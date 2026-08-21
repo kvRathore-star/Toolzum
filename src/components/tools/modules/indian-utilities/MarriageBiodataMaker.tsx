@@ -59,7 +59,7 @@ const STEPS = [
 
 function BiodataPreview({ data, photoUrl }: { data: BiodataForm; photoUrl: string | null }) {
   const hasAny = (field: string) => field.trim().length > 0;
-  const label = (l: string) => <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider block mb-0.5">{l}</span>;
+  const label = (l: string) => <span className="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block mb-0.5">{l}</span>;
 
   return (
     <div className="bg-white text-zinc-900 rounded-2xl border-2 border-rose-200 shadow-sm overflow-hidden">
@@ -254,7 +254,7 @@ export default function MarriageBiodataMaker() {
                     <button onClick={() => setPhotoUrl(null)} className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center shadow">×</button>
                   </div>
                 ) : (
-                  <button onClick={() => photoInputRef.current?.click()} className="w-20 h-20 rounded-full border-2 border-dashed border-rose-300 flex flex-col items-center justify-center text-rose-400 hover:border-rose-500 transition-colors">
+                  <button onClick={() => photoInputRef.current?.click()} className="w-20 h-20 rounded-full border-2 border-dashed border-rose-300 flex flex-col items-center justify-center text-rose-700 dark:text-rose-400 hover:border-rose-500 transition-colors">
                     <Camera className="w-6 h-6" />
                     <span className="text-[8px] mt-0.5">Upload</span>
                   </button>

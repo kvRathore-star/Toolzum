@@ -72,7 +72,7 @@ export default function PdfAttachments() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>PDF Attachments:</strong> Embed any file type as an attachment inside a PDF document. Add images, spreadsheets, archives, or supplementary files.
         </div>
         <FileUploader accept="application/pdf" onFileSelect={(_f) => handleFileSelect(_f)}
@@ -139,7 +139,7 @@ export default function PdfAttachments() {
             <h4 className="font-bold text-emerald-500">Attachment Added</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `attached_${file.name}`)}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             Download PDF with Attachment
           </button>
         </div>

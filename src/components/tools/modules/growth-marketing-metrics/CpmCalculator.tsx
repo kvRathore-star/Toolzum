@@ -165,12 +165,12 @@ export default function CpmCalculator() {
             <>
               <div className="rounded-2xl p-6 border bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30 flex flex-col justify-center items-center min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2">
-                  <DollarSign className="w-4 h-4 text-blue-500" />
+                  <DollarSign className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                   <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">
                     Estimated Advertiser Cost
                   </span>
                 </div>
-                <p className="text-5xl font-extrabold text-blue-500">
+                <p className="text-5xl font-extrabold text-blue-700 dark:text-blue-400">
                   ${estimatedAdCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
                 <p className="text-[11px] text-[var(--text-muted)] mt-2">

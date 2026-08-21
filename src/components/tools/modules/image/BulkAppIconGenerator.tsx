@@ -165,7 +165,7 @@ export default function BulkAppIconGenerator() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {ICON_SIZES.slice(0, 12).map(({ size, label }) => (
               <div key={size} className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-                <div className="w-4 h-4 rounded bg-[var(--accent)]/20 flex items-center justify-center text-[8px] font-mono text-[var(--accent)] shrink-0">{size < 100 ? size : ''}</div>
+                <div className="w-4 h-4 rounded bg-[var(--accent-ink)]/20 flex items-center justify-center text-[8px] font-mono text-[var(--accent)] shrink-0">{size < 100 ? size : ''}</div>
                 <span className="truncate">{label}</span>
               </div>
             ))}
@@ -176,7 +176,7 @@ export default function BulkAppIconGenerator() {
         <button
           onClick={handleGenerate}
           disabled={isProcessing}
-          className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
           {isProcessing ? 'Generating Icons...' : `Generate All ${ICON_SIZES.length} Icon Sizes (ZIP)`}

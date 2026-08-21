@@ -15,7 +15,7 @@ import {
 } from '@/utils/urlStatus';
 
 function statusColor(status: number): string {
-  if (status >= 200 && status < 300) return 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+  if (status >= 200 && status < 300) return 'text-emerald-600 dark:text-emerald-400 bg-emerald-700/10 border-emerald-500/20';
   if (status >= 300 && status < 400) return 'text-sky-600 dark:text-sky-400 bg-sky-500/10 border-sky-500/20';
   if (status >= 400 && status < 500) return 'text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20';
   if (status >= 500) return 'text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20';
@@ -206,7 +206,7 @@ export default function BulkUrlStatusChecker() {
 
       {summary && (
         <div className="flex flex-wrap gap-2 text-xs">
-          <span className="px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold">{summary.ok} OK</span>
+          <span className="px-3 py-1.5 rounded-lg bg-emerald-700/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold">{summary.ok} OK</span>
           <span className="px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 font-semibold">{summary.redirects} redirects</span>
           <span className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold">{summary.clientErrors} client errors</span>
           <span className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 font-semibold">{summary.serverErrors} server errors</span>

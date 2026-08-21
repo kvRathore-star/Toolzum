@@ -465,7 +465,7 @@ export default function ChartMaker() {
             <button onClick={handleBack} className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold px-4 py-3 rounded-xl transition-colors">
               Back to Editor
             </button>
-            <button onClick={() => outputUrl && downloadOrShare(outputUrl, `${title || 'chart'}.png`)} className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            <button onClick={() => outputUrl && downloadOrShare(outputUrl, `${title || 'chart'}.png`)} className="flex-1 bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-3 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download as PNG
             </button>
@@ -477,7 +477,7 @@ export default function ChartMaker() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Create Beautiful Charts:</strong> Enter your data, customize appearance, and download as PNG. All processing happens in your browser.
       </div>
 
@@ -505,7 +505,7 @@ export default function ChartMaker() {
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Data Table (Label, Value)</label>
-              <button onClick={addRow} className="text-xs text-blue-600 hover:text-blue-500 font-medium px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-lg transition-colors">+ Add Row</button>
+              <button onClick={addRow} className="text-xs text-blue-600 hover:text-blue-700 dark:hover:text-blue-400 font-medium px-2 py-1 bg-blue-50 dark:bg-blue-900/30 rounded-lg transition-colors">+ Add Row</button>
             </div>
             <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
               {data.map(row => (

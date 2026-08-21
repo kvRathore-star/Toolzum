@@ -26,7 +26,7 @@ const CATEGORIES = [
     id: "pdf",
     name: "PDF & Documents",
     icon: FileText,
-    color: "text-red-400",
+    color: "text-red-700 dark:text-red-400",
     bgColor: "bg-red-500/10",
     borderColor: "border-red-500/20",
     description: "Compress, merge, split, and convert PDF documents completely in-browser. Your legal and personal papers never touch our servers.",
@@ -42,7 +42,7 @@ const CATEGORIES = [
     id: "image",
     name: "Image & Graphics",
     icon: ImageIcon,
-    color: "text-blue-400",
+    color: "text-blue-700 dark:text-blue-400",
     bgColor: "bg-blue-500/10",
     borderColor: "border-blue-500/20",
     description: "Remove background from photos, edit vector files, convert formats, and optimize images inside your browser window.",
@@ -58,8 +58,8 @@ const CATEGORIES = [
     id: "developer",
     name: "Developer Utilities",
     icon: Code,
-    color: "text-emerald-400",
-    bgColor: "bg-emerald-500/10",
+    color: "text-emerald-700 dark:text-emerald-400",
+    bgColor: "bg-emerald-700/10",
     borderColor: "border-emerald-500/20",
     description: "Format, minify, encode/decode, and generate dummy data using lightning-fast client-side compilers.",
     features: [
@@ -74,7 +74,7 @@ const CATEGORIES = [
     id: "calculator",
     name: "Math & Calculators",
     icon: Calculator,
-    color: "text-purple-400",
+    color: "text-purple-700 dark:text-purple-400",
     bgColor: "bg-purple-500/10",
     borderColor: "border-purple-500/20",
     description: "Financial planners, unit converters, and advanced mathematical calculators executing math equations instantaneously.",
@@ -131,7 +131,7 @@ export default function ProductPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
-            <div className="w-12 h-12 rounded-[var(--radius-md)] bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+            <div className="w-12 h-12 rounded-[var(--radius-md)] bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-medium mb-3">Privacy Sealed</h3>
@@ -151,7 +151,7 @@ export default function ProductPage() {
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
-            <div className="w-12 h-12 rounded-[var(--radius-md)] bg-purple-500/10 text-purple-400 flex items-center justify-center mb-6">
+            <div className="w-12 h-12 rounded-[var(--radius-md)] bg-purple-500/10 text-purple-700 dark:text-purple-400 flex items-center justify-center mb-6">
               <WifiOff className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-medium mb-3">Runs Fully Offline</h3>
@@ -165,7 +165,7 @@ export default function ProductPage() {
         {/* Interactive Showcase */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-12 mb-24 relative overflow-hidden">
           
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--accent-ink)]/5 rounded-full blur-[100px] pointer-events-none" />
 
           <div className="mb-10 text-center md:text-left">
             <h2 className="text-3xl font-semibold mb-3">Interactive Explorer</h2>
@@ -183,7 +183,7 @@ export default function ProductPage() {
                   onClick={() => setActiveTab(category.id)}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeTab === category.id 
-                    ? "bg-[var(--accent)] text-white shadow-sm" 
+                    ? "bg-[var(--accent-ink)] text-white shadow-sm" 
                     : "hover:bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
                   }`}
                 >
@@ -208,7 +208,7 @@ export default function ProductPage() {
               <ul className="space-y-3 mb-8">
                 {activeCategory.features.map((feature, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-sm text-[var(--text-secondary)]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-ink)]" />
                     {feature}
                   </li>
                 ))}
@@ -244,7 +244,7 @@ export default function ProductPage() {
                 <div className="pl-4">"processing_speed": "0.08ms",</div>
                 <div className="pl-4">"features_available": [</div>
                 {activeCategory.features.slice(0, 3).map((f, idx) => (
-                  <div key={idx} className="pl-8 text-emerald-400">"{f.split(" ")[0]}...",</div>
+                  <div key={idx} className="pl-8 text-emerald-700 dark:text-emerald-400">"{f.split(" ")[0]}...",</div>
                 ))}
                 <div className="pl-4">]</div>
                 <div>{"}"}</div>

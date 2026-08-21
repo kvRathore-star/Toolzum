@@ -121,7 +121,7 @@ export default function BigTextGenerator() {
               onClick={() => setActiveStyle(style.id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 activeStyle === style.id
-                  ? 'bg-[var(--accent)] text-white shadow-md'
+                  ? 'bg-[var(--accent-ink)] text-white shadow-md'
                   : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
               }`}
             >
@@ -141,7 +141,7 @@ export default function BigTextGenerator() {
               <p className="text-[var(--text-muted)] text-sm italic">Your big text will appear here...</p>
             )}
           </div>
-          <button onClick={handleCopy} disabled={!output} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={handleCopy} disabled={!output} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
             <Copy className="w-4 h-4" /> Copy Big Text
           </button>
         </div>

@@ -106,7 +106,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
             </div>
 
             {/* Private Key */}
@@ -120,7 +120,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
             </div>
 
           </div>

@@ -92,7 +92,7 @@ export default function AiImageGenerator() {
         <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5 flex flex-col justify-between">
           <div className="space-y-4">
             <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
-              <ImageIcon className="w-5 h-5 text-blue-500" />
+              <ImageIcon className="w-5 h-5 text-blue-700 dark:text-blue-400" />
               <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Image Generator</h3>
             </div>
             

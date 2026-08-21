@@ -142,7 +142,7 @@ export default function PincodeFinder() {
               <div className="flex flex-wrap gap-2 mt-2">
                 {QUICK_PRESETS.map(p => (
                   <button key={p} onClick={() => setPincode(p)}
-                    className="px-3 py-1 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-400 hover:text-blue-500 transition-all cursor-pointer bg-[var(--bg-overlay)]/50">
+                    className="px-3 py-1 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-400 hover:text-blue-700 dark:hover:text-blue-400 transition-all cursor-pointer bg-[var(--bg-overlay)]/50">
                     {p}
                   </button>
                 ))}
@@ -190,8 +190,8 @@ export default function PincodeFinder() {
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 mt-0.5 shrink-0 text-rose-400" />
-              <div><h4 className="font-bold text-rose-400">Search Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
+              <AlertCircle className="w-5 h-5 mt-0.5 shrink-0 text-rose-700 dark:text-rose-400" />
+              <div><h4 className="font-bold text-rose-700 dark:text-rose-400">Search Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -201,9 +201,9 @@ export default function PincodeFinder() {
             <div className="flex items-center gap-1 text-xs font-bold text-zinc-800 dark:text-zinc-200"><Info className="w-4 h-4" style={{ color: accentColor }} />Pincode Structure Analysis ({currentPincode})</div>
             <div className="flex justify-center text-center gap-1 font-mono text-xl font-bold p-3 bg-white dark:bg-black/50 rounded-lg border border-zinc-200 dark:border-[var(--border-subtle)]">
               <div className="px-2 py-1 rounded" style={{ backgroundColor: '#2563eb10', borderColor: '#2563eb20', borderWidth: 1 }}><span style={{ color: accentColor }} className="block">{breakdown.region}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Region</span></div>
-              <div className="px-2 py-1 bg-rose-500/10 border border-rose-500/20 rounded"><span className="text-rose-400 block">{breakdown.subRegion}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sub-Reg</span></div>
-              <div className="px-2 py-1 bg-amber-500/10 border border-amber-500/20 rounded"><span className="text-amber-400 block">{breakdown.sortingDistrict}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sorting</span></div>
-              <div className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded flex-1"><span className="text-emerald-400 block tracking-widest">{breakdown.office}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Post Office Route</span></div>
+              <div className="px-2 py-1 bg-rose-500/10 border border-rose-500/20 rounded"><span className="text-rose-700 dark:text-rose-400 block">{breakdown.subRegion}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sub-Reg</span></div>
+              <div className="px-2 py-1 bg-amber-500/10 border border-amber-500/20 rounded"><span className="text-amber-700 dark:text-amber-400 block">{breakdown.sortingDistrict}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sorting</span></div>
+              <div className="px-3 py-1 bg-emerald-700/10 border border-emerald-500/20 rounded flex-1"><span className="text-emerald-700 dark:text-emerald-400 block tracking-widest">{breakdown.office}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Post Office Route</span></div>
             </div>
           </motion.div>
         )}
@@ -232,7 +232,7 @@ export default function PincodeFinder() {
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-bold text-zinc-900 dark:text-[var(--text-primary)] text-sm block">{office.Name}</span>
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${office.DeliveryStatus === 'Delivery' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>{office.DeliveryStatus}</span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${office.DeliveryStatus === 'Delivery' ? 'bg-emerald-700/10 text-emerald-700 dark:text-emerald-400' : 'bg-rose-500/10 text-rose-700 dark:text-rose-400'}`}>{office.DeliveryStatus}</span>
                       </div>
                       <span className="text-[var(--text-secondary)] block">Type: {office.BranchType}</span>
                     </div>

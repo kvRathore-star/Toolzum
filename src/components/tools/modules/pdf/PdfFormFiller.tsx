@@ -106,7 +106,7 @@ export default function PdfFormFiller() {
   if (!pdfFile) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>100% Client-Side Filling:</strong> We extract and fill the AcroForm fields right in your browser. Highly secure for sensitive documents like Government Forms, W-9s, or NDAs.
         </div>
         <FileUploader 
@@ -129,7 +129,7 @@ export default function PdfFormFiller() {
         </div>
         <button 
           onClick={() => { setPdfFile(null); setFields([]); }}
-          className="text-sm text-red-400 hover:text-red-300 px-3 py-1 bg-red-400/10 rounded-lg"
+          className="text-sm text-red-700 dark:text-red-400 hover:text-red-300 px-3 py-1 bg-red-400/10 rounded-lg"
         >
           Cancel
         </button>
@@ -184,8 +184,8 @@ export default function PdfFormFiller() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center">
-              <h4 className="text-lg font-bold text-emerald-400 mb-4">PDF Generated Successfully!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center">
+              <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">PDF Generated Successfully!</h4>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `filled_${pdfFile.name}`)}
                 className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"

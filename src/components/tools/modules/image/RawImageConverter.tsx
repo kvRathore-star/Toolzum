@@ -142,7 +142,7 @@ export default function RawImageConverter() {
   if (files.length === 0) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>RAW Converter:</strong> Convert RAW camera images ({EXTENSIONS.join(', ')}) to JPG, PNG, or WebP. All processing is done locally — nothing is uploaded.
         </div>
         <FileUploader
@@ -182,7 +182,7 @@ export default function RawImageConverter() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-2">
             <div className="flex justify-between items-center">
               <h4 className="text-[var(--text-primary)] font-medium text-sm">Files</h4>
-              <button onClick={() => fileInputRef.current?.click()} className="text-xs text-blue-500 hover:text-blue-400 font-medium">+ Add More</button>
+              <button onClick={() => fileInputRef.current?.click()} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-medium">+ Add More</button>
             </div>
             <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
             <div className="space-y-1 max-h-72 overflow-y-auto">
@@ -267,11 +267,11 @@ export default function RawImageConverter() {
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Complete</h4>
               </div>
-              <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex items-center justify-center p-4 min-h-[120px]">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex items-center justify-center p-4 min-h-[120px]">
                 <img src={outputUrl} alt="Converted" className="max-w-full max-h-[250px] object-contain" />
               </div>
               <button onClick={() => downloadOrShare(outputUrl, outputName)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-3.5 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-3.5 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

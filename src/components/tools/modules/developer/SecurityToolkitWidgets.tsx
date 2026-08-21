@@ -203,7 +203,7 @@ export function Pbkdf2HashGenerator() {
           <div className="bg-[var(--bg-surface)] rounded-lg p-3">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-bold text-zinc-600 dark:text-[var(--text-muted)]">Hash Output</span>
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-blue-500 hover:underline">Copy</button>
+              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-blue-700 dark:text-blue-400 hover:underline">Copy</button>
             </div>
             <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 break-all">{output}</pre>
           </div>

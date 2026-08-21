@@ -293,7 +293,7 @@ export default function AiGrammarChecker() {
                   </div>
                   <div className="space-y-2">
                     <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500" /> Corrected Text
+                      <span className="w-2 h-2 rounded-full bg-emerald-700" /> Corrected Text
                     </span>
                     <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-4 text-sm leading-relaxed max-h-60 overflow-y-auto min-h-[120px] text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">
                       {correctedText.trim() || <span className="text-[var(--text-muted)] italic">No text</span>}
@@ -303,7 +303,7 @@ export default function AiGrammarChecker() {
 
                 <div className="flex gap-3">
                   <button onClick={handleFixAll}
-                    className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer">
+                    className="flex-1 bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
@@ -338,7 +338,7 @@ export default function AiGrammarChecker() {
               </>
             ) : (
               <div className="text-center py-8 text-[var(--text-muted)]">
-                <svg className="w-12 h-12 mx-auto mb-3 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="w-12 h-12 mx-auto mb-3 text-emerald-700 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p className="text-sm font-medium">No errors found!</p>

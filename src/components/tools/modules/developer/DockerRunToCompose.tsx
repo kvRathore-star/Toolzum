@@ -75,7 +75,7 @@ export default function DockerRunToCompose() {
   return (
     <div className="max-w-3xl mx-auto space-y-4">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="docker run -d --name myapp -p 8080:80 nginx" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono h-[100px]" />
-      <button onClick={convert} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Convert to Compose</button>
+      <button onClick={convert} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Convert to Compose</button>
       {output && (
         <div className="relative">
           <textarea value={output} readOnly className="w-full h-[300px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-emerald-500 outline-none resize-none font-mono" />

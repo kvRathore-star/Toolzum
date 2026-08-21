@@ -99,7 +99,7 @@ export default function FaviconGenerator() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Complete Package:</strong> Upload a square image (PNG/JPG) to instantly generate all modern favicon formats (16x16, 32x32, Apple Touch, Android Chrome) and a `site.webmanifest` zipped up.
         </div>
         <FileUploader 
@@ -132,13 +132,13 @@ export default function FaviconGenerator() {
           <h4 className="text-[var(--text-primary)] font-medium">Included Assets</h4>
           
           <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-300">
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> favicon-16x16.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> favicon-32x32.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> apple-touch-icon.png (180x180)</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> android-chrome-192x192.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> android-chrome-512x512.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> favicon.ico (fallback)</li>
-            <li className="flex items-center gap-2"><span className="text-blue-500">✓</span> site.webmanifest</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon-16x16.png</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon-32x32.png</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> apple-touch-icon.png (180x180)</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-192x192.png</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-512x512.png</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon.ico (fallback)</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> site.webmanifest</li>
           </ul>
 
           <button 
@@ -157,14 +157,14 @@ export default function FaviconGenerator() {
                   <h4 className="font-bold text-emerald-500">Package Ready</h4>
                </div>
                
-               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                   <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" /></svg>
                   <p className="font-bold">favicon_package.zip</p>
                </div>
 
                <button 
                   onClick={() => downloadOrShare(outputUrl, `favicon_package.zip`)}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download ZIP

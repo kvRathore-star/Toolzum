@@ -28,7 +28,7 @@ const PLANNED: RoadmapItem[] = [
     title: "Offline Audio Transcriber",
     description: "Utilize localized Whisper.js neural models running on WebGPU for speech-to-text dictation without any API usage. (Partially covered by existing text tools.)",
     tag: "AI Model",
-    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    tagColor: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20",
     votes: 421
   }
 ];
@@ -39,7 +39,7 @@ const DEVELOPING: RoadmapItem[] = [
     title: "Toolzum Browser Extension",
     description: "Chrome extension bringing color picker, screenshot capture, QR encoding, and quick tool access into your browser toolbar.",
     tag: "Extension",
-    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    tagColor: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20",
     votes: 287
   }
 ];
@@ -50,7 +50,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "WebGL AI Background Remover",
     description: "Identify and transparentize photographic backgrounds using local browser image segmentation tensors.",
     tag: "AI Model",
-    tagColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    tagColor: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20",
     votes: 681
   },
   {
@@ -58,7 +58,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "Developer Formatters Drawer",
     description: "Minify and expand CSS, HTML, JS, and JSON codes using quick-copy dev nodes.",
     tag: "Dev Utility",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
     votes: 318
   },
   {
@@ -66,7 +66,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "CSV to SQLite Web Terminal",
     description: "Drag CSV files and run SQL queries in a local WebAssembly SQLite sandbox. Create tables from CSV headers, execute any SQL, and export results. Zero uploads.",
     tag: "Dev Utility",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
     votes: 194
   },
   {
@@ -74,7 +74,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "Multi-page Vector Pen Canvas",
     description: "Draw freeform vectors, shapes, and diagrams with a multi-page canvas, color picker, and SVG/PNG export. All processing stays in your browser.",
     tag: "Design Suite",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     votes: 289
   },
   {
@@ -82,7 +82,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "Offline PDF Signature Ink",
     description: "Draw or load custom signature vectors onto PDF documents, saving signed files locally in seconds.",
     tag: "PDF Suite",
-    tagColor: "bg-red-500/10 text-red-400 border-red-500/20",
+    tagColor: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20",
     votes: 512
   },
   {
@@ -90,7 +90,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "Temporary Email Generator",
     description: "Generate disposable email addresses with configurable expiry (5 min to 48 hours). Create inboxes that self-destruct — no server needed.",
     tag: "Utility",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     votes: 342
   },
   {
@@ -98,7 +98,7 @@ const COMPLETED: RoadmapItem[] = [
     title: "Batch WebP / AVIF Optimizer",
     description: "Convert entire image folders to WebP or AVIF with fallback PNGs and ready-to-use HTML picture tags. Multi-threaded batch processing.",
     tag: "Performance",
-    tagColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    tagColor: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20",
     votes: 382
   }
 ];
@@ -177,7 +177,7 @@ export default function RoadmapPage() {
                   onClick={() => handleUpvote(item.id, item.votes)}
                   className={`flex flex-col items-center justify-center p-2 rounded-[var(--radius-md)] border shrink-0 transition-all ${
                     hasVoted 
-                    ? "bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]" 
+                    ? "bg-[var(--accent-ink)]/10 border-[var(--accent)] text-[var(--accent)]" 
                     : "bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-white"
                   }`}
                 >
@@ -233,14 +233,14 @@ export default function RoadmapPage() {
 
         {/* Kanban Board Container */}
         <div className="flex flex-col lg:flex-row gap-8 items-start mb-24 overflow-x-auto pb-4">
-          {renderColumn("Planned / Brainstorming", FolderOpen, PLANNED, "text-blue-400")}
-          {renderColumn("In Development", RotateCw, DEVELOPING, "text-amber-400")}
-          {renderColumn("Completed / Shipped", CheckCircle2, COMPLETED, "text-emerald-400")}
+          {renderColumn("Planned / Brainstorming", FolderOpen, PLANNED, "text-blue-700 dark:text-blue-400")}
+          {renderColumn("In Development", RotateCw, DEVELOPING, "text-amber-700 dark:text-amber-400")}
+          {renderColumn("Completed / Shipped", CheckCircle2, COMPLETED, "text-emerald-700 dark:text-emerald-400")}
         </div>
 
         {/* Suggestion CTA */}
         <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-ink)]/5 rounded-full blur-[80px]" />
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Have a feature request?</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
             If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.

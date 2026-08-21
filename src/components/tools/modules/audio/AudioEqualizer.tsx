@@ -395,7 +395,7 @@ export default function AudioEqualizer() {
                   style={{ writingMode: 'vertical-lr', direction: 'ltr' }}
                 />
                 <span className={`text-[10px] font-mono font-semibold
-                  ${bands[i] > 0 ? 'text-emerald-500' : bands[i] < 0 ? 'text-red-400' : 'text-[var(--text-muted)]'}`}>
+                  ${bands[i] > 0 ? 'text-emerald-500' : bands[i] < 0 ? 'text-red-700 dark:text-red-400' : 'text-[var(--text-muted)]'}`}>
                   {bands[i] > 0 ? '+' : ''}{bands[i]}
                 </span>
               </div>
@@ -455,7 +455,7 @@ export default function AudioEqualizer() {
             )}
             {outputUrl && (
               <button onClick={() => downloadOrShare(outputUrl, `equalized_${file.name.replace(/\.[^/.]+$/, '')}.${outputFormat}`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>

@@ -41,7 +41,7 @@ export default function AboutPage() {
         </div>
 
         {/* Core Insight */}
-        <div className="max-w-4xl mx-auto mb-16 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
+        <div className="max-w-4xl mx-auto mb-16 p-6 bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
           <p className="text-lg font-semibold text-[var(--text-primary)]">
             The Browser is the Data Center.
           </p>
@@ -61,11 +61,11 @@ export default function AboutPage() {
               <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Local Tools</div>
             </div>
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-              <div className="text-4xl sm:text-5xl font-mono font-semibold text-blue-400 mb-2">{localPct}%</div>
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-blue-700 dark:text-blue-400 mb-2">{localPct}%</div>
               <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Client-Side</div>
             </div>
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 text-center">
-              <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-400 mb-2">&#60; 1s</div>
+              <div className="text-4xl sm:text-5xl font-mono font-semibold text-purple-700 dark:text-purple-400 mb-2">&#60; 1s</div>
               <div className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">Execution Speed</div>
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function AboutPage() {
         </div>
 
         {/* What Sets Us Apart */}
-        <div className="max-w-4xl mx-auto mb-16 p-8 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-2xl)]">
+        <div className="max-w-4xl mx-auto mb-16 p-8 bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-2xl)]">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-soft)] border border-[var(--accent)]/20 text-sm font-semibold text-[var(--accent)] mb-4">
             <Ban className="w-4 h-4" /> The Difference
           </span>
@@ -117,7 +117,7 @@ export default function AboutPage() {
         <div className="space-y-16 mb-24 max-w-4xl mx-auto">
           
           <div className="flex flex-col md:flex-row items-start gap-8 border-b border-[var(--border-subtle)] pb-12">
-            <div className="w-12 h-12 rounded-xl bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -129,7 +129,7 @@ export default function AboutPage() {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-8 border-b border-[var(--border-subtle)] pb-12">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-700 dark:text-purple-400 flex items-center justify-center shrink-0">
               <Cpu className="w-6 h-6" />
             </div>
             <div>
@@ -141,7 +141,7 @@ export default function AboutPage() {
           </div>
 
           <div className="flex flex-col md:flex-row items-start gap-8">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-700 dark:text-blue-400 flex items-center justify-center shrink-0">
               <Zap className="w-6 h-6" />
             </div>
             <div>
@@ -164,7 +164,7 @@ export default function AboutPage() {
           </div>
           <div className="mt-6">
             <Link href="/contact">
-              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
+              <div className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-medium rounded-[var(--radius-lg)] transition-colors text-sm">
                 <HelpCircle className="w-4 h-4" /> Send Feedback
               </div>
             </Link>

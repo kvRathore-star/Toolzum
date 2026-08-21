@@ -56,7 +56,7 @@ export default function PdfOptimizer() {
   if (!pdfFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm font-medium">
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm font-medium">
           <strong>⚠ PDF Optimizer (Client-Side Only):</strong> This tool strips metadata and optimizes internal PDF structure using pdf-lib. It <strong>cannot compress images</strong> (the main driver of PDF size). For significant size reduction on scanned/image-heavy PDFs, server-side tools with image recompression are required.
         </div>
         <FileUploader 
@@ -96,23 +96,23 @@ export default function PdfOptimizer() {
         <button 
           onClick={processOptimize}
           disabled={isProcessing}
-          className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl shadow-[var(--shadow-md)] transition-all active:scale-95 disabled:opacity-50"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl shadow-[var(--shadow-md)] transition-all active:scale-95 disabled:opacity-50"
         >
           {isProcessing ? "Optimizing PDF..." : "Optimize PDF →"}
         </button>
       </div>
 
       {outputUrl && outputSize && (
-        <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-in slide-in-from-bottom-4">
+        <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-in slide-in-from-bottom-4">
           <div className="w-full">
-            <h4 className="text-lg font-bold text-emerald-400 mb-2">Optimization Complete!</h4>
+            <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-2">Optimization Complete!</h4>
             <div className="flex justify-between items-center text-sm border-b border-emerald-500/20 pb-2 mb-2">
               <span className="text-[var(--text-secondary)]">New Size:</span>
               <strong className="text-[var(--text-primary)] font-mono">{(outputSize / 1024).toFixed(2)} KB</strong>
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-[var(--text-secondary)]">Data Saved:</span>
-              <strong className={savingsPercent > 0 ? "text-emerald-400" : "text-amber-400"}>
+              <strong className={savingsPercent > 0 ? "text-emerald-700 dark:text-emerald-400" : "text-amber-700 dark:text-amber-400"}>
                 {savingsPercent}%
               </strong>
             </div>

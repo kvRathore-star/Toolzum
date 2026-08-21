@@ -74,7 +74,7 @@ export default function RsaKeyGenerator() {
               </button>
             ))}
           </div>
-          <button onClick={generate} disabled={loading} className={`bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          <button onClick={generate} disabled={loading} className={`bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
             {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : <><Key className="w-4 h-4" /> Generate Key Pair</>}
           </button>
         </div>

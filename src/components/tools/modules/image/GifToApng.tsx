@@ -129,7 +129,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             APNG to GIF
           </button>
         </div>
-        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 text-emerald-400' : 'bg-blue-500/10 border border-blue-500/20 text-blue-400'}`}>          {toApng
+        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-blue-500/10 border border-blue-500/20 text-blue-700 dark:text-blue-400'}`}>          {toApng
             ? <><strong>APNG supports 24-bit colors and 8-bit alpha transparency</strong> — better quality than GIF.</>
             : <><strong>APNG to GIF:</strong> Convert animated PNGs to universally compatible GIF format.</>}
         </div>
@@ -225,8 +225,8 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
               {toApng && (
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div><p className="text-xs text-[var(--text-muted)] mb-2">Original (GIF)</p><p className="text-sm text-zinc-200">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</p></div>
@@ -234,7 +234,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
                 </div>
               )}
               {toApng && outputSize > 0 && gifInfo!.fileSize > 0 && (
-                <p className="text-sm text-[var(--text-muted)] mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-emerald-400' : 'text-amber-400'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
+                <p className="text-sm text-[var(--text-muted)] mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
               )}
               <button onClick={() => downloadOrShare(outputUrl, `${file!.name.split('.')[0]}.${toApng ? 'png' : 'gif'}`)}
                 className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg">Download {toApng ? 'APNG' : 'GIF'}</button>
@@ -271,9 +271,9 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
                   <p>Frames: <span className="text-zinc-900 dark:text-zinc-100">{gifInfo.frameCount}</span></p>
                 </div>
               )}
-              <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-400">
+              <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
                 <p className="font-medium text-blue-300">Why APNG?</p>
-                <ul className="space-y-1 text-blue-400/80">
+                <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
                   <li>• Full 24-bit color support (16.7M colors)</li>
                   <li>• 8-bit alpha transparency for smooth compositing</li>
                   <li>• Backward compatible — degrades to single PNG frame</li>

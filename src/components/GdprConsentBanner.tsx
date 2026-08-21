@@ -51,7 +51,7 @@ export function GdprConsentBanner() {
           </button>
           <button
             onClick={accept}
-            className="px-4 py-2 text-xs font-bold text-white bg-[var(--accent)] hover:opacity-90 rounded-[var(--radius-lg)] transition-all cursor-pointer"
+            className="px-4 py-2 text-xs font-bold text-white bg-[var(--accent-ink)] hover:opacity-90 rounded-[var(--radius-lg)] transition-all cursor-pointer"
           >
             Accept All
           </button>

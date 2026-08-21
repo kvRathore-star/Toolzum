@@ -138,7 +138,7 @@ export default function CropImage() {
                   onClick={() => changeAspectRatio(ratio.value)}
                   className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer ${
                     aspectRatio === ratio.value
-                      ? 'bg-[var(--accent)] border-indigo-600 text-white'
+                      ? 'bg-[var(--accent-ink)] border-indigo-600 text-white'
                       : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)]'
                   }`}
                 >
@@ -191,7 +191,7 @@ export default function CropImage() {
             </button>
             <button
               onClick={handleCrop}
-              className="w-full py-3.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+              className="w-full py-3.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
             >
               <Download className="w-4 h-4" />
               Crop & Download

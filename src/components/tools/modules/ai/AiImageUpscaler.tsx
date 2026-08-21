@@ -162,8 +162,8 @@ export default function AiImageUpscaler() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-400 shrink-0" />
+        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
           <span><strong>Lanczos-3 Processing:</strong> The high-fidelity mathematical resampler scales image resolution client-side without adding pixel noise.</span>
         </div>
         <FileUploader
@@ -210,7 +210,7 @@ export default function AiImageUpscaler() {
                   }}
                   className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                     factor === f
-                      ? 'bg-[var(--accent)] text-white shadow-lg'
+                      ? 'bg-[var(--accent-ink)] text-white shadow-lg'
                       : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
                   }`}
                 >
@@ -222,13 +222,13 @@ export default function AiImageUpscaler() {
 
           {isProcessing && progress > 0 && (
             <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-1.5 mb-2">
-              <div className="bg-[var(--accent)] h-1.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+              <div className="bg-[var(--accent-ink)] h-1.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           )}
           <button
             onClick={processUpscale}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
           >
             {isProcessing ? `Upscaling... ${progress}%` : 'Enhance & Scale'}
           </button>
@@ -291,7 +291,7 @@ export default function AiImageUpscaler() {
             {upscaledUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 <Download className="w-4 h-4" />
                 Download Upscaled Photo

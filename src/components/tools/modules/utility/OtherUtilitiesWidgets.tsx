@@ -123,7 +123,7 @@ export function OTPGenerator() {
             <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} className="w-24" />
           </div>
         </div>
-        <button onClick={generateOTP} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
+        <button onClick={generateOTP} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
         {otpCodes.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {otpCodes.map((code, i) => (

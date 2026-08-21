@@ -20,7 +20,7 @@ const THRESHOLDS = [
   { min: 5000, label: 'Average', pct: 50, color: 'bg-yellow-500' },
   { min: 15000, label: 'Fast', pct: 75, color: 'bg-lime-500' },
   { min: 30000, label: 'Very Fast', pct: 90, color: 'bg-green-500' },
-  { min: 60000, label: 'Extreme', pct: 99, color: 'bg-emerald-500' },
+  { min: 60000, label: 'Extreme', pct: 99, color: 'bg-emerald-700' },
 ];
 
 function runBench(type: BenchType, duration: number): number {
@@ -91,7 +91,7 @@ export default function BenchmarkBuilder() {
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Duration: {duration}s</label>
             <input type="range" min={1} max={5} step={0.5} value={duration} onChange={e => setDuration(parseFloat(e.target.value))} disabled={running} className="w-full" />
           </div>
-          <button onClick={run} disabled={running} className={`bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${running ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          <button onClick={run} disabled={running} className={`bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${running ? 'opacity-70 cursor-not-allowed' : ''}`}>
             {running ? <><Loader2 className="w-4 h-4 animate-spin" /> Running...</> : <><Zap className="w-4 h-4" /> Run Benchmark</>}
           </button>
         </div>

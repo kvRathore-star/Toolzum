@@ -18,7 +18,7 @@ export default function PasswordStrengthChecker() {
     'bg-rose-500',
     'bg-orange-500',
     'bg-amber-500',
-    'bg-emerald-500'
+    'bg-emerald-700'
   ];
 
   return (
@@ -82,7 +82,7 @@ export default function PasswordStrengthChecker() {
               <div className="space-y-1">
                 <p>💡 Estimated Crack Time: <span className="font-bold text-zinc-100">{evaluation.crack_times_display.offline_fast_hashing_1e10_per_second}</span></p>
                 {evaluation.feedback.warning && (
-                  <p className="text-rose-400">⚠️ Warning: {evaluation.feedback.warning}</p>
+                  <p className="text-rose-700 dark:text-rose-400">⚠️ Warning: {evaluation.feedback.warning}</p>
                 )}
                 {evaluation.feedback.suggestions.length > 0 && (
                   <div className="text-[10px] text-[var(--text-secondary)] mt-2">

@@ -142,7 +142,7 @@ export default function LiveTranscription() {
   if (!isSupported) {
     return (
       <div className="bg-red-500/10 border border-red-500/20 p-8 rounded-2xl text-center">
-        <h3 className="text-xl font-bold text-red-400 mb-2">Browser Not Supported</h3>
+        <h3 className="text-xl font-bold text-red-700 dark:text-red-400 mb-2">Browser Not Supported</h3>
         <p className="text-zinc-600 dark:text-[var(--text-muted)]">Live Transcription requires the Web Speech API, which is not supported in your current browser. Please try using Google Chrome, Microsoft Edge, or Safari.</p>
       </div>
     );
@@ -151,7 +151,7 @@ export default function LiveTranscription() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex items-center justify-between">
-        <div className="text-blue-400 text-sm">
+        <div className="text-blue-700 dark:text-blue-400 text-sm">
           <strong>100% Client-Side Voice AI:</strong> Audio is processed locally by your browser's speech engine. No audio files are uploaded to our servers.
         </div>
         <select 
@@ -173,7 +173,7 @@ export default function LiveTranscription() {
             onClick={toggleRecording}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg ${
               isRecording 
-                ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30 animate-pulse'
+                ? 'bg-red-500/20 text-red-700 dark:text-red-400 border border-red-500/30 hover:bg-red-500/30 animate-pulse'
                 : 'bg-blue-600 hover:bg-blue-500 text-white shadow-blue-500/20 active:scale-95'
             }`}
           >
@@ -216,7 +216,7 @@ export default function LiveTranscription() {
           )}
           
           <span>{transcript}</span>
-          <span className="text-blue-400 opacity-80">{interimTranscript}</span>
+          <span className="text-blue-700 dark:text-blue-400 opacity-80">{interimTranscript}</span>
           
           {isRecording && interimTranscript === '' && (
             <span className="inline-block w-2 h-5 ml-1 bg-blue-500 animate-pulse align-middle" />

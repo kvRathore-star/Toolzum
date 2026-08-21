@@ -391,7 +391,7 @@ export default function MarkdownToPdf() {
           <h3 className="text-[var(--text-secondary)] text-sm font-medium">PDF Preview</h3>
           <button
             onClick={() => downloadOrShare(pdfUrl, 'document.pdf')}
-            className="text-sm px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold transition-colors flex items-center gap-2 shadow-lg"
+            className="text-sm px-5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-700 text-white font-semibold transition-colors flex items-center gap-2 shadow-lg"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download PDF
@@ -410,7 +410,7 @@ export default function MarkdownToPdf() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Markdown to PDF:</strong> Write or upload markdown content and convert it into a beautifully formatted PDF document.
       </div>
 

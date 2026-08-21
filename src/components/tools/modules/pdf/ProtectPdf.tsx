@@ -131,7 +131,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
             Unlock PDF
           </button>
         </div>
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           {isProtect ? <ShieldAlert className="w-5 h-5 flex-shrink-0" /> : <Unlock className="w-5 h-5 flex-shrink-0" />}
           <span>
             {isProtect
@@ -213,7 +213,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
             )}
           </div>
           <button type="submit" disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2">
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2">
             {isProcessing ? (
               <><RefreshCw className="w-5 h-5 animate-spin" /><span>{statusText} ({progress}%)</span></>
             ) : (
@@ -226,13 +226,13 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-              <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-indigo-500/10 border-indigo-500/20 text-[var(--accent)]' : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'}`}>
+              <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-indigo-500/10 border-indigo-500/20 text-[var(--accent)]' : 'bg-emerald-700/10 border-emerald-500/20 text-emerald-500'}`}>
                 {isProtect ? <Lock className="w-16 h-16 mb-4" /> : <Unlock className="w-16 h-16 mb-4" />}
                 <p className="font-bold text-center">{isProtect ? `protected_${file!.name}` : `unlocked_${file!.name}`}</p>
                 <p className="text-xs mt-1 opacity-80">{isProtect ? 'Ready with password protection.' : 'Ready without encryption.'}</p>
               </div>
               <button onClick={() => downloadOrShare(outputUrl, `${isProtect ? 'protected' : 'unlocked'}_${file!.name}`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer">
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer">
                 <Download className="w-5 h-5" /> Download {isProtect ? 'Protected' : 'Unlocked'} PDF
               </button>
             </div>

@@ -89,7 +89,7 @@ export default function ChromeExtensionPage() {
 
             <div className="space-y-4">
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 mt-1">
+                <div className="w-10 h-10 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 mt-1">
                   <Pipette className="w-5 h-5" />
                 </div>
                 <div>
@@ -101,7 +101,7 @@ export default function ChromeExtensionPage() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 mt-1">
+                <div className="w-10 h-10 rounded-full bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-1">
                   <Camera className="w-5 h-5" />
                 </div>
                 <div>
@@ -113,7 +113,7 @@ export default function ChromeExtensionPage() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0 mt-1">
+                <div className="w-10 h-10 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-400 flex items-center justify-center shrink-0 mt-1">
                   <QrCode className="w-5 h-5" />
                 </div>
                 <div>
@@ -149,13 +149,13 @@ export default function ChromeExtensionPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-4">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-6 h-6 rounded bg-[var(--accent)] text-white flex items-center justify-center font-bold text-xs">T</div>
+                    <div className="w-6 h-6 rounded bg-[var(--accent-ink)] text-white flex items-center justify-center font-bold text-xs">T</div>
                     <span className="font-semibold text-sm text-[var(--text-primary)]">Toolzum Quick</span>
                   </div>
                   <div className="flex gap-2">
-                    <button onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
-                    <button onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
-                    <button onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
+                    <button onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
+                    <button onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
+                    <button onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
                   </div>
                 </div>
 
@@ -209,12 +209,12 @@ export default function ChromeExtensionPage() {
                     </button>
 
                     <button onClick={() => toast("Opening Base64 Encoder...", { icon: "🔗" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
-                      <span className="flex items-center gap-2"><Copy className="w-3.5 h-3.5 text-blue-400" /> Base64 Encoder</span>
+                      <span className="flex items-center gap-2"><Copy className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" /> Base64 Encoder</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
                     </button>
 
                     <button onClick={() => toast("Opening Password Generator...", { icon: "🔑" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
-                      <span className="flex items-center gap-2"><Settings className="w-3.5 h-3.5 text-emerald-400" /> Password Generator</span>
+                      <span className="flex items-center gap-2"><Settings className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" /> Password Generator</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
@@ -270,14 +270,14 @@ export default function ChromeExtensionPage() {
           
           <div className="space-y-6 text-sm">
             <div className="flex gap-4">
-              <span className="w-6 h-6 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">1</span>
+              <span className="w-6 h-6 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">1</span>
               <div>
                 <h4 className="font-semibold">Download and Extract ZIP</h4>
                 <p className="text-[var(--text-secondary)] mt-1">
                   Click the "Download Extension ZIP" button at the top to download the extension bundle, then extract it to a folder on your computer.
                 </p>
                 {copiedZip && (
-                  <div className="mt-2 text-xs text-emerald-400 font-medium">
+                  <div className="mt-2 text-xs text-emerald-700 dark:text-emerald-400 font-medium">
                     ✓ Extension ZIP generated and downloaded successfully!
                   </div>
                 )}
@@ -285,7 +285,7 @@ export default function ChromeExtensionPage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="w-6 h-6 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">2</span>
+              <span className="w-6 h-6 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">2</span>
               <div>
                 <h4 className="font-semibold">Open Chrome Extensions Settings</h4>
                 <p className="text-[var(--text-secondary)] mt-1">
@@ -295,7 +295,7 @@ export default function ChromeExtensionPage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="w-6 h-6 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">3</span>
+              <span className="w-6 h-6 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">3</span>
               <div>
                 <h4 className="font-semibold">Enable Developer Mode</h4>
                 <p className="text-[var(--text-secondary)] mt-1">
@@ -305,7 +305,7 @@ export default function ChromeExtensionPage() {
             </div>
 
             <div className="flex gap-4">
-              <span className="w-6 h-6 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">4</span>
+              <span className="w-6 h-6 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center shrink-0 font-bold text-xs mt-0.5">4</span>
               <div>
                 <h4 className="font-semibold">Load Unpacked Extension</h4>
                 <p className="text-[var(--text-secondary)] mt-1">

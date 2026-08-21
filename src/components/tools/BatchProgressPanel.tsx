@@ -15,9 +15,9 @@ interface BatchProgressPanelProps {
 
 const STATUS_ICONS: Record<FileStatus, React.ReactNode> = {
   queued: <FileText className="w-3.5 h-3.5 text-[var(--text-muted)]" />,
-  processing: <Loader2 className="w-3.5 h-3.5 text-blue-400 animate-spin" />,
-  done: <Check className="w-3.5 h-3.5 text-emerald-400" />,
-  error: <AlertTriangle className="w-3.5 h-3.5 text-red-400" />,
+  processing: <Loader2 className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400 animate-spin" />,
+  done: <Check className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />,
+  error: <AlertTriangle className="w-3.5 h-3.5 text-red-700 dark:text-red-400" />,
 };
 
 function formatSize(bytes: number): string {
@@ -37,13 +37,13 @@ export const BatchProgressPanel = memo(function BatchProgressPanel({ files, prog
           <span className="text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]">
             Files ({progress.total})
           </span>
-          <span className="text-[11px] text-emerald-400">{progress.completed} done</span>
-          {progress.failed > 0 && <span className="text-[11px] text-red-400">{progress.failed} failed</span>}
-          {progress.processing > 0 && <span className="text-[11px] text-blue-400 animate-pulse">{progress.processing} processing</span>}
+          <span className="text-[11px] text-emerald-700 dark:text-emerald-400">{progress.completed} done</span>
+          {progress.failed > 0 && <span className="text-[11px] text-red-700 dark:text-red-400">{progress.failed} failed</span>}
+          {progress.processing > 0 && <span className="text-[11px] text-blue-700 dark:text-blue-400 animate-pulse">{progress.processing} processing</span>}
         </div>
         <div className="flex gap-2">
           {isProcessing && onAbort && (
-            <button onClick={onAbort} className="text-[11px] text-red-400 hover:text-red-300 font-semibold">Stop</button>
+            <button onClick={onAbort} className="text-[11px] text-red-700 dark:text-red-400 hover:text-red-300 font-semibold">Stop</button>
           )}
           {!isProcessing && files.some(f => f.status === 'done' || f.status === 'error') && (
             <button onClick={onClear} className="text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] font-semibold">Clear</button>
@@ -71,7 +71,7 @@ export const BatchProgressPanel = memo(function BatchProgressPanel({ files, prog
               <div className="flex gap-2 text-[10px] text-[var(--text-muted)]">
                 <span>{formatSize(bf.file.size)}</span>
                 {bf.status === 'processing' && <span>{bf.progress}%</span>}
-                {bf.status === 'error' && bf.error && <span className="text-red-400 truncate">{bf.error}</span>}
+                {bf.status === 'error' && bf.error && <span className="text-red-700 dark:text-red-400 truncate">{bf.error}</span>}
               </div>
               {bf.status === 'processing' && bf.progress > 0 && (
                 <div className="h-1 bg-[var(--border-subtle)] rounded-full mt-1 max-w-[120px]">
@@ -80,7 +80,7 @@ export const BatchProgressPanel = memo(function BatchProgressPanel({ files, prog
               )}
             </div>
             {!isProcessing && bf.status !== 'processing' && (
-              <button onClick={() => onRemove(bf.id)} className="shrink-0 text-[var(--text-muted)] hover:text-red-400 transition-colors">
+              <button onClick={() => onRemove(bf.id)} className="shrink-0 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 transition-colors">
                 <X className="w-3.5 h-3.5" />
               </button>
             )}

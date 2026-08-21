@@ -236,8 +236,8 @@ export default function GstInvoiceGenerator() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-2xl">
-        <div className="text-emerald-400 text-sm space-y-2">
+      <div className="flex items-center justify-between bg-emerald-700/10 border border-emerald-500/20 p-6 rounded-2xl">
+        <div className="text-emerald-700 dark:text-emerald-400 text-sm space-y-2">
           <h4 className="font-bold text-emerald-300">Client-Side GST Invoice Builder</h4>
           <p className="text-zinc-600 dark:text-zinc-300">Create legally compliant GST Invoices matching Indian standards. CGST/SGST vs IGST rates are automatically computed based on the Biller and Client states. Fully private, generated locally.</p>
         </div>
@@ -249,7 +249,7 @@ export default function GstInvoiceGenerator() {
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {Array.from({ length: MONTHLY_LIMIT }, (_, i) => (
-              <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-500'}`} />
+              <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-700'}`} />
             ))}
           </div>
           <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {MONTHLY_LIMIT} remaining this month</span>
@@ -279,7 +279,7 @@ export default function GstInvoiceGenerator() {
             {logoDataUrl && (
               <div className="flex items-center gap-3 mt-2">
                 <img src={logoDataUrl} alt="Logo preview" className="h-10 w-auto rounded border border-[var(--border-subtle)]" />
-                <button onClick={() => setLogoDataUrl(null)} className="text-xs text-red-500 hover:text-red-400 font-semibold">Remove</button>
+                <button onClick={() => setLogoDataUrl(null)} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold">Remove</button>
               </div>
             )}
           </div>
@@ -344,7 +344,7 @@ export default function GstInvoiceGenerator() {
                       <td className="px-4 py-3 text-right">₹{item.price.toFixed(2)}</td>
                       <td className="px-4 py-3 text-center">{item.gstRate}%</td>
                       <td className="px-4 py-3 text-right text-[var(--text-primary)] font-medium">₹{(item.quantity * item.price).toFixed(2)}</td>
-                      <td className="px-4 py-3 text-center"><button onClick={() => removeLineItem(item.id)} className="text-red-500 hover:text-red-400 font-bold transition-colors"><Trash2 className="w-4 h-4 inline" /></button></td>
+                      <td className="px-4 py-3 text-center"><button onClick={() => removeLineItem(item.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold transition-colors"><Trash2 className="w-4 h-4 inline" /></button></td>
                     </tr>
                   ))}
                 </tbody>

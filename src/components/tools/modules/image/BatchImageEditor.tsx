@@ -115,7 +115,7 @@ export default function BatchImageEditor() {
            <div className="flex items-center gap-2">
              <div className="flex gap-1">
                {Array.from({ length: FREE_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-500'}`} />
+                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-700'}`} />
                ))}
              </div>
              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {FREE_LIMIT} remaining</span>
@@ -154,7 +154,7 @@ export default function BatchImageEditor() {
                  <input type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none" />
                </div>
                <button onClick={processBatch} disabled={isProcessing || remaining === 0}
-                 className="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                 className="w-full mt-4 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
                  {isProcessing ? (<><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>) : remaining === 0 ? 'Limit reached — Upgrade to Pro' : (<><Download className="w-5 h-5" /> Process & Download ZIP</>)}
                </button>
              </div>

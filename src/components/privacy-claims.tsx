@@ -25,7 +25,7 @@ export function PerToolBadge({ tool }: { tool: ToolMetadata }) {
     return <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--warning)]" />Cloud AI</span>;
   }
   if (verdict === "hybrid") {
-    return <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />Hybrid</span>;
+    return <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-ink)]" />Hybrid</span>;
   }
   if (verdict === "unverified") {
     return <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-[var(--text-muted)]" />Unverified</span>;

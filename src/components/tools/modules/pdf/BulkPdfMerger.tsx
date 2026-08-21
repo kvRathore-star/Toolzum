@@ -86,14 +86,14 @@ export default function BulkPdfMerger() {
         <button
           onClick={handleMerge}
           disabled={batch.isProcessing || batch.files.length < 2}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {batch.isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
           {batch.isProcessing ? `Merging ${batch.files.length} PDFs...` : `Merge ${batch.files.length} PDF(s) into One`}
         </button>
 
         {mergedBlob && !batch.isProcessing && (
-          <button onClick={downloadMerged} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 text-white font-medium rounded-[var(--radius-lg)] hover:bg-emerald-500 transition-all">
+          <button onClick={downloadMerged} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 text-white font-medium rounded-[var(--radius-lg)] hover:bg-emerald-700 transition-all">
             <Download className="w-4 h-4" /> Download Merged PDF
           </button>
         )}

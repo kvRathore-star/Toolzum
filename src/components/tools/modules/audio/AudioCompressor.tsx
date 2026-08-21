@@ -128,7 +128,7 @@ export default function AudioCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-4xl mx-auto">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm">
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
           <strong>Dynamic Range Compression:</strong> Reduce the volume gap between quiet and loud parts of your audio. All processing happens locally in your browser.
         </div>
         <FileUploader
@@ -146,7 +146,7 @@ export default function AudioCompressor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm">
+      <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
         <strong>Dynamic Range Compression:</strong> Reduce the volume gap between quiet and loud parts of your audio. All processing happens locally in your browser.
       </div>
 

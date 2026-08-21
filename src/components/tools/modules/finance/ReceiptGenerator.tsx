@@ -179,7 +179,7 @@ export default function ReceiptGenerator() {
                 <input type="number" min="0" value={newItemRate} onChange={e => setNewItemRate(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 outline-none" />
               </div>
             </div>
-            <button onClick={addItem} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            <button onClick={addItem} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
               <Plus className="w-4 h-4" /> Add Item
             </button>
           </div>
@@ -193,7 +193,7 @@ export default function ReceiptGenerator() {
                 <h4 className="text-base font-black text-[var(--text-primary)]">{businessName}</h4>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">Receipt: {receiptNumber} | {date}</p>
               </div>
-              <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-2 py-1 rounded text-[9px] font-bold tracking-wider">PAID</span>
+              <span className="bg-emerald-700/10 text-emerald-500 border border-emerald-500/20 px-2 py-1 rounded text-[9px] font-bold tracking-wider">PAID</span>
             </div>
 
             <div className="space-y-3">

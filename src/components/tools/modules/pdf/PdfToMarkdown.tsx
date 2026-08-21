@@ -102,7 +102,7 @@ export default function PdfToMarkdown() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>PDF to Markdown:</strong> Extract text content from PDF files as clean Markdown. Best for text-based PDFs &mdash; scanned documents need OCR.
         </div>
         <FileUploader
@@ -137,7 +137,7 @@ export default function PdfToMarkdown() {
           <button
             onClick={extractText}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             {isProcessing ? "Extracting..." : "Extract Text"}
@@ -158,7 +158,7 @@ export default function PdfToMarkdown() {
                   </button>
                   <button
                     onClick={() => downloadOrShare(outputUrl!, `${fileName}.md`)}
-                    className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg"
+                    className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg"
                   >
                     Download .md
                   </button>

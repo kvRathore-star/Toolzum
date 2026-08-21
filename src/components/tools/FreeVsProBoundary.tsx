@@ -24,9 +24,9 @@ export function FreeVsProBoundary({
   if (isPro) return null;
 
   const icons = {
-    size: <Info className="w-3.5 h-3.5 text-blue-400" />,
-    batch: <Zap className="w-3.5 h-3.5 text-amber-400" />,
-    features: <Lock className="w-3.5 h-3.5 text-purple-400" />,
+    size: <Info className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />,
+    batch: <Zap className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400" />,
+    features: <Lock className="w-3.5 h-3.5 text-purple-700 dark:text-purple-400" />,
   };
 
   return (

@@ -104,14 +104,14 @@ export default function StatusPage() {
       <div className="relative z-10 max-w-[1280px] mx-auto pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         
         {/* Main Status Header Card */}
-        <div className="max-w-4xl mx-auto bg-emerald-500/10 border border-emerald-500/20 rounded-[var(--radius-2xl)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mb-12">
+        <div className="max-w-4xl mx-auto bg-emerald-700/10 border border-emerald-500/20 rounded-[var(--radius-2xl)] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 mb-12">
           <div className="flex items-center gap-4 text-center sm:text-left">
-            <div className="w-12 h-12 rounded-full bg-emerald-500/25 flex items-center justify-center shrink-0 text-emerald-400">
+            <div className="w-12 h-12 rounded-full bg-emerald-700/25 flex items-center justify-center shrink-0 text-emerald-700 dark:text-emerald-400">
               <CheckCircle className="w-7 h-7" />
             </div>
             <div>
               <h1 className="text-xl sm:text-2xl font-semibold text-white">All Systems Operational</h1>
-              <p className="text-sm text-emerald-400/80 mt-1">Toolzum services are running normally. Latency check healthy.</p>
+              <p className="text-sm text-emerald-700 dark:text-emerald-400/80 mt-1">Toolzum services are running normally. Latency check healthy.</p>
             </div>
           </div>
 
@@ -119,7 +119,7 @@ export default function StatusPage() {
             onClick={handlePing} 
             disabled={isPinging}
             variant="secondary" 
-            className="shrink-0 gap-2 text-xs py-2 px-4 h-auto border border-emerald-500/30 text-emerald-400 hover:text-emerald-300"
+            className="shrink-0 gap-2 text-xs py-2 px-4 h-auto border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 hover:text-emerald-300"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isPinging ? "animate-spin" : ""}`} />
             {isPinging ? "Pinging..." : "Run Infrastructure Ping Check"}
@@ -155,7 +155,7 @@ export default function StatusPage() {
                       <h3 className="text-sm font-semibold">{sys.name}</h3>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">Operational</span>
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-700 dark:text-emerald-400 font-bold">Operational</span>
                       </div>
                     </div>
                   </div>
@@ -184,7 +184,7 @@ export default function StatusPage() {
                     {sys.history.map((_, i) => (
                       <div 
                         key={i} 
-                        className="flex-1 h-6 rounded bg-emerald-500/20 border border-emerald-500/30 hover:bg-emerald-500 hover:scale-y-110 transition-all duration-200" 
+                        className="flex-1 h-6 rounded bg-emerald-700/20 border border-emerald-500/30 hover:bg-emerald-700 hover:scale-y-110 transition-all duration-200" 
                         title={`Day ${30 - i} ago: 100% Operational`}
                       />
                     ))}

@@ -287,7 +287,7 @@ export default function VectorPenCanvas() {
 
           {/* Actions */}
           <button onClick={handleUndo} className="p-2 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Undo"><Undo2 className="w-4 h-4" /></button>
-          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-400 hover:bg-zinc-800 rounded-lg" title="Clear"><Trash2 className="w-4 h-4" /></button>
+          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 hover:bg-zinc-800 rounded-lg" title="Clear"><Trash2 className="w-4 h-4" /></button>
 
           <div className="flex-1" />
 
@@ -295,7 +295,7 @@ export default function VectorPenCanvas() {
           <button onClick={() => handleExport('svg')} className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
             <Download className="w-3.5 h-3.5" /> SVG
           </button>
-          <button onClick={() => handleExport('png')} className="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <button onClick={() => handleExport('png')} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
             <Download className="w-3.5 h-3.5" /> PNG
           </button>
         </div>
@@ -303,7 +303,7 @@ export default function VectorPenCanvas() {
         {/* Canvas */}
         <div ref={containerRef} className="relative">
           {loadError && (
-            <div className="flex items-center justify-center h-[500px] text-xs text-red-400 gap-2 bg-red-500/5">
+            <div className="flex items-center justify-center h-[500px] text-xs text-red-700 dark:text-red-400 gap-2 bg-red-500/5">
               <AlertTriangle className="w-4 h-4" />
               {loadError}
             </div>

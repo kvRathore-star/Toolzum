@@ -94,7 +94,7 @@ export function IpRangeExpander() {
               className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
           </div>
         </div>
-        <button onClick={expand} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Expand Range</button>
+        <button onClick={expand} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Expand Range</button>
         {rangeCount > 0 && (
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-3">
             <div className="flex justify-between items-center">
@@ -136,7 +136,7 @@ export function Ipv6UlaGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv6 ULA Generator</h2>
-        <button onClick={generate} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Generate New ULA</button>
+        <button onClick={generate} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Generate New ULA</button>
         {ula.full && (
           <div>
             <InfoRow label="Full Address" val={ula.full} />

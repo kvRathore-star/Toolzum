@@ -53,7 +53,7 @@ export function DocumentConverter({ defaultFrom, defaultTo }: { defaultFrom?: st
             </div>
           </div>
         )}
-        {file && <button onClick={handleConvert} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">Convert & Download</button>}
+        {file && <button onClick={handleConvert} className="w-full py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">Convert & Download</button>}
         {file && <div className="text-xs text-[var(--text-muted)]"><p>Source: {file.name} ({srcFormat})</p><p>Output: {file.name.replace(/\.[^.]+$/, '')}.{dstFormat.toLowerCase()}</p></div>}
       </div>
     </div>

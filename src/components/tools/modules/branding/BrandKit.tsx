@@ -171,7 +171,7 @@ export default function BrandKit() {
              />
              <button 
                onClick={addFont}
-               className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 rounded-xl font-medium transition-colors"
+               className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white px-5 rounded-xl font-medium transition-colors"
              >
                Add
              </button>

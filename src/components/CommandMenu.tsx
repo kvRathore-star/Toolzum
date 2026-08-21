@@ -108,7 +108,7 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
                       ) : tool.category === "indian-utilities" ? (
                         <Zap className="w-4 h-4 text-[var(--india)] mr-3 group-data-[selected=true]:text-[var(--accent)]" />
                       ) : (
-                        <Layout className="w-4 h-4 text-blue-500 mr-3 group-data-[selected=true]:text-[var(--accent)]" />
+                        <Layout className="w-4 h-4 text-blue-700 dark:text-blue-400 mr-3 group-data-[selected=true]:text-[var(--accent)]" />
                       )}
                       <span className="font-medium flex-1 text-left">{tool.name}</span>
                       <span className="text-[11px] font-mono text-[var(--text-muted)] px-2 bg-[var(--bg-overlay)] rounded-full">

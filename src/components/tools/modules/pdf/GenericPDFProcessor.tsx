@@ -204,14 +204,14 @@ export default function GenericPDFProcessor() {
             )}
 
             {operation === 'compress' && (
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-sm text-blue-400">
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-sm text-blue-700 dark:text-blue-400">
                 <p className="font-semibold mb-1">How compression works</p>
                 <p className="text-xs">Strips all metadata (title, author, subject, keywords) and re-encodes internal object streams. File size reduction varies depending on the original content.</p>
               </div>
             )}
 
             {operation === 'remove-metadata' && (
-              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-sm text-amber-400">
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-sm text-amber-700 dark:text-amber-400">
                 <p className="font-semibold mb-1">What gets removed</p>
                 <p className="text-xs">Title, Author, Subject, Keywords, Producer, and Creator fields will be cleared. Page content and structure remain unchanged.</p>
               </div>
@@ -221,7 +221,7 @@ export default function GenericPDFProcessor() {
           <button
             onClick={processPdf}
             disabled={isProcessing || !!outputUrl}
-            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -240,7 +240,7 @@ export default function GenericPDFProcessor() {
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-              <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <Download className="w-16 h-16 mb-4" />
                 <p className="font-bold text-center">{file.name.replace('.pdf', `_${operation}`)}.pdf</p>
                 <p className="text-xs text-emerald-500/80 mt-1">PDF processed successfully.</p>
@@ -248,7 +248,7 @@ export default function GenericPDFProcessor() {
 
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.replace('.pdf', `_${operation}`)}.pdf`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download Processed PDF

@@ -90,7 +90,7 @@ export default function ExifDataRemover() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Privacy First:</strong> Photos contain hidden data (GPS location, Camera model, Time). This tool detects and completely removes all EXIF metadata securely on your device.
         </div>
         <FileUploader 
@@ -127,7 +127,7 @@ export default function ExifDataRemover() {
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Metadata Analysis</h4>
             {isAnalyzing ? (
-              <span className="text-xs text-blue-500 font-bold animate-pulse">Scanning...</span>
+              <span className="text-xs text-blue-700 dark:text-blue-400 font-bold animate-pulse">Scanning...</span>
             ) : (
               <span className={`text-xs font-bold px-2 py-1 rounded ${hasExif ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>
                 {hasExif ? 'Exif Data Found' : 'Clean (No Exif)'}
@@ -182,7 +182,7 @@ export default function ExifDataRemover() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Safe Export</h4>
-            {outputUrl && <span className="text-xs font-bold bg-emerald-500 text-white px-2 py-1 rounded">100% Clean</span>}
+            {outputUrl && <span className="text-xs font-bold bg-emerald-700 text-white px-2 py-1 rounded">100% Clean</span>}
           </div>
 
           <div className="flex-1 bg-[var(--bg-overlay)] rounded-xl overflow-hidden border border-[var(--border-subtle)] flex items-center justify-center p-4 min-h-[300px] chess-bg relative mb-6">
@@ -212,7 +212,7 @@ export default function ExifDataRemover() {
           <button 
              onClick={() => outputUrl && downloadOrShare(outputUrl, `safe_${file.name}`)}
              disabled={!outputUrl}
-             className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
            >
              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
              Download Safe Image

@@ -118,7 +118,7 @@ export default function BulkQrCodeGenerator() {
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500" />
             </div>
             <button onClick={generateSingle} disabled={isProcessing || remaining === 0}
-              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
               {isProcessing ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : remaining === 0 ? 'Daily limit reached — Upgrade to Pro' : 'Generate QR Code'}
             </button>
             {singleQrUrl && (
@@ -149,7 +149,7 @@ export default function BulkQrCodeGenerator() {
                   {csvData.length > 10 && <div className="text-xs text-[var(--text-muted)] pt-1">...and {csvData.length - 10} more</div>}
                 </div>
                 <button onClick={generateBulk} disabled={isProcessing}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
                   {isProcessing ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : <><Download className="w-4 h-4" /> Generate & Download ZIP ({csvData.length} QRs)</>}
                 </button>
                 {csvData.length > DAILY_LIMIT && usage >= DAILY_LIMIT && (

@@ -34,7 +34,7 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
           <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-center pb-3">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[var(--accent)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
+              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[var(--accent-ink)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
             >
               <Crown className="w-3 h-3" />
               Upgrade to Pro
@@ -47,9 +47,9 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
         <div className="absolute inset-0 z-50 flex items-center justify-center p-6">
           <div className="absolute inset-0 bg-black/40" />
           <div className="relative w-full max-w-md bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 text-center shadow-2xl overflow-hidden">
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[var(--accent)]/10 blur-2xl rounded-full pointer-events-none" />
+            <div className="absolute -top-10 -left-10 w-32 h-32 bg-[var(--accent-ink)]/10 blur-2xl rounded-full pointer-events-none" />
 
-            <div className="w-14 h-14 bg-[var(--accent)]/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--accent)]/30">
+            <div className="w-14 h-14 bg-[var(--accent-ink)]/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--accent)]/30">
               <Lock className="w-6 h-6 text-[var(--accent)]" />
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Pro Feature</h3>
@@ -59,22 +59,22 @@ export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPromp
 
             <div className="grid grid-cols-2 gap-2 mb-6 text-left">
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
-                <Upload className="w-3.5 h-3.5 text-emerald-400 mb-1" />
+                <Upload className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400 mb-1" />
                 <div className="text-[11px] font-medium text-white">Up to 500MB</div>
                 <div className="text-[10px] text-zinc-400">file size limit</div>
               </div>
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
-                <Zap className="w-3.5 h-3.5 text-amber-400 mb-1" />
+                <Zap className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400 mb-1" />
                 <div className="text-[11px] font-medium text-white">Bulk Batch</div>
                 <div className="text-[10px] text-zinc-400">up to 500 files</div>
               </div>
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
-                <Sparkles className="w-3.5 h-3.5 text-purple-400 mb-1" />
+                <Sparkles className="w-3.5 h-3.5 text-purple-700 dark:text-purple-400 mb-1" />
                 <div className="text-[11px] font-medium text-white">AI Engine</div>
                 <div className="text-[10px] text-zinc-400">OCR & generation</div>
               </div>
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
-                <Crown className="w-3.5 h-3.5 text-amber-400 mb-1" />
+                <Crown className="w-3.5 h-3.5 text-amber-700 dark:text-amber-400 mb-1" />
                 <div className="text-[11px] font-medium text-white">White-label</div>
                 <div className="text-[10px] text-zinc-400">no watermarks</div>
               </div>

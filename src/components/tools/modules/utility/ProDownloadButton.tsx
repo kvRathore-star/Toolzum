@@ -22,7 +22,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
       <button
         onClick={onDownloadAll}
         disabled={isProcessing}
-        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+        className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
         <Download className="w-4 h-4" />
         {isProcessing ? 'Processing...' : fileCount === 1 ? 'Download' : `Download All (${fileCount} files)`}
@@ -57,7 +57,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
       </div>
       <Link
         href="/pricing"
-        className="block w-full text-center text-xs text-amber-400 hover:text-amber-300 underline transition-colors"
+        className="block w-full text-center text-xs text-amber-700 dark:text-amber-400 hover:text-amber-300 underline transition-colors"
       >
         Upgrade to Pro for batch ZIP downloads
       </Link>

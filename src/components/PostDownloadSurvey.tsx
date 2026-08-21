@@ -74,7 +74,7 @@ export function PostDownloadSurvey() {
           </button>
           <button
             onClick={() => respond(false)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-400 text-xs font-semibold hover:bg-red-500/20 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 text-red-700 dark:text-red-400 text-xs font-semibold hover:bg-red-500/20 transition-colors"
           >
             <ThumbsDown className="w-3.5 h-3.5" /> No
           </button>
@@ -100,7 +100,7 @@ export function PostDownloadSurvey() {
             />
             <button
               type="submit"
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--accent)] text-white hover:brightness-110 transition-all"
+              className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--accent-ink)] text-white hover:brightness-110 transition-all"
             >
               Subscribe
             </button>

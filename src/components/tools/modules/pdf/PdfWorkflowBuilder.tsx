@@ -323,9 +323,9 @@ export function PdfWorkflowBuilder() {
   function fileBar(name: string, onChange: () => void) {
     return (
       <div className={fileRowCls}>
-        <FileText size={15} className="text-blue-400 shrink-0" />
+        <FileText size={15} className="text-blue-700 dark:text-blue-400 shrink-0" />
         <span className="flex-1 truncate">{name}</span>
-        <button onClick={onChange} className="text-xs text-blue-400 hover:underline shrink-0">Change</button>
+        <button onClick={onChange} className="text-xs text-blue-700 dark:text-blue-400 hover:underline shrink-0">Change</button>
       </div>
     );
   }
@@ -344,15 +344,15 @@ export function PdfWorkflowBuilder() {
         <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1">
           {TABS.map(t => (
             <button key={t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-blue-600/20 text-blue-700 dark:text-blue-400 border border-blue-500/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
               {t.icon}<span>{t.label}</span>
             </button>
           ))}
         </div>
 
         <div className="flex-1 p-6 overflow-y-auto space-y-4">
-          {error && <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">{error}</div>}
-          {success && <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-400">{success}</div>}
+          {error && <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-700 dark:text-red-400">{error}</div>}
+          {success && <div className="p-3 bg-emerald-700/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-700 dark:text-emerald-400">{success}</div>}
 
           {activeTab === 'merge' && (
             <>
@@ -364,11 +364,11 @@ export function PdfWorkflowBuilder() {
                 <div className="space-y-1.5">
                   {mergeFiles.map((f, i) => (
                     <div key={f.id} className={fileRowCls}>
-                      <FileText size={15} className="text-blue-400 shrink-0" />
+                      <FileText size={15} className="text-blue-700 dark:text-blue-400 shrink-0" />
                       <span className="flex-1 truncate">{f.name}</span>
                       <button onClick={() => moveMergeFile(i, -1)} disabled={i === 0} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"><ChevronUp size={15} /></button>
                       <button onClick={() => moveMergeFile(i, 1)} disabled={i === mergeFiles.length - 1} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"><ChevronDown size={15} /></button>
-                      <button onClick={() => removeMergeFile(f.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-400"><Trash2 size={14} /></button>
+                      <button onClick={() => removeMergeFile(f.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400"><Trash2 size={14} /></button>
                     </div>
                   ))}
                 </div>
@@ -415,7 +415,7 @@ export function PdfWorkflowBuilder() {
                   <button onClick={handleFill} disabled={loading} className={btnCls}>{loading ? 'Filling...' : 'Fill & Download'}</button>
                 </div>
               )}
-              {fillFile && formFields.length === 0 && <p className="text-sm text-amber-400">No interactive form fields detected in this PDF.</p>}
+              {fillFile && formFields.length === 0 && <p className="text-sm text-amber-700 dark:text-amber-400">No interactive form fields detected in this PDF.</p>}
             </>
           )}
 
@@ -432,7 +432,7 @@ export function PdfWorkflowBuilder() {
                 <>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-[var(--text-tertiary)]">{pageCount} page(s) · {selectedPages.length} selected</span>
-                    <button onClick={toggleAllPages} className="text-xs text-blue-400 hover:underline">{selectedPages.length === pageCount ? 'Deselect all' : 'Select all'}</button>
+                    <button onClick={toggleAllPages} className="text-xs text-blue-700 dark:text-blue-400 hover:underline">{selectedPages.length === pageCount ? 'Deselect all' : 'Select all'}</button>
                   </div>
                   <div className="grid grid-cols-10 gap-1.5">
                     {Array.from({ length: pageCount }, (_, i) => i + 1).map(n => (
@@ -460,7 +460,7 @@ export function PdfWorkflowBuilder() {
               <p className="text-sm text-[var(--text-tertiary)]">Reduce file size by stripping unused data and re-saving efficiently.</p>
               <input ref={optimizeRef} type="file" accept=".pdf" onChange={handleOptimize} className="hidden" />
               {dropZone('Click to select a PDF to optimize', () => optimizeRef.current?.click())}
-              {optimizeResult && <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg text-sm text-blue-400">{optimizeResult}</div>}
+              {optimizeResult && <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg text-sm text-blue-700 dark:text-blue-400">{optimizeResult}</div>}
             </>
           )}
 
@@ -486,7 +486,7 @@ export function PdfWorkflowBuilder() {
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
             <p className="text-xs text-[var(--text-tertiary)]">
-              <span className="text-emerald-400 font-bold">🔒 Privacy First</span> — All PDF processing happens in your browser. Files are never uploaded to any server.
+              <span className="text-emerald-700 dark:text-emerald-400 font-bold">🔒 Privacy First</span> — All PDF processing happens in your browser. Files are never uploaded to any server.
             </p>
           </div>
         </div>

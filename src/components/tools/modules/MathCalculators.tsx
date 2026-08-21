@@ -28,7 +28,7 @@ export function SquareRootCalculator() {
       {result && n >= 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">\u221a{n}</div>
-          <div className="text-3xl font-bold text-indigo-400">{sqrt.toFixed(4)}</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{sqrt.toFixed(4)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -221,11 +221,11 @@ export function ScientificCalculator() {
   const evalDisplay = expr.replace(/\*/g, '\u00d7').replace(/\//g, '\u00f7');
   const btnBase = `h-11 sm:h-12 rounded-xl font-semibold text-sm sm:text-base transition-all active:scale-95 select-none flex items-center justify-center`;
   const btnNum = `${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`;
-  const btnOp = `${btnBase} bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-400 border border-indigo-500/20`;
+  const btnOp = `${btnBase} bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-700 dark:text-indigo-400 border border-indigo-500/20`;
   const btnEq = `${btnBase} bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white shadow-lg`;
-  const btnFn = `${btnBase} bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/20 text-xs`;
-  const btnClr = `${btnBase} bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20`;
-  const btnMem = `${btnBase} bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/20 text-xs`;
+  const btnFn = `${btnBase} bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-xs`;
+  const btnClr = `${btnBase} bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-400 border border-red-500/20`;
+  const btnMem = `${btnBase} bg-purple-500/10 hover:bg-purple-500/20 text-purple-700 dark:text-purple-400 border border-purple-500/20 text-xs`;
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -233,13 +233,13 @@ export function ScientificCalculator() {
         <div className="flex items-center justify-between px-4 pt-4 pb-2">
           <h1 className="text-lg font-bold text-[var(--text-primary)]">Scientific Calculator</h1>
           <div className="flex items-center gap-2">
-            <button onClick={() => setShowHistory(!showHistory)} className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+            <button onClick={() => setShowHistory(!showHistory)} className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               History {history.length > 0 && `(${history.length})`}
             </button>
             <button onClick={() => setShowFuncs(!showFuncs)} className="px-3 py-1 rounded-lg text-xs font-medium bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {showFuncs ? 'Basic' : 'Sci'}
             </button>
-            <button onClick={() => setAngleMode(m => m === 'deg' ? 'rad' : 'deg')} className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${angleMode === 'deg' ? 'bg-indigo-500/20 text-indigo-400' : 'bg-amber-500/20 text-amber-400'}`}>
+            <button onClick={() => setAngleMode(m => m === 'deg' ? 'rad' : 'deg')} className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors ${angleMode === 'deg' ? 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-400' : 'bg-amber-500/20 text-amber-700 dark:text-amber-400'}`}>
               {angleMode.toUpperCase()}
             </button>
           </div>
@@ -249,7 +249,7 @@ export function ScientificCalculator() {
             {evalDisplay || <span className="opacity-30">0</span>}
           </div>
           <div className="flex items-center justify-between mt-1">
-            <div className="text-xs text-[var(--text-tertiary)]">{memory !== null && <span className="text-purple-400 font-bold">M</span>}</div>
+            <div className="text-xs text-[var(--text-tertiary)]">{memory !== null && <span className="text-purple-700 dark:text-purple-400 font-bold">M</span>}</div>
             <div className="flex items-center gap-2">
               {result && (
                 <>
@@ -257,7 +257,7 @@ export function ScientificCalculator() {
                   <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result"><Copy size={16} /></button>
                 </>
               )}
-              {error && <span className="text-sm text-red-400 font-medium">{error}</span>}
+              {error && <span className="text-sm text-red-700 dark:text-red-400 font-medium">{error}</span>}
             </div>
           </div>
         </div>
@@ -405,7 +405,7 @@ export function FluidTypographyCalculator() {
             </div>
             <div className="mt-4 p-4 bg-purple-500/5 border border-purple-500/10 rounded-xl">
               <div className="text-xs text-[var(--text-tertiary)] mb-2">CSS clamp() formula (base):</div>
-              <code className="text-xs font-mono text-purple-400 break-all">{cssClamp}</code>
+              <code className="text-xs font-mono text-purple-700 dark:text-purple-400 break-all">{cssClamp}</code>
             </div>
           </div>
         )}
@@ -462,13 +462,13 @@ export function AbTestCalculator() {
               <div className="text-xs text-[var(--text-tertiary)]">Control</div>
               <div className="text-lg font-bold text-[var(--text-primary)]">{(cr1 * 100).toFixed(1)}%</div>
             </div>
-            <div className={`flex-1 rounded-xl p-3 text-center border ${pct >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+            <div className={`flex-1 rounded-xl p-3 text-center border ${pct >= 0 ? 'bg-emerald-700/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
               <div className="text-xs text-[var(--text-tertiary)]">Variant</div>
-              <div className={`text-lg font-bold ${pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
+              <div className={`text-lg font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
             </div>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-lg px-3 py-2 text-center">
-            <span className={`text-sm font-bold ${pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+            <span className={`text-sm font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
               {pct >= 0 ? '+' : ''}{pct.toFixed(1)}% {pct >= 0 ? 'improvement' : 'decline'}
             </span>
           </div>
@@ -506,7 +506,7 @@ export function ExponentCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">Result</div>
-          <div className="text-xl font-bold text-indigo-400 font-mono break-all">{b}^{e} = {val.toLocaleString()}</div>
+          <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {val.toLocaleString()}</div>
         </div>
       )}
     </CalculatorShell>
@@ -549,7 +549,7 @@ export function FinalGradeCalculator() {
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Final Grade</div>
-            <div className={`text-3xl font-bold ${final >= 90 ? 'text-emerald-400' : final >= 80 ? 'text-blue-400' : final >= 70 ? 'text-amber-400' : 'text-red-400'}`}>{final.toFixed(1)}%</div>
+            <div className={`text-3xl font-bold ${final >= 90 ? 'text-emerald-700 dark:text-emerald-400' : final >= 80 ? 'text-blue-700 dark:text-blue-400' : final >= 70 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{final.toFixed(1)}%</div>
           </div>
         </div>
       )}
@@ -595,7 +595,7 @@ export function GpaCalculator() {
         return (
           <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
             <div className="text-xs text-[var(--text-tertiary)]">GPA</div>
-            <div className={`text-3xl font-bold ${gpa >= 3.5 ? 'text-emerald-400' : gpa >= 3.0 ? 'text-blue-400' : gpa >= 2.0 ? 'text-amber-400' : 'text-red-400'}`}>{gpa.toFixed(2)}</div>
+            <div className={`text-3xl font-bold ${gpa >= 3.5 ? 'text-emerald-700 dark:text-emerald-400' : gpa >= 3.0 ? 'text-blue-700 dark:text-blue-400' : gpa >= 2.0 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{gpa.toFixed(2)}</div>
           </div>
         );
       })()}
@@ -620,14 +620,14 @@ export function GradeCalculator() {
   ];
   const p = parseFloat(percentage) || 0;
   const letter = getLetter(p);
-  const colorMap: Record<string, string> = { 'A': 'text-emerald-400', 'A-': 'text-emerald-400', 'B+': 'text-blue-400', 'B': 'text-blue-400', 'B-': 'text-blue-400', 'C+': 'text-amber-400', 'C': 'text-amber-400', 'C-': 'text-amber-400', 'D+': 'text-orange-400', 'D': 'text-orange-400', 'F': 'text-red-400' };
+  const colorMap: Record<string, string> = { 'A': 'text-emerald-700 dark:text-emerald-400', 'A-': 'text-emerald-700 dark:text-emerald-400', 'B+': 'text-blue-700 dark:text-blue-400', 'B': 'text-blue-700 dark:text-blue-400', 'B-': 'text-blue-700 dark:text-blue-400', 'C+': 'text-amber-700 dark:text-amber-400', 'C': 'text-amber-700 dark:text-amber-400', 'C-': 'text-amber-700 dark:text-amber-400', 'D+': 'text-orange-700 dark:text-orange-400', 'D': 'text-orange-700 dark:text-orange-400', 'F': 'text-red-700 dark:text-red-400' };
   return (
     <CalculatorShell title="Grade Calculator" result={result} onCalculate={calc} presets={presets} accent="fuchsia">
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Percentage (%)</label><input type="number" value={percentage} onChange={e => setPercentage(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="space-y-2">
           <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-            <div className={`text-5xl font-bold ${colorMap[letter] || 'text-indigo-400'}`}>{letter}</div>
+            <div className={`text-5xl font-bold ${colorMap[letter] || 'text-indigo-700 dark:text-indigo-400'}`}>{letter}</div>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
             <div className={`h-full rounded-full transition-all duration-500 ${p >= 60 ? 'bg-gradient-to-r from-red-500 via-amber-500 to-emerald-500' : 'bg-red-500'}`} style={{ width: `${p}%` }} />
@@ -687,11 +687,11 @@ export function CollegeGpaCalculator() {
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
               <div className="text-xs text-[var(--text-tertiary)]">Semester GPA</div>
-              <div className="text-xl font-bold text-indigo-400">{semGpa.toFixed(2)}</div>
+              <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{semGpa.toFixed(2)}</div>
             </div>
-            <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
+            <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
               <div className="text-xs text-[var(--text-tertiary)]">Cumulative GPA</div>
-              <div className="text-xl font-bold text-emerald-400">{cumGpa.toFixed(2)}</div>
+              <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{cumGpa.toFixed(2)}</div>
             </div>
           </div>
         );
@@ -721,7 +721,7 @@ export function LeapYearCalculator() {
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className={`bg-[var(--bg-overlay)] rounded-xl p-4 text-center border ${isLeap ? 'border-emerald-500/20' : 'border-amber-500/20'}`}>
-          <div className={`text-3xl font-bold ${isLeap ? 'text-emerald-400' : 'text-amber-400'}`}>{isLeap ? 'Leap Year' : 'Not a Leap Year'}</div>
+          <div className={`text-3xl font-bold ${isLeap ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{isLeap ? 'Leap Year' : 'Not a Leap Year'}</div>
           <div className="text-xs text-[var(--text-tertiary)] mt-1">{isLeap ? '366 days' : '365 days'}</div>
         </div>
       )}
@@ -760,7 +760,7 @@ export function ProbabilityCalculator() {
         <div className="space-y-2">
           <div className="flex items-center justify-between bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
             <span className="text-sm text-[var(--text-secondary)]">Probability</span>
-            <span className="text-xl font-bold text-indigo-400">{pct.toFixed(1)}%</span>
+            <span className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{pct.toFixed(1)}%</span>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500" style={{ width: `${Math.min(pct, 100)}%` }} />
@@ -802,7 +802,7 @@ export function ProportionCalculator() {
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)] font-mono text-lg">
-          <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
+          <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-700 dark:text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
         </div>
       )}
     </CalculatorShell>
@@ -837,7 +837,7 @@ export function RatioCalculator() {
       </div>
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-2xl font-bold text-indigo-400">{n1 / g} : {n2 / g}</div>
+          <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{n1 / g} : {n2 / g}</div>
         </div>
       )}
     </CalculatorShell>
@@ -875,8 +875,8 @@ export function AspectRatioCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="text-center">
-            <div className="text-2xl font-bold text-indigo-400">{w / g}:{h / g}</div>
-            {match && <div className="text-xs text-emerald-400 mt-1">Common: {match}</div>}
+            <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{w / g}:{h / g}</div>
+            {match && <div className="text-xs text-emerald-700 dark:text-emerald-400 mt-1">Common: {match}</div>}
           </div>
           <div className="mt-3 bg-[var(--bg-elevated)] rounded-lg h-24 flex items-center justify-center" style={{ aspectRatio: `${w / g}/${h / g}` }}>
             <div className="text-xs text-[var(--text-tertiary)]">{w} \u00d7 {h}</div>
@@ -911,11 +911,11 @@ export function CircleCalculator() {
         <div className="grid grid-cols-2 gap-2">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-            <div className="text-lg font-bold text-indigo-400">{area.toFixed(1)}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{area.toFixed(1)}</div>
           </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
+          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Circumference</div>
-            <div className="text-lg font-bold text-emerald-400">{(2 * Math.PI * r).toFixed(1)}</div>
+            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{(2 * Math.PI * r).toFixed(1)}</div>
           </div>
         </div>
       )}
@@ -952,7 +952,7 @@ export function DpiCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">Dots Per Inch</div>
-          <div className="text-3xl font-bold text-indigo-400">{dpi.toFixed(0)}</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -1034,11 +1034,11 @@ export function MeanMedianModeCalculator() {
         <div className="grid grid-cols-2 gap-2">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Mean</div>
-            <div className="text-lg font-bold text-indigo-400">{mean.toFixed(2)}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{mean.toFixed(2)}</div>
           </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
+          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Median</div>
-            <div className="text-lg font-bold text-emerald-400">{nums.length ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0}</div>
+            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{nums.length ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0}</div>
           </div>
         </div>
       )}
@@ -1076,7 +1076,7 @@ export function PpiCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">Pixels Per Inch</div>
-          <div className="text-3xl font-bold text-purple-400">{ppi.toFixed(0)}</div>
+          <div className="text-3xl font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -1113,7 +1113,7 @@ export function PythagoreanTheoremCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">c = \u221a(a\u00b2 + b\u00b2)</div>
-          <div className="text-3xl font-bold text-indigo-400">{c.toFixed(2)}</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{c.toFixed(2)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -1163,7 +1163,7 @@ export function QuadraticEquationSolver() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">Discriminant</div>
-          <div className={`text-lg font-bold ${disc >= 0 ? 'text-emerald-400' : 'text-amber-400'}`}>{disc.toFixed(2)}</div>
+          <div className={`text-lg font-bold ${disc >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{disc.toFixed(2)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -1199,11 +1199,11 @@ export function RectangleAreaCalculator() {
         <div className="grid grid-cols-3 gap-2">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-            <div className="text-lg font-bold text-indigo-400">{l * w}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{l * w}</div>
           </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
+          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>
-            <div className="text-lg font-bold text-emerald-400">{2 * (l + w)}</div>
+            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{2 * (l + w)}</div>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 text-center border border-[var(--border-subtle)]">
             <div className="text-xs text-[var(--text-tertiary)]">Diagonal</div>

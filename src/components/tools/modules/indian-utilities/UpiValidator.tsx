@@ -197,9 +197,9 @@ export default function UpiValidator() {
         </div>
 
         {showResult && result && (
-          <div className={`p-5 rounded-xl border-2 animate-in fade-in slide-in-from-top-2 duration-300 ${result.valid ? 'bg-emerald-500/5 border-emerald-500/30' : 'bg-rose-500/5 border-rose-500/30'}`}>
+          <div className={`p-5 rounded-xl border-2 animate-in fade-in slide-in-from-top-2 duration-300 ${result.valid ? 'bg-emerald-700/5 border-emerald-500/30' : 'bg-rose-500/5 border-rose-500/30'}`}>
             <div className="flex items-start gap-4">
-              <div className={`shrink-0 p-2 rounded-full ${result.valid ? 'bg-emerald-500/20 text-emerald-500' : 'bg-rose-500/20 text-rose-500'}`}>
+              <div className={`shrink-0 p-2 rounded-full ${result.valid ? 'bg-emerald-700/20 text-emerald-500' : 'bg-rose-500/20 text-rose-500'}`}>
                 {result.valid ? <CheckCircle className="w-7 h-7 animate-in zoom-in-95 duration-300" /> : <XCircle className="w-7 h-7 animate-in zoom-in-95 duration-300" />}
               </div>
               <div className="flex-1 min-w-0 space-y-2">
@@ -316,7 +316,7 @@ export default function UpiValidator() {
               <History className="w-3.5 h-3.5 text-[#0d9488]" />
               Recent Validations
             </h4>
-            <button onClick={clearHistory} className="text-[10px] font-bold text-rose-500 hover:text-rose-400 cursor-pointer">Clear All</button>
+            <button onClick={clearHistory} className="text-[10px] font-bold text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 cursor-pointer">Clear All</button>
           </div>
           <div className="space-y-1.5">
             {history.map((entry, i) => (

@@ -71,7 +71,7 @@ export default function VideoWatermarkAdder() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Protect your content:</strong> Burn custom text watermarks directly into your videos locally in the browser.
         </div>
         <FileUploader 
@@ -153,8 +153,8 @@ export default function VideoWatermarkAdder() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Watermark Applied!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Watermark Applied!</h4>
               <video src={outputUrl} controls className="w-full max-h-[200px] rounded-lg mb-6" />
               <button 
                 onClick={() => downloadOrShare(outputUrl, `watermarked_${file.name}`)}

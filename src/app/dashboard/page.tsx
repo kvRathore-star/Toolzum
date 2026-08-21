@@ -73,7 +73,7 @@ export default function DashboardPage() {
               <span className="text-[var(--text-muted)] text-sm">remaining</span>
             </div>
             <div className="mt-4 w-full bg-[var(--bg-overlay)] rounded-full h-1.5 overflow-hidden">
-              <div className="bg-[var(--accent)] h-full w-[30%]" />
+              <div className="bg-[var(--accent-ink)] h-full w-[30%]" />
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export default function DashboardPage() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="px-6 py-4 flex items-center justify-between hover:bg-[var(--bg-overlay)] transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className="w-2 h-2 rounded-full bg-[var(--accent)]" />
+                  <div className="w-2 h-2 rounded-full bg-[var(--accent-ink)]" />
                   <div>
                     <p className="text-sm font-medium text-[var(--text-primary)]">Used PDF Compressor</p>
                     <p className="text-[12px] text-[var(--text-muted)]">Saved 4.2 MB on local device</p>

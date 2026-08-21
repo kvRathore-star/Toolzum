@@ -113,7 +113,7 @@ export default function ComparePdfFiles() {
         {diffResult.map(([type, text], idx) => {
           if (type === DIFF_INSERT) {
             return (
-              <span key={idx} className="bg-emerald-500/20 text-emerald-800 dark:text-[var(--success)] px-1 py-0.5 rounded font-medium border border-emerald-500/10">
+              <span key={idx} className="bg-emerald-700/20 text-emerald-800 dark:text-[var(--success)] px-1 py-0.5 rounded font-medium border border-emerald-500/10">
                 {text}
               </span>
             );
@@ -134,7 +134,7 @@ export default function ComparePdfFiles() {
   if (!compared) {
     return (
       <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           <Files className="w-5 h-5 flex-shrink-0" />
           <span><strong>100% Client-Side Comparison:</strong> Your PDF text is extracted and diffed entirely inside your web browser. Nothing goes online.</span>
         </div>
@@ -259,7 +259,7 @@ export default function ComparePdfFiles() {
               const isSelected = idx === currentPage;
               let indicatorColor = "bg-[var(--bg-surface)] text-[var(--text-secondary)]";
               if (isSelected) {
-                indicatorColor = "bg-[var(--accent)] text-white font-bold";
+                indicatorColor = "bg-[var(--accent-ink)] text-white font-bold";
               } else if (!hasPageA || !hasPageB) {
                 indicatorColor = "bg-rose-500/10 text-[var(--accent)] border border-rose-500/25";
               }
@@ -278,7 +278,7 @@ export default function ComparePdfFiles() {
           </div>
 
           <div className="text-[10px] text-[var(--text-muted)] space-y-1.5 pt-2 border-t border-[var(--border-subtle)]">
-            <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 bg-emerald-500/25 border border-emerald-500/30 rounded inline-block" /> <span>Green represents insertions (B has, A doesn't)</span></div>
+            <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 bg-emerald-700/25 border border-emerald-500/30 rounded inline-block" /> <span>Green represents insertions (B has, A doesn't)</span></div>
             <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 bg-rose-500/25 border border-rose-500/30 rounded inline-block" /> <span>Red represents deletions (A has, B doesn't)</span></div>
           </div>
         </div>

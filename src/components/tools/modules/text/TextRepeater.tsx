@@ -128,7 +128,7 @@ export default function TextRepeater() {
               />
             </div>
             <div className="flex gap-2">
-              <button onClick={handleCopy} disabled={!output} className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+              <button onClick={handleCopy} disabled={!output} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
                 <Copy className="w-4 h-4" /> Copy All
               </button>
               <button onClick={handleDownload} disabled={!output} className="flex-1 bg-[var(--bg-overlay)] hover:bg-[var(--border-subtle)] disabled:opacity-50 text-[var(--text-primary)] font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 border border-[var(--border-subtle)] cursor-pointer">

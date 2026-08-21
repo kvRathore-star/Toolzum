@@ -181,8 +181,8 @@ export default function PhotoRetoucher() {
   if (!imageSrc) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-400 shrink-0" />
+        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
           <span><strong>100% Client-Side Retouch:</strong> Smooth skin or correct red-eyes using local brush strokes directly inside your browser.</span>
         </div>
         <FileUploader
@@ -228,7 +228,7 @@ export default function PhotoRetoucher() {
                 onClick={() => setRetouchMode('smooth')}
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'smooth'
-                    ? 'bg-[var(--accent)] text-white shadow-lg'
+                    ? 'bg-[var(--accent-ink)] text-white shadow-lg'
                     : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
@@ -238,7 +238,7 @@ export default function PhotoRetoucher() {
                 onClick={() => setRetouchMode('redeye')}
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'redeye'
-                    ? 'bg-[var(--accent)] text-white shadow-lg'
+                    ? 'bg-[var(--accent-ink)] text-white shadow-lg'
                     : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
@@ -287,7 +287,7 @@ export default function PhotoRetoucher() {
             {processedUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 Download Retouched Photo
               </button>

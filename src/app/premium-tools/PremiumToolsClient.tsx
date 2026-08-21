@@ -61,7 +61,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] overflow-hidden">
       {/* Ambient glow */}
       <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-[30%] right-1/4 w-[400px] h-[400px] bg-[var(--accent)]/8 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-[30%] right-1/4 w-[400px] h-[400px] bg-[var(--accent-ink)]/8 blur-[100px] rounded-full pointer-events-none" />
 
       {/* ===== HERO ===== */}
       <section className="relative pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
@@ -233,8 +233,8 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>AI tools</span></li>
             </ul>
           </div>
-          <div className="p-6 bg-[var(--accent)]/5 border-2 border-[var(--accent)] rounded-[var(--radius-xl)] relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[var(--accent)] text-white text-[10px] font-mono uppercase tracking-wider rounded-full">Popular</div>
+          <div className="p-6 bg-[var(--accent-ink)]/5 border-2 border-[var(--accent)] rounded-[var(--radius-xl)] relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[var(--accent-ink)] text-white text-[10px] font-mono uppercase tracking-wider rounded-full">Popular</div>
             <div className="flex items-center gap-2 mb-1">
               <Crown className="w-4 h-4 text-amber-500" />
               <span className="text-xs font-mono text-amber-500 uppercase tracking-wider">Pro</span>

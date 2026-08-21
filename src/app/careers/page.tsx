@@ -37,7 +37,7 @@ export default function CareersPage() {
         </div>
 
         {/* Mission highlight */}
-        <div className="max-w-3xl mx-auto mb-16 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
+        <div className="max-w-3xl mx-auto mb-16 p-6 bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
           <Shield className="w-8 h-8 text-[var(--accent)] mx-auto mb-3" />
           <h2 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-2">Privacy is not a feature. It is the architecture.</h2>
           <p className="text-sm text-[var(--text-secondary)] max-w-xl mx-auto">
@@ -50,7 +50,7 @@ export default function CareersPage() {
         {/* Culture highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 max-w-5xl mx-auto">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
-            <div className="w-10 h-10 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
+            <div className="w-10 h-10 rounded-lg bg-[var(--accent-ink)]/10 text-[var(--accent)] flex items-center justify-center mb-6">
               <MapPin className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-base mb-2">100% Remote</h3>
@@ -58,7 +58,7 @@ export default function CareersPage() {
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-6">
+            <div className="w-10 h-10 rounded-lg bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center mb-6">
               <Clock className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-base mb-2">Sustainable Pace</h3>
@@ -66,7 +66,7 @@ export default function CareersPage() {
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8">
-            <div className="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center mb-6">
+            <div className="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-400 flex items-center justify-center mb-6">
               <Heart className="w-5 h-5" />
             </div>
             <h3 className="font-semibold text-base mb-2">Open Source DNA</h3>

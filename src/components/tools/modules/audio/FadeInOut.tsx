@@ -310,7 +310,7 @@ export default function FadeInOut() {
                   <button key={f} onClick={() => setOutputFmt(f)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                       outputFmt === f
-                        ? 'bg-emerald-500 text-white border-emerald-500'
+                        ? 'bg-emerald-700 text-white border-emerald-500'
                         : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-emerald-300 dark:hover:border-emerald-700'
                     }`}>
                     {FORMAT_LABELS[f]}
@@ -321,7 +321,7 @@ export default function FadeInOut() {
 
             {!outputUrl && !processing && (
               <button onClick={process}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                 <Play className="w-4 h-4" /> Apply Fade Effects
               </button>
             )}
@@ -359,7 +359,7 @@ export default function FadeInOut() {
                 </div>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `faded_audio.${outputFmt}`)}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                   <Download className="w-4 h-4" /> Download {FORMAT_LABELS[outputFmt]}
                 </button>
               </div>

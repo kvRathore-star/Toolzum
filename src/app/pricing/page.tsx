@@ -10,7 +10,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] relative overflow-hidden">
       {/* Premium Gradient Ambient Light */}
-      <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent)]/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent-ink)]/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-[var(--success)]/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Abstract Grid Background */}
@@ -28,7 +28,7 @@ export default function PricingPage() {
       <div className="relative z-10 max-w-[1280px] mx-auto pt-32 pb-24 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
         {/* Header */}
         <div className="text-center mb-10 max-w-3xl">
-          <div className="inline-flex items-center gap-1.5 bg-[var(--accent)]/10 text-[var(--accent)] text-xs font-semibold px-3 py-1 rounded-full mb-4">
+          <div className="inline-flex items-center gap-1.5 bg-[var(--accent-ink)]/10 text-[var(--accent)] text-xs font-semibold px-3 py-1 rounded-full mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Simple, Easy Pricing Security</span>
           </div>

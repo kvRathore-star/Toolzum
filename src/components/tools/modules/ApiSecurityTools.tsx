@@ -116,7 +116,7 @@ export function ApiKeyValidator() {
             <div className="space-y-1.5">
               {result.checks.map((c, i) => (
                 <div key={i} className="flex items-center gap-2 text-xs">
-                  <span className={c.pass ? 'text-green-500' : 'text-red-400'}>{c.pass ? '✓' : '✗'}</span>
+                  <span className={c.pass ? 'text-green-500' : 'text-red-700 dark:text-red-400'}>{c.pass ? '✓' : '✗'}</span>
                   <span className="text-[var(--text-secondary)]">{c.label}</span>
                 </div>
               ))}
@@ -182,7 +182,7 @@ export function ApiCostEstimator() {
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Cost Per User</p>
-              <p className="text-2xl font-black text-blue-500">${result.costPerUser.toFixed(4)}</p>
+              <p className="text-2xl font-black text-blue-700 dark:text-blue-400">${result.costPerUser.toFixed(4)}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Requests Per User</p>
@@ -244,7 +244,7 @@ export function ApiGatewayRateCalculator() {
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Sustained</p>
-                <p className="text-lg font-bold text-blue-500">{result.sustainedRate} req/s</p>
+                <p className="text-lg font-bold text-blue-700 dark:text-blue-400">{result.sustainedRate} req/s</p>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Throttle (80%)</p>
@@ -305,7 +305,7 @@ export function ApiRateLimiterCalculator() {
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Per Minute</p>
-              <p className="text-xl font-bold text-blue-500">{result.ratePerMin.toFixed(1)} req/min</p>
+              <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{result.ratePerMin.toFixed(1)} req/min</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Burst Window</p>

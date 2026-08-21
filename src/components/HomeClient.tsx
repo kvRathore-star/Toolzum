@@ -64,7 +64,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
 
       {/* ===== 1. HERO ===== */}
       <section ref={heroRef} className="relative pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
-        <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent)]/8 blur-[140px] pointer-events-none" />
+        <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent-ink)]/8 blur-[140px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           <div className="flex flex-col items-start text-left">
@@ -206,7 +206,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             >
               <div className="flex items-center gap-4 mb-6">
                 <span className="text-[40px] font-mono font-bold text-[var(--accent)] leading-none">{step.num}</span>
-                <div className="h-px flex-1 bg-[var(--border-subtle)] group-hover:bg-[var(--accent)]/30 transition-colors" />
+                <div className="h-px flex-1 bg-[var(--border-subtle)] group-hover:bg-[var(--accent-ink)]/30 transition-colors" />
               </div>
               <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--accent-soft)] border border-[var(--accent)]/20 flex items-center justify-center mb-5 transition-all">
                 <step.icon className="w-5 h-5 text-[var(--accent)]" />
@@ -439,7 +439,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
                       </div>
                       <div className="flex items-center gap-1.5">
                         {tool.slug.startsWith('bulk-') && (
-                          <span className="text-[10px] font-mono text-blue-500 uppercase tracking-wider bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 px-2 py-0.5 rounded">
+                          <span className="text-[10px] font-mono text-blue-700 dark:text-blue-400 uppercase tracking-wider bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 px-2 py-0.5 rounded">
                             Bulk
                           </span>
                         )}
@@ -505,8 +505,8 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
           <div className="p-6 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
             <div className="flex items-center gap-2 mb-1">
-              <Users className="w-4 h-4 text-zinc-400" />
-              <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Free</span>
+              <Users className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
+              <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Free</span>
             </div>
             <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">$0</div>
             <ul className="space-y-2.5 text-sm">
@@ -518,11 +518,11 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>AI generation & extraction</span></li>
             </ul>
           </div>
-          <div className="p-6 bg-[var(--accent)]/5 border-2 border-[var(--accent)] rounded-[var(--radius-xl)] relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[var(--accent)] text-white text-[10px] font-mono uppercase tracking-wider rounded-full">Popular</div>
+          <div className="p-6 bg-[var(--accent-ink)]/5 border-2 border-[var(--accent)] rounded-[var(--radius-xl)] relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-[var(--accent-ink)] text-white text-[10px] font-mono uppercase tracking-wider rounded-full">Popular</div>
             <div className="flex items-center gap-2 mb-1">
-              <Crown className="w-4 h-4 text-amber-500" />
-              <span className="text-xs font-mono text-amber-500 uppercase tracking-wider">Pro</span>
+              <Crown className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+              <span className="text-xs font-mono text-amber-700 dark:text-amber-400 uppercase tracking-wider">Pro</span>
             </div>
             <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">{showIndia ? '₹249' : '$14.99'}</div>
             <div className="text-xs text-[var(--text-muted)] mb-4">/{showIndia ? 'mo' : 'month'}, cancel anytime</div>
@@ -540,7 +540,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
         <div className="text-center">
           <Link
             href="/pricing"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-xl hover:bg-[var(--accent-hover)] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-xl hover:bg-[var(--accent-hover)] transition-colors"
           >
             See full pricing <ArrowRight className="w-4 h-4" />
           </Link>
@@ -618,7 +618,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
       {/* ===== 10. FEEDBACK FORM ===== */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <div className="max-w-3xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-ink)]/5 rounded-full blur-[80px]" />
           <Lightbulb className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
           <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl text-[var(--text-primary)] mb-3">
             Suggest a tool
@@ -642,7 +642,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
       {/* ===== 11. FINAL CTA ===== */}
       <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[60%] h-[80%] rounded-full bg-[var(--accent)]/5 blur-[100px]" />
+          <div className="w-[60%] h-[80%] rounded-full bg-[var(--accent-ink)]/5 blur-[100px]" />
         </div>
 
         <motion.div
@@ -758,7 +758,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         onClick={() => document.getElementById('hero-file-input')?.click()}
         className={`flex-1 border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-4 transition-colors cursor-pointer group ${
           dragOver
-            ? 'border-[var(--accent)] bg-[var(--accent)]/5'
+            ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5'
             : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
         }`}
       >
@@ -779,7 +779,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           </div>
         ) : (
           <>
-            <div className="w-16 h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent)]/5 transition-all">
+            <div className="w-16 h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent-ink)]/5 transition-all">
               <Upload className="w-6 h-6 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
             </div>
             <div className="text-center">

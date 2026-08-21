@@ -63,7 +63,7 @@ export function ApiRequestBuilder() {
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate cURL</button>
         {result && (
           <div className="relative">
-            <pre className="bg-gray-900 text-green-400 rounded-xl p-4 text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all max-h-48">{result}</pre>
+            <pre className="bg-gray-900 text-green-700 dark:text-green-400 rounded-xl p-4 text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all max-h-48">{result}</pre>
             <button onClick={() => { navigator.clipboard.writeText(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
               className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
@@ -234,7 +234,7 @@ export function ApiErrorDecoder() {
         {info && (
           <div className="bg-[var(--bg-surface)] rounded-xl p-4 space-y-3 border border-[var(--border-subtle)]">
             <div className="flex items-center gap-3">
-              <span className={`text-3xl font-black ${info.color === 'green' ? 'text-green-500' : info.color === 'yellow' ? 'text-yellow-500' : info.color === 'blue' ? 'text-blue-500' : 'text-red-500'}`}>{result}</span>
+              <span className={`text-3xl font-black ${info.color === 'green' ? 'text-green-500' : info.color === 'yellow' ? 'text-yellow-500' : info.color === 'blue' ? 'text-blue-700 dark:text-blue-400' : 'text-red-500'}`}>{result}</span>
               <div>
                 <p className="text-lg font-bold text-[var(--text-primary)]">{info.name}</p>
                 <span className={`inline-block px-2 py-0.5 text-[10px] font-bold rounded-full ${info.color === 'green' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : info.color === 'yellow' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' : info.color === 'blue' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>{info.category}</span>
@@ -293,13 +293,13 @@ export function ApiPayloadAnalyzer() {
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Size</p>
-              <p className="text-xl font-bold text-blue-500">{result.size < 1024 ? `${result.size} B` : `${(result.size / 1024).toFixed(2)} KB`}</p>
+              <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{result.size < 1024 ? `${result.size} B` : `${(result.size / 1024).toFixed(2)} KB`}</p>
               <div className="mt-2 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${(result.size / maxKey) * 100}%` }} /></div>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Total Keys</p>
               <p className="text-xl font-bold text-emerald-500">{result.keys}</p>
-              <div className="mt-2 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div className="h-full bg-emerald-500 rounded-full transition-all" style={{ width: `${(result.keys * 10 / maxKey) * 100}%` }} /></div>
+              <div className="mt-2 h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div className="h-full bg-emerald-700 rounded-full transition-all" style={{ width: `${(result.keys * 10 / maxKey) * 100}%` }} /></div>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-4 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Nesting Depth</p>
@@ -372,7 +372,7 @@ export function ApiMockDataGenerator() {
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
           <input type="range" min={1} max={20} value={count} onChange={e => { setCount(Number(e.target.value)); setResult(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
-        <button onClick={calc} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
+        <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {result && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{result}</pre>
@@ -507,7 +507,7 @@ export function MockApiResponseGenerator() {
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>
           <input type="range" min={1} max={50} value={count} onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
-        <button onClick={calc} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
+        <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {output && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{output}</pre>
@@ -545,7 +545,7 @@ export function ApiLatencyBudget() {
     <div className="max-w-2xl mx-auto space-y-4">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Latency Splitter</h2>
-        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-400 text-xs">
+        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-xs">
           <strong>⚠ Simplified Calculator:</strong> This tool uses a fixed 30/40/30% split (Application/Database/External APIs) for demonstration. Real latency budgets require profiling your specific architecture, considering tail latencies, retries, and queueing delays.
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -578,7 +578,7 @@ export function ApiLatencyBudget() {
             <div className="space-y-2">
               {[
                 { label: 'Application', value: result.appBudget, color: 'bg-blue-500', pct: 30 },
-                { label: 'Database', value: result.dbBudget, color: 'bg-emerald-500', pct: 40 },
+                { label: 'Database', value: result.dbBudget, color: 'bg-emerald-700', pct: 40 },
                 { label: 'External APIs', value: result.extBudget, color: 'bg-purple-500', pct: 30 },
               ].map(item => (
                 <div key={item.label} className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
@@ -644,7 +644,7 @@ export function ApiPaginationCalculator() {
             <div className="grid grid-cols-4 gap-2">
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pages</p>
-                <p className="text-xl font-bold text-blue-500">{result.totalPages}</p>
+                <p className="text-xl font-bold text-blue-700 dark:text-blue-400">{result.totalPages}</p>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Offset</p>
@@ -652,11 +652,11 @@ export function ApiPaginationCalculator() {
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Has Next</p>
-                <p className={`text-lg font-bold ${result.hasNext ? 'text-green-500' : 'text-red-400'}`}>{result.hasNext ? '✓' : '✗'}</p>
+                <p className={`text-lg font-bold ${result.hasNext ? 'text-green-500' : 'text-red-700 dark:text-red-400'}`}>{result.hasNext ? '✓' : '✗'}</p>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
                 <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Has Prev</p>
-                <p className={`text-lg font-bold ${result.hasPrev ? 'text-green-500' : 'text-red-400'}`}>{result.hasPrev ? '✓' : '✗'}</p>
+                <p className={`text-lg font-bold ${result.hasPrev ? 'text-green-500' : 'text-red-700 dark:text-red-400'}`}>{result.hasPrev ? '✓' : '✗'}</p>
               </div>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
@@ -893,7 +893,7 @@ export function ApiDiffChecker() {
             </div>}
             {result.removed.length > 0 && <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
               <p className="text-[10px] font-bold text-red-600 uppercase mb-1">Removed Endpoints</p>
-              {result.removed.map(p => <p key={p} className="text-xs font-mono text-red-400">- {p}</p>)}
+              {result.removed.map(p => <p key={p} className="text-xs font-mono text-red-700 dark:text-red-400">- {p}</p>)}
             </div>}
           </div>
         )}

@@ -79,7 +79,7 @@ export default function JsonFormatter() {
             </span>
             <button 
               onClick={clearAll}
-              className="text-xs text-red-400 hover:text-red-300 px-2 py-1 bg-red-400/10 rounded-md transition-colors"
+              className="text-xs text-red-700 dark:text-red-400 hover:text-red-300 px-2 py-1 bg-red-400/10 rounded-md transition-colors"
             >
               Clear
             </button>
@@ -109,7 +109,7 @@ export default function JsonFormatter() {
             </div>
             
             <div className="flex gap-2">
-              <button onClick={copyToClipboard} disabled={!output} className="p-1.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy">
+              <button onClick={copyToClipboard} disabled={!output} className="p-1.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
               </button>
               <button onClick={downloadJson} disabled={!output} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg disabled:opacity-50 transition-colors" title="Download JSON file" aria-label="Download">
@@ -123,14 +123,14 @@ export default function JsonFormatter() {
               value={output}
               readOnly
               placeholder="Formatted JSON will appear here..."
-              className="absolute inset-0 w-full h-full bg-transparent p-4 text-emerald-400 font-mono text-sm resize-none outline-none"
+              className="absolute inset-0 w-full h-full bg-transparent p-4 text-emerald-700 dark:text-emerald-400 font-mono text-sm resize-none outline-none"
               spellCheck={false}
             />
             
             {error && (
               <div className="absolute bottom-4 left-4 right-4 bg-red-950/90 border border-red-500/50 p-4 rounded-xl shadow-xl backdrop-blur-sm animate-in slide-in-from-bottom-2">
                 <div className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-red-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                  <svg className="w-5 h-5 text-red-700 dark:text-red-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                   <div className="font-mono text-sm text-red-200 whitespace-pre-wrap break-all">
                     {error}
                   </div>

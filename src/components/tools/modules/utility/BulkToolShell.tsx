@@ -195,14 +195,14 @@ export function BulkToolShell({
               {presets.map(p => (
                 <div key={p.id} className="flex items-center justify-between p-2 bg-[var(--bg-elevated)] rounded-[var(--radius-md)]">
                   <button onClick={() => handleLoadPreset(p.id)} className="text-sm text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">{p.name}</button>
-                  <button onClick={() => deletePreset(p.id)} className="text-xs text-red-400 hover:text-red-300">Delete</button>
+                  <button onClick={() => deletePreset(p.id)} className="text-xs text-red-700 dark:text-red-400 hover:text-red-300">Delete</button>
                 </div>
               ))}
             </div>
             <div className="flex gap-2">
               <input value={presetName} onChange={e => setPresetName(e.target.value)} placeholder="Preset name..." className="flex-1 p-2 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]" />
               {canSavePresets ? (
-                <button onClick={handleSavePreset} className="px-3 py-2 text-xs font-medium bg-[var(--accent)] text-white rounded-[var(--radius-md)] hover:bg-[var(--accent-hover)] transition-colors">Save</button>
+                <button onClick={handleSavePreset} className="px-3 py-2 text-xs font-medium bg-[var(--accent-ink)] text-white rounded-[var(--radius-md)] hover:bg-[var(--accent-hover)] transition-colors">Save</button>
               ) : (
                 <Link href="/pricing" className="px-3 py-2 text-xs font-medium bg-amber-500/10 text-amber-500 rounded-[var(--radius-md)] hover:bg-amber-500/20 transition-colors whitespace-nowrap flex items-center gap-1"><Crown className="w-3 h-3" /> Pro</Link>
               )}
@@ -248,7 +248,7 @@ export function BulkToolShell({
                 <FileText className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
                 <span className="text-sm text-[var(--text-primary)] truncate flex-1">{f.name}</span>
                 <span className="text-xs text-[var(--text-muted)] font-mono">{(f.size / 1024 / 1024).toFixed(1)}MB</span>
-                <button onClick={() => removeFile(i)} className="opacity-0 group-hover:opacity-100 w-8 h-8 bg-red-500/20 text-red-400 rounded-full flex items-center justify-center hover:bg-red-500/40 transition-all" aria-label={`Remove ${f.name}`}>
+                <button onClick={() => removeFile(i)} className="opacity-0 group-hover:opacity-100 w-8 h-8 bg-red-500/20 text-red-700 dark:text-red-400 rounded-full flex items-center justify-center hover:bg-red-500/40 transition-all" aria-label={`Remove ${f.name}`}>
                   <X className="w-3 h-3" />
                 </button>
               </div>
@@ -335,7 +335,7 @@ export function BulkToolShell({
         <button
           onClick={isProcessing ? abort : handleProcess}
           disabled={files.length === 0}
-          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
           {isProcessing

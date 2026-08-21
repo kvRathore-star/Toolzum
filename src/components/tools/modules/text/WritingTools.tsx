@@ -149,7 +149,7 @@ export default function WritingTools() {
             <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--text-muted)]">{result.chars.toLocaleString()} chars</span>
-              <button onClick={handleClear} className="text-xs text-red-500 hover:text-red-400 cursor-pointer" title="Clear">
+              <button onClick={handleClear} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 cursor-pointer" title="Clear">
                 <Eraser className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -191,7 +191,7 @@ export default function WritingTools() {
                 <span className="text-sm text-[var(--text-primary)]">{result.readingEase}</span>
               </div>
             </div>
-            <button onClick={handleCopyStats} disabled={!text} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+            <button onClick={handleCopyStats} disabled={!text} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer">
               <Copy className="w-3.5 h-3.5" /> Copy Stats
             </button>
           </div>

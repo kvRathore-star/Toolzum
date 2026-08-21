@@ -410,7 +410,7 @@ export function WorldClock() {
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-lg font-mono font-bold text-[var(--text-primary)]">{new Date(time).toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit' })}</div>
-                  <button onClick={() => remove(tz)} className="text-xs text-red-500 hover:text-red-400 font-medium">&times;</button>
+                  <button onClick={() => remove(tz)} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-medium">&times;</button>
                 </div>
               </div>
             );

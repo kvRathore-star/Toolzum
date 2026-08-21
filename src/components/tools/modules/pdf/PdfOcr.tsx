@@ -107,7 +107,7 @@ export default function PdfOcr() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Secure Local OCR:</strong> Extract text from scanned documents using WebAssembly. Processing happens entirely on your device.
         </div>
         <FileUploader 
@@ -178,7 +178,7 @@ export default function PdfOcr() {
       {extractedText && (
         <div className="space-y-4 animate-in slide-in-from-bottom-4">
           <div className="flex justify-between items-center">
-            <h4 className="text-lg font-bold text-emerald-400">Extracted Text</h4>
+            <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400">Extracted Text</h4>
             <div className="flex gap-2">
               <button 
                 onClick={copyToClipboard}

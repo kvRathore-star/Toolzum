@@ -231,7 +231,7 @@ export default function PdfAdvanced() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Advanced PDF Tools:</strong> Overlay PDFs, alternate-merge, combine pages into sheets, apply booklet layout, invert colors, or extract pages as ZIP images.
       </div>
 
@@ -317,7 +317,7 @@ export default function PdfAdvanced() {
             <h4 className="font-bold text-emerald-500">Complete</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, action === 'zip' ? `${mainFile?.name?.replace(/\.pdf$/i, '') || 'pages'}-pages.zip` : `advanced_${mainFile?.name || 'output.pdf'}`)}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             Download {action === 'zip' ? 'ZIP' : 'PDF'}
           </button>
         </div>

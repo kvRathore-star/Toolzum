@@ -80,7 +80,7 @@ export default function ImageColorizer() {
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
               <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
               <p className="text-xs text-[var(--text-muted)]">Upload standard grayscale or color image</p>
-              <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+              <label className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
                 Choose Photo
                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
               </label>
@@ -143,7 +143,7 @@ export default function ImageColorizer() {
               </div>
               <button 
                 onClick={downloadImage}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 Download Tinted Image
               </button>

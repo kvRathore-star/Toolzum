@@ -241,7 +241,7 @@ export default function IndianAddressParser() {
           <button
             key={i}
             onClick={() => handlePreset(p.address)}
-            className="px-3 py-1.5 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-amber-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all bg-[var(--bg-overlay)]/50 cursor-pointer"
+            className="px-3 py-1.5 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-amber-400 hover:text-amber-600 dark:hover:text-amber-700 dark:hover:text-amber-400 transition-all bg-[var(--bg-overlay)]/50 cursor-pointer"
           >
             {p.label}
           </button>
@@ -395,7 +395,7 @@ Maharashtra 400050`}
                         <div className="flex items-center gap-2">
                           <span className="text-sm font-bold font-mono tracking-widest text-[var(--text-primary)]">{parsed.pincode}</span>
                           {pincodeValid === true && (
-                            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">
+                            <span className="flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-700/10 px-1.5 py-0.5 rounded-full">
                               <CheckCircle2 className="w-3 h-3" /> Valid
                             </span>
                           )}

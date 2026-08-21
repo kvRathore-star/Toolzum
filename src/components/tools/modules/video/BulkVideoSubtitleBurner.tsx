@@ -173,7 +173,7 @@ export default function BulkVideoSubtitleBurner() {
         )}
 
         {isLoaded && (
-          <button onClick={handleProcess} disabled={batch.isProcessing || batch.files.length === 0 || !subtitle} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all">
+          <button onClick={handleProcess} disabled={batch.isProcessing || batch.files.length === 0 || !subtitle} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all">
             {batch.isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Subtitles className="w-4 h-4" />}
             {batch.isProcessing ? 'Burning subtitles...' : `Burn subtitles into ${batch.files.length} video(s)`}
           </button>

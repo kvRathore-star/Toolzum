@@ -60,7 +60,7 @@ export default function InvisibleTextGenerator() {
             />
             <button
               onClick={() => { const n = parseInt(customLen); if (n > 0 && n <= 10000) generateInvisible(n); else toast.error('Enter 1-10000'); }}
-              className="px-3 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg font-bold cursor-pointer"
+              className="px-3 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg font-bold cursor-pointer"
             >
               Generate
             </button>
@@ -80,7 +80,7 @@ export default function InvisibleTextGenerator() {
             </div>
           </div>
           <div className="flex gap-2">
-            <button onClick={handleCopy} className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={handleCopy} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               <Copy className="w-4 h-4" /> Copy
             </button>
             <button onClick={handleDownload} className="flex-1 bg-[var(--bg-overlay)] hover:bg-[var(--border-subtle)] text-[var(--text-primary)] font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 border border-[var(--border-subtle)] cursor-pointer">

@@ -80,7 +80,7 @@ export default function ReverseVideo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Reverse Video:</strong> Play video, audio, or both in reverse. All processing happens locally in your browser — nothing is uploaded.
         </div>
         <FileUploader
@@ -172,8 +172,8 @@ export default function ReverseVideo() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Reversed!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Reversed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `reversed_${file.name}`)}

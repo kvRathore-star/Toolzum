@@ -137,7 +137,7 @@ ${inputText}`;
         <button
           onClick={handleTranslate}
           disabled={isTranslating || !inputText.trim()}
-          className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50"
         >
           {isTranslating ? (
             <>

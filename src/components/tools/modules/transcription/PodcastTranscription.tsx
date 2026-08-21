@@ -36,7 +36,7 @@ export default function PodcastTranscription() {
       <div className="space-y-6 max-w-3xl mx-auto">
         <AiPrivacyBanner />
         <AiSettings />
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-600 dark:text-emerald-400 text-sm">
+        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-600 dark:text-emerald-400 text-sm">
           Upload a podcast episode and get a full text transcript. Audio is sent to our server for transcription with Gemini — nothing is stored.
         </div>
         <FileUploader
@@ -74,7 +74,7 @@ export default function PodcastTranscription() {
           <button
             onClick={processAudio}
             disabled={isProcessing}
-            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
             {isProcessing ? "Transcribing..." : "Transcribe Podcast"}
           </button>
@@ -89,7 +89,7 @@ export default function PodcastTranscription() {
                   const blob = new Blob([output], { type: 'text/plain' });
                   downloadOrShare(URL.createObjectURL(blob), `transcript_${file.name}.txt`);
                 }}
-                className="text-sm text-emerald-400 hover:text-emerald-300"
+                className="text-sm text-emerald-700 dark:text-emerald-400 hover:text-emerald-300"
               >
                 Download .TXT
               </button>

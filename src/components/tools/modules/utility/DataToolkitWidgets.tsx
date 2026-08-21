@@ -164,19 +164,19 @@ export function DataTypeConverter() {
   return (
     <Section title="Data Type Converter">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
       </div>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Column name" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {typePills.map(t => <button key={t} onClick={() => setType(t)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${type === t ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border-emerald-500/20'}`}>{t}</button>)}
+        {typePills.map(t => <button key={t} onClick={() => setType(t)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${type === t ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'}`}>{t}</button>)}
       </div>
-      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result — {col} as {type}</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
@@ -1052,15 +1052,15 @@ export function JsonToZod() {
   return (
     <Section title="JSON → Zod Schema">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
       </div>
       <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
-      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Zod</button>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Zod</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Zod Schema</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>

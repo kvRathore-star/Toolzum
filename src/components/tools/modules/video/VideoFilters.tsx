@@ -263,7 +263,7 @@ export default function VideoFilters() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-violet-500/10 border border-violet-500/20 p-4 rounded-xl text-violet-400 text-sm">
+        <div className="bg-violet-500/10 border border-violet-500/20 p-4 rounded-xl text-violet-700 dark:text-violet-400 text-sm">
           <strong>Video Filters:</strong> Apply visual effects like grayscale, sepia, pixelate, blur, vignette, and more. All processing happens in your browser.
         </div>
         <FileUploader
@@ -411,8 +411,8 @@ export default function VideoFilters() {
       </div>
 
       {outputUrl && (
-        <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 shadow-xl max-w-2xl mx-auto">
-          <h4 className="text-xl font-bold text-emerald-400 mb-4 text-center">Filtered Video Ready!</h4>
+        <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 shadow-xl max-w-2xl mx-auto">
+          <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4 text-center">Filtered Video Ready!</h4>
           {outputFormat === 'gif' ? (
             <img src={outputUrl} alt="Filtered GIF" className="w-full max-h-[300px] rounded-lg mb-6 object-contain" />
           ) : (

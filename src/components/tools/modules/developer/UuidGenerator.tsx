@@ -96,7 +96,7 @@ export default function UuidGenerator() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       {/* Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-400 text-sm space-y-1">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-700 dark:text-blue-400 text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           🆔 Bulk UUID Generator
         </h4>
@@ -211,7 +211,7 @@ export default function UuidGenerator() {
                 <span className="text-zinc-950 dark:text-zinc-200">{id}</span>
                 <button
                   onClick={() => copySingle(id)}
-                  className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-xs text-blue-500 hover:text-blue-400 font-semibold px-2 py-1 rounded bg-blue-500/10 transition-opacity"
+                  className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-semibold px-2 py-1 rounded bg-blue-500/10 transition-opacity"
                 >
                   Copy
                 </button>

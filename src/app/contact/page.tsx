@@ -96,7 +96,7 @@ export default function ContactPage() {
 
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6">
               <h3 className="font-semibold text-base mb-4 flex items-center gap-2">
-                <Bug className="w-4.5 h-4.5 text-red-400" /> Bug Reporting
+                <Bug className="w-4.5 h-4.5 text-red-700 dark:text-red-400" /> Bug Reporting
               </h3>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 Notice an issue executing our client-side tools? Open an issue on our GitHub repository or submit details directly to our developers.
@@ -105,7 +105,7 @@ export default function ContactPage() {
 
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6">
               <h3 className="font-semibold text-base mb-4 flex items-center gap-2">
-                <MessageSquare className="w-4.5 h-4.5 text-blue-400" /> Enterprise Devs
+                <MessageSquare className="w-4.5 h-4.5 text-blue-700 dark:text-blue-400" /> Enterprise Devs
               </h3>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 Want to host Toolzum on closed intranet networks, compile custom Docker nodes, or scale cloud relay quotas? We offer special licenses.
@@ -120,7 +120,7 @@ export default function ContactPage() {
               <div className="py-12 text-center flex flex-col items-center justify-center">
                 
                 {/* Simulated sending animation and confirmation check */}
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 animate-bounce">
+                <div className="w-16 h-16 rounded-full bg-emerald-700/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 flex items-center justify-center mb-6 animate-bounce">
                   <Check className="w-8 h-8" />
                 </div>
                 
@@ -221,7 +221,7 @@ export default function ContactPage() {
 
         {/* Suggest a Tool Section */}
         <div className="max-w-3xl mx-auto mt-20 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-ink)]/5 rounded-full blur-[80px]" />
           <Lightbulb className="w-8 h-8 text-[var(--accent)] mx-auto mb-4" />
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Suggest a tool</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">

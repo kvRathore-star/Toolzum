@@ -17,7 +17,7 @@ export const LinkCard = ({ title, slug, desc }: { title: string; slug: string; d
   <Link href={`/tools/${slug}`} className="block bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
     <div className="flex items-center gap-1">
       <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
-      <ExternalLink className="w-3 h-3 text-blue-400 shrink-0" />
+      <ExternalLink className="w-3 h-3 text-blue-700 dark:text-blue-400 shrink-0" />
     </div>
     <p className="text-[10px] text-[var(--text-secondary)] leading-relaxed">{desc}</p>
   </Link>
@@ -55,7 +55,7 @@ export function UnitConv({ title, units, defaultValue = '1' }: { title: string; 
           </select>
         </div>
       </div>
-      <button onClick={convert} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+      <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
       {results.length > 0 && (
         <div className="space-y-1.5">
           {results.map((r, i) => (
@@ -148,7 +148,7 @@ export function LargeTextViewer() {
           <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
             className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
         </div>
-        <button onClick={doSearch} className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Find</button>
+        <button onClick={doSearch} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Find</button>
       </div>
       {matches.length > 0 && <p className="text-sm text-[var(--text-muted)]">{matches.length} matches</p>}
       <div className="max-h-60 overflow-auto bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm font-mono whitespace-pre-wrap">{text || 'No file loaded'}</div>
@@ -190,7 +190,7 @@ export function AvroSchemaGenerator() {
         <textarea rows={4} value={fields} onChange={e => setFields(e.target.value)}
           className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
       </div>
-      <button onClick={generate} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+      <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
       {schema && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{schema}</pre><div className="mt-1"><CopyBtn text={schema} label="Schema" /></div></div>}
     </div>
   );
@@ -225,7 +225,7 @@ export function AvroToJsonSample() {
         <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
           className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
       </div>
-      <button onClick={generateSample} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
+      <button onClick={generateSample} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
       {sample && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{sample}</pre><div className="mt-1"><CopyBtn text={sample} label="Sample" /></div></div>}
     </div>
   );
@@ -275,7 +275,7 @@ export function IcalEventGenerator() {
         <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
       </div>
       <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Description</label><textarea rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" /></div>
-      <button onClick={generate} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate .ics</button>
+      <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate .ics</button>
       {ical && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{ical}</pre><div className="mt-1"><CopyBtn text={ical} label=".ics" /></div></div>}
     </div>
   );

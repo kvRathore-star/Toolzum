@@ -16,7 +16,7 @@ export default function ResumeBuilder() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-7xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm no-print">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm no-print">
         <strong>Client-Side Resume Builder:</strong> Fill out your details and print/save to PDF. No data is saved on our servers.
       </div>
 
@@ -38,7 +38,7 @@ export default function ResumeBuilder() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Experience</h3>
-              <button onClick={addExperience} className="text-sm text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
+              <button onClick={addExperience} className="text-sm text-blue-700 dark:text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
             </div>
             {experience.map((exp, i) => (
               <div key={i} className="space-y-2 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
@@ -55,7 +55,7 @@ export default function ResumeBuilder() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Education</h3>
-              <button onClick={addEducation} className="text-sm text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
+              <button onClick={addEducation} className="text-sm text-blue-700 dark:text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
             </div>
             {education.map((edu, i) => (
               <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">

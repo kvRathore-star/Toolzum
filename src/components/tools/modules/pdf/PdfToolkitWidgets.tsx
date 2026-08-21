@@ -57,7 +57,7 @@ export function PdfBackgroundColor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>PDF Background Color:</strong> Add a subtle color tint to all pages in your PDF.
         </div>
         <FileUploader accept="application/pdf" onFileSelect={handleFileSelect} title="Upload PDF" subtitle="Select a PDF to add background color" />
@@ -88,7 +88,7 @@ export function PdfBackgroundColor() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `bg_${file.name}`)}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
         </div>
       )}
     </div>
@@ -151,7 +151,7 @@ export function PdfAddBlankPage() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Add Blank Pages:</strong> Insert blank pages at any position in your PDF.
         </div>
         <FileUploader accept="application/pdf" onFileSelect={handleFileSelect} title="Upload PDF" subtitle="Select a PDF to add blank pages" />
@@ -203,7 +203,7 @@ export function PdfAddBlankPage() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `blank_${file.name}`)}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
         </div>
       )}
     </div>

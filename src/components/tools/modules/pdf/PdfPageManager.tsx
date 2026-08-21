@@ -168,13 +168,13 @@ export default function PdfPageManager() {
   return (
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center gap-2">
-        <FileText className="w-5 h-5 text-blue-500" />
+        <FileText className="w-5 h-5 text-blue-700 dark:text-blue-400" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">PDF Page Manager</h3>
       </div>
 
       {!file ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-blue-500/10 border-b border-blue-500/20 p-3 px-5 text-blue-500 text-xs"><strong>All-in-One PDF Page Tool:</strong> Crop, organize, extract, rotate, and delete pages.</div>
+          <div className="bg-blue-500/10 border-b border-blue-500/20 p-3 px-5 text-blue-700 dark:text-blue-400 text-xs"><strong>All-in-One PDF Page Tool:</strong> Crop, organize, extract, rotate, and delete pages.</div>
           <div className="p-5 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl m-5 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
             <input type="file" accept="application/pdf" onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" />
             <FileText className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />

@@ -242,7 +242,7 @@ export default function XmlSitemapGenerator() {
                 className={`px-6 py-3 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
                   isCrawling
                     ? 'bg-red-500 hover:bg-red-600 text-white'
-                    : 'bg-emerald-500 hover:bg-emerald-600 text-white'
+                    : 'bg-emerald-700 hover:bg-emerald-700 text-white'
                 }`}
               >
                 {isCrawling ? 'Cancel' : 'Generate Sitemap →'}
@@ -331,7 +331,7 @@ export default function XmlSitemapGenerator() {
 
             <div className="w-full h-1.5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                className="h-full bg-emerald-700 rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(100, (state.crawled / state.max) * 100)}%` }}
               />
             </div>
@@ -393,7 +393,7 @@ export default function XmlSitemapGenerator() {
                 <button onClick={handleCopy} className="flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-xl text-xs transition-colors">
                   <Copy className="w-3.5 h-3.5" /> Copy XML
                 </button>
-                <button onClick={handleDownloadXml} className="flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">
+                <button onClick={handleDownloadXml} className="flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
                   <Download className="w-3.5 h-3.5" /> Download XML
                 </button>
               </div>
@@ -455,7 +455,7 @@ export default function XmlSitemapGenerator() {
               </div>
             )}
             {state.insights.healthyPages === state.pages.length && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-lg text-xs text-emerald-700 dark:text-emerald-400">
+              <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 dark:bg-emerald-700/10 border border-emerald-200 dark:border-emerald-500/20 rounded-lg text-xs text-emerald-700 dark:text-emerald-400">
                 <CheckCircle className="w-3.5 h-3.5" />
                 All {state.pages.length} pages look healthy.
               </div>
@@ -484,7 +484,7 @@ export default function XmlSitemapGenerator() {
             </h3>
             <div className="space-y-4">
               <div className="flex gap-4">
-                <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">1</span>
+                <span className="w-7 h-7 rounded-full bg-emerald-700/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">1</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Upload to your server root</p>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5">Upload sitemap.xml to the root of your website so search engines can find it.</p>
@@ -492,7 +492,7 @@ export default function XmlSitemapGenerator() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">2</span>
+                <span className="w-7 h-7 rounded-full bg-emerald-700/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">2</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Add to robots.txt</p>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5">Tell all search engine bots where your sitemap is.</p>
@@ -500,7 +500,7 @@ export default function XmlSitemapGenerator() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">3</span>
+                <span className="w-7 h-7 rounded-full bg-emerald-700/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">3</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Submit to Google Search Console</p>
                   <a
@@ -514,7 +514,7 @@ export default function XmlSitemapGenerator() {
                 </div>
               </div>
               <div className="flex gap-4">
-                <span className="w-7 h-7 rounded-full bg-emerald-500/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">4</span>
+                <span className="w-7 h-7 rounded-full bg-emerald-700/10 text-emerald-500 text-xs font-bold flex items-center justify-center shrink-0">4</span>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Submit to Bing Webmaster Tools</p>
                   <a

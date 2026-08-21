@@ -83,7 +83,7 @@ export default function RotateImage() {
              <button onClick={() => handleRotate(90)} className="flex items-center gap-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 font-medium py-3 px-6 rounded-xl transition-all shadow-sm">
                <RotateCw className="w-5 h-5" /> Right
              </button>
-             <button onClick={download} className="flex items-center gap-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95 ml-auto sm:ml-4">
+             <button onClick={download} className="flex items-center gap-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95 ml-auto sm:ml-4">
                <Download className="w-5 h-5" /> Download
              </button>
              <button onClick={() => {setImage(null); setRotation(0);}} className="text-sm text-[var(--text-secondary)] underline ml-2">Clear</button>

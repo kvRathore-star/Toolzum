@@ -224,7 +224,7 @@ Note: Connect backend LLM for exact deduction processing.`);
             <div className="flex items-center justify-between mb-4">
               <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider">Tax Calculator</h4>
               <button onClick={() => setShowCalc(!showCalc)}
-                className="text-[10px] text-indigo-500 font-semibold hover:text-indigo-400 transition-colors">
+                className="text-[10px] text-indigo-500 font-semibold hover:text-indigo-700 dark:hover:text-indigo-400 transition-colors">
                 {showCalc ? 'Hide' : 'Show'}
               </button>
             </div>

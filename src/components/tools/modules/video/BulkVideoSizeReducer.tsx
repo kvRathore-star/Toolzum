@@ -131,7 +131,7 @@ export default function BulkVideoSizeReducer() {
           </button>
         )}
         {isLoaded && (
-          <button onClick={handleProcess} disabled={batch.isProcessing || batch.files.length === 0} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all">
+          <button onClick={handleProcess} disabled={batch.isProcessing || batch.files.length === 0} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all">
             {batch.isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Film className="w-4 h-4" />}
             {batch.isProcessing ? 'Reducing...' : `Reduce ${batch.files.length} video(s) to ~${targetSize}MB each`}
           </button>

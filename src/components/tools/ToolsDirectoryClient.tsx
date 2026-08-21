@@ -309,7 +309,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 <button onClick={() => { setProFilter('free'); setCurrentPage(1); }} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
                   <Sparkles className="w-3 h-3" /> Free
                 </button>
-                <button onClick={() => { setProFilter('pro'); setCurrentPage(1); }} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
+                <button onClick={() => { setProFilter('pro'); setCurrentPage(1); }} className={`flex items-center gap-1 px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-700 dark:text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-700 dark:hover:text-amber-400'}`}>
                   <Crown className="w-3 h-3" /> Pro
                 </button>
               </div>
@@ -386,7 +386,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                         <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
                           {tool.category}
                         </span>
-                        {tool.isPro && <span className="text-[9px] font-mono text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
+                        {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
                       </div>
                       <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                         {tool.name}
@@ -422,7 +422,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                       <div className="flex items-center gap-2 mb-0.5">
                         <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
                         <span className="text-[9px] font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-1.5 py-0.5 rounded">{tool.category}</span>
-                          {tool.isPro && <span className="text-[9px] font-mono text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
+                          {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
                       </div>
                       <p className="text-xs text-[var(--text-secondary)] truncate">{tool.description}</p>
                     </div>

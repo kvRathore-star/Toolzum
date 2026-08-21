@@ -70,7 +70,7 @@ export default function UpsideDownText() {
                 onClick={() => setMode(m.id as 'flip' | 'mirror')}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                   mode === m.id
-                    ? 'bg-[var(--accent)] text-white shadow-md'
+                    ? 'bg-[var(--accent-ink)] text-white shadow-md'
                     : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
                 }`}
               >
@@ -98,7 +98,7 @@ export default function UpsideDownText() {
             {output && (
               <button
                 onClick={handleCopy}
-                className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors"
+                className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors"
               >
                 Copy
               </button>

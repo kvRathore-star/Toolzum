@@ -273,7 +273,7 @@ export default function CitationGenerator() {
                     onClick={() => updateField('sourceType', t)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer capitalize ${
                       form.sourceType === t
-                        ? 'bg-[var(--accent)] text-white'
+                        ? 'bg-[var(--accent-ink)] text-white'
                         : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--border-subtle)]'
                     }`}
                   >
@@ -384,7 +384,7 @@ export default function CitationGenerator() {
                     onClick={() => toggleFormat(f)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                       selectedFormats.has(f)
-                        ? 'bg-[var(--accent)] text-white'
+                        ? 'bg-[var(--accent-ink)] text-white'
                         : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--border-subtle)]'
                     }`}
                   >
@@ -409,7 +409,7 @@ export default function CitationGenerator() {
             </div>
 
             <div className="flex gap-2">
-              <button onClick={handleCopyAll} disabled={citations.length === 0} className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+              <button onClick={handleCopyAll} disabled={citations.length === 0} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
                 <Copy className="w-4 h-4" /> Copy All
               </button>
               <button onClick={handleDownload} disabled={citations.length === 0} className="flex-1 bg-[var(--bg-overlay)] hover:bg-[var(--border-subtle)] disabled:opacity-50 text-[var(--text-primary)] font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 border border-[var(--border-subtle)] cursor-pointer">

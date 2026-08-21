@@ -130,7 +130,7 @@ export default function GifCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
           <strong>Reduce GIF size by up to 80%</strong> by optimizing colors and removing duplicate frames.
         </div>
         <FileUploader
@@ -194,7 +194,7 @@ export default function GifCompressor() {
                     onClick={() => setDithering(d)}
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       dithering === d
-                        ? 'bg-emerald-500 text-white shadow-lg'
+                        ? 'bg-emerald-700 text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
@@ -252,13 +252,13 @@ export default function GifCompressor() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Compressed!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Compressed!</h4>
               <img src={outputUrl} alt="Compressed GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <div className="text-sm text-[var(--text-muted)] mb-4">
                 <p>Original: <span className="text-zinc-200">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</span></p>
                 <p>Compressed: <span className="text-zinc-200">{(outputSize / 1024).toFixed(1)} KB</span></p>
-                <p className="text-emerald-400 font-medium">
+                <p className="text-emerald-700 dark:text-emerald-400 font-medium">
                   {gifInfo!.fileSize > 0 ? `-${Math.round((1 - outputSize / gifInfo!.fileSize) * 100)}%` : ''}
                 </p>
               </div>
@@ -299,16 +299,16 @@ export default function GifCompressor() {
               <p>Original: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{gifInfo ? (gifInfo.fileSize / 1024).toFixed(1) : 0} KB</span></p>
               <p>Estimated: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{(estimatedSize / 1024).toFixed(1)} KB</span></p>
               {gifInfo && gifInfo.fileSize > 0 && (
-                <p className="text-emerald-400">
+                <p className="text-emerald-700 dark:text-emerald-400">
                   ~{Math.round((1 - estimatedSize / gifInfo.fileSize) * 100)}% smaller
                 </p>
               )}
             </div>
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-400">
+          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
             <p className="font-medium text-blue-300">Optimization Tips</p>
-            <ul className="space-y-1 text-blue-400/80">
+            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
               <li>• Lower colors = smaller file, but may reduce quality</li>
               <li>• Dithering helps smooth color transitions</li>
               <li>• Removing duplicate frames reduces animation size</li>

@@ -63,7 +63,7 @@ export default function RegexTester() {
     const sortedMatches = [...matches].sort((a, b) => a.index - b.index);
     sortedMatches.forEach((m, i) => {
       if (m.index > lastIndex) elements.push(<span key={`t${i}`}>{testString.substring(lastIndex, m.index)}</span>);
-      elements.push(<span key={`m${i}`} className="bg-emerald-500/30 text-emerald-900 dark:text-emerald-100 rounded-sm font-semibold">{m.match}</span>);
+      elements.push(<span key={`m${i}`} className="bg-emerald-700/30 text-emerald-900 dark:text-emerald-100 rounded-sm font-semibold">{m.match}</span>);
       lastIndex = m.index + m.match.length;
     });
     if (lastIndex < testString.length) elements.push(<span key="end">{testString.substring(lastIndex)}</span>);

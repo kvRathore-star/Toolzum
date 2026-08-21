@@ -283,7 +283,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
       </div>
 
       {description && (
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
@@ -307,7 +307,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
 
             {(!isLoaded || isLoading) && (
               <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
-                <svg className="w-5 h-5 animate-spin text-blue-500" fill="none" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 animate-spin text-blue-700 dark:text-blue-400" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                 </svg>
@@ -339,7 +339,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
               <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <audio controls className="w-full" src={outputUrl}></audio>
                 <button onClick={downloadOutput}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-sm transition-all active:scale-[0.98]">
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-sm transition-all active:scale-[0.98]">
                   Download {outputFmt.label}
                 </button>
               </div>

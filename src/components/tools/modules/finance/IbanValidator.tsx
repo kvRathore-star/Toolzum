@@ -40,7 +40,7 @@ export default function IbanValidator() {
 
           <button 
             onClick={validate}
-            className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-colors"
+            className="w-full py-4 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-colors"
           >
             Validate IBAN
           </button>
@@ -50,7 +50,7 @@ export default function IbanValidator() {
           {checked ? (
             valid ? (
               <div className="text-center space-y-2 animate-in zoom-in-95">
-                <div className="p-3 bg-emerald-500 text-white rounded-full inline-block">
+                <div className="p-3 bg-emerald-700 text-white rounded-full inline-block">
                   <Check className="w-8 h-8" />
                 </div>
                 <h4 className="text-lg font-bold text-emerald-500">Valid IBAN</h4>

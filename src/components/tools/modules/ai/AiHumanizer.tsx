@@ -352,7 +352,7 @@ export default function AiHumanizer() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button onClick={handleHumanize} disabled={isLoading || !input.trim()}
-              className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
+              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
               {isLoading ? (
                 <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Humanizing...</>
               ) : (

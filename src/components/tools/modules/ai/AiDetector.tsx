@@ -88,7 +88,7 @@ function getScoreColor(score: number): string {
 }
 
 function getScoreBg(score: number): string {
-  if (score < 35) return 'bg-emerald-500/10 border-emerald-500/20';
+  if (score < 35) return 'bg-emerald-700/10 border-emerald-500/20';
   if (score < 65) return 'bg-amber-500/10 border-amber-500/20';
   return 'bg-red-500/10 border-red-500/20';
 }
@@ -136,7 +136,7 @@ function analyzeParagraphs(text: string): ParagraphScore[] {
 }
 
 function getBarColor(score: number): string {
-  if (score < 35) return 'bg-emerald-500';
+  if (score < 35) return 'bg-emerald-700';
   if (score < 65) return 'bg-amber-500';
   return 'bg-red-500';
 }
@@ -326,7 +326,7 @@ export default function AiDetector() {
             </div>
 
             <div className="flex justify-center gap-4 text-xs">
-              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-500" /> Human (0-34%)</span>
+              <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-700" /> Human (0-34%)</span>
               <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-amber-500" /> Uncertain (35-64%)</span>
               <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-500" /> AI (65-100%)</span>
             </div>

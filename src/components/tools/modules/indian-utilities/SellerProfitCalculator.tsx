@@ -186,7 +186,7 @@ export default function SellerProfitCalculator() {
           )}
 
           <div className="flex gap-2">
-            <button onClick={handleExport} className="flex-1 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-1.5 transition-colors">
+            <button onClick={handleExport} className="flex-1 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-1.5 transition-colors">
               <Download className="w-4 h-4" /> Export Report
             </button>
           </div>

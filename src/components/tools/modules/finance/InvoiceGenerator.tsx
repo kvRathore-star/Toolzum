@@ -68,7 +68,7 @@ export default function InvoiceGenerator() {
         
         <button
           onClick={handlePrint}
-          className="px-6 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+          className="px-6 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors flex items-center gap-2"
         >
           <Printer className="w-4 h-4" />
           Print / PDF

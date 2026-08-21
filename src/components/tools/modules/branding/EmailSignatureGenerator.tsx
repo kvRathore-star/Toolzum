@@ -211,7 +211,7 @@ export default function EmailSignatureGenerator() {
             
             <button 
               onClick={copyHtmlCode}
-              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
             >
               <Copy className="w-4 h-4" />
               Copy HTML Code

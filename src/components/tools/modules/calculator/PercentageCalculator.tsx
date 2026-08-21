@@ -30,7 +30,7 @@ export default function PercentageCalculator() {
            </div>
            <button
               onClick={() => setResult1((Number(val1) / 100) * Number(val2))}
-              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl transition-all active:scale-95"
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl transition-all active:scale-95"
             >
               Calculate
             </button>
@@ -55,7 +55,7 @@ export default function PercentageCalculator() {
            </div>
            <button
               onClick={() => setResult2((Number(val3) / Number(val4)) * 100)}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
+              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
             >
               Calculate
             </button>

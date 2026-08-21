@@ -142,7 +142,7 @@ export default function PdfInfo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>PDF Info & Analysis:</strong> View document metadata, page dimensions, extract text content, and export structured data as JSON. All processing stays on your device.
         </div>
         <FileUploader

@@ -51,7 +51,7 @@ export function WordCounter() {
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-between min-h-[300px]">
           {text ? (<div className="space-y-4"><div className="grid grid-cols-2 gap-3">
             <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-emerald-500">{words}</p><p className="text-xs text-[var(--text-muted)]">Words</p></div>
-            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-500">{chars}</p><p className="text-xs text-[var(--text-muted)]">Characters</p></div>
+            <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-700 dark:text-blue-400">{chars}</p><p className="text-xs text-[var(--text-muted)]">Characters</p></div>
             <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-violet-500">{charsNoSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
             <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{sentences}</p><p className="text-xs text-[var(--text-muted)]">Sentences</p></div>
             <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-rose-500">{paragraphs}</p><p className="text-xs text-[var(--text-muted)]">Paragraphs</p></div>
@@ -84,7 +84,7 @@ export function CharacterCounter() {
             <div className="grid grid-cols-2 gap-3">
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-zinc-800 dark:text-white">{total}</p><p className="text-xs text-[var(--text-muted)]">Total</p></div>
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-emerald-500">{noSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-500">{letters}</p><p className="text-xs text-[var(--text-muted)]">Letters</p></div>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-700 dark:text-blue-400">{letters}</p><p className="text-xs text-[var(--text-muted)]">Letters</p></div>
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{digits}</p><p className="text-xs text-[var(--text-muted)]">Digits</p></div>
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-cyan-500">{spaces}</p><p className="text-xs text-[var(--text-muted)]">Spaces</p></div>
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-rose-500">{punctuation}</p><p className="text-xs text-[var(--text-muted)]">Punctuation</p></div>
@@ -115,10 +115,10 @@ export function WordFrequencyCounter() {
         <div className="space-y-4">
           <Input label="Text" value={text} onChange={setText} rows={8} />
           <Input label="Show Top" type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v))} />
-          <button onClick={analyze} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
+          <button onClick={analyze} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[300px]">
-          {frequencies.length > 0 ? (<div className="space-y-1.5 max-h-[350px] overflow-y-auto">{frequencies.map((f, i) => (<div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span><span className="flex-1">{f.word}</span><div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-500 h-full rounded-full" /></div><span className="w-16 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and analyze</p>)}
+          {frequencies.length > 0 ? (<div className="space-y-1.5 max-h-[350px] overflow-y-auto">{frequencies.map((f, i) => (<div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span><span className="flex-1">{f.word}</span><div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" /></div><span className="w-16 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and analyze</p>)}
         </div>
       </div>
     </Section>
@@ -284,7 +284,7 @@ export function SeoSlugGenerator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <Input label="Text" value={text} onChange={setText} />
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Slug</button>
+          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Slug</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">{slug ? (<div className="text-center"><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p><button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate a URL-friendly slug</p>)}</div>
       </div>
@@ -322,7 +322,7 @@ export function TextReplacer() {
         <div className="space-y-4">
           <Input label="Text" value={text} onChange={setText} rows={6} />
           <div className="grid grid-cols-2 gap-3"><Input label="Find" value={find} onChange={setFind} /><Input label="Replace With" value={replace} onChange={setReplace} /></div>
-          <button onClick={replaceAll} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Replace All</button>
+          <button onClick={replaceAll} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Replace All</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Find and replace text</p>)}</div>
       </div>
@@ -385,7 +385,7 @@ export function TextDiffChecker() {
     <Section title="Text Diff Checker">
       <div className="grid grid-cols-1 gap-6">
         <div className="grid grid-cols-2 gap-4"><Input label="Original Text" value={text1} onChange={setText1} rows={6} /><Input label="New Text" value={text2} onChange={setText2} rows={6} /></div>
-        <button onClick={compare} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors self-start">Compare</button>
+        <button onClick={compare} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors self-start">Compare</button>
         {diff && (<div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4"><div className="flex items-center gap-3 mb-3 text-xs"><span className="text-emerald-500 font-bold">+{added} added</span><span className="text-red-500 font-bold">-{removed} removed</span></div><div className="font-mono text-xs max-h-[300px] overflow-y-auto space-y-0.5">{diff.lines.map((l, i) => (<div key={i} className={`p-1 rounded ${l.type === 'same' ? '' : l.type === 'added' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300'}`}><span className="mr-2 font-bold">{l.type === 'added' ? '+' : l.type === 'removed' ? '-' : ' '}</span>{l.text || ' '}</div>))}</div></div>)}
       </div>
     </Section>
@@ -403,7 +403,7 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <Input label={isTextToHtml ? 'Plain Text' : 'HTML'} value={input} onChange={setInput} rows={8} />
-          <div className="flex flex-wrap gap-2"><button onClick={convert} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button><button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button></div>
+          <div className="flex flex-wrap gap-2"><button onClick={convert} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button><button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button></div>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter content to convert</p>)}</div>
       </div>
@@ -446,7 +446,7 @@ export function DuplicateWordRemover() {
     <Section title="Duplicate Word Remover">
       <p className="text-sm text-[var(--text-secondary)]">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label={`Text (${inWords} words)`} value={text} onChange={setText} rows={6} /><button onClick={remove} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicate Words</button></div>
+        <div className="space-y-4"><Input label={`Text (${inWords} words)`} value={text} onChange={setText} rows={6} /><button onClick={remove} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicate Words</button></div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste text to remove duplicate words</p>)}</div>
       </div>
     </Section>
@@ -493,7 +493,7 @@ export function TrailingSpaceRemover() {
   return (
     <Section title="Trailing Space Remover">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={trim} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Trim Trailing Spaces</button></div>
+        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={trim} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Trim Trailing Spaces</button></div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">Trimmed {trimmed} line{trimmed !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Remove trailing whitespace</p>)}</div>
       </div>
     </Section>
@@ -542,7 +542,7 @@ export function UtmBuilder() {
           <Input label="Base URL" type="url" value={baseUrl} onChange={setBaseUrl} />
           <div className="grid grid-cols-2 gap-3"><Input label="Source" value={source} onChange={setSource} /><Input label="Medium" value={medium} onChange={setMedium} /><Input label="Campaign" value={campaign} onChange={setCampaign} /><Input label="Term (opt)" value={term} onChange={setTerm} /></div>
           <Input label="Content (opt)" value={content} onChange={setContent} />
-          <button onClick={build} className="px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Build UTM URL</button>
+          <button onClick={build} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Build UTM URL</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><input readOnly value={result} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields to build a UTM-tagged URL</p>)}</div>
       </div>

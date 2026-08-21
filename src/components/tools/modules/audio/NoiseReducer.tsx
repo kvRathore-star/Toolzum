@@ -291,7 +291,7 @@ export default function NoiseReducer() {
                   </div>
                   <div className="space-y-1.5">
                     <p className="text-[10px] font-semibold text-emerald-500 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
+                      <span className="w-2 h-2 rounded-full bg-emerald-700 inline-block" />
                       Processed
                     </p>
                     <audio controls className="w-full" src={outputUrl} />

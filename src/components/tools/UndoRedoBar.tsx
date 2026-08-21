@@ -38,7 +38,7 @@ export function UndoRedoBar({ canUndo, canRedo, onUndo, onRedo, onReset, label }
       {onReset && (
         <button
           onClick={onReset}
-          className="flex items-center gap-1 px-2 py-1.5 text-[11px] font-medium rounded-md transition-all text-[var(--text-muted)] hover:text-red-400 enabled:hover:bg-[var(--bg-elevated)]"
+          className="flex items-center gap-1 px-2 py-1.5 text-[11px] font-medium rounded-md transition-all text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 enabled:hover:bg-[var(--bg-elevated)]"
           title="Reset"
         >
           <RotateCcw className="w-3.5 h-3.5" />

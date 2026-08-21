@@ -101,7 +101,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </button>
             <button
               onClick={this.handleCopyError}
-              className="px-3 py-2.5 text-xs text-red-500 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors"
+              className="px-3 py-2.5 text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-colors"
               title="Copy error details"
             >
               Copy Error

@@ -225,8 +225,8 @@ export default function ObjectRemover() {
   if (!imageSrc) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-400 shrink-0" />
+        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
           <span><strong>100% Client-Side Inpaint:</strong> Draw red highlight strokes over unwanted objects to erase them using surrounding textures.</span>
         </div>
         <FileUploader
@@ -290,7 +290,7 @@ export default function ObjectRemover() {
             <button
               onClick={handleInpaint}
               disabled={isProcessing}
-              className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-xs"
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-xs"
             >
               {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Eraser className="w-4 h-4" />}
               Erase Highlighted Object
@@ -315,7 +315,7 @@ export default function ObjectRemover() {
             {processedUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 Download Restructured Image
               </button>

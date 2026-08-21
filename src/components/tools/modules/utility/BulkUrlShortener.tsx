@@ -109,7 +109,7 @@ export default function BulkUrlShortener() {
           />
           <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
             <span>{urls.length} URL{urls.length !== 1 ? 's' : ''} detected</span>
-            {results.length > 0 && <button onClick={clearAll} className="text-red-400 hover:underline">Clear</button>}
+            {results.length > 0 && <button onClick={clearAll} className="text-red-700 dark:text-red-400 hover:underline">Clear</button>}
           </div>
         </div>
 
@@ -118,7 +118,7 @@ export default function BulkUrlShortener() {
           <button
             onClick={isProcessing ? abort : shortenAll}
             disabled={urls.length === 0}
-            className="flex items-center gap-2 px-6 py-2.5 bg-[var(--accent)] text-white font-medium rounded-xl hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all"
+            className="flex items-center gap-2 px-6 py-2.5 bg-[var(--accent-ink)] text-white font-medium rounded-xl hover:bg-[var(--accent-hover)] disabled:opacity-50 transition-all"
           >
             {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <LinkIcon className="w-4 h-4" />}
             {isProcessing ? `Shortening ${progress.done}/${progress.total}...` : `Shorten All (${urls.length})`}

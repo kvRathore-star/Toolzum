@@ -227,7 +227,7 @@ export default function QrCodeReader() {
               <span>({(file.size / 1024).toFixed(1)} KB)</span>
               {imageDimensions.width > 0 && <span className="text-[var(--text-muted)]">| {imageDimensions.width}x{imageDimensions.height}px</span>}
             </div>
-            <button onClick={handleReset} className="text-xs text-red-400 hover:text-red-300 font-bold">Clear</button>
+            <button onClick={handleReset} className="text-xs text-red-700 dark:text-red-400 hover:text-red-300 font-bold">Clear</button>
           </div>
         )}
 
@@ -247,7 +247,7 @@ export default function QrCodeReader() {
               <p className="text-sm font-medium text-red-600 dark:text-red-400">Detection Failed</p>
               <p className="text-xs text-red-500/80 mt-1">{error}</p>
             </div>
-            <button onClick={handleReset} className="text-xs text-red-500 hover:text-red-400 underline shrink-0">Try Another</button>
+            <button onClick={handleReset} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 underline shrink-0">Try Another</button>
           </div>
         )}
 
@@ -288,7 +288,7 @@ export default function QrCodeReader() {
               </div>
             ))}
             <div className="flex gap-3">
-              <button onClick={handleCopyAll} className="flex-1 px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-bold rounded-xl transition-colors">Copy All</button>
+              <button onClick={handleCopyAll} className="flex-1 px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-bold rounded-xl transition-colors">Copy All</button>
               <button onClick={handleDownloadResult} className="flex-1 px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] text-sm font-bold rounded-xl transition-colors">Download</button>
             </div>
           </div>

@@ -205,7 +205,7 @@ export default function SpeechToText() {
             <div className="text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-medium">
               {transcript}
               {interimTranscript && (
-                <span className="text-blue-500 italic bg-blue-500/10 px-1 rounded animate-pulse">
+                <span className="text-blue-700 dark:text-blue-400 italic bg-blue-500/10 px-1 rounded animate-pulse">
                   {transcript ? ' ' : ''}{interimTranscript}
                 </span>
               )}

@@ -110,7 +110,7 @@ export default function VideoStabilizer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm">
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
           <strong>vidstab:</strong> Reduces camera shake in videos using ffmpeg's vidstab
           deshake filter. Available in Regular (two-pass) and Quick (single-pass) modes.
           Processing happens entirely in your browser — no uploads.
@@ -294,8 +294,8 @@ export default function VideoStabilizer() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Video Stabilized!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Video Stabilized!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `stabilized_${file.name}`)}

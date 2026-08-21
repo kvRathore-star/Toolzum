@@ -200,7 +200,7 @@ export default function SecurityPage() {
           </p>
           <a
             href="mailto:security@toolzum.com"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] transition-all text-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--accent-hover)] transition-all text-sm"
           >
             <Download className="w-4 h-4" /> Request Security Package
           </a>

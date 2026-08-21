@@ -57,7 +57,7 @@ export default function HtmlToImage() {
              <textarea 
                value={htmlContent}
                onChange={(e) => setHtmlContent(e.target.value)}
-               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-400 rounded-xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                placeholder="Enter HTML here..."
              />
              <div className="flex gap-4">
@@ -66,7 +66,7 @@ export default function HtmlToImage() {
                  <option value="jpeg">JPEG</option>
                  <option value="svg">SVG</option>
                </select>
-               <button onClick={convert} className="flex-[2] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-lg shadow transition-all active:scale-95">
+               <button onClick={convert} className="flex-[2] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-lg shadow transition-all active:scale-95">
                  Render & Download
                </button>
              </div>

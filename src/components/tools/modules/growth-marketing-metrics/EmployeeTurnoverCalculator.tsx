@@ -33,7 +33,7 @@ export default function EmployeeTurnoverCalculator() {
 
   // Turnover rate health indicator
   let statusText = "Healthy";
-  let statusColor = "text-emerald-500 bg-emerald-500/10 border-emerald-500/20";
+  let statusColor = "text-emerald-500 bg-emerald-700/10 border-emerald-500/20";
   let statusIcon = <CheckCircle className="w-5 h-5 text-emerald-500" />;
   let recommendation = "Your turnover rate is below the national average (~15%). Focus on continuous feedback loops, professional development, and maintaining your excellent work environment.";
 
@@ -177,7 +177,7 @@ export default function EmployeeTurnoverCalculator() {
             {/* Estimated Total Loss */}
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-md flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold text-rose-400 uppercase tracking-wider">Financial Loss</span>
+                <span className="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider">Financial Loss</span>
                 <h4 className="text-2xl font-black text-[var(--accent)] mt-1">
                   ${Math.round(totalReplacementCost).toLocaleString()}
                 </h4>

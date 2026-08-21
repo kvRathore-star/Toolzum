@@ -124,7 +124,7 @@ export default function GrayscalePdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Grayscale Conversion:</strong> Convert your color PDF to grayscale for professional printing or to reduce file size. Note: this process rasterizes the PDF pages.
         </div>
         <FileUploader
@@ -161,7 +161,7 @@ export default function GrayscalePdf() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Output DPI</label>
-              <span className="text-xs font-bold text-blue-500">{dpi} DPI</span>
+              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{dpi} DPI</span>
             </div>
             <div className="grid grid-cols-4 gap-2">
               {[72, 150, 200, 300].map((val) => (
@@ -178,14 +178,14 @@ export default function GrayscalePdf() {
             <p className="text-xs text-[var(--text-secondary)]">Higher DPI = better quality but larger file size.</p>
           </div>
 
-          <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-xs">
+          <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-xs">
             <strong>Note:</strong> Grayscale conversion rasterizes each page (text becomes image). The output may be larger than the original for text-heavy documents.
           </div>
 
           <button
             onClick={convertToGrayscale}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -205,14 +205,14 @@ export default function GrayscalePdf() {
                   <h4 className="font-bold text-emerald-500">Conversion Complete</h4>
                </div>
 
-               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                   <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                   <p className="font-bold text-center">grayscale_{file.name}</p>
                </div>
 
                <button
                   onClick={() => downloadOrShare(outputUrl, `grayscale_${file.name}`)}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download Grayscale PDF

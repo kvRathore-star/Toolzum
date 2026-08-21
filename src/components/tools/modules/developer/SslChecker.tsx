@@ -199,7 +199,7 @@ export default function SslChecker() {
 
   const statusColor = (s: string) => {
     switch (s) {
-      case 'valid': return 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20';
+      case 'valid': return 'text-emerald-500 bg-emerald-700/10 border-emerald-500/20';
       case 'expiring': return 'text-amber-500 bg-amber-500/10 border-amber-500/20';
       case 'expired': return 'text-red-500 bg-red-500/10 border-red-500/20';
       default: return 'text-[var(--text-secondary)] bg-[var(--bg-overlay)]0/10 border-zinc-500/20';
@@ -208,7 +208,7 @@ export default function SslChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-sky-500/10 border border-sky-500/20 p-4 rounded-2xl text-sky-400 text-sm space-y-1">
+      <div className="bg-sky-500/10 border border-sky-500/20 p-4 rounded-2xl text-sky-700 dark:text-sky-400 text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)]">SSL Certificate Checker</h4>
         <p className="text-zinc-600 dark:text-[var(--text-muted)]">Check SSL certificate details for any domain. Uses public certificate transparency APIs.</p>
       </div>
@@ -225,7 +225,7 @@ export default function SslChecker() {
         {error && (
           <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl p-4">
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-            <button onClick={handleRetry} className="mt-2 text-xs text-red-500 hover:text-red-400 underline">Retry</button>
+            <button onClick={handleRetry} className="mt-2 text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 underline">Retry</button>
           </div>
         )}
 

@@ -146,7 +146,7 @@ export default function GstinLookup() {
                   maxLength={15}
                   className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase outline-none focus:ring-2 focus:ring-emerald-500/30" />
                 <button onClick={handleLookup} disabled={loading || !gstin || isFreeLimitReached}
-                  className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
+                  className="px-6 py-3 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
                   {loading ? 'Searching...' : <><Search className="w-4 h-4" /> Verify</>}
                 </button>
               </div>
@@ -194,7 +194,7 @@ export default function GstinLookup() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-[var(--text-secondary)]">{bulkData.length} GSTINs loaded</span>
-                    <button onClick={handleBulkLookup} className="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors">
+                    <button onClick={handleBulkLookup} className="px-4 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
                       Verify All
                     </button>
                   </div>

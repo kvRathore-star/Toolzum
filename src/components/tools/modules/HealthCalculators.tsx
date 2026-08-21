@@ -52,7 +52,7 @@ export function BmiCalculatorForKids() {
           <div className="mt-6 grid grid-cols-2 gap-4">
             <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">BMI</div>
-              <div className="text-2xl font-bold text-cyan-400">{result}</div>
+              <div className="text-2xl font-bold text-cyan-700 dark:text-cyan-400">{result}</div>
             </div>
             <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Category</div>
@@ -125,7 +125,7 @@ export function BodyFatPercentageCalculator() {
           <div className="mt-6 grid grid-cols-2 gap-4">
             <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Body Fat</div>
-              <div className="text-2xl font-bold text-rose-400">{result}%</div>
+              <div className="text-2xl font-bold text-rose-700 dark:text-rose-400">{result}%</div>
             </div>
             <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Category</div>
@@ -180,10 +180,10 @@ export function BodySurfaceAreaCalculator() {
           <div className="mt-6 grid gap-3">
             {result.map((r, i) => {
               const styles = [
-                { bg: 'bg-emerald-500/10 border border-emerald-500/20', text: 'text-emerald-400' },
-                { bg: 'bg-blue-500/10 border border-blue-500/20', text: 'text-blue-400' },
-                { bg: 'bg-violet-500/10 border border-violet-500/20', text: 'text-violet-400' },
-                { bg: 'bg-amber-500/10 border border-amber-500/20', text: 'text-amber-400' },
+                { bg: 'bg-emerald-700/10 border border-emerald-500/20', text: 'text-emerald-700 dark:text-emerald-400' },
+                { bg: 'bg-blue-500/10 border border-blue-500/20', text: 'text-blue-700 dark:text-blue-400' },
+                { bg: 'bg-violet-500/10 border border-violet-500/20', text: 'text-violet-700 dark:text-violet-400' },
+                { bg: 'bg-amber-500/10 border border-amber-500/20', text: 'text-amber-700 dark:text-amber-400' },
               ];
               const s = styles[i] || styles[0];
               return (
@@ -193,9 +193,9 @@ export function BodySurfaceAreaCalculator() {
                 </div>
               );
             })}
-            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+            <div className="bg-emerald-700/10 border border-emerald-500/20 rounded-xl p-4 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Average of all formulas</div>
-              <div className="text-2xl font-bold text-emerald-400">{(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²</div>
+              <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-400">{(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²</div>
             </div>
           </div>
         )}

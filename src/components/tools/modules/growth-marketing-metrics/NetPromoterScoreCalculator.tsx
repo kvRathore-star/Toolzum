@@ -71,11 +71,11 @@ export default function NetPromoterScoreCalculator() {
           {total > 0 && (
             <div className="space-y-2 mt-4">
               <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
-                <span className="w-4 h-2.5 rounded bg-emerald-500" />
+                <span className="w-4 h-2.5 rounded bg-emerald-700" />
                 <span>Promoters {promoterPct.toFixed(0)}%</span>
               </div>
               <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex">
-                <div style={{ width: `${promoterPct}%` }} className="bg-emerald-500 h-full transition-all duration-300" />
+                <div style={{ width: `${promoterPct}%` }} className="bg-emerald-700 h-full transition-all duration-300" />
                 <div style={{ width: `${passivePct}%` }} className="bg-zinc-400 h-full transition-all duration-300" />
                 <div style={{ width: `${detractorPct}%` }} className="bg-red-500 h-full transition-all duration-300" />
               </div>
@@ -109,9 +109,9 @@ export default function NetPromoterScoreCalculator() {
               </div>
             </div>
             <div className="flex gap-1">
-              <button onClick={() => { clipboardWrite(nps.toFixed(1)); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Copy NPS" aria-label="Copy NPS"><Copy size={14} /></button>
-              <button onClick={handleDownload} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Download CSV" aria-label="Download CSV"><Download size={14} /></button>
-              <button onClick={addToHistory} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Save to history" aria-label="Save to history"><History size={14} /></button>
+              <button onClick={() => { clipboardWrite(nps.toFixed(1)); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Copy NPS" aria-label="Copy NPS"><Copy size={14} /></button>
+              <button onClick={handleDownload} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Download CSV" aria-label="Download CSV"><Download size={14} /></button>
+              <button onClick={addToHistory} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Save to history" aria-label="Save to history"><History size={14} /></button>
             </div>
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">

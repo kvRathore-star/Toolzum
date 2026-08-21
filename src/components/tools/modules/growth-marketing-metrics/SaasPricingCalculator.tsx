@@ -31,7 +31,7 @@ export default function SaasPricingCalculator() {
   let healthColor = "text-[var(--accent)] bg-rose-500/10 border-rose-500/20";
   if (ltvToCac >= 5) {
     healthText = "Excellent (Highly Scalable)";
-    healthColor = "text-emerald-500 bg-emerald-500/10 border-emerald-500/20";
+    healthColor = "text-emerald-500 bg-emerald-700/10 border-emerald-500/20";
   } else if (ltvToCac >= 3) {
     healthText = "Good (Standard SaaS Target)";
     healthColor = "text-[var(--accent)] bg-indigo-500/10 border-indigo-500/20";
@@ -281,7 +281,7 @@ export default function SaasPricingCalculator() {
                     <tr key={proj.month} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-zinc-800/20">
                       <td className="py-2.5 font-semibold text-[var(--text-primary)]">Month {proj.month}</td>
                       <td className="py-2.5 font-bold text-[var(--text-primary)]">{proj.endCust.toLocaleString()}</td>
-                      <td className="py-2.5 text-rose-400">-{proj.churned}</td>
+                      <td className="py-2.5 text-rose-700 dark:text-rose-400">-{proj.churned}</td>
                       <td className="py-2.5 font-semibold text-zinc-900 dark:text-zinc-200">${Math.round(proj.mrr).toLocaleString()}</td>
                       <td className="py-2.5 text-[var(--text-muted)]">${Math.round(proj.arr).toLocaleString()}</td>
                       <td className="py-2.5 font-bold text-emerald-500 text-right">${Math.round(proj.grossProfit).toLocaleString()}</td>

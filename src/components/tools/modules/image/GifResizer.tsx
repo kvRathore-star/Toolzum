@@ -142,7 +142,7 @@ export default function GifResizer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
           <strong>Resize animated GIFs</strong> while preserving animation and quality.
         </div>
         <FileUploader
@@ -195,7 +195,7 @@ export default function GifResizer() {
                     onClick={() => handleWidthChange(p)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       width === p
-                        ? 'bg-emerald-500 text-white'
+                        ? 'bg-emerald-700 text-white'
                         : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
@@ -238,7 +238,7 @@ export default function GifResizer() {
                     onClick={() => setInterpolation(m)}
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       interpolation === m
-                        ? 'bg-emerald-500 text-white shadow-lg'
+                        ? 'bg-emerald-700 text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
@@ -266,8 +266,8 @@ export default function GifResizer() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Resized!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Resized!</h4>
               <img src={outputUrl} alt="Resized GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}-resized.gif`)}
@@ -308,9 +308,9 @@ export default function GifResizer() {
             </div>
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-400">
+          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
             <p className="font-medium text-blue-300">About Resizing</p>
-            <ul className="space-y-1 text-blue-400/80">
+            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
               <li>• Lanczos offers the best quality for most GIFs</li>
               <li>• Bilinear is faster but softer</li>
               <li>• Nearest neighbor preserves pixel art sharpness</li>

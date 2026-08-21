@@ -93,7 +93,7 @@ export default function VideoTrimmer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Lossless Trimming:</strong> Cut video clips natively in your browser using WASM. No video data is uploaded.
         </div>
         <FileUploader 
@@ -138,7 +138,7 @@ export default function VideoTrimmer() {
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Start Time</label>
-                  <span className="font-mono text-sm text-blue-500">{fmtTime(startTime)}</span>
+                  <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(startTime)}</span>
                 </div>
                 <input 
                   type="range" 
@@ -158,7 +158,7 @@ export default function VideoTrimmer() {
               <div>
                 <div className="flex justify-between mb-2">
                   <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">End Time</label>
-                  <span className="font-mono text-sm text-blue-500">{fmtTime(endTime)}</span>
+                  <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(endTime)}</span>
                 </div>
                 <input 
                   type="range" 
@@ -200,8 +200,8 @@ export default function VideoTrimmer() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-4">Video Trimmed!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Video Trimmed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button 
                 onClick={() => downloadOrShare(outputUrl, `trimmed_${file.name}`)}

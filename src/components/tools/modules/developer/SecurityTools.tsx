@@ -39,7 +39,7 @@ function Output({ value, label }: { value: string; label?: string }) {
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
         <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
-        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
   );
@@ -52,7 +52,7 @@ export function PasswordEntropyCalculator() {
   const [result, setResult] = useState<{ bits: number; strength: string; score: number } | null>(null);
   const presetPasswords = ['Password123!', 'CorrectHorseBatteryStaple', 'p@ssw0rd', 'Tr0ub4dor&3', 'MyS3cur3P@ss!2024'];
   const strengthColors: Record<string, string> = {
-    'Very Weak': 'bg-red-500', 'Weak': 'bg-orange-500', 'Reasonable': 'bg-yellow-500', 'Strong': 'bg-green-500', 'Very Strong': 'bg-emerald-500'
+    'Very Weak': 'bg-red-500', 'Weak': 'bg-orange-500', 'Reasonable': 'bg-yellow-500', 'Strong': 'bg-green-500', 'Very Strong': 'bg-emerald-700'
   };
   const calc = (pwd?: string) => {
     const p = pwd ?? password;
@@ -303,14 +303,14 @@ export function HashVerifier() {
   return (
     <Section title="Hash Verifier">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {textPresets.map(t => <button key={t} onClick={() => verify(t)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{t}</button>)}
+        {textPresets.map(t => <button key={t} onClick={() => verify(t)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{t}</button>)}
       </div>
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {algoPills.map(a => <button key={a} onClick={() => setAlgo(a)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border-emerald-500/20'}`}>{a}</button>)}
+        {algoPills.map(a => <button key={a} onClick={() => setAlgo(a)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'}`}>{a}</button>)}
       </div>
       <Input label="Original text" value={text} onChange={v => { setText(v); setMatch(null); }} placeholder="Enter text..." />
       <Input label="Hash to verify against" value={hash} onChange={v => { setHash(v); setMatch(null); }} placeholder="Enter hash..." />
-      <button onClick={() => verify()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Verify</button>
+      <button onClick={() => verify()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Verify</button>
       {match !== null && (
         <div className="mt-4 space-y-3">
           <div className={`p-4 rounded-xl text-sm font-medium ${match ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}`}>
@@ -1089,15 +1089,15 @@ export function EnvFileGenerator() {
   return (
     <Section title=".env File Template Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {envPresets.map(p => <button key={p.label} onClick={() => gen(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+        {envPresets.map(p => <button key={p.label} onClick={() => gen(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
       </div>
       <Input label="VAR_NAME=Description (one per line)" rows={6} value={descriptions} onChange={v => { setDescriptions(v); setOutput(''); }} />
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
+      <button onClick={() => gen()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">.env Template</span>
-            <button onClick={copy} className="px-2.5 py-1 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <button onClick={copy} className="px-2.5 py-1 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
           <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg">{output}</pre>
           <p className="text-xs text-zinc-500 mt-2">{output.split('\n').filter(l => l.startsWith('#')).length} variables documented</p>
@@ -1651,14 +1651,14 @@ X-XSS-Protection: 0`,
   return (
     <Section title="Security Header Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {contextPresets.map(p => <button key={p.label} onClick={() => gen(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${context === p.v ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border-emerald-500/20'}`}>{p.label}</button>)}
+        {contextPresets.map(p => <button key={p.label} onClick={() => gen(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${context === p.v ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'}`}>{p.label}</button>)}
       </div>
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
+      <button onClick={() => gen()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Headers</button>
       {headers && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Recommended Headers</span>
-            <button onClick={copy} className="px-2.5 py-1 text-xs bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <button onClick={copy} className="px-2.5 py-1 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
           <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg">{headers}</pre>
         </div>

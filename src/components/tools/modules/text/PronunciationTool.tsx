@@ -513,7 +513,7 @@ export default function PronunciationTool() {
             <button
               key={word}
               onClick={() => pronounceWord(word)}
-              className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] hover:bg-sky-50 dark:hover:bg-sky-900/20 hover:text-sky-600 dark:hover:text-sky-400 text-zinc-600 dark:text-[var(--text-muted)] rounded-lg transition-all cursor-pointer"
+              className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] hover:bg-sky-50 dark:hover:bg-sky-900/20 hover:text-sky-600 dark:hover:text-sky-700 dark:hover:text-sky-400 text-zinc-600 dark:text-[var(--text-muted)] rounded-lg transition-all cursor-pointer"
             >
               {word}
             </button>

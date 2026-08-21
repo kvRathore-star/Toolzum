@@ -277,7 +277,7 @@ export default function BankStatementAnalyser() {
                             <span className="font-semibold text-zinc-800 dark:text-zinc-200">₹{data.total.toLocaleString('en-IN')}</span>
                           </div>
                           <div className="h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
-                            <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(data.total / maxCategoryTotal) * 100}%` }} />
+                            <div className="h-full bg-emerald-700 rounded-full" style={{ width: `${(data.total / maxCategoryTotal) * 100}%` }} />
                           </div>
                         </div>
                       ))}

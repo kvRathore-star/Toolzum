@@ -128,7 +128,7 @@ export default function TranslatePdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           <Globe className="w-5 h-5 flex-shrink-0" />
           <span><strong>PDF Text Translation:</strong> Extract text from any PDF and translate it into 20+ languages using MyMemory API.</span>
         </div>
@@ -160,7 +160,7 @@ export default function TranslatePdf() {
         </button>
       </div>
 
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
         <Globe className="w-5 h-5 flex-shrink-0" />
         <span>Free API translation via MyMemory — limited to 5000 characters per request. Accuracy may vary. For sensitive documents, review translations manually.</span>
       </div>
@@ -261,7 +261,7 @@ export default function TranslatePdf() {
         <button
           onClick={handleTranslate}
           disabled={isTranslating || !extractedText.trim()}
-          className="w-full mt-5 bg-[var(--accent)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+          className="w-full mt-5 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
         >
           {isTranslating ? (
             <>

@@ -113,7 +113,7 @@ export default function IfscLookup() {
               className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] outline-none"
               onKeyDown={e => e.key === 'Enter' && handleLookup()} />
             <button onClick={handleLookup} disabled={loading || remaining === 0}
-              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
               {remaining === 0 ? 'Limit reached' : 'Lookup'}
             </button>
@@ -123,7 +123,7 @@ export default function IfscLookup() {
         {error && (
           <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-start gap-3 animate-in fade-in duration-300">
             <AlertCircle className="w-5 h-5 text-[var(--accent)] mt-0.5 shrink-0" />
-            <div><h4 className="font-bold text-rose-400">Lookup Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
+            <div><h4 className="font-bold text-rose-700 dark:text-rose-400">Lookup Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
           </div>
         )}
 
@@ -132,7 +132,7 @@ export default function IfscLookup() {
             {data.isOfflineFallback && (
               <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-3">
                 <HelpCircle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
-                <div><h4 className="font-bold text-amber-400">Offline Fallback Match</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
+                <div><h4 className="font-bold text-amber-700 dark:text-amber-400">Offline Fallback Match</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -169,10 +169,10 @@ export default function IfscLookup() {
             )}
             {!data.isOfflineFallback && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
-                <div className={`p-3 rounded-lg border ${data.UPI !== false ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>UPI Supported</div>
-                <div className={`p-3 rounded-lg border ${data.NEFT !== false ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>NEFT Supported</div>
-                <div className={`p-3 rounded-lg border ${data.IMPS !== false ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>IMPS Supported</div>
-                <div className={`p-3 rounded-lg border ${data.RTGS !== false ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>RTGS Supported</div>
+                <div className={`p-3 rounded-lg border ${data.UPI !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>UPI Supported</div>
+                <div className={`p-3 rounded-lg border ${data.NEFT !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>NEFT Supported</div>
+                <div className={`p-3 rounded-lg border ${data.IMPS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>IMPS Supported</div>
+                <div className={`p-3 rounded-lg border ${data.RTGS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>RTGS Supported</div>
               </div>
             )}
             {data.CONTACT && data.CONTACT !== 'N/A' && (

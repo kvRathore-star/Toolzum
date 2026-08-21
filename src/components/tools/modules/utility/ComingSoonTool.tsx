@@ -21,7 +21,7 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
       <div className="mb-6 relative">
         <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
         <div className="relative w-24 h-24 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl flex items-center justify-center shadow-2xl">
-          <svg className="w-10 h-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-10 h-10 text-blue-700 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
@@ -36,15 +36,15 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
       </p>
 
       {submitted ? (
-        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-6 max-w-sm w-full mx-auto backdrop-blur-sm animate-in fade-in zoom-in duration-300">
+        <div className="bg-emerald-700/10 border border-emerald-500/20 rounded-2xl p-6 max-w-sm w-full mx-auto backdrop-blur-sm animate-in fade-in zoom-in duration-300">
           <div className="flex items-center justify-center mb-3">
-            <div className="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400">
+            <div className="w-10 h-10 bg-emerald-700/20 rounded-full flex items-center justify-center text-emerald-700 dark:text-emerald-400">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
           </div>
-          <h3 className="text-emerald-400 font-semibold mb-1">You're on the list!</h3>
+          <h3 className="text-emerald-700 dark:text-emerald-400 font-semibold mb-1">You're on the list!</h3>
           <p className="text-emerald-500/80 text-sm">We'll notify you the moment this tool goes live.</p>
         </div>
       ) : (
@@ -72,7 +72,7 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
         </div>
         <div>
           <h4 className="text-[var(--text-primary)] font-medium mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Zero Data Retention
+            <span className="w-2 h-2 rounded-full bg-emerald-700"></span> Zero Data Retention
           </h4>
           <p className="text-sm text-[var(--text-secondary)]">We don't store your files, logs, or processing history on our servers.</p>
         </div>

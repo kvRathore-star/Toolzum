@@ -361,7 +361,7 @@ export default function LogoMaker() {
             
             <button 
               onClick={downloadSVG}
-              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
             >
               <Download className="w-4 h-4" />
               Download Vector SVG

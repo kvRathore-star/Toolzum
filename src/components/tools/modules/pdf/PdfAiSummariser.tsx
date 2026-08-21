@@ -92,7 +92,7 @@ export default function PdfAiSummariser() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-emerald-700/10 flex items-center justify-center">
               <FileText className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>

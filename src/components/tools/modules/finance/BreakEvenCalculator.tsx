@@ -105,9 +105,9 @@ export default function BreakEvenCalculator() {
               </div>
             </div>
             <div className="flex gap-1">
-              <button onClick={() => { clipboardWrite(Math.ceil(breakEvenUnits).toString()); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Copy" aria-label="Copy"><Copy size={14} /></button>
-              <button onClick={handleDownload} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Download CSV" aria-label="Download CSV"><Download size={14} /></button>
-              <button onClick={addToHistory} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Save to history" aria-label="Save to history"><History size={14} /></button>
+              <button onClick={() => { clipboardWrite(Math.ceil(breakEvenUnits).toString()); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Copy" aria-label="Copy"><Copy size={14} /></button>
+              <button onClick={handleDownload} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Download CSV" aria-label="Download CSV"><Download size={14} /></button>
+              <button onClick={addToHistory} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--accent-ink)]/10 text-[var(--text-muted)] hover:text-[var(--accent)] rounded-lg transition-colors" title="Save to history" aria-label="Save to history"><History size={14} /></button>
             </div>
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">

@@ -239,7 +239,7 @@ export default function AiBgChanger() {
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={removeBackgroundAuto} disabled={isProcessing}
-                      className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
                       {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Scissors className="w-3.5 h-3.5" /> Remove BG {!isPro ? '(Standard)' : ''}</>}
                     </button>
                   </>
@@ -252,7 +252,7 @@ export default function AiBgChanger() {
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={applyManualMask} disabled={isProcessing}
-                      className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
                       <Eraser className="w-3.5 h-3.5" /> Apply Mask
                     </button>
                   </>

@@ -78,7 +78,7 @@ export default function SubtitleGenerator() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Browser-Only:</strong> Create SRT subtitles by adding timed text entries while previewing your media. Everything runs locally.
         </div>
         <FileUploader
@@ -127,7 +127,7 @@ export default function SubtitleGenerator() {
             </div>
             <div className="bg-zinc-800/90 text-white p-3 rounded-xl flex items-center justify-between">
               <div className="text-xs font-mono">{formatTime(currentTime)}</div>
-              <button onClick={addSubtitle} className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors">
+              <button onClick={addSubtitle} className="bg-emerald-700 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-colors">
                 <Plus className="w-3.5 h-3.5" /> Add at {formatTime(currentTime)}
               </button>
             </div>
@@ -137,7 +137,7 @@ export default function SubtitleGenerator() {
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-sm font-bold text-[var(--text-primary)]">Subtitles ({entries.length})</h4>
               {entries.length > 0 && (
-                <button onClick={downloadSrt} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
                   <Download className="w-3 h-3" /> SRT
                 </button>
               )}
@@ -166,7 +166,7 @@ export default function SubtitleGenerator() {
                         }
                       }} className="w-[90px] bg-transparent outline-none border-b border-dashed border-zinc-300 dark:border-zinc-700" />
                     </div>
-                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
+                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                   <textarea
                     ref={editingId === entry.id ? textInputRef : undefined}
@@ -208,7 +208,7 @@ export default function SubtitleGenerator() {
             <div className="pt-3 border-t border-[var(--border-subtle)]">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs font-bold text-[var(--text-primary)]">{entries.length} entries</span>
-                <button onClick={downloadSrt} className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
                   <Download className="w-3 h-3" /> Download SRT
                 </button>
               </div>
@@ -217,7 +217,7 @@ export default function SubtitleGenerator() {
                   <div key={entry.id} className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] bg-[var(--bg-overlay)] rounded-lg px-3 py-1.5">
                     <span className="font-mono text-[9px] text-[var(--text-muted)] w-[150px]">{formatTime(entry.start)} → {formatTime(entry.end)}</span>
                     <span className="flex-1">{entry.text}</span>
-                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
+                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                 ))}
               </div>
@@ -303,7 +303,7 @@ function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset
         className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
           isListening
             ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse'
-            : 'bg-emerald-500 hover:bg-emerald-600 text-white'
+            : 'bg-emerald-700 hover:bg-emerald-700 text-white'
         }`}
       >
         <Mic className="w-4 h-4" />

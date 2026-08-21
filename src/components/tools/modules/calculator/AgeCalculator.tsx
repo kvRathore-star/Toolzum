@@ -58,7 +58,7 @@ export default function AgeCalculator() {
 
          <button
             onClick={calculate}
-            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
           >
             Calculate Exact Age
           </button>

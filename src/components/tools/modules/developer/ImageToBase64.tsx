@@ -95,7 +95,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
         </div>
       </div>
 
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         {isEncode
           ? <><strong>Lightning Fast & Private:</strong> Convert any image into a Base64 string instantly in your browser. Files never touch a server.</>
           : <><strong>Client-Side Only:</strong> Paste a Base64 encoded string to decode it into an image. The decoding process happens locally in your browser.</>}
@@ -145,8 +145,8 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <h4 className="text-[var(--text-primary)] font-medium">Base64 String</h4>
               <div className="flex gap-2">
-                <button onClick={async () => { try { setBase64Input(await navigator.clipboard.readText()); } catch { toast.error('Failed to read clipboard'); } }} className="text-xs text-blue-500 hover:text-blue-400 font-bold">Paste</button>
-                <button onClick={() => { setBase64Input(''); setImageUrl(null); setError(null); }} className="text-xs text-red-500 hover:text-red-400 font-bold">Clear</button>
+                <button onClick={async () => { try { setBase64Input(await navigator.clipboard.readText()); } catch { toast.error('Failed to read clipboard'); } }} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold">Paste</button>
+                <button onClick={() => { setBase64Input(''); setImageUrl(null); setError(null); }} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold">Clear</button>
               </div>
             </div>
             <textarea value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-none font-mono text-sm" />
@@ -170,7 +170,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
               )}
             </div>
             <button onClick={() => imageUrl && downloadOrShare(imageUrl, `decoded_image_${Date.now()}.png`)} disabled={!imageUrl}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 disabled:opacity-50">
+              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 disabled:opacity-50">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download Image
             </button>

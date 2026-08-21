@@ -37,7 +37,7 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span>{display.toLocaleString('en-IN')}</span>;
 }
 
-function BarChart({ data, maxVal, labelKey, color = 'bg-emerald-500' }: { data: { year: number; value: number }[]; maxVal: number; labelKey: string; color?: string }) {
+function BarChart({ data, maxVal, labelKey, color = 'bg-emerald-700' }: { data: { year: number; value: number }[]; maxVal: number; labelKey: string; color?: string }) {
   return (
     <div className="space-y-1.5">
       {data.map((d, i) => {
@@ -180,7 +180,7 @@ function SipTab() {
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Year-by-Year Breakdown</p>
           <button onClick={() => downloadCSV(headers, rows, 'sip-calculation.csv')}
-            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
+            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
         </div>
         <Table headers={headers} rows={rows} accentIdx={3} />
       </div>
@@ -256,7 +256,7 @@ function PpfTab() {
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Year-by-Year Breakdown</p>
           <button onClick={() => downloadCSV(headers, rows, 'ppf-calculation.csv')}
-            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
+            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
         </div>
         <Table headers={headers} rows={rows} accentIdx={3} />
       </div>
@@ -362,14 +362,14 @@ function EpfTab() {
 
       <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
         <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mb-3">Corpus Growth</p>
-        <BarChart data={yearlyData.map(d => ({ year: d.year, value: d.corpus }))} maxVal={maxVal} labelKey="Corpus" color="bg-emerald-500" />
+        <BarChart data={yearlyData.map(d => ({ year: d.year, value: d.corpus }))} maxVal={maxVal} labelKey="Corpus" color="bg-emerald-700" />
       </div>
 
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Year-by-Year Breakdown</p>
           <button onClick={() => downloadCSV(headers, rows, 'epf-calculation.csv')}
-            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
+            className="flex items-center gap-1 text-[10px] font-bold text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors"><Download className="w-3 h-3" /> CSV</button>
         </div>
         <Table headers={headers} rows={rows} accentIdx={4} />
       </div>

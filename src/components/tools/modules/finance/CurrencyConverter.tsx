@@ -307,7 +307,7 @@ export default function CurrencyConverter() {
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-3">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
                 <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                  <History className="w-4 h-4 text-blue-400" />
+                  <History className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                   Recent History
                 </h3>
                 <button 

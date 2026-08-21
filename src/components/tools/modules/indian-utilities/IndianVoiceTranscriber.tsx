@@ -319,7 +319,7 @@ export default function IndianVoiceTranscriber() {
                     <span className="flex items-center gap-1 px-2 py-1 rounded-md bg-[var(--bg-overlay)] border border-[var(--border-subtle)]">
                       <Languages className="w-3 h-3" style={{ color: '#0284c7' }} /> {selectedLang?.native}
                     </span>
-                    <span className="flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 font-semibold">
+                    <span className="flex items-center gap-1 px-2 py-1 rounded-md bg-emerald-700/10 border border-emerald-500/20 text-emerald-500 font-semibold">
                       <BarChart3 className="w-3 h-3" /> Confidence: 92%
                     </span>
                   </div>

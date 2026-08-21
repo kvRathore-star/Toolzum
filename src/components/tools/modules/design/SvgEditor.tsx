@@ -134,7 +134,7 @@ export default function SvgEditor() {
             </button>
             <button 
               onClick={downloadSvgFile}
-              className="py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
+              className="py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
             >
               <Download className="w-3.5 h-3.5" />
               Export SVG

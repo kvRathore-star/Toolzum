@@ -21,7 +21,7 @@ function ToolCard({ name, slug, desc, icon: Icon, path }: HubCard) {
         <Icon className="w-4 h-4" />
       </span>
       <div className="min-w-0">
-        <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{name}</div>
+        <div className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-blue-600 dark:group-hover:text-blue-700 dark:hover:text-blue-400 transition-colors">{name}</div>
         <div className="text-[11px] text-[var(--text-secondary)] mt-0.5 leading-relaxed">{desc}</div>
       </div>
     </a>

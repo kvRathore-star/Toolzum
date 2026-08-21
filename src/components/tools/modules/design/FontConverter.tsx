@@ -322,7 +322,7 @@ export default function FontConverter() {
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <FileText className="w-4 h-4 text-blue-500" />
+          <FileText className="w-4 h-4 text-blue-700 dark:text-blue-400" />
           Font Converter
         </h4>
         <p className="text-zinc-600 dark:text-[var(--text-muted)]">
@@ -400,7 +400,7 @@ export default function FontConverter() {
             <button
               onClick={handleConvert}
               disabled={isConverting}
-              className="w-full px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-600/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-600/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
             >
               {isConverting ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Converting...</>
@@ -412,7 +412,7 @@ export default function FontConverter() {
             {outputUrl && (
               <button
                 onClick={handleDownload}
-                className="w-full px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" />
                 Download {file?.name?.replace(/\.[^.]+$/, '')}.{outputFormat}

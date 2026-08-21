@@ -214,7 +214,7 @@ export default function AudioMerger() {
   if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center p-16 space-y-4">
-        <svg className="w-10 h-10 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+        <svg className="w-10 h-10 text-blue-700 dark:text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
@@ -306,7 +306,7 @@ export default function AudioMerger() {
                     </button>
                     <button
                       onClick={() => removeFile(displayIdx)}
-                      className="p-1 text-red-400 hover:text-red-600 transition-colors ml-1"
+                      className="p-1 text-red-700 dark:text-red-400 hover:text-red-600 transition-colors ml-1"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -342,7 +342,7 @@ export default function AudioMerger() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">Crossfade</label>
-              <span className="text-xs font-bold text-blue-500">{crossfade}s</span>
+              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crossfade}s</span>
             </div>
             <input
               type="range"
@@ -408,7 +408,7 @@ export default function AudioMerger() {
             <audio controls className="w-full" src={outputUrl} />
             <button
               onClick={() => downloadOrShare(outputUrl, `merged_audio.${EXTENSIONS[outputFormat]}`)}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download {outputFormat.toUpperCase()} ({formatTime(totalDuration)})

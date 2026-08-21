@@ -236,7 +236,7 @@ export default function TiffToPdf() {
     return (
       <div className="space-y-6">
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-          <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-500" />
+          <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
           <span>Convert TIFF images to universally compatible PDF documents. Perfect for scanned documents and fax archives.</span>
         </div>
         <div
@@ -266,13 +266,13 @@ export default function TiffToPdf() {
   return (
     <div className="space-y-6">
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-500" />
+        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
         <span>Convert TIFF images to universally compatible PDF documents. Perfect for scanned documents and fax archives.</span>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
-          <FileImage className="w-8 h-8 text-blue-500 shrink-0" />
+          <FileImage className="w-8 h-8 text-blue-700 dark:text-blue-400 shrink-0" />
           <div className="min-w-0">
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
             {tiffInfo && (
@@ -365,7 +365,7 @@ export default function TiffToPdf() {
         <button
           onClick={processConversion}
           disabled={isProcessing}
-          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all"
+          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all"
         >
           {isProcessing ? (
             <><RefreshCw className="w-5 h-5 animate-spin" /> Converting...</>
@@ -377,7 +377,7 @@ export default function TiffToPdf() {
         {outputUrl && (
           <button
             onClick={handleDownload}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all"
           >
             <Download className="w-5 h-5" /> Download PDF
           </button>

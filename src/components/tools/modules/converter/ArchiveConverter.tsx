@@ -121,7 +121,7 @@ export default function ArchiveConverter() {
             </div>
 
             <button onClick={createZip} disabled={isProcessing}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+              className="w-full bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
               <Download className="w-4 h-4" />
               {isProcessing ? 'Creating ZIP...' : `Create & Download ZIP (${files.length} files)`}
             </button>

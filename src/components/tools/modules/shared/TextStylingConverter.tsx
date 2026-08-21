@@ -158,7 +158,7 @@ function FancyView() {
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -181,7 +181,7 @@ function FancyView() {
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -299,7 +299,7 @@ function ZalgoView() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[200px]">
           <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Normal Input Text</span>
-            <button onClick={() => setInput('')} className="text-xs text-red-500 hover:text-red-400 font-semibold cursor-pointer">Clear</button>
+            <button onClick={() => setInput('')} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold cursor-pointer">Clear</button>
           </div>
           <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Type or paste standard text here..."
             className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-[var(--text-primary)]" />
@@ -308,7 +308,7 @@ function ZalgoView() {
           <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
             <button onClick={() => { if (output) { clipboardWrite(output); toast.success('Copied!'); } }} disabled={!output}
-              className="text-xs text-blue-500 hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
+              className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>
           <textarea value={output} readOnly placeholder="Cursed text will creep here..."
             className="flex-1 p-4 bg-transparent outline-none resize-none font-sans text-lg text-red-500 dark:text-red-400 overflow-y-auto" />

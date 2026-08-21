@@ -169,7 +169,7 @@ export default function WhoisLookup() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-2xl text-purple-400 text-sm space-y-1">
+      <div className="bg-purple-500/10 border border-purple-500/20 p-4 rounded-2xl text-purple-700 dark:text-purple-400 text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)]">WHOIS Lookup</h4>
         <p className="text-zinc-600 dark:text-[var(--text-muted)]">Look up domain registration information. Uses public RDAP/whois APIs.</p>
       </div>
@@ -186,7 +186,7 @@ export default function WhoisLookup() {
         {error && (
           <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl p-4">
             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
-            <button onClick={handleRetry} className="mt-2 text-xs text-red-500 hover:text-red-400 underline">Retry</button>
+            <button onClick={handleRetry} className="mt-2 text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 underline">Retry</button>
           </div>
         )}
 

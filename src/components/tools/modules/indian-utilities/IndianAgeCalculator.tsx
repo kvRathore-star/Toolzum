@@ -166,7 +166,7 @@ export default function IndianAgeCalculator() {
           <div className="flex gap-4">
             <button
               onClick={handleCalculate}
-              className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+              className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
             >
               Calculate Age
             </button>
@@ -222,8 +222,8 @@ export default function IndianAgeCalculator() {
                   className={`p-4 rounded-xl border text-xs transition-all space-y-1.5 ${
                     result
                       ? isEligible
-                        ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-                        : 'bg-rose-500/10 border-rose-500/20 text-rose-400'
+                        ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400'
+                        : 'bg-rose-500/10 border-rose-500/20 text-rose-700 dark:text-rose-400'
                       : 'bg-white dark:bg-black border-[var(--border-subtle)] text-[var(--text-secondary)]'
                   }`}
                 >

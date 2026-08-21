@@ -42,7 +42,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] relative overflow-hidden flex items-center justify-center">
       {/* Ambient glow */}
-      <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent)]/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent-ink)]/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-[var(--success)]/5 blur-[150px] rounded-full pointer-events-none" />
 
       {/* Grid background */}
@@ -66,7 +66,7 @@ export default function LoginPage() {
           {/* Header */}
           <div className="text-center mb-8">
             <div
-              className="inline-flex items-center justify-center w-12 h-12 bg-[var(--accent)]/10 mb-5"
+              className="inline-flex items-center justify-center w-12 h-12 bg-[var(--accent-ink)]/10 mb-5"
               style={{ borderRadius: "var(--radius-lg)" }}
             >
               <LogIn className="w-5 h-5 text-[var(--accent)]" />

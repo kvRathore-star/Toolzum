@@ -25,7 +25,7 @@ export function ProcessingOverlay({
           {progress !== undefined && progress > 0 && (
             <div className="w-48 h-1.5 bg-[var(--border-subtle)] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[var(--accent)] rounded-full transition-all duration-300"
+                className="h-full bg-[var(--accent-ink)] rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(progress, 100)}%` }}
               />
             </div>

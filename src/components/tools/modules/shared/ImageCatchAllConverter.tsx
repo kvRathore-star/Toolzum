@@ -401,7 +401,7 @@ export default function ImageFormatConverter({ slug }: ImageFormatConverterProps
       </div>
 
       {description && (
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">

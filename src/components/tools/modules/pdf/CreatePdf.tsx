@@ -226,7 +226,7 @@ export default function CreatePdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Create PDF:</strong> Generate a PDF document from text, CSV tables, JSON data, or XML. Fully browser-based.
       </div>
 
@@ -312,7 +312,7 @@ export default function CreatePdf() {
             <h4 className="font-bold text-emerald-500">PDF Ready</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `${titleText.toLowerCase().replace(/\s+/g, '-') || 'document'}.pdf`)}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download PDF
           </button>

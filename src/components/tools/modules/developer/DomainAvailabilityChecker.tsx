@@ -80,7 +80,7 @@ export default function DomainAvailabilityChecker() {
           <button
             onClick={checkDomain}
             disabled={isLoading}
-            className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-600/50 text-white text-sm font-medium rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+            className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-emerald-700/50 text-white text-sm font-medium rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
           >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
             {isLoading ? 'Checking...' : 'Check Availability'}
@@ -95,7 +95,7 @@ export default function DomainAvailabilityChecker() {
                   {r.available ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                   ) : (
-                    <XCircle className="w-5 h-5 text-red-400 shrink-0" />
+                    <XCircle className="w-5 h-5 text-red-700 dark:text-red-400 shrink-0" />
                   )}
                   <span className="text-sm font-mono text-[var(--text-primary)]">{r.domain}</span>
                 </div>

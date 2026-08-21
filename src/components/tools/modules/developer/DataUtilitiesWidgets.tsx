@@ -37,7 +37,7 @@ export function CsvAnalyzer() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Analyze CSV structure — column types, counts, unique values, and empty cells.</p>
       </div>
       <textarea value={csv} onChange={e => setCsv(e.target.value)} rows={6} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste CSV data (first row = headers)..." />
-      <button onClick={analyze} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Analyze</button>
+      <button onClick={analyze} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Analyze</button>
       {analysis && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
@@ -106,7 +106,7 @@ export function JsonPathQueryBuilder() {
         <label className="text-xs font-medium text-[var(--text-secondary)]">JSON Path</label>
         <input value={path} onChange={e => setPath(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="$.users[*].name" />
       </div>
-      <button onClick={query} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Execute</button>
+      <button onClick={query} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Execute</button>
       {result && (
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Result</label>

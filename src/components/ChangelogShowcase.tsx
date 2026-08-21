@@ -35,15 +35,15 @@ function FaultToleranceDemo() {
             <span className="flex-1 truncate text-[var(--text-primary)]">{f.name}</span>
             <span className="text-[var(--text-muted)]">{f.size}</span>
             {f.status === "processing" && <Loader2 className="w-3.5 h-3.5 text-[var(--accent)] animate-spin shrink-0" />}
-            {f.status === "done" && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />}
-            {f.status === "error" && <XCircle className="w-3.5 h-3.5 text-red-400 shrink-0" />}
-            {f.status === "skipped" && <span className="text-[10px] uppercase tracking-wider text-amber-400 font-semibold shrink-0">Skipped</span>}
+            {f.status === "done" && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400 shrink-0" />}
+            {f.status === "error" && <XCircle className="w-3.5 h-3.5 text-red-700 dark:text-red-400 shrink-0" />}
+            {f.status === "skipped" && <span className="text-[10px] uppercase tracking-wider text-amber-700 dark:text-amber-400 font-semibold shrink-0">Skipped</span>}
           </div>
         ))}
       </div>
       <div className="mt-3 flex items-center gap-2 text-xs text-[var(--text-muted)]">
-        <span className="inline-flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-400" /> 3 completed</span>
-        <span className="inline-flex items-center gap-1"><XCircle className="w-3 h-3 text-red-400" /> 1 corrupted (auto-skipped)</span>
+        <span className="inline-flex items-center gap-1"><CheckCircle2 className="w-3 h-3 text-emerald-700 dark:text-emerald-400" /> 3 completed</span>
+        <span className="inline-flex items-center gap-1"><XCircle className="w-3 h-3 text-red-700 dark:text-red-400" /> 1 corrupted (auto-skipped)</span>
         <span className="inline-flex items-center gap-1"><Loader2 className="w-3 h-3 text-[var(--accent)] animate-spin" /> 1 processing</span>
       </div>
     </div>
@@ -71,7 +71,7 @@ function BatchProcessingDemo() {
     <div className="bg-[var(--bg-base)] rounded-[var(--radius-xl)] border border-[var(--border-subtle)] p-4 sm:p-6 my-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-[var(--accent-ink)] animate-pulse" />
           <span className="text-xs font-mono text-[var(--text-muted)]">Batch Processing Simulation</span>
         </div>
         <button onClick={() => setIsPlaying(p => !p)} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] transition-colors">
@@ -87,10 +87,10 @@ function BatchProcessingDemo() {
             <div key={i} className="flex-1 flex flex-col items-center gap-1">
               <div className="w-full aspect-[3/4] rounded-md border border-[var(--border-subtle)] bg-[var(--bg-elevated)] overflow-hidden relative">
                 <div
-                  className="absolute bottom-0 left-0 right-0 bg-[var(--accent)] transition-all duration-100"
+                  className="absolute bottom-0 left-0 right-0 bg-[var(--accent-ink)] transition-all duration-100"
                   style={{ height: active ? `${Math.min(100, ((progress - threshold + (100 / 12)) / (100 / 12)) * 100)}%` : "0%" }}
                 />
-                {active && <div className="absolute inset-0 flex items-center justify-center"><CheckCircle2 className="w-4 h-4 text-emerald-400" /></div>}
+                {active && <div className="absolute inset-0 flex items-center justify-center"><CheckCircle2 className="w-4 h-4 text-emerald-700 dark:text-emerald-400" /></div>}
               </div>
               <span className="text-[10px] font-mono text-[var(--text-muted)]">#{i + 1}</span>
             </div>
@@ -111,7 +111,7 @@ function BatchProcessingDemo() {
       <div className="mt-3 flex items-center gap-3 text-xs text-[var(--text-muted)]">
         <span>6 parallel threads (Pro)</span>
         <span className="text-[var(--border-subtle)]">|</span>
-        <span className="text-emerald-400 font-semibold">{Math.floor(progress / 8.33)} / 12 files</span>
+        <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{Math.floor(progress / 8.33)} / 12 files</span>
         <span className="text-[var(--border-subtle)]">|</span>
         <span>Sequential (Free)</span>
       </div>
@@ -153,7 +153,7 @@ function ToolExpansionDemo() {
       { label: "Video", registryCat: "Video", color: "bg-purple-500" },
       { label: "PDF", registryCat: "PDF", color: "bg-rose-500" },
       { label: "Audio", registryCat: "Audio", color: "bg-amber-500" },
-      { label: "Dev", registryCat: "Developer", color: "bg-emerald-500" },
+      { label: "Dev", registryCat: "Developer", color: "bg-emerald-700" },
       { label: "Finance", registryCat: "Finance", color: "bg-cyan-500" },
       { label: "AI", registryCat: "AI", color: "bg-violet-500" },
       { label: "India", registryCat: "indian-utilities", color: "bg-orange-500" },

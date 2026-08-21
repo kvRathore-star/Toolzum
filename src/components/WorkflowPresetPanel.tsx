@@ -98,14 +98,14 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                             key={p.id}
                             onClick={() => handleLoad(p.id)}
                             className={`flex items-center gap-2 w-full text-xs text-left px-3 py-2.5 hover:bg-[var(--bg-overlay)] transition-colors ${
-                              recentlyLoaded === p.id ? 'bg-[var(--accent)]/10 text-[var(--accent)]' : ''
+                              recentlyLoaded === p.id ? 'bg-[var(--accent-ink)]/10 text-[var(--accent)]' : ''
                             }`}
                           >
                             <Check className={`w-3 h-3 ${recentlyLoaded === p.id ? 'opacity-100' : 'opacity-0'}`} />
                             <span className="flex-1 truncate">{p.name}</span>
                             <button
                               onClick={(e) => handleDelete(e, p.id, p.name)}
-                              className="text-[var(--text-muted)] hover:text-red-400 transition-colors p-0.5"
+                              className="text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 transition-colors p-0.5"
                             >
                               <Trash2 className="w-3 h-3" />
                             </button>
@@ -120,7 +120,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                   <>
                     <button
                       onClick={() => setShowSaveDialog(true)}
-                      className="flex items-center gap-2 text-xs text-white bg-[var(--accent)] rounded-[var(--radius-md)] px-3 py-2 hover:opacity-90 transition-opacity w-full"
+                      className="flex items-center gap-2 text-xs text-white bg-[var(--accent-ink)] rounded-[var(--radius-md)] px-3 py-2 hover:opacity-90 transition-opacity w-full"
                     >
                       <Save className="w-3.5 h-3.5" />
                       Save Current Config as Preset
@@ -138,7 +138,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                         />
                         <button
                           onClick={handleSave}
-                          className="text-xs text-white bg-emerald-600 rounded-[var(--radius-md)] px-3 py-2 hover:bg-emerald-700 transition-colors"
+                          className="text-xs text-white bg-emerald-700 rounded-[var(--radius-md)] px-3 py-2 hover:bg-emerald-700 transition-colors"
                         >
                           Save
                         </button>

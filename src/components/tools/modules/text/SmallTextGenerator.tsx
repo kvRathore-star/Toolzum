@@ -82,7 +82,7 @@ export default function SmallTextGenerator() {
               onClick={() => setActiveMode(mode.id)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 activeMode === mode.id
-                  ? 'bg-[var(--accent)] text-white shadow-md'
+                  ? 'bg-[var(--accent-ink)] text-white shadow-md'
                   : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
               }`}
             >
@@ -103,7 +103,7 @@ export default function SmallTextGenerator() {
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] h-28 outline-none resize-none text-sm break-all"
             />
           </div>
-          <button onClick={() => handleCopy(output)} disabled={!output} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={() => handleCopy(output)} disabled={!output} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
             <Copy className="w-4 h-4" /> Copy {activeModeObj.label}
           </button>
         </div>

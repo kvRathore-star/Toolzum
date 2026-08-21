@@ -34,7 +34,7 @@ function DynamicImportFallback({ slug }: { slug: string }) {
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-6 py-2.5 bg-[var(--accent)] hover:opacity-90 text-white rounded-xl font-medium transition-all"
+          className="px-6 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl font-medium transition-all"
         >
           Refresh Page
         </button>

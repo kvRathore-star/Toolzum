@@ -104,7 +104,7 @@ export default function MuteVideo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm">
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
           <strong>Mute / Replace Audio:</strong> Strip, replace, or adjust the volume of your video&apos;s audio track. Everything runs in your browser — no uploads.
         </div>
         <FileUploader
@@ -274,8 +274,8 @@ export default function MuteVideo() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-400 mb-2">Processing Complete!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-2">Processing Complete!</h4>
               <p className="text-sm text-emerald-600 dark:text-emerald-300 mb-4">
                 {mode === 'mute' && 'Audio track has been removed.'}
                 {mode === 'replace' && 'Audio track has been replaced.'}

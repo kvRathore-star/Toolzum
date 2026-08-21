@@ -204,7 +204,7 @@ ${linkCards}
                   {ICON_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
                 </select>
                 <button onClick={addLink}
-                  className="px-3 py-2 bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1 hover:bg-emerald-600 transition-colors">
+                  className="px-3 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1 hover:bg-emerald-700 transition-colors">
                   <Plus className="w-3.5 h-3.5" /> Add
                 </button>
               </div>
@@ -245,7 +245,7 @@ ${linkCards}
               </div>
               <div className="flex gap-2">
                 <button onClick={handleCopyHtml}
-                  className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg text-[10px] font-semibold flex items-center gap-1 hover:bg-emerald-600 transition-colors">
+                  className="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-[10px] font-semibold flex items-center gap-1 hover:bg-emerald-700 transition-colors">
                   {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   {copied ? 'Copied' : 'Copy HTML'}
                 </button>
@@ -282,7 +282,7 @@ ${linkCards}
               </div>
             ) : (
               <div className="bg-zinc-900 rounded-2xl p-4 min-h-[500px] overflow-auto border-4 border-zinc-800">
-                <pre className="text-[10px] text-emerald-400 whitespace-pre-wrap font-mono leading-relaxed">{generateHtml}</pre>
+                <pre className="text-[10px] text-emerald-700 dark:text-emerald-400 whitespace-pre-wrap font-mono leading-relaxed">{generateHtml}</pre>
               </div>
             )}
           </div>

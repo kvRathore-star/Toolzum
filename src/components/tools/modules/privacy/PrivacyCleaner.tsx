@@ -126,7 +126,7 @@ export default function PrivacyCleaner() {
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">Cookies</p>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-            <Database className="w-4 h-4 mx-auto text-blue-500 mb-1" />
+            <Database className="w-4 h-4 mx-auto text-blue-700 dark:text-blue-400 mb-1" />
             <p className="text-lg font-black text-zinc-800 dark:text-white">{stats.localStorage}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">localStorage</p>
           </div>

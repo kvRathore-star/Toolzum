@@ -43,7 +43,7 @@ export default function JSONDiffChecker() {
             <textarea value={right} onChange={e => setRight(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
           </div>
         </div>
-        <button onClick={compare} className="px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Compare</button>
+        <button onClick={compare} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Compare</button>
         {diff && (
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Differences</label>

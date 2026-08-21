@@ -64,14 +64,14 @@ export default function CookiePolicyPage() {
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
-            <EyeOff className="w-8 h-8 text-emerald-400 shrink-0" />
+            <EyeOff className="w-8 h-8 text-emerald-700 dark:text-emerald-400 shrink-0" />
             <div>
               <h4 className="font-semibold text-sm">No Personal Data</h4>
               <p className="text-xs text-[var(--text-secondary)] mt-1">Our privacy-first analytics collect zero personal information. No cookies are used for analytics.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
-            <Settings className="w-8 h-8 text-purple-400 shrink-0" />
+            <Settings className="w-8 h-8 text-purple-700 dark:text-purple-400 shrink-0" />
             <div>
               <h4 className="font-semibold text-sm">Full Control</h4>
               <p className="text-xs text-[var(--text-secondary)] mt-1">You can accept or decline non-essential cookies at any time via our consent banner.</p>

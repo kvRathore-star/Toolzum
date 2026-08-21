@@ -29,7 +29,7 @@ export function ToolPresetBar({ presets, onSelect, activeLabel }: ToolPresetBarP
             onClick={() => onSelect(preset)}
             className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
               activeLabel === preset.label
-                ? 'bg-blue-600/20 border-blue-500/40 text-blue-400'
+                ? 'bg-blue-600/20 border-blue-500/40 text-blue-700 dark:text-blue-400'
                 : 'bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-muted)] hover:border-[var(--border-default)] hover:text-[var(--text-primary)]'
             }`}
             title={preset.description}

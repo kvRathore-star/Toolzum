@@ -232,7 +232,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
   if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center p-12 space-y-4">
-        <svg className="w-12 h-12 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-blue-700 dark:text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
@@ -276,7 +276,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
       </div>
 
       {description && (
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       {!file ? (
@@ -309,7 +309,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
                   <div className="bg-[var(--bg-surface)] p-4 rounded-2xl">
                     <span className="font-black text-xl text-zinc-800 dark:text-zinc-200">{inputFmt.label}</span>
                   </div>
-                  <svg className="w-8 h-8 text-blue-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                  <svg className="w-8 h-8 text-blue-700 dark:text-blue-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   <div className="bg-[var(--bg-surface)] p-4 rounded-2xl border-2 border-blue-500/30">
                     <span className="font-black text-xl text-blue-500">{outputFmt.label}</span>
                   </div>

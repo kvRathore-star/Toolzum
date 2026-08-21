@@ -132,7 +132,7 @@ export default function PngToSvg() {
                 <p className="text-[9px] text-[var(--text-secondary)] mt-1">Conversion works offline in your browser</p>
               </div>
             )}
-            <label className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
+            <label className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] px-4 py-2 rounded-xl text-xs text-white font-bold cursor-pointer transition-colors shadow mt-4">
               Select Image File
               <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
             </label>

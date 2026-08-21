@@ -90,7 +90,7 @@ export default function ImageBulkConverter() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Client-Side Bulk Processing:</strong> Convert and compress hundreds of images at once directly in your browser. No files are uploaded to any server.
       </div>
 
@@ -113,7 +113,7 @@ export default function ImageBulkConverter() {
                 {files.map((f) => (
                   <li key={f.id} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] p-2 rounded-lg text-sm">
                     <span className="text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1 mr-2">{f.file.name}</span>
-                    <button onClick={() => removeFile(f.id)} className="text-red-400 hover:text-red-300 p-1">
+                    <button onClick={() => removeFile(f.id)} className="text-red-700 dark:text-red-400 hover:text-red-300 p-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </li>
@@ -154,7 +154,7 @@ export default function ImageBulkConverter() {
             <div>
               <div className="flex justify-between mb-2">
                 <label className="text-sm font-medium text-[var(--text-primary)]">Quality</label>
-                <span className="text-blue-400 font-bold text-sm">{Math.round(quality * 100)}%</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold text-sm">{Math.round(quality * 100)}%</span>
               </div>
               <input 
                 type="range" 
@@ -185,11 +185,11 @@ export default function ImageBulkConverter() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex flex-col items-center text-center animate-in slide-in-from-bottom-4">
-              <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mb-4">
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col items-center text-center animate-in slide-in-from-bottom-4">
+              <div className="w-16 h-16 bg-emerald-700/20 text-emerald-700 dark:text-emerald-400 rounded-full flex items-center justify-center mb-4">
                 <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               </div>
-              <h4 className="text-xl font-bold text-emerald-400 mb-1">Batch Complete!</h4>
+              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-1">Batch Complete!</h4>
               <p className="text-emerald-500/80 text-sm mb-6">All {files.length} images have been packaged into a ZIP archive.</p>
               
               <button 

@@ -64,14 +64,14 @@ export default function IpAnonymizer() {
             </div>
           </div>
 
-          <button onClick={anonymizeIp} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+          <button onClick={anonymizeIp} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
             <RefreshCw className="w-4 h-4" /> Anonymize IP
           </button>
         </div>
 
         <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-zinc-800 flex flex-col justify-center items-center min-h-[160px] space-y-3">
           <span className="text-[10px] text-[var(--text-secondary)] uppercase block">Anonymized Output</span>
-          <p className="text-3xl font-black text-emerald-400 font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
+          <p className="text-3xl font-black text-emerald-700 dark:text-emerald-400 font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
           {anonymized && (
             <button onClick={() => { clipboardWrite(anonymized); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline">Copy Result</button>
           )}

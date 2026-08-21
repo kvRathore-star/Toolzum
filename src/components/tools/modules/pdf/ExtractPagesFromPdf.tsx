@@ -98,7 +98,7 @@ export default function ExtractPagesFromPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Extract Pages:</strong> Select specific pages from a PDF and save them as a new document. Files never leave your browser.
         </div>
         <FileUploader
@@ -140,14 +140,14 @@ export default function ExtractPagesFromPdf() {
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
             />
             <p className="text-xs text-[var(--text-secondary)]">
-              Enter page numbers and/or ranges separated by commas. Examples: <code className="text-blue-400">1,3,5</code> or <code className="text-blue-400">1-5,8,11-13</code>. Max page: {totalPages}.
+              Enter page numbers and/or ranges separated by commas. Examples: <code className="text-blue-700 dark:text-blue-400">1,3,5</code> or <code className="text-blue-700 dark:text-blue-400">1-5,8,11-13</code>. Max page: {totalPages}.
             </p>
           </div>
 
           <button
             onClick={extractPages}
             disabled={isProcessing || !rangeInput.trim()}
-            className="w-full bg-[var(--accent)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
             {isProcessing ? "Extracting..." : "Extract Pages"}
           </button>
@@ -160,14 +160,14 @@ export default function ExtractPagesFromPdf() {
                 <h4 className="font-bold text-emerald-500">Extraction Complete</h4>
               </div>
 
-              <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 <p className="font-bold">extracted_{file.name}</p>
               </div>
 
               <button
                 onClick={() => downloadOrShare(outputUrl, `extracted_${file.name}`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download New PDF

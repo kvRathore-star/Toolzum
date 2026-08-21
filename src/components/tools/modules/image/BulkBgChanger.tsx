@@ -205,7 +205,7 @@ export default function BulkBgChanger() {
                 )}
 
                 <button onClick={processAll} disabled={isProcessing}
-                  className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                  className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
                   {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Layers className="w-3.5 h-3.5" /> Process All ({images.length})</>}
                 </button>
               </div>

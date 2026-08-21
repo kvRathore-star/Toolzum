@@ -83,7 +83,7 @@ export function EncoderDecoder() {
           <label className="text-xs font-medium text-[var(--text-secondary)]">Input</label>
           <textarea value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
         </div>
-        <button onClick={handleProcess} className="w-full py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
+        <button onClick={handleProcess} className="w-full py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
         {output && (
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>

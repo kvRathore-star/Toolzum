@@ -234,11 +234,11 @@ export default function CsvToSqlite() {
         <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase flex items-center gap-1.5"><Table className="w-3.5 h-3.5" /> Schema</span>
-            {db && <button onClick={handleReset} className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Reset</button>}
+            {db && <button onClick={handleReset} className="text-xs text-red-700 dark:text-red-400 hover:text-red-300 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Reset</button>}
           </div>
 
           {sqlError && (
-            <div className="text-xs text-red-400 flex items-center gap-2 py-4 bg-red-500/10 rounded-xl px-3">
+            <div className="text-xs text-red-700 dark:text-red-400 flex items-center gap-2 py-4 bg-red-500/10 rounded-xl px-3">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               {sqlError}
             </div>
@@ -351,7 +351,7 @@ export default function CsvToSqlite() {
             </div>
 
             {error && (
-              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-xs text-red-400 font-mono">{error}</div>
+              <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-xs text-red-700 dark:text-red-400 font-mono">{error}</div>
             )}
 
             {results && !error && (

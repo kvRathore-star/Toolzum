@@ -126,8 +126,8 @@ export default function ToDoList() {
                   
                   {/* Priority Tag */}
                   <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase ${
-                    item.priority === 'high' ? 'bg-rose-500/10 text-rose-400' :
-                    item.priority === 'medium' ? 'bg-amber-500/10 text-amber-400' :
+                    item.priority === 'high' ? 'bg-rose-500/10 text-rose-700 dark:text-rose-400' :
+                    item.priority === 'medium' ? 'bg-amber-500/10 text-amber-700 dark:text-amber-400' :
                     'bg-[var(--bg-overlay)]0/10 text-[var(--text-muted)]'
                   }`}>
                     {item.priority}

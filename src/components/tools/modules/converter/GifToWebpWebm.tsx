@@ -148,7 +148,7 @@ export default function GifToWebpWebm() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
           <strong>Modern GIF replacement:</strong> Convert animated GIFs to WebP (animated image, ~10x smaller) or WebM (video, even better compression) — entirely in your browser.
         </div>
         <FileUploader
@@ -194,7 +194,7 @@ export default function GifToWebpWebm() {
                     onClick={() => setOutputFormat(fmt)}
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       outputFormat === fmt
-                        ? 'bg-emerald-500 text-white shadow-lg'
+                        ? 'bg-emerald-700 text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
@@ -297,8 +297,8 @@ export default function GifToWebpWebm() {
           {(outputUrl || outputUrl2) && (
             <div className="space-y-4">
               {outputUrl && (
-                <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-                  <h4 className="text-xl font-bold text-emerald-400 mb-4">WebP Ready!</h4>
+                <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+                  <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">WebP Ready!</h4>
                   {outputFormat !== 'both' ? (
                     <img src={outputUrl} alt="Converted WebP" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
                   ) : (
@@ -315,8 +315,8 @@ export default function GifToWebpWebm() {
                 </div>
               )}
               {outputUrl2 && (
-                <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-                  <h4 className="text-xl font-bold text-emerald-400 mb-4">WebM Ready!</h4>
+                <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+                  <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">WebM Ready!</h4>
                   <video src={outputUrl2} controls autoPlay loop className="w-full max-h-[200px] rounded-lg mb-6" />
                   <button
                     onClick={() => downloadOrShare(outputUrl2, `${file.name.split('.')[0]}.webm`)}
@@ -339,9 +339,9 @@ export default function GifToWebpWebm() {
             />
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-400">
+          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
             <p className="font-medium text-blue-300">Why convert?</p>
-            <ul className="space-y-1 text-blue-400/80">
+            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
               <li>• WebP animated images are typically <strong>~10× smaller</strong> than GIF</li>
               <li>• WebM video offers even better compression with alpha support</li>
               <li>• Modern browsers support WebP and WebM natively</li>

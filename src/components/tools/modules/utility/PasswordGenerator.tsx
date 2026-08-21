@@ -42,10 +42,10 @@ function calcEntropy(password: string, options: Options): number {
 }
 
 function getStrength(entropy: number): { label: string; color: string; bg: string } {
-  if (entropy >= 120) return { label: 'Strong', color: 'text-emerald-400', bg: 'bg-emerald-500' };
-  if (entropy >= 80) return { label: 'Good', color: 'text-blue-400', bg: 'bg-blue-500' };
-  if (entropy >= 60) return { label: 'Fair', color: 'text-amber-400', bg: 'bg-amber-500' };
-  return { label: 'Weak', color: 'text-red-400', bg: 'bg-red-500' };
+  if (entropy >= 120) return { label: 'Strong', color: 'text-emerald-700 dark:text-emerald-400', bg: 'bg-emerald-700' };
+  if (entropy >= 80) return { label: 'Good', color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-500' };
+  if (entropy >= 60) return { label: 'Fair', color: 'text-amber-700 dark:text-amber-400', bg: 'bg-amber-500' };
+  return { label: 'Weak', color: 'text-red-700 dark:text-red-400', bg: 'bg-red-500' };
 }
 
 function generatePassword(opts: Options): string {
@@ -126,7 +126,7 @@ export default function PasswordGenerator() {
             type="text"
             readOnly
             value={password}
-            className="w-full bg-[var(--bg-base)] border-2 border-emerald-500/30 rounded-xl px-5 py-4 text-xl font-mono text-emerald-400 outline-none text-center tracking-wider"
+            className="w-full bg-[var(--bg-base)] border-2 border-emerald-500/30 rounded-xl px-5 py-4 text-xl font-mono text-emerald-700 dark:text-emerald-400 outline-none text-center tracking-wider"
           />
         </div>
 
@@ -145,13 +145,13 @@ export default function PasswordGenerator() {
 
         {/* Action buttons */}
         <div className="flex gap-2 flex-wrap">
-          <button onClick={copy} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
+          <button onClick={copy} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Copy
           </button>
           <button onClick={download} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Download
           </button>
-          <button onClick={generate} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
+          <button onClick={generate} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Regenerate
           </button>
         </div>

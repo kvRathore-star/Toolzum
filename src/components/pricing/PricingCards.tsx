@@ -57,7 +57,7 @@ export function PricingCards() {
             onClick={() => setBillingInterval(interval)}
             className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative ${
               billingInterval === interval
-                ? "bg-[var(--accent)] text-white shadow-md scale-105"
+                ? "bg-[var(--accent-ink)] text-white shadow-md scale-105"
                 : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-base)]"
             }`}
           >
@@ -127,7 +127,7 @@ export function PricingCards() {
               MOST POPULAR
             </div>
           )}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[var(--accent-ink)] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
             <Zap className="w-3.5 h-3.5 fill-white" /> Pro Plan
           </div>
 

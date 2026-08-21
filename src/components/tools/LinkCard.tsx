@@ -17,7 +17,7 @@ export function LinkCard({ slug, name, description, category }: LinkCardProps) {
     >
       <div className="flex items-center gap-1.5">
         <h5 className="text-sm font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{name}</h5>
-        <ExternalLink className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+        <ExternalLink className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400 shrink-0" />
       </div>
       <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{description}</p>
     </Link>

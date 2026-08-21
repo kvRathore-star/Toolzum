@@ -103,7 +103,7 @@ export default function SpeedTest() {
             </div>
           </div>
 
-          <button onClick={startTest} disabled={isRunning} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
+          <button onClick={startTest} disabled={isRunning} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
             <RefreshCw className="w-4 h-4" /> Start Speed Diagnosis
           </button>
         </div>

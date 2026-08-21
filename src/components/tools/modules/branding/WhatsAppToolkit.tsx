@@ -59,7 +59,7 @@ function MessageLinkTab() {
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
           <button onClick={handleCopy}
-            className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">
+            className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
@@ -103,7 +103,7 @@ function GroupLinkTab() {
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
           <button onClick={handleCopy}
-            className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors">
+            className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
         </div>
@@ -160,7 +160,7 @@ function FormatTextTab() {
               </div>
               <code className="block text-xs text-[var(--text-primary)] bg-zinc-100 dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
               <button onClick={() => handleCopy(f.syntax, f.label)}
-                className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition-colors">
+                className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-colors">
                 {copied === f.label ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                 {copied === f.label ? 'Copied!' : 'Copy to Clipboard'}
               </button>
@@ -266,7 +266,7 @@ function BulkLinkTab() {
             </div>
             <div className="flex gap-2">
               <button onClick={copyAll}
-                className="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
+                className="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
                 {copiedAll ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 Copy All ({filteredData.length})
               </button>
@@ -391,10 +391,10 @@ function QrTab() {
               const file = e.target.files?.[0];
               if (file) setLogoImage(URL.createObjectURL(file));
             }}
-              className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
+              className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-700 dark:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
           </div>
           <button onClick={handleDownload}
-            className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download QR Code
           </button>
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
@@ -473,7 +473,7 @@ function QuickRepliesTab() {
           <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)"
             className="md:col-span-1 bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
           <button onClick={addTemplate}
-            className="px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+            className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
             <Plus className="w-3.5 h-3.5" /> Save Template
           </button>
         </div>
@@ -500,7 +500,7 @@ function QuickRepliesTab() {
                       const content = (document.getElementById(`edit-content-${t.id}`) as HTMLTextAreaElement).value;
                       updateTemplate(t.id, title, content);
                     }}
-                      className="px-3 py-1.5 bg-emerald-500 text-white rounded-lg text-xs font-semibold">Save</button>
+                      className="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-xs font-semibold">Save</button>
                     <button onClick={() => setEditingId(null)}
                       className="px-3 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs">Cancel</button>
                   </div>
@@ -513,7 +513,7 @@ function QuickRepliesTab() {
                   </div>
                   <div className="flex gap-1 shrink-0">
                     <button onClick={() => handleCopy(t.id, t.content)}
-                      className="p-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-lg hover:bg-emerald-500/20 transition-colors">
+                      className="p-1.5 bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 rounded-lg hover:bg-emerald-700/20 transition-colors">
                       {copiedId === t.id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                     <button onClick={() => setEditingId(t.id)}
@@ -663,7 +663,7 @@ function ChatAnalyzerTab() {
               <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Media Shared</p>
             </div>
             <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-              <p className="text-2xl font-black text-blue-500">{stats.linkCount}</p>
+              <p className="text-2xl font-black text-blue-700 dark:text-blue-400">{stats.linkCount}</p>
               <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Links Shared</p>
             </div>
           </div>
@@ -676,7 +676,7 @@ function ChatAnalyzerTab() {
                   <span className="text-[11px] text-[var(--text-secondary)] w-4">{i + 1}.</span>
                   <span className="text-xs text-[var(--text-primary)] flex-1 truncate">{name}</span>
                   <div className="flex-1 max-w-[120px] h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${(count / maxVal) * 100}%` }} />
+                    <div className="h-full bg-emerald-700 rounded-full" style={{ width: `${(count / maxVal) * 100}%` }} />
                   </div>
                   <span className="text-[10px] text-[var(--text-secondary)] font-mono w-16 text-right">{count}</span>
                 </div>
@@ -842,7 +842,7 @@ function StatusDesignerTab() {
           </div>
 
           <button onClick={handleDownload}
-            className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download Status Image (1080×1920)
           </button>
         </div>
@@ -865,7 +865,7 @@ export default function WhatsAppToolkit() {
           <Smartphone className="w-5 h-5 text-emerald-500" />
           <h3 className="text-lg font-bold text-[var(--text-primary)]">WhatsApp Business Toolkit</h3>
         </div>
-        <span className="text-[9px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-full">8 Tools</span>
+        <span className="text-[9px] font-bold text-emerald-500 bg-emerald-700/10 px-2 py-1 rounded-full">8 Tools</span>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">

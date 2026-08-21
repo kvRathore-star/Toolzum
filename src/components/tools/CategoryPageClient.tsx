@@ -476,7 +476,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             <span className="text-[var(--border-subtle)] select-none">·</span>
             <button onClick={() => setProFilter('free')} className={`flex items-center gap-1 px-2.5 py-1.5 rounded-[var(--radius-md)] transition-colors ${proFilter === 'free' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}><Sparkles className="w-3 h-3" /> Free</button>
             <span className="text-[var(--border-subtle)] select-none">·</span>
-            <button onClick={() => setProFilter('pro')} className={`flex items-center gap-1 px-2.5 py-1.5 rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-400'}`}><Crown className="w-3 h-3" /> Pro</button>
+            <button onClick={() => setProFilter('pro')} className={`flex items-center gap-1 px-2.5 py-1.5 rounded-[var(--radius-md)] transition-colors ${proFilter === 'pro' ? 'bg-[var(--bg-elevated)] shadow-sm text-amber-700 dark:text-amber-400' : 'text-[var(--text-muted)] hover:text-amber-700 dark:hover:text-amber-400'}`}><Crown className="w-3 h-3" /> Pro</button>
           </div>
           <span className="text-xs text-[var(--text-muted)] font-mono">{toolCount} tool{toolCount !== 1 ? 's' : ''}</span>
         </div>
@@ -680,7 +680,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             </div>
             <p className="text-[var(--text-muted)] mb-2">No tools found{searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : letterFilter ? ` starting with "${letterFilter}"` : ''}.</p>
             <p className="text-xs text-[var(--text-muted)] mb-4">Try a different search term or browse other categories.</p>
-            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
+            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
               Clear filters
             </button>
           </div>

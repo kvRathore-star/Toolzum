@@ -120,7 +120,7 @@ export default function RedactPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           <EyeOff className="w-5 h-5 flex-shrink-0" />
           <span><strong>Permanent Redaction:</strong> Black out sensitive content in your PDFs. All processing happens locally — nothing is uploaded.</span>
         </div>
@@ -243,7 +243,7 @@ export default function RedactPdf() {
           <button 
             onClick={applyRedaction}
             disabled={isProcessing || !pageRange.trim()}
-            className="w-full bg-[var(--accent)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -265,14 +265,14 @@ export default function RedactPdf() {
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Redaction Complete</h4>
               </div>
-              <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <EyeOff className="w-16 h-16 mb-4" />
                 <p className="font-bold text-center">redacted_{file.name}</p>
                 <p className="text-xs text-emerald-500/80 mt-1">Sensitive content has been permanently blacked out.</p>
               </div>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `redacted_${file.name}`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 Download Redacted PDF

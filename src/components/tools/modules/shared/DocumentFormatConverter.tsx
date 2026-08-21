@@ -697,7 +697,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
         {formatPicker}
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           <Sparkles className="w-5 h-5 flex-shrink-0" />
           <span><strong>100% Client-Side:</strong> {pair.description}</span>
         </div>
@@ -744,7 +744,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           <button
             onClick={convertDoc}
             disabled={isProcessing || !!outputUrl}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -763,7 +763,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-              <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                 <Download className="w-16 h-16 mb-4" />
                 <p className="font-bold text-center">{pair.outputFileName(file.name)}</p>
                 <p className="text-xs text-emerald-500/80 mt-1">Converted successfully.</p>
@@ -771,7 +771,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
 
               <button
                 onClick={() => downloadOrShare(outputUrl, pair.outputFileName(file.name))}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download {pair.iconLabel} File
@@ -797,7 +797,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
                 <a
                   key={s}
                   href={`/pdf/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
                 >
                   {p.iconLabel} {p.actionLabel}
                 </a>

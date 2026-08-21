@@ -78,7 +78,7 @@ export default function ImageResizer() {
          )}
 
          {image && (
-           <button onClick={download} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+           <button onClick={download} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
              Download Resized Image
            </button>
          )}

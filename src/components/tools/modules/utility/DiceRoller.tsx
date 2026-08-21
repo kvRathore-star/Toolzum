@@ -56,7 +56,7 @@ export default function DiceRoller() {
           <button 
             onClick={rollDices} 
             disabled={isRolling}
-            className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold px-8 py-3 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
+            className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-8 py-3 rounded-xl text-xs flex items-center gap-2 cursor-pointer shadow-lg disabled:opacity-50"
           >
             <RefreshCw className={`w-4 h-4 ${isRolling ? 'animate-spin' : ''}`} />
             Roll Dices

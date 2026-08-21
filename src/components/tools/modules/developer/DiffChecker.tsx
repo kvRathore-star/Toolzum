@@ -81,7 +81,7 @@ export default function DiffChecker() {
           <button
             onClick={handleDiffCheck}
             disabled={isProcessing}
-            className="flex-1 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-xs"
+            className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-xs"
           >
             <ArrowLeftRight className="w-4 h-4" />
             {isProcessing ? <>
@@ -114,7 +114,7 @@ export default function DiffChecker() {
                   return (
                     <span 
                       key={idx} 
-                      className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-bold border-b border-emerald-500/35 px-1 py-0.5 rounded"
+                      className="bg-emerald-700/20 text-emerald-600 dark:text-emerald-400 font-bold border-b border-emerald-500/35 px-1 py-0.5 rounded"
                       title="Added"
                     >
                       {textVal}
@@ -136,7 +136,7 @@ export default function DiffChecker() {
 
             <div className="flex gap-4 text-[10px] text-[var(--text-secondary)] justify-center">
               <div className="flex items-center gap-1">
-                <div className="w-3 h-3 bg-emerald-500/20 border border-emerald-500/30 rounded" />
+                <div className="w-3 h-3 bg-emerald-700/20 border border-emerald-500/30 rounded" />
                 <span>Addition (Inserted)</span>
               </div>
               <div className="flex items-center gap-1">

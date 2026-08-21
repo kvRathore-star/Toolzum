@@ -31,7 +31,7 @@ const RELEASES: Release[] = [
     date: "July 25, 2026",
     title: "Accurate Tool Counts — Hidden Redirects No Longer Inflate Directory Numbers",
     tag: "minor",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     description: "Fixed a significant counting discrepancy across the tools directory. The header claimed '1090+ Free Online Tools' while the results counter showed only '856' — a 234-tool gap caused by hidden SEO redirect stubs (format-pair variants like 'MKV to WEBM') being counted in the total but excluded from the visible results. Now every count on the page — header, subtitle, category sidebars, and results — reflects only tools actually shown.",
     updates: [
       { type: "fix", text: "Header 'X+ Free Online Tools' and subtitle now use the same visible-only count as the results list — no more 234-tool gap between header and results." },
@@ -45,7 +45,7 @@ const RELEASES: Release[] = [
     date: "July 07, 2026",
     title: "Premium UX Overhaul, Indian Utilities & Calculator Shell",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Major premium interface upgrade across the entire platform. CalculatorShell deployed across 80+ calculators with history, keyboard shortcuts, and one-click copy. Three flagship premium tools launched: SaaS Metrics Dashboard with KPI charts and scenario modeling, API Builder/Tester with Postman-lite collections, and PDF Workflow Builder for merge/split/form-fill. Indian Utilities category completed with 5 new tools. All remaining tool modules upgraded to premium UI. CSS variable system migrated across all 359 tool modules.",
     updates: [
       { type: "feature", text: "CalculatorShell framework created and deployed across 80+ calculators — history panel, keyboard support, result memory, and one-click copy. Scientific Calculator rebuilt with full grid layout." },
@@ -68,7 +68,7 @@ const RELEASES: Release[] = [
     date: "June 23, 2026",
     title: "Registry Expansion, Toolkit Audit & Production Hardening",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Tool catalog expanded to 831 entries with full cross-reference audit across all routing paths. 15/15 composite toolkit bundles audited, refactored, and deduplicated — 5 retired into LinkCard hubs. Production hardening: CSP headers, IndexNow, dynamic sitemap, content integrity test suite with pre-push hooks. 83 format-pair redirect URLs deployed, 62 previously hidden tools restored. Bulk tool BatchProgressPanel retrofitted across 31 modules. SEO category sections with server-side H2 groupings.",
     updates: [
       { type: "feature", text: "Full cross-reference audit: 689 MODULE_REGISTRY entries + 256 CONVERTER_CONFIG entries + 17 SEO_PERMUTATIONS = 955 coverage slots covering 831 tool slugs with zero orphans and zero gaps." },
@@ -94,7 +94,7 @@ const RELEASES: Release[] = [
     date: "June 15, 2026",
     title: "830 Tools — Full Registry Coverage, Zero Orphans",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Tool catalog doubled from ~430 to 831 tools. Every tool slug now routes to a real component — zero 'Coming Soon' pages, zero orphaned module keys, zero uncovered slugs. All dynamic routing paths (MODULE_REGISTRY, CONVERTER_CONFIG, SEO_PERMUTATIONS) cross-referenced and verified complete. Subcategory pills fixed across all 15 tool categories. Format converter consolidation finalized with all 256 converterConfig entries.",
     updates: [
       { type: "feature", text: "400+ new tool entries added to the registry — total catalog grows from ~430 to 831 tools across 20 categories. Every new tool has a unique slug, ID, description, and module binding." },
@@ -120,7 +120,7 @@ const RELEASES: Release[] = [
     date: "May 26, 2026",
     title: "Category Navigation Overhaul & CPM Suite",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Major navigation upgrades: category filters across all tool categories, A-Z alphabetical tool filter, and dynamic recently-used tools in the megamenu. Fixed critical navigation bug where 'Back to Privacy' linked to Privacy Policy instead of Privacy tools. Added CPM Calculator with 7 platform presets (YouTube, Twitch, Facebook, Instagram, TikTok, Twitter/X, LinkedIn) plus RPM (Revenue Per Mille) mode for creators.",
     updates: [
       { type: "feature", text: "CPM Calculator rewritten with platform presets for 7 social platforms — each pre-fills typical CPM/RPM averages. RPM mode toggle for creator earnings analysis." },
@@ -139,7 +139,7 @@ const RELEASES: Release[] = [
     date: "May 15, 2026",
     title: "250 Format Pair Converter Pages & Tool Differentiation",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Full format-pair coverage: all 250 directed converter pairs across image, audio, video, document, and data formats now have individual SEO-optimized pages. Every pair page has format-specific usage instructions and conversion-reason FAQs. Tool differentiation applied to 20+ high-traffic tools with unique descriptions, custom how-to steps, and cross-tool comparison FAQs.",
     updates: [
       { type: "feature", text: "250 format-pair converter pages completed: 110 image pairs, 72 audio pairs, 42 document pairs, 20 video pairs, 6 data pairs — each with unique slug, SEO metadata, instructions, and FAQs." },
@@ -155,7 +155,7 @@ const RELEASES: Release[] = [
     date: "April 20, 2026",
     title: "Launch Readiness — CORS, D1 Database, Mobile UX & SEO Overhaul",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Production hardening across the entire platform. CORS middleware locked to toolzum.com, remote D1 database provisioned with migrations, mobile responsiveness fixes across all tool layouts, and SEO metadata rewritten for search intent alignment. Every tool module audited and patched for production readiness.",
     updates: [
       { type: "security", text: "CORS middleware restricted to toolzum.com only — staging and localhost origins removed from production." },
@@ -176,7 +176,7 @@ const RELEASES: Release[] = [
     date: "March 24, 2026",
     title: "Fault-Tolerant Bulk Processing — No More Crashing on Bad Files",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Bulk processing now handles faults gracefully. Process 50 files at once — if one is corrupted or too large, Toolzum auto-skips it, keeps processing the rest, and flags the failure at the end. No more restarting entire batches.",
     demo: "fault-tolerance",
     updates: [
@@ -191,7 +191,7 @@ const RELEASES: Release[] = [
     date: "March 13, 2026",
     title: "30 Bulk Tools Complete — Batch Video, Audio & Document Processing",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "All 30 bulk processing modules are now live. Compress videos, reduce file sizes, burn subtitles, convert images to PDF, merge documents, run OCR, and more — all in your browser with zero uploads. Pro users unlock 6x parallel processing and ZIP downloads.",
     demo: "batch-processing",
     updates: [
@@ -206,7 +206,7 @@ const RELEASES: Release[] = [
     date: "February 11, 2026",
     title: "Enterprise Trust, Compliance & Full Office Suite — 230+ Tools",
     tag: "major",
-    tagColor: "bg-[var(--accent)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: `The biggest expansion yet — ${toolsRegistry.length}+ tools across 21 categories plus enterprise-ready security. Published a dedicated /security page, CSP headers for XSS prevention, offline mode indicator, and zero-data retention badges across all upload zones.`,
     demo: "tool-expansion",
     updates: [
@@ -223,7 +223,7 @@ const RELEASES: Release[] = [
     date: "January 09, 2026",
     title: "Business Finance & Developer Toolbox",
     tag: "minor",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     description: "Expanded the finance and developer tool categories with SaaS metrics, currency exchange, code formatting, and offline caching for persistent access.",
     updates: [
       { type: "feature", text: "Business finance suite: SaaS pricing calculator, employee turnover tracker, ROI simulator, and localized currency exchange rates." },
@@ -236,7 +236,7 @@ const RELEASES: Release[] = [
     date: "December 15, 2025",
     title: "Platform Launch — Privacy-First Web Utilities",
     tag: "launch",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
     description: "Toolzum launched with a simple premise: every tool should run in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
     updates: [
       { type: "feature", text: "Initial catalog of 50 tools: hashing, text processing, image compression, format conversion, and random generators." },
@@ -248,7 +248,7 @@ const RELEASES: Release[] = [
     date: "November 18, 2025",
     title: "Tool Expansion & User Feedback Integration",
     tag: "minor",
-    tagColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     description: "Doubled the tool catalog based on closed-beta feedback. Added image editing, PDF manipulation, QR code generation, and text utilities. Razorpay integration stabilized for Indian subscriptions.",
     updates: [
       { type: "feature", text: "Expanded catalog from 25 to 50 tools: image resizer, PDF merger, QR code generator, password generator, JSON formatter, and base64 encoder/decoder." },
@@ -262,7 +262,7 @@ const RELEASES: Release[] = [
     date: "October 12, 2025",
     title: "Private Beta — Foundation & Core Architecture",
     tag: "launch",
-    tagColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
     description: "Closed beta launch with the core architecture: client-side WASM processing engine, PDF.js integration, FFmpeg WASM for media, and the initial 25 tools. Pro subscription model and Razorpay/DodoPayments integration established.",
     updates: [
       { type: "feature", text: "Core WASM processing engine: PDF.js, FFmpeg WASM, and Tesseract.js integrated for fully client-side document, media, and OCR processing." },
@@ -312,7 +312,7 @@ export default function ChangelogPage() {
             onClick={() => setFilter("all")} 
             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
               filter === "all" 
-              ? "bg-[var(--accent)] text-white border-[var(--accent)]" 
+              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
               : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
             }`}
           >
@@ -322,7 +322,7 @@ export default function ChangelogPage() {
             onClick={() => setFilter("major")} 
             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
               filter === "major" 
-              ? "bg-[var(--accent)] text-white border-[var(--accent)]" 
+              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
               : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
             }`}
           >
@@ -332,7 +332,7 @@ export default function ChangelogPage() {
             onClick={() => setFilter("minor")} 
             className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
               filter === "minor" 
-              ? "bg-[var(--accent)] text-white border-[var(--accent)]" 
+              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
               : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
             }`}
           >
@@ -388,9 +388,9 @@ export default function ChangelogPage() {
                       <li key={idx} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
                         <span className="mt-1">
                           {update.type === "feature" && <Sparkles className="w-4 h-4 text-[var(--accent)] shrink-0" />}
-                          {update.type === "performance" && <ShieldCheck className="w-4 h-4 text-purple-400 shrink-0" />}
-                          {update.type === "fix" && <Wrench className="w-4 h-4 text-blue-400 shrink-0" />}
-                          {update.type === "security" && <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />}
+                          {update.type === "performance" && <ShieldCheck className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0" />}
+                          {update.type === "fix" && <Wrench className="w-4 h-4 text-blue-700 dark:text-blue-400 shrink-0" />}
+                          {update.type === "security" && <ShieldCheck className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0" />}
                         </span>
                         <span>
                           <strong className="capitalize text-[var(--text-primary)]">{update.type}: </strong>
@@ -410,7 +410,7 @@ export default function ChangelogPage() {
 
         {/* Bottom newsletter section */}
         <div className="mt-24 max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent)]/5 rounded-full blur-[80px]" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-ink)]/5 rounded-full blur-[80px]" />
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Never miss a tool update</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
             We build and deploy new offline utilities every single week. Subscribe to get our weekly release summaries.

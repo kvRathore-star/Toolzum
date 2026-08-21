@@ -633,13 +633,13 @@ export default function AiThumbnailMaker() {
             <div className="grid grid-cols-3 gap-2">
               <button 
                 onClick={() => applyPreset('clickbait')} 
-                className="py-1.5 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-rose-500/20"
+                className="py-1.5 bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-400 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-rose-500/20"
               >
                 Clickbait
               </button>
               <button 
                 onClick={() => applyPreset('neon')} 
-                className="py-1.5 bg-sky-500/10 border border-sky-500/20 text-sky-400 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-sky-500/20"
+                className="py-1.5 bg-sky-500/10 border border-sky-500/20 text-sky-700 dark:text-sky-400 rounded-lg font-semibold text-[10px] cursor-pointer hover:bg-sky-500/20"
               >
                 Neon Glow
               </button>
@@ -794,7 +794,7 @@ export default function AiThumbnailMaker() {
             <div className="grid grid-cols-2 gap-2">
               <button 
                 onClick={addTextElement}
-                className="flex items-center justify-center gap-1.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-xl text-xs cursor-pointer"
+                className="flex items-center justify-center gap-1.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-2 rounded-xl text-xs cursor-pointer"
               >
                 <Type className="w-3.5 h-3.5" />
                 Add Text

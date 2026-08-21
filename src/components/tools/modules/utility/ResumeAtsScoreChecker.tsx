@@ -96,7 +96,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
   };
 
   const scoreBg = (s: number) => {
-    if (s >= 80) return 'bg-emerald-500/10 border-emerald-500/20';
+    if (s >= 80) return 'bg-emerald-700/10 border-emerald-500/20';
     if (s >= 60) return 'bg-amber-500/10 border-amber-500/20';
     return 'bg-red-500/10 border-red-500/20';
   };

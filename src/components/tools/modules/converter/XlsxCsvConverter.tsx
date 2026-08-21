@@ -172,7 +172,7 @@ export default function XlsxCsvConverter() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>100% Client-Side Processing:</strong> Convert between Excel spreadsheets and CSV files. Perfect for data migration and analysis.
       </div>
 
@@ -293,7 +293,7 @@ export default function XlsxCsvConverter() {
       {error && (
         <div className="bg-red-950/90 border border-red-500/50 p-4 rounded-xl">
           <div className="flex items-start gap-3">
-            <svg className="w-5 h-5 text-red-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <svg className="w-5 h-5 text-red-700 dark:text-red-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
             <div className="font-mono text-sm text-red-200 whitespace-pre-wrap">{error}</div>
           </div>
         </div>
@@ -306,7 +306,7 @@ export default function XlsxCsvConverter() {
             {outputUrl && (
               <button
                 onClick={downloadOutput}
-                className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs rounded-lg transition-colors flex items-center gap-1.5"
+                className="px-4 py-1.5 bg-emerald-700 hover:bg-emerald-700 text-white text-xs rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download {direction === 'xlsx-to-csv' ? '.csv' : '.xlsx'}

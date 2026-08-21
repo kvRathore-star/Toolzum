@@ -290,7 +290,7 @@ export default function UnblurSharpen() {
   if (!sourceImage) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Unblur & Sharpen:</strong> Fix blurry photos or add artistic blur effects using on-device canvas convolution. No uploads needed.
         </div>
         <FileUploader
@@ -348,7 +348,7 @@ export default function UnblurSharpen() {
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>Intensity</span>
-              <span className="text-blue-400 font-bold">{intensity}</span>
+              <span className="text-blue-700 dark:text-blue-400 font-bold">{intensity}</span>
             </div>
             <input
               type="range" min="1" max="10" value={intensity}
@@ -361,7 +361,7 @@ export default function UnblurSharpen() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                 <span>Angle</span>
-                <span className="text-blue-400 font-bold">{angle}°</span>
+                <span className="text-blue-700 dark:text-blue-400 font-bold">{angle}°</span>
               </div>
               <input
                 type="range" min="0" max="360" value={angle}
@@ -458,7 +458,7 @@ export default function UnblurSharpen() {
                     const ext = extensionMap[format];
                     downloadOrShare(outputUrl, `processed_${sourceFile?.name?.replace(/\.[^/.]+$/, '') || 'image'}.${ext}`);
                   }}
-                  className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-6 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg flex items-center gap-2 text-sm"
+                  className="bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg flex items-center gap-2 text-sm"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download

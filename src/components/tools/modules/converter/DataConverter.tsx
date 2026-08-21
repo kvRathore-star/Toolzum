@@ -326,7 +326,7 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
               <button
                 onClick={downloadOutput}
                 disabled={!output}
-                className="text-xs bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
               >
                 Save .{FORMAT_EXT[dstFormat]}
               </button>
@@ -355,7 +355,7 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
               <Link
                 key={p.slug}
                 href={`/converter/${p.slug}`}
-                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all"
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
               >
                 {p.input} → {p.output}
               </Link>

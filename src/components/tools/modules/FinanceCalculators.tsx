@@ -64,8 +64,8 @@ export function MortgageCalculator() {
                 {amort.slice(0, 10).map(row => (
                   <tr key={row.year} className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)]/50">
                     <td className="px-3 py-1.5 text-[var(--text-primary)] font-medium">{row.year}</td>
-                    <td className="px-3 py-1.5 text-right text-green-400">${row.principal.toLocaleString()}</td>
-                    <td className="px-3 py-1.5 text-right text-red-400">${row.interest.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 text-right text-green-700 dark:text-green-400">${row.principal.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 text-right text-red-700 dark:text-red-400">${row.interest.toLocaleString()}</td>
                     <td className="px-3 py-1.5 text-right text-[var(--text-secondary)]">${row.balance.toLocaleString()}</td>
                   </tr>
                 ))}
@@ -110,7 +110,7 @@ export function ArrCalculator() {
         <div className="space-y-2">
           {[
             { label: 'Subscriptions', value: parseFloat(subRev) || 0, color: 'bg-indigo-500' },
-            { label: 'Expansion', value: parseFloat(expRev) || 0, color: 'bg-emerald-500' },
+            { label: 'Expansion', value: parseFloat(expRev) || 0, color: 'bg-emerald-700' },
             { label: 'Churn', value: -(parseFloat(churnRev) || 0), color: 'bg-red-500' },
           ].map(bar => (
             <div key={bar.label}>
@@ -126,7 +126,7 @@ export function ArrCalculator() {
           <div className="pt-2 border-t border-[var(--border-subtle)]">
             <div className="flex justify-between text-sm font-bold">
               <span className="text-[var(--text-primary)]">ARR</span>
-              <span className="text-indigo-400">${arr.toLocaleString()}</span>
+              <span className="text-indigo-700 dark:text-indigo-400">${arr.toLocaleString()}</span>
             </div>
           </div>
         </div>
@@ -185,8 +185,8 @@ export function CompoundInterestCalculator() {
                 {yearData.map(row => (
                   <tr key={row.year} className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)]/50">
                     <td className="px-3 py-1.5 text-[var(--text-primary)] font-medium">{row.year}</td>
-                    <td className="px-3 py-1.5 text-right text-indigo-400 font-medium">${row.value.toLocaleString()}</td>
-                    <td className="px-3 py-1.5 text-right text-emerald-400">${row.interest.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 text-right text-indigo-700 dark:text-indigo-400 font-medium">${row.value.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 text-right text-emerald-700 dark:text-emerald-400">${row.interest.toLocaleString()}</td>
                     <td className="px-3 py-1.5 text-right">
                       <div className="inline-flex items-center gap-1">
                         <div className="w-16 h-1.5 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
@@ -240,7 +240,7 @@ export function CarLoanCalculator() {
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="flex items-center justify-center gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-indigo-400">${pmt.toFixed(0)}</div>
+              <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${pmt.toFixed(0)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">per month</div>
             </div>
             <div className="h-12 w-px bg-[var(--border-subtle)]" />
@@ -250,7 +250,7 @@ export function CarLoanCalculator() {
             </div>
             <div className="h-12 w-px bg-[var(--border-subtle)]" />
             <div className="text-center">
-              <div className="text-lg font-bold text-emerald-400">${(pmt * n - p).toFixed(0)}</div>
+              <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">${(pmt * n - p).toFixed(0)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">total interest</div>
             </div>
           </div>
@@ -296,7 +296,7 @@ export function CarLeaseCalculator() {
       {result && monthly > 0 && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
           <div className="text-center mb-3">
-            <div className="text-3xl font-bold text-amber-400">${monthly.toFixed(0)}</div>
+            <div className="text-3xl font-bold text-amber-700 dark:text-amber-400">${monthly.toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">monthly lease payment</div>
           </div>
           <div className="flex gap-3">
@@ -306,7 +306,7 @@ export function CarLeaseCalculator() {
             </div>
             <div className="flex-1 bg-[var(--bg-elevated)] rounded-lg p-3 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">APR</div>
-              <div className="text-sm font-bold text-amber-400">{((parseFloat(mf) || 0) * 2400).toFixed(2)}%</div>
+              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{((parseFloat(mf) || 0) * 2400).toFixed(2)}%</div>
             </div>
             <div className="flex-1 bg-[var(--bg-elevated)] rounded-lg p-3 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Total</div>
@@ -352,7 +352,7 @@ export function ChurnRateCalculator() {
           <div>
             <div className="flex justify-between text-xs mb-1">
               <span className="text-[var(--text-secondary)]">Churn</span>
-              <span className="text-red-400 font-medium">{churnPct.toFixed(1)}%</span>
+              <span className="text-red-700 dark:text-red-400 font-medium">{churnPct.toFixed(1)}%</span>
             </div>
             <div className="h-3 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full transition-all duration-500" style={{ width: `${Math.min(churnPct, 100)}%` }} />
@@ -361,7 +361,7 @@ export function ChurnRateCalculator() {
           <div>
             <div className="flex justify-between text-xs mb-1">
               <span className="text-[var(--text-secondary)]">Retention</span>
-              <span className="text-emerald-400 font-medium">{(100 - churnPct).toFixed(1)}%</span>
+              <span className="text-emerald-700 dark:text-emerald-400 font-medium">{(100 - churnPct).toFixed(1)}%</span>
             </div>
             <div className="h-3 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
               <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500" style={{ width: `${100 - Math.min(churnPct, 100)}%` }} />
@@ -403,7 +403,7 @@ export function ConversionRateCalculator() {
         <div className="space-y-2">
           <div className="flex items-center justify-between bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
             <span className="text-sm text-[var(--text-secondary)]">Conversion Rate</span>
-            <span className="text-2xl font-bold text-indigo-400">{cr.toFixed(1)}%</span>
+            <span className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{cr.toFixed(1)}%</span>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full transition-all duration-500" style={{ width: `${Math.min(cr, 100)}%` }} />
@@ -527,14 +527,14 @@ export function DiscountCalculator() {
               <div className="text-lg line-through text-[var(--text-tertiary)]">${p.toFixed(0)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">Original</div>
             </div>
-            <div className="text-2xl font-bold text-emerald-400 px-4">&#8594;</div>
+            <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-400 px-4">&#8594;</div>
             <div className="text-center flex-1">
               <div className="text-3xl font-bold text-[var(--text-primary)]">${final.toFixed(0)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">Final Price</div>
             </div>
           </div>
-          <div className="bg-emerald-500/10 rounded-lg p-2 text-center">
-            <span className="text-sm font-bold text-emerald-400">You Save ${savings.toFixed(2)} ({d}% off)</span>
+          <div className="bg-emerald-700/10 rounded-lg p-2 text-center">
+            <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">You Save ${savings.toFixed(2)} ({d}% off)</span>
           </div>
         </div>
       )}
@@ -575,10 +575,10 @@ export function HourlyToSalaryCalculator() {
       {result && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { label: 'Annual', value: `$${annual.toLocaleString()}`, color: 'text-indigo-400' },
-            { label: 'Monthly', value: `$${monthly.toLocaleString()}`, color: 'text-emerald-400' },
-            { label: 'Biweekly', value: `$${(annual / 26).toLocaleString()}`, color: 'text-amber-400' },
-            { label: 'Weekly', value: `$${(h * hpw).toLocaleString()}`, color: 'text-rose-400' },
+            { label: 'Annual', value: `$${annual.toLocaleString()}`, color: 'text-indigo-700 dark:text-indigo-400' },
+            { label: 'Monthly', value: `$${monthly.toLocaleString()}`, color: 'text-emerald-700 dark:text-emerald-400' },
+            { label: 'Biweekly', value: `$${(annual / 26).toLocaleString()}`, color: 'text-amber-700 dark:text-amber-400' },
+            { label: 'Weekly', value: `$${(h * hpw).toLocaleString()}`, color: 'text-rose-700 dark:text-rose-400' },
           ].map(card => (
             <div key={card.label} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
               <div className={`text-lg font-bold ${card.color}`}>{card.value}</div>
@@ -628,10 +628,10 @@ export function InflationCalculator() {
               <div className="text-xs text-[var(--text-tertiary)]">Today</div>
               <div className="text-2xl font-bold text-[var(--text-primary)]">${p.toFixed(0)}</div>
             </div>
-            <div className="text-2xl text-red-400">&#8594;</div>
+            <div className="text-2xl text-red-700 dark:text-red-400">&#8594;</div>
             <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">In {y} years</div>
-              <div className="text-2xl font-bold text-amber-400">${fv.toFixed(0)}</div>
+              <div className="text-2xl font-bold text-amber-700 dark:text-amber-400">${fv.toFixed(0)}</div>
             </div>
           </div>
           <div className="mt-3 h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
@@ -666,7 +666,7 @@ export function LtvCalculator() {
       {result && (
         <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>
-          <div className="text-3xl font-bold text-indigo-400">$${ltv.toFixed(0)}</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">$${ltv.toFixed(0)}</div>
         </div>
       )}
     </CalculatorShell>
@@ -701,11 +701,11 @@ export function MrrCalculator() {
       {result && (
         <div className="grid grid-cols-3 gap-3">
           <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-lg font-bold text-indigo-400">${mrr.toLocaleString()}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${mrr.toLocaleString()}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Monthly</div>
           </div>
-          <div className="bg-emerald-500/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-lg font-bold text-emerald-400">${(mrr * 12).toLocaleString()}</div>
+          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
+            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">${(mrr * 12).toLocaleString()}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Annual</div>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 text-center border border-[var(--border-subtle)]">
@@ -754,11 +754,11 @@ export function NetWorthCalculator() {
           <div className="flex items-center justify-between bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
             <div>
               <div className="text-xs text-[var(--text-tertiary)]">Net Worth</div>
-              <div className={`text-2xl font-bold ${nw >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              <div className={`text-2xl font-bold ${nw >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
                 ${nw.toLocaleString()}
               </div>
             </div>
-            <div className={`px-3 py-1 rounded-lg text-xs font-bold ${dti <= 30 ? 'bg-emerald-500/20 text-emerald-400' : dti <= 50 ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'}`}>
+            <div className={`px-3 py-1 rounded-lg text-xs font-bold ${dti <= 30 ? 'bg-emerald-700/20 text-emerald-700 dark:text-emerald-400' : dti <= 50 ? 'bg-amber-500/20 text-amber-700 dark:text-amber-400' : 'bg-red-500/20 text-red-700 dark:text-red-400'}`}>
               {dti.toFixed(0)}% DTI
             </div>
           </div>
@@ -808,9 +808,9 @@ export function NpsCalculator() {
   return (
     <CalculatorShell title="Net Promoter Score" result={result} onCalculate={calc} presets={presets} accent="red">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-emerald-400 mb-1.5">Promoters (9-10)</label><input type="number" value={promoters} onChange={e => setPromoters(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-amber-400 mb-1.5">Passives (7-8)</label><input type="number" value={passives} onChange={e => setPassives(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-red-400 mb-1.5">Detractors (0-6)</label><input type="number" value={detractors} onChange={e => setDetractors(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-emerald-700 dark:text-emerald-400 mb-1.5">Promoters (9-10)</label><input type="number" value={promoters} onChange={e => setPromoters(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-amber-700 dark:text-amber-400 mb-1.5">Passives (7-8)</label><input type="number" value={passives} onChange={e => setPassives(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-red-700 dark:text-red-400 mb-1.5">Detractors (0-6)</label><input type="number" value={detractors} onChange={e => setDetractors(e.target.value)} className={inputCls} /></div>
       </div>
       {result && total > 0 && (
         <div className="space-y-3">
@@ -819,7 +819,7 @@ export function NpsCalculator() {
             <div className="text-sm text-[var(--text-tertiary)]">out of -100 to +100</div>
           </div>
           <div className="flex h-8 rounded-full overflow-hidden">
-            <div className="bg-emerald-500 transition-all duration-500 flex items-center justify-center text-xs font-bold text-white" style={{ width: `${pctPromo}%` }}>{pctPromo >= 15 ? `${pctPromo.toFixed(0)}%` : ''}</div>
+            <div className="bg-emerald-700 transition-all duration-500 flex items-center justify-center text-xs font-bold text-white" style={{ width: `${pctPromo}%` }}>{pctPromo >= 15 ? `${pctPromo.toFixed(0)}%` : ''}</div>
             <div className="bg-amber-500 transition-all duration-500 flex items-center justify-center text-xs font-bold text-white" style={{ width: `${100 - pctPromo - pctDet}%` }}>{100 - pctPromo - pctDet >= 15 ? `${(100 - pctPromo - pctDet).toFixed(0)}%` : ''}</div>
             <div className="bg-red-500 transition-all duration-500 flex items-center justify-center text-xs font-bold text-white" style={{ width: `${pctDet}%` }}>{pctDet >= 15 ? `${pctDet.toFixed(0)}%` : ''}</div>
           </div>
@@ -883,17 +883,17 @@ export function RentVsBuyCalculator() {
       {result && (
         <div className="space-y-3">
           <div className="flex h-20 gap-3">
-            <div className="flex-1 bg-emerald-500/10 rounded-xl border border-emerald-500/20 p-3 flex flex-col justify-center items-center">
+            <div className="flex-1 bg-emerald-700/10 rounded-xl border border-emerald-500/20 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Buy Net Cost</div>
-              <div className="text-xl font-bold text-emerald-400">${buyNet.toFixed(0)}</div>
+              <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">${buyNet.toFixed(0)}</div>
             </div>
             <div className="flex-1 bg-amber-500/10 rounded-xl border border-amber-500/20 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Rent Total</div>
-              <div className="text-xl font-bold text-amber-400">${rentTotal.toFixed(0)}</div>
+              <div className="text-xl font-bold text-amber-700 dark:text-amber-400">${rentTotal.toFixed(0)}</div>
             </div>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden flex">
-            <div className="h-full bg-emerald-500 transition-all duration-500" style={{ width: `${Math.min(buyPct, 100)}%` }} />
+            <div className="h-full bg-emerald-700 transition-all duration-500" style={{ width: `${Math.min(buyPct, 100)}%` }} />
             <div className="h-full bg-amber-500 transition-all duration-500" style={{ width: `${100 - Math.min(buyPct, 100)}%` }} />
           </div>
           <div className="flex justify-between text-xs text-[var(--text-tertiary)]">
@@ -955,7 +955,7 @@ export function RetirementCalculator() {
         <div className="space-y-3">
           <div className="bg-indigo-500/10 rounded-xl p-4 text-center border border-indigo-500/20">
             <div className="text-xs text-[var(--text-tertiary)]">Retirement Nest Egg</div>
-            <div className="text-3xl font-bold text-indigo-400">${fv.toLocaleString()}</div>
+            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${fv.toLocaleString()}</div>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
@@ -964,11 +964,11 @@ export function RetirementCalculator() {
             </div>
             <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Growth</div>
-              <div className="text-sm font-bold text-emerald-400">${growth.toLocaleString()}</div>
+              <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400">${growth.toLocaleString()}</div>
             </div>
             <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Growth %</div>
-              <div className="text-sm font-bold text-amber-400">{growthPct.toFixed(0)}%</div>
+              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{growthPct.toFixed(0)}%</div>
             </div>
           </div>
         </div>
@@ -1012,7 +1012,7 @@ export function RevenueGrowthCalculator() {
               <div className="text-xs text-[var(--text-tertiary)]">Previous</div>
               <div className="text-lg font-bold text-[var(--text-primary)]">${p.toLocaleString()}</div>
             </div>
-            <div className={`text-2xl font-bold ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
+            <div className={`text-2xl font-bold ${isPositive ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
               {isPositive ? '\u2191' : '\u2193'} {Math.abs(growth).toFixed(1)}%
             </div>
             <div className="text-center">
@@ -1021,7 +1021,7 @@ export function RevenueGrowthCalculator() {
             </div>
           </div>
           <div className="mt-3 h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className={`h-full rounded-full transition-all duration-500 ${isPositive ? 'bg-emerald-500' : 'bg-red-500'}`} style={{ width: `${Math.min(Math.abs(growth), 100)}%` }} />
+            <div className={`h-full rounded-full transition-all duration-500 ${isPositive ? 'bg-emerald-700' : 'bg-red-500'}`} style={{ width: `${Math.min(Math.abs(growth), 100)}%` }} />
           </div>
         </div>
       )}
@@ -1070,7 +1070,7 @@ export function RunwayCalculator() {
             </div>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className={`h-full rounded-full transition-all duration-500 ${runwayPct > 50 ? 'bg-emerald-500' : runwayPct > 25 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${runwayPct}%` }} />
+            <div className={`h-full rounded-full transition-all duration-500 ${runwayPct > 50 ? 'bg-emerald-700' : runwayPct > 25 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${runwayPct}%` }} />
           </div>
         </div>
       )}
@@ -1150,7 +1150,7 @@ export function SavingsCalculator() {
         <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">
             <thead className="sticky top-0 bg-[var(--bg-overlay)]"><tr className="text-[var(--text-tertiary)]"><th className="text-left px-3 py-2">Year</th><th className="text-right px-3 py-2">Balance</th><th className="text-right px-3 py-2">Contributions</th><th className="text-right px-3 py-2">Interest</th></tr></thead>
-            <tbody>{schedule.map(r => <tr key={r.year} className="border-b border-[var(--border-subtle)]"><td className="px-3 py-1.5 text-[var(--text-primary)]">{r.year}</td><td className="px-3 py-1.5 text-right text-emerald-400">${r.balance.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-[var(--text-secondary)]">${r.contributions.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-amber-400">${r.interest.toLocaleString()}</td></tr>)}</tbody>
+            <tbody>{schedule.map(r => <tr key={r.year} className="border-b border-[var(--border-subtle)]"><td className="px-3 py-1.5 text-[var(--text-primary)]">{r.year}</td><td className="px-3 py-1.5 text-right text-emerald-700 dark:text-emerald-400">${r.balance.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-[var(--text-secondary)]">${r.contributions.toLocaleString()}</td><td className="px-3 py-1.5 text-right text-amber-700 dark:text-amber-400">${r.interest.toLocaleString()}</td></tr>)}</tbody>
           </table>
         </div>
       )}

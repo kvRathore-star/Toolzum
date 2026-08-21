@@ -100,7 +100,7 @@ export default function VideoCompressor() {
     }
     return (
       <div className="flex flex-col items-center justify-center p-12 space-y-4">
-        <svg className="w-12 h-12 text-blue-500 animate-spin" fill="none" viewBox="0 0 24 24">
+        <svg className="w-12 h-12 text-blue-700 dark:text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
@@ -117,7 +117,7 @@ export default function VideoCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>100% Client-Side:</strong> Compress videos and GIFs directly in your browser — nothing uploaded.
         </div>
 
@@ -125,7 +125,7 @@ export default function VideoCompressor() {
         <div className="flex gap-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-1 w-fit mx-auto">
           <button
             onClick={() => setMode('video')}
-            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'video' ? 'bg-[var(--accent)] text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
+            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'video' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}
           >
             Video
           </button>
@@ -174,7 +174,7 @@ export default function VideoCompressor() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Compression Level</label>
-                  <span className="text-xs font-bold text-blue-500">{crf === 23 ? 'High Quality' : crf >= 32 ? 'Low Quality' : 'Balanced'} (CRF {crf})</span>
+                  <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crf === 23 ? 'High Quality' : crf >= 32 ? 'Low Quality' : 'Balanced'} (CRF {crf})</span>
                 </div>
                 <input
                   type="range" min="20" max="40" step="1" value={crf}
@@ -213,7 +213,7 @@ export default function VideoCompressor() {
           <div className="pt-4 border-t border-[var(--border-subtle)]">
             {isProcessing ? (
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-bold text-blue-500">
+                <div className="flex justify-between text-xs font-bold text-blue-700 dark:text-blue-400">
                   <span>{mode === 'video' ? 'Compressing Video...' : 'Optimizing GIF...'}</span>
                   <span>{progress}%</span>
                 </div>
@@ -259,7 +259,7 @@ export default function VideoCompressor() {
               )}
               <button
                 onClick={() => downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^/.]+$/, "")}.${mode === 'video' ? 'mp4' : 'gif'}`)}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download Compressed {mode === 'video' ? 'Video' : 'GIF'}

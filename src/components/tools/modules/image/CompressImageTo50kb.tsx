@@ -96,8 +96,8 @@ export default function CompressImageTo50kb() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-400 text-sm flex items-start gap-2.5">
-          <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2.5">
+          <AlertTriangle className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
           <div>
             <strong>Strict 50KB Portal Limit:</strong> This utility is pre-configured to automatically adjust file weights to fit exactly under the 50KB restriction required by NSDL, UIDAI, UPSC, and banking portals.
           </div>
@@ -144,7 +144,7 @@ export default function CompressImageTo50kb() {
           <button
             onClick={handleCompress}
             disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -175,7 +175,7 @@ export default function CompressImageTo50kb() {
             {compressedUrl && compressedSize ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 <Download className="w-5 h-5" />
                 Download ({(compressedSize / 1024).toFixed(1)} KB)

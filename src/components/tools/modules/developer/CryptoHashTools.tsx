@@ -89,7 +89,7 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
         <Input label="Passphrase" type="password" value={pass} onChange={setPass} placeholder="Enter passphrase..." />
         <Input label={mode === 'encrypt' ? 'Plain text' : 'Ciphertext'} value={input} onChange={setInput}
           placeholder={mode === 'encrypt' ? 'Enter text to encrypt...' : 'Paste ciphertext...'} rows={5} />
-        <button onClick={handleAction} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">
+        <button onClick={handleAction} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">
           <Shield className="w-4 h-4 inline mr-1.5" /> {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
         {result && <Output value={result} label={mode === 'encrypt' ? 'Ciphertext' : 'Decrypted text'} />}

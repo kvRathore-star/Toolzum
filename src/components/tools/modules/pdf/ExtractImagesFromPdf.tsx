@@ -142,7 +142,7 @@ export default function ExtractImagesFromPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
           <Sparkles className="w-5 h-5 flex-shrink-0" />
           <span><strong>100% Client-Side Extraction:</strong> Extract raw embedded image resource objects (illustrations, figures, photos) completely offline.</span>
         </div>
@@ -191,7 +191,7 @@ export default function ExtractImagesFromPdf() {
           <button 
             onClick={extractImages}
             disabled={isProcessing || imageCount !== null}
-            className="w-full mt-6 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <>
@@ -211,7 +211,7 @@ export default function ExtractImagesFromPdf() {
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-               <div className="bg-emerald-500/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                   <Download className="w-16 h-16 mb-4" />
                   <p className="font-bold text-center">extracted_images_{file.name.replace('.pdf', '')}.zip</p>
                   <p className="text-xs text-emerald-500/80 mt-1">Extracted {imageCount} images successfully.</p>
@@ -219,7 +219,7 @@ export default function ExtractImagesFromPdf() {
 
                <button 
                   onClick={() => downloadOrShare(outputUrl, `extracted_images_${file.name.replace('.pdf', '')}.zip`)}
-                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
                 >
                   <Download className="w-5 h-5" />
                   Download Images ZIP

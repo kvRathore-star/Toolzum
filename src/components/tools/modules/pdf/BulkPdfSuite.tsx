@@ -165,7 +165,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
       configFields={
         <div className="space-y-3">
           {opLabel && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-[var(--radius-lg)] w-fit">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--accent-ink)]/10 border border-[var(--accent)]/20 rounded-[var(--radius-lg)] w-fit">
               <span className="text-xs font-semibold text-[var(--accent)]">{opLabel}</span>
             </div>
           )}

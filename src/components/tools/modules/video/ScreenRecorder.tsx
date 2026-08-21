@@ -236,7 +236,7 @@ export default function ScreenRecorder() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
         <strong>Browser-Based Recording:</strong> Your screen is never uploaded. Everything stays on your device. Share your entire screen, a specific application window, or a browser tab.
       </div>
 
@@ -301,11 +301,11 @@ export default function ScreenRecorder() {
           <div className="flex items-center justify-center gap-3">
             {!isPaused && <span className="w-4 h-4 bg-red-500 rounded-full animate-pulse" />}
             {isPaused && (
-              <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-amber-700 dark:text-amber-400" fill="currentColor" viewBox="0 0 24 24">
                 <rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" />
               </svg>
             )}
-            <span className={`text-3xl font-mono font-bold tabular-nums ${isPaused ? 'text-amber-400' : 'text-red-500'}`}>
+            <span className={`text-3xl font-mono font-bold tabular-nums ${isPaused ? 'text-amber-700 dark:text-amber-400' : 'text-red-500'}`}>
               {isPaused ? 'Paused' : 'REC'} {formatTime(duration)}
             </span>
           </div>
@@ -343,7 +343,7 @@ export default function ScreenRecorder() {
 
           {isProcessing ? (
             <div className="space-y-3">
-              <div className="flex justify-between text-sm font-semibold text-blue-500">
+              <div className="flex justify-between text-sm font-semibold text-blue-700 dark:text-blue-400">
                 <span>Converting to MP4...</span>
                 <span>{ffmpegProgress}%</span>
               </div>

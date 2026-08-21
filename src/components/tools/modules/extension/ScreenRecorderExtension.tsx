@@ -114,7 +114,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
             />
           </div>
 
-          <button onClick={handleDownload} className="w-full mt-4 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={handleDownload} className="w-full mt-4 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
             <Download className="w-4 h-4" /> Download Extension ZIP
           </button>
         </div>
@@ -136,7 +136,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
             <textarea
               value={activeTab === 'manifest' ? manifest : activeTab === 'popupHtml' ? popupHtml : popupJs}
               readOnly
-              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
             />
           </div>
         </div>

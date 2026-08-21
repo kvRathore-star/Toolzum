@@ -350,7 +350,7 @@ export default function QrCodeGenerator() {
           <div className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner w-full">
             <canvas ref={canvasRef} className="max-w-full max-h-[300px] object-contain" />
           </div>
-          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm">
+          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-700 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm">
             <Download className="w-4 h-4" /> Download QR PNG
           </button>
         </div>

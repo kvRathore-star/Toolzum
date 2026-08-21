@@ -228,13 +228,13 @@ export default function BusinessCardMaker() {
           <div className="flex gap-4">
             <button 
               onClick={() => setActiveSide('front')} 
-              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'front' ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
+              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'front' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
             >
               Front Side
             </button>
             <button 
               onClick={() => setActiveSide('back')} 
-              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'back' ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
+              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'back' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
             >
               Back Side (Details)
             </button>
@@ -343,7 +343,7 @@ export default function BusinessCardMaker() {
             
             <button 
               onClick={downloadPDF}
-              className="bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
             >
               <FileText className="w-4 h-4" />
               Download Print PDF

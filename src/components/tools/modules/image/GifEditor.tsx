@@ -225,7 +225,7 @@ export default function GifEditor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Edit GIFs in Browser:</strong> Resize, speed up/slow down, reverse, optimize colors, or extract frames from animated GIFs. All processing runs locally via WebAssembly.
         </div>
         <FileUploader
@@ -327,7 +327,7 @@ export default function GifEditor() {
         <div className="space-y-6">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
             <div className="p-3 border-b border-[var(--border-subtle)] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-emerald-700" />
               <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Original</span>
             </div>
             <div className="bg-[radial-gradient(#ccc_1px,transparent_1px)] dark:bg-[radial-gradient(#333_1px,transparent_1px)] bg-[length:20px_20px] p-4 flex items-center justify-center min-h-[200px]">

@@ -225,7 +225,7 @@ export default function PdfToPng() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>PDF to Image:</strong> Convert PDF pages to PNG, WebP, or BMP images. Extract slides, documents, and graphics in high quality.
         </div>
         <FileUploader
@@ -240,13 +240,13 @@ export default function PdfToPng() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm flex items-start gap-3">
-        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-500" />
+      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-start gap-3">
+        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
         <span>Convert PDF pages to {format.toUpperCase()} images at your chosen DPI and color mode.</span>
       </div>
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
-          <FileText className="w-8 h-8 text-blue-500 shrink-0" />
+          <FileText className="w-8 h-8 text-blue-700 dark:text-blue-400 shrink-0" />
           <div className="min-w-0">
             <p className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
             {pdfInfo && <p className="text-sm text-[var(--text-secondary)]">{pdfInfo.pageCount} page{pdfInfo.pageCount !== 1 ? 's' : ''} &middot; {pdfInfo.fileSize}</p>}
@@ -311,12 +311,12 @@ export default function PdfToPng() {
       )}
       <div className="flex flex-col sm:flex-row gap-3">
         <button onClick={processConversion} disabled={isProcessing}
-          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all">
+          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all">
           {isProcessing ? <><RefreshCw className="w-5 h-5 animate-spin" /> Converting...</> : <><Settings className="w-5 h-5" /> Convert to {format.toUpperCase()}</>}
         </button>
         {outputUrl && (
           <button onClick={handleDownload}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all">
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all">
             <Download className="w-5 h-5" /> Download ZIP
           </button>
         )}

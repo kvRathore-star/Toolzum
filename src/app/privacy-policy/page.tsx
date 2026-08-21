@@ -55,8 +55,8 @@ export default function PrivacyPolicyPage() {
         </div>
 
         {/* Super Strength Statement */}
-        <div className="max-w-4xl mx-auto mb-12 p-6 bg-[var(--accent)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 text-[var(--accent)] text-[10px] font-mono uppercase tracking-wider mb-3">
+        <div className="max-w-4xl mx-auto mb-12 p-6 bg-[var(--accent-ink)]/5 border border-[var(--accent)]/20 rounded-[var(--radius-xl)] text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent)] text-[10px] font-mono uppercase tracking-wider mb-3">
             <ShieldAlert className="w-3 h-3" /> Privacy by Architecture, Not Policy
           </div>
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-2">
@@ -81,14 +81,14 @@ export default function PrivacyPolicyPage() {
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
-            <Database className="w-8 h-8 text-emerald-400 shrink-0" />
+            <Database className="w-8 h-8 text-emerald-700 dark:text-emerald-400 shrink-0" />
             <div>
               <h4 className="font-semibold text-sm">Local Storage ONLY</h4>
               <p className="text-xs text-[var(--text-secondary)] mt-1">Application states and preferences are cached locally inside IndexedDB.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
-            <ShieldAlert className="w-8 h-8 text-purple-400 shrink-0" />
+            <ShieldAlert className="w-8 h-8 text-purple-700 dark:text-purple-400 shrink-0" />
             <div>
               <h4 className="font-semibold text-sm">Offline Isolation</h4>
               <p className="text-xs text-[var(--text-secondary)] mt-1">All compiled WebAssembly operations execute without sending outbound API pings.</p>

@@ -84,7 +84,7 @@ export default function BulkImageConverter({ defaultConfig: extraConfig }: { def
       configFields={
         <div className="space-y-3">
           {fromParam && toParam && (
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-[var(--radius-lg)] w-fit">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--accent-ink)]/10 border border-[var(--accent)]/20 rounded-[var(--radius-lg)] w-fit">
               <span className="text-xs font-semibold text-[var(--accent)]">{fromLabel}</span>
               <ArrowRight className="w-3.5 h-3.5 text-[var(--accent)]" />
               <span className="text-xs font-semibold text-[var(--accent)]">{toLabel}</span>

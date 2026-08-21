@@ -59,7 +59,7 @@ export default function AppleMusicPreviewExtractor() {
           <button 
             onClick={startDownloadSim} 
             disabled={isDownloading}
-            className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
           >
             {isDownloading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
             {isDownloading ? `Fetching preview stream (${progress}%)...` : 'Extract Preview (M4A)'}

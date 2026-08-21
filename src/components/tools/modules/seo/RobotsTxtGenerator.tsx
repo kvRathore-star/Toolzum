@@ -98,7 +98,7 @@ export default function RobotsTxtGenerator() {
             <textarea
               value={buildRobotsTxt()}
               readOnly
-              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
             />
           </div>
         </div>

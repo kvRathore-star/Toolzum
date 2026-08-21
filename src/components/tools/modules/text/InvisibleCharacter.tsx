@@ -101,7 +101,7 @@ export default function InvisibleCharacter() {
                 onClick={() => toggleInvisible(c.id)}
                 className={`px-3 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                   selectedChars.includes(c.id)
-                    ? 'bg-[var(--accent)] text-white shadow-md'
+                    ? 'bg-[var(--accent-ink)] text-white shadow-md'
                     : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
                 }`}
                 title={c.desc}
@@ -147,7 +147,7 @@ export default function InvisibleCharacter() {
           <div className="flex items-center justify-between">
             <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Invisible Sequence</label>
             {invisibleSequence && (
-              <button onClick={handleCopyRaw} className="px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">
+              <button onClick={handleCopyRaw} className="px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">
                 Copy Raw
               </button>
             )}
@@ -164,7 +164,7 @@ export default function InvisibleCharacter() {
             {output && (
               <button
                 onClick={handleCopy}
-                className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors"
+                className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors"
               >
                 Copy
               </button>

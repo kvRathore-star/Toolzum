@@ -202,7 +202,7 @@ export default function EsignPdf() {
   if (!pdfFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-400 text-sm">
+        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
           <strong>Secure Local eSign:</strong> Sign documents directly in your browser. Your signature and document never leave your device.
         </div>
         <FileUploader 
@@ -296,8 +296,8 @@ export default function EsignPdf() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4">
-              <h4 className="text-lg font-bold text-emerald-400 mb-4">Document Signed!</h4>
+            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4">
+              <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">Document Signed!</h4>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `signed_${pdfFile.name}`)}
                 className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"

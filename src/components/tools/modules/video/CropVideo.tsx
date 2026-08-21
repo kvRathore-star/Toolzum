@@ -153,7 +153,7 @@ export default function ReelShortsMaker() {
             {outputUrl && (
               <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <video controls className="w-full rounded-xl" src={outputUrl}></video>
-                <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}_cropped.mp4`} className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all"><Download className="w-4 h-4" /> Download Cropped Video</a>
+                <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}_cropped.mp4`} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all"><Download className="w-4 h-4" /> Download Cropped Video</a>
               </div>
             )}
           </div>

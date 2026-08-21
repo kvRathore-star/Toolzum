@@ -13,7 +13,7 @@ const COMPLAINT_TYPES = [
   { id: 'bank', label: 'Bank Fraud', icon: Building, statute: 'Banking Ombudsman Scheme 2006, RBI Guidelines', color: 'bg-blue-500' },
   { id: 'telecom', label: 'Telecom Issue', icon: Smartphone, statute: 'TRAI Regulations, Telecom Consumer Protection Rules', color: 'bg-purple-500' },
   { id: 'ecommerce', label: 'E-commerce Fraud', icon: ShoppingCart, statute: 'Consumer Protection Act 2019, Legal Metrology Act', color: 'bg-red-500' },
-  { id: 'insurance', label: 'Insurance Claim', icon: Shield, statute: 'IRDAI Guidelines, Consumer Protection Act 2019', color: 'bg-emerald-500' },
+  { id: 'insurance', label: 'Insurance Claim', icon: Shield, statute: 'IRDAI Guidelines, Consumer Protection Act 2019', color: 'bg-emerald-700' },
   { id: 'realestate', label: 'Real Estate/Builder', icon: Home, statute: 'RERA Act 2016, Consumer Protection Act 2019', color: 'bg-amber-500' },
   { id: 'electricity', label: 'Electricity Bill', icon: Zap, statute: 'Electricity Act 2003, State Electricity Regulatory Commission', color: 'bg-yellow-500' },
   { id: 'water', label: 'Water Supply', icon: Droplets, statute: 'State Municipal Corporation Act, Consumer Protection Act 2019', color: 'bg-cyan-500' },
@@ -252,7 +252,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
               <span className="text-[9px] font-semibold text-red-700 dark:text-red-300">{ct.statute}</span>
             </div>
             <button onClick={() => setExpandedStatute(!expandedStatute)}
-              className="text-[9px] text-red-500 hover:text-red-400 font-semibold underline">
+              className="text-[9px] text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold underline">
               {expandedStatute ? 'Less info' : 'More info'}
             </button>
           </div>

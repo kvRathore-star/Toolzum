@@ -100,7 +100,7 @@ export default function BlurFace() {
          </div>
 
          {image && (
-           <button onClick={processFaces} disabled={isProcessing} className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+           <button onClick={processFaces} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
              {isProcessing ? "Processing..." : "Blur Faces & Download"}
            </button>
          )}
