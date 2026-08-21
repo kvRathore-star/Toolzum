@@ -3,6 +3,7 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Sun } from 'lucide-react';
 import {
   Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
   Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb,
@@ -583,7 +584,7 @@ export function HomeClient({ isIndia = false }: { isIndia?: boolean }) {
             className="flex flex-col items-center text-center mb-12"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF6B35]/10 border border-[#FF6B35]/20 text-sm font-semibold text-[#FF6B35] mb-6">
-              🇮🇳 Made for India
+              <Sun className="w-4 h-4 inline mr-1" />Made for India
             </span>
             <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] mb-3">
               Built for Bharat

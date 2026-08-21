@@ -265,10 +265,10 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
     return groups;
   }, [allCategories]);
 
-  const GROUP_ORDER = ['Media', 'India 🇮🇳', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
+  const GROUP_ORDER = ['Media', 'India', 'Text & AI', 'Developer & Tech', 'Business & Finance', 'Tools & Converters', 'Lifestyle'];
   const GROUP_ICONS: Record<string, React.ReactNode> = {
     'Media': <Image className="w-3.5 h-3.5" />,
-    'India 🇮🇳': <Sun className="w-3.5 h-3.5" />,
+    'India': <Sun className="w-3.5 h-3.5" />,
     'Text & AI': <FileText className="w-3.5 h-3.5" />,
     'Developer & Tech': <Code2 className="w-3.5 h-3.5" />,
     'Business & Finance': <Briefcase className="w-3.5 h-3.5" />,

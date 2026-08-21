@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { getMegamenuIcon } from "@/registry/megamenu-icons";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -203,7 +204,7 @@ export function Header() {
                           >
                             <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
                               <h4 className="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5 transition-colors">
-                                <span className="text-[14px]">{col.icon}</span>
+                                <span className="w-3.5 h-3.5 flex items-center justify-center">{(() => { const Ico = getMegamenuIcon(col.icon); return <Ico className="w-3.5 h-3.5" />; })()}</span>
                                 {col.title}
                                 <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
                               </h4>
@@ -244,7 +245,7 @@ export function Header() {
                           >
                             <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
                               <h4 className="text-[11px] font-semibold text-[var(--text-muted)] hover:text-[var(--accent)] uppercase tracking-[0.08em] mb-3 flex items-center gap-1.5 transition-colors">
-                                <span className="text-[14px]">{col.icon}</span>
+                                <span className="w-3.5 h-3.5 flex items-center justify-center">{(() => { const Ico = getMegamenuIcon(col.icon); return <Ico className="w-3.5 h-3.5" />; })()}</span>
                                 {col.title}
                                 <div className="h-[1px] flex-1 bg-[var(--border-subtle)]" />
                               </h4>
@@ -509,7 +510,7 @@ export function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       className="px-4 py-2.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
                     >
-                      <span className="mr-1.5">{col.icon}</span>
+                      <span className="mr-1.5 w-3.5 h-3.5 inline-flex items-center justify-center">{(() => { const Ico = getMegamenuIcon(col.icon); return <Ico className="w-3.5 h-3.5" />; })()}</span>
                       {col.title}
                     </Link>
                   ))}
