@@ -415,6 +415,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online QR Code Reader — Decode QR codes from images. Scan and extract text/URL from any QR code. ',
     dependencies: "jsQR",
     showInCategory: true,
+    faqs: [
+      { question: "What image formats can I upload?", answer: "PNG, JPG, GIF, BMP, and WebP. The tool analyzes the image pixel data to locate and decode any QR code pattern present." },
+      { question: "Can it read multiple QR codes from one image?", answer: "The tool decodes the first QR code it finds. For images with multiple QR codes, crop to the specific code you want to read before uploading." },
+      { question: "What data can a QR code contain?", answer: "Text, URLs, phone numbers, email addresses, WiFi credentials, vCards, and other encoded data. The tool displays whatever text was encoded in the QR code." },
+      { question: "Does it work with damaged QR codes?", answer: "The jsQR library has built-in error correction and can often read partially damaged or obscured QR codes, especially those encoded with high error correction level." },
+      { question: "Is my image uploaded to a server?", answer: "No. QR code decoding happens entirely in your browser using the jsQR library. Your image never leaves your device." },
+    ],
 },
   {
     id: "444",
@@ -436,9 +443,15 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
     dependencies: "none",
     showInCategory: true,
+    faqs: [
+      { question: "What information does the WHOIS lookup return?", answer: "Domain registrar name, registration and expiration dates, name servers, DNSSEC status, and the RDAP registry where the domain is managed." },
+      { question: "What's the difference between WHOIS and RDAP?", answer: "WHOIS is the legacy protocol. RDAP (Registration Data Access Protocol) is the modern replacement that provides structured JSON data and respects privacy laws by redacting personal info." },
+      { question: "Can I look up any TLD?", answer: "Most generic TLDs (.com, .net, .org) and many country-code TLDs are supported. Some ccTLDs may have limited data depending on the registry's RDAP implementation." },
+      { question: "Why is registrant contact info redacted?", answer: "GDPR and other privacy regulations require registries to hide personal contact details. The lookup shows the registrar and public data, but personal info is masked." },
+      { question: "Is the lookup query stored?", answer: "No. Queries are made directly from your browser to public RDAP servers. No search history is stored on any third-party server." },
+    ],
 },
   {
-
     id: "446",
     name: "SSL Checker",
     slug: "ssl-checker",
@@ -447,6 +460,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
     dependencies: "none",
     showInCategory: true,
+    faqs: [
+      { question: "What SSL certificate details does it show?", answer: "Certificate issuer (e.g., Let's Encrypt, DigiCert), validity period (not-before and not-after dates), days remaining until expiration, serial number, and Subject Alternative Names (SANs)." },
+      { question: "Can I check if a certificate is about to expire?", answer: "Yes. The tool shows the exact expiration date and calculates days remaining. Use this to monitor your own domains or verify a site's certificate is current." },
+      { question: "Does it check the full certificate chain?", answer: "Yes. It verifies the leaf certificate, intermediate certificates, and whether the chain connects to a trusted root CA. Broken chains or missing intermediates are flagged." },
+      { question: "What is a SAN (Subject Alternative Name)?", answer: "A SAN is an additional domain name or IP address covered by the same certificate. Many certificates secure multiple domains (e.g., example.com and www.example.com) via SANs." },
+      { question: "Is the check query stored?", answer: "No. The tool queries the domain's TLS endpoint directly from your browser. No search history or domain data is stored on any server." },
+    ],
 },
   {
     id: "447",
@@ -955,9 +975,15 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to ASCII Converter — Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. ',
     dependencies: "None",
+    faqs: [
+      { question: "What's the difference between hex and ASCII?", answer: "Hex is a base-16 representation of binary data (0-9, A-F). ASCII maps byte values to human-readable characters (letters, digits, symbols). The converter translates between the two representations." },
+      { question: "What delimiters are supported?", answer: "Space-separated (48 65 6C 6C 6F), colon-separated (48:65:6C:6C:6F), no delimiter (48656C6C6F), and comma-separated. Choose the format that matches your input." },
+      { question: "Can I convert in both directions?", answer: "Yes. Paste hex to get ASCII, or paste ASCII text to get its hex representation. The conversion updates in real time as you type." },
+      { question: "What happens with non-printable bytes?", answer: "Bytes that don't correspond to printable ASCII characters are shown as dots (.) in the ASCII output. This helps identify binary data embedded in hex strings." },
+      { question: "Is my data uploaded?", answer: "No. All conversion happens in your browser using simple byte manipulation. No data is transmitted to any server." },
+    ],
 },
   {
-
     id: "496",
     name: "URL Encoder / Decoder",
     slug: "url-encoder-decoder",

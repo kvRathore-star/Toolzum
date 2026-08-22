@@ -1652,6 +1652,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.',
     seoDescription: 'Free online Website Screenshot — Capture screenshots of any website in your browser. Multiple formats, viewport sizes, and delay options. ',
     dependencies: "html2canvas",
+    faqs: [
+      { question: "What viewport sizes can I capture?", answer: "Common presets include desktop (1920x1080), tablet (768x1024), and mobile (375x812). You can also enter custom width and height values for any screen size." },
+      { question: "What output formats are supported?", answer: "PNG (lossless, best for sharp text) and JPEG (compressed, smaller file size). Choose based on whether you need quality or smaller downloads." },
+      { question: "Why would I need a capture delay?", answer: "Some pages load content dynamically (animations, lazy-loaded images, cookie banners). A delay of 1-5 seconds lets the page fully render before the screenshot is taken." },
+      { question: "Does it capture the full page or just the viewport?", answer: "By default it captures the visible viewport. For full-page screenshots, the tool can scroll and stitch the entire page into one image." },
+      { question: "Is the website data stored?", answer: "No. The tool renders the page in your browser and captures it using html2canvas. No website content is transmitted to any server." },
+    ],
     showInCategory: true,
 },
   {
