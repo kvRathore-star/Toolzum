@@ -1632,6 +1632,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.',
     seoDescription: 'Free online MD5 & SHA Hash Generator — Compute MD5, SHA-1, SHA-256, and SHA-512 cryptographic hashes from text or file input. All processing happens in your browser, nothing is uploaded.',
     dependencies: "CryptoJS",
+    faqs: [
+      { question: "Which hash algorithms are supported?", answer: "MD5, SHA-1, SHA-256, and SHA-512. Each produces a fixed-length hash string — MD5 (32 hex chars), SHA-1 (40), SHA-256 (64), SHA-512 (128)." },
+      { question: "Can I hash files, not just text?", answer: "Yes. Paste text or upload a file. The tool computes the hash of the file contents using the CryptoJS library entirely in your browser." },
+      { question: "What's the difference between MD5 and SHA-256?", answer: "MD5 is faster but cryptographically broken — vulnerable to collision attacks. SHA-256 is secure and recommended for password hashing, digital signatures, and data integrity checks." },
+      { question: "Are the hashes salted?", answer: "No. This tool computes raw hashes. For password hashing, you should add a random salt before hashing and use a slow algorithm like bcrypt or Argon2 instead." },
+      { question: "Is my input data uploaded?", answer: "No. Hashing happens entirely in your browser using CryptoJS. Neither your text nor file contents are transmitted to any server." },
+    ],
 },
   {
 
@@ -1815,6 +1822,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.',
     seoDescription: 'Free online API Builder & Tester — Full-featured API client that runs in your browser. Make HTTP requests, save collections, generate code snippets. Privacy-first — your API keys never touch a server.',
     dependencies: "Browser API",
+    faqs: [
+      { question: "What HTTP methods are supported?", answer: "GET, POST, PUT, PATCH, DELETE, HEAD, and OPTIONS. Each method can include custom headers, query parameters, and request bodies in JSON, form-data, or raw text." },
+      { question: "Can I save API requests for later?", answer: "Yes. Save requests into collections stored in your browser's local storage. Organize by project or API, and reload them anytime without re-entering details." },
+      { question: "Does it support authentication?", answer: "Yes. Add Bearer tokens, Basic auth, API keys, or custom header-based auth. The tool includes a built-in token manager for JWT and OAuth flows." },
+      { question: "Can I generate code from my request?", answer: "Yes. Generate equivalent code snippets in cURL, Fetch API, and Axios — copy-paste ready for your project. The generated code matches your exact request configuration." },
+      { question: "Are my API keys and tokens stored on a server?", answer: "No. Everything runs in your browser using the Fetch API. Your request data, headers, and tokens never leave your device." },
+    ],
 },
   {
     id: "196",

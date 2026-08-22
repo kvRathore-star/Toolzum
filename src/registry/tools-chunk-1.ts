@@ -642,8 +642,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Font Subsetter — Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. ',
     dependencies: "opentype.js, jszip",
-  
-    },
+    faqs: [
+      { question: "What font formats can I convert?", answer: "Input: TTF and OTF. Output: WOFF2 (modern web font format with Brotli compression). The subsetter strips unused glyphs to dramatically reduce file size." },
+      { question: "How does character subsetting work?", answer: "The tool analyzes which Unicode characters your text actually uses, then generates a font file containing only those glyphs. A font supporting 20 languages can shrink from 2MB to 200KB." },
+      { question: "What does the @font-face CSS output do?", answer: "It generates the CSS @font-face declaration with the correct src, font-weight, and font-style properties — ready to paste into your stylesheet to load the subsetted font." },
+      { question: "Can I subset multiple fonts at once?", answer: "Yes. Upload several TTF/OTF files and process them in batch. Each font gets its own subsetted WOFF2 file and CSS declaration." },
+      { question: "Is my font file uploaded?", answer: "No. Font parsing and subsetting happen entirely in your browser using opentype.js. Your font files never leave your device." },
+    ],
+},
   {
     id: "301",
     name: "Bulk Subtitle Time-Shifter",
@@ -662,7 +668,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Regex Extractor & Replacer — Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. ',
     dependencies: "Vanilla JS, jszip",
-  
+    faqs: [
+      { question: "What can I search for?", answer: "Any regex pattern — IP addresses, API keys, email addresses, URLs, error messages, or custom patterns. The visual builder helps construct patterns without writing regex manually." },
+      { question: "How many files can I process at once?", answer: "Upload an entire folder or ZIP archive containing hundreds or thousands of files. The tool scans every file and aggregates matches across the entire batch." },
+      { question: "Can I replace matches, not just extract?", answer: "Yes. Switch to replace mode, enter your replacement string (which can include capture group references like $1), and the tool replaces all matches across all files." },
+      { question: "Does the visual regex builder support capture groups?", answer: "Yes. The builder lets you define named and numbered capture groups visually. The extracted groups are shown separately in the results for easy copy-paste." },
+      { question: "Are my files uploaded during scanning?", answer: "No. All scanning happens locally in your browser. Files are read from your device using the File API and never transmitted anywhere." },
+    ],
     },
   {
     id: "303",
@@ -766,6 +778,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
     seoDescription: "Free online Domain Availability Checker — Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names. No signup required.",
     dependencies: "DNS API",
+    faqs: [
+      { question: "Which TLDs does it check?", answer: "Major TLDs including .com, .net, .org, .io, .dev, .co, .app, and more. The checker queries DNS records to determine if a domain is registered or available." },
+      { question: "How accurate are the results?", answer: "Results are based on DNS queries and WHOIS data. A domain showing as 'available' may still be registered but not actively hosted — always verify with a registrar before purchasing." },
+      { question: "Can I check multiple domains at once?", answer: "Yes. Enter a base name and the tool checks it across all supported TLDs simultaneously, showing availability status for each extension in a single table." },
+      { question: "Does it suggest alternative names?", answer: "Yes. If your preferred domain is taken, the tool suggests available alternatives with different TLDs or slight name variations." },
+      { question: "Is the lookup data stored?", answer: "No. DNS queries are made directly from your browser. No domain search history is stored or transmitted to any third party." },
+    ],
 },
   {
     id: "auto-10051",
