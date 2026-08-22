@@ -753,11 +753,35 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
         : `Yes. After the initial page load, ${tool.name} runs entirely on your device with no internet connection needed. All processing is done locally.`
     });
   }
-  const faqs = [
+  const rawFaqs = [
     ...(formatFaq ? [formatFaq] : []),
     ...inputTypeFaqs,
     ...baseFaqs,
   ];
+  const topicPatterns: [RegExp, string][] = [
+    [/offline/i, "offline"],
+    [/\bfree\b/i, "free"],
+    [/\bmobile\b/i, "mobile"],
+    [/privacy|private|stored|uploaded/i, "privacy"],
+    [/limit|size|large/i, "limits"],
+    [/accurate|precision|decimal/i, "accuracy"],
+    [/speed|fast|slow|long/i, "speed"],
+    [/sign.?up|register|account/i, "registration"],
+    [/safe|security|encrypt/i, "security"],
+  ];
+  const seenTopics = new Set<string>();
+  const faqs = rawFaqs.filter((faq) => {
+    let topic = "";
+    for (const [pattern, label] of topicPatterns) {
+      if (pattern.test(faq.question)) { topic = label; break; }
+    }
+    if (!topic) {
+      topic = faq.question.toLowerCase().replace(/[^a-z0-9]/g, "").substring(0, 30);
+    }
+    if (seenTopics.has(topic)) return false;
+    seenTopics.add(topic);
+    return true;
+  });
 
   return (
     <div className="w-full mt-16 text-left space-y-16 border-t border-[var(--border-subtle)] pt-16">
