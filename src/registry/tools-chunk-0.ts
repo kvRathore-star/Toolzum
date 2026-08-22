@@ -801,6 +801,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Diff Checker — Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. ',
     dependencies: "diff-match-patch",
+    faqs: [
+      { question: "What types of differences does it highlight?", answer: "Insertions (new lines added), deletions (lines removed), and modifications (changed lines) are each highlighted with distinct background colors so you can spot every difference at a glance." },
+      { question: "Is there a limit on text size?", answer: "There's no hard limit. Very large texts (100KB+) may take a moment to compare, but the diff-match-patch algorithm handles substantial inputs efficiently." },
+      { question: "Can I compare code files?", answer: "Yes. Paste any text — code, config files, documentation, or plain text. The tool compares line-by-line and highlights exactly what changed between the two versions." },
+      { question: "Does it work offline?", answer: "Yes. After the initial page load, the comparison runs entirely in your browser using the diff-match-patch library. No data is sent to any server." },
+      { question: "Can I copy the diff results?", answer: "The highlighted comparison is displayed visually. You can select and copy the text from either panel, or take a screenshot of the side-by-side view." },
+    ],
 },
   {
     id: "74",
@@ -821,6 +828,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.',
     seoDescription: 'Free online IP Address Lookup — Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. ',
     dependencies: "MaxMind / IP-API",
+    faqs: [
+      { question: "What information does the IP lookup show?", answer: "Your public IPv4 and IPv6 addresses, city, country, region, ISP name, ASN (Autonomous System Number), timezone, and approximate latitude/longitude coordinates." },
+      { question: "Does it show my real IP even with a VPN?", answer: "It shows the IP address visible to external servers. If you're connected to a VPN, it will display the VPN server's IP and location, not your physical one — which is exactly how to verify your VPN is working." },
+      { question: "Is my IP address stored or logged?", answer: "No. The lookup queries public APIs and displays the result directly in your browser. No IP data is stored, logged, or transmitted to any third party." },
+      { question: "What's the difference between IPv4 and IPv6?", answer: "IPv4 is the older 32-bit address format (e.g., 192.168.1.1). IPv6 is the newer 128-bit format (e.g., 2001:0db8::1) designed to replace IPv4 as addresses run out. The tool shows both if your network supports them." },
+      { question: "Can I look up someone else's IP?", answer: "This tool shows your own public IP. To look up another IP's geolocation, you'd need a different WHOIS or IP geolocation service." },
+    ],
 },
   {
     id: "79",
@@ -957,6 +971,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Regex Tester — Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. ',
     dependencies: "regex.js",
+    faqs: [
+      { question: "How does the real-time matching work?", answer: "As you type your regex pattern and test string, matches are highlighted instantly. The tool uses the JavaScript RegExp engine, so what you see is exactly how the pattern will behave in your code." },
+      { question: "Does it support all regex flags?", answer: "Yes. You can toggle common flags like global (g), case-insensitive (i), multiline (m), and dotAll (s) using checkboxes. The flags are applied to your pattern in real time." },
+      { question: "Can I test multiple patterns at once?", answer: "Enter one pattern at a time, but you can test it against multiple sample strings. Paste different test cases to verify your regex handles all edge cases correctly." },
+      { question: "Does it explain what my regex does?", answer: "The tool highlights matches visually. For a detailed breakdown of what each part of your pattern means, use a regex explanation tool alongside this tester." },
+      { question: "Is my regex pattern stored?", answer: "No. Your pattern and test strings stay in your browser and are never transmitted anywhere. Everything runs locally using the regex.js library." },
+    ],
 },
   {
 
@@ -1108,6 +1129,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.',
     dependencies: "JSONLint",
     seoDescription: 'Free JSON formatter online — format, validate, and beautify JSON with configurable indentation and sorting. Syntax error highlighting included.',
+    faqs: [
+      { question: "What does the formatter do to my JSON?", answer: "It pretty-prints minified JSON with proper indentation, sorts keys alphabetically (optional), and collapses or expands nested brackets. Malformed JSON gets flagged with the exact line number of the syntax error." },
+      { question: "Can I choose the indent size?", answer: "Yes. Select from 2 spaces (default), 4 spaces, tabs, or minified output. The indent setting applies instantly as you switch between options." },
+      { question: "Does it validate JSON syntax?", answer: "Yes. If your JSON has syntax errors — missing commas, trailing braces, unquoted keys — the tool highlights the exact location and describes the error so you can fix it quickly." },
+      { question: "Can I sort JSON keys?", answer: "Yes. Toggle key sorting to arrange all object keys alphabetically. This is useful for comparing two JSON structures or making large configs easier to navigate." },
+      { question: "Is my JSON data uploaded?", answer: "No. All formatting and validation happens locally in your browser using the JSONLint library. Your data never leaves your device." },
+    ],
 },
   {
     id: "114",
@@ -1247,6 +1275,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. No signup or account required.',
     seoDescription: 'Free online JS Minifier — Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. ',
     dependencies: "Terser",
+    faqs: [
+      { question: "What does the minifier remove?", answer: "Comments, extra whitespace, line breaks, and optional local variable name shortening. The output is functionally identical JavaScript with a significantly smaller file size." },
+      { question: "Will minification break my code?", answer: "No. The Terser engine preserves execution semantics. It only removes dead code, comments, and whitespace — never logic, function calls, or variable references." },
+      { question: "Can I also beautify code with this tool?", answer: "This tool focuses on minification. For beautifying or formatting JavaScript, use the Code Beautifier tool instead." },
+      { question: "How much smaller does minified JS get?", answer: "Typically 30-70% reduction depending on how much whitespace and commenting your original code has. Code with extensive comments sees the largest savings." },
+      { question: "Is my source code uploaded?", answer: "No. Minification runs entirely in your browser using the Terser library. Your JavaScript source never leaves your device." },
+    ],
 },
   {
 
