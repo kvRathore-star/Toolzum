@@ -991,6 +991,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online URL Encoder Decoder — Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. ',
     dependencies: "None",
+    faqs: [
+      { question: "What's percent-encoding?", answer: "Percent-encoding (URL encoding) replaces unsafe URL characters with % followed by two hex digits. Spaces become %20, special characters become %XX. This ensures URLs are transmitted correctly over HTTP." },
+      { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
+      { question: "Does it handle UTF-8 characters?", answer: "Yes. Non-ASCII characters like emojis, accented letters, and CJK characters are properly encoded as UTF-8 byte sequences (e.g., é becomes %C3%A9)." },
+      { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
+      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
+    ],
 },
   {
 
@@ -1060,7 +1067,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.',
     seoDescription: 'Free online URL Parser — Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What components does it parse?", answer: "Protocol (http/https), hostname, port, pathname, query parameters, hash fragment, and authentication info. Each component is displayed separately with its value." },
+      { question: "Can I parse URLs with query strings?", answer: "Yes. Query parameters are extracted and displayed as key-value pairs. Multiple parameters, encoded values, and complex query strings are all handled correctly." },
+      { question: "Does it handle encoded characters?", answer: "Yes. Percent-encoded characters (%20, %E2%80%A6) are decoded and displayed in their readable form. The original encoded form is also shown." },
+      { question: "Can I copy individual components?", answer: "Yes. Each parsed component has a copy-to-clipboard button for easy reuse. Copy the full URL or just the hostname, path, or query string." },
+      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser using the URL API. No URL data is sent to any server." },
+    ],
+  },
   {
 
     id: "503",
@@ -1070,7 +1084,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.',
     seoDescription: 'Free online String Inspector — Inspect any string with character count, byte length, word count, line count, Unicode code points, and non-ASCII breakdown. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What metrics does it show?", answer: "Character count, byte length (UTF-8), word count, line count, number of Unicode code points, and a breakdown of non-ASCII characters with their code points." },
+      { question: "What's the difference between character count and byte length?", answer: "Character count is the number of visible characters. Byte length is the UTF-8 encoded size in bytes. For example, 'é' is 1 character but 2 bytes in UTF-8." },
+      { question: "Does it detect Unicode code points?", answer: "Yes. Each character is analyzed for its Unicode code point value (e.g., 'A' = U+0041, '€' = U+20AC). Non-BMP characters like emojis are also detected." },
+      { question: "Can I use it to find non-ASCII characters?", answer: "Yes. The tool lists all non-ASCII characters in the string with their code points, helping you identify special characters that may cause encoding issues." },
+      { question: "Is my string data uploaded?", answer: "No. All analysis happens locally in your browser. No string data is transmitted to any server." },
+    ],
+  },
   {
     id: "504",
     name: "Unix Time Converter",
@@ -1079,7 +1100,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time formats.',
     seoDescription: 'Free online Unix Time Converter — Convert Unix timestamps to human-readable dates and back. Shows UTC, ISO 8601, locale, date, and time. ',
     dependencies: "None",
-        },
+    faqs: [
+      { question: "What's percent-encoding?", answer: "Percent-encoding (URL encoding) replaces unsafe URL characters with % followed by two hex digits. Spaces become %20, special characters become %XX. This ensures URLs are transmitted correctly over HTTP." },
+      { question: "When should I encode vs decode?", answer: "Encode when building URLs programmatically — query strings, form data, redirect URLs. Decode when reading encoded URLs you received from APIs or webhooks." },
+      { question: "Does it handle UTF-8 characters?", answer: "Yes. Non-ASCII characters like emojis, accented letters, and CJK characters are properly encoded as UTF-8 byte sequences (e.g., é becomes %C3%A9)." },
+      { question: "Can I encode just the query string, not the whole URL?", answer: "Yes. Paste a full URL or just the query parameters. The tool can encode/decode the entire string or just specific parts." },
+      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is sent to any server." },
+    ],
+},
   {
 
     id: "505",
@@ -1089,7 +1117,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.',
     seoDescription: 'Free online Code Beautifier and Minifier — Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What languages are supported?", answer: "HTML, CSS, JavaScript, XML, ERB (Ruby templates), LESS, and SCSS. Each language has its own formatter that understands the syntax." },
+      { question: "What's the difference between beautify and minify?", answer: "Beautify adds indentation, line breaks, and spacing for readability. Minify removes all unnecessary whitespace to reduce file size for production." },
+      { question: "Can I switch between indent sizes?", answer: "Yes. Choose between 2-space, 4-space, or tab indentation when beautifying. The indentation setting applies consistently throughout the output." },
+      { question: "Does it preserve my code logic?", answer: "Yes. Formatting changes are purely cosmetic. Your code's functionality, variable names, string values, and logic remain unchanged." },
+      { question: "Is my code uploaded?", answer: "No. All beautification and minification happens locally in your browser. No code is sent to any server." },
+    ],
+  },
   {
 
     id: "506",
@@ -1099,7 +1134,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Converts HTML files to JSX format — web pages, email templates, and content rendering to React component definitions and UI rendering. All conversion happens locally in your browser with no file size limits.',
     seoDescription: 'Free online HTML to JSX Converter — Convert HTML markup to JSX for React components. Handles class→className, for→htmlFor, event handlers, and more. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What HTML features are converted?", answer: "Standard HTML elements, attributes, inline styles, event handlers, comments, and nested structures. All HTML5 elements are supported." },
+      { question: "Does it handle self-closing tags?", answer: "Yes. HTML self-closing tags like <img>, <br>, and <input> are converted to JSX-compatible self-closing syntax with explicit closing slashes." },
+      { question: "Are className and htmlFor converted?", answer: "Yes. HTML's 'class' attribute becomes 'className', 'for' becomes 'htmlFor', and other HTML-specific attributes are converted to their JSX equivalents." },
+      { question: "Can I convert inline styles?", answer: "Yes. HTML inline style strings (style='color: red') are converted to JSX style objects ({ color: 'red' }) with proper camelCase property names." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversion happens in your browser. No HTML data is sent to any server." },
+    ],
+  },
   {
 
     id: "507",
@@ -1109,7 +1151,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.',
     seoDescription: 'Free online PHP Tools — Convert between JSON and PHP arrays, serialize and unserialize PHP data. All operations in one tool. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What operations are supported?", answer: "JSON to PHP array, PHP array to JSON, PHP serialize, and PHP unserialize. All four operations are available with instant swap between input and output." },
+      { question: "What's the difference between serialize and json_encode?", answer: "PHP serialize creates a PHP-specific string format that preserves types (objects, arrays). json_encode creates JSON format for cross-language compatibility." },
+      { question: "Can I convert nested PHP arrays?", answer: "Yes. Deeply nested arrays and associative arrays are handled correctly. The tool preserves the complete structure during conversion." },
+      { question: "Does it handle PHP objects?", answer: "For JSON conversion, PHP objects are converted to JSON objects. For serialization, object notation (O:4:\"name\":...) is preserved in the serialized string." },
+      { question: "Is my data uploaded?", answer: "No. All conversions happen locally in your browser. No PHP data is sent to any server." },
+    ],
+  },
   {
 
     id: "508",
@@ -1153,7 +1202,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.',
     seoDescription: 'Free online JWT Debugger — Decode and inspect JWT tokens. View header, payload, expiration, issuer, subject, and standard claims. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What JWT fields are displayed?", answer: "Header (algorithm, type), payload (all claims), and signature. Standard claims like exp, iss, sub, aud, iat, and jti are decoded and displayed with human-readable labels." },
+      { question: "Does it verify token signatures?", answer: "No. The debugger decodes and displays JWT content without signature verification. It shows the algorithm used but does not validate against a secret or public key." },
+      { question: "Can I check if a token is expired?", answer: "Yes. The 'exp' claim is decoded to a human-readable timestamp, and the tool shows whether the token is currently valid or expired." },
+      { question: "Does it support all JWT algorithms?", answer: "It decodes headers for any algorithm (HS256, RS256, ES256, etc.). However, it only displays the content — it does not perform signature verification for any algorithm." },
+      { question: "Is my token data uploaded?", answer: "No. All decoding happens locally in your browser. No JWT data is sent to any server." },
+    ],
+  },
   {
 
     id: "512",
@@ -1163,7 +1219,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online HTML Preview — Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "How does the live preview work?", answer: "As you type HTML in the editor, the preview pane updates in real-time using an iframe. The HTML is rendered immediately without any build step." },
+      { question: "Is the preview sandboxed?", answer: "Yes. The preview runs in a sandboxed iframe that prevents it from accessing the parent page or running scripts that could affect the editor." },
+      { question: "Can I use external CSS/JS?", answer: "Yes. You can include external stylesheets and scripts via URL in the HTML. They load from their sources in the sandboxed preview." },
+      { question: "Does it auto-refresh?", answer: "Yes. The preview updates automatically as you type. There's no manual refresh button needed — changes appear instantly." },
+      { question: "Is my HTML uploaded?", answer: "No. All rendering happens locally in your browser. No HTML data is sent to any server." },
+    ],
+  },
   {
 
     id: "513",
@@ -1173,7 +1236,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.',
     seoDescription: 'Free online Cron Expression Parser — Parse cron expressions into human-readable descriptions with common presets. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What cron formats are supported?", answer: "Standard 5-field cron format (minute, hour, day-of-month, month, day-of-week) and extended 6-field format with seconds. Supports wildcards, ranges, lists, and steps." },
+      { question: "What are the common presets?", answer: "Ready-to-use presets for hourly, daily, weekly, monthly, and yearly schedules. Common intervals like every 5 minutes or every Monday are included." },
+      { question: "Does it explain each field?", answer: "Yes. Each cron field is parsed and displayed with its meaning. You can see exactly what '0 2 * * 1-5' means (weekdays at 2 AM)." },
+      { question: "Can I validate cron expressions?", answer: "Yes. Invalid expressions are flagged with error messages. The tool checks for valid ranges, correct field count, and proper syntax." },
+      { question: "Is the parsing done locally?", answer: "Yes. All parsing happens in your browser. No cron data is sent to any server." },
+    ],
+  },
   {
 
     id: "514",
@@ -1204,7 +1274,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.',
     seoDescription: 'Free online Web Inspector & HTTP Tools — Browser device info, user-agent parser, HTTP status codes, MIME types, Basic Auth generator, OG meta tags, and keycode inspector. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What tools are included?", answer: "Seven tools: device info display, user-agent string parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector." },
+      { question: "How does the user-agent parser work?", answer: "Parses your browser's user-agent string to extract browser name/version, OS, device type, and rendering engine. Displays structured data from the raw user-agent." },
+      { question: "Can I generate Basic Auth headers?", answer: "Yes. Enter a username and password to generate the Base64-encoded Authorization header value. Copy the complete header for use in API requests." },
+      { question: "Does it show my browser info?", answer: "Yes. The device info tool displays your current browser, OS, screen resolution, color depth, language, and connection details." },
+      { question: "Is any data sent to a server?", answer: "No. All tools run locally in your browser. Device info and user-agent data stay in your browser and are not transmitted." },
+    ],
+  },
   {
 
     id: "518",
@@ -1234,7 +1311,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.',
     seoDescription: 'Free online YAML Re-indenter — Clean up messy YAML with proper indentation, aligned colons, and normalized list formatting. ',
     dependencies: "Vanilla JS",
-},
+    faqs: [
+      { question: "What YAML issues does it fix?", answer: "Fixes inconsistent indentation, misaligned colons, inconsistent list markers, trailing spaces, and incorrect spacing after colons. Normalizes the entire document." },
+      { question: "Does it validate YAML syntax?", answer: "Yes. The tool detects and reports syntax errors like invalid indentation, unclosed quotes, and malformed mappings. Errors are highlighted with line numbers." },
+      { question: "Can I choose indent size?", answer: "Yes. Choose between 2-space (default) or 4-space indentation. The tool re-indents the entire document with consistent spacing." },
+      { question: "Does it handle multi-line strings?", answer: "Yes. Block scalars (| and >) and flow scalars are preserved. The tool re-indents around them without breaking the string content." },
+      { question: "Is my YAML uploaded?", answer: "No. All re-indentation happens locally in your browser. No YAML data is sent to any server." },
+    ],
+  },
   {
 
     id: "ou-1",
@@ -1350,7 +1434,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.',
     seoDescription: 'Free online RSA Key Pair Generator — Generate 2048 or 4096-bit RSA key pairs and export as PEM. Uses Web Crypto API, ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What key sizes are supported?", answer: "2048-bit and 4096-bit RSA keys. 2048-bit is standard for most applications; 4096-bit provides stronger security for sensitive use cases." },
+      { question: "What format are the keys exported in?", answer: "PEM format (Base64-encoded DER) with standard headers (-----BEGIN PUBLIC KEY-----, etc.). Ready for use with OpenSSL, SSH, and most cryptographic libraries." },
+      { question: "Is the key generation secure?", answer: "Yes. Keys are generated using the Web Crypto API's cryptographically secure random number generator (CSPRNG) in your browser." },
+      { question: "Can I use these keys for SSH?", answer: "The generated PEM keys can be converted to SSH format using OpenSSL commands. The tool exports standard keys compatible with SSH key generation tools." },
+      { question: "Are my keys uploaded?", answer: "No. All key generation happens locally in your browser using the Web Crypto API. No keys are transmitted to any server." },
+    ],
+  },
   {
 
     id: "ct-1",
@@ -1628,7 +1719,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.',
     seoDescription: 'Free online PKCE Verifier \u2014 Generate and verify PKCE code_verifier / code_challenge pairs for secure OAuth flows. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What is PKCE?", answer: "PKCE (Proof Key for Code Exchange) is a security extension to OAuth 2.0 that prevents authorization code interception attacks. Used with public clients like mobile and SPA apps." },
+      { question: "When do I use code_verifier vs code_challenge?", answer: "Generate a code_verifier (random string) and its code_challenge (SHA-256 hash). Send the challenge in the authorization request, then send the verifier during token exchange." },
+      { question: "Does it support S256 only?", answer: "Yes. S256 (SHA-256) is the only supported method. It's the recommended and most secure option per the PKCE RFC specification." },
+      { question: "Can I verify an existing pair?", answer: "Yes. Paste a code_verifier and code_challenge to verify they match. The tool recalculates the challenge from the verifier and compares them." },
+      { question: "Is the generation done locally?", answer: "Yes. All PKCE generation and verification happens in your browser. No data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "537c",
@@ -1655,7 +1753,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Validate OAuth state parameters for format, length, and age.',
     seoDescription: 'Free online OAuth State Validator \u2014 Validate state parameters for format, length, and age. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What does the state parameter do?", answer: "The OAuth state parameter prevents CSRF attacks by ensuring the authorization response matches your original request. It must be unpredictable and tied to the user's session." },
+      { question: "What makes a state parameter valid?", answer: "A valid state is a cryptographically random string (at least 32 characters), properly encoded for URL use, and not expired. It should be stored server-side for verification." },
+      { question: "Can I check if a state has expired?", answer: "Yes. Enter the state and its creation timestamp. The tool calculates the age and checks against configurable expiration thresholds (default 10 minutes)." },
+      { question: "Does it validate the format?", answer: "Yes. Checks for minimum length (32 chars), URL-safe characters only, and no whitespace. Flags weak or predictable state values." },
+      { question: "Is my state data uploaded?", answer: "No. All validation happens locally in your browser. No state data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "537e",
@@ -1665,7 +1770,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.',
     seoDescription: 'Free online PBKDF2 Hash Generator \u2014 Generate PBKDF2 hashes with 10,000 SHA-256 iterations. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What is PBKDF2?", answer: "PBKDF2 (Password-Based Key Derivation Function 2) derives a cryptographic key from a password using repeated hashing. It's designed to slow brute-force attacks through high iteration counts." },
+      { question: "Why 10,000 iterations?", answer: "10,000 iterations provides a balance between security and performance. Modern standards recommend higher counts (100,000+), but 10,000 is suitable for password storage simulation." },
+      { question: "Can I change the iteration count?", answer: "The default is 10,000 iterations for password storage simulation. Higher iteration counts increase security but slow down generation. The tool uses fixed 10,000 for simulation." },
+      { question: "What's the output format?", answer: "The hash is displayed as a hex-encoded string. The tool shows the derived key along with the salt used (randomly generated if not provided)." },
+      { question: "Is my password uploaded?", answer: "No. All hashing happens locally in your browser using the Web Crypto API. No password or hash data is transmitted." },
+    ],
+  },
   {
 
     id: "537f",
@@ -1675,7 +1787,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).',
     seoDescription: 'Free online Cookie Parser & Analyzer \u2014 Parse Set-Cookie headers and check security flags. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What cookie fields are parsed?", answer: "Name, value, domain, path, expires/max-age, secure flag, HttpOnly flag, SameSite attribute, and other Set-Cookie directives are extracted and displayed." },
+      { question: "Can I check security flags?", answer: "Yes. The tool analyzes Secure, HttpOnly, SameSite, and domain settings, flagging missing or insecure configurations." },
+      { question: "Does it detect expired cookies?", answer: "Yes. If a cookie has an Expires attribute in the past, the tool flags it as expired. It also shows max-age countdown for session cookies." },
+      { question: "Can I parse multiple cookies?", answer: "Yes. Paste multiple Set-Cookie headers and the tool parses each one separately, displaying structured data for every cookie." },
+      { question: "Is my cookie data uploaded?", answer: "No. All parsing happens locally in your browser. No cookie data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "539b",
@@ -1702,7 +1821,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.',
     seoDescription: 'Free online XML Minifier / Validator \u2014 Minify XML by removing whitespace, or validate XML syntax. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What does minification remove?", answer: "Removes all unnecessary whitespace, line breaks, and indentation between elements and attributes. Comments and CDATA sections are preserved." },
+      { question: "Does it validate XML?", answer: "Yes. The validator checks for well-formed XML: proper tag nesting, closed elements, valid attribute syntax, and correct entity references." },
+      { question: "Can I choose between minify and validate?", answer: "Yes. Toggle between minification mode (reduce file size) and validation mode (check syntax) with a single click." },
+      { question: "Does it handle XML declarations?", answer: "Yes. XML declarations (<?xml version='1.0'?>) and processing instructions are preserved during minification and validated for correct syntax." },
+      { question: "Is my XML uploaded?", answer: "No. All minification and validation happens locally in your browser. No XML data is transmitted to any server." },
+    ],
+  },
   {
     id: "948",
     name: "Border CSS Generator",
@@ -1731,7 +1857,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Encode text to Base32 or decode Base32 strings back to text.',
     seoDescription: 'Free online Base32 Encoder / Decoder \u2014 Encode and decode Base32 strings. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What is Base32 encoding?", answer: "Base32 encodes binary data into 32 ASCII characters (A-Z, 2-7). It produces longer output than Base64 but is human-readable and avoids ambiguous characters." },
+      { question: "When would I use Base32 vs Base64?", answer: "Use Base32 when you need human-readable encoding (TOTP secrets, QR codes) or systems that only support uppercase letters. Base64 is more compact for general use." },
+      { question: "Does it handle UTF-8?", answer: "Yes. UTF-8 text is properly encoded to Base32 and decoded back to the original text, preserving all characters including non-ASCII." },
+      { question: "Can I decode Base32 to text?", answer: "Yes. Paste a Base32 string and the tool decodes it to the original text. The tool handles both standard and padded Base32 formats." },
+      { question: "Is the conversion done locally?", answer: "Yes. All encoding and decoding happens in your browser. No data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543b",
@@ -1741,7 +1874,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly.',
     seoDescription: 'Free online Base64 to JSON Decoder \u2014 Decode Base64 and pretty-print JSON. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What does it do with Base64 input?", answer: "Decodes the Base64 string to its original text, then attempts to parse it as JSON. If successful, the JSON is pretty-printed with syntax highlighting." },
+      { question: "Does it auto-detect Base64?", answer: "Yes. Paste any Base64 string and the tool attempts to decode it. If the result is valid JSON, it's automatically pretty-printed." },
+      { question: "Can I paste raw JSON?", answer: "Yes. You can paste either Base64-encoded JSON or raw JSON. Raw JSON is directly pretty-printed without Base64 decoding." },
+      { question: "Does it pretty-print nested objects?", answer: "Yes. Deeply nested JSON objects and arrays are formatted with proper indentation (2 spaces) and syntax highlighting for easy reading." },
+      { question: "Is my data uploaded?", answer: "No. All decoding and formatting happens locally in your browser. No data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543c",
@@ -1751,7 +1891,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert between hex strings and text. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Hex to Text Converter \u2014 Convert between hex strings and text. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What format should hex be in?", answer: "Enter hex values as pairs of characters (0-9, a-f, A-F) with or without spaces. Both '48656C6C6F' and '48 65 6C 6C 6F' are accepted." },
+      { question: "Can I convert text to hex?", answer: "Yes. The tool converts in both directions. Enter text to see its hex representation, or enter hex to see the decoded text." },
+      { question: "Does it handle UTF-8?", answer: "Yes. Multi-byte UTF-8 characters (emojis, accented letters, CJK) are properly converted to their hex byte sequences and back." },
+      { question: "What about non-printable bytes?", answer: "Non-printable bytes are displayed as their hex values with special indicators. Control characters (0x00-0x1F) are shown but not rendered as text." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543d",
@@ -1771,7 +1918,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Analyze each character to see its Unicode code point and ASCII/non-ASCII status.',
     seoDescription: 'Free online Character Encoding Converter \u2014 Analyze Unicode code points and ASCII status. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What character data is shown?", answer: "Each character displays its Unicode code point (e.g., U+0041), decimal value, binary representation, and whether it's ASCII or non-ASCII." },
+      { question: "Does it detect encoding issues?", answer: "Yes. The tool identifies characters that may cause encoding problems, including replacement characters (U+FFFD), control characters, and ambiguous encoding." },
+      { question: "Can I see Unicode code points?", answer: "Yes. Every character shows its full Unicode code point (U+XXXX), name, and category (letter, number, symbol, etc.)." },
+      { question: "Does it identify non-ASCII characters?", answer: "Yes. ASCII (0x00-0x7F) and non-ASCII characters are clearly labeled. Non-ASCII characters are highlighted for easy identification." },
+      { question: "Is my text uploaded?", answer: "No. All analysis happens locally in your browser. No text data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543f",
@@ -1781,7 +1935,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert text to Unicode code points with JavaScript escape sequences and HTML entities.',
     seoDescription: 'Free online Unicode Converter \u2014 Get code points, JS escapes, and HTML entities. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What output formats are supported?", answer: "Unicode code points (U+XXXX), JavaScript escape sequences (backslash uXXXX, backslash u{XXXXX}), HTML entities (&#xXXXX;), and decimal values." },
+      { question: "Does it handle emojis?", answer: "Yes. Emojis (including multi-codepoint sequences) are converted to their proper Unicode representations. Both simple and compound emojis work." },
+      { question: "Can I convert back from code points?", answer: "Yes. Paste code points (U+XXXX format), JS escapes, or HTML entities and convert them back to readable text." },
+      { question: "Does it support all Unicode planes?", answer: "Yes. All 17 Unicode planes are supported, including Basic Multilingual Plane (BMP), Supplementary Multilingual Plane (SMP), and others." },
+      { question: "Is the conversion done locally?", answer: "Yes. All conversions happen in your browser. No data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543g",
@@ -1818,7 +1979,14 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Minify SVG by removing whitespace, comments, and redundant attributes.',
     seoDescription: 'Free online SVG Optimizer \u2014 Minify SVG by removing whitespace and comments. ',
     dependencies: "None",
-},
+    faqs: [
+      { question: "What does the optimizer remove?", answer: "Removes whitespace, line breaks, comments (<!-- -->), metadata, editor-specific attributes, empty groups, and redundant attributes like xmlns declarations." },
+      { question: "Does it preserve visual appearance?", answer: "Yes. The optimizer removes only non-visual elements and whitespace. The rendered SVG appearance remains identical to the original." },
+      { question: "Can I choose optimization level?", answer: "Yes. Choose between light optimization (remove comments/whitespace) or aggressive optimization (also remove metadata and editor attributes)." },
+      { question: "Does it handle embedded images?", answer: "Yes. Embedded raster images (base64-encoded) are preserved during optimization. Only SVG-specific metadata is removed." },
+      { question: "Is my SVG uploaded?", answer: "No. All optimization happens locally in your browser. No SVG data is transmitted to any server." },
+    ],
+  },
   {
 
     id: "543k",
