@@ -359,6 +359,28 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert HEIC images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to JPG — Decodes Apple HEIC photos and converts them to universally compatible JPG files while preserving EXIF metadata like location and camera settings. ',
     dependencies: "heic2any",
+    faqs: [
+      {
+        question: "Will my photo's location and camera data survive the conversion?",
+        answer: "Yes. The converter preserves EXIF metadata including GPS coordinates, camera model, lens info, and shooting date from your original HEIC file."
+      },
+      {
+        question: "Why is my iPhone photo HEIC instead of JPG?",
+        answer: "Apple switched to HEIC starting with iOS 11 because it compresses images to about half the size of JPG without visible quality loss. This tool converts them back to JPG for wider compatibility."
+      },
+      {
+        question: "Can I convert HEIC photos taken in burst mode?",
+        answer: "Yes. Upload each burst photo individually — there is no limit on how many files you can convert. The tool processes one image at a time."
+      },
+      {
+        question: "What happens to the transparency in my HEIC image?",
+        answer: "HEIC supports transparency but JPG does not. If your HEIC has an alpha channel, the converter flattens it against a white background during conversion."
+      },
+      {
+        question: "Is there a maximum file size I can convert?",
+        answer: "There is no hard limit, but very large HEIC files (50MB+) may take longer to process depending on your device's memory. Most iPhone photos are 1-5MB and convert instantly."
+      },
+    ],
     showInCategory: false,
   },
   {
@@ -609,6 +631,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert MKV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
     seoDescription: 'Free online MKV to MP4 — Re-encapsulates MKV video files into the more universally compatible MP4 container without re-encoding the underlying video stream. ',
     dependencies: "FFmpeg",
+    faqs: [
+      { question: "Does converting MKV to MP4 re-encode the video?", answer: "No. The converter re-muxes (repackages) the video and audio streams from the MKV container into the MP4 container. The actual video quality, resolution, and bitrate remain identical." },
+      { question: "Why is MKV less compatible than MP4?", answer: "MP4 is supported by virtually every device, browser, and streaming platform. MKV is open-source and feature-rich but not natively supported by many TVs, game consoles, and mobile devices." },
+      { question: "Will the audio tracks survive the conversion?", answer: "Standard audio tracks (AAC, MP3, AC3) transfer directly. Some MKV files contain audio formats that MP4 does not support (like DTS or FLAC in certain configurations) — those may be transcoded to AAC." },
+      { question: "Can I keep multiple subtitle tracks?", answer: "MP4 supports embedded subtitles, but not all players handle them equally. The converter preserves subtitle tracks that are compatible with the MP4 format. External SRT files can be added separately." },
+      { question: "What if my MKV has chapters?", answer: "MKV chapter markers transfer to MP4 if they use the standard format. Most players will recognize the chapters after conversion. Some MKV-specific metadata may not carry over." },
+    ],
     showInCategory: false,
   },
   {
@@ -887,6 +916,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: "Trim and cut audio files online — MP3, WAV, M4A, FLAC, and OGG. Select start and end points visually on the waveform, then download the trimmed clip.",
     seoDescription: 'Free online Audio Cutter — Trim and cut audio files online ',
     dependencies: "Web Audio API / FFmpeg",
+    faqs: [
+      { question: "How do I select the exact part of the audio to keep?", answer: "Drag the start and end markers on the waveform display to set your trim points. You can also type exact timestamps in the input fields for frame-accurate cuts." },
+      { question: "Does cutting the audio reduce its quality?", answer: "No. The cutter extracts the selected portion without re-encoding. The output quality matches the original file exactly — there is no generation loss from trimming." },
+      { question: "What audio formats can I cut?", answer: "The tool supports MP3, WAV, M4A, FLAC, OGG, and AAC. Upload any of these formats and download the trimmed clip in the same format or convert it during the process." },
+      { question: "Can I remove a section from the middle of a file?", answer: "Yes. Set the start marker after the section you want to remove and the end marker before it. The tool joins the remaining parts into a single continuous output." },
+      { question: "Is there a minimum or maximum length I can trim to?", answer: "You can trim to as short as one second. There is no maximum — the tool handles files of any length your browser can load into memory." },
+    ],
   },
   {
     id: "86b",
@@ -2003,6 +2039,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract the audio track from QuickTime MOV files and convert it to MP3 format. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.',
     seoDescription: 'Free online MOV to MP3 Converter — Extract audio from QuickTime MOV files and convert to MP3. 100% browser-based, no uploads.',
     dependencies: "ffmpeg",
+    faqs: [
+      { question: "Why would I extract audio from a MOV file?", answer: "MOV files contain both video and audio tracks. If you only need the audio — a podcast clip, a song from a video, or a voice recording — extracting it as MP3 gives you a smaller, audio-only file." },
+      { question: "What audio quality will the MP3 have?", answer: "The converter defaults to 192kbps, which sounds excellent for most purposes. You can adjust the bitrate for smaller files (128kbps) or higher quality (320kbps) depending on your needs." },
+      { question: "Does it extract the full audio track or just a portion?", answer: "By default it extracts the entire audio track. If you only need a specific segment, use the audio cutter tool after extraction to trim the MP3 to your desired start and end points." },
+      { question: "What if my MOV file has multiple audio tracks?", answer: "The converter extracts the primary audio track. If your MOV has multiple tracks (for example, different language audio), the tool uses the first or default track." },
+      { question: "Can I convert MOV files from my iPhone?", answer: "Yes. Transfer the MOV file to your computer or load it directly from your phone's browser. The conversion runs in the browser, so any device with a modern browser works." },
+    ],
   },
   {
     id: "222",

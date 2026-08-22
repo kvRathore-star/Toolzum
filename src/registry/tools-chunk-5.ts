@@ -1190,6 +1190,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert PNG images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to WEBP — Convert PNG images into WEBP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Does WebP support PNG transparency?", answer: "Yes. WebP supports alpha channel transparency just like PNG. Your transparent backgrounds and soft edges are preserved through the conversion." },
+      { question: "Why is my WebP file much smaller than the PNG?", answer: "PNG uses lossless compression that preserves every pixel exactly. WebP uses more advanced compression algorithms that achieve 25-35% smaller files while keeping visual quality nearly identical." },
+      { question: "Can I convert PNG with text and sharp edges to WebP?", answer: "Yes. For graphics with sharp text and edges, choose lossless WebP mode to avoid compression artifacts. Lossy WebP works best for photographs and smooth gradients." },
+      { question: "Will the converted WebP look identical to my PNG?", answer: "At lossless quality, yes. At lossy quality, there may be subtle differences in fine details when zoomed to 100%. For most web use the difference is imperceptible." },
+      { question: "What is the best use case for PNG to WebP conversion?", answer: "Web performance optimization. If your site uses many PNG images, converting to WebP can reduce page weight by 25-35% without visible quality loss, improving load times." },
+    ],
     showInCategory: false,
   },
   {
@@ -1348,6 +1355,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JPG images to TIFF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to TIFF — Convert JPG images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Why would I convert JPG to TIFF?", answer: "TIFF preserves image quality without compression artifacts. If you need to edit a JPG repeatedly (retouching, color grading, printing), converting to TIFF first prevents quality degradation from re-saving." },
+      { question: "Does converting JPG to TIFF improve quality?", answer: "No. TIFF cannot recover detail lost during the original JPG compression. The conversion preserves whatever quality exists in the JPG. Think of it as a safe container for further editing, not a quality enhancer." },
+      { question: "How much larger will the TIFF file be?", answer: "A 2MB JPG typically becomes 15-40MB as TIFF because TIFF stores uncompressed pixel data. Factor this into your storage planning before batch converting." },
+      { question: "Can I edit the TIFF and save without losing quality?", answer: "Yes. That is the primary advantage of TIFF. You can edit, adjust, and re-save the TIFF multiple times without introducing new compression artifacts." },
+      { question: "Will the TIFF keep my JPG's EXIF data?", answer: "The converter preserves basic EXIF metadata like camera model and date. Some proprietary manufacturer notes may not transfer, but standard fields survive the conversion." },
+    ],
     showInCategory: false,
   },
   {
@@ -1500,6 +1514,28 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert HEIC images to ICO format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to ICO — Convert HEIC images into ICO format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      {
+        question: "What sizes does the ICO file include?",
+        answer: "The converter generates a multi-resolution ICO containing 16x16, 32x32, 48x48, and 256x256 pixel versions. Windows picks the appropriate size automatically based on where the icon is displayed."
+      },
+      {
+        question: "Can I use this ICO as a website favicon?",
+        answer: "Yes. Rename the output to favicon.ico and place it in your site's root directory. Modern browsers also accept PNG and SVG favicons, but ICO remains the most universally supported format."
+      },
+      {
+        question: "Why use ICO instead of just converting to PNG?",
+        answer: "ICO is a container format that holds multiple image sizes in one file. Windows requires ICO for desktop icons and taskbar pins because it needs different resolutions for different display contexts."
+      },
+      {
+        question: "Does the converter preserve transparency from my HEIC?",
+        answer: "Yes. The alpha channel from your HEIC source is preserved in the ICO output, so your icon will have clean transparent edges."
+      },
+      {
+        question: "What if my HEIC image is not square?",
+        answer: "The converter scales your image to fit a square canvas. If the aspect ratio does not match, the image is centered with transparent padding on the shorter sides."
+      },
+    ],
     showInCategory: false,
   },
   {
@@ -1597,6 +1633,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert AVIF images to JXL format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online AVIF to JXL — Convert AVIF images into JXL format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Why would I convert AVIF to JXL?", answer: "JXL offers better lossless compression and supports higher bit depths than AVIF. If you are archiving images or working in a professional photography pipeline, JXL preserves more data." },
+      { question: "Will I lose quality in the conversion?", answer: "Converting lossy AVIF to lossless JXL preserves whatever quality exists in the source. The conversion cannot recover detail already lost by AVIF compression, but it stops further degradation." },
+      { question: "What file size should I expect?", answer: "Lossless JXL files are typically larger than lossy AVIF. A 500KB lossy AVIF might become 1-3MB as lossless JXL. The tradeoff is perfect quality preservation." },
+      { question: "Does JXL support the same features as AVIF?", answer: "JXL supports HDR, wide color gamut, and transparency — similar to AVIF. JXL also has a unique progressive decoding feature that lets images load in stages." },
+      { question: "Can I use JXL on the web?", answer: "JXL browser support is limited. Firefox supports it, and Chrome had support that was later removed. For web delivery, keep your AVIF originals. Use JXL for archival and local workflows." },
+    ],
     showInCategory: false,
   },
   {
@@ -1788,6 +1831,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert GIF images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online GIF to SVG — Convert GIF images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Does this convert the GIF into a vector SVG?", answer: "No. GIF is a raster (pixel) format and cannot be truly vectorized. The converter embeds the raster image inside an SVG container, which provides SVG compatibility without vector scalability." },
+      { question: "Will the SVG version scale without pixelation?", answer: "No. Because the SVG contains an embedded raster image, enlarging it beyond the original dimensions produces the same pixelation as scaling the GIF directly." },
+      { question: "Why would I want a GIF inside an SVG wrapper?", answer: "Some design tools, CMS platforms, and build pipelines accept only SVG input. This wrapper lets you use your GIF images in those workflows without switching to a different format." },
+      { question: "Does the animated GIF animation survive the conversion?", answer: "No. The SVG output is a static image. Only the first frame of the GIF is captured. Use a video-to-GIF tool in reverse if you need animation in SVG-compatible formats." },
+      { question: "Is there any advantage over just using the GIF directly?", answer: "SVG files can be styled with CSS and manipulated with JavaScript in web contexts. If you need programmatic control over the image on a webpage, the SVG wrapper provides that capability." },
+    ],
     showInCategory: false,
   },
   {
@@ -1946,6 +1996,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to AVIF — Convert JXL images into AVIF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Why convert between JXL and AVIF instead of just using one?", answer: "JXL has better lossless compression while AVIF has wider browser support. Converting JXL to AVIF lets you use your library of JXL images on websites where AVIF is better supported." },
+      { question: "Which format produces smaller files?", answer: "For lossy compression at the same quality level, AVIF and JXL produce similarly sized files. JXL edges ahead in lossless mode, while AVIF has a slight advantage in lossy at low bitrates." },
+      { question: "Will the conversion change my image dimensions?", answer: "No. A 3000x2000 JXL becomes a 3000x2000 AVIF. Only the file format and compression change — pixel dimensions stay identical." },
+      { question: "Is JXL supported in browsers?", answer: "JXL has limited browser support — Chrome had it briefly, then removed it. Firefox supports it behind a flag. If you need web compatibility, convert to AVIF or WebP instead." },
+      { question: "Does the converter handle animated JXL files?", answer: "No. This tool converts single-frame JXL images only. Animated JXL sequences are not supported in this version." },
+    ],
     showInCategory: false,
   },
   {
@@ -1956,6 +2013,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Convert JXL images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to SVG — Convert JXL images into SVG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Can a raster JXL image become a true vector SVG?", answer: "No. SVG is a vector format, but JXL is raster (pixel-based). The converter embeds the raster image inside an SVG wrapper, which preserves compatibility but does not add vector scalability." },
+      { question: "Why would I want a JXL inside an SVG wrapper?", answer: "Some design tools and web workflows require SVG input. Wrapping your JXL in SVG lets you use it in these contexts without converting to a different raster format." },
+      { question: "Will the SVG scale to any size without quality loss?", answer: "No. Since the SVG contains a raster image, scaling beyond the original pixel dimensions causes the same blurring or pixelation as scaling the JXL directly." },
+      { question: "What is the file size impact?", answer: "The SVG wrapper adds a small overhead (1-2KB) on top of the JXL data. The resulting file is slightly larger than the original JXL but functionally equivalent." },
+      { question: "Is this useful for web performance?", answer: "Not particularly. For web use, convert JXL to WebP or AVIF directly for better compression. The SVG wrapper is mainly useful for tool compatibility, not performance." },
+    ],
     showInCategory: false,
   },
   {
@@ -1996,6 +2060,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate SRT/VTT subtitles for videos from transcript text. Auto-sync timestamps with configurable duration and gap.',
     seoDescription: 'Free online Subtitle Generator — Generate SRT and VTT subtitle files from transcript text. Auto-sync with configurable timestamps.',
     dependencies: "None",
+    faqs: [
+      { question: "How do I create subtitles from a transcript?", answer: "Paste your transcript text into the input area. The generator splits it into timed subtitle segments, distributing them evenly across the video duration you specify." },
+      { question: "What is the difference between SRT and VTT?", answer: "SRT is the most widely supported subtitle format — it works in virtually every video player. VTT (WebVTT) supports styling and positioning. Choose SRT for maximum compatibility, VTT for web players." },
+      { question: "Can I adjust the timing of individual subtitles?", answer: "Yes. After generation, you can edit the start and end timestamps for each subtitle entry. Adjust timing to match specific dialogue or scene changes in your video." },
+      { question: "How long should each subtitle stay on screen?", answer: "The default is 3-5 seconds per subtitle, which matches natural reading speed. Shorter subtitles (2-3 seconds) work for single words or emphasis. Longer ones (6-7 seconds) suit dense text." },
+      { question: "Can I use this for YouTube video subtitles?", answer: "Yes. Download the SRT file and upload it directly to YouTube Studio under Subtitles. YouTube accepts both SRT and VTT formats for manual subtitle uploads." },
+    ],
 
   },
   {

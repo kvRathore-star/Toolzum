@@ -835,6 +835,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format — your files never leave your device.',
     seoDescription: 'Free online Audio Format Converter — Convert between MP3, WAV, FLAC, OGG, M4A, and AAC audio formats. Pick any input and output format. ',
     dependencies: "FFmpeg",
+    faqs: [
+      { question: "Which format should I choose for the best quality?", answer: "FLAC and WAV are lossless — they preserve every detail of the original audio. For smaller files with good quality, use AAC at 256kbps or OGG at 320kbps. MP3 at 320kbps is a safe universal choice." },
+      { question: "Why would I convert WAV to MP3?", answer: "WAV files are large because they store uncompressed audio. Converting to MP3 reduces file size by 80-90% while maintaining quality that most listeners cannot distinguish from the original." },
+      { question: "Does converting between formats reduce quality?", answer: "Converting between lossy formats (MP3, AAC, OGG) does introduce slight quality loss each time because each format re-compresses the audio. Convert from the highest quality source available to minimize degradation." },
+      { question: "Can I convert a video file's audio track?", answer: "Yes. Upload a video file and the converter extracts the audio track automatically. Select your output format and the tool separates the audio for conversion." },
+      { question: "What bitrate should I use for MP3 conversion?", answer: "192kbps is suitable for casual listening. 256kbps is a good balance of quality and size. 320kbps is near-transparent quality for most people. Higher bitrates produce diminishing returns." },
+    ],
     showInCategory: true,
   },
   {
@@ -1144,6 +1151,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Combine multiple photos into beautiful collages. Choose from grid, strip, or featured layouts. Perfect for creating photo montages, mood boards, and social media posts.',
     seoDescription: 'Free online Collage Maker — Combine multiple photos into beautiful collages. Grid, strip, and featured layouts. ',
     dependencies: "none",
+    faqs: [
+      { question: "How many photos can I add to a collage?", answer: "Most layouts support between 2 and 12 photos. The exact count depends on the layout template you choose — grids support more images while featured layouts highlight fewer." },
+      { question: "Can I rearrange photos after placing them?", answer: "Yes. Drag and drop photos between cells to reposition them. You can also swap photos by dragging one onto another." },
+      { question: "What dimensions should I export for Instagram?", answer: "For Instagram posts use 1080x1080 (square) or 1080x1350 (portrait). For stories, export at 1080x1920. The collage maker lets you set custom output dimensions." },
+      { question: "Can I change the spacing between photos?", answer: "Yes. Adjust the gap width between cells using the spacing slider. You can also set a background color for the gaps or make them transparent." },
+      { question: "What file format should I download the collage in?", answer: "PNG is best for sharp graphics and social media. JPG produces smaller files for web use. Choose based on where you plan to share the collage." },
+    ],
     showInCategory: true,
   },
   {
@@ -1259,6 +1273,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Combine multiple audio files into one continuous track. Supports crossfade between songs and automatic volume normalization. Perfect for making mixtapes, podcasts, and audiobooks.',
     seoDescription: 'Free online Audio Merger — Combine multiple audio files into one track with crossfade and volume normalization. ',
     dependencies: "@ffmpeg/ffmpeg",
+    faqs: [
+      { question: "How many audio files can I merge together?", answer: "There is no limit. Add as many files as you need — the merger concatenates them in the order you arrange. Each file is processed sequentially from your browser." },
+      { question: "What does the crossfade option do?", answer: "Crossfade blends the end of one track into the beginning of the next, creating a smooth transition instead of an abrupt cut. You can set the crossfade duration in seconds." },
+      { question: "Will the merged file sound louder or quieter?", answer: "The volume normalization option adjusts each input to a consistent level before merging. Without it, files recorded at different volumes will sound uneven in the output." },
+      { question: "Can I merge files of different formats?", answer: "Yes. The tool accepts mixed formats — for example, you can merge an MP3 with a WAV and an OGG. All files are converted to a common format before joining." },
+      { question: "What format is the output file?", answer: "The merged output defaults to MP3 for broad compatibility. You can also choose WAV, FLAC, or OGG depending on your quality and file size preferences." },
+    ],
     showInCategory: true,
   },
   {
@@ -1340,6 +1361,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Capture still frames from any video at precise timestamps. Extract single screenshots or batch capture at regular intervals. Export as JPG, PNG, or WebP. Perfect for thumbnails and previews.',
     seoDescription: 'Free online Video Screenshot — Capture frames from videos at precise timestamps. Single or batch extraction. ',
     dependencies: "@ffmpeg/ffmpeg",
+    faqs: [
+      { question: "How do I capture a frame at an exact timestamp?", answer: "Use the timestamp input to enter the precise time (in seconds or HH:MM:SS format) where you want to capture. The tool extracts that exact frame from the video." },
+      { question: "What image format should I choose for the screenshot?", answer: "PNG preserves full quality with no compression artifacts — best for thumbnails you will edit later. JPG produces smaller files for web use. WebP offers the best compression-to-quality ratio." },
+      { question: "Can I capture multiple frames at once?", answer: "Yes. Use the batch capture mode to extract frames at regular intervals — for example, one frame every 5 seconds. The tool generates a set of screenshots from your specified time range." },
+      { question: "Will the screenshot match the video resolution?", answer: "Yes. The captured frame uses the original video resolution. A 1080p video produces 1920x1080 screenshots. A 4K video produces 3840x2160 screenshots." },
+      { question: "What video formats can I take screenshots from?", answer: "The tool supports MP4, MOV, AVI, WebM, MKV, and most common video formats. Upload any supported video and capture frames from it." },
+    ],
 
     showInCategory: true,
   },
@@ -1362,6 +1390,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Record your screen, application window, or browser tab with optional microphone audio. Choose HD, Full HD, or 2K quality. Download as WebM or MP4. No software installation needed.',
     seoDescription: 'Free online Screen Recorder — Record screen, window, or tab with mic audio. HD to 2K quality. Download as WebM or MP4. ',
     dependencies: "@ffmpeg/ffmpeg",
+    faqs: [
+      { question: "Can I record just one application window?", answer: "Yes. When you start recording, the browser asks you to choose between recording your entire screen, a specific application window, or a browser tab. Pick the option that fits your needs." },
+      { question: "Does the recorder capture system audio?", answer: "It captures microphone audio by default. To record system audio (the sound your computer plays), you need to share a browser tab that is playing audio — system audio capture depends on your browser and OS." },
+      { question: "What quality can I record in?", answer: "Choose between 720p (HD), 1080p (Full HD), or 1440p (2K). Higher resolutions produce larger files. 1080p is the best balance of quality and file size for most recordings." },
+      { question: "How long can I record for?", answer: "There is no time limit, but longer recordings produce larger files. A 10-minute 1080p recording is roughly 200-500MB depending on screen content. Make sure you have enough disk space." },
+      { question: "Why WebM instead of MP4?", answer: "WebM records faster because it uses a browser-native codec. MP4 requires conversion after recording, which adds a few seconds. Both formats produce good quality — WebM is slightly more efficient." },
+    ],
 
     showInCategory: true,
   },
@@ -1470,6 +1505,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert SVG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online SVG to JPG — Convert SVG vector graphics into JPEG images for sharing on platforms that require raster formats. ',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Will my SVG lose vector quality as a JPG?", answer: "Yes. JPG is a raster format, so the SVG is rendered at a fixed pixel resolution during conversion. The result looks sharp at the chosen size but cannot be scaled up infinitely like the original SVG." },
+      { question: "What resolution should I export the JPG at?", answer: "Match the resolution to your use case. 72 DPI for web, 150 DPI for standard print, and 300 DPI for high-quality print. The tool lets you set the output width in pixels." },
+      { question: "Does the converter handle SVG animations?", answer: "No. Only the static first frame of the SVG is rendered. CSS animations, SMIL animations, and JavaScript-driven SVG effects are not captured." },
+      { question: "What about text in my SVG?", answer: "Text elements are rasterized at the chosen resolution. If your SVG uses web fonts that are not embedded, the converter substitutes a fallback font. Embed fonts in the SVG for accurate rendering." },
+      { question: "Can I control the JPG quality?", answer: "Yes. The tool offers a quality slider. Higher values (90-100) produce larger files with fewer compression artifacts. Lower values (60-80) produce smaller files that are fine for thumbnails and previews." },
+    ],
     showInCategory: false,
   },
   {
@@ -1551,6 +1593,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to JPG — Convert TIFF images into universally compatible JPEG format for sharing on the web or via email. ',
     dependencies: "Canvas API",
+    faqs: [
+      {
+        question: "Why are my TIFF files so large?",
+        answer: "TIFF is a lossless format that stores every pixel of image data without compression. A single TIFF from a scanner or DSLR can be 20-100MB. Converting to JPG reduces the file size dramatically, usually to 1-5MB."
+      },
+      {
+        question: "Will converting TIFF to JPG reduce print quality?",
+        answer: "For web and screen use, no - JPG at high quality (90%+) looks identical. For professional printing at 300 DPI, keep your TIFF originals and only use the JPG for preview or web purposes."
+      },
+      {
+        question: "Does the converter handle multi-page TIFF files?",
+        answer: "No. This tool processes one TIFF image at a time. If your TIFF has multiple pages or layers, only the first page is converted."
+      },
+      {
+        question: "Can I control the JPG compression quality?",
+        answer: "Yes. The tool lets you choose a quality slider from 1-100. Higher values preserve more detail but produce larger files. 85-95 is the sweet spot for most use cases."
+      },
+      {
+        question: "Does the JPG output keep my TIFF's color profile?",
+        answer: "The converter embeds the sRGB color profile in the JPG output. If your TIFF uses Adobe RGB or ProPhoto, colors may shift slightly. Convert with the original profile for color-critical work."
+      },
+    ],
     showInCategory: false,
   },
   {
@@ -1763,6 +1827,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to AVIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to AVIF — Convert Apple HEIC/HEIF photos into next-gen AVIF format with superior compression. ',
     dependencies: "Canvas API",
+    faqs: [
+      {
+        question: "Why would I convert HEIC to AVIF instead of JPG?",
+        answer: "AVIF typically produces files 30-50% smaller than JPG at the same visual quality. If you are optimizing for web performance, AVIF gives you faster page loads without sacrificing image clarity."
+      },
+      {
+        question: "Will browsers display my converted AVIF image?",
+        answer: "AVIF is supported in Chrome 85+, Firefox 93+, and Safari 16.4+. Older browsers like Internet Explorer will not display it. Check your audience's browser support before using AVIF on production sites."
+      },
+      {
+        question: "Does the conversion lose quality compared to the original HEIC?",
+        answer: "HEIC and AVIF both use modern compression, so the conversion introduces minimal quality loss. For most photos the difference is imperceptible. Choose lossless mode if you need pixel-perfect results."
+      },
+      {
+        question: "Can I batch convert multiple HEIC photos to AVIF?",
+        answer: "This tool converts one image at a time. Upload and convert each HEIC file individually — there is no limit on the number of conversions you can run."
+      },
+      {
+        question: "What color space does the AVIF output use?",
+        answer: "The converter preserves the color profile from your HEIC source. If the original uses Display P3 or sRGB, the AVIF output maintains the same color space."
+      },
+    ],
     showInCategory: false,
   },
   {
@@ -1773,6 +1859,28 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert HEIC images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online HEIC to GIF — Convert Apple HEIC/HEIF photos into GIF format for compatibility with older platforms. ',
     dependencies: "Canvas API",
+    faqs: [
+      {
+        question: "Why would I convert a HEIC photo to GIF?",
+        answer: "Some platforms, email clients, and legacy systems still do not support HEIC or AVIF. GIF is universally compatible and works almost everywhere, though it is limited to 256 colors."
+      },
+      {
+        question: "Will my photo look worse as a GIF?",
+        answer: "GIF supports only 256 colors per frame, so photos with gradients or complex color palettes may show banding or dithering. For photographs, JPG or WebP are better choices. GIF works best for simple graphics with flat colors."
+      },
+      {
+        question: "Does the converted GIF support animation?",
+        answer: "No. HEIC is a still image format, so the output is a single-frame GIF. If you need animated GIFs, use a video-to-GIF tool instead."
+      },
+      {
+        question: "Can I control the GIF color palette?",
+        answer: "The converter automatically generates an optimal 256-color palette from your image. You cannot manually select colors, but the algorithm picks the best match for your specific photo."
+      },
+      {
+        question: "What is the typical file size difference?",
+        answer: "GIF files are usually larger than HEIC for photographs because GIF uses less efficient compression. A 3MB HEIC might become 4-6MB as GIF. Use this conversion only when compatibility is the priority."
+      },
+    ],
     showInCategory: false,
   },
   {
@@ -1823,6 +1931,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert JXL images to GIF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JXL to GIF — Convert JPEG XL images into GIF format for use on legacy platforms. ',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "Why would I convert JXL to GIF?", answer: "GIF is universally supported on every platform, social media site, and messaging app. If you need to share a JXL image on a platform that does not support it, GIF is a safe fallback format." },
+      { question: "Will my image lose quality as a GIF?", answer: "Yes. JXL supports millions of colors and transparency, but GIF is limited to 256 colors per frame. Photos with smooth gradients may show color banding. Flat-color graphics convert well." },
+      { question: "Does the GIF output keep the image dimensions?", answer: "Yes. The pixel dimensions are preserved exactly. A 2000x1500 JXL becomes a 2000x1500 GIF — only the color depth and file size change." },
+      { question: "What about the transparency in my JXL?", answer: "GIF supports binary transparency (fully opaque or fully transparent pixels). If your JXL has soft semi-transparent edges, they become hard-edged in the GIF output." },
+      { question: "Is there a better format than GIF for sharing JXL images?", answer: "For most cases, convert to JPG or PNG instead of GIF. JPG is better for photos, PNG for graphics with transparency. GIF only makes sense when the receiving platform specifically requires it." },
+    ],
     showInCategory: false,
   },
   {
@@ -1903,6 +2018,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Convert TIFF images to WEBP format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online TIFF to WebP — Convert TIFF images into modern WebP format for smaller file sizes and web use. ',
     dependencies: "Canvas API",
+    faqs: [
+      { question: "How much smaller is WebP compared to TIFF?", answer: "WebP files are typically 80-90% smaller than uncompressed TIFF. A 50MB TIFF might become 3-5MB as WebP while maintaining visually similar quality, making it ideal for web delivery." },
+      { question: "Can WebP match TIFF quality for archival purposes?", answer: "No. TIFF is lossless and preserves every pixel exactly. WebP uses lossy compression by default. Use TIFF for archival master files and WebP only for web-optimized copies." },
+      { question: "Does WebP support the same color depths as TIFF?", answer: "TIFF supports 16-bit and 32-bit color channels. WebP is limited to 8-bit. If your TIFF uses high bit depth for color grading, you will lose some tonal precision in the conversion." },
+      { question: "Will my image dimensions change during conversion?", answer: "No. The pixel dimensions remain identical. A 4000x3000 TIFF becomes a 4000x3000 WebP — only the file size and compression change." },
+      { question: "Is WebP supported on all devices?", answer: "WebP works in all modern browsers (Chrome, Firefox, Safari, Edge) and most mobile devices. Windows Photo Viewer and some older image editors may not open WebP files natively." },
+    ],
     showInCategory: false,
   },
   {

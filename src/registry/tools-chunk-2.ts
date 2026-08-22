@@ -257,6 +257,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OGG audio files to M4A format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online OGG to M4A — Convert OGG Vorbis audio files into M4A format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "Why would I convert OGG to M4A?", answer: "M4A (AAC) is the default audio format for Apple devices and iTunes. If your OGG files do not play on an iPhone, iPod, or in Apple Music, converting to M4A fixes the compatibility issue." },
+      { question: "Is M4A better quality than OGG?", answer: "At the same bitrate, AAC (M4A) and OGG Vorbis are very close in quality. AAC has a slight edge at low bitrates (below 128kbps), while OGG performs better in some mid-range scenarios." },
+      { question: "Will the file size change significantly?", answer: "AAC and OGG have similar compression ratios. Expect the M4A file to be roughly the same size as the original OGG, give or take 5-10% depending on the specific content and bitrate." },
+      { question: "Does the conversion preserve audio quality?", answer: "Converting between lossy formats introduces a small amount of quality loss because the audio is re-encoded. Convert from the highest quality source you have to minimize cumulative degradation." },
+      { question: "Can I play the M4A output on Android?", answer: "Yes. Modern Android devices and apps (Google Play Music, Poweramp, VLC) all support M4A playback. It is not Apple-exclusive — M4A is widely compatible across platforms." },
+    ],
     showInCategory: false,
   },
   {
@@ -357,6 +364,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Resize animated GIFs to exact dimensions while preserving animation. Choose from presets or custom width with aspect ratio lock.',
     seoDescription: 'Free online GIF Resizer — Resize animated GIFs to exact dimensions while preserving animation. Presets or custom size. ',
     dependencies: "@ffmpeg/ffmpeg",
+    faqs: [
+      { question: "Will resizing break my GIF animation?", answer: "No. The resizer preserves all frames and their timing. Your animation plays at the same speed — only the frame dimensions change." },
+      { question: "Can I make a GIF smaller without losing animation?", answer: "Yes. Reducing dimensions shrinks the file size proportionally. A 500x500 GIF resized to 250x250 loses about 75% of its file size while keeping the animation intact." },
+      { question: "Does the resizer maintain GIF transparency?", answer: "Yes. Transparent pixels in your original GIF remain transparent after resizing. The alpha channel is preserved across all frames." },
+      { question: "What happens if I resize to non-proportional dimensions?", answer: "The GIF stretches or squishes to fit the exact dimensions you specify. Use the aspect ratio lock to prevent distortion if you want to preserve the original proportions." },
+      { question: "Is there a minimum size I can resize to?", answer: "There is no hard minimum, but extremely small dimensions (under 10x10 pixels) may make the content unrecognizable. The tool works best when resizing to at least 50 pixels on the shortest side." },
+    ],
     showInCategory: true,
   },
   {
@@ -603,6 +617,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert FLAC audio files to OPUS format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online FLAC to Opus — Convert lossless FLAC audio files into Opus format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "Why convert lossless FLAC to lossy Opus?", answer: "Opus files are 80-90% smaller than FLAC while sounding nearly identical at normal listening volumes. This is ideal for portable devices, streaming, or reducing storage usage without noticeable quality loss." },
+      { question: "What bitrate should I use for Opus?", answer: "128kbps Opus sounds comparable to 192kbps MP3. For transparent quality, use 192-256kbps. At 64kbps Opus still sounds better than most other codecs at the same bitrate." },
+      { question: "Will Opus play on my devices?", answer: "Opus is supported in Chrome, Firefox, Edge, and Android. It is not natively supported in Safari (macOS Sonoma and later have partial support) or older iOS versions. Check your target device before converting." },
+      { question: "Does the conversion preserve track metadata?", answer: "Basic metadata like artist name, album, and track title transfers from FLAC to Opus. FLAC-specific tags are mapped to equivalent Opus fields during conversion." },
+      { question: "Can I convert back from Opus to FLAC?", answer: "You can, but it is pointless. Opus discards audio data during compression. Converting Opus to FLAC creates a lossless file containing already-degraded audio — the quality does not improve." },
+    ],
     showInCategory: false,
   },
   {
@@ -827,6 +848,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to WAV format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to WAV — Convert Opus audio files into uncompressed WAV format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "Why would I convert lossy Opus to lossless WAV?", answer: "Some professional audio software, DAWs, and hardware only accept WAV input. Converting Opus to WAV makes the audio compatible with these tools, though it cannot recover lost quality." },
+      { question: "Will converting to WAV improve the audio quality?", answer: "No. WAV is lossless but the source Opus file has already discarded audio data. The WAV output will sound identical to the Opus — it just uses more storage space." },
+      { question: "How much larger will the WAV file be?", answer: "A 4-minute Opus song at 128kbps (about 4MB) becomes roughly 40-50MB as WAV. The file size increase is dramatic because WAV stores every sample uncompressed." },
+      { question: "What sample rate and bit depth does the WAV use?", answer: "The converter uses the source Opus file's sample rate (typically 48kHz) and outputs 16-bit PCM WAV by default. This is standard CD quality and compatible with virtually all audio software." },
+      { question: "Can I edit the WAV in Audacity or GarageBand?", answer: "Yes. WAV is universally supported in every audio editor. Open the converted file directly in Audacity, GarageBand, Logic Pro, Pro Tools, or any DAW." },
+    ],
     showInCategory: false,
   },
   {
@@ -847,6 +875,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to OGG — Convert Opus audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "Why convert Opus to OGG?", answer: "Opus is newer and more efficient, but OGG Vorbis has broader device and software support. Some older media players, car stereos, and gaming consoles recognize OGG but not Opus." },
+      { question: "Will I lose quality converting Opus to OGG?", answer: "Both are lossy formats, so converting between them re-encodes the audio. The quality difference is minimal at high bitrates (192kbps+), but avoid repeatedly converting between lossy formats." },
+      { question: "What is the typical output bitrate?", answer: "The converter defaults to matching the source bitrate. If your Opus file is 128kbps, the OGG output will be similar. You can adjust the target bitrate for different quality or file size tradeoffs." },
+      { question: "Does OGG Vorbis sound worse than Opus?", answer: "At identical bitrates, Opus generally outperforms OGG Vorbis, especially at low bitrates. At 256kbps and above, the difference becomes negligible for most listeners." },
+      { question: "Is OGG supported in web browsers?", answer: "Yes. OGG Vorbis is supported in Chrome, Firefox, and Edge. Safari added OGG support in macOS Ventura. It is widely used for web audio and game sound effects." },
+    ],
     showInCategory: false,
   },
   {
@@ -867,6 +902,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert OPUS audio files to AAC format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online Opus to AAC — Convert Opus audio files into AAC format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "Why convert Opus to AAC?", answer: "AAC is the universal standard for music downloads, streaming platforms, and Apple devices. If you need to submit audio to a service that requires AAC, this conversion gets you there." },
+      { question: "How does AAC quality compare to Opus?", answer: "At the same bitrate, Opus is generally more efficient than AAC. At 256kbps, most listeners cannot tell the difference. For critical listening, keep your Opus originals." },
+      { question: "Will the file size increase?", answer: "AAC typically needs a slightly higher bitrate than Opus to achieve equivalent quality. A 128kbps Opus file might become a 160-192kbps AAC file of similar perceptual quality." },
+      { question: "Does the conversion preserve metadata?", answer: "Standard metadata fields like title, artist, album, and track number transfer from Opus to AAC. Custom or non-standard tags may not survive the conversion." },
+      { question: "Can I use the AAC output on iPhone?", answer: "Yes. AAC is Apple's preferred audio format. The converted file plays natively in Apple Music, GarageBand, and any iOS audio app without additional conversion." },
+    ],
     showInCategory: false,
   },
   {
@@ -917,6 +959,13 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Convert AIFF audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
     seoDescription: 'Free online AIFF to OGG — Convert AIFF audio files into OGG Vorbis format. ',
     dependencies: "FFmpeg.wasm",
+    faqs: [
+      { question: "What is AIFF and why would I have these files?", answer: "AIFF (Audio Interchange File Format) is Apple's equivalent of WAV — lossless, uncompressed audio. Mac users often have AIFF files from GarageBand, iTunes, or professional audio workflows." },
+      { question: "Why convert AIFF to OGG instead of MP3?", answer: "OGG Vorbis at the same bitrate as MP3 generally produces better sound quality. At 192kbps, OGG is considered transparent by most listeners while being fully open-source with no licensing fees." },
+      { question: "How much smaller will the OGG file be?", answer: "A typical 5-minute AIFF song (about 50MB) becomes roughly 5-8MB as OGG at 192kbps. That is an 85-90% reduction in file size." },
+      { question: "Will my AIFF metadata transfer to OGG?", answer: "Standard tags like title, artist, album, and genre transfer automatically. AIFF uses a different metadata format than OGG, but the converter maps the fields correctly." },
+      { question: "Can I use OGG in my video projects?", answer: "OGG is supported in most video editors and web players. Some proprietary software like older versions of Final Cut or Adobe Premiere may not import OGG directly. Check your editor's format support." },
+    ],
     showInCategory: false,
   },
   {
