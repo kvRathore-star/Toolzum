@@ -11,6 +11,141 @@ interface ToolPageSEOContentProps {
 
 const broadTypes = new Set(['generator', 'checker', 'tester', 'builder']);
 
+type InteractionPattern =
+  | { pattern: 'upload-convert-download'; inputType: string }
+  | { pattern: 'upload-process-download' }
+  | { pattern: 'enter-values-result' }
+  | { pattern: 'paste-text-process-copy' }
+  | { pattern: 'upload-edit-visual-download' }
+  | { pattern: 'ai-generate' }
+  | { pattern: 'click-generate'; hasOptions: boolean }
+  | { pattern: 'other' };
+
+const ZERO_INPUT_TOOLS = new Set(['dice-roller', 'coin-flipper', 'password-strength-checker']);
+
+const KNOWN_INPUT_TYPES = new Set([
+  'pdf', 'jpg', 'jpeg', 'png', 'gif', 'webp', 'heic', 'heif', 'bmp', 'tiff', 'tif', 'svg', 'avif', 'ico',
+  'mp4', 'mov', 'avi', 'webm', 'mkv', 'flv', 'wmv', 'm4v', 'mpg', 'mpeg', '3gp', 'video',
+  'mp3', 'wav', 'ogg', 'm4a', 'flac', 'aac', 'wma', 'opus', 'audio',
+  'json', 'xml', 'csv', 'yaml', 'yml', 'toml', 'ini', 'env',
+  'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'odt', 'ods', 'odp',
+  'epub', 'mobi', 'txt', 'rtf', 'md', 'markdown',
+  'zip', 'rar', '7z', 'tar', 'gz',
+  'css', 'html', 'htm', 'js', 'ts', 'jsx', 'tsx',
+  'sql', 'graphql', 'proto',
+  'apng', 'psd', 'cbz', 'eml', 'scss',
+  'base64', 'hex', 'rgb', 'hsl',
+  'text', 'image', 'speech', 'scan', 'url', 'tailwind',
+  'slack', 'handwriting', 'sqlite',
+  'csv/excel', 'odt/rtf',
+]);
+
+const ACTION_VERBS = /^(add|remove|crop|merge|split|rotate|compress|extract|insert|delete|batch|import)\s/i;
+
+function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
+  const n = tool.name.toLowerCase();
+  const s = tool.slug;
+  const dep = (tool.dependencies || '').toLowerCase();
+  const cat = (tool.category || '').toLowerCase();
+
+  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'canvas api'];
+  const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'converter', 'archive', 'document', 'transcription'].includes(cat);
+
+  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page'))) {
+    return { pattern: 'upload-process-download' };
+  }
+
+  const toMatch = n.match(/(.+?)\s+to\s+/i);
+  if (toMatch && hasFileInput) {
+    const raw = toMatch[1].trim();
+    const inputType = raw.replace(/^(bulk|add)\s+/i, '').trim();
+    if (!ACTION_VERBS.test(raw) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
+      return { pattern: 'upload-convert-download', inputType };
+    }
+  }
+  if (s.includes('-to-') && hasFileInput) {
+    const raw = s.split('-to-')[0];
+    const inputType = raw.replace(/^(bulk|add)/, '').trim();
+    if (inputType && !ACTION_VERBS.test(inputType) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
+      return { pattern: 'upload-convert-download', inputType };
+    }
+  }
+  if (dep.includes('canvas') || dep.includes('fabric') || dep.includes('cropper')) {
+    return { pattern: 'upload-edit-visual-download' };
+  }
+
+  if (cat === 'calculator' || cat === 'finance' || cat === 'health') {
+    return { pattern: 'enter-values-result' };
+  }
+  if (n.includes('calculator') || n.includes('converter') && !hasFileInput) {
+    return { pattern: 'enter-values-result' };
+  }
+  if (UNIT_FAMILIES[s]) {
+    return { pattern: 'enter-values-result' };
+  }
+
+  if (dep.includes('api') && !dep.includes('vanilla') && !dep.includes('canvas')) {
+    return { pattern: 'ai-generate' };
+  }
+  if (n.includes('text to speech') || n.includes('tts') || n.includes('speech to text') || n.includes('transcri')) {
+    return { pattern: 'ai-generate' };
+  }
+
+  if (ZERO_INPUT_TOOLS.has(s)) {
+    return { pattern: 'click-generate', hasOptions: false };
+  }
+  if (n.includes('generator') || n.includes('maker') || n.includes('random') || n.includes('wheel') || n.includes('password') || n.includes('uuid') || n.includes('dice') || n.includes('coin') || n.includes('barcode') || n.includes('qr code') || n.includes('lorem')) {
+    return { pattern: 'click-generate', hasOptions: true };
+  }
+
+  if (cat === 'developer' || cat === 'text' || cat === 'seo' || cat === 'privacy') {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  if (dep.includes('vanilla js') || dep.includes('fast-xml-parser') || dep.includes('json')) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+
+  return { pattern: 'other' };
+}
+
+const interactionPatternTemplates: Record<string, ((inputType?: string) => { title: string; desc: string }[]) | { title: string; desc: string }[]> = {
+  'upload-convert-download': (inputType?: string) => [
+    { title: `1. Upload Your ${inputType || 'File'}`, desc: `Select a ${inputType || 'file'} from your device. Drag and drop or use the file browser to upload.` },
+    { title: "2. Select Output Format", desc: "Choose your desired output format from the available options." },
+    { title: "3. Convert & Download", desc: "Click convert to process locally, then download the result to your device." },
+  ],
+  'upload-process-download': [
+    { title: "1. Upload Your File", desc: "Select a file from your device. Drag and drop or use the file browser to upload." },
+    { title: "2. Adjust Settings", desc: "Configure the processing options — quality, dimensions, format, or compression level." },
+    { title: "3. Process & Download", desc: "Click the process button to run the operation locally, then download the result." },
+  ],
+  'enter-values-result': [
+    { title: "1. Enter Your Values", desc: "Fill in the input fields with your numbers, dates, or measurements." },
+    { title: "2. See Instant Results", desc: "Results update automatically as you adjust your inputs." },
+    { title: "3. Copy or Save", desc: "Copy the result to your clipboard or note it down for your use." },
+  ],
+  'paste-text-process-copy': [
+    { title: "1. Paste Your Text", desc: "Enter your code, text, or data into the input area." },
+    { title: "2. Click Process", desc: "Run the operation — format, validate, encode, convert, or analyze." },
+    { title: "3. Copy the Result", desc: "Copy the output to your clipboard with one click." },
+  ],
+  'upload-edit-visual-download': [
+    { title: "1. Upload an Image", desc: "Select an image from your device to load into the editor." },
+    { title: "2. Edit on the Canvas", desc: "Use the visual tools to adjust, draw, add text, or apply effects." },
+    { title: "3. Download Your Image", desc: "Export the finished image in your preferred format." },
+  ],
+  'ai-generate': [
+    { title: "1. Enter Your Prompt", desc: "Describe what you want — text, image, voice, or translation." },
+    { title: "2. Generate", desc: "Click generate and wait for the AI to process your request." },
+    { title: "3. Download the Result", desc: "Review the output and download or copy it for your use." },
+  ],
+  'click-generate': [
+    { title: "1. Set Options (if needed)", desc: "Adjust any available settings like length, format, or count." },
+    { title: "2. Click Generate", desc: "Click the generate button to produce your output instantly." },
+    { title: "3. Copy the Result", desc: "Copy the generated output to your clipboard." },
+  ],
+};
+
 const fileProcessingCategories = new Set(['image', 'audio', 'video', 'pdf', 'converter', 'archive', 'document']);
 
 const keywordTypeRules: [RegExp, string][] = [
@@ -578,7 +713,17 @@ export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
 
   const toolType = deriveToolType(tool.slug, tool.name, tool.description, tool.category);
   const seoType = tool.category === 'SEO' ? deriveSeoInstructionType(tool.slug, tool.name, tool.description) : null;
-  const steps = tool.instructions || formatSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
+  const interactionPattern = deriveInteractionPattern(tool);
+  let patternSteps: { title: string; desc: string }[] | null = null;
+  if (interactionPattern.pattern !== 'other') {
+    const tmpl = interactionPatternTemplates[interactionPattern.pattern];
+    if (typeof tmpl === 'function') {
+      patternSteps = (tmpl as (inputType?: string) => { title: string; desc: string }[])((interactionPattern as { inputType?: string }).inputType);
+    } else {
+      patternSteps = tmpl as { title: string; desc: string }[];
+    }
+  }
+  const steps = tool.instructions || formatSteps || patternSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
   const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
   const formatFaq = pair ? {
     question: `Why convert ${FORMAT_INFO[pair.from].name} to ${FORMAT_INFO[pair.to].name}?`,
