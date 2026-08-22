@@ -23,6 +23,18 @@ import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
 import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
 
+const BULK_PRESET_SLUGS = new Set([
+  'bulk-audio-converter', 'bulk-audio-normalizer', 'bulk-csv-excel-to-json',
+  'bulk-ebook-converter', 'bulk-exif-stripper-injector', 'bulk-face-anonymizer',
+  'bulk-font-subsetter', 'bulk-heic-to-jpg', 'bulk-heic-converter',
+  'bulk-image-compressor', 'bulk-image-resizer', 'bulk-image-to-pdf',
+  'bulk-image-to-text-ocr', 'bulk-invoice-receipt-parser',
+  'bulk-markdown-to-pdf-html', 'bulk-pdf-data-extractor',
+  'bulk-pdf-form-extractor', 'bulk-pdf-size-reducer', 'bulk-pdf-suite',
+  'bulk-regex-extractor-replacer', 'bulk-subtitle-time-shifter',
+  'bulk-svg-to-png', 'bulk-image-converter', 'image-compressor', 'image-resizer',
+]);
+
 interface ToolLayoutProps {
   title: string;
   description: string;
@@ -187,8 +199,8 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             {tool && <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>}
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
-            <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>
-            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+            {BULK_PRESET_SLUGS.has(slug) && <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>}
+            {BULK_PRESET_SLUGS.has(slug) && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             <ShareTool title={title} slug={slug} category={category} />
             {!hideDownloadQuota && <DownloadQuotaBadge />}
           </div>
