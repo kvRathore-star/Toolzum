@@ -20,7 +20,7 @@ type BlockEvent =
 const reasonCopy: Record<PlanLimitReason, { title: string; body: string }> = {
   file_size: {
     title: "File too large for your plan",
-    body: "This file is over your plan's size limit. Upgrade to Pro for up to 500MB uploads.",
+    body: "This file is over your plan's size limit. Upgrade to Pro for up to 2GB uploads.",
   },
   batch_size: {
     title: "Batch too large for your plan",

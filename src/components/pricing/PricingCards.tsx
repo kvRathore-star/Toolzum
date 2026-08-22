@@ -105,7 +105,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                <span className="line-through">Pro: 1-Click ZIP downloads, workflow presets, 500MB files</span>
+                <span className="line-through">Pro: 1-Click ZIP downloads, workflow presets, 2GB files</span>
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />

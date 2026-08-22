@@ -63,6 +63,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- mark mounted to avoid hydration mismatch in theme-aware footer
@@ -93,7 +94,7 @@ export function Footer() {
                 <a href="https://wa.me/?text=Check+out+Toolzum+—+privacy-first+browser+tools,+all+free.+https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-emerald-500/30 hover:bg-emerald-700 transition-all" title="Share on WhatsApp">WA</a>
                 <a href="https://reddit.com/submit?url=https://toolzum.com&title=Toolzum+—+privacy-first+browser+tools" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-orange-500/30 hover:bg-orange-600 transition-all" title="Share on Reddit">RD</a>
                 <a href="https://t.me/share/url?url=https://toolzum.com&text=Check+out+Toolzum+—+privacy-first+browser+tools" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-sky-500/30 hover:bg-sky-600 transition-all" title="Share on Telegram">TG</a>
-                <button onClick={async () => { try { await navigator.clipboard.writeText('https://toolzum.com'); } catch {} }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
+                <button onClick={async () => { try { await navigator.clipboard.writeText('https://toolzum.com'); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch {} }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">{copied ? <Check className="w-3.5 h-3.5 text-[var(--success)]" /> : '🔗'}</button>
               </div>
             </div>
           </div>
