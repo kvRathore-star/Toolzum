@@ -15,7 +15,7 @@ const ALPHA_NOISE_FLOOR = 3 / 255;
 const ALPHA_THRESHOLD = 0.002;
 const MAX_ALPHA = 0.99;
 const LOGO_VALUE = 255;
-const FREE_MONTHLY_LIMIT = 25;
+const FREE_MONTHLY_LIMIT = 10;
 
 function getFreeUsageCount(): number {
   if (typeof window === 'undefined') return 0;

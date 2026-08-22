@@ -34,6 +34,7 @@ interface ToolLayoutProps {
   proToolCount: number;
   toolCount: number;
   relatedTools: RelatedTool[];
+  hideDownloadQuota?: boolean;
 }
 
 const SITE_URL = "https://toolzum.com";
@@ -52,7 +53,7 @@ function getRelativePath(category: string, slug: string): string {
   return `/${getCategoryPath(category)}/${slug}`;
 }
 
-export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp }: ToolLayoutProps) {
+export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp, hideDownloadQuota }: ToolLayoutProps) {
   const [userPlan, setUserPlan] = useState<string | null>(null);
   const { data: sessionData, isPending } = useSession();
 
@@ -189,7 +190,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <ShareTool title={title} slug={slug} category={category} />
-            <DownloadQuotaBadge />
+            {!hideDownloadQuota && <DownloadQuotaBadge />}
           </div>
 
           {/* Tool Container */}
