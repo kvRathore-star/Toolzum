@@ -453,7 +453,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Object Remover — Lets you brush over an unwanted object, blemish, or watermark in a photo, then fills the area with contextually plausible pixels. ',
-    dependencies: "Lama Cleaner",
+    dependencies: "Canvas API",
   },
   {
     id: "38",

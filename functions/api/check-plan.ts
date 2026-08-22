@@ -3,8 +3,8 @@ interface Env {
 }
 
 export const PLAN_LIMITS: Record<string, { maxFileSizeMB: number; maxBatchSize: number; threads: number }> = {
-  free:     { maxFileSizeMB: 50,   maxBatchSize: 1,   threads: 1 },
-  signedin: { maxFileSizeMB: 500,  maxBatchSize: 10,  threads: 1 },
+  free:     { maxFileSizeMB: 30,   maxBatchSize: 1,   threads: 1 },
+  signedin: { maxFileSizeMB: 150,  maxBatchSize: 10,  threads: 1 },
   pro:      { maxFileSizeMB: 2000, maxBatchSize: 500, threads: 6 },
 };
 

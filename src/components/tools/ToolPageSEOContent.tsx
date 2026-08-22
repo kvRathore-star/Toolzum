@@ -349,7 +349,7 @@ export const categoryFaqTemplates: Record<string, { question: string; answer: st
     { question: "How long does video processing take?", answer: "Processing time depends on file size, your device's CPU, and the operation. Most conversions complete within seconds to a few minutes." },
     { question: "Is video quality preserved?", answer: "Quality depends on your selected settings. Higher bitrate and resolution presets produce better quality but larger file sizes." },
     { question: "Can I process videos offline?", answer: "Yes. All video processing uses FFmpeg WASM running locally in your browser. No uploads or servers involved." },
-    { question: "What's the maximum video file size?", answer: "There's no imposed limit, but files over 500MB may require significant RAM and could perform slowly on older devices." },
+    { question: "What's the maximum video file size?", answer: "Free users can process up to 30MB. Signing in increases the limit to 150MB. Pro subscribers can process files up to 2GB with batch support." },
   ],
   "Audio": [
     { question: "What audio formats can I convert?", answer: "Supported formats include MP3, WAV, OGG, M4A, FLAC, and audio tracks extracted from video files." },

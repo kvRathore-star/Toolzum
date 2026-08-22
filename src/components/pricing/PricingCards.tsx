@@ -89,7 +89,7 @@ export function PricingCards() {
             <ul className="space-y-4 text-sm text-[var(--text-secondary)] mb-8 border-t border-[var(--border-subtle)] pt-6">
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>Single-file processing — 10-50MB per file (20-500MB after signing in)</span>
+                <span>Single-file processing — 10-30MB per file (20-150MB after signing in)</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
