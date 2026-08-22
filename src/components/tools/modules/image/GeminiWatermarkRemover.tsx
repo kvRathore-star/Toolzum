@@ -425,17 +425,6 @@ export default function GeminiWatermarkRemover() {
           />
         </div>
       )}
-
-      <div className="border-t border-[var(--border-default)] pt-4 mt-6">
-        <h3 className="text-sm font-medium text-[var(--text-primary)] mb-2">How it works</h3>
-        <ul className="text-xs text-[var(--text-secondary)] space-y-1">
-          <li>• Gemini adds a visible sparkle watermark using alpha blending in the bottom-right corner</li>
-          <li>• This tool mathematically reverses the blending formula to recover the original pixels</li>
-          <li>• Auto-detects 48×48 and 96×96 watermark sizes based on image dimensions</li>
-          <li>• 100% client-side — your images never leave your browser</li>
-          <li>• Does not remove invisible SynthID watermarks embedded in pixel data</li>
-        </ul>
-      </div>
     </div>
   );
 }
