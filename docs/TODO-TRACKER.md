@@ -19,7 +19,17 @@ Last updated: 2026-08-23
 - [x] 7b. One-way converter upgrade — examples, conversion factors, references for 6 tools; Time & Data Size flipped to two-way; specific FAQs (150 lines)
 - [x] 8. Thin-tool audit — merged 3 time converter clones into bidirectional time-converter; upgraded rounding calculator (5 modes + step display); upgraded modulo calculator (JS/Python semantics + long-division); added FAQs for all 3 (commit a796dcc)
 
-## Blocked on Decisions
+## Mechanical (proven playbook, no decision needed)
+- [ ] 13. FAQ rollout (top 30 most-visited tools) — content volume, same process as 578-tool batch
+- [ ] 14. Developer dedup — API Response Formatter ≈ JSON Formatter, HTTP Status ≈ API Error Decoder. Same 301-redirect playbook as earlier duplicate clusters (curl-to-code, video-pair, YAML pair)
+- [ ] 15. Calculator consolidation — Square Root, Rectangle Area, Triangle Area, Pythagorean Theorem, Leap Year, Day of Year all redundant with Geometry/Scientific calculators. Redirect or merge
+- [ ] 16. Transcription reclassification — rename "Audio to Text" / "Video to Text" to "Transcript Formatter" or similar. They're text post-processors, not speech-to-text. Fix name + description, no structural change
+- [x] 17. ~~Branding AI-claim fix~~ — Already fixed. deps was "None" (now "AI API"), UI saying "AI-powered" is accurate (tool uses useAiProvider). Auto-generated FAQ now correctly states API key required. (commit ed11ea6)
+
+## Needs one strategic decision
+- [ ] 18. Productivity category — build out (habit trackers, focus timers, note tools?) or fold 2 tools into Utility and remove category. A 2-tool category looks unfinished next to 60+ tool categories. Recommend fold+kill unless productivity is core to growth strategy
+
+## Business decisions (separate thread)
 - [ ] 9. Email capture — where do signups go?
 - [ ] 10. Annual plan / credit pack — what price/credit size?
 
