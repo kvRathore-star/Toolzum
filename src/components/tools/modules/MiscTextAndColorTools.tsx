@@ -95,6 +95,14 @@ export function GuidGenerator() {
           </div>
         ))}
       </div>
+      <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
+        <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">UUID versions explained</p>
+        <div className="grid grid-cols-2 gap-3 text-xs text-[var(--text-muted)]">
+          <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="font-mono text-[var(--text-primary)]">v4</span> — Random. No guarantees on uniqueness beyond probability. Use for database IDs, session tokens.</div>
+          <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="font-mono text-[var(--text-primary)]">v7</span> — Time-ordered. Sortable by creation time. Use for event IDs, logging, distributed systems.</div>
+        </div>
+        <p className="text-xs text-[var(--text-muted)]">Format: <code className="bg-[var(--bg-overlay)] px-1 rounded">xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx</code> — 32 hex digits with 4 version bits and 2 variant bits.</p>
+      </div>
     </Section>
   );
 }

@@ -128,15 +128,35 @@ export function PercentageDifferenceCalculator() {
   const clr = ac('PercentageDifferenceCalculator');
   const [a, setA] = useState('100');
   const [b, setB] = useState('150');
-  const avg = (Number(a) + Number(b)) / 2;
-  const diff = avg ? Math.abs(Number(a) - Number(b)) / avg * 100 : 0;
+  const numA = Number(a), numB = Number(b);
+  const avg = (numA + numB) / 2;
+  const diff = avg ? Math.abs(numA - numB) / avg * 100 : 0;
+  const maxVal = Math.max(Math.abs(numA), Math.abs(numB), 1);
   return (
     <Section title="Percentage Difference">
       <div className="flex gap-2 items-center">
-        <Input label="Value" value={a} onChange={setA} />
-        <Input label="Value" value={b} onChange={setB} />
+        <Input label="Value A" value={a} onChange={setA} />
+        <Input label="Value B" value={b} onChange={setB} />
       </div>
       <div className="text-lg font-bold">{diff.toFixed(2)}% difference</div>
+      {numA !== 0 && numB !== 0 && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-3">
+          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">How it's calculated</p>
+          <div className="font-mono text-xs text-[var(--text-primary)] space-y-1">
+            <p>|{numA} - {numB}| = {Math.abs(numA - numB)}</p>
+            <p>( {numA} + {numB} ) / 2 = {avg}</p>
+            <p>{Math.abs(numA - numB)} / {avg} × 100 = <span className="font-bold text-amber-500">{diff.toFixed(2)}%</span></p>
+          </div>
+          <div className="flex gap-2 items-center text-xs text-[var(--text-muted)]">
+            <div className="h-2 bg-blue-500 rounded-full" style={{ width: `${(Math.abs(numA) / maxVal) * 100}%` }} />
+            <span>{numA}</span>
+            <span className="text-[var(--text-muted)]">vs</span>
+            <div className="h-2 bg-rose-500 rounded-full" style={{ width: `${(Math.abs(numB) / maxVal) * 100}%` }} />
+            <span>{numB}</span>
+          </div>
+          <p className="text-xs text-[var(--text-muted)]">Both values are treated equally — there's no "original" or "new" value. The result is always the same regardless of which value you enter first.</p>
+        </div>
+      )}
     </Section>
   );
 }
@@ -495,10 +515,22 @@ export function CombinationCalculator() {
   return (
     <Section title="Combinations (nCr)">
       <div className="flex gap-2 items-center">
-        <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />
-        <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
+        <Input label="n (total items)" type="number" value={n} onChange={setN} placeholder="n" />
+        <Input label="r (choose)" type="number" value={r} onChange={setR} placeholder="r" />
       </div>
       <div className="text-lg font-bold">C({nn}, {rr}) = {isFinite(c) ? c.toFixed(0) : 'N/A'}</div>
+      {isFinite(c) && nn > 0 && rr > 0 && rr <= nn && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-3">
+          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">How it's calculated</p>
+          <div className="font-mono text-xs text-[var(--text-primary)] space-y-1">
+            <p>C({nn}, {rr}) = {nn}! / ({rr}! × ({nn}-{rr})!)</p>
+            <p>= {nn}! / ({rr}! × {nn - rr}!)</p>
+            <p>= {fact(nn)} / ({fact(rr)} × {fact(nn - rr)})</p>
+            <p>= <span className="font-bold text-amber-500">{c.toFixed(0)}</span></p>
+          </div>
+          <p className="text-xs text-[var(--text-muted)]">Combinations count groups where order doesn't matter — choosing 3 from 5 gives the same group regardless of selection order. For order matters, use permutations (nPr).</p>
+        </div>
+      )}
     </Section>
   );
 }

@@ -41,6 +41,7 @@ export function WordCounter() {
   const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim()).length;
   const readingTime = words > 0 ? Math.ceil(words / 200) : 0;
   const speakingTime = words > 0 ? Math.ceil(words / 150) : 0;
+  const avgWordsPerSentence = sentences > 0 ? (words / sentences).toFixed(1) : '0';
 
   return (
     <Section title="Word Counter">
@@ -59,6 +60,17 @@ export function WordCounter() {
           </div></div>) : (<p className="text-[var(--text-muted)] text-sm">Start typing to see live statistics</p>)}
         </div>
       </div>
+      {words > 0 && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
+          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Readability snapshot</p>
+          <div className="grid grid-cols-3 gap-3 text-xs">
+            <div><span className="font-bold text-[var(--text-primary)]">{avgWordsPerSentence}</span> <span className="text-[var(--text-muted)]">avg words/sentence</span></div>
+            <div><span className="font-bold text-[var(--text-primary)]">{readingTime} min</span> <span className="text-[var(--text-muted)]">reading time (200 wpm)</span></div>
+            <div><span className="font-bold text-[var(--text-primary)]">{speakingTime} min</span> <span className="text-[var(--text-muted)]">speaking time (150 wpm)</span></div>
+          </div>
+          <p className="text-xs text-[var(--text-muted)]">Aim for 15-20 words per sentence for web content. Blog posts: 1,000-2,500 words. Social media: 100-300 words.</p>
+        </div>
+      )}
     </Section>
   );
 }
@@ -143,6 +155,15 @@ export function KeywordDensityChecker() {
           <button onClick={check} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Check Density</button>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">{density ? (<div className="space-y-4"><div className="grid grid-cols-2 gap-3"><div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{density.count}</p><p className="text-xs text-[var(--text-muted)]">Occurrences</p></div><div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold">{density.total}</p><p className="text-xs text-[var(--text-muted)]">Total Words</p></div></div><div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl"><div className="flex justify-between items-center"><span className="text-sm font-bold text-[var(--text-secondary)]">Density</span><span className="text-2xl font-extrabold text-amber-500">{density.percentage.toFixed(2)}%</span></div><div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden mt-2"><div style={{ width: `${Math.min(density.percentage * 5, 100)}%` }} className="bg-amber-500 h-full rounded-full" /></div></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Check keyword density in text</p>)}</div>
+      </div>
+      <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
+        <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What the numbers mean</p>
+        <div className="grid grid-cols-3 gap-3 text-xs">
+          <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg"><span className="font-bold text-green-600">1-2%</span> <span className="text-[var(--text-muted)]">Natural, readable density</span></div>
+          <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg"><span className="font-bold text-amber-600">2-3%</span> <span className="text-[var(--text-muted)]">Optimal for SEO</span></div>
+          <div className="p-2 bg-red-50 dark:bg-red-900/20 rounded-lg"><span className="font-bold text-red-600">3%+</span> <span className="text-[var(--text-muted)]">Keyword stuffing risk</span></div>
+        </div>
+        <p className="text-xs text-[var(--text-muted)]">Density is calculated as: (keyword occurrences ÷ total words) × 100. Matches are exact and case-insensitive. Partial word matches are not counted.</p>
       </div>
     </Section>
   );
@@ -297,14 +318,36 @@ export function CaseConverter() {
   const [text, setText] = useState('hello world from toolzum'); const [result, setResult] = useState('');
   const convert = (type: string) => { switch (type) { case 'upper': setResult(text.toUpperCase()); break; case 'lower': setResult(text.toLowerCase()); break; case 'title': setResult(text.replace(/\b\w/g, c => c.toUpperCase())); break; case 'sentence': setResult(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()); break; case 'camel': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'pascal': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'snake': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('_')); break; case 'kebab': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('-')); break; } };
 
+  const cases = [
+    { id: 'upper', label: 'UPPER', example: 'HELLO WORLD' },
+    { id: 'lower', label: 'lower', example: 'hello world' },
+    { id: 'title', label: 'Title Case', example: 'Hello World' },
+    { id: 'sentence', label: 'Sentence', example: 'Hello world' },
+    { id: 'camel', label: 'camelCase', example: 'helloWorld' },
+    { id: 'pascal', label: 'PascalCase', example: 'HelloWorld' },
+    { id: 'snake', label: 'snake_case', example: 'hello_world' },
+    { id: 'kebab', label: 'kebab-case', example: 'hello-world' },
+  ];
+
   return (
     <Section title="Case Converter">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <Input label="Text" value={text} onChange={setText} rows={5} />
-          <div className="flex flex-wrap gap-2">{[['UPPER','upper'],['lower','lower'],['Title Case','title'],['Sentence','sentence'],['camelCase','camel'],['PascalCase','pascal'],['snake_case','snake'],['kebab-case','kebab']].map(([label, id]) => (<button key={id} onClick={() => convert(id)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{label}</button>))}</div>
+          <div className="flex flex-wrap gap-2">{cases.map((c) => (<button key={c.id} onClick={() => convert(c.id)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{c.label}</button>))}</div>
         </div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[150px]">{result ? (<><textarea readOnly value={result} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and choose a case</p>)}</div>
+      </div>
+      <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
+        <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">When to use each case</p>
+        <div className="grid grid-cols-2 gap-2 text-xs text-[var(--text-muted)]">
+          <div><span className="font-mono text-[var(--text-primary)]">camelCase</span> — JavaScript variables, React props</div>
+          <div><span className="font-mono text-[var(--text-primary)]">PascalCase</span> — React components, class names</div>
+          <div><span className="font-mono text-[var(--text-primary)]">snake_case</span> — Python, database columns, env vars</div>
+          <div><span className="font-mono text-[var(--text-primary)]">kebab-case</span> — CSS classes, URLs, file names</div>
+          <div><span className="font-mono text-[var(--text-primary)]">UPPER_SNAKE</span> — Constants, environment variables</div>
+          <div><span className="font-mono text-[var(--text-primary)]">Title Case</span> — Headings, titles, UI labels</div>
+        </div>
       </div>
     </Section>
   );
@@ -510,6 +553,15 @@ export function CanonicalUrlChecker() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4"><Input label="URL" type="url" value={url} onChange={setUrl} /><button onClick={check} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Check URL</button></div>
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<pre className="text-sm font-mono whitespace-pre-wrap">{result}</pre>) : (<p className="text-[var(--text-muted)] text-sm">Check canonical URL structure</p>)}</div>
+      </div>
+      <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
+        <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What this checks</p>
+        <p className="text-xs text-[var(--text-muted)]">Validates URL structure using the browser's native <code className="bg-[var(--bg-overlay)] px-1 rounded">URL</code> constructor. Checks for common canonical issues: fragments, query params, trailing slashes, www prefix.</p>
+        <div className="grid grid-cols-2 gap-2 text-xs text-[var(--text-muted)]">
+          <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg"><span className="font-bold text-green-600">✓ Checks</span> — URL format, protocol, domain, path, query params, fragments</div>
+          <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg"><span className="font-bold text-amber-600">✗ Doesn't check</span> — DNS resolution, HTTP status, redirect chains, actual canonical tags</div>
+        </div>
+        <p className="text-xs text-[var(--text-muted)]">For full canonical validation, check the <code className="bg-[var(--bg-overlay)] px-1 rounded">&lt;link rel="canonical"&gt;</code> tag in your page's HTML and verify it matches your preferred URL.</p>
       </div>
     </Section>
   );
