@@ -758,26 +758,5 @@
 /video/video-converter-tool    /converter/video-converter/   301
 /video/webm-to-mp3/   /converter/webm-to-mp3/   301
 /video/webm-to-mp3    /converter/webm-to-mp3/   301
-
-# Developer dedup — merge near-duplicates
-/developer/api-response-formatter/   /developer/json-formatter/   301
-/developer/api-response-formatter    /developer/json-formatter/   301
-/developer/api-error-decoder/   /developer/http-status-code-checker/   301
-/developer/api-error-decoder    /developer/http-status-code-checker/   301
-
-# Calculator consolidation — redirect to broader tools
-/calculator/rectangle-area-calculator/   /calculator/geometry-calculator/   301
-/calculator/rectangle-area-calculator    /calculator/geometry-calculator/   301
-/calculator/triangle-area-calculator/   /calculator/geometry-calculator/   301
-/calculator/triangle-area-calculator    /calculator/geometry-calculator/   301
-/calculator/pythagorean-theorem-calculator/   /calculator/geometry-calculator/   301
-/calculator/pythagorean-theorem-calculator    /calculator/geometry-calculator/   301
-/calculator/square-root-calculator/   /calculator/scientific-calculator/   301
-/calculator/square-root-calculator    /calculator/scientific-calculator/   301
-/calculator/leap-year-calculator/   /calculator/date-addition-calculator/   301
-/calculator/leap-year-calculator    /calculator/date-addition-calculator/   301
-/calculator/day-of-year-calculator/   /calculator/week-number-calculator/   301
-/calculator/day-of-year-calculator    /calculator/week-number-calculator/   301
-
 # ==== DYNAMIC RULES (keep last — everything after the first splat/placeholder counts as dynamic) ====
 /growth-&-marketing/*   /growth-metrics/:splat   301

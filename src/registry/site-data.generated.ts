@@ -17,13 +17,13 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1152;
+export const TOOL_COUNT = 1149;
 
 export const SITE_STATS = {
-  totalImplemented: 1068,
-  freeTierTotal: 1030,
-  localTools: 1030,
-  cloudTools: 31,
+  totalImplemented: 1065,
+  freeTierTotal: 1027,
+  localTools: 1026,
+  cloudTools: 32,
   hybridTools: 4,
 } as const;
 
@@ -357,7 +357,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/utility/dice-roller"
       }
     ],
-    "allCount": 86,
+    "allCount": 83,
     "allHref": "/utility",
     "isIndia": false
   },
