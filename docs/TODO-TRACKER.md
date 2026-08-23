@@ -20,14 +20,27 @@ Last updated: 2026-08-23
 - [x] 8. Thin-tool audit — merged 3 time converter clones into bidirectional time-converter; upgraded rounding calculator (5 modes + step display); upgraded modulo calculator (JS/Python semantics + long-division); added FAQs for all 3 (commit a796dcc)
 
 ## Mechanical (proven playbook, no decision needed)
-- [ ] 13. FAQ rollout (top 30 most-visited tools) — content volume, same process as 578-tool batch
+- [ ] 13. FAQ rollout — GSC "crawled, not indexed" is the priority signal, not raw traffic. Cross-reference the 174/220-tool flagged list against current indexing status. Tier 1 (improve category templates) first, then GSC-flagged tools, then general rollout at relaxed pace
 - [ ] 14. Developer dedup — API Response Formatter ≈ JSON Formatter, HTTP Status ≈ API Error Decoder. Same 301-redirect playbook as earlier duplicate clusters (curl-to-code, video-pair, YAML pair)
 - [ ] 15. Calculator consolidation — Square Root, Rectangle Area, Triangle Area, Pythagorean Theorem, Leap Year, Day of Year all redundant with Geometry/Scientific calculators. Redirect or merge
 - [ ] 16. Transcription reclassification — rename "Audio to Text" / "Video to Text" to "Transcript Formatter" or similar. They're text post-processors, not speech-to-text. Fix name + description, no structural change
 - [x] 17. ~~Branding AI-claim fix~~ — Already fixed. deps was "None" (now "AI API"), UI saying "AI-powered" is accurate (tool uses useAiProvider). Auto-generated FAQ now correctly states API key required. (commit ed11ea6)
 
+## Immediate actions
+- [ ] 23. Improve 6 category FAQ templates in ToolPageSEOContent.tsx (Tier 1 — raises floor for all 818 tools without custom FAQs)
+- [ ] 24. Submit IndexNow / re-validate GSC for latest fixes (classifier, trust bugs, related-tools)
+
+## GSC monitoring (time-gated)
+- [ ] 19. Submit IndexNow / re-validate GSC for this round of fixes (classifier, trust bugs, related-tools, FAQ content) — free nudge, do now
+- [ ] 20. GSC check at 2 weeks (early signal) — pull crawled-not-indexed list, check Validate Fix progress bars, per-URL indexing status on the174/220 flagged tools
+- [ ] 21. GSC check at 4 weeks (real assessment) — same checks, compare against 2-week data. Recovery is often uneven across pages
+- [ ] 22. GSC monthly check-in after 4 weeks — light monitoring cadence
+
 ## Needs one strategic decision
 - [ ] 18. Productivity category — build out (habit trackers, focus timers, note tools?) or fold 2 tools into Utility and remove category. A 2-tool category looks unfinished next to 60+ tool categories. Recommend fold+kill unless productivity is core to growth strategy
+
+## Prevention (ongoing)
+- [ ] 25. Add lint check: new tools without `faqs` field in registry trigger a warning. Prevents future818-tool backlog. Bake into the tool-addition checklist.
 
 ## Business decisions (separate thread)
 - [ ] 9. Email capture — where do signups go?
