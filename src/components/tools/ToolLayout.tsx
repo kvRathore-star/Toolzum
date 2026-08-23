@@ -211,7 +211,21 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
           {/* Tool Container */}
           <div className="w-full text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow overflow-hidden relative">
             <GlobalErrorBoundary>
-              <WorkflowPresetPanel toolSlug={slug}>
+              {BULK_PRESET_SLUGS.has(slug) ? (
+                <WorkflowPresetPanel toolSlug={slug}>
+                  <ToolPaywall
+                    isLocked={isLocked}
+                    isFreeTier={isFreeTier}
+                    isProLocked={isProLocked}
+                    showSignInPrompt={showSignInPrompt}
+                    proToolCount={proToolCount}
+                    toolCount={toolCount}
+                    title={title}
+                  >
+                    {children}
+                  </ToolPaywall>
+                </WorkflowPresetPanel>
+              ) : (
                 <ToolPaywall
                   isLocked={isLocked}
                   isFreeTier={isFreeTier}
@@ -223,7 +237,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 >
                   {children}
                 </ToolPaywall>
-              </WorkflowPresetPanel>
+              )}
             </GlobalErrorBoundary>
           </div>
 
