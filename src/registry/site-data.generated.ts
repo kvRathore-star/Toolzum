@@ -17,11 +17,11 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1148;
+export const TOOL_COUNT = 1152;
 
 export const SITE_STATS = {
-  freeTierTotal: 1026,
-  localTools: 1027,
+  freeTierTotal: 1030,
+  localTools: 1030,
   cloudTools: 31,
   hybridTools: 4,
 } as const;
@@ -29,7 +29,7 @@ export const SITE_STATS = {
 export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   {
     "title": "Image",
-    "icon": "🖼",
+    "icon": "image",
     "tools": [
       {
         "name": "Image Compressor",
@@ -60,13 +60,13 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/image/png-to-jpg"
       }
     ],
-    "allCount": 38,
+    "allCount": 42,
     "allHref": "/image",
     "isIndia": false
   },
   {
     "title": "PDF",
-    "icon": "📄",
+    "icon": "pdf",
     "tools": [
       {
         "name": "PDF Compressor",
@@ -103,7 +103,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Video",
-    "icon": "📹",
+    "icon": "video",
     "tools": [
       {
         "name": "Video Compressor",
@@ -140,7 +140,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Audio",
-    "icon": "🎵",
+    "icon": "audio",
     "tools": [
       {
         "name": "Text to Speech (TTS)",
@@ -177,7 +177,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "AI",
-    "icon": "🤖",
+    "icon": "ai",
     "tools": [
       {
         "name": "AI Image Generator",
@@ -214,7 +214,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Developer",
-    "icon": "💻",
+    "icon": "developer",
     "tools": [
       {
         "name": "JSON Formatter",
@@ -251,7 +251,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Text",
-    "icon": "✍",
+    "icon": "text",
     "tools": [
       {
         "name": "Character Counter",
@@ -288,7 +288,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Finance",
-    "icon": "💰",
+    "icon": "finance",
     "tools": [
       {
         "name": "Currency Converter",
@@ -325,7 +325,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Utility",
-    "icon": "🔧",
+    "icon": "utility",
     "tools": [
       {
         "name": "QR Code Generator",
@@ -362,7 +362,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Converter",
-    "icon": "🔄",
+    "icon": "converter",
     "tools": [
       {
         "name": "MKV to MP4",
@@ -385,21 +385,21 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/converter/markdown-tools"
       },
       {
-        "name": "Archive Converter",
-        "href": "/converter/archive-converter"
+        "name": "JSON to XML",
+        "href": "/converter/json-to-xml"
       },
       {
-        "name": "EPUB to PDF",
-        "href": "/converter/epub-to-pdf"
+        "name": "Archive Converter",
+        "href": "/converter/archive-converter"
       }
     ],
-    "allCount": 37,
+    "allCount": 38,
     "allHref": "/converter",
     "isIndia": false
   },
   {
     "title": "Privacy",
-    "icon": "🔒",
+    "icon": "privacy",
     "tools": [
       {
         "name": "Temporary Email Generator",
@@ -436,7 +436,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "SEO",
-    "icon": "📈",
+    "icon": "seo",
     "tools": [
       {
         "name": "Keyword Density Checker",
@@ -473,7 +473,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "Branding",
-    "icon": "🎨",
+    "icon": "branding",
     "tools": [
       {
         "name": "Logo Maker",
@@ -510,7 +510,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
   },
   {
     "title": "India",
-    "icon": "🇮🇳",
+    "icon": "indian-utilities",
     "tools": [
       {
         "name": "Passport Photo Maker (India)",

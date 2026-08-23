@@ -12,13 +12,58 @@ type FamilyConfig = {
   desc: string;
   units: UnitDef[];
   baseUnit: string;
-  /** For families where all units are linear (multiply to base), provide per-unit multipliers */
   multipliers?: Record<string, number>;
-  /** For families needing custom convert (e.g. temperature) */
   customConvert?: (v: number, from: string, to: string) => number;
-  /** Show all units in a list (like length/weight) rather than from/to selector */
   showAll?: boolean;
+  examples?: { label: string; value: string }[];
+  conversionFactors?: string[];
+  references?: { label: string; value: string }[];
 };
+
+function ConverterExamples({ examples, onSelect }: { examples: { label: string; value: string }[]; onSelect: (v: string) => void }) {
+  if (!examples || examples.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-2">
+      {examples.map(ex => (
+        <button key={ex.label} onClick={() => onSelect(ex.value)}
+          className="px-3 py-1.5 text-xs rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors">
+          {ex.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ConverterMeta({ family }: { family: FamilyConfig }) {
+  if (!family.conversionFactors && !family.references) return null;
+  return (
+    <div className="space-y-4 pt-2">
+      {family.conversionFactors && family.conversionFactors.length > 0 && (
+        <div>
+          <h3 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Conversion Factors</h3>
+          <div className="grid grid-cols-2 gap-1.5">
+            {family.conversionFactors.map(f => (
+              <div key={f} className="text-xs text-[var(--text-muted)] bg-[var(--bg-surface)] rounded-lg px-2.5 py-1.5 font-mono">{f}</div>
+            ))}
+          </div>
+        </div>
+      )}
+      {family.references && family.references.length > 0 && (
+        <div>
+          <h3 className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Common References</h3>
+          <div className="space-y-1">
+            {family.references.map(r => (
+              <div key={r.label} className="flex justify-between text-xs bg-[var(--bg-surface)] rounded-lg px-2.5 py-1.5">
+                <span className="text-[var(--text-secondary)]">{r.label}</span>
+                <span className="text-[var(--text-muted)] font-mono">{r.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: string }) {
   const [value, setValue] = useState('100');
@@ -40,16 +85,19 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
     setOutput(`${v} ${fromLabel} = ${result.toFixed(4)} ${toLabel}`);
   };
 
+  const swap = () => { setFrom(to); setTo(from); setOutput(''); };
+
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
+      <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
         <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
         <input type="number" value={value} onChange={e => setValue(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
           <select value={from} onChange={e => setFrom(e.target.value)}
@@ -57,6 +105,9 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
         </div>
+        <button onClick={swap} className="mb-0.5 px-2 py-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors text-xs" title="Swap units">
+          &#8644;
+        </button>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
           <select value={to} onChange={e => setTo(e.target.value)}
@@ -74,6 +125,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
           {output}
         </div>
       )}
+      <ConverterMeta family={family} />
     </div>
   );
 }
@@ -97,6 +149,7 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
       <h2 className="text-lg font-bold text-[var(--text-primary)]">{family.title}</h2>
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
+      <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
         <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value (in {family.baseUnit})</label>
         <input type="number" value={value} onChange={e => setValue(e.target.value)}
@@ -110,6 +163,7 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
           </div>
         ))}
       </div>
+      <ConverterMeta family={family} />
     </div>
   );
 }

@@ -11,6 +11,12 @@ type FamilyConfig = {
   customConvert?: (v: number, from: string, to: string) => number;
   /** Show all units in a list (like length/weight) rather than from/to selector */
   showAll?: boolean;
+  /** Clickable example values that pre-fill the input */
+  examples?: { label: string; value: string }[];
+  /** Conversion factors shown below results (must match tool's underlying math exactly) */
+  conversionFactors?: string[];
+  /** Real-world size references (use "~" for approximations) */
+  references?: { label: string; value: string }[];
 };
 
 export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
@@ -24,6 +30,11 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
       { key: "yd", label: "Yards" }, { key: "mi", label: "Miles" },
     ],
     multipliers: { mm: 1000, cm: 100, m: 1, km: 0.001, in: 39.3701, ft: 3.28084, yd: 1.09361, mi: 0.000621371 },
+    conversionFactors: [
+      "1 inch = 2.54 cm (exactly)",
+      "1 foot = 0.3048 m (exactly)",
+      "1 mile = 1.60934 km",
+    ],
   },
   "length-converter": {
     title: "Length Converter", desc: "Convert between meters, kilometers, miles, feet, and more",
@@ -35,6 +46,22 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
       { key: "yd", label: "Yards" }, { key: "mi", label: "Miles" },
     ],
     multipliers: { mm: 1000, cm: 100, m: 1, km: 0.001, in: 39.3701, ft: 3.28084, yd: 1.09361, mi: 0.000621371 },
+    examples: [
+      { label: "Smartphone (~6 in)", value: "15.24" },
+      { label: "Room height (~3 m)", value: "3" },
+      { label: "Marathon (~42.2 km)", value: "42.195" },
+    ],
+    conversionFactors: [
+      "1 inch = 2.54 cm (exactly)",
+      "1 foot = 0.3048 m (exactly)",
+      "1 yard = 0.9144 m (exactly)",
+      "1 mile = 1.60934 km",
+    ],
+    references: [
+      { label: "Pencil length", value: "~19 cm / ~7.5 in" },
+      { label: "Door height", value: "~2 m / ~6.5 ft" },
+      { label: "Football field (American)", value: "~100 yd / ~91.4 m" },
+    ],
   },
   "weight-converter": {
     title: "Weight Converter", desc: "Convert between kilograms, pounds, ounces, and more",
@@ -46,6 +73,22 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
       { key: "st", label: "Stone" },
     ],
     multipliers: { mg: 1e6, g: 1000, kg: 1, t: 0.001, lb: 2.20462, oz: 35.274, st: 0.157473 },
+    examples: [
+      { label: "Apple (~150 g)", value: "150" },
+      { label: "Person (~70 kg)", value: "70" },
+      { label: "Car (~1.5 t)", value: "1500" },
+    ],
+    conversionFactors: [
+      "1 pound = 0.453592 kg",
+      "1 ounce = 28.3495 g",
+      "1 stone = 6.35029 kg",
+      "1 metric ton = 1000 kg",
+    ],
+    references: [
+      { label: "Bag of sugar", value: "~1 kg / ~2.2 lb" },
+      { label: "Average human", value: "~62 kg / ~137 lb" },
+      { label: "Small car", value: "~1000–1500 kg" },
+    ],
   },
   "volume-converter": {
     title: "Volume Converter", desc: "Convert between liters, gallons, cups, and more",
@@ -57,6 +100,22 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
       { key: "floz", label: "Fluid Ounces" },
     ],
     multipliers: { ml: 1000, l: 1, gal: 0.264172, qt: 1.05669, pt: 2.11338, cup: 4.22675, floz: 33.814 },
+    examples: [
+      { label: "Soda can (~355 mL)", value: "355" },
+      { label: "Water bottle (~500 mL)", value: "500" },
+      { label: "Bathtub (~300 L)", value: "300" },
+    ],
+    conversionFactors: [
+      "1 gallon (US) = 3.78541 L",
+      "1 cup = 236.588 mL",
+      "1 fluid ounce = 29.5735 mL",
+      "1 pint = 473.176 mL",
+    ],
+    references: [
+      { label: "Soda can", value: "~355 mL / ~12 fl oz" },
+      { label: "Coffee mug", value: "~300 mL / ~10 fl oz" },
+      { label: "Olympic pool", value: "~2.5 million L / ~660k gal" },
+    ],
   },
   "area-converter": {
     title: "Area Converter", desc: "Convert between square meters, acres, hectares, and more",
@@ -68,6 +127,22 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
       { key: "ha", label: "Hectares" },
     ],
     multipliers: { sqmm: 1e6, sqcm: 10000, sqm: 1, sqkm: 0.000001, sqft: 10.7639, ac: 0.000247105, ha: 0.0001 },
+    examples: [
+      { label: "Studio apartment (~400 ft²)", value: "37.16" },
+      { label: "House (~2000 ft²)", value: "185.8" },
+      { label: "Land (~5 acres)", value: "20234" },
+    ],
+    conversionFactors: [
+      "1 acre = 4046.86 m²",
+      "1 hectare = 10,000 m²",
+      "1 ft² = 0.092903 m²",
+      "1 km² = 1,000,000 m²",
+    ],
+    references: [
+      { label: "Parking space", value: "~12–15 m² / ~130–160 ft²" },
+      { label: "Tennis court", value: "~261 m² / ~2809 ft²" },
+      { label: "Soccer pitch (FIFA)", value: "~7140 m² / ~1.76 acres" },
+    ],
   },
   "speed-converter": {
     title: "Speed Converter", desc: "Convert between km/h, mph, knots, and more",
@@ -119,23 +194,55 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
   },
   "time-converter": {
     title: "Time Converter", desc: "Convert between seconds, minutes, hours, days, weeks",
-    baseUnit: "seconds", showAll: true,
+    baseUnit: "seconds", showAll: false,
     units: [
       { key: "seconds", label: "Seconds" }, { key: "minutes", label: "Minutes" },
       { key: "hours", label: "Hours" }, { key: "days", label: "Days" },
       { key: "weeks", label: "Weeks" },
     ],
     multipliers: { seconds: 1, minutes: 1 / 60, hours: 1 / 3600, days: 1 / 86400, weeks: 1 / 604800 },
+    examples: [
+      { label: "3 minutes", value: "3" },
+      { label: "2 hours", value: "2" },
+      { label: "1 day", value: "1" },
+    ],
+    conversionFactors: [
+      "1 minute = 60 seconds",
+      "1 hour = 3600 seconds",
+      "1 day = 86,400 seconds",
+      "1 week = 604,800 seconds",
+    ],
+    references: [
+      { label: "Movie runtime", value: "~2 hours / ~7200 s" },
+      { label: "Work week", value: "~40 hours / ~5 days" },
+      { label: "Earth rotation", value: "~24 hours / ~86,400 s" },
+    ],
   },
   "data-size-converter": {
     title: "Data Size Converter", desc: "Convert between bytes, kilobytes, megabytes, and more",
-    baseUnit: "B", showAll: true,
+    baseUnit: "B", showAll: false,
     units: [
       { key: "b", label: "Bytes" }, { key: "kb", label: "Kilobytes" },
       { key: "mb", label: "Megabytes" }, { key: "gb", label: "Gigabytes" },
       { key: "tb", label: "Terabytes" }, { key: "pb", label: "Petabytes" },
     ],
     multipliers: { b: 1, kb: 1 / 1024, mb: 1 / (1024 * 1024), gb: 1 / (1024 * 1024 * 1024), tb: 1 / (1024 ** 4), pb: 1 / (1024 ** 5) },
+    examples: [
+      { label: "Song (~5 MB)", value: "5" },
+      { label: "HD movie (~5 GB)", value: "5" },
+      { label: "SSD (~512 GB)", value: "512" },
+    ],
+    conversionFactors: [
+      "1 KB = 1024 Bytes",
+      "1 MB = 1024 KB",
+      "1 GB = 1024 MB",
+      "1 TB = 1024 GB",
+    ],
+    references: [
+      { label: "Text email", value: "~10 KB" },
+      { label: "MP3 song (3 min)", value: "~3–5 MB" },
+      { label: "USB flash drive", value: "~32–256 GB" },
+    ],
   },
   "cooking-measurement-converter": {
     title: "Cooking Measurement Converter", desc: "Convert between teaspoons, tablespoons, cups, and milliliters",

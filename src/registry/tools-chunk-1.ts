@@ -8,7 +8,14 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Unit Converter — Universal unit conversion tool handling length, mass, volume, temperature, area, speed, time, and digital data. ',
     category: 'Utility',
     id:  "224",
-    dependencies: 'None'
+    dependencies: 'None',
+    faqs: [
+      { question: "What units can this converter handle?", answer: "Length (mm, cm, m, km, in, ft, yd, mi) with more unit families available. Enter any value and see the conversion to all supported units instantly." },
+      { question: "How many feet are in a meter?", answer: "1 meter = 3.28084 feet. All conversions use internationally standardized factors." },
+      { question: "How many inches in a centimeter?", answer: "1 inch = 2.54 cm exactly. This is a defined international agreement, not an approximation." },
+      { question: "How far is a marathon?", answer: "A marathon is 42.195 km (26.2 miles). The exact distance was standardized by the IAAF in 1921." },
+      { question: "Does this converter work offline?", answer: "Yes. All conversions run locally in your browser using JavaScript. No data is sent to any server." },
+    ],
   },
   {
     name: 'Video Watermark Adder',
