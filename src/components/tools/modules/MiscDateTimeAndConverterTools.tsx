@@ -176,44 +176,6 @@ export function HoursMinutesCalculator() {
     </Section>
   );
 }
-// --- MinutesToHoursConverter ---
-export function MinutesToHoursConverter() {
-  const clr = ac('MinutesToHoursConverter');
-  const [mins, setMins] = useState('150');
-  const m = Number(mins);
-  return (
-    <Section title="Minutes → Hours Converter">
-      <Input label="Value" type="number" value={mins} onChange={setMins} />
-      <div className="text-lg font-bold">{Math.floor(m / 60)}h {m % 60}m</div>
-      <div className="text-xs text-muted">Decimal: {(m / 60).toFixed(2)} hours</div>
-    </Section>
-  );
-}
-// --- HoursToMinutesTool ---
-export function HoursToMinutesTool() {
-  const clr = ac('HoursToMinutesTool');
-  const [hrs, setHrs] = useState('2.5');
-  const h = Number(hrs);
-  return (
-    <Section title="Hours → Minutes Tool">
-      <Input label="Value" type="number" value={hrs} onChange={setHrs} step="0.1" />
-      <div className="text-lg font-bold">{Math.floor(h * 60)} minutes</div>
-      <div className="text-xs text-muted">{h * 3600} seconds</div>
-    </Section>
-  );
-}
-// --- SecondsToMinutesConverter ---
-export function SecondsToMinutesConverter() {
-  const clr = ac('SecondsToMinutesConverter');
-  const [sec, setSec] = useState('3661');
-  const s = Number(sec);
-  return (
-    <Section title="Seconds → Minutes Converter">
-      <Input label="Value" type="number" value={sec} onChange={setSec} />
-      <div className="text-lg font-bold">{Math.floor(s / 3600)}h {Math.floor((s % 3600) / 60)}m {s % 60}s</div>
-    </Section>
-  );
-}
 // --- SpeedConverter ---
 export function SpeedConverter() {
   const clr = ac('SpeedConverter');

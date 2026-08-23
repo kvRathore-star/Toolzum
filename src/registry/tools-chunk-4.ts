@@ -577,9 +577,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Modulo Calculator",
     slug: "modulo-calculator",
     category: "Calculator",
-    description: 'Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. ',
+    description: 'Calculate the remainder of division (a mod b). Shows quotient, remainder, full division expression, and negative dividend semantics. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Modulo Calculator \u2014 Calculate the remainder of division (a mod b). Shows quotient, remainder, full division expression, and negative dividend semantics. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is modulo?", answer: "Modulo (mod) returns the remainder after division. For example, 17 mod 5 = 2 because 17 = 5 × 3 + 2. It's used in cryptography, hash functions, clock arithmetic, and array indexing." },
+      { question: "Why does JavaScript give a different result than Python for negative numbers?", answer: "JavaScript's % truncates the quotient toward zero, so -7 % 3 = -1. Python floors toward negative infinity, so -7 % 3 = 2. Both are valid — they just define 'remainder' differently. This tool shows both results when they differ." },
+      { question: "What is the visual long division?", answer: "It shows the complete division expression: dividend ÷ divisor = decimal, the integer quotient, and the remainder calculation (dividend − divisor × quotient = remainder). This helps verify the result step by step." },
+      { question: "What is 'mod' used for in programming?", answer: "Common uses: checking if a number is even/odd (n % 2), cycling through array indices (i % length), implementing hash tables, clock arithmetic (hours % 12), and modular exponentiation in cryptography." },
+    ],
   },
   {
     id: "853",
@@ -631,9 +637,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: "Rounding Calculator",
     slug: "rounding-calculator",
     category: "Calculator",
-    description: 'Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Rounding Calculator \u2014 Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. ',
+    description: 'Round numbers using 5 modes: round half up, banker\'s rounding, floor, ceil, and truncate. Shows step-by-step explanation with the digit being rounded. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online Rounding Calculator \u2014 Round numbers using 5 modes: round half up, banker\'s rounding, floor, ceil, and truncate. Shows step-by-step explanation. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is banker's rounding?", answer: "Banker's rounding (round half to even) rounds 0.5 to the nearest even number. For example, 2.5 → 2 and 3.5 → 4. This avoids the statistical bias that standard rounding introduces when processing large datasets. Used in IEEE 754 and financial reporting." },
+      { question: "What's the difference between floor, ceil, and truncate?", answer: "Floor rounds toward −∞ (−3.7 → −4), ceil rounds toward +∞ (−3.7 → −3), and truncate simply drops decimals (−3.7 → −3). For positive numbers, floor = truncate. They differ for negative numbers." },
+      { question: "Why does the step display matter?", answer: "It shows you exactly which digit is being rounded and why the result is what it is. For example, rounding 3.145 to 2 places: the third decimal digit is 5, so round-half-up rounds up to 3.15." },
+      { question: "When should I use each rounding mode?", answer: "Round half up: everyday math. Banker's rounding: statistical/financial data. Floor: when you need the lower bound. Ceil: when you need the upper bound. Truncate: when you need to drop decimals without rounding (e.g., integer division)." },
+    ],
   },
   {
     id: "859",
@@ -965,26 +977,6 @@ export const entries_chunk_4: ToolMetadata[] = [
     dependencies: "None",
   },
 
-  {
-
-    id: "895",
-    name: "Minutes to Hours Converter",
-    slug: "minutes-to-hours-converter",
-    category: "Utility",
-    description: 'Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Minutes to Hours Converter \u2014 Convert minutes to hours and minutes format. Also shows the decimal hours equivalent for payroll and billing. ',
-    dependencies: "None",
-},
-  {
-
-    id: "897",
-    name: "Seconds to Minutes Converter",
-    slug: "seconds-to-minutes-converter",
-    category: "Utility",
-    description: 'Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Seconds to Minutes Converter \u2014 Convert seconds to hours, minutes, and seconds format. Handles large values for video durations, countdowns, and scientific use. ',
-    dependencies: "None",
-},
   {
 
     id: "898",
@@ -1387,17 +1379,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.',
     seoDescription: 'Free online .gitignore Generator \u2014 Generate .gitignore files by selecting languages, frameworks, and tools. ',
     dependencies: "None",
-},
-  {
-
-    id: "937",
-    name: "Hours to Minutes Converter",
-    slug: "hours-to-minutes-converter",
-    category: "Utility",
-    description: 'Convert hours and minutes to total minutes for time tracking and scheduling. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Hours to Minutes Converter \u2014 Convert hours and minutes to total minutes for time tracking and scheduling. ',
-    dependencies: "None",
-},
+  },
   {
     id: "939",
     name: "SaaS Payback Period",

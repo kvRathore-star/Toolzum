@@ -25,7 +25,7 @@ Last updated: 2026-08-23
 
 ## Save for Focus Time
 - [ ] 11. FAQ rollout (~1,060 tools) — multi-day
-- [ ] 12. Registry-import perf rewrite (503KB chunk) — multi-day
+- [x] 12. Registry-import perf rewrite — eliminated 736KB full registry from client bundles; Homepage -567KB (30%), Tool page -734KB (35%) (commit 52dccf2)
 
 ---
 
@@ -37,3 +37,5 @@ Last updated: 2026-08-23
 - [x] Bulk Image Upscaler — commit 2c24b51
 - [x] Footer Indian Utilities link — verified consistent
 - [x] ⌘K search — verified auto-indexes from toolsRegistry
+- [x] Protobuf Decoder — rewrote with real wire format parsing (commit b06b887)
+- [x] User Favorites — D1 table, API endpoints, star buttons, homepage section, ⌘K group (commit 5ee786c)

@@ -3,6 +3,11 @@
 /growth-&-marketing   /growth-metrics/   301
 /growth-&-marketing/   /growth-metrics/   301
 
+# Thin time converters merged into bidirectional time-converter
+/minutes-to-hours-converter   /time-converter   301
+/seconds-to-minutes-converter   /time-converter   301
+/hours-to-minutes-converter   /time-converter   301
+
 # Category migration — tool moved from Finance to Indian Utilities
 /finance/gst-calculator/   /indian-utilities/gst-calculator/   301
 /finance/gst-calculator    /indian-utilities/gst-calculator/   301

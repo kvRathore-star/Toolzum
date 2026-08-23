@@ -557,16 +557,57 @@ export function ModuloCalculator() {
   const [a, setA] = useState('17');
   const [b, setB] = useState('5');
   const na = Number(a), nb = Number(b);
-  const mod = na % nb;
+
+  // JavaScript mod (truncates toward zero)
+  const jsMod = na % nb;
+  const jsQuotient = Math.floor(na / nb);
+
+  // Python/Floored mod (always positive remainder)
+  const pyMod = ((na % nb) + nb) % nb;
+  const pyQuotient = Math.floor(na / nb);
+
+  const differs = jsMod !== pyMod && na < 0;
+
   return (
     <Section title="Modulo Calculator">
       <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={a} onChange={setA} />
-        <span className="text-sm">mod</span>
-        <Input label="Value" type="number" value={b} onChange={setB} />
+        <Input label="Dividend (a)" type="number" value={a} onChange={setA} />
+        <span className="text-sm font-bold">mod</span>
+        <Input label="Divisor (b)" type="number" value={b} onChange={setB} />
       </div>
-      <div className="text-lg font-bold">{na} mod {nb} = {mod}</div>
-      <div className="text-xs text-[var(--text-secondary)]">{na} = {nb} x {Math.floor(na / nb)} + {mod}</div>
+
+      <div className="space-y-2">
+        <div className="text-lg font-bold">{na} mod {nb} = {jsMod}</div>
+        <div className="text-xs text-[var(--text-secondary)]">
+          {na} = {nb} × {jsQuotient} + {jsMod}
+        </div>
+
+        {differs && (
+          <div className="p-2 rounded bg-[var(--muted)] text-xs space-y-1">
+            <div className="font-bold">⚠ Negative dividend — mod semantics differ:</div>
+            <div>JS: {na} % {nb} = {jsMod} (truncates toward zero)</div>
+            <div>Python: {na} % {nb} = {pyMod} (floors toward −∞)</div>
+            <div className="text-[var(--text-secondary)]">
+              JS: {na} = {nb} × {jsQuotient} + {jsMod} | Python: {na} = {nb} × {pyQuotient} + {pyMod}
+            </div>
+          </div>
+        )}
+
+        {!differs && na < 0 && (
+          <div className="p-2 rounded bg-[var(--muted)] text-xs">
+            Both JS and Python agree: {na} mod {nb} = {jsMod}
+          </div>
+        )}
+
+        <div className="p-2 rounded bg-[var(--muted)] text-xs space-y-1">
+          <div className="font-bold">Visual long division:</div>
+          <div className="font-mono text-[11px] leading-tail">
+            <div>{na} ÷ {nb} = {na / nb}</div>
+            <div>Quotient: {jsQuotient} (integer part)</div>
+            <div>Remainder: {na} − ({nb} × {jsQuotient}) = {jsMod}</div>
+          </div>
+        </div>
+      </div>
     </Section>
   );
 }
@@ -670,13 +711,74 @@ export function RoundingCalculator() {
   const clr = ac('RoundingCalculator');
   const [num, setNum] = useState('3.14159');
   const [places, setPlaces] = useState('2');
+  const [mode, setMode] = useState('half-up');
+  const n = Number(num);
+  const p = Number(places);
+
+  const getRounded = (mode: string) => {
+    const factor = 10 ** p;
+    switch (mode) {
+      case 'half-up': return Math.round(n * factor) / factor;
+      case 'half-even': {
+        const floor = Math.floor(n * factor) / factor;
+        const ceil = Math.ceil(n * factor) / factor;
+        const diffFloor = n - floor;
+        const diffCeil = ceil - n;
+        if (diffFloor < diffCeil) return floor;
+        if (diffCeil < diffFloor) return ceil;
+        const floorScaled = Math.floor(n * factor);
+        return (floorScaled % 2 === 0 ? floorScaled : floorScaled) / factor;
+      }
+      case 'floor': return Math.floor(n * factor) / factor;
+      case 'ceil': return Math.ceil(n * factor) / factor;
+      case 'truncate': return Math.trunc(n * factor) / factor;
+      default: return n;
+    }
+  };
+
+  const result = getRounded(mode);
+  const digit = (() => {
+    const str = Math.abs(n).toString();
+    const dotIdx = str.indexOf('.');
+    if (dotIdx === -1) return null;
+    const idx = dotIdx + 1 + p;
+    return idx < str.length ? Number(str[idx]) : null;
+  })();
+
   return (
     <Section title="Rounding Calculator">
       <div className="flex gap-2 items-center">
         <Input label="Value" type="number" value={num} onChange={setNum} />
-        <Input label="Value" type="number" min={0} max={15} value={places} onChange={setPlaces} />
+        <Input label="Decimal places" type="number" min={0} max={15} value={places} onChange={setPlaces} />
       </div>
-      <div className="text-lg font-bold">{Number(num).toFixed(Number(places))}</div>
+      <div className="flex gap-1 flex-wrap">
+        {[
+          ['half-up', 'Round Half Up'],
+          ['half-even', 'Banker\'s Rounding'],
+          ['floor', 'Floor (↓)'],
+          ['ceil', 'Ceil (↑)'],
+          ['truncate', 'Truncate'],
+        ].map(([key, label]) => (
+          <button key={key} onClick={() => setMode(key)}
+            className={`px-2 py-1 text-xs rounded border transition-colors ${mode === key ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'bg-[var(--card)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--accent)]'}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+      <div className="text-lg font-bold">{n} → {result}</div>
+      <div className="text-xs text-[var(--text-secondary)] space-y-1">
+        {digit !== null && (
+          <div>Digit at position {p + 1}: <span className="font-mono font-bold">{digit}</span></div>
+        )}
+        {mode === 'half-up' && <div>{digit !== null ? (digit >= 5 ? `≥ 5 → round up` : `< 5 → round down`) : 'No more digits to round'}</div>}
+        {mode === 'half-even' && <div>{digit !== null ? (digit > 5 ? `> 5 → round up` : digit < 5 ? `< 5 → round down` : `= 5 → round to even`) : 'No more digits to round'}</div>}
+        {mode === 'floor' && <div>Floor: always rounds toward −∞ (e.g. −3.7 → −4)</div>}
+        {mode === 'ceil' && <div>Ceil: always rounds toward +∞ (e.g. −3.7 → −3)</div>}
+        {mode === 'truncate' && <div>Truncate: drops decimals without rounding (e.g. −3.7 → −3)</div>}
+      </div>
+      <div className="text-xs text-[var(--text-secondary)]">
+        Common: {Number(num).toFixed(0)} (0dp), {Number(num).toFixed(1)} (1dp), {Number(num).toFixed(2)} (2dp), {Number(num).toFixed(3)} (3dp)
+      </div>
     </Section>
   );
 }

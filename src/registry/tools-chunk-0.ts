@@ -92,11 +92,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "time-converter",
     dependencies: "None",
     faqs: [
-      { question: "What time units can I convert between?", answer: "Seconds, minutes, hours, days, and weeks. Results include decimal precision." },
+      { question: "What time units can I convert between?", answer: "Seconds, minutes, hours, days, weeks, months, and years. Results include decimal precision for billing and scientific use." },
       { question: "How many seconds are in an hour?", answer: "1 hour = 3,600 seconds (60 minutes × 60 seconds). The converter uses exact factors for all calculations." },
-      { question: "Can I convert fractional time values?", answer: "Yes. You can enter decimal values like 1.5 hours or 0.5 days for precise conversions." },
+      { question: "How are months and years calculated?", answer: "Months use the average of 30.44 days (365.25 ÷ 12) and years use 365.24 days (accounting for leap years). These are approximate — exact conversion depends on the specific month and year." },
+      { question: "Can I convert fractional time values?", answer: "Yes. You can enter decimal values like 1.5 hours or 0.5 days for precise conversions. Enter seconds to see the equivalent in all other units simultaneously." },
+      { question: "How do I convert minutes to hours?", answer: "Select 'Minutes' as the source unit and 'Hours' as the target. For example, 150 minutes = 2.5 hours. The bidirectional selector lets you convert in either direction." },
       { question: "Is my input data stored?", answer: "No. Your input values are processed locally and never leave your browser." },
-      { question: "Can I use this offline?", answer: "Yes. The converter works entirely offline after the initial page load." },
     ],
 },
   {
