@@ -5,6 +5,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 export function QRCodeGenerator() {
   const clr = ac('QRCodeGenerator');
@@ -80,22 +81,67 @@ export function GuidGenerator() {
     return `${ts.slice(0,8)}-${ts.slice(8,12)}-7${r.slice(0,3)}-${(rand[0]&0x3f|0x80).toString(16)}${r.slice(3,7)}-${r.slice(7,15)}`;
   };
   const [guids, setGuids] = useState<string[]>([]);
+  const [count, setCount] = useState(1);
+  const [version, setVersion] = useState<4 | 7>(4);
+
+  const presets = [
+    { label: 'Single v4', apply: () => { setCount(1); setVersion(4); setGuids([gen(4)]); } },
+    { label: 'Batch 10 v4', apply: () => { setCount(10); setVersion(4); setGuids(Array.from({ length: 10 }, () => gen(4))); } },
+    { label: 'Batch 5 v7', apply: () => { setCount(5); setVersion(7); setGuids(Array.from({ length: 5 }, () => gen(7))); } },
+    { label: 'Clear', apply: () => { setGuids([]); setCount(1); } },
+  ];
+
+  const resultText = guids.length > 0
+    ? `Generated ${guids.length} UUID${guids.length > 1 ? 's' : ''} (v${version})`
+    : 'No GUIDs generated';
+
   return (
-    <Section title="GUID / UUID Generator">
-      <div className="flex gap-2">
-        <button className={btnClass(clr)} onClick={() => setGuids([gen(4), ...guids.slice(0, 9)])}>Generate UUID v4</button>
-        <button className={btnClass(clr)} onClick={() => setGuids([gen(7), ...guids.slice(0, 9)])}>Generate UUID v7</button>
-        <button className={btnClass(clr)} onClick={() => setGuids([])}>Clear</button>
-      </div>
-      <div className="space-y-1 max-h-64 overflow-auto">
-        {guids.map((g, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <code className="text-xs font-mono text-[var(--text-secondary)] flex-1">{g}</code>
-            <button className="text-xs text-blue-600 hover:underline" onClick={() => clipboardWrite(g)}>Copy</button>
+    <CalculatorShell title="GUID / UUID Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={guids.join('\n')} downloadFilename="guids.txt">
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Version</label>
+            <select value={version} onChange={e => setVersion(Number(e.target.value) as 4 | 7)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
+              <option value={4}>UUID v4 (Random)</option>
+              <option value={7}>UUID v7 (Timestamp + Random)</option>
+            </select>
           </div>
-        ))}
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
+            <input type="number" min={1} max={100} value={count} onChange={e => setCount(Number(e.target.value))}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <button onClick={() => setGuids(Array.from({ length: count }, () => gen(version)))}
+            className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors">
+            Generate {count} UUID{count > 1 ? 's' : ''}
+          </button>
+          <button onClick={() => setGuids([])} className="px-5 py-2.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-white rounded-xl text-sm font-medium transition-colors">
+            Clear
+          </button>
+        </div>
+
+        {guids.length > 0 && (
+          <div className="space-y-1 max-h-64 overflow-auto">
+            {guids.map((g, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <code className="text-xs font-mono text-[var(--text-secondary)] flex-1">{g}</code>
+                <button className="px-2 py-1 text-xs text-violet-600 hover:text-violet-500 hover:underline" onClick={() => clipboardWrite(g)}>Copy</button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {guids.length > 0 && (
+          <div className="text-xs text-[var(--text-muted)] text-center">
+            {guids.length} GUID{guids.length > 1 ? 's' : ''} generated — click to copy individually or use download
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- ColorConverter ---

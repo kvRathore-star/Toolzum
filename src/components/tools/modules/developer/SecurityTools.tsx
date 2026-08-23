@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback } from 'react';
 import { getErrorMessage } from '@/utils/error';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -229,10 +230,10 @@ export function HashGenerator() {
     const enc = new TextEncoder();
     const data = enc.encode(txt || ' ');
     const algos = [
-      { id: 'SHA-1', label: 'SHA-1', color: 'border-l-purple-400' },
-      { id: 'SHA-256', label: 'SHA-256', color: 'border-l-indigo-400' },
-      { id: 'SHA-384', label: 'SHA-384', color: 'border-l-blue-400' },
-      { id: 'SHA-512', label: 'SHA-512', color: 'border-l-violet-400' },
+      { id: 'SHA-1', label: 'SHA-1', color: 'border-l-purple-400', length: 40 },
+      { id: 'SHA-256', label: 'SHA-256', color: 'border-l-indigo-400', length: 64 },
+      { id: 'SHA-384', label: 'SHA-384', color: 'border-l-blue-400', length: 96 },
+      { id: 'SHA-512', label: 'SHA-512', color: 'border-l-violet-400', length: 128 },
     ];
     const run = async () => {
       const r: Record<string, string> = {};
@@ -247,32 +248,76 @@ export function HashGenerator() {
   };
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const copy = (id: string, val: string) => { navigator.clipboard.writeText(val).then(() => { setCopiedId(id); setTimeout(() => setCopiedId(null), 1500); }); };
+
+  const presets = [
+    { label: 'Hello World', apply: () => gen('Hello World') },
+    { label: 'Password Test', apply: () => gen('password123') },
+    { label: 'Pangram', apply: () => gen('The quick brown fox jumps over the lazy dog') },
+    { label: 'Common', apply: () => gen('admin') },
+    { label: 'Simple', apply: () => gen('test') },
+    { label: 'Clear', apply: () => { setText(''); setResults({}); } },
+  ];
+
+  const resultText = Object.keys(results).length > 0
+    ? `Generated ${Object.keys(results).length} hashes for "${text.slice(0, 30)}${text.length > 30 ? '...' : ''}"`
+    : 'Enter text to generate hashes';
+
+  const algoInfo = [
+    { id: 'SHA-1', label: 'SHA-1', color: 'purple', length: 40, deprecated: true },
+    { id: 'SHA-256', label: 'SHA-256', color: 'indigo', length: 64, deprecated: false },
+    { id: 'SHA-384', label: 'SHA-384', color: 'blue', length: 96, deprecated: false },
+    { id: 'SHA-512', label: 'SHA-512', color: 'violet', length: 128, deprecated: false },
+  ];
+
+  const downloadData = Object.keys(results).length > 0
+    ? Object.entries(results).map(([k, v]) => `${k}: ${v}`).join('\n')
+    : '';
+
   return (
-    <Section title="Hash Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {textPresets.map(t => <button key={t} onClick={() => gen(t)} className="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 border border-purple-500/20 transition-colors">{t}</button>)}
-      </div>
-      <Input label="Text to hash" value={text} onChange={v => { setText(v); setResults({}); }} placeholder="Enter text..." />
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Hashes</button>
-      {Object.keys(results).length > 0 && (
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[
-            { id: 'SHA-1', label: 'SHA-1', color: 'border-l-purple-400' },
-            { id: 'SHA-256', label: 'SHA-256', color: 'border-l-indigo-400' },
-            { id: 'SHA-384', label: 'SHA-384', color: 'border-l-blue-400' },
-            { id: 'SHA-512', label: 'SHA-512', color: 'border-l-violet-400' },
-          ].map(a => results[a.id] ? (
-            <div key={a.id} className={`bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 ${a.color}`}>
-              <div className="flex justify-between items-center mb-1">
-                <span className="text-xs font-semibold text-zinc-500">{a.label}</span>
-                <button onClick={() => copy(a.id, results[a.id])} className="px-2 py-0.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded transition-colors">{copiedId === a.id ? 'Copied!' : 'Copy'}</button>
-              </div>
-              <p className="font-mono text-xs text-zinc-900 dark:text-zinc-100 break-all">{results[a.id]}</p>
-            </div>
-          ) : null)}
+    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt">
+      <div className="space-y-4">
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text to Hash</label>
+          <textarea value={text} onChange={e => { setText(e.target.value); setResults({}); }} rows={4} placeholder="Enter text..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
         </div>
-      )}
-    </Section>
+
+        <button onClick={gen} className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">
+          Generate Hashes
+        </button>
+
+        {Object.keys(results).length > 0 && (
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {algoInfo.map(a => results[a.id] ? (
+              <div key={a.id} className={`bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-l-${a.color}-400 relative`}>
+                <div className="flex justify-between items-center mb-1">
+                  <span className="text-xs font-semibold text-zinc-500 flex items-center gap-1">
+                    {a.label}
+                    {a.deprecated && <span className="px-1.5 py-0.5 text-[10px] bg-rose-500/10 text-rose-600 dark:text-rose-400 rounded">Deprecated</span>}
+                    <span className="text-[var(--text-muted)] text-xs">({a.length} chars)</span>
+                  </span>
+                  <button onClick={() => copy(a.id, results[a.id])} className="px-2 py-0.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded transition-colors">
+                    {copiedId === a.id ? 'Copied!' : 'Copy'}
+                  </button>
+                </div>
+                <p className="font-mono text-xs text-zinc-900 dark:text-zinc-100 break-all">{results[a.id]}</p>
+              </div>
+            ) : null)}
+          </div>
+        )}
+
+        {Object.keys(results).length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Usage Notes</div>
+            <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc list-inside">
+              <li>SHA-256+ recommended for security; SHA-1 deprecated for certificates</li>
+              <li>Use HMAC for message authentication (not shown)</li>
+              <li>Hashes are one-way — cannot be reversed to original text</li>
+            </ul>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 

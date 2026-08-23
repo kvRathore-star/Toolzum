@@ -840,11 +840,85 @@ export function GreatestCommonFactorCalculator() {
   const [b, setB] = useState('18');
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const na = Number(a), nb = Number(b);
+  const result = gcd(na, nb);
+
+  const presets = [
+    { label: '12 & 18', apply: () => { setA('12'); setB('18'); } },
+    { label: '24 & 36', apply: () => { setA('24'); setB('36'); } },
+    { label: '48 & 180', apply: () => { setA('48'); setB('180'); } },
+    { label: '100 & 75', apply: () => { setA('100'); setB('75'); } },
+    { label: '81 & 153', apply: () => { setA('81'); setB('153'); } },
+  ];
+
+  const resultText = `GCF(${na}, ${nb}) = ${result}`;
+
+  const steps = (() => {
+    const s: string[] = [];
+    let x = na, y = nb;
+    while (y) {
+      const q = Math.floor(x / y);
+      const r = x % y;
+      s.push(`${x} = ${y} × ${q} + ${r}`);
+      [x, y] = [y, r];
+    }
+    return s;
+  })();
+
   return (
-    <Section title="GCF / GCD Calculator">
-      <div className="flex gap-2"><Input label="Value" type="number" value={a} onChange={setA} /><Input label="Value" type="number" value={b} onChange={setB} /></div>
-      <div className="text-lg font-bold">GCF({na}, {nb}) = {gcd(na, nb)}</div>
-    </Section>
+    <CalculatorShell title="GCF / GCD Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="blue">
+      <div className="space-y-4">
+        <div className="flex gap-2">
+          <div className="flex-1">
+            <label className={labelClass}>First number</label>
+            <input type="number" min={0} value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          </div>
+          <div className="flex-1">
+            <label className={labelClass}>Second number</label>
+            <input type="number" min={0} value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          </div>
+        </div>
+
+        {na > 0 && nb > 0 && (
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Greatest Common Factor</div>
+            <div className="text-4xl font-bold text-blue-700 dark:text-blue-300">{result}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Largest integer dividing both numbers</div>
+          </div>
+        )}
+
+        {na > 0 && nb > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Euclidean Algorithm Steps</div>
+            <div className="font-mono text-sm space-y-1 text-[var(--text-primary)]">
+              {steps.map((step, i) => (
+                <div key={i} className={i === steps.length - 1 ? 'font-bold text-emerald-600 dark:text-emerald-400' : ''}>
+                  {step}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {na > 0 && nb > 0 && (
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Are coprime?</div>
+              <div className={`text-sm font-bold ${result === 1 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                {result === 1 ? 'Yes' : 'No'}
+              </div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">LCM</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">
+                {na && nb ? (na * nb / result).toLocaleString() : '—'}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 // --- LeastCommonMultipleCalculator ---
@@ -855,11 +929,66 @@ export function LeastCommonMultipleCalculator() {
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const lcm = (x: number, y: number) => x && y ? (x * y) / gcd(x, y) : 0;
   const na = Number(a), nb = Number(b);
+  const result = lcm(na, nb);
+
+  const presets = [
+    { label: '4 & 6', apply: () => { setA('4'); setB('6'); } },
+    { label: '6 & 8', apply: () => { setA('6'); setB('8'); } },
+    { label: '12 & 18', apply: () => { setA('12'); setB('18'); } },
+    { label: '15 & 25', apply: () => { setA('15'); setB('25'); } },
+    { label: '7 & 11', apply: () => { setA('7'); setB('11'); } },
+  ];
+
+  const resultText = `LCM(${na}, ${nb}) = ${result}`;
+
   return (
-    <Section title="LCM Calculator">
-      <div className="flex gap-2"><Input label="Value" type="number" value={a} onChange={setA} /><Input label="Value" type="number" value={b} onChange={setB} /></div>
-      <div className="text-lg font-bold">LCM({na}, {nb}) = {lcm(na, nb)}</div>
-    </Section>
+    <CalculatorShell title="LCM Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet">
+      <div className="space-y-4">
+        <div className="flex gap-2">
+          <div className="flex-1">
+            <label className={labelClass}>First number</label>
+            <input type="number" min={0} value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+          <div className="flex-1">
+            <label className={labelClass}>Second number</label>
+            <input type="number" min={0} value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+        </div>
+
+        {na > 0 && nb > 0 && (
+          <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-violet-600 dark:text-violet-400 font-medium mb-1">Least Common Multiple</div>
+            <div className="text-4xl font-bold text-violet-700 dark:text-violet-300">{result.toLocaleString()}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Smallest positive multiple of both numbers</div>
+          </div>
+        )}
+
+        {na > 0 && nb > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+              <div>LCM(a, b) = |a × b| / GCF(a, b)</div>
+              <div className="text-[var(--text-secondary)]">{na} × {nb} / {gcd(na, nb)} = {result}</div>
+            </div>
+          </div>
+        )}
+
+        {na > 0 && nb > 0 && (
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">GCF</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">{gcd(na, nb)}</div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Product</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">{na * nb}</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 // --- ModuloCalculator ---
@@ -870,56 +999,86 @@ export function ModuloCalculator() {
   const na = Number(a), nb = Number(b);
 
   // JavaScript mod (truncates toward zero)
-  const jsMod = na % nb;
-  const jsQuotient = Math.floor(na / nb);
+  const jsMod = nb !== 0 ? na % nb : NaN;
+  const jsQuotient = nb !== 0 ? Math.floor(na / nb) : NaN;
 
   // Python/Floored mod (always positive remainder)
-  const pyMod = ((na % nb) + nb) % nb;
-  const pyQuotient = Math.floor(na / nb);
+  const pyMod = nb !== 0 ? ((na % nb) + nb) % nb : NaN;
+  const pyQuotient = nb !== 0 ? Math.floor(na / nb) : NaN;
 
-  const differs = jsMod !== pyMod && na < 0;
+  const differs = nb !== 0 && jsMod !== pyMod && na < 0;
+
+  const presets = [
+    { label: '17 mod 5', apply: () => { setA('17'); setB('5'); } },
+    { label: '-17 mod 5', apply: () => { setA('-17'); setB('5'); } },
+    { label: '23 mod 7', apply: () => { setA('23'); setB('7'); } },
+    { label: '-23 mod 7', apply: () => { setA('-23'); setB('7'); } },
+    { label: '100 mod 3', apply: () => { setA('100'); setB('3'); } },
+  ];
+
+  const resultText = nb !== 0
+    ? `${na} mod ${nb} = ${jsMod} (JS)${differs ? ` / ${pyMod} (Python)` : ''}`
+    : 'Divisor cannot be zero';
 
   return (
-    <Section title="Modulo Calculator">
-      <div className="flex gap-2 items-center">
-        <Input label="Dividend (a)" type="number" value={a} onChange={setA} />
-        <span className="text-sm font-bold">mod</span>
-        <Input label="Divisor (b)" type="number" value={b} onChange={setB} />
-      </div>
-
-      <div className="space-y-2">
-        <div className="text-lg font-bold">{na} mod {nb} = {jsMod}</div>
-        <div className="text-xs text-[var(--text-secondary)]">
-          {na} = {nb} × {jsQuotient} + {jsMod}
+    <CalculatorShell title="Modulo Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald">
+      <div className="space-y-4">
+        <div className="flex gap-2 items-end">
+          <div className="flex-1">
+            <label className={labelClass}>Dividend (a)</label>
+            <input type="number" value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+          <span className="text-sm font-bold self-center">mod</span>
+          <div className="flex-1">
+            <label className={labelClass}>Divisor (b)</label>
+            <input type="number" min={1} value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
         </div>
 
-        {differs && (
-          <div className="p-2 rounded bg-[var(--muted)] text-xs space-y-1">
-            <div className="font-bold">⚠ Negative dividend — mod semantics differ:</div>
-            <div>JS: {na} % {nb} = {jsMod} (truncates toward zero)</div>
-            <div>Python: {na} % {nb} = {pyMod} (floors toward −∞)</div>
-            <div className="text-[var(--text-secondary)]">
-              JS: {na} = {nb} × {jsQuotient} + {jsMod} | Python: {na} = {nb} × {pyQuotient} + {pyMod}
+        {nb !== 0 && (
+          <div className="space-y-3">
+            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+              <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">JavaScript / C-style</div>
+              <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">{na} mod {nb} = {jsMod}</div>
+              <div className="text-xs text-[var(--text-secondary)] mt-1">Truncates toward zero</div>
+            </div>
+
+            {differs && (
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
+                <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">Python / Floored (mathematical)</div>
+                <div className="text-3xl font-bold text-amber-700 dark:text-amber-300">{na} mod {nb} = {pyMod}</div>
+                <div className="text-xs text-[var(--text-secondary)] mt-1">Floors toward −∞ (always non-negative)</div>
+              </div>
+            )}
+
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+              <div className="text-xs text-[var(--text-secondary)] mb-2">Division Identity</div>
+              <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+                <div>{na} = {nb} × {jsQuotient} + {jsMod} <span className="text-emerald-600 dark:text-emerald-400">(JS)</span></div>
+                {differs && <div>{na} = {nb} × {pyQuotient} + {pyMod} <span className="text-amber-600 dark:text-amber-400">(Python)</span></div>}
+              </div>
+            </div>
+
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+              <div className="text-xs text-[var(--text-secondary)] mb-2">Long Division</div>
+              <div className="font-mono text-xs text-[var(--text-primary)] space-y-1">
+                <div>{na} ÷ {nb} = {(na / nb).toFixed(4)}</div>
+                <div>Quotient (floor): {jsQuotient}</div>
+                <div>Remainder: {na} − ({nb} × {jsQuotient}) = {jsMod}</div>
+              </div>
             </div>
           </div>
         )}
 
-        {!differs && na < 0 && (
-          <div className="p-2 rounded bg-[var(--muted)] text-xs">
-            Both JS and Python agree: {na} mod {nb} = {jsMod}
+        {nb === 0 && (
+          <div className="text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-center">
+            Divisor cannot be zero
           </div>
         )}
-
-        <div className="p-2 rounded bg-[var(--muted)] text-xs space-y-1">
-          <div className="font-bold">Visual long division:</div>
-          <div className="font-mono text-[11px] leading-tail">
-            <div>{na} ÷ {nb} = {na / nb}</div>
-            <div>Quotient: {jsQuotient} (integer part)</div>
-            <div>Remainder: {na} − ({nb} × {jsQuotient}) = {jsMod}</div>
-          </div>
-        </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- LogarithmCalculator ---
@@ -1056,41 +1215,87 @@ export function RoundingCalculator() {
     return idx < str.length ? Number(str[idx]) : null;
   })();
 
+  const presets = [
+    { label: 'π → 2dp', apply: () => { setNum(Math.PI.toString()); setPlaces('2'); } },
+    { label: 'e → 3dp', apply: () => { setNum(Math.E.toString()); setPlaces('3'); } },
+    { label: '-3.14159 → 2dp', apply: () => { setNum('-3.14159'); setPlaces('2'); } },
+    { label: '123.456 → 0dp', apply: () => { setNum('123.456'); setPlaces('0'); } },
+    { label: '0.00456 → 2sf', apply: () => { setNum('0.00456'); setPlaces('2'); setMode('half-up'); } },
+  ];
+
+  const resultText = `${n} → ${result} (${mode.replace('-', ' ')})`;
+
+  const modeLabels: Record<string, string> = {
+    'half-up': 'Round Half Up',
+    'half-even': "Banker's Rounding",
+    'floor': 'Floor (↓)',
+    'ceil': 'Ceil (↑)',
+    'truncate': 'Truncate',
+  };
+
+  const modeDescriptions: Record<string, string> = {
+    'half-up': 'Rounds away from zero at midpoint (≥ 5 rounds up)',
+    'half-even': 'Rounds to nearest even at midpoint (banker\'s rounding)',
+    'floor': 'Always rounds toward −∞',
+    'ceil': 'Always rounds toward +∞',
+    'truncate': 'Drops decimals without rounding (toward zero)',
+  };
+
   return (
-    <Section title="Rounding Calculator">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={num} onChange={setNum} />
-        <Input label="Decimal places" type="number" min={0} max={15} value={places} onChange={setPlaces} />
-      </div>
-      <div className="flex gap-1 flex-wrap">
-        {[
-          ['half-up', 'Round Half Up'],
-          ['half-even', 'Banker\'s Rounding'],
-          ['floor', 'Floor (↓)'],
-          ['ceil', 'Ceil (↑)'],
-          ['truncate', 'Truncate'],
-        ].map(([key, label]) => (
-          <button key={key} onClick={() => setMode(key)}
-            className={`px-2 py-1 text-xs rounded border transition-colors ${mode === key ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'bg-[var(--card)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--accent)]'}`}>
-            {label}
-          </button>
-        ))}
-      </div>
-      <div className="text-lg font-bold">{n} → {result}</div>
-      <div className="text-xs text-[var(--text-secondary)] space-y-1">
+    <CalculatorShell title="Rounding Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="amber">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className={labelClass}>Value</label>
+            <input type="number" step="any" value={num} onChange={e => setNum(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>Decimal places</label>
+            <input type="number" min={0} max={15} value={places} onChange={e => setPlaces(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-1.5">
+          {['half-up', 'half-even', 'floor', 'ceil', 'truncate'].map(key => (
+            <button key={key} onClick={() => setMode(key)}
+              className={`px-3 py-1.5 text-xs rounded-lg border transition-colors font-medium ${mode === key ? 'bg-amber-500 text-white border-amber-500' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-zinc-300 dark:border-zinc-700 hover:border-amber-500'}`}>
+              {modeLabels[key]}
+            </button>
+          ))}
+        </div>
+
+        <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
+          <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">{modeLabels[mode]}</div>
+          <div className="text-4xl font-bold text-amber-700 dark:text-amber-300 font-mono">{n} → {result}</div>
+          <div className="text-xs text-[var(--text-secondary)] mt-1">{modeDescriptions[mode]}</div>
+        </div>
+
         {digit !== null && (
-          <div>Digit at position {p + 1}: <span className="font-mono font-bold">{digit}</span></div>
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Rounding Decision</div>
+            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+              <div>Digit at position {p + 1}: <span className="font-bold text-amber-600 dark:text-amber-400">{digit}</span></div>
+              {mode === 'half-up' && <div>{digit >= 5 ? `≥ 5 → round up` : `< 5 → round down`}</div>}
+              {mode === 'half-even' && <div>{digit > 5 ? `> 5 → round up` : digit < 5 ? `< 5 → round down` : `= 5 → round to even (${result * (10 ** p) % 2 === 0 ? 'even' : 'odd'})`}</div>}
+              {mode === 'floor' && <div>Floor: always rounds toward −∞ (e.g. −3.7 → −4)</div>}
+              {mode === 'ceil' && <div>Ceil: always rounds toward +∞ (e.g. −3.7 → −3)</div>}
+              {mode === 'truncate' && <div>Truncate: drops decimals without rounding (toward zero)</div>}
+            </div>
+          </div>
         )}
-        {mode === 'half-up' && <div>{digit !== null ? (digit >= 5 ? `≥ 5 → round up` : `< 5 → round down`) : 'No more digits to round'}</div>}
-        {mode === 'half-even' && <div>{digit !== null ? (digit > 5 ? `> 5 → round up` : digit < 5 ? `< 5 → round down` : `= 5 → round to even`) : 'No more digits to round'}</div>}
-        {mode === 'floor' && <div>Floor: always rounds toward −∞ (e.g. −3.7 → −4)</div>}
-        {mode === 'ceil' && <div>Ceil: always rounds toward +∞ (e.g. −3.7 → −3)</div>}
-        {mode === 'truncate' && <div>Truncate: drops decimals without rounding (e.g. −3.7 → −3)</div>}
+
+        <div className="grid grid-cols-4 gap-2">
+          {[0, 1, 2, 3].map(dp => (
+            <div key={dp} className="bg-[var(--bg-surface)] rounded-xl p-2 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">{dp} dp</div>
+              <div className="text-sm font-mono font-bold text-[var(--text-primary)]">{Number(num).toFixed(dp)}</div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="text-xs text-[var(--text-secondary)]">
-        Common: {Number(num).toFixed(0)} (0dp), {Number(num).toFixed(1)} (1dp), {Number(num).toFixed(2)} (2dp), {Number(num).toFixed(3)} (3dp)
-      </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- MathEquationSolver ---
