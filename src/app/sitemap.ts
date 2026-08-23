@@ -16,6 +16,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/blog`, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 0.6 },
     { url: `${baseUrl}/changelog`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
     { url: `${baseUrl}/extension`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.4 },
+    { url: `${baseUrl}/careers`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/product`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/roadmap`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/status`, lastModified: LAUNCH_DATE, changeFrequency: 'weekly' as const, priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/privacy-policy`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/cookies`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/security`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/faq`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/billing`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
+    { url: `${baseUrl}/premium-tools`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
   ];
 
   function catSlug(cat: string): string {
