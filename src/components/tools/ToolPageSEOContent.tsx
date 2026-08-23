@@ -478,146 +478,146 @@ const categoryInstructionTemplates: Record<string, { title: string; desc: string
   ],
 };
 
-export const categoryFaqTemplates: Record<string, { question: string; answer: string }[]> = {
-  "PDF": [
-    { question: "Are my PDFs private when using this tool?", answer: "Yes. All PDF processing happens entirely in your browser. Your files are never uploaded to any server, ensuring complete document privacy." },
-    { question: "What PDF formats and versions are supported?", answer: "The tool works with standard PDF files. Most operations support both older and modern PDF versions. Encrypted or password-protected files may need to be unlocked first." },
-    { question: "Can I process large PDF files?", answer: "Processing capacity depends on your device's available memory. Very large files (500+ pages or 100MB+) may cause slower performance on low-memory devices." },
-    { question: "Is there a limit on how many PDFs I can process?", answer: "No. You can process unlimited PDF files daily. There are no quotas or usage caps since all computation happens on your own device." },
-    { question: "Does this work offline?", answer: "Yes. After the initial page load, all PDF tools function completely offline — no internet connection is required." },
+export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { question: string; answer: string }[]) | { question: string; answer: string }[]> = {
+  "PDF": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser — no files are uploaded to any server.` },
+    { question: `Is ${tool.name} safe for confidential documents?`, answer: `Yes. Your PDFs never leave your device. All operations happen in-browser using pdf-lib or similar local libraries.` },
+    { question: `What PDF formats does ${tool.name} support?`, answer: `Standard PDF files (versions 1.0–2.0). Encrypted or password-protected files may need to be unlocked first.` },
+    { question: `Are there file size limits?`, answer: `No hard limits, but very large PDFs (500+ pages or 100MB+) may process slower on low-memory devices.` },
+    { question: `Does ${tool.name} work offline?`, answer: `Yes. After the initial page load, all PDF processing runs completely offline.` },
   ],
-  "Image": [
-    { question: "Will I lose image quality during processing?", answer: "Quality depends on the operation. Lossless operations preserve original quality, while compression and format conversion may slightly reduce quality based on your settings." },
-    { question: "What image formats are supported?", answer: "Most tools support PNG, JPG, WebP, HEIC, GIF, and SVG. Some specialized tools may support additional formats." },
-    { question: "Can I batch process multiple images?", answer: "Batch processing is available in select tools. For single-image tools, you can process them one at a time." },
-    { question: "Where are my images processed?", answer: "Completely on your device. Images never leave your browser, ensuring your visual content stays private." },
-    { question: "Is there a file size limit?", answer: "There's no hard limit, but very large images (4000x4000px+) may process slower on lower-end devices due to memory constraints." },
+  "Image": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing happens locally in your browser.` },
+    { question: `Will ${tool.name} reduce my image quality?`, answer: `Quality depends on the operation. Lossless operations preserve original quality; compression or format conversion may reduce it based on your settings.` },
+    { question: `What image formats does ${tool.name} support?`, answer: `Most tools support PNG, JPG, WebP, HEIC, GIF, and SVG. Check the tool interface for the exact list.` },
+    { question: `Is my image data private?`, answer: `Yes. Images never leave your browser — all processing runs on your device.` },
+    { question: `Can I batch process multiple images?`, answer: `Batch support depends on the specific tool. Check the upload area for multi-file support.` },
   ],
-  "Video": [
-    { question: "What video formats are supported?", answer: "Common formats include MP4, MOV, AVI, WebM, MKV, and GIF. The exact list varies by tool." },
-    { question: "How long does video processing take?", answer: "Processing time depends on file size, your device's CPU, and the operation. Most conversions complete within seconds to a few minutes." },
-    { question: "Is video quality preserved?", answer: "Quality depends on your selected settings. Higher bitrate and resolution presets produce better quality but larger file sizes." },
-    { question: "Can I process videos offline?", answer: "Yes. All video processing uses FFmpeg WASM running locally in your browser. No uploads or servers involved." },
-    { question: "What's the maximum video file size?", answer: "Free users can process up to 30MB. Signing in increases the limit to 150MB. Pro subscribers can process files up to 2GB with batch support." },
+  "Video": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} Runs locally in your browser using FFmpeg WASM.` },
+    { question: `What video formats are supported?`, answer: `Common formats include MP4, MOV, AVI, WebM, MKV, and GIF. The exact list varies by tool.` },
+    { question: `How long does video processing take?`, answer: `Depends on file size, your device's CPU, and the operation. Most conversions complete within seconds to a few minutes.` },
+    { question: `Is my video data private?`, answer: `Yes. All processing happens locally — your videos never leave your device.` },
+    { question: `What's the maximum file size?`, answer: `Free users can process up to 30MB. Signing in increases the limit to 150MB. Pro subscribers can process files up to 2GB.` },
   ],
-  "Audio": [
-    { question: "What audio formats can I convert?", answer: "Supported formats include MP3, WAV, OGG, M4A, FLAC, and audio tracks extracted from video files." },
-    { question: "Does compression reduce audio quality?", answer: "Quality depends on the bitrate and format you choose. Higher bitrates preserve more detail at the cost of larger file sizes." },
-    { question: "Is my audio data private?", answer: "Absolutely. All audio processing happens locally in your browser using WebAssembly. No data is transmitted." },
-    { question: "Can I extract audio from video?", answer: "Yes. Several tools support extracting audio tracks from video files and saving them as standalone audio files." },
-    { question: "How long does audio processing take?", answer: "Most audio operations complete in seconds. Longer files or complex compression may take a bit longer." },
+  "Audio": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All audio processing runs locally in your browser.` },
+    { question: `What audio formats are supported?`, answer: `Supported formats typically include MP3, WAV, OGG, M4A, FLAC, and audio tracks extracted from video files.` },
+    { question: `Does ${tool.name} reduce audio quality?`, answer: `Quality depends on the bitrate and format you choose. Higher bitrates preserve more detail at the cost of larger file sizes.` },
+    { question: `Is my audio data private?`, answer: `Yes. All audio processing happens locally in your browser using WebAssembly. No data is transmitted.` },
+    { question: `How long does processing take?`, answer: `Most audio operations complete in seconds. Longer files or complex operations may take a bit longer.` },
   ],
-  "Developer": [
-    { question: "What programming languages are supported?", answer: "Tools cover JavaScript, CSS, HTML, SQL, Python, JSON, XML, CSV, and more. Check individual tool descriptions for specifics." },
-    { question: "Is my code sent to a server?", answer: "No. All code processing — formatting, minification, conversion, hashing — runs locally in your browser." },
-    { question: "Can I process large code files?", answer: "Yes. Since processing is local, performance depends on your device. Most operations handle large files without issue." },
-    { question: "Do the formatting tools follow standard conventions?", answer: "Yes. SQL uses sql-formatter, JSON uses native JSON.parse, and other formatters follow widely adopted formatting rules." },
-    { question: "Can I use these tools offline?", answer: "Yes. All developer tools work fully offline after the initial page load." },
+  "Developer": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally — no code is sent to any server.` },
+    { question: `What programming languages are supported?`, answer: `Tools cover JavaScript, CSS, HTML, SQL, Python, JSON, XML, CSV, and more. Check the tool description for specifics.` },
+    { question: `Can I process large code files?`, answer: `Yes. Since processing is local, performance depends on your device. Most operations handle large files without issue.` },
+    { question: `Do the tools follow standard conventions?`, answer: `Yes. Formatters use well-known libraries (sql-formatter, Prettier-compatible patterns) and follow widely adopted rules.` },
+    { question: `Can I use ${tool.name} offline?`, answer: `Yes. All developer tools work fully offline after the initial page load.` },
   ],
-  "Text": [
-    { question: "Can I convert large amounts of text?", answer: "Yes. Text processing is extremely fast and can handle documents of any length your browser can display." },
-    { question: "Will my text be saved or shared?", answer: "No. Your text stays on your device and is never sent to any server. We don't store your inputs." },
-    { question: "What text transformations are available?", answer: "Options include case changes, reversal, unicode styling, binary encoding, Morse code, and handwriting simulation." },
-    { question: "Can I upload a file instead of pasting text?", answer: "Many text tools support both direct input and file upload (.txt, .html, .csv, etc.)." },
-    { question: "Is there a character limit?", answer: "There's no hard limit, but very large documents (1M+ characters) may cause slower UI responsiveness." },
+  "Text": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
+    { question: `Will my text be saved or shared?`, answer: `No. Your text stays on your device and is never sent to any server.` },
+    { question: `What text transformations are available?`, answer: `Options include case changes, reversal, unicode styling, binary encoding, Morse code, and more depending on the tool.` },
+    { question: `Can I upload a file instead of pasting?`, answer: `Many text tools support both direct input and file upload (.txt, .html, .csv, etc.).` },
+    { question: `Is there a character limit?`, answer: `No hard limit, but very large documents (1M+ characters) may cause slower UI responsiveness.` },
   ],
-  "SEO": [
-    { question: "Will these tools improve my search rankings?", answer: "They help with technical SEO fundamentals — auditing site health, analyzing content structure, identifying broken links, and ensuring search engines can properly index your pages." },
-    { question: "Can I test multiple URLs at once?", answer: "Yes. Several tools support batch input — add multiple URLs, analyze entire pages, or compare keywords in one go." },
-    { question: "Is the output ready to use?", answer: "Yes. Results are presented immediately — you can copy, export, or act on them directly." },
-    { question: "Do I need technical knowledge to use these?", answer: "Basic understanding of SEO concepts helps, but most tools are straightforward — paste your data and get results." },
-    { question: "Are my website details stored anywhere?", answer: "No. All data stays in your browser and is never transmitted to our servers." },
+  "SEO": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} Results are generated instantly in your browser.` },
+    { question: `Will these tools improve my search rankings?`, answer: `They help with technical SEO — auditing site health, analyzing content, identifying issues. They don't guarantee ranking changes.` },
+    { question: `Can I test multiple URLs at once?`, answer: `Several tools support batch input — add multiple URLs or analyze entire pages in one go.` },
+    { question: `Is my website data stored?`, answer: `No. All data stays in your browser and is never transmitted to our servers.` },
+    { question: `Do I need technical knowledge?`, answer: `Basic SEO understanding helps, but most tools are straightforward — paste your data and get results.` },
   ],
-  "Privacy": [
-    { question: "How is my sensitive data protected?", answer: "All operations run locally in your browser. Passwords, notes, and cryptographic keys never leave your device." },
-    { question: "Can I trust the password strength check?", answer: "Yes. It uses the zxcvbn library developed by Dropbox, which evaluates passwords against real-world attack patterns." },
-    { question: "Is the encryption truly secure?", answer: "Yes. Encryption uses AES via crypto-js, and PGP key generation uses the OpenPGP.js library — both industry-standard cryptographic implementations." },
-    { question: "What happens to my encrypted notes?", answer: "Encrypted notes are encoded into the URL hash fragment, which is never sent to servers. No data is stored on our side." },
-    { question: "Can I use these tools offline?", answer: "Yes. All privacy and security tools run completely offline after the initial page load." },
+  "Privacy": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All operations run locally — no data ever leaves your browser.` },
+    { question: `Is my data truly private?`, answer: `Yes. Everything happens in your browser. No data is transmitted to any server, and nothing is stored.` },
+    { question: `Is the cryptography secure?`, answer: `Encryption uses industry-standard AES (crypto-js) and OpenPGP.js. Key derivation uses PBKDF2 with configurable iterations.` },
+    { question: `Can I use ${tool.name} offline?`, answer: `Yes. All privacy and security tools run completely offline after the initial page load.` },
+    { question: `What happens to my data after I leave?`, answer: `Nothing — your data was never stored anywhere. It exists only in your browser's active memory while the page is open.` },
   ],
-  "Finance": [
-    { question: "How accurate are the calculations?", answer: "All calculators use standard financial formulas and are accurate to two decimal places unless otherwise specified." },
-    { question: "Can I save my calculation history?", answer: "Some calculators include local storage for recent calculations. History stays on your device and is not shared." },
-    { question: "Are the results financial advice?", answer: "No. These tools provide mathematical calculations for educational and planning purposes. Consult a financial advisor for professional advice." },
-    { question: "What currencies does the converter support?", answer: "The currency converter supports 160+ currencies with live exchange rates via a public API, plus an offline fallback matrix." },
-    { question: "Can I use these offline?", answer: "Basic calculators work offline. The currency converter requires an internet connection for live rates but includes offline fallback data." },
+  "Finance": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All calculations run locally in your browser.` },
+    { question: `How accurate are the calculations?`, answer: `All calculators use standard financial formulas and are accurate to two decimal places unless otherwise specified.` },
+    { question: `Is this financial advice?`, answer: `No. These tools provide mathematical calculations for educational and planning purposes. Consult a financial advisor for professional advice.` },
+    { question: `Can I save my calculation history?`, answer: `Some calculators include local storage for recent calculations. History stays on your device.` },
+    { question: `Does this work offline?`, answer: `Yes. All finance calculators work offline. Currency converters require internet for live rates but include offline fallback data.` },
   ],
-  "AI": [
-    { question: "Do I need an API key to use AI tools?", answer: "Some AI tools require a provider API key (OpenAI, Anthropic, etc.). Configure yours in the AI Settings panel." },
-    { question: "What AI providers are supported?", answer: "Support depends on the tool. Most work with OpenAI-compatible APIs. Check the AI Settings for available providers." },
-    { question: "Is my prompt data private?", answer: "Prompts are sent to the AI provider you configure. Choose a provider with a privacy policy you trust for sensitive content." },
-    { question: "Why is there a loading delay?", answer: "AI generation requires network calls to the provider's API. Response time depends on the model and your internet speed." },
-    { question: "Can I use these tools for free?", answer: "The tools are free to use, but you may need to supply your own API key for the underlying AI service." },
+  "AI": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} Requires an AI provider API key configured in AI Settings.` },
+    { question: `Do I need an API key?`, answer: `Yes. Configure your OpenAI, Anthropic, or compatible provider key in the AI Settings panel.` },
+    { question: `Is my prompt data private?`, answer: `Prompts are sent to the AI provider you configure. Choose a provider with a privacy policy you trust for sensitive content.` },
+    { question: `Why is there a loading delay?`, answer: `AI generation requires network calls to the provider's API. Response time depends on the model and your internet speed.` },
+    { question: `Can I use this for free?`, answer: `The tool is free, but you supply your own API key for the underlying AI service.` },
   ],
-  "indian-utilities": [
-    { question: "Is my personal data safe?", answer: "Yes. All processing happens locally in your browser. Aadhaar and PAN data never leave your device." },
-    { question: "What Indian formats are supported?", answer: "Tools support Aadhaar card masking, PAN card verification, IFSC code lookup, pincode finder, and Indian age/percentage calculations." },
-    { question: "Can I use these for official purposes?", answer: "These tools are for personal assistance only. Official verification should be done through government portals." },
-    { question: "Are the IFSC and pincode databases up to date?", answer: "Lookup data is built into the page and updated periodically. For critical verifications, cross-check with official sources." },
-    { question: "Do I need internet access?", answer: "PAN and Aadhaar tools work offline. IFSC and pincode lookups require internet for the most current data." },
+  "indian-utilities": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing happens locally in your browser.` },
+    { question: `Is my personal data safe?`, answer: `Yes. All processing happens locally. Aadhaar and PAN data never leave your device.` },
+    { question: `Can I use this for official purposes?`, answer: `These tools are for personal assistance only. Official verification should be done through government portals.` },
+    { question: `Are the databases up to date?`, answer: `Lookup data is built into the page and updated periodically. For critical verifications, cross-check with official sources.` },
+    { question: `Do I need internet access?`, answer: `Most tools work offline. Lookup tools (IFSC, pincode) may require internet for the most current data.` },
   ],
-  "Extension": [
-    { question: "How do I install these extensions?", answer: "Download the extension files and follow your browser's developer mode extension installation guide." },
-    { question: "Are the extensions safe to use?", answer: "All generated extensions run manifest files you can review before installing. You control the code." },
-    { question: "Can I customize the generated extension?", answer: "Yes. The generator creates editable source code that you can modify before packaging." },
-    { question: "What browsers are supported?", answer: "Generated extensions follow the Manifest V3 standard, compatible with Chrome, Edge, Brave, and other Chromium-based browsers." },
-    { question: "Will the extension work offline?", answer: "Most generated extensions work offline, but some features (like downloaders) require internet connectivity." },
+  "Extension": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} The generator creates editable source code you can review before installing.` },
+    { question: `Are the extensions safe?`, answer: `All generated extensions produce manifest files you can review. You control the code.` },
+    { question: `Can I customize the output?`, answer: `Yes. The generator creates editable source code that you can modify before packaging.` },
+    { question: `What browsers are supported?`, answer: `Generated extensions follow Manifest V3, compatible with Chrome, Edge, Brave, and other Chromium browsers.` },
+    { question: `Will it work offline?`, answer: `Most generated extensions work offline, but some features may require internet connectivity.` },
   ],
-  "Utility": [
-    { question: "Is this utility tool free to use?", answer: "Yes, every utility tool on Toolzum is completely free with no usage limits, registration, or hidden charges." },
-    { question: "Can I use this tool on mobile?", answer: "Yes. All utility tools are fully responsive and work on any device — phone, tablet, or desktop." },
-    { question: "How is my privacy protected?", answer: "Your data never leaves your browser. All processing runs locally and nothing is stored or uploaded." },
-    { question: "Does this tool work offline?", answer: "Yes. After the initial page load, the tool runs entirely offline in your browser." },
-    { question: "Are there any file size limits?", answer: "Most tools don't impose limits. For file-based tools, performance depends on your device's available memory." },
+  "Utility": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
+    { question: `Is this tool free?`, answer: `Yes. Completely free with no usage limits, registration, or hidden charges.` },
+    { question: `Can I use this on mobile?`, answer: `Yes. All utility tools are fully responsive and work on any device.` },
+    { question: `How is my privacy protected?`, answer: `Your data never leaves your browser. All processing runs locally.` },
+    { question: `Does ${tool.name} work offline?`, answer: `Yes. After the initial page load, the tool runs entirely offline.` },
   ],
-  "Health": [
-    { question: "Is this a substitute for professional medical advice?", answer: "No. These calculators provide estimates for educational and personal reference. Always consult a healthcare professional for medical decisions." },
-    { question: "How accurate are the calculations?", answer: "Calculations follow established medical formulas (Mifflin-St Jeor, Harris-Benedict, etc.) and are accurate within standard clinical parameters." },
-    { question: "Is my health data private?", answer: "Absolutely. All health data is processed locally in your browser. Nothing is stored, saved, or transmitted." },
-    { question: "What measurements do I need?", answer: "Most health calculators require basic data like age, gender, height, weight, and activity level — all processed instantly as you type." },
-    { question: "Can I save or track my results over time?", answer: "Some tools save your last calculation locally. For ongoing tracking, export your results or use a dedicated health tracking app." },
+  "Health": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All calculations run locally in your browser.` },
+    { question: `Is this medical advice?`, answer: `No. These calculators provide estimates for educational and personal reference. Always consult a healthcare professional.` },
+    { question: `How accurate are the results?`, answer: `Calculations follow established medical formulas (Mifflin-St Jeor, Harris-Benedict, etc.) and are accurate within standard clinical parameters.` },
+    { question: `Is my health data private?`, answer: `Absolutely. All health data is processed locally. Nothing is stored, saved, or transmitted.` },
+    { question: `What measurements do I need?`, answer: `Most health calculators require basic data like age, gender, height, weight, and activity level.` },
   ],
-  "Calculator": [
-    { question: "How accurate are these calculators?", answer: "All calculators use standard mathematical and financial formulas with high precision. Results are rounded according to the specific calculator's conventions." },
-    { question: "Can I use these calculators for professional purposes?", answer: "Yes for general calculations, but verify critical results independently. Specialized scenarios may require professional-grade tools." },
-    { question: "Is my data stored or saved?", answer: "No. All calculations happen in your browser and no data is stored on any server." },
-    { question: "Do I need to sign up or register?", answer: "No registration is needed. All calculators are free to use with no account required." },
-    { question: "Can I use these offline?", answer: "Yes. All calculator tools work completely offline after the initial page load." },
+  "Calculator": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All calculations happen in your browser.` },
+    { question: `How accurate are the results?`, answer: `All calculators use standard mathematical formulas with high precision. Results are rounded per the calculator's conventions.` },
+    { question: `Can I use this for professional purposes?`, answer: `Yes for general calculations, but verify critical results independently.` },
+    { question: `Is my data stored?`, answer: `No. All calculations happen in your browser — no data is stored on any server.` },
+    { question: `Does ${tool.name} work offline?`, answer: `Yes. All calculator tools work completely offline after the initial page load.` },
   ],
-  "Branding": [
-    { question: "Can I customize the templates?", answer: "Yes. Every brand asset tool lets you customize colors, fonts, layouts, and content to match your brand identity." },
-    { question: "What file formats can I download?", answer: "Output formats vary by tool and typically include PNG, SVG, PDF, HTML, and plain text depending on the asset type." },
-    { question: "Are there brand usage guidelines included?", answer: "Some tools include usage recommendations. For professional branding, consult a brand guidelines document for consistency." },
-    { question: "Is my brand information stored?", answer: "No. All content is processed locally in your browser and nothing is saved on external servers." },
-    { question: "Can I use these for commercial projects?", answer: "Yes. All generated brand assets are yours to use for personal or commercial projects with no restrictions." },
+  "Branding": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
+    { question: `Can I customize the templates?`, answer: `Yes. Every brand asset tool lets you customize colors, fonts, layouts, and content.` },
+    { question: `What file formats can I download?`, answer: `Output formats vary by tool and typically include PNG, SVG, PDF, HTML, and plain text.` },
+    { question: `Is my brand information stored?`, answer: `No. All content is processed locally — nothing is saved on external servers.` },
+    { question: `Can I use these commercially?`, answer: `Yes. All generated brand assets are yours to use for personal or commercial projects.` },
   ],
-  "Design": [
-    { question: "What file formats are supported?", answer: "Most design tools support PNG, JPG, SVG, WebP, and CSS output. Input support varies by tool." },
-    { question: "Will I lose quality during export?", answer: "Export quality depends on your settings. SVG and lossless PNG preserve full quality, while JPG/WebP offer compression at adjustable quality levels." },
-    { question: "Can I use the designs commercially?", answer: "Yes. All designs you create are yours to use for any personal or commercial project." },
-    { question: "Is my design data saved?", answer: "No. All design processing runs in your browser. Save your work by downloading before leaving the page." },
-    { question: "Do I need design experience?", answer: "No. The tools are designed to be intuitive. Adjust visual controls and see changes in real time." },
+  "Design": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing runs locally in your browser.` },
+    { question: `What file formats are supported?`, answer: `Most design tools support PNG, JPG, SVG, WebP, and CSS output.` },
+    { question: `Will I lose quality during export?`, answer: `SVG and lossless PNG preserve full quality. JPG/WebP offer compression at adjustable quality levels.` },
+    { question: `Is my design data saved?`, answer: `No. All design processing runs in your browser. Download before leaving the page.` },
+    { question: `Do I need design experience?`, answer: `No. The tools are designed to be intuitive. Adjust controls and see changes in real time.` },
   ],
-  "Transcription": [
-    { question: "How accurate is the transcription?", answer: "Accuracy depends on audio quality, speaker clarity, background noise, and the specific engine used. Clean recordings produce the best results." },
-    { question: "What audio formats are supported?", answer: "Most transcription tools support MP3, WAV, M4A, FLAC, and video formats with audio tracks like MP4 and MOV." },
-    { question: "Is there a file length limit?", answer: "File length limits vary by tool. Longer files may have size constraints or require more processing time depending on your device." },
-    { question: "Is my audio data private?", answer: "Transcription runs locally using WebAssembly speech recognition where possible. Audio data stays on your device." },
-    { question: "Can I edit the transcript after processing?", answer: "Yes. The generated text is editable — you can correct errors, add punctuation, and format it before copying or downloading." },
+  "Transcription": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing happens locally where supported.` },
+    { question: `How accurate is the transcription?`, answer: `Accuracy depends on audio quality, speaker clarity, and background noise. Clean recordings produce the best results.` },
+    { question: `What audio formats are supported?`, answer: `Most tools support MP3, WAV, M4A, FLAC, and video formats like MP4 and MOV.` },
+    { question: `Is my audio data private?`, answer: `Transcription runs locally using WebAssembly where possible. Audio data stays on your device.` },
+    { question: `Can I edit the transcript?`, answer: `Yes. The generated text is fully editable — correct errors, add punctuation, and format before copying.` },
   ],
-  "Productivity": [
-    { question: "Does this tool save my data automatically?", answer: "Data is saved locally in your browser's storage. Clearing your browser data will remove saved information." },
-    { question: "Can I export my data?", answer: "Yes. Most productivity tools offer copy-to-clipboard or download options to export your tasks, notes, or lists." },
-    { question: "Do I need an account?", answer: "No. All productivity tools work without registration or login. Everything stays on your device." },
-    { question: "Can I use this on multiple devices?", answer: "Data is stored per device in your local browser. Cross-device sync is not available since no account or cloud storage is used." },
-    { question: "Does this work offline?", answer: "Yes. All productivity tools work fully offline after the initial page load." },
+  "Productivity": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All data stays in your browser.` },
+    { question: `Does this save my data?`, answer: `Data is saved locally in your browser's storage. Clearing browser data will remove saved information.` },
+    { question: `Can I export my data?`, answer: `Yes. Most productivity tools offer copy-to-clipboard or download options.` },
+    { question: `Do I need an account?`, answer: `No. All productivity tools work without registration. Everything stays on your device.` },
+    { question: `Does ${tool.name} work offline?`, answer: `Yes. All productivity tools work fully offline after the initial page load.` },
   ],
-  "Converter": [
-    { question: "What formats can I convert between?", answer: "Format support depends on the specific converter tool. Check the tool description for supported input and output formats." },
-    { question: "Will I lose quality during conversion?", answer: "Quality depends on the format pair. Lossless conversions preserve original quality, while compressed formats apply adjustable quality settings." },
-    { question: "Is there a file size limit?", answer: "No artificial limits are imposed. Very large files may process slower depending on your device's memory and processing power." },
-    { question: "Are my files private during conversion?", answer: "Yes. All conversions happen locally in your browser using WebAssembly. Files never leave your device." },
-    { question: "Can I batch convert multiple files?", answer: "Batch conversion availability depends on the specific tool. Check the tool interface for multi-file upload support." },
+  "Converter": (tool) => [
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} All conversions happen locally in your browser.` },
+    { question: `What formats are supported?`, answer: `Format support depends on the specific converter. Check the tool description for supported input and output formats.` },
+    { question: `Will I lose quality?`, answer: `Quality depends on the format pair. Lossless conversions preserve original quality; compressed formats offer adjustable quality.` },
+    { question: `Is there a file size limit?`, answer: `No artificial limits. Very large files may process slower depending on your device's memory.` },
+    { question: `Are my files private?`, answer: `Yes. All conversions happen locally in your browser. Files never leave your device.` },
   ],
 };
 
@@ -711,7 +711,8 @@ export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOConte
     }
   }
   const steps = tool.instructions || formatSteps || patternSteps || (seoType && seoInstructionTypeTemplates[seoType]) || typeInstructionTemplates[toolType] || categoryInstructionTemplates[categoryKey] || defaultInstructions;
-  const baseFaqs = tool.faqs || categoryFaqTemplates[categoryKey] || defaultFaqs;
+  const categoryFaqFn = categoryFaqTemplates[categoryKey];
+  const baseFaqs = tool.faqs || (categoryFaqFn ? (typeof categoryFaqFn === 'function' ? (categoryFaqFn as (t: ToolMetadata) => { question: string; answer: string }[])(tool) : categoryFaqFn) : defaultFaqs);
   const formatFaq = pair ? {
     question: `Why convert ${FORMAT_INFO[pair.from].name} to ${FORMAT_INFO[pair.to].name}?`,
     answer: `${FORMAT_INFO[pair.from].name} (${FORMAT_INFO[pair.from].fullName}) uses ${FORMAT_INFO[pair.from].quality} encoding and is best for ${FORMAT_INFO[pair.from].bestFor}. ${FORMAT_INFO[pair.to].name} (${FORMAT_INFO[pair.to].fullName}) uses ${FORMAT_INFO[pair.to].quality} encoding and excels at ${FORMAT_INFO[pair.to].bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`

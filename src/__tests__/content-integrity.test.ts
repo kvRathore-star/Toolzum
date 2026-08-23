@@ -253,7 +253,11 @@ describe('tool description content integrity', () => {
   it('SEO FAQ template answers do not reference specific tool subtypes (generators/checkers/analyzers) that mislead for other SEO tools', () => {
     const subtypePattern = /\b(generators?|checkers?|analyzers?)\b/i;
     const failures: string[] = [];
-    for (const faq of categoryFaqTemplates['SEO']) {
+    const seoEntry = categoryFaqTemplates['SEO'];
+    const seoFaqs = typeof seoEntry === 'function'
+      ? seoEntry({ id: 'test', slug: 'test', name: 'Test', description: 'Test', category: 'SEO', component: 'Test', componentPath: '' } as any)
+      : seoEntry;
+    for (const faq of seoFaqs) {
       if (subtypePattern.test(faq.answer)) {
         failures.push(`SEO FAQ "${faq.question.slice(0, 50)}..." answer references tool subtype: "${faq.answer}"`);
       }
