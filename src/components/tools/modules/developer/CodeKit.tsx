@@ -65,14 +65,6 @@ export function JsSyntaxChecker() {
         try { acorn.parse(code, { ecmaVersion: 'latest' }); setResult('✓ Valid JavaScript'); } catch (e) { setResult(`✗ ${e instanceof Error ? e.message : 'Syntax error'}`); }
       }} label="Check Syntax" />
       {result && <Result value={result} />}
-      <div className="p-3 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
-        <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What this checks</p>
-        <p className="text-xs text-[var(--text-muted)]">Uses the <code className="bg-[var(--bg-overlay)] px-1 rounded">acorn</code> parser — the same parser used by webpack and Rollup. Checks syntax only, not runtime behavior or type errors.</p>
-        <div className="grid grid-cols-2 gap-2 text-xs text-[var(--text-muted)]">
-          <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg"><span className="font-bold text-green-600">✓ Catches</span> — missing brackets, invalid keywords, bad string syntax</div>
-          <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg"><span className="font-bold text-amber-600">✗ Doesn't catch</span> — undefined variables, type errors, logic bugs</div>
-        </div>
-      </div>
     </div>
   );
 }

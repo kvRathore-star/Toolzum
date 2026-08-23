@@ -108,17 +108,6 @@ export function HexTextConverter() {
           <button onClick={textToHex} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Text to Hex</button>
         </div>
         <OutputBox output={output} />
-        <div className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] space-y-2">
-          <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">How hex encoding works</p>
-          <p className="text-xs text-[var(--text-muted)]">Each character maps to a two-digit hexadecimal number (0-9, a-f). "Hello" becomes <code className="bg-[var(--bg-overlay)] px-1 rounded">48 65 6c 6c 6f</code> — one byte per character.</p>
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-            <div><span className="text-blue-500">H</span> = 0x<span className="text-amber-500">48</span> = 72</div>
-            <div><span className="text-blue-500">e</span> = 0x<span className="text-amber-500">65</span> = 101</div>
-            <div><span className="text-blue-500">l</span> = 0x<span className="text-amber-500">6c</span> = 108</div>
-            <div><span className="text-blue-500">l</span> = 0x<span className="text-amber-500">6c</span> = 108</div>
-          </div>
-          <p className="text-xs text-[var(--text-muted)]">Use cases: debugging binary protocols, inspecting file headers, encoding data for URLs or databases.</p>
-        </div>
       </div>
     </div>
   );
