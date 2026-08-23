@@ -608,16 +608,20 @@ export function JwtInspector() {
   const [header, setHeader] = useState<Record<string, any> | null>(null);
   const [payload, setPayload] = useState<Record<string, any> | null>(null);
   const [issues, setIssues] = useState<string[]>([]);
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const jwtPresets = [
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjk5OTk5OTk5OTl9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
-    'eyJhbGciOiJSUzI1NiIsImtpZCI6ImFiYzEyMyJ9.eyJpc3MiOiJ0b29semFtLmNvbSIsInN1YiI6InVzZXIxMjMiLCJhdWQiOlsidG9vbHpsdW0iLCJhcGkiXSwiaWF0IjoxNjAwMDAwMDAwLCJleHAiOjk5OTk5OTk5OTl9.dGVzdHNpZw',
+    { label: 'HS256 (expired)', apply: () => setToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjk5OTk5OTk5OTl9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c') },
+    { label: 'RS256 (valid)', apply: () => setToken('eyJhbGciOiJSUzI1NiIsImtpZCI6ImFiYzEyMyJ9.eyJpc3MiOiJ0b29semFtLmNvbSIsInN1YiI6InVzZXIxMjMiLCJhdWQiOlsidG9vbHpsdW0iLCJhcGkiXSwiaWF0IjoxNjAwMDAwMDAwLCJleHAiOjk5OTk5OTk5OTl9.dGVzdHNpZw') },
+    { label: 'Clear', apply: () => { setToken(''); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); } },
   ];
+
   const inspect = (t?: string) => {
     const tk = t !== undefined ? t : token;
     if (t !== undefined) setToken(tk);
     try {
       const parts = tk.split('.');
-      if (parts.length !== 3) { setHeader(null); setPayload(null); setIssues(['Invalid JWT format — expected 3 parts']); return; }
+      if (parts.length !== 3) { setHeader(null); setPayload(null); setIssues(['Invalid JWT format — expected 3 parts']); setIsValid(false); return; }
       const h = JSON.parse(atob(parts[0].replace(/-/g, '+').replace(/_/g, '/')));
       const p = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
       setHeader(h);
@@ -638,48 +642,69 @@ export function JwtInspector() {
       if (p.nbf && p.nbf > now) iss.push('⚠ Not yet valid');
       if (p.jti) iss.push(`✓ JWT ID: ${p.jti}`);
       setIssues(iss);
-    } catch { setHeader(null); setPayload(null); setIssues(['Error: Could not parse token — invalid base64 or JSON']); }
+      setIsValid(true);
+    } catch { setHeader(null); setPayload(null); setIssues(['Error: Could not parse token — invalid base64 or JSON']); setIsValid(false); }
   };
+
   const [copiedH, setCopiedH] = useState(false);
   const [copiedP, setCopiedP] = useState(false);
   const copyH = () => { if (header) { navigator.clipboard.writeText(JSON.stringify(header, null, 2)).then(() => { setCopiedH(true); setTimeout(() => setCopiedH(false), 1500); }); } };
   const copyP = () => { if (payload) { navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 1500); }); } };
+
+  const resultText = isValid ? `✓ Valid JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'})` : (issues[0] || 'Enter JWT to inspect');
+
   return (
-    <Section title="JWT Inspector">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jwtPresets.map((j, i) => <button key={i} onClick={() => inspect(j)} className="px-2.5 py-1 text-xs rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 hover:bg-violet-500/20 border border-violet-500/20 transition-colors">Token {i + 1}</button>)}
-      </div>
-      <Input label="JWT Token" rows={3} value={token} onChange={v => { setToken(v); setHeader(null); setPayload(null); setIssues([]); }} placeholder="eyJhbGciOiJIUzI1NiIs..." />
-      <button onClick={() => inspect()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
-      {issues.length > 0 && (
-        <div className="mt-4 space-y-3">
-          {header && (
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Header</span>
-                <button onClick={copyH} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copiedH ? 'Copied!' : 'Copy'}</button>
-              </div>
-              <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
+    <CalculatorShell title="JWT Inspector" result={resultText} onCalculate={inspect} presets={jwtPresets} accent="violet" downloadData={header && payload ? JSON.stringify({ header, payload }, null, 2) : ''} downloadFilename="jwt.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JWT Token</label>
+        <textarea value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
+
+        <button onClick={inspect} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Inspect</button>
+
+        {isValid !== null && (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border-violet-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
+              <div className="flex items-center gap-2 font-semibold">{isValid ? '✓ Valid JWT' : '✗ Invalid JWT'}</div>
+              {issues.length > 0 && (
+                <div className="mt-2 space-y-1">
+                  {issues.map((iss, i) => (
+                    <div key={i} className={`text-xs px-2 py-1 rounded ${iss.startsWith('✓') ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300' : iss.startsWith('⚠') ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' : 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300'}`}>{iss}</div>
+                  ))}
+                </div>
+              )}
             </div>
-          )}
-          {payload && (
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Payload</span>
-                <button onClick={copyP} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
+
+            {header && (
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Header</span>
+                  <button onClick={copyH} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copiedH ? 'Copied!' : 'Copy'}</button>
+                </div>
+                <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
               </div>
-              <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
-            </div>
-          )}
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3 space-y-1">
-            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2 block">Claims Report</span>
-            {issues.map((iss, i) => (
-              <div key={i} className={`text-xs px-2 py-1 rounded ${iss.startsWith('✓') ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300' : iss.startsWith('⚠') ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' : 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300'}`}>{iss}</div>
-            ))}
+            )}
+
+            {payload && (
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Payload</span>
+                  <button onClick={copyP} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
+                </div>
+                <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
+              </div>
+            )}
+
+            {(header || payload) && (
+              <div className="flex gap-2">
+                <button onClick={copyH} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copiedH ? 'Copied!' : 'Copy Header'}</button>
+                <button onClick={copyP} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copiedP ? 'Copied!' : 'Copy Payload'}</button>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-    </Section>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -1028,36 +1053,74 @@ export function JsonValidator() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState('');
   const [isValid, setIsValid] = useState<boolean | null>(null);
+  const [parsed, setParsed] = useState<unknown>(null);
+  const [error, setError] = useState<string>('');
+
   const presets = [
-    '{"name":"Alice","age":30,"active":true}',
-    '{"users":[{"id":1,"name":"Bob"},{"id":2,"name":"Charlie"}]}',
-    '{broken json]',
+    { label: 'Simple Object', apply: () => { setInput('{"name":"Alice","age":30,"active":true}'); } },
+    { label: 'Nested Array', apply: () => { setInput('{"users":[{"id":1,"name":"Bob"},{"id":2,"name":"Charlie"}]}'); } },
+    { label: 'Invalid', apply: () => { setInput('{broken json]'); } },
+    { label: 'Clear', apply: () => { setInput(''); setResult(''); setIsValid(null); setParsed(null); setError(''); } },
   ];
+
   const validate = (t?: string) => {
     const txt = t !== undefined ? t : input;
     if (t !== undefined) setInput(t);
-    try { const p = JSON.parse(txt || '{}'); setResult(JSON.stringify(p, null, 2).substring(0, 2000)); setIsValid(true); }
-    catch (e: unknown) { setResult(getErrorMessage(e)); setIsValid(false); }
+    try { const p = JSON.parse(txt || '{}'); setParsed(p); setResult(JSON.stringify(p, null, 2)); setIsValid(true); setError(''); }
+    catch (e: unknown) { setParsed(null); setResult(''); setIsValid(false); setError(getErrorMessage(e)); }
   };
+
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (result && isValid) { navigator.clipboard.writeText(result).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (result && isValid && parsed) { navigator.clipboard.writeText(JSON.stringify(parsed, null, 2)).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+
+  const stats = isValid && parsed ? {
+    keys: typeof parsed === 'object' && parsed !== null ? Object.keys(parsed as object).length : 0,
+    depth: (() => { let max = 0; const traverse = (obj: unknown, d = 1) => { if (typeof obj === 'object' && obj !== null) { max = Math.max(max, d); Object.values(obj).forEach(v => traverse(v, d + 1)); } }; traverse(parsed); return max; })(),
+    size: JSON.stringify(parsed).length,
+  } : null;
+
+  const resultText = isValid ? `✓ Valid JSON (${stats?.size || 0} chars, ${stats?.keys || 0} keys, depth ${stats?.depth || 0})` : (error ? `✗ Invalid: ${error}` : 'Enter JSON to validate');
+
   return (
-    <Section title="JSON Syntax Validator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {presets.map((p, i) => <button key={i} onClick={() => validate(p)} className="px-2.5 py-1 text-xs rounded-lg bg-lime-500/10 text-lime-600 dark:text-lime-400 hover:bg-lime-500/20 border border-lime-500/20 transition-colors">Sample {i + 1}</button>)}
-      </div>
-      <Input label="JSON string" rows={6} value={input} onChange={v => { setInput(v); setResult(''); setIsValid(null); }} placeholder='{"key": "value"}' />
-      <button onClick={() => validate()} className="px-5 py-2.5 bg-lime-500 hover:bg-lime-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
-      {result && (
-        <div className="mt-4 space-y-2">
-          <div className={`p-4 rounded-xl text-sm border-l-4 ${isValid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
-            <div className="flex items-center gap-2 mb-1 font-semibold">{isValid ? '✓ Valid JSON' : '✗ Invalid JSON'}</div>
-            <pre className="text-xs font-mono mt-1 whitespace-pre-wrap">{result}</pre>
-          </div>
-          {isValid && <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Formatted'}</button>}
+    <CalculatorShell title="JSON Syntax Validator" result={resultText} onCalculate={validate} presets={presets} accent="lime" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="validated.json">
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JSON String</label>
+          <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIsValid(null); setError(''); }} rows={8} placeholder='{"key": "value"}'
+            className="flex-1 min-w-[300px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-lime-500/50 resize-y" />
         </div>
-      )}
-    </Section>
+
+        <button onClick={validate} className="px-5 py-2.5 bg-lime-500 hover:bg-lime-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
+
+        {isValid !== null && (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
+              <div className="flex items-center gap-2 mb-2 font-semibold">{isValid ? '✓ Valid JSON' : '✗ Invalid JSON'}</div>
+              {error && <div className="text-sm">{error}</div>}
+              {isValid && stats && (
+                <div className="grid grid-cols-3 gap-3 mt-2">
+                  <div className="bg-white dark:bg-zinc-800/50 p-2 rounded"><div className="text-xs text-[var(--text-muted)]">Keys</div><div className="font-bold">{stats.keys}</div></div>
+                  <div className="bg-white dark:bg-zinc-800/50 p-2 rounded"><div className="text-xs text-[var(--text-muted)]">Depth</div><div className="font-bold">{stats.depth}</div></div>
+                  <div className="bg-white dark:bg-zinc-800/50 p-2 rounded"><div className="text-xs text-[var(--text-muted)]">Size</div><div className="font-bold">{stats.size} chars</div></div>
+                </div>
+              )}
+            </div>
+
+            {isValid && parsed && (
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700 max-h-[300px] overflow-auto">
+                <pre className="text-xs font-mono whitespace-pre-wrap">{JSON.stringify(parsed, null, 2)}</pre>
+              </div>
+            )}
+
+            {isValid && (
+              <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">
+                {copied ? 'Copied!' : 'Copy Formatted JSON'}
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -1065,15 +1128,22 @@ export function YamlValidator() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState('');
   const [issues, setIssues] = useState<string[]>([]);
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+  const [parsed, setParsed] = useState<unknown>(null);
+
   const presets = [
-    { label: 'Simple', v: 'name: Alice\nage: 30\nrole: admin' },
-    { label: 'Nested', v: 'server:\n  host: localhost\n  port: 8080\ndatabase:\n  name: mydb\n  user: admin' },
+    { label: 'Simple', apply: () => setInput('name: Alice\nage: 30\nrole: admin') },
+    { label: 'Nested', apply: () => setInput('server:\n  host: localhost\n  port: 8080\ndatabase:\n  name: mydb\n  user: admin') },
+    { label: 'Array', apply: () => setInput('items:\n  - name: item1\n    price: 10\n  - name: item2\n    price: 20') },
+    { label: 'Invalid', apply: () => setInput('key: value\n  bad indent') },
+    { label: 'Clear', apply: () => { setInput(''); setResult(''); setIssues([]); setIsValid(null); setParsed(null); } },
   ];
+
   const validate = (t?: string) => {
     const txt = t !== undefined ? t : input;
     if (t !== undefined) setInput(txt);
     const v = txt.trim();
-    if (!v) { setResult('✗ Empty input'); setIssues([]); return; }
+    if (!v) { setResult('Empty input'); setIssues([]); setIsValid(false); setParsed(null); return; }
     const lines = v.split('\n');
     const iss: string[] = [];
     let prevIndent = 0;
@@ -1087,28 +1157,68 @@ export function YamlValidator() {
       prevIndent = indent;
     }
     setIssues(iss);
-    if (iss.length === 0) setResult('✓ Valid YAML syntax — no issues found');
-    else setResult(`✓ Valid YAML with ${iss.length} warning(s)`);
+    if (iss.length === 0) { setResult('✓ Valid YAML syntax — no issues found'); setIsValid(true); }
+    else { setResult(`✓ Valid YAML with ${iss.length} warning(s)`); setIsValid(true); }
+    // Simple YAML to JSON parsing for display
+    try {
+      const obj: Record<string, unknown> = {};
+      let currentPath: string[] = [];
+      const indentStack: number[] = [0];
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const indent = line.search(/\S/);
+        const [key, ...valueParts] = trimmed.split(':');
+        const value = valueParts.join(':').trim();
+        while (indentStack.length > 0 && indentStack[indentStack.length - 1] >= indent) indentStack.pop();
+        indentStack.push(indent);
+        let current: Record<string, unknown> = obj;
+        for (const p of indentStack.slice(1, -1)) { /* path tracking */ }
+        if (value === '' || value === '|' || value === '>') { current[key] = ''; }
+        else { current[key] = value; }
+      }
+      setParsed(obj);
+    } catch { setParsed(null); }
   };
+
+  const resultText = isValid ? (issues.length === 0 ? '✓ Valid YAML — no issues' : `✓ Valid YAML with ${issues.length} warning(s)`) : 'Enter YAML to validate';
+
   return (
-    <Section title="YAML Syntax Validator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {presets.map(p => <button key={p.label} onClick={() => validate(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border border-yellow-500/20 transition-colors">{p.label}</button>)}
-      </div>
-      <Input label="YAML string" rows={6} value={input} onChange={v => { setInput(v); setResult(''); setIssues([]); }} placeholder="key: value" />
-      <button onClick={() => validate()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
-      {result && (
-        <div className="mt-4 space-y-2">
-          <div className={`p-4 rounded-xl text-sm border-l-4 ${issues.length === 0 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-400'}`}>{result}</div>
-          {issues.length > 0 && (
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-yellow-400 space-y-1">
-              <span className="text-xs font-semibold text-zinc-500 block mb-1">Warnings</span>
-              {issues.map((iss, i) => <div key={i} className="text-xs text-zinc-700 dark:text-zinc-300">⚠ {iss}</div>)}
+    <CalculatorShell title="YAML Syntax Validator" result={resultText} onCalculate={validate} presets={presets} accent="yellow" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="parsed.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">YAML String</label>
+        <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIssues([]); setIsValid(null); setParsed(null); }} rows={8} placeholder="key: value"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 resize-y" />
+
+        <button onClick={validate} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
+
+        {isValid !== null && (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl border-l-4 ${issues.length === 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-yellow-50 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-400'}`}>
+              {result}
             </div>
-          )}
-        </div>
-      )}
-    </Section>
+
+            {issues.length > 0 && (
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-yellow-400 space-y-1">
+                <span className="text-xs font-semibold text-zinc-500 block mb-1">Warnings</span>
+                {issues.map((iss, i) => (
+                  <div key={i} className="text-xs text-zinc-700 dark:text-zinc-300 flex items-center gap-1">
+                    <span className="text-yellow-500">⚠</span>
+                    {iss}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {parsed && (
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700 max-h-[300px] overflow-auto">
+                <pre className="text-xs font-mono whitespace-pre-wrap">{JSON.stringify(parsed, null, 2)}</pre>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 

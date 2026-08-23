@@ -112,56 +112,136 @@ export function CharacterCounter() {
   const digits = (text.match(/[0-9]/g) || []).length;
   const spaces = (text.match(/\s/g) || []).length;
   const punctuation = (text.match(/[^\w\s]/g) || []).length;
+  const uppercase = (text.match(/[A-Z]/g) || []).length;
+  const lowercase = (text.match(/[a-z]/g) || []).length;
+
+  const presets = [
+    { label: 'Lorem Ipsum', apply: () => setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.') },
+    { label: 'Code Sample', apply: () => setText('function hello() {\n  console.log("Hello, World!");\n  return 42;\n}') },
+    { label: 'Email', apply: () => setText('user.name+tag@example-domain.com') },
+    { label: 'Clear', apply: () => setText('') },
+  ];
+
+  const resultText = total > 0
+    ? `${total} chars (${noSpace} no space), ${letters} letters, ${digits} digits, ${spaces} spaces, ${punctuation} punct`
+    : 'No text entered';
+
+  const stats = [
+    { label: 'Total', value: total, color: 'text-zinc-600 dark:text-zinc-400' },
+    { label: 'No Spaces', value: noSpace, color: 'text-emerald-500' },
+    { label: 'Letters', value: letters, color: 'text-blue-700 dark:text-blue-400', sub: `↑${uppercase} ↓${lowercase}` },
+    { label: 'Digits', value: digits, color: 'text-amber-500' },
+    { label: 'Spaces', value: spaces, color: 'text-cyan-500' },
+    { label: 'Punctuation', value: punctuation, color: 'text-rose-500' },
+  ];
 
   return (
-    <Section title="Character Counter">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text" value={text} onChange={setText} rows={10} placeholder="Type or paste text..." />
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-between min-h-[300px]">
-          {text ? (<div className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-zinc-800 dark:text-white">{total}</p><p className="text-xs text-[var(--text-muted)]">Total</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-emerald-500">{noSpace}</p><p className="text-xs text-[var(--text-muted)]">No Space</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-blue-700 dark:text-blue-400">{letters}</p><p className="text-xs text-[var(--text-muted)]">Letters</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-amber-500">{digits}</p><p className="text-xs text-[var(--text-muted)]">Digits</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-cyan-500">{spaces}</p><p className="text-xs text-[var(--text-muted)]">Spaces</p></div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center"><p className="text-3xl font-extrabold text-rose-500">{punctuation}</p><p className="text-xs text-[var(--text-muted)]">Punctuation</p></div>
+    <CalculatorShell title="Character Counter" result={resultText} onCalculate={() => {}} presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+        <textarea value={text} onChange={e => setText(e.target.value)} rows={10} placeholder="Type or paste text..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-sky-500/50 resize-y" />
+
+        {text && (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {stats.map((s, i) => (
+              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
+                <p className={`text-2xl font-extrabold ${s.color}`}>{s.value}</p>
+                <p className="text-xs text-[var(--text-muted)]">{s.label}</p>
+                {s.sub && <p className="text-[10px] text-[var(--text-muted)]">{s.sub}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {total > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Composition</div>
+            <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex">
+              {letters > 0 && <div style={{ width: `${(letters / total) * 100}%` }} className="bg-blue-500 h-full" title="Letters" />}
+              {digits > 0 && <div style={{ width: `${(digits / total) * 100}%` }} className="bg-amber-500 h-full" title="Digits" />}
+              {spaces > 0 && <div style={{ width: `${(spaces / total) * 100}%` }} className="bg-cyan-500 h-full" title="Spaces" />}
+              {punctuation > 0 && <div style={{ width: `${(punctuation / total) * 100}%` }} className="bg-rose-500 h-full" title="Punctuation" />}
             </div>
-            {total > 0 && <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex"><div style={{ width: `${(letters / total) * 100}%` }} className="bg-blue-500 h-full" /><div style={{ width: `${(digits / total) * 100}%` }} className="bg-amber-500 h-full" /><div style={{ width: `${(spaces / total) * 100}%` }} className="bg-cyan-500 h-full" /><div style={{ width: `${(punctuation / total) * 100}%` }} className="bg-rose-500 h-full" /></div>}
-          </div>) : (<p className="text-[var(--text-muted)] text-sm">Start typing to see character breakdown</p>)}
-        </div>
+            <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">
+              <span>Letters: {letters}</span>
+              <span>Digits: {digits}</span>
+              <span>Spaces: {spaces}</span>
+              <span>Punct: {punctuation}</span>
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
 // === 3. WordFrequencyCounter ===
 export function WordFrequencyCounter() {
-  const [text, setText] = useState(''); const [limit, setLimit] = useState(20); const [frequencies, setFrequencies] = useState<{ word: string; count: number; pct: number }[]>([]);
+  const [text, setText] = useState('');
+  const [limit, setLimit] = useState(20);
+  const [frequencies, setFrequencies] = useState<{ word: string; count: number; pct: number }[]>([]);
+
   const analyze = () => {
     const words = text.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(Boolean);
-    const freq: Record<string, number> = {}; words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+    const freq: Record<string, number> = {};
+    words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
     const total = words.length;
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, limit).map(([word, count]) => ({ word, count, pct: (count / total) * 100 }));
     setFrequencies(sorted);
   };
+
   const maxCount = frequencies.length > 0 ? frequencies[0].count : 1;
+  const totalWords = frequencies.reduce((sum, f) => sum + f.count, 0);
+
+  const presets = [
+    { label: 'Lorem Ipsum', apply: () => { setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'); } },
+    { label: 'Repeated Words', apply: () => { setText('the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox'); } },
+    { label: 'Clear', apply: () => { setText(''); setFrequencies([]); } },
+  ];
+
+  const resultText = frequencies.length > 0
+    ? `Top ${frequencies.length} words from ${totalWords} total words`
+    : 'Enter text and analyze';
 
   return (
-    <Section title="Word Frequency Counter">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text" value={text} onChange={setText} rows={8} />
-          <Input label="Show Top" type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v))} />
-          <button onClick={analyze} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
+    <CalculatorShell title="Word Frequency Counter" result={resultText} onCalculate={analyze} presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+          <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text to analyze..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[300px]">
-          {frequencies.length > 0 ? (<div className="space-y-1.5 max-h-[350px] overflow-y-auto">{frequencies.map((f, i) => (<div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span><span className="flex-1">{f.word}</span><div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden"><div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" /></div><span className="w-16 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and analyze</p>)}
+        <div className="flex gap-2 items-end">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Show Top</label>
+            <input type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v.target.value))}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+          </div>
+          <button onClick={analyze} className="self-end px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
         </div>
+
+        {frequencies.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+            <div className="max-h-[400px] overflow-y-auto space-y-1.5">
+              {frequencies.map((f, i) => (
+                <div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+                  <span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span>
+                  <span className="flex-1 font-medium">{f.word}</span>
+                  <div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                    <div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" />
+                  </div>
+                  <span className="w-20 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span>
+                </div>
+              ))}
+            </div>
+            <div className="text-xs text-[var(--text-muted)] mt-2">
+              Showing {frequencies.length} of {Object.keys(frequencies.reduce((acc, f) => { acc[f.word] = f.count; return acc; }, {})).length} unique words
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -260,24 +340,64 @@ export function KeywordDensityChecker() {
 // === 5. KeywordPlannerTool ===
 const STOP_WORDS = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','shall','can','need','dare','ought','used','to','of','in','for','on','with','at','by','from','as','into','through','during','before','after','above','below','between','out','off','over','under','again','further','then','once','here','there','when','where','why','how','all','each','every','both','few','more','most','other','some','such','no','nor','not','only','own','same','so','than','too','very','just','because','but','and','or','if','while','that','this','these','those','it','its','also']);
 export function KeywordPlannerTool() {
-  const [text, setText] = useState(''); const [keywords, setKeywords] = useState<{ word: string; count: number; density: number }[]>([]);
+  const [text, setText] = useState('');
+  const [keywords, setKeywords] = useState<{ word: string; count: number; density: number }[]>([]);
+  const [minLength, setMinLength] = useState(3);
+
   const extract = () => {
     const words = text.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(Boolean);
-    const freq: Record<string, number> = {}; words.forEach(w => { if (w.length > 2 && !STOP_WORDS.has(w)) freq[w] = (freq[w] || 0) + 1; });
+    const freq: Record<string, number> = {};
+    words.forEach(w => { if (w.length >= minLength && !STOP_WORDS.has(w)) freq[w] = (freq[w] || 0) + 1; });
     const total = words.length;
-    setKeywords(Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 30).map(([word, count]) => ({ word, count, density: (count / total) * 100 })));
+    setKeywords(Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, 50).map(([word, count]) => ({ word, count, density: (count / total) * 100 })));
   };
 
+  const presets = [
+    { label: 'Blog Post', apply: () => setText('Writing effective blog posts requires understanding your audience and their search intent. Content marketing strategies should focus on providing value through educational content that solves real problems. SEO optimization helps your content rank higher in search results.') },
+    { label: 'Product Page', apply: () => setText('Our premium wireless headphones feature active noise cancellation, 30-hour battery life, and premium comfort. The headphones are perfect for travel, work, and music lovers. Shop now for the best audio experience with free shipping.') },
+    { label: 'Clear', apply: () => { setText(''); setKeywords([]); } },
+  ];
+
+  const resultText = keywords.length > 0
+    ? `Extracted ${keywords.length} keywords from ${text.split(/\s+/).filter(Boolean).length} words (min length: ${minLength})`
+    : 'Enter text to extract keywords';
+
+  const totalWords = text.trim() ? text.split(/\s+/).length : 0;
+
   return (
-    <Section title="Keyword Planner Tool">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text Content" value={text} onChange={setText} rows={8} />
-          <button onClick={extract} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Extract Keywords</button>
+    <CalculatorShell title="Keyword Planner Tool" result={resultText} onCalculate={extract} presets={presets} accent="indigo" downloadData={keywords.length > 0 ? JSON.stringify({ totalWords, keywords }, null, 2) : ''} downloadFilename="keywords.json">
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Content</label>
+          <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[300px]">{keywords.length > 0 ? (<div className="space-y-1 max-h-[350px] overflow-y-auto">{keywords.map((k, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="flex items-center gap-2"><span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>{k.word}</span><span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(1)}%)</span></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Extract keywords from your content</p>)}</div>
+        <div className="flex gap-2 flex-wrap items-end">
+          <div className="flex-1 min-w-[150px]">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Min Word Length</label>
+            <input type="number" min={2} max={10} value={String(minLength)} onChange={e => setMinLength(Number(e.target.value))}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+          </div>
+          <button onClick={extract} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Extract Keywords</button>
+        </div>
+
+        {keywords.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+            <div className="max-h-[400px] overflow-y-auto space-y-1">
+              {keywords.map((k, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+                  <span className="flex items-center gap-2">
+                    <span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>
+                    <span className="font-medium">{k.word}</span>
+                  </span>
+                  <span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(2)}%)</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -403,19 +523,78 @@ export function SeoSlugGenerator() {
 
 // === 11. CaseConverter ===
 export function CaseConverter() {
-  const [text, setText] = useState('hello world from toolzum'); const [result, setResult] = useState('');
-  const convert = (type: string) => { switch (type) { case 'upper': setResult(text.toUpperCase()); break; case 'lower': setResult(text.toLowerCase()); break; case 'title': setResult(text.replace(/\b\w/g, c => c.toUpperCase())); break; case 'sentence': setResult(text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()); break; case 'camel': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'pascal': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('')); break; case 'snake': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('_')); break; case 'kebab': setResult(text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('-')); break; } };
+  const [text, setText] = useState('hello world from toolzum');
+  const [result, setResult] = useState('');
+  const [activeCase, setActiveCase] = useState<string | null>(null);
+
+  const convert = (type: string) => {
+    let r = '';
+    switch (type) {
+      case 'upper': r = text.toUpperCase(); break;
+      case 'lower': r = text.toLowerCase(); break;
+      case 'title': r = text.replace(/\b\w/g, c => c.toUpperCase()); break;
+      case 'sentence': r = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase(); break;
+      case 'camel': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(''); break;
+      case 'pascal': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(''); break;
+      case 'snake': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('_'); break;
+      case 'kebab': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('-'); break;
+      case 'constant': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toUpperCase()).join('_'); break;
+      case 'dot': r = text.replace(/[^\w\s]/g, '').split(/\s+/).map(w => w.toLowerCase()).join('.'); break;
+    }
+    setResult(r);
+    setActiveCase(type);
+  };
+
+  const cases = [
+    { id: 'upper', label: 'UPPERCASE', icon: 'ABC' },
+    { id: 'lower', label: 'lowercase', icon: 'abc' },
+    { id: 'title', label: 'Title Case', icon: 'Abc' },
+    { id: 'sentence', label: 'Sentence', icon: 'Abc' },
+    { id: 'camel', label: 'camelCase', icon: 'aBc' },
+    { id: 'pascal', label: 'PascalCase', icon: 'Abc' },
+    { id: 'snake', label: 'snake_case', icon: 'a_b_c' },
+    { id: 'kebab', label: 'kebab-case', icon: 'a-b-c' },
+    { id: 'constant', label: 'CONSTANT_CASE', icon: 'A_B_C' },
+    { id: 'dot', label: 'dot.case', icon: 'a.b.c' },
+  ];
+
+  const presets = [
+    { label: 'Sample Text', apply: () => { setText('hello world from toolzum'); setResult(''); setActiveCase(null); } },
+    { label: 'API Response', apply: () => { setText('user id first name last name email address'); setResult(''); setActiveCase(null); } },
+    { label: 'CSS Classes', apply: () => { setText('main container header navigation menu item active'); setResult(''); setActiveCase(null); } },
+    { label: 'Clear', apply: () => { setText(''); setResult(''); setActiveCase(null); } },
+  ];
+
+  const resultText = result ? `Converted to ${cases.find(c => c.id === activeCase)?.label || activeCase}` : 'Enter text and choose a case style';
 
   return (
-    <Section title="Case Converter">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text" value={text} onChange={setText} rows={5} />
-          <div className="flex flex-wrap gap-2">{[['UPPER','upper'],['lower','lower'],['Title Case','title'],['Sentence','sentence'],['camelCase','camel'],['PascalCase','pascal'],['snake_case','snake'],['kebab-case','kebab']].map(([label, id]) => (<button key={id} onClick={() => convert(id)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{label}</button>))}</div>
+    <CalculatorShell title="Case Converter" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={result} downloadFilename="converted.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+        <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); setActiveCase(null); }} rows={4} placeholder="Enter text to convert..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-y" />
+
+        <div className="flex flex-wrap gap-2">
+          {cases.map(c => (
+            <button key={c.id} onClick={() => convert(c.id)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors flex items-center gap-1 ${activeCase === c.id ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400'}`}>
+              <span className="text-[10px] font-mono opacity-50">{c.icon}</span>
+              {c.label}
+            </button>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[150px]">{result ? (<><textarea readOnly value={result} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter text and choose a case</p>)}</div>
+
+        {result && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-[var(--text-secondary)]">Result</span>
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+            </div>
+            <textarea readOnly value={result} rows={3} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -480,24 +659,73 @@ export function TextDeduplicator() {
 
 // === 15. TextDiffChecker ===
 export function TextDiffChecker() {
-  const [text1, setText1] = useState('The quick brown fox\njumps over the lazy dog'); const [text2, setText2] = useState('The quick brown fox\njumps over the sleepy cat'); const [diff, setDiff] = useState<{ lines: { text: string; type: 'same' | 'added' | 'removed' }[] } | null>(null);
+  const [text1, setText1] = useState('The quick brown fox\njumps over the lazy dog');
+  const [text2, setText2] = useState('The quick brown fox\njumps over the sleepy cat');
+  const [diff, setDiff] = useState<{ lines: { text: string; type: 'same' | 'added' | 'removed' }[] } | null>(null);
+
   const compare = () => {
-    const lines1 = text1.split('\n'); const lines2 = text2.split('\n'); const maxLen = Math.max(lines1.length, lines2.length);
+    const lines1 = text1.split('\n');
+    const lines2 = text2.split('\n');
+    const maxLen = Math.max(lines1.length, lines2.length);
     const lines: { text: string; type: 'same' | 'added' | 'removed' }[] = [];
-    for (let i = 0; i < maxLen; i++) { if (i >= lines1.length) lines.push({ text: lines2[i], type: 'added' }); else if (i >= lines2.length) lines.push({ text: lines1[i], type: 'removed' }); else if (lines1[i] === lines2[i]) lines.push({ text: lines1[i], type: 'same' }); else { lines.push({ text: lines1[i], type: 'removed' }); lines.push({ text: lines2[i], type: 'added' }); } }
+    for (let i = 0; i < maxLen; i++) {
+      if (i >= lines1.length) lines.push({ text: lines2[i], type: 'added' });
+      else if (i >= lines2.length) lines.push({ text: lines1[i], type: 'removed' });
+      else if (lines1[i] === lines2[i]) lines.push({ text: lines1[i], type: 'same' });
+      else { lines.push({ text: lines1[i], type: 'removed' }); lines.push({ text: lines2[i], type: 'added' }); }
+    }
     setDiff({ lines });
   };
+
   const added = diff ? diff.lines.filter(l => l.type === 'added').length : 0;
   const removed = diff ? diff.lines.filter(l => l.type === 'removed').length : 0;
+  const same = diff ? diff.lines.filter(l => l.type === 'same').length : 0;
+
+  const presets = [
+    { label: 'Code Change', apply: () => { setText1('function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(1, 2));'); setText2('function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(1, 2));\nconsole.log(add(3, 4));'); } },
+    { label: 'Config Diff', apply: () => { setText1('DEBUG=true\nPORT=3000\nHOST=localhost'); setText2('DEBUG=false\nPORT=8080\nHOST=0.0.0.0\nLOG_LEVEL=info'); } },
+    { label: 'Clear', apply: () => { setText1(''); setText2(''); setDiff(null); } },
+  ];
+
+  const resultText = diff
+    ? `${added} added, ${removed} removed, ${same} unchanged`
+    : 'Enter two texts to compare';
 
   return (
-    <Section title="Text Diff Checker">
-      <div className="grid grid-cols-1 gap-6">
-        <div className="grid grid-cols-2 gap-4"><Input label="Original Text" value={text1} onChange={setText1} rows={6} /><Input label="New Text" value={text2} onChange={setText2} rows={6} /></div>
-        <button onClick={compare} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors self-start">Compare</button>
-        {diff && (<div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4"><div className="flex items-center gap-3 mb-3 text-xs"><span className="text-emerald-500 font-bold">+{added} added</span><span className="text-red-500 font-bold">-{removed} removed</span></div><div className="font-mono text-xs max-h-[300px] overflow-y-auto space-y-0.5">{diff.lines.map((l, i) => (<div key={i} className={`p-1 rounded ${l.type === 'same' ? '' : l.type === 'added' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300'}`}><span className="mr-2 font-bold">{l.type === 'added' ? '+' : l.type === 'removed' ? '-' : ' '}</span>{l.text || ' '}</div>))}</div></div>)}
+    <CalculatorShell title="Text Diff Checker" result={resultText} onCalculate={compare} presets={presets} accent="violet" downloadData={diff ? JSON.stringify({ text1, text2, diff: diff.lines }, null, 2) : ''} downloadFilename="diff.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
+          <textarea value={text1} onChange={e => { setText1(e.target.value); setDiff(null); }} rows={6} placeholder="Original text..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">New Text</label>
+          <textarea value={text2} onChange={e => { setText2(e.target.value); setDiff(null); }} rows={6} placeholder="New text..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
+        </div>
+
+        <button onClick={compare} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors self-start">Compare</button>
+
+        {diff && (
+          <div className="space-y-3">
+            <div className="flex items-center gap-4 text-sm">
+              <span className="px-2 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full font-medium">+{added} added</span>
+              <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full font-medium">-{removed} removed</span>
+              <span className="px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full font-medium">{same} same</span>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 max-h-[400px] overflow-y-auto font-mono text-xs space-y-0.5">
+              {diff.lines.map((l, i) => (
+                <div key={i} className={`p-1.5 rounded ${l.type === 'same' ? 'bg-transparent' : l.type === 'added' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' : 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-300'}`}>
+                  <span className="mr-2 font-bold text-[var(--text-muted)]">
+                    {l.type === 'added' ? '+' : l.type === 'removed' ? '-' : ' '}
+                  </span>
+                  <span>{l.text || '\u00A0'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -641,20 +869,97 @@ export function BreadcrumbSchemaGenerator() {
 
 // === 25. UtmBuilder ===
 export function UtmBuilder() {
-  const [baseUrl, setBaseUrl] = useState('https://example.com'); const [source, setSource] = useState('newsletter'); const [medium, setMedium] = useState('email'); const [campaign, setCampaign] = useState('spring_sale'); const [term, setTerm] = useState(''); const [content, setContent] = useState(''); const [result, setResult] = useState('');
-  const build = () => { try { new URL(baseUrl); } catch { return; } const u = new URL(baseUrl); u.searchParams.set('utm_source', source); u.searchParams.set('utm_medium', medium); u.searchParams.set('utm_campaign', campaign); if (term) u.searchParams.set('utm_term', term); if (content) u.searchParams.set('utm_content', content); setResult(u.toString()); };
+  const [baseUrl, setBaseUrl] = useState('https://example.com');
+  const [source, setSource] = useState('newsletter');
+  const [medium, setMedium] = useState('email');
+  const [campaign, setCampaign] = useState('spring_sale');
+  const [term, setTerm] = useState('');
+  const [content, setContent] = useState('');
+  const [result, setResult] = useState('');
+
+  const build = () => {
+    try {
+      new URL(baseUrl);
+    } catch { return; }
+    const u = new URL(baseUrl);
+    u.searchParams.set('utm_source', source);
+    u.searchParams.set('utm_medium', medium);
+    u.searchParams.set('utm_campaign', campaign);
+    if (term) u.searchParams.set('utm_term', term);
+    if (content) u.searchParams.set('utm_content', content);
+    setResult(u.toString());
+  };
+
+  const presets = [
+    { label: 'Email Campaign', apply: () => { setSource('newsletter'); setMedium('email'); setCampaign('weekly_digest'); } },
+    { label: 'Social Media', apply: () => { setSource('facebook'); setMedium('social'); setCampaign('product_launch'); } },
+    { label: 'Paid Search', apply: () => { setSource('google'); setMedium('cpc'); setCampaign('brand_terms'); setTerm('running shoes'); } },
+    { label: 'Referral', apply: () => { setSource('partner_site'); setMedium('referral'); setCampaign('affiliate'); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? `UTM URL built (${new URL(result).searchParams.toString()})` : 'Fill fields to build a UTM-tagged URL';
+
+  const params = [
+    { key: 'utm_source', label: 'Source', value: source, required: true, desc: 'Where traffic comes from' },
+    { key: 'utm_medium', label: 'Medium', value: medium, required: true, desc: 'Marketing medium' },
+    { key: 'utm_campaign', label: 'Campaign', value: campaign, required: true, desc: 'Specific campaign name' },
+    { key: 'utm_term', label: 'Term', value: term, required: false, desc: 'Paid search keywords' },
+    { key: 'utm_content', label: 'Content', value: content, required: false, desc: 'A/B test variant' },
+  ];
 
   return (
-    <Section title="UTM Builder">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Base URL" type="url" value={baseUrl} onChange={setBaseUrl} />
-          <div className="grid grid-cols-2 gap-3"><Input label="Source" value={source} onChange={setSource} /><Input label="Medium" value={medium} onChange={setMedium} /><Input label="Campaign" value={campaign} onChange={setCampaign} /><Input label="Term (opt)" value={term} onChange={setTerm} /></div>
-          <Input label="Content (opt)" value={content} onChange={setContent} />
-          <button onClick={build} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Build UTM URL</button>
+    <CalculatorShell title="UTM Builder" result={resultText} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
+        <input type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {params.map(p => (
+            <div key={p.key} className={p.required ? 'ring-1 ring-cyan-500/20' : ''}>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1">
+                {p.label}
+                {!p.required && <span className="text-xs text-[var(--text-muted)]">(optional)</span>}
+              </label>
+              <input type="text" value={p.value} onChange={e => {
+                if (p.key === 'utm_source') setSource(e.target.value);
+                else if (p.key === 'utm_medium') setMedium(e.target.value);
+                else if (p.key === 'utm_campaign') setCampaign(e.target.value);
+                else if (p.key === 'utm_term') setTerm(e.target.value);
+                else if (p.key === 'utm_content') setContent(e.target.value);
+              }} placeholder={p.desc}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+            </div>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><input readOnly value={result} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields to build a UTM-tagged URL</p>)}</div>
+
+        <button onClick={build} className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Build UTM URL</button>
+
+        {result && (
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">Result</label>
+            <div className="flex gap-2">
+              <input readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" />
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors shrink-0">Copy</button>
+            </div>
+            <div className="text-xs text-[var(--text-muted)]">
+              <strong>Params:</strong> {new URL(result).searchParams.toString()}
+            </div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">UTM Parameter Guide</div>
+          <div className="grid grid-cols-2 gap-1 text-xs text-[var(--text-muted)]">
+            <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_source</span> — Traffic source (google, newsletter, facebook)</div>
+            <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_medium</span> — Medium (email, cpc, social, referral)</div>
+            <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_campaign</span> — Campaign name (spring_sale, product_launch)</div>
+            <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_term</span> — Search keywords (paid search)</div>
+            <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_content</span> — Ad/content variant (A/B testing)</div>
+          </div>
+        </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
