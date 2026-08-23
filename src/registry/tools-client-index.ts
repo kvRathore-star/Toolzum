@@ -54,6 +54,46 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "time-conv-1",
+    "name": "Time Converter",
+    "slug": "time-converter",
+    "category": "Utility",
+    "description": "Convert between time units including seconds, minutes, hours, days, weeks, months, and years with precise decimal results. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "du-1",
+    "name": "Random Port Generator",
+    "slug": "random-port-generator",
+    "category": "Developer",
+    "description": "Generate random TCP/UDP port numbers from well-known, registered, or dynamic ranges. Useful for network testing, Docker port mapping, and firewall configuration.",
+    "isPro": false
+  },
+  {
+    "id": "du-2",
+    "name": "Chmod Calculator",
+    "slug": "chmod-calculator",
+    "category": "Developer",
+    "description": "Convert between numeric (755) and symbolic (u=rwx,g=rx,o=rx) chmod permission formats. See detailed breakdown for owner, group, and others.",
+    "isPro": false
+  },
+  {
+    "id": "du-3",
+    "name": "Docker Run to Compose Converter",
+    "slug": "docker-run-to-compose",
+    "category": "Developer",
+    "description": "Convert docker run commands to docker-compose.yml format. Supports ports, volumes, environment variables, networks, restart policies, and container names.",
+    "isPro": false
+  },
+  {
+    "id": "du-4",
+    "name": "Email Normalizer",
+    "slug": "email-normalizer",
+    "category": "Developer",
+    "description": "Normalize email addresses by removing dots (Gmail), stripping +tags, and lowercasing. Process multiple emails at once for deduplication and cleaning.",
+    "isPro": false
+  },
+  {
     "id": "arch-conv-1",
     "name": "Archive Converter",
     "slug": "archive-converter",
@@ -99,6 +139,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-image-generator",
     "category": "AI",
     "description": "Transforms text prompts into high-resolution images using advanced diffusion models. Designers and marketers use it for rapid visual prototyping.",
+    "isPro": false
+  },
+  {
+    "id": "11",
+    "name": "Speed Test",
+    "slug": "speed-test",
+    "category": "Utility",
+    "description": "Measures your internet connection’s download speed and latency by downloading a test file from a CDN. Upload speed is not currently measured.",
     "isPro": false
   },
   {
@@ -222,6 +270,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "35",
+    "name": "Wheel of Names",
+    "slug": "wheel-of-names",
+    "category": "Utility",
+    "description": "Displays an animated spinning wheel that randomly selects one entry from a customizable list of names or options. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "36",
     "name": "Image Compressor",
     "slug": "image-compressor",
@@ -270,6 +326,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "42",
+    "name": "QR Code Generator",
+    "slug": "qr-code-generator",
+    "category": "Utility",
+    "description": "Renders a scannable QR code from any text or URL using a client-side Reed-Solomon encoder. Download as PNG.",
+    "isPro": false
+  },
+  {
     "id": "44",
     "name": "Excel to PDF",
     "slug": "excel-to-pdf",
@@ -295,10 +359,10 @@ export const clientToolsRegistry: ClientToolEntry[] = [
   },
   {
     "id": "47",
-    "name": "Video to Text Transcription",
+    "name": "Video Transcript Formatter",
     "slug": "video-to-text-transcription",
     "category": "Transcription",
-    "description": "Structure raw video audio logs into clean scripts, articles, or outlines using AI. Paste your video transcription logs and pick a target format.",
+    "description": "Clean up and restructure raw video transcription logs into readable scripts, articles, or outlines using AI. Paste a messy transcript dump and pick a target format.",
     "isPro": false
   },
   {
@@ -350,6 +414,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "54",
+    "name": "Random Number Generator",
+    "slug": "random-number-generator",
+    "category": "Utility",
+    "description": "Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "55",
+    "name": "URL Shortener",
+    "slug": "url-shortener",
+    "category": "Utility",
+    "description": "Takes any long URL and generates a compact, shareable short link with optional custom alias support. Uses cloud-based processing.",
+    "isPro": false
+  },
+  {
     "id": "58",
     "name": "PDF to Excel",
     "slug": "pdf-to-excel",
@@ -391,7 +471,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
   },
   {
     "id": "64",
-    "name": "Audio to Text Transcription",
+    "name": "Audio Transcript Formatter",
     "slug": "audio-to-text-transcription",
     "category": "Transcription",
     "description": "Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.",
@@ -411,6 +491,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "mov-to-mp4",
     "category": "Converter",
     "description": "Convert MOV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.",
+    "isPro": false
+  },
+  {
+    "id": "68",
+    "name": "Resume Builder",
+    "slug": "resume-builder",
+    "category": "Utility",
+    "description": "Provides a structured, form-based interface for entering work history, education, and skills, then renders a professionally formatted PDF resume. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -438,11 +526,35 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "72",
+    "name": "Password Generator",
+    "slug": "password-generator",
+    "category": "Utility",
+    "description": "Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "73",
+    "name": "Diff Checker",
+    "slug": "diff-checker",
+    "category": "Developer",
+    "description": "Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "74",
     "name": "WEBM to MP4",
     "slug": "webm-to-mp4",
     "category": "Converter",
     "description": "Convert WEBM video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.",
+    "isPro": false
+  },
+  {
+    "id": "76",
+    "name": "IP Address Lookup",
+    "slug": "ip-address-lookup",
+    "category": "Developer",
+    "description": "Displays your public IPv4 and IPv6 addresses with geolocation data (city, ISP, ASN, timezone). Network engineers use it to verify VPN connectivity. Uses cloud-based processing.",
     "isPro": false
   },
   {
@@ -542,6 +654,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "99",
+    "name": "Regex Tester",
+    "slug": "regex-tester",
+    "category": "Developer",
+    "description": "Provides an interactive environment where users can write a regular expression pattern, test it against sample strings, and view real-time match. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "101",
+    "name": "Dice Roller",
+    "slug": "dice-roller",
+    "category": "Utility",
+    "description": "Simulates rolling any number of dice with arbitrary side counts—d4, d6, d8, d10, d12, d20, d100, or custom values. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "102",
     "name": "Profit Margin Calculator",
     "slug": "profit-margin-calculator",
@@ -563,6 +691,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "pdf-to-epub",
     "category": "PDF",
     "description": "Convert PDF documents to EPUB format for e-book readers. Server-side conversion preserves layout, images, and chapter structure.",
+    "isPro": false
+  },
+  {
+    "id": "107",
+    "name": "Coin Flipper",
+    "slug": "coin-flipper",
+    "category": "Utility",
+    "description": "Simulates a fair coin flip using a cryptographic random number generator, displaying heads or tails with a realistic animation. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -638,6 +774,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "113",
+    "name": "JSON Formatter",
+    "slug": "json-formatter",
+    "category": "Developer",
+    "description": "Pretty-prints raw JSON with configurable indent width, key sorting, and bracket collapsing options while flagging syntax errors with exact.",
+    "isPro": false
+  },
+  {
     "id": "114",
     "name": "XML Sitemap Generator",
     "slug": "xml-sitemap-generator",
@@ -710,6 +854,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "129",
+    "name": "Morse Code Translator",
+    "slug": "morse-code-translator",
+    "category": "Converter",
+    "description": "Converts alphanumeric text into International Morse code with audible beeps played through the Web Audio API, and decodes incoming Morse signals. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "130",
     "name": "Cursive Text Generator",
     "slug": "cursive-text-generator",
@@ -739,6 +891,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "password-strength-checker",
     "category": "Privacy",
     "description": "Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.",
+    "isPro": false
+  },
+  {
+    "id": "135",
+    "name": "JS Minifier",
+    "slug": "js-minifier",
+    "category": "Developer",
+    "description": "Strips comments, whitespace, and shortens local variable names in JavaScript source without altering execution semantics. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "136",
+    "name": "Base64 Encode/Decode",
+    "slug": "base64-encode-decode",
+    "category": "Developer",
+    "description": "Encodes text or small files into Base64 strings and decodes them back with automatic MIME-type detection for binary safety. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -779,6 +947,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "video-to-gif",
     "category": "Video",
     "description": "Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "142",
+    "name": "Image to Base64",
+    "slug": "image-to-base64",
+    "category": "Converter",
+    "description": "Convert images to Base64 encoded data URIs directly in your browser. Supports PNG, JPG, WebP, SVG, and GIF. 100% client-side.",
     "isPro": false
   },
   {
@@ -830,6 +1006,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "154",
+    "name": "SQL Formatter",
+    "slug": "sql-formatter",
+    "category": "Developer",
+    "description": "Formats SQL queries with proper keyword capitalization, indentation, and clause alignment for readable database operations.",
+    "isPro": false
+  },
+  {
+    "id": "155",
+    "name": "UUID Generator",
+    "slug": "uuid-generator",
+    "category": "Developer",
+    "description": "Generates UUID v4 random identifiers in standard 36-character string format with an optional compact hex mode (no dashes). Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "156",
     "name": "HEX to RGB Converter",
     "slug": "hex-to-rgb-converter",
@@ -843,6 +1035,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bmr-calculator",
     "category": "Health",
     "description": "Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "159",
+    "name": "Text to Binary",
+    "slug": "text-to-binary",
+    "category": "Converter",
+    "description": "Encodes any Unicode string into its binary (base-2) representation, byte by byte, with visible byte-boundary separators. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "160",
+    "name": "Binary to Text",
+    "slug": "binary-to-text",
+    "category": "Converter",
+    "description": "Decodes space- or comma-separated binary strings back into human-readable Unicode text, rejecting malformed groups with an exact-position error. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -894,6 +1102,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "166",
+    "name": "CSS Minifier",
+    "slug": "css-minifier",
+    "category": "Developer",
+    "description": "Removes unnecessary whitespace, comments, and trailing semicolons from CSS, while merging identical selector blocks where safe to do so. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "168",
     "name": "Compare PDF Files",
     "slug": "compare-pdf-files",
@@ -923,6 +1139,38 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "keyword-density-checker",
     "category": "SEO",
     "description": "Parses pasted or uploaded text to count total words, unique terms, and per-keyword frequency as a percentage, sorted by density descending. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "172",
+    "name": "Base64 to Image",
+    "slug": "base64-to-image",
+    "category": "Developer",
+    "description": "Decodes a Base64 data string back into its original image format and displays a preview directly in the browser with a download button. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "174",
+    "name": "MD5 & SHA Hash Generator",
+    "slug": "md5-hash-generator",
+    "category": "Developer",
+    "description": "Compute MD5, SHA-1, SHA-256, and SHA-512 hashes from text or file input using CryptoJS.",
+    "isPro": false
+  },
+  {
+    "id": "175",
+    "name": "HTML Minifier",
+    "slug": "html-minifier",
+    "category": "Developer",
+    "description": "Removes unnecessary whitespace, comments, and optional closing tags from HTML code to reduce file size without altering rendered output. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "176",
+    "name": "Barcode Generator",
+    "slug": "barcode-generator",
+    "category": "Utility",
+    "description": "Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -1051,6 +1299,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "pdf-workflow-builder",
     "category": "PDF",
     "description": "Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.",
+    "isPro": false
+  },
+  {
+    "id": "221",
+    "name": "API Builder & Tester",
+    "slug": "api-builder",
+    "category": "Developer",
+    "description": "Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.",
     "isPro": false
   },
   {
@@ -1203,6 +1459,318 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "webm-to-mp3",
     "category": "Converter",
     "description": "Extract the audio track from WebM video files and convert it to MP3 format. All processing runs locally in your browser with FFmpeg WASM — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "224",
+    "name": "Unit Converter",
+    "slug": "unit-converter",
+    "category": "Utility",
+    "description": "Convert between hundreds of units — length, mass, volume, temperature, area, speed, time, digital data, and more with a single click.",
+    "isPro": true
+  },
+  {
+    "id": "223",
+    "name": "Video Watermark Adder",
+    "slug": "video-watermark-adder",
+    "category": "Video",
+    "description": "Add a logo image or custom text watermark to your videos with position and opacity controls. 100% browser-based.",
+    "isPro": false
+  },
+  {
+    "id": "227",
+    "name": "GST Invoice Generator",
+    "slug": "gst-invoice-generator",
+    "category": "indian-utilities",
+    "description": "Generates compliant PDF invoices with mandatory Indian GST fields — HSN/SAC codes, GSTIN, place of supply, and tax breakdown. Everything runs locally in your browser.",
+    "isPro": false
+  },
+  {
+    "id": "228",
+    "name": "ITR Filing Helper",
+    "slug": "itr-filing-helper",
+    "category": "indian-utilities",
+    "description": "Step-by-step assistant for India Income Tax Return filing. ITR form selection, 80C/80D deductions, salary and house property income.",
+    "isPro": false
+  },
+  {
+    "id": "230",
+    "name": "Browser Extension",
+    "slug": "browser-extension",
+    "category": "Extension",
+    "description": "All-in-one AI sidebar assistant that helps with writing, summarization, translation, and answering questions right in your browser.",
+    "isPro": false
+  },
+  {
+    "id": "231",
+    "name": "MP3 Compressor",
+    "slug": "mp3-compressor",
+    "category": "Audio",
+    "description": "Reduce MP3 file size by adjusting bitrate and audio quality settings. Perfect for saving storage or faster uploads.",
+    "isPro": false
+  },
+  {
+    "id": "232",
+    "name": "GIF to MP4 Converter",
+    "slug": "gif-to-mp4",
+    "category": "Converter",
+    "description": "Convert GIF animations to MP4 videos for drastically smaller file sizes. Content creators use this to shrink animated GIFs by up to 90% for social media, Discord, and web pages — all in your browser, nothing uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "233",
+    "name": "Video Trimmer",
+    "slug": "video-trimmer",
+    "category": "Video",
+    "description": "Trim and cut video clips locally in your browser. Select start and end times, preview, and download the result.",
+    "isPro": false
+  },
+  {
+    "id": "234",
+    "name": "Aadhaar Card Masker",
+    "slug": "aadhaar-card-masker",
+    "category": "indian-utilities",
+    "description": "Securely masks the first 8 digits of your 12-digit Aadhaar number on card images, leaving only the last 4 digits visible for safe sharing. Fully local processing.",
+    "isPro": false
+  },
+  {
+    "id": "235",
+    "name": "PAN Card Verification",
+    "slug": "pan-verification",
+    "category": "indian-utilities",
+    "description": "Verifies PAN card number format and structure locally. Extracts the taxpayer category from the PAN code — Individual, Company, Trust, etc. No data is sent to any server.",
+    "isPro": false
+  },
+  {
+    "id": "236",
+    "name": "IFSC Code Lookup",
+    "slug": "ifsc-code-lookup",
+    "category": "indian-utilities",
+    "description": "Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Uses the built-in IFSC database for instant results.",
+    "isPro": false
+  },
+  {
+    "id": "237",
+    "name": "Voter ID Form Helper",
+    "slug": "voter-id-form-helper",
+    "category": "indian-utilities",
+    "description": "Get document checklists and step-by-step guidance for Indian voter registration forms — Form 6 (new enrollment), Form 7 (correction/objection), and Form 8 (name transfer within constituency).",
+    "isPro": false
+  },
+  {
+    "id": "238",
+    "name": "India Pincode Finder",
+    "slug": "india-pincode-finder",
+    "category": "indian-utilities",
+    "description": "Search Indian pincodes and post office branches by pincode, location name, or area. Find delivery status, office type, and contact details for any post office in India.",
+    "isPro": false
+  },
+  {
+    "id": "239",
+    "name": "Hindi / Regional Font Generator",
+    "slug": "hindi-regional-font-generator",
+    "category": "indian-utilities",
+    "description": "Generate stylish Unicode fonts for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and other Indian regional scripts. Copy-paste styled text for social media, WhatsApp, and more.",
+    "isPro": false
+  },
+  {
+    "id": "240",
+    "name": "Indian Age Calculator",
+    "slug": "indian-age-calculator",
+    "category": "indian-utilities",
+    "description": "Calculate exact age in years, months, and days from a date of birth in DD/MM/YYYY format. Includes eligibility check for Indian government age requirements.",
+    "isPro": false
+  },
+  {
+    "id": "241",
+    "name": "CGPA to Percentage Converter",
+    "slug": "cgpa-to-percentage-converter",
+    "category": "indian-utilities",
+    "description": "Convert CGPA to percentage using CBSE, Mumbai University (MU), Anna University, and other Indian university conversion formulas. Supports 10-point, 7-point, and 4-point CGPA scales.",
+    "isPro": false
+  },
+  {
+    "id": "242",
+    "name": "PDF to HTML",
+    "slug": "pdf-to-html",
+    "category": "PDF",
+    "description": "Converts PDF files to HTML format — document sharing, printing, and archival with consistent formatting to web pages, email templates, and content rendering. All conversion happens locally in your browser with no file size limits.",
+    "isPro": false
+  },
+  {
+    "id": "243",
+    "name": "HTML to PDF",
+    "slug": "html-to-pdf",
+    "category": "PDF",
+    "description": "Converts HTML files to PDF format — web pages, email templates, and content rendering to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits.",
+    "isPro": false
+  },
+  {
+    "id": "244",
+    "name": "Generic PDF Processor",
+    "slug": "generic-pdf-processor",
+    "category": "PDF",
+    "description": "Compress, rotate pages, or strip metadata from PDFs in one unified tool. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "246",
+    "name": "JFIF to PNG Converter",
+    "slug": "jfif-to-png",
+    "category": "Image",
+    "description": "Converts JFIF (JPEG File Interchange Format) images to standard PNG format without quality loss. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "248",
+    "name": "Image to JPG Converter",
+    "slug": "convert-to-jpg",
+    "category": "Image",
+    "description": "Converts any image format — PNG, WebP, BMP, GIF, TIFF — to standard JPG with configurable quality settings. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "249",
+    "name": "Rotate Image Online",
+    "slug": "rotate-image",
+    "category": "Image",
+    "description": "Rotates images left or right by 90-degree increments instantly in the browser with no upload required. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "250",
+    "name": "Blur Face Online",
+    "slug": "blur-face",
+    "category": "Image",
+    "description": "Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "251",
+    "name": "HTML to Image Converter",
+    "slug": "html-to-image",
+    "category": "Converter",
+    "description": "Renders custom HTML and CSS markup into downloadable PNG, JPG, or SVG images directly in the browser. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "252",
+    "name": "Apple Music Preview Extractor",
+    "slug": "apple-music-preview-extractor",
+    "category": "Audio",
+    "description": "Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "257",
+    "name": "Marriage Biodata Maker",
+    "slug": "marriage-biodata-maker",
+    "category": "indian-utilities",
+    "description": "Creates printable matrimonial biodata forms with sections for personal details, family background, education, career, and partner preferences. Download as PDF for sharing on matrimonial platforms.",
+    "isPro": false
+  },
+  {
+    "id": "258",
+    "name": "Rental Agreement Generator",
+    "slug": "rental-agreement-generator",
+    "category": "indian-utilities",
+    "description": "Generates customizable rental lease and license agreements compliant with Indian property laws. Supports leave-and-license agreements and standard tenancy formats for residential and commercial properties.",
+    "isPro": false
+  },
+  {
+    "id": "259",
+    "name": "Resume ATS Score Checker",
+    "slug": "resume-ats-score-checker",
+    "category": "AI",
+    "description": "Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "261",
+    "name": "WhatsApp Toolkit",
+    "slug": "whatsapp-toolkit",
+    "category": "Utility",
+    "description": "Generates wa.me click-to-chat links, WhatsApp group invite links, QR codes for quick connections, and includes a chat analyzer and status text. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "262",
+    "name": "Indian Document Enhancer",
+    "slug": "indian-document-enhancer",
+    "category": "indian-utilities",
+    "description": "Enhances scanned images of Indian identification documents — Aadhaar, PAN, Voter ID, Driving License — for upload compliance on government portals. Adjusts contrast, brightness, and sharpness locally.",
+    "isPro": false
+  },
+  {
+    "id": "264",
+    "name": "Indian Voice Transcriber",
+    "slug": "indian-voice-transcriber",
+    "category": "indian-utilities",
+    "description": "Transcribes recorded audio to text with support for 12 Indian languages using AI speech recognition. Record or upload a voice note and audio is sent to our server for transcription.",
+    "isPro": false
+  },
+  {
+    "id": "265",
+    "name": "Bank Statement Analyser",
+    "slug": "bank-statement-analyser",
+    "category": "Utility",
+    "description": "Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "268",
+    "name": "Social Media Calendar",
+    "slug": "social-media-calendar",
+    "category": "Branding",
+    "description": "Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "269",
+    "name": "Bulk Background Changer",
+    "slug": "bulk-bg-changer",
+    "category": "Image",
+    "description": "Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "270",
+    "name": "AI Background Changer",
+    "slug": "ai-bg-changer",
+    "category": "Image",
+    "description": "Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "271",
+    "name": "Link in Bio Builder",
+    "slug": "link-in-bio-builder",
+    "category": "Branding",
+    "description": "Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "274",
+    "name": "PDF Page Manager",
+    "slug": "pdf-page-manager",
+    "category": "PDF",
+    "description": "Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "275",
+    "name": "Bulk QR Code Generator",
+    "slug": "bulk-qr-code-generator",
+    "category": "Utility",
+    "description": "Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "276",
+    "name": "PDF AI Summariser",
+    "slug": "pdf-ai-summariser",
+    "category": "AI",
+    "description": "Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.",
     "isPro": false
   },
   {
@@ -1483,6 +2051,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "to-do-list",
     "category": "Productivity",
     "description": "A persistent task manager with priorities and filters. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "auto-10050",
+    "name": "Domain Availability Checker",
+    "slug": "domain-availability-checker",
+    "category": "Developer",
+    "description": "Check if a domain name is available across major TLDs. Instantly verify domain availability, lookup registration status, and get suggestions for alternative names.",
     "isPro": false
   },
   {
@@ -2086,6 +2662,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "380",
+    "name": "Website Screenshot",
+    "slug": "website-screenshot",
+    "category": "Developer",
+    "description": "Capture screenshots of any website directly in your browser. Choose output format, viewport size, and capture delay. No server-side processing.",
+    "isPro": false
+  },
+  {
     "id": "381",
     "name": "GIF to WebP/WebM",
     "slug": "gif-to-webp-webm",
@@ -2614,11 +3198,27 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "443",
+    "name": "QR Code Reader",
+    "slug": "qr-code-reader",
+    "category": "Developer",
+    "description": "Decode QR codes from uploaded images. Scan any QR code image and extract the embedded text or URL.",
+    "isPro": false
+  },
+  {
     "id": "444",
     "name": "Lorem Ipsum Generator",
     "slug": "lorem-ipsum-generator",
     "category": "Text",
     "description": "Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.",
+    "isPro": false
+  },
+  {
+    "id": "445",
+    "name": "WHOIS Lookup",
+    "slug": "whois-lookup",
+    "category": "Developer",
+    "description": "Look up domain registration information using public RDAP APIs. Check registrar, expiration date, name servers, and more.",
     "isPro": false
   },
   {
@@ -2683,6 +3283,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "xlsx-csv-converter",
     "category": "Converter",
     "description": "Bidirectional converter between Excel spreadsheets (XLSX) and CSV files. Select sheets, choose delimiters, and preview data before converting.",
+    "isPro": false
+  },
+  {
+    "id": "455",
+    "name": "VCF ↔ CSV Converter",
+    "slug": "vcf-csv-converter",
+    "category": "Converter",
+    "description": "Bidirectional converter between vCard (VCF) and CSV formats. Perfect for importing/exporting address books between any platform or service.",
+    "isPro": false
+  },
+  {
+    "id": "456",
+    "name": "ICS ↔ CSV Converter",
+    "slug": "ics-csv-converter",
+    "category": "Converter",
+    "description": "Bidirectional converter between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and spreadsheets.",
     "isPro": false
   },
   {
@@ -2990,11 +3606,75 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "495-uniq",
+    "name": "Hex ↔ ASCII Converter",
+    "slug": "hex-ascii-converter",
+    "category": "Developer",
+    "description": "Convert between hexadecimal bytes and ASCII text. Supports custom delimiters and real-time bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "496",
     "name": "URL Encoder / Decoder",
     "slug": "url-encoder-decoder",
     "category": "Developer",
     "description": "Encode or decode URLs with percent-encoding. Swaps input/output for quick bidirectional conversion. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "497",
+    "name": "HTML Entity Encoder / Decoder",
+    "slug": "html-entity-encoder",
+    "category": "Developer",
+    "description": "Encode special HTML characters into entities (&amp; &lt; &gt;) or decode them back to readable text.",
+    "isPro": false
+  },
+  {
+    "id": "498",
+    "name": "Backslash Escape / Unescape",
+    "slug": "backslash-escape",
+    "category": "Developer",
+    "description": "Escape or unescape special characters with backslashes. Handles newlines, tabs, quotes, and more. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "499",
+    "name": "Random String Generator",
+    "slug": "random-string-generator",
+    "category": "Utility",
+    "description": "Generate cryptographically secure random strings with customizable length, count, and character sets (uppercase, lowercase, digits, symbols).",
+    "isPro": false
+  },
+  {
+    "id": "500",
+    "name": "Number Base Converter",
+    "slug": "number-base-converter",
+    "category": "Converter",
+    "description": "Convert numbers between binary (2), octal (8), decimal (10), and hexadecimal (16) bases with instant swap.",
+    "isPro": false
+  },
+  {
+    "id": "501",
+    "name": "Line Sorter & Deduplicator",
+    "slug": "line-sorter",
+    "category": "Utility",
+    "description": "Sort lines alphabetically (A→Z, Z→A), reverse order, shuffle randomly, or remove duplicate lines.",
+    "isPro": false
+  },
+  {
+    "id": "502",
+    "name": "URL Parser",
+    "slug": "url-parser",
+    "category": "Developer",
+    "description": "Parse any URL into its components — protocol, hostname, path, query parameters, hash, and more with copy-to-clipboard.",
+    "isPro": false
+  },
+  {
+    "id": "503",
+    "name": "String Inspector",
+    "slug": "string-inspector",
+    "category": "Developer",
+    "description": "Inspect any string — view character count, byte length, word count, line count, Unicode code points, and non-ASCII character breakdown.",
     "isPro": false
   },
   {
@@ -3006,11 +3686,75 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "505",
+    "name": "Code Beautifier & Minifier",
+    "slug": "code-beautifier",
+    "category": "Developer",
+    "description": "Beautify or minify HTML, CSS, JavaScript, XML, ERB, LESS, and SCSS with a single click.",
+    "isPro": false
+  },
+  {
+    "id": "506",
+    "name": "HTML to JSX Converter",
+    "slug": "html-to-jsx",
+    "category": "Developer",
+    "description": "Converts HTML files to JSX format — web pages, email templates, and content rendering to React component definitions and UI rendering. All conversion happens locally in your browser with no file size limits.",
+    "isPro": false
+  },
+  {
+    "id": "507",
+    "name": "PHP Tools",
+    "slug": "php-tools",
+    "category": "Developer",
+    "description": "Convert between JSON and PHP arrays, and serialize/unserialize PHP data. All four operations in one tool with instant swap.",
+    "isPro": false
+  },
+  {
+    "id": "508",
+    "name": "SVG to CSS Converter",
+    "slug": "svg-to-css",
+    "category": "Developer",
+    "description": "Convert SVG images to CSS format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "isPro": false
+  },
+  {
     "id": "510",
     "name": "JSON to Code Generator",
     "slug": "json-to-code",
     "category": "Converter",
     "description": "Generate type definitions from JSON for TypeScript, Java, C#, Python, Go, Rust, and Kotlin. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "511",
+    "name": "JWT Debugger",
+    "slug": "jwt-debugger",
+    "category": "Developer",
+    "description": "Decode and inspect JWT tokens — view header, payload, expiration, issuer, subject, and other standard claims.",
+    "isPro": false
+  },
+  {
+    "id": "512",
+    "name": "HTML Preview",
+    "slug": "html-preview",
+    "category": "Developer",
+    "description": "Write HTML and see a live preview rendered in a sandboxed iframe. Perfect for prototyping and testing. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "513",
+    "name": "Cron Expression Parser",
+    "slug": "cron-parser",
+    "category": "Developer",
+    "description": "Parse cron expressions into human-readable descriptions. Includes common presets for quick reference.",
+    "isPro": false
+  },
+  {
+    "id": "514",
+    "name": "Crypto & Hash Toolkit",
+    "slug": "crypto-kit",
+    "category": "Developer",
+    "description": "Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.",
     "isPro": false
   },
   {
@@ -3022,11 +3766,131 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "517",
+    "name": "Web Inspector & HTTP Tools",
+    "slug": "web-inspector",
+    "category": "Developer",
+    "description": "Browser device info, user-agent parser, HTTP status codes reference, MIME types lookup, Basic Auth header generator, Open Graph meta tags generator, and keycode inspector.",
+    "isPro": false
+  },
+  {
+    "id": "518",
+    "name": "Text Converter & Obfuscator",
+    "slug": "text-converter",
+    "category": "Developer",
+    "description": "NATO phonetic alphabet converter, ASCII binary converter, Unicode code point viewer, Roman numeral converter, and string obfuscator with leet speak, ROT13, Base64, and shuffle.",
+    "isPro": false
+  },
+  {
     "id": "mt-1",
     "name": "ETA Calculator",
     "slug": "eta-calculator",
     "category": "Calculator",
     "description": "Estimate travel time from distance and speed — with optional arrival time.",
+    "isPro": false
+  },
+  {
+    "id": "du-5",
+    "name": "YAML Re-indenter",
+    "slug": "yaml-reindenter",
+    "category": "Developer",
+    "description": "Clean up messy YAML — fix indentation, align colons, and normalize list formatting. Paste any YAML and get consistently formatted output.",
+    "isPro": false
+  },
+  {
+    "id": "ou-1",
+    "name": "WiFi QR Generator",
+    "slug": "wifi-qr-generator",
+    "category": "Utility",
+    "description": "Generate QR codes for WiFi network credentials — scan to connect.",
+    "isPro": false
+  },
+  {
+    "id": "ou-2",
+    "name": "Phone Number Parser",
+    "slug": "phone-parser",
+    "category": "Developer",
+    "description": "Parse and validate international phone numbers with country detection.",
+    "isPro": false
+  },
+  {
+    "id": "ou-4",
+    "name": "Slugify",
+    "slug": "slugify-tool",
+    "category": "Utility",
+    "description": "Convert text to URL-friendly slugs with configurable separators. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "mg-1",
+    "name": "ULID Generator",
+    "slug": "ulid-generator",
+    "category": "Utility",
+    "description": "Generate time-ordered ULID identifiers with Crockford base32 encoding. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "mg-2",
+    "name": "Numeronym Generator",
+    "slug": "numeronym-generator",
+    "category": "Utility",
+    "description": "Convert words to numeronyms (a11y-style) and acronyms. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "mg-3",
+    "name": "MAC Vendor Lookup",
+    "slug": "mac-vendor-lookup",
+    "category": "Developer",
+    "description": "Look up device manufacturer from MAC address OUI prefix.",
+    "isPro": false
+  },
+  {
+    "id": "523",
+    "name": "List Converter",
+    "slug": "list-converter",
+    "category": "Utility",
+    "description": "Convert lists between delimiters: comma, newline, pipe, tab, semicolon, and space. Auto-detects input format and supports trim, sort, and deduplicate.",
+    "isPro": false
+  },
+  {
+    "id": "524",
+    "name": "RSA Key Pair Generator",
+    "slug": "rsa-key-generator",
+    "category": "Developer",
+    "description": "Generate RSA key pairs (2048/4096-bit) using the Web Crypto API. Export public and private keys as PEM strings. All client-side, no server uploads.",
+    "isPro": false
+  },
+  {
+    "id": "ct-1",
+    "name": "Emoji Picker",
+    "slug": "emoji-picker",
+    "category": "Utility",
+    "description": "Browse 400+ emojis organized by category with search and copy.",
+    "isPro": false
+  },
+  {
+    "id": "ct-2",
+    "name": "ASCII Art Generator",
+    "slug": "ascii-art-generator",
+    "category": "Utility",
+    "description": "Convert text to ASCII art with multiple font styles.",
+    "isPro": false
+  },
+  {
+    "id": "ct-2b",
+    "name": "ASCII Font Generator",
+    "slug": "ascii-font-generator",
+    "category": "Utility",
+    "description": "Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.",
+    "isPro": false
+  },
+  {
+    "id": "526",
+    "name": "Benchmark Builder",
+    "slug": "benchmark-builder",
+    "category": "Utility",
+    "description": "Measure browser CPU performance with synthetic benchmarks: integer math, floating point, array sorting, string ops, and mixed workloads.",
     "isPro": false
   },
   {
@@ -3158,11 +4022,99 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "534e",
+    "name": "Ring Size Converter",
+    "slug": "ring-size-converter",
+    "category": "Utility",
+    "description": "Convert inner diameter in millimeters to US ring sizes.",
+    "isPro": false
+  },
+  {
     "id": "534f",
     "name": "Screen Size Calculator",
     "slug": "screen-size-converter",
     "category": "Calculator",
     "description": "Calculate width, height, and area from diagonal screen size and aspect ratio.",
+    "isPro": false
+  },
+  {
+    "id": "534g",
+    "name": "Shoe Size Converter",
+    "slug": "shoe-size-converter",
+    "category": "Utility",
+    "description": "Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\\",
+    "isPro": false
+  },
+  {
+    "id": "534h",
+    "name": "ZIP File Extractor",
+    "slug": "zip-file-extractor",
+    "category": "Utility",
+    "description": "View the contents and file sizes inside a ZIP archive without extracting.",
+    "isPro": false
+  },
+  {
+    "id": "537a",
+    "name": "OAuth Client Setup",
+    "slug": "oauth-client-setup",
+    "category": "Developer",
+    "description": "Generate OAuth authorization URLs for Google, GitHub, Facebook, Microsoft, and LinkedIn with custom client ID, redirect URI, and scope.",
+    "isPro": false
+  },
+  {
+    "id": "537b",
+    "name": "PKCE Verifier",
+    "slug": "pkce-verifier",
+    "category": "Developer",
+    "description": "Generate PKCE code_verifier and code_challenge (S256) pairs, or verify that a verifier matches a challenge.",
+    "isPro": false
+  },
+  {
+    "id": "537c",
+    "name": "OAuth Scope Builder",
+    "slug": "oauth-scope-builder",
+    "category": "Developer",
+    "description": "Build OAuth scope strings from comma-separated values with URL encoding and breakdown.",
+    "isPro": false
+  },
+  {
+    "id": "537d",
+    "name": "OAuth State Validator",
+    "slug": "oauth-state-validator",
+    "category": "Developer",
+    "description": "Validate OAuth state parameters for format, length, and age.",
+    "isPro": false
+  },
+  {
+    "id": "537e",
+    "name": "PBKDF2 Hash Generator",
+    "slug": "pbkdf2-hash-generator",
+    "category": "Developer",
+    "description": "Generate PBKDF2 hashes with 10,000 iterations of SHA-256 for password storage simulation.",
+    "isPro": false
+  },
+  {
+    "id": "537f",
+    "name": "Cookie Parser & Analyzer",
+    "slug": "cookie-parser",
+    "category": "Developer",
+    "description": "Parse Set-Cookie headers into structured JSON, or analyze cookie security flags (Secure, HttpOnly, SameSite, expiry).",
+    "isPro": false
+  },
+  {
+    "id": "539b",
+    "name": "HTML Linter",
+    "slug": "html-linter",
+    "category": "Developer",
+    "description": "Lint HTML for missing DOCTYPE, unclosed tags, and unexpected closing tags. Paste your HTML and get instant feedback.",
+    "isPro": false
+  },
+  {
+    "id": "539c",
+    "name": "XML Minifier / Validator",
+    "slug": "xml-minifier-validator",
+    "category": "Developer",
+    "description": "Minify XML by removing whitespace, or validate XML syntax. Paste your XML and choose an operation.",
     "isPro": false
   },
   {
@@ -3182,6 +4134,94 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "543a",
+    "name": "Base32 Encoder / Decoder",
+    "slug": "base32-encoder",
+    "category": "Developer",
+    "description": "Encode text to Base32 or decode Base32 strings back to text.",
+    "isPro": false
+  },
+  {
+    "id": "543b",
+    "name": "Base64 to JSON Decoder",
+    "slug": "base64-json-decoder",
+    "category": "Developer",
+    "description": "Decode Base64 strings and pretty-print JSON data — paste encoded text to see the decoded result instantly.",
+    "isPro": false
+  },
+  {
+    "id": "543c",
+    "name": "Hex to Text Converter",
+    "slug": "hex-text-converter",
+    "category": "Developer",
+    "description": "Convert between hex strings and text. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "543d",
+    "name": "SVG to Base64 Converter",
+    "slug": "svg-base64-converter",
+    "category": "Converter",
+    "description": "Convert SVG images to BASE64 format in your browser. Lossless, private, and completely free — no uploads needed.",
+    "isPro": false
+  },
+  {
+    "id": "543e",
+    "name": "Character Encoding Converter",
+    "slug": "character-encoding-converter",
+    "category": "Developer",
+    "description": "Analyze each character to see its Unicode code point and ASCII/non-ASCII status.",
+    "isPro": false
+  },
+  {
+    "id": "543f",
+    "name": "Unicode Converter",
+    "slug": "unicode-converter",
+    "category": "Developer",
+    "description": "Convert text to Unicode code points with JavaScript escape sequences and HTML entities.",
+    "isPro": false
+  },
+  {
+    "id": "543g",
+    "name": "Markdown to Slack Converter",
+    "slug": "markdown-slack-converter",
+    "category": "Converter",
+    "description": "Convert Markdown formatting to Slack mrkdwn syntax — bold, italic, links, code blocks, and lists translated automatically.",
+    "isPro": false
+  },
+  {
+    "id": "543h",
+    "name": "PX to REM Converter",
+    "slug": "px-rem-converter",
+    "category": "Developer",
+    "description": "Convert between PX and REM with custom base size. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "543i",
+    "name": "SVG Optimizer",
+    "slug": "svg-optimizer",
+    "category": "Developer",
+    "description": "Minify SVG by removing whitespace, comments, and redundant attributes.",
+    "isPro": false
+  },
+  {
+    "id": "543k",
+    "name": "Power Converter",
+    "slug": "power-converter",
+    "category": "Utility",
+    "description": "Convert between kW, hp, bhp, W, MW, and BTU/hr.",
+    "isPro": false
+  },
+  {
+    "id": "543l",
+    "name": "Pressure Converter",
+    "slug": "pressure-converter",
+    "category": "Utility",
+    "description": "Convert between kPa, psi, bar, atm, Torr, and mbar. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "548a",
     "name": "Color Shades & Tints",
     "slug": "color-shades-tints",
@@ -3195,6 +4235,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "contrast-ratio-checker",
     "category": "Design",
     "description": "Check foreground/background color contrast against WCAG AA and AAA accessibility standards.",
+    "isPro": false
+  },
+  {
+    "id": "548c",
+    "name": "Media Query Generator",
+    "slug": "media-query-generator",
+    "category": "Developer",
+    "description": "Generate CSS media queries with min/max width and optional device type conditions.",
+    "isPro": false
+  },
+  {
+    "id": "548d",
+    "name": "Markdown Table Generator",
+    "slug": "markdown-table-generator",
+    "category": "Developer",
+    "description": "Generate Markdown table templates with configurable rows and columns.",
     "isPro": false
   },
   {
@@ -3230,11 +4286,123 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "548e",
+    "name": "Nginx Config Generator",
+    "slug": "nginx-config-generator",
+    "category": "Developer",
+    "description": "Generate Nginx server block configurations from directive lists.",
+    "isPro": false
+  },
+  {
+    "id": "548f",
+    "name": "IP Allowlist Generator",
+    "slug": "ip-allowlist-generator",
+    "category": "Developer",
+    "description": "Generate Nginx allow/deny rules from a list of CIDR ranges.",
+    "isPro": false
+  },
+  {
     "id": "549a",
     "name": "INI to JSON Converter",
     "slug": "ini-json-converter",
     "category": "Converter",
     "description": "Convert INI configs to JSON. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "549b",
+    "name": "MessagePack Inspector",
+    "slug": "msgpack-inspector",
+    "category": "Developer",
+    "description": "Encode JSON as real MessagePack binary and inspect the resulting bytes. Supports both encode and decode modes.",
+    "isPro": false
+  },
+  {
+    "id": "549c",
+    "name": "CBOR Inspector",
+    "slug": "cbor-inspector",
+    "category": "Developer",
+    "description": "Encode JSON as real CBOR binary and inspect the resulting bytes with major type analysis. Supports both encode and decode modes.",
+    "isPro": false
+  },
+  {
+    "id": "549d",
+    "name": "Data Anonymizer",
+    "slug": "data-anonymizer",
+    "category": "Developer",
+    "description": "Anonymize emails, phone numbers, and IP addresses in text by replacing them with placeholders.",
+    "isPro": false
+  },
+  {
+    "id": "549e",
+    "name": "Code to cURL Converter",
+    "slug": "code-to-curl-converter",
+    "category": "Developer",
+    "description": "Convert fetch() or axios JavaScript code to equivalent cURL commands with headers, methods, and request body intact.",
+    "isPro": false
+  },
+  {
+    "id": "549f",
+    "name": "cURL to Code Converter",
+    "slug": "curl-to-code-converter",
+    "category": "Developer",
+    "description": "Convert cURL commands to fetch() JavaScript code — paste a cURL string to get a ready-to-use fetch call.",
+    "isPro": false
+  },
+  {
+    "id": "549g",
+    "name": "JSON-RPC Builder",
+    "slug": "jsonrpc-builder",
+    "category": "Developer",
+    "description": "Build JSON-RPC 2.0 request objects with method, params, and auto-generated ID.",
+    "isPro": false
+  },
+  {
+    "id": "549h",
+    "name": "HAR File Analyzer",
+    "slug": "har-analyzer",
+    "category": "Developer",
+    "description": "Analyze HAR files to see entry count, total size, total time, and URLs.",
+    "isPro": false
+  },
+  {
+    "id": "549i",
+    "name": "Log File Analyzer",
+    "slug": "log-analyzer",
+    "category": "Developer",
+    "description": "Count log lines by level (ERROR, INFO, WARN, DEBUG, etc.).",
+    "isPro": false
+  },
+  {
+    "id": "549j",
+    "name": "package.json Validator",
+    "slug": "package-json-validator",
+    "category": "Developer",
+    "description": "Validate package.json for required fields, semver format, and dependency presence.",
+    "isPro": false
+  },
+  {
+    "id": "549k",
+    "name": "MIME Type Finder",
+    "slug": "mime-finder",
+    "category": "Developer",
+    "description": "Look up MIME types for common file extensions.",
+    "isPro": false
+  },
+  {
+    "id": "551a",
+    "name": "CIDR Calculator",
+    "slug": "cidr-calculator",
+    "category": "Developer",
+    "description": "Calculate CIDR subnet ranges — network address, broadcast, first/last host, total hosts, and netmask.",
+    "isPro": false
+  },
+  {
+    "id": "551b",
+    "name": "AWS IAM Policy Analyzer",
+    "slug": "aws-iam-policy-analyzer",
+    "category": "Developer",
+    "description": "Paste an AWS IAM policy JSON to check for wildcard resources, overly broad actions, and full admin access.",
     "isPro": false
   },
   {
@@ -3259,6 +4427,54 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "tailwind-to-css-converter",
     "category": "Converter",
     "description": "Convert Tailwind utility classes to plain CSS. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "553d",
+    "name": "Proto Schema Converter",
+    "slug": "proto-schema-converter",
+    "category": "Developer",
+    "description": "Convert Protobuf message definitions to TypeScript interfaces and JSON samples.",
+    "isPro": false
+  },
+  {
+    "id": "553e",
+    "name": "Protobuf Decoder",
+    "slug": "protobuf-decoder",
+    "category": "Developer",
+    "description": "Decode protobuf wire format hex bytes into readable field structure. Shows field numbers, wire types, varints, strings, nested messages, and raw hex.",
+    "isPro": false
+  },
+  {
+    "id": "553f",
+    "name": "tsconfig Analyzer",
+    "slug": "tsconfig-analyzer",
+    "category": "Developer",
+    "description": "Parse and describe each option in a tsconfig.json file.",
+    "isPro": false
+  },
+  {
+    "id": "553g",
+    "name": "TypeScript Formatter",
+    "slug": "typescript-formatter",
+    "category": "Developer",
+    "description": "Auto-format TypeScript code with consistent indentation and line breaks.",
+    "isPro": false
+  },
+  {
+    "id": "553h",
+    "name": "String Template Tester",
+    "slug": "string-template-tester",
+    "category": "Developer",
+    "description": "Test string templates with {{variable}} placeholders against JSON variables.",
+    "isPro": false
+  },
+  {
+    "id": "553i",
+    "name": "Test Data Generator",
+    "slug": "test-data-generator",
+    "category": "Developer",
+    "description": "Generate test data objects from a schema defining field names and types.",
     "isPro": false
   },
   {
@@ -3822,6 +5038,502 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "678",
+    "name": "API Request Builder",
+    "slug": "api-request-builder",
+    "category": "Developer",
+    "description": "Build HTTP requests with custom method, URL, headers, and body. Generate equivalent curl commands. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "679",
+    "name": "API Tester",
+    "slug": "api-tester",
+    "category": "Developer",
+    "description": "Test any HTTP endpoint by sending GET, POST, PUT, or DELETE requests directly from your browser. View response status, headers, and body.",
+    "isPro": false
+  },
+  {
+    "id": "680",
+    "name": "API Response Formatter",
+    "slug": "api-response-formatter",
+    "category": "Developer",
+    "description": "Prettifies JSON and API response data with configurable indentation, sorting, and syntax validation — fixes malformed JSON and makes nested structures readable.",
+    "isPro": false
+  },
+  {
+    "id": "681",
+    "name": "API Error Decoder",
+    "slug": "api-error-decoder",
+    "category": "Developer",
+    "description": "Decode HTTP status codes with full category, description, and common causes for each code from 1xx to 5xx.",
+    "isPro": false
+  },
+  {
+    "id": "682",
+    "name": "API Payload Analyzer",
+    "slug": "api-payload-analyzer",
+    "category": "Developer",
+    "description": "Analyze JSON payload size, structure, nesting depth, and key count for optimizing API request and response bodies.",
+    "isPro": false
+  },
+  {
+    "id": "683",
+    "name": "API Mock Data Generator",
+    "slug": "api-mock-data-generator",
+    "category": "Developer",
+    "description": "Generate realistic mock JSON data from a schema description. Ideal for rapid API prototyping and frontend development without a backend.",
+    "isPro": false
+  },
+  {
+    "id": "684",
+    "name": "API Mock Server Config",
+    "slug": "api-mock-server-config",
+    "category": "Developer",
+    "description": "Generate JSON Server configuration files from endpoint definitions. Set up a fully functional mock API server in seconds.",
+    "isPro": false
+  },
+  {
+    "id": "685",
+    "name": "Mock API Response Generator",
+    "slug": "mock-api-response-generator",
+    "category": "Developer",
+    "description": "Generate sample API responses from a schema definition. Create realistic mock data for frontend testing and development.",
+    "isPro": false
+  },
+  {
+    "id": "686",
+    "name": "API Latency Budget",
+    "slug": "api-latency-budget",
+    "category": "Developer",
+    "description": "Calculate API latency budgets from SLA requirements. Distribute response time across application, database, and external service layers.",
+    "isPro": false
+  },
+  {
+    "id": "687",
+    "name": "API Pagination Calculator",
+    "slug": "api-pagination-calculator",
+    "category": "Developer",
+    "description": "Calculate pagination parameters including page count, offset values, and next/previous page navigation for any API.",
+    "isPro": false
+  },
+  {
+    "id": "688",
+    "name": "API Key Generator",
+    "slug": "api-key-generator",
+    "category": "Developer",
+    "description": "Generate secure API keys with configurable length, character set, and optional prefix. Use with any authentication scheme.",
+    "isPro": false
+  },
+  {
+    "id": "689",
+    "name": "API Key Hasher",
+    "slug": "api-key-hasher",
+    "category": "Developer",
+    "description": "Hash API keys using SHA-256 for secure storage. Never store raw API keys — hash them before persisting to your database.",
+    "isPro": false
+  },
+  {
+    "id": "690",
+    "name": "API Key Validator",
+    "slug": "api-key-validator",
+    "category": "Developer",
+    "description": "Validate API key format including length checks, character set validation, prefix verification, and entropy analysis.",
+    "isPro": false
+  },
+  {
+    "id": "691",
+    "name": "API Cost Estimator",
+    "slug": "api-cost-estimator",
+    "category": "Developer",
+    "description": "Estimate API costs based on monthly requests, price per million calls, and number of users. Plan your API budget with confidence.",
+    "isPro": false
+  },
+  {
+    "id": "692",
+    "name": "API Gateway Rate Calculator",
+    "slug": "api-gateway-rate-calculator",
+    "category": "Developer",
+    "description": "Calculate rate limits, burst capacities, and throttling thresholds for API gateway configurations. Plan your traffic management strategy.",
+    "isPro": false
+  },
+  {
+    "id": "693",
+    "name": "API Rate Limiter Calculator",
+    "slug": "api-rate-limiter-calculator",
+    "category": "Developer",
+    "description": "Calculate rate limit windows, burst allowances, and retry intervals. Design effective rate limiting for your API endpoints.",
+    "isPro": false
+  },
+  {
+    "id": "694",
+    "name": "API Changelog Generator",
+    "slug": "api-changelog-generator",
+    "category": "Developer",
+    "description": "Generate structured changelogs from API version diffs. Categorize changes as Added, Changed, Deprecated, Removed, Fixed, or Security.",
+    "isPro": false
+  },
+  {
+    "id": "695",
+    "name": "API Documentation Generator",
+    "slug": "api-documentation-generator",
+    "category": "Developer",
+    "description": "Generate clean API documentation from endpoint descriptions. Includes parameters, response examples, and curl command samples.",
+    "isPro": false
+  },
+  {
+    "id": "696",
+    "name": "REST Endpoint Documenter",
+    "slug": "rest-endpoint-documenter",
+    "category": "Developer",
+    "description": "Document REST API endpoints with method, path, and description. Generates formatted documentation with sample request and response bodies.",
+    "isPro": false
+  },
+  {
+    "id": "697",
+    "name": "GraphQL Cost Estimator",
+    "slug": "graphql-cost-estimator",
+    "category": "Developer",
+    "description": "Estimate GraphQL query complexity based on field count and nesting depth. Identify expensive queries before they hit your server.",
+    "isPro": false
+  },
+  {
+    "id": "698",
+    "name": "GraphQL Query Formatter",
+    "slug": "graphql-query-formatter",
+    "category": "Developer",
+    "description": "Format and prettify GraphQL queries with proper indentation. Makes complex nested queries readable and maintainable.",
+    "isPro": false
+  },
+  {
+    "id": "699",
+    "name": "GraphQL Schema to JSON Schema",
+    "slug": "graphql-schema-to-json-schema",
+    "category": "Developer",
+    "description": "Convert GraphQL schema definitions to JSON Schema format. Bridge the gap between GraphQL and REST tooling ecosystems.",
+    "isPro": false
+  },
+  {
+    "id": "700",
+    "name": "GraphQL Schema Validator",
+    "slug": "graphql-schema-validator",
+    "category": "Developer",
+    "description": "Validate GraphQL schema syntax and structure. Detect missing root types, unknown type references, and common schema issues.",
+    "isPro": false
+  },
+  {
+    "id": "701",
+    "name": "GraphQL Subscription Builder",
+    "slug": "graphql-subscription-builder",
+    "category": "Developer",
+    "description": "Build GraphQL subscription queries with custom event names and payload fields. Generate ready-to-use subscription strings.",
+    "isPro": false
+  },
+  {
+    "id": "702",
+    "name": "GraphQL Tester",
+    "slug": "graphql-tester",
+    "category": "Developer",
+    "description": "Test GraphQL queries with variables. Format queries and variables, and preview formatted responses for development and debugging.",
+    "isPro": false
+  },
+  {
+    "id": "703",
+    "name": "GraphQL Variables Formatter",
+    "slug": "graphql-variables-formatter",
+    "category": "Developer",
+    "description": "Format and beautify GraphQL variables JSON with proper indentation. Ensure your variables are correctly structured before sending queries.",
+    "isPro": false
+  },
+  {
+    "id": "704",
+    "name": "gRPC Status Code Lookup",
+    "slug": "grpc-status-code-lookup",
+    "category": "Developer",
+    "description": "Lookup gRPC status codes from 0 (OK) to 16 (Unauthenticated) with descriptions and common causes for each error.",
+    "isPro": false
+  },
+  {
+    "id": "705",
+    "name": "SOAP API Tester",
+    "slug": "soap-api-tester",
+    "category": "Developer",
+    "description": "Build and test SOAP API envelopes with WSDL URL, method name, and XML parameters. Generate complete SOAP request envelopes.",
+    "isPro": false
+  },
+  {
+    "id": "706",
+    "name": "OpenAPI Mock Generator",
+    "slug": "openapi-mock-generator",
+    "category": "Developer",
+    "description": "Generate mock API responses from OpenAPI spec fragments. Create realistic sample data for API development and testing.",
+    "isPro": false
+  },
+  {
+    "id": "707",
+    "name": "OpenAPI to Postman",
+    "slug": "openapi-to-postman",
+    "category": "Developer",
+    "description": "Convert OpenAPI specs to Postman collection JSON format. Import directly into Postman. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "708",
+    "name": "OpenAPI Validator",
+    "slug": "openapi-validator",
+    "category": "Developer",
+    "description": "Validate OpenAPI/Swagger spec syntax. Check for required fields, missing paths, and structural issues in your API specification.",
+    "isPro": false
+  },
+  {
+    "id": "709",
+    "name": "Postman Collection Generator",
+    "slug": "postman-collection-generator",
+    "category": "Developer",
+    "description": "Generate Postman collection JSON from endpoint descriptions. Create ready-to-import collections with method and path for each endpoint.",
+    "isPro": false
+  },
+  {
+    "id": "710",
+    "name": "Postman to OpenAPI Converter",
+    "slug": "postman-to-openapi-converter",
+    "category": "Developer",
+    "description": "Convert Postman collections to OpenAPI 3.0 specs. Migrate your API documentation. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "711",
+    "name": "Swagger/OpenAPI Generator",
+    "slug": "swagger-openapi-generator",
+    "category": "Developer",
+    "description": "Generate Swagger UI / OpenAPI specs from a simple description. Enter title, version, and endpoints to produce a complete spec JSON.",
+    "isPro": false
+  },
+  {
+    "id": "712",
+    "name": "Webhook Payload Generator",
+    "slug": "webhook-payload-generator",
+    "category": "Developer",
+    "description": "Generate realistic webhook payload examples with customizable event names and data fields. Test your webhook handlers with realistic data.",
+    "isPro": false
+  },
+  {
+    "id": "713",
+    "name": "Webhook Retry Config",
+    "slug": "webhook-retry-config",
+    "category": "Developer",
+    "description": "Configure and compare webhook retry strategies — Fixed, Linear, Exponential, and Exponential + Jitter. Calculate total delays and visualize retry patterns.",
+    "isPro": false
+  },
+  {
+    "id": "714",
+    "name": "Webhook Signature Verifier",
+    "slug": "webhook-signature-verifier",
+    "category": "Developer",
+    "description": "Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\\",
+    "isPro": false
+  },
+  {
+    "id": "715",
+    "name": "Webhook Tester",
+    "slug": "webhook-tester",
+    "category": "Developer",
+    "description": "Test webhook endpoints by sending simulated POST requests with custom JSON payloads. Verify your webhook handlers are working correctly.",
+    "isPro": false
+  },
+  {
+    "id": "716",
+    "name": "Webhook Validator",
+    "slug": "webhook-validator",
+    "category": "Developer",
+    "description": "Validate webhook payload structure including required fields (id, event, data, created). Ensure your webhooks meet the standard format.",
+    "isPro": false
+  },
+  {
+    "id": "954",
+    "name": "API Diff Checker",
+    "slug": "api-diff-checker",
+    "category": "Developer",
+    "description": "Compare two OpenAPI specs side-by-side to detect breaking changes, new endpoints, removed fields, and modified schemas between versions.",
+    "isPro": false
+  },
+  {
+    "id": "955",
+    "name": "OpenAPI Documentation Generator",
+    "slug": "api-docs-generator",
+    "category": "Developer",
+    "description": "Generate Markdown API documentation from OpenAPI specs. Create clean, readable docs with endpoints, parameters, and response examples.",
+    "isPro": false
+  },
+  {
+    "id": "717",
+    "name": "Conventional Commit Generator",
+    "slug": "conventional-commit-generator",
+    "category": "Developer",
+    "description": "Generate conventional commit messages with type, scope, description, breaking changes, and body. Follow the Conventional Commits specification.",
+    "isPro": false
+  },
+  {
+    "id": "718",
+    "name": "Code Formatter",
+    "slug": "code-formatter",
+    "category": "Developer",
+    "description": "Auto-formats source code across 15+ languages — JavaScript, Python, HTML, CSS, SQL, YAML — with language-aware indentation and syntax rules.",
+    "isPro": false
+  },
+  {
+    "id": "720",
+    "name": "HTML Formatter",
+    "slug": "html-formatter",
+    "category": "Developer",
+    "description": "Indents and structures HTML markup with proper nesting, attribute alignment, and readable indentation for templates and email designs.",
+    "isPro": false
+  },
+  {
+    "id": "721",
+    "name": "CSS Formatter",
+    "slug": "css-formatter",
+    "category": "Developer",
+    "description": "Organizes CSS stylesheets with consistent indentation, property grouping, and selector formatting for maintainable styles.",
+    "isPro": false
+  },
+  {
+    "id": "722",
+    "name": "JavaScript Formatter",
+    "slug": "javascript-formatter",
+    "category": "Developer",
+    "description": "Formats JavaScript code with proper indentation, consistent spacing, and syntax structure — supports modern ES6+ features and async patterns.",
+    "isPro": false
+  },
+  {
+    "id": "724",
+    "name": "JSX Formatter",
+    "slug": "jsx-formatter",
+    "category": "Developer",
+    "description": "Formats JSX/React component code with proper indentation, prop alignment, and JSX expression structure for readable component definitions.",
+    "isPro": false
+  },
+  {
+    "id": "725",
+    "name": "TSX Formatter",
+    "slug": "tsx-formatter",
+    "category": "Developer",
+    "description": "Formats TSX/React TypeScript components with type-aware indentation, prop type alignment, and clean JSX structure.",
+    "isPro": false
+  },
+  {
+    "id": "726",
+    "name": "SCSS Formatter",
+    "slug": "scss-formatter",
+    "category": "Developer",
+    "description": "Organizes SCSS/Sass stylesheets with proper nesting indentation, variable alignment, and mixin formatting for maintainable styles.",
+    "isPro": false
+  },
+  {
+    "id": "727",
+    "name": "Python Formatter",
+    "slug": "python-formatter",
+    "category": "Developer",
+    "description": "Formats Python code with PEP 8 compliant indentation, consistent spacing, and readable structure for scripts and modules.",
+    "isPro": false
+  },
+  {
+    "id": "729",
+    "name": "YAML Formatter",
+    "slug": "yaml-formatter",
+    "category": "Developer",
+    "description": "Structures YAML configuration files with consistent indentation, proper key alignment, and readable hierarchy for Docker and CI/CD configs.",
+    "isPro": false
+  },
+  {
+    "id": "730",
+    "name": "XML Formatter",
+    "slug": "xml-formatter",
+    "category": "Developer",
+    "description": "Pretty-prints XML documents with proper tree indentation, validates structure, and reorganizes attributes for maximum readability.",
+    "isPro": false
+  },
+  {
+    "id": "731",
+    "name": "Markdown Formatter",
+    "slug": "markdown-formatter",
+    "category": "Developer",
+    "description": "Normalizes Markdown formatting with consistent heading spacing, list indentation, and code block structure for readable documentation.",
+    "isPro": false
+  },
+  {
+    "id": "732",
+    "name": "CSS Generator",
+    "slug": "css-generator",
+    "category": "Developer",
+    "description": "Generate CSS code interactively for box shadows, gradients, border radius, transforms, filters, and more. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "733",
+    "name": "Box Shadow Generator",
+    "slug": "box-shadow-generator",
+    "category": "Developer",
+    "description": "Generate CSS box-shadow values with an interactive preview. Configure offset, blur, spread, color, and inset. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "735",
+    "name": "Border Radius Generator",
+    "slug": "border-radius-generator",
+    "category": "Developer",
+    "description": "Generate CSS border-radius values visually. Control each corner independently with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "736",
+    "name": "Flexbox CSS Generator",
+    "slug": "flexbox-css-generator",
+    "category": "Developer",
+    "description": "Generate Flexbox CSS code interactively. Configure direction, wrap, justify, align, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "737",
+    "name": "CSS Grid Generator",
+    "slug": "css-grid-generator",
+    "category": "Developer",
+    "description": "Generate CSS Grid layout code interactively. Configure columns, rows, and gap with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "738",
+    "name": "Text Shadow Generator",
+    "slug": "text-shadow-generator",
+    "category": "Developer",
+    "description": "Generate CSS text-shadow values with interactive preview. Configure offset, blur, color, and opacity. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "739",
+    "name": "CSS Transform Generator",
+    "slug": "css-transform-generator",
+    "category": "Developer",
+    "description": "Generate CSS transform values interactively. Configure rotate, scale, skew, and translate with live preview. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "740",
+    "name": "CSS Animation Generator",
+    "slug": "css-animation-generator",
+    "category": "Developer",
+    "description": "Generate CSS keyframe animations interactively. Choose from fade-in, slide-in, and pulse animations. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "741",
+    "name": "CSS Filter Generator",
+    "slug": "css-filter-generator",
+    "category": "Developer",
+    "description": "Generate CSS filter values interactively. Configure blur, brightness, contrast, saturation, hue, sepia, and grayscale. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "745",
     "name": "Image Converter",
     "slug": "image-converter",
@@ -3835,6 +5547,206 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "encoder-decoder",
     "category": "Developer",
     "description": "Encode or decode text using Base64, Base64URL, URL encoding, HTML entities, Hex, Binary, ROT13, UTF-8, and Unicode escape schemes.",
+    "isPro": false
+  },
+  {
+    "id": "du-6",
+    "name": "CSV Analyzer",
+    "slug": "csv-analyzer",
+    "category": "Utility",
+    "description": "Analyze CSV structure — column types, counts, unique values, and empty cells.",
+    "isPro": false
+  },
+  {
+    "id": "du-7",
+    "name": "JSON Path Query Builder",
+    "slug": "json-path-query-builder",
+    "category": "Developer",
+    "description": "Query JSON data using dot-notation path expressions with wildcard support. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "du-8",
+    "name": "JSON Tree Viewer",
+    "slug": "json-tree-viewer",
+    "category": "Developer",
+    "description": "Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.",
+    "isPro": false
+  },
+  {
+    "id": "du-9",
+    "name": "JSON Diff Checker",
+    "slug": "json-diff-checker",
+    "category": "Developer",
+    "description": "Compare two JSON objects side-by-side with color-coded key-level differences. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "763",
+    "name": "Random Color Generator",
+    "slug": "random-color-generator",
+    "category": "Utility",
+    "description": "Generate random colors in Hex, RGB, or HSL format with visual preview swatches. Perfect for design palettes and testing. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "764",
+    "name": "Random Team Generator",
+    "slug": "random-team-generator",
+    "category": "Utility",
+    "description": "Split a list of names into random teams with configurable number of teams. Perfect for classroom activities, sports, and group projects. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "765",
+    "name": "Random Picker Generator",
+    "slug": "random-picker-generator",
+    "category": "Utility",
+    "description": "Randomly pick one or more items from a list with optional repeat control. Perfect for giveaways, raffles, and random selection. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "766",
+    "name": "Random Decision Maker",
+    "slug": "random-decision-maker",
+    "category": "Utility",
+    "description": "Make decisions with a fun animated spinner that cycles through Yes, No, Maybe, and other responses. Perfect for quick decisions. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "767",
+    "name": "Random Username Generator",
+    "slug": "random-username-generator",
+    "category": "Utility",
+    "description": "Generate creative usernames from configurable patterns including adjective+noun, noun+number, and word-word combinations. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "769",
+    "name": "Random Token Generator",
+    "slug": "random-token-generator",
+    "category": "Developer",
+    "description": "Generate cryptographically secure random tokens in hex, base64, or alphanumeric format. Perfect for API keys, session tokens, and secrets. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "771",
+    "name": "Dummy Text Generator",
+    "slug": "dummy-text-generator",
+    "category": "Developer",
+    "description": "Generate dummy placeholder text at a specified character length for design mockups, UI prototypes, and content layout testing. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "772",
+    "name": "Fake Data Generator",
+    "slug": "fake-data-generator",
+    "category": "Developer",
+    "description": "Generate fake personal data including names, emails, phone numbers, and addresses. Perfect for testing forms, databases, and application development. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "773",
+    "name": "Fake Identity Generator",
+    "slug": "fake-identity-generator",
+    "category": "Developer",
+    "description": "Generate complete fake identities with name, email, phone, address, date of birth, and occupation. Includes a photo placeholder. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "774",
+    "name": "Fake Credit Card Generator",
+    "slug": "fake-credit-card-generator",
+    "category": "Developer",
+    "description": "Generate fake credit card numbers with valid formats including Visa, Mastercard, Amex, and Discover. All numbers pass Luhn algorithm validation. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "775",
+    "name": "Sequence Generator",
+    "slug": "sequence-generator",
+    "category": "Utility",
+    "description": "Generate number sequences in arithmetic, geometric, or custom progression. Configure start value, difference/ratio, and count. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "778",
+    "name": "Coupon Code Generator",
+    "slug": "coupon-code-generator",
+    "category": "Developer",
+    "description": "Generate random coupon/discount codes with customizable pattern using X as placeholder for random characters. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "779",
+    "name": "Serial Number Generator",
+    "slug": "serial-number-generator",
+    "category": "Developer",
+    "description": "Generate serial numbers with configurable format patterns using X (hex), 9 (digit), and A (alphanumeric) placeholders. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "780",
+    "name": "Nickname Generator",
+    "slug": "nickname-generator",
+    "category": "Utility",
+    "description": "Generate random nicknames by combining adjectives and creative name parts. Perfect for gaming, social media, and creative projects. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "781",
+    "name": "Avatar Generator",
+    "slug": "avatar-generator",
+    "category": "Design",
+    "description": "Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "782",
+    "name": "Timer",
+    "slug": "timer",
+    "category": "Utility",
+    "description": "Configurable countdown timer with hours, minutes, and seconds input. Features start, pause, and reset controls with visual progress bar. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "783",
+    "name": "Stopwatch",
+    "slug": "stopwatch",
+    "category": "Utility",
+    "description": "Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "784",
+    "name": "Countdown Timer",
+    "slug": "countdown-tool",
+    "category": "Utility",
+    "description": "Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "786",
+    "name": "Interval Timer",
+    "slug": "interval-timer",
+    "category": "Utility",
+    "description": "Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "787",
+    "name": "Tabata Timer",
+    "slug": "tabata-timer",
+    "category": "Utility",
+    "description": "Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "788",
+    "name": "World Clock",
+    "slug": "world-clock",
+    "category": "Utility",
+    "description": "Display multiple timezone clocks simultaneously. Add and remove cities from a curated list of major world timezones. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -3974,11 +5886,115 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "813",
+    "name": "Color Picker",
+    "slug": "color-picker",
+    "category": "Design",
+    "description": "Pick colors from a visual spectrum or enter hex values. Copy to clipboard — perfect for design palettes, CSS variables, and UI mockups. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "814",
+    "name": "Color Palette Generator",
+    "slug": "color-palette-generator",
+    "category": "Design",
+    "description": "Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "815",
+    "name": "Gradient Generator",
+    "slug": "gradient-generator",
+    "category": "Design",
+    "description": "Create beautiful CSS gradients with a visual preview. Choose between linear and radial gradients for your web designs. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "816",
+    "name": "Contrast Checker",
+    "slug": "contrast-checker",
+    "category": "Utility",
+    "description": "Check the contrast ratio between two colors against WCAG AA and AAA standards. Essential for accessible web design. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "817",
+    "name": "Counter Tool",
+    "slug": "counter-tool",
+    "category": "Utility",
+    "description": "Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "818",
+    "name": "List Randomizer",
+    "slug": "list-randomizer",
+    "category": "Utility",
+    "description": "Randomly shuffle any list of items. Enter each item on a new line and see them randomized instantly. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "819",
+    "name": "List Sorter",
+    "slug": "list-sorter",
+    "category": "Utility",
+    "description": "Sort lists alphabetically (A-Z or Z-A) or by length. Great for organizing data and cleaning up unordered lists. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "820",
+    "name": "Decision Maker",
+    "slug": "decision-maker",
+    "category": "Utility",
+    "description": "Can",
+    "isPro": false
+  },
+  {
+    "id": "821",
+    "name": "Yes / No Picker",
+    "slug": "yes-no-picker",
+    "category": "Utility",
+    "description": "Quick yes/no picker for binary decisions. Randomly picks yes or no with animated reveal. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "823",
+    "name": "Number Guessing Game",
+    "slug": "number-guessing-game",
+    "category": "Utility",
+    "description": "Guess the random number between 1 and 100. Get hints if your guess is too high or too low. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "824",
+    "name": "Rock Paper Scissors",
+    "slug": "rock-paper-scissors",
+    "category": "Utility",
+    "description": "Play rock paper scissors against the computer. Keep track of wins, losses, and ties. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "825",
+    "name": "Hangman Game",
+    "slug": "hangman-game",
+    "category": "Utility",
+    "description": "Classic hangman word guessing game. Choose letters to reveal the hidden word before the hangman is complete. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "828",
     "name": "Roman Numeral Converter",
     "slug": "roman-numeral-converter",
     "category": "Converter",
     "description": "Convert between Roman numerals and decimal numbers. Supports standard numeral rules up to 3999. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "829",
+    "name": "Number to Words Converter",
+    "slug": "number-to-words-converter",
+    "category": "Utility",
+    "description": "Convert any number to its English word representation. Supports large numbers up to billions. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -4198,6 +6214,46 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "867",
+    "name": "Length Converter",
+    "slug": "length-converter",
+    "category": "Utility",
+    "description": "Convert length and distance between km, miles, meters, yards, feet, and inches. Simple and intuitive. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "868",
+    "name": "Weight Converter",
+    "slug": "weight-converter",
+    "category": "Utility",
+    "description": "Convert weight between kg, g, lb, oz, and stone. Supports both metric and imperial systems. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "869",
+    "name": "Volume Converter",
+    "slug": "volume-converter",
+    "category": "Utility",
+    "description": "Convert volume between liters, mL, gallons, quarts, fl oz, and cups. Handy for cooking, science, and travel. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "870",
+    "name": "Area Converter",
+    "slug": "area-converter",
+    "category": "Utility",
+    "description": "Convert area between square meters, square feet, acres, hectares, and square kilometers. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "871",
+    "name": "Data Size Converter",
+    "slug": "data-size-converter",
+    "category": "Utility",
+    "description": "Convert data sizes between bytes, KB, MB, GB, TB, and PB. Understand disk space and file sizes in different units. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "873",
     "name": "Body Fat Estimator",
     "slug": "body-fat-calculator",
@@ -4302,6 +6358,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "891",
+    "name": "Time Zone Converter",
+    "slug": "time-zone-converter",
+    "category": "Utility",
+    "description": "Convert time between different time zones. Enter a time and your source/target time zones and see the converted result. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "892",
     "name": "DST Checker (US)",
     "slug": "daylight-saving-time-checker",
@@ -4326,6 +6390,286 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "898",
+    "name": "Password Entropy Calculator",
+    "slug": "password-entropy-calculator",
+    "category": "Developer",
+    "description": "Calculate password entropy in bits to measure password strength against brute-force attacks. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "899",
+    "name": "Two-Factor Auth Generator",
+    "slug": "two-factor-auth-generator",
+    "category": "Developer",
+    "description": "Generate TOTP URIs for two-factor authentication setup with authenticator apps. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "900",
+    "name": "Brute Force Time Estimator",
+    "slug": "brute-force-time-estimator",
+    "category": "Developer",
+    "description": "Estimate the time required to brute-force a password given its length, character set, and hash rate. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "902",
+    "name": "Hash Verifier",
+    "slug": "hash-verifier",
+    "category": "Developer",
+    "description": "Verify that a hash matches a given input to check data integrity. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "903",
+    "name": "Hash Password Generator",
+    "slug": "hash-password-generator",
+    "category": "Developer",
+    "description": "Generate password hashes using PBKDF2-SHA256 with 600,000 iterations for secure password storage. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "904",
+    "name": "Content Hash Generator",
+    "slug": "hash-file-generator",
+    "category": "Developer",
+    "description": "Compute SHA-1, SHA-256, SHA-384, or SHA-512 hashes of text content using the Web Crypto API. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "905",
+    "name": "HMAC Generator",
+    "slug": "hmac-generator",
+    "category": "Developer",
+    "description": "Generate HMAC signatures using a secret key and hash algorithm for API authentication. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "906",
+    "name": "SSL/TLS Checker",
+    "slug": "ssl-tls-checker",
+    "category": "Developer",
+    "description": "Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "907",
+    "name": "HTTP Security Checker",
+    "slug": "http-security-checker",
+    "category": "Developer",
+    "description": "Scan HTTP response headers for security best practices like HSTS, X-Frame-Options, and CSP.",
+    "isPro": false
+  },
+  {
+    "id": "909",
+    "name": "JWT Inspector",
+    "slug": "jwt-inspector",
+    "category": "Developer",
+    "description": "Deep-inspect JWT tokens with expiry validation, algorithm analysis, and claim details. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "910",
+    "name": "Content Security Policy Generator",
+    "slug": "content-security-policy-generator",
+    "category": "Developer",
+    "description": "Build a Content Security Policy header by selecting directives and allowed sources. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "911",
+    "name": "Subnet Calculator",
+    "slug": "subnet-calculator",
+    "category": "Developer",
+    "description": "Calculate subnet masks, network addresses, broadcast addresses, and usable host ranges. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "912",
+    "name": "Subnet Visualizer",
+    "slug": "subnet-visualizer",
+    "category": "Developer",
+    "description": "Visualize IP subnet divisions with a hierarchical tree view for network planning. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "912b",
+    "name": "IPv4 Address Converter",
+    "slug": "ip-address-converter",
+    "category": "Developer",
+    "description": "Convert IPv4 addresses between dotted decimal, decimal, binary, and hexadecimal formats. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "912c",
+    "name": "IP Range Expander",
+    "slug": "ip-range-expander",
+    "category": "Developer",
+    "description": "Expand an IP address range into a list of individual addresses. Useful for network planning and firewall rules. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "912d",
+    "name": "IPv6 ULA Generator",
+    "slug": "ipv6-ula-generator",
+    "category": "Developer",
+    "description": "Generate random IPv6 Unique Local Addresses (ULA) for internal network use. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "913",
+    "name": "DNS Lookup Generator",
+    "slug": "dns-lookup-generator",
+    "category": "Developer",
+    "description": "Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "914",
+    "name": "CORS Inspector",
+    "slug": "cors-inspector",
+    "category": "Developer",
+    "description": "Analyze CORS headers to identify cross-origin request configuration issues. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "915",
+    "name": "CORS Header Generator",
+    "slug": "cors-header-generator",
+    "category": "Developer",
+    "description": "Generate CORS headers for your API by configuring allowed origins, methods, and headers.",
+    "isPro": false
+  },
+  {
+    "id": "916",
+    "name": "Env File Generator",
+    "slug": "env-file-generator",
+    "category": "Developer",
+    "description": "Generate .env file templates with configurable variable names and default values. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "917",
+    "name": "Env File Parser",
+    "slug": "env-file-parser",
+    "category": "Developer",
+    "description": "Parse and validate .env files to detect missing variables, syntax errors, and duplicates. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "918",
+    "name": "CVE Lookup",
+    "slug": "cve-lookup",
+    "category": "Developer",
+    "description": "Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "919",
+    "name": "SQL Injection Detector",
+    "slug": "sql-injection-detector",
+    "category": "Developer",
+    "description": "Analyze SQL queries for common injection patterns and parameterization issues. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "920",
+    "name": "XSS Protection Checker",
+    "slug": "xss-protection-checker",
+    "category": "Developer",
+    "description": "Scan HTML/JavaScript code for reflected, stored, and DOM-based XSS vulnerabilities.",
+    "isPro": false
+  },
+  {
+    "id": "921",
+    "name": "CSRF Token Generator",
+    "slug": "csrf-token-generator",
+    "category": "Developer",
+    "description": "Generate cryptographically secure CSRF tokens with configurable length and encoding. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "922",
+    "name": "OAuth2 Debugger",
+    "slug": "oauth2-debugger",
+    "category": "Developer",
+    "description": "Debug and decode OAuth2 tokens, authorization codes, and refresh token flows. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "923",
+    "name": "SAML Decoder",
+    "slug": "saml-decoder",
+    "category": "Developer",
+    "description": "Decode and inspect SAML assertions and responses for SSO troubleshooting. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "924",
+    "name": "CSP Policy Validator",
+    "slug": "csp-policy-validator",
+    "category": "Developer",
+    "description": "Validate Content Security Policy headers against W3C spec and common pitfalls. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "925",
+    "name": "TLS Cipher Checker",
+    "slug": "tls-cipher-checker",
+    "category": "Developer",
+    "description": "Check which TLS ciphers and protocol versions are supported by a server.",
+    "isPro": false
+  },
+  {
+    "id": "926",
+    "name": "IP Reputation Checker",
+    "slug": "ip-reputation-checker",
+    "category": "Developer",
+    "description": "Check an IP address against known threat intelligence and blacklist databases. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "927",
+    "name": "URL Sanitizer",
+    "slug": "url-sanitizer",
+    "category": "Developer",
+    "description": "Sanitize URLs by removing tracking parameters and normalizing the URL structure. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "928",
+    "name": "SSL Certificate Decoder",
+    "slug": "ssl-certificate-decoder",
+    "category": "Developer",
+    "description": "Decode and view SSL certificate details including subject, issuer, and validity period. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "929",
+    "name": "Subdomain Finder",
+    "slug": "subdomain-finder",
+    "category": "Developer",
+    "description": "Discover subdomains for a given domain using common wordlists and patterns. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "930",
+    "name": "Email Validator",
+    "slug": "email-format-validator",
+    "category": "Developer",
+    "description": "Validate email addresses for correct format, disposable domains, and MX record existence. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "931",
+    "name": "Validator",
+    "slug": "syntax-validator",
+    "category": "Developer",
+    "description": "Validate code syntax across multiple languages including JSON, XML, and JavaScript. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "933",
     "name": "Annual Contract Value Calculator",
     "slug": "acv-calculator",
@@ -4339,6 +6683,22 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ascii-table-generator",
     "category": "Text",
     "description": "Generate clean ASCII art tables from CSV, TSV, or pipe-delimited data. Configurable header alignment, border styles, column padding, and export options for documentation, code comments, and terminal output.",
+    "isPro": false
+  },
+  {
+    "id": "935",
+    "name": "Git Commit Linter",
+    "slug": "git-commit-linter",
+    "category": "Developer",
+    "description": "Validate git commit messages against the Conventional Commits specification. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "936",
+    "name": ".gitignore Generator",
+    "slug": "gitignore-generator",
+    "category": "Developer",
+    "description": "Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.",
     "isPro": false
   },
   {
@@ -4366,6 +6726,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "942",
+    "name": "Swift Formatter",
+    "slug": "swift-formatter",
+    "category": "Developer",
+    "description": "Formats Swift source code with proper indentation, spacing, and bracing style for readable iOS and macOS development.",
+    "isPro": false
+  },
+  {
     "id": "943",
     "name": "Temperature Converter",
     "slug": "temperature-converter",
@@ -4382,11 +6750,83 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "946",
+    "name": "CSV to SQLite Web Terminal",
+    "slug": "csv-to-sqlite",
+    "category": "Converter",
+    "description": "Import CSV data directly into a SQLite database. Run SQL queries, filter rows, and export results.",
+    "isPro": false
+  },
+  {
     "id": "947",
     "name": "Vector Pen Canvas",
     "slug": "vector-pen-canvas",
     "category": "Design",
     "description": "A freeform vector drawing tool with freehand pen, shapes (rectangle, ellipse, line), multi-page canvas, color picker, and SVG/PNG export. Draw diagrams and illustrations entirely in your browser.",
+    "isPro": false
+  },
+  {
+    "id": "956",
+    "name": "AES Encrypt",
+    "slug": "aes-encrypt",
+    "category": "Developer",
+    "description": "Encrypt text using AES symmetric encryption with a passphrase. Generate ciphertext that can be safely transmitted or stored. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "957",
+    "name": "AES Decrypt",
+    "slug": "aes-decrypt",
+    "category": "Developer",
+    "description": "Decrypt AES-encrypted ciphertext back to plain text using the original passphrase. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "958",
+    "name": "HTTP Header Analyzer",
+    "slug": "http-header-analyzer",
+    "category": "Developer",
+    "description": "Analyze HTTP request and response headers — detect security headers, review formatting, and inspect value structure. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "959",
+    "name": "HTTP Headers Generator",
+    "slug": "http-headers-generator",
+    "category": "Developer",
+    "description": "Generate common HTTP headers for JSON, REST, and GraphQL APIs with correct Content-Type and authorization patterns. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "960",
+    "name": "HTTP Cache Header Generator",
+    "slug": "http-cache-header-generator",
+    "category": "Developer",
+    "description": "Generate Cache-Control directives with configurable max-age, scope, must-revalidate, and no-transform options. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "961",
+    "name": "HTTP Status Code Checker",
+    "slug": "http-status-code-checker",
+    "category": "Developer",
+    "description": "Look up HTTP status codes by number — view description, label, and response class (informational, success, redirect, client error, server error).",
+    "isPro": false
+  },
+  {
+    "id": "962",
+    "name": "ESLint Config Generator",
+    "slug": "eslint-config-generator",
+    "category": "Developer",
+    "description": "Generate ESLint configuration presets for React, Node.js, TypeScript, and Next.js projects with recommended rules. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "963",
+    "name": "HTTP Retry Policy Builder",
+    "slug": "http-retry-policy-builder",
+    "category": "Developer",
+    "description": "Build HTTP retry policies with exponential backoff, fixed delay, or circuit breaker strategies for resilient API clients. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -4422,11 +6862,27 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "969",
+    "name": "TSV ↔ CSV Converter",
+    "slug": "tsv-csv-converter",
+    "category": "Converter",
+    "description": "Bidirectional converter between tab-separated values (TSV) and comma-separated values (CSV) with proper quoting. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "970",
     "name": "JSON → Toon Converter",
     "slug": "json-toon-converter",
     "category": "Converter",
     "description": "Convert JSON objects into a human-readable Toon format using → arrows instead of colons. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "971",
+    "name": "CSV Data Cleaner",
+    "slug": "csv-data-cleaner",
+    "category": "Converter",
+    "description": "Clean CSV data by trimming whitespace, removing empty rows, deduplicating, and applying column-aware transforms (email lowercasing, phone digit-stripping, note normalizing). Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -4478,6 +6934,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "978",
+    "name": "Trailing Space Remover",
+    "slug": "trailing-space-remover",
+    "category": "Developer",
+    "description": "Remove trailing whitespace from every line in your text. Essential for code cleanup and formatting.",
+    "isPro": false
+  },
+  {
     "id": "979",
     "name": "Canonical URL Checker",
     "slug": "canonical-url-checker",
@@ -4502,11 +6966,571 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "982",
+    "name": "Port Number Lookup",
+    "slug": "port-number-lookup",
+    "category": "Developer",
+    "description": "Look up service names for TCP/UDP port numbers — well-known (0-1023), registered (1024-49151), and dynamic/private (49152-65535) ranges. Includes 25+ common services.",
+    "isPro": false
+  },
+  {
+    "id": "983",
+    "name": "User-Agent Parser",
+    "slug": "user-agent-parser",
+    "category": "Developer",
+    "description": "Parse browser, operating system, and version from any User-Agent string. Detects Chrome, Firefox, Safari, Edge, and the client OS from request headers.",
+    "isPro": false
+  },
+  {
+    "id": "984",
+    "name": "Query String Parser",
+    "slug": "query-string-parser",
+    "category": "Developer",
+    "description": "Parse and inspect URL query parameters as structured key-value pairs. Decodes URL-encoded values and displays them in a readable JSON format.",
+    "isPro": false
+  },
+  {
+    "id": "985",
+    "name": "SSE Event Formatter",
+    "slug": "sse-event-formatter",
+    "category": "Developer",
+    "description": "Parse and visualize Server-Sent Events (SSE) streams into structured data. Formats event fields including data, event, id, and retry directives.",
+    "isPro": false
+  },
+  {
+    "id": "986",
+    "name": "Rate Limit Header Parser",
+    "slug": "rate-limit-header-parser",
+    "category": "Developer",
+    "description": "Parse X-RateLimit headers and compute usage percentage, reset times, and retry intervals. Supports standard X-RateLimit-Limit, X-RateLimit-Remaining, and X-RateLimit-Reset formats.",
+    "isPro": false
+  },
+  {
+    "id": "987",
+    "name": "Pricing Tier Builder",
+    "slug": "pricing-tier-builder",
+    "category": "Developer",
+    "description": "Build pricing tier descriptions from JSON input. Supports free/pro tiers with configurable pricing (monthly/annual), user limits, and feature lists.",
+    "isPro": false
+  },
+  {
+    "id": "988",
+    "name": "SSH Key Generator",
+    "slug": "ssh-key-generator",
+    "category": "Developer",
+    "description": "Generate RSA, ECDSA, and Ed25519 SSH key pairs with proper OpenSSH format output. RSA uses RSASSA-PKCS1-v1_5 (2048-bit). ECDSA supports P-256 and P-384. Ed25519 uses a pure-JS implementation (no server). Public keys paste directly into ~/.ssh/authorized_keys.",
+    "isPro": false
+  },
+  {
+    "id": "989",
+    "name": "Secret Scanner",
+    "slug": "secret-scanner",
+    "category": "Developer",
+    "description": "Scan text and code for leaked secrets and credentials. Detects Stripe keys, GitHub tokens, Slack tokens, Google API keys, AWS keys, OpenAI keys, JWT tokens, private keys, and config passwords.",
+    "isPro": false
+  },
+  {
+    "id": "990",
+    "name": "security.txt Generator",
+    "slug": "security-txt-generator",
+    "category": "Developer",
+    "description": "Generate a security.txt file for your website following RFC 9116 standard. Specify contact email, security policy URL, encryption key, and expiry date for vulnerability disclosure.",
+    "isPro": false
+  },
+  {
+    "id": "991",
+    "name": "robots.txt Validator",
+    "slug": "robots-txt-validator",
+    "category": "Developer",
+    "description": "Validate robots.txt syntax — checks User-agent, Allow, Disallow, Sitemap, Crawl-delay directives. Identifies unknown directives, missing colons, and missing User-agent declarations.",
+    "isPro": false
+  },
+  {
+    "id": "992",
+    "name": "DNS Record Validator",
+    "slug": "dns-record-validator",
+    "category": "Developer",
+    "description": "Validate DNS record syntax for A, AAAA, CNAME, MX, TXT, NS, SOA, SRV, CAA, and PTR records. Checks IP format for A/AAAA records and domain validity for MX records.",
+    "isPro": false
+  },
+  {
+    "id": "993",
+    "name": "Docker Compose Validator",
+    "slug": "docker-compose-validator",
+    "category": "Developer",
+    "description": "Validate docker-compose.yml files — checks YAML syntax, correct indentation, tab usage, and the presence of the services section. Identifies mixed indentation and formatting issues.",
+    "isPro": false
+  },
+  {
+    "id": "994",
+    "name": "Dockerfile Linter",
+    "slug": "dockerfile-linter",
+    "category": "Developer",
+    "description": "Lint Dockerfiles against 20+ valid instructions (FROM, RUN, CMD, COPY, ENTRYPOINT, HEALTHCHECK, SHELL). Detects unknown instructions and missing FROM declaration.",
+    "isPro": false
+  },
+  {
+    "id": "995",
+    "name": "htaccess Validator",
+    "slug": "htaccess-validator",
+    "category": "Developer",
+    "description": "Validate .htaccess files against 30+ known Apache directives. Checks RewriteEngine, RewriteRule, ErrorDocument, Redirect, Header, Options, and block directives. Flags unknown directives.",
+    "isPro": false
+  },
+  {
+    "id": "996",
+    "name": "Kubernetes YAML Validator",
+    "slug": "kubernetes-yaml-validator",
+    "category": "Developer",
+    "description": "Validate Kubernetes YAML manifests — checks for required fields (apiVersion, kind, metadata), correct YAML structure, indentation, and tab usage.",
+    "isPro": false
+  },
+  {
+    "id": "997",
+    "name": "GitHub Actions Validator",
+    "slug": "github-actions-validator",
+    "category": "Developer",
+    "description": "Validate GitHub Actions workflow YAML — checks for workflow name, on trigger, jobs section, and correct YAML structure. Identifies formatting issues and missing fields.",
+    "isPro": false
+  },
+  {
+    "id": "998",
+    "name": "GeoJSON Validator",
+    "slug": "geojson-validator",
+    "category": "Developer",
+    "description": "Validate GeoJSON objects against the GeoJSON specification. Checks feature, geometry, point coordinates, FeatureCollection structure, and bounding box format.",
+    "isPro": false
+  },
+  {
+    "id": "999",
+    "name": "RSS Feed Validator",
+    "slug": "rss-feed-validator",
+    "category": "Developer",
+    "description": "Validate RSS 2.0 and Atom feed XML — checks root element, channel/feed, title, link, description, items/entries, and XML declaration.",
+    "isPro": false
+  },
+  {
+    "id": "1000",
+    "name": "Sitemap Validator",
+    "slug": "sitemap-validator",
+    "category": "Developer",
+    "description": "Validate XML sitemaps — checks urlset/sitemapindex root, loc entries, XML declaration, and URL count. Supports standard sitemap protocol formatting.",
+    "isPro": false
+  },
+  {
+    "id": "1001",
+    "name": "XPath Validator",
+    "slug": "xpath-validator",
+    "category": "Developer",
+    "description": "Test XPath expressions against XML or HTML documents. Evaluates queries and displays matching results in real time. Checks XML parsing errors before evaluation.",
+    "isPro": false
+  },
+  {
+    "id": "1002",
+    "name": "Cron Expression Validator",
+    "slug": "cron-expression-validator",
+    "category": "Developer",
+    "description": "Validate cron expressions with field-level range checking. Supports 5-field format with step values, ranges, lists, and wildcards. Detects out-of-bounds values and provides readable descriptions.",
+    "isPro": false
+  },
+  {
+    "id": "gt-1",
+    "name": "Random Date Generator",
+    "slug": "random-date-generator",
+    "category": "Utility",
+    "description": "Generate random dates within a configurable range with optional format selection including ISO, US, EU, and full-date styles. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-2",
+    "name": "Random Time Generator",
+    "slug": "random-time-generator",
+    "category": "Utility",
+    "description": "Generate random times in 12-hour or 24-hour format with optional seconds and configurable time range. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-3",
+    "name": "Random IP Generator",
+    "slug": "random-ip-generator",
+    "category": "Developer",
+    "description": "Generate random IPv4 and IPv6 addresses for network testing, development, and security research. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-4",
+    "name": "Random User-Agent Generator",
+    "slug": "random-user-agent-generator",
+    "category": "Developer",
+    "description": "Generate random browser user-agent strings from a curated list covering Chrome, Firefox, Safari, Edge, and mobile browsers. No signup or account required.",
+    "isPro": false
+  },
+  {
+    "id": "gt-5",
+    "name": "Random Sentence Generator",
+    "slug": "random-sentence-generator",
+    "category": "Utility",
+    "description": "Generate random sentences from a curated word list, useful for placeholder text and content generation. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-6",
+    "name": "Random Word Generator",
+    "slug": "random-word-generator",
+    "category": "Utility",
+    "description": "Generate random words from a curated vocabulary list for brainstorming, naming, and word games. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-7",
+    "name": "PIN Generator",
+    "slug": "pin-generator",
+    "category": "Developer",
+    "description": "Generate numeric PINs of configurable length from 4 to 10 digits for security codes, verification codes, and access tokens. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-8",
+    "name": "License Key Generator",
+    "slug": "license-key-generator",
+    "category": "Developer",
+    "description": "Generate license keys in custom formats with configurable character sets, segment separators, and prefix/suffix options. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-9",
+    "name": "Image Placeholder Generator",
+    "slug": "image-placeholder-generator",
+    "category": "Design",
+    "description": "Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-10",
+    "name": "Logo Placeholder Generator",
+    "slug": "logo-placeholder-generator",
+    "category": "Design",
+    "description": "Generate brand logo placeholders as SVG with random brand names, initials, colors, and configurable size for design mockups. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-11",
+    "name": "Open Graph Generator",
+    "slug": "open-graph-generator",
+    "category": "Developer",
+    "description": "Generate Open Graph (og:) and Twitter Card meta tags for social sharing, with fields for title, description, URL, and image. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "gt-12",
+    "name": "OAuth PKCE Generator",
+    "slug": "oauth-pkce-generator",
+    "category": "Developer",
+    "description": "Generate RFC 7636 OAuth PKCE code_verifier + code_challenge (S256 method) pairs. Verifier uses 48 bytes → 64-char base64url, challenge uses SHA-256. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "ce-1",
+    "name": "Cooking Measurement Converter",
+    "slug": "cooking-measurement-converter",
+    "category": "Utility",
+    "description": "Convert cooking measurements between teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons, milliliters, and liters. Includes tsp and tbsp not found in the volume converter.",
+    "isPro": false
+  },
+  {
+    "id": "ce-2",
+    "name": "Fuel Consumption Converter",
+    "slug": "fuel-consumption-converter",
+    "category": "Utility",
+    "description": "Convert fuel economy between L/100km, MPG (US), MPG (UK), and km/L. Essential for comparing vehicle efficiency across metric and imperial systems.",
+    "isPro": false
+  },
+  {
+    "id": "ce-3",
+    "name": "Paper Size Converter",
+    "slug": "paper-size-converter",
+    "category": "Utility",
+    "description": "Compare and convert between A0, A1, A4, Letter, and Legal paper sizes. Understand how many sheets of one size fit into another.",
+    "isPro": false
+  },
+  {
+    "id": "ce-4",
+    "name": "Clothing Size Converter",
+    "slug": "clothing-size-converter",
+    "category": "Utility",
+    "description": "Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\\",
+    "isPro": false
+  },
+  {
+    "id": "ce-5",
+    "name": "Large Text File Viewer",
+    "slug": "large-text-viewer",
+    "category": "Developer",
+    "description": "View and search large text files (logs, CSVs, JSON) up to 100K characters in the browser with text search and match counting. No file upload needed — all client-side.",
+    "isPro": false
+  },
+  {
+    "id": "ce-6",
+    "name": "Avro Schema Generator",
+    "slug": "avro-schema-generator",
+    "category": "Developer",
+    "description": "Generate Apache Avro schemas from a JSON field definition. Configure namespace, record name, and field types — outputs valid Avro schema JSON.",
+    "isPro": false
+  },
+  {
+    "id": "ce-7",
+    "name": "Avro to JSON Sample Generator",
+    "slug": "avro-to-json-sample",
+    "category": "Developer",
+    "description": "Generate sample JSON data from an Avro schema. Auto-generates values based on field types. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "ce-8",
+    "name": "iCal Event Generator",
+    "slug": "ical-event-generator",
+    "category": "Utility",
+    "description": "Generate .ics calendar files for any event. Set summary, dates, times, description, and location — download or copy ready-to-import iCal (RFC 5545) format.",
+    "isPro": false
+  },
+  {
+    "id": "dt-1",
+    "name": "Column Extractor",
+    "slug": "column-extractor",
+    "category": "Utility",
+    "description": "Extract specific columns from CSV data by header name. Select the columns you need and get a clean CSV with only your chosen fields.",
+    "isPro": false
+  },
+  {
+    "id": "dt-2",
+    "name": "Column Renamer",
+    "slug": "column-renamer",
+    "category": "Utility",
+    "description": "Rename CSV column headers in bulk using old:new mapping. Quickly relabel columns for data standardization and reporting.",
+    "isPro": false
+  },
+  {
+    "id": "dt-3",
+    "name": "Data Type Converter",
+    "slug": "data-type-converter",
+    "category": "Converter",
+    "description": "Convert CSV column data types between number, string, integer, and float. Ensure consistent typing across your dataset.",
+    "isPro": false
+  },
+  {
+    "id": "dt-4",
+    "name": "CSV Deduplicator",
+    "slug": "deduplicator",
+    "category": "Utility",
+    "description": "Remove duplicate rows from CSV data based on a specific column. Keep only unique values for cleaner datasets.",
+    "isPro": false
+  },
+  {
+    "id": "dt-5",
+    "name": "CSV Format Validator",
+    "slug": "format-validator",
+    "category": "Utility",
+    "description": "Validate CSV formatting — detect inconsistent column counts, quoting errors, and malformed rows. Get detailed issue reports.",
+    "isPro": false
+  },
+  {
+    "id": "dt-6",
+    "name": "CSV Merger",
+    "slug": "csv-merger",
+    "category": "Utility",
+    "description": "Merge two CSV files on a common column. Join datasets horizontally by matching key values, like a SQL JOIN for your spreadsheets.",
+    "isPro": false
+  },
+  {
+    "id": "dt-7",
+    "name": "Null Value Handler",
+    "slug": "null-value-handler",
+    "category": "Utility",
+    "description": "Replace empty, null, or NA values in CSV data with a custom fill value. Clean your datasets for analysis and migration.",
+    "isPro": false
+  },
+  {
+    "id": "dt-8",
+    "name": "CSV Pivot Generator",
+    "slug": "pivot-generator",
+    "category": "Utility",
+    "description": "Generate pivot tables from CSV data by specifying group and value columns. Transform long-format data into summary tables. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-9",
+    "name": "CSV Row Filter",
+    "slug": "row-filter",
+    "category": "Utility",
+    "description": "Filter CSV rows by column value matching. Includes exact match, contains, and not-equal operators for flexible data selection.",
+    "isPro": false
+  },
+  {
+    "id": "dt-10",
+    "name": "CSV Row Sorter",
+    "slug": "csv-row-sorter",
+    "category": "Utility",
+    "description": "Sort CSV rows by any column in ascending or descending order. Quickly organize your data for analysis and reporting.",
+    "isPro": false
+  },
+  {
+    "id": "dt-11",
+    "name": "CSV Splitter",
+    "slug": "csv-splitter",
+    "category": "Utility",
+    "description": "Split a large CSV file into multiple smaller files by page count. Divide datasets into manageable chunks for processing.",
+    "isPro": false
+  },
+  {
+    "id": "dt-12",
+    "name": "CSV Transpose",
+    "slug": "csv-transpose",
+    "category": "Utility",
+    "description": "Transpose CSV data — swap rows and columns. Convert horizontal data to vertical and vice versa for reformatting.",
+    "isPro": false
+  },
+  {
     "id": "dt-13",
     "name": "CSV to Markdown Table",
     "slug": "csv-to-markdown",
     "category": "Converter",
     "description": "Convert CSV data into GitHub-flavored Markdown tables for docs and README files. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-14",
+    "name": "CSV to NDJSON",
+    "slug": "csv-to-ndjson",
+    "category": "Converter",
+    "description": "Convert CSV to Newline Delimited JSON. Each row becomes a separate JSON object. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-15",
+    "name": "CSV to SQL INSERT",
+    "slug": "csv-to-sql",
+    "category": "Converter",
+    "description": "Converts CSV files to SQL format — spreadsheets, database exports, and data imports to relational database operations, data analysis, and reporting. All conversion happens locally in your browser with no file size limits.",
+    "isPro": false
+  },
+  {
+    "id": "dt-16",
+    "name": "JSON Escape/Unescape",
+    "slug": "json-escape-unescape",
+    "category": "Developer",
+    "description": "Escape or unescape JSON strings — convert special characters to their JSON-safe escaped equivalents and back.",
+    "isPro": false
+  },
+  {
+    "id": "dt-17",
+    "name": "JSON Flattener",
+    "slug": "json-flattener",
+    "category": "Developer",
+    "description": "Flatten nested JSON objects into dot-notation key-value pairs. Unwrap complex hierarchies for tabular processing.",
+    "isPro": false
+  },
+  {
+    "id": "dt-18",
+    "name": "JSON-LD Generator",
+    "slug": "json-ld-generator",
+    "category": "Developer",
+    "description": "Wrap JSON data in valid JSON-LD (Linked Data) structure with @context and @type. Generate schema.org-compatible structured data.",
+    "isPro": false
+  },
+  {
+    "id": "dt-19",
+    "name": "Merge Patch Generator",
+    "slug": "merge-patch-generator",
+    "category": "Developer",
+    "description": "Generate JSON Merge Patch (RFC 7396) documents by comparing original and modified JSON objects. Show exactly what changed.",
+    "isPro": false
+  },
+  {
+    "id": "dt-20",
+    "name": "JSON Schema Generator",
+    "slug": "json-schema-generator",
+    "category": "Developer",
+    "description": "Generate a JSON Schema (draft-07) from sample JSON data. Auto-detect types, required fields, and nested structures.",
+    "isPro": false
+  },
+  {
+    "id": "dt-21",
+    "name": "JSON Size Analyzer",
+    "slug": "json-size-analyzer",
+    "category": "Developer",
+    "description": "Analyze JSON payload size, character count, key count, and nesting depth. Understand the size profile of your data.",
+    "isPro": false
+  },
+  {
+    "id": "dt-22",
+    "name": "JSON to Zod Schema",
+    "slug": "json-to-zod",
+    "category": "Developer",
+    "description": "Generate Zod validation schemas from sample JSON data. TypeScript runtime validation. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-23",
+    "name": "JWK Generator",
+    "slug": "jwk-generator",
+    "category": "Developer",
+    "description": "Generate JSON Web Keys (JWK) with RSA key sizes of 2048 or 4096 bits. Export public and private keys in JWK format.",
+    "isPro": false
+  },
+  {
+    "id": "dt-24",
+    "name": "JSONL Formatter",
+    "slug": "jsonl-formatter",
+    "category": "Developer",
+    "description": "Format JSON Lines (JSONL) data — pretty-print each line as formatted JSON for readability and debugging.",
+    "isPro": false
+  },
+  {
+    "id": "dt-25",
+    "name": "NDJSON to JSON Array",
+    "slug": "ndjson-to-json",
+    "category": "Developer",
+    "description": "Convert Newline Delimited JSON into a standard JSON array format. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-26",
+    "name": "JSON to URL Parameters",
+    "slug": "json-to-url-params",
+    "category": "Developer",
+    "description": "Convert JSON objects into URL query string parameters for API calls and web requests. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "dt-27",
+    "name": "CSV Row / JSON Generator",
+    "slug": "csv-json-row-generator",
+    "category": "Utility",
+    "description": "Generate realistic dummy data as CSV rows or JSON objects. Configure count (1-50) for test data, demos, and prototyping.",
+    "isPro": false
+  },
+  {
+    "id": "css-1",
+    "name": "Glassmorphism CSS Generator",
+    "slug": "glassmorphism-generator",
+    "category": "Developer",
+    "description": "Generate glassmorphism CSS with adjustable blur, opacity, and border radius. Copy ready-to-use CSS for frosted-glass UI effects. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "css-2",
+    "name": "Neumorphism CSS Generator",
+    "slug": "neumorphism-generator",
+    "category": "Developer",
+    "description": "Generate neumorphism CSS with configurable size, blur, and color. Create soft UI shadow effects with live preview.",
+    "isPro": false
+  },
+  {
+    "id": "css-3",
+    "name": "CSS Specificity Calculator",
+    "slug": "css-specificity-calculator",
+    "category": "Developer",
+    "description": "Calculate CSS selector specificity as (IDs, classes, tags) and total weight. Understand which selector wins in a specificity conflict.",
     "isPro": false
   },
   {
@@ -4526,6 +7550,46 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "css-6",
+    "name": "CSS Validator",
+    "slug": "css-validator",
+    "category": "Developer",
+    "description": "Validate CSS for missing semicolons, unclosed braces, and syntax issues. Get line-by-line error reports.",
+    "isPro": false
+  },
+  {
+    "id": "code-1",
+    "name": "Code Obfuscator",
+    "slug": "code-obfuscator",
+    "category": "Developer",
+    "description": "Obfuscate or deobfuscate code using Base64 encoding with reversed output. Quick one-way code protection for sharing.",
+    "isPro": false
+  },
+  {
+    "id": "code-2",
+    "name": "Code to cURL Parser",
+    "slug": "code-to-curl-parser",
+    "category": "Developer",
+    "description": "Parse cURL commands to extract method, URL, headers, and body. Debug HTTP requests from cURL strings. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "code-3",
+    "name": "JavaScript Syntax Checker",
+    "slug": "js-syntax-checker",
+    "category": "Developer",
+    "description": "Check JavaScript code for syntax errors using the Function constructor. Validate code before execution. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "code-4",
+    "name": "Pug to HTML Converter",
+    "slug": "pug-to-html-converter",
+    "category": "Developer",
+    "description": "Convert Pug/Jade template syntax to HTML. Parse indentation-based Pug into standard HTML tags. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
     "id": "text-tools-hub",
     "name": "Text Converter",
     "slug": "text-tools",
@@ -4534,11 +7598,99 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "json-formatter-tool-hub",
+    "name": "JSON Output Tools",
+    "slug": "json-formatter-tool",
+    "category": "Developer",
+    "description": "Format, validate, and convert JSON to Zod schemas, URL query parameters, flat key-value pairs, JSON-LD, or analyze size and structure.",
+    "isPro": false
+  },
+  {
+    "id": "csv-formatter-hub",
+    "name": "CSV Output Tools",
+    "slug": "csv-formatter",
+    "category": "Converter",
+    "description": "Convert CSV data to Markdown tables, NDJSON, SQL INSERT statements, HTML tables, or analyze statistics and find data quality issues.",
+    "isPro": false
+  },
+  {
     "id": "import-to-csv-hub",
     "name": "Import to CSV",
     "slug": "import-to-csv",
     "category": "Converter",
     "description": "Convert TSV, Excel XLSX, vCard VCF, iCalendar ICS, and Parquet files to CSV. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "cb-1",
+    "name": "Color Blindness Simulator",
+    "slug": "color-blindness-simulator",
+    "category": "Design",
+    "description": "Simulate how your designs and images appear to users with protanopia, deuteranopia, tritanopia, and achromatopsia color vision deficiencies.",
+    "isPro": false
+  },
+  {
+    "id": "cf-cpp",
+    "name": "C++ Formatter",
+    "slug": "cpp-formatter",
+    "category": "Developer",
+    "description": "Format and beautify C++ source code with configurable indentation, brace style, and spacing. Supports modern C++11 through C++23 syntax.",
+    "isPro": false
+  },
+  {
+    "id": "cf-go",
+    "name": "Go Formatter",
+    "slug": "go-formatter",
+    "category": "Developer",
+    "description": "Format and beautify Go source code with proper indentation, alignment, and standard gofmt-style conventions. Clean up any Go file instantly.",
+    "isPro": false
+  },
+  {
+    "id": "cf-kt",
+    "name": "Kotlin Formatter",
+    "slug": "kotlin-formatter",
+    "category": "Developer",
+    "description": "Format and beautify Kotlin source code with correct indentation, spacing, and brace placement. Supports Kotlin DSL, coroutines, and modern syntax.",
+    "isPro": false
+  },
+  {
+    "id": "cf-php",
+    "name": "PHP Beautifier",
+    "slug": "php-beautifier",
+    "category": "Developer",
+    "description": "Beautify and format PHP source code with proper indentation, brace style, and spacing. Handles PHP, HTML embedded PHP, and mixed syntax files.",
+    "isPro": false
+  },
+  {
+    "id": "cf-rb",
+    "name": "Ruby Formatter",
+    "slug": "ruby-formatter",
+    "category": "Developer",
+    "description": "Format and beautify Ruby source code with proper indentation, spacing, and block alignment. Supports modern Ruby syntax and Rails conventions.",
+    "isPro": false
+  },
+  {
+    "id": "cf-rs",
+    "name": "Rust Formatter",
+    "slug": "rust-formatter",
+    "category": "Developer",
+    "description": "Format and beautify Rust source code with proper indentation, spacing, and brace placement. Handles Rust macros, traits, generics, and module structure.",
+    "isPro": false
+  },
+  {
+    "id": "jwt-e-1",
+    "name": "JWT Encoder & Signer",
+    "slug": "jwt-encoder-signer",
+    "category": "Developer",
+    "description": "Create and sign JSON Web Tokens with custom header and payload. Supports HS256, HS384, HS512 signing algorithms for API authentication testing.",
+    "isPro": false
+  },
+  {
+    "id": "mp-1",
+    "name": "Memorable Password Generator",
+    "slug": "memorable-password-generator",
+    "category": "Developer",
+    "description": "Generate easy-to-remember passphrases using random word combinations with separators, numbers, and capitalization. More secure than dictionary words, easier to remember than random strings.",
     "isPro": false
   },
   {
@@ -5222,6 +8374,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "1086",
+    "name": "Validator Kit",
+    "slug": "validator-kit",
+    "category": "Developer",
+    "description": "Validate email addresses, URLs, phone numbers, credit cards, IP addresses, JSON, and more. Batch validation supported.",
+    "isPro": false
+  },
+  {
     "id": "1087",
     "name": "JSON to YAML Converter",
     "slug": "json-to-yaml-converter",
@@ -5259,6 +8419,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "css-to-stylus-converter",
     "category": "Converter",
     "description": "Convert CSS braces and semicolons to Stylus indentation-based syntax. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "1092",
+    "name": "Bulk URL Shortener",
+    "slug": "bulk-url-shortener",
+    "category": "Utility",
+    "description": "Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.",
     "isPro": false
   },
   {
@@ -5331,6 +8499,54 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "invisible-character",
     "category": "Text",
     "description": "Generate and inspect invisible Unicode characters — zero-width space (ZWSP), zero-width non-joiner (ZWNJ), zero-width joiner (ZWJ), left-to-right/right-to-left marks, and word joiner. Copy raw bytes or visualizable forms.",
+    "isPro": false
+  },
+  {
+    "id": "1099",
+    "name": "NATO Phonetic Converter",
+    "slug": "nato-phonetic-converter",
+    "category": "Converter",
+    "description": "Bidirectional NATO phonetic alphabet converter. Convert text to NATO words (Alpha, Bravo, Charlie) and back. Perfect for radio communication, spelling clarification, and aviation.",
+    "isPro": false
+  },
+  {
+    "id": "1100",
+    "name": "Unicode Code Point Viewer",
+    "slug": "unicode-viewer",
+    "category": "Utility",
+    "description": "View Unicode code points, HTML entities, and percent-encoding for any text. Character-by-character breakdown with U+XXXX codes and HTML entity references.",
+    "isPro": false
+  },
+  {
+    "id": "md-seo-1",
+    "name": "Markdown to HTML",
+    "slug": "markdown-to-html",
+    "category": "Converter",
+    "description": "Convert Markdown to HTML with live preview. Perfect for writing blog posts, documentation, and README files.",
+    "isPro": false
+  },
+  {
+    "id": "md-seo-2",
+    "name": "HTML to Markdown",
+    "slug": "html-to-markdown",
+    "category": "Converter",
+    "description": "Convert HTML to Markdown format. Perfect for migrating content from rich text editors to Markdown-based workflows.",
+    "isPro": false
+  },
+  {
+    "id": "md-seo-3",
+    "name": "Text to Markdown",
+    "slug": "text-to-markdown",
+    "category": "Converter",
+    "description": "Convert plain text to Markdown format. Wraps paragraphs and preserves line breaks in clean Markdown syntax.",
+    "isPro": false
+  },
+  {
+    "id": "md-seo-4",
+    "name": "Markdown to Text",
+    "slug": "markdown-to-text",
+    "category": "Converter",
+    "description": "Strip Markdown formatting and convert to plain text. Removes headers, bold, italic, links, and lists cleanly.",
     "isPro": false
   }
 ];

@@ -30,11 +30,11 @@ for (let i = 0; i <= 5; i++) {
   const chunkPath = path.join(REGISTRY_DIR, `tools-chunk-${i}.ts`);
   const src = fs.readFileSync(chunkPath, 'utf8');
 
-  // Match each tool object: { id: "...", name: "...", ... }
-  // We extract fields line-by-line within each { } block
-  const blocks = src.split(/\{(?=\s*\n\s*id:)/);
+  // Match each tool object: split on { followed by newline + any field (id, name, slug, etc.)
+  const blocks = src.split(/\{(?=\s*\n\s*(?:id|name|slug):)/);
   for (const block of blocks) {
-    if (!block.startsWith('\n    id:')) continue;
+    // Must contain both id and slug to be a valid tool entry
+    if (!block.includes('id:') || !block.includes('slug:')) continue;
 
     const get = (field) => {
       // Match: field: "value" or field: 'value'
