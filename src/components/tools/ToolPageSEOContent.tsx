@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ChevronRight, HelpCircle, BookOpen, Layers, ArrowRight } from "lucide-react";
-import { toolsRegistry, ToolMetadata } from "@/registry/tools";
+import type { ToolMetadata } from "@/registry/tools";
 import { getShortDescription } from "@/lib/generateToolDescription";
 import { requiresCloudApi, LOCAL_TRUST_CLAIM, FORMAT_INFO } from "@/lib/cloudPatterns";
 import { UNIT_FAMILIES } from './modules/shared/unitFamilies';
 
 interface ToolPageSEOContentProps {
   tool: ToolMetadata;
+  relatedTools?: ToolMetadata[];
 }
 
 const broadTypes = new Set(['generator', 'checker', 'tester', 'builder']);
@@ -671,36 +672,9 @@ const crossCategoryMap: Record<string, string[]> = {
 
 // Precomputed word arrays for every tool (name + description), built once at
 // module load. The registry is static, so this is safe to compute eagerly.
-// Before this, ToolPageSEOContent re-tokenized all ~1,150 candidates per page
-// render (plus a fresh query-word Set per candidate) — ~330ms × 1,272 pages
-// ≈ 420s of build CPU. Now each rankRelated is a Map lookup + Set scan (~16ms).
-function wordsOf(tool: ToolMetadata): string[] {
-  return (tool.name + " " + tool.description).toLowerCase().split(/\W+/).filter((w) => w.length > 2);
-}
-
-const TOOL_WORDS: Map<string, string[]> = new Map(toolsRegistry.map((t) => [t.slug, wordsOf(t)]));
-
-export function ToolPageSEOContent({ tool }: ToolPageSEOContentProps) {
+export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOContentProps) {
   const categoryKey = getCategoryKey(tool.category);
-  const toolWordSet = new Set(TOOL_WORDS.get(tool.slug) ?? []);
-
-  function rankRelated(t: ToolMetadata): number {
-    const candidateWords = TOOL_WORDS.get(t.slug) ?? [];
-    let intersection = 0;
-    for (const w of candidateWords) {
-      if (toolWordSet.has(w)) intersection++;
-    }
-    return intersection;
-  }
-
-  const candidates = toolsRegistry.filter((t) => t.slug !== tool.slug);
-  const sameCategory = candidates.filter((t) => t.category === tool.category);
-  const crossCategory = candidates.filter((t) => t.category !== tool.category);
-
-  const rankedSame = sameCategory.sort((a, b) => rankRelated(b) - rankRelated(a)).slice(0, 4);
-  const rankedCross = crossCategory.sort((a, b) => rankRelated(b) - rankRelated(a)).slice(0, 3);
-
-  const allRelated = [...rankedSame.slice(0, 3), ...rankedCross.slice(0, 2)].slice(0, 6);
+  const allRelated = relatedTools.slice(0, 6);
 
   const displayCategory = tool.category.split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 

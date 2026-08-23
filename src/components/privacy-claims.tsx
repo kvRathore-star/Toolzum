@@ -1,21 +1,21 @@
-import { getCachedToolCounts } from '@/registry/tools-helpers';
+import { SITE_STATS } from '@/registry/site-data.generated';
 import type { ToolMetadata } from '@/registry/tools-types';
 import { classifyDependencies } from '@/lib/cloudPatterns';
 
 export function ToolCountBadge() {
-  const { totalImplemented, localTools, cloudTools, hybridTools } = getCachedToolCounts();
+  const { totalImplemented, localTools, cloudTools, hybridTools } = SITE_STATS;
   const pct = Math.round((localTools / totalImplemented) * 100);
   return <>{totalImplemented.toLocaleString()} free tools · {pct}% local · no signup</>;
 }
 
 export function PrivacyClaim() {
-  const { localTools, cloudTools, hybridTools } = getCachedToolCounts();
+  const { localTools, cloudTools, hybridTools } = SITE_STATS;
   const totalCloud = cloudTools + hybridTools;
   return <>{localTools.toLocaleString()} tools run 100% in your browser. {totalCloud} use cloud processing — clearly marked on every tool.</>;
 }
 
 export function ShortPrivacyClaim() {
-  const { localTools } = getCachedToolCounts();
+  const { localTools } = SITE_STATS;
   return <>{localTools.toLocaleString()} tools run in your browser</>;
 }
 

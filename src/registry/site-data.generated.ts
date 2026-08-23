@@ -20,6 +20,7 @@ export interface MegamenuColumn {
 export const TOOL_COUNT = 1152;
 
 export const SITE_STATS = {
+  totalImplemented: 1068,
   freeTierTotal: 1030,
   localTools: 1030,
   cloudTools: 31,

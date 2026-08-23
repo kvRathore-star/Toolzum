@@ -44,6 +44,7 @@ export interface MegamenuColumn {
 export const TOOL_COUNT = ${toolsRegistry.length};
 
 export const SITE_STATS = {
+  totalImplemented: ${counts.totalImplemented},
   freeTierTotal: ${counts.freeTierTotal},
   localTools: ${counts.localTools},
   cloudTools: ${counts.cloudTools},

@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Check, Zap, Sparkles, ShieldCheck, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { toolsRegistry } from "@/registry/tools";
+import { clientToolsRegistry } from "@/registry/tools-client-index";
 import { useIsIndia } from "@/hooks/useIsIndia";
 
 type BillingInterval = "pass" | "monthly" | "yearly";
 
-const proCount = toolsRegistry.filter(t => t.isPro).length;
+const proCount = clientToolsRegistry.filter(t => t.isPro).length;
 
 interface PricingPlan {
   price: string;

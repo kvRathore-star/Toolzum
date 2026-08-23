@@ -5,7 +5,7 @@ import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Search, Sparkles, Zap, Layout, Sun, Moon, Home, Star } from "lucide-react";
-import { toolsRegistry } from "@/registry/tools";
+import { clientToolsRegistry } from "@/registry/tools-client-index";
 import { useFavorites } from "@/hooks/useFavorites";
 
 interface CommandMenuProps {
@@ -27,8 +27,8 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
 
   // Group tools by category
   const categories = useMemo(() => {
-    const groups: Record<string, typeof toolsRegistry> = {};
-    toolsRegistry.forEach((tool) => {
+    const groups: Record<string, typeof clientToolsRegistry> = {};
+    clientToolsRegistry.forEach((tool) => {
       if (!groups[tool.category]) {
         groups[tool.category] = [];
       }
@@ -66,7 +66,7 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
               {favorites.size > 0 && (
                 <Command.Group heading="Your Favorites" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
                   {Array.from(favorites).map(slug => {
-                    const tool = toolsRegistry.find(t => t.slug === slug);
+                    const tool = clientToolsRegistry.find(t => t.slug === slug);
                     if (!tool) return null;
                     return (
                       <Command.Item

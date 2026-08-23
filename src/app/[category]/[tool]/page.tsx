@@ -1,6 +1,7 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import { toolsRegistry, getToolByCategoryAndSlug, TOOL_REDIRECTS, SEO_PERMUTATIONS } from "@/registry/tools";
 import { getToolLayoutData } from "@/registry/tools-helpers";
+import { findRelatedTools } from "@/registry/related-tools";
 import { ToolLayout } from "@/components/tools/ToolLayout";
 import { ToolPageSEOContent } from "@/components/tools/ToolPageSEOContent";
 import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWrapper";
@@ -113,7 +114,7 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         tool={toolMetadata}
         {...getToolLayoutData(params.category, toolMetadata.slug)}
         hideDownloadQuota={toolMetadata.slug === 'gemini-watermark-remover'}
-        seoSection={<ToolPageSEOContent tool={toolMetadata} />}
+        seoSection={<ToolPageSEOContent tool={toolMetadata} relatedTools={findRelatedTools(toolMetadata, toolsRegistry)} />}
       >
         <MemoryWatchdog />
         <ErrorBoundary>

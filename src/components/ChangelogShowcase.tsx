@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Play, Pause, FileType, CheckCircle2, XCircle, Loader2 } from "lucide-react";
-import { toolsRegistry } from "@/registry/tools";
+import { clientToolsRegistry } from "@/registry/tools-client-index";
 
 // ─── Batch Fault Tolerance Demo (v1.5.0) ───
 
@@ -160,7 +160,7 @@ function ToolExpansionDemo() {
     ];
     return map.map(({ label, registryCat, color }) => ({
       label,
-      count: toolsRegistry.filter(t => t.category === registryCat && t.showInCategory !== false).length,
+      count: clientToolsRegistry.filter(t => t.category === registryCat && t.showInCategory !== false).length,
       color,
     }));
   }, []);

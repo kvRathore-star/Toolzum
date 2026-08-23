@@ -10,7 +10,7 @@ import {
   Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
 import type { PopularTool, CategoryCount } from '@/registry/tools';
-import { getCachedToolCounts } from '@/registry/tools-helpers';
+import { SITE_STATS } from '@/registry/site-data.generated';
 import { Button } from '@/components/ui/button';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import {
@@ -20,9 +20,9 @@ import {
 import { useIsIndia } from '@/hooks/useIsIndia';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
-import { getToolBySlug } from '@/registry/tools';
+import { getClientToolBySlug } from '@/registry/tools-client-index';
 
-const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, totalImplemented } = SITE_STATS;
 const totalCloud = cloudTools + hybridTools;
 const localPct = Math.round((localTools / totalImplemented) * 100);
 const categoryCount = CATEGORIES.length;
@@ -411,7 +411,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Array.from(favorites).map((slug, i) => {
-              const tool = getToolBySlug(slug);
+              const tool = getClientToolBySlug(slug);
               if (!tool) return null;
               const theme = getCategoryTheme(tool.category);
               const Icon = theme.icon;
