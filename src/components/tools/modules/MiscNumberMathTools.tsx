@@ -741,7 +741,7 @@ export function PrimeNumberChecker() {
     let below = nn, above = nn;
     while (below > 2 && !isPrime(below)) below--;
     while (!isPrime(above)) above++;
-    if (below === nn && prime) { const b = nn - 1; while (b > 2 && !isPrime(b)) below = b--; }
+    if (below === nn && prime) { let b = nn - 1; while (b > 2 && !isPrime(b)) below = b--; }
     return { below: below !== nn ? below : null, above: above !== nn ? above : null };
   })();
 

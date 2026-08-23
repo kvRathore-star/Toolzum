@@ -5,7 +5,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
-import { CalculatorShell } from '../shared/CalculatorShell';
+import { CalculatorShell } from './shared/CalculatorShell';
 
 export function QRCodeGenerator() {
   const clr = ac('QRCodeGenerator');
