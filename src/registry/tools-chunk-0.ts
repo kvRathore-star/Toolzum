@@ -583,11 +583,11 @@ export const entries_chunk_0: ToolMetadata[] = [
   },
   {
     id: "47",
-    name: "Video to Text Transcription",
+    name: "Video Transcript Formatter",
     slug: "video-to-text-transcription",
     category: "Transcription",
-    description: 'Structure raw video audio logs into clean scripts, articles, or outlines using AI. Paste your video transcription logs and pick a target format.',
-    seoDescription: 'Free online Video to Text Transcription — Turn messy video transcription logs into clean, structured scripts, articles, or outlines with AI.',
+    description: 'Clean up and restructure raw video transcription logs into readable scripts, articles, or outlines using AI. Paste a messy transcript dump and pick a target format.',
+    seoDescription: 'Free online Video Transcript Formatter — restructure raw video transcription logs into clean, readable scripts, articles, or outlines with AI.',
     dependencies: "Gemini API",
   },
   {
@@ -742,11 +742,11 @@ export const entries_chunk_0: ToolMetadata[] = [
   },
   {
     id: "64",
-    name: "Audio to Text Transcription",
+    name: "Audio Transcript Formatter",
     slug: "audio-to-text-transcription",
     category: "Transcription",
     description: 'Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.',
-    seoDescription: 'Free online Audio to Text Transcription — Turn messy, unformatted audio transcription text into clean, readable articles or scripts with AI.',
+    seoDescription: 'Free online Audio Transcript Formatter — turn messy audio transcription text into clean, readable articles or scripts with AI.',
     dependencies: "Gemini API",
   },
   {
