@@ -1602,6 +1602,15 @@ export const entries_chunk_2: ToolMetadata[] = [
     description: 'Insert blank pages at any position in a PDF document. Choose page size, count, and position.',
     seoDescription: 'Free online PDF Add Blank Page \u2014 Insert blank pages at any position in a PDF document. ',
     dependencies: "pdf-lib",
+    instructions: [
+      { title: "1. Upload Your PDF", desc: "Drag and drop or select the PDF file you want to add blank pages to." },
+      { title: "2. Choose Position and Count", desc: "Select where to insert blank pages (before page 1, after page N, or at the end) and how many blank pages to add." },
+      { title: "3. Download the Result", desc: "Click process to insert the blank pages, then download the modified PDF." },
+    ],
+    faqs: [
+      { question: "What page sizes are supported?", answer: "The blank pages inherit the size of the adjacent page by default. You can also choose A4, Letter, or custom dimensions." },
+      { question: "Can I add blank pages between specific pages?", answer: "Yes. Enter the page number after which you want to insert blank pages. For example, entering '3' inserts blank pages after page 3." },
+    ],
   },
   {
     id: "950",

@@ -49,10 +49,10 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   const dep = (tool.dependencies || '').toLowerCase();
   const cat = (tool.category || '').toLowerCase();
 
-  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'canvas api'];
+  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs'];
   const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'converter', 'archive', 'document', 'transcription'].includes(cat);
 
-  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page'))) {
+  if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc'))) {
     return { pattern: 'upload-process-download' };
   }
 
@@ -71,7 +71,8 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
       return { pattern: 'upload-convert-download', inputType };
     }
   }
-  if (dep.includes('canvas') || dep.includes('fabric') || dep.includes('cropper')) {
+  // Canvas/Fabric = visual editor ONLY if tool name implies editing (not generating placeholders)
+  if ((dep.includes('fabric') || dep.includes('cropper')) && (n.includes('edit') || n.includes('draw') || n.includes('crop') || n.includes('design'))) {
     return { pattern: 'upload-edit-visual-download' };
   }
 
@@ -85,7 +86,10 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
     return { pattern: 'enter-values-result' };
   }
 
-  if (dep.includes('api') && !dep.includes('vanilla') && !dep.includes('canvas')) {
+  // AI pattern: only match actual AI/API dependencies, not Web Audio API or fetch API
+  const aiApiDeps = ['openai', 'anthropic', 'gemini', 'huggingface', 'replicate', 'stability', 'ai api', 'ai provider'];
+  const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('vanilla') && !dep.includes('canvas'));
+  if (isAiDep) {
     return { pattern: 'ai-generate' };
   }
   if (n.includes('text to speech') || n.includes('tts') || n.includes('speech to text') || n.includes('transcri')) {
@@ -99,10 +103,19 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
     return { pattern: 'click-generate', hasOptions: true };
   }
 
-  if (cat === 'developer' || cat === 'text' || cat === 'seo' || cat === 'privacy') {
+  // Category-based patterns: only for categories where paste-text-process-copy is actually correct
+  if (cat === 'developer' || cat === 'seo') {
     return { pattern: 'paste-text-process-copy' };
   }
-  if (dep.includes('vanilla js') || dep.includes('fast-xml-parser') || dep.includes('json')) {
+  // Privacy tools: check name for text-processing intent, not just category
+  if (cat === 'privacy' && (n.includes('encrypt') || n.includes('decrypt') || n.includes('hash') || n.includes('password') || n.includes('pgp') || n.includes('key'))) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  // Text tools: check name for text-processing intent
+  if (cat === 'text' && (n.includes(' formatter') || n.includes(' validator') || n.includes(' counter') || n.includes(' case') || n.includes(' revers') || n.includes(' clean') || n.includes(' sort') || n.includes(' find') || n.includes(' replac') || n.includes(' remov') || n.includes(' dedup'))) {
+    return { pattern: 'paste-text-process-copy' };
+  }
+  if (dep.includes('fast-xml-parser') || dep.includes('json')) {
     return { pattern: 'paste-text-process-copy' };
   }
 

@@ -30,7 +30,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Avatar Generator — Generate avatar initials SVG from any name with customizable background color, text color, and size. Perfect for profile placeholders. ',
     dependencies: "None",
-},
+  },
   {
 
     id: "782",
@@ -309,7 +309,7 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Counter Tool \u2014 Simple increment/decrement counter with a reset option. Track anything from reps to inventory counts. ',
     dependencies: "None",
-},
+  },
   {
 
     id: "818",
@@ -1649,6 +1649,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     description: 'Remove duplicate words from text while preserving the first occurrence and original word order. Leaves line structure intact — only targets repeated words, not lines.',
     seoDescription: 'Free online Duplicate Word Remover — Remove repeated words from text while preserving first occurrence and original order. Keeps line structure intact. Instant local processing.',
     dependencies: "None",
+    instructions: [
+      { title: "1. Paste Your Text", desc: "Enter the text containing duplicate words into the input area." },
+      { title: "2. Remove Duplicates", desc: "Click the remove button to scan for and eliminate repeated words." },
+      { title: "3. Copy Clean Text", desc: "Copy the cleaned output with only the first occurrence of each word preserved." },
+    ],
+    faqs: [
+      { question: "Does this remove duplicate lines or just words?", answer: "Words only. Each line is processed independently — if the same word appears multiple times within a line, only the first occurrence is kept. Duplicate lines are preserved." },
+      { question: "Is case-sensitive?", answer: "Yes. 'The' and 'the' are treated as different words. If you want case-insensitive deduplication, convert all text to lowercase first." },
+    ],
   },
   {
     id: "976",

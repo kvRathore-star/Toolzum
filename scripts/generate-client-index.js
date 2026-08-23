@@ -92,6 +92,11 @@ export interface ClientToolEntry {
 }
 
 export const clientToolsRegistry: ClientToolEntry[] = ${JSON.stringify(entries, null, 2)};
+
+const _clientToolsBySlug = new Map(clientToolsRegistry.map(t => [t.slug, t]));
+export function getClientToolBySlug(slug: string): ClientToolEntry | undefined {
+  return _clientToolsBySlug.get(slug);
+}
 `;
 
 fs.writeFileSync(OUT_FILE, output);

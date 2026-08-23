@@ -194,7 +194,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: 'Privacy',
     description: 'Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. No signup or account required.',
     seoDescription: 'Free online Privacy Cleaner — Scans and clears browser cookies, localStorage, sessionStorage, and cached data for the current site. ',
-    dependencies: 'Vanilla JS'
+    dependencies: 'Vanilla JS',
   },
   {
     id: "7",
@@ -1549,7 +1549,17 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert between plain text and binary in both directions — encode text into its base-2 representation or decode binary strings back to readable text, byte by byte. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Text ↔ Binary Converter — Encode text to binary or decode binary back to text in both directions, byte by byte. ',
     dependencies: "Vanilla JS",
-},
+    instructions: [
+      { title: "1. Enter Your Text or Binary", desc: "Type or paste text to encode, or enter space-separated binary values (e.g., 01001000 01100101) to decode." },
+      { title: "2. Convert", desc: "Click the convert button — text is encoded to binary, or binary is decoded to readable text." },
+      { title: "3. Copy the Result", desc: "Copy the converted output to your clipboard." },
+    ],
+    faqs: [
+      { question: "What encoding is used?", answer: "Text is converted to binary using UTF-8 encoding. Each character is represented as its 8-bit binary equivalent (e.g., 'A' = 01000001)." },
+      { question: "How do I separate binary values?", answer: "Use spaces between 8-bit groups (e.g., 01001000 01100101). Commas are also accepted as separators." },
+      { question: "Does this handle special characters?", answer: "Yes. UTF-8 encoding supports all Unicode characters including accented letters, emoji, and non-Latin scripts." },
+    ],
+  },
   {
     id: "161",
     name: "Break-Even Calculator",

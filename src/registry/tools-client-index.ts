@@ -1466,7 +1466,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Brand Color Palette Generator",
     "slug": "brand-color-palette-generator",
     "category": "Branding",
-    "description": "AI-powered brand color palette generator. Describe your brand and get a complete 6-color palette with usage suggestions for designers.",
+    "description": "Describe your brand and get a complete 6-color palette with usage suggestions for designers. Uses AI to generate harmonious color schemes.",
     "isPro": false
   },
   {
@@ -4098,7 +4098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Modulo Calculator",
     "slug": "modulo-calculator",
     "category": "Calculator",
-    "description": "Calculate the remainder of division (a mod b). Shows quotient, remainder, and the full division expression. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate the remainder of division (a mod b). Shows quotient, remainder, full division expression, and negative dividend semantics. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -4146,7 +4146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rounding Calculator",
     "slug": "rounding-calculator",
     "category": "Calculator",
-    "description": "Round numbers to the nearest whole, tenth, hundredth, thousandth, or decimal places. Shows intermediate rounding steps. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Round numbers using 5 modes: round half up, banker\\",
     "isPro": false
   },
   {
@@ -5335,4 +5335,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
   }
 ];
 
-export const getClientToolBySlug = (slug: string) => clientToolsRegistry.find(t => t.slug === slug);
+const _clientToolsBySlug = new Map(clientToolsRegistry.map(t => [t.slug, t]));
+export function getClientToolBySlug(slug: string): ClientToolEntry | undefined {
+  return _clientToolsBySlug.get(slug);
+}

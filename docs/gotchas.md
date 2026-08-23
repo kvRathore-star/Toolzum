@@ -59,3 +59,15 @@ Hard-won knowledge from debugging production issues. Read before modifying relat
 **Fix:** `src/components/tools/modules/utility/BulkToolShell.tsx:74-87` — `createImageBitmap()` probe at upload time. If decoding fails, the file is rejected with a clear toast: `"filename" is not a valid image — skipped.` Only runs for image-accepting tools (`accept !== '*/*'`). Commit `f8a9353`.
 
 **Prevention:** Any file input that accepts images should validate content, not just extension. The `createImageBitmap` probe pattern is the standard approach. If adding a new batch tool, ensure `BulkToolShell` handles the validation — don't bypass it with a custom upload handler.
+
+## 7. Classifier: audio-converter and text-to-speech get wrong How-to templates
+
+**What's wrong:** `deriveInteractionPattern()` in `ToolPageSEOContent.tsx` gives these tools incorrect patterns:
+- `audio-converter` → `other` (falls through all patterns). The converter check at line 81 (`n.includes('converter') && !hasFileInput`) requires `!hasFileInput`, but the Audio category forces `hasFileInput=true`. So the converter pattern is skipped and it falls to `other`, which uses a generic category template.
+- `text-to-speech` → `upload-convert-download` (instead of `ai-generate`). The name "Text to Speech" matches the "X to Y" regex at line 59, and Audio category makes `hasFileInput=true`, so it gets file-conversion steps instead of AI-generation steps. The TTS-specific check at line 91 never runs because upload-convert-download returns first.
+
+**Root cause:** The converter check guards on `!hasFileInput`, which excludes all audio/video/pdf/image category tools even when they're format converters. The "X to Y" regex matches before the TTS-specific check.
+
+**Fix (not yet done):** Either (a) add `audio-converter` to a known-slugs exclusion list that skips the "X to Y" pattern, or (b) move the TTS check above the converter check, or (c) add a `!n.includes('speech')` guard to the "X to Y" regex. Low priority — these tools still work, just get generic How-to steps.
+
+**Discovered:** 2026-08-23 during classifier audit. Pre-existing, not caused by any session changes.

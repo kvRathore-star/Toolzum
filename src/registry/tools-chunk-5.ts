@@ -295,7 +295,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Image Placeholder Generator — Generate SVG image placeholders as base64 data URIs with configurable dimensions and random background colors for prototyping. ',
     dependencies: "Canvas API",
-},
+  },
   {
 
     id: "gt-10",

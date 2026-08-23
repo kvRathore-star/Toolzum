@@ -256,7 +256,17 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Apple Music Preview Extractor — Extracts publicly available 30-to-90-second audio preview clips from Apple Music by resolving the store URL. ',
     category: 'Audio',
     id:  "252",
-    dependencies: 'fetch API'
+    dependencies: 'fetch API',
+    instructions: [
+      { title: "1. Paste the Apple Music URL", desc: "Copy a song or album URL from Apple Music and paste it into the input field." },
+      { title: "2. Extract the Preview", desc: "Click extract to resolve the URL and fetch the publicly available preview clip." },
+      { title: "3. Download the Audio", desc: "Listen to the preview and download the MP3 clip to your device." },
+    ],
+    faqs: [
+      { question: "What URL formats are supported?", answer: "Paste any Apple Music song or album URL (music.apple.com/...). The tool extracts the preview clip ID from the URL and fetches the publicly available 30-90 second preview." },
+      { question: "Does this download full songs?", answer: "No. This tool only extracts the publicly available preview clips that Apple Music provides for free. Full song downloads require an Apple Music subscription." },
+      { question: "Do I need an Apple Music account?", answer: "No. The preview clips are publicly available and don't require authentication. The tool fetches them directly from Apple's CDN." },
+    ],
   },
   {
     name: 'Marriage Biodata Maker',
@@ -342,7 +352,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Social Media Calendar — Lets users plan and schedule social media posts across multiple platforms in a visual calendar view with draft, scheduled. ',
     category: 'Branding',
     id:  "268",
-    dependencies: 'localStorage'
+    dependencies: 'localStorage',
+    instructions: [
+      { title: "1. Create a Post", desc: "Click on a calendar date to create a new post. Enter your content and select the target platform." },
+      { title: "2. Schedule or Save as Draft", desc: "Set the publish date and time, or save as a draft for later editing." },
+      { title: "3. Manage Your Calendar", desc: "Drag posts to reschedule, edit content inline, or delete posts you no longer need." },
+    ],
+    faqs: [
+      { question: "Does this post to social media automatically?", answer: "No. This is a planning and scheduling tool that stores posts locally. You manually publish each post at the scheduled time. No API connections to social platforms." },
+      { question: "Where is my data stored?", answer: "All posts are stored in your browser's localStorage. No data is sent to any server. Clearing browser data will remove your calendar." },
+    ],
   },
   {
     name: 'Bulk Background Changer',
@@ -477,7 +496,15 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Size Reducer — Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. ',
     dependencies: "pdf-lib",
-  
+    instructions: [
+      { title: "1. Add PDF Files", desc: "Drag and drop multiple PDF files or click to select them from your device." },
+      { title: "2. Choose Compression Level", desc: "Select low (best quality), medium (balanced), or high (smallest size) compression for the batch." },
+      { title: "3. Reduce and Download", desc: "Click reduce to compress all files. See before/after sizes and download the optimized PDFs." },
+    ],
+    faqs: [
+      { question: "How much can I reduce PDF size?", answer: "Compression results vary by content. Text-heavy PDFs typically reduce 10-20%. Image-heavy PDFs can reduce 50-80% depending on the compression level chosen." },
+      { question: "Does compression reduce quality?", answer: "Low compression preserves quality with minimal size reduction. Medium is balanced. High compression may reduce image quality for maximum size savings." },
+    ],
     },
   {
     id: "285",
@@ -513,8 +540,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk PDF Merger — Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. ',
     dependencies: "pdf-lib",
-  
-    },
+    instructions: [
+      { title: "1. Add PDF Files", desc: "Drag and drop multiple PDF files or click to select them from your device." },
+      { title: "2. Reorder if Needed", desc: "Drag files up or down to set the merge order. Files are joined in the order shown." },
+      { title: "3. Merge and Download", desc: "Click merge to combine all files into a single PDF, then download the result." },
+    ],
+    faqs: [
+      { question: "Is there a file count limit?", answer: "Free users can merge up to 5 files. Pro users can merge up to 500 files in a single operation." },
+      { question: "Does merging reduce quality?", answer: "No. The merger preserves the original quality, formatting, and embedded fonts of each source PDF." },
+    ],
+  },
   {
     id: "288",
     name: "Bulk Face Anonymizer",
@@ -553,7 +588,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. Everything runs locally in your browser — nothing is uploaded.",
     seoDescription: 'Free online Bulk Audio Normalizer — Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. ',
     dependencies: "Web Audio API",
-  
+    instructions: [
+      { title: "1. Add Audio Files", desc: "Drag and drop multiple audio files (MP3, WAV, OGG, M4A) or click to select them." },
+      { title: "2. Choose LUFS Target", desc: "Select a loudness target: –14 LUFS (streaming), –16 LUFS (podcasts), or –24 LUFS (broadcast)." },
+      { title: "3. Normalize and Download", desc: "Click normalize to adjust loudness across all files. Download the normalized audio files." },
+    ],
+    faqs: [
+      { question: "What is LUFS?", answer: "Loudness Units Full Scale — the industry standard for measuring perceived loudness. Streaming platforms (Spotify, YouTube) target –14 LUFS. Podcasts typically use –16 LUFS." },
+      { question: "Does normalization change audio quality?", answer: "No. Loudness normalization adjusts the overall volume level without altering the audio content. Dynamic range and frequency balance are preserved." },
+      { question: "What audio formats are supported?", answer: "MP3, WAV, OGG, FLAC, and M4A. Output format matches the input format." },
+    ],
     },
   {
     id: "292",
@@ -754,9 +798,9 @@ export const entries_chunk_1: ToolMetadata[] = [
     name: "Brand Color Palette Generator",
     slug: "brand-color-palette-generator",
     category: "Branding",
-    description: "AI-powered brand color palette generator. Describe your brand and get a complete 6-color palette with usage suggestions for designers.",
-    seoDescription: "Free online Brand Color Palette Generator — AI-powered brand color palette generator. Describe your brand and receive a complete 6-color palette with hex codes and designer usage notes. ",
-    dependencies: "None",
+    description: "Describe your brand and get a complete 6-color palette with usage suggestions for designers. Uses AI to generate harmonious color schemes.",
+    seoDescription: "Free online Brand Color Palette Generator — Describe your brand and receive a complete 6-color palette with hex codes and designer usage notes. ",
+    dependencies: "AI API",
   },
   {
     id: "auto-10031",
@@ -1426,6 +1470,16 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Grammar Checker — Check and correct grammar, spelling, and punctuation. Detects homophones, misspellings, and more. ',
     dependencies: "none",
     showInCategory: true,
+    instructions: [
+      { title: "1. Paste Your Text", desc: "Enter or paste the text you want to check into the input area." },
+      { title: "2. Run the Check", desc: "Click the check button to scan for grammar, spelling, and punctuation errors." },
+      { title: "3. Review and Fix", desc: "See each error highlighted with a suggestion. Click to accept the fix or ignore it." },
+    ],
+    faqs: [
+      { question: "What types of errors does this detect?", answer: "Grammar mistakes, spelling errors, punctuation issues, homophone confusion (their/there/they're), misspellings, and run-on sentences." },
+      { question: "Does this require an API key?", answer: "No. The grammar checker runs entirely in your browser using local pattern matching. No data is sent to any server." },
+      { question: "How accurate is it?", answer: "The checker catches common errors but isn't a replacement for professional editing. It's designed for quick proofreading of everyday text." },
+    ],
   },
   {
     id: "357",

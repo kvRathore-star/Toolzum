@@ -273,22 +273,72 @@ export function NginxConfigGenerator() {
 
 export function IpAllowlistGenerator() {
   const [list, setList] = useState('192.168.1.0/24\n10.0.0.0/8');
+  const [format, setFormat] = useState<'nginx' | 'apache' | 'iptables' | 'aws' | 'cloudflare'>('nginx');
   const [output, setOutput] = useState('');
 
   const generate = () => {
-    const lines = list.split('\n').filter(Boolean);
-    const allow = lines.map(l => `  allow ${l.trim()};`).join('\n');
-    setOutput(`${allow}\n  deny all;`);
+    const lines = list.split('\n').map(l => l.trim()).filter(Boolean);
+    let out = '';
+    switch (format) {
+      case 'nginx':
+        out = lines.map(l => `  allow ${l};`).join('\n') + '\n  deny all;';
+        break;
+      case 'apache':
+        out = lines.map(l => `  Require ip ${l}`).join('\n') + '\n  Require all denied';
+        break;
+      case 'iptables':
+        out = lines.map(l => `iptables -A INPUT -s ${l} -j ACCEPT`).join('\n') + '\niptables -A INPUT -j DROP';
+        break;
+      case 'aws':
+        out = JSON.stringify({
+          IpPermissions: [{
+            IpProtocol: 'tcp',
+            FromPort: 443,
+            ToPort: 443,
+            IpRanges: lines.map(l => ({ CidrIp: l, Description: 'Allowed IP' })),
+          }],
+        }, null, 2);
+        break;
+      case 'cloudflare':
+        out = lines.map(l => `  "${l}": "allow"`).join(',\n');
+        break;
+    }
+    setOutput(out);
   };
+
+  const formats = [
+    { key: 'nginx' as const, label: 'Nginx' },
+    { key: 'apache' as const, label: 'Apache' },
+    { key: 'iptables' as const, label: 'iptables' },
+    { key: 'aws' as const, label: 'AWS SG' },
+    { key: 'cloudflare' as const, label: 'Cloudflare' },
+  ];
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Allowlist Generator</h2>
-        <textarea rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line"
+        <p className="text-xs text-[var(--text-secondary)]">Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Cloudflare WAF from CIDR ranges.</p>
+        <textarea rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <div className="flex gap-1 flex-wrap">
+          {formats.map(f => (
+            <button key={f.key} onClick={() => { setFormat(f.key); setOutput(''); }}
+              className={`px-3 py-1 text-xs rounded-lg border transition-colors ${format === f.key ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>
+              {f.label}
+            </button>
+          ))}
+        </div>
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && (
+          <div className="relative">
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
+            <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }}
+              className="absolute top-2 right-2 text-xs bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded px-2 py-1 hover:bg-[var(--bg-overlay)]">
+              Copy
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

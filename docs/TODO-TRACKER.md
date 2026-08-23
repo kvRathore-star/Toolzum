@@ -17,7 +17,7 @@ Last updated: 2026-08-23
 - [x] 6. Build-time profiling — 12min fresh build: TypeScript 5.5min, compilation 3.2min, SSG 3.2min. Nothing pathological. (15 min)
 - [x] 7. Icon system unification — emoji → lucide-react in megamenu/categories (30-60 min)
 - [x] 7b. One-way converter upgrade — examples, conversion factors, references for 6 tools; Time & Data Size flipped to two-way; specific FAQs (150 lines)
-- [ ] 8. Thin-tool audit — pick 3 thinnest, propose what extra lines add real value (30 min)
+- [x] 8. Thin-tool audit — merged 3 time converter clones into bidirectional time-converter; upgraded rounding calculator (5 modes + step display); upgraded modulo calculator (JS/Python semantics + long-division); added FAQs for all 3 (commit a796dcc)
 
 ## Blocked on Decisions
 - [ ] 9. Email capture — where do signups go?
