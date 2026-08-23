@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback } from 'react';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 const PORTS: Record<number, string> = {
   20: 'FTP Data', 21: 'FTP Control', 22: 'SSH', 23: 'Telnet', 25: 'SMTP',
@@ -159,6 +160,7 @@ export function RateLimitHeaderParser() {
 export function PricingTierBuilder() {
   const [tiers, setTiers] = useState('[{"name": "Free", "price": 0, "users": 1}, {"name": "Pro", "price": 29, "users": 50}]');
   const [result, setResult] = useState('');
+
   const build = () => {
     try {
       const parsed = JSON.parse(tiers);
@@ -171,13 +173,29 @@ export function PricingTierBuilder() {
       setResult(out);
     } catch { setResult('Invalid JSON — check your tier format'); }
   };
+
+  const presets = [
+    { label: 'Freemium', apply: () => setTiers('[{"name":"Free","price":0,"users":1},{"name":"Pro","price":29,"users":50,"features":["Analytics","API"]},{"name":"Enterprise","price":99,"users":Infinity,"features":["SSO","SLA","Support"]}]') },
+    { label: 'SaaS Standard', apply: () => setTiers('[{"name":"Starter","price":9,"users":5},{"name":"Growth","price":49,"users":100},{"name":"Scale","price":199,"users":Infinity}]') },
+    { label: 'Clear', apply: () => setTiers('[]') },
+  ];
+
+  const resultText = result ? 'Pricing tiers built' : 'Enter tiers JSON to build';
+
   return (
-    <Section title="Pricing Tier Builder">
-      <div className="space-y-3">
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label><textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder='[{"name": "Free", "price": 0, "users": 1}]' /></div>
-        <button onClick={build} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Build</button>
-        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+    <CalculatorShell title="Pricing Tier Builder" result={resultText} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
+        <textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y"
+          placeholder='[{"name": "Free", "price": 0, "users": 1, "features": ["Basic"]}]' />
+
+        <button onClick={build} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Build</button>
+
+        {result && (
+          <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }

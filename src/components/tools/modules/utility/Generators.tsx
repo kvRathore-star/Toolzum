@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import QRCodeLib from 'qrcode';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function randInt(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function randItem<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -543,47 +544,119 @@ const NICKNAME_PATTERNS = [
   { name: 'Gamer Tag', get: () => `xX${randItem(ADJECTIVES)}${randItem(NOUNS)}${randInt(1, 99)}Xx` },
 ];
 export function NicknameGenerator() {
-  const [patternIdx, setPatternIdx] = useState(0); const [count, setCount] = useState(10); const [results, setResults] = useState<string[]>([]);
+  const [patternIdx, setPatternIdx] = useState(0);
+  const [count, setCount] = useState(10);
+  const [results, setResults] = useState<string[]>([]);
   const generate = () => { const n: string[] = []; for (let i = 0; i < count; i++) n.push(NICKNAME_PATTERNS[patternIdx].get()); setResults(n); };
 
+  const presets = [
+    { label: 'Gamer', apply: () => { setPatternIdx(0); setCount(10); generate(); } },
+    { label: 'Fantasy', apply: () => { setPatternIdx(1); setCount(10); generate(); } },
+    { label: 'Sci-Fi', apply: () => { setPatternIdx(2); setCount(10); generate(); } },
+    { label: 'Cute', apply: () => { setPatternIdx(3); setCount(10); generate(); } },
+    { label: 'Professional', apply: () => { setPatternIdx(4); setCount(10); generate(); } },
+  ];
+
+  const resultText = results.length > 0 ? `Generated ${results.length} nicknames (${NICKNAME_PATTERNS[patternIdx].name})` : 'Select pattern and generate';
+
   return (
-    <Section title="Nickname Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pattern</label>
-            <select value={patternIdx} onChange={e => setPatternIdx(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">{NICKNAME_PATTERNS.map((p, i) => (<option key={i} value={i}>{p.name}</option>))}</select>
-          </div>
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <button onClick={generate} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Nicknames</button>
+    <CalculatorShell title="Nickname Generator" result={resultText} onCalculate={generate} presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
+      <div className="space-y-4">
+        <div>
+          <label className={labelClass}>Pattern</label>
+          <select value={patternIdx} onChange={e => setPatternIdx(Number(e.target.value))}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500/50">
+            {NICKNAME_PATTERNS.map((p, i) => (<option key={i} value={i}>{p.name}</option>))}
+          </select>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">{results.length > 0 ? (<div className="space-y-1 max-h-[250px] overflow-y-auto">{results.map((n, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span>{n}</span><button onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-pink-500 hover:underline"><Copy size={12} /></button></div>))}<button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate creative nicknames</p>)}</div>
+        <div>
+          <label className={labelClass}>Count</label>
+          <input type="number" min={1} max={100} value={String(count)} onChange={e => setCount(Number(e.target.value))}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500/50" />
+        </div>
+
+        <button onClick={generate} className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Nicknames</button>
+
+        {results.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+            <div className="space-y-1 max-h-[250px] overflow-y-auto">
+              {results.map((n, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
+                  <span>{n}</span>
+                  <button onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-pink-500 hover:underline"><Copy size={12} /></button>
+                </div>
+              ))}
+            </div>
+            <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
 // === 22. AvatarGenerator ===
 export function AvatarGenerator() {
-  const [name, setName] = useState('John Doe'); const [bgColor, setBgColor] = useState('#4F46E5'); const [textColor, setTextColor] = useState('#FFFFFF'); const [size, setSize] = useState(120); const [shape, setShape] = useState('rounded');
+  const [name, setName] = useState('John Doe');
+  const [bgColor, setBgColor] = useState('#4F46E5');
+  const [textColor, setTextColor] = useState('#FFFFFF');
+  const [size, setSize] = useState(120);
+  const [shape, setShape] = useState<'rounded' | 'circle' | 'square'>('rounded');
   const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2) || '?';
   const svgRef = useRef<SVGSVGElement>(null);
-  const shapes: Record<string, number> = { rounded: 0.2, circle: 0.5, square: 0 };
+  const shapes = { rounded: 0.2, circle: 0.5, square: 0 };
+
+  const presets = [
+    { label: 'John Doe', apply: () => { setName('John Doe'); setBgColor('#4F46E5'); setTextColor('#FFFFFF'); } },
+    { label: 'Jane Smith', apply: () => { setName('Jane Smith'); setBgColor('#10B981'); setTextColor('#FFFFFF'); } },
+    { label: 'Alex Chen', apply: () => { setName('Alex Chen'); setBgColor('#F59E0B'); setTextColor('#000000'); } },
+    { label: 'Default', apply: () => { setName('John Doe'); setBgColor('#4F46E5'); setTextColor('#FFFFFF'); setSize(120); setShape('rounded'); } },
+  ];
+
+  const resultText = `Avatar: ${initials} (${size}px, ${shape})`;
 
   return (
-    <Section title="Avatar Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Name" value={name} onChange={v => setName(v)} placeholder="Enter a name..." />
-          <div className="flex gap-3"><div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label><input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" /></div><div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label><input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" /></div></div>
-          <div className="space-y-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size: {size}px</label><input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-indigo-500" /></div>
-          <div className="flex gap-2"><span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>{Object.entries(shapes).map(([k]) => (<button key={k} onClick={() => setShape(k)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${shape === k ? 'bg-indigo-500/10 border-indigo-400 text-indigo-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>{k.charAt(0).toUpperCase() + k.slice(1)}</button>))}</div>
+    <CalculatorShell title="Avatar Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
+      <div className="space-y-4">
+        <label className={labelClass}>Name</label>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
+            <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+            <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[200px]">
-          <svg ref={svgRef} width={size} height={size} viewBox={`0 0 ${size} ${size}`} xmlns="http://www.w3.org/2000/svg"><rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} /><text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text></svg>
-          <div className="flex gap-2 mt-3"><button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button><button onClick={() => { clipboardWrite(initials); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div>
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size: {size}px</label>
+        <input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-indigo-500" />
+
+        <div className="flex gap-2">
+          <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>
+          {Object.entries(shapes).map(([k, v]) => (
+            <button key={k} onClick={() => setShape(k as 'rounded' | 'circle' | 'square')}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${shape === k ? 'bg-indigo-500/10 border-indigo-400 text-indigo-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
+              {k.charAt(0).toUpperCase() + k.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center justify-center min-h-[200px] bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
+          <svg ref={svgRef} width={size} height={size} viewBox={`0 0 ${size} ${size}`} xmlns="http://www.w3.org/2000/svg">
+            <rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} />
+            <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text>
+          </svg>
+          <div className="flex gap-2 mt-3">
+            <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button>
+            <button onClick={() => { clipboardWrite(initials); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
         </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }

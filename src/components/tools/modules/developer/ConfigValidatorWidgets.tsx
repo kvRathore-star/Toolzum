@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -289,9 +290,11 @@ export function XpathValidator() {
 export function CronExpressionValidator() {
   const [input, setInput] = useState('*/5 * * * *');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     const parts = input.trim().split(/\s+/);
-    if (parts.length !== 5 && parts.length !== 6) { setOutput('Expected 5 fields (minute hour day month weekday)'); return; }
+    if (parts.length !== 5 && parts.length !== 6) { setOutput('Expected 5 fields (minute hour day month weekday)'); setIsValid(false); return; }
     const ranges = [{ name: 'minute', min: 0, max: 59 }, { name: 'hour', min: 0, max: 23 }, { name: 'day', min: 1, max: 31 }, { name: 'month', min: 1, max: 12 }, { name: 'weekday', min: 0, max: 7 }];
     const issues: string[] = [];
     const desc: string[] = [];
@@ -303,17 +306,36 @@ export function CronExpressionValidator() {
       if (p.includes('-')) { const [a, b] = p.split('-').map(v => parseInt(v)); if (isNaN(a) || isNaN(b) || a < r.min || b > r.max) issues.push(`${r.name}: range out of bounds`); else desc.push(`${r.name}: ${a}-${b}`); return; }
       const n = parseInt(p); if (isNaN(n) || n < r.min || n > r.max) issues.push(`${r.name}: "${p}" not in range ${r.min}-${r.max}`); else desc.push(`${r.name}: at ${n}`);
     });
+    setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : `Valid cron: ${parts.slice(0, 5).join(' ')}\n${desc.join('\n')}${parts[5] ? `\n(Cmd: ${parts.slice(5).join(' ')})` : ''}`);
     toast.success(issues.length ? 'Issues found' : 'Valid cron');
   };
+
+  const presets = [
+    { label: 'Every 5 min', apply: () => { setInput('*/5 * * * *'); validate(); } },
+    { label: 'Daily at 3am', apply: () => { setInput('0 3 * * *'); validate(); } },
+    { label: 'Weekly Monday', apply: () => { setInput('0 0 * * 1'); validate(); } },
+    { label: 'Monthly 1st', apply: () => { setInput('0 0 1 * *'); validate(); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const resultText = isValid ? '✓ Valid cron expression' : (output || 'Enter cron expression');
+
   return (
-    <Section title="Cron Expression Validator">
-      <div className="space-y-3">
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" placeholder="*/5 * * * *" />
-        <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday</p>
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
+    <CalculatorShell title="Cron Expression Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="cron-validation.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Cron Expression</label>
+        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="*/5 * * * *"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+        <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday (optional 6th: command)</p>
+        <button onClick={validate} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Validate</button>
+
+        {output && (
+          <pre className={`p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ${isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>
+            {output}
+          </pre>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }

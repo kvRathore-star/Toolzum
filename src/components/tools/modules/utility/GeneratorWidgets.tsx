@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -179,6 +180,7 @@ export function PinGenerator() {
   const [count, setCount] = useState(5);
   const [digits, setDigits] = useState(6);
   const [out, setOut] = useState('');
+
   const gen = () => {
     const lines = Array.from({ length: count }, () =>
       Array.from({ length: digits }, () => randInt(0, 9)).join('')
@@ -186,18 +188,37 @@ export function PinGenerator() {
     setOut(lines.join('\n'));
     toast.success('PINs generated');
   };
+
+  const presets = [
+    { label: '5 × 4-digit', apply: () => { setCount(5); setDigits(4); gen(); } },
+    { label: '10 × 6-digit', apply: () => { setCount(10); setDigits(6); gen(); } },
+    { label: '3 × 8-digit', apply: () => { setCount(3); setDigits(8); gen(); } },
+    { label: '20 × 4-digit', apply: () => { setCount(20); setDigits(4); gen(); } },
+  ];
+
+  const resultText = out ? `Generated ${count} PINs (${digits} digits each)` : 'Configure and generate';
+
   return (
-    <Section title="PIN Generator">
-      <CountSlider value={count} onChange={setCount} />
-      <div className="flex items-center gap-2">
-        <span className="text-sm text-[var(--text-secondary)]">Digits</span>
-        {[4, 5, 6, 8, 10].map(n => (
-          <button key={n} onClick={() => setDigits(n)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{n}</button>
-        ))}
+    <CalculatorShell title="PIN Generator" result={resultText} onCalculate={gen} presets={presets} accent="blue" downloadData={out} downloadFilename="pins.txt">
+      <div className="space-y-4">
+        <label className={labelClass}>Count</label>
+        <CountSlider value={count} onChange={setCount} />
+
+        <label className={labelClass}>Digits</label>
+        <div className="flex gap-1 flex-wrap">
+          {[4, 5, 6, 8, 10].map(n => (
+            <button key={n} onClick={() => { setDigits(n); gen(); }}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
+              {n}
+            </button>
+          ))}
+        </div>
+
+        <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate PINs</button>
+
+        {out && <OutputBlock value={out} />}
       </div>
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate PINs</button>
-      <OutputBlock value={out} />
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -319,6 +340,9 @@ export function OpenGraphGenerator() {
 export function OauthPkceGenerator() {
   const [out, setOut] = useState('');
   const [loading, setLoading] = useState(false);
+  const [verifier, setVerifier] = useState('');
+  const [challenge, setChallenge] = useState('');
+
   const generate = useCallback(async () => {
     setLoading(true);
     try {
@@ -332,6 +356,8 @@ export function OauthPkceGenerator() {
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
         .replace(/=+$/, '');
+      setVerifier(verifier);
+      setChallenge(challenge);
       setOut(`code_verifier (${verifier.length} chars):\n${verifier}\n\ncode_challenge (S256):\n${challenge}\n\nMethod: S256\nVerifier length: ${verifier.length} (RFC spec: 43-128) ✓`);
       toast.success('PKCE pair generated');
     } catch {
@@ -340,18 +366,30 @@ export function OauthPkceGenerator() {
       setLoading(false);
     }
   }, []);
+
+  const presets = [
+    { label: 'Generate', apply: () => generate() },
+    { label: 'Copy Verifier', apply: () => { if (verifier) clipboardWrite(verifier); toast.success('Verifier copied'); } },
+    { label: 'Copy Challenge', apply: () => { if (challenge) clipboardWrite(challenge); toast.success('Challenge copied'); } },
+    { label: 'Clear', apply: () => { setOut(''); setVerifier(''); setChallenge(''); } },
+  ];
+
+  const resultText = out ? `PKCE pair generated (${verifier.length} char verifier)` : 'Generate RFC 7636 PKCE pair';
+
   return (
-    <Section title="OAuth PKCE Generator">
-      <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
-      <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">
-        <li>48 random bytes → 64-char base64url verifier (spec: 43-128)</li>
-        <li>SHA-256 hash → base64url-encoded challenge (S256 method)</li>
-        <li>Output usable with any OAuth 2.0 PKCE-compliant provider</li>
-      </ul>
-      <button onClick={generate} disabled={loading} className={`w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
-        {loading ? 'Generating...' : 'Generate PKCE Pair'}
-      </button>
-      {out && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-64 overflow-y-auto">{out}</pre>}
-    </Section>
+    <CalculatorShell title="OAuth PKCE Generator" result={resultText} onCalculate={generate} presets={presets} accent="violet" downloadData={out} downloadFilename="pkce.txt">
+      <div className="space-y-4">
+        <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
+        <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">
+          <li>48 random bytes → 64-char base64url verifier (spec: 43-128)</li>
+          <li>SHA-256 hash → base64url-encoded challenge (S256 method)</li>
+          <li>Output usable with any OAuth 2.0 PKCE-compliant provider</li>
+        </ul>
+        <button onClick={generate} disabled={loading} className={`w-full px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
+          {loading ? 'Generating...' : 'Generate PKCE Pair'}
+        </button>
+        {out && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-64 overflow-y-auto">{out}</pre>}
+      </div>
+    </CalculatorShell>
   );
 }

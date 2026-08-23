@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function CopyBtn({ text }: { text: string }) {
   return (
@@ -416,15 +417,30 @@ export function TestDataGenerator() {
     } catch { toast.error('Invalid schema JSON'); }
   };
 
+  const presets = [
+    { label: 'User Profile', apply: () => setSchema('[{"name":"id","type":"number"},{"name":"email","type":"email"},{"name":"name","type":"string"},{"name":"active","type":"boolean"}]') },
+    { label: 'Product', apply: () => setSchema('[{"name":"id","type":"number"},{"name":"title","type":"string"},{"name":"price","type":"number"},{"name":"inStock","type":"boolean"}]') },
+    { label: 'Order', apply: () => setSchema('[{"name":"orderId","type":"string"},{"name":"userId","type":"number"},{"name":"total","type":"number"},{"name":"status","type":"string"},{"name":"createdAt","type":"date"}]') },
+    { label: 'Clear', apply: () => { setSchema('[]'); } },
+  ];
+
+  const resultText = output ? 'Test data generated from schema' : 'Enter JSON schema to generate test data';
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Data Generator</h2>
-        <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+    <CalculatorShell title="Test Data Generator" result={output || 'Enter schema to generate'} onCalculate={generate} presets={presets} accent="green" downloadData={output} downloadFilename="test-data.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {name, type})</label>
+        <textarea value={schema} onChange={e => setSchema(e.target.value)} rows={6} placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 resize-y" />
+
+        <button onClick={generate} className="px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate</button>
+
+        {output && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 max-h-[300px] overflow-auto">
+            <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
