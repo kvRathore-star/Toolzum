@@ -8,6 +8,7 @@ import type { ToolMetadata } from "@/registry/tools";
 import { Search, ChevronLeft, ChevronRight, Grid3X3, List, ChevronDown, PanelLeft, AlignJustify, ArrowUpDown, Crown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sparkles, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
+import { FavoriteStarButton } from "@/components/FavoriteStarButton";
 
 const CATEGORY_DISPLAY_NAMES: Record<string, string> = {
   'e-commerce': 'E-Commerce',
@@ -383,10 +384,13 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                         <div className={`w-9 h-9 rounded-xl ${theme.bgTint} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
                           <Icon className={`w-4 h-4 ${theme.iconColor}`} />
                         </div>
-                        <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
-                          {tool.category}
-                        </span>
-                        {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
+                            {tool.category}
+                          </span>
+                          {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
+                          <FavoriteStarButton slug={tool.slug} />
+                        </div>
                       </div>
                       <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                         {tool.name}

@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, real, primaryKey, index } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -82,5 +82,14 @@ export const analyticsEvents = sqliteTable("analytics_event", {
   viewport: text("viewport"),
   createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
 });
+
+export const userFavorites = sqliteTable("user_favorite", {
+  userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  toolSlug: text("toolSlug").notNull(),
+  createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
+}, (t) => [
+  primaryKey({ columns: [t.userId, t.toolSlug] }),
+  index("user_favorite_userId_idx").on(t.userId),
+]);
 
 

@@ -4,8 +4,9 @@ import React, { useMemo } from "react";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Search, Sparkles, Zap, Layout, Sun, Moon, Home } from "lucide-react";
+import { Search, Sparkles, Zap, Layout, Sun, Moon, Home, Star } from "lucide-react";
 import { toolsRegistry } from "@/registry/tools";
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface CommandMenuProps {
   open: boolean;
@@ -17,6 +18,7 @@ interface CommandMenuProps {
 export function CommandMenu({ open, onClose }: CommandMenuProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+  const { favorites } = useFavorites();
 
   const runCommand = (command: () => void) => {
     onClose();
@@ -60,6 +62,28 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
               <Command.Empty className="py-12 text-center text-sm text-[var(--text-muted)]">
                 No matching tools or settings found.
               </Command.Empty>
+
+              {favorites.size > 0 && (
+                <Command.Group heading="Your Favorites" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
+                  {Array.from(favorites).map(slug => {
+                    const tool = toolsRegistry.find(t => t.slug === slug);
+                    if (!tool) return null;
+                    return (
+                      <Command.Item
+                        key={slug}
+                        onSelect={() => runCommand(() => router.push(`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`))}
+                        className="flex items-center h-[48px] px-3 rounded-[var(--radius-md)] text-[14px] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer data-[selected=true]:bg-[var(--bg-surface)] data-[selected=true]:text-[var(--text-primary)] transition-colors group"
+                      >
+                        <Star className="w-4 h-4 fill-amber-400 text-amber-400 mr-3" />
+                        <span className="font-medium flex-1 text-left">{tool.name}</span>
+                        <span className="text-[11px] font-mono text-[var(--text-muted)] px-2 bg-[var(--bg-overlay)] rounded-full">
+                          {tool.category}
+                        </span>
+                      </Command.Item>
+                    );
+                  })}
+                </Command.Group>
+              )}
 
               <Command.Group heading="Actions" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
                 <Command.Item

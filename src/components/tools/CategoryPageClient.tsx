@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ToolMetadata, ToolCategory } from "@/registry/tools";
 import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown, ArrowUpDown } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
+import { FavoriteStarButton } from "@/components/FavoriteStarButton";
 import type { CategorySection } from "@/data/categorySections";
 
 interface CategoryPageClientProps {
@@ -521,6 +522,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                         <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
                           <Icon className={`w-4 h-4 ${color}`} />
                         </div>
+                        <FavoriteStarButton slug={tool.slug} />
                       </div>
                       <h3 className="text-base font-medium text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
                         {tool.name}

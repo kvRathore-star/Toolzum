@@ -18,6 +18,9 @@ import {
   getWhyChoose, getStatsBar
 } from '@/data/homepage';
 import { useIsIndia } from '@/hooks/useIsIndia';
+import { useFavorites } from '@/hooks/useFavorites';
+import { FavoriteStarButton } from '@/components/FavoriteStarButton';
+import { getToolBySlug } from '@/registry/tools';
 
 const { localTools, cloudTools, hybridTools, totalImplemented } = getCachedToolCounts();
 const totalCloud = cloudTools + hybridTools;
@@ -42,6 +45,7 @@ const itemVariants = {
 export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { isIndia?: boolean; popularTools: PopularTool[]; categoryCounts: CategoryCount[] }) {
   const [activeTab, setActiveTab] = useState("compress");
   const showIndia = useIsIndia(isIndia);
+  const { favorites, isLoading: favoritesLoading } = useFavorites();
 
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
@@ -386,6 +390,63 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
           ))}
         </div>
       </section>
+
+      {/* ===== 6.5. YOUR FAVORITES ===== */}
+      {!favoritesLoading && favorites.size > 0 && (
+        <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            className="flex items-center justify-between mb-12"
+          >
+            <div>
+              <h2 className="font-[family-name:var(--font-serif)] text-4xl text-[var(--text-primary)] flex items-center gap-3">
+                <Star className="w-8 h-8 fill-amber-400 text-amber-400" />
+                Your Favorites
+              </h2>
+              <p className="text-sm text-[var(--text-secondary)] mt-2">Tools you&apos;ve saved for quick access.</p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from(favorites).map((slug, i) => {
+              const tool = getToolBySlug(slug);
+              if (!tool) return null;
+              const theme = getCategoryTheme(tool.category);
+              const Icon = theme.icon;
+              return (
+                <motion.div
+                  key={slug}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                >
+                  <Link
+                    href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+                    className="group block h-full relative"
+                  >
+                    <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-sm hover:shadow-[var(--shadow-md)] hover:border-[var(--border-default)] hover:-translate-y-1 ${theme.gradientHover}`}>
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`w-8 h-8 rounded-full ${theme.bgTint} flex items-center justify-center`}>
+                          <Icon className={`w-4 h-4 ${theme.iconColor}`} />
+                        </div>
+                        <FavoriteStarButton slug={slug} />
+                      </div>
+                      <h3 className="font-semibold text-[var(--text-primary)] mb-1 group-hover:text-[var(--accent)] transition-colors flex items-center gap-2">
+                        {tool.name}
+                        <ChevronRight className="w-3.5 h-3.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      </h3>
+                      <p className="text-xs text-[var(--text-secondary)] line-clamp-2">{tool.description}</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* ===== 7. POPULAR TOOLS ===== */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">

@@ -16,6 +16,7 @@ import { DownloadLimitModal } from '@/components/tools/DownloadLimitModal';
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import { ShareTool } from '@/components/ShareTool';
+import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
@@ -202,6 +203,8 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             {BULK_PRESET_SLUGS.has(slug) && <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>}
             {BULK_PRESET_SLUGS.has(slug) && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             <ShareTool title={title} slug={slug} category={category} />
+            <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+            <FavoriteStarButton slug={slug} />
             {!hideDownloadQuota && <DownloadQuotaBadge />}
           </div>
 
