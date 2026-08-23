@@ -113,15 +113,55 @@ export function PercentageChangeCalculator() {
   const clr = ac('PercentageChangeCalculator');
   const [a, setA] = useState('100');
   const [b, setB] = useState('120');
-  const change = Number(a) ? ((Number(b) - Number(a)) / Number(a) * 100) : 0;
+  const oldVal = Number(a), newVal = Number(b);
+  const change = oldVal ? ((newVal - oldVal) / oldVal * 100) : 0;
+  const diff = newVal - oldVal;
+
+  const presets = [
+    { label: '100 → 120', apply: () => { setA('100'); setB('120'); } },
+    { label: '50 → 75', apply: () => { setA('50'); setB('75'); } },
+    { label: '200 → 150', apply: () => { setA('200'); setB('150'); } },
+    { label: '1000 → 850', apply: () => { setA('1000'); setB('850'); } },
+  ];
+
+  const resultText = oldVal ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}% (${diff >= 0 ? '+' : ''}${diff.toFixed(2)})` : 'Enter old value';
+
   return (
-    <Section title="Percentage Change">
-      <div className="flex gap-2 items-center">
-        <div><label className={labelClass}>Old Value</label><Input label="Value" value={a} onChange={setA} /></div>
-        <div><label className={labelClass}>New Value</label><Input label="Value" value={b} onChange={setB} /></div>
+    <CalculatorShell title="Percentage Change" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" downloadData={JSON.stringify({ oldValue: oldVal, newValue: newVal, change: change.toFixed(2), difference: diff.toFixed(2) }, null, 2)} downloadFilename="pct-change.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className={labelClass}>Old Value</label>
+            <input type="number" step="any" value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>New Value</label>
+            <input type="number" step="any" value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
+        </div>
+
+        {oldVal && (
+          <div className={`p-4 rounded-xl ${change >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-rose-500/10 border-rose-500/20'}`}>
+            <div className="flex items-baseline justify-center gap-2">
+              <span className={`text-3xl font-bold ${change >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                ${change >= 0 ? '+' : ''}${change.toFixed(2)}%
+              </span>
+              <span className="text-sm text-[var(--text-secondary)]">${change >= 0 ? 'increase' : 'decrease'}</span>
+            </div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">${diff >= 0 ? '+' : ''}${diff.toFixed(2)} change</div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+          <div className="font-mono text-sm text-[var(--text-primary)]">
+            (New - Old) / Old × 100
+          </div>
+        </div>
       </div>
-      <div className="text-lg font-bold">{change >= 0 ? '+' : ''}{change.toFixed(2)}% {change >= 0 ? 'increase' : 'decrease'}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- PercentageDifferenceCalculator ---
@@ -364,11 +404,60 @@ export function ROICalculator() {
   const [returned, setReturned] = useState('1500');
   const i = Number(invested), r = Number(returned);
   const roi = i ? ((r - i) / i * 100) : 0;
+  const profit = r - i;
+
+  const presets = [
+    { label: '1000 → 1500', apply: () => { setInvested('1000'); setReturned('1500'); } },
+    { label: '5000 → 7500', apply: () => { setInvested('5000'); setReturned('7500'); } },
+    { label: '10000 → 8500', apply: () => { setInvested('10000'); setReturned('8500'); } },
+    { label: '2500 → 3000', apply: () => { setInvested('2500'); setReturned('3000'); } },
+  ];
+
+  const resultText = i ? `ROI: ${roi.toFixed(2)}% (${profit >= 0 ? '+' : ''}$${profit.toFixed(2)})` : 'Enter investment amount';
+
   return (
-    <Section title="ROI Calculator">
-      <div className="flex gap-2"><div><label className={labelClass}>Amount Invested</label><Input label="Value" type="number" value={invested} onChange={setInvested} /></div><div><label className={labelClass}>Total Return</label><Input label="Value" type="number" value={returned} onChange={setReturned} /></div></div>
-      <div className="text-lg font-bold">ROI: {roi.toFixed(2)}% (${(r - i).toFixed(2)})</div>
-    </Section>
+    <CalculatorShell title="ROI Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={JSON.stringify({ invested: i, returned: r, roi: roi.toFixed(2), profit: profit.toFixed(2) }, null, 2)} downloadFilename="roi.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className={labelClass}>Amount Invested ($)</label>
+            <input type="number" min={0} step="0.01" value={invested} onChange={e => setInvested(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>Total Return ($)</label>
+            <input type="number" min={0} step="0.01" value={returned} onChange={e => setReturned(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+        </div>
+
+        {i && (
+          <div className={`p-4 rounded-xl ${profit >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-rose-500/10 border-rose-500/20'}`}>
+            <div className="grid grid-cols-2 gap-3 text-center">
+              <div>
+                <div className="text-xs text-[var(--text-secondary)]">ROI</div>
+                <div className={`text-2xl font-bold ${profit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                  {roi.toFixed(2)}%
+                </div>
+              </div>
+              <div>
+                <div className="text-xs text-[var(--text-secondary)]">Profit/Loss</div>
+                <div className={`text-2xl font-bold ${profit >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                  {profit >= 0 ? '+' : ''}$${profit.toFixed(2)}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+          <div className="font-mono text-sm text-[var(--text-primary)]">
+            ROI = (Return - Invested) / Invested × 100
+          </div>
+        </div>
+      </div>
+    </CalculatorShell>
   );
 }
 // --- CAGRCalculator ---
@@ -379,15 +468,72 @@ export function CAGRCalculator() {
   const [years, setYears] = useState('5');
   const s = Number(start), e = Number(end), y = Number(years);
   const cagr = s > 0 && y > 0 ? (Math.pow(e / s, 1 / y) - 1) * 100 : 0;
+  const totalReturn = s ? ((e - s) / s * 100) : 0;
+
+  const presets = [
+    { label: '1K to 2K in 5yr', apply: () => { setStart('1000'); setEnd('2000'); setYears('5'); } },
+    { label: '10K to 50K in 10yr', apply: () => { setStart('10000'); setEnd('50000'); setYears('10'); } },
+    { label: '100 to 1000 in 7yr', apply: () => { setStart('100'); setEnd('1000'); setYears('7'); } },
+    { label: '5000 to 7500 in 3yr', apply: () => { setStart('5000'); setEnd('7500'); setYears('3'); } },
+  ];
+
+  const resultText = s > 0 && y > 0 ? `CAGR: ${cagr.toFixed(2)}% (Total: ${totalReturn.toFixed(2)}%)` : 'Enter valid values';
+
   return (
-    <Section title="CAGR Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>Start Value</label><Input label="Value" type="number" value={start} onChange={setStart} /></div>
-        <div><label className={labelClass}>End Value</label><Input label="Value" type="number" value={end} onChange={setEnd} /></div>
-        <div><label className={labelClass}>Years</label><Input label="Value" type="number" value={years} onChange={setYears} /></div>
+    <CalculatorShell title="CAGR Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={JSON.stringify({ startValue: s, endValue: e, years: y, cagr: cagr.toFixed(2), totalReturn: totalReturn.toFixed(2) }, null, 2)} downloadFilename="cagr.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-3 gap-2">
+          <div>
+            <label className={labelClass}>Start Value</label>
+            <input type="number" min={0} step="0.01" value={start} onChange={e => setStart(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>End Value</label>
+            <input type="number" min={0} step="0.01" value={end} onChange={e => setEnd(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>Years</label>
+            <input type="number" min={0} step="0.1" value={years} onChange={e => setYears(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+        </div>
+
+        {s > 0 && y > 0 && (
+          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">Compound Annual Growth Rate</div>
+            <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${cagr.toFixed(2)}%</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Total return: ${totalReturn.toFixed(2)}%</div>
+          </div>
+        )}
+
+        {s > 0 && y > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Year-by-Year Growth</div>
+            <div className="max-h-48 overflow-auto space-y-1">
+              {Array.from({ length: y }, (_, i) => {
+                const year = i + 1;
+                const value = s * Math.pow(e / s, year / y);
+                return (
+                  <div key={year} className="flex justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+                    <span>Year ${year}</span>
+                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">${value.toFixed(2)}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+          <div className="font-mono text-sm text-[var(--text-primary)]">
+            CAGR = (End / Start)^(1 / Years) - 1
+          </div>
+        </div>
       </div>
-      <div className="text-lg font-bold">CAGR: {cagr.toFixed(2)}%</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- CurrencyConverter ---
@@ -418,39 +564,126 @@ export function CurrencyConverter() {
 export function CurrencyRateCalculator() {
   const clr = ac('CurrencyRateCalculator');
   const currencies: Record<string, number> = { USD: 1, EUR: 0.92, GBP: 0.79, JPY: 149.5, INR: 83.1, CAD: 1.36, AUD: 1.53, CHF: 0.88, CNY: 7.24, NZD: 1.62, SEK: 10.45, NOK: 10.55, DKK: 6.87, PLN: 3.98, MXN: 17.15, SGD: 1.34, HKD: 7.82, TRY: 30.25, ZAR: 18.75, BRL: 4.97, KRW: 1325, AED: 3.67, SAR: 3.75, THB: 35.50, MYR: 4.72, PHP: 56.20, IDR: 15650, VND: 24600, CZK: 22.80, HUF: 358, CLP: 875, ARS: 820 };
+  const currencyList = Object.keys(currencies);
   const [amount, setAmount] = useState('100');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('EUR');
   const result = (Number(amount) / currencies[from]) * currencies[to];
+  const rate = currencies[to] / currencies[from];
+
+  const presets = [
+    { label: 'USD → EUR', apply: () => { setFrom('USD'); setTo('EUR'); } },
+    { label: 'GBP → USD', apply: () => { setFrom('GBP'); setTo('USD'); } },
+    { label: 'JPY → USD', apply: () => { setFrom('JPY'); setTo('USD'); } },
+    { label: 'EUR → GBP', apply: () => { setFrom('EUR'); setTo('GBP'); } },
+    { label: 'USD → INR', apply: () => { setFrom('USD'); setTo('INR'); } },
+  ];
+
+  const resultText = `${amount} ${from} = ${result.toFixed(2)} ${to} (rate: ${rate.toFixed(4)})`;
+
   return (
-    <Section title="Currency Rate Calculator">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={amount} onChange={setAmount} />
-        <select className={selClass} value={from} onChange={e => setFrom(e.target.value)}>{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</select>
-        <span>-</span>
-        <select className={selClass} value={to} onChange={e => setTo(e.target.value)}>{Object.keys(currencies).map(c => <option key={c}>{c}</option>)}</select>
+    <CalculatorShell title="Currency Rate Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={JSON.stringify({ amount: Number(amount), from, to, result: result.toFixed(2), rate: rate.toFixed(6) }, null, 2)} downloadFilename="currency-rate.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className={labelClass}>Amount</label>
+            <input type="number" min={0} step="0.01" value={amount} onChange={e => setAmount(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>From / To</label>
+            <div className="flex gap-1">
+              <select value={from} onChange={e => setFrom(e.target.value)}
+                className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                ${currencyList.map(c => `<option key="${c}" value="${c}">${c}</option>`)}
+              </select>
+              <span className="self-center text-lg font-bold">→</span>
+              <select value={to} onChange={e => setTo(e.target.value)}
+                className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                ${currencyList.map(c => `<option key="${c}" value="${c}">${c}</option>`)}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+          <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Converted Amount</div>
+          <div className="text-3xl font-bold text-blue-700 dark:text-blue-300">${result.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${to}</div>
+          <div className="text-xs text-[var(--text-secondary)] mt-1">Rate: 1 ${from} = ${rate.toFixed(4)} ${to}</div>
+        </div>
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Rate Table (per 1 ${from})</div>
+          <div className="grid grid-cols-3 gap-2 max-h-48 overflow-auto text-xs">
+            ${currencyList.slice(0, 15).map(c => `
+              <div className="p-1.5 bg-[var(--bg-overlay)] rounded-lg text-center">
+                <div className="font-mono text-blue-600 dark:text-blue-400">${(currencies[c] / currencies[from]).toFixed(4)}</div>
+                <div className="text-[var(--text-muted)]">${c}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
-      <div className="text-lg font-bold">{result.toFixed(2)} {to}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- ExchangeRateCalculator ---
 export function ExchangeRateCalculator() {
   const clr = ac('ExchangeRateCalculator');
   const rates: Record<string, number> = { 'USD/EUR': 0.92, 'USD/GBP': 0.79, 'USD/JPY': 149.5, 'EUR/USD': 1.09, 'EUR/GBP': 0.86, 'GBP/USD': 1.27, 'GBP/EUR': 1.16, 'USD/INR': 83.1, 'USD/CAD': 1.36, 'USD/AUD': 1.53 };
+  const pairList = Object.keys(rates);
   const [amount, setAmount] = useState('100');
   const [pair, setPair] = useState('USD/EUR');
   const rate = rates[pair] || 1;
+  const result = Number(amount) * rate;
+
+  const presets = [
+    { label: 'USD/EUR', apply: () => setPair('USD/EUR') },
+    { label: 'EUR/USD', apply: () => setPair('EUR/USD') },
+    { label: 'USD/JPY', apply: () => setPair('USD/JPY') },
+    { label: 'GBP/USD', apply: () => setPair('GBP/USD') },
+    { label: 'USD/INR', apply: () => setPair('USD/INR') },
+  ];
+
+  const resultText = `${amount} ${pair.split('/')[0]} = ${result.toFixed(2)} ${pair.split('/')[1]} @ ${rate}`;
+
   return (
-    <Section title="Exchange Rate Calculator">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={amount} onChange={setAmount} />
-        <select className={selClass} value={pair} onChange={e => setPair(e.target.value)}>
-          {Object.keys(rates).map(p => <option key={p}>{p}</option>)}
-        </select>
+    <CalculatorShell title="Exchange Rate Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData={JSON.stringify({ amount: Number(amount), pair, rate, result: result.toFixed(2) }, null, 2)} downloadFilename="exchange-rate.json">
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2 items-end">
+          <div className="flex-1 min-w-[150px]">
+            <label className={labelClass}>Amount</label>
+            <input type="number" min={0} step="0.01" value={amount} onChange={e => setAmount(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+          </div>
+          <div className="flex-1 min-w-[150px]">
+            <label className={labelClass}>Currency Pair</label>
+            <select value={pair} onChange={e => setPair(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+              ${pairList.map(p => `<option key="${p}" value="${p}">${p}</option>`)}
+            </select>
+          </div>
+        </div>
+
+        <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
+          <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Converted</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300">${result.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${pair.split('/')[1]}</div>
+          <div className="text-xs text-[var(--text-secondary)] mt-1">Rate: 1 ${pair.split('/')[0]} = ${rate.toFixed(4)} ${pair.split('/')[1]}</div>
+        </div>
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">All Rates</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs max-h-48 overflow-auto">
+            ${pairList.map(p => `
+              <div className="p-1.5 bg-[var(--bg-overlay)] rounded-lg text-center ${p === pair ? 'ring-2 ring-indigo-500' : ''}">
+                <div className="font-mono text-indigo-600 dark:text-indigo-400">${rates[p].toFixed(4)}</div>
+                <div className="text-[var(--text-muted)]">${p}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
       </div>
-      <div className="text-lg font-bold">{(Number(amount) * rate).toFixed(2)}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- FractionSimplifier ---
@@ -460,18 +693,72 @@ export function FractionSimplifier() {
   const [den, setDen] = useState('12');
   const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
   const n = Number(num), d = Number(den);
-  const g = gcd(n, d);
+  const g = d ? gcd(Math.abs(n), Math.abs(d)) : 0;
+  const simple = g ? `${n/g}/${d/g}` : 'Invalid';
+  const decimal = d ? (n / d).toFixed(4) : '—';
+  const percent = d ? ((n / d) * 100).toFixed(2) : '—';
+
+  const presets = [
+    { label: '8/12', apply: () => { setNum('8'); setDen('12'); } },
+    { label: '15/25', apply: () => { setNum('15'); setDen('25'); } },
+    { label: '100/250', apply: () => { setNum('100'); setDen('250'); } },
+    { label: '7/13', apply: () => { setNum('7'); setDen('13'); } },
+  ];
+
+  const resultText = d ? `${n}/${d} = ${simple} = ${decimal} (${percent}%)` : 'Enter denominator';
+
   return (
-    <Section title="Fraction Simplifier">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={num} onChange={setNum} />
-        <span className="text-xl">/</span>
-        <Input label="Value" type="number" value={den} onChange={setDen} />
+    <CalculatorShell title="Fraction Simplifier" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={d ? JSON.stringify({ numerator: n, denominator: d, simplified: simple, decimal: parseFloat(decimal), percent: parseFloat(percent) }, null, 2) : ''} downloadFilename="fraction.json">
+      <div className="space-y-4">
+        <div className="flex gap-2 items-center">
+          <div className="flex-1">
+            <label className={labelClass}>Numerator</label>
+            <input type="number" value={num} onChange={e => setNum(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+          <span className="text-xl font-bold">/</span>
+          <div className="flex-1">
+            <label className={labelClass}>Denominator</label>
+            <input type="number" value={den} onChange={e => setDen(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+          </div>
+        </div>
+
+        {d && (
+          <div className="space-y-3">
+            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+              <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">Simplified</div>
+              <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${simple}</div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 text-center">
+                <div className="text-xs text-[var(--text-secondary)]">Decimal</div>
+                <div className="text-lg font-bold text-[var(--text-primary)] font-mono">${decimal}</div>
+              </div>
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 text-center">
+                <div className="text-xs text-[var(--text-secondary)]">Percentage</div>
+                <div className="text-lg font-bold text-[var(--text-primary)] font-mono">${percent}%</div>
+              </div>
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 text-center">
+                <div className="text-xs text-[var(--text-secondary)]">GCD</div>
+                <div className="text-lg font-bold text-[var(--text-primary)]">${g}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {d && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Step by Step</div>
+            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+              <div>${n}/${d} = (${n}/${g}) / (${d}/${g}) = ${simple}</div>
+              <div className="text-[var(--text-secondary)]">GCD(${Math.abs(n)}, ${Math.abs(d)}) = ${g}</div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="text-lg font-bold">
-        {d ? n + '/' + d + ' = ' + (n/g) + '/' + (d/g) : 'Invalid'}
-      </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- FractionToDecimalCalculator ---
@@ -480,36 +767,136 @@ export function FractionToDecimalCalculator() {
   const [num, setNum] = useState('3');
   const [den, setDen] = useState('4');
   const n = Number(num), d = Number(den);
+  const decimal = d ? n / d : NaN;
+  const percent = d ? (n / d * 100).toFixed(2) : '—';
+
+  const presets = [
+    { label: '1/2', apply: () => { setNum('1'); setDen('2'); } },
+    { label: '3/4', apply: () => { setNum('3'); setDen('4'); } },
+    { label: '5/8', apply: () => { setNum('5'); setDen('8'); } },
+    { label: '22/7', apply: () => { setNum('22'); setDen('7'); } },
+  ];
+
+  const resultText = d ? `${n}/${d} = ${decimal.toFixed(6)} (${percent}%)` : 'Enter denominator';
+
   return (
-    <Section title="Fraction to Decimal">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={num} onChange={setNum} />
-        <span className="text-xl">/</span>
-        <Input label="Value" type="number" value={den} onChange={setDen} />
+    <CalculatorShell title="Fraction to Decimal" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={d ? JSON.stringify({ fraction: `${n}/${d}`, decimal, percent: parseFloat(percent) }, null, 2) : ''} downloadFilename="fraction-decimal.json">
+      <div className="space-y-4">
+        <div className="flex gap-2 items-center">
+          <div className="flex-1">
+            <label className={labelClass}>Numerator</label>
+            <input type="number" value={num} onChange={e => setNum(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          </div>
+          <span className="text-xl font-bold">/</span>
+          <div className="flex-1">
+            <label className={labelClass}>Denominator</label>
+            <input type="number" value={den} onChange={e => setDen(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          </div>
+        </div>
+
+        {d && (
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Decimal Value</div>
+            <div className="text-3xl font-bold text-blue-700 dark:text-blue-300 font-mono">${decimal.toFixed(6)}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">${percent}%</div>
+          </div>
+        )}
+
+        {d && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Equivalent Fractions</div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                Math.round(n * 2) + '/' + Math.round(d * 2),
+                Math.round(n * 3) + '/' + Math.round(d * 3),
+                Math.round(n * 4) + '/' + Math.round(d * 4),
+                Math.round(n * 5) + '/' + Math.round(d * 5),
+              ].map(f => (
+                <span key={f} className="px-2 py-1 bg-[var(--bg-overlay)] rounded-lg text-sm font-mono">${f}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="text-lg font-bold">{d ? (n / d).toString() : 'Invalid'}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- DecimalToFractionCalculator ---
 export function DecimalToFractionCalculator() {
   const clr = ac('DecimalToFractionCalculator');
   const [dec, setDec] = useState('0.75');
+  const [precision, setPrecision] = useState(1000000);
   const d = parseFloat(dec);
   const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
-  const getFraction = (v: number) => {
+  const getFraction = (v: number, prec: number) => {
     if (isNaN(v)) return { n: 0, d: 0 };
-    const precision = 1000000;
-    const n = Math.round(v * precision);
-    const g = gcd(n, precision);
-    return { n: n / g, d: precision / g };
+    const n = Math.round(v * prec);
+    const g = gcd(n, prec);
+    return { n: n / g, d: prec / g };
   };
-  const f = getFraction(d);
+  const f = isNaN(d) ? { n: 0, d: 0 } : getFraction(d, precision);
+  const decimalVal = f.d ? f.n / f.d : 0;
+  const error = f.d ? Math.abs(d - decimalVal) : 0;
+
+  const presets = [
+    { label: '0.75', apply: () => setDec('0.75') },
+    { label: '0.333...', apply: () => setDec('0.3333333333') },
+    { label: '0.142857', apply: () => setDec('0.142857142857') },
+    { label: 'π - 3', apply: () => setDec((Math.PI - 3).toFixed(10)) },
+  ];
+
+  const resultText = f.d ? `${dec} ≈ ${f.n}/${f.d} (error: ${error.toExponential(2)})` : 'Enter decimal';
+
   return (
-    <Section title="Decimal to Fraction">
-      <Input label="Value" type="number" step="0.01" value={dec} onChange={setDec} />
-      <div className="text-lg font-bold">{f.d ? f.n + '/' + f.d : 'Invalid'}</div>
-    </Section>
+    <CalculatorShell title="Decimal to Fraction" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" downloadData={f.d ? JSON.stringify({ decimal: d, fraction: `${f.n}/${f.d}`, error }, null, 2) : ''} downloadFilename="decimal-fraction.json">
+      <div className="space-y-4">
+        <label className={labelClass}>Decimal Value</label>
+        <input type="text" value={dec} onChange={e => setDec(e.target.value)} placeholder="0.75"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+
+        {f.d && (
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">Fraction</div>
+            <div className="text-3xl font-bold text-amber-700 dark:text-amber-300 font-mono">${f.n}/${f.d}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">≈ ${decimalVal.toFixed(10)} (error: ${error.toExponential(2)})</div>
+          </div>
+        )}
+
+        {f.d && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Precision</div>
+            <input type="range" min={10} max={100000000} step={10} value={precision} onChange={e => setPrecision(Number(e.target.value))}
+              className="w-full accent-amber-500 mb-2" />
+            <div className="text-xs text-[var(--text-muted)]">Precision: ${precision.toLocaleString()}</div>
+          </div>
+        )}
+
+        {f.d && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Continued Fraction Approximations</div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { prec: 10, label: '10' },
+                { prec: 100, label: '100' },
+                { prec: 1000, label: '1,000' },
+                { prec: 10000, label: '10,000' },
+                { prec: 100000, label: '100,000' },
+                { prec: 1000000, label: '1,000,000' },
+              ].map(p => {
+                const fr = getFraction(d, p.prec);
+                return (
+                  <span key={p.prec} className="px-2 py-1 bg-[var(--bg-overlay)] rounded-lg text-xs font-mono ${p.prec === precision ? 'bg-amber-500/20 ring-1 ring-amber-500' : ''}">
+                    ${fr.n}/${fr.d} (${p.label})
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 // --- RatioSimplifier ---
@@ -519,16 +906,74 @@ export function RatioSimplifier() {
   const [b, setB] = useState('18');
   const gcd = (x: number, y: number): number => y ? gcd(y, x % y) : x;
   const n1 = Number(a), n2 = Number(b);
-  const g = gcd(n1, n2);
+  const g = n1 && n2 ? gcd(n1, n2) : 0;
+  const simple = g ? `${n1/g}:${n2/g}` : 'Invalid';
+  const fraction = n2 ? n1 / n2 : NaN;
+  const percent = n2 ? (n1 / n2 * 100).toFixed(2) : '—';
+
+  const presets = [
+    { label: '12:18', apply: () => { setA('12'); setB('18'); } },
+    { label: '15:25', apply: () => { setA('15'); setB('25'); } },
+    { label: '100:250', apply: () => { setA('100'); setB('250'); } },
+    { label: '7:3', apply: () => { setA('7'); setB('3'); } },
+  ];
+
+  const resultText = g ? `${n1}:${n2} = ${simple} = ${fraction.toFixed(4)} (${percent}%)` : 'Enter both values';
+
   return (
-    <Section title="Ratio Simplifier">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={a} onChange={setA} />
-        <span>:</span>
-        <Input label="Value" type="number" value={b} onChange={setB} />
+    <CalculatorShell title="Ratio Simplifier" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={g ? JSON.stringify({ a: n1, b: n2, simplified: simple, fraction, percent: parseFloat(percent) }, null, 2) : ''} downloadFilename="ratio.json">
+      <div className="space-y-4">
+        <div className="flex gap-2 items-center">
+          <div className="flex-1">
+            <label className={labelClass}>First</label>
+            <input type="number" value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+          <span className="text-xl font-bold">:</span>
+          <div className="flex-1">
+            <label className={labelClass}>Second</label>
+            <input type="number" value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+        </div>
+
+        {g && (
+          <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-violet-600 dark:text-violet-400 font-medium mb-1">Simplified Ratio</div>
+            <div className="text-3xl font-bold text-violet-700 dark:text-violet-300">${simple}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Fraction: ${fraction.toFixed(4)} (${percent}%)</div>
+          </div>
+        )}
+
+        {g && (
+          <div className="grid grid-cols-3 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">GCD</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${g}</div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Fraction</div>
+              <div className="text-sm font-bold text-[var(--text-primary)] font-mono">${fraction.toFixed(4)}</div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Percentage</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${percent}%</div>
+            </div>
+          </div>
+        )}
+
+        {g && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Equivalent Ratios</div>
+            <div className="flex flex-wrap gap-2">
+              {[2, 3, 4, 5, 10, 100].map(m => (
+                <span key={m} className="px-2 py-1 bg-[var(--bg-overlay)] rounded-lg text-sm font-mono">${n1*m}:${n2*m}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="text-lg font-bold">{n1}:{n2} = {n1/g}:{n2/g}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- ProportionalCalculator ---
@@ -539,16 +984,71 @@ export function ProportionalCalculator() {
   const [c, setC] = useState('6');
   const na = Number(a), nb = Number(b), nc = Number(c);
   const d = na ? (nb * nc / na) : 0;
+  const ratio = na ? nb / na : NaN;
+
+  const presets = [
+    { label: '2:4 = 6:x', apply: () => { setA('2'); setB('4'); setC('6'); } },
+    { label: '3:5 = 9:x', apply: () => { setA('3'); setB('5'); setC('9'); } },
+    { label: '10:15 = 20:x', apply: () => { setA('10'); setB('15'); setC('20'); } },
+    { label: '0.5:1.5 = 2:x', apply: () => { setA('0.5'); setB('1.5'); setC('2'); } },
+  ];
+
+  const resultText = na ? `${na}:${nb} = ${nc}:${d.toFixed(4)}` : 'Enter first value';
+
   return (
-    <Section title="Proportional Calculator">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={a} onChange={setA} /><span className="text-xs">:</span>
-        <Input label="Value" type="number" value={b} onChange={setB} /><span className="text-xs">=</span>
-        <Input label="Value" type="number" value={c} onChange={setC} /><span className="text-xs">:</span>
-        <span className="text-lg font-bold">{d.toFixed(2)}</span>
+    <CalculatorShell title="Proportional Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="cyan" downloadData={na ? JSON.stringify({ a: na, b: nb, c: nc, d: d.toFixed(4), ratio: ratio.toFixed(4) }, null, 2) : ''} downloadFilename="proportion.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-4 gap-2 items-end">
+          <div>
+            <label className={labelClass}>a</label>
+            <input type="number" step="any" value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>b</label>
+            <input type="number" step="any" value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>c</label>
+            <input type="number" step="any" value={c} onChange={e => setC(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+          </div>
+          <span className="text-xl font-bold text-[var(--text-secondary)]">= d</span>
+        </div>
+
+        {na && (
+          <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-cyan-600 dark:text-cyan-400 font-medium mb-1">Result: d</div>
+            <div className="text-3xl font-bold text-cyan-700 dark:text-cyan-300 font-mono">${d.toFixed(4)}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Ratio b/a = ${ratio.toFixed(4)}</div>
+          </div>
+        )}
+
+        {na && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Proportion</div>
+            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+              <div>${na} : ${nb} = ${nc} : ${d.toFixed(4)}</div>
+              <div className="text-[var(--text-secondary)]">d = c × (b/a) = ${nc} × ${ratio.toFixed(4)} = ${d.toFixed(4)}</div>
+            </div>
+          </div>
+        )}
+
+        {na && (
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Multiplier</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${ratio.toFixed(4)}</div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Inverse</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${(1/ratio).toFixed(4)}</div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className="text-xs text-[var(--text-secondary)]">{na}:{nb} = {nc}:{d.toFixed(2)}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- RuleOfThreeCalculator ---
@@ -559,17 +1059,65 @@ export function RuleOfThreeCalculator() {
   const [c, setC] = useState('6');
   const na = Number(a), nb = Number(b), nc = Number(c);
   const x = na ? (nb * nc / na) : 0;
+
+  const presets = [
+    { label: '2 is to 4 as 6 is to x', apply: () => { setA('2'); setB('4'); setC('6'); } },
+    { label: '3 is to 5 as 10 is to x', apply: () => { setA('3'); setB('5'); setC('10'); } },
+    { label: '10 is to 15 as 30 is to x', apply: () => { setA('10'); setB('15'); setC('30'); } },
+    { label: '0.5 is to 1.5 as 2 is to x', apply: () => { setA('0.5'); setB('1.5'); setC('2'); } },
+  ];
+
+  const resultText = na ? `${na} : ${nb} :: ${nc} : ${x.toFixed(4)}` : 'Enter first value';
+
   return (
-    <Section title="Rule of Three">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={a} onChange={setA} /><span className="text-xs">-</span>
-        <Input label="Value" type="number" value={b} onChange={setB} />
+    <CalculatorShell title="Rule of Three" result={resultText} onCalculate={() => {}} presets={presets} accent="orange" downloadData={na ? JSON.stringify({ a: na, b: nb, c: nc, x: x.toFixed(4) }, null, 2) : ''} downloadFilename="rule-of-three.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-3 gap-2">
+          <div>
+            <label className={labelClass}>a (is to)</label>
+            <input type="number" step="any" value={a} onChange={e => setA(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>b (as)</label>
+            <input type="number" step="any" value={b} onChange={e => setB(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>c (is to)</label>
+            <input type="number" step="any" value={c} onChange={e => setC(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 text-lg font-bold">
+          <span className="text-[var(--text-secondary)]">x =</span>
+          <span className="text-2xl font-mono font-bold text-orange-600 dark:text-orange-400">${x.toFixed(4)}</span>
+        </div>
+
+        {na && (
+          <div className="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-orange-600 dark:text-orange-400 font-medium mb-1">Rule of Three</div>
+            <div className="font-mono text-sm text-[var(--text-secondary)] mb-2">${na} : ${nb} :: ${nc} : ${x.toFixed(4)}</div>
+            <div className="text-sm text-[var(--text-primary)]">${nc} × ${nb} / ${na} = ${x.toFixed(4)}</div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Variations</div>
+          <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
+              <div className="text-xs text-[var(--text-muted)]">Direct (a:b = c:x)</div>
+              <div className="font-mono">${x.toFixed(4)}</div>
+            </div>
+            <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
+              <div className="text-xs text-[var(--text-muted)]">Inverse (a:b = x:c)</div>
+              <div className="font-mono">${(na * nc / nb).toFixed(4)}</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={c} onChange={setC} /><span className="text-xs">-</span>
-        <span className="text-lg font-bold">{x.toFixed(2)}</span>
-      </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- CombinationCalculator ---
@@ -709,12 +1257,69 @@ export function FactorialCalculator() {
   const clr = ac('FactorialCalculator');
   const [n, setN] = useState('5');
   const fact = (x: number): number => x <= 1 ? 1 : x * fact(x - 1);
-  const nn = Number(n);
+  const nn = Number(n) || 0;
+  const valid = nn >= 0 && nn <= 170;
+  const result = valid ? fact(nn) : null;
+  const digits = valid ? result.toString().length : 0;
+
+  const presets = [
+    { label: '0!', apply: () => setN('0') },
+    { label: '5!', apply: () => setN('5') },
+    { label: '10!', apply: () => setN('10') },
+    { label: '20!', apply: () => setN('20') },
+    { label: '50!', apply: () => setN('50') },
+  ];
+
+  const resultText = valid ? `${nn}! = ${result.toLocaleString()} (${digits} digits)` : (nn > 170 ? 'Max supported: 170' : 'Enter 0-170');
+
   return (
-    <Section title="Factorial Calculator">
-      <Input label="Value" type="number" min={0} max={170} value={n} onChange={setN} />
-      <div className="text-lg font-bold">{nn}! = {nn > 170 ? 'Too large' : fact(nn).toLocaleString('fullwide', { useGrouping: false })}</div>
-    </Section>
+    <CalculatorShell title="Factorial Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={valid ? `factorial(${nn}) = ${result}` : ''} downloadFilename="factorial.txt">
+      <div className="space-y-4">
+        <label className={labelClass}>Non-negative integer (0-170)</label>
+        <input type="number" min={0} max={170} value={n} onChange={e => setN(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+
+        {valid && (
+          <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-violet-600 dark:text-violet-400 font-medium mb-1">Result</div>
+            <div className="text-2xl font-bold text-violet-700 dark:text-violet-300 font-mono break-all">{result.toLocaleString()}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">${digits} digits</div>
+          </div>
+        )}
+
+        {valid && nn <= 20 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">All factorials up to ${nn}</div>
+            <div className="grid grid-cols-2 gap-2 max-h-48 overflow-auto">
+              {Array.from({ length: nn + 1 }, (_, i) => {
+                const f = i <= 1 ? 1 : Array.from({ length: i }, (_, j) => j + 1).reduce((a, b) => a * b, 1);
+                return (
+                  <div key={i} className="p-2 bg-[var(--bg-overlay)] rounded-lg text-sm font-mono">
+                    <span className="text-[var(--text-secondary)]">${i}! =</span>
+                    <span className="font-bold">${f.toLocaleString()}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {valid && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+            <div className="font-mono text-sm text-[var(--text-primary)]">
+              ${nn}! = ${Array.from({ length: nn }, (_, i) => i + 1).join(' × ')}
+            </div>
+          </div>
+        )}
+
+        {!valid && nn > 170 && (
+          <div className="text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-center">
+            Factorials above 170 exceed JavaScript's safe integer range. Maximum supported: 170.
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 // --- PrimeNumberChecker ---
@@ -823,14 +1428,68 @@ export function PrimeNumberChecker() {
 export function PrimeFactorizationCalculator() {
   const clr = ac('PrimeFactorizationCalculator');
   const [n, setN] = useState('84');
-  const nn = Number(n);
+  const nn = Number(n) || 0;
   const factors = (x: number) => { const f: number[] = []; let d = 2; while (x > 1) { while (x % d === 0) { f.push(d); x /= d; } d++; } return f; };
-  const f = factors(nn);
+  const f = nn >= 2 ? factors(nn) : [];
+  const uniqueFactors = [...new Set(f)];
+  const factorCounts = uniqueFactors.map(p => ({ prime: p, count: f.filter(x => x === p).length }));
+
+  const presets = [
+    { label: '84', apply: () => setN('84') },
+    { label: '100', apply: () => setN('100') },
+    { label: '1000', apply: () => setN('1000') },
+    { label: '997 (prime)', apply: () => setN('997') },
+    { label: '720720', apply: () => setN('720720') },
+  ];
+
+  const resultText = nn >= 2 ? `${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}^${fc.count}` : fc.prime).join(' × ')}` : 'Enter number ≥ 2';
+
   return (
-    <Section title="Prime Factorization">
-      <Input label="Value" type="number" min={2} value={n} onChange={setN} />
-      <div className="text-lg font-bold">{nn} = {f.join(' x ')}</div>
-    </Section>
+    <CalculatorShell title="Prime Factorization" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
+      <div className="space-y-4">
+        <label className={labelClass}>Number (≥ 2)</label>
+        <input type="number" min={2} value={n} onChange={e => setN(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+
+        {nn >= 2 && (
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Factorization</div>
+            <div className="text-2xl font-bold text-blue-700 dark:text-blue-300 font-mono break-all">
+              ${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}<sup>${fc.count}</sup>` : fc.prime).join(' × ')}
+            </div>
+          </div>
+        )}
+
+        {nn >= 2 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Prime Factors Detail</div>
+            <div className="space-y-1.5">
+              {factorCounts.map(fc => (
+                <div key={fc.prime} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg">
+                  <span className="font-mono font-bold text-blue-600 dark:text-blue-400">${fc.prime}</span>
+                  <span className="text-sm text-[var(--text-secondary)]">
+                    ${fc.count > 1 ? `^${fc.count} (${fc.prime} × ${' × '.repeat(fc.count - 1)}${fc.prime})` : ''}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {nn >= 2 && (
+          <div className="grid grid-cols-2 gap-2">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Unique Primes</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${uniqueFactors.length}</div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+              <div className="text-xs text-[var(--text-secondary)]">Total Factors</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${f.length}</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 // --- GreatestCommonFactorCalculator ---
@@ -1133,12 +1792,66 @@ export function DegreeRadianConverter() {
   const [rad, setRad] = useState('3.14159');
   const d2r = () => setRad(String(Number(deg) * Math.PI / 180));
   const r2d = () => setDeg(String(Number(rad) * 180 / Math.PI));
+
+  const presets = [
+    { label: '90°', apply: () => { setDeg('90'); d2r(); } },
+    { label: '180°', apply: () => { setDeg('180'); d2r(); } },
+    { label: '360°', apply: () => { setDeg('360'); d2r(); } },
+    { label: 'π rad', apply: () => { setRad(Math.PI.toFixed(5)); r2d(); } },
+    { label: '2π rad', apply: () => { setRad((2 * Math.PI).toFixed(5)); r2d(); } },
+  ];
+
+  const resultText = `Deg: ${deg}° → Rad: ${rad} rad`;
+
   return (
-    <Section title="Degree / Radian Converter">
-      <div className="flex gap-2 items-center"><label className={labelClass}>Degrees</label><Input label="Value" type="number" value={deg} onChange={setDeg} /></div>
-      <div className="flex gap-2 items-center"><label className={labelClass}>Radians</label><Input label="Value" type="number" value={rad} onChange={setRad} /></div>
-      <div className="flex gap-2"><button className={btnClass(clr)} onClick={d2r}>Deg to Rad</button><button className={btnClass(clr)} onClick={r2d}>Rad to Deg</button></div>
-    </Section>
+    <CalculatorShell title="Degree / Radian Converter" result={resultText} onCalculate={() => {}} presets={presets} accent="cyan" downloadData={JSON.stringify({ degrees: Number(deg), radians: Number(rad) }, null, 2)} downloadFilename="deg-rad.json">
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className={labelClass}>Degrees</label>
+            <input type="number" step="any" value={deg} onChange={e => { setDeg(e.target.value); d2r(); }}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+          </div>
+          <div>
+            <label className={labelClass}>Radians</label>
+            <input type="number" step="any" value={rad} onChange={e => { setRad(e.target.value); r2d(); }}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          <button onClick={d2r} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-medium transition-colors flex-1">Deg → Rad</button>
+          <button onClick={r2d} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-xl text-sm font-medium transition-colors flex-1">Rad → Deg</button>
+        </div>
+
+        <div className="bg-cyan-500/10 border border-cyan-500/20 rounded-xl p-4 text-center">
+          <div className="text-xs text-cyan-600 dark:text-cyan-400 font-medium mb-1">Conversion</div>
+          <div className="text-2xl font-bold text-cyan-700 dark:text-cyan-300 font-mono">
+            ${Number(deg).toFixed(4)}° = ${Number(rad).toFixed(4)} rad
+          </div>
+        </div>
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Common Angles</div>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            {[
+              { deg: 30, rad: (Math.PI/6).toFixed(4) },
+              { deg: 45, rad: (Math.PI/4).toFixed(4) },
+              { deg: 60, rad: (Math.PI/3).toFixed(4) },
+              { deg: 90, rad: (Math.PI/2).toFixed(4) },
+              { deg: 180, rad: Math.PI.toFixed(4) },
+              { deg: 270, rad: (3*Math.PI/2).toFixed(4) },
+              { deg: 360, rad: (2*Math.PI).toFixed(4) },
+            ].map(a => (
+              <div key={a.deg} className="p-2 bg-[var(--bg-overlay)] rounded-lg text-center">
+                <div className="font-mono">${a.deg}°</div>
+                <div className="text-[var(--text-muted)]">${a.rad} rad</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </CalculatorShell>
   );
 }
 // --- ScientificNotationConverter ---
@@ -1412,13 +2125,88 @@ function parseExpr(input: string): number {
 export function AlgebraCalculator() {
   const clr = ac('AlgebraCalculator');
   const [expr, setExpr] = useState('2*(3+4)');
-  let result: string;
-  try { result = String(parseExpr(expr)); } catch { result = 'Invalid expression'; }
+  const [result, setResult] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  const parseExpr = (e: string): number => {
+    const tokens = e.replace(/\s+/g, '').match(/(\d+\.?\d*|[+\-*/()])/g) || [];
+    let pos = 0;
+    const parseExpression = (): number => {
+      let val = parseTerm();
+      while (pos < tokens.length && (tokens[pos] === '+' || tokens[pos] === '-')) {
+        const op = tokens[pos++];
+        const next = parseTerm();
+        val = op === '+' ? val + next : val - next;
+      }
+      return val;
+    };
+    const parseTerm = (): number => {
+      let val = parseFactor();
+      while (pos < tokens.length && (tokens[pos] === '*' || tokens[pos] === '/')) {
+        const op = tokens[pos++];
+        const next = parseFactor();
+        val = op === '*' ? val * next : val / next;
+      }
+      return val;
+    };
+    const parseFactor = (): number => {
+      if (tokens[pos] === '(') { pos++; const val = parseExpression(); pos++; return val; }
+      return parseFloat(tokens[pos++]);
+    };
+    pos = 0;
+    return parseExpression();
+  };
+
+  const evaluate = () => {
+    try { const r = parseExpr(expr); setResult(String(r)); setError(''); }
+    catch (e: unknown) { setResult(''); setError(getErrorMessage(e)); }
+  };
+
+  const presets = [
+    { label: '2*(3+4)', apply: () => { setExpr('2*(3+4)'); evaluate(); } },
+    { label: '10+20*3', apply: () => { setExpr('10+20*3'); evaluate(); } },
+    { label: '(5+5)/2', apply: () => { setExpr('(5+5)/2'); evaluate(); } },
+    { label: '2^10', apply: () => { setExpr('2*2*2*2*2*2*2*2*2*2'); evaluate(); } },
+    { label: 'Clear', apply: () => { setExpr(''); setResult(''); setError(''); } },
+  ];
+
+  const resultText = result ? `= ${result}` : (error ? `Error: ${error}` : 'Enter expression');
+
   return (
-    <Section title="Algebraic Expression Evaluator">
-      <Input label="Value" value={expr} onChange={setExpr} />
-      <div className="text-lg font-bold font-mono">= {result}</div>
-    </Section>
+    <CalculatorShell title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt">
+      <div className="space-y-4">
+        <label className={labelClass}>Expression</label>
+        <input type="text" value={expr} onChange={e => { setExpr(e.target.value); evaluate(); }}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+          placeholder="e.g., 2*(3+4) or 10+20*3" />
+
+        {result && (
+          <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>
+            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 font-mono">${result}</div>
+          </div>
+        )}
+
+        {error && (
+          <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-rose-600 dark:text-rose-400 font-medium mb-1">Error</div>
+            <div className="text-rose-700 dark:text-rose-300">${error}</div>
+          </div>
+        )}
+
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+          <div className="text-xs text-[var(--text-secondary)] mb-2">Supported</div>
+          <div className="grid grid-cols-2 gap-2 text-xs text-[var(--text-secondary)]">
+            <span>+ Addition</span>
+            <span>- Subtraction</span>
+            <span>* Multiplication</span>
+            <span>/ Division</span>
+            <span>( ) Parentheses</span>
+            <span>Decimals</span>
+          </div>
+        </div>
+      </div>
+    </CalculatorShell>
   );
 }
 // --- GeometryCalculator ---
