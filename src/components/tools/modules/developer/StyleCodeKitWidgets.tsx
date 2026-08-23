@@ -172,6 +172,94 @@ export function ProtoSchemaConverter() {
   );
 }
 
+function readVarint(bytes: Uint8Array, offset: number): { value: number; newOffset: number } {
+  let result = 0;
+  let shift = 0;
+  let pos = offset;
+  while (pos < bytes.length) {
+    const b = bytes[pos];
+    result |= (b & 0x7f) << shift;
+    pos++;
+    if ((b & 0x80) === 0) return { value: result, newOffset: pos };
+    shift += 7;
+    if (shift > 35) break;
+  }
+  return { value: result, newOffset: pos };
+}
+
+function decodeProtobuf(bytes: Uint8Array, depth = 0): { fields: string[]; bytesUsed: number } {
+  const fields: string[] = [];
+  let offset = 0;
+  const indent = '  '.repeat(depth);
+
+  while (offset < bytes.length) {
+    const tag = readVarint(bytes, offset);
+    offset = tag.newOffset;
+    const fieldNumber = tag.value >> 3;
+    const wireType = tag.value & 0x07;
+
+    if (fieldNumber === 0) { fields.push(`${indent}[invalid field 0]`); continue; }
+
+    switch (wireType) {
+      case 0: { // Varint
+        const val = readVarint(bytes, offset);
+        offset = val.newOffset;
+        fields.push(`${indent}field ${fieldNumber} (varint): ${val.value}`);
+        break;
+      }
+      case 1: { // 64-bit
+        if (offset + 8 > bytes.length) { fields.push(`${indent}field ${fieldNumber}: truncated 64-bit`); return { fields, bytesUsed: offset }; }
+        const view = new DataView(bytes.buffer, bytes.byteOffset + offset, 8);
+        const num = Number(view.getBigUint64(0, true));
+        offset += 8;
+        fields.push(`${indent}field ${fieldNumber} (64-bit): ${num}`);
+        break;
+      }
+      case 2: { // Length-delimited
+        const len = readVarint(bytes, offset);
+        offset = len.newOffset;
+        const end = offset + len.value;
+        if (end > bytes.length) { fields.push(`${indent}field ${fieldNumber}: truncated (need ${len.value} bytes, have ${bytes.length - offset})`); return { fields, bytesUsed: offset }; }
+        const slice = bytes.slice(offset, end);
+        offset = end;
+
+        const text = new TextDecoder().decode(slice).replace(/[^\x20-\x7E]/g, '.');
+        const isPrintable = /^[\x20-\x7E]+$/.test(text);
+
+        if (isPrintable && slice.length > 0) {
+          fields.push(`${indent}field ${fieldNumber} (string): "${text}"`);
+        } else if (slice.length >= 2) {
+          const nested = decodeProtobuf(slice, depth + 1);
+          if (nested.fields.length > 0 && nested.bytesUsed === slice.length) {
+            fields.push(`${indent}field ${fieldNumber} (message): {`);
+            fields.push(...nested.fields);
+            fields.push(`${indent}}`);
+          } else {
+            const hexStr = Array.from(slice).map(b => b.toString(16).padStart(2, '0')).join(' ');
+            fields.push(`${indent}field ${fieldNumber} (bytes): ${hexStr}`);
+          }
+        } else {
+          const hexStr = Array.from(slice).map(b => b.toString(16).padStart(2, '0')).join(' ');
+          fields.push(`${indent}field ${fieldNumber} (bytes): ${hexStr || '(empty)'}`);
+        }
+        break;
+      }
+      case 5: { // 32-bit
+        if (offset + 4 > bytes.length) { fields.push(`${indent}field ${fieldNumber}: truncated 32-bit`); return { fields, bytesUsed: offset }; }
+        const view = new DataView(bytes.buffer, bytes.byteOffset + offset, 4);
+        const num = view.getUint32(0, true);
+        offset += 4;
+        fields.push(`${indent}field ${fieldNumber} (32-bit): ${num}`);
+        break;
+      }
+      default:
+        fields.push(`${indent}field ${fieldNumber}: unknown wire type ${wireType}`);
+        return { fields, bytesUsed: offset };
+    }
+  }
+  return { fields, bytesUsed: offset };
+}
+
 export function ProtobufDecoder() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -179,9 +267,13 @@ export function ProtobufDecoder() {
   const decode = () => {
     try {
       const hex = input.trim().startsWith('0x') ? input.trim().slice(2) : input.trim();
-      const bytes = new Uint8Array(hex.split(/\s+/).map(h => parseInt(h, 16)));
-      const text = new TextDecoder().decode(bytes).replace(/[^\x20-\x7E]/g, '\uFFFD');
-      setOutput(`Decoded (${bytes.length} bytes):\n${text}\n\nHex: ${Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(' ')}`);
+      const cleaned = hex.replace(/\s+/g, '');
+      if (cleaned.length % 2 !== 0) { toast.error('Hex string must have even length'); return; }
+      const bytes = new Uint8Array(cleaned.match(/.{2}/g)!.map(h => parseInt(h, 16)));
+      const result = decodeProtobuf(bytes);
+      const hexDump = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(' ');
+      const summary = `// ${bytes.length} bytes total\n// Wire format: field_number << 3 | wire_type\n// 0=varint, 1=64-bit, 2=length-delimited, 5=32-bit\n\n${result.fields.join('\n')}\n\n// Raw hex:\n// ${hexDump}`;
+      setOutput(summary);
     } catch { toast.error('Invalid hex input'); }
   };
 
@@ -189,10 +281,11 @@ export function ProtobufDecoder() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Protobuf Decoder</h2>
+        <p className="text-xs text-[var(--text-secondary)]">Decode protobuf wire format hex to readable field structure. Supports varints, strings, nested messages, and fixed-width types.</p>
         <textarea rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>}
       </div>
     </div>
   );

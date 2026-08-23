@@ -230,9 +230,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "Protobuf Decoder",
     slug: "protobuf-decoder",
     category: "Developer",
-    description: 'Decode raw protobuf hex bytes to readable text.',
-    seoDescription: 'Free online Protobuf Decoder \u2014 Decode raw protobuf hex bytes to text. ',
+    description: 'Decode protobuf wire format hex bytes into readable field structure. Shows field numbers, wire types, varints, strings, nested messages, and raw hex.',
+    seoDescription: 'Free online Protobuf Decoder — Decode protobuf wire format hex to structured fields. Shows field numbers, types, varints, strings, and nested messages. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is protobuf wire format?", answer: "Protocol Buffers (protobuf) serializes structured data into binary. Each field is encoded as a tag (field number + wire type) followed by the value. Wire types: 0=varint, 1=64-bit, 2=length-delimited (strings, nested messages), 5=32-bit." },
+      { question: "How do I find protobuf hex to decode?", answer: "Capture network traffic with browser DevTools or Wireshark, then copy the hex bytes from the request/response body. gRPC and HTTP/2 APIs commonly use protobuf encoding." },
+      { question: "What does 'field 1 (string): \"bob\"' mean?", answer: "Field number 1 contains a length-delimited string value 'bob'. The tag byte encodes both the field number (1) and wire type (2 = length-delimited)." },
+      { question: "Can this decode nested protobuf messages?", answer: "Yes. Length-delimited fields that contain valid protobuf structure are recursively decoded, showing nested fields indented under their parent." },
+      { question: "Does this need a .proto schema file?", answer: "No. This decodes the raw wire format without a schema. Field names are shown as numbers — to get meaningful names, you'd need the .proto definition." },
+    ],
 },
   {
 
