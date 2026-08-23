@@ -49,8 +49,8 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   const dep = (tool.dependencies || '').toLowerCase();
   const cat = (tool.category || '').toLowerCase();
 
-  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs'];
-  const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'converter', 'archive', 'document', 'transcription'].includes(cat);
+  const fileDeps = ['ffmpeg', 'pdf-lib', 'heic2any', 'jszip', 'cropper.js', 'exifr', 'tesseract', 'pdf2json', 'pdf2docx', 'sheetjs', 'jspdf', 'pptxgenjs', 'html2canvas', 'canvas api', 'sharp'];
+  const hasFileInput = fileDeps.some(d => dep.includes(d)) || ['pdf', 'image', 'video', 'audio', 'archive', 'document', 'transcription'].includes(cat);
 
   if (hasFileInput && (n.includes('compress') || n.includes('merge') || n.includes('split') || n.includes('lock') || n.includes('unlock') || n.includes('stamp') || n.includes('watermark') || n.includes('protect') || n.includes('rotate') || n.includes('extract') || n.includes('resize') || n.includes('crop') || n.includes('remove') || n.includes('enhance') || n.includes('trim') || n.includes('cut') || n.includes('filter') || n.includes('batch') || n.includes('record') || n.includes('add text') || n.includes('add page') || n.includes('normaliz') || n.includes('reduc'))) {
     return { pattern: 'upload-process-download' };
@@ -87,9 +87,9 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   }
 
   // AI pattern: only match actual AI/API dependencies, not Web Audio API or fetch API
-  const aiApiDeps = ['openai', 'anthropic', 'gemini', 'huggingface', 'replicate', 'stability', 'ai api', 'ai provider'];
+  const aiApiDeps = ['openai', 'anthropic', 'gemini', 'huggingface', 'replicate', 'stability', 'ai api', 'ai provider', 'real-esrgan', 'insightface', 'whisper', 'cf vectorize', 'stable diffusion'];
   const isAiDep = aiApiDeps.some(d => dep.includes(d)) || (dep.includes('api') && !dep.includes('web audio') && !dep.includes('fetch api') && !dep.includes('vanilla') && !dep.includes('canvas'));
-  if (isAiDep) {
+  if (isAiDep || cat === 'ai') {
     return { pattern: 'ai-generate' };
   }
   if (n.includes('text to speech') || n.includes('tts') || n.includes('speech to text') || n.includes('transcri')) {
