@@ -23,7 +23,7 @@ const popularPairs = [
   { from: 'ODT', to: 'PDF', label: 'ODT → PDF' },
 ];
 
-export function DocumentConverter({ defaultFrom, defaultTo }: { defaultFrom?: string; defaultTo?: string }) {
+export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: { defaultFrom?: string; defaultTo?: string; downloadFilename?: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [srcFormat, setSrcFormat] = useState<typeof FORMATS[number]>((defaultFrom as typeof FORMATS[number]) || 'PDF');
   const [dstFormat, setDstFormat] = useState<typeof FORMATS[number]>((defaultTo as typeof FORMATS[number]) || 'DOCX');
@@ -70,6 +70,7 @@ export function DocumentConverter({ defaultFrom, defaultTo }: { defaultFrom?: st
   };
 
   const resultText = file ? `Ready: ${file.name} (${srcFormat} → ${dstFormat})` : 'Upload a document to convert';
+  const outFilename = downloadFilename || (converted ? converted.name : `converted.${dstFormat.toLowerCase()}`);
 
   return (
     <CalculatorShell
@@ -79,7 +80,7 @@ export function DocumentConverter({ defaultFrom, defaultTo }: { defaultFrom?: st
       presets={popularPairs.map(p => ({ label: p.label, apply: () => { setSrcFormat(p.from as any); setDstFormat(p.to as any); } }))}
       accent="blue"
       downloadData={converted ? converted.blob : undefined}
-      downloadFilename={converted?.name}
+      downloadFilename={outFilename}
     >
       <div className="space-y-4">
         <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600 rounded-xl p-8 cursor-pointer hover:border-blue-500 transition">
@@ -117,11 +118,11 @@ export function DocumentConverter({ defaultFrom, defaultTo }: { defaultFrom?: st
   );
 }
 
-export function PdfToDocx() { return <DocumentConverter defaultFrom="PDF" defaultTo="DOCX" />; }
-export function DocxToPdf() { return <DocumentConverter defaultFrom="DOCX" defaultTo="PDF" />; }
-export function PdfToTxt() { return <DocumentConverter defaultFrom="PDF" defaultTo="TXT" />; }
-export function TxtToPdf() { return <DocumentConverter defaultFrom="TXT" defaultTo="PDF" />; }
-export function MdToHtml() { return <DocumentConverter defaultFrom="Markdown" defaultTo="HTML" />; }
-export function HtmlToPdf() { return <DocumentConverter defaultFrom="HTML" defaultTo="PDF" />; }
-export function DocxToTxt() { return <DocumentConverter defaultFrom="DOCX" defaultTo="TXT" />; }
-export function RtfToPdf() { return <DocumentConverter defaultFrom="RTF" defaultTo="PDF" />; }
+export function PdfToDocx() { return <DocumentConverter defaultFrom="PDF" defaultTo="DOCX" downloadFilename="converted.docx" />; }
+export function DocxToPdf() { return <DocumentConverter defaultFrom="DOCX" defaultTo="PDF" downloadFilename="converted.pdf" />; }
+export function PdfToTxt() { return <DocumentConverter defaultFrom="PDF" defaultTo="TXT" downloadFilename="converted.txt" />; }
+export function TxtToPdf() { return <DocumentConverter defaultFrom="TXT" defaultTo="PDF" downloadFilename="converted.pdf" />; }
+export function MdToHtml() { return <DocumentConverter defaultFrom="Markdown" defaultTo="HTML" downloadFilename="converted.html" />; }
+export function HtmlToPdf() { return <DocumentConverter defaultFrom="HTML" defaultTo="PDF" downloadFilename="converted.pdf" />; }
+export function DocxToTxt() { return <DocumentConverter defaultFrom="DOCX" defaultTo="TXT" downloadFilename="converted.txt" />; }
+export function RtfToPdf() { return <DocumentConverter defaultFrom="RTF" defaultTo="PDF" downloadFilename="converted.pdf" />; }

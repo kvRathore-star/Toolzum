@@ -32,7 +32,7 @@ function getRelated(slug: string) {
   return PAIRS.filter(p => p.slug !== slug).slice(0, 6);
 }
 
-export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string; defaultTo?: string }) {
+export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloadFilename }: { defaultFrom?: string; defaultTo?: string; presetOverrides?: { label: string; apply: () => void }[]; downloadFilename?: string }) {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -47,6 +47,15 @@ export function DataConverter({ defaultFrom, defaultTo }: { defaultFrom?: string
     setDstFormat(srcFormat);
     setOutput('');
   };
+
+  const basePresets = [
+    { label: 'Swap', apply: swapFormats },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const presets = [...basePresets, ...(presetOverrides || [])];
+
+  const resultFilename = downloadFilename || `converted.${FORMAT_EXT[dstFormat]}`;
 
   const handleConvert = useCallback(async () => {
     if (!input.trim()) { setOutput(''); return; }
@@ -255,7 +264,7 @@ const copyOutput = useCallback(() => {
       presets={presets}
       accent="blue"
       downloadData={output}
-      downloadFilename={`converted.${FORMAT_EXT[dstFormat]}`}
+      downloadFilename={resultFilename}
     >
       <div className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
@@ -391,14 +400,14 @@ const copyOutput = useCallback(() => {
   );
 }
 
-export function JsonToCsv() { return <DataConverter defaultFrom="JSON" defaultTo="CSV" />; }
-export function CsvToJson() { return <DataConverter defaultFrom="CSV" defaultTo="JSON" />; }
-export function JsonToXml() { return <DataConverter defaultFrom="JSON" defaultTo="XML" />; }
-export function XmlToJson() { return <DataConverter defaultFrom="XML" defaultTo="JSON" />; }
-export function YamlToJson() { return <DataConverter defaultFrom="YAML" defaultTo="JSON" />; }
-export function JsonToYaml() { return <DataConverter defaultFrom="JSON" defaultTo="YAML" />; }
-export function CsvToTsv() { return <DataConverter defaultFrom="CSV" defaultTo="TSV" />; }
-export function TsvToCsv() { return <DataConverter defaultFrom="TSV" defaultTo="CSV" />; }
+export function JsonToCsv() { return <DataConverter defaultFrom="JSON" defaultTo="CSV" presetOverrides={[{ label: 'Sample JSON', apply: () => {} }, { label: 'Array of Objects', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-csv.csv" />; }
+export function CsvToJson() { return <DataConverter defaultFrom="CSV" defaultTo="JSON" presetOverrides={[{ label: 'Sample CSV', apply: () => {} }, { label: 'Headers Only', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="csv-to-json.json" />; }
+export function JsonToXml() { return <DataConverter defaultFrom="JSON" defaultTo="XML" presetOverrides={[{ label: 'Sample JSON', apply: () => {} }, { label: 'Nested Object', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-xml.xml" />; }
+export function XmlToJson() { return <DataConverter defaultFrom="XML" defaultTo="JSON" presetOverrides={[{ label: 'Simple XML', apply: () => {} }, { label: 'Nested XML', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="xml-to-json.json" />; }
+export function YamlToJson() { return <DataConverter defaultFrom="YAML" defaultTo="JSON" presetOverrides={[{ label: 'Sample YAML', apply: () => {} }, { label: 'Nested YAML', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="yaml-to-json.json" />; }
+export function JsonToYaml() { return <DataConverter defaultFrom="JSON" defaultTo="YAML" presetOverrides={[{ label: 'Sample JSON', apply: () => {} }, { label: 'Array', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-yaml.yaml" />; }
+export function CsvToTsv() { return <DataConverter defaultFrom="CSV" defaultTo="TSV" presetOverrides={[{ label: 'Sample CSV', apply: () => {} }, { label: 'Tab-separated', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="csv-to-tsv.tsv" />; }
+export function TsvToCsv() { return <DataConverter defaultFrom="TSV" defaultTo="CSV" presetOverrides={[{ label: 'Sample TSV', apply: () => {} }, { label: 'Comma-separated', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="tsv-to-csv.csv" />; }
 
 export const SLUG_MAP: Record<string, [string, string]> = {
   'json-to-csv': ['JSON', 'CSV'],
