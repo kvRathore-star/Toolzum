@@ -49,6 +49,7 @@ function OutputBlock({ value }: { value: string }) {
 export function RandomDateGenerator() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
       const d = new Date(Date.now() - randInt(0, 365 * 5) * 86400000);
@@ -57,18 +58,32 @@ export function RandomDateGenerator() {
     setOut(lines.join('\n'));
     toast.success('Dates generated');
   };
+
+  const presets = [
+    { label: '5 dates', apply: () => { setCount(5); gen(); } },
+    { label: '10 dates', apply: () => { setCount(10); gen(); } },
+    { label: '20 dates', apply: () => { setCount(20); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(5); } },
+  ];
+
+  const resultText = out ? `Generated ${count} random dates` : 'Configure and generate';
+
   return (
-    <Section title="Random Date Generator">
+    <CalculatorShell title="Random Date Generator" result={resultText} onCalculate={gen} presets={presets} accent="indigo" downloadData={out} downloadFilename="random-dates.txt">
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
+
       <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Dates</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
 export function RandomTimeGenerator() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
       const h = String(randInt(0, 23)).padStart(2, '0');
@@ -79,33 +94,74 @@ export function RandomTimeGenerator() {
     setOut(lines.join('\n'));
     toast.success('Times generated');
   };
+
+  const presets = [
+    { label: '5 times', apply: () => { setCount(5); gen(); } },
+    { label: '10 times', apply: () => { setCount(10); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(5); } },
+  ];
+
+  const resultText = out ? `Generated ${count} random times` : 'Configure and generate';
+
   return (
-    <Section title="Random Time Generator">
+    <CalculatorShell title="Random Time Generator" result={resultText} onCalculate={gen} presets={presets} accent="blue" downloadData={out} downloadFilename="random-times.txt">
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
+
       <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Times</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
 export function RandomIpGenerator() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
+  const [version, setVersion] = useState<'ipv4' | 'ipv6'>('ipv4');
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
-      if (Math.random() > 0.5) return `${randInt(1, 223)}.${randInt(0, 255)}.${randInt(0, 255)}.${randInt(1, 254)}`;
-      const h = Array.from({ length: 4 }, () => randInt(0, 65535).toString(16)).join(':');
-      return `${h}::${randInt(1, 254).toString(16)}`;
+      if (version === 'ipv4') {
+        return `${randInt(1, 223)}.${randInt(0, 255)}.${randInt(0, 255)}.${randInt(1, 254)}`;
+      } else {
+        const h = Array.from({ length: 4 }, () => randInt(0, 65535).toString(16)).join(':');
+        return `${h}::${randInt(1, 254).toString(16)}`;
+      }
     });
     setOut(lines.join('\n'));
     toast.success('IPs generated');
   };
+
+  const presets = [
+    { label: '5 IPv4', apply: () => { setVersion('ipv4'); setCount(5); gen(); } },
+    { label: '10 IPv4', apply: () => { setVersion('ipv4'); setCount(10); gen(); } },
+    { label: '5 IPv6', apply: () => { setVersion('ipv6'); setCount(5); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(5); } },
+  ];
+
+  const resultText = out ? `Generated ${count} ${version.toUpperCase()} addresses` : 'Configure and generate';
+
   return (
-    <Section title="Random IP Generator">
+    <CalculatorShell title="Random IP Generator" result={resultText} onCalculate={gen} presets={presets} accent="emerald" downloadData={out} downloadFilename="random-ips.txt">
+      <div className="flex gap-2 mb-3">
+        <label className="flex items-center gap-2">
+          <input type="radio" value="ipv4" checked={version === 'ipv4'} onChange={() => setVersion('ipv4')} className="accent-emerald-500" />
+          <span className="text-sm">IPv4</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="radio" value="ipv6" checked={version === 'ipv6'} onChange={() => setVersion('ipv6')} className="accent-emerald-500" />
+          <span className="text-sm">IPv6</span>
+        </label>
+      </div>
+
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate IPs</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate IPs</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
@@ -123,17 +179,51 @@ const UA_LIST = [
 export function RandomUserAgentGenerator() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
+  const [category, setCategory] = useState<'all' | 'desktop' | 'mobile'>('all');
+
+  const desktopUAs = UA_LIST.slice(0, 4);
+  const mobileUAs = UA_LIST.slice(4);
+
   const gen = () => {
-    const lines = Array.from({ length: count }, () => UA_LIST[randInt(0, UA_LIST.length - 1)]);
+    const pool = category === 'desktop' ? desktopUAs : category === 'mobile' ? mobileUAs : UA_LIST;
+    const lines = Array.from({ length: count }, () => pool[randInt(0, pool.length - 1)]);
     setOut(lines.join('\n'));
     toast.success('User agents generated');
   };
+
+  const presets = [
+    { label: '5 Desktop', apply: () => { setCategory('desktop'); setCount(5); gen(); } },
+    { label: '5 Mobile', apply: () => { setCategory('mobile'); setCount(5); gen(); } },
+    { label: '10 Mixed', apply: () => { setCategory('all'); setCount(10); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(5); setCategory('all'); } },
+  ];
+
+  const resultText = out ? `Generated ${count} user agents (${category})` : 'Configure and generate';
+
   return (
-    <Section title="Random User-Agent Generator">
+    <CalculatorShell title="Random User-Agent Generator" result={resultText} onCalculate={gen} presets={presets} accent="purple" downloadData={out} downloadFilename="user-agents.txt">
+      <div className="flex gap-2 mb-3">
+        <label className="flex items-center gap-2">
+          <input type="radio" value="all" checked={category === 'all'} onChange={() => setCategory('all')} className="accent-purple-500" />
+          <span className="text-sm">All</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="radio" value="desktop" checked={category === 'desktop'} onChange={() => setCategory('desktop')} className="accent-purple-500" />
+          <span className="text-sm">Desktop</span>
+        </label>
+        <label className="flex items-center gap-2">
+          <input type="radio" value="mobile" checked={category === 'mobile'} onChange={() => setCategory('mobile')} className="accent-purple-500" />
+          <span className="text-sm">Mobile</span>
+        </label>
+      </div>
+
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate User Agents</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate User Agents</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
@@ -142,37 +232,79 @@ const WORDS = ['lorem','ipsum','dolor','sit','amet','consectetur','adipiscing','
 export function RandomSentenceGenerator() {
   const [count, setCount] = useState(5);
   const [out, setOut] = useState('');
+  const [wordsPerSentence, setWordsPerSentence] = useState(8);
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
-      const wc = randInt(5, 12);
+      const wc = randInt(Math.max(3, wordsPerSentence - 2), wordsPerSentence + 2);
       const words = Array.from({ length: wc }, () => WORDS[randInt(0, WORDS.length - 1)]);
-      return words[0].charAt(0).toUpperCase() + words.slice(0).join(' ') + '.';
+      return words[0].charAt(0).toUpperCase() + words.slice(1).join(' ') + '.';
     });
     setOut(lines.join('\n'));
     toast.success('Sentences generated');
   };
+
+  const presets = [
+    { label: '5 Short', apply: () => { setCount(5); setWordsPerSentence(6); gen(); } },
+    { label: '10 Medium', apply: () => { setCount(10); setWordsPerSentence(10); gen(); } },
+    { label: '5 Long', apply: () => { setCount(5); setWordsPerSentence(15); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(5); setWordsPerSentence(8); } },
+  ];
+
+  const resultText = out ? `Generated ${count} sentences (${wordsPerSentence} words avg)` : 'Configure and generate';
+
   return (
-    <Section title="Random Sentence Generator">
-      <CountSlider value={count} onChange={setCount} />
+    <CalculatorShell title="Random Sentence Generator" result={resultText} onCalculate={gen} presets={presets} accent="indigo" downloadData={out} downloadFilename="random-sentences.txt">
+      <label className={labelClass}>Count</label>
+      <CountSlider value={count} onChange={setCount} max={50} />
+
+      <label className={labelClass}>Words per sentence (avg)</label>
+      <input type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-indigo-500" />
+      <div className="text-xs text-[var(--text-muted)] text-right">{wordsPerSentence} words</div>
+
       <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Sentences</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
 export function RandomWordGenerator() {
   const [count, setCount] = useState(10);
   const [out, setOut] = useState('');
+  const [capitalize, setCapitalize] = useState(false);
+
   const gen = () => {
-    setOut(Array.from({ length: count }, () => WORDS[randInt(0, WORDS.length - 1)]).join('\n'));
+    setOut(Array.from({ length: count }, () => {
+      const w = WORDS[randInt(0, WORDS.length - 1)];
+      return capitalize ? w.charAt(0).toUpperCase() + w.slice(1) : w;
+    }).join('\n'));
     toast.success('Words generated');
   };
+
+  const presets = [
+    { label: '10 lowercase', apply: () => { setCount(10); setCapitalize(false); gen(); } },
+    { label: '10 Capitalized', apply: () => { setCount(10); setCapitalize(true); gen(); } },
+    { label: '50 words', apply: () => { setCount(50); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(10); } },
+  ];
+
+  const resultText = out ? `Generated ${count} words` : 'Configure and generate';
+
   return (
-    <Section title="Random Word Generator">
-      <CountSlider value={count} onChange={setCount} />
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Words</button>
-      <OutputBlock value={out} />
-    </Section>
+    <CalculatorShell title="Random Word Generator" result={resultText} onCalculate={gen} presets={presets} accent="green" downloadData={out} downloadFilename="random-words.txt">
+      <label className={labelClass}>Count</label>
+      <CountSlider value={count} onChange={setCount} max={100} />
+
+      <label className="flex items-center gap-2">
+        <input type="checkbox" checked={capitalize} onChange={e => setCapitalize(e.target.checked)} className="accent-green-500" />
+        <span className="text-sm">Capitalize</span>
+      </label>
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Words</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
@@ -226,6 +358,7 @@ export function LicenseKeyGenerator() {
   const [count, setCount] = useState(5);
   const [format, setFormat] = useState('XXXXX-XXXXX-XXXXX-XXXXX');
   const [out, setOut] = useState('');
+
   const gen = () => {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const lines = Array.from({ length: count }, () =>
@@ -234,16 +367,29 @@ export function LicenseKeyGenerator() {
     setOut(lines.join('\n'));
     toast.success('License keys generated');
   };
+
+  const presets = [
+    { label: '5 × Standard', apply: () => { setCount(5); setFormat('XXXXX-XXXXX-XXXXX-XXXXX'); gen(); } },
+    { label: '10 × Compact', apply: () => { setCount(10); setFormat('XXXX-XXXX-XXXX'); gen(); } },
+    { label: '3 × Long', apply: () => { setCount(3); setFormat('XXXXX-XXXXX-XXXXX-XXXXX-XXXXX'); gen(); } },
+    { label: 'Custom', apply: () => { setFormat('XXXX-XXXX-XXXX-XXXX'); gen(); } },
+  ];
+
+  const resultText = out ? `Generated ${count} license keys` : 'Configure and generate';
+
   return (
-    <Section title="License Key Generator">
+    <CalculatorShell title="License Key Generator" result={resultText} onCalculate={gen} presets={presets} accent="violet" downloadData={out} downloadFilename="license-keys.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
       <CountSlider value={count} onChange={setCount} />
-      <div className="space-y-1">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char)</label>
-        <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX" className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" />
-      </div>
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Keys</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char, - = separator)</label>
+      <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX"
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Keys</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
@@ -253,6 +399,9 @@ const C_PRODUCTS = ['Widget Pro','Basic Widget','Widget Max','Premium Widget','W
 export function ImagePlaceholderGenerator() {
   const [count, setCount] = useState(3);
   const [out, setOut] = useState('');
+  const [width, setWidth] = useState(400);
+  const [height, setHeight] = useState(300);
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
       const w = randInt(100, 800);
@@ -264,38 +413,81 @@ export function ImagePlaceholderGenerator() {
     setOut(lines.join('\n\n'));
     toast.success('Placeholders generated');
   };
+
+  const presets = [
+    { label: '3 × 400×300', apply: () => { setCount(3); setWidth(400); setHeight(300); gen(); } },
+    { label: '5 × 800×600', apply: () => { setCount(5); setWidth(800); setHeight(600); gen(); } },
+    { label: '10 × 1920×1080', apply: () => { setCount(10); setWidth(1920); setHeight(1080); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(3); } },
+  ];
+
+  const resultText = out ? `Generated ${count} SVG placeholders (${width}×${height})` : 'Configure and generate';
+
   return (
-    <Section title="Image Placeholder Generator">
+    <CalculatorShell title="Image Placeholder Generator" result={resultText} onCalculate={gen} presets={presets} accent="cyan" downloadData={out} downloadFilename="placeholders.txt">
+      <div className="grid grid-cols-2 gap-3 mb-3">
+        <div>
+          <label className={labelClass}>Width</label>
+          <input type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+        </div>
+        <div>
+          <label className={labelClass}>Height</label>
+          <input type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/50" />
+        </div>
+      </div>
+
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-      <p className="text-xs text-[var(--text-muted)]">Generates SVG placeholders as base64 data URIs</p>
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Placeholders</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Placeholders</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
 export function LogoPlaceholderGenerator() {
   const [count, setCount] = useState(3);
   const [out, setOut] = useState('');
+  const [size, setSize] = useState(120);
+
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
       const brand = C_PRODUCTS[randInt(0, C_PRODUCTS.length - 1)];
       const initials = brand.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase();
-      const size = randInt(80, 200);
+      const sz = randInt(80, 200);
       const bg = C_BG[randInt(0, C_BG.length - 1)];
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" rx="${size * 0.2}" fill="${bg}"/><text x="${size / 2}" y="${size / 2}" font-family="sans-serif" font-size="${size * 0.4}" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">${initials}</text></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}"><rect width="${sz}" height="${sz}" rx="${sz * 0.2}" fill="${bg}"/><text x="${sz / 2}" y="${sz / 2}" font-family="sans-serif" font-size="${sz * 0.4}" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">${initials}</text></svg>`;
       return `${brand}: data:image/svg+xml;base64,${btoa(svg)}`;
     });
     setOut(lines.join('\n\n'));
     toast.success('Logo placeholders generated');
   };
+
+  const presets = [
+    { label: '3 × 120px', apply: () => { setCount(3); setSize(120); gen(); } },
+    { label: '5 × 200px', apply: () => { setCount(5); setSize(200); gen(); } },
+    { label: '10 × 100px', apply: () => { setCount(10); setSize(100); gen(); } },
+    { label: 'Clear', apply: () => { setOut(''); setCount(3); } },
+  ];
+
+  const resultText = out ? `Generated ${count} logo placeholders (${size}px)` : 'Configure and generate';
+
   return (
-    <Section title="Logo Placeholder Generator">
+    <CalculatorShell title="Logo Placeholder Generator" result={resultText} onCalculate={gen} presets={presets} accent="pink" downloadData={out} downloadFilename="logos.txt">
+      <label className={labelClass}>Size (px)</label>
+      <input type="range" min={50} max={300} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-pink-500 mb-2" />
+      <div className="text-xs text-[var(--text-muted)] text-right mb-3">{size}px</div>
+
+      <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-      <p className="text-xs text-[var(--text-muted)]">Branded SVG logos with random colors</p>
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Logos</button>
-      <OutputBlock value={out} />
-    </Section>
+
+      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Logos</button>
+
+      {out && <OutputBlock value={out} />}
+    </CalculatorShell>
   );
 }
 
@@ -305,6 +497,7 @@ export function OpenGraphGenerator() {
   const [url, setUrl] = useState('https://example.com');
   const [img, setImg] = useState('https://example.com/image.jpg');
   const [out, setOut] = useState('');
+
   const gen = () => {
     const tags = [
       `<meta property="og:title" content="${title}" />`,
@@ -320,17 +513,40 @@ export function OpenGraphGenerator() {
     setOut(tags.join('\n'));
     toast.success('OG tags generated');
   };
+
+  const presets = [
+    { label: 'Blog Post', apply: () => { setTitle('My Blog Post'); setDesc('An interesting article about web development'); setUrl('https://example.com/blog/post'); setImg('https://example.com/blog-image.jpg'); } },
+    { label: 'Product Page', apply: () => { setTitle('Amazing Product'); setDesc('The best product you will ever buy'); setUrl('https://shop.example.com/product'); setImg('https://shop.example.com/product.jpg'); } },
+    { label: 'Landing Page', apply: () => { setTitle('Welcome to Our Site'); setDesc('Discover amazing features and benefits'); setUrl('https://example.com'); setImg('https://example.com/hero.jpg'); } },
+    { label: 'Clear', apply: () => { setOut(''); } },
+  ];
+
+  const resultText = out ? 'Open Graph tags generated' : 'Enter details to generate OG tags';
+
   return (
-    <Section title="Open Graph Generator">
-      <div className="space-y-2">
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label><input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label><input type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label><input type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label><input type="text" value={img} onChange={e => setImg(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+    <CalculatorShell title="Open Graph Generator" result={resultText} onCalculate={gen} presets={presets} accent="indigo" downloadData={out} downloadFilename="og-tags.html">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
+        <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="My Amazing Website"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
+        <input type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Discover the best content..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
+        <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label>
+        <input type="url" value={img} onChange={e => setImg(e.target.value)} placeholder="https://example.com/image.jpg"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate OG Tags</button>
+
+        {out && <OutputBlock value={out} />}
       </div>
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate OG Tags</button>
-      <OutputBlock value={out} />
-    </Section>
+    </CalculatorShell>
   );
 }
 
