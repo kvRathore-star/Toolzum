@@ -403,38 +403,95 @@ export function KeywordPlannerTool() {
 
 // === 6. SeoMetaTagGenerator ===
 export function SeoMetaTagGenerator() {
-  const [title, setTitle] = useState('My Amazing Page Title'); const [description, setDescription] = useState('This is a compelling meta description for search engines and social media platforms.'); const [keywords, setKeywords] = useState('toolzum, online tools, free tools'); const [result, setResult] = useState('');
-  const generate = () => { setResult(`<title>${title}</title>\n<meta name="description" content="${description}" />\n<meta name="keywords" content="${keywords}" />\n<meta property="og:title" content="${title}" />\n<meta property="og:description" content="${description}" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${title}" />\n<meta name="twitter:description" content="${description}" />`); };
+  const [title, setTitle] = useState('My Amazing Page Title');
+  const [description, setDescription] = useState('This is a compelling meta description for search engines and social media platforms.');
+  const [keywords, setKeywords] = useState('toolzum, online tools, free tools');
+  const [result, setResult] = useState('');
+
+  const generate = () => {
+    setResult(`<title>${title}</title>\n<meta name="description" content="${description}" />\n<meta name="keywords" content="${keywords}" />\n<meta property="og:title" content="${title}" />\n<meta property="og:description" content="${description}" />\n<meta name="twitter:card" content="summary_large_image" />\n<meta name="twitter:title" content="${title}" />\n<meta name="twitter:description" content="${description}" />`);
+  };
+
+  const presets = [
+    { label: 'Blog Post', apply: () => { setTitle('How to Build Amazing Web Apps'); setDescription('Learn the secrets of building modern web applications with the latest technologies and best practices.'); setKeywords('web development, programming, tutorial'); } },
+    { label: 'Product Page', apply: () => { setTitle('Premium Widget Pro - Best Quality Widget'); setDescription('The ultimate widget for professionals. Durable, efficient, and affordable.'); setKeywords('widget, premium, professional, tools'); } },
+    { label: 'Landing Page', apply: () => { setTitle('Welcome to Toolzum - Free Online Tools'); setDescription('Discover 1000+ free online tools for developers, designers, and everyday tasks. No sign-up required.'); setKeywords('free tools, online tools, developer tools'); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? 'Meta tags generated successfully' : 'Enter details to generate meta tags';
 
   return (
-    <Section title="SEO Meta Tag Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label={`Title (${title.length}/60)`} value={title} onChange={setTitle} />
-          <Input label={`Description (${description.length}/160)`} value={description} onChange={setDescription} rows={3} />
-          <Input label="Keywords" value={keywords} onChange={setKeywords} />
-          <button onClick={generate} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Meta Tags</button>
+    <CalculatorShell title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title (<span id="title-len">{title.length}</span>/60)</label>
+          <input type="text" value={title} onChange={e => setTitle(e.target.value)}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Fill fields and generate meta tags</p>)}</div>
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description (<span id="desc-len">{description.length}</span>/160)</label>
+          <textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Compelling description for search engines and social media..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Keywords</label>
+          <input type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="toolzum, online tools, free tools"
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+        </div>
+
+        <button onClick={generate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Meta Tags</button>
+
+        {result && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Generated Meta Tags</label>
+            <textarea readOnly value={result} rows={10}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
 // === 7. SeoPreviewGenerator ===
 export function SeoPreviewGenerator() {
-  const [title, setTitle] = useState('Toolzum - Free Online Tools'); const [url, setUrl] = useState('https://toolzum.com/'); const [description, setDescription] = useState('Free online tools for developers, designers, and everyday tasks. No sign-up required, 100% browser-based.');
+  const [title, setTitle] = useState('Toolzum - Free Online Tools');
+  const [url, setUrl] = useState('https://toolzum.com/');
+  const [description, setDescription] = useState('Free online tools for developers, designers, and everyday tasks. No sign-up required, 100% browser-based.');
+
   const ogLength = title.length;
   const descLength = description.length;
 
+  const presets = [
+    { label: 'Toolzum', apply: () => { setTitle('Toolzum - Free Online Tools'); setUrl('https://toolzum.com/'); setDescription('Free online tools for developers, designers, and everyday tasks. No sign-up required, 100% browser-based.'); } },
+    { label: 'E-commerce', apply: () => { setTitle('Buy Premium Widgets Online - Best Prices'); setUrl('https://shop.example.com/widgets'); setDescription('Shop premium widgets at unbeatable prices. Fast shipping, easy returns.'); } },
+    { label: 'Blog Post', apply: () => { setTitle('10 Tips for Better SEO in 2024'); setUrl('https://blog.example.com/seo-tips-2024'); setDescription('Boost your search rankings with these proven SEO strategies and techniques.'); } },
+    { label: 'Clear', apply: () => { setTitle(''); setUrl(''); setDescription(''); } },
+  ];
+
+  const resultText = `Title: ${ogLength}/60 ${ogLength > 60 ? '⚠️ Too long' : '✓'} | Description: ${descLength}/160 ${descLength > 160 ? '⚠️ Too long' : '✓'}`;
+
   return (
-    <Section title="SEO Preview Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label={`Title (${ogLength}/60) ${ogLength > 60 ? 'Too long!' : ''}`} value={title} onChange={setTitle} />
-          <Input label="URL" value={url} onChange={setUrl} />
-          <Input label={`Description (${descLength}/160) ${descLength > 160 ? 'Too long!' : ''}`} value={description} onChange={setDescription} rows={3} />
+    <CalculatorShell title="SEO Preview Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
+          <input type="text" value={title} onChange={e => setTitle(e.target.value)}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
+          <input type="url" value={url} onChange={e => setUrl(e.target.value)}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
+          <textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Meta description..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+        </div>
+
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">
           <p className="text-xs font-bold text-[var(--text-muted)] uppercase mb-3">Google SERP Preview</p>
           <div className="p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)]">
@@ -443,8 +500,19 @@ export function SeoPreviewGenerator() {
             <div className="text-sm text-zinc-600 dark:text-[var(--text-muted)] leading-snug">{description}</div>
           </div>
         </div>
+
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="p-2 bg-[var(--bg-surface)] rounded-lg text-center">
+            <div className="text-[var(--text-muted)]">Title Length</div>
+            <div className={`font-bold ${ogLength > 60 ? 'text-red-500' : 'text-green-500'}`}>{ogLength}/60</div>
+          </div>
+          <div className="p-2 bg-[var(--bg-surface)] rounded-lg text-center">
+            <div className="text-[var(--text-muted)]">Description Length</div>
+            <div className={`font-bold ${descLength > 160 ? 'text-red-500' : 'text-green-500'}`}>{descLength}/160</div>
+          </div>
+        </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
