@@ -2,7 +2,8 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
-import { Shield, Hash, Search } from 'lucide-react';
+import { Shield, Hash, Search, Download, Copy } from 'lucide-react';
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
@@ -621,46 +622,55 @@ export function ULIDGenerator() {
     setUlids(results);
   }, [count]);
 
+  const presets = [
+    { label: '1 ULID', apply: () => { setCount(1); generate(); } },
+    { label: '5 ULIDs', apply: () => { setCount(5); generate(); } },
+    { label: '10 ULIDs', apply: () => { setCount(10); generate(); } },
+    { label: '20 ULIDs', apply: () => { setCount(20); generate(); } },
+    { label: 'Clear', apply: () => { setUlids([]); } },
+  ];
+
+  const resultText = ulids.length > 0 ? `Generated ${ulids.length} ULIDs` : 'Configure and generate';
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div>
-        <h1 className="text-2xl font-bold">ULID Generator</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">Generate Universally Unique Lexicographically Sortable Identifiers.</p>
-      </div>
-
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">ULID Generator</h3>
-        </div>
-
+    <CalculatorShell
+      title="ULID Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="emerald"
+      downloadData={JSON.stringify({ count, ulids }, null, 2)}
+      downloadFilename="ulids.json"
+    >
+      <div className="space-y-4">
         <div className="space-y-3">
-          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count: {count}</label>
           <input type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))}
             className="w-full accent-emerald-500" />
         </div>
 
-        <button onClick={generate}
-          className="bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all active:scale-95 text-sm">
-          Generate New
-        </button>
+        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate New</button>
 
         {ulids.length > 0 && (
-          <div className="space-y-2">
-            {ulids.map((item, i) => (
-              <div key={i} className="flex items-center gap-2 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3">
-                <div className="flex-1 min-w-0">
-                  <code className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{item.ulid}</code>
-                  <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{new Date(item.timestamp).toISOString()}</div>
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <div className="space-y-2 max-h-[400px] overflow-y-auto">
+              {ulids.map((item, i) => (
+                <div key={i} className="flex items-center gap-2 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3">
+                  <div className="flex-1 min-w-0">
+                    <code className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{item.ulid}</code>
+                    <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{new Date(item.timestamp).toISOString()}</div>
+                  </div>
+                  <button onClick={() => { clipboardWrite(item.ulid); toast.success('ULID copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
                 </div>
-                <button onClick={() => { clipboardWrite(item.ulid); toast.success('ULID copied!'); }}
-                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
+        {!ulids.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure count and generate ULIDs</p>
+        )}
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
 
@@ -679,25 +689,31 @@ export function NumeronymGenerator() {
 
   const acronym = input.trim() ? toAcronym(input) : '';
 
+  const presets = [
+    { label: 'internationalization', apply: () => { setInput('internationalization'); } },
+    { label: 'localization', apply: () => { setInput('localization'); } },
+    { label: 'accessibility', apply: () => { setInput('accessibility'); } },
+    { label: 'personalization', apply: () => { setInput('personalization'); } },
+    { label: 'Clear', apply: () => { setInput(''); setPreserveCase(false); } },
+  ];
+
+  const resultText = input.trim() ? `Numeronym: ${numeronym} | Acronym: ${acronym} | Words: ${wordCount}` : 'Enter text to generate';
+
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div>
-        <h1 className="text-2xl font-bold">Numeronym Generator</h1>
-        <p className="text-sm text-[var(--text-secondary)] mt-1">Create numeronyms like i18n and acronyms from any text.</p>
-      </div>
-
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div className="flex items-center gap-2">
-          <Hash className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">Numeronym Generator</h3>
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Input Text</label>
-          <input type="text" value={input} onChange={e => setInput(e.target.value)}
-            placeholder="e.g., internationalization"
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-emerald-400 transition-colors" />
-        </div>
+    <CalculatorShell
+      title="Numeronym Generator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="emerald"
+      downloadData={JSON.stringify({ input, numeronym, acronym, wordCount, preserveCase }, null, 2)}
+      downloadFilename="numeronym.json"
+    >
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input type="text" value={input} onChange={e => setInput(e.target.value)}
+          placeholder="e.g., internationalization"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
 
         <div className="flex items-center gap-2">
           <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
@@ -713,8 +729,7 @@ export function NumeronymGenerator() {
             <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Numeronym</span>
-                <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }}
-                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
               <code className="text-lg font-mono font-bold text-emerald-600 dark:text-emerald-400 break-all">{numeronym}</code>
             </div>
@@ -722,8 +737,7 @@ export function NumeronymGenerator() {
             <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Acronym</span>
-                <button onClick={() => { clipboardWrite(acronym); toast.success('Acronym copied!'); }}
-                  className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                <button onClick={() => { clipboardWrite(acronym); toast.success('Acronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
               <code className="text-lg font-mono font-bold text-blue-600 dark:text-blue-400 break-all">{acronym}</code>
             </div>
@@ -742,7 +756,7 @@ export function NumeronymGenerator() {
           </div>
         </div>
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
 

@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
-import { SmilePlus, Image } from 'lucide-react';
+import { SmilePlus, Image, Type, Download, Copy } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 const EMOJIS = [
   // Smileys
@@ -485,27 +486,39 @@ export function ASCIIArtGenerator() {
 
   const asciiResult = useMemo(() => makeAsciiArt(asciiInput, asciiStyle), [asciiInput, asciiStyle]);
 
+  const presets = [
+    { label: 'HELLO (Block)', apply: () => { setAsciiInput('HELLO'); setAsciiStyle('block'); } },
+    { label: 'WORLD (Bubble)', apply: () => { setAsciiInput('WORLD'); setAsciiStyle('bubble'); } },
+    { label: 'ASCII (Fancy)', apply: () => { setAsciiInput('ASCII'); setAsciiStyle('fancy'); } },
+    { label: '1234 (Digital)', apply: () => { setAsciiInput('1234'); setAsciiStyle('digital'); } },
+    { label: 'Clear', apply: () => { setAsciiInput(''); } },
+  ];
+
+  const resultText = asciiResult ? `Generated ${asciiStyle} style ASCII art` : 'Enter text and select style';
+
   return (
-    <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
-        <Image className="w-6 h-6 text-blue-600 dark:text-blue-400" /> ASCII Art Generator
-      </h1>
-      <p className="text-sm text-[var(--text-secondary)]">
-        Convert text to ASCII art with block, bubble, fancy, and digital styles.
-      </p>
+    <CalculatorShell
+      title="ASCII Art Generator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="blue"
+      downloadData={asciiResult}
+      downloadFilename="ascii-art.txt"
+    >
       <div className="space-y-4">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-          <input value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
-          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
-            {['simple', 'block', 'bubble', 'fancy', 'digital'].map(s => (
-              <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
-              </button>
-            ))}
-          </div>
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 outline-none font-mono" />
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
+          {['simple', 'block', 'bubble', 'fancy', 'digital'].map(s => (
+            <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              {s.charAt(0).toUpperCase() + s.slice(1)}
+            </button>
+          ))}
         </div>
+
         {asciiResult && (
-          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
               <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
@@ -515,7 +528,10 @@ export function ASCIIArtGenerator() {
             </pre>
           </div>
         )}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+        {!asciiResult && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Enter text and select style to generate ASCII art</p>
+        )}
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
           <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Character Map Reference</h3>
           <div className="text-xs font-mono text-[var(--text-secondary)] leading-loose">
             <span className="text-[var(--text-primary)]">@</span> 80-100%{' '}
@@ -529,7 +545,7 @@ export function ASCIIArtGenerator() {
           </div>
         </div>
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
 
@@ -627,27 +643,38 @@ export function ASCIIFontGenerator() {
 
   const fontResult = useMemo(() => renderAsciiFont(fontInput, fontStyle), [fontInput, fontStyle]);
 
+  const presets = [
+    { label: 'HELLO', apply: () => { setFontInput('HELLO'); } },
+    { label: 'WORLD', apply: () => { setFontInput('WORLD'); } },
+    { label: 'ASCII', apply: () => { setFontInput('ASCII'); } },
+    { label: 'CLEAR', apply: () => { setFontInput(''); } },
+  ];
+
+  const resultText = fontResult ? `Generated ${fontStyle} font banner` : 'Enter text to generate';
+
   return (
-    <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
-        <Type className="w-6 h-6 text-purple-600 dark:text-purple-400" /> ASCII Font Generator
-      </h1>
-      <p className="text-sm text-[var(--text-secondary)]">
-        Generate large ASCII text banners with multiple font styles — perfect for terminal headers and text art.
-      </p>
+    <CalculatorShell
+      title="ASCII Font Generator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="purple"
+      downloadData={fontResult}
+      downloadFilename="ascii-font.txt"
+    >
       <div className="space-y-4">
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-          <input value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
-          <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
-            {['standard'].map(s => (
-              <button key={s} onClick={() => setFontStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${fontStyle === s ? 'bg-[var(--bg-elevated)] text-purple-600 dark:text-purple-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
-                {s.charAt(0).toUpperCase() + s.slice(1)}
-              </button>
-            ))}
-          </div>
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 outline-none font-mono" />
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
+          {['standard'].map(s => (
+            <button key={s} onClick={() => setFontStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${fontStyle === s ? 'bg-[var(--bg-elevated)] text-purple-600 dark:text-purple-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              {s.charAt(0).toUpperCase() + s.slice(1)}
+            </button>
+          ))}
         </div>
+
         {fontResult && (
-          <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
+          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
               <button onClick={() => copy(fontResult, 'ASCII font')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
@@ -657,8 +684,11 @@ export function ASCIIFontGenerator() {
             </pre>
           </div>
         )}
+        {!fontResult && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Enter text to generate ASCII font banner</p>
+        )}
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
 
