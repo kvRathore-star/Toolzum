@@ -33,6 +33,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export function PortNumberLookup() {
   const [port, setPort] = useState('443');
   const [result, setResult] = useState('');
+
   const lookup = () => {
     const num = parseInt(port);
     if (num < 1 || num > 65535) { setResult('Invalid port number (1-65535)'); return; }
@@ -40,20 +41,34 @@ export function PortNumberLookup() {
     const category = num < 1024 ? 'Well-known' : num < 49152 ? 'Registered' : 'Dynamic/Private';
     setResult(`Port ${num}: ${service} (${category})`);
   };
+
+  const presets = [
+    { label: 'HTTP (80)', apply: () => { setPort('80'); lookup(); } },
+    { label: 'HTTPS (443)', apply: () => { setPort('443'); lookup(); } },
+    { label: 'SSH (22)', apply: () => { setPort('22'); lookup(); } },
+    { label: 'DNS (53)', apply: () => { setPort('53'); lookup(); } },
+    { label: 'Custom', apply: () => { setPort(''); setResult(''); } },
+  ];
+
+  const resultText = result || 'Enter port number to lookup';
+
   return (
-    <Section title="Port Number Lookup">
-      <div className="space-y-3">
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label><input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        <button onClick={lookup} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Lookup</button>
-        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
+      <input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+      <button onClick={lookup} className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Lookup</button>
+
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+    </CalculatorShell>
   );
 }
 
 export function UserAgentParser() {
   const [ua, setUa] = useState('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
   const [result, setResult] = useState('');
+
   const parse = () => {
     const isChrome = ua.includes('Chrome/');
     const isFirefox = ua.includes('Firefox/');
@@ -64,21 +79,34 @@ export function UserAgentParser() {
     const version = ua.match(/(Chrome|Firefox|Safari|Edg)\/([\d.]+)/)?.[2] || 'Unknown';
     setResult(`Browser: ${browser} ${version}\nOS: ${osMatch ? osMatch[1] : 'Unknown'}`);
   };
+
+  const presets = [
+    { label: 'Chrome Desktop', apply: () => { setUa('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'); parse(); } },
+    { label: 'Firefox Desktop', apply: () => { setUa('Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0'); parse(); } },
+    { label: 'Safari iOS', apply: () => { setUa('Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'); parse(); } },
+    { label: 'Chrome Android', apply: () => { setUa('Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'); parse(); } },
+    { label: 'Clear', apply: () => { setUa(''); setResult(''); } },
+  ];
+
+  const resultText = result || 'Enter User-Agent string to parse';
+
   return (
-    <Section title="User-Agent Parser">
-      <div className="space-y-3">
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label><textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
-        <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
-        {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label>
+      <textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
+
+      <button onClick={parse} className="px-5 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Parse</button>
+
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+    </CalculatorShell>
   );
 }
 
 export function QueryStringParser() {
   const [qs, setQs] = useState('?name=Alice&age=30&active=true&tags=admin,user');
   const [result, setResult] = useState('');
-  const { copied, copy } = useCopy();
+
   const parse = () => {
     const clean = qs.startsWith('?') ? qs.slice(1) : qs;
     const params: Record<string, string> = {};
@@ -88,14 +116,26 @@ export function QueryStringParser() {
     });
     setResult(JSON.stringify(params, null, 2));
   };
+
+  const presets = [
+    { label: 'Simple', apply: () => { setQs('?name=Alice&age=30'); parse(); } },
+    { label: 'Array', apply: () => { setQs('?tags=admin&tags=user&tags=guest'); parse(); } },
+    { label: 'Nested', apply: () => { setQs('?user[name]=Alice&user[age]=30&user[active]=true'); parse(); } },
+    { label: 'Clear', apply: () => { setQs(''); setResult(''); } },
+  ];
+
+  const resultText = result || 'Enter query string to parse';
+
   return (
-    <Section title="Query String Parser">
-      <div className="space-y-3">
-        <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label><input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar" className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
-        {result && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre><button onClick={() => copy(result)} className="mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-xl text-sm font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button></div>}
-      </div>
-    </Section>
+    <CalculatorShell title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label>
+      <input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+
+      <button onClick={parse} className="px-5 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Parse</button>
+
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+    </CalculatorShell>
   );
 }
 
