@@ -255,19 +255,13 @@ export function RandomStringGenerator() {
   };
 
   const presets = [
-    { label: 'API Key (32)', apply: () => { setLength(32); setCharset('alphanumeric'); gen(); } },
-    { label: 'Session (64)', apply: () => { setLength(64); setCharset('hex'); gen(); } },
-    { label: 'Short ID (8)', apply: () => { setLength(8); setCharset('alphanumeric'); gen(); } },
-    { label: 'OTP (6)', apply: () => { setLength(6); setCharset('numeric'); gen(); } },
-    { label: 'UUID', apply: () => { setCharset('uuid'); gen(); } },
+    { label: 'API Key (32)', apply: () => { setLength(32); setCharset('alphanumeric'); generate(); } },
+    { label: 'Session (64)', apply: () => { setLength(64); setCharset('hex'); generate(); } },
+    { label: 'Short ID (8)', apply: () => { setLength(8); setCharset('alphanumeric'); generate(); } },
+    { label: 'OTP (6)', apply: () => { setLength(6); setCharset('numeric'); generate(); } },
+    { label: 'UUID', apply: () => { setCharset('uuid'); generate(); } },
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
-
-  const generate = () => {
-    let chars = '';
-    switch (charset) { case 'alpha': chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; break; case 'numeric': chars = '0123456789'; break; case 'hex': chars = '0123456789abcdef'; break; case 'hex-upper': chars = '0123456789ABCDEF'; break; case 'uuid': setResult(crypto.randomUUID()); return; default: chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; }
-    let s = ''; for (let i = 0; i < length; i++) s += chars[randInt(0, chars.length - 1)]; setResult(s);
-  };
 
   const resultText = result ? `Generated ${result.length}-char string (${charset})` : 'Configure and generate';
 
@@ -276,7 +270,7 @@ export function RandomStringGenerator() {
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {STRING_PRESETS.map(p => (
-            <button key={p.name} onClick={() => { setLength(p.length); setCharset(p.charset); gen(); }}
+            <button key={p.name} onClick={() => { setLength(p.length); setCharset(p.charset); generate(); }}
               className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.name}
             </button>
@@ -305,12 +299,12 @@ export function RandomStringGenerator() {
 
         <div className="flex gap-2">
           {[4, 8, 12, 16, 32, 64].map(n => (
-            <button key={n} onClick={() => { setLength(n); gen(); }}
+            <button key={n} onClick={() => { setLength(n); generate(); }}
               className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${length === n ? 'bg-indigo-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'`}>{n}</button>
           ))}
         </div>
 
-        <button onClick={gen} className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
+        <button onClick={generate} className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
 
         {result && (
           <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-500/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
@@ -328,22 +322,80 @@ export function RandomColorGenerator() {
   const [count, setCount] = useState(5); const [format, setFormat] = useState('hex'); const [colors, setColors] = useState<string[]>([]);
   const generate = () => {
     const c: string[] = [];
-    for (let i = 0; i < count; i++) { const r = randInt(0, 255); const g = randInt(0, 255); const b = randInt(0, 255); if (format === 'hex') c.push(`#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`); else if (format === 'rgb') c.push(`rgb(${r}, ${g}, ${b})`); else c.push(`hsl(${randInt(0, 360)}, ${randInt(50, 100)}%, ${randInt(40, 60)}%)`); }
+    for (let i = 0; i < count; i++) {
+      const r = randInt(0, 255);
+      const g = randInt(0, 255);
+      const b = randInt(0, 255);
+      if (format === 'hex') {
+        const hexR = r.toString(16).padStart(2, '0');
+        const hexG = g.toString(16).padStart(2, '0');
+        const hexB = b.toString(16).padStart(2, '0');
+        c.push('#' + hexR + hexG + hexB);
+      } else if (format === 'rgb') {
+        c.push('rgb(' + r + ', ' + g + ', ' + b + ')');
+      } else {
+        const h = randInt(0, 360);
+        const s = randInt(50, 100);
+        const l = randInt(40, 60);
+        c.push('hsl(' + h + ', ' + s + '%, ' + l + '%)');
+      }
+    }
     setColors(c);
   };
 
+  const presets = [
+    { label: '5 Colors', apply: () => { setCount(5); generate(); } },
+    { label: '10 Colors', apply: () => { setCount(10); generate(); } },
+    { label: '20 Colors', apply: () => { setCount(20); generate(); } },
+    { label: 'Pastel (HSL)', apply: () => { setFormat('hsl'); setCount(8); generate(); } },
+    { label: 'Clear', apply: () => { setColors([]); } },
+  ];
+
+  const resultText = colors.length > 0 ? `Generated ${colors.length} ${format.toUpperCase()} colors` : 'Configure and generate';
+
   return (
-    <Section title="Random Color Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3"><Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} /><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label><select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="hex">Hex</option><option value="rgb">RGB</option><option value="hsl">HSL</option></select></div></div>
-          <button onClick={generate} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Colors</button>
+    <CalculatorShell
+      title="Random Color Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="pink"
+      downloadData={JSON.stringify({ format, count, colors }, null, 2)}
+      downloadFilename="colors.json"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
+            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
+              <option value="hex">Hex</option>
+              <option value="rgb">RGB</option>
+              <option value="hsl">HSL</option>
+            </select>
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
-          {colors.length > 0 ? (<div className="flex flex-wrap gap-3 justify-center">{colors.map((c, i) => (<div key={i} className="flex flex-col items-center gap-1"><div className="w-14 h-14 rounded-xl border border-zinc-300 dark:border-zinc-600 shadow-sm" style={{ backgroundColor: c }} /><span className="text-[10px] font-mono text-[var(--text-muted)]">{c}</span><button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm text-center">Generate random colors</p>)}
-        </div>
+
+        <button onClick={generate} className="px-5 py-3 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Colors</button>
+
+        {colors.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
+            <div className="flex flex-wrap gap-3 justify-center">
+              {colors.map((c, i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <div className="w-14 h-14 rounded-xl border border-zinc-300 dark:border-zinc-600 shadow-sm" style={{ backgroundColor: c }} />
+                  <span className="text-[10px] font-mono text-[var(--text-muted)]">{c}</span>
+                  <button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {!colors.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure options and generate colors</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -353,19 +405,47 @@ export function RandomTeamGenerator() {
   const generate = () => { const names = input.split('\n').map(s => s.trim()).filter(Boolean); const shuffled = shuffleArray(names); const t: string[][] = Array.from({ length: numTeams }, () => []); shuffled.forEach((name, i) => t[i % numTeams].push(name)); setTeams(t); };
   const teamColors = ['text-emerald-500', 'text-violet-500', 'text-amber-500', 'text-blue-700 dark:text-blue-400', 'text-pink-500', 'text-cyan-500'];
 
+  const presets = [
+    { label: '2 Teams', apply: () => { setNumTeams(2); generate(); } },
+    { label: '3 Teams', apply: () => { setNumTeams(3); generate(); } },
+    { label: '4 Teams', apply: () => { setNumTeams(4); generate(); } },
+    { label: 'Clear', apply: () => { setTeams([]); } },
+  ];
+
+  const resultText = teams.length > 0 ? `Generated ${teams.length} teams from ${input.split('\n').filter(Boolean).length} names` : 'Enter names and generate teams';
+
   return (
-    <Section title="Random Team Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Names (one per line)" value={input} onChange={v => setInput(v)} rows={6} />
-          <Input label="Number of Teams" type="number" value={String(numTeams)} onChange={v => setNumTeams(Number(v))} />
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors"><Shuffle className="w-4 h-4 inline mr-1" />Generate Teams</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
-          {teams.length > 0 ? (<div className="space-y-3">{teams.map((team, i) => (<div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl"><div className={`text-sm font-bold ${teamColors[i % teamColors.length]} mb-1`}>Team {i + 1} · {team.length} members</div><div className="text-xs text-[var(--text-secondary)]">{team.join(', ')}</div></div>))}</div>) : (<p className="text-[var(--text-muted)] text-sm">Enter names and generate teams</p>)}
-        </div>
+    <CalculatorShell
+      title="Random Team Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="emerald"
+      downloadData={JSON.stringify({ teams: teams.map((t, i) => ({ team: i + 1, members: t })), totalNames: input.split('\n').filter(Boolean).length }, null, 2)}
+      downloadFilename="teams.json"
+    >
+      <div className="space-y-4">
+        <Input label="Names (one per line)" value={input} onChange={v => setInput(v)} rows={6} />
+        <Input label="Number of Teams" type="number" value={String(numTeams)} onChange={v => setNumTeams(Number(v))} />
+        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><Shuffle className="w-4 h-4 inline mr-1" />Generate Teams</button>
+
+        {teams.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <div className="space-y-3">
+              {teams.map((team, i) => (
+                <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl">
+                  <div className={`text-sm font-bold ${teamColors[i % teamColors.length]} mb-1`}>Team {i + 1} · {team.length} members</div>
+                  <div className="text-xs text-[var(--text-secondary)]">{team.join(', ')}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        {!teams.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Enter names and generate teams</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -374,18 +454,44 @@ export function RandomPickerGenerator() {
   const [input, setInput] = useState('Option A\nOption B\nOption C\nOption D'); const [count, setCount] = useState(1); const [allowRepeat, setAllowRepeat] = useState(false); const [result, setResult] = useState<string[]>([]);
   const pick = () => { const items = input.split('\n').map(s => s.trim()).filter(Boolean); if (!items.length) return; if (allowRepeat) { const picked: string[] = []; for (let i = 0; i < count; i++) picked.push(randItem(items)); setResult(picked); } else { const shuffled = shuffleArray(items); setResult(shuffled.slice(0, Math.min(count, items.length))); } };
 
+  const presets = [
+    { label: 'Pick 1', apply: () => { setCount(1); pick(); } },
+    { label: 'Pick 3', apply: () => { setCount(3); pick(); } },
+    { label: 'Pick 5', apply: () => { setCount(5); pick(); } },
+    { label: 'Clear', apply: () => { setResult([]); } },
+  ];
+
+  const resultText = result.length > 0 ? `Picked ${result.length} of ${input.split('\n').filter(Boolean).length} items (${allowRepeat ? 'with' : 'without'} repeats)` : 'Add items and pick';
+
   return (
-    <Section title="Random Picker Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Items (one per line)" value={input} onChange={v => setInput(v)} rows={5} />
-          <Input label="Pick Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-violet-500" />Allow repeats</label>
-          <button onClick={pick} className="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors"><Shuffle className="w-4 h-4 inline mr-1" />Pick</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">{result.length > 0 ? (<div className="text-center"><p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p><button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3"><Copy size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Add items and pick</p>)}</div>
+    <CalculatorShell
+      title="Random Picker Generator"
+      result={resultText}
+      onCalculate={pick}
+      presets={presets}
+      accent="violet"
+      downloadData={JSON.stringify({ items: input.split('\n').map(s => s.trim()).filter(Boolean), picked: result, allowRepeat, count }, null, 2)}
+      downloadFilename="picked-items.json"
+    >
+      <div className="space-y-4">
+        <Input label="Items (one per line)" value={input} onChange={v => setInput(v)} rows={5} />
+        <Input label="Pick Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-violet-500" />Allow repeats</label>
+        <button onClick={pick} className="px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><Shuffle className="w-4 h-4 inline mr-1" />Pick</button>
+
+        {result.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
+            <div className="text-center">
+              <p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p>
+              <button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3"><Copy size={14} /></button>
+            </div>
+          </div>
+        )}
+        {!result.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Add items and pick</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -436,21 +542,50 @@ export function RandomDecisionMaker() {
     ctx.fillText(choice, cx, cy);
   }, [choice]);
 
+  const presets = [
+    { label: 'Yes/No', apply: () => { setOptions('Yes\nNo'); } },
+    { label: 'Yes/No/Maybe', apply: () => { setOptions('Yes\nNo\nMaybe'); } },
+    { label: '3 Options', apply: () => { setOptions('Option A\nOption B\nOption C'); } },
+    { label: 'Clear', apply: () => { setChoice(''); setHistory([]); } },
+  ];
+
+  const resultText = choice ? `Decision: ${choice}` : 'Enter options and decide';
+
   return (
-    <Section title="Random Decision Maker">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="What are you deciding? (optional)" value={question} onChange={v => setQuestion(v)} placeholder="e.g. Should I go out tonight?" />
-          <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
-          <button onClick={decide} disabled={spinning} className={`px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors ${spinning ? 'opacity-60' : ''}`}>{spinning ? 'Spinning...' : 'Decide'}</button>
-        </div>
+    <CalculatorShell
+      title="Random Decision Maker"
+      result={resultText}
+      onCalculate={decide}
+      presets={presets}
+      accent="amber"
+      downloadData={JSON.stringify({ question, options: options.split('\n').map(s => s.trim()).filter(Boolean), decision: choice, history }, null, 2)}
+      downloadFilename="decision.json"
+    >
+      <div className="space-y-4">
+        <Input label="What are you deciding? (optional)" value={question} onChange={v => setQuestion(v)} placeholder="e.g. Should I go out tonight?" />
+        <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
+        <button onClick={decide} disabled={spinning} className={`px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto ${spinning ? 'opacity-60' : ''}`}>{spinning ? 'Spinning...' : 'Decide'}</button>
+
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
           <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
           {choice && <button onClick={() => { clipboardWrite(choice); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3"><Copy size={14} /></button>}
         </div>
+
+        {history.length > 0 && (
+          <div className="border-t border-[var(--border-subtle)] pt-4">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">History</h4>
+              <button onClick={() => setHistory([])} className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent)]"><RotateCcw size={12} /> Clear</button>
+            </div>
+            <div className="space-y-1">
+              {history.map((h, i) => (
+                <div key={i} className="p-2 bg-[var(--bg-surface)] rounded-lg text-xs text-[var(--text-secondary)]">{h}</div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      {history.length > 0 && (<div className="border-t border-[var(--border-subtle)] pt-4"><div className="flex items-center justify-between mb-3"><h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">History</h4><button onClick={() => setHistory([])} className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent)]"><RotateCcw size={12} /> Clear</button></div><div className="space-y-1">{history.map((h, i) => (<div key={i} className="p-2 bg-[var(--bg-surface)] rounded-lg text-xs text-[var(--text-secondary)]">{h}</div>))}</div></div>)}
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -461,21 +596,53 @@ export function RandomUsernameGenerator() {
   const [pattern, setPattern] = useState('adj-noun'); const [includeNum, setIncludeNum] = useState(false); const [count, setCount] = useState(5); const [results, setResults] = useState<string[]>([]);
   const generate = () => { const usernames: string[] = []; for (let i = 0; i < count; i++) { let u = ''; switch (pattern) { case 'adj-noun': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}`; break; case 'noun-num': u = `${randItem(NOUNS)}${randInt(10, 999)}`; break; case 'adj-noun-num': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}${randInt(10, 999)}`; break; case 'word-word': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}`.toLowerCase(); break; } if (includeNum) u += randInt(10, 999); usernames.push(u); } setResults(usernames); };
 
+  const presets = [
+    { label: 'Adjective + Noun', apply: () => { setPattern('adj-noun'); generate(); } },
+    { label: 'Noun + Number', apply: () => { setPattern('noun-num'); generate(); } },
+    { label: 'Adjective + Noun + Number', apply: () => { setPattern('adj-noun-num'); generate(); } },
+    { label: 'word-word (lowercase)', apply: () => { setPattern('word-word'); generate(); } },
+    { label: 'Clear', apply: () => { setResults([]); } },
+  ];
+
+  const resultText = results.length > 0 ? `Generated ${results.length} usernames (${pattern})` : 'Configure and generate';
+
   return (
-    <Section title="Random Username Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pattern</label>
-            <select value={pattern} onChange={e => setPattern(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="adj-noun">Adjective + Noun</option><option value="noun-num">Noun + Number</option><option value="adj-noun-num">Adjective + Noun + Number</option><option value="word-word">word-word (lowercase)</option></select>
-          </div>
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-indigo-500" />Append random number</label>
-          <button onClick={generate} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Usernames</button>
+    <CalculatorShell
+      title="Random Username Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="indigo"
+      downloadData={JSON.stringify({ pattern, includeNum, count, usernames: results }, null, 2)}
+      downloadFilename="usernames.json"
+    >
+      <div className="space-y-4">
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pattern</label>
+          <select value={pattern} onChange={e => setPattern(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="adj-noun">Adjective + Noun</option><option value="noun-num">Noun + Number</option><option value="adj-noun-num">Adjective + Noun + Number</option><option value="word-word">word-word (lowercase)</option></select>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">{results.length > 0 ? (<div className="space-y-1">{results.map((u, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm"><span className="font-mono">{u}</span><button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-indigo-500 hover:underline"><Copy size={12} /></button></div>))}<button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate usernames</p>)}</div>
+        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-indigo-500" />Append random number</label>
+        <button onClick={generate} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Usernames</button>
+
+        {results.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+            <div className="space-y-1 max-h-[300px] overflow-y-auto">
+              {results.map((u, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
+                  <span className="font-mono">{u}</span>
+                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-indigo-500 hover:underline"><Copy size={12} /></button>
+                </div>
+              ))}
+              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+            </div>
+          </div>
+        )}
+        {!results.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate usernames</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -484,16 +651,53 @@ export function RandomUUIDGenerator() {
   const [version, setVersion] = useState('v4'); const [count, setCount] = useState(1); const [results, setResults] = useState<string[]>([]);
   const generate = () => { const uuids: string[] = []; for (let i = 0; i < count; i++) { if (version === 'v4') uuids.push(crypto.randomUUID()); else { const arr = new Uint8Array(16); crypto.getRandomValues(arr); arr[6] = (arr[6] & 0x0f) | 0x70; arr[8] = (arr[8] & 0x3f) | 0x80; const hex = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join(''); uuids.push(`${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`); } } setResults(uuids); };
 
+  const presets = [
+    { label: 'UUID v4 (Random)', apply: () => { setVersion('v4'); setCount(5); generate(); } },
+    { label: 'UUID v7 (Time-Ordered)', apply: () => { setVersion('v7'); setCount(5); generate(); } },
+    { label: '10 UUIDs', apply: () => { setCount(10); generate(); } },
+    { label: 'Clear', apply: () => { setResults([]); } },
+  ];
+
+  const resultText = results.length > 0 ? `Generated ${results.length} ${version.toUpperCase()}s` : 'Configure and generate';
+
   return (
-    <Section title="Random UUID Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3"><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Version</label><select value={version} onChange={e => setVersion(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="v4">UUID v4 (Random)</option><option value="v7">UUID v7 (Time-Ordered)</option></select></div><Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} /></div>
-          <button onClick={generate} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors">Generate UUIDs</button>
+    <CalculatorShell
+      title="Random UUID Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="cyan"
+      downloadData={JSON.stringify({ version, count, uuids: results }, null, 2)}
+      downloadFilename="uuids.json"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Version</label>
+            <select value={version} onChange={e => setVersion(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="v4">UUID v4 (Random)</option><option value="v7">UUID v7 (Time-Ordered)</option></select>
+          </div>
+          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">{results.length > 0 ? (<div className="space-y-1 max-h-[300px] overflow-y-auto">{results.map((u, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-xs font-mono"><span>{u}</span><button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-cyan-500 hover:underline"><Copy size={12} /></button></div>))}<button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate UUIDs</p>)}</div>
+        <button onClick={generate} className="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate UUIDs</button>
+
+        {results.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+            <div className="space-y-1 max-h-[300px] overflow-y-auto">
+              {results.map((u, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-xs font-mono">
+                  <span>{u}</span>
+                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-cyan-500 hover:underline"><Copy size={12} /></button>
+                </div>
+              ))}
+              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+            </div>
+          </div>
+        )}
+        {!results.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate UUIDs</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -503,16 +707,50 @@ export function RandomTokenGenerator() {
   const generate = () => { const bytes = new Uint8Array(Math.ceil(length * (format === 'base64' ? 0.75 : 0.5))); crypto.getRandomValues(bytes); if (format === 'hex') setResult(Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('').slice(0, length)); else if (format === 'base64') setResult(btoa(String.fromCharCode(...bytes)).replace(/=+$/, '').slice(0, length)); else { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; let s = ''; for (let i = 0; i < length; i++) s += chars[randInt(0, chars.length - 1)]; setResult(s); } };
   const entropy = Math.round(length * Math.log2(format === 'hex' ? 16 : format === 'base64' ? 64 : 62));
 
+  const presets = [
+    { label: 'Hex (32)', apply: () => { setFormat('hex'); setLength(32); generate(); } },
+    { label: 'Base64 (32)', apply: () => { setFormat('base64'); setLength(32); generate(); } },
+    { label: 'Alphanumeric (32)', apply: () => { setFormat('alphanumeric'); setLength(32); generate(); } },
+    { label: 'API Key (64)', apply: () => { setFormat('hex'); setLength(64); generate(); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? `Generated ${length}-char ${format.toUpperCase()} token (${entropy} bits entropy)` : 'Configure and generate';
+
   return (
-    <Section title="Random Token Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3"><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label><select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="hex">Hex</option><option value="base64">Base64</option><option value="alphanumeric">Alphanumeric</option></select></div><Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} /></div>
-          <button onClick={generate} className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Token</button>
+    <CalculatorShell
+      title="Random Token Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="rose"
+      downloadData={result ? JSON.stringify({ format, length, token: result, entropy }, null, 2) : ''}
+      downloadFilename="token.json"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
+            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="hex">Hex</option><option value="base64">Base64</option><option value="alphanumeric">Alphanumeric</option></select>
+          </div>
+          <Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[120px]">{result ? (<><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p><p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `token.${format}`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Generate a secure token</p>)}</div>
+        <button onClick={generate} className="px-5 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Token</button>
+
+        {result ? (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[120px]">
+            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p>
+            <div className="flex gap-1 mt-2">
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `token.${format}`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate a secure token</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -528,17 +766,49 @@ export function LoremIpsumGenerator() {
     else { const paras: string[] = []; for (let i = 0; i < count; i++) { let p = sentences.slice(i * 4, (i + 1) * 4).join(' '); if (i === 0 && startLorem) p = 'Lorem ipsum dolor sit amet, ' + p.charAt(0).toLowerCase() + p.slice(1); paras.push(p); } setResult(paras.join('\n\n')); }
   };
 
+  const presets = [
+    { label: '3 Paragraphs', apply: () => { setType('paragraphs'); setCount(3); generate(); } },
+    { label: '5 Sentences', apply: () => { setType('sentences'); setCount(5); generate(); } },
+    { label: '50 Words', apply: () => { setType('words'); setCount(50); generate(); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? `Generated ${type} (${count})` : 'Configure and generate';
+
   return (
-    <Section title="Lorem Ipsum Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-3"><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label><select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select></div><Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} /></div>
-          {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-blue-500" />Start with "Lorem ipsum..."</label>}
-          <div className="flex gap-2"><button onClick={generate} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Generate</button></div>
+    <CalculatorShell
+      title="Lorem Ipsum Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="blue"
+      downloadData={result}
+      downloadFilename="lorem-ipsum.txt"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="mb-3">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
+            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select>
+          </div>
+          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" /><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'lorem-ipsum.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Generate placeholder text</p>)}</div>
+        {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-blue-500" />Start with "Lorem ipsum..."</label>}
+        <button onClick={generate} className="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
+
+        {result ? (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+            <div className="flex gap-1 mt-2">
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'lorem-ipsum.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-[var(--text-muted)] text-sm text-center">Generate placeholder text</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -547,16 +817,50 @@ export function DummyTextGenerator() {
   const [length, setLength] = useState(200); const [result, setResult] = useState('');
   const generate = () => { let text = ''; while (text.length < length) { text += randItem(LOREM_WORDS) + ' '; } setResult(text.slice(0, length).replace(/^./, c => c.toUpperCase()).replace(/\s+\S*$/, '') + '.'); };
 
+  const presets = [
+    { label: '200 chars', apply: () => { setLength(200); generate(); } },
+    { label: '500 chars', apply: () => { setLength(500); generate(); } },
+    { label: '1000 chars', apply: () => { setLength(1000); generate(); } },
+    { label: '2000 chars', apply: () => { setLength(2000); generate(); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? `Generated ${result.length} chars dummy text` : 'Configure and generate';
+
   return (
-    <Section title="Dummy Text Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="space-y-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Character Length ({length})</label><input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-sky-500" /><input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-          <button onClick={generate} className="px-4 py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Text</button>
+    <CalculatorShell
+      title="Dummy Text Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="sky"
+      downloadData={result}
+      downloadFilename="dummy-text.txt"
+    >
+      <div className="space-y-4">
+        <div className="space-y-1">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Character Length ({length})</label>
+          <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-sky-500" />
+          <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{result.length} chars</span><div className="flex gap-1"><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'dummy-text.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></div></>) : (<p className="text-[var(--text-muted)] text-sm">Generate dummy text</p>)}</div>
+        <button onClick={generate} className="px-5 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Text</button>
+
+        {result ? (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+            <div className="flex items-center justify-between mt-2">
+              <span className="text-xs text-[var(--text-muted)]">{result.length} chars</span>
+              <div className="flex gap-1">
+                <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'dummy-text.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p className="text-[var(--text-muted)] text-sm text-center">Generate dummy text</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -573,17 +877,57 @@ export function FakeDataGenerator() {
   const generate = () => { const entries: Record<string, string>[] = []; for (let i = 0; i < count; i++) { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); const entry: Record<string, string> = {}; if (fields.includes('name')) entry.Name = `${fn} ${ln}`; if (fields.includes('email')) entry.Email = `${fn.toLowerCase()}.${ln.toLowerCase()}${randInt(1, 99)}@${randItem(DOMAINS)}`; if (fields.includes('phone')) entry.Phone = `+91 ${randInt(70000, 99999)} ${randInt(10000, 99999)}`; if (fields.includes('address')) entry.Address = `${randInt(1, 999)} ${randItem(STREETS)}, ${randItem(CITIES)} - ${randInt(100001, 999999)}`; entries.push(entry); } setData(entries); };
   const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]); return [headers.join(','), ...data.map(r => headers.map(h => `"${(r[h] || '').replace(/"/g, '""')}"`).join(','))].join('\n'); };
 
+  const presets = [
+    { label: '5 Records (All Fields)', apply: () => { setCount(5); setFields(['name', 'email', 'phone', 'address']); generate(); } },
+    { label: '10 Records (All Fields)', apply: () => { setCount(10); setFields(['name', 'email', 'phone', 'address']); generate(); } },
+    { label: '20 Records (All Fields)', apply: () => { setCount(20); setFields(['name', 'email', 'phone', 'address']); generate(); } },
+    { label: 'Clear', apply: () => { setData([]); } },
+  ];
+
+  const resultText = data.length > 0 ? `Generated ${data.length} records with ${fields.length} fields` : 'Configure and generate';
+
   return (
-    <Section title="Fake Data Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <div className="flex flex-wrap gap-2"><span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider w-full">Fields</span>{(['name', 'email', 'phone', 'address'] as Field[]).map(f => (<button key={f} onClick={() => toggleField(f)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>))}</div>
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Data</button>
+    <CalculatorShell
+      title="Fake Data Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="emerald"
+      downloadData={data.length > 0 ? JSON.stringify(data, null, 2) : ''}
+      downloadFilename="fake-data.json"
+    >
+      <div className="space-y-4">
+        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <div className="flex flex-wrap gap-2">
+          <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider w-full">Fields</span>
+          {(['name', 'email', 'phone', 'address'] as Field[]).map(f => (
+            <button key={f} onClick={() => toggleField(f)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{data.length > 0 ? (<div className="space-y-1 max-h-[300px] overflow-y-auto">{data.map((d, i) => (<div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-xs leading-relaxed">{Object.entries(d).map(([k, v]) => (<div key={k}><span className="font-bold text-[var(--text-secondary)]">{k}:</span> {v}</div>))}</div>))}<div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(JSON.stringify(data, null, 2)); toast.success('Copied as JSON!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const csv = toCSV(); if (!csv) return; const blob = new Blob([csv], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'fake-data.csv'; a.click(); URL.revokeObjectURL(url); toast.success('CSV downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate fake data</p>)}</div>
+        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Data</button>
+
+        {data.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <div className="space-y-1 max-h-[300px] overflow-y-auto">
+              {data.map((d, i) => (
+                <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-xs leading-relaxed">
+                  {Object.entries(d).map(([k, v]) => (
+                    <div key={k}><span className="font-bold text-[var(--text-secondary)]">{k}:</span> {v}</div>
+                  ))}
+                </div>
+              ))}
+              <div className="flex gap-1 mt-2">
+                <button onClick={() => { clipboardWrite(JSON.stringify(data, null, 2)); toast.success('Copied as JSON!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+                <button onClick={() => { const csv = toCSV(); if (!csv) return; const blob = new Blob([csv], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'fake-data.csv'; a.click(); URL.revokeObjectURL(url); toast.success('CSV downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              </div>
+            </div>
+          </div>
+        )}
+        {!data.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate fake data</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -592,15 +936,45 @@ export function FakeIdentityGenerator() {
   const [identity, setIdentity] = useState<any>(null);
   const generate = () => { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); setIdentity({ name: `${fn} ${ln}`, email: `${fn.toLowerCase()}.${ln.toLowerCase()}${randInt(1, 99)}@${randItem(DOMAINS)}`, phone: `+91 ${randInt(70000, 99999)} ${randInt(10000, 99999)}`, address: `${randInt(1, 999)} ${randItem(STREETS)}, ${randItem(CITIES)} - ${randInt(100001, 999999)}`, dob: `${randInt(1, 28)}/${randInt(1, 12)}/${randInt(1970, 2002)}`, occupation: randItem(['Engineer', 'Doctor', 'Teacher', 'Designer', 'Developer', 'Manager', 'Consultant', 'Analyst']) }); };
 
+  const presets = [
+    { label: 'Generate', apply: () => { generate(); } },
+    { label: 'Clear', apply: () => { setIdentity(null); } },
+  ];
+
+  const resultText = identity ? `Generated identity: ${identity.name}` : 'Generate a random identity';
+
   return (
-    <Section title="Fake Identity Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <button onClick={generate} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors"><RefreshCw className="w-4 h-4 inline mr-1" />Generate Identity</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{identity ? (<div className="space-y-3"><div className="flex justify-center"><div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div></div><div className="p-4 bg-[var(--bg-surface)] rounded-xl text-sm space-y-1.5">{[['Name', identity.name], ['Email', identity.email], ['Phone', identity.phone], ['Address', identity.address], ['DOB', identity.dob], ['Occupation', identity.occupation]].map(([k, v]) => (<div key={k as string} className="flex justify-between"><span className="font-bold text-[var(--text-secondary)]">{k as string}</span><span className="text-[var(--text-primary)]">{v as string}</span></div>))}</div><button onClick={() => { clipboardWrite(JSON.stringify(identity, null, 2)); toast.success('Copied as JSON!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate a random identity</p>)}</div>
+    <CalculatorShell
+      title="Fake Identity Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="indigo"
+      downloadData={identity ? JSON.stringify(identity, null, 2) : ''}
+      downloadFilename="identity.json"
+    >
+      <div className="space-y-4">
+        <button onClick={generate} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><RefreshCw className="w-4 h-4 inline mr-1" />Generate Identity</button>
+
+        {identity ? (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <div className="space-y-3">
+              <div className="flex justify-center">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
+              </div>
+              <div className="p-4 bg-[var(--bg-surface)] rounded-xl text-sm space-y-1.5">
+                {[['Name', identity.name], ['Email', identity.email], ['Phone', identity.phone], ['Address', identity.address], ['DOB', identity.dob], ['Occupation', identity.occupation]].map(([k, v]) => (
+                  <div key={k as string} className="flex justify-between"><span className="font-bold text-[var(--text-secondary)]">{k as string}</span><span className="text-[var(--text-primary)]">{v as string}</span></div>
+                ))}
+              </div>
+              <button onClick={() => { clipboardWrite(JSON.stringify(identity, null, 2)); toast.success('Copied as JSON!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-[var(--text-muted)] text-sm text-center">Generate a random identity</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -615,16 +989,51 @@ export function FakeCreditCardGenerator() {
   const generate = () => { const c: typeof cards = []; for (let i = 0; i < count; i++) { const t = randItem(CARD_TYPES); c.push({ type: t.name, number: genCardNum(t.prefix, t.len), expiry: `${String(randInt(1, 12)).padStart(2, '0')}/${randInt(25, 30)}`, cvv: String(randInt(100, 999)) }); } setCards(c); };
   const cardColors: Record<string, string> = { Visa: 'from-blue-600 to-blue-800', Mastercard: 'from-orange-500 to-red-600', Amex: 'from-cyan-600 to-blue-700', Discover: 'from-orange-400 to-yellow-600', RuPay: 'from-emerald-600 to-teal-700' };
 
+  const presets = [
+    { label: '3 Cards', apply: () => { setCount(3); generate(); } },
+    { label: '5 Cards', apply: () => { setCount(5); generate(); } },
+    { label: '10 Cards', apply: () => { setCount(10); generate(); } },
+    { label: 'Clear', apply: () => { setCards([]); } },
+  ];
+
+  const resultText = cards.length > 0 ? `Generated ${cards.length} test cards (Luhn valid)` : 'Configure and generate';
+
   return (
-    <Section title="Fake Credit Card Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Cards</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{cards.length > 0 ? (<div className="space-y-3 max-h-[350px] overflow-y-auto">{cards.map((c, i) => (<div key={i} className={`p-4 rounded-xl bg-gradient-to-br ${cardColors[c.type] || 'from-zinc-600 to-zinc-800'} text-white shadow-md`}><div className="flex justify-between items-start"><span className="text-xs font-medium opacity-80">{c.type}</span><span className="text-[10px] opacity-60">CVV: {c.cvv}</span></div><div className="text-lg font-mono tracking-wider mt-3">{c.number.replace(/(\d{4})(?=\d)/g, '$1 ')}</div><div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div></div>))}<button onClick={() => { clipboardWrite(cards.map(c => `${c.number}|${c.expiry}|${c.cvv}`).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate test card numbers</p>)}</div>
+    <CalculatorShell
+      title="Fake Credit Card Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="amber"
+      downloadData={cards.length > 0 ? JSON.stringify(cards, null, 2) : ''}
+      downloadFilename="cards.json"
+    >
+      <div className="space-y-4">
+        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <button onClick={generate} className="px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Cards</button>
+
+        {cards.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <div className="space-y-3 max-h-[350px] overflow-y-auto">
+              {cards.map((c, i) => (
+                <div key={i} className={`p-4 rounded-xl bg-gradient-to-br ${cardColors[c.type] || 'from-zinc-600 to-zinc-800'} text-white shadow-md`}>
+                  <div className="flex justify-between items-start">
+                    <span className="text-xs font-medium opacity-80">{c.type}</span>
+                    <span className="text-[10px] opacity-60">CVV: {c.cvv}</span>
+                  </div>
+                  <div className="text-lg font-mono tracking-wider mt-3">{c.number.replace(/(\d{4})(?=\d)/g, '$1 ')}</div>
+                  <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
+                </div>
+              ))}
+              <button onClick={() => { clipboardWrite(cards.map(c => `${c.number}|${c.expiry}|${c.cvv}`).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+            </div>
+          </div>
+        )}
+        {!cards.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Generate test card numbers</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -634,20 +1043,48 @@ export function SequenceGenerator() {
   const generate = () => { const s = parseFloat(start); const d = parseFloat(diff); const c = parseInt(count); if (isNaN(s) || isNaN(d) || isNaN(c)) return; const seq: number[] = []; if (type === 'arithmetic') { for (let i = 0; i < c; i++) seq.push(s + i * d); } else if (type === 'geometric') { for (let i = 0; i < c; i++) seq.push(s * Math.pow(d, i)); } else { for (let i = 0; i < c; i++) seq.push(s + i + (i * d)); } setResult(seq); };
   const sum = result.reduce((a, b) => a + b, 0);
 
+  const presets = [
+    { label: 'Arithmetic 1-10', apply: () => { setType('arithmetic'); setStart('1'); setDiff('1'); setCount('10'); generate(); } },
+    { label: 'Geometric 2^n', apply: () => { setType('geometric'); setStart('1'); setDiff('2'); setCount('10'); generate(); } },
+    { label: 'Even Numbers', apply: () => { setType('arithmetic'); setStart('2'); setDiff('2'); setCount('10'); generate(); } },
+    { label: 'Clear', apply: () => { setResult([]); } },
+  ];
+
+  const resultText = result.length > 0 ? `Generated ${result.length} numbers (${type}, sum: ${sum.toLocaleString()})` : 'Configure and generate';
+
   return (
-    <Section title="Sequence Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
-          </div>
-          <div className="grid grid-cols-3 gap-3"><Input label="Start" type="number" value={start} onChange={v => setStart(v)} /><Input label="Diff/Ratio" type="number" value={diff} onChange={v => setDiff(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
-          <button onClick={generate} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Sequence</button>
+    <CalculatorShell
+      title="Sequence Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="amber"
+      downloadData={result.length > 0 ? JSON.stringify({ type, start: parseFloat(start), diff: parseFloat(diff), count: parseInt(count), sequence: result, sum }, null, 2) : ''}
+      downloadFilename="sequence.json"
+    >
+      <div className="space-y-4">
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
+          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">{result.length > 0 ? (<><p className="text-sm font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p><p className="text-xs text-[var(--text-muted)] mt-2">Sum: {sum.toLocaleString()} · Count: {result.length}</p><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'sequence.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Generate a number sequence</p>)}</div>
+        <div className="grid grid-cols-3 gap-3"><Input label="Start" type="number" value={start} onChange={v => setStart(v)} /><Input label="Diff/Ratio" type="number" value={diff} onChange={v => setDiff(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
+        <button onClick={generate} className="px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Sequence</button>
+
+        {result.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
+            <p className="text-sm font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-2">Sum: {sum.toLocaleString()} · Count: {result.length}</p>
+            <div className="flex gap-1 mt-2">
+              <button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'sequence.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
+          </div>
+        )}
+        {!result.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Generate a number sequence</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -657,13 +1094,44 @@ export function BarcodeGenerator() {
   const [input, setInput] = useState('123456789012'); const [type, setType] = useState('UPC-A'); const svgRef = useRef<SVGSVGElement>(null);
   const renderBarcode = () => { const patterns = BARCODE_PATTERNS[type] || BARCODE_PATTERNS['UPC-A']; const digits = input.replace(/\D/g, '').split('').slice(0, 12); const barWidth = 2; const height = 80; let x = 20; const bars: { x: number; w: number }[] = []; bars.push({ x, w: barWidth }); x += barWidth; bars.push({ x, w: barWidth * 2 }); x += barWidth * 2; for (const d of digits) { const p = patterns[parseInt(d)] || patterns[0]; for (const c of p) { bars.push({ x, w: parseInt(c) * barWidth }); x += parseInt(c) * barWidth; } } bars.push({ x, w: barWidth * 2 }); x += barWidth * 2; bars.push({ x, w: barWidth }); const totalWidth = x + 20; return (<svg ref={svgRef} width={totalWidth} height={height + 30} xmlns="http://www.w3.org/2000/svg" className="mx-auto">{bars.map((b, i) => (<rect key={i} x={b.x} y={10} width={b.w} height={height} fill={i % 2 === 0 ? '#000' : '#fff'} />))}<text x={totalWidth / 2} y={height + 25} textAnchor="middle" fontSize="12" fontFamily="monospace">{input}</text></svg>); };
 
+  const presets = [
+    { label: 'UPC-A (12 digits)', apply: () => { setType('UPC-A'); setInput('123456789012'); } },
+    { label: 'EAN-13 (13 digits)', apply: () => { setType('EAN-13'); setInput('1234567890123'); } },
+    { label: 'Code 128', apply: () => { setType('Code128'); setInput('HELLO123'); } },
+    { label: 'Code 39', apply: () => { setType('Code39'); setInput('CODE39'); } },
+    { label: 'Clear', apply: () => { setInput(''); } },
+  ];
+
+  const resultText = input ? `Generated ${type} barcode for: ${input}` : 'Enter data to generate barcode';
+
   return (
-    <Section title="Barcode Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label><select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select></div><Input label="Data" value={input} onChange={v => setInput(v)} /></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[160px]">{input ? (<div className="overflow-auto w-full flex justify-center">{renderBarcode()}<button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'barcode.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Enter data to generate barcode</p>)}</div>
+    <CalculatorShell
+      title="Barcode Generator"
+      result={resultText}
+      onCalculate={renderBarcode}
+      presets={presets}
+      accent="indigo"
+      downloadData={input ? JSON.stringify({ type, data: input }, null, 2) : ''}
+      downloadFilename="barcode.json"
+    >
+      <div className="space-y-4">
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
+          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
+        </div>
+        <Input label="Data" value={input} onChange={v => setInput(v)} />
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[160px]">
+          {input ? (
+            <div className="overflow-auto w-full flex justify-center">
+              {renderBarcode()}
+              <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'barcode.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button>
+            </div>
+          ) : (
+            <p className="text-[var(--text-muted)] text-sm">Enter data to generate barcode</p>
+          )}
+        </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -672,13 +1140,49 @@ export function QrCodeGenerator() {
   const [text, setText] = useState('https://toolzum.com'); const [errorCorrection, setErrorCorrection] = useState('M'); const [dataUrl, setDataUrl] = useState(''); const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => { if (!text.trim()) return; const canvas = canvasRef.current; if (!canvas) return; QRCodeLib.toCanvas(canvas, text.trim(), { width: 280, margin: 2, color: { dark: '#000000', light: '#ffffff' }, errorCorrectionLevel: errorCorrection as 'L' | 'M' | 'Q' | 'H' }).then(() => { setDataUrl(canvas.toDataURL('image/png')); }).catch(() => {}); }, [text, errorCorrection]);
 
+  const presets = [
+    { label: 'URL', apply: () => { setText('https://toolzum.com'); } },
+    { label: 'Email', apply: () => { setText('mailto:test@example.com'); } },
+    { label: 'Phone', apply: () => { setText('tel:+1234567890'); } },
+    { label: 'Text', apply: () => { setText('Hello World'); } },
+    { label: 'Clear', apply: () => { setText(''); setDataUrl(''); } },
+  ];
+
+  const resultText = dataUrl ? `Generated QR code (${errorCorrection} error correction)` : 'Enter text to generate QR code';
+
   return (
-    <Section title="QR Code Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Text / URL" value={text} onChange={v => setText(v)} placeholder="Enter text or URL..." /><div className="mb-3"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Error Correction</label><select value={errorCorrection} onChange={e => setErrorCorrection(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="L">Low (7%)</option><option value="M">Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%)</option></select></div></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[200px]"><canvas ref={canvasRef} className="hidden" />{dataUrl ? (<><img src={dataUrl} alt="QR Code" className="rounded-xl border border-[var(--border-subtle)] shadow-sm max-w-[200px]" /><div className="flex gap-2 mt-3"><button onClick={() => downloadOrShare(dataUrl, `qrcode_${Date.now()}.png`)} className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button><button onClick={() => { clipboardWrite(text); toast.success('Text copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Enter text to generate QR code</p>)}</div>
+    <CalculatorShell
+      title="QR Code Generator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="violet"
+      downloadData={text ? JSON.stringify({ text, errorCorrection }, null, 2) : ''}
+      downloadFilename="qrcode.json"
+    >
+      <div className="space-y-4">
+        <Input label="Text / URL" value={text} onChange={v => setText(v)} placeholder="Enter text or URL..." />
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Error Correction</label>
+          <select value={errorCorrection} onChange={e => setErrorCorrection(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="L">Low (7%)</option><option value="M">Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%)</option></select>
+        </div>
+
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[200px]">
+          <canvas ref={canvasRef} className="hidden" />
+          {dataUrl ? (
+            <>
+              <img src={dataUrl} alt="QR Code" className="rounded-xl border border-[var(--border-subtle)] shadow-sm max-w-[200px]" />
+              <div className="flex gap-2 mt-3">
+                <button onClick={() => downloadOrShare(dataUrl, `qrcode_${Date.now()}.png`)} className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button>
+                <button onClick={() => { clipboardWrite(text); toast.success('Text copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              </div>
+            </>
+          ) : (
+            <p className="text-[var(--text-muted)] text-sm">Enter text to generate QR code</p>
+          )}
+        </div>
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -691,18 +1195,57 @@ export function CouponCodeGenerator() {
   const [pattern, setPattern] = useState('XXXX-XXXX-XXXX'); const [count, setCount] = useState(5); const [codes, setCodes] = useState<string[]>([]);
   const generate = () => { const cs: string[] = []; for (let c = 0; c < count; c++) { let code = ''; for (const ch of pattern) { if (ch === 'X') code += COUPON_CHARS[randInt(0, COUPON_CHARS.length - 1)]; else code += ch; } cs.push(code); } setCodes(cs); };
 
+  const presets = [
+    { label: 'Standard (XXXX-XXXX-XXXX)', apply: () => { setPattern('XXXX-XXXX-XXXX'); setCount(5); generate(); } },
+    { label: 'Short (XXXX-XXXX)', apply: () => { setPattern('XXXX-XXXX'); setCount(5); generate(); } },
+    { label: 'With Year (2026-XXXX-XXXX)', apply: () => { setPattern('2026-XXXX-XXXX'); setCount(5); generate(); } },
+    { label: 'Alphanumeric (XXXXXXXXXXXX)', apply: () => { setPattern('XXXXXXXXXXXX'); setCount(5); generate(); } },
+    { label: 'Clear', apply: () => { setCodes([]); } },
+  ];
+
+  const resultText = codes.length > 0 ? `Generated ${codes.length} coupons (${pattern})` : 'Configure and generate';
+
   return (
-    <Section title="Coupon Code Generator">
-      <div className="flex flex-wrap gap-2">{COUPON_PRESETS.map(p => (<button key={p.name} onClick={() => setPattern(p.pattern)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>))}</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Pattern (X = random char)" value={pattern} onChange={v => setPattern(v)} />
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Coupons</button>
+    <CalculatorShell
+      title="Coupon Code Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="emerald"
+      downloadData={codes.join('\n')}
+      downloadFilename="coupon-codes.txt"
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {COUPON_PRESETS.map(p => (
+            <button key={p.name} onClick={() => setPattern(p.pattern)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">{codes.length > 0 ? (<div className="space-y-1 max-h-[250px] overflow-y-auto">{codes.map((c, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono"><span className="tracking-wide">{c}</span><button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-xs text-emerald-500 hover:underline"><Copy size={12} /></button></div>))}<div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(codes.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button><button onClick={() => { const blob = new Blob([codes.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'coupon-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate coupon codes</p>)}</div>
+        <Input label="Pattern (X = random char)" value={pattern} onChange={v => setPattern(v)} />
+        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Coupons</button>
+
+        {codes.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+            <div className="space-y-1 max-h-[250px] overflow-y-auto">
+              {codes.map((c, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
+                  <span className="tracking-wide">{c}</span>
+                  <button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-xs text-emerald-500 hover:underline"><Copy size={12} /></button>
+                </div>
+              ))}
+              <div className="flex gap-1 mt-2">
+                <button onClick={() => { clipboardWrite(codes.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+                <button onClick={() => { const blob = new Blob([codes.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'coupon-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              </div>
+            </div>
+          </div>
+        )}
+        {!codes.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate coupon codes</p>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -714,7 +1257,59 @@ export function SerialNumberGenerator() {
   const [format, setFormat] = useState('XXXX-XXXX-XXXX-XXXX'); const [count, setCount] = useState(5); const [serials, setSerials] = useState<string[]>([]);
   const generate = () => { const ss: string[] = []; for (let c = 0; c < count; c++) { let s = ''; for (const ch of format) { if (ch === 'X') s += '0123456789ABCDEF'[randInt(0, 15)]; else if (ch === '9') s += randInt(0, 9).toString(); else if (ch === 'A') s += COUPON_CHARS[randInt(0, COUPON_CHARS.length - 1)]; else s += ch; } ss.push(s); } setSerials(ss); };
 
+  const presets = [
+    { label: 'Standard (XXXX-XXXX-XXXX-XXXX)', apply: () => { setFormat('XXXX-XXXX-XXXX-XXXX'); setCount(5); generate(); } },
+    { label: 'Product Key (XXXXX-XXXXX-XXXXX-XXXXX)', apply: () => { setFormat('XXXXX-XXXXX-XXXXX-XXXXX'); setCount(5); generate(); } },
+    { label: 'Hex (XXXXXXXX-XXXXXXXX)', apply: () => { setFormat('XXXXXXXX-XXXXXXXX'); setCount(5); generate(); } },
+    { label: 'Numeric (9999-9999-9999)', apply: () => { setFormat('9999-9999-9999'); setCount(5); generate(); } },
+    { label: 'Clear', apply: () => { setSerials([]); } },
+  ];
+
+  const resultText = serials.length > 0 ? `Generated ${serials.length} serials (${format})` : 'Configure and generate';
+
   return (
+    <CalculatorShell
+      title="Serial Number Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="cyan"
+      downloadData={serials.join('\n')}
+      downloadFilename="serials.txt"
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {SERIAL_PRESETS.map(p => (
+            <button key={p.name} onClick={() => setFormat(p.format)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
+          ))}
+        </div>
+        <Input label="Format (X=hex, 9=digit, A=alphanum)" value={format} onChange={v => setFormat(v)} />
+        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <button onClick={generate} className="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Serials</button>
+
+        {serials.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+            <div className="space-y-1 max-h-[250px] overflow-y-auto">
+              {serials.map((s, i) => (
+                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
+                  <span className="tracking-wide">{s}</span>
+                  <button onClick={() => { clipboardWrite(s); toast.success('Copied!'); }} className="text-xs text-cyan-500 hover:underline"><Copy size={12} /></button>
+                </div>
+              ))}
+              <div className="flex gap-1 mt-2">
+                <button onClick={() => { clipboardWrite(serials.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+                <button onClick={() => { const blob = new Blob([serials.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'serials.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              </div>
+            </div>
+          </div>
+        )}
+        {!serials.length && (
+          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate serial numbers</p>
+        )}
+      </div>
+    </CalculatorShell>
+  );
+}
     <Section title="Serial Number Generator">
       <div className="flex flex-wrap gap-2">{SERIAL_PRESETS.map(p => (<button key={p.name} onClick={() => setFormat(p.format)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>))}</div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
