@@ -3,15 +3,7 @@ import React, { useState } from 'react';
 import { getErrorMessage } from '@/utils/error';
 import * as YAML from 'js-yaml';
 import Link from 'next/link';
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
-      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
-      {children}
-    </div>
-  );
-}
+import { CalculatorShell } from '../shared/CalculatorShell';
 
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
@@ -65,9 +57,25 @@ export function TsvCsvConverter() {
     }
   };
 
+  const presets = [
+    { label: 'TSV → CSV', apply: () => { setMode('tsv-to-csv'); } },
+    { label: 'CSV → TSV', apply: () => { setMode('csv-to-tsv'); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const resultText = output ? `Converted ${mode === 'tsv-to-csv' ? 'TSV → CSV' : 'CSV → TSV'}` : 'Enter data to convert';
+
   return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="TSV ↔ CSV Converter">
+    <CalculatorShell
+      title="TSV ↔ CSV Converter"
+      result={resultText}
+      onCalculate={convert}
+      presets={presets}
+      accent="blue"
+      downloadData={output}
+      downloadFilename={mode === 'tsv-to-csv' ? 'converted.csv' : 'converted.tsv'}
+    >
+      <div className="space-y-4">
         <div className="flex gap-2 mb-3">
           <button onClick={() => setMode('tsv-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'tsv-to-csv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>TSV → CSV</button>
           <button onClick={() => setMode('csv-to-tsv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-tsv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → TSV</button>
@@ -75,8 +83,8 @@ export function TsvCsvConverter() {
         <Input label={mode === 'tsv-to-csv' ? 'TSV Input' : 'CSV Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'tsv-to-csv' ? 'col1\tcol2\tcol3\nval1\tval2\tval3' : 'col1,col2,col3\nval1,val2,val3'} />
         <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         <Output value={output} label={mode === 'tsv-to-csv' ? 'CSV Output' : 'TSV Output'} />
-      </Section>
-    </div>
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -236,9 +244,26 @@ export function CsvDataCleaner() {
     setOutput(cleaned.map(r => r.join(',')).join('\n'));
   };
 
+  const presets = [
+    { label: 'Emails', apply: () => { setInput('name,email,phone\nJohn,john@Example.COM,123-456-7890'); setColAware(true); clean(); } },
+    { label: 'Phones', apply: () => { setInput('name,phone\nJohn,123-456-7890'); setColAware(true); clean(); } },
+    { label: 'Notes', apply: () => { setInput('name,notes\nJohn,Some Notes Here'); setColAware(true); clean(); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const resultText = output ? 'CSV cleaned successfully' : 'Paste CSV to clean';
+
   return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="CSV Data Cleaner">
+    <CalculatorShell
+      title="CSV Data Cleaner"
+      result={resultText}
+      onCalculate={clean}
+      presets={presets}
+      accent="emerald"
+      downloadData={output}
+      downloadFilename="cleaned.csv"
+    >
+      <div className="space-y-4">
         <Input label="CSV Input" value={input} onChange={setInput} rows={6} placeholder="name,email,phone\nJohn,john@Example.COM,123-456-7890" />
         <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-3 cursor-pointer">
           <input type="checkbox" checked={colAware} onChange={e => setColAware(e.target.checked)} className="rounded" />
@@ -246,8 +271,8 @@ export function CsvDataCleaner() {
         </label>
         <button onClick={clean} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Clean CSV</button>
         <Output value={output} label="Cleaned CSV" />
-      </Section>
-    </div>
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -281,14 +306,29 @@ export function CsvStatistics() {
     setOutput(results.join('\n'));
   };
 
+  const presets = [
+    { label: 'Sample Data', apply: () => { setInput('name,age,salary\nAlice,30,75000\nBob,25,62000\nCharlie,35,80000'); analyze(); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const resultText = output ? 'Statistics generated' : 'Paste CSV to analyze';
+
   return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="CSV Statistics">
+    <CalculatorShell
+      title="CSV Statistics"
+      result={resultText}
+      onCalculate={analyze}
+      presets={presets}
+      accent="amber"
+      downloadData={output}
+      downloadFilename="csv-stats.txt"
+    >
+      <div className="space-y-4">
         <Input label="CSV Input" value={input} onChange={setInput} rows={6} placeholder="name,age,salary\nAlice,30,75000\nBob,25,62000" />
         <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate Statistics</button>
         <Output value={output} label="Column Statistics" />
-      </Section>
-    </div>
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -341,10 +381,30 @@ export function CsvHtmlTableConverter() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="CSV ↔ HTML Table Converter">
+    <CalculatorShell
+      title="CSV ↔ HTML Table Converter"
+      result={resultText}
+      onCalculate={convert}
+      presets={presets}
+      accent="violet"
+      downloadData={output}
+      downloadFilename={mode === 'csv-to-html' ? 'table.html' : 'table.csv'}
+    >
+      <div className="space-y-4">
         <div className="flex gap-2 mb-3">
           <button onClick={() => setMode('csv-to-html')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-html' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → HTML</button>
+          <button onClick={() => setMode('html-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'html-to-csv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>HTML → CSV</button>
+        </div>
+        <Input label={mode === 'csv-to-html' ? 'CSV Input' : 'HTML Table Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'csv-to-html' ? 'name,age
+Alice,30' : '<table><tr><th>Name</th></tr><tr><td>Alice</td></tr></table>'} />
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {mode === 'csv-to-html' && preview && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl overflow-x-auto" dangerouslySetInnerHTML={{ __html: preview }} />
+        )}
+        <Output value={output} label={mode === 'csv-to-html' ? 'HTML Output' : 'CSV Output'} />
+      </div>
+    </CalculatorShell>
+  ); className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-html' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → HTML</button>
           <button onClick={() => setMode('html-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'html-to-csv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>HTML → CSV</button>
         </div>
         <Input label={mode === 'csv-to-html' ? 'CSV Input' : 'HTML Table Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'csv-to-html' ? 'name,age\nAlice,30' : '<table><tr><th>Name</th></tr><tr><td>Alice</td></tr></table>'} />
@@ -404,14 +464,41 @@ export function YamlValidator() {
     }
   };
 
-  return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <Section title="YAML Validator">
+  
+  const presets = [
+    { label: 'Validate', apply: () => { setMode('validate'); } },
+    { label: 'To JSON', apply: () => { setMode('to-json'); } },
+    { label: 'Minify', apply: () => { setMode('minify'); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+  ];
+
+  const resultText = output ? `YAML ${mode}d successfully` : 'Enter YAML to process';
+
+return (
+    <CalculatorShell
+      title="YAML Validator"
+      result={resultText}
+      onCalculate={process}
+      presets={presets}
+      accent="indigo"
+      downloadData={output}
+      downloadFilename={mode === 'validate' ? 'validation.txt' : mode === 'to-json' ? 'output.json' : 'minified.yaml'}
+    >
+      <div className="space-y-4">
         <div className="flex flex-wrap gap-2 mb-3">
           {[{ v: 'validate', l: 'Validate' }, { v: 'to-json', l: 'To JSON' }, { v: 'minify', l: 'Minify' }].map(({ v, l }) => (
             <button key={v} onClick={() => setMode(v as any)}
               className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{l}</button>
           ))}
+        </div>
+        <Input label="YAML Input" value={input} onChange={setInput} rows={6} placeholder="name: Alice
+age: 30" />
+        <button onClick={process} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">{mode === 'validate' ? 'Validate' : mode === 'to-json' ? 'Convert to JSON' : 'Minify'}</button>
+        <Output value={output} label={mode === 'validate' ? 'Validation Results' : mode === 'to-json' ? 'JSON Output' : 'Minified YAML'} />
+        <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <Link href="/converter/yaml-json-converter" className="text-blue-600 dark:text-blue-400 hover:underline">YAML↔JSON Converter</Link>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
+      </div>
+    </CalculatorShell>
+  );
         </div>
         <Input label="YAML Input" value={input} onChange={setInput} rows={6} placeholder="name: Alice\nage: 30" />
         <button onClick={process} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">{mode === 'validate' ? 'Validate' : mode === 'to-json' ? 'Convert to JSON' : 'Minify'}</button>
