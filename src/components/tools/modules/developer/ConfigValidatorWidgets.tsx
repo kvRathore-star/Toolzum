@@ -37,6 +37,7 @@ const preCls = "p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zi
 export function DockerComposeValidator() {
   const [input, setInput] = useState('version: "3.8"\nservices:\n  web:\n    image: nginx:latest\n    ports:\n      - "80:80"');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
   const validate = () => {
     if (!input.trim()) { toast.error('Enter docker-compose.yml'); return; }
     const issues = validateYaml(input);
@@ -48,22 +49,38 @@ export function DockerComposeValidator() {
       kws.length ? `Keywords: ${kws.join(', ')}` : '',
     ].filter(Boolean);
     setOutput(lines.join('\n'));
+    setIsValid(issues.length === 0);
     toast.success(issues.length ? 'Issues found' : 'Valid YAML structure');
   };
+
+  const presets = [
+    { label: 'Web Service', apply: () => setInput('version: "3.8"\nservices:\n  web:\n    image: nginx:latest\n    ports:\n      - "80:80"\n    volumes:\n      - ./html:/usr/share/nginx/html') },
+    { label: 'Multi-service', apply: () => setInput('version: "3.8"\nservices:\n  app:\n    build: .\n    ports:\n      - "3000:3000"\n  db:\n    image: postgres:15\n    environment:\n      POSTGRES_PASSWORD: secret') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid Docker Compose' : (isValid === false ? '✗ Invalid' : 'Enter docker-compose.yml');
+
   return (
-    <Section title="Docker Compose Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="Docker Compose Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="docker-compose-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Docker Compose YAML</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
 export function DockerfileLinter() {
   const [input, setInput] = useState('FROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD ["npm", "start"]');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter Dockerfile'); return; }
     const lines = input.split('\n');
@@ -76,23 +93,40 @@ export function DockerfileLinter() {
       if (!validInstructions.includes(instr)) issues.push(`Line ${i + 1}: Unknown instruction "${instr}"`);
     });
     if (!lines.some(l => l.trim().toUpperCase().startsWith('FROM'))) issues.push('Missing FROM instruction');
+    setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : `Valid Dockerfile (${lines.length} lines)`);
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
+
+  const presets = [
+    { label: 'Node.js', apply: () => setInput('FROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nEXPOSE 3000\nCMD ["npm", "start"]') },
+    { label: 'Python', apply: () => setInput('FROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nCMD ["python", "app.py"]') },
+    { label: 'Go', apply: () => setInput('FROM golang:1.21-alpine\nWORKDIR /app\nCOPY go.mod go.sum .\nRUN go mod download\nCOPY . .\nRUN go build -o app\nCMD ["./app"]') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid Dockerfile' : (isValid === false ? '✗ Issues found' : 'Enter Dockerfile to lint');
+
   return (
-    <Section title="Dockerfile Linter">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Lint</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="Dockerfile Linter" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="dockerfile-lint.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Dockerfile</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Lint</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
 export function HtaccessValidator() {
   const [input, setInput] = useState('RewriteEngine On\nRewriteRule ^old$ /new [R=301,L]\nErrorDocument 404 /404.html\nOptions -Indexes');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter .htaccess'); return; }
     const lines = input.split('\n');
@@ -104,23 +138,40 @@ export function HtaccessValidator() {
       const dir = t.split(/\s+/)[0];
       if (!validDirs.includes(dir) && !dir.startsWith('<') && !dir.startsWith('</')) issues.push(`Line ${i + 1}: Unknown directive "${dir}"`);
     });
+    setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : `Valid .htaccess (${lines.length} lines)`);
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
+
+  const presets = [
+    { label: 'Basic', apply: () => setInput('RewriteEngine On\nRewriteRule ^old$ /new [R=301,L]\nErrorDocument 404 /404.html\nOptions -Indexes') },
+    { label: 'Force HTTPS', apply: () => setInput('RewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]') },
+    { label: 'SPA Rewrite', apply: () => setInput('RewriteEngine On\nRewriteBase /\nRewriteRule ^index\\.html$ - [L]\nRewriteCond %{REQUEST_FILENAME} !-f\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteRule . /index.html [L]') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid .htaccess' : (isValid === false ? '✗ Issues found' : 'Enter .htaccess to validate');
+
   return (
-    <Section title="htaccess Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="htaccess Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="htaccess-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">htaccess Content</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
 export function KubernetesYamlValidator() {
   const [input, setInput] = useState('apiVersion: v1\nkind: Pod\nmetadata:\n  name: my-pod\nspec:\n  containers:\n  - name: app\n    image: nginx:latest');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter Kubernetes YAML'); return; }
     const issues = validateYaml(input);
@@ -130,23 +181,40 @@ export function KubernetesYamlValidator() {
       input.includes('kind:') ? 'Has kind' : 'Missing kind',
       input.includes('metadata:') ? 'Has metadata' : 'Missing metadata',
     ];
+    setIsValid(issues.length === 0);
     setOutput(lines.join('\n'));
     toast.success(issues.length ? 'Issues found' : 'Valid K8s manifest');
   };
+
+  const presets = [
+    { label: 'Pod', apply: () => setInput('apiVersion: v1\nkind: Pod\nmetadata:\n  name: my-pod\nspec:\n  containers:\n  - name: app\n    image: nginx:latest') },
+    { label: 'Deployment', apply: () => setInput('apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: nginx-deployment\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: nginx\n  template:\n    metadata:\n      labels:\n        app: nginx\n    spec:\n      containers:\n      - name: nginx\n        image: nginx:latest') },
+    { label: 'Service', apply: () => setInput('apiVersion: v1\nkind: Service\nmetadata:\n  name: nginx-service\nspec:\n  selector:\n    app: nginx\n  ports:\n    - protocol: TCP\n      port: 80\n      targetPort: 80') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid K8s manifest' : (isValid === false ? '✗ Issues found' : 'Enter Kubernetes YAML');
+
   return (
-    <Section title="Kubernetes YAML Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="Kubernetes YAML Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="k8s-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Kubernetes YAML</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
 export function GithubActionsValidator() {
   const [input, setInput] = useState('name: CI\non: [push]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - run: npm test');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter GitHub Actions workflow'); return; }
     const issues = validateYaml(input);
@@ -156,17 +224,31 @@ export function GithubActionsValidator() {
       input.includes('on:') ? 'Has trigger (on:)' : 'Missing on: trigger',
       input.includes('jobs:') ? 'Has jobs:' : 'Missing jobs:',
     ];
+    setIsValid(issues.length === 0);
     setOutput(lines.join('\n'));
     toast.success(issues.length ? 'Issues found' : 'Valid workflow');
   };
+
+  const presets = [
+    { label: 'Node.js CI', apply: () => setInput('name: Node.js CI\non: [push, pull_request]\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: "20"\n      - run: npm ci\n      - run: npm test') },
+    { label: 'Docker Build', apply: () => setInput('name: Docker\non:\n  push:\n    branches: [main]\njobs:\n  docker:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: docker/login-action@v3\n        with:\n          registry: ghcr.io\n          username: ${{ github.actor }}\n          password: ${{ secrets.GITHUB_TOKEN }}\n      - uses: docker/build-push-action@v5\n        with:\n          push: true\n          tags: ghcr.io/${{ github.repository }}/app:latest') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid workflow' : (isValid === false ? '✗ Issues found' : 'Enter GitHub Actions YAML');
+
   return (
-    <Section title="GitHub Actions Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="GitHub Actions Validator" result={resultText} onCalculate={validate} presets={presets} accent="purple" downloadData={output} downloadFilename="github-actions-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GitHub Actions Workflow YAML</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
