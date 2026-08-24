@@ -284,6 +284,8 @@ export function GeoJsonValidator() {
 export function RssFeedValidator() {
   const [input, setInput] = useState('<?xml version="1.0"?>\n<rss version="2.0">\n<channel>\n<title>My Feed</title>\n<link>https://example.com</link>\n<description>Test feed</description>\n<item>\n<title>Post 1</title>\n<link>https://example.com/1</link>\n</item>\n</channel>\n</rss>');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter RSS XML'); return; }
     const issues: string[] = [];
@@ -294,23 +296,39 @@ export function RssFeedValidator() {
     if (!input.includes('<description>')) issues.push('Missing <description>');
     if (!input.includes('<item>') && !input.includes('<entry>')) issues.push('No items/entries found');
     const xmlDecl = input.trim().startsWith('<?xml');
+    setIsValid(issues.length === 0);
     setOutput((xmlDecl ? 'Has XML declaration\n' : 'Missing XML declaration\n') + (issues.length ? issues.join('\n') : 'Valid RSS/Atom structure'));
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
+
+  const presets = [
+    { label: 'RSS 2.0', apply: () => setInput('<?xml version="1.0"?>\n<rss version="2.0">\n<channel>\n<title>My Feed</title>\n<link>https://example.com</link>\n<description>Test feed</description>\n<item>\n<title>Post 1</title>\n<link>https://example.com/1</link>\n</item>\n</channel>\n</rss>') },
+    { label: 'Atom', apply: () => setInput('<?xml version="1.0"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n<title>My Feed</title>\n<link href="https://example.com"/>\n<updated>2024-01-01T00:00:00Z</updated>\n<entry>\n<title>Post 1</title>\n<link href="https://example.com/1"/>\n</entry>\n</feed>') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid RSS/Atom' : (isValid === false ? '✗ Issues found' : 'Enter RSS/Atom XML');
+
   return (
-    <Section title="RSS Feed Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="RSS Feed Validator" result={resultText} onCalculate={validate} presets={presets} accent="orange" downloadData={output} downloadFilename="rss-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">RSS/Atom XML</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
 export function SitemapValidator() {
   const [input, setInput] = useState('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>https://example.com/</loc><lastmod>2024-01-01</lastmod><priority>1.0</priority></url>\n</urlset>');
   const [output, setOutput] = useState('');
+  const [isValid, setIsValid] = useState<boolean | null>(null);
+
   const validate = () => {
     if (!input.trim()) { toast.error('Enter sitemap XML'); return; }
     const issues: string[] = [];
@@ -319,17 +337,32 @@ export function SitemapValidator() {
     if (!input.includes('<url>') && !input.includes('<sitemap>')) issues.push('No <url> entries found');
     if (!input.includes('<loc>')) issues.push('Missing <loc> (required in each url)');
     const urls = input.match(/<loc>([^<]+)<\/loc>/g) || [];
+    setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : `Valid sitemap (${urls.length} URL(s) found)`);
     toast.success(issues.length ? 'Issues found' : 'Valid sitemap');
   };
+
+  const presets = [
+    { label: 'Basic', apply: () => setInput('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>https://example.com/</loc><lastmod>2024-01-01</lastmod><priority>1.0</priority></url>\n</urlset>') },
+    { label: 'Multiple URLs', apply: () => setInput('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>https://example.com/</loc><lastmod>2024-01-01</lastmod><priority>1.0</priority></url>\n<url><loc>https://example.com/about</loc><lastmod>2024-01-15</lastmod><priority>0.8</priority></url>\n<url><loc>https://example.com/contact</loc><lastmod>2024-02-01</lastmod><priority>0.5</priority></url>\n</urlset>') },
+    { label: 'Sitemap Index', apply: () => setInput('<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<sitemap><loc>https://example.com/sitemap1.xml</loc><lastmod>2024-01-01</lastmod></sitemap>\n<sitemap><loc>https://example.com/sitemap2.xml</loc><lastmod>2024-01-01</lastmod></sitemap>\n</sitemapindex>') },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setIsValid(null); } },
+  ];
+
+  const resultText = isValid === true ? '✓ Valid sitemap' : (isValid === false ? '✗ Issues found' : 'Enter sitemap XML');
+
   return (
-    <Section title="Sitemap Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
-      </div>
-    </Section>
+    <CalculatorShell title="Sitemap Validator" result={resultText} onCalculate={validate} presets={presets} accent="indigo" downloadData={output} downloadFilename="sitemap-validation.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sitemap XML</label>
+      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+
+      <button onClick={validate} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
+
+      {output && (
+        <pre className={`p-4 rounded-xl ${isValid ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -337,6 +370,8 @@ export function XpathValidator() {
   const [expr, setExpr] = useState('//div[@class="content"]/p');
   const [xml, setXml] = useState('<root><div class="content"><p>Hello</p></div></root>');
   const [output, setOutput] = useState('');
+  const [matchCount, setMatchCount] = useState(0);
+
   const validate = () => {
     if (!xml.trim()) { toast.error('Enter XML/HTML'); return; }
     try {
@@ -347,25 +382,41 @@ export function XpathValidator() {
       const results: string[] = [];
       let node: Node | null;
       while ((node = result.iterateNext())) results.push(node.textContent?.trim() || node.nodeName || '');
+      setMatchCount(results.length);
       setOutput(results.length ? `Found ${results.length} match(es):\n${results.join('\n')}` : 'No matches');
       toast.success(`Found ${results.length} match(es)`);
     } catch (e: unknown) { setOutput('XPath error: ' + (e instanceof Error ? e.message : '')); toast.error('Invalid XPath'); }
   };
+
+  const presets = [
+    { label: 'All divs', apply: () => { setExpr('//div'); setXml('<root><div class="a">1</div><div class="b">2</div></root>'); } },
+    { label: 'Class selector', apply: () => { setExpr('//div[@class="content"]/p'); setXml('<root><div class="content"><p>Hello</p></div></root>'); } },
+    { label: 'All links', apply: () => { setExpr('//a[@href]'); setXml('<root><a href="/a">A</a><a href="/b">B</a></root>'); } },
+    { label: 'Clear', apply: () => { setExpr(''); setXml(''); setOutput(''); } },
+  ];
+
+  const resultText = matchCount > 0 ? `Found ${matchCount} match(es)` : (output ? output : 'Enter XPath and XML');
+
   return (
-    <Section title="XPath Validator">
-      <div className="space-y-3">
-        <div className="space-y-2">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
-          <input type="text" value={expr} onChange={e => setExpr(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50" placeholder="//div/p" />
-        </div>
-        <div className="space-y-1">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
-          <textarea value={xml} onChange={e => setXml(e.target.value)} rows={4} className={taCls} placeholder="<root><div><p>text</p></div></root>" />
-        </div>
-        <button onClick={validate} className={btnCls}>Test XPath</button>
-        {output && <pre className={preCls}>{output}</pre>}
+    <CalculatorShell title="XPath Validator" result={resultText} onCalculate={validate} presets={presets} accent="violet" downloadData={output} downloadFilename="xpath-results.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
+        <input type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
+        <textarea value={xml} onChange={e => setXml(e.target.value)} rows={4}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" placeholder="<root><div><p>text</p></div></root>" />
+
+        <button onClick={validate} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Test XPath</button>
+
+        {output && (
+          <pre className={`p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ${matchCount > 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>
+            {output}
+          </pre>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
