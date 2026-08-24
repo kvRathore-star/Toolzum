@@ -3,8 +3,8 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
-
-import { Section, Input, labelClass, selClass } from './MiscToolsShared';
+import { Input, labelClass, selClass } from './MiscToolsShared';
+import { CalculatorShell } from './shared/CalculatorShell';
 
 export function BodyMassIndexCalculator() {
   const clr = ac('BodyMassIndexCalculator');
@@ -16,18 +16,36 @@ export function BodyMassIndexCalculator() {
   const bmi = h > 0 ? w / (h * h) : 0;
   const category = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal' : bmi < 30 ? 'Overweight' : 'Obese';
   const color = bmi < 18.5 ? 'text-yellow-500' : bmi < 25 ? 'text-green-600' : bmi < 30 ? 'text-orange-500' : 'text-red-500';
+
+  const presets = [
+    { label: 'Average Male (170cm, 70kg)', apply: () => { setUnit('metric'); setHeight('170'); setWeight('70'); } },
+    { label: 'Average Female (160cm, 60kg)', apply: () => { setUnit('metric'); setHeight('160'); setWeight('60'); } },
+    { label: 'Imperial (5\'7\", 154lb)', apply: () => { setUnit('imperial'); setHeight('67'); setWeight('154'); } },
+    { label: 'Clear', apply: () => { setHeight('170'); setWeight('70'); setUnit('metric'); } },
+  ];
+
+  const resultText = bmi > 0 ? `BMI: ${bmi.toFixed(1)} (${category})` : 'Enter height and weight';
+
   return (
-    <Section title="BMI Calculator">
-      <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
-        <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
-      </select>
-      <div className="flex gap-2">
-        <Input label="Value" type="number" value={height} onChange={setHeight} placeholder={unit === 'metric' ? 'cm' : 'in'} />
-        <Input label="Value" type="number" value={weight} onChange={setWeight} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
+    <CalculatorShell
+      title="BMI Calculator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="blue"
+      downloadData={bmi > 0 ? JSON.stringify({ height, weight, unit, bmi: bmi.toFixed(1), category }, null, 2) : ''}
+      downloadFilename="bmi.json"
+    >
+      <div className="space-y-4">
+        <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
+          <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
+        </select>
+        <div className="flex gap-2">
+          <Input label="Value" type="number" value={height} onChange={setHeight} placeholder={unit === 'metric' ? 'cm' : 'in'} />
+          <Input label="Value" type="number" value={weight} onChange={setWeight} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
+        </div>
       </div>
-      <div className={'text-2xl font-bold ' + color}>{bmi.toFixed(1)}</div>
-      <div className={'text-sm font-medium ' + color}>{category}</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- BodyFatCalculator ---
@@ -38,17 +56,36 @@ export function BodyFatCalculator() {
   const [gender, setGender] = useState('male');
   const b = Number(bmi), a = Number(age);
   const bf = gender === 'male' ? 1.2 * b + 0.23 * a - 16.2 : 1.2 * b + 0.23 * a - 5.4;
+
+  const presets = [
+    { label: 'Male, BMI 24, Age 30', apply: () => { setGender('male'); setBmi('24'); setAge('30'); } },
+    { label: 'Female, BMI 22, Age 25', apply: () => { setGender('female'); setBmi('22'); setAge('25'); } },
+    { label: 'Male, BMI 28, Age 40', apply: () => { setGender('male'); setBmi('28'); setAge('40'); } },
+    { label: 'Clear', apply: () => { setBmi('24'); setAge('30'); setGender('male'); } },
+  ];
+
+  const resultText = `Body Fat: ${bf.toFixed(1)}%`;
+
   return (
-    <Section title="Body Fat % Estimator">
-      <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}>
-        <option value="male">Male</option><option value="female">Female</option>
-      </select>
-      <div className="flex gap-2">
-        <div><label className={labelClass}>BMI</label><Input label="Value" type="number" value={bmi} onChange={setBmi} /></div>
-        <div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div>
+    <CalculatorShell
+      title="Body Fat % Estimator"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="emerald"
+      downloadData={JSON.stringify({ bmi: Number(bmi), age: Number(age), gender, bodyFat: bf.toFixed(1) }, null, 2)}
+      downloadFilename="body-fat.json"
+    >
+      <div className="space-y-4">
+        <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}>
+          <option value="male">Male</option><option value="female">Female</option>
+        </select>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>BMI</label><Input label="Value" type="number" value={bmi} onChange={setBmi} /></div>
+          <div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div>
+        </div>
       </div>
-      <div className="text-lg font-bold">Body Fat: {bf.toFixed(1)}%</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- CalorieIntakeCalculator ---
@@ -61,19 +98,37 @@ export function CalorieIntakeCalculator() {
   const [activity, setActivity] = useState('1.55');
   const w = Number(weight), h = Number(height), a = Number(age), act = Number(activity);
   const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
+
+  const presets = [
+    { label: 'Male, 70kg, 170cm, 30, Moderate', apply: () => { setGender('male'); setWeight('70'); setHeight('170'); setAge('30'); setActivity('1.55'); } },
+    { label: 'Female, 60kg, 160cm, 25, Light', apply: () => { setGender('female'); setWeight('60'); setHeight('160'); setAge('25'); setActivity('1.375'); } },
+    { label: 'Male, 80kg, 180cm, 40, Active', apply: () => { setGender('male'); setWeight('80'); setHeight('180'); setAge('40'); setActivity('1.725'); } },
+    { label: 'Clear', apply: () => { setWeight('70'); setHeight('170'); setAge('30'); setGender('male'); setActivity('1.55'); } },
+  ];
+
+  const resultText = `BMR: ${bmr.toFixed(0)} kcal/day | Maintenance: ${(bmr * act).toFixed(0)} kcal/day`;
+
   return (
-    <Section title="Daily Calorie Needs">
-      <div className="flex gap-2">
-        <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select>
-        <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>
-          <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option>
-          <option value="1.725">Active</option><option value="1.9">Very Active</option>
-        </select>
+    <CalculatorShell
+      title="Daily Calorie Needs"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="emerald"
+      downloadData={JSON.stringify({ weight: w, height: h, age: a, gender, activity: act, bmr: bmr.toFixed(0), maintenance: (bmr * act).toFixed(0) }, null, 2)}
+      downloadFilename="calories.json"
+    >
+      <div className="space-y-4">
+        <div className="flex gap-2">
+          <select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select>
+          <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>
+            <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option>
+            <option value="1.725">Active</option><option value="1.9">Very Active</option>
+          </select>
+        </div>
+        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div><div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div></div>
       </div>
-      <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div><div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div></div>
-      <div className="text-lg font-bold">BMR: {bmr.toFixed(0)} kcal/day</div>
-      <div className="text-sm">Maintenance: {(bmr * act).toFixed(0)} kcal/day</div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- MacroSplitCalculator ---
@@ -81,15 +136,30 @@ export function MacroSplitCalculator() {
   const clr = ac('MacroSplitCalculator');
   const [calories, setCalories] = useState('2000');
   const c = Number(calories);
+
+  const presets = [
+    { label: '2000 kcal', apply: () => { setCalories('2000'); } },
+    { label: '1500 kcal', apply: () => { setCalories('1500'); } },
+    { label: '2500 kcal', apply: () => { setCalories('2500'); } },
+    { label: 'Clear', apply: () => { setCalories('2000'); } },
+  ];
+
+  const resultText = `Protein: ${(c * 0.3 / 4).toFixed(0)}g (${(c * 0.3).toFixed(0)} kcal) | Carbs: ${(c * 0.4 / 4).toFixed(0)}g (${(c * 0.4).toFixed(0)} kcal) | Fat: ${(c * 0.3 / 9).toFixed(0)}g (${(c * 0.3).toFixed(0)} kcal)`;
+
   return (
-    <Section title="Daily Macronutrients">
-      <Input label="Value" type="number" value={calories} onChange={setCalories} />
-      <div className="text-xs space-y-1">
-        <div className="flex justify-between"><span>Protein (30%)</span><span className="font-bold">{(c * 0.3 / 4).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
-        <div className="flex justify-between"><span>Carbs (40%)</span><span className="font-bold">{(c * 0.4 / 4).toFixed(0)}g = {(c * 0.4).toFixed(0)} kcal</span></div>
-        <div className="flex justify-between"><span>Fat (30%)</span><span className="font-bold">{(c * 0.3 / 9).toFixed(0)}g = {(c * 0.3).toFixed(0)} kcal</span></div>
+    <CalculatorShell
+      title="Daily Macronutrients"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="amber"
+      downloadData={JSON.stringify({ calories: c, protein: { g: (c * 0.3 / 4).toFixed(0), kcal: (c * 0.3).toFixed(0) }, carbs: { g: (c * 0.4 / 4).toFixed(0), kcal: (c * 0.4).toFixed(0) }, fat: { g: (c * 0.3 / 9).toFixed(0), kcal: (c * 0.3).toFixed(0) } }, null, 2)}
+      downloadFilename="macros.json"
+    >
+      <div className="space-y-4">
+        <Input label="Value" type="number" value={calories} onChange={setCalories} />
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- WaterRequirementCalculator ---
