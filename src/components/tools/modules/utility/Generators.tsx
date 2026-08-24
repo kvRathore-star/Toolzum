@@ -51,20 +51,115 @@ export function RandomPasswordGenerator() {
 
   const addToHistory = () => { if (result) { setHistory(prev => [result, ...prev].slice(0, 10)); toast.success('Added to history'); } };
 
+  const presets = [
+    { label: 'Secure (32)', apply: () => { setLength(32); setUpper(true); setLower(true); setDigits(true); setSymbols(true); setExcludeSimilar(false); } },
+    { label: 'Memorable (16)', apply: () => { setLength(16); setUpper(true); setLower(true); setDigits(true); setSymbols(false); setExcludeSimilar(true); } },
+    { label: 'PIN (6 digits)', apply: () => { setLength(6); setUpper(false); setLower(false); setDigits(true); setSymbols(false); setExcludeSimilar(false); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const entropy = (() => { let pool = 0; if (upper) pool += 26; if (lower) pool += 26; if (digits) pool += 10; if (symbols) pool += 20; return pool > 0 ? Math.round(length * Math.log2(pool)) : 0; })();
+  const strength = entropy >= 80 ? 'Strong' : entropy >= 50 ? 'Good' : entropy >= 30 ? 'Fair' : 'Weak';
+  const strengthColor = entropy >= 80 ? 'text-emerald-500' : entropy >= 50 ? 'text-amber-500' : 'text-red-500';
+
+  const generate = () => { let chars = ''; if (upper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; if (lower) chars += 'abcdefghijklmnopqrstuvwxyz'; if (digits) chars += '0123456789'; if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?'; if (excludeSimilar) chars = chars.replace(/[il1Lo0O]/g, ''); if (!chars) return; let pwd = ''; for (let i = 0; i < length; i++) pwd += chars[randInt(0, chars.length - 1)]; setResult(pwd); };
+
+  const addToHistory = () => { if (result) { setHistory(prev => [result, ...prev].slice(0, 10)); toast.success('Added to history'); } };
+
+  const resultText = result ? `Generated ${length}-char password (${entropy} bits, ${strength})` : 'Configure options and generate';
+
   return (
-    <Section title="Random Password Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="space-y-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length ({length})</label><input type="range" min={4} max={128} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-emerald-500" /></div>
-          <div className="flex flex-wrap gap-3"><label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={upper} onChange={e => setUpper(e.target.checked)} className="accent-emerald-500" />Uppercase</label><label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={lower} onChange={e => setLower(e.target.checked)} className="accent-emerald-500" />Lowercase</label><label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={digits} onChange={e => setDigits(e.target.checked)} className="accent-emerald-500" />Digits</label><label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={symbols} onChange={e => setSymbols(e.target.checked)} className="accent-emerald-500" />Symbols</label><label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={excludeSimilar} onChange={e => setExcludeSimilar(e.target.checked)} className="accent-emerald-500" />Exclude Similar</label></div>
-          <div className="flex gap-2"><button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Password</button><button onClick={() => { if (result) { clipboardWrite(result); toast.success('Copied!'); } }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" title="Copy"><Copy size={16} /></button><button onClick={addToHistory} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" title="Save"><History size={16} /></button></div>
+    <CalculatorShell
+      title="Random Password Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="emerald"
+      downloadData={result}
+      downloadFilename="password.txt"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-4">
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length ({length})</label>
+            <input type="range" min={4} max={128} value={length} onChange={e => setLength(Number(e.target.value))}
+              className="w-full accent-emerald-500" />
+            <div className="text-xs text-[var(--text-muted)] text-right">{length} characters</div>
+
+            <div className="flex flex-wrap gap-3">
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                <input type="checkbox" checked={upper} onChange={e => setUpper(e.target.checked)} className="accent-emerald-500" />Uppercase
+              </label>
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                <input type="checkbox" checked={lower} onChange={e => setLower(e.target.checked)} className="accent-emerald-500" />Lowercase
+              </label>
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                <input type="checkbox" checked={digits} onChange={e => setDigits(e.target.checked)} className="accent-emerald-500" />Digits
+              </label>
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                <input type="checkbox" checked={symbols} onChange={e => setSymbols(e.target.checked)} className="accent-emerald-500" />Symbols
+              </label>
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                <input type="checkbox" checked={excludeSimilar} onChange={e => setExcludeSimilar(e.target.checked)} className="accent-emerald-500" />Exclude Similar
+              </label>
+            </div>
+
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+              <div className="text-xs text-[var(--text-secondary)] mb-2">Entropy Analysis</div>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
+                  <div className="text-xs text-[var(--text-muted)]">Character Pool</div>
+                  <div className="font-bold text-[var(--text-primary)]">
+                    {(upper ? 26 : 0) + (lower ? 26 : 0) + (digits ? 10 : 0) + (symbols ? 20 : 0)}
+                  </div>
+                </div>
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
+                  <div className="text-xs text-[var(--text-muted)]">Entropy</div>
+                  <div className={`font-bold ${strengthColor}`}>{entropy} bits</div>
+                </div>
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
+                  <div className="text-xs text-[var(--text-muted)]">Strength</div>
+                  <div className={`text-sm font-bold ${strengthColor}`}>{strength}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Password</button>
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
-          {result ? (<><p className="text-2xl font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p><div className="flex items-center gap-2 mt-3"><span className="text-xs text-[var(--text-muted)]">{entropy} bits entropy</span><span className={`text-xs font-bold ${strengthColor}`}>{strength}</span></div></>) : (<p className="text-[var(--text-muted)] text-sm">Enter options and generate</p>)}
+
+        <div className="space-y-4">
+          {result && (
+            <div className="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-500/20 rounded-xl p-4 flex flex-col items-center min-h-[160px]">
+              <p className="text-2xl font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
+              <div className="flex items-center gap-2 mt-3">
+                <span className="text-xs text-[var(--text-muted)]">{entropy} bits entropy</span>
+                <span className={`text-xs font-bold ${strengthColor}`}>{strength}</span>
+              </div>
+            </div>
+          )}
+          {!result && <p className="text-[var(--text-muted)] text-center py-8">Configure options and generate a password</p>}
+
+          {history.length > 0 && (
+            <div className="border-t border-[var(--border-subtle)] pt-4">
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">History</h4>
+                <button onClick={() => setHistory([])} className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent)]"><RotateCcw size={12} /> Clear</button>
+              </div>
+              <div className="space-y-1 max-h-[200px] overflow-y-auto">
+                {history.map((h, i) => (
+                  <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-xs font-mono">
+                    <span>{h}</span>
+                    <button onClick={() => { clipboardWrite(h); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline"><Copy size={12} /></button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
-      {history.length > 0 && (<div className="border-t border-[var(--border-subtle)] pt-4"><div className="flex items-center justify-between mb-3"><h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">History</h4><button onClick={() => setHistory([])} className="flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--accent)]"><RotateCcw size={12} /> Clear</button></div><div className="space-y-1 max-h-[200px] overflow-y-auto">{history.map((h, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-xs font-mono"><span>{h}</span><button onClick={() => { clipboardWrite(h); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline"><Copy size={12} /></button></div>))}</div></div>)}
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -83,19 +178,67 @@ export function RandomNumberGenerator() {
     setResult(nums);
   };
 
+  const presets = [
+    { label: 'Dice Roll (1-6)', apply: () => { setMin('1'); setMax('6'); setCount('1'); } },
+    { label: 'Lottery (1-49)', apply: () => { setMin('1'); setMax('49'); setCount('6'); setUnique(true); } },
+    { label: '100 Numbers (1-1000)', apply: () => { setMin('1'); setMax('1000'); setCount('100'); } },
+    { label: 'Clear', apply: () => { setResult([]); setHistory([]); } },
+  ];
+
+  const resultText = result.length > 0 ? `Generated ${result.length} numbers (${unique ? 'unique' : 'with repeats'})` : 'Configure range and generate';
+
   return (
-    <Section title="Random Number Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="grid grid-cols-3 gap-3"><Input label="Min" type="number" value={min} onChange={v => setMin(v)} /><Input label="Max" type="number" value={max} onChange={v => setMax(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
-          <div className="flex gap-4 text-sm text-[var(--text-secondary)]"><label className="flex items-center gap-2"><input type="checkbox" checked={unique} onChange={e => setUnique(e.target.checked)} className="accent-violet-500" />Unique</label><label className="flex items-center gap-2"><input type="checkbox" checked={sort} onChange={e => setSort(e.target.checked)} className="accent-violet-500" />Sorted</label></div>
-          <div className="flex gap-2"><button onClick={generate} className="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors">Generate</button></div>
+    <CalculatorShell
+      title="Random Number Generator"
+      result={resultText}
+      onCalculate={generate}
+      presets={presets}
+      accent="violet"
+      downloadData={JSON.stringify({ min: parseInt(min), max: parseInt(max), count: parseInt(count), unique, sort, numbers: result }, null, 2)}
+      downloadFilename="random-numbers.json"
+    >
+      <div className="space-y-4">
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Min</label>
+            <input type="number" value={min} onChange={e => setMin(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Max</label>
+            <input type="number" value={max} onChange={e => setMax(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
+            <input type="number" min="1" max="10000" value={count} onChange={e => setCount(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[160px]">
-          {result.length > 0 ? (<><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p><p className="text-xs text-[var(--text-muted)] mt-2">{result.length} numbers · {sort ? 'sorted' : 'unsorted'} · {unique ? 'unique' : 'repeatable'}</p><div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button><button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'random-numbers.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Set range and generate</p>)}
+
+        <div className="flex gap-4 text-sm text-[var(--text-secondary)]">
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={unique} onChange={e => setUnique(e.target.checked)} className="accent-violet-500" />Unique
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="checkbox" checked={sort} onChange={e => setSort(e.target.checked)} className="accent-violet-500" />Sorted
+          </label>
         </div>
+
+        <button onClick={generate} className="px-5 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
+
+        {result.length > 0 && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[160px]">
+            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-2">{result.length} numbers · {sort ? 'sorted' : 'unsorted'} · {unique ? 'unique' : 'repeatable'}</p>
+            <div className="flex gap-1 mt-2">
+              <button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'random-numbers.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -111,21 +254,72 @@ export function RandomStringGenerator() {
     let s = ''; for (let i = 0; i < length; i++) s += chars[randInt(0, chars.length - 1)]; setResult(s);
   };
 
+  const presets = [
+    { label: 'API Key (32)', apply: () => { setLength(32); setCharset('alphanumeric'); gen(); } },
+    { label: 'Session (64)', apply: () => { setLength(64); setCharset('hex'); gen(); } },
+    { label: 'Short ID (8)', apply: () => { setLength(8); setCharset('alphanumeric'); gen(); } },
+    { label: 'OTP (6)', apply: () => { setLength(6); setCharset('numeric'); gen(); } },
+    { label: 'UUID', apply: () => { setCharset('uuid'); gen(); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const generate = () => {
+    let chars = '';
+    switch (charset) { case 'alpha': chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; break; case 'numeric': chars = '0123456789'; break; case 'hex': chars = '0123456789abcdef'; break; case 'hex-upper': chars = '0123456789ABCDEF'; break; case 'uuid': setResult(crypto.randomUUID()); return; default: chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; }
+    let s = ''; for (let i = 0; i < length; i++) s += chars[randInt(0, chars.length - 1)]; setResult(s);
+  };
+
+  const resultText = result ? `Generated ${result.length}-char string (${charset})` : 'Configure and generate';
+
   return (
-    <Section title="Random String Generator">
-      <div className="flex flex-wrap gap-2">{STRING_PRESETS.map(p => (<button key={p.name} onClick={() => { setLength(p.length); setCharset(p.charset); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>))}</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} />
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Charset</label>
-            <select value={charset} onChange={e => setCharset(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="alphanumeric">Alphanumeric</option><option value="alpha">Alphabetic</option><option value="numeric">Numeric</option><option value="hex">Hex (lowercase)</option><option value="hex-upper">Hex (uppercase)</option><option value="uuid">UUID v4</option></select>
-          </div>
-          <div className="flex gap-2"><button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate</button></div>
+    <CalculatorShell title="Random String Generator" result={resultText} onCalculate={generate} presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {STRING_PRESETS.map(p => (
+            <button key={p.name} onClick={() => { setLength(p.length); setCharset(p.charset); gen(); }}
+              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              {p.name}
+            </button>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[120px]">{result ? (<><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p><p className="text-xs text-[var(--text-muted)] mt-1">{result.length} chars</p><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate a random string</p>)}</div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length</label>
+            <input type="number" min={1} max={1000} value={String(length)} onChange={e => setLength(Number(e.target.value))}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Charset</label>
+            <select value={charset} onChange={e => setCharset(e.target.value)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+              <option value="alphanumeric">Alphanumeric</option>
+              <option value="alpha">Alphabetic</option>
+              <option value="numeric">Numeric</option>
+              <option value="hex">Hex (lowercase)</option>
+              <option value="hex-upper">Hex (uppercase)</option>
+              <option value="uuid">UUID v4</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="flex gap-2">
+          {[4, 8, 12, 16, 32, 64].map(n => (
+            <button key={n} onClick={() => { setLength(n); gen(); }}
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${length === n ? 'bg-indigo-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'`}>{n}</button>
+          ))}
+        </div>
+
+        <button onClick={gen} className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
+
+        {result && (
+          <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-500/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
+            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
+            <p className="text-xs text-[var(--text-muted)] mt-1">{result.length} chars ({charset})</p>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
