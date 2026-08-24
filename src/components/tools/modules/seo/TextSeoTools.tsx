@@ -519,7 +519,8 @@ export function SeoPreviewGenerator() {
 // === 8. SeoHeadlineAnalyzer ===
 const POWER_WORDS = ['amazing','essential','exclusive','guaranteed','instant','powerful','proven','simple','ultimate','urgent','free','new','secret','hidden','shocking','remarkable','complete','easy','fast','best'];
 export function SeoHeadlineAnalyzer() {
-  const [headline, setHeadline] = useState('10 Amazing SEO Tips for Better Rankings'); const [analysis, setAnalysis] = useState<{ wordCount: number; charCount: number; powerWords: string[]; sentiment: string; score: number } | null>(null);
+  const [headline, setHeadline] = useState('10 Amazing SEO Tips for Better Rankings');
+  const [analysis, setAnalysis] = useState<{ wordCount: number; charCount: number; powerWords: string[]; sentiment: string; score: number } | null>(null);
   const analyze = () => {
     const words = headline.split(/\s+/).filter(Boolean); const found = words.filter(w => POWER_WORDS.includes(w.toLowerCase()));
     const wordCount = words.length; const charCount = headline.length;
@@ -532,20 +533,47 @@ export function SeoHeadlineAnalyzer() {
     setAnalysis({ wordCount, charCount, powerWords: found, sentiment, score });
   };
 
+  const presets = [
+    { label: 'Strong', apply: () => { setHeadline('10 Amazing SEO Tips for Better Rankings'); analyze(); } },
+    { label: 'Weak', apply: () => { setHeadline('SEO tips'); analyze(); } },
+    { label: 'Clickbait', apply: () => { setHeadline('You Won\'t Believe This Amazing Secret Trick'); analyze(); } },
+    { label: 'Clear', apply: () => { setHeadline(''); setAnalysis(null); } },
+  ];
+
+  const resultText = analysis ? `Score: ${analysis.score}/100 (${analysis.sentiment})` : 'Enter headline to analyze';
+
   return (
-    <Section title="SEO Headline Analyzer">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Headline" value={headline} onChange={setHeadline} />
-          <button onClick={analyze} className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{analysis ? (<div className="space-y-3">
-          <div className={`p-4 rounded-xl text-center ${analysis.score >= 70 ? 'bg-emerald-50 dark:bg-emerald-900/20' : analysis.score >= 40 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}><span className="text-xs text-[var(--text-muted)]">SEO Score</span><p className={`text-4xl font-extrabold ${analysis.score >= 70 ? 'text-emerald-500' : analysis.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>{analysis.score}/100</p></div>
-          <div className="grid grid-cols-2 gap-2 text-xs"><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Words</span><p className="font-bold">{analysis.wordCount}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Chars</span><p className="font-bold">{analysis.charCount}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Sentiment</span><p className="font-bold">{analysis.sentiment}</p></div><div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Power Words</span><p className="font-bold">{analysis.powerWords.length}</p></div></div>
-          {analysis.powerWords.length > 0 && <div className="flex flex-wrap gap-1">{analysis.powerWords.map((w, i) => (<span key={i} className="px-2 py-0.5 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded text-xs font-medium">{w}</span>))}</div>}
-        </div>) : (<p className="text-[var(--text-muted)] text-sm">Enter a headline to analyze</p>)}</div>
+    <CalculatorShell title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
+        <input type="text" value={headline} onChange={e => setHeadline(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50" />
+
+        <button onClick={analyze} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Analyze</button>
+
+        {analysis && (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl text-center ${analysis.score >= 70 ? 'bg-emerald-50 dark:bg-emerald-900/20' : analysis.score >= 40 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
+              <span className="text-xs text-[var(--text-muted)]">SEO Score</span>
+              <p className={`text-4xl font-extrabold ${analysis.score >= 70 ? 'text-emerald-500' : analysis.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>{analysis.score}/100</p>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Words</span><p className="font-bold">{analysis.wordCount}</p></div>
+              <div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Chars</span><p className="font-bold">{analysis.charCount}</p></div>
+              <div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Sentiment</span><p className="font-bold">{analysis.sentiment}</p></div>
+              <div className="p-2 bg-[var(--bg-surface)] rounded-lg"><span className="text-[var(--text-muted)]">Power Words</span><p className="font-bold">{analysis.powerWords.length}</p></div>
+            </div>
+            {analysis.powerWords.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {analysis.powerWords.map((w, i) => (
+                  <span key={i} className="px-2 py-0.5 bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 rounded text-xs font-medium">{w}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -554,20 +582,46 @@ export function SeoSchemaGenerator() {
   const [type, setType] = useState('Article'); const [data, setData] = useState('{"headline": "Sample Article", "description": "Article description"}'); const [result, setResult] = useState('');
   const generate = () => { try { const parsed = JSON.parse(data); setResult(JSON.stringify({ '@context': 'https://schema.org', '@type': type, ...parsed }, null, 2)); } catch { setResult('Invalid JSON input'); } };
 
+  const presets = [
+    { label: 'Article', apply: () => { setType('Article'); setData('{"headline": "Sample Article", "description": "Article description"}'); generate(); } },
+    { label: 'Product', apply: () => { setType('Product'); setData('{"name": "Product Name", "description": "Product description", "price": "29.99", "currency": "USD"}'); generate(); } },
+    { label: 'FAQPage', apply: () => { setType('FAQPage'); setData('{"mainEntity": [{"@type": "Question", "name": "Question?", "acceptedAnswer": {"@type": "Answer", "text": "Answer text."}}]}'); generate(); } },
+    { label: 'Clear', apply: () => { setResult(''); } },
+  ];
+
+  const resultText = result ? 'Schema generated successfully' : 'Enter properties to generate schema';
+
   return (
-    <Section title="SEO Schema Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
-            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50"><option value="Article">Article</option><option value="Product">Product</option><option value="FAQPage">FAQ</option><option value="LocalBusiness">LocalBusiness</option><option value="Recipe">Recipe</option><option value="Event">Event</option></select>
-          </div>
-          <Input label="Properties (JSON)" value={data} onChange={setData} rows={6} />
-          <button onClick={generate} className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Schema</button>
+    <CalculatorShell title="SEO Schema Generator" result={resultText} onCalculate={generate} presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
+      <div className="space-y-4">
+        <div className="mb-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
+          <select value={type} onChange={e => setType(e.target.value)}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+            <option value="Article">Article</option>
+            <option value="Product">Product</option>
+            <option value="FAQPage">FAQ</option>
+            <option value="LocalBusiness">LocalBusiness</option>
+            <option value="Recipe">Recipe</option>
+            <option value="Event">Event</option>
+          </select>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate JSON-LD schema markup</p>)}</div>
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Properties (JSON)</label>
+        <textarea value={data} onChange={e => setData(e.target.value)} rows={6} placeholder='{"headline": "Sample Article", "description": "Article description"}'
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+
+        <button onClick={generate} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Schema</button>
+
+        {result && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 max-h-[300px] overflow-auto">
+            <textarea readOnly value={result} rows={10}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -576,16 +630,34 @@ export function SeoSlugGenerator() {
   const [text, setText] = useState('How to Write SEO-Friendly URLs'); const [slug, setSlug] = useState('');
   const generate = () => { setSlug(text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')); };
 
+  const presets = [
+    { label: 'Blog Post', apply: () => { setText('How to Write SEO-Friendly URLs'); generate(); } },
+    { label: 'Product', apply: () => { setText('Premium Wireless Headphones - Black'); generate(); } },
+    { label: 'Category', apply: () => { setText('Men\'s Running Shoes - Size 10'); generate(); } },
+    { label: 'Clear', apply: () => { setText(''); setSlug(''); } },
+  ];
+
+  const resultText = slug ? `Slug generated: ${slug}` : 'Enter text to generate slug';
+
   return (
-    <Section title="SEO Slug Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text" value={text} onChange={setText} />
-          <button onClick={generate} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Generate Slug</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">{slug ? (<div className="text-center"><p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p><button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate a URL-friendly slug</p>)}</div>
+    <CalculatorShell title="SEO Slug Generator" result={resultText} onCalculate={generate} presets={presets} accent="emerald" downloadData={slug} downloadFilename="slug.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+        <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter text to convert to slug"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+
+        <button onClick={generate} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Slug</button>
+
+        {slug && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">
+            <div className="text-center">
+              <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p>
+              <button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button>
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -672,17 +744,48 @@ export function TextReplacer() {
   const replaceAll = () => { if (!find) return; setResult(text.split(find).join(replace)); };
   const count = result ? (text.match(new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length : 0;
 
+  const presets = [
+    { label: 'Fix typo', apply: () => { setText('The quik brown fox jumps over the lazy dog'); setFind('quik'); setReplace('quick'); } },
+    { label: 'Remove prefix', apply: () => { setText('OLD_item1\nOLD_item2\nOLD_item3'); setFind('OLD_'); setReplace(''); } },
+    { label: 'Clear', apply: () => { setText(''); setFind(''); setReplace(''); setResult(''); } },
+  ];
+
+  const count = result ? (text.match(new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length : 0;
+  const resultText = result ? `Replaced ${count} occurrence${count !== 1 ? 's' : ''}` : 'Enter text to find and replace';
+
   return (
-    <Section title="Text Replacer">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text" value={text} onChange={setText} rows={6} />
-          <div className="grid grid-cols-2 gap-3"><Input label="Find" value={find} onChange={setFind} /><Input label="Replace With" value={replace} onChange={setReplace} /></div>
-          <button onClick={replaceAll} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Replace All</button>
+    <CalculatorShell title="Text Replacer" result={resultText} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+        <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); }} rows={6} placeholder="Enter text..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y" />
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Find</label>
+            <input type="text" value={find} onChange={e => setFind(e.target.value)} placeholder="Text to find"
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Replace With</label>
+            <input type="text" value={replace} onChange={e => setReplace(e.target.value)} placeholder="Replacement text"
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Find and replace text</p>)}</div>
+
+        <button onClick={replaceAll} className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Replace All</button>
+
+        {result && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span>
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            </div>
+            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -693,16 +796,45 @@ export function TextSorter() {
   const inLines = text.split('\n').filter(l => l.trim()).length;
   const outLines = sorted ? sorted.split('\n').filter(l => l.trim()).length : 0;
 
+  const presets = [
+    { label: 'Fruits', apply: () => { setText('banana\napple\ndate\ncherry\nelderberry'); sort('az'); } },
+    { label: 'Mixed', apply: () => { setText('zebra\napple\nbanana\ncherry'); sort('az'); } },
+    { label: 'Numbers', apply: () => { setText('10\n2\n30\n4\n5'); sort('length'); } },
+    { label: 'Clear', apply: () => { setText(''); setSorted(''); setSortMethod(''); } },
+  ];
+
+  const resultText = sorted ? `Sorted ${outLines} lines (${sortMethod})` : 'Enter lines to sort';
+
   return (
-    <Section title="Text Sorter">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label={`Lines (${inLines})`} value={text} onChange={setText} rows={8} />
-          <div className="flex flex-wrap gap-2">{[['A→Z','az'],['Z→A','za'],['By Length','length'],['Randomize','random'],['Deduplicate','unique']].map(([label, id]) => (<button key={id} onClick={() => sort(id)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>{label}</button>))}</div>
+    <CalculatorShell title="Text Sorter" result={resultText} onCalculate={sort} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
+        <textarea value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
+
+        <div className="flex flex-wrap gap-2">
+          {[
+            ['A→Z', 'az'], ['Z→A', 'za'], ['By Length', 'length'], ['Randomize', 'random'], ['Deduplicate', 'unique']
+          ].map(([label, id]) => (
+            <button key={id} onClick={() => sort(id)}
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+              {label}
+            </button>
+          ))}
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{sorted ? (<><textarea readOnly value={sorted} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span><button onClick={() => { clipboardWrite(sorted); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Enter lines and choose sort method</p>)}</div>
+
+        {sorted && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
+            <textarea readOnly value={sorted} rows={8}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            <div className="flex items-center justify-between mt-2">
+              <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>
+              <button onClick={() => { clipboardWrite(sorted); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+            </div>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -712,16 +844,33 @@ export function TextDeduplicator() {
   const inLines = text.split('\n').filter(l => l.trim()).length;
   const deduplicate = () => { const lines = text.split('\n').map(l => l.trim()).filter(Boolean); setResult([...new Set(lines)].join('\n')); };
 
+  const presets = [
+    { label: 'Sample', apply: () => { setText('apple\nbanana\napple\ncherry\nbanana\ndate'); } },
+    { label: 'Logs', apply: () => { setText('ERROR: Connection failed\nINFO: Started\nERROR: Connection failed\nWARN: Timeout\nINFO: Started'); } },
+    { label: 'Clear', apply: () => { setText(''); setResult(''); } },
+  ];
+
+  const resultText = result ? `${result.split('\n').length} unique lines (from ${inLines})` : 'Paste lines to deduplicate';
+
   return (
-    <Section title="Text Deduplicator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Text Lines" value={text} onChange={setText} rows={8} />
-          <button onClick={deduplicate} className="px-4 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicates</button>
+    <CalculatorShell title="Text Deduplicator" result={resultText} onCalculate={deduplicate} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Lines</label>
+      <textarea value={text} onChange={setText} rows={8}
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 resize-y" />
+
+      <button onClick={deduplicate} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Duplicates</button>
+
+      {result && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <textarea readOnly value={result} rows={8}
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+          <div className="flex items-center justify-between mt-2">
+            <span className="text-xs text-[var(--text-muted)]">{result.split('\n').length} unique lines ({inLines - result.split('\n').length} removed)</span>
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{result.split('\n').length} unique lines (from {inLines})</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste lines to deduplicate</p>)}</div>
-      </div>
-    </Section>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -800,19 +949,38 @@ export function TextDiffChecker() {
 // === 16/17. TextToHtmlConverter / HtmlToTextConverter ===
 function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-text' }) {
   const [mode, setMode] = useState(defaultMode); const [input, setInput] = useState(''); const [result, setResult] = useState('');
-  const convert = () => { const val = input.trim(); if (!val) { setResult(''); return; } try { if (mode === 'text-to-html') { const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim()); setResult(paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n')); } else { setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\n\s*\n/g, '\n\n').trim()); } } catch { setResult(''); } };
+  const convert = () => { const val = input.trim(); if (!val) { setResult(''); return; } try { if (mode === 'text-to-html') { const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim()); setResult(paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n')); } else { setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, "'").replace(/\n\s*\n/g, '\n\n').trim()); } } catch { setResult(''); } };
   const isTextToHtml = mode === 'text-to-html';
 
+  const presets = [
+    { label: 'Article', apply: () => { setMode('text-to-html'); setInput('Title\n\nFirst paragraph here.\n\nSecond paragraph with **bold** and *italic* text.'); } },
+    { label: 'Code Block', apply: () => { setMode('text-to-html'); setInput('function hello() {\n  console.log("Hello, World!");\n}'); } },
+    { label: 'HTML', apply: () => { setMode('html-to-text'); setInput('<div class="card"><h1>Title</h1><p>Content with <strong>bold</strong> text.</p></div>'); } },
+    { label: 'Clear', apply: () => { setInput(''); setResult(''); } },
+  ];
+
+  const resultText = result ? `Converted ${isTextToHtml ? 'text → HTML' : 'HTML → text'}` : 'Enter content to convert';
+
   return (
-    <Section title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label={isTextToHtml ? 'Plain Text' : 'HTML'} value={input} onChange={setInput} rows={8} />
-          <div className="flex flex-wrap gap-2"><button onClick={convert} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button><button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button></div>
+    <CalculatorShell title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'} result={resultText} onCalculate={convert} presets={presets} accent="amber" downloadData={result} downloadFilename={isTextToHtml ? 'output.html' : 'output.txt'}>
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{isTextToHtml ? 'Plain Text' : 'HTML'}</label>
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={8} placeholder={isTextToHtml ? 'Enter plain text...' : 'Enter HTML...'}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y" />
+
+        <div className="flex flex-wrap gap-2">
+          <button onClick={convert} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button>
+          <button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button>
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Enter content to convert</p>)}</div>
+
+        {result && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
+            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 export function TextToHtmlConverter() { return <TextHtmlTool key="text-to-html" defaultMode="text-to-html" />; }
@@ -821,22 +989,36 @@ export function HtmlToTextConverter() { return <TextHtmlTool key="html-to-text" 
 // === 18. MarkdownPreviewer ===
 export function MarkdownPreviewer() {
   const [md, setMd] = useState('# Hello World\n\nThis is **bold** and *italic* text.\n\n- List item 1\n- List item 2\n\n```\ncode block\n```\n\n> Blockquote'); const [html, setHtml] = useState('');
+
   const preview = () => {
     let h = md.replace(/^###### (.*$)/gm, '<h6>$1</h6>').replace(/^##### (.*$)/gm, '<h5>$1</h5>').replace(/^#### (.*$)/gm, '<h4>$1</h4>').replace(/^### (.*$)/gm, '<h3>$1</h3>').replace(/^## (.*$)/gm, '<h2>$1</h2>').replace(/^# (.*$)/gm, '<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1</code></pre>').replace(/`(.*?)`/g, '<code>$1</code>').replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>').replace(/^- (.*$)/gm, '<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>').replace(/\n\n/g, '</p><p>').replace(/^(?!<[hulpb])/gm, '');
     h = `<p>${h}</p>`.replace(/<p><\/p>/g, '');
     setHtml(h);
   };
 
+  const presets = [
+    { label: 'Basic', apply: () => { setMd('# Hello World\n\nThis is **bold** and *italic* text.\n\n- List item 1\n- List item 2\n\n```\ncode block\n```\n\n> Blockquote'); } },
+    { label: 'Code', apply: () => { setMd('# Code Example\n\n```javascript\nfunction hello() {\n  console.log("Hello, World!");\n}\n```'); } },
+    { label: 'Table', apply: () => { setMd('| Name | Age |\n|------|-----|\n| Alice | 30 |\n| Bob | 25 |'); } },
+    { label: 'Clear', apply: () => { setMd(''); setHtml(''); } },
+  ];
+
+  const resultText = html ? 'Markdown rendered to HTML' : 'Enter Markdown to preview';
+
   return (
-    <Section title="Markdown Previewer">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Markdown" value={md} onChange={setMd} rows={10} />
-          <button onClick={preview} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Preview</button>
+    <CalculatorShell title="Markdown Previewer" result={resultText} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Markdown</label>
+      <textarea value={md} onChange={e => setMd(e.target.value)} rows={10} placeholder="Enter Markdown..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y" />
+
+      <button onClick={preview} className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Preview</button>
+
+      {html && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">
+          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
         </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">{html ? <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} /> : <p className="text-[var(--text-muted)] text-sm">Click Preview to render</p>}</div>
-      </div>
-    </Section>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -847,14 +1029,33 @@ export function DuplicateWordRemover() {
   const inWords = text.trim() ? text.split(/\s+/).length : 0;
   const outWords = result.trim() ? result.split(/\s+/).length : 0;
 
+  const presets = [
+    { label: 'Sample', apply: () => { setText('the quick brown fox jumps over the lazy dog the quick brown fox'); } },
+    { label: 'Repeated', apply: () => { setText('word word word another another test test test'); } },
+    { label: 'Clear', apply: () => { setText(''); setResult(''); } },
+  ];
+
+  const resultText = result ? `${outWords} unique words (removed ${inWords - outWords} duplicates)` : 'Paste text to remove duplicate words';
+
   return (
-    <Section title="Duplicate Word Remover">
-      <p className="text-sm text-[var(--text-secondary)]">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label={`Text (${inWords} words)`} value={text} onChange={setText} rows={6} /><button onClick={remove} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Remove Duplicate Words</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Paste text to remove duplicate words</p>)}</div>
-      </div>
-    </Section>
+    <CalculatorShell title="Duplicate Word Remover" result={resultText} onCalculate={remove} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
+      <p className="text-sm text-[var(--text-secondary)] mb-3">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text (${inWords} words)</label>
+      <textarea value={text} onChange={setText} rows={6} placeholder="Paste text..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 resize-y" />
+
+      <button onClick={remove} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Duplicate Words</button>
+
+      {result && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+          <div className="flex items-center justify-between mt-2">
+            <span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span>
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        </div>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -863,13 +1064,29 @@ export function TextCleaner() {
   const [text, setText] = useState(''); const [result, setResult] = useState('');
   const clean = () => { let t = text; t = t.replace(/\s+/g, ' '); t = t.replace(/\n{3,}/g, '\n\n'); t = t.replace(/[^\S\n]+$/gm, ''); t = t.replace(/^[^\S\n]+/gm, ''); setResult(t.trim()); };
 
+  const presets = [
+    { label: 'Messy', apply: () => { setText('  Hello    World  \n\n\n  This   is   a   test  '); } },
+    { label: 'Extra newlines', apply: () => { setText('Line 1\n\n\n\nLine 2\n\n\nLine 3'); } },
+    { label: 'Clear', apply: () => { setText(''); setResult(''); } },
+  ];
+
+  const resultText = result ? 'Text cleaned (whitespace normalized)' : 'Enter text to clean';
+
   return (
-    <Section title="Text Cleaner">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={clean} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors">Clean Text</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Normalize whitespace and clean text</p>)}</div>
-      </div>
-    </Section>
+    <CalculatorShell title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text to clean..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-y" />
+
+      <button onClick={clean} className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Clean Text</button>
+
+      {result && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
+          <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors self-start"><Copy size={14} /></button>
+        </div>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -879,13 +1096,37 @@ export function TextSplitter() {
   const split = () => { if (!delimiter) return; const parts = text.split(delimiter).map(s => s.trim()).filter(Boolean); setResult(parts.map((p, i) => `${i + 1}. ${p}`).join('\n')); };
   const count = result ? result.split('\n').length : 0;
 
+  const presets = [
+    { label: 'CSV', apply: () => { setText('apple, banana, cherry, date'); setDelimiter(','); } },
+    { label: 'Lines', apply: () => { setText('line1\nline2\nline3'); setDelimiter('\n'); } },
+    { label: 'Semicolon', apply: () => { setText('a;b;c;d'); setDelimiter(';'); } },
+    { label: 'Clear', apply: () => { setText(''); setDelimiter(','); setResult(''); } },
+  ];
+
+  const resultText = result ? `Split into ${count} parts` : 'Enter text and delimiter to split';
+
   return (
-    <Section title="Text Splitter">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><Input label="Delimiter" value={delimiter} onChange={setDelimiter} /><button onClick={split} className="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors">Split</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">{count} parts</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Split text by delimiter</p>)}</div>
-      </div>
-    </Section>
+    <CalculatorShell title="Text Splitter" result={resultText} onCalculate={split} presets={presets} accent="violet" downloadData={result} downloadFilename="split.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text to split..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
+
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Delimiter</label>
+      <input type="text" value={delimiter} onChange={e => setDelimiter(e.target.value)} placeholder=","
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
+
+      <button onClick={split} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Split</button>
+
+      {result && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+          <div className="flex items-center justify-between mt-2">
+            <span className="text-xs text-[var(--text-muted)]">{count} parts</span>
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        </div>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -895,13 +1136,32 @@ export function TrailingSpaceRemover() {
   const trim = () => { setResult(text.split('\n').map(l => l.trimEnd()).join('\n').trim()); };
   const trimmed = result ? text.split('\n').length - result.split('\n').length : 0;
 
+  const presets = [
+    { label: 'Sample', apply: () => { setText('Line 1   \nLine 2  \n  Line 3  \n\nLine 4'); } },
+    { label: 'Code', apply: () => { setText('function hello() {  \n  console.log("test");  \n}  '); } },
+    { label: 'Clear', apply: () => { setText(''); setResult(''); } },
+  ];
+
+  const resultText = result ? 'Trailing spaces removed' : 'Enter text to remove trailing spaces';
+
   return (
-    <Section title="Trailing Space Remover">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Text" value={text} onChange={setText} rows={6} /><button onClick={trim} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Trim Trailing Spaces</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><div className="flex items-center justify-between mt-2"><span className="text-xs text-[var(--text-muted)]">Trimmed {trimmed} line{trimmed !== 1 ? 's' : ''}</span><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button></div></>) : (<p className="text-[var(--text-muted)] text-sm">Remove trailing whitespace</p>)}</div>
-      </div>
-    </Section>
+    <CalculatorShell title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
+      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text with trailing spaces..."
+        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-y" />
+
+      <button onClick={trim} className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Trailing Spaces</button>
+
+      {result && (
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
+          <div className="flex items-center justify-between mt-2">
+            <span className="text-xs text-[var(--text-muted)]">Trailing spaces removed</span>
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        </div>
+      )}
+    </CalculatorShell>
   );
 }
 
@@ -910,13 +1170,29 @@ export function CanonicalUrlChecker() {
   const [url, setUrl] = useState('https://example.com/blog/my-article'); const [result, setResult] = useState('');
   const check = () => { try { new URL(url); } catch { setResult('Invalid URL'); return; } const u = new URL(url); setResult([`✓ Valid URL format`,`Protocol: ${u.protocol}`,`Domain: ${u.hostname}`,`Path: ${u.pathname}`,u.hash ? '⚠️ Has fragment (#) — search engines may ignore' : '✓ No fragment',u.search ? '⚠️ Has query params — ensure these are the canonical version' : '✓ No query params',u.pathname.endsWith('/') ? '✓ Ends with /' : 'ℹ️ No trailing slash',u.hostname.startsWith('www.') ? 'ℹ️ With www' : 'ℹ️ Without www'].join('\n')); };
 
+  const presets = [
+    { label: 'Article', apply: () => setUrl('https://example.com/blog/my-article') },
+    { label: 'Product', apply: () => setUrl('https://shop.example.com/product/123?ref=email') },
+    { label: 'Root', apply: () => setUrl('https://example.com/') },
+    { label: 'Clear', apply: () => { setUrl(''); setResult(''); } },
+  ];
+
+  const resultText = result ? `URL checked: ${url}` : 'Enter URL to check canonical structure';
+
   return (
-    <Section title="Canonical URL Checker">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="URL" type="url" value={url} onChange={setUrl} /><button onClick={check} className="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors">Check URL</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<pre className="text-sm font-mono whitespace-pre-wrap">{result}</pre>) : (<p className="text-[var(--text-muted)] text-sm">Check canonical URL structure</p>)}</div>
+    <CalculatorShell title="Canonical URL Checker" result={resultText} onCalculate={check} presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
+        <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+
+        <button onClick={check} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Check URL</button>
+
+        {result && (
+          <pre className="p-4 bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 font-mono text-sm whitespace-pre-wrap">{result}</pre>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
@@ -925,13 +1201,33 @@ export function BreadcrumbSchemaGenerator() {
   const [pages, setPages] = useState('Home,https://example.com\nProducts,https://example.com/products\nWidgets,https://example.com/widgets'); const [result, setResult] = useState('');
   const generate = () => { const items = pages.split('\n').filter(l => l.trim()).map(l => { const [name, url] = l.split(',').map(s => s.trim()); return { name, url }; }); if (items.length < 2) return; setResult(JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items.map((item, i) => ({ "@type": "ListItem", "position": i + 1, "name": item.name, "item": item.url })) }, null, 2)); };
 
+  const presets = [
+    { label: 'E-commerce', apply: () => setPages('Home,https://example.com\nProducts,https://example.com/products\nWidgets,https://example.com/widgets') },
+    { label: 'Blog', apply: () => setPages('Home,https://blog.example.com\nCategory,https://blog.example.com/category\nPost,https://blog.example.com/post') },
+    { label: 'Documentation', apply: () => setPages('Home,https://docs.example.com\nGuides,https://docs.example.com/guides\nAPI,https://docs.example.com/api') },
+    { label: 'Clear', apply: () => { setPages(''); setResult(''); } },
+  ];
+
+  const resultText = result ? 'Breadcrumb schema generated' : 'Enter pages to generate breadcrumb schema';
+
   return (
-    <Section title="Breadcrumb Schema Generator">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4"><Input label="Pages (Name,URL per line)" value={pages} onChange={setPages} rows={5} /><button onClick={generate} className="px-4 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Breadcrumb Schema</button></div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">{result ? (<><textarea readOnly value={result} rows={10} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" /><button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button></>) : (<p className="text-[var(--text-muted)] text-sm">Generate breadcrumb JSON-LD schema</p>)}</div>
+    <CalculatorShell title="Breadcrumb Schema Generator" result={resultText} onCalculate={generate} presets={presets} accent="amber" downloadData={result} downloadFilename="breadcrumb-schema.json">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pages (Name,URL per line)</label>
+        <textarea value={pages} onChange={e => setPages(e.target.value)} rows={5} placeholder="Home,https://example.com\nProducts,https://example.com/products"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 resize-y" />
+
+        <button onClick={generate} className="px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Breadcrumb Schema</button>
+
+        {result && (
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+            <textarea readOnly value={result} rows={10}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+          </div>
+        )}
       </div>
-    </Section>
+    </CalculatorShell>
   );
 }
 
