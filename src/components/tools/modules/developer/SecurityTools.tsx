@@ -481,6 +481,7 @@ export function HashVerifier() {
   const [computed, setComputed] = useState('');
   const textPresets = ['Hello World', 'password123'];
   const algoPills = ['SHA-1', 'SHA-256', 'SHA-512'];
+
   const verify = (t?: string, h?: string) => {
     const ft = t !== undefined ? t : text;
     const fh = h !== undefined ? h : hash;
@@ -495,29 +496,55 @@ export function HashVerifier() {
     };
     run();
   };
+
   const [copied, setCopied] = useState(false);
   const copy = () => { if (computed) { navigator.clipboard.writeText(computed).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+
+  const presets = [
+    { label: 'Hello World (SHA-256)', apply: () => { setText('Hello World'); setAlgo('SHA-256'); verify(); } },
+    { label: 'Password (SHA-256)', apply: () => { setText('password123'); setAlgo('SHA-256'); verify(); } },
+    { label: 'Test SHA-1', apply: () => { setText('test'); setAlgo('SHA-1'); verify(); } },
+    { label: 'Test SHA-512', apply: () => { setText('test'); setAlgo('SHA-512'); verify(); } },
+  ];
+
+  const resultText = match !== null ? (match ? 'Hash matches!' : 'Hash mismatch!') : 'Enter text and hash to verify';
+
   return (
-    <Section title="Hash Verifier">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {textPresets.map(t => <button key={t} onClick={() => verify(t)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{t}</button>)}
-      </div>
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {algoPills.map(a => <button key={a} onClick={() => setAlgo(a)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'}`}>{a}</button>)}
-      </div>
-      <Input label="Original text" value={text} onChange={v => { setText(v); setMatch(null); }} placeholder="Enter text..." />
-      <Input label="Hash to verify against" value={hash} onChange={v => { setHash(v); setMatch(null); }} placeholder="Enter hash..." />
-      <button onClick={() => verify()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Verify</button>
-      {match !== null && (
-        <div className="mt-4 space-y-3">
-          <div className={`p-4 rounded-xl text-sm font-medium ${match ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}`}>
-            <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
-            <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
-          </div>
-          <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
+    <CalculatorShell
+      title="Hash Verifier"
+      result={resultText}
+      onCalculate={verify}
+      presets={presets}
+      accent="emerald"
+      downloadData={computed ? `Algorithm: ${algo}\nExpected: ${hash}\nComputed: ${computed}\nMatch: ${match ? 'YES' : 'NO'}` : ''}
+      downloadFilename="hash-verification.txt"
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {algoPills.map(a => <button key={a} onClick={() => { setAlgo(a); verify(); }} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'`}>{a}</button>)}
         </div>
-      )}
-    </Section>
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
+        <input type="text" value={text} onChange={e => { setText(e.target.value); setMatch(null); }} placeholder="Enter text..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hash to Verify Against</label>
+        <input type="text" value={hash} onChange={e => { setHash(e.target.value); setMatch(null); }} placeholder="Enter hash..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
+
+        <button onClick={verify} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Verify</button>
+
+        {match !== null && (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl text-sm font-medium ${match ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}`}>
+              <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
+              <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
+            </div>
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
+          </div>
+        )}
+      </div>
+    </CalculatorShell>
   );
 }
 
