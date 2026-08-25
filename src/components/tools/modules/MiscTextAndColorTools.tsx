@@ -488,14 +488,35 @@ export function ColorConverter() {
 export function ColorPicker() {
   const clr = ac('ColorPicker');
   const [color, setColor] = useState('#ff6b6b');
+
+  const presets = [
+    { label: 'Red', apply: () => { setColor('#ff6b6b'); } },
+    { label: 'Blue', apply: () => { setColor('#3b82f6'); } },
+    { label: 'Green', apply: () => { setColor('#10b981'); } },
+    { label: 'Purple', apply: () => { setColor('#8b5cf6'); } },
+    { label: 'Random', apply: () => { setColor('#' + Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')); } },
+  ];
+
+  const resultText = `Selected: ${color.toUpperCase()}`;
+
   return (
-    <Section title="Color Picker">
-      <div className="flex gap-4 items-center">
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
-        <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
+    <CalculatorShell
+      title="Color Picker"
+      result={resultText}
+      onCalculate={() => {}}
+      presets={presets}
+      accent="pink"
+      downloadData={color}
+      downloadFilename="color.txt"
+    >
+      <div className="space-y-4">
+        <div className="flex gap-4 items-center">
+          <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
+          <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
+        </div>
+        <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
       </div>
-      <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
-    </Section>
+    </CalculatorShell>
   );
 }
 // --- ColorPaletteGenerator ---
