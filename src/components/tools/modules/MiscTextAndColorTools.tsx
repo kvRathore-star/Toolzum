@@ -74,7 +74,7 @@ export function QRCodeGenerator() {
   const resultText = text ? `QR generated (${size}x${size}px, EC: ${errorLevel})` : 'Enter text to generate QR code';
 
   return (
-    <CalculatorShell title="QR Code Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData={qrDataUrl} downloadFilename="qrcode.png">
+    <CalculatorShell title="QR Code Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={qrDataUrl} downloadFilename="qrcode.png">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text / URL</label>
         <textarea value={text} onChange={e => setText(e.target.value)} rows={3} placeholder="Enter text, URL, email, WiFi config..."
@@ -243,7 +243,7 @@ export function BarcodeGenerator() {
   const resultText = text ? `Barcode: ${format.toUpperCase()} (${text.length} chars, ${width}px bars)` : 'Enter data to generate barcode';
 
   return (
-    <CalculatorShell title="Barcode Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="orange" downloadData={barcodeDataUrl} downloadFilename="barcode.png">
+    <CalculatorShell title="Barcode Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="orange" downloadData={barcodeDataUrl} downloadFilename="barcode.png">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Data</label>
         <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter barcode data"
@@ -328,7 +328,7 @@ export function GuidGenerator() {
     : 'No GUIDs generated';
 
   return (
-    <CalculatorShell title="GUID / UUID Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={guids.join('\n')} downloadFilename="guids.txt">
+    <CalculatorShell title="GUID / UUID Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="violet" downloadData={guids.join('\n')} downloadFilename="guids.txt">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <div>
@@ -437,7 +437,7 @@ export function ColorConverter() {
   ];
 
   return (
-    <CalculatorShell title="Color Converter" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={isValid ? JSON.stringify({ hex: hex.toUpperCase(), rgb, hsl, hsv, cmyk }, null, 2) : ''} downloadFilename="color.json">
+    <CalculatorShell title="Color Converter" result={resultText} onCalculate={() => {}} calculateLabel="Convert" presets={presets} accent="blue" downloadData={isValid ? JSON.stringify({ hex: hex.toUpperCase(), rgb, hsl, hsv, cmyk }, null, 2) : ''} downloadFilename="color.json">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-4 items-center">
           <div className="flex-1 min-w-[200px]">
@@ -504,6 +504,7 @@ export function ColorPicker() {
       title="Color Picker"
       result={resultText}
       onCalculate={() => {}}
+      calculateLabel="Pick"
       presets={presets}
       accent="pink"
       downloadData={color}
@@ -601,7 +602,7 @@ export function ColorPaletteGenerator() {
   const resultText = `Palette: ${type} (${palette.length} colors)`;
 
   return (
-    <CalculatorShell title="Color Palette Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={JSON.stringify({ base, type, palette }, null, 2)} downloadFilename="palette.json">
+    <CalculatorShell title="Color Palette Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="violet" downloadData={JSON.stringify({ base, type, palette }, null, 2)} downloadFilename="palette.json">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-4 items-center">
           <div className="flex-1 min-w-[200px]">
@@ -686,7 +687,7 @@ export function GradientGenerator() {
   const directions = ['to right', 'to left', 'to top', 'to bottom', 'to top right', 'to top left', 'to bottom right', 'to bottom left'];
 
   return (
-    <CalculatorShell title="Gradient Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="pink" downloadData={gradient} downloadFilename="gradient.css">
+    <CalculatorShell title="Gradient Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="pink" downloadData={gradient} downloadFilename="gradient.css">
       <div className="space-y-4">
         <div className="flex gap-2 flex-wrap items-center">
           <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
@@ -775,7 +776,7 @@ export function ContrastChecker() {
   const resultText = `Contrast: ${ratio.toFixed(2)}:1 (${isLargeText ? 'Large' : 'Normal'} text)`;
 
   return (
-    <CalculatorShell title="Contrast Checker" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2)} downloadFilename="contrast.json">
+    <CalculatorShell title="Contrast Checker" result={resultText} onCalculate={() => {}} calculateLabel="Check" presets={presets} accent="emerald" downloadData={JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2)} downloadFilename="contrast.json">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-4 items-center">
           <div>

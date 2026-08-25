@@ -169,6 +169,7 @@ export function TwoFactorAuthGenerator() {
       title="Two-Factor Auth (TOTP) Generator"
       result={resultText}
       onCalculate={gen}
+      calculateLabel="Generate"
       presets={presets}
       accent="blue"
       downloadData={uri}
@@ -426,7 +427,7 @@ export function HashGenerator() {
     : '';
 
   return (
-    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt">
+    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt">
       <div className="space-y-4">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text to Hash</label>
@@ -594,7 +595,7 @@ export function HashPasswordGenerator() {
   const resultText = params ? `PBKDF2-SHA256: ${params.iter.toLocaleString()} iterations` : 'Enter password to generate hash';
 
   return (
-    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt">
+    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input type="password" value={pwd} onChange={e => { setPwd(e.target.value); setResult(''); }} placeholder="Enter password..."
@@ -1292,7 +1293,7 @@ export function JsonValidator() {
   const resultText = isValid ? `✓ Valid JSON (${stats?.size || 0} chars, ${stats?.keys || 0} keys, depth ${stats?.depth || 0})` : (error ? `✗ Invalid: ${error}` : 'Enter JSON to validate');
 
   return (
-    <CalculatorShell title="JSON Syntax Validator" result={resultText} onCalculate={validate} presets={presets} accent="lime" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="validated.json">
+    <CalculatorShell title="JSON Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="lime" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="validated.json">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JSON String</label>
@@ -1394,7 +1395,7 @@ export function YamlValidator() {
   const resultText = isValid ? (issues.length === 0 ? '✓ Valid YAML — no issues' : `✓ Valid YAML with ${issues.length} warning(s)`) : 'Enter YAML to validate';
 
   return (
-    <CalculatorShell title="YAML Syntax Validator" result={resultText} onCalculate={validate} presets={presets} accent="yellow" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="parsed.json">
+    <CalculatorShell title="YAML Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="yellow" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="parsed.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">YAML String</label>
         <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIssues([]); setIsValid(null); setParsed(null); }} rows={8} placeholder="key: value"

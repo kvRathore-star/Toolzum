@@ -35,13 +35,14 @@ interface CalculatorShellProps {
   result: string;
   error?: string;
   onCalculate: () => void;
+  calculateLabel?: string;
   presets?: Preset[];
   downloadData?: string;
   downloadFilename?: string;
   accent?: string;
 }
 
-export function CalculatorShell({ title, children, result, error, onCalculate, presets, downloadData, downloadFilename, accent = 'indigo' }: CalculatorShellProps) {
+export function CalculatorShell({ title, children, result, error, onCalculate, calculateLabel = 'Calculate', presets, downloadData, downloadFilename, accent = 'indigo' }: CalculatorShellProps) {
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
@@ -138,7 +139,7 @@ export function CalculatorShell({ title, children, result, error, onCalculate, p
               onClick={onCalculate}
               className={`flex-1 bg-gradient-to-r ${a.btn} ${a.btnHover} text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg`}
             >
-              Calculate
+              {calculateLabel}
             </button>
             {downloadData && (
               <button

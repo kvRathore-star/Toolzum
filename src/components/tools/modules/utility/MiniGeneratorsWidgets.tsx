@@ -637,6 +637,7 @@ export function ULIDGenerator() {
       title="ULID Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ count, ulids }, null, 2)}
@@ -704,6 +705,7 @@ export function NumeronymGenerator() {
       title="Numeronym Generator"
       result={resultText}
       onCalculate={() => {}}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ input, numeronym, acronym, wordCount, preserveCase }, null, 2)}

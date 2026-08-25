@@ -427,7 +427,7 @@ export function TestDataGenerator() {
   const resultText = output ? 'Test data generated from schema' : 'Enter JSON schema to generate test data';
 
   return (
-    <CalculatorShell title="Test Data Generator" result={output || 'Enter schema to generate'} onCalculate={generate} presets={presets} accent="green" downloadData={output} downloadFilename="test-data.json">
+    <CalculatorShell title="Test Data Generator" result={output || 'Enter schema to generate'} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="green" downloadData={output} downloadFilename="test-data.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {name, type})</label>
         <textarea value={schema} onChange={e => setSchema(e.target.value)} rows={6} placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'

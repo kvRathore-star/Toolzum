@@ -65,6 +65,7 @@ export function RandomPasswordGenerator() {
       title="Random Password Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={result}
@@ -184,6 +185,7 @@ export function RandomNumberGenerator() {
       title="Random Number Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="violet"
       downloadData={JSON.stringify({ min: parseInt(min), max: parseInt(max), count: parseInt(count), unique, sort, numbers: result }, null, 2)}
@@ -258,7 +260,7 @@ export function RandomStringGenerator() {
   const resultText = result ? 'Generated ' + result.length + '-char string (' + charset + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random String Generator" result={resultText} onCalculate={generate} presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
+    <CalculatorShell title="Random String Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {STRING_PRESETS.map(p => (
@@ -350,6 +352,7 @@ export function RandomColorGenerator() {
       title="Random Color Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="pink"
       downloadData={JSON.stringify({ format, count, colors }, null, 2)}
@@ -411,6 +414,7 @@ export function RandomTeamGenerator() {
       title="Random Team Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ teams: teams.map((t, i) => ({ team: i + 1, members: t })), totalNames: input.split('\n').filter(Boolean).length }, null, 2)}
@@ -460,6 +464,7 @@ export function RandomPickerGenerator() {
       title="Random Picker Generator"
       result={resultText}
       onCalculate={pick}
+      calculateLabel="Generate"
       presets={presets}
       accent="violet"
       downloadData={JSON.stringify({ items: input.split('\n').map(s => s.trim()).filter(Boolean), picked: result, allowRepeat, count }, null, 2)}
@@ -548,6 +553,7 @@ export function RandomDecisionMaker() {
       title="Random Decision Maker"
       result={resultText}
       onCalculate={decide}
+      calculateLabel="Generate"
       presets={presets}
       accent="amber"
       downloadData={JSON.stringify({ question, options: options.split('\n').map(s => s.trim()).filter(Boolean), decision: choice, history }, null, 2)}
@@ -603,6 +609,7 @@ export function RandomUsernameGenerator() {
       title="Random Username Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="indigo"
       downloadData={JSON.stringify({ pattern, includeNum, count, usernames: results }, null, 2)}
@@ -657,6 +664,7 @@ export function RandomUUIDGenerator() {
       title="Random UUID Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="cyan"
       downloadData={JSON.stringify({ version, count, uuids: results }, null, 2)}
@@ -714,6 +722,7 @@ export function RandomTokenGenerator() {
       title="Random Token Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="rose"
       downloadData={result ? JSON.stringify({ format, length, token: result, entropy }, null, 2) : ''}
@@ -772,6 +781,7 @@ export function LoremIpsumGenerator() {
       title="Lorem Ipsum Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="blue"
       downloadData={result}
@@ -824,6 +834,7 @@ export function DummyTextGenerator() {
       title="Dummy Text Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="sky"
       downloadData={result}
@@ -883,6 +894,7 @@ export function FakeDataGenerator() {
       title="Fake Data Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={data.length > 0 ? JSON.stringify(data, null, 2) : ''}
@@ -940,6 +952,7 @@ export function FakeIdentityGenerator() {
       title="Fake Identity Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="indigo"
       downloadData={identity ? JSON.stringify(identity, null, 2) : ''}
@@ -995,6 +1008,7 @@ export function FakeCreditCardGenerator() {
       title="Fake Credit Card Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="amber"
       downloadData={cards.length > 0 ? JSON.stringify(cards, null, 2) : ''}
@@ -1049,6 +1063,7 @@ export function SequenceGenerator() {
       title="Sequence Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="amber"
       downloadData={result.length > 0 ? JSON.stringify({ type, start: parseFloat(start), diff: parseFloat(diff), count: parseInt(count), sequence: result, sum }, null, 2) : ''}
@@ -1101,6 +1116,7 @@ export function BarcodeGenerator() {
       title="Barcode Generator"
       result={resultText}
       onCalculate={renderBarcode}
+      calculateLabel="Generate"
       presets={presets}
       accent="indigo"
       downloadData={input ? JSON.stringify({ type, data: input }, null, 2) : ''}
@@ -1147,6 +1163,7 @@ export function QrCodeGenerator() {
       title="QR Code Generator"
       result={resultText}
       onCalculate={() => {}}
+      calculateLabel="Generate"
       presets={presets}
       accent="violet"
       downloadData={text ? JSON.stringify({ text, errorCorrection }, null, 2) : ''}
@@ -1202,6 +1219,7 @@ export function CouponCodeGenerator() {
       title="Coupon Code Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="emerald"
       downloadData={codes.join('\n')}
@@ -1264,6 +1282,7 @@ export function SerialNumberGenerator() {
       title="Serial Number Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="cyan"
       downloadData={serials.join('\n')}
@@ -1328,7 +1347,7 @@ export function NicknameGenerator() {
   const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx].name + ')' : 'Select pattern and generate';
 
   return (
-    <CalculatorShell title="Nickname Generator" result={resultText} onCalculate={generate} presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
+    <CalculatorShell title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
       <div className="space-y-4">
         <div>
           <label className={labelClass}>Pattern</label>
@@ -1384,7 +1403,7 @@ export function AvatarGenerator() {
   const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
 
   return (
-    <CalculatorShell title="Avatar Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
+    <CalculatorShell title="Avatar Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Name</label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."

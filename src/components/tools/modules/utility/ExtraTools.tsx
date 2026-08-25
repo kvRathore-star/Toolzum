@@ -154,6 +154,7 @@ export function GitignoreGenerator() {
       title=".gitignore Generator"
       result={resultText}
       onCalculate={generate}
+      calculateLabel="Generate"
       presets={presets}
       accent="violet"
       downloadData={output}

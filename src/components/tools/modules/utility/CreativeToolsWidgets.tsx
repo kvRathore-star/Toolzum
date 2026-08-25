@@ -501,6 +501,7 @@ export function ASCIIArtGenerator() {
       title="ASCII Art Generator"
       result={resultText}
       onCalculate={() => {}}
+      calculateLabel="Generate"
       presets={presets}
       accent="blue"
       downloadData={asciiResult}
@@ -657,6 +658,7 @@ export function ASCIIFontGenerator() {
       title="ASCII Font Generator"
       result={resultText}
       onCalculate={() => {}}
+      calculateLabel="Generate"
       presets={presets}
       accent="purple"
       downloadData={fontResult}

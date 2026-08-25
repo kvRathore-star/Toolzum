@@ -71,6 +71,7 @@ export function TsvCsvConverter() {
       title="TSV ↔ CSV Converter"
       result={resultText}
       onCalculate={convert}
+      calculateLabel="Convert"
       presets={presets}
       accent="blue"
       downloadData={output}
@@ -393,6 +394,7 @@ export function CsvHtmlTableConverter() {
       title="CSV ↔ HTML Table Converter"
       result={resultText}
       onCalculate={convert}
+      calculateLabel="Convert"
       presets={presets}
       accent="violet"
       downloadData={output}
@@ -475,6 +477,7 @@ return (
       title="YAML Validator"
       result={resultText}
       onCalculate={process}
+      calculateLabel="Check"
       presets={presets}
       accent="indigo"
       downloadData={output}

@@ -64,7 +64,7 @@ export function WordCounter() {
   ];
 
   return (
-    <CalculatorShell title="Word Counter" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
+    <CalculatorShell title="Word Counter" result={resultText} onCalculate={() => {}} calculateLabel="Count" presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -136,7 +136,7 @@ export function CharacterCounter() {
   ];
 
   return (
-    <CalculatorShell title="Character Counter" result={resultText} onCalculate={() => {}} presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
+    <CalculatorShell title="Character Counter" result={resultText} onCalculate={() => {}} calculateLabel="Count" presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => setText(e.target.value)} rows={10} placeholder="Type or paste text..."
@@ -205,7 +205,7 @@ export function WordFrequencyCounter() {
     : 'Enter text and analyze';
 
   return (
-    <CalculatorShell title="Word Frequency Counter" result={resultText} onCalculate={analyze} presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
+    <CalculatorShell title="Word Frequency Counter" result={resultText} onCalculate={analyze} calculateLabel="Count" presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -279,7 +279,7 @@ export function KeywordDensityChecker() {
   const grade = density ? getDensityGrade(density.percentage) : null;
 
   return (
-    <CalculatorShell title="Keyword Density Checker" result={resultText} onCalculate={check} presets={presets} accent="amber" downloadData={density ? JSON.stringify({ keyword, text, ...density }, null, 2) : ''} downloadFilename="keyword-density.json">
+    <CalculatorShell title="Keyword Density Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="amber" downloadData={density ? JSON.stringify({ keyword, text, ...density }, null, 2) : ''} downloadFilename="keyword-density.json">
       <div className="space-y-4">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -422,7 +422,7 @@ export function SeoMetaTagGenerator() {
   const resultText = result ? 'Meta tags generated successfully' : 'Enter details to generate meta tags';
 
   return (
-    <CalculatorShell title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
+    <CalculatorShell title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title (<span id="title-len">{title.length}</span>/60)</label>
@@ -474,7 +474,7 @@ export function SeoPreviewGenerator() {
   const resultText = `Title: ${ogLength}/60 ${ogLength > 60 ? '⚠️ Too long' : '✓'} | Description: ${descLength}/160 ${descLength > 160 ? '⚠️ Too long' : '✓'}`;
 
   return (
-    <CalculatorShell title="SEO Preview Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
+    <CalculatorShell title="SEO Preview Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
@@ -543,7 +543,7 @@ export function SeoHeadlineAnalyzer() {
   const resultText = analysis ? `Score: ${analysis.score}/100 (${analysis.sentiment})` : 'Enter headline to analyze';
 
   return (
-    <CalculatorShell title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
+    <CalculatorShell title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} calculateLabel="Analyze" presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
         <input type="text" value={headline} onChange={e => setHeadline(e.target.value)}
@@ -592,7 +592,7 @@ export function SeoSchemaGenerator() {
   const resultText = result ? 'Schema generated successfully' : 'Enter properties to generate schema';
 
   return (
-    <CalculatorShell title="SEO Schema Generator" result={resultText} onCalculate={generate} presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
+    <CalculatorShell title="SEO Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
       <div className="space-y-4">
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
@@ -640,7 +640,7 @@ export function SeoSlugGenerator() {
   const resultText = slug ? `Slug generated: ${slug}` : 'Enter text to generate slug';
 
   return (
-    <CalculatorShell title="SEO Slug Generator" result={resultText} onCalculate={generate} presets={presets} accent="emerald" downloadData={slug} downloadFilename="slug.txt">
+    <CalculatorShell title="SEO Slug Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="emerald" downloadData={slug} downloadFilename="slug.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter text to convert to slug"
@@ -907,7 +907,7 @@ export function TextDiffChecker() {
     : 'Enter two texts to compare';
 
   return (
-    <CalculatorShell title="Text Diff Checker" result={resultText} onCalculate={compare} presets={presets} accent="violet" downloadData={diff ? JSON.stringify({ text1, text2, diff: diff.lines }, null, 2) : ''} downloadFilename="diff.json">
+    <CalculatorShell title="Text Diff Checker" result={resultText} onCalculate={compare} calculateLabel="Check" presets={presets} accent="violet" downloadData={diff ? JSON.stringify({ text1, text2, diff: diff.lines }, null, 2) : ''} downloadFilename="diff.json">
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
@@ -1178,7 +1178,7 @@ export function CanonicalUrlChecker() {
   const resultText = result ? `URL checked: ${url}` : 'Enter URL to check canonical structure';
 
   return (
-    <CalculatorShell title="Canonical URL Checker" result={resultText} onCalculate={check} presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
+    <CalculatorShell title="Canonical URL Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
         <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
@@ -1209,7 +1209,7 @@ export function BreadcrumbSchemaGenerator() {
   const resultText = result ? 'Breadcrumb schema generated' : 'Enter pages to generate breadcrumb schema';
 
   return (
-    <CalculatorShell title="Breadcrumb Schema Generator" result={resultText} onCalculate={generate} presets={presets} accent="amber" downloadData={result} downloadFilename="breadcrumb-schema.json">
+    <CalculatorShell title="Breadcrumb Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="amber" downloadData={result} downloadFilename="breadcrumb-schema.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pages (Name,URL per line)</label>
         <textarea value={pages} onChange={e => setPages(e.target.value)} rows={5} placeholder="Home,https://example.com\nProducts,https://example.com/products"
