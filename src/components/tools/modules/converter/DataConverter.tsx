@@ -53,8 +53,6 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
     { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
   ];
 
-  const presets = [...basePresets, ...(presetOverrides || [])];
-
   const resultFilename = downloadFilename || `converted.${FORMAT_EXT[dstFormat]}`;
 
   const handleConvert = useCallback(async () => {

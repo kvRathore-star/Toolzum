@@ -140,10 +140,10 @@ export function GitignoreGenerator() {
   const generate = () => setOutput(gen());
 
   const presets = [
-    { label: 'Node.js', apply: () => { items.forEach(k => setSelected(p => ({...p, [k]: ['node_modules', 'dist', 'build', '.env', '*.log'].includes(k))})); gen(); } },
-    { label: 'Python', apply: () => { items.forEach(k => setSelected(p => ({...p, [k]: ['venv', '__pycache__', '*.pyc', '.env'].includes(k))})); gen(); } },
-    { label: 'All', apply: () => { items.forEach(k => setSelected(p => ({...p, [k]: true}))); gen(); } },
-    { label: 'Clear', apply: () => { items.forEach(k => setSelected(p => ({...p, [k]: false}))); setOutput(''); } },
+    { label: 'Node.js', apply: () => { items.forEach(k => setSelected(p => ({ ...p, [k]: ['node_modules', 'dist', 'build', '.env', '*.log'].includes(k) }))); gen(); } },
+    { label: 'Python', apply: () => { items.forEach(k => setSelected(p => ({ ...p, [k]: ['venv', '__pycache__', '*.pyc', '.env'].includes(k) }))); gen(); } },
+    { label: 'All', apply: () => { items.forEach(k => setSelected(p => ({ ...p, [k]: true }))); gen(); } },
+    { label: 'Clear', apply: () => { items.forEach(k => setSelected(p => ({ ...p, [k]: false }))); setOutput(''); } },
   ];
 
   const resultText = output ? 'Generated .gitignore' : 'Select items to include';

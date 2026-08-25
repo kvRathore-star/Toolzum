@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
-import { SmilePlus, Image, Type, Download, Copy } from 'lucide-react';
+import { SmilePlus, Image, Type as TypeIcon, Download, Copy } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 import { CalculatorShell } from '../shared/CalculatorShell';
 

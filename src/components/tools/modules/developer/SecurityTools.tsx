@@ -559,14 +559,7 @@ export function HashPasswordGenerator() {
   const [iterations, setIterations] = useState('600000');
   const [result, setResult] = useState('');
   const [params, setParams] = useState<{ salt: string; iter: number; hash: string } | null>(null);
-  const presets = [
-    { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
-    { label: 'High Security (1M)', apply: () => { setIterations('1000000'); gen(); } },
-    { label: 'Legacy (100K)', apply: () => { setIterations('100000'); gen(); } },
-    { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
-  ];
-
-  const gen = () => { const fp = p !== undefined ? p : pwd; const fs = s !== undefined ? s : salt; const fi = i !== undefined ? parseInt(i) : parseInt(iterations); if (!fp.trim()) return; if (p !== undefined) setPwd(p); if (s !== undefined) setSalt(s); if (i !== undefined) setIterations(i); const slt = fs || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join(''); setSalt(slt); const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']); const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256); const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join(''); const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`; setResult(fullHash); setParams({ salt: slt, iter: fi, hash: h }); };
+  const [copied, setCopied] = useState(false);
 
   const presets = [
     { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
@@ -575,7 +568,28 @@ export function HashPasswordGenerator() {
     { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
   ];
 
-  const gen = () => { const fp = p !== undefined ? p : pwd; const fs = s !== undefined ? s : salt; const fi = i !== undefined ? parseInt(i) : parseInt(iterations); if (!fp.trim()) return; if (p !== undefined) setPwd(p); if (s !== undefined) setSalt(s); if (i !== undefined) setIterations(i); const slt = fs || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join(''); setSalt(slt); const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']); const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256); const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join(''); const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`; setResult(fullHash); setParams({ salt: slt, iter: fi, hash: h }); };
+  const copy = async () => {
+    if (result) {
+      await navigator.clipboard.writeText(result);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
+
+  const gen = async () => {
+    const fp = pwd;
+    const fs = salt;
+    const fi = parseInt(iterations);
+    if (!fp.trim()) return;
+    const slt = salt || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join('');
+    setSalt(slt);
+    const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']);
+    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256);
+    const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
+    const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`;
+    setResult(fullHash);
+    setParams({ salt: slt, iter: fi, hash: h });
+  };
 
   const presets = [
     { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },

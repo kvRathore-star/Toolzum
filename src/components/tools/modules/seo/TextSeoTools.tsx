@@ -749,8 +749,6 @@ export function TextReplacer() {
     { label: 'Remove prefix', apply: () => { setText('OLD_item1\nOLD_item2\nOLD_item3'); setFind('OLD_'); setReplace(''); } },
     { label: 'Clear', apply: () => { setText(''); setFind(''); setReplace(''); setResult(''); } },
   ];
-
-  const count = result ? (text.match(new RegExp(find.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length : 0;
   const resultText = result ? `Replaced ${count} occurrence${count !== 1 ? 's' : ''}` : 'Enter text to find and replace';
 
   return (
