@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { ac } from './miscToolColors';
 
-import { Section, Input, labelClass, selClass } from './MiscToolsShared';
+import { Input, labelClass, selClass } from './MiscToolsShared';
 import { CalculatorShell } from './shared/CalculatorShell';
 
 export function QRCodeGenerator() {
@@ -78,8 +78,8 @@ export function QRCodeGenerator() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-indigo-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="QR Code Generator">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">QR Code Generator</h2>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text / URL</label>
           <textarea value={text} onChange={e => setText(e.target.value)} rows={3} placeholder="Enter text, URL, email, WiFi config..."
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
@@ -110,12 +110,16 @@ export function QRCodeGenerator() {
           )}
 
           {qrDataUrl && (
-            <a href={qrDataUrl} download="qrcode.png" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-              Download PNG
-            </a>
+            <div className="flex gap-2 flex-wrap">
+              <a href={qrDataUrl} download="qrcode.png" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+                Download PNG
+              </a>
+              <button onClick={() => { navigator.clipboard.writeText(qrDataUrl); toast.success('Data URL copied!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                Copy
+              </button>
+            </div>
           )}
-        </div>
-      </Section>
+      </div>
     </>
   );
 }
@@ -252,8 +256,8 @@ export function BarcodeGenerator() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-orange-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="Barcode Generator">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Barcode Generator</h2>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Data</label>
           <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter barcode data"
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
@@ -298,12 +302,16 @@ export function BarcodeGenerator() {
           )}
 
           {barcodeDataUrl && (
-            <a href={barcodeDataUrl} download="barcode.png" className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-              Download PNG
-            </a>
+            <div className="flex gap-2 flex-wrap">
+              <a href={barcodeDataUrl} download="barcode.png" className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+                Download PNG
+              </a>
+              <button onClick={() => { navigator.clipboard.writeText(barcodeDataUrl); toast.success('Data URL copied!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                Copy
+              </button>
+            </div>
           )}
-        </div>
-      </Section>
+      </div>
     </>
   );
 }
@@ -514,20 +522,24 @@ export function ColorPicker() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="Color Picker">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Picker</h2>
           <div className="flex gap-4 items-center">
             <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
             <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
           </div>
           <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
-          {color && (
-            <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(color)}`} download="color.txt" className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-              Download
-            </a>
-          )}
-        </div>
-      </Section>
+          <div className="flex gap-2 flex-wrap">
+            {color && (
+              <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(color)}`} download="color.txt" className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+                Download
+              </a>
+            )}
+            <button onClick={() => { navigator.clipboard.writeText(color); toast.success('Hex copied!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              Copy
+            </button>
+          </div>
+      </div>
     </>
   );
 }
@@ -617,8 +629,8 @@ export function ColorPaletteGenerator() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-violet-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="Color Palette Generator">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Palette Generator</h2>
           <div className="flex flex-wrap gap-4 items-center">
             <div className="flex-1 min-w-[200px]">
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base Color</label>
@@ -671,13 +683,19 @@ export function ColorPaletteGenerator() {
             </div>
           </div>
 
-          {palette.length > 0 && (
-            <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ base, type, palette }, null, 2))}`} download="palette.json" className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-              Download JSON
-            </a>
-          )}
-        </div>
-      </Section>
+          <div className="flex gap-2 flex-wrap">
+            {palette.length > 0 && (
+              <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ base, type, palette }, null, 2))}`} download="palette.json" className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+                Download JSON
+              </a>
+            )}
+            {palette.length > 0 && (
+              <button onClick={() => { navigator.clipboard.writeText(JSON.stringify(palette.map(c => c.toUpperCase()), null, 2)); toast.success('Palette colors copied!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                Copy All
+              </button>
+            )}
+          </div>
+      </div>
     </>
   );
 }
@@ -713,8 +731,8 @@ export function GradientGenerator() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="Gradient Generator">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Gradient Generator</h2>
           <div className="flex gap-2 flex-wrap items-center">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
             <select value={type} onChange={e => { setType(e.target.value as any); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
@@ -771,8 +789,7 @@ export function GradientGenerator() {
               Download CSS
             </a>
           )}
-        </div>
-      </Section>
+      </div>
     </>
   );
 }
@@ -813,8 +830,8 @@ export function ContrastChecker() {
           <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{p.label}</button>
         ))}
       </div>
-      <Section title="Contrast Checker">
-        <div className="space-y-4">
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Contrast Checker</h2>
           <div className="flex flex-wrap gap-4 items-center">
             <div>
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Foreground</label>
@@ -902,13 +919,17 @@ export function ContrastChecker() {
             </div>
           </div>
 
-          {ratio > 0 && (
-            <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2))}`} download="contrast.json" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-              Download JSON
-            </a>
-          )}
-        </div>
-      </Section>
+          <div className="flex gap-2 flex-wrap">
+            {ratio > 0 && (
+              <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2))}`} download="contrast.json" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+                Download JSON
+              </a>
+            )}
+            <button onClick={() => { navigator.clipboard.writeText(`${ratio.toFixed(2)}:1`); toast.success('Ratio copied!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              Copy
+            </button>
+          </div>
+      </div>
     </>
   );
 }

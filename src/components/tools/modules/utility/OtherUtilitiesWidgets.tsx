@@ -63,6 +63,17 @@ export function PhoneParser() {
         <h1 className="text-xl font-bold text-[var(--text-primary)]">International Phone Parser</h1>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Parse and format international phone numbers.</p>
       </div>
+      <div className="flex flex-wrap gap-2">
+        {[
+          { label: '+14155552671 (US)', apply: () => { setPhoneInput('+14155552671'); setPhoneResult(detectCountry('+14155552671')); } },
+          { label: '+919876543210 (India)', apply: () => { setPhoneInput('+919876543210'); setPhoneResult(detectCountry('+919876543210')); } },
+          { label: '+447911123456 (UK)', apply: () => { setPhoneInput('+447911123456'); setPhoneResult(detectCountry('+447911123456')); } },
+        ].map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
       {phoneResult && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
@@ -70,7 +81,10 @@ export function PhoneParser() {
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country Code</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.code}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">National Number</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.national}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">E.164 Format</span><span className="font-bold text-blue-600 dark:text-blue-400">{phoneResult.e164}</span></div>
-          <button onClick={() => copy(phoneResult.e164, 'E.164')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+          <div className="flex gap-3 items-center">
+            <button onClick={() => copy(phoneResult.e164, 'E.164')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+            <button onClick={() => { const output = `Country: ${phoneResult.country}\nCountry Code: ${phoneResult.code}\nNational Number: ${phoneResult.national}\nE.164 Format: ${phoneResult.e164}`; const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='phone-parsed.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+          </div>
         </div>
       )}
       {phoneInput && !phoneResult && <p className="text-xs text-[var(--text-muted)]">No matching country found for this number.</p>}
@@ -102,6 +116,17 @@ export function OTPGenerator() {
         <h1 className="text-xl font-bold text-[var(--text-primary)]">OTP Code Generator</h1>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Generate one-time passcodes of various types and lengths.</p>
       </div>
+      <div className="flex flex-wrap gap-2">
+        {[
+          { label: '6-digit Numeric', apply: () => { setOtpLen(6); setOtpType('numeric'); setOtpCount(5); } },
+          { label: '8-digit Hex', apply: () => { setOtpLen(8); setOtpType('hex'); setOtpCount(5); } },
+          { label: '4-digit Numeric', apply: () => { setOtpLen(4); setOtpType('numeric'); setOtpCount(5); } },
+        ].map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div>
@@ -123,7 +148,12 @@ export function OTPGenerator() {
             <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} className="w-24" />
           </div>
         </div>
-        <button onClick={generateOTP} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
+        <div className="flex gap-3 items-center">
+          <button onClick={generateOTP} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
+          {otpCodes.length > 0 && (
+            <button onClick={() => { const output = otpCodes.join('\n'); const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='otp-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download All</button>
+          )}
+        </div>
         {otpCodes.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {otpCodes.map((code, i) => (
@@ -152,6 +182,17 @@ export function SlugifyTool() {
         <h1 className="text-xl font-bold text-[var(--text-primary)]">URL Slug Generator</h1>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Convert text into URL-friendly slugs.</p>
       </div>
+      <div className="flex flex-wrap gap-2">
+        {[
+          { label: 'Hello World Example', apply: () => setSlugInput('Hello World Example') },
+          { label: 'My Blog Post Title', apply: () => setSlugInput('My Blog Post Title') },
+          { label: 'Special Ch@rs! Here', apply: () => setSlugInput('Special Ch@rs! Here') },
+        ].map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <input value={slugInput} onChange={e => setSlugInput(e.target.value)} placeholder="Enter text to slugify..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none" />
       <div className="flex items-center gap-4 flex-wrap text-xs text-[var(--text-secondary)]">
         <label className="flex items-center gap-1.5"><input type="checkbox" checked={slugLowercase} onChange={e => setSlugLowercase(e.target.checked)} /> Lowercase</label>
@@ -165,7 +206,10 @@ export function SlugifyTool() {
         <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
           <input type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 outline-none font-mono" />
-          <button onClick={() => copy(slugOutput, 'Slug')} className="absolute top-6 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
+          <div className="absolute top-6 right-3 flex gap-2">
+            <button onClick={() => copy(slugOutput, 'Slug')} className="text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
+            <button onClick={() => { const blob = new Blob([slugOutput], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='slug.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Download</button>
+          </div>
         </div>
       )}
     </div>

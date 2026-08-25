@@ -631,7 +631,8 @@ export function ULIDGenerator() {
   ];
 
   return (
-    <Section title="ULID Generator">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">ULID Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
           <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">{p.label}</button>
@@ -644,7 +645,14 @@ export function ULIDGenerator() {
             className="w-full accent-emerald-500" />
         </div>
 
-        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate New</button>
+        <div className="flex items-center gap-3">
+          <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate New</button>
+          {ulids.length > 0 && (
+            <button onClick={() => { const text = ulids.map(u => u.ulid).join('\n'); const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='ulids.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+              Download All
+            </button>
+          )}
+        </div>
 
         {ulids.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
@@ -665,7 +673,7 @@ export function ULIDGenerator() {
           <p className="text-[var(--text-muted)] text-sm text-center">Configure count and generate ULIDs</p>
         )}
       </div>
-    </Section>
+    </div>
   );
 }
 
@@ -693,7 +701,8 @@ export function NumeronymGenerator() {
   ];
 
   return (
-    <Section title="Numeronym Generator">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">Numeronym Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
           <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">{p.label}</button>
@@ -719,7 +728,12 @@ export function NumeronymGenerator() {
             <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Numeronym</span>
-                <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                  <button onClick={() => { const text = `Numeronym: ${numeronym}\nAcronym: ${acronym}\nInput: ${input}`; const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='numeronym.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                    Download
+                  </button>
+                </div>
               </div>
               <code className="text-lg font-mono font-bold text-emerald-600 dark:text-emerald-400 break-all">{numeronym}</code>
             </div>
@@ -746,7 +760,7 @@ export function NumeronymGenerator() {
           </div>
         </div>
       </div>
-    </Section>
+    </div>
   );
 }
 

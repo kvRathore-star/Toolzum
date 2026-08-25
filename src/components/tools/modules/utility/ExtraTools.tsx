@@ -43,17 +43,38 @@ export function AnnualContractValueCalculator() {
   const [years, setYears] = useState('');
   const [result, setResult] = useState<number | null>(null);
   const calc = () => { const t = parseFloat(tv); const y = parseFloat(years); if (t && y && y > 0) setResult(t / y); };
+  const presets = [
+    { label: '3yr $120k', apply: () => { setTv('120000'); setYears('3'); setTimeout(calc, 0); } },
+    { label: '1yr $50k', apply: () => { setTv('50000'); setYears('1'); setTimeout(calc, 0); } },
+    { label: '2yr $200k', apply: () => { setTv('200000'); setYears('2'); setTimeout(calc, 0); } },
+  ];
   return (
-    <Section title="Annual Contract Value (ACV) Calculator">
-      <Input label="Total Contract Value ($)" value={tv} onChange={setTv} placeholder="e.g. 120000" type="number" />
-      <Input label="Contract Term (Years)" value={years} onChange={setYears} placeholder="e.g. 3" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate ACV</button>
-      {result !== null && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">ACV: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">${result.toFixed(2)}</span></p>
-        </div>
-      )}
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Annual Contract Value (ACV) Calculator</h2>
+        <Input label="Total Contract Value ($)" value={tv} onChange={setTv} placeholder="e.g. 120000" type="number" />
+        <Input label="Contract Term (Years)" value={years} onChange={setYears} placeholder="e.g. 3" type="number" />
+        <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate ACV</button>
+        {result !== null && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">ACV: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">${result.toFixed(2)}</span></p>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(String(result)); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(result)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -74,12 +95,34 @@ export function AsciiTableGenerator() {
     }
     setTable(out);
   };
+  const presets = [
+    { label: 'Names & Ages', apply: () => { setData('Name, Age, City\nAlice, 30, NYC\nBob, 25, SF'); setTimeout(gen, 0); } },
+    { label: 'Products & Prices', apply: () => { setData('Product, Price, Stock\nLaptop, 999, 15\nPhone, 699, 42\nTablet, 499, 28'); setTimeout(gen, 0); } },
+  ];
   return (
-    <Section title="ASCII Table Generator">
-      <Input label="CSV Data (first row = headers)" value={data} onChange={setData} placeholder="Name, Age, City\nAlice, 30, NYC\nBob, 25, SF" rows={4} />
-      <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Table</button>
-      <Output value={table} label="ASCII Table" />
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">ASCII Table Generator</h2>
+        <Input label="CSV Data (first row = headers)" value={data} onChange={setData} placeholder="Name, Age, City\nAlice, 30, NYC\nBob, 25, SF" rows={4} />
+        <button onClick={gen} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Generate Table</button>
+        <Output value={table} label="ASCII Table" />
+        {table && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+            <div className="flex items-center justify-end gap-2 mb-2">
+              <button onClick={() => { navigator.clipboard.writeText(table); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([table], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='table.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -148,7 +191,8 @@ export function GitignoreGenerator() {
   ];
 
   return (
-    <Section title=".gitignore Generator">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">.gitignore Generator</h2>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
           <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-200 dark:hover:bg-violet-900/50 transition-colors">{p.label}</button>
@@ -163,10 +207,17 @@ export function GitignoreGenerator() {
             </label>
           ))}
         </div>
-        <button onClick={generate} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
+        <div className="flex items-center gap-3">
+          <button onClick={generate} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
+          {output && (
+            <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='.gitignore'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+              Download
+            </button>
+          )}
+        </div>
         <Output value={output} label=".gitignore" />
       </div>
-    </Section>
+    </div>
   );
 }
 
@@ -175,17 +226,38 @@ export function HoursToMinutesConverter() {
   const [minutes, setMinutes] = useState('');
   const [total, setTotal] = useState<number | null>(null);
   const convert = () => { const h = parseFloat(hours) || 0; const m = parseFloat(minutes) || 0; setTotal(h * 60 + m); };
+  const presets = [
+    { label: '1h 30m', apply: () => { setHours('1'); setMinutes('30'); setTimeout(convert, 0); } },
+    { label: '2h 15m', apply: () => { setHours('2'); setMinutes('15'); setTimeout(convert, 0); } },
+    { label: '8h 0m', apply: () => { setHours('8'); setMinutes('0'); setTimeout(convert, 0); } },
+  ];
   return (
-    <Section title="Hours & Minutes to Total Minutes">
-      <Input label="Hours" value={hours} onChange={setHours} placeholder="e.g. 2" type="number" />
-      <Input label="Minutes" value={minutes} onChange={setMinutes} placeholder="e.g. 30" type="number" />
-      <button onClick={convert} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
-      {total !== null && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Total Minutes: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{total}</span></p>
-        </div>
-      )}
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Hours & Minutes to Total Minutes</h2>
+        <Input label="Hours" value={hours} onChange={setHours} placeholder="e.g. 2" type="number" />
+        <Input label="Minutes" value={minutes} onChange={setMinutes} placeholder="e.g. 30" type="number" />
+        <button onClick={convert} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+        {total !== null && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Total Minutes: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{total}</span></p>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(String(total)); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(total)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -247,18 +319,38 @@ export function SaasPaybackPeriod() {
   const [mrr, setMrr] = useState('');
   const [result, setResult] = useState<number | null>(null);
   const calc = () => { const c = parseFloat(cac); const m = parseFloat(mrr); if (c && m && m > 0) setResult(c / m); };
+  const presets = [
+    { label: 'CAC $500, MRR $50', apply: () => { setCac('500'); setMrr('50'); setTimeout(calc, 0); } },
+    { label: 'CAC $1000, MRR $100', apply: () => { setCac('1000'); setMrr('100'); setTimeout(calc, 0); } },
+  ];
   return (
-    <Section title="SaaS Payback Period">
-      <Input label="Customer Acquisition Cost ($)" value={cac} onChange={setCac} placeholder="e.g. 500" type="number" />
-      <Input label="Monthly Revenue per Customer ($)" value={mrr} onChange={setMrr} placeholder="e.g. 50" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Payback</button>
-      {result !== null && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Payback Period: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)} months</span></p>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">{result < 12 ? 'Healthy payback period.' : 'Long payback — consider reducing CAC or increasing MRR.'}</p>
-        </div>
-      )}
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Payback Period</h2>
+        <Input label="Customer Acquisition Cost ($)" value={cac} onChange={setCac} placeholder="e.g. 500" type="number" />
+        <Input label="Monthly Revenue per Customer ($)" value={mrr} onChange={setMrr} placeholder="e.g. 50" type="number" />
+        <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Payback</button>
+        {result !== null && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Payback Period: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)} months</span></p>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(String(result.toFixed(1))); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(result.toFixed(1))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">{result < 12 ? 'Healthy payback period.' : 'Long payback — consider reducing CAC or increasing MRR.'}</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -269,21 +361,41 @@ export function SaasQuickRatio() {
     const nn = parseFloat(n) || 0; const ee = parseFloat(e) || 0; const rr = parseFloat(r) || 0; const cc = parseFloat(ch) || 0; const coo = parseFloat(co) || 0;
     const denom = cc + coo; if (denom > 0) setRatio((nn + ee + rr) / denom); else if (nn + ee + rr > 0) setRatio(Infinity); else setRatio(null);
   };
+  const presets = [
+    { label: 'Healthy SaaS', apply: () => { setN('10000'); setE('3000'); setR('1000'); setCh('2000'); setCo('1000'); setTimeout(calc, 0); } },
+    { label: 'At-risk SaaS', apply: () => { setN('2000'); setE('500'); setR('200'); setCh('3000'); setCo('1500'); setTimeout(calc, 0); } },
+  ];
   return (
-    <Section title="SaaS Quick Ratio">
-      <Input label="New MRR ($)" value={n} onChange={setN} placeholder="e.g. 10000" type="number" />
-      <Input label="Expansion MRR ($)" value={e} onChange={setE} placeholder="e.g. 3000" type="number" />
-      <Input label="Reactivation MRR ($)" value={r} onChange={setR} placeholder="e.g. 1000" type="number" />
-      <Input label="Churned MRR ($)" value={ch} onChange={setCh} placeholder="e.g. 2000" type="number" />
-      <Input label="Contraction MRR ($)" value={co} onChange={setCo} placeholder="e.g. 1000" type="number" />
-      <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Quick Ratio</button>
-      {ratio !== null && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Quick Ratio: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
-          <p className="text-xs text-[var(--text-secondary)] mt-1">{ratio >= 4 ? 'Excellent!' : ratio >= 2 ? 'Good' : ratio >= 1 ? 'Needs improvement' : 'At risk'}</p>
-        </div>
-      )}
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Quick Ratio</h2>
+        <Input label="New MRR ($)" value={n} onChange={setN} placeholder="e.g. 10000" type="number" />
+        <Input label="Expansion MRR ($)" value={e} onChange={setE} placeholder="e.g. 3000" type="number" />
+        <Input label="Reactivation MRR ($)" value={r} onChange={setR} placeholder="e.g. 1000" type="number" />
+        <Input label="Churned MRR ($)" value={ch} onChange={setCh} placeholder="e.g. 2000" type="number" />
+        <Input label="Contraction MRR ($)" value={co} onChange={setCo} placeholder="e.g. 1000" type="number" />
+        <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate Quick Ratio</button>
+        {ratio !== null && (
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Quick Ratio: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(String(ratio === Infinity ? '∞' : ratio.toFixed(2))); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(ratio === Infinity ? '∞' : ratio.toFixed(2))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">{ratio >= 4 ? 'Excellent!' : ratio >= 2 ? 'Good' : ratio >= 1 ? 'Needs improvement' : 'At risk'}</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 
@@ -292,18 +404,38 @@ export function SaasRuleOf40() {
   const [margin, setMargin] = useState('');
   const [result, setResult] = useState<number | null>(null);
   const calc = () => { const g = parseFloat(growth); const m = parseFloat(margin); if (!isNaN(g) && !isNaN(m)) setResult(g + m); };
+  const presets = [
+    { label: 'Growth 25%, Margin 20%', apply: () => { setGrowth('25'); setMargin('20'); setTimeout(calc, 0); } },
+    { label: 'Growth 40%, Margin 5%', apply: () => { setGrowth('40'); setMargin('5'); setTimeout(calc, 0); } },
+  ];
   return (
-    <Section title="SaaS Rule of 40">
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">SaaS Rule of 40</h2>
       <Input label="Revenue Growth Rate (%)" value={growth} onChange={setGrowth} placeholder="e.g. 25" type="number" />
       <Input label="Profit Margin (%)" value={margin} onChange={setMargin} placeholder="e.g. 20 (or -5 for loss)" type="number" />
       <button onClick={calc} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Calculate</button>
       {result !== null && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Rule of 40 Score: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)}%</span></p>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Rule of 40 Score: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)}%</span></p>
+            <div className="flex gap-2">
+              <button onClick={() => { navigator.clipboard.writeText(String(result.toFixed(1)) + '%'); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([String(result.toFixed(1)) + '%'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+            </div>
+          </div>
           <p className="text-xs text-[var(--text-secondary)] mt-1">{result >= 40 ? 'Passes the Rule of 40 ✓' : 'Below 40% threshold — focus on growth or profitability.'}</p>
         </div>
       )}
-    </Section>
+      </div>
+    </>
   );
 }
 
@@ -322,12 +454,34 @@ export function SwiftFormatter() {
     }).join('\n');
     setFormatted(out);
   };
+  const presets = [
+    { label: 'Simple struct', apply: () => { setCode('struct User {\nlet name: String\nlet age: Int\n}'); setTimeout(fmt, 0); } },
+    { label: 'Function with closure', apply: () => { setCode('func greet(name: String) {\nprint("Hello, \\(name)!")\n}'); setTimeout(fmt, 0); } },
+  ];
   return (
-    <Section title="Swift Formatter">
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Swift Formatter</h2>
       <Input label="Swift Code" value={code} onChange={setCode} placeholder="struct Foo {\nlet bar: String\n}" rows={6} />
       <button onClick={fmt} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Format</button>
       <Output value={formatted} label="Formatted Swift Code" />
-    </Section>
+      {formatted && (
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
+          <div className="flex items-center justify-end gap-2 mb-2">
+            <button onClick={() => { navigator.clipboard.writeText(formatted); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+            <button onClick={() => { const blob = new Blob([formatted], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='formatted.swift'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+          </div>
+        </div>
+      )}
+      </div>
+    </>
   );
 }
 
@@ -347,8 +501,22 @@ export function TemperatureConverter() {
     else if (to === 'fahrenheit') setResult(c * 9 / 5 + 32);
     else setResult(c + 273.15);
   };
+  const presets = [
+    { label: '100°C → °F', apply: () => { setValue('100'); setFrom('celsius'); setTo('fahrenheit'); setTimeout(convert, 0); } },
+    { label: '32°F → °C', apply: () => { setValue('32'); setFrom('fahrenheit'); setTo('celsius'); setTimeout(convert, 0); } },
+    { label: '0K → °C', apply: () => { setValue('0'); setFrom('kelvin'); setTo('celsius'); setTimeout(convert, 0); } },
+  ];
   return (
-    <Section title="Temperature Converter">
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Temperature Converter</h2>
       <Input label="Value" value={value} onChange={setValue} placeholder="e.g. 100" type="number" />
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
@@ -371,10 +539,17 @@ export function TemperatureConverter() {
       <button onClick={convert} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {result !== null && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
+            <div className="flex gap-2">
+              <button onClick={() => { navigator.clipboard.writeText(String(result.toFixed(2)) + '°'); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([String(result.toFixed(2)) + '°'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+            </div>
+          </div>
         </div>
       )}
-    </Section>
+      </div>
+    </>
   );
 }
 

@@ -42,8 +42,20 @@ export function Base32Encoder() {
     setOutput(new TextDecoder().decode(new Uint8Array(bytes)));
   };
 
+  const presets = [
+    { label: 'Hello World', apply: () => { setInput('Hello World'); setOutput(''); } },
+    { label: 'Sample Text', apply: () => { setInput('Sample Text'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base32 Encode / Decode</h2>
         <textarea rows={3} value={input} onChange={e => setInput(e.target.value)}
@@ -52,7 +64,18 @@ export function Base32Encoder() {
           <button onClick={encode} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Encode</button>
           <button onClick={decode} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
         </div>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -70,14 +93,37 @@ export function Base64ToJsonDecoder() {
     } catch (e) { console.error(e); toast.error('Invalid base64 or not JSON'); }
   };
 
+  const presets = [
+    { label: 'Simple Object', apply: () => { setInput('eyJuYW1lIjoiSm9obiIsImFnZSI6MzB9'); setOutput(''); } },
+    { label: 'Nested JSON', apply: () => { setInput('eyJ1c2VyIjp7Im5hbWUiOiJKYW5lIiwiYWRkcmVzcyI6eyJjaXR5IjoiTmV3IFlvcmsifX19'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base64 to JSON Decoder</h2>
         <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste base64 string..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode to JSON</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -98,8 +144,20 @@ export function HexTextConverter() {
     setOutput(Array.from(new TextEncoder().encode(input)).map(b => b.toString(16).padStart(2, '0')).join(''));
   };
 
+  const presets = [
+    { label: 'Hello World hex', apply: () => { setInput('48656c6c6f20576f726c64'); setOutput(''); } },
+    { label: 'Sample hex', apply: () => { setInput('53616d706c65'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Hex &lt;-&gt; Text Converter</h2>
         <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Hex string or text..."
@@ -108,7 +166,18 @@ export function HexTextConverter() {
           <button onClick={hexToText} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Hex to Text</button>
           <button onClick={textToHex} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Text to Hex</button>
         </div>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -125,8 +194,20 @@ export function SvgToBase64Converter() {
     } catch { toast.error('Invalid SVG'); }
   };
 
+  const presets = [
+    { label: 'Simple SVG', apply: () => { setInput('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>'); setOutput(''); } },
+    { label: 'Circle SVG', apply: () => { setInput('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="blue"/></svg>'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG to Base64 Converter</h2>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
@@ -134,7 +215,14 @@ export function SvgToBase64Converter() {
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Data URI</button>
         {output && (
           <div className="space-y-2">
-            <OutputBox output={output} />
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
             <img src={output} alt="Preview" className="max-h-16 mx-auto" />
           </div>
         )}
@@ -156,14 +244,37 @@ export function CharacterEncodingConverter() {
     setOutput(lines.join('\n'));
   };
 
+  const presets = [
+    { label: 'Hello World', apply: () => { setInput('Hello World'); setOutput(''); } },
+    { label: 'Special chars', apply: () => { setInput('café naïve résumé'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Character Encoding Converter</h2>
         <textarea rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze Characters</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -184,14 +295,37 @@ export function UnicodeConverter() {
     setOutput(lines.join('\n'));
   };
 
+  const presets = [
+    { label: 'Hello', apply: () => { setInput('Hello'); setOutput(''); } },
+    { label: 'Emoji 🎉', apply: () => { setInput('🎉🚀✨'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Unicode Converter</h2>
         <textarea rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert Unicode</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -290,8 +424,21 @@ export function PxRemConverter() {
     setOutput(`${rem}rem = ${(rem * b).toFixed(1)}px (base: ${b}px)`);
   };
 
+  const presets = [
+    { label: '16px', apply: () => { setValue('16'); setOutput(''); } },
+    { label: '32px', apply: () => { setValue('32'); setOutput(''); } },
+    { label: '48px', apply: () => { setValue('48'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PX &lt;-&gt; REM Converter</h2>
         <div className="grid grid-cols-2 gap-3">
@@ -310,7 +457,18 @@ export function PxRemConverter() {
           <button onClick={pxToRem} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">PX to REM</button>
           <button onClick={remToPx} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">REM to PX</button>
         </div>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -332,14 +490,37 @@ export function SvgOptimizer() {
     setOutput(`${out}\n\nOriginal: ${origSize} bytes | Optimized: ${newSize} bytes (${saved}% smaller)`);
   };
 
+  const presets = [
+    { label: 'Simple SVG', apply: () => { setInput('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>'); setOutput(''); } },
+    { label: 'Complex SVG', apply: () => { setInput('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG Optimizer</h2>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={optimize} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Optimize SVG</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -361,8 +542,20 @@ export function SpeedConverter() {
     setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
   };
 
+  const presets = [
+    { label: '60 mph', apply: () => { setValue('60'); setFrom('mph'); setTo('kmh'); setOutput(''); } },
+    { label: '100 km/h', apply: () => { setValue('100'); setFrom('kmh'); setTo('mph'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Speed Converter</h2>
         <div>
@@ -387,7 +580,18 @@ export function SpeedConverter() {
           </div>
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -409,8 +613,20 @@ export function PowerConverter() {
     setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
   };
 
+  const presets = [
+    { label: '100W', apply: () => { setValue('100'); setFrom('watt'); setTo('kw'); setOutput(''); } },
+    { label: '1 HP', apply: () => { setValue('1'); setFrom('hp'); setTo('kw'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Power Converter</h2>
         <div>
@@ -435,7 +651,18 @@ export function PowerConverter() {
           </div>
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -457,8 +684,20 @@ export function PressureConverter() {
     setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
   };
 
+  const presets = [
+    { label: '1 atm', apply: () => { setValue('1'); setFrom('atm'); setTo('kpa'); setOutput(''); } },
+    { label: '100 kPa', apply: () => { setValue('100'); setFrom('kpa'); setTo('psi'); setOutput(''); } },
+  ];
+
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Pressure Converter</h2>
         <div>
@@ -483,7 +722,18 @@ export function PressureConverter() {
           </div>
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs text-[var(--text-secondary)]">Output</span>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
