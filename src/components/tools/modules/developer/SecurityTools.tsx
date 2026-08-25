@@ -507,6 +507,11 @@ export function HashVerifier() {
     { label: 'Test SHA-512', apply: () => { setText('test'); setAlgo('SHA-512'); verify(); } },
   ];
 
+  const algoPillClasses = {
+    active: 'bg-emerald-700 text-white border-emerald-500',
+    inactive: 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20',
+  };
+
   const resultText = match !== null ? (match ? 'Hash matches!' : 'Hash mismatch!') : 'Enter text and hash to verify';
 
   return (
@@ -521,7 +526,7 @@ export function HashVerifier() {
     >
       <div className="space-y-4">
         <div className="flex flex-wrap gap-1.5 mb-3">
-          {algoPills.map(a => <button key={a} onClick={() => { setAlgo(a); verify(); }} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'`}>{a}</button>)}
+          {algoPills.map(a => <button key={a} onClick={() => { setAlgo(a); verify(); }} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? algoPillClasses.active : algoPillClasses.inactive}`}>{a}</button>)}
         </div>
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
@@ -536,7 +541,7 @@ export function HashVerifier() {
 
         {match !== null && (
           <div className="space-y-3">
-            <div className={`p-4 rounded-xl text-sm font-medium ${match ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}`}>
+            <div className={match ? 'p-4 rounded-xl text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'p-4 rounded-xl text-sm font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}>
               <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
               <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
             </div>
@@ -554,48 +559,67 @@ export function HashPasswordGenerator() {
   const [iterations, setIterations] = useState('600000');
   const [result, setResult] = useState('');
   const [params, setParams] = useState<{ salt: string; iter: number; hash: string } | null>(null);
-  const iterPresets = ['100000', '600000', '1000000', '2000000'];
-  const gen = async (p?: string, s?: string, i?: string) => {
-    const fp = p !== undefined ? p : pwd;
-    const fs = s !== undefined ? s : salt;
-    const fi = i !== undefined ? parseInt(i) : parseInt(iterations);
-    if (!fp.trim()) return;
-    if (p !== undefined) setPwd(p);
-    if (s !== undefined) setSalt(s);
-    if (i !== undefined) setIterations(i);
-    const slt = fs || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join('');
-    setSalt(slt);
-    const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256);
-    const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
-    const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`;
-    setResult(fullHash);
-    setParams({ salt: slt, iter: fi, hash: h });
-  };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (result) { navigator.clipboard.writeText(result).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const presets = [
+    { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
+    { label: 'High Security (1M)', apply: () => { setIterations('1000000'); gen(); } },
+    { label: 'Legacy (100K)', apply: () => { setIterations('100000'); gen(); } },
+    { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
+  ];
+
+  const gen = () => { const fp = p !== undefined ? p : pwd; const fs = s !== undefined ? s : salt; const fi = i !== undefined ? parseInt(i) : parseInt(iterations); if (!fp.trim()) return; if (p !== undefined) setPwd(p); if (s !== undefined) setSalt(s); if (i !== undefined) setIterations(i); const slt = fs || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join(''); setSalt(slt); const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']); const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256); const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join(''); const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`; setResult(fullHash); setParams({ salt: slt, iter: fi, hash: h }); };
+
+  const presets = [
+    { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
+    { label: 'High Security (1M)', apply: () => { setIterations('1000000'); gen(); } },
+    { label: 'Legacy (100K)', apply: () => { setIterations('100000'); gen(); } },
+    { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
+  ];
+
+  const gen = () => { const fp = p !== undefined ? p : pwd; const fs = s !== undefined ? s : salt; const fi = i !== undefined ? parseInt(i) : parseInt(iterations); if (!fp.trim()) return; if (p !== undefined) setPwd(p); if (s !== undefined) setSalt(s); if (i !== undefined) setIterations(i); const slt = fs || Array.from({ length: 16 }, () => Math.random().toString(36)[2]).join(''); setSalt(slt); const keyMaterial = await crypto.subtle.importKey('raw', new TextEncoder().encode(fp), { name: 'PBKDF2' }, false, ['deriveBits']); const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: new TextEncoder().encode(slt), iterations: fi, hash: 'SHA-256' }, keyMaterial, 256); const h = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join(''); const fullHash = `$pbkdf2-sha256$iterations=${fi}$${slt}$${h}`; setResult(fullHash); setParams({ salt: slt, iter: fi, hash: h }); };
+
+  const presets = [
+    { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
+    { label: 'High Security (1M)', apply: () => { setIterations('1000000'); gen(); } },
+    { label: 'Legacy (100K)', apply: () => { setIterations('100000'); gen(); } },
+    { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
+  ];
+
+  const resultText = params ? `PBKDF2-SHA256: ${params.iter.toLocaleString()} iterations` : 'Enter password to generate hash';
+
   return (
-    <Section title="Hash Password Generator (PBKDF2-SHA256)">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {iterPresets.map(i => <button key={i} onClick={() => gen(undefined, undefined, i)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${iterations === i ? 'bg-indigo-500 text-white border-indigo-500' : 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border-indigo-500/20'}`}>{Number(i).toLocaleString()}</button>)}
+    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt">
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
+        <input type="password" value={pwd} onChange={e => { setPwd(e.target.value); setResult(''); }} placeholder="Enter password..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Salt (optional)</label>
+        <input type="text" value={salt} onChange={e => { setSalt(e.target.value); setResult(''); }} placeholder="Leave blank to auto-generate"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
+
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Iterations</label>
+        <select value={iterations} onChange={e => { setIterations(e.target.value); gen(); }}
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+          <option value="100000">100K (Legacy)</option>
+          <option value="600000">600K (OWASP recommended)</option>
+          <option value="1000000">1M (High security)</option>
+          <option value="2000000">2M (Maximum)</option>
+        </select>
+
+        <button onClick={gen} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Generate Hash</button>
+
+        {params && (
+          <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">PBKDF2-SHA256 Hash</span>
+              <button onClick={copy} className="px-2 py-1 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            </div>
+            <p className="font-mono text-xs text-indigo-700 dark:text-indigo-300 break-all">{result}</p>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Iterations: {params.iter.toLocaleString()} | Salt: {params.salt}</div>
+          </div>
+        )}
       </div>
-      <Input label="Password" type="password" value={pwd} onChange={v => { setPwd(v); setResult(''); }} placeholder="Enter password..." />
-      <Input label="Salt (leave blank to generate)" value={salt} onChange={v => { setSalt(v); setResult(''); }} />
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
-      {params && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400 space-y-2">
-          <div className="flex justify-between items-center">
-            <span className="text-xs font-semibold text-zinc-500">PBKDF2-SHA256 Hash</span>
-            <button onClick={copy} className="px-2.5 py-1 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
-          </div>
-          <p className="font-mono text-xs text-zinc-900 dark:text-zinc-100 break-all">{result}</p>
-          <div className="grid grid-cols-3 gap-2 pt-2 border-t border-zinc-200 dark:border-zinc-700">
-            <div><span className="text-xs text-zinc-500">Iterations</span><p className="text-sm font-mono text-zinc-900 dark:text-zinc-100">{params.iter.toLocaleString()}</p></div>
-            <div className="col-span-2"><span className="text-xs text-zinc-500">Salt</span><p className="text-sm font-mono text-zinc-900 dark:text-zinc-100 truncate">{params.salt}</p></div>
-          </div>
-        </div>
-      )}
-    </Section>
+    </CalculatorShell>
   );
 }
 
