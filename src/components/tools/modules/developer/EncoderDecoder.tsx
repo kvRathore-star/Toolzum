@@ -57,6 +57,12 @@ export function EncoderDecoder() {
   const [scheme, setScheme] = useState<Scheme>('Base64');
   const [mode, setMode] = useState<Mode>('encode');
 
+  const presets = [
+    { label: 'Hello World', apply: () => { setInput('Hello World'); setMode('encode'); } },
+    { label: 'Sample URL', apply: () => { setInput('https://example.com/path?q=hello&lang=en'); setMode('encode'); } },
+    { label: 'HTML Tags', apply: () => { setInput('<div class="container"><p>Hello &amp; goodbye</p></div>'); setMode('encode'); } },
+  ];
+
   const handleProcess = () => {
     if (!input.trim()) { toast.error('Enter text to process'); return; }
     try {
@@ -66,8 +72,31 @@ export function EncoderDecoder() {
     }
   };
 
+  const handleCopy = () => {
+    navigator.clipboard.writeText(output);
+    toast.success('Copied!');
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `encoded-${scheme.toLowerCase().replace(/\s+/g, '-')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
         <h2 className="text-2xl font-bold">Encoder / Decoder</h2>
         <p className="text-sm text-[var(--text-secondary)]">Encode or decode text using various schemes</p>
@@ -83,11 +112,17 @@ export function EncoderDecoder() {
           <label className="text-xs font-medium text-[var(--text-secondary)]">Input</label>
           <textarea value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
         </div>
-        <button onClick={handleProcess} className="w-full py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
+        <button onClick={handleProcess} className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition active:scale-[0.98]">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
         {output && (
-          <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>
+              <div className="flex gap-2">
+                <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
+            </div>
+            <pre className="p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
           </div>
         )}
       </div>

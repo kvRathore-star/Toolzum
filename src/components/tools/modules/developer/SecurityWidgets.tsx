@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { Copy, Download } from 'lucide-react';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -39,6 +40,28 @@ function CopyBtn({ text, label }: { text: string; label?: string }) {
 export function SecretScanner() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
+
+  const presets = [
+    { label: 'Sample with Secrets', apply: () => setInput("const config = {\n  apiKey: 'sk-abc123def456ghi789jkl012mno345pqr',\n  password: 'supersecret123',\n  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U',\n  github: 'ghp_abcdefghijklmnopqrstuvwxyz123456'\n};") },
+  ];
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Copied to clipboard!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'scan-results.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
   const scan = () => {
     if (!input.trim()) { toast.error('Paste text to scan'); return; }
     const findings: string[] = [];
@@ -58,9 +81,28 @@ export function SecretScanner() {
   return (
     <Section title="Secret Scanner">
       <div className="space-y-3">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {presets.map((p) => (
+            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              {p.label}
+            </button>
+          ))}
+        </div>
         <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="Paste text or code to scan for API keys, tokens, and secrets..." />
         <button onClick={scan} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Scan for Secrets</button>
-        {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
+                <Copy className="w-3.5 h-3.5" /> Copy
+              </button>
+              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                <Download className="w-3.5 h-3.5" /> Download
+              </button>
+            </div>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+          </div>
+        )}
       </div>
     </Section>
   );

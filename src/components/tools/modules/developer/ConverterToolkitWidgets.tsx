@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { Copy, Download } from 'lucide-react';
 
 function OutputBox({ output }: { output: string }) {
   if (!output) return null;
@@ -200,6 +201,29 @@ export function MarkdownToSlackConverter() {
   const [input, setInput] = useState('# Hello\n\nThis is **bold** and *italic*.\n\n- List item 1\n- List item 2\n\n> Blockquote\n\n`inline code`');
   const [output, setOutput] = useState('');
 
+  const presets = [
+    { label: 'Sample Markdown', apply: () => setInput('# Hello World\n\nThis is **bold** and *italic*.\n\n## Section\n\n- Item 1\n- Item 2\n- Item 3\n\n> This is a blockquote\n\n```js\nconst x = 42;\n```\n\n[Click here](https://example.com)') },
+    { label: 'Lists & Headers', apply: () => setInput('# Title\n## Subtitle\n### Sub-subtitle\n\n1. First item\n2. Second item\n3. Third item\n\n- Bullet one\n- Bullet two\n- Bullet three') },
+  ];
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Copied to clipboard!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'slack-text.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   const convert = () => {
     let out = input;
     out = out.replace(/#{1,6}\s+(.*)/g, '*$1*');
@@ -219,10 +243,29 @@ export function MarkdownToSlackConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markdown to Slack Converter</h2>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {presets.map((p) => (
+            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              {p.label}
+            </button>
+          ))}
+        </div>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Slack</button>
-        <OutputBox output={output} />
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
+                <Copy className="w-3.5 h-3.5" /> Copy
+              </button>
+              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                <Download className="w-3.5 h-3.5" /> Download
+              </button>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );

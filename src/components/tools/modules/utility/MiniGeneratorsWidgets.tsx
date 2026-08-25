@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { Shield, Hash, Search, Download, Copy } from 'lucide-react';
-import { CalculatorShell } from '../shared/CalculatorShell';
+import { Section } from '../MiscToolsShared';
 
 const CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
@@ -630,19 +630,13 @@ export function ULIDGenerator() {
     { label: 'Clear', apply: () => { setUlids([]); } },
   ];
 
-  const resultText = ulids.length > 0 ? `Generated ${ulids.length} ULIDs` : 'Configure and generate';
-
   return (
-    <CalculatorShell
-      title="ULID Generator"
-      result={resultText}
-      onCalculate={generate}
-      calculateLabel="Generate"
-      presets={presets}
-      accent="emerald"
-      downloadData={JSON.stringify({ count, ulids }, null, 2)}
-      downloadFilename="ulids.json"
-    >
+    <Section title="ULID Generator">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">{p.label}</button>
+        ))}
+      </div>
       <div className="space-y-4">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count: {count}</label>
@@ -671,7 +665,7 @@ export function ULIDGenerator() {
           <p className="text-[var(--text-muted)] text-sm text-center">Configure count and generate ULIDs</p>
         )}
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }
 
@@ -698,19 +692,13 @@ export function NumeronymGenerator() {
     { label: 'Clear', apply: () => { setInput(''); setPreserveCase(false); } },
   ];
 
-  const resultText = input.trim() ? `Numeronym: ${numeronym} | Acronym: ${acronym} | Words: ${wordCount}` : 'Enter text to generate';
-
   return (
-    <CalculatorShell
-      title="Numeronym Generator"
-      result={resultText}
-      onCalculate={() => {}}
-      calculateLabel="Generate"
-      presets={presets}
-      accent="emerald"
-      downloadData={JSON.stringify({ input, numeronym, acronym, wordCount, preserveCase }, null, 2)}
-      downloadFilename="numeronym.json"
-    >
+    <Section title="Numeronym Generator">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-lg text-xs font-medium hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">{p.label}</button>
+        ))}
+      </div>
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
         <input type="text" value={input} onChange={e => setInput(e.target.value)}
@@ -758,7 +746,7 @@ export function NumeronymGenerator() {
           </div>
         </div>
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }
 

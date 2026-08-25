@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-import { ArrowLeftRight, Copy, Trash2 } from 'lucide-react';
+import { ArrowLeftRight, Copy, Trash2, Download } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 const MORSE: Record<string, string> = {
@@ -56,6 +56,24 @@ export default function MorseCodeTranslator() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
 
+  const presets = [
+    { label: 'SOS', apply: () => { setInput('SOS'); setMode('encode'); setOutput('... --- ...'); } },
+    { label: 'Hello World', apply: () => { setInput('Hello World'); setMode('encode'); handleInputChange('Hello World'); } },
+    { label: 'Morse Reference', apply: () => { document.querySelector('details')?.setAttribute('open', ''); } },
+  ];
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'morse-output.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   const handleInputChange = useCallback((value: string) => {
     setInput(value);
     if (!value.trim()) {
@@ -90,6 +108,14 @@ export default function MorseCodeTranslator() {
 
   return (
     <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+
       <div className="flex items-center justify-between">
         <button
           onClick={toggleMode}
@@ -100,14 +126,23 @@ export default function MorseCodeTranslator() {
         </button>
         <div className="flex items-center gap-2">
           {output && (
-            <button
-              onClick={copyOutput}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
-              style={{ backgroundColor: '#0891b2', color: 'white' }}
-            >
-              <Copy className="w-3.5 h-3.5" />
-              Copy
-            </button>
+            <>
+              <button
+                onClick={copyOutput}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors"
+                style={{ backgroundColor: '#0891b2', color: 'white' }}
+              >
+                <Copy className="w-3.5 h-3.5" />
+                Copy
+              </button>
+              <button
+                onClick={downloadOutput}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Download
+              </button>
+            </>
           )}
           <button
             onClick={clearAll}

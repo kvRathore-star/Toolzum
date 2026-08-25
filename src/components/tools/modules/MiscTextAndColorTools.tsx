@@ -71,47 +71,52 @@ export function QRCodeGenerator() {
     { label: 'Clear', apply: () => { setText(''); } },
   ];
 
-  const resultText = text ? `QR generated (${size}x${size}px, EC: ${errorLevel})` : 'Enter text to generate QR code';
-
   return (
-    <CalculatorShell title="QR Code Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={qrDataUrl} downloadFilename="qrcode.png">
-      <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text / URL</label>
-        <textarea value={text} onChange={e => setText(e.target.value)} rows={3} placeholder="Enter text, URL, email, WiFi config..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
-
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size</label>
-            <input type="range" min={100} max={500} step={50} value={size} onChange={e => setSize(Number(e.target.value))}
-              className="w-full accent-indigo-500" />
-            <div className="text-xs text-[var(--text-muted)] text-right mt-1">{size}px</div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Error Correction</label>
-            <select value={errorLevel} onChange={e => setErrorLevel(e.target.value as 'L'|'M'|'Q'|'H')}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
-              <option value="L">L (7%)</option>
-              <option value="M">M (15%)</option>
-              <option value="Q">Q (25%)</option>
-              <option value="H">H (30%)</option>
-            </select>
-          </div>
-        </div>
-
-        {text && (
-          <div className="flex justify-center">
-            <canvas ref={canvasRef} width={size} height={size} className="bg-white dark:bg-black rounded-lg border border-zinc-300 dark:border-zinc-700" />
-          </div>
-        )}
-
-        {qrDataUrl && (
-          <a href={qrDataUrl} download="qrcode.png" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-            Download PNG
-          </a>
-        )}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-indigo-400 transition-colors">{p.label}</button>
+        ))}
       </div>
-    </CalculatorShell>
+      <Section title="QR Code Generator">
+        <div className="space-y-4">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text / URL</label>
+          <textarea value={text} onChange={e => setText(e.target.value)} rows={3} placeholder="Enter text, URL, email, WiFi config..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size</label>
+              <input type="range" min={100} max={500} step={50} value={size} onChange={e => setSize(Number(e.target.value))}
+                className="w-full accent-indigo-500" />
+              <div className="text-xs text-[var(--text-muted)] text-right mt-1">{size}px</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Error Correction</label>
+              <select value={errorLevel} onChange={e => setErrorLevel(e.target.value as 'L'|'M'|'Q'|'H')}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50">
+                <option value="L">L (7%)</option>
+                <option value="M">M (15%)</option>
+                <option value="Q">Q (25%)</option>
+                <option value="H">H (30%)</option>
+              </select>
+            </div>
+          </div>
+
+          {text && (
+            <div className="flex justify-center">
+              <canvas ref={canvasRef} width={size} height={size} className="bg-white dark:bg-black rounded-lg border border-zinc-300 dark:border-zinc-700" />
+            </div>
+          )}
+
+          {qrDataUrl && (
+            <a href={qrDataUrl} download="qrcode.png" className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download PNG
+            </a>
+          )}
+        </div>
+      </Section>
+    </>
   );
 }
 // --- BarcodeGenerator ---
@@ -240,61 +245,66 @@ export function BarcodeGenerator() {
     { label: 'Clear', apply: () => { setText(''); } },
   ];
 
-  const resultText = text ? `Barcode: ${format.toUpperCase()} (${text.length} chars, ${width}px bars)` : 'Enter data to generate barcode';
-
   return (
-    <CalculatorShell title="Barcode Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="orange" downloadData={barcodeDataUrl} downloadFilename="barcode.png">
-      <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Data</label>
-        <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter barcode data"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
-            <select value={format} onChange={e => setFormat(e.target.value as 'upc-a'|'ean-13'|'code128'|'code39')}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
-              <option value="upc-a">UPC-A (12 digits)</option>
-              <option value="ean-13">EAN-13 (13 digits)</option>
-              <option value="code128">Code 128 (alphanumeric)</option>
-              <option value="code39">Code 39 (uppercase)</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Bar Width</label>
-            <input type="range" min={1} max={5} value={width} onChange={e => setWidth(Number(e.target.value))}
-              className="w-full accent-orange-500" />
-            <div className="text-xs text-[var(--text-muted)] text-right mt-1">{width}px</div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Height</label>
-            <input type="range" min={50} max={200} step={10} value={height} onChange={e => setHeight(Number(e.target.value))}
-              className="w-full accent-orange-500" />
-            <div className="text-xs text-[var(--text-muted)] text-right mt-1">{height}px</div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Show Text</label>
-            <select value={showText} onChange={e => setShowText(e.target.value === 'true')}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </div>
-        </div>
-
-        {text && (
-          <div className="flex justify-center">
-            <canvas ref={canvasRef} className="bg-white dark:bg-black rounded-lg border border-zinc-300 dark:border-zinc-700" />
-          </div>
-        )}
-
-        {barcodeDataUrl && (
-          <a href={barcodeDataUrl} download="barcode.png" className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
-            Download PNG
-          </a>
-        )}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-orange-400 transition-colors">{p.label}</button>
+        ))}
       </div>
-    </CalculatorShell>
+      <Section title="Barcode Generator">
+        <div className="space-y-4">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Data</label>
+          <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter barcode data"
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50" />
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
+              <select value={format} onChange={e => setFormat(e.target.value as 'upc-a'|'ean-13'|'code128'|'code39')}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
+                <option value="upc-a">UPC-A (12 digits)</option>
+                <option value="ean-13">EAN-13 (13 digits)</option>
+                <option value="code128">Code 128 (alphanumeric)</option>
+                <option value="code39">Code 39 (uppercase)</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Bar Width</label>
+              <input type="range" min={1} max={5} value={width} onChange={e => setWidth(Number(e.target.value))}
+                className="w-full accent-orange-500" />
+              <div className="text-xs text-[var(--text-muted)] text-right mt-1">{width}px</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Height</label>
+              <input type="range" min={50} max={200} step={10} value={height} onChange={e => setHeight(Number(e.target.value))}
+                className="w-full accent-orange-500" />
+              <div className="text-xs text-[var(--text-muted)] text-right mt-1">{height}px</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Show Text</label>
+              <select value={showText} onChange={e => setShowText(e.target.value === 'true')}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          </div>
+
+          {text && (
+            <div className="flex justify-center">
+              <canvas ref={canvasRef} className="bg-white dark:bg-black rounded-lg border border-zinc-300 dark:border-zinc-700" />
+            </div>
+          )}
+
+          {barcodeDataUrl && (
+            <a href={barcodeDataUrl} download="barcode.png" className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download PNG
+            </a>
+          )}
+        </div>
+      </Section>
+    </>
   );
 }
 // --- GuidGenerator ---
@@ -497,27 +507,28 @@ export function ColorPicker() {
     { label: 'Random', apply: () => { setColor('#' + Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0')); } },
   ];
 
-  const resultText = `Selected: ${color.toUpperCase()}`;
-
   return (
-    <CalculatorShell
-      title="Color Picker"
-      result={resultText}
-      onCalculate={() => {}}
-      calculateLabel="Pick"
-      presets={presets}
-      accent="pink"
-      downloadData={color}
-      downloadFilename="color.txt"
-    >
-      <div className="space-y-4">
-        <div className="flex gap-4 items-center">
-          <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
-          <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
-        </div>
-        <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
+        ))}
       </div>
-    </CalculatorShell>
+      <Section title="Color Picker">
+        <div className="space-y-4">
+          <div className="flex gap-4 items-center">
+            <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
+            <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
+          </div>
+          <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
+          {color && (
+            <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(color)}`} download="color.txt" className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download
+            </a>
+          )}
+        </div>
+      </Section>
+    </>
   );
 }
 // --- ColorPaletteGenerator ---
@@ -599,64 +610,75 @@ export function ColorPaletteGenerator() {
     { label: 'Monochrome', apply: () => { setType('monochromatic'); setCount(7); } },
   ];
 
-  const resultText = `Palette: ${type} (${palette.length} colors)`;
-
   return (
-    <CalculatorShell title="Color Palette Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="violet" downloadData={JSON.stringify({ base, type, palette }, null, 2)} downloadFilename="palette.json">
-      <div className="space-y-4">
-        <div className="flex flex-wrap gap-4 items-center">
-          <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base Color</label>
-            <div className="flex gap-2">
-              <input type="color" value={base} onChange={e => setBase(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
-              <input type="text" value={base} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setBase(v); }} placeholder="#3b82f6"
-                className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 text-uppercase" />
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-violet-400 transition-colors">{p.label}</button>
+        ))}
+      </div>
+      <Section title="Color Palette Generator">
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex-1 min-w-[200px]">
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base Color</label>
+              <div className="flex gap-2">
+                <input type="color" value={base} onChange={e => setBase(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+                <input type="text" value={base} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setBase(v); }} placeholder="#3b82f6"
+                  className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 text-uppercase" />
+              </div>
             </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Harmony Type</label>
-            <select value={type} onChange={e => setType(e.target.value as any)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
-              <option value="complementary">Complementary (2)</option>
-              <option value="analogous">Analogous (3)</option>
-              <option value="triadic">Triadic (3)</option>
-              <option value="tetradic">Tetradic (4)</option>
-              <option value="split-complementary">Split Complementary (3)</option>
-              <option value="monochromatic">Monochromatic (5+)</option>
-            </select>
-          </div>
-          {type === 'monochromatic' && (
             <div>
-              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Color Count</label>
-              <input type="range" min={3} max={10} value={count} onChange={e => setCount(Number(e.target.value))}
-                className="w-full accent-violet-500" />
-              <div className="text-xs text-[var(--text-muted)] text-right mt-1">{count} colors</div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Harmony Type</label>
+              <select value={type} onChange={e => setType(e.target.value as any)}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-violet-500/50">
+                <option value="complementary">Complementary (2)</option>
+                <option value="analogous">Analogous (3)</option>
+                <option value="triadic">Triadic (3)</option>
+                <option value="tetradic">Tetradic (4)</option>
+                <option value="split-complementary">Split Complementary (3)</option>
+                <option value="monochromatic">Monochromatic (5+)</option>
+              </select>
             </div>
-          )}
-        </div>
+            {type === 'monochromatic' && (
+              <div>
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Color Count</label>
+                <input type="range" min={3} max={10} value={count} onChange={e => setCount(Number(e.target.value))}
+                  className="w-full accent-violet-500" />
+                <div className="text-xs text-[var(--text-muted)] text-right mt-1">{count} colors</div>
+              </div>
+            )}
+          </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-2">
-          {palette.map((c, i) => (
-            <div key={i} className="flex-shrink-0 w-24 h-32 rounded-xl flex flex-col items-center justify-between p-2 text-xs font-mono text-white relative" style={{ backgroundColor: c }}>
-              <span className="bg-black/50 px-1 rounded">{c.toUpperCase()}</span>
-              <button className="text-[10px] bg-black/50 px-1 rounded hover:bg-black/70" onClick={() => navigator.clipboard.writeText(c)}>Copy</button>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
-          <div className="text-xs text-[var(--text-secondary)] mb-2">Color Details</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <div className="flex gap-2 overflow-x-auto pb-2">
             {palette.map((c, i) => (
-              <div key={i} className="p-2 rounded-lg text-center" style={{ backgroundColor: c, color: '#ffffff' }}>
-                <div className="font-mono">{c.toUpperCase()}</div>
-                <div className="opacity-80">Color {i + 1}</div>
+              <div key={i} className="flex-shrink-0 w-24 h-32 rounded-xl flex flex-col items-center justify-between p-2 text-xs font-mono text-white relative" style={{ backgroundColor: c }}>
+                <span className="bg-black/50 px-1 rounded">{c.toUpperCase()}</span>
+                <button className="text-[10px] bg-black/50 px-1 rounded hover:bg-black/70" onClick={() => navigator.clipboard.writeText(c)}>Copy</button>
               </div>
             ))}
           </div>
+
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Color Details</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+              {palette.map((c, i) => (
+                <div key={i} className="p-2 rounded-lg text-center" style={{ backgroundColor: c, color: '#ffffff' }}>
+                  <div className="font-mono">{c.toUpperCase()}</div>
+                  <div className="opacity-80">Color {i + 1}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {palette.length > 0 && (
+            <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ base, type, palette }, null, 2))}`} download="palette.json" className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download JSON
+            </a>
+          )}
         </div>
-      </div>
-    </CalculatorShell>
+      </Section>
+    </>
   );
 }
 // --- GradientGenerator ---
@@ -682,65 +704,76 @@ export function GradientGenerator() {
     { label: 'Simple', apply: () => { setColors(['#3b82f6', '#8b5cf6']); setType('linear'); setDirection('to right'); setPositions([0, 100]); } },
   ];
 
-  const resultText = `${type} gradient with ${colors.length} stops`;
-
   const directions = ['to right', 'to left', 'to top', 'to bottom', 'to top right', 'to top left', 'to bottom right', 'to bottom left'];
 
   return (
-    <CalculatorShell title="Gradient Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="pink" downloadData={gradient} downloadFilename="gradient.css">
-      <div className="space-y-4">
-        <div className="flex gap-2 flex-wrap items-center">
-          <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
-          <select value={type} onChange={e => { setType(e.target.value as any); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
-            className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500/50">
-            <option value="linear">Linear</option>
-            <option value="radial">Radial</option>
-            <option value="conic">Conic</option>
-          </select>
-          {type === 'linear' && (
-            <select value={direction} onChange={e => setDirection(e.target.value)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
+        ))}
+      </div>
+      <Section title="Gradient Generator">
+        <div className="space-y-4">
+          <div className="flex gap-2 flex-wrap items-center">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
+            <select value={type} onChange={e => { setType(e.target.value as any); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
               className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500/50">
-              {directions.map(d => <option key={d} value={d}>{d}</option>)}
+              <option value="linear">Linear</option>
+              <option value="radial">Radial</option>
+              <option value="conic">Conic</option>
             </select>
-          )}
-        </div>
+            {type === 'linear' && (
+              <select value={direction} onChange={e => setDirection(e.target.value)}
+                className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-pink-500/50">
+                {directions.map(d => <option key={d} value={d}>{d}</option>)}
+              </select>
+            )}
+          </div>
 
-        <div className="flex flex-wrap gap-2 items-center">
-          {colors.map((c, i) => (
-            <div key={i} className="flex items-center gap-1">
-              <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-zinc-300 dark:border-zinc-700" />
-              <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
-                className="w-24 accent-pink-500" />
-              <span className="text-xs text-[var(--text-muted)] w-10 text-right">{positions[i]}%</span>
-              {colors.length > 2 && <button className="text-xs text-red-500 hover:text-red-600" onClick={() => removeColor(i)}>×</button>}
-            </div>
-          ))}
-          <button onClick={addColor} className="px-3 py-1.5 text-sm font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">+ Add</button>
-        </div>
-
-        <div className="w-full h-48 rounded-xl border border-zinc-300 dark:border-zinc-700" style={{ background: gradient }} />
-
-        <div className="flex gap-2 flex-wrap">
-          <code className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs break-all">{gradient}</code>
-          <button onClick={() => { clipboardWrite(gradient); toast.success('CSS copied!'); }} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Copy CSS</button>
-        </div>
-
-        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
-          <div className="text-xs text-[var(--text-secondary)] mb-2">Color Stops</div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+          <div className="flex flex-wrap gap-2 items-center">
             {colors.map((c, i) => (
-              <div key={i} className="p-2 rounded-lg text-center flex flex-col items-center" style={{ backgroundColor: c, color: '#ffffff' }}>
-                <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border-none bg-transparent" />
-                <div className="font-mono">{c.toUpperCase()}</div>
+              <div key={i} className="flex items-center gap-1">
+                <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-zinc-300 dark:border-zinc-700" />
                 <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
-                  className="w-full accent-pink-500 mt-1" />
-                <span className="text-[10px]">{positions[i]}%</span>
+                  className="w-24 accent-pink-500" />
+                <span className="text-xs text-[var(--text-muted)] w-10 text-right">{positions[i]}%</span>
+                {colors.length > 2 && <button className="text-xs text-red-500 hover:text-red-600" onClick={() => removeColor(i)}>×</button>}
               </div>
             ))}
+            <button onClick={addColor} className="px-3 py-1.5 text-sm font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">+ Add</button>
           </div>
+
+          <div className="w-full h-48 rounded-xl border border-zinc-300 dark:border-zinc-700" style={{ background: gradient }} />
+
+          <div className="flex gap-2 flex-wrap">
+            <code className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs break-all">{gradient}</code>
+            <button onClick={() => { clipboardWrite(gradient); toast.success('CSS copied!'); }} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Copy CSS</button>
+          </div>
+
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Color Stops</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+              {colors.map((c, i) => (
+                <div key={i} className="p-2 rounded-lg text-center flex flex-col items-center" style={{ backgroundColor: c, color: '#ffffff' }}>
+                  <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border-none bg-transparent" />
+                  <div className="font-mono">{c.toUpperCase()}</div>
+                  <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
+                    className="w-full accent-pink-500 mt-1" />
+                  <span className="text-[10px]">{positions[i]}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {gradient && (
+            <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(gradient)}`} download="gradient.css" className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download CSS
+            </a>
+          )}
         </div>
-      </div>
-    </CalculatorShell>
+      </Section>
+    </>
   );
 }
 // --- ContrastChecker ---
@@ -773,99 +806,110 @@ export function ContrastChecker() {
     { label: 'WCAG AAA', apply: () => { setFg('#000000'); setBg('#ffffff'); setFontSize(24); } },
   ];
 
-  const resultText = `Contrast: ${ratio.toFixed(2)}:1 (${isLargeText ? 'Large' : 'Normal'} text)`;
-
   return (
-    <CalculatorShell title="Contrast Checker" result={resultText} onCalculate={() => {}} calculateLabel="Check" presets={presets} accent="emerald" downloadData={JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2)} downloadFilename="contrast.json">
-      <div className="space-y-4">
-        <div className="flex flex-wrap gap-4 items-center">
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Foreground</label>
-            <div className="flex gap-2 items-center">
-              <input type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
-              <input type="text" value={fg} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setFg(v); }} placeholder="#ffffff"
-                className="flex-1 min-w-[120px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-uppercase" />
-            </div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
-            <div className="flex gap-2 items-center">
-              <input type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
-              <input type="text" value={bg} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setBg(v); }} placeholder="#1a1a2e"
-                className="flex-1 min-w-[120px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-uppercase" />
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Font Size</label>
-            <input type="range" min={10} max={48} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
-              className="w-full accent-emerald-500" />
-            <div className="text-xs text-[var(--text-muted)] text-right mt-1">{fontSize}px</div>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Font Weight</label>
-            <select value={fontWeight} onChange={e => setFontWeight(Number(e.target.value))}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
-              <option value={400}>Normal (400)</option>
-              <option value={500}>Medium (500)</option>
-              <option value={600}>Semi-bold (600)</option>
-              <option value={700}>Bold (700)</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className={`p-3 rounded-xl text-center ${aaNormal ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-            <div className="text-xs text-[var(--text-muted)]">AA Normal</div>
-            <div className={`font-bold ${aaNormal ? 'text-emerald-600' : 'text-red-600'}`}>{aaNormal ? 'PASS' : 'FAIL'}</div>
-            <div className="text-[10px] text-[var(--text-muted)]">≥ 4.5:1</div>
-          </div>
-          <div className={`p-3 rounded-xl text-center ${aaLarge ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-            <div className="text-xs text-[var(--text-muted)]">AA Large</div>
-            <div className={`font-bold ${aaLarge ? 'text-emerald-600' : 'text-red-600'}`}>{aaLarge ? 'PASS' : 'FAIL'}</div>
-            <div className="text-[10px] text-[var(--text-muted)]">≥ 3:1</div>
-          </div>
-          <div className={`p-3 rounded-xl text-center ${aaaNormal ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-            <div className="text-xs text-[var(--text-muted)]">AAA Normal</div>
-            <div className={`font-bold ${aaaNormal ? 'text-emerald-600' : 'text-red-600'}`}>{aaaNormal ? 'PASS' : 'FAIL'}</div>
-            <div className="text-[10px] text-[var(--text-muted)]">≥ 7:1</div>
-          </div>
-          <div className={`p-3 rounded-xl text-center ${aaaLarge ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-            <div className="text-xs text-[var(--text-muted)]">AAA Large</div>
-            <div className={`font-bold ${aaaLarge ? 'text-emerald-600' : 'text-red-600'}`}>{aaaLarge ? 'PASS' : 'FAIL'}</div>
-            <div className="text-[10px] text-[var(--text-muted)]">≥ 4.5:1</div>
-          </div>
-        </div>
-
-        <div className="w-full h-32 rounded-xl flex items-center justify-center text-lg font-bold" style={{ color: fg, backgroundColor: bg, fontSize: `${fontSize}px`, fontWeight }}>
-          Sample Text — {ratio.toFixed(2)}:1
-        </div>
-
-        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
-          <div className="text-xs text-[var(--text-secondary)] mb-2">Color Values</div>
-          <div className="grid grid-cols-4 gap-2 text-xs">
-            <div className="p-2 rounded-lg text-center" style={{ backgroundColor: fg, color: l1 > 0.5 ? '#000' : '#fff' }}>
-              <div className="font-mono">{fg.toUpperCase()}</div>
-              <div className="opacity-80">Foreground</div>
-            </div>
-            <div className="p-2 rounded-lg text-center" style={{ backgroundColor: bg, color: l2 > 0.5 ? '#000' : '#fff' }}>
-              <div className="font-mono">{bg.toUpperCase()}</div>
-              <div className="opacity-80">Background</div>
-            </div>
-            <div className="p-2 rounded-lg text-center bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
-              <div className="font-mono">{ratio.toFixed(2)}:1</div>
-              <div className="opacity-80">Ratio</div>
-            </div>
-            <div className="p-2 rounded-lg text-center bg-blue-500/10 text-blue-700 dark:text-blue-300">
-              <div className="font-mono">{isLargeText ? 'Large' : 'Normal'}</div>
-              <div className="opacity-80">Text Size</div>
-            </div>
-          </div>
-        </div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400 transition-colors">{p.label}</button>
+        ))}
       </div>
-    </CalculatorShell>
+      <Section title="Contrast Checker">
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Foreground</label>
+              <div className="flex gap-2 items-center">
+                <input type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+                <input type="text" value={fg} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setFg(v); }} placeholder="#ffffff"
+                  className="flex-1 min-w-[120px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-uppercase" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
+              <div className="flex gap-2 items-center">
+                <input type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-12 h-12 rounded-lg cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+                <input type="text" value={bg} onChange={e => { const v = e.target.value; if (/^#[0-9a-fA-F]{6}$/.test(v)) setBg(v); }} placeholder="#1a1a2e"
+                  className="flex-1 min-w-[120px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 text-uppercase" />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Font Size</label>
+              <input type="range" min={10} max={48} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
+                className="w-full accent-emerald-500" />
+              <div className="text-xs text-[var(--text-muted)] text-right mt-1">{fontSize}px</div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Font Weight</label>
+              <select value={fontWeight} onChange={e => setFontWeight(Number(e.target.value))}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
+                <option value={400}>Normal (400)</option>
+                <option value={500}>Medium (500)</option>
+                <option value={600}>Semi-bold (600)</option>
+                <option value={700}>Bold (700)</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className={`p-3 rounded-xl text-center ${aaNormal ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
+              <div className="text-xs text-[var(--text-muted)]">AA Normal</div>
+              <div className={`font-bold ${aaNormal ? 'text-emerald-600' : 'text-red-600'}`}>{aaNormal ? 'PASS' : 'FAIL'}</div>
+              <div className="text-[10px] text-[var(--text-muted)]">≥ 4.5:1</div>
+            </div>
+            <div className={`p-3 rounded-xl text-center ${aaLarge ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
+              <div className="text-xs text-[var(--text-muted)]">AA Large</div>
+              <div className={`font-bold ${aaLarge ? 'text-emerald-600' : 'text-red-600'}`}>{aaLarge ? 'PASS' : 'FAIL'}</div>
+              <div className="text-[10px] text-[var(--text-muted)]">≥ 3:1</div>
+            </div>
+            <div className={`p-3 rounded-xl text-center ${aaaNormal ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
+              <div className="text-xs text-[var(--text-muted)]">AAA Normal</div>
+              <div className={`font-bold ${aaaNormal ? 'text-emerald-600' : 'text-red-600'}`}>{aaaNormal ? 'PASS' : 'FAIL'}</div>
+              <div className="text-[10px] text-[var(--text-muted)]">≥ 7:1</div>
+            </div>
+            <div className={`p-3 rounded-xl text-center ${aaaLarge ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
+              <div className="text-xs text-[var(--text-muted)]">AAA Large</div>
+              <div className={`font-bold ${aaaLarge ? 'text-emerald-600' : 'text-red-600'}`}>{aaaLarge ? 'PASS' : 'FAIL'}</div>
+              <div className="text-[10px] text-[var(--text-muted)]">≥ 4.5:1</div>
+            </div>
+          </div>
+
+          <div className="w-full h-32 rounded-xl flex items-center justify-center text-lg font-bold" style={{ color: fg, backgroundColor: bg, fontSize: `${fontSize}px`, fontWeight }}>
+            Sample Text — {ratio.toFixed(2)}:1
+          </div>
+
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Color Values</div>
+            <div className="grid grid-cols-4 gap-2 text-xs">
+              <div className="p-2 rounded-lg text-center" style={{ backgroundColor: fg, color: l1 > 0.5 ? '#000' : '#fff' }}>
+                <div className="font-mono">{fg.toUpperCase()}</div>
+                <div className="opacity-80">Foreground</div>
+              </div>
+              <div className="p-2 rounded-lg text-center" style={{ backgroundColor: bg, color: l2 > 0.5 ? '#000' : '#fff' }}>
+                <div className="font-mono">{bg.toUpperCase()}</div>
+                <div className="opacity-80">Background</div>
+              </div>
+              <div className="p-2 rounded-lg text-center bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                <div className="font-mono">{ratio.toFixed(2)}:1</div>
+                <div className="opacity-80">Ratio</div>
+              </div>
+              <div className="p-2 rounded-lg text-center bg-blue-500/10 text-blue-700 dark:text-blue-300">
+                <div className="font-mono">{isLargeText ? 'Large' : 'Normal'}</div>
+                <div className="opacity-80">Text Size</div>
+              </div>
+            </div>
+          </div>
+
+          {ratio > 0 && (
+            <a href={`data:application/json;charset=utf-8,${encodeURIComponent(JSON.stringify({ foreground: fg, background: bg, ratio: ratio.toFixed(2), aaNormal, aaLarge, aaaNormal, aaaLarge }, null, 2))}`} download="contrast.json" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-medium transition-colors inline-block">
+              Download JSON
+            </a>
+          )}
+        </div>
+      </Section>
+    </>
   );
 }
 // --- CounterTool ---

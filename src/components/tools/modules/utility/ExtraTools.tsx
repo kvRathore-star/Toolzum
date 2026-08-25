@@ -147,19 +147,13 @@ export function GitignoreGenerator() {
     { label: 'Clear', apply: () => { items.forEach(k => setSelected(p => ({ ...p, [k]: false }))); setOutput(''); } },
   ];
 
-  const resultText = output ? 'Generated .gitignore' : 'Select items to include';
-
   return (
-    <CalculatorShell
-      title=".gitignore Generator"
-      result={resultText}
-      onCalculate={generate}
-      calculateLabel="Generate"
-      presets={presets}
-      accent="violet"
-      downloadData={output}
-      downloadFilename=".gitignore"
-    >
+    <Section title=".gitignore Generator">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded-lg text-xs font-medium hover:bg-violet-200 dark:hover:bg-violet-900/50 transition-colors">{p.label}</button>
+        ))}
+      </div>
       <div className="space-y-4">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
           {items.map(k => (
@@ -172,7 +166,7 @@ export function GitignoreGenerator() {
         <button onClick={generate} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
         <Output value={output} label=".gitignore" />
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }
 

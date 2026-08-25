@@ -260,6 +260,7 @@ export function CsvDataCleaner() {
       title="CSV Data Cleaner"
       result={resultText}
       onCalculate={clean}
+      calculateLabel="Clean"
       presets={presets}
       accent="emerald"
       downloadData={output}
@@ -320,6 +321,7 @@ export function CsvStatistics() {
       title="CSV Statistics"
       result={resultText}
       onCalculate={analyze}
+      calculateLabel="Analyze"
       presets={presets}
       accent="amber"
       downloadData={output}

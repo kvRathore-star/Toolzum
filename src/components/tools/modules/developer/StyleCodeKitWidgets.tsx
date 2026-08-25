@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
-import { CalculatorShell } from '../shared/CalculatorShell';
+import { Section } from '../MiscToolsShared';
 
 function CopyBtn({ text }: { text: string }) {
   return (
@@ -424,10 +424,13 @@ export function TestDataGenerator() {
     { label: 'Clear', apply: () => { setSchema('[]'); } },
   ];
 
-  const resultText = output ? 'Test data generated from schema' : 'Enter JSON schema to generate test data';
-
   return (
-    <CalculatorShell title="Test Data Generator" result={output || 'Enter schema to generate'} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="green" downloadData={output} downloadFilename="test-data.json">
+    <Section title="Test Data Generator">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p, i) => (
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">{p.label}</button>
+        ))}
+      </div>
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {name, type})</label>
         <textarea value={schema} onChange={e => setSchema(e.target.value)} rows={6} placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
@@ -441,6 +444,6 @@ export function TestDataGenerator() {
           </div>
         )}
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }

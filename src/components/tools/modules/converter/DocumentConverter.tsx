@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
-import { CalculatorShell } from '../shared/CalculatorShell';
+import { Section } from '../MiscToolsShared';
 
 const FORMATS = ['PDF', 'DOCX', 'TXT', 'HTML', 'Markdown', 'RTF', 'ODT', 'EPUB'];
 
@@ -69,19 +69,15 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
     }
   };
 
-  const resultText = file ? `Ready: ${file.name} (${srcFormat} → ${dstFormat})` : 'Upload a document to convert';
   const outFilename = downloadFilename || (converted ? converted.name : `converted.${dstFormat.toLowerCase()}`);
 
   return (
-    <CalculatorShell
-      title="Document Converter"
-      result={resultText}
-      onCalculate={handleConvert}
-      presets={popularPairs.map(p => ({ label: p.label, apply: () => { setSrcFormat(p.from as any); setDstFormat(p.to as any); } }))}
-      accent="blue"
-      downloadData={converted ? converted.blob : undefined}
-      downloadFilename={outFilename}
-    >
+    <Section title="Document Converter">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {popularPairs.map((p, i) => (
+          <button key={i} onClick={() => { setSrcFormat(p.from as any); setDstFormat(p.to as any); }} className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">{p.label}</button>
+        ))}
+      </div>
       <div className="space-y-4">
         <label className="flex flex-col items-center justify-center border-2 border-dashed border-zinc-300 dark:border-zinc-600 rounded-xl p-8 cursor-pointer hover:border-blue-500 transition">
           <input type="file" accept={`.pdf,.docx,.txt,.html,.htm,.md,.rtf,.odt,.epub`} onChange={handleFile} className="hidden" />
@@ -114,7 +110,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           <button onClick={handleDownload} className="w-full py-2 bg-green-600 hover:bg-green-500 text-white rounded-xl font-medium transition">Download Converted File</button>
         )}
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }
 

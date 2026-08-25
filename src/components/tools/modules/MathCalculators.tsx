@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Copy, Delete } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { CalculatorShell } from './shared/CalculatorShell';
+import { Section } from './MiscToolsShared';
 import { gradePointsMap, gcd, factorial, inputCls, labelCls, btnCls } from './Calculators.shared';
 
 export function SquareRootCalculator() {
@@ -375,8 +376,9 @@ export function FluidTypographyCalculator() {
   const intercept2 = (minSz - mn2 * (maxSz - minSz) / (mx2 - mn2)).toFixed(2);
   const cssClamp = `font-size: clamp(${minSz.toFixed(1)}px, ${slope2}vw + ${intercept2}px, ${maxSz.toFixed(1)}px);`;
   return (
-    <CalculatorShell title="Fluid Typography" accent="purple" result={result.length > 0 ? `${result.length} sizes generated` : ''} onCalculate={calc}>
+    <Section title="Fluid Typography">
       <div className="max-w-xl">
+        <button onClick={calc} className="mb-4 px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors">Generate Type Scale</button>
         <div className="grid grid-cols-2 gap-4">
           <div><label className={labelCls}>Base Font Size (px)</label><input className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
           <div><label className={labelCls}>Scale Ratio</label><input className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
@@ -410,7 +412,7 @@ export function FluidTypographyCalculator() {
           </div>
         )}
       </div>
-    </CalculatorShell>
+    </Section>
   );
 }
 
