@@ -58,15 +58,7 @@ export function RandomPasswordGenerator() {
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 
-  const entropy = (() => { let pool = 0; if (upper) pool += 26; if (lower) pool += 26; if (digits) pool += 10; if (symbols) pool += 20; return pool > 0 ? Math.round(length * Math.log2(pool)) : 0; })();
-  const strength = entropy >= 80 ? 'Strong' : entropy >= 50 ? 'Good' : entropy >= 30 ? 'Fair' : 'Weak';
-  const strengthColor = entropy >= 80 ? 'text-emerald-500' : entropy >= 50 ? 'text-amber-500' : 'text-red-500';
-
-  const generate = () => { let chars = ''; if (upper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; if (lower) chars += 'abcdefghijklmnopqrstuvwxyz'; if (digits) chars += '0123456789'; if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?'; if (excludeSimilar) chars = chars.replace(/[il1Lo0O]/g, ''); if (!chars) return; let pwd = ''; for (let i = 0; i < length; i++) pwd += chars[randInt(0, chars.length - 1)]; setResult(pwd); };
-
-  const addToHistory = () => { if (result) { setHistory(prev => [result, ...prev].slice(0, 10)); toast.success('Added to history'); } };
-
-  const resultText = result ? `Generated ${length}-char password (${entropy} bits, ${strength})` : 'Configure options and generate';
+  const resultText = result ? 'Generated ' + length + '-char password (' + entropy + ' bits, ' + strength + ')' : 'Configure options and generate';
 
   return (
     <CalculatorShell
@@ -115,11 +107,11 @@ export function RandomPasswordGenerator() {
                 </div>
                 <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
                   <div className="text-xs text-[var(--text-muted)]">Entropy</div>
-                  <div className={`font-bold ${strengthColor}`}>{entropy} bits</div>
+                  <div className={'font-bold ' + strengthColor}>{entropy} bits</div>
                 </div>
                 <div className="p-2 bg-[var(--bg-overlay)] rounded-lg">
                   <div className="text-xs text-[var(--text-muted)]">Strength</div>
-                  <div className={`text-sm font-bold ${strengthColor}`}>{strength}</div>
+                  <div className={'text-sm font-bold ' + strengthColor}>{strength}</div>
                 </div>
               </div>
             </div>
@@ -135,7 +127,7 @@ export function RandomPasswordGenerator() {
               <p className="text-2xl font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
               <div className="flex items-center gap-2 mt-3">
                 <span className="text-xs text-[var(--text-muted)]">{entropy} bits entropy</span>
-                <span className={`text-xs font-bold ${strengthColor}`}>{strength}</span>
+                <span className={'text-xs font-bold ' + strengthColor}>{strength}</span>
               </div>
             </div>
           )}
@@ -185,7 +177,7 @@ export function RandomNumberGenerator() {
     { label: 'Clear', apply: () => { setResult([]); setHistory([]); } },
   ];
 
-  const resultText = result.length > 0 ? `Generated ${result.length} numbers (${unique ? 'unique' : 'with repeats'})` : 'Configure range and generate';
+  const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + (unique ? 'unique' : 'with repeats') + ')' : 'Configure range and generate';
 
   return (
     <CalculatorShell
@@ -263,7 +255,7 @@ export function RandomStringGenerator() {
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 
-  const resultText = result ? `Generated ${result.length}-char string (${charset})` : 'Configure and generate';
+  const resultText = result ? 'Generated ' + result.length + '-char string (' + charset + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell title="Random String Generator" result={resultText} onCalculate={generate} presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
@@ -300,7 +292,7 @@ export function RandomStringGenerator() {
         <div className="flex gap-2">
           {[4, 8, 12, 16, 32, 64].map(n => (
             <button key={n} onClick={() => { setLength(n); generate(); }}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${length === n ? 'bg-indigo-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'`}>{n}</button>
+              className={'px-3 py-1.5 text-xs font-bold rounded-lg transition-all ' + (length === n ? 'bg-indigo-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{n}</button>
           ))}
         </div>
 
@@ -351,7 +343,7 @@ export function RandomColorGenerator() {
     { label: 'Clear', apply: () => { setColors([]); } },
   ];
 
-  const resultText = colors.length > 0 ? `Generated ${colors.length} ${format.toUpperCase()} colors` : 'Configure and generate';
+  const resultText = colors.length > 0 ? 'Generated ' + colors.length + ' ' + format.toUpperCase() + ' colors' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -412,7 +404,7 @@ export function RandomTeamGenerator() {
     { label: 'Clear', apply: () => { setTeams([]); } },
   ];
 
-  const resultText = teams.length > 0 ? `Generated ${teams.length} teams from ${input.split('\n').filter(Boolean).length} names` : 'Enter names and generate teams';
+  const resultText = teams.length > 0 ? 'Generated ' + teams.length + ' teams from ' + input.split('\n').filter(Boolean).length + ' names' : 'Enter names and generate teams';
 
   return (
     <CalculatorShell
@@ -434,7 +426,7 @@ export function RandomTeamGenerator() {
             <div className="space-y-3">
               {teams.map((team, i) => (
                 <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl">
-                  <div className={`text-sm font-bold ${teamColors[i % teamColors.length]} mb-1`}>Team {i + 1} · {team.length} members</div>
+                  <div className={'text-sm font-bold ' + teamColors[i % teamColors.length] + ' mb-1'}>Team {i + 1} · {team.length} members</div>
                   <div className="text-xs text-[var(--text-secondary)]">{team.join(', ')}</div>
                 </div>
               ))}
@@ -461,7 +453,7 @@ export function RandomPickerGenerator() {
     { label: 'Clear', apply: () => { setResult([]); } },
   ];
 
-  const resultText = result.length > 0 ? `Picked ${result.length} of ${input.split('\n').filter(Boolean).length} items (${allowRepeat ? 'with' : 'without'} repeats)` : 'Add items and pick';
+  const resultText = result.length > 0 ? 'Picked ' + result.length + ' of ' + input.split('\n').filter(Boolean).length + ' items (' + (allowRepeat ? 'with' : 'without') + ' repeats)' : 'Add items and pick';
 
   return (
     <CalculatorShell
@@ -518,7 +510,7 @@ export function RandomDecisionMaker() {
         setSpinning(false);
         const final = items[Math.floor(Math.random() * items.length)];
         setChoice(final);
-        const label = question.trim() ? `Q: ${question} → ${final}` : final;
+        const label = question.trim() ? 'Q: ' + question + ' → ' + final : final;
         setHistory(prev => [label, ...prev].slice(0, 10));
       }
     }, 80);
@@ -549,7 +541,7 @@ export function RandomDecisionMaker() {
     { label: 'Clear', apply: () => { setChoice(''); setHistory([]); } },
   ];
 
-  const resultText = choice ? `Decision: ${choice}` : 'Enter options and decide';
+  const resultText = choice ? 'Decision: ' + choice : 'Enter options and decide';
 
   return (
     <CalculatorShell
@@ -564,7 +556,7 @@ export function RandomDecisionMaker() {
       <div className="space-y-4">
         <Input label="What are you deciding? (optional)" value={question} onChange={v => setQuestion(v)} placeholder="e.g. Should I go out tonight?" />
         <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
-        <button onClick={decide} disabled={spinning} className={`px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto ${spinning ? 'opacity-60' : ''}`}>{spinning ? 'Spinning...' : 'Decide'}</button>
+        <button onClick={decide} disabled={spinning} className={'px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto ' + (spinning ? 'opacity-60' : '')}>{spinning ? 'Spinning...' : 'Decide'}</button>
 
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
           <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
@@ -594,7 +586,7 @@ const ADJECTIVES = ['Swift', 'Brave', 'Clever', 'Mighty', 'Silent', 'Golden', 'S
 const NOUNS = ['Fox', 'Wolf', 'Eagle', 'Bear', 'Hawk', 'Owl', 'Tiger', 'Dragon', 'Phoenix', 'Raven', 'Lion', 'Panther', 'Falcon', 'Cobra', 'Viper'];
 export function RandomUsernameGenerator() {
   const [pattern, setPattern] = useState('adj-noun'); const [includeNum, setIncludeNum] = useState(false); const [count, setCount] = useState(5); const [results, setResults] = useState<string[]>([]);
-  const generate = () => { const usernames: string[] = []; for (let i = 0; i < count; i++) { let u = ''; switch (pattern) { case 'adj-noun': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}`; break; case 'noun-num': u = `${randItem(NOUNS)}${randInt(10, 999)}`; break; case 'adj-noun-num': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}${randInt(10, 999)}`; break; case 'word-word': u = `${randItem(ADJECTIVES)}${randItem(NOUNS)}`.toLowerCase(); break; } if (includeNum) u += randInt(10, 999); usernames.push(u); } setResults(usernames); };
+  const generate = () => { const usernames: string[] = []; for (let i = 0; i < count; i++) { let u = ''; switch (pattern) { case 'adj-noun': u = randItem(ADJECTIVES) + randItem(NOUNS); break; case 'noun-num': u = randItem(NOUNS) + randInt(10, 999); break; case 'adj-noun-num': u = randItem(ADJECTIVES) + randItem(NOUNS) + randInt(10, 999); break; case 'word-word': u = (randItem(ADJECTIVES) + randItem(NOUNS)).toLowerCase(); break; } if (includeNum) u += randInt(10, 999); usernames.push(u); } setResults(usernames); };
 
   const presets = [
     { label: 'Adjective + Noun', apply: () => { setPattern('adj-noun'); generate(); } },
@@ -604,7 +596,7 @@ export function RandomUsernameGenerator() {
     { label: 'Clear', apply: () => { setResults([]); } },
   ];
 
-  const resultText = results.length > 0 ? `Generated ${results.length} usernames (${pattern})` : 'Configure and generate';
+  const resultText = results.length > 0 ? 'Generated ' + results.length + ' usernames (' + pattern + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -649,7 +641,7 @@ export function RandomUsernameGenerator() {
 // === 9. RandomUUIDGenerator ===
 export function RandomUUIDGenerator() {
   const [version, setVersion] = useState('v4'); const [count, setCount] = useState(1); const [results, setResults] = useState<string[]>([]);
-  const generate = () => { const uuids: string[] = []; for (let i = 0; i < count; i++) { if (version === 'v4') uuids.push(crypto.randomUUID()); else { const arr = new Uint8Array(16); crypto.getRandomValues(arr); arr[6] = (arr[6] & 0x0f) | 0x70; arr[8] = (arr[8] & 0x3f) | 0x80; const hex = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join(''); uuids.push(`${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`); } } setResults(uuids); };
+  const generate = () => { const uuids: string[] = []; for (let i = 0; i < count; i++) { if (version === 'v4') uuids.push(crypto.randomUUID()); else { const arr = new Uint8Array(16); crypto.getRandomValues(arr); arr[6] = (arr[6] & 0x0f) | 0x70; arr[8] = (arr[8] & 0x3f) | 0x80; const hex = Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join(''); uuids.push(hex.slice(0,8) + '-' + hex.slice(8,12) + '-' + hex.slice(12,16) + '-' + hex.slice(16,20) + '-' + hex.slice(20)); } } setResults(uuids); };
 
   const presets = [
     { label: 'UUID v4 (Random)', apply: () => { setVersion('v4'); setCount(5); generate(); } },
@@ -658,7 +650,7 @@ export function RandomUUIDGenerator() {
     { label: 'Clear', apply: () => { setResults([]); } },
   ];
 
-  const resultText = results.length > 0 ? `Generated ${results.length} ${version.toUpperCase()}s` : 'Configure and generate';
+  const resultText = results.length > 0 ? 'Generated ' + results.length + ' ' + version.toUpperCase() + 's' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -715,7 +707,7 @@ export function RandomTokenGenerator() {
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 
-  const resultText = result ? `Generated ${length}-char ${format.toUpperCase()} token (${entropy} bits entropy)` : 'Configure and generate';
+  const resultText = result ? 'Generated ' + length + '-char ' + format.toUpperCase() + ' token (' + entropy + ' bits entropy)' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -743,7 +735,7 @@ export function RandomTokenGenerator() {
             <p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p>
             <div className="flex gap-1 mt-2">
               <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
-              <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `token.${format}`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'token.' + format; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
             </div>
           </div>
         ) : (
@@ -773,7 +765,7 @@ export function LoremIpsumGenerator() {
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 
-  const resultText = result ? `Generated ${type} (${count})` : 'Configure and generate';
+  const resultText = result ? 'Generated ' + type + ' (' + count + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -825,7 +817,7 @@ export function DummyTextGenerator() {
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 
-  const resultText = result ? `Generated ${result.length} chars dummy text` : 'Configure and generate';
+  const resultText = result ? 'Generated ' + result.length + ' chars dummy text' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -874,8 +866,8 @@ type Field = 'name' | 'email' | 'phone' | 'address';
 export function FakeDataGenerator() {
   const [count, setCount] = useState(5); const [fields, setFields] = useState<Field[]>(['name', 'email', 'phone', 'address']); const [data, setData] = useState<Record<string, string>[]>([]);
   const toggleField = (f: Field) => setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
-  const generate = () => { const entries: Record<string, string>[] = []; for (let i = 0; i < count; i++) { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); const entry: Record<string, string> = {}; if (fields.includes('name')) entry.Name = `${fn} ${ln}`; if (fields.includes('email')) entry.Email = `${fn.toLowerCase()}.${ln.toLowerCase()}${randInt(1, 99)}@${randItem(DOMAINS)}`; if (fields.includes('phone')) entry.Phone = `+91 ${randInt(70000, 99999)} ${randInt(10000, 99999)}`; if (fields.includes('address')) entry.Address = `${randInt(1, 999)} ${randItem(STREETS)}, ${randItem(CITIES)} - ${randInt(100001, 999999)}`; entries.push(entry); } setData(entries); };
-  const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]); return [headers.join(','), ...data.map(r => headers.map(h => `"${(r[h] || '').replace(/"/g, '""')}"`).join(','))].join('\n'); };
+  const generate = () => { const entries: Record<string, string>[] = []; for (let i = 0; i < count; i++) { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); const entry: Record<string, string> = {}; if (fields.includes('name')) entry.Name = fn + ' ' + ln; if (fields.includes('email')) entry.Email = fn.toLowerCase() + '.' + ln.toLowerCase() + randInt(1, 99) + '@' + randItem(DOMAINS); if (fields.includes('phone')) entry.Phone = '+91 ' + randInt(70000, 99999) + ' ' + randInt(10000, 99999); if (fields.includes('address')) entry.Address = randInt(1, 999) + ' ' + randItem(STREETS) + ', ' + randItem(CITIES) + ' - ' + randInt(100001, 999999); entries.push(entry); } setData(entries); };
+  const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]); return [headers.join(','), ...data.map(r => headers.map(h => '"' + (r[h] || '').replace(/"/g, '""') + '"').join(','))].join('\n'); };
 
   const presets = [
     { label: '5 Records (All Fields)', apply: () => { setCount(5); setFields(['name', 'email', 'phone', 'address']); generate(); } },
@@ -884,7 +876,7 @@ export function FakeDataGenerator() {
     { label: 'Clear', apply: () => { setData([]); } },
   ];
 
-  const resultText = data.length > 0 ? `Generated ${data.length} records with ${fields.length} fields` : 'Configure and generate';
+  const resultText = data.length > 0 ? 'Generated ' + data.length + ' records with ' + fields.length + ' fields' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -901,7 +893,7 @@ export function FakeDataGenerator() {
         <div className="flex flex-wrap gap-2">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider w-full">Fields</span>
           {(['name', 'email', 'phone', 'address'] as Field[]).map(f => (
-            <button key={f} onClick={() => toggleField(f)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
+            <button key={f} onClick={() => toggleField(f)} className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
           ))}
         </div>
         <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Data</button>
@@ -934,14 +926,14 @@ export function FakeDataGenerator() {
 // === 14. FakeIdentityGenerator ===
 export function FakeIdentityGenerator() {
   const [identity, setIdentity] = useState<any>(null);
-  const generate = () => { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); setIdentity({ name: `${fn} ${ln}`, email: `${fn.toLowerCase()}.${ln.toLowerCase()}${randInt(1, 99)}@${randItem(DOMAINS)}`, phone: `+91 ${randInt(70000, 99999)} ${randInt(10000, 99999)}`, address: `${randInt(1, 999)} ${randItem(STREETS)}, ${randItem(CITIES)} - ${randInt(100001, 999999)}`, dob: `${randInt(1, 28)}/${randInt(1, 12)}/${randInt(1970, 2002)}`, occupation: randItem(['Engineer', 'Doctor', 'Teacher', 'Designer', 'Developer', 'Manager', 'Consultant', 'Analyst']) }); };
+  const generate = () => { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); setIdentity({ name: fn + ' ' + ln, email: fn.toLowerCase() + '.' + ln.toLowerCase() + randInt(1, 99) + '@' + randItem(DOMAINS), phone: '+91 ' + randInt(70000, 99999) + ' ' + randInt(10000, 99999), address: randInt(1, 999) + ' ' + randItem(STREETS) + ', ' + randItem(CITIES) + ' - ' + randInt(100001, 999999), dob: randInt(1, 28) + '/' + randInt(1, 12) + '/' + randInt(1970, 2002), occupation: randItem(['Engineer', 'Doctor', 'Teacher', 'Designer', 'Developer', 'Manager', 'Consultant', 'Analyst']) }); };
 
   const presets = [
     { label: 'Generate', apply: () => { generate(); } },
     { label: 'Clear', apply: () => { setIdentity(null); } },
   ];
 
-  const resultText = identity ? `Generated identity: ${identity.name}` : 'Generate a random identity';
+  const resultText = identity ? 'Generated identity: ' + identity.name : 'Generate a random identity';
 
   return (
     <CalculatorShell
@@ -986,7 +978,7 @@ function luhnCheck(num: string): boolean { let sum = 0; let alt = false; for (le
 function genCardNum(prefix: string, len: number): string { let num = prefix; for (let i = num.length; i < len - 1; i++) num += randInt(0, 9); for (let c = 0; c <= 9; c++) { if (luhnCheck(num + c)) return num + c; } return num + '0'; }
 export function FakeCreditCardGenerator() {
   const [count, setCount] = useState(3); const [cards, setCards] = useState<{ type: string; number: string; expiry: string; cvv: string }[]>([]);
-  const generate = () => { const c: typeof cards = []; for (let i = 0; i < count; i++) { const t = randItem(CARD_TYPES); c.push({ type: t.name, number: genCardNum(t.prefix, t.len), expiry: `${String(randInt(1, 12)).padStart(2, '0')}/${randInt(25, 30)}`, cvv: String(randInt(100, 999)) }); } setCards(c); };
+  const generate = () => { const c: typeof cards = []; for (let i = 0; i < count; i++) { const t = randItem(CARD_TYPES); c.push({ type: t.name, number: genCardNum(t.prefix, t.len), expiry: String(randInt(1, 12)).padStart(2, '0') + '/' + randInt(25, 30), cvv: String(randInt(100, 999)) }); } setCards(c); };
   const cardColors: Record<string, string> = { Visa: 'from-blue-600 to-blue-800', Mastercard: 'from-orange-500 to-red-600', Amex: 'from-cyan-600 to-blue-700', Discover: 'from-orange-400 to-yellow-600', RuPay: 'from-emerald-600 to-teal-700' };
 
   const presets = [
@@ -996,7 +988,7 @@ export function FakeCreditCardGenerator() {
     { label: 'Clear', apply: () => { setCards([]); } },
   ];
 
-  const resultText = cards.length > 0 ? `Generated ${cards.length} test cards (Luhn valid)` : 'Configure and generate';
+  const resultText = cards.length > 0 ? 'Generated ' + cards.length + ' test cards (Luhn valid)' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -1016,7 +1008,7 @@ export function FakeCreditCardGenerator() {
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3 max-h-[350px] overflow-y-auto">
               {cards.map((c, i) => (
-                <div key={i} className={`p-4 rounded-xl bg-gradient-to-br ${cardColors[c.type] || 'from-zinc-600 to-zinc-800'} text-white shadow-md`}>
+                <div key={i} className={'p-4 rounded-xl bg-gradient-to-br ' + (cardColors[c.type] || 'from-zinc-600 to-zinc-800') + ' text-white shadow-md'}>
                   <div className="flex justify-between items-start">
                     <span className="text-xs font-medium opacity-80">{c.type}</span>
                     <span className="text-[10px] opacity-60">CVV: {c.cvv}</span>
@@ -1025,7 +1017,7 @@ export function FakeCreditCardGenerator() {
                   <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
                 </div>
               ))}
-              <button onClick={() => { clipboardWrite(cards.map(c => `${c.number}|${c.expiry}|${c.cvv}`).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
             </div>
           </div>
         )}
@@ -1050,7 +1042,7 @@ export function SequenceGenerator() {
     { label: 'Clear', apply: () => { setResult([]); } },
   ];
 
-  const resultText = result.length > 0 ? `Generated ${result.length} numbers (${type}, sum: ${sum.toLocaleString()})` : 'Configure and generate';
+  const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + type + ', sum: ' + sum.toLocaleString() + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -1102,7 +1094,7 @@ export function BarcodeGenerator() {
     { label: 'Clear', apply: () => { setInput(''); } },
   ];
 
-  const resultText = input ? `Generated ${type} barcode for: ${input}` : 'Enter data to generate barcode';
+  const resultText = input ? 'Generated ' + type + ' barcode for: ' + input : 'Enter data to generate barcode';
 
   return (
     <CalculatorShell
@@ -1148,7 +1140,7 @@ export function QrCodeGenerator() {
     { label: 'Clear', apply: () => { setText(''); setDataUrl(''); } },
   ];
 
-  const resultText = dataUrl ? `Generated QR code (${errorCorrection} error correction)` : 'Enter text to generate QR code';
+  const resultText = dataUrl ? 'Generated QR code (' + errorCorrection + ' error correction)' : 'Enter text to generate QR code';
 
   return (
     <CalculatorShell
@@ -1173,7 +1165,7 @@ export function QrCodeGenerator() {
             <>
               <img src={dataUrl} alt="QR Code" className="rounded-xl border border-[var(--border-subtle)] shadow-sm max-w-[200px]" />
               <div className="flex gap-2 mt-3">
-                <button onClick={() => downloadOrShare(dataUrl, `qrcode_${Date.now()}.png`)} className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button>
+                <button onClick={() => downloadOrShare(dataUrl, 'qrcode_' + Date.now() + '.png')} className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-lg text-sm transition-colors">Download PNG</button>
                 <button onClick={() => { clipboardWrite(text); toast.success('Text copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
               </div>
             </>
@@ -1203,7 +1195,7 @@ export function CouponCodeGenerator() {
     { label: 'Clear', apply: () => { setCodes([]); } },
   ];
 
-  const resultText = codes.length > 0 ? `Generated ${codes.length} coupons (${pattern})` : 'Configure and generate';
+  const resultText = codes.length > 0 ? 'Generated ' + codes.length + ' coupons (' + pattern + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -1265,7 +1257,7 @@ export function SerialNumberGenerator() {
     { label: 'Clear', apply: () => { setSerials([]); } },
   ];
 
-  const resultText = serials.length > 0 ? `Generated ${serials.length} serials (${format})` : 'Configure and generate';
+  const resultText = serials.length > 0 ? 'Generated ' + serials.length + ' serials (' + format + ')' : 'Configure and generate';
 
   return (
     <CalculatorShell
@@ -1310,27 +1302,14 @@ export function SerialNumberGenerator() {
     </CalculatorShell>
   );
 }
-    <Section title="Serial Number Generator">
-      <div className="flex flex-wrap gap-2">{SERIAL_PRESETS.map(p => (<button key={p.name} onClick={() => setFormat(p.format)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>))}</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <Input label="Format (X=hex, 9=digit, A=alphanum)" value={format} onChange={v => setFormat(v)} />
-          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-          <button onClick={generate} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors">Generate Serials</button>
-        </div>
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">{serials.length > 0 ? (<div className="space-y-1 max-h-[250px] overflow-y-auto">{serials.map((s, i) => (<div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono"><span className="tracking-wide">{s}</span><button onClick={() => { clipboardWrite(s); toast.success('Copied!'); }} className="text-xs text-cyan-500 hover:underline"><Copy size={12} /></button></div>))}<div className="flex gap-1 mt-2"><button onClick={() => { clipboardWrite(serials.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button><button onClick={() => { const blob = new Blob([serials.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'serials.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button></div></div>) : (<p className="text-[var(--text-muted)] text-sm">Generate serial numbers</p>)}</div>
-      </div>
-    </Section>
-  );
-}
 
 // === 21. NicknameGenerator ===
 const NICKNAME_PARTS = ['Star', 'Shadow', 'Light', 'Blaze', 'Storm', 'Frost', 'Crystal', 'Thunder', 'Dark', 'Wild', 'Fire', 'Ice', 'Iron', 'Steel', 'Silver', 'Gold', 'Mystic', 'Phantom', 'Neon', 'Cyber'];
 const NICKNAME_PATTERNS = [
-  { name: 'Adjective+Part+Num', get: () => `${randItem(ADJECTIVES).toLowerCase()}${randItem(NICKNAME_PARTS).toLowerCase()}${randInt(1, 99)}` },
-  { name: 'Color+Animal', get: () => `${randItem(['Red', 'Blue', 'Dark', 'Gold', 'Silver', 'Neon', 'Ice', 'Fire'])}${randItem(['Wolf', 'Fox', 'Bear', 'Hawk', 'Lion', 'Viper', 'Puma', 'Elk'])}` },
+  { name: 'Adjective+Part+Num', get: () => randItem(ADJECTIVES).toLowerCase() + randItem(NICKNAME_PARTS).toLowerCase() + randInt(1, 99) },
+  { name: 'Color+Animal', get: () => randItem(['Red', 'Blue', 'Dark', 'Gold', 'Silver', 'Neon', 'Ice', 'Fire']) + randItem(['Wolf', 'Fox', 'Bear', 'Hawk', 'Lion', 'Viper', 'Puma', 'Elk']) },
   { name: 'Random Word', get: () => randItem(NICKNAME_PARTS) + randItem(ADJECTIVES) + randInt(10, 999) },
-  { name: 'Gamer Tag', get: () => `xX${randItem(ADJECTIVES)}${randItem(NOUNS)}${randInt(1, 99)}Xx` },
+  { name: 'Gamer Tag', get: () => 'xX' + randItem(ADJECTIVES) + randItem(NOUNS) + randInt(1, 99) + 'Xx' },
 ];
 export function NicknameGenerator() {
   const [patternIdx, setPatternIdx] = useState(0);
@@ -1346,7 +1325,7 @@ export function NicknameGenerator() {
     { label: 'Professional', apply: () => { setPatternIdx(4); setCount(10); generate(); } },
   ];
 
-  const resultText = results.length > 0 ? `Generated ${results.length} nicknames (${NICKNAME_PATTERNS[patternIdx].name})` : 'Select pattern and generate';
+  const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx].name + ')' : 'Select pattern and generate';
 
   return (
     <CalculatorShell title="Nickname Generator" result={resultText} onCalculate={generate} presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
@@ -1402,7 +1381,7 @@ export function AvatarGenerator() {
     { label: 'Default', apply: () => { setName('John Doe'); setBgColor('#4F46E5'); setTextColor('#FFFFFF'); setSize(120); setShape('rounded'); } },
   ];
 
-  const resultText = `Avatar: ${initials} (${size}px, ${shape})`;
+  const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
 
   return (
     <CalculatorShell title="Avatar Generator" result={resultText} onCalculate={() => {}} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
@@ -1429,14 +1408,14 @@ export function AvatarGenerator() {
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>
           {Object.entries(shapes).map(([k, v]) => (
             <button key={k} onClick={() => setShape(k as 'rounded' | 'circle' | 'square')}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${shape === k ? 'bg-indigo-500/10 border-indigo-400 text-indigo-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
+              className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (shape === k ? 'bg-indigo-500/10 border-indigo-400 text-indigo-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>
               {k.charAt(0).toUpperCase() + k.slice(1)}
             </button>
           ))}
         </div>
 
         <div className="flex flex-col items-center justify-center min-h-[200px] bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
-          <svg ref={svgRef} width={size} height={size} viewBox={`0 0 ${size} ${size}`} xmlns="http://www.w3.org/2000/svg">
+          <svg ref={svgRef} width={size} height={size} viewBox={'0 0 ' + size + ' ' + size} xmlns="http://www.w3.org/2000/svg">
             <rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} />
             <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text>
           </svg>
