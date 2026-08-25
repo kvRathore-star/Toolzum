@@ -403,6 +403,8 @@ export function CsvHtmlTableConverter() {
         <Output value={output} label={mode === 'csv-to-html' ? 'HTML Output' : 'CSV Output'} />
       </div>
     </CalculatorShell>
+  );
+}
 
 export function YamlValidator() {
   const [input, setInput] = useState('');

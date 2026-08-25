@@ -591,13 +591,6 @@ export function HashPasswordGenerator() {
     setParams({ salt: slt, iter: fi, hash: h });
   };
 
-  const presets = [
-    { label: 'Standard (600K)', apply: () => { setIterations('600000'); gen(); } },
-    { label: 'High Security (1M)', apply: () => { setIterations('1000000'); gen(); } },
-    { label: 'Legacy (100K)', apply: () => { setIterations('100000'); gen(); } },
-    { label: 'Max Security (2M)', apply: () => { setIterations('2000000'); gen(); } },
-  ];
-
   const resultText = params ? `PBKDF2-SHA256: ${params.iter.toLocaleString()} iterations` : 'Enter password to generate hash';
 
   return (
