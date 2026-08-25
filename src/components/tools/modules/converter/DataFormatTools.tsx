@@ -4,6 +4,7 @@ import { getErrorMessage } from '@/utils/error';
 import * as YAML from 'js-yaml';
 import Link from 'next/link';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Section } from '../MiscToolsShared';
 
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
@@ -338,6 +339,11 @@ export function CsvHtmlTableConverter() {
   const [output, setOutput] = useState('');
   const [preview, setPreview] = useState('');
 
+  const presets = [
+    { label: 'CSV → HTML', apply: () => setMode('csv-to-html') },
+    { label: 'HTML → CSV', apply: () => setMode('html-to-csv') },
+  ];
+
   const convert = () => {
     if (!input.trim()) return;
     if (mode === 'csv-to-html') {
@@ -379,6 +385,8 @@ export function CsvHtmlTableConverter() {
       setPreview('');
     }
   };
+
+  const resultText = output ? (mode === 'csv-to-html' ? 'HTML table generated' : 'CSV extracted') : 'Convert between CSV and HTML tables';
 
   return (
     <CalculatorShell

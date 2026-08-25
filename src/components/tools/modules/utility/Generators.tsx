@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Copy, Download, History, RotateCcw, RefreshCw, Shuffle, User, CreditCard, Key, Hash, Braces, Sigma, Ticket, Image as ImageIcon, BarChart3, Users, Palette, DollarSign, TrendingUp, Eye, List } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";

@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
-import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
+import { ac } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
 import { CalculatorShell } from './shared/CalculatorShell';

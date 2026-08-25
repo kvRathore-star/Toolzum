@@ -5,6 +5,7 @@ import { ac, pillClass, btnClass, borderClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
 import { CalculatorShell } from './shared/CalculatorShell';
+import { getErrorMessage } from '@/utils/error';
 
 export function BinaryConverter() {
   const clr = ac('BinaryConverter');

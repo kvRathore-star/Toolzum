@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import NextLink from 'next/link';
 import { Copy, Download, Hash, Type, BarChart3, Search, FileText, Globe, Edit3, ListOrdered, GitCompare, ArrowLeftRight, SpellCheck, Scissors, Trash2, Link, Rows3, Sigma } from 'lucide-react';
 import { toast } from 'react-hot-toast';
