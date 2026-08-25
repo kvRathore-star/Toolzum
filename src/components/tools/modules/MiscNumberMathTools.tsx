@@ -1260,7 +1260,7 @@ export function FactorialCalculator() {
   const nn = Number(n) || 0;
   const valid = nn >= 0 && nn <= 170;
   const result = valid ? fact(nn) : null;
-  const digits = valid ? result.toString().length : 0;
+  const digits = valid && result ? result.toString().length : 0;
 
   const presets = [
     { label: '0!', apply: () => setN('0') },
