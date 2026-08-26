@@ -59,13 +59,13 @@ export function MessagePackInspector() {
         const parsed = JSON.parse(input);
         const encoded = msgpack.encode(parsed);
         const hex = Array.from(new Uint8Array(encoded)).map(b => b.toString(16).padStart(2, '0')).join(' ');
-        setOutput(`MessagePack encoded (${encoded.byteLength} bytes):\nHex: ${hex}\nBase64: ${btoa(String.fromCharCode(...new Uint8Array(encoded)))}`);
+        setOutput('MessagePack encoded (' + encoded.byteLength + ' bytes):\nHex: ' + hex + '\nBase64: ' + btoa(String.fromCharCode(...new Uint8Array(encoded))));
       } else {
         const binaryStr = atob(input.replace(/\s/g, ''));
         const bytes = new Uint8Array(binaryStr.length);
         for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
         const decoded = msgpack.decode(bytes);
-        setOutput(`MessagePack decoded:\n${JSON.stringify(decoded, null, 2)}`);
+        setOutput('MessagePack decoded:\n' + JSON.stringify(decoded, null, 2));
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Invalid input');
@@ -77,8 +77,8 @@ export function MessagePackInspector() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MessagePack Inspector</h2>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Encode JSON → MsgPack</button>
-          <button onClick={() => setMode('decode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Decode Base64 MsgPack → JSON</button>
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → MsgPack</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 MsgPack → JSON</button>
         </div>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 MessagePack to decode'} />
@@ -100,13 +100,13 @@ export function CborInspector() {
         const parsed = JSON.parse(input);
         const encoded = cbor.encode(parsed);
         const hex = Array.from(encoded).map(b => b.toString(16).padStart(2, '0')).join(' ');
-        setOutput(`CBOR encoded (${encoded.length} bytes):\nHex: ${hex}\nBase64: ${btoa(String.fromCharCode(...encoded))}`);
+        setOutput('CBOR encoded (' + encoded.length + ' bytes):\nHex: ' + hex + '\nBase64: ' + btoa(String.fromCharCode(...encoded)));
       } else {
         const binaryStr = atob(input.replace(/\s/g, ''));
         const bytes = new Uint8Array(binaryStr.length);
         for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
         const decoded = cbor.decode(bytes);
-        setOutput(`CBOR decoded:\n${JSON.stringify(decoded, null, 2)}`);
+        setOutput('CBOR decoded:\n' + JSON.stringify(decoded, null, 2));
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Invalid input');
@@ -118,8 +118,8 @@ export function CborInspector() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CBOR Inspector</h2>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Encode JSON → CBOR</button>
-          <button onClick={() => setMode('decode')} className={`px-3 py-1.5 text-sm rounded-lg ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>Decode Base64 CBOR → JSON</button>
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → CBOR</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 CBOR → JSON</button>
         </div>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 CBOR to decode'} />
@@ -131,25 +131,108 @@ export function CborInspector() {
 }
 
 export function DataAnonymizer() {
-  const [input, setInput] = useState('Contact john@email.com or call 555-123-4567. IP: 192.168.1.1');
+  const [input, setInput] = useState('Contact john@email.com or call 555-123-4567. SSN: 123-45-6789. Card: 4111-1111-1111-1111. IP: 192.168.1.1');
   const [output, setOutput] = useState('');
+  const [detectedTypes, setDetectedTypes] = useState<Record<string, number>>({});
+
+  const PRESETS: Record<string, string> = {
+    pii: 'Name: John Doe\nEmail: john.doe@gmail.com\nPhone: (555) 123-4567\nSSN: 123-45-6789\nAddress: 123 Main St, Springfield, IL 62701',
+    financial: 'Card: 4111-1111-1111-1111\nCard2: 5500-0000-0000-0004\nAccount: 1234567890\nRouting: 021000021\nIP: 10.0.0.1',
+  };
 
   const anonymize = () => {
     let result = input;
-    result = result.replace(/[\w.-]+@[\w.-]+\.\w+/g, '***@***.***');
-    result = result.replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, '***-***-****');
-    result = result.replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, '***.***.***.***');
+    const counts: Record<string, number> = {};
+
+    result = result.replace(/[\w.-]+@[\w.-]+\.\w+/g, function(match) {
+      counts['email'] = (counts['email'] || 0) + 1;
+      return '***@***.***';
+    });
+    result = result.replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, function(match) {
+      counts['phone'] = (counts['phone'] || 0) + 1;
+      return '***-***-****';
+    });
+    result = result.replace(/\b\d{3}-\d{2}-\d{4}\b/g, function(match) {
+      counts['SSN'] = (counts['SSN'] || 0) + 1;
+      return '***-**-****';
+    });
+    result = result.replace(/\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})\b/g, function(match) {
+      counts['credit card'] = (counts['credit card'] || 0) + 1;
+      return '****-****-****-****';
+    });
+    result = result.replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, function(match) {
+      counts['IP address'] = (counts['IP address'] || 0) + 1;
+      return '***.***.***.***';
+    });
+
+    setDetectedTypes(counts);
     setOutput(result);
   };
 
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Anonymized text copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'anonymized.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button onClick={() => setInput(PRESETS.pii)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
+        <button onClick={() => setInput(PRESETS.financial)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Data Anonymizer</h2>
         <textarea rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={anonymize} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Anonymize</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+
+        {Object.keys(detectedTypes).length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(detectedTypes).map(function(entry) {
+              return (
+                <span key={entry[0]} className="px-2 py-0.5 text-xs font-bold rounded bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">
+                  {entry[0]}: {entry[1]}
+                </span>
+              );
+            })}
+          </div>
+        )}
+
+        {output && (
+          <div>
+            <div className="grid grid-cols-2 gap-4 text-xs">
+              <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                <span className="font-bold text-[var(--text-muted)]">Before</span>
+                <pre className="mt-1 whitespace-pre-wrap font-mono">{input}</pre>
+              </div>
+              <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+                <span className="font-bold text-emerald-600">After</span>
+                <pre className="mt-1 whitespace-pre-wrap font-mono text-emerald-700 dark:text-emerald-300">{output}</pre>
+              </div>
+            </div>
+            <div className="flex gap-2 mt-3">
+              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
+                <Copy className="w-3.5 h-3.5" /> Copy
+              </button>
+              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                <Download className="w-3.5 h-3.5" /> Download
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -200,13 +283,13 @@ export function CodeToCurlConverter() {
     let m;
     while ((m = headerRegex.exec(input)) !== null) {
       if (!m[1].toLowerCase().includes('method') && !m[1].toLowerCase().includes('body')) {
-        headers.push(`-H '${m[1]}: ${m[2]}'`);
+        headers.push("-H '" + m[1] + ': ' + m[2] + "'");
       }
     }
 
-    let result = `curl -X ${method} '${url}'`;
-    if (headers.length > 0) result += ` \\\n  ${headers.join(' \\\n  ')}`;
-    if (body) result += ` \\\n  -d '${body}'`;
+    let result = "curl -X " + method + " '" + url + "'";
+    if (headers.length > 0) result += " \\\n  " + headers.join(' \\\n  ');
+    if (body) result += " \\\n  -d '" + body + "'";
     setOutput(result);
   };
 
@@ -279,21 +362,21 @@ export function CurlToCodeConverter() {
 
       let result = '';
       if (targetLang === 'fetch') {
-        const h = Object.entries(headers).map(([k, v]) => `      '${k}': '${v}'`).join(',\n');
-        result = `fetch('${url}', {\n  method: '${method}',\n  headers: {\n${h}\n  }${body ? `,\n  body: JSON.stringify(${body.startsWith('{') ? body : `'${body}'`})` : ''}\n})`;
+        const h = Object.entries(headers).map(([k, v]) => "      '" + k + "': '" + v + "'").join(',\n');
+        result = "fetch('" + url + "', {\n  method: '" + method + "',\n  headers: {\n" + h + "\n  }" + (body ? ",\n  body: JSON.stringify(" + (body.startsWith('{') ? body : "'" + body + "'") + ")" : '') + "\n})";
       } else if (targetLang === 'axios') {
-        const h = Object.entries(headers).map(([k, v]) => `      '${k}': '${v}'`).join(',\n');
-        result = `axios({\n  method: '${method}',\n  url: '${url}',\n  headers: {\n${h}\n  }${body ? `,\n  data: ${body.startsWith('{') ? body : `'${body}'`}` : ''}\n})`;
+        const h = Object.entries(headers).map(([k, v]) => "      '" + k + "': '" + v + "'").join(',\n');
+        result = "axios({\n  method: '" + method + "',\n  url: '" + url + "',\n  headers: {\n" + h + "\n  }" + (body ? ",\n  data: " + (body.startsWith('{') ? body : "'" + body + "'") : '') + "\n})";
       } else if (targetLang === 'xhr') {
-        const h = Object.entries(headers).map(([k, v]) => `  xhr.setRequestHeader('${k}', '${v}');`).join('\n');
-        result = `const xhr = new XMLHttpRequest();\nxhr.open('${method}', '${url}');\n${h}\nxhr.onload = () => console.log(xhr.responseText);\n${body ? `xhr.send(${body.startsWith('{') ? body : `'${body}'`});` : 'xhr.send();'}`;
+        const h = Object.entries(headers).map(([k, v]) => "  xhr.setRequestHeader('" + k + "', '" + v + "');").join('\n');
+        result = "const xhr = new XMLHttpRequest();\nxhr.open('" + method + "', '" + url + "');\n" + h + "\nxhr.onload = () => console.log(xhr.responseText);\n" + (body ? "xhr.send(" + (body.startsWith('{') ? body : "'" + body + "'") + ");" : 'xhr.send();');
       } else if (targetLang === 'python') {
-        const h = Object.entries(headers).map(([k, v]) => `    '${k}': '${v}'`).join(',\n');
+        const h = Object.entries(headers).map(([k, v]) => "    '" + k + "': '" + v + "'").join(',\n');
         const bodyStr = body ? (body.startsWith('{') ? body : "'" + body + "'") : '';
-        result = `import requests\n\nheaders = {\n${h}\n}\nresponse = requests.request(\n  '${method}',\n  '${url}',\n  headers=headers${bodyStr ? `,\n  json=${bodyStr}` : ''}\n)\nprint(response.text)`;
+        result = "import requests\n\nheaders = {\n" + h + "\n}\nresponse = requests.request(\n  '" + method + "',\n  '" + url + "',\n  headers=headers" + (bodyStr ? ",\n  json=" + bodyStr : '') + "\n)\nprint(response.text)";
       } else if (targetLang === 'node') {
-        const h = Object.entries(headers).map(([k, v]) => `    '${k}': '${v}'`).join(',\n');
-        result = `const https = require('https');\n\nconst options = {\n  hostname: '${new URL(url).hostname}',\n  path: '${new URL(url).pathname}',\n  method: '${method}',\n  headers: {\n${h}\n  }\n};\n\nconst req = https.request(options, res => {\n  let data = '';\n  res.on('data', chunk => data += chunk);\n  res.on('end', () => console.log(data));\n});\n\n${body ? `req.write(${body.startsWith('{') ? body : `'${body}'`});\n` : ''}req.end();`;
+        const h = Object.entries(headers).map(([k, v]) => "    '" + k + "': '" + v + "'").join(',\n');
+        result = "const https = require('https');\n\nconst options = {\n  hostname: '" + new URL(url).hostname + "',\n  path: '" + new URL(url).pathname + "',\n  method: '" + method + "',\n  headers: {\n" + h + "\n  }\n};\n\nconst req = https.request(options, res => {\n  let data = '';\n  res.on('data', chunk => data += chunk);\n  res.on('end', () => console.log(data));\n});\n\n" + (body ? "req.write(" + (body.startsWith('{') ? body : "'" + body + "'") + ");\n" : '') + "req.end();";
       }
 
       setOutput(result);
@@ -308,7 +391,7 @@ export function CurlToCodeConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">cURL to Code Converter</h2>
         <div className="flex flex-wrap gap-2">
           {['fetch', 'axios', 'xhr', 'python', 'node'].map(lang => (
-            <button key={lang} onClick={() => setTargetLang(lang as any)} className={`px-3 py-1.5 text-sm rounded-lg ${targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]'}`}>{lang}</button>
+            <button key={lang} onClick={() => setTargetLang(lang as any)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
           ))}
         </div>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
@@ -354,56 +437,259 @@ export function JsonRpcBuilder() {
 }
 
 export function HarAnalyzer() {
-  const [input, setInput] = useState('{"log": {"entries": [{"request": {"method": "GET", "url": "https://example.com"}, "response": {"status": 200, "content": {"size": 1234}}, "timings": {"wait": 100, "receive": 50}}]}}');
+  const [input, setInput] = useState('{"log": {"entries": [{"request": {"method": "GET", "url": "https://example.com/api/users", "headers": []}, "response": {"status": 200, "content": {"size": 1234}}, "timings": {"wait": 50, "receive": 30}, "startedDateTime": "2024-01-01T10:00:00Z"}, {"request": {"method": "POST", "url": "https://example.com/api/data", "headers": []}, "response": {"status": 201, "content": {"size": 512}}, "timings": {"wait": 100, "receive": 50}, "startedDateTime": "2024-01-01T10:00:01Z"}, {"request": {"method": "GET", "url": "https://cdn.example.com/style.css", "headers": []}, "response": {"status": 304, "content": {"size": 0}}, "timings": {"wait": 5, "receive": 1}, "startedDateTime": "2024-01-01T10:00:02Z"}]}}');
   const [output, setOutput] = useState('');
+  const [domainBreakdown, setDomainBreakdown] = useState<Record<string, number>>({});
+  const [statusDist, setStatusDist] = useState<Record<number, number>>({});
+  const [waterfall, setWaterfall] = useState('');
+
+  const PRESETS: Record<string, string> = {
+    small: '{"log": {"entries": [{"request": {"method": "GET", "url": "https://example.com/"}, "response": {"status": 200, "content": {"size": 2048}}, "timings": {"wait": 20, "receive": 10}}, {"request": {"method": "GET", "url": "https://example.com/app.js"}, "response": {"status": 200, "content": {"size": 15000}}, "timings": {"wait": 30, "receive": 80}}]}}',
+    cookies: '{"log": {"entries": [{"request": {"method": "GET", "url": "https://api.example.com/auth", "cookies": [{"name": "session", "value": "abc123"}]}, "response": {"status": 200, "content": {"size": 512}, "cookies": [{"name": "token", "value": "xyz"}]}, "timings": {"wait": 100, "receive": 50}}, {"request": {"method": "GET", "url": "https://api.example.com/data", "cookies": [{"name": "token", "value": "xyz"}]}, "response": {"status": 200, "content": {"size": 4096}}, "timings": {"wait": 80, "receive": 120}}]}}',
+  };
 
   const analyze = () => {
     try {
       const har = JSON.parse(input);
       const entries = har?.log?.entries || [];
       if (entries.length === 0) { setOutput('No entries found.'); return; }
+
       const totalSize = entries.reduce((s: number, e: any) => s + (e.response?.content?.size || 0), 0);
       const totalTime = entries.reduce((s: number, e: any) => s + (e.timings?.wait || 0) + (e.timings?.receive || 0), 0);
-      const urls = entries.map((e: any) => e.request?.url);
-      setOutput(`Entries: ${entries.length}\nTotal Size: ${(totalSize / 1024).toFixed(2)} KB\nTotal Time: ${totalTime.toFixed(0)}ms\nURLs:\n${urls.map((u: string) => `  ${u}`).join('\n')}`);
+
+      const domains: Record<string, number> = {};
+      const statuses: Record<number, number> = {};
+      const lines: string[] = [];
+
+      entries.forEach((e: any, i: number) => {
+        try {
+          const u = new URL(e.request?.url || '');
+          domains[u.hostname] = (domains[u.hostname] || 0) + 1;
+        } catch {}
+        const status = e.response?.status || 0;
+        statuses[status] = (statuses[status] || 0) + 1;
+      });
+
+      setDomainBreakdown(domains);
+      setStatusDist(statuses);
+
+      lines.push('HAR Analysis Report');
+      lines.push('==================');
+      lines.push('Entries: ' + entries.length);
+      lines.push('Total Size: ' + (totalSize / 1024).toFixed(2) + ' KB');
+      lines.push('Total Time: ' + totalTime.toFixed(0) + 'ms');
+      lines.push('');
+
+      lines.push('Domain Breakdown:');
+      Object.entries(domains).forEach(function(entry) {
+        lines.push('  ' + entry[0] + ': ' + entry[1] + ' request(s)');
+      });
+      lines.push('');
+
+      lines.push('Status Distribution:');
+      Object.entries(statuses).forEach(function(entry) {
+        const pct = ((entry[1] / entries.length) * 100).toFixed(1);
+        lines.push('  ' + entry[0] + ': ' + entry[1] + ' (' + pct + '%)');
+      });
+
+      let wf = 'Waterfall (text):\n';
+      entries.forEach((e: any, i: number) => {
+        const wait = e.timings?.wait || 0;
+        const recv = e.timings?.receive || 0;
+        const total = wait + recv;
+        const url = (e.request?.url || '').slice(0, 40);
+        const bar = '#'.repeat(Math.min(Math.ceil(total / 20), 30));
+        wf += '  ' + String(i + 1).padStart(2, ' ') + '. ' + url.padEnd(42) + ' ' + bar + ' ' + total + 'ms\n';
+      });
+      setWaterfall(wf);
+      setOutput(lines.join('\n'));
     } catch { toast.error('Invalid HAR JSON'); }
   };
 
+  const copyOutput = () => {
+    if (!output) return;
+    const full = output + '\n\n' + waterfall;
+    clipboardWrite(full);
+    toast.success('Report copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const full = output + '\n\n' + waterfall;
+    const blob = new Blob([full], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'har-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button onClick={() => setInput(PRESETS.small)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
+        <button onClick={() => setInput(PRESETS.cookies)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HAR File Analyzer</h2>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+
+        {Object.keys(statusDist).length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(statusDist).map(function(entry) {
+              const color = entry[0].startsWith('2') ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : entry[0].startsWith('3') ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : entry[0].startsWith('4') ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300';
+              return <span key={entry[0]} className={'px-2 py-0.5 text-xs font-bold rounded ' + color}>{entry[0]}: {entry[1]}</span>;
+            })}
+          </div>
+        )}
+
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
+                <Copy className="w-3.5 h-3.5" /> Copy Report
+              </button>
+              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                <Download className="w-3.5 h-3.5" /> Download
+              </button>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+            {waterfall && <pre className="text-xs font-mono bg-zinc-900 text-green-400 rounded-lg p-3 whitespace-pre-wrap max-h-48 overflow-y-auto">{waterfall}</pre>}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
 export function LogAnalyzer() {
-  const [input, setInput] = useState('2024-01-01 10:00:00 ERROR Connection failed\n2024-01-01 10:01:00 INFO Request received\n2024-01-01 10:02:00 WARN High memory usage\n2024-01-01 10:03:00 ERROR Timeout exceeded');
+  const [input, setInput] = useState('2024-01-01 10:00:00 ERROR [app] Connection failed to db:5432\n2024-01-01 10:00:01 INFO [http] GET /api/users 200 45ms\n2024-01-01 10:00:02 WARN [app] High memory usage: 85%\n2024-01-01 10:00:03 ERROR [http] POST /api/data 500 1200ms\n2024-01-01 10:00:04 INFO [http] GET /api/health 200 5ms');
   const [output, setOutput] = useState('');
+  const [stats, setStats] = useState<{ total: number; errorRate: string; statusDist: Record<string, number> }>({ total: 0, errorRate: '0%', statusDist: {} });
+
+  const PRESETS: Record<string, string> = {
+    apache: '127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326\n127.0.0.1 - frank [10/Oct/2000:13:55:37 -0700] "GET /nonexistent HTTP/1.0" 404 289\n127.0.0.1 - frank [10/Oct/2000:13:55:38 -0700] "POST /api/data HTTP/1.1" 500 1024',
+    nginx: '2024/01/01 10:00:00 [error] 12345#0: *1 connection refused\n2024/01/01 10:00:01 [notice] 12345#0: *2 client: 192.168.1.1\n2024/01/01 10:00:02 [warn] 12345#0: *3 upstream response too slow',
+  };
 
   const analyze = () => {
     const lines = input.trim().split('\n');
     const levels: Record<string, number> = {};
-    lines.forEach(line => {
-      const match = line.match(/\b(ERROR|INFO|WARN|DEBUG|FATAL|TRACE)\b/);
-      if (match) levels[match[1]] = (levels[match[1]] || 0) + 1;
+    const statusDist: Record<string, number> = {};
+    const ips: Record<string, number> = {};
+    const urls: string[] = [];
+    let errorCount = 0;
+
+    lines.forEach(function(line) {
+      const levelMatch = line.match(/\b(ERROR|INFO|WARN|DEBUG|FATAL|TRACE|error|notice|warn|crit)\b/i);
+      if (levelMatch) {
+        const lvl = levelMatch[1].toUpperCase();
+        levels[lvl] = (levels[lvl] || 0) + 1;
+        if (lvl === 'ERROR' || lvl === 'FATAL' || lvl === 'CRIT') errorCount++;
+      }
+
+      const statusMatch = line.match(/\s(\d{3})\s/);
+      if (statusMatch) {
+        const s = statusMatch[1];
+        statusDist[s] = (statusDist[s] || 0) + 1;
+      }
+
+      const ipMatch = line.match(/\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b/);
+      if (ipMatch) ips[ipMatch[1]] = (ips[ipMatch[1]] || 0) + 1;
+
+      const urlMatch = line.match(/"([A-Z]+) ([^ "]+)/);
+      if (urlMatch && urlMatch[2] !== '-') urls.push(urlMatch[2]);
     });
-    setOutput(`Total Lines: ${lines.length}\n\nBy Level:\n${Object.entries(levels).sort((a, b) => b[1] - a[1]).map(([k, v]) => `  ${k}: ${v}`).join('\n')}`);
+
+    const errorRate = lines.length > 0 ? ((errorCount / lines.length) * 100).toFixed(1) : '0';
+    setStats({ total: lines.length, errorRate: errorRate + '%', statusDist });
+
+    let report = 'Log Analysis Report\n';
+    report += '===================\n';
+    report += 'Total lines: ' + lines.length + '\n';
+    report += 'Error rate: ' + errorRate + '%\n\n';
+
+    report += 'Log Levels:\n';
+    Object.entries(levels).sort((a, b) => b[1] - a[1]).forEach(function(entry) {
+      report += '  ' + entry[0] + ': ' + entry[1] + '\n';
+    });
+
+    if (Object.keys(statusDist).length > 0) {
+      report += '\nHTTP Status Codes:\n';
+      Object.entries(statusDist).sort((a, b) => b[1] - a[1]).forEach(function(entry) {
+        report += '  ' + entry[0] + ': ' + entry[1] + '\n';
+      });
+    }
+
+    if (Object.keys(ips).length > 0) {
+      report += '\nTop IPs:\n';
+      Object.entries(ips).sort((a, b) => b[1] - a[1]).slice(0, 5).forEach(function(entry) {
+        report += '  ' + entry[0] + ': ' + entry[1] + '\n';
+      });
+    }
+
+    if (urls.length > 0) {
+      report += '\nURLs accessed:\n';
+      [...new Set(urls)].forEach(function(u) { report += '  ' + u + '\n'; });
+    }
+
+    setOutput(report);
+  };
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Report copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'log-analysis.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button onClick={() => setInput(PRESETS.apache)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
+        <button onClick={() => setInput(PRESETS.nginx)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Log File Analyzer</h2>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+
+        {stats.total > 0 && (
+          <div className="flex gap-4 text-xs">
+            <span className="px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Lines: {stats.total}</span>
+            <span className="px-2 py-1 rounded bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">Errors: {stats.errorRate}</span>
+          </div>
+        )}
+
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
+                <Copy className="w-3.5 h-3.5" /> Copy Report
+              </button>
+              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                <Download className="w-3.5 h-3.5" /> Download
+              </button>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -460,14 +746,14 @@ export function MimeFinder() {
 
   const find = () => {
     const m = MIME_DB[ext.toLowerCase()];
-    setOutput(m ? `MIME type: ${m}` : 'Unknown extension');
+    setOutput(m ? 'MIME type: ' + m : 'Unknown extension');
   };
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MIME Type Finder</h2>
-        <input type="text" value={ext} onChange={e => setExt(e.target.value.startsWith('.') ? e.target.value : `.${e.target.value}`)} placeholder=".ext"
+        <input type="text" value={ext} onChange={e => setExt(e.target.value.startsWith('.') ? e.target.value : '.' + e.target.value)} placeholder=".ext"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         <button onClick={find} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Find MIME Type</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}

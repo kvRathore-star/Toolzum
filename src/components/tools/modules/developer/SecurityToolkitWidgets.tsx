@@ -23,7 +23,7 @@ export function OauthClientSetup() {
     if (!clientId) { toast.error('Enter Client ID'); return; }
     const base = PROVIDERS[provider] || PROVIDERS.Google;
     const state = crypto.randomUUID();
-    const url = `${base}?client_id=${encodeURIComponent(clientId)}&redirect_uri=${encodeURIComponent(redirectUri || 'https://yourapp.com/callback')}&scope=${encodeURIComponent(scope)}&response_type=code&state=${state}`;
+    const url = base + '?client_id=' + encodeURIComponent(clientId) + '&redirect_uri=' + encodeURIComponent(redirectUri || 'https://yourapp.com/callback') + '&scope=' + encodeURIComponent(scope) + '&response_type=code&state=' + state;
     setAuthUrl(url + '\n\nState: ' + state);
   };
 
@@ -34,7 +34,7 @@ export function OauthClientSetup() {
         <div className="flex flex-wrap gap-2">
           {Object.keys(PROVIDERS).map(p => (
             <button key={p} onClick={() => setProvider(p)}
-              className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${provider === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{p}</button>
+              className={'px-3 py-1 text-xs font-bold rounded-lg transition-all ' + (provider === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]')}>{p}</button>
           ))}
         </div>
         <div className="space-y-3">
@@ -120,28 +120,122 @@ export function PkceVerifier() {
 }
 
 export function OAuthScopeBuilder() {
-  const [scopes, setScopes] = useState('openid,profile,email,offline_access');
-  const [result, setResult] = useState('');
+  const [selectedScopes, setSelectedScopes] = useState<Record<string, boolean>>({
+    'openid': true, 'profile': true, 'email': true,
+  });
+  const [output, setOutput] = useState('');
+  const [format, setFormat] = useState<'space' | 'json'>('space');
+
+  const SCOPE_DB: Record<string, { label: string; desc: string }[]> = {
+    Google: [
+      { label: 'openid', desc: 'OpenID Connect identity' },
+      { label: 'profile', desc: 'User profile information' },
+      { label: 'email', desc: 'User email address' },
+      { label: 'offline_access', desc: 'Refresh token for long-lived access' },
+      { label: 'https://www.googleapis.com/auth/drive', desc: 'Full Google Drive access' },
+      { label: 'https://www.googleapis.com/auth/calendar', desc: 'Google Calendar access' },
+    ],
+    GitHub: [
+      { label: 'repo', desc: 'Full repository access' },
+      { label: 'repo:status', desc: 'Commit status access' },
+      { label: 'read:org', desc: 'Read organization membership' },
+      { label: 'write:org', desc: 'Manage organization membership' },
+      { label: 'admin:repo_hook', desc: 'Manage repository hooks' },
+      { label: 'user', desc: 'User profile and email' },
+      { label: 'user:email', desc: 'Read user email' },
+      { label: 'gist', desc: 'Create and manage gists' },
+    ],
+    Facebook: [
+      { label: 'public_profile', desc: 'Default public profile info' },
+      { label: 'email', desc: 'User email address' },
+      { label: 'user_friends', desc: 'User friends list' },
+      { label: 'user_birthday', desc: 'User birthday' },
+      { label: 'user_photos', desc: 'User photos' },
+      { label: 'pages_manage_posts', desc: 'Manage page posts' },
+    ],
+  };
+
+  const [activeProvider, setActiveProvider] = useState('Google');
+  const scopes = SCOPE_DB[activeProvider];
+
+  const toggleScope = (label: string) => {
+    setSelectedScopes(prev => ({ ...prev, [label]: !prev[label] }));
+  };
 
   const build = () => {
-    const list = scopes.split(',').map(s => s.trim()).filter(Boolean);
-    const str = list.join(' ');
-    setResult(
-      `Scopes: ${list.length}\nJoined string: ${str}\nURL encoded: ${encodeURIComponent(str)}\n\nBreakdown:\n${list.map(s => `  - ${s}`).join('\n')}`
-    );
+    const active = Object.entries(selectedScopes).filter(function(e) { return e[1]; }).map(function(e) { return e[0]; });
+    if (active.length === 0) { toast.error('Select at least one scope'); return; }
+    let result = '';
+    if (format === 'space') {
+      result = 'Space-separated:\n' + active.join(' ') + '\n\nURL-encoded:\n' + encodeURIComponent(active.join(' ')) + '\n\nBreakdown:\n' + active.map(function(s) { return '  - ' + s; }).join('\n');
+    } else {
+      result = JSON.stringify(active, null, 2);
+    }
+    setOutput(result);
+  };
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Scopes copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'oauth-scopes.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        {Object.keys(SCOPE_DB).map(function(p) {
+          return (
+            <button key={p} onClick={() => { setActiveProvider(p); setSelectedScopes({}); setOutput(''); }}
+              className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (activeProvider === p ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>{p}</button>
+          );
+        })}
+        <button onClick={() => { const defaults: Record<string, boolean> = {}; (SCOPE_DB[activeProvider] || []).forEach(function(s) { defaults[s.label] = true; }); setSelectedScopes(defaults); }} className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg">Select All</button>
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Scope Builder</h2>
-        <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Scopes (comma-separated)</label>
-          <input type="text" value={scopes} onChange={e => setScopes(e.target.value)} placeholder="openid,profile,email"
-            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Scope Builder — {activeProvider}</h2>
+
+        <div className="space-y-1">
+          {scopes.map(function(s) {
+            return (
+              <label key={s.label} className="flex items-start gap-3 text-sm py-2 px-3 rounded-lg hover:bg-[var(--bg-surface)] cursor-pointer">
+                <input type="checkbox" checked={!!selectedScopes[s.label]} onChange={() => toggleScope(s.label)} className="mt-1 rounded" />
+                <div>
+                  <span className="font-mono text-xs text-blue-600 dark:text-blue-400">{s.label}</span>
+                  <p className="text-xs text-[var(--text-muted)]">{s.desc}</p>
+                </div>
+              </label>
+            );
+          })}
         </div>
+
+        <div className="flex gap-2">
+          <button onClick={() => setFormat('space')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'space' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Space-separated</button>
+          <button onClick={() => setFormat('json')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'json' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>JSON array</button>
+        </div>
+
         <button onClick={build} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Build Scope String</button>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
+              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -149,20 +243,84 @@ export function OAuthScopeBuilder() {
 
 export function OAuthStateValidator() {
   const [state, setState] = useState('');
-  const [result, setResult] = useState('');
+  const [output, setOutput] = useState('');
+
+  const PRESETS: Record<string, string> = {
+    valid: 'eyJzdGF0dXMiOiJvcmlnaW5hbCIsInRpbWVzdGFtcCI6MTcwMDAwMDAwMCwibm9uY2UiOiJhYmMxMjMifQ==',
+    invalid: 'not-a-valid-base64!!!',
+  };
 
   const validate = () => {
-    if (!state) { toast.error('Enter state parameter to verify'); return; }
-    const parts = state.split(':');
-    const valid = parts.length >= 2 || state.length >= 16;
-    const age = parts.length >= 2 ? `${(Date.now() - Number(parts[0])) / 1000}s ago` : 'unknown';
-    setResult(valid
-      ? `State format valid (length: ${state.length}, age: ${age})\nTip: Always store state in session and compare on callback.`
-      : `State too short or malformed (min 16 chars recommended)`);
+    if (!state) { toast.error('Enter state parameter'); return; }
+
+    const results: string[] = [];
+    results.push('OAuth State Validation Report');
+    results.push('=============================\n');
+
+    // Base64 decode attempt
+    results.push('Base64 Decode:');
+    try {
+      const decoded = atob(state.replace(/-/g, '+').replace(/_/g, '/'));
+      results.push('  Decoded: ' + decoded);
+      try {
+        const json = JSON.parse(decoded);
+        results.push('  JSON: ' + JSON.stringify(json, null, 2));
+        if (json.timestamp) {
+          const age = Math.floor((Date.now() / 1000) - json.timestamp);
+          results.push('  Age: ' + age + ' seconds');
+          if (age > 3600) results.push('  ⚠ State is older than 1 hour — possible replay attack');
+        }
+      } catch {
+        results.push('  Not valid JSON');
+      }
+    } catch {
+      results.push('  ✗ Invalid base64 encoding');
+    }
+
+    results.push('\nSecurity Checks:');
+    if (state.length < 16) results.push('  ✗ State too short (' + state.length + ' chars) — min 16 recommended');
+    else results.push('  ✓ Adequate length (' + state.length + ' chars)');
+
+    if (!/^[A-Za-z0-9+/=_-]+$/.test(state)) results.push('  ⚠ Contains unexpected characters');
+    else results.push('  ✓ Valid character set');
+
+    if (state === state.toLowerCase() && /^[a-f0-9]+$/.test(state)) results.push('  ✓ Appears to be hex-encoded (good for UUIDs)');
+    else if (/^[A-Za-z0-9+/=]+$/.test(state)) results.push('  ✓ Appears to be base64-encoded');
+
+    results.push('\nRecommendations:');
+    results.push('  1. Always store state in session/cookie before redirect');
+    results.push('  2. Validate state matches on callback');
+    results.push('  3. Use PKCE (code_verifier + code_challenge) for public clients');
+    results.push('  4. State should be at least 16 chars, cryptographically random');
+    results.push('  5. Consider using JWT with expiry for stateless validation');
+
+    setOutput(results.join('\n'));
+  };
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Report copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'oauth-state-validation.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button onClick={() => setState(PRESETS.valid)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
+        <button onClick={() => setState(PRESETS.invalid)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
         <div>
@@ -171,7 +329,16 @@ export function OAuthStateValidator() {
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+
+        {output && (
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
+              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
+            </div>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -188,7 +355,7 @@ export function Pbkdf2HashGenerator() {
     const bits = await crypto.subtle.deriveBits({ name: 'PBKDF2', salt, iterations: 10000, hash: 'SHA-256' }, key, 256);
     const hashHex = Array.from(new Uint8Array(bits)).map(b => b.toString(16).padStart(2, '0')).join('');
     const saltB64 = btoa(String.fromCharCode(...salt));
-    setOutput(`$2a$10$${saltB64}$${hashHex.slice(0, 53)}`);
+    setOutput('$2a$10$' + saltB64 + '$' + hashHex.slice(0, 53));
     toast.success('PBKDF2 hash generated');
   };
 
@@ -256,9 +423,9 @@ export function CookieParser() {
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={() => { setMode('parse'); parse(); }}
-            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'parse' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]'}`}>Parse Cookie</button>
+            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'parse' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Parse Cookie</button>
           <button onClick={() => { setMode('analyze'); analyze(); }}
-            className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${mode === 'analyze' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]'}`}>Analyze Security</button>
+            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'analyze' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Analyze Security</button>
         </div>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>

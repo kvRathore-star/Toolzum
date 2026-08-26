@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
-import { getErrorMessage } from '@/utils/error';
 import { CalculatorShell } from '../shared/CalculatorShell';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -22,9 +21,9 @@ function validateYaml(text: string): string[] {
     const trimmed = l.trim();
     if (!trimmed || trimmed.startsWith('#')) return;
     const indent = l.search(/\S/);
-    if (indent > prevIndent + 2) issues.push(`Line ${i + 1}: Over-indented (${indent} spaces)`);
-    if (trimmed.includes('\t')) issues.push(`Line ${i + 1}: Contains tab (use spaces)`);
-    if (trimmed.includes(': ') && trimmed.indexOf(':') !== trimmed.lastIndexOf(':')) issues.push(`Line ${i + 1}: Multiple colons — missing space?`);
+    if (indent > prevIndent + 2) issues.push('Line ' + (i + 1) + ': Over-indented (' + indent + ' spaces)');
+    if (trimmed.includes('\t')) issues.push('Line ' + (i + 1) + ': Contains tab (use spaces)');
+    if (trimmed.includes(': ') && trimmed.indexOf(':') !== trimmed.lastIndexOf(':')) issues.push('Line ' + (i + 1) + ': Multiple colons — missing space?');
     prevIndent = indent;
   });
   return issues;
@@ -46,7 +45,7 @@ export function DockerComposeValidator() {
     const lines = [
       ...issues,
       hasServices ? 'Has services:' : 'Missing services:',
-      kws.length ? `Keywords: ${kws.join(', ')}` : '',
+      kws.length ? 'Keywords: ' + kws.join(', ') : '',
     ].filter(Boolean);
     setOutput(lines.join('\n'));
     setIsValid(issues.length === 0);
@@ -66,11 +65,9 @@ export function DockerComposeValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Docker Compose YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -90,11 +87,11 @@ export function DockerfileLinter() {
       const t = l.trim();
       if (!t || t.startsWith('#')) return;
       const instr = t.split(/\s+/)[0].toUpperCase();
-      if (!validInstructions.includes(instr)) issues.push(`Line ${i + 1}: Unknown instruction "${instr}"`);
+      if (!validInstructions.includes(instr)) issues.push('Line ' + (i + 1) + ': Unknown instruction "' + instr + '"');
     });
     if (!lines.some(l => l.trim().toUpperCase().startsWith('FROM'))) issues.push('Missing FROM instruction');
     setIsValid(issues.length === 0);
-    setOutput(issues.length ? issues.join('\n') : `Valid Dockerfile (${lines.length} lines)`);
+    setOutput(issues.length ? issues.join('\n') : 'Valid Dockerfile (' + lines.length + ' lines)');
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
 
@@ -112,11 +109,9 @@ export function DockerfileLinter() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Dockerfile</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Lint</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -136,10 +131,10 @@ export function HtaccessValidator() {
       const t = l.trim();
       if (!t || t.startsWith('#')) return;
       const dir = t.split(/\s+/)[0];
-      if (!validDirs.includes(dir) && !dir.startsWith('<') && !dir.startsWith('</')) issues.push(`Line ${i + 1}: Unknown directive "${dir}"`);
+      if (!validDirs.includes(dir) && !dir.startsWith('<') && !dir.startsWith('</')) issues.push('Line ' + (i + 1) + ': Unknown directive "' + dir + '"');
     });
     setIsValid(issues.length === 0);
-    setOutput(issues.length ? issues.join('\n') : `Valid .htaccess (${lines.length} lines)`);
+    setOutput(issues.length ? issues.join('\n') : 'Valid .htaccess (' + lines.length + ' lines)');
     toast.success(issues.length ? 'Issues found' : 'Valid!');
   };
 
@@ -157,11 +152,9 @@ export function HtaccessValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">htaccess Content</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -200,11 +193,9 @@ export function KubernetesYamlValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Kubernetes YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -242,11 +233,9 @@ export function GithubActionsValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GitHub Actions Workflow YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -255,29 +244,109 @@ export function GithubActionsValidator() {
 export function GeoJsonValidator() {
   const [input, setInput] = useState('{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[72.8777,19.0760]},"properties":{"name":"Mumbai"}}]}');
   const [output, setOutput] = useState('');
+
+  const PRESETS: Record<string, string> = {
+    validPoint: '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[72.8777,19.0760]},"properties":{"name":"Mumbai"}},{"type":"Feature","geometry":{"type":"Point","coordinates":[-73.9857,40.7484]},"properties":{"name":"New York"}}]}',
+    validPolygon: '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Polygon","coordinates":[[[0,0],[1,0],[1,1],[0,1],[0,0]]]},"properties":{"name":"Square"}}]}',
+    invalidCoords: '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[200,95]},"properties":{"name":"Invalid"}}]}',
+  };
+
   const validate = () => {
     try {
       const obj = JSON.parse(input);
       const validTypes = ['Point', 'MultiPoint', 'LineString', 'MultiLineString', 'Polygon', 'MultiPolygon', 'GeometryCollection', 'Feature', 'FeatureCollection'];
       const errs: string[] = [];
+      const warnings: string[] = [];
       if (!obj.type) errs.push('Missing type field');
-      else if (!validTypes.includes(obj.type)) errs.push(`Unknown type: ${obj.type}`);
-      if (obj.type === 'Feature' && !obj.geometry) errs.push('Feature missing geometry');
-      if (obj.type === 'FeatureCollection' && !Array.isArray(obj.features)) errs.push('FeatureCollection missing features array');
-      if (obj.geometry?.type === 'Point' && (!Array.isArray(obj.geometry.coordinates) || obj.geometry.coordinates.length < 2)) errs.push('Point needs [lng, lat]');
+      else if (!validTypes.includes(obj.type)) errs.push('Unknown type: ' + obj.type);
+
+      if (obj.type === 'FeatureCollection') {
+        if (!Array.isArray(obj.features)) { errs.push('FeatureCollection missing features array'); }
+        else {
+          const typeBreakdown: Record<string, number> = {};
+          obj.features.forEach((f: { type?: string; geometry?: { type?: string; coordinates?: number[] } }, i: number) => {
+            if (f.type !== 'Feature') warnings.push('Feature ' + i + ': type should be "Feature"');
+            if (!f.geometry) { errs.push('Feature ' + i + ': missing geometry'); return; }
+            const gt = f.geometry.type || 'Unknown';
+            typeBreakdown[gt] = (typeBreakdown[gt] || 0) + 1;
+              if (f.geometry.coordinates) {
+              const coords = f.geometry.coordinates as unknown as number[];
+              if (gt === 'Point' || gt === 'MultiPoint') {
+                const lng = gt === 'Point' ? coords[0] : (Array.isArray(coords[0]) ? coords[0][0] : coords[0]);
+                const lat = gt === 'Point' ? coords[1] : (Array.isArray(coords[0]) ? coords[0][1] : coords[1]);
+                if (typeof lng === 'number' && (lng < -180 || lng > 180)) errs.push('Feature ' + i + ': longitude ' + lng + ' out of range [-180,180]');
+                if (typeof lat === 'number' && (lat < -90 || lat > 90)) errs.push('Feature ' + i + ': latitude ' + lat + ' out of range [-90,90]');
+              }
+            }
+          });
+          const breakdown = Object.entries(typeBreakdown).map(function(entry) { return '  ' + entry[0] + ': ' + entry[1]; }).join('\n');
+          warnings.push('Total features: ' + obj.features.length);
+          if (breakdown) warnings.push('Geometry breakdown:\n' + breakdown);
+        }
+      } else if (obj.type === 'Feature') {
+        if (!obj.geometry) errs.push('Feature missing geometry');
+        if (obj.geometry && obj.geometry.coordinates) {
+          if (obj.geometry.type === 'Point') {
+            if (obj.geometry.coordinates[0] < -180 || obj.geometry.coordinates[0] > 180) errs.push('longitude out of range');
+            if (obj.geometry.coordinates[1] < -90 || obj.geometry.coordinates[1] > 90) errs.push('latitude out of range');
+          }
+        }
+      } else {
+        warnings.push('Top-level geometry type: ' + obj.type);
+      }
+
       if (obj.bbox && obj.bbox.length !== 4) errs.push('bbox should be [west, south, east, north]');
-      setOutput(errs.length ? errs.join('\n') : 'Valid GeoJSON');
+
+      const report = (errs.length ? 'ERRORS:\n' + errs.join('\n') + '\n\n' : '') +
+        (warnings.length ? 'INFO:\n' + warnings.join('\n') + '\n\n' : '') +
+        (errs.length === 0 ? '✓ Valid GeoJSON (RFC 7946)' : '');
+      setOutput(report.trim());
       toast.success(errs.length ? 'Issues found' : 'Valid GeoJSON');
-    } catch { toast.error('Invalid JSON'); setOutput('Invalid JSON'); }
+    } catch { toast.error('Invalid JSON'); setOutput('Invalid JSON — could not parse input'); }
   };
+
+  const copyOutput = () => {
+    if (!output) return;
+    clipboardWrite(output);
+    toast.success('Report copied!');
+  };
+
+  const downloadOutput = () => {
+    if (!output) return;
+    const blob = new Blob([output], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'geojson-report.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success('Downloaded!');
+  };
+
   return (
-    <Section title="GeoJSON Validator">
-      <div className="space-y-3">
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
-        <button onClick={validate} className={btnCls}>Validate</button>
-        {output && <pre className={preCls}>{output}</pre>}
+    <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button onClick={() => setInput(PRESETS.validPoint)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Point</button>
+        <button onClick={() => setInput(PRESETS.validPolygon)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Polygon</button>
+        <button onClick={() => setInput(PRESETS.invalidCoords)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid Coordinates</button>
       </div>
-    </Section>
+      <Section title="GeoJSON Validator">
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GeoJSON Input (RFC 7946)</label>
+          <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+          <button onClick={validate} className={btnCls}>Validate GeoJSON</button>
+          {output && (
+            <div className="mt-4">
+              <div className="flex gap-2 mb-2">
+                <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy Report</button>
+                <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
+              </div>
+              <pre className={preCls}>{output}</pre>
+            </div>
+          )}
+        </div>
+      </Section>
+    </div>
   );
 }
 
@@ -314,11 +383,9 @@ export function RssFeedValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">RSS/Atom XML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -338,7 +405,7 @@ export function SitemapValidator() {
     if (!input.includes('<loc>')) issues.push('Missing <loc> (required in each url)');
     const urls = input.match(/<loc>([^<]+)<\/loc>/g) || [];
     setIsValid(issues.length === 0);
-    setOutput(issues.length ? issues.join('\n') : `Valid sitemap (${urls.length} URL(s) found)`);
+    setOutput(issues.length ? issues.join('\n') : 'Valid sitemap (' + urls.length + ' URL(s) found)');
     toast.success(issues.length ? 'Issues found' : 'Valid sitemap');
   };
 
@@ -356,11 +423,9 @@ export function SitemapValidator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sitemap XML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
-
       <button onClick={validate} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
-
       {output && (
-        <pre className={`p-4 rounded-xl ${isValid ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>{output}</pre>
+        <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
     </CalculatorShell>
   );
@@ -383,8 +448,8 @@ export function XpathValidator() {
       let node: Node | null;
       while ((node = result.iterateNext())) results.push(node.textContent?.trim() || node.nodeName || '');
       setMatchCount(results.length);
-      setOutput(results.length ? `Found ${results.length} match(es):\n${results.join('\n')}` : 'No matches');
-      toast.success(`Found ${results.length} match(es)`);
+      setOutput(results.length ? 'Found ' + results.length + ' match(es):\n' + results.join('\n') : 'No matches');
+      toast.success('Found ' + results.length + ' match(es)');
     } catch (e: unknown) { setOutput('XPath error: ' + (e instanceof Error ? e.message : '')); toast.error('Invalid XPath'); }
   };
 
@@ -395,7 +460,7 @@ export function XpathValidator() {
     { label: 'Clear', apply: () => { setExpr(''); setXml(''); setOutput(''); } },
   ];
 
-  const resultText = matchCount > 0 ? `Found ${matchCount} match(es)` : (output ? output : 'Enter XPath and XML');
+  const resultText = matchCount > 0 ? 'Found ' + matchCount + ' match(es)' : (output || 'Enter XPath and XML');
 
   return (
     <CalculatorShell title="XPath Validator" result={resultText} onCalculate={validate} presets={presets} accent="violet" downloadData={output} downloadFilename="xpath-results.txt">
@@ -403,15 +468,12 @@ export function XpathValidator() {
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
         <input type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500/50" />
-
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
         <textarea value={xml} onChange={e => setXml(e.target.value)} rows={4}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" placeholder="<root><div><p>text</p></div></root>" />
-
         <button onClick={validate} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Test XPath</button>
-
         {output && (
-          <pre className={`p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ${matchCount > 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>
+          <pre className={'p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ' + (matchCount > 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>
             {output}
           </pre>
         )}
@@ -433,14 +495,14 @@ export function CronExpressionValidator() {
     const desc: string[] = [];
     parts.slice(0, 5).forEach((p, i) => {
       const r = ranges[i];
-      if (p === '*') { desc.push(`${r.name}: every`); return; }
-      if (p.startsWith('*/')) { const n = parseInt(p.slice(2)); if (isNaN(n) || n < 1) issues.push(`${r.name}: invalid step "${p}"`); else desc.push(`${r.name}: every ${n} ${r.name}s`); return; }
-      if (p.includes(',')) { const vals = p.split(',').map(v => parseInt(v)); if (vals.some(v => isNaN(v) || v < r.min || v > r.max)) issues.push(`${r.name}: value(s) out of range ${r.min}-${r.max}`); else desc.push(`${r.name}: at ${p}`); return; }
-      if (p.includes('-')) { const [a, b] = p.split('-').map(v => parseInt(v)); if (isNaN(a) || isNaN(b) || a < r.min || b > r.max) issues.push(`${r.name}: range out of bounds`); else desc.push(`${r.name}: ${a}-${b}`); return; }
-      const n = parseInt(p); if (isNaN(n) || n < r.min || n > r.max) issues.push(`${r.name}: "${p}" not in range ${r.min}-${r.max}`); else desc.push(`${r.name}: at ${n}`);
+      if (p === '*') { desc.push(r.name + ': every'); return; }
+      if (p.startsWith('*/')) { const n = parseInt(p.slice(2)); if (isNaN(n) || n < 1) issues.push(r.name + ': invalid step "' + p + '"'); else desc.push(r.name + ': every ' + n + ' ' + r.name + 's'); return; }
+      if (p.includes(',')) { const vals = p.split(',').map(v => parseInt(v)); if (vals.some(v => isNaN(v) || v < r.min || v > r.max)) issues.push(r.name + ': value(s) out of range ' + r.min + '-' + r.max); else desc.push(r.name + ': at ' + p); return; }
+      if (p.includes('-')) { const [a, b] = p.split('-').map(v => parseInt(v)); if (isNaN(a) || isNaN(b) || a < r.min || b > r.max) issues.push(r.name + ': range out of bounds'); else desc.push(r.name + ': ' + a + '-' + b); return; }
+      const n = parseInt(p); if (isNaN(n) || n < r.min || n > r.max) issues.push(r.name + ': "' + p + '" not in range ' + r.min + '-' + r.max); else desc.push(r.name + ': at ' + n);
     });
     setIsValid(issues.length === 0);
-    setOutput(issues.length ? issues.join('\n') : `Valid cron: ${parts.slice(0, 5).join(' ')}\n${desc.join('\n')}${parts[5] ? `\n(Cmd: ${parts.slice(5).join(' ')})` : ''}`);
+    setOutput(issues.length ? issues.join('\n') : 'Valid cron: ' + parts.slice(0, 5).join(' ') + '\n' + desc.join('\n') + (parts[5] ? '\n(Cmd: ' + parts.slice(5).join(' ') + ')' : ''));
     toast.success(issues.length ? 'Issues found' : 'Valid cron');
   };
 
@@ -462,9 +524,8 @@ export function CronExpressionValidator() {
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
         <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday (optional 6th: command)</p>
         <button onClick={validate} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Validate</button>
-
         {output && (
-          <pre className={`p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ${isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20'}`}>
+          <pre className={'p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ' + (isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>
             {output}
           </pre>
         )}

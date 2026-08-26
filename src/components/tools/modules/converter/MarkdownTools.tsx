@@ -16,6 +16,25 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'markdown-to-text', label: 'MD → Text' },
 ];
 
+const PRESETS: Record<TabId, { label: string; input: string }[]> = {
+  'markdown-to-html': [
+    { label: 'Basic', input: '# Hello World\n\nThis is a **bold** and *italic* text.\n\n## Lists\n- Item 1\n- Item 2\n\n> A blockquote\n\n`inline code`' },
+    { label: 'Table', input: '| Name | Age |\n|------|-----|\n| Alice | 30 |\n| Bob | 25 |' },
+  ],
+  'text-to-markdown': [
+    { label: 'Article', input: 'Title of Article\n\nFirst paragraph of the article with important information.\n\nSecond paragraph continues the discussion.\n\nFinal thoughts and conclusion.' },
+    { label: 'Notes', input: 'Meeting Notes - Jan 1\n\nAction items:\n1. Review proposal\n2. Update timeline\n3. Schedule follow-up' },
+  ],
+  'html-to-markdown': [
+    { label: 'Simple', input: '<h1>Title</h1>\n<p>This is a <strong>bold</strong> paragraph.</p>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>' },
+    { label: 'Article', input: '<article>\n  <h1>My Post</h1>\n  <p>Content with <a href="#">links</a> and <em>emphasis</em>.</p>\n  <blockquote>A wise quote</blockquote>\n</article>' },
+  ],
+  'markdown-to-text': [
+    { label: 'Formatted', input: '# Title\n\n**Bold text** and *italic*.\n\n- List item 1\n- List item 2\n\n> Blockquote\n\n`code`' },
+    { label: 'Links', input: 'Check out [this link](https://example.com) and [another](https://test.com).\n\nAlso see the [docs](https://docs.example.com) for more.' },
+  ],
+};
+
 function MarkdownToHtmlTab() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -52,6 +71,13 @@ function MarkdownToHtmlTab() {
 
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {PRESETS['markdown-to-html'].map(function(p) {
+          return (
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+          );
+        })}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
         <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
@@ -119,6 +145,13 @@ function TextToMarkdownTab() {
 
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {PRESETS['text-to-markdown'].map(function(p) {
+          return (
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+          );
+        })}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
         <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
@@ -189,6 +222,13 @@ function HtmlToMarkdownTab() {
 
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {PRESETS['html-to-markdown'].map(function(p) {
+          return (
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+          );
+        })}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
         <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
@@ -268,6 +308,13 @@ function MarkdownToTextTab() {
 
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {PRESETS['markdown-to-text'].map(function(p) {
+          return (
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+          );
+        })}
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
         <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
@@ -321,11 +368,7 @@ export default function MarkdownTools() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ${
-              activeTab === tab.id
-                ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
+            className={'px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ' + (activeTab === tab.id ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')}
           >
             {tab.label}
           </button>
