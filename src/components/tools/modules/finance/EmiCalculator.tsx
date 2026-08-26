@@ -31,7 +31,7 @@ export default function EmiCalculator() {
     setTotalInterest(totalPay - p);
   };
 
-  const resultText = emi !== null ? `Monthly EMI: $${emi.toFixed(2)} | Total Interest: $${totalInterest?.toFixed(2)} | Total Payment: $${totalPayment?.toFixed(2)}` : '';
+  const resultText = emi !== null ? 'Monthly EMI: $' + emi.toFixed(2) + ' | Total Interest: $' + (totalInterest?.toFixed(2) || '0') + ' | Total Payment: $' + (totalPayment?.toFixed(2) || '0') : '';
 
   const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
   const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='emi-calculation.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
