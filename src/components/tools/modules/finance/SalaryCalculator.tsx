@@ -1,10 +1,17 @@
 "use client";
 import React, { useState } from 'react';
 import { Briefcase } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 export default function SalaryCalculator() {
   const [ctc, setCtc] = useState(1200000);
   const [deductions, setDeductions] = useState(150000);
+
+  const presets = [
+    { label: '₹12L CTC, ₹1.5L ded', apply: () => { setCtc(1200000); setDeductions(150000); } },
+    { label: '₹20L CTC, ₹2L ded', apply: () => { setCtc(2000000); setDeductions(200000); } },
+    { label: '₹30L CTC, ₹3L ded', apply: () => { setCtc(3000000); setDeductions(300000); } },
+  ];
 
   // Simple progressive standard income tax logic for simulation
   const calculateTax = (income: number) => {
@@ -30,8 +37,21 @@ export default function SalaryCalculator() {
   const netAnnual = ctc - tax;
   const netMonthly = netAnnual / 12;
 
+  const resultText = `CTC: ₹${ctc.toLocaleString('en-IN')} | Deductions: ₹${deductions.toLocaleString('en-IN')} | Tax: ₹${Math.round(tax).toLocaleString('en-IN')} | Annual Take-Home: ₹${Math.round(netAnnual).toLocaleString('en-IN')} | Monthly: ₹${Math.round(netMonthly).toLocaleString('en-IN')}`;
+
+  const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
+  const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='salary-breakdown.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
+
   return (
-    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
       <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
         <Briefcase className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">Salary Take-Home Calculator</h3>
@@ -68,6 +88,10 @@ export default function SalaryCalculator() {
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-6">
             <span className="text-xs text-[var(--text-muted)]">Monthly Net Salary</span>
             <p className="text-3xl font-extrabold text-emerald-500">₹${Math.round(netMonthly).toLocaleString('en-IN')}/mo</p>
+          </div>
+          <div className="flex gap-2 pt-2">
+            <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+            <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
           </div>
         </div>
       </div>

@@ -1,17 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
-      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
-      {children}
-    </div>
-  );
-}
-
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
@@ -70,13 +59,13 @@ export function ColumnExtractor() {
     const nr = p.rows.map(r => idxs.map(i => r[i] || ''));
     setOut(formatCSV(nh, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Column Extractor">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Column Extractor</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Columns to extract" value={cols} onChange={v => { setCols(v); setOut(''); }} placeholder="col1,col2" />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Extract</button>
@@ -84,12 +73,17 @@ export function ColumnExtractor() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result ({out.split('\n').length - 1} rows)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -109,13 +103,13 @@ export function ColumnRenamer() {
     const nh = p.headers.map(h => { const m = mappings.find(([k]) => k === h); return m ? m[1] : h; });
     setOut(formatCSV(nh, p.rows));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Column Renamer">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 hover:bg-violet-500/20 border border-violet-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Column Renamer</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Mapping (old:new,old2:new2)" value={mapping} onChange={v => { setMapping(v); setOut(''); }} placeholder="name:full_name,email:email_address" />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors">Rename</button>
@@ -123,12 +117,17 @@ export function ColumnRenamer() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-violet-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -159,13 +158,13 @@ export function DataTypeConverter() {
     });
     setOut(formatCSV(p.headers, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Data Type Converter">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Data Type Converter</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Column name" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -176,12 +175,17 @@ export function DataTypeConverter() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result — {col} as {type}</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -205,13 +209,13 @@ export function Deduplicator() {
     setStats({ before: p.rows.length, after: nr.length });
     setOut(formatCSV(p.headers, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Deduplicator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 border border-orange-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Deduplicator</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); setStats(null); }} placeholder="CSV input..." />
       <Input label="Column to deduplicate on" value={col} onChange={v => { setCol(v); setOut(''); setStats(null); }} placeholder="Column name" />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Deduplicate</button>
@@ -230,13 +234,18 @@ export function Deduplicator() {
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-blue-400">
             <div className="flex justify-between items-center mb-2">
               <span className="text-xs font-semibold text-zinc-500">Deduplicated Data</span>
-              <button onClick={copy} className="px-2 py-0.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+              <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
             </div>
             <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
           </div>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -264,10 +273,12 @@ export function FormatValidator() {
     setIsValid(iss.length === 0);
   };
   return (
-    <Section title="Format Validator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border border-yellow-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Format Validator</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setIssues([]); setIsValid(null); }} placeholder="CSV input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       {isValid !== null && (
@@ -284,7 +295,9 @@ export function FormatValidator() {
           )}
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -316,13 +329,13 @@ export function CsvMerger() {
     });
     setOut(formatCSV(nh, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV Merger">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v1, p.v2)} className="px-2.5 py-1 text-xs rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v1, p.v2)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Merger</h2>
       <Input label="First CSV (left table)" rows={3} value={input1} onChange={v => { setInput1(v); setOut(''); }} placeholder="First CSV..." />
       <Input label="Second CSV (right table)" rows={3} value={input2} onChange={v => { setInput2(v); setOut(''); }} placeholder="Second CSV..." />
       <Input label="Key column (must exist in both)" value={key} onChange={v => { setKey(v); setOut(''); }} placeholder="name" />
@@ -331,12 +344,17 @@ export function CsvMerger() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Merged Result</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-cyan-500 hover:bg-cyan-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -359,13 +377,13 @@ export function NullValueHandler() {
     setNullCount(count);
     setOut(formatCSV(p.headers, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Null Value Handler">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20 border border-teal-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Null Value Handler</h2>
       <Input label="CSV Input (with empty cells)" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <div className="flex flex-wrap gap-1.5 mb-3">
         {replacePresets.map(r => <button key={r} onClick={() => setReplace(r)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${replace === r ? 'bg-teal-500 text-white border-teal-500' : 'bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20 border-teal-500/20'}`}>{r}</button>)}
@@ -375,12 +393,17 @@ export function NullValueHandler() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-teal-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result ({nullCount} nulls replaced)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-teal-500 hover:bg-teal-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -410,13 +433,13 @@ export function PivotGenerator() {
     const lines = Object.entries(groups).map(([k, vals]) => `${k},${vals.length},${vals.reduce((a, b) => a + b, 0).toFixed(2)},${(vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(2)}`);
     setOut(['group,count,sum,avg', ...lines].join('\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Pivot Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Pivot Generator</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Group column" value={groupCol} onChange={v => { setGroupCol(v); setOut(''); }} placeholder="Group column" />
       <Input label="Value column" value={valCol} onChange={v => { setValCol(v); setOut(''); }} placeholder="Value column (numeric)" />
@@ -425,12 +448,17 @@ export function PivotGenerator() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Pivot Table (group, count, sum, avg)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -455,13 +483,13 @@ export function RowFilter() {
     setMatchCount(nr.length);
     setOut(formatCSV(p.headers, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Row Filter">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500/20 border border-pink-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Row Filter</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Column" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
       <Input label="Filter value" value={val} onChange={v => { setVal(v); setOut(''); }} placeholder="Filter value (case-insensitive)" />
@@ -470,12 +498,17 @@ export function RowFilter() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-pink-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result — {matchCount} row(s) match</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-pink-500 hover:bg-pink-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -502,13 +535,13 @@ export function Sorter() {
     });
     setOut(formatCSV(p.headers, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Sorter">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 border border-sky-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Sorter</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Sort column" value={col} onChange={v => { setCol(v); setOut(''); }} placeholder="Column name" />
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -519,12 +552,17 @@ export function Sorter() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-sky-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Sorted by {col} ({dir})</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -550,13 +588,13 @@ export function Splitter() {
     }
     setOut(result.join('\n\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV Splitter">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Splitter</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <div className="flex flex-wrap gap-1.5 mb-3">
         {partPresets.map(p => <button key={p} onClick={() => setParts(p)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${parts === p ? 'bg-rose-500 text-white border-rose-500' : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border-rose-500/20'}`}>{p} parts</button>)}
@@ -566,12 +604,17 @@ export function Splitter() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Split Result</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -595,25 +638,30 @@ export function Transpose() {
     const nr = transposed.slice(1);
     setOut(formatCSV(nh, nr));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV Transpose">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 border border-amber-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Transpose</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors">Transpose</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-amber-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Transposed ({out.split('\n').length - 1} rows)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-amber-500 hover:bg-amber-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -634,25 +682,30 @@ export function CsvToMarkdown() {
     const rows = p.rows.map(r => `|${r.join('|')}|`).join('\n');
     setOut([head, sep, rows].join('\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV → Markdown Table">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20 border border-green-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV → Markdown Table</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-green-500 hover:bg-green-600 text-white rounded-xl text-sm font-medium transition-colors">Generate MD</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-green-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Markdown Table</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-green-500 hover:bg-green-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.md'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -675,25 +728,30 @@ export function CsvToNdjson() {
     }).join('\n');
     setOut(objs);
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV → NDJSON">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 border border-purple-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV → NDJSON</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-purple-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">NDJSON ({out.split('\n').length} objects)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -713,13 +771,13 @@ export function CsvToSql() {
     const inserts = p.rows.map(r => `INSERT INTO ${table} (${p.headers.join(', ')}) VALUES (${r.map(c => `'${c.replace(/'/g, "''")}'`).join(', ')});`);
     setOut(inserts.join('\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="CSV → SQL INSERT">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-400 hover:bg-slate-500/20 border border-slate-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV → SQL INSERT</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Table name" value={table} onChange={v => { setTable(v); setOut(''); }} placeholder="Table name" />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-slate-500 hover:bg-slate-600 text-white rounded-xl text-sm font-medium transition-colors">Generate SQL</button>
@@ -727,12 +785,17 @@ export function CsvToSql() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-slate-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">SQL INSERT ({out.split('\n').length} statements)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.sql'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -753,13 +816,13 @@ export function JsonEscapeUnescape() {
     if (t !== undefined) setInput(txt);
     setOut(txt.replace(/\\"/g, '"').replace(/\\n/g, '\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON Escape / Unescape">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => { setInput(p.v); setOut(''); }} className="px-2.5 py-1 text-xs rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => { setInput(p.v); setOut(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON Escape / Unescape</h2>
       <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
       <div className="flex gap-2 mb-3">
         <button onClick={() => escape()} className="flex-1 px-5 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl text-sm font-medium transition-colors">Escape</button>
@@ -769,12 +832,17 @@ export function JsonEscapeUnescape() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result ({out.length} chars)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-cyan-500 hover:bg-cyan-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -799,25 +867,30 @@ export function JsonFlattener() {
     go(obj, '');
     setOut(JSON.stringify(flat, null, 2));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON Flattener">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-orange-500/10 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 border border-orange-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON Flattener</h2>
       <Input label="Nested JSON" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="Nested JSON..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Flatten</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-orange-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Flattened ({Object.keys(JSON.parse(out)).length} keys)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -842,25 +915,30 @@ export function JsonLdGenerator() {
       setOut(JSON.stringify(ld, null, 2));
     } catch { toast.error('Invalid JSON'); }
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON-LD Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
         {typePresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${schemaType === p.v ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border-blue-500/20'}`}>{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON-LD Generator</h2>
       <Input label="JSON Properties" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Generate JSON-LD</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">JSON-LD ({schemaType})</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -890,13 +968,13 @@ export function MergePatchGenerator() {
     });
     setOut(JSON.stringify(patch, null, 2));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="Merge Patch Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.o, p.m)} className="px-2.5 py-1 text-xs rounded-lg bg-violet-500/10 text-violet-600 dark:text-violet-400 hover:bg-violet-500/20 border border-violet-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.o, p.m)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Merge Patch Generator</h2>
       <Input label="Original JSON" rows={3} value={orig} onChange={v => { setOrig(v); setOut(''); }} placeholder="Original JSON..." />
       <Input label="Modified JSON" rows={3} value={modified} onChange={v => { setModified(v); setOut(''); }} placeholder="Modified JSON..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Patch</button>
@@ -904,12 +982,17 @@ export function MergePatchGenerator() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-violet-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Merge Patch (RFC 7396)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -941,25 +1024,30 @@ export function JsonSchemaGenerator() {
     };
     setOut(JSON.stringify({ $schema: 'http://json-schema.org/draft-07/schema#', ...infer(obj) }, null, 2));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON Schema Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON Schema Generator</h2>
       <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Schema</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">JSON Schema (draft-07)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -994,10 +1082,12 @@ export function JsonSizeAnalyzer() {
     });
   };
   return (
-    <Section title="JSON Size Analyzer">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500/20 border border-rose-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON Size Analyzer</h2>
       <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setMetrics(null); }} placeholder="JSON input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Analyze</button>
       {metrics && (
@@ -1017,7 +1107,9 @@ export function JsonSizeAnalyzer() {
           ))}
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1047,25 +1139,30 @@ export function JsonToZod() {
     };
     setOut(`import { z } from 'zod';\n\nexport const schema = ${toZod(obj).trim()};`);
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON → Zod Schema">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON → Zod Schema</h2>
       <Input label="JSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="JSON input..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Generate Zod</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Zod Schema</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.ts'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1088,24 +1185,29 @@ export function JwkGenerator() {
     };
     setOut(JSON.stringify(jwk, null, 2));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JWK Generator">
-      <div className="flex flex-wrap gap-1.5 mb-3">
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
         {bitPresets.map(b => <button key={b} onClick={() => handle(b)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${bits === b ? 'bg-yellow-500 text-white border-yellow-500' : 'bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 border-yellow-500/20'}`}>{b} bits</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JWK Generator</h2>
       <button onClick={() => handle()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors">Generate JWK</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-yellow-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Symmetric JWK ({bits}-bit)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-yellow-500 hover:bg-yellow-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1123,25 +1225,30 @@ export function JsonlFormatter() {
     const formatted = lines.map(l => { try { return JSON.stringify(JSON.parse(l), null, 2); } catch { return l; } }).join('\n---\n');
     setOut(formatted);
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSONL Formatter">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 hover:bg-sky-500/20 border border-sky-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSONL Formatter</h2>
       <Input label="JSONL Input (one JSON per line)" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="One JSON object per line..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-sm font-medium transition-colors">Format</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-sky-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Formatted JSONL</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1162,25 +1269,30 @@ export function NdjsonToJson() {
     setObjCount(objs.length);
     setOut(JSON.stringify(objs, null, 2));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="NDJSON → JSON Array">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 hover:bg-purple-500/20 border border-purple-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">NDJSON → JSON Array</h2>
       <Input label="NDJSON Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="One JSON per line..." />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-purple-500 hover:bg-purple-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-purple-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">JSON Array ({objCount} objects)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-purple-500 hover:bg-purple-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.json'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1200,25 +1312,30 @@ export function JsonToUrlParams() {
       setOut(new URLSearchParams(obj).toString());
     } catch { toast.error('Invalid JSON'); }
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
   return (
-    <Section title="JSON → URL Params">
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-pink-500/10 text-pink-600 dark:text-pink-400 hover:bg-pink-500/20 border border-pink-500/20 transition-colors">{p.label}</button>)}
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {jsonPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON → URL Params</h2>
       <Input label="Flat JSON Object" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder='{"key":"value"}' />
       <button onClick={() => handle()} className="px-5 py-2.5 bg-pink-500 hover:bg-pink-600 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-pink-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">URL Query String</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-pink-500 hover:bg-pink-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
+    </>
   );
 }
 
@@ -1243,10 +1360,10 @@ export function CsvJsonRowGenerator() {
     }
     setOut(results.join('\n'));
   };
-  const [copied, setCopied] = useState(false);
-  const copy = () => { if (out) { clipboardWrite(out); setCopied(true); setTimeout(() => setCopied(false), 1500); } };
+  const downloadFile = type === 'csv' ? 'output.csv' : 'output.json';
   return (
-    <Section title="CSV Row / JSON Generator">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Row / JSON Generator</h2>
       <div className="flex gap-2 mb-3">
         {[{ v: 'csv', l: 'CSV Row' }, { v: 'json', l: 'JSON' }].map(({ v, l }) => (
           <button key={v} onClick={() => setType(v)} className={`px-4 py-2 text-sm font-semibold rounded-xl border transition-colors ${type === v ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'}`}>{l}</button>
@@ -1261,11 +1378,15 @@ export function CsvJsonRowGenerator() {
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Generated {type.toUpperCase()} ({count} rows)</span>
-            <button onClick={copy} className="px-2 py-0.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <div className="flex gap-2">
+                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=downloadFile; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              </div>
           </div>
           <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
-    </Section>
+    
+      </div>
   );
 }

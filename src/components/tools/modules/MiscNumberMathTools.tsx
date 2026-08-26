@@ -17,19 +17,40 @@ export function BinaryConverter() {
     return { dec: String(n), hex: n.toString(16).toUpperCase(), oct: n.toString(8), bin: n.toString(2) };
   };
   const res = convert(input, mode);
+  const resultText = `Decimal: ${res.dec}\nHex: ${res.hex}\nOctal: ${res.oct}\nBinary: ${res.bin}`;
+  const presets = [
+    { label: 'Hello World', apply: () => { setInput('Hello World'); setMode('dec'); } },
+    { label: '42 decimal', apply: () => { setInput('42'); setMode('dec'); } },
+    { label: 'FF hex', apply: () => { setInput('FF'); setMode('hex'); } },
+    { label: '1010 binary', apply: () => { setInput('1010'); setMode('bin'); } },
+  ];
   return (
-    <Section title="Binary Converter">
-      <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
-        <option value="dec">Decimal</option><option value="hex">Hex</option><option value="oct">Octal</option><option value="bin">Binary</option>
-      </select>
-      <Input label="Enter value" placeholder="Enter value" value={input} onChange={setInput} />
-      <div className="text-xs space-y-1 font-mono">
-        <div><span className="text-[var(--text-secondary)]">Decimal:</span> {res.dec}</div>
-        <div><span className="text-[var(--text-secondary)]">Hex:</span> {res.hex}</div>
-        <div><span className="text-[var(--text-secondary)]">Octal:</span> {res.oct}</div>
-        <div><span className="text-[var(--text-secondary)]">Binary:</span> {res.bin}</div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Binary Converter</h2>
+        <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
+          <option value="dec">Decimal</option><option value="hex">Hex</option><option value="oct">Octal</option><option value="bin">Binary</option>
+        </select>
+        <Input label="Enter value" placeholder="Enter value" value={input} onChange={setInput} />
+        <div className="text-xs space-y-1 font-mono">
+          <div><span className="text-[var(--text-secondary)]">Decimal:</span> {res.dec}</div>
+          <div><span className="text-[var(--text-secondary)]">Hex:</span> {res.hex}</div>
+          <div><span className="text-[var(--text-secondary)]">Octal:</span> {res.oct}</div>
+          <div><span className="text-[var(--text-secondary)]">Binary:</span> {res.bin}</div>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- RomanNumeralConverter ---
@@ -55,12 +76,32 @@ export function RomanNumeralConverter() {
   };
   const toR = () => { const n = parseInt(dec); if (n > 0 && n < 4000) setRoman(toRoman(n)); };
   const fromR = () => { const n = fromRoman(roman.toUpperCase()); if (n > 0) setDec(String(n)); };
+  const resultText = `Decimal: ${dec}\nRoman: ${roman}`;
+  const presets = [
+    { label: '1999', apply: () => { setDec('1999'); setRoman(toRoman(1999)); } },
+    { label: '42', apply: () => { setDec('42'); setRoman(toRoman(42)); } },
+    { label: '100', apply: () => { setDec('100'); setRoman(toRoman(100)); } },
+  ];
   return (
-    <Section title="Roman Numeral Converter">
-      <Input label="Decimal" placeholder="Decimal" value={dec} onChange={setDec} />
-      <Input label="Roman" placeholder="Roman" value={roman} onChange={setRoman} />
-      <div className="flex gap-2"><button className={btnClass(clr)} onClick={toR}>To Roman</button><button className={btnClass(clr)} onClick={fromR}>From Roman</button></div>
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Roman Numeral Converter</h2>
+        <Input label="Decimal" placeholder="Decimal" value={dec} onChange={setDec} />
+        <Input label="Roman" placeholder="Roman" value={roman} onChange={setRoman} />
+        <div className="flex gap-2"><button className={btnClass(clr)} onClick={toR}>To Roman</button><button className={btnClass(clr)} onClick={fromR}>From Roman</button></div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- NumberToWordsConverter ---
@@ -78,11 +119,31 @@ export function NumberToWordsConverter() {
     return convert(Math.floor(n / 1000000000)) + ' Billion' + (n % 1000000000 ? ' ' + convert(n % 1000000000) : '');
   };
   const words = parseInt(num) ? convert(parseInt(num)) : '';
+  const resultText = words;
+  const presets = [
+    { label: '123', apply: () => setNum('123') },
+    { label: '1000000', apply: () => setNum('1000000') },
+    { label: '42', apply: () => setNum('42') },
+  ];
   return (
-    <Section title="Number to Words">
-      <Input label="Value" type="number" value={num} onChange={setNum} />
-      <div className="text-sm font-medium p-3 bg-[var(--bg-surface)] rounded-lg">{words}</div>
-    </Section>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Number to Words</h2>
+        <Input label="Value" type="number" value={num} onChange={setNum} />
+        <div className="text-sm font-medium p-3 bg-[var(--bg-surface)] rounded-lg">{words}</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- NumberBaseConverter ---
@@ -93,20 +154,40 @@ export function NumberBaseConverter() {
   const [toBase, setToBase] = useState(16);
   const result = parseInt(input, fromBase);
   const output = isNaN(result) ? '' : result.toString(toBase).toUpperCase();
+  const resultText = `${input} (base ${fromBase}) = ${output} (base ${toBase})`;
+  const presets = [
+    { label: '255 decimal', apply: () => { setInput('255'); setFromBase(10); setToBase(16); } },
+    { label: 'FF hex', apply: () => { setInput('FF'); setFromBase(16); setToBase(10); } },
+    { label: '11111111 binary', apply: () => { setInput('11111111'); setFromBase(2); setToBase(16); } },
+  ];
   return (
-    <Section title="Number Base Converter">
-      <div className="flex gap-2">
-        <select className={selClass} value={fromBase} onChange={e => setFromBase(Number(e.target.value))}>
-          {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
-        </select>
-        <span className="self-center">-</span>
-        <select className={selClass} value={toBase} onChange={e => setToBase(Number(e.target.value))}>
-          {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
-        </select>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <Input label="Enter number" placeholder="Enter number" value={input} onChange={setInput} />
-      <div className="text-lg font-mono font-bold text-blue-600">{output}</div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Number Base Converter</h2>
+        <div className="flex gap-2">
+          <select className={selClass} value={fromBase} onChange={e => setFromBase(Number(e.target.value))}>
+            {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
+          </select>
+          <span className="self-center">-</span>
+          <select className={selClass} value={toBase} onChange={e => setToBase(Number(e.target.value))}>
+            {Array.from({ length: 35 }, (_, i) => i + 2).map(b => <option key={b} value={b}>Base {b}</option>)}
+          </select>
+        </div>
+        <Input label="Enter number" placeholder="Enter number" value={input} onChange={setInput} />
+        <div className="text-lg font-mono font-bold text-blue-600">{output}</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- PercentageChangeCalculator ---
@@ -279,17 +360,36 @@ export function VatCalculator() {
   const vat = mode === 'add' ? a * rate / 100 : a * rate / (100 + rate);
   const net = mode === 'add' ? a : a - vat;
   const gross = mode === 'add' ? a + vat : a;
+  const resultText = `Net: ${net.toFixed(2)}\nVAT (${rate}%): ${vat.toFixed(2)}\nGross: ${gross.toFixed(2)}`;
+  const presets = [
+    { label: '100 + 20%', apply: () => { setAmount('100'); setRate(20); setMode('add'); } },
+    { label: '50 + 10%', apply: () => { setAmount('50'); setRate(10); setMode('add'); } },
+  ];
   return (
-    <Section title="VAT Calculator">
-      <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
-        <option value="add">Add VAT</option><option value="remove">Remove VAT</option>
-      </select>
-      <div className="flex gap-2">
-        <Input label="Value" type="number" value={amount} onChange={setAmount} />
-        <Input label="Value" type="number" value={rate} onChange={v => setRate(Number(v))} />
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-xs space-y-1"><div>Net: {net.toFixed(2)}</div><div>VAT ({rate}%): {vat.toFixed(2)}</div><div className="font-bold">Gross: {gross.toFixed(2)}</div></div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">VAT Calculator</h2>
+        <select className={selClass} value={mode} onChange={e => setMode(e.target.value)}>
+          <option value="add">Add VAT</option><option value="remove">Remove VAT</option>
+        </select>
+        <div className="flex gap-2">
+          <Input label="Value" type="number" value={amount} onChange={setAmount} />
+          <Input label="Value" type="number" value={rate} onChange={v => setRate(Number(v))} />
+        </div>
+        <div className="text-xs space-y-1"><div>Net: {net.toFixed(2)}</div><div>VAT ({rate}%): {vat.toFixed(2)}</div><div className="font-bold">Gross: {gross.toFixed(2)}</div></div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- TipCalculator ---
@@ -301,19 +401,38 @@ export function TipCalculator() {
   const b = Number(bill);
   const tip = b * pct / 100;
   const total = b + tip;
+  const resultText = `Tip: $${tip.toFixed(2)}\nTotal: $${total.toFixed(2)}\nEach: $${(total / split).toFixed(2)}`;
+  const presets = [
+    { label: '$50 18%', apply: () => { setBill('50'); setPct(18); } },
+    { label: '$100 20%', apply: () => { setBill('100'); setPct(20); } },
+  ];
   return (
-    <Section title="Tip Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>Bill</label><Input label="Value" type="number" value={bill} onChange={setBill} /></div>
-        <div><label className={labelClass}>Tip %</label><Input label="Value" type="number" value={pct} onChange={v => setPct(Number(v))} /></div>
-        <div><label className={labelClass}>Split</label><Input label="Value" type="number" min={1} value={split} onChange={v => setSplit(Number(v))} /></div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-xs space-y-1">
-        <div>Tip: ${tip.toFixed(2)}</div>
-        <div>Total: ${total.toFixed(2)}</div>
-        <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Tip Calculator</h2>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>Bill</label><Input label="Value" type="number" value={bill} onChange={setBill} /></div>
+          <div><label className={labelClass}>Tip %</label><Input label="Value" type="number" value={pct} onChange={v => setPct(Number(v))} /></div>
+          <div><label className={labelClass}>Split</label><Input label="Value" type="number" min={1} value={split} onChange={v => setSplit(Number(v))} /></div>
+        </div>
+        <div className="text-xs space-y-1">
+          <div>Tip: ${tip.toFixed(2)}</div>
+          <div>Total: ${total.toFixed(2)}</div>
+          <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
       </div>
-    </Section>
+    </>
   );
 }
 // --- SalesTaxCalculator ---
@@ -338,42 +457,61 @@ export function SalesTaxCalculator() {
   const a = Number(amount);
   const r = mode === 'state' && state ? (US_STATE_TAX[state] ?? 0) : Number(rate);
   const tax = a * r / 100;
+  const resultText = `Subtotal: $${a.toFixed(2)}\nTax (${r}%): $${tax.toFixed(2)}\nTotal: $${(a + tax).toFixed(2)}`;
+  const presets = [
+    { label: '$100 CA 7.25%', apply: () => { setAmount('100'); setMode('state'); setState('CA'); } },
+    { label: '$50 NY 8%', apply: () => { setAmount('50'); setMode('state'); setState('NY'); } },
+  ];
   return (
-    <Section title="Sales Tax Calculator">
-      <div className="flex gap-1 mb-2">
-        <button onClick={() => setMode('custom')} className={`px-3 py-1 text-xs rounded-lg border transition-colors ${mode === 'custom' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>Custom Rate</button>
-        <button onClick={() => setMode('state')} className={`px-3 py-1 text-xs rounded-lg border transition-colors ${mode === 'state' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>US State</button>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="flex gap-2">
-        <Input label="Price ($)" type="number" value={amount} onChange={setAmount} />
-        {mode === 'custom' ? (
-          <Input label="Tax Rate (%)" type="number" value={rate} onChange={setRate} />
-        ) : (
-          <div className="flex-1">
-            <label className="block text-xs font-medium mb-1">State</label>
-            <select value={state} onChange={e => setState(e.target.value)} className="w-full border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm bg-[var(--bg-surface)]">
-              <option value="">Select state</option>
-              {Object.entries(US_STATE_TAX).sort(([a], [b]) => a.localeCompare(b)).map(([abbr, rate]) => (
-                <option key={abbr} value={abbr}>{abbr} — {rate}%</option>
-              ))}
-            </select>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Sales Tax Calculator</h2>
+        <div className="flex gap-1 mb-2">
+          <button onClick={() => setMode('custom')} className={`px-3 py-1 text-xs rounded-lg border transition-colors ${mode === 'custom' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>Custom Rate</button>
+          <button onClick={() => setMode('state')} className={`px-3 py-1 text-xs rounded-lg border transition-colors ${mode === 'state' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>US State</button>
+        </div>
+        <div className="flex gap-2">
+          <Input label="Price ($)" type="number" value={amount} onChange={setAmount} />
+          {mode === 'custom' ? (
+            <Input label="Tax Rate (%)" type="number" value={rate} onChange={setRate} />
+          ) : (
+            <div className="flex-1">
+              <label className="block text-xs font-medium mb-1">State</label>
+              <select value={state} onChange={e => setState(e.target.value)} className="w-full border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm bg-[var(--bg-surface)]">
+                <option value="">Select state</option>
+                {Object.entries(US_STATE_TAX).sort(([a], [b]) => a.localeCompare(b)).map(([abbr, rate]) => (
+                  <option key={abbr} value={abbr}>{abbr} — {rate}%</option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+        <div className="text-xs space-y-1">
+          <div>Subtotal: ${a.toFixed(2)}</div>
+          <div>Tax ({r}%): ${tax.toFixed(2)}</div>
+          <div className="text-base font-bold">Total: ${(a + tax).toFixed(2)}</div>
+        </div>
+        {mode === 'state' && state && (
+          <div className="text-xs text-[var(--text-secondary)]">
+            {US_STATE_TAX[state] === 0
+              ? `${state} has no statewide sales tax — local rates may apply.`
+              : `Base state rate only. Local/county taxes may add 1-3% on top.`
+            }
           </div>
         )}
-      </div>
-      <div className="text-xs space-y-1">
-        <div>Subtotal: ${a.toFixed(2)}</div>
-        <div>Tax ({r}%): ${tax.toFixed(2)}</div>
-        <div className="text-base font-bold">Total: ${(a + tax).toFixed(2)}</div>
-      </div>
-      {mode === 'state' && state && (
-        <div className="text-xs text-[var(--text-secondary)]">
-          {US_STATE_TAX[state] === 0
-            ? `${state} has no statewide sales tax — local rates may apply.`
-            : `Base state rate only. Local/county taxes may add 1-3% on top.`
-          }
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
         </div>
-      )}
-    </Section>
+      </div>
+    </>
   );
 }
 // --- MarkupCalculator ---
@@ -384,18 +522,37 @@ export function MarkupCalculator() {
   const c = Number(cost), m = Number(markup);
   const price = c * (1 + m / 100);
   const profit = price - c;
+  const resultText = `Selling Price: $${price.toFixed(2)}\nProfit: $${profit.toFixed(2)}\nMargin: ${(profit / price * 100).toFixed(1)}%`;
+  const presets = [
+    { label: '$50 cost 40% markup', apply: () => { setCost('50'); setMarkup(40); } },
+    { label: '$100 cost 25%', apply: () => { setCost('100'); setMarkup(25); } },
+  ];
   return (
-    <Section title="Markup Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>Cost</label><Input label="Value" type="number" value={cost} onChange={setCost} /></div>
-        <div><label className={labelClass}>Markup %</label><Input label="Value" type="number" value={markup} onChange={v => setMarkup(Number(v))} /></div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-xs space-y-1">
-        <div>Selling Price: ${price.toFixed(2)}</div>
-        <div>Profit: ${profit.toFixed(2)}</div>
-        <div className="font-bold">Margin: {(profit / price * 100).toFixed(1)}%</div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Markup Calculator</h2>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>Cost</label><Input label="Value" type="number" value={cost} onChange={setCost} /></div>
+          <div><label className={labelClass}>Markup %</label><Input label="Value" type="number" value={markup} onChange={v => setMarkup(Number(v))} /></div>
+        </div>
+        <div className="text-xs space-y-1">
+          <div>Selling Price: ${price.toFixed(2)}</div>
+          <div>Profit: ${profit.toFixed(2)}</div>
+          <div className="font-bold">Margin: {(profit / price * 100).toFixed(1)}%</div>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
       </div>
-    </Section>
+    </>
   );
 }
 // --- ROICalculator ---
@@ -545,20 +702,39 @@ export function CurrencyConverter() {
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('EUR');
   const result = (Number(amount) / rates[from]) * rates[to];
+  const resultText = `${amount} ${from} = ${result.toFixed(2)} ${to}`;
+  const presets = [
+    { label: '100 USD→EUR', apply: () => { setAmount('100'); setFrom('USD'); setTo('EUR'); } },
+    { label: '1000 INR→USD', apply: () => { setAmount('1000'); setFrom('INR'); setTo('USD'); } },
+  ];
   return (
-    <Section title="Currency Converter">
-      <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={amount} onChange={setAmount} />
-        <select className={selClass} value={from} onChange={e => setFrom(e.target.value)}>
-          {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
-        </select>
-        <span>-</span>
-        <select className={selClass} value={to} onChange={e => setTo(e.target.value)}>
-          {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
-        </select>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-lg font-bold">{result.toFixed(2)} {to}</div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Currency Converter</h2>
+        <div className="flex gap-2 items-center">
+          <Input label="Value" type="number" value={amount} onChange={setAmount} />
+          <select className={selClass} value={from} onChange={e => setFrom(e.target.value)}>
+            {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
+          </select>
+          <span>-</span>
+          <select className={selClass} value={to} onChange={e => setTo(e.target.value)}>
+            {Object.keys(rates).map(c => <option key={c}>{c}</option>)}
+          </select>
+        </div>
+        <div className="text-lg font-bold">{result.toFixed(2)} {to}</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- CurrencyRateCalculator ---
@@ -1243,14 +1419,33 @@ export function PermutationCalculator() {
   const fact = (x: number): number => x <= 1 ? 1 : x * fact(x - 1);
   const nn = Number(n), rr = Number(r);
   const p = fact(nn) / fact(nn - rr);
+  const resultText = `P(${nn}, ${rr}) = ${isFinite(p) ? p.toFixed(0) : 'N/A'}`;
+  const presets = [
+    { label: '10P3', apply: () => { setN('10'); setR('3'); } },
+    { label: '5P2', apply: () => { setN('5'); setR('2'); } },
+  ];
   return (
-    <Section title="Permutations (nPr)">
-      <div className="flex gap-2 items-center">
-        <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />
-        <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-lg font-bold">P({nn}, {rr}) = {isFinite(p) ? p.toFixed(0) : 'N/A'}</div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Permutations (nPr)</h2>
+        <div className="flex gap-2 items-center">
+          <Input label="n" type="number" value={n} onChange={setN} placeholder="n" />
+          <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
+        </div>
+        <div className="text-lg font-bold">P({nn}, {rr}) = {isFinite(p) ? p.toFixed(0) : 'N/A'}</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- FactorialCalculator ---
@@ -2283,19 +2478,38 @@ export function SlopeCalculator() {
   const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
   const dx = c - a, dy = d - b;
   const slope = dx !== 0 ? dy / dx : Infinity;
+  const resultText = `Slope = ${isFinite(slope) ? slope.toFixed(4) : 'undefined'}\nEquation: y = ${isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}`;
+  const presets = [
+    { label: '(0,0) to (3,4)', apply: () => { setX1('0'); setY1('0'); setX2('3'); setY2('4'); } },
+    { label: '(1,2) to (5,8)', apply: () => { setX1('1'); setY1('2'); setX2('5'); setY2('8'); } },
+  ];
   return (
-    <Section title="Slope Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
-        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
-        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
-        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-sm font-mono">
-        <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>
-        <div>Equation: y = {isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}</div>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Slope Calculator</h2>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+          <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+          <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+          <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+        </div>
+        <div className="text-sm font-mono">
+          <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>
+          <div>Equation: y = {isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}</div>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
       </div>
-    </Section>
+    </>
   );
 }
 // --- MidpointCalculator ---
@@ -2304,16 +2518,35 @@ export function MidpointCalculator() {
   const [x1, setX1] = useState('0'); const [y1, setY1] = useState('0');
   const [x2, setX2] = useState('4'); const [y2, setY2] = useState('6');
   const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
+  const resultText = `Midpoint: (${(a + c) / 2}, ${(b + d) / 2})`;
+  const presets = [
+    { label: '(0,0) to (10,10)', apply: () => { setX1('0'); setY1('0'); setX2('10'); setY2('10'); } },
+    { label: '(2,4) to (6,8)', apply: () => { setX1('2'); setY1('4'); setX2('6'); setY2('8'); } },
+  ];
   return (
-    <Section title="Midpoint Calculator">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
-        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
-        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
-        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-lg font-bold">Midpoint: ({(a + c) / 2}, {(b + d) / 2})</div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Midpoint Calculator</h2>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+          <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+          <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+          <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+        </div>
+        <div className="text-lg font-bold">Midpoint: ({(a + c) / 2}, {(b + d) / 2})</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- DistanceCalculator ---
@@ -2323,16 +2556,35 @@ export function DistanceCalculator() {
   const [x2, setX2] = useState('3'); const [y2, setY2] = useState('4');
   const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
   const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
+  const resultText = `Distance: ${dist.toFixed(4)}`;
+  const presets = [
+    { label: '(0,0) to (3,4)', apply: () => { setX1('0'); setY1('0'); setX2('3'); setY2('4'); } },
+    { label: '(1,1) to (4,5)', apply: () => { setX1('1'); setY1('1'); setX2('4'); setY2('5'); } },
+  ];
   return (
-    <Section title="Distance Calculator (2D)">
-      <div className="flex gap-2">
-        <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
-        <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
-        <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
-        <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+    <>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
       </div>
-      <div className="text-lg font-bold">Distance: {dist.toFixed(4)}</div>
-    </Section>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">Distance Calculator (2D)</h2>
+        <div className="flex gap-2">
+          <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
+          <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
+          <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
+          <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+        </div>
+        <div className="text-lg font-bold">Distance: {dist.toFixed(4)}</div>
+        <div className="flex gap-2">
+          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      </div>
+    </>
   );
 }
 // --- BodyMassIndexCalculator ---

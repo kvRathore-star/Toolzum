@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function EmiCalculator() {
   const [principal, setPrincipal] = useState('100000');
@@ -8,6 +9,12 @@ export default function EmiCalculator() {
   const [emi, setEmi] = useState<number | null>(null);
   const [totalInterest, setTotalInterest] = useState<number | null>(null);
   const [totalPayment, setTotalPayment] = useState<number | null>(null);
+
+  const presets = [
+    { label: '$100K, 10%, 12mo', apply: () => { setPrincipal('100000'); setRate('10'); setTenure('12'); } },
+    { label: '$500K, 8%, 60mo', apply: () => { setPrincipal('500000'); setRate('8'); setTenure('60'); } },
+    { label: '$1M, 7%, 120mo', apply: () => { setPrincipal('1000000'); setRate('7'); setTenure('120'); } },
+  ];
 
   const calculate = () => {
     const p = parseFloat(principal);
@@ -24,8 +31,20 @@ export default function EmiCalculator() {
     setTotalInterest(totalPay - p);
   };
 
+  const resultText = emi !== null ? `Monthly EMI: $${emi.toFixed(2)} | Total Interest: $${totalInterest?.toFixed(2)} | Total Payment: $${totalPayment?.toFixed(2)}` : '';
+
+  const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
+  const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='emi-calculation.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div className="flex flex-wrap gap-2">
+        {presets.map((p) => (
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            {p.label}
+          </button>
+        ))}
+      </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
@@ -72,6 +91,13 @@ export default function EmiCalculator() {
                  <div className="text-xs text-amber-600 font-bold uppercase mb-1">Total Payment</div>
                  <div className="text-xl font-bold text-amber-700 dark:text-amber-400 mt-2">${totalPayment?.toFixed(2)}</div>
                </div>
+            </div>
+          )}
+
+          {emi !== null && (
+            <div className="flex gap-2">
+              <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
             </div>
           )}
       </div>
