@@ -287,7 +287,7 @@ export function BarcodeGenerator() {
             </div>
             <div>
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Show Text</label>
-              <select value={showText} onChange={e => setShowText(e.target.value === 'true')}
+              <select value={String(showText)} onChange={e => setShowText(e.target.value === 'true')}
                 className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-orange-500/50">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
@@ -582,7 +582,7 @@ export function ColorPaletteGenerator() {
     return rgbToHex(Math.round((r + m) * 255), Math.round((g + m) * 255), Math.round((b + m) * 255));
   };
 
-  const baseHsl = hslFromRgb(...Object.values(hexToRgb(base)));
+  const rgb = hexToRgb(base); const baseHsl = hslFromRgb(rgb.r, rgb.g, rgb.b);
 
   const generatePalette = () => {
     const colors: string[] = [];

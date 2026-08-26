@@ -26,11 +26,11 @@ function useCopy() {
   return { copied, copy };
 }
 
-function CountSlider({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+function CountSlider({ value, onChange, max = 20 }: { value: number; onChange: (v: number) => void; max?: number }) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-[var(--text-secondary)]">Count</span>
-      <input type="range" min={1} max={20} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 h-1" />
+      <input type="range" min={1} max={max} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 h-1" />
       <span className="text-sm text-[var(--text-muted)] w-5 text-right">{value}</span>
     </div>
   );

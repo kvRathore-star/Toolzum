@@ -650,7 +650,7 @@ export function TestDataGenerator() {
         ))}
       </div>
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {name, type})</label>
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {"{name, type}"})</label>
         <textarea value={schema} onChange={e => setSchema(e.target.value)} rows={6} placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500/50 resize-y" />
 

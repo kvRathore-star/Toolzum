@@ -6,6 +6,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 import QRCodeLib from 'qrcode';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { labelClass } from '../MiscToolsShared';
 
 function randInt(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function randItem<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }

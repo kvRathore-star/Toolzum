@@ -96,7 +96,7 @@ export function PasswordEntropyCalculator() {
         <input type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-500/50" />
 
-        <button onClick={calc} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Calculate Entropy</button>
+        <button onClick={() => calc()} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Calculate Entropy</button>
 
         {result && (
           <div className="space-y-3">
@@ -186,7 +186,7 @@ export function TwoFactorAuthGenerator() {
         </div>
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Secret Key (Base32)</label>
-        <input type="text" value={secret} onChange={setSecret} placeholder="Leave blank to generate"
+        <input type="text" value={secret} onChange={e => setSecret(e.target.value)} placeholder="Leave blank to generate"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
@@ -202,7 +202,7 @@ export function TwoFactorAuthGenerator() {
           </div>
         </div>
 
-        <button onClick={gen} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Generate URI</button>
+        <button onClick={() => gen()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Generate URI</button>
 
         {uri && (
           <div className="space-y-3">
@@ -337,7 +337,7 @@ export function BruteForceTimeEstimator() {
           </div>
         </div>
 
-        <button onClick={calc} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Estimate Time</button>
+        <button onClick={() => calc()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Estimate Time</button>
 
         {est && (
           <div className="space-y-3">
@@ -538,7 +538,7 @@ export function HashVerifier() {
         <input type="text" value={hash} onChange={e => { setHash(e.target.value); setMatch(null); }} placeholder="Enter hash..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
 
-        <button onClick={verify} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Verify</button>
+        <button onClick={() => verify()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Verify</button>
 
         {match !== null && (
           <div className="space-y-3">
@@ -871,7 +871,7 @@ export function JwtInspector() {
         <textarea value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
-        <button onClick={inspect} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Inspect</button>
+        <button onClick={() => inspect()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Inspect</button>
 
         {isValid !== null && (
           <div className="space-y-3">
@@ -1301,7 +1301,7 @@ export function JsonValidator() {
             className="flex-1 min-w-[300px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-lime-500/50 resize-y" />
         </div>
 
-        <button onClick={validate} className="px-5 py-2.5 bg-lime-500 hover:bg-lime-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
+        <button onClick={() => validate()} className="px-5 py-2.5 bg-lime-500 hover:bg-lime-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
 
         {isValid !== null && (
           <div className="space-y-3">
@@ -1317,7 +1317,7 @@ export function JsonValidator() {
               )}
             </div>
 
-            {isValid && parsed && (
+            {isValid && parsed !== null && (
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700 max-h-[300px] overflow-auto">
                 <pre className="text-xs font-mono whitespace-pre-wrap">{JSON.stringify(parsed, null, 2)}</pre>
               </div>
@@ -1401,7 +1401,7 @@ export function YamlValidator() {
         <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIssues([]); setIsValid(null); setParsed(null); }} rows={8} placeholder="key: value"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 resize-y" />
 
-        <button onClick={validate} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
+        <button onClick={() => validate()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
 
         {isValid !== null && (
           <div className="space-y-3">
@@ -1421,7 +1421,7 @@ export function YamlValidator() {
               </div>
             )}
 
-            {parsed && (
+            {parsed !== null && (
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700 max-h-[300px] overflow-auto">
                 <pre className="text-xs font-mono whitespace-pre-wrap">{JSON.stringify(parsed, null, 2)}</pre>
               </div>

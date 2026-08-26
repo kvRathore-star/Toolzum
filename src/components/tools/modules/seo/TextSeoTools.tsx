@@ -236,7 +236,7 @@ export function WordFrequencyCounter() {
               ))}
             </div>
             <div className="text-xs text-[var(--text-muted)] mt-2">
-              Showing {frequencies.length} of {Object.keys(frequencies.reduce((acc, f) => { acc[f.word] = f.count; return acc; }, {})).length} unique words
+              Showing {frequencies.length} of {Object.keys(frequencies.reduce((acc: Record<string, number>, f) => { acc[f.word] = f.count; return acc; }, {})).length} unique words
             </div>
           </div>
         )}
@@ -810,7 +810,7 @@ export function TextSorter() {
   const resultText = sorted ? `Sorted ${outLines} lines (${sortMethod})` : 'Enter lines to sort';
 
   return (
-    <CalculatorShell title="Text Sorter" result={resultText} onCalculate={sort} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
+    <CalculatorShell title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
         <textarea value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
@@ -859,7 +859,7 @@ export function TextDeduplicator() {
   return (
     <CalculatorShell title="Text Deduplicator" result={resultText} onCalculate={deduplicate} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Lines</label>
-      <textarea value={text} onChange={setText} rows={8}
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 resize-y" />
 
       <button onClick={deduplicate} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Duplicates</button>
@@ -1092,7 +1092,7 @@ export function DuplicateWordRemover() {
     <CalculatorShell title="Duplicate Word Remover" result={resultText} onCalculate={remove} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
       <p className="text-sm text-[var(--text-secondary)] mb-3">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text (${inWords} words)</label>
-      <textarea value={text} onChange={setText} rows={6} placeholder="Paste text..."
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50 resize-y" />
 
       <button onClick={remove} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Duplicate Words</button>
@@ -1126,7 +1126,7 @@ export function TextCleaner() {
   return (
     <CalculatorShell title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text to clean..."
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to clean..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-y" />
 
       <button onClick={clean} className="px-5 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Clean Text</button>
@@ -1159,7 +1159,7 @@ export function TextSplitter() {
   return (
     <CalculatorShell title="Text Splitter" result={resultText} onCalculate={split} presets={presets} accent="violet" downloadData={result} downloadFilename="split.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text to split..."
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to split..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Delimiter</label>
@@ -1198,7 +1198,7 @@ export function TrailingSpaceRemover() {
   return (
     <CalculatorShell title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea value={text} onChange={setText} rows={6} placeholder="Enter text with trailing spaces..."
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text with trailing spaces..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 resize-y" />
 
       <button onClick={trim} className="px-5 py-2.5 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Remove Trailing Spaces</button>
