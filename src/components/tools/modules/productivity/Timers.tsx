@@ -3,11 +3,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
-      <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
-        <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
-        {children}
-      </div>
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6">
+      <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
+      {children}
     </div>
   );
 }
