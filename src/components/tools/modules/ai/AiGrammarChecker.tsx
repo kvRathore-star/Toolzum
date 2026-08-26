@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 interface GrammarError {
   start: number;
@@ -154,6 +155,8 @@ export default function AiGrammarChecker() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(handleCheck);
+
   const handleFixAll = () => {
     try {
       const fixed = applyFixes(input, errors);
@@ -249,8 +252,10 @@ export default function AiGrammarChecker() {
         </div>
 
         <div className="flex gap-3">
-          <button onClick={handleCheck} disabled={isLoading || !input.trim()}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
+          <button onClick={handleCheck} onKeyDown={handleKeyDown} disabled={isLoading || !input.trim()}
+            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isLoading ? 'Checking grammar...' : 'Check grammar'}
+          >
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
@@ -261,7 +266,9 @@ export default function AiGrammarChecker() {
             {isLoading ? 'Checking...' : 'Check Grammar'}
           </button>
           <button onClick={handleClear}
-            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer">
+            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label="Clear text"
+          >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>

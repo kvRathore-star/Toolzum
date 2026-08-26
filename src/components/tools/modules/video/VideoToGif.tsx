@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Film, Image } from 'lucide-react';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 type InputMode = 'video' | 'image';
 
@@ -61,6 +62,8 @@ export default function VideoToGif() {
       setIsProcessing(false);
     }
   };
+
+  const handleKeyDown = useEnterToSubmit(convertToGif);
 
   const isReady = mode === 'video' ? !!videoFile : imageFiles.length > 0;
 
@@ -134,7 +137,7 @@ export default function VideoToGif() {
                 <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Frames per Second</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[5, 10, 15].map(v => <button key={v} onClick={() => setFps(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${fps === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v} FPS</button>)}</div></div>
                 <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Width</label><div className="grid grid-cols-3 gap-1.5 mt-1.5">{[320, 480, 640].map(v => <button key={v} onClick={() => setWidth(v)} className={`py-2 text-[10px] font-bold border rounded-lg ${width === v ? 'bg-fuchsia-600 text-white border-fuchsia-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>{v}px</button>)}</div></div>
               </div>
-              <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} disabled={isProcessing} className="w-full bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">{isProcessing ? 'Generating...' : 'Create Animated GIF'}</button>}</div>
+              <div className="flex flex-col justify-end">{outputUrl ? null : <button onClick={convertToGif} onKeyDown={handleKeyDown} disabled={isProcessing} className="w-full bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" aria-label={isProcessing ? 'Generating GIF...' : 'Create animated GIF'}>{isProcessing ? 'Generating...' : 'Create Animated GIF'}</button>}</div>
             </div>
           </div>
         )
@@ -162,7 +165,7 @@ export default function VideoToGif() {
           <div className="bg-zinc-100 dark:bg-black rounded-xl overflow-hidden p-4 flex items-center justify-center" style={{backgroundImage: 'linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee)', backgroundSize: '20px 20px', backgroundPosition: '0 0,10px 10px'}}>
             <img  loading="lazy" src={outputUrl} alt="Generated GIF" className="max-w-full max-h-[250px] object-contain rounded drop-shadow-md" />
           </div>
-          <button onClick={() => downloadOrShare(outputUrl, `animated.gif`)} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+          <button onClick={() => downloadOrShare(outputUrl, `animated.gif`)} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" aria-label="Download generated GIF">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download GIF
           </button>

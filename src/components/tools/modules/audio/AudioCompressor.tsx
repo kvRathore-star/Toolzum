@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { fetchFile } from '@ffmpeg/util';
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 type OutputFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
 
@@ -121,6 +122,8 @@ export default function AudioCompressor() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(processAudio);
+
   const gainReduction = simulateGainReduction(threshold, ratio, knee);
   const sliderClass = (val: number, min: number, max: number) =>
     ((val - min) / (max - min)) * 100;
@@ -231,7 +234,9 @@ export default function AudioCompressor() {
           {isLoaded && !isProcessing && !outputUrl && (
             <button
               onClick={processAudio}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]"
+              onKeyDown={handleKeyDown}
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              aria-label={isProcessing ? 'Compressing audio...' : 'Compress audio'}
             >
               Compress Audio
             </button>
@@ -297,7 +302,8 @@ export default function AudioCompressor() {
                     const fmt = OUTPUT_FORMATS.find(f => f.value === outputFormat)!;
                     downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^.]+$/, '')}.${fmt.ext}`);
                   }}
-                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label={`Download compressed audio as ${OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}`}
                 >
                   Download {OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}
                 </button>

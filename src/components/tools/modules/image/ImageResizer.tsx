@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { usePresetContext } from '@/context/WorkflowPresetContext';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function ImageResizer() {
   const [image, setImage] = useState<string | null>(null);
@@ -54,6 +55,8 @@ export default function ImageResizer() {
     };
   };
 
+  const handleKeyDown = useEnterToSubmit(download);
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
@@ -78,7 +81,12 @@ export default function ImageResizer() {
          )}
 
          {image && (
-           <button onClick={download} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+           <button 
+             onClick={download} 
+             onKeyDown={handleKeyDown}
+             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+             aria-label="Download resized image"
+           >
              Download Resized Image
            </button>
          )}

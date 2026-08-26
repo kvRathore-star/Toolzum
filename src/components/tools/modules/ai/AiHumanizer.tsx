@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 type Tone = 'casual' | 'professional' | 'friendly' | 'natural' | 'storytelling';
 type Creativity = 'low' | 'medium' | 'high';
@@ -250,6 +251,8 @@ export default function AiHumanizer() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(handleHumanize);
+
   const handleCopy = () => {
     if (!output) return;
     navigator.clipboard.writeText(output);
@@ -351,8 +354,10 @@ export default function AiHumanizer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <button onClick={handleHumanize} disabled={isLoading || !input.trim()}
-              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
+            <button onClick={handleHumanize} onKeyDown={handleKeyDown} disabled={isLoading || !input.trim()}
+              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              aria-label={isLoading ? 'Humanizing text...' : 'Humanize text'}
+            >
               {isLoading ? (
                 <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Humanizing...</>
               ) : (

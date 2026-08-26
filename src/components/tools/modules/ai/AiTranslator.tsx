@@ -7,6 +7,7 @@ import AiSettings from '../../AiSettings';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { getErrorMessage } from '@/utils/error';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function AITranslator() {
   const { generateCompletion } = useAiProvider();
@@ -47,6 +48,8 @@ ${inputText}`;
       setIsTranslating(false);
     }
   };
+
+  const handleKeyDown = useEnterToSubmit(handleTranslate);
 
   const swapLanguages = () => {
     if (sourceLang === 'Auto Detect') return;
@@ -125,8 +128,8 @@ ${inputText}`;
             {outputText && (
               <button 
                 onClick={copyToClipboard}
-                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors"
-                aria-label="Copy"
+                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Copy translation to clipboard"
               >
                 <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
               </button>
@@ -136,8 +139,10 @@ ${inputText}`;
 
         <button
           onClick={handleTranslate}
+          onKeyDown={handleKeyDown}
           disabled={isTranslating || !inputText.trim()}
-          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          aria-label={isTranslating ? 'Translating text...' : 'Translate text'}
         >
           {isTranslating ? (
             <>

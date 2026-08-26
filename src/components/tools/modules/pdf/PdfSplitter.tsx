@@ -5,6 +5,7 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { PDFDocument } from 'pdf-lib';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function PdfSplitter() {
   const [file, setFile] = useState<File | null>(null);
@@ -104,6 +105,8 @@ export default function PdfSplitter() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(splitPdf);
+
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
@@ -157,8 +160,10 @@ export default function PdfSplitter() {
 
           <button 
             onClick={splitPdf}
+            onKeyDown={handleKeyDown}
             disabled={isProcessing || !rangeInput.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isProcessing ? 'Extracting pages...' : 'Extract pages from PDF'}
           >
             {isProcessing ? "Processing..." : "Extract Pages"}
           </button>

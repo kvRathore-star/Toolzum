@@ -7,6 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function VideoSpeedChanger() {
   const [file, setFile] = useState<File | null>(null);
@@ -114,6 +115,8 @@ export default function VideoSpeedChanger() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(processVideo);
+
   const outputDuration = originalDuration > 0 ? originalDuration / speed : 0;
 
   const formatDuration = (seconds: number): string => {
@@ -195,11 +198,13 @@ export default function VideoSpeedChanger() {
                   <button
                     key={p}
                     onClick={() => setSpeed(p)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       speed === p
                         ? 'bg-blue-600 text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
+                    aria-label={`Set speed to ${p}x`}
+                    aria-pressed={speed === p}
                   >
                     {p}x
                   </button>
@@ -222,8 +227,10 @@ export default function VideoSpeedChanger() {
 
             <button
               onClick={processVideo}
+              onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              aria-label={isProcessing ? `Processing video ${progress}%` : `Change speed to ${speed}x`}
             >
               {isProcessing && (
                 <div
@@ -243,7 +250,8 @@ export default function VideoSpeedChanger() {
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `speed_${speed}x_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Download speed-changed video"
               >
                 Download Video
               </button>

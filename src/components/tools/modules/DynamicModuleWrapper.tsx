@@ -718,7 +718,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'random-team-generator': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomTeamGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-team-generator" /> }),
   'random-picker-generator': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomPickerGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-picker-generator" /> }),
   'random-decision-maker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="random-decision-maker" /> }),
-  'yes-no-picker': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomDecisionMaker })), { ssr: false, loading: () => <DynamicImportFallback slug="yes-no-picker" /> }),
+
   'random-username-generator': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomUsernameGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-username-generator" /> }),
   'random-token-generator': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.RandomTokenGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="random-token-generator" /> }),
   'lorem-ipsum-generator': dynamic(() => import('@/components/tools/modules/utility/Generators').then(m => ({ default: m.LoremIpsumGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="lorem-ipsum-generator" /> }),
@@ -829,16 +829,13 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'daylight-saving-time-checker': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.DaylightSavingTimeChecker })), { ssr: false, loading: () => <DynamicImportFallback slug="daylight-saving-time-checker" /> }),
   'work-hours-calculator': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.WorkHoursCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="work-hours-calculator" /> }),
   'hours-minutes-calculator': dynamic(() => import('@/components/tools/modules/MiscellaneousTools1').then(m => ({ default: m.HoursMinutesCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="hours-minutes-calculator" /> }),
-  'minutes-to-hours-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="time-converter" /> })), { ssr: false, loading: () => <DynamicImportFallback slug="minutes-to-hours-converter" /> }),
 
-  'seconds-to-minutes-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="time-converter" /> })), { ssr: false, loading: () => <DynamicImportFallback slug="seconds-to-minutes-converter" /> }),
 
 
   'acv-calculator': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.AnnualContractValueCalculator })), { ssr: false, loading: () => <DynamicImportFallback slug="acv-calculator" /> }),
   'ascii-table-generator': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.AsciiTableGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="ascii-table-generator" /> }),
   'git-commit-linter': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.GitCommitLinter })), { ssr: false, loading: () => <DynamicImportFallback slug="git-commit-linter" /> }),
   'gitignore-generator': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.GitignoreGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="gitignore-generator" /> }),
-  'hours-to-minutes-converter': dynamic(() => import('@/components/tools/modules/shared/UnitConverter').then(m => ({ default: () => <m.default slug="time-converter" /> })), { ssr: false, loading: () => <DynamicImportFallback slug="hours-to-minutes-converter" /> }),
   'saas-payback-period': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SaasPaybackPeriod })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-payback-period" /> }),
   'saas-quick-ratio': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SaasQuickRatio })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-quick-ratio" /> }),
   'saas-rule-of-40': dynamic(() => import('@/components/tools/modules/utility/ExtraTools').then(m => ({ default: m.SaasRuleOf40 })), { ssr: false, loading: () => <DynamicImportFallback slug="saas-rule-of-40" /> }),

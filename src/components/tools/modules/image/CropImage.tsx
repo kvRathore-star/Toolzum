@@ -7,6 +7,7 @@ import { FileUploader } from '../../FileUploader';
 import { Crop, RotateCw, RefreshCcw, Download, FlipHorizontal, FlipVertical, Trash2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function CropImage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -68,6 +69,8 @@ export default function CropImage() {
     setImageFile(null);
     setImageSrc(null);
   };
+
+  const handleKeyDown = useEnterToSubmit(handleCrop);
 
   if (!imageSrc) {
     return (
@@ -136,7 +139,7 @@ export default function CropImage() {
                 <button
                   key={idx}
                   onClick={() => changeAspectRatio(ratio.value)}
-                  className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer ${
+                  className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                     aspectRatio === ratio.value
                       ? 'bg-[var(--accent-ink)] border-indigo-600 text-white'
                       : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)]'
@@ -153,28 +156,32 @@ export default function CropImage() {
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleRotate(-90)}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Rotate left 90 degrees"
               >
                 <RefreshCcw className="w-3.5 h-3.5" />
                 Rotate -90°
               </button>
               <button
                 onClick={() => handleRotate(90)}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Rotate right 90 degrees"
               >
                 <RotateCw className="w-3.5 h-3.5" />
                 Rotate +90°
               </button>
               <button
                 onClick={() => handleFlip('h')}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Flip image horizontally"
               >
                 <FlipHorizontal className="w-3.5 h-3.5" />
                 Flip Horiz
               </button>
               <button
                 onClick={() => handleFlip('v')}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Flip image vertically"
               >
                 <FlipVertical className="w-3.5 h-3.5" />
                 Flip Vert
@@ -191,7 +198,9 @@ export default function CropImage() {
             </button>
             <button
               onClick={handleCrop}
-              className="w-full py-3.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+              onKeyDown={handleKeyDown}
+              className="w-full py-3.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              aria-label="Crop and download image"
             >
               <Download className="w-4 h-4" />
               Crop & Download

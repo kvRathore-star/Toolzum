@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { fetchFile } from '@ffmpeg/util';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 type Mode = 'instrumental' | 'acapella' | 'both';
 type OutFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
@@ -135,6 +136,8 @@ export default function VocalRemover() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(processAudio);
+
   if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center py-16 space-y-4">
@@ -204,8 +207,10 @@ export default function VocalRemover() {
         </div>
 
         {!isProcessing && !outputUrl && !outputUrl2 && (
-          <button onClick={processAudio}
-            className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+          <button onClick={processAudio} onKeyDown={handleKeyDown}
+            className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isProcessing ? 'Processing audio...' : 'Process audio'}
+          >
             Process Audio
           </button>
         )}
@@ -229,7 +234,9 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Instrumental (Karaoke)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_instrumental.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Download instrumental track"
+                >
                   Download Instrumental
                 </button>
               </div>
@@ -239,7 +246,9 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_vocals.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Download vocals track"
+                >
                   Download Vocals
                 </button>
               </div>
@@ -249,7 +258,9 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl2} />
                 <button onClick={() => downloadOrShare(outputUrl2, `${baseName}_vocals.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Download vocals track"
+                >
                   Download Vocals
                 </button>
               </div>

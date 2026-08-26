@@ -7,6 +7,12 @@
 /minutes-to-hours-converter   /time-converter   301
 /seconds-to-minutes-converter   /time-converter   301
 /hours-to-minutes-converter   /time-converter   301
+/utility/minutes-to-hours-converter   /utility/time-converter   301
+/utility/seconds-to-minutes-converter   /utility/time-converter   301
+/utility/hours-to-minutes-converter   /utility/time-converter   301
+/developer/minutes-to-hours-converter   /utility/time-converter   301
+/developer/seconds-to-minutes-converter   /utility/time-converter   301
+/developer/hours-to-minutes-converter   /utility/time-converter   301
 
 # Category migration — tool moved from Finance to Indian Utilities
 /finance/gst-calculator/   /indian-utilities/gst-calculator/   301
@@ -375,8 +381,8 @@
 # Removed utility duplicates — redirect to canonical
 /utility/dice-roller-tool/   /utility/dice-roller/   301
 /utility/dice-roller-tool    /utility/dice-roller/   301
-/utility/hours-to-minutes-tool/   /utility/hours-to-minutes-converter/   301
-/utility/hours-to-minutes-tool    /utility/hours-to-minutes-converter/   301
+/utility/hours-to-minutes-tool/   /utility/time-converter/   301
+/utility/hours-to-minutes-tool    /utility/time-converter/   301
 /utility/speed-converter-advanced/   /utility/speed-converter/   301
 /utility/speed-converter-advanced    /utility/speed-converter/   301
 /utility/number-words-tools/   /utility/number-to-words-converter/   301
@@ -514,8 +520,8 @@
 /developer/markdown-slack-converter    /converter/markdown-slack-converter/   301
 /developer/meeting-time-planner/   /calculator/meeting-time-planner/   301
 /developer/meeting-time-planner    /calculator/meeting-time-planner/   301
-/developer/minutes-to-hours-converter/   /utility/minutes-to-hours-converter/   301
-/developer/minutes-to-hours-converter    /utility/minutes-to-hours-converter/   301
+/developer/minutes-to-hours-converter/   /utility/time-converter/   301
+/developer/minutes-to-hours-converter    /utility/time-converter/   301
 /developer/nickname-generator/   /utility/nickname-generator/   301
 /developer/nickname-generator    /utility/nickname-generator/   301
 /developer/number-base-converter/   /converter/number-base-converter/   301

@@ -293,7 +293,7 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "time-duration-calculator": { category: "calculator", slug: "time-duration-calculator", sourceCategory: "developer" },
   "random-time-generator": { category: "utility", slug: "random-time-generator", sourceCategory: "developer" },
   "list-converter": { category: "utility", slug: "list-converter", sourceCategory: "developer" },
-  "minutes-to-hours-converter": { category: "utility", slug: "minutes-to-hours-converter", sourceCategory: "developer" },
+  "minutes-to-hours-converter": { category: "utility", slug: "time-converter", sourceCategory: "developer" },
   "text-to-html-converter": { category: "converter", slug: "text-to-html-converter", sourceCategory: "seo" },
   "yaml-json-converter": { category: "converter", slug: "yaml-json-converter", sourceCategory: "developer" },
   "hours-minutes-calculator": { category: "calculator", slug: "hours-minutes-calculator", sourceCategory: "developer" },
@@ -337,7 +337,7 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "text-sorter": { category: "text", slug: "text-sorter", sourceCategory: "seo" },
   "time-converter": { category: "utility", slug: "time-converter", sourceCategory: "converter" },
   "cidr-calculator": { category: "developer", slug: "cidr-calculator", sourceCategory: "utility" },
-  "salary-calculator": { category: "finance", slug: "salary-calculator", sourceCategory: ["hr", "calculator"] },
+  "salary-calculator": { category: "finance", slug: "salary-calculator", sourceCategory: ["calculator"] },
   "savings-calculator": { category: "finance", slug: "savings-calculator", sourceCategory: "calculator" },
   "rent-vs-buy-calculator": { category: "finance", slug: "rent-vs-buy-calculator", sourceCategory: "calculator" },
   "percentage-difference-calculator": { category: "calculator", slug: "percentage-difference-calculator", sourceCategory: "utility" },
@@ -367,6 +367,8 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "profit-margin-calculator": { category: "finance", slug: "profit-margin-calculator", sourceCategory: "calculator" },
   "steps-to-calories-calculator": { category: "health", slug: "steps-to-calories-calculator", sourceCategory: "calculator" },
   "tds-calculator-india": { category: "finance", slug: "tds-calculator-india", sourceCategory: "calculator" },
+  "seconds-to-minutes-converter": { category: "utility", slug: "time-converter", sourceCategory: "developer" },
+  "hours-to-minutes-converter": { category: "utility", slug: "time-converter", sourceCategory: "developer" },
 };
 
 

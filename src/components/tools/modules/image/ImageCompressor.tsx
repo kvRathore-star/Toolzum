@@ -8,6 +8,7 @@ import { Download, RefreshCw, Sliders, Image as ImageIcon, Zap } from 'lucide-re
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { usePresetContext } from '@/context/WorkflowPresetContext';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function ImageCompressor() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -94,6 +95,8 @@ export default function ImageCompressor() {
     if (!compressedUrl) return;
     downloadOrShare(compressedUrl, `compressed-${imageFile?.name || 'image.jpg'}`);
   };
+
+  const handleKeyDown = useEnterToSubmit(handleCompress);
 
   const reset = () => {
     setImageFile(null);
@@ -192,8 +195,10 @@ export default function ImageCompressor() {
 
           <button
             onClick={handleCompress}
+            onKeyDown={handleKeyDown}
             disabled={isProcessing}
             className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isProcessing ? 'Compressing image...' : 'Apply compression settings'}
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -249,6 +254,7 @@ alt="Uploaded image preview"
               <button
                 onClick={handleDownload}
                 className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Download compressed image"
               >
                 <Download className="w-4 h-4" />
                 Download Output

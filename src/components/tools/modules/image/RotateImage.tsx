@@ -4,6 +4,7 @@ import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
 import { RotateCcw, RotateCw, Download, FlipHorizontal, FlipVertical } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function RotateImage() {
   const [image, setImage] = useState<string | null>(null);
@@ -59,6 +60,8 @@ export default function RotateImage() {
     };
   };
 
+  const handleKeyDown = useEnterToSubmit(download);
+
   const previewStyle = {
     transform: `rotate(${rotation}deg) scaleX(${flipH ? -1 : 1}) scaleY(${flipV ? -1 : 1})`,
   };
@@ -87,22 +90,44 @@ export default function RotateImage() {
            <div className="space-y-4">
              {/* Quick rotate buttons */}
              <div className="flex flex-wrap gap-2 items-center justify-center">
-               <button onClick={() => handleRotate(-90)} className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm">
-                 <RotateCcw className="w-4 h-4" /> 90° Left
-               </button>
-               <button onClick={() => handleRotate(90)} className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm">
-                 <RotateCw className="w-4 h-4" /> 90° Right
-               </button>
-               <button onClick={() => handleRotate(180)} className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm">
-                 180°
-               </button>
+                <button 
+                  onClick={() => handleRotate(-90)} 
+                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Rotate left 90 degrees"
+                >
+                  <RotateCcw className="w-4 h-4" /> 90° Left
+                </button>
+                <button 
+                  onClick={() => handleRotate(90)} 
+                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Rotate right 90 degrees"
+                >
+                  <RotateCw className="w-4 h-4" /> 90° Right
+                </button>
+                <button 
+                  onClick={() => handleRotate(180)} 
+                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Rotate 180 degrees"
+                >
+                  180°
+                </button>
                <div className="w-px h-6 bg-[var(--border-subtle)]" />
-               <button onClick={() => setFlipH(!flipH)} className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm ${flipH ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}>
-                 <FlipHorizontal className="w-4 h-4" /> Flip H
-               </button>
-               <button onClick={() => setFlipV(!flipV)} className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm ${flipV ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}>
-                 <FlipVertical className="w-4 h-4" /> Flip V
-               </button>
+                <button 
+                  onClick={() => setFlipH(!flipH)} 
+                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${flipH ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}
+                  aria-label="Flip image horizontally"
+                  aria-pressed={flipH}
+                >
+                  <FlipHorizontal className="w-4 h-4" /> Flip H
+                </button>
+                <button 
+                  onClick={() => setFlipV(!flipV)} 
+                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${flipV ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}
+                  aria-label="Flip image vertically"
+                  aria-pressed={flipV}
+                >
+                  <FlipVertical className="w-4 h-4" /> Flip V
+                </button>
              </div>
 
              {/* Arbitrary rotation slider */}
@@ -121,7 +146,12 @@ export default function RotateImage() {
              <div className="flex flex-wrap gap-2 items-center justify-center">
                <button onClick={() => { setRotation(0); setFlipH(false); setFlipV(false); }}
                  className="text-sm text-[var(--text-secondary)] underline">Reset All</button>
-               <button onClick={download} className="flex items-center gap-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95">
+                <button 
+                  onClick={download} 
+                  onKeyDown={handleKeyDown}
+                  className="flex items-center gap-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label="Download rotated image"
+                >
                  <Download className="w-5 h-5" /> Download
                </button>
                <button onClick={() => { setImage(null); setRotation(0); setFlipH(false); setFlipV(false); }}

@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function AudioCutter() {
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
@@ -85,6 +86,8 @@ export default function AudioCutter() {
       setIsProcessing(false);
     }
   };
+
+  const handleKeyDown = useEnterToSubmit(cutAudio);
 
   if (!isLoaded) {
     return (
@@ -189,10 +192,12 @@ export default function AudioCutter() {
                  </div>
                </div>
              ) : (
-               <button 
-                 onClick={cutAudio}
-                 className="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
-               >
+                <button 
+                  onClick={cutAudio}
+                  onKeyDown={handleKeyDown}
+                  className="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  aria-label={isProcessing ? 'Trimming audio...' : 'Trim audio'}
+                >
                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                  Cut Audio
                </button>

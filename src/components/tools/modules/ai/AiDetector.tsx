@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 interface Breakdown {
   burstiness: { score: number; variance: number; stdDev: number; avgLength: number };
@@ -179,6 +180,8 @@ export default function AiDetector() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(handleAnalyze);
+
   const handlePaste = async () => {
     try {
       const text = await navigator.clipboard.readText();
@@ -259,10 +262,18 @@ export default function AiDetector() {
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium text-[var(--text-primary)]">Input Text</label>
             <div className="flex gap-2">
-              <button onClick={handlePaste} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button 
+                onClick={handlePaste} 
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Paste text from clipboard"
+              >
                 Paste
               </button>
-              <button onClick={handleClear} className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors">
+              <button 
+                onClick={handleClear} 
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Clear input text"
+              >
                 Clear
               </button>
             </div>
@@ -287,8 +298,10 @@ export default function AiDetector() {
 
           <button
             onClick={handleAnalyze}
+            onKeyDown={handleKeyDown}
             disabled={isLoading || !input.trim()}
-            className="w-full py-3.5 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+            className="w-full py-3.5 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isLoading ? 'Analyzing text...' : 'Analyze text for AI patterns'}
           >
             {isLoading ? (
               <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Analyzing...</>

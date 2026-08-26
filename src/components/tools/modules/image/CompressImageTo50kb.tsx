@@ -6,6 +6,7 @@ import imageCompression from 'browser-image-compression';
 import { Download, RefreshCw, AlertTriangle, ShieldCheck, Zap } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function CompressImageTo50kb() {
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -86,6 +87,8 @@ export default function CompressImageTo50kb() {
     downloadOrShare(compressedUrl, `compressed-50kb-${imageFile?.name || 'photo.jpg'}`);
   };
 
+  const handleKeyDown = useEnterToSubmit(handleCompress);
+
   const reset = () => {
     setImageFile(null);
     setOriginalUrl(null);
@@ -143,8 +146,10 @@ export default function CompressImageTo50kb() {
           </div>
           <button
             onClick={handleCompress}
+            onKeyDown={handleKeyDown}
             disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            aria-label={isProcessing ? 'Compressing image...' : 'Auto-compress image to under 50KB'}
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -175,7 +180,8 @@ export default function CompressImageTo50kb() {
             {compressedUrl && compressedSize ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Download compressed image under 50KB"
               >
                 <Download className="w-5 h-5" />
                 Download ({(compressedSize / 1024).toFixed(1)} KB)

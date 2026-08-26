@@ -6,6 +6,7 @@ import { fetchFile } from '@ffmpeg/util';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { useEnterToSubmit } from '@/lib/keyboard';
 
 export default function ReverseVideo() {
   const [file, setFile] = useState<File | null>(null);
@@ -77,6 +78,8 @@ export default function ReverseVideo() {
     }
   };
 
+  const handleKeyDown = useEnterToSubmit(processVideo);
+
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
@@ -122,12 +125,14 @@ export default function ReverseVideo() {
                 {(['video', 'audio', 'both'] as const).map((m) => (
                   <button
                     key={m}
-                    onClick={() => setMode(m)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    onClick={() => setMode(m as any)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       mode === m
                         ? 'bg-blue-600 text-white shadow'
                         : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
                     }`}
+                    aria-label={`Reverse ${m === 'both' ? 'video and audio' : m}`}
+                    aria-pressed={mode === m}
                   >
                     {m === 'video' ? 'Video' : m === 'audio' ? 'Audio' : 'Both'}
                   </button>
@@ -156,8 +161,10 @@ export default function ReverseVideo() {
 
             <button
               onClick={processVideo}
+              onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              aria-label={isProcessing ? `Reversing video: ${loadingMessage || 'Processing...'}` : 'Reverse video'}
             >
               {isProcessing && (
                 <div
@@ -177,7 +184,8 @@ export default function ReverseVideo() {
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `reversed_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Download reversed video"
               >
                 Download Reversed Video
               </button>

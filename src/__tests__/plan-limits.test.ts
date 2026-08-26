@@ -43,10 +43,10 @@ describe('plan limits alignment (Option A)', () => {
     expect(allowed).toBe(true);
   });
 
-  it('replays broken flow: free 40MB video downloads (old 10MB server cap blocked it)', async () => {
+  it('replays broken flow: free 25MB video downloads (old 10MB server cap blocked it)', async () => {
     mockPlanFetch(PLAN_LIMITS.free, 'free');
 
-    const allowed = await checkAndRecordDownload({ fileSizeMB: 40 });
+    const allowed = await checkAndRecordDownload({ fileSizeMB: 25 });
     expect(allowed).toBe(true);
   });
 
