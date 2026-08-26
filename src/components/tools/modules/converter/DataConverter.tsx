@@ -26,6 +26,57 @@ const FORMAT_EXT: Record<FormatKey, string> = {
   TSV: 'tsv',
 };
 
+const FORMAT_INFO: Record<FormatKey, { features: string[]; limitations: string[] }> = {
+  JSON: { features: ['Nested objects/arrays', 'Strong schema support', 'Native JS objects'], limitations: ['No comments', 'No trailing commas'] },
+  CSV: { features: ['Flat tabular data', 'Excel-compatible', 'Human-readable'], limitations: ['No nested structures', 'No type info'] },
+  XML: { features: ['Self-describing', 'Schema validation (XSD)', 'Namespaces'], limitations: ['Verbose syntax', 'Complex parsing'] },
+  YAML: { features: ['Human-readable', 'Supports comments', 'Complex nesting'], limitations: ['Indentation-sensitive', 'Can be ambiguous'] },
+  TSV: { features: ['Tab-delimited', 'Fast parsing', 'Database-friendly'], limitations: ['No tabs in values', 'Flat structure only'] },
+};
+
+const SAMPLE_DATA: Record<string, Record<FormatKey, string>> = {
+  'JsonToCsv': {
+    JSON: '[{"name":"Alice","age":30,"city":"NYC"},{"name":"Bob","age":25,"city":"LA"}]',
+    CSV: 'name,age,city\nAlice,30,NYC\nBob,25,LA',
+    XML: '', YAML: '', TSV: '',
+  },
+  'CsvToJson': {
+    CSV: 'name,age,city\nAlice,30,NYC\nBob,25,LA',
+    JSON: '[{"name":"Alice","age":"30","city":"NYC"},{"name":"Bob","age":"25","city":"LA"}]',
+    XML: '', YAML: '', TSV: '',
+  },
+  'JsonToXml': {
+    JSON: '{"user":{"name":"Alice","age":30}}',
+    XML: '',
+    CSV: '', YAML: '', TSV: '',
+  },
+  'XmlToJson': {
+    XML: '<user><name>Alice</name><age>30</age></user>',
+    JSON: '',
+    CSV: '', YAML: '', TSV: '',
+  },
+  'YamlToJson': {
+    YAML: 'user:\n  name: Alice\n  age: 30',
+    JSON: '',
+    CSV: '', XML: '', TSV: '',
+  },
+  'JsonToYaml': {
+    JSON: '{"user":{"name":"Alice","age":30}}',
+    YAML: '',
+    CSV: '', XML: '', TSV: '',
+  },
+  'CsvToTsv': {
+    CSV: 'name,age,city\nAlice,30,NYC',
+    TSV: 'name\tage\tcity\nAlice\t30\tNYC',
+    JSON: '', XML: '', YAML: '',
+  },
+  'TsvToCsv': {
+    TSV: 'name\tage\tcity\nAlice\t30\tNYC',
+    CSV: 'name,age,city\nAlice,30,NYC',
+    JSON: '', XML: '', YAML: '',
+  },
+};
+
 const PAIRS = FORMATS.flatMap(f => FORMATS.filter(t => t !== f).map(t => ({ input: f, output: t, slug: `${f.toLowerCase()}-to-${t.toLowerCase()}` })));
 
 function getRelated(slug: string) {
@@ -38,6 +89,7 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
   const [isProcessing, setIsProcessing] = useState(false);
   const [srcFormat, setSrcFormat] = useState<FormatKey>((defaultFrom as FormatKey) || 'JSON');
   const [dstFormat, setDstFormat] = useState<FormatKey>((defaultTo as FormatKey) || 'CSV');
+  const [validationError, setValidationError] = useState('');
 
   const activeSlug = `${srcFormat.toLowerCase()}-to-${dstFormat.toLowerCase()}`;
   const related = useMemo(() => getRelated(activeSlug), [activeSlug]);
@@ -48,15 +100,22 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
     setOutput('');
   };
 
-  const basePresets = [
-    { label: 'Swap', apply: swapFormats },
-    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
-  ];
-
-  const resultFilename = downloadFilename || `converted.${FORMAT_EXT[dstFormat]}`;
+  const validateInput = useCallback(() => {
+    if (!input.trim()) { setValidationError(''); return true; }
+    try {
+      if (srcFormat === 'JSON') JSON.parse(input);
+      if (srcFormat === 'XML' && !input.trim().startsWith('<')) throw new Error('XML must start with <');
+      setValidationError('');
+      return true;
+    } catch (e: any) {
+      setValidationError(e.message || `Invalid ${srcFormat} input`);
+      return false;
+    }
+  }, [input, srcFormat]);
 
   const handleConvert = useCallback(async () => {
     if (!input.trim()) { setOutput(''); return; }
+    if (!validateInput()) { toast.error('Validation failed'); return; }
     setIsProcessing(true);
     try {
       let result = '';
@@ -221,7 +280,7 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
     } finally {
       setIsProcessing(false);
     }
-  }, [srcFormat, dstFormat, input]);
+  }, [srcFormat, dstFormat, input, validateInput]);
 
 const copyOutput = useCallback(() => {
     if (!output) return;
@@ -239,7 +298,19 @@ const copyOutput = useCallback(() => {
     setTimeout(() => URL.revokeObjectURL(url), 100);
   }, [output, dstFormat]);
 
+  const formatSpecificPresets = useMemo(() => {
+    const slug = `${srcFormat.toLowerCase()}-${dstFormat.toLowerCase()}`;
+    const sampleKey = Object.keys(SAMPLE_DATA).find(k => k.toLowerCase().replace(/([A-Z])/g, (m) => m.toLowerCase()) === slug);
+    const sample = sampleKey ? SAMPLE_DATA[sampleKey] : null;
+    const presets: { label: string; apply: () => void }[] = [];
+    if (sample && sample[srcFormat]) {
+      presets.push({ label: `Sample ${srcFormat}`, apply: () => setInput(sample[srcFormat]) });
+    }
+    return presets;
+  }, [srcFormat, dstFormat]);
+
   const presets = [
+    ...formatSpecificPresets,
     { label: 'JSON → CSV', apply: () => { setSrcFormat('JSON'); setDstFormat('CSV'); } },
     { label: 'CSV → JSON', apply: () => { setSrcFormat('CSV'); setDstFormat('JSON'); } },
     { label: 'JSON → XML', apply: () => { setSrcFormat('JSON'); setDstFormat('XML'); } },
@@ -247,12 +318,15 @@ const copyOutput = useCallback(() => {
     { label: 'CSV → TSV', apply: () => { setSrcFormat('CSV'); setDstFormat('TSV'); } },
     { label: 'JSON → YAML', apply: () => { setSrcFormat('JSON'); setDstFormat('YAML'); } },
     { label: 'Swap', apply: swapFormats },
-    { label: 'Clear', apply: () => { setInput(''); setOutput(''); } },
+    { label: 'Clear', apply: () => { setInput(''); setOutput(''); setValidationError(''); } },
   ];
 
   const resultText = output ? `Converted ${srcFormat} → ${dstFormat} (${output.length} chars)` : 'Enter data to convert';
 
   const formatOptions = FORMATS.map(k => <option key={k} value={k}>{k}</option>);
+
+  const srcInfo = FORMAT_INFO[srcFormat];
+  const dstInfo = FORMAT_INFO[dstFormat];
 
   return (
     <CalculatorShell
@@ -262,9 +336,21 @@ const copyOutput = useCallback(() => {
       presets={presets}
       accent="blue"
       downloadData={output}
-      downloadFilename={resultFilename}
+      downloadFilename={downloadFilename || `converted.${FORMAT_EXT[dstFormat]}`}
     >
       <div className="space-y-4">
+        <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-xs font-semibold text-[var(--text-primary)] uppercase tracking-wider">{srcFormat}</span>
+            <svg className="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            <span className="text-xs font-semibold text-[var(--text-primary)] uppercase tracking-wider">{dstFormat}</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-[10px] text-[var(--text-muted)]">
+            <div><span className="font-semibold text-[var(--text-secondary)]">Source:</span> {srcInfo.features.slice(0, 2).join(', ')}</div>
+            <div><span className="font-semibold text-[var(--text-secondary)]">Target:</span> {dstInfo.features.slice(0, 2).join(', ')}</div>
+          </div>
+        </div>
+
         <div className="flex flex-wrap items-center gap-3">
           <select
             value={srcFormat}
@@ -276,10 +362,10 @@ const copyOutput = useCallback(() => {
 
           <button
             onClick={swapFormats}
-            className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all active:scale-95"
+            className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-elevated)] hover:border-blue-400 transition-all active:scale-95 group"
             aria-label="Swap formats"
           >
-            <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)] group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
           </button>
@@ -292,6 +378,13 @@ const copyOutput = useCallback(() => {
             {formatOptions}
           </select>
         </div>
+
+        {validationError && (
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400 flex items-center gap-2">
+            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.27 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+            {validationError}
+          </div>
+        )}
 
         <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
           <label className="cursor-pointer bg-zinc-100 hover:bg-zinc-200 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
@@ -312,9 +405,14 @@ const copyOutput = useCallback(() => {
           <button
             onClick={handleConvert}
             disabled={isProcessing}
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2 justify-center"
           >
-            {isProcessing ? 'Converting...' : `Convert to ${dstFormat}`}
+            {isProcessing ? (
+              <>
+                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
+                Converting...
+              </>
+            ) : `Convert to ${dstFormat}`}
           </button>
         </div>
 
@@ -325,7 +423,7 @@ const copyOutput = useCallback(() => {
                 {srcFormat} Input
               </h3>
               <button
-                onClick={() => { setInput(''); setOutput(''); }}
+                onClick={() => { setInput(''); setOutput(''); setValidationError(''); }}
                 className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors"
               >
                 Clear
@@ -356,9 +454,10 @@ const copyOutput = useCallback(() => {
                 <button
                   onClick={downloadOutput}
                   disabled={!output}
-                  className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                  className="text-xs bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
                 >
-                  Save .{FORMAT_EXT[dstFormat]}
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  .{FORMAT_EXT[dstFormat]}
                 </button>
               </div>
             </div>
@@ -398,7 +497,18 @@ const copyOutput = useCallback(() => {
   );
 }
 
-export function JsonToCsv() { return <DataConverter defaultFrom="JSON" defaultTo="CSV" presetOverrides={[{ label: 'Sample JSON', apply: () => {} }, { label: 'Array of Objects', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-csv.csv" />; }
+const CONVERSION_PRESETS: Record<string, { sampleInput: string; description: string }> = {
+  'json-to-csv': { sampleInput: '[{"name":"Alice","age":30,"city":"NYC"},{"name":"Bob","age":25,"city":"LA"}]', description: 'Convert JSON array to CSV spreadsheet' },
+  'csv-to-json': { sampleInput: 'name,age,city\nAlice,30,NYC\nBob,25,LA', description: 'Parse CSV rows into JSON objects' },
+  'json-to-xml': { sampleInput: '{"user":{"name":"Alice","age":30}}', description: 'Transform JSON to XML document' },
+  'xml-to-json': { sampleInput: '<user><name>Alice</name><age>30</age></user>', description: 'Parse XML into JSON structure' },
+  'yaml-to-json': { sampleInput: 'user:\n  name: Alice\n  age: 30', description: 'Convert YAML to JSON format' },
+  'json-to-yaml': { sampleInput: '{"user":{"name":"Alice","age":30}}', description: 'Transform JSON to YAML format' },
+  'csv-to-tsv': { sampleInput: 'name,age,city\nAlice,30,NYC', description: 'Convert CSV to tab-separated values' },
+  'tsv-to-csv': { sampleInput: 'name\tage\tcity\nAlice\t30\tNYC', description: 'Convert TSV to comma-separated values' },
+};
+
+export function JsonToCsv() { const p = CONVERSION_PRESETS['json-to-csv']; return <DataConverter defaultFrom="JSON" defaultTo="CSV" presetOverrides={[{ label: 'Sample JSON Array', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-csv.csv" />; }
 export function CsvToJson() { return <DataConverter defaultFrom="CSV" defaultTo="JSON" presetOverrides={[{ label: 'Sample CSV', apply: () => {} }, { label: 'Headers Only', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="csv-to-json.json" />; }
 export function JsonToXml() { return <DataConverter defaultFrom="JSON" defaultTo="XML" presetOverrides={[{ label: 'Sample JSON', apply: () => {} }, { label: 'Nested Object', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="json-to-xml.xml" />; }
 export function XmlToJson() { return <DataConverter defaultFrom="XML" defaultTo="JSON" presetOverrides={[{ label: 'Simple XML', apply: () => {} }, { label: 'Nested XML', apply: () => {} }, { label: 'Clear', apply: () => {} }]} downloadFilename="xml-to-json.json" />; }

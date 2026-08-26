@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { Clipboard, ExternalLink } from 'lucide-react';
+import { Clipboard, ExternalLink, Star, History, ArrowLeftRight } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
 
 export function CopyBtn({ text, label }: { text: string; label?: string }) {
@@ -23,39 +23,135 @@ export const LinkCard = ({ title, slug, desc }: { title: string; slug: string; d
   </Link>
 );
 
-export function UnitConv({ title, units, defaultValue = '1' }: { title: string; units: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]; defaultValue?: string }) {
+export interface ConversionPreset {
+  label: string;
+  value: string;
+  fromUnit: number;
+  toUnit: number;
+}
+
+export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { title: string; units: { label: string; toBase: (v: number) => number; fromBase: (v: number) => number }[]; defaultValue?: string; presets?: ConversionPreset[] }) {
   const [val, setVal] = useState(defaultValue);
   const [fromUnit, setFromUnit] = useState(0);
   const [results, setResults] = useState<{ label: string; value: string }[]>([]);
+  const [history, setHistory] = useState<{ value: string; from: string; result: string; time: string }[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [batchMode, setBatchMode] = useState(false);
+  const [batchValues, setBatchValues] = useState('');
 
-  const convert = () => {
+  const convert = useCallback(() => {
+    if (batchMode) {
+      const values = batchValues.split('\n').filter(v => v.trim());
+      const batchResults = values.map(v => {
+        const num = parseFloat(v.trim());
+        if (isNaN(num)) return { label: v.trim(), value: 'Invalid' };
+        const base = units[fromUnit].toBase(num);
+        return {
+          label: v.trim(),
+          value: units.map((u, i) => `${u.label}: ${i === fromUnit ? v.trim() : u.fromBase(base).toFixed(4)}`).join(' | ')
+        };
+      });
+      setResults(batchResults);
+      return;
+    }
     const num = parseFloat(val);
     if (isNaN(num)) { toast.error('Enter a valid number'); return; }
     const base = units[fromUnit].toBase(num);
-    setResults(units.map((u, i) => ({
+    const newResults = units.map((u, i) => ({
       label: u.label,
       value: i === fromUnit ? val : u.fromBase(base).toFixed(4),
-    })));
+    }));
+    setResults(newResults);
+    const time = new Date().toLocaleTimeString();
+    setHistory(prev => [{ value: val, from: units[fromUnit].label, result: newResults.map(r => `${r.label}: ${r.value}`).join(', '), time }, ...prev].slice(0, 20));
+  }, [val, fromUnit, units, batchMode, batchValues]);
+
+  const swapUnits = useCallback(() => {
+    if (results.length > 1) {
+      const secondUnitIndex = units.findIndex(u => u.label === results[1]?.label);
+      if (secondUnitIndex >= 0) {
+        setFromUnit(secondUnitIndex);
+        setVal(results[1]?.value || defaultValue);
+        setResults([]);
+      }
+    }
+  }, [results, units, defaultValue]);
+
+  const toggleFavorite = (key: string) => {
+    setFavorites(prev => prev.includes(key) ? prev.filter(f => f !== key) : [...prev, key]);
   };
 
+  const favKey = `${title}-${fromUnit}`;
+
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
-      <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
-          <input type="number" value={val} onChange={e => setVal(e.target.value)}
-            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
-        </div>
-        <div className="space-y-1">
-          <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
-          <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
-            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
-            {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
-          </select>
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+      <div className="flex items-center justify-between">
+        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
+        <div className="flex gap-1">
+          <button onClick={() => toggleFavorite(favKey)}
+            className={`p-1.5 rounded-lg transition-colors ${favorites.includes(favKey) ? 'text-amber-500' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
+            <Star className="w-4 h-4" fill={favorites.includes(favKey) ? 'currentColor' : 'none'} />
+          </button>
+          <button onClick={() => setBatchMode(!batchMode)}
+            className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-colors ${batchMode ? 'text-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'text-[var(--text-muted)] hover:text-blue-400'}`}>
+            Batch
+          </button>
         </div>
       </div>
-      <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+
+      {presets.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {presets.map((p, i) => (
+            <button key={i} onClick={() => { setVal(p.value); setFromUnit(p.fromUnit); }}
+              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              {p.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {batchMode ? (
+        <div className="space-y-3">
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Values (one per line)</label>
+            <textarea value={batchValues} onChange={e => setBatchValues(e.target.value)} rows={4}
+              placeholder="100&#10;250&#10;500"
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
+            </select>
+          </div>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3">
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
+            <input type="number" value={val} onChange={e => setVal(e.target.value)}
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+          </div>
+          <div className="space-y-1">
+            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
+            </select>
+          </div>
+        </div>
+      )}
+
+      <div className="flex gap-2">
+        <button onClick={convert} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
+        {!batchMode && results.length > 0 && (
+          <button onClick={swapUnits} className="px-3 py-2.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-secondary)] hover:text-blue-500 hover:border-blue-400 transition-colors" title="Swap units">
+            <ArrowLeftRight className="w-4 h-4" />
+          </button>
+        )}
+      </div>
+
       {results.length > 0 && (
         <div className="space-y-1.5">
           {results.map((r, i) => (
@@ -64,6 +160,23 @@ export function UnitConv({ title, units, defaultValue = '1' }: { title: string; 
               <span className="font-bold text-[var(--text-primary)]">{r.value}</span>
             </div>
           ))}
+        </div>
+      )}
+
+      {history.length > 0 && (
+        <div className="border-t border-[var(--border-subtle)] pt-3">
+          <div className="flex items-center gap-1 mb-2">
+            <History className="w-3 h-3 text-[var(--text-muted)]" />
+            <span className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">Recent</span>
+          </div>
+          <div className="max-h-32 overflow-y-auto space-y-1">
+            {history.map((h, i) => (
+              <div key={i} className="flex items-center justify-between text-[10px] text-[var(--text-muted)] py-0.5">
+                <span>{h.value} {h.from}</span>
+                <span className="font-mono">{h.time}</span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
@@ -82,6 +195,12 @@ export const COOKING_UNITS = [
   { label: 'Liter (L)', toBase: (v: number) => v * 1000, fromBase: (v: number) => v / 1000 },
 ];
 
+const COOKING_PRESETS: ConversionPreset[] = [
+  { label: '1 cup → mL', value: '1', fromUnit: 3, toUnit: 7 },
+  { label: '2 tbsp → tsp', value: '2', fromUnit: 1, toUnit: 0 },
+  { label: '1 gal → L', value: '1', fromUnit: 6, toUnit: 8 },
+];
+
 export const FUEL_UNITS = [
   { label: 'L/100km', toBase: (v: number) => v, fromBase: (v: number) => v },
   { label: 'MPG (US)', toBase: (v: number) => 235.215 / v, fromBase: (v: number) => 235.215 / v },
@@ -89,12 +208,22 @@ export const FUEL_UNITS = [
   { label: 'km/L', toBase: (v: number) => 100 / v, fromBase: (v: number) => 100 / v },
 ];
 
+const FUEL_PRESETS: ConversionPreset[] = [
+  { label: '30 mpg → L/100km', value: '30', fromUnit: 1, toUnit: 0 },
+  { label: '8 L/100km → mpg', value: '8', fromUnit: 0, toUnit: 1 },
+];
+
 export const PAPER_UNITS = [
-  { label: 'A0 (841×1189mm)', toBase: (v: number) => v, fromBase: (v: number) => v },
-  { label: 'A1 (594×841mm)', toBase: (v: number) => v * 0.5, fromBase: (v: number) => v * 2 },
-  { label: 'A4 (210×297mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
-  { label: 'Letter (216×279mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
-  { label: 'Legal (216×356mm)', toBase: (v: number) => v * 0.075, fromBase: (v: number) => v * 13.33 },
+  { label: 'A0 (841x1189mm)', toBase: (v: number) => v, fromBase: (v: number) => v },
+  { label: 'A1 (594x841mm)', toBase: (v: number) => v * 0.5, fromBase: (v: number) => v * 2 },
+  { label: 'A4 (210x297mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
+  { label: 'Letter (216x279mm)', toBase: (v: number) => v * 0.0625, fromBase: (v: number) => v * 16 },
+  { label: 'Legal (216x356mm)', toBase: (v: number) => v * 0.075, fromBase: (v: number) => v * 13.33 },
+];
+
+const PAPER_PRESETS: ConversionPreset[] = [
+  { label: '1 A0 → A4', value: '1', fromUnit: 0, toUnit: 2 },
+  { label: '1 A1 → A4', value: '1', fromUnit: 1, toUnit: 2 },
 ];
 
 export const CLOTHING_UNITS = [
@@ -105,10 +234,15 @@ export const CLOTHING_UNITS = [
   { label: 'France', toBase: (v: number) => (v - 34) * 1.5, fromBase: (v: number) => v / 1.5 + 34 },
 ];
 
-export function UnitConvWithCooking() { return <UnitConv title="Cooking Measurement Converter" units={COOKING_UNITS} defaultValue="1" />; }
-export function UnitConvWithFuel() { return <UnitConv title="Fuel Consumption Converter" units={FUEL_UNITS} defaultValue="8" />; }
-export function UnitConvWithPaper() { return <UnitConv title="Paper Size Converter" units={PAPER_UNITS} defaultValue="1" />; }
-export function UnitConvWithClothing() { return <UnitConv title="Clothing Size Converter" units={CLOTHING_UNITS} defaultValue="8" />; }
+const CLOTHING_PRESETS: ConversionPreset[] = [
+  { label: 'US 8 → EU', value: '8', fromUnit: 0, toUnit: 2 },
+  { label: 'EU 42 → US', value: '42', fromUnit: 2, toUnit: 0 },
+];
+
+export function UnitConvWithCooking() { return <UnitConv title="Cooking Measurement Converter" units={COOKING_UNITS} defaultValue="1" presets={COOKING_PRESETS} />; }
+export function UnitConvWithFuel() { return <UnitConv title="Fuel Consumption Converter" units={FUEL_UNITS} defaultValue="8" presets={FUEL_PRESETS} />; }
+export function UnitConvWithPaper() { return <UnitConv title="Paper Size Converter" units={PAPER_UNITS} defaultValue="1" presets={PAPER_PRESETS} />; }
+export function UnitConvWithClothing() { return <UnitConv title="Clothing Size Converter" units={CLOTHING_UNITS} defaultValue="8" presets={CLOTHING_PRESETS} />; }
 
 export function LargeTextViewer() {
   const [text, setText] = useState('');
@@ -137,7 +271,7 @@ export function LargeTextViewer() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Large Text File Viewer</h5>
       <input type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
         className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
@@ -171,7 +305,7 @@ export function AvroSchemaGenerator() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro Schema Generator</h5>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
@@ -218,8 +352,8 @@ export function AvroToJsonSample() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro → JSON Sample</h5>
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
+      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro to JSON Sample</h5>
       <div className="space-y-1">
         <label className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
         <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
@@ -262,7 +396,7 @@ export function IcalEventGenerator() {
   };
 
   return (
-    <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
+    <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">iCal Event Generator</h5>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>

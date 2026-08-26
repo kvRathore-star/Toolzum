@@ -447,7 +447,10 @@ export function SeoMetaTagGenerator() {
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Generated Meta Tags</label>
             <textarea readOnly value={result} rows={10}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
-            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+            <div className="flex items-center gap-3 mt-2">
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result], { type: 'text/html' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'meta-tags.html'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
           </div>
         )}
       </div>
@@ -777,7 +780,10 @@ export function TextReplacer() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span>
-              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+              <div className="flex gap-2">
+                <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">Copy</button>
+                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'replaced.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">Download</button>
+              </div>
             </div>
             <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
           </div>
@@ -947,7 +953,32 @@ export function TextDiffChecker() {
 // === 16/17. TextToHtmlConverter / HtmlToTextConverter ===
 function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-text' }) {
   const [mode, setMode] = useState(defaultMode); const [input, setInput] = useState(''); const [result, setResult] = useState('');
-  const convert = () => { const val = input.trim(); if (!val) { setResult(''); return; } try { if (mode === 'text-to-html') { const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim()); setResult(paragraphs.map(p => `<p>${p.split('\n').filter(l => l.trim()).join('<br />')}</p>`).join('\n')); } else { setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, "'").replace(/\n\s*\n/g, '\n\n').trim()); } } catch { setResult(''); } };
+  const [showPreview, setShowPreview] = useState(false);
+  const [semantic, setSemantic] = useState(false);
+  const [hasMarkdown, setHasMarkdown] = useState(false);
+
+  const detectMarkdown = (text: string) => {
+    const mdPatterns = [/\*\*.*?\*\*/, /\*.*?\*/, /^#+\s/m, /`{3}/, /^\s*[-*]\s/m, /^\d+\.\s/m, /\[.*?\]\(.*?\)/];
+    return mdPatterns.some(p => p.test(text));
+  };
+
+  const convert = () => {
+    const val = input.trim(); if (!val) { setResult(''); return; }
+    try {
+      if (mode === 'text-to-html') {
+        setHasMarkdown(detectMarkdown(val));
+        const paragraphs = val.split(/\n\s*\n/).filter(p => p.trim());
+        const htmlParts = paragraphs.map(p => {
+          const lines = p.split('\n').filter(l => l.trim()).join('<br />');
+          return semantic ? `<section><p>${lines}</p></section>` : `<p>${lines}</p>`;
+        });
+        setResult(htmlParts.join('\n'));
+      } else {
+        setResult(val.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>').replace(/"/g, '"').replace(/'/g, "'").replace(/\n\s*\n/g, '\n\n').trim());
+      }
+    } catch { setResult(''); }
+  };
+
   const isTextToHtml = mode === 'text-to-html';
 
   const presets = [
@@ -969,12 +1000,34 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
         <div className="flex flex-wrap gap-2">
           <button onClick={convert} className="px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-colors">Convert to {isTextToHtml ? 'HTML' : 'Text'}</button>
           <button onClick={() => setMode(isTextToHtml ? 'html-to-text' : 'text-to-html')} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Switch ↻</button>
+          {isTextToHtml && (
+            <>
+              <button onClick={() => setShowPreview(!showPreview)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${showPreview ? 'bg-amber-500 text-white border-amber-500' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Preview</button>
+              <button onClick={() => setSemantic(!semantic)} className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${semantic ? 'bg-purple-500 text-white border-purple-500' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Semantic HTML</button>
+            </>
+          )}
         </div>
+
+        {hasMarkdown && isTextToHtml && (
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl px-4 py-2 text-xs text-amber-600 dark:text-amber-400 flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            Markdown syntax detected in input. This tool converts plain text to HTML.
+          </div>
+        )}
 
         {result && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
-            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
-            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 self-start"><Copy size={14} /></button>
+            {showPreview && isTextToHtml ? (
+              <div className="flex-1 p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)] prose prose-sm dark:prose-invert max-w-none overflow-auto">
+                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(result) }} />
+              </div>
+            ) : (
+              <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+            )}
+            <div className="flex items-center gap-3 mt-2">
+              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+              <button onClick={() => { const blob = new Blob([result], { type: isTextToHtml ? 'text/html' : 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = isTextToHtml ? 'output.html' : 'output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+            </div>
           </div>
         )}
       </div>

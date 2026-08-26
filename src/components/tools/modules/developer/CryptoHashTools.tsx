@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { Shield, Copy } from 'lucide-react';
 import CryptoJS from 'crypto-js';
@@ -41,32 +41,85 @@ function Output({ value, label }: { value: string; label?: string }) {
   );
 }
 
+function StrengthMeter({ password }: { password: string }) {
+  const getStrength = () => {
+    let score = 0;
+    if (password.length >= 8) score++;
+    if (password.length >= 12) score++;
+    if (password.length >= 16) score++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+    if (/\d/.test(password)) score++;
+    if (/[^a-zA-Z\d]/.test(password)) score++;
+    return Math.min(5, score);
+  };
+
+  const strength = getStrength();
+  const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
+  const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-lime-500', 'bg-green-500', 'bg-emerald-500'];
+
+  if (!password) return null;
+
+  return (
+    <div className="mt-2">
+      <div className="flex gap-1 mb-1">
+        {[0, 1, 2, 3, 4].map(i => (
+          <div key={i} className={`h-1.5 flex-1 rounded-full ${i < strength ? colors[strength] : 'bg-zinc-200 dark:bg-zinc-700'} transition-colors`} />
+        ))}
+      </div>
+      <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
+        <span>{labels[strength]}</span>
+        <span>{password.length} chars</span>
+      </div>
+    </div>
+  );
+}
+
 function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decrypt' }) {
   const [mode, setMode] = useState<'encrypt' | 'decrypt'>(defaultMode);
   const [input, setInput] = useState('');
   const [pass, setPass] = useState('');
   const [result, setResult] = useState('');
+  const [algorithm, setAlgorithm] = useState<'AES-128' | 'AES-256'>('AES-256');
+  const [outputFormat, setOutputFormat] = useState<'Base64' | 'Hex'>('Base64');
+  const [benchmark, setBenchmark] = useState<{ time: number; ops: number } | null>(null);
 
-  const handleAction = () => {
+  const handleAction = useCallback(() => {
     if (!input.trim() || !pass.trim()) { toast.error('Enter both text and passphrase'); return; }
-    if (mode === 'encrypt') {
-      setResult(CryptoJS.AES.encrypt(input, pass).toString());
-    } else {
-      try {
+
+    const startTime = performance.now();
+
+    try {
+      if (mode === 'encrypt') {
+        const options: any = {};
+        if (algorithm === 'AES-256') {
+          options.keySize = 256 / 32;
+        } else {
+          options.keySize = 128 / 32;
+        }
+        const encrypted = CryptoJS.AES.encrypt(input, pass, options);
+        const formatted = outputFormat === 'Hex' ? encrypted.ciphertext.toString(CryptoJS.enc.Hex) : encrypted.toString();
+        setResult(formatted);
+      } else {
         const bytes = CryptoJS.AES.decrypt(input, pass);
         const dec = bytes.toString(CryptoJS.enc.Utf8);
         if (!dec) { toast.error('Decryption failed — wrong passphrase or invalid ciphertext'); return; }
         setResult(dec);
-      } catch { toast.error('Decryption failed — invalid input'); }
+      }
+    } catch {
+      toast.error(mode === 'encrypt' ? 'Encryption failed' : 'Decryption failed — invalid input');
+      return;
     }
-  };
+
+    const elapsed = performance.now() - startTime;
+    setBenchmark({ time: elapsed, ops: Math.round(1000 / Math.max(elapsed, 0.1)) });
+  }, [input, pass, mode, algorithm, outputFormat]);
 
   return (
     <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-4">
       <Section title={`AES ${mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}`}>
         <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] mb-4 w-fit">
           <button
-            onClick={() => { setMode('encrypt'); setInput(''); setPass(''); setResult(''); }}
+            onClick={() => { setMode('encrypt'); setInput(''); setPass(''); setResult(''); setBenchmark(null); }}
             className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
               mode === 'encrypt'
                 ? 'bg-blue-600 text-white shadow-sm'
@@ -76,7 +129,7 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
             Encrypt
           </button>
           <button
-            onClick={() => { setMode('decrypt'); setInput(''); setPass(''); setResult(''); }}
+            onClick={() => { setMode('decrypt'); setInput(''); setPass(''); setResult(''); setBenchmark(null); }}
             className={`px-6 py-2 rounded-lg text-sm font-semibold transition-all ${
               mode === 'decrypt'
                 ? 'bg-blue-600 text-white shadow-sm'
@@ -86,13 +139,50 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
             Decrypt
           </button>
         </div>
+
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div>
+            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
+            <select value={algorithm} onChange={e => setAlgorithm(e.target.value as any)}
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+              <option value="AES-128">AES-128 (128-bit)</option>
+              <option value="AES-256">AES-256 (256-bit)</option>
+            </select>
+          </div>
+          {mode === 'encrypt' && (
+            <div>
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Output Format</label>
+              <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as any)}
+                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+                <option value="Base64">Base64</option>
+                <option value="Hex">Hexadecimal</option>
+              </select>
+            </div>
+          )}
+        </div>
+
         <Input label="Passphrase" type="password" value={pass} onChange={setPass} placeholder="Enter passphrase..." />
+        <StrengthMeter password={pass} />
+
+        {mode === 'encrypt' && (
+          <div className="flex gap-2 mt-2">
+            <button onClick={() => { setPass('weak'); }} className="px-2 py-1 text-[10px] font-medium bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-md hover:bg-red-200 dark:hover:bg-red-900/40 transition-colors">Weak: "weak"</button>
+            <button onClick={() => { setPass('Str0ng!P@ssw0rd#2024'); }} className="px-2 py-1 text-[10px] font-medium bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-md hover:bg-green-200 dark:hover:bg-green-900/40 transition-colors">Strong: "Str0ng!P@ssw0rd#2024"</button>
+          </div>
+        )}
+
         <Input label={mode === 'encrypt' ? 'Plain text' : 'Ciphertext'} value={input} onChange={setInput}
           placeholder={mode === 'encrypt' ? 'Enter text to encrypt...' : 'Paste ciphertext...'} rows={5} />
-        <button onClick={handleAction} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">
-          <Shield className="w-4 h-4 inline mr-1.5" /> {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
+        <button onClick={handleAction} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all flex items-center justify-center gap-2">
+          <Shield className="w-4 h-4" /> {mode === 'encrypt' ? 'Encrypt' : 'Decrypt'}
         </button>
         {result && <Output value={result} label={mode === 'encrypt' ? 'Ciphertext' : 'Decrypted text'} />}
+        {benchmark && (
+          <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-[var(--text-muted)] flex items-center gap-4">
+            <span>Time: <span className="font-mono font-bold text-[var(--text-primary)]">{benchmark.time.toFixed(2)}ms</span></span>
+            <span>Throughput: <span className="font-mono font-bold text-[var(--text-primary)]">{benchmark.ops.toLocaleString()} ops/sec</span></span>
+          </div>
+        )}
       </Section>
     </div>
   );
