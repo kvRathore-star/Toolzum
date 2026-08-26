@@ -25,7 +25,7 @@ export function GlassmorphismGenerator() {
   const [opacity, setOpacity] = useState(15);
   const css = `background: rgba(255,255,255,${(opacity / 100).toFixed(2)}); backdrop-filter: blur(${blur}px); -webkit-backdrop-filter: blur(${blur}px); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px;`;
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Blur</span>
         <input type="range" min={1} max={20} value={blur} onChange={e => setBlur(Number(e.target.value))} className="flex-1" /></div>
       <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Opacity</span>
@@ -42,7 +42,7 @@ export function NeumorphismGenerator() {
   const [color, setColor] = useState('#e0e0e0');
   const [out, setOut] = useState('');
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <Inp label="Size" value={size} onChange={setSize} suffix="px" small />
       <Inp label="Blur" value={blur} onChange={setBlur} suffix="px" small />
       <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-full h-6 rounded cursor-pointer" />
@@ -61,7 +61,7 @@ export function CssSpecificityCalculator() {
   const [sel, setSel] = useState('#main .content p');
   const [res, setRes] = useState<string | null>(null);
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <input type="text" value={sel} onChange={e => setSel(e.target.value)} placeholder="Enter CSS selector..."
         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[11px] font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
       <CalcBtn onClick={() => {
@@ -80,7 +80,7 @@ export function CssToScss() {
   const [input, setInput] = useState('.container {\n  color: red;\n  .inner {\n    background: blue;\n  }\n}');
   const [output, setOutput] = useState('');
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="CSS with nesting..."
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => { setOutput(input.replace(/\n/g, '\n')); toast.success('CSS → SCSS (basic)'); }} label="Convert" />
@@ -93,7 +93,7 @@ export function LessToCss() {
   const [input, setInput] = useState('@primary: #333;\nbody { color: @primary; }');
   const [output, setOutput] = useState('');
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="@var: value;"
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => { setOutput(input.replace(/@(\w+)/g, '/* $1 */')); toast.success('Less → CSS (variables commented)'); }} label="Convert" />
@@ -106,7 +106,7 @@ export function CssValidator() {
   const [input, setInput] = useState('');
   const [result, setResult] = useState<string | null>(null);
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS..."
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {

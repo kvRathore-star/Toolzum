@@ -17,7 +17,7 @@ export function CodeObfuscator() {
   const [mode, setMode] = useState<'obfuscate' | 'deobfuscate'>('obfuscate');
   const [output, setOutput] = useState('');
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <select value={mode} onChange={e => setMode(e.target.value as any)}
         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] outline-none">
         <option value="obfuscate">Obfuscate</option>
@@ -39,7 +39,7 @@ export function CodeToCurlParser() {
   const [input, setInput] = useState('curl https://api.example.com/data');
   const [output, setOutput] = useState<string | null>(null);
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="curl command..."
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
@@ -58,7 +58,7 @@ export function JsSyntaxChecker() {
   const [code, setCode] = useState('const x = 1;');
   const [result, setResult] = useState<string | null>(null);
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {
@@ -73,7 +73,7 @@ export function PugToHtml() {
   const [input, setInput] = useState('div.container\n  h1.title Hello\n  p.content World');
   const [output, setOutput] = useState('');
   return (
-    <div className="space-y-3">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello"
         className="w-full h-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
       <CalcBtn onClick={() => {

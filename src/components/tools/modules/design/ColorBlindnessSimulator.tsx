@@ -124,7 +124,8 @@ export default function ColorBlindnessSimulator() {
   const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2";
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">Color Blindness Simulator</h1>
       <p className="text-sm mb-6 text-[var(--text-secondary)]">
         Simulate how your designs and images appear to people with protanopia, deuteranopia, tritanopia,
@@ -192,6 +193,7 @@ export default function ColorBlindnessSimulator() {
       >
         Download simulated image
       </button>
+      </div>
     </div>
   );
 }

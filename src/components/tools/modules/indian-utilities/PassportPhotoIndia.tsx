@@ -81,24 +81,27 @@ export default function PassportPhotoIndia() {
 
   if (!image) {
     return (
-      <div className="space-y-6">
-        <div className="bg-[#2563eb]/10 border border-[#2563eb]/20 p-4 rounded-xl flex items-center gap-3">
-          <FileImage className="w-5 h-5 text-[#2563eb] shrink-0" />
-          <p className="text-sm text-[#2563eb] dark:text-[#2563eb] font-medium">
-            <strong>Requirements:</strong> Upload a photo with good lighting. Crop to 3.5x4.5 cm with white background and compress under 50KB for Indian Government portals.
-          </p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="space-y-6">
+          <div className="bg-[#2563eb]/10 border border-[#2563eb]/20 p-4 rounded-xl flex items-center gap-3">
+            <FileImage className="w-5 h-5 text-[#2563eb] shrink-0" />
+            <p className="text-sm text-[#2563eb] dark:text-[#2563eb] font-medium">
+              <strong>Requirements:</strong> Upload a photo with good lighting. Crop to 3.5x4.5 cm with white background and compress under 50KB for Indian Government portals.
+            </p>
+          </div>
+          <FileUploader
+            accept="image/*"
+            onFileSelect={handleFileSelect}
+            title="Upload Photo for Passport/Visa"
+          />
         </div>
-        <FileUploader
-          accept="image/*"
-          onFileSelect={handleFileSelect}
-          title="Upload Photo for Passport/Visa"
-        />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in zoom-in duration-500">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-8 animate-in fade-in zoom-in duration-500">
       <div className="flex justify-between items-center">
         <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Crop Your Photo</h3>
         <button
@@ -212,7 +215,8 @@ export default function PassportPhotoIndia() {
             <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-3 text-center">6 photos per 4x6 inch print sheet</p>
           </div>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

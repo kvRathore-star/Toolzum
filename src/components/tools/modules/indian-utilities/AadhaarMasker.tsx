@@ -137,29 +137,32 @@ export default function AadhaarMasker() {
   };
 
   if (isProcessing) {
-    return <div className="py-20 text-center text-zinc-600 dark:text-[var(--text-muted)]">Parsing document entirely on your device...</div>;
+    return <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4"><div className="py-20 text-center text-zinc-600 dark:text-[var(--text-muted)]">Parsing document entirely on your device...</div></div>;
   }
 
   if (!image) {
     return (
-      <div className="space-y-6">
-        <div className="flex items-center gap-3 bg-[#1e3a5f]/10 border border-[#1e3a5f]/20 p-4 rounded-xl">
-          <ShieldCheck className="w-5 h-5 text-[#1e3a5f] shrink-0" />
-          <p className="text-sm text-[#1e3a5f] dark:text-[#1e3a5f] font-medium">
-            <strong>Privacy First:</strong> Upload an image or PDF of your Aadhaar. We render it locally in your browser. Draw black boxes over the first 8 digits. <strong>Nothing leaves your device.</strong>
-          </p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+        <div className="space-y-6">
+          <div className="flex items-center gap-3 bg-[#1e3a5f]/10 border border-[#1e3a5f]/20 p-4 rounded-xl">
+            <ShieldCheck className="w-5 h-5 text-[#1e3a5f] shrink-0" />
+            <p className="text-sm text-[#1e3a5f] dark:text-[#1e3a5f] font-medium">
+              <strong>Privacy First:</strong> Upload an image or PDF of your Aadhaar. We render it locally in your browser. Draw black boxes over the first 8 digits. <strong>Nothing leaves your device.</strong>
+            </p>
+          </div>
+          <FileUploader
+            accept="image/*,application/pdf"
+            onFileSelect={handleFileSelect}
+            title="Upload Aadhaar (Image or PDF)"
+          />
         </div>
-        <FileUploader
-          accept="image/*,application/pdf"
-          onFileSelect={handleFileSelect}
-          title="Upload Aadhaar (Image or PDF)"
-        />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap items-center gap-3">
         <span className="inline-flex items-center gap-1.5 bg-[#1e3a5f]/10 text-[#1e3a5f] text-xs font-bold px-3 py-1.5 rounded-full border border-[#1e3a5f]/20">
           <ShieldCheck className="w-3.5 h-3.5" />
@@ -224,6 +227,7 @@ export default function AadhaarMasker() {
         <Download className="w-5 h-5" />
         Download Secure Masked Copy
       </button>
+      </div>
     </div>
   );
 }

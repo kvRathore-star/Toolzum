@@ -72,7 +72,8 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   const outFilename = downloadFilename || (converted ? converted.name : `converted.${dstFormat.toLowerCase()}`);
 
   return (
-    <Section title="Document Converter">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <Section title="Document Converter">
       <div className="flex flex-wrap gap-2 mb-4">
         {popularPairs.map((p, i) => (
           <button key={i} onClick={() => { setSrcFormat(p.from as any); setDstFormat(p.to as any); }} className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">{p.label}</button>
@@ -110,7 +111,8 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           <button onClick={handleDownload} className="w-full py-2 bg-green-600 hover:bg-green-500 text-white rounded-xl font-medium transition">Download Converted File</button>
         )}
       </div>
-    </Section>
+      </Section>
+    </div>
   );
 }
 

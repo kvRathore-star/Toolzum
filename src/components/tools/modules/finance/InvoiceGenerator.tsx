@@ -54,60 +54,61 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center print:hidden">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
-            <FileText className="w-5 h-5 text-[var(--accent)] dark:text-[var(--accent)]" />
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
+        <div className="flex justify-between items-center print:hidden">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
+              <FileText className="w-5 h-5 text-[var(--accent)] dark:text-[var(--accent)]" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">Invoice Generator</h2>
+              <p className="text-sm text-[var(--text-secondary)]">Create and print professional invoices</p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-xl font-bold text-[var(--text-primary)]">Invoice Generator</h2>
-            <p className="text-sm text-[var(--text-secondary)]">Create and print professional invoices</p>
-          </div>
+          
+          <button
+            onClick={handlePrint}
+            className="px-6 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+          >
+            <Printer className="w-4 h-4" />
+            Print / PDF
+          </button>
         </div>
-        
-        <button
-          onClick={handlePrint}
-          className="px-6 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-xl font-medium transition-colors flex items-center gap-2"
+
+        <style>{`
+          @media print {
+            body * {
+              visibility: hidden;
+            }
+            #invoice-container, #invoice-container * {
+              visibility: visible;
+            }
+            #invoice-container {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              border: none !important;
+              box-shadow: none !important;
+              padding: 0 !important;
+            }
+            .print-hide {
+              display: none !important;
+            }
+            input, textarea {
+              border: none !important;
+              background: transparent !important;
+              resize: none !important;
+              padding: 0 !important;
+            }
+          }
+        `}</style>
+
+        <div 
+          id="invoice-container"
+          className="bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-2xl p-8 md:p-12 shadow-sm"
         >
-          <Printer className="w-4 h-4" />
-          Print / PDF
-        </button>
-      </div>
-
-      <style>{`
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          #invoice-container, #invoice-container * {
-            visibility: visible;
-          }
-          #invoice-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-          }
-          .print-hide {
-            display: none !important;
-          }
-          input, textarea {
-            border: none !important;
-            background: transparent !important;
-            resize: none !important;
-            padding: 0 !important;
-          }
-        }
-      `}</style>
-
-      <div 
-        id="invoice-container"
-        className="bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-2xl p-8 md:p-12 shadow-sm"
-      >
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
           <div className="space-y-4 flex-1">
@@ -293,6 +294,7 @@ export default function InvoiceGenerator() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

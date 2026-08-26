@@ -32,7 +32,7 @@ export default function JSONDiffChecker() {
         <h1 className="text-3xl font-bold tracking-tight">JSON Diff Checker</h1>
         <p className="text-[var(--text-muted)] mt-2">Compare two JSON objects side-by-side with color-coded key-level differences.</p>
       </div>
-      <div className="space-y-4">
+      <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Left (original)</label>

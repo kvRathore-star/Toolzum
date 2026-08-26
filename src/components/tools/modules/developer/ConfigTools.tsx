@@ -23,7 +23,7 @@ const HTTP_STATUSES: { code: number; label: string; desc: string }[] = [
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="w-full bg-[var(--bg-overlay)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] p-6">
+    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl">
       <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
       {children}
     </div>
@@ -155,8 +155,15 @@ const RETRY_POLICIES: Record<string, object> = {
   },
 };
 
+const HTTP_HEADER_PRESETS = [
+  { label: 'REST API', headers: 'Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer <token>\nX-Request-ID: req-abc-123' },
+  { label: 'CORS Setup', headers: 'Access-Control-Allow-Origin: https://example.com\nAccess-Control-Allow-Methods: GET, POST, OPTIONS\nAccess-Control-Allow-Headers: Content-Type, Authorization' },
+  { label: 'Security Headers', headers: 'Content-Security-Policy: default-src \'self\'\nStrict-Transport-Security: max-age=31536000; includeSubDomains\nX-Content-Type-Options: nosniff\nX-Frame-Options: DENY\nReferrer-Policy: strict-origin-when-cross-origin' },
+  { label: 'Cache Control', headers: 'Cache-Control: public, max-age=3600\nETag: "abc123"\nVary: Accept-Encoding' },
+];
+
 export function HttpHeaderAnalyzer() {
-  const [input, setInput] = useState('content-type: application/json\nauthorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTYifQ...\ncache-control: no-cache\nx-request-id: abc-123-def');
+  const [input, setInput] = useState(HTTP_HEADER_PRESETS[0].headers);
   const [output, setOutput] = useState('');
 
   const analyze = () => {
@@ -178,6 +185,13 @@ export function HttpHeaderAnalyzer() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <Section title="HTTP Header Analyzer">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {HTTP_HEADER_PRESETS.map((p) => (
+            <button key={p.label} onClick={() => { setInput(p.headers); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              {p.label}
+            </button>
+          ))}
+        </div>
         <Input label="Headers (one per line)" value={input} onChange={setInput} rows={6} placeholder="header: value" />
         <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Analyze Headers</button>
         <Output value={output} label="Analysis" />
