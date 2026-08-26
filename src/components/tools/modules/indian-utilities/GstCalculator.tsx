@@ -54,7 +54,7 @@ export default function GstCalculator() {
           </div>
         </div>
 
-        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
+        <div aria-live="polite" className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">GST Summary</h4>
             <div className="grid grid-cols-2 gap-4">

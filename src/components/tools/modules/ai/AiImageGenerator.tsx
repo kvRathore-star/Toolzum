@@ -138,7 +138,7 @@ export default function AiImageGenerator() {
           <button
             onClick={handleGenerate}
             disabled={isGenerating}
-            className="mt-6 w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+            className="mt-6 w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             {isGenerating ? (
               <>
@@ -162,14 +162,14 @@ export default function AiImageGenerator() {
               <div className="flex gap-2">
                 <button
                   onClick={handleCopyLink}
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   title="Copy Direct Link" aria-label="Copy link"
                 >
                   <Link2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   title="Download Image" aria-label="Download"
                 >
                   <Download className="w-4 h-4" />
@@ -178,7 +178,7 @@ export default function AiImageGenerator() {
             )}
           </div>
 
-          <div className="flex-1 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50">
+          <div aria-live="polite" className="flex-1 flex flex-col items-center justify-center overflow-hidden rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50">
             {isGenerating ? (
               <div className="flex flex-col items-center text-center p-8">
                 <div className="relative w-16 h-16 mb-4">

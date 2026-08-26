@@ -218,11 +218,11 @@ export function WordFrequencyCounter() {
             <input type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
           </div>
-          <button onClick={analyze} className="self-end px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Analyze</button>
+          <button onClick={analyze} className="self-end px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Analyze</button>
         </div>
 
         {frequencies.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
             <div className="max-h-[400px] overflow-y-auto space-y-1.5">
               {frequencies.map((f, i) => (
                 <div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
@@ -292,11 +292,11 @@ export function KeywordDensityChecker() {
             <input type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Enter keyword to check..."
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
           </div>
-          <button onClick={check} className="self-end px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors">Check Density</button>
+          <button onClick={check} className="self-end px-5 py-2.5 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Check Density</button>
         </div>
 
         {density && (
-          <div className="space-y-3">
+          <div aria-live="polite" className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
               <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
                 <p className="text-3xl font-extrabold text-amber-500">{density.count}</p>
@@ -378,11 +378,11 @@ export function KeywordPlannerTool() {
             <input type="number" min={2} max={10} value={String(minLength)} onChange={e => setMinLength(Number(e.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50" />
           </div>
-          <button onClick={extract} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors">Extract Keywords</button>
+          <button onClick={extract} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Extract Keywords</button>
         </div>
 
         {keywords.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
             <div className="max-h-[400px] overflow-y-auto space-y-1">
               {keywords.map((k, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
@@ -440,7 +440,7 @@ export function SeoMetaTagGenerator() {
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
         </div>
 
-        <button onClick={generate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Meta Tags</button>
+        <button onClick={generate} className="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Generate Meta Tags</button>
 
         {result && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
@@ -448,8 +448,8 @@ export function SeoMetaTagGenerator() {
             <textarea readOnly value={result} rows={10}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
             <div className="flex items-center gap-3 mt-2">
-              <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
-              <button onClick={() => { const blob = new Blob([result], { type: 'text/html' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'meta-tags.html'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
+              <button aria-label="Copy meta tags" onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>
+              <button aria-label="Download meta tags" onClick={() => { const blob = new Blob([result], { type: 'text/html' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'meta-tags.html'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"><Download size={14} /></button>
             </div>
           </div>
         )}
@@ -495,7 +495,7 @@ export function SeoPreviewGenerator() {
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
 
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">
+        <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">
           <p className="text-xs font-bold text-[var(--text-muted)] uppercase mb-3">Google SERP Preview</p>
           <div className="p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)]">
             <div className="text-xs text-green-700 dark:text-green-400 mb-1">{url}</div>
@@ -552,10 +552,10 @@ export function SeoHeadlineAnalyzer() {
         <input type="text" value={headline} onChange={e => setHeadline(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-rose-500/50" />
 
-        <button onClick={analyze} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Analyze</button>
+        <button onClick={analyze} className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Analyze</button>
 
         {analysis && (
-          <div className="space-y-3">
+          <div aria-live="polite" className="space-y-3">
             <div className={`p-4 rounded-xl text-center ${analysis.score >= 70 ? 'bg-emerald-50 dark:bg-emerald-900/20' : analysis.score >= 40 ? 'bg-amber-50 dark:bg-amber-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
               <span className="text-xs text-[var(--text-muted)]">SEO Score</span>
               <p className={`text-4xl font-extrabold ${analysis.score >= 70 ? 'text-emerald-500' : analysis.score >= 40 ? 'text-amber-500' : 'text-red-500'}`}>{analysis.score}/100</p>
@@ -614,13 +614,13 @@ export function SeoSchemaGenerator() {
         <textarea value={data} onChange={e => setData(e.target.value)} rows={6} placeholder='{"headline": "Sample Article", "description": "Article description"}'
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 resize-y" />
 
-        <button onClick={generate} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Schema</button>
+        <button onClick={generate} className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Generate Schema</button>
 
         {result && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 max-h-[300px] overflow-auto">
             <textarea readOnly value={result} rows={10}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
-            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
+            <button aria-label="Copy schema" onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>
           </div>
         )}
       </div>
@@ -649,13 +649,13 @@ export function SeoSlugGenerator() {
         <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter text to convert to slug"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
 
-        <button onClick={generate} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Slug</button>
+        <button onClick={generate} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Generate Slug</button>
 
         {slug && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">
             <div className="text-center">
               <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p>
-              <button onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Copy size={14} /></button>
+              <button aria-label="Copy slug" onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>
             </div>
           </div>
         )}
@@ -720,7 +720,7 @@ export function CaseConverter() {
         <div className="flex flex-wrap gap-2">
           {cases.map(c => (
             <button key={c.id} onClick={() => convert(c.id)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors flex items-center gap-1 ${activeCase === c.id ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400'}`}>
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors flex items-center gap-1 ${activeCase === c.id ? 'bg-emerald-500 text-white border-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-emerald-400'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}>
               <span className="text-[10px] font-mono opacity-50">{c.icon}</span>
               {c.label}
             </button>

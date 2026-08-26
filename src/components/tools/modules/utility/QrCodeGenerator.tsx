@@ -205,7 +205,7 @@ export default function QrCodeGenerator() {
                 qrType === tab.id
                   ? 'bg-[var(--accent)] text-white shadow-sm'
                   : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'
-              }`}
+              } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
             >
               <Icon className="w-3.5 h-3.5" />
               {tab.label}
@@ -338,19 +338,19 @@ export default function QrCodeGenerator() {
               Choose Logo File
               <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </label>
-            {logoImage && <button onClick={() => setLogoImage(null)} className="text-[10px] text-rose-400 hover:text-rose-300 font-bold block mt-1">Remove Logo</button>}
+            {logoImage && <button onClick={() => setLogoImage(null)} className="text-[10px] text-rose-400 hover:text-rose-300 font-bold block mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Remove Logo</button>}
           </div>
 
-          <button onClick={reset} className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5">
+          <button onClick={reset} className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
             <RefreshCw className="w-3 h-3" /> Reset
           </button>
         </div>
 
         <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center min-h-[350px]">
-          <div className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner w-full">
+          <div aria-live="polite" className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner w-full">
             <canvas ref={canvasRef} className="max-w-full max-h-[300px] object-contain" />
           </div>
-          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-700 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm">
+          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-700 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
             <Download className="w-4 h-4" /> Download QR PNG
           </button>
         </div>

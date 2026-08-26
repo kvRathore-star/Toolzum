@@ -95,7 +95,9 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
           <h1 className="text-xl font-bold text-[var(--text-primary)]">{title}</h1>
           <button
             onClick={() => setShowHistory(!showHistory)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${showHistory ? a.activeBg + ' ' + a.activeText : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+            aria-expanded={showHistory}
+            aria-label={showHistory ? 'Hide calculation history' : 'Show calculation history'}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${showHistory ? a.activeBg + ' ' + a.activeText : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
           >
             <Clock size={14} />
             History {history.length > 0 && `(${history.length})`}
@@ -120,7 +122,8 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
                 <button
                   key={p.label}
                   onClick={() => { setActivePreset(p.label); p.apply(); }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+                  aria-pressed={activePreset === p.label}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                     activePreset === p.label
                       ? a.activeBg + ' ' + a.activeText + ' ' + a.activeBorder
                       : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-[var(--text-primary)] ' + a.border
@@ -137,15 +140,15 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
           <div className="flex gap-3">
             <button
               onClick={onCalculate}
-              className={`flex-1 bg-gradient-to-r ${a.btn} ${a.btnHover} text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg`}
+              className={`flex-1 bg-gradient-to-r ${a.btn} ${a.btnHover} text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
             >
               {calculateLabel}
             </button>
             {downloadData && (
               <button
                 onClick={handleDownload}
-                className="px-4 py-3.5 rounded-xl bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] transition-all active:scale-95"
-                title="Download CSV"
+                aria-label="Download CSV"
+                className="px-4 py-3.5 rounded-xl bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <Download size={20} />
               </button>
@@ -153,16 +156,16 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
           </div>
 
           {(result || error) && (
-            <div className={`p-5 rounded-2xl text-sm font-mono whitespace-pre flex items-start justify-between gap-4 ${error ? 'bg-red-500/10 border border-red-500/20 text-red-700 dark:text-red-400' : a.resultBg + ' border ' + a.resultBorder + ' ' + a.text}`}>
+            <div role="status" aria-live="polite" className={`p-5 rounded-2xl text-sm font-mono whitespace-pre flex items-start justify-between gap-4 ${error ? 'bg-red-500/10 border border-red-500/20 text-red-700 dark:text-red-400' : a.resultBg + ' border ' + a.resultBorder + ' ' + a.text}`}>
               <span className="flex-1">{error || result}</span>
               {result && (
                 <div className="flex items-center gap-1 shrink-0">
                   {downloadData && (
-                    <button onClick={handleDownload} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Download">
+                    <button onClick={handleDownload} aria-label="Download result" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
                       <Download size={16} />
                     </button>
                   )}
-                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result">
+                  <button onClick={copyResult} aria-label="Copy result to clipboard" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
                     <Copy size={16} />
                   </button>
                 </div>

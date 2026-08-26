@@ -136,7 +136,7 @@ export default function ImageCompressor() {
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           Upload New Image
         </button>
@@ -193,7 +193,7 @@ export default function ImageCompressor() {
           <button
             onClick={handleCompress}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             {isProcessing ? (
               <RefreshCw className="w-5 h-5 animate-spin" />
@@ -205,7 +205,7 @@ export default function ImageCompressor() {
 
         {/* View panel */}
         <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between min-h-[350px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center flex-1">
+          <div aria-live="polite" className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center flex-1">
             <div className="space-y-2 text-center">
               <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block">Before</span>
               <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[200px]">
@@ -248,7 +248,7 @@ alt="Uploaded image preview"
               </div>
               <button
                 onClick={handleDownload}
-                className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow"
+                className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <Download className="w-4 h-4" />
                 Download Output

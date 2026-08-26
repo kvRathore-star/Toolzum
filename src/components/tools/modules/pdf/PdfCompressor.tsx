@@ -79,7 +79,7 @@ export default function PdfOptimizer() {
         </div>
         <button 
           onClick={() => setPdfFile(null)}
-          className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-3 py-1.5 rounded-lg hover:bg-[var(--bg-surface)]"
+          className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-3 py-1.5 rounded-lg hover:bg-[var(--bg-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           Change PDF
         </button>
@@ -96,14 +96,14 @@ export default function PdfOptimizer() {
         <button 
           onClick={processOptimize}
           disabled={isProcessing}
-          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl shadow-[var(--shadow-md)] transition-all active:scale-95 disabled:opacity-50"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-medium py-3 rounded-xl shadow-[var(--shadow-md)] transition-all active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           {isProcessing ? "Optimizing PDF..." : "Optimize PDF →"}
         </button>
       </div>
 
       {outputUrl && outputSize && (
-        <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-in slide-in-from-bottom-4">
+        <div aria-live="polite" className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-in slide-in-from-bottom-4">
           <div className="w-full">
             <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-2">Optimization Complete!</h4>
             <div className="flex justify-between items-center text-sm border-b border-emerald-500/20 pb-2 mb-2">
@@ -120,7 +120,7 @@ export default function PdfOptimizer() {
           
           <button 
             onClick={() => downloadOrShare(outputUrl, `optimized_${pdfFile.name}`)}
-            className="w-full md:w-auto bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap"
+            className="w-full md:w-auto bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             Download PDF
           </button>

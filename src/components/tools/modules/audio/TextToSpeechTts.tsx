@@ -131,7 +131,7 @@ export default function TextToSpeechTts() {
            {isPlaying ? (
              <button 
                onClick={handlePause}
-               className="flex-1 sm:flex-none bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2"
+               className="flex-1 sm:flex-none bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                Pause
@@ -139,7 +139,7 @@ export default function TextToSpeechTts() {
            ) : (
              <button 
                onClick={handlePlay}
-               className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2"
+               className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
                {isPaused ? 'Resume' : 'Play'}
@@ -147,11 +147,11 @@ export default function TextToSpeechTts() {
            )}
            
            {(isPlaying || isPaused) && (
-<button 
-                onClick={handleStop}
-                className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center"
-                aria-label="Stop"
-              >
+               <button 
+                 onClick={handleStop}
+                 className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                 aria-label="Stop"
+               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" /></svg>
               </button>
            )}
@@ -167,10 +167,10 @@ export default function TextToSpeechTts() {
             <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
                <span className="text-xl">📝</span> Text Input
             </h3>
-            <button 
-              onClick={() => setText('')}
-              className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors"
-            >
+             <button 
+               onClick={() => setText('')}
+               className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+             >
               Clear
             </button>
           </div>
@@ -228,7 +228,7 @@ export default function TextToSpeechTts() {
            </div>
            
            <div className="pt-6 border-t border-[var(--border-subtle)] flex items-center justify-center">
-              <div className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-blue-500 animate-pulse bg-blue-500/10 scale-110' : 'border-[var(--border-subtle)]'}`}>
+             <div aria-live="polite" role="status" className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-blue-500 animate-pulse bg-blue-500/10 scale-110' : 'border-[var(--border-subtle)]'}`}>
                  <svg className={`w-10 h-10 ${isPlaying ? 'text-blue-700 dark:text-blue-400 animate-bounce' : 'text-zinc-300 dark:text-zinc-700'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
               </div>
            </div>
