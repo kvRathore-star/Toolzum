@@ -8,7 +8,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
 import JSZip from 'jszip';
-import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Info, Clock, FileImage, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Clock, FileImage, Crop, Move, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const ALPHA_NOISE_FLOOR = 3 / 255;
@@ -59,7 +59,7 @@ function calculateAlphaMap(imageData: ImageData): Float32Array {
 }
 
 async function loadAlphaMap(size: 48 | 96): Promise<Float32Array> {
-  const img = await loadImage(`/assets/gemini-alpha-${size}.png`);
+  const img = await loadImage('/assets/gemini-alpha-' + size + '.png');
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
   canvas.height = img.height;
@@ -82,19 +82,15 @@ function removeWatermarkFromImageData(
 ): void {
   const { x, y, width, height } = position;
   const data = imageData.data;
-
   for (let row = 0; row < height; row++) {
     for (let col = 0; col < width; col++) {
       const imgIdx = ((y + row) * imageData.width + (x + col)) * 4;
       const alphaIdx = row * width + col;
-
       const rawAlpha = alphaMap[alphaIdx];
       const signalAlpha = Math.max(0, Math.abs(rawAlpha) - ALPHA_NOISE_FLOOR);
       if (signalAlpha < ALPHA_THRESHOLD) continue;
-
       const alpha = Math.min(Math.abs(rawAlpha), MAX_ALPHA);
       const oneMinusAlpha = 1.0 - alpha;
-
       for (let c = 0; c < 3; c++) {
         const watermarked = data[imgIdx + c];
         const original = (watermarked - alpha * LOGO_VALUE) / oneMinusAlpha;
@@ -110,26 +106,42 @@ function formatFileSize(bytes: number): string {
   return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
 
-async function processImage(file: File, outputFormat: 'png' | 'jpeg' | 'webp', quality: number): Promise<{ blob: Blob; time: number }> {
+interface CropArea { x: number; y: number; w: number; h: number; }
+
+async function processImage(
+  file: File,
+  outputFormat: 'png' | 'jpeg' | 'webp',
+  quality: number,
+  positionOverride: { x: number; y: number } | null,
+  crop: CropArea | null
+): Promise<{ blob: Blob; time: number }> {
   const start = performance.now();
   const img = await createImageBitmap(file);
   const canvas = document.createElement('canvas');
-  canvas.width = img.width;
-  canvas.height = img.height;
+
+  if (crop) {
+    canvas.width = crop.w;
+    canvas.height = crop.h;
+  } else {
+    canvas.width = img.width;
+    canvas.height = img.height;
+  }
   const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
-  ctx.drawImage(img, 0, 0);
+
+  if (crop) {
+    ctx.drawImage(img, crop.x, crop.y, crop.w, crop.h, 0, 0, crop.w, crop.h);
+  } else {
+    ctx.drawImage(img, 0, 0);
+  }
   img.close();
 
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const config = detectWatermarkConfig(canvas.width, canvas.height);
   const alphaMap = await loadAlphaMap(config.logoSize);
 
-  const position = {
-    x: canvas.width - config.marginRight - config.logoSize,
-    y: canvas.height - config.marginBottom - config.logoSize,
-    width: config.logoSize,
-    height: config.logoSize,
-  };
+  const position = positionOverride
+    ? { x: positionOverride.x, y: positionOverride.y, width: config.logoSize, height: config.logoSize }
+    : { x: canvas.width - config.marginRight - config.logoSize, y: canvas.height - config.marginBottom - config.logoSize, width: config.logoSize, height: config.logoSize };
 
   removeWatermarkFromImageData(imageData, alphaMap, position);
   ctx.putImageData(imageData, 0, 0);
@@ -138,27 +150,24 @@ async function processImage(file: File, outputFormat: 'png' | 'jpeg' | 'webp', q
   const blob = await new Promise<Blob>((resolve) => {
     canvas.toBlob((b) => resolve(b!), mimeType, quality);
   });
-
   return { blob, time: performance.now() - start };
 }
 
 function ImageInfo({ file, blob }: { file: File; blob?: Blob | null }) {
   const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
   const url = useRef(URL.createObjectURL(file));
-
   useEffect(() => {
     const img = new Image();
     img.onload = () => setDims({ w: img.width, h: img.height });
     img.src = url.current;
     return () => URL.revokeObjectURL(url.current);
   }, [file]);
-
   return (
     <div className="flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
       <span className="flex items-center gap-1"><FileImage className="w-3 h-3" />{formatFileSize(file.size)}</span>
       {dims && <span>{dims.w} x {dims.h}px</span>}
       <span className="uppercase">{file.type.split('/')[1] || 'unknown'}</span>
-      {blob && <span className="text-emerald-600 dark:text-emerald-400">→ {formatFileSize(blob.size)}</span>}
+      {blob && <span className="text-emerald-600 dark:text-emerald-400">{formatFileSize(file.size)} → {formatFileSize(blob.size)}</span>}
     </div>
   );
 }
@@ -167,14 +176,11 @@ function SliderCompare({ before, after }: { before: string; after: string }) {
   const [pos, setPos] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
-
   const updatePos = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-    setPos((x / rect.width) * 100);
+    setPos(Math.max(0, Math.min((clientX - rect.left) / rect.width * 100, 100)));
   }, []);
-
   useEffect(() => {
     const handleMove = (e: MouseEvent) => { if (dragging.current) updatePos(e.clientX); };
     const handleUp = () => { dragging.current = false; };
@@ -182,26 +188,67 @@ function SliderCompare({ before, after }: { before: string; after: string }) {
     window.addEventListener('mouseup', handleUp);
     return () => { window.removeEventListener('mousemove', handleMove); window.removeEventListener('mouseup', handleUp); };
   }, [updatePos]);
-
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full h-[400px] rounded-xl overflow-hidden cursor-col-resize select-none"
+    <div ref={containerRef} className="relative w-full h-[400px] rounded-xl overflow-hidden cursor-col-resize select-none"
       onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
-      onTouchMove={(e) => updatePos(e.touches[0].clientX)}
-    >
+      onTouchMove={(e) => updatePos(e.touches[0].clientX)}>
       <img src={after} alt="After" className="absolute inset-0 w-full h-full object-contain" />
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
-        <img src={before} alt="Before" className="absolute inset-0 w-full h-full object-contain" style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }} />
+      <div className="absolute inset-0 overflow-hidden" style={{ width: pos + '%' }}>
+        <img src={before} alt="Before" className="absolute inset-0 h-full object-contain" style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }} />
       </div>
-      <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg" style={{ left: `${pos}%` }}>
+      <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg" style={{ left: pos + '%' }}>
         <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-          <ChevronLeft className="w-3 h-3 text-gray-600" />
-          <ChevronRight className="w-3 h-3 text-gray-600" />
+          <span className="text-gray-600 text-xs">↔</span>
         </div>
       </div>
       <span className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">Before</span>
       <span className="absolute top-2 right-2 bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">After</span>
+    </div>
+  );
+}
+
+function CropEditor({ url, onCrop, onClear }: { url: string; onCrop: (c: CropArea) => void; onClear: () => void }) {
+  const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+  const [box, setBox] = useState({ x: 0, y: 0, w: 0, h: 0 });
+  const [active, setActive] = useState(false);
+  const startRef = useRef({ x: 0, y: 0 });
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setDims({ w: img.naturalWidth, h: img.naturalHeight });
+    img.src = url;
+  }, [url]);
+
+  const getPos = (e: React.MouseEvent) => {
+    if (!imgRef.current) return { x: 0, y: 0 };
+    const rect = imgRef.current.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  };
+
+  const toNatural = (px: { x: number; y: number }) => {
+    if (!imgRef.current || !dims) return { x: 0, y: 0 };
+    const rect = imgRef.current.getBoundingClientRect();
+    return { x: Math.round(px.x / rect.width * dims.w), y: Math.round(px.y / rect.height * dims.h) };
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+        <Crop className="w-3 h-3" /> Draw a box on the image to crop, or skip to use full image
+      </div>
+      <div className="relative inline-block max-w-full">
+        <img ref={imgRef} src={url} alt="Crop source" className="max-h-[350px] max-w-full object-contain cursor-crosshair"
+          onMouseDown={(e) => { setActive(true); const p = getPos(e); startRef.current = p; setBox({ x: p.x, y: p.y, w: 0, h: 0 }); }}
+          onMouseMove={(e) => { if (!active) return; const p = getPos(e); const s = startRef.current; setBox({ x: Math.min(s.x, p.x), y: Math.min(s.y, p.y), w: Math.abs(p.x - s.x), h: Math.abs(p.y - s.y) }); }}
+          onMouseUp={() => { setActive(false); if (box.w > 10 && box.h > 10) { const tl = toNatural({ x: box.x, y: box.y }); const br = toNatural({ x: box.x + box.w, y: box.y + box.h }); onCrop({ x: tl.x, y: tl.y, w: br.x - tl.x, h: br.y - tl.y }); } }} />
+        {box.w > 0 && (
+          <div className="absolute border-2 border-dashed border-white/80 pointer-events-none" style={{ left: box.x, top: box.y, width: box.w, height: box.h }} />
+        )}
+      </div>
+      <div className="flex gap-2">
+        <button onClick={onClear} className="px-3 py-1.5 text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)]">Skip Crop</button>
+      </div>
     </div>
   );
 }
@@ -218,6 +265,10 @@ export default function GeminiWatermarkRemover() {
   const [processTime, setProcessTime] = useState<number | null>(null);
   const [compareMode, setCompareMode] = useState<'side' | 'slider'>('side');
   const [isDragging, setIsDragging] = useState(false);
+  const [positionOverride, setPositionOverride] = useState<{ x: number; y: number } | null>(null);
+  const [showPositionPicker, setShowPositionPicker] = useState(false);
+  const [crop, setCrop] = useState<CropArea | null>(null);
+  const [showCrop, setShowCrop] = useState(false);
 
   const batch = useBatchProgress();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -225,10 +276,7 @@ export default function GeminiWatermarkRemover() {
   const blobUrlsRef = useRef<string[]>([]);
   const doneBlobsRef = useRef<Blob[]>([]);
 
-  useEffect(() => {
-    setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount());
-  }, []);
-
+  useEffect(() => { setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount()); }, []);
   useEffect(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
@@ -243,9 +291,8 @@ export default function GeminiWatermarkRemover() {
     const url = URL.createObjectURL(file);
     blobUrlsRef.current.push(url);
     setSingleImage({ file, url });
-    setProcessedUrl(null);
-    setProcessedBlob(null);
-    setProcessTime(null);
+    setProcessedUrl(null); setProcessedBlob(null); setProcessTime(null);
+    setPositionOverride(null); setCrop(null); setShowCrop(false); setShowPositionPicker(false);
   }, []);
 
   const handleSingleUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -253,103 +300,79 @@ export default function GeminiWatermarkRemover() {
   }, [handleFiles]);
 
   const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
+    e.preventDefault(); setIsDragging(false);
     handleFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
   }, [handleFiles]);
 
   const processSingle = useCallback(async () => {
     if (!singleImage) return;
-    if (!recordFreeUsage()) {
-      toast.error('Free limit reached (' + FREE_MONTHLY_LIMIT + '/month). Switch to Pro for unlimited.');
-      return;
-    }
+    if (!recordFreeUsage()) { toast.error('Free limit reached (' + FREE_MONTHLY_LIMIT + '/month).'); return; }
     setIsProcessing(true);
     try {
-      const { blob, time } = await processImage(singleImage.file, outputFormat, quality);
+      const { blob, time } = await processImage(singleImage.file, outputFormat, quality, positionOverride, crop);
       const url = URL.createObjectURL(blob);
       blobUrlsRef.current.push(url);
-      setProcessedUrl(url);
-      setProcessedBlob(blob);
-      setProcessTime(time);
+      setProcessedUrl(url); setProcessedBlob(blob); setProcessTime(time);
       setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount());
       toast.success('Watermark removed in ' + (time / 1000).toFixed(1) + 's!');
-    } catch (err) {
-      toast.error('Failed to process image');
-      console.error(err);
-    } finally {
-      setIsProcessing(false);
-    }
-  }, [singleImage, outputFormat, quality]);
+    } catch (err) { toast.error('Failed to process image'); console.error(err); }
+    finally { setIsProcessing(false); }
+  }, [singleImage, outputFormat, quality, positionOverride, crop]);
 
   const handleSingleDownload = useCallback(() => {
     if (!processedUrl || !singleImage) return;
     const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
-    const name = singleImage.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext;
-    downloadOrShare(processedUrl, name);
+    downloadOrShare(processedUrl, singleImage.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext);
   }, [processedUrl, singleImage, outputFormat]);
 
   const handleBulkFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
     if (accepted.length === 0) return;
     batch.addFiles(accepted);
-    accepted.forEach((f) => {
-      const url = URL.createObjectURL(f);
-      blobUrlsRef.current.push(url);
-    });
+    accepted.forEach((f) => { const url = URL.createObjectURL(f); blobUrlsRef.current.push(url); });
     toast.success('Added ' + accepted.length + ' file(s)');
   }, [batch]);
 
-  const bulkProcessor = useCallback(
-    async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
-      return withErrorHandling(async () => {
-        onProgress(10);
-        const { blob } = await processImage(file, outputFormat, quality);
-        onProgress(100);
-        return blob;
-      }, { toast: 'Processing error', log: true });
-    },
-    [outputFormat, quality]
-  );
+  const bulkProcessor = useCallback(async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
+    return withErrorHandling(async () => {
+      onProgress(10);
+      const { blob } = await processImage(file, outputFormat, quality, null, null);
+      onProgress(100); return blob;
+    }, { toast: 'Processing error', log: true });
+  }, [outputFormat, quality]);
 
   const handleBulkProcess = useCallback(async () => {
     if (batch.files.length === 0) return;
     if (hasLargeFiles(batch.files.map((f) => f.file))) {
       const mem = checkMemory();
-      if (!mem) {
-        const proceed = window.confirm('Large images detected. Processing may be slow on low-memory devices. Continue?');
-        if (!proceed) return;
-      }
+      if (!mem && !window.confirm('Large images detected. Continue?')) return;
     }
     doneBlobsRef.current = [];
     await batch.processBatch(bulkProcessor, {
-      onComplete: () => {
-        doneBlobsRef.current = batch.files
-          .filter((f) => f.status === 'done' && f.result)
-          .map((f) => f.result!);
-      },
+      onComplete: () => { doneBlobsRef.current = batch.files.filter((f) => f.status === 'done' && f.result).map((f) => f.result!); },
     });
   }, [batch, bulkProcessor]);
 
   const downloadAll = useCallback(async () => {
     const blobs = doneBlobsRef.current;
     if (blobs.length === 0) return;
-    if (blobs.length === 1) {
-      downloadOrShare(URL.createObjectURL(blobs[0]), 'clean.png');
-      return;
-    }
+    if (blobs.length === 1) { downloadOrShare(URL.createObjectURL(blobs[0]), 'clean.png'); return; }
     const zip = new JSZip();
-    batch.files.forEach((bf, i) => {
-      if (bf.status === 'done' && bf.result) {
-        const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
-        const name = bf.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext;
-        zip.file(name, bf.result);
-      }
+    const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
+    batch.files.forEach((bf) => {
+      if (bf.status === 'done' && bf.result) zip.file(bf.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext, bf.result);
     });
     const content = await zip.generateAsync({ type: 'blob' });
-    const url = URL.createObjectURL(content);
-    blobUrlsRef.current.push(url);
+    const url = URL.createObjectURL(content); blobUrlsRef.current.push(url);
     downloadOrShare(url, 'clean-images.zip');
+  }, [batch.files, outputFormat]);
+
+  const downloadIndividual = useCallback((index: number) => {
+    const bf = batch.files[index];
+    if (!bf || bf.status !== 'done' || !bf.result) return;
+    const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
+    const url = URL.createObjectURL(bf.result); blobUrlsRef.current.push(url);
+    downloadOrShare(url, bf.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext);
   }, [batch.files, outputFormat]);
 
   return (
@@ -357,20 +380,10 @@ export default function GeminiWatermarkRemover() {
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
-          <button
-            onClick={() => setMode('single')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              mode === 'single' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
-          >
+          <button onClick={() => setMode('single')} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'single' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
             <Sparkles className="w-4 h-4" /> Single Image
           </button>
-          <button
-            onClick={() => setMode('bulk')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-              mode === 'bulk' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
-          >
+          <button onClick={() => setMode('bulk')} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'bulk' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
             <Images className="w-4 h-4" /> Batch Mode
           </button>
         </div>
@@ -391,8 +404,7 @@ export default function GeminiWatermarkRemover() {
         {outputFormat !== 'png' && (
           <div className="flex items-center gap-2">
             <label className="text-xs text-[var(--text-secondary)]">Quality: {quality}%</label>
-            <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))}
-              className="w-24 h-1 accent-[var(--accent-ink)]" />
+            <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-24 h-1 accent-[var(--accent-ink)]" />
           </div>
         )}
         {processTime !== null && (
@@ -405,41 +417,73 @@ export default function GeminiWatermarkRemover() {
       {mode === 'single' ? (
         <div className="space-y-4">
           {!singleImage ? (
-            <div
-              onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
-              onDragLeave={() => setIsDragging(false)}
-              onDrop={handleDrop}
+            <div onDragOver={e => { e.preventDefault(); setIsDragging(true); }} onDragLeave={() => setIsDragging(false)} onDrop={handleDrop}
               onClick={() => fileRef.current?.click()}
-              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
-                isDragging
-                  ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.01]'
-                  : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'
-              }`}
-            >
+              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragging ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.01]' : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'}`}>
               <Upload className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
-              <p className="text-[var(--text-primary)] font-medium">
-                {isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}
-              </p>
+              <p className="text-[var(--text-primary)] font-medium">{isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}</p>
               <p className="text-sm text-[var(--text-secondary)] mt-1">or click to browse</p>
-              <p className="text-xs text-[var(--text-muted)] mt-3">Removes the sparkle watermark using reverse alpha blending</p>
               <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
             </div>
           ) : (
             <div className="space-y-4">
-              {/* Image Info */}
               <ImageInfo file={singleImage.file} blob={processedBlob} />
+
+              {/* Tools Row */}
+              <div className="flex flex-wrap gap-2">
+                <button onClick={() => { setShowCrop(!showCrop); setShowPositionPicker(false); }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${showCrop ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                  <Crop className="w-3 h-3" /> {crop ? 'Crop Applied' : 'Crop Image'}
+                </button>
+                <button onClick={() => { setShowPositionPicker(!showPositionPicker); setShowCrop(false); }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${showPositionPicker ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                  <Move className="w-3 h-3" /> {positionOverride ? 'Position Set' : 'Set Watermark Position'}
+                </button>
+                {(positionOverride || crop) && (
+                  <button onClick={() => { setPositionOverride(null); setCrop(null); }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+                    <RotateCcw className="w-3 h-3" /> Reset
+                  </button>
+                )}
+              </div>
+
+              {/* Crop Editor */}
+              {showCrop && !crop && (
+                <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4">
+                  <CropEditor url={singleImage.url} onCrop={(c) => { setCrop(c); setShowCrop(false); toast.success('Crop applied'); }} onClear={() => setShowCrop(false)} />
+                </div>
+              )}
+
+              {/* Position Picker */}
+              {showPositionPicker && (
+                <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
+                  <p className="text-xs text-[var(--text-secondary)]">Click on the image to set watermark position (bottom-right is default)</p>
+                  <div className="relative inline-block">
+                    <img src={singleImage.url} alt="Pick position" className="max-h-[300px] max-w-full object-contain cursor-crosshair"
+                      onClick={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const img = new Image(); img.src = singleImage.url;
+                        img.onload = () => {
+                          const scaleX = img.naturalWidth / rect.width;
+                          const scaleY = img.naturalHeight / rect.height;
+                          setPositionOverride({ x: Math.round((e.clientX - rect.left) * scaleX), y: Math.round((e.clientY - rect.top) * scaleY) });
+                          setShowPositionPicker(false);
+                          toast.success('Watermark position set');
+                        };
+                      }} />
+                    {positionOverride && (
+                      <div className="absolute w-6 h-6 border-2 border-red-500 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"
+                        style={{ left: '50%', top: '50%' }} />
+                    )}
+                  </div>
+                </div>
+              )}
 
               {/* Compare Mode Toggle */}
               {processedUrl && (
                 <div className="flex gap-2">
-                  <button onClick={() => setCompareMode('side')}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'side' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
-                    Side by Side
-                  </button>
-                  <button onClick={() => setCompareMode('slider')}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'slider' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
-                    Slider Compare
-                  </button>
+                  <button onClick={() => setCompareMode('side')} className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'side' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>Side by Side</button>
+                  <button onClick={() => setCompareMode('slider')} className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'slider' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>Slider Compare</button>
                 </div>
               )}
 
@@ -474,7 +518,7 @@ export default function GeminiWatermarkRemover() {
                     <Download className="w-4 h-4" /> Download Clean Image
                   </button>
                 )}
-                <button onClick={() => { setSingleImage(null); setProcessedUrl(null); setProcessedBlob(null); setProcessTime(null); }}
+                <button onClick={() => { setSingleImage(null); setProcessedUrl(null); setProcessedBlob(null); setProcessTime(null); setPositionOverride(null); setCrop(null); }}
                   className="flex items-center gap-2 px-4 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                   <X className="w-4 h-4" /> Clear
                 </button>
@@ -496,7 +540,10 @@ export default function GeminiWatermarkRemover() {
               </button>
             )}
             {batch.files.filter((f) => f.status === 'done').length > 0 && !batch.isProcessing && (
-              <ProDownloadButton fileCount={batch.files.filter((f) => f.status === 'done').length} onDownloadAll={downloadAll} />
+              <>
+                <ProDownloadButton fileCount={batch.files.filter((f) => f.status === 'done').length} onDownloadAll={downloadAll} />
+                <span className="text-xs text-[var(--text-muted)]">or download individually ↓</span>
+              </>
             )}
             <input ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
           </div>
@@ -505,30 +552,23 @@ export default function GeminiWatermarkRemover() {
             onRemove={batch.removeFile} onClear={() => { batch.clearFiles(); doneBlobsRef.current = []; }}
             onAbort={batch.abort}
           />
-        </div>
-      )}
-
-      {/* How It Works */}
-      <div className="border-t border-[var(--border-subtle)] pt-6 space-y-4">
-        <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <Info className="w-4 h-4" /> How It Works
-        </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { step: '1', title: 'Upload', desc: 'Drop your Gemini-generated image with the sparkle watermark.' },
-            { step: '2', title: 'Detect', desc: 'The tool locates the watermark using alpha channel analysis.' },
-            { step: '3', title: 'Remove', desc: 'Reverse alpha blending reconstructs the original pixels underneath.' },
-          ].map(s => (
-            <div key={s.step} className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent-ink)] font-bold flex items-center justify-center shrink-0 text-sm">{s.step}</div>
-              <div>
-                <h4 className="font-medium text-[var(--text-primary)] text-sm">{s.title}</h4>
-                <p className="text-xs text-[var(--text-secondary)]">{s.desc}</p>
+          {/* Individual Downloads */}
+          {batch.files.filter(f => f.status === 'done').length > 0 && !batch.isProcessing && (
+            <div className="space-y-2">
+              <h4 className="text-xs font-medium text-[var(--text-secondary)]">Individual Downloads</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                {batch.files.map((bf, i) => bf.status === 'done' && (
+                  <button key={i} onClick={() => downloadIndividual(i)}
+                    className="flex items-center gap-2 px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors text-left truncate">
+                    <Download className="w-3 h-3 shrink-0 text-emerald-500" />
+                    <span className="truncate">{bf.file.name.replace(/\.[^.]+$/, '')}-clean</span>
+                  </button>
+                ))}
               </div>
             </div>
-          ))}
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
