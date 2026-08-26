@@ -8,7 +8,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
 import JSZip from 'jszip';
-import { Upload, Download, Zap, Images, X, Loader2, Sparkles } from 'lucide-react';
+import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Info, Clock, FileImage, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const ALPHA_NOISE_FLOOR = 3 / 255;
@@ -104,7 +104,14 @@ function removeWatermarkFromImageData(
   }
 }
 
-async function processImage(file: File): Promise<Blob> {
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+async function processImage(file: File, outputFormat: 'png' | 'jpeg' | 'webp', quality: number): Promise<{ blob: Blob; time: number }> {
+  const start = performance.now();
   const img = await createImageBitmap(file);
   const canvas = document.createElement('canvas');
   canvas.width = img.width;
@@ -127,17 +134,90 @@ async function processImage(file: File): Promise<Blob> {
   removeWatermarkFromImageData(imageData, alphaMap, position);
   ctx.putImageData(imageData, 0, 0);
 
-  return new Promise<Blob>((resolve) => {
-    canvas.toBlob((blob) => resolve(blob!), 'image/png');
+  const mimeType = outputFormat === 'jpeg' ? 'image/jpeg' : outputFormat === 'webp' ? 'image/webp' : 'image/png';
+  const blob = await new Promise<Blob>((resolve) => {
+    canvas.toBlob((b) => resolve(b!), mimeType, quality);
   });
+
+  return { blob, time: performance.now() - start };
+}
+
+function ImageInfo({ file, blob }: { file: File; blob?: Blob | null }) {
+  const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+  const url = useRef(URL.createObjectURL(file));
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setDims({ w: img.width, h: img.height });
+    img.src = url.current;
+    return () => URL.revokeObjectURL(url.current);
+  }, [file]);
+
+  return (
+    <div className="flex flex-wrap gap-3 text-xs text-[var(--text-secondary)]">
+      <span className="flex items-center gap-1"><FileImage className="w-3 h-3" />{formatFileSize(file.size)}</span>
+      {dims && <span>{dims.w} x {dims.h}px</span>}
+      <span className="uppercase">{file.type.split('/')[1] || 'unknown'}</span>
+      {blob && <span className="text-emerald-600 dark:text-emerald-400">→ {formatFileSize(blob.size)}</span>}
+    </div>
+  );
+}
+
+function SliderCompare({ before, after }: { before: string; after: string }) {
+  const [pos, setPos] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+
+  const updatePos = useCallback((clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setPos((x / rect.width) * 100);
+  }, []);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => { if (dragging.current) updatePos(e.clientX); };
+    const handleUp = () => { dragging.current = false; };
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleUp);
+    return () => { window.removeEventListener('mousemove', handleMove); window.removeEventListener('mouseup', handleUp); };
+  }, [updatePos]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full h-[400px] rounded-xl overflow-hidden cursor-col-resize select-none"
+      onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
+      onTouchMove={(e) => updatePos(e.touches[0].clientX)}
+    >
+      <img src={after} alt="After" className="absolute inset-0 w-full h-full object-contain" />
+      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
+        <img src={before} alt="Before" className="absolute inset-0 w-full h-full object-contain" style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }} />
+      </div>
+      <div className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg" style={{ left: `${pos}%` }}>
+        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+          <ChevronLeft className="w-3 h-3 text-gray-600" />
+          <ChevronRight className="w-3 h-3 text-gray-600" />
+        </div>
+      </div>
+      <span className="absolute top-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">Before</span>
+      <span className="absolute top-2 right-2 bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">After</span>
+    </div>
+  );
 }
 
 export default function GeminiWatermarkRemover() {
   const [mode, setMode] = useState<'single' | 'bulk'>('single');
   const [singleImage, setSingleImage] = useState<{ file: File; url: string } | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
+  const [processedBlob, setProcessedBlob] = useState<Blob | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [freeRemaining, setFreeRemaining] = useState(FREE_MONTHLY_LIMIT);
+  const [outputFormat, setOutputFormat] = useState<'png' | 'jpeg' | 'webp'>('png');
+  const [quality, setQuality] = useState(92);
+  const [processTime, setProcessTime] = useState<number | null>(null);
+  const [compareMode, setCompareMode] = useState<'side' | 'slider'>('side');
+  const [isDragging, setIsDragging] = useState(false);
 
   const batch = useBatchProgress();
   const fileRef = useRef<HTMLInputElement>(null);
@@ -157,42 +237,57 @@ export default function GeminiWatermarkRemover() {
     };
   }, [singleImage, processedUrl]);
 
-  const handleSingleUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleFiles = useCallback((files: File[]) => {
+    if (files.length === 0) return;
+    const file = files[0];
     const url = URL.createObjectURL(file);
     blobUrlsRef.current.push(url);
     setSingleImage({ file, url });
     setProcessedUrl(null);
+    setProcessedBlob(null);
+    setProcessTime(null);
   }, []);
+
+  const handleSingleUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFiles(Array.from(e.target.files || []));
+  }, [handleFiles]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    handleFiles(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/')));
+  }, [handleFiles]);
 
   const processSingle = useCallback(async () => {
     if (!singleImage) return;
     if (!recordFreeUsage()) {
-      toast.error(`Free limit reached (${FREE_MONTHLY_LIMIT}/month). Switch to Pro for unlimited.`);
+      toast.error('Free limit reached (' + FREE_MONTHLY_LIMIT + '/month). Switch to Pro for unlimited.');
       return;
     }
     setIsProcessing(true);
     try {
-      const blob = await processImage(singleImage.file);
+      const { blob, time } = await processImage(singleImage.file, outputFormat, quality);
       const url = URL.createObjectURL(blob);
       blobUrlsRef.current.push(url);
       setProcessedUrl(url);
+      setProcessedBlob(blob);
+      setProcessTime(time);
       setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount());
-      toast.success('Watermark removed!');
+      toast.success('Watermark removed in ' + (time / 1000).toFixed(1) + 's!');
     } catch (err) {
       toast.error('Failed to process image');
       console.error(err);
     } finally {
       setIsProcessing(false);
     }
-  }, [singleImage]);
+  }, [singleImage, outputFormat, quality]);
 
   const handleSingleDownload = useCallback(() => {
     if (!processedUrl || !singleImage) return;
-    const name = singleImage.file.name.replace(/\.[^.]+$/, '') + '-clean.png';
+    const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
+    const name = singleImage.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext;
     downloadOrShare(processedUrl, name);
-  }, [processedUrl, singleImage]);
+  }, [processedUrl, singleImage, outputFormat]);
 
   const handleBulkFiles = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const accepted = Array.from(e.target.files || []);
@@ -202,24 +297,23 @@ export default function GeminiWatermarkRemover() {
       const url = URL.createObjectURL(f);
       blobUrlsRef.current.push(url);
     });
-    toast.success(`Added ${accepted.length} file(s)`);
+    toast.success('Added ' + accepted.length + ' file(s)');
   }, [batch]);
 
   const bulkProcessor = useCallback(
     async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
       return withErrorHandling(async () => {
         onProgress(10);
-        const blob = await processImage(file);
+        const { blob } = await processImage(file, outputFormat, quality);
         onProgress(100);
         return blob;
       }, { toast: 'Processing error', log: true });
     },
-    []
+    [outputFormat, quality]
   );
 
   const handleBulkProcess = useCallback(async () => {
     if (batch.files.length === 0) return;
-
     if (hasLargeFiles(batch.files.map((f) => f.file))) {
       const mem = checkMemory();
       if (!mem) {
@@ -227,7 +321,6 @@ export default function GeminiWatermarkRemover() {
         if (!proceed) return;
       }
     }
-
     doneBlobsRef.current = [];
     await batch.processBatch(bulkProcessor, {
       onComplete: () => {
@@ -248,7 +341,8 @@ export default function GeminiWatermarkRemover() {
     const zip = new JSZip();
     batch.files.forEach((bf, i) => {
       if (bf.status === 'done' && bf.result) {
-        const name = bf.file.name.replace(/\.[^.]+$/, '') + '-clean.png';
+        const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
+        const name = bf.file.name.replace(/\.[^.]+$/, '') + '-clean' + ext;
         zip.file(name, bf.result);
       }
     });
@@ -256,123 +350,133 @@ export default function GeminiWatermarkRemover() {
     const url = URL.createObjectURL(content);
     blobUrlsRef.current.push(url);
     downloadOrShare(url, 'clean-images.zip');
-  }, [batch.files]);
+  }, [batch.files, outputFormat]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex bg-[var(--bg-base)] rounded-[var(--radius-lg)] p-1">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
           <button
             onClick={() => setMode('single')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] text-sm font-medium transition-colors ${
-              mode === 'single'
-                ? 'bg-[var(--accent-ink)] text-white'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              mode === 'single' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Sparkles className="w-4 h-4" />
-            Single Image
+            <Sparkles className="w-4 h-4" /> Single Image
           </button>
           <button
             onClick={() => setMode('bulk')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-[var(--radius-md)] text-sm font-medium transition-colors ${
-              mode === 'bulk'
-                ? 'bg-[var(--accent-ink)] text-white'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              mode === 'bulk' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
-            <Images className="w-4 h-4" />
-            Batch Mode
+            <Images className="w-4 h-4" /> Batch Mode
           </button>
         </div>
-        <span className="text-xs text-[var(--text-secondary)]">
-          {freeRemaining} free images remaining this month
-        </span>
+        <span className="text-xs text-[var(--text-secondary)]">{freeRemaining} free images remaining this month</span>
+      </div>
+
+      {/* Settings Bar */}
+      <div className="flex flex-wrap items-center gap-4 text-sm">
+        <div className="flex items-center gap-2">
+          <label className="text-xs text-[var(--text-secondary)]">Output:</label>
+          <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
+            className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] outline-none">
+            <option value="png">PNG</option>
+            <option value="jpeg">JPG</option>
+            <option value="webp">WebP</option>
+          </select>
+        </div>
+        {outputFormat !== 'png' && (
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-[var(--text-secondary)]">Quality: {quality}%</label>
+            <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))}
+              className="w-24 h-1 accent-[var(--accent-ink)]" />
+          </div>
+        )}
+        {processTime !== null && (
+          <span className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400">
+            <Clock className="w-3 h-3" /> Processed in {(processTime / 1000).toFixed(1)}s
+          </span>
+        )}
       </div>
 
       {mode === 'single' ? (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {!singleImage ? (
             <div
+              onDragOver={e => { e.preventDefault(); setIsDragging(true); }}
+              onDragLeave={() => setIsDragging(false)}
+              onDrop={handleDrop}
               onClick={() => fileRef.current?.click()}
-              className="border-2 border-dashed border-[var(--border-default)] rounded-[var(--radius-xl)] p-12 text-center cursor-pointer hover:border-[var(--accent)] transition-colors"
+              className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${
+                isDragging
+                  ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.01]'
+                  : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'
+              }`}
             >
-              <Sparkles className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
-              <p className="text-[var(--text-primary)] font-medium">Drop a Gemini image here</p>
-              <p className="text-sm text-[var(--text-secondary)] mt-1">
-                Removes the visible sparkle watermark using reverse alpha blending
+              <Upload className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
+              <p className="text-[var(--text-primary)] font-medium">
+                {isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}
               </p>
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleSingleUpload}
-              />
+              <p className="text-sm text-[var(--text-secondary)] mt-1">or click to browse</p>
+              <p className="text-xs text-[var(--text-muted)] mt-3">Removes the sparkle watermark using reverse alpha blending</p>
+              <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
             </div>
           ) : (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="relative rounded-[var(--radius-xl)] overflow-hidden bg-[var(--bg-base)]">
-                  <span className="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
-                    Before
-                  </span>
-                  <img
-                    src={singleImage.url}
-                    alt="Original"
-                    className="w-full h-auto max-h-[400px] object-contain"
-                  />
+              {/* Image Info */}
+              <ImageInfo file={singleImage.file} blob={processedBlob} />
+
+              {/* Compare Mode Toggle */}
+              {processedUrl && (
+                <div className="flex gap-2">
+                  <button onClick={() => setCompareMode('side')}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'side' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
+                    Side by Side
+                  </button>
+                  <button onClick={() => setCompareMode('slider')}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-lg ${compareMode === 'slider' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
+                    Slider Compare
+                  </button>
                 </div>
-                {processedUrl && (
-                  <div className="relative rounded-[var(--radius-xl)] overflow-hidden bg-[var(--bg-base)]">
-                    <span className="absolute top-2 left-2 z-10 bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">
-                      After
-                    </span>
-                    <img
-                      src={processedUrl}
-                      alt="Cleaned"
-                      className="w-full h-auto max-h-[400px] object-contain"
-                    />
+              )}
+
+              {/* Preview */}
+              {compareMode === 'slider' && processedUrl ? (
+                <SliderCompare before={singleImage.url} after={processedUrl} />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="relative rounded-xl overflow-hidden bg-[var(--bg-surface)]">
+                    <span className="absolute top-2 left-2 z-10 bg-black/60 text-white text-xs px-2 py-1 rounded-full">Before</span>
+                    <img src={singleImage.url} alt="Original" className="w-full h-auto max-h-[400px] object-contain" />
                   </div>
-                )}
-              </div>
+                  {processedUrl && (
+                    <div className="relative rounded-xl overflow-hidden bg-[var(--bg-surface)]">
+                      <span className="absolute top-2 left-2 z-10 bg-emerald-600/80 text-white text-xs px-2 py-1 rounded-full">After</span>
+                      <img src={processedUrl} alt="Cleaned" className="w-full h-auto max-h-[400px] object-contain" />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Actions */}
               <div className="flex items-center gap-3">
                 {!processedUrl ? (
-                  <button
-                    onClick={processSingle}
-                    disabled={isProcessing}
-                    className="flex items-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white rounded-[var(--radius-lg)] font-medium hover:opacity-90 disabled:opacity-50 transition-opacity"
-                  >
-                    {isProcessing ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Processing...
-                      </>
-                    ) : (
-                      <>
-                        <Zap className="w-4 h-4" />
-                        Remove Watermark
-                      </>
-                    )}
+                  <button onClick={processSingle} disabled={isProcessing}
+                    className="flex items-center gap-2 px-6 py-3 bg-[var(--accent-ink)] text-white rounded-xl font-medium hover:opacity-90 disabled:opacity-50 transition-opacity">
+                    {isProcessing ? <><Loader2 className="w-4 h-4 animate-spin" /> Processing...</> : <><Zap className="w-4 h-4" /> Remove Watermark</>}
                   </button>
                 ) : (
-                  <button
-                    onClick={handleSingleDownload}
-                    className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-[var(--radius-lg)] font-medium hover:bg-emerald-700 transition-colors"
-                  >
-                    <Download className="w-4 h-4" />
-                    Download Clean Image
+                  <button onClick={handleSingleDownload}
+                    className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white rounded-xl font-medium hover:bg-emerald-700 transition-colors">
+                    <Download className="w-4 h-4" /> Download Clean Image
                   </button>
                 )}
-                <button
-                  onClick={() => {
-                    setSingleImage(null);
-                    setProcessedUrl(null);
-                  }}
-                  className="flex items-center gap-2 px-4 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                  Clear
+                <button onClick={() => { setSingleImage(null); setProcessedUrl(null); setProcessedBlob(null); setProcessTime(null); }}
+                  className="flex items-center gap-2 px-4 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                  <X className="w-4 h-4" /> Clear
                 </button>
               </div>
             </div>
@@ -381,50 +485,50 @@ export default function GeminiWatermarkRemover() {
       ) : (
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => bulkFileRef.current?.click()}
-              className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-base)] border border-[var(--border-default)] rounded-[var(--radius-lg)] text-sm hover:border-[var(--accent)] transition-colors"
-            >
-              <Upload className="w-4 h-4" />
-              Add Images
+            <button onClick={() => bulkFileRef.current?.click()}
+              className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm hover:border-[var(--accent)] transition-colors">
+              <Upload className="w-4 h-4" /> Add Images
             </button>
             {batch.files.length > 0 && !batch.isProcessing && (
-              <button
-                onClick={handleBulkProcess}
-                className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] text-white rounded-[var(--radius-lg)] text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                <Zap className="w-4 h-4" />
-                Process All ({batch.files.length})
+              <button onClick={handleBulkProcess}
+                className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity">
+                <Zap className="w-4 h-4" /> Process All ({batch.files.length})
               </button>
             )}
             {batch.files.filter((f) => f.status === 'done').length > 0 && !batch.isProcessing && (
-              <ProDownloadButton
-                fileCount={batch.files.filter((f) => f.status === 'done').length}
-                onDownloadAll={downloadAll}
-              />
+              <ProDownloadButton fileCount={batch.files.filter((f) => f.status === 'done').length} onDownloadAll={downloadAll} />
             )}
-            <input
-              ref={bulkFileRef}
-              type="file"
-              accept="image/*"
-              multiple
-              className="hidden"
-              onChange={handleBulkFiles}
-            />
+            <input ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
           </div>
           <BatchProgressPanel
-            files={batch.files}
-            progress={batch.progress}
-            isProcessing={batch.isProcessing}
-            onRemove={batch.removeFile}
-            onClear={() => {
-              batch.clearFiles();
-              doneBlobsRef.current = [];
-            }}
+            files={batch.files} progress={batch.progress} isProcessing={batch.isProcessing}
+            onRemove={batch.removeFile} onClear={() => { batch.clearFiles(); doneBlobsRef.current = []; }}
             onAbort={batch.abort}
           />
         </div>
       )}
+
+      {/* How It Works */}
+      <div className="border-t border-[var(--border-subtle)] pt-6 space-y-4">
+        <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2">
+          <Info className="w-4 h-4" /> How It Works
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[
+            { step: '1', title: 'Upload', desc: 'Drop your Gemini-generated image with the sparkle watermark.' },
+            { step: '2', title: 'Detect', desc: 'The tool locates the watermark using alpha channel analysis.' },
+            { step: '3', title: 'Remove', desc: 'Reverse alpha blending reconstructs the original pixels underneath.' },
+          ].map(s => (
+            <div key={s.step} className="flex gap-3">
+              <div className="w-8 h-8 rounded-full bg-[var(--accent-ink)]/10 text-[var(--accent-ink)] font-bold flex items-center justify-center shrink-0 text-sm">{s.step}</div>
+              <div>
+                <h4 className="font-medium text-[var(--text-primary)] text-sm">{s.title}</h4>
+                <p className="text-xs text-[var(--text-secondary)]">{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
