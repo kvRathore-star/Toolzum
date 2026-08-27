@@ -104,7 +104,7 @@ export function ColorShadesTints() {
           <div className="flex gap-1 flex-wrap">
             {shades.map((c, i) => (
               <button key={i} className="w-10 h-10 rounded-lg text-xs" style={{ backgroundColor: c, color: i < 5 ? '#fff' : '#000' }}
-                onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} title={c} />
+                onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} title={c} aria-label={`Copy color ${c}`} />
             ))}
           </div>
         )}

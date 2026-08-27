@@ -96,7 +96,7 @@ export default function MacAddressGenerator() {
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">MAC Addresses</span>
-              {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg"><Copy className="w-4 h-4" /></button>}
+              {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy all MAC addresses"><Copy className="w-4 h-4" /></button>}
             </div>
             <textarea readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 h-48 resize-none mt-2" />
           </div>

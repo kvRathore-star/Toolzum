@@ -398,7 +398,7 @@ export default function WebsiteScreenshot() {
         <div className="relative w-full bg-[var(--bg-surface)] flex items-start justify-center p-4" style={{ minHeight: '50vh', maxHeight: '80vh', overflow: 'auto' }}>
           <img
             src={screenshotUrl!}
-            alt="Website screenshot"
+            alt={`Screenshot of ${url}`}
             className="shadow-2xl rounded-lg max-w-full"
             style={{ width: Math.min(viewportWidth, 1200) + 'px' }}
           />

@@ -224,7 +224,7 @@ export default function ScientificCalculator() {
               {result && (
                 <>
                   <span className="text-2xl font-bold text-[var(--text-primary)] font-mono">{result}</span>
-                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result"><Copy size={16} /></button>
+                  <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result" aria-label="Copy result"><Copy size={16} /></button>
                 </>
               )}
               {error && <span className="text-sm text-red-700 dark:text-red-400 font-medium">{error}</span>}

@@ -169,7 +169,7 @@ export function SaaSMetricsDashboard() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button onClick={reset} className="p-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Reset to defaults">
+          <button onClick={reset} className="p-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Reset to defaults" aria-label="Reset to defaults">
             <RefreshCw size={16} />
           </button>
           <button onClick={exportPdf} disabled={exporting} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">

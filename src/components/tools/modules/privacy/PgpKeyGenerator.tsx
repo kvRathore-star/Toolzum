@@ -101,8 +101,8 @@ export default function PgpKeyGenerator() {
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Public Key Block</span>
                 {publicKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Copy public key"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Download public key"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>
@@ -115,8 +115,8 @@ export default function PgpKeyGenerator() {
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Private Key Block</span>
                 {privateKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Copy private key"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Download private key"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>

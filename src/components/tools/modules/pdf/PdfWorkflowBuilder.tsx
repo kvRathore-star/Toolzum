@@ -366,9 +366,9 @@ export function PdfWorkflowBuilder() {
                     <div key={f.id} className={fileRowCls}>
                       <FileText size={15} className="text-blue-700 dark:text-blue-400 shrink-0" />
                       <span className="flex-1 truncate">{f.name}</span>
-                      <button onClick={() => moveMergeFile(i, -1)} disabled={i === 0} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"><ChevronUp size={15} /></button>
-                      <button onClick={() => moveMergeFile(i, 1)} disabled={i === mergeFiles.length - 1} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"><ChevronDown size={15} /></button>
-                      <button onClick={() => removeMergeFile(f.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400"><Trash2 size={14} /></button>
+                      <button onClick={() => moveMergeFile(i, -1)} disabled={i === 0} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30" aria-label="Move file up"><ChevronUp size={15} /></button>
+                      <button onClick={() => moveMergeFile(i, 1)} disabled={i === mergeFiles.length - 1} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30" aria-label="Move file down"><ChevronDown size={15} /></button>
+                      <button onClick={() => removeMergeFile(f.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400" aria-label="Remove file"><Trash2 size={14} /></button>
                     </div>
                   ))}
                 </div>

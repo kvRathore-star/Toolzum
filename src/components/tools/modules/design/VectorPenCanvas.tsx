@@ -245,11 +245,11 @@ export default function VectorPenCanvas() {
         <div className="flex flex-wrap items-center gap-1.5 p-3 border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
           {/* Drawing modes */}
           <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-black/30 rounded-xl">
-            <button onClick={() => setMode('select')} className={`p-2 rounded-lg transition-all ${mode === 'select' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Select"><MousePointer2 className="w-4 h-4" /></button>
-            <button onClick={() => setMode('pen')} className={`p-2 rounded-lg transition-all ${mode === 'pen' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Freehand Pen"><Pencil className="w-4 h-4" /></button>
-            <button onClick={() => setMode('rect')} className={`p-2 rounded-lg transition-all ${mode === 'rect' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Rectangle"><Square className="w-4 h-4" /></button>
-            <button onClick={() => setMode('circle')} className={`p-2 rounded-lg transition-all ${mode === 'circle' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Ellipse"><Circle className="w-4 h-4" /></button>
-            <button onClick={() => setMode('line')} className={`p-2 rounded-lg transition-all ${mode === 'line' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Line"><Minus className="w-4 h-4" /></button>
+            <button onClick={() => setMode('select')} className={`p-2 rounded-lg transition-all ${mode === 'select' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Select" aria-label="Select tool"><MousePointer2 className="w-4 h-4" /></button>
+            <button onClick={() => setMode('pen')} className={`p-2 rounded-lg transition-all ${mode === 'pen' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Freehand Pen" aria-label="Freehand pen tool"><Pencil className="w-4 h-4" /></button>
+            <button onClick={() => setMode('rect')} className={`p-2 rounded-lg transition-all ${mode === 'rect' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Rectangle" aria-label="Rectangle tool"><Square className="w-4 h-4" /></button>
+            <button onClick={() => setMode('circle')} className={`p-2 rounded-lg transition-all ${mode === 'circle' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Ellipse" aria-label="Ellipse tool"><Circle className="w-4 h-4" /></button>
+            <button onClick={() => setMode('line')} className={`p-2 rounded-lg transition-all ${mode === 'line' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Line" aria-label="Line tool"><Minus className="w-4 h-4" /></button>
           </div>
 
           <div className="w-px h-6 bg-zinc-200 dark:bg-[var(--bg-surface)] mx-1" />
@@ -263,6 +263,7 @@ export default function VectorPenCanvas() {
                 className={`w-6 h-6 rounded-full border-2 transition-all ${color === c ? 'border-white scale-110 shadow-md' : 'border-transparent'}`}
                 style={{ backgroundColor: c }}
                 title={c}
+                aria-label={`Color: ${c}`}
               />
             ))}
             <label className="relative cursor-pointer">
@@ -286,8 +287,8 @@ export default function VectorPenCanvas() {
           <div className="w-px h-6 bg-zinc-200 dark:border-zinc-800 mx-1" />
 
           {/* Actions */}
-          <button onClick={handleUndo} className="p-2 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Undo"><Undo2 className="w-4 h-4" /></button>
-          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 hover:bg-zinc-800 rounded-lg" title="Clear"><Trash2 className="w-4 h-4" /></button>
+          <button onClick={handleUndo} className="p-2 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Undo" aria-label="Undo"><Undo2 className="w-4 h-4" /></button>
+          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 hover:bg-zinc-800 rounded-lg" title="Clear canvas" aria-label="Clear canvas"><Trash2 className="w-4 h-4" /></button>
 
           <div className="flex-1" />
 
@@ -329,7 +330,7 @@ export default function VectorPenCanvas() {
               Page {idx + 1}
             </button>
           ))}
-          <button onClick={addPage} className="p-1.5 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Add Page">
+          <button onClick={addPage} className="p-1.5 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Add Page" aria-label="Add new page">
             <Plus className="w-3.5 h-3.5" />
           </button>
         </div>

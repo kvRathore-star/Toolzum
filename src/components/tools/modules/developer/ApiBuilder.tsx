@@ -302,7 +302,7 @@ export function ApiBuilder() {
             <div className="flex-1 relative">
               <input ref={urlRef} type="text" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://api.example.com/endpoint" className={`${inputClass} pr-20`} onKeyDown={e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendRequest(); }} />
               <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
-                <button onClick={() => copyToClipboard(url)} className="p-1 rounded hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy URL"><Copy size={14} /></button>
+                <button onClick={() => copyToClipboard(url)} className="p-1 rounded hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy URL" aria-label="Copy URL"><Copy size={14} /></button>
               </div>
             </div>
             <button onClick={sendRequest} disabled={loading} className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">
@@ -321,7 +321,7 @@ export function ApiBuilder() {
                   <input type="checkbox" checked={p.enabled} onChange={() => toggleParam(p.id)} className="accent-indigo-500" />
                   <input type="text" placeholder="Key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
                   <input type="text" placeholder="Value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <button onClick={() => removeParam(p.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors"><Trash2 size={13} /></button>
+                  <button onClick={() => removeParam(p.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove parameter"><Trash2 size={13} /></button>
                 </div>
               ))}
               <button onClick={addParam} className="flex items-center gap-1 text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-300 transition-colors"><Plus size={12} /> Add param</button>
@@ -339,7 +339,7 @@ export function ApiBuilder() {
                   <input type="checkbox" checked={h.enabled} onChange={() => toggleHeader(h.id)} className="accent-indigo-500" />
                   <input type="text" placeholder="Header" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
                   <input type="text" placeholder="Value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <button onClick={() => removeHeader(h.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors"><Trash2 size={13} /></button>
+                  <button onClick={() => removeHeader(h.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove header"><Trash2 size={13} /></button>
                 </div>
               ))}
               <button onClick={addHeader} className="flex items-center gap-1 text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-300 transition-colors"><Plus size={12} /> Add header</button>
