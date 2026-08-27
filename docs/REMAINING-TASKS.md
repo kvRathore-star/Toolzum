@@ -5,7 +5,7 @@
 | Task | Status | Details |
 |------|--------|---------|
 | Keyboard Accessibility | ✅ Complete | 20 tools wired with `useEnterToSubmit` |
-| Testing | ✅ Complete | 23 test files, 35+ tests |
+| Testing | ✅ Complete | 67 test files, 100+ tests |
 | Server Components | ⏳ Pending | 400 client components |
 | Split Mega Files | ⏳ Pending | 8 files >1000 lines |
 
@@ -102,27 +102,157 @@ Tools/
 
 ---
 
-## Task 3: Additional Testing (Optional)
+## Task 3: Testing Strategy - Shared Library Coverage
+
+### Approach
+Instead of 300+ individual tool tests, test shared libraries/hooks that all tools depend on.
+~39 shared files → ~40-50 tests covers all tools via dependencies.
+
+### Tests Created (Aug 27) - 17 Files
+
+#### Tool-Specific Tests (6 files)
+| File | Category | Tests |
+|------|----------|-------|
+| `src/__tests__/AudioMerger.test.tsx` | Audio | Audio merge functionality |
+| `src/__tests__/ImageColorizer.test.tsx` | Image | Colorization feature |
+| `src/__tests__/ImageEnhancer.test.tsx` | Image | Enhancement feature |
+| `src/__tests__/MuteVideo.test.tsx` | Video | Audio muting |
+| `src/__tests__/NoiseReducer.test.tsx` | Audio | Noise reduction |
+| `src/__tests__/VideoCompressor.test.tsx` | Video | Compression |
+
+#### Hook Tests (4 files)
+| File | Hook | Tests |
+|------|------|-------|
+| `src/__tests__/hooks/useAiProvider.test.ts` | useAiProvider | AI provider integration |
+| `src/__tests__/hooks/useBatchProgress.test.ts` | useBatchProgress | Batch progress tracking |
+| `src/__tests__/hooks/useFFmpeg.test.ts` | useFFmpeg | FFmpeg initialization |
+| `src/__tests__/hooks/useUsageCounter.test.ts` | useUsageCounter | Usage counting |
+
+#### Library Tests (5 files)
+| File | Library | Tests |
+|------|---------|-------|
+| `src/__tests__/lib/clipboard.test.ts` | clipboard | clipboardWrite (3 tests) |
+| `src/__tests__/lib/error.test.ts` | error utils | getErrorMessage (7 tests) |
+| `src/__tests__/lib/fileUtils.test.ts` | fileUtils | hasLargeFiles, checkMemory |
+| `src/__tests__/lib/keyboard.test.ts` | keyboard | Keyboard accessibility |
+| `src/__tests__/lib/withErrorHandling.test.ts` | withErrorHandling | Error wrapper (5 tests) |
+
+#### Utils & Component Tests (2 files)
+| File | Component | Tests |
+|------|-----------|-------|
+| `src/__tests__/utils/blob.test.ts` | blob utils | Blob handling |
+| `src/__tests__/components/AiPrivacyBanner.test.tsx` | AiPrivacyBanner | Privacy banner |
 
 ### Current Coverage
-- 23 test files
-- 35+ tests
-- 6% of tools tested
+- **Total test files:** 67
+- **Shared lib tests:** 17 (new)
+- **Existing tests:** 50 (tool-specific, pairs, integrity)
+- **Coverage:** ~17% of shared code tested
 
-### Recommended Addition
-- Add 27 more tests to reach 50 total (MVP)
-- Focus on high-traffic tools
-- Test unique business logic, not FFmpeg
+### Remaining Shared Libs to Test (28 files)
 
-### Priority Tools for Testing
+#### High Priority (9 files)
+| File | Purpose | Used By |
+|------|---------|---------|
+| `src/lib/fetchWithRetry.ts` | API retry logic | API tools |
+| `src/lib/proLimits.ts` | Premium limits | All premium tools |
+| `src/hooks/useFavorites.ts` | User favorites | All tools |
+| `src/hooks/useToolHistory.ts` | Tool history | All tools |
+| `src/utils/fileSizeLimits.ts` | File validation | File tools |
+| `src/utils/freeUsageGuard.ts` | Free tier guard | Free tools |
+| `src/hooks/useParallelProcessor.ts` | Parallel ops | Batch tools |
+| `src/hooks/useBidirectional.ts` | Two-way converters | Converter tools |
+| `src/hooks/usePresets.tsx` | Preset management | Calculator tools |
 
-| Tool | Reason |
-|------|--------|
-| SalaryCalculator | Complex formula |
-| UnitConverter | Multiple rules |
-| PasswordGenerator | Entropy calculation |
-| QrCodeGenerator | Output validation |
-| CurrencyConverter | API handling |
+#### Medium Priority (9 files)
+| File | Purpose | Used By |
+|------|---------|---------|
+| `src/lib/auth.ts` | Auth logic | User features |
+| `src/lib/auth-client.ts` | Client auth | User features |
+| `src/lib/env.ts` | Environment config | All tools |
+| `src/hooks/useWorkflowPresets.ts` | Workflow presets | Complex tools |
+| `src/utils/nativeShare.ts` | Native share | Mobile tools |
+| `src/utils/toolCache.ts` | Tool caching | All tools |
+| `src/utils/urlStatus.ts` | URL validation | URL tools |
+| `src/lib/categoryTheme.ts` | Theme mappings | UI |
+| `src/lib/geo.ts` | Geo utilities | Location tools |
+
+#### Low Priority (10 files)
+| File | Purpose | Used By |
+|------|---------|---------|
+| `src/lib/log.ts` | Logging | Debug |
+| `src/lib/utils.ts` | General utils | Various |
+| `src/lib/generateToolDescription.ts` | Description gen | SEO |
+| `src/hooks/useObjectURL.ts` | Object URL mgmt | File tools |
+| `src/hooks/useFreeUsage.ts` | Free tier tracking | Free tools |
+| `src/hooks/useIsIndia.ts` | Region detection | Indian tools |
+| `src/hooks/useMemoryWatchdog.ts` | Memory monitoring | Heavy tools |
+| `src/hooks/useWebWorker.ts` | Worker management | CPU tools |
+| `src/utils/cobaltApi.ts` | Cobalt API | Video download |
+| `src/utils/telemetry.ts` | Telemetry | Analytics |
+
+---
+
+## Task 4: Dependency Testing (Verify All Tools Work)
+
+### Approach
+Test each dependency/library directly to verify ALL tools using it work correctly.
+13 dependency tests = ~150 tools covered
+
+### High-Value Dependencies (P0 - Do First)
+
+| Dependency | Tools Using It | Test Strategy | Tests Needed |
+|------------|----------------|---------------|--------------|
+| pdf-lib | **73 tools** | Test merge/split/watermark on sample PDF | 1 |
+| jszip | **30 tools** | Test create/extract/preview ZIP | 1 |
+| @ffmpeg/ffmpeg | **34 tools** | Test basic transcode/compress | 1 |
+
+### Medium Dependencies (P1)
+
+| Dependency | Tools Using It | Test Strategy | Tests Needed |
+|------------|----------------|---------------|--------------|
+| dompurify | **10 tools** | Test sanitize HTML input | 1 |
+| qrcode | **5 tools** | Test generate/read QR | 1 |
+| jspdf | **5 tools** | Test generate PDF with text | 1 |
+| browser-image-compression | **8 tools** | Test compress JPEG/PNG | 1 |
+| pdfjs-dist | **18 tools** | Test render PDF page | 1 |
+
+### Low Dependencies (P2)
+
+| Dependency | Tools Using It | Test Strategy | Tests Needed |
+|------------|----------------|---------------|--------------|
+| marked | **5 tools** | Test parse markdown→HTML | 1 |
+| xlsx | **5 tools** | Test read/write spreadsheet | 1 |
+| crypto-js | **3 tools** | Test encrypt/decrypt AES | 1 |
+| zxcvbn | **2 tools** | Test password strength calc | 1 |
+| tesseract.js | **2 tools** | Test extract text from image | 1 |
+
+### Dependency Test Summary
+
+| Priority | Dependencies | Tools Covered | Tests |
+|----------|--------------|---------------|-------|
+| P0 | pdf-lib, jszip, ffmpeg | ~137 tools | 3 |
+| P1 | dompurify, qrcode, jspdf, image-compression, pdfjs | ~46 tools | 5 |
+| P2 | marked, xlsx, crypto-js, zxcvbn, tesseract | ~17 tools | 5 |
+| **Total** | **13 dependencies** | **~150 tools** | **13** |
+
+### Test File Locations
+```
+src/__tests__/dependencies/
+  ├── pdf-lib.test.ts          (covers 73 PDF tools)
+  ├── jszip.test.ts            (covers 30 file tools)
+  ├── ffmpeg.test.ts           (covers 34 video/audio tools)
+  ├── dompurify.test.ts        (covers 10 text tools)
+  ├── qrcode.test.ts           (covers 5 QR tools)
+  ├── jspdf.test.ts            (covers 5 PDF gen tools)
+  ├── image-compression.test.ts (covers 8 image tools)
+  ├── pdfjs-dist.test.ts       (covers 18 PDF render tools)
+  ├── marked.test.ts           (covers 5 markdown tools)
+  ├── xlsx.test.ts             (covers 5 Excel tools)
+  ├── crypto-js.test.ts        (covers 3 security tools)
+  ├── zxcvbn.test.ts           (covers 2 password tools)
+  └── tesseract.test.ts        (covers 2 OCR tools)
+```
 
 ---
 
@@ -142,11 +272,22 @@ Tools/
 5. Update imports
 6. Test all functionality
 
-### Phase 3: Additional Testing (Week 4)
-1. Add 27 more tests
-2. Focus on complex tools
+### Phase 3: Dependency Testing (Week 4)
+1. Create `src/__tests__/dependencies/` folder
+2. Test P0 deps: pdf-lib, jszip, ffmpeg (covers 137 tools)
+3. Test P1 deps: dompurify, qrcode, jspdf, image-compression (covers 46 tools)
+4. Verify all tools using these deps work
+
+### Phase 4: Shared Library Testing (Week 5)
+1. Complete high-priority lib tests (9 files)
+2. Complete medium-priority lib tests (9 files)
 3. Run full test suite
-4. Verify coverage
+
+### Phase 5: Low Priority Testing (Week 6)
+1. Test P2 deps: marked, xlsx, crypto-js, zxcvbn, tesseract
+2. Complete low-priority lib tests (10 files)
+3. Add category smoke tests (1 per category)
+4. Final coverage verification
 
 ---
 
@@ -156,7 +297,10 @@ Tools/
 |--------|---------|--------|
 | Server Components | 0 | 50+ |
 | Files <1000 lines | 8 | 0 |
-| Test Coverage | 6% | 12%+ |
+| Shared Lib Tests | 17 | 45+ |
+| Dependency Tests | 0 | 13 |
+| Tools Verified | ~50 | ~200 |
+| Test Coverage | 17% | 60%+ |
 | Build Size | - | -10% |
 
 ---
