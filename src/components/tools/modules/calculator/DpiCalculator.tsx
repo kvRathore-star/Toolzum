@@ -23,18 +23,18 @@ export default function DpiCalculator() {
   const p = parseFloat(pixels) || 0;
   const i = parseFloat(inches) || 1;
   const dpi = p / i;
+  const customResult = result ? (
+    <div className="text-center">
+      <div className="text-xs text-[var(--text-tertiary)]">Dots Per Inch</div>
+      <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="DPI Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
+    <CalculatorShell title="DPI Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Pixels</label><input type="number" value={pixels} onChange={e => setPixels(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inches</label><input type="number" value={inches} onChange={e => setInches(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Dots Per Inch</div>
-          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

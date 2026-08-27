@@ -23,18 +23,18 @@ export default function PpiCalculator() {
   const p = parseFloat(diagPixels) || 0;
   const i = parseFloat(diagInches) || 1;
   const ppi = p / i;
+  const customResult = result ? (
+    <div className="text-center">
+      <div className="text-xs text-[var(--text-tertiary)]">Pixels Per Inch</div>
+      <div className="text-3xl font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="PPI Calculator" result={result} onCalculate={calc} presets={presets} accent="orange">
+    <CalculatorShell title="PPI Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Pixels</label><input type="number" value={diagPixels} onChange={e => setDiagPixels(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Inches</label><input type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Pixels Per Inch</div>
-          <div className="text-3xl font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

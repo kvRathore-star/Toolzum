@@ -27,21 +27,22 @@ export default function MeanMedianModeCalculator() {
   ];
   const nums = numbers.split(',').map(Number).sort((a, b) => a - b);
   const mean = nums.length ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
+  const median = nums.length ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0;
+  const customResult = result ? (
+    <div className="grid grid-cols-2 gap-2">
+      <div className="text-center">
+        <div className="text-xs text-[var(--text-tertiary)]">Mean</div>
+        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{mean.toFixed(2)}</div>
+      </div>
+      <div className="text-center">
+        <div className="text-xs text-[var(--text-tertiary)]">Median</div>
+        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{median}</div>
+      </div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Mean Median Mode Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan">
+    <CalculatorShell title="Mean Median Mode Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputCls} /></div>
-      {result && (
-        <div className="grid grid-cols-2 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Mean</div>
-            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{mean.toFixed(2)}</div>
-          </div>
-          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Median</div>
-            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{nums.length ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0}</div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

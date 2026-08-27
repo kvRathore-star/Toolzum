@@ -25,13 +25,9 @@ export default function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets} accent="blue">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Period ($)</label><input type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Period ($)</label><input type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets} accent="blue" customResult={
+      result ? (
+        <div>
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Previous</div>
@@ -49,7 +45,12 @@ export default function RevenueGrowthCalculator() {
             <div className={`h-full rounded-full transition-all duration-500 ${isPositive ? 'bg-emerald-700' : 'bg-red-500'}`} style={{ width: `${Math.min(Math.abs(growth), 100)}%` }} />
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Period ($)</label><input type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Period ($)</label><input type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

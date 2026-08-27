@@ -36,19 +36,19 @@ export default function QuadraticEquationSolver() {
   const B = parseFloat(b) || 0;
   const C = parseFloat(c) || 0;
   const disc = B * B - 4 * A * C;
+  const customResult = result ? (
+    <div className="text-center">
+      <div className="text-xs text-[var(--text-tertiary)]">Discriminant</div>
+      <div className={`text-lg font-bold ${disc >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{disc.toFixed(2)}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Quadratic Solver" result={result} onCalculate={calc} presets={presets} accent="pink">
+    <CalculatorShell title="Quadratic Solver" result={result} onCalculate={calc} presets={presets} accent="pink" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">c</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Discriminant</div>
-          <div className={`text-lg font-bold ${disc >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{disc.toFixed(2)}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

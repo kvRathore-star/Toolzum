@@ -36,33 +36,33 @@ export default function AbTestCalculator() {
   const cr1 = cc / cv;
   const cr2 = vc / vv;
   const pct = cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0;
+  const customResult = result ? (
+    <div className="space-y-2">
+      <div className="flex gap-3">
+        <div className="flex-1 text-center">
+          <div className="text-xs text-[var(--text-tertiary)]">Control</div>
+          <div className="text-lg font-bold text-[var(--text-primary)]">{(cr1 * 100).toFixed(1)}%</div>
+        </div>
+        <div className="flex-1 text-center">
+          <div className="text-xs text-[var(--text-tertiary)]">Variant</div>
+          <div className={`text-lg font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
+        </div>
+      </div>
+      <div className="text-center">
+        <span className={`text-sm font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
+          {pct >= 0 ? '+' : ''}{pct.toFixed(1)}% {pct >= 0 ? 'improvement' : 'decline'}
+        </span>
+      </div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="A/B Test Calculator" result={result} onCalculate={calc} presets={presets} accent="violet">
+    <CalculatorShell title="A/B Test Calculator" result={result} onCalculate={calc} presets={presets} accent="violet" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Visitors</label><input type="number" value={variantVisitors} onChange={e => setVariantVisitors(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Conversions</label><input type="number" value={variantConversions} onChange={e => setVariantConversions(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="space-y-2">
-          <div className="flex gap-3">
-            <div className="flex-1 bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-              <div className="text-xs text-[var(--text-tertiary)]">Control</div>
-              <div className="text-lg font-bold text-[var(--text-primary)]">{(cr1 * 100).toFixed(1)}%</div>
-            </div>
-            <div className={`flex-1 rounded-xl p-3 text-center border ${pct >= 0 ? 'bg-emerald-700/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
-              <div className="text-xs text-[var(--text-tertiary)]">Variant</div>
-              <div className={`text-lg font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
-            </div>
-          </div>
-          <div className="bg-[var(--bg-overlay)] rounded-lg px-3 py-2 text-center">
-            <span className={`text-sm font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
-              {pct >= 0 ? '+' : ''}{pct.toFixed(1)}% {pct >= 0 ? 'improvement' : 'decline'}
-            </span>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

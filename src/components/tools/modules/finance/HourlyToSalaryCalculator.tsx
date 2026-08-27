@@ -26,12 +26,8 @@ export default function HourlyToSalaryCalculator() {
   const annual = h * hpw * 52;
   const monthly = annual / 12;
   return (
-    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets} accent="pink">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hourly Rate ($)</label><input type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hours per Week</label><input type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
+    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets} accent="pink" customResult={
+      result ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { label: 'Annual', value: `$${annual.toLocaleString()}`, color: 'text-indigo-700 dark:text-indigo-400' },
@@ -39,13 +35,18 @@ export default function HourlyToSalaryCalculator() {
             { label: 'Biweekly', value: `$${(annual / 26).toLocaleString()}`, color: 'text-amber-700 dark:text-amber-400' },
             { label: 'Weekly', value: `$${(h * hpw).toLocaleString()}`, color: 'text-rose-700 dark:text-rose-400' },
           ].map(card => (
-            <div key={card.label} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
+            <div key={card.label} className="text-center p-3">
               <div className={`text-lg font-bold ${card.color}`}>{card.value}</div>
               <div className="text-xs text-[var(--text-tertiary)]">{card.label}</div>
             </div>
           ))}
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hourly Rate ($)</label><input type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hours per Week</label><input type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

@@ -31,15 +31,9 @@ export default function CompoundInterestCalculator() {
   ];
   const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
-    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
-      </div>
-      {yearData.length > 0 && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
+    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
+      yearData.length > 0 ? (
+        <div>
           <div className="px-4 py-2 border-b border-[var(--border-subtle)] text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Year-by-Year Growth</div>
           <div className="max-h-48 overflow-y-auto">
             <table className="w-full text-xs">
@@ -67,7 +61,14 @@ export default function CompoundInterestCalculator() {
             </table>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

@@ -28,14 +28,10 @@ export default function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets} accent="purple">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Assets ($)</label><input type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Liabilities ($)</label><input type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
+    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
+      result ? (
         <div className="space-y-3">
-          <div className="flex items-center justify-between bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+          <div className="flex items-center justify-between">
             <div>
               <div className="text-xs text-[var(--text-tertiary)]">Net Worth</div>
               <div className={`text-2xl font-bold ${nw >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
@@ -50,7 +46,12 @@ export default function NetWorthCalculator() {
             <div className="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-red-500 rounded-full" style={{ width: `${Math.min(dti, 100)}%` }} />
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Assets ($)</label><input type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Liabilities ($)</label><input type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

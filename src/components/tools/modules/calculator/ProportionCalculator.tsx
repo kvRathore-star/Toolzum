@@ -25,18 +25,18 @@ export default function ProportionCalculator() {
   const nb = parseFloat(b) || 0;
   const nc = parseFloat(c) || 0;
   const d = na ? (nb * nc) / na : 0;
+  const customResult = result ? (
+    <div className="text-center font-mono text-lg">
+      <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-700 dark:text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Proportion Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo">
+    <CalculatorShell title="Proportion Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)] font-mono text-lg">
-          <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-700 dark:text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

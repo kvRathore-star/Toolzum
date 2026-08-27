@@ -90,15 +90,8 @@ export function PasswordEntropyCalculator() {
       accent="red"
       downloadData={result ? `Entropy: ${result.bits} bits\nStrength: ${result.strength}\nScore: ${result.score}/100` : ''}
       downloadFilename="password-entropy.txt"
-    >
-      <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
-        <input type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-500/50" />
-
-        <button onClick={() => calc()} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Calculate Entropy</button>
-
-        {result && (
+      customResult={
+        result ? (
           <div className="space-y-3">
             <div className="p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400">
               <div className="flex justify-between items-center mb-2">
@@ -126,7 +119,13 @@ export function PasswordEntropyCalculator() {
 
             <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Result'}</button>
           </div>
-        )}
+        ) : null
+      }
+    >
+      <div className="space-y-4">
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
+        <input type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-red-500/50" />
       </div>
     </CalculatorShell>
   );
@@ -174,6 +173,29 @@ export function TwoFactorAuthGenerator() {
       accent="blue"
       downloadData={uri}
       downloadFilename="totp-uri.txt"
+      customResult={
+        uri ? (
+          <div className="space-y-3">
+            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">TOTP URI</label>
+              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 mb-3 font-mono text-xs break-all text-zinc-800 dark:text-zinc-200">{uri}</div>
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Secret</span><p className="font-mono text-zinc-800 dark:text-zinc-200 truncate">{secret || '—'}</p></div>
+                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Issuer</span><p className="text-zinc-800 dark:text-zinc-200">{issuer || 'Service'}</p></div>
+                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Type</span><p className="text-zinc-800 dark:text-zinc-200">TOTP (SHA-1, 6 digits, 30s)</p></div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Algorithm</span><p className="text-zinc-800 dark:text-zinc-200">SHA-1</p></div>
+              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Digits</span><p className="text-zinc-800 dark:text-zinc-200">6</p></div>
+              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Period</span><p className="text-zinc-800 dark:text-zinc-200">30s</p></div>
+            </div>
+
+            <button onClick={copyUri} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors self-start">{copied ? 'Copied!' : 'Copy URI'}</button>
+          </div>
+        ) : null
+      }
     >
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2 mb-3">
@@ -201,30 +223,6 @@ export function TwoFactorAuthGenerator() {
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
           </div>
         </div>
-
-        <button onClick={() => gen()} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Generate URI</button>
-
-        {uri && (
-          <div className="space-y-3">
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
-              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">TOTP URI</label>
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 mb-3 font-mono text-xs break-all text-zinc-800 dark:text-zinc-200">{uri}</div>
-              <div className="grid grid-cols-3 gap-2 text-xs">
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Secret</span><p className="font-mono text-zinc-800 dark:text-zinc-200 truncate">{secret || '—'}</p></div>
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Issuer</span><p className="text-zinc-800 dark:text-zinc-200">{issuer || 'Service'}</p></div>
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Type</span><p className="text-zinc-800 dark:text-zinc-200">TOTP (SHA-1, 6 digits, 30s)</p></div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Algorithm</span><p className="text-zinc-800 dark:text-zinc-200">SHA-1</p></div>
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Digits</span><p className="text-zinc-800 dark:text-zinc-200">6</p></div>
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Period</span><p className="text-zinc-800 dark:text-zinc-200">30s</p></div>
-            </div>
-
-            <button onClick={copyUri} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors self-start">{copied ? 'Copied!' : 'Copy URI'}</button>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );
@@ -307,6 +305,35 @@ export function BruteForceTimeEstimator() {
       accent="amber"
       downloadData={est ? `Password: ${pwd}\nRate: ${Number(rate).toLocaleString()}/s\nEstimated: ${est}\nSeverity: ${severityLabels[severity] || severity}` : ''}
       downloadFilename="brute-force-estimate.txt"
+      customResult={
+        est ? (
+          <div className="space-y-3">
+            <div className={`p-4 rounded-xl border-l-4 ${severity === 'critical' ? 'bg-red-50 dark:bg-red-900/30 border-red-500' : severity === 'high' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-500' : severity === 'medium' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-500' : severity === 'low' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500' : 'bg-green-50 dark:bg-green-900/30 border-green-500'}`}>
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Time to Crack</span>
+                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${severityColors[severity]}`}>{severityLabels[severity]}</span>
+              </div>
+              <p className="text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100">{est}</p>
+              <div className="mt-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2.5">
+                <div className={`h-2.5 rounded-full transition-all duration-500 ${severityColors[severity]}`}
+                  style={{ width: severity === 'critical' ? '95%' : severity === 'high' ? '70%' : severity === 'medium' ? '50%' : severity === 'low' ? '25%' : '5%' }} />
+              </div>
+            </div>
+
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+              <p className="text-xs text-[var(--text-secondary)] mb-2">Details</p>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div><span className="text-zinc-500">Total Combinations</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Math.pow(10, Math.log10(Math.pow(10, Math.log10(seconds) || 0)))?.toLocaleString?.() || '∞'}</p></div>
+                <div><span className="text-zinc-500">Attack Rate</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Number(rate).toLocaleString()}/s</p></div>
+                <div><span className="text-zinc-500">Seconds</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{seconds.toLocaleString()}</p></div>
+                <div><span className="text-zinc-500">Severity</span><p className={`font-bold ${severityColors[severity].replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
+              </div>
+            </div>
+
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Estimate'}</button>
+          </div>
+        ) : null
+      }
     >
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
@@ -336,36 +363,6 @@ export function BruteForceTimeEstimator() {
             </div>
           </div>
         </div>
-
-        <button onClick={() => calc()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Estimate Time</button>
-
-        {est && (
-          <div className="space-y-3">
-            <div className={`p-4 rounded-xl border-l-4 ${severity === 'critical' ? 'bg-red-50 dark:bg-red-900/30 border-red-500' : severity === 'high' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-500' : severity === 'medium' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-500' : severity === 'low' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500' : 'bg-green-50 dark:bg-green-900/30 border-green-500'}`}>
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Time to Crack</span>
-                <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${severityColors[severity]}`}>{severityLabels[severity]}</span>
-              </div>
-              <p className="text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100">{est}</p>
-              <div className="mt-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2.5">
-                <div className={`h-2.5 rounded-full transition-all duration-500 ${severityColors[severity]}`}
-                  style={{ width: severity === 'critical' ? '95%' : severity === 'high' ? '70%' : severity === 'medium' ? '50%' : severity === 'low' ? '25%' : '5%' }} />
-              </div>
-            </div>
-
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
-              <p className="text-xs text-[var(--text-secondary)] mb-2">Details</p>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div><span className="text-zinc-500">Total Combinations</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Math.pow(10, Math.log10(Math.pow(10, Math.log10(seconds) || 0)))?.toLocaleString?.() || '∞'}</p></div>
-                <div><span className="text-zinc-500">Attack Rate</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Number(rate).toLocaleString()}/s</p></div>
-                <div><span className="text-zinc-500">Seconds</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{seconds.toLocaleString()}</p></div>
-                <div><span className="text-zinc-500">Severity</span><p className={`font-bold ${severityColors[severity].replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
-              </div>
-            </div>
-
-            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Estimate'}</button>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );
@@ -427,20 +424,10 @@ export function HashGenerator() {
     : '';
 
   return (
-    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt">
-      <div className="space-y-4">
+    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt" customResult={
+      Object.keys(results).length > 0 ? (
         <div className="space-y-3">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text to Hash</label>
-          <textarea value={text} onChange={e => { setText(e.target.value); setResults({}); }} rows={4} placeholder="Enter text..."
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
-        </div>
-
-        <button onClick={() => gen()} className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">
-          Generate Hashes
-        </button>
-
-        {Object.keys(results).length > 0 && (
-          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {algoInfo.map(a => results[a.id] ? (
               <div key={a.id} className={`bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-l-${a.color}-400 relative`}>
                 <div className="flex justify-between items-center mb-1">
@@ -457,9 +444,7 @@ export function HashGenerator() {
               </div>
             ) : null)}
           </div>
-        )}
 
-        {Object.keys(results).length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Usage Notes</div>
             <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc list-inside">
@@ -468,7 +453,15 @@ export function HashGenerator() {
               <li>Hashes are one-way — cannot be reversed to original text</li>
             </ul>
           </div>
-        )}
+        </div>
+      ) : null
+    }>
+      <div className="space-y-4">
+        <div className="space-y-3">
+          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text to Hash</label>
+          <textarea value={text} onChange={e => { setText(e.target.value); setResults({}); }} rows={4} placeholder="Enter text..."
+            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-y" />
+        </div>
       </div>
     </CalculatorShell>
   );
@@ -524,6 +517,17 @@ export function HashVerifier() {
       accent="emerald"
       downloadData={computed ? `Algorithm: ${algo}\nExpected: ${hash}\nComputed: ${computed}\nMatch: ${match ? 'YES' : 'NO'}` : ''}
       downloadFilename="hash-verification.txt"
+      customResult={
+        match !== null ? (
+          <div className="space-y-3">
+            <div className={match ? 'p-4 rounded-xl text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'p-4 rounded-xl text-sm font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}>
+              <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
+              <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
+            </div>
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
+          </div>
+        ) : null
+      }
     >
       <div className="space-y-4">
         <div className="flex flex-wrap gap-1.5 mb-3">
@@ -537,18 +541,6 @@ export function HashVerifier() {
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hash to Verify Against</label>
         <input type="text" value={hash} onChange={e => { setHash(e.target.value); setMatch(null); }} placeholder="Enter hash..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
-
-        <button onClick={() => verify()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Verify</button>
-
-        {match !== null && (
-          <div className="space-y-3">
-            <div className={match ? 'p-4 rounded-xl text-sm font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-l-4 border-green-400' : 'p-4 rounded-xl text-sm font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-l-4 border-red-400'}>
-              <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
-              <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
-            </div>
-            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );
@@ -595,7 +587,18 @@ export function HashPasswordGenerator() {
   const resultText = params ? `PBKDF2-SHA256: ${params.iter.toLocaleString()} iterations` : 'Enter password to generate hash';
 
   return (
-    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt">
+    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt" customResult={
+      params ? (
+        <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">PBKDF2-SHA256 Hash</span>
+            <button onClick={copy} className="px-2 py-1 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <p className="font-mono text-xs text-indigo-700 dark:text-indigo-300 break-all">{result}</p>
+          <div className="text-xs text-[var(--text-secondary)] mt-1">Iterations: {params.iter.toLocaleString()} | Salt: {params.salt}</div>
+        </div>
+      ) : null
+    }>
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input type="password" value={pwd} onChange={e => { setPwd(e.target.value); setResult(''); }} placeholder="Enter password..."
@@ -613,19 +616,6 @@ export function HashPasswordGenerator() {
           <option value="1000000">1M (High security)</option>
           <option value="2000000">2M (Maximum)</option>
         </select>
-
-        <button onClick={gen} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Generate Hash</button>
-
-        {params && (
-          <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">PBKDF2-SHA256 Hash</span>
-              <button onClick={copy} className="px-2 py-1 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
-            </div>
-            <p className="font-mono text-xs text-indigo-700 dark:text-indigo-300 break-all">{result}</p>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">Iterations: {params.iter.toLocaleString()} | Salt: {params.salt}</div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

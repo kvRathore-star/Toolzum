@@ -45,22 +45,15 @@ export default function RentVsBuyCalculator() {
   const rentTotal = monthlyRent * 12 * term;
   const buyPct = buyNet + rentTotal > 0 ? buyNet / (buyNet + rentTotal) * 100 : 50;
   return (
-    <CalculatorShell title="Rent vs Buy Calculator" result={result} onCalculate={calc} presets={presets} accent="green">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Home Price ($)</label><input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Down Payment ($)</label><input type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Mortgage Rate (%)</label><input type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Rent ($)</label><input type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Timeframe (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
+    <CalculatorShell title="Rent vs Buy Calculator" result={result} onCalculate={calc} presets={presets} accent="green" customResult={
+      result ? (
         <div className="space-y-3">
           <div className="flex h-20 gap-3">
-            <div className="flex-1 bg-emerald-700/10 rounded-xl border border-emerald-500/20 p-3 flex flex-col justify-center items-center">
+            <div className="flex-1 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Buy Net Cost</div>
               <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">${buyNet.toFixed(0)}</div>
             </div>
-            <div className="flex-1 bg-amber-500/10 rounded-xl border border-amber-500/20 p-3 flex flex-col justify-center items-center">
+            <div className="flex-1 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Rent Total</div>
               <div className="text-xl font-bold text-amber-700 dark:text-amber-400">${rentTotal.toFixed(0)}</div>
             </div>
@@ -74,7 +67,15 @@ export default function RentVsBuyCalculator() {
             <span>Rent</span>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Home Price ($)</label><input type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Down Payment ($)</label><input type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Mortgage Rate (%)</label><input type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Rent ($)</label><input type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Timeframe (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

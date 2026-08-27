@@ -40,31 +40,32 @@ export function BusinessDaysCalculator() {
     current.setDate(current.getDate() + 1);
   }
   return (
-    <CalculatorShell title="Business Days Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Start Date</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">End Date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
+    <CalculatorShell title="Business Days Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
+      result ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{bdCount}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Business Days</div>
           </div>
-          <div className="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-amber-700 dark:text-amber-400">{(new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24) - bdCount}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Weekends</div>
           </div>
-          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{Math.round((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24))}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Total Days</div>
           </div>
-          <div className="bg-[var(--bg-overlay)] rounded-xl p-3 text-center border border-[var(--border-subtle)]">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-[var(--text-primary)]">{((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 7)).toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Weeks</div>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Start Date</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">End Date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }
@@ -93,31 +94,32 @@ export function DaysBetweenDates() {
   const diff = Math.abs(d2.getTime() - d1.getTime());
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Between Dates" result={result} onCalculate={calc} presets={presets} accent="rose">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 1</label><input type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 2</label><input type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && days > 0 && (
+    <CalculatorShell title="Days Between Dates" result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
+      result && days > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{days}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Days</div>
           </div>
-          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{Math.floor(days / 7)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Weeks</div>
           </div>
-          <div className="bg-amber-500/10 rounded-xl p-3 text-center border border-amber-500/20">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-amber-700 dark:text-amber-400">~{Math.floor(days / 30.44)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Months</div>
           </div>
-          <div className="bg-[var(--bg-overlay)] rounded-xl p-3 text-center border border-[var(--border-subtle)]">
+          <div className="text-center p-3">
             <div className="text-xl font-bold text-[var(--text-primary)]">~{(days / 365.25).toFixed(1)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Years</div>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 1</label><input type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 2</label><input type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }
@@ -144,14 +146,15 @@ export function DaysUntilCalculator() {
   const diff = target.getTime() - now.getTime();
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Until Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan">
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Target Date</label><input type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputCls} /></div>
-      {result && days > 0 && (
-        <div className="bg-indigo-500/10 rounded-xl p-4 text-center border border-indigo-500/20">
+    <CalculatorShell title="Days Until Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan" customResult={
+      result && days > 0 ? (
+        <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Countdown</div>
           <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{days} <span className="text-lg">days</span></div>
         </div>
-      )}
+      ) : null
+    }>
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Target Date</label><input type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }
@@ -175,13 +178,14 @@ export function DayOfWeekCalculator() {
   const dayName = days[d.getDay()];
   const colors: Record<string, string> = { Sunday: 'text-red-700 dark:text-red-400', Monday: 'text-indigo-700 dark:text-indigo-400', Tuesday: 'text-emerald-700 dark:text-emerald-400', Wednesday: 'text-amber-700 dark:text-amber-400', Thursday: 'text-blue-700 dark:text-blue-400', Friday: 'text-teal-700 dark:text-teal-400', Saturday: 'text-purple-700 dark:text-purple-400' };
   return (
-    <CalculatorShell title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange">
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
+    <CalculatorShell title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
+      result ? (
+        <div className="text-center">
           <div className={`text-3xl font-bold ${colors[dayName] || 'text-indigo-700 dark:text-indigo-400'}`}>{dayName}</div>
         </div>
-      )}
+      ) : null
+    }>
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }

@@ -19,15 +19,15 @@ export default function LeapYearCalculator() {
   ];
   const y = parseInt(year);
   const isLeap = (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+  const customResult = result ? (
+    <div className="text-center">
+      <div className={`text-3xl font-bold ${isLeap ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{isLeap ? 'Leap Year' : 'Not a Leap Year'}</div>
+      <div className="text-xs text-[var(--text-tertiary)] mt-1">{isLeap ? '366 days' : '365 days'}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Leap Year Calculator" result={result} onCalculate={calc} presets={presets} accent="red">
+    <CalculatorShell title="Leap Year Calculator" result={result} onCalculate={calc} presets={presets} accent="red" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
-      {result && (
-        <div className={`bg-[var(--bg-overlay)] rounded-xl p-4 text-center border ${isLeap ? 'border-emerald-500/20' : 'border-amber-500/20'}`}>
-          <div className={`text-3xl font-bold ${isLeap ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{isLeap ? 'Leap Year' : 'Not a Leap Year'}</div>
-          <div className="text-xs text-[var(--text-tertiary)] mt-1">{isLeap ? '366 days' : '365 days'}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

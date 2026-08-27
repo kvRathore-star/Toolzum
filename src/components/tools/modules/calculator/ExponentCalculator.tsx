@@ -22,18 +22,18 @@ export default function ExponentCalculator() {
   const b = parseFloat(base) || 0;
   const e = parseFloat(exp) || 0;
   const val = Math.pow(b, e);
+  const customResult = result ? (
+    <div className="text-center">
+      <div className="text-xs text-[var(--text-tertiary)]">Result</div>
+      <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {val.toLocaleString()}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Exponent Calculator" result={result} onCalculate={calc} presets={presets} accent="pink">
+    <CalculatorShell title="Exponent Calculator" result={result} onCalculate={calc} presets={presets} accent="pink" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Base</label><input type="number" value={base} onChange={e => setBase(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Exponent</label><input type="number" value={exp} onChange={e => setExp(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">Result</div>
-          <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {val.toLocaleString()}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

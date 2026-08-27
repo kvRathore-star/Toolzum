@@ -24,18 +24,18 @@ export default function PythagoreanTheoremCalculator() {
   const na = parseFloat(a) || 0;
   const nb = parseFloat(b) || 0;
   const c = Math.sqrt(na * na + nb * nb);
+  const customResult = result ? (
+    <div className="text-center">
+      <div className="text-xs text-[var(--text-tertiary)]">c = √(a² + b²)</div>
+      <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{c.toFixed(2)}</div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Pythagorean Theorem" result={result} onCalculate={calc} presets={presets} accent="teal">
+    <CalculatorShell title="Pythagorean Theorem" result={result} onCalculate={calc} presets={presets} accent="teal" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)]">
-          <div className="text-xs text-[var(--text-tertiary)]">c = \u221a(a\u00b2 + b\u00b2)</div>
-          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{c.toFixed(2)}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

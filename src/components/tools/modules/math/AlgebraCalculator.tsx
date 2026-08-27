@@ -56,26 +56,24 @@ export default function AlgebraCalculator() {
   const resultText = result ? `= ${result}` : (error ? `Error: ${error}` : 'Enter expression');
 
   return (
-    <CalculatorShell title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt">
+    <CalculatorShell title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
+      result ? (
+        <div className="text-center">
+          <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>
+          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 font-mono">${result}</div>
+        </div>
+      ) : error ? (
+        <div className="text-center">
+          <div className="text-xs text-rose-600 dark:text-rose-400 font-medium mb-1">Error</div>
+          <div className="text-rose-700 dark:text-rose-300">${error}</div>
+        </div>
+      ) : null
+    }>
       <div className="space-y-4">
         <label className={labelClass}>Expression</label>
         <input type="text" value={expr} onChange={e => { setExpr(e.target.value); evaluate(); }}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
           placeholder="e.g., 2*(3+4) or 10+20*3" />
-
-        {result && (
-          <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>
-            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 font-mono">${result}</div>
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-rose-600 dark:text-rose-400 font-medium mb-1">Error</div>
-            <div className="text-rose-700 dark:text-rose-300">${error}</div>
-          </div>
-        )}
 
         <div className="bg-[var(--bg-surface)] rounded-xl p-3">
           <div className="text-xs text-[var(--text-secondary)] mb-2">Supported</div>

@@ -30,30 +30,22 @@ export default function DecimalToFractionCalculator() {
   const resultText = f.d ? `${dec} ≈ ${f.n}/${f.d} (error: ${error.toExponential(2)})` : 'Enter decimal';
 
   return (
-    <CalculatorShell title="Decimal to Fraction" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" downloadData={f.d ? JSON.stringify({ decimal: d, fraction: `${f.n}/${f.d}`, error }, null, 2) : ''} downloadFilename="decimal-fraction.json">
-      <div className="space-y-4">
-        <label className={labelClass}>Decimal Value</label>
-        <input type="text" value={dec} onChange={e => setDec(e.target.value)} placeholder="0.75"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
-
-        {f.d && (
-          <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
+    <CalculatorShell title="Decimal to Fraction" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" downloadData={f.d ? JSON.stringify({ decimal: d, fraction: `${f.n}/${f.d}`, error }, null, 2) : ''} downloadFilename="decimal-fraction.json" customResult={
+      f.d ? (
+        <div className="space-y-4">
+          <div className="text-center">
             <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">Fraction</div>
             <div className="text-3xl font-bold text-amber-700 dark:text-amber-300 font-mono">${f.n}/${f.d}</div>
             <div className="text-xs text-[var(--text-secondary)] mt-1">≈ ${decimalVal.toFixed(10)} (error: ${error.toExponential(2)})</div>
           </div>
-        )}
 
-        {f.d && (
           <div className="bg-[var(--bg-surface)] rounded-xl p-3">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Precision</div>
             <input type="range" min={10} max={100000000} step={10} value={precision} onChange={e => setPrecision(Number(e.target.value))}
               className="w-full accent-amber-500 mb-2" />
             <div className="text-xs text-[var(--text-muted)]">Precision: ${precision.toLocaleString()}</div>
           </div>
-        )}
 
-        {f.d && (
           <div className="bg-[var(--bg-surface)] rounded-xl p-3">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Continued Fraction Approximations</div>
             <div className="flex flex-wrap gap-2">
@@ -74,7 +66,13 @@ export default function DecimalToFractionCalculator() {
               })}
             </div>
           </div>
-        )}
+        </div>
+      ) : null
+    }>
+      <div className="space-y-4">
+        <label className={labelClass}>Decimal Value</label>
+        <input type="text" value={dec} onChange={e => setDec(e.target.value)} placeholder="0.75"
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50" />
       </div>
     </CalculatorShell>
   );

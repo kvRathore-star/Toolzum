@@ -30,19 +30,20 @@ export default function FractionCalculator() {
     { label: '3/4 * 2/5', apply: () => { setFrac1('3/4'); setFrac2('2/5'); setOp('*'); } },
   ];
   return (
-    <CalculatorShell title="Fraction Calculator" result={result} onCalculate={calc} presets={presets} accent="rose">
+    <CalculatorShell title="Fraction Calculator" result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
+      result ? (
+        <div className="text-center font-mono">
+          <div className="text-lg text-[var(--text-primary)]">{result.split('\n')[0]}</div>
+        </div>
+      ) : null
+    }>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 1</label><input type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Operation</label><select value={op} onChange={e => setOp(e.target.value)} className={inputCls}>
-          <option value="+">+</option><option value="-">-</option><option value="*">\u00d7</option><option value="/">\u00f7</option>
+          <option value="+">+</option><option value="-">-</option><option value="*">×</option><option value="/">÷</option>
         </select></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 2</label><input type="text" value={frac2} onChange={e => setFrac2(e.target.value)} placeholder="1/3" className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-center border border-[var(--border-subtle)] font-mono">
-          <div className="text-lg text-[var(--text-primary)]">{result.split('\n')[0]}</div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

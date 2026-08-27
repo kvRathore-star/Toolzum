@@ -36,7 +36,30 @@ export default function RetirementCalculator() {
   const growth = fv - totalContrib;
   const growthPct = totalContrib > 0 ? (growth / totalContrib) * 100 : 0;
   return (
-    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo">
+    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo" customResult={
+      result ? (
+        <div className="space-y-3">
+          <div className="text-center">
+            <div className="text-xs text-[var(--text-tertiary)]">Retirement Nest Egg</div>
+            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${fv.toLocaleString()}</div>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <div className="rounded-lg p-2 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Contributions</div>
+              <div className="text-sm font-bold text-[var(--text-primary)]">${totalContrib.toLocaleString()}</div>
+            </div>
+            <div className="rounded-lg p-2 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Growth</div>
+              <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400">${growth.toLocaleString()}</div>
+            </div>
+            <div className="rounded-lg p-2 text-center">
+              <div className="text-xs text-[var(--text-tertiary)]">Growth %</div>
+              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{growthPct.toFixed(0)}%</div>
+            </div>
+          </div>
+        </div>
+      ) : null
+    }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex gap-4">
           <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputCls} /></div>
@@ -46,28 +69,6 @@ export default function RetirementCalculator() {
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="space-y-3">
-          <div className="bg-indigo-500/10 rounded-xl p-4 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Retirement Nest Egg</div>
-            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${fv.toLocaleString()}</div>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
-              <div className="text-xs text-[var(--text-tertiary)]">Contributions</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">${totalContrib.toLocaleString()}</div>
-            </div>
-            <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
-              <div className="text-xs text-[var(--text-tertiary)]">Growth</div>
-              <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400">${growth.toLocaleString()}</div>
-            </div>
-            <div className="bg-[var(--bg-overlay)] rounded-lg p-2 text-center">
-              <div className="text-xs text-[var(--text-tertiary)]">Growth %</div>
-              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{growthPct.toFixed(0)}%</div>
-            </div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

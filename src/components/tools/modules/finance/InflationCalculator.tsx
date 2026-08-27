@@ -26,14 +26,9 @@ export default function InflationCalculator() {
   const y = parseFloat(years) || 0;
   const fv = p * Math.pow(1 + r, y);
   return (
-    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets} accent="lime">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets} accent="lime" customResult={
+      result ? (
+        <div>
           <div className="flex items-center justify-center gap-6">
             <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Today</div>
@@ -49,7 +44,13 @@ export default function InflationCalculator() {
             <div className="h-full bg-gradient-to-r from-amber-500 to-red-500 rounded-full" style={{ width: `${Math.min((fv / (p * 2)) * 100, 100)}%` }} />
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

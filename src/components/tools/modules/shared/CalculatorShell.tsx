@@ -40,9 +40,10 @@ interface CalculatorShellProps {
   downloadData?: string;
   downloadFilename?: string;
   accent?: string;
+  customResult?: React.ReactNode;
 }
 
-export function CalculatorShell({ title, children, result, error, onCalculate, calculateLabel = 'Calculate', presets, downloadData, downloadFilename, accent = 'indigo' }: CalculatorShellProps) {
+export function CalculatorShell({ title, children, result, error, onCalculate, calculateLabel = 'Calculate', presets, downloadData, downloadFilename, accent = 'indigo', customResult }: CalculatorShellProps) {
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
@@ -155,20 +156,26 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
             )}
           </div>
 
-          {(result || error) && (
+          {(result || error || customResult) && (
             <div role="status" aria-live="polite" className={`p-5 rounded-2xl text-sm font-mono whitespace-pre flex items-start justify-between gap-4 ${error ? 'bg-red-500/10 border border-red-500/20 text-red-700 dark:text-red-400' : a.resultBg + ' border ' + a.resultBorder + ' ' + a.text}`}>
-              <span className="flex-1">{error || result}</span>
-              {result && (
-                <div className="flex items-center gap-1 shrink-0">
-                  {downloadData && (
-                    <button onClick={handleDownload} aria-label="Download result" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-                      <Download size={16} />
-                    </button>
+              {customResult ? (
+                <div className="flex-1">{customResult}</div>
+              ) : (
+                <>
+                  <span className="flex-1">{error || result}</span>
+                  {result && (
+                    <div className="flex items-center gap-1 shrink-0">
+                      {downloadData && (
+                        <button onClick={handleDownload} aria-label="Download result" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                          <Download size={16} />
+                        </button>
+                      )}
+                      <button onClick={copyResult} aria-label="Copy result to clipboard" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                        <Copy size={16} />
+                      </button>
+                    </div>
                   )}
-                  <button onClick={copyResult} aria-label="Copy result to clipboard" className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-                    <Copy size={16} />
-                  </button>
-                </div>
+                </>
               )}
             </div>
           )}

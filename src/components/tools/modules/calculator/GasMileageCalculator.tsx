@@ -28,7 +28,11 @@ export default function GasMileageCalculator() {
     }
   }, [distance, gallons, pricePerGallon, unit]);
   return (
-    <CalculatorShell title="Gas Mileage Calculator" accent="amber" result={result} onCalculate={calc}>
+    <CalculatorShell title="Gas Mileage Calculator" accent="amber" result={result} onCalculate={calc} customResult={
+      result ? (
+        <div className="font-mono text-sm whitespace-pre">{result}</div>
+      ) : null
+    }>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'us'|'metric')}><option value="us">US (mi, gal)</option><option value="metric">Metric (km, L)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

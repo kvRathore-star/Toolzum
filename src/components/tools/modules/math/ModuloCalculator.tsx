@@ -33,7 +33,46 @@ export default function ModuloCalculator() {
     : 'Divisor cannot be zero';
 
   return (
-    <CalculatorShell title="Modulo Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald">
+    <CalculatorShell title="Modulo Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" customResult={
+      nb !== 0 ? (
+        <div className="space-y-3">
+          <div className="text-center">
+            <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">JavaScript / C-style</div>
+            <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">{na} mod {nb} = {jsMod}</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Truncates toward zero</div>
+          </div>
+
+          {differs && (
+            <div className="text-center">
+              <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">Python / Floored (mathematical)</div>
+              <div className="text-3xl font-bold text-amber-700 dark:text-amber-300">{na} mod {nb} = {pyMod}</div>
+              <div className="text-xs text-[var(--text-secondary)] mt-1">Floors toward −∞ (always non-negative)</div>
+            </div>
+          )}
+
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Division Identity</div>
+            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+              <div>{na} = {nb} × {jsQuotient} + {jsMod} <span className="text-emerald-600 dark:text-emerald-400">(JS)</span></div>
+              {differs && <div>{na} = {nb} × {pyQuotient} + {pyMod} <span className="text-amber-600 dark:text-amber-400">(Python)</span></div>}
+            </div>
+          </div>
+
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+            <div className="text-xs text-[var(--text-secondary)] mb-2">Long Division</div>
+            <div className="font-mono text-xs text-[var(--text-primary)] space-y-1">
+              <div>{na} ÷ {nb} = {(na / nb).toFixed(4)}</div>
+              <div>Quotient (floor): {jsQuotient}</div>
+              <div>Remainder: {na} − ({nb} × {jsQuotient}) = {jsMod}</div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="text-amber-600 dark:text-amber-400 text-center">
+          Divisor cannot be zero
+        </div>
+      )
+    }>
       <div className="space-y-4">
         <div className="flex gap-2 items-end">
           <div className="flex-1">
@@ -48,47 +87,6 @@ export default function ModuloCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>
-
-        {nb !== 0 && (
-          <div className="space-y-3">
-            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
-              <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">JavaScript / C-style</div>
-              <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">{na} mod {nb} = {jsMod}</div>
-              <div className="text-xs text-[var(--text-secondary)] mt-1">Truncates toward zero</div>
-            </div>
-
-            {differs && (
-              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-center">
-                <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">Python / Floored (mathematical)</div>
-                <div className="text-3xl font-bold text-amber-700 dark:text-amber-300">{na} mod {nb} = {pyMod}</div>
-                <div className="text-xs text-[var(--text-secondary)] mt-1">Floors toward −∞ (always non-negative)</div>
-              </div>
-            )}
-
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-              <div className="text-xs text-[var(--text-secondary)] mb-2">Division Identity</div>
-              <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
-                <div>{na} = {nb} × {jsQuotient} + {jsMod} <span className="text-emerald-600 dark:text-emerald-400">(JS)</span></div>
-                {differs && <div>{na} = {nb} × {pyQuotient} + {pyMod} <span className="text-amber-600 dark:text-amber-400">(Python)</span></div>}
-              </div>
-            </div>
-
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-              <div className="text-xs text-[var(--text-secondary)] mb-2">Long Division</div>
-              <div className="font-mono text-xs text-[var(--text-primary)] space-y-1">
-                <div>{na} ÷ {nb} = {(na / nb).toFixed(4)}</div>
-                <div>Quotient (floor): {jsQuotient}</div>
-                <div>Remainder: {na} − ({nb} × {jsQuotient}) = {jsMod}</div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {nb === 0 && (
-          <div className="text-amber-600 dark:text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-xl p-3 text-center">
-            Divisor cannot be zero
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

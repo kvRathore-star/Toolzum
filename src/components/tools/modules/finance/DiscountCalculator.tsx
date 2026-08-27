@@ -44,25 +44,9 @@ export default function DiscountCalculator() {
   const originalPrice = mode === 'forward' ? p : sp / (1 - d / 100);
 
   return (
-    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
-      <div className="flex gap-1 mb-4">
-        <button onClick={() => setMode('forward')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${mode === 'forward' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>
-          Find Sale Price
-        </button>
-        <button onClick={() => setMode('reverse')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${mode === 'reverse' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>
-          Find Original Price
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {mode === 'forward' ? (
-          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputCls} /></div>
-        ) : (
-          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Sale Price ($)</label><input type="number" value={salePrice} onChange={e => setSalePrice(e.target.value)} className={inputCls} /></div>
-        )}
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets} accent="teal" customResult={
+      result ? (
+        <div>
           <div className="flex justify-between items-end mb-3">
             <div className="text-center flex-1">
               <div className="text-lg line-through text-[var(--text-tertiary)]">${originalPrice.toFixed(2)}</div>
@@ -83,7 +67,24 @@ export default function DiscountCalculator() {
             </span>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="flex gap-1 mb-4">
+        <button onClick={() => setMode('forward')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${mode === 'forward' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>
+          Find Sale Price
+        </button>
+        <button onClick={() => setMode('reverse')} className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${mode === 'reverse' ? 'bg-[var(--accent)] text-white border-[var(--accent)]' : 'border-[var(--border-subtle)]'}`}>
+          Find Original Price
+        </button>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {mode === 'forward' ? (
+          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputCls} /></div>
+        ) : (
+          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Sale Price ($)</label><input type="number" value={salePrice} onChange={e => setSalePrice(e.target.value)} className={inputCls} /></div>
+        )}
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

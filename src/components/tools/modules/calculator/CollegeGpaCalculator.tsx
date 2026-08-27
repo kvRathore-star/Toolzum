@@ -32,14 +32,8 @@ export default function CollegeGpaCalculator() {
     { label: 'Junior Year', apply: () => { setSemGrades('A-,A,B'); setSemCredits('4,3,3'); setPrevGpa('3.2'); setPrevCredits('60'); } },
   ];
   return (
-    <CalculatorShell title="College GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="purple">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous GPA</label><input type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Credits</label><input type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputCls} /></div>
-      </div>
-      {result && (() => {
+    <CalculatorShell title="College GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
+      result ? (() => {
         const g = semGrades.split(',').map(g => g.trim().toUpperCase());
         const c = semCredits.split(',').map(Number);
         let tp = 0, tc = 0;
@@ -50,17 +44,24 @@ export default function CollegeGpaCalculator() {
         const cumGpa = (pg * pc + tp) / (pc + tc);
         return (
           <div className="grid grid-cols-2 gap-3">
-            <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
+            <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Semester GPA</div>
               <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{semGpa.toFixed(2)}</div>
             </div>
-            <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
+            <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Cumulative GPA</div>
               <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{cumGpa.toFixed(2)}</div>
             </div>
           </div>
         );
-      })()}
+      })() : null
+    }>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous GPA</label><input type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Credits</label><input type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

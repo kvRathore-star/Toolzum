@@ -28,15 +28,9 @@ export default function CarLeaseCalculator() {
   const res = parseFloat(residual) || 0;
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
   return (
-    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets} accent="amber">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="md:col-span-2"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Capitalized Cost ($)</label><input type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Residual Value ($)</label><input type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Lease Term (months)</label><input type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Money Factor</label><input type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputCls} /></div>
-      </div>
-      {result && monthly > 0 && (
-        <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
+    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
+      result && monthly > 0 ? (
+        <div>
           <div className="text-center mb-3">
             <div className="text-3xl font-bold text-amber-700 dark:text-amber-400">${monthly.toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">monthly lease payment</div>
@@ -56,7 +50,14 @@ export default function CarLeaseCalculator() {
             </div>
           </div>
         </div>
-      )}
+      ) : null
+    }>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="md:col-span-2"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Capitalized Cost ($)</label><input type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Residual Value ($)</label><input type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Lease Term (months)</label><input type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Money Factor</label><input type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputCls} /></div>
+      </div>
     </CalculatorShell>
   );
 }

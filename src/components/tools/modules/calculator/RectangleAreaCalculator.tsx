@@ -22,28 +22,28 @@ export default function RectangleAreaCalculator() {
   ];
   const l = parseFloat(length) || 0;
   const w = parseFloat(width) || 0;
+  const customResult = result ? (
+    <div className="grid grid-cols-3 gap-2">
+      <div className="text-center">
+        <div className="text-xs text-[var(--text-tertiary)]">Area</div>
+        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{l * w}</div>
+      </div>
+      <div className="text-center">
+        <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>
+        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{2 * (l + w)}</div>
+      </div>
+      <div className="text-center">
+        <div className="text-xs text-[var(--text-tertiary)]">Diagonal</div>
+        <div className="text-lg font-bold text-[var(--text-primary)]">{Math.sqrt(l * l + w * w).toFixed(1)}</div>
+      </div>
+    </div>
+  ) : null;
   return (
-    <CalculatorShell title="Rectangle Calculator" result={result} onCalculate={calc} presets={presets} accent="lime">
+    <CalculatorShell title="Rectangle Calculator" result={result} onCalculate={calc} presets={presets} accent="lime" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Length</label><input type="number" value={length} onChange={e => setLength(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
       </div>
-      {result && (
-        <div className="grid grid-cols-3 gap-2">
-          <div className="bg-indigo-500/10 rounded-xl p-3 text-center border border-indigo-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{l * w}</div>
-          </div>
-          <div className="bg-emerald-700/10 rounded-xl p-3 text-center border border-emerald-500/20">
-            <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>
-            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{2 * (l + w)}</div>
-          </div>
-          <div className="bg-[var(--bg-overlay)] rounded-xl p-3 text-center border border-[var(--border-subtle)]">
-            <div className="text-xs text-[var(--text-tertiary)]">Diagonal</div>
-            <div className="text-lg font-bold text-[var(--text-primary)]">{Math.sqrt(l * l + w * w).toFixed(1)}</div>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }
