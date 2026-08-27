@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export default function MockApiResponseGenerator() {
   const [schema, setSchema] = useState('{\n  "users": [\n    { "id": "number", "name": "string", "email": "string", "active": "boolean" }\n  ],\n  "total": "number"\n}');
