@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   output: "export",
   poweredByHeader: false,
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: '/sign-in',
+        destination: '/login',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 const withBA = withBundleAnalyzer({

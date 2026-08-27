@@ -1,18 +1,12 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import { 
-  GitCommit, 
-  Sparkles, 
-  Wrench, 
-  ShieldCheck, 
   ArrowRight,
   Bookmark
 } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toolsRegistry } from "@/registry/tools";
-import ChangelogShowcase, { DemoType } from "@/components/ChangelogShowcase";
+import { ChangelogTimeline } from "@/components/ChangelogTimeline";
+import { DemoType } from "@/components/ChangelogShowcase";
 
 interface Release {
   version: string;
@@ -128,7 +122,7 @@ const RELEASES: Release[] = [
       { type: "feature", text: "Category filter buttons (Compress, Resize, Convert, Edit, AI, etc.) now available on Audio, Video, Text, Developer, SEO, Finance, Privacy, Utility, Branding, and Health category pages — not just Image and PDF." },
       { type: "feature", text: "A-Z alphabetical letter filter on all category pages — dimmed letters for empty letters, works alongside search." },
       { type: "feature", text: "Megamenu 'Most used today' now shows your actual recently-used tools (from localStorage history) instead of hardcoded links. Falls back to defaults when history is empty." },
-      { type: "fix", text: "Fixed 'Back to Privacy' navigation — Privacy Policy moved from /privacy/ to /privacy-policy/ so /privacy/ now correctly shows the Privacy tools category. Same fix for /health/ → /status/ redirect to unblock Health tools category page." },
+      { type: "fix", text: "Fixed 'Back to Privacy' navigation — Privacy Policy moved from /privacy/ to /privacy-policy/ so /privacy/ now correctly shows the Privacy tools category page. Same fix for /health/ → /status/ redirect to unblock Health tools category page." },
       { type: "fix", text: "Tool cards no longer display dependency/library names (Canvas API, FFmpeg.wasm, etc.) — removes competitive exposure and cleans up card design." },
       { type: "feature", text: "SEO permutations added for bulk-url-checker and bulk-link-checker routing to the existing bulk URL status checker tool." },
       { type: "feature", text: "New professional SVG favicon and PWA icons — clean geometric monogram mark replaces the previous raster favicon." },
@@ -274,15 +268,6 @@ const RELEASES: Release[] = [
 ];
 
 export default function ChangelogPage() {
-  const [filter, setFilter] = useState<"all" | "major" | "minor">("all");
-
-  const filteredReleases = RELEASES.filter(release => {
-    if (filter === "all") return true;
-    if (filter === "major") return release.tag === "major" || release.tag === "launch";
-    if (filter === "minor") return release.tag === "minor";
-    return true;
-  });
-
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
       
@@ -306,107 +291,7 @@ export default function ChangelogPage() {
           </p>
         </div>
 
-        {/* Filter bar */}
-        <div className="flex justify-center gap-2 mb-16">
-          <button 
-            onClick={() => setFilter("all")} 
-            className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
-              filter === "all" 
-              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
-              : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
-            }`}
-          >
-            All Updates
-          </button>
-          <button 
-            onClick={() => setFilter("major")} 
-            className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
-              filter === "major" 
-              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
-              : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
-            }`}
-          >
-            Major Releases
-          </button>
-          <button 
-            onClick={() => setFilter("minor")} 
-            className={`px-4 py-2 rounded-full text-xs font-semibold border transition-all ${
-              filter === "minor" 
-              ? "bg-[var(--accent-ink)] text-white border-[var(--accent)]" 
-              : "bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-white"
-            }`}
-          >
-            Minor & Bug Fixes
-          </button>
-        </div>
-
-        {/* Timeline representation */}
-        <div className="max-w-4xl mx-auto relative pl-6 sm:pl-10 before:absolute before:top-0 before:bottom-0 before:left-[11px] sm:before:left-[19px] before:w-[2px] before:bg-[var(--border-subtle)]">
-          
-          {filteredReleases.map((release, releaseIdx) => (
-            <div key={release.version} className="relative mb-20 last:mb-0">
-              
-              {/* Timeline marker node */}
-              <div className="absolute -left-[20px] sm:-left-[28px] top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[var(--bg-base)] border-[3px] border-[var(--accent)] flex items-center justify-center text-white z-10 shadow-sm">
-                <GitCommit className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[var(--accent)]" />
-              </div>
-
-              {/* Release details box */}
-              <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-10 shadow-sm relative group hover:border-[var(--accent)]/30 transition-all duration-300">
-                <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono font-semibold px-2.5 py-1 rounded bg-[var(--bg-base)] border border-[var(--border-subtle)]">
-                      {release.version}
-                    </span>
-                    <span className="text-xs text-[var(--text-muted)] font-mono">{release.date}</span>
-                  </div>
-                  <span className={`text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 rounded-full border ${release.tagColor}`}>
-                    {release.tag}
-                  </span>
-                </div>
-
-                <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
-                  {release.title}
-                </h3>
-                
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
-                  {release.description}
-                </p>
-
-                {release.demo && (
-                  <div className="mb-6">
-                    <ChangelogShowcase demo={release.demo} />
-                  </div>
-                )}
-
-                {/* Sublist updates */}
-                <div className="space-y-3.5">
-                  <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider">Change Details</h4>
-                  
-                  <ul className="space-y-3">
-                    {release.updates.map((update, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
-                        <span className="mt-1">
-                          {update.type === "feature" && <Sparkles className="w-4 h-4 text-[var(--accent)] shrink-0" />}
-                          {update.type === "performance" && <ShieldCheck className="w-4 h-4 text-purple-700 dark:text-purple-400 shrink-0" />}
-                          {update.type === "fix" && <Wrench className="w-4 h-4 text-blue-700 dark:text-blue-400 shrink-0" />}
-                          {update.type === "security" && <ShieldCheck className="w-4 h-4 text-emerald-700 dark:text-emerald-400 shrink-0" />}
-                        </span>
-                        <span>
-                          <strong className="capitalize text-[var(--text-primary)]">{update.type}: </strong>
-                          {update.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-              </div>
-
-            </div>
-          ))}
-
-        </div>
+        <ChangelogTimeline releases={RELEASES} />
 
         {/* Bottom newsletter section */}
         <div className="mt-24 max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">

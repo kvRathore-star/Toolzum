@@ -1,14 +1,11 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import { 
   ShieldAlert, 
-  FileText, 
   EyeOff, 
   Database,
-  Lock,
-  ArrowUp
+  Lock
 } from "lucide-react";
+import { DocumentSidebar } from "@/components/DocumentSidebar";
 
 const SECTIONS = [
   { id: "intro", title: "1. Introduction" },
@@ -21,16 +18,6 @@ const SECTIONS = [
 ];
 
 export default function PrivacyPolicyPage() {
-  const [activeSection, setActiveSection] = useState("intro");
-
-  const scrollTo = (id: string) => {
-    setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
       
@@ -99,28 +86,7 @@ export default function PrivacyPolicyPage() {
         {/* Sticky Nav + Legal Layout */}
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
           
-          {/* Sticky Sidebar Navigation */}
-          <div className="md:col-span-4 sticky top-28 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-5 hidden md:block">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] mb-4 flex items-center gap-2">
-              <FileText className="w-3.5 h-3.5" /> Document Sections
-            </h3>
-            <ul className="space-y-3">
-              {SECTIONS.map((sec) => (
-                <li key={sec.id}>
-                  <button
-                    onClick={() => scrollTo(sec.id)}
-                    className={`w-full text-left text-xs font-medium transition-colors hover:text-white ${
-                      activeSection === sec.id 
-                      ? "text-[var(--accent)] font-semibold" 
-                      : "text-[var(--text-secondary)]"
-                    }`}
-                  >
-                    {sec.title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <DocumentSidebar sections={SECTIONS} />
 
           {/* Legal Text Stream */}
           <div className="md:col-span-8 space-y-12 text-sm leading-relaxed text-[var(--text-secondary)] font-sans">
@@ -207,16 +173,6 @@ export default function PrivacyPolicyPage() {
                 </ul>
               </div>
             </section>
-
-            {/* Scroll back to top button */}
-            <div className="flex justify-center border-t border-[var(--border-subtle)] pt-8 mt-12">
-              <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                className="flex items-center gap-2 text-xs font-semibold text-[var(--text-muted)] hover:text-white transition-colors"
-              >
-                <ArrowUp className="w-3.5 h-3.5" /> Back to Top
-              </button>
-            </div>
 
           </div>
 
