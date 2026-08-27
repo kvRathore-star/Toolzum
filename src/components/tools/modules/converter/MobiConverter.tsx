@@ -6,10 +6,17 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import JSZip from 'jszip';
-import * as pdfjsLib from 'pdfjs-dist';
 import { getErrorMessage } from '@/utils/error';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+let pdfjsLib: any = null;
+
+async function loadPdfjs() {
+  if (!pdfjsLib) {
+    pdfjsLib = await import('pdfjs-dist');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+  }
+  return pdfjsLib;
+}
 
 type Mode = 'mobi-to-pdf' | 'mobi-to-epub' | 'pdf-to-mobi';
 type PageSize = 'a4' | 'letter' | 'kindle';
@@ -337,7 +344,8 @@ export default function MobiConverter() {
         setFile(selectedFile);
         toast.success(`Loaded "${result.metadata.title}"`);
       } else {
-        const pdf = await pdfjsLib.getDocument({ data: buf.slice(0) }).promise;
+        const pdfjs = await loadPdfjs();
+        const pdf = await pdfjs.getDocument({ data: buf.slice(0) }).promise;
         let text = '';
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);

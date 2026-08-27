@@ -48,7 +48,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   }
 
   const desc = getMetaDescription(toolMetadata);
-  const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.png`;
+  const ogImageUrl = `https://toolzum.com/og/${params.category}/${params.tool}.webp`;
 
   return {
     title: `${toolMetadata.name} – Free Online Tool`,

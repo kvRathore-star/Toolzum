@@ -54,7 +54,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
     'Growth & Marketing': { title: 'Free Growth & Marketing Tools – SaaS & Performance', description: 'Free growth and marketing tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics. All calculations happen locally in your browser.' },
   };
   const seo = SEO[categoryKey] ?? { title: `${categoryKey} Tools – Free | Toolzum`, description: `Free ${categoryKey.toLowerCase()} tools — most processed locally in your browser with nothing uploaded for local tools.` };
-  const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.png`;
+  const ogImage = `https://toolzum.com/og/${categoryKey.toLowerCase()}/index.webp`;
   return {
     title: seo.title,
     description: seo.description,

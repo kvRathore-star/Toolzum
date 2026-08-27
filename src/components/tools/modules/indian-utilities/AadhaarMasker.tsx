@@ -3,11 +3,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { toast } from "react-hot-toast";
 import { FileUploader } from '../../FileUploader';
-import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { Eye, EyeOff, ShieldCheck, RotateCcw, Undo2, Download } from 'lucide-react';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
+let pdfjsLib: any = null;
+
+async function loadPdfjs() {
+  if (!pdfjsLib) {
+    pdfjsLib = await import('pdfjs-dist');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
+  }
+  return pdfjsLib;
+}
 
 const ACCENT = '#1e3a5f';
 
@@ -29,7 +36,8 @@ export default function AadhaarMasker() {
     try {
       if (file.type === "application/pdf") {
         const arrayBuffer = await file.arrayBuffer();
-        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const pdfjs = await loadPdfjs();
+        const pdf = await pdfjs.getDocument({ data: arrayBuffer }).promise;
         const page = await pdf.getPage(1);
 
         const viewport = page.getViewport({ scale: 1.5 });

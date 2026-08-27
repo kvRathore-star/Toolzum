@@ -11,6 +11,7 @@ import {
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { toolsRegistry } from "../src/registry/tools";
+import sharp from "sharp";
 
 const require = createRequire(import.meta.url);
 const { ImageResponse } = require(
@@ -305,6 +306,17 @@ async function writeImage(outPath: string, buf: Buffer): Promise<void> {
   const dir = outPath.substring(0, outPath.lastIndexOf("/"));
   if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
   writeFileSync(outPath, buf);
+  
+  // Also generate WebP version for better compression
+  const webpPath = outPath.replace(/\.png$/, '.webp');
+  if (!existsSync(webpPath)) {
+    try {
+      const webpBuffer = await sharp(buf).webp({ quality: 80 }).toBuffer();
+      writeFileSync(webpPath, webpBuffer);
+    } catch (error) {
+      console.error(`Failed to generate WebP for ${outPath}:`, error);
+    }
+  }
 }
 
 async function runPool<T>(

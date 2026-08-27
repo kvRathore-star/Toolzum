@@ -48,11 +48,11 @@ export const metadata: Metadata = {
     title: "Toolzum – Privacy-First Web Tools",
     description:
       `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
-    images: [{ url: "/og/branding/index.png", width: 1200, height: 630 }],
+    images: [{ url: "/og/branding/index.webp", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og/branding/index.png"],
+    images: ["/og/branding/index.webp"],
   },
 };
 
@@ -81,7 +81,7 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "Toolzum",
                 "url": "https://toolzum.com",
-                "logo": "https://toolzum.com/og/branding/index.png",
+                "logo": "https://toolzum.com/og/branding/index.webp",
                 "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
                 "sameAs": [],
               },

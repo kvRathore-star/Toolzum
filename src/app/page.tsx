@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: `Toolzum — ${totalImplemented}+ Privacy-First Browser Tools`,
     description:
       `${totalImplemented}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
-    images: [{ url: "/og/branding/index.png", width: 1200, height: 630 }],
+    images: [{ url: "/og/branding/index.webp", width: 1200, height: 630 }],
   },
 };
 

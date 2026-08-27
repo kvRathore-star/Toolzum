@@ -5,10 +5,17 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
-import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+let pdfjsLib: any = null;
+
+async function loadPdfjs() {
+  if (!pdfjsLib) {
+    pdfjsLib = await import('pdfjs-dist');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+  }
+  return pdfjsLib;
+}
 
 type Action = 'overlay' | 'alternate-merge' | 'combine' | 'booklet' | 'invert' | 'zip';
 
@@ -145,7 +152,8 @@ export default function PdfAdvanced() {
       } else if (action === 'invert') {
         resultDoc = await PDFDocument.create();
         const buf2 = mainBuffer.slice(0);
-        const pdfJsDoc = await pdfjsLib.getDocument(buf2).promise;
+        const pdfjs = await loadPdfjs();
+        const pdfJsDoc = await pdfjs.getDocument(buf2).promise;
         for (let i = 1; i <= pdfJsDoc.numPages; i++) {
           const page = await pdfJsDoc.getPage(i);
           const viewport = page.getViewport({ scale: 2 });
@@ -176,7 +184,8 @@ export default function PdfAdvanced() {
         resultDoc = mainDoc;
         const zip = new JSZip();
         const buf3 = mainBuffer.slice(0);
-        const pdfJsDoc2 = await pdfjsLib.getDocument(buf3).promise;
+        const pdfjs = await loadPdfjs();
+        const pdfJsDoc2 = await pdfjs.getDocument(buf3).promise;
         for (let i = 1; i <= pdfJsDoc2.numPages; i++) {
           const page = await pdfJsDoc2.getPage(i);
           const viewport = page.getViewport({ scale: 2 });
