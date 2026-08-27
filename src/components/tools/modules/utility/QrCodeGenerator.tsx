@@ -153,7 +153,11 @@ export default function QrCodeGenerator() {
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) { setLogoImage(URL.createObjectURL(file)); toast.success('QR Center logo loaded!'); }
+    if (file) {
+      if (logoImage) URL.revokeObjectURL(logoImage);
+      setLogoImage(URL.createObjectURL(file));
+      toast.success('QR Center logo loaded!');
+    }
   };
 
   const handleDownload = () => {

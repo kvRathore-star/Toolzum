@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { getErrorMessage } from '@/utils/error';
 import * as YAML from 'js-yaml';
 import Link from 'next/link';
+import DOMPurify from 'dompurify';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { Section } from '../MiscToolsShared';
 
@@ -410,7 +411,7 @@ export function CsvHtmlTableConverter() {
         <Input label={mode === 'csv-to-html' ? 'CSV Input' : 'HTML Table Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'csv-to-html' ? 'name,age\nAlice,30' : '<table><tr><th>Name</th></tr><tr><td>Alice</td></tr></table>'} />
         <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         {mode === 'csv-to-html' && preview && (
-          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl overflow-x-auto" dangerouslySetInnerHTML={{ __html: preview }} />
+          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl overflow-x-auto" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(preview) }} />
         )}
         <Output value={output} label={mode === 'csv-to-html' ? 'HTML Output' : 'CSV Output'} />
       </div>

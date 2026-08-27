@@ -389,7 +389,10 @@ function QrTab() {
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Logo (optional)</label>
             <input type="file" accept="image/*" onChange={e => {
               const file = e.target.files?.[0];
-              if (file) setLogoImage(URL.createObjectURL(file));
+              if (file) {
+                if (logoImage) URL.revokeObjectURL(logoImage);
+                setLogoImage(URL.createObjectURL(file));
+              }
             }}
               className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-700 dark:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
           </div>

@@ -65,7 +65,10 @@ export default function LinkInBioBuilder() {
 
   const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) setProfileImage(URL.createObjectURL(file));
+    if (file) {
+      if (profileImage) URL.revokeObjectURL(profileImage);
+      setProfileImage(URL.createObjectURL(file));
+    }
   };
 
   const generateHtml = useMemo(() => {

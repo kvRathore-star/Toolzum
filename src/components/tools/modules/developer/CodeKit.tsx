@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import * as acorn from 'acorn';
+import DOMPurify from 'dompurify';
 
 const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
   <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
@@ -400,7 +401,7 @@ export function PugToHtml() {
         <div className="space-y-2">
           {preview && (
             <div className="bg-white rounded-lg border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
-              <div dangerouslySetInnerHTML={{ __html: output }} className="text-[11px] text-gray-800" />
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(output) }} className="text-[11px] text-gray-800" />
             </div>
           )}
           <Result value={output} />
