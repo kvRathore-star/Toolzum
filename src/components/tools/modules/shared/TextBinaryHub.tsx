@@ -102,7 +102,7 @@ export default function TextBinaryHub({ slug: defaultSlug }: { slug: string; des
         <div className="space-y-1">
           <span className="text-xs text-[var(--text-secondary)] font-medium">{config.inputLabel}</span>
           <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder={config.inputPlaceholder}
-            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y min-h-[80px]" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         </div>
         {output && (
           <div className="space-y-2">

@@ -247,13 +247,13 @@ export default function AiGrammarChecker() {
             }}
             onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleCheck()}
             placeholder="Paste or type text to check..."
-            className="w-full h-44 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] outline-none resize-none focus:border-indigo-500"
+            className="w-full h-44 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-indigo-500"
           />
         </div>
 
         <div className="flex gap-3">
           <button onClick={handleCheck} onKeyDown={handleKeyDown} disabled={isLoading || !input.trim()}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isLoading ? 'Checking grammar...' : 'Check grammar'}
           >
             {isLoading ? (
@@ -266,7 +266,7 @@ export default function AiGrammarChecker() {
             {isLoading ? 'Checking...' : 'Check Grammar'}
           </button>
           <button onClick={handleClear}
-            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label="Clear text"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

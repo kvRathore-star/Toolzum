@@ -201,18 +201,18 @@ export default function SocialMediaPostMaker() {
               <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs h-20 resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs h-20 resize-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
-                <input type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold outline-none text-xs" />
+                <input type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
-                <select value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] outline-none text-xs">
+                <select value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
                   <option value="sans-serif">Sans-Serif</option>
                   <option value="serif">Serif</option>
                   <option value="Impact">Impact (Meme Style)</option>

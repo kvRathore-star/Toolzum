@@ -245,12 +245,12 @@ export default function CreatePdf() {
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Document Title</label>
             <input type="text" value={titleText} onChange={(e) => setTitleText(e.target.value)}
               placeholder="My Document"
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
             <select value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               <option value={10}>10pt</option>
               <option value={12}>12pt</option>
               <option value={14}>14pt</option>
@@ -276,7 +276,7 @@ export default function CreatePdf() {
             </div>
             <textarea value={csvRaw} onChange={(e) => setCsvRaw(e.target.value)}
               placeholder="name,email,role&#10;John,john@example.com,Admin&#10;Jane,jane@example.com,Editor"
-              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
             />
             <p className="text-xs text-[var(--text-secondary)]">First row is treated as table headers. Supports quoted fields.</p>
           </div>
@@ -290,13 +290,13 @@ export default function CreatePdf() {
             </div>
             <textarea value={text} onChange={(e) => setText(e.target.value)}
               placeholder='{"name": "John", "age": 30}'
-              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
             />
           </div>
         ) : (
           <textarea value={text} onChange={(e) => setText(e.target.value)}
             placeholder={mode === 'text' ? 'Enter your text here...' : '<root><item>XML content</item></root>'}
-            className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y"
+            className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
           />
         )}
       </div>

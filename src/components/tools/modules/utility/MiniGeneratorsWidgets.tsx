@@ -712,7 +712,7 @@ export function NumeronymGenerator() {
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
         <input type="text" value={input} onChange={e => setInput(e.target.value)}
           placeholder="e.g., internationalization"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
 
         <div className="flex items-center gap-2">
           <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
@@ -793,7 +793,7 @@ export function MACVendorLookup() {
           <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">MAC Address</label>
           <input type="text" value={macInput} onChange={e => setMacInput(e.target.value)}
             placeholder="00:1A:11:22:33:44 or 001A11223344"
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-emerald-400 transition-colors" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-400 transition-colors" />
         </div>
 
         {oui && (

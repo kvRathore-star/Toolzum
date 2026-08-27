@@ -187,41 +187,41 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Full Name *</label>
                 <input value={form.fullName} onChange={e => update('fullName', e.target.value)} placeholder="Rahul Sharma"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Email</label>
                   <input value={form.email} onChange={e => update('email', e.target.value)} placeholder="rahul@email.com"
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone</label>
                   <input value={form.phone} onChange={e => update('phone', e.target.value)} placeholder="9876543210"
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
                 </div>
               </div>
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Against (Company/Person)</label>
               <input value={form.againstName} onChange={e => update('againstName', e.target.value)} placeholder="XYZ Bank / ABC Company"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Transaction/Reference ID</label>
               <input value={form.transactionId} onChange={e => update('transactionId', e.target.value)} placeholder="TXN123456789"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Amount (₹)</label>
                 <input type="number" value={form.amount} onChange={e => update('amount', e.target.value)} placeholder="5000"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Date of Incident</label>
                 <input type="date" value={form.date} onChange={e => update('date', e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
               </div>
             </div>
           </div>
@@ -229,21 +229,21 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Your Address</label>
             <input value={form.address} onChange={e => update('address', e.target.value)} placeholder="123, Main Street, New Delhi - 110001"
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Describe Your Complaint in Detail *</label>
             <textarea value={form.description} onChange={e => update('description', e.target.value)} rows={4}
               placeholder="Describe what happened, when, and who you contacted..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Relief Sought (What do you want?)</label>
             <textarea value={form.relief} onChange={e => update('relief', e.target.value)} rows={2}
               placeholder="e.g. Refund of ₹5000, compensation for mental harassment..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/30 transition-all resize-none" />
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">

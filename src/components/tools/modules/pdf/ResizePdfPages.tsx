@@ -195,7 +195,7 @@ export default function ResizePdfPages() {
                     max={5000}
                     value={customWidth}
                     onChange={(e) => setCustomWidth(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                   />
                 </div>
                 <div>
@@ -206,7 +206,7 @@ export default function ResizePdfPages() {
                     max={5000}
                     value={customHeight}
                     onChange={(e) => setCustomHeight(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                   />
                 </div>
               </div>

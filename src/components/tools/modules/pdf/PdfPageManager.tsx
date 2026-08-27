@@ -223,7 +223,7 @@ export default function PdfPageManager() {
             {tab === 'extract' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Specify pages to extract (e.g. 1, 3, 5-10).</p>
-                <input type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+                <input type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
                 <button onClick={processExtract} disabled={isProcessing || !pageRange.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Extract & Download'}</button>
               </div>
             )}
@@ -243,7 +243,7 @@ export default function PdfPageManager() {
             {tab === 'delete' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Enter page numbers to delete (e.g. 1, 3, 5-10). Max: {totalPages}.</p>
-                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} onChange={e => setDeleteRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] outline-none focus:border-red-500" />
+                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} onChange={e => setDeleteRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500" />
                 <button onClick={processDelete} disabled={isProcessing || !deleteRange.trim()} className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Delete Pages & Download'}</button>
               </div>
             )}

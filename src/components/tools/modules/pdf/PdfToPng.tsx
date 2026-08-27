@@ -267,7 +267,7 @@ export default function PdfToPng() {
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Output Format</label>
           <select value={format} onChange={(e) => setFormat(e.target.value as OutputFormat)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value="png">PNG (lossless)</option>
             <option value="webp">WebP (smaller)</option>
             <option value="bmp">BMP (uncompressed)</option>
@@ -277,12 +277,12 @@ export default function PdfToPng() {
           <label className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
           <input type="text" value={pageRange} onChange={(e) => setPageRange(e.target.value)}
             placeholder="all, 1-5, or 1,3,5"
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none" />
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
         </div>
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">DPI</label>
           <select value={dpi} onChange={(e) => setDpi(Number(e.target.value))}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value={150}>150 DPI</option>
             <option value={200}>200 DPI</option>
             <option value={300}>300 DPI</option>
@@ -291,7 +291,7 @@ export default function PdfToPng() {
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Color Mode</label>
           <select value={colorMode} onChange={(e) => setColorMode(e.target.value as ColorMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none">
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value="rgba">Full Color</option>
             <option value="gray">Grayscale</option>
             <option value="bw">Black & White</option>

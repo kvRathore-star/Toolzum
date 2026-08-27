@@ -210,7 +210,7 @@ export default function XlsxCsvConverter() {
               <select
                 value={sheetName}
                 onChange={(e) => { setSheetName(e.target.value); if (file) processXlsxFile(file, e.target.value, delimiter, includeHeader, range); }}
-                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 {sheetNames.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
@@ -223,7 +223,7 @@ export default function XlsxCsvConverter() {
               <select
                 value={range}
                 onChange={(e) => setRange(e.target.value)}
-                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 <option value="all">All Rows</option>
                 <option value="1-100">Rows 1-100</option>
@@ -238,7 +238,7 @@ export default function XlsxCsvConverter() {
             <select
               value={delimiter}
               onChange={(e) => setDelimiter(e.target.value as Delimiter)}
-              className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none"
+              className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             >
               <option value=",">Comma (,)</option>
               <option value={'\t'}>Tab</option>
@@ -267,7 +267,7 @@ export default function XlsxCsvConverter() {
                 type="text"
                 value={csvSheetName}
                 onChange={(e) => setCsvSheetName(e.target.value)}
-                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:outline-none w-32"
+                className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-32"
               />
             </div>
           )}

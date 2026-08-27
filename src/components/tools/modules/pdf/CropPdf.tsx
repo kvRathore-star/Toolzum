@@ -158,7 +158,7 @@ export default function CropPdf() {
                     max={2000}
                     value={margins[side]}
                     onChange={(e) => setMargins({ ...margins, [side]: Math.max(0, parseInt(e.target.value) || 0) })}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                   />
                 </div>
               ))}

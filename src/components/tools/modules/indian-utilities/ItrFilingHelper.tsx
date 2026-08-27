@@ -233,13 +233,13 @@ Note: Connect backend LLM for exact deduction processing.`);
                 <div>
                   <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Total Annual Income (₹)</label>
                   <input type="number" value={income} onChange={e => setIncome(e.target.value)}
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-all text-sm"
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm"
                     placeholder="e.g. 1500000" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Tax Regime</label>
                   <select value={regime} onChange={e => setRegime(e.target.value)}
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-all text-sm">
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm">
                     <option value="new">New Tax Regime (Default)</option>
                     <option value="old">Old Tax Regime (With 80C Deductions)</option>
                   </select>

@@ -151,7 +151,7 @@ export default function PdfMetadataEditor() {
                 type="text"
                 value={metadata.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
             
@@ -161,7 +161,7 @@ export default function PdfMetadataEditor() {
                 type="text"
                 value={metadata.author}
                 onChange={(e) => handleInputChange('author', e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
 
@@ -171,7 +171,7 @@ export default function PdfMetadataEditor() {
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => handleInputChange('subject', e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
 
@@ -182,7 +182,7 @@ export default function PdfMetadataEditor() {
                 value={metadata.keywords}
                 onChange={(e) => handleInputChange('keywords', e.target.value)}
                 placeholder="Comma separated"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
 
@@ -193,7 +193,7 @@ export default function PdfMetadataEditor() {
                    type="text"
                    value={metadata.creator}
                    onChange={(e) => handleInputChange('creator', e.target.value)}
-                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
+                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-sm"
                  />
                </div>
                <div className="space-y-1">
@@ -202,7 +202,7 @@ export default function PdfMetadataEditor() {
                    type="text"
                    value={metadata.producer}
                    onChange={(e) => handleInputChange('producer', e.target.value)}
-                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
+                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-sm"
                  />
                </div>
             </div>

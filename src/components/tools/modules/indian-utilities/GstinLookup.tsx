@@ -144,7 +144,7 @@ export default function GstinLookup() {
               <div className="flex gap-2">
                 <input value={gstin} onChange={e => setGstin(e.target.value.toUpperCase())} placeholder="27AABCU1234D1Z5"
                   maxLength={15}
-                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                 <button onClick={handleLookup} disabled={loading || !gstin || isFreeLimitReached}
                   className="px-6 py-3 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
                   {loading ? 'Searching...' : <><Search className="w-4 h-4" /> Verify</>}

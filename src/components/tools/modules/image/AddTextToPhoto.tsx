@@ -144,17 +144,17 @@ export default function SocialMediaImageCreator() {
                </div>
                {PRESETS[preset].label === 'Custom' && (
                  <div className="grid grid-cols-2 gap-2">
-                   <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs outline-none" /></div>
-                   <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs outline-none" /></div>
+                   <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" /></div>
+                   <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" /></div>
                  </div>
                )}
 
                <div className="border-t border-[var(--border-subtle)] pt-4 space-y-3">
                  <label className="block text-sm font-semibold">Text</label>
-                 <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none text-sm" />
+                 <input type="text" value={text} onChange={e => setText(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm" />
                  <div className="flex gap-2">
                    <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-10 w-10 rounded cursor-pointer border-0 p-0 shrink-0" />
-                   <input type="text" value={color} onChange={e => setColor(e.target.value)} className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none uppercase font-mono text-xs" />
+                   <input type="text" value={color} onChange={e => setColor(e.target.value)} className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 uppercase font-mono text-xs" />
                  </div>
                  <div><label className="text-xs font-semibold flex justify-between"><span>Size</span><span className="text-[var(--text-secondary)]">{fontSize}px</span></label><input type="range" min="10" max="300" value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-violet-500" /></div>
                  <div><label className="text-xs font-semibold flex justify-between"><span>X Pos</span><span className="text-[var(--text-secondary)]">{Math.round(xPos)}</span></label><input type="range" min="0" max={image.width} value={xPos} onChange={e => setXPos(Number(e.target.value))} className="w-full accent-violet-500" /></div>

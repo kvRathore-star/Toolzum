@@ -68,11 +68,11 @@ export default function RoiCalculator() {
         <div className="space-y-4">
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Initial Investment ($)</label>
-            <input type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Final Value ($)</label>
-            <input type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
         </div>
 

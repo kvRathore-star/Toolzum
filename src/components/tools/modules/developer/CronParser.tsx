@@ -39,7 +39,7 @@ export default function CronParser() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex items-center gap-3">
-        <input value={expression} onChange={e => { setExpression(e.target.value); parse(e.target.value); }} placeholder="cron expression (e.g. */5 * * * *)" className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none font-mono focus:border-[var(--accent)] transition-colors" />
+        <input value={expression} onChange={e => { setExpression(e.target.value); parse(e.target.value); }} placeholder="cron expression (e.g. */5 * * * *)" className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono focus:border-[var(--accent)] transition-colors" />
       </div>
       {result.length > 0 && (
         <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl overflow-hidden">

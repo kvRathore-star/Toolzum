@@ -65,7 +65,7 @@ export default function ListConverter() {
   return (
     <div className="max-w-4xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste your list here..." className="w-full h-[200px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste your list here..." className="w-full h-[200px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
         
         {detected && (
           <div className="text-[11px] text-[var(--text-secondary)] flex items-center gap-2">
@@ -101,7 +101,7 @@ export default function ListConverter() {
             <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Output ({items.length} items)</span>
             <button onClick={() => copy(output, 'List')} className="text-[10px] text-[var(--accent)] hover:underline">Copy All</button>
           </div>
-          <textarea value={output} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] outline-none resize-none font-mono" />
+          <textarea value={output} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
         </div>
       )}
     </div>

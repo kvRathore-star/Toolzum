@@ -152,7 +152,7 @@ export default function AddImageToPdf() {
                 max={totalPages}
                 value={pageNum}
                 onChange={(e) => setPageNum(Math.min(totalPages, Math.max(1, parseInt(e.target.value) || 1)))}
-                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
               <span className="text-sm text-[var(--text-secondary)]">of {totalPages}</span>
             </div>
@@ -180,7 +180,7 @@ export default function AddImageToPdf() {
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
             <div className="space-y-2">
@@ -189,7 +189,7 @@ export default function AddImageToPdf() {
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function AddImageToPdf() {
                 min={1}
                 value={width}
                 onChange={(e) => setWidth(parseInt(e.target.value) || 1)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
             <div className="space-y-2">
@@ -212,7 +212,7 @@ export default function AddImageToPdf() {
                 min={1}
                 value={height}
                 onChange={(e) => setHeight(parseInt(e.target.value) || 1)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
           </div>

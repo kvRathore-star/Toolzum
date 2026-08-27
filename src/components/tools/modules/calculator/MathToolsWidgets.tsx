@@ -39,11 +39,11 @@ export function EtaCalculator() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Distance ({unit === 'km' ? 'km' : 'mi'})</label>
-            <input value={dist} onChange={e => setDist(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={dist} onChange={e => setDist(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
           <div>
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Speed ({unit === 'km' ? 'km/h' : 'mph'})</label>
-            <input value={speed} onChange={e => setSpeed(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={speed} onChange={e => setSpeed(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -55,7 +55,7 @@ export function EtaCalculator() {
         </div>
         <div>
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Start Time (optional, HH:MM)</label>
-            <input value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         </div>
         {result && (
           <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl p-5 text-center">

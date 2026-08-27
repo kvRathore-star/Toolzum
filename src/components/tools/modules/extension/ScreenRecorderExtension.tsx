@@ -110,7 +110,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
               type="text" 
               value={extName} 
               onChange={e => setExtName(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
 
@@ -136,7 +136,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
             <textarea
               value={activeTab === 'manifest' ? manifest : activeTab === 'popupHtml' ? popupHtml : popupJs}
               readOnly
-              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"
             />
           </div>
         </div>

@@ -133,7 +133,7 @@ export default function PdfOcr() {
             <select 
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
+              className="bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-sm"
             >
               <option value="eng">English</option>
               <option value="hin">Hindi</option>

@@ -146,7 +146,7 @@ export default function PrivacyCleaner() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--text-muted)]" />
             <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search stored items..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <button onClick={scanStorage} disabled={scanning}
             className="px-4 py-2.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors">

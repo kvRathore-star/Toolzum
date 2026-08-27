@@ -129,7 +129,7 @@ export default function PanVerification() {
               placeholder="e.g., ABCDE1234F"
               value={pan}
               onChange={(e) => setPan(e.target.value.toUpperCase())}
-              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3 text-lg font-mono tracking-widest text-[var(--text-primary)] outline-none transition-all"
+              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3 text-lg font-mono tracking-widest text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all"
               style={{
                 borderColor: pan ? ACCENT + '66' : 'var(--border-subtle)',
                 boxShadow: pan ? `0 0 0 3px ${ACCENT}22` : 'none',

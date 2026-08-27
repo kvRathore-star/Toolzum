@@ -78,7 +78,7 @@ ${inputText}`;
              <select 
                value={sourceLang}
                onChange={(e) => setSourceLang(e.target.value)}
-               className="w-full bg-[var(--bg-overlay)] border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
              >
                {languages.map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -97,7 +97,7 @@ ${inputText}`;
              <select 
                value={targetLang}
                onChange={(e) => setTargetLang(e.target.value)}
-               className="w-full bg-[var(--bg-overlay)] border-none outline-none px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
              >
                {languages.filter(l => l !== 'Auto Detect').map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -111,7 +111,7 @@ ${inputText}`;
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Enter text to translate..."
-              className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none shadow-sm focus:border-[var(--accent)] transition-colors"
+              className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none shadow-sm focus:border-[var(--accent)] transition-colors"
             />
             <div className="absolute bottom-4 right-4 text-xs text-[var(--text-muted)]">
               {inputText.length} characters
@@ -123,12 +123,12 @@ ${inputText}`;
               value={outputText}
               readOnly
               placeholder="Translation will appear here..."
-              className={`w-full h-[400px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] outline-none resize-none shadow-sm ${isTranslating ? 'animate-pulse text-[var(--text-muted)]' : ''}`}
+              className={`w-full h-[400px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-6 text-lg text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none shadow-sm ${isTranslating ? 'animate-pulse text-[var(--text-muted)]' : ''}`}
             />
             {outputText && (
               <button 
                 onClick={copyToClipboard}
-                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Copy translation to clipboard"
               >
                 <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
@@ -141,7 +141,7 @@ ${inputText}`;
           onClick={handleTranslate}
           onKeyDown={handleKeyDown}
           disabled={isTranslating || !inputText.trim()}
-          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 disabled:opacity-50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
           aria-label={isTranslating ? 'Translating text...' : 'Translate text'}
         >
           {isTranslating ? (

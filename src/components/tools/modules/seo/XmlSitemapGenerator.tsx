@@ -233,7 +233,7 @@ export default function XmlSitemapGenerator() {
                   onChange={e => setUrl(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && startCrawl()}
                   placeholder="https://yourwebsite.com — works with React, Next.js & Vue too"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]/50 transition-colors placeholder:text-[var(--text-muted)]"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]/50 transition-colors placeholder:text-[var(--text-muted)]"
                   disabled={isCrawling}
                 />
               </div>
@@ -265,7 +265,7 @@ export default function XmlSitemapGenerator() {
                   <select
                     value={maxPages}
                     onChange={e => setMaxPages(Number(e.target.value))}
-                    className="bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs outline-none"
+                    className="bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
@@ -287,7 +287,7 @@ export default function XmlSitemapGenerator() {
                       onChange={e => setNewExclusion(e.target.value)}
                       onKeyDown={e => e.key === 'Enter' && addExclusion()}
                       placeholder="/tag/*, /author/*, ?page=*"
-                      className="flex-1 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs outline-none"
+                      className="flex-1 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                       disabled={isCrawling}
                     />
                     <button onClick={addExclusion} className="px-3 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs transition-colors" disabled={isCrawling}>Add</button>

@@ -158,7 +158,7 @@ export default function WritingTools() {
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Paste or type your text here for instant analysis..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-40 outline-none resize-none text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
           />
         </div>
 

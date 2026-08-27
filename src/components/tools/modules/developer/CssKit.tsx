@@ -7,7 +7,7 @@ const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: 
   <div className="flex items-center gap-1.5">
     <label className="text-[10px] text-[var(--text-secondary)] w-14 shrink-0">{label}</label>
     <input type={typeof value === 'number' ? 'number' : 'text'} value={value} onChange={e => onChange(typeof value === 'number' ? Number(e.target.value) : e.target.value)}
-      className={`w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 ${small ? 'py-1 text-[11px]' : 'py-1.5 text-xs'} text-[var(--text-primary)] outline-none focus:border-[var(--accent)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`} />
+      className={`w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 ${small ? 'py-1 text-[11px]' : 'py-1.5 text-xs'} text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`} />
     {suffix && <span className="text-[10px] text-[var(--text-muted)] w-5">{suffix}</span>}
   </div>
 );
@@ -334,7 +334,7 @@ export function CssToScss() {
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">CSS Input</span>
           <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS..."
-            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
         </div>
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">SCSS Output</span>
@@ -437,7 +437,7 @@ export function LessToCss() {
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">LESS Input</span>
           <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="@var: value;"
-            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
         </div>
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">CSS Output</span>
@@ -502,7 +502,7 @@ export function CssSpecificityCalculator() {
 
       <div className="space-y-2">
         <input type="text" value={sel} onChange={e => setSel(e.target.value)} placeholder="Enter CSS selector..."
-          className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+          className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
 
         {/* Specificity bar */}
         <div className="w-full bg-[var(--bg-overlay)] rounded-lg h-4 overflow-hidden">
@@ -521,7 +521,7 @@ export function CssSpecificityCalculator() {
       {compareMode && (
         <div className="space-y-2">
           <input type="text" value={sel2} onChange={e => setSel2(e.target.value)} placeholder="Second selector..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           {spec2 && (
             <div className="w-full bg-[var(--bg-overlay)] rounded-lg h-4 overflow-hidden">
               <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-300 flex items-center justify-end pr-1"
@@ -618,7 +618,7 @@ export function CssValidator() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
       <PresetBar presets={presetList} />
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS to validate..."
-        className="w-full h-32 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+        className="w-full h-32 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={validate} label="Validate CSS" />
 
       {issues.length > 0 && (

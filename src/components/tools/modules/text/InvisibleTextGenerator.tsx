@@ -56,7 +56,7 @@ export default function InvisibleTextGenerator() {
               value={customLen}
               onChange={e => setCustomLen(e.target.value)}
               placeholder="Custom count"
-              className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none text-xs"
+              className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
             />
             <button
               onClick={() => { const n = parseInt(customLen); if (n > 0 && n <= 10000) generateInvisible(n); else toast.error('Enter 1-10000'); }}

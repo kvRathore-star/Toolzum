@@ -138,7 +138,7 @@ export default function AddPageNumbersToPdf() {
             <select 
               value={format} 
               onChange={(e) => setFormat(e.target.value as any)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 outline-none focus:border-[var(--accent)] text-[var(--text-primary)] text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-[var(--text-primary)] text-sm"
             >
               <option value="X">1, 2, 3...</option>
               <option value="Page X">Page 1, Page 2...</option>

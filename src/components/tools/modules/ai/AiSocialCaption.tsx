@@ -224,7 +224,7 @@ export default function AiSocialCaption() {
             onChange={e => setTopic(e.target.value)}
             placeholder="Describe your post topic, product, or idea..."
             rows={3}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] outline-none resize-none focus:border-indigo-500"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-indigo-500"
           />
         </div>
 

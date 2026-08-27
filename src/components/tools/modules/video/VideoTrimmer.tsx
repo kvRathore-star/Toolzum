@@ -189,7 +189,7 @@ export default function VideoTrimmer() {
               onClick={processVideo}
               onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? `Trimming video ${Math.round(progress)}%` : 'Trim video'}
             >
               {isProcessing && (
@@ -210,7 +210,7 @@ export default function VideoTrimmer() {
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button 
                 onClick={() => downloadOrShare(outputUrl, `trimmed_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download trimmed video"
               >
                 Download Video

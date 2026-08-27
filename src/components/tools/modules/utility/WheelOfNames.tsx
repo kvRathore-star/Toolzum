@@ -223,7 +223,7 @@ export default function WheelOfNames() {
               value={names}
               onChange={(e) => setNames(e.target.value)}
               placeholder="Enter names here...\\nOne name per line"
-              className="flex-1 w-full p-4 bg-transparent resize-none focus:outline-none text-[var(--text-primary)] leading-relaxed font-medium"
+              className="flex-1 w-full p-4 bg-transparent resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] leading-relaxed font-medium"
               spellCheck={false}
             />
           </div>

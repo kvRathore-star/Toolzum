@@ -395,7 +395,7 @@ export default function GeminiWatermarkRemover() {
         <div className="flex items-center gap-2">
           <label className="text-xs text-[var(--text-secondary)]">Output:</label>
           <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
-            className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] outline-none">
+            className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value="png">PNG</option>
             <option value="jpeg">JPG</option>
             <option value="webp">WebP</option>

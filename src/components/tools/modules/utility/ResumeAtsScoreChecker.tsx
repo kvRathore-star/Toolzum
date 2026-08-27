@@ -120,7 +120,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
                 value={jobTitle}
                 onChange={e => setJobTitle(e.target.value)}
                 placeholder="e.g. Senior Software Engineer"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-indigo-500/30"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/30"
               />
             </div>
 
@@ -129,7 +129,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
               <select
                 value={industry}
                 onChange={e => setIndustry(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 {['Technology', 'Finance & Banking', 'Healthcare', 'Education', 'Manufacturing', 'Marketing & Media', 'Consulting', 'Government', 'Retail', 'Other'].map(i =>
                   <option key={i} value={i}>{i}</option>
@@ -143,7 +143,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
                 value={resumeText}
                 onChange={e => setResumeText(e.target.value)}
                 placeholder="Paste your full resume text here including work experience, skills, education, certifications..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-indigo-500/30 resize-none flex-1 min-h-[200px]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/30 resize-none flex-1 min-h-[200px]"
               />
             </div>
 

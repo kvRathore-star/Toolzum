@@ -388,7 +388,7 @@ export default function FontConverter() {
                 <select
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as FontFormat)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none cursor-pointer"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-pointer"
                 >
                   {OUTPUT_FORMATS.map((fmt) => (
                     <option key={fmt.value} value={fmt.value}>{fmt.label}</option>
@@ -433,7 +433,7 @@ export default function FontConverter() {
             value={previewText}
             onChange={(e) => setPreviewText(e.target.value)}
             placeholder="Type sample text here..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
           <div className="bg-white border border-[var(--border-subtle)] rounded-xl overflow-hidden">
             <canvas ref={canvasRef} width={760} height={160} className="w-full h-auto" />

@@ -146,12 +146,12 @@ export default function BatchImageEditor() {
                <div className="space-y-3">
                  <label className="block text-sm font-semibold">Max Width (px)</label>
                  <p className="text-xs text-[var(--text-secondary)] mb-2">Images wider than this will be scaled down.</p>
-                 <input type="number" value={maxWidth} onChange={e => setMaxWidth(Number(e.target.value))} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none" />
+                 <input type="number" value={maxWidth} onChange={e => setMaxWidth(Number(e.target.value))} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <div className="space-y-3">
                  <label className="block text-sm font-semibold">Watermark Text (Optional)</label>
                  <p className="text-xs text-[var(--text-secondary)] mb-2">Added to bottom right corner.</p>
-                 <input type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none" />
+                 <input type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <button onClick={processBatch} disabled={isProcessing || remaining === 0}
                  className="w-full mt-4 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">

@@ -216,7 +216,7 @@ export default function BulkImageWatermark() {
             value={watermarkText}
             onChange={e => setWatermarkText(e.target.value)}
             placeholder="Enter watermark text..."
-            className="w-full p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]"
+            className="w-full p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
           />
         ) : (
           <div onClick={() => logoRef.current?.click()} className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-lg)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors">

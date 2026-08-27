@@ -156,7 +156,7 @@ export default function PdfPageDelete() {
               placeholder="e.g. 1, 3, 5-10"
               value={rangeInput}
               onChange={(e) => setRangeInput(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-red-500 transition-colors"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500 transition-colors"
             />
             <p className="text-xs text-[var(--text-secondary)]">
               Enter page numbers and/or ranges separated by commas. Examples: `1,3,5` or `1-5, 8`. Max page: {totalPages}.

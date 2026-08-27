@@ -177,7 +177,7 @@ export default function TranslatePdf() {
               readOnly
               value={extractedText}
               placeholder="Text extracted from PDF will appear here..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-sm resize-none"
               rows={12}
             />
           </div>
@@ -193,7 +193,7 @@ export default function TranslatePdf() {
               readOnly
               value={translatedText}
               placeholder="Translated text will appear here..."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 text-sm resize-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-sm resize-none"
               rows={12}
             />
             {translatedText && (
@@ -228,7 +228,7 @@ export default function TranslatePdf() {
             <select
               value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
             >
               <option value="auto">Auto Detect</option>
               {LANGUAGES.map((lang) => (
@@ -249,7 +249,7 @@ export default function TranslatePdf() {
             <select
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
             >
               {LANGUAGES.map((lang) => (
                 <option key={lang.code} value={lang.code}>{lang.name}</option>

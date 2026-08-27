@@ -268,7 +268,7 @@ Bandra West,
 Mumbai,
 Maharashtra 400050`}
               rows={7}
-              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-200 resize-y font-mono focus:border-amber-500"
+              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200 resize-y font-mono focus:border-amber-500"
               style={{ '--tw-ring-color': ACCENT } as React.CSSProperties}
             />
             <button

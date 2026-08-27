@@ -110,7 +110,7 @@ export default function IfscLookup() {
           <label className="block text-sm font-bold text-[var(--text-primary)]">Enter 11-Digit IFSC Code</label>
           <div className="flex gap-2">
             <input type="text" maxLength={11} placeholder="e.g. HDFC0000123" value={ifsc} onChange={(e) => setIfsc(e.target.value.toUpperCase())}
-              className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] outline-none"
+              className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               onKeyDown={e => e.key === 'Enter' && handleLookup()} />
             <button onClick={handleLookup} disabled={loading || remaining === 0}
               className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">

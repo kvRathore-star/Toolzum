@@ -201,11 +201,11 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
         {files.length > 0 && (
           <div className="flex flex-wrap gap-2 items-center">
-            <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            <select value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
               {FORMATS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
             <button onClick={swapFormats} className="px-3 py-2 rounded-xl bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:border-blue-400" title="Swap formats">⇄</button>
-            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50">
+            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
               {FORMATS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
           </div>

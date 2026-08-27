@@ -139,7 +139,7 @@ export default function ImageCompressor() {
         </div>
         <button
           onClick={reset}
-          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-xs font-bold rounded-lg transition-colors cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           Upload New Image
         </button>
@@ -197,7 +197,7 @@ export default function ImageCompressor() {
             onClick={handleCompress}
             onKeyDown={handleKeyDown}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Compressing image...' : 'Apply compression settings'}
           >
             {isProcessing ? (
@@ -253,7 +253,7 @@ alt="Uploaded image preview"
               </div>
               <button
                 onClick={handleDownload}
-                className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-6 py-2.5 rounded-xl transition-all active:scale-95 flex items-center gap-2 text-sm cursor-pointer shadow focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download compressed image"
               >
                 <Download className="w-4 h-4" />

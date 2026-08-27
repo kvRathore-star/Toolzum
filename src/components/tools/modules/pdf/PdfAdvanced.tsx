@@ -286,7 +286,7 @@ export default function PdfAdvanced() {
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Pages Per Sheet</label>
             <select value={pagesPerSheet} onChange={(e) => setPagesPerSheet(Number(e.target.value))}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               <option value={2}>2 pages per sheet</option>
               <option value={4}>4 pages per sheet</option>
             </select>

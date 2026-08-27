@@ -117,7 +117,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={day}
                   onChange={e => setDay(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
                 >
                   {Array.from({ length: 31 }, (_, i) => String(i + 1)).map(d => (
                     <option key={d} value={d}>{d.padStart(2, '0')}</option>
@@ -130,7 +130,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={month}
                   onChange={e => setMonth(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
                 >
                   {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m, i) => (
                     <option key={i + 1} value={String(i + 1)}>{m}</option>
@@ -143,7 +143,7 @@ export default function IndianAgeCalculator() {
                 <select
                   value={year}
                   onChange={e => setYear(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
                 >
                   {yearOptions.map(y => (
                     <option key={y} value={String(y)}>{y}</option>
@@ -159,7 +159,7 @@ export default function IndianAgeCalculator() {
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
             />
           </div>
 

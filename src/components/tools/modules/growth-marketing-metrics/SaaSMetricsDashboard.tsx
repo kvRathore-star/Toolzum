@@ -70,7 +70,7 @@ function MiniBar({ values, color, height = 40 }: { values: number[]; color: stri
   );
 }
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
 const labelClass = "block text-xs font-medium mb-1 text-[var(--text-secondary)]";
 
 function MetricInput({ label, value, onChange, prefix, step }: { label: string; value: number; onChange: (v: number) => void; prefix?: string; step?: string }) {

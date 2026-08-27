@@ -129,7 +129,7 @@ export default function PincodeFinder() {
                 <div className="relative flex-1">
                   <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: accentColor }} />
                   <input type="text" maxLength={6} placeholder="e.g. 110001" value={pincode} onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
-                    className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl pl-12 pr-4 py-3 text-lg font-mono tracking-widest text-[var(--text-primary)] outline-none transition-all duration-200"
+                    className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl pl-12 pr-4 py-3 text-lg font-mono tracking-widest text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200"
                     style={{ borderColor: pincode.length === 6 ? accentColor : undefined, '--tw-ring-color': accentColor } as React.CSSProperties}
                     onKeyDown={e => e.key === 'Enter' && handleSearch()} />
                 </div>
@@ -155,7 +155,7 @@ export default function PincodeFinder() {
                 <div className="relative flex-1">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5" style={{ color: accentColor }} />
                   <input type="text" placeholder="e.g. Connaught Place" value={officeName} onChange={(e) => setOfficeName(e.target.value)}
-                    className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl pl-12 pr-4 py-3 text-[var(--text-primary)] outline-none transition-all duration-200"
+                    className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl pl-12 pr-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200"
                     onKeyDown={e => e.key === 'Enter' && handleSearch()} />
                 </div>
                 <button onClick={handleSearch} disabled={loading || remaining === 0}

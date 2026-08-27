@@ -198,14 +198,14 @@ export default function CodeFormatter() {
           <div className="flex-1 min-w-[160px]">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Language</label>
             <select value={lang} onChange={e => { setLang(e.target.value); setCode(LANG_SAMPLES[e.target.value] || ''); setOutput(''); setValidationError(''); }}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
+              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               {LANGUAGES.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Indent</label>
             <select value={indent} onChange={e => setIndent(Number(e.target.value))}
-              className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
+              className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value={2}>2 spaces</option>
               <option value={4}>4 spaces</option>
               <option value={8}>8 spaces</option>
@@ -230,7 +230,7 @@ export default function CodeFormatter() {
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source Code</label>
-          <textarea value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder="Paste your code here..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 outline-none text-sm resize-y" />
+          <textarea value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder="Paste your code here..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
         </div>
         {validationError && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400">{validationError}</div>
@@ -306,7 +306,7 @@ function createFormatter(lang: string) {
             <div>
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Indent</label>
               <select value={indent} onChange={e => setIndent(Number(e.target.value))}
-                className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50">
+                className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
                 <option value={2}>2 spaces</option>
                 <option value={4}>4 spaces</option>
                 <option value={8}>8 spaces</option>
@@ -331,7 +331,7 @@ function createFormatter(lang: string) {
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source {lang}</label>
-            <textarea value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 outline-none text-sm resize-y" />
+            <textarea value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
           </div>
           {validationError && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400">{validationError}</div>

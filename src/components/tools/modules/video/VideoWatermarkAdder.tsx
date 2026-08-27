@@ -115,7 +115,7 @@ export default function VideoWatermarkAdder() {
                   value={watermarkText}
                   onChange={(e) => setWatermarkText(e.target.value)}
                   placeholder="@yourbrand"
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 />
               </div>
 
@@ -124,7 +124,7 @@ export default function VideoWatermarkAdder() {
                 <select 
                   value={position}
                   onChange={(e) => setPosition(e.target.value)}
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 >
                   <option value="bottomRight">Bottom Right</option>
                   <option value="bottomLeft">Bottom Left</option>

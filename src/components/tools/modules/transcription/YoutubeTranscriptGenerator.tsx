@@ -67,7 +67,7 @@ export default function YoutubeTranscriptGenerator() {
                 value={videoUrl}
                 onChange={e => setVideoUrl(e.target.value)}
                 placeholder="e.g., https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
               />
             </div>
 
@@ -76,7 +76,7 @@ export default function YoutubeTranscriptGenerator() {
               <select
                 value={detailLevel}
                 onChange={e => setDetailLevel(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
               >
                 <option value="Standard Summary">Standard Summary</option>
                 <option value="Full Outline">Full Outline</option>

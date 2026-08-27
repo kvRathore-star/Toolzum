@@ -151,7 +151,7 @@ export default function PdfSplitter() {
               placeholder="e.g. 1, 3, 5-10"
               value={rangeInput}
               onChange={(e) => setRangeInput(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
             />
             <p className="text-xs text-[var(--text-secondary)]">
               Enter page numbers and/or ranges separated by commas. Examples: `1,3,5` or `1-5, 8, 11-13`. Max page: {totalPages}.
@@ -162,7 +162,7 @@ export default function PdfSplitter() {
             onClick={splitPdf}
             onKeyDown={handleKeyDown}
             disabled={isProcessing || !rangeInput.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Extracting pages...' : 'Extract pages from PDF'}
           >
             {isProcessing ? "Processing..." : "Extract Pages"}

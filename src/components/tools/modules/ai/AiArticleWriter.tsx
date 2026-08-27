@@ -598,7 +598,7 @@ export default function AiArticleWriter() {
             onChange={(e) => setTopic(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
             placeholder="e.g., Artificial Intelligence in Healthcare, Remote Work Best Practices..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm"
           />
         </div>
 
@@ -608,7 +608,7 @@ export default function AiArticleWriter() {
             <select
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {TONES.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -618,7 +618,7 @@ export default function AiArticleWriter() {
             <select
               value={length}
               onChange={(e) => setLength(e.target.value as LengthKey)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {LENGTHS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
             </select>
@@ -628,7 +628,7 @@ export default function AiArticleWriter() {
             <select
               value={audience}
               onChange={(e) => setAudience(e.target.value as Audience)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
             >
               {AUDIENCES.map((a) => <option key={a} value={a}>{a}</option>)}
             </select>
@@ -695,7 +695,7 @@ export default function AiArticleWriter() {
                 <select
                   value={format}
                   onChange={(e) => setFormat(e.target.value as Format)}
-                  className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:border-indigo-500 appearance-none cursor-pointer"
+                  className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 appearance-none cursor-pointer"
                 >
                   <option value="md">Markdown (.md)</option>
                   <option value="txt">Plain Text (.txt)</option>

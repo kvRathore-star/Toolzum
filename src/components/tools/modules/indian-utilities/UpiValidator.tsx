@@ -152,7 +152,7 @@ export default function UpiValidator() {
     toast.success('History cleared');
   };
 
-  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-[#0d9488] text-[var(--text-primary)]";
+  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[#0d9488] text-[var(--text-primary)]";
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -182,7 +182,7 @@ export default function UpiValidator() {
               value={upiId}
               onChange={e => handleInputChange(e.target.value)}
               placeholder="username@okhdfcbank"
-              className="flex-1 bg-[var(--bg-overlay)] border-2 border-l-0 border-[var(--border-subtle)] focus:border-[#0d9488] rounded-r-xl px-4 py-3.5 text-lg font-mono text-[var(--text-primary)] outline-none"
+              className="flex-1 bg-[var(--bg-overlay)] border-2 border-l-0 border-[var(--border-subtle)] focus:border-[#0d9488] rounded-r-xl px-4 py-3.5 text-lg font-mono text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
           <div className="flex flex-wrap gap-1.5 text-[10px] text-[var(--text-muted)]">

@@ -664,7 +664,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={inputKey}
         onChange={(e) => handleFormatChange("input", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {FORMAT_KEYS.map(k => (
           <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
@@ -684,7 +684,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={outputKey}
         onChange={(e) => handleFormatChange("output", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {(VALID_OUTPUTS[inputKey] || []).map(k => (
           <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>

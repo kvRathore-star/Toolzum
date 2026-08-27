@@ -14,7 +14,7 @@ export function Section({ title, children }: { title: string; children: React.Re
 export function Input({ label, value, onChange, placeholder, type = "text", rows, min, max, step }: {
   label: string; value: string | number; onChange: (v: any) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string;
 }) {
-  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -42,4 +42,4 @@ export function CopyBtn({ text }: { text: string }) {
 }
 
 export const labelClass = "block text-sm font-medium text-[var(--text-secondary)] mb-1.5";
-export const selClass = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50";
+export const selClass = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";

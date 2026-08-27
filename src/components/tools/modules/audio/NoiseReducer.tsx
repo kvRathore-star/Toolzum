@@ -221,7 +221,7 @@ export default function NoiseReducer() {
                     value={noiseStart}
                     onChange={e => setNoiseStart(Math.max(0, Number(e.target.value)))}
                     disabled={isProcessing}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-violet-500 disabled:opacity-50"
                   />
                   <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseStart / 60)}:{(noiseStart % 60).toFixed(1).padStart(4, '0')}</span>
                 </div>
@@ -234,7 +234,7 @@ export default function NoiseReducer() {
                     value={noiseEnd}
                     onChange={e => setNoiseEnd(Math.max(0, Number(e.target.value)))}
                     disabled={isProcessing}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none disabled:opacity-50"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 disabled:opacity-50"
                   />
                   <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseEnd / 60)}:{(noiseEnd % 60).toFixed(1).padStart(4, '0')}</span>
                 </div>
@@ -247,7 +247,7 @@ export default function NoiseReducer() {
                 value={outputFormat}
                 onChange={e => setOutputFormat(e.target.value as OutputFormat)}
                 disabled={isProcessing}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none disabled:opacity-50"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 disabled:opacity-50"
               >
                 {OUTPUT_FORMATS.map(f => (
                   <option key={f} value={f}>{f.toUpperCase()}</option>

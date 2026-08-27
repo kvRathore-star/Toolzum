@@ -222,7 +222,7 @@ export default function DockerRunToCompose() {
         ))}
       </div>
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="docker run -d --name myapp -p 8080:80 nginx"
-        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono h-[100px]" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono h-[100px]" />
       <button onClick={convert} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Convert to Compose</button>
       {warnings.length > 0 && (
         <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-3 text-xs text-yellow-700 dark:text-yellow-300">
@@ -232,7 +232,7 @@ export default function DockerRunToCompose() {
       )}
       {output && (
         <div className="relative">
-          <textarea value={output} readOnly className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-emerald-500 outline-none resize-none font-mono" />
+          <textarea value={output} readOnly className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
           <div className="absolute top-3 right-3 flex gap-2">
             <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }}
               className="text-[11px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>

@@ -80,7 +80,7 @@ export default function UrlShortener() {
                 onChange={(e) => setUrl(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && shortenUrl()}
                 placeholder="https://example.com/very/long/path/to/something"
-                className="w-full sm:flex-1 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
+                className="w-full sm:flex-1 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
               />
               <button
                 onClick={shortenUrl}
@@ -118,7 +118,7 @@ export default function UrlShortener() {
                   type="text"
                   readOnly
                   value={shortUrl}
-                  className="flex-1 bg-transparent border-none focus:outline-none text-[var(--text-primary)] px-2 font-medium"
+                  className="flex-1 bg-transparent border-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] px-2 font-medium"
                 />
                 
                 <button

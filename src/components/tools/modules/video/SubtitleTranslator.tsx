@@ -69,7 +69,7 @@ ${subtitleText}`;
                 value={subtitleText}
                 onChange={e => setSubtitleText(e.target.value)}
                 placeholder="Paste SRT or VTT content here..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
               />
             </div>
 
@@ -78,7 +78,7 @@ ${subtitleText}`;
               <select
                 value={targetLanguage}
                 onChange={e => setTargetLanguage(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
               >
                 <option value="Spanish">Spanish</option>
                 <option value="French">French</option>

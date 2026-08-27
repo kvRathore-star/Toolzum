@@ -261,11 +261,11 @@ export default function GstInvoiceGenerator() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Number</label>
-              <input type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors" />
+              <input type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             </div>
             <div className="space-y-2">
               <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Date</label>
-              <input type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors" />
+              <input type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             </div>
           </div>
 
@@ -288,9 +288,9 @@ export default function GstInvoiceGenerator() {
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-[var(--text-primary)]">Billed By (Seller)</h3>
               <div className="space-y-3">
-                <input type="text" placeholder="Company Name" value={billerName} onChange={e => setBillerName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors" />
+                <input type="text" placeholder="Company Name" value={billerName} onChange={e => setBillerName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
                 <div className="relative">
-                  <input type="text" placeholder="GSTIN (15 characters)" value={billerGstin} onChange={e => setBillerGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 uppercase font-mono transition-colors" />
+                  <input type="text" placeholder="GSTIN (15 characters)" value={billerGstin} onChange={e => setBillerGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 uppercase font-mono transition-colors" />
                   {billerGstinValidation.message && (
                     <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold ${billerGstinValidation.valid ? 'text-emerald-500' : 'text-red-500'}`}>
                       {billerGstinValidation.valid ? '✓' : '✕'}
@@ -300,18 +300,18 @@ export default function GstInvoiceGenerator() {
                 {billerGstinValidation.message && (
                   <p className={`text-[10px] ${billerGstinValidation.valid ? 'text-emerald-500' : 'text-red-500'}`}>{billerGstinValidation.message}</p>
                 )}
-                <select value={billerState} onChange={e => setBillerState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors">
+                <select value={billerState} onChange={e => setBillerState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors">
                   {INDIAN_STATES.map(s => <option key={s.code} value={s.code}>{s.name} ({s.code})</option>)}
                 </select>
-                <textarea placeholder="Billing Address" value={billerAddress} onChange={e => setBillerAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors resize-none" />
+                <textarea placeholder="Billing Address" value={billerAddress} onChange={e => setBillerAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors resize-none" />
               </div>
             </div>
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-[var(--text-primary)]">Billed To (Buyer)</h3>
               <div className="space-y-3">
-                <input type="text" placeholder="Client Name" value={clientName} onChange={e => setClientName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors" />
+                <input type="text" placeholder="Client Name" value={clientName} onChange={e => setClientName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
                 <div className="relative">
-                  <input type="text" placeholder="Client GSTIN (Optional)" value={clientGstin} onChange={e => setClientGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 uppercase font-mono transition-colors" />
+                  <input type="text" placeholder="Client GSTIN (Optional)" value={clientGstin} onChange={e => setClientGstin(e.target.value.toUpperCase())} maxLength={15} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 uppercase font-mono transition-colors" />
                   {clientGstinValidation.message && (
                     <span className={`absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold ${clientGstinValidation.valid ? 'text-emerald-500' : 'text-red-500'}`}>
                       {clientGstinValidation.valid ? '✓' : '✕'}
@@ -321,10 +321,10 @@ export default function GstInvoiceGenerator() {
                 {clientGstinValidation.message && (
                   <p className={`text-[10px] ${clientGstinValidation.valid ? 'text-emerald-500' : 'text-red-500'}`}>{clientGstinValidation.message}</p>
                 )}
-                <select value={clientState} onChange={e => setClientState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors">
+                <select value={clientState} onChange={e => setClientState(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors">
                   {INDIAN_STATES.map(s => <option key={s.code} value={s.code}>{s.name} ({s.code})</option>)}
                 </select>
-                <textarea placeholder="Shipping/Billing Address" value={clientAddress} onChange={e => setClientAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors resize-none" />
+                <textarea placeholder="Shipping/Billing Address" value={clientAddress} onChange={e => setClientAddress(e.target.value)} rows={2} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors resize-none" />
               </div>
             </div>
           </div>
@@ -353,11 +353,11 @@ export default function GstInvoiceGenerator() {
             <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 p-5 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
               <h4 className="text-sm font-semibold text-[var(--text-primary)]">Add New Line Item</h4>
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
-                <div className="sm:col-span-5"><input type="text" placeholder="Item Description" value={newItemDesc} onChange={e => setNewItemDesc(e.target.value)} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 transition-colors" /></div>
-                <div className="sm:col-span-2"><input type="number" placeholder="Qty" value={newItemQty || ''} onChange={e => setNewItemQty(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-center transition-colors" /></div>
-                <div className="sm:col-span-3"><input type="number" placeholder="₹ Unit Price" value={newItemPrice || ''} onChange={e => setNewItemPrice(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-right transition-colors" /></div>
+                <div className="sm:col-span-5"><input type="text" placeholder="Item Description" value={newItemDesc} onChange={e => setNewItemDesc(e.target.value)} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" /></div>
+                <div className="sm:col-span-2"><input type="number" placeholder="Qty" value={newItemQty || ''} onChange={e => setNewItemQty(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 text-center transition-colors" /></div>
+                <div className="sm:col-span-3"><input type="number" placeholder="₹ Unit Price" value={newItemPrice || ''} onChange={e => setNewItemPrice(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 text-right transition-colors" /></div>
                 <div className="sm:col-span-2">
-                  <select value={newItemGst} onChange={e => setNewItemGst(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none focus:border-emerald-500 text-center transition-colors">
+                  <select value={newItemGst} onChange={e => setNewItemGst(Number(e.target.value))} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 text-center transition-colors">
                     <option value="18">18% GST</option><option value="12">12% GST</option><option value="5">5% GST</option><option value="28">28% GST</option><option value="0">Exempt (0%)</option>
                   </select>
                 </div>

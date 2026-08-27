@@ -151,7 +151,7 @@ export default function PdfFormFiller() {
                 
                 {field.type.includes('CheckBox') ? (
                   <select 
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                     value={field.value}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
                   >
@@ -161,7 +161,7 @@ export default function PdfFormFiller() {
                 ) : (
                   <input 
                     type="text" 
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                     placeholder={`Enter ${field.name}`}
                     value={field.value}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}

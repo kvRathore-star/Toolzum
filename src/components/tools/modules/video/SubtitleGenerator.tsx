@@ -156,7 +156,7 @@ export default function SubtitleGenerator() {
                           const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
                           updateEntry(entry.id, 'start', secs);
                         }
-                      }} className="w-[90px] bg-transparent outline-none border-b border-dashed border-zinc-300 dark:border-zinc-700" />
+                      }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
                       <span>→</span>
                       <input type="text" value={formatTime(entry.end)} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
@@ -164,7 +164,7 @@ export default function SubtitleGenerator() {
                           const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
                           updateEntry(entry.id, 'end', secs);
                         }
-                      }} className="w-[90px] bg-transparent outline-none border-b border-dashed border-zinc-300 dark:border-zinc-700" />
+                      }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
                     </div>
                     <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
@@ -174,7 +174,7 @@ export default function SubtitleGenerator() {
                     onChange={e => updateEntry(entry.id, 'text', e.target.value)}
                     onFocus={() => setEditingId(entry.id)}
                     placeholder="Subtitle text..."
-                    className="w-full bg-transparent text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none h-8"
+                    className="w-full bg-transparent text-xs text-zinc-800 dark:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none h-8"
                     rows={1}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {

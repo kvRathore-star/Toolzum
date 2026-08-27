@@ -385,7 +385,7 @@ export default function VehicleRegChecker() {
               value={input}
               onChange={handleInput}
               onKeyDown={e => e.key === 'Enter' && handleVerify()}
-              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3.5 text-lg font-mono tracking-widest text-[var(--text-primary)] outline-none transition-all"
+              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3.5 text-lg font-mono tracking-widest text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all"
               style={{
                 borderColor: liveValidation && !liveValidation.isValid && input.length >= 4
                   ? '#dc262666' : liveValidation?.isValid ? '#22c55e66' : 'var(--border-subtle)',

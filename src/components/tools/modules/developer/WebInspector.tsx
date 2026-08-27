@@ -229,7 +229,7 @@ export default function WebInspector() {
 
       {tab === 'ua' && (
         <div className="space-y-4">
-          <input value={uaInput} onChange={e => { setUaInput(e.target.value); setUaResult(parseUA(e.target.value)); }} className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
+          <input value={uaInput} onChange={e => { setUaInput(e.target.value); setUaResult(parseUA(e.target.value)); }} className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           {uaResult.browser && (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
               <div className="space-y-0">
@@ -245,7 +245,7 @@ export default function WebInspector() {
 
       {tab === 'http' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-          <input value={httpSearch} onChange={e => setHttpSearch(e.target.value)} placeholder="Search by code or name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+          <input value={httpSearch} onChange={e => setHttpSearch(e.target.value)} placeholder="Search by code or name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           <div className="max-h-[400px] overflow-y-auto space-y-0.5">
             {filteredHttp.map(s => (
               <div key={s.code} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50">
@@ -263,7 +263,7 @@ export default function WebInspector() {
 
       {tab === 'mime' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-          <input value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
+          <input value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
               <thead><tr className="text-[var(--text-muted)] font-bold uppercase text-[10px] border-b border-[var(--border-subtle)]"><th className="text-left py-2 px-2">Extension</th><th className="text-left py-2 px-2">MIME Type</th><th className="text-left py-2 px-2">Category</th></tr></thead>
@@ -285,14 +285,14 @@ export default function WebInspector() {
       {tab === 'basic-auth' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <input value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
-            <input value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
+            <input value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+            <input value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
           {basicUser && basicPass && (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
               <div className="relative">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Authorization Header</label>
-                <input type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono outline-none" />
+                <input type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
               </div>
               <InfoRow label="Raw Base64" val={basicResult} />
@@ -304,18 +304,18 @@ export default function WebInspector() {
       {tab === 'og' && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-            <input value={ogTitle} onChange={e => { setOgTitle(e.target.value); setTimeout(generateOG, 0); }} placeholder="Title..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-            <textarea value={ogDesc} onChange={e => { setOgDesc(e.target.value); setTimeout(generateOG, 0); }} placeholder="Description..." rows={3} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none resize-none" />
-            <input value={ogImage} onChange={e => { setOgImage(e.target.value); setTimeout(generateOG, 0); }} placeholder="Image URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-            <input value={ogUrl} onChange={e => { setOgUrl(e.target.value); setTimeout(generateOG, 0); }} placeholder="Page URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-            <input value={ogSite} onChange={e => { setOgSite(e.target.value); setTimeout(generateOG, 0); }} placeholder="Site Name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none" />
-            <select value={ogType} onChange={e => { setOgType(e.target.value); setTimeout(generateOG, 0); }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none">
+            <input value={ogTitle} onChange={e => { setOgTitle(e.target.value); setTimeout(generateOG, 0); }} placeholder="Title..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <textarea value={ogDesc} onChange={e => { setOgDesc(e.target.value); setTimeout(generateOG, 0); }} placeholder="Description..." rows={3} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
+            <input value={ogImage} onChange={e => { setOgImage(e.target.value); setTimeout(generateOG, 0); }} placeholder="Image URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <input value={ogUrl} onChange={e => { setOgUrl(e.target.value); setTimeout(generateOG, 0); }} placeholder="Page URL..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <input value={ogSite} onChange={e => { setOgSite(e.target.value); setTimeout(generateOG, 0); }} placeholder="Site Name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <select value={ogType} onChange={e => { setOgType(e.target.value); setTimeout(generateOG, 0); }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {['website', 'article', 'product', 'video.movie', 'video.episode', 'music.song', 'profile'].map(t => <option key={t} value={t}>{t}</option>)}
             </select>
           </div>
           <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-2">Generated Meta Tags</label>
-            <textarea value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] outline-none resize-none font-mono" />
+            <textarea value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
             {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
           </div>
         </div>
@@ -337,7 +337,7 @@ export default function WebInspector() {
               'location': String(e.location),
               'repeat': String(e.repeat),
             });
-          }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-5 py-4 text-sm text-[var(--text-primary)] outline-none font-mono text-center" />
+          }} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-5 py-4 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono text-center" />
           {Object.keys(keyInfo).length > 0 && (
             <div className="space-y-0">
               {Object.entries(keyInfo).map(([k, v]) => <InfoRow key={k} label={k} val={v} />)}

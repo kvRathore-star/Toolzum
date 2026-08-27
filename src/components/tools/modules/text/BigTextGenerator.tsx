@@ -110,7 +110,7 @@ export default function BigTextGenerator() {
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type something to make it BIG..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-24 outline-none resize-none text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
           />
         </div>
 

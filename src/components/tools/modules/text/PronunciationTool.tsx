@@ -284,7 +284,7 @@ export default function PronunciationTool() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 placeholder={tab === 'word' ? 'Enter a word to look up...' : 'Type any phrase to speak...'}
-                className="w-full px-4 py-3 pr-10 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+                className="w-full px-4 py-3 pr-10 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
               />
               {text && (
                 <button
@@ -440,7 +440,7 @@ export default function PronunciationTool() {
             <select
               value={accentIndex}
               onChange={(e) => setAccentIndex(Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
             >
               {ACCENTS.map((v, i) => (
                 <option key={i} value={i}>{v.flag} {v.label}</option>
@@ -456,7 +456,7 @@ export default function PronunciationTool() {
             <select
               value={voiceGender}
               onChange={(e) => setVoiceGender(e.target.value as 'male' | 'female')}
-              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500/40"
+              className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
             >
               <option value="female">Female</option>
               <option value="male">Male</option>

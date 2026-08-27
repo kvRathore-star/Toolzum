@@ -66,11 +66,11 @@ export default function SalaryCalculator() {
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual CTC / Salary</label>
-              <input type="number" value={ctc} onChange={e => setCtc(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+              <input type="number" value={ctc} onChange={e => setCtc(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual Deductions / 80C</label>
-              <input type="number" value={deductions} onChange={e => setDeductions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none" />
+              <input type="number" value={deductions} onChange={e => setDeductions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">

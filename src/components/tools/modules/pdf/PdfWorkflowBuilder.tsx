@@ -20,7 +20,7 @@ const TABS: { id: PdfTab; label: string; icon: React.ReactNode; desc: string }[]
   { id: 'metadata', label: 'Metadata', icon: <Info size={15} />, desc: 'Edit title, author, and more' },
 ];
 
-const inputCls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
+const inputCls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
 const btnCls = "px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
 const btnSec = "px-4 py-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-lg text-sm transition-colors disabled:opacity-50";
 const fileRowCls = "flex items-center gap-2 bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-sm";

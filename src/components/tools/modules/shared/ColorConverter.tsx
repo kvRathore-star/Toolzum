@@ -99,7 +99,7 @@ export default function ColorConverter({ slug }: { slug: string }) {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{mode.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{mode.description}</p>
         <input type="text" value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         <button onClick={handleConvert}
           className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           Convert

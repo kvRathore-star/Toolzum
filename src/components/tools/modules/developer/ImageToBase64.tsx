@@ -131,7 +131,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
                 <input type="checkbox" checked={includePrefix} onChange={e => setIncludePrefix(e.target.checked)} className="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
                 Include URI Prefix <span className="text-xs text-[var(--text-muted)] font-normal">(data:image/jpeg;base64,...)</span>
               </label>
-              <textarea readOnly value={getOutputString()} className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-secondary)] outline-none resize-none font-mono text-xs break-all" />
+              <textarea readOnly value={getOutputString()} className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-xs break-all" />
               <div className="flex gap-4 pt-2">
                 <button onClick={copyBase64} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95">Copy to Clipboard</button>
                 <button onClick={downloadTextFile} className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3 rounded-xl shadow transition-all active:scale-95">Download .txt</button>
@@ -149,7 +149,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
                 <button onClick={() => { setBase64Input(''); setImageUrl(null); setError(null); }} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold">Clear</button>
               </div>
             </div>
-            <textarea value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-none font-mono text-sm" />
+            <textarea value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-none font-mono text-sm" />
             {error && <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm font-medium rounded-xl">{error}</div>}
             <button onClick={processBase64} disabled={!base64Input.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">Decode to Image</button>
           </div>

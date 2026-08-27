@@ -74,7 +74,7 @@ export default function TextRepeater() {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 placeholder="Type or paste your text here..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 outline-none resize-none text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
               />
             </div>
 
@@ -87,7 +87,7 @@ export default function TextRepeater() {
                   max={10000}
                   value={count}
                   onChange={e => setCount(Math.max(1, Math.min(10000, parseInt(e.target.value) || 1)))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 />
               </div>
               <div className="space-y-1">
@@ -95,7 +95,7 @@ export default function TextRepeater() {
                 <select
                   value={separator}
                   onChange={e => setSeparator(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 >
                   {SEPARATORS.map(s => (
                     <option key={s.label} value={s.value}>{s.label}</option>
@@ -124,7 +124,7 @@ export default function TextRepeater() {
               <textarea
                 value={output}
                 readOnly
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-mono text-sm h-32 outline-none resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-mono text-sm h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none"
               />
             </div>
             <div className="flex gap-2">

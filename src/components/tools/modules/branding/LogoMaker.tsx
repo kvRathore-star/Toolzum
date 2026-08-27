@@ -218,7 +218,7 @@ export default function LogoMaker() {
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none text-sm focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm focus:border-[var(--border-subtle)]"
               />
             </div>
 
@@ -228,7 +228,7 @@ export default function LogoMaker() {
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] outline-none text-sm focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm focus:border-[var(--border-subtle)]"
               />
             </div>
 
@@ -238,7 +238,7 @@ export default function LogoMaker() {
                 <select
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
                 >
                   <option value="sans-serif">Sans Serif (Modern)</option>
                   <option value="serif">Serif (Traditional)</option>
@@ -252,7 +252,7 @@ export default function LogoMaker() {
                 <select
                   value={layout}
                   onChange={(e) => setLayout(e.target.value as any)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none text-xs"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
                 >
                   <option value="vertical">Stacked (Vertical)</option>
                   <option value="horizontal">Line (Horizontal)</option>
@@ -308,7 +308,7 @@ export default function LogoMaker() {
                 <select
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
-                  className="w-full h-10 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 text-[10px] font-bold outline-none"
+                  className="w-full h-10 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 text-[10px] font-bold focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 >
                   <option value="transparent">Transparent</option>
                   <option value="#ffffff">White</option>

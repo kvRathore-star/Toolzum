@@ -184,7 +184,7 @@ export default function QrCodeGenerator() {
     setFgColor('#000000'); setBgColor('#ffffff'); setSize(300); setLogoImage(null);
   };
 
-  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]";
+  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]";
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -209,7 +209,7 @@ export default function QrCodeGenerator() {
                 qrType === tab.id
                   ? 'bg-[var(--accent)] text-white shadow-sm'
                   : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'
-              } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+              } focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2`}
             >
               <Icon className="w-3.5 h-3.5" />
               {tab.label}
@@ -342,10 +342,10 @@ export default function QrCodeGenerator() {
               Choose Logo File
               <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </label>
-            {logoImage && <button onClick={() => setLogoImage(null)} className="text-[10px] text-rose-400 hover:text-rose-300 font-bold block mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">Remove Logo</button>}
+            {logoImage && <button onClick={() => setLogoImage(null)} className="text-[10px] text-rose-400 hover:text-rose-300 font-bold block mt-1 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">Remove Logo</button>}
           </div>
 
-          <button onClick={reset} className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+          <button onClick={reset} className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors cursor-pointer flex items-center justify-center gap-1.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
             <RefreshCw className="w-3 h-3" /> Reset
           </button>
         </div>
@@ -354,7 +354,7 @@ export default function QrCodeGenerator() {
           <div aria-live="polite" className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner w-full">
             <canvas ref={canvasRef} className="max-w-full max-h-[300px] object-contain" />
           </div>
-          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-700 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+          <button onClick={handleDownload} className="w-full mt-6 bg-emerald-700 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
             <Download className="w-4 h-4" /> Download QR PNG
           </button>
         </div>

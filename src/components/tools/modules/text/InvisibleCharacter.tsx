@@ -122,7 +122,7 @@ export default function InvisibleCharacter() {
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Text to inject invisible chars between each character..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-20 outline-none resize-none text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
           />
         </div>
 
@@ -159,7 +159,7 @@ export default function InvisibleCharacter() {
                 : output
               }
               readOnly
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-28 outline-none resize-none text-sm break-all font-mono"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm break-all font-mono"
             />
             {output && (
               <button

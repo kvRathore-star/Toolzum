@@ -117,7 +117,7 @@ export default function TextToSpeechTts() {
           <select
             value={selectedVoiceURI}
             onChange={(e) => setSelectedVoiceURI(e.target.value)}
-            className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium outline-none truncate"
+            className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 truncate"
           >
             {voices.map((v, i) => (
               <option key={`${v.voiceURI}-${i}`} value={v.voiceURI}>
@@ -131,7 +131,7 @@ export default function TextToSpeechTts() {
            {isPlaying ? (
              <button 
                onClick={handlePause}
-               className="flex-1 sm:flex-none bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               className="flex-1 sm:flex-none bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                Pause
@@ -139,7 +139,7 @@ export default function TextToSpeechTts() {
            ) : (
              <button 
                onClick={handlePlay}
-               className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
                {isPaused ? 'Resume' : 'Play'}
@@ -149,7 +149,7 @@ export default function TextToSpeechTts() {
            {(isPlaying || isPaused) && (
                <button 
                  onClick={handleStop}
-                 className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                 className="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                  aria-label="Stop"
                >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" /></svg>
@@ -169,7 +169,7 @@ export default function TextToSpeechTts() {
             </h3>
              <button 
                onClick={() => setText('')}
-               className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+               className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              >
               Clear
             </button>
@@ -178,7 +178,7 @@ export default function TextToSpeechTts() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter the text you want to convert to speech..."
-            className="flex-1 w-full p-6 bg-transparent outline-none resize-none text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
+            className="flex-1 w-full p-6 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
             spellCheck="false"
           />
         </div>

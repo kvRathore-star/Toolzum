@@ -230,7 +230,7 @@ export default function WebsiteScreenshot() {
               onChange={e => setUrl(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && !isProcessing && handleCapture()}
               placeholder="https://example.com"
-              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
             />
             <button
               onClick={handleCapture}
@@ -318,7 +318,7 @@ export default function WebsiteScreenshot() {
                 placeholder="Enter width (320-3840)"
                 min={320}
                 max={3840}
-                className="mt-2 w-full px-3 py-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-2 w-full px-3 py-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
               />
             )}
           </div>

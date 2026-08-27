@@ -112,7 +112,7 @@ export default function SvgEditor() {
             <textarea
               value={svgCode}
               onChange={e => setSvgCode(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-900 dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed outline-none focus:border-indigo-500 resize-none flex-1 overflow-y-auto"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-900 dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 resize-none flex-1 overflow-y-auto"
               placeholder="Write SVG code here..."
             />
           </div>

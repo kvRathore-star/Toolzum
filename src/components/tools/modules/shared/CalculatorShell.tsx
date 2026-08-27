@@ -58,6 +58,13 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
     prevResultRef.current = result;
   }, [result]);
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Escape' && showHistory) {
+      setShowHistory(false);
+      shellRef.current?.querySelector<HTMLButtonElement>('[aria-label*="history"]')?.focus();
+    }
+  }, [showHistory]);
+
   const copyResult = useCallback(() => {
     if (result) {
       navigator.clipboard.writeText(result);
@@ -90,8 +97,8 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
   }, [onCalculate]);
 
   return (
-    <div className="max-w-2xl mx-auto" ref={shellRef}>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
+    <div className="max-w-2xl mx-auto" ref={shellRef} onKeyDown={handleKeyDown}>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden" tabIndex={-1}>
         <div className="flex items-center justify-between px-6 pt-6 pb-2">
           <h1 className="text-xl font-bold text-[var(--text-primary)]">{title}</h1>
           <button

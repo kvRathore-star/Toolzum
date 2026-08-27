@@ -60,7 +60,7 @@ export default function RobotsTxtGenerator() {
               type="text" 
               value={sitemap} 
               onChange={e => setSitemap(e.target.value)} 
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
 
@@ -72,7 +72,7 @@ export default function RobotsTxtGenerator() {
                 value={newDisallow} 
                 onChange={e => setNewDisallow(e.target.value)}
                 placeholder="/admin-dashboard" 
-                className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none"
+                className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <button onClick={addDisallow} className="bg-indigo-600 px-3 py-2 rounded-xl text-xs font-bold text-white cursor-pointer">Add</button>
             </div>
@@ -98,7 +98,7 @@ export default function RobotsTxtGenerator() {
             <textarea
               value={buildRobotsTxt()}
               readOnly
-              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 outline-none text-xs resize-none"
+              className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"
             />
           </div>
         </div>

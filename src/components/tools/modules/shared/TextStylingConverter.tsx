@@ -139,7 +139,7 @@ function FancyView() {
         <div className="space-y-2">
           <label className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
           <input type="text" value={inputText} onChange={e => setInputText(e.target.value)}
-            className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] outline-none" />
+            className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
         </div>
         {inputText && (
           <div className="space-y-8">
@@ -219,13 +219,13 @@ function CursiveView() {
         <div className="space-y-2">
           <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
           <textarea value={input} onChange={e => setInput(e.target.value)}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-40 outline-none resize-none" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
         </div>
         <div className="flex flex-col justify-between space-y-4">
           <div className="space-y-2">
             <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Cursive Unicode Output</span>
             <textarea value={cursive} readOnly
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-serif text-lg h-40 outline-none resize-none" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-serif text-lg h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
           </div>
           <button onClick={handleCopy}
             className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs cursor-pointer">
@@ -302,7 +302,7 @@ function ZalgoView() {
             <button onClick={() => setInput('')} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold cursor-pointer">Clear</button>
           </div>
           <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Type or paste standard text here..."
-            className="flex-1 p-4 bg-transparent outline-none resize-none font-mono text-sm text-[var(--text-primary)]" />
+            className="flex-1 p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)]" />
         </div>
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
           <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
@@ -311,7 +311,7 @@ function ZalgoView() {
               className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>
           <textarea value={output} readOnly placeholder="Cursed text will creep here..."
-            className="flex-1 p-4 bg-transparent outline-none resize-none font-sans text-lg text-red-500 dark:text-red-400 overflow-y-auto" />
+            className="flex-1 p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-sans text-lg text-red-500 dark:text-red-400 overflow-y-auto" />
         </div>
       </div>
     </div>

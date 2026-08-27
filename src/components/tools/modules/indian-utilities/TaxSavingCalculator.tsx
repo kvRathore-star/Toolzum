@@ -127,7 +127,7 @@ export default function TaxSavingCalculator() {
       </label>
       <input type="number" min="0" step="10000" value={inputs[key] || ''} onChange={e => update(key, e.target.value)}
         placeholder={placeholder} inputMode="numeric"
-        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
     </div>
   );
 

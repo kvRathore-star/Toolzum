@@ -154,7 +154,7 @@ export default function RomanNumeralConverter() {
             value={input}
             onChange={e => handleChange(e.target.value)}
             placeholder="e.g. 2024 or MMXXIV"
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-lg font-mono text-center outline-none transition-all duration-200 focus:border-amber-500"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-lg font-mono text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200 focus:border-amber-500"
           />
           <p className="text-[10px] text-[var(--text-muted)] text-center">
             Type a number (1-3999) or Roman numeral — auto-detected

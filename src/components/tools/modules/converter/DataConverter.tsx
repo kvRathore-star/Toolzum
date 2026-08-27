@@ -355,7 +355,7 @@ const copyOutput = useCallback(() => {
           <select
             value={srcFormat}
             onChange={(e) => { setSrcFormat(e.target.value as FormatKey); setOutput(''); }}
-            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
           >
             {formatOptions}
           </select>
@@ -373,7 +373,7 @@ const copyOutput = useCallback(() => {
           <select
             value={dstFormat}
             onChange={(e) => { setDstFormat(e.target.value as FormatKey); setOutput(''); }}
-            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
           >
             {formatOptions}
           </select>
@@ -433,7 +433,7 @@ const copyOutput = useCallback(() => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={`Paste ${srcFormat} here...`}
-              className="flex-1 w-full p-4 bg-transparent outline-none resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
+              className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
               spellCheck="false"
             />
           </div>

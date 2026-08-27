@@ -314,7 +314,7 @@ export default function AiChatPdf() {
                 }
               }}
               placeholder="Ask a question about your document..."
-              className="flex-1 bg-transparent p-4 outline-none text-zinc-800 dark:text-zinc-200 resize-none max-h-32 min-h-[56px] leading-relaxed"
+              className="flex-1 bg-transparent p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-800 dark:text-zinc-200 resize-none max-h-32 min-h-[56px] leading-relaxed"
               rows={1}
             />
             <div className="pr-4 shrink-0">

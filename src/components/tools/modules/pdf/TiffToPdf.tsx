@@ -303,7 +303,7 @@ export default function TiffToPdf() {
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
             placeholder='all, 1-5, or 1,3,5'
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
         </div>
 
@@ -312,7 +312,7 @@ export default function TiffToPdf() {
           <select
             value={pageSize}
             onChange={(e) => setPageSize(e.target.value as PageSizeOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="auto">Auto (Match TIFF)</option>
             <option value="a4">A4</option>
@@ -326,7 +326,7 @@ export default function TiffToPdf() {
           <select
             value={orientation}
             onChange={(e) => setOrientation(e.target.value as OrientationOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="auto">Auto</option>
             <option value="portrait">Portrait</option>
@@ -339,7 +339,7 @@ export default function TiffToPdf() {
           <select
             value={margin}
             onChange={(e) => setMargin(e.target.value as MarginOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="none">None</option>
             <option value="small">Small</option>

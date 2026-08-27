@@ -198,7 +198,7 @@ export default function VideoSpeedChanger() {
                   <button
                     key={p}
                     onClick={() => setSpeed(p)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       speed === p
                         ? 'bg-blue-600 text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
@@ -229,7 +229,7 @@ export default function VideoSpeedChanger() {
               onClick={processVideo}
               onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? `Processing video ${progress}%` : `Change speed to ${speed}x`}
             >
               {isProcessing && (
@@ -250,7 +250,7 @@ export default function VideoSpeedChanger() {
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `speed_${speed}x_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download speed-changed video"
               >
                 Download Video

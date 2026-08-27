@@ -200,7 +200,7 @@ export default function VocalRemover() {
           <select
             value={outputFormat}
             onChange={e => setOutputFormat(e.target.value as OutFormat)}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             {FORMATS.map(f => <option key={f} value={f}>{FORMAT_LABELS[f]}</option>)}
           </select>
@@ -208,7 +208,7 @@ export default function VocalRemover() {
 
         {!isProcessing && !outputUrl && !outputUrl2 && (
           <button onClick={processAudio} onKeyDown={handleKeyDown}
-            className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Processing audio...' : 'Process audio'}
           >
             Process Audio
@@ -234,7 +234,7 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Instrumental (Karaoke)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_instrumental.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Download instrumental track"
                 >
                   Download Instrumental
@@ -246,7 +246,7 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl} />
                 <button onClick={() => downloadOrShare(outputUrl, `${baseName}_vocals.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Download vocals track"
                 >
                   Download Vocals
@@ -258,7 +258,7 @@ export default function VocalRemover() {
                 <p className="text-[10px] font-semibold text-[var(--text-secondary)]">Acapella (Vocals Only)</p>
                 <audio controls className="w-full" src={outputUrl2} />
                 <button onClick={() => downloadOrShare(outputUrl2, `${baseName}_vocals.${ext}`)}
-                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="w-full bg-violet-500 hover:bg-violet-600 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Download vocals track"
                 >
                   Download Vocals

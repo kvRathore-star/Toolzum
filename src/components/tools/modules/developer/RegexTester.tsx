@@ -110,7 +110,7 @@ export default function RegexTester() {
                 </label>
                 <textarea value={description} onChange={e => setDescription(e.target.value)}
                   placeholder='e.g. "Match email addresses that end with @gmail.com"'
-                  className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:border-amber-400 h-24 resize-none" />
+                  className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-amber-400 h-24 resize-none" />
               </div>
               <button onClick={handleGenerate} disabled={isGenerating}
                 className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
@@ -130,11 +130,11 @@ export default function RegexTester() {
                   <span className="absolute left-4 text-[var(--text-muted)] text-lg">/</span>
                   <input type="text" value={pattern} onChange={e => setPattern(e.target.value)}
                     placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                    className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl pl-8 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
+                    className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl pl-8 pr-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
                   <span className="absolute right-4 text-[var(--text-muted)] text-lg">/</span>
                 </div>
                 <input type="text" value={flags} onChange={e => setFlags(e.target.value)} placeholder="gmi"
-                  className="w-24 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
+                  className="w-24 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
               </div>
               {error && <p className="text-sm text-red-500 flex items-center gap-2"><Info className="w-4 h-4" />{error}</p>}
             </div>
@@ -147,7 +147,7 @@ export default function RegexTester() {
                 <button onClick={() => setTestString('')} className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white transition-colors">Clear</button>
               </div>
               <textarea value={testString} onChange={e => setTestString(e.target.value)}
-                className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all font-mono resize-none"
+                className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono resize-none"
                 placeholder="Enter text to test your regular expression against..." spellCheck={false} />
             </div>
             <div className="space-y-3">

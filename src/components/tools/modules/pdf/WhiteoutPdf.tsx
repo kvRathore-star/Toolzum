@@ -182,7 +182,7 @@ export default function WhiteoutPdf() {
               placeholder="e.g. 1-3,5,7-9"
               value={pageRange}
               onChange={(e) => setPageRange(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] font-mono text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] font-mono text-sm"
             />
             <p className="text-xs text-[var(--text-secondary)] mt-1">Total pages: {pageCount}</p>
           </div>
@@ -198,7 +198,7 @@ export default function WhiteoutPdf() {
                     max={5000}
                     value={area[key]}
                     onChange={(e) => setArea({ ...area, [key]: Math.max(0, parseInt(e.target.value) || 0) })}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                   />
                 </div>
               ))}

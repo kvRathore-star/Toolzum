@@ -74,7 +74,7 @@ export function PhoneParser() {
           </button>
         ))}
       </div>
-      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none font-mono" />
+      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
       {phoneResult && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.country}</span></div>
@@ -131,7 +131,7 @@ export function OTPGenerator() {
         <div className="flex items-center gap-4 flex-wrap">
           <div>
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Length</label>
-            <select value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none">
+            <select value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {[4,5,6,7,8].map(n => <option key={n} value={n}>{n} digits</option>)}
             </select>
           </div>
@@ -193,19 +193,19 @@ export function SlugifyTool() {
           </button>
         ))}
       </div>
-      <input value={slugInput} onChange={e => setSlugInput(e.target.value)} placeholder="Enter text to slugify..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] outline-none" />
+      <input value={slugInput} onChange={e => setSlugInput(e.target.value)} placeholder="Enter text to slugify..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
       <div className="flex items-center gap-4 flex-wrap text-xs text-[var(--text-secondary)]">
         <label className="flex items-center gap-1.5"><input type="checkbox" checked={slugLowercase} onChange={e => setSlugLowercase(e.target.checked)} /> Lowercase</label>
         <label className="flex items-center gap-1.5"><input type="checkbox" checked={slugTrim} onChange={e => setSlugTrim(e.target.checked)} /> Trim</label>
         <label className="flex items-center gap-1.5">
           Separator:
-          <select value={slugSep} onChange={e => setSlugSep(e.target.value)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] outline-none font-mono">-</select>
+          <select value={slugSep} onChange={e => setSlugSep(e.target.value)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono">-</select>
         </label>
       </div>
       {slugInput && (
         <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
-          <input type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 outline-none font-mono" />
+          <input type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <div className="absolute top-6 right-3 flex gap-2">
             <button onClick={() => copy(slugOutput, 'Slug')} className="text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
             <button onClick={() => { const blob = new Blob([slugOutput], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='slug.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Download</button>

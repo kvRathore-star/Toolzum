@@ -127,14 +127,14 @@ export default function ReelShortsMaker() {
 
             {RATIOS[ratioIdx].label === 'Custom' && (
               <div className="grid grid-cols-2 gap-3">
-                <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs outline-none mt-1" /></div>
-                <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs outline-none mt-1" /></div>
+                <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>
+                <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>
               </div>
             )}
 
             <div className="grid grid-cols-2 gap-3">
-              <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">X Offset</label><input type="number" value={xOffset} onChange={e => setXOffset(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs outline-none mt-1" /></div>
-              <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Y Offset</label><input type="number" value={yOffset} onChange={e => setYOffset(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs outline-none mt-1" /></div>
+              <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">X Offset</label><input type="number" value={xOffset} onChange={e => setXOffset(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>
+              <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Y Offset</label><input type="number" value={yOffset} onChange={e => setYOffset(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>
             </div>
 
             {(!isLoaded || isLoading) && <div className="text-center text-[var(--text-secondary)] py-3 flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin text-[var(--accent)]" /><span className="text-[10px]">Loading FFmpeg...</span></div>}

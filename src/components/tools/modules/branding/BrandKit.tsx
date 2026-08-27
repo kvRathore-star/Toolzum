@@ -124,7 +124,7 @@ export default function BrandKit() {
                    placeholder="Name (e.g. Primary)"
                    value={newColorName} 
                    onChange={e => setNewColorName(e.target.value)} 
-                   className="w-full text-sm p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none"
+                   className="w-full text-sm p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                  />
                </div>
                <button 
@@ -167,7 +167,7 @@ export default function BrandKit() {
                placeholder="Google Font Name (e.g. Roboto)"
                value={newFont} 
                onChange={e => setNewFont(e.target.value)} 
-               className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] outline-none"
+               className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
              />
              <button 
                onClick={addFont}

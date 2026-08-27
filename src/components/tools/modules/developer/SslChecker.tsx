@@ -215,7 +215,7 @@ export default function SslChecker() {
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
         <div className="flex flex-col sm:flex-row gap-3">
-          <input type="text" value={domain} onChange={e => setDomain(e.target.value)} onKeyDown={e => e.key === 'Enter' && check()} placeholder="example.com" className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none font-mono" />
+          <input type="text" value={domain} onChange={e => setDomain(e.target.value)} onKeyDown={e => e.key === 'Enter' && check()} placeholder="example.com" className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <button onClick={() => check()} disabled={isProcessing} className="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 disabled:bg-sky-600/50 text-white text-sm font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer justify-center">
             {isProcessing && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
             {isProcessing ? 'Checking...' : 'Check SSL'}

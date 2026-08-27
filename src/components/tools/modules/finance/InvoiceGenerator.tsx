@@ -116,13 +116,13 @@ export default function InvoiceGenerator() {
               type="text"
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
-              className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full transition-colors"
+              className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full transition-colors"
               placeholder="Your Company Name"
             />
             <textarea
               value={senderDetails}
               onChange={(e) => setSenderDetails(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none transition-colors"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none transition-colors"
               placeholder="Your Address & Contact Info"
             />
           </div>
@@ -138,7 +138,7 @@ export default function InvoiceGenerator() {
                   type="text"
                   value={invoiceNum}
                   onChange={(e) => setInvoiceNum(e.target.value)}
-                  className="w-32 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none md:text-right font-mono"
+                  className="w-32 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right font-mono"
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
@@ -147,7 +147,7 @@ export default function InvoiceGenerator() {
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none md:text-right"
+                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right"
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
@@ -156,7 +156,7 @@ export default function InvoiceGenerator() {
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none md:text-right text-[var(--text-secondary)]"
+                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right text-[var(--text-secondary)]"
                 />
               </div>
             </div>
@@ -171,13 +171,13 @@ export default function InvoiceGenerator() {
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
-              className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full"
+              className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full"
               placeholder="Client Name"
             />
             <textarea
               value={clientDetails}
               onChange={(e) => setClientDetails(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
               placeholder="Client Address & Info"
             />
           </div>
@@ -204,7 +204,7 @@ export default function InvoiceGenerator() {
                       type="text"
                       value={item.description}
                       onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
-                      className="w-full bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none text-zinc-900 dark:text-zinc-300"
+                      className="w-full bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
                       placeholder="Item description"
                     />
                   </td>
@@ -214,7 +214,7 @@ export default function InvoiceGenerator() {
                       min="1"
                       value={item.quantity}
                       onChange={(e) => handleItemChange(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none text-zinc-900 dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
                     />
                   </td>
                   <td className="py-3 px-2 text-right">
@@ -224,7 +224,7 @@ export default function InvoiceGenerator() {
                       step="0.01"
                       value={item.rate}
                       onChange={(e) => handleItemChange(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none text-zinc-900 dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
                     />
                   </td>
                   <td className="py-3 px-2 text-right font-medium text-[var(--text-primary)]">
@@ -260,7 +260,7 @@ export default function InvoiceGenerator() {
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 outline-none w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
               placeholder="Terms, payment instructions, etc."
             />
           </div>
@@ -279,7 +279,7 @@ export default function InvoiceGenerator() {
                     type="number"
                     value={taxRate}
                     onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}
-                    className="w-8 text-right bg-transparent outline-none"
+                    className="w-8 text-right bg-transparent focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                   />
                   %
                 </span>

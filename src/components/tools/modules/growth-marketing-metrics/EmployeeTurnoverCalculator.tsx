@@ -77,7 +77,7 @@ export default function EmployeeTurnoverCalculator() {
                 <input 
                   type="number" value={startingEmployees} 
                   onChange={e => setStartingEmployees(Math.max(1, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold outline-none text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
                 />
               </div>
 
@@ -87,7 +87,7 @@ export default function EmployeeTurnoverCalculator() {
                 <input 
                   type="number" value={endingEmployees} 
                   onChange={e => setEndingEmployees(Math.max(1, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold outline-none text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
                 />
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function EmployeeTurnoverCalculator() {
                 <input 
                   type="number" value={voluntaryDepartures} 
                   onChange={e => setVoluntaryDepartures(Math.max(0, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold outline-none text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
                 />
               </div>
 
@@ -109,7 +109,7 @@ export default function EmployeeTurnoverCalculator() {
                 <input 
                   type="number" value={involuntaryDepartures} 
                   onChange={e => setInvoluntaryDepartures(Math.max(0, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold outline-none text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
                 />
               </div>
             </div>
@@ -121,7 +121,7 @@ export default function EmployeeTurnoverCalculator() {
                 <input 
                   type="number" value={avgAnnualSalary} 
                   onChange={e => setAvgAnnualSalary(Math.max(1000, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-2.5 text-[var(--text-primary)] font-bold outline-none text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
                 />
                 <span className="absolute right-4 top-3 text-[var(--text-muted)] text-xs">$</span>
               </div>

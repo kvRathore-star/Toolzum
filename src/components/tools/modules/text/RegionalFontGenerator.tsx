@@ -152,7 +152,7 @@ export default function RegionalFontGenerator() {
               placeholder="e.g. जय हिन्द or Royal King"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-4 text-lg text-[var(--text-primary)] outline-none transition-all duration-200"
+              className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-4 text-lg text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200"
               style={{ borderColor: inputText ? '#9333ea' : undefined }}
             />
             {inputText && (

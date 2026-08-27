@@ -104,7 +104,7 @@ export default function BulkUrlShortener() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="https://example.com/very/long/url/1&#10;https://example.com/very/long/url/2&#10;https://example.com/very/long/url/3"
-            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none resize-y focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
+            className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-y focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
             disabled={isProcessing}
           />
           <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">

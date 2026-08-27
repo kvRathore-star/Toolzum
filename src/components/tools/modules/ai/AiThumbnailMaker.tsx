@@ -863,7 +863,7 @@ export default function AiThumbnailMaker() {
                     <textarea 
                       value={activeText.text}
                       onChange={e => handleTextPropertyChange('text', e.target.value)}
-                      className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] outline-none focus:border-zinc-400"
+                      className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-400"
                       rows={2}
                     />
                   </div>

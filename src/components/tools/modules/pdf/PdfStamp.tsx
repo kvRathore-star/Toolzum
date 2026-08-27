@@ -15,7 +15,7 @@ export default function PdfStamp() {
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Stamp Text</label>
             <input type="text" value={stampText} onChange={e => setState({ ...state, stampText: e.target.value })}
               placeholder="DRAFT, CONFIDENTIAL, etc."
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
         );
       }}

@@ -222,12 +222,12 @@ export default function AiBgChanger() {
                   <div className="flex bg-zinc-200 dark:bg-zinc-700 rounded-lg p-0.5">
                     <button onClick={() => setMode('auto')}
                       aria-pressed={mode === 'auto'}
-                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'auto' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'auto' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                       Auto
                     </button>
                     <button onClick={() => setMode('manual')}
                       aria-pressed={mode === 'manual'}
-                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'manual' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'manual' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                       Manual
                     </button>
                   </div>
@@ -241,7 +241,7 @@ export default function AiBgChanger() {
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={removeBackgroundAuto} disabled={isProcessing}
-                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
                       {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Scissors className="w-3.5 h-3.5" /> Remove BG {!isPro ? '(Standard)' : ''}</>}
                     </button>
                   </>
@@ -254,7 +254,7 @@ export default function AiBgChanger() {
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={applyManualMask} disabled={isProcessing}
-                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
                       <Eraser className="w-3.5 h-3.5" /> Apply Mask
                     </button>
                   </>
@@ -273,7 +273,7 @@ export default function AiBgChanger() {
                 </label>
 
                 <button onClick={resetAll}
-                  className="w-full py-2 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                  className="w-full py-2 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
                   <RotateCcw className="w-3.5 h-3.5" /> Reset
                 </button>
               </div>
@@ -283,7 +283,7 @@ export default function AiBgChanger() {
                   const url = result || image;
                   if (url) downloadOrShare(url, `bg_changed_${Date.now()}.png`);
                 }}
-                  className="w-full py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                  className="w-full py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
                   <Download className="w-3.5 h-3.5" /> Download
                 </button>
               )}

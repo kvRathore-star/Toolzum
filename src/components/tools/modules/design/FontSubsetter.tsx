@@ -429,7 +429,7 @@ export default function FontSubsetter() {
                 onChange={(e) => { setCharacters(e.target.value); setOutputUrl(null); cleanup(); setSubsetInfo(null); }}
                 rows={3}
                 placeholder="Type or paste characters to keep in the subset..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none"
               />
               <div className="flex flex-wrap gap-2">
                 {PRESETS.map((preset) => (
@@ -453,7 +453,7 @@ export default function FontSubsetter() {
                 <select
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as FontFormat)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none cursor-pointer"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-pointer"
                 >
                   <option value="ttf">TTF (TrueType)</option>
                   <option value="woff">WOFF (Web Open Font Format)</option>
@@ -510,7 +510,7 @@ export default function FontSubsetter() {
             value={previewText}
             onChange={(e) => setPreviewText(e.target.value)}
             placeholder="Type sample text here..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
           <div className="bg-white border border-[var(--border-subtle)] rounded-xl overflow-hidden">
             <canvas ref={canvasRef} width={760} height={160} className="w-full h-auto" />

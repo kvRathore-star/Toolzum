@@ -178,7 +178,7 @@ export default function SaasPricingCalculator() {
                 <input 
                   type="number" value={targetMrr} 
                   onChange={e => setTargetMrr(Math.max(100, parseInt(e.target.value) || 0))}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-bold outline-none focus:border-[var(--border-subtle)] text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] text-sm"
                 />
                 <span className="absolute right-4 top-3.5 text-[var(--text-muted)] font-bold text-xs">USD</span>
               </div>

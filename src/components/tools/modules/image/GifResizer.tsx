@@ -186,7 +186,7 @@ export default function GifResizer() {
                 min="1"
                 value={width}
                 onChange={(e) => handleWidthChange(Math.max(1, Number(e.target.value)))}
-                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500"
               />
               <div className="flex gap-2 mt-3 flex-wrap">
                 {PRESETS.map((p) => (
@@ -213,7 +213,7 @@ export default function GifResizer() {
                 value={height}
                 onChange={(e) => handleHeightChange(Math.max(1, Number(e.target.value)))}
                 disabled={maintainAspect}
-                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
 

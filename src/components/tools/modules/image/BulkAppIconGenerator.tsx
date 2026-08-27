@@ -135,7 +135,7 @@ export default function BulkAppIconGenerator() {
   <circle cx="50" cy="50" r="40" fill="#6366f1" />
 </svg>`}
             rows={8}
-            className="w-full p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all resize-none"
+            className="w-full p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30 transition-all resize-none"
           />
         ) : (
           <div

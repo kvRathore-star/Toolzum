@@ -225,7 +225,7 @@ export default function MuteVideo() {
                       <select
                         value={syncMode}
                         onChange={(e) => setSyncMode(e.target.value as 'shortest' | 'first')}
-                        className="text-xs bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[var(--text-primary)] outline-none"
+                        className="text-xs bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                       >
                         <option value="shortest">Trim to shortest duration</option>
                         <option value="first">Use original video duration</option>

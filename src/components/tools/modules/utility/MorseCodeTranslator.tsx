@@ -163,7 +163,7 @@ export default function MorseCodeTranslator() {
             value={input}
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder={mode === 'encode' ? 'Type your text here...' : 'Enter Morse code (use space between letters, / between words)...'}
-            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none outline-none focus:ring-2 focus:ring-[#0891b2]/40 transition-all placeholder:text-[var(--text-muted)]"
+            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[#0891b2]/40 transition-all placeholder:text-[var(--text-muted)]"
           />
         </div>
 
@@ -175,7 +175,7 @@ export default function MorseCodeTranslator() {
             value={output}
             readOnly
             placeholder="Translation will appear here..."
-            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none outline-none cursor-default"
+            className="w-full h-40 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-sm font-mono resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-default"
           />
         </div>
       </div>

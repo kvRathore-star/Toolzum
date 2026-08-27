@@ -235,7 +235,7 @@ export default function AudioCompressor() {
             <button
               onClick={processAudio}
               onKeyDown={handleKeyDown}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? 'Compressing audio...' : 'Compress audio'}
             >
               Compress Audio
@@ -302,7 +302,7 @@ export default function AudioCompressor() {
                     const fmt = OUTPUT_FORMATS.find(f => f.value === outputFormat)!;
                     downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^.]+$/, '')}.${fmt.ext}`);
                   }}
-                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label={`Download compressed audio as ${OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}`}
                 >
                   Download {OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}
@@ -351,7 +351,7 @@ function SliderControl({ label, value, min, max, step, unit, onChange }: {
           step={step}
           value={value}
           onChange={e => onChange(parseFloat(e.target.value))}
-          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] outline-none
+          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2
             [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-amber-500 [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white
             [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:active:scale-110"

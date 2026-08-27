@@ -68,11 +68,11 @@ export default function MarginCalculator() {
         <div className="space-y-4">
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Item Cost ($)</label>
-            <input type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Margin (%)</label>
-            <input type="number" value={margin} onChange={e => setMargin(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={margin} onChange={e => setMargin(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             <input type="range" min="1" max="90" step="1" value={margin} onChange={e => setMargin(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
           </div>
         </div>

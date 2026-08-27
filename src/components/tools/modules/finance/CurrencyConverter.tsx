@@ -177,7 +177,7 @@ export default function CurrencyConverter() {
                 onChange={e => setAmount(e.target.value)} 
                 min="0.01" 
                 step="any"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-[var(--border-subtle)] dark:focus:border-zinc-700 rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-lg font-bold outline-none transition-colors"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-[var(--border-subtle)] dark:focus:border-zinc-700 rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-colors"
                 required
               />
             </div>
@@ -201,7 +201,7 @@ export default function CurrencyConverter() {
                 <select 
                   value={fromCurrency} 
                   onChange={e => setFromCurrency(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm outline-none appearance-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none"
                 >
                   {POPULAR_CURRENCIES.map(c => (
                     <option key={`from-pop-${c.code}`} value={c.code}>{c.code} - {c.name}</option>
@@ -236,7 +236,7 @@ export default function CurrencyConverter() {
                 <select 
                   value={toCurrency} 
                   onChange={e => setToCurrency(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm outline-none appearance-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none"
                 >
                   {POPULAR_CURRENCIES.map(c => (
                     <option key={`to-pop-${c.code}`} value={c.code}>{c.code} - {c.name}</option>

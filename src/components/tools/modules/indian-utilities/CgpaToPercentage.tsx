@@ -139,7 +139,7 @@ export default function CgpaToPercentage() {
             <div className="flex gap-4 items-center">
               <div className="relative">
                 <input type="number" step="0.01" min="0" max="10" value={cgpa} onChange={e => setCgpa(e.target.value)}
-                  className="w-28 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-lg font-mono text-center text-[var(--text-primary)] outline-none transition-all duration-200"
+                  className="w-28 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-lg font-mono text-center text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all duration-200"
                   style={{ borderColor: cgpa ? '#8b5cf6' : undefined }}
                   onKeyDown={e => e.key === 'Enter' && calculate()} />
               </div>
@@ -159,7 +159,7 @@ export default function CgpaToPercentage() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-2">
               <label className="block text-sm font-bold text-[var(--text-primary)]">Multiplication Factor</label>
               <input type="number" step="0.1" value={customFactor} onChange={e => setCustomFactor(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-violet-500 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none" />
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-violet-500 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </motion.div>
           )}
 

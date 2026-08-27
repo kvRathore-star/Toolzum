@@ -94,10 +94,10 @@ export default function ToDoList() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="What needs to be accomplished today?"
-            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs outline-none focus:border-zinc-300"
+            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300"
           />
           <div className="flex gap-2">
-            <select value={priority} onChange={e => setPriority(e.target.value as any)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 text-[var(--text-primary)] text-xs outline-none">
+            <select value={priority} onChange={e => setPriority(e.target.value as any)} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 text-[var(--text-primary)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               <option value="high">High Priority</option>
               <option value="medium">Medium Priority</option>
               <option value="low">Low Priority</option>

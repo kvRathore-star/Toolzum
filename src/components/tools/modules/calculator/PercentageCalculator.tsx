@@ -20,12 +20,12 @@ export default function PercentageCalculator() {
            <div className="flex items-center space-x-4">
               <input 
                 type="number" value={val1} onChange={e => setVal1(e.target.value)}
-                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <span className="font-bold text-[var(--text-secondary)]">% of</span>
               <input 
                 type="number" value={val2} onChange={e => setVal2(e.target.value)}
-                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
            </div>
            <button
@@ -45,12 +45,12 @@ export default function PercentageCalculator() {
            <div className="flex items-center space-x-4">
               <input 
                 type="number" value={val3} onChange={e => setVal3(e.target.value)}
-                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <span className="font-bold text-[var(--text-secondary)]">is what % of</span>
               <input 
                 type="number" value={val4} onChange={e => setVal4(e.target.value)}
-                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 outline-none"
+                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
            </div>
            <button

@@ -83,7 +83,7 @@ export default function SellerProfitCalculator() {
         {suffix === '₹' && <span className="text-[var(--text-muted)] text-xs font-medium">{suffix}</span>}
         <input type="number" min="0" step="1" value={(input[key] as number) || ''} onChange={e => update(key, e.target.value)}
           placeholder={placeholder}
-          className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+          className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         {suffix && suffix !== '₹' && <span className="text-[var(--text-muted)] text-[10px] w-6">{suffix}</span>}
       </div>
     </div>
@@ -115,7 +115,7 @@ export default function SellerProfitCalculator() {
             <div className="space-y-1">
               <label className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide"><BarChart3 className="w-3.5 h-3.5" /> Platform</label>
               <select value={input.platform} onChange={e => update('platform', e.target.value as Platform)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30">
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
                 <option value="meesho">Meesho (0-15% commission)</option>
                 <option value="amazon">Amazon (2-35% commission)</option>
                 <option value="flipkart">Flipkart (5-25% commission)</option>

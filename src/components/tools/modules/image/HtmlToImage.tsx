@@ -57,11 +57,11 @@ export default function HtmlToImage() {
              <textarea 
                value={htmlContent}
                onChange={(e) => setHtmlContent(e.target.value)}
-               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
                placeholder="Enter HTML here..."
              />
              <div className="flex gap-4">
-               <select value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-[var(--bg-surface)] border-none rounded-lg px-4 py-2 flex-1 outline-none">
+               <select value={format} onChange={(e) => setFormat(e.target.value as any)} className="bg-[var(--bg-surface)] border-none rounded-lg px-4 py-2 flex-1 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                  <option value="png">PNG</option>
                  <option value="jpeg">JPEG</option>
                  <option value="svg">SVG</option>

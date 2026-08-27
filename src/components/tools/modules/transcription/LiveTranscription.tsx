@@ -157,7 +157,7 @@ export default function LiveTranscription() {
         <select 
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="bg-white dark:bg-black border border-blue-500/30 text-blue-300 text-sm rounded-lg px-3 py-1.5 outline-none"
+          className="bg-white dark:bg-black border border-blue-500/30 text-blue-300 text-sm rounded-lg px-3 py-1.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
         >
           <option value="en-US">English (US)</option>
           <option value="en-IN">English (India)</option>

@@ -199,7 +199,7 @@ export default function VideoScreenshot() {
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
                 <input type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
                   className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
@@ -211,7 +211,7 @@ export default function VideoScreenshot() {
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
                 <input type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
                   className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
@@ -249,13 +249,13 @@ export default function VideoScreenshot() {
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
                 <input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
                 <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
-                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] outline-none font-mono"
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>
             </div>

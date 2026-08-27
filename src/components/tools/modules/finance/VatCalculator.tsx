@@ -71,11 +71,11 @@ export default function VatCalculator() {
         <div className="space-y-4">
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Net Price / Pre-tax ($)</label>
-            <input type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">VAT / GST Rate (%)</label>
-            <input type="number" value={vatRate} onChange={e => setVatRate(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-emerald-500 transition-colors" />
+            <input type="number" value={vatRate} onChange={e => setVatRate(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             <input type="range" min="0" max="28" step="0.5" value={vatRate} onChange={e => setVatRate(parseFloat(e.target.value))} className="w-full accent-emerald-500 mt-1" />
           </div>
         </div>

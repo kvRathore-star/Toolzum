@@ -234,7 +234,7 @@ export default function BankStatementAnalyser() {
                   }
                 }
               }} rows={6} placeholder="Copy-paste your bank statement text here..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none font-mono" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none font-mono" />
             </div>
             {error && (
               <div className="flex items-start gap-2 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/30 rounded-xl mt-3">
@@ -307,15 +307,15 @@ export default function BankStatementAnalyser() {
               <div className="relative flex-1 min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--text-muted)]" />
                 <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search description..."
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}
-                className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] outline-none focus:ring-2 focus:ring-emerald-500/30">
+                className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
                 <option value="">All categories</option>
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
               <input type="text" value={dateFilter} onChange={e => setDateFilter(e.target.value)} placeholder="Filter date..."
-                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] outline-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               <button onClick={handleExport}
                 className="px-3 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
                 <Download className="w-3.5 h-3.5" /> Export CSV

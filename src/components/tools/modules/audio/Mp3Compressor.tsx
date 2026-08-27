@@ -87,7 +87,7 @@ export default function Mp3Compressor() {
             <select 
               value={bitrate}
               onChange={(e) => setBitrate(e.target.value)}
-              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] outline-none font-bold"
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-bold"
             >
               <option value="32k">32 kbps (Smallest, Low Quality)</option>
               <option value="64k">64 kbps (Good for Voice/Podcasts)</option>

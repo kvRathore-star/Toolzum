@@ -264,14 +264,14 @@ export default function AiDetector() {
             <div className="flex gap-2">
               <button 
                 onClick={handlePaste} 
-                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Paste text from clipboard"
               >
                 Paste
               </button>
               <button 
                 onClick={handleClear} 
-                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Clear input text"
               >
                 Clear
@@ -287,7 +287,7 @@ export default function AiDetector() {
               value={input}
               onChange={(e) => { if (e.target.value.length <= 10000) setInput(e.target.value); }}
               placeholder="Paste or type text to analyze (up to 10,000 characters)..."
-              className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none focus:ring-2 focus:ring-red-500/50 transition-all"
+              className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:ring-2 focus:ring-red-500/50 transition-all"
               spellCheck={false}
             />
             <div className="absolute bottom-3 right-3 text-[10px] text-[var(--text-muted)] bg-[var(--bg-surface)] px-2 py-0.5 rounded-full">
@@ -300,7 +300,7 @@ export default function AiDetector() {
             onClick={handleAnalyze}
             onKeyDown={handleKeyDown}
             disabled={isLoading || !input.trim()}
-            className="w-full py-3.5 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full py-3.5 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-sm transition-all flex items-center justify-center gap-2 active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isLoading ? 'Analyzing text...' : 'Analyze text for AI patterns'}
           >
             {isLoading ? (

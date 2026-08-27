@@ -86,13 +86,13 @@ export function CodeObfuscator() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
       <select value={level} onChange={e => setLevel(e.target.value as any)}
-        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] outline-none">
+        className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
         <option value="light">Light (Base64)</option>
         <option value="medium">Medium (Hex + Base64)</option>
         <option value="heavy">Heavy (Multi-var + Dead Code)</option>
       </select>
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste code to obfuscate..."
-        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={obfuscate} label="Obfuscate" />
       {output && (
         <div className="space-y-2">
@@ -176,7 +176,7 @@ export function CodeToCurlParser() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch, axios, or XMLHttpRequest code..."
-        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={parse} label="Parse to Curl" />
       {output && (
         <div className="space-y-2">
@@ -260,7 +260,7 @@ export function JsSyntaxChecker() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
       <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
-        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={check} label="Check Syntax" />
       {result && (
         <div className="space-y-2">
@@ -387,7 +387,7 @@ export function PugToHtml() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
       <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello&#10;  p World"
-        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] outline-none resize-none" />
+        className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <div className="flex gap-2">
         <CalcBtn onClick={convert} label="Convert" />
         {output && (

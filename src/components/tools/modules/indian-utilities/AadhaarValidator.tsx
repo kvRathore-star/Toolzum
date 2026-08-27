@@ -203,7 +203,7 @@ export default function AadhaarValidator() {
               placeholder="XXXX XXXX XXXX"
               value={input}
               onChange={handleChange}
-              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3.5 text-xl font-mono tracking-[0.15em] text-[var(--text-primary)] outline-none transition-all"
+              className="w-full bg-[var(--bg-overlay)] border-2 rounded-xl px-4 py-3.5 text-xl font-mono tracking-[0.15em] text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-all"
               style={{
                 borderColor: validated ? (isValid ? '#22c55e66' : '#ef444466') : '#f9731666',
                 boxShadow: validated ? (isValid ? '0 0 0 3px #22c55e22' : '0 0 0 3px #ef444422') : '0 0 0 3px #f9731622',

@@ -115,7 +115,7 @@ export default function BulkQrCodeGenerator() {
               <label className="text-sm font-bold text-[var(--text-primary)]">Text or URL</label>
               <input type="text" value={text} onChange={e => setText(e.target.value)}
                 placeholder="https://example.com"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-indigo-500" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500" />
             </div>
             <button onClick={generateSingle} disabled={isProcessing || remaining === 0}
               className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">

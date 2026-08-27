@@ -200,7 +200,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
               <input type="password" value={password} onChange={e => setPassword(e.target.value)}
                 placeholder={isProtect ? 'Enter password (minimum 4 characters)...' : 'Enter password (leave empty if none)...'}
                 minLength={isProtect ? 4 : undefined}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]"
                 required={isProtect} />
             </div>
             {isProtect && (
@@ -208,7 +208,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Confirm Password</label>
                 <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                   placeholder="Confirm password..." minLength={4} required
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--border-subtle)]" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]" />
               </div>
             )}
           </div>

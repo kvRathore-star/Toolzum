@@ -51,21 +51,21 @@ export default function EmiCalculator() {
               <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Loan Amount ($)</label>
               <input 
                 type="number" value={principal} onChange={e => setPrincipal(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
             <div>
               <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Interest Rate (% p.a)</label>
               <input 
                 type="number" value={rate} onChange={e => setRate(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
             <div>
               <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Loan Tenure (Months)</label>
               <input 
                 type="number" value={tenure} onChange={e => setTenure(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-amber-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
          </div>

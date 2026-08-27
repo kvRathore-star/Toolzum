@@ -34,7 +34,7 @@ export default function IbanValidator() {
                 setChecked(false);
               }} 
               placeholder="e.g. GB29 NWBK 6016 1331 9268 19" 
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm outline-none focus:border-zinc-300 dark:focus:border-zinc-700" 
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700" 
             />
           </div>
 

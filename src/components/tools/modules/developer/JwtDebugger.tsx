@@ -33,21 +33,21 @@ export default function JwtDebugger() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <textarea value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[var(--accent)] transition-colors break-all" />
+      <textarea value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors break-all" />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {header && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1">
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Header</h4>
             <div className="relative">
-              <textarea value={header} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
+              <textarea value={header} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
               <button onClick={() => { clipboardWrite(header); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
           <div className="space-y-1">
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Payload</h4>
             <div className="relative">
-              <textarea value={payload} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 outline-none resize-none font-mono" />
+              <textarea value={payload} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-zinc-800 dark:text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
               <button onClick={() => { clipboardWrite(payload); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>

@@ -344,7 +344,7 @@ export default function VoiceRecorder() {
                 <input ref={inputRef} defaultValue={recordingName}
                   onKeyDown={e => { if (e.key === 'Enter') confirmRename(); if (e.key === 'Escape') setIsRenaming(false); }}
                   onBlur={confirmRename}
-                  className="flex-1 bg-[var(--bg-elevated)] border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-fuchsia-500" />
+                  className="flex-1 bg-[var(--bg-elevated)] border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-fuchsia-500" />
               ) : (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[180px]">{recordingName}.{outputFormat}</span>

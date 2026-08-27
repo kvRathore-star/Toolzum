@@ -217,7 +217,7 @@ export function BulkToolShell({
               ))}
             </div>
             <div className="flex gap-2">
-              <input value={presetName} onChange={e => setPresetName(e.target.value)} placeholder="Preset name..." className="flex-1 p-2 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]" />
+              <input value={presetName} onChange={e => setPresetName(e.target.value)} placeholder="Preset name..." className="flex-1 p-2 text-sm bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
               {canSavePresets ? (
                 <button onClick={handleSavePreset} className="px-3 py-2 text-xs font-medium bg-[var(--accent-ink)] text-white rounded-[var(--radius-md)] hover:bg-[var(--accent-hover)] transition-colors">Save</button>
               ) : (

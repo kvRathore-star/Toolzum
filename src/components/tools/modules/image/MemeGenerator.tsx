@@ -176,7 +176,7 @@ export default function MemeGenerator() {
             <span className="font-bold text-[var(--text-secondary)] uppercase block">Top Caption</span>
             <input
               type="text" value={topText} onChange={e => setTopText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]"
             />
           </div>
 
@@ -185,7 +185,7 @@ export default function MemeGenerator() {
             <span className="font-bold text-[var(--text-secondary)] uppercase block">Bottom Caption</span>
             <input
               type="text" value={bottomText} onChange={e => setBottomText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 outline-none focus:border-indigo-500 text-[var(--text-primary)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]"
             />
           </div>
 

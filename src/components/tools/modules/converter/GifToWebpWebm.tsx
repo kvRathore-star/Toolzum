@@ -256,7 +256,7 @@ export default function GifToWebpWebm() {
                   max="1000"
                   value={loopCount}
                   onChange={(e) => setLoopCount(Math.max(0, Number(e.target.value)))}
-                  className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-4 py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
             )}

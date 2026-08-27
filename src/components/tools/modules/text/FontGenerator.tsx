@@ -58,7 +58,7 @@ export default function FontGenerator() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-3 py-2 text-[var(--text-primary)] outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
 

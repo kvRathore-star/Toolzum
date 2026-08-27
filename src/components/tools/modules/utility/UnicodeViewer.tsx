@@ -54,7 +54,7 @@ export default function UnicodeViewer() {
         value={input}
         onChange={e => setInput(e.target.value)}
         placeholder="Type or paste any text here..."
-        className="w-full h-[120px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono focus:border-[#7c3aed] transition-colors"
+        className="w-full h-[120px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[#7c3aed] transition-colors"
       />
 
       <div className="grid gap-4">

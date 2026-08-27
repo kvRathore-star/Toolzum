@@ -10,6 +10,6 @@ export function factorial(n: number): number {
   for (let i = 2; i <= n; i++) r *= i;
   return r;
 }
-export const inputCls = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] transition-colors";
+export const inputCls = "w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-colors";
 export const labelCls = "block text-sm font-bold text-[var(--text-primary)] mb-1.5";
-export const btnCls = "mt-4 px-6 py-3 rounded-xl font-bold text-sm transition-all bg-[var(--accent)] text-white hover:opacity-90 active:scale-95";
+export const btnCls = "mt-4 px-6 py-3 rounded-xl font-bold text-sm transition-all bg-[var(--accent)] text-white hover:opacity-90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";

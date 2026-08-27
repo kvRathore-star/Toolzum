@@ -326,7 +326,7 @@ export default function AiHumanizer() {
               </div>
               <textarea value={input} onChange={e => setInput(e.target.value.slice(0, MAX_CHARS))}
                 placeholder="Paste AI-generated text here..."
-                className="w-full h-64 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none focus:ring-2 focus:ring-emerald-500/30" />
+                className="w-full h-64 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
@@ -355,7 +355,7 @@ export default function AiHumanizer() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button onClick={handleHumanize} onKeyDown={handleKeyDown} disabled={isLoading || !input.trim()}
-              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isLoading ? 'Humanizing text...' : 'Humanize text'}
             >
               {isLoading ? (

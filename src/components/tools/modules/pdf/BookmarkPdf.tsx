@@ -226,7 +226,7 @@ export default function BookmarkPdf() {
               <textarea
                 value={bulkInput}
                 onChange={e => setBulkInput(e.target.value)}
-                className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-sm text-zinc-900 dark:text-zinc-100 resize-none outline-none"
+                className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-sm text-zinc-900 dark:text-zinc-100 resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 placeholder="Chapter 1\t3&#10;&#9;Section 1.1\t5&#10;&#9;&#9;Subsection 1.1.1\t7&#10;Chapter 2\t10"
               />
               <button
@@ -244,7 +244,7 @@ export default function BookmarkPdf() {
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                   placeholder="Bookmark title"
-                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-blue-500/30"
+                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/30"
                 />
                 <input
                   type="number"
@@ -252,14 +252,14 @@ export default function BookmarkPdf() {
                   max={totalPages}
                   value={page}
                   onChange={e => setPage(Math.min(totalPages, Math.max(1, parseInt(e.target.value) || 1)))}
-                  className="w-16 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 py-2 text-sm text-center text-zinc-900 dark:text-zinc-100 outline-none focus:ring-2 focus:ring-blue-500/30"
+                  className="w-16 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 py-2 text-sm text-center text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/30"
                   title="Page number"
                 />
               </div>
               <select
                 value={parentId || ''}
                 onChange={e => setParentId(e.target.value || null)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 <option value="">— Top Level —</option>
                 {bookmarks.map(b => (

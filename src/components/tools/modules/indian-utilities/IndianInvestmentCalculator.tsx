@@ -75,7 +75,7 @@ function NumberInput({ label, value, onChange, min = 0, max, step = 1, prefix, s
         {prefix && <span className="text-[var(--text-muted)] font-medium text-sm">{prefix}</span>}
         <input type="number" value={value || ''} onChange={e => { const v = parseFloat(e.target.value) || 0; onChange(max !== undefined ? Math.min(Math.max(v, min), max) : Math.max(v, min)); }}
           min={min} max={max} step={step}
-          className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--text-primary)] font-semibold p-0 focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+          className="flex-1 bg-transparent border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm text-[var(--text-primary)] font-semibold p-0 focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
         {suffix && <span className="text-[var(--text-muted)] text-xs">{suffix}</span>}
       </div>
       <input type="range" min={min} max={max ?? 1000000} step={step} value={value} onChange={e => onChange(parseFloat(e.target.value))}

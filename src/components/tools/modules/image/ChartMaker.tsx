@@ -488,17 +488,17 @@ export default function ChartMaker() {
 
           <div>
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Title</label>
-            <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
+            <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">X-Axis Label</label>
-              <input type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Category" />
+              <input type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Category" />
             </div>
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Y-Axis Label</label>
-              <input type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Value" />
+              <input type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Value" />
             </div>
           </div>
 
@@ -510,8 +510,8 @@ export default function ChartMaker() {
             <div className="space-y-1.5 max-h-64 overflow-y-auto pr-1">
               {data.map(row => (
                 <div key={row.id} className="flex gap-2 items-center">
-                  <input type="text" value={row.label} onChange={e => updateRow(row.id, 'label', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/2" placeholder="Label" />
-                  <input type="text" value={row.value} onChange={e => updateRow(row.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 w-1/3" placeholder="Value" />
+                  <input type="text" value={row.label} onChange={e => updateRow(row.id, 'label', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 w-1/2" placeholder="Label" />
+                  <input type="text" value={row.value} onChange={e => updateRow(row.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 w-1/3" placeholder="Value" />
                   <button onClick={() => removeRow(row.id)} className="text-[var(--text-muted)] hover:text-red-500 transition-colors p-1">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                   </button>
@@ -562,7 +562,7 @@ export default function ChartMaker() {
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Background Color</label>
             <div className="flex gap-2 items-center">
               <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-9 w-12 rounded-lg border border-[var(--border-subtle)] cursor-pointer bg-transparent" />
-              <input type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
+              <input type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 font-mono" />
             </div>
           </div>
 

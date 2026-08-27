@@ -166,7 +166,7 @@ export default function AddTextToPdf() {
                 max={totalPages}
                 value={pageNum}
                 onChange={(e) => setPageNum(Math.min(totalPages, Math.max(1, parseInt(e.target.value) || 1)))}
-                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
               <span className="text-sm text-[var(--text-secondary)]">of {totalPages}</span>
             </div>
@@ -179,7 +179,7 @@ export default function AddTextToPdf() {
               placeholder="Enter text to add..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
             />
           </div>
 
@@ -223,7 +223,7 @@ export default function AddTextToPdf() {
                 value={customColor}
                 onChange={(e) => { setCustomColor(e.target.value); setColor(e.target.value); }}
                 placeholder="#000000"
-                className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)] font-mono"
+                className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] font-mono"
               />
             </div>
           </div>
@@ -235,7 +235,7 @@ export default function AddTextToPdf() {
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
             <div className="space-y-2">
@@ -244,7 +244,7 @@ export default function AddTextToPdf() {
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
               />
             </div>
           </div>

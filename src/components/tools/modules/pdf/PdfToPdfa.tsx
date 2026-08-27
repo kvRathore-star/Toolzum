@@ -116,7 +116,7 @@ export default function PdfToPdfa() {
                 type="text"
                 value={metadata.title}
                 onChange={(e) => setMetadata({ ...metadata, title: e.target.value })}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 placeholder="Document Title"
               />
             </div>
@@ -126,7 +126,7 @@ export default function PdfToPdfa() {
                 type="text"
                 value={metadata.author}
                 onChange={(e) => setMetadata({ ...metadata, author: e.target.value })}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 placeholder="Author Name"
               />
             </div>
@@ -136,7 +136,7 @@ export default function PdfToPdfa() {
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => setMetadata({ ...metadata, subject: e.target.value })}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 placeholder="Subject"
               />
             </div>
@@ -146,7 +146,7 @@ export default function PdfToPdfa() {
                 type="text"
                 value={metadata.keywords}
                 onChange={(e) => setMetadata({ ...metadata, keywords: e.target.value })}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 placeholder="keyword1, keyword2"
               />
             </div>

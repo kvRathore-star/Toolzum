@@ -79,7 +79,7 @@ export default function SecureNoteSharer() {
             value={note}
             onChange={e => setNote(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && createSecureNote()}
             placeholder="Type your sensitive message here..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 outline-none text-xs resize-none"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"
           />
 
           <div className="space-y-1">
@@ -89,7 +89,7 @@ export default function SecureNoteSharer() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Leave empty to auto-generate"
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs outline-none"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function SecureNoteSharer() {
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)] animate-in">
               <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Shareable link</span>
               <div className="flex gap-2">
-                <input readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 outline-none" />
+                <input readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-zinc-800 px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function SecureNoteSharer() {
               <textarea
                 value={decryptedNote}
                 readOnly
-                className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-40 outline-none text-xs resize-none mt-2"
+                className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none mt-2"
               />
             </div>
           ) : (

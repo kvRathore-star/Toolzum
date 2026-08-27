@@ -116,12 +116,12 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
             <label className="text-xs font-medium text-[var(--text-secondary)]">Values (one per line)</label>
             <textarea value={batchValues} onChange={e => setBatchValues(e.target.value)} rows={4}
               placeholder="100&#10;250&#10;500"
-              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
             <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
-              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
             </select>
           </div>
@@ -131,12 +131,12 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
           <div className="space-y-1">
             <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
             <input type="number" value={val} onChange={e => setVal(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
             <select value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
-              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+              className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
             </select>
           </div>
@@ -280,7 +280,7 @@ export function LargeTextViewer() {
         <div className="flex-1 space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">Search</label>
           <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
-            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <button onClick={doSearch} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Find</button>
       </div>
@@ -311,18 +311,18 @@ export function AvroSchemaGenerator() {
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">Namespace</label>
           <input type="text" value={namespace} onChange={e => setNamespace(e.target.value)} placeholder="Namespace"
-            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">Name</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"
-            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
       </div>
       <div className="space-y-1">
         <label className="text-xs font-medium text-[var(--text-secondary)]">Fields JSON</label>
         <textarea rows={4} value={fields} onChange={e => setFields(e.target.value)}
-          className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
+          className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
       </div>
       <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
       {schema && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{schema}</pre><div className="mt-1"><CopyBtn text={schema} label="Schema" /></div></div>}
@@ -357,7 +357,7 @@ export function AvroToJsonSample() {
       <div className="space-y-1">
         <label className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
         <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
-          className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" />
+          className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
       </div>
       <button onClick={generateSample} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
       {sample && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-emerald-600 dark:text-emerald-400">{sample}</pre><div className="mt-1"><CopyBtn text={sample} label="Sample" /></div></div>}
@@ -399,16 +399,16 @@ export function IcalEventGenerator() {
     <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">iCal Event Generator</h5>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Location</label><input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Location</label><input type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End date</label><input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
       </div>
-      <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Description</label><textarea rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y" /></div>
+      <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Description</label><textarea rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" /></div>
       <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate .ics</button>
       {ical && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{ical}</pre><div className="mt-1"><CopyBtn text={ical} label=".ics" /></div></div>}
     </div>

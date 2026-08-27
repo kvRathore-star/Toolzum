@@ -188,7 +188,7 @@ export default function HeaderFooterPdf() {
               placeholder="e.g. Confidential &bull; {{page}}/{{total}}"
               value={headerText}
               onChange={(e) => setHeaderText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
             />
           </div>
 
@@ -199,7 +199,7 @@ export default function HeaderFooterPdf() {
               placeholder="e.g. Page {{page}} of {{total}} &mdash; {{date}}"
               value={footerText}
               onChange={(e) => setFooterText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
             />
           </div>
 
@@ -273,7 +273,7 @@ export default function HeaderFooterPdf() {
               placeholder="e.g. 1-5, 8, 11-13"
               value={pageRange}
               onChange={(e) => setPageRange(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-sm"
             />
           </div>
 

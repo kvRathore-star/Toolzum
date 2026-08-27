@@ -39,7 +39,7 @@ export default function PasswordStrengthChecker() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Type passwords to analyze entropy..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs outline-none pr-10"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 pr-10"
               />
               <button 
                 onClick={() => setShowPassword(!showPassword)}

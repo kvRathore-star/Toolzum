@@ -289,7 +289,7 @@ export default function CitationGenerator() {
                 value={form.authors}
                 onChange={e => updateField('authors', e.target.value)}
                 placeholder="Last, F., Last, F."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
 
@@ -299,7 +299,7 @@ export default function CitationGenerator() {
                 value={form.title}
                 onChange={e => updateField('title', e.target.value)}
                 placeholder="Title of the work"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
 
@@ -310,7 +310,7 @@ export default function CitationGenerator() {
                   value={form.publisher}
                   onChange={e => updateField('publisher', e.target.value)}
                   placeholder="Publisher"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 />
               </div>
               <div className="space-y-1">
@@ -319,7 +319,7 @@ export default function CitationGenerator() {
                   value={form.year}
                   onChange={e => updateField('year', e.target.value)}
                   placeholder="2024"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 />
               </div>
             </div>
@@ -328,15 +328,15 @@ export default function CitationGenerator() {
               <div className="grid grid-cols-3 gap-3">
                 <div className="space-y-1">
                   <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Volume</label>
-                  <input value={form.volume} onChange={e => updateField('volume', e.target.value)} placeholder="Vol" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none" />
+                  <input value={form.volume} onChange={e => updateField('volume', e.target.value)} placeholder="Vol" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Issue</label>
-                  <input value={form.issue} onChange={e => updateField('issue', e.target.value)} placeholder="No." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none" />
+                  <input value={form.issue} onChange={e => updateField('issue', e.target.value)} placeholder="No." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Pages</label>
-                  <input value={form.pages} onChange={e => updateField('pages', e.target.value)} placeholder="1-10" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none" />
+                  <input value={form.pages} onChange={e => updateField('pages', e.target.value)} placeholder="1-10" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 </div>
               </div>
             )}
@@ -348,7 +348,7 @@ export default function CitationGenerator() {
                   value={form.url}
                   onChange={e => updateField('url', e.target.value)}
                   placeholder="https://"
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 />
               </div>
             )}
@@ -359,7 +359,7 @@ export default function CitationGenerator() {
                 type="date"
                 value={form.accessedDate}
                 onChange={e => updateField('accessedDate', e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
 
@@ -369,7 +369,7 @@ export default function CitationGenerator() {
                 value={form.doi}
                 onChange={e => updateField('doi', e.target.value)}
                 placeholder="10.1000/xyz123"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm outline-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
             </div>
           </div>

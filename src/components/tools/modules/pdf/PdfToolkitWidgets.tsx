@@ -173,26 +173,26 @@ export function PdfAddBlankPage() {
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Number of Blank Pages</label>
           <input type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Size</label>
           <select value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
             <option value="a4">A4</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="a3">A3</option>
           </select>
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Insert Position</label>
           <select value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]">
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
             <option value="after">After Page</option><option value="before">Before Page</option>
           </select>
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">At Page</label>
           <input type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)]" />
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
       </div>
       <button onClick={process} disabled={isProcessing}

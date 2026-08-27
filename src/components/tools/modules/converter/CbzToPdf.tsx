@@ -339,7 +339,7 @@ export default function CbzToPdf() {
               value={pageRange}
               onChange={e => setPageRange(e.target.value)}
               placeholder='all, "1-10", or "1,3,5-8"'
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-[var(--accent)] text-sm"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-sm"
             />
           </div>
 

@@ -100,7 +100,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
                 onChange={e => setBrandDesc(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="e.g., A premium organic skincare brand targeting eco-conscious millennials..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 outline-none focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
               />
             </div>
 
@@ -109,7 +109,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
               <select
                 value={style}
                 onChange={e => setStyle(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] outline-none text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
               >
                 {STYLES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>

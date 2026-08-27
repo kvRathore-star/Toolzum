@@ -71,11 +71,11 @@ export default function ImageResizer() {
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                  <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Width (px)</label>
-                 <input type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 outline-none" />
+                 <input type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
               <div>
                  <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Height (px)</label>
-                 <input type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 outline-none" />
+                 <input type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
            </div>
          )}
@@ -84,7 +84,7 @@ export default function ImageResizer() {
            <button 
              onClick={download} 
              onKeyDown={handleKeyDown}
-             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              aria-label="Download resized image"
            >
              Download Resized Image

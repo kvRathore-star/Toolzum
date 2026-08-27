@@ -28,7 +28,7 @@ export default function PrimeFactorizationCalculator() {
       <div className="space-y-4">
         <label className={labelClass}>Number (≥ 2)</label>
         <input type="number" min={2} value={n} onChange={e => setN(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
 
         {nn >= 2 && (
           <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">

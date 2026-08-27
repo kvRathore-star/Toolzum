@@ -88,7 +88,7 @@ export default function JsonFormatter() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your unformatted JSON here..."
-            className="flex-1 w-full bg-transparent p-4 text-[var(--text-primary)] font-mono text-sm resize-none outline-none focus:ring-1 focus:ring-[var(--accent)]/50"
+            className="flex-1 w-full bg-transparent p-4 text-[var(--text-primary)] font-mono text-sm resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]/50"
             spellCheck={false}
           />
         </div>
@@ -123,7 +123,7 @@ export default function JsonFormatter() {
               value={output}
               readOnly
               placeholder="Formatted JSON will appear here..."
-              className="absolute inset-0 w-full h-full bg-transparent p-4 text-emerald-700 dark:text-emerald-400 font-mono text-sm resize-none outline-none"
+              className="absolute inset-0 w-full h-full bg-transparent p-4 text-emerald-700 dark:text-emerald-400 font-mono text-sm resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               spellCheck={false}
             />
             

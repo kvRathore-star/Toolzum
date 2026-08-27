@@ -92,7 +92,7 @@ export default function VideoCompressor() {
           </div>
           <p className="text-red-500 font-medium">Failed to load video engine</p>
           <p className="text-xs text-[var(--text-muted)] max-w-sm">{loadError}</p>
-          <button onClick={loadFFmpeg} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+          <button onClick={loadFFmpeg} className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-xl transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
             Retry
           </button>
         </div>
@@ -125,13 +125,13 @@ export default function VideoCompressor() {
         <div className="flex gap-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-1 w-fit mx-auto">
           <button
             onClick={() => setMode('video')}
-            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'video' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'video' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'} focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2`}
           >
             Video
           </button>
           <button
             onClick={() => setMode('gif')}
-            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'gif' ? 'bg-pink-500 text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+            className={`px-4 py-1.5 text-xs font-medium rounded-[var(--radius-lg)] transition-colors ${mode === 'gif' ? 'bg-pink-500 text-white' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'} focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2`}
           >
             GIF
           </button>
@@ -160,7 +160,7 @@ export default function VideoCompressor() {
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
         >
           Change File
         </button>
@@ -224,7 +224,7 @@ export default function VideoCompressor() {
             ) : (
               <button
                 onClick={compressVideo}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 {mode === 'video' ? 'Compress Video' : 'Optimize GIF'}
@@ -259,7 +259,7 @@ export default function VideoCompressor() {
               )}
               <button
                 onClick={() => downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^/.]+$/, "")}.${mode === 'video' ? 'mp4' : 'gif'}`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download Compressed {mode === 'video' ? 'Video' : 'GIF'}

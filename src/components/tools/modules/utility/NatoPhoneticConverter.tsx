@@ -80,14 +80,14 @@ export default function NatoPhoneticConverter() {
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder={mode === 'to' ? 'Type text here...' : 'Paste NATO words here...'}
-          className="w-full h-[180px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono"
+          className="w-full h-[180px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono"
         />
         <div className="relative">
           <textarea
             value={output}
             readOnly
             placeholder="Result will appear here..."
-            className="w-full h-[180px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none resize-none font-mono"
+            className="w-full h-[180px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono"
           />
           {output && (
             <button

@@ -276,7 +276,7 @@ export default function PdfToTiff() {
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
             placeholder='all, 1-5, or 1,3,5'
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
         </div>
 
@@ -285,7 +285,7 @@ export default function PdfToTiff() {
           <select
             value={mode}
             onChange={(e) => setMode(e.target.value as OutputMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="multi">Single Multi-Page TIFF</option>
             <option value="single">Separate TIFF Files (ZIP)</option>
@@ -297,7 +297,7 @@ export default function PdfToTiff() {
           <select
             value={dpi}
             onChange={(e) => setDpi(Number(e.target.value))}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value={150}>150 DPI</option>
             <option value={200}>200 DPI</option>
@@ -310,7 +310,7 @@ export default function PdfToTiff() {
           <select
             value={colorMode}
             onChange={(e) => setColorMode(e.target.value as ColorMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="rgba">Full Color</option>
             <option value="gray">Grayscale</option>
@@ -323,7 +323,7 @@ export default function PdfToTiff() {
           <select
             value={compression}
             onChange={(e) => setCompression(e.target.value as Compression)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 outline-none"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="lzw">LZW</option>
             <option value="packbits">PackBits</option>

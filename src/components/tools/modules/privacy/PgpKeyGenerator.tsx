@@ -72,17 +72,17 @@ export default function PgpKeyGenerator() {
           
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold">User Name</label>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
+            <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold">Email Address</label>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold">Passphrase (Password Lock)</label>
-            <input type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 outline-none" />
+            <input type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <button onClick={generateKeys} disabled={isGenerating} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
@@ -106,7 +106,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
             </div>
 
             {/* Private Key */}
@@ -120,7 +120,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 outline-none resize-none" />
+              <textarea readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
             </div>
 
           </div>

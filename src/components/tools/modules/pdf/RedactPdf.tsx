@@ -189,7 +189,7 @@ export default function RedactPdf() {
               placeholder={mode === 'pages' ? 'e.g. 1, 3, 5-10' : 'e.g. 1-5'}
               value={pageRange}
               onChange={(e) => setPageRange(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] outline-none focus:border-red-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500"
             />
             <p className="text-xs text-[var(--text-secondary)]">
               Enter page numbers or ranges separated by commas (e.g. 1-5, 8, 11-13). Max: {totalPages}.
@@ -206,7 +206,7 @@ export default function RedactPdf() {
                     type="number"
                     value={area.x}
                     onChange={(e) => setArea(a => ({...a, x: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500"
                   />
                 </div>
                 <div>
@@ -215,7 +215,7 @@ export default function RedactPdf() {
                     type="number"
                     value={area.y}
                     onChange={(e) => setArea(a => ({...a, y: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500"
                   />
                 </div>
                 <div>
@@ -224,7 +224,7 @@ export default function RedactPdf() {
                     type="number"
                     value={area.w}
                     onChange={(e) => setArea(a => ({...a, w: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500"
                   />
                 </div>
                 <div>
@@ -233,7 +233,7 @@ export default function RedactPdf() {
                     type="number"
                     value={area.h}
                     onChange={(e) => setArea(a => ({...a, h: parseInt(e.target.value) || 0}))}
-                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] outline-none focus:border-red-500"
+                    className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500"
                   />
                 </div>
               </div>

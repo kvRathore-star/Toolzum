@@ -71,7 +71,7 @@ export default function FormatSerializerHub({ slug: defaultSlug }: { slug: strin
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{config.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] outline-none focus:border-[var(--accent)] resize-y min-h-[80px]" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
           className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           Convert

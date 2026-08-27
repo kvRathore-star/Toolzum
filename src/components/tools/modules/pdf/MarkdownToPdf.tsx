@@ -425,7 +425,7 @@ export default function MarkdownToPdf() {
               value={markdown}
               onChange={(e) => { setMarkdown(e.target.value); setPdfUrl(null); }}
               placeholder="# Enter your markdown here..."
-              className="w-full h-[340px] p-5 bg-transparent text-zinc-800 dark:text-zinc-200 font-mono text-sm resize-none outline-none leading-relaxed"
+              className="w-full h-[340px] p-5 bg-transparent text-zinc-800 dark:text-zinc-200 font-mono text-sm resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 leading-relaxed"
               spellCheck={false}
             />
           </div>

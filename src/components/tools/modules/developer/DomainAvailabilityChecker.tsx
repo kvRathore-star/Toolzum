@@ -75,7 +75,7 @@ export default function DomainAvailabilityChecker() {
             onChange={(e) => setDomain(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && checkDomain()}
             placeholder="Enter a name (e.g. myproject)"
-            className="flex-1 px-4 py-2.5 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+            className="flex-1 px-4 py-2.5 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/40"
           />
           <button
             onClick={checkDomain}
