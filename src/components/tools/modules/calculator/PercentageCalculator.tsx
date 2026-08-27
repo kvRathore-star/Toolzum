@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function PercentageCalculator() {
   const [val1, setVal1] = useState('');

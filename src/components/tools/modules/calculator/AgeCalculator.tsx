@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function AgeCalculator() {
   const [dob, setDob] = useState('');

@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
 
 export function EtaCalculator() {
   const [dist, setDist] = useState('100');
