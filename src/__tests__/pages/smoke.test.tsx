@@ -25,7 +25,6 @@ const PAGES = [
   'blog/page.tsx',
   'careers/page.tsx',
   'login/page.tsx',
-  'sign-in/page.tsx',
   'dashboard/page.tsx',
   'billing/page.tsx',
   '[category]/page.tsx',

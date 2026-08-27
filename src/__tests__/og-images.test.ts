@@ -49,7 +49,7 @@ describe('OG image generation: per-tool images are decoupled from the global too
       tools[0] = { ...tools[0], description: 'Changed description A' };
       await generateAll(tools, ['Converter', 'Text'], dir);
 
-      expect(changedFiles(before, hashDir(dir))).toEqual(['converter/alpha.png']);
+      expect(changedFiles(before, hashDir(dir))).toEqual(['converter/alpha.png', 'converter/alpha.webp']);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
@@ -93,7 +93,7 @@ describe('OG image generation: per-tool images are decoupled from the global too
       tools.push(mkTool('Beta Tool', 'beta', 'Converter', 'B'));
       await generateAll(tools, ['Converter'], dir);
 
-      expect(changedFiles(before, hashDir(dir))).toEqual(['converter/beta.png', 'converter/index.png']);
+      expect(changedFiles(before, hashDir(dir))).toEqual(['converter/beta.png', 'converter/beta.webp', 'converter/index.png', 'converter/index.webp']);
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }

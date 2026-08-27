@@ -21,25 +21,27 @@ class MockIntersectionObserver {
 }
 Object.assign(globalThis, { IntersectionObserver: MockIntersectionObserver });
 
-// Mock matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: vi.fn().mockImplementation((query: string) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(),
-    removeListener: vi.fn(),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
+// Mock matchMedia (browser-only)
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
 
-// Mock HTMLCanvasElement.getContext
-HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
-  fillRect: vi.fn(),
-  clearRect: vi.fn(),
-  putImageData: vi.fn(),
-  canvas: { width: 0, height: 0 },
-})) as never;
+  // Mock HTMLCanvasElement.getContext
+  HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
+    fillRect: vi.fn(),
+    clearRect: vi.fn(),
+    putImageData: vi.fn(),
+    canvas: { width: 0, height: 0 },
+  })) as never;
+}

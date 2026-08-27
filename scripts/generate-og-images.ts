@@ -309,13 +309,11 @@ async function writeImage(outPath: string, buf: Buffer): Promise<void> {
   
   // Also generate WebP version for better compression
   const webpPath = outPath.replace(/\.png$/, '.webp');
-  if (!existsSync(webpPath)) {
-    try {
-      const webpBuffer = await sharp(buf).webp({ quality: 80 }).toBuffer();
-      writeFileSync(webpPath, webpBuffer);
-    } catch (error) {
-      console.error(`Failed to generate WebP for ${outPath}:`, error);
-    }
+  try {
+    const webpBuffer = await sharp(buf).webp({ quality: 80 }).toBuffer();
+    writeFileSync(webpPath, webpBuffer);
+  } catch (error) {
+    console.error(`Failed to generate WebP for ${outPath}:`, error);
   }
 }
 
