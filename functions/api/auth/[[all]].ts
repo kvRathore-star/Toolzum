@@ -4,27 +4,38 @@ export const onRequest: PagesFunction = async (context) => {
   try {
     const auth = createAuth(context.env);
     const url = new URL(context.request.url);
-    console.log(`[AUTH REQ] ${context.request.method} ${url.pathname}${url.search}`);
+    const path = url.pathname.replace("/api/auth", "");
 
-    const response = await auth.handler(context.request);
-    const cloned = response.clone();
-    const body = await cloned.text();
-    console.log(`[AUTH RES] status=${response.status} body=${body.substring(0, 500)}`);
+    // For GET requests, use the handler
+    if (context.request.method === "GET") {
+      return auth.handler(context.request);
+    }
 
-    // If better-auth returned a 500 with empty body, try to get more info
-    if (response.status === 500 && !body) {
-      console.error("[AUTH 500] Empty body from better-auth handler");
-      return new Response(JSON.stringify({
-        error: "Internal auth error",
-        path: url.pathname,
-        method: context.request.method,
-      }), {
-        status: 500,
+    // For POST requests, use the API directly
+    if (path === "/sign-up/email" && context.request.method === "POST") {
+      const body = await context.request.json();
+      const result = await (auth as any).api.signUpEmail({
+        body,
+        headers: context.request.headers,
+      });
+      return new Response(JSON.stringify(result), {
         headers: { "Content-Type": "application/json" },
       });
     }
 
-    return response;
+    if (path === "/sign-in/email" && context.request.method === "POST") {
+      const body = await context.request.json();
+      const result = await (auth as any).api.signInEmail({
+        body,
+        headers: context.request.headers,
+      });
+      return new Response(JSON.stringify(result), {
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Fallback to handler for other routes
+    return auth.handler(context.request);
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
     const stack = e instanceof Error ? e.stack : undefined;
