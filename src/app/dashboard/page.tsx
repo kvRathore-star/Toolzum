@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
-import { CreditCard, Activity, Save, Settings, LogOut, Zap } from "lucide-react";
+import { CreditCard, Activity, Save, Settings, LogOut, Zap, User } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -47,6 +47,9 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <Button variant="secondary" asChild>
+              <Link href="/dashboard/account"><User className="w-4 h-4 mr-2" /> Account</Link>
+            </Button>
             <Button variant="secondary" asChild>
               <Link href="/pricing"><CreditCard className="w-4 h-4 mr-2" /> Upgrade Plan</Link>
             </Button>
