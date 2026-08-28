@@ -1,8 +1,20 @@
 interface Env {
+  DB: D1Database;
   GEMINI_API_KEY: string;
 }
 
 const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
+
+async function getUserId(request: Request, DB: D1Database): Promise<string | null> {
+  const cookies = request.headers.get('cookie') || '';
+  const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+  const token = tokenMatch?.[1];
+  if (!token) return null;
+  const row = await DB.prepare(
+    "SELECT s.userId FROM session s WHERE s.token = ? AND s.expiresAt > unixepoch()"
+  ).bind(token).first<{ userId: string }>();
+  return row?.userId || null;
+}
 
 function toBase64(bytes: Uint8Array): string {
   let binary = '';
@@ -14,6 +26,39 @@ function toBase64(bytes: Uint8Array): string {
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
+    const { DB } = context.env;
+
+    // Require signed-in user
+    const userId = await getUserId(context.request, DB);
+    if (!userId) {
+      return new Response(JSON.stringify({ error: 'Sign in required' }), {
+        status: 401,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Rate limit: 3 requests per minute per user
+    const recent = await DB.prepare(
+      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
+    ).bind(`ai-trans:${userId}`).first<{ c: number }>();
+    if (recent && recent.c >= 3) {
+      return new Response(JSON.stringify({ error: 'Rate limited. Try again in a minute.' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Check credits
+    const user = await DB.prepare(
+      "SELECT credits FROM user WHERE id = ?"
+    ).bind(userId).first<{ credits: number }>();
+    if (!user || user.credits <= 0) {
+      return new Response(JSON.stringify({ error: 'No credits remaining' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     const geminiKey = context.env.GEMINI_API_KEY;
     if (!geminiKey) {
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
@@ -36,15 +81,15 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     if (file.size > MAX_UPLOAD_BYTES) {
       return new Response(
-        JSON.stringify({
-          error: `File too large: ${file.size} bytes (max ${MAX_UPLOAD_BYTES})`,
-        }),
-        {
-          status: 413,
-          headers: { 'Content-Type': 'application/json' },
-        }
+        JSON.stringify({ error: `File too large: ${file.size} bytes (max ${MAX_UPLOAD_BYTES})` }),
+        { status: 413, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    // Log rate limit entry
+    await DB.prepare(
+      "INSERT INTO analytics_event (id, path, fingerprint, createdAt) VALUES (?, ?, ?, datetime('now'))"
+    ).bind(crypto.randomUUID(), '/ai/transcribe', `ai-trans:${userId}`).run();
 
     const arrayBuffer = await file.arrayBuffer();
     const base64 = toBase64(new Uint8Array(arrayBuffer));
@@ -90,6 +135,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    // Deduct 1 credit
+    await DB.prepare("UPDATE user SET credits = credits - 1 WHERE id = ? AND credits > 0").bind(userId).run();
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
 
