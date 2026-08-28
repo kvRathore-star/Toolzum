@@ -1,22 +1,15 @@
 import { createAuth } from "../../../src/lib/auth";
 
-export const onRequest: PagesFunction = async (context) => {
+export async function onRequestPost(context: { request: Request; env: Record<string, unknown> }) {
   const { env } = context;
 
-  if (context.request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
   const auth = createAuth({
-    DB: env.DB,
-    GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID,
-    GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET,
-    BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET,
-    BETTER_AUTH_URL: env.BETTER_AUTH_URL,
-    TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY,
+    DB: (env as { DB: D1Database }).DB,
+    GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
+    GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
+    BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
+    BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
+    TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY as string,
   });
 
   try {
@@ -46,8 +39,9 @@ export const onRequest: PagesFunction = async (context) => {
 
     const id = crypto.randomUUID();
     const usedAt = Math.floor(Date.now() / 1000);
+    const DB = (env as { DB: D1Database }).DB;
 
-    await env.DB.prepare(
+    await DB.prepare(
       `INSERT INTO user_tool_usage (id, userId, toolSlug, toolName, category, usedAt) VALUES (?, ?, ?, ?, ?, ?)`
     )
       .bind(id, session.user.id, body.toolSlug, body.toolName, body.category ?? null, usedAt)
@@ -64,4 +58,4 @@ export const onRequest: PagesFunction = async (context) => {
       headers: { "Content-Type": "application/json" },
     });
   }
-};
+}

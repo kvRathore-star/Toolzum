@@ -27,6 +27,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/faq`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
     { url: `${baseUrl}/billing`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.2 },
     { url: `${baseUrl}/premium-tools`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
+    { url: `${baseUrl}/login`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/sign-in`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/sign-up`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${baseUrl}/forgot-password`, lastModified: LAUNCH_DATE, changeFrequency: 'monthly' as const, priority: 0.3 },
   ];
 
   function catSlug(cat: string): string {
