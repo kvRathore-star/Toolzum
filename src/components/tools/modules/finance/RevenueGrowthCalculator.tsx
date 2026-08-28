@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function RevenueGrowthCalculator() {
@@ -26,7 +27,7 @@ export default function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets} accent="blue" customResult={
+    <CalculatorShell title="Revenue Growth Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="blue" customResult={
       result ? (
         <div>
           <div className="flex items-center justify-center gap-4">

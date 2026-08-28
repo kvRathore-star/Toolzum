@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function CarLoanCalculator() {
@@ -28,7 +29,7 @@ export default function CarLoanCalculator() {
   const p = parseFloat(loan);
   const pmt = p && r ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
   return (
-    <CalculatorShell title="Car Loan Calculator" result={result} onCalculate={calc} presets={presets} accent="violet" customResult={
+    <CalculatorShell title="Car Loan Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="violet" customResult={
       result && pmt > 0 ? (
         <div className="flex items-center justify-center gap-8">
           <div className="text-center">

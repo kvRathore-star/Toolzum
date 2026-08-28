@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function CarLeaseCalculator() {
@@ -29,7 +30,7 @@ export default function CarLeaseCalculator() {
   const res = parseFloat(residual) || 0;
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
   return (
-    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
+    <CalculatorShell title="Car Lease Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
       result && monthly > 0 ? (
         <div>
           <div className="text-center mb-3">

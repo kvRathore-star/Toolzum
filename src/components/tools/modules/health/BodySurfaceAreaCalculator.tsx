@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BodySurfaceAreaCalculator() {
@@ -23,7 +24,7 @@ export default function BodySurfaceAreaCalculator() {
     setResult(formulas.map(f => ({ m2: Math.round(f.calc * 100) / 100, formula: f.name, value: Math.round(f.calc * 100) / 100 })));
   }, [weight, height, unit]);
   return (
-    <CalculatorShell title="Body Surface Area (BSA)" accent="emerald" result={result.length > 0 ? `Avg: ${(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²` : ''} onCalculate={calc} customResult={
+    <CalculatorShell title="Body Surface Area (BSA)" icon={<Heart className="w-5 h-5" />} accent="emerald" result={result.length > 0 ? `Avg: ${(result.reduce((s, r) => s + r.m2, 0) / result.length).toFixed(2)} m²` : ''} onCalculate={calc} customResult={
       result.length > 0 ? (
         <div className="grid gap-3">
           {result.map((r, i) => {

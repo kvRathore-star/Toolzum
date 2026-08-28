@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function StepsToCaloriesCalculator() {
@@ -20,7 +21,7 @@ export default function StepsToCaloriesCalculator() {
     setResult(`Distance: ${distKm.toFixed(2)} km (${distMiles.toFixed(2)} mi)\nCalories burned: ${calories} kcal\nStride length: ${strideLen.toFixed(1)} cm`);
   }, [steps, weight, height]);
   return (
-    <CalculatorShell title="Steps to Calories" accent="green" result={result} onCalculate={calc}>
+    <CalculatorShell title="Steps to Calories" icon={<Heart className="w-5 h-5" />} accent="green" result={result} onCalculate={calc}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Steps</label><input className={inputCls} type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div>
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>

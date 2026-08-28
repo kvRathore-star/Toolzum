@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function MacroCalculator() {
@@ -23,6 +24,7 @@ export default function MacroCalculator() {
   return (
     <CalculatorShell
       title="Macro Calculator"
+      icon={<Heart className="w-5 h-5" />}
       accent="lime"
       result={result}
       onCalculate={calc}

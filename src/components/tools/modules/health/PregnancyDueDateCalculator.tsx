@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function PregnancyDueDateCalculator() {
@@ -23,7 +24,7 @@ export default function PregnancyDueDateCalculator() {
     setResult(`Estimated due date: ${fmt(due)}\nDays remaining: ${daysLeft} days\nCurrent trimester: ${trimester}\nWeeks pregnant: ${Math.round((280 - daysLeft) / 7)} weeks`);
   }, [lmp, cycleLen]);
   return (
-    <CalculatorShell title="Pregnancy Due Date" accent="fuchsia" result={result} onCalculate={calc}>
+    <CalculatorShell title="Pregnancy Due Date" icon={<Heart className="w-5 h-5" />} accent="fuchsia" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>First day of LMP</label><input className={inputCls} type="date" value={lmp} onChange={e => setLmp(e.target.value)} /></div>
         <div><label className={labelCls}>Cycle length (optional)</label><input className={inputCls} type="number" value={cycleLen} onChange={e => setCycleLen(e.target.value)} /></div>

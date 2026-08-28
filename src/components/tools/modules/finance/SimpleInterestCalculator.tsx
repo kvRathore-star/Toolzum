@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SimpleInterestCalculator() {
@@ -20,6 +21,7 @@ export default function SimpleInterestCalculator() {
   return (
     <CalculatorShell
       title="Simple Interest Calculator"
+      icon={<DollarSign className="w-5 h-5" />}
       accent="indigo"
       result={result}
       onCalculate={calc}

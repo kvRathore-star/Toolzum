@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function InflationCalculator() {
@@ -27,7 +28,7 @@ export default function InflationCalculator() {
   const y = parseFloat(years) || 0;
   const fv = p * Math.pow(1 + r, y);
   return (
-    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets} accent="lime" customResult={
+    <CalculatorShell title="Inflation Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="lime" customResult={
       result ? (
         <div>
           <div className="flex items-center justify-center gap-6">

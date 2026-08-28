@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BabySleepScheduleCalculator() {
@@ -16,7 +17,7 @@ export default function BabySleepScheduleCalculator() {
     setResult(`Total sleep: ${totalSleep}h/day\nNight: ${nightSleep}h | Day: ${daySleep}h\nNaps: ${naps}\nWake window: ${wakeWindow}`);
   }, [ageWeeks]);
   return (
-    <CalculatorShell title="Baby Sleep Schedule" accent="purple" result={result} onCalculate={calc}>
+    <CalculatorShell title="Baby Sleep Schedule" icon={<Heart className="w-5 h-5" />} accent="purple" result={result} onCalculate={calc}>
       <div className="max-w-sm">
         <div><label className={labelCls}>Age (weeks)</label><input className={inputCls} type="number" value={ageWeeks} onChange={e => setAgeWeeks(e.target.value)} /></div>
       </div>

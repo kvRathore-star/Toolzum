@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function TdsCalculatorIndia() {
@@ -45,6 +46,7 @@ export default function TdsCalculatorIndia() {
   return (
     <CalculatorShell
       title="TDS Calculator (India)"
+      icon={<DollarSign className="w-5 h-5" />}
       accent="orange"
       result={result}
       onCalculate={calc}

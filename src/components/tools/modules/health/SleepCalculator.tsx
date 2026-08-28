@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SleepCalculator() {
@@ -23,6 +24,7 @@ export default function SleepCalculator() {
   return (
     <CalculatorShell
       title="Sleep Calculator"
+      icon={<Heart className="w-5 h-5" />}
       accent="purple"
       result={result}
       onCalculate={calc}

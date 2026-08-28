@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function DiscountCalculator() {
@@ -45,7 +46,7 @@ export default function DiscountCalculator() {
   const originalPrice = mode === 'forward' ? p : sp / (1 - d / 100);
 
   return (
-    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets} accent="teal" customResult={
+    <CalculatorShell title="Discount Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="teal" customResult={
       result ? (
         <div>
           <div className="flex justify-between items-end mb-3">

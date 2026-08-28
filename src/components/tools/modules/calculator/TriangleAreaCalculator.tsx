@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Calculator } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function TriangleAreaCalculator() {
@@ -39,7 +40,7 @@ export default function TriangleAreaCalculator() {
     }
   }, [method, base, height, sideA, sideB, sideC, angle]);
   return (
-    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result={result} onCalculate={calc}>
+    <CalculatorShell title="Triangle Area Calculator" icon={<Calculator className="w-5 h-5" />} accent="emerald" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Method</label><select className={inputCls} value={method} onChange={e => setMethod(e.target.value as 'baseheight'|'sides'|'sas')}><option value="baseheight">Base & Height</option><option value="sides">Three sides (SSS)</option><option value="sas">Two sides & angle (SAS)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

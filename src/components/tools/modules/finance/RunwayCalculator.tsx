@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function RunwayCalculator() {
@@ -28,7 +29,7 @@ export default function RunwayCalculator() {
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell title="Runway Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
+    <CalculatorShell title="Runway Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
       result ? (
         <div className="space-y-2">
           <div className="text-center">

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function ChildHeightPredictor() {
@@ -27,7 +28,7 @@ export default function ChildHeightPredictor() {
     setResult(`Mid-parental height: ${midParent.toFixed(1)} cm\nPredicted adult height: ${Math.round(predicted)} cm (${(predicted / 2.54).toFixed(1)} in)`);
   }, [parentHeight, motherHeight, gender, childAge, childHeight]);
   return (
-    <CalculatorShell title="Child Height Predictor" accent="cyan" result={result} onCalculate={calc}>
+    <CalculatorShell title="Child Height Predictor" icon={<Heart className="w-5 h-5" />} accent="cyan" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Father height (cm)</label><input className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
         <div><label className={labelCls}>Mother height (cm)</label><input className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>

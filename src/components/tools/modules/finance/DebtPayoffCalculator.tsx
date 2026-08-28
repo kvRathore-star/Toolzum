@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function DebtPayoffCalculator() {
@@ -49,7 +50,7 @@ export default function DebtPayoffCalculator() {
     }
   }
   return (
-    <CalculatorShell title="Debt Payoff Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
+    <CalculatorShell title="Debt Payoff Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
       result && payoffMonths > 0 ? (
         <div>
           <div className="px-4 py-3">
