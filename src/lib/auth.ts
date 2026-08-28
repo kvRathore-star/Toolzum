@@ -47,6 +47,9 @@ export function createAuth(env: AuthEnv) {
         plan: { type: "string", defaultValue: "free" },
       },
     },
+    advanced: {
+      disableCSRF: true,
+    },
   });
 
   authCache.set(env, instance);
