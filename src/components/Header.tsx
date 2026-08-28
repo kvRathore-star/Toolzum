@@ -7,7 +7,7 @@ import { getMegamenuIcon, getMegamenuIconColor } from "@/registry/megamenu-icons
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check, User, LogOut, LayoutDashboard } from "lucide-react";
+import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check, User, LogOut, LayoutDashboard, Star } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { useSession, signOut } from "@/lib/auth-client";
@@ -36,6 +36,18 @@ export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
   const isSignedIn = !!session?.user;
+
+  // Close user menu on outside click
+  useEffect(() => {
+    if (!userMenuOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [userMenuOpen]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted flag before attaching scroll listener (avoids hydration mismatch)
@@ -426,7 +438,6 @@ export function Header() {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    onMouseLeave={() => setUserMenuOpen(false)}
                     className="flex items-center gap-2 px-2 py-1.5 rounded-[var(--radius-md)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer"
                   >
                     <div className="w-7 h-7 rounded-full bg-[var(--accent)]/15 flex items-center justify-center">
@@ -469,6 +480,15 @@ export function Header() {
                           <User className="w-3.5 h-3.5" />
                           Account
                         </Link>
+                        <Link
+                          href="/dashboard/favorites"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                        >
+                          <Star className="w-3.5 h-3.5" />
+                          Favorites
+                        </Link>
+                        <div className="border-t border-[var(--border-subtle)] my-1" />
                         <button
                           onClick={async () => {
                             setUserMenuOpen(false);
@@ -490,18 +510,20 @@ export function Header() {
                 <Button variant="ghost" size="sm" asChild className="hidden lg:flex">
                   <Link href="/login" className="hover:scale-105 active:scale-95 transition-transform">Sign in</Link>
                 </Button>
-                <Button 
-                  variant="primary" 
-                  size="sm" 
-                  className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
-                  asChild
-                >
-                  <Link href="/pricing">
-                    Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
-                  </Link>
-                </Button>
               </>
             )}
+
+            {/* Get Pro — always visible */}
+            <Button 
+              variant="primary" 
+              size="sm" 
+              className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
+              asChild
+            >
+              <Link href="/pricing">
+                Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
 
@@ -557,6 +579,13 @@ export function Header() {
                     className="block px-4 py-3 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    href="/dashboard/favorites"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                  >
+                    Favorites
                   </Link>
                   <button
                     onClick={async () => {

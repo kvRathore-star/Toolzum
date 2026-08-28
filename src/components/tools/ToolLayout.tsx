@@ -25,7 +25,7 @@ import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
 
 const BULK_PRESET_SLUGS = new Set([
-  'bulk-audio-converter', 'bulk-audio-normalizer', 'bulk-csv-excel-to-json',
+  'bulk-audio-conpressor', 'bulk-audio-normalizer', 'bulk-csv-excel-to-json',
   'bulk-ebook-converter', 'bulk-exif-stripper-injector', 'bulk-face-anonymizer',
   'bulk-font-subsetter', 'bulk-heic-to-jpg', 'bulk-heic-converter',
   'bulk-image-compressor', 'bulk-image-resizer', 'bulk-image-to-pdf',
@@ -34,6 +34,11 @@ const BULK_PRESET_SLUGS = new Set([
   'bulk-pdf-form-extractor', 'bulk-pdf-size-reducer', 'bulk-pdf-suite',
   'bulk-regex-extractor-replacer', 'bulk-subtitle-time-shifter',
   'bulk-svg-to-png', 'bulk-image-converter', 'image-compressor', 'image-resizer',
+]);
+
+// Categories where the download quota badge is relevant (tools that produce file downloads)
+const DOWNLOAD_CATEGORIES = new Set([
+  'image', 'pdf', 'video', 'audio', 'converter', 'transcription',
 ]);
 
 interface ToolLayoutProps {
@@ -205,7 +210,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <ShareTool title={title} slug={slug} category={category} />
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <FavoriteStarButton slug={slug} />
-            {!hideDownloadQuota && <DownloadQuotaBadge />}
+            {!hideDownloadQuota && DOWNLOAD_CATEGORIES.has(category) && <DownloadQuotaBadge />}
           </div>
 
           {/* Tool Container */}
