@@ -130,6 +130,19 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     }
   }, [tool, recordTool]);
 
+  // Log usage to server for signed-in users (once per tool visit)
+  useEffect(() => {
+    if (!tool || !isSignedIn) return;
+    const key = `usage-logged-${tool.slug}`;
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, "1");
+    fetch("/api/user/log-usage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ toolSlug: tool.slug, toolName: tool.name, category: tool.category }),
+    }).catch(() => {});
+  }, [tool, isSignedIn]);
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") {

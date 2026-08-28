@@ -17,6 +17,7 @@ import {
   Sparkles,
   BarChart3,
   Layers,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
 import { getCategoryTheme } from "@/lib/categoryTheme";
@@ -166,7 +167,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {/* Credits */}
           <div className="group bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-5 hover:border-[var(--accent)]/30 transition-all duration-200">
             <div className="flex items-center justify-between mb-3">
@@ -214,6 +215,30 @@ export default function DashboardPage() {
                 : `${activity?.totalToolsUsed ?? 0} all time`}
             </div>
           </div>
+
+          {/* Favorites */}
+          <Link
+            href="/dashboard/favorites"
+            className="group bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-5 hover:border-amber-400/30 transition-all duration-200"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-9 h-9 rounded-lg bg-amber-400/10 flex items-center justify-center">
+                <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              </div>
+              <span className="text-[10px] font-medium text-[var(--text-muted)] uppercase tracking-wider">
+                Favorites
+              </span>
+            </div>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-sm font-medium group-hover:text-amber-400 transition-colors">
+                View saved tools
+              </span>
+            </div>
+            <div className="mt-3 flex items-center gap-1 text-[10px] text-[var(--text-muted)]">
+              <ArrowUpRight className="w-3 h-3" />
+              Manage favorites
+            </div>
+          </Link>
 
           {/* Plan */}
           <div className="group bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-5 hover:border-[var(--warning)]/30 transition-all duration-200">

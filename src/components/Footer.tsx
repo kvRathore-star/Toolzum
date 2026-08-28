@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Globe, Moon, Sun, Check } from "lucide-react";
+import { Globe, Moon, Sun, Check, User, LayoutDashboard, Star } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useSession } from "@/lib/auth-client";
 
 const LANGUAGES = [
   { code: "en", label: "English", native: "English" },
@@ -62,6 +63,7 @@ function LanguageSelector() {
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const { theme, setTheme } = useTheme();
+  const { data: session } = useSession();
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -125,16 +127,41 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Legal */}
-          <div className="flex flex-col gap-4">
-            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
-            <ul className="flex flex-col gap-3">
-              <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
-              <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
-              <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
-            </ul>
+          {/* Column 4: Account (signed in) or Legal (signed out) */}
+          {session?.user ? (
+            <div className="flex flex-col gap-4">
+              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
+              <ul className="flex flex-col gap-3">
+                <li><Link href="/dashboard" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><LayoutDashboard className="w-3.5 h-3.5" /> Dashboard</Link></li>
+                <li><Link href="/dashboard/favorites" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><Star className="w-3.5 h-3.5" /> Favorites</Link></li>
+                <li><Link href="/dashboard/account" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><User className="w-3.5 h-3.5" /> My Account</Link></li>
+              </ul>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-4">
+              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
+              <ul className="flex flex-col gap-3">
+                <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
+                <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
+                <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Legal row — always visible when signed in */}
+        {session?.user && (
+          <div className="mb-12">
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em] mb-4">Legal</p>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <Link href="/privacy-policy" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link>
+              <Link href="/cookies" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link>
+              <Link href="/terms" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link>
+              <Link href="/security" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link>
+            </div>
           </div>
+        )}
         </div>
 
         {/* Bottom Bar */}
