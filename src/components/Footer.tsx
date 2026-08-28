@@ -76,7 +76,7 @@ export function Footer() {
     <footer className="bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] text-[var(--text-secondary)] py-16">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top 4 Columns */}
+        {/* Top Columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           
           {/* Column 1: Brand */}
@@ -127,17 +127,8 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Account (signed in) or Legal (signed out) */}
-          {session?.user ? (
-            <div className="flex flex-col gap-4">
-              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
-              <ul className="flex flex-col gap-3">
-                <li><Link href="/dashboard" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><LayoutDashboard className="w-3.5 h-3.5" /> Dashboard</Link></li>
-                <li><Link href="/dashboard/favorites" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><Star className="w-3.5 h-3.5" /> Favorites</Link></li>
-                <li><Link href="/dashboard/account" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><User className="w-3.5 h-3.5" /> My Account</Link></li>
-              </ul>
-            </div>
-          ) : (
+          {/* Column 4: Legal + Account when signed in */}
+          <div className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
               <ul className="flex flex-col gap-3">
@@ -147,21 +138,18 @@ export function Footer() {
                 <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
               </ul>
             </div>
-          )}
-        </div>
-
-        {/* Legal row — always visible when signed in */}
-        {session?.user && (
-          <div className="mb-12">
-            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em] mb-4">Legal</p>
-            <div className="flex flex-wrap gap-4 text-sm">
-              <Link href="/privacy-policy" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link>
-              <Link href="/cookies" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link>
-              <Link href="/terms" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link>
-              <Link href="/security" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link>
-            </div>
+            {session?.user && (
+              <div className="flex flex-col gap-4">
+                <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
+                <ul className="flex flex-col gap-3">
+                  <li><Link href="/dashboard" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><LayoutDashboard className="w-3.5 h-3.5" /> Dashboard</Link></li>
+                  <li><Link href="/dashboard/favorites" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><Star className="w-3.5 h-3.5" /> Favorites</Link></li>
+                  <li><Link href="/dashboard/account" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><User className="w-3.5 h-3.5" /> My Account</Link></li>
+                </ul>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
