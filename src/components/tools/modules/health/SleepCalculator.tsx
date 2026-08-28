@@ -21,7 +21,19 @@ export default function SleepCalculator() {
     setResult(cycles.map(c => `${c.cycles} cycles (${c.cycles * 1.5}h): ${c.time}`).join('\n'));
   }, [wakeTime]);
   return (
-    <CalculatorShell title="Sleep Calculator" accent="purple" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Sleep Calculator"
+      accent="purple"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: '6:30 AM', apply: () => { setWakeTime('06:30'); } },
+        { label: '7:00 AM', apply: () => { setWakeTime('07:00'); } },
+        { label: '5:30 AM', apply: () => { setWakeTime('05:30'); } },
+      ]}
+      downloadData={`WakeTime,Result\n${wakeTime},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="sleep-times.csv"
+    >
       <div className="max-w-sm">
         <div><label className={labelCls}>Wake time</label><input className={inputCls} type="time" value={wakeTime} onChange={e => setWakeTime(e.target.value)} /></div>
       </div>

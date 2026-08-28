@@ -43,7 +43,19 @@ export default function TdsCalculatorIndia() {
     setResult(`Gross income: \u20b9${inc.toLocaleString('en-IN')}\nTaxable: \u20b9${taxable.toLocaleString('en-IN')}\nTax: \u20b9${Math.round(tax).toLocaleString('en-IN')}\nHealth & edu cess (4%): \u20b9${Math.round(cess).toLocaleString('en-IN')}\nTotal tax: \u20b9${Math.round(totalTax).toLocaleString('en-IN')}\nEffective rate: ${(totalTax / inc * 100).toFixed(1)}%`);
   }, [income, age, regime]);
   return (
-    <CalculatorShell title="TDS Calculator (India)" accent="orange" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="TDS Calculator (India)"
+      accent="orange"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: '5L New Regime', apply: () => { setIncome('500000'); setAge('35'); setRegime('new'); } },
+        { label: '12L New Regime', apply: () => { setIncome('1200000'); setAge('35'); setRegime('new'); } },
+        { label: '15L Old Regime', apply: () => { setIncome('1500000'); setAge('45'); setRegime('old'); } },
+      ]}
+      downloadData={`Income,Age,Regime,Result\n${income},${age},${regime},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="tds-india.csv"
+    >
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Annual income (\u20b9)</label><input className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
         <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>

@@ -22,7 +22,7 @@ export default function FractionToDecimalCalculator() {
   const resultText = d ? `${n}/${d} = ${decimal.toFixed(6)} (${percent}%)` : 'Enter denominator';
 
   return (
-    <CalculatorShell title="Fraction to Decimal" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={d ? JSON.stringify({ fraction: `${n}/${d}`, decimal, percent: parseFloat(percent) }, null, 2) : ''} downloadFilename="fraction-decimal.json">
+    <CalculatorShell title="Fraction to Decimal" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={d ? `Fraction,Decimal,Percent\n${n}/${d},${decimal.toFixed(6)},${percent}` : ''} downloadFilename="fraction-decimal.csv">
       <div className="space-y-4">
         <div className="flex gap-2 items-center">
           <div className="flex-1">

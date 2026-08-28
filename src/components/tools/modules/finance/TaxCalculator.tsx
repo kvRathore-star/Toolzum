@@ -31,7 +31,19 @@ export default function TaxCalculator() {
     setResult(`Gross income: $${inc.toLocaleString()}\nTaxable income: $${taxable.toLocaleString()}\nFederal: $${Math.round(federalTax).toLocaleString()}\nFICA: $${Math.round(fica).toLocaleString()}\nState: $${Math.round(stateTaxAmount).toLocaleString()}\nTotal tax: $${Math.round(totalTax).toLocaleString()}\nEffective rate: ${effectiveRate.toFixed(1)}%\nTake-home: $${Math.round(takeHome).toLocaleString()} (${(takeHome / inc * 100).toFixed(0)}%)`);
   }, [income, filingStatus, stateTax, deductions]);
   return (
-    <CalculatorShell title="Tax Calculator (US 2025)" accent="indigo" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Tax Calculator (US 2025)"
+      accent="indigo"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: '60k Single', apply: () => { setIncome('60000'); setFilingStatus('single'); setStateTax('5'); setDeductions('14600'); } },
+        { label: '150k Married', apply: () => { setIncome('150000'); setFilingStatus('married'); setStateTax('5'); setDeductions('29200'); } },
+        { label: '100k Head', apply: () => { setIncome('100000'); setFilingStatus('head'); setStateTax('5'); setDeductions('21900'); } },
+      ]}
+      downloadData={`Income,FilingStatus,StateTaxPct,Deductions,Result\n${income},${filingStatus},${stateTax},${deductions},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="tax-calculation.csv"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Annual income ($)</label><input className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
         <div><label className={labelCls}>Filing status</label><select className={inputCls} value={filingStatus} onChange={e => setFilingStatus(e.target.value as 'single'|'married'|'head')}><option value="single">Single</option><option value="married">Married filing jointly</option><option value="head">Head of household</option></select></div>

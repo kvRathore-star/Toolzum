@@ -27,7 +27,19 @@ export default function CalorieCalculator() {
     setResult(`BMR: ${Math.round(bmr)} kcal\nTDEE: ${Math.round(tdee)} kcal\n${goal === 'maintain' ? 'Maintenance' : goal === 'lose' ? 'Weight loss (-0.5kg/wk)' : 'Weight gain (+0.5kg/wk)'}: ${Math.round(goalCals)} kcal`);
   }, [gender, age, weight, height, activity, goal]);
   return (
-    <CalculatorShell title="Calorie Calculator (TDEE)" accent="emerald" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Calorie Calculator (TDEE)"
+      accent="emerald"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: 'Avg Male', apply: () => { setGender('male'); setAge('30'); setWeight('70'); setHeight('170'); setActivity('1.55'); setGoal('maintain'); } },
+        { label: 'Avg Female', apply: () => { setGender('female'); setAge('30'); setWeight('60'); setHeight('165'); setActivity('1.55'); setGoal('maintain'); } },
+        { label: 'Active Male', apply: () => { setGender('male'); setAge('25'); setWeight('80'); setHeight('180'); setActivity('1.725'); setGoal('lose'); } },
+      ]}
+      downloadData={`Gender,Age,Weight,Height,Activity,Goal,Result\n${gender},${age},${weight},${height},${activity},${goal},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="calorie-tdee.csv"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
         <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>

@@ -18,7 +18,19 @@ export default function SimpleInterestCalculator() {
     setResult(`Simple Interest: $${interest.toFixed(2)}\nTotal amount: $${total.toFixed(2)}\nAnnual interest: $${(p * r / 100).toFixed(2)}`);
   }, [principal, rate, time]);
   return (
-    <CalculatorShell title="Simple Interest Calculator" accent="indigo" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Simple Interest Calculator"
+      accent="indigo"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: '$10k, 5%, 3yr', apply: () => { setPrincipal('10000'); setRate('5'); setTime('3'); } },
+        { label: '$50k, 8%, 5yr', apply: () => { setPrincipal('50000'); setRate('8'); setTime('5'); } },
+        { label: '$100k, 6%, 10yr', apply: () => { setPrincipal('100000'); setRate('6'); setTime('10'); } },
+      ]}
+      downloadData={`Principal,Rate,Time_Years,Interest,Total\n${principal},${rate},${time},${(parseFloat(principal) || 0) * ((parseFloat(rate) || 0) / 100) * (parseFloat(time) || 0)},${(parseFloat(principal) || 0) + (parseFloat(principal) || 0) * ((parseFloat(rate) || 0) / 100) * (parseFloat(time) || 0)}`}
+      downloadFilename="simple-interest.csv"
+    >
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Principal ($)</label><input className={inputCls} type="number" value={principal} onChange={e => setPrincipal(e.target.value)} /></div>
         <div><label className={labelCls}>Rate (%)</label><input className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>

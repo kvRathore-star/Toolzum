@@ -22,7 +22,19 @@ export default function HeartRateZoneCalculator() {
     setResult(`Max HR: ${maxHr} bpm\nHR Reserve: ${reserve} bpm` + zones.map(z => `\n${z.name}: ${z.min}-${z.max} bpm`).join(''));
   }, [age, restHr]);
   return (
-    <CalculatorShell title="Heart Rate Zone Calculator" accent="rose" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Heart Rate Zone Calculator"
+      accent="rose"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: 'Athlete 25', apply: () => { setAge('25'); setRestHr('60'); } },
+        { label: 'Average 35', apply: () => { setAge('35'); setRestHr('65'); } },
+        { label: 'Average 45', apply: () => { setAge('45'); setRestHr('72'); } },
+      ]}
+      downloadData={`Age,RestingHR,Result\n${age},${restHr},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="heart-rate-zones.csv"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Age</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Resting HR (bpm)</label><input className={inputCls} type="number" value={restHr} onChange={e => setRestHr(e.target.value)} /></div>

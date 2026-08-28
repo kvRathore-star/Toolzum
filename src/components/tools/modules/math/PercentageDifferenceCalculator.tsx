@@ -47,6 +47,8 @@ export default function PercentageDifferenceCalculator() {
       onCalculate={() => {}}
       presets={presets}
       accent="emerald"
+      downloadData={`ValueA,ValueB,Average,AbsDiff,PercentDiff\n${a},${b},${avg.toFixed(2)},${absDiff.toFixed(2)},${diff.toFixed(2)}`}
+      downloadFilename="percentage-difference.csv"
     >
       <div className="space-y-4">
         <div className="flex gap-2 items-end">

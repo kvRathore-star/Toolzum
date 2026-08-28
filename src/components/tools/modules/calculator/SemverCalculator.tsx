@@ -24,7 +24,19 @@ export default function SemverCalculator() {
     setResult(`Comparison: ${diff}\n${v1} -> major: ${bumpMajor}\n${v1} -> minor: ${bumpMinor}\n${v1} -> patch: ${bumpPatch}`);
   }, [v1, v2]);
   return (
-    <CalculatorShell title="Semver Calculator" accent="sky" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Semver Calculator"
+      accent="sky"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: '1.0.0 vs 2.0.0', apply: () => { setV1('1.0.0'); setV2('2.0.0'); } },
+        { label: '1.2.3 vs 1.5.0', apply: () => { setV1('1.2.3'); setV2('1.5.0'); } },
+        { label: '3.1.0 vs 3.1.0', apply: () => { setV1('3.1.0'); setV2('3.1.0'); } },
+      ]}
+      downloadData={`Version1,Version2,Result\n${v1},${v2},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="semver-comparison.csv"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Version 1</label><input className={inputCls} value={v1} onChange={e => setV1(e.target.value)} placeholder="1.0.0" /></div>
         <div><label className={labelCls}>Version 2</label><input className={inputCls} value={v2} onChange={e => setV2(e.target.value)} placeholder="2.0.0" /></div>

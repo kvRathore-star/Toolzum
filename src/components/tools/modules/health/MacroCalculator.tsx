@@ -21,7 +21,19 @@ export default function MacroCalculator() {
     setResult(`Protein: ${Math.round(proteinG)}g (${Math.round(proteinG * 4)} kcal)\nCarbs: ${Math.round(carbsG)}g (${Math.round(carbsG * 4)} kcal)\nFat: ${Math.round(fatG)}g (${Math.round(fatG * 9)} kcal)`);
   }, [calories, proteinPct, carbsPct, fatPct]);
   return (
-    <CalculatorShell title="Macro Calculator" accent="lime" result={result} onCalculate={calc}>
+    <CalculatorShell
+      title="Macro Calculator"
+      accent="lime"
+      result={result}
+      onCalculate={calc}
+      presets={[
+        { label: 'Balanced', apply: () => { setCalories('2000'); setProteinPct('30'); setCarbsPct('40'); setFatPct('30'); } },
+        { label: 'Keto', apply: () => { setCalories('2000'); setProteinPct('25'); setCarbsPct('5'); setFatPct('70'); } },
+        { label: 'Muscle gain', apply: () => { setCalories('2500'); setProteinPct('35'); setCarbsPct('45'); setFatPct('20'); } },
+      ]}
+      downloadData={`Calories,ProteinPct,CarbsPct,FatPct,Result\n${calories},${proteinPct},${carbsPct},${fatPct},${result.replace(/\n/g, ' | ')}`}
+      downloadFilename="macro-breakdown.csv"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Daily calories</label><input className={inputCls} type="number" value={calories} onChange={e => setCalories(e.target.value)} /></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

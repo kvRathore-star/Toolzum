@@ -35,7 +35,7 @@ export default function GreatestCommonFactorCalculator() {
   })();
 
   return (
-    <CalculatorShell title="GCF / GCD Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="blue">
+    <CalculatorShell title="GCF / GCD Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={`Number1,Number2,GCF,LCM,AreCoprime\n${a},${b},${result},${na && nb ? (na * nb / result) : ''},${result === 1 ? 'Yes' : 'No'}`} downloadFilename="gcf-calculation.csv">
       <div className="space-y-4">
         <div className="flex gap-2">
           <div className="flex-1">
