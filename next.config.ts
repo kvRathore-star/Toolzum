@@ -6,13 +6,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: true,
   async redirects() {
-    return [
-      {
-        source: '/sign-in',
-        destination: '/login',
-        permanent: true,
-      },
-    ];
+    return [];
   },
   async headers() {
     return [

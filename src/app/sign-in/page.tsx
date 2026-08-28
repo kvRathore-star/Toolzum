@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { signIn } from "@/lib/auth-client";
 
-export default function LoginPage() {
+export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -41,11 +41,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] relative overflow-hidden flex items-center justify-center">
-      {/* Ambient glow */}
       <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent-ink)]/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-[var(--success)]/5 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Grid background */}
       <div className="absolute inset-0 z-0 flex justify-center pointer-events-none opacity-[0.03]">
         <div
           className="w-full max-w-[1280px] h-full"
@@ -58,12 +56,10 @@ export default function LoginPage() {
       </div>
 
       <div className="relative z-10 w-full max-w-[420px] px-4">
-        {/* Card */}
         <div
           className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 sm:p-10"
           style={{ borderRadius: "var(--radius-xl)" }}
         >
-          {/* Header */}
           <div className="text-center mb-8">
             <div
               className="inline-flex items-center justify-center w-12 h-12 bg-[var(--accent-ink)]/10 mb-5"
@@ -79,9 +75,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
@@ -98,13 +92,13 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
+                  required
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-4 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
               </div>
             </div>
 
-            {/* Password */}
             <div className="space-y-1.5">
               <label
                 htmlFor="password"
@@ -121,6 +115,7 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   autoComplete="current-password"
+                  required
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-10 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
@@ -130,16 +125,11 @@ export default function LoginPage() {
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                   tabIndex={-1}
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            {/* Forgot password */}
             <div className="flex items-center justify-end">
               <Link
                 href="/forgot-password/"
@@ -149,14 +139,12 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            {/* Submit */}
             <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading}>
               {loading ? "Signing in..." : "Sign In"}
               {!loading && <ArrowRight className="w-4 h-4" />}
             </Button>
           </form>
 
-          {/* Divider */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-[var(--border-subtle)]" />
             <span className="text-xs text-[var(--text-muted)] font-medium uppercase tracking-wide">
@@ -165,7 +153,6 @@ export default function LoginPage() {
             <div className="flex-1 h-px bg-[var(--border-subtle)]" />
           </div>
 
-          {/* Social buttons */}
           <div className="flex flex-col gap-3">
             <button
               type="button"
@@ -179,7 +166,6 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* Footer */}
           <p className="text-center text-xs text-[var(--text-muted)] mt-6">
             Don&apos;t have an account?{" "}
             <Link

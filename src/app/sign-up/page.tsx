@@ -6,34 +6,45 @@ import {
   Lock,
   Eye,
   EyeOff,
-  LogIn,
+  UserPlus,
   Globe,
   ArrowRight,
+  User,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { signIn } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 
-export default function LoginPage() {
+export default function SignUpPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
     setLoading(true);
     try {
-      const result = await signIn.email({ email, password });
+      const result = await signUp.email({ name, email, password });
       if (result.error) {
-        toast.error(result.error.message || "Invalid credentials");
+        toast.error(result.error.message || "Failed to create account");
       } else {
-        toast.success("Signed in successfully");
+        toast.success("Account created! Check your email to verify.");
         window.location.href = "/dashboard";
       }
     } catch {
-      toast.error("Failed to sign in. Check your credentials.");
+      toast.error("Failed to create account. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -41,11 +52,9 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] relative overflow-hidden flex items-center justify-center">
-      {/* Ambient glow */}
       <div className="absolute top-[-10%] left-1/4 w-[500px] h-[500px] bg-[var(--accent-ink)]/10 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-1/4 w-[600px] h-[600px] bg-[var(--success)]/5 blur-[150px] rounded-full pointer-events-none" />
 
-      {/* Grid background */}
       <div className="absolute inset-0 z-0 flex justify-center pointer-events-none opacity-[0.03]">
         <div
           className="w-full max-w-[1280px] h-full"
@@ -58,30 +67,49 @@ export default function LoginPage() {
       </div>
 
       <div className="relative z-10 w-full max-w-[420px] px-4">
-        {/* Card */}
         <div
           className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 sm:p-10"
           style={{ borderRadius: "var(--radius-xl)" }}
         >
-          {/* Header */}
           <div className="text-center mb-8">
             <div
               className="inline-flex items-center justify-center w-12 h-12 bg-[var(--accent-ink)]/10 mb-5"
               style={{ borderRadius: "var(--radius-lg)" }}
             >
-              <LogIn className="w-5 h-5 text-[var(--accent)]" />
+              <UserPlus className="w-5 h-5 text-[var(--accent)]" />
             </div>
             <h1 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl tracking-tight mb-2">
-              Welcome Back
+              Create Account
             </h1>
             <p className="text-[var(--text-secondary)] text-sm">
-              Sign in to access your account
+              Sign up for a free account
             </p>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email */}
+            <div className="space-y-1.5">
+              <label
+                htmlFor="name"
+                className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase"
+              >
+                Name
+              </label>
+              <div className="relative">
+                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)] pointer-events-none" />
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                  autoComplete="name"
+                  required
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-4 h-11 text-sm"
+                  style={{ borderRadius: "var(--radius-md)" }}
+                />
+              </div>
+            </div>
+
             <div className="space-y-1.5">
               <label
                 htmlFor="email"
@@ -98,13 +126,13 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
+                  required
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-4 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
               </div>
             </div>
 
-            {/* Password */}
             <div className="space-y-1.5">
               <label
                 htmlFor="password"
@@ -119,8 +147,10 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  autoComplete="current-password"
+                  placeholder="At least 8 characters"
+                  autoComplete="new-password"
+                  required
+                  minLength={8}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-10 h-11 text-sm"
                   style={{ borderRadius: "var(--radius-md)" }}
                 />
@@ -130,33 +160,41 @@ export default function LoginPage() {
                   className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                   tabIndex={-1}
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-4 h-4" />
-                  ) : (
-                    <Eye className="w-4 h-4" />
-                  )}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
             </div>
 
-            {/* Forgot password */}
-            <div className="flex items-center justify-end">
-              <Link
-                href="/forgot-password/"
-                className="text-xs text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors"
+            <div className="space-y-1.5">
+              <label
+                htmlFor="confirmPassword"
+                className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase"
               >
-                Forgot password?
-              </Link>
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)] pointer-events-none" />
+                <input
+                  id="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter password"
+                  autoComplete="new-password"
+                  required
+                  minLength={8}
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none transition-all duration-150 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] pl-10 pr-4 h-11 text-sm"
+                  style={{ borderRadius: "var(--radius-md)" }}
+                />
+              </div>
             </div>
 
-            {/* Submit */}
             <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading}>
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? "Creating account..." : "Create Account"}
               {!loading && <ArrowRight className="w-4 h-4" />}
             </Button>
           </form>
 
-          {/* Divider */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-[var(--border-subtle)]" />
             <span className="text-xs text-[var(--text-muted)] font-medium uppercase tracking-wide">
@@ -165,28 +203,26 @@ export default function LoginPage() {
             <div className="flex-1 h-px bg-[var(--border-subtle)]" />
           </div>
 
-          {/* Social buttons */}
           <div className="flex flex-col gap-3">
             <button
               type="button"
-              aria-label="Sign in with Google"
+              aria-label="Sign up with Google"
               onClick={() => signIn.social({ provider: "google" })}
               className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
               style={{ borderRadius: "var(--radius-md)" }}
             >
               <Globe className="w-4 h-4" />
-              Sign in with Google
+              Sign up with Google
             </button>
           </div>
 
-          {/* Footer */}
           <p className="text-center text-xs text-[var(--text-muted)] mt-6">
-            Don&apos;t have an account?{" "}
+            Already have an account?{" "}
             <Link
-              href="/sign-up/"
+              href="/sign-in/"
               className="text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors font-medium"
             >
-              Create one
+              Sign in
             </Link>
           </p>
         </div>
