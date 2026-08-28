@@ -162,7 +162,6 @@ export function Footer() {
             </div>
           </div>
         )}
-        </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
