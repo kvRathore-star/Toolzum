@@ -19,7 +19,7 @@ import {
   Layers,
 } from "lucide-react";
 import Link from "next/link";
-import { categoryTheme } from "@/lib/categoryTheme";
+import { getCategoryTheme } from "@/lib/categoryTheme";
 
 interface ActivityItem {
   toolSlug: string;
@@ -69,9 +69,12 @@ function timeAgo(unix: number): string {
 
 function getCategoryIcon(category: string | null) {
   if (!category) return Layers;
-  const theme = categoryTheme[category.toLowerCase()];
-  if (!theme) return Layers;
-  return theme.icon;
+  try {
+    const theme = getCategoryTheme(category);
+    return theme.icon;
+  } catch {
+    return Layers;
+  }
 }
 
 export default function DashboardPage() {
