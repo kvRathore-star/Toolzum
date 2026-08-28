@@ -3,6 +3,11 @@
 import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalculatorShell } from '../shared/CalculatorShell';
+import { Code } from 'lucide-react';
+
+const labelCls = "text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider";
+const inputCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2";
 
 function toUnicode(ch: string): string {
   const code = ch.codePointAt(0)!;
@@ -48,68 +53,41 @@ export default function UnicodeViewer() {
     }
   };
 
-  return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <textarea
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        placeholder="Type or paste any text here..."
-        className="w-full h-[120px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[#7c3aed] transition-colors"
-      />
-
-      <div className="grid gap-4">
-        {/* Code Points */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Code Points (U+XXXX)</h3>
-            <button
-              onClick={() => copy(allCodePoints, 'Code points')}
-              className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors"
-            >
-              Copy
-            </button>
-          </div>
-          <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
-            {allCodePoints || <span className="text-[var(--text-muted)]">—</span>}
-          </p>
+  const customResult = (
+    <div className="space-y-4">
+      <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <h3 className={labelCls}>Code Points (U+XXXX)</h3>
+          <button onClick={() => copy(allCodePoints, 'Code points')} className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
         </div>
+        <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
+          {allCodePoints || <span className="text-[var(--text-muted)]">—</span>}
+        </p>
+      </div>
 
-        {/* HTML Entities */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">HTML Entities (&#XXXX;)</h3>
-            <button
-              onClick={() => copy(allHtmlEntities, 'HTML entities')}
-              className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors"
-            >
-              Copy
-            </button>
-          </div>
-          <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
-            {allHtmlEntities || <span className="text-[var(--text-muted)]">—</span>}
-          </p>
+      <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <h3 className={labelCls}>HTML Entities (&#XXXX;)</h3>
+          <button onClick={() => copy(allHtmlEntities, 'HTML entities')} className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
         </div>
+        <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
+          {allHtmlEntities || <span className="text-[var(--text-muted)]">—</span>}
+        </p>
+      </div>
 
-        {/* Percent-encoded */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Percent-encoded (%XX)</h3>
-            <button
-              onClick={() => copy(allPercentEncoded, 'Percent-encoded')}
-              className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors"
-            >
-              Copy
-            </button>
-          </div>
-          <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
-            {allPercentEncoded || <span className="text-[var(--text-muted)]">—</span>}
-          </p>
+      <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-2">
+        <div className="flex items-center justify-between">
+          <h3 className={labelCls}>Percent-encoded (%XX)</h3>
+          <button onClick={() => copy(allPercentEncoded, 'Percent-encoded')} className="text-[10px] text-[var(--text-muted)] hover:text-[#7c3aed] font-medium px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
         </div>
+        <p className="text-sm text-[var(--text-primary)] font-mono break-all min-h-[1.25rem]">
+          {allPercentEncoded || <span className="text-[var(--text-muted)]">—</span>}
+        </p>
       </div>
 
       {chars.length > 0 && (
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3 overflow-x-auto">
-          <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Character Breakdown</h3>
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 space-y-3 overflow-x-auto">
+          <h3 className={labelCls}>Character Breakdown</h3>
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-[var(--border-subtle)] text-left">
@@ -119,7 +97,7 @@ export default function UnicodeViewer() {
               </tr>
             </thead>
             <tbody>
-              {charData.map(({ id, char, codePoint, htmlEntity, percent }) => (
+              {charData.map(({ id, char, codePoint, htmlEntity }) => (
                 <tr key={id} className="border-b border-[var(--border-subtle)]/50 last:border-0">
                   <td className="py-2 pr-4 text-[var(--text-primary)] text-lg font-mono">{char}</td>
                   <td className="py-2 pr-4 text-[var(--text-primary)] font-mono text-xs">{codePoint}</td>
@@ -131,5 +109,33 @@ export default function UnicodeViewer() {
         </div>
       )}
     </div>
+  );
+
+  return (
+    <CalculatorShell
+      title="Unicode Viewer"
+      icon={<Code className="w-5 h-5" />}
+      result={allCodePoints}
+      onCalculate={() => {}}
+      calculateLabel="Analyze"
+      resultStats={[
+        { label: 'Characters', value: String(chars.length) },
+        { label: 'Code Points', value: String(chars.length) },
+        { label: 'HTML Entities', value: String(chars.length) },
+      ]}
+      resultLabel="Unicode Analysis"
+      accent="indigo"
+      customResult={customResult}
+    >
+      <div>
+        <label className={labelCls}>Input Text</label>
+        <textarea
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="Type or paste any text here..."
+          className={`${inputCls} h-[120px] resize-none font-mono mt-2`}
+        />
+      </div>
+    </CalculatorShell>
   );
 }

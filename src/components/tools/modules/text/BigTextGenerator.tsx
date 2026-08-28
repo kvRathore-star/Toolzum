@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useMemo, useState } from 'react';
-import { Heading, Copy } from 'lucide-react';
-import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { Heading } from 'lucide-react';
+import { CalculatorShell } from '../shared/CalculatorShell';
+
+const labelCls = "text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider";
+const inputCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2";
 
 const ASCII_ALPHABET: Record<string, string[]> = {
   'A': ['  ██  ', ' ████ ', '██  ██', '██████', '██  ██', '██  ██', '██  ██'],
@@ -90,62 +92,42 @@ export default function BigTextGenerator() {
     return activeStyleObj.apply(text);
   }, [text, activeStyleObj]);
 
-  const handleCopy = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied big text!');
-  };
+  const presets = STYLES.map(style => ({
+    label: style.label,
+    apply: () => setActiveStyle(style.id),
+  }));
+
+  const customResult = output ? (
+    <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 min-h-[120px] overflow-x-auto">
+      <pre className="text-[var(--accent)] text-xs leading-tight font-mono whitespace-pre">{output}</pre>
+    </div>
+  ) : (
+    <p className="text-[var(--text-muted)] text-sm italic">Your big text will appear here...</p>
+  );
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
-        <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
-          <Heading className="w-5 h-5 text-[var(--accent)]" />
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">Big Text Generator</h3>
-        </div>
-
+      <CalculatorShell
+        title="Big Text Generator"
+        icon={<Heading className="w-5 h-5" />}
+        result={output}
+        onCalculate={() => {}}
+        calculateLabel="Generate"
+        presets={presets}
+        resultLabel="Big Text Output"
+        accent="purple"
+        customResult={customResult}
+      >
         <div className="space-y-1">
-          <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
+          <label className={labelCls}>Your Text</label>
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type something to make it BIG..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
+            className={`${inputCls} h-24 resize-none`}
           />
         </div>
-
-        <div className="flex flex-wrap gap-2">
-          {STYLES.map(style => (
-            <button
-              key={style.id}
-              onClick={() => setActiveStyle(style.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
-                activeStyle === style.id
-                  ? 'bg-[var(--accent-ink)] text-white shadow-md'
-                  : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
-              }`}
-            >
-              {style.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Output</label>
-          </div>
-          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 min-h-[120px] overflow-x-auto">
-            {output ? (
-              <pre className="text-[var(--accent)] text-xs leading-tight font-mono whitespace-pre">{output}</pre>
-            ) : (
-              <p className="text-[var(--text-muted)] text-sm italic">Your big text will appear here...</p>
-            )}
-          </div>
-          <button onClick={handleCopy} disabled={!output} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
-            <Copy className="w-4 h-4" /> Copy Big Text
-          </button>
-        </div>
-      </div>
+      </CalculatorShell>
     </div>
   );
 }

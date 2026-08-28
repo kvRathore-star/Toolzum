@@ -2,37 +2,53 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { BookOpen, GraduationCap, FileText } from 'lucide-react';
+import { CalculatorShell } from '../shared/CalculatorShell';
+
+const labelCls = "text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider";
+const inputCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2";
 
 export function StudyTimeCalculator() {
   const [hrs, setHrs] = useState('3');
   const [days, setDays] = useState('30');
   const [result, setResult] = useState('');
+  const [stats, setStats] = useState<{ label: string; value: string }[]>([]);
 
   const calc = () => {
     const total = parseFloat(hrs) * parseInt(days);
-    setResult(`Total: ${total} hours over ${days} days\nDaily: ${parseFloat(hrs).toFixed(1)}h/day\n~${Math.round(total / 30)} months at this pace`);
+    const months = Math.round(total / 30);
+    setStats([
+      { label: 'Total Hours', value: `${total}h` },
+      { label: 'Months', value: `~${months}` },
+    ]);
+    setResult(`${total}h`);
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">Study Time Calculator</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Hours per day</label>
-            <input type="number" value={hrs} onChange={e => setHrs(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-          </div>
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total days</label>
-            <input type="number" value={days} onChange={e => setDays(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-          </div>
-        </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+    <CalculatorShell
+      title="Study Time Calculator"
+      icon={<BookOpen className="w-5 h-5" />}
+      result={result}
+      onCalculate={calc}
+      calculateLabel="Calculate"
+      resultLabel="Total Study Time"
+      accent="blue"
+      resultStats={stats}
+      presets={[
+        { label: '1hr/day for 30 days', apply: () => { setHrs('1'); setDays('30'); } },
+        { label: '2hr/day for 60 days', apply: () => { setHrs('2'); setDays('60'); } },
+        { label: '3hr/day for 90 days', apply: () => { setHrs('3'); setDays('90'); } },
+      ]}
+    >
+      <div>
+        <label className={labelCls}>Hours per day</label>
+        <input type="number" value={hrs} onChange={e => setHrs(e.target.value)} className={inputCls} />
       </div>
-    </div>
+      <div>
+        <label className={labelCls}>Total days</label>
+        <input type="number" value={days} onChange={e => setDays(e.target.value)} className={inputCls} />
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -40,33 +56,43 @@ export function TestScoreCalculator() {
   const [correct, setCorrect] = useState('85');
   const [total, setTotal] = useState('100');
   const [result, setResult] = useState('');
+  const [stats, setStats] = useState<{ label: string; value: string }[]>([]);
 
   const calc = () => {
     const pct = (parseInt(correct) / parseInt(total)) * 100;
     const grade = pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : pct >= 60 ? 'D' : 'F';
-    setResult(`Score: ${correct}/${total} = ${pct.toFixed(1)}%\nGrade: ${grade}`);
+    setStats([
+      { label: 'Percentage', value: `${pct.toFixed(1)}%` },
+      { label: 'Grade', value: grade },
+    ]);
+    setResult(`${pct.toFixed(1)}%`);
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Score Calculator</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Correct answers</label>
-            <input type="number" value={correct} onChange={e => setCorrect(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-          </div>
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total questions</label>
-            <input type="number" value={total} onChange={e => setTotal(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-          </div>
-        </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+    <CalculatorShell
+      title="Test Score Calculator"
+      icon={<GraduationCap className="w-5 h-5" />}
+      result={result}
+      onCalculate={calc}
+      calculateLabel="Calculate"
+      resultLabel="Your Score"
+      accent="emerald"
+      resultStats={stats}
+      presets={[
+        { label: '85/100', apply: () => { setCorrect('85'); setTotal('100'); } },
+        { label: '45/50', apply: () => { setCorrect('45'); setTotal('50'); } },
+        { label: '180/200', apply: () => { setCorrect('180'); setTotal('200'); } },
+      ]}
+    >
+      <div>
+        <label className={labelCls}>Correct answers</label>
+        <input type="number" value={correct} onChange={e => setCorrect(e.target.value)} className={inputCls} />
       </div>
-    </div>
+      <div>
+        <label className={labelCls}>Total questions</label>
+        <input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} />
+      </div>
+    </CalculatorShell>
   );
 }
 
@@ -74,37 +100,47 @@ export function WordsPerPageCalculator() {
   const [words, setWords] = useState('500');
   const [fontSize, setFontSize] = useState('12');
   const [result, setResult] = useState('');
+  const [stats, setStats] = useState<{ label: string; value: string }[]>([]);
 
   const calc = () => {
     const w = parseInt(words);
     const fs = parseFloat(fontSize);
     const wpp = fs <= 10 ? 600 : fs <= 12 ? 500 : fs <= 14 ? 400 : 300;
     const pages = Math.ceil(w / wpp);
-    setResult(`~${wpp} words/page at ${fontSize}pt\n${w} words = ${pages} page${pages > 1 ? 's' : ''}`);
+    setStats([
+      { label: 'Pages', value: `${pages}` },
+      { label: 'Words/Page', value: `${wpp}` },
+    ]);
+    setResult(`${pages} pages`);
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">Words Per Page Calculator</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Word count</label>
-            <input type="number" value={words} onChange={e => setWords(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-          </div>
-          <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Font size</label>
-            <select value={fontSize} onChange={e => setFontSize(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
-              {[8, 9, 10, 11, 12, 14, 16, 18].map(s => <option key={s} value={s}>{s}pt</option>)}
-            </select>
-          </div>
-        </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+    <CalculatorShell
+      title="Words Per Page Calculator"
+      icon={<FileText className="w-5 h-5" />}
+      result={result}
+      onCalculate={calc}
+      calculateLabel="Calculate"
+      resultLabel="Page Estimate"
+      accent="violet"
+      resultStats={stats}
+      presets={[
+        { label: '500 words, 12pt', apply: () => { setWords('500'); setFontSize('12'); } },
+        { label: '1000 words, 14pt', apply: () => { setWords('1000'); setFontSize('14'); } },
+        { label: '2500 words, 11pt', apply: () => { setWords('2500'); setFontSize('11'); } },
+      ]}
+    >
+      <div>
+        <label className={labelCls}>Word count</label>
+        <input type="number" value={words} onChange={e => setWords(e.target.value)} className={inputCls} />
       </div>
-    </div>
+      <div>
+        <label className={labelCls}>Font size</label>
+        <select value={fontSize} onChange={e => setFontSize(e.target.value)} className={inputCls}>
+          {[8, 9, 10, 11, 12, 14, 16, 18].map(s => <option key={s} value={s}>{s}pt</option>)}
+        </select>
+      </div>
+    </CalculatorShell>
   );
 }
 
