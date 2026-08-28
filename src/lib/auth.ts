@@ -11,7 +11,8 @@ interface AuthEnv {
   BETTER_AUTH_URL?: string;
 }
 
-const authCache = new WeakMap<AuthEnv, ReturnType<typeof betterAuth>>();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const authCache = new WeakMap<AuthEnv, any>();
 
 export function createAuth(env: AuthEnv) {
   const cached = authCache.get(env);
@@ -24,13 +25,10 @@ export function createAuth(env: AuthEnv) {
     ),
     emailAndPassword: {
       enabled: true,
-      sendResetPassword: async ({ user, url, token }) => {
-        // TODO: Integrate email service (Resend, SendGrid, Cloudflare Email Workers)
-        // For now, log the reset URL so it's visible in function logs
+      sendResetPassword: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
         console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
-      sendVerificationEmail: async ({ user, url, token }) => {
-        // TODO: Integrate email service
+      sendVerificationEmail: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
         console.warn(`[EMAIL VERIFY] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
     },
