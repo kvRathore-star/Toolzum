@@ -3,6 +3,10 @@ compatibility_date = "2026-07-10"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "out"
 
+[vars]
+NEXT_PUBLIC_APP_URL = "https://toolzum.com"
+NEXT_PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAAEe0A5L_32vG3O7z"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "toolhub-db"
