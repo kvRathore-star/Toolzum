@@ -418,6 +418,97 @@ export default function AccountPage() {
           </div>
         </div>
 
+        {/* ===== FAVORITES ===== */}
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8 shadow-[var(--shadow-sm)] mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-lg font-semibold text-[var(--text-primary)] flex items-center gap-2">
+              <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+              Favorite Tools
+              {favorites.length > 0 && (
+                <span className="text-xs font-normal text-[var(--text-muted)] bg-[var(--bg-overlay)] px-2 py-0.5 rounded-full">
+                  {favorites.length}
+                </span>
+              )}
+            </h2>
+            {favorites.length > 0 && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => exportFavorites("json")}
+                  className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] flex items-center gap-1 px-2 py-1 rounded-md hover:bg-[var(--bg-overlay)] transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" /> JSON
+                </button>
+                <button
+                  onClick={() => exportFavorites("csv")}
+                  className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] flex items-center gap-1 px-2 py-1 rounded-md hover:bg-[var(--bg-overlay)] transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" /> CSV
+                </button>
+              </div>
+            )}
+          </div>
+
+          {favoritesLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-5 h-5 text-[var(--accent)] animate-spin" />
+            </div>
+          ) : favorites.length === 0 ? (
+            <div className="text-center py-12">
+              <Star className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
+              <p className="text-sm text-[var(--text-secondary)] mb-3">No favorites yet.</p>
+              <Link
+                href="/tools/"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium rounded-[var(--radius-md)] transition-colors"
+              >
+                Browse Tools <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {favorites.map(({ toolSlug }) => {
+                const tool = getClientToolBySlug(toolSlug);
+                if (!tool) return null;
+                const theme = getCategoryTheme(tool.category);
+                const Icon = theme.icon;
+                return (
+                  <div
+                    key={toolSlug}
+                    className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] hover:border-[var(--border-default)] transition-colors group"
+                  >
+                    <Link
+                      href={`/${tool.category.toLowerCase().replace(/\s+/g, "-")}/${tool.slug}`}
+                      className="flex items-center gap-3 min-w-0 flex-1"
+                    >
+                      <div className={`w-8 h-8 rounded-full ${theme.bgTint} flex items-center justify-center shrink-0`}>
+                        <Icon className={`w-4 h-4 ${theme.iconColor}`} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">
+                          {tool.name}
+                        </p>
+                        <p className="text-xs text-[var(--text-muted)] truncate">{tool.category}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-[var(--text-muted)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                    </Link>
+                    <button
+                      onClick={() => removeFavorite(toolSlug)}
+                      disabled={removingSlug === toolSlug}
+                      className="p-1.5 text-[var(--text-muted)] hover:text-[var(--danger)] hover:bg-[var(--danger)]/10 rounded-md transition-colors shrink-0 ml-2 disabled:opacity-50"
+                      title="Remove from favorites"
+                    >
+                      {removingSlug === toolSlug ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
         {/* ===== CHANGE PASSWORD ===== */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8 shadow-[var(--shadow-sm)] mb-8">
           <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-6 flex items-center gap-2">
@@ -542,97 +633,6 @@ export default function AccountPage() {
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       ) : (
                         "Revoke"
-                      )}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* ===== FAVORITES ===== */}
-        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-8 shadow-[var(--shadow-sm)] mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)] flex items-center gap-2">
-              <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
-              Favorite Tools
-              {favorites.length > 0 && (
-                <span className="text-xs font-normal text-[var(--text-muted)] bg-[var(--bg-overlay)] px-2 py-0.5 rounded-full">
-                  {favorites.length}
-                </span>
-              )}
-            </h2>
-            {favorites.length > 0 && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => exportFavorites("json")}
-                  className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] flex items-center gap-1 px-2 py-1 rounded-md hover:bg-[var(--bg-overlay)] transition-colors"
-                >
-                  <Download className="w-3.5 h-3.5" /> JSON
-                </button>
-                <button
-                  onClick={() => exportFavorites("csv")}
-                  className="text-xs text-[var(--text-muted)] hover:text-[var(--accent)] flex items-center gap-1 px-2 py-1 rounded-md hover:bg-[var(--bg-overlay)] transition-colors"
-                >
-                  <Download className="w-3.5 h-3.5" /> CSV
-                </button>
-              </div>
-            )}
-          </div>
-
-          {favoritesLoading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="w-5 h-5 text-[var(--accent)] animate-spin" />
-            </div>
-          ) : favorites.length === 0 ? (
-            <div className="text-center py-12">
-              <Star className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
-              <p className="text-sm text-[var(--text-secondary)] mb-3">No favorites yet.</p>
-              <Link
-                href="/tools/"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium rounded-[var(--radius-md)] transition-colors"
-              >
-                Browse Tools <ExternalLink className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          ) : (
-            <div className="space-y-2">
-              {favorites.map(({ toolSlug }) => {
-                const tool = getClientToolBySlug(toolSlug);
-                if (!tool) return null;
-                const theme = getCategoryTheme(tool.category);
-                const Icon = theme.icon;
-                return (
-                  <div
-                    key={toolSlug}
-                    className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] hover:border-[var(--border-default)] transition-colors group"
-                  >
-                    <Link
-                      href={`/${tool.category.toLowerCase().replace(/\s+/g, "-")}/${tool.slug}`}
-                      className="flex items-center gap-3 min-w-0 flex-1"
-                    >
-                      <div className={`w-8 h-8 rounded-full ${theme.bgTint} flex items-center justify-center shrink-0`}>
-                        <Icon className={`w-4 h-4 ${theme.iconColor}`} />
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">
-                          {tool.name}
-                        </p>
-                        <p className="text-xs text-[var(--text-muted)] truncate">{tool.category}</p>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-[var(--text-muted)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-                    </Link>
-                    <button
-                      onClick={() => removeFavorite(toolSlug)}
-                      disabled={removingSlug === toolSlug}
-                      className="p-1.5 text-[var(--text-muted)] hover:text-[var(--danger)] hover:bg-[var(--danger)]/10 rounded-md transition-colors shrink-0 ml-2 disabled:opacity-50"
-                      title="Remove from favorites"
-                    >
-                      {removingSlug === toolSlug ? (
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Trash2 className="w-4 h-4" />
                       )}
                     </button>
                   </div>
