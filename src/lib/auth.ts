@@ -1,6 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
+import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
 
 interface AuthEnv {
@@ -9,6 +10,32 @@ interface AuthEnv {
   GOOGLE_CLIENT_SECRET: string;
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
+}
+
+const SCRYPT_PARAMS = { N: 16384, r: 16, p: 1, maxmem: 128 * 16384 * 16 * 2 };
+
+async function hashPassword(password: string): Promise<string> {
+  const salt = randomBytes(16).toString("hex");
+  const key = scryptSync(password.normalize("NFKC"), salt, 64, SCRYPT_PARAMS);
+  return `${salt}:${key.toString("hex")}`;
+}
+
+async function verifyPassword({
+  hash,
+  password,
+}: {
+  hash: string;
+  password: string;
+}): Promise<boolean> {
+  const [saltHex, keyHex] = hash.split(":");
+  if (!saltHex || !keyHex) return false;
+  const derived = scryptSync(
+    password.normalize("NFKC"),
+    Buffer.from(saltHex, "hex"),
+    64,
+    SCRYPT_PARAMS
+  );
+  return timingSafeEqual(Buffer.from(keyHex, "hex"), derived);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,6 +63,10 @@ export function createAuth(env: AuthEnv) {
     ),
     emailAndPassword: {
       enabled: true,
+      password: {
+        hash: hashPassword,
+        verify: verifyPassword,
+      },
       sendResetPassword: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
         console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
