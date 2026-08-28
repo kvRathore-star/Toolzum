@@ -19,6 +19,9 @@ export function createAuth(env: AuthEnv) {
   if (cached) return cached;
 
   const instance = betterAuth({
+    secret: env.BETTER_AUTH_SECRET || "fallback-dev-secret",
+    baseURL: env.BETTER_AUTH_URL || "https://toolzum.com",
+    basePath: "/api/auth",
     database: drizzleAdapter(
       drizzle(env.DB, { schema }),
       { provider: "sqlite", schema }
