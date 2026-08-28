@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import {
   Mail,
   Lock,
@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { signUp, signIn } from "@/lib/auth-client";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function SignUpPage() {
   const [name, setName] = useState("");
@@ -23,6 +24,7 @@ export default function SignUpPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,9 +36,16 @@ export default function SignUpPage() {
       toast.error("Password must be at least 8 characters");
       return;
     }
+    if (!turnstileToken) {
+      toast.error("Please complete the verification");
+      return;
+    }
     setLoading(true);
     try {
-      const result = await signUp.email({ name, email, password });
+      const result = await signUp.email(
+        { name, email, password },
+        { headers: { "x-captcha-response": turnstileToken } }
+      );
       if (result.error) {
         toast.error(result.error.message || "Failed to create account");
       } else {
@@ -189,7 +198,15 @@ export default function SignUpPage() {
               </div>
             </div>
 
-            <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading}>
+            <div className="flex justify-center">
+              <Turnstile
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken(null)}
+              />
+            </div>
+
+            <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading || !turnstileToken}>
               {loading ? "Creating account..." : "Create Account"}
               {!loading && <ArrowRight className="w-4 h-4" />}
             </Button>

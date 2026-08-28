@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { captcha } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/d1";
 import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
@@ -10,6 +11,7 @@ interface AuthEnv {
   GOOGLE_CLIENT_SECRET: string;
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 // Reduced params: N=4096, r=8, p=1 — still memory-hard but fits Workers CPU budget (~200-400ms)
@@ -85,6 +87,12 @@ export function createAuth(env: AuthEnv) {
         plan: { type: "string", defaultValue: "free" },
       },
     },
+    plugins: [
+      captcha({
+        provider: "cloudflare-turnstile",
+        secretKey: env.TURNSTILE_SECRET_KEY || "",
+      }),
+    ],
   });
 
   authCache.set(env, instance);

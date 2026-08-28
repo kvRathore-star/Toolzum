@@ -5,19 +5,28 @@ import { Mail, ArrowRight, KeyRound } from "lucide-react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      toast.error("Please complete the verification");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch("/api/auth/forget-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "x-captcha-response": turnstileToken,
+        },
         body: JSON.stringify({
           email,
           redirectTo: "/reset-password",
@@ -114,7 +123,15 @@ export default function ForgotPasswordPage() {
                 </div>
               </div>
 
-              <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading}>
+              <div className="flex justify-center">
+                <Turnstile
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken(null)}
+                />
+              </div>
+
+              <Button type="submit" variant="primary" size="md" className="w-full gap-2" disabled={loading || !turnstileToken}>
                 {loading ? "Sending..." : "Send Reset Link"}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </Button>
