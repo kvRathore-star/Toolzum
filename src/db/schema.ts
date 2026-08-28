@@ -92,4 +92,16 @@ export const userFavorites = sqliteTable("user_favorite", {
   index("user_favorite_userId_idx").on(t.userId),
 ]);
 
+export const userToolUsage = sqliteTable("user_tool_usage", {
+  id: text("id").primaryKey(),
+  userId: text("userId").notNull().references(() => users.id, { onDelete: "cascade" }),
+  toolSlug: text("toolSlug").notNull(),
+  toolName: text("toolName").notNull(),
+  category: text("category"),
+  usedAt: integer("usedAt", { mode: "timestamp" }).notNull(),
+}, (t) => [
+  index("user_tool_usage_userId_idx").on(t.userId),
+  index("user_tool_usage_usedAt_idx").on(t.usedAt),
+]);
+
 
