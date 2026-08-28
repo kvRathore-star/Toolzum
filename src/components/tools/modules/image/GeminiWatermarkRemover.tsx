@@ -376,7 +376,7 @@ export default function GeminiWatermarkRemover() {
   }, [batch.files, outputFormat]);
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+    <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">

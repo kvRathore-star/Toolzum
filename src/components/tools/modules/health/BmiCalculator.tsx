@@ -73,7 +73,7 @@ export default function BmiCalculator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-4xl mx-auto p-6 space-y-6 animate-in fade-in duration-500">
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
         <div className="flex items-center gap-2">
           <Activity className="w-5 h-5 text-[var(--accent)]" />

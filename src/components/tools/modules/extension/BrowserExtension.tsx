@@ -37,7 +37,7 @@ export default function BrowserExtension() {
   ];
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-8">
+    <div className="p-6 space-y-8">
       {/* Hero */}
       <div className="text-center space-y-4">
         <div className="w-20 h-20 rounded-full bg-indigo-500/10 flex items-center justify-center mx-auto">

@@ -52,7 +52,7 @@ export default function RoiCalculator() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
+    <div className="max-w-4xl mx-auto p-6 space-y-6 animate-in fade-in duration-500">
       <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
         <Percent className="w-5 h-5 text-emerald-500" />
         <h3 className="text-lg font-bold text-[var(--text-primary)]">ROI Calculator</h3>

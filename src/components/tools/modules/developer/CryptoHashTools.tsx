@@ -7,7 +7,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl">
+    <div className="w-full p-6">
       <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4">{title}</h2>
       {children}
     </div>

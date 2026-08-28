@@ -54,7 +54,7 @@ export default function InvoiceGenerator() {
   };
 
   return (
-    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+    <div className="p-6 space-y-4">
       <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
         <div className="flex justify-between items-center print:hidden">
           <div className="flex items-center gap-3">
