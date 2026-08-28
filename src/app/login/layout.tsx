@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sign In",
-  alternates: { canonical: "https://toolzum.com/login" },  description:
+  description:
     "Sign in to your Toolzum account to access premium features and manage your subscription.",
+  alternates: { canonical: "https://toolzum.com/login/" },
 };
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {

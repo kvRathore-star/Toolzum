@@ -2,36 +2,52 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
 import * as schema from "@/db/schema";
-import { getRequiredEnv } from "./env";
 
-export const auth = betterAuth({
-  database: drizzleAdapter(
-    // Note: process.env.DB is populated by Cloudflare Pages / OpenNext bindings
-    drizzle(process.env.DB as unknown as D1Database, { schema }),
-    {
-      provider: "sqlite",
-      schema,
-    }
-  ),
-  emailAndPassword: {
-    enabled: true,
-  },
-  socialProviders: {
-    google: {
-      clientId: getRequiredEnv("GOOGLE_CLIENT_ID"),
-      clientSecret: getRequiredEnv("GOOGLE_CLIENT_SECRET"),
-    },
-  },
-  user: {
-    additionalFields: {
-      credits: {
-        type: "number",
-        defaultValue: 100,
+interface AuthEnv {
+  DB: D1Database;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  BETTER_AUTH_SECRET?: string;
+  BETTER_AUTH_URL?: string;
+}
+
+const authCache = new WeakMap<AuthEnv, ReturnType<typeof betterAuth>>();
+
+export function createAuth(env: AuthEnv) {
+  const cached = authCache.get(env);
+  if (cached) return cached;
+
+  const instance = betterAuth({
+    database: drizzleAdapter(
+      drizzle(env.DB, { schema }),
+      { provider: "sqlite", schema }
+    ),
+    emailAndPassword: {
+      enabled: true,
+      sendResetPassword: async ({ user, url, token }) => {
+        // TODO: Integrate email service (Resend, SendGrid, Cloudflare Email Workers)
+        // For now, log the reset URL so it's visible in function logs
+        console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
-      plan: {
-        type: "string",
-        defaultValue: "free",
+      sendVerificationEmail: async ({ user, url, token }) => {
+        // TODO: Integrate email service
+        console.warn(`[EMAIL VERIFY] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
     },
-  },
-});
+    socialProviders: {
+      google: {
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+      },
+    },
+    user: {
+      additionalFields: {
+        credits: { type: "number", defaultValue: 100 },
+        plan: { type: "string", defaultValue: "free" },
+      },
+    },
+  });
+
+  authCache.set(env, instance);
+  return instance;
+}
