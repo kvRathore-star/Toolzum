@@ -1,7 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { drizzle } from "drizzle-orm/d1";
-import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
 
 interface AuthEnv {
@@ -15,9 +14,25 @@ interface AuthEnv {
 const SCRYPT_PARAMS = { N: 16384, r: 16, p: 1, maxmem: 128 * 16384 * 16 * 2 };
 
 async function hashPassword(password: string): Promise<string> {
-  const salt = randomBytes(16).toString("hex");
-  const key = scryptSync(password.normalize("NFKC"), salt, 64, SCRYPT_PARAMS);
-  return `${salt}:${key.toString("hex")}`;
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, "0")).join("");
+
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password.normalize("NFKC")),
+    { name: "HKDF" },
+    false,
+    ["deriveBits"]
+  );
+
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: "HKDF", hash: "SHA-256", salt, info: new TextEncoder().encode("better-auth-scrypt") },
+    keyMaterial,
+    512
+  );
+
+  const keyHex = Array.from(new Uint8Array(derivedBits)).map(b => b.toString(16).padStart(2, "0")).join("");
+  return `${saltHex}:${keyHex}`;
 }
 
 async function verifyPassword({
@@ -29,13 +44,25 @@ async function verifyPassword({
 }): Promise<boolean> {
   const [saltHex, keyHex] = hash.split(":");
   if (!saltHex || !keyHex) return false;
-  const derived = scryptSync(
-    password.normalize("NFKC"),
-    Buffer.from(saltHex, "hex"),
-    64,
-    SCRYPT_PARAMS
+
+  const salt = Uint8Array.from(saltHex.match(/.{1,2}/g)!.map(h => parseInt(h, 16)));
+
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password.normalize("NFKC")),
+    { name: "HKDF" },
+    false,
+    ["deriveBits"]
   );
-  return timingSafeEqual(Buffer.from(keyHex, "hex"), derived);
+
+  const derivedBits = await crypto.subtle.deriveBits(
+    { name: "HKDF", hash: "SHA-256", salt, info: new TextEncoder().encode("better-auth-scrypt") },
+    keyMaterial,
+    512
+  );
+
+  const derivedHex = Array.from(new Uint8Array(derivedBits)).map(b => b.toString(16).padStart(2, "0")).join("");
+  return derivedHex === keyHex;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
