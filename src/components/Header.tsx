@@ -7,9 +7,10 @@ import { getMegamenuIcon, getMegamenuIconColor } from "@/registry/megamenu-icons
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check } from "lucide-react";
+import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check, User, LogOut, LayoutDashboard } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useToolHistory } from '@/hooks/useToolHistory';
+import { useSession, signOut } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { MEGAMENU_COLUMNS, SITE_STATS } from "@/registry/site-data.generated";
 
@@ -31,6 +32,10 @@ export function Header() {
   const { history } = useToolHistory();
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const isSignedIn = !!session?.user;
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- set mounted flag before attaching scroll listener (avoids hydration mismatch)
@@ -116,7 +121,6 @@ export function Header() {
     { label: "Extension", href: "/extension" },
     { label: "Pro", href: "/premium-tools" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Sign in", href: "/login" },
   ];
 
   return (
@@ -416,22 +420,88 @@ export function Header() {
           </button>
 
           <div className="hidden sm:flex items-center gap-2 lg:gap-3">
+            {isSignedIn ? (
+              <>
+                {/* User Menu */}
+                <div className="relative" ref={userMenuRef}>
+                  <button
+                    onClick={() => setUserMenuOpen(!userMenuOpen)}
+                    onMouseLeave={() => setUserMenuOpen(false)}
+                    className="flex items-center gap-2 px-2 py-1.5 rounded-[var(--radius-md)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-[var(--accent)]/15 flex items-center justify-center">
+                      <span className="text-[11px] font-semibold text-[var(--accent)]">
+                        {session.user.name?.[0]?.toUpperCase() || "U"}
+                      </span>
+                    </div>
+                    <span className="hidden lg:inline text-[13px] font-medium text-[var(--text-secondary)] max-w-[100px] truncate">
+                      {session.user.name?.split(" ")[0]}
+                    </span>
+                  </button>
 
-            <Button variant="ghost" size="sm" asChild className="hidden lg:flex">
-              <Link href="/login" className="hover:scale-105 active:scale-95 transition-transform">Sign in</Link>
-            </Button>
-            
-            {/* CTA Glow Button */}
-            <Button 
-              variant="primary" 
-              size="sm" 
-              className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
-              asChild
-            >
-              <Link href="/pricing">
-                Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
-              </Link>
-            </Button>
+                  <AnimatePresence>
+                    {userMenuOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.15 }}
+                        onMouseLeave={() => setUserMenuOpen(false)}
+                        className="absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-1.5 min-w-[180px]"
+                      >
+                        <div className="px-3 py-2 border-b border-[var(--border-subtle)] mb-1">
+                          <p className="text-[13px] font-medium text-[var(--text-primary)] truncate">{session.user.name}</p>
+                          <p className="text-[11px] text-[var(--text-muted)] truncate">{session.user.email}</p>
+                        </div>
+                        <Link
+                          href="/dashboard"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                        >
+                          <LayoutDashboard className="w-3.5 h-3.5" />
+                          Dashboard
+                        </Link>
+                        <Link
+                          href="/dashboard/account"
+                          onClick={() => setUserMenuOpen(false)}
+                          className="flex items-center gap-2.5 px-3 py-2 text-[13px] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                        >
+                          <User className="w-3.5 h-3.5" />
+                          Account
+                        </Link>
+                        <button
+                          onClick={async () => {
+                            setUserMenuOpen(false);
+                            await signOut();
+                            window.location.href = "/";
+                          }}
+                          className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-[var(--danger)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors cursor-pointer"
+                        >
+                          <LogOut className="w-3.5 h-3.5" />
+                          Sign out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" asChild className="hidden lg:flex">
+                  <Link href="/login" className="hover:scale-105 active:scale-95 transition-transform">Sign in</Link>
+                </Button>
+                <Button 
+                  variant="primary" 
+                  size="sm" 
+                  className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
+                  asChild
+                >
+                  <Link href="/pricing">
+                    Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
+                  </Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
 
@@ -479,6 +549,35 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              {isSignedIn ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={async () => {
+                      setMobileMenuOpen(false);
+                      await signOut();
+                      window.location.href = "/";
+                    }}
+                    className="block w-full text-left px-4 py-3 text-sm text-[var(--danger)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors cursor-pointer"
+                  >
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/login"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-4 py-3 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] rounded-[var(--radius-md)] transition-colors"
+                >
+                  Sign in
+                </Link>
+              )}
 
               <div className="px-4 py-3">
                 <p className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-3">Share Toolzum</p>
