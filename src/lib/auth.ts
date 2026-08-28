@@ -24,7 +24,15 @@ export function createAuth(env: AuthEnv) {
     basePath: "/api/auth",
     database: drizzleAdapter(
       drizzle(env.DB, { schema }),
-      { provider: "sqlite", schema }
+      {
+        provider: "sqlite",
+        schema: {
+          user: schema.users,
+          session: schema.sessions,
+          account: schema.accounts,
+          verification: schema.verifications,
+        },
+      }
     ),
     emailAndPassword: {
       enabled: true,
