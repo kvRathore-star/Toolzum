@@ -98,7 +98,6 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
 
   return (
     <div className="max-w-2xl mx-auto" ref={shellRef} onKeyDown={handleKeyDown}>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden" tabIndex={-1}>
         <div className="flex items-center justify-between px-6 pt-6 pb-2">
           <h1 className="text-xl font-bold text-[var(--text-primary)]">{title}</h1>
           <button
@@ -187,7 +186,6 @@ export function CalculatorShell({ title, children, result, error, onCalculate, c
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 }
