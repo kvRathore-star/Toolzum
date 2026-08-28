@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function ProteinCalculator() {
   const [weight, setWeight] = useState('80');

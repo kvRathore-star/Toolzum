@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { inputCls } from '../Calculators.shared';
 
 export default function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');

@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
+import { inputCls } from '../Calculators.shared';
 
 export default function RevenueGrowthCalculator() {
   const [current, setCurrent] = useState('120000');
