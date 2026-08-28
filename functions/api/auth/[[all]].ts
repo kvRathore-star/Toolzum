@@ -3,12 +3,13 @@ import { createAuth } from "../../../src/lib/auth";
 export const onRequest: PagesFunction = async (context) => {
   try {
     const auth = createAuth(context.env);
-    const response = await auth.handler(context.request);
+    const url = new URL(context.request.url);
+    console.log(`[AUTH REQ] ${context.request.method} ${url.pathname}${url.search}`);
 
-    if (response.status >= 400) {
-      const body = await response.clone().text();
-      console.error(`[AUTH ${response.status}] ${context.request.method} ${context.request.url}`, body);
-    }
+    const response = await auth.handler(context.request);
+    const cloned = response.clone();
+    const body = await cloned.text();
+    console.log(`[AUTH RES] status=${response.status} body=${body.substring(0, 500)}`);
 
     return response;
   } catch (e) {
