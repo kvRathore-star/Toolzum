@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS user (
   image TEXT,
   createdAt INTEGER NOT NULL,
   updatedAt INTEGER NOT NULL,
-  credits INTEGER NOT NULL DEFAULT 100,
+  credits INTEGER NOT NULL DEFAULT 10,
   plan TEXT NOT NULL DEFAULT 'free'
 );
 

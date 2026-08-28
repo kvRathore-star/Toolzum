@@ -331,7 +331,7 @@ export default function AccountPage() {
               <div>
                 <span className="text-3xl font-bold capitalize text-[var(--text-primary)]">{plan}</span>
                 <p className="text-sm text-[var(--text-muted)] mt-1">
-                  {plan === "free" ? "100 AI credits per account" : "Unlimited AI credits"}
+                  {plan === "free" ? "10 AI credits per account" : "Unlimited AI credits"}
                 </p>
               </div>
               <div className="mt-6">
@@ -344,7 +344,7 @@ export default function AccountPage() {
                 <div className="w-full bg-[var(--bg-overlay)] rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-[var(--accent-ink)] h-full transition-all duration-500"
-                    style={{ width: `${Math.min((credits / 100) * 100, 100)}%` }}
+                    style={{ width: `${Math.min((credits / 10) * 100, 100)}%` }}
                   />
                 </div>
               </div>

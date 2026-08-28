@@ -83,7 +83,7 @@ export function createAuth(env: AuthEnv) {
     },
     user: {
       additionalFields: {
-        credits: { type: "number", defaultValue: 100 },
+        credits: { type: "number", defaultValue: 10 },
         plan: { type: "string", defaultValue: "free" },
       },
     },

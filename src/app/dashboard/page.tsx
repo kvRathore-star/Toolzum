@@ -187,7 +187,7 @@ export default function DashboardPage() {
             <div className="mt-3 w-full bg-[var(--bg-overlay)] rounded-full h-1">
               <div
                 className="bg-[var(--accent)] h-full rounded-full transition-all duration-500"
-                style={{ width: `${Math.min((credits / 100) * 100, 100)}%` }}
+                style={{ width: `${Math.min((credits / 10) * 100, 100)}%` }}
               />
             </div>
           </div>

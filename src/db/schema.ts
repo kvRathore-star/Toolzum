@@ -9,7 +9,7 @@ export const users = sqliteTable("user", {
   createdAt: integer("createdAt", { mode: "timestamp" }).notNull(),
   updatedAt: integer("updatedAt", { mode: "timestamp" }).notNull(),
   // Custom fields for SaaS
-  credits: integer("credits").default(100).notNull(),
+  credits: integer("credits").default(10).notNull(),
   plan: text("plan").default("free").notNull(),
 });
 
