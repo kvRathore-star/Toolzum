@@ -27,7 +27,7 @@ export function EtaCalculator() {
     return out;
   }, [dist, speed, start]);
 
-  const copy = (txt: string) => { clipboardWrite(txt); toast.success('Copied!'); };
+  const copy = (txt: string) => { navigator.clipboard.writeText(txt); toast.success('Copied!'); };
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
