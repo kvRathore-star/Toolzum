@@ -11,6 +11,19 @@ export const onRequest: PagesFunction = async (context) => {
     const body = await cloned.text();
     console.log(`[AUTH RES] status=${response.status} body=${body.substring(0, 500)}`);
 
+    // If better-auth returned a 500 with empty body, try to get more info
+    if (response.status === 500 && !body) {
+      console.error("[AUTH 500] Empty body from better-auth handler");
+      return new Response(JSON.stringify({
+        error: "Internal auth error",
+        path: url.pathname,
+        method: context.request.method,
+      }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     return response;
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
