@@ -227,7 +227,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
           </div>
 
           {/* Tool Container */}
-          <div className="w-full text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow overflow-hidden relative">
+          <div className="w-full text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow overflow-hidden relative p-6 sm:p-8">
             <GlobalErrorBoundary>
               {BULK_PRESET_SLUGS.has(slug) ? (
                 <WorkflowPresetPanel toolSlug={slug}>
