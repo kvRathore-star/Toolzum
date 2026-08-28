@@ -97,9 +97,6 @@ export function createAuth(env: AuthEnv) {
       sendResetPassword: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
         console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
-      sendVerificationEmail: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
-        console.warn(`[EMAIL VERIFY] User: ${user.email}, URL: ${url}, Token: ${token}`);
-      },
     },
     socialProviders: {
       google: {
