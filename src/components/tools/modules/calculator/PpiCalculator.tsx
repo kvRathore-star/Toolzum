@@ -17,7 +17,7 @@ export default function PpiCalculator() {
   const customResult = (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Pixels Per Inch</div>
-      <div className="text-3xl font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
+      <div className="text-lg font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
     </div>
   );
   return (

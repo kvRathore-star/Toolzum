@@ -22,7 +22,7 @@ export default function CarLoanCalculator() {
       pmt > 0 ? (
         <div className="flex items-center justify-center gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${pmt.toFixed(0)}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${pmt.toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">per month</div>
           </div>
           <div className="h-12 w-px bg-[var(--border-subtle)]" />

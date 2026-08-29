@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -9,13 +9,13 @@ export default function ChildHeightPredictor() {
   const [gender, setGender] = useState<'male'|'female'>('male');
   const [childAge, setChildAge] = useState('8');
   const [childHeight, setChildHeight] = useState('130');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const ph = parseFloat(parentHeight) || 0;
-    const mh = parseFloat(motherHeight) || 0;
-    const age = parseFloat(childAge) || 0;
-    const ch = parseFloat(childHeight) || 0;
-    if (!ph || !mh) { setResult(''); return; }
+
+  const ph = parseFloat(parentHeight) || 0;
+  const mh = parseFloat(motherHeight) || 0;
+  const age = parseFloat(childAge) || 0;
+  const ch = parseFloat(childHeight) || 0;
+  let result = '';
+  if (ph && mh) {
     const midParent = (ph + mh) / 2;
     let predicted: number;
     if (gender === 'male') predicted = midParent + 6.5;
@@ -24,10 +24,11 @@ export default function ChildHeightPredictor() {
       const adjusted = (ch / (age >= 2 ? (100 + (age - 2) * 6.2) : 100)) * predicted;
       predicted = Math.round((predicted + adjusted) / 2);
     }
-    setResult(`Mid-parental height: ${midParent.toFixed(1)} cm\nPredicted adult height: ${Math.round(predicted)} cm (${(predicted / 2.54).toFixed(1)} in)`);
-  }, [parentHeight, motherHeight, gender, childAge, childHeight]);
+    result = `Mid-parental height: ${midParent.toFixed(1)} cm\nPredicted adult height: ${Math.round(predicted)} cm (${(predicted / 2.54).toFixed(1)} in)`;
+  }
+
   return (
-    <CalculatorShell title="Child Height Predictor" accent="cyan" result={result} onCalculate={calc}>
+    <CalculatorShell title="Child Height Predictor" accent="cyan" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Father height (cm)</label><input className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
         <div><label className={labelCls}>Mother height (cm)</label><input className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>

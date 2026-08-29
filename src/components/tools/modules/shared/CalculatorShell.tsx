@@ -225,7 +225,7 @@ export function CalculatorShell({
                   <div className="mt-1">{customResult}</div>
                 ) : result ? (
                   <>
-                    <p className={`text-4xl font-extrabold ${a.icon} mt-1`}>{result}</p>
+                    <p className={`text-xl font-bold ${a.icon} mt-1`}>{result}</p>
                     <div className="flex items-center gap-1 mt-3">
                       {downloadData && (
                         <button onClick={handleDownload} aria-label="Download result" className={`p-1.5 bg-[var(--bg-surface)] hover:${a.bg} text-[var(--text-muted)] hover:${a.icon} rounded-lg transition-colors`}>

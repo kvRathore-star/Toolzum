@@ -17,7 +17,7 @@ export default function DpiCalculator() {
   const customResult = (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Dots Per Inch</div>
-      <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
+      <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
     </div>
   );
   return (

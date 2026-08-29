@@ -22,7 +22,7 @@ export default function RunwayCalculator() {
         <div className="space-y-2">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Runway</div>
-            <div className="text-3xl font-bold" style={{ color: months > 18 ? '#34d399' : months > 6 ? '#fbbf24' : '#f87171' }}>
+            <div className="text-lg font-bold" style={{ color: months > 18 ? '#34d399' : months > 6 ? '#fbbf24' : '#f87171' }}>
               {months.toFixed(1)} <span className="text-lg">months</span>
             </div>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -7,19 +7,20 @@ export default function CyclingCalorieCalculator() {
   const [weight, setWeight] = useState('80');
   const [distance, setDistance] = useState('30');
   const [speed, setSpeed] = useState('25');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
-    const d = parseFloat(distance) || 0;
-    const s = parseFloat(speed) || 0;
-    if (!w || !d || !s) { setResult(''); return; }
+
+  const w = parseFloat(weight) || 0;
+  const d = parseFloat(distance) || 0;
+  const s = parseFloat(speed) || 0;
+  let result = '';
+  if (w && d && s) {
     const hours = d / s;
     const met = s < 16 ? 4 : s < 20 ? 6 : s < 25 ? 8 : s < 30 ? 10 : 12;
     const calories = Math.round(met * w * hours);
-    setResult(`Duration: ${hours.toFixed(1)} hours\nMET: ${met}\nCalories burned: ${calories} kcal`);
-  }, [weight, distance, speed]);
+    result = `Duration: ${hours.toFixed(1)} hours\nMET: ${met}\nCalories burned: ${calories} kcal`;
+  }
+
   return (
-    <CalculatorShell title="Cycling Calorie Calculator" accent="orange" result={result} onCalculate={calc}>
+    <CalculatorShell title="Cycling Calorie Calculator" accent="orange" result={result} auto>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Distance (km)</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>

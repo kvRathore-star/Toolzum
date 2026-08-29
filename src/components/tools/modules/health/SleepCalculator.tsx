@@ -1,13 +1,13 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SleepCalculator() {
   const [wakeTime, setWakeTime] = useState('06:30');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    if (!wakeTime) { setResult(''); return; }
+
+  let result = '';
+  if (wakeTime) {
     const [h, m] = wakeTime.split(':').map(Number);
     const wakeMin = h * 60 + m;
     const cycles = [5, 4.5, 4, 3.5, 3, 2.5, 2].map(c => {
@@ -18,14 +18,15 @@ export default function SleepCalculator() {
       const bedM = Math.round(bedMin % 60);
       return { cycles: c, time: `${bedH.toString().padStart(2, '0')}:${bedM.toString().padStart(2, '0')}` };
     });
-    setResult(cycles.map(c => `${c.cycles} cycles (${c.cycles * 1.5}h): ${c.time}`).join('\n'));
-  }, [wakeTime]);
+    result = cycles.map(c => `${c.cycles} cycles (${c.cycles * 1.5}h): ${c.time}`).join('\n');
+  }
+
   return (
     <CalculatorShell
       title="Sleep Calculator"
       accent="purple"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: '6:30 AM', apply: () => { setWakeTime('06:30'); } },
         { label: '7:00 AM', apply: () => { setWakeTime('07:00'); } },

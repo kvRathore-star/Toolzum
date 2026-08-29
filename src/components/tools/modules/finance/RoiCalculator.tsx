@@ -97,7 +97,7 @@ export default function RoiCalculator() {
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">
             <span className="text-xs text-[var(--text-muted)]">Return on Investment (ROI)</span>
-            <p className={`text-4xl font-extrabold ${roiColor}`}>{roi.toFixed(2)}%</p>
+            <p className={`text-xl font-extrabold ${roiColor}`}>{roi.toFixed(2)}%</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">{gain >= 0 ? 'Profitable' : 'Loss'}</p>
           </div>
         </div>

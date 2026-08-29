@@ -98,7 +98,7 @@ export default function MarginCalculator() {
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">
             <span className="text-xs text-[var(--text-muted)]">Target Selling Price</span>
-            <p className="text-4xl font-extrabold text-emerald-500">{isFinite(revenue) ? `$${revenue.toFixed(2)}` : 'N/A'}</p>
+            <p className="text-xl font-extrabold text-emerald-500">{isFinite(revenue) ? `$${revenue.toFixed(2)}` : 'N/A'}</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">Cost ${cost.toFixed(2)} at {margin}% margin</p>
           </div>
         </div>

@@ -17,7 +17,7 @@ export default function GradeCalculator() {
   const customResult = (
     <div className="space-y-2">
       <div className="text-center">
-        <div className={`text-5xl font-bold ${colorMap[letter] || 'text-indigo-700 dark:text-indigo-400'}`}>{letter}</div>
+        <div className={`text-xl font-bold ${colorMap[letter] || 'text-indigo-700 dark:text-indigo-400'}`}>{letter}</div>
       </div>
       <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
         <div className={`h-full rounded-full transition-all duration-500 ${p >= 60 ? 'bg-gradient-to-r from-red-500 via-amber-500 to-emerald-500' : 'bg-red-500'}`} style={{ width: `${p}%` }} />

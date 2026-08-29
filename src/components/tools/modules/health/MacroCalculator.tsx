@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -8,24 +8,25 @@ export default function MacroCalculator() {
   const [proteinPct, setProteinPct] = useState('30');
   const [carbsPct, setCarbsPct] = useState('40');
   const [fatPct, setFatPct] = useState('30');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const cals = parseFloat(calories) || 0;
-    const p = parseFloat(proteinPct) || 0;
-    const c = parseFloat(carbsPct) || 0;
-    const f = parseFloat(fatPct) || 0;
-    if (!cals || Math.abs(p + c + f - 100) > 1) { setResult('Percentages must add to 100%.'); return; }
+
+  const cals = parseFloat(calories) || 0;
+  const p = parseFloat(proteinPct) || 0;
+  const c = parseFloat(carbsPct) || 0;
+  const f = parseFloat(fatPct) || 0;
+  let result = '';
+  if (cals && Math.abs(p + c + f - 100) <= 1) {
     const proteinG = cals * (p / 100) / 4;
     const carbsG = cals * (c / 100) / 4;
     const fatG = cals * (f / 100) / 9;
-    setResult(`Protein: ${Math.round(proteinG)}g (${Math.round(proteinG * 4)} kcal)\nCarbs: ${Math.round(carbsG)}g (${Math.round(carbsG * 4)} kcal)\nFat: ${Math.round(fatG)}g (${Math.round(fatG * 9)} kcal)`);
-  }, [calories, proteinPct, carbsPct, fatPct]);
+    result = `Protein: ${Math.round(proteinG)}g (${Math.round(proteinG * 4)} kcal)\nCarbs: ${Math.round(carbsG)}g (${Math.round(carbsG * 4)} kcal)\nFat: ${Math.round(fatG)}g (${Math.round(fatG * 9)} kcal)`;
+  }
+
   return (
     <CalculatorShell
       title="Macro Calculator"
       accent="lime"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: 'Balanced', apply: () => { setCalories('2000'); setProteinPct('30'); setCarbsPct('40'); setFatPct('30'); } },
         { label: 'Keto', apply: () => { setCalories('2000'); setProteinPct('25'); setCarbsPct('5'); setFatPct('70'); } },

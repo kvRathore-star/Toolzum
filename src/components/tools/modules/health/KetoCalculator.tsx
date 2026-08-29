@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -9,23 +9,24 @@ export default function KetoCalculator() {
   const [age, setAge] = useState('35');
   const [gender, setGender] = useState<'male'|'female'>('male');
   const [activity, setActivity] = useState('1.55');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
-    const h = parseFloat(height) || 0;
-    const a = parseFloat(age) || 35;
-    const act = parseFloat(activity) || 1.55;
-    if (!w || !h) { setResult(''); return; }
+
+  const w = parseFloat(weight) || 0;
+  const h = parseFloat(height) || 0;
+  const a = parseFloat(age) || 35;
+  const act = parseFloat(activity) || 1.55;
+  let result = '';
+  if (w && h) {
     const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
     const tdee = bmr * act;
     const deficit = tdee - 500;
     const protein = w * 1.8;
     const fat = (deficit - protein * 4) / 9;
     const carbs = 20;
-    setResult(`Daily calories: ${Math.round(deficit)} kcal\nProtein: ${Math.round(protein)} g (${Math.round(protein * 4)} kcal)\nFat: ${Math.round(fat)} g (${Math.round(fat * 9)} kcal)\nCarbs: ${carbs} g (${carbs * 4} kcal)\nNet carbs: ${carbs}g target`);
-  }, [weight, height, age, gender, activity]);
+    result = `Daily calories: ${Math.round(deficit)} kcal\nProtein: ${Math.round(protein)} g (${Math.round(protein * 4)} kcal)\nFat: ${Math.round(fat)} g (${Math.round(fat * 9)} kcal)\nCarbs: ${carbs} g (${carbs * 4} kcal)\nNet carbs: ${carbs}g target`;
+  }
+
   return (
-    <CalculatorShell title="Keto Calculator" accent="amber" result={result} onCalculate={calc}>
+    <CalculatorShell title="Keto Calculator" accent="amber" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>

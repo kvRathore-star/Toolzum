@@ -104,7 +104,7 @@ export default function ProfitMarginCalculator() {
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">
             <span className="text-xs text-[var(--text-muted)]">Gross Profit Margin</span>
-            <p className="text-4xl font-extrabold text-emerald-500">{margin.toFixed(2)}%</p>
+            <p className="text-xl font-extrabold text-emerald-500">{margin.toFixed(2)}%</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">Profit of ${profit.toFixed(2)} on ${revenue.toFixed(2)} revenue</p>
           </div>
         </div>

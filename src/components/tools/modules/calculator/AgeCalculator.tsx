@@ -66,7 +66,7 @@ export default function AgeCalculator() {
           {result && (
             <div className="p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl text-center space-y-2">
                <div className="text-sm text-blue-600 dark:text-blue-400 font-bold uppercase tracking-wider">Your Exact Age is</div>
-               <div className="text-4xl font-black text-blue-700 dark:text-blue-300">
+               <div className="text-xl font-black text-blue-700 dark:text-blue-300">
                  {result.years} <span className="text-xl">Years</span>, {result.months} <span className="text-xl">Months</span>, {result.days} <span className="text-xl">Days</span>
                </div>
             </div>

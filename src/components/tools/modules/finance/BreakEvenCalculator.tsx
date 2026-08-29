@@ -113,7 +113,7 @@ export default function BreakEvenCalculator() {
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">
             <span className="text-xs text-[var(--text-muted)]">Break-Even Sales Volume</span>
-            <p className="text-3xl font-extrabold text-[var(--accent)]">${Math.round(breakEvenSales).toLocaleString()}</p>
+            <p className="text-lg font-extrabold text-[var(--accent)]">${Math.round(breakEvenSales).toLocaleString()}</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">Revenue needed to break even</p>
           </div>
         </div>

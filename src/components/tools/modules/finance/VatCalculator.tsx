@@ -103,7 +103,7 @@ export default function VatCalculator() {
           </div>
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-4">
             <span className="text-xs text-[var(--text-muted)]">Gross Price (Inclusive)</span>
-            <p className="text-4xl font-extrabold text-emerald-500">${grossPrice.toFixed(2)}</p>
+            <p className="text-xl font-extrabold text-emerald-500">${grossPrice.toFixed(2)}</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">Net ${netPrice.toFixed(2)} + VAT ${vatAmount.toFixed(2)}</p>
           </div>
         </div>

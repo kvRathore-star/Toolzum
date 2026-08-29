@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -11,35 +11,46 @@ export default function TriangleAreaCalculator() {
   const [sideB, setSideB] = useState('6');
   const [sideC, setSideC] = useState('7');
   const [angle, setAngle] = useState('60');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    if (method === 'baseheight') {
-      const b = parseFloat(base) || 0;
-      const h = parseFloat(height) || 0;
-      if (!b || !h) { setResult(''); return; }
+
+  let result = '';
+  if (method === 'baseheight') {
+    const b = parseFloat(base) || 0;
+    const h = parseFloat(height) || 0;
+    if (b && h) {
       const area = 0.5 * b * h;
-      setResult(`Area = \u00bd \u00d7 ${b} \u00d7 ${h} = ${area.toFixed(2)} sq units\n\nFormula: A = \u00bdbh`);
-    } else if (method === 'sides') {
-      const a = parseFloat(sideA) || 0;
-      const b = parseFloat(sideB) || 0;
-      const c = parseFloat(sideC) || 0;
-      if (!a || !b || !c) { setResult(''); return; }
+      result = `Area = \u00bd \u00d7 ${b} \u00d7 ${h} = ${area.toFixed(2)} sq units\n\nFormula: A = \u00bdbh`;
+    }
+  } else if (method === 'sides') {
+    const a = parseFloat(sideA) || 0;
+    const b = parseFloat(sideB) || 0;
+    const c = parseFloat(sideC) || 0;
+    if (a && b && c) {
       const s = (a + b + c) / 2;
       const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-      if (isNaN(area)) { setResult('These side lengths do not form a valid triangle.'); return; }
-      setResult(`Area (Heron's formula) = ${area.toFixed(2)} sq units\nSemi-perimeter = ${s.toFixed(2)}\n\nFormula: A = \u221a(s(s-a)(s-b)(s-c))`);
-    } else {
-      const a = parseFloat(sideA) || 0;
-      const b = parseFloat(sideB) || 0;
-      const ang = parseFloat(angle) || 0;
-      if (!a || !b || !ang) { setResult(''); return; }
+      if (isNaN(area)) {
+        result = 'These side lengths do not form a valid triangle.';
+      } else {
+        result = `Area (Heron's formula) = ${area.toFixed(2)} sq units\nSemi-perimeter = ${s.toFixed(2)}\n\nFormula: A = \u221a(s(s-a)(s-b)(s-c))`;
+      }
+    }
+  } else {
+    const a = parseFloat(sideA) || 0;
+    const b = parseFloat(sideB) || 0;
+    const ang = parseFloat(angle) || 0;
+    if (a && b && ang) {
       const rad = ang * Math.PI / 180;
       const area = 0.5 * a * b * Math.sin(rad);
-      setResult(`Area = \u00bd \u00d7 ${a} \u00d7 ${b} \u00d7 sin(${ang}\u00b0) = ${area.toFixed(2)} sq units`);
+      result = `Area = \u00bd \u00d7 ${a} \u00d7 ${b} \u00d7 sin(${ang}\u00b0) = ${area.toFixed(2)} sq units`;
     }
-  }, [method, base, height, sideA, sideB, sideC, angle]);
+  }
+  const customResult = (
+    <div className="font-mono text-sm whitespace-pre-wrap">
+      {result}
+    </div>
+  );
+
   return (
-    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result={result} onCalculate={calc}>
+    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result="" auto customResult={customResult}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Method</label><select className={inputCls} value={method} onChange={e => setMethod(e.target.value as 'baseheight'|'sides'|'sas')}><option value="baseheight">Base & Height</option><option value="sides">Three sides (SSS)</option><option value="sas">Two sides & angle (SAS)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

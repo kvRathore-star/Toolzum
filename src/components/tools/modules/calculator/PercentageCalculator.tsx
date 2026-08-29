@@ -35,7 +35,7 @@ export default function PercentageCalculator() {
               Calculate
             </button>
             {result1 !== null && (
-              <div className="text-center text-3xl font-black text-[var(--accent)] dark:text-[var(--accent)]">{result1}</div>
+              <div className="text-center text-lg font-black text-[var(--accent)] dark:text-[var(--accent)]">{result1}</div>
             )}
         </div>
 
@@ -60,7 +60,7 @@ export default function PercentageCalculator() {
               Calculate
             </button>
             {result2 !== null && (
-              <div className="text-center text-3xl font-black text-emerald-600 dark:text-emerald-400">{result2.toFixed(2)}%</div>
+              <div className="text-center text-lg font-black text-emerald-600 dark:text-emerald-400">{result2.toFixed(2)}%</div>
             )}
         </div>
 

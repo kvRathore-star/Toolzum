@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -10,13 +10,13 @@ export default function CalorieCalculator() {
   const [height, setHeight] = useState('180');
   const [activity, setActivity] = useState('1.55');
   const [goal, setGoal] = useState('maintain');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const a = parseFloat(age) || 30;
-    const w = parseFloat(weight) || 0;
-    const h = parseFloat(height) || 0;
-    const act = parseFloat(activity) || 1.55;
-    if (!w || !h) { setResult(''); return; }
+
+  const a = parseFloat(age) || 30;
+  const w = parseFloat(weight) || 0;
+  const h = parseFloat(height) || 0;
+  const act = parseFloat(activity) || 1.55;
+  let result = '';
+  if (w && h) {
     let bmr: number;
     if (gender === 'male') bmr = 10 * w + 6.25 * h - 5 * a + 5;
     else bmr = 10 * w + 6.25 * h - 5 * a - 161;
@@ -24,14 +24,15 @@ export default function CalorieCalculator() {
     let goalCals = tdee;
     if (goal === 'lose') goalCals = tdee - 500;
     else if (goal === 'gain') goalCals = tdee + 500;
-    setResult(`BMR: ${Math.round(bmr)} kcal\nTDEE: ${Math.round(tdee)} kcal\n${goal === 'maintain' ? 'Maintenance' : goal === 'lose' ? 'Weight loss (-0.5kg/wk)' : 'Weight gain (+0.5kg/wk)'}: ${Math.round(goalCals)} kcal`);
-  }, [gender, age, weight, height, activity, goal]);
+    result = `BMR: ${Math.round(bmr)} kcal\nTDEE: ${Math.round(tdee)} kcal\n${goal === 'maintain' ? 'Maintenance' : goal === 'lose' ? 'Weight loss (-0.5kg/wk)' : 'Weight gain (+0.5kg/wk)'}: ${Math.round(goalCals)} kcal`;
+  }
+
   return (
     <CalculatorShell
       title="Calorie Calculator (TDEE)"
       accent="emerald"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: 'Avg Male', apply: () => { setGender('male'); setAge('30'); setWeight('70'); setHeight('170'); setActivity('1.55'); setGoal('maintain'); } },
         { label: 'Avg Female', apply: () => { setGender('female'); setAge('30'); setWeight('60'); setHeight('165'); setActivity('1.55'); setGoal('maintain'); } },

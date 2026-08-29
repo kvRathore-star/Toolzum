@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -7,23 +7,24 @@ export default function WaterIntakeCalculator() {
   const [weight, setWeight] = useState('70');
   const [activity, setActivity] = useState('30');
   const [climate, setClimate] = useState('moderate');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const w = parseFloat(weight) || 0;
-    const act = parseFloat(activity) || 0;
-    if (!w) { setResult(''); return; }
+
+  const w = parseFloat(weight) || 0;
+  const act = parseFloat(activity) || 0;
+  let result = '';
+  if (w) {
     const baseMl = w * 35;
     const actMl = Math.round(act * 12);
     const climateFactor = climate === 'hot' ? 1.3 : climate === 'cold' ? 0.9 : 1;
     const total = Math.round((baseMl + actMl) * climateFactor);
-    setResult(`Base: ${Math.round(baseMl)} mL\nActivity: +${actMl} mL\nClimate factor: ${climateFactor}x\nTotal: ${total} mL (${(total / 1000).toFixed(1)} L)\nCups (8oz): ${Math.round(total / 240)}`);
-  }, [weight, activity, climate]);
+    result = `Base: ${Math.round(baseMl)} mL\nActivity: +${actMl} mL\nClimate factor: ${climateFactor}x\nTotal: ${total} mL (${(total / 1000).toFixed(1)} L)\nCups (8oz): ${Math.round(total / 240)}`;
+  }
+
   return (
     <CalculatorShell
       title="Water Intake Calculator"
       accent="sky"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: 'Avg adult', apply: () => { setWeight('70'); setActivity('30'); setClimate('moderate'); } },
         { label: 'Active / hot', apply: () => { setWeight('80'); setActivity('60'); setClimate('hot'); } },

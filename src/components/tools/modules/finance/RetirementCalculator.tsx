@@ -32,7 +32,7 @@ export default function RetirementCalculator() {
         <div className="space-y-3">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Retirement Nest Egg</div>
-            <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${fv.toLocaleString()}</div>
+            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${fv.toLocaleString()}</div>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <div className="rounded-lg p-2 text-center">
