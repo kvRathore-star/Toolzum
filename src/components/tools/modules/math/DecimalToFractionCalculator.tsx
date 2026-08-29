@@ -30,7 +30,7 @@ export default function DecimalToFractionCalculator() {
   const resultText = f.d ? `${dec} ≈ ${f.n}/${f.d} (error: ${error.toExponential(2)})` : 'Enter decimal';
 
   return (
-    <CalculatorShell title="Decimal to Fraction" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" downloadData={f.d ? JSON.stringify({ decimal: d, fraction: `${f.n}/${f.d}`, error }, null, 2) : ''} downloadFilename="decimal-fraction.json" customResult={
+    <CalculatorShell title="Decimal to Fraction" result={resultText} auto presets={presets} accent="amber" downloadData={f.d ? JSON.stringify({ decimal: d, fraction: `${f.n}/${f.d}`, error }, null, 2) : ''} downloadFilename="decimal-fraction.json" customResult={
       f.d ? (
         <div className="space-y-4">
           <div className="text-center">

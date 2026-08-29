@@ -38,7 +38,7 @@ export default function CombinationCalculator() {
     <CalculatorShell
       title="Combinations & Permutations"
       result={resultText}
-      onCalculate={() => {}}
+      auto
       presets={presets}
       accent="violet"
       customResult={

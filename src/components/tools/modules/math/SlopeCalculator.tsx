@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -37,10 +37,7 @@ export default function SlopeCalculator() {
           <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>
           <div>Equation: y = {isFinite(slope) ? slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}</div>
         </div>
-        <div className="flex gap-2">
-          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-        </div>
+        <CalcActions result={resultText} downloadData={`x1,y1,x2,y2,Slope,Equation\n${a},${b},${c},${d},${isFinite(slope) ? slope.toFixed(4) : 'undefined'},"${isFinite(slope) ? 'y = ' + slope.toFixed(2) + 'x ' + (b - slope * a >= 0 ? '+' : '') + (b - slope * a).toFixed(2) : 'x = ' + a}"`} downloadFilename="slope.csv" />
       </div>
     </>
   );

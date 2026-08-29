@@ -24,7 +24,7 @@ export default function LeastCommonMultipleCalculator() {
   const resultText = `LCM(${na}, ${nb}) = ${result}`;
 
   return (
-    <CalculatorShell title="LCM Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="violet" downloadData={`Number1,Number2,LCM,GCF,Product\n${a},${b},${result},${gcd(na, nb)},${na * nb}`} downloadFilename="lcm-calculation.csv">
+    <CalculatorShell title="LCM Calculator" result={resultText} auto presets={presets} accent="violet" downloadData={`Number1,Number2,LCM,GCF,Product\n${a},${b},${result},${gcd(na, nb)},${na * nb}`} downloadFilename="lcm-calculation.csv">
       <div className="space-y-4">
         <div className="flex gap-2">
           <div className="flex-1">

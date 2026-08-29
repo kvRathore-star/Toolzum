@@ -44,7 +44,7 @@ export default function PercentageDifferenceCalculator() {
     <CalculatorShell
       title="Percentage Difference"
       result={resultText}
-      onCalculate={() => {}}
+      auto
       presets={presets}
       accent="emerald"
       downloadData={`ValueA,ValueB,Average,AbsDiff,PercentDiff\n${a},${b},${avg.toFixed(2)},${absDiff.toFixed(2)},${diff.toFixed(2)}`}

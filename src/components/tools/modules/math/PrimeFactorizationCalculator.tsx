@@ -24,7 +24,7 @@ export default function PrimeFactorizationCalculator() {
   const resultText = nn >= 2 ? `${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}^${fc.count}` : fc.prime).join(' × ')}` : 'Enter number ≥ 2';
 
   return (
-    <CalculatorShell title="Prime Factorization" result={resultText} onCalculate={() => {}} presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
+    <CalculatorShell title="Prime Factorization" result={resultText} auto presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
       <div className="space-y-4">
         <label className={labelClass}>Number (≥ 2)</label>
         <input type="number" min={2} value={n} onChange={e => setN(e.target.value)}

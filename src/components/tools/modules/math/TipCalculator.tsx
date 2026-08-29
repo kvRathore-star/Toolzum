@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -38,10 +38,7 @@ export default function TipCalculator() {
           <div>Total: ${total.toFixed(2)}</div>
           <div className="font-bold">Each: ${(total / split).toFixed(2)}</div>
         </div>
-        <div className="flex gap-2">
-          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-        </div>
+        <CalcActions result={resultText} downloadData={`Tip,Total,Each\n$${tip.toFixed(2)},$${total.toFixed(2)},$${(total / split).toFixed(2)}`} downloadFilename="tip.csv" />
       </div>
     </>
   );

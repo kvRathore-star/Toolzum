@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Section, Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -12,10 +13,14 @@ export default function SignificantFiguresCalculator() {
     if (!trimmed.includes('.')) return trimmed.replace(/0+$/, '').length;
     return trimmed.replace(/\./g, '').length;
   };
+  const sigFigs = countSigFigs(input);
+  const resultText = `Value: ${input}\nSignificant Figures: ${sigFigs}`;
+  const downloadData = `Value,Significant Figures\n${input},${sigFigs}`;
   return (
     <Section title="Significant Figures">
       <Input label="Value" value={input} onChange={setInput} />
-      <div className="text-lg font-bold">{countSigFigs(input)} significant figures</div>
+      <div className="text-lg font-bold">{sigFigs} significant figures</div>
+      <CalcActions result={resultText} downloadData={downloadData} downloadFilename="significant_figures.csv" />
     </Section>
   );
 }

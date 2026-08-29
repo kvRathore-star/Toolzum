@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Section, Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -24,6 +25,15 @@ export default function GeometryCalculator() {
     }
   };
   const result = calc();
+  const resultLines = [
+    result.area !== undefined && `Area: ${result.area.toFixed(4)}`,
+    result.perimeter !== undefined && `Perimeter: ${result.perimeter.toFixed(4)}`,
+    result.volume !== undefined && `Volume: ${result.volume.toFixed(4)}`,
+  ].filter(Boolean);
+  const resultText = `Shape: ${shape}\n${resultLines.join('\n')}`;
+  const csvHeaders = ['Shape', 'Radius', 'Width', 'Height', 'Area', 'Perimeter', 'Volume'].join(',');
+  const csvValues = [shape, r, w, h, result.area?.toFixed(4) ?? '', result.perimeter?.toFixed(4) ?? '', result.volume?.toFixed(4) ?? ''].join(',');
+  const downloadData = `${csvHeaders}\n${csvValues}`;
   return (
     <Section title="Geometry Calculator">
       <select className={selClass} value={shape} onChange={e => setShape(e.target.value)}>
@@ -41,6 +51,7 @@ export default function GeometryCalculator() {
         {result.perimeter !== undefined && <div>Perimeter: {result.perimeter.toFixed(4)}</div>}
         {result.volume !== undefined && <div>Volume: {result.volume.toFixed(4)}</div>}
       </div>
+      <CalcActions result={resultText} downloadData={downloadData} downloadFilename="geometry.csv" />
     </Section>
   );
 }

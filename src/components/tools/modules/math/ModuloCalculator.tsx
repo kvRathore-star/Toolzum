@@ -33,7 +33,7 @@ export default function ModuloCalculator() {
     : 'Divisor cannot be zero';
 
   return (
-    <CalculatorShell title="Modulo Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" customResult={
+    <CalculatorShell title="Modulo Calculator" result={resultText} auto presets={presets} accent="emerald" customResult={
       nb !== 0 ? (
         <div className="space-y-3">
           <div className="text-center">

@@ -34,7 +34,7 @@ export default function PrimeNumberChecker() {
   const resultText = nn < 2 ? `${nn} is less than 2` : prime ? `${nn} is prime` : `${nn} = ${factorList.join(' × ')}`;
 
   return (
-    <CalculatorShell title="Prime Number Checker" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
+    <CalculatorShell title="Prime Number Checker" result={resultText} auto presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
       <div className="space-y-4">
         <div>
           <label className={labelClass}>Number</label>

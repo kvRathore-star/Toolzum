@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Section, Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -10,6 +11,8 @@ export default function CoordinateCalculator() {
   const a = Number(x1), b = Number(y1), c = Number(x2), d = Number(y2);
   const dist = Math.sqrt((c - a) ** 2 + (d - b) ** 2);
   const mx = (a + c) / 2, my = (b + d) / 2;
+  const resultText = `Distance: ${dist.toFixed(4)}\nMidpoint: (${mx.toFixed(2)}, ${my.toFixed(2)})`;
+  const downloadData = `x1,y1,x2,y2,Distance,Midpoint X,Midpoint Y\n${a},${b},${c},${d},${dist.toFixed(4)},${mx.toFixed(2)},${my.toFixed(2)}`;
   return (
     <Section title="Coordinate Calculator">
       <div className="flex gap-2">
@@ -22,6 +25,7 @@ export default function CoordinateCalculator() {
         <div>Distance: {dist.toFixed(4)}</div>
         <div>Midpoint: ({mx.toFixed(2)}, {my.toFixed(2)})</div>
       </div>
+      <CalcActions result={resultText} downloadData={downloadData} downloadFilename="coordinates.csv" />
     </Section>
   );
 }

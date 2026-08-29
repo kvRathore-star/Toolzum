@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -32,10 +32,7 @@ export default function PermutationCalculator() {
           <Input label="r" type="number" value={r} onChange={setR} placeholder="r" />
         </div>
         <div className="text-lg font-bold">P({nn}, {rr}) = {isFinite(p) ? p.toFixed(0) : 'N/A'}</div>
-        <div className="flex gap-2">
-          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-        </div>
+        <CalcActions result={resultText} downloadData={`P,R,Result\n${nn},${rr},${isFinite(p) ? p.toFixed(0) : 'N/A'}`} downloadFilename="permutation.csv" />
       </div>
     </>
   );

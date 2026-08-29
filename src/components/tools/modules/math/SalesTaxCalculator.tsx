@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 import { ac, borderClass } from '../miscToolColors';
 import { Input, labelClass, selClass } from '../MiscToolsShared';
 
@@ -72,10 +72,7 @@ export default function SalesTaxCalculator() {
             }
           </div>
         )}
-        <div className="flex gap-2">
-          <button onClick={() => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-          <button onClick={() => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a2 = document.createElement('a'); a2.href=url; a2.download='result.txt'; a2.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-        </div>
+        <CalcActions result={resultText} downloadData={`Subtotal,Tax Rate,Tax,Total\n$${a.toFixed(2)},${r}%,$${tax.toFixed(2)},$${(a + tax).toFixed(2)}`} downloadFilename="sales-tax.csv" />
       </div>
     </>
   );
