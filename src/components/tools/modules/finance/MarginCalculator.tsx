@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { DollarSign, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; cost: number; margin: number };
 const PRESETS: Preset[] = [
@@ -102,6 +103,13 @@ export default function MarginCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`Selling Price: ${isFinite(revenue) ? '$' + revenue.toFixed(2) : 'N/A'} | Markup: ${markup.toFixed(1)}%`}
+        downloadData={csvContent}
+        downloadFilename="margin-pricing-calculation.csv"
+        accent="emerald"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

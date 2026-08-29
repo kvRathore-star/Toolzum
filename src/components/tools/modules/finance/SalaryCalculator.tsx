@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Briefcase } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function SalaryCalculator() {
   const [ctc, setCtc] = useState(1200000);
@@ -91,10 +92,11 @@ export default function SalaryCalculator() {
               <span className="text-xs text-[var(--text-muted)]">Monthly Net Salary</span>
               <p className="text-3xl font-extrabold text-emerald-500">{Math.round(netMonthly).toLocaleString('en-IN')}/mo</p>
             </div>
-            <div className="flex gap-2 pt-2">
-              <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-              <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-            </div>
+            <CalcActions
+              result={resultText}
+              downloadFilename="salary-breakdown.txt"
+              accent="emerald"
+            />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Target, DollarSign, TrendingUp, Calculator } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { CalcActions } from '../shared/CalcActions';
 
 const platformPresets: Record<string, { cpm: number; rpm: number; note: string }> = {
   'youtube': { cpm: 3.50, rpm: 1.50, note: 'YouTube: CPM varies by niche (gaming ~$2, finance ~$12). RPM ~40-55% of CPM after ad rev share.' },
@@ -45,6 +46,11 @@ export default function CpmCalculator() {
   const platformLabel = platform !== 'custom' ? platformPresets[platform]?.note?.split(':')[0] : '';
   const presetCpm = platform !== 'custom' ? platformPresets[platform]?.cpm : null;
   const presetRpm = platform !== 'custom' ? platformPresets[platform]?.rpm : null;
+
+  const mainResult = mode === 'cpm' ? `$${cpm.toFixed(2)}` : mode === 'rpm' ? `$${rpm.toFixed(2)}` : `$${estimatedAdCost.toFixed(2)}`;
+  const csvData = mode === 'estimate'
+    ? `Metric,Value\nEstimated Ad Cost,$${estimatedAdCost.toFixed(2)}\nEstimated Earnings,$${estimatedEarnings.toFixed(2)}\nViews,${estViews}`
+    : `Metric,Value\nCPM,$${cpm.toFixed(2)}\nRPM,$${rpm.toFixed(2)}\nImpressions,${impressions}`;
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6 animate-in fade-in duration-500">
@@ -140,7 +146,7 @@ export default function CpmCalculator() {
                   </span>
                 </div>
                 <p className={`text-5xl font-extrabold ${mode === 'cpm' ? 'text-violet-500' : 'text-emerald-500'}`}>
-                  ${(mode === 'cpm' ? cpm : rpm).toFixed(2)}
+                  {mode === 'cpm' ? `$${cpm.toFixed(2)}` : `$${rpm.toFixed(2)}`}
                 </p>
                 {platform !== 'custom' && (
                   <p className="text-[11px] text-[var(--text-muted)] mt-2">
@@ -148,6 +154,7 @@ export default function CpmCalculator() {
                   </p>
                 )}
               </div>
+              <CalcActions result={mainResult} downloadData={csvData} downloadFilename="cpm-results.csv" />
 
               {/* Show both metrics when in either mode */}
               <div className="grid grid-cols-2 gap-3">
@@ -192,6 +199,7 @@ export default function CpmCalculator() {
                   {estViews.toLocaleString()} views × ${estRpm.toFixed(2)} RPM
                 </p>
               </div>
+              <CalcActions result={`Ad Cost: $${estimatedAdCost.toFixed(2)} | Earnings: $${estimatedEarnings.toFixed(2)}`} downloadData={csvData} downloadFilename="earnings-estimate.csv" />
             </>
           )}
         </div>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BarChart, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type HistoryEntry = { promoters: number; passives: number; detractors: number; total: number; nps: number; timestamp: string };
 
@@ -121,6 +122,13 @@ export default function NetPromoterScoreCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`NPS: ${nps.toFixed(0)} (${npsLabel})`}
+        downloadData={csvContent}
+        downloadFilename="nps-calculation.csv"
+        accent="indigo"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

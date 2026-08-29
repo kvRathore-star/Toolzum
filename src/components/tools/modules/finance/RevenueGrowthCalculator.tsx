@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,15 +7,6 @@ export default function RevenueGrowthCalculator() {
   const [current, setCurrent] = useState('120000');
   const [previous, setPrevious] = useState('100000');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const c = parseFloat(current) || 0;
-    const p = parseFloat(previous) || 0;
-    if (!p) return;
-    const growth = ((c - p) / p) * 100;
-    const absChange = c - p;
-    const cagr = growth;
-    setResult(`Growth Rate: ${growth.toFixed(2)}%\nAbsolute Change: $${absChange.toLocaleString()}\nCurrent: $${c.toLocaleString()}\nPrevious: $${p.toLocaleString()}`);
-  }, [current, previous]);
   const presets = [
     { label: 'YoY Growth', apply: () => { setCurrent('120000'); setPrevious('100000'); } },
     { label: 'QoQ Growth', apply: () => { setCurrent('55000'); setPrevious('50000'); } },
@@ -26,7 +17,7 @@ export default function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={result} onCalculate={calc} presets={presets} accent="blue" customResult={
+    <CalculatorShell title="Revenue Growth Calculator" result={result} auto presets={presets} accent="blue" customResult={
       result ? (
         <div>
           <div className="flex items-center justify-center gap-4">

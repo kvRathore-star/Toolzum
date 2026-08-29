@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { DollarSign, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; rate: number };
 const PRESETS: Preset[] = [
@@ -107,6 +108,13 @@ export default function VatCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`Gross: $${grossPrice.toFixed(2)} | VAT: $${vatAmount.toFixed(2)} (${vatRate}%)`}
+        downloadData={csvContent}
+        downloadFilename="vat-calculation.csv"
+        accent="emerald"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -7,22 +7,18 @@ export default function SimpleInterestCalculator() {
   const [principal, setPrincipal] = useState('10000');
   const [rate, setRate] = useState('5');
   const [time, setTime] = useState('3');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const p = parseFloat(principal) || 0;
-    const r = parseFloat(rate) || 0;
-    const t = parseFloat(time) || 0;
-    if (!p || !r || !t) { setResult(''); return; }
-    const interest = p * (r / 100) * t;
-    const total = p + interest;
-    setResult(`Simple Interest: $${interest.toFixed(2)}\nTotal amount: $${total.toFixed(2)}\nAnnual interest: $${(p * r / 100).toFixed(2)}`);
-  }, [principal, rate, time]);
+  const p = parseFloat(principal) || 0;
+  const r = parseFloat(rate) || 0;
+  const t = parseFloat(time) || 0;
+  const interest = p * (r / 100) * t;
+  const total = p + interest;
+  const result = p && r && t ? `Simple Interest: $${interest.toFixed(2)}\nTotal amount: $${total.toFixed(2)}\nAnnual interest: $${(p * r / 100).toFixed(2)}` : '';
   return (
     <CalculatorShell
       title="Simple Interest Calculator"
       accent="indigo"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: '$10k, 5%, 3yr', apply: () => { setPrincipal('10000'); setRate('5'); setTime('3'); } },
         { label: '$50k, 8%, 5yr', apply: () => { setPrincipal('50000'); setRate('8'); setTime('5'); } },

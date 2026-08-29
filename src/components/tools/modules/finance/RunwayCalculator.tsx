@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,16 +7,6 @@ export default function RunwayCalculator() {
   const [cash, setCash] = useState('500000');
   const [burnRate, setBurnRate] = useState('50000');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const c = parseFloat(cash) || 0;
-    const b = parseFloat(burnRate) || 0;
-    if (!b) return;
-    const months = c / b;
-    const years = months / 12;
-    const date = new Date();
-    date.setMonth(date.getMonth() + Math.floor(months));
-    setResult(`Runway: ${months.toFixed(1)} months (${years.toFixed(1)} years)\nCash: $${c.toLocaleString()}\nMonthly Burn: $${b.toLocaleString()}\nRunway Until: ${date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`);
-  }, [cash, burnRate]);
   const presets = [
     { label: 'Seed Stage', apply: () => { setCash('500000'); setBurnRate('50000'); } },
     { label: 'Series A', apply: () => { setCash('3000000'); setBurnRate('200000'); } },
@@ -28,7 +18,7 @@ export default function RunwayCalculator() {
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell title="Runway Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
+    <CalculatorShell title="Runway Calculator" result={result} auto presets={presets} accent="emerald" customResult={
       result ? (
         <div className="space-y-2">
           <div className="text-center">

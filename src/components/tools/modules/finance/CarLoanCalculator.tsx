@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,16 +8,6 @@ export default function CarLoanCalculator() {
   const [rate, setRate] = useState('4.5');
   const [years, setYears] = useState('5');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const r = parseFloat(rate) / 100 / 12;
-    const n = parseFloat(years) * 12;
-    const p = parseFloat(loan);
-    if (!p || !r || !n) return;
-    const pmt = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-    const t = pmt * n;
-    const totalPct = ((t - p) / p) * 100;
-    setResult(`Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${t.toFixed(2)}\nTotal Interest: $${(t - p).toFixed(2)}\nInterest as % of Loan: ${totalPct.toFixed(1)}%`);
-  }, [loan, rate, years]);
   const presets = [
     { label: 'New Car 5yr', apply: () => { setLoan('35000'); setRate('4.5'); setYears('5'); } },
     { label: 'Used Car 3yr', apply: () => { setLoan('18000'); setRate('6.0'); setYears('3'); } },
@@ -28,7 +18,7 @@ export default function CarLoanCalculator() {
   const p = parseFloat(loan);
   const pmt = p && r ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
   return (
-    <CalculatorShell title="Car Loan Calculator" result={result} onCalculate={calc} presets={presets} accent="violet" customResult={
+    <CalculatorShell title="Car Loan Calculator" result={result} auto presets={presets} accent="violet" customResult={
       result && pmt > 0 ? (
         <div className="flex items-center justify-center gap-8">
           <div className="text-center">

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Calendar, Clock, RefreshCw, Milestone, ShieldCheck, Heart } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 import { toast } from 'react-hot-toast';
 
 const ELIGIBILITY_RULES = [
@@ -180,29 +181,37 @@ export default function IndianAgeCalculator() {
           </div>
 
           {result && (
-            <div className="space-y-6 border-t border-[var(--border-subtle)] pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
-              <div className="p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center space-y-2">
-                <span className="text-xs text-[var(--accent)] font-bold uppercase tracking-wider block">Your exact age is</span>
-                <span className="text-3xl font-black text-[var(--accent)] block">
-                  {result.years} <span className="text-base font-normal">Years</span>, {result.months} <span className="text-base font-normal">Months</span>, {result.days} <span className="text-base font-normal">Days</span>
-                </span>
+            <>
+              <div className="space-y-6 border-t border-[var(--border-subtle)] pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center space-y-2">
+                  <span className="text-xs text-[var(--accent)] font-bold uppercase tracking-wider block">Your exact age is</span>
+                  <span className="text-3xl font-black text-[var(--accent)] block">
+                    {result.years} <span className="text-base font-normal">Years</span>, {result.months} <span className="text-base font-normal">Months</span>, {result.days} <span className="text-base font-normal">Days</span>
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                    <span className="text-[10px] text-[var(--text-secondary)] block">Total Days</span>
+                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalDays}</span>
+                  </div>
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                    <span className="text-[10px] text-[var(--text-secondary)] block">Total Weeks</span>
+                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalWeeks}</span>
+                  </div>
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                    <span className="text-[10px] text-[var(--text-secondary)] block">Next Birthday</span>
+                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.nextBdayDays} Days</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 text-center">
-                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
-                  <span className="text-[10px] text-[var(--text-secondary)] block">Total Days</span>
-                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalDays}</span>
-                </div>
-                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
-                  <span className="text-[10px] text-[var(--text-secondary)] block">Total Weeks</span>
-                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalWeeks}</span>
-                </div>
-                <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
-                  <span className="text-[10px] text-[var(--text-secondary)] block">Next Birthday</span>
-                  <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.nextBdayDays} Days</span>
-                </div>
-              </div>
-            </div>
+              <CalcActions
+                result={`Age: ${result.years} years, ${result.months} months, ${result.days} days`}
+                downloadData={`Metric,Value\nYears,${result.years}\nMonths,${result.months}\nDays,${result.days}\nTotal Days,${result.totalDays}\nTotal Weeks,${result.totalWeeks}`}
+                downloadFilename="age-result.csv"
+              />
+            </>
           )}
         </div>
 

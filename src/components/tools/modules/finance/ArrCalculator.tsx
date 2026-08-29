@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,14 +8,6 @@ export default function ArrCalculator() {
   const [expRev, setExpRev] = useState('20000');
   const [churnRev, setChurnRev] = useState('5000');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const sub = parseFloat(subRev) || 0;
-    const exp = parseFloat(expRev) || 0;
-    const churn = parseFloat(churnRev) || 0;
-    const netNew = exp - churn;
-    const arr = sub + exp - churn;
-    setResult(`ARR: $${arr.toLocaleString()}\nSubscriptions: $${sub.toLocaleString()}\nExpansion: $${exp.toLocaleString()}\nChurn: -$${churn.toLocaleString()}\nNet New: $${netNew.toLocaleString()}`);
-  }, [subRev, expRev, churnRev]);
   const presets = [
     { label: 'SaaS Startup', apply: () => { setSubRev('50000'); setExpRev('10000'); setChurnRev('3000'); } },
     { label: 'Enterprise', apply: () => { setSubRev('500000'); setExpRev('100000'); setChurnRev('25000'); } },
@@ -25,7 +17,7 @@ export default function ArrCalculator() {
   const arr = (parseFloat(subRev) || 0) + (parseFloat(expRev) || 0) - (parseFloat(churnRev) || 0);
   const maxVal = Math.max(1, (parseFloat(subRev) || 0) + (parseFloat(expRev) || 0));
   return (
-    <CalculatorShell title="ARR Calculator" result={result} onCalculate={calc} presets={presets} accent="blue">
+    <CalculatorShell title="ARR Calculator" result={result} auto presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Subscription Revenue ($)</label><input type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Expansion Revenue ($)</label><input type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputCls} /></div>

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,13 +7,6 @@ export default function MrrCalculator() {
   const [customers, setCustomers] = useState('100');
   const [avgRevenue, setAvgRevenue] = useState('50');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const c = parseFloat(customers) || 0;
-    const r = parseFloat(avgRevenue) || 0;
-    const mrr = c * r;
-    const arr = mrr * 12;
-    setResult(`MRR: $${mrr.toLocaleString()}\nARR: $${arr.toLocaleString()}\nCustomers: ${c}\nARPU: $${r.toFixed(2)}/mo`);
-  }, [customers, avgRevenue]);
   const presets = [
     { label: 'Early Stage', apply: () => { setCustomers('100'); setAvgRevenue('50'); } },
     { label: 'Growth Stage', apply: () => { setCustomers('1500'); setAvgRevenue('80'); } },
@@ -23,7 +16,7 @@ export default function MrrCalculator() {
   const r = parseFloat(avgRevenue) || 0;
   const mrr = c * r;
   return (
-    <CalculatorShell title="MRR Calculator" result={result} onCalculate={calc} presets={presets} accent="fuchsia" customResult={
+    <CalculatorShell title="MRR Calculator" result={result} auto presets={presets} accent="fuchsia" customResult={
       result ? (
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3">

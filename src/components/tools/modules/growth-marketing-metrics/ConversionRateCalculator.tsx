@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Target, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; conversions: number; visitors: number };
 const PRESETS: Preset[] = [
@@ -110,6 +111,13 @@ export default function ConversionRateCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`Conversion Rate: ${rate.toFixed(2)}%`}
+        downloadData={csvContent}
+        downloadFilename="conversion-rate-calculation.csv"
+        accent="violet"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

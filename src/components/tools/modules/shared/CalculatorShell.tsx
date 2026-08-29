@@ -41,8 +41,9 @@ interface CalculatorShellProps {
   children: React.ReactNode;
   result: string;
   error?: string;
-  onCalculate: () => void;
+  onCalculate?: () => void;
   calculateLabel?: string;
+  auto?: boolean;
   presets?: Preset[];
   resultStats?: ResultStat[];
   resultLabel?: string;
@@ -60,6 +61,7 @@ export function CalculatorShell({
   error,
   onCalculate,
   calculateLabel = 'Calculate',
+  auto = false,
   presets,
   resultStats,
   resultLabel,
@@ -109,6 +111,7 @@ export function CalculatorShell({
   }, [downloadData, downloadFilename]);
 
   useEffect(() => {
+    if (auto || !onCalculate) return;
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && shellRef.current?.contains(e.target as Node)) {
         e.preventDefault();
@@ -118,7 +121,7 @@ export function CalculatorShell({
     const shell = shellRef.current;
     shell?.addEventListener('keydown', handler);
     return () => shell?.removeEventListener('keydown', handler);
-  }, [onCalculate]);
+  }, [onCalculate, auto]);
 
   const hasResult = result || error || customResult;
 
@@ -183,12 +186,14 @@ export function CalculatorShell({
         <div className="space-y-4">
           {children}
 
-          <button
-            onClick={onCalculate}
-            className={`w-full bg-gradient-to-r ${a.btn} ${a.btnHover} text-white font-bold py-3 rounded-xl transition-all active:scale-95 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
-          >
-            {calculateLabel}
-          </button>
+          {!auto && onCalculate && (
+            <button
+              onClick={onCalculate}
+              className={`w-full bg-gradient-to-r ${a.btn} ${a.btnHover} text-white font-bold py-3 rounded-xl transition-all active:scale-95 shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+            >
+              {calculateLabel}
+            </button>
+          )}
         </div>
 
         {/* Right: Result panel */}

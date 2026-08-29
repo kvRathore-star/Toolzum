@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,29 +8,6 @@ export default function DebtPayoffCalculator() {
   const [rate, setRate] = useState('18');
   const [payment, setPayment] = useState('500');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const b = parseFloat(balance) || 0;
-    const annualRate = parseFloat(rate) || 0;
-    const r = annualRate / 100 / 12;
-    const p = parseFloat(payment) || 0;
-    if (!b || !p) return;
-    if (p <= b * r) { setResult('Payment too low - not covering monthly interest. Increase payment.'); return; }
-    let remaining = b;
-    let months = 0;
-    let totalPaid = 0;
-    let totalInterest = 0;
-    while (remaining > 0 && months < 600) {
-      const interest = remaining * r;
-      const principal = Math.min(p - interest, remaining);
-      remaining -= principal;
-      totalPaid += p;
-      totalInterest += Math.min(interest, p);
-      months++;
-    }
-    const years = Math.floor(months / 12);
-    const remMonths = months % 12;
-    setResult(`Payoff Time: ${years > 0 ? `${years} yr ${remMonths} mo` : `${months} mo`}\nTotal Paid: $${totalPaid.toFixed(2)}\nTotal Interest: $${totalInterest.toFixed(2)}\nInterest Saved vs Min: ${months < 600 ? `$${(b * (Math.pow(1 + r, months) - 1) - totalInterest).toFixed(0)}` : 'N/A'}`);
-  }, [balance, rate, payment]);
   const presets = [
     { label: 'Credit Card', apply: () => { setBalance('10000'); setRate('18'); setPayment('500'); } },
     { label: 'Student Loan', apply: () => { setBalance('35000'); setRate('5.5'); setPayment('400'); } },
@@ -49,7 +26,7 @@ export default function DebtPayoffCalculator() {
     }
   }
   return (
-    <CalculatorShell title="Debt Payoff Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
+    <CalculatorShell title="Debt Payoff Calculator" result={result} auto presets={presets} accent="orange" customResult={
       result && payoffMonths > 0 ? (
         <div>
           <div className="px-4 py-3">

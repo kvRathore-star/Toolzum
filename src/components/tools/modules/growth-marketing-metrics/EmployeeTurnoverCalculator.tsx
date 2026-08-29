@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Users, TrendingDown, DollarSign, Sparkles, CheckCircle, AlertTriangle } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function EmployeeTurnoverCalculator() {
   const [startingEmployees, setStartingEmployees] = useState<number>(100);
@@ -232,6 +233,12 @@ export default function EmployeeTurnoverCalculator() {
               </div>
             </div>
           )}
+
+          <CalcActions
+            result={`Turnover: ${turnoverRate.toFixed(1)}% | Retention: ${retentionRate.toFixed(1)}% | Total Cost: $${Math.round(totalReplacementCost).toLocaleString()}`}
+            downloadData={`Metric,Value\nTurnover Rate,${turnoverRate.toFixed(1)}%\nRetention Rate,${retentionRate.toFixed(1)}%\nTotal Departures,${totalDepartures}\nReplacement Cost,$${Math.round(totalReplacementCost).toLocaleString()}\nRecruitment,$${Math.round(directRecruitmentCost).toLocaleString()}\nTraining,$${Math.round(trainingOnboardingCost).toLocaleString()}\nLost Productivity,$${Math.round(lostProductivityCost).toLocaleString()}`}
+            downloadFilename="turnover-analysis.csv"
+          />
 
           {/* Actionable Recommendations */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-3">

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -9,19 +9,6 @@ export default function RetirementCalculator() {
   const [savings, setSavings] = useState('50000');
   const [monthly, setMonthly] = useState('1000');
   const [rate, setRate] = useState('7');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const years = parseFloat(retireAge) - parseFloat(currentAge);
-    if (years <= 0) { setResult('Retirement age must be greater than current age.'); return; }
-    const r = (parseFloat(rate) || 0) / 100 / 12;
-    const n = years * 12;
-    const pv = parseFloat(savings) || 0;
-    const pmt = parseFloat(monthly) || 0;
-    const fv = pv * Math.pow(1 + r, n) + pmt * (Math.pow(1 + r, n) - 1) / r;
-    const totalContrib = pv + pmt * n;
-    const withdrawal4pct = fv * 0.04 / 12;
-    setResult(`Total at Retirement: $${fv.toLocaleString()}\nTotal Contributions: $${totalContrib.toLocaleString()}\nInvestment Growth: $${(fv - totalContrib).toLocaleString()}\nYears Saving: ${years}\n4% Monthly Withdrawal: $${withdrawal4pct.toLocaleString()}`);
-  }, [currentAge, retireAge, savings, monthly, rate]);
   const presets = [
     { label: 'Start Late (40)', apply: () => { setCurrentAge('40'); setRetireAge('65'); setSavings('100000'); setMonthly('2000'); setRate('7'); } },
     { label: 'Early Start (25)', apply: () => { setCurrentAge('25'); setRetireAge('60'); setSavings('10000'); setMonthly('1000'); setRate('8'); } },
@@ -36,9 +23,12 @@ export default function RetirementCalculator() {
   const totalContrib = pv + pmt * n;
   const growth = fv - totalContrib;
   const growthPct = totalContrib > 0 ? (growth / totalContrib) * 100 : 0;
+  const result = parseFloat(retireAge) > parseFloat(currentAge)
+    ? `Total at Retirement: $${fv.toLocaleString()}\nTotal Contributions: $${totalContrib.toLocaleString()}\nInvestment Growth: $${growth.toLocaleString()}\nYears Saving: ${yrs}\n4% Monthly Withdrawal: $${(fv * 0.04 / 12).toLocaleString()}`
+    : 'Retirement age must be greater than current age.';
   return (
-    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo" customResult={
-      result ? (
+    <CalculatorShell title="Retirement Calculator" result={result} auto presets={presets} accent="indigo" customResult={
+      parseFloat(retireAge) > parseFloat(currentAge) ? (
         <div className="space-y-3">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Retirement Nest Egg</div>

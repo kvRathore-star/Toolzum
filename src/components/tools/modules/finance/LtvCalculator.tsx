@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,10 +7,6 @@ export default function LtvCalculator() {
   const [arpu, setArpu] = useState('50');
   const [churn, setChurn] = useState('5');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const ltv = parseFloat(arpu) / (parseFloat(churn) / 100);
-    setResult(`Customer Lifetime Value: $${ltv.toFixed(2)}`);
-  }, [arpu, churn]);
   const presets = [
     { label: 'SaaS', apply: () => { setArpu('50'); setChurn('5'); } },
     { label: 'Enterprise', apply: () => { setArpu('500'); setChurn('3'); } },
@@ -18,7 +14,7 @@ export default function LtvCalculator() {
   ];
   const ltv = parseFloat(arpu) / (parseFloat(churn) / 100 || 0.01);
   return (
-    <CalculatorShell title="LTV Calculator" result={result} onCalculate={calc} presets={presets} accent="sky" customResult={
+    <CalculatorShell title="LTV Calculator" result={result} auto presets={presets} accent="sky" customResult={
       result ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>

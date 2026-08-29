@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -9,17 +9,6 @@ export default function CarLeaseCalculator() {
   const [term, setTerm] = useState('36');
   const [mf, setMf] = useState('0.00125');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const cap = parseFloat(capCost) || 0;
-    const res = parseFloat(residual) || 0;
-    const t = parseFloat(term) || 1;
-    const moneyFactor = parseFloat(mf) || 0;
-    const depreciation = (cap - res) / t;
-    const finance = (cap + res) * moneyFactor;
-    const monthly = depreciation + finance;
-    const apr = moneyFactor * 2400;
-    setResult(`Monthly Payment: $${monthly.toFixed(2)}\nDepreciation: $${depreciation.toFixed(2)}/mo\nFinance Charge: $${finance.toFixed(2)}/mo\nMoney Factor APR: ${apr.toFixed(2)}%\nTotal Lease Cost: $${(monthly * t).toFixed(2)}`);
-  }, [capCost, residual, term, mf]);
   const presets = [
     { label: 'Economy 36mo', apply: () => { setCapCost('25000'); setResidual('12500'); setTerm('36'); setMf('0.00150'); } },
     { label: 'Luxury 36mo', apply: () => { setCapCost('55000'); setResidual('30250'); setTerm('36'); setMf('0.00125'); } },
@@ -29,7 +18,7 @@ export default function CarLeaseCalculator() {
   const res = parseFloat(residual) || 0;
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
   return (
-    <CalculatorShell title="Car Lease Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
+    <CalculatorShell title="Car Lease Calculator" result={result} auto presets={presets} accent="amber" customResult={
       result && monthly > 0 ? (
         <div>
           <div className="text-center mb-3">

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -10,26 +10,12 @@ export default function TrialConversionCalculator() {
   const [trialLength, setTrialLength] = useState('14');
   const [price, setPrice] = useState('29');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const v = parseFloat(visitors) || 0;
-    const s = parseFloat(signups) || 0;
-    const p = parseFloat(paid) || 0;
-    const tl = parseFloat(trialLength) || 14;
-    const pr = parseFloat(price) || 0;
-    if (!v || !s || !p) { setResult(''); return; }
-    const signupRate = (s / v) * 100;
-    const conversionRate = (p / s) * 100;
-    const overallRate = (p / v) * 100;
-    const revenue = p * pr;
-    const monthlyRev = revenue * (30 / tl);
-    setResult(`Signup rate: ${signupRate.toFixed(1)}%\nTrial-to-paid: ${conversionRate.toFixed(1)}%\nOverall conversion: ${overallRate.toFixed(2)}%\nRevenue: $${Math.round(revenue)}\nEst. monthly revenue: $${Math.round(monthlyRev)}`);
-  }, [visitors, signups, paid, trialLength, price]);
   return (
     <CalculatorShell
       title="Trial Conversion Calculator"
       accent="violet"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: 'Typical SaaS', apply: () => { setVisitors('10000'); setSignups('500'); setPaid('75'); setTrialLength('14'); setPrice('29'); } },
         { label: 'High conversion', apply: () => { setVisitors('5000'); setSignups('250'); setPaid('50'); setTrialLength('7'); setPrice('49'); } },

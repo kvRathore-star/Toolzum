@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function EmiCalculator() {
   const [principal, setPrincipal] = useState('100000');
@@ -95,10 +96,11 @@ export default function EmiCalculator() {
           )}
 
           {emi !== null && (
-            <div className="flex gap-2">
-              <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-              <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-            </div>
+            <CalcActions
+              result={resultText}
+              downloadFilename="emi-calculation.txt"
+              accent="amber"
+            />
           )}
       </div>
     </div>

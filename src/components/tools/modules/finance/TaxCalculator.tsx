@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -8,34 +8,31 @@ export default function TaxCalculator() {
   const [filingStatus, setFilingStatus] = useState<'single'|'married'|'head'>('single');
   const [stateTax, setStateTax] = useState('5');
   const [deductions, setDeductions] = useState('14600');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const inc = parseFloat(income) || 0;
-    const ded = parseFloat(deductions) || 14600;
-    const st = parseFloat(stateTax) || 0;
-    const taxable = Math.max(0, inc - ded);
-    const brackets: Record<string, Array<{min: number; max: number; rate: number}>> = { single: [{min:0,max:11600,rate:0.1},{min:11600,max:47150,rate:0.12},{min:47150,max:100525,rate:0.22},{min:100525,max:191950,rate:0.24},{min:191950,max:243725,rate:0.32},{min:243725,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}], married: [{min:0,max:23200,rate:0.1},{min:23200,max:94300,rate:0.12},{min:94300,max:201050,rate:0.22},{min:201050,max:383900,rate:0.24},{min:383900,max:487450,rate:0.32},{min:487450,max:731200,rate:0.35},{min:731200,max:Infinity,rate:0.37}], head: [{min:0,max:16550,rate:0.1},{min:16550,max:63100,rate:0.12},{min:63100,max:100500,rate:0.22},{min:100500,max:191950,rate:0.24},{min:191950,max:243700,rate:0.32},{min:243700,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}] };
-    let federalTax = 0;
-    let remaining = taxable;
-    for (const b of brackets[filingStatus]) {
-      if (remaining <= 0) break;
-      const taxableInBracket = Math.min(remaining, b.max - b.min);
-      federalTax += taxableInBracket * b.rate;
-      remaining -= taxableInBracket;
-    }
-    const stateTaxAmount = taxable * (st / 100);
-    const fica = inc * 0.0765;
-    const totalTax = federalTax + stateTaxAmount + fica;
-    const effectiveRate = (totalTax / inc) * 100;
-    const takeHome = inc - totalTax;
-    setResult(`Gross income: $${inc.toLocaleString()}\nTaxable income: $${taxable.toLocaleString()}\nFederal: $${Math.round(federalTax).toLocaleString()}\nFICA: $${Math.round(fica).toLocaleString()}\nState: $${Math.round(stateTaxAmount).toLocaleString()}\nTotal tax: $${Math.round(totalTax).toLocaleString()}\nEffective rate: ${effectiveRate.toFixed(1)}%\nTake-home: $${Math.round(takeHome).toLocaleString()} (${(takeHome / inc * 100).toFixed(0)}%)`);
-  }, [income, filingStatus, stateTax, deductions]);
+  const inc = parseFloat(income) || 0;
+  const ded = parseFloat(deductions) || 14600;
+  const st = parseFloat(stateTax) || 0;
+  const taxable = Math.max(0, inc - ded);
+  const brackets: Record<string, Array<{min: number; max: number; rate: number}>> = { single: [{min:0,max:11600,rate:0.1},{min:11600,max:47150,rate:0.12},{min:47150,max:100525,rate:0.22},{min:100525,max:191950,rate:0.24},{min:191950,max:243725,rate:0.32},{min:243725,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}], married: [{min:0,max:23200,rate:0.1},{min:23200,max:94300,rate:0.12},{min:94300,max:201050,rate:0.22},{min:201050,max:383900,rate:0.24},{min:383900,max:487450,rate:0.32},{min:487450,max:731200,rate:0.35},{min:731200,max:Infinity,rate:0.37}], head: [{min:0,max:16550,rate:0.1},{min:16550,max:63100,rate:0.12},{min:63100,max:100500,rate:0.22},{min:100500,max:191950,rate:0.24},{min:191950,max:243700,rate:0.32},{min:243700,max:609350,rate:0.35},{min:609350,max:Infinity,rate:0.37}] };
+  let federalTax = 0;
+  let remaining = taxable;
+  for (const b of brackets[filingStatus]) {
+    if (remaining <= 0) break;
+    const taxableInBracket = Math.min(remaining, b.max - b.min);
+    federalTax += taxableInBracket * b.rate;
+    remaining -= taxableInBracket;
+  }
+  const stateTaxAmount = taxable * (st / 100);
+  const fica = inc * 0.0765;
+  const totalTax = federalTax + stateTaxAmount + fica;
+  const effectiveRate = inc > 0 ? (totalTax / inc) * 100 : 0;
+  const takeHome = inc - totalTax;
+  const result = inc > 0 ? `Gross income: $${inc.toLocaleString()}\nTaxable income: $${taxable.toLocaleString()}\nFederal: $${Math.round(federalTax).toLocaleString()}\nFICA: $${Math.round(fica).toLocaleString()}\nState: $${Math.round(stateTaxAmount).toLocaleString()}\nTotal tax: $${Math.round(totalTax).toLocaleString()}\nEffective rate: ${effectiveRate.toFixed(1)}%\nTake-home: $${Math.round(takeHome).toLocaleString()} (${(takeHome / inc * 100).toFixed(0)}%)` : '';
   return (
     <CalculatorShell
       title="Tax Calculator (US 2025)"
       accent="indigo"
       result={result}
-      onCalculate={calc}
+      auto
       presets={[
         { label: '60k Single', apply: () => { setIncome('60000'); setFilingStatus('single'); setStateTax('5'); setDeductions('14600'); } },
         { label: '150k Married', apply: () => { setIncome('150000'); setFilingStatus('married'); setStateTax('5'); setDeductions('29200'); } },

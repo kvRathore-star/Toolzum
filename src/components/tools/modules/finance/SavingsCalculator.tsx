@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -11,30 +11,8 @@ export default function SavingsCalculator() {
   const [compoundsPerYear, setCompoundsPerYear] = useState('12');
   const [result, setResult] = useState('');
   const [schedule, setSchedule] = useState<Array<{year: number; balance: number; contributions: number; interest: number}>>([]);
-  const calc = useCallback(() => {
-    const p = parseFloat(initial) || 0;
-    const m = parseFloat(monthly) || 0;
-    const r = (parseFloat(rate) || 0) / 100;
-    const y = parseFloat(years) || 0;
-    const n = parseFloat(compoundsPerYear) || 12;
-    if (!r && !y) { setResult(''); return; }
-    const periodicRate = r / n;
-    const totalPeriods = y * n;
-    const future = p * Math.pow(1 + periodicRate, totalPeriods) + m * (Math.pow(1 + periodicRate, totalPeriods) - 1) / periodicRate;
-    const totalContributions = p + m * y * 12;
-    const totalInterest = future - totalContributions;
-    const sched: Array<{year: number; balance: number; contributions: number; interest: number}> = [];
-    for (let yr = 1; yr <= y; yr++) {
-      const per = yr * n;
-      const bal = p * Math.pow(1 + periodicRate, per) + m * (Math.pow(1 + periodicRate, per) - 1) / periodicRate;
-      const contribs = p + m * yr * 12;
-      sched.push({ year: yr, balance: Math.round(bal * 100) / 100, contributions: Math.round(contribs * 100) / 100, interest: Math.round((bal - contribs) * 100) / 100 });
-    }
-    setSchedule(sched);
-    setResult(`Future value: $${future.toFixed(2)}\nTotal contributions: $${totalContributions.toFixed(2)}\nTotal interest: $${totalInterest.toFixed(2)}`);
-  }, [initial, monthly, rate, years, compoundsPerYear]);
   return (
-    <CalculatorShell title="Savings Calculator" accent="emerald" result={result} onCalculate={calc} customResult={
+    <CalculatorShell title="Savings Calculator" accent="emerald" result={result} auto customResult={
       schedule.length > 0 ? (
         <div className="overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">

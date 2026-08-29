@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,15 +8,6 @@ export default function InflationCalculator() {
   const [rate, setRate] = useState('3');
   const [years, setYears] = useState('10');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const p = parseFloat(present) || 0;
-    const r = (parseFloat(rate) || 0) / 100;
-    const y = parseFloat(years) || 0;
-    const fv = p * Math.pow(1 + r, y);
-    const loss = fv - p;
-    const buyingPowerLoss = (1 - p / fv) * 100;
-    setResult(`Future Value: $${fv.toFixed(2)}\nLoss of Purchasing Power: $${Math.abs(loss).toFixed(2)}\nBuying Power Reduction: ${buyingPowerLoss.toFixed(1)}%\nPresent Value: $${p.toFixed(2)}`);
-  }, [present, rate, years]);
   const presets = [
     { label: '10yr @ 3%', apply: () => { setPresent('1000'); setRate('3'); setYears('10'); } },
     { label: '20yr @ 4%', apply: () => { setPresent('1000'); setRate('4'); setYears('20'); } },
@@ -27,7 +18,7 @@ export default function InflationCalculator() {
   const y = parseFloat(years) || 0;
   const fv = p * Math.pow(1 + r, y);
   return (
-    <CalculatorShell title="Inflation Calculator" result={result} onCalculate={calc} presets={presets} accent="lime" customResult={
+    <CalculatorShell title="Inflation Calculator" result={result} auto presets={presets} accent="lime" customResult={
       result ? (
         <div>
           <div className="flex items-center justify-center gap-6">

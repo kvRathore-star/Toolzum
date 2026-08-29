@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Activity } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function BmrCalculator() {
   const [weight, setWeight] = useState(70);
@@ -72,6 +73,11 @@ export default function BmrCalculator() {
             <span className="text-xs text-[var(--text-muted)]">TDEE (Daily Calories Needed)</span>
             <p className="text-4xl font-extrabold text-[var(--accent)]">{Math.round(tdee)} kcal/day</p>
           </div>
+          <CalcActions
+            result={`BMR: ${bmr.toFixed(0)} kcal/day | TDEE: ${tdee.toFixed(0)} kcal/day`}
+            downloadData={`Metric,Value\nBMR,${bmr.toFixed(0)} kcal/day\nTDEE,${tdee.toFixed(0)} kcal/day\nActivity Level,${activity}\nWeight,${weight} kg\nHeight,${height} cm\nAge,${age}`}
+            downloadFilename="bmr-result.csv"
+          />
         </div>
       </div>
     </div>

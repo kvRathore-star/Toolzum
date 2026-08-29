@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,18 +7,6 @@ export default function NetWorthCalculator() {
   const [assets, setAssets] = useState('500000');
   const [liabilities, setLiabilities] = useState('200000');
   const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const a = parseFloat(assets) || 0;
-    const l = parseFloat(liabilities) || 0;
-    const nw = a - l;
-    const dti = a > 0 ? (l / a) * 100 : 0;
-    let health: string;
-    if (nw <= 0) health = 'Critical';
-    else if (dti > 50) health = 'Needs Improvement';
-    else if (dti > 30) health = 'Fair';
-    else health = 'Healthy';
-    setResult(`Net Worth: $${nw.toLocaleString()}\nAssets: $${a.toLocaleString()}\nLiabilities: $${l.toLocaleString()}\nDebt-to-Asset: ${dti.toFixed(1)}%\nFinancial Health: ${health}`);
-  }, [assets, liabilities]);
   const presets = [
     { label: 'Young Adult', apply: () => { setAssets('50000'); setLiabilities('20000'); } },
     { label: 'Mid Career', apply: () => { setAssets('500000'); setLiabilities('200000'); } },
@@ -29,7 +17,7 @@ export default function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
+    <CalculatorShell title="Net Worth Calculator" result={result} auto presets={presets} accent="purple" customResult={
       result ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">

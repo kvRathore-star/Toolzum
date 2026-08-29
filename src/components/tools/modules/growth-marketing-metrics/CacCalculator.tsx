@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { DollarSign, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; marketing: number; sales: number; acquired: number };
 
@@ -109,6 +110,13 @@ export default function CacCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`CAC: $${cac.toFixed(2)} | Total Spend: $${totalCost.toLocaleString()}`}
+        downloadData={csvContent}
+        downloadFilename="cac-calculation.csv"
+        accent="emerald"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

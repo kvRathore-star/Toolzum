@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { DollarSign, Percent, TrendingUp, Users, ShieldAlert, BarChart3, HelpCircle } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function SaasPricingCalculator() {
   const [arpu, setArpu] = useState<number>(50); // Average Revenue Per User (monthly)
@@ -230,6 +231,13 @@ export default function SaasPricingCalculator() {
             </div>
 
           </div>
+
+          {/* Actions */}
+          <CalcActions
+            result={`LTV:CAC ${ltvToCac.toFixed(1)}x (${healthText}) | Payback ${paybackPeriod.toFixed(1)}mo | Break-even ${breakEvenCustomers} users | LTV $${Math.round(ltv).toLocaleString()} | Gross Margin ${(grossMarginMultiplier * 100).toFixed(0)}%`}
+            downloadData={`Month,End Users,Added,Churned,MRR,ARR,Gross Profit\n${projections.map(p => `${p.month},${p.endCust},${p.added},${p.churned},${Math.round(p.mrr)},${Math.round(p.arr)},${Math.round(p.grossProfit)}`).join('\n')}`}
+            downloadFilename="saas-pricing-projections.csv"
+          />
 
           {/* Core Metrics Breakdown */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,24 +8,6 @@ export default function DiscountCalculator() {
   const [price, setPrice] = useState('100');
   const [discount, setDiscount] = useState('20');
   const [salePrice, setSalePrice] = useState('80');
-  const [result, setResult] = useState('');
-
-  const calc = useCallback(() => {
-    if (mode === 'forward') {
-      const p = parseFloat(price) || 0;
-      const d = parseFloat(discount) || 0;
-      const savings = p * d / 100;
-      const final = p - savings;
-      setResult(`Original: $${p.toFixed(2)}\nDiscount: ${d}% (-$${savings.toFixed(2)})\nFinal Price: $${final.toFixed(2)}\nYou Save: $${savings.toFixed(2)}`);
-    } else {
-      const sp = parseFloat(salePrice) || 0;
-      const d = parseFloat(discount) || 0;
-      if (d >= 100) { setResult('Discount must be less than 100%'); return; }
-      const original = sp / (1 - d / 100);
-      const savings = original - sp;
-      setResult(`Sale Price: $${sp.toFixed(2)}\nDiscount: ${d}%\nOriginal Price: $${original.toFixed(2)}\nYou Saved: $${savings.toFixed(2)}`);
-    }
-  }, [mode, price, discount, salePrice]);
 
   const presets = mode === 'forward' ? [
     { label: 'Flash Sale 50%', apply: () => { setPrice('100'); setDiscount('50'); } },
@@ -40,13 +22,18 @@ export default function DiscountCalculator() {
   const p = parseFloat(price) || 0;
   const d = parseFloat(discount) || 0;
   const sp = parseFloat(salePrice) || 0;
-  const savings = mode === 'forward' ? p * d / 100 : (sp / (1 - d / 100)) - sp;
+  const savings = mode === 'forward' ? p * d / 100 : d < 100 ? (sp / (1 - d / 100)) - sp : 0;
   const finalPrice = mode === 'forward' ? p - savings : sp;
-  const originalPrice = mode === 'forward' ? p : sp / (1 - d / 100);
+  const originalPrice = mode === 'forward' ? p : d < 100 ? sp / (1 - d / 100) : 0;
+  const result = mode === 'forward'
+    ? `Original: $${p.toFixed(2)}\nDiscount: ${d}% (-$${savings.toFixed(2)})\nFinal Price: $${finalPrice.toFixed(2)}\nYou Save: $${savings.toFixed(2)}`
+    : d >= 100
+      ? 'Discount must be less than 100%'
+      : `Sale Price: $${sp.toFixed(2)}\nDiscount: ${d}%\nOriginal Price: $${originalPrice.toFixed(2)}\nYou Saved: $${savings.toFixed(2)}`;
 
   return (
-    <CalculatorShell title="Discount Calculator" result={result} onCalculate={calc} presets={presets} accent="teal" customResult={
-      result ? (
+    <CalculatorShell title="Discount Calculator" result={result} auto presets={presets} accent="teal" customResult={
+      result && result !== 'Discount must be less than 100%' ? (
         <div>
           <div className="flex justify-between items-end mb-3">
             <div className="text-center flex-1">

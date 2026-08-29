@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Percent, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; initial: number; final: number };
 const PRESETS: Preset[] = [
@@ -101,6 +102,13 @@ export default function RoiCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`ROI: ${roi.toFixed(2)}% | Net Gain: $${gain.toFixed(2)}`}
+        downloadData={csvContent}
+        downloadFilename="roi-calculation.csv"
+        accent="emerald"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">

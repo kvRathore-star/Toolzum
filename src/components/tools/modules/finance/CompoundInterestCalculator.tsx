@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,23 +8,17 @@ export default function CompoundInterestCalculator() {
   const [rate, setRate] = useState('5');
   const [n, setN] = useState('12');
   const [t, setT] = useState('10');
-  const [result, setResult] = useState('');
-  const [yearData, setYearData] = useState<Array<{year: number; value: number; deposited: number; interest: number}>>([]);
-  const calc = useCallback(() => {
-    const P = parseFloat(principal);
-    const r = parseFloat(rate) / 100;
-    const nPerYear = parseFloat(n);
-    const years = parseFloat(t);
-    if (!P || !r || !nPerYear || !years) return;
-    const A = P * Math.pow(1 + r / nPerYear, nPerYear * years);
-    const table: Array<{year: number; value: number; deposited: number; interest: number}> = [];
-    for (let y = 1; y <= years; y++) {
-      const val = P * Math.pow(1 + r / nPerYear, nPerYear * y);
-      table.push({ year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 });
-    }
-    setYearData(table);
-    setResult(`Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%`);
-  }, [principal, rate, n, t]);
+  const P = parseFloat(principal);
+  const r = parseFloat(rate) / 100;
+  const nPerYear = parseFloat(n);
+  const years = parseFloat(t);
+  const A = P && r && nPerYear && years ? P * Math.pow(1 + r / nPerYear, nPerYear * years) : 0;
+  const yearData = P && r && nPerYear && years ? Array.from({ length: years }, (_, i) => {
+    const y = i + 1;
+    const val = P * Math.pow(1 + r / nPerYear, nPerYear * y);
+    return { year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 };
+  }) : [];
+  const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%` : '';
   const presets = [
     { label: 'S&P Avg (10yr)', apply: () => { setPrincipal('10000'); setRate('10'); setN('1'); setT('10'); } },
     { label: 'Monthly Save (5yr)', apply: () => { setPrincipal('5000'); setRate('7'); setN('12'); setT('5'); } },
@@ -32,7 +26,7 @@ export default function CompoundInterestCalculator() {
   ];
   const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
-    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
+    <CalculatorShell title="Compound Interest Calculator" result={result} auto presets={presets} accent="emerald" customResult={
       yearData.length > 0 ? (
         <div>
           <div className="px-4 py-2 border-b border-[var(--border-subtle)] text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Year-by-Year Growth</div>

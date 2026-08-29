@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Activity } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 type UnitSystem = 'metric' | 'imperial';
 
@@ -142,6 +143,11 @@ export default function BmiCalculator() {
               </p>
             </div>
           </div>
+          <CalcActions
+            result={`BMI: ${bmi.toFixed(1)} (${category}) | Healthy range: ${minHealthy}–${maxHealthy} kg`}
+            downloadData={`Metric,Value\nBMI,${bmi.toFixed(1)}\nCategory,${category}\nWeight,${unit === 'metric' ? weightKg + ' kg' : weightLbs + ' lbs'}\nHeight,${unit === 'metric' ? heightCm + ' cm' : heightFt + ' ft ' + heightIn + ' in'}\nHealthy range,${minHealthy}–${maxHealthy} kg`}
+            downloadFilename="bmi-result.csv"
+          />
         </div>
       </div>
     </div>

@@ -1,22 +1,11 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
 export default function HourlyToSalaryCalculator() {
   const [hourly, setHourly] = useState('25');
   const [hoursPerWeek, setHoursPerWeek] = useState('40');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const h = parseFloat(hourly) || 0;
-    const hpw = parseFloat(hoursPerWeek) || 0;
-    const annual = h * hpw * 52;
-    const monthly = annual / 12;
-    const biweekly = annual / 26;
-    const weekly = h * hpw;
-    const daily = h * 8;
-    setResult(`Annual: $${annual.toLocaleString()}\nMonthly: $${monthly.toLocaleString()}\nBiweekly: $${biweekly.toLocaleString()}\nWeekly: $${weekly.toLocaleString()}\nDaily (8h): $${daily.toLocaleString()}\nHourly: $${h.toFixed(2)}`);
-  }, [hourly, hoursPerWeek]);
   const presets = [
     { label: 'Min Wage', apply: () => { setHourly('15'); setHoursPerWeek('40'); } },
     { label: 'Mid Career', apply: () => { setHourly('35'); setHoursPerWeek('40'); } },
@@ -26,9 +15,10 @@ export default function HourlyToSalaryCalculator() {
   const hpw = parseFloat(hoursPerWeek) || 0;
   const annual = h * hpw * 52;
   const monthly = annual / 12;
+  const result = `Annual: $${annual.toLocaleString()}\nMonthly: $${monthly.toLocaleString()}\nBiweekly: $${(annual / 26).toLocaleString()}\nWeekly: $${(h * hpw).toLocaleString()}\nDaily (8h): $${(h * 8).toLocaleString()}\nHourly: $${h.toFixed(2)}`;
   return (
-    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets} accent="pink" customResult={
-      result ? (
+    <CalculatorShell title="Hourly to Salary Calculator" result={result} auto presets={presets} accent="pink" customResult={
+      h > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { label: 'Annual', value: `$${annual.toLocaleString()}`, color: 'text-indigo-700 dark:text-indigo-400' },

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Calculator } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function GstCalculator() {
   const [amount, setAmount] = useState(1000);
@@ -74,6 +75,12 @@ export default function GstCalculator() {
             <p className="text-3xl font-extrabold text-emerald-500">₹{total.toFixed(2)}</p>
           </div>
         </div>
+
+        <CalcActions
+          result={`Base: ₹${amount} | GST (${rate}%): ₹${gstAmount.toFixed(2)} | Total: ₹${total.toFixed(2)}`}
+          downloadData={`Metric,Value\nBase Amount,₹${amount}\nGST Rate,${rate}%\nGST Amount,₹${gstAmount.toFixed(2)}\nTotal Amount,₹${total.toFixed(2)}`}
+          downloadFilename="gst-calculation.csv"
+        />
       </div>
     </div>
   );

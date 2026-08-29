@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { TrendingUp, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; monthly: number; rate: number; years: number };
 const PRESETS: Preset[] = [
@@ -131,6 +132,13 @@ export default function SipCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`FV: ₹${Math.round(futureValue).toLocaleString('en-IN')} | Invested: ₹${Math.round(totalInvested).toLocaleString('en-IN')} | Gain: +₹${Math.round(wealthGained).toLocaleString('en-IN')}`}
+        downloadData={csvContent}
+        downloadFilename="sip-calculation.csv"
+        accent="emerald"
+      />
 
       {/* Year-by-year table */}
       <div className="border-t border-[var(--border-subtle)] pt-4">

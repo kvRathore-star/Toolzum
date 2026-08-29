@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { DollarSign, Copy, Download, History, RotateCcw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 type Preset = { name: string; starting: number; ending: number; months: number };
 const PRESETS: Preset[] = [
@@ -115,6 +116,13 @@ export default function BurnRateCalculator() {
           </div>
         </div>
       </div>
+
+      <CalcActions
+        result={`Monthly Burn: $${Math.round(burn).toLocaleString()} | Runway: ${runway.toFixed(1)} months`}
+        downloadData={csvContent}
+        downloadFilename="burn-rate-calculation.csv"
+        accent="emerald"
+      />
 
       {history.length > 0 && (
         <div className="border-t border-[var(--border-subtle)] pt-4">
