@@ -296,10 +296,6 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/finance/currency-converter"
       },
       {
-        "name": "Percentage Calculator",
-        "href": "/calculator/percentage-calculator"
-      },
-      {
         "name": "EMI Calculator",
         "href": "/finance/emi-calculator"
       },
@@ -318,10 +314,51 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
       {
         "name": "Profit Margin Calculator",
         "href": "/finance/profit-margin-calculator"
+      },
+      {
+        "name": "Salary Calculator",
+        "href": "/finance/salary-calculator"
       }
     ],
     "allCount": 33,
     "allHref": "/finance",
+    "isIndia": false
+  },
+  {
+    "title": "Calculator",
+    "icon": "calculator",
+    "tools": [
+      {
+        "name": "Percentage Calculator",
+        "href": "/calculator/percentage-calculator"
+      },
+      {
+        "name": "Age Calculator",
+        "href": "/calculator/age-calculator"
+      },
+      {
+        "name": "College GPA Calculator",
+        "href": "/calculator/college-gpa-calculator"
+      },
+      {
+        "name": "Date Difference Calculator",
+        "href": "/calculator/date-difference-calculator"
+      },
+      {
+        "name": "Fraction Calculator",
+        "href": "/calculator/fraction-calculator"
+      },
+      {
+        "name": "Exponent Calculator",
+        "href": "/calculator/exponent-calculator"
+      },
+      {
+        "name": "DPI Calculator",
+        "href": "/calculator/dpi-calculator"
+      }
+    ],
+    "allCount": 66,
+    "allHref": "/calculator",
     "isIndia": false
   },
   {
@@ -335,10 +372,6 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
       {
         "name": "Password Generator",
         "href": "/utility/password-generator"
-      },
-      {
-        "name": "Age Calculator",
-        "href": "/calculator/age-calculator"
       },
       {
         "name": "Wheel of Names",
@@ -355,6 +388,10 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
       {
         "name": "Dice Roller",
         "href": "/utility/dice-roller"
+      },
+      {
+        "name": "Unit Converter",
+        "href": "/utility/unit-converter"
       }
     ],
     "allCount": 83,

@@ -77,7 +77,7 @@ export function Footer() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
           
           {/* Column 1: Brand */}
           <div className="flex flex-col items-start">
@@ -127,27 +127,35 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Legal + Account when signed in */}
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-4">
-              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
-              <ul className="flex flex-col gap-3">
-                <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
-                <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
-                <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
-                <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
-              </ul>
-            </div>
-            {session?.user && (
-              <div className="flex flex-col gap-4">
-                <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
-                <ul className="flex flex-col gap-3">
+          {/* Column 4: Legal */}
+          <div className="flex flex-col gap-4">
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Legal</p>
+            <ul className="flex flex-col gap-3">
+              <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
+              <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: Account */}
+          <div className="flex flex-col gap-4">
+            <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
+            <ul className="flex flex-col gap-3">
+              {session?.user ? (
+                <>
                   <li><Link href="/dashboard" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><LayoutDashboard className="w-3.5 h-3.5" /> Dashboard</Link></li>
                   <li><Link href="/dashboard/favorites" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><Star className="w-3.5 h-3.5" /> Favorites</Link></li>
                   <li><Link href="/dashboard/account" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><User className="w-3.5 h-3.5" /> My Account</Link></li>
-                </ul>
-              </div>
-            )}
+                </>
+              ) : (
+                <>
+                  <li><Link href="/sign-in" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Sign In</Link></li>
+                  <li><Link href="/sign-up" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Sign Up</Link></li>
+                  <li><Link href="/forgot-password" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Forgot Password</Link></li>
+                </>
+              )}
+            </ul>
           </div>
         </div>
 

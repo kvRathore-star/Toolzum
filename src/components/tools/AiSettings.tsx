@@ -9,9 +9,9 @@ export default function AiSettings() {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
       <div className="text-sm text-blue-600 dark:text-blue-400">
-        <p className="font-medium mb-0.5">Powered by Google Gemini</p>
+        <p className="font-medium mb-0.5">AI-Powered</p>
         <p className="text-blue-700 dark:text-blue-400/80 dark:text-blue-400/80 text-xs leading-relaxed">
-          AI features are free and server-powered — no API key needed. Your data is sent to our server for processing with Gemini.
+          AI features are server-powered — no API key needed. Your data is processed securely.
            {" "}<Link href="/privacy-policy" className="underline hover:no-underline">Privacy policy</Link>
         </p>
       </div>
