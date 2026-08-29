@@ -33,7 +33,7 @@ export default function SavingsCalculator() {
     return rows;
   }, [initial, monthly, rate, years, compoundsPerYear]);
   return (
-    <CalculatorShell title="Savings Calculator" accent="emerald" result={schedule.length} auto customResult={
+    <CalculatorShell title="Savings Calculator" accent="emerald" result={`${schedule.length} years`} auto customResult={
       schedule.length > 0 ? (
         <div className="overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">
