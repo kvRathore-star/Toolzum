@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { gcd, inputCls } from '../Calculators.shared';
 
 export default function FractionCalculator() {
@@ -31,7 +30,7 @@ export default function FractionCalculator() {
     { label: '3/4 * 2/5', apply: () => { setFrac1('3/4'); setFrac2('2/5'); setOp('*'); } },
   ];
   return (
-    <CalculatorShell title="Fraction Calculator" icon={<Calculator className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
+    <CalculatorShell title="Fraction Calculator" result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
       result ? (
         <div className="text-center font-mono">
           <div className="text-lg text-[var(--text-primary)]">{result.split('\n')[0]}</div>

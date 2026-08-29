@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { GraduationCap, Calculator } from 'lucide-react';
 import { gradePointsMap, inputCls } from '../Calculators.shared';
 
 export default function CollegeGpaCalculator() {
@@ -33,7 +32,7 @@ export default function CollegeGpaCalculator() {
     { label: 'Junior Year', apply: () => { setSemGrades('A-,A,B'); setSemCredits('4,3,3'); setPrevGpa('3.2'); setPrevCredits('60'); } },
   ];
   return (
-    <CalculatorShell title="College GPA Calculator" icon={<GraduationCap className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
+    <CalculatorShell title="College GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
       result ? (() => {
         const g = semGrades.split(',').map(g => g.trim().toUpperCase());
         const c = semCredits.split(',').map(Number);

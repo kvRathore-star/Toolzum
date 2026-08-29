@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function NetWorthCalculator() {
@@ -30,7 +29,7 @@ export default function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
+    <CalculatorShell title="Net Worth Calculator" result={result} onCalculate={calc} presets={presets} accent="purple" customResult={
       result ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">

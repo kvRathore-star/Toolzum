@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { gcd, inputCls } from '../Calculators.shared';
 
 export default function RatioCalculator() {
@@ -30,7 +29,7 @@ export default function RatioCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Ratio Calculator" icon={<Calculator className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="blue" customResult={customResult}>
+    <CalculatorShell title="Ratio Calculator" result={result} onCalculate={calc} presets={presets} accent="blue" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">First Number</label><input type="number" value={num1} onChange={e => setNum1(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Second Number</label><input type="number" value={num2} onChange={e => setNum2(e.target.value)} className={inputCls} /></div>

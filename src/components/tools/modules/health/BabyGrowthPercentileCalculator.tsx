@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BabyGrowthPercentileCalculator() {
@@ -26,7 +25,7 @@ export default function BabyGrowthPercentileCalculator() {
     setResult(`Height: ${Math.max(1, Math.min(99, hPct))}th percentile\nWeight: ${Math.max(1, Math.min(99, wPct))}th percentile`);
   }, [age, gender, height, weight]);
   return (
-    <CalculatorShell title="Baby Growth Percentile" icon={<Heart className="w-5 h-5" />} accent="rose" result={result} onCalculate={calc}>
+    <CalculatorShell title="Baby Growth Percentile" accent="rose" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>

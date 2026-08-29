@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function ChurnRateCalculator() {
@@ -27,7 +26,7 @@ export default function ChurnRateCalculator() {
   const t = parseFloat(total) || 1;
   const churnPct = (l / t) * 100;
   return (
-    <CalculatorShell title="Churn Rate Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="rose">
+    <CalculatorShell title="Churn Rate Calculator" result={result} onCalculate={calc} presets={presets} accent="rose">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>

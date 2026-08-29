@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function HeartRateZoneCalculator() {
@@ -25,7 +24,6 @@ export default function HeartRateZoneCalculator() {
   return (
     <CalculatorShell
       title="Heart Rate Zone Calculator"
-      icon={<Heart className="w-5 h-5" />}
       accent="rose"
       result={result}
       onCalculate={calc}

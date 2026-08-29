@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function SquareRootCalculator() {
@@ -28,7 +27,7 @@ export default function SquareRootCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Square Root Calculator" icon={<Calculator className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="sky" customResult={customResult}>
+    <CalculatorShell title="Square Root Calculator" result={result} onCalculate={calc} presets={presets} accent="sky" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number</label><input type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );

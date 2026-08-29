@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function ProteinCalculator() {
@@ -19,7 +18,7 @@ export default function ProteinCalculator() {
     setResult(`Daily protein: ${proteinG}g\nPer meal (3 meals): ${perMeal}g\nRange: ${Math.round(w * (factor - 0.3))}g - ${Math.round(w * (factor + 0.3))}g`);
   }, [weight, goal, activity]);
   return (
-    <CalculatorShell title="Protein Calculator" icon={<Heart className="w-5 h-5" />} accent="blue" result={result} onCalculate={calc}>
+    <CalculatorShell title="Protein Calculator" accent="blue" result={result} onCalculate={calc}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Goal</label><select className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="general">General health</option><option value="muscle">Muscle gain</option><option value="weightLoss">Weight loss</option></select></div>

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function HourlyToSalaryCalculator() {
@@ -28,7 +27,7 @@ export default function HourlyToSalaryCalculator() {
   const annual = h * hpw * 52;
   const monthly = annual / 12;
   return (
-    <CalculatorShell title="Hourly to Salary Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="pink" customResult={
+    <CalculatorShell title="Hourly to Salary Calculator" result={result} onCalculate={calc} presets={presets} accent="pink" customResult={
       result ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[

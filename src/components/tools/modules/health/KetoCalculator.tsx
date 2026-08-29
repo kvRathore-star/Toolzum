@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function KetoCalculator() {
@@ -26,7 +25,7 @@ export default function KetoCalculator() {
     setResult(`Daily calories: ${Math.round(deficit)} kcal\nProtein: ${Math.round(protein)} g (${Math.round(protein * 4)} kcal)\nFat: ${Math.round(fat)} g (${Math.round(fat * 9)} kcal)\nCarbs: ${carbs} g (${carbs * 4} kcal)\nNet carbs: ${carbs}g target`);
   }, [weight, height, age, gender, activity]);
   return (
-    <CalculatorShell title="Keto Calculator" icon={<Heart className="w-5 h-5" />} accent="amber" result={result} onCalculate={calc}>
+    <CalculatorShell title="Keto Calculator" accent="amber" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>

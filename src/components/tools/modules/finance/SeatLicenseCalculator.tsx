@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SeatLicenseCalculator() {
@@ -23,7 +22,6 @@ export default function SeatLicenseCalculator() {
   return (
     <CalculatorShell
       title="Seat License Calculator"
-      icon={<DollarSign className="w-5 h-5" />}
       accent="violet"
       result={result}
       onCalculate={calc}

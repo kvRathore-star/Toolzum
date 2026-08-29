@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { ac, borderClass } from '../miscToolColors';
 import { labelClass, selClass } from '../MiscToolsShared';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 
 export default function RoundingCalculator() {
   const clr = ac('RoundingCalculator');
@@ -70,65 +69,7 @@ export default function RoundingCalculator() {
   };
 
   return (
-    <CalculatorShell icon={<Calculator className="w-5 h-5" />} title="Rounding Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" customResult={
-      <div className="space-y-4">
-        <div className="text-center">
-          <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">{modeLabels[mode]}</div>
-          <div className="text-4xl font-bold text-amber-700 dark:text-amber-300 font-mono">{n} → {result}</div>
-          <div className="text-xs text-[var(--text-secondary)] mt-1">{modeDescriptions[mode]}</div>
-        </div>
-
-        {digit !== null && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Rounding Decision</div>
-            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
-              <div>Digit at position {p + 1}: <span className="font-bold text-amber-600 dark:text-amber-400">{digit}</span></div>
-              {mode === 'half-up' && <div>{digit >= 5 ? `≥ 5 → round up` : `< 5 → round down`}</div>}
-              {mode === 'half-even' && <div>{digit > 5 ? `> 5 → round up` : digit < 5 ? `< 5 → round down` : `= 5 → round to even (${result * (10 ** p) % 2 === 0 ? 'even' : 'odd'})`}</div>}
-              {mode === 'floor' && <div>Floor: always rounds toward −∞ (e.g. −3.7 → −4)</div>}
-              {mode === 'ceil' && <div>Ceil: always rounds toward +∞ (e.g. −3.7 → −3)</div>}
-              {mode === 'truncate' && <div>Truncate: drops decimals without rounding (toward zero)</div>}
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-4 gap-2">
-          {[0, 1, 2, 3].map(dp => (
-            <div key={dp} className="bg-[var(--bg-surface)] rounded-xl p-2 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">{dp} dp</div>
-              <div className="text-sm font-mono font-bold text-[var(--text-primary)]">{Number(num).toFixed(dp)}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    }>
-      <div className="space-y-4">
-        <div className="grid grid-cols-2 gap-2">
-          <div>
-            <label className={labelClass}>Value</label>
-            <input type="number" step="any" value={num} onChange={e => setNum(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
-          </div>
-          <div>
-            <label className={labelClass}>Decimal places</label>
-            <input type="number" min={0} max={15} value={places} onChange={e => setPlaces(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-1.5">
-          {['half-up', 'half-even', 'floor', 'ceil', 'truncate'].map(key => (
-            <button key={key} onClick={() => setMode(key)}
-              className={`px-3 py-1.5 text-xs rounded-lg border transition-colors font-medium ${mode === key ? 'bg-amber-500 text-white border-amber-500' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-zinc-300 dark:border-zinc-700 hover:border-amber-500'}`}>
-              {modeLabels[key]}
-            </button>
-          ))}
-        </div>
-      </div>
-    </CalculatorShell>
-  );
-}
-title="Rounding Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" customResult={
+    <CalculatorShell title="Rounding Calculator" result={resultText} onCalculate={() => {}} presets={presets} accent="amber" customResult={
       <div className="space-y-4">
         <div className="text-center">
           <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">{modeLabels[mode]}</div>

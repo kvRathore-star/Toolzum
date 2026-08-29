@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Monitor, Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function DpiCalculator() {
@@ -31,7 +30,7 @@ export default function DpiCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="DPI Calculator" icon={<Monitor className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="amber" customResult={customResult}>
+    <CalculatorShell title="DPI Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Pixels</label><input type="number" value={pixels} onChange={e => setPixels(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inches</label><input type="number" value={inches} onChange={e => setInches(e.target.value)} step="0.1" className={inputCls} /></div>

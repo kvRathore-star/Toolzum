@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { GraduationCap, Calculator } from 'lucide-react';
 import { gradePointsMap, inputCls } from '../Calculators.shared';
 
 export default function GpaCalculator() {
@@ -28,7 +27,7 @@ export default function GpaCalculator() {
     { label: 'Average Semester', apply: () => { setGrades('B,B+,C+'); setCredits('3,3,4'); } },
   ];
   return (
-    <CalculatorShell title="GPA Calculator" icon={<GraduationCap className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="sky" customResult={
+    <CalculatorShell title="GPA Calculator" result={result} onCalculate={calc} presets={presets} accent="sky" customResult={
       result ? (() => {
         const g = grades.split(',').map(g => g.trim().toUpperCase());
         const c = credits.split(',').map(Number);

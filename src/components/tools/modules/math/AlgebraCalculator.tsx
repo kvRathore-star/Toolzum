@@ -4,7 +4,6 @@ import { ac, borderClass } from '../miscToolColors';
 import { labelClass, selClass } from '../MiscToolsShared';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { getErrorMessage } from '@/utils/error';
-import { Calculator } from 'lucide-react';
 
 export default function AlgebraCalculator() {
   const clr = ac('AlgebraCalculator');
@@ -57,41 +56,7 @@ export default function AlgebraCalculator() {
   const resultText = result ? `= ${result}` : (error ? `Error: ${error}` : 'Enter expression');
 
   return (
-    <CalculatorShell icon={<Calculator className="w-5 h-5" />} title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
-      result ? (
-        <div className="text-center">
-          <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>
-          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 font-mono">${result}</div>
-        </div>
-      ) : error ? (
-        <div className="text-center">
-          <div className="text-xs text-rose-600 dark:text-rose-400 font-medium mb-1">Error</div>
-          <div className="text-rose-700 dark:text-rose-300">${error}</div>
-        </div>
-      ) : null
-    }>
-      <div className="space-y-4">
-        <label className={labelClass}>Expression</label>
-        <input type="text" value={expr} onChange={e => { setExpr(e.target.value); evaluate(); }}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50"
-          placeholder="e.g., 2*(3+4) or 10+20*3" />
-
-        <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-          <div className="text-xs text-[var(--text-secondary)] mb-2">Supported</div>
-          <div className="grid grid-cols-2 gap-2 text-xs text-[var(--text-secondary)]">
-            <span>+ Addition</span>
-            <span>- Subtraction</span>
-            <span>* Multiplication</span>
-            <span>/ Division</span>
-            <span>( ) Parentheses</span>
-            <span>Decimals</span>
-          </div>
-        </div>
-      </div>
-    </CalculatorShell>
-  );
-}
-title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
+    <CalculatorShell title="Algebraic Expression Evaluator" result={resultText} onCalculate={evaluate} presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
       result ? (
         <div className="text-center">
           <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function TrialConversionCalculator() {
@@ -28,7 +27,6 @@ export default function TrialConversionCalculator() {
   return (
     <CalculatorShell
       title="Trial Conversion Calculator"
-      icon={<DollarSign className="w-5 h-5" />}
       accent="violet"
       result={result}
       onCalculate={calc}

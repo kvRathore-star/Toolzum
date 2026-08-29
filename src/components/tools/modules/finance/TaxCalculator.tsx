@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function TaxCalculator() {
@@ -34,7 +33,6 @@ export default function TaxCalculator() {
   return (
     <CalculatorShell
       title="Tax Calculator (US 2025)"
-      icon={<DollarSign className="w-5 h-5" />}
       accent="indigo"
       result={result}
       onCalculate={calc}

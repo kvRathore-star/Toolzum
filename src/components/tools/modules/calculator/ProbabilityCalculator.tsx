@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function ProbabilityCalculator() {
@@ -37,7 +36,7 @@ export default function ProbabilityCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Probability Calculator" icon={<Calculator className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="green" customResult={customResult}>
+    <CalculatorShell title="Probability Calculator" result={result} onCalculate={calc} presets={presets} accent="green" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Favorable Outcomes</label><input type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Possible Outcomes</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>

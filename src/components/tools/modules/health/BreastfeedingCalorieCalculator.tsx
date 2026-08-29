@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BreastfeedingCalorieCalculator() {
@@ -17,7 +16,7 @@ export default function BreastfeedingCalorieCalculator() {
     setResult(`Est. milk per feed: ${milkPerFeedMl} mL\nDaily milk output: ${dailyMl} mL\nCalories burned: ~${caloriesBurned} kcal/day`);
   }, [age, feedings]);
   return (
-    <CalculatorShell title="Breastfeeding Calories" icon={<Heart className="w-5 h-5" />} accent="fuchsia" result={result} onCalculate={calc}>
+    <CalculatorShell title="Breastfeeding Calories" accent="fuchsia" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Baby age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Feedings / day</label><input className={inputCls} type="number" value={feedings} onChange={e => setFeedings(e.target.value)} /></div>

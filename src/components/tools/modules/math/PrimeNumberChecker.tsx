@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { ac, borderClass } from '../miscToolColors';
 import { labelClass, selClass } from '../MiscToolsShared';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 
 export default function PrimeNumberChecker() {
   const clr = ac('PrimeNumberChecker');
@@ -35,78 +34,7 @@ export default function PrimeNumberChecker() {
   const resultText = nn < 2 ? `${nn} is less than 2` : prime ? `${nn} is prime` : `${nn} = ${factorList.join(' × ')}`;
 
   return (
-    <CalculatorShell icon={<Calculator className="w-5 h-5" />} title="Prime Number Checker" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
-      <div className="space-y-4">
-        <div>
-          <label className={labelClass}>Number</label>
-          <input type="number" min={0} value={n} onChange={e => setN(e.target.value)}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
-        </div>
-
-        {nn >= 2 && (
-          <div className={`p-4 rounded-xl border ${prime ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-rose-500/10 border-rose-500/20'}`}>
-            <div className="flex items-center gap-3">
-              <span className={`text-4xl ${prime ? 'text-emerald-500' : 'text-rose-500'}`}>{prime ? '✓' : '✗'}</span>
-              <div>
-                <div className={`text-lg font-bold ${prime ? 'text-emerald-700 dark:text-emerald-300' : 'text-rose-700 dark:text-rose-300'}`}>
-                  {nn} is {prime ? 'prime' : 'not prime'}
-                </div>
-                {!prime && factorList.length > 0 && (
-                  <div className="text-sm text-[var(--text-secondary)] mt-1">
-                    {nn} = {factorList.join(' × ')}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {nn >= 2 && (
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">Prime?</div>
-              <div className={`text-sm font-bold ${prime ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>{prime ? 'Yes' : 'No'}</div>
-            </div>
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">Factor Count</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">{factorList.length}</div>
-            </div>
-          </div>
-        )}
-
-        {nn >= 2 && !prime && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Prime Factorization</div>
-            <div className="font-mono text-sm text-[var(--text-primary)]">
-              {nn} = {factorList.map((f, i) => (
-                <span key={i}>
-                  {i > 0 && <span className="text-[var(--text-secondary)]"> × </span>}
-                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">{f}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {nn >= 2 && (nearestPrimes.below !== null || nearestPrimes.above !== null) && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Nearest Primes</div>
-            <div className="flex gap-2">
-              {nearestPrimes.below !== null && (
-                <span className="px-2 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono">{nearestPrimes.below}</span>
-              )}
-              {!prime && <span className="text-xs text-[var(--text-secondary)] self-center">← {nn} →</span>}
-              {nearestPrimes.above !== null && nearestPrimes.above !== nn && (
-                <span className="px-2 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-mono">{nearestPrimes.above}</span>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    </CalculatorShell>
-  );
-}
-title="Prime Number Checker" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
+    <CalculatorShell title="Prime Number Checker" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
       <div className="space-y-4">
         <div>
           <label className={labelClass}>Number</label>

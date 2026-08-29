@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function CompoundInterestCalculator() {
@@ -33,7 +32,7 @@ export default function CompoundInterestCalculator() {
   ];
   const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
-    <CalculatorShell title="Compound Interest Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
+    <CalculatorShell title="Compound Interest Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={
       yearData.length > 0 ? (
         <div>
           <div className="px-4 py-2 border-b border-[var(--border-subtle)] text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Year-by-Year Growth</div>

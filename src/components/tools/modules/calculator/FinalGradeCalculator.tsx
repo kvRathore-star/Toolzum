@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { GraduationCap, Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function FinalGradeCalculator() {
@@ -37,7 +36,7 @@ export default function FinalGradeCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Final Grade Calculator" icon={<GraduationCap className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="lime" customResult={customResult}>
+    <CalculatorShell title="Final Grade Calculator" result={result} onCalculate={calc} presets={presets} accent="lime" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (comma-separated)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Weights (comma-separated, %)</label><input type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputCls} /></div>

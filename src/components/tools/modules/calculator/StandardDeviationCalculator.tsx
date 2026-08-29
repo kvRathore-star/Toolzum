@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function StandardDeviationCalculator() {
@@ -22,7 +21,7 @@ export default function StandardDeviationCalculator() {
     setResult(`Count: ${nums.length}\nMean: ${mean.toFixed(4)}\nMedian: ${median}\nRange: ${min} - ${max}\nPopulation Std Dev: ${stdDev.toFixed(4)}\nSample Std Dev: ${sampleStdDev.toFixed(4)}\nVariance: ${variance.toFixed(4)}`);
   }, [numbers]);
   return (
-    <CalculatorShell title="Standard Deviation Calculator" icon={<Calculator className="w-5 h-5" />} accent="blue" result={result} onCalculate={calc}>
+    <CalculatorShell title="Standard Deviation Calculator" accent="blue" result={result} onCalculate={calc}>
       <div className="max-w-xl">
         <div><label className={labelCls}>Numbers (comma separated)</label><textarea className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
       </div>

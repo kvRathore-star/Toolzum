@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function GasMileageCalculator() {
@@ -29,7 +28,7 @@ export default function GasMileageCalculator() {
     }
   }, [distance, gallons, pricePerGallon, unit]);
   return (
-    <CalculatorShell title="Gas Mileage Calculator" icon={<Calculator className="w-5 h-5" />} accent="amber" result={result} onCalculate={calc} customResult={
+    <CalculatorShell title="Gas Mileage Calculator" accent="amber" result={result} onCalculate={calc} customResult={
       result ? (
         <div className="font-mono text-sm whitespace-pre">{result}</div>
       ) : null

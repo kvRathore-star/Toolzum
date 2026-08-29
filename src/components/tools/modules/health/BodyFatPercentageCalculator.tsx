@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function BodyFatPercentageCalculator() {
@@ -44,7 +43,7 @@ export default function BodyFatPercentageCalculator() {
     setCategory(cat);
   }, [gender, weight, waist, neck, hip]);
   return (
-    <CalculatorShell title="Body Fat Percentage" icon={<Heart className="w-5 h-5" />} accent="rose" result={result} onCalculate={calc}>
+    <CalculatorShell title="Body Fat Percentage" accent="rose" result={result} onCalculate={calc}>
       <div className="max-w-xl">
         <div className="grid grid-cols-2 gap-4">
           <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>

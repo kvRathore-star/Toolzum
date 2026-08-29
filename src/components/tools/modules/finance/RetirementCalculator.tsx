@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function RetirementCalculator() {
@@ -38,7 +37,7 @@ export default function RetirementCalculator() {
   const growth = fv - totalContrib;
   const growthPct = totalContrib > 0 ? (growth / totalContrib) * 100 : 0;
   return (
-    <CalculatorShell title="Retirement Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="indigo" customResult={
+    <CalculatorShell title="Retirement Calculator" result={result} onCalculate={calc} presets={presets} accent="indigo" customResult={
       result ? (
         <div className="space-y-3">
           <div className="text-center">

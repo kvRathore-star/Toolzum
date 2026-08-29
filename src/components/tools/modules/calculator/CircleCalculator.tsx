@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function CircleCalculator() {
@@ -34,7 +33,7 @@ export default function CircleCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Circle Calculator" icon={<Calculator className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="violet" customResult={customResult}>
+    <CalculatorShell title="Circle Calculator" result={result} onCalculate={calc} presets={presets} accent="violet" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Radius</label><input type="number" value={radius} onChange={e => setRadius(e.target.value)} step="0.1" className={inputCls} /></div>
     </CalculatorShell>
   );

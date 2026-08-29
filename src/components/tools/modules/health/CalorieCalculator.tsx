@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function CalorieCalculator() {
@@ -30,7 +29,6 @@ export default function CalorieCalculator() {
   return (
     <CalculatorShell
       title="Calorie Calculator (TDEE)"
-      icon={<Heart className="w-5 h-5" />}
       accent="emerald"
       result={result}
       onCalculate={calc}

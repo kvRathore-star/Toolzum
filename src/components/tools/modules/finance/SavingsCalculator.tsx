@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SavingsCalculator() {
@@ -35,7 +34,7 @@ export default function SavingsCalculator() {
     setResult(`Future value: $${future.toFixed(2)}\nTotal contributions: $${totalContributions.toFixed(2)}\nTotal interest: $${totalInterest.toFixed(2)}`);
   }, [initial, monthly, rate, years, compoundsPerYear]);
   return (
-    <CalculatorShell title="Savings Calculator" icon={<DollarSign className="w-5 h-5" />} accent="emerald" result={result} onCalculate={calc} customResult={
+    <CalculatorShell title="Savings Calculator" accent="emerald" result={result} onCalculate={calc} customResult={
       schedule.length > 0 ? (
         <div className="overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">

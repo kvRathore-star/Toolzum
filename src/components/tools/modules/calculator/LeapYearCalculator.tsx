@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Calendar, Calculator } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function LeapYearCalculator() {
@@ -27,7 +26,7 @@ export default function LeapYearCalculator() {
     </div>
   ) : null;
   return (
-    <CalculatorShell title="Leap Year Calculator" icon={<Calendar className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="red" customResult={customResult}>
+    <CalculatorShell title="Leap Year Calculator" result={result} onCalculate={calc} presets={presets} accent="red" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );

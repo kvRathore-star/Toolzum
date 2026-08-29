@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function MrrCalculator() {
@@ -24,7 +23,7 @@ export default function MrrCalculator() {
   const r = parseFloat(avgRevenue) || 0;
   const mrr = c * r;
   return (
-    <CalculatorShell title="MRR Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="fuchsia" customResult={
+    <CalculatorShell title="MRR Calculator" result={result} onCalculate={calc} presets={presets} accent="fuchsia" customResult={
       result ? (
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3">

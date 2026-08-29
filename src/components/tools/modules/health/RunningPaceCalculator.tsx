@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { Heart } from 'lucide-react';
 import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function RunningPaceCalculator() {
@@ -26,7 +25,7 @@ export default function RunningPaceCalculator() {
     setResult(`Pace: ${paceMinInt}:${paceSec.toString().padStart(2, '0')} /${unitLabel}\nSpeed: ${speed.toFixed(2)} ${unitLabel}/h\nTime: ${h}h ${m}m ${s}s`);
   }, [distance, unit, hours, minutes, seconds]);
   return (
-    <CalculatorShell title="Running Pace Calculator" icon={<Heart className="w-5 h-5" />} accent="orange" result={result} onCalculate={calc}>
+    <CalculatorShell title="Running Pace Calculator" accent="orange" result={result} onCalculate={calc}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Distance</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
         <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'km'|'mi')}><option value="km">km</option><option value="mi">mi</option></select></div>

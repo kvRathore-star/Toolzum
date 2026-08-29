@@ -1,7 +1,6 @@
 "use client";
 import { useState, useCallback } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { DollarSign } from 'lucide-react';
 import { inputCls } from '../Calculators.shared';
 
 export default function RentVsBuyCalculator() {
@@ -47,7 +46,7 @@ export default function RentVsBuyCalculator() {
   const rentTotal = monthlyRent * 12 * term;
   const buyPct = buyNet + rentTotal > 0 ? buyNet / (buyNet + rentTotal) * 100 : 50;
   return (
-    <CalculatorShell title="Rent vs Buy Calculator" icon={<DollarSign className="w-5 h-5" />} result={result} onCalculate={calc} presets={presets} accent="green" customResult={
+    <CalculatorShell title="Rent vs Buy Calculator" result={result} onCalculate={calc} presets={presets} accent="green" customResult={
       result ? (
         <div className="space-y-3">
           <div className="flex h-20 gap-3">
