@@ -7,7 +7,6 @@ export default function InflationCalculator() {
   const [present, setPresent] = useState('1000');
   const [rate, setRate] = useState('3');
   const [years, setYears] = useState('10');
-  const [result, setResult] = useState('');
   const presets = [
     { label: '10yr @ 3%', apply: () => { setPresent('1000'); setRate('3'); setYears('10'); } },
     { label: '20yr @ 4%', apply: () => { setPresent('1000'); setRate('4'); setYears('20'); } },
@@ -17,9 +16,10 @@ export default function InflationCalculator() {
   const r = (parseFloat(rate) || 0) / 100;
   const y = parseFloat(years) || 0;
   const fv = p * Math.pow(1 + r, y);
+  const result = p > 0 && y > 0 ? `$${fv.toFixed(0)}` : '';
   return (
     <CalculatorShell title="Inflation Calculator" result={result} auto presets={presets} accent="lime" customResult={
-      result ? (
+      p > 0 && y > 0 ? (
         <div>
           <div className="flex items-center justify-center gap-6">
             <div className="text-center">

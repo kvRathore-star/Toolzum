@@ -711,7 +711,7 @@ export function CaseConverter() {
   const resultText = result ? `Converted to ${cases.find(c => c.id === activeCase)?.label || activeCase}` : 'Enter text and choose a case style';
 
   return (
-    <CalculatorShell title="Case Converter" result={resultText} onCalculate={() => {}} presets={presets} accent="emerald" downloadData={result} downloadFilename="converted.txt">
+    <CalculatorShell title="Case Converter" result={resultText} presets={presets} accent="emerald" downloadData={result} downloadFilename="converted.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); setActiveCase(null); }} rows={4} placeholder="Enter text to convert..."

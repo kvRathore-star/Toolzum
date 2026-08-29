@@ -8,7 +8,6 @@ export default function CarLeaseCalculator() {
   const [residual, setResidual] = useState('15000');
   const [term, setTerm] = useState('36');
   const [mf, setMf] = useState('0.00125');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'Economy 36mo', apply: () => { setCapCost('25000'); setResidual('12500'); setTerm('36'); setMf('0.00150'); } },
     { label: 'Luxury 36mo', apply: () => { setCapCost('55000'); setResidual('30250'); setTerm('36'); setMf('0.00125'); } },
@@ -17,9 +16,10 @@ export default function CarLeaseCalculator() {
   const cap = parseFloat(capCost) || 0;
   const res = parseFloat(residual) || 0;
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
+  const result = monthly > 0 ? `$${monthly.toFixed(0)}/mo` : '';
   return (
     <CalculatorShell title="Car Lease Calculator" result={result} auto presets={presets} accent="amber" customResult={
-      result && monthly > 0 ? (
+      monthly > 0 ? (
         <div>
           <div className="text-center mb-3">
             <div className="text-3xl font-bold text-amber-700 dark:text-amber-400">${monthly.toFixed(0)}</div>

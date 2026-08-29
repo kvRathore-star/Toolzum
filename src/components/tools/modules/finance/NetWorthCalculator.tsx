@@ -6,7 +6,6 @@ import { inputCls } from '../Calculators.shared';
 export default function NetWorthCalculator() {
   const [assets, setAssets] = useState('500000');
   const [liabilities, setLiabilities] = useState('200000');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'Young Adult', apply: () => { setAssets('50000'); setLiabilities('20000'); } },
     { label: 'Mid Career', apply: () => { setAssets('500000'); setLiabilities('200000'); } },
@@ -17,8 +16,8 @@ export default function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" result={result} auto presets={presets} accent="purple" customResult={
-      result ? (
+    <CalculatorShell title="Net Worth Calculator" result={nw} auto presets={presets} accent="purple" customResult={
+      true ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div>

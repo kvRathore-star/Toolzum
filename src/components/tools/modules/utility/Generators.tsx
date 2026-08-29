@@ -737,8 +737,6 @@ export function RandomTokenGenerator() {
           </div>
           <Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} />
         </div>
-        <button onClick={generate} className="px-5 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Token</button>
-
         {result ? (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[120px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>

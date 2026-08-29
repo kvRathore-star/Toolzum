@@ -7,7 +7,6 @@ export default function DebtPayoffCalculator() {
   const [balance, setBalance] = useState('10000');
   const [rate, setRate] = useState('18');
   const [payment, setPayment] = useState('500');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'Credit Card', apply: () => { setBalance('10000'); setRate('18'); setPayment('500'); } },
     { label: 'Student Loan', apply: () => { setBalance('35000'); setRate('5.5'); setPayment('400'); } },
@@ -25,9 +24,10 @@ export default function DebtPayoffCalculator() {
       payoffMonths++;
     }
   }
+  const result = payoffMonths > 0 ? `${payoffMonths} months` : '';
   return (
     <CalculatorShell title="Debt Payoff Calculator" result={result} auto presets={presets} accent="orange" customResult={
-      result && payoffMonths > 0 ? (
+      payoffMonths > 0 ? (
         <div>
           <div className="px-4 py-3">
             <div className="flex items-center justify-between mb-2">

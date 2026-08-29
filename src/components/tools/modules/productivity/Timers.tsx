@@ -498,16 +498,15 @@ export function TimeDurationCalculator() {
   };
 
   return (
-    <Section title="Time Duration Calculator">
-      <div className="space-y-3">
-        <div className="flex gap-4">
-          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-          <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">End Time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-        </div>
-        <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Calculate Duration</button>
-        {result && <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono text-[var(--text-primary)]">{result}</div>}
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">Time Duration Calculator</h2>
+      <div className="flex gap-4">
+        <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Start Time</label><input type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+        <div className="flex-1"><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">End Time</label><input type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
       </div>
-    </Section>
+      <button onClick={calc} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Calculate Duration</button>
+      {result && <div className="p-4 bg-[var(--bg-surface)] rounded-lg text-sm font-mono text-[var(--text-primary)]">{result}</div>}
+    </div>
   );
 }
 

@@ -93,7 +93,8 @@ export function ListSorter() {
   const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
   const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='sorted-list.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
-    <div className="space-y-4">
+    <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
+      <h2 className="text-lg font-bold text-[var(--text-primary)]">List Sorter</h2>
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
           <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
@@ -101,22 +102,19 @@ export function ListSorter() {
           </button>
         ))}
       </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">List Sorter</h2>
-        <Input label="Enter items (one per line)" value={input} onChange={setInput} rows={5} />
-        <div className="flex gap-2">
-          <button className={btnClass(clr)} onClick={() => sort('az')}>A-Z</button>
-          <button className={btnClass(clr)} onClick={() => sort('za')}>Z-A</button>
-          <button className={btnClass(clr)} onClick={() => sort('len')}>By Length</button>
-        </div>
-        {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
-        {result.length > 0 && (
-          <div className="flex gap-2">
-            <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-            <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-          </div>
-        )}
+      <Input label="Enter items (one per line)" value={input} onChange={setInput} rows={5} />
+      <div className="flex gap-2">
+        <button className={btnClass(clr)} onClick={() => sort('az')}>A-Z</button>
+        <button className={btnClass(clr)} onClick={() => sort('za')}>Z-A</button>
+        <button className={btnClass(clr)} onClick={() => sort('len')}>By Length</button>
       </div>
+      {result.length > 0 && <div className="text-sm space-y-1">{result.map((item, i) => <div key={i} className="bg-[var(--bg-surface)] px-3 py-1 rounded">{i + 1}. {item}</div>)}</div>}
+      {result.length > 0 && (
+        <div className="flex gap-2">
+          <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+          <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        </div>
+      )}
     </div>
   );
 }

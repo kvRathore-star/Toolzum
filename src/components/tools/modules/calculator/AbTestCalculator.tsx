@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,22 +8,6 @@ export default function AbTestCalculator() {
   const [controlConversions, setControlConversions] = useState('100');
   const [variantVisitors, setVariantVisitors] = useState('1000');
   const [variantConversions, setVariantConversions] = useState('120');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const cv = parseFloat(controlVisitors) || 0;
-    const cc = parseFloat(controlConversions) || 0;
-    const vv = parseFloat(variantVisitors) || 0;
-    const vc = parseFloat(variantConversions) || 0;
-    if (!cv || !vv) return;
-    const cr1 = cc / cv;
-    const cr2 = vc / vv;
-    const pPool = (cc + vc) / (cv + vv);
-    const se = pPool * (1 - pPool) * (1 / cv + 1 / vv) > 0 ? Math.sqrt(pPool * (1 - pPool) * (1 / cv + 1 / vv)) : 0;
-    const z = se > 0 ? (cr2 - cr1) / se : 0;
-    const pct = cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0;
-    const significant = Math.abs(z) > 1.96;
-    setResult(`Control Rate: ${(cr1 * 100).toFixed(2)}%\nVariant Rate: ${(cr2 * 100).toFixed(2)}%\nImprovement: ${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%\nZ-Score: ${z.toFixed(3)}\n${significant ? 'Statistically Significant (p < 0.05)' : 'Not statistically significant'}`);
-  }, [controlVisitors, controlConversions, variantVisitors, variantConversions]);
   const presets = [
     { label: 'Winner', apply: () => { setControlVisitors('1000'); setControlConversions('100'); setVariantVisitors('1000'); setVariantConversions('130'); } },
     { label: 'Flat', apply: () => { setControlVisitors('1000'); setControlConversions('100'); setVariantVisitors('1000'); setVariantConversions('102'); } },
@@ -36,7 +20,7 @@ export default function AbTestCalculator() {
   const cr1 = cc / cv;
   const cr2 = vc / vv;
   const pct = cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0;
-  const customResult = result ? (
+  const customResult = (
     <div className="space-y-2">
       <div className="flex gap-3">
         <div className="flex-1 text-center">
@@ -54,9 +38,9 @@ export default function AbTestCalculator() {
         </span>
       </div>
     </div>
-  ) : null;
+  );
   return (
-    <CalculatorShell title="A/B Test Calculator" result={result} onCalculate={calc} presets={presets} accent="violet" customResult={customResult}>
+    <CalculatorShell title="A/B Test Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>

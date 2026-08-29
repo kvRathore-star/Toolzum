@@ -6,7 +6,6 @@ import { inputCls } from '../Calculators.shared';
 export default function RunwayCalculator() {
   const [cash, setCash] = useState('500000');
   const [burnRate, setBurnRate] = useState('50000');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'Seed Stage', apply: () => { setCash('500000'); setBurnRate('50000'); } },
     { label: 'Series A', apply: () => { setCash('3000000'); setBurnRate('200000'); } },
@@ -18,8 +17,8 @@ export default function RunwayCalculator() {
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell title="Runway Calculator" result={result} auto presets={presets} accent="emerald" customResult={
-      result ? (
+    <CalculatorShell title="Runway Calculator" result={months} auto presets={presets} accent="emerald" customResult={
+      true ? (
         <div className="space-y-2">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Runway</div>

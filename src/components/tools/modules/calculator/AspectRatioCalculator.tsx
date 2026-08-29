@@ -1,20 +1,11 @@
 "use client";
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { gcd, inputCls } from '../Calculators.shared';
 
 export default function AspectRatioCalculator() {
   const [width, setWidth] = useState('1920');
   const [height, setHeight] = useState('1080');
-  const [result, setResult] = useState('');
-  const calc = useCallback(() => {
-    const w = parseInt(width) || 0;
-    const h = parseInt(height) || 0;
-    if (!w || !h) return;
-    const g = gcd(w, h);
-    const ratio = (w / g) / (h / g);
-    setResult(`Aspect Ratio: ${w / g}:${h / g}\nRatio: ${ratio.toFixed(3)}:1\n(${w} \u00d7 ${h})`);
-  }, [width, height]);
   const presets = [
     { label: 'HD 16:9', apply: () => { setWidth('1920'); setHeight('1080'); } },
     { label: '4:3', apply: () => { setWidth('1024'); setHeight('768'); } },
@@ -25,7 +16,7 @@ export default function AspectRatioCalculator() {
   const g = gcd(w, h);
   const commonRatios = ['16:9', '4:3', '21:9', '3:2', '1:1', '5:4'];
   const match = commonRatios.find(r => { const [rw, rh] = r.split(':').map(Number); return w / h === rw / rh; });
-  const customResult = result ? (
+  const customResult = (
     <div>
       <div className="text-center">
         <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{w / g}:{h / g}</div>
@@ -35,9 +26,9 @@ export default function AspectRatioCalculator() {
         <div className="text-xs text-[var(--text-tertiary)]">{w} × {h}</div>
       </div>
     </div>
-  ) : null;
+  );
   return (
-    <CalculatorShell title="Aspect Ratio Calculator" result={result} onCalculate={calc} presets={presets} accent="emerald" customResult={customResult}>
+    <CalculatorShell title="Aspect Ratio Calculator" result="" auto presets={presets} accent="emerald" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width (px)</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Height (px)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputCls} /></div>

@@ -7,7 +7,6 @@ export default function CarLoanCalculator() {
   const [loan, setLoan] = useState('35000');
   const [rate, setRate] = useState('4.5');
   const [years, setYears] = useState('5');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'New Car 5yr', apply: () => { setLoan('35000'); setRate('4.5'); setYears('5'); } },
     { label: 'Used Car 3yr', apply: () => { setLoan('18000'); setRate('6.0'); setYears('3'); } },
@@ -17,9 +16,10 @@ export default function CarLoanCalculator() {
   const n = parseFloat(years) * 12;
   const p = parseFloat(loan);
   const pmt = p && r ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
+  const result = pmt > 0 ? `$${pmt.toFixed(0)}/mo` : '';
   return (
     <CalculatorShell title="Car Loan Calculator" result={result} auto presets={presets} accent="violet" customResult={
-      result && pmt > 0 ? (
+      pmt > 0 ? (
         <div className="flex items-center justify-center gap-8">
           <div className="text-center">
             <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">${pmt.toFixed(0)}</div>

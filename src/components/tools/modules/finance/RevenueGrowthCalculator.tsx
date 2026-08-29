@@ -6,7 +6,6 @@ import { inputCls } from '../Calculators.shared';
 export default function RevenueGrowthCalculator() {
   const [current, setCurrent] = useState('120000');
   const [previous, setPrevious] = useState('100000');
-  const [result, setResult] = useState('');
   const presets = [
     { label: 'YoY Growth', apply: () => { setCurrent('120000'); setPrevious('100000'); } },
     { label: 'QoQ Growth', apply: () => { setCurrent('55000'); setPrevious('50000'); } },
@@ -17,8 +16,8 @@ export default function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={result} auto presets={presets} accent="blue" customResult={
-      result ? (
+    <CalculatorShell title="Revenue Growth Calculator" result={growth} auto presets={presets} accent="blue" customResult={
+      true ? (
         <div>
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">

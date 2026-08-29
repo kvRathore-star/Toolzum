@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
@@ -9,10 +9,31 @@ export default function SavingsCalculator() {
   const [rate, setRate] = useState('5');
   const [years, setYears] = useState('10');
   const [compoundsPerYear, setCompoundsPerYear] = useState('12');
-  const [result, setResult] = useState('');
-  const [schedule, setSchedule] = useState<Array<{year: number; balance: number; contributions: number; interest: number}>>([]);
+  const schedule = useMemo(() => {
+    const i0 = parseFloat(initial) || 0;
+    const m = parseFloat(monthly) || 0;
+    const r = (parseFloat(rate) || 0) / 100;
+    const y = parseInt(years) || 0;
+    const n = parseInt(compoundsPerYear) || 12;
+    const rows: Array<{year: number; balance: number; contributions: number; interest: number}> = [];
+    let balance = i0;
+    let totalContributions = i0;
+    let totalInterest = 0;
+    for (let yr = 1; yr <= y; yr++) {
+      for (let period = 0; period < n; period++) {
+        const interest = balance * (r / n);
+        balance += interest;
+        totalInterest += interest;
+        const periodContrib = m * (12 / n);
+        balance += periodContrib;
+        totalContributions += periodContrib;
+      }
+      rows.push({ year: yr, balance: Math.round(balance), contributions: Math.round(totalContributions), interest: Math.round(totalInterest) });
+    }
+    return rows;
+  }, [initial, monthly, rate, years, compoundsPerYear]);
   return (
-    <CalculatorShell title="Savings Calculator" accent="emerald" result={result} auto customResult={
+    <CalculatorShell title="Savings Calculator" accent="emerald" result={schedule.length} auto customResult={
       schedule.length > 0 ? (
         <div className="overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">
