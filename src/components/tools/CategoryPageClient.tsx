@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { ToolMetadata, ToolCategory } from "@/registry/tools";
-import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown, ArrowUpDown } from "lucide-react";
+import { Search, ChevronRight, Grid3X3, List, ChevronDown, Image, FileText, Code2, Briefcase, Wrench, Compass, Sun, Sparkles, Crown, ArrowUpDown, PanelLeft, X } from "lucide-react";
 import { getCategoryTheme, getCategoryGroup } from "@/lib/categoryTheme";
 import { FavoriteStarButton } from "@/components/FavoriteStarButton";
 import type { CategorySection } from "@/data/categorySections";
@@ -242,6 +242,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
   const [letterFilter, setLetterFilter] = React.useState("");
   const [expandedSections, setExpandedSections] = React.useState<Set<string>>(new Set());
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
   const toggleSection = (id: string) => {
     setExpandedSections(prev => {
@@ -313,6 +314,77 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
           <ChevronRight className="w-3 h-3" />
           <span className="text-[var(--text-primary)]">{displayName}</span>
         </nav>
+
+        {/* Sidebar toggle */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 mb-4 text-[11px] font-mono border border-[var(--border-subtle)] rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors md:hidden"
+        >
+          <PanelLeft className="w-3 h-3" />
+          Categories
+        </button>
+
+        {/* Mobile sidebar overlay */}
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-50 md:hidden">
+            <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+            <div className="absolute left-0 top-0 h-full w-72 bg-[var(--bg-elevated)] border-r border-[var(--border-subtle)] p-4 overflow-y-auto">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-bold text-[var(--text-primary)]">Categories</h3>
+                <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-md hover:bg-[var(--bg-overlay)]">
+                  <X className="w-4 h-4 text-[var(--text-muted)]" />
+                </button>
+              </div>
+              <nav className="space-y-1">
+                <Link
+                  href="/tools"
+                  onClick={() => setSidebarOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-[11px] font-mono uppercase tracking-wider rounded-[var(--radius-md)] transition-colors border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--border-default)]"
+                >
+                  All Tools
+                </Link>
+                {GROUP_ORDER.map(groupLabel => {
+                  const cats = groupedCategories[groupLabel];
+                  if (!cats || cats.length === 0) return null;
+                  const isActive = groupLabel === group;
+                  return (
+                    <div key={groupLabel}>
+                      <div className={`flex items-center gap-2 px-3 py-2 text-[11px] font-mono uppercase tracking-wider mt-2 ${isActive ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'}`}>
+                        <span className={isActive ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'}>
+                          {GROUP_ICONS[groupLabel]}
+                        </span>
+                        {groupLabel}
+                      </div>
+                      <div className="ml-4 space-y-0.5">
+                        {cats.map(cat => {
+                          const theme = getCategoryTheme(cat);
+                          const Icon = theme.icon;
+                          const isCatActive = cat === category;
+                          const catDisplay = CATEGORY_DISPLAY_NAMES[cat.toLowerCase()] || cat;
+                          return (
+                            <Link
+                              key={cat}
+                              href={`/${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                              onClick={() => setSidebarOpen(false)}
+                              className={`flex items-center gap-2 px-3 py-1.5 text-xs rounded-[var(--radius-md)] transition-colors ${
+                                isCatActive
+                                  ? 'text-[var(--accent)] bg-[var(--accent-soft)] font-medium'
+                                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'
+                              }`}
+                            >
+                              <Icon className={`w-3 h-3 ${theme.iconColor}`} />
+                              <span>{catDisplay}</span>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        )}
 
         {/* Category Menubar */}
         <div ref={menuRef} className="relative mb-8">
