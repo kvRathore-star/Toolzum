@@ -1,11 +1,9 @@
 "use client";
 
 import React, { useMemo, useState } from 'react';
-import { TextSelect } from 'lucide-react';
-import { CalculatorShell } from '../shared/CalculatorShell';
-
-const labelCls = "text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider";
-const inputCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2";
+import { TextSelect, Copy } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const MODES = [
   {
@@ -53,47 +51,63 @@ export default function SmallTextGenerator() {
     return activeModeObj.apply(text);
   }, [text, activeModeObj]);
 
-  const presets = MODES.map(mode => ({
-    label: mode.label,
-    apply: () => setActiveMode(mode.id),
-  }));
-
-  const customResult = output ? (
-    <div className="space-y-2">
-      <textarea
-        value={output}
-        readOnly
-        className={`${inputCls} h-28 resize-none text-[var(--accent)] break-all font-mono`}
-      />
-      <span className="text-xs text-[var(--text-muted)]">{output.length} chars</span>
-    </div>
-  ) : (
-    <p className="text-[var(--text-muted)] text-sm italic">Your converted text will appear here...</p>
-  );
+  const handleCopy = (value: string) => {
+    if (!value) return;
+    clipboardWrite(value);
+    toast.success('Copied!');
+  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <CalculatorShell
-        title="Small Text Generator"
-        icon={<TextSelect className="w-5 h-5" />}
-        result={output}
-        onCalculate={() => {}}
-        calculateLabel="Convert"
-        presets={presets}
-        resultLabel="Converted Text"
-        accent="fuchsia"
-        customResult={customResult}
-      >
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
+        <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
+          <TextSelect className="w-5 h-5 text-[var(--accent)]" />
+          <h3 className="text-lg font-bold text-[var(--text-primary)]">Small Text Generator</h3>
+        </div>
+
         <div className="space-y-1">
-          <label className={labelCls}>Your Text</label>
+          <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
           <textarea
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type or paste your text here..."
-            className={`${inputCls} h-28 resize-none`}
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm"
           />
         </div>
-      </CalculatorShell>
+
+        <div className="flex flex-wrap gap-2">
+          {MODES.map(mode => (
+            <button
+              key={mode.id}
+              onClick={() => setActiveMode(mode.id)}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${
+                activeMode === mode.id
+                  ? 'bg-[var(--accent-ink)] text-white shadow-md'
+                  : 'bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:bg-[var(--border-subtle)] border border-[var(--border-subtle)]'
+              }`}
+            >
+              {mode.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Output</label>
+            {output && <span className="text-xs text-[var(--text-muted)]">{output.length} chars</span>}
+          </div>
+          <div className="relative">
+            <textarea
+              value={output}
+              readOnly
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] h-28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm break-all"
+            />
+          </div>
+          <button onClick={() => handleCopy(output)} disabled={!output} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+            <Copy className="w-4 h-4" /> Copy {activeModeObj.label}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
