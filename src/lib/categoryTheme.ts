@@ -6,7 +6,7 @@ import {
   Video,
   Cpu,
   Sun,
-  ArrowLeftRight,
+  ArrowRightLeft,
   Code,
   Shield,
   Puzzle,
@@ -16,7 +16,9 @@ import {
   DollarSign,
   CheckSquare,
   Calculator as CalculatorIcon,
+  Palette,
   BarChart3,
+  Megaphone,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -120,25 +122,25 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
   },
 
   Converter: {
-    icon: ArrowLeftRight,
+    icon: ArrowRightLeft,
     iconColor: "text-emerald-500",
     bgTint: "bg-emerald-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-emerald-500/5",
   },
   Transcription: {
-    icon: FileText,
+    icon: Mic,
     iconColor: "text-sky-500",
     bgTint: "bg-sky-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-sky-500/5",
   },
   Design: {
-    icon: ImageIcon,
+    icon: Palette,
     iconColor: "text-rose-500",
     bgTint: "bg-rose-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-rose-500/5",
   },
   Branding: {
-    icon: ImageIcon,
+    icon: Megaphone,
     iconColor: "text-fuchsia-500",
     bgTint: "bg-fuchsia-500/10",
     gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-fuchsia-500/5",
@@ -158,7 +160,7 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
 };
 
 const DEFAULT_THEME: CategoryTheme = {
-  icon: ArrowLeftRight,
+  icon: ArrowRightLeft,
   iconColor: "text-[var(--text-muted)]",
   bgTint: "bg-[var(--bg-overlay)]",
   gradientHover: "hover:bg-gradient-to-br hover:from-[var(--bg-elevated)] hover:to-orange-500/5",

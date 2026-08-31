@@ -28,14 +28,15 @@ export default function StandardDeviationCalculator() {
     </div>
   );
 
+  const presets = [
+    { label: 'Reset example', apply: () => setNumbers('10, 12, 23, 23, 16, 23, 21, 16') },
+    { label: '1-10', apply: () => setNumbers('1, 2, 3, 4, 5, 6, 7, 8, 9, 10') },
+  ];
+
   return (
-    <CalculatorShell title="Standard Deviation Calculator" accent="blue" result="" auto customResult={customResult}>
+    <CalculatorShell title="Standard Deviation Calculator" accent="blue" result="" auto customResult={customResult} presets={presets}>
       <div className="max-w-xl">
         <div><label className={labelCls}>Numbers (comma separated)</label><textarea className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setNumbers('10, 12, 23, 23, 16, 23, 21, 16')}>Reset example</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setNumbers('1, 2, 3, 4, 5, 6, 7, 8, 9, 10')}>1-10</button>
       </div>
     </CalculatorShell>
   );

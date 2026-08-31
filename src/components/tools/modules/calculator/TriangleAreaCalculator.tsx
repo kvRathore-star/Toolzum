@@ -49,18 +49,19 @@ export default function TriangleAreaCalculator() {
     </div>
   );
 
+  const presets = [
+    { label: 'Base/Height', apply: () => { setBase('10'); setHeight('8'); setMethod('baseheight'); } },
+    { label: '3-4-5', apply: () => { setSideA('5'); setSideB('6'); setSideC('7'); setMethod('sides'); } },
+  ];
+
   return (
-    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result="" auto customResult={customResult}>
+    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result="" auto customResult={customResult} presets={presets}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Method</label><select className={inputCls} value={method} onChange={e => setMethod(e.target.value as 'baseheight'|'sides'|'sas')}><option value="baseheight">Base & Height</option><option value="sides">Three sides (SSS)</option><option value="sas">Two sides & angle (SAS)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>
         {method === 'baseheight' && (<><div><label className={labelCls}>Base</label><input className={inputCls} type="number" value={base} onChange={e => setBase(e.target.value)} /></div><div><label className={labelCls}>Height</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div></>)}
         {method === 'sides' && (<><div><label className={labelCls}>Side A</label><input className={inputCls} type="number" value={sideA} onChange={e => setSideA(e.target.value)} /></div><div><label className={labelCls}>Side B</label><input className={inputCls} type="number" value={sideB} onChange={e => setSideB(e.target.value)} /></div><div><label className={labelCls}>Side C</label><input className={inputCls} type="number" value={sideC} onChange={e => setSideC(e.target.value)} /></div></>)}
         {method === 'sas' && (<><div><label className={labelCls}>Side A</label><input className={inputCls} type="number" value={sideA} onChange={e => setSideA(e.target.value)} /></div><div><label className={labelCls}>Side B</label><input className={inputCls} type="number" value={sideB} onChange={e => setSideB(e.target.value)} /></div><div><label className={labelCls}>Angle (\u00b0)</label><input className={inputCls} type="number" value={angle} onChange={e => setAngle(e.target.value)} /></div></>)}
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setBase('10'); setHeight('8'); setMethod('baseheight'); }}>Base/Height</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSideA('5'); setSideB('6'); setSideC('7'); setMethod('sides'); }}>3-4-5</button>
       </div>
     </CalculatorShell>
   );

@@ -11,7 +11,7 @@ import {
   ArrowRightLeft,
   Lock,
   TrendingUp,
-  Palette,
+  Megaphone,
   Sun,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -31,7 +31,7 @@ export const MEGAMENU_ICON_MAP: Record<string, LucideIcon> = {
   converter: ArrowRightLeft,
   privacy: Lock,
   seo: TrendingUp,
-  branding: Palette,
+  branding: Megaphone,
   "indian-utilities": Sun,
 };
 

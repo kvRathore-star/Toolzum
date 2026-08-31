@@ -1,9 +1,9 @@
 import {
   ArrowRight, ShieldCheck, Zap, Server,
   Upload, Download, Lock, Layers, Globe, Palette, BarChart3,
-  FileType, Image as ImageIcon, Video, Mic, Cpu, FileText, Code,
+  Image as ImageIcon, Video, Mic, Cpu, FileText, Code,
   Type, Shield, Search, Wrench, DollarSign, Heart, CheckSquare,
-  Calculator as CalculatorIcon, MapPin
+  Calculator as CalculatorIcon, ArrowRightLeft, Sun, Megaphone
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -45,7 +45,7 @@ export const CATEGORIES: CategoryDef[] = [
   { id: 'AI', label: 'AI Tools', icon: Cpu, desc: 'Generate, summarize & analyze with AI' },
   { id: 'Video', label: 'Video', icon: Video, desc: 'Trim, compress & transcode videos' },
   { id: 'Audio', label: 'Audio', icon: Mic, desc: 'Convert, cut & enhance audio files' },
-  { id: 'Converter', label: 'Convert', icon: FileType, desc: 'Convert between 50+ formats' },
+  { id: 'Converter', label: 'Convert', icon: ArrowRightLeft, desc: 'Convert between 50+ formats' },
   { id: 'Developer', label: 'Developer', icon: Code, desc: 'Format, minify & debug code' },
   { id: 'Calculator', label: 'Calculator', icon: CalculatorIcon, desc: 'Math, stats, finance & unit converters' },
   { id: 'Finance', label: 'Finance', icon: DollarSign, desc: 'Currency rates, GST, loans & budgeting' },
@@ -55,11 +55,11 @@ export const CATEGORIES: CategoryDef[] = [
   { id: 'Privacy', label: 'Privacy', icon: Shield, desc: 'Metadata remover, ad blocker & privacy cleaners' },
   { id: 'SEO', label: 'SEO', icon: Search, desc: 'Keyword tools, meta tags, robots.txt & audits' },
   { id: 'Design', label: 'Design', icon: Palette, desc: 'Color palettes, gradients & typography tools' },
-  { id: 'Branding', label: 'Branding', icon: BarChart3, desc: 'Logos, business cards, brand kits & social media assets' },
+  { id: 'Branding', label: 'Branding', icon: Megaphone, desc: 'Logos, business cards, brand kits & social media assets' },
   { id: 'Growth & Marketing', label: 'Growth & Marketing', icon: BarChart3, desc: 'ARR, MRR, LTV, CAC, CPM, ROAS & SaaS analytics' },
   { id: 'Transcription', label: 'Transcription', icon: Mic, desc: 'Speech-to-text, subtitles & caption tools' },
   { id: 'Productivity', label: 'Productivity', icon: CheckSquare, desc: 'Todo lists, habit trackers & time tools' },
-  { id: 'indian-utilities', label: 'Indian Utilities', icon: MapPin, desc: 'Aadhaar, PAN, GST, IFSC & India-specific tools' },
+  { id: 'indian-utilities', label: 'Indian Utilities', icon: Sun, desc: 'Aadhaar, PAN, GST, IFSC & India-specific tools' },
 ];
 
 export const STEPS: StepDef[] = [
