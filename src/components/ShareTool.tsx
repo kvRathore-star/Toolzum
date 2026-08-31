@@ -63,7 +63,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
 
       {open && (
         <>
-          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
+          <div className="fixed inset-0 z-40" role="button" tabIndex={0} onClick={() => setOpen(false)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(false); } }} />
           <div className="absolute right-0 top-full mt-2 z-[60] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-xl p-2 min-w-[180px] space-y-0.5">
             {platforms.map(p => (
               <a

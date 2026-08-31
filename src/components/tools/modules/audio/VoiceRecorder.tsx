@@ -307,7 +307,8 @@ export default function VoiceRecorder() {
             <div className="flex items-center justify-center gap-6">
               {!isRecording ? (
                 <button onClick={startRecording} disabled={!isSupported}
-                  className="relative w-20 h-20 rounded-full bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center shadow-xl transition-all active:scale-95">
+                  className="relative w-20 h-20 rounded-full bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center shadow-xl transition-all active:scale-95"
+                  aria-label="Start recording">
                   <Mic className="w-9 h-9" />
                 </button>
               ) : (
@@ -317,7 +318,8 @@ export default function VoiceRecorder() {
                     {isPaused ? <Play className="w-7 h-7" /> : <Pause className="w-7 h-7" />}
                   </button>
                   <button onClick={stopRecording}
-                    className="w-16 h-16 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-all active:scale-95">
+                    className="w-16 h-16 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center shadow-lg transition-all active:scale-95"
+                    aria-label="Stop recording">
                     <Square className="w-7 h-7" />
                   </button>
                 </>

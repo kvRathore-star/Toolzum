@@ -323,7 +323,7 @@ export default function UpiValidator() {
               <div
                 key={`${entry.upiId}-${entry.timestamp}`}
                 className="flex items-center justify-between p-3 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[#0d9488]/30 transition-colors group cursor-pointer"
-                onClick={() => {
+                role="button" tabIndex={0} onClick={() => {
                   setUpiId(entry.upiId);
                   setQrDataUrl(null);
                   const v = validateUpiId(entry.upiId);
@@ -331,6 +331,7 @@ export default function UpiValidator() {
                   setShowResult(true);
                   inputRef.current?.focus();
                 }}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setUpiId(entry.upiId); setQrDataUrl(null); const v = validateUpiId(entry.upiId); setResult(v); setShowResult(true); inputRef.current?.focus(); } }}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="p-1.5 rounded-lg bg-[#0d9488]/10 text-[#0d9488]">

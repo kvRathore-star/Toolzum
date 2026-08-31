@@ -198,7 +198,7 @@ export function CalculatorShell({
 
         {/* Right: Result panel */}
         {hasResult && (
-          <div className={`rounded-2xl p-6 border flex flex-col justify-between ${error ? 'bg-red-500/10 border-red-500/20' : a.resultBg + ' ' + a.resultBorder}`}>
+          <div aria-live="polite" className={`rounded-2xl p-6 border flex flex-col justify-between ${error ? 'bg-red-500/10 border-red-500/20' : a.resultBg + ' ' + a.resultBorder}`}>
             {/* Stats row (if provided) */}
             {resultStats && resultStats.length > 0 && (
               <div className="space-y-3 mb-4">

@@ -215,7 +215,8 @@ export default function BankStatementAnalyser() {
         {transactions.length === 0 ? (
           <div>
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-              onClick={() => document.getElementById('bs-statement-file')?.click()}>
+              role="button" tabIndex={0} onClick={() => document.getElementById('bs-statement-file')?.click()}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById('bs-statement-file')?.click(); } }}>
               <Upload className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
               <p className="text-base font-semibold text-[var(--text-secondary)]">Upload bank statement</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">CSV, TXT — paste raw text below</p>

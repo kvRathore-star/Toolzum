@@ -59,7 +59,7 @@ export default function UrlParser() {
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">URL Components</h4>
             <div className="flex gap-1">
               <button onClick={copyAll} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> All</button>
-              <button onClick={downloadJson} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
+              <button onClick={downloadJson} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1" aria-label="Download"><Download className="w-3 h-3" /></button>
             </div>
           </div>
           <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl overflow-hidden">

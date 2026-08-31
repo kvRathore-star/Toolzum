@@ -42,11 +42,15 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
   return (
     <div
       className="fixed inset-0 z-[100] bg-[var(--bg-base)]/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] p-4"
+      role="button" tabIndex={0}
       onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClose(); } }}
     >
         <div 
           className="w-[calc(100%-2rem)] max-w-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col max-h-[60vh] mt-[10vh]"
+          role="button" tabIndex={0}
           onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); } }}
         >
           <Command className="flex flex-col h-full">
             <div className="flex items-center border-b border-[var(--border-subtle)] px-4">

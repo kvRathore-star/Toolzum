@@ -184,7 +184,8 @@ export default function GstinLookup() {
             <>
               <p className="text-xs text-[var(--text-secondary)]">Upload a CSV or text file with one GSTIN per line. Pro feature — bulk verify up to 500 GSTINs at once.</p>
               <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-                onClick={() => document.getElementById('bulk-gstin-file')?.click()}>
+                role="button" tabIndex={0} onClick={() => document.getElementById('bulk-gstin-file')?.click()}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById('bulk-gstin-file')?.click(); } }}>
                 <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
                 <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{bulkData.length > 0 ? `${bulkData.length} GSTINs loaded` : 'Upload CSV/TXT file'}</p>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">One GSTIN per line</p>

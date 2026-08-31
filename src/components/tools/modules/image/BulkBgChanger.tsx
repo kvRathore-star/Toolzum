@@ -163,8 +163,9 @@ export default function BulkBgChanger() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-          onClick={() => fileInputRef.current?.click()}>
+        <div role="button" tabIndex={0} className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
+          onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
           <ImagePlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
           <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Upload product photos</p>
           <p className="text-[10px] text-[var(--text-secondary)] mt-1">Select a color to remove, replace with your brand background</p>
@@ -212,7 +213,8 @@ export default function BulkBgChanger() {
 
               <div className="space-y-1.5 max-h-[300px] overflow-y-auto">
                 {images.map(item => (
-                  <div key={item.id} onClick={() => setSelectedImageId(item.id)}
+                  <div key={item.id} role="button" tabIndex={0} onClick={() => setSelectedImageId(item.id)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedImageId(item.id); } }}
                     className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition-colors ${
                       selectedImageId === item.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-[var(--border-subtle)] hover:border-zinc-400 dark:hover:border-zinc-500'
                     }`}>

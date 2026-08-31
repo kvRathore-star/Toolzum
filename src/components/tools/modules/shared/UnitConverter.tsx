@@ -120,8 +120,9 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
         Convert
       </button>
       {output && (
-        <div className="mt-4 p-3 bg-[var(--bg-surface)] rounded-lg text-sm text-center font-mono text-emerald-600 dark:text-emerald-400"
-          onClick={() => { clipboardWrite(output); toast.success('Copied!'); }}>
+        <div role="button" tabIndex={0} className="mt-4 p-3 bg-[var(--bg-surface)] rounded-lg text-sm text-center font-mono text-emerald-600 dark:text-emerald-400"
+          onClick={() => { clipboardWrite(output); toast.success('Copied!'); }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output); toast.success('Copied!'); } }}>
           {output}
         </div>
       )}

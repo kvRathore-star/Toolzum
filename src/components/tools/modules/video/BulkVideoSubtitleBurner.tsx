@@ -127,14 +127,14 @@ export default function BulkVideoSubtitleBurner() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div onClick={() => videoRef.current?.click()} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
+          <div role="button" tabIndex={0} onClick={() => videoRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); videoRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
             <Film className="w-8 h-8 text-[var(--text-muted)] mb-2" />
             <p className="text-sm font-medium text-[var(--text-primary)]">Videos</p>
             <p className="text-xs text-[var(--text-muted)] text-center">MP4, MOV, AVI, WebM</p>
             <p className="text-xs text-[var(--accent)] mt-1">{batch.files.length} selected</p>
             <input ref={videoRef} type="file" accept="video/*" multiple onChange={handleVideos} className="hidden" />
           </div>
-          <div onClick={() => srtRef.current?.click()} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
+          <div role="button" tabIndex={0} onClick={() => srtRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); srtRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
             <Subtitles className="w-8 h-8 text-[var(--text-muted)] mb-2" />
             <p className="text-sm font-medium text-[var(--text-primary)]">Subtitle file (.srt)</p>
             <p className="text-xs text-[var(--text-muted)] text-center">Single SRT applied to all videos</p>

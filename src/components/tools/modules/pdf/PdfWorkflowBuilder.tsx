@@ -312,7 +312,7 @@ export function PdfWorkflowBuilder() {
 
   function dropZone(label: string, onClick: () => void) {
     return (
-      <div onClick={onClick} className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500/50 transition-colors">
+      <div role="button" tabIndex={0} onClick={onClick} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }} className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500/50 transition-colors">
         <FileUp size={32} className="mx-auto mb-3 text-[var(--text-tertiary)]" />
         <p className="text-sm text-[var(--text-tertiary)]">{label}</p>
         <p className="text-xs text-[var(--text-tertiary)] mt-2">PDF files only</p>

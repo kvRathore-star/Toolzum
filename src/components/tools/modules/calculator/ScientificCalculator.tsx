@@ -280,7 +280,7 @@ export default function ScientificCalculator() {
             <button className={btnNum} onClick={() => insertText('8')}>8</button>
             <button className={btnNum} onClick={() => insertText('9')}>9</button>
             <button className={btnOp} onClick={() => insertText('/')}>\u00f7</button>
-            <button className={`${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`} onClick={handleBackspace}><Delete size={18} /></button>
+            <button className={`${btnBase} bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)]`} onClick={handleBackspace} aria-label="Backspace"><Delete size={18} /></button>
             <button className={btnNum} onClick={() => insertText('4')}>4</button>
             <button className={btnNum} onClick={() => insertText('5')}>5</button>
             <button className={btnNum} onClick={() => insertText('6')}>6</button>

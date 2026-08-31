@@ -249,7 +249,8 @@ function BulkLinkTab() {
       <p className="text-xs text-[var(--text-secondary)]">Upload a CSV with phone numbers and optional messages to generate bulk WhatsApp links.</p>
 
       <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-        onClick={() => fileInputRef.current?.click()}>
+        role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
         <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
         <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Upload CSV file'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">CSV format: phone,message (one per line)</p>
@@ -647,7 +648,8 @@ function ChatAnalyzerTab() {
       <p className="text-xs text-[var(--text-secondary)]">Export your WhatsApp chat (without media) and drop the <code className="text-emerald-500">.txt</code> file here to analyze.</p>
 
       <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-        onClick={() => fileInputRef.current?.click()}>
+        role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
         <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
         <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Tap to upload _chat.txt'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">WhatsApp → More → Export Chat → Without Media</p>

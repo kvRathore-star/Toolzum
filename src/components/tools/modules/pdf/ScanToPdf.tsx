@@ -106,7 +106,8 @@ export default function ScanToPdf() {
           <strong>Scan to PDF:</strong> Turn photos of documents into a professional PDF document. All processing happens in your browser &mdash; nothing is uploaded.
         </div>
         <div
-          onClick={() => inputRef.current?.click()}
+          role="button" tabIndex={0} onClick={() => inputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inputRef.current?.click(); } }}
           className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-3xl transition-all duration-300 ease-in-out cursor-pointer border-zinc-300 dark:border-zinc-700 bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:border-zinc-400 dark:hover:border-zinc-500"
         >
           <input

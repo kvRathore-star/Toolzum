@@ -72,10 +72,12 @@ export default function RotateImage() {
          <h2 className="text-2xl font-bold">Rotate & Flip Image</h2>
          <p className="text-[var(--text-secondary)]">Rotate to any angle, flip horizontally or vertically. All processing in your browser.</p>
          
-         <div 
-           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
-           onClick={() => !image && fileInputRef.current?.click()}
-         >
+          <div 
+            role="button" tabIndex={0}
+            className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
+            onClick={() => !image && fileInputRef.current?.click()}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!image) fileInputRef.current?.click(); } }}
+          >
            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" />
            {image ? (
              <div className="relative inline-block transition-transform duration-300" style={previewStyle}>

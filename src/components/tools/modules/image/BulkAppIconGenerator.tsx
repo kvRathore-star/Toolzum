@@ -139,7 +139,9 @@ export default function BulkAppIconGenerator() {
           />
         ) : (
           <div
+            role="button" tabIndex={0}
             onClick={() => fileInputRef.current?.click()}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}
             className="flex flex-col items-center justify-center p-12 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]"
           >
             {imagePreview ? (

@@ -63,17 +63,21 @@ export function DownloadLimitModal() {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      role="button" tabIndex={0}
       onClick={close}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); close(); } }}
     >
       <div
         className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl"
+        role="button" tabIndex={0}
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); } }}
       >
         <div className="flex items-start justify-between mb-4">
           <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
             <Lock className="w-6 h-6 text-amber-500" />
           </div>
-          <button onClick={close} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+          <button onClick={close} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]" aria-label="Close">
             <X className="w-5 h-5" />
           </button>
         </div>

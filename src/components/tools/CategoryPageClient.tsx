@@ -327,7 +327,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
         {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div className="fixed inset-0 z-50 md:hidden">
-            <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+            <div className="absolute inset-0 bg-black/50" role="button" tabIndex={0} onClick={() => setSidebarOpen(false)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSidebarOpen(false); } }} />
             <div className="absolute left-0 top-0 h-full w-72 bg-[var(--bg-elevated)] border-r border-[var(--border-subtle)] p-4 overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-bold text-[var(--text-primary)]">Categories</h3>

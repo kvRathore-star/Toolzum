@@ -443,6 +443,7 @@ export default function VehicleRegChecker() {
           <button
             onClick={handleReset}
             className="px-5 py-3.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all cursor-pointer"
+            aria-label="Refresh"
           >
             <RefreshCw className="w-5 h-5" />
           </button>

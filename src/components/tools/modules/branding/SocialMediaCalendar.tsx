@@ -213,7 +213,8 @@ export default function SocialMediaCalendar() {
                 <div className="space-y-0.5">
                   {dayPosts.slice(0, 2).map(p => (
                     <div key={p.id} className={`${PLATFORM_COLORS[p.platform]} rounded-sm px-1 py-0.5 text-[7px] text-white truncate cursor-pointer`}
-                      title={p.content} onClick={() => editPost(p)}>
+                      role="button" tabIndex={0} title={p.content} onClick={() => editPost(p)}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); editPost(p); } }}>
                       {p.status === 'published' ? '✓' : p.status === 'scheduled' ? '⏰' : '○'} {p.platform}
                     </div>
                   ))}

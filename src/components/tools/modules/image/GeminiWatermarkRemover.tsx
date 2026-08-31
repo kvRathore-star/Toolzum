@@ -460,6 +460,7 @@ export default function GeminiWatermarkRemover() {
                   <p className="text-xs text-[var(--text-secondary)]">Click on the image to set watermark position (bottom-right is default)</p>
                   <div className="relative inline-block">
                     <img src={singleImage.url} alt="Pick position" className="max-h-[300px] max-w-full object-contain cursor-crosshair"
+                      role="button" tabIndex={0}
                       onClick={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
                         const img = new Image(); img.src = singleImage.url;
@@ -470,7 +471,22 @@ export default function GeminiWatermarkRemover() {
                           setShowPositionPicker(false);
                           toast.success('Watermark position set');
                         };
-                      }} />
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          const img = new Image(); img.src = singleImage.url;
+                          img.onload = () => {
+                            const scaleX = img.naturalWidth / rect.width;
+                            const scaleY = img.naturalHeight / rect.height;
+                            setPositionOverride({ x: Math.round((rect.width / 2) * scaleX), y: Math.round((rect.height / 2) * scaleY) });
+                            setShowPositionPicker(false);
+                            toast.success('Watermark position set');
+                          };
+                        }
+                      }}
+                      />
                     {positionOverride && (
                       <div className="absolute w-6 h-6 border-2 border-red-500 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2"
                         style={{ left: '50%', top: '50%' }} />

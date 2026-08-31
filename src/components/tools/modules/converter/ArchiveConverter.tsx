@@ -91,7 +91,8 @@ export default function ArchiveConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Drag & drop files or select them to create a ZIP archive. All processing is done locally in your browser.</p>
 
-        <div onDrop={handleDrop} onDragOver={handleDragOver} onClick={() => inputRef.current?.click()}
+        <div onDrop={handleDrop} onDragOver={handleDragOver} role="button" tabIndex={0} onClick={() => inputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inputRef.current?.click(); } }}
           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center"
         >
           <input ref={inputRef} type="file" multiple onChange={e => { if (e.target.files) addFiles(e.target.files); e.target.value = ''; }} className="hidden" />

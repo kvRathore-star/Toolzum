@@ -65,7 +65,8 @@ export default function ApiPaginationCalculator() {
               <p className="text-xs text-[var(--text-secondary)] mb-2">Items on page: <span className="font-bold">{result.start} - {result.end}</span></p>
               <div className="flex gap-1 flex-wrap">
                 {pageArr.map(p => (
-                  <span key={p} onClick={() => { setPage(String(p)); calc(); }}
+                  <span key={p} role="button" tabIndex={0} onClick={() => { setPage(String(p)); calc(); }}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPage(String(p)); calc(); } }}
                     className={`px-2.5 py-1 text-xs font-bold rounded-lg cursor-pointer transition-all ${p === parseInt(page) ? 'bg-blue-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-[var(--text-secondary)] hover:bg-zinc-200 dark:hover:bg-zinc-700'}`}>
                     {p}
                   </span>

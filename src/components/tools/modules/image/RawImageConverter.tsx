@@ -187,7 +187,8 @@ export default function RawImageConverter() {
             <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
             <div className="space-y-1 max-h-72 overflow-y-auto">
               {files.map((f, i) => (
-                <div key={i} onClick={() => { setSelectedIndex(i); setOutputUrl(null); }}
+                <div key={i} role="button" tabIndex={0} onClick={() => { setSelectedIndex(i); setOutputUrl(null); }}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedIndex(i); setOutputUrl(null); } }}
                   className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-all ${i === selectedIndex ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/30' : 'hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 text-[var(--text-primary)]'}`}
                 >
                   <span className="truncate flex-1 mr-2">{f.name}</span>

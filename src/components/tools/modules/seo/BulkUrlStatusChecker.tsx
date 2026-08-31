@@ -141,7 +141,10 @@ export default function BulkUrlStatusChecker() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
         {urls.length === 0 ? (
           <div
+            role="button"
+            tabIndex={0}
             onClick={() => fileRef.current?.click()}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click(); } }}
             className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-sky-500/50 transition-colors bg-[var(--bg-overlay)]"
           >
             <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />

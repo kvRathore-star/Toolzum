@@ -171,7 +171,8 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          onClick={() => fileInputRef.current?.click()}
+          role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}
           className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-8 cursor-pointer transition-all ${
             isDragOver
               ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 scale-[1.02]'

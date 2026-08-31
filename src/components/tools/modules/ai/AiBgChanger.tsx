@@ -206,8 +206,9 @@ export default function AiBgChanger() {
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         {!image ? (
-          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
-            onClick={() => fileInputRef.current?.click()}>
+          <div role="button" tabIndex={0} className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
+            onClick={() => fileInputRef.current?.click()}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
             <Image className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
             <p className="text-base font-semibold text-[var(--text-secondary)]">Upload an image</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">AI-powered background removal + replacement</p>

@@ -81,11 +81,13 @@ export default function BrandKit() {
            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
              {colors.map((color, idx) => (
                <div key={idx} className="group relative border border-[var(--border-subtle)] rounded-xl overflow-hidden hover:shadow-lg transition-all bg-[var(--bg-overlay)]/50">
-                 <div 
-                   className="h-24 w-full cursor-pointer flex items-center justify-center transition-opacity hover:opacity-90" 
-                   style={{ backgroundColor: color.hex }}
-                   onClick={() => copyToClipboard(color.hex)}
-                 >
+                  <div 
+                    className="h-24 w-full cursor-pointer flex items-center justify-center transition-opacity hover:opacity-90" 
+                    style={{ backgroundColor: color.hex }}
+                    role="button" tabIndex={0}
+                    onClick={() => copyToClipboard(color.hex)}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyToClipboard(color.hex); } }}
+                  >
                    {copiedId === color.hex && (
                      <div className="bg-black/50 text-white p-2 rounded-full backdrop-blur-sm">
                        <Check className="w-5 h-5" />

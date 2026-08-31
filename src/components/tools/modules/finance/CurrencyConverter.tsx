@@ -153,9 +153,10 @@ export default function CurrencyConverter() {
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--text-muted)] self-end sm:self-auto">
           <span>Rates updated: <strong className="text-zinc-600 dark:text-zinc-300">{lastUpdated || 'Loading...'}</strong></span>
-          <button 
-            onClick={fetchRates} 
+          <button
+            onClick={fetchRates}
             disabled={loading}
+            aria-label="Refresh rates"
             className="p-2 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-zinc-700 dark:text-[var(--text-secondary)] transition-colors disabled:opacity-50 flex items-center gap-1 cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />

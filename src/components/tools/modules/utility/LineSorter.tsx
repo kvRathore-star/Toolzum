@@ -55,7 +55,7 @@ export default function LineSorter() {
           {output && (
             <div className="absolute top-3 right-3 flex gap-1">
               <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
-              <button onClick={handleDownload} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
+              <button onClick={handleDownload} aria-label="Download" className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
             </div>
           )}
         </div>

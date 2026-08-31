@@ -208,7 +208,7 @@ export function ConventionalCommitGenerator() {
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && (
-          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-xs font-mono cursor-pointer" onClick={() => { clipboardWrite(output); toast.success('Copied!'); }}>{output}</div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-xs font-mono cursor-pointer" role="button" tabIndex={0} onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output); toast.success('Copied!'); } }}>{output}</div>
         )}
       </div>
     </div>

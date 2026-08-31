@@ -159,7 +159,8 @@ ${linkCards}
               <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h5>
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => document.getElementById('lib-profile-pic')?.click()}>
+                  role="button" tabIndex={0} onClick={() => document.getElementById('lib-profile-pic')?.click()}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById('lib-profile-pic')?.click(); } }}>
                   {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-[var(--text-muted)]" style={{ paddingTop: '18px' }} />}
                 </div>
                 <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="hidden" />
