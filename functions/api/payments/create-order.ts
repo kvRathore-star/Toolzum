@@ -12,22 +12,17 @@ const VALID_GATEWAYS = ['razorpay', 'dodo'];
 
 const RATE_LIMIT = 5;
 
+import { checkRateLimit, recordRateLimit } from '../rate-limit';
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
     const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
 
-    const recent = await DB.prepare(
-      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`payment_rate:${ip}`).first<{ c: number }>();
+    const rl = await checkRateLimit(DB, 'payment_rate', ip, RATE_LIMIT);
+    if (rl.limited) return rl.response;
 
-    if (recent && recent.c >= RATE_LIMIT) {
-      return new Response(JSON.stringify({ error: 'Too many requests' }), { status: 429, headers: { 'Content-Type': 'application/json' } });
-    }
-
-    DB.prepare(
-      "INSERT INTO analytics_event (path, fingerprint, clientType, createdAt) VALUES (?, ?, 'payment-rate', datetime('now'))"
-    ).bind('/api/payments/create-order', `payment_rate:${ip}`).run().catch(() => {});
+    recordRateLimit(DB, 'payment_rate', ip, '/api/payments/create-order');
 
     const formData = await context.request.formData();
     const plan = (formData.get('plan') as string) || 'pass';

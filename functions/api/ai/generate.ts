@@ -8,6 +8,8 @@ interface Env {
   GEMINI_API_KEY: string;
 }
 
+import { checkRateLimit, recordRateLimit } from '../rate-limit';
+
 async function getUserId(request: Request, DB: D1Database): Promise<string | null> {
   const cookies = request.headers.get('cookie') || '';
   const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
@@ -33,15 +35,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     // Rate limit: 5 requests per minute per user
-    const recent = await DB.prepare(
-      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`ai-gen:${userId}`).first<{ c: number }>();
-    if (recent && recent.c >= 5) {
-      return new Response(JSON.stringify({ error: 'Rate limited. Try again in a minute.' }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
+    const rl = await checkRateLimit(DB, 'ai-gen', userId, 5);
+    if (rl.limited) return rl.response;
 
     // Check credits
     const user = await DB.prepare(
@@ -75,9 +70,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     // Log rate limit entry
-    await DB.prepare(
-      "INSERT INTO analytics_event (id, path, fingerprint, createdAt) VALUES (?, ?, ?, datetime('now'))"
-    ).bind(crypto.randomUUID(), '/ai/generate', `ai-gen:${userId}`).run();
+    recordRateLimit(DB, 'ai-gen', userId, '/ai/generate');
 
     const geminiContents = messages.map(m => ({
       role: m.role === 'assistant' ? 'model' : m.role === 'system' ? 'user' : 'user',

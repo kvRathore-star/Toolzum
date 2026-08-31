@@ -12,6 +12,8 @@ interface CheckResult {
   error?: string;
 }
 
+import { checkRateLimit, recordRateLimit } from './rate-limit';
+
 // Free-plan Workers allow 50 subrequests/invocation. Budget leaves headroom
 // for redirect hops and the concurrent in-flight fetches (CONCURRENCY).
 const SUBREQUEST_BUDGET = 45;
@@ -112,18 +114,12 @@ export async function onRequestPost({ request, env }: { request: Request; env: E
   // Rate limit: 15 checks/min per IP (each check covers up to 45 URLs).
   if (env.DB) {
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-    const recent = await env.DB.prepare(
-      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`status-check:${ip}`).first<{ c: number }>();
-    if (recent && recent.c >= 15) {
-      return new Response(JSON.stringify({ error: 'Too many requests. Try again in a minute.' }), {
-        status: 429,
-        headers: jsonHeaders,
-      });
+    const rl = await checkRateLimit(env.DB, 'status-check', ip, 15);
+    if (rl.limited) {
+      rl.response!.headers.set('Access-Control-Allow-Origin', 'https://toolzum.com');
+      return rl.response;
     }
-    env.DB.prepare(
-      "INSERT INTO analytics_event (path, fingerprint, clientType, createdAt) VALUES (?, ?, 'url-status-check', datetime('now'))"
-    ).bind('/api/url-status-check', `status-check:${ip}`).run().catch(() => {});
+    recordRateLimit(env.DB, 'status-check', ip, '/api/url-status-check');
   }
 
   let body: { urls?: unknown };

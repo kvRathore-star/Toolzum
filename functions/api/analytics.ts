@@ -2,6 +2,8 @@ interface Env {
   DB: D1Database;
 }
 
+import { checkRateLimit, recordRateLimit } from './rate-limit';
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
@@ -13,12 +15,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
-    const recent = await DB.prepare(
-      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`analytics:${ip}`).first<{ c: number }>();
-    if (recent && recent.c >= 30) {
-      return new Response(JSON.stringify({ ok: false, error: 'Rate limited' }), { status: 429, headers: { 'Content-Type': 'application/json' } });
-    }
+    const rl = await checkRateLimit(DB, 'analytics', ip, 30);
+    if (rl.limited) return rl.response;
+
+    recordRateLimit(DB, 'analytics', ip, '/api/analytics');
 
     await DB.prepare(
       "INSERT INTO analytics_event (path, fingerprint, clientType, viewport, createdAt) VALUES (?, ?, ?, ?, datetime('now'))"

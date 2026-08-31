@@ -20,6 +20,8 @@ interface SEOInsights {
   healthyPages: number;
 }
 
+import { checkRateLimit, recordRateLimit } from './rate-limit';
+
 function escapeXml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
 }
@@ -125,16 +127,9 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   // Rate limit: 3 crawls/min per IP
   if (env.DB) {
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
-    const recent = await env.DB.prepare(
-      "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-1 minute')"
-    ).bind(`crawl:${ip}`).first<{ c: number }>();
-    if (recent && recent.c >= 3) {
-      return new Response('Too many requests. Try again in a minute.', { status: 429 });
-    }
-    // Record this crawl attempt for rate tracking (fire-and-forget)
-    env.DB.prepare(
-      "INSERT INTO analytics_event (path, fingerprint, clientType, createdAt) VALUES (?, ?, 'sitemap-crawl', datetime('now'))"
-    ).bind('/api/sitemap-crawl', `crawl:${ip}`).run().catch(() => {});
+    const rl = await checkRateLimit(env.DB, 'crawl', ip, 3);
+    if (rl.limited) return rl.response;
+    recordRateLimit(env.DB, 'crawl', ip, '/api/sitemap-crawl');
   }
 
   let inputUrl = urlParam.trim();
