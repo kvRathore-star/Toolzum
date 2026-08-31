@@ -152,6 +152,7 @@ export function GitCommitLinter() {
       title="Git Commit Linter"
       result={resultText}
       onCalculate={lint}
+      calculateLabel="Lint"
       presets={presets}
       accent="emerald"
       downloadData={msg ? JSON.stringify({ message: msg, valid: issues.length === 0, issues }, null, 2) : ''}
@@ -159,7 +160,6 @@ export function GitCommitLinter() {
     >
       <div className="space-y-4">
         <Input label="Commit Message" value={msg} onChange={setMsg} placeholder="feat: add user authentication" rows={2} />
-        <button onClick={lint} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-medium transition-colors">Lint Message</button>
         {issues.length > 0 && (
           <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
             {issues.map((e, i) => <p key={i} className="text-sm text-red-700 dark:text-red-300">{e}</p>)}

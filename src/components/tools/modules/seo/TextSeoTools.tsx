@@ -64,7 +64,7 @@ export function WordCounter() {
   ];
 
   return (
-    <CalculatorShell title="Word Counter" result={resultText} onCalculate={() => {}} calculateLabel="Count" presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
+    <CalculatorShell title="Word Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -136,7 +136,7 @@ export function CharacterCounter() {
   ];
 
   return (
-    <CalculatorShell title="Character Counter" result={resultText} onCalculate={() => {}} calculateLabel="Count" presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
+    <CalculatorShell title="Character Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => setText(e.target.value)} rows={10} placeholder="Type or paste text..."
@@ -477,7 +477,7 @@ export function SeoPreviewGenerator() {
   const resultText = `Title: ${ogLength}/60 ${ogLength > 60 ? '⚠️ Too long' : '✓'} | Description: ${descLength}/160 ${descLength > 160 ? '⚠️ Too long' : '✓'}`;
 
   return (
-    <CalculatorShell title="SEO Preview Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
+    <CalculatorShell title="SEO Preview Generator" result={resultText} auto={true} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
@@ -9,7 +10,6 @@ import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
 import { ToolPaywall } from './ToolPaywall';
 import { useFreeUsage } from '@/hooks/useFreeUsage';
-import { PostDownloadBar } from '@/components/PostDownloadBar';
 import { PostDownloadSurvey } from '@/components/PostDownloadSurvey';
 import { DownloadQuotaBadge } from '@/components/tools/DownloadQuotaBadge';
 import { DownloadLimitModal } from '@/components/tools/DownloadLimitModal';
@@ -23,6 +23,8 @@ import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
 import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
+
+const PostDownloadBar = dynamic(() => import('@/components/PostDownloadBar').then(m => ({ default: m.PostDownloadBar })), { ssr: false });
 
 const BULK_PRESET_SLUGS = new Set([
   'bulk-audio-conpressor', 'bulk-audio-normalizer', 'bulk-csv-excel-to-json',

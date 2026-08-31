@@ -29,7 +29,7 @@ export function AgeCalculator() {
     <CalculatorShell
       title="Age Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="blue"
       downloadData={calc ? JSON.stringify({ birth, ...calc }, null, 2) : ''}
@@ -65,7 +65,7 @@ export function DateDifferenceCalculator() {
     <CalculatorShell
       title="Date Difference Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="indigo"
       downloadData={diff ? JSON.stringify({ date1: d1, date2: d2, ...diff }, null, 2) : ''}
@@ -97,7 +97,7 @@ export function DateAdditionCalculator() {
     <CalculatorShell
       title="Date Addition / Subtraction"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={result ? JSON.stringify({ start, days: Number(days), result: result.toISOString().slice(0, 10) }, null, 2) : ''}
@@ -131,7 +131,7 @@ export function WeekNumberCalculator() {
     <CalculatorShell
       title="Week Number Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="amber"
       downloadData={JSON.stringify({ date, week, year: d.getFullYear(), dayOfWeek: d.toLocaleDateString('en-US', { weekday: 'long' }) }, null, 2)}
@@ -171,7 +171,7 @@ export function TimeSinceCalculator() {
     <CalculatorShell
       title="Time Since / Until"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="rose"
       downloadData={JSON.stringify({ date, years: yr, months: mo, weeks: wk, days: day, hours: hr, minutes: min, seconds: sec }, null, 2)}
@@ -211,7 +211,7 @@ export function TimeZoneConverter() {
     <CalculatorShell
       title="Time Zone Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="violet"
       downloadData={JSON.stringify({ time, fromTz, toTz, result: `${String(resultH).padStart(2, '0')}:${String(resultM).padStart(2, '0')}` }, null, 2)}
@@ -247,7 +247,7 @@ export function DaylightSavingTimeChecker() {
     <CalculatorShell
       title="DST Checker (US)"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="orange"
       downloadData={JSON.stringify({ year: y, dstStart: dstStart.toISOString().slice(0, 10), dstEnd: dstEnd.toISOString().slice(0, 10), periodDays: Math.round((dstEnd.getTime() - dstStart.getTime()) / 86400000) }, null, 2)}
@@ -283,7 +283,7 @@ export function WorkHoursCalculator() {
     <CalculatorShell
       title="Work Hours Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ start, end, breakMin, totalHours: hrs, totalMinutes: mins }, null, 2)}
@@ -316,7 +316,7 @@ export function HoursMinutesCalculator() {
     <CalculatorShell
       title="Hours & Minutes Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="indigo"
       downloadData={JSON.stringify({ time1: `${h1}h${m1}m`, time2: `${h2}h${m2}m`, total: `${Math.floor(total / 60)}h${total % 60}m`, diff: `${Math.floor(diff / 60)}h${diff % 60}m` }, null, 2)}
@@ -351,7 +351,7 @@ export function SpeedConverter() {
     <CalculatorShell
       title="Speed Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="cyan"
       downloadData={JSON.stringify({ kmh: k, mph: (k * 0.621371).toFixed(2), knots: (k * 0.539957).toFixed(2), ms: (k / 3.6).toFixed(2), fts: (k * 0.911344).toFixed(2) }, null, 2)}
@@ -382,7 +382,7 @@ export function LengthConverter() {
     <CalculatorShell
       title="Length Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ meters: m, km: (m / 1000).toFixed(4), miles: (m * 0.000621371).toFixed(4), yards: (m * 1.09361).toFixed(2), feet: (m * 3.28084).toFixed(2), inches: (m * 39.3701).toFixed(2) }, null, 2)}
@@ -413,7 +413,7 @@ export function WeightConverter() {
     <CalculatorShell
       title="Weight Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="amber"
       downloadData={JSON.stringify({ kg: k, g: (k * 1000).toFixed(0), lb: (k * 2.20462).toFixed(2), oz: (k * 35.274).toFixed(2), stone: (k * 0.157473).toFixed(2) }, null, 2)}
@@ -444,7 +444,7 @@ export function VolumeConverter() {
     <CalculatorShell
       title="Volume Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="blue"
       downloadData={JSON.stringify({ liters: l, ml: (l * 1000).toFixed(0), galUS: (l * 0.264172).toFixed(4), qt: (l * 1.05669).toFixed(4), floz: (l * 33.814).toFixed(2), cups: (l * 4.22675).toFixed(2) }, null, 2)}
@@ -475,7 +475,7 @@ export function AreaConverter() {
     <CalculatorShell
       title="Area Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="green"
       downloadData={JSON.stringify({ sqm: a, sqft: (a * 10.7639).toFixed(2), acres: (a * 0.000247105).toFixed(6), hectares: (a * 0.0001).toFixed(6), sqkm: (a / 1e6).toFixed(6) }, null, 2)}
@@ -508,7 +508,7 @@ export function DataSizeConverter() {
     <CalculatorShell
       title="Data Size Converter"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="purple"
       downloadData={JSON.stringify({ bytes: b, ...Object.fromEntries(conv.map(c => [c.unit.toLowerCase(), c.value.toFixed(2)])) }, null, 2)}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionDiv } from "@/components/LazyMotion";
 import { Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -27,7 +27,7 @@ export function PostDownloadBar() {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 16 }}
@@ -57,7 +57,7 @@ export function PostDownloadBar() {
               <X className="w-4 h-4" />
             </button>
           </div>
-        </motion.div>
+        </MotionDiv>
       )}
     </AnimatePresence>
   );

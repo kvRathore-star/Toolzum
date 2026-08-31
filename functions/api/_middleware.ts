@@ -17,7 +17,16 @@ export async function onRequest(context: { request: Request; next: () => Promise
     const origin = request.headers.get('Origin');
     const referer = request.headers.get('Referer');
     const check = origin || referer;
-    if (check && !isAllowed(check)) {
+
+    // Reject if no origin/referer at all (curl, Postman, server-to-server bypass)
+    if (!check) {
+      return new Response(JSON.stringify({ error: 'Forbidden' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!isAllowed(check)) {
       return new Response(JSON.stringify({ error: 'Forbidden' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },

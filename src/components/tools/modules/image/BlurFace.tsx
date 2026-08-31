@@ -1,34 +1,37 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
-import * as blazeface from '@tensorflow-models/blazeface';
-import '@tensorflow/tfjs';
 import { downloadOrShare } from '@/utils/nativeShare';
 
 export default function BlurFace() {
   const [image, setImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [model, setModel] = useState<blazeface.BlazeFaceModel | null>(null);
-  const [modelLoading, setModelLoading] = useState(true);
+  const [isLoadingModel, setIsLoadingModel] = useState(false);
+  const modelRef = useRef<any>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- start loading the AI face-detection model on mount
-    setModelLoading(true);
-    const loadToast = toast.loading("Loading AI face detection model...");
-    blazeface.load().then(m => {
-      setModel(m);
-      setModelLoading(false);
-      toast.dismiss(loadToast);
-      toast.success("Face detection model ready");
-    }).catch(err => {
-      setModelLoading(false);
-      toast.dismiss(loadToast);
-      toast.error("Failed to load face detection model");
+  const ensureModel = async () => {
+    if (modelRef.current) return modelRef.current;
+    setIsLoadingModel(true);
+    toast.loading("Loading AI face detection model...", { id: 'blur-model' });
+    try {
+      const [{ load: loadBlazeface }] = await Promise.all([
+        import('@tensorflow-models/blazeface'),
+        import('@tensorflow/tfjs'),
+      ]);
+      const m = await loadBlazeface();
+      modelRef.current = m;
+      toast.success("Face detection model ready", { id: 'blur-model' });
+      return m;
+    } catch (err) {
+      toast.error("Failed to load face detection model", { id: 'blur-model' });
       console.error("Failed to load blazeface", err);
-    });
-  }, []);
+      return null;
+    } finally {
+      setIsLoadingModel(false);
+    }
+  };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -39,10 +42,11 @@ export default function BlurFace() {
   };
 
   const processFaces = async () => {
-    if (!image || !canvasRef.current || !model) {
-      if (!model) toast.error("AI Model still loading...");
-      return;
-    }
+    if (!image || !canvasRef.current) return;
+    
+    const model = await ensureModel();
+    if (!model) return;
+
     setIsProcessing(true);
     toast.loading("Detecting faces...", { id: 'blur' });
     
@@ -99,11 +103,11 @@ export default function BlurFace() {
            )}
          </div>
 
-         {image && (
-           <button onClick={processFaces} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
-             {isProcessing ? "Processing..." : "Blur Faces & Download"}
-           </button>
-         )}
+          {image && (
+            <button onClick={processFaces} disabled={isProcessing || isLoadingModel} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-400 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
+              {isLoadingModel ? "Loading AI Model..." : isProcessing ? "Processing..." : "Blur Faces & Download"}
+            </button>
+          )}
          
          <canvas ref={canvasRef} className="hidden" />
       </div>

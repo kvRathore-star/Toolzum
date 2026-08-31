@@ -50,7 +50,12 @@ export function createAuth(env: AuthEnv) {
   if (cached) return cached;
 
   const instance = betterAuth({
-    secret: env.BETTER_AUTH_SECRET || "fallback-dev-secret",
+    secret: (() => {
+      if (!env.BETTER_AUTH_SECRET) {
+        throw new Error("BETTER_AUTH_SECRET is not set. Authentication will not work without it.");
+      }
+      return env.BETTER_AUTH_SECRET;
+    })(),
     baseURL: env.BETTER_AUTH_URL || "https://toolzum.com",
     basePath: "/api/auth",
     database: drizzleAdapter(

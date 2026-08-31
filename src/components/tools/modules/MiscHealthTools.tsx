@@ -30,7 +30,7 @@ export function BodyMassIndexCalculator() {
     <CalculatorShell
       title="BMI Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="blue"
       downloadData={bmi > 0 ? JSON.stringify({ height, weight, unit, bmi: bmi.toFixed(1), category }, null, 2) : ''}
@@ -70,7 +70,7 @@ export function BodyFatCalculator() {
     <CalculatorShell
       title="Body Fat % Estimator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ bmi: Number(bmi), age: Number(age), gender, bodyFat: bf.toFixed(1) }, null, 2)}
@@ -112,7 +112,7 @@ export function CalorieIntakeCalculator() {
     <CalculatorShell
       title="Daily Calorie Needs"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ weight: w, height: h, age: a, gender, activity: act, bmr: bmr.toFixed(0), maintenance: (bmr * act).toFixed(0) }, null, 2)}
@@ -150,7 +150,7 @@ export function MacroSplitCalculator() {
     <CalculatorShell
       title="Daily Macronutrients"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="amber"
       downloadData={JSON.stringify({ calories: c, protein: { g: (c * 0.3 / 4).toFixed(0), kcal: (c * 0.3).toFixed(0) }, carbs: { g: (c * 0.4 / 4).toFixed(0), kcal: (c * 0.4).toFixed(0) }, fat: { g: (c * 0.3 / 9).toFixed(0), kcal: (c * 0.3).toFixed(0) } }, null, 2)}
@@ -184,7 +184,7 @@ export function WaterRequirementCalculator() {
     <CalculatorShell
       title="Daily Water Intake"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="blue"
       downloadData={JSON.stringify({ weight: w, activityMin: Number(activity), base: base.toFixed(2), extra: extra.toFixed(2), total: (base + extra).toFixed(2) }, null, 2)}
@@ -217,7 +217,7 @@ export function SleepRequirementCalculator() {
     <CalculatorShell
       title="Sleep Requirements by Age"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="indigo"
       downloadData={JSON.stringify({ age: a, recommendation: rec }, null, 2)}
@@ -249,7 +249,7 @@ export function HeartRateCalculator() {
     <CalculatorShell
       title="Target Heart Rate Zones"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="rose"
       downloadData={JSON.stringify({ age: a, maxHR: max, zones: { z1: `${Math.round(max * 0.5)}-${Math.round(max * 0.6)}`, z2: `${Math.round(max * 0.6)}-${Math.round(max * 0.7)}`, z3: `${Math.round(max * 0.7)}-${Math.round(max * 0.8)}`, z4: `${Math.round(max * 0.8)}-${Math.round(max * 0.9)}`, z5: `${Math.round(max * 0.9)}-${max}` } }, null, 2)}
@@ -284,7 +284,7 @@ export function IdealWeightCalc() {
     <CalculatorShell
       title="Ideal Body Weight"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="emerald"
       downloadData={JSON.stringify({ height: h, gender, devine: devine.toFixed(1), robinson: robinson.toFixed(1) }, null, 2)}
@@ -319,7 +319,7 @@ export function PaceCalculator() {
     <CalculatorShell
       title="Running Pace Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="amber"
       downloadData={d ? JSON.stringify({ distanceKm: d, timeMin: t, pace: `${paceMinWhole}:${paceSec.toString().padStart(2, '0')}`, speedKmh: (d / t * 60).toFixed(2) }, null, 2) : ''}
@@ -355,7 +355,7 @@ export function StepsCalculator() {
     <CalculatorShell
       title="Steps to Distance"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="indigo"
       downloadData={JSON.stringify({ steps: s, height: h, distanceKm: distKm.toFixed(2), distanceMiles: distMi.toFixed(2), calories: (s * 0.04).toFixed(0) }, null, 2)}
@@ -391,7 +391,7 @@ export function CaloriesBurnedCalculator() {
     <CalculatorShell
       title="Calories Burned"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="orange"
       downloadData={JSON.stringify({ weight: Number(weight), duration: Number(duration), activity, met, calories: burned.toFixed(0) }, null, 2)}
@@ -429,7 +429,7 @@ export function BloodAlcoholCalculator() {
     <CalculatorShell
       title="Blood Alcohol Estimator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent={finalBac >= 0.08 ? 'red' : 'green'}
       downloadData={JSON.stringify({ weight: w, gender, drinks: d, hours: h, bac: finalBac.toFixed(3), overLimit: finalBac >= 0.08 }, null, 2)}
@@ -461,7 +461,7 @@ export function PregnancyCalculator() {
     <CalculatorShell
       title="Pregnancy Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="pink"
       downloadData={due ? JSON.stringify({ lmp, dueDate: due.toISOString().slice(0, 10), gestationalWeeks: Math.floor((Date.now() - new Date(lmp).getTime()) / (7 * 86400000)) }, null, 2) : ''}
@@ -502,7 +502,7 @@ export function OvulationTracker() {
     <CalculatorShell
       title="Ovulation Tracker"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="pink"
       downloadData={results ? JSON.stringify({ lmp, cycleLength: Number(cycleLength), fertileWindow: { start: results.fertileStart.toISOString().slice(0, 10), end: results.fertileEnd.toISOString().slice(0, 10) }, ovulation: results.ovulation.toISOString().slice(0, 10), nextPeriod: results.nextPeriod.toISOString().slice(0, 10) }, null, 2) : ''}
@@ -542,7 +542,7 @@ export function AgeCalculator() {
     <CalculatorShell
       title="Age Calculator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       presets={presets}
       accent="blue"
       downloadData={calc ? JSON.stringify({ birth, ...calc }, null, 2) : ''}

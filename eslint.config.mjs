@@ -5,6 +5,7 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+
   {
     rules: {
       "no-console": ["warn", { allow: ["warn", "error"] }],
@@ -14,6 +15,12 @@ const eslintConfig = defineConfig([
       // (set-state-in-effect is intentionally LEFT as an error pending review —
       // it flags real cascading-render anti-patterns, not style noise.)
       "@typescript-eslint/no-explicit-any": "warn",
+      // jsx-a11y: warn-only for now — visibility, not blocking.
+      // Tighten to errors after initial a11y cleanup pass.
+      "jsx-a11y/anchor-has-content": "warn",
+      "jsx-a11y/anchor-is-valid": "warn",
+      "jsx-a11y/click-events-have-key-events": "warn",
+      "jsx-a11y/no-static-element-interactions": "warn",
       "react/no-unescaped-entities": "warn",
       "react-hooks/static-components": "warn",
       "react-hooks/refs": "warn",

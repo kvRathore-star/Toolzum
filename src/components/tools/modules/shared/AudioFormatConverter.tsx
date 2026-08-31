@@ -205,8 +205,6 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
   const inputFmt = FORMATS[inputKey];
   const outputFmt = FORMATS[outputKey];
 
-  useEffect(() => { loadFFmpeg(); }, []);
-
   useEffect(() => {
     return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
   }, [outputUrl]);
@@ -225,9 +223,13 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
     setOutputUrl(null);
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f) { setFile(f); setOutputUrl(null); }
+    if (f) {
+      setFile(f);
+      setOutputUrl(null);
+      if (!isLoaded) await loadFFmpeg();
+    }
   };
 
   const convertAudio = async () => {

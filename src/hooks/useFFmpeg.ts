@@ -1,11 +1,19 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { toBlobURL } from '@ffmpeg/util';
+
+type FFmpegInstance = InstanceType<typeof import('@ffmpeg/ffmpeg').FFmpeg>;
 
 // Global singleton instance so we don't re-download the 30MB wasm 
 // every time the user switches between video tools.
-let ffmpegGlobal: FFmpeg | null = null;
+let ffmpegGlobal: FFmpegInstance | null = null;
+let ffmpegModulePromise: Promise<typeof import('@ffmpeg/ffmpeg')> | null = null;
 let hasLoadedOnce = false;
+
+async function getFFmpegModule() {
+  if (!ffmpegModulePromise) {
+    ffmpegModulePromise = import('@ffmpeg/ffmpeg');
+  }
+  return ffmpegModulePromise;
+}
 
 const LOAD_TIMEOUT_MS = 60_000;
 
@@ -23,7 +31,7 @@ export function useFFmpeg() {
   const [progress, setProgress] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const ffmpegRef = useRef<FFmpegInstance | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
@@ -51,7 +59,7 @@ export function useFFmpeg() {
     setLogs(prev => [...prev.slice(-10), message]);
   }, []);
 
-  const setupListeners = useCallback((ffmpeg: FFmpeg) => {
+  const setupListeners = useCallback((ffmpeg: FFmpegInstance) => {
     ffmpeg.off('progress', handleProgress);
     ffmpeg.off('log', handleLog);
     ffmpeg.on('progress', handleProgress);
@@ -63,6 +71,11 @@ export function useFFmpeg() {
     const timeoutId = setTimeout(() => abortRef.current?.abort(), LOAD_TIMEOUT_MS);
 
     try {
+      const [{ FFmpeg }, { toBlobURL }] = await Promise.all([
+        getFFmpegModule(),
+        import('@ffmpeg/util'),
+      ]);
+
       ffmpegGlobal = new FFmpeg();
       ffmpegRef.current = ffmpegGlobal;
       setupListeners(ffmpegGlobal);
@@ -85,7 +98,7 @@ export function useFFmpeg() {
     }
   };
 
-  const loadFFmpeg = async (): Promise<FFmpeg | null> => {
+  const loadFFmpeg = async (): Promise<FFmpegInstance | null> => {
     if (ffmpegGlobal?.loaded) {
       setIsLoaded(true);
       setLoadError(null);

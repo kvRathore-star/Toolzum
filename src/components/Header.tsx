@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import { getMegamenuIcon, getMegamenuIconColor } from "@/registry/megamenu-icons";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight, Search, Zap, Menu, X, Sun, Moon, Heart, Link as LinkIcon, Check, User, LogOut, LayoutDashboard, Star } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useToolHistory } from '@/hooks/useToolHistory';
@@ -175,20 +174,13 @@ export function Header() {
               >
                 <span>Tools</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${megaMenuOpen ? "rotate-180" : ""}`} />
-                {megaMenuOpen && (
-                  <div className="absolute bottom-[-16px] left-0 w-full h-[16px] bg-transparent" />
-                )}
+                <div className={`absolute bottom-[-16px] left-0 w-full h-[16px] bg-transparent transition-opacity duration-200 ${megaMenuOpen ? 'opacity-100' : 'opacity-0'}`} />
               </button>
 
-              <AnimatePresence>
-                {megaMenuOpen && (
-                  <motion.div
+              
+                  <div
                     ref={menuRef}
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
-                    className="fixed left-1/2 -translate-x-1/2 top-[60px] mt-2 w-screen max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000] md:w-[600px] lg:w-[900px] xl:w-[1100px]"
+                    className={`fixed left-1/2 -translate-x-1/2 top-[60px] mt-2 w-screen max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000] md:w-[600px] lg:w-[900px] xl:w-[1100px] transition-all duration-200 ease-[cubic-bezier(0,0,0.2,1)] ${megaMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                   >
                     {/* Inline Search — opens CommandMenu */}
                     <button
@@ -211,11 +203,8 @@ export function Header() {
                       {/* Top Row: 7 columns */}
                       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3">
                         {MEGAMENU_COLUMNS.slice(0, 7).map((col, idx) => (
-                          <motion.div 
+                          <div 
                             key={col.title}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: idx * 0.03 }}
                             className={`flex flex-col ${col.isIndia ? 'p-3 rounded-xl border border-orange-500/30 bg-orange-500/5' : ''}`}
                           >
                             <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
@@ -245,18 +234,15 @@ export function Header() {
                             >
                               → All {col.allCount}
                             </Link>
-                          </motion.div>
+                          </div>
                         ))}
                       </div>
 
                       {/* Bottom Row: remaining columns */}
                       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 mt-6 pt-6 border-t border-[var(--border-subtle)]">
                         {MEGAMENU_COLUMNS.slice(7).map((col, idx) => (
-                          <motion.div 
+                          <div 
                             key={col.title}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: (idx + 7) * 0.03 }}
                             className={`flex flex-col ${col.isIndia ? 'p-3 rounded-xl border border-orange-500/30 bg-orange-500/5' : ''}`}
                           >
                             <Link href={col.allHref} onClick={() => setMegaMenuOpen(false)}>
@@ -286,7 +272,7 @@ export function Header() {
                             >
                               → All {col.allCount}
                             </Link>
-                          </motion.div>
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -311,9 +297,8 @@ export function Header() {
                         )}
                       </div>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+              
             </div>
 
             <Link href="/extension" aria-current={pathname === "/extension" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
@@ -338,14 +323,9 @@ export function Header() {
                 <span>Share</span>
               </button>
 
-              <AnimatePresence>
-                {shareOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-3 min-w-[200px]"
+              
+                  <div
+                    className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-3 min-w-[200px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${shareOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                     onMouseEnter={() => setShareOpen(true)}
                     onMouseLeave={() => setShareOpen(false)}
                   >
@@ -385,9 +365,8 @@ export function Header() {
                         {shareCopied ? 'Copied!' : 'Copy link'}
                       </button>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+              
             </div>
 
           </nav>
@@ -450,15 +429,10 @@ export function Header() {
                     </span>
                   </button>
 
-                  <AnimatePresence>
-                    {userMenuOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.15 }}
+                  
+                      <div
                         onMouseLeave={() => setUserMenuOpen(false)}
-                        className="absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-1.5 min-w-[180px]"
+                        className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-1.5 min-w-[180px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${userMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                       >
                         <div className="px-3 py-2 border-b border-[var(--border-subtle)] mb-1">
                           <p className="text-[13px] font-medium text-[var(--text-primary)] truncate">{session.user.name}</p>
@@ -500,9 +474,8 @@ export function Header() {
                           <LogOut className="w-3.5 h-3.5" />
                           Sign out
                         </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      </div>
+                  
                 </div>
               </>
             ) : (
@@ -530,19 +503,13 @@ export function Header() {
       </div>
 
       {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+          <div
             ref={drawerRef}
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
-            className="fixed inset-x-0 top-[60px] bottom-0 z-[999] md:hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-y-auto"
+            className={`fixed inset-x-0 top-[60px] bottom-0 z-[999] md:hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-y-auto transition-all duration-200 ease-[cubic-bezier(0,0,0.2,1)] ${mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
           >
             <div className="p-4 space-y-1">
               {/* Search shortcut */}
@@ -662,9 +629,8 @@ export function Header() {
                 </Link>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      
     </header>
   );
 }

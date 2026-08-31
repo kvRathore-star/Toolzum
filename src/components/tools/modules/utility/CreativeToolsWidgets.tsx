@@ -500,7 +500,7 @@ export function ASCIIArtGenerator() {
     <CalculatorShell
       title="ASCII Art Generator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       calculateLabel="Generate"
       presets={presets}
       accent="blue"
@@ -657,7 +657,7 @@ export function ASCIIFontGenerator() {
     <CalculatorShell
       title="ASCII Font Generator"
       result={resultText}
-      onCalculate={() => {}}
+      auto={true}
       calculateLabel="Generate"
       presets={presets}
       accent="purple"
