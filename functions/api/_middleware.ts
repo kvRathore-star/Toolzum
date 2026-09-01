@@ -53,6 +53,15 @@ export async function onRequest(context: { request: Request; next: () => Promise
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    const cookies = request.headers.get('cookie') || '';
+    const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+    const token = tokenMatch?.[1];
+    if (token) {
+      context.env.DB.prepare(
+        'UPDATE "user" SET "lastLoginAt" = unixepoch() WHERE id = (SELECT userId FROM session WHERE token = ?) AND ("lastLoginAt" IS NULL OR "lastLoginAt" < unixepoch() - 300)'
+      ).bind(token).run().catch(() => {});
+    }
   }
 
   return context.next();

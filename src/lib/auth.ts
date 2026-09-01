@@ -101,21 +101,6 @@ export function createAuth(env: AuthEnv) {
         secretKey: env.TURNSTILE_SECRET_KEY || "",
       }),
     ],
-    hooks: {
-      after: [
-        {
-          matcher: "session.create",
-          handler: async ({ session, user }: { session: { id: string; userId: string }; user: { id: string } }) => {
-            try {
-              await (env.DB as D1Database)
-                .prepare('UPDATE "user" SET "lastLoginAt" = ? WHERE id = ?')
-                .bind(Math.floor(Date.now() / 1000), user.id)
-                .run();
-            } catch { /* non-critical */ }
-          },
-        },
-      ],
-    },
   });
 
   authCache.set(env, instance);
