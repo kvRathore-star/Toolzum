@@ -55,7 +55,7 @@ export function PortNumberLookup() {
   const resultText = result || 'Enter port number to lookup';
 
   return (
-    <CalculatorShell title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
+    <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
       <input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
@@ -91,7 +91,7 @@ export function UserAgentParser() {
   const resultText = result || 'Enter User-Agent string to parse';
 
   return (
-    <CalculatorShell title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
+    <CalculatorShell category="Developer" title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label>
       <textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
@@ -125,7 +125,7 @@ export function QueryStringParser() {
   const resultText = result || 'Enter query string to parse';
 
   return (
-    <CalculatorShell title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
+    <CalculatorShell category="Developer" title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label>
       <input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
@@ -358,7 +358,7 @@ export function PricingTierBuilder() {
   const resultText = result ? 'Pricing tiers built' : 'Enter tiers JSON to build';
 
   return (
-    <CalculatorShell title="Pricing Tier Builder" result={resultText} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
+    <CalculatorShell category="Developer" title="Pricing Tier Builder" result={resultText} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
         <textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={6}

@@ -70,7 +70,7 @@ export function RandomDateGenerator() {
   const resultText = out ? `Generated ${count} random dates` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random Date Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="random-dates.txt">
+    <CalculatorShell category="Utility" title="Random Date Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="random-dates.txt">
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
 
@@ -103,7 +103,7 @@ export function RandomTimeGenerator() {
   const resultText = out ? `Generated ${count} random times` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random Time Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="blue" downloadData={out} downloadFilename="random-times.txt">
+    <CalculatorShell category="Utility" title="Random Time Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="blue" downloadData={out} downloadFilename="random-times.txt">
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
 
@@ -140,7 +140,7 @@ export function RandomIpGenerator() {
   const resultText = out ? `Generated ${count} ${version.toUpperCase()} addresses` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random IP Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="emerald" downloadData={out} downloadFilename="random-ips.txt">
+    <CalculatorShell category="Utility" title="Random IP Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="emerald" downloadData={out} downloadFilename="random-ips.txt">
       <div className="flex gap-2 mb-3">
         <label className="flex items-center gap-2">
           <input type="radio" value="ipv4" checked={version === 'ipv4'} onChange={() => setVersion('ipv4')} className="accent-emerald-500" />
@@ -196,7 +196,7 @@ export function RandomUserAgentGenerator() {
   const resultText = out ? `Generated ${count} user agents (${category})` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random User-Agent Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={out} downloadFilename="user-agents.txt">
+    <CalculatorShell category="Utility" title="Random User-Agent Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={out} downloadFilename="user-agents.txt">
       <div className="flex gap-2 mb-3">
         <label className="flex items-center gap-2">
           <input type="radio" value="all" checked={category === 'all'} onChange={() => setCategory('all')} className="accent-purple-500" />
@@ -247,7 +247,7 @@ export function RandomSentenceGenerator() {
   const resultText = out ? `Generated ${count} sentences (${wordsPerSentence} words avg)` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random Sentence Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="random-sentences.txt">
+    <CalculatorShell category="Utility" title="Random Sentence Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="random-sentences.txt">
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} max={50} />
 
@@ -283,7 +283,7 @@ export function RandomWordGenerator() {
   const resultText = out ? `Generated ${count} words` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random Word Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="green" downloadData={out} downloadFilename="random-words.txt">
+    <CalculatorShell category="Utility" title="Random Word Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="green" downloadData={out} downloadFilename="random-words.txt">
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} max={100} />
 
@@ -320,7 +320,7 @@ export function PinGenerator() {
   const resultText = out ? `Generated ${count} PINs (${digits} digits each)` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="PIN Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="blue" downloadData={out} downloadFilename="pins.txt">
+    <CalculatorShell category="Utility" title="PIN Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="blue" downloadData={out} downloadFilename="pins.txt">
       <div className="space-y-4">
         <label className={labelClass}>Count</label>
         <CountSlider value={count} onChange={setCount} />
@@ -365,7 +365,7 @@ export function LicenseKeyGenerator() {
   const resultText = out ? `Generated ${count} license keys` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="License Key Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="violet" downloadData={out} downloadFilename="license-keys.txt">
+    <CalculatorShell category="Utility" title="License Key Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="violet" downloadData={out} downloadFilename="license-keys.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
       <CountSlider value={count} onChange={setCount} />
 
@@ -409,7 +409,7 @@ export function ImagePlaceholderGenerator() {
   const resultText = out ? `Generated ${count} SVG placeholders (${width}×${height})` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Image Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="cyan" downloadData={out} downloadFilename="placeholders.txt">
+    <CalculatorShell category="Utility" title="Image Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="cyan" downloadData={out} downloadFilename="placeholders.txt">
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className={labelClass}>Width</label>
@@ -459,7 +459,7 @@ export function LogoPlaceholderGenerator() {
   const resultText = out ? `Generated ${count} logo placeholders (${size}px)` : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Logo Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="pink" downloadData={out} downloadFilename="logos.txt">
+    <CalculatorShell category="Utility" title="Logo Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="pink" downloadData={out} downloadFilename="logos.txt">
       <label className={labelClass}>Size (px)</label>
       <input type="range" min={50} max={300} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-pink-500 mb-2" />
       <div className="text-xs text-[var(--text-muted)] text-right mb-3">{size}px</div>
@@ -505,7 +505,7 @@ export function OpenGraphGenerator() {
   const resultText = out ? 'Open Graph tags generated' : 'Enter details to generate OG tags';
 
   return (
-    <CalculatorShell title="Open Graph Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="og-tags.html">
+    <CalculatorShell category="Utility" title="Open Graph Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="og-tags.html">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
         <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="My Amazing Website"
@@ -572,7 +572,7 @@ export function OauthPkceGenerator() {
   const resultText = out ? `PKCE pair generated (${verifier.length} char verifier)` : 'Generate RFC 7636 PKCE pair';
 
   return (
-    <CalculatorShell title="OAuth PKCE Generator" result={resultText} auto={true} presets={presets} accent="violet" downloadData={out} downloadFilename="pkce.txt">
+    <CalculatorShell category="Utility" title="OAuth PKCE Generator" result={resultText} auto={true} presets={presets} accent="violet" downloadData={out} downloadFilename="pkce.txt">
       <div className="space-y-4">
         <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
         <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">

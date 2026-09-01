@@ -55,7 +55,7 @@ export default function TriangleAreaCalculator() {
   ];
 
   return (
-    <CalculatorShell title="Triangle Area Calculator" accent="emerald" result="" auto customResult={customResult} presets={presets}>
+    <CalculatorShell category="Calculator" title="Triangle Area Calculator" accent="emerald" result="" auto customResult={customResult} presets={presets}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Method</label><select className={inputCls} value={method} onChange={e => setMethod(e.target.value as 'baseheight'|'sides'|'sas')}><option value="baseheight">Base & Height</option><option value="sides">Three sides (SSS)</option><option value="sas">Two sides & angle (SAS)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

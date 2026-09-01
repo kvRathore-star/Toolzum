@@ -19,7 +19,7 @@ export default function SquareRootCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Square Root Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Square Root Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number</label><input type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );

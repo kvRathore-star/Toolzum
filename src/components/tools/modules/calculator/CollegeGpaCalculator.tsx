@@ -33,7 +33,7 @@ export default function CollegeGpaCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="College GPA Calculator" result="" auto presets={presets} accent="purple" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="College GPA Calculator" result="" auto presets={presets} accent="purple" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>

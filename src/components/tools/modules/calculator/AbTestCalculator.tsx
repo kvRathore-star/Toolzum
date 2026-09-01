@@ -40,7 +40,7 @@ export default function AbTestCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="A/B Test Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="A/B Test Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>

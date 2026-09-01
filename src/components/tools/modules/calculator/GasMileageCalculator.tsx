@@ -21,7 +21,7 @@ export default function GasMileageCalculator() {
     <div className="font-mono text-sm whitespace-pre">{(() => { const liters = g * 3.78541; const km = d * 1.60934; const cost = g * p; return `Fuel economy: ${((liters / km) * 100).toFixed(1)} L/100km\nFuel used: ${liters.toFixed(1)} L\nFuel cost: $${cost.toFixed(2)}\nCost per km: $${(cost / km).toFixed(3)}`; })()}</div>
   );
   return (
-    <CalculatorShell title="Gas Mileage Calculator" accent="amber" result="" auto presets={presets} customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Gas Mileage Calculator" accent="amber" result="" auto presets={presets} customResult={customResult}>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'us'|'metric')}><option value="us">US (mi, gal)</option><option value="metric">Metric (km, L)</option></select></div>
         <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>

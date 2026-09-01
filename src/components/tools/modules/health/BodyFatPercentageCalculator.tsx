@@ -40,8 +40,13 @@ export default function BodyFatPercentageCalculator() {
     }
   }
 
+  const presets = [
+    { label: 'Fit Male', apply: () => { setGender('male'); setWeight('80'); setWaist('80'); setNeck('40'); } },
+    { label: 'Avg Female', apply: () => { setGender('female'); setWeight('70'); setWaist('75'); setNeck('35'); setHip('100'); } },
+  ];
+
   return (
-    <CalculatorShell title="Body Fat Percentage" accent="rose" result={result} auto customResult={
+    <CalculatorShell category="Health" title="Body Fat Percentage" accent="rose" result={result} auto presets={presets} customResult={
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Body Fat</div>

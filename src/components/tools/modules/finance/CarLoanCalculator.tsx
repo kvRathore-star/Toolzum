@@ -18,7 +18,7 @@ export default function CarLoanCalculator() {
   const pmt = p && r ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
   const result = pmt > 0 ? `$${pmt.toFixed(0)}/mo` : '';
   return (
-    <CalculatorShell title="Car Loan Calculator" result={result} auto presets={presets} accent="violet" customResult={
+    <CalculatorShell category="Finance" title="Car Loan Calculator" result={result} auto presets={presets} accent="violet" customResult={
       pmt > 0 ? (
         <div className="flex items-center justify-center gap-8">
           <div className="text-center">

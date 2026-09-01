@@ -21,7 +21,7 @@ export default function PythagoreanTheoremCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Pythagorean Theorem" result="" auto presets={presets} accent="teal" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Pythagorean Theorem" result="" auto presets={presets} accent="teal" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>

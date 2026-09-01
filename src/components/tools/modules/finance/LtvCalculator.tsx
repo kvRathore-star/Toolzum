@@ -19,7 +19,7 @@ export default function LtvCalculator() {
   ];
 
   return (
-    <CalculatorShell title="LTV Calculator" result={ltvFormatted} auto presets={presets} accent="sky" customResult={
+    <CalculatorShell category="Finance" title="LTV Calculator" result={ltvFormatted} auto presets={presets} accent="sky" customResult={
       ltv > 0 ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>

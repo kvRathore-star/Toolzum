@@ -29,7 +29,7 @@ export default function RentVsBuyCalculator() {
     ? `Buy Net Cost: $${buyNet.toFixed(0)}\nRent Total: $${rentTotal.toFixed(0)}\nDifference: $${Math.abs(buyNet - rentTotal).toFixed(0)} ${(buyNet - rentTotal) < 0 ? '(Buy cheaper)' : '(Rent cheaper)'}\nMonthly Mortgage: $${pmt.toFixed(0)} vs Rent: $${monthlyRent.toFixed(0)}`
     : '';
   return (
-    <CalculatorShell title="Rent vs Buy Calculator" result={result} auto presets={presets} accent="green" customResult={
+    <CalculatorShell category="Finance" title="Rent vs Buy Calculator" result={result} auto presets={presets} accent="green" customResult={
       hp && term ? (
         <div className="space-y-3">
           <div className="flex h-20 gap-3">

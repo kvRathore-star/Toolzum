@@ -41,7 +41,7 @@ export default function PercentageDifferenceCalculator() {
   const barColorB = numB > numA ? 'bg-emerald-500' : numB < numA ? 'bg-rose-500' : 'bg-blue-500';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Math"
       title="Percentage Difference"
       result={resultText}
       auto

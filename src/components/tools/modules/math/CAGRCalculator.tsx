@@ -23,7 +23,7 @@ export default function CAGRCalculator() {
   const resultText = s > 0 && y > 0 ? `CAGR: ${cagr.toFixed(2)}% (Total: ${totalReturn.toFixed(2)}%)` : 'Enter valid values';
 
   return (
-    <CalculatorShell title="CAGR Calculator" result={resultText} auto presets={presets} accent="emerald" downloadData={`StartValue,EndValue,Years,CAGR,TotalReturn\n${s},${e},${y},${cagr.toFixed(2)},${totalReturn.toFixed(2)}`} downloadFilename="cagr-calculation.csv">
+    <CalculatorShell category="Math" title="CAGR Calculator" result={resultText} auto presets={presets} accent="emerald" downloadData={`StartValue,EndValue,Years,CAGR,TotalReturn\n${s},${e},${y},${cagr.toFixed(2)},${totalReturn.toFixed(2)}`} downloadFilename="cagr-calculation.csv">
       <div className="space-y-4">
         <div className="grid grid-cols-3 gap-2">
           <div>

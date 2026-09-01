@@ -31,7 +31,7 @@ export default function SemverCalculator() {
   );
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Calculator"
       title="Semver Calculator"
       accent="sky"
       result=""

@@ -19,16 +19,17 @@ export default function CyclingCalorieCalculator() {
     result = `Duration: ${hours.toFixed(1)} hours\nMET: ${met}\nCalories burned: ${calories} kcal`;
   }
 
+  const presets = [
+    { label: 'Leisure ride', apply: () => { setWeight('70'); setDistance('20'); setSpeed('20'); } },
+    { label: 'Road training', apply: () => { setWeight('80'); setDistance('50'); setSpeed('28'); } },
+  ];
+
   return (
-    <CalculatorShell title="Cycling Calorie Calculator" accent="orange" result={result} auto>
+    <CalculatorShell category="Health" title="Cycling Calorie Calculator" accent="orange" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Distance (km)</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
         <div><label className={labelCls}>Speed (km/h)</label><input className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('70'); setDistance('20'); setSpeed('20'); }}>Leisure ride</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('80'); setDistance('50'); setSpeed('28'); }}>Road training</button>
       </div>
     </CalculatorShell>
   );

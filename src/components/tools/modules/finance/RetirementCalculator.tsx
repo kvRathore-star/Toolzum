@@ -27,7 +27,7 @@ export default function RetirementCalculator() {
     ? `Total at Retirement: $${fv.toLocaleString()}\nTotal Contributions: $${totalContrib.toLocaleString()}\nInvestment Growth: $${growth.toLocaleString()}\nYears Saving: ${yrs}\n4% Monthly Withdrawal: $${(fv * 0.04 / 12).toLocaleString()}`
     : 'Retirement age must be greater than current age.';
   return (
-    <CalculatorShell title="Retirement Calculator" result={result} auto presets={presets} accent="indigo" customResult={
+    <CalculatorShell category="Finance" title="Retirement Calculator" result={result} auto presets={presets} accent="indigo" customResult={
       parseFloat(retireAge) > parseFloat(currentAge) ? (
         <div className="space-y-3">
           <div className="text-center">

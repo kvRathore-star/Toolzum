@@ -20,8 +20,15 @@ export default function BabyFormulaCalculator() {
   const perFeed = dailyMl / feeds;
   const result = `Daily: ${Math.round(dailyMl)} mL (${(dailyMl * 0.0338).toFixed(1)} oz)\nPer feed: ${Math.round(perFeed)} mL (${(perFeed * 0.0338).toFixed(1)} oz)\nFeeds: ${feeds} per day`;
 
+  const presets = [
+    { label: 'Newborn (1mo)', apply: () => { setAge('1'); setWeight('4'); setFeedsPerDay('8'); } },
+    { label: '3 months', apply: () => { setAge('3'); setWeight('6'); setFeedsPerDay('6'); } },
+    { label: '6 months', apply: () => { setAge('6'); setWeight('8'); setFeedsPerDay('5'); } },
+    { label: '12 months', apply: () => { setAge('12'); setWeight('10'); setFeedsPerDay('4'); } },
+  ];
+
   return (
-    <CalculatorShell title="Baby Formula Calculator" accent="pink" result={result} auto>
+    <CalculatorShell category="Health" title="Baby Formula Calculator" accent="pink" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>

@@ -21,7 +21,7 @@ export default function TrialConversionCalculator() {
   const result = v > 0 ? `Visitor→Signup: ${visitorToSignup.toFixed(1)}% | Signup→Paid: ${signupToPaid.toFixed(1)}% | MRR: $${mrr.toLocaleString()}` : '';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Finance"
       title="Trial Conversion Calculator"
       accent="violet"
       result={result}

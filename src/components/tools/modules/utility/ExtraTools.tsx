@@ -148,7 +148,7 @@ export function GitCommitLinter() {
   const resultText = msg ? (issues.length === 0 ? '✓ Valid commit message' : `Found ${issues.length} issue(s)`) : 'Enter commit message to lint';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Git Commit Linter"
       result={resultText}
       onCalculate={lint}

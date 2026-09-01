@@ -20,7 +20,7 @@ export default function RatioCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Ratio Calculator" result="" auto presets={presets} accent="blue" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Ratio Calculator" result="" auto presets={presets} accent="blue" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">First Number</label><input type="number" value={num1} onChange={e => setNum1(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Second Number</label><input type="number" value={num2} onChange={e => setNum2(e.target.value)} className={inputCls} /></div>

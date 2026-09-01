@@ -21,7 +21,7 @@ export default function HeartRateZoneCalculator() {
   const result = `Max HR: ${maxHr} bpm\nHR Reserve: ${reserve} bpm` + zones.map(z => `\n${z.name}: ${z.min}-${z.max} bpm`).join('');
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Heart Rate Zone Calculator"
       accent="rose"
       result={result}

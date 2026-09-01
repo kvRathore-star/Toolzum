@@ -25,7 +25,7 @@ export default function ChurnRateCalculator() {
   ];
 
   return (
-    <CalculatorShell title="Churn Rate Calculator" result={result} auto presets={presets} accent="rose" downloadData={csvData} downloadFilename="churn-rate.csv">
+    <CalculatorShell category="Finance" title="Churn Rate Calculator" result={result} auto presets={presets} accent="rose" downloadData={csvData} downloadFilename="churn-rate.csv">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>

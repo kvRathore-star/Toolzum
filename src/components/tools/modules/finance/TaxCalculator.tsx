@@ -28,7 +28,7 @@ export default function TaxCalculator() {
   const takeHome = inc - totalTax;
   const result = inc > 0 ? `Gross income: $${inc.toLocaleString()}\nTaxable income: $${taxable.toLocaleString()}\nFederal: $${Math.round(federalTax).toLocaleString()}\nFICA: $${Math.round(fica).toLocaleString()}\nState: $${Math.round(stateTaxAmount).toLocaleString()}\nTotal tax: $${Math.round(totalTax).toLocaleString()}\nEffective rate: ${effectiveRate.toFixed(1)}%\nTake-home: $${Math.round(takeHome).toLocaleString()} (${(takeHome / inc * 100).toFixed(0)}%)` : '';
   return (
-    <CalculatorShell
+    <CalculatorShell category="Finance"
       title="Tax Calculator (US 2025)"
       accent="indigo"
       result={result}

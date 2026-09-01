@@ -82,7 +82,7 @@ export function PasswordEntropyCalculator() {
   const resultText = result ? `Entropy: ${result.bits} bits (${result.strength})` : 'Enter password to calculate entropy';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Developer"
       title="Password Entropy Calculator"
       result={resultText}
       onCalculate={calc}
@@ -164,7 +164,7 @@ export function TwoFactorAuthGenerator() {
   const copyUri = () => { if (uri) { navigator.clipboard.writeText(uri).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Developer"
       title="Two-Factor Auth (TOTP) Generator"
       result={resultText}
       onCalculate={gen}
@@ -297,7 +297,7 @@ export function BruteForceTimeEstimator() {
   const resultText = est ? `Time to crack: ${est} (${severityLabels[severity] || severity})` : 'Enter password to estimate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Developer"
       title="Brute Force Time Estimator"
       result={resultText}
       onCalculate={calc}
@@ -424,7 +424,7 @@ export function HashGenerator() {
     : '';
 
   return (
-    <CalculatorShell title="Hash Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt" customResult={
+    <CalculatorShell category="Developer" title="Hash Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="purple" downloadData={downloadData} downloadFilename="hashes.txt" customResult={
       Object.keys(results).length > 0 ? (
         <div className="space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -509,7 +509,7 @@ export function HashVerifier() {
   const resultText = match !== null ? (match ? 'Hash matches!' : 'Hash mismatch!') : 'Enter text and hash to verify';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Developer"
       title="Hash Verifier"
       result={resultText}
       onCalculate={verify}
@@ -587,7 +587,7 @@ export function HashPasswordGenerator() {
   const resultText = params ? `PBKDF2-SHA256: ${params.iter.toLocaleString()} iterations` : 'Enter password to generate hash';
 
   return (
-    <CalculatorShell title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt" customResult={
+    <CalculatorShell category="Developer" title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt" customResult={
       params ? (
         <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
           <div className="flex justify-between items-center mb-2">
@@ -854,7 +854,7 @@ export function JwtInspector() {
   const resultText = isValid ? `✓ Valid JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'})` : (issues[0] || 'Enter JWT to inspect');
 
   return (
-    <CalculatorShell title="JWT Inspector" result={resultText} onCalculate={inspect} presets={jwtPresets} accent="violet" downloadData={header && payload ? JSON.stringify({ header, payload }, null, 2) : ''} downloadFilename="jwt.json">
+    <CalculatorShell category="Developer" title="JWT Inspector" result={resultText} onCalculate={inspect} presets={jwtPresets} accent="violet" downloadData={header && payload ? JSON.stringify({ header, payload }, null, 2) : ''} downloadFilename="jwt.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JWT Token</label>
         <textarea value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
@@ -1280,7 +1280,7 @@ export function JsonValidator() {
   const resultText = isValid ? `✓ Valid JSON (${stats?.size || 0} chars, ${stats?.keys || 0} keys, depth ${stats?.depth || 0})` : (error ? `✗ Invalid: ${error}` : 'Enter JSON to validate');
 
   return (
-    <CalculatorShell title="JSON Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="lime" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="validated.json">
+    <CalculatorShell category="Developer" title="JSON Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="lime" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="validated.json">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JSON String</label>
@@ -1380,7 +1380,7 @@ export function YamlValidator() {
   const resultText = isValid ? (issues.length === 0 ? '✓ Valid YAML — no issues' : `✓ Valid YAML with ${issues.length} warning(s)`) : 'Enter YAML to validate';
 
   return (
-    <CalculatorShell title="YAML Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="yellow" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="parsed.json">
+    <CalculatorShell category="Developer" title="YAML Syntax Validator" result={resultText} onCalculate={validate} calculateLabel="Check" presets={presets} accent="yellow" downloadData={isValid && parsed ? JSON.stringify(parsed, null, 2) : ''} downloadFilename="parsed.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">YAML String</label>
         <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIssues([]); setIsValid(null); setParsed(null); }} rows={8} placeholder="key: value"

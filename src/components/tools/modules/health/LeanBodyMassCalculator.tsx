@@ -18,8 +18,13 @@ export default function LeanBodyMassCalculator() {
     result = `Boer formula: ${Math.round(boer * 10) / 10} kg\nJames formula: ${Math.round(james * 10) / 10} kg\nAverage LBM: ${Math.round(avg * 10) / 10} kg\nBody fat est.: ${Math.round((w - avg) / w * 100)}%`;
   }
 
+  const presets = [
+    { label: 'Avg Male', apply: () => { setGender('male'); setWeight('80'); setHeight('180'); } },
+    { label: 'Avg Female', apply: () => { setGender('female'); setWeight('65'); setHeight('165'); } },
+  ];
+
   return (
-    <CalculatorShell title="Lean Body Mass" accent="blue" result={result} auto>
+    <CalculatorShell category="Health" title="Lean Body Mass" accent="blue" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>

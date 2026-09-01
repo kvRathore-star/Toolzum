@@ -26,7 +26,7 @@ export default function BabyGrowthPercentileCalculator() {
   }
 
   return (
-    <CalculatorShell title="Baby Growth Percentile" accent="rose" result={result} auto>
+    <CalculatorShell category="Health" title="Baby Growth Percentile" accent="rose" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>

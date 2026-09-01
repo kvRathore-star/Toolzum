@@ -16,7 +16,7 @@ export default function NetWorthCalculator() {
   const nw = a - l;
   const dti = a > 0 ? (l / a) * 100 : 0;
   return (
-    <CalculatorShell title="Net Worth Calculator" result={`$${nw.toLocaleString()}`} auto presets={presets} accent="purple" customResult={
+    <CalculatorShell category="Finance" title="Net Worth Calculator" result={`$${nw.toLocaleString()}`} auto presets={presets} accent="purple" customResult={
       true ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">

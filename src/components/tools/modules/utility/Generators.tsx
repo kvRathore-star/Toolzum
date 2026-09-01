@@ -62,7 +62,7 @@ export function RandomPasswordGenerator() {
   const resultText = result ? 'Generated ' + length + '-char password (' + entropy + ' bits, ' + strength + ')' : 'Configure options and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Password Generator"
       result={resultText}
       onCalculate={generate}
@@ -180,7 +180,7 @@ export function RandomNumberGenerator() {
   const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + (unique ? 'unique' : 'with repeats') + ')' : 'Configure range and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Number Generator"
       result={resultText}
       onCalculate={generate}
@@ -257,7 +257,7 @@ export function RandomStringGenerator() {
   const resultText = result ? 'Generated ' + result.length + '-char string (' + charset + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell title="Random String Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
+    <CalculatorShell category="Utility" title="Random String Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {STRING_PRESETS.map(p => (
@@ -343,7 +343,7 @@ export function RandomColorGenerator() {
   const resultText = colors.length > 0 ? 'Generated ' + colors.length + ' ' + format.toUpperCase() + ' colors' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Color Generator"
       result={resultText}
       onCalculate={generate}
@@ -403,7 +403,7 @@ export function RandomTeamGenerator() {
   const resultText = teams.length > 0 ? 'Generated ' + teams.length + ' teams from ' + input.split('\n').filter(Boolean).length + ' names' : 'Enter names and generate teams';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Team Generator"
       result={resultText}
       onCalculate={generate}
@@ -451,7 +451,7 @@ export function RandomPickerGenerator() {
   const resultText = result.length > 0 ? 'Picked ' + result.length + ' of ' + input.split('\n').filter(Boolean).length + ' items (' + (allowRepeat ? 'with' : 'without') + ' repeats)' : 'Add items and pick';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Picker Generator"
       result={resultText}
       onCalculate={pick}
@@ -538,7 +538,7 @@ export function RandomDecisionMaker() {
   const resultText = choice ? 'Decision: ' + choice : 'Enter options and decide';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Decision Maker"
       result={resultText}
       auto={true}
@@ -593,7 +593,7 @@ export function RandomUsernameGenerator() {
   const resultText = results.length > 0 ? 'Generated ' + results.length + ' usernames (' + pattern + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Username Generator"
       result={resultText}
       onCalculate={generate}
@@ -646,7 +646,7 @@ export function RandomUUIDGenerator() {
   const resultText = results.length > 0 ? 'Generated ' + results.length + ' ' + version.toUpperCase() + 's' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random UUID Generator"
       result={resultText}
       onCalculate={generate}
@@ -702,7 +702,7 @@ export function RandomTokenGenerator() {
   const resultText = result ? 'Generated ' + length + '-char ' + format.toUpperCase() + ' token (' + entropy + ' bits entropy)' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Random Token Generator"
       result={resultText}
       onCalculate={generate}
@@ -759,7 +759,7 @@ export function LoremIpsumGenerator() {
   const resultText = result ? 'Generated ' + type + ' (' + count + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Lorem Ipsum Generator"
       result={resultText}
       onCalculate={generate}
@@ -810,7 +810,7 @@ export function DummyTextGenerator() {
   const resultText = result ? 'Generated ' + result.length + ' chars dummy text' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Dummy Text Generator"
       result={resultText}
       onCalculate={generate}
@@ -868,7 +868,7 @@ export function FakeDataGenerator() {
   const resultText = data.length > 0 ? 'Generated ' + data.length + ' records with ' + fields.length + ' fields' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Fake Data Generator"
       result={resultText}
       onCalculate={generate}
@@ -924,7 +924,7 @@ export function FakeIdentityGenerator() {
   const resultText = identity ? 'Generated identity: ' + identity.name : 'Generate a random identity';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Fake Identity Generator"
       result={resultText}
       onCalculate={generate}
@@ -978,7 +978,7 @@ export function FakeCreditCardGenerator() {
   const resultText = cards.length > 0 ? 'Generated ' + cards.length + ' test cards (Luhn valid)' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Fake Credit Card Generator"
       result={resultText}
       onCalculate={generate}
@@ -1031,7 +1031,7 @@ export function SequenceGenerator() {
   const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + type + ', sum: ' + sum.toLocaleString() + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Sequence Generator"
       result={resultText}
       onCalculate={generate}
@@ -1082,7 +1082,7 @@ export function BarcodeGenerator() {
   const resultText = input ? 'Generated ' + type + ' barcode for: ' + input : 'Enter data to generate barcode';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Barcode Generator"
       result={resultText}
       onCalculate={renderBarcode}
@@ -1129,7 +1129,7 @@ export function QrCodeGenerator() {
   const resultText = dataUrl ? 'Generated QR code (' + errorCorrection + ' error correction)' : 'Enter text to generate QR code';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="QR Code Generator"
       result={resultText}
       auto={true}
@@ -1184,7 +1184,7 @@ export function CouponCodeGenerator() {
   const resultText = codes.length > 0 ? 'Generated ' + codes.length + ' coupons (' + pattern + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Coupon Code Generator"
       result={resultText}
       onCalculate={generate}
@@ -1245,7 +1245,7 @@ export function SerialNumberGenerator() {
   const resultText = serials.length > 0 ? 'Generated ' + serials.length + ' serials (' + format + ')' : 'Configure and generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="Serial Number Generator"
       result={resultText}
       onCalculate={generate}
@@ -1312,7 +1312,7 @@ export function NicknameGenerator() {
   const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx].name + ')' : 'Select pattern and generate';
 
   return (
-    <CalculatorShell title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
+    <CalculatorShell category="Utility" title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
       <div className="space-y-4">
         <div>
           <label className={labelClass}>Pattern</label>
@@ -1366,7 +1366,7 @@ export function AvatarGenerator() {
   const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
 
   return (
-    <CalculatorShell title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
+    <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Name</label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."

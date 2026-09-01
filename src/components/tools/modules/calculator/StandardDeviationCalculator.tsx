@@ -34,7 +34,7 @@ export default function StandardDeviationCalculator() {
   ];
 
   return (
-    <CalculatorShell title="Standard Deviation Calculator" accent="blue" result="" auto customResult={customResult} presets={presets}>
+    <CalculatorShell category="Calculator" title="Standard Deviation Calculator" accent="blue" result="" auto customResult={customResult} presets={presets}>
       <div className="max-w-xl">
         <div><label className={labelCls}>Numbers (comma separated)</label><textarea className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
       </div>

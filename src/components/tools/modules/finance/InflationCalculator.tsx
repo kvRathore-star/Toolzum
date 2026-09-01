@@ -18,7 +18,7 @@ export default function InflationCalculator() {
   const fv = p * Math.pow(1 + r, y);
   const result = p > 0 && y > 0 ? `$${fv.toFixed(0)}` : '';
   return (
-    <CalculatorShell title="Inflation Calculator" result={result} auto presets={presets} accent="lime" customResult={
+    <CalculatorShell category="Finance" title="Inflation Calculator" result={result} auto presets={presets} accent="lime" customResult={
       p > 0 && y > 0 ? (
         <div>
           <div className="flex items-center justify-center gap-6">

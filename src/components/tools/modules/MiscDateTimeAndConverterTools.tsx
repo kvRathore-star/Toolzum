@@ -26,7 +26,7 @@ export function DateDifferenceCalculator() {
   const resultText = diff ? `${diff.days} days (${diff.hours}h ${diff.minutes}m ${diff.seconds}s)` : 'Select two dates';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Date Difference Calculator"
       result={resultText}
       auto={true}
@@ -58,7 +58,7 @@ export function DateAdditionCalculator() {
   const resultText = result ? result.toLocaleDateString() : 'Enter start date and days';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Date Addition / Subtraction"
       result={resultText}
       auto={true}
@@ -92,7 +92,7 @@ export function WeekNumberCalculator() {
   const resultText = `Week ${week} of ${d.getFullYear()}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Week Number Calculator"
       result={resultText}
       auto={true}
@@ -132,7 +132,7 @@ export function TimeSinceCalculator() {
   const resultText = d.getTime() > now.getTime() ? `${yr} years, ${mo} months, ${wk} weeks, ${day} days until` : `${yr} years, ${mo} months, ${wk} weeks, ${day} days since`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Time Since / Until"
       result={resultText}
       auto={true}
@@ -172,7 +172,7 @@ export function TimeZoneConverter() {
   const resultText = `${String(resultH).padStart(2, '0')}:${String(resultM).padStart(2, '0')} (${fromTz} → ${toTz})`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Time Zone Converter"
       result={resultText}
       auto={true}
@@ -208,7 +208,7 @@ export function DaylightSavingTimeChecker() {
   const resultText = `DST: ${dstStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${dstEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} (${Math.round((dstEnd.getTime() - dstStart.getTime()) / 86400000)} days)`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="DST Checker (US)"
       result={resultText}
       auto={true}
@@ -244,7 +244,7 @@ export function WorkHoursCalculator() {
   const resultText = `${hrs}h ${mins}m`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Work Hours Calculator"
       result={resultText}
       auto={true}
@@ -277,7 +277,7 @@ export function HoursMinutesCalculator() {
   const resultText = `Total: ${Math.floor(total / 60)}h ${total % 60}m | Diff: ${Math.floor(diff / 60)}h ${diff % 60}m`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Hours & Minutes Calculator"
       result={resultText}
       auto={true}
@@ -312,7 +312,7 @@ export function SpeedConverter() {
   const resultText = `mph: ${(k * 0.621371).toFixed(2)} | knots: ${(k * 0.539957).toFixed(2)} | m/s: ${(k / 3.6).toFixed(2)} | ft/s: ${(k * 0.911344).toFixed(2)}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Speed Converter"
       result={resultText}
       auto={true}
@@ -343,7 +343,7 @@ export function LengthConverter() {
   const resultText = `km: ${(m / 1000).toFixed(4)} | miles: ${(m * 0.000621371).toFixed(4)} | yards: ${(m * 1.09361).toFixed(2)} | feet: ${(m * 3.28084).toFixed(2)} | inches: ${(m * 39.3701).toFixed(2)}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Length Converter"
       result={resultText}
       auto={true}
@@ -374,7 +374,7 @@ export function WeightConverter() {
   const resultText = `g: ${(k * 1000).toFixed(0)} | lb: ${(k * 2.20462).toFixed(2)} | oz: ${(k * 35.274).toFixed(2)} | stone: ${(k * 0.157473).toFixed(2)}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Weight Converter"
       result={resultText}
       auto={true}
@@ -405,7 +405,7 @@ export function VolumeConverter() {
   const resultText = `mL: ${(l * 1000).toFixed(0)} | gal (US): ${(l * 0.264172).toFixed(4)} | qt: ${(l * 1.05669).toFixed(4)} | fl oz: ${(l * 33.814).toFixed(2)} | cups: ${(l * 4.22675).toFixed(2)}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Volume Converter"
       result={resultText}
       auto={true}
@@ -436,7 +436,7 @@ export function AreaConverter() {
   const resultText = `sq ft: ${(a * 10.7639).toFixed(2)} | acres: ${(a * 0.000247105).toFixed(6)} | hectares: ${(a * 0.0001).toFixed(6)} | sq km: ${(a / 1e6).toFixed(6)}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Area Converter"
       result={resultText}
       auto={true}
@@ -469,7 +469,7 @@ export function DataSizeConverter() {
   const resultText = conv.map(c => `${c.unit}: ${c.value.toFixed(2)}`).join(' | ');
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Data Size Converter"
       result={resultText}
       auto={true}

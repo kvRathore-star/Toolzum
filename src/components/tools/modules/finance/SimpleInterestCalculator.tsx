@@ -14,7 +14,7 @@ export default function SimpleInterestCalculator() {
   const total = p + interest;
   const result = p && r && t ? `Simple Interest: $${interest.toFixed(2)}\nTotal amount: $${total.toFixed(2)}\nAnnual interest: $${(p * r / 100).toFixed(2)}` : '';
   return (
-    <CalculatorShell
+    <CalculatorShell category="Finance"
       title="Simple Interest Calculator"
       accent="indigo"
       result={result}

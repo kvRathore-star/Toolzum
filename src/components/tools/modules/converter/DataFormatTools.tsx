@@ -68,7 +68,7 @@ export function TsvCsvConverter() {
   const resultText = output ? `Converted ${mode === 'tsv-to-csv' ? 'TSV → CSV' : 'CSV → TSV'}` : 'Enter data to convert';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="TSV ↔ CSV Converter"
       result={resultText}
       onCalculate={convert}
@@ -256,7 +256,7 @@ export function CsvDataCleaner() {
   const resultText = output ? 'CSV cleaned successfully' : 'Paste CSV to clean';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="CSV Data Cleaner"
       result={resultText}
       onCalculate={clean}
@@ -316,7 +316,7 @@ export function CsvStatistics() {
   const resultText = output ? 'Statistics generated' : 'Paste CSV to analyze';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="CSV Statistics"
       result={resultText}
       onCalculate={analyze}
@@ -390,7 +390,7 @@ export function CsvHtmlTableConverter() {
   const resultText = output ? (mode === 'csv-to-html' ? 'HTML table generated' : 'CSV extracted') : 'Convert between CSV and HTML tables';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="CSV ↔ HTML Table Converter"
       result={resultText}
       onCalculate={convert}
@@ -472,7 +472,7 @@ export function YamlValidator() {
   const resultText = output ? `YAML ${mode}d successfully` : 'Enter YAML to process';
 
 return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="YAML Validator"
       result={resultText}
       onCalculate={process}

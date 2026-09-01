@@ -15,7 +15,7 @@ export default function BreastfeedingCalorieCalculator() {
   const result = `Est. milk per feed: ${milkPerFeedMl} mL\nDaily milk output: ${dailyMl} mL\nCalories burned: ~${caloriesBurned} kcal/day`;
 
   return (
-    <CalculatorShell title="Breastfeeding Calories" accent="fuchsia" result={result} auto>
+    <CalculatorShell category="Health" title="Breastfeeding Calories" accent="fuchsia" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Baby age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
         <div><label className={labelCls}>Feedings / day</label><input className={inputCls} type="number" value={feedings} onChange={e => setFeedings(e.target.value)} /></div>

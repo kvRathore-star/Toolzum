@@ -325,43 +325,6 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
     "isIndia": false
   },
   {
-    "title": "Calculator",
-    "icon": "calculator",
-    "tools": [
-      {
-        "name": "Percentage Calculator",
-        "href": "/calculator/percentage-calculator"
-      },
-      {
-        "name": "Age Calculator",
-        "href": "/calculator/age-calculator"
-      },
-      {
-        "name": "College GPA Calculator",
-        "href": "/calculator/college-gpa-calculator"
-      },
-      {
-        "name": "Date Difference Calculator",
-        "href": "/calculator/date-difference-calculator"
-      },
-      {
-        "name": "Fraction Calculator",
-        "href": "/calculator/fraction-calculator"
-      },
-      {
-        "name": "Exponent Calculator",
-        "href": "/calculator/exponent-calculator"
-      },
-      {
-        "name": "DPI Calculator",
-        "href": "/calculator/dpi-calculator"
-      }
-    ],
-    "allCount": 66,
-    "allHref": "/calculator",
-    "isIndia": false
-  },
-  {
     "title": "Utility",
     "icon": "utility",
     "tools": [

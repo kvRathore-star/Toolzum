@@ -26,7 +26,7 @@ export default function MeanMedianModeCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Mean Median Mode Calculator" result="" auto presets={presets} accent="cyan" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Mean Median Mode Calculator" result="" auto presets={presets} accent="cyan" customResult={customResult}>
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );

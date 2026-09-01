@@ -64,7 +64,7 @@ export function WordCounter() {
   ];
 
   return (
-    <CalculatorShell title="Word Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
+    <CalculatorShell category="SEO" title="Word Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="emerald" downloadData={JSON.stringify({ words, chars, charsNoSpace, sentences, paragraphs, readingTime, speakingTime }, null, 2)} downloadFilename="word-count.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -136,7 +136,7 @@ export function CharacterCounter() {
   ];
 
   return (
-    <CalculatorShell title="Character Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
+    <CalculatorShell category="SEO" title="Character Counter" result={resultText} auto={true} calculateLabel="Count" presets={presets} accent="sky" downloadData={JSON.stringify({ total, noSpace, letters, uppercase, lowercase, digits, spaces, punctuation }, null, 2)} downloadFilename="char-count.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => setText(e.target.value)} rows={10} placeholder="Type or paste text..."
@@ -205,7 +205,7 @@ export function WordFrequencyCounter() {
     : 'Enter text and analyze';
 
   return (
-    <CalculatorShell title="Word Frequency Counter" result={resultText} onCalculate={analyze} calculateLabel="Count" presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
+    <CalculatorShell category="SEO" title="Word Frequency Counter" result={resultText} onCalculate={analyze} calculateLabel="Count" presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -278,7 +278,7 @@ export function KeywordDensityChecker() {
   const grade = density ? getDensityGrade(density.percentage) : null;
 
   return (
-    <CalculatorShell title="Keyword Density Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="amber" downloadData={density ? JSON.stringify({ keyword, text, ...density }, null, 2) : ''} downloadFilename="keyword-density.json">
+    <CalculatorShell category="SEO" title="Keyword Density Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="amber" downloadData={density ? JSON.stringify({ keyword, text, ...density }, null, 2) : ''} downloadFilename="keyword-density.json">
       <div className="space-y-4">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -363,7 +363,7 @@ export function KeywordPlannerTool() {
   const totalWords = text.trim() ? text.split(/\s+/).length : 0;
 
   return (
-    <CalculatorShell title="Keyword Planner Tool" result={resultText} onCalculate={extract} presets={presets} accent="indigo" downloadData={keywords.length > 0 ? JSON.stringify({ totalWords, keywords }, null, 2) : ''} downloadFilename="keywords.json">
+    <CalculatorShell category="SEO" title="Keyword Planner Tool" result={resultText} onCalculate={extract} presets={presets} accent="indigo" downloadData={keywords.length > 0 ? JSON.stringify({ totalWords, keywords }, null, 2) : ''} downloadFilename="keywords.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Content</label>
@@ -419,7 +419,7 @@ export function SeoMetaTagGenerator() {
   const resultText = result ? 'Meta tags generated successfully' : 'Enter details to generate meta tags';
 
   return (
-    <CalculatorShell title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
+    <CalculatorShell category="SEO" title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title (<span id="title-len">{title.length}</span>/60)</label>
@@ -472,7 +472,7 @@ export function SeoPreviewGenerator() {
   const resultText = `Title: ${ogLength}/60 ${ogLength > 60 ? '⚠️ Too long' : '✓'} | Description: ${descLength}/160 ${descLength > 160 ? '⚠️ Too long' : '✓'}`;
 
   return (
-    <CalculatorShell title="SEO Preview Generator" result={resultText} auto={true} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
+    <CalculatorShell category="SEO" title="SEO Preview Generator" result={resultText} auto={true} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={JSON.stringify({ title, url, description, ogLength, descLength }, null, 2)} downloadFilename="seo-preview.json">
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
@@ -541,7 +541,7 @@ export function SeoHeadlineAnalyzer() {
   const resultText = analysis ? `Score: ${analysis.score}/100 (${analysis.sentiment})` : 'Enter headline to analyze';
 
   return (
-    <CalculatorShell title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} calculateLabel="Analyze" presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
+    <CalculatorShell category="SEO" title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} calculateLabel="Analyze" presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
         <input type="text" value={headline} onChange={e => setHeadline(e.target.value)}
@@ -588,7 +588,7 @@ export function SeoSchemaGenerator() {
   const resultText = result ? 'Schema generated successfully' : 'Enter properties to generate schema';
 
   return (
-    <CalculatorShell title="SEO Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
+    <CalculatorShell category="SEO" title="SEO Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
       <div className="space-y-4">
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
@@ -634,7 +634,7 @@ export function SeoSlugGenerator() {
   const resultText = slug ? `Slug generated: ${slug}` : 'Enter text to generate slug';
 
   return (
-    <CalculatorShell title="SEO Slug Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="emerald" downloadData={slug} downloadFilename="slug.txt">
+    <CalculatorShell category="SEO" title="SEO Slug Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="emerald" downloadData={slug} downloadFilename="slug.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <input type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter text to convert to slug"
@@ -700,7 +700,7 @@ export function CaseConverter() {
   const resultText = result ? `Converted to ${cases.find(c => c.id === activeCase)?.label || activeCase}` : 'Enter text and choose a case style';
 
   return (
-    <CalculatorShell title="Case Converter" result={resultText} presets={presets} accent="emerald" downloadData={result} downloadFilename="converted.txt">
+    <CalculatorShell category="SEO" title="Case Converter" result={resultText} presets={presets} accent="emerald" downloadData={result} downloadFilename="converted.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); setActiveCase(null); }} rows={4} placeholder="Enter text to convert..."
@@ -744,7 +744,7 @@ export function TextReplacer() {
   const resultText = result ? `Replaced ${count} occurrence${count !== 1 ? 's' : ''}` : 'Enter text to find and replace';
 
   return (
-    <CalculatorShell title="Text Replacer" result={resultText} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
+    <CalculatorShell category="SEO" title="Text Replacer" result={resultText} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); }} rows={6} placeholder="Enter text..."
@@ -797,7 +797,7 @@ export function TextSorter() {
   const resultText = sorted ? `Sorted ${outLines} lines (${sortMethod})` : 'Enter lines to sort';
 
   return (
-    <CalculatorShell title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
+    <CalculatorShell category="SEO" title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
         <textarea value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
@@ -844,7 +844,7 @@ export function TextDeduplicator() {
   const resultText = result ? `${result.split('\n').length} unique lines (from ${inLines})` : 'Paste lines to deduplicate';
 
   return (
-    <CalculatorShell title="Text Deduplicator" result={resultText} onCalculate={deduplicate} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
+    <CalculatorShell category="SEO" title="Text Deduplicator" result={resultText} onCalculate={deduplicate} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Lines</label>
       <textarea value={text} onChange={e => setText(e.target.value)} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50 resize-y" />
@@ -898,7 +898,7 @@ export function TextDiffChecker() {
     : 'Enter two texts to compare';
 
   return (
-    <CalculatorShell title="Text Diff Checker" result={resultText} onCalculate={compare} calculateLabel="Check" presets={presets} accent="violet" downloadData={diff ? JSON.stringify({ text1, text2, diff: diff.lines }, null, 2) : ''} downloadFilename="diff.json">
+    <CalculatorShell category="SEO" title="Text Diff Checker" result={resultText} onCalculate={compare} calculateLabel="Check" presets={presets} accent="violet" downloadData={diff ? JSON.stringify({ text1, text2, diff: diff.lines }, null, 2) : ''} downloadFilename="diff.json">
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
@@ -974,7 +974,7 @@ function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'html-to-
   const resultText = result ? `Converted ${isTextToHtml ? 'text → HTML' : 'HTML → text'}` : 'Enter content to convert';
 
   return (
-    <CalculatorShell title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'} result={resultText} onCalculate={convert} presets={presets} accent="amber" downloadData={result} downloadFilename={isTextToHtml ? 'output.html' : 'output.txt'}>
+    <CalculatorShell title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'} category="SEO" result={resultText} onCalculate={convert} presets={presets} accent="amber" downloadData={result} downloadFilename={isTextToHtml ? 'output.html' : 'output.txt'}>
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{isTextToHtml ? 'Plain Text' : 'HTML'}</label>
         <textarea value={input} onChange={e => setInput(e.target.value)} rows={8} placeholder={isTextToHtml ? 'Enter plain text...' : 'Enter HTML...'}
@@ -1039,7 +1039,7 @@ export function MarkdownPreviewer() {
   const resultText = html ? 'Markdown rendered to HTML' : 'Enter Markdown to preview';
 
   return (
-    <CalculatorShell title="Markdown Previewer" result={resultText} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
+    <CalculatorShell category="SEO" title="Markdown Previewer" result={resultText} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Markdown</label>
       <textarea value={md} onChange={e => setMd(e.target.value)} rows={10} placeholder="Enter Markdown..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
@@ -1069,7 +1069,7 @@ export function DuplicateWordRemover() {
   const resultText = result ? `${outWords} unique words (removed ${inWords - outWords} duplicates)` : 'Paste text to remove duplicate words';
 
   return (
-    <CalculatorShell title="Duplicate Word Remover" result={resultText} onCalculate={remove} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
+    <CalculatorShell category="SEO" title="Duplicate Word Remover" result={resultText} onCalculate={remove} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
       <p className="text-sm text-[var(--text-secondary)] mb-3">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text (${inWords} words)</label>
       <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text..."
@@ -1102,7 +1102,7 @@ export function TextCleaner() {
   const resultText = result ? 'Text cleaned (whitespace normalized)' : 'Enter text to clean';
 
   return (
-    <CalculatorShell title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
+    <CalculatorShell category="SEO" title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
       <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to clean..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50 resize-y" />
@@ -1133,7 +1133,7 @@ export function TextSplitter() {
   const resultText = result ? `Split into ${count} parts` : 'Enter text and delimiter to split';
 
   return (
-    <CalculatorShell title="Text Splitter" result={resultText} onCalculate={split} presets={presets} accent="violet" downloadData={result} downloadFilename="split.txt">
+    <CalculatorShell category="SEO" title="Text Splitter" result={resultText} onCalculate={split} presets={presets} accent="violet" downloadData={result} downloadFilename="split.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
       <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to split..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
@@ -1170,7 +1170,7 @@ export function TrailingSpaceRemover() {
   const resultText = result ? 'Trailing spaces removed' : 'Enter text to remove trailing spaces';
 
   return (
-    <CalculatorShell title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
+    <CalculatorShell category="SEO" title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
       <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text with trailing spaces..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
@@ -1203,7 +1203,7 @@ export function CanonicalUrlChecker() {
   const resultText = result ? `URL checked: ${url}` : 'Enter URL to check canonical structure';
 
   return (
-    <CalculatorShell title="Canonical URL Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
+    <CalculatorShell category="SEO" title="Canonical URL Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
         <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
@@ -1232,7 +1232,7 @@ export function BreadcrumbSchemaGenerator() {
   const resultText = result ? 'Breadcrumb schema generated' : 'Enter pages to generate breadcrumb schema';
 
   return (
-    <CalculatorShell title="Breadcrumb Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="amber" downloadData={result} downloadFilename="breadcrumb-schema.json">
+    <CalculatorShell category="SEO" title="Breadcrumb Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="amber" downloadData={result} downloadFilename="breadcrumb-schema.json">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pages (Name,URL per line)</label>
         <textarea value={pages} onChange={e => setPages(e.target.value)} rows={5} placeholder="Home,https://example.com\nProducts,https://example.com/products"
@@ -1292,7 +1292,7 @@ export function UtmBuilder() {
   ];
 
   return (
-    <CalculatorShell title="UTM Builder" result={resultText} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
+    <CalculatorShell category="SEO" title="UTM Builder" result={resultText} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
         <input type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"

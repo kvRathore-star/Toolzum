@@ -18,7 +18,7 @@ export default function SeatLicenseCalculator() {
   const result = u > 0 && p > 0 ? `$${monthly.toFixed(0)}/mo ($${annual.toFixed(0)}/yr)` : '';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Finance"
       title="Seat License Calculator"
       accent="violet"
       result={result}

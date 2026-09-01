@@ -22,7 +22,7 @@ export default function SleepCalculator() {
   }
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Sleep Calculator"
       accent="purple"
       result={result}

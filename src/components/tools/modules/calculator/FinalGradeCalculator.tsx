@@ -23,7 +23,7 @@ export default function FinalGradeCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Final Grade Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Final Grade Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (comma-separated)</label><input type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Weights (comma-separated, %)</label><input type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputCls} /></div>

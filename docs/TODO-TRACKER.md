@@ -45,7 +45,6 @@ Last updated: 2026-08-23
 
 ## Immediate actions
 - [x] 23. ~~Improve 6 category FAQ templates in ToolPageSEOContent.tsx~~ — Templates now personalized per tool (name, description in first2 questions). All818 tools get unique FAQ text, breaking duplicate content pattern. (commit 296e435)
-- [ ] 24. Submit IndexNow / re-validate GSC for latest fixes (classifier, trust bugs, related-tools, FAQ content)
 
 ## Prevention (ongoing)
 - [ ] 25. Add lint check: new tools without `faqs` field in registry trigger a warning. Prevents future818-tool backlog. Bake into the tool-addition checklist.
@@ -53,73 +52,33 @@ Last updated: 2026-08-23
 - [ ] 27. Add category-slug validation: maintain a known-good slug→category mapping, flag mismatches at build time. Catches miscategorized tools before they ship.
 - [ ] 28. **FAQ depth audit for Formula-type CalculatorShell tools** — ~120 tools use CalculatorShell with Formula classification. The FAQ rollout (item 11/13/23) only solves thin-content if FAQs are genuinely deep (worked examples, derivation steps, edge cases), not generic templates. Before FAQ rollout: audit all Formula tools' registry `faqs` for: step-by-step derivation, worked numeric example, common mistake warnings, formula variant explanations. Flag tools with <4 FAQs or missing worked examples for manual deepening.
 
-## Testing Strategy: Shared Library Coverage
-**Approach:** Instead of 300+ individual tool tests, test shared libraries/hooks that all tools depend on. ~39 shared files → ~40-50 tests covers all tools.
+SEO: Add unique meta descriptions to top 50 most-visited tools
+SEO: Add internal linking between related tools (reduces thin content signals)
 
-### Pre-existing (11 files) ✅
-| File | Tests | Status |
-|------|-------|--------|
-| `src/__tests__/lib/clipboard.test.ts` | clipboardWrite | ✅ |
-| `src/__tests__/lib/error.test.ts` | getErrorMessage | ✅ |
-| `src/__tests__/lib/fileUtils.test.ts` | hasLargeFiles, checkMemory | ✅ |
-| `src/__tests__/lib/keyboard.test.ts` | keyboard utilities | ✅ |
-| `src/__tests__/lib/withErrorHandling.test.ts` | error wrapper (5 tests) | ✅ |
-| `src/__tests__/utils/blob.test.ts` | blob utilities | ✅ |
-| `src/__tests__/hooks/useAiProvider.test.ts` | AI provider hook | ✅ |
-| `src/__tests__/hooks/useBatchProgress.test.ts` | batch progress hook | ✅ |
-| `src/__tests__/hooks/useFFmpeg.test.ts` | FFmpeg hook | ✅ |
-| `src/__tests__/hooks/useUsageCounter.test.ts` | usage counter hook | ✅ |
-| `src/__tests__/components/AiPrivacyBanner.test.tsx` | privacy banner | ✅ |
+ Wire up email service (Resend)
+ Wire Resend email service for forgot-password/reset-password
 
-### Lib (10 files) ✅
-| File | Tests | Status |
-|------|-------|--------|
-| `src/__tests__/lib/fetchWithRetry.test.ts` | fetchWithRetry (7 tests) | ✅ |
-| `src/__tests__/lib/proLimits.test.ts` | pro tier limits | ✅ |
-| `src/__tests__/lib/env.test.ts` | getRequiredEnv | ✅ |
-| `src/__tests__/lib/categoryTheme.test.ts` | getCategoryTheme, getCategoryGroup, getGroupedCategories (15 tests) | ✅ |
-| `src/__tests__/lib/geo.test.ts` | geo utilities | ✅ |
-| `src/__tests__/lib/log.test.ts` | logging | ✅ |
-| `src/__tests__/lib/utils.test.ts` | general utils | ✅ |
-| `src/__tests__/lib/generateToolDescription.test.ts` | generateToolDescription, getShortDescription, getMetaDescription, getOgDescription, getUnverifiedDependencyTools (25 tests) | ✅ |
-| `src/__tests__/lib/auth.test.ts` | N/A — config-only file, covered by integration tests | ✅ |
-| `src/__tests__/lib/auth-client.test.ts` | N/A — config-only file, covered by integration tests | ✅ |
+ Credits — Default reduced from 100 to 10. Schema, auth config, migration, dashboard bar, and account page all updated. Current cost: 1 credit per AI tool use (generate/transcribe). Free users get 10 credits; Pro gets unlimited.
 
-### Hooks (11 files) ✅
-| File | Tests | Status |
-|------|-------|--------|
-| `src/__tests__/hooks/useFavorites.test.ts` | useFavorites | ✅ |
-| `src/__tests__/hooks/useToolHistory.test.ts` | useToolHistory | ✅ |
-| `src/__tests__/hooks/useParallelProcessor.test.ts` | useParallelProcessor | ✅ |
-| `src/__tests__/hooks/useBidirectional.test.ts` | useBidirectional | ✅ |
-| `src/__tests__/hooks/usePresets.test.tsx` | usePresets (5 tests) | ✅ |
-| `src/__tests__/hooks/useWorkflowPresets.test.ts` | useWorkflowPresets (9 tests) | ✅ |
-| `src/__tests__/hooks/useObjectURL.test.ts` | useObjectURL | ✅ |
-| `src/__tests__/hooks/useFreeUsage.test.ts` | useFreeUsage | ✅ |
-| `src/__tests__/hooks/useIsIndia.test.ts` | useIsIndia | ✅ |
-| `src/__tests__/hooks/useMemoryWatchdog.test.tsx` | MemoryWatchdog (2 tests) | ✅ |
-| `src/__tests__/hooks/useWebWorker.test.ts` | useWebWorker (2 tests) | ✅ |
+  Define per-task credit costs (e.g., image gen = 5, text gen = 2, transcription = 3) — currently all 1 credit
 
-### Utils (9 files) ✅
-| File | Tests | Status |
-|------|-------|--------|
-| `src/__tests__/utils/error.test.ts` | getErrorMessage (via lib/error.test.ts) | ✅ |
-| `src/__tests__/utils/fileSizeLimits.test.ts` | smartMax (7 tests) | ✅ |
-| `src/__tests__/lib/freeUsageGuard.test.ts` | freeUsageGuard | ✅ |
-| `src/__tests__/utils/nativeShare.test.ts` | nativeShare | ✅ |
-| `src/__tests__/utils/toolCache.test.ts` | toolCache | ✅ |
-| `src/__tests__/utils/urlStatus.test.ts` | parseUrlList, chunkArray, buildResultsCsv, summarizeResults (26 tests) | ✅ |
-| `src/__tests__/utils/cobaltApi.test.ts` | fetchCobaltDownload (8 tests) | ✅ |
-| `src/__tests__/utils/telemetry.test.ts` | telemetry | ✅ |
-| `src/__tests__/transcribe.test.ts` | submitTranscription (4 tests) | ✅ |
+ use CalculatorShell with: which 
+1. Truly bare/minimal tools — tools with just a plain form and no styling
+2. Calculator-style tools — inputs → calculate/auto → result
+Two-column layout (inputs left, result panel right) 
+Preset chips for quick values, 
+Result panel with stats, copy/download/history
+reusable CalcActions component (copy + download + history)
+3. Tools with inconsistent UI — where you want uniform look
+Icon + title with border-bottom
+Added icon prop to CalculatorShell 
+Finance tools: DollarSign icon
+Calculator tools: Calculator/GraduationCap/Monitor icons
+Health tools: Heart icon
+Math tools: Calculator icon
+Developer tools: Code icon etc.
 
-### Summary — COMPLETE ✅
-- **Total shared files:** 39
-- **Tested:** 39/39 (100%)
-- **Total test files:** 30 (lib 10 + hooks 11 + utils 9)
-- **Total tests:** ~92 new tests added
-- All 92 new tests passing
----
+
 
 ## Completed
 - [x] A/E/X/H QA sweep — 4 commits (cookie/FAQ, a11y, error-handling, mobile)

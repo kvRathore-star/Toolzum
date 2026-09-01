@@ -32,7 +32,7 @@ export default function DiscountCalculator() {
       : `Sale Price: $${sp.toFixed(2)}\nDiscount: ${d}%\nOriginal Price: $${originalPrice.toFixed(2)}\nYou Saved: $${savings.toFixed(2)}`;
 
   return (
-    <CalculatorShell title="Discount Calculator" result={result} auto presets={presets} accent="teal" customResult={
+    <CalculatorShell category="Finance" title="Discount Calculator" result={result} auto presets={presets} accent="teal" customResult={
       result && result !== 'Discount must be less than 100%' ? (
         <div>
           <div className="flex justify-between items-end mb-3">

@@ -20,16 +20,17 @@ export default function StepsToCaloriesCalculator() {
     result = `Distance: ${distKm.toFixed(2)} km (${distMiles.toFixed(2)} mi)\nCalories burned: ${calories} kcal\nStride length: ${strideLen.toFixed(1)} cm`;
   }
 
+  const presets = [
+    { label: '10K steps', apply: () => { setSteps('10000'); setWeight('70'); setHeight('170'); } },
+    { label: '5K steps', apply: () => { setSteps('5000'); } },
+  ];
+
   return (
-    <CalculatorShell title="Steps to Calories" accent="green" result={result} auto>
+    <CalculatorShell category="Health" title="Steps to Calories" accent="green" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Steps</label><input className={inputCls} type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div>
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Height (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSteps('10000'); setWeight('70'); setHeight('170'); }}>10K steps</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setSteps('5000'); }}>5K steps</button>
       </div>
     </CalculatorShell>
   );

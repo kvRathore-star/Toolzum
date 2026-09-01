@@ -34,7 +34,7 @@ export default function TdsCalculatorIndia() {
   const result = inc > 0 ? `Tax: ₹${tax.toLocaleString()} (${effectiveRate.toFixed(1)}%) | In-hand: ₹${inHand.toLocaleString()}` : '';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Finance"
       title="TDS Calculator (India)"
       accent="orange"
       result={result}

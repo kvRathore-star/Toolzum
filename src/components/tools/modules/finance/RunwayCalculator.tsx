@@ -17,7 +17,7 @@ export default function RunwayCalculator() {
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell title="Runway Calculator" result={`${months.toFixed(1)} months`} auto presets={presets} accent="emerald" customResult={
+    <CalculatorShell category="Finance" title="Runway Calculator" result={`${months.toFixed(1)} months`} auto presets={presets} accent="emerald" customResult={
       true ? (
         <div className="space-y-2">
           <div className="text-center">

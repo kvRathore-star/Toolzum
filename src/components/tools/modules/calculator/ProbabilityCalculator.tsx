@@ -26,7 +26,7 @@ export default function ProbabilityCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Probability Calculator" result="" auto presets={presets} accent="green" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Probability Calculator" result="" auto presets={presets} accent="green" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Favorable Outcomes</label><input type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Possible Outcomes</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>

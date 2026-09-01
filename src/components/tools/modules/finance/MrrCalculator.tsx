@@ -16,7 +16,7 @@ export default function MrrCalculator() {
   const mrr = c * r;
   const result = c > 0 && r > 0 ? `$${mrr.toLocaleString()}` : '';
   return (
-    <CalculatorShell title="MRR Calculator" result={result} auto presets={presets} accent="fuchsia" customResult={
+    <CalculatorShell category="Finance" title="MRR Calculator" result={result} auto presets={presets} accent="fuchsia" customResult={
       c > 0 && r > 0 ? (
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3">

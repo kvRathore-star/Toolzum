@@ -16,7 +16,7 @@ export default function RevenueGrowthCalculator() {
   const growth = ((c - p) / p) * 100;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell title="Revenue Growth Calculator" result={`${growth.toFixed(1)}%`} auto presets={presets} accent="blue" customResult={
+    <CalculatorShell category="Finance" title="Revenue Growth Calculator" result={`${growth.toFixed(1)}%`} auto presets={presets} accent="blue" customResult={
       true ? (
         <div>
           <div className="flex items-center justify-center gap-4">

@@ -26,7 +26,7 @@ export default function DebtPayoffCalculator() {
   }
   const result = payoffMonths > 0 ? `${payoffMonths} months` : '';
   return (
-    <CalculatorShell title="Debt Payoff Calculator" result={result} auto presets={presets} accent="orange" customResult={
+    <CalculatorShell category="Finance" title="Debt Payoff Calculator" result={result} auto presets={presets} accent="orange" customResult={
       payoffMonths > 0 ? (
         <div>
           <div className="px-4 py-3">

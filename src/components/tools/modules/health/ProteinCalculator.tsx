@@ -18,8 +18,13 @@ export default function ProteinCalculator() {
     result = `Daily protein: ${proteinG}g\nPer meal (3 meals): ${perMeal}g\nRange: ${Math.round(w * (factor - 0.3))}g - ${Math.round(w * (factor + 0.3))}g`;
   }
 
+  const presets = [
+    { label: 'Muscle Gain, Active', apply: () => { setWeight('80'); setGoal('muscle'); setActive('active'); } },
+    { label: 'Weight Loss, Moderate', apply: () => { setWeight('70'); setGoal('weightLoss'); setActive('moderate'); } },
+  ];
+
   return (
-    <CalculatorShell title="Protein Calculator" accent="blue" result={result} auto>
+    <CalculatorShell category="Health" title="Protein Calculator" accent="blue" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
         <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
         <div><label className={labelCls}>Goal</label><select className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="general">General health</option><option value="muscle">Muscle gain</option><option value="weightLoss">Weight loss</option></select></div>

@@ -35,7 +35,7 @@ export default function CombinationCalculator() {
   const displayR = Math.min(rr, maxDisplay);
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Math"
       title="Combinations & Permutations"
       result={resultText}
       auto

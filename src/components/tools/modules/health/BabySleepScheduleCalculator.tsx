@@ -14,15 +14,16 @@ export default function BabySleepScheduleCalculator() {
   const wakeWindow = w <= 4 ? '45-60 min' : w <= 12 ? '60-90 min' : w <= 24 ? '2-3 hours' : '3-4 hours';
   const result = `Total sleep: ${totalSleep}h/day\nNight: ${nightSleep}h | Day: ${daySleep}h\nNaps: ${naps}\nWake window: ${wakeWindow}`;
 
+  const presets = [
+    { label: 'Newborn (4w)', apply: () => setAgeWeeks('4') },
+    { label: '4 months', apply: () => setAgeWeeks('16') },
+    { label: '12 months', apply: () => setAgeWeeks('52') },
+  ];
+
   return (
-    <CalculatorShell title="Baby Sleep Schedule" accent="purple" result={result} auto>
+    <CalculatorShell category="Health" title="Baby Sleep Schedule" accent="purple" result={result} auto presets={presets}>
       <div className="max-w-sm">
         <div><label className={labelCls}>Age (weeks)</label><input className={inputCls} type="number" value={ageWeeks} onChange={e => setAgeWeeks(e.target.value)} /></div>
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('4')}>Newborn (4w)</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('16')}>4 months</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => setAgeWeeks('52')}>12 months</button>
       </div>
     </CalculatorShell>
   );

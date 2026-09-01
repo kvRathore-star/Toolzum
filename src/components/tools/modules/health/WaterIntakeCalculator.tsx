@@ -20,7 +20,7 @@ export default function WaterIntakeCalculator() {
   }
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Water Intake Calculator"
       accent="sky"
       result={result}

@@ -61,7 +61,7 @@ export function DockerComposeValidator() {
   const resultText = isValid === true ? '✓ Valid Docker Compose' : (isValid === false ? '✗ Invalid' : 'Enter docker-compose.yml');
 
   return (
-    <CalculatorShell title="Docker Compose Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="docker-compose-validation.txt">
+    <CalculatorShell category="Developer" title="Docker Compose Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="docker-compose-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Docker Compose YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
@@ -104,7 +104,7 @@ export function DockerfileLinter() {
   const resultText = isValid === true ? '✓ Valid Dockerfile' : (isValid === false ? '✗ Issues found' : 'Enter Dockerfile to lint');
 
   return (
-    <CalculatorShell title="Dockerfile Linter" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="dockerfile-lint.txt">
+    <CalculatorShell category="Developer" title="Dockerfile Linter" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="dockerfile-lint.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Dockerfile</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
@@ -146,7 +146,7 @@ export function HtaccessValidator() {
   const resultText = isValid === true ? '✓ Valid .htaccess' : (isValid === false ? '✗ Issues found' : 'Enter .htaccess to validate');
 
   return (
-    <CalculatorShell title="htaccess Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="htaccess-validation.txt">
+    <CalculatorShell category="Developer" title="htaccess Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="htaccess-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">htaccess Content</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 resize-y" />
@@ -186,7 +186,7 @@ export function KubernetesYamlValidator() {
   const resultText = isValid === true ? '✓ Valid K8s manifest' : (isValid === false ? '✗ Issues found' : 'Enter Kubernetes YAML');
 
   return (
-    <CalculatorShell title="Kubernetes YAML Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="k8s-validation.txt">
+    <CalculatorShell category="Developer" title="Kubernetes YAML Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="k8s-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Kubernetes YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
@@ -225,7 +225,7 @@ export function GithubActionsValidator() {
   const resultText = isValid === true ? '✓ Valid workflow' : (isValid === false ? '✗ Issues found' : 'Enter GitHub Actions YAML');
 
   return (
-    <CalculatorShell title="GitHub Actions Validator" result={resultText} onCalculate={validate} presets={presets} accent="purple" downloadData={output} downloadFilename="github-actions-validation.txt">
+    <CalculatorShell category="Developer" title="GitHub Actions Validator" result={resultText} onCalculate={validate} presets={presets} accent="purple" downloadData={output} downloadFilename="github-actions-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GitHub Actions Workflow YAML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
@@ -374,7 +374,7 @@ export function RssFeedValidator() {
   const resultText = isValid === true ? '✓ Valid RSS/Atom' : (isValid === false ? '✗ Issues found' : 'Enter RSS/Atom XML');
 
   return (
-    <CalculatorShell title="RSS Feed Validator" result={resultText} onCalculate={validate} presets={presets} accent="orange" downloadData={output} downloadFilename="rss-validation.txt">
+    <CalculatorShell category="Developer" title="RSS Feed Validator" result={resultText} onCalculate={validate} presets={presets} accent="orange" downloadData={output} downloadFilename="rss-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">RSS/Atom XML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
@@ -414,7 +414,7 @@ export function SitemapValidator() {
   const resultText = isValid === true ? '✓ Valid sitemap' : (isValid === false ? '✗ Issues found' : 'Enter sitemap XML');
 
   return (
-    <CalculatorShell title="Sitemap Validator" result={resultText} onCalculate={validate} presets={presets} accent="indigo" downloadData={output} downloadFilename="sitemap-validation.txt">
+    <CalculatorShell category="Developer" title="Sitemap Validator" result={resultText} onCalculate={validate} presets={presets} accent="indigo" downloadData={output} downloadFilename="sitemap-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sitemap XML</label>
       <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
@@ -457,7 +457,7 @@ export function XpathValidator() {
   const resultText = matchCount > 0 ? 'Found ' + matchCount + ' match(es)' : (output || 'Enter XPath and XML');
 
   return (
-    <CalculatorShell title="XPath Validator" result={resultText} onCalculate={validate} presets={presets} accent="violet" downloadData={output} downloadFilename="xpath-results.txt">
+    <CalculatorShell category="Developer" title="XPath Validator" result={resultText} onCalculate={validate} presets={presets} accent="violet" downloadData={output} downloadFilename="xpath-results.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
         <input type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
@@ -510,7 +510,7 @@ export function CronExpressionValidator() {
   const resultText = isValid ? '✓ Valid cron expression' : (output || 'Enter cron expression');
 
   return (
-    <CalculatorShell title="Cron Expression Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="cron-validation.txt">
+    <CalculatorShell category="Developer" title="Cron Expression Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="cron-validation.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Cron Expression</label>
         <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="*/5 * * * *"

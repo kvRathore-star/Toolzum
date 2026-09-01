@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Copy, Clock, ChevronDown, ChevronUp, Download, RotateCcw } from 'lucide-react';
+import { getCategoryTheme } from '@/lib/categoryTheme';
 import { toast } from 'react-hot-toast';
 
 interface Preset {
@@ -50,6 +51,7 @@ interface CalculatorShellProps {
   downloadData?: string;
   downloadFilename?: string;
   accent?: string;
+  category?: string;
   customResult?: React.ReactNode;
 }
 
@@ -68,6 +70,7 @@ export function CalculatorShell({
   downloadData,
   downloadFilename,
   accent = 'indigo',
+  category,
   customResult,
 }: CalculatorShellProps) {
   const [history, setHistory] = useState<string[]>([]);
@@ -75,6 +78,7 @@ export function CalculatorShell({
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const shellRef = useRef<HTMLDivElement>(null);
   const a = accentMap[accent] || accentMap.indigo;
+  const resolvedIcon = icon ?? (category ? React.createElement(getCategoryTheme(category).icon, { size: 20 }) : null);
 
   const prevResultRef = useRef(result);
   const historyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -136,7 +140,7 @@ export function CalculatorShell({
       {/* Header with icon + title + history toggle */}
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-6">
         <div className="flex items-center gap-2">
-          {icon && <span className={a.icon}>{icon}</span>}
+          {resolvedIcon && <span className={a.icon}>{resolvedIcon}</span>}
           <h3 className="text-lg font-bold text-[var(--text-primary)]">{title}</h3>
         </div>
         <button

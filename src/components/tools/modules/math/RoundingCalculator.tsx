@@ -69,7 +69,7 @@ export default function RoundingCalculator() {
   };
 
   return (
-    <CalculatorShell title="Rounding Calculator" result={resultText} auto presets={presets} accent="amber" customResult={
+    <CalculatorShell category="Math" title="Rounding Calculator" result={resultText} auto presets={presets} accent="amber" customResult={
       <div className="space-y-4">
         <div className="text-center">
           <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">{modeLabels[mode]}</div>

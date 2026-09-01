@@ -28,7 +28,7 @@ export default function ChildHeightPredictor() {
   }
 
   return (
-    <CalculatorShell title="Child Height Predictor" accent="cyan" result={result} auto>
+    <CalculatorShell category="Health" title="Child Height Predictor" accent="cyan" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
         <div><label className={labelCls}>Father height (cm)</label><input className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
         <div><label className={labelCls}>Mother height (cm)</label><input className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>

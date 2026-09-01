@@ -28,7 +28,7 @@ export default function AspectRatioCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Aspect Ratio Calculator" result="" auto presets={presets} accent="emerald" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Aspect Ratio Calculator" result="" auto presets={presets} accent="emerald" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width (px)</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Height (px)</label><input type="number" value={height} onChange={e => setHeight(e.target.value)} className={inputCls} /></div>

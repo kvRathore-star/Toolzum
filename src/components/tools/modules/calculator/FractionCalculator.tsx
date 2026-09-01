@@ -30,7 +30,7 @@ export default function FractionCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="Fraction Calculator" result="" auto presets={presets} accent="rose" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="Fraction Calculator" result="" auto presets={presets} accent="rose" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 1</label><input type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Operation</label><select value={op} onChange={e => setOp(e.target.value)} className={inputCls}>

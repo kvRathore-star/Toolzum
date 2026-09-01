@@ -25,8 +25,13 @@ export default function BodySurfaceAreaCalculator() {
     result = `Avg: ${avg.toFixed(2)} m²`;
   }
 
+  const presets = [
+    { label: 'Adult (70kg/170cm)', apply: () => { setWeight('70'); setHeight('170'); } },
+    { label: 'Adult (85kg/180cm)', apply: () => { setWeight('85'); setHeight('180'); } },
+  ];
+
   return (
-    <CalculatorShell title="Body Surface Area (BSA)" accent="emerald" result={result} auto customResult={
+    <CalculatorShell category="Health" title="Body Surface Area (BSA)" accent="emerald" result={result} auto presets={presets} customResult={
       <div className="grid gap-3">
         {bsaResults.map((r, i) => {
           const styles = [
@@ -56,10 +61,6 @@ export default function BodySurfaceAreaCalculator() {
           <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'metric'|'imperial')}><option value="metric">Metric (kg/cm)</option><option value="imperial">Imperial (lb/in)</option></select></div>
           <div><label className={labelCls}>{unit === 'metric' ? 'Weight (kg)' : 'Weight (lb)'}</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
           <div><label className={labelCls}>{unit === 'metric' ? 'Height (cm)' : 'Height (in)'}</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-        </div>
-        <div className="flex gap-3 mt-3">
-          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('70'); setHeight('170'); }}>Adult (70kg/170cm)</button>
-          <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setWeight('85'); setHeight('180'); }}>Adult (85kg/180cm)</button>
         </div>
       </div>
     </CalculatorShell>

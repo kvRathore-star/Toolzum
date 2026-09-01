@@ -56,7 +56,7 @@ export default function AlgebraCalculator() {
   const resultText = result ? `= ${result}` : (error ? `Error: ${error}` : 'Enter expression');
 
   return (
-    <CalculatorShell title="Algebraic Expression Evaluator" result={resultText} auto presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
+    <CalculatorShell category="Math" title="Algebraic Expression Evaluator" result={resultText} auto presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
       result ? (
         <div className="text-center">
           <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>

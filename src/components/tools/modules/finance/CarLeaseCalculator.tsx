@@ -18,7 +18,7 @@ export default function CarLeaseCalculator() {
   const monthly = cap && res ? ((cap - res) / (parseFloat(term) || 1)) + (cap + res) * (parseFloat(mf) || 0) : 0;
   const result = monthly > 0 ? `$${monthly.toFixed(0)}/mo` : '';
   return (
-    <CalculatorShell title="Car Lease Calculator" result={result} auto presets={presets} accent="amber" customResult={
+    <CalculatorShell category="Finance" title="Car Lease Calculator" result={result} auto presets={presets} accent="amber" customResult={
       monthly > 0 ? (
         <div>
           <div className="text-center mb-3">

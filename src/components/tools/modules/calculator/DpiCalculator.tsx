@@ -21,7 +21,7 @@ export default function DpiCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="DPI Calculator" result="" auto presets={presets} accent="amber" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="DPI Calculator" result="" auto presets={presets} accent="amber" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Pixels</label><input type="number" value={pixels} onChange={e => setPixels(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inches</label><input type="number" value={inches} onChange={e => setInches(e.target.value)} step="0.1" className={inputCls} /></div>

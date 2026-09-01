@@ -22,7 +22,7 @@ export default function MacroCalculator() {
   }
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Macro Calculator"
       accent="lime"
       result={result}

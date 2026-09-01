@@ -27,7 +27,7 @@ export function BodyMassIndexCalculator() {
   const resultText = bmi > 0 ? `BMI: ${bmi.toFixed(1)} (${category})` : 'Enter height and weight';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="BMI Calculator"
       result={resultText}
       auto={true}
@@ -67,7 +67,7 @@ export function BodyFatCalculator() {
   const resultText = `Body Fat: ${bf.toFixed(1)}%`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Body Fat % Estimator"
       result={resultText}
       auto={true}
@@ -109,7 +109,7 @@ export function CalorieIntakeCalculator() {
   const resultText = `BMR: ${bmr.toFixed(0)} kcal/day | Maintenance: ${(bmr * act).toFixed(0)} kcal/day`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Daily Calorie Needs"
       result={resultText}
       auto={true}
@@ -147,7 +147,7 @@ export function MacroSplitCalculator() {
   const resultText = `Protein: ${(c * 0.3 / 4).toFixed(0)}g (${(c * 0.3).toFixed(0)} kcal) | Carbs: ${(c * 0.4 / 4).toFixed(0)}g (${(c * 0.4).toFixed(0)} kcal) | Fat: ${(c * 0.3 / 9).toFixed(0)}g (${(c * 0.3).toFixed(0)} kcal)`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Daily Macronutrients"
       result={resultText}
       auto={true}
@@ -181,7 +181,7 @@ export function WaterRequirementCalculator() {
   const resultText = `${(base + extra).toFixed(1)} L / day`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Daily Water Intake"
       result={resultText}
       auto={true}
@@ -214,7 +214,7 @@ export function SleepRequirementCalculator() {
   const resultText = `Recommended: ${rec}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Sleep Requirements by Age"
       result={resultText}
       auto={true}
@@ -246,7 +246,7 @@ export function HeartRateCalculator() {
   const resultText = `Max HR: ${max} bpm | Zone 1: ${Math.round(max * 0.5)}-${Math.round(max * 0.6)} | Zone 2: ${Math.round(max * 0.6)}-${Math.round(max * 0.7)} | Zone 3: ${Math.round(max * 0.7)}-${Math.round(max * 0.8)} | Zone 4: ${Math.round(max * 0.8)}-${Math.round(max * 0.9)} | Zone 5: ${Math.round(max * 0.9)}-${max}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Target Heart Rate Zones"
       result={resultText}
       auto={true}
@@ -281,7 +281,7 @@ export function IdealWeightCalc() {
   const resultText = `Devine: ${devine.toFixed(1)} kg | Robinson: ${robinson.toFixed(1)} kg`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Ideal Body Weight"
       result={resultText}
       auto={true}
@@ -316,7 +316,7 @@ export function PaceCalculator() {
   const resultText = d ? `${paceMinWhole}:${paceSec.toString().padStart(2, '0')} /km (${(d / t * 60).toFixed(2)} km/h)` : 'Enter distance and time';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Running Pace Calculator"
       result={resultText}
       auto={true}
@@ -352,7 +352,7 @@ export function StepsCalculator() {
   const resultText = `Distance: ${distKm.toFixed(2)} km | ${distMi.toFixed(2)} miles | Calories: ${(s * 0.04).toFixed(0)} kcal`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Steps to Distance"
       result={resultText}
       auto={true}
@@ -388,7 +388,7 @@ export function CaloriesBurnedCalculator() {
   const resultText = `${burned.toFixed(0)} kcal burned (${activity}, ${met} METs)`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Calories Burned"
       result={resultText}
       auto={true}
@@ -426,7 +426,7 @@ export function BloodAlcoholCalculator() {
   const resultText = `BAC: ${finalBac.toFixed(3)}% ${finalBac >= 0.08 ? '⚠️ Over legal limit (0.08%)' : '✅ Under legal limit'}`;
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Blood Alcohol Estimator"
       result={resultText}
       auto={true}
@@ -458,7 +458,7 @@ export function PregnancyCalculator() {
   const resultText = due ? `Due Date: ${due.toLocaleDateString()} | Gestational age: ${Math.floor((Date.now() - new Date(lmp).getTime()) / (7 * 86400000))} weeks` : 'Enter LMP date';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Pregnancy Calculator"
       result={resultText}
       auto={true}
@@ -499,7 +499,7 @@ export function OvulationTracker() {
   const resultText = results ? `Fertile: ${results.fertileStart.toLocaleDateString()} - ${results.fertileEnd.toLocaleDateString()} | Ovulation: ${results.ovulation.toLocaleDateString()} | Next period: ${results.nextPeriod.toLocaleDateString()}` : 'Enter LMP and cycle length';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Ovulation Tracker"
       result={resultText}
       auto={true}

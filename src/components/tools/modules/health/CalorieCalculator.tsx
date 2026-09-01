@@ -28,7 +28,7 @@ export default function CalorieCalculator() {
   }
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Health"
       title="Calorie Calculator (TDEE)"
       accent="emerald"
       result={result}

@@ -26,7 +26,7 @@ export default function CompoundInterestCalculator() {
   ];
   const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
-    <CalculatorShell title="Compound Interest Calculator" result={result} auto presets={presets} accent="emerald" customResult={
+    <CalculatorShell category="Finance" title="Compound Interest Calculator" result={result} auto presets={presets} accent="emerald" customResult={
       yearData.length > 0 ? (
         <div>
           <div className="px-4 py-2 border-b border-[var(--border-subtle)] text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Year-by-Year Growth</div>

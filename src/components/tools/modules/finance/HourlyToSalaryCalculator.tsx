@@ -17,7 +17,7 @@ export default function HourlyToSalaryCalculator() {
   const monthly = annual / 12;
   const result = `Annual: $${annual.toLocaleString()}\nMonthly: $${monthly.toLocaleString()}\nBiweekly: $${(annual / 26).toLocaleString()}\nWeekly: $${(h * hpw).toLocaleString()}\nDaily (8h): $${(h * 8).toLocaleString()}\nHourly: $${h.toFixed(2)}`;
   return (
-    <CalculatorShell title="Hourly to Salary Calculator" result={result} auto presets={presets} accent="pink" customResult={
+    <CalculatorShell category="Finance" title="Hourly to Salary Calculator" result={result} auto presets={presets} accent="pink" customResult={
       h > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[

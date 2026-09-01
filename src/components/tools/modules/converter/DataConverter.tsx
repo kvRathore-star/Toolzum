@@ -329,7 +329,7 @@ const copyOutput = useCallback(() => {
   const dstInfo = FORMAT_INFO[dstFormat];
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Converter"
       title="Data Format Converter"
       result={resultText}
       onCalculate={handleConvert}

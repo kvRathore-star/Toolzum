@@ -40,7 +40,7 @@ export function BusinessDaysCalculator() {
     current.setDate(current.getDate() + 1);
   }
   return (
-    <CalculatorShell title="Business Days Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
+    <CalculatorShell category="Calculator" title="Business Days Calculator" result={result} onCalculate={calc} presets={presets} accent="amber" customResult={
       result ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           <div className="text-center p-3">
@@ -94,7 +94,7 @@ export function DaysBetweenDates() {
   const diff = Math.abs(d2.getTime() - d1.getTime());
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Between Dates" result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
+    <CalculatorShell category="Calculator" title="Days Between Dates" result={result} onCalculate={calc} presets={presets} accent="rose" customResult={
       result && days > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           <div className="text-center p-3">
@@ -146,7 +146,7 @@ export function DaysUntilCalculator() {
   const diff = target.getTime() - now.getTime();
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return (
-    <CalculatorShell title="Days Until Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan" customResult={
+    <CalculatorShell category="Calculator" title="Days Until Calculator" result={result} onCalculate={calc} presets={presets} accent="cyan" customResult={
       result && days > 0 ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Countdown</div>
@@ -178,7 +178,7 @@ export function DayOfWeekCalculator() {
   const dayName = days[d.getDay()];
   const colors: Record<string, string> = { Sunday: 'text-red-700 dark:text-red-400', Monday: 'text-indigo-700 dark:text-indigo-400', Tuesday: 'text-emerald-700 dark:text-emerald-400', Wednesday: 'text-amber-700 dark:text-amber-400', Thursday: 'text-blue-700 dark:text-blue-400', Friday: 'text-teal-700 dark:text-teal-400', Saturday: 'text-purple-700 dark:text-purple-400' };
   return (
-    <CalculatorShell title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
+    <CalculatorShell category="Calculator" title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
       result ? (
         <div className="text-center">
           <div className={`text-3xl font-bold ${colors[dayName] || 'text-indigo-700 dark:text-indigo-400'}`}>{dayName}</div>
@@ -217,7 +217,7 @@ export function DayOfYearCalculator() {
   const totalDays = isLeap ? 366 : 365;
   const pct = (day / totalDays) * 100;
   return (
-    <CalculatorShell title="Day of Year Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
+    <CalculatorShell category="Calculator" title="Day of Year Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
       <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="space-y-2">

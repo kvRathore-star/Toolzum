@@ -32,8 +32,13 @@ export default function SavingsCalculator() {
     }
     return rows;
   }, [initial, monthly, rate, years, compoundsPerYear]);
+  const presets = [
+    { label: '20yr retirement', apply: () => { setInitial('10000'); setMonthly('500'); setRate('7'); setYears('20'); } },
+    { label: '30yr max', apply: () => { setInitial('0'); setMonthly('1000'); setRate('8'); setYears('30'); } },
+  ];
+
   return (
-    <CalculatorShell title="Savings Calculator" accent="emerald" result={`${schedule.length} years`} auto customResult={
+    <CalculatorShell category="Finance" title="Savings Calculator" accent="emerald" result={`${schedule.length} years`} auto presets={presets} customResult={
       schedule.length > 0 ? (
         <div className="overflow-hidden max-h-48 overflow-y-auto">
           <table className="w-full text-xs">
@@ -49,10 +54,6 @@ export default function SavingsCalculator() {
         <div><label className={labelCls}>Annual rate (%)</label><input className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
         <div><label className={labelCls}>Time (years)</label><input className={inputCls} type="number" value={years} onChange={e => setYears(e.target.value)} /></div>
         <div><label className={labelCls}>Compounds / year</label><select className={inputCls} value={compoundsPerYear} onChange={e => setCompoundsPerYear(e.target.value)}><option value="1">Annual</option><option value="2">Semi-annual</option><option value="4">Quarterly</option><option value="12">Monthly</option><option value="365">Daily</option></select></div>
-      </div>
-      <div className="flex gap-3 mt-3">
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setInitial('10000'); setMonthly('500'); setRate('7'); setYears('20'); }}>20yr retirement</button>
-        <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setInitial('0'); setMonthly('1000'); setRate('8'); setYears('30'); }}>30yr max</button>
       </div>
     </CalculatorShell>
   );

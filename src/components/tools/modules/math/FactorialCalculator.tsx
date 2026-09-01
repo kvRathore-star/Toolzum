@@ -24,7 +24,7 @@ export default function FactorialCalculator() {
   const resultText = valid ? `${nn}! = ${result.toLocaleString()} (${digits} digits)` : (nn > 170 ? 'Max supported: 170' : 'Enter 0-170');
 
   return (
-    <CalculatorShell title="Factorial Calculator" result={resultText} auto presets={presets} accent="violet" downloadData={valid ? `factorial(${nn}) = ${result}` : ''} downloadFilename="factorial.txt" customResult={
+    <CalculatorShell category="Math" title="Factorial Calculator" result={resultText} auto presets={presets} accent="violet" downloadData={valid ? `factorial(${nn}) = ${result}` : ''} downloadFilename="factorial.txt" customResult={
       valid ? (
         <div className="space-y-4">
           <div className="text-center">

@@ -21,7 +21,7 @@ export default function PpiCalculator() {
     </div>
   );
   return (
-    <CalculatorShell title="PPI Calculator" result="" auto presets={presets} accent="orange" customResult={customResult}>
+    <CalculatorShell category="Calculator" title="PPI Calculator" result="" auto presets={presets} accent="orange" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Pixels</label><input type="number" value={diagPixels} onChange={e => setDiagPixels(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Inches</label><input type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputCls} /></div>

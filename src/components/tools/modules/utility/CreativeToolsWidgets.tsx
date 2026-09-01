@@ -497,7 +497,7 @@ export function ASCIIArtGenerator() {
   const resultText = asciiResult ? `Generated ${asciiStyle} style ASCII art` : 'Enter text and select style';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="ASCII Art Generator"
       result={resultText}
       auto={true}
@@ -654,7 +654,7 @@ export function ASCIIFontGenerator() {
   const resultText = fontResult ? `Generated ${fontStyle} font banner` : 'Enter text to generate';
 
   return (
-    <CalculatorShell
+    <CalculatorShell category="Utility"
       title="ASCII Font Generator"
       result={resultText}
       auto={true}
