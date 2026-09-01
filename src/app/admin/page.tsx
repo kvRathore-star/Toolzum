@@ -3,8 +3,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity } from "lucide-react";
+import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity, ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface AdminStats {
   totalUsers: number;
@@ -152,7 +153,7 @@ export default function AdminPage() {
     try {
       const res = await fetch("/api/admin/audit-log?limit=50");
       if (res.ok) {
-        const data = await res.json();
+        const data = (await res.json()) as { logs: AuditLogEntry[] };
         setAuditLogs(data.logs || []);
       }
     } catch { /* ignore */ }
@@ -204,24 +205,34 @@ export default function AdminPage() {
   const totalPages = Math.ceil(total / 20);
 
   return (
-    <div className="min-h-[80vh] bg-[var(--bg-base)]">
-      <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-[var(--bg-base)] flex">
+      <aside className="w-56 border-r border-[var(--border-subtle)] p-4 flex flex-col gap-2 shrink-0">
+        <Link href="/" className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Toolzum
+        </Link>
+        <div className="mt-4 space-y-1">
+          <div className="px-3 py-1.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Admin</div>
+          <button onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth' })} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+            <div className="flex items-center gap-2"><TrendingUp className="w-4 h-4" /> Stats</div>
+          </button>
+          <button onClick={() => document.getElementById('users')?.scrollIntoView({ behavior: 'smooth' })} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+            <div className="flex items-center gap-2"><Users className="w-4 h-4" /> Users</div>
+          </button>
+          <button onClick={() => { setShowAuditLog(true); fetchAuditLog(); }} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+            <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> Audit Log</div>
+          </button>
+        </div>
+      </aside>
+      <main className="flex-1 min-w-0">
+        <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
           <div className="flex items-center gap-3">
             <Shield className="w-6 h-6 text-[var(--accent)]" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Admin Dashboard</h1>
           </div>
-          <button
-            onClick={() => { setShowAuditLog(true); fetchAuditLog(); }}
-            className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
-          >
-            <Clock className="w-4 h-4" />
-            Audit Log
-          </button>
-        </div>
 
         {stats && (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div id="stats" className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { label: "Total Users", value: stats.totalUsers, icon: Users },
               { label: "Pro Users", value: stats.proUsers, icon: TrendingUp },
@@ -241,7 +252,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        <div className="space-y-4">
+        <div id="users" className="space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-[var(--text-primary)]">Users</h2>
             <form onSubmit={handleSearch} className="flex gap-2">
@@ -380,7 +391,8 @@ export default function AdminPage() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+      </main>
 
       {selectedUserId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setSelectedUserId(null)} onKeyDown={e => e.key === 'Escape' && setSelectedUserId(null)} role="button" tabIndex={-1}>
