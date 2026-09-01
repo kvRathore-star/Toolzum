@@ -63,8 +63,9 @@ export default function AdminPage() {
         if (cancelled) return;
         if (statsRes.ok) {
           setStats(await statsRes.json());
-        } else if (statsRes.status === 403) {
-          setError("Admin access required");
+        } else if (statsRes.status === 403 || statsRes.status === 401) {
+          router.push("/dashboard");
+          return;
         }
         if (usersRes.ok) {
           const data = (await usersRes.json()) as UsersResponse;

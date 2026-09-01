@@ -1,4 +1,5 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
+import { checkRateLimit, recordRateLimit } from "../../rate-limit";
 
 interface AdminEnv {
   DB: D1Database;
@@ -11,6 +12,11 @@ interface AdminEnv {
 }
 
 export async function onRequestGet(context: { request: Request; env: AdminEnv }) {
+  const DB = context.env.DB;
+  const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(DB, "admin-users", ip, 30);
+  if (rl.limited) return rl.response;
+
   const auth = await requireAdmin(context.request, context.env);
   if ("error" in auth) return auth.error;
 
@@ -32,11 +38,11 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   }
 
   query += " ORDER BY createdAt DESC LIMIT ? OFFSET ?";
-  const countResult = await context.env.DB.prepare(countQuery)
+  const countResult = await DB.prepare(countQuery)
     .bind(...params)
     .first<{ total: number }>();
 
-  const stmt = context.env.DB.prepare(query).bind(...params, limit, offset);
+  const stmt = DB.prepare(query).bind(...params, limit, offset);
   const users = await stmt.all<{
     id: string;
     name: string;
@@ -47,6 +53,8 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     createdAt: number;
     image: string | null;
   }>();
+
+  recordRateLimit(DB, "admin-users", ip, "/api/admin/users");
 
   return json({
     users: users.results || [],

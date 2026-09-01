@@ -1,4 +1,5 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
+import { checkRateLimit, recordRateLimit } from "../../rate-limit";
 
 interface AdminEnv {
   DB: D1Database;
@@ -11,6 +12,12 @@ interface AdminEnv {
 }
 
 export async function onRequestPost(context: { request: Request; env: AdminEnv }) {
+  const DB = context.env.DB;
+
+  const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(DB, "admin-role", ip, 10);
+  if (rl.limited) return rl.response;
+
   const auth = await requireAdmin(context.request, context.env);
   if ("error" in auth) return auth.error;
 
@@ -25,9 +32,38 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
     return json({ error: "cannot_change_own_role" }, 400);
   }
 
-  await context.env.DB.prepare('UPDATE "user" SET role = ? WHERE id = ?')
+  const target = await DB.prepare('SELECT role FROM "user" WHERE id = ?')
+    .bind(userId)
+    .first<{ role: string }>();
+
+  if (!target) {
+    return json({ error: "user_not_found" }, 404);
+  }
+
+  if (target.role === "admin" && role !== "admin") {
+    const adminCount = await DB.prepare(
+      'SELECT COUNT(*) as count FROM "user" WHERE role = ?'
+    )
+      .bind("admin")
+      .first<{ count: number }>();
+
+    if (adminCount && adminCount.count <= 1) {
+      return json({ error: "cannot_remove_last_admin" }, 400);
+    }
+  }
+
+  await DB.prepare('UPDATE "user" SET role = ? WHERE id = ?')
     .bind(role, userId)
     .run();
+
+  await DB.prepare(
+    "INSERT INTO admin_audit_log (actorEmail, action, targetUserId, oldValue, newValue, createdAt) VALUES (?, ?, ?, ?, ?, datetime('now'))"
+  )
+    .bind(auth.user.email, "update-role", userId, target.role, role)
+    .run()
+    .catch(() => {});
+
+  recordRateLimit(DB, "admin-role", ip, "/api/admin/update-role");
 
   return json({ success: true, userId, role });
 }
