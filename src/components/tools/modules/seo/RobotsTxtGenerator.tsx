@@ -52,7 +52,7 @@ export default function RobotsTxtGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Config panel */}
         <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Directives</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Directives</h3>
           
           <div className="space-y-2">
             <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Sitemap URL</label>
@@ -74,7 +74,7 @@ export default function RobotsTxtGenerator() {
                 placeholder="/admin-dashboard" 
                 className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
-              <button onClick={addDisallow} className="bg-indigo-600 px-3 py-2 rounded-xl text-xs font-bold text-white cursor-pointer">Add</button>
+              <button onClick={addDisallow} className="bg-[var(--accent-ink)] px-3 py-2 rounded-xl text-xs font-bold text-white cursor-pointer">Add</button>
             </div>
             
             <div className="space-y-1.5 max-h-[150px] overflow-y-auto">
@@ -91,9 +91,9 @@ export default function RobotsTxtGenerator() {
         {/* Output Panel */}
         <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col justify-between min-h-[400px]">
           <div className="space-y-2 flex-1 flex flex-col">
-            <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
+            <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Generated Robots.txt</span>
-              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
             </div>
             <textarea
               value={buildRobotsTxt()}

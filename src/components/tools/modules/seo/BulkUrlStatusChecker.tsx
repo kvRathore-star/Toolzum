@@ -160,7 +160,7 @@ export default function BulkUrlStatusChecker() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Link2 className="w-5 h-5 text-sky-500" />
+                <Link2 className="w-5 h-5 text-[var(--accent)]" />
                 <div>
                   <p className="text-sm font-semibold text-[var(--text-primary)]">{fileName}</p>
                   <p className="text-xs text-[var(--text-muted)]">{urls.length} URLs ready</p>
@@ -190,7 +190,7 @@ export default function BulkUrlStatusChecker() {
                 </div>
                 <div className="h-1.5 w-full bg-[var(--bg-surface)] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-sky-400 to-sky-600 rounded-full transition-all duration-300"
+                    className="h-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-ink)] rounded-full transition-all duration-300"
                     style={{ width: `${progress.total > 0 ? (progress.checked / progress.total) * 100 : 0}%` }}
                   />
                 </div>
@@ -198,7 +198,7 @@ export default function BulkUrlStatusChecker() {
             ) : (
               <button
                 onClick={checkStatuses}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-sky-500 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98]"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98]"
               >
                 <Globe className="w-4 h-4" /> Check Statuses
               </button>
@@ -224,7 +224,7 @@ export default function BulkUrlStatusChecker() {
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Results ({results.length})</h3>
             <div className="flex gap-2">
               <button onClick={handleCopy} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[var(--accent)]" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied ? 'Copied' : 'Copy CSV'}
               </button>
               <button onClick={handleDownload} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white rounded-lg transition-all">

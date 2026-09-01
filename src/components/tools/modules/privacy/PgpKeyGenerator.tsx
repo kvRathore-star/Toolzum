@@ -68,7 +68,7 @@ export default function PgpKeyGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Settings */}
         <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">User Identity</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">User Identity</h3>
           
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold">User Name</label>
@@ -85,7 +85,7 @@ export default function PgpKeyGenerator() {
             <input type="text" value={passphrase} onChange={e => setPassphrase(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
-          <button onClick={generateKeys} disabled={isGenerating} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
+          <button onClick={generateKeys} disabled={isGenerating} className="w-full mt-4 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
             {isGenerating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Key className="w-4 h-4" />}
             Generate PGP Keys
           </button>
@@ -97,12 +97,12 @@ export default function PgpKeyGenerator() {
             
             {/* Public Key */}
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
-              <div className="flex justify-between items-center border-b border-zinc-800 pb-2 mb-2">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Public Key Block</span>
                 {publicKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Copy public key"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Download public key"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(publicKey, 'Public Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded" aria-label="Copy public key"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(publicKey, 'public_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded" aria-label="Download public key"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>
@@ -111,12 +111,12 @@ export default function PgpKeyGenerator() {
 
             {/* Private Key */}
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
-              <div className="flex justify-between items-center border-b border-zinc-800 pb-2 mb-2">
+              <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2 mb-2">
                 <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Private Key Block</span>
                 {privateKey && (
                   <div className="flex gap-2">
-                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Copy private key"><Copy className="w-3.5 h-3.5" /></button>
-                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded" aria-label="Download private key"><Download className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleCopy(privateKey, 'Private Key')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded" aria-label="Copy private key"><Copy className="w-3.5 h-3.5" /></button>
+                    <button onClick={() => handleDownload(privateKey, 'private_key.asc')} className="p-1 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded" aria-label="Download private key"><Download className="w-3.5 h-3.5" /></button>
                   </div>
                 )}
               </div>

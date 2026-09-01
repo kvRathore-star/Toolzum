@@ -329,10 +329,10 @@ export default function IcsCsvConverter() {
           <strong>No server uploads — </strong>Convert calendar events between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and any spreadsheet.
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
             ICS → CSV
           </button>
-          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
             CSV → ICS
           </button>
         </div>
@@ -350,9 +350,9 @@ export default function IcsCsvConverter() {
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{events.length} event(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'ics-to-csv' ? 'ICS → CSV' : 'CSV → ICS'}</p>
+          <p className="text-[var(--text-secondary)] text-sm">{events.length} event(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'ics-to-csv' ? 'ICS → CSV' : 'CSV → ICS'}</p>
         </div>
-        <button onClick={() => { setFile(null); setOutputUrl(null); setEvents([]); setPreview([]); setError(null); }} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
+        <button onClick={() => { setFile(null); setOutputUrl(null); setEvents([]); setPreview([]); setError(null); }} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       {direction === 'ics-to-csv' && (
@@ -360,16 +360,16 @@ export default function IcsCsvConverter() {
           <h4 className="text-[var(--text-primary)] font-medium">Fields to Export</h4>
           <div className="flex flex-wrap gap-2">
             {ICS_FIELDS.map(f => (
-              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
                 {f.label}
               </button>
             ))}
           </div>
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Date Format</label>
+            <label className="block text-sm text-[var(--text-secondary)] mb-2">Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>
@@ -382,7 +382,7 @@ export default function IcsCsvConverter() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {csvHeaders.map(h => (
               <div key={h} className="flex items-center gap-2">
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)] min-w-[100px]">{h}:</span>
+                <span className="text-sm text-[var(--text-secondary)] min-w-[100px]">{h}:</span>
                 <select value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
                   <option value="">— Skip —</option>
                   {CSV_HEADERS.map(c => (
@@ -393,10 +393,10 @@ export default function IcsCsvConverter() {
             ))}
           </div>
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Input Date Format</label>
+            <label className="block text-sm text-[var(--text-secondary)] mb-2">Input Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>
@@ -410,7 +410,7 @@ export default function IcsCsvConverter() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--border-subtle)]">
-                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-zinc-600 dark:text-[var(--text-muted)] font-medium whitespace-nowrap">{h}</th>)}
+                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-[var(--text-secondary)] font-medium whitespace-nowrap">{h}</th>)}
                 </tr>
               </thead>
               <tbody>
@@ -443,13 +443,13 @@ export default function IcsCsvConverter() {
             <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
             <p className="font-bold text-center">{file.name.replace(/\.(ics|csv)$/i, direction === 'ics-to-csv' ? '.csv' : '.ics')}</p>
           </div>
-          <button onClick={() => downloadOrShare(outputUrl, file.name.replace(/\.(ics|csv)$/i, direction === 'ics-to-csv' ? '.csv' : '.ics'))} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+          <button onClick={() => downloadOrShare(outputUrl, file.name.replace(/\.(ics|csv)$/i, direction === 'ics-to-csv' ? '.csv' : '.ics'))} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download
           </button>
         </div>
       ) : (
-        <button onClick={convert} disabled={isProcessing || events.length === 0} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
+        <button onClick={convert} disabled={isProcessing || events.length === 0} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
           {isProcessing ? 'Converting...' : `Convert to ${direction === 'ics-to-csv' ? 'CSV' : 'ICS'}`}
         </button>

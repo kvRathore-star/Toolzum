@@ -145,7 +145,7 @@ export default function PasswordGenerator() {
 
         {/* Action buttons */}
         <div className="flex gap-2 flex-wrap">
-          <button onClick={copy} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
+          <button onClick={copy} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
             Copy
           </button>
           <button onClick={download} disabled={!password} className="flex-1 min-w-[100px] px-4 py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm font-semibold rounded-xl transition-all active:scale-[0.97]">
@@ -170,7 +170,7 @@ export default function PasswordGenerator() {
             min="4" max="64" step="1"
             value={opts.length}
             onChange={(e) => { setOpts(prev => ({ ...prev, length: parseInt(e.target.value) })); setActivePreset(null); }}
-            className="w-full accent-emerald-500"
+            className="w-full accent-[var(--accent)]"
           />
           <div className="flex justify-between text-[10px] text-[var(--text-muted)]"><span>4</span><span>64</span></div>
         </div>
@@ -188,7 +188,7 @@ export default function PasswordGenerator() {
                 type="checkbox"
                 checked={opts[opt.key] as boolean}
                 onChange={() => toggle(opt.key)}
-                className="w-4 h-4 text-emerald-500 rounded focus:ring-emerald-500"
+                className="w-4 h-4 text-[var(--accent)] rounded focus:ring-emerald-500"
               />
               <span className="text-sm text-[var(--text-primary)]">{opt.label}</span>
             </label>
@@ -201,7 +201,7 @@ export default function PasswordGenerator() {
             type="checkbox"
             checked={opts.excludeAmbiguous}
             onChange={() => toggle('excludeAmbiguous')}
-            className="w-4 h-4 text-emerald-500 rounded focus:ring-emerald-500"
+            className="w-4 h-4 text-[var(--accent)] rounded focus:ring-emerald-500"
           />
           <span className="text-sm text-[var(--text-muted)]">Exclude ambiguous characters (I, l, 1, O, 0)</span>
         </label>

@@ -54,7 +54,7 @@ export default function MacAddressGenerator() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Controls */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 text-xs">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Formatting</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Formatting</h3>
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
@@ -86,7 +86,7 @@ export default function MacAddressGenerator() {
             <label className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
           </div>
 
-          <button onClick={generateMacs} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+          <button onClick={generateMacs} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
             <RefreshCw className="w-4 h-4" /> Generate Addresses
           </button>
         </div>
@@ -94,9 +94,9 @@ export default function MacAddressGenerator() {
         {/* Results */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-between">
           <div className="space-y-2 flex-1 flex flex-col">
-            <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
+            <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">MAC Addresses</span>
-              {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy all MAC addresses"><Copy className="w-4 h-4" /></button>}
+              {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy all MAC addresses"><Copy className="w-4 h-4" /></button>}
             </div>
             <textarea readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 h-48 resize-none mt-2" />
           </div>

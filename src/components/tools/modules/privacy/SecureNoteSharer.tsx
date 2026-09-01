@@ -73,7 +73,7 @@ export default function SecureNoteSharer() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Creation Box */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Create Secure Note</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Create Secure Note</h3>
           
           <textarea
             value={note}
@@ -102,7 +102,7 @@ export default function SecureNoteSharer() {
               <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Shareable link</span>
               <div className="flex gap-2">
                 <input readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-zinc-800 px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+                <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-[var(--accent-ink)] px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
               </div>
             </div>
           )}

@@ -247,7 +247,7 @@ export default function TiffToPdf() {
             if (f && (f.type === 'image/tiff' || f.name.match(/\.tiff?$/i))) handleFileSelect(f);
             else toast.error('Please upload a TIFF file.');
           }}
-          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 transition cursor-pointer"
+          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-[var(--border-subtle)] rounded-2xl bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 transition cursor-pointer"
         >
           <input
             type="file"
@@ -256,7 +256,7 @@ export default function TiffToPdf() {
             onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
           />
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
-          <p className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">Upload TIFF</p>
+          <p className="text-lg font-semibold text-[var(--text-primary)]">Upload TIFF</p>
           <p className="text-sm text-[var(--text-secondary)] mt-1">Drag & drop or click to browse</p>
         </div>
       </div>
@@ -274,7 +274,7 @@ export default function TiffToPdf() {
         <div className="flex items-center gap-3 min-w-0">
           <FileImage className="w-8 h-8 text-blue-700 dark:text-blue-400 shrink-0" />
           <div className="min-w-0">
-            <p className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
+            <p className="font-semibold text-[var(--text-primary)] truncate">{file.name}</p>
             {tiffInfo && (
               <p className="text-sm text-[var(--text-secondary)]">
                 {tiffInfo.pageCount} page{tiffInfo.pageCount !== 1 ? 's' : ''} &middot; {tiffInfo.width}x{tiffInfo.height}px &middot; {tiffInfo.fileSize}
@@ -290,8 +290,8 @@ export default function TiffToPdf() {
       {previewUrl && (
         <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 flex items-center gap-3">
           <Eye className="w-5 h-5 text-[var(--text-muted)] shrink-0" />
-          <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">First page preview:</span>
-          <img src={previewUrl} alt="TIFF preview" className="h-20 w-auto rounded border border-zinc-300 dark:border-zinc-700" />
+          <span className="text-sm text-[var(--text-secondary)]">First page preview:</span>
+          <img src={previewUrl} alt="TIFF preview" className="h-20 w-auto rounded border border-[var(--border-subtle)]" />
         </div>
       )}
 
@@ -303,7 +303,7 @@ export default function TiffToPdf() {
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
             placeholder='all, 1-5, or 1,3,5'
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
         </div>
 
@@ -312,7 +312,7 @@ export default function TiffToPdf() {
           <select
             value={pageSize}
             onChange={(e) => setPageSize(e.target.value as PageSizeOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="auto">Auto (Match TIFF)</option>
             <option value="a4">A4</option>
@@ -326,7 +326,7 @@ export default function TiffToPdf() {
           <select
             value={orientation}
             onChange={(e) => setOrientation(e.target.value as OrientationOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="auto">Auto</option>
             <option value="portrait">Portrait</option>
@@ -339,7 +339,7 @@ export default function TiffToPdf() {
           <select
             value={margin}
             onChange={(e) => setMargin(e.target.value as MarginOption)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="none">None</option>
             <option value="small">Small</option>
@@ -351,12 +351,12 @@ export default function TiffToPdf() {
 
       {isProcessing && (
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+          <div className="flex justify-between text-sm text-[var(--text-secondary)]">
             <span>Converting pages...</span>
             <span>{progress}%</span>
           </div>
           <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
-            <div className="h-full bg-blue-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-[var(--accent)] rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
         </div>
       )}
@@ -377,7 +377,7 @@ export default function TiffToPdf() {
         {outputUrl && (
           <button
             onClick={handleDownload}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition-all"
           >
             <Download className="w-5 h-5" /> Download PDF
           </button>

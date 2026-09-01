@@ -14,7 +14,7 @@ export function CopyBtn({ text, label }: { text: string; label?: string }) {
 }
 
 export const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
-  <Link href={`/tools/${slug}`} className="block bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-3 rounded-xl space-y-2 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+  <Link href={`/tools/${slug}`} className="block bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-3 rounded-xl space-y-2 hover:border-[var(--accent)] transition-all group">
     <div className="flex items-center gap-1">
       <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
       <ExternalLink className="w-3 h-3 text-blue-700 dark:text-blue-400 shrink-0" />
@@ -86,7 +86,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <div className="flex items-center justify-between">
-        <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{title}</h5>
+        <h5 className="text-sm font-bold text-[var(--text-primary)]">{title}</h5>
         <div className="flex gap-1">
           <button onClick={() => toggleFavorite(favKey)}
             className={`p-1.5 rounded-lg transition-colors ${favorites.includes(favKey) ? 'text-amber-500' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
@@ -103,7 +103,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
         <div className="flex flex-wrap gap-2">
           {presets.map((p, i) => (
             <button key={i} onClick={() => { setVal(p.value); setFromUnit(p.fromUnit); }}
-              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           ))}
@@ -156,7 +156,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
         <div className="space-y-1.5">
           {results.map((r, i) => (
             <div key={i} className="flex justify-between items-center bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm font-mono">
-              <span className="text-zinc-600 dark:text-[var(--text-muted)]">{r.label}</span>
+              <span className="text-[var(--text-secondary)]">{r.label}</span>
               <span className="font-bold text-[var(--text-primary)]">{r.value}</span>
             </div>
           ))}
@@ -272,7 +272,7 @@ export function LargeTextViewer() {
 
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Large Text File Viewer</h5>
+      <h5 className="text-sm font-bold text-[var(--text-primary)]">Large Text File Viewer</h5>
       <input type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
         className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
       <p className="text-sm text-[var(--text-muted)]">Size: {(fileSize / 1024).toFixed(1)} KB</p>
@@ -306,7 +306,7 @@ export function AvroSchemaGenerator() {
 
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro Schema Generator</h5>
+      <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro Schema Generator</h5>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">Namespace</label>
@@ -353,7 +353,7 @@ export function AvroToJsonSample() {
 
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Avro to JSON Sample</h5>
+      <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro to JSON Sample</h5>
       <div className="space-y-1">
         <label className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
         <textarea rows={4} value={schema} onChange={e => setSchema(e.target.value)}
@@ -397,7 +397,7 @@ export function IcalEventGenerator() {
 
   return (
     <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
-      <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">iCal Event Generator</h5>
+      <h5 className="text-sm font-bold text-[var(--text-primary)]">iCal Event Generator</h5>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
         <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start</label><input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>

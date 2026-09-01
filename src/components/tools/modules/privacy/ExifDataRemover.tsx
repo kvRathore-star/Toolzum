@@ -110,11 +110,11 @@ export default function ExifDataRemover() {
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button 
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Photo
         </button>
@@ -202,7 +202,7 @@ export default function ExifDataRemover() {
             
             {!outputUrl && (
                <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                  <div className="bg-zinc-900/80 backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-medium">
+                  <div className="bg-[var(--accent-ink)] backdrop-blur-sm text-white px-4 py-2 rounded-lg text-sm font-medium">
                      Awaiting Scrubbing...
                   </div>
                </div>
@@ -212,7 +212,7 @@ export default function ExifDataRemover() {
           <button 
              onClick={() => outputUrl && downloadOrShare(outputUrl, `safe_${file.name}`)}
              disabled={!outputUrl}
-             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+             className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
            >
              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
              Download Safe Image

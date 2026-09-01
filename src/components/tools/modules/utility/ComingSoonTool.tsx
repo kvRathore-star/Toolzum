@@ -31,8 +31,8 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
         In Development
       </h2>
       
-      <p className="text-zinc-600 dark:text-[var(--text-muted)] max-w-md mx-auto mb-10 text-lg leading-relaxed">
-        We are currently building the <span className="text-zinc-800 dark:text-zinc-200 font-semibold">{toolName}</span> module. It will be powered entirely by your browser for maximum privacy.
+      <p className="text-[var(--text-secondary)] max-w-md mx-auto mb-10 text-lg leading-relaxed">
+        We are currently building the <span className="text-[var(--text-primary)] font-semibold">{toolName}</span> module. It will be powered entirely by your browser for maximum privacy.
       </p>
 
       {submitted ? (

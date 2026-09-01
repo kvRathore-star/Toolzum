@@ -110,7 +110,7 @@ export default function MorseCodeTranslator() {
     <div className="max-w-2xl mx-auto animate-in fade-in duration-500 space-y-6">
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -137,7 +137,7 @@ export default function MorseCodeTranslator() {
               </button>
               <button
                 onClick={downloadOutput}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 Download

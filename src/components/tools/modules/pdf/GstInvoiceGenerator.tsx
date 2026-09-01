@@ -272,7 +272,7 @@ export default function GstInvoiceGenerator() {
           <div className="space-y-2">
             <label className="text-sm font-semibold text-[var(--text-primary)]">Company Logo</label>
             <label className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-xl cursor-pointer hover:border-emerald-500 transition-colors">
-              <Upload className="w-5 h-5 text-emerald-500" />
+              <Upload className="w-5 h-5 text-[var(--accent)]" />
               <span className="text-sm text-[var(--text-secondary)]">{logoDataUrl ? 'Logo uploaded' : 'Upload logo (PNG/JPG, max 500KB)'}</span>
               <input type="file" accept="image/png,image/jpeg" onChange={handleLogoUpload} className="hidden" />
             </label>
@@ -395,7 +395,7 @@ export default function GstInvoiceGenerator() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden sticky top-6">
             <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]/50">
               <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4 text-emerald-500" />
+                <Eye className="w-4 h-4 text-[var(--accent)]" />
                 <span className="text-xs font-bold text-[var(--text-primary)]">Live Invoice Preview</span>
               </div>
               <span className="text-[10px] text-[var(--text-muted)]">A4</span>

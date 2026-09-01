@@ -122,22 +122,22 @@ export default function PrivacyCleaner() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
             <Cookie className="w-4 h-4 mx-auto text-orange-500 mb-1" />
-            <p className="text-lg font-black text-zinc-800 dark:text-white">{stats.cookies}</p>
+            <p className="text-lg font-black text-[var(--text-primary)]">{stats.cookies}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">Cookies</p>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
             <Database className="w-4 h-4 mx-auto text-blue-700 dark:text-blue-400 mb-1" />
-            <p className="text-lg font-black text-zinc-800 dark:text-white">{stats.localStorage}</p>
+            <p className="text-lg font-black text-[var(--text-primary)]">{stats.localStorage}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">localStorage</p>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
             <Clock className="w-4 h-4 mx-auto text-purple-500 mb-1" />
-            <p className="text-lg font-black text-zinc-800 dark:text-white">{stats.sessionStorage}</p>
+            <p className="text-lg font-black text-[var(--text-primary)]">{stats.sessionStorage}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">Session</p>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
             <Globe className="w-4 h-4 mx-auto text-emerald-500 mb-1" />
-            <p className="text-lg font-black text-zinc-800 dark:text-white">{(stats.totalSize / 1024).toFixed(1)}</p>
+            <p className="text-lg font-black text-[var(--text-primary)]">{(stats.totalSize / 1024).toFixed(1)}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">KB Total</p>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function PrivacyCleaner() {
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <button onClick={scanStorage} disabled={scanning}
-            className="px-4 py-2.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors">
+            className="px-4 py-2.5 bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-[var(--bg-surface)] transition-colors">
             <RefreshCw className={`w-3.5 h-3.5 ${scanning ? 'animate-spin' : ''}`} /> Rescan
           </button>
           <button onClick={clearStorage} disabled={cleaning || items.length === 0}

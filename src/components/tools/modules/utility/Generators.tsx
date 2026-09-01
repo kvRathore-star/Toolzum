@@ -24,7 +24,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows, min, max }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number;
 }) {
-  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -77,24 +77,24 @@ export function RandomPasswordGenerator() {
           <div className="space-y-4">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length ({length})</label>
             <input type="range" min={4} max={128} value={length} onChange={e => setLength(Number(e.target.value))}
-              className="w-full accent-emerald-500" />
+              className="w-full accent-[var(--accent)]" />
             <div className="text-xs text-[var(--text-muted)] text-right">{length} characters</div>
 
             <div className="flex flex-wrap gap-3">
               <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <input type="checkbox" checked={upper} onChange={e => setUpper(e.target.checked)} className="accent-emerald-500" />Uppercase
+                <input type="checkbox" checked={upper} onChange={e => setUpper(e.target.checked)} className="accent-[var(--accent)]" />Uppercase
               </label>
               <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <input type="checkbox" checked={lower} onChange={e => setLower(e.target.checked)} className="accent-emerald-500" />Lowercase
+                <input type="checkbox" checked={lower} onChange={e => setLower(e.target.checked)} className="accent-[var(--accent)]" />Lowercase
               </label>
               <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <input type="checkbox" checked={digits} onChange={e => setDigits(e.target.checked)} className="accent-emerald-500" />Digits
+                <input type="checkbox" checked={digits} onChange={e => setDigits(e.target.checked)} className="accent-[var(--accent)]" />Digits
               </label>
               <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <input type="checkbox" checked={symbols} onChange={e => setSymbols(e.target.checked)} className="accent-emerald-500" />Symbols
+                <input type="checkbox" checked={symbols} onChange={e => setSymbols(e.target.checked)} className="accent-[var(--accent)]" />Symbols
               </label>
               <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-                <input type="checkbox" checked={excludeSimilar} onChange={e => setExcludeSimilar(e.target.checked)} className="accent-emerald-500" />Exclude Similar
+                <input type="checkbox" checked={excludeSimilar} onChange={e => setExcludeSimilar(e.target.checked)} className="accent-[var(--accent)]" />Exclude Similar
               </label>
             </div>
 
@@ -195,31 +195,31 @@ export function RandomNumberGenerator() {
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Min</label>
             <input type="number" value={min} onChange={e => setMin(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Max</label>
             <input type="number" value={max} onChange={e => setMax(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
             <input type="number" min="1" max="10000" value={count} onChange={e => setCount(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
         </div>
 
         <div className="flex gap-4 text-sm text-[var(--text-secondary)]">
           <label className="flex items-center gap-2">
-            <input type="checkbox" checked={unique} onChange={e => setUnique(e.target.checked)} className="accent-violet-500" />Unique
+            <input type="checkbox" checked={unique} onChange={e => setUnique(e.target.checked)} className="accent-[var(--accent)]" />Unique
           </label>
           <label className="flex items-center gap-2">
-            <input type="checkbox" checked={sort} onChange={e => setSort(e.target.checked)} className="accent-violet-500" />Sorted
+            <input type="checkbox" checked={sort} onChange={e => setSort(e.target.checked)} className="accent-[var(--accent)]" />Sorted
           </label>
         </div>
 
         {result.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center min-h-[160px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
             <p className="text-xs text-[var(--text-muted)] mt-2">{result.length} numbers · {sort ? 'sorted' : 'unsorted'} · {unique ? 'unique' : 'repeatable'}</p>
             <div className="flex gap-1 mt-2">
@@ -262,7 +262,7 @@ export function RandomStringGenerator() {
         <div className="flex flex-wrap gap-2">
           {STRING_PRESETS.map(p => (
             <button key={p.name} onClick={() => { setLength(p.length); setCharset(p.charset); generate(); }}
-              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.name}
             </button>
           ))}
@@ -272,12 +272,12 @@ export function RandomStringGenerator() {
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length</label>
             <input type="number" min={1} max={1000} value={String(length)} onChange={e => setLength(Number(e.target.value))}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Charset</label>
             <select value={charset} onChange={e => setCharset(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
               <option value="alphanumeric">Alphanumeric</option>
               <option value="alpha">Alphabetic</option>
               <option value="numeric">Numeric</option>
@@ -291,7 +291,7 @@ export function RandomStringGenerator() {
         <div className="flex gap-2">
           {[4, 8, 12, 16, 32, 64].map(n => (
             <button key={n} onClick={() => { setLength(n); generate(); }}
-              className={'px-3 py-1.5 text-xs font-bold rounded-lg transition-all ' + (length === n ? 'bg-indigo-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{n}</button>
+              className={'px-3 py-1.5 text-xs font-bold rounded-lg transition-all ' + (length === n ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{n}</button>
           ))}
         </div>
 
@@ -358,7 +358,7 @@ export function RandomColorGenerator() {
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
           <div className="mb-3">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
-            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value="hex">Hex</option>
               <option value="rgb">RGB</option>
               <option value="hsl">HSL</option>
@@ -367,7 +367,7 @@ export function RandomColorGenerator() {
         </div>
 
         {colors.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[120px]">
             <div className="flex flex-wrap gap-3 justify-center">
               {colors.map((c, i) => (
                 <div key={i} className="flex flex-col items-center gap-1">
@@ -417,7 +417,7 @@ export function RandomTeamGenerator() {
         <Input label="Names (one per line)" value={input} onChange={v => setInput(v)} rows={6} />
         <Input label="Number of Teams" type="number" value={String(numTeams)} onChange={v => setNumTeams(Number(v))} />
         {teams.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3">
               {teams.map((team, i) => (
                 <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl">
@@ -464,9 +464,9 @@ export function RandomPickerGenerator() {
       <div className="space-y-4">
         <Input label="Items (one per line)" value={input} onChange={v => setInput(v)} rows={5} />
         <Input label="Pick Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-violet-500" />Allow repeats</label>
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-[var(--accent)]" />Allow repeats</label>
         {result.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[160px]">
             <div className="text-center">
               <p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p>
               <button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy picked items"><Copy size={14} /></button>
@@ -552,7 +552,7 @@ export function RandomDecisionMaker() {
         <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
         <button onClick={decide} disabled={spinning} className={'px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto ' + (spinning ? 'opacity-60' : '')}>{spinning ? 'Spinning...' : 'Decide'}</button>
 
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[160px]">
           <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
           {choice && <button onClick={() => { clipboardWrite(choice); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy choice"><Copy size={14} /></button>}
         </div>
@@ -606,20 +606,20 @@ export function RandomUsernameGenerator() {
       <div className="space-y-4">
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pattern</label>
-          <select value={pattern} onChange={e => setPattern(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="adj-noun">Adjective + Noun</option><option value="noun-num">Noun + Number</option><option value="adj-noun-num">Adjective + Noun + Number</option><option value="word-word">word-word (lowercase)</option></select>
+          <select value={pattern} onChange={e => setPattern(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="adj-noun">Adjective + Noun</option><option value="noun-num">Noun + Number</option><option value="adj-noun-num">Adjective + Noun + Number</option><option value="word-word">word-word (lowercase)</option></select>
         </div>
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-indigo-500" />Append random number</label>
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-[var(--accent)]" />Append random number</label>
         {results.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
               {results.map((u, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                   <span className="font-mono">{u}</span>
-                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-indigo-500 hover:underline"><Copy size={12} /></button>
+                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
-              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
             </div>
           </div>
         )}
@@ -660,20 +660,20 @@ export function RandomUUIDGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div className="mb-3">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Version</label>
-            <select value={version} onChange={e => setVersion(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="v4">UUID v4 (Random)</option><option value="v7">UUID v7 (Time-Ordered)</option></select>
+            <select value={version} onChange={e => setVersion(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="v4">UUID v4 (Random)</option><option value="v7">UUID v7 (Time-Ordered)</option></select>
           </div>
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
         {results.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
               {results.map((u, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-xs font-mono">
                   <span>{u}</span>
-                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-cyan-500 hover:underline"><Copy size={12} /></button>
+                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
-              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+              <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
             </div>
           </div>
         )}
@@ -716,12 +716,12 @@ export function RandomTokenGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div className="mb-3">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
-            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="hex">Hex</option><option value="base64">Base64</option><option value="alphanumeric">Alphanumeric</option></select>
+            <select value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="hex">Hex</option><option value="base64">Base64</option><option value="alphanumeric">Alphanumeric</option></select>
           </div>
           <Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} />
         </div>
         {result ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[120px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[120px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
             <p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p>
             <div className="flex gap-1 mt-2">
@@ -773,14 +773,14 @@ export function LoremIpsumGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div className="mb-3">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select>
+            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select>
           </div>
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
         {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-blue-500" />Start with "Lorem ipsum..."</label>}
         {result ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
-            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
+            <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
             <div className="flex gap-1 mt-2">
               <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy lorem ipsum"><Copy size={14} /></button>
               <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'lorem-ipsum.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download lorem ipsum"><Download size={14} /></button>
@@ -824,11 +824,11 @@ export function DummyTextGenerator() {
         <div className="space-y-1">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Character Length ({length})</label>
           <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-sky-500" />
-          <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+          <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
         {result ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
-            <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
+            <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
             <div className="flex items-center justify-between mt-2">
               <span className="text-xs text-[var(--text-muted)]">{result.length} chars</span>
               <div className="flex gap-1">
@@ -883,11 +883,11 @@ export function FakeDataGenerator() {
         <div className="flex flex-wrap gap-2">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider w-full">Fields</span>
           {(['name', 'email', 'phone', 'address'] as Field[]).map(f => (
-            <button key={f} onClick={() => toggleField(f)} className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
+            <button key={f} onClick={() => toggleField(f)} className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-[var(--accent)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)]')}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
           ))}
         </div>
         {data.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
               {data.map((d, i) => (
                 <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-xs leading-relaxed">
@@ -936,7 +936,7 @@ export function FakeIdentityGenerator() {
     >
       <div className="space-y-4">
         {identity ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3">
               <div className="flex justify-center">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
@@ -946,7 +946,7 @@ export function FakeIdentityGenerator() {
                   <div key={k as string} className="flex justify-between"><span className="font-bold text-[var(--text-secondary)]">{k as string}</span><span className="text-[var(--text-primary)]">{v as string}</span></div>
                 ))}
               </div>
-              <button onClick={() => { clipboardWrite(JSON.stringify(identity, null, 2)); toast.success('Copied as JSON!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
+              <button onClick={() => { clipboardWrite(JSON.stringify(identity, null, 2)); toast.success('Copied as JSON!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
             </div>
           </div>
         ) : (
@@ -991,7 +991,7 @@ export function FakeCreditCardGenerator() {
       <div className="space-y-4">
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         {cards.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3 max-h-[350px] overflow-y-auto">
               {cards.map((c, i) => (
                 <div key={i} className={'p-4 rounded-xl bg-gradient-to-br ' + (cardColors[c.type] || 'from-zinc-600 to-zinc-800') + ' text-white shadow-md'}>
@@ -1003,7 +1003,7 @@ export function FakeCreditCardGenerator() {
                   <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
                 </div>
               ))}
-              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
             </div>
           </div>
         )}
@@ -1044,11 +1044,11 @@ export function SequenceGenerator() {
       <div className="space-y-4">
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
+          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
         </div>
         <div className="grid grid-cols-3 gap-3"><Input label="Start" type="number" value={start} onChange={v => setStart(v)} /><Input label="Diff/Ratio" type="number" value={diff} onChange={v => setDiff(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
         {result.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[120px]">
             <p className="text-sm font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
             <p className="text-xs text-[var(--text-muted)] mt-2">Sum: {sum.toLocaleString()} · Count: {result.length}</p>
             <div className="flex gap-1 mt-2">
@@ -1095,10 +1095,10 @@ export function BarcodeGenerator() {
       <div className="space-y-4">
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
+          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
         </div>
         <Input label="Data" value={input} onChange={v => setInput(v)} />
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[160px]">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col items-center justify-center min-h-[160px]">
           {input ? (
             <div className="overflow-auto w-full flex justify-center">
               {renderBarcode()}
@@ -1150,10 +1150,10 @@ export function QrCodeGenerator() {
         <Input label="Text / URL" value={text} onChange={v => setText(v)} placeholder="Enter text or URL..." />
         <div className="mb-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Error Correction</label>
-          <select value={errorCorrection} onChange={e => setErrorCorrection(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="L">Low (7%)</option><option value="M">Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%)</option></select>
+          <select value={errorCorrection} onChange={e => setErrorCorrection(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="L">Low (7%)</option><option value="M">Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%)</option></select>
         </div>
 
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col items-center justify-center min-h-[200px]">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col items-center justify-center min-h-[200px]">
           <canvas ref={canvasRef} className="hidden" />
           {dataUrl ? (
             <>
@@ -1205,22 +1205,22 @@ export function CouponCodeGenerator() {
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {COUPON_PRESETS.map(p => (
-            <button key={p.name} onClick={() => setPattern(p.pattern)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
+            <button key={p.name} onClick={() => setPattern(p.pattern)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
           ))}
         </div>
         <Input label="Pattern (X = random char)" value={pattern} onChange={v => setPattern(v)} />
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         {codes.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[250px] overflow-y-auto">
               {codes.map((c, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
                   <span className="tracking-wide">{c}</span>
-                  <button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-xs text-emerald-500 hover:underline"><Copy size={12} /></button>
+                  <button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
               <div className="flex gap-1 mt-2">
-                <button onClick={() => { clipboardWrite(codes.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+                <button onClick={() => { clipboardWrite(codes.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
                 <button onClick={() => { const blob = new Blob([codes.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'coupon-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
               </div>
             </div>
@@ -1266,22 +1266,22 @@ export function SerialNumberGenerator() {
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {SERIAL_PRESETS.map(p => (
-            <button key={p.name} onClick={() => setFormat(p.format)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
+            <button key={p.name} onClick={() => setFormat(p.format)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.name}</button>
           ))}
         </div>
         <Input label="Format (X=hex, 9=digit, A=alphanum)" value={format} onChange={v => setFormat(v)} />
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         {serials.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[250px] overflow-y-auto">
               {serials.map((s, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
                   <span className="tracking-wide">{s}</span>
-                  <button onClick={() => { clipboardWrite(s); toast.success('Copied!'); }} className="text-xs text-cyan-500 hover:underline"><Copy size={12} /></button>
+                  <button onClick={() => { clipboardWrite(s); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
               <div className="flex gap-1 mt-2">
-                <button onClick={() => { clipboardWrite(serials.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+                <button onClick={() => { clipboardWrite(serials.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
                 <button onClick={() => { const blob = new Blob([serials.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'serials.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
               </div>
             </div>
@@ -1325,27 +1325,27 @@ export function NicknameGenerator() {
         <div>
           <label className={labelClass}>Pattern</label>
           <select value={patternIdx} onChange={e => setPatternIdx(Number(e.target.value))}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
             {NICKNAME_PATTERNS.map((p, i) => (<option key={i} value={i}>{p.name}</option>))}
           </select>
         </div>
         <div>
           <label className={labelClass}>Count</label>
           <input type="number" min={1} max={100} value={String(count)} onChange={e => setCount(Number(e.target.value))}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50" />
         </div>
 
         {results.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[250px] overflow-y-auto">
               {results.map((n, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                   <span>{n}</span>
-                  <button onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-pink-500 hover:underline"><Copy size={12} /></button>
+                  <button onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
             </div>
-            <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+            <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
           </div>
         )}
       </div>
@@ -1378,39 +1378,39 @@ export function AvatarGenerator() {
       <div className="space-y-4">
         <label className={labelClass}>Name</label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
-            <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+            <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-            <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+            <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
         </div>
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size: {size}px</label>
-        <input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-indigo-500" />
+        <input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
 
         <div className="flex gap-2">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>
           {Object.entries(shapes).map(([k, v]) => (
             <button key={k} onClick={() => setShape(k as 'rounded' | 'circle' | 'square')}
-              className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (shape === k ? 'bg-indigo-500/10 border-indigo-400 text-indigo-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>
+              className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (shape === k ? 'bg-[var(--accent)]/10 border-indigo-400 text-[var(--accent)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)]')}>
               {k.charAt(0).toUpperCase() + k.slice(1)}
             </button>
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-center min-h-[200px] bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4">
+        <div className="flex flex-col items-center justify-center min-h-[200px] bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
           <svg ref={svgRef} width={size} height={size} viewBox={'0 0 ' + size + ' ' + size} xmlns="http://www.w3.org/2000/svg">
             <rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} />
             <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text>
           </svg>
           <div className="flex gap-2 mt-3">
-            <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button>
+            <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button>
             <button onClick={() => { clipboardWrite(initials); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy initials"><Copy size={14} /></button>
           </div>
         </div>

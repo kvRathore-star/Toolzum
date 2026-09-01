@@ -49,7 +49,7 @@ export default function NatoPhoneticConverter() {
             onClick={() => setMode('to')}
             className={`px-4 py-1.5 text-xs font-bold rounded-lg transition-all ${
               mode === 'to'
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-[var(--accent)] text-white shadow-sm'
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
@@ -59,7 +59,7 @@ export default function NatoPhoneticConverter() {
             onClick={() => setMode('from')}
             className={`px-4 py-1.5 text-xs font-bold rounded-lg transition-all ${
               mode === 'from'
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-[var(--accent)] text-white shadow-sm'
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >

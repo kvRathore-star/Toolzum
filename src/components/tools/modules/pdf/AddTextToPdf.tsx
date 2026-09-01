@@ -143,11 +143,11 @@ export default function AddTextToPdf() {
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -186,7 +186,7 @@ export default function AddTextToPdf() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{fontSize}px</span>
+              <span className="text-xs font-bold text-[var(--accent)]">{fontSize}px</span>
             </div>
             <input
               type="range"
@@ -194,7 +194,7 @@ export default function AddTextToPdf() {
               max={72}
               value={fontSize}
               onChange={(e) => setFontSize(parseInt(e.target.value))}
-              className="w-full accent-blue-600"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -255,7 +255,7 @@ export default function AddTextToPdf() {
                 type="checkbox"
                 checked={centerH}
                 onChange={(e) => setCenterH(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500"
+                className="rounded border-[var(--border-subtle)] text-blue-600 focus:ring-blue-500"
               />
               <span className="text-sm text-[var(--text-primary)]">Center Horizontally</span>
             </label>
@@ -264,7 +264,7 @@ export default function AddTextToPdf() {
                 type="checkbox"
                 checked={centerV}
                 onChange={(e) => setCenterV(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500"
+                className="rounded border-[var(--border-subtle)] text-blue-600 focus:ring-blue-500"
               />
               <span className="text-sm text-[var(--text-primary)]">Center Vertically</span>
             </label>
@@ -273,7 +273,7 @@ export default function AddTextToPdf() {
           <button
             onClick={addText}
             disabled={isProcessing || !text.trim()}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
             {isProcessing ? "Processing..." : "Add Text to Page"}
@@ -284,17 +284,17 @@ export default function AddTextToPdf() {
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
-                <h4 className="font-bold text-emerald-500">Text Added</h4>
+                <h4 className="font-bold text-[var(--accent)]">Text Added</h4>
               </div>
 
-              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+              <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-[var(--accent)]">
                 <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 <p className="font-bold text-center">annotated_{file.name}</p>
               </div>
 
               <button
                 onClick={() => downloadOrShare(outputUrl, `annotated_${file.name}`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download PDF

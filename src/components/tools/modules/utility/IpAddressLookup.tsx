@@ -73,7 +73,7 @@ export default function IpAddressLookup() {
             />
           </div>
 
-          <button onClick={fetchIpDetails} disabled={isProcessing} className="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
+          <button onClick={fetchIpDetails} disabled={isProcessing} className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
             <RefreshCw className={`w-4 h-4 ${isProcessing ? 'animate-spin' : ''}`} />
             Resolve IP Details
           </button>
@@ -83,7 +83,7 @@ export default function IpAddressLookup() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl min-h-[250px] flex flex-col justify-center">
           {details ? (
             <div className="space-y-4 animate-in zoom-in-95 duration-200 text-xs">
-              <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-zinc-800 pb-2">Resolved Geolocation details</span>
+              <span className="text-xs text-[var(--text-muted)] font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Resolved Geolocation details</span>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
                   <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Resolved IP</span>
@@ -105,7 +105,7 @@ export default function IpAddressLookup() {
             </div>
           ) : (
             <div className="text-center text-[var(--text-secondary)]">
-              <ShieldAlert className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700" />
+              <ShieldAlert className="w-10 h-10 mx-auto mb-2 text-[var(--text-muted)]" />
               <p className="text-xs">No IP Address details loaded. Trigger resolution query.</p>
             </div>
           )}

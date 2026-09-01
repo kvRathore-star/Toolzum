@@ -208,7 +208,7 @@ export default function QrCodeGenerator() {
               className={`px-3 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
                 qrType === tab.id
                   ? 'bg-[var(--accent)] text-white shadow-sm'
-                  : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
               } focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -338,7 +338,7 @@ export default function QrCodeGenerator() {
 
           <div className="space-y-1 text-xs">
             <span className="text-[var(--text-secondary)] font-bold block">Center Logo</span>
-            <label className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-zinc-700 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] font-bold rounded-xl text-center cursor-pointer block">
+            <label className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-zinc-700 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] font-bold rounded-xl text-center cursor-pointer block">
               Choose Logo File
               <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </label>

@@ -104,9 +104,9 @@ export default function BulkQrCodeGenerator() {
 
         <div className="flex gap-2 p-1 bg-[var(--bg-surface)] rounded-xl max-w-xs">
           <button onClick={() => setMode('single')}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${mode === 'single' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}>Single QR</button>
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${mode === 'single' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Single QR</button>
           <button onClick={() => setMode('bulk')}
-            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${mode === 'bulk' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}>Bulk from CSV</button>
+            className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${mode === 'bulk' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Bulk from CSV</button>
         </div>
 
         {mode === 'single' ? (
@@ -133,7 +133,7 @@ export default function BulkQrCodeGenerator() {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
               <input type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
               <FileSpreadsheet className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
               <p className="text-sm font-medium text-[var(--text-secondary)]">Upload CSV (columns: <strong>value</strong>, optional <strong>label</strong>)</p>
@@ -149,7 +149,7 @@ export default function BulkQrCodeGenerator() {
                   {csvData.length > 10 && <div className="text-xs text-[var(--text-muted)] pt-1">...and {csvData.length - 10} more</div>}
                 </div>
                 <button onClick={generateBulk} disabled={isProcessing}
-                  className="w-full bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
+                  className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
                   {isProcessing ? <><Loader2 className="w-4 h-4 animate-spin" /> Generating...</> : <><Download className="w-4 h-4" /> Generate & Download ZIP ({csvData.length} QRs)</>}
                 </button>
                 {csvData.length > DAILY_LIMIT && usage >= DAILY_LIMIT && (
