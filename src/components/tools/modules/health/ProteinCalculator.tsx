@@ -19,8 +19,8 @@ export default function ProteinCalculator() {
   }
 
   const presets = [
-    { label: 'Muscle Gain, Active', apply: () => { setWeight('80'); setGoal('muscle'); setActive('active'); } },
-    { label: 'Weight Loss, Moderate', apply: () => { setWeight('70'); setGoal('weightLoss'); setActive('moderate'); } },
+    { label: 'Muscle Gain, Active', apply: () => { setWeight('80'); setGoal('muscle'); setActivity('active'); } },
+    { label: 'Weight Loss, Moderate', apply: () => { setWeight('70'); setGoal('weightLoss'); setActivity('moderate'); } },
   ];
 
   return (
