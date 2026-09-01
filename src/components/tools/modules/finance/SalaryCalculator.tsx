@@ -1,105 +1,72 @@
 "use client";
-import React, { useState } from 'react';
-import { Briefcase } from 'lucide-react';
-import { toast } from 'react-hot-toast';
-import { CalcActions } from '../shared/CalcActions';
+import { useState } from 'react';
+import { CalculatorShell } from '../shared/CalculatorShell';
+import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function SalaryCalculator() {
-  const [ctc, setCtc] = useState(1200000);
-  const [deductions, setDeductions] = useState(150000);
+  const [ctc, setCtc] = useState('1200000');
+  const [deductions, setDeductions] = useState('150000');
 
-  const presets = [
-    { label: '₹12L CTC, ₹1.5L ded', apply: () => { setCtc(1200000); setDeductions(150000); } },
-    { label: '₹20L CTC, ₹2L ded', apply: () => { setCtc(2000000); setDeductions(200000); } },
-    { label: '₹30L CTC, ₹3L ded', apply: () => { setCtc(3000000); setDeductions(300000); } },
-  ];
+  const c = parseFloat(ctc) || 0;
+  const d = parseFloat(deductions) || 0;
+  const hasInput = c > 0;
 
-  const calculateTax = (income: number) => {
-    const taxable = Math.max(0, income - deductions);
+  const calculateTax = (income: number, ded: number) => {
+    const taxable = Math.max(0, income - ded);
     let tax = 0;
-    if (taxable > 1500000) {
-      tax += (taxable - 1500000) * 0.3 + 187500;
-    } else if (taxable > 1200000) {
-      tax += (taxable - 1200000) * 0.2 + 127500;
-    } else if (taxable > 900000) {
-      tax += (taxable - 900000) * 0.15 + 82500;
-    } else if (taxable > 600000) {
-      tax += (taxable - 600000) * 0.1 + 52500;
-    } else if (taxable > 300000) {
-      tax += (taxable - 300000) * 0.05;
-    }
+    if (taxable > 1500000) { tax += (taxable - 1500000) * 0.3 + 187500; }
+    else if (taxable > 1200000) { tax += (taxable - 1200000) * 0.2 + 127500; }
+    else if (taxable > 900000) { tax += (taxable - 900000) * 0.15 + 82500; }
+    else if (taxable > 600000) { tax += (taxable - 600000) * 0.1 + 52500; }
+    else if (taxable > 300000) { tax += (taxable - 300000) * 0.05; }
     return tax;
   };
 
-  const tax = calculateTax(ctc);
-  const netAnnual = ctc - tax;
-  const netMonthly = netAnnual / 12;
+  let tax = 0, netAnnual = 0, netMonthly = 0;
+  if (hasInput) {
+    tax = calculateTax(c, d);
+    netAnnual = c - tax;
+    netMonthly = netAnnual / 12;
+  }
 
-  const resultText = 'CTC: ' + ctc.toLocaleString('en-IN') + ' | Deductions: ' + deductions.toLocaleString('en-IN') + ' | Tax: ' + Math.round(tax).toLocaleString('en-IN') + ' | Annual Take-Home: ' + Math.round(netAnnual).toLocaleString('en-IN') + ' | Monthly: ' + Math.round(netMonthly).toLocaleString('en-IN');
+  const result = hasInput
+    ? `CTC: ₹${c.toLocaleString('en-IN')} | Tax: ₹${Math.round(tax).toLocaleString('en-IN')} | Annual Take-Home: ₹${Math.round(netAnnual).toLocaleString('en-IN')} | Monthly: ₹${Math.round(netMonthly).toLocaleString('en-IN')}`
+    : '';
+  const resultStats = hasInput ? [
+    { label: 'Income Tax', value: `₹${Math.round(tax).toLocaleString('en-IN')}`, color: 'text-emerald-700 dark:text-emerald-400' },
+    { label: 'Annual Take-Home', value: `₹${Math.round(netAnnual).toLocaleString('en-IN')}`, color: 'text-emerald-700 dark:text-emerald-400' },
+    { label: 'Monthly Net', value: `₹${Math.round(netMonthly).toLocaleString('en-IN')}/mo`, color: 'text-emerald-700 dark:text-emerald-400' },
+  ] : undefined;
 
-  const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
-  const handleDownload = () => {
-    const blob = new Blob([resultText], {type:'text/plain'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'salary-breakdown.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
+  const presets = [
+    { label: '₹12L CTC, ₹1.5L ded', apply: () => { setCtc('1200000'); setDeductions('150000'); } },
+    { label: '₹20L CTC, ₹2L ded', apply: () => { setCtc('2000000'); setDeductions('200000'); } },
+    { label: '₹30L CTC, ₹3L ded', apply: () => { setCtc('3000000'); setDeductions('300000'); } },
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2">
-        {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
-            {p.label}
-          </button>
-        ))}
-      </div>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6 animate-in fade-in duration-500">
-        <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
-          <Briefcase className="w-5 h-5 text-emerald-500" />
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">Salary Take-Home Calculator</h3>
+    <CalculatorShell
+      category="Finance"
+      title="Salary Take-Home Calculator"
+      accent="emerald"
+      result={result}
+      resultStats={resultStats}
+      onCalculate={() => {}}
+      calculateLabel="Calculate Take-Home"
+      presets={presets}
+      downloadData={result}
+      downloadFilename="salary-breakdown.txt"
+    >
+      <div className="space-y-4">
+        <div>
+          <label className={labelCls}>Annual CTC / Salary</label>
+          <input type="number" value={ctc} onChange={e => setCtc(e.target.value)} className={inputCls} />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-4">
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual CTC / Salary</label>
-              <input type="number" value={ctc} onChange={e => setCtc(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-            </div>
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Annual Deductions / 80C</label>
-              <input type="number" value={deductions} onChange={e => setDeductions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-            </div>
-          </div>
-          <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
-            <div className="space-y-4">
-              <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">Annual Breakdown</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <span className="text-xs text-[var(--text-muted)]">Income Tax</span>
-                  <p className="text-lg font-bold text-[var(--accent)]">{Math.round(tax).toLocaleString('en-IN')}</p>
-                </div>
-                <div>
-                  <span className="text-xs text-[var(--text-muted)]">Annual Take-Home</span>
-                  <p className="text-lg font-bold text-[var(--text-secondary)] dark:text-[var(--text-primary)]">{Math.round(netAnnual).toLocaleString('en-IN')}</p>
-                </div>
-              </div>
-            </div>
-            <div className="border-t border-[var(--border-subtle)] pt-4 mt-6">
-              <span className="text-xs text-[var(--text-muted)]">Monthly Net Salary</span>
-              <p className="text-3xl font-extrabold text-emerald-500">{Math.round(netMonthly).toLocaleString('en-IN')}/mo</p>
-            </div>
-            <CalcActions
-              result={resultText}
-              downloadFilename="salary-breakdown.txt"
-              accent="emerald"
-            />
-          </div>
+        <div>
+          <label className={labelCls}>Annual Deductions / 80C</label>
+          <input type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputCls} />
         </div>
       </div>
-    </div>
+    </CalculatorShell>
   );
 }
