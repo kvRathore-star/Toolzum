@@ -11,15 +11,19 @@ export default function PpiCalculator() {
     { label: '27" Monitor', apply: () => { setDiagPixels('3840'); setDiagInches('27'); } },
     { label: '15" Laptop', apply: () => { setDiagPixels('1920'); setDiagInches('15.6'); } },
   ];
-  const p = parseFloat(diagPixels) || 0;
-  const i = parseFloat(diagInches) || 1;
-  const ppi = p / i;
-  const customResult = (
+  const hasInput = diagPixels !== '' && diagInches !== '';
+  let ppi: number | null = null;
+  if (hasInput) {
+    const p = parseFloat(diagPixels) || 0;
+    const i = parseFloat(diagInches) || 1;
+    ppi = p / i;
+  }
+  const customResult = hasInput && ppi !== null ? (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Pixels Per Inch</div>
       <div className="text-lg font-bold text-purple-700 dark:text-purple-400">{ppi.toFixed(0)}</div>
     </div>
-  );
+  ) : null;
   return (
     <CalculatorShell category="Calculator" title="PPI Calculator" result="" auto presets={presets} accent="orange" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

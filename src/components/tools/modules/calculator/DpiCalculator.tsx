@@ -11,15 +11,19 @@ export default function DpiCalculator() {
     { label: 'Full HD 24\"', apply: () => { setPixels('1920'); setInches('24'); } },
     { label: 'Phone 6.1\"', apply: () => { setPixels('2532'); setInches('6.1'); } },
   ];
-  const p = parseFloat(pixels) || 0;
-  const i = parseFloat(inches) || 1;
-  const dpi = p / i;
-  const customResult = (
+  const hasInput = pixels !== '' && inches !== '';
+  let dpi: number | null = null;
+  if (hasInput) {
+    const p = parseFloat(pixels) || 0;
+    const i = parseFloat(inches) || 1;
+    dpi = p / i;
+  }
+  const customResult = hasInput && dpi !== null ? (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Dots Per Inch</div>
       <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{dpi.toFixed(0)}</div>
     </div>
-  );
+  ) : null;
   return (
     <CalculatorShell category="Calculator" title="DPI Calculator" result="" auto presets={presets} accent="amber" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

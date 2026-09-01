@@ -8,13 +8,24 @@ export default function ArrCalculator() {
   const [expRev, setExpRev] = useState('20000');
   const [churnRev, setChurnRev] = useState('5000');
 
-  const s = parseFloat(subRev) || 0;
-  const e = parseFloat(expRev) || 0;
-  const c = parseFloat(churnRev) || 0;
-  const netNew = e - c;
-  const arr = s + e - c;
-  const maxVal = Math.max(1, s + e);
-  const result = `$${arr.toLocaleString()} ARR`;
+  const hasInput = subRev !== '' && expRev !== '' && churnRev !== '';
+  let arr = 0;
+  let maxVal = 1;
+  let bars: Array<{label: string; value: number; color: string}> = [];
+  let result = '';
+  if (hasInput) {
+    const s = parseFloat(subRev) || 0;
+    const e = parseFloat(expRev) || 0;
+    const c = parseFloat(churnRev) || 0;
+    arr = s + e - c;
+    maxVal = Math.max(1, s + e);
+    result = `$${arr.toLocaleString()} ARR`;
+    bars = [
+      { label: 'Subscriptions', value: s, color: 'bg-indigo-500' },
+      { label: 'Expansion', value: e, color: 'bg-emerald-700' },
+      { label: 'Churn', value: -c, color: 'bg-red-500' },
+    ];
+  }
 
   const presets = [
     { label: 'SaaS Startup', apply: () => { setSubRev('50000'); setExpRev('10000'); setChurnRev('3000'); } },
@@ -30,11 +41,7 @@ export default function ArrCalculator() {
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Revenue ($)</label><input type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputCls} /></div>
       </div>
       <div className="space-y-2">
-        {[
-          { label: 'Subscriptions', value: s, color: 'bg-indigo-500' },
-          { label: 'Expansion', value: e, color: 'bg-emerald-700' },
-          { label: 'Churn', value: -c, color: 'bg-red-500' },
-        ].map(bar => (
+        {hasInput && bars.map(bar => (
           <div key={bar.label}>
             <div className="flex justify-between text-xs mb-1">
               <span className="text-[var(--text-secondary)]">{bar.label}</span>

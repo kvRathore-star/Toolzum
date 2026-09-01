@@ -7,16 +7,26 @@ export default function ChurnRateCalculator() {
   const [lost, setLost] = useState('50');
   const [total, setTotal] = useState('1000');
 
-  const l = parseFloat(lost) || 0;
-  const t = parseFloat(total) || 1;
-  const churnPct = (l / t) * 100;
-  const retentionPct = 100 - churnPct;
-  const annualChurn = 100 - Math.pow(1 - churnPct / 100, 12) * 100;
-  const avgLifetime = churnPct > 0 ? (1 / (churnPct / 100)) : Infinity;
-  const retained = Math.round(t - l);
+  const hasInput = lost !== '' && total !== '';
+  let churnPct = 0;
+  let retentionPct = 100;
+  let annualChurn = 0;
+  let avgLifetime: number = Infinity;
+  let retained = 0;
+  let result = '';
+  let csvData = '';
+  if (hasInput) {
+    const l = parseFloat(lost) || 0;
+    const t = parseFloat(total) || 1;
+    churnPct = (l / t) * 100;
+    retentionPct = 100 - churnPct;
+    annualChurn = 100 - Math.pow(1 - churnPct / 100, 12) * 100;
+    avgLifetime = churnPct > 0 ? (1 / (churnPct / 100)) : Infinity;
+    retained = Math.round(t - l);
 
-  const result = `Churn Rate: ${churnPct.toFixed(2)}% | Retention: ${retentionPct.toFixed(2)}% | Annualized: ${annualChurn.toFixed(2)}% | Avg Lifetime: ${avgLifetime === Infinity ? 'N/A' : avgLifetime.toFixed(1) + ' months'} | Retained: ${retained}`;
-  const csvData = `Metric,Value\nChurn Rate,${churnPct.toFixed(2)}%\nRetention Rate,${retentionPct.toFixed(2)}%\nAnnualized Churn,${annualChurn.toFixed(2)}%\nAvg Customer Lifetime,${avgLifetime === Infinity ? 'N/A' : avgLifetime.toFixed(1) + ' months'}\nCustomers Lost,${l}\nTotal Customers,${t}\nCustomers Retained,${retained}`;
+    result = `Churn Rate: ${churnPct.toFixed(2)}% | Retention: ${retentionPct.toFixed(2)}% | Annualized: ${annualChurn.toFixed(2)}% | Avg Lifetime: ${avgLifetime === Infinity ? 'N/A' : avgLifetime.toFixed(1) + ' months'} | Retained: ${retained}`;
+    csvData = `Metric,Value\nChurn Rate,${churnPct.toFixed(2)}%\nRetention Rate,${retentionPct.toFixed(2)}%\nAnnualized Churn,${annualChurn.toFixed(2)}%\nAvg Customer Lifetime,${avgLifetime === Infinity ? 'N/A' : avgLifetime.toFixed(1) + ' months'}\nCustomers Lost,${l}\nTotal Customers,${t}\nCustomers Retained,${retained}`;
+  }
 
   const presets = [
     { label: 'SaaS Avg', apply: () => { setLost('50'); setTotal('1000'); } },
@@ -30,6 +40,7 @@ export default function ChurnRateCalculator() {
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
         <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
       </div>
+      {hasInput && (
       <div className="space-y-3">
         <div>
           <div className="flex justify-between text-xs mb-1">
@@ -50,6 +61,7 @@ export default function ChurnRateCalculator() {
           </div>
         </div>
       </div>
+      )}
     </CalculatorShell>
   );
 }

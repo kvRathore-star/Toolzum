@@ -11,13 +11,18 @@ export default function NetWorthCalculator() {
     { label: 'Mid Career', apply: () => { setAssets('500000'); setLiabilities('200000'); } },
     { label: 'Pre-Retirement', apply: () => { setAssets('1500000'); setLiabilities('300000'); } },
   ];
-  const a = parseFloat(assets) || 0;
-  const l = parseFloat(liabilities) || 0;
-  const nw = a - l;
-  const dti = a > 0 ? (l / a) * 100 : 0;
+  const hasInput = assets !== '' && liabilities !== '';
+  let nw = 0;
+  let dti = 0;
+  if (hasInput) {
+    const a = parseFloat(assets) || 0;
+    const l = parseFloat(liabilities) || 0;
+    nw = a - l;
+    dti = a > 0 ? (l / a) * 100 : 0;
+  }
   return (
-    <CalculatorShell category="Finance" title="Net Worth Calculator" result={`$${nw.toLocaleString()}`} auto presets={presets} accent="purple" customResult={
-      true ? (
+    <CalculatorShell category="Finance" title="Net Worth Calculator" result={hasInput ? `$${nw.toLocaleString()}` : ''} auto presets={presets} accent="purple" customResult={
+      hasInput ? (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div>

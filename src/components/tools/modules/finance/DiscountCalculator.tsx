@@ -19,21 +19,40 @@ export default function DiscountCalculator() {
     { label: '25% off $60', apply: () => { setSalePrice('60'); setDiscount('25'); } },
   ];
 
-  const p = parseFloat(price) || 0;
-  const d = parseFloat(discount) || 0;
-  const sp = parseFloat(salePrice) || 0;
-  const savings = mode === 'forward' ? p * d / 100 : d < 100 ? (sp / (1 - d / 100)) - sp : 0;
-  const finalPrice = mode === 'forward' ? p - savings : sp;
-  const originalPrice = mode === 'forward' ? p : d < 100 ? sp / (1 - d / 100) : 0;
-  const result = mode === 'forward'
-    ? `Original: $${p.toFixed(2)}\nDiscount: ${d}% (-$${savings.toFixed(2)})\nFinal Price: $${finalPrice.toFixed(2)}\nYou Save: $${savings.toFixed(2)}`
-    : d >= 100
-      ? 'Discount must be less than 100%'
-      : `Sale Price: $${sp.toFixed(2)}\nDiscount: ${d}%\nOriginal Price: $${originalPrice.toFixed(2)}\nYou Saved: $${savings.toFixed(2)}`;
+  const hasInput = mode === 'forward'
+    ? price !== '' && discount !== ''
+    : salePrice !== '' && discount !== '';
+
+  let savings = 0;
+  let finalPrice = 0;
+  let originalPrice = 0;
+  let d = 0;
+  let sp = 0;
+  let result = '';
+
+  if (hasInput) {
+    const p = parseFloat(price) || 0;
+    d = parseFloat(discount) || 0;
+    sp = parseFloat(salePrice) || 0;
+
+    if (mode === 'forward') {
+      savings = p * d / 100;
+      finalPrice = p - savings;
+      originalPrice = p;
+      result = `Original: $${p.toFixed(2)}\nDiscount: ${d}% (-$${savings.toFixed(2)})\nFinal Price: $${finalPrice.toFixed(2)}\nYou Save: $${savings.toFixed(2)}`;
+    } else if (d >= 100) {
+      result = 'Discount must be less than 100%';
+    } else {
+      savings = (sp / (1 - d / 100)) - sp;
+      finalPrice = sp;
+      originalPrice = sp / (1 - d / 100);
+      result = `Sale Price: $${sp.toFixed(2)}\nDiscount: ${d}%\nOriginal Price: $${originalPrice.toFixed(2)}\nYou Saved: $${savings.toFixed(2)}`;
+    }
+  }
 
   return (
     <CalculatorShell category="Finance" title="Discount Calculator" result={result} auto presets={presets} accent="teal" customResult={
-      result && result !== 'Discount must be less than 100%' ? (
+      hasInput && result !== 'Discount must be less than 100%' ? (
         <div>
           <div className="flex justify-between items-end mb-3">
             <div className="text-center flex-1">
