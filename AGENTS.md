@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Project Overview
 
-**Toolzum.com** — privacy-first PWA with **1,149 browser-based tools** across 21 categories. All processing is client-side (nothing uploaded). Built with Next.js 16, React 19, Capacitor (Android), Cloudflare Pages + D1.
+**Toolzum.com** — privacy-first PWA with **1,149 routed tool pages** (1,067 in category listings + 82 SEO landing pages) across 21 categories. All processing is client-side (nothing uploaded). Built with Next.js 16, React 19, Capacitor (Android), Cloudflare Pages + D1.
 
 ### Key Architecture
 
