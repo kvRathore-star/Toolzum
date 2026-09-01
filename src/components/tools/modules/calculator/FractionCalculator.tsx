@@ -14,17 +14,18 @@ export default function FractionCalculator() {
   const [n1, d1] = frac1.split('/').map(Number);
   const [n2, d2] = frac2.split('/').map(Number);
   const hasInput = !isNaN(n1) && !isNaN(d1) && d1 !== 0 && !isNaN(n2) && !isNaN(d2) && d2 !== 0 && !(op === '/' && n2 === 0);
-  let rn: number, rd: number;
-  switch (op) {
-    case '+': rn = n1 * d2 + n2 * d1; rd = d1 * d2; break;
-    case '-': rn = n1 * d2 - n2 * d1; rd = d1 * d2; break;
-    case '*': rn = n1 * n2; rd = d1 * d2; break;
-    case '/': rn = n1 * d2; rd = d1 * n2; break;
-    default: rn = 0; rd = 1;
+  let rn = 0, rd = 1;
+  if (hasInput) {
+    switch (op) {
+      case '+': rn = n1 * d2 + n2 * d1; rd = d1 * d2; break;
+      case '-': rn = n1 * d2 - n2 * d1; rd = d1 * d2; break;
+      case '*': rn = n1 * n2; rd = d1 * d2; break;
+      case '/': rn = n1 * d2; rd = d1 * n2; break;
+    }
+    const g = gcd(Math.abs(rn), Math.abs(rd));
+    rn /= g; rd /= g;
   }
-  const g = gcd(Math.abs(rn), Math.abs(rd));
-  rn /= g; rd /= g;
-  const decimal = rn / rd;
+  const decimal = rd !== 0 ? rn / rd : 0;
   const customResult = !hasInput ? (
     <div className="text-sm text-[var(--text-muted)]">Enter valid fractions (e.g., 1/2)</div>
   ) : (
