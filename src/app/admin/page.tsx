@@ -1,78 +1,40 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity, ArrowLeft } from "lucide-react";
+import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity, ArrowLeft, Download, Copy } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface AdminStats {
-  totalUsers: number;
-  proUsers: number;
-  adminUsers: number;
-  signupsLast7Days: number;
-  signupsLast30Days: number;
-  pageViewsLast7Days: number;
+const inputCls = "w-full px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]";
+const labelCls = "block text-sm font-medium text-[var(--text-secondary)] mb-1";
+
+interface AdminStats { totalUsers: number; proUsers: number; adminUsers: number; signupsLast7Days: number; signupsLast30Days: number; pageViewsLast7Days: number; totalPageViews: number; }
+interface User { id: string; name: string; email: string; role: string; plan: string; credits: number; status: string; lastLoginAt: number | null; createdAt: number; image: string | null; }
+interface UsersResponse { users: User[]; total: number; page: number; limit: number; }
+interface Payment { id: string; gateway: string; orderId: string; amount: number; currency: string; status: string; createdAt: number; }
+interface ToolUsage { toolSlug: string; count: number; }
+interface AuditEntry { actorEmail: string; action: string; oldValue: string | null; newValue: string | null; createdAt: string; }
+interface UserDetail { user: User; payments: Payment[]; toolUsage: ToolUsage[]; roleHistory: AuditEntry[]; }
+interface AuditLogEntry { id: number; actorEmail: string; action: string; targetUserId: string; targetUserName: string | null; targetUserEmail: string | null; oldValue: string | null; newValue: string | null; createdAt: string; }
+
+function relativeTime(ts: number | null): string {
+  if (!ts) return "never";
+  const diff = Math.floor(Date.now() / 1000) - ts;
+  if (diff < 60) return "just now";
+  if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+  if (diff < 2592000) return `${Math.floor(diff / 86400)}d ago`;
+  return new Date(ts * 1000).toLocaleDateString();
 }
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  plan: string;
-  credits: number;
-  status: string;
-  createdAt: number;
-  image: string | null;
-}
-
-interface UsersResponse {
-  users: User[];
-  total: number;
-  page: number;
-  limit: number;
-}
-
-interface Payment {
-  id: string;
-  gateway: string;
-  orderId: string;
-  amount: number;
-  currency: string;
-  status: string;
-  createdAt: number;
-}
-
-interface ToolUsage {
-  toolSlug: string;
-  count: number;
-}
-
-interface AuditEntry {
-  actorEmail: string;
-  action: string;
-  oldValue: string | null;
-  newValue: string | null;
-  createdAt: string;
-}
-
-interface UserDetail {
-  user: User;
-  payments: Payment[];
-  toolUsage: ToolUsage[];
-  auditLog: AuditEntry[];
-}
-
-interface AuditLogEntry {
-  id: number;
-  actorEmail: string;
-  action: string;
-  targetUserId: string;
-  oldValue: string | null;
-  newValue: string | null;
-  createdAt: string;
+function Sparkline() {
+  return (
+    <svg width="60" height="24" viewBox="0 0 60 24" fill="none" className="opacity-40">
+      <path d="M0 18 L5 14 L10 16 L15 10 L20 12 L25 6 L30 8 L35 4 L40 7 L45 3 L50 5 L55 2 L60 4" stroke="var(--accent)" strokeWidth="1.5" fill="none" />
+    </svg>
+  );
 }
 
 export default function AdminPage() {
@@ -91,11 +53,19 @@ export default function AdminPage() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [showAuditLog, setShowAuditLog] = useState(false);
+  const [roleConfirmTarget, setRoleConfirmTarget] = useState<{ userId: string; name: string; oldRole: string; newRole: string } | null>(null);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
+  const [editingCredits, setEditingCredits] = useState<{ userId: string; value: number } | null>(null);
+  const [creditSaveMsg, setCreditSaveMsg] = useState("");
+  const [resetResult, setResetResult] = useState<{ tempPassword: string; email: string } | null>(null);
+  const [activeSection, setActiveSection] = useState<"stats" | "users">("stats");
+  const searchRef = useRef<HTMLInputElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const usersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/login");
-    }
+    if (!isPending && !session) router.push("/login");
   }, [session, isPending, router]);
 
   useEffect(() => {
@@ -108,42 +78,25 @@ export default function AdminPage() {
           fetch(`/api/admin/users?page=${page}&limit=20${search ? `&search=${encodeURIComponent(search)}` : ""}`),
         ]);
         if (cancelled) return;
-        if (statsRes.ok) {
-          setStats(await statsRes.json());
-        } else if (statsRes.status === 403 || statsRes.status === 401) {
-          router.push("/dashboard");
-          return;
-        }
-        if (usersRes.ok) {
-          const data = (await usersRes.json()) as UsersResponse;
-          setUsers(data.users);
-          setTotal(data.total);
-        }
-      } catch {
-        if (!cancelled) setError("Failed to load data");
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
+        if (statsRes.ok) setStats(await statsRes.json());
+        else if (statsRes.status === 403 || statsRes.status === 401) { router.push("/dashboard"); return; }
+        if (usersRes.ok) { const data = (await usersRes.json()) as UsersResponse; setUsers(data.users); setTotal(data.total); }
+      } catch { if (!cancelled) setError("Failed to load data"); } finally { if (!cancelled) setLoading(false); }
     }
     load();
     return () => { cancelled = true; };
   }, [session, page, search, router]);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (!selectedUserId) { setUserDetail(null); return; }
+    if (!selectedUserId) { return; }
     let cancelled = false;
     async function load() {
       setDetailLoading(true);
+      setUserDetail(null);
       try {
         const res = await fetch(`/api/admin/user-detail?userId=${selectedUserId}`);
-        if (!cancelled && res.ok) {
-          setUserDetail(await res.json());
-        }
-      } finally {
-        if (!cancelled) setDetailLoading(false);
-      }
+        if (!cancelled && res.ok) setUserDetail(await res.json());
+      } finally { if (!cancelled) setDetailLoading(false); }
     }
     load();
     return () => { cancelled = true; };
@@ -152,32 +105,106 @@ export default function AdminPage() {
   const fetchAuditLog = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/audit-log?limit=50");
-      if (res.ok) {
-        const data = (await res.json()) as { logs: AuditLogEntry[] };
-        setAuditLogs(data.logs || []);
-      }
+      if (res.ok) { const data = (await res.json()) as { logs: AuditLogEntry[] }; setAuditLogs(data.logs || []); }
     } catch { /* ignore */ }
   }, []);
+
+  useEffect(() => {
+    if (!statsRef.current || !usersRef.current) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target === statsRef.current) setActiveSection("stats");
+            else if (entry.target === usersRef.current) setActiveSection("users");
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(statsRef.current);
+    observer.observe(usersRef.current);
+    return () => observer.disconnect();
+  }, [loading]);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement;
+      const isInput = target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.tagName === "SELECT";
+      if (e.key === "Escape") {
+        if (roleConfirmTarget) { setRoleConfirmTarget(null); return; }
+        if (selectedUserId) { setSelectedUserId(null); return; }
+        if (showAuditLog) { setShowAuditLog(false); return; }
+      }
+      if (!isInput && e.key === "/") { e.preventDefault(); searchRef.current?.focus(); }
+      if (!isInput && e.key === "g") {
+        const handler = (e2: KeyboardEvent) => {
+          document.removeEventListener("keydown", handler);
+          if (e2.key === "s") document.getElementById("stats")?.scrollIntoView({ behavior: "smooth" });
+          if (e2.key === "u") document.getElementById("users")?.scrollIntoView({ behavior: "smooth" });
+        };
+        document.addEventListener("keydown", handler, { once: true });
+        setTimeout(() => document.removeEventListener("keydown", handler), 1000);
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [roleConfirmTarget, selectedUserId, showAuditLog]);
 
   const handleRoleChange = async (userId: string, newRole: string) => {
     setUpdatingRole(userId);
     try {
-      const res = await fetch("/api/admin/update-role", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, role: newRole }),
-      });
-      if (res.ok) {
-        setUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u));
-      }
-    } finally {
-      setUpdatingRole(null);
-    }
+      const res = await fetch("/api/admin/update-role", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, role: newRole }) });
+      if (res.ok) setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
+    } finally { setUpdatingRole(null); }
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleBulkAction = async (action: "ban" | "unban" | "delete") => {
+    if (action === "delete") {
+      if (!confirm(`Permanently delete ${selectedIds.size} user(s)? This cannot be undone.`)) return;
+      if (!confirm(`FINAL CONFIRM: Delete ${selectedIds.size} users irrecoverably?`)) return;
+    }
+    setBulkAction(action);
+    for (const uid of selectedIds) {
+      try {
+        if (action === "delete") {
+          await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, confirm: "DELETE" }) });
+        } else {
+          await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, ban: action === "ban" }) });
+          await new Promise((r) => setTimeout(r, 300));
+        }
+      } catch { /* continue */ }
+    }
+    setSelectedIds(new Set());
+    setBulkAction(null);
     setPage(1);
+    setSearch("");
+  };
+
+  const exportCSV = () => {
+    const header = "Name,Email,Role,Plan,Credits,Status,Last Login,Created\n";
+    const rows = users.map((u) => [
+      `"${(u.name || "").replace(/"/g, '""')}"`,
+      `"${u.email}"`,
+      u.role,
+      u.plan,
+      u.credits,
+      u.status,
+      u.lastLoginAt ? new Date(u.lastLoginAt * 1000).toISOString() : "never",
+      new Date(u.createdAt * 1000).toISOString(),
+    ].join(",")).join("\n");
+    const blob = new Blob([header + rows], { type: "text/csv" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `users-page${page}.csv`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+
+  const handleSearch = (e: React.FormEvent) => { e.preventDefault(); setPage(1); };
+  const toggleSelectAll = () => {
+    if (selectedIds.size === users.length) setSelectedIds(new Set());
+    else setSelectedIds(new Set(users.map((u) => u.id)));
   };
 
   if (isPending || loading) {
@@ -187,9 +214,7 @@ export default function AdminPage() {
       </div>
     );
   }
-
   if (!session) return null;
-
   if (error) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-[var(--bg-base)]">
@@ -203,233 +228,217 @@ export default function AdminPage() {
   }
 
   const totalPages = Math.ceil(total / 20);
+  const sidebarBtnCls = (active: boolean) =>
+    `w-full text-left px-3 py-2 rounded-xl text-sm transition-colors cursor-pointer ${active ? "bg-[var(--accent)] text-white font-medium" : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]"}`;
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] flex">
       <aside className="hidden md:flex w-56 border-r border-[var(--border-subtle)] p-4 flex-col gap-2 shrink-0">
         <div className="space-y-1">
           <div className="px-3 py-1.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Admin</div>
-          <button onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth' })} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+          <button onClick={() => document.getElementById("stats")?.scrollIntoView({ behavior: "smooth" })} className={sidebarBtnCls(activeSection === "stats")}>
             <div className="flex items-center gap-2"><TrendingUp className="w-4 h-4" /> Stats</div>
           </button>
-          <button onClick={() => document.getElementById('users')?.scrollIntoView({ behavior: 'smooth' })} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+          <button onClick={() => document.getElementById("users")?.scrollIntoView({ behavior: "smooth" })} className={sidebarBtnCls(activeSection === "users")}>
             <div className="flex items-center gap-2"><Users className="w-4 h-4" /> Users</div>
           </button>
-          <button onClick={() => { setShowAuditLog(true); fetchAuditLog(); }} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
+          <button onClick={() => { setShowAuditLog(true); fetchAuditLog(); }} className={sidebarBtnCls(false)}>
             <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> Audit Log</div>
           </button>
         </div>
         <Link href="/" className="mt-auto flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Toolzum
+          <ArrowLeft className="w-4 h-4" /> Back to Toolzum
         </Link>
       </aside>
       <main className="flex-1 min-w-0">
         <div className="md:hidden flex items-center gap-2 px-4 py-3 border-b border-[var(--border-subtle)]">
-          <Link href="/" className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Toolzum
-          </Link>
+          <Link href="/" className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><ArrowLeft className="w-4 h-4" /> Back to Toolzum</Link>
         </div>
         <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
           <div className="flex items-center gap-3">
             <Shield className="w-6 h-6 text-[var(--accent)]" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Admin Dashboard</h1>
           </div>
-
-        {stats && (
-          <div id="stats" className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              { label: "Total Users", value: stats.totalUsers, icon: Users },
-              { label: "Pro Users", value: stats.proUsers, icon: TrendingUp },
-              { label: "Admins", value: stats.adminUsers, icon: Shield },
-              { label: "Signups (7d)", value: stats.signupsLast7Days, icon: Users },
-              { label: "Signups (30d)", value: stats.signupsLast30Days, icon: Users },
-              { label: "Page Views (7d)", value: stats.pageViewsLast7Days, icon: TrendingUp },
-            ].map((stat) => (
-              <div key={stat.label} className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">
-                <div className="flex items-center gap-2 mb-2">
-                  <stat.icon className="w-4 h-4 text-[var(--text-muted)]" />
-                  <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">{stat.label}</span>
+          {stats && (
+            <div ref={statsRef} id="stats" className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[
+                { label: "Total Users", value: stats.totalUsers, icon: Users },
+                { label: "Pro Users", value: stats.proUsers, icon: TrendingUp },
+                { label: "Admins", value: stats.adminUsers, icon: Shield },
+                { label: "Signups (7d)", value: stats.signupsLast7Days, icon: Users },
+                { label: "Signups (30d)", value: stats.signupsLast30Days, icon: Users },
+                { label: "Page Views (7d)", value: stats.pageViewsLast7Days, icon: TrendingUp },
+              ].map((stat) => (
+                <div key={stat.label} className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <stat.icon className="w-4 h-4 text-[var(--text-muted)]" />
+                      <span className="text-xs text-[var(--text-muted)] uppercase tracking-wider">{stat.label}</span>
+                    </div>
+                    <Sparkline />
+                  </div>
+                  <p className="text-2xl font-bold text-[var(--text-primary)]">{stat.value.toLocaleString()}</p>
                 </div>
-                <p className="text-2xl font-bold text-[var(--text-primary)]">{stat.value.toLocaleString()}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div id="users" className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-[var(--text-primary)]">Users</h2>
-            <form onSubmit={handleSearch} className="flex gap-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
-                <input
-                  type="text"
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  placeholder="Search name or email..."
-                  className="pl-9 pr-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
-                />
-              </div>
-              <button type="submit" className="px-4 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">
-                Search
-              </button>
-            </form>
-          </div>
-
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-[var(--border-subtle)]">
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">User</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Email</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Status</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Role</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Plan</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Joined</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user) => (
-                    <tr
-                      key={user.id}
-                      className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
-                      onClick={() => setSelectedUserId(user.id)}
-                    >
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          {user.image ? (
-                            <Image src={user.image} alt="" width={32} height={32} className="w-8 h-8 rounded-full" unoptimized />
-                          ) : (
-                            <div className="w-8 h-8 rounded-full bg-[var(--accent)] flex items-center justify-center text-white text-xs font-bold">
-                              {user.name.charAt(0).toUpperCase()}
-                            </div>
-                          )}
-                          <span className="text-[var(--text-primary)] font-medium">{user.name}</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-[var(--text-secondary)]">{user.email}</td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
-                          user.status === "banned"
-                            ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                            : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                        }`}>
-                          {user.status}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
-                          user.role === "admin"
-                            ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
-                            : "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-                        }`}>
-                          {user.role}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
-                          user.plan === "pro"
-                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                            : user.plan === "signedin"
-                            ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                            : "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
-                        }`}>
-                          {user.plan}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-[var(--text-secondary)]">{user.credits}</td>
-                      <td className="px-4 py-3 text-[var(--text-secondary)]">
-                        {new Date(user.createdAt * 1000).toLocaleDateString()}
-                      </td>
-                      <td className="px-4 py-3" onClick={e => e.stopPropagation()}>
-                        <select
-                          value={user.role}
-                          onChange={e => handleRoleChange(user.id, e.target.value)}
-                          disabled={updatingRole === user.id}
-                          className="px-2 py-1 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
-                        >
-                          <option value="user">User</option>
-                          <option value="admin">Admin</option>
-                        </select>
-                      </td>
-                    </tr>
-                  ))}
-                  {users.length === 0 && (
-                    <tr>
-                      <td colSpan={7} className="px-4 py-8 text-center text-[var(--text-muted)]">
-                        No users found
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between">
-              <span className="text-sm text-[var(--text-muted)]">
-                Showing {(page - 1) * 20 + 1}–{Math.min(page * 20, total)} of {total}
-              </span>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setPage(p => Math.max(1, p - 1))}
-                  disabled={page === 1}
-                  className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <span className="px-3 py-2 text-sm text-[var(--text-secondary)]">
-                  {page} / {totalPages}
-                </span>
-                <button
-                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                  disabled={page === totalPages}
-                  className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
+              ))}
             </div>
           )}
-        </div>
+          <div ref={usersRef} id="users" className="space-y-4">
+            <div className="flex items-center justify-between flex-wrap gap-2">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Users</h2>
+              <div className="flex gap-2 items-center">
+                <button onClick={exportCSV} className="px-3 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer flex items-center gap-1.5">
+                  <Download className="w-4 h-4" /> Export CSV
+                </button>
+                <form onSubmit={handleSearch} className="flex gap-2">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
+                    <input ref={searchRef} type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search name or email... ( / )" className="pl-9 pr-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+                  </div>
+                  <button type="submit" className="px-4 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer">Search</button>
+                </form>
+              </div>
+            </div>
+            <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-[var(--border-subtle)]">
+                      <th className="text-left px-4 py-3 w-10">
+                        <input type="checkbox" checked={selectedIds.size === users.length && users.length > 0} onChange={toggleSelectAll} className="rounded cursor-pointer" />
+                      </th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">User</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Email</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Status</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Role</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Plan</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Credits</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Last Active</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Joined</th>
+                      <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => (
+                      <tr key={user.id} className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors">
+                        <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                          <input
+                            type="checkbox"
+                            checked={selectedIds.has(user.id)}
+                            onChange={() => {
+                              setSelectedIds((prev) => {
+                                const next = new Set(prev);
+                                if (next.has(user.id)) next.delete(user.id); else next.add(user.id);
+                                return next;
+                              });
+                            }}
+                            className="rounded cursor-pointer"
+                          />
+                        </td>
+                        <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedUserId(user.id)}>
+                          <div className="flex items-center gap-3">
+                            {user.image ? (
+                              <Image src={user.image} alt="" width={32} height={32} className="w-8 h-8 rounded-full" unoptimized />
+                            ) : (
+                              <div className="w-8 h-8 rounded-full bg-[var(--accent)] flex items-center justify-center text-white text-xs font-bold">{user.name.charAt(0).toUpperCase()}</div>
+                            )}
+                            <span className="text-[var(--text-primary)] font-medium">{user.name}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-[var(--text-secondary)] cursor-pointer" onClick={() => setSelectedUserId(user.id)}>{user.email}</td>
+                        <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedUserId(user.id)}>
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${user.status === "banned" ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400" : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"}`}>{user.status}</span>
+                        </td>
+                        <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedUserId(user.id)}>
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${user.role === "admin" ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400" : "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"}`}>{user.role}</span>
+                        </td>
+                        <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedUserId(user.id)}>
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${user.plan === "pro" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : user.plan === "signedin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400" : "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"}`}>{user.plan}</span>
+                        </td>
+                        <td className="px-4 py-3 text-[var(--text-secondary)] text-xs">{user.credits}</td>
+                        <td className="px-4 py-3 text-[var(--text-muted)] text-xs cursor-pointer" onClick={() => setSelectedUserId(user.id)}>{relativeTime(user.lastLoginAt)}</td>
+                        <td className="px-4 py-3 text-[var(--text-secondary)] text-xs cursor-pointer" onClick={() => setSelectedUserId(user.id)}>{new Date(user.createdAt * 1000).toLocaleDateString()}</td>
+                        <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                          <select
+                            value={user.role}
+                            onChange={(e) => setRoleConfirmTarget({ userId: user.id, name: user.name, oldRole: user.role, newRole: e.target.value })}
+                            disabled={updatingRole === user.id}
+                            className="px-2 py-1 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
+                          >
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                          </select>
+                        </td>
+                      </tr>
+                    ))}
+                    {users.length === 0 && (
+                      <tr><td colSpan={10} className="px-4 py-8 text-center text-[var(--text-muted)]">No users found</td></tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-[var(--text-muted)]">Showing {(page - 1) * 20 + 1}–{Math.min(page * 20, total)} of {total}</span>
+                <div className="flex gap-2">
+                  <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronLeft className="w-4 h-4" /></button>
+                  <span className="px-3 py-2 text-sm text-[var(--text-secondary)]">{page} / {totalPages}</span>
+                  <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"><ChevronRight className="w-4 h-4" /></button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </main>
 
+      {selectedIds.size > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl px-6 py-3 flex items-center gap-4 text-sm">
+          <span className="font-medium text-[var(--text-primary)]">{selectedIds.size} selected</span>
+          <span className="text-[var(--border-subtle)]">|</span>
+          <button onClick={() => handleBulkAction("ban")} disabled={bulkAction !== null} className="px-3 py-1.5 bg-amber-100 text-amber-700 hover:bg-amber-200 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50">Ban</button>
+          <button onClick={() => handleBulkAction("unban")} disabled={bulkAction !== null} className="px-3 py-1.5 bg-emerald-100 text-emerald-700 hover:bg-emerald-200 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50">Unban</button>
+          <button onClick={() => handleBulkAction("delete")} disabled={bulkAction !== null} className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50">Delete</button>
+          <button onClick={() => setSelectedIds(new Set())} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><X className="w-4 h-4 text-[var(--text-muted)]" /></button>
+        </div>
+      )}
+
+      {roleConfirmTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setRoleConfirmTarget(null)}>
+          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4" onClick={(e) => e.stopPropagation()}>
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">Confirm Role Change</h3>
+            <p className="text-[var(--text-secondary)]">Change <strong>{roleConfirmTarget.name}&apos;s</strong> role from <strong>{roleConfirmTarget.oldRole}</strong> to <strong>{roleConfirmTarget.newRole}</strong>?</p>
+            <div className="flex justify-end gap-2">
+              <button onClick={() => setRoleConfirmTarget(null)} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer">Cancel</button>
+              <button onClick={() => { handleRoleChange(roleConfirmTarget.userId, roleConfirmTarget.newRole); setRoleConfirmTarget(null); }} className="px-4 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer">Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {selectedUserId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setSelectedUserId(null)} onKeyDown={e => e.key === 'Escape' && setSelectedUserId(null)} role="button" tabIndex={-1}>
-          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-6 border-b border-[var(--border-subtle)]">
+        <div className="fixed inset-0 z-40 flex justify-end" onClick={() => setSelectedUserId(null)}>
+          <div className="absolute inset-0 bg-black/40 transition-opacity" />
+          <div className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto animate-slide-in-right" onClick={(e) => e.stopPropagation()}>
+            <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]">
               <h2 className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
-              <button onClick={() => setSelectedUserId(null)} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer">
-                <X className="w-5 h-5 text-[var(--text-muted)]" />
-              </button>
+              <button onClick={() => setSelectedUserId(null)} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
             </div>
             {detailLoading ? (
-              <div className="p-12 text-center">
-                <div className="w-6 h-6 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
-              </div>
+              <div className="p-12 text-center"><div className="w-6 h-6 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" /></div>
             ) : userDetail ? (
               <div className="p-6 space-y-6">
                 <div className="flex items-center gap-4">
                   {userDetail.user.image ? (
                     <Image src={userDetail.user.image} alt="" width={48} height={48} className="w-12 h-12 rounded-full" unoptimized />
                   ) : (
-                    <div className="w-12 h-12 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold">
-                      {userDetail.user.name.charAt(0).toUpperCase()}
-                    </div>
+                    <div className="w-12 h-12 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold">{userDetail.user.name.charAt(0).toUpperCase()}</div>
                   )}
                   <div>
                     <p className="font-semibold text-[var(--text-primary)]">{userDetail.user.name}</p>
                     <p className="text-sm text-[var(--text-secondary)]">{userDetail.user.email}</p>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
                     <p className="text-xs text-[var(--text-muted)] uppercase">Role</p>
                     <p className="font-bold text-[var(--text-primary)]">{userDetail.user.role}</p>
@@ -440,24 +449,49 @@ export default function AdminPage() {
                   </div>
                   <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
                     <p className="text-xs text-[var(--text-muted)] uppercase">Status</p>
-                    <p className={`font-bold ${userDetail.user.status === "banned" ? "text-red-500" : "text-[var(--text-primary)]"}`}>
-                      {userDetail.user.status}
-                    </p>
+                    <p className={`font-bold ${userDetail.user.status === "banned" ? "text-red-500" : "text-[var(--text-primary)]"}`}>{userDetail.user.status}</p>
+                  </div>
+                  <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
+                    <p className="text-xs text-[var(--text-muted)] uppercase">Last Login</p>
+                    <p className="font-bold text-[var(--text-primary)] text-xs">{userDetail.user.lastLoginAt ? new Date(userDetail.user.lastLoginAt * 1000).toLocaleDateString() : "Never"}</p>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
+                  <label className={labelCls}>Credits</label>
+                  <div className="flex gap-2 items-center">
+                    <input
+                      type="number"
+                      value={editingCredits?.userId === userDetail.user.id ? editingCredits.value : userDetail.user.credits}
+                      onChange={(e) => setEditingCredits({ userId: userDetail.user.id, value: Number(e.target.value) })}
+                      className={`${inputCls} w-32`}
+                    />
+                    <button
+                      onClick={async () => {
+                        if (!editingCredits || editingCredits.userId !== userDetail.user.id) return;
+                        const res = await fetch("/api/admin/update-credits", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, credits: editingCredits.value }) });
+                        if (res.ok) {
+                          setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, credits: editingCredits.value } } : prev);
+                          setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, credits: editingCredits.value } : u)));
+                          setEditingCredits(null);
+                          setCreditSaveMsg("Saved!");
+                          setTimeout(() => setCreditSaveMsg(""), 2000);
+                        }
+                      }}
+                      className="px-3 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer"
+                    >Save</button>
+                    {creditSaveMsg && <span className="text-xs text-emerald-500 font-medium">{creditSaveMsg}</span>}
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   <select
                     value={userDetail.user.plan}
-                    onChange={async e => {
-                      const res = await fetch("/api/admin/change-plan", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ userId: userDetail.user.id, plan: e.target.value }),
-                      });
+                    onChange={async (e) => {
+                      const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, plan: e.target.value }) });
                       if (res.ok) {
-                        setUserDetail(prev => prev ? { ...prev, user: { ...prev.user, plan: e.target.value } } : prev);
-                        setUsers(prev => prev.map(u => u.id === userDetail.user.id ? { ...u, plan: e.target.value } : u));
+                        setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, plan: e.target.value } } : prev);
+                        setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, plan: e.target.value } : u)));
                       }
                     }}
                     className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer"
@@ -466,57 +500,33 @@ export default function AdminPage() {
                     <option value="signedin">Signed In</option>
                     <option value="pro">Pro</option>
                   </select>
-
-                  <button
-                    onClick={async () => {
-                      const newStatus = userDetail.user.status === "banned" ? "active" : "banned";
-                      const res = await fetch("/api/admin/ban-user", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ userId: userDetail.user.id, status: newStatus }),
-                      });
-                      if (res.ok) {
-                        setUserDetail(prev => prev ? { ...prev, user: { ...prev.user, status: newStatus } } : prev);
-                        setUsers(prev => prev.map(u => u.id === userDetail.user.id ? { ...u, status: newStatus } : u));
-                      }
-                    }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${
-                      userDetail.user.status === "banned"
-                        ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
-                        : "bg-amber-100 text-amber-700 hover:bg-amber-200"
-                    }`}
-                  >
+                  <button onClick={async () => { const newStatus = userDetail.user.status === "banned" ? "active" : "banned"; const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, ban: newStatus === "banned" }) }); if (res.ok) { setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, status: newStatus } } : prev); setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, status: newStatus } : u))); } }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${userDetail.user.status === "banned" ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" : "bg-amber-100 text-amber-700 hover:bg-amber-200"}`}>
                     {userDetail.user.status === "banned" ? "Unban User" : "Ban User"}
                   </button>
-
-                  <button
-                    onClick={async () => {
-                      if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return;
-                      if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return;
-                      const res = await fetch("/api/admin/delete-user", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }),
-                      });
-                      if (res.ok) {
-                        setSelectedUserId(null);
-                        setUsers(prev => prev.filter(u => u.id !== userDetail.user.id));
-                        setTotal(prev => prev - 1);
-                      }
-                    }}
-                    className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer"
-                  >
-                    Delete User (GDPR)
-                  </button>
+                  <button onClick={async () => { if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return; if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return; const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) }); if (res.ok) { setSelectedUserId(null); setUsers((prev) => prev.filter((u) => u.id !== userDetail.user.id)); setTotal((prev) => prev - 1); } }}
+                    className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer">Delete User (GDPR)</button>
+                  <button onClick={async () => { const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) }); if (res.ok) { const data = await res.json(); setResetResult({ tempPassword: data.tempPassword, email: data.email }); } }}
+                    className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] cursor-pointer">Reset Password</button>
                 </div>
+
+                {resetResult && (
+                  <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl space-y-2">
+                    <p className="text-xs font-medium text-amber-700 dark:text-amber-400">Password reset for {resetResult.email}</p>
+                    <div className="flex items-center gap-2">
+                      <code className="flex-1 px-3 py-2 bg-white dark:bg-black rounded-lg text-sm font-mono text-[var(--text-primary)] border border-[var(--border-subtle)]">{resetResult.tempPassword}</code>
+                      <button onClick={() => { navigator.clipboard.writeText(resetResult.tempPassword); }} className="p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><Copy className="w-4 h-4 text-[var(--text-muted)]" /></button>
+                    </div>
+                    <p className="text-xs text-amber-600 dark:text-amber-500">Share this temp password with the user. They should change it on next login.</p>
+                    <button onClick={() => setResetResult(null)} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">Dismiss</button>
+                  </div>
+                )}
 
                 {userDetail.payments.length > 0 && (
                   <div>
-                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3">
-                      <CreditCard className="w-4 h-4" /> Payment History
-                    </h3>
+                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><CreditCard className="w-4 h-4" /> Payment History</h3>
                     <div className="space-y-2">
-                      {userDetail.payments.map(p => (
+                      {userDetail.payments.map((p) => (
                         <div key={p.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm">
                           <div>
                             <span className="font-medium text-[var(--text-primary)]">{p.gateway}</span>
@@ -524,9 +534,7 @@ export default function AdminPage() {
                             <span className="text-[var(--text-secondary)]">{p.amount} {p.currency}</span>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                              p.status === "paid" ? "bg-emerald-100 text-emerald-700" : p.status === "failed" ? "bg-red-100 text-red-700" : "bg-zinc-100 text-zinc-700"
-                            }`}>{p.status}</span>
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${p.status === "paid" ? "bg-emerald-100 text-emerald-700" : p.status === "failed" ? "bg-red-100 text-red-700" : "bg-zinc-100 text-zinc-700"}`}>{p.status}</span>
                             <span className="text-[var(--text-muted)] text-xs">{new Date(p.createdAt * 1000).toLocaleDateString()}</span>
                           </div>
                         </div>
@@ -537,11 +545,9 @@ export default function AdminPage() {
 
                 {userDetail.toolUsage.length > 0 && (
                   <div>
-                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3">
-                      <Activity className="w-4 h-4" /> Top Tools
-                    </h3>
+                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Activity className="w-4 h-4" /> Top Tools</h3>
                     <div className="space-y-1">
-                      {userDetail.toolUsage.map(t => (
+                      {userDetail.toolUsage.map((t) => (
                         <div key={t.toolSlug} className="flex justify-between text-sm px-3 py-1.5">
                           <span className="text-[var(--text-secondary)]">{t.toolSlug}</span>
                           <span className="text-[var(--text-muted)]">{t.count}x</span>
@@ -551,13 +557,11 @@ export default function AdminPage() {
                   </div>
                 )}
 
-                {userDetail.auditLog.length > 0 && (
+                {userDetail.roleHistory.length > 0 && (
                   <div>
-                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3">
-                      <Clock className="w-4 h-4" /> Role Changes
-                    </h3>
+                    <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Clock className="w-4 h-4" /> Role Changes</h3>
                     <div className="space-y-1">
-                      {userDetail.auditLog.map((a, i) => (
+                      {userDetail.roleHistory.map((a, i) => (
                         <div key={i} className="text-sm px-3 py-1.5 text-[var(--text-secondary)]">
                           <span className="text-[var(--text-muted)]">{a.createdAt}</span>
                           <span className="mx-2">·</span>
@@ -578,19 +582,17 @@ export default function AdminPage() {
       )}
 
       {showAuditLog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowAuditLog(false)} onKeyDown={e => e.key === 'Escape' && setShowAuditLog(false)} role="button" tabIndex={-1}>
-          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setShowAuditLog(false)}>
+          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-2xl w-full mx-4 max-h-[85vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between p-6 border-b border-[var(--border-subtle)]">
               <h2 className="text-lg font-bold text-[var(--text-primary)]">Audit Log</h2>
-              <button onClick={() => setShowAuditLog(false)} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer">
-                <X className="w-5 h-5 text-[var(--text-muted)]" />
-              </button>
+              <button onClick={() => setShowAuditLog(false)} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
             </div>
             <div className="p-6 space-y-2">
               {auditLogs.length === 0 ? (
                 <p className="text-center text-[var(--text-muted)] py-8">No audit entries yet</p>
               ) : (
-                auditLogs.map(log => (
+                auditLogs.map((log) => (
                   <div key={log.id} className="p-3 bg-[var(--bg-surface)] rounded-xl text-sm">
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-[var(--text-primary)]">{log.actorEmail}</span>
@@ -598,7 +600,7 @@ export default function AdminPage() {
                     </div>
                     <p className="text-[var(--text-secondary)] mt-1">
                       {log.action} — {log.oldValue} → {log.newValue}
-                      <span className="text-[var(--text-muted)] ml-2">(user: {log.targetUserId})</span>
+                      <span className="text-[var(--text-muted)] ml-2">({log.targetUserName || log.targetUserEmail || log.targetUserId})</span>
                     </p>
                   </div>
                 ))
@@ -607,6 +609,16 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes slide-in-right {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        .animate-slide-in-right {
+          animation: slide-in-right 0.2s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
