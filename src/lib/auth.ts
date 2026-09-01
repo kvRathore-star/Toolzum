@@ -91,6 +91,7 @@ export function createAuth(env: AuthEnv) {
         credits: { type: "number", defaultValue: 10 },
         plan: { type: "string", defaultValue: "free" },
         role: { type: "string", defaultValue: "user" },
+        status: { type: "string", defaultValue: "active" },
       },
     },
     plugins: [

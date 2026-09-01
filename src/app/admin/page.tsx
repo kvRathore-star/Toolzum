@@ -22,6 +22,7 @@ interface User {
   role: string;
   plan: string;
   credits: number;
+  status: string;
   createdAt: number;
   image: string | null;
 }
@@ -267,9 +268,9 @@ export default function AdminPage() {
                   <tr className="border-b border-[var(--border-subtle)]">
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">User</th>
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Email</th>
+                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Status</th>
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Role</th>
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Plan</th>
-                    <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Credits</th>
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Joined</th>
                     <th className="text-left px-4 py-3 text-[var(--text-muted)] font-medium">Actions</th>
                   </tr>
@@ -294,6 +295,15 @@ export default function AdminPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-[var(--text-secondary)]">{user.email}</td>
+                      <td className="px-4 py-3">
+                        <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                          user.status === "banned"
+                            ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                            : "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
+                        }`}>
+                          {user.status}
+                        </span>
+                      </td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
                           user.role === "admin"
@@ -411,9 +421,75 @@ export default function AdminPage() {
                     <p className="font-bold text-[var(--text-primary)]">{userDetail.user.plan}</p>
                   </div>
                   <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
-                    <p className="text-xs text-[var(--text-muted)] uppercase">Credits</p>
-                    <p className="font-bold text-[var(--text-primary)]">{userDetail.user.credits}</p>
+                    <p className="text-xs text-[var(--text-muted)] uppercase">Status</p>
+                    <p className={`font-bold ${userDetail.user.status === "banned" ? "text-red-500" : "text-[var(--text-primary)]"}`}>
+                      {userDetail.user.status}
+                    </p>
                   </div>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  <select
+                    value={userDetail.user.plan}
+                    onChange={async e => {
+                      const res = await fetch("/api/admin/change-plan", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId: userDetail.user.id, plan: e.target.value }),
+                      });
+                      if (res.ok) {
+                        setUserDetail(prev => prev ? { ...prev, user: { ...prev.user, plan: e.target.value } } : prev);
+                        setUsers(prev => prev.map(u => u.id === userDetail.user.id ? { ...u, plan: e.target.value } : u));
+                      }
+                    }}
+                    className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer"
+                  >
+                    <option value="free">Free</option>
+                    <option value="signedin">Signed In</option>
+                    <option value="pro">Pro</option>
+                  </select>
+
+                  <button
+                    onClick={async () => {
+                      const newStatus = userDetail.user.status === "banned" ? "active" : "banned";
+                      const res = await fetch("/api/admin/ban-user", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId: userDetail.user.id, status: newStatus }),
+                      });
+                      if (res.ok) {
+                        setUserDetail(prev => prev ? { ...prev, user: { ...prev.user, status: newStatus } } : prev);
+                        setUsers(prev => prev.map(u => u.id === userDetail.user.id ? { ...u, status: newStatus } : u));
+                      }
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${
+                      userDetail.user.status === "banned"
+                        ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200"
+                        : "bg-amber-100 text-amber-700 hover:bg-amber-200"
+                    }`}
+                  >
+                    {userDetail.user.status === "banned" ? "Unban User" : "Ban User"}
+                  </button>
+
+                  <button
+                    onClick={async () => {
+                      if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return;
+                      if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return;
+                      const res = await fetch("/api/admin/delete-user", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }),
+                      });
+                      if (res.ok) {
+                        setSelectedUserId(null);
+                        setUsers(prev => prev.filter(u => u.id !== userDetail.user.id));
+                        setTotal(prev => prev - 1);
+                      }
+                    }}
+                    className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer"
+                  >
+                    Delete User (GDPR)
+                  </button>
                 </div>
 
                 {userDetail.payments.length > 0 && (

@@ -26,7 +26,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   const search = url.searchParams.get("search") || "";
   const offset = (page - 1) * limit;
 
-  let query = 'SELECT id, name, email, role, plan, credits, createdAt, image FROM "user"';
+  let query = 'SELECT id, name, email, role, plan, credits, status, createdAt, image FROM "user"';
   let countQuery = 'SELECT COUNT(*) as total FROM "user"';
   const params: unknown[] = [];
 

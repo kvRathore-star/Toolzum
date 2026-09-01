@@ -12,6 +12,7 @@ export const users = sqliteTable("user", {
   credits: integer("credits").default(10).notNull(),
   plan: text("plan").default("free").notNull(),
   role: text("role").default("user").notNull(),
+  status: text("status").default("active").notNull(),
 });
 
 export const sessions = sqliteTable("session", {

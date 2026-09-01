@@ -25,7 +25,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   if (!userId) return json({ error: "userId required" }, 400);
 
   const user = await DB.prepare(
-    'SELECT id, name, email, role, plan, credits, createdAt, image FROM "user" WHERE id = ?'
+    'SELECT id, name, email, role, plan, credits, status, createdAt, image FROM "user" WHERE id = ?'
   )
     .bind(userId)
     .first<{
