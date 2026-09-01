@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
-import { inputCls } from '../Calculators.shared';
+import { inputCls, labelCls } from '../Calculators.shared';
 
 export default function CompoundInterestCalculator() {
   const [principal, setPrincipal] = useState('10000');
@@ -62,10 +62,10 @@ export default function CompoundInterestCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
+        <div><label className={labelCls}>Principal ($)</label><input type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
+        <div><label className={labelCls}>Annual Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className={labelCls}>Compounds/Yr</label><input type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
+        <div><label className={labelCls}>Years</label><input type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );
