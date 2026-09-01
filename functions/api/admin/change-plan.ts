@@ -1,5 +1,5 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
-import { checkRateLimit, recordRateLimit } from "../../rate-limit";
+import { checkRateLimit, recordRateLimit } from "../rate-limit";
 
 interface AdminEnv {
   DB: D1Database;
