@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -12,19 +12,22 @@ export default function DebtPayoffCalculator() {
     { label: 'Student Loan', apply: () => { setBalance('35000'); setRate('5.5'); setPayment('400'); } },
     { label: 'Personal Loan', apply: () => { setBalance('15000'); setRate('10'); setPayment('350'); } },
   ];
-  const b = parseFloat(balance) || 0;
-  const r = (parseFloat(rate) || 0) / 100 / 12;
-  const p = parseFloat(payment) || 0;
-  let payoffMonths = 0;
-  if (b && p && p > b * r) {
-    let rem = b;
-    while (rem > 0 && payoffMonths < 600) {
-      const intPart = rem * r;
-      rem -= Math.min(p - intPart, rem);
-      payoffMonths++;
+  const { payoffMonths, result } = useMemo(() => {
+    const b = parseFloat(balance) || 0;
+    const r = (parseFloat(rate) || 0) / 100 / 12;
+    const p = parseFloat(payment) || 0;
+    let payoffMonths = 0;
+    if (b && p && p > b * r) {
+      let rem = b;
+      while (rem > 0 && payoffMonths < 600) {
+        const intPart = rem * r;
+        rem -= Math.min(p - intPart, rem);
+        payoffMonths++;
+      }
     }
-  }
-  const result = payoffMonths > 0 ? `${payoffMonths} months` : '';
+    const result = payoffMonths > 0 ? `${payoffMonths} months` : '';
+    return { payoffMonths, result };
+  }, [balance, rate, payment]);
   return (
     <CalculatorShell category="Finance" title="Debt Payoff Calculator" result={result} auto presets={presets} accent="orange" customResult={
       payoffMonths > 0 ? (

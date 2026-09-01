@@ -1115,8 +1115,16 @@ export function BarcodeGenerator() {
 
 // === 18. QrCodeGenerator ===
 export function QrCodeGenerator() {
-  const [text, setText] = useState('https://toolzum.com'); const [errorCorrection, setErrorCorrection] = useState('M'); const [dataUrl, setDataUrl] = useState(''); const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => { if (!text.trim()) return; const canvas = canvasRef.current; if (!canvas) return; QRCodeLib.toCanvas(canvas, text.trim(), { width: 280, margin: 2, color: { dark: '#000000', light: '#ffffff' }, errorCorrectionLevel: errorCorrection as 'L' | 'M' | 'Q' | 'H' }).then(() => { setDataUrl(canvas.toDataURL('image/png')); }).catch(() => {}); }, [text, errorCorrection]);
+  const [text, setText] = useState('https://toolzum.com'); const [errorCorrection, setErrorCorrection] = useState('M'); const [dataUrl, setDataUrl] = useState(''); const canvasRef = useRef<HTMLCanvasElement>(null); const qrTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    if (qrTimerRef.current) clearTimeout(qrTimerRef.current);
+    if (!text.trim()) { setDataUrl(''); return; }
+    qrTimerRef.current = setTimeout(() => {
+      const canvas = canvasRef.current; if (!canvas) return;
+      QRCodeLib.toCanvas(canvas, text.trim(), { width: 280, margin: 2, color: { dark: '#000000', light: '#ffffff' }, errorCorrectionLevel: errorCorrection as 'L' | 'M' | 'Q' | 'H' }).then(() => { setDataUrl(canvas.toDataURL('image/png')); }).catch(() => {});
+    }, 300);
+    return () => { if (qrTimerRef.current) clearTimeout(qrTimerRef.current); };
+  }, [text, errorCorrection]);
 
   const presets = [
     { label: 'URL', apply: () => { setText('https://toolzum.com'); } },

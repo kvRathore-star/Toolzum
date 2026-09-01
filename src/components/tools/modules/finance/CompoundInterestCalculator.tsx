@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -8,23 +8,26 @@ export default function CompoundInterestCalculator() {
   const [rate, setRate] = useState('5');
   const [n, setN] = useState('12');
   const [t, setT] = useState('10');
-  const P = parseFloat(principal);
-  const r = parseFloat(rate) / 100;
-  const nPerYear = parseFloat(n);
-  const years = parseFloat(t);
-  const A = P && r && nPerYear && years ? P * Math.pow(1 + r / nPerYear, nPerYear * years) : 0;
-  const yearData = P && r && nPerYear && years ? Array.from({ length: years }, (_, i) => {
-    const y = i + 1;
-    const val = P * Math.pow(1 + r / nPerYear, nPerYear * y);
-    return { year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 };
-  }) : [];
-  const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%` : '';
+  const { A, yearData, result, maxVal } = useMemo(() => {
+    const P = parseFloat(principal);
+    const r = parseFloat(rate) / 100;
+    const nPerYear = parseFloat(n);
+    const years = parseFloat(t);
+    const A = P && r && nPerYear && years ? P * Math.pow(1 + r / nPerYear, nPerYear * years) : 0;
+    const yearData = P && r && nPerYear && years ? Array.from({ length: years }, (_, i) => {
+      const y = i + 1;
+      const val = P * Math.pow(1 + r / nPerYear, nPerYear * y);
+      return { year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 };
+    }) : [];
+    const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%` : '';
+    const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
+    return { A, yearData, result, maxVal };
+  }, [principal, rate, n, t]);
   const presets = [
     { label: 'S&P Avg (10yr)', apply: () => { setPrincipal('10000'); setRate('10'); setN('1'); setT('10'); } },
     { label: 'Monthly Save (5yr)', apply: () => { setPrincipal('5000'); setRate('7'); setN('12'); setT('5'); } },
     { label: 'Retirement (30yr)', apply: () => { setPrincipal('50000'); setRate('8'); setN('12'); setT('30'); } },
   ];
-  const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
   return (
     <CalculatorShell category="Finance" title="Compound Interest Calculator" result={result} auto presets={presets} accent="emerald" customResult={
       yearData.length > 0 ? (
