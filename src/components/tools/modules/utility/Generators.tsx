@@ -1161,8 +1161,7 @@ export function QrCodeGenerator() {
     <CalculatorShell
       title="QR Code Generator"
       result={resultText}
-      onCalculate={() => {}}
-      calculateLabel="Generate"
+      auto={true}
       presets={presets}
       accent="violet"
       downloadData={text ? JSON.stringify({ text, errorCorrection }, null, 2) : ''}
@@ -1402,7 +1401,7 @@ export function AvatarGenerator() {
   const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
 
   return (
-    <CalculatorShell title="Avatar Generator" result={resultText} onCalculate={() => {}} calculateLabel="Generate" presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
+    <CalculatorShell title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Name</label>
         <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."

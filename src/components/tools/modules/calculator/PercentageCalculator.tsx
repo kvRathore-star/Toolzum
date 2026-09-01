@@ -53,8 +53,8 @@ export default function PercentageCalculator() {
                 placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
            </div>
-           <button
-              onClick={() => setResult2((Number(val3) / Number(val4)) * 100)}
+            <button
+              onClick={() => { const y = Number(val4); setResult2(y === 0 ? null : (Number(val3) / y) * 100); }}
               className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
             >
               Calculate

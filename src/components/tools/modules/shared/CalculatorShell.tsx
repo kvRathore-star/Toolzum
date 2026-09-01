@@ -77,11 +77,17 @@ export function CalculatorShell({
   const a = accentMap[accent] || accentMap.indigo;
 
   const prevResultRef = useRef(result);
+  const historyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     if (result && result !== prevResultRef.current) {
-      setHistory(prev => [...prev, result]);
+      if (historyTimerRef.current) clearTimeout(historyTimerRef.current);
+      const captured = result;
+      historyTimerRef.current = setTimeout(() => {
+        setHistory(prev => [...prev, captured]);
+      }, 500);
     }
     prevResultRef.current = result;
+    return () => { if (historyTimerRef.current) clearTimeout(historyTimerRef.current); };
   }, [result]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

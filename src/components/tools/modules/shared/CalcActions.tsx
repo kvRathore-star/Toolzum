@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Copy, Download, Clock, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { toast } from "react-hot-toast";
 
@@ -20,13 +20,19 @@ export function CalcActions({
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
 
+  const historyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     if (result) {
-      setHistory((prev) => {
-        if (prev[0] === result) return prev;
-        return [result, ...prev].slice(0, 20);
-      });
+      if (historyTimerRef.current) clearTimeout(historyTimerRef.current);
+      const captured = result;
+      historyTimerRef.current = setTimeout(() => {
+        setHistory((prev) => {
+          if (prev[0] === captured) return prev;
+          return [captured, ...prev].slice(0, 20);
+        });
+      }, 500);
     }
+    return () => { if (historyTimerRef.current) clearTimeout(historyTimerRef.current); };
   }, [result]);
 
   const copyResult = useCallback(() => {
