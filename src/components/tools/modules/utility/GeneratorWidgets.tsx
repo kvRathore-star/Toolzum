@@ -74,8 +74,6 @@ export function RandomDateGenerator() {
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
 
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Dates</button>
-
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
   );
@@ -108,8 +106,6 @@ export function RandomTimeGenerator() {
     <CalculatorShell title="Random Time Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="blue" downloadData={out} downloadFilename="random-times.txt">
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Times</button>
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -158,8 +154,6 @@ export function RandomIpGenerator() {
 
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate IPs</button>
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -221,8 +215,6 @@ export function RandomUserAgentGenerator() {
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
 
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate User Agents</button>
-
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
   );
@@ -263,8 +255,6 @@ export function RandomSentenceGenerator() {
       <input type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-indigo-500" />
       <div className="text-xs text-[var(--text-muted)] text-right">{wordsPerSentence} words</div>
 
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Sentences</button>
-
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
   );
@@ -301,8 +291,6 @@ export function RandomWordGenerator() {
         <input type="checkbox" checked={capitalize} onChange={e => setCapitalize(e.target.checked)} className="accent-green-500" />
         <span className="text-sm">Capitalize</span>
       </label>
-
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Words</button>
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -347,8 +335,6 @@ export function PinGenerator() {
           ))}
         </div>
 
-        <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate PINs</button>
-
         {out && <OutputBlock value={out} />}
       </div>
     </CalculatorShell>
@@ -386,8 +372,6 @@ export function LicenseKeyGenerator() {
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char, - = separator)</label>
       <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX"
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
-
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Keys</button>
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -442,8 +426,6 @@ export function ImagePlaceholderGenerator() {
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
 
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Placeholders</button>
-
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
   );
@@ -484,8 +466,6 @@ export function LogoPlaceholderGenerator() {
 
       <label className={labelClass}>Count</label>
       <CountSlider value={count} onChange={setCount} />
-
-      <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate Logos</button>
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -543,8 +523,6 @@ export function OpenGraphGenerator() {
         <input type="url" value={img} onChange={e => setImg(e.target.value)} placeholder="https://example.com/image.jpg"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
-        <button onClick={gen} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate OG Tags</button>
-
         {out && <OutputBlock value={out} />}
       </div>
     </CalculatorShell>
@@ -594,7 +572,7 @@ export function OauthPkceGenerator() {
   const resultText = out ? `PKCE pair generated (${verifier.length} char verifier)` : 'Generate RFC 7636 PKCE pair';
 
   return (
-    <CalculatorShell title="OAuth PKCE Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="violet" downloadData={out} downloadFilename="pkce.txt">
+    <CalculatorShell title="OAuth PKCE Generator" result={resultText} auto={true} presets={presets} accent="violet" downloadData={out} downloadFilename="pkce.txt">
       <div className="space-y-4">
         <p className="text-sm text-[var(--text-secondary)]">Generates RFC 7636 OAuth PKCE code_verifier + code_challenge pair.</p>
         <ul className="text-xs text-[var(--text-muted)] space-y-1 list-disc pl-4">

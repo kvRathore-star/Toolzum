@@ -648,7 +648,6 @@ export function HashFileGenerator() {
         {algoPills.map(a => <button key={a} onClick={() => setAlgo(a)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${algo === a ? 'bg-cyan-500 text-white border-cyan-500' : 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 hover:bg-cyan-500/20 border-cyan-500/20'}`}>{a}</button>)}
       </div>
       <Input label="Text content to hash" rows={4} value={text} onChange={v => { setText(v); setHash(''); }} placeholder="Paste text content..." />
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Hash</button>
       {hash && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
           <div className="flex justify-between items-center mb-1">
@@ -860,8 +859,6 @@ export function JwtInspector() {
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JWT Token</label>
         <textarea value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
-
-        <button onClick={() => inspect()} className="px-5 py-2.5 bg-violet-500 hover:bg-violet-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Inspect</button>
 
         {isValid !== null && (
           <div className="space-y-3">
@@ -1291,8 +1288,6 @@ export function JsonValidator() {
             className="flex-1 min-w-[300px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-lime-500/50 resize-y" />
         </div>
 
-        <button onClick={() => validate()} className="px-5 py-2.5 bg-lime-500 hover:bg-lime-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
-
         {isValid !== null && (
           <div className="space-y-3">
             <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
@@ -1390,8 +1385,6 @@ export function YamlValidator() {
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">YAML String</label>
         <textarea value={input} onChange={e => { setInput(e.target.value); setResult(''); setIssues([]); setIsValid(null); setParsed(null); }} rows={8} placeholder="key: value"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-yellow-500/50 resize-y" />
-
-        <button onClick={() => validate()} className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-sm font-medium transition-colors self-start">Validate</button>
 
         {isValid !== null && (
           <div className="space-y-3">

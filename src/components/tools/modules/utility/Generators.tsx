@@ -118,9 +118,7 @@ export function RandomPasswordGenerator() {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Password</button>
-          </div>
+
         </div>
 
         <div className="space-y-4">
@@ -220,8 +218,6 @@ export function RandomNumberGenerator() {
           </label>
         </div>
 
-        <button onClick={generate} className="px-5 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
-
         {result.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[160px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
@@ -299,8 +295,6 @@ export function RandomStringGenerator() {
           ))}
         </div>
 
-        <button onClick={generate} className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
-
         {result && (
           <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-500/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
@@ -372,8 +366,6 @@ export function RandomColorGenerator() {
           </div>
         </div>
 
-        <button onClick={generate} className="px-5 py-3 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Colors</button>
-
         {colors.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
             <div className="flex flex-wrap gap-3 justify-center">
@@ -424,8 +416,6 @@ export function RandomTeamGenerator() {
       <div className="space-y-4">
         <Input label="Names (one per line)" value={input} onChange={v => setInput(v)} rows={6} />
         <Input label="Number of Teams" type="number" value={String(numTeams)} onChange={v => setNumTeams(Number(v))} />
-        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><Shuffle className="w-4 h-4 inline mr-1" />Generate Teams</button>
-
         {teams.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3">
@@ -475,8 +465,6 @@ export function RandomPickerGenerator() {
         <Input label="Items (one per line)" value={input} onChange={v => setInput(v)} rows={5} />
         <Input label="Pick Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-violet-500" />Allow repeats</label>
-        <button onClick={pick} className="px-5 py-3 bg-violet-600 hover:bg-violet-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><Shuffle className="w-4 h-4 inline mr-1" />Pick</button>
-
         {result.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[160px]">
             <div className="text-center">
@@ -553,8 +541,7 @@ export function RandomDecisionMaker() {
     <CalculatorShell
       title="Random Decision Maker"
       result={resultText}
-      onCalculate={decide}
-      calculateLabel="Generate"
+      auto={true}
       presets={presets}
       accent="amber"
       downloadData={JSON.stringify({ question, options: options.split('\n').map(s => s.trim()).filter(Boolean), decision: choice, history }, null, 2)}
@@ -623,8 +610,6 @@ export function RandomUsernameGenerator() {
         </div>
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-indigo-500" />Append random number</label>
-        <button onClick={generate} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Usernames</button>
-
         {results.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
@@ -679,8 +664,6 @@ export function RandomUUIDGenerator() {
           </div>
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
-        <button onClick={generate} className="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate UUIDs</button>
-
         {results.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
@@ -795,8 +778,6 @@ export function LoremIpsumGenerator() {
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         </div>
         {type === 'paragraphs' && <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={startLorem} onChange={e => setStartLorem(e.target.checked)} className="accent-blue-500" />Start with "Lorem ipsum..."</label>}
-        <button onClick={generate} className="px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate</button>
-
         {result ? (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
@@ -845,8 +826,6 @@ export function DummyTextGenerator() {
           <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-sky-500" />
           <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
-        <button onClick={generate} className="px-5 py-3 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Text</button>
-
         {result ? (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
@@ -907,8 +886,6 @@ export function FakeDataGenerator() {
             <button key={f} onClick={() => toggleField(f)} className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (fields.includes(f) ? 'bg-emerald-700/10 border-emerald-400 text-emerald-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>{f.charAt(0).toUpperCase() + f.slice(1)}</button>
           ))}
         </div>
-        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Data</button>
-
         {data.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <div className="space-y-1 max-h-[300px] overflow-y-auto">
@@ -958,8 +935,6 @@ export function FakeIdentityGenerator() {
       downloadFilename="identity.json"
     >
       <div className="space-y-4">
-        <button onClick={generate} className="px-5 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto"><RefreshCw className="w-4 h-4 inline mr-1" />Generate Identity</button>
-
         {identity ? (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3">
@@ -1015,8 +990,6 @@ export function FakeCreditCardGenerator() {
     >
       <div className="space-y-4">
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        <button onClick={generate} className="px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Cards</button>
-
         {cards.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3 max-h-[350px] overflow-y-auto">
@@ -1074,8 +1047,6 @@ export function SequenceGenerator() {
           <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
         </div>
         <div className="grid grid-cols-3 gap-3"><Input label="Start" type="number" value={start} onChange={v => setStart(v)} /><Input label="Diff/Ratio" type="number" value={diff} onChange={v => setDiff(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
-        <button onClick={generate} className="px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Sequence</button>
-
         {result.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[120px]">
             <p className="text-sm font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
@@ -1231,8 +1202,6 @@ export function CouponCodeGenerator() {
         </div>
         <Input label="Pattern (X = random char)" value={pattern} onChange={v => setPattern(v)} />
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Coupons</button>
-
         {codes.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[250px] overflow-y-auto">
@@ -1294,8 +1263,6 @@ export function SerialNumberGenerator() {
         </div>
         <Input label="Format (X=hex, 9=digit, A=alphanum)" value={format} onChange={v => setFormat(v)} />
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        <button onClick={generate} className="px-5 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate Serials</button>
-
         {serials.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
             <div className="space-y-1 max-h-[250px] overflow-y-auto">
@@ -1359,8 +1326,6 @@ export function NicknameGenerator() {
           <input type="number" min={1} max={100} value={String(count)} onChange={e => setCount(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50" />
         </div>
-
-        <button onClick={generate} className="px-5 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate Nicknames</button>
 
         {results.length > 0 && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[160px]">
