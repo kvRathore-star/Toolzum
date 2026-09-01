@@ -95,7 +95,7 @@ export default function AdminPage() {
       setUserDetail(null);
       try {
         const res = await fetch(`/api/admin/user-detail?userId=${selectedUserId}`);
-        if (!cancelled && res.ok) setUserDetail(await res.json());
+        if (!cancelled && res.ok) setUserDetail(await res.json() as UserDetail);
       } finally { if (!cancelled) setDetailLoading(false); }
     }
     load();
@@ -506,7 +506,7 @@ export default function AdminPage() {
                   </button>
                   <button onClick={async () => { if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return; if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return; const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) }); if (res.ok) { setSelectedUserId(null); setUsers((prev) => prev.filter((u) => u.id !== userDetail.user.id)); setTotal((prev) => prev - 1); } }}
                     className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer">Delete User (GDPR)</button>
-                  <button onClick={async () => { const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) }); if (res.ok) { const data = await res.json(); setResetResult({ tempPassword: data.tempPassword, email: data.email }); } }}
+                  <button onClick={async () => { const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) }); if (res.ok) { const data = await res.json() as { tempPassword: string; email: string }; setResetResult({ tempPassword: data.tempPassword, email: data.email }); } }}
                     className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] cursor-pointer">Reset Password</button>
                 </div>
 
