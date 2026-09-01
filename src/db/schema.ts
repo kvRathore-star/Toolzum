@@ -11,6 +11,7 @@ export const users = sqliteTable("user", {
   // Custom fields for SaaS
   credits: integer("credits").default(10).notNull(),
   plan: text("plan").default("free").notNull(),
+  role: text("role").default("user").notNull(),
 });
 
 export const sessions = sqliteTable("session", {
