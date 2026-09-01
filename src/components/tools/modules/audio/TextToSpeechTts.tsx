@@ -76,6 +76,7 @@ export default function TextToSpeechTts() {
 
     utterance.onerror = (e) => {
       console.error(e);
+      toast.error('Speech synthesis failed. Your browser may not support this voice.');
       setIsPlaying(false);
       setIsPaused(false);
     };

@@ -24,6 +24,7 @@ export default function RotateImage() {
       setFlipH(false);
       setFlipV(false);
     };
+    reader.onerror = () => toast.error('Failed to read file. Please try another image.');
     reader.readAsDataURL(file);
   };
 
@@ -36,28 +37,34 @@ export default function RotateImage() {
     const img = new Image();
     img.src = image;
     img.onload = () => {
-      const canvas = canvasRef.current!;
-      const ctx = canvas.getContext('2d')!;
-      
-      const rad = (rotation * Math.PI) / 180;
-      const w = img.width;
-      const h = img.height;
-      const newWidth = Math.abs(w * Math.cos(rad)) + Math.abs(h * Math.sin(rad));
-      const newHeight = Math.abs(w * Math.sin(rad)) + Math.abs(h * Math.cos(rad));
-      
-      canvas.width = newWidth;
-      canvas.height = newHeight;
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.translate(canvas.width / 2, canvas.height / 2);
-      ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
-      ctx.rotate(rad);
-      ctx.drawImage(img, -w / 2, -h / 2);
-      
-      const outUrl = canvas.toDataURL('image/png');
-      downloadOrShare(outUrl, 'rotated.png');
-      toast.success('Downloaded rotated image!');
+      try {
+        const canvas = canvasRef.current!;
+        const ctx = canvas.getContext('2d')!;
+        
+        const rad = (rotation * Math.PI) / 180;
+        const w = img.width;
+        const h = img.height;
+        const newWidth = Math.abs(w * Math.cos(rad)) + Math.abs(h * Math.sin(rad));
+        const newHeight = Math.abs(w * Math.sin(rad)) + Math.abs(h * Math.cos(rad));
+        
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.scale(flipH ? -1 : 1, flipV ? -1 : 1);
+        ctx.rotate(rad);
+        ctx.drawImage(img, -w / 2, -h / 2);
+        
+        const outUrl = canvas.toDataURL('image/png');
+        downloadOrShare(outUrl, 'rotated.png');
+        toast.success('Downloaded rotated image!');
+      } catch (e) {
+        console.error('RotateImage canvas error:', e);
+        toast.error('Failed to process image. The file may be too large or corrupted.');
+      }
     };
+    img.onerror = () => toast.error('Failed to load image. The file may be corrupted.');
   };
 
   const handleKeyDown = useEnterToSubmit(download);

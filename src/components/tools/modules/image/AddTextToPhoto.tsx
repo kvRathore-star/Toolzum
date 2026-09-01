@@ -88,13 +88,18 @@ export default function SocialMediaImageCreator() {
       return;
     }
     if (canvasRef.current) {
-      const a = document.createElement('a');
-      a.href = canvasRef.current.toDataURL('image/png');
-      a.download = `social-${PRESETS[preset].label.toLowerCase().replace(/\s+/g, '-')}.png`;
-      a.click();
-      trackUsage(usage + 1);
-      if (usage + 1 >= DAILY_LIMIT) {
-        toast(`Upgrade to Pro for unlimited image exports.`, { icon: '👑' });
+      try {
+        const a = document.createElement('a');
+        a.href = canvasRef.current.toDataURL('image/png');
+        a.download = `social-${PRESETS[preset].label.toLowerCase().replace(/\s+/g, '-')}.png`;
+        a.click();
+        trackUsage(usage + 1);
+        if (usage + 1 >= DAILY_LIMIT) {
+          toast(`Upgrade to Pro for unlimited image exports.`, { icon: '👑' });
+        }
+      } catch (e) {
+        console.error('AddTextToPhoto canvas error:', e);
+        toast.error('Failed to export image. The canvas may be too large or corrupted.');
       }
     }
   };

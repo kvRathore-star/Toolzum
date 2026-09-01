@@ -34,8 +34,10 @@ export default function ImageResizer() {
          setHeight(img.height.toString());
          setImage(img.src);
        };
+       img.onerror = () => toast.error('Failed to load image. The file may be corrupted.');
        img.src = event.target?.result as string;
     };
+    reader.onerror = () => toast.error('Failed to read file. Please try another image.');
     reader.readAsDataURL(file);
   };
 
@@ -44,15 +46,21 @@ export default function ImageResizer() {
     const img = new Image();
     img.src = image;
     img.onload = () => {
-      const canvas = canvasRef.current!;
-      canvas.width = parseInt(width);
-      canvas.height = parseInt(height);
-      const ctx = canvas.getContext('2d')!;
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      
-      downloadOrShare(canvas.toDataURL('image/png'), 'resized.png');
-      toast.success('Downloaded!');
+      try {
+        const canvas = canvasRef.current!;
+        canvas.width = parseInt(width);
+        canvas.height = parseInt(height);
+        const ctx = canvas.getContext('2d')!;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        downloadOrShare(canvas.toDataURL('image/png'), 'resized.png');
+        toast.success('Downloaded!');
+      } catch (e) {
+        console.error('ImageResizer canvas error:', e);
+        toast.error('Failed to resize image. The file may be too large or corrupted.');
+      }
     };
+    img.onerror = () => toast.error('Failed to load image. The file may be corrupted.');
   };
 
   const handleKeyDown = useEnterToSubmit(download);
