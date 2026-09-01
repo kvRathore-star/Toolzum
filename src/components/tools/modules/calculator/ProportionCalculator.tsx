@@ -15,11 +15,16 @@ export default function ProportionCalculator() {
   const na = parseFloat(a) || 0;
   const nb = parseFloat(b) || 0;
   const nc = parseFloat(c) || 0;
-  const d = na ? (nb * nc) / na : 0;
+  const hasInput = a !== '' && b !== '' && c !== '' && !isNaN(na) && !isNaN(nb) && !isNaN(nc) && na > 0;
+  const d = hasInput ? (nb * nc) / na : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter values to calculate</div>
+    ) : (
     <div className="text-center font-mono text-lg">
       <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-700 dark:text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Proportion Calculator" result="" auto presets={presets} accent="indigo" customResult={customResult}>

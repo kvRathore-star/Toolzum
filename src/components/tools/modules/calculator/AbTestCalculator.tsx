@@ -17,10 +17,14 @@ export default function AbTestCalculator() {
   const cc = parseFloat(controlConversions) || 0;
   const vv = parseFloat(variantVisitors) || 1;
   const vc = parseFloat(variantConversions) || 0;
-  const cr1 = cc / cv;
-  const cr2 = vc / vv;
-  const pct = cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0;
+  const hasInput = controlVisitors !== '' && controlConversions !== '' && variantVisitors !== '' && variantConversions !== '' && cv > 0 && vv > 0;
+  const cr1 = hasInput ? cc / cv : 0;
+  const cr2 = hasInput ? vc / vv : 0;
+  const pct = hasInput ? (cr1 > 0 ? (cr2 - cr1) / cr1 * 100 : 0) : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter values to calculate</div>
+    ) : (
     <div className="space-y-2">
       <div className="flex gap-3">
         <div className="flex-1 text-center">
@@ -38,6 +42,7 @@ export default function AbTestCalculator() {
         </span>
       </div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="A/B Test Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>

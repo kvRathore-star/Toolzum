@@ -15,12 +15,17 @@ export default function FinalGradeCalculator() {
   let total = 0;
   let weightSum = 0;
   for (let i = 0; i < g.length; i++) { total += g[i] * w[i] / 100; weightSum += w[i]; }
-  const final = weightSum > 0 ? total / (weightSum / 100) : 0;
+  const hasInput = grades !== '' && weights !== '' && weightSum > 0;
+  const final = hasInput ? total / (weightSum / 100) : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter grades and weights</div>
+    ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Final Grade</div>
       <div className={`text-lg font-bold ${final >= 90 ? 'text-emerald-700 dark:text-emerald-400' : final >= 80 ? 'text-blue-700 dark:text-blue-400' : final >= 70 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{final.toFixed(1)}%</div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Final Grade Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>

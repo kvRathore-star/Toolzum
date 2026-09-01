@@ -13,21 +13,26 @@ export default function RectangleAreaCalculator() {
   ];
   const l = parseFloat(length) || 0;
   const w = parseFloat(width) || 0;
+  const hasInput = length !== '' && width !== '' && !isNaN(l) && !isNaN(w) && l > 0 && w > 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter dimensions</div>
+    ) : (
     <div className="grid grid-cols-3 gap-2">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{l * w}</div>
+        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{hasInput ? l * w : 0}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>
-        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{2 * (l + w)}</div>
+        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{hasInput ? 2 * (l + w) : 0}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Diagonal</div>
-        <div className="text-lg font-bold text-[var(--text-primary)]">{Math.sqrt(l * l + w * w).toFixed(1)}</div>
+        <div className="text-lg font-bold text-[var(--text-primary)]">{hasInput ? Math.sqrt(l * l + w * w).toFixed(1) : '0'}</div>
       </div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Rectangle Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>

@@ -13,10 +13,14 @@ export default function AspectRatioCalculator() {
   ];
   const w = parseInt(width) || 0;
   const h = parseInt(height) || 1;
-  const g = gcd(w, h);
+  const hasInput = width !== '' && height !== '' && !isNaN(w) && !isNaN(h) && w > 0 && h > 0;
+  const g = hasInput ? gcd(w, h) : 1;
   const commonRatios = ['16:9', '4:3', '21:9', '3:2', '1:1', '5:4'];
   const match = commonRatios.find(r => { const [rw, rh] = r.split(':').map(Number); return w / h === rw / rh; });
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter dimensions</div>
+    ) : (
     <div>
       <div className="text-center">
         <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{w / g}:{h / g}</div>
@@ -26,6 +30,7 @@ export default function AspectRatioCalculator() {
         <div className="text-xs text-[var(--text-tertiary)]">{w} × {h}</div>
       </div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Aspect Ratio Calculator" result="" auto presets={presets} accent="emerald" customResult={customResult}>

@@ -13,11 +13,16 @@ export default function RatioCalculator() {
   ];
   const n1 = parseInt(num1) || 0;
   const n2 = parseInt(num2) || 1;
-  const g = gcd(n1, n2);
+  const hasInput = num1 !== '' && num2 !== '' && !isNaN(n1) && !isNaN(n2) && n1 > 0 && n2 > 0;
+  const g = hasInput ? gcd(n1, n2) : 1;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter numbers</div>
+    ) : (
     <div className="text-center">
       <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{n1 / g} : {n2 / g}</div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Ratio Calculator" result="" auto presets={presets} accent="blue" customResult={customResult}>

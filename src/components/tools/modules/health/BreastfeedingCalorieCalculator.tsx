@@ -8,11 +8,12 @@ export default function BreastfeedingCalorieCalculator() {
   const [feedings, setFeedings] = useState('8');
 
   const a = parseFloat(age) || 0;
-  const f = parseFloat(feedings) || 8;
-  const milkPerFeedMl = a <= 1 ? 60 : a <= 2 ? 90 : a <= 4 ? 120 : a <= 6 ? 150 : a <= 12 ? 180 : 210;
+  const f = parseFloat(feedings) || 0;
+  const hasInput = age !== '' && feedings !== '' && !isNaN(a) && !isNaN(f) && a > 0 && f > 0;
+  const milkPerFeedMl = !hasInput ? 0 : a <= 1 ? 60 : a <= 2 ? 90 : a <= 4 ? 120 : a <= 6 ? 150 : a <= 12 ? 180 : 210;
   const dailyMl = milkPerFeedMl * f;
   const caloriesBurned = Math.round(dailyMl * 0.67);
-  const result = `Est. milk per feed: ${milkPerFeedMl} mL\nDaily milk output: ${dailyMl} mL\nCalories burned: ~${caloriesBurned} kcal/day`;
+  const result = hasInput ? `Est. milk per feed: ${milkPerFeedMl} mL\nDaily milk output: ${dailyMl} mL\nCalories burned: ~${caloriesBurned} kcal/day` : 'Enter baby age and feedings per day';
 
   return (
     <CalculatorShell category="Health" title="Breastfeeding Calories" accent="fuchsia" result={result} auto>

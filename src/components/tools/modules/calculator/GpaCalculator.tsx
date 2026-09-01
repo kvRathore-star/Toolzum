@@ -14,12 +14,17 @@ export default function GpaCalculator() {
   const c = credits.split(',').map(Number);
   let tp = 0, tc = 0;
   for (let i = 0; i < g.length; i++) { tp += (gradePointsMap[g[i]] || 0) * c[i]; tc += c[i]; }
-  const gpa = tc > 0 ? tp / tc : 0;
+  const hasInput = grades !== '' && credits !== '' && tc > 0;
+  const gpa = hasInput ? tp / tc : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter grades and credits</div>
+    ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">GPA</div>
       <div className={`text-lg font-bold ${gpa >= 3.5 ? 'text-emerald-700 dark:text-emerald-400' : gpa >= 3.0 ? 'text-blue-700 dark:text-blue-400' : gpa >= 2.0 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{gpa.toFixed(2)}</div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="GPA Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>

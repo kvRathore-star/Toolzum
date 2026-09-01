@@ -11,8 +11,12 @@ export default function CircleCalculator() {
     { label: 'r=10', apply: () => { setRadius('10'); } },
   ];
   const r = parseFloat(radius) || 0;
-  const area = Math.PI * r * r;
+  const hasInput = radius !== '' && !isNaN(r) && r > 0;
+  const area = hasInput ? Math.PI * r * r : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter radius</div>
+    ) : (
     <div className="grid grid-cols-2 gap-2">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Area</div>
@@ -23,6 +27,7 @@ export default function CircleCalculator() {
         <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{(2 * Math.PI * r).toFixed(1)}</div>
       </div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Circle Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>

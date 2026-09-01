@@ -13,8 +13,12 @@ export default function ProbabilityCalculator() {
   ];
   const f = parseFloat(favorable) || 0;
   const t = parseFloat(total) || 1;
-  const pct = (f / t) * 100;
+  const hasInput = favorable !== '' && total !== '' && !isNaN(f) && !isNaN(t) && t > 0 && f >= 0;
+  const pct = hasInput ? (f / t) * 100 : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter values to calculate</div>
+    ) : (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <span className="text-sm text-[var(--text-secondary)]">Probability</span>
@@ -24,6 +28,7 @@ export default function ProbabilityCalculator() {
         <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500" style={{ width: `${Math.min(pct, 100)}%` }} />
       </div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Probability Calculator" result="" auto presets={presets} accent="green" customResult={customResult}>

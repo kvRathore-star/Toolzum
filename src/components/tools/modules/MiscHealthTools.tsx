@@ -203,7 +203,8 @@ export function SleepRequirementCalculator() {
   const clr = ac('SleepRequirementCalculator');
   const [age, setAge] = useState('30');
   const a = Number(age);
-  const rec = a < 1 ? '12-16 hours' : a < 2 ? '11-14 hours' : a < 5 ? '10-13 hours' : a < 13 ? '9-12 hours' : a < 18 ? '8-10 hours' : a < 65 ? '7-9 hours' : '7-8 hours';
+  const hasInput = age !== '' && !isNaN(a) && a >= 0;
+  const rec = !hasInput ? '' : a < 1 ? '12-16 hours' : a < 2 ? '11-14 hours' : a < 5 ? '10-13 hours' : a < 13 ? '9-12 hours' : a < 18 ? '8-10 hours' : a < 65 ? '7-9 hours' : '7-8 hours';
 
   const presets = [
     { label: 'Infant (0-1)', apply: () => { setAge('0'); } },
@@ -213,7 +214,7 @@ export function SleepRequirementCalculator() {
     { label: 'Senior (70)', apply: () => { setAge('70'); } },
   ];
 
-  const resultText = `Recommended: ${rec}`;
+  const resultText = hasInput ? `Recommended: ${rec}` : 'Enter age';
 
   return (
     <CalculatorShell category="Health"

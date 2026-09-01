@@ -12,13 +12,14 @@ export default function RunwayCalculator() {
     { label: 'Bootstrapped', apply: () => { setCash('200000'); setBurnRate('15000'); } },
   ];
   const c = parseFloat(cash) || 0;
-  const b = parseFloat(burnRate) || 1;
-  const months = c / b;
+  const b = parseFloat(burnRate) || 0;
+  const hasInput = cash !== '' && burnRate !== '' && c > 0 && b > 0;
+  const months = hasInput ? c / b : 0;
   const maxMonths = 60;
   const runwayPct = Math.min((months / maxMonths) * 100, 100);
   return (
-    <CalculatorShell category="Finance" title="Runway Calculator" result={`${months.toFixed(1)} months`} auto presets={presets} accent="emerald" customResult={
-      true ? (
+    <CalculatorShell category="Finance" title="Runway Calculator" result={hasInput ? `${months.toFixed(1)} months` : 'Enter cash and burn rate'} auto presets={presets} accent="emerald" customResult={
+      hasInput ? (
         <div className="space-y-2">
           <div className="text-center">
             <div className="text-xs text-[var(--text-tertiary)]">Runway</div>

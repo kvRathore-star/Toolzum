@@ -13,12 +13,17 @@ export default function PythagoreanTheoremCalculator() {
   ];
   const na = parseFloat(a) || 0;
   const nb = parseFloat(b) || 0;
-  const c = Math.sqrt(na * na + nb * nb);
+  const hasInput = a !== '' && b !== '' && !isNaN(na) && !isNaN(nb) && na > 0 && nb > 0;
+  const c = hasInput ? Math.sqrt(na * na + nb * nb) : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter side lengths</div>
+    ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">c = √(a² + b²)</div>
       <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{c.toFixed(2)}</div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Pythagorean Theorem" result="" auto presets={presets} accent="teal" customResult={customResult}>

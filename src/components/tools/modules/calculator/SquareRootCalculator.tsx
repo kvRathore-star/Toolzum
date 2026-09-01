@@ -11,12 +11,17 @@ export default function SquareRootCalculator() {
     { label: '\u221a10000', apply: () => { setNumber('10000'); } },
   ];
   const n = parseFloat(number) || 0;
-  const sqrt = Math.sqrt(Math.max(0, n));
+  const hasInput = number !== '' && !isNaN(n) && n > 0;
+  const sqrt = hasInput ? Math.sqrt(Math.max(0, n)) : 0;
   const customResult = (
+    !hasInput ? (
+      <div className="text-sm text-[var(--text-muted)]">Enter a number</div>
+    ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">√{n}</div>
       <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{sqrt.toFixed(4)}</div>
     </div>
+    )
   );
   return (
     <CalculatorShell category="Calculator" title="Square Root Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>
