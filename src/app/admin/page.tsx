@@ -206,12 +206,8 @@ export default function AdminPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] flex">
-      <aside className="w-56 border-r border-[var(--border-subtle)] p-4 flex flex-col gap-2 shrink-0">
-        <Link href="/" className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Toolzum
-        </Link>
-        <div className="mt-4 space-y-1">
+      <aside className="hidden md:flex w-56 border-r border-[var(--border-subtle)] p-4 flex-col gap-2 shrink-0">
+        <div className="space-y-1">
           <div className="px-3 py-1.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">Admin</div>
           <button onClick={() => document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth' })} className="w-full text-left px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors cursor-pointer">
             <div className="flex items-center gap-2"><TrendingUp className="w-4 h-4" /> Stats</div>
@@ -223,8 +219,18 @@ export default function AdminPage() {
             <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> Audit Log</div>
           </button>
         </div>
+        <Link href="/" className="mt-auto flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Toolzum
+        </Link>
       </aside>
       <main className="flex-1 min-w-0">
+        <div className="md:hidden flex items-center gap-2 px-4 py-3 border-b border-[var(--border-subtle)]">
+          <Link href="/" className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Toolzum
+          </Link>
+        </div>
         <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
           <div className="flex items-center gap-3">
             <Shield className="w-6 h-6 text-[var(--accent)]" />
