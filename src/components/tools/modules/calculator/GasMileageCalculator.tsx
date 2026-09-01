@@ -15,7 +15,10 @@ export default function GasMileageCalculator() {
   const d = parseFloat(distance) || 0;
   const g = parseFloat(gallons) || 0;
   const p = parseFloat(pricePerGallon) || 0;
-  const customResult = unit === 'us' ? (
+  const hasInput = d > 0 && g > 0;
+  const customResult = !hasInput ? (
+    <div className="text-sm text-[var(--text-muted)]">Enter distance and gallons used</div>
+  ) : unit === 'us' ? (
     <div className="font-mono text-sm whitespace-pre">{`Fuel economy: ${(d / g).toFixed(1)} mpg\nFuel used: ${g.toFixed(1)} gal\nFuel cost: $${(g * p).toFixed(2)}\nCost per mile: $${((g * p) / d).toFixed(3)}`}</div>
   ) : (
     <div className="font-mono text-sm whitespace-pre">{(() => { const liters = g * 3.78541; const km = d * 1.60934; const cost = g * p; return `Fuel economy: ${((liters / km) * 100).toFixed(1)} L/100km\nFuel used: ${liters.toFixed(1)} L\nFuel cost: $${cost.toFixed(2)}\nCost per km: $${(cost / km).toFixed(3)}`; })()}</div>

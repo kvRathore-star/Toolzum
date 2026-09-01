@@ -55,7 +55,8 @@ export function BodyFatCalculator() {
   const [age, setAge] = useState('30');
   const [gender, setGender] = useState('male');
   const b = Number(bmi), a = Number(age);
-  const bf = gender === 'male' ? 1.2 * b + 0.23 * a - 16.2 : 1.2 * b + 0.23 * a - 5.4;
+  const hasInput = bmi !== '' && age !== '' && !isNaN(b) && !isNaN(a) && b > 0 && a > 0;
+  const bf = !hasInput ? 0 : gender === 'male' ? 1.2 * b + 0.23 * a - 16.2 : 1.2 * b + 0.23 * a - 5.4;
 
   const presets = [
     { label: 'Male, BMI 24, Age 30', apply: () => { setGender('male'); setBmi('24'); setAge('30'); } },
@@ -64,7 +65,7 @@ export function BodyFatCalculator() {
     { label: 'Clear', apply: () => { setBmi('24'); setAge('30'); setGender('male'); } },
   ];
 
-  const resultText = `Body Fat: ${bf.toFixed(1)}%`;
+  const resultText = hasInput ? `Body Fat: ${bf.toFixed(1)}%` : 'Enter BMI and age';
 
   return (
     <CalculatorShell category="Health"
@@ -97,7 +98,8 @@ export function CalorieIntakeCalculator() {
   const [gender, setGender] = useState('male');
   const [activity, setActivity] = useState('1.55');
   const w = Number(weight), h = Number(height), a = Number(age), act = Number(activity);
-  const bmr = gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161;
+  const hasInput = weight !== '' && height !== '' && age !== '' && !isNaN(w) && !isNaN(h) && !isNaN(a) && w > 0 && h > 0 && a > 0;
+  const bmr = hasInput ? (gender === 'male' ? 10 * w + 6.25 * h - 5 * a + 5 : 10 * w + 6.25 * h - 5 * a - 161) : 0;
 
   const presets = [
     { label: 'Male, 70kg, 170cm, 30, Moderate', apply: () => { setGender('male'); setWeight('70'); setHeight('170'); setAge('30'); setActivity('1.55'); } },
@@ -106,7 +108,7 @@ export function CalorieIntakeCalculator() {
     { label: 'Clear', apply: () => { setWeight('70'); setHeight('170'); setAge('30'); setGender('male'); setActivity('1.55'); } },
   ];
 
-  const resultText = `BMR: ${bmr.toFixed(0)} kcal/day | Maintenance: ${(bmr * act).toFixed(0)} kcal/day`;
+  const resultText = hasInput ? `BMR: ${bmr.toFixed(0)} kcal/day | Maintenance: ${(bmr * act).toFixed(0)} kcal/day` : 'Enter weight, height, and age';
 
   return (
     <CalculatorShell category="Health"
@@ -268,8 +270,9 @@ export function IdealWeightCalc() {
   const [height, setHeight] = useState('170');
   const [gender, setGender] = useState('male');
   const h = Number(height);
-  const devine = gender === 'male' ? 50 + 2.3 * ((h - 152.4) / 2.54) : 45.5 + 2.3 * ((h - 152.4) / 2.54);
-  const robinson = gender === 'male' ? 52 + 1.9 * ((h - 152.4) / 2.54) : 49 + 1.7 * ((h - 152.4) / 2.54);
+  const hasInput = height !== '' && !isNaN(h) && h > 100;
+  const devine = hasInput ? (gender === 'male' ? 50 + 2.3 * ((h - 152.4) / 2.54) : 45.5 + 2.3 * ((h - 152.4) / 2.54)) : 0;
+  const robinson = hasInput ? (gender === 'male' ? 52 + 1.9 * ((h - 152.4) / 2.54) : 49 + 1.7 * ((h - 152.4) / 2.54)) : 0;
 
   const presets = [
     { label: 'Male 170cm', apply: () => { setGender('male'); setHeight('170'); } },
@@ -278,7 +281,7 @@ export function IdealWeightCalc() {
     { label: 'Clear', apply: () => { setHeight('170'); setGender('male'); } },
   ];
 
-  const resultText = `Devine: ${devine.toFixed(1)} kg | Robinson: ${robinson.toFixed(1)} kg`;
+  const resultText = hasInput ? `Devine: ${devine.toFixed(1)} kg | Robinson: ${robinson.toFixed(1)} kg` : 'Enter height (cm)';
 
   return (
     <CalculatorShell category="Health"
@@ -302,7 +305,8 @@ export function PaceCalculator() {
   const [dist, setDist] = useState('10');
   const [time, setTime] = useState('50');
   const d = Number(dist), t = Number(time);
-  const paceMin = d ? t / d : 0;
+  const hasInput = dist !== '' && time !== '' && !isNaN(d) && !isNaN(t) && d > 0 && t > 0;
+  const paceMin = hasInput ? t / d : 0;
   const paceMinWhole = Math.floor(paceMin);
   const paceSec = Math.round((paceMin - paceMinWhole) * 60);
 
@@ -313,7 +317,7 @@ export function PaceCalculator() {
     { label: 'Clear', apply: () => { setDist('10'); setTime('50'); } },
   ];
 
-  const resultText = d ? `${paceMinWhole}:${paceSec.toString().padStart(2, '0')} /km (${(d / t * 60).toFixed(2)} km/h)` : 'Enter distance and time';
+  const resultText = hasInput ? `${paceMinWhole}:${paceSec.toString().padStart(2, '0')} /km (${(d / t * 60).toFixed(2)} km/h)` : 'Enter distance and time';
 
   return (
     <CalculatorShell category="Health"
@@ -412,8 +416,9 @@ export function BloodAlcoholCalculator() {
   const [drinks, setDrinks] = useState('3');
   const [hours, setHours] = useState('2');
   const w = Number(weight), d = Number(drinks), h = Number(hours);
+  const hasInput = weight !== '' && drinks !== '' && !isNaN(w) && !isNaN(d) && w > 0 && d > 0;
   const r = gender === 'male' ? 0.68 : 0.55;
-  const bac = (d * 14 / (w * 1000 * r)) * 100 - (h * 0.015);
+  const bac = hasInput ? (d * 14 / (w * 1000 * r)) * 100 - (h * 0.015) : 0;
   const finalBac = Math.max(0, bac);
 
   const presets = [
@@ -423,7 +428,7 @@ export function BloodAlcoholCalculator() {
     { label: 'Clear', apply: () => { setGender('male'); setWeight('70'); setDrinks('3'); setHours('2'); } },
   ];
 
-  const resultText = `BAC: ${finalBac.toFixed(3)}% ${finalBac >= 0.08 ? '⚠️ Over legal limit (0.08%)' : '✅ Under legal limit'}`;
+  const resultText = hasInput ? `BAC: ${finalBac.toFixed(3)}% ${finalBac >= 0.08 ? '⚠️ Over legal limit (0.08%)' : '✅ Under legal limit'}` : 'Enter weight and drinks';
 
   return (
     <CalculatorShell category="Health"

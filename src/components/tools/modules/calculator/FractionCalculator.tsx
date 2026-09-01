@@ -13,6 +13,7 @@ export default function FractionCalculator() {
   ];
   const [n1, d1] = frac1.split('/').map(Number);
   const [n2, d2] = frac2.split('/').map(Number);
+  const hasInput = !isNaN(n1) && !isNaN(d1) && d1 !== 0 && !isNaN(n2) && !isNaN(d2) && d2 !== 0 && !(op === '/' && n2 === 0);
   let rn: number, rd: number;
   switch (op) {
     case '+': rn = n1 * d2 + n2 * d1; rd = d1 * d2; break;
@@ -24,7 +25,9 @@ export default function FractionCalculator() {
   const g = gcd(Math.abs(rn), Math.abs(rd));
   rn /= g; rd /= g;
   const decimal = rn / rd;
-  const customResult = (
+  const customResult = !hasInput ? (
+    <div className="text-sm text-[var(--text-muted)]">Enter valid fractions (e.g., 1/2)</div>
+  ) : (
     <div className="text-center font-mono">
       <div className="text-lg text-[var(--text-primary)]">{frac1} {op === '*' ? '\u00d7' : op === '/' ? '\u00f7' : op} {frac2} = {rn}/{rd}{rd === 1 ? ` = ${rn}` : ` = ${decimal.toFixed(4)}`}</div>
     </div>

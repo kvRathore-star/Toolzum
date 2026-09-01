@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
@@ -7,31 +7,34 @@ export default function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');
   const [rate, setRate] = useState('6.5');
   const [years, setYears] = useState('30');
-  const p = parseFloat(loan);
-  const annualRate = parseFloat(rate) / 100;
-  const r = annualRate / 12;
-  const n = parseFloat(years) * 12;
-  const pmt = p && r && n ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
-  const total = pmt * n;
-  const amort = p && r && n ? (() => {
-    const table: Array<{year: number; principal: number; interest: number; balance: number}> = [];
-    let bal = p;
-    for (let yr = 1; yr <= parseFloat(years); yr++) {
-      let yrPrincipal = 0;
-      let yrInterest = 0;
-      for (let m = 0; m < 12; m++) {
-        const intPart = bal * r;
-        const prinPart = pmt - intPart;
-        yrPrincipal += prinPart;
-        yrInterest += intPart;
-        bal -= prinPart;
+  const { pmt, total, amort, result } = useMemo(() => {
+    const p = parseFloat(loan);
+    const annualRate = parseFloat(rate) / 100;
+    const r = annualRate / 12;
+    const n = parseFloat(years) * 12;
+    const pmt = p && r && n ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
+    const total = pmt * n;
+    const amort = p && r && n ? (() => {
+      const table: Array<{year: number; principal: number; interest: number; balance: number}> = [];
+      let bal = p;
+      for (let yr = 1; yr <= parseFloat(years); yr++) {
+        let yrPrincipal = 0;
+        let yrInterest = 0;
+        for (let m = 0; m < 12; m++) {
+          const intPart = bal * r;
+          const prinPart = pmt - intPart;
+          yrPrincipal += prinPart;
+          yrInterest += intPart;
+          bal -= prinPart;
+        }
+        if (bal < 0) bal = 0;
+        table.push({ year: yr, principal: Math.round(yrPrincipal * 100) / 100, interest: Math.round(yrInterest * 100) / 100, balance: Math.round(bal * 100) / 100 });
       }
-      if (bal < 0) bal = 0;
-      table.push({ year: yr, principal: Math.round(yrPrincipal * 100) / 100, interest: Math.round(yrInterest * 100) / 100, balance: Math.round(bal * 100) / 100 });
-    }
-    return table;
-  })() : [];
-  const result = p && r && n ? `Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${total.toFixed(2)}\nTotal Interest: $${(total - p).toFixed(2)}` : '';
+      return table;
+    })() : [];
+    const result = p && r && n ? `Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${total.toFixed(2)}\nTotal Interest: $${(total - p).toFixed(2)}` : '';
+    return { pmt, total, amort, result };
+  }, [loan, rate, years]);
   const presets = [
     { label: '30yr Fixed 6.5%', apply: () => { setLoan('300000'); setRate('6.5'); setYears('30'); } },
     { label: '15yr Fixed 5.5%', apply: () => { setLoan('300000'); setRate('5.5'); setYears('15'); } },

@@ -9,6 +9,7 @@ export default function ModuloCalculator() {
   const [a, setA] = useState('17');
   const [b, setB] = useState('5');
   const na = Number(a), nb = Number(b);
+  const hasInput = a !== '' && b !== '' && !isNaN(na) && !isNaN(nb);
 
   // JavaScript mod (truncates toward zero)
   const jsMod = nb !== 0 ? na % nb : NaN;
@@ -28,13 +29,16 @@ export default function ModuloCalculator() {
     { label: '100 mod 3', apply: () => { setA('100'); setB('3'); } },
   ];
 
-  const resultText = nb !== 0
+  const resultText = !hasInput ? 'Enter dividend and divisor'
+    : nb !== 0
     ? `${na} mod ${nb} = ${jsMod} (JS)${differs ? ` / ${pyMod} (Python)` : ''}`
     : 'Divisor cannot be zero';
 
   return (
     <CalculatorShell category="Math" title="Modulo Calculator" result={resultText} auto presets={presets} accent="emerald" customResult={
-      nb !== 0 ? (
+      !hasInput ? (
+        <div className="text-sm text-[var(--text-muted)] text-center">Enter dividend and divisor</div>
+      ) : nb !== 0 ? (
         <div className="space-y-3">
           <div className="text-center">
             <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">JavaScript / C-style</div>

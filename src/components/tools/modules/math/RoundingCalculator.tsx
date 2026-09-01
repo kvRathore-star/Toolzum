@@ -11,6 +11,7 @@ export default function RoundingCalculator() {
   const [mode, setMode] = useState('half-up');
   const n = Number(num);
   const p = Number(places);
+  const hasInput = num !== '' && !isNaN(n);
 
   const getRounded = (mode: string) => {
     const factor = 10 ** p;
@@ -50,7 +51,7 @@ export default function RoundingCalculator() {
     { label: '0.00456 → 2sf', apply: () => { setNum('0.00456'); setPlaces('2'); setMode('half-up'); } },
   ];
 
-  const resultText = `${n} → ${result} (${mode.replace('-', ' ')})`;
+  const resultText = hasInput ? `${n} → ${result} (${mode.replace('-', ' ')})` : 'Enter a number to round';
 
   const modeLabels: Record<string, string> = {
     'half-up': 'Round Half Up',
@@ -70,6 +71,9 @@ export default function RoundingCalculator() {
 
   return (
     <CalculatorShell category="Math" title="Rounding Calculator" result={resultText} auto presets={presets} accent="amber" customResult={
+      !hasInput ? (
+        <div className="text-sm text-[var(--text-muted)] text-center">Enter a number to round</div>
+      ) : (
       <div className="space-y-4">
         <div className="text-center">
           <div className="text-xs text-amber-600 dark:text-amber-400 font-medium mb-1">{modeLabels[mode]}</div>
@@ -100,6 +104,7 @@ export default function RoundingCalculator() {
           ))}
         </div>
       </div>
+      )
     }>
       <div className="space-y-4">
         <div className="grid grid-cols-2 gap-2">

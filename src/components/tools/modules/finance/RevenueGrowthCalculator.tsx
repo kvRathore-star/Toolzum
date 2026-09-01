@@ -12,12 +12,13 @@ export default function RevenueGrowthCalculator() {
     { label: 'Hypergrowth', apply: () => { setCurrent('300000'); setPrevious('150000'); } },
   ];
   const c = parseFloat(current) || 0;
-  const p = parseFloat(previous) || 1;
-  const growth = ((c - p) / p) * 100;
+  const p = parseFloat(previous) || 0;
+  const hasInput = current !== '' && previous !== '' && p > 0;
+  const growth = hasInput ? ((c - p) / p) * 100 : 0;
   const isPositive = growth >= 0;
   return (
-    <CalculatorShell category="Finance" title="Revenue Growth Calculator" result={`${growth.toFixed(1)}%`} auto presets={presets} accent="blue" customResult={
-      true ? (
+    <CalculatorShell category="Finance" title="Revenue Growth Calculator" result={hasInput ? `${growth.toFixed(1)}%` : 'Enter current and previous revenue'} auto presets={presets} accent="blue" customResult={
+      hasInput ? (
         <div>
           <div className="flex items-center justify-center gap-4">
             <div className="text-center">

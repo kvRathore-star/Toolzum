@@ -19,8 +19,11 @@ export default function CollegeGpaCalculator() {
   const semGpa = tc > 0 ? tp / tc : 0;
   const pg = parseFloat(prevGpa) || 0;
   const pc = parseFloat(prevCredits) || 0;
-  const cumGpa = (pg * pc + tp) / (pc + tc);
-  const customResult = (
+  const hasInput = g.length > 0 && tc > 0;
+  const cumGpa = (pc + tc) > 0 ? (pg * pc + tp) / (pc + tc) : 0;
+  const customResult = !hasInput ? (
+    <div className="text-sm text-[var(--text-muted)]">Enter semester grades and credits</div>
+  ) : (
     <div className="grid grid-cols-2 gap-3">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Semester GPA</div>

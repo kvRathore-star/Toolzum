@@ -10,10 +10,13 @@ export default function MeanMedianModeCalculator() {
     { label: '1,2,3,4,5', apply: () => { setNumbers('1,2,3,4,5'); } },
     { label: '10,20,30', apply: () => { setNumbers('10,20,30'); } },
   ];
-  const nums = numbers.split(',').map(Number).sort((a, b) => a - b);
-  const mean = nums.length ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
-  const median = nums.length ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0;
-  const customResult = (
+  const nums = numbers.split(',').map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
+  const hasInput = nums.length > 0;
+  const mean = hasInput ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
+  const median = hasInput ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0;
+  const customResult = !hasInput ? (
+    <div className="text-sm text-[var(--text-muted)]">Enter comma-separated numbers</div>
+  ) : (
     <div className="grid grid-cols-2 gap-2">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Mean</div>
