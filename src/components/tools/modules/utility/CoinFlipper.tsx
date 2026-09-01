@@ -30,7 +30,7 @@ export default function CoinFlipper() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Flip coin display */}
-        <div className="flex flex-col justify-center items-center bg-[var(--bg-overlay)] rounded-2xl p-8 border border-zinc-800 min-h-[250px]">
+        <div className="flex flex-col justify-center items-center bg-[var(--bg-overlay)] rounded-2xl p-8 border border-[var(--border-subtle)] min-h-[250px]">
           <div 
             className={`w-28 h-28 rounded-full border-4 border-amber-500 bg-gradient-to-tr from-amber-400 to-yellow-300 shadow-xl flex items-center justify-center font-black text-amber-800 text-sm tracking-wider transition-all duration-500 ${
               isFlipping ? 'scale-90 opacity-40 rotate-[360deg] animate-bounce' : ''
@@ -56,7 +56,7 @@ export default function CoinFlipper() {
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
               <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Heads Total</span>
-              <p className="text-2xl font-black text-amber-500 mt-1">{stats.heads}</p>
+              <p className="text-2xl font-black text-[var(--accent)] mt-1">{stats.heads}</p>
             </div>
             <div className="bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] text-center">
               <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Tails Total</span>

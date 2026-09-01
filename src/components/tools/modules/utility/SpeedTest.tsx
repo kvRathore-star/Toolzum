@@ -69,11 +69,11 @@ export default function SpeedTest() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="flex flex-col justify-center items-center bg-[var(--bg-overlay)] rounded-2xl p-8 border border-zinc-800 min-h-[220px]">
+        <div className="flex flex-col justify-center items-center bg-[var(--bg-overlay)] rounded-2xl p-8 border border-[var(--border-subtle)] min-h-[220px]">
           {speedMbps !== null ? (
             <div className="text-center space-y-2 animate-in zoom-in-95">
               <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Download Speed</span>
-              <div className="text-6xl font-black text-emerald-500">{speedMbps}</div>
+              <div className="text-6xl font-black text-[var(--accent)]">{speedMbps}</div>
               <span className="text-sm font-bold text-[var(--text-muted)]">Mbps</span>
             </div>
           ) : (

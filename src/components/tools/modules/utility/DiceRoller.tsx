@@ -32,8 +32,8 @@ export default function DiceRoller() {
           <h3 className="text-lg font-bold text-[var(--text-primary)]">3D CSS Dice Roller</h3>
         </div>
         <div className="flex gap-2">
-          <button onClick={removeDice} className="px-2.5 py-1 bg-zinc-800 text-xs text-zinc-300 rounded font-semibold">- Remove</button>
-          <button onClick={addDice} className="px-2.5 py-1 bg-indigo-600 text-xs text-white rounded font-semibold">+ Add Dice</button>
+          <button onClick={removeDice} className="px-2.5 py-1 bg-[var(--bg-surface)] text-xs text-[var(--text-secondary)] rounded font-semibold">- Remove</button>
+          <button onClick={addDice} className="px-2.5 py-1 bg-[var(--accent-ink)] text-xs text-white rounded font-semibold">+ Add Dice</button>
         </div>
       </div>
 
