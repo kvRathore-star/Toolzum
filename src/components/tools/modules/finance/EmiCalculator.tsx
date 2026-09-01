@@ -43,8 +43,7 @@ export default function EmiCalculator() {
       accent="amber"
       result={result}
       resultStats={resultStats}
-      onCalculate={() => {}}
-      calculateLabel="Calculate EMI"
+      auto
       presets={presets}
       downloadData={result}
       downloadFilename="emi-calculation.txt"

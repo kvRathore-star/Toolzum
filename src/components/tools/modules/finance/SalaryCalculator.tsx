@@ -51,8 +51,7 @@ export default function SalaryCalculator() {
       accent="emerald"
       result={result}
       resultStats={resultStats}
-      onCalculate={() => {}}
-      calculateLabel="Calculate Take-Home"
+      auto
       presets={presets}
       downloadData={result}
       downloadFilename="salary-breakdown.txt"
