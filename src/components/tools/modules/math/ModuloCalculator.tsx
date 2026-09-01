@@ -11,15 +11,14 @@ export default function ModuloCalculator() {
   const na = Number(a), nb = Number(b);
   const hasInput = a !== '' && b !== '' && !isNaN(na) && !isNaN(nb);
 
-  // JavaScript mod (truncates toward zero)
-  const jsMod = nb !== 0 ? na % nb : NaN;
-  const jsQuotient = nb !== 0 ? Math.floor(na / nb) : NaN;
-
-  // Python/Floored mod (always positive remainder)
-  const pyMod = nb !== 0 ? ((na % nb) + nb) % nb : NaN;
-  const pyQuotient = nb !== 0 ? Math.floor(na / nb) : NaN;
-
-  const differs = nb !== 0 && jsMod !== pyMod && na < 0;
+  let jsMod = 0, jsQuotient = 0, pyMod = 0, pyQuotient = 0, differs = false;
+  if (hasInput && nb !== 0) {
+    jsMod = na % nb;
+    jsQuotient = Math.floor(na / nb);
+    pyMod = ((na % nb) + nb) % nb;
+    pyQuotient = Math.floor(na / nb);
+    differs = jsMod !== pyMod && na < 0;
+  }
 
   const presets = [
     { label: '17 mod 5', apply: () => { setA('17'); setB('5'); } },

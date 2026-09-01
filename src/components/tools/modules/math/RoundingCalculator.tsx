@@ -11,7 +11,7 @@ export default function RoundingCalculator() {
   const [mode, setMode] = useState('half-up');
   const n = Number(num);
   const p = Number(places);
-  const hasInput = num !== '' && !isNaN(n);
+  const hasInput = num !== '' && !isNaN(n) && !isNaN(p);
 
   const getRounded = (mode: string) => {
     const factor = 10 ** p;
@@ -34,8 +34,9 @@ export default function RoundingCalculator() {
     }
   };
 
-  const result = getRounded(mode);
+  const result = hasInput ? getRounded(mode) : 0;
   const digit = (() => {
+    if (!hasInput) return null;
     const str = Math.abs(n).toString();
     const dotIdx = str.indexOf('.');
     if (dotIdx === -1) return null;
