@@ -17,8 +17,62 @@ export interface AdminUser {
   role: string;
   plan: string;
   credits: number;
+  status: string;
   createdAt: number;
   image: string | null;
+}
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  name: string;
+}
+
+function jsonError(error: string, status: number): { error: Response } {
+  return {
+    error: new Response(JSON.stringify({ error }), {
+      status,
+      headers: { "Content-Type": "application/json" },
+    }),
+  };
+}
+
+export async function requireUser(
+  request: Request,
+  env: Pick<AdminEnv, "DB" | "GOOGLE_CLIENT_ID" | "GOOGLE_CLIENT_SECRET" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "TURNSTILE_SECRET_KEY">
+): Promise<{ user: AuthUser } | { error: Response }> {
+  const auth = createAuth({
+    DB: env.DB,
+    GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET,
+    BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET,
+    BETTER_AUTH_URL: env.BETTER_AUTH_URL,
+    TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY,
+  });
+
+  const session = await auth.api.getSession({ headers: request.headers });
+
+  if (!session?.user?.id) {
+    return jsonError("sign_in_required", 401);
+  }
+
+  const userRow = await env.DB.prepare(
+    'SELECT status FROM "user" WHERE id = ?'
+  )
+    .bind(session.user.id)
+    .first<{ status: string }>();
+
+  if (userRow?.status === "banned") {
+    return jsonError("account_banned", 403);
+  }
+
+  return {
+    user: {
+      id: session.user.id,
+      email: session.user.email?.toLowerCase() || "",
+      name: session.user.name || "",
+    },
+  };
 }
 
 export async function requireAdmin(
@@ -37,12 +91,17 @@ export async function requireAdmin(
   const session = await auth.api.getSession({ headers: request.headers });
 
   if (!session?.user?.id) {
-    return {
-      error: new Response(JSON.stringify({ error: "sign_in_required" }), {
-        status: 401,
-        headers: { "Content-Type": "application/json" },
-      }),
-    };
+    return jsonError("sign_in_required", 401);
+  }
+
+  const userRow = await env.DB.prepare(
+    'SELECT role, status FROM "user" WHERE id = ?'
+  )
+    .bind(session.user.id)
+    .first<{ role: string; status: string }>();
+
+  if (userRow?.status === "banned") {
+    return jsonError("account_banned", 403);
   }
 
   const adminEmails = (env.ADMIN_EMAILS || "")
@@ -53,27 +112,11 @@ export async function requireAdmin(
   const email = session.user.email?.toLowerCase() || "";
 
   if (!adminEmails.includes(email)) {
-    return {
-      error: new Response(JSON.stringify({ error: "admin_email_required" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      }),
-    };
+    return jsonError("admin_email_required", 403);
   }
 
-  const userRow = await env.DB.prepare(
-    'SELECT role FROM "user" WHERE id = ?'
-  )
-    .bind(session.user.id)
-    .first<{ role: string }>();
-
   if (userRow?.role !== "admin") {
-    return {
-      error: new Response(JSON.stringify({ error: "admin_role_required" }), {
-        status: 403,
-        headers: { "Content-Type": "application/json" },
-      }),
-    };
+    return jsonError("admin_role_required", 403);
   }
 
   return {
@@ -84,6 +127,7 @@ export async function requireAdmin(
       role: userRow.role,
       plan: (session.user as Record<string, unknown>).plan as string || "free",
       credits: (session.user as Record<string, unknown>).credits as number || 0,
+      status: userRow.status,
       createdAt: (session.user as Record<string, unknown>).createdAt as number || 0,
       image: session.user.image || null,
     },
