@@ -95,7 +95,8 @@ export function createAuth(env: AuthEnv) {
       },
     },
     onAPIError: {
-      onError(e, ctx) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      onError(e: any, _ctx: any) {
         console.error("[AUTH ON_ERROR]", e?.name, e?.message, e?.stack?.slice(0, 800));
       },
     },
