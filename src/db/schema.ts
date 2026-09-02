@@ -30,6 +30,7 @@ export const sessions = sqliteTable("session", {
 
 export const accounts = sqliteTable("account", {
   id: text("id").primaryKey(),
+  issuer: text("issuer").notNull(),
   accountId: text("accountId").notNull(),
   providerId: text("providerId").notNull(),
   userId: text("userId")
