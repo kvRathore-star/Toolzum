@@ -4,8 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GdprConsentBanner } from "@/components/GdprConsentBanner";
 import { PostHogProvider } from "@/components/PostHogProvider";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { SiteShell } from "@/components/SiteShell";
 import { TOOL_COUNT } from "@/registry/site-data.generated";
 import "./globals.css";
 
@@ -117,13 +116,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
-          <Header />
-
-          <PostHogProvider>
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-          </PostHogProvider>
+          <SiteShell>
+            <PostHogProvider>
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+            </PostHogProvider>
+          </SiteShell>
 
           <Toaster 
             position="bottom-center"
@@ -150,7 +149,6 @@ export default function RootLayout({
           />
 
           <GdprConsentBanner />
-          <Footer />
         </ThemeProvider>
       </body>
     </html>
