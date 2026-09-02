@@ -29,13 +29,6 @@ function relativeTime(ts: number | null): string {
   return new Date(ts * 1000).toLocaleDateString();
 }
 
-function Sparkline() {
-  return (
-    <svg width="60" height="24" viewBox="0 0 60 24" fill="none" className="opacity-40">
-      <path d="M0 18 L5 14 L10 16 L15 10 L20 12 L25 6 L30 8 L35 4 L40 7 L45 3 L50 5 L55 2 L60 4" stroke="var(--accent)" strokeWidth="1.5" fill="none" />
-    </svg>
-  );
-}
 
 export default function AdminPage() {
   const router = useRouter();
