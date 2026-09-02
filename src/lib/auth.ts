@@ -98,12 +98,6 @@ export function createAuth(env: AuthEnv) {
         status: { type: "string", defaultValue: "active" },
       },
     },
-    onAPIError: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onError(e: any, _ctx: any) {
-        console.error("[AUTH ON_ERROR]", e?.name, e?.message, e?.stack?.slice(0, 800));
-      },
-    },
     plugins: [
       ...(env.TURNSTILE_SECRET_KEY
         ? [
