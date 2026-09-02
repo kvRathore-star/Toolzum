@@ -95,10 +95,14 @@ export function createAuth(env: AuthEnv) {
       },
     },
     plugins: [
-      captcha({
-        provider: "cloudflare-turnstile",
-        secretKey: env.TURNSTILE_SECRET_KEY || "",
-      }),
+      ...(env.TURNSTILE_SECRET_KEY
+        ? [
+            captcha({
+              provider: "cloudflare-turnstile",
+              secretKey: env.TURNSTILE_SECRET_KEY,
+            }),
+          ]
+        : []),
     ],
   });
 

@@ -58,6 +58,8 @@ SEO: Add internal linking between related tools (reduces thin content signals)
  Wire up email service (Resend)
  Wire Resend email service for forgot-password/reset-password
 
+ admin page to handle users.
+
  Credits — Default reduced from 100 to 10. Schema, auth config, migration, dashboard bar, and account page all updated. Current cost: 1 credit per AI tool use (generate/transcribe). Free users get 10 credits; Pro gets unlimited.
 
   Define per-task credit costs (e.g., image gen = 5, text gen = 2, transcription = 3) — currently all 1 credit
