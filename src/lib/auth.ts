@@ -80,6 +80,9 @@ export function createAuth(env: AuthEnv) {
         console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
     },
+    account: {
+      storeStateStrategy: "database",
+    },
     socialProviders: {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
