@@ -84,6 +84,9 @@ export function createAuth(env: AuthEnv) {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
+        // Workaround for upstream bug: signInSocial constructs redirectURI as
+        // ${baseURL}/callback/google, missing the /api/auth prefix.
+        // Remove when https://github.com/better-auth/better-auth/issues/8033 is fixed.
         redirectURI: `${env.BETTER_AUTH_URL || "https://toolzum.com"}/api/auth/callback/google`,
       },
     },
