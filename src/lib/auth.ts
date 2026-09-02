@@ -84,6 +84,7 @@ export function createAuth(env: AuthEnv) {
       google: {
         clientId: env.GOOGLE_CLIENT_ID,
         clientSecret: env.GOOGLE_CLIENT_SECRET,
+        redirectURI: `${env.BETTER_AUTH_URL || "https://toolzum.com"}/api/auth/callback/google`,
       },
     },
     user: {
