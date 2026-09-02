@@ -92,7 +92,6 @@ export function createAuth(env: AuthEnv) {
         plan: { type: "string", defaultValue: "free" },
         role: { type: "string", defaultValue: "user" },
         status: { type: "string", defaultValue: "active" },
-        lastLoginAt: { type: "number", defaultValue: null },
       },
     },
     plugins: [

@@ -57,10 +57,12 @@ export async function onRequest(context: { request: Request; next: () => Promise
     const cookies = request.headers.get('cookie') || '';
     const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
-    if (token) {
-      context.env.DB.prepare(
-        'UPDATE "user" SET "lastLoginAt" = unixepoch() WHERE id = (SELECT userId FROM session WHERE token = ?) AND ("lastLoginAt" IS NULL OR "lastLoginAt" < unixepoch() - 300)'
-      ).bind(token).run().catch(() => {});
+    if (token && context.env.DB && !request.url.includes('/api/auth/')) {
+      try {
+        await context.env.DB.prepare(
+          'UPDATE "user" SET "lastLoginAt" = unixepoch() WHERE id = (SELECT userId FROM session WHERE token = ?) AND ("lastLoginAt" IS NULL OR "lastLoginAt" < unixepoch() - 300)'
+        ).bind(token).run();
+      } catch { /* non-critical, ignore */ }
     }
   }
 
