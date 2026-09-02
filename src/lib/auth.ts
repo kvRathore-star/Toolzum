@@ -70,7 +70,6 @@ export function createAuth(env: AuthEnv) {
         },
       }
     ),
-    secondaryStorage: env.DB,
     emailAndPassword: {
       enabled: true,
       password: {
