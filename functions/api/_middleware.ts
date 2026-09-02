@@ -24,6 +24,11 @@ async function isBanned(request: Request, DB: D1Database): Promise<boolean> {
 export async function onRequest(context: { request: Request; next: () => Promise<Response>; env: { DB?: D1Database } }) {
   const { request } = context;
 
+  // Skip middleware entirely for auth routes — better-auth handles its own CSRF, sessions, and state
+  if (request.url.includes('/api/auth/')) {
+    return context.next();
+  }
+
   if (['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method)) {
     const origin = request.headers.get('Origin');
     const referer = request.headers.get('Referer');
