@@ -19,23 +19,35 @@ export const onRequest: PagesFunction = async (context) => {
     const status = response.status;
     const location = response.headers.get("location") || "";
 
-    if (status >= 400 || location.includes("error")) {
-      console.error(`[AUTH RESP] ${method} ${pathname} → ${status} location=${location}`);
+    // Log ALL callback and sign-in responses
+    if (isCallback || isSignInSocial) {
+      console.log(`[AUTH RESP] ${method} ${pathname} → ${status} location=${location}`);
     }
 
-    if (isCallback && status >= 300 && status < 400 && location) {
-      const loc = new URL(location, url.origin);
-      if (loc.searchParams.has("error")) {
-        console.error(`[AUTH CALLBACK ERROR] redirect to error page: ${location}`);
-        // Try to read the response body for more details
-        const body = await response.text().catch(() => "");
-        console.error(`[AUTH CALLBACK ERROR] response body (first 500): ${body.slice(0, 500)}`);
+    // For callbacks: clone response to read body without consuming it
+    if (isCallback) {
+      const clone = response.clone();
+      const body = await clone.text().catch(() => "");
+      if (body.length > 0) {
+        console.log(`[AUTH CALLBACK BODY] ${pathname} body=${body.slice(0, 2000)}`);
       }
-    }
 
-    if (isCallback && status === 500) {
-      const body = await response.text().catch(() => "");
-      console.error(`[AUTH 500] ${method} ${pathname} body=${body.slice(0, 1000)}`);
+      // If redirecting to error page, log the full error details
+      if (status >= 300 && status < 400 && location) {
+        try {
+          const loc = new URL(location, url.origin);
+          const error = loc.searchParams.get("error");
+          const errorDescription = loc.searchParams.get("error_description");
+          if (error) {
+            console.error(`[AUTH CALLBACK ERROR] error=${error} description=${errorDescription}`);
+          }
+        } catch { /* ignore parse errors */ }
+      }
+
+      // If 500, log full body
+      if (status === 500) {
+        console.error(`[AUTH CALLBACK 500] ${pathname} body=${body.slice(0, 2000)}`);
+      }
     }
 
     return response;
