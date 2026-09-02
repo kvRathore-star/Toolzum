@@ -13,6 +13,10 @@ export const onRequest: PagesFunction = async (context) => {
   }
 
   try {
+    // Debug: confirm env vars are available
+    if (isCallback || isSignInSocial) {
+      console.log(`[AUTH ENV] BETTER_AUTH_URL=${context.env.BETTER_AUTH_URL || "(undefined)"} BETTER_AUTH_SECRET=${context.env.BETTER_AUTH_SECRET ? "(set)" : "(missing)"}`);
+    }
     const auth = createAuth(context.env);
     const response = await auth.handler(context.request);
 
