@@ -1,4 +1,9 @@
 export async function onRequest(context: { request: Request; next: () => Promise<Response> }) {
+  // Skip for auth routes — better-auth manages its own cookies/state
+  if (context.request.url.includes('/api/auth/')) {
+    return context.next();
+  }
+
   const response = await context.next();
 
   const country = (context.request as any)?.cf?.country;
