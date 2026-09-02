@@ -70,6 +70,7 @@ export function createAuth(env: AuthEnv) {
         },
       }
     ),
+    secondaryStorage: env.DB,
     emailAndPassword: {
       enabled: true,
       password: {
@@ -79,9 +80,6 @@ export function createAuth(env: AuthEnv) {
       sendResetPassword: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
         console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
       },
-    },
-    account: {
-      storeStateStrategy: "database",
     },
     socialProviders: {
       google: {
