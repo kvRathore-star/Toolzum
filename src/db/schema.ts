@@ -13,7 +13,6 @@ export const users = sqliteTable("user", {
   plan: text("plan").default("free").notNull(),
   role: text("role").default("user").notNull(),
   status: text("status").default("active").notNull(),
-  lastLoginAt: integer("lastLoginAt", { mode: "timestamp" }),
 });
 
 export const sessions = sqliteTable("session", {
