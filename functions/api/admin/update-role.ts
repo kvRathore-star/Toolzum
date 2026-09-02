@@ -21,8 +21,8 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
   const auth = await requireAdmin(context.request, context.env);
   if ("error" in auth) return auth.error;
 
-  const body = (await context.request.json()) as { userId: string; role: string };
-  const { userId, role } = body;
+  const body = (await context.request.json()) as { userId: string; role: string; confirmEmail?: string };
+  const { userId, role, confirmEmail } = body;
 
   if (!userId || !["user", "admin"].includes(role)) {
     return json({ error: "invalid_params" }, 400);
@@ -32,12 +32,20 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
     return json({ error: "cannot_change_own_role" }, 400);
   }
 
-  const target = await DB.prepare('SELECT role FROM "user" WHERE id = ?')
+  const target = await DB.prepare('SELECT role, email FROM "user" WHERE id = ?')
     .bind(userId)
-    .first<{ role: string }>();
+    .first<{ role: string; email: string }>();
 
   if (!target) {
     return json({ error: "user_not_found" }, 404);
+  }
+
+  // Type-to-confirm: required for any change that grants or removes admin role
+  const isAdminChange = target.role === "admin" || role === "admin";
+  if (isAdminChange) {
+    if (!confirmEmail || confirmEmail !== target.email) {
+      return json({ error: "confirm_email_required", message: "Type the user's email to confirm admin role changes" }, 400);
+    }
   }
 
   if (target.role === "admin" && role !== "admin") {

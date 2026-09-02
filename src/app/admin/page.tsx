@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity, ArrowLeft, Download, Copy, DollarSign, Target, Zap, AlertTriangle, BarChart3 } from "lucide-react";
+import { Shield, Users, TrendingUp, Search, ChevronLeft, ChevronRight, X, CreditCard, Clock, Activity, ArrowLeft, Download, Copy, DollarSign, Target, Zap, AlertTriangle, BarChart3, Monitor } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -46,7 +46,11 @@ export default function AdminPage() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [showAuditLog, setShowAuditLog] = useState(false);
-  const [roleConfirmTarget, setRoleConfirmTarget] = useState<{ userId: string; name: string; oldRole: string; newRole: string } | null>(null);
+  const [roleConfirmTarget, setRoleConfirmTarget] = useState<{ userId: string; name: string; email: string; oldRole: string; newRole: string } | null>(null);
+  const [roleConfirmEmail, setRoleConfirmEmail] = useState("");
+  const [userSessions, setUserSessions] = useState<{ id: string; ipAddress: string | null; userAgent: string | null; createdAt: number; expiresAt: number }[]>([]);
+  const [sessionsLoading, setSessionsLoading] = useState(false);
+  const [revokingSession, setRevokingSession] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
   const [editingCredits, setEditingCredits] = useState<{ userId: string; value: number } | null>(null);
@@ -80,27 +84,47 @@ export default function AdminPage() {
     return () => { cancelled = true; };
   }, [session, page, search, router]);
 
-  useEffect(() => {
-    if (!selectedUserId) { return; }
-    let cancelled = false;
-    async function load() {
-      setDetailLoading(true);
-      setUserDetail(null);
-      try {
-        const res = await fetch(`/api/admin/user-detail?userId=${selectedUserId}`);
-        if (!cancelled && res.ok) setUserDetail(await res.json() as UserDetail);
-      } finally { if (!cancelled) setDetailLoading(false); }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, [selectedUserId]);
-
   const fetchAuditLog = useCallback(async () => {
     try {
       const res = await fetch("/api/admin/audit-log?limit=50");
       if (res.ok) { const data = (await res.json()) as { logs: AuditLogEntry[] }; setAuditLogs(data.logs || []); }
     } catch { /* ignore */ }
   }, []);
+
+  const fetchSessions = useCallback(async (userId: string) => {
+    setSessionsLoading(true);
+    try {
+      const res = await fetch(`/api/admin/sessions?userId=${userId}`);
+      if (res.ok) { const data = (await res.json()) as { sessions: typeof userSessions }; setUserSessions(data.sessions || []); }
+    } catch { /* ignore */ }
+    finally { setSessionsLoading(false); }
+  }, []);
+
+  const revokeSession = useCallback(async (sessionId: string) => {
+    setRevokingSession(sessionId);
+    try {
+      const res = await fetch("/api/admin/sessions/revoke", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId }) });
+      if (res.ok) { setUserSessions((prev) => prev.filter((s) => s.id !== sessionId)); }
+    } catch { /* ignore */ }
+    finally { setRevokingSession(null); }
+  }, []);
+
+  useEffect(() => {
+    if (!selectedUserId) { return; }
+    let cancelled = false;
+    async function load() {
+      setDetailLoading(true);
+      setUserDetail(null);
+      setUserSessions([]);
+      try {
+        const res = await fetch(`/api/admin/user-detail?userId=${selectedUserId}`);
+        if (!cancelled && res.ok) setUserDetail(await res.json() as UserDetail);
+      } finally { if (!cancelled) setDetailLoading(false); }
+      if (!cancelled) fetchSessions(selectedUserId);
+    }
+    load();
+    return () => { cancelled = true; };
+  }, [selectedUserId, fetchSessions]);
 
   useEffect(() => {
     if (!statsRef.current || !usersRef.current) return;
@@ -144,10 +168,10 @@ export default function AdminPage() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [roleConfirmTarget, selectedUserId, showAuditLog]);
 
-  const handleRoleChange = async (userId: string, newRole: string) => {
+  const handleRoleChange = async (userId: string, newRole: string, confirmEmail?: string) => {
     setUpdatingRole(userId);
     try {
-      const res = await fetch("/api/admin/update-role", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, role: newRole }) });
+      const res = await fetch("/api/admin/update-role", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, role: newRole, confirmEmail }) });
       if (res.ok) setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
     } finally { setUpdatingRole(null); }
   };
@@ -434,7 +458,7 @@ export default function AdminPage() {
                         <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                           <select
                             value={user.role}
-                            onChange={(e) => setRoleConfirmTarget({ userId: user.id, name: user.name, oldRole: user.role, newRole: e.target.value })}
+                            onChange={(e) => { setRoleConfirmTarget({ userId: user.id, name: user.name, email: user.email, oldRole: user.role, newRole: e.target.value }); setRoleConfirmEmail(""); }}
                             disabled={updatingRole === user.id}
                             className="px-2 py-1 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
                           >
@@ -476,18 +500,41 @@ export default function AdminPage() {
         </div>
       )}
 
-      {roleConfirmTarget && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setRoleConfirmTarget(null)}>
-          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-bold text-[var(--text-primary)]">Confirm Role Change</h3>
-            <p className="text-[var(--text-secondary)]">Change <strong>{roleConfirmTarget.name}&apos;s</strong> role from <strong>{roleConfirmTarget.oldRole}</strong> to <strong>{roleConfirmTarget.newRole}</strong>?</p>
-            <div className="flex justify-end gap-2">
-              <button onClick={() => setRoleConfirmTarget(null)} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer">Cancel</button>
-              <button onClick={() => { handleRoleChange(roleConfirmTarget.userId, roleConfirmTarget.newRole); setRoleConfirmTarget(null); }} className="px-4 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer">Confirm</button>
+      {roleConfirmTarget && (() => {
+        const isAdminChange = roleConfirmTarget.newRole === "admin" || roleConfirmTarget.oldRole === "admin";
+        const emailMatch = roleConfirmEmail === roleConfirmTarget.email;
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => { setRoleConfirmTarget(null); setRoleConfirmEmail(""); }}>
+            <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4" onClick={(e) => e.stopPropagation()}>
+              <h3 className="text-lg font-bold text-[var(--text-primary)]">Confirm Role Change</h3>
+              <p className="text-[var(--text-secondary)]">Change <strong>{roleConfirmTarget.name}&apos;s</strong> role from <strong>{roleConfirmTarget.oldRole}</strong> to <strong>{roleConfirmTarget.newRole}</strong>?</p>
+              {isAdminChange && (
+                <div>
+                  <label className="block text-sm text-[var(--text-secondary)] mb-1">Type <strong className="text-[var(--text-primary)]">{roleConfirmTarget.email}</strong> to confirm:</label>
+                  <input
+                    type="text"
+                    value={roleConfirmEmail}
+                    onChange={(e) => setRoleConfirmEmail(e.target.value)}
+                    placeholder={roleConfirmTarget.email}
+                    className="w-full px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+                    autoFocus
+                  />
+                </div>
+              )}
+              <div className="flex justify-end gap-2">
+                <button onClick={() => { setRoleConfirmTarget(null); setRoleConfirmEmail(""); }} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer">Cancel</button>
+                <button
+                  disabled={isAdminChange && !emailMatch}
+                  onClick={() => { handleRoleChange(roleConfirmTarget.userId, roleConfirmTarget.newRole, isAdminChange ? roleConfirmEmail : undefined); setRoleConfirmTarget(null); setRoleConfirmEmail(""); }}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium cursor-pointer ${isAdminChange && !emailMatch ? "bg-[var(--bg-surface)] text-[var(--text-muted)] cursor-not-allowed" : "bg-[var(--accent)] text-white hover:opacity-90"}`}
+                >
+                  Confirm
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {selectedUserId && (
         <div className="fixed inset-0 z-40 flex justify-end" onClick={() => setSelectedUserId(null)}>
@@ -630,6 +677,33 @@ export default function AdminPage() {
                     </div>
                   </div>
                 )}
+
+                <div>
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Monitor className="w-4 h-4" /> Active Sessions</h3>
+                  {sessionsLoading ? (
+                    <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]"><div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" /> Loading sessions...</div>
+                  ) : userSessions.length === 0 ? (
+                    <p className="text-sm text-[var(--text-muted)]">No active sessions</p>
+                  ) : (
+                    <div className="space-y-2">
+                      {userSessions.map((s) => (
+                        <div key={s.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm">
+                          <div className="min-w-0">
+                            <p className="text-[var(--text-primary)] font-medium truncate">{s.userAgent || "Unknown device"}</p>
+                            <p className="text-xs text-[var(--text-muted)]">{s.ipAddress || "No IP"} · Expires {new Date(s.expiresAt * 1000).toLocaleDateString()}</p>
+                          </div>
+                          <button
+                            onClick={() => revokeSession(s.id)}
+                            disabled={revokingSession === s.id}
+                            className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg cursor-pointer disabled:opacity-50"
+                          >
+                            {revokingSession === s.id ? "Revoking..." : "Revoke"}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 {userDetail.roleHistory.length > 0 && (
                   <div>

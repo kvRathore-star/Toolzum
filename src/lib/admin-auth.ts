@@ -8,6 +8,7 @@ interface AdminEnv {
   BETTER_AUTH_URL: string;
   TURNSTILE_SECRET_KEY: string;
   ADMIN_EMAILS: string;
+  ADMIN_IPS?: string;
 }
 
 export interface AdminUser {
@@ -117,6 +118,18 @@ export async function requireAdmin(
 
   if (userRow?.role !== "admin") {
     return jsonError("admin_role_required", 403);
+  }
+
+  // IP allowlist — optional, skip if ADMIN_IPS not set
+  const adminIps = (env.ADMIN_IPS || "")
+    .split(",")
+    .map((ip: string) => ip.trim())
+    .filter(Boolean);
+  if (adminIps.length > 0) {
+    const clientIp = request.headers.get("cf-connecting-ip") || request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
+    if (!adminIps.includes(clientIp)) {
+      return jsonError("ip_not_allowed", 403);
+    }
   }
 
   return {
