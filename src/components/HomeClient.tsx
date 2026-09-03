@@ -734,6 +734,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 function FileDropZone({ activeTab }: { activeTab: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -796,6 +797,13 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     if (f) setFile(f);
   }, []);
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInputRef.current?.click();
+    }
+  }, []);
+
   const fileType = file ? detectFileType(file) : null;
 
   const formatBadges = [
@@ -817,8 +825,12 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
-        onClick={() => document.getElementById('hero-file-input')?.click()}
-        className={`flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group ${
+        onClick={() => fileInputRef.current?.click()}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-label="Drop a file here or click to browse"
+        className={`flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
           dragOver
             ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
             : file
@@ -826,17 +838,17 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
               : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
         }`}
       >
-        <input id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} />
+        <input ref={fileInputRef} id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} aria-hidden="true" tabIndex={-1} />
         {file && fileType ? (
-          <div className="flex flex-col items-center gap-2 p-4">
-            <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center">
+          <div className="flex flex-col items-center gap-2 p-4 animate-fade-in">
+            <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center animate-scale-in">
               {fileTypeIcon(fileType)}
             </div>
             <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
             <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)} &middot; {fileType.toUpperCase()}</p>
             <button
-              onClick={(e) => { e.stopPropagation(); setFile(null); }}
-              className="text-[10px] text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
+              onClick={(e) => { e.stopPropagation(); setFile(null); fileInputRef.current && (fileInputRef.current.value = ''); }}
+              className="mt-1 px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg hover:border-[var(--accent)]/30 transition-all duration-200 min-h-[32px]"
             >
               Remove
             </button>
