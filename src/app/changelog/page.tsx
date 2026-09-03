@@ -23,49 +23,20 @@ const RELEASES: Release[] = [
   // SEPTEMBER 2026
   // ──────────────────────────────────────────────
   {
-    version: "v2.4.0",
-    date: "September 15, 2026",
-    title: "Admin Security Hardening & Session Control",
-    tag: "security",
-    tagColor: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20",
-    description: "Admin panel locked down with IP restrictions, session management, and safeguards against accidental privilege changes. If you run a multi-admin setup, set the ADMIN_IPS environment variable to restrict access.",
+    version: "v2.3.0",
+    date: "September 03, 2026",
+    title: "30+ New Tools, Admin Security & Homepage Redesign",
+    tag: "major",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "30+ new tools including bulk processors and AI watermark removal. Admin panel locked down with IP restrictions and session management. Homepage upload redesigned with format badges.",
     updates: [
+      { type: "feature", text: "30+ new tools: bulk image upscaling, HEIC/AVIF conversion, AI watermark removal (single + batch), bulk PDF operations (rotate, protect, split, watermark, crop), and text utilities (Reverser, Upside Down, Glitch, Invisible Character)." },
       { type: "security", text: "Admin panel restricted by IP — only trusted networks can access admin routes. Set ADMIN_IPS environment variable to enable." },
       { type: "security", text: "Admin role changes now require typing the user's exact email to confirm — prevents accidental promotions or demotions." },
       { type: "feature", text: "Admins can view active sessions per user (device, IP, expiry) and force-logout lost or stolen devices." },
-      { type: "feature", text: "Full audit trail for all admin actions — every role change, ban, and credit edit is logged with timestamp and actor." },
-      { type: "fix", text: "Sign-in now works reliably — users no longer appear logged out after authenticating. Session detection fixed across client and server." },
+      { type: "feature", text: "Homepage upload box redesigned — shows supported format badges (IMG, VID, PDF, DOC, AUD) at a glance, privacy notice, and smarter file detection." },
+      { type: "fix", text: "Sign-in now works reliably — users no longer appear logged out after authenticating." },
       { type: "fix", text: "Middleware ban enforcement fixed — banned users were previously able to access API routes in production." },
-    ]
-  },
-  {
-    version: "v2.3.1",
-    date: "September 10, 2026",
-    title: "SEO — 1,000+ Tool FAQs & Format-Pair Pages",
-    tag: "minor",
-    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
-    description: "1,000+ tool-specific instructions and FAQs written across all 21 categories. 53 new format-pair SEO pages. FAQPage structured data added.",
-    updates: [
-      { type: "feature", text: "1,000+ tool-specific instructions and FAQs written — every tool now has unique how-to guides instead of generic templates." },
-      { type: "feature", text: "53 new format-pair SEO pages (PNG-to-JPG, MP3-to-WAV, etc.) — search for any conversion and land on the right tool." },
-      { type: "feature", text: "FAQPage JSON-LD structured data added to FAQ page and top tool pages — improves search engine visibility." },
-      { type: "feature", text: "Interaction-pattern-based How to Use templates — instructions adapt based on what the tool actually does." },
-      { type: "fix", text: "Tool-specific FAQs added for 137 tools that were crawled but not indexed by search engines." },
-    ]
-  },
-  {
-    version: "v2.3.0",
-    date: "September 03, 2026",
-    title: "30+ New Tools & Homepage Redesign",
-    tag: "major",
-    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "30+ new tools added including bulk processors, AI-powered watermark removal, and text utilities. Homepage upload experience redesigned with format badges and privacy-first messaging.",
-    updates: [
-      { type: "feature", text: "30+ new tools: bulk image upscaling, bulk HEIC/AVIF conversion, AI watermark removal (single + batch), bulk PDF operations (rotate, protect, split, watermark, crop), and text utilities (Reverser, Upside Down, Glitch, Invisible Character)." },
-      { type: "feature", text: "Homepage upload box redesigned — shows supported format badges (IMG, VID, PDF, DOC, AUD) at a glance, privacy notice, and smarter file detection that routes to the right tool." },
-      { type: "feature", text: "Mobile sidebar navigation added to category pages — browse tools by category on any screen size." },
-      { type: "feature", text: "1,000+ tool-specific instructions and FAQs written across all 21 categories — every tool now has unique how-to guides instead of generic templates." },
-      { type: "fix", text: "Category sidebar and view mode toggles now visible on mobile — were previously hidden on small screens." },
     ]
   },
   // ──────────────────────────────────────────────
