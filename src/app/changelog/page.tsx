@@ -29,6 +29,7 @@ const RELEASES: Release[] = [
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "The admin panel gets real security — IP restrictions, session control, and confirmation safeguards. 30 new tools ship including AI-powered watermark removal and bulk PDF operations. The homepage upload experience is completely rebuilt.",
+    demo: "tool-expansion",
     updates: [
       { type: "security", text: "Admin panel restricted by IP — only trusted networks can access admin routes via ADMIN_IPS environment variable." },
       { type: "security", text: "Admin role changes require typing the user's exact email to confirm — eliminates accidental privilege changes." },
@@ -268,6 +269,7 @@ const RELEASES: Release[] = [
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Process 50 files at once without worry. One corrupted file no longer crashes the entire batch — it's auto-skipped and the rest keep going. Low-memory devices get a warning before processing starts.",
+    demo: "fault-tolerance",
     updates: [
       { type: "performance", text: "Fault-tolerant batch engine: corrupted files are auto-skipped, the batch continues, and failures are reported at the end." },
       { type: "feature", text: "Memory-pressure warning on devices with less than 4 GB RAM — prevents crashes before they happen." },
@@ -298,6 +300,7 @@ const RELEASES: Release[] = [
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "All 30 bulk processing tools go live. Compress videos, reduce file sizes, burn subtitles, convert images to PDF, merge documents, run OCR — all in your browser. Pro users get parallel processing and ZIP downloads.",
+    demo: "batch-processing",
     updates: [
       { type: "feature", text: "Batch video processing — compress, resize, and add subtitles to multiple videos simultaneously." },
       { type: "feature", text: "20+ new bulk tools: image resize/compress, PDF merge/reduce, OCR text extraction, ebook conversion, audio format conversion, and face anonymization." },
@@ -475,7 +478,7 @@ export default function ChangelogPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--accent-ink)]/5 rounded-full blur-[80px]" />
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-3">Never miss a tool update</h3>
           <p className="text-[var(--text-secondary)] text-sm max-w-lg mx-auto mb-6">
-            We build and deploy new offline utilities every single week. Subscribe to get our weekly release summaries.
+            We ship new offline tools every week. Get release summaries straight to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input 
@@ -483,7 +486,7 @@ export default function ChangelogPage() {
               placeholder="name@email.com" 
               className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
             />
-            <Button disabled className="shrink-0 gap-2 opacity-60 cursor-not-allowed">Subscribe <ArrowRight className="w-4 h-4" /></Button>
+            <Button className="shrink-0 gap-2 bg-[var(--accent)] text-white hover:opacity-90 transition-opacity">Subscribe <ArrowRight className="w-4 h-4" /></Button>
           </div>
         </div>
 
