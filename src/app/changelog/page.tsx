@@ -39,6 +39,21 @@ const RELEASES: Release[] = [
     ]
   },
   {
+    version: "v2.3.1",
+    date: "September 10, 2026",
+    title: "SEO — 1,000+ Tool FAQs & Format-Pair Pages",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "1,000+ tool-specific instructions and FAQs written across all 21 categories. 53 new format-pair SEO pages. FAQPage structured data added.",
+    updates: [
+      { type: "feature", text: "1,000+ tool-specific instructions and FAQs written — every tool now has unique how-to guides instead of generic templates." },
+      { type: "feature", text: "53 new format-pair SEO pages (PNG-to-JPG, MP3-to-WAV, etc.) — search for any conversion and land on the right tool." },
+      { type: "feature", text: "FAQPage JSON-LD structured data added to FAQ page and top tool pages — improves search engine visibility." },
+      { type: "feature", text: "Interaction-pattern-based How to Use templates — instructions adapt based on what the tool actually does." },
+      { type: "fix", text: "Tool-specific FAQs added for 137 tools that were crawled but not indexed by search engines." },
+    ]
+  },
+  {
     version: "v2.3.0",
     date: "September 03, 2026",
     title: "30+ New Tools & Homepage Redesign",
@@ -70,6 +85,21 @@ const RELEASES: Release[] = [
       { type: "fix", text: "Accessibility pass: screen reader support, keyboard navigation, and proper labels added to all interactive elements across 39 tools." },
       { type: "performance", text: "Page loads faster — heavy code removed from initial bundles, images optimized to WebP, tools load on demand." },
       { type: "fix", text: "Gas mileage calculator NaN bug fixed. Fraction calculator stack overflow fixed. Modulo and rounding computations guarded against empty inputs." },
+    ]
+  },
+  {
+    version: "v2.1.1",
+    date: "August 18, 2026",
+    title: "Admin Panel Deep Dive — Search, Pagination & Bulk Actions",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Admin panel upgraded with search, pagination, bulk actions, CSV export, and rate limiting. Last-admin protection prevents accidental lockout.",
+    updates: [
+      { type: "feature", text: "Admin panel: search users by name or email, paginated results, bulk ban/unban/delete actions, CSV export." },
+      { type: "security", text: "Rate limiting added to all admin API endpoints — prevents abuse and brute-force attacks." },
+      { type: "security", text: "Last-admin protection — cannot remove the last remaining admin account." },
+      { type: "feature", text: "Audit log viewer with full history of role changes, bans, and credit edits." },
+      { type: "fix", text: "Admin sidebar navigation improved — Back to Toolzum link at bottom, mobile responsive." },
     ]
   },
   {
@@ -141,6 +171,21 @@ const RELEASES: Release[] = [
     ]
   },
   {
+    version: "v1.10.1",
+    date: "June 25, 2026",
+    title: "Hidden Tools Restored & Content Integrity",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "62 accidentally hidden tools restored. Content integrity test suite added to prevent future regressions. Duplicate entries cleaned up.",
+    updates: [
+      { type: "fix", text: "62 tools restored that were accidentally hidden — unit converters, time/date tools, color utilities, JSON/CSV tools, and code utilities." },
+      { type: "fix", text: "23 duplicate tool entries removed. 6 broken tool links fixed. Category filtering corrected across all pages." },
+      { type: "feature", text: "Content integrity test suite runs before every commit — catches broken tools, duplicate entries, and missing modules automatically." },
+      { type: "fix", text: "Footer navigation links fixed — were invisible on hover in light mode." },
+      { type: "fix", text: "509 tools with duplicate descriptions deduplicated." },
+    ]
+  },
+  {
     version: "v1.9.0",
     date: "June 15, 2026",
     title: "830+ Tools — Full Catalog, Zero Empty Pages",
@@ -209,6 +254,21 @@ const RELEASES: Release[] = [
     ]
   },
   {
+    version: "v1.5.1",
+    date: "April 10, 2026",
+    title: "Mobile Responsiveness & SEO Overhaul",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Mobile layout fixed across all tool pages. SEO descriptions rewritten to match natural search intent. AI crawler rules configured for discoverability.",
+    updates: [
+      { type: "fix", text: "Mobile layout fixed across all tool pages — badges, navigation, hero sections, and URL shortener now work on small screens." },
+      { type: "performance", text: "SEO descriptions rewritten to match how people actually search — removed number prefixes, aligned with natural language." },
+      { type: "security", text: "AI crawler rules configured — major AI models can now discover and index tool pages for referral traffic." },
+      { type: "fix", text: "Console warnings in 7 non-critical modules suppressed in production." },
+      { type: "fix", text: "Video converter output format corrected — proper codecs for WebM, AVI, and other formats." },
+    ]
+  },
+  {
     version: "v1.5.0",
     date: "April 05, 2026",
     title: "Database & Auth Infrastructure",
@@ -241,6 +301,21 @@ const RELEASES: Release[] = [
     ]
   },
   {
+    version: "v1.3.1",
+    date: "March 20, 2026",
+    title: "Bulk Document Processing & OCR",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Document-focused bulk tools added: PDF merge/reduce, OCR text extraction, ebook conversion. BatchProgressPanel added across all bulk modules.",
+    updates: [
+      { type: "feature", text: "Bulk PDF merge and reduce — combine multiple PDFs or shrink file sizes in batch." },
+      { type: "feature", text: "OCR text extraction from images and PDFs — runs entirely in your browser." },
+      { type: "feature", text: "Ebook format conversion added to bulk processing suite." },
+      { type: "performance", text: "BatchProgressPanel added to all bulk modules — real-time progress, fault isolation, and per-file status." },
+      { type: "fix", text: "Bulk audio format conversion fixed — correct codecs used for each output format." },
+    ]
+  },
+  {
     version: "v1.3.0",
     date: "March 13, 2026",
     title: "30 Bulk Processing Tools",
@@ -257,6 +332,21 @@ const RELEASES: Release[] = [
   // ──────────────────────────────────────────────
   // FEBRUARY 2026
   // ──────────────────────────────────────────────
+  {
+    version: "v1.2.1",
+    date: "February 28, 2026",
+    title: "230+ Tools Milestone & Registry Cleanup",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Catalog crossed 230 tools across 21 categories. Duplicate entries cleaned up, broken links fixed, and category filtering corrected.",
+    updates: [
+      { type: "feature", text: "Catalog crossed 230 tools across 21 categories with full working pages." },
+      { type: "fix", text: "Duplicate tool entries removed across all categories." },
+      { type: "fix", text: "Broken tool links fixed — all entries now route to working pages." },
+      { type: "fix", text: "Category filtering corrected — subcategories now show accurate tool counts." },
+      { type: "performance", text: "Tool card rendering optimized — faster page loads on category listing pages." },
+    ]
+  },
   {
     version: "v1.2.0",
     date: "February 20, 2026",
