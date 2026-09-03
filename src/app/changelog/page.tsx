@@ -19,35 +19,57 @@ interface Release {
 }
 
 const RELEASES: Release[] = [
+  // ──────────────────────────────────────────────
+  // SEPTEMBER 2026
+  // ──────────────────────────────────────────────
   {
-    version: "v2.3.0",
-    date: "September 03, 2026",
-    title: "Sign-In Fixed, Admin Security & 30+ New Tools",
-    tag: "major",
-    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Fixed the sign-in issue that was silently breaking user sessions. Admin panel hardened with IP restrictions, session control, and safeguards against accidental role changes. 30+ new tools added including bulk processors, AI-powered watermark removal, and text utilities. Homepage upload experience redesigned.",
+    version: "v2.4.0",
+    date: "September 15, 2026",
+    title: "Admin Security Hardening & Session Control",
+    tag: "security",
+    tagColor: "bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20",
+    description: "Admin panel locked down with IP restrictions, session management, and safeguards against accidental privilege changes. If you run a multi-admin setup, set the ADMIN_IPS environment variable to restrict access.",
     updates: [
-      { type: "fix", text: "Sign-in now works reliably — users no longer appear logged out after authenticating." },
-      { type: "security", text: "Admin panel restricted by IP — only trusted networks can access admin routes." },
-      { type: "security", text: "Admin role changes now require typing the user's email to confirm — prevents accidental promotions or demotions." },
-      { type: "feature", text: "Admins can view and revoke active sessions per user, including device and IP information." },
-      { type: "feature", text: "30+ new tools: bulk image upscaling, bulk format conversion, AI watermark removal, bulk PDF operations, and text utilities." },
-      { type: "feature", text: "Homepage upload box redesigned — shows supported formats at a glance with privacy-first messaging." },
+      { type: "security", text: "Admin panel restricted by IP — only trusted networks can access admin routes. Set ADMIN_IPS environment variable to enable." },
+      { type: "security", text: "Admin role changes now require typing the user's exact email to confirm — prevents accidental promotions or demotions." },
+      { type: "feature", text: "Admins can view active sessions per user (device, IP, expiry) and force-logout lost or stolen devices." },
+      { type: "feature", text: "Full audit trail for all admin actions — every role change, ban, and credit edit is logged with timestamp and actor." },
+      { type: "fix", text: "Sign-in now works reliably — users no longer appear logged out after authenticating. Session detection fixed across client and server." },
+      { type: "fix", text: "Middleware ban enforcement fixed — banned users were previously able to access API routes in production." },
     ]
   },
   {
-    version: "v2.2.0",
-    date: "August 25, 2026",
-    title: "Smarter Calculators, Accessibility & Performance",
+    version: "v2.3.0",
+    date: "September 03, 2026",
+    title: "30+ New Tools & Homepage Redesign",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Every calculator upgraded with a two-column layout, result history, and auto-calculate mode. Full accessibility pass across the platform. Page load times improved.",
+    description: "30+ new tools added including bulk processors, AI-powered watermark removal, and text utilities. Homepage upload experience redesigned with format badges and privacy-first messaging.",
     updates: [
-      { type: "feature", text: "Calculators redesigned: two-column layout with result panel, one-click copy/download, calculation history, and presets." },
-      { type: "feature", text: "Auto-calculate across health, finance, and math tools — results appear as you type." },
-      { type: "fix", text: "Calculation accuracy improved across 20+ tools — edge cases like empty inputs and impossible values handled gracefully." },
-      { type: "fix", text: "Accessibility pass: screen reader support, keyboard navigation, and proper labels added across all interactive elements." },
-      { type: "performance", text: "Page loads faster — heavy code removed from initial bundles, images optimized, tools load on demand." },
+      { type: "feature", text: "30+ new tools: bulk image upscaling, bulk HEIC/AVIF conversion, AI watermark removal (single + batch), bulk PDF operations (rotate, protect, split, watermark, crop), and text utilities (Reverser, Upside Down, Glitch, Invisible Character)." },
+      { type: "feature", text: "Homepage upload box redesigned — shows supported format badges (IMG, VID, PDF, DOC, AUD) at a glance, privacy notice, and smarter file detection that routes to the right tool." },
+      { type: "feature", text: "Mobile sidebar navigation added to category pages — browse tools by category on any screen size." },
+      { type: "feature", text: "1,000+ tool-specific instructions and FAQs written across all 21 categories — every tool now has unique how-to guides instead of generic templates." },
+      { type: "fix", text: "Category sidebar and view mode toggles now visible on mobile — were previously hidden on small screens." },
+    ]
+  },
+  // ──────────────────────────────────────────────
+  // AUGUST 2026
+  // ──────────────────────────────────────────────
+  {
+    version: "v2.2.0",
+    date: "August 25, 2026",
+    title: "Calculator Upgrade, Accessibility & Performance",
+    tag: "major",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Every calculator redesigned with a two-column layout, result history, and auto-calculate mode. Full accessibility pass across the platform. Page load times improved.",
+    updates: [
+      { type: "feature", text: "Calculators redesigned: two-column layout with result panel, one-click copy/download, calculation history, and presets across 80+ calculators." },
+      { type: "feature", text: "Auto-calculate across health, finance, and math tools — results appear as you type, no Calculate button needed." },
+      { type: "fix", text: "Calculation accuracy improved across 20+ tools — edge cases like empty inputs, impossible values, NaN, and overflow handled gracefully instead of showing misleading zeros." },
+      { type: "fix", text: "Accessibility pass: screen reader support, keyboard navigation, and proper labels added to all interactive elements across 39 tools." },
+      { type: "performance", text: "Page loads faster — heavy code removed from initial bundles, images optimized to WebP, tools load on demand." },
+      { type: "fix", text: "Gas mileage calculator NaN bug fixed. Fraction calculator stack overflow fixed. Modulo and rounding computations guarded against empty inputs." },
     ]
   },
   {
@@ -56,25 +78,31 @@ const RELEASES: Release[] = [
     title: "Admin Panel, Sign-In Rebuilt & Account System",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Google sign-in completely rebuilt to fix persistent authentication failures. New admin panel for user management, subscriptions, and audit logging. Full account system with profile editing, favorites, and bot protection on auth flows.",
+    description: "Google sign-in completely rebuilt to fix persistent authentication failures. New admin panel for user management, subscriptions, and audit logging. Full account system with profile editing, favorites, and bot protection.",
     updates: [
-      { type: "fix", text: "Google sign-in rebuilt from scratch — fixed redirect issues, session persistence, and cookie conflicts that were breaking authentication." },
-      { type: "feature", text: "Admin panel launched: manage users, view subscriptions, edit credits, ban/unban, GDPR delete, and full audit trail." },
-      { type: "feature", text: "Account page: edit profile, change password, manage sessions, export favorites, and delete your account." },
-      { type: "feature", text: "Favorites system: star any tool, see them on your homepage, and jump to them instantly from search." },
-      { type: "security", text: "Bot protection added to sign-up, sign-in, and password reset flows." },
+      { type: "fix", text: "Google sign-in rebuilt from scratch — fixed redirect issues, session persistence, and cookie conflicts that were breaking authentication for all users." },
+      { type: "feature", text: "Admin panel launched: manage users, view subscriptions, edit credits, ban/unban, GDPR delete, and full audit trail with search and pagination." },
+      { type: "feature", text: "Account page: edit profile, change password, manage active sessions, export favorites, and delete your account." },
+      { type: "feature", text: "Favorites system: star any tool, see them on your homepage, and jump to them instantly from search (Cmd+K)." },
+      { type: "security", text: "Bot protection (Turnstile CAPTCHA) added to sign-up, sign-in, and password reset flows." },
+      { type: "fix", text: "Admin layout fixed — Header and Footer hidden on admin pages for a cleaner interface." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // JULY 2026
+  // ──────────────────────────────────────────────
   {
     version: "v2.0.1",
     date: "July 25, 2026",
     title: "Tool Count Accuracy Fix",
     tag: "minor",
     tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
-    description: "Fixed a counting discrepancy where the header claimed '1090+ tools' but results showed '856'. Now every count on the page — header, category sidebars, and results — shows the same number.",
+    description: "Fixed a counting discrepancy where the header claimed '1090+ tools' but results showed '856'. Now every count on the page — header, category sidebars, and results — shows the same accurate number.",
     updates: [
       { type: "fix", text: "Tool counts now consistent everywhere — header, subtitle, category sidebars, and results all show the same number." },
-      { type: "fix", text: "Search engine metadata and structured data now use accurate counts." },
+      { type: "fix", text: "Category sidebar and menubar counts now show only visible tools, not hidden redirect entries." },
+      { type: "fix", text: "Search engine metadata and structured data (page title, Open Graph) now use accurate counts." },
+      { type: "fix", text: "Category navigation no longer lists empty categories that only contained hidden entries." },
     ]
   },
   {
@@ -83,88 +111,121 @@ const RELEASES: Release[] = [
     title: "Premium Calculator Shell, SaaS Dashboard & Indian Utilities",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Major premium interface upgrade. CalculatorShell framework deployed across 80+ calculators with history, keyboard shortcuts, and one-click copy. Three flagship premium tools launched. Indian Utilities category completed. All tool modules upgraded to premium UI.",
+    description: "Major premium interface upgrade across the entire platform. CalculatorShell framework deployed across 80+ calculators. Three flagship premium tools launched. Indian Utilities category completed.",
     updates: [
-      { type: "feature", text: "CalculatorShell framework: history panel, keyboard support, result memory, and one-click copy across 80+ calculators." },
-      { type: "feature", text: "Premium SaaS Metrics Dashboard — interactive KPI cards, charts, scenario modeling, and PDF export." },
-      { type: "feature", text: "Premium API Builder/Tester — request collections, code snippet generation, and environment variables." },
-      { type: "feature", text: "Premium PDF Workflow Builder — merge, split, fill forms, rearrange pages in a single workspace." },
-      { type: "feature", text: "Indian Utilities completed: UPI ID Validator, Indian Address Parser, Vehicle Registration Checker, Aadhaar Validator, and Investment Calculator." },
-      { type: "feature", text: "Bulk URL Shortener — shorten multiple URLs at once with custom aliases and CSV export." },
-      { type: "fix", text: "22 health tools moved to their own category. Video converter tool restored." },
+      { type: "feature", text: "CalculatorShell framework: history panel, keyboard shortcuts, result memory, and one-click copy across 80+ calculators. Scientific Calculator rebuilt with full grid layout." },
+      { type: "feature", text: "Premium SaaS Metrics Dashboard — interactive KPI cards, SVG charts, scenario modeling, and PDF export. Privacy-first, no server round trips." },
+      { type: "feature", text: "Premium API Builder/Tester — request collections, code snippet generation, environment variables, and privacy-first execution." },
+      { type: "feature", text: "Premium PDF Workflow Builder — merge, split, fill forms, rearrange pages, optimize, and edit metadata in a single drag-and-drop workspace." },
+      { type: "feature", text: "Indian Utilities completed: UPI ID Validator, Indian Address Parser, Vehicle Registration Checker, Aadhaar Validator, and Investment Calculator — all optimized for Indian data formats." },
+      { type: "feature", text: "Bulk URL Shortener — shorten multiple URLs at once with custom aliases, click tracking, and CSV export." },
+      { type: "fix", text: "22 health tools moved from Calculator to their own Health category. Video converter tool restored from incorrect hiding." },
+    ]
+  },
+  // ──────────────────────────────────────────────
+  // JUNE 2026
+  // ──────────────────────────────────────────────
+  {
+    version: "v1.10.0",
+    date: "June 30, 2026",
+    title: "Production Hardening & Batch Processing Fixes",
+    tag: "major",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Bulk processing hardened with fault isolation — one bad file no longer crashes the entire batch. Security headers added, automated sitemap, and AI crawler rules configured.",
+    updates: [
+      { type: "performance", text: "Bulk processing hardened: a single corrupted or broken file is auto-skipped instead of crashing the entire batch." },
+      { type: "security", text: "Content-Security-Policy headers added — prevents unauthorized script execution on all pages." },
+      { type: "feature", text: "Automated sitemap generation with 876+ URLs, plus AI crawler rules for discoverability." },
+      { type: "feature", text: "Content integrity test suite runs before every commit — catches broken tools and duplicate entries automatically." },
+      { type: "fix", text: "62 tools that were accidentally hidden are now visible again — unit converters, time/date tools, color utilities, JSON/CSV tools, and code utilities." },
     ]
   },
   {
     version: "v1.9.0",
-    date: "June 23, 2026",
-    title: "830+ Tools, Production Hardening & SEO Overhaul",
+    date: "June 15, 2026",
+    title: "830+ Tools — Full Catalog, Zero Empty Pages",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Tool catalog expanded to 830+. Production hardened with security headers, automated sitemap, and content integrity testing. 62 accidentally hidden tools restored. Bulk processing upgraded with fault isolation. SEO category sections rewritten.",
+    description: "Tool catalog doubled to 830+. Every tool now has a real working page — zero 'Coming Soon' placeholders, zero broken links. 23 duplicates removed, 6 broken links fixed.",
     updates: [
-      { type: "feature", text: "Catalog grew to 830+ tools across 20 categories with full cross-reference verification." },
-      { type: "fix", text: "62 tools that were accidentally hidden are now visible again — unit converters, time/date tools, color utilities, and more." },
-      { type: "feature", text: "Content integrity testing runs before every commit — catches broken tools and duplicate entries automatically." },
-      { type: "performance", text: "Bulk processing hardened: one bad file no longer crashes the entire batch." },
-      { type: "feature", text: "Security headers added, automated sitemap generation, and AI crawler rules configured." },
+      { type: "feature", text: "Catalog doubled to 830+ tools across 20 categories — every entry has a working page with real functionality." },
+      { type: "fix", text: "23 duplicate entries removed. 6 broken tool links fixed. Category filtering corrected across all pages." },
+      { type: "feature", text: "New CSV to SQL Terminal — upload CSV files and run SQL queries entirely in your browser." },
+      { type: "feature", text: "New Vector Drawing Canvas — freeform drawing with pen, shapes, multi-page support, color picker, and SVG/PNG export." },
+      { type: "fix", text: "EPUB to PDF converter restored. Time Converter moved to correct category." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // MAY 2026
+  // ──────────────────────────────────────────────
   {
     version: "v1.8.0",
-    date: "June 15, 2026",
-    title: "Full Tool Catalog — Zero Empty Pages",
-    tag: "major",
-    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Tool catalog doubled to 830+. Every tool now has a real working page — zero 'Coming Soon' placeholders, zero broken links. Format converters consolidated. New tools: CSV to SQL terminal, Vector Drawing canvas.",
-    updates: [
-      { type: "feature", text: "Catalog doubled to 830+ tools — every entry has a working page with real functionality." },
-      { type: "fix", text: "23 duplicate entries removed. 6 broken tool links fixed. Category filtering corrected across all pages." },
-      { type: "feature", text: "New CSV to SQL Terminal — run SQL queries on CSV files in your browser." },
-      { type: "feature", text: "New Vector Drawing Canvas — freeform drawing with shapes, multi-page support, and export." },
-    ]
-  },
-  {
-    version: "v1.7.0",
     date: "May 26, 2026",
     title: "Category Filters, A-Z Sorting & Smart Megamenu",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Category filters now available on every tool category page. A-Z alphabetical sorting. Megamenu shows your recently-used tools. CPM Calculator with platform presets for YouTube, Instagram, TikTok and more.",
+    description: "Category filters now on every tool category page. A-Z alphabetical sorting. Megamenu shows your recently-used tools. CPM Calculator with presets for 7 social platforms.",
     updates: [
-      { type: "feature", text: "Category filter buttons (Compress, Resize, Convert, Edit, AI) now on every category page." },
-      { type: "feature", text: "A-Z alphabetical sorting on all category pages." },
-      { type: "feature", text: "Megamenu now shows your recently-used tools instead of hardcoded links." },
+      { type: "feature", text: "Category filter buttons (Compress, Resize, Convert, Edit, AI) now available on every category page — not just Image and PDF." },
+      { type: "feature", text: "A-Z alphabetical sorting on all category pages — dimmed letters for empty categories, works alongside search." },
+      { type: "feature", text: "Megamenu 'Most used today' now shows your actual recently-used tools from browser history instead of hardcoded links." },
       { type: "feature", text: "CPM Calculator with presets for 7 social platforms — YouTube, Twitch, Facebook, Instagram, TikTok, Twitter/X, LinkedIn." },
-      { type: "fix", text: "'Back to Privacy' link fixed — was going to Privacy Policy instead of Privacy tools." },
-      { type: "feature", text: "New professional favicon and PWA icons." },
+      { type: "fix", text: "'Back to Privacy' link fixed — was going to Privacy Policy page instead of Privacy tools category." },
+      { type: "feature", text: "New professional SVG favicon and PWA icons." },
     ]
   },
   {
-    version: "v1.6.0",
+    version: "v1.7.0",
     date: "May 15, 2026",
-    title: "250 Format Converter Pages",
+    title: "250 Format Converter Pages & Tool Differentiation",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "Every format-to-format conversion now has its own dedicated page. Search 'PNG to WebP' or 'MP3 to WAV' and land directly on the right tool. 20+ high-traffic tools differentiated with unique descriptions.",
+    description: "Every format-to-format conversion now has its own dedicated page. Search 'PNG to WebP' or 'MP3 to WAV' and land directly on the right tool. 20+ high-traffic tools differentiated.",
     updates: [
-      { type: "feature", text: "250 format-pair converter pages — each with format-specific instructions and FAQs." },
-      { type: "feature", text: "20+ popular tools given unique descriptions and how-to guides so they don't look like clones." },
+      { type: "feature", text: "250 format-pair converter pages completed: 110 image pairs, 72 audio pairs, 42 document pairs, 20 video pairs, 6 data pairs — each with unique instructions and FAQs." },
+      { type: "feature", text: "20+ popular tools given unique descriptions and how-to guides — word counter, image compressor, PDF compressor, video compressor, and more no longer look like clones." },
+      { type: "feature", text: "Tool cards no longer display library/framework names — cleaner design, no competitive exposure." },
+      { type: "fix", text: "Duplicate SVG-to-PNG entry removed. Link-in-bio builder duplicate fixed." },
+      { type: "performance", text: "Sidebar converter count corrected — now accurately reflects all available converters." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // APRIL 2026
+  // ──────────────────────────────────────────────
   {
-    version: "v1.5.0",
+    version: "v1.6.0",
     date: "April 20, 2026",
     title: "Production Launch — Security, Mobile & SEO",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Platform locked down for production. Security headers, database provisioned, mobile responsiveness fixed across all tools, and SEO rewritten for search intent.",
     updates: [
-      { type: "security", text: "Security headers added — prevents unauthorized script execution." },
-      { type: "fix", text: "Mobile layout fixed across all tool pages — badges, navigation, and hero sections now work on small screens." },
+      { type: "security", text: "CORS restricted to toolzum.com only — staging and localhost origins removed from production." },
+      { type: "security", text: "Security headers added — prevents unauthorized script execution on all pages." },
+      { type: "fix", text: "Mobile layout fixed across all tool pages — badges, navigation, hero sections, and URL shortener now work on small screens." },
       { type: "fix", text: "URL Shortener and Currency Converter moved to backend proxy — were broken by browser security restrictions." },
-      { type: "performance", text: "SEO descriptions rewritten to match how people actually search." },
+      { type: "performance", text: "SEO descriptions rewritten to match how people actually search — removed number prefixes, aligned with natural language." },
+      { type: "fix", text: "Console warnings in 7 non-critical modules suppressed in production — clean console output." },
     ]
   },
+  {
+    version: "v1.5.0",
+    date: "April 05, 2026",
+    title: "Database & Auth Infrastructure",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Database provisioned with user, session, payment, and analytics tables. Authentication system wired with fallback URLs to prevent redirect loops.",
+    updates: [
+      { type: "feature", text: "Database tables provisioned: user accounts, sessions, payments, download usage, and analytics events." },
+      { type: "fix", text: "Auth redirect loop fixed — fallback URL changed from localhost to production domain." },
+      { type: "fix", text: "Video converter codec fixed — correct format used for each output type (WebM, AVI, etc.)." },
+      { type: "fix", text: "Currency exchange rates moved to backend proxy with caching — live data instead of fallback rates." },
+      { type: "fix", text: "XML Sitemap generator download bug fixed — files no longer fail on slow devices." },
+    ]
+  },
+  // ──────────────────────────────────────────────
+  // MARCH 2026
+  // ──────────────────────────────────────────────
   {
     version: "v1.4.0",
     date: "March 24, 2026",
@@ -173,9 +234,10 @@ const RELEASES: Release[] = [
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "Process 50 files at once without worry. If one file is corrupted or too large, it's automatically skipped and the rest keep processing. Large files get a warning before processing.",
     updates: [
-      { type: "feature", text: "Memory-pressure warning on devices with less than 4 GB RAM." },
-      { type: "feature", text: "Large file confirmation dialogs (>100 MB) — no more silent browser crashes." },
-      { type: "performance", text: "Bad files are auto-skipped instead of crashing the entire batch." },
+      { type: "feature", text: "Memory-pressure warning on devices with less than 4 GB RAM — prevents crashes before they happen." },
+      { type: "feature", text: "Large file confirmation dialogs (>100 MB) with device memory info across video, PDF, and image modules." },
+      { type: "performance", text: "Fault-tolerant batch engine: corrupted files are auto-skipped, the batch continues, and failures are reported at the end." },
+      { type: "security", text: "Out-of-memory errors caught explicitly with a clear recovery message instead of a silent browser freeze." },
     ]
   },
   {
@@ -186,74 +248,121 @@ const RELEASES: Release[] = [
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
     description: "All 30 bulk processing tools live. Compress videos, reduce file sizes, burn subtitles, convert images to PDF, merge documents, run OCR — all in your browser. Pro users get parallel processing and ZIP downloads.",
     updates: [
-      { type: "feature", text: "Batch video processing — compress, resize, and add subtitles to multiple videos at once." },
-      { type: "feature", text: "20+ new bulk tools: image resize, PDF merge, OCR, ebook conversion, audio conversion, and more." },
-      { type: "feature", text: "Pro users download entire batches as a single ZIP file." },
+      { type: "feature", text: "Batch video processing — compress, resize, and add subtitles to multiple videos simultaneously." },
+      { type: "feature", text: "20+ new bulk tools: image resize/compress, PDF merge/reduce, OCR text extraction, ebook conversion, audio format conversion, and face anonymization." },
+      { type: "feature", text: "Pro users download entire batches as a single ZIP file. Free users get per-file downloads." },
+      { type: "performance", text: "Pro tier unlocks 6x parallel processing — process 12 files in the time free users process 2." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // FEBRUARY 2026
+  // ──────────────────────────────────────────────
   {
     version: "v1.2.0",
-    date: "February 11, 2026",
-    title: "Enterprise Security & Full Office Suite — 230+ Tools",
+    date: "February 20, 2026",
+    title: "Design Studio & Enterprise Security",
     tag: "major",
     tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
-    description: "230+ tools with enterprise-ready security. PDF office suite, design studio, CSP security headers, offline mode indicator, and zero data collection across every tool.",
+    description: "Design tools launched: SVG editor, Logo Maker, AI Thumbnail Maker. Enterprise security headers added. Offline mode indicator. Zero data collection verified.",
     updates: [
-      { type: "feature", text: "Full PDF office suite: Word-to-PDF, PDF-to-Word, PDF-to-JPG, and page editing." },
-      { type: "feature", text: "Design studio: SVG editor, Logo Maker, AI Thumbnail Maker with templates and export." },
-      { type: "security", text: "Security headers prevent unauthorized scripts. Zero data collection across all tools." },
-      { type: "feature", text: "Offline mode indicator — tools work even without WiFi." },
+      { type: "feature", text: "Design studio: SVG Vector Editor, Logo Maker, AI Thumbnail Maker with drag-and-drop canvas, templates, and export presets." },
+      { type: "security", text: "Content-Security-Policy headers lock down script execution — no unauthorized scripts can run." },
+      { type: "feature", text: "Offline mode indicator shows persistent banner — all processing works even when WiFi drops." },
+      { type: "performance", text: "Image background removal migrated to local execution — 4x faster, still zero uploads." },
+      { type: "security", text: "Zero data collection verified across all tools — no analytics pings, no third-party requests." },
     ]
   },
   {
-    version: "v1.1.0",
-    date: "January 09, 2026",
-    title: "Finance & Developer Tools",
-    tag: "minor",
-    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
-    description: "New finance and developer tools. Offline caching for persistent access.",
+    version: "v1.1.1",
+    date: "February 11, 2026",
+    title: "PDF Office Suite — 230+ Tools",
+    tag: "major",
+    tagColor: "bg-[var(--accent-ink)]/10 text-[var(--accent)] border-[var(--accent)]/20",
+    description: "Full PDF office suite launched: Word-to-PDF, PDF-to-Word, PDF-to-JPG, and page editing. All 100% client-side with no server uploads.",
     updates: [
-      { type: "feature", text: "Business finance: SaaS pricing calculator, ROI simulator, currency exchange rates." },
-      { type: "feature", text: "Developer tools: SQL, JSON, and CSS formatters with syntax highlighting." },
-      { type: "performance", text: "Offline caching — tools load instantly even without a connection." },
+      { type: "feature", text: "PDF office suite: Word-to-PDF, PDF-to-Word, PDF-to-JPG, and PDF page editing — fully client-side." },
+      { type: "feature", text: "Catalog crossed 230 tools across 21 categories." },
+      { type: "fix", text: "Video converter output format corrected — proper codecs for WebM, AVI, and other formats." },
+      { type: "fix", text: "Currency converter exchange rates now fetched from backend with caching — live data instead of stale fallbacks." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // JANUARY 2026
+  // ──────────────────────────────────────────────
+  {
+    version: "v1.1.0",
+    date: "January 20, 2026",
+    title: "Developer Toolbox & Offline Caching",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "New developer tools with syntax highlighting. Offline caching enabled — tools load instantly even without a connection.",
+    updates: [
+      { type: "feature", text: "Developer tools: SQL, JSON, and CSS formatters and minifiers with syntax highlighting and error detection." },
+      { type: "feature", text: "Offline caching enabled across all page routes — tools and pages load instantly even without WiFi." },
+      { type: "fix", text: "XML sitemap generator blob URL race condition fixed — downloads no longer fail on slow devices." },
+    ]
+  },
+  {
+    version: "v1.0.1",
+    date: "January 09, 2026",
+    title: "Finance Tools & Currency Exchange",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "New business finance tools: SaaS pricing calculator, ROI simulator, and live currency exchange rates.",
+    updates: [
+      { type: "feature", text: "Business finance: SaaS pricing calculator, employee turnover tracker, ROI simulator." },
+      { type: "feature", text: "Live currency exchange rates with backend caching for reliability." },
+      { type: "fix", text: "PDF.js memory leak fixed — prolonged use no longer degrades browser performance." },
+    ]
+  },
+  // ──────────────────────────────────────────────
+  // DECEMBER 2025
+  // ──────────────────────────────────────────────
   {
     version: "v1.0.0",
     date: "December 15, 2025",
-    title: "Platform Launch",
+    title: "Platform Launch — Privacy-First Web Utilities",
     tag: "launch",
     tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
-    description: "Toolzum launched with a simple premise: every tool runs in your browser, not on a server. No uploading confidential files to black-box servers.",
+    description: "Toolzum launched with a simple premise: every tool runs in your browser, not on a server. No uploading confidential files to black-box servers for simple resize, crop, or hashing operations.",
     updates: [
-      { type: "feature", text: "50 tools at launch: hashing, text processing, image compression, format conversion, and generators." },
-      { type: "security", text: "Zero data exfiltration verified — every byte stays on your device." },
+      { type: "feature", text: "50 tools at launch: hashing, text processing, image compression, format conversion, and random generators." },
+      { type: "security", text: "Verified zero data exfiltration — no packets leave your device during any tool execution." },
+      { type: "performance", text: "Each tool loads independently — initial page load kept under 100KB." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // NOVEMBER 2025
+  // ──────────────────────────────────────────────
   {
     version: "v0.10.0",
     date: "November 18, 2025",
     title: "Tool Expansion & Payment Integration",
     tag: "minor",
     tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
-    description: "Catalog doubled to 50 tools based on beta feedback. Payment integration stabilized for Indian subscriptions.",
+    description: "Catalog doubled to 50 tools based on closed-beta feedback. Payment integration stabilized for Indian subscriptions.",
     updates: [
-      { type: "feature", text: "Catalog expanded from 25 to 50 tools: image resizer, PDF merger, QR code generator, password generator." },
-      { type: "fix", text: "Payment integration stabilized — webhooks, retries, and invoices automated." },
-      { type: "performance", text: "Each tool loads independently — initial page load 40% faster." },
+      { type: "feature", text: "Catalog expanded from 25 to 50 tools: image resizer, PDF merger, QR code generator, password generator, JSON formatter, base64 encoder/decoder." },
+      { type: "feature", text: "Payment integration stabilized — subscription webhooks, retry logic, and invoice generation automated." },
+      { type: "fix", text: "PDF.js memory leak fixed — prolonged use no longer degrades browser performance." },
+      { type: "performance", text: "Code-splitting improved — each tool loads independently, reducing initial page load by 40%." },
     ]
   },
+  // ──────────────────────────────────────────────
+  // OCTOBER 2025
+  // ──────────────────────────────────────────────
   {
     version: "v0.9.0",
     date: "October 12, 2025",
-    title: "Private Beta",
+    title: "Private Beta — Foundation & Core Architecture",
     tag: "launch",
     tagColor: "bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20",
     description: "Closed beta with 25 tools. All processing happens in your browser — zero uploads. Pro subscription model with payment gateways for India and global users.",
     updates: [
-      { type: "feature", text: "25 tools across PDF, Image, Video, Audio, and Text — all running in-browser." },
-      { type: "feature", text: "Pro subscription with payment support for India (UPI) and global cards." },
-      { type: "performance", text: "Tools load on demand — initial page under 100KB." },
+      { type: "feature", text: "25 tools across PDF, Image, Video, Audio, and Text — all running entirely in your browser." },
+      { type: "feature", text: "Pro subscription model with payment support for India (UPI) and global cards." },
+      { type: "feature", text: "Core processing engine: PDF handling, video/audio processing, and OCR — all client-side." },
+      { type: "performance", text: "Dynamic module loading — tools load on demand, keeping initial page under 100KB." },
     ]
   }
 ];
