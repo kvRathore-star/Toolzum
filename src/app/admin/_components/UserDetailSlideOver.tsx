@@ -165,7 +165,7 @@ export function UserDetailSlideOver({
                     else onToast("Failed to update plan", "error");
                   } catch { onToast("Failed to update plan", "error"); } finally { setChangingPlan(false); }
                 }}
-                className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all duration-200"
+                className="px-3 py-2 min-h-[44px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all duration-200"
               >
                 <option value="free">Free</option>
                 <option value="signedin">Signed In</option>
@@ -295,8 +295,8 @@ function TopTools({ tools }: { tools: ToolUsage[] }) {
       <div className="space-y-1">
         {tools.map((t) => (
           <div key={t.toolSlug} className="flex justify-between text-sm px-3 py-1.5 rounded-lg hover:bg-[var(--bg-surface)] transition-colors duration-150">
-            <span className="text-[var(--text-secondary)]">{t.toolSlug}</span>
-            <span className="text-[var(--text-muted)] tabular-nums">{t.count}x</span>
+            <span className="text-[var(--text-secondary)] truncate min-w-0 mr-2">{t.toolSlug}</span>
+            <span className="text-[var(--text-muted)] tabular-nums shrink-0">{t.count}x</span>
           </div>
         ))}
       </div>
@@ -344,7 +344,7 @@ function RoleHistory({ entries }: { entries: AuditEntry[] }) {
           <div key={i} className="text-sm px-3 py-1.5 text-[var(--text-secondary)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors duration-150">
             <span className="text-[var(--text-muted)] tabular-nums">{a.createdAt}</span>
             <span className="mx-2">·</span>
-            <span>{a.actorEmail}</span>
+            <span className="font-medium">{a.actorUserName || a.actorEmail}</span>
             <span className="mx-1">changed role from</span>
             <span className="font-medium">{a.oldValue}</span>
             <span className="mx-1">to</span>

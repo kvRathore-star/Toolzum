@@ -51,6 +51,7 @@ export interface ToolUsage {
 
 export interface AuditEntry {
   actorEmail: string;
+  actorUserName: string | null;
   action: string;
   oldValue: string | null;
   newValue: string | null;

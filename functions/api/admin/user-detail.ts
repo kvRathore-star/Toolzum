@@ -64,11 +64,12 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     .all<{ toolSlug: string; count: number }>();
 
   const auditLog = await DB.prepare(
-    "SELECT actorEmail, action, oldValue, newValue, createdAt FROM admin_audit_log WHERE targetUserId = ? ORDER BY createdAt DESC LIMIT 10"
+    "SELECT a.actorEmail, a.action, a.oldValue, a.newValue, a.createdAt, au.name as actorUserName FROM admin_audit_log a LEFT JOIN \"user\" au ON a.actorEmail = au.email WHERE a.targetUserId = ? ORDER BY a.createdAt DESC LIMIT 10"
   )
     .bind(userId)
     .all<{
       actorEmail: string;
+      actorUserName: string | null;
       action: string;
       oldValue: string | null;
       newValue: string | null;
