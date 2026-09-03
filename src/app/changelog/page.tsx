@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { 
   ArrowRight,
-  Bookmark
+  Bookmark,
+  ChevronDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChangelogTimeline } from "@/components/ChangelogTimeline";
@@ -222,7 +225,7 @@ const RELEASES: Release[] = [
     updates: [
       { type: "security", text: "CORS restricted to toolzum.com only — staging and localhost origins removed from production." },
       { type: "security", text: "Security headers added — prevents unauthorized script execution on all pages." },
-      { type: "fix", text: "Mobile layout fixed across all tool pages — badges, navigation, hero sections, and URL shortener now work on small screens." },
+      { type: "fix", text: "Responsive polish — tool cards, result panels, and category grids now reflow cleanly on tablets and small phones." },
       { type: "fix", text: "URL Shortener and Currency Converter moved to backend proxy — were broken by browser security restrictions." },
       { type: "performance", text: "SEO descriptions rewritten to match how people actually search — removed number prefixes, aligned with natural language." },
       { type: "feature", text: "Google Search Console verified — analytics and search performance tracking enabled." },
@@ -236,7 +239,7 @@ const RELEASES: Release[] = [
     tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
     description: "Mobile layout corrected across all tool pages. SEO metadata rewritten for natural search language. AI crawler rules configured — tools are now discoverable by ChatGPT, Perplexity, and other AI assistants.",
     updates: [
-      { type: "fix", text: "Mobile layout corrected across tool pages — badges, navigation, and hero sections now display properly on small screens." },
+      { type: "fix", text: "Mobile navigation overhauled — hamburger menu, touch targets, and swipe gestures now work reliably on iOS and Android." },
       { type: "performance", text: "SEO metadata updated to match natural search language — descriptions align with how users actually search." },
       { type: "feature", text: "AI crawler rules configured for major models — improves tool discoverability and referral traffic." },
       { type: "performance", text: "Image compression tools now process 2x faster on mobile devices." },
@@ -387,7 +390,7 @@ const RELEASES: Release[] = [
       { type: "feature", text: "Live currency exchange rates with backend caching for reliability." },
       { type: "feature", text: "PDF.js updated to latest stable release — improved rendering accuracy and memory management." },
       { type: "performance", text: "Search results now include newly added tools within seconds of deployment." },
-      { type: "fix", text: "Mobile layout corrected across all finance tool pages." },
+      { type: "fix", text: "Finance tool pages — calculator inputs, result tables, and chart layouts now render correctly on mobile." },
     ]
   },
   // ══════════════════════════════════════════════
@@ -422,7 +425,7 @@ const RELEASES: Release[] = [
       { type: "feature", text: "Catalog expanded from 25 to 50 tools: image resizer, PDF merger, QR code generator, password generator, JSON formatter, base64 encoder/decoder." },
       { type: "feature", text: "Payment integration stabilized — subscription webhooks, retry logic, and invoice generation automated." },
       { type: "performance", text: "Code-splitting improved — each tool loads independently, reducing initial page load by 40%." },
-      { type: "fix", text: "Mobile layout corrected — tools now display properly on screens smaller than 768px." },
+      { type: "fix", text: "Viewport fix — tool pages now respect meta viewport tag, eliminating horizontal scroll on screens under 768px." },
       { type: "feature", text: "Image resizer now supports batch mode — resize multiple images to the same dimensions at once." },
     ]
   },
@@ -447,6 +450,11 @@ const RELEASES: Release[] = [
 ];
 
 export default function ChangelogPage() {
+  const [showAll, setShowAll] = useState(false);
+  const RECENT_COUNT = 8;
+  const visibleReleases = showAll ? RELEASES : RELEASES.slice(0, RECENT_COUNT);
+  const hiddenCount = RELEASES.length - RECENT_COUNT;
+
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
       
@@ -470,7 +478,19 @@ export default function ChangelogPage() {
           </p>
         </div>
 
-        <ChangelogTimeline releases={RELEASES} />
+        <ChangelogTimeline releases={visibleReleases} />
+
+        {!showAll && hiddenCount > 0 && (
+          <div className="text-center mt-12">
+            <button
+              onClick={() => setShowAll(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] hover:border-[var(--accent)]/30 transition-all duration-200"
+            >
+              <ChevronDown className="w-4 h-4" />
+              Show {hiddenCount} older releases
+            </button>
+          </div>
+        )}
 
         {/* Bottom newsletter section */}
         <div className="mt-24 max-w-4xl mx-auto bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12 text-center relative overflow-hidden">

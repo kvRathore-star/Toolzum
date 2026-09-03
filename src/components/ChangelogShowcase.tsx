@@ -137,13 +137,14 @@ function ToolExpansionDemo() {
 
   useEffect(() => {
     if (!isVisible) return;
-    const totalSteps = 200 - 50;
+    const target = clientToolsRegistry.filter(t => t.showInCategory !== false).length;
+    const totalSteps = 150;
     let step = 0;
     const t = setInterval(() => {
       step++;
-      setCount(50 + Math.floor((step / totalSteps) * (200 - 50)));
+      setCount(Math.min(Math.floor((step / totalSteps) * target), target));
       if (step >= totalSteps) clearInterval(t);
-    }, 30);
+    }, 20);
     return () => clearInterval(t);
   }, [isVisible]);
 
