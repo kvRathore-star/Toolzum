@@ -10,6 +10,9 @@ export function classifyTool(tool: ToolMetadata): DependencyVerdict {
 }
 
 export function getToolCounts() {
+  // Exclude:
+  // - seo-* : SEO permutation landing pages (generated URL variations, not real tools)
+  // - Extension : browser extension entries (not browser-based tools)
   const implementedTools = toolsRegistry.filter(t => !t.id?.startsWith('seo-') && t.category !== 'Extension');
   
   const visibleFree = implementedTools.filter(t => 

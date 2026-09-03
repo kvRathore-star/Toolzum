@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Play, Pause, FileType, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
+import { SITE_STATS } from "@/registry/site-data.generated";
 
 // ─── Batch Fault Tolerance Demo (v1.5.0) ───
 
@@ -137,7 +138,7 @@ function ToolExpansionDemo() {
 
   useEffect(() => {
     if (!isVisible) return;
-    const target = clientToolsRegistry.filter(t => t.showInCategory !== false).length;
+    const target = SITE_STATS.totalImplemented;
     const totalSteps = 150;
     let step = 0;
     const t = setInterval(() => {
