@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GdprConsentBanner } from "@/components/GdprConsentBanner";
 import { PostHogProvider } from "@/components/PostHogProvider";
+import { ErrorLogger } from "@/components/ErrorLogger";
 import { SiteShell } from "@/components/SiteShell";
 import { TOOL_COUNT } from "@/registry/site-data.generated";
 import "./globals.css";
@@ -118,9 +119,11 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <SiteShell>
             <PostHogProvider>
-              <main id="main-content" className="flex-1">
-                {children}
-              </main>
+              <ErrorLogger>
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
+              </ErrorLogger>
             </PostHogProvider>
           </SiteShell>
 

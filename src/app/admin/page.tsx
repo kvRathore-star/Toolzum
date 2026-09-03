@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Shield, Users, TrendingUp, Clock, ArrowLeft } from "lucide-react";
+import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug } from "lucide-react";
 import Link from "next/link";
 import { StatsSection } from "./_components/StatsSection";
 import { UserTable } from "./_components/UserTable";
@@ -11,6 +11,7 @@ import { BulkActionsBar } from "./_components/BulkActionsBar";
 import { RoleConfirmModal } from "./_components/RoleConfirmModal";
 import { UserDetailSlideOver } from "./_components/UserDetailSlideOver";
 import { AuditLogModal } from "./_components/AuditLogModal";
+import { ErrorLogsSection } from "./_components/ErrorLogsSection";
 import type { AdminStats, User, UsersResponse, UserDetail, AuditLogEntry, Session } from "./_components/admin.types";
 
 export default function AdminPage() {
@@ -38,6 +39,7 @@ export default function AdminPage() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
   const [activeSection, setActiveSection] = useState<"stats" | "users">("stats");
+  const [showErrors, setShowErrors] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -262,6 +264,9 @@ export default function AdminPage() {
           <button onClick={() => { setShowAuditLog(true); fetchAuditLog(); }} className={sidebarBtnCls(false)}>
             <div className="flex items-center gap-2"><Clock className="w-4 h-4" /> Audit Log</div>
           </button>
+          <button onClick={() => setShowErrors(!showErrors)} className={sidebarBtnCls(showErrors)}>
+            <div className="flex items-center gap-2"><Bug className="w-4 h-4" /> Errors</div>
+          </button>
         </div>
         <Link href="/" className="mt-auto flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Toolzum
@@ -311,6 +316,12 @@ export default function AdminPage() {
             }}
             searchRef={searchRef}
           />
+          {showErrors && (
+            <div className="space-y-4">
+              <h2 className="text-lg font-semibold text-[var(--text-primary)]">Error Logs</h2>
+              <ErrorLogsSection />
+            </div>
+          )}
         </div>
       </main>
 
