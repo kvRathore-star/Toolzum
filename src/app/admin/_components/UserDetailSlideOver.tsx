@@ -36,7 +36,7 @@ function ActionButton({ onClick, disabled, loading, icon: Icon, label, loadingLa
     <button
       disabled={disabled || loading}
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95 ${variants[variant]} ${className}`}
+      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95 min-h-[44px] ${variants[variant]} ${className}`}
     >
       {loading ? (
         <div className="w-3.5 h-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
@@ -65,13 +65,19 @@ export function UserDetailSlideOver({
   return (
     <div className="fixed inset-0 z-40 flex justify-end" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in" />
-      <div className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto shadow-2xl animate-slide-in-right" onClick={(e) => e.stopPropagation()}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="user-detail-title"
+        className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto shadow-2xl animate-slide-in-right"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]/95 backdrop-blur-xl">
-          <h2 className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
-          <button type="button" onClick={onClose} className="relative z-20 p-1.5 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
+          <h2 id="user-detail-title" className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
+          <button type="button" onClick={onClose} aria-label="Close" className="relative z-20 p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
         </div>
         {loading ? (
-          <div className="p-12 text-center">
+          <div className="p-12 text-center" role="status" aria-live="polite">
             <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
             <p className="text-sm text-[var(--text-muted)] mt-3">Loading user details...</p>
           </div>
@@ -107,9 +113,10 @@ export function UserDetailSlideOver({
 
             {/* Credits */}
             <div className="p-4 bg-[var(--bg-surface)] rounded-xl">
-              <label className={labelCls}>Credits</label>
+              <label htmlFor="credits-input" className={labelCls}>Credits</label>
               <div className="flex gap-2 items-center">
                 <input
+                  id="credits-input"
                   type="number"
                   min={0}
                   max={99999}
@@ -148,6 +155,7 @@ export function UserDetailSlideOver({
               <select
                 value={userDetail.user.plan}
                 disabled={changingPlan}
+                aria-label="Change user plan"
                 onChange={async (e) => {
                   const newPlan = e.target.value;
                   setChangingPlan(true);
@@ -209,21 +217,22 @@ export function UserDetailSlideOver({
 
       {showDeleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)}>
-          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3">
               <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-xl">
                 <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />
               </div>
-              <h3 className="text-lg font-bold text-[var(--text-primary)]">Delete User</h3>
+              <h3 id="delete-confirm-title" className="text-lg font-bold text-[var(--text-primary)]">Delete User</h3>
             </div>
             <p className="text-sm text-[var(--text-secondary)]">
               This will permanently delete <strong className="text-[var(--text-primary)]">{userDetail?.user.name}</strong> and all their data across 6 tables. This cannot be undone.
             </p>
             <div>
-              <label className="block text-sm text-[var(--text-secondary)] mb-1">
+              <label htmlFor="delete-confirm-input" className="block text-sm text-[var(--text-secondary)] mb-1">
                 Type <strong className="text-red-500">DELETE</strong> to confirm:
               </label>
               <input
+                id="delete-confirm-input"
                 type="text"
                 value={deleteConfirmText}
                 onChange={(e) => setDeleteConfirmText(e.target.value)}
@@ -300,7 +309,7 @@ function SessionsSection({ sessions, loading, revokingSession, onRevoke }: { ses
     <div>
       <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Monitor className="w-4 h-4" /> Active Sessions</h3>
       {loading ? (
-        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)] py-4"><div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" /> Loading sessions...</div>
+        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)] py-4" role="status" aria-live="polite"><div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" /> Loading sessions...</div>
       ) : sessions.length === 0 ? (
         <p className="text-sm text-[var(--text-muted)] py-4">No active sessions</p>
       ) : (
@@ -314,7 +323,7 @@ function SessionsSection({ sessions, loading, revokingSession, onRevoke }: { ses
               <button
                 onClick={() => onRevoke(s.id)}
                 disabled={revokingSession === s.id}
-                className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95"
+                className="px-3 py-2 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95 min-h-[44px]"
               >
                 {revokingSession === s.id ? "Revoking..." : "Revoke"}
               </button>

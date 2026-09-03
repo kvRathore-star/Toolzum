@@ -94,10 +94,11 @@ export default function AdminPage() {
     setRevokingSession(sessionId);
     try {
       const res = await fetch("/api/admin/sessions/revoke", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId }) });
-      if (res.ok) { setUserSessions((prev) => prev.filter((s) => s.id !== sessionId)); }
-    } catch { /* ignore */ }
+      if (res.ok) { setUserSessions((prev) => prev.filter((s) => s.id !== sessionId)); showToast("Session revoked"); }
+      else showToast("Failed to revoke session", "error");
+    } catch { showToast("Failed to revoke session", "error"); }
     finally { setRevokingSession(null); }
-  }, []);
+  }, [showToast]);
 
   useEffect(() => {
     if (!selectedUserId) { return; }
