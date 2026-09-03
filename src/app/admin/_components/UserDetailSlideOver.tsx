@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, CreditCard, Activity, Clock, Monitor, Copy, ShieldOff, ShieldCheck, Trash2, KeyRound, Save } from "lucide-react";
+import { X, CreditCard, Activity, Clock, Monitor, ShieldOff, ShieldCheck, Trash2, Save } from "lucide-react";
 import Image from "next/image";
 import type { UserDetail, Payment, ToolUsage, AuditEntry, Session } from "./admin.types";
 import { inputCls, labelCls } from "./admin.utils";
@@ -57,7 +57,6 @@ export function UserDetailSlideOver({
   const [banningUser, setBanningUser] = useState(false);
   const [deletingUser, setDeletingUser] = useState(false);
   const [changingPlan, setChangingPlan] = useState(false);
-  const [resetResult, setResetResult] = useState<{ tempPassword: string; email: string } | null>(null);
 
   if (!userDetail && !loading) return null;
 
@@ -199,34 +198,7 @@ export function UserDetailSlideOver({
                 }}
                 icon={Trash2} label="Delete (GDPR)" variant="danger"
               />
-
-              <ActionButton
-                loading={false}
-                onClick={async () => {
-                  try {
-                    const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) });
-                    if (res.ok) {
-                      const data = await res.json() as { tempPassword: string; email: string };
-                      setResetResult({ tempPassword: data.tempPassword, email: data.email });
-                      onToast("Password reset generated");
-                    } else onToast("Failed to reset password", "error");
-                  } catch { onToast("Failed to reset password", "error"); }
-                }}
-                icon={KeyRound} label="Reset Password" variant="ghost"
-              />
             </div>
-
-            {resetResult && (
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl space-y-2 animate-slide-down">
-                <p className="text-xs font-medium text-amber-700 dark:text-amber-400">Password reset for {resetResult.email}</p>
-                <div className="flex items-center gap-2">
-                  <code className="flex-1 px-3 py-2 bg-white dark:bg-black rounded-lg text-sm font-mono text-[var(--text-primary)] border border-[var(--border-subtle)] select-all">{resetResult.tempPassword}</code>
-                  <button onClick={() => { navigator.clipboard.writeText(resetResult.tempPassword); onToast("Copied to clipboard"); }} className="p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><Copy className="w-4 h-4 text-[var(--text-muted)]" /></button>
-                </div>
-                <p className="text-xs text-amber-600 dark:text-amber-500">Share this temp password with the user. They should change it on next login.</p>
-                <button onClick={() => setResetResult(null)} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-colors">Dismiss</button>
-              </div>
-            )}
 
             {userDetail.payments.length > 0 && <PaymentHistory payments={userDetail.payments} />}
             {userDetail.toolUsage.length > 0 && <TopTools tools={userDetail.toolUsage} />}
