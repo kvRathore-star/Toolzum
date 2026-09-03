@@ -66,7 +66,7 @@ export function UserDetailSlideOver({
       <div className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto shadow-2xl animate-slide-in-right" onClick={(e) => e.stopPropagation()}>
         <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]/95 backdrop-blur-xl">
           <h2 className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
-          <button onClick={onClose} className="p-1.5 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
+          <button type="button" onClick={onClose} className="relative z-20 p-1.5 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
         </div>
         {loading ? (
           <div className="p-12 text-center">
