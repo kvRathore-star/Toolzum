@@ -33,7 +33,6 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   const countBinds: unknown[] = [];
 
   if (search) {
-    const searchClause = "AND (u.name LIKE ? OR u.email LIKE ? OR p.orderId LIKE ?)";
     whereClause = `LEFT JOIN "user" u ON p.userId = u.id WHERE (u.name LIKE ? OR u.email LIKE ? OR p.orderId LIKE ?)`;
     countWhere = `LEFT JOIN "user" u ON p.userId = u.id WHERE (u.name LIKE ? OR u.email LIKE ? OR p.orderId LIKE ?)`;
     const s = `%${search}%`;
