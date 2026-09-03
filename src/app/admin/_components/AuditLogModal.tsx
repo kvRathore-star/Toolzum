@@ -26,11 +26,11 @@ export function AuditLogModal({ show, logs, onClose }: AuditLogModalProps) {
             logs.map((log) => (
               <div key={log.id} className="p-3 bg-[var(--bg-surface)] rounded-xl text-sm transition-colors duration-200 hover:bg-[var(--bg-elevated)]">
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-[var(--text-primary)]">{log.actorEmail}</span>
+                  <span className="font-medium text-[var(--text-primary)]">{log.actorUserName || log.actorEmail}</span>
                   <span className="text-[var(--text-muted)] text-xs tabular-nums">{log.createdAt}</span>
                 </div>
                 <p className="text-[var(--text-secondary)] mt-1">
-                  {log.action} — {log.oldValue} → {log.newValue}
+                  {log.actorUserName || log.actorEmail} — {log.action} · {log.oldValue} → {log.newValue}
                   <span className="text-[var(--text-muted)] ml-2">({log.targetUserName || log.targetUserEmail || log.targetUserId})</span>
                 </p>
               </div>

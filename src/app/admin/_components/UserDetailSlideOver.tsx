@@ -57,6 +57,8 @@ export function UserDetailSlideOver({
   const [banningUser, setBanningUser] = useState(false);
   const [deletingUser, setDeletingUser] = useState(false);
   const [changingPlan, setChangingPlan] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
 
   if (!userDetail && !loading) return null;
 
@@ -109,8 +111,14 @@ export function UserDetailSlideOver({
               <div className="flex gap-2 items-center">
                 <input
                   type="number"
+                  min={0}
+                  max={99999}
                   value={editingCredits !== null ? editingCredits : userDetail.user.credits}
-                  onChange={(e) => setEditingCredits(Number(e.target.value))}
+                  onChange={(e) => {
+                    const v = Number(e.target.value);
+                    if (v < 0 || v > 99999) return;
+                    setEditingCredits(v);
+                  }}
                   className={`${inputCls} w-32`}
                 />
                 <button
@@ -186,16 +194,7 @@ export function UserDetailSlideOver({
 
               <ActionButton
                 loading={deletingUser}
-                onClick={async () => {
-                  if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return;
-                  if (!confirm("FINAL CONFIRM: Delete this user irrecoverably?")) return;
-                  setDeletingUser(true);
-                  try {
-                    const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) });
-                    if (res.ok) { onDeleteUser(userDetail.user.id); onToast("User deleted"); }
-                    else onToast("Failed to delete user", "error");
-                  } catch { onToast("Failed to delete user", "error"); } finally { setDeletingUser(false); }
-                }}
+                onClick={() => { setShowDeleteConfirm(true); setDeleteConfirmText(""); }}
                 icon={Trash2} label="Delete (GDPR)" variant="danger"
               />
             </div>
@@ -207,6 +206,52 @@ export function UserDetailSlideOver({
           </div>
         ) : null}
       </div>
+
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)}>
+          <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-xl">
+                <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />
+              </div>
+              <h3 className="text-lg font-bold text-[var(--text-primary)]">Delete User</h3>
+            </div>
+            <p className="text-sm text-[var(--text-secondary)]">
+              This will permanently delete <strong className="text-[var(--text-primary)]">{userDetail?.user.name}</strong> and all their data across 6 tables. This cannot be undone.
+            </p>
+            <div>
+              <label className="block text-sm text-[var(--text-secondary)] mb-1">
+                Type <strong className="text-red-500">DELETE</strong> to confirm:
+              </label>
+              <input
+                type="text"
+                value={deleteConfirmText}
+                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                placeholder="DELETE"
+                className="w-full px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-200"
+                autoFocus
+              />
+            </div>
+            <div className="flex justify-end gap-2 pt-2">
+              <button onClick={() => setShowDeleteConfirm(false)} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer transition-all duration-200 active:scale-95">Cancel</button>
+              <button
+                disabled={deleteConfirmText !== "DELETE" || deletingUser}
+                onClick={async () => {
+                  setDeletingUser(true);
+                  try {
+                    const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail!.user.id, confirm: "DELETE" }) });
+                    if (res.ok) { onDeleteUser(userDetail!.user.id); onToast("User deleted"); setShowDeleteConfirm(false); }
+                    else onToast("Failed to delete user", "error");
+                  } catch { onToast("Failed to delete user", "error"); } finally { setDeletingUser(false); }
+                }}
+                className="px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all duration-200 active:scale-95 disabled:bg-[var(--bg-surface)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed bg-red-600 text-white hover:bg-red-700"
+              >
+                {deletingUser ? "Deleting..." : "Delete Forever"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

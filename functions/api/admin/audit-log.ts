@@ -30,15 +30,17 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   ).first<{ total: number }>();
 
   const logs = await DB.prepare(
-    `SELECT a.*, u.name as targetUserName, u.email as targetUserEmail
+    `SELECT a.*, u.name as targetUserName, u.email as targetUserEmail, au.name as actorUserName
      FROM admin_audit_log a
      LEFT JOIN "user" u ON a.targetUserId = u.id
+     LEFT JOIN "user" au ON a.actorEmail = au.email
      ORDER BY a.createdAt DESC LIMIT ? OFFSET ?`
   )
     .bind(limit, offset)
     .all<{
       id: number;
       actorEmail: string;
+      actorUserName: string | null;
       action: string;
       targetUserId: string;
       targetUserName: string | null;

@@ -67,6 +67,7 @@ export interface UserDetail {
 export interface AuditLogEntry {
   id: number;
   actorEmail: string;
+  actorUserName: string | null;
   action: string;
   targetUserId: string;
   targetUserName: string | null;

@@ -47,7 +47,7 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
   await DB.prepare(
     "INSERT INTO admin_audit_log (actorEmail, action, targetUserId, oldValue, newValue, createdAt) VALUES (?, ?, ?, ?, ?, datetime('now'))"
   )
-    .bind(auth.user.email, "gdpr-delete", userId, target.email, "deleted", "deleted")
+    .bind(auth.user.email, "gdpr-delete", userId, target.email, "deleted")
     .run()
     .catch(() => {});
 
