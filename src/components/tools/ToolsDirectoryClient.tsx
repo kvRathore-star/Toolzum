@@ -332,7 +332,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 )}
               </div>
               {/* Nav mode toggle */}
-              <div className="hidden sm:flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+              <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
                 <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Sidebar navigation">
                   <PanelLeft className="w-4 h-4" />
                 </button>
@@ -341,7 +341,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 </button>
               </div>
               {/* View mode toggle */}
-              <div className="hidden sm:flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
+              <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
                 <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Grid view">
                   <Grid3X3 className="w-4 h-4" />
                 </button>

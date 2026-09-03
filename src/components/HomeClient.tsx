@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sun } from 'lucide-react';
 import {
-  Command, ArrowRight, ShieldCheck, Zap, Sparkles, ChevronRight,
+  Command, ArrowRight, ShieldCheck, Shield, Zap, Sparkles, ChevronRight,
   Check, MoveRight, Crown, Users, Layers, Star, Upload, FileText, HelpCircle, Lightbulb,
   Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
@@ -759,7 +759,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       case 'audio': return '/audio/audio-compressor';
       case 'pdf': return '/pdf/pdf-compressor';
       case 'document': return '/document/document-converter';
-      default: return '/image/image-compressor';
+      default: return '/tools';
     }
   };
 
@@ -798,17 +798,32 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
 
   const fileType = file ? detectFileType(file) : null;
 
+  const formatBadges = [
+    { label: 'IMG', exts: 'JPG, PNG, WebP' },
+    { label: 'VID', exts: 'MP4, WebM' },
+    { label: 'PDF', exts: 'PDF docs' },
+    { label: 'DOC', exts: 'DOC, XLS, PPT' },
+    { label: 'AUD', exts: 'MP3, WAV, FLAC' },
+  ];
+
   return (
-    <>
+    <div className="flex-1 flex flex-col">
+      <div className="mb-4">
+        <p className="text-sm font-semibold text-[var(--text-primary)]">What are you working with?</p>
+        <p className="text-xs text-[var(--text-muted)] mt-0.5">We detect the format and open the right tool</p>
+      </div>
+
       <div
         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         onClick={() => document.getElementById('hero-file-input')?.click()}
-        className={`flex-1 border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-4 transition-colors cursor-pointer group ${
+        className={`flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group ${
           dragOver
-            ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5'
-            : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
+            ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
+            : file
+              ? 'border-[var(--accent)]/40 bg-[var(--accent-soft)]'
+              : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent-hover)] hover:bg-[var(--accent-soft)]'
         }`}
       >
         <input id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} />
@@ -818,7 +833,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
               {fileTypeIcon(fileType)}
             </div>
             <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
-            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)} &middot; {fileType.charAt(0).toUpperCase() + fileType.slice(1)}</p>
+            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)} &middot; {fileType.toUpperCase()}</p>
             <button
               onClick={(e) => { e.stopPropagation(); setFile(null); }}
               className="text-[10px] text-[var(--text-muted)] underline hover:text-[var(--text-secondary)]"
@@ -828,47 +843,46 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           </div>
         ) : (
           <>
-            <div className="w-16 h-16 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent-ink)]/5 transition-all">
-              <Upload className="w-6 h-6 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
+            <div className="w-14 h-14 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent-ink)]/5 transition-all">
+              <Upload className="w-5 h-5 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-[var(--text-primary)]">Drop file here</p>
-              <p className="text-xs text-[var(--text-muted)] mt-1">Private, client-side processing</p>
+              <p className="text-sm font-medium text-[var(--text-primary)]">Drop your file here</p>
+              <p className="text-xs text-[var(--text-muted)] mt-1">or <span className="text-[var(--accent)] underline">browse</span></p>
             </div>
           </>
         )}
       </div>
 
-      <div className="mt-6 flex justify-between items-center bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
-        <div className="flex flex-col">
-          <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider">
-            {file && fileType ? `Detected: ${fileType.charAt(0).toUpperCase() + fileType.slice(1)}` : 'Output Size'}
+      <div className="flex flex-wrap gap-1.5 mt-3">
+        {formatBadges.map((b) => (
+          <span key={b.label} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[10px] font-mono text-[var(--text-muted)]">
+            {b.label} <span className="hidden sm:inline text-[9px] opacity-60">{b.exts}</span>
           </span>
-          <span className="text-sm font-mono text-[var(--success)]">
-            {file && fileType ? getToolName(fileType) : '-74% smaller'}
-          </span>
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-[var(--radius-lg)] border border-[var(--border-subtle)]">
+        <div className="flex items-center gap-2">
+          <Shield className="w-3.5 h-3.5 text-[var(--success)]" />
+          <span className="text-[10px] text-[var(--text-muted)]">Your file is only inspected in this browser</span>
         </div>
         <div className="flex items-center gap-3">
           {file && fileType ? (
             <Button size="sm" asChild>
-              <Link href={getRoute(fileType)}>Open Tool <MoveRight className="w-3 h-3 ml-1" /></Link>
+              <Link href={getRoute(fileType)}>Open {getToolName(fileType)} <MoveRight className="w-3 h-3 ml-1" /></Link>
             </Button>
           ) : (
-            <>
-              <Link
-                href="/image/image-compressor"
-                className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                Full: Image Compressor <MoveRight className="w-3 h-3 inline" />
-              </Link>
-              <Button size="sm" asChild>
-                <Link href="/image/image-compressor">Export</Link>
-              </Button>
-            </>
+            <Link
+              href="/tools"
+              className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
+            >
+              Browse by category <MoveRight className="w-3 h-3 inline" />
+            </Link>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

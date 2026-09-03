@@ -61,7 +61,7 @@ function getSignedInStatus(): boolean {
   try {
     const cookies = document.cookie.split("; ");
     for (const c of cookies) {
-      if (c.startsWith("better-auth_session_token=") || c.startsWith("next-auth.session-token=")) return true;
+      if (c.startsWith("better-auth.session_token=") || c.startsWith("__Secure-better-auth.session_token=") || c.startsWith("next-auth.session-token=")) return true;
     }
     return !!localStorage.getItem("better-auth.session");
   } catch (e) {

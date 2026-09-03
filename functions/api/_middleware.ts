@@ -12,7 +12,7 @@ function isAllowed(header: string | null): boolean {
 
 async function isBanned(request: Request, DB: D1Database): Promise<boolean> {
   const cookies = request.headers.get('cookie') || '';
-  const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+  const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
   const token = tokenMatch?.[1];
   if (!token) return false;
   const row = await DB.prepare(
@@ -60,7 +60,7 @@ export async function onRequest(context: { request: Request; next: () => Promise
     }
 
     const cookies = request.headers.get('cookie') || '';
-    const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+    const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
     if (token && context.env.DB && !request.url.includes('/api/auth/')) {
       try {
