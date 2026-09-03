@@ -34,6 +34,7 @@ export default function AdminPage() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
   const [stats, setStats] = useState<AdminStats | null>(null);
+  const [statsError, setStatsError] = useState("");
   const [users, setUsers] = useState<User[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -77,6 +78,7 @@ export default function AdminPage() {
         if (cancelled) return;
         if (statsRes.ok) setStats(await statsRes.json());
         else if (statsRes.status === 403 || statsRes.status === 401) { router.push("/dashboard"); return; }
+        else setStatsError(`Stats API error: ${statsRes.status}`);
         if (usersRes.ok) { const data = (await usersRes.json()) as UsersResponse; setUsers(data.users); setTotal(data.total); }
       } catch { if (!cancelled) setError("Failed to load data"); } finally { if (!cancelled) setLoading(false); }
     }
@@ -276,6 +278,12 @@ export default function AdminPage() {
             <Shield className="w-6 h-6 text-[var(--accent)]" />
             <h1 className="text-2xl font-bold text-[var(--text-primary)]">Admin Dashboard</h1>
           </div>
+          {statsError && !stats && (
+            <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl">
+              <p className="text-sm text-amber-700 dark:text-amber-400">{statsError}</p>
+              <p className="text-xs text-amber-600 dark:text-amber-500 mt-1">Stats section unavailable. Users table still works.</p>
+            </div>
+          )}
           {stats && (
             <div ref={statsRef} id="stats" className="space-y-6">
               {/* Primary metrics — colored left-border accent cards */}
