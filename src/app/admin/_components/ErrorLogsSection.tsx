@@ -64,7 +64,7 @@ export function ErrorLogsSection() {
       try {
         const res = await fetch(`/api/admin/error-logs?group=${activeView}&limit=100`);
         if (!res.ok || cancelled) return;
-        const data = await res.json();
+        const data = await res.json() as { groups?: ToolGroup[] | SourceGroup[]; errors?: ErrorEntry[] };
         if (cancelled) return;
         if (activeView === "tool") setToolGroups(data.groups || []);
         else if (activeView === "source") setSourceGroups(data.groups || []);
