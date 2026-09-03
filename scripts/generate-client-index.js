@@ -17,7 +17,7 @@ const OUT_FILE = path.join(REGISTRY_DIR, 'tools-client-index.ts');
 
 // --- 1. Parse proSlugs from tools-constants.ts ---
 const constantsSrc = fs.readFileSync(path.join(REGISTRY_DIR, 'tools-constants.ts'), 'utf8');
-const proMatch = constantsSrc.match(/export const proSlugs: string\[\] = \[([\s\S]*?)\];/);
+const proMatch = constantsSrc.match(/export const proSlugs(?::\s*string\[\])?\s*=\s*\[([\s\S]*?)\];/);
 const proSlugs = new Set(
   proMatch
     ? proMatch[1].match(/"([^"]+)"/g)?.map(s => s.replace(/"/g, '')) ?? []

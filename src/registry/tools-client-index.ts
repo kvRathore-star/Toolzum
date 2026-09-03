@@ -139,7 +139,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-image-generator",
     "category": "AI",
     "description": "Transforms text prompts into high-resolution images using advanced diffusion models. Designers and marketers use it for rapid visual prototyping.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "11",
@@ -403,7 +403,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "text-to-speech-tts",
     "category": "Audio",
     "description": "Generate natural-sounding speech from text with AI voices in Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download as MP3 or WAV.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "53",
@@ -411,7 +411,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-paraphrasing-tool",
     "category": "AI",
     "description": "Rewrite sentences and paragraphs while preserving meaning. Perfect for students, writers, and content creators.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "54",
@@ -683,7 +683,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "speech-to-text",
     "category": "Audio",
     "description": "Transcribe audio to text in multiple languages — supports MP3, WAV, M4A, and FLAC with AI-powered speech recognition.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "106",
@@ -1411,7 +1411,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-document-chat",
     "category": "AI",
     "description": "Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "217",
@@ -1419,7 +1419,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-video-subtitler",
     "category": "AI",
     "description": "Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "218",
@@ -1731,7 +1731,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-bg-changer",
     "category": "Image",
     "description": "Removes or replaces backgrounds on multiple images simultaneously with color-key sampling and batch processing. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "270",
@@ -1763,7 +1763,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-qr-code-generator",
     "category": "Utility",
     "description": "Processes a CSV file containing multiple data entries and generates a corresponding QR code image for each row, delivered as a ZIP archive. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "276",
@@ -1779,7 +1779,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-watermark",
     "category": "Image",
     "description": "Apply a text logo, image logo, or timestamp overlay to dozens of images at once with configurable position, opacity, and rotation per batch. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "279",
@@ -1787,7 +1787,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-pdf-data-extractor",
     "category": "PDF",
     "description": "Extract tables, form fields, and key-value pairs from multiple PDFs simultaneously and export the aggregated data to a single CSV or Excel file. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "280",
@@ -1795,7 +1795,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-to-pdf",
     "category": "PDF",
     "description": "Merge hundreds of JPG, PNG, or WebP images into a single multi-page PDF with configurable page size, orientation, and compression per batch. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "281",
@@ -1803,7 +1803,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-audio-converter",
     "category": "Audio",
     "description": "Convert an entire folder of audio files between MP3, WAV, OGG, FLAC, and M4A formats in one batch with consistent quality and bitrate settings. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "282",
@@ -1811,7 +1811,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-svg-to-png",
     "category": "Image",
     "description": "Rasterize hundreds of SVG files to PNG at any resolution, preserving vector sharpness. Ideal for generating icon sprite sheets and asset pipelines. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "283",
@@ -1819,7 +1819,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-compressor",
     "category": "Image",
     "description": "Compress JPG, PNG, and WebP images in bulk with uniform quality settings. E-commerce sellers use it to optimize entire product catalogs before upload. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "284",
@@ -1827,7 +1827,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-pdf-size-reducer",
     "category": "PDF",
     "description": "Reduce file size of multiple PDFs at once by compressing embedded images, removing metadata, and optimizing object streams across the batch. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "285",
@@ -1835,7 +1835,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-resizer",
     "category": "Image",
     "description": "Resize hundreds of images to exact pixel dimensions or percentage scale in one pass. Photographers use it to standardize client galleries before delivery. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "286",
@@ -1843,7 +1843,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-video-compressor",
     "category": "Video",
     "description": "Compress multiple video files simultaneously with consistent CRF, resolution, and codec settings. YouTube studios use it to batch-optimize daily uploads. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "287",
@@ -1851,7 +1851,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-pdf-merger",
     "category": "PDF",
     "description": "Join dozens of PDF files into one document in a single operation. Legal teams use it to consolidate contract bundles and discovery exhibits instantly. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "288",
@@ -1859,7 +1859,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-face-anonymizer",
     "category": "Image",
     "description": "Detect and blur faces across multiple images automatically using on-device face detection. GDPR compliance teams use it to anonymize datasets before publication. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "289",
@@ -1867,7 +1867,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-pdf-form-extractor",
     "category": "PDF",
     "description": "Extract filled form fields from hundreds of identical PDF forms and aggregate responses into a single CSV. Large-scale survey and application processing teams depend on it. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "290",
@@ -1875,7 +1875,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-video-size-reducer",
     "category": "Video",
     "description": "Batch-reduce video file sizes to fit email attachment limits (25MB), messaging platform caps, or any user-defined target. Every office worker with video attachments needs this. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "291",
@@ -1883,7 +1883,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-audio-normalizer",
     "category": "Audio",
     "description": "Normalize loudness across multiple audio files to broadcast-standard LUFS levels (–16 LUFS for podcasts, –14 LUFS for streaming). Podcast networks use this to unify episode volume. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "292",
@@ -1891,7 +1891,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-video-subtitle-burner",
     "category": "Video",
     "description": "Burn SRT or VTT subtitles directly into multiple video files in one batch. Content republishers use it to prepare videos for platforms that do not support soft subtitles. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "293",
@@ -1899,7 +1899,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-invoice-receipt-parser",
     "category": "Finance",
     "description": "Drop 100 invoice PDFs or images, auto-detect date, vendor, amount, and tax, then export a clean CSV ready for tax filing. Replaces expensive accounting OCR per-document fees. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "294",
@@ -1907,7 +1907,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-csv-excel-to-json",
     "category": "Converter",
     "description": "Convert messy CSV or Excel sheets from clients into clean JSON in one batch. Handles missing values, nested rows, and generates strict JSON schemas for 50+ files at once. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "295",
@@ -1915,7 +1915,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-url-status-checker",
     "category": "SEO",
     "description": "Check up to 5,000 URLs for HTTP status codes (200, 301, 404, 500), redirect targets, and response times, then flag broken links and slow pages. Checks run server-side, so results are accurate. SEO agencies use it instead of $50/mo crawling tools.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "296",
@@ -1923,7 +1923,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-converter",
     "category": "Image",
     "description": "Find the exact bulk conversion you need: PNG→WebP, JPG→AVIF, HEIC→JPG, and 100+ more — each format pair is its own dedicated, optimized tool with quality control and folder-preserving ZIP output.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "297",
@@ -1931,7 +1931,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-exif-stripper-injector",
     "category": "Image",
     "description": "Strip GPS location, camera serial, and timestamps from thousands of photos client-side. Or bulk-inject copyright metadata using a template across an entire image library. No signup or account required.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "298",
@@ -1939,7 +1939,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-app-icon-generator",
     "category": "Image",
     "description": "Upload one high-res SVG/PNG and export 30+ correctly sized icons for iOS, Android, PWA, Shopify, and social media OG images in a structured ZIP. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "299",
@@ -1947,7 +1947,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-markdown-to-pdf-html",
     "category": "Converter",
     "description": "Convert 100+ Markdown files into beautifully styled PDFs or static HTML with custom CSS, auto-generated table of contents, and corporate templates. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "300",
@@ -1955,7 +1955,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-font-subsetter",
     "category": "Developer",
     "description": "Convert TTF/OTF fonts to WOFF2 and subset to only used characters (Latin, Cyrillic, etc.). Generates @font-face CSS blocks. Cuts font files from MBs to KBs. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "301",
@@ -1963,7 +1963,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-subtitle-time-shifter",
     "category": "Video",
     "description": "Apply global time offset (+/- seconds) to a whole season of SRT/VTT files at once. Localization agencies use it to realign and translate subtitle batches. No signup or account required.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "302",
@@ -1971,7 +1971,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-regex-extractor-replacer",
     "category": "Developer",
     "description": "Scan thousands of log files or codebase files for regex patterns (IPs, API keys, URLs) and extract or replace them. Visual builder for non-coders with live preview. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "303",
@@ -1979,7 +1979,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-to-text-ocr",
     "category": "Image",
     "description": "Extract text from batches of scanned JPGs, PNGs, or PDF pages and export as a single formatted Word doc. Students and digitizers use it instead of typing 40 pages manually. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "304",
@@ -1987,7 +1987,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-ebook-converter",
     "category": "Converter",
     "description": "Convert your entire digital library between EPUB, MOBI, and PDF in one batch. Note: This is a basic client-side conversion — complex EPUB/MOBI layouts may not render perfectly. For professional results, use a dedicated e-book tool like Calibre.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "306",
@@ -1995,7 +1995,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-heic-to-jpg",
     "category": "Image",
     "description": "Convert hundreds of iPhone HEIC photos to universal JPGs in one batch — fully client-side so your personal vacation photos never leave your machine. Windows users finally view their iPhone library. No signup or account required.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "307",
@@ -2899,7 +2899,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-pdf-suite",
     "category": "PDF",
     "description": "Rotate, protect, unlock, split, watermark, crop, resize, or flatten multiple PDF files in one batch. All processing happens locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "404",
@@ -8427,7 +8427,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-url-shortener",
     "category": "Utility",
     "description": "Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "1093",
