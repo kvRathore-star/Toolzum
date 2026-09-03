@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, CreditCard, Activity, Clock, Monitor, Copy } from "lucide-react";
+import { X, CreditCard, Activity, Clock, Monitor, Copy, ShieldOff, ShieldCheck, Trash2, KeyRound, Save } from "lucide-react";
 import Image from "next/image";
 import type { UserDetail, Payment, ToolUsage, AuditEntry, Session } from "./admin.types";
 import { inputCls, labelCls } from "./admin.utils";
@@ -16,9 +16,36 @@ interface UserDetailSlideOverProps {
   onRevokeSession: (sessionId: string) => void;
   onUpdateCredits: (userId: string, credits: number) => void;
   onChangePlan: (userId: string, plan: string) => void;
-  onBanUser: (userId: string, ban: boolean) => void;
+  onBanUser: (userId: string, status: string) => void;
   onDeleteUser: (userId: string) => void;
   onToast: (message: string, type?: "success" | "error") => void;
+}
+
+function ActionButton({ onClick, disabled, loading, icon: Icon, label, loadingLabel, variant, className = "" }: {
+  onClick: () => void; disabled?: boolean; loading?: boolean;
+  icon: React.ElementType; label: string; loadingLabel?: string;
+  variant: "primary" | "danger" | "warning" | "ghost"; className?: string;
+}) {
+  const variants = {
+    primary: "bg-[var(--accent)] text-white hover:opacity-90",
+    danger: "bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50",
+    warning: "bg-amber-100 text-amber-700 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:hover:bg-amber-900/50",
+    ghost: "bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)]",
+  };
+  return (
+    <button
+      disabled={disabled || loading}
+      onClick={onClick}
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95 ${variants[variant]} ${className}`}
+    >
+      {loading ? (
+        <div className="w-3.5 h-3.5 rounded-full border-2 border-current border-t-transparent animate-spin" />
+      ) : (
+        <Icon className="w-3.5 h-3.5" />
+      )}
+      {loading ? (loadingLabel || "Working...") : label}
+    </button>
+  );
 }
 
 export function UserDetailSlideOver({
@@ -36,44 +63,45 @@ export function UserDetailSlideOver({
 
   return (
     <div className="fixed inset-0 z-40 flex justify-end" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/40 transition-opacity" />
-      <div className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto animate-slide-in-right" onClick={(e) => e.stopPropagation()}>
-        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]">
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in" />
+      <div className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto shadow-2xl animate-slide-in-right" onClick={(e) => e.stopPropagation()}>
+        <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]/95 backdrop-blur-xl">
           <h2 className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
-          <button onClick={onClose} className="p-1 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
+          <button onClick={onClose} className="p-1.5 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
         </div>
         {loading ? (
-          <div className="p-12 text-center"><div className="w-6 h-6 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" /></div>
+          <div className="p-12 text-center">
+            <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
+            <p className="text-sm text-[var(--text-muted)] mt-3">Loading user details...</p>
+          </div>
         ) : userDetail ? (
           <div className="p-6 space-y-6">
+            {/* Header */}
             <div className="flex items-center gap-4">
               {userDetail.user.image ? (
-                <Image src={userDetail.user.image} alt="" width={48} height={48} className="w-12 h-12 rounded-full" unoptimized />
+                <Image src={userDetail.user.image} alt="" width={48} height={48} className="w-12 h-12 rounded-full ring-2 ring-[var(--border-subtle)]" unoptimized />
               ) : (
-                <div className="w-12 h-12 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold">{userDetail.user.name.charAt(0).toUpperCase()}</div>
+                <div className="w-12 h-12 rounded-full bg-[var(--accent)] flex items-center justify-center text-white font-bold ring-2 ring-[var(--accent)]/20">{userDetail.user.name.charAt(0).toUpperCase()}</div>
               )}
               <div>
                 <p className="font-semibold text-[var(--text-primary)]">{userDetail.user.name}</p>
                 <p className="text-sm text-[var(--text-secondary)]">{userDetail.user.email}</p>
               </div>
             </div>
+
+            {/* Stats grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
-                <p className="text-xs text-[var(--text-muted)] uppercase">Role</p>
-                <p className="font-bold text-[var(--text-primary)]">{userDetail.user.role}</p>
-              </div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
-                <p className="text-xs text-[var(--text-muted)] uppercase">Plan</p>
-                <p className="font-bold text-[var(--text-primary)]">{userDetail.user.plan}</p>
-              </div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
-                <p className="text-xs text-[var(--text-muted)] uppercase">Status</p>
-                <p className={`font-bold ${userDetail.user.status === "banned" ? "text-red-500" : "text-[var(--text-primary)]"}`}>{userDetail.user.status}</p>
-              </div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
-                <p className="text-xs text-[var(--text-muted)] uppercase">Last Login</p>
-                <p className="font-bold text-[var(--text-primary)] text-xs">{userDetail.user.lastLoginAt ? new Date(userDetail.user.lastLoginAt * 1000).toLocaleDateString() : "Never"}</p>
-              </div>
+              {[
+                { label: "Role", value: userDetail.user.role, color: userDetail.user.role === "admin" ? "text-purple-500" : "text-[var(--text-primary)]" },
+                { label: "Plan", value: userDetail.user.plan, color: userDetail.user.plan === "pro" ? "text-emerald-500" : "text-[var(--text-primary)]" },
+                { label: "Status", value: userDetail.user.status, color: userDetail.user.status === "banned" ? "text-red-500" : "text-emerald-500" },
+                { label: "Last Login", value: userDetail.user.lastLoginAt ? new Date(userDetail.user.lastLoginAt * 1000).toLocaleDateString() : "Never", color: "text-[var(--text-primary)]" },
+              ].map((item) => (
+                <div key={item.label} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center">
+                  <p className="text-xs text-[var(--text-muted)] uppercase">{item.label}</p>
+                  <p className={`font-bold text-sm ${item.color}`}>{item.value}</p>
+                </div>
+              ))}
             </div>
 
             {/* Credits */}
@@ -87,7 +115,7 @@ export function UserDetailSlideOver({
                   className={`${inputCls} w-32`}
                 />
                 <button
-                  disabled={savingCredits}
+                  disabled={savingCredits || editingCredits === null}
                   onClick={async () => {
                     if (editingCredits === null) return;
                     setSavingCredits(true);
@@ -100,8 +128,11 @@ export function UserDetailSlideOver({
                       } else onToast("Failed to update credits", "error");
                     } catch { onToast("Failed to update credits", "error"); } finally { setSavingCredits(false); }
                   }}
-                  className="px-3 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer disabled:opacity-50"
-                >{savingCredits ? "Saving..." : "Save"}</button>
+                  className="flex items-center gap-1.5 px-3 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95"
+                >
+                  {savingCredits ? <div className="w-3.5 h-3.5 rounded-full border-2 border-white border-t-transparent animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                  {savingCredits ? "Saving..." : "Save"}
+                </button>
               </div>
             </div>
 
@@ -119,31 +150,46 @@ export function UserDetailSlideOver({
                     else onToast("Failed to update plan", "error");
                   } catch { onToast("Failed to update plan", "error"); } finally { setChangingPlan(false); }
                 }}
-                className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
+                className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all duration-200"
               >
                 <option value="free">Free</option>
                 <option value="signedin">Signed In</option>
                 <option value="pro">Pro</option>
               </select>
-              <button
-                disabled={banningUser}
-                onClick={async () => {
-                  const newStatus = userDetail.user.status === "banned" ? "active" : "banned";
-                  setBanningUser(true);
-                  try {
-                    const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, ban: newStatus === "banned" }) });
-                    if (res.ok) { onBanUser(userDetail.user.id, newStatus === "banned"); onToast(newStatus === "banned" ? "User banned" : "User unbanned"); }
-                    else onToast("Failed to change ban status", "error");
-                  } catch { onToast("Failed to change ban status", "error"); } finally { setBanningUser(false); }
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50 ${userDetail.user.status === "banned" ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" : "bg-amber-100 text-amber-700 hover:bg-amber-200"}`}>
-                {banningUser ? "Working..." : userDetail.user.status === "banned" ? "Unban User" : "Ban User"}
-              </button>
-              <button
-                disabled={deletingUser}
+
+              {userDetail.user.status === "banned" ? (
+                <ActionButton
+                  loading={banningUser}
+                  onClick={async () => {
+                    setBanningUser(true);
+                    try {
+                      const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, status: "active" }) });
+                      if (res.ok) { onBanUser(userDetail.user.id, "active"); onToast("User unbanned"); }
+                      else onToast("Failed to unban user", "error");
+                    } catch { onToast("Failed to unban user", "error"); } finally { setBanningUser(false); }
+                  }}
+                  icon={ShieldCheck} label="Unban User" variant="primary"
+                />
+              ) : (
+                <ActionButton
+                  loading={banningUser}
+                  onClick={async () => {
+                    setBanningUser(true);
+                    try {
+                      const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, status: "banned" }) });
+                      if (res.ok) { onBanUser(userDetail.user.id, "banned"); onToast("User banned"); }
+                      else onToast("Failed to ban user", "error");
+                    } catch { onToast("Failed to ban user", "error"); } finally { setBanningUser(false); }
+                  }}
+                  icon={ShieldOff} label="Ban User" variant="warning"
+                />
+              )}
+
+              <ActionButton
+                loading={deletingUser}
                 onClick={async () => {
                   if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return;
-                  if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return;
+                  if (!confirm("FINAL CONFIRM: Delete this user irrecoverably?")) return;
                   setDeletingUser(true);
                   try {
                     const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) });
@@ -151,8 +197,11 @@ export function UserDetailSlideOver({
                     else onToast("Failed to delete user", "error");
                   } catch { onToast("Failed to delete user", "error"); } finally { setDeletingUser(false); }
                 }}
-                className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50">{deletingUser ? "Deleting..." : "Delete User (GDPR)"}</button>
-              <button
+                icon={Trash2} label="Delete (GDPR)" variant="danger"
+              />
+
+              <ActionButton
+                loading={false}
                 onClick={async () => {
                   try {
                     const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) });
@@ -163,34 +212,26 @@ export function UserDetailSlideOver({
                     } else onToast("Failed to reset password", "error");
                   } catch { onToast("Failed to reset password", "error"); }
                 }}
-                className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] cursor-pointer">Reset Password</button>
+                icon={KeyRound} label="Reset Password" variant="ghost"
+              />
             </div>
 
             {resetResult && (
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl space-y-2">
+              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl space-y-2 animate-slide-down">
                 <p className="text-xs font-medium text-amber-700 dark:text-amber-400">Password reset for {resetResult.email}</p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 px-3 py-2 bg-white dark:bg-black rounded-lg text-sm font-mono text-[var(--text-primary)] border border-[var(--border-subtle)]">{resetResult.tempPassword}</code>
-                  <button onClick={() => { navigator.clipboard.writeText(resetResult.tempPassword); }} className="p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer"><Copy className="w-4 h-4 text-[var(--text-muted)]" /></button>
+                  <code className="flex-1 px-3 py-2 bg-white dark:bg-black rounded-lg text-sm font-mono text-[var(--text-primary)] border border-[var(--border-subtle)] select-all">{resetResult.tempPassword}</code>
+                  <button onClick={() => { navigator.clipboard.writeText(resetResult.tempPassword); onToast("Copied to clipboard"); }} className="p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95"><Copy className="w-4 h-4 text-[var(--text-muted)]" /></button>
                 </div>
                 <p className="text-xs text-amber-600 dark:text-amber-500">Share this temp password with the user. They should change it on next login.</p>
-                <button onClick={() => setResetResult(null)} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">Dismiss</button>
+                <button onClick={() => setResetResult(null)} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-colors">Dismiss</button>
               </div>
             )}
 
-            {userDetail.payments.length > 0 && (
-              <PaymentHistory payments={userDetail.payments} />
-            )}
-
-            {userDetail.toolUsage.length > 0 && (
-              <TopTools tools={userDetail.toolUsage} />
-            )}
-
+            {userDetail.payments.length > 0 && <PaymentHistory payments={userDetail.payments} />}
+            {userDetail.toolUsage.length > 0 && <TopTools tools={userDetail.toolUsage} />}
             <SessionsSection sessions={sessions} loading={sessionsLoading} revokingSession={revokingSession} onRevoke={onRevokeSession} />
-
-            {userDetail.roleHistory.length > 0 && (
-              <RoleHistory entries={userDetail.roleHistory} />
-            )}
+            {userDetail.roleHistory.length > 0 && <RoleHistory entries={userDetail.roleHistory} />}
           </div>
         ) : null}
       </div>
@@ -204,15 +245,15 @@ function PaymentHistory({ payments }: { payments: Payment[] }) {
       <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><CreditCard className="w-4 h-4" /> Payment History</h3>
       <div className="space-y-2">
         {payments.map((p) => (
-          <div key={p.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm">
+          <div key={p.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm transition-colors duration-200 hover:bg-[var(--bg-elevated)]">
             <div>
               <span className="font-medium text-[var(--text-primary)]">{p.gateway}</span>
               <span className="text-[var(--text-muted)] mx-2">·</span>
-              <span className="text-[var(--text-secondary)]">{p.amount} {p.currency}</span>
+              <span className="text-[var(--text-secondary)] tabular-nums">{p.amount} {p.currency}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${p.status === "paid" ? "bg-emerald-100 text-emerald-700" : p.status === "failed" ? "bg-red-100 text-red-700" : "bg-zinc-100 text-zinc-700"}`}>{p.status}</span>
-              <span className="text-[var(--text-muted)] text-xs">{new Date(p.createdAt * 1000).toLocaleDateString()}</span>
+              <span className="text-[var(--text-muted)] text-xs tabular-nums">{new Date(p.createdAt * 1000).toLocaleDateString()}</span>
             </div>
           </div>
         ))}
@@ -227,9 +268,9 @@ function TopTools({ tools }: { tools: ToolUsage[] }) {
       <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Activity className="w-4 h-4" /> Top Tools</h3>
       <div className="space-y-1">
         {tools.map((t) => (
-          <div key={t.toolSlug} className="flex justify-between text-sm px-3 py-1.5">
+          <div key={t.toolSlug} className="flex justify-between text-sm px-3 py-1.5 rounded-lg hover:bg-[var(--bg-surface)] transition-colors duration-150">
             <span className="text-[var(--text-secondary)]">{t.toolSlug}</span>
-            <span className="text-[var(--text-muted)]">{t.count}x</span>
+            <span className="text-[var(--text-muted)] tabular-nums">{t.count}x</span>
           </div>
         ))}
       </div>
@@ -242,13 +283,13 @@ function SessionsSection({ sessions, loading, revokingSession, onRevoke }: { ses
     <div>
       <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Monitor className="w-4 h-4" /> Active Sessions</h3>
       {loading ? (
-        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)]"><div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" /> Loading sessions...</div>
+        <div className="flex items-center gap-2 text-sm text-[var(--text-muted)] py-4"><div className="w-4 h-4 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" /> Loading sessions...</div>
       ) : sessions.length === 0 ? (
-        <p className="text-sm text-[var(--text-muted)]">No active sessions</p>
+        <p className="text-sm text-[var(--text-muted)] py-4">No active sessions</p>
       ) : (
         <div className="space-y-2">
           {sessions.map((s) => (
-            <div key={s.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm">
+            <div key={s.id} className="flex items-center justify-between p-3 bg-[var(--bg-surface)] rounded-xl text-sm transition-colors duration-200 hover:bg-[var(--bg-elevated)]">
               <div className="min-w-0">
                 <p className="text-[var(--text-primary)] font-medium truncate">{s.userAgent || "Unknown device"}</p>
                 <p className="text-xs text-[var(--text-muted)]">{s.ipAddress || "No IP"} · Expires {new Date(s.expiresAt * 1000).toLocaleDateString()}</p>
@@ -256,7 +297,7 @@ function SessionsSection({ sessions, loading, revokingSession, onRevoke }: { ses
               <button
                 onClick={() => onRevoke(s.id)}
                 disabled={revokingSession === s.id}
-                className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg cursor-pointer disabled:opacity-50"
+                className="px-2 py-1 text-xs text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg cursor-pointer disabled:opacity-50 transition-all duration-200 active:scale-95"
               >
                 {revokingSession === s.id ? "Revoking..." : "Revoke"}
               </button>
@@ -274,8 +315,8 @@ function RoleHistory({ entries }: { entries: AuditEntry[] }) {
       <h3 className="flex items-center gap-2 text-sm font-semibold text-[var(--text-primary)] mb-3"><Clock className="w-4 h-4" /> Role Changes</h3>
       <div className="space-y-1">
         {entries.map((a, i) => (
-          <div key={i} className="text-sm px-3 py-1.5 text-[var(--text-secondary)]">
-            <span className="text-[var(--text-muted)]">{a.createdAt}</span>
+          <div key={i} className="text-sm px-3 py-1.5 text-[var(--text-secondary)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors duration-150">
+            <span className="text-[var(--text-muted)] tabular-nums">{a.createdAt}</span>
             <span className="mx-2">·</span>
             <span>{a.actorEmail}</span>
             <span className="mx-1">changed role from</span>

@@ -181,7 +181,7 @@ export default function AdminPage() {
           const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, confirm: "DELETE" }) });
           if (res.ok) successCount++; else failCount++;
         } else {
-          const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, ban: action === "ban" }) });
+          const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, status: action === "ban" ? "banned" : "active" }) });
           if (res.ok) successCount++; else failCount++;
           await new Promise((r) => setTimeout(r, 300));
         }
@@ -224,7 +224,10 @@ export default function AdminPage() {
   if (isPending || loading) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-[var(--bg-base)]">
-        <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin" />
+          <p className="text-sm text-[var(--text-muted)]">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
@@ -243,7 +246,7 @@ export default function AdminPage() {
 
   const totalPages = Math.ceil(total / 20);
   const sidebarBtnCls = (active: boolean) =>
-    `w-full text-left px-3 py-2 rounded-xl text-sm transition-colors cursor-pointer ${active ? "bg-[var(--accent)] text-white font-medium" : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]"}`;
+    `w-full text-left px-3 py-2 rounded-xl text-sm transition-all duration-200 cursor-pointer ${active ? "bg-[var(--accent)] text-white font-medium shadow-lg shadow-[var(--accent)]/20" : "text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]"}`;
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] flex">
@@ -350,8 +353,7 @@ export default function AdminPage() {
           setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, plan } } : prev);
           setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, plan } : u)));
         }}
-        onBanUser={(userId, banned) => {
-          const status = banned ? "banned" : "active";
+        onBanUser={(userId, status) => {
           setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, status } } : prev);
           setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, status } : u)));
         }}
@@ -373,12 +375,30 @@ export default function AdminPage() {
 
       <style>{`
         @keyframes slide-in-right {
-          from { transform: translateX(100%); }
-          to { transform: translateX(0); }
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
         }
-        .animate-slide-in-right {
-          animation: slide-in-right 0.2s ease-out;
+        @keyframes slide-up {
+          from { transform: translate(-50%, 20px); opacity: 0; }
+          to { transform: translate(-50%, 0); opacity: 1; }
         }
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scale-in {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes slide-down {
+          from { transform: translateY(-8px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-in-right { animation: slide-in-right 0.25s ease-out; }
+        .animate-slide-up { animation: slide-up 0.25s ease-out; }
+        .animate-fade-in { animation: fade-in 0.2s ease-out; }
+        .animate-scale-in { animation: scale-in 0.2s ease-out; }
+        .animate-slide-down { animation: slide-down 0.2s ease-out; }
       `}</style>
     </div>
   );
