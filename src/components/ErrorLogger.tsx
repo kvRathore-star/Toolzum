@@ -117,7 +117,7 @@ export function ErrorLogger({ children }: { children: React.ReactNode }) {
 }
 
 export function logToolError(error: Error, toolSlug: string) {
-  if (error.__logged) return;
+  if ((error as Error & { __logged?: boolean }).__logged) return;
   Object.defineProperty(error, "__logged", { value: true });
   const path = typeof window !== "undefined" ? window.location.pathname : undefined;
   enqueue({

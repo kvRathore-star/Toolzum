@@ -24,7 +24,7 @@ export function PaymentsTable() {
     if (search) params.set("search", search);
     if (statusFilter) params.set("status", statusFilter);
     fetch(`/api/admin/payments?${params}`)
-      .then((r) => r.ok ? r.json() : null)
+      .then(async (r) => r.ok ? (await r.json()) as { payments?: PlatformPayment[]; total?: number } : null)
       .then((data) => {
         if (cancelled || !data) return;
         setPayments(data.payments || []);

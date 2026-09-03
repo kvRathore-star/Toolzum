@@ -66,8 +66,8 @@ export function ErrorLogsSection() {
         if (!res.ok || cancelled) return;
         const data = await res.json() as { groups?: ToolGroup[] | SourceGroup[]; errors?: ErrorEntry[] };
         if (cancelled) return;
-        if (activeView === "tool") setToolGroups(data.groups || []);
-        else if (activeView === "source") setSourceGroups(data.groups || []);
+        if (activeView === "tool") setToolGroups((data.groups || []) as ToolGroup[]);
+        else if (activeView === "source") setSourceGroups((data.groups || []) as SourceGroup[]);
         else setMessages(data.errors || []);
       } catch { /* ignore */ }
       finally { if (!cancelled) setLoading(false); }
