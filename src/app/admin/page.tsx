@@ -120,7 +120,7 @@ export default function AdminPage() {
         const res = await fetch(`/api/admin/user-detail?userId=${selectedUserId}`);
         if (!cancelled && res.ok) setUserDetail(await res.json() as UserDetail);
       } finally { if (!cancelled) setDetailLoading(false); }
-      if (!cancelled) fetchSessions(selectedUserId);
+      if (!cancelled && selectedUserId) fetchSessions(selectedUserId);
     }
     load();
     return () => { cancelled = true; };
