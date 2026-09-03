@@ -25,7 +25,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   if (!userId) return json({ error: "userId required" }, 400);
 
   const user = await DB.prepare(
-    'SELECT id, name, email, role, plan, credits, status, createdAt, image FROM "user" WHERE id = ?'
+    'SELECT id, name, email, role, plan, credits, status, lastLoginAt, createdAt, image FROM "user" WHERE id = ?'
   )
     .bind(userId)
     .first<{
@@ -35,6 +35,8 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
       role: string;
       plan: string;
       credits: number;
+      status: string;
+      lastLoginAt: number | null;
       createdAt: number;
       image: string | null;
     }>();
@@ -79,6 +81,6 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     user,
     payments: payments.results || [],
     toolUsage: toolUsage.results || [],
-    auditLog: auditLog.results || [],
+    roleHistory: auditLog.results || [],
   });
 }
