@@ -12,7 +12,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
     const cookies = context.request.headers.get('cookie') || '';
-    const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+    const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
 
     const key = token ? 'signedin' : 'free';

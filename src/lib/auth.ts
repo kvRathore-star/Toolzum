@@ -90,6 +90,12 @@ export function createAuth(env: AuthEnv) {
         redirectURI: `${env.BETTER_AUTH_URL || "https://toolzum.com"}/api/auth/callback/google`,
       },
     },
+    account: {
+      accountLinking: {
+        enabled: true,
+        trustedProviders: ["google"],
+      },
+    },
     user: {
       additionalFields: {
         credits: { type: "number", defaultValue: 10 },

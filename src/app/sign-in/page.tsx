@@ -174,7 +174,9 @@ export default function SignInPage() {
             <button
               type="button"
               aria-label="Sign in with Google"
-              onClick={() => signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+              onClick={() => {
+                window.location.href = `${process.env.NEXT_PUBLIC_APP_URL || "https://toolzum.com"}/api/auth/sign-in/social?provider=google&callbackURL=${encodeURIComponent("/dashboard")}`;
+              }}
               className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
               style={{ borderRadius: "var(--radius-md)" }}
             >

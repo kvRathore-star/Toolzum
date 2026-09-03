@@ -4,7 +4,7 @@ interface Env {
 
 async function getUserId(request: Request, DB: D1Database): Promise<string | null> {
   const cookies = request.headers.get('cookie') || '';
-  const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
+  const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
   const token = tokenMatch?.[1];
   if (!token) return null;
   const user = await DB.prepare(
