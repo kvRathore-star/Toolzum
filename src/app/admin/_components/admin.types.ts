@@ -85,3 +85,16 @@ export interface Session {
   createdAt: number;
   expiresAt: number;
 }
+
+export interface PlatformPayment {
+  id: string;
+  userId: string;
+  gateway: string;
+  orderId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  createdAt: number;
+  userName: string | null;
+  userEmail: string | null;
+}

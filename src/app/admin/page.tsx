@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
-import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug } from "lucide-react";
+import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug, CreditCard } from "lucide-react";
 import Link from "next/link";
 import { StatsSection } from "./_components/StatsSection";
 import { UserTable } from "./_components/UserTable";
@@ -12,6 +12,7 @@ import { RoleConfirmModal } from "./_components/RoleConfirmModal";
 import { UserDetailSlideOver } from "./_components/UserDetailSlideOver";
 import { AuditLogModal } from "./_components/AuditLogModal";
 import { ErrorLogsSection } from "./_components/ErrorLogsSection";
+import { PaymentsTable } from "./_components/PaymentsTable";
 import type { AdminStats, User, UsersResponse, UserDetail, AuditLogEntry, Session } from "./_components/admin.types";
 
 export default function AdminPage() {
@@ -40,6 +41,7 @@ export default function AdminPage() {
   const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
   const [activeSection, setActiveSection] = useState<"stats" | "users">("stats");
   const [showErrors, setShowErrors] = useState(false);
+  const [showPayments, setShowPayments] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
@@ -268,6 +270,9 @@ export default function AdminPage() {
           <button onClick={() => setShowErrors(!showErrors)} className={sidebarBtnCls(showErrors)}>
             <div className="flex items-center gap-2"><Bug className="w-4 h-4" /> Errors</div>
           </button>
+          <button onClick={() => setShowPayments(!showPayments)} className={sidebarBtnCls(showPayments)}>
+            <div className="flex items-center gap-2"><CreditCard className="w-4 h-4" /> Payments</div>
+          </button>
         </div>
         <Link href="/" className="mt-auto flex items-center gap-2 px-3 py-2 rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Toolzum
@@ -323,6 +328,7 @@ export default function AdminPage() {
               <ErrorLogsSection />
             </div>
           )}
+          {showPayments && <PaymentsTable />}
         </div>
       </main>
 
