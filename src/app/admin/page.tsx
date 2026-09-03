@@ -55,12 +55,21 @@ export default function AdminPage() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
   const [editingCredits, setEditingCredits] = useState<{ userId: string; value: number } | null>(null);
-  const [creditSaveMsg, setCreditSaveMsg] = useState("");
   const [resetResult, setResetResult] = useState<{ tempPassword: string; email: string } | null>(null);
   const [activeSection, setActiveSection] = useState<"stats" | "users">("stats");
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [banningUser, setBanningUser] = useState<string | null>(null);
+  const [deletingUser, setDeletingUser] = useState<string | null>(null);
+  const [savingCredits, setSavingCredits] = useState(false);
+  const [changingPlan, setChangingPlan] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const usersRef = useRef<HTMLDivElement>(null);
+
+  const showToast = useCallback((message: string, type: "success" | "error" = "success") => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  }, []);
 
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
@@ -174,8 +183,11 @@ export default function AdminPage() {
     setUpdatingRole(userId);
     try {
       const res = await fetch("/api/admin/update-role", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId, role: newRole, confirmEmail }) });
-      if (res.ok) setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
-    } finally { setUpdatingRole(null); }
+      if (res.ok) {
+        setUsers((prev) => prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u)));
+        showToast("Role updated");
+      } else showToast("Failed to update role", "error");
+    } catch { showToast("Failed to update role", "error"); } finally { setUpdatingRole(null); }
   };
 
   const handleBulkAction = async (action: "ban" | "unban" | "delete") => {
@@ -184,20 +196,26 @@ export default function AdminPage() {
       if (!confirm(`FINAL CONFIRM: Delete ${selectedIds.size} users irrecoverably?`)) return;
     }
     setBulkAction(action);
+    let successCount = 0;
+    let failCount = 0;
     for (const uid of selectedIds) {
       try {
         if (action === "delete") {
-          await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, confirm: "DELETE" }) });
+          const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, confirm: "DELETE" }) });
+          if (res.ok) successCount++; else failCount++;
         } else {
-          await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, ban: action === "ban" }) });
+          const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, ban: action === "ban" }) });
+          if (res.ok) successCount++; else failCount++;
           await new Promise((r) => setTimeout(r, 300));
         }
-      } catch { /* continue */ }
+      } catch { failCount++; }
     }
     setSelectedIds(new Set());
     setBulkAction(null);
     setPage(1);
     setSearch("");
+    if (failCount > 0) showToast(`${failCount} action(s) failed`, "error");
+    else showToast(`${successCount} user(s) ${action === "delete" ? "deleted" : action === "ban" ? "banned" : "unbanned"}`);
   };
 
   const exportCSV = () => {
@@ -596,46 +614,92 @@ export default function AdminPage() {
                       className={`${inputCls} w-32`}
                     />
                     <button
+                      disabled={savingCredits}
                       onClick={async () => {
                         if (!editingCredits || editingCredits.userId !== userDetail.user.id) return;
-                        const res = await fetch("/api/admin/update-credits", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, credits: editingCredits.value }) });
-                        if (res.ok) {
-                          setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, credits: editingCredits.value } } : prev);
-                          setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, credits: editingCredits.value } : u)));
-                          setEditingCredits(null);
-                          setCreditSaveMsg("Saved!");
-                          setTimeout(() => setCreditSaveMsg(""), 2000);
-                        }
+                        setSavingCredits(true);
+                        try {
+                          const res = await fetch("/api/admin/update-credits", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, credits: editingCredits.value }) });
+                          if (res.ok) {
+                            setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, credits: editingCredits.value } } : prev);
+                            setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, credits: editingCredits.value } : u)));
+                            setEditingCredits(null);
+                            showToast("Credits updated");
+                          } else showToast("Failed to update credits", "error");
+                        } catch { showToast("Failed to update credits", "error"); } finally { setSavingCredits(false); }
                       }}
-                      className="px-3 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer"
-                    >Save</button>
-                    {creditSaveMsg && <span className="text-xs text-emerald-500 font-medium">{creditSaveMsg}</span>}
+                      className="px-3 py-2 bg-[var(--accent)] text-white rounded-xl text-sm font-medium hover:opacity-90 cursor-pointer disabled:opacity-50"
+                    >{savingCredits ? "Saving..." : "Save"}</button>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
                   <select
                     value={userDetail.user.plan}
+                    disabled={changingPlan === userDetail.user.id}
                     onChange={async (e) => {
-                      const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, plan: e.target.value }) });
-                      if (res.ok) {
-                        setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, plan: e.target.value } } : prev);
-                        setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, plan: e.target.value } : u)));
-                      }
+                      const newPlan = e.target.value;
+                      setChangingPlan(userDetail.user.id);
+                      try {
+                        const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, plan: newPlan }) });
+                        if (res.ok) {
+                          setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, plan: newPlan } } : prev);
+                          setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, plan: newPlan } : u)));
+                          showToast("Plan updated");
+                        } else showToast("Failed to update plan", "error");
+                      } catch { showToast("Failed to update plan", "error"); } finally { setChangingPlan(null); }
                     }}
-                    className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer"
+                    className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50"
                   >
                     <option value="free">Free</option>
                     <option value="signedin">Signed In</option>
                     <option value="pro">Pro</option>
                   </select>
-                  <button onClick={async () => { const newStatus = userDetail.user.status === "banned" ? "active" : "banned"; const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, ban: newStatus === "banned" }) }); if (res.ok) { setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, status: newStatus } } : prev); setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, status: newStatus } : u))); } }}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer ${userDetail.user.status === "banned" ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" : "bg-amber-100 text-amber-700 hover:bg-amber-200"}`}>
-                    {userDetail.user.status === "banned" ? "Unban User" : "Ban User"}
+                  <button
+                    disabled={banningUser === userDetail.user.id}
+                    onClick={async () => {
+                      const newStatus = userDetail.user.status === "banned" ? "active" : "banned";
+                      setBanningUser(userDetail.user.id);
+                      try {
+                        const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, ban: newStatus === "banned" }) });
+                        if (res.ok) {
+                          setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, status: newStatus } } : prev);
+                          setUsers((prev) => prev.map((u) => (u.id === userDetail.user.id ? { ...u, status: newStatus } : u)));
+                          showToast(newStatus === "banned" ? "User banned" : "User unbanned");
+                        } else showToast("Failed to change ban status", "error");
+                      } catch { showToast("Failed to change ban status", "error"); } finally { setBanningUser(null); }
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50 ${userDetail.user.status === "banned" ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" : "bg-amber-100 text-amber-700 hover:bg-amber-200"}`}>
+                    {banningUser === userDetail.user.id ? "Working..." : userDetail.user.status === "banned" ? "Unban User" : "Ban User"}
                   </button>
-                  <button onClick={async () => { if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return; if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return; const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) }); if (res.ok) { setSelectedUserId(null); setUsers((prev) => prev.filter((u) => u.id !== userDetail.user.id)); setTotal((prev) => prev - 1); } }}
-                    className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer">Delete User (GDPR)</button>
-                  <button onClick={async () => { const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) }); if (res.ok) { const data = await res.json() as { tempPassword: string; email: string }; setResetResult({ tempPassword: data.tempPassword, email: data.email }); } }}
+                  <button
+                    disabled={deletingUser === userDetail.user.id}
+                    onClick={async () => {
+                      if (!confirm("Permanently delete this user and ALL their data? This cannot be undone.")) return;
+                      if (!confirm("FINAL CONFIRM: Type DELETE in your mind — this user will be irrecoverably removed.")) return;
+                      setDeletingUser(userDetail.user.id);
+                      try {
+                        const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) });
+                        if (res.ok) {
+                          setSelectedUserId(null);
+                          setUsers((prev) => prev.filter((u) => u.id !== userDetail.user.id));
+                          setTotal((prev) => prev - 1);
+                          showToast("User deleted");
+                        } else showToast("Failed to delete user", "error");
+                      } catch { showToast("Failed to delete user", "error"); } finally { setDeletingUser(null); }
+                    }}
+                    className="px-3 py-1.5 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg text-xs font-medium cursor-pointer disabled:opacity-50">{deletingUser === userDetail.user.id ? "Deleting..." : "Delete User (GDPR)"}</button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const res = await fetch("/api/admin/reset-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id }) });
+                        if (res.ok) {
+                          const data = await res.json() as { tempPassword: string; email: string };
+                          setResetResult({ tempPassword: data.tempPassword, email: data.email });
+                          showToast("Password reset generated");
+                        } else showToast("Failed to reset password", "error");
+                      } catch { showToast("Failed to reset password", "error"); }
+                    }}
                     className="px-3 py-1.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] cursor-pointer">Reset Password</button>
                 </div>
 
@@ -763,6 +827,12 @@ export default function AdminPage() {
               )}
             </div>
           </div>
+        </div>
+      )}
+
+      {toast && (
+        <div className={`fixed bottom-6 right-6 z-[60] px-4 py-3 rounded-xl shadow-lg text-sm font-medium transition-all ${toast.type === "error" ? "bg-red-600 text-white" : "bg-emerald-600 text-white"}`}>
+          {toast.message}
         </div>
       )}
 
