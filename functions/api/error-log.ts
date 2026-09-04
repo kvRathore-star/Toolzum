@@ -1,4 +1,4 @@
-import { json } from "../../../src/lib/admin-auth";
+import { json } from "../../src/lib/admin-auth";
 import type { D1Database } from "@cloudflare/workers-types";
 
 interface Env {
