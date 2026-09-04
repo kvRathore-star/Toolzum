@@ -161,9 +161,10 @@ export function UserDetailSlideOver({
                   setChangingPlan(true);
                   try {
                     const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, plan: newPlan }) });
-                    if (res.ok) { onChangePlan(userDetail.user.id, newPlan); onToast("Plan updated"); }
-                    else onToast("Failed to update plan", "error");
-                  } catch { onToast("Failed to update plan", "error"); } finally { setChangingPlan(false); }
+                    const body = await res.json().catch(() => ({})) as { error?: string };
+                    if (res.ok) { onChangePlan(userDetail.user.id, newPlan); onToast("Plan updated to " + newPlan); }
+                    else onToast(body.error || "Failed to update plan", "error");
+                  } catch { onToast("Failed to update plan — network error", "error"); } finally { setChangingPlan(false); }
                 }}
                 className="px-3 py-2 min-h-[44px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all duration-200"
               >

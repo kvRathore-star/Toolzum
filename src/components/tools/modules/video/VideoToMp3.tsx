@@ -13,7 +13,7 @@ import { smartMax } from '@/utils/fileSizeLimits';
 const DAILY_LIMIT = 3;
 
 export default function VideoToMp3() {
-  const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
+  const { ffmpeg, isLoaded, isLoading, loadError, progress, loadFFmpeg } = useFFmpeg();
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -119,12 +119,21 @@ export default function VideoToMp3() {
                <button onClick={() => { setFile(null); setOutputUrl(null); }} className="text-sm text-red-500 hover:underline">Remove</button>
              </div>
 
-             {(!isLoaded || isLoading) && (
-               <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
-                 <Loader2 className="w-6 h-6 animate-spin text-fuchsia-500" />
-                 Loading FFmpeg Engine... (This may take a moment)
-               </div>
-             )}
+              {(!isLoaded || isLoading) && !loadError && (
+                <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
+                  <Loader2 className="w-6 h-6 animate-spin text-fuchsia-500" />
+                  Loading FFmpeg Engine... (This may take a moment)
+                </div>
+              )}
+
+              {loadError && (
+                <div className="text-center py-4 flex flex-col items-center gap-3">
+                  <p className="text-sm text-red-500">{loadError}</p>
+                  <button onClick={() => loadFFmpeg()} className="px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white text-sm font-medium rounded-lg transition-colors">
+                    Retry
+                  </button>
+                </div>
+              )}
 
              {isLoaded && !outputUrl && !isProcessing && (
                <button onClick={processVideo} disabled={remaining === 0}

@@ -109,7 +109,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                <span className="line-through">Pro: 30+ advanced B2B media, document & data engines</span>
+                <span className="line-through">Pro: 35+ advanced B2B media, document & data engines</span>
               </li>
             </ul>
           </div>
@@ -178,7 +178,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                <span>Advanced B2B Engines: 30 Bulk tools access</span>
+                <span>Advanced B2B Engines: 35 Bulk tools access</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
