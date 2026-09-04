@@ -35,7 +35,7 @@ Last updated: 2026-08-23
 - [x] 17. ~~Branding AI-claim fix~~ — Already fixed. deps was "None" (now "AI API"), UI saying "AI-powered" is accurate (tool uses useAiProvider). Auto-generated FAQ now correctly states API key required. (commit ed11ea6)
 
 ## Needs one strategic decision
-- [ ] 18. Productivity category — build out (habit trackers, focus timers, note tools?) or fold 2 tools into Utility and remove category. A 2-tool category looks unfinished next to 60+ tool categories. Recommend fold+kill unless productivity is core to growth strategy
+- [ ] 18. Productivity category — build out (habit trackers, focus timers, note tools?)
 
 ## GSC monitoring (time-gated)
 - [ ] 19. Submit IndexNow / re-validate GSC for this round of fixes (classifier, trust bugs, related-tools, FAQ content) — free nudge, do now
@@ -58,11 +58,17 @@ SEO: Add internal linking between related tools (reduces thin content signals)
  Wire up email service (Resend)
  Wire Resend email service for forgot-password/reset-password
 
- admin page to handle users.
+ Newsletter has no backend — clicking subscribe does nothing (would need a Cloudflare Worker or email service)
 
  Credits — Default reduced from 100 to 10. Schema, auth config, migration, dashboard bar, and account page all updated. Current cost: 1 credit per AI tool use (generate/transcribe). Free users get 10 credits; Pro gets unlimited.
 
   Define per-task credit costs (e.g., image gen = 5, text gen = 2, transcription = 3) — currently all 1 credit
+  Limited" on Free tier should say "10 AI credits"
+
+
+  changelog update
+- 
+
 
  use CalculatorShell with: which 
 1. Truly bare/minimal tools — tools with just a plain form and no styling

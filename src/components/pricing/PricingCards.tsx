@@ -4,13 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Check, Zap, Sparkles, ShieldCheck, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { clientToolsRegistry } from "@/registry/tools-client-index";
 import { useIsIndia } from "@/hooks/useIsIndia";
 
 type BillingInterval = "pass" | "monthly" | "yearly";
-
-const proCount = clientToolsRegistry.filter(t => t.isPro).length;
-const bulkProCount = clientToolsRegistry.filter(t => t.isPro && (t.slug.startsWith('bulk-') || t.slug.startsWith('batch-'))).length;
 
 interface PricingPlan {
   price: string;
@@ -32,7 +28,7 @@ const pricingData: Record<"USD" | "INR", Record<BillingInterval, PricingPlan>> =
   },
 };
 
-export function PricingCards() {
+export function PricingCards({ proCount, totalTools }: { proCount: number; totalTools: number }) {
   const [billingInterval, setBillingInterval] = useState<BillingInterval>("monthly");
   const isIndia = useIsIndia();
 
@@ -110,7 +106,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3 opacity-50">
                 <div className="w-4.5 h-px bg-[var(--border-subtle)] shrink-0" />
-                <span className="line-through">Pro: {bulkProCount}+ advanced B2B media, document & data engines</span>
+                <span className="line-through">Pro: advanced B2B media, document & data engines</span>
               </li>
             </ul>
           </div>
@@ -179,7 +175,7 @@ export function PricingCards() {
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                <span>Advanced B2B Engines: {bulkProCount} Bulk tools access</span>
+                <span>Advanced B2B Engines: Bulk tools access</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />

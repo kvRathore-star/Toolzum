@@ -3,7 +3,7 @@ import { getCachedToolCounts } from "@/registry/tools-helpers";
 import { EnterpriseCompliance } from "@/components/EnterpriseCompliance";
 import { PricingCards } from "@/components/pricing/PricingCards";
 
-const { localTools, cloudTools, hybridTools, freeTierTotal, totalImplemented } = getCachedToolCounts();
+const { localTools, cloudTools, hybridTools, freeTierTotal, totalImplemented, proTools } = getCachedToolCounts();
 const totalCloud = cloudTools + hybridTools;
 
 export default function PricingPage() {
@@ -40,7 +40,7 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <PricingCards />
+        <PricingCards proCount={proTools} totalTools={totalImplemented} />
 
         {/* Feature Comparison Table */}
         <div className="w-full max-w-4xl mt-20">

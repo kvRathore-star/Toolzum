@@ -135,6 +135,7 @@ export function Header() {
   ];
 
   return (
+    <>
     <header className={`sticky top-0 z-[1000] w-full h-[60px] border-b border-[var(--border-subtle)] transition-all duration-300 ${isScrolled ? 'bg-[var(--bg-elevated)]/80 backdrop-blur-md' : 'bg-[var(--bg-elevated)]'}`}>
       <div className="mx-auto flex max-w-[1280px] h-full items-center justify-between px-4 sm:px-6">
         
@@ -486,23 +487,31 @@ export function Header() {
               </>
             )}
 
-            {/* Get Pro — always visible */}
-            <Button 
-              variant="primary" 
-              size="sm" 
-              className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
-              asChild
-            >
-              <Link href="/pricing">
-                Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
-              </Link>
-            </Button>
+            {/* Get Pro — hidden for Pro users */}
+            {(() => {
+              const userPlan = isSignedIn ? ((session?.user as Record<string, unknown>)?.plan as string || "free") : "free";
+              if (userPlan === "pro") return null;
+              return (
+                <Button 
+                  variant="primary" 
+                  size="sm" 
+                  className="group relative hover:scale-105 active:scale-95 transition-all shadow-[var(--shadow-glow-accent)] bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] border-none" 
+                  asChild
+                >
+                  <Link href="/pricing">
+                    Get Pro <ArrowRight className="w-3.5 h-3.5 ml-1.5 group-hover:translate-x-[3px] transition-transform" />
+                  </Link>
+                </Button>
+              );
+            })()}
           </div>
         </div>
 
       </div>
 
-      {/* Mobile Drawer */}
+    </header>
+
+      {/* Mobile Drawer — outside header element to avoid backdrop-filter containing block */}
           <div
             ref={drawerRef}
             id="mobile-menu"
@@ -618,19 +627,24 @@ export function Header() {
                 <span className="text-[12px] font-mono text-[var(--text-secondary)]"><strong className="text-[var(--text-primary)]">Client-side tools unlimited</strong></span>
               </div>
 
-              {/* Pro CTA */}
-              <div className="pt-2 pb-6">
-                <Link
-                  href="/pricing"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block mx-4 text-center px-4 py-3 text-sm font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors"
-                >
-                  Get Pro
-                </Link>
-              </div>
+              {/* Pro CTA — hidden for Pro users */}
+              {(() => {
+                const userPlan = isSignedIn ? ((session?.user as Record<string, unknown>)?.plan as string || "free") : "free";
+                if (userPlan === "pro") return null;
+                return (
+                  <div className="pt-2 pb-6">
+                    <Link
+                      href="/pricing"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block mx-4 text-center px-4 py-3 text-sm font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors"
+                    >
+                      Get Pro
+                    </Link>
+                  </div>
+                );
+              })()}
             </div>
           </div>
-      
-    </header>
+    </>
   );
 }

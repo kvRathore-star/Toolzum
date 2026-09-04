@@ -1,11 +1,11 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import {
   Crown, Sparkles, Zap, ShieldCheck, Upload, Check, ArrowRight,
   ChevronRight, FileText, Image, Code2, Briefcase, Wrench,
-  Mic, Video, Cpu, Users, Star, Layers
+  Mic, Video, Cpu, Users, Star, Layers, ChevronDown
 } from 'lucide-react';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import type { ToolMetadata } from '@/registry/tools';
@@ -40,12 +40,18 @@ const CATEGORY_SUMMARIES: Record<string, { icon: React.ElementType; desc: string
   SEO: { icon: Wrench, desc: 'SEO tools for bulk URL checking and link validation.' },
   Privacy: { icon: ShieldCheck, desc: 'Privacy tools for bulk metadata stripping and anonymization.' },
   'E-commerce': { icon: Briefcase, desc: 'E-commerce tools for bulk image and data processing.' },
+  Utility: { icon: Zap, desc: 'General-purpose utilities for unit conversion and data processing.' },
+  Transcription: { icon: Mic, desc: 'Speech-to-text transcription and subtitle generation tools.' },
+  Converter: { icon: ArrowRight, desc: 'Format conversion tools for documents, data, and media.' },
+  'Growth & Marketing': { icon: Sparkles, desc: 'Marketing analytics and SaaS metrics dashboards.' },
+  Finance: { icon: Briefcase, desc: 'Financial analysis and bank statement processing tools.' },
 };
 
-const CATEGORY_ORDER = ['AI', 'PDF', 'Image', 'Video', 'Audio', 'Developer', 'SEO', 'Privacy', 'E-commerce'];
+const CATEGORY_ORDER = ['AI', 'PDF', 'Image', 'Video', 'Audio', 'Developer', 'SEO', 'Privacy', 'E-commerce', 'Utility', 'Transcription', 'Converter', 'Growth & Marketing', 'Finance'];
 
 export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools: ToolMetadata[]; proCount: number; toolCount: number }) {
   const isIndia = useIsIndia();
+  const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
 
   const proPrice = isIndia ? "₹249" : "$14.99";
   const proPriceSuffix = isIndia ? "/month" : "/month, cancel anytime";
@@ -56,6 +62,15 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
     const bi = CATEGORY_ORDER.indexOf(b);
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
   });
+
+  const toggleCategory = (cat: string) => {
+    setCollapsedCategories(prev => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] overflow-hidden">
@@ -118,55 +133,67 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
           </p>
         </div>
 
-        <div className="space-y-16">
+        <div className="space-y-4">
           {sortedCategories.map(category => {
             const tools = grouped[category];
             const theme = getCategoryTheme(category);
             const summary = CATEGORY_SUMMARIES[category];
             const Icon = summary?.icon || theme.icon;
+            const isCollapsed = collapsedCategories.has(category);
 
             return (
-              <div key={category}>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className={`w-10 h-10 rounded-full ${theme.bgTint} flex items-center justify-center`}>
+              <div key={category} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] overflow-hidden">
+                <button
+                  onClick={() => toggleCategory(category)}
+                  className="w-full flex items-center gap-3 p-5 text-left hover:bg-[var(--bg-overlay)] transition-colors cursor-pointer"
+                >
+                  <div className={`w-10 h-10 rounded-full ${theme.bgTint} flex items-center justify-center shrink-0`}>
                     <Icon className={`w-5 h-5 ${theme.iconColor}`} />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold text-[var(--text-primary)]">{category} Tools</h3>
-                    {summary && <p className="text-sm text-[var(--text-secondary)]">{summary.desc}</p>}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-[var(--text-primary)]">{category}</h3>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                        {tools.length} Pro
+                      </span>
+                    </div>
+                    {summary && <p className="text-sm text-[var(--text-secondary)] mt-0.5">{summary.desc}</p>}
                   </div>
-                </div>
+                  <ChevronDown className={`w-5 h-5 text-[var(--text-muted)] shrink-0 transition-transform duration-200 ${isCollapsed ? '' : 'rotate-180'}`} />
+                </button>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                  {tools.map(tool => {
-                    const theme = getCategoryTheme(tool.category);
-                    const Icon = theme.icon;
-                    return (
-                      <Link
-                        key={tool.slug}
-                        href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
-                        className="group block p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-200 hover:border-amber-500/30 hover:shadow-md hover:-translate-y-0.5"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className={`w-8 h-8 rounded-lg ${theme.bgTint} flex items-center justify-center shrink-0`}>
-                            <Icon className={`w-4 h-4 ${theme.iconColor}`} />
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-1.5 mb-1">
-                              <h4 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">
-                                {tool.name}
-                              </h4>
-                              <Crown className="w-3 h-3 text-amber-500 shrink-0" />
+                {!isCollapsed && (
+                  <div className="px-5 pb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                    {tools.map(tool => {
+                      const toolTheme = getCategoryTheme(tool.category);
+                      const ToolIcon = toolTheme.icon;
+                      return (
+                        <Link
+                          key={tool.slug}
+                          href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+                          className="group block p-4 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-200 hover:border-amber-500/30 hover:shadow-md hover:-translate-y-0.5"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className={`w-8 h-8 rounded-lg ${toolTheme.bgTint} flex items-center justify-center shrink-0`}>
+                              <ToolIcon className={`w-4 h-4 ${toolTheme.iconColor}`} />
                             </div>
-                            <p className="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed">
-                              {tool.description}
-                            </p>
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-center gap-1.5 mb-1">
+                                <h4 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">
+                                  {tool.name}
+                                </h4>
+                                <Crown className="w-3 h-3 text-amber-500 shrink-0" />
+                              </div>
+                              <p className="text-xs text-[var(--text-muted)] line-clamp-2 leading-relaxed">
+                                {tool.description}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             );
           })}

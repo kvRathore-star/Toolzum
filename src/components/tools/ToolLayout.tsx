@@ -26,21 +26,13 @@ import { getShortDescription } from '@/lib/generateToolDescription';
 
 const PostDownloadBar = dynamic(() => import('@/components/PostDownloadBar').then(m => ({ default: m.PostDownloadBar })), { ssr: false });
 
-const BULK_PRESET_SLUGS = new Set([
-  'bulk-audio-conpressor', 'bulk-audio-normalizer', 'bulk-csv-excel-to-json',
-  'bulk-ebook-converter', 'bulk-exif-stripper-injector', 'bulk-face-anonymizer',
-  'bulk-font-subsetter', 'bulk-heic-to-jpg', 'bulk-heic-converter',
-  'bulk-image-compressor', 'bulk-image-resizer', 'bulk-image-to-pdf',
-  'bulk-image-to-text-ocr', 'bulk-invoice-receipt-parser',
-  'bulk-markdown-to-pdf-html', 'bulk-pdf-data-extractor',
-  'bulk-pdf-form-extractor', 'bulk-pdf-size-reducer', 'bulk-pdf-suite',
-  'bulk-regex-extractor-replacer', 'bulk-subtitle-time-shifter',
-  'bulk-svg-to-png', 'bulk-image-converter', 'image-compressor', 'image-resizer',
-]);
+import { DOWNLOAD_PRODUCING_SLUGS } from '@/lib/downloadProducingSlugs';
 
-// Categories where the download quota badge is relevant (tools that produce file downloads)
-const DOWNLOAD_CATEGORIES = new Set([
-  'image', 'pdf', 'video', 'audio', 'converter', 'transcription',
+// Only tools whose preset UI is wired through usePresetContext (outer WorkflowPresetPanel).
+// BulkToolShell tools have their own inner preset panel — wrapping them in the outer
+// panel creates a broken duplicate (save fails with "No configuration available to save").
+const BULK_PRESET_SLUGS = new Set([
+  'image-compressor', 'image-resizer',
 ]);
 
 interface ToolLayoutProps {
@@ -225,7 +217,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <ShareTool title={title} slug={slug} category={category} />
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <FavoriteStarButton slug={slug} />
-            {!hideDownloadQuota && DOWNLOAD_CATEGORIES.has(category) && <DownloadQuotaBadge />}
+            {!hideDownloadQuota && DOWNLOAD_PRODUCING_SLUGS.has(slug) && <DownloadQuotaBadge />}
           </div>
 
           {/* Tool Container */}

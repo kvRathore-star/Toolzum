@@ -175,13 +175,25 @@ async function callServerCheck(): Promise<ServerCheckResponse | null> {
   }
 }
 
+function getCurrentToolContext(): { toolSlug: string | null; category: string | null } {
+  if (typeof window === "undefined") return { toolSlug: null, category: null };
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  // URL pattern: /{category}/{tool-slug}/
+  if (parts.length >= 2) {
+    return { category: parts[0], toolSlug: parts[1] };
+  }
+  return { toolSlug: null, category: null };
+}
+
 async function callServerRecord(): Promise<boolean> {
   if (typeof window === "undefined") return false;
   try {
     const fp = getFingerprint();
+    const { toolSlug, category } = getCurrentToolContext();
     const res = await fetch("/api/downloads/record", {
       method: "POST",
-      headers: { "x-download-fingerprint": fp },
+      headers: { "x-download-fingerprint": fp, "Content-Type": "application/json" },
+      body: JSON.stringify({ toolSlug, category }),
     });
     if (!res.ok) return false;
     const data = await res.json() as ServerRecordResponse;
