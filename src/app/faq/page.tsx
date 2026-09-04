@@ -25,7 +25,7 @@ const faqs = [
   },
   {
     q: "Is there a file size limit?",
-    a: "Free anonymous users can process files up to 10MB. Signing in increases the limit to 25MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
+    a: "Free anonymous users can process files up to 10-30MB depending on file type (images 10MB, PDFs 15MB, audio 20MB, video 30MB). Signing in increases limits to 20-150MB. Pro subscribers can process files up to 2GB with batch support of up to 500 files.",
   },
   {
     q: "How many files can I process?",
