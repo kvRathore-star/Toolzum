@@ -61,6 +61,12 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'ai-translator': 1,
   'ai-cover-letter-generator': 1,
   'ai-document-chat': 1,
+  'brand-color-palette-generator': 1,
+  'complaint-letter-generator': 1,
+  'video-to-text-transcription': 1,
+  'audio-to-text-transcription': 1,
+  'pdf-ai-summariser': 1,
+  'resume-ats-score-checker': 1,
   'indian-voice-transcriber': 10,
 };
 

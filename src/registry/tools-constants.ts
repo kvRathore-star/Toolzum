@@ -25,6 +25,10 @@ export const proSlugs = [
   // Transcription / cloud tools
   "youtube-transcript-generator", "podcast-transcription", "meeting-minutes-generator",
   "indian-voice-transcriber", "subtitle-translator",
+  "audio-to-text-transcription", "video-to-text-transcription",
+  // AI tools that use /api/ai/generate
+  "brand-color-palette-generator", "complaint-letter-generator",
+  "pdf-ai-summariser", "resume-ats-score-checker",
   // Premium SaaS / batch
   "saas-metrics-dashboard",
   "bank-statement-analyser", "api-builder",
