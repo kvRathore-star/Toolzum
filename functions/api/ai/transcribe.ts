@@ -7,15 +7,41 @@ const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
 
-async function getUserId(request: Request, DB: D1Database): Promise<string | null> {
+const RATE_LIMITS: Record<string, number> = {
+  free: 2,
+  signedin: 2,
+  pro: 5,
+};
+
+const CREDIT_RESET_DAYS = 30;
+const FREE_CREDITS = 30;
+const PRO_CREDITS = 300;
+
+async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';
   const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
   const token = tokenMatch?.[1];
   if (!token) return null;
   const row = await DB.prepare(
-    "SELECT s.userId FROM session s WHERE s.token = ? AND s.expiresAt > unixepoch()"
-  ).bind(token).first<{ userId: string }>();
-  return row?.userId || null;
+    "SELECT s.userId, u.plan FROM session s JOIN user u ON u.id = s.userId WHERE s.token = ? AND s.expiresAt > unixepoch()"
+  ).bind(token).first<{ userId: string; plan: string }>();
+  if (!row) return null;
+  return { userId: row.userId, plan: row.plan || 'free' };
+}
+
+async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string, creditResetAt: number | null): Promise<number> {
+  const now = Date.now();
+  const resetMs = CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000;
+  const maxCredits = plan === 'pro' ? PRO_CREDITS : FREE_CREDITS;
+
+  if (!creditResetAt || (now - creditResetAt) >= resetMs) {
+    await DB.prepare(
+      "UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?"
+    ).bind(maxCredits, now, userId).run();
+    return maxCredits;
+  }
+
+  return maxCredits;
 }
 
 function toBase64(bytes: Uint8Array): string {
@@ -30,24 +56,33 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
 
-    // Require signed-in user
-    const userId = await getUserId(context.request, DB);
-    if (!userId) {
+    const userCtx = await getUserContext(context.request, DB);
+    if (!userCtx) {
       return new Response(JSON.stringify({ error: 'Sign in required' }), {
         status: 401,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // Rate limit: 3 requests per minute per user
-    const rl = await checkRateLimit(DB, 'ai-trans', userId, 3);
+    const { userId, plan } = userCtx;
+    const rateLimit = RATE_LIMITS[plan] || RATE_LIMITS.free;
+
+    const rl = await checkRateLimit(DB, 'ai-trans', userId, rateLimit);
     if (rl.limited) return rl.response;
 
-    // Check credits
     const user = await DB.prepare(
-      "SELECT credits FROM user WHERE id = ?"
-    ).bind(userId).first<{ credits: number }>();
-    if (!user || user.credits <= 0) {
+      "SELECT credits, creditResetAt FROM user WHERE id = ?"
+    ).bind(userId).first<{ credits: number; creditResetAt: number | null }>();
+    if (!user) {
+      return new Response(JSON.stringify({ error: 'User not found' }), {
+        status: 404,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const maxCredits = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt);
+
+    if (user.credits <= 0) {
       return new Response(JSON.stringify({ error: 'No credits remaining' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
@@ -81,7 +116,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       );
     }
 
-    // Log rate limit entry
     recordRateLimit(DB, 'ai-trans', userId, '/ai/transcribe');
 
     const arrayBuffer = await file.arrayBuffer();
@@ -129,7 +163,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    // Deduct 1 credit
     await DB.prepare("UPDATE user SET credits = credits - 1 WHERE id = ? AND credits > 0").bind(userId).run();
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
