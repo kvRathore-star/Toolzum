@@ -135,12 +135,6 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
                     <h3 className="text-xl font-semibold text-[var(--text-primary)]">{category} Tools</h3>
                     {summary && <p className="text-sm text-[var(--text-secondary)]">{summary.desc}</p>}
                   </div>
-                  <div className="ml-auto hidden sm:block">
-                    <Link href={`/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="text-sm text-[var(--accent)] hover:underline flex items-center gap-1">
-                      Browse all {category} <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">

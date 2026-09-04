@@ -8,7 +8,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net; media-src 'self' blob:; font-src 'self' data:; frame-src 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; media-src 'self' blob:; font-src 'self' data:; frame-src 'self'
 
 # Font files - long cache
 *.woff2
@@ -27,4 +27,6 @@
 *.svg
   Cache-Control: public, max-age=31536000, immutable
 *.ico
+  Cache-Control: public, max-age=31536000, immutable
+*.wasm
   Cache-Control: public, max-age=31536000, immutable

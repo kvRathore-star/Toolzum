@@ -162,7 +162,7 @@ export function UserDetailSlideOver({
                   try {
                     const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, plan: newPlan }) });
                     const body = await res.json().catch(() => ({})) as { error?: string };
-                    if (res.ok) { onChangePlan(userDetail.user.id, newPlan); onToast("Plan updated to " + newPlan); }
+                    if (res.ok) { onChangePlan(userDetail.user.id, newPlan); onToast("Plan updated to " + newPlan + ". User must re-login for changes to take effect."); }
                     else onToast(body.error || "Failed to update plan", "error");
                   } catch { onToast("Failed to update plan — network error", "error"); } finally { setChangingPlan(false); }
                 }}

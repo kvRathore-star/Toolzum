@@ -41,6 +41,13 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
     .bind(plan, userId)
     .run();
 
+  // Invalidate all sessions for the target user so their client
+  // picks up the new plan on next login (better-auth caches plan in session)
+  await DB.prepare('DELETE FROM "session" WHERE userId = ?')
+    .bind(userId)
+    .run()
+    .catch(() => {});
+
   await DB.prepare(
     "INSERT INTO admin_audit_log (actorEmail, action, targetUserId, oldValue, newValue, createdAt) VALUES (?, ?, ?, ?, ?, datetime('now'))"
   )
