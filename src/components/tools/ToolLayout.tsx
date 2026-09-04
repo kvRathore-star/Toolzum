@@ -82,9 +82,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
   const { recordTool } = useToolHistory();
 
   const isPro = tool?.isPro || false;
-  const isProLocked = isPro && userPlan !== "pro";
-  const isLocked = isProLocked && userPlan !== "free";
-  const isFreeTier = isPro && userPlan === "free";
+  const isLocked = isPro && userPlan !== "pro" && userPlan !== "free";
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   const breadcrumbSchema = {
@@ -226,8 +224,6 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 <WorkflowPresetPanel toolSlug={slug}>
                   <ToolPaywall
                     isLocked={isLocked}
-                    isFreeTier={isFreeTier}
-                    isProLocked={isProLocked}
                     showSignInPrompt={showSignInPrompt}
                     proToolCount={proToolCount}
                     toolCount={toolCount}
@@ -239,8 +235,6 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
               ) : (
                 <ToolPaywall
                   isLocked={isLocked}
-                  isFreeTier={isFreeTier}
-                  isProLocked={isProLocked}
                   showSignInPrompt={showSignInPrompt}
                   proToolCount={proToolCount}
                   toolCount={toolCount}

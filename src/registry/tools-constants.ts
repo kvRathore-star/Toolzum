@@ -16,7 +16,7 @@ export const proSlugs = [
   "bulk-heic-to-jpg",
   "bulk-pdf-suite",
   "bulk-url-shortener",
-  "batch-image-editor", "image-bulk-converter", "unit-converter",
+  "batch-image-editor", "image-bulk-converter",
   "bulk-avif-optimizer", "bulk-heic-converter", "bulk-image-upscaler",
   // AI tools
   "ai-translator", "ai-image-upscaler", "ai-face-swap",
@@ -26,7 +26,7 @@ export const proSlugs = [
   "youtube-transcript-generator", "podcast-transcription", "meeting-minutes-generator",
   "indian-voice-transcriber", "subtitle-translator",
   // Premium SaaS / batch
-  "gemini-watermark-remover", "saas-metrics-dashboard",
+  "saas-metrics-dashboard",
   "bank-statement-analyser", "api-builder",
 ];
 

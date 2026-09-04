@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 
 interface ToolPaywallProps {
   isLocked: boolean;
-  isFreeTier: boolean;
-  isProLocked: boolean;
   showSignInPrompt: boolean;
   proToolCount: number;
   toolCount: number;
@@ -16,32 +14,14 @@ interface ToolPaywallProps {
   children: React.ReactNode;
 }
 
-export function ToolPaywall({ isLocked, isFreeTier, isProLocked, showSignInPrompt, proToolCount, title, children }: ToolPaywallProps) {
-  if (!isLocked && !isFreeTier) return <>{children}</>;
+export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, children }: ToolPaywallProps) {
+  if (!isLocked) return <>{children}</>;
 
   return (
     <div className="relative overflow-hidden">
       <div className={isLocked ? "blur-md pointer-events-none select-none opacity-40 transition-all duration-300" : "transition-all duration-300"}>
         {children}
       </div>
-
-      {isFreeTier && !isLocked && (
-        <>
-          <div
-            className="absolute bottom-0 left-0 right-0 h-12 pointer-events-none z-10"
-            style={{ background: "linear-gradient(to bottom, transparent, var(--bg-elevated))" }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 z-20 flex justify-center pb-3">
-            <Link
-              href="/pricing"
-              className="inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[var(--accent-ink)] text-white text-[11px] font-semibold hover:opacity-90 transition-opacity shadow-sm"
-            >
-              <Crown className="w-3 h-3" />
-              Upgrade to Pro
-            </Link>
-          </div>
-        </>
-      )}
 
       {isLocked && (
         <div className="absolute inset-0 z-50 flex items-center justify-center p-6">

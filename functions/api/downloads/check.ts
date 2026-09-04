@@ -4,9 +4,10 @@ interface Env {
   DB: D1Database;
 }
 
-function getUserLimit(plan: string | null): number {
+function getUserLimit(plan: string | null, isProTool: boolean): number {
   if (plan === 'pro') return Infinity;
-  return plan ? 10 : 3;
+  if (isProTool) return plan ? 2 : 0;
+  return plan ? 5 : 3;
 }
 
 export async function onRequestGet(context: { request: Request; env: Env }) {
@@ -17,6 +18,9 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
     const rl = await checkRateLimit(DB, "dl-check", ip, 20);
     if (rl.limited) return rl.response;
+
+    const url = new URL(request.url);
+    const isProTool = url.searchParams.get('isPro') === '1';
 
     // Identify user from session
     const cookies = request.headers.get('cookie') || '';
@@ -32,15 +36,22 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       userId = user?.userId || null;
     }
 
-    const limit = getUserLimit(plan);
+    const limit = getUserLimit(plan, isProTool);
     if (limit === Infinity) {
       return new Response(JSON.stringify({ allowed: true, remaining: 999 }), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    // For identified users, track by userId; otherwise by browser fingerprint
-    const fingerprint = userId || request.headers.get('x-download-fingerprint') || 'unknown';
+    if (limit === 0) {
+      return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // For Pro tool downloads, prefix fingerprint to track separately
+    const baseFingerprint = userId || request.headers.get('x-download-fingerprint') || 'unknown';
+    const fingerprint = isProTool ? `pro:${baseFingerprint}` : baseFingerprint;
     const today = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
     const row = await DB.prepare(
       "SELECT count FROM download_usage WHERE fingerprint = ? AND date = ?"

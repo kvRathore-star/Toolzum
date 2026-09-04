@@ -4,8 +4,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Crown, Lock, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { proSlugs } from "@/registry/tools-constants";
 
-type PlanLimitReason = "file_size" | "batch_size";
+const PRO_SLUG_SET = new Set(proSlugs);
+
+function isCurrentToolPro(): boolean {
+  if (typeof window === "undefined") return false;
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  return parts.length >= 2 ? PRO_SLUG_SET.has(parts[1]) : false;
+}
+
+type PlanLimitReason = "file_size" | "batch_size" | "pro_tool_anon";
 
 interface PlanLimitDetail {
   reason: PlanLimitReason;
@@ -25,6 +34,10 @@ const reasonCopy: Record<PlanLimitReason, { title: string; body: string }> = {
   batch_size: {
     title: "Batch too large for your plan",
     body: "This batch is over your plan's file limit. Upgrade to Pro for bulk processing.",
+  },
+  pro_tool_anon: {
+    title: "Sign in to use this Pro tool",
+    body: "This is a premium Pro tool. Sign in free to get 2 downloads per day, or upgrade to Pro for unlimited access.",
   },
 };
 
@@ -53,11 +66,17 @@ export function DownloadLimitModal() {
   if (!event) return null;
 
   const isQuota = event.type === "quota";
+  const isProTool = isCurrentToolPro();
   const copy = isQuota
-    ? {
-        title: "Daily download limit reached",
-        body: "You've used up your free downloads for today. Sign in for 3 more, or go Pro for unlimited downloads.",
-      }
+    ? isProTool
+      ? {
+          title: "Pro tool daily limit reached",
+          body: "You've used your 2 free downloads on Pro tools today. Upgrade to Pro for unlimited downloads.",
+        }
+      : {
+          title: "Daily download limit reached",
+          body: "You've used up your free downloads for today. Sign in for more, or go Pro for unlimited downloads.",
+        }
     : reasonCopy[event.detail.reason];
 
   return (
@@ -98,7 +117,7 @@ export function DownloadLimitModal() {
             className="w-full text-sm"
             asChild
           >
-            <Link href="/sign-in">Sign in free for 3 more</Link>
+            <Link href="/sign-in">Sign in free for more</Link>
           </Button>
           <button
             onClick={close}

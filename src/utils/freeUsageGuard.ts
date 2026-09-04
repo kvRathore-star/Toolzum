@@ -1,3 +1,7 @@
+import { proSlugs } from "@/registry/tools-constants";
+
+const PRO_SLUG_SET = new Set(proSlugs);
+
 const STORAGE_KEYS = {
   count: "th_free_uses",
   fingerprint: "th_fp",
@@ -6,7 +10,7 @@ const STORAGE_KEYS = {
 };
 
 const ANON_LIMIT = 3;
-const SIGNED_IN_EXTRA = 7;
+const SIGNED_IN_EXTRA = 2;
 const TOTAL_FREE = ANON_LIMIT + SIGNED_IN_EXTRA;
 
 export function getFingerprint(): string {
@@ -160,11 +164,12 @@ async function callPlanCheck(): Promise<PlanLimits | null> {
   }
 }
 
-async function callServerCheck(): Promise<ServerCheckResponse | null> {
+async function callServerCheck(isProTool: boolean): Promise<ServerCheckResponse | null> {
   if (typeof window === "undefined") return null;
   try {
     const fp = getFingerprint();
-    const res = await fetch("/api/downloads/check", {
+    const url = isProTool ? "/api/downloads/check?isPro=1" : "/api/downloads/check";
+    const res = await fetch(url, {
       headers: { "x-download-fingerprint": fp },
     });
     if (!res.ok) return null;
@@ -186,7 +191,12 @@ function getCurrentToolContext(): { toolSlug: string | null; category: string | 
   return { toolSlug: null, category: null };
 }
 
-async function callServerRecord(): Promise<boolean> {
+function isCurrentToolPro(): boolean {
+  const { toolSlug } = getCurrentToolContext();
+  return toolSlug ? PRO_SLUG_SET.has(toolSlug) : false;
+}
+
+async function callServerRecord(isProTool: boolean): Promise<boolean> {
   if (typeof window === "undefined") return false;
   try {
     const fp = getFingerprint();
@@ -194,7 +204,7 @@ async function callServerRecord(): Promise<boolean> {
     const res = await fetch("/api/downloads/record", {
       method: "POST",
       headers: { "x-download-fingerprint": fp, "Content-Type": "application/json" },
-      body: JSON.stringify({ toolSlug, category }),
+      body: JSON.stringify({ toolSlug, category, isPro: isProTool }),
     });
     if (!res.ok) return false;
     const data = await res.json() as ServerRecordResponse;
@@ -207,6 +217,17 @@ async function callServerRecord(): Promise<boolean> {
 
 export async function checkAndRecordDownload(options?: { fileSizeMB?: number; batchSize?: number }): Promise<boolean> {
   if (typeof window === "undefined") return true;
+
+  const isProTool = isCurrentToolPro();
+
+  // Pro tools: block anonymous users immediately
+  if (isProTool) {
+    const isSignedIn = getSignedInStatus();
+    if (!isSignedIn) {
+      try { window.dispatchEvent(new CustomEvent("toolzum:plan-limit", { detail: { reason: "pro_tool_anon", limit: 0, actual: 1 } })); } catch {}
+      return false;
+    }
+  }
 
   // 0. Check plan limits from server (defensive: block if server unreachable)
   const plan = await callPlanCheck();
@@ -224,7 +245,7 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
   }
 
   // 1. Server-side quota check (defensive: block if server unreachable)
-  const server = await callServerCheck();
+  const server = await callServerCheck(isProTool);
   if (!server || !server.allowed) {
     try {
       window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
@@ -235,7 +256,7 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
   }
 
   // 2. Record on server (blocking — must succeed to authorise)
-  const serverRecorded = await callServerRecord();
+  const serverRecorded = await callServerRecord(isProTool);
   if (!serverRecorded) {
     console.warn("[toolzum] Server-side download record failed — rejecting to stay safe");
     return false;

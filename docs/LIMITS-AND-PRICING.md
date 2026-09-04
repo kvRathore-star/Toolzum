@@ -12,34 +12,51 @@ Last verified: 2026-09-04
 | Metric | Count |
 |--------|-------|
 | Total tools | 1,046 |
-| Pro tools | 63 (gated by `proSlugs` in `tools-constants.ts`) |
+| Pro tools | 62 (gated by `proSlugs` in `tools-constants.ts`) |
 | Download-producing tools | 408 (auto-generated in `downloadProducingSlugs.ts`) |
 | Categories | 21 |
 
 ---
 
-## 2. Download Quota (Client-Side Tools)
+## 2. Download Quota
 
 **Applies to:** 408 tools that call `downloadOrShare()` — image compressors, PDF tools, video converters, audio tools, etc.
 
+### Free tools (non-Pro)
+
 | Tier | Daily limit | Reset | Enforcement |
 |------|-------------|-------|-------------|
-| Anonymous | 3/day | Rolling 24h | Server-side (`download_usage` table) |
-| Signed-in (free) | 10/day | Rolling 24h | Server-side |
+| Anonymous | 3/day | Daily (midnight UTC) | Server-side (`download_usage` table) |
+| Signed-in (free) | 5/day | Daily (midnight UTC) | Server-side |
 | Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
 
-**Code:** `functions/api/downloads/record.ts:5-8`
+### Pro tools
+
+| Tier | Daily limit | Reset | Enforcement |
+|------|-------------|-------|-------------|
+| Anonymous | 0 (blocked) | — | Paywall blocks access entirely |
+| Signed-in (free) | 2/day | Daily (midnight UTC) | Server-side (separate `pro:` fingerprint prefix) |
+| Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
+
+**Code:** `functions/api/downloads/check.ts:7-10`, `functions/api/downloads/record.ts:7-10`
 
 ```
-getUserLimit(plan):
+getUserLimit(plan, isProTool):
   pro → Infinity
-  signed-in → 10
-  anonymous → 3
+  signed-in + Pro tool → 2
+  signed-in + free tool → 5
+  anonymous + Pro tool → 0
+  anonymous + free tool → 3
 ```
 
-**Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota).
+**Pro tool detection:** Client detects Pro tools from URL slug via `proSlugs` set in `tools-constants.ts`. Passes `isPro=1` query param (check) or `isPro: true` body field (record) to server. Server prefixes fingerprint with `pro:` to track Pro tool downloads separately.
 
-**Badge:** Shows on tool page for all 408 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx:220`. Hidden when `hideDownloadQuota={true}` (currently only `gemini-watermark-remover`).
+**Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
+
+**Badge:** Shows on tool page for all 408 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies:
+- Pro tool: "2 Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
+- Free tool: "3/5 free downloads left today" / "Free downloads used up today"
+- Pro user: hidden (unlimited)
 
 ---
 
@@ -49,11 +66,9 @@ getUserLimit(plan):
 
 | Tier | Credits | Reset | Enforcement |
 |------|---------|-------|-------------|
-| Free (signed-in) | 30/month | Monthly (proposed) | `user.credits` in D1 |
-| Pro | 300/month | Monthly (proposed) | `user.credits` in D1 |
+| Free (signed-in) | 30/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
+| Pro | 300/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
 | Anonymous | N/A (sign-in required) | — | 401 on AI routes |
-
-**Note:** Current code has 10 credits total with no reset. Monthly renewal is proposed but not yet implemented.
 
 ### Per-Task Credit Costs
 
@@ -103,13 +118,13 @@ getUserLimit(plan):
 
 ### Download Record (`/api/downloads/record`)
 
-No explicit rate limit — relies on daily quota enforcement.
+Rate limited at 10 req/min per IP. Daily quota enforced separately.
 
 ---
 
 ## 5. File Size Limits
 
-**Code:** `functions/api/check-plan.ts:5-8`
+**Code:** `functions/api/check-plan.ts:7-11`
 
 | Tier | Max file size | Max batch size | Threads |
 |------|--------------|----------------|---------|
@@ -134,27 +149,43 @@ No explicit rate limit — relies on daily quota enforcement.
 
 Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no monthly cap.
 
-| Tier | Limit |
-|------|-------|
-| All users | Unlimited |
+**Split access model:**
+- **Single mode** → Free tool (everyone can use)
+- **Batch mode** → Pro-only (upgrade required)
+
+### Single Mode (free tool)
+
+| Tier | Downloads/day |
+|------|---------------|
+| Anonymous | 3 |
+| Signed-in (free) | 5 |
+| Pro | Unlimited |
+
+### Batch Mode (Pro-only)
+
+| Tier | Access |
+|------|--------|
+| Anonymous | Blocked |
+| Signed-in (free) | Blocked |
+| Pro | Unlimited |
 
 **Code:** `src/components/tools/modules/image/GeminiWatermarkRemover.tsx`
 
-**Previous system (removed):** localStorage monthly cap (10/month) — bypassable via storage clear, no analytics. Removed because tool costs $0 to run and the cap was never enforceable.
-
-**Download quota:** Shows daily badge like other image tools (408 tool set).
+**Batch gating:** Button shows lock icon for non-Pro users. Clicking shows toast "Upgrade to Pro for batch processing". If somehow in batch mode, shows upgrade prompt instead of batch UI.
 
 ---
 
 ## 7. Pro Tools
 
-**List:** `src/registry/tools-constants.ts` → `proSlugs` array (63 slugs)
+**List:** `src/registry/tools-constants.ts` → `proSlugs` array (62 slugs)
 
 **Categories covered:** AI, Image (bulk), PDF (bulk), Audio (bulk), Video (bulk), Transcription, Developer, E-commerce, Privacy, Indian Utilities
 
-**Enforcement:** `isPro` flag checked at tool page render; Pro users identified via `session.user.plan === "pro"`.
+**Enforcement:** `isPro` flag checked at tool page render; anonymous users see full lock screen. Signed-in free users get full access with download limits (2/day for Pro tools).
 
 **Get Pro button:** Hidden for Pro users in header (desktop + mobile drawer).
+
+**Note:** `unit-converter` and `gemini-watermark-remover` are NOT Pro tools. Unit converter is a free utility. Gemini watermark single mode is free; batch mode is gated inside the component.
 
 ---
 
@@ -163,14 +194,16 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 | Feature | Anonymous | Signed-in (free) | Pro ($14.99/mo) |
 |---------|-----------|------------------|-----------------|
 | Client-side tools | Unlimited | Unlimited | Unlimited |
-| Download quota | 3/day | 10/day | Unlimited |
+| Download quota (free tools) | 3/day | 5/day | Unlimited |
+| Download quota (Pro tools) | Blocked | 2/day | Unlimited |
 | AI credits | N/A | 30/month | 300/month |
 | AI rate limit | Blocked | 2 req/min | 5 req/min |
 | Transcription rate limit | Blocked | 2 req/min | 5 req/min |
 | Max file size | 30 MB | 150 MB | 2 GB |
 | Max batch size | 1 file | 10 files | 500 files |
-| Pro tools | Blocked | Blocked | Full access |
-| Gemini watermark remover | Unlimited | Unlimited | Unlimited |
+| Pro tools access | Blocked | Full access (with limits) | Full access (unlimited) |
+| Gemini watermark single | 3/day | 5/day | Unlimited |
+| Gemini watermark batch | Blocked | Blocked | Unlimited |
 
 ---
 
@@ -189,8 +222,4 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 ## 10. Known Gaps / TODO
 
-- [ ] Credit monthly renewal not yet implemented (currently 10 total, no reset)
-- [ ] AI rate limits not yet updated to 2/5 split (currently 5 for all signed-in)
-- [ ] Transcription rate limits not yet updated to 2/5 split (currently 3 for all)
 - [ ] Log AI-credit exhaustion events to analytics (same pattern as download-event)
-- [ ] Remove `hideDownloadQuota={false}` prop entirely from page.tsx (no longer needed)

@@ -1,14 +1,16 @@
 'use client';
 
 import React, { useState, useRef, useCallback, useEffect } from 'react';
+import Link from 'next/link';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
+import { useSession } from '@/lib/auth-client';
 import JSZip from 'jszip';
-import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Clock, FileImage, Crop, Move, RotateCcw } from 'lucide-react';
+import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Clock, FileImage, Crop, Move, RotateCcw, Crown, Lock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 const ALPHA_NOISE_FLOOR = 3 / 255;
@@ -232,6 +234,8 @@ function CropEditor({ url, onCrop, onClear }: { url: string; onCrop: (c: CropAre
 }
 
 export default function GeminiWatermarkRemover() {
+  const { data: session } = useSession();
+  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
   const [mode, setMode] = useState<'single' | 'bulk'>('single');
   const [singleImage, setSingleImage] = useState<{ file: File; url: string } | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
@@ -357,8 +361,12 @@ export default function GeminiWatermarkRemover() {
           <button onClick={() => setMode('single')} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'single' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
             <Sparkles className="w-4 h-4" /> Single Image
           </button>
-          <button onClick={() => setMode('bulk')} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'bulk' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+          <button onClick={() => {
+            if (!isPro) { toast.error('Upgrade to Pro for batch processing'); return; }
+            setMode('bulk');
+          }} className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'bulk' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
             <Images className="w-4 h-4" /> Batch Mode
+            {!isPro && <Crown className="w-3 h-3 text-amber-500" />}
           </button>
         </div>
       </div>
@@ -517,44 +525,57 @@ export default function GeminiWatermarkRemover() {
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <button onClick={() => bulkFileRef.current?.click()}
-              className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm hover:border-[var(--accent)] transition-colors">
-              <Upload className="w-4 h-4" /> Add Images
-            </button>
-            {batch.files.length > 0 && !batch.isProcessing && (
-              <button onClick={handleBulkProcess}
-                className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity">
-                <Zap className="w-4 h-4" /> Process All ({batch.files.length})
-              </button>
-            )}
-            {batch.files.filter((f) => f.status === 'done').length > 0 && !batch.isProcessing && (
-              <>
-                <ProDownloadButton fileCount={batch.files.filter((f) => f.status === 'done').length} onDownloadAll={downloadAll} />
-                <span className="text-xs text-[var(--text-muted)]">or download individually ↓</span>
-              </>
-            )}
-            <input ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
-          </div>
-          <BatchProgressPanel
-            files={batch.files} progress={batch.progress} isProcessing={batch.isProcessing}
-            onRemove={batch.removeFile} onClear={() => { batch.clearFiles(); doneBlobsRef.current = []; }}
-            onAbort={batch.abort}
-          />
-          {/* Individual Downloads */}
-          {batch.files.filter(f => f.status === 'done').length > 0 && !batch.isProcessing && (
-            <div className="space-y-2">
-              <h4 className="text-xs font-medium text-[var(--text-secondary)]">Individual Downloads</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-                {batch.files.map((bf, i) => bf.status === 'done' && (
-                  <button key={i} onClick={() => downloadIndividual(i)}
-                    className="flex items-center gap-2 px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors text-left truncate">
-                    <Download className="w-3 h-3 shrink-0 text-emerald-500" />
-                    <span className="truncate">{bf.file.name.replace(/\.[^.]+$/, '')}-clean</span>
-                  </button>
-                ))}
-              </div>
+          {!isPro ? (
+            <div className="text-center py-12">
+              <Lock className="w-10 h-10 mx-auto mb-3 text-amber-500" />
+              <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">Batch Mode is Pro</h3>
+              <p className="text-sm text-[var(--text-secondary)] mb-4">Process multiple images at once with batch watermark removal. Upgrade to Pro to unlock.</p>
+              <Link href="/pricing" className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-xl font-medium text-sm hover:opacity-90 transition-opacity">
+                <Crown className="w-4 h-4" /> Upgrade to Pro
+              </Link>
             </div>
+          ) : (
+            <>
+              <div className="flex items-center gap-3">
+                <button onClick={() => bulkFileRef.current?.click()}
+                  className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm hover:border-[var(--accent)] transition-colors">
+                  <Upload className="w-4 h-4" /> Add Images
+                </button>
+                {batch.files.length > 0 && !batch.isProcessing && (
+                  <button onClick={handleBulkProcess}
+                    className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium hover:opacity-90 transition-opacity">
+                    <Zap className="w-4 h-4" /> Process All ({batch.files.length})
+                  </button>
+                )}
+                {batch.files.filter((f) => f.status === 'done').length > 0 && !batch.isProcessing && (
+                  <>
+                    <ProDownloadButton fileCount={batch.files.filter((f) => f.status === 'done').length} onDownloadAll={downloadAll} />
+                    <span className="text-xs text-[var(--text-muted)]">or download individually ↓</span>
+                  </>
+                )}
+                <input ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
+              </div>
+              <BatchProgressPanel
+                files={batch.files} progress={batch.progress} isProcessing={batch.isProcessing}
+                onRemove={batch.removeFile} onClear={() => { batch.clearFiles(); doneBlobsRef.current = []; }}
+                onAbort={batch.abort}
+              />
+              {/* Individual Downloads */}
+              {batch.files.filter(f => f.status === 'done').length > 0 && !batch.isProcessing && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-medium text-[var(--text-secondary)]">Individual Downloads</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                    {batch.files.map((bf, i) => bf.status === 'done' && (
+                      <button key={i} onClick={() => downloadIndividual(i)}
+                        className="flex items-center gap-2 px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] hover:border-[var(--accent)] transition-colors text-left truncate">
+                        <Download className="w-3 h-3 shrink-0 text-emerald-500" />
+                        <span className="truncate">{bf.file.name.replace(/\.[^.]+$/, '')}-clean</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       )}

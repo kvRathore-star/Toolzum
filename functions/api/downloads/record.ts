@@ -4,9 +4,10 @@ interface Env {
   DB: D1Database;
 }
 
-function getUserLimit(plan: string | null): number {
+function getUserLimit(plan: string | null, isProTool: boolean): number {
   if (plan === 'pro') return Infinity;
-  return plan ? 10 : 3;
+  if (isProTool) return plan ? 2 : 0;
+  return plan ? 5 : 3;
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
@@ -18,13 +19,15 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const rl = await checkRateLimit(DB, "dl-record", ip, 10);
     if (rl.limited) return rl.response;
 
-    // Parse optional body fields (toolSlug, category) sent by the client
+    // Parse optional body fields (toolSlug, category, isPro) sent by the client
     let toolSlug: string | null = null;
     let category: string | null = null;
+    let isProTool = false;
     try {
-      const body = await request.clone().json<{ toolSlug?: string; category?: string }>();
+      const body = await request.clone().json<{ toolSlug?: string; category?: string; isPro?: boolean }>();
       toolSlug = body.toolSlug || null;
       category = body.category || null;
+      isProTool = body.isPro === true;
     } catch {
       // Body may be empty (legacy callers) — that's fine
     }
@@ -42,8 +45,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       userId = user?.userId || null;
     }
 
-    const limit = getUserLimit(plan);
-    const fingerprint = userId || request.headers.get('x-download-fingerprint') || 'unknown';
+    const limit = getUserLimit(plan, isProTool);
+    const baseFingerprint = userId || request.headers.get('x-download-fingerprint') || 'unknown';
+    const fingerprint = isProTool ? `pro:${baseFingerprint}` : baseFingerprint;
     const userType = plan === 'pro' ? 'pro' : plan ? 'signedin' : 'anon';
     const today = `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`;
 
@@ -57,6 +61,20 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         ).bind(userId, fingerprint, userType, toolSlug, category).run();
       }
       return new Response(JSON.stringify({ allowed: true, remaining: 999 }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Anonymous users on Pro tools: immediate block
+    if (limit === 0) {
+      recordRateLimit(DB, "dl-record", ip, "/downloads/record");
+      if (toolSlug) {
+        await DB.prepare(
+          `INSERT INTO download_event (userId, fingerprint, userType, toolSlug, category, outcome, dailyCount, dailyLimit, createdAt)
+           VALUES (?, ?, ?, ?, ?, 'blocked_pro_anon', 0, 0, unixepoch())`
+        ).bind(userId, fingerprint, userType, toolSlug, category).run();
+      }
+      return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
         headers: { 'Content-Type': 'application/json' },
       });
     }

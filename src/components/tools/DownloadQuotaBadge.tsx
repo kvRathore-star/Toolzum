@@ -3,7 +3,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Download } from "lucide-react";
 import { getFingerprint } from "@/utils/freeUsageGuard";
+import { proSlugs } from "@/registry/tools-constants";
 
+const PRO_SLUG_SET = new Set(proSlugs);
 const PRO_REMAINING = 999;
 
 interface CheckResponse {
@@ -11,9 +13,17 @@ interface CheckResponse {
   remaining: number;
 }
 
+function isCurrentToolPro(): boolean {
+  if (typeof window === "undefined") return false;
+  const parts = window.location.pathname.split("/").filter(Boolean);
+  return parts.length >= 2 ? PRO_SLUG_SET.has(parts[1]) : false;
+}
+
 async function fetchRemaining(): Promise<number | null> {
   try {
-    const res = await fetch("/api/downloads/check", {
+    const isPro = isCurrentToolPro();
+    const url = isPro ? "/api/downloads/check?isPro=1" : "/api/downloads/check";
+    const res = await fetch(url, {
       headers: { "x-download-fingerprint": getFingerprint() },
     });
     if (!res.ok) return null;
@@ -26,8 +36,11 @@ async function fetchRemaining(): Promise<number | null> {
 
 export function DownloadQuotaBadge() {
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [isProTool, setIsProTool] = useState(false);
 
   const refresh = useCallback(async () => {
+    const proTool = isCurrentToolPro();
+    setIsProTool(proTool);
     const value = await fetchRemaining();
     if (value !== null) setRemaining(value);
   }, []);
@@ -48,6 +61,14 @@ export function DownloadQuotaBadge() {
 
   const isZero = remaining === 0;
 
+  const label = isProTool
+    ? isZero
+      ? "Pro downloads used up today"
+      : `${remaining} Pro ${remaining === 1 ? "download" : "downloads"} left — Upgrade for unlimited`
+    : isZero
+      ? "Free downloads used up today"
+      : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`;
+
   return (
     <>
       <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
@@ -55,9 +76,7 @@ export function DownloadQuotaBadge() {
         <Download
           className={`w-3.5 h-3.5 ${isZero ? "text-[var(--danger)]" : "text-[var(--accent)]"}`}
         />
-        {isZero
-          ? "Free downloads used up today"
-          : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`}
+        {label}
       </span>
     </>
   );
