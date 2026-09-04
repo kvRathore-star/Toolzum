@@ -5,9 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "gen:og": "npx tsx scripts/generate-og-images.ts",
+    "gen:download-slugs": "npx tsx scripts/generate-download-slugs.ts",
     "gen:redirects": "node scripts/generate-redirects.js",
     "gen:site-data": "npx tsx scripts/generate-site-data.ts",
-    "build": "npm run gen:redirects && npm run gen:og && npm run gen:site-data && next build",
+    "build": "npm run gen:redirects && npm run gen:og && npm run gen:site-data && npm run gen:download-slugs && next build",
     "start": "npx serve out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --strict",
