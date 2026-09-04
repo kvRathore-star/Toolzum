@@ -17,6 +17,7 @@ interface UserTableProps {
   onSearch: (e: React.FormEvent) => void;
   onSearchChange: (value: string) => void;
   onExportCSV: () => void;
+  onExportAllCSV: () => void;
   onPageChange: (page: number) => void;
   onSelectAll: () => void;
   onSelectUser: (id: string) => void;
@@ -44,7 +45,7 @@ function StatusBadge({ value }: { value: string }) {
 
 export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function UserTable(
   { users, total, page, totalPages, search, selectedIds, updatingRole,
-    onSearch, onSearchChange, onExportCSV, onPageChange, onSelectAll,
+    onSearch, onSearchChange, onExportCSV, onExportAllCSV, onPageChange, onSelectAll,
     onSelectUser, onToggleSelect, onRoleSelect, searchRef },
   ref,
 ) {
@@ -54,7 +55,10 @@ export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function Use
         <h2 className="text-lg font-semibold text-[var(--text-primary)]">Users</h2>
         <div className="flex gap-2 items-center">
           <button onClick={onExportCSV} className="px-3 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-all duration-200 cursor-pointer flex items-center gap-1.5 hover:border-[var(--accent)]/30">
-            <Download className="w-4 h-4" /> Export CSV
+            <Download className="w-4 h-4" /> Export Page
+          </button>
+          <button onClick={onExportAllCSV} className="px-3 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] transition-all duration-200 cursor-pointer flex items-center gap-1.5 hover:border-[var(--accent)]/30">
+            <Download className="w-4 h-4" /> Export All
           </button>
           <form onSubmit={onSearch} className="flex gap-2">
             <div className="relative group">

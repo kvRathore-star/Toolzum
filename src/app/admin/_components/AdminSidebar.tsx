@@ -3,10 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug, CreditCard } from "lucide-react";
+import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug, CreditCard, BarChart3 } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Overview", icon: TrendingUp },
+  { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
   { href: "/admin/errors", label: "Errors", icon: Bug },

@@ -28,7 +28,7 @@ export default function AdminUsersPage() {
   const [sessionsLoading, setSessionsLoading] = useState(false);
   const [revokingSession, setRevokingSession] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | null>(null);
+  const [bulkAction, setBulkAction] = useState<"ban" | "unban" | "delete" | "upgrade-pro" | "downgrade-free" | null>(null);
   const [roleConfirmTarget, setRoleConfirmTarget] = useState<{ userId: string; name: string; email: string; oldRole: string; newRole: string } | null>(null);
   const [roleConfirmEmail, setRoleConfirmEmail] = useState("");
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -106,10 +106,14 @@ export default function AdminUsersPage() {
     } catch { showToast("Failed to update role", "error"); } finally { setUpdatingRole(null); }
   };
 
-  const handleBulkAction = async (action: "ban" | "unban" | "delete") => {
+  const handleBulkAction = async (action: "ban" | "unban" | "delete" | "upgrade-pro" | "downgrade-free") => {
     if (action === "delete") {
       if (!confirm(`Permanently delete ${selectedIds.size} user(s)? This cannot be undone.`)) return;
       if (!confirm(`FINAL CONFIRM: Delete ${selectedIds.size} users irrecoverably?`)) return;
+    }
+    if (action === "upgrade-pro" || action === "downgrade-free") {
+      const plan = action === "upgrade-pro" ? "pro" : "free";
+      if (!confirm(`${action === "upgrade-pro" ? "Upgrade" : "Downgrade"} ${selectedIds.size} user(s) to ${plan}?`)) return;
     }
     setBulkAction(action);
     let successCount = 0;
@@ -119,6 +123,11 @@ export default function AdminUsersPage() {
         if (action === "delete") {
           const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, confirm: "DELETE" }) });
           if (res.ok) successCount++; else failCount++;
+        } else if (action === "upgrade-pro" || action === "downgrade-free") {
+          const plan = action === "upgrade-pro" ? "pro" : "free";
+          const res = await fetch("/api/admin/change-plan", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, plan }) });
+          if (res.ok) successCount++; else failCount++;
+          await new Promise((r) => setTimeout(r, 300));
         } else {
           const res = await fetch("/api/admin/ban-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: uid, status: action === "ban" ? "banned" : "active" }) });
           if (res.ok) successCount++; else failCount++;
@@ -131,7 +140,10 @@ export default function AdminUsersPage() {
     setPage(1);
     setSearch("");
     if (failCount > 0) showToast(`${failCount} action(s) failed`, "error");
-    else showToast(`${successCount} user(s) ${action === "delete" ? "deleted" : action === "ban" ? "banned" : "unbanned"}`);
+    else {
+      const label = action === "upgrade-pro" ? "upgraded to Pro" : action === "downgrade-free" ? "downgraded to Free" : `${action === "delete" ? "deleted" : action === "ban" ? "banned" : "unbanned"}`;
+      showToast(`${successCount} user(s) ${label}`);
+    }
   };
 
   const exportCSV = () => {
@@ -152,6 +164,34 @@ export default function AdminUsersPage() {
     a.download = `users-page${page}.csv`;
     a.click();
     URL.revokeObjectURL(a.href);
+  };
+
+  const exportAllUsersCSV = async () => {
+    try {
+      const res = await fetch(`/api/admin/users?page=1&limit=10000`);
+      if (!res.ok) return showToast("Failed to export", "error");
+      const data = await res.json() as { users: User[] };
+      const header = "Name,Email,Role,Plan,Credits,Status,Last Login,Created\n";
+      const rows = data.users.map((u) => [
+        `"${(u.name || "").replace(/"/g, '""')}"`,
+        `"${u.email}"`,
+        u.role,
+        u.plan,
+        u.credits,
+        u.status,
+        u.lastLoginAt ? new Date(u.lastLoginAt * 1000).toISOString() : "never",
+        new Date(u.createdAt * 1000).toISOString(),
+      ].join(",")).join("\n");
+      const blob = new Blob([header + rows], { type: "text/csv" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `users-all-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast(`Exported ${data.users.length} users`);
+    } catch {
+      showToast("Export failed", "error");
+    }
   };
 
   const handleSearch = (e: React.FormEvent) => { e.preventDefault(); setPage(1); };
@@ -205,6 +245,7 @@ export default function AdminUsersPage() {
             onSearch={handleSearch}
             onSearchChange={setSearch}
             onExportCSV={exportCSV}
+            onExportAllCSV={exportAllUsersCSV}
             onPageChange={setPage}
             onSelectAll={toggleSelectAll}
             onSelectUser={setSelectedUserId}
@@ -230,6 +271,8 @@ export default function AdminUsersPage() {
         onBan={() => handleBulkAction("ban")}
         onUnban={() => handleBulkAction("unban")}
         onDelete={() => handleBulkAction("delete")}
+        onUpgradePro={() => handleBulkAction("upgrade-pro")}
+        onDowngradeFree={() => handleBulkAction("downgrade-free")}
         onClear={() => setSelectedIds(new Set())}
       />
 
