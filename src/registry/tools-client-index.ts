@@ -123,7 +123,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-translator",
     "category": "AI",
     "description": "Detects source language automatically and translates text between 100+ languages using advanced neural machine translation.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "9",
@@ -507,7 +507,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-image-upscaler",
     "category": "AI",
     "description": "Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "70",
@@ -619,7 +619,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "youtube-transcript-generator",
     "category": "Transcription",
     "description": "YouTube Transcript Generator fetches captions from public YouTube videos via the video ID or URL. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "92",
@@ -771,7 +771,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-face-swap",
     "category": "AI",
     "description": "Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle for natural results.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "113",
@@ -795,7 +795,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "meeting-minutes-generator",
     "category": "Transcription",
     "description": "Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "116",
@@ -803,7 +803,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-cover-letter-generator",
     "category": "AI",
     "description": "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "121",
@@ -931,7 +931,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-thumbnail-maker",
     "category": "AI",
     "description": "Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "140",
@@ -963,7 +963,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "subtitle-translator",
     "category": "Video",
     "description": "Accepts SRT or VTT subtitle files and translates their text content into any of 100+ target languages while preserving exact timing codes and frame. Uses cloud-based processing.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "144",
@@ -1099,7 +1099,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "podcast-transcription",
     "category": "Transcription",
     "description": "Convert a podcast episode audio file into a full text transcript using AI speech recognition.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "166",
@@ -1291,7 +1291,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "saas-metrics-dashboard",
     "category": "Growth & Marketing",
     "description": "All-in-one SaaS metrics dashboard with ARR, MRR, LTV, CAC, NPS, churn, runway, and A/B test analysis — plus scenario modeling and PDF export. Your data stays in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "222",
@@ -1307,7 +1307,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "api-builder",
     "category": "Developer",
     "description": "Full-featured API client that runs in your browser — make HTTP requests, edit headers/body/params, save collections, generate code snippets (cURL/Fetch/Axios). Your API keys never touch a server — everything runs locally.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "196",
@@ -1707,7 +1707,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "indian-voice-transcriber",
     "category": "indian-utilities",
     "description": "Transcribes recorded audio to text with support for 12 Indian languages using AI speech recognition. Record or upload a voice note and audio is sent to our server for transcription.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "265",
@@ -1715,7 +1715,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bank-statement-analyser",
     "category": "Utility",
     "description": "Parses uploaded bank statement PDFs or CSV exports and categorizes transactions into income, expense, and transfer categories with visual spending. No signup or account required.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "268",
@@ -1739,7 +1739,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-bg-changer",
     "category": "Image",
     "description": "Removes and replaces image backgrounds using edge-aware detection algorithms that separate foreground subjects without a green screen. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "271",
@@ -2467,7 +2467,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-chat-pdf",
     "category": "AI",
     "description": "Chat with your PDF documents. Ask questions, get answers, and extract insights from any document. Extract text and use intelligent search to find relevant information instantly.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "356",
@@ -2475,7 +2475,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "grammar-checker",
     "category": "AI",
     "description": "Check and correct grammar, spelling, and punctuation in your text. Detects common errors including homophones, misspellings, punctuation issues, and run-on sentences.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "357",
@@ -2483,7 +2483,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-humanizer",
     "category": "AI",
     "description": "Make AI-generated text sound more natural and human-like. Choose from casual, professional, friendly, natural, or storytelling tones. Reduces robotic patterns and improves readability.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "358",
@@ -2491,7 +2491,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-detector",
     "category": "AI",
     "description": "Detect if text was written by AI. Analyzes burstiness, repetition patterns, sentence variance, and AI trigger phrases. Get a percentage score with detailed breakdown per section.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "359",
@@ -4259,7 +4259,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "gemini-watermark-remover",
     "category": "Image",
     "description": "Remove the visible sparkle watermark from Gemini AI-generated images using reverse alpha blending. Supports single image and batch processing with ZIP download. 100% client-side — nothing is uploaded.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "502",

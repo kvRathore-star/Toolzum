@@ -18,6 +18,16 @@ export const proSlugs = [
   "bulk-url-shortener",
   "batch-image-editor", "image-bulk-converter", "unit-converter",
   "bulk-avif-optimizer", "bulk-heic-converter", "bulk-image-upscaler",
+  // AI tools
+  "ai-translator", "ai-image-upscaler", "ai-face-swap",
+  "ai-bg-changer", "ai-thumbnail-maker", "ai-cover-letter-generator",
+  "ai-chat-pdf", "grammar-checker", "ai-humanizer", "ai-detector",
+  // Transcription / cloud tools
+  "youtube-transcript-generator", "podcast-transcription", "meeting-minutes-generator",
+  "indian-voice-transcriber", "subtitle-translator",
+  // Premium SaaS / batch
+  "gemini-watermark-remover", "saas-metrics-dashboard",
+  "bank-statement-analyser", "api-builder",
 ];
 
 
