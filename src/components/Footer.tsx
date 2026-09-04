@@ -134,7 +134,9 @@ export function Footer() {
               <li><Link href="/privacy-policy" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Privacy Policy</Link></li>
               <li><Link href="/cookies" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Cookie Policy</Link></li>
               <li><Link href="/terms" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/disclaimer" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Disclaimer</Link></li>
               <li><Link href="/security" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Security</Link></li>
+              <li><Link href="/sitemap" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Sitemap</Link></li>
             </ul>
           </div>
 

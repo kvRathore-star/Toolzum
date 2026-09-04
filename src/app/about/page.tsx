@@ -82,7 +82,7 @@ export default function AboutPage() {
             — {localTools} run entirely in your browser, no server needed.
           </p>
           <p className="text-sm text-[var(--text-muted)] mt-4">
-            Bootstrapped. Zero VC funding. Privacy-first by design.
+            Privacy-first by design.
           </p>
         </div>
 

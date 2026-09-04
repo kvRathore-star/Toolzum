@@ -14,7 +14,9 @@ const SECTIONS = [
   { id: "cookies", title: "4. Cookies and Session Memory" },
   { id: "third-party", title: "5. Third-Party Integrations" },
   { id: "security", title: "6. Security Architecture" },
-  { id: "dpdp", title: "7. Data Protection (India DPDP Act)" }
+  { id: "dpdp", title: "7. Data Protection (India DPDP Act)" },
+  { id: "gdpr", title: "8. GDPR Rights (European Users)" },
+  { id: "ccpa", title: "9. CCPA Rights (California Users)" },
 ];
 
 export default function PrivacyPolicyPage() {
@@ -171,6 +173,43 @@ export default function PrivacyPolicyPage() {
                   <li><strong>Retention:</strong> Analytics data retained for 90 days. Account data retained until deletion.</li>
                   <li><strong>Contact:</strong> For data requests, email support@toolzum.com within 72 hours response SLA.</li>
                 </ul>
+              </div>
+            </section>
+
+            <section id="gdpr" className="scroll-mt-32 border-t border-[var(--border-subtle)] pt-8">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">8. GDPR Rights (European Users)</h3>
+              <div className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border-subtle)] space-y-4">
+                <p>If you are located in the European Economic Area (EEA), UK, or Switzerland, you have the following rights under the General Data Protection Regulation (GDPR):</p>
+                <ul className="list-disc list-inside space-y-2 text-sm">
+                  <li><strong>Right of Access:</strong> Request a copy of the personal data we hold about you.</li>
+                  <li><strong>Right to Rectification:</strong> Request correction of inaccurate personal data.</li>
+                  <li><strong>Right to Erasure:</strong> Request deletion of your personal data ("right to be forgotten").</li>
+                  <li><strong>Right to Restrict Processing:</strong> Request that we limit how we use your data.</li>
+                  <li><strong>Right to Data Portability:</strong> Receive your data in a structured, machine-readable format.</li>
+                  <li><strong>Right to Object:</strong> Object to our processing of your personal data.</li>
+                  <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, withdraw it at any time.</li>
+                </ul>
+                <p className="text-sm"><strong>Legal Basis:</strong> We process data based on (a) consent (analytics, account creation), (b) contractual necessity (providing the service), and (c) legitimate interests (security, fraud prevention).</p>
+                <p className="text-sm"><strong>Data Transfers:</strong> Toolzum uses Cloudflare (global CDN) and may process data outside the EEA. We rely on Standard Contractual Clauses (SCCs) where required.</p>
+                <p className="text-sm"><strong>Contact:</strong> For GDPR requests, email support@toolzum.com. We respond within 30 days. You also have the right to lodge a complaint with your local supervisory authority.</p>
+              </div>
+            </section>
+
+            <section id="ccpa" className="scroll-mt-32 border-t border-[var(--border-subtle)] pt-8">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">9. CCPA Rights (California Users)</h3>
+              <div className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border-subtle)] space-y-4">
+                <p>If you are a California resident, the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA) grant you the following rights:</p>
+                <ul className="list-disc list-inside space-y-2 text-sm">
+                  <li><strong>Right to Know:</strong> Request disclosure of the categories and specific pieces of personal information we collect, the sources, purposes, and categories of third parties we share it with.</li>
+                  <li><strong>Right to Delete:</strong> Request deletion of your personal information, subject to certain exceptions.</li>
+                  <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information.</li>
+                  <li><strong>Right to Opt-Out of Sale/Sharing:</strong> We do not sell or share your personal information for cross-context behavioral advertising.</li>
+                  <li><strong>Right to Limit Use of Sensitive Personal Information:</strong> We do not use sensitive personal information for purposes other than providing the service.</li>
+                  <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your privacy rights.</li>
+                </ul>
+                <p className="text-sm"><strong>Categories Collected:</strong> Identifiers (email, user ID), internet activity (usage analytics), and inferences (tool usage patterns). We do not collect biometric data, geolocation, or financial information beyond payment processing.</p>
+                <p className="text-sm"><strong>Disclosure:</strong> In the preceding 12 months, we have not sold personal information of California residents.</p>
+                <p className="text-sm"><strong>Contact:</strong> For CCPA requests, email support@toolzum.com. We verify your identity before processing. We respond within 45 days.</p>
               </div>
             </section>
 
