@@ -4,6 +4,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
 
+function categoryToSlug(category: string): string {
+  if (category === "Growth & Marketing") return "growth-metrics";
+  if (category === "Branding") return "marketing";
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
 export const metadata: Metadata = {
   title: "Sitemap",
   description: "Complete list of all Toolzum tools organized by category.",
@@ -89,7 +95,7 @@ export default function SitemapPage() {
                   .map((tool) => (
                     <Link
                       key={tool.slug}
-                      href={`/${category.toLowerCase()}/${tool.slug}`}
+                      href={`/${categoryToSlug(category)}/${tool.slug}`}
                       className="px-4 py-2.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-colors truncate"
                       title={tool.name}
                     >

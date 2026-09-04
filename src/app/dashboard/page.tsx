@@ -78,6 +78,13 @@ function getCategoryIcon(category: string | null) {
   }
 }
 
+function categoryToSlug(category: string | null): string {
+  if (!category) return "utility";
+  if (category === "Growth & Marketing") return "growth-metrics";
+  if (category === "Branding") return "marketing";
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
 export default function DashboardPage() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
@@ -300,7 +307,7 @@ export default function DashboardPage() {
                   return (
                     <Link
                       key={`${item.toolSlug}-${item.usedAt}-${i}`}
-                      href={`/${(item.category || "utility").toLowerCase()}/${item.toolSlug}`}
+                      href={`/${categoryToSlug(item.category)}/${item.toolSlug}`}
                       className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-overlay)] transition-colors group"
                     >
                       <div className="w-8 h-8 rounded-lg bg-[var(--bg-overlay)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--accent)]/10 transition-colors">
@@ -352,7 +359,7 @@ export default function DashboardPage() {
                   return (
                     <Link
                       key={tool.toolSlug}
-                      href={`/${(tool.category || "utility").toLowerCase()}/${tool.toolSlug}`}
+                      href={`/${categoryToSlug(tool.category)}/${tool.toolSlug}`}
                       className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-overlay)] transition-colors group"
                     >
                       <span className="text-[10px] font-mono text-[var(--text-muted)] w-4 text-right">

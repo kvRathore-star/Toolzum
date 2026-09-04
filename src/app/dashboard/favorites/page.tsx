@@ -9,6 +9,13 @@ import { getClientToolBySlug } from "@/registry/tools-client-index";
 import { getCategoryTheme } from "@/lib/categoryTheme";
 import toast from "react-hot-toast";
 
+function categoryToSlug(category: string | null): string {
+  if (!category) return "utility";
+  if (category === "Growth & Marketing") return "growth-metrics";
+  if (category === "Branding") return "marketing";
+  return category.toLowerCase().replace(/\s+/g, "-");
+}
+
 interface FavoriteTool {
   toolSlug: string;
   createdAt: string;
@@ -124,7 +131,7 @@ export default function FavoritesPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <Link
-                      href={`/${tool.category.toLowerCase().replace(/\s+/g, "-")}/${tool.slug}`}
+                      href={`/${categoryToSlug(tool.category)}/${tool.slug}`}
                       className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors block truncate"
                     >
                       {tool.name}
@@ -133,7 +140,7 @@ export default function FavoritesPage() {
                   </div>
                   <div className="flex items-center gap-1 shrink-0">
                     <Link
-                      href={`/${tool.category.toLowerCase().replace(/\s+/g, "-")}/${tool.slug}`}
+                      href={`/${categoryToSlug(tool.category)}/${tool.slug}`}
                       className="p-2 text-[var(--text-muted)] hover:text-[var(--accent)] hover:bg-[var(--bg-overlay)] rounded-lg transition-colors"
                       title="Open tool"
                     >
