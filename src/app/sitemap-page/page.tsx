@@ -26,7 +26,7 @@ const sortedCategories = CATEGORY_ORDER.filter((c) => grouped[c]?.length);
 
 export default function SitemapPage() {
   return (
-    <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
+    <div id="top" className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)]">
       <div className="absolute inset-0 z-0 flex justify-center pointer-events-none opacity-[0.03]">
         <div className="w-full max-w-[1280px] h-full" style={{ backgroundImage: "linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
       </div>
@@ -89,7 +89,7 @@ export default function SitemapPage() {
                   .map((tool) => (
                     <Link
                       key={tool.slug}
-                      href={`/tools/${tool.slug}`}
+                      href={`/${tool.category.toLowerCase()}/${tool.slug}`}
                       className="px-4 py-2.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-colors truncate"
                       title={tool.name}
                     >
@@ -103,12 +103,12 @@ export default function SitemapPage() {
 
         {/* Back to top */}
         <div className="max-w-4xl mx-auto mt-16 text-center">
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          <a
+            href="#top"
             className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
           >
             <ArrowUp className="w-4 h-4" /> Back to top
-          </button>
+          </a>
         </div>
 
       </div>
