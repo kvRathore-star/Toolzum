@@ -16,10 +16,10 @@ const CATEGORY_ORDER = [
   "Network", "Data", "File", "Social", "Privacy", "Design",
 ];
 
-const grouped: Record<string, { slug: string; name: string }[]> = {};
+const grouped: Record<string, { slug: string; name: string; category: string }[]> = {};
 for (const tool of clientToolsRegistry) {
   if (!grouped[tool.category]) grouped[tool.category] = [];
-  grouped[tool.category].push({ slug: tool.slug, name: tool.name });
+  grouped[tool.category].push({ slug: tool.slug, name: tool.name, category: tool.category });
 }
 
 const sortedCategories = CATEGORY_ORDER.filter((c) => grouped[c]?.length);
@@ -89,7 +89,7 @@ export default function SitemapPage() {
                   .map((tool) => (
                     <Link
                       key={tool.slug}
-                      href={`/${tool.category.toLowerCase()}/${tool.slug}`}
+                      href={`/${category.toLowerCase()}/${tool.slug}`}
                       className="px-4 py-2.5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 transition-colors truncate"
                       title={tool.name}
                     >
