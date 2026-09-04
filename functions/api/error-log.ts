@@ -1,4 +1,5 @@
 import { json } from "../../src/lib/admin-auth";
+import { checkRateLimit, recordRateLimit } from "./rate-limit";
 import type { D1Database } from "@cloudflare/workers-types";
 
 interface Env {
@@ -26,6 +27,10 @@ async function ensureTable(DB: D1Database) {
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const DB = context.env.DB;
   const userAgent = context.request.headers.get("user-agent") || null;
+  const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
+
+  const rl = await checkRateLimit(DB, "error-log", ip, 20);
+  if (rl.limited) return rl.response;
 
   let body: { errors: { message: string; stack?: string; source: string; toolSlug?: string; path?: string }[] };
   try {
@@ -39,6 +44,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
   await ensureTable(DB);
   const now = Math.floor(Date.now() / 1000);
+  recordRateLimit(DB, "error-log", ip, "/error-log");
 
   for (const err of errors) {
     if (!err.message) continue;

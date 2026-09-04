@@ -1,3 +1,5 @@
+import { checkRateLimit, recordRateLimit } from "../rate-limit";
+
 interface Env {
   DB: D1Database;
 }
@@ -11,6 +13,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
     const { request } = context;
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
+
+    const rl = await checkRateLimit(DB, "dl-record", ip, 10);
+    if (rl.limited) return rl.response;
 
     // Parse optional body fields (toolSlug, category) sent by the client
     let toolSlug: string | null = null;
@@ -43,6 +49,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     // Pro users: immediate allow, no tracking needed
     if (limit === Infinity) {
+      recordRateLimit(DB, "dl-record", ip, "/downloads/record");
       if (toolSlug) {
         await DB.prepare(
           `INSERT INTO download_event (userId, fingerprint, userType, toolSlug, category, outcome, dailyCount, dailyLimit, createdAt)
@@ -62,6 +69,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     // Blocked: daily quota exhausted
     if (currentCount >= limit) {
+      recordRateLimit(DB, "dl-record", ip, "/downloads/record");
       if (toolSlug) {
         await DB.prepare(
           `INSERT INTO download_event (userId, fingerprint, userType, toolSlug, category, outcome, dailyCount, dailyLimit, createdAt)
@@ -92,6 +100,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       ).bind(userId, fingerprint, userType, toolSlug, category, currentCount + 1, limit).run();
     }
 
+    recordRateLimit(DB, "dl-record", ip, "/downloads/record");
     return new Response(JSON.stringify({ allowed: true, remaining: limit - currentCount - 1 }), {
       headers: { 'Content-Type': 'application/json' },
     });

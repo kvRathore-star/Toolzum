@@ -1,4 +1,6 @@
 import { createAuth } from "../../../src/lib/auth";
+import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import type { D1Database } from "@cloudflare/workers-types";
 
 export async function onRequestPost(context: { request: Request; env: Record<string, unknown> }) {
   const { env } = context;
@@ -34,11 +36,17 @@ export async function onRequestPost(context: { request: Request; env: Record<str
     }
 
     const DB = (env as { DB: D1Database }).DB;
+
+    const rl = await checkRateLimit(DB, "fav-rm", session.user.id, 10);
+    if (rl.limited) return rl.response;
+
     await DB.prepare(
       "DELETE FROM user_favorite WHERE userId = ? AND toolSlug = ?"
     )
       .bind(session.user.id, toolSlug)
       .run();
+
+    recordRateLimit(DB, "fav-rm", session.user.id, "/favorites/remove");
 
     return new Response(JSON.stringify({ ok: true }), {
       headers: { "Content-Type": "application/json" },

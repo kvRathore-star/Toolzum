@@ -1,4 +1,6 @@
 import { createAuth } from "../../../src/lib/auth";
+import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import type { D1Database } from "@cloudflare/workers-types";
 
 export async function onRequestGet(context: { request: Request; env: Record<string, unknown> }) {
   const { env } = context;
@@ -25,11 +27,14 @@ export async function onRequestGet(context: { request: Request; env: Record<stri
     }
 
     const userId = session.user.id;
+    const DB = (env as { DB: D1Database }).DB;
+
+    const rl = await checkRateLimit(DB, "user-activity", userId, 10);
+    if (rl.limited) return rl.response;
+
     const now = Math.floor(Date.now() / 1000);
     const thirtyDaysAgo = now - 30 * 24 * 60 * 60;
     const sevenDaysAgo = now - 7 * 24 * 60 * 60;
-
-    const DB = (env as { DB: D1Database }).DB;
 
     const monthlyUsage = await DB.prepare(
       `SELECT COUNT(DISTINCT toolSlug) as count FROM user_tool_usage WHERE userId = ? AND usedAt >= ?`
@@ -76,6 +81,8 @@ export async function onRequestGet(context: { request: Request; env: Record<stri
     )
       .bind(userId)
       .all<{ category: string; uses: number }>();
+
+    recordRateLimit(DB, "user-activity", userId, "/user/activity");
 
     return new Response(
       JSON.stringify({

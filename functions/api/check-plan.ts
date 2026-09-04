@@ -1,3 +1,5 @@
+import { checkRateLimit, recordRateLimit } from "./rate-limit";
+
 interface Env {
   DB: D1Database;
 }
@@ -11,6 +13,11 @@ export const PLAN_LIMITS: Record<string, { maxFileSizeMB: number; maxBatchSize: 
 export async function onRequestGet(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
+    const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
+
+    const rl = await checkRateLimit(DB, "check-plan", ip, 30);
+    if (rl.limited) return rl.response;
+
     const cookies = context.request.headers.get('cookie') || '';
     const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
     const token = tokenMatch?.[1];
@@ -26,6 +33,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     }
 
     const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free;
+    recordRateLimit(DB, "check-plan", ip, "/check-plan");
 
     return new Response(JSON.stringify({ plan, ...limits }), {
       headers: { 'Content-Type': 'application/json' },

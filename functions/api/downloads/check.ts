@@ -1,3 +1,5 @@
+import { checkRateLimit, recordRateLimit } from "../rate-limit";
+
 interface Env {
   DB: D1Database;
 }
@@ -11,6 +13,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
     const { request } = context;
+    const ip = request.headers.get("cf-connecting-ip") || "unknown";
+
+    const rl = await checkRateLimit(DB, "dl-check", ip, 20);
+    if (rl.limited) return rl.response;
 
     // Identify user from session
     const cookies = request.headers.get('cookie') || '';
@@ -42,6 +48,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
     const count = row?.count || 0;
     const remaining = Math.max(0, limit - count);
+    recordRateLimit(DB, "dl-check", ip, "/downloads/check");
 
     return new Response(JSON.stringify({ allowed: remaining > 0, remaining }), {
       headers: { 'Content-Type': 'application/json' },
