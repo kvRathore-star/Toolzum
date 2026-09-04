@@ -300,7 +300,7 @@ export default function DashboardPage() {
                   return (
                     <Link
                       key={`${item.toolSlug}-${item.usedAt}-${i}`}
-                      href={`/${item.category || "utility"}/${item.toolSlug}`}
+                      href={`/${(item.category || "utility").toLowerCase()}/${item.toolSlug}`}
                       className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-overlay)] transition-colors group"
                     >
                       <div className="w-8 h-8 rounded-lg bg-[var(--bg-overlay)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--accent)]/10 transition-colors">
@@ -352,7 +352,7 @@ export default function DashboardPage() {
                   return (
                     <Link
                       key={tool.toolSlug}
-                      href={`/${tool.category || "utility"}/${tool.toolSlug}`}
+                      href={`/${(tool.category || "utility").toLowerCase()}/${tool.toolSlug}`}
                       className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-overlay)] transition-colors group"
                     >
                       <span className="text-[10px] font-mono text-[var(--text-muted)] w-4 text-right">
