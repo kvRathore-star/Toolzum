@@ -39,7 +39,7 @@ function findDownloadFiles(): string[] {
         files.push(...walk(full));
       } else if (/\.(tsx?|mts?)$/.test(entry.name)) {
         const content = read(full, 'utf8');
-        if (content.includes('downloadOrShare')) {
+        if (content.includes('downloadOrShare') || content.includes('BulkToolShell') || content.includes('JSZip') || content.includes('URL.createObjectURL')) {
           files.push(full);
         }
       }
