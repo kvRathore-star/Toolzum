@@ -4267,7 +4267,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-heic-converter",
     "category": "Image",
     "description": "Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch with quality control. Fully client-side — your photos never leave your device.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "503",
@@ -4275,7 +4275,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-image-upscaler",
     "category": "Image",
     "description": "Batch upscale AI-generated and regular images by 2x, 3x, or 4x with Lanczos, Bicubic, or Bilinear algorithms. Side-by-side comparison preview. 100% client-side.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "501",
@@ -4283,7 +4283,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "bulk-avif-optimizer",
     "category": "Image",
     "description": "Convert and compress images to AVIF format in bulk with quality presets and max-width controls. AVIF provides 50% smaller files than JPEG with better quality. 100% client-side.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "548e",
