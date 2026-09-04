@@ -63,7 +63,7 @@ export default function PricingPage() {
                   ['ZIP batch download', '—', '✓'],
                   ['Watermark-free export', '—', '✓'],
                   ['Workflow presets', '—', 'Unlimited'],
-                  ['AI-powered tools', '10 AI credits', 'Full access'],
+                  ['AI-powered tools', '30 AI credits/mo', '300 AI credits/mo'],
                   ['Priority support', '—', 'Email 4h response'],
                   ['White-label export', '—', '✓'],
                   ['Team seats', '1', '1 (Team plan coming)'],

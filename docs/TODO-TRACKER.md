@@ -60,10 +60,10 @@ SEO: Add internal linking between related tools (reduces thin content signals)
 
  Newsletter has no backend — clicking subscribe does nothing (would need a Cloudflare Worker or email service)
 
- Credits — Default reduced from 100 to 10. Schema, auth config, migration, dashboard bar, and account page all updated. Current cost: 1 credit per AI tool use (generate/transcribe). Free users get 10 credits; Pro gets unlimited.
+  Credits — Default set to 30 for free users, 300 for Pro. Schema, auth config, migration, dashboard bar, account page, and pricing page all updated. Monthly reset via creditResetAt. Current cost: 1 credit per AI tool use (generate/transcribe).
 
   Define per-task credit costs (e.g., image gen = 5, text gen = 2, transcription = 3) — currently all 1 credit
-  Limited" on Free tier should say "10 AI credits"
+  "AI Credits" on Free tier shows "30 AI credits/month"
 
 
   changelog update
