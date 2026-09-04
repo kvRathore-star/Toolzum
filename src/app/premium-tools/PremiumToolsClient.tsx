@@ -200,6 +200,40 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
         </div>
       </section>
 
+      {/* ===== BATCH INCLUDED IN FREE TOOLS ===== */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-sm font-semibold text-emerald-500 mb-4">
+            <Layers className="w-4 h-4" /> Batch Included
+          </span>
+          <h2 className="font-[family-name:var(--font-serif)] text-3xl sm:text-4xl text-[var(--text-primary)] mb-3">
+            Free tools with Pro batch modes
+          </h2>
+          <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
+            These tools are free for single use. Upgrade to Pro to unlock batch processing.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          {[
+            { name: 'Gemini Watermark Remover', slug: 'gemini-watermark-remover', category: 'image', desc: 'Remove watermarks from Gemini-generated images. Single mode free, batch mode Pro.', free: 'Single image', pro: 'Batch 500+' },
+          ].map(tool => (
+            <Link
+              key={tool.slug}
+              href={`/${tool.category}/${tool.slug}`}
+              className="group block p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] hover:border-emerald-500/30 hover:shadow-md transition-all"
+            >
+              <h4 className="text-sm font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] mb-2">{tool.name}</h4>
+              <p className="text-xs text-[var(--text-muted)] mb-3 line-clamp-2">{tool.desc}</p>
+              <div className="flex gap-2">
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Free: {tool.free}</span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">Pro: {tool.pro}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* ===== WHY GO PRO ===== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <div className="text-center mb-12">
