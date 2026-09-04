@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 function categoryToSlug(category: string | null): string {
   if (!category) return "utility";
   if (category === "Growth & Marketing") return "growth-metrics";
-  if (category === "Branding") return "marketing";
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 

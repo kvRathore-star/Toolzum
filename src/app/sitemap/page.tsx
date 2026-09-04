@@ -6,7 +6,6 @@ import { clientToolsRegistry } from "@/registry/tools-client-index";
 
 function categoryToSlug(category: string): string {
   if (category === "Growth & Marketing") return "growth-metrics";
-  if (category === "Branding") return "marketing";
   return category.toLowerCase().replace(/\s+/g, "-");
 }
 
