@@ -13,6 +13,7 @@ export function PaymentsTable() {
   const [searchInput, setSearchInput] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const prevDeps = useRef({ page, search, statusFilter });
 
   useEffect(() => {
@@ -24,14 +25,15 @@ export function PaymentsTable() {
     if (search) params.set("search", search);
     if (statusFilter) params.set("status", statusFilter);
     fetch(`/api/admin/payments?${params}`)
-      .then(async (r) => r.ok ? (await r.json()) as { payments?: PlatformPayment[]; total?: number } : null)
+      .then(async (r) => r.ok ? (await r.json()) as { payments?: PlatformPayment[]; total?: number; error?: string } : null)
       .then((data) => {
         if (cancelled || !data) return;
         setPayments(data.payments || []);
         setTotal(data.total || 0);
         setTotalPages(Math.max(1, Math.ceil((data.total || 0) / 20)));
+        if (data.error) setLoadError(data.error);
       })
-      .catch(() => {})
+      .catch(() => setLoadError("Failed to fetch payments"))
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
   }, [page, search, statusFilter]);
@@ -87,6 +89,12 @@ export function PaymentsTable() {
           <div className="p-12 text-center" role="status" aria-live="polite">
             <div className="w-8 h-8 rounded-full border-2 border-[var(--accent)] border-t-transparent animate-spin mx-auto" />
             <p className="text-sm text-[var(--text-muted)] mt-3">Loading payments...</p>
+          </div>
+        ) : loadError ? (
+          <div className="p-12 text-center">
+            <CreditCard className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
+            <p className="text-sm text-[var(--text-secondary)] mb-1">Payments data unavailable</p>
+            <p className="text-xs text-[var(--text-muted)]">{loadError}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">

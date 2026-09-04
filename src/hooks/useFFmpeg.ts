@@ -18,10 +18,11 @@ async function getFFmpegModule() {
 const LOAD_TIMEOUT_MS = 60_000;
 
 const CDN_FALLBACKS: { baseURL: string; mt?: boolean }[] = [
-  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd', mt: false },
   { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.9/dist/umd', mt: false },
-  { baseURL: 'https://unpkg.com/@ffmpeg/core-mt@0.12.9/dist/umd', mt: true },
+  { baseURL: 'https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd', mt: false },
   { baseURL: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-mt@0.12.9/dist/umd', mt: true },
+  { baseURL: 'https://unpkg.com/@ffmpeg/core-mt@0.12.9/dist/umd', mt: true },
+  { baseURL: 'https://cdnjs.cloudflare.com/ajax/libs/ffmpeg-core@0.12.9/dist/umd', mt: false },
 ];
 
 export function useFFmpeg() {
@@ -121,7 +122,7 @@ export function useFFmpeg() {
           return ffmpegGlobal;
         }
       }
-      throw new Error('All FFmpeg CDN sources failed to load');
+      throw new Error('All CDN sources failed. This may be due to browser security restrictions (SharedArrayBuffer not available). Try Chrome or Edge, or disable browser extensions that block cross-origin requests.');
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Failed to load FFmpeg WASM';
       console.error("FFmpeg load failed:", e);

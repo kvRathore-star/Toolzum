@@ -16,6 +16,7 @@ export const proSlugs = [
   "bulk-heic-to-jpg",
   "bulk-pdf-suite",
   "bulk-url-shortener",
+  "batch-image-editor", "image-bulk-converter", "unit-converter",
 ];
 
 

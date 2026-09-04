@@ -27,6 +27,13 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   const status = url.searchParams.get("status") || "";
   const offset = (page - 1) * limit;
 
+  // Check if payment table exists
+  try {
+    await DB.prepare("SELECT 1 FROM payment LIMIT 1").first();
+  } catch {
+    return json({ payments: [], total: 0, page, limit, error: "payment table not found" });
+  }
+
   let whereClause = "";
   let countWhere = "";
   const binds: unknown[] = [];
