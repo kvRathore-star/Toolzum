@@ -88,8 +88,28 @@ const SECTIONS = [
     )
   },
   {
+    id: "security-research",
+    title: "6. Security Research & Responsible Disclosure",
+    content: (
+      <>
+        <p className="mb-3">
+          Toolzum encourages responsible security research. If you discover a vulnerability in our Service, we will not take legal action against you provided you:
+        </p>
+        <ul className="list-disc pl-6 space-y-2 mb-3">
+          <li>Make a good-faith effort to avoid privacy violations, data destruction, service disruption, and destruction of other users' data.</li>
+          <li>Only interact with accounts you own or have explicit permission to test — never access another user's data.</li>
+          <li>Do not exploit a vulnerability beyond what is necessary to confirm its existence — stop once you have demonstrated impact.</li>
+          <li>Report the vulnerability to us promptly via <a href="mailto:security@toolzum.com" className="text-[var(--accent)] underline">security@toolzum.com</a> and allow reasonable time for remediation before public disclosure.</li>
+        </ul>
+        <p>
+          We commit to acknowledging receipt of your report within 72 hours and will work with you to understand and resolve the issue. We will not pursue legal action for testing conducted in accordance with this policy.
+        </p>
+      </>
+    )
+  },
+  {
     id: "changes",
-    title: "6. Changes to Terms",
+    title: "7. Changes to Terms",
     content: (
       <>
         <p className="mb-3">
