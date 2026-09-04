@@ -56,6 +56,14 @@ const SERVER_SIDE_SLUGS = new Set([
   'meeting-minutes-generator', 'audio-to-text-transcription', 'pdf-ai-summariser', 'indian-voice-transcriber',
 ]);
 
+const CREDIT_COST_SLUGS: Record<string, number> = {
+  'ai-paraphrasing-tool': 1,
+  'ai-translator': 1,
+  'ai-cover-letter-generator': 1,
+  'ai-document-chat': 1,
+  'indian-voice-transcriber': 10,
+};
+
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
 }
@@ -208,6 +216,15 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             {tool && <PerToolBadge tool={tool} />}
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             {tool && <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-[var(--warning)]" /> Browser Native</span>}
+            {CREDIT_COST_SLUGS[slug] && (
+              <>
+                <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+                <span className="flex items-center gap-1.5 text-amber-500">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  {CREDIT_COST_SLUGS[slug]} credit{CREDIT_COST_SLUGS[slug] > 1 ? 's' : ''} per use
+                </span>
+              </>
+            )}
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
             {BULK_PRESET_SLUGS.has(slug) && <span className="flex items-center gap-1.5"><Info className="w-3.5 h-3.5 text-[var(--accent)]" /> Bulk &amp; Presets ✦ Pro</span>}
             {BULK_PRESET_SLUGS.has(slug) && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}

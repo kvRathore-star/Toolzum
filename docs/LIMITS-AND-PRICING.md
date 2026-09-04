@@ -74,24 +74,24 @@ getUserLimit(plan, isProTool):
 
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
-| Text generation | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Image generation | 5 | $0 | Pollinations.ai (free external API) |
-| Transcription | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
-| Gemini watermark remover | 0 | $0 | Client-side alpha-blending (no API) |
-| Other image tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
+| Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
+| Transcription (Speech-to-Text) | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| AI Image Generation | 0 | $0 | Pollinations.ai (free external API, client-side) |
+| Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
+| Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
 - ~3 transcription sessions (25 min each), OR
-- ~6 image gen requests, OR
-- ~3 watermark removals, OR
+- Unlimited AI image generation (free), OR
+- Unlimited watermark removal (free), OR
 - Mix of all
 
 **Cost at 300 Pro credits/month:**
 - ~300 text gen calls, OR
 - ~30 transcription sessions, OR
-- ~60 image gen requests, OR
-- ~30 watermark removals, OR
+- Unlimited AI image generation (free), OR
+- Unlimited watermark removal (free), OR
 - Mix of all
 
 **Worst-case cost per free user:** ~$0.57/month (3 transcription sessions × $0.19)
