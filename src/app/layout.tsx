@@ -33,6 +33,7 @@ export const metadata: Metadata = {
   description:
     `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
   robots: "index, follow",
+  manifest: "/manifest.json",
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
