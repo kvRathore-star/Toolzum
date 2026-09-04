@@ -50,7 +50,7 @@ getUserLimit(plan):
 | Tier | Credits | Reset | Enforcement |
 |------|---------|-------|-------------|
 | Free (signed-in) | 30/month | Monthly (proposed) | `user.credits` in D1 |
-| Pro | 200/month | Monthly (proposed) | `user.credits` in D1 |
+| Pro | 300/month | Monthly (proposed) | `user.credits` in D1 |
 | Anonymous | N/A (sign-in required) | — | 401 on AI routes |
 
 **Note:** Current code has 10 credits total with no reset. Monthly renewal is proposed but not yet implemented.
@@ -60,19 +60,24 @@ getUserLimit(plan):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Image generation | 0 | $0 | Pollinations.ai (free external API) |
+| Image generation | 5 | $0 | Pollinations.ai (free external API) |
 | Transcription | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Gemini watermark remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
 - ~3 transcription sessions (25 min each), OR
-- Mix of both
+- ~6 image gen requests, OR
+- ~3 watermark removals, OR
+- Mix of all
 
-**Cost at 200 Pro credits/month:**
-- ~200 text gen calls, OR
-- ~20 transcription sessions, OR
-- Mix of both
+**Cost at 300 Pro credits/month:**
+- ~300 text gen calls, OR
+- ~30 transcription sessions, OR
+- ~60 image gen requests, OR
+- ~30 watermark removals, OR
+- Mix of all
 
 **Worst-case cost per free user:** ~$0.57/month (3 transcription sessions × $0.19)
 
@@ -125,19 +130,19 @@ No explicit rate limit — relies on daily quota enforcement.
 
 ---
 
-## 6. Gemini Watermark Remover (Special Case)
+## 6. Gemini Watermark Remover
 
-This tool calls Gemini API directly from the client (not through `/api/ai/`), so it has its own limits.
+Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no monthly cap.
 
-| Tier | Limit | Reset | Enforcement |
-|------|-------|-------|-------------|
-| Anonymous | 3/month | Monthly | localStorage |
-| Signed-in (free) | 10/month | Monthly | localStorage |
-| Pro | Unlimited | N/A | Server-side download quota bypasses localStorage |
+| Tier | Limit |
+|------|-------|
+| All users | Unlimited |
 
-**Code:** `src/components/tools/modules/image/GeminiWatermarkRemover.tsx:18`
+**Code:** `src/components/tools/modules/image/GeminiWatermarkRemover.tsx`
 
-**Why separate:** Cannot use credit system (client-side API call, no server proxy). `hideDownloadQuota={true}` hides the daily badge since this tool uses monthly limits.
+**Previous system (removed):** localStorage monthly cap (10/month) — bypassable via storage clear, no analytics. Removed because tool costs $0 to run and the cap was never enforceable.
+
+**Download quota:** Shows daily badge like other image tools (408 tool set).
 
 ---
 
@@ -159,13 +164,13 @@ This tool calls Gemini API directly from the client (not through `/api/ai/`), so
 |---------|-----------|------------------|-----------------|
 | Client-side tools | Unlimited | Unlimited | Unlimited |
 | Download quota | 3/day | 10/day | Unlimited |
-| AI credits | N/A | 30/month | 200/month |
+| AI credits | N/A | 30/month | 300/month |
 | AI rate limit | Blocked | 2 req/min | 5 req/min |
 | Transcription rate limit | Blocked | 2 req/min | 5 req/min |
 | Max file size | 30 MB | 150 MB | 2 GB |
 | Max batch size | 1 file | 10 files | 500 files |
 | Pro tools | Blocked | Blocked | Full access |
-| Gemini watermark remover | 3/month | 10/month | Unlimited |
+| Gemini watermark remover | Unlimited | Unlimited | Unlimited |
 
 ---
 
@@ -185,7 +190,7 @@ This tool calls Gemini API directly from the client (not through `/api/ai/`), so
 ## 10. Known Gaps / TODO
 
 - [ ] Credit monthly renewal not yet implemented (currently 10 total, no reset)
-- [ ] `gemini-watermark-remover` anon limit should be 3/month (currently 10 for both anon and signed-in)
 - [ ] AI rate limits not yet updated to 2/5 split (currently 5 for all signed-in)
 - [ ] Transcription rate limits not yet updated to 2/5 split (currently 3 for all)
 - [ ] Log AI-credit exhaustion events to analytics (same pattern as download-event)
+- [ ] Remove `hideDownloadQuota={false}` prop entirely from page.tsx (no longer needed)

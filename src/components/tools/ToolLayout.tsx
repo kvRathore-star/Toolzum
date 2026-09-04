@@ -46,7 +46,6 @@ interface ToolLayoutProps {
   proToolCount: number;
   toolCount: number;
   relatedTools: RelatedTool[];
-  hideDownloadQuota?: boolean;
 }
 
 const SITE_URL = "https://toolzum.com";
@@ -65,7 +64,7 @@ function getRelativePath(category: string, slug: string): string {
   return `/${getCategoryPath(category)}/${slug}`;
 }
 
-export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp, hideDownloadQuota }: ToolLayoutProps) {
+export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp }: ToolLayoutProps) {
   const [userPlan, setUserPlan] = useState<string | null>(null);
   const { data: sessionData, isPending } = useSession();
 
@@ -217,7 +216,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             <ShareTool title={title} slug={slug} category={category} />
             <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
             <FavoriteStarButton slug={slug} />
-            {!hideDownloadQuota && DOWNLOAD_PRODUCING_SLUGS.has(slug) && <DownloadQuotaBadge />}
+            {DOWNLOAD_PRODUCING_SLUGS.has(slug) && <DownloadQuotaBadge />}
           </div>
 
           {/* Tool Container */}

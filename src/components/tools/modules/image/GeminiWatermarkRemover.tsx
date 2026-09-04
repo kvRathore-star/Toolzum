@@ -15,28 +15,6 @@ const ALPHA_NOISE_FLOOR = 3 / 255;
 const ALPHA_THRESHOLD = 0.002;
 const MAX_ALPHA = 0.99;
 const LOGO_VALUE = 255;
-const FREE_MONTHLY_LIMIT = 10;
-
-function getFreeUsageCount(): number {
-  if (typeof window === 'undefined') return 0;
-  const stored = localStorage.getItem('toolzum:gwr-free-count');
-  if (!stored) return 0;
-  const { count, month } = JSON.parse(stored);
-  const now = new Date();
-  if (month === `${now.getFullYear()}-${now.getMonth()}`) return count;
-  return 0;
-}
-
-function recordFreeUsage(): boolean {
-  const count = getFreeUsageCount();
-  if (count >= FREE_MONTHLY_LIMIT) return false;
-  const now = new Date();
-  localStorage.setItem(
-    'toolzum:gwr-free-count',
-    JSON.stringify({ count: count + 1, month: `${now.getFullYear()}-${now.getMonth()}` })
-  );
-  return true;
-}
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -259,7 +237,6 @@ export default function GeminiWatermarkRemover() {
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
   const [processedBlob, setProcessedBlob] = useState<Blob | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [freeRemaining, setFreeRemaining] = useState(FREE_MONTHLY_LIMIT);
   const [outputFormat, setOutputFormat] = useState<'png' | 'jpeg' | 'webp'>('png');
   const [quality, setQuality] = useState(92);
   const [processTime, setProcessTime] = useState<number | null>(null);
@@ -276,7 +253,6 @@ export default function GeminiWatermarkRemover() {
   const blobUrlsRef = useRef<string[]>([]);
   const doneBlobsRef = useRef<Blob[]>([]);
 
-  useEffect(() => { setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount()); }, []);
   useEffect(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
@@ -306,14 +282,12 @@ export default function GeminiWatermarkRemover() {
 
   const processSingle = useCallback(async () => {
     if (!singleImage) return;
-    if (!recordFreeUsage()) { toast.error('Free limit reached (' + FREE_MONTHLY_LIMIT + '/month).'); return; }
     setIsProcessing(true);
     try {
       const { blob, time } = await processImage(singleImage.file, outputFormat, quality, positionOverride, crop);
       const url = URL.createObjectURL(blob);
       blobUrlsRef.current.push(url);
       setProcessedUrl(url); setProcessedBlob(blob); setProcessTime(time);
-      setFreeRemaining(FREE_MONTHLY_LIMIT - getFreeUsageCount());
       toast.success('Watermark removed in ' + (time / 1000).toFixed(1) + 's!');
     } catch (err) { toast.error('Failed to process image'); console.error(err); }
     finally { setIsProcessing(false); }
@@ -387,7 +361,6 @@ export default function GeminiWatermarkRemover() {
             <Images className="w-4 h-4" /> Batch Mode
           </button>
         </div>
-        <span className="text-xs text-[var(--text-secondary)]">{freeRemaining} free images remaining this month</span>
       </div>
 
       {/* Settings Bar */}

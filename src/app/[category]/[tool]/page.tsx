@@ -113,7 +113,6 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         slug={toolMetadata.slug}
         tool={toolMetadata}
         {...getToolLayoutData(params.category, toolMetadata.slug)}
-        hideDownloadQuota={toolMetadata.slug === 'gemini-watermark-remover'}
         seoSection={<ToolPageSEOContent tool={toolMetadata} relatedTools={findRelatedTools(toolMetadata, toolsRegistry)} />}
       >
         <MemoryWatchdog />

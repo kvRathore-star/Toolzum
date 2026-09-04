@@ -178,10 +178,11 @@ async function callServerCheck(): Promise<ServerCheckResponse | null> {
 function getCurrentToolContext(): { toolSlug: string | null; category: string | null } {
   if (typeof window === "undefined") return { toolSlug: null, category: null };
   const parts = window.location.pathname.split("/").filter(Boolean);
-  // URL pattern: /{category}/{tool-slug}/
+  // URL pattern: /{category}/{tool-slug}/ — if this doesn't match, analytics rows will have null toolSlug/category
   if (parts.length >= 2) {
     return { category: parts[0], toolSlug: parts[1] };
   }
+  console.warn('[download-analytics] URL does not match /{category}/{tool-slug}/ pattern:', window.location.pathname);
   return { toolSlug: null, category: null };
 }
 
