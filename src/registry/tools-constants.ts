@@ -2,7 +2,7 @@ import type { ToolCategory } from './tools-types';
 
 export const proSlugs = [
   "ai-image-generator", "ai-document-chat", "ai-video-subtitler",
-  "text-to-speech-tts", "speech-to-text", "ai-paraphrasing-tool",
+  "ai-paraphrasing-tool",
   "bulk-bg-changer", "bulk-qr-code-generator", "bulk-image-watermark",
   "bulk-pdf-data-extractor", "bulk-image-to-pdf", "bulk-audio-converter",
   "bulk-svg-to-png", "bulk-image-compressor", "bulk-pdf-size-reducer",
