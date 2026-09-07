@@ -311,7 +311,7 @@ export default function WebsiteScreenshot() {
               </button>
             </div>
             {viewportWidth === -1 && (
-              <input
+              <input aria-label="Viewport Width"
                 type="number"
                 value={customWidth}
                 onChange={e => setCustomWidth(e.target.value)}

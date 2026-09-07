@@ -24,17 +24,17 @@ export default function SeoPreviewGenerator() {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
-          <input type="text" value={title} onChange={e => setTitle(e.target.value)}
+          <input aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
-          <input type="url" value={url} onChange={e => setUrl(e.target.value)}
+          <input aria-label="URL" type="url" value={url} onChange={e => setUrl(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
-          <textarea value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Meta description..."
+          <textarea aria-label="Description" value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Meta description..."
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
 

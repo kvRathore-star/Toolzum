@@ -27,9 +27,9 @@ export default function CyclingCalorieCalculator() {
   return (
     <CalculatorShell category="Health" title="Cycling Calorie Calculator" accent="orange" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Distance (km)</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
-        <div><label className={labelCls}>Speed (km/h)</label><input className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Distance (km)</label><input aria-label="Distance (km)" className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label className={labelCls}>Speed (km/h)</label><input aria-label="Speed (km/h)" className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

@@ -25,9 +25,9 @@ export default function QuadraticEquationSolver() {
   return (
     <CalculatorShell category="Calculator" title="Quadratic Solver" result="" auto presets={presets} accent="pink" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">a</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">b</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">c</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">a</label><input aria-label="a" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">b</label><input aria-label="b" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">c</label><input aria-label="c" type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

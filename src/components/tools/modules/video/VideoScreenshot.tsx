@@ -198,7 +198,7 @@ export default function VideoScreenshot() {
             {mode === 'single' ? (
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
-                <input type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
+                <input aria-label="Timestamp (MM:SS or HH:MM:SS)" type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
@@ -210,7 +210,7 @@ export default function VideoScreenshot() {
             ) : (
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
-                <input type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
+                <input aria-label="Interval (seconds between frames)" type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
@@ -239,7 +239,7 @@ export default function VideoScreenshot() {
                 <label className="text-zinc-600 dark:text-[var(--text-muted)]">Quality</label>
                 <span className="text-zinc-900 dark:text-zinc-100 font-mono text-xs bg-[var(--bg-surface)] px-2 py-0.5 rounded">{quality}%</span>
               </div>
-              <input type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))}
+              <input aria-label="Quality" type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))}
                 className="w-full accent-blue-600"
               />
               <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>Low</span><span>High</span></div>
@@ -248,13 +248,13 @@ export default function VideoScreenshot() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
-                <input type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
+                <input aria-label="Width (0 = original)" type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>
               <div>
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
-                <input type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
+                <input aria-label="Height (0 = original)" type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>

@@ -82,8 +82,8 @@ export function BodyFatCalculator() {
           <option value="male">Male</option><option value="female">Female</option>
         </select>
         <div className="flex gap-2">
-          <div><label className={labelClass}>BMI</label><Input label="Value" type="number" value={bmi} onChange={setBmi} /></div>
-          <div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div>
+          <div><label className={labelClass}>BMI</label><Input label="BMI" type="number" value={bmi} onChange={setBmi} /></div>
+          <div><label className={labelClass}>Age</label><Input label="Age" type="number" value={age} onChange={setAge} /></div>
         </div>
       </div>
     </CalculatorShell>
@@ -128,7 +128,7 @@ export function CalorieIntakeCalculator() {
             <option value="1.725">Active</option><option value="1.9">Very Active</option>
           </select>
         </div>
-        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div><div><label className={labelClass}>Age</label><Input label="Value" type="number" value={age} onChange={setAge} /></div></div>
+        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Height (cm)" type="number" value={height} onChange={setHeight} /></div><div><label className={labelClass}>Age</label><Input label="Age" type="number" value={age} onChange={setAge} /></div></div>
       </div>
     </CalculatorShell>
   );
@@ -193,7 +193,7 @@ export function WaterRequirementCalculator() {
       downloadFilename="water.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Exercise (min)</label><Input label="Value" type="number" value={activity} onChange={setActivity} /></div></div>
+        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Exercise (min)</label><Input label="Exercise (min)" type="number" value={activity} onChange={setActivity} /></div></div>
       </div>
     </CalculatorShell>
   );
@@ -331,7 +331,7 @@ export function PaceCalculator() {
       downloadFilename="pace.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><div><label className={labelClass}>Distance (km)</label><Input label="Value" type="number" value={dist} onChange={setDist} /></div><div><label className={labelClass}>Time (min)</label><Input label="Value" type="number" value={time} onChange={setTime} /></div></div>
+        <div className="flex gap-2"><div><label className={labelClass}>Distance (km)</label><Input label="Distance (km)" type="number" value={dist} onChange={setDist} /></div><div><label className={labelClass}>Time (min)</label><Input label="Time (min)" type="number" value={time} onChange={setTime} /></div></div>
       </div>
     </CalculatorShell>
   );
@@ -367,7 +367,7 @@ export function StepsCalculator() {
       downloadFilename="steps-distance.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input label="Value" type="number" value={steps} onChange={setSteps} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Value" type="number" value={height} onChange={setHeight} /></div></div>
+        <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input label="Steps" type="number" value={steps} onChange={setSteps} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Height (cm)" type="number" value={height} onChange={setHeight} /></div></div>
         <p className="text-xs text-[var(--text-secondary)]">Uses height-based stride estimate (stride = height × 0.415). For weight-based calories, see <Link href="/health/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</Link>.</p>
       </div>
     </CalculatorShell>
@@ -403,8 +403,8 @@ export function CaloriesBurnedCalculator() {
       downloadFilename="calories-burned.json"
     >
       <div className="space-y-4">
-        <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>{Object.keys(mets).map(k => <option key={k}>{k}</option>)}</select>
-        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Value" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Duration (min)</label><Input label="Value" type="number" value={duration} onChange={setDuration} /></div></div>
+        <select aria-label="Height (cm)" className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>{Object.keys(mets).map(k => <option key={k}>{k}</option>)}</select>
+        <div className="flex gap-2"><div><label className={labelClass}>Weight (kg)</label><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} /></div><div><label className={labelClass}>Duration (min)</label><Input label="Duration (min)" type="number" value={duration} onChange={setDuration} /></div></div>
       </div>
     </CalculatorShell>
   );
@@ -475,7 +475,7 @@ export function PregnancyCalculator() {
     >
       <div className="space-y-4">
         <label className={labelClass}>First day of last menstrual period</label>
-        <Input label="Value" type="date" value={lmp} onChange={setLmp} />
+        <Input label="First day of last menstrual period" type="date" value={lmp} onChange={setLmp} />
       </div>
     </CalculatorShell>
   );
@@ -516,9 +516,9 @@ export function OvulationTracker() {
     >
       <div className="space-y-4">
         <label className={labelClass}>First day of LMP</label>
-        <Input label="Value" type="date" value={lmp} onChange={setLmp} />
+        <Input label="First day of LMP" type="date" value={lmp} onChange={setLmp} />
         <label className={labelClass}>Cycle Length (days)</label>
-        <Input label="Value" type="number" value={cycleLength} onChange={setCycleLength} min={20} max={45} />
+        <Input label="Cycle Length (days)" type="number" value={cycleLength} onChange={setCycleLength} min={20} max={45} />
       </div>
     </CalculatorShell>
   );

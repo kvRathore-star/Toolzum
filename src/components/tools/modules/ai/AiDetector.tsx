@@ -283,7 +283,7 @@ export default function AiDetector() {
             onDragOver={handleDragOver}
             className="relative"
           >
-            <textarea
+            <textarea aria-label="Input Text"
               value={input}
               onChange={(e) => { if (e.target.value.length <= 10000) setInput(e.target.value); }}
               placeholder="Paste or type text to analyze (up to 10,000 characters)..."

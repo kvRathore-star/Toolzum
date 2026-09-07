@@ -315,7 +315,7 @@ export default function WebInspector() {
           </div>
           <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-2">Generated Meta Tags</label>
-            <textarea value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
+            <textarea aria-label="Generated Meta Tags" value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
             {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
           </div>
         </div>
@@ -323,7 +323,7 @@ export default function WebInspector() {
 
       {tab === 'keycode' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-          <input placeholder="Press any key here..." onKeyDown={e => {
+          <input aria-label="Generated Meta Tags" placeholder="Press any key here..." onKeyDown={e => {
             setKeyInfo({
               'key': e.key,
               'code': e.code,

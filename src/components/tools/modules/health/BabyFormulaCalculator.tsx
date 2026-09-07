@@ -30,9 +30,9 @@ export default function BabyFormulaCalculator() {
   return (
     <CalculatorShell category="Health" title="Baby Formula Calculator" accent="pink" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Feeds / day</label><input className={inputCls} type="number" value={feedsPerDay} onChange={e => setFeedsPerDay(e.target.value)} /></div>
+        <div><label className={labelCls}>Age (months)</label><input aria-label="Age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Feeds / day</label><input aria-label="Feeds / day" className={inputCls} type="number" value={feedsPerDay} onChange={e => setFeedsPerDay(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

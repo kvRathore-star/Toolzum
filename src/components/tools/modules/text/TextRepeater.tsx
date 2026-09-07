@@ -70,7 +70,7 @@ export default function TextRepeater() {
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Text to Repeat</label>
-              <textarea
+              <textarea aria-label="Text to Repeat"
                 value={text}
                 onChange={e => setText(e.target.value)}
                 placeholder="Type or paste your text here..."
@@ -81,7 +81,7 @@ export default function TextRepeater() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Repeat Count</label>
-                <input
+                <input aria-label="Repeat Count"
                   type="number"
                   min={1}
                   max={10000}
@@ -92,7 +92,7 @@ export default function TextRepeater() {
               </div>
               <div className="space-y-1">
                 <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Separator</label>
-                <select
+                <select aria-label="Separator"
                   value={separator}
                   onChange={e => setSeparator(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -121,7 +121,7 @@ export default function TextRepeater() {
                 <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Output</label>
                 <span className="text-xs text-[var(--text-muted)]">{totalChars.toLocaleString()} chars</span>
               </div>
-              <textarea
+              <textarea aria-label="Output"
                 value={output}
                 readOnly
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-mono text-sm h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none"

@@ -148,7 +148,7 @@ export default function BulkVideoSubtitleBurner() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="text-xs font-medium text-[var(--text-secondary)]">Font size</label>
-              <select value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
+              <select aria-label="Font size" value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
                 <option value="12">12 — Small</option>
                 <option value="18">18 — Normal</option>
                 <option value="24">24 — Large</option>
@@ -157,7 +157,7 @@ export default function BulkVideoSubtitleBurner() {
             </div>
             <div>
               <label className="text-xs font-medium text-[var(--text-secondary)]">Position</label>
-              <select value={position} onChange={e => setPosition(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
+              <select aria-label="Position" value={position} onChange={e => setPosition(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
                 <option value="bottom">Bottom (default)</option>
                 <option value="top">Top</option>
                 <option value="middle">Middle</option>

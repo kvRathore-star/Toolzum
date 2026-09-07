@@ -4,6 +4,7 @@ import React, { useState, useRef, useMemo } from 'react';
 import { Upload, Download, Copy, Check, Mic, FileText, Clock, Languages, AlertCircle, Loader2, Play, Square, BarChart3, Users, Type } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import AiSettings from '@/components/tools/AiSettings';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -235,7 +236,11 @@ export default function IndianVoiceTranscriber() {
               style={{ borderColor: audioFile ? '#0284c7' : undefined }}
               onMouseEnter={e => { if (!audioFile) e.currentTarget.style.borderColor = '#0284c780'; }}
               onMouseLeave={e => { if (!audioFile) e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
-              onClick={() => fileInputRef.current?.click()}>
+              role="button"
+              tabIndex={0}
+              onClick={() => fileInputRef.current?.click()}
+              onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
+              onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}>
               <Upload className="w-10 h-10 mx-auto mb-2" style={{ color: audioFile ? '#0284c7' : 'var(--text-muted)' }} />
               <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}

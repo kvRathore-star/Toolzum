@@ -33,11 +33,11 @@ export function ApiKeyGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Prefix</label>
-            <input type="text" value={prefix} onChange={e => { setPrefix(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="Prefix" type="text" value={prefix} onChange={e => { setPrefix(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
-            <input type="number" value={length} onChange={e => { setLength(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="Length" type="number" value={length} onChange={e => { setLength(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
@@ -71,7 +71,7 @@ export function ApiKeyHasher() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Hasher</h2>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
-          <input type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <input aria-label="API Key" type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Hash (SHA-256)</button>
         {result && (
@@ -104,7 +104,7 @@ export function ApiKeyValidator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Validator</h2>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
-          <input type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <input aria-label="API Key" type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Validate</button>
         {result && (
@@ -162,15 +162,15 @@ export function ApiCostEstimator() {
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Monthly Requests</label>
-            <input type="number" value={requests} onChange={e => { setRequests(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Monthly Requests" type="number" value={requests} onChange={e => { setRequests(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Price/Million ($)</label>
-            <input type="number" value={pricePerMillion} onChange={e => { setPricePerMillion(e.target.value); setResult(null); }} step="0.01" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Price/Million ($)" type="number" value={pricePerMillion} onChange={e => { setPricePerMillion(e.target.value); setResult(null); }} step="0.01" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Users</label>
-            <input type="number" value={users} onChange={e => { setUsers(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Users" type="number" value={users} onChange={e => { setUsers(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Estimate Cost</button>
@@ -223,15 +223,15 @@ export function ApiGatewayRateCalculator() {
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Max RPS</label>
-            <input type="number" value={maxRps} onChange={e => { setMaxRps(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Max RPS" type="number" value={maxRps} onChange={e => { setMaxRps(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Burst Size</label>
-            <input type="number" value={burstSize} onChange={e => { setBurstSize(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Burst Size" type="number" value={burstSize} onChange={e => { setBurstSize(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Window (s)</label>
-            <input type="number" value={windowSec} onChange={e => { setWindowSec(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Window (s)" type="number" value={windowSec} onChange={e => { setWindowSec(e.target.value); setResult(null); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate</button>
@@ -285,15 +285,15 @@ export function ApiRateLimiterCalculator() {
         <div className="grid grid-cols-3 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Rate Limit</label>
-            <input type="number" value={limit} onChange={e => setLimit(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Rate Limit" type="number" value={limit} onChange={e => setLimit(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Window (min)</label>
-            <input type="number" value={windowMins} onChange={e => setWindowMins(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Window (min)" type="number" value={windowMins} onChange={e => setWindowMins(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Burst</label>
-            <input type="number" value={burst} onChange={e => setBurst(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Burst" type="number" value={burst} onChange={e => setBurst(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate</button>

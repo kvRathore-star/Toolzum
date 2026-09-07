@@ -214,7 +214,7 @@ export default function LogoMaker() {
             
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Brand Name</label>
-              <input
+              <input aria-label="Brand Name"
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -224,7 +224,7 @@ export default function LogoMaker() {
 
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tagline</label>
-              <input
+              <input aria-label="Tagline"
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
@@ -235,7 +235,7 @@ export default function LogoMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Font Family</label>
-                <select
+                <select aria-label="Font Family"
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
@@ -297,15 +297,15 @@ export default function LogoMaker() {
             <div className="grid grid-cols-3 gap-2">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient Start</label>
-                <input type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <input aria-label="Gradient Start" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient End</label>
-                <input type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <input aria-label="Gradient End" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Canvas BG</label>
-                <select
+                <select aria-label="Canvas BG"
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
                   className="w-full h-10 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 text-[10px] font-bold focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

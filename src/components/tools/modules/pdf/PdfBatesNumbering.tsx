@@ -16,11 +16,11 @@ export default function PdfBatesNumbering() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Prefix</label>
-                <input type="text" value={prefix} onChange={e => setState({ ...state, prefix: e.target.value })} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
+                <input aria-label="Prefix" type="text" value={prefix} onChange={e => setState({ ...state, prefix: e.target.value })} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Start Number</label>
-                <input type="number" value={startNum} onChange={e => setState({ ...state, startNum: parseInt(e.target.value) || 1 })} min={1} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
+                <input aria-label="Start Number" type="number" value={startNum} onChange={e => setState({ ...state, startNum: parseInt(e.target.value) || 1 })} min={1} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
               </div>
             </div>
             <div className="space-y-3">

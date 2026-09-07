@@ -124,7 +124,7 @@ export default function BulkVideoCompressor() {
           <div className="grid grid-cols-1 gap-3">
             <div>
               <label className="text-xs font-medium text-[var(--text-secondary)]">CRF (Constant Rate Factor)</label>
-              <select value={crf} onChange={e => setCrf(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+              <select aria-label="CRF (Constant Rate Factor)" value={crf} onChange={e => setCrf(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
                 {CRF_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
               <p className="text-xs text-[var(--text-muted)] mt-1">Lower CRF = higher quality, larger file. 23 is a good balance.</p>

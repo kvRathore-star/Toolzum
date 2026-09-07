@@ -116,7 +116,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
           <div className="space-y-4 flex-1 flex flex-col">
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Job Title *</label>
-              <input
+              <input aria-label="Target Job Title *"
                 value={jobTitle}
                 onChange={e => setJobTitle(e.target.value)}
                 placeholder="e.g. Senior Software Engineer"
@@ -126,7 +126,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Industry</label>
-              <select
+              <select aria-label="Industry"
                 value={industry}
                 onChange={e => setIndustry(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -139,7 +139,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
 
             <div className="space-y-2 flex-1">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Paste Your Resume *</label>
-              <textarea
+              <textarea aria-label="Paste Your Resume *"
                 value={resumeText}
                 onChange={e => setResumeText(e.target.value)}
                 placeholder="Paste your full resume text here including work experience, skills, education, certifications..."

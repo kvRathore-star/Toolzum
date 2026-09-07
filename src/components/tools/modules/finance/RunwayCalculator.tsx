@@ -34,8 +34,8 @@ export default function RunwayCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Cash Balance ($)</label><input type="number" value={cash} onChange={e => setCash(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Burn Rate ($)</label><input type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Cash Balance ($)</label><input aria-label="Cash Balance ($)" type="number" value={cash} onChange={e => setCash(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Burn Rate ($)</label><input aria-label="Monthly Burn Rate ($)" type="number" value={burnRate} onChange={e => setBurnRate(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

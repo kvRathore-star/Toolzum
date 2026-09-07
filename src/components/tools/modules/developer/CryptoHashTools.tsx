@@ -17,14 +17,15 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
+  const id = React.useId();
   const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
       {rows ? (
-        <textarea className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <textarea id={id} className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       ) : (
-        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <input id={id} className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       )}
     </div>
   );
@@ -143,7 +144,7 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
-            <select value={algorithm} onChange={e => setAlgorithm(e.target.value as any)}
+            <select aria-label="Algorithm" value={algorithm} onChange={e => setAlgorithm(e.target.value as any)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
               <option value="AES-128">AES-128 (128-bit)</option>
               <option value="AES-256">AES-256 (256-bit)</option>

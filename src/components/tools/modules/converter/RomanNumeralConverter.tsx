@@ -149,7 +149,7 @@ export default function RomanNumeralConverter() {
           <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">
             Enter a number or Roman numeral
           </label>
-          <input
+          <input aria-label="Enter a number or Roman numeral"
             type="text"
             value={input}
             onChange={e => handleChange(e.target.value)}

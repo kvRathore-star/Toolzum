@@ -86,11 +86,11 @@ export default function DiscountCalculator() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {mode === 'forward' ? (
-          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Original Price ($)</label><input type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputCls} /></div>
+          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Original Price ($)</label><input aria-label="Original Price ($)" type="number" value={price} onChange={e => setPrice(e.target.value)} className={inputCls} /></div>
         ) : (
-          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Sale Price ($)</label><input type="number" value={salePrice} onChange={e => setSalePrice(e.target.value)} className={inputCls} /></div>
+          <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Sale Price ($)</label><input aria-label="Sale Price ($)" type="number" value={salePrice} onChange={e => setSalePrice(e.target.value)} className={inputCls} /></div>
         )}
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Discount (%)</label><input type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Discount (%)</label><input aria-label="Discount (%)" type="number" value={discount} onChange={e => setDiscount(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

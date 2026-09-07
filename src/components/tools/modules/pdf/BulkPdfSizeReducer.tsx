@@ -20,7 +20,7 @@ export default function BulkPdfSizeReducer() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Compression Level</label>
-          <select name="quality" defaultValue="70" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+          <select aria-label="Compression Level" name="quality" defaultValue="70" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
             <option value="40">Maximum (smallest size)</option>
             <option value="70">Balanced (recommended)</option>
             <option value="90">Light (preserve quality)</option>

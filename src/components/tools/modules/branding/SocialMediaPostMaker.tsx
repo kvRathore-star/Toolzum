@@ -198,7 +198,7 @@ export default function SocialMediaPostMaker() {
             
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Overlay</label>
-              <textarea
+              <textarea aria-label="Text Overlay"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs h-20 resize-none"
@@ -208,11 +208,11 @@ export default function SocialMediaPostMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
-                <input type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Font Size" type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
-                <select value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
+                <select aria-label="Font Family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
                   <option value="sans-serif">Sans-Serif</option>
                   <option value="serif">Serif</option>
                   <option value="Impact">Impact (Meme Style)</option>
@@ -224,11 +224,11 @@ export default function SocialMediaPostMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Color</label>
-                <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <input aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Position Y (%)</label>
-                <input type="range" min="10" max="90" value={textY} onChange={e => setTextY(parseInt(e.target.value))} className="w-full accent-indigo-650 mt-2" />
+                <input aria-label="Position Y (%)" type="range" min="10" max="90" value={textY} onChange={e => setTextY(parseInt(e.target.value))} className="w-full accent-indigo-650 mt-2" />
               </div>
             </div>
           </div>
@@ -240,17 +240,17 @@ export default function SocialMediaPostMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad Start</label>
-                <input type="color" value={bgColor1} onChange={e => setBgColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <input aria-label="Grad Start" type="color" value={bgColor1} onChange={e => setBgColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad End</label>
-                <input type="color" value={bgColor2} onChange={e => setBgColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <input aria-label="Grad End" type="color" value={bgColor2} onChange={e => setBgColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
             </div>
 
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Background Image</label>
-              <input 
+              <input aria-label="Upload Background Image" 
                 type="file" 
                 accept="image/*" 
                 onChange={handleImageUpload} 

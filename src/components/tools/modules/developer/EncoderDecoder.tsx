@@ -106,11 +106,11 @@ export function EncoderDecoder() {
         </div>
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Scheme</label>
-          <select value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
+          <select aria-label="Scheme" value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
         </div>
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Input</label>
-          <textarea value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
+          <textarea aria-label="Input" value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
         </div>
         <button onClick={handleProcess} className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition active:scale-[0.98]">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
         {output && (

@@ -21,6 +21,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
   const [copied, setCopied] = useState(false);
   const [mdCopied, setMdCopied] = useState(false);
   const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
   const url = `${SITE_URL}/${category.toLowerCase()}/${slug}`;
   const text = `Check out ${title} on Toolzum — free, runs in your browser. Privacy-first.`;
   const markdown = `[Toolzum - ${title}](${url})`;
@@ -55,6 +56,9 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
     <div className="relative">
       <button
         onClick={() => setOpen(!open)}
+        onKeyDown={(e) => { if (e.key === 'Escape' && open) { e.stopPropagation(); close(); } }}
+        aria-expanded={open}
+        aria-haspopup="menu"
         className="flex items-center gap-1.5 text-[11px] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
         title="Share this tool"
       >
@@ -63,11 +67,12 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
 
       {open && (
         <>
-          <div className="fixed inset-0 z-40" role="button" tabIndex={0} onClick={() => setOpen(false)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(false); } }} />
-          <div className="absolute right-0 top-full mt-2 z-[60] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-xl p-2 min-w-[180px] space-y-0.5">
+          <button aria-label="Close share menu" className="fixed inset-0 z-40 cursor-default bg-transparent border-0 p-0" onClick={() => setOpen(false)} tabIndex={-1} />
+          <div role="menu" aria-label={`Share ${title}`} onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }} className="absolute right-0 top-full mt-2 z-[60] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-xl p-2 min-w-[180px] space-y-0.5">
             {platforms.map(p => (
               <a
                 key={p.name}
+                role="menuitem"
                 href={shareUrl(p.name)}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -79,6 +84,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
               </a>
             ))}
             <button
+              role="menuitem"
               onClick={copyLink}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-[var(--text-secondary)] hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-[var(--radius-md)] transition-colors"
             >
@@ -86,6 +92,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
               {copied ? 'Copied!' : 'Copy link'}
             </button>
             <button
+              role="menuitem"
               onClick={copyMarkdown}
               className="w-full flex items-center gap-2.5 px-3 py-2 text-xs text-[var(--text-secondary)] hover:bg-zinc-100 dark:hover:bg-zinc-800/50 rounded-[var(--radius-md)] transition-colors"
             >

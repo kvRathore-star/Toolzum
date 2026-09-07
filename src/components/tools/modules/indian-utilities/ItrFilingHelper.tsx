@@ -232,13 +232,13 @@ Note: Connect backend LLM for exact deduction processing.`);
               <div className="space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div>
                   <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Total Annual Income (₹)</label>
-                  <input type="number" value={income} onChange={e => setIncome(e.target.value)}
+                  <input aria-label="Total Annual Income (₹)" type="number" value={income} onChange={e => setIncome(e.target.value)}
                     className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm"
                     placeholder="e.g. 1500000" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Tax Regime</label>
-                  <select value={regime} onChange={e => setRegime(e.target.value)}
+                  <select aria-label="Tax Regime" value={regime} onChange={e => setRegime(e.target.value)}
                     className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm">
                     <option value="new">New Tax Regime (Default)</option>
                     <option value="old">Old Tax Regime (With 80C Deductions)</option>

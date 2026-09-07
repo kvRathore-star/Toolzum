@@ -5,6 +5,7 @@ import { Upload, Download, ImagePlus, Layers, RefreshCw, Trash2, Palette, Check,
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 
 interface ImageItem {
   id: string;
@@ -45,6 +46,12 @@ export default function BulkBgChanger() {
     const hex = '#' + [pixel[0], pixel[1], pixel[2]].map(v => v.toString(16).padStart(2, '0')).join('');
     setSampleColor(hex);
     toast.success(`Sampled color: ${hex}`);
+  };
+
+  const pickCenterColor = () => {
+    const canvas = sampleCanvasRef.current;
+    if (!canvas || !selectedImage) return;
+    pickColorFromImage(selectedImage.id, canvas, Math.round(canvas.width / 2), Math.round(canvas.height / 2));
   };
 
   const processImage = useCallback((item: ImageItem): Promise<string> => {
@@ -180,7 +187,7 @@ export default function BulkBgChanger() {
                 
                 <div className="space-y-1">
                   <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>New BG Color</span></label>
-                  <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+                  <input aria-label="New BG Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                     className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
 
@@ -250,12 +257,17 @@ export default function BulkBgChanger() {
                 <div className="bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)]">
                   <div className="relative overflow-auto max-h-[500px] flex items-center justify-center">
                     <canvas ref={sampleCanvasRef}
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Sample color from image. Press Enter to sample the center pixel, or click any pixel."
                       onClick={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
                         const x = (e.clientX - rect.left) * (e.currentTarget.width / rect.width);
                         const y = (e.clientY - rect.top) * (e.currentTarget.height / rect.height);
                         pickColorFromImage(selectedImage.id, e.currentTarget, Math.round(x), Math.round(y));
                       }}
+                      onKeyDown={(e) => buttonKeyDown(e, pickCenterColor)}
+                      onKeyUp={(e) => buttonKeyUp(e, pickCenterColor)}
                       className="max-w-full max-h-[500px] rounded-lg cursor-crosshair"
                       style={{ width: '100%', height: 'auto' }} />
                     <img  loading="lazy" src={selectedImage.processedUrl || selectedImage.originalUrl} alt="Selected image"

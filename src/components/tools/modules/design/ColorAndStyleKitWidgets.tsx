@@ -129,7 +129,7 @@ export function ContrastRatioChecker() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Foreground</label>
-            <input type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+            <input aria-label="Foreground" type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Background</label>
@@ -234,7 +234,7 @@ export function MarkdownTableGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Columns</label>
-            <input type="number" value={cols} onChange={e => setCols(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={10}
+            <input aria-label="Columns" type="number" value={cols} onChange={e => setCols(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={10}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>

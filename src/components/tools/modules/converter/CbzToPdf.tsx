@@ -334,7 +334,7 @@ export default function CbzToPdf() {
 
           <div>
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Range</label>
-            <input
+            <input aria-label="Page Range"
               type="text"
               value={pageRange}
               onChange={e => setPageRange(e.target.value)}

@@ -146,7 +146,7 @@ export default function AddImageToPdf() {
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Target Page</label>
             <div className="flex gap-2 items-center">
-              <input
+              <input aria-label="Target Page"
                 type="number"
                 min={1}
                 max={totalPages}
@@ -176,7 +176,7 @@ export default function AddImageToPdf() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
-              <input
+              <input aria-label="X Position"
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
@@ -185,7 +185,7 @@ export default function AddImageToPdf() {
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
-              <input
+              <input aria-label="Y Position"
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}
@@ -197,7 +197,7 @@ export default function AddImageToPdf() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Width (px)</label>
-              <input
+              <input aria-label="Width (px)"
                 type="number"
                 min={1}
                 value={width}
@@ -207,7 +207,7 @@ export default function AddImageToPdf() {
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Height (px)</label>
-              <input
+              <input aria-label="Height (px)"
                 type="number"
                 min={1}
                 value={height}

@@ -28,8 +28,8 @@ export default function MarkupCalculator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markup Calculator</h2>
         <div className="flex gap-2">
-          <div><label className={labelClass}>Cost</label><Input label="Value" type="number" value={cost} onChange={setCost} /></div>
-          <div><label className={labelClass}>Markup %</label><Input label="Value" type="number" value={markup} onChange={v => setMarkup(Number(v))} /></div>
+          <div><label className={labelClass}>Cost</label><Input label="Cost" type="number" value={cost} onChange={setCost} /></div>
+          <div><label className={labelClass}>Markup %</label><Input label="Markup %" type="number" value={markup} onChange={v => setMarkup(Number(v))} /></div>
         </div>
         <div className="text-xs space-y-1">
           <div>Selling Price: ${price.toFixed(2)}</div>

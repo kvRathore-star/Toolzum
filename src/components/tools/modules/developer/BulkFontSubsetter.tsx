@@ -43,7 +43,7 @@ export default function BulkFontSubsetter() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Characters to Keep</label>
-          <textarea name="chars" defaultValue="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()_+-=[]{}|;:'&quot;<>/`~ " rows={3} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
+          <textarea aria-label="Characters to Keep" name="chars" defaultValue="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()_+-=[]{}|;:'&quot;<>/`~ " rows={3} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
           <p className="text-xs text-[var(--text-muted)] mt-1">Only these characters will be preserved in the subset font.</p>
         </div>
       }

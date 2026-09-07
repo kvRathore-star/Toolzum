@@ -34,13 +34,13 @@ export default function WordFrequencyCounter() {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-          <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text to analyze..."
+          <textarea aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text to analyze..."
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
         <div className="flex gap-2 items-end">
           <div className="flex-1">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Show Top</label>
-            <input type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v.target.value))}
+            <input aria-label="Show Top" type="number" min={5} max={100} value={String(limit)} onChange={v => setLimit(Number(v.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
           </div>
         </div>

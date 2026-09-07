@@ -26,7 +26,7 @@ export default function BulkImageToPdf() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Page Margin (px)</label>
-          <input name="margin" type="number" defaultValue="10" min="0" max="100" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+          <input aria-label="Page Margin (px)" name="margin" type="number" defaultValue="10" min="0" max="100" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
         </div>
       }
       defaultConfig={{ margin: '10' }}

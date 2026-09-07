@@ -36,7 +36,7 @@ export default function SleepCalculator() {
       downloadFilename="sleep-times.csv"
     >
       <div className="max-w-sm">
-        <div><label className={labelCls}>Wake time</label><input className={inputCls} type="time" value={wakeTime} onChange={e => setWakeTime(e.target.value)} /></div>
+        <div><label className={labelCls}>Wake time</label><input aria-label="Wake time" className={inputCls} type="time" value={wakeTime} onChange={e => setWakeTime(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

@@ -177,7 +177,7 @@ export default function WhiteoutPdf() {
 
           <div>
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Page Range</label>
-            <input
+            <input aria-label="Page Range"
               type="text"
               placeholder="e.g. 1-3,5,7-9"
               value={pageRange}

@@ -28,10 +28,10 @@ export default function SlopeCalculator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Slope Calculator</h2>
         <div className="flex gap-2">
-          <div><label className={labelClass}>x1</label><Input label="Value" type="number" value={x1} onChange={setX1} /></div>
-          <div><label className={labelClass}>y1</label><Input label="Value" type="number" value={y1} onChange={setY1} /></div>
-          <div><label className={labelClass}>x2</label><Input label="Value" type="number" value={x2} onChange={setX2} /></div>
-          <div><label className={labelClass}>y2</label><Input label="Value" type="number" value={y2} onChange={setY2} /></div>
+          <div><label className={labelClass}>x1</label><Input label="x1" type="number" value={x1} onChange={setX1} /></div>
+          <div><label className={labelClass}>y1</label><Input label="y1" type="number" value={y1} onChange={setY1} /></div>
+          <div><label className={labelClass}>x2</label><Input label="x2" type="number" value={x2} onChange={setX2} /></div>
+          <div><label className={labelClass}>y2</label><Input label="y2" type="number" value={y2} onChange={setY2} /></div>
         </div>
         <div className="text-sm font-mono">
           <div>Slope = {isFinite(slope) ? slope.toFixed(4) : 'undefined'}</div>

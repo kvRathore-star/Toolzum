@@ -38,11 +38,11 @@ export default function ApiLatencyBudget() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">SLA (%)</label>
-            <input type="number" value={sla} onChange={e => setSla(e.target.value)} step="0.01" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="SLA (%)" type="number" value={sla} onChange={e => setSla(e.target.value)} step="0.01" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Total Budget (ms)</label>
-            <input type="number" value={totalTime} onChange={e => setTotalTime(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <input aria-label="Total Budget (ms)" type="number" value={totalTime} onChange={e => setTotalTime(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate Split</button>

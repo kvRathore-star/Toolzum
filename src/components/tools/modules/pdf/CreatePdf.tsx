@@ -243,13 +243,13 @@ export default function CreatePdf() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Document Title</label>
-            <input type="text" value={titleText} onChange={(e) => setTitleText(e.target.value)}
+            <input aria-label="Document Title" type="text" value={titleText} onChange={(e) => setTitleText(e.target.value)}
               placeholder="My Document"
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
-            <select value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))}
+            <select aria-label="Font Size" value={fontSize} onChange={(e) => setFontSize(Number(e.target.value))}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               <option value={10}>10pt</option>
               <option value={12}>12pt</option>

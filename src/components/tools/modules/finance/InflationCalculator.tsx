@@ -39,9 +39,9 @@ export default function InflationCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Present Value ($)</label><input type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inflation Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Present Value ($)</label><input aria-label="Present Value ($)" type="number" value={present} onChange={e => setPresent(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Inflation Rate (%)</label><input aria-label="Inflation Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Years</label><input aria-label="Years" type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

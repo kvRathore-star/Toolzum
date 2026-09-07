@@ -147,7 +147,7 @@ export default function EmailNormalizer() {
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
         <label className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-2 block">Email Input (one per line)</label>
-        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Enter emails, one per line..."
+        <textarea aria-label="Email Input (one per line)" value={input} onChange={e => setInput(e.target.value)} placeholder="Enter emails, one per line..."
           className="w-full h-[200px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
         <button onClick={normalizeAll} className="w-full mt-3 px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">
           Normalize & Validate

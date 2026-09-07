@@ -62,7 +62,7 @@ export default function MeetingMinutesGenerator() {
             
 <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Transcript or Raw Notes</label>
-              <textarea
+              <textarea aria-label="Meeting Transcript or Raw Notes"
                 value={transcript}
                 onChange={e => setTranscript(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="Paste transcription text here..."
@@ -72,7 +72,7 @@ export default function MeetingMinutesGenerator() {
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Focus</label>
-              <select
+              <select aria-label="Meeting Focus"
                 value={focus}
                 onChange={e => setFocus(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

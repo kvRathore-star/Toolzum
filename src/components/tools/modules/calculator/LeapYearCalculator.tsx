@@ -27,7 +27,7 @@ export default function LeapYearCalculator() {
   );
   return (
     <CalculatorShell category="Calculator" title="Leap Year Calculator" result="" auto presets={presets} accent="red" customResult={customResult}>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Year</label><input aria-label="Year" type="number" value={year} onChange={e => setYear(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }

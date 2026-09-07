@@ -144,7 +144,7 @@ export default function AudioCutter() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Start Time (seconds)</label>
               <span className="text-xs font-bold text-violet-500">{startTime}s</span>
             </div>
-            <input
+            <input aria-label="Start Time (seconds)"
               type="range"
               min="0"
               max={Math.max(0, audioDuration - 1)}
@@ -161,7 +161,7 @@ export default function AudioCutter() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">End Time (seconds)</label>
               <span className="text-xs font-bold text-violet-500">{endTime}s</span>
             </div>
-            <input
+            <input aria-label="End Time (seconds)"
               type="range"
               min={startTime + 0.5}
               max={audioDuration}

@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { Upload, Download, Type, Loader2, FileText, WholeWord } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 
 type FontFormat = 'ttf' | 'woff';
 
@@ -381,7 +382,11 @@ export default function FontSubsetter() {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
+          role="button"
+          tabIndex={0}
           onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
+              onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
         >
           <input ref={fileInputRef} type="file" accept=".ttf,.otf" onChange={handleFileChange} className="hidden" />
@@ -424,7 +429,7 @@ export default function FontSubsetter() {
           <>
             <div className="space-y-3">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Characters to Keep</label>
-              <textarea
+              <textarea aria-label="Characters to Keep"
                 value={characters}
                 onChange={(e) => { setCharacters(e.target.value); setOutputUrl(null); cleanup(); setSubsetInfo(null); }}
                 rows={3}

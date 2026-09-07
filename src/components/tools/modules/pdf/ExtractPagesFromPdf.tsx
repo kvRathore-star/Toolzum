@@ -132,7 +132,7 @@ export default function ExtractPagesFromPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Pages to Extract</label>
-            <input
+            <input aria-label="Pages to Extract"
               type="text"
               placeholder="e.g. 1, 3, 5-10"
               value={rangeInput}

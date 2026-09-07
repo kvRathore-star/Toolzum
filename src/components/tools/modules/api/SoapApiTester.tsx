@@ -24,16 +24,16 @@ export default function SoapApiTester() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SOAP API Tester</h2>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">WSDL URL</label>
-          <input type="text" value={wsdl} onChange={e => setWsdl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <input aria-label="WSDL URL" type="text" value={wsdl} onChange={e => setWsdl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Method</label>
-            <input type="text" value={method} onChange={e => setMethod(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="Method" type="text" value={method} onChange={e => setMethod(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">XML Parameters</label>
-            <textarea value={params} onChange={e => setParams(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <textarea aria-label="XML Parameters" value={params} onChange={e => setParams(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate SOAP Envelope</button>

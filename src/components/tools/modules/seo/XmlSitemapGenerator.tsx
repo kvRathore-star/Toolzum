@@ -262,7 +262,7 @@ export default function XmlSitemapGenerator() {
               <div className="space-y-4 p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                 <div>
                   <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Max pages to crawl</label>
-                  <select
+                  <select aria-label="Max pages to crawl"
                     value={maxPages}
                     onChange={e => setMaxPages(Number(e.target.value))}
                     className="bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -281,7 +281,7 @@ export default function XmlSitemapGenerator() {
                     Exclude URL patterns <span className="text-[var(--text-muted)] font-normal">— skip matching paths</span>
                   </label>
                   <div className="flex gap-2 mb-2">
-                    <input
+                    <input aria-label="Exclude URL patterns — skip matching paths"
                       type="text"
                       value={newExclusion}
                       onChange={e => setNewExclusion(e.target.value)}

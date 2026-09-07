@@ -143,7 +143,7 @@ export default function VideoTrimmer() {
                   <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Start Time</label>
                   <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(startTime)}</span>
                 </div>
-                <input 
+                <input aria-label="Start Time" 
                   type="range" 
                   min={0}
                   max={videoDuration || 1}
@@ -163,7 +163,7 @@ export default function VideoTrimmer() {
                   <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">End Time</label>
                   <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(endTime)}</span>
                 </div>
-                <input 
+                <input aria-label="End Time" 
                   type="range" 
                   min={0}
                   max={videoDuration || 1}

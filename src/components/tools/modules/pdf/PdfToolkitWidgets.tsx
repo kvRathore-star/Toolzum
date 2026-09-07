@@ -77,7 +77,7 @@ export function PdfBackgroundColor() {
       </div>
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Background Color (subtle tint)</label>
-        <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
+        <input aria-label="Background Color (subtle tint)" type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)}
           className="w-full h-12 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
       </div>
       <button onClick={process} disabled={isProcessing}
@@ -172,26 +172,26 @@ export function PdfAddBlankPage() {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Number of Blank Pages</label>
-          <input type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
+          <input aria-label="Number of Blank Pages" type="number" value={blankCount} onChange={(e) => setBlankCount(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={50}
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Size</label>
-          <select value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
+          <select aria-label="Page Size" value={targetSize} onChange={(e) => setTargetSize(e.target.value)}
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
             <option value="a4">A4</option><option value="letter">Letter</option><option value="legal">Legal</option><option value="a3">A3</option>
           </select>
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Insert Position</label>
-          <select value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
+          <select aria-label="Insert Position" value={blankPosition} onChange={(e) => setBlankPosition(e.target.value as 'before' | 'after')}
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
             <option value="after">After Page</option><option value="before">Before Page</option>
           </select>
         </div>
         <div className="space-y-1.5">
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">At Page</label>
-          <input type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
+          <input aria-label="At Page" type="number" value={blankPage} onChange={(e) => setBlankPage(Math.max(1, Math.min(pageCount, parseInt(e.target.value) || 1)))} min={1} max={pageCount}
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
       </div>

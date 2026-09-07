@@ -188,7 +188,7 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
                 {quality === 0 ? 'Extreme (0)' : quality === 2 ? 'High (2)' : quality === 5 ? 'Standard (5)' : `Level ${quality}`}
               </span>
             </div>
-            <input
+            <input aria-label="VBR Quality (0-9)"
               type="range"
               min="0"
               max="9"

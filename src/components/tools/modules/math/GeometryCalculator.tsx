@@ -42,9 +42,9 @@ export default function GeometryCalculator() {
         <option value="cone">Cone</option><option value="cube">Cube</option>
       </select>
       <div className="flex gap-2 flex-wrap">
-        {(shape === 'circle' || shape === 'sphere' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Radius</label><Input label="Value" type="number" value={r} onChange={setR} /></div>}
-        {(shape === 'square' || shape === 'rectangle' || shape === 'cube') && <div><label className={labelClass}>Width</label><Input label="Value" type="number" value={w} onChange={setW} /></div>}
-        {(shape === 'triangle' || shape === 'rectangle' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Height</label><Input label="Value" type="number" value={h} onChange={setH} /></div>}
+        {(shape === 'circle' || shape === 'sphere' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Radius</label><Input label="Radius" type="number" value={r} onChange={setR} /></div>}
+        {(shape === 'square' || shape === 'rectangle' || shape === 'cube') && <div><label className={labelClass}>Width</label><Input label="Width" type="number" value={w} onChange={setW} /></div>}
+        {(shape === 'triangle' || shape === 'rectangle' || shape === 'cylinder' || shape === 'cone') && <div><label className={labelClass}>Height</label><Input label="Height" type="number" value={h} onChange={setH} /></div>}
       </div>
       <div className="text-xs space-y-1">
         {result.area !== undefined && <div>Area: {result.area.toFixed(4)}</div>}

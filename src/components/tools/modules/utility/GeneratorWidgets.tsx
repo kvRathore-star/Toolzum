@@ -252,7 +252,7 @@ export function RandomSentenceGenerator() {
       <CountSlider value={count} onChange={setCount} max={50} />
 
       <label className={labelClass}>Words per sentence (avg)</label>
-      <input type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-indigo-500" />
+      <input aria-label="Words per sentence (avg)" type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-indigo-500" />
       <div className="text-xs text-[var(--text-muted)] text-right">{wordsPerSentence} words</div>
 
       {out && <OutputBlock value={out} />}
@@ -370,7 +370,7 @@ export function LicenseKeyGenerator() {
       <CountSlider value={count} onChange={setCount} />
 
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char, - = separator)</label>
-      <input type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX"
+      <input aria-label="Format (X = any char, - = separator)" type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX"
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
 
       {out && <OutputBlock value={out} />}
@@ -413,12 +413,12 @@ export function ImagePlaceholderGenerator() {
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className={labelClass}>Width</label>
-          <input type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
+          <input aria-label="Width" type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
         <div>
           <label className={labelClass}>Height</label>
-          <input type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
+          <input aria-label="Height" type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
       </div>
@@ -461,7 +461,7 @@ export function LogoPlaceholderGenerator() {
   return (
     <CalculatorShell category="Utility" title="Logo Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="pink" downloadData={out} downloadFilename="logos.txt">
       <label className={labelClass}>Size (px)</label>
-      <input type="range" min={50} max={300} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-pink-500 mb-2" />
+      <input aria-label="Size (px)" type="range" min={50} max={300} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-pink-500 mb-2" />
       <div className="text-xs text-[var(--text-muted)] text-right mb-3">{size}px</div>
 
       <label className={labelClass}>Count</label>
@@ -508,19 +508,19 @@ export function OpenGraphGenerator() {
     <CalculatorShell category="Utility" title="Open Graph Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={out} downloadFilename="og-tags.html">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
-        <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="My Amazing Website"
+        <input aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="My Amazing Website"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
-        <input type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Discover the best content..."
+        <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Discover the best content..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
-        <input type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
+        <input aria-label="URL" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label>
-        <input type="url" value={img} onChange={e => setImg(e.target.value)} placeholder="https://example.com/image.jpg"
+        <input aria-label="Image URL" type="url" value={img} onChange={e => setImg(e.target.value)} placeholder="https://example.com/image.jpg"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         {out && <OutputBlock value={out} />}

@@ -28,10 +28,10 @@ export default function BabyGrowthPercentileCalculator() {
   return (
     <CalculatorShell category="Health" title="Baby Growth Percentile" accent="rose" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Age (months)</label><input className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Gender</label><select className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label className={labelCls}>Height / Length (cm)</label><input className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Age (months)</label><input aria-label="Age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label className={labelCls}>Gender</label><select aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label className={labelCls}>Height / Length (cm)</label><input aria-label="Height / Length (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

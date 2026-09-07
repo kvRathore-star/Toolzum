@@ -59,18 +59,18 @@ export default function SipCalculator() {
       <div className="space-y-4">
         <div>
           <label className={labelCls}>Monthly Investment (₹)</label>
-          <input className={inputCls} type="number" value={monthly} onChange={e => setMonthly(Math.max(0, parseInt(e.target.value) || 0))} />
-          <input type="range" min="500" max="100000" step="500" value={monthly} onChange={e => setMonthly(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
+          <input aria-label="Monthly Investment (₹)" className={inputCls} type="number" value={monthly} onChange={e => setMonthly(Math.max(0, parseInt(e.target.value) || 0))} />
+          <input aria-label="Monthly Investment (₹)" type="range" min="500" max="100000" step="500" value={monthly} onChange={e => setMonthly(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
         </div>
         <div>
           <label className={labelCls}>Expected Return Rate (p.a. %)</label>
-          <input className={inputCls} type="number" value={rate} onChange={e => setRate(Math.max(0, parseFloat(e.target.value) || 0))} />
-          <input type="range" min="1" max="30" step="0.5" value={rate} onChange={e => setRate(parseFloat(e.target.value))} className="w-full accent-emerald-500 mt-1" />
+          <input aria-label="Expected Return Rate (p.a. %)" className={inputCls} type="number" value={rate} onChange={e => setRate(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Expected Return Rate (p.a. %)" type="range" min="1" max="30" step="0.5" value={rate} onChange={e => setRate(parseFloat(e.target.value))} className="w-full accent-emerald-500 mt-1" />
         </div>
         <div>
           <label className={labelCls}>Time Period (Years)</label>
-          <input className={inputCls} type="number" value={years} onChange={e => setYears(Math.max(1, parseInt(e.target.value) || 1))} />
-          <input type="range" min="1" max="40" step="1" value={years} onChange={e => setYears(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
+          <input aria-label="Time Period (Years)" className={inputCls} type="number" value={years} onChange={e => setYears(Math.max(1, parseInt(e.target.value) || 1))} />
+          <input aria-label="Time Period (Years)" type="range" min="1" max="40" step="1" value={years} onChange={e => setYears(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
         </div>
       </div>
     </CalculatorShell>

@@ -178,15 +178,15 @@ ${linkCards}
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Background</label>
-                  <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Card</label>
-                  <input type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <input aria-label="Card" type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Text</label>
-                  <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <input aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Accent</label>

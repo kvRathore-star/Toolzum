@@ -51,12 +51,12 @@ export default function IpAnonymizer() {
           <div className="space-y-3">
             <div className="space-y-1">
               <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">IPv4 Address</label>
-              <input type="text" value={ip} onChange={e => setIp(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]" />
+              <input aria-label="IPv4 Address" type="text" value={ip} onChange={e => setIp(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]" />
             </div>
 
             <div className="space-y-1">
               <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Anonymization Level</label>
-              <select value={mask} onChange={e => setMask(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <select aria-label="Anonymization Level" value={mask} onChange={e => setMask(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="24">Mask last octet (GDPR /24 - standard)</option>
                 <option value="16">Mask last 2 octets (Aggressive /16)</option>
                 <option value="hash">Full hashing block replacement</option>

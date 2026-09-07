@@ -275,7 +275,7 @@ function ZalgoView() {
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Cursed Level (1-20)</label>
             <span className="text-sm font-extrabold text-red-500">{intensity}</span>
           </div>
-          <input type="range" min={1} max={20} value={intensity} onChange={e => setIntensity(Number(e.target.value))}
+          <input aria-label="Cursed Level (1-20)" type="range" min={1} max={20} value={intensity} onChange={e => setIntensity(Number(e.target.value))}
             className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-red-600 mt-2" />
         </div>
         <div className="space-y-3 pt-2">

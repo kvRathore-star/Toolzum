@@ -5,6 +5,7 @@ import { Search, Download, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import type { User } from "./admin.types";
 import { relativeTime } from "./admin.utils";
+import { buttonKeyDown, buttonKeyUp } from "@/components/buttonKeys";
 
 interface UserTableProps {
   users: User[];
@@ -94,6 +95,10 @@ export const UserTable = forwardRef<HTMLDivElement, UserTableProps>(function Use
                   key={user.id}
                   className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)] transition-colors duration-150 cursor-pointer"
                   onClick={() => onSelectUser(user.id)}
+                  tabIndex={0}
+                  aria-label={`Open details for ${user.name}`}
+                  onKeyDown={(e) => buttonKeyDown(e, () => onSelectUser(user.id))}
+                  onKeyUp={(e) => buttonKeyUp(e, () => onSelectUser(user.id))}
                 >
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                     <input

@@ -123,7 +123,7 @@ export default function PanVerification() {
             Enter 10-Digit PAN Number
           </label>
           <div className="relative">
-            <input
+            <input aria-label="Enter 10-Digit PAN Number"
               type="text"
               maxLength={10}
               placeholder="e.g., ABCDE1234F"

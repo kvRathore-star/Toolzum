@@ -46,12 +46,12 @@ export default function FluidTypographyCalculator() {
       <div className="max-w-xl">
         <button onClick={calc} className="mb-4 px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors">Generate Type Scale</button>
         <div className="grid grid-cols-2 gap-4">
-          <div><label className={labelCls}>Base Font Size (px)</label><input className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
-          <div><label className={labelCls}>Scale Ratio</label><input className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
-          <div><label className={labelCls}>Min Viewport (px)</label><input className={inputCls} value={minVw} onChange={e => setMinVw(e.target.value)} /></div>
-          <div><label className={labelCls}>Max Viewport (px)</label><input className={inputCls} value={maxVw} onChange={e => setMaxVw(e.target.value)} /></div>
-          <div><label className={labelCls}>Min Clamp (px, optional)</label><input className={inputCls} value={minSize} onChange={e => setMinSize(e.target.value)} placeholder="Auto" /></div>
-          <div><label className={labelCls}>Max Clamp (px, optional)</label><input className={inputCls} value={maxSize} onChange={e => setMaxSize(e.target.value)} placeholder="Auto" /></div>
+          <div><label className={labelCls}>Base Font Size (px)</label><input aria-label="Base Font Size (px)" className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
+          <div><label className={labelCls}>Scale Ratio</label><input aria-label="Scale Ratio" className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
+          <div><label className={labelCls}>Min Viewport (px)</label><input aria-label="Min Viewport (px)" className={inputCls} value={minVw} onChange={e => setMinVw(e.target.value)} /></div>
+          <div><label className={labelCls}>Max Viewport (px)</label><input aria-label="Max Viewport (px)" className={inputCls} value={maxVw} onChange={e => setMaxVw(e.target.value)} /></div>
+          <div><label className={labelCls}>Min Clamp (px, optional)</label><input aria-label="Min Clamp (px, optional)" className={inputCls} value={minSize} onChange={e => setMinSize(e.target.value)} placeholder="Auto" /></div>
+          <div><label className={labelCls}>Max Clamp (px, optional)</label><input aria-label="Max Clamp (px, optional)" className={inputCls} value={maxSize} onChange={e => setMaxSize(e.target.value)} placeholder="Auto" /></div>
         </div>
         {result.length > 0 && (
           <div className="mt-6">

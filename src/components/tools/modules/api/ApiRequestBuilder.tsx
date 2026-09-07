@@ -45,17 +45,17 @@ export default function ApiRequestBuilder() {
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">URL</label>
-            <input type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="URL" type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Headers (one per line)</label>
-          <textarea value={headers} onChange={e => setHeaders(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <textarea aria-label="Headers (one per line)" value={headers} onChange={e => setHeaders(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         {method !== 'GET' && (
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Body</label>
-            <textarea value={body} onChange={e => setBody(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <textarea aria-label="Body" value={body} onChange={e => setBody(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         )}
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate cURL</button>

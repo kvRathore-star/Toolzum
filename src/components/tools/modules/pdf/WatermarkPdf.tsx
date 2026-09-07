@@ -127,7 +127,7 @@ export default function WatermarkPdf() {
           
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Watermark Text</label>
-            <input
+            <input aria-label="Watermark Text"
               type="text"
               placeholder="e.g. CONFIDENTIAL"
               value={watermarkText}
@@ -141,7 +141,7 @@ export default function WatermarkPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Opacity</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{Math.round(opacity * 100)}%</span>
             </div>
-            <input
+            <input aria-label="Opacity"
               type="range"
               min="0.1"
               max="1"
@@ -157,7 +157,7 @@ export default function WatermarkPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{fontSize}px</span>
             </div>
-            <input
+            <input aria-label="Font Size"
               type="range"
               min="20"
               max="150"

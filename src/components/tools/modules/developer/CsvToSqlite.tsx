@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import initSqlJs, { Database as SqlDb, SqlJsStatic } from 'sql.js';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { createDownloadBlob } from '@/utils/blob';
 
 export default function CsvToSqlite() {
@@ -255,7 +256,11 @@ export default function CsvToSqlite() {
             <div
               onDrop={handleDrop}
               onDragOver={e => e.preventDefault()}
+              role="button"
+              tabIndex={0}
               onClick={() => fileInputRef.current?.click()}
+              onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
+              onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
               className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-6 text-center cursor-pointer hover:border-indigo-500 transition-colors"
             >
               <Upload className="w-8 h-8 mx-auto text-[var(--text-muted)] mb-2" />

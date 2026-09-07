@@ -135,7 +135,7 @@ export default function AddPageNumbersToPdf() {
           
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Format</label>
-            <select 
+            <select aria-label="Format" 
               value={format} 
               onChange={(e) => setFormat(e.target.value as any)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-[var(--text-primary)] text-sm"

@@ -40,11 +40,11 @@ export default function WebhookPayloadGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Event Name</label>
-            <input type="text" value={event} onChange={e => { setEvent(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="Event Name" type="text" value={event} onChange={e => { setEvent(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Fields (key: type)</label>
-            <textarea value={fields} onChange={e => { setFields(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <textarea aria-label="Fields (key: type)" value={fields} onChange={e => { setFields(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Payload</button>

@@ -378,7 +378,7 @@ export default function VehicleRegChecker() {
             Vehicle Registration Number
           </label>
           <div className="relative">
-            <input
+            <input aria-label="Vehicle Registration Number"
               type="text"
               maxLength={12}
               placeholder="e.g., KA01AB1234"

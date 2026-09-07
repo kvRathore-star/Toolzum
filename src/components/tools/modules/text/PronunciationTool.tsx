@@ -437,7 +437,7 @@ export default function PronunciationTool() {
               <Globe className="w-3.5 h-3.5" />
               Accent
             </label>
-            <select
+            <select aria-label="Accent"
               value={accentIndex}
               onChange={(e) => setAccentIndex(Number(e.target.value))}
               className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
@@ -453,7 +453,7 @@ export default function PronunciationTool() {
               <Mic className="w-3.5 h-3.5" />
               Voice
             </label>
-            <select
+            <select aria-label="Voice"
               value={voiceGender}
               onChange={(e) => setVoiceGender(e.target.value as 'male' | 'female')}
               className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"

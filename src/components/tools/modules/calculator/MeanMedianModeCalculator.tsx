@@ -23,7 +23,7 @@ export default function MeanMedianModeCalculator() {
   ] : undefined;
   return (
     <CalculatorShell category="Calculator" title="Mean Median Mode Calculator" result={result} auto presets={presets} accent="cyan" resultStats={resultStats}>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Numbers (comma-separated)</label><input type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputCls} /></div>
+      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Numbers (comma-separated)</label><input aria-label="Numbers (comma-separated)" type="text" value={numbers} onChange={e => setNumbers(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }

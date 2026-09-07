@@ -42,8 +42,8 @@ export default function NetWorthCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Assets ($)</label><input type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Liabilities ($)</label><input type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Assets ($)</label><input aria-label="Total Assets ($)" type="number" value={assets} onChange={e => setAssets(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Liabilities ($)</label><input aria-label="Total Liabilities ($)" type="number" value={liabilities} onChange={e => setLiabilities(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

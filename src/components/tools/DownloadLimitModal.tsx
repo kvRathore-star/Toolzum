@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Crown, Lock, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDialogA11y } from "@/components/useDialogA11y";
 import { proSlugs } from "@/registry/tools-constants";
 
 const PRO_SLUG_SET = new Set(proSlugs);
@@ -45,6 +46,7 @@ export function DownloadLimitModal() {
   const [event, setEvent] = useState<BlockEvent | null>(null);
 
   const close = useCallback(() => setEvent(null), []);
+  const dialogRef = useDialogA11y<HTMLDivElement>(event !== null, close);
 
   useEffect(() => {
     const onQuota = () => setEvent({ type: "quota" });
@@ -81,16 +83,21 @@ export function DownloadLimitModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-      role="button" tabIndex={0}
-      onClick={close}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); close(); } }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
     >
+      <button
+        aria-label="Close dialog"
+        onClick={close}
+        tabIndex={-1}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
+      />
       <div
-        className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl"
-        role="button" tabIndex={0}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); } }}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="download-limit-title"
+        tabIndex={-1}
+        className="relative bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl"
       >
         <div className="flex items-start justify-between mb-4">
           <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
@@ -101,7 +108,7 @@ export function DownloadLimitModal() {
           </button>
         </div>
 
-        <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">{copy.title}</h3>
+        <h3 id="download-limit-title" className="text-lg font-bold text-[var(--text-primary)] mb-1">{copy.title}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-5">{copy.body}</p>
 
         <div className="space-y-2.5">

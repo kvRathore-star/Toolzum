@@ -44,16 +44,16 @@ export default function BreakEvenCalculator() {
       <div className="space-y-4">
         <div>
           <label className={labelCls}>Fixed Costs ($)</label>
-          <input className={inputCls} type="number" value={fixedCosts} onChange={e => setFixedCosts(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Fixed Costs ($)" className={inputCls} type="number" value={fixedCosts} onChange={e => setFixedCosts(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Unit Variable Cost ($)</label>
-            <input className={inputCls} type="number" value={variableCost} onChange={e => setVariableCost(Math.max(0, parseFloat(e.target.value) || 0))} />
+            <input aria-label="Unit Variable Cost ($)" className={inputCls} type="number" value={variableCost} onChange={e => setVariableCost(Math.max(0, parseFloat(e.target.value) || 0))} />
           </div>
           <div>
             <label className={labelCls}>Unit Selling Price ($)</label>
-            <input className={inputCls} type="number" value={sellingPrice} onChange={e => setSellingPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
+            <input aria-label="Unit Selling Price ($)" className={inputCls} type="number" value={sellingPrice} onChange={e => setSellingPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
           </div>
         </div>
       </div>

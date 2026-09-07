@@ -17,8 +17,14 @@ export function RoleConfirmModal({ target, confirmEmail, onConfirmEmailChange, o
   const emailMatch = confirmEmail === target.email;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm animate-fade-in" onClick={onCancel}>
-      <div className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl animate-scale-in" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <button
+        aria-label="Cancel role change"
+        onClick={onCancel}
+        tabIndex={-1}
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in cursor-default"
+      />
+      <div className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl animate-scale-in" role="dialog" aria-modal="true" aria-label="Confirm role change">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-xl">
             <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />

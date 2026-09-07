@@ -225,7 +225,7 @@ export default function TranslatePdf() {
               <Globe className="w-3 h-3" />
               Source Language
             </label>
-            <select
+            <select aria-label="Source Language"
               value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
@@ -246,7 +246,7 @@ export default function TranslatePdf() {
               <Languages className="w-3 h-3" />
               Target Language
             </label>
-            <select
+            <select aria-label="Target Language"
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"

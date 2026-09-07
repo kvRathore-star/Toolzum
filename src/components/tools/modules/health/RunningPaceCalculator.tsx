@@ -34,11 +34,11 @@ export default function RunningPaceCalculator() {
   return (
     <CalculatorShell category="Health" title="Running Pace Calculator" accent="orange" result={result} auto presets={presets}>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Distance</label><input className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
-        <div><label className={labelCls}>Unit</label><select className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'km'|'mi')}><option value="km">km</option><option value="mi">mi</option></select></div>
-        <div><label className={labelCls}>Hours</label><input className={inputCls} type="number" value={hours} onChange={e => setHours(e.target.value)} /></div>
-        <div><label className={labelCls}>Minutes</label><input className={inputCls} type="number" value={minutes} onChange={e => setMinutes(e.target.value)} /></div>
-        <div><label className={labelCls}>Seconds</label><input className={inputCls} type="number" value={seconds} onChange={e => setSeconds(e.target.value)} /></div>
+        <div><label className={labelCls}>Distance</label><input aria-label="Distance" className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label className={labelCls}>Unit</label><select aria-label="Unit" className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'km'|'mi')}><option value="km">km</option><option value="mi">mi</option></select></div>
+        <div><label className={labelCls}>Hours</label><input aria-label="Hours" className={inputCls} type="number" value={hours} onChange={e => setHours(e.target.value)} /></div>
+        <div><label className={labelCls}>Minutes</label><input aria-label="Minutes" className={inputCls} type="number" value={minutes} onChange={e => setMinutes(e.target.value)} /></div>
+        <div><label className={labelCls}>Seconds</label><input aria-label="Seconds" className={inputCls} type="number" value={seconds} onChange={e => setSeconds(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

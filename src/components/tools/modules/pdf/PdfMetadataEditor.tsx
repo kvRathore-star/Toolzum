@@ -147,7 +147,7 @@ export default function PdfMetadataEditor() {
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Title</label>
-              <input
+              <input aria-label="Title"
                 type="text"
                 value={metadata.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
@@ -157,7 +157,7 @@ export default function PdfMetadataEditor() {
             
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Author</label>
-              <input
+              <input aria-label="Author"
                 type="text"
                 value={metadata.author}
                 onChange={(e) => handleInputChange('author', e.target.value)}
@@ -167,7 +167,7 @@ export default function PdfMetadataEditor() {
 
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Subject</label>
-              <input
+              <input aria-label="Subject"
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => handleInputChange('subject', e.target.value)}
@@ -177,7 +177,7 @@ export default function PdfMetadataEditor() {
 
             <div className="space-y-1">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Keywords</label>
-              <input
+              <input aria-label="Keywords"
                 type="text"
                 value={metadata.keywords}
                 onChange={(e) => handleInputChange('keywords', e.target.value)}
@@ -189,7 +189,7 @@ export default function PdfMetadataEditor() {
             <div className="grid grid-cols-2 gap-4">
                <div className="space-y-1">
                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Creator</label>
-                 <input
+                 <input aria-label="Creator"
                    type="text"
                    value={metadata.creator}
                    onChange={(e) => handleInputChange('creator', e.target.value)}
@@ -198,7 +198,7 @@ export default function PdfMetadataEditor() {
                </div>
                <div className="space-y-1">
                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Producer</label>
-                 <input
+                 <input aria-label="Producer"
                    type="text"
                    value={metadata.producer}
                    onChange={(e) => handleInputChange('producer', e.target.value)}

@@ -80,13 +80,13 @@ export default function ModuloCalculator() {
         <div className="flex gap-2 items-end">
           <div className="flex-1">
             <label className={labelClass}>Dividend (a)</label>
-            <input type="number" value={a} onChange={e => setA(e.target.value)}
+            <input aria-label="Dividend (a)" type="number" value={a} onChange={e => setA(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
           <span className="text-sm font-bold self-center">mod</span>
           <div className="flex-1">
             <label className={labelClass}>Divisor (b)</label>
-            <input type="number" min={1} value={b} onChange={e => setB(e.target.value)}
+            <input aria-label="Divisor (b)" type="number" min={1} value={b} onChange={e => setB(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>

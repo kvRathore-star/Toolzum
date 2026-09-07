@@ -475,7 +475,7 @@ export function PdfWorkflowBuilder() {
                   {[{ l: 'Title', v: metaTitle, s: setMetaTitle }, { l: 'Author', v: metaAuthor, s: setMetaAuthor }, { l: 'Subject', v: metaSubject, s: setMetaSubject }, { l: 'Keywords', v: metaKeywords, s: setMetaKeywords }].map(({ l, v, s }) => (
                     <div key={l}>
                       <label className="block text-xs font-medium mb-1 text-[var(--text-tertiary)]">{l}</label>
-                      <input className={inputCls} value={v} onChange={e => s(e.target.value)} placeholder={l} />
+                      <input className={inputCls} value={v} onChange={e => s(e.target.value)} placeholder={l} aria-label={l} />
                     </div>
                   ))}
                   <button onClick={handleMetaSave} disabled={loading} className={btnCls}>{loading ? 'Saving...' : 'Save & Download'}</button>

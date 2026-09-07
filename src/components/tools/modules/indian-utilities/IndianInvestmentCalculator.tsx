@@ -66,19 +66,20 @@ function StatCard({ label, value, accent = false }: { label: string; value: Reac
 }
 
 function NumberInput({ label, value, onChange, min = 0, max, step = 1, prefix, suffix, icon }: { label: string; value: number; onChange: (v: number) => void; min?: number; max?: number; step?: number; prefix?: string; suffix?: string; icon?: React.ReactNode }) {
+  const id = React.useId();
   return (
     <div className="bg-[var(--bg-overlay)] rounded-xl p-3.5 border border-[var(--border-subtle)] space-y-1.5">
-      <label className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide">
+      <label htmlFor={id} className="flex items-center gap-1.5 text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wide">
         {icon} {label}
       </label>
       <div className="flex items-center gap-1.5">
         {prefix && <span className="text-[var(--text-muted)] font-medium text-sm">{prefix}</span>}
-        <input type="number" value={value || ''} onChange={e => { const v = parseFloat(e.target.value) || 0; onChange(max !== undefined ? Math.min(Math.max(v, min), max) : Math.max(v, min)); }}
+        <input id={id} type="number" value={value || ''} onChange={e => { const v = parseFloat(e.target.value) || 0; onChange(max !== undefined ? Math.min(Math.max(v, min), max) : Math.max(v, min)); }}
           min={min} max={max} step={step}
           className="flex-1 bg-transparent border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm text-[var(--text-primary)] font-semibold p-0 focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
         {suffix && <span className="text-[var(--text-muted)] text-xs">{suffix}</span>}
       </div>
-      <input type="range" min={min} max={max ?? 1000000} step={step} value={value} onChange={e => onChange(parseFloat(e.target.value))}
+      <input type="range" aria-label={label} min={min} max={max ?? 1000000} step={step} value={value} onChange={e => onChange(parseFloat(e.target.value))}
         className="w-full accent-emerald-500 h-1.5" />
     </div>
   );

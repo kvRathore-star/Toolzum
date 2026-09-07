@@ -592,7 +592,7 @@ export default function AiArticleWriter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
         <div className="space-y-2">
           <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Topic</label>
-          <input
+          <input aria-label="Topic"
             type="text"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -605,7 +605,7 @@ export default function AiArticleWriter() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
             <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tone</label>
-            <select
+            <select aria-label="Tone"
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
@@ -615,7 +615,7 @@ export default function AiArticleWriter() {
           </div>
           <div className="space-y-2">
             <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
-            <select
+            <select aria-label="Length"
               value={length}
               onChange={(e) => setLength(e.target.value as LengthKey)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
@@ -625,7 +625,7 @@ export default function AiArticleWriter() {
           </div>
           <div className="space-y-2">
             <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Audience</label>
-            <select
+            <select aria-label="Audience"
               value={audience}
               onChange={(e) => setAudience(e.target.value as Audience)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
@@ -692,7 +692,7 @@ export default function AiArticleWriter() {
                 )}
               </div>
               <div className="flex items-center gap-2">
-                <select
+                <select aria-label="Include Sections"
                   value={format}
                   onChange={(e) => setFormat(e.target.value as Format)}
                   className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 appearance-none cursor-pointer"

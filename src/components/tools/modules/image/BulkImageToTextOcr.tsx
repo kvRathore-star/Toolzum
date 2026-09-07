@@ -18,7 +18,7 @@ export default function BulkImageToTextOcr() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">OCR Language</label>
-          <select name="lang" defaultValue="eng" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+          <select aria-label="OCR Language" name="lang" defaultValue="eng" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
             <option value="eng">English</option>
             <option value="hin">Hindi</option>
             <option value="ara">Arabic</option>

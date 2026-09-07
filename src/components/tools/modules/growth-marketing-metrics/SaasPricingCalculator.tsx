@@ -176,7 +176,7 @@ export default function SaasPricingCalculator() {
             <div className="space-y-1 pt-2 border-t border-[var(--border-subtle)]">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider mb-2">Target Monthly Recurring Revenue</label>
               <div className="relative">
-                <input 
+                <input aria-label="Target Monthly Recurring Revenue" 
                   type="number" value={targetMrr} 
                   onChange={e => setTargetMrr(Math.max(100, parseInt(e.target.value) || 0))}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] text-sm"

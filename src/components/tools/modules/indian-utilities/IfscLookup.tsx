@@ -109,7 +109,7 @@ export default function IfscLookup() {
         <div className="space-y-2">
           <label className="block text-sm font-bold text-[var(--text-primary)]">Enter 11-Digit IFSC Code</label>
           <div className="flex gap-2">
-            <input type="text" maxLength={11} placeholder="e.g. HDFC0000123" value={ifsc} onChange={(e) => setIfsc(e.target.value.toUpperCase())}
+            <input aria-label="Enter 11-Digit IFSC Code" type="text" maxLength={11} placeholder="e.g. HDFC0000123" value={ifsc} onChange={(e) => setIfsc(e.target.value.toUpperCase())}
               className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               onKeyDown={e => e.key === 'Enter' && handleLookup()} />
             <button onClick={handleLookup} disabled={loading || remaining === 0}

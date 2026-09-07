@@ -172,7 +172,7 @@ export default function CurrencyConverter() {
             {/* Amount */}
             <div className="md:col-span-3 space-y-1">
               <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Amount</label>
-              <input 
+              <input aria-label="Amount" 
                 type="number" 
                 value={amount} 
                 onChange={e => setAmount(e.target.value)} 
@@ -199,7 +199,7 @@ export default function CurrencyConverter() {
             <div className="md:col-span-2 space-y-1">
               <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">From</label>
               <div className="relative">
-                <select 
+                <select aria-label="From" 
                   value={fromCurrency} 
                   onChange={e => setFromCurrency(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none"
@@ -234,7 +234,7 @@ export default function CurrencyConverter() {
             <div className="md:col-span-2 space-y-1">
               <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">To</label>
               <div className="relative">
-                <select 
+                <select aria-label="To" 
                   value={toCurrency} 
                   onChange={e => setToCurrency(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none"

@@ -123,7 +123,7 @@ export function IpAddressConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv4 Address Converter</h2>
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">IPv4 Address</label>
-          <input value={input} onChange={e => setInput(e.target.value)} placeholder="Enter IPv4..."
+          <input aria-label="IPv4 Address" value={input} onChange={e => setInput(e.target.value)} placeholder="Enter IPv4..."
             className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
 
@@ -178,12 +178,12 @@ export function IpRangeExpander() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <label className="text-xs font-medium text-[var(--text-secondary)]">Start IP</label>
-            <input value={start} onChange={e => setStart(e.target.value)} placeholder="Start IP..."
+            <input aria-label="Start IP" value={start} onChange={e => setStart(e.target.value)} placeholder="Start IP..."
               className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-medium text-[var(--text-secondary)]">End IP</label>
-            <input value={end} onChange={e => setEnd(e.target.value)} placeholder="End IP..."
+            <input aria-label="End IP" value={end} onChange={e => setEnd(e.target.value)} placeholder="End IP..."
               className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
         </div>

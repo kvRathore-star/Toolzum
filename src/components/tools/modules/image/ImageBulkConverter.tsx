@@ -156,7 +156,7 @@ export default function ImageBulkConverter() {
                 <label className="text-sm font-medium text-[var(--text-primary)]">Quality</label>
                 <span className="text-blue-700 dark:text-blue-400 font-bold text-sm">{Math.round(quality * 100)}%</span>
               </div>
-              <input 
+              <input aria-label="Quality" 
                 type="range" 
                 min="0.1" 
                 max="1" 

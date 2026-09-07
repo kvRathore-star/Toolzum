@@ -46,12 +46,12 @@ function MessageLinkTab() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="space-y-2">
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
-          <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
+          <input aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         </div>
         <div className="space-y-2">
           <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
-          <input value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I saw your listing..."
+          <input aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I saw your listing..."
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         </div>
       </div>
@@ -366,23 +366,23 @@ function QrTab() {
         <div className="space-y-3">
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
-            <input value={phone} onChange={e => setPhone(e.target.value)} placeholder="919876543210"
+            <input aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="919876543210"
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
-            <input value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I need your services..."
+            <input aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I need your services..."
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">QR Color</label>
-              <input type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
+              <input aria-label="QR Color" type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
-              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+              <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>
@@ -806,7 +806,7 @@ function StatusDesignerTab() {
         <div className="space-y-3">
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Status Text</label>
-            <textarea value={text} onChange={e => setText(e.target.value)} rows={3}
+            <textarea aria-label="Status Text" value={text} onChange={e => setText(e.target.value)} rows={3}
               placeholder="Type your status message..."
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none" />
           </div>
@@ -814,12 +814,12 @@ function StatusDesignerTab() {
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
-              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+              <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Text Color</label>
-              <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
+              <input aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>
@@ -832,7 +832,7 @@ function StatusDesignerTab() {
             </label>
             <div className="flex-1" />
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase mr-1">Font</label>
-            <input type="range" min="20" max="72" value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
+            <input aria-label="Font" type="range" min="20" max="72" value={fontSize} onChange={e => setFontSize(Number(e.target.value))}
               className="w-20 accent-emerald-500" />
           </div>
 

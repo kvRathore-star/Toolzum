@@ -263,7 +263,7 @@ export default function AiBgChanger() {
 
                 <div className="space-y-1">
                   <label className="text-[10px] text-[var(--text-secondary)]">New BG Color</label>
-                  <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+                  <input aria-label="New BG Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                     className="w-full h-9 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
 

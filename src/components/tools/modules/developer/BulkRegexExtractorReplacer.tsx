@@ -30,22 +30,22 @@ export default function BulkRegexExtractorReplacer() {
         <div className="space-y-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Mode</label>
-            <select name="mode" defaultValue="extract" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select aria-label="Mode" name="mode" defaultValue="extract" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="extract">Extract Matches</option>
               <option value="replace">Replace Matches</option>
             </select>
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Regex Pattern</label>
-            <input name="pattern" type="text" placeholder="e.g., \d{10}" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
+            <input aria-label="Regex Pattern" name="pattern" type="text" placeholder="e.g., \d{10}" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Replacement (replace mode only)</label>
-            <input name="replacement" type="text" placeholder="$1" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
+            <input aria-label="Replacement (replace mode only)" name="replacement" type="text" placeholder="$1" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Flags</label>
-            <input name="flags" type="text" defaultValue="g" placeholder="g, i, gi" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
+            <input aria-label="Flags" name="flags" type="text" defaultValue="g" placeholder="g, i, gi" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm font-mono text-[var(--text-primary)]" />
           </div>
         </div>
       }

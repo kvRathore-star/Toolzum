@@ -154,7 +154,7 @@ export default function WritingTools() {
               </button>
             </div>
           </div>
-          <textarea
+          <textarea aria-label="Your Text"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Paste or type your text here for instant analysis..."

@@ -488,17 +488,17 @@ export default function ChartMaker() {
 
           <div>
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Title</label>
-            <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
+            <input aria-label="Chart Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">X-Axis Label</label>
-              <input type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Category" />
+              <input aria-label="X-Axis Label" type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Category" />
             </div>
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Y-Axis Label</label>
-              <input type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Value" />
+              <input aria-label="Y-Axis Label" type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Value" />
             </div>
           </div>
 
@@ -561,8 +561,8 @@ export default function ChartMaker() {
           <div>
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Background Color</label>
             <div className="flex gap-2 items-center">
-              <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-9 w-12 rounded-lg border border-[var(--border-subtle)] cursor-pointer bg-transparent" />
-              <input type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 font-mono" />
+              <input aria-label="Background Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-9 w-12 rounded-lg border border-[var(--border-subtle)] cursor-pointer bg-transparent" />
+              <input aria-label="Background Color" type="text" value={bgColor} onChange={e => setBgColor(e.target.value)} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 font-mono" />
             </div>
           </div>
 

@@ -108,7 +108,7 @@ export default function RegexTester() {
                 <label className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />Describe what you want to match
                 </label>
-                <textarea value={description} onChange={e => setDescription(e.target.value)}
+                <textarea aria-label="Describe what you want to match" value={description} onChange={e => setDescription(e.target.value)}
                   placeholder='e.g. "Match email addresses that end with @gmail.com"'
                   className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-amber-400 h-24 resize-none" />
               </div>
@@ -146,7 +146,7 @@ export default function RegexTester() {
                 <label className="text-sm font-medium text-[var(--text-primary)]">Test String</label>
                 <button onClick={() => setTestString('')} className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white transition-colors">Clear</button>
               </div>
-              <textarea value={testString} onChange={e => setTestString(e.target.value)}
+              <textarea aria-label="Test String" value={testString} onChange={e => setTestString(e.target.value)}
                 className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono resize-none"
                 placeholder="Enter text to test your regular expression against..." spellCheck={false} />
             </div>

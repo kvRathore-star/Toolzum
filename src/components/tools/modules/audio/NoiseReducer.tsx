@@ -214,7 +214,7 @@ export default function NoiseReducer() {
               <div className="grid grid-cols-2 gap-3 pl-7">
                 <div>
                   <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise Start (sec)</label>
-                  <input
+                  <input aria-label="Noise Start (sec)"
                     type="number"
                     min={0}
                     step={0.1}
@@ -227,7 +227,7 @@ export default function NoiseReducer() {
                 </div>
                 <div>
                   <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise End (sec)</label>
-                  <input
+                  <input aria-label="Noise End (sec)"
                     type="number"
                     min={0}
                     step={0.1}
@@ -243,7 +243,7 @@ export default function NoiseReducer() {
 
             <div>
               <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
-              <select
+              <select aria-label="Output Format"
                 value={outputFormat}
                 onChange={e => setOutputFormat(e.target.value as OutputFormat)}
                 disabled={isProcessing}

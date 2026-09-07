@@ -34,7 +34,7 @@ export default function PasswordStrengthChecker() {
           <div className="space-y-2">
             <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Password String</label>
             <div className="relative">
-              <input 
+              <input aria-label="Password String" 
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={e => setPassword(e.target.value)}

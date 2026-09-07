@@ -3,15 +3,25 @@
 import React from "react";
 import Link from "next/link";
 import { Star, X } from "lucide-react";
+import { useDialogA11y } from "./useDialogA11y";
 
 export function FavoritesSignInModal({ onClose }: { onClose: () => void }) {
+  const dialogRef = useDialogA11y<HTMLDivElement>(true, onClose);
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" role="button" tabIndex={0} onClick={onClose} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClose(); } }}>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <button
+        aria-label="Close dialog"
+        onClick={onClose}
+        tabIndex={-1}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-default"
+      />
       <div
-        className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl"
-        role="button" tabIndex={0}
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); } }}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="favorites-modal-title"
+        tabIndex={-1}
+        className="relative bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 max-w-md w-full shadow-2xl"
       >
         <div className="flex justify-end">
           <button onClick={onClose} className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors" aria-label="Close">
@@ -24,7 +34,7 @@ export function FavoritesSignInModal({ onClose }: { onClose: () => void }) {
             <Star className="w-6 h-6 text-amber-500" />
           </div>
 
-          <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
+          <h3 id="favorites-modal-title" className="text-lg font-bold text-[var(--text-primary)] mb-2">
             Save your favorite tools
           </h3>
           <p className="text-sm text-[var(--text-secondary)] mb-6 max-w-xs">

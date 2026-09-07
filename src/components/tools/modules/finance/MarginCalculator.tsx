@@ -42,12 +42,12 @@ export default function MarginCalculator() {
       <div className="space-y-4">
         <div>
           <label className={labelCls}>Item Cost ($)</label>
-          <input className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Item Cost ($)" className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
           <label className={labelCls}>Target Margin (%)</label>
-          <input className={inputCls} type="number" value={margin} onChange={e => setMargin(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} />
-          <input type="range" min="1" max="90" step="1" value={margin} onChange={e => setMargin(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
+          <input aria-label="Target Margin (%)" className={inputCls} type="number" value={margin} onChange={e => setMargin(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} />
+          <input aria-label="Target Margin (%)" type="range" min="1" max="90" step="1" value={margin} onChange={e => setMargin(parseInt(e.target.value))} className="w-full accent-emerald-500 mt-1" />
         </div>
       </div>
     </CalculatorShell>

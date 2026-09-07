@@ -46,12 +46,12 @@ export default function VatCalculator() {
       <div className="space-y-4">
         <div>
           <label className={labelCls}>Net Price / Pre-tax ($)</label>
-          <input className={inputCls} type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Net Price / Pre-tax ($)" className={inputCls} type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
           <label className={labelCls}>VAT / GST Rate (%)</label>
-          <input className={inputCls} type="number" value={vatRate} onChange={e => setVatRate(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} />
-          <input type="range" min="0" max="28" step="0.5" value={vatRate} onChange={e => setVatRate(parseFloat(e.target.value))} className="w-full accent-emerald-500 mt-1" />
+          <input aria-label="VAT / GST Rate (%)" className={inputCls} type="number" value={vatRate} onChange={e => setVatRate(Math.min(99, Math.max(0, parseFloat(e.target.value) || 0)))} />
+          <input aria-label="VAT / GST Rate (%)" type="range" min="0" max="28" step="0.5" value={vatRate} onChange={e => setVatRate(parseFloat(e.target.value))} className="w-full accent-emerald-500 mt-1" />
         </div>
       </div>
     </CalculatorShell>

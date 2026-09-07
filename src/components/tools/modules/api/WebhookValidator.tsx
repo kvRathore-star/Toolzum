@@ -25,7 +25,7 @@ export default function WebhookValidator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Webhook Validator</h2>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Webhook Payload (JSON)</label>
-          <textarea value={payload} onChange={e => { setPayload(e.target.value); setResult(null); }} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <textarea aria-label="Webhook Payload (JSON)" value={payload} onChange={e => { setPayload(e.target.value); setResult(null); }} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Validate</button>
         {result && (

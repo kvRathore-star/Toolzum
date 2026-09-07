@@ -270,7 +270,7 @@ export default function PdfDeskew() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Manual Rotation</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{manualAngle.toFixed(1)}&deg;</span>
             </div>
-            <input
+            <input aria-label="Manual Rotation"
               type="range"
               min="-45"
               max="45"

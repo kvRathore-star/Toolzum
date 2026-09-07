@@ -29,17 +29,17 @@ export default function AvatarGenerator() {
     <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Name</label>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
+        <input aria-label="Name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
-            <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
+            <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-            <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
+            <input aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
         </div>
 

@@ -160,7 +160,7 @@ export default function AddTextToPdf() {
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Target Page</label>
             <div className="flex gap-2 items-center">
-              <input
+              <input aria-label="Target Page"
                 type="number"
                 min={1}
                 max={totalPages}
@@ -174,7 +174,7 @@ export default function AddTextToPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Text Content</label>
-            <input
+            <input aria-label="Text Content"
               type="text"
               placeholder="Enter text to add..."
               value={text}
@@ -188,7 +188,7 @@ export default function AddTextToPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
               <span className="text-xs font-bold text-[var(--accent)]">{fontSize}px</span>
             </div>
-            <input
+            <input aria-label="Font Size"
               type="range"
               min={8}
               max={72}
@@ -212,13 +212,13 @@ export default function AddTextToPdf() {
               ))}
             </div>
             <div className="flex items-center gap-3">
-              <input
+              <input aria-label="Color"
                 type="color"
                 value={customColor}
                 onChange={(e) => { setCustomColor(e.target.value); setColor(e.target.value); }}
                 className="w-10 h-10 p-0.5 rounded-lg cursor-pointer border border-[var(--border-subtle)] bg-transparent"
               />
-              <input
+              <input aria-label="Color"
                 type="text"
                 value={customColor}
                 onChange={(e) => { setCustomColor(e.target.value); setColor(e.target.value); }}
@@ -231,7 +231,7 @@ export default function AddTextToPdf() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
-              <input
+              <input aria-label="X Position"
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
@@ -240,7 +240,7 @@ export default function AddTextToPdf() {
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
-              <input
+              <input aria-label="Y Position"
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}

@@ -66,7 +66,7 @@ export default function MockApiResponseGenerator() {
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Response Schema (JSON)</label>
-          <textarea value={schema} onChange={e => { setSchema(e.target.value); setOutput(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <textarea aria-label="Response Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setOutput(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>

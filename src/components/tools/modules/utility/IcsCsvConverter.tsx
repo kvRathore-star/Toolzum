@@ -383,7 +383,7 @@ export default function IcsCsvConverter() {
             {csvHeaders.map(h => (
               <div key={h} className="flex items-center gap-2">
                 <span className="text-sm text-[var(--text-secondary)] min-w-[100px]">{h}:</span>
-                <select value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
+                <select aria-label="Date Format" value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
                   <option value="">— Skip —</option>
                   {CSV_HEADERS.map(c => (
                     <option key={c} value={c}>{c}</option>

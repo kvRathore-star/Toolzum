@@ -199,15 +199,15 @@ export default function MarriageBiodataMaker() {
     <div className={cols > 1 ? 'md:col-span-2' : ''}>
       <label className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">{lbl}</label>
       {options ? (
-        <select value={value} onChange={e => onChange(e.target.value)}
+        <select value={value} onChange={e => onChange(e.target.value)} aria-label={lbl}
           className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/30 transition-all">
           {options.map(o => <option key={o} value={o}>{o}</option>)}
         </select>
       ) : type === 'textarea' ? (
-        <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+        <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} aria-label={lbl}
           className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/30 resize-none h-20 transition-all" />
       ) : (
-        <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+        <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} aria-label={lbl}
           className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/30 transition-all" />
       )}
     </div>
@@ -259,7 +259,7 @@ export default function MarriageBiodataMaker() {
                     <span className="text-[8px] mt-0.5">Upload</span>
                   </button>
                 )}
-                <input ref={photoInputRef} type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+                <input aria-label="Profile Photo" ref={photoInputRef} type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
                 <p className="text-[10px] text-[var(--text-muted)]">Upload a clear passport-style photo</p>
               </div>
             </div>

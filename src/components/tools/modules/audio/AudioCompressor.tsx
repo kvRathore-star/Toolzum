@@ -337,14 +337,16 @@ function SliderControl({ label, value, min, max, step, unit, onChange }: {
   onChange: (v: number) => void;
 }) {
   const pct = ((value - min) / (max - min)) * 100;
+  const id = React.useId();
   return (
     <div>
       <div className="flex justify-between items-center mb-1">
-        <label className="text-[10px] font-semibold text-[var(--text-muted)]">{label}</label>
+        <label htmlFor={id} className="text-[10px] font-semibold text-[var(--text-muted)]">{label}</label>
         <span className="text-xs font-bold text-[var(--text-primary)] tabular-nums">{value}{unit}</span>
       </div>
       <div className="relative">
         <input
+          id={id}
           type="range"
           min={min}
           max={max}

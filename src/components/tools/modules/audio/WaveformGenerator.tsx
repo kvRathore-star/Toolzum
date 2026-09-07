@@ -306,18 +306,18 @@ export default function WaveformGenerator() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
                 <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Waveform Color</label>
-                <input type="color" value={waveformColor} onChange={e => setWaveformColor(e.target.value)}
+                <input aria-label="Waveform Color" type="color" value={waveformColor} onChange={e => setWaveformColor(e.target.value)}
                   className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               <div>
                 <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Background Color</label>
-                <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+                <input aria-label="Background Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                   className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               {useGradient && (
                 <div>
                   <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Gradient Color</label>
-                  <input type="color" value={gradientColor} onChange={e => setGradientColor(e.target.value)}
+                  <input aria-label="Gradient Color" type="color" value={gradientColor} onChange={e => setGradientColor(e.target.value)}
                     className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
                 </div>
               )}

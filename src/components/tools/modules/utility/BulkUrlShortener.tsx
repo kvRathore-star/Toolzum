@@ -100,7 +100,7 @@ export default function BulkUrlShortener() {
           <label className="text-sm font-medium text-[var(--text-primary)]">
             Paste URLs to shorten <span className="text-[var(--text-muted)]">(one per line)</span>
           </label>
-          <textarea
+          <textarea aria-label="Paste URLs to shorten (one per line)"
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="https://example.com/very/long/url/1&#10;https://example.com/very/long/url/2&#10;https://example.com/very/long/url/3"

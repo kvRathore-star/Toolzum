@@ -38,7 +38,7 @@ export default function AgeCalculator() {
          <div className="space-y-4">
             <div>
               <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Date of Birth</label>
-              <input 
+              <input aria-label="Date of Birth" 
                 type="date"
                 value={dob}
                 onChange={e => setDob(e.target.value)}
@@ -47,7 +47,7 @@ export default function AgeCalculator() {
             </div>
             <div>
               <label className="block text-sm font-bold text-[var(--text-primary)] mb-2">Target Date (Defaults to Today)</label>
-              <input 
+              <input aria-label="Target Date (Defaults to Today)" 
                 type="date"
                 value={targetDate}
                 onChange={e => setTargetDate(e.target.value)}

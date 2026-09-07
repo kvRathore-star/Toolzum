@@ -165,7 +165,7 @@ export default function PasswordGenerator() {
             <label className="text-sm font-semibold text-[var(--text-primary)]">Password Length</label>
             <span className="text-sm font-mono text-[var(--accent)]">{opts.length}</span>
           </div>
-          <input
+          <input aria-label="Password Length"
             type="range"
             min="4" max="64" step="1"
             value={opts.length}

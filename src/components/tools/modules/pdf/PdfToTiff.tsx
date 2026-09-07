@@ -271,7 +271,7 @@ export default function PdfToTiff() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
-          <input
+          <input aria-label="Page Range"
             type="text"
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
@@ -282,7 +282,7 @@ export default function PdfToTiff() {
 
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Output Mode</label>
-          <select
+          <select aria-label="Output Mode"
             value={mode}
             onChange={(e) => setMode(e.target.value as OutputMode)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -294,7 +294,7 @@ export default function PdfToTiff() {
 
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">DPI</label>
-          <select
+          <select aria-label="DPI"
             value={dpi}
             onChange={(e) => setDpi(Number(e.target.value))}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -307,7 +307,7 @@ export default function PdfToTiff() {
 
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Color Mode</label>
-          <select
+          <select aria-label="Color Mode"
             value={colorMode}
             onChange={(e) => setColorMode(e.target.value as ColorMode)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -320,7 +320,7 @@ export default function PdfToTiff() {
 
         <div className="space-y-1.5">
           <label className="text-sm font-medium text-[var(--text-primary)]">Compression</label>
-          <select
+          <select aria-label="Compression"
             value={compression}
             onChange={(e) => setCompression(e.target.value as Compression)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

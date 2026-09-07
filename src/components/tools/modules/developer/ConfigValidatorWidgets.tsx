@@ -63,7 +63,7 @@ export function DockerComposeValidator() {
   return (
     <CalculatorShell category="Developer" title="Docker Compose Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="docker-compose-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Docker Compose YAML</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+      <textarea aria-label="Docker Compose YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -106,7 +106,7 @@ export function DockerfileLinter() {
   return (
     <CalculatorShell category="Developer" title="Dockerfile Linter" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="dockerfile-lint.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Dockerfile</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+      <textarea aria-label="Dockerfile" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -148,7 +148,7 @@ export function HtaccessValidator() {
   return (
     <CalculatorShell category="Developer" title="htaccess Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="htaccess-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">htaccess Content</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+      <textarea aria-label="htaccess Content" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -188,7 +188,7 @@ export function KubernetesYamlValidator() {
   return (
     <CalculatorShell category="Developer" title="Kubernetes YAML Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="k8s-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Kubernetes YAML</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+      <textarea aria-label="Kubernetes YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -227,7 +227,7 @@ export function GithubActionsValidator() {
   return (
     <CalculatorShell category="Developer" title="GitHub Actions Validator" result={resultText} onCalculate={validate} presets={presets} accent="purple" downloadData={output} downloadFilename="github-actions-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GitHub Actions Workflow YAML</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
+      <textarea aria-label="GitHub Actions Workflow YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -328,7 +328,7 @@ export function GeoJsonValidator() {
       <Section title="GeoJSON Validator">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GeoJSON Input (RFC 7946)</label>
-          <textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
+          <textarea aria-label="GeoJSON Input (RFC 7946)" value={input} onChange={e => setInput(e.target.value)} rows={6} className={taCls} />
           <button onClick={validate} className={btnCls}>Validate GeoJSON</button>
           {output && (
             <div className="mt-4">
@@ -376,7 +376,7 @@ export function RssFeedValidator() {
   return (
     <CalculatorShell category="Developer" title="RSS Feed Validator" result={resultText} onCalculate={validate} presets={presets} accent="orange" downloadData={output} downloadFilename="rss-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">RSS/Atom XML</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+      <textarea aria-label="RSS/Atom XML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
       <button onClick={validate} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
       {output && (
@@ -416,7 +416,7 @@ export function SitemapValidator() {
   return (
     <CalculatorShell category="Developer" title="Sitemap Validator" result={resultText} onCalculate={validate} presets={presets} accent="indigo" downloadData={output} downloadFilename="sitemap-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sitemap XML</label>
-      <textarea value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
+      <textarea aria-label="Sitemap XML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -460,10 +460,10 @@ export function XpathValidator() {
     <CalculatorShell category="Developer" title="XPath Validator" result={resultText} onCalculate={validate} presets={presets} accent="violet" downloadData={output} downloadFilename="xpath-results.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
-        <input type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
+        <input aria-label="XPath Expression" type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
-        <textarea value={xml} onChange={e => setXml(e.target.value)} rows={4}
+        <textarea aria-label="XML/HTML" value={xml} onChange={e => setXml(e.target.value)} rows={4}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" placeholder="<root><div><p>text</p></div></root>" />
         {output && (
           <pre className={'p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ' + (matchCount > 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>
@@ -513,7 +513,7 @@ export function CronExpressionValidator() {
     <CalculatorShell category="Developer" title="Cron Expression Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="cron-validation.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Cron Expression</label>
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="*/5 * * * *"
+        <input aria-label="Cron Expression" type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="*/5 * * * *"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
         <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday (optional 6th: command)</p>
         {output && (

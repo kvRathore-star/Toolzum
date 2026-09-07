@@ -51,14 +51,14 @@ export default function BulkFaceAnonymizer() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Method</label>
-            <select name="method" defaultValue="blur" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select aria-label="Method" name="method" defaultValue="blur" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="blur">Gaussian Blur</option>
               <option value="pixelate">Pixelate</option>
             </select>
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Strength</label>
-            <input name="strength" type="number" defaultValue="20" min="5" max="50" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+            <input aria-label="Strength" name="strength" type="number" defaultValue="20" min="5" max="50" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
           </div>
         </div>
       }

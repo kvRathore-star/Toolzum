@@ -113,7 +113,7 @@ export default function BulkQrCodeGenerator() {
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-sm font-bold text-[var(--text-primary)]">Text or URL</label>
-              <input type="text" value={text} onChange={e => setText(e.target.value)}
+              <input aria-label="Text or URL" type="text" value={text} onChange={e => setText(e.target.value)}
                 placeholder="https://example.com"
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500" />
             </div>
@@ -134,7 +134,7 @@ export default function BulkQrCodeGenerator() {
         ) : (
           <div className="space-y-4">
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
-              <input type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+              <input aria-label="Text or URL" type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
               <FileSpreadsheet className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
               <p className="text-sm font-medium text-[var(--text-secondary)]">Upload CSV (columns: <strong>value</strong>, optional <strong>label</strong>)</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">Pro: up to {PRO_MAX} QR codes per batch</p>

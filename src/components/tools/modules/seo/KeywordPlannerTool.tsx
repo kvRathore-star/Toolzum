@@ -34,13 +34,13 @@ export default function KeywordPlannerTool() {
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Content</label>
-          <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
+          <textarea aria-label="Text Content" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
         <div className="flex gap-2 flex-wrap items-end">
           <div className="flex-1 min-w-[150px]">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Min Word Length</label>
-            <input type="number" min={2} max={10} value={String(minLength)} onChange={e => setMinLength(Number(e.target.value))}
+            <input aria-label="Min Word Length" type="number" min={2} max={10} value={String(minLength)} onChange={e => setMinLength(Number(e.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
           </div>
         </div>

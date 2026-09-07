@@ -3,14 +3,17 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: number | string; onChange: (v: any) => void; suffix?: string; small?: boolean }) => (
+const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: number | string; onChange: (v: any) => void; suffix?: string; small?: boolean }) => {
+  const id = React.useId();
+  return (
   <div className="flex items-center gap-1.5">
-    <label className="text-[10px] text-[var(--text-secondary)] w-14 shrink-0">{label}</label>
-    <input type={typeof value === 'number' ? 'number' : 'text'} value={value} onChange={e => onChange(typeof value === 'number' ? Number(e.target.value) : e.target.value)}
+    <label htmlFor={id} className="text-[10px] text-[var(--text-secondary)] w-14 shrink-0">{label}</label>
+    <input id={id} type={typeof value === 'number' ? 'number' : 'text'} value={value} onChange={e => onChange(typeof value === 'number' ? Number(e.target.value) : e.target.value)}
       className={`w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 ${small ? 'py-1 text-[11px]' : 'py-1.5 text-xs'} text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none`} />
     {suffix && <span className="text-[10px] text-[var(--text-muted)] w-5">{suffix}</span>}
   </div>
-);
+  );
+};
 
 const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
   <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
@@ -113,7 +116,7 @@ export function GlassmorphismGenerator() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <label className="text-[10px] text-[var(--text-secondary)]">Tint</label>
-            <input type="color" value={`#${bgColor.split(',').map(c => Number(c).toString(16).padStart(2, '0')).join('')}`}
+            <input aria-label="Tint" type="color" value={`#${bgColor.split(',').map(c => Number(c).toString(16).padStart(2, '0')).join('')}`}
               onChange={e => { const h = e.target.value.slice(1); setBgColor(`${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)}`); }}
               className="w-8 h-6 rounded cursor-pointer border-0" />
           </div>
@@ -207,7 +210,7 @@ export function NeumorphismGenerator() {
         <div className="space-y-2">
           <div className="flex items-center gap-2">
             <label className="text-[10px] text-[var(--text-secondary)]">Base</label>
-            <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-8 h-6 rounded cursor-pointer border-0" />
+            <input aria-label="Base" type="color" value={color} onChange={e => setColor(e.target.value)} className="w-8 h-6 rounded cursor-pointer border-0" />
           </div>
           <label className="flex items-center gap-1.5 cursor-pointer">
             <input type="checkbox" checked={inset} onChange={e => setInset(e.target.checked)} className="w-3 h-3 rounded" />
@@ -552,7 +555,6 @@ export function CssValidator() {
     const found: { line: number; severity: 'error' | 'warning' | 'info'; message: string; suggestion: string }[] = [];
 
     let braceDepth = 0;
-    let lastSelector = '';
 
     lines.forEach((line, i) => {
       const trimmed = line.trim();

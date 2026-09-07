@@ -62,7 +62,7 @@ export default function YoutubeTranscriptGenerator() {
             
 <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">YouTube Video URL</label>
-              <input
+              <input aria-label="YouTube Video URL"
                 type="text"
                 value={videoUrl}
                 onChange={e => setVideoUrl(e.target.value)}
@@ -73,7 +73,7 @@ export default function YoutubeTranscriptGenerator() {
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Detail Level</label>
-              <select
+              <select aria-label="Detail Level"
                 value={detailLevel}
                 onChange={e => setDetailLevel(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

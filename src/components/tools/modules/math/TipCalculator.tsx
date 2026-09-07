@@ -29,9 +29,9 @@ export default function TipCalculator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Tip Calculator</h2>
         <div className="flex gap-2">
-          <div><label className={labelClass}>Bill</label><Input label="Value" type="number" value={bill} onChange={setBill} /></div>
-          <div><label className={labelClass}>Tip %</label><Input label="Value" type="number" value={pct} onChange={v => setPct(Number(v))} /></div>
-          <div><label className={labelClass}>Split</label><Input label="Value" type="number" min={1} value={split} onChange={v => setSplit(Number(v))} /></div>
+          <div><label className={labelClass}>Bill</label><Input label="Bill" type="number" value={bill} onChange={setBill} /></div>
+          <div><label className={labelClass}>Tip %</label><Input label="Tip %" type="number" value={pct} onChange={v => setPct(Number(v))} /></div>
+          <div><label className={labelClass}>Split</label><Input label="Split" type="number" min={1} value={split} onChange={v => setSplit(Number(v))} /></div>
         </div>
         <div className="text-xs space-y-1">
           <div>Tip: ${tip.toFixed(2)}</div>

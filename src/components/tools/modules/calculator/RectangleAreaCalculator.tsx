@@ -37,8 +37,8 @@ export default function RectangleAreaCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Rectangle Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Length</label><input type="number" value={length} onChange={e => setLength(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width</label><input type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Length</label><input aria-label="Length" type="number" value={length} onChange={e => setLength(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width</label><input aria-label="Width" type="number" value={width} onChange={e => setWidth(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

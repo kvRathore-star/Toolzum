@@ -29,9 +29,9 @@ export default function ProportionCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Proportion Calculator" result="" auto presets={presets} accent="indigo" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input aria-label="A" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input aria-label="B (first ratio)" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input aria-label="C (solve D)" type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

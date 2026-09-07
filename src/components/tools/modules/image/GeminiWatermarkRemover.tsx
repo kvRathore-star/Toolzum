@@ -6,6 +6,7 @@ import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { withErrorHandling } from '@/lib/withErrorHandling';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
 import { useSession } from '@/lib/auth-client';
@@ -170,6 +171,11 @@ function SliderCompare({ before, after }: { before: string; after: string }) {
   }, [updatePos]);
   return (
     <div ref={containerRef} className="relative w-full h-[400px] rounded-xl overflow-hidden cursor-col-resize select-none"
+      role="slider" tabIndex={0} aria-label="Before and after comparison" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pos)}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); setPos((p) => Math.max(0, p - 5)); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); setPos((p) => Math.min(100, p + 5)); }
+      }}
       onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
       onTouchMove={(e) => updatePos(e.touches[0].clientX)}>
       <img src={after} alt="After" className="absolute inset-0 w-full h-full object-contain" />
@@ -375,7 +381,7 @@ export default function GeminiWatermarkRemover() {
       <div className="flex flex-wrap items-center gap-4 text-sm">
         <div className="flex items-center gap-2">
           <label className="text-xs text-[var(--text-secondary)]">Output:</label>
-          <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
+          <select aria-label="Output:" value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
             className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value="png">PNG</option>
             <option value="jpeg">JPG</option>
@@ -399,7 +405,11 @@ export default function GeminiWatermarkRemover() {
         <div className="space-y-4">
           {!singleImage ? (
             <div onDragOver={e => { e.preventDefault(); setIsDragging(true); }} onDragLeave={() => setIsDragging(false)} onDrop={handleDrop}
+              role="button"
+              tabIndex={0}
               onClick={() => fileRef.current?.click()}
+              onKeyDown={(e) => buttonKeyDown(e, () => fileRef.current?.click())}
+              onKeyUp={(e) => buttonKeyUp(e, () => fileRef.current?.click())}
               className={`border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer transition-all ${isDragging ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.01]' : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'}`}>
               <Upload className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
               <p className="text-[var(--text-primary)] font-medium">{isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}</p>

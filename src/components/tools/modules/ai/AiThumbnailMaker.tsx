@@ -694,7 +694,7 @@ export default function AiThumbnailMaker() {
                   <div>
                     <label className="text-[10px] text-[var(--text-muted)]">Start Color</label>
                     <div className="flex items-center gap-2 mt-1">
-                      <input 
+                      <input aria-label="Start Color" 
                         type="color" 
                         value={gradColorStart}
                         onChange={e => setGradColorStart(e.target.value)}
@@ -860,7 +860,7 @@ export default function AiThumbnailMaker() {
                   {/* Text Edit Box */}
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Value</label>
-                    <textarea 
+                    <textarea aria-label="Text Value" 
                       value={activeText.text}
                       onChange={e => handleTextPropertyChange('text', e.target.value)}
                       className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-400"
@@ -873,7 +873,7 @@ export default function AiThumbnailMaker() {
                     <div>
                       <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Color</label>
                       <div className="flex items-center gap-2 mt-1">
-                        <input 
+                        <input aria-label="Text Color" 
                           type="color" 
                           value={activeText.color}
                           onChange={e => handleTextPropertyChange('color', e.target.value)}
@@ -886,7 +886,7 @@ export default function AiThumbnailMaker() {
                     <div>
                       <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Background</label>
                       <div className="flex items-center gap-2 mt-1">
-                        <input 
+                        <input aria-label="Background" 
                           type="color" 
                           value={activeText.bgColor === 'transparent' ? '#000000' : activeText.bgColor}
                           onChange={e => handleTextPropertyChange('bgColor', e.target.value)}
@@ -909,7 +909,7 @@ export default function AiThumbnailMaker() {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Size</label>
-                      <input 
+                      <input aria-label="Font Size" 
                         type="number" min="10" max="200"
                         value={activeText.fontSize}
                         onChange={e => handleTextPropertyChange('fontSize', parseInt(e.target.value) || 20)}
@@ -918,7 +918,7 @@ export default function AiThumbnailMaker() {
                     </div>
                     <div>
                       <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Family</label>
-                      <select 
+                      <select aria-label="Font Family" 
                         value={activeText.fontFamily}
                         onChange={e => handleTextPropertyChange('fontFamily', e.target.value)}
                         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
@@ -938,7 +938,7 @@ export default function AiThumbnailMaker() {
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="text-[9px] text-[var(--text-muted)]">Outline Width</label>
-                        <input 
+                        <input aria-label="Outline Width" 
                           type="number" min="0" max="15"
                           value={activeText.strokeWidth}
                           onChange={e => handleTextPropertyChange('strokeWidth', parseInt(e.target.value) || 0)}
@@ -947,7 +947,7 @@ export default function AiThumbnailMaker() {
                       </div>
                       <div>
                         <label className="text-[9px] text-[var(--text-muted)]">Outline Color</label>
-                        <input 
+                        <input aria-label="Outline Color" 
                           type="color" 
                           value={activeText.strokeColor}
                           onChange={e => handleTextPropertyChange('strokeColor', e.target.value)}
@@ -963,7 +963,7 @@ export default function AiThumbnailMaker() {
                     <div className="grid grid-cols-2 gap-3">
                       <div>
                         <label className="text-[9px] text-[var(--text-muted)]">Shadow Blur</label>
-                        <input 
+                        <input aria-label="Shadow Blur" 
                           type="number" min="0" max="30"
                           value={activeText.shadowBlur}
                           onChange={e => handleTextPropertyChange('shadowBlur', parseInt(e.target.value) || 0)}

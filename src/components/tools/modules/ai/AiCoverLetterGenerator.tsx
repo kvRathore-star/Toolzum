@@ -66,7 +66,7 @@ export default function AiCoverLetterGenerator() {
             
 <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Job Title</label>
-              <input
+              <input aria-label="Target Job Title"
                 type="text"
                 value={jobTitle}
                 onChange={e => setJobTitle(e.target.value)}
@@ -77,7 +77,7 @@ export default function AiCoverLetterGenerator() {
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Company Name</label>
-              <input
+              <input aria-label="Company Name"
                 type="text"
                 value={company}
                 onChange={e => setCompany(e.target.value)}
@@ -88,7 +88,7 @@ export default function AiCoverLetterGenerator() {
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Job Description / Requirements (Optional)</label>
-              <textarea
+              <textarea aria-label="Job Description / Requirements (Optional)"
                 value={jobDesc}
                 onChange={e => setJobDesc(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="Paste key job responsibilities or requirements..."
@@ -98,7 +98,7 @@ export default function AiCoverLetterGenerator() {
 
             <div className="space-y-2">
               <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Skills / Experience</label>
-              <textarea
+              <textarea aria-label="Your Skills / Experience"
                 value={resumeSummary}
                 onChange={e => setResumeSummary(e.target.value)}
                 placeholder="Paste your resume summary, key achievements, or skills..."

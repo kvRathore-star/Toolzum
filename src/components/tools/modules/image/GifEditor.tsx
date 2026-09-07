@@ -266,14 +266,14 @@ export default function GifEditor() {
             <div className="flex items-center gap-2">
               <div className="flex-1">
                 <label className="text-[9px] text-[var(--text-secondary)]">Width</label>
-                <input type="number" min={1} value={resizeWidth} onChange={e => handleWidthChange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
+                <input aria-label="Width" type="number" min={1} value={resizeWidth} onChange={e => handleWidthChange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
               </div>
               <button onClick={toggleKeepAspect} className={`mt-5 p-2 rounded-lg border transition-colors ${keepAspect ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-muted)]'}`} title="Keep aspect ratio">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={keepAspect ? "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" : "M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"} /></svg>
               </button>
               <div className="flex-1">
                 <label className="text-[9px] text-[var(--text-secondary)]">Height</label>
-                <input type="number" min={1} value={keepAspect ? (typeof resizeWidth === 'number' && gifInfo ? Math.round(resizeWidth * (gifInfo.height / gifInfo.width)) : resizeHeight) : resizeHeight} onChange={e => handleHeightChange(e.target.value)} disabled={keepAspect} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] disabled:opacity-40" />
+                <input aria-label="Height" type="number" min={1} value={keepAspect ? (typeof resizeWidth === 'number' && gifInfo ? Math.round(resizeWidth * (gifInfo.height / gifInfo.width)) : resizeHeight) : resizeHeight} onChange={e => handleHeightChange(e.target.value)} disabled={keepAspect} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] disabled:opacity-40" />
               </div>
             </div>
           </div>

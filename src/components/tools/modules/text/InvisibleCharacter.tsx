@@ -118,7 +118,7 @@ export default function InvisibleCharacter() {
 
         <div className="space-y-1">
           <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Input Text (optional)</label>
-          <textarea
+          <textarea aria-label="Input Text (optional)"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Text to inject invisible chars between each character..."
@@ -153,7 +153,7 @@ export default function InvisibleCharacter() {
             )}
           </div>
           <div className="relative">
-            <textarea
+            <textarea aria-label="Invisible Sequence"
               value={showInvisible 
                 ? output.split('').map(c => INVISIBLE_CHARS.find(ic => ic.char === c) ? `[${INVISIBLE_CHARS.find(ic => ic.char === c)!.name.charAt(0).toUpperCase() + INVISIBLE_CHARS.find(ic => ic.char === c)!.name.slice(1)}]` : c).join('') 
                 : output

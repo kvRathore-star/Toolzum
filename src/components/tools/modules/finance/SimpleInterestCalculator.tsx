@@ -28,9 +28,9 @@ export default function SimpleInterestCalculator() {
       downloadFilename="simple-interest.csv"
     >
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Principal ($)</label><input className={inputCls} type="number" value={principal} onChange={e => setPrincipal(e.target.value)} /></div>
-        <div><label className={labelCls}>Rate (%)</label><input className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
-        <div><label className={labelCls}>Time (years)</label><input className={inputCls} type="number" value={time} onChange={e => setTime(e.target.value)} /></div>
+        <div><label className={labelCls}>Principal ($)</label><input aria-label="Principal ($)" className={inputCls} type="number" value={principal} onChange={e => setPrincipal(e.target.value)} /></div>
+        <div><label className={labelCls}>Rate (%)</label><input aria-label="Rate (%)" className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
+        <div><label className={labelCls}>Time (years)</label><input aria-label="Time (years)" className={inputCls} type="number" value={time} onChange={e => setTime(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

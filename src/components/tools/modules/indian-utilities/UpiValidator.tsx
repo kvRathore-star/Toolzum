@@ -176,7 +176,7 @@ export default function UpiValidator() {
             <span className="inline-flex items-center px-4 bg-[#0d9488] text-white font-bold text-lg rounded-l-xl border-2 border-r-0 border-[#0d9488]">
               @
             </span>
-            <input
+            <input aria-label="UPI ID (VPA)"
               ref={inputRef}
               type="text"
               value={upiId}
@@ -262,14 +262,14 @@ export default function UpiValidator() {
                 <label className="text-xs font-bold text-[var(--text-secondary)]">Payee Name</label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
-                  <input type="text" value={payeeName} onChange={e => setPayeeName(e.target.value)} placeholder="John Doe" className={`${inpCls} pl-9`} />
+                  <input aria-label="Payee Name" type="text" value={payeeName} onChange={e => setPayeeName(e.target.value)} placeholder="John Doe" className={`${inpCls} pl-9`} />
                 </div>
               </div>
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[var(--text-secondary)]">Amount (₹)</label>
                 <div className="relative">
                   <IndianRupee className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
-                  <input type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00" min="0" step="0.01" className={`${inpCls} pl-9`} />
+                  <input aria-label="Amount (₹)" type="number" value={amount} onChange={e => setAmount(e.target.value)} placeholder="0.00" min="0" step="0.01" className={`${inpCls} pl-9`} />
                 </div>
               </div>
             </div>

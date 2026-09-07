@@ -41,15 +41,15 @@ export default function BulkImageResizer() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Width (px)</label>
-            <input name="width" type="number" defaultValue="800" min="1" max="10000" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+            <input aria-label="Width (px)" name="width" type="number" defaultValue="800" min="1" max="10000" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Height (px)</label>
-            <input name="height" type="number" defaultValue="800" min="1" max="10000" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+            <input aria-label="Height (px)" name="height" type="number" defaultValue="800" min="1" max="10000" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
           </div>
           <div className="col-span-2">
             <label className="text-xs font-medium text-[var(--text-secondary)]">Fit Mode</label>
-            <select name="fit" defaultValue="contain" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select aria-label="Fit Mode" name="fit" defaultValue="contain" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="contain">Contain (fit inside)</option>
               <option value="cover">Cover (fill, may crop)</option>
               <option value="stretch">Stretch (exact)</option>

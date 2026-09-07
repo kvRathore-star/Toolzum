@@ -36,11 +36,11 @@ export default function MacroCalculator() {
       downloadFilename="macro-breakdown.csv"
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Daily calories</label><input className={inputCls} type="number" value={calories} onChange={e => setCalories(e.target.value)} /></div>
-        <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input className={inputCls} /></div>
-        <div><label className={labelCls}>Protein %</label><input className={inputCls} type="number" value={proteinPct} onChange={e => setProteinPct(e.target.value)} /></div>
-        <div><label className={labelCls}>Carbs %</label><input className={inputCls} type="number" value={carbsPct} onChange={e => setCarbsPct(e.target.value)} /></div>
-        <div><label className={labelCls}>Fat %</label><input className={inputCls} type="number" value={fatPct} onChange={e => setFatPct(e.target.value)} /></div>
+        <div><label className={labelCls}>Daily calories</label><input aria-label="Daily calories" className={inputCls} type="number" value={calories} onChange={e => setCalories(e.target.value)} /></div>
+        <div className="opacity-0 pointer-events-none"><label className={labelCls}>_</label><input aria-label="_" className={inputCls} /></div>
+        <div><label className={labelCls}>Protein %</label><input aria-label="Protein %" className={inputCls} type="number" value={proteinPct} onChange={e => setProteinPct(e.target.value)} /></div>
+        <div><label className={labelCls}>Carbs %</label><input aria-label="Carbs %" className={inputCls} type="number" value={carbsPct} onChange={e => setCarbsPct(e.target.value)} /></div>
+        <div><label className={labelCls}>Fat %</label><input aria-label="Fat %" className={inputCls} type="number" value={fatPct} onChange={e => setFatPct(e.target.value)} /></div>
       </div>
       <div className="flex gap-3 mt-3">
         <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setCalories('2000'); setProteinPct('30'); setCarbsPct('40'); setFatPct('30'); }}>Balanced</button>

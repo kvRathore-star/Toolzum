@@ -219,7 +219,7 @@ export default function AiSocialCaption() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
         <div className="space-y-2">
           <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">What is your post about?</label>
-          <textarea
+          <textarea aria-label="What is your post about?"
             value={topic}
             onChange={e => setTopic(e.target.value)}
             placeholder="Describe your post topic, product, or idea..."

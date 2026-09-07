@@ -421,7 +421,7 @@ export function JsonRpcBuilder() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON-RPC Builder</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Method</label>
-          <input type="text" value={method} onChange={e => setMethod(e.target.value)} placeholder="method.name"
+          <input aria-label="Method" type="text" value={method} onChange={e => setMethod(e.target.value)} placeholder="method.name"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>

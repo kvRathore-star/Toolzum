@@ -35,14 +35,15 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
+  const id = React.useId();
   const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
       {rows ? (
-        <textarea className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <textarea id={id} className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       ) : (
-        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <input id={id} className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       )}
     </div>
   );
@@ -80,10 +81,11 @@ function Output({ value, label }: { value: string; label?: string }) {
 function Select({ label, value, onChange, options }: {
   label: string; value: string; onChange: (v: string) => void; options: { value: string; label: string }[];
 }) {
+  const id = React.useId();
   return (
     <div className="mb-3">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
-      <select value={value} onChange={e => onChange(e.target.value)}
+      <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      <select id={id} value={value} onChange={e => onChange(e.target.value)}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>

@@ -151,7 +151,7 @@ export function DiceRollerTool() {
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Dice Roller (Custom)</h2>
       <div className="flex gap-3 items-center">
         <label className="text-sm">Sides:</label>
-        <Input label="Value" type="number" min={2} max={100} value={sides} onChange={v => setSides(Number(v))} />
+        <Input label="Sides:" type="number" min={2} max={100} value={sides} onChange={v => setSides(Number(v))} />
         <button className={btnClass(clr)} onClick={roll}>Roll</button>
       </div>
       {result !== null && <div className="text-5xl font-bold text-center text-blue-600">{result}</div>}

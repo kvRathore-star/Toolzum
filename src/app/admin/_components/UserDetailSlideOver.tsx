@@ -63,14 +63,18 @@ export function UserDetailSlideOver({
   if (!userDetail && !loading) return null;
 
   return (
-    <div className="fixed inset-0 z-40 flex justify-end" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in" />
+    <div className="fixed inset-0 z-40 flex justify-end">
+      <button
+        aria-label="Close user detail"
+        onClick={onClose}
+        tabIndex={-1}
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in cursor-default"
+      />
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="user-detail-title"
         className="relative bg-[var(--bg-base)] w-full max-w-2xl border-l border-[var(--border-subtle)] overflow-y-auto shadow-2xl animate-slide-in-right"
-        onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]/95 backdrop-blur-xl">
           <h2 id="user-detail-title" className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
@@ -217,8 +221,14 @@ export function UserDetailSlideOver({
       </div>
 
       {showDeleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm" onClick={() => setShowDeleteConfirm(false)}>
-          <div role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <button
+            aria-label="Cancel delete"
+            onClick={() => setShowDeleteConfirm(false)}
+            tabIndex={-1}
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm cursor-default"
+          />
+          <div role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-xl">
                 <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />

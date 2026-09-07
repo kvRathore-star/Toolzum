@@ -184,7 +184,7 @@ export default function RedactPdf() {
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
               Page Range
             </label>
-            <input
+            <input aria-label="Page Range"
               type="text"
               placeholder={mode === 'pages' ? 'e.g. 1, 3, 5-10' : 'e.g. 1-5'}
               value={pageRange}
@@ -202,7 +202,7 @@ export default function RedactPdf() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="text-[10px] text-[var(--text-secondary)]">X (from left)</label>
-                  <input
+                  <input aria-label="X (from left)"
                     type="number"
                     value={area.x}
                     onChange={(e) => setArea(a => ({...a, x: parseInt(e.target.value) || 0}))}
@@ -211,7 +211,7 @@ export default function RedactPdf() {
                 </div>
                 <div>
                   <label className="text-[10px] text-[var(--text-secondary)]">Y (from bottom)</label>
-                  <input
+                  <input aria-label="Y (from bottom)"
                     type="number"
                     value={area.y}
                     onChange={(e) => setArea(a => ({...a, y: parseInt(e.target.value) || 0}))}
@@ -220,7 +220,7 @@ export default function RedactPdf() {
                 </div>
                 <div>
                   <label className="text-[10px] text-[var(--text-secondary)]">Width</label>
-                  <input
+                  <input aria-label="Width"
                     type="number"
                     value={area.w}
                     onChange={(e) => setArea(a => ({...a, w: parseInt(e.target.value) || 0}))}
@@ -229,7 +229,7 @@ export default function RedactPdf() {
                 </div>
                 <div>
                   <label className="text-[10px] text-[var(--text-secondary)]">Height</label>
-                  <input
+                  <input aria-label="Height"
                     type="number"
                     value={area.h}
                     onChange={(e) => setArea(a => ({...a, h: parseInt(e.target.value) || 0}))}

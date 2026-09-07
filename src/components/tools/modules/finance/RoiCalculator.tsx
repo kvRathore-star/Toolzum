@@ -40,11 +40,11 @@ export default function RoiCalculator() {
       <div className="space-y-4">
         <div>
           <label className={labelCls}>Initial Investment ($)</label>
-          <input className={inputCls} type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Initial Investment ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
           <label className={labelCls}>Final Value ($)</label>
-          <input className={inputCls} type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input aria-label="Final Value ($)" className={inputCls} type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
       </div>
     </CalculatorShell>

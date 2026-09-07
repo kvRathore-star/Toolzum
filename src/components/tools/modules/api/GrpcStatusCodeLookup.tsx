@@ -38,7 +38,7 @@ export default function GrpcStatusCodeLookup() {
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2">
             <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Code</label>
-            <input type="number" value={code} onChange={e => setCode(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <input aria-label="Code" type="number" value={code} onChange={e => setCode(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div className="flex items-end">
             <button onClick={() => setResult(codes[code]?.name || '')} className="w-full bg-stone-600 hover:bg-stone-500 text-white font-bold py-2 rounded-lg text-xs transition-all">Lookup</button>

@@ -68,15 +68,15 @@ export default function LtvCalculator() {
         <div className="space-y-4">
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average Order Value ($)</label>
-            <input type="number" value={aov} onChange={e => setAov(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <input aria-label="Average Order Value ($)" type="number" value={aov} onChange={e => setAov(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Purchase Frequency (per year)</label>
-            <input type="number" value={frequency} onChange={e => setFrequency(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <input aria-label="Purchase Frequency (per year)" type="number" value={frequency} onChange={e => setFrequency(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Customer Lifespan (Years)</label>
-            <input type="number" value={lifespan} onChange={e => setLifespan(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <input aria-label="Customer Lifespan (Years)" type="number" value={lifespan} onChange={e => setLifespan(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
         </div>
 

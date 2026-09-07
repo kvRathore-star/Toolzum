@@ -176,7 +176,7 @@ export default function VideoCompressor() {
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Compression Level</label>
                   <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crf === 23 ? 'High Quality' : crf >= 32 ? 'Low Quality' : 'Balanced'} (CRF {crf})</span>
                 </div>
-                <input
+                <input aria-label="Compression Level"
                   type="range" min="20" max="40" step="1" value={crf}
                   onChange={(e) => setCrf(parseInt(e.target.value))}
                   disabled={isProcessing}
@@ -196,7 +196,7 @@ export default function VideoCompressor() {
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Color Palette</label>
                   <span className="text-xs font-bold text-pink-500">{colors} colors</span>
                 </div>
-                <input
+                <input aria-label="Color Palette"
                   type="range" min="32" max="256" step="1" value={parseInt(colors)}
                   onChange={(e) => setColors(e.target.value)}
                   disabled={isProcessing}

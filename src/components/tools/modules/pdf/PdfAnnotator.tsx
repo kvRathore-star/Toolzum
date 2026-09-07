@@ -172,14 +172,14 @@ export default function PdfAnnotator() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-[var(--text-secondary)]">Hex:</span>
-              <input type="text" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}
+              <input aria-label="Color" type="text" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}
                 className="flex-1 px-2 py-1 text-xs font-mono border border-[var(--border-subtle)] bg-white dark:bg-[var(--bg-surface)] rounded-lg text-zinc-900 dark:text-zinc-100" placeholder="#FF0000" />
               <div className="w-7 h-7 rounded border border-zinc-300 dark:border-zinc-600" style={{ backgroundColor: selectedColor }} />
             </div>
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Opacity: {selectedOpacity.toFixed(1)}</label>
-            <input type="range" min="0.1" max="1" step="0.1" value={selectedOpacity}
+            <input type="range" min="0.1" max="1" step="0.1" value={selectedOpacity} aria-label={`Opacity: ${selectedOpacity.toFixed(1)}`}
               onChange={(e) => setSelectedOpacity(parseFloat(e.target.value))} className="w-full accent-blue-600" />
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -191,7 +191,7 @@ export default function PdfAnnotator() {
             ].map((f) => (
               <div key={f.label}>
                 <label className="text-xs text-[var(--text-secondary)] font-medium mb-1 block">{f.label}</label>
-                <input type="number" value={f.val} onChange={(e) => f.set(parseInt(e.target.value) || 0)}
+                <input type="number" value={f.val} aria-label={f.label} onChange={(e) => f.set(parseInt(e.target.value) || 0)}
                   className="w-full px-2 py-1.5 text-xs border border-[var(--border-subtle)] bg-white dark:bg-[var(--bg-surface)] rounded-lg text-zinc-900 dark:text-zinc-100" />
               </div>
             ))}

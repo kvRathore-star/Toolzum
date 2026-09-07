@@ -94,13 +94,13 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
         <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-        <input type="number" value={value} onChange={e => setValue(e.target.value)}
+        <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-          <select value={from} onChange={e => setFrom(e.target.value)}
+          <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
@@ -110,7 +110,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
         </button>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
-          <select value={to} onChange={e => setTo(e.target.value)}
+          <select aria-label="To" value={to} onChange={e => setTo(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>

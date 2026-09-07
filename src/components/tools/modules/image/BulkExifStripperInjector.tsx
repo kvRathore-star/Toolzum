@@ -23,7 +23,7 @@ export default function BulkExifStripperInjector() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Mode</label>
-          <select name="mode" defaultValue="strip" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+          <select aria-label="Mode" name="mode" defaultValue="strip" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
             <option value="strip">Strip All Metadata</option>
             <option value="inject">Re-encode (strips EXIF, preserves pixels)</option>
           </select>

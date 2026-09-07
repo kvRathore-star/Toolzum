@@ -59,7 +59,7 @@ export default function MacAddressGenerator() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <label className="text-[10px] text-[var(--text-muted)] font-bold">Quantity</label>
-              <select value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <select aria-label="Quantity" value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="5">5 Addresses</option>
                 <option value="10">10 Addresses</option>
                 <option value="20">20 Addresses</option>
@@ -68,7 +68,7 @@ export default function MacAddressGenerator() {
             
             <div className="space-y-1">
               <label className="text-[10px] text-[var(--text-muted)] font-bold">Delimiter</label>
-              <select value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <select aria-label="Delimiter" value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value=":">Colon (:)</option>
                 <option value="-">Hyphen (-)</option>
                 <option value="">None</option>
@@ -78,11 +78,11 @@ export default function MacAddressGenerator() {
 
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold">OUI Prefix (e.g. 00:50:56 for VMware)</label>
-            <input type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <input aria-label="OUI Prefix (e.g. 00:50:56 for VMware)" type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <div className="flex items-center gap-1.5 pt-2">
-            <input type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
+            <input aria-label="OUI Prefix (e.g. 00:50:56 for VMware)" type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
             <label className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
           </div>
 
@@ -98,7 +98,7 @@ export default function MacAddressGenerator() {
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">MAC Addresses</span>
               {list.length > 0 && <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy all MAC addresses"><Copy className="w-4 h-4" /></button>}
             </div>
-            <textarea readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 h-48 resize-none mt-2" />
+            <textarea aria-label="Uppercase Hex Letters" readOnly value={list.join('\n')} placeholder="Addresses will appear here..." className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-300 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 h-48 resize-none mt-2" />
           </div>
         </div>
       </div>

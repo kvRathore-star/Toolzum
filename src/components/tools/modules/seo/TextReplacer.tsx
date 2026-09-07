@@ -20,13 +20,13 @@ export default function TextReplacer() {
     <CalculatorShell category="SEO" title="Text Replacer" result={resultText} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-        <textarea value={text} onChange={e => { setText(e.target.value); setResult(''); }} rows={6} placeholder="Enter text..."
+        <textarea aria-label="Text" value={text} onChange={e => { setText(e.target.value); setResult(''); }} rows={6} placeholder="Enter text..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Find</label>
-            <input type="text" value={find} onChange={e => setFind(e.target.value)} placeholder="Text to find"
+            <input aria-label="Find" type="text" value={find} onChange={e => setFind(e.target.value)} placeholder="Text to find"
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
           </div>
           <div>

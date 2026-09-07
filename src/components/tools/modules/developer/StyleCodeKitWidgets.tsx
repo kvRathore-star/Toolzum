@@ -599,12 +599,12 @@ export function StringTemplateTester() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">String Template Tester</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Template</label>
-          <input type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
+          <input aria-label="Template" type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Variables (JSON)</label>
-          <textarea rows={3} value={vars} onChange={e => setVars(e.target.value)}
+          <textarea aria-label="Variables (JSON)" rows={3} value={vars} onChange={e => setVars(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={test} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Test</button>

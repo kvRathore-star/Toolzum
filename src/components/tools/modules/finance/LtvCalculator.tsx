@@ -28,8 +28,8 @@ export default function LtvCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">ARPU ($)</label><input type="number" value={arpu} onChange={e => setArpu(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Rate (%)</label><input type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">ARPU ($)</label><input aria-label="ARPU ($)" type="number" value={arpu} onChange={e => setArpu(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Rate (%)</label><input aria-label="Churn Rate (%)" type="number" value={churn} onChange={e => setChurn(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

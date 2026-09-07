@@ -181,7 +181,7 @@ export default function GifResizer() {
 
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (px)</label>
-              <input
+              <input aria-label="Width (px)"
                 type="number"
                 min="1"
                 value={width}
@@ -207,7 +207,7 @@ export default function GifResizer() {
 
             <div>
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (px)</label>
-              <input
+              <input aria-label="Height (px)"
                 type="number"
                 min="1"
                 value={height}

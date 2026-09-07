@@ -45,7 +45,7 @@ export default function ApiMockDataGenerator() {
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Schema (JSON)</label>
-          <textarea value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <textarea aria-label="Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>

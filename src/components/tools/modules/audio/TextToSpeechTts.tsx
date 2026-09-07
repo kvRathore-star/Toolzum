@@ -193,7 +193,7 @@ export default function TextToSpeechTts() {
                <label className="text-sm font-bold text-[var(--text-secondary)]">Speech Rate</label>
                <span className="text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded">{rate.toFixed(1)}x</span>
              </div>
-             <input
+             <input aria-label="Speech Rate"
                type="range"
                min="0.5"
                max="2"
@@ -213,7 +213,7 @@ export default function TextToSpeechTts() {
                <label className="text-sm font-bold text-[var(--text-secondary)]">Voice Pitch</label>
                <span className="text-xs font-bold bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-2 py-1 rounded">{pitch.toFixed(1)}</span>
              </div>
-             <input
+             <input aria-label="Voice Pitch"
                type="range"
                min="0"
                max="2"

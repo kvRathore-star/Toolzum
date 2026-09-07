@@ -40,17 +40,17 @@ export function OauthClientSetup() {
         <div className="space-y-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Client ID</label>
-            <input type="text" value={clientId} onChange={e => setClientId(e.target.value)} placeholder="your-client-id"
+            <input aria-label="Client ID" type="text" value={clientId} onChange={e => setClientId(e.target.value)} placeholder="your-client-id"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Redirect URI</label>
-            <input type="text" value={redirectUri} onChange={e => setRedirectUri(e.target.value)} placeholder="https://yourapp.com/callback"
+            <input aria-label="Redirect URI" type="text" value={redirectUri} onChange={e => setRedirectUri(e.target.value)} placeholder="https://yourapp.com/callback"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Scope</label>
-            <input type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="openid profile email"
+            <input aria-label="Scope" type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="openid profile email"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
@@ -100,12 +100,12 @@ export function PkceVerifier() {
         <div className="space-y-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_verifier</label>
-            <textarea rows={2} value={verifier} onChange={e => setVerifier(e.target.value)} placeholder="Paste or generate..."
+            <textarea aria-label="code_verifier" rows={2} value={verifier} onChange={e => setVerifier(e.target.value)} placeholder="Paste or generate..."
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_challenge (S256)</label>
-            <input type="text" value={challenge} onChange={e => setChallenge(e.target.value)}
+            <input aria-label="code_challenge (S256)" type="text" value={challenge} onChange={e => setChallenge(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>

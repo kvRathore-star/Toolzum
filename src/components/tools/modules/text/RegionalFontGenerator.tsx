@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Type, Copy, Check, RefreshCw, Star, Heart, Sparkles, Search, Grid3X3 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { buttonKeyDown, buttonKeyUp } from "@/components/buttonKeys";
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SYMBOL_WRAPPERS = [
@@ -147,7 +148,7 @@ export default function RegionalFontGenerator() {
             Enter Input Text (English or Unicode Script)
           </label>
           <div className="relative">
-            <input
+            <input aria-label="Enter Input Text (English or Unicode Script)"
               type="text"
               placeholder="e.g. जय हिन्द or Royal King"
               value={inputText}
@@ -206,6 +207,11 @@ export default function RegionalFontGenerator() {
                       className="group relative p-4 rounded-xl border transition-all duration-200 cursor-pointer"
                       style={{ borderColor: isCopied ? '#9333ea' : 'var(--border-subtle)', backgroundColor: isCopied ? '#9333ea08' : 'var(--bg-overlay)' }}
                       onClick={() => handleCopy(item.output, item.id)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Copy ${item.output}`}
+                      onKeyDown={(e) => buttonKeyDown(e, () => handleCopy(item.output, item.id))}
+                      onKeyUp={(e) => buttonKeyUp(e, () => handleCopy(item.output, item.id))}
                       whileHover={{ y: -2, boxShadow: '0 8px 25px rgba(147,51,234,0.12)' }}
                     >
                       <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">

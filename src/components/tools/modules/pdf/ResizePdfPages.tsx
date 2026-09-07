@@ -191,6 +191,7 @@ export default function ResizePdfPages() {
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Width ({unit})</label>
                   <input
                     type="number"
+                    aria-label={`Width (${unit})`}
                     min={1}
                     max={5000}
                     value={customWidth}
@@ -202,6 +203,7 @@ export default function ResizePdfPages() {
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Height ({unit})</label>
                   <input
                     type="number"
+                    aria-label={`Height (${unit})`}
                     min={1}
                     max={5000}
                     value={customHeight}

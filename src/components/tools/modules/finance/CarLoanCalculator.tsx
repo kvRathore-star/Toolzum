@@ -39,9 +39,9 @@ export default function CarLoanCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Amount ($)</label><input type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Interest Rate (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Term (years)</label><input type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Amount ($)</label><input aria-label="Loan Amount ($)" type="number" value={loan} onChange={e => setLoan(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Interest Rate (%)</label><input aria-label="Interest Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Loan Term (years)</label><input aria-label="Loan Term (years)" type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

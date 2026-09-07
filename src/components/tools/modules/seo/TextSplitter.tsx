@@ -22,7 +22,7 @@ export default function TextSplitter() {
   return (
     <CalculatorShell category="SEO" title="Text Splitter" result={resultText} onCalculate={split} presets={presets} accent="violet" downloadData={result} downloadFilename="split.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to split..."
+      <textarea aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to split..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Delimiter</label>

@@ -222,7 +222,7 @@ export default function MuteVideo() {
                     <audio ref={audioRef} src={URL.createObjectURL(audioFile)} controls className="w-full h-10" />
                     <div className="flex items-center justify-between p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800/30">
                       <span className="text-xs text-amber-700 dark:text-amber-400">Sync Mode</span>
-                      <select
+                      <select aria-label="Replacement Audio"
                         value={syncMode}
                         onChange={(e) => setSyncMode(e.target.value as 'shortest' | 'first')}
                         className="text-xs bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -242,7 +242,7 @@ export default function MuteVideo() {
                   <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Volume Level</label>
                   <span className="text-lg font-bold text-amber-500">{volume}%</span>
                 </div>
-                <input
+                <input aria-label="Volume Level"
                   type="range"
                   min="0"
                   max="200"

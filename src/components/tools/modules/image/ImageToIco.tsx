@@ -271,14 +271,14 @@ export default function ImageToIco() {
           {!squareCrop && (
             <div>
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Background Color</label>
-              <input
+              <input aria-label="Background Color"
                 type="color"
                 value={bgColor === '#ffffff00' ? '#ffffff' : bgColor}
                 onChange={(e) => setBgColor(e.target.value)}
                 className="w-full h-10 rounded-lg border border-[var(--border-subtle)] cursor-pointer"
               />
               <div className="flex items-center gap-2 mt-2">
-                <input
+                <input aria-label="Background Color"
                   type="checkbox"
                   id="transparentBg"
                   checked={bgColor === '#ffffff00'}

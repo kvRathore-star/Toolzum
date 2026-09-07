@@ -36,11 +36,11 @@ export default function FractionCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Fraction Calculator" result="" auto presets={presets} accent="rose" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 1</label><input type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Operation</label><select value={op} onChange={e => setOp(e.target.value)} className={inputCls}>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 1</label><input aria-label="Fraction 1" type="text" value={frac1} onChange={e => setFrac1(e.target.value)} placeholder="1/2" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Operation</label><select aria-label="Operation" value={op} onChange={e => setOp(e.target.value)} className={inputCls}>
           <option value="+">+</option><option value="-">-</option><option value="*">×</option><option value="/">÷</option>
         </select></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 2</label><input type="text" value={frac2} onChange={e => setFrac2(e.target.value)} placeholder="1/3" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Fraction 2</label><input aria-label="Fraction 2" type="text" value={frac2} onChange={e => setFrac2(e.target.value)} placeholder="1/3" className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

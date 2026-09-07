@@ -250,7 +250,7 @@ export default function GifToWebpWebm() {
                 <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   Loop Count <span className="text-[var(--text-muted)]">(0 = infinite)</span>
                 </label>
-                <input
+                <input aria-label="Loop Count (0 = infinite)"
                   type="number"
                   min="0"
                   max="1000"

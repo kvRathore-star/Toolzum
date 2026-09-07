@@ -344,7 +344,7 @@ export default function AudioMerger() {
               <label className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">Crossfade</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crossfade}s</span>
             </div>
-            <input
+            <input aria-label="Crossfade"
               type="range"
               min={0}
               max={10}

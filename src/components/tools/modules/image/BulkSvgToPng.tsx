@@ -35,7 +35,7 @@ export default function BulkSvgToPng() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Scale Factor</label>
-          <select name="scale" defaultValue="2" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+          <select aria-label="Scale Factor" name="scale" defaultValue="2" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
             <option value="1">1× (original size)</option>
             <option value="2">2× (retina, default)</option>
             <option value="3">3× (ultra HD)</option>

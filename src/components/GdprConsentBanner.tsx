@@ -27,10 +27,19 @@ export function GdprConsentBanner() {
     setVisible(false);
   };
 
+  useEffect(() => {
+    if (!visible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') decline();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [visible]);
+
   if (!visible) return null;
 
   return (
-    <div role="dialog" aria-modal="true" aria-labelledby="gdpr-title" className="fixed bottom-0 left-0 right-0 z-[9999] bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] shadow-2xl">
+    <div role="region" aria-label="Cookie consent" className="fixed bottom-0 left-0 right-0 z-[9999] bg-[var(--bg-elevated)] border-t border-[var(--border-subtle)] shadow-2xl">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="flex items-start gap-3 flex-1">
           <Cookie className="w-5 h-5 text-[var(--text-muted)] shrink-0 mt-0.5" />

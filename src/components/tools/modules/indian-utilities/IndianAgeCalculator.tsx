@@ -115,7 +115,7 @@ export default function IndianAgeCalculator() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Day</label>
-                <select
+                <select aria-label="Day"
                   value={day}
                   onChange={e => setDay(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -128,7 +128,7 @@ export default function IndianAgeCalculator() {
 
               <div>
                 <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Month</label>
-                <select
+                <select aria-label="Month"
                   value={month}
                   onChange={e => setMonth(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -141,7 +141,7 @@ export default function IndianAgeCalculator() {
 
               <div>
                 <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Year</label>
-                <select
+                <select aria-label="Year"
                   value={year}
                   onChange={e => setYear(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -156,7 +156,7 @@ export default function IndianAgeCalculator() {
 
           <div className="space-y-2">
             <label className="block text-sm font-bold text-[var(--text-primary)]">Target Date (Defaults to Today)</label>
-            <input
+            <input aria-label="Target Date (Defaults to Today)"
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}

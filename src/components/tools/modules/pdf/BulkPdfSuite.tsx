@@ -171,7 +171,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           )}
           <div className="flex items-center gap-2">
             <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Operation</label>
-            <select name="op" defaultValue={currentOp} className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select aria-label="Operation" name="op" defaultValue={currentOp} className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               {OPERATIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
             </select>
           </div>
@@ -180,7 +180,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           {currentOp === 'rotate' && (
             <div className="flex items-center gap-2">
               <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Degrees</label>
-              <select name="degrees" defaultValue="90" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+              <select aria-label="Degrees" name="degrees" defaultValue="90" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
                 <option value="90">90° clockwise</option>
                 <option value="-90">90° counter-clockwise</option>
                 <option value="180">180°</option>
@@ -195,11 +195,11 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
             <>
               <div className="flex items-center gap-2">
                 <label className="text-xs font-medium text-[var(--text-secondary)] w-24">User Password</label>
-                <input name="userPassword" type="password" placeholder="Optional" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="User Password" name="userPassword" type="password" placeholder="Optional" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
               <div className="flex items-center gap-2">
                 <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Owner Password</label>
-                <input name="ownerPassword" type="password" placeholder="Required" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Owner Password" name="ownerPassword" type="password" placeholder="Required" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
             </>
           )}
@@ -208,7 +208,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           {currentOp === 'unlock' && (
             <div className="flex items-center gap-2">
               <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Password</label>
-              <input name="password" type="password" placeholder="Enter document password" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+              <input aria-label="Password" name="password" type="password" placeholder="Enter document password" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
             </div>
           )}
 
@@ -216,7 +216,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           {currentOp === 'remove-pages' && (
             <div className="flex items-center gap-2">
               <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Page Range</label>
-              <input name="range" placeholder="e.g. 1-3, 5, 7-9" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+              <input aria-label="Page Range" name="range" placeholder="e.g. 1-3, 5, 7-9" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
             </div>
           )}
 
@@ -224,7 +224,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           {currentOp === 'split' && (
             <div className="flex items-center gap-2">
               <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Pages Per File</label>
-              <input name="pagesPerFile" type="number" min="1" defaultValue="1" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+              <input aria-label="Pages Per File" name="pagesPerFile" type="number" min="1" defaultValue="1" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
             </div>
           )}
 
@@ -232,7 +232,7 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
           {currentOp === 'watermark' && (
             <div className="flex items-center gap-2">
               <label className="text-xs font-medium text-[var(--text-secondary)] w-24">Text</label>
-              <input name="watermarkText" placeholder="WATERMARK" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+              <input aria-label="Text" name="watermarkText" placeholder="WATERMARK" className="flex-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
             </div>
           )}
 
@@ -241,19 +241,19 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Top (pts)</label>
-                <input name="cropTop" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Top (pts)" name="cropTop" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Right (pts)</label>
-                <input name="cropRight" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Right (pts)" name="cropRight" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Bottom (pts)</label>
-                <input name="cropBottom" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Bottom (pts)" name="cropBottom" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Left (pts)</label>
-                <input name="cropLeft" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Left (pts)" name="cropLeft" type="number" min="0" defaultValue="0" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
             </div>
           )}
@@ -263,11 +263,11 @@ export default function BulkPdfSuite({ defaultConfig: extraConfig }: { defaultCo
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Width (pts)</label>
-                <input name="resizeWidth" type="number" min="10" defaultValue="595" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Width (pts)" name="resizeWidth" type="number" min="10" defaultValue="595" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
               <div>
                 <label className="text-xs font-medium text-[var(--text-secondary)]">Height (pts)</label>
-                <input name="resizeHeight" type="number" min="10" defaultValue="842" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+                <input aria-label="Height (pts)" name="resizeHeight" type="number" min="10" defaultValue="842" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
               </div>
             </div>
           )}

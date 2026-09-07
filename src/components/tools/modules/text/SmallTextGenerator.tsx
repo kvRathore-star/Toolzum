@@ -67,7 +67,7 @@ export default function SmallTextGenerator() {
 
         <div className="space-y-1">
           <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
-          <textarea
+          <textarea aria-label="Your Text"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type or paste your text here..."
@@ -97,7 +97,7 @@ export default function SmallTextGenerator() {
             {output && <span className="text-xs text-[var(--text-muted)]">{output.length} chars</span>}
           </div>
           <div className="relative">
-            <textarea
+            <textarea aria-label="Output"
               value={output}
               readOnly
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] h-28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm break-all"

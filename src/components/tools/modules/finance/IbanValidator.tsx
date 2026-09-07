@@ -26,7 +26,7 @@ export default function IbanValidator() {
         <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">International Bank Account Number (IBAN)</label>
-            <input 
+            <input aria-label="International Bank Account Number (IBAN)" 
               type="text" 
               value={iban} 
               onChange={e => {

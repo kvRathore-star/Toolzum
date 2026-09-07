@@ -164,7 +164,7 @@ export default function AiFaceSwap() {
                   <Upload className="w-6 h-6 text-[var(--text-muted)] mb-1" />
                 )}
                 <span className="text-[10px] text-[var(--text-muted)] mt-1">{sourceImg ? "Ready" : "Upload"}</span>
-                <input type="file" accept="image/*" onChange={handleSourceUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+                <input aria-label="Source Face" type="file" accept="image/*" onChange={handleSourceUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
               </div>
             </div>
 

@@ -444,7 +444,7 @@ export function PxRemConverter() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-            <input type="text" value={value} onChange={e => setValue(e.target.value)}
+            <input aria-label="Value" type="text" value={value} onChange={e => setValue(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
@@ -560,20 +560,20 @@ export function SpeedConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Speed Converter</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input type="number" value={value} onChange={e => setValue(e.target.value)}
+          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-            <select value={from} onChange={e => setFrom(e.target.value)}
+            <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
-            <select value={to} onChange={e => setTo(e.target.value)}
+            <select aria-label="To" value={to} onChange={e => setTo(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
@@ -631,20 +631,20 @@ export function PowerConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Power Converter</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input type="number" value={value} onChange={e => setValue(e.target.value)}
+          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-            <select value={from} onChange={e => setFrom(e.target.value)}
+            <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
-            <select value={to} onChange={e => setTo(e.target.value)}
+            <select aria-label="To" value={to} onChange={e => setTo(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
@@ -702,20 +702,20 @@ export function PressureConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Pressure Converter</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input type="number" value={value} onChange={e => setValue(e.target.value)}
+          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-            <select value={from} onChange={e => setFrom(e.target.value)}
+            <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
-            <select value={to} onChange={e => setTo(e.target.value)}
+            <select aria-label="To" value={to} onChange={e => setTo(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {Object.entries(LABELS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>

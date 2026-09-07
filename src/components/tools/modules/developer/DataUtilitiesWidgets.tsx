@@ -103,11 +103,11 @@ export function JsonPathQueryBuilder() {
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">JSON Data</label>
-          <textarea value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
+          <textarea aria-label="JSON Data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
         </div>
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">JSON Path</label>
-          <input value={path} onChange={e => setPath(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="$.users[*].name" />
+          <input aria-label="JSON Path" value={path} onChange={e => setPath(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="$.users[*].name" />
         </div>
         <button onClick={query} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Execute</button>
         {result && (
@@ -152,7 +152,7 @@ export function JsonTreeViewer() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
-        <textarea value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
+        <textarea aria-label="Result" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         {parsed && (
           <div>

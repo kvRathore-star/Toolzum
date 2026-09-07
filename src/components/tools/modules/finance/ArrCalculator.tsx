@@ -36,9 +36,9 @@ export default function ArrCalculator() {
   return (
     <CalculatorShell category="Finance" title="ARR Calculator" result={result} auto presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Subscription Revenue ($)</label><input type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Expansion Revenue ($)</label><input type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Revenue ($)</label><input type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Subscription Revenue ($)</label><input aria-label="Subscription Revenue ($)" type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Expansion Revenue ($)</label><input aria-label="Expansion Revenue ($)" type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Revenue ($)</label><input aria-label="Churn Revenue ($)" type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputCls} /></div>
       </div>
       <div className="space-y-2">
         {hasInput && bars.map(bar => (

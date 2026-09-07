@@ -45,7 +45,7 @@ export function HtmlLinter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HTML Linter</h2>
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">HTML</label>
-          <textarea value={htmlInput} onChange={e => setHtmlInput(e.target.value)} placeholder="Paste HTML..."
+          <textarea aria-label="HTML" value={htmlInput} onChange={e => setHtmlInput(e.target.value)} placeholder="Paste HTML..."
             className="w-full h-32 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
         </div>
         <button onClick={lintHtml} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Lint HTML</button>
@@ -88,7 +88,7 @@ export function XmlMinifierValidator() {
         </div>
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">XML content</label>
-          <textarea value={xmlInput} onChange={e => setXmlInput(e.target.value)} placeholder="Paste XML..."
+          <textarea aria-label="XML content" value={xmlInput} onChange={e => setXmlInput(e.target.value)} placeholder="Paste XML..."
             className="w-full h-32 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
         </div>
         <button onClick={process} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Process</button>

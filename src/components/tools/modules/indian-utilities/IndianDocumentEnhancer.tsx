@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Upload, Download, Sliders, RotateCcw, Sun, Contrast, Crop, FileImage, ImagePlus, ZoomIn, ZoomOut, RefreshCw, Check, Sparkles, Palette, FileText, ArrowLeft, ArrowRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const DOCUMENT_TYPES = [
@@ -222,7 +223,11 @@ export default function IndianDocumentEnhancer() {
               style={{ borderColor: '#47556940' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = '#475569'}
               onMouseLeave={e => e.currentTarget.style.borderColor = '#47556940'}
-              onClick={() => fileInputRef.current?.click()}>
+              role="button"
+              tabIndex={0}
+              onClick={() => fileInputRef.current?.click()}
+              onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
+              onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}>
               <ImagePlus className="w-16 h-16 mx-auto mb-4" style={{ color: '#47556980' }} />
               <p className="text-lg font-semibold text-[var(--text-secondary)]">Upload a document photo</p>
               <p className="text-xs text-[var(--text-muted)] mt-2">Aadhaar, PAN, Marksheet, Passport, Bank Statement, Driving Licence, Voter ID</p>
@@ -265,19 +270,19 @@ export default function IndianDocumentEnhancer() {
                   
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brightness</span><span className="font-mono">{(brightness * 100).toFixed(0)}%</span></label>
-                    <input type="range" min="-50" max="50" value={brightness} onChange={e => setBrightness(Number(e.target.value))}
+                    <input type="range" min="-50" max="50" value={brightness} aria-label="Brightness" onChange={e => setBrightness(Number(e.target.value))}
                       className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Contrast</span><span className="font-mono">{(contrast * 100).toFixed(0)}%</span></label>
-                    <input type="range" min="-50" max="50" value={contrast} onChange={e => setContrast(Number(e.target.value))}
+                    <input type="range" min="-50" max="50" value={contrast} aria-label="Contrast" onChange={e => setContrast(Number(e.target.value))}
                       className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Rotation</span><span className="font-mono">{rotation}°</span></label>
-                    <input type="range" min="-45" max="45" value={rotation} onChange={e => setRotation(Number(e.target.value))}
+                    <input type="range" min="-45" max="45" value={rotation} aria-label="Rotation" onChange={e => setRotation(Number(e.target.value))}
                       className="w-full" style={{ accentColor: '#475569' }} />
                   </div>
 
@@ -342,8 +347,13 @@ export default function IndianDocumentEnhancer() {
               <div className="lg:col-span-2">
                 <div className="relative bg-[var(--bg-overlay)] rounded-xl p-2 border border-[var(--border-subtle)]"
                   ref={containerRef}
+                  role="img"
+                  aria-label="Enhanced document preview. Focus to compare with the original."
+                  tabIndex={0}
                   onMouseEnter={() => setShowComparison(true)}
-                  onMouseLeave={() => setShowComparison(false)}>
+                  onMouseLeave={() => setShowComparison(false)}
+                  onFocus={() => setShowComparison(true)}
+                  onBlur={() => setShowComparison(false)}>
                   {isProcessing && (
                     <div className="absolute inset-0 bg-black/10 dark:bg-white/5 rounded-xl flex items-center justify-center z-10">
                       <RefreshCw className="w-6 h-6 animate-spin" style={{ color: '#475569' }} />

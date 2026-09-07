@@ -53,12 +53,12 @@ export default function RetirementCalculator() {
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex gap-4">
-          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Age</label><input type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputCls} /></div>
-          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Retire Age</label><input type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputCls} /></div>
+          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Age</label><input aria-label="Current Age" type="number" value={currentAge} onChange={e => setCurrentAge(e.target.value)} className={inputCls} /></div>
+          <div className="flex-1"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Retire Age</label><input aria-label="Retire Age" type="number" value={retireAge} onChange={e => setRetireAge(e.target.value)} className={inputCls} /></div>
         </div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Savings ($)</label><input type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Contribution ($)</label><input type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Return (%)</label><input type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Savings ($)</label><input aria-label="Current Savings ($)" type="number" value={savings} onChange={e => setSavings(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Contribution ($)</label><input aria-label="Monthly Contribution ($)" type="number" value={monthly} onChange={e => setMonthly(e.target.value)} className={inputCls} /></div>
+        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Return (%)</label><input aria-label="Annual Return (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

@@ -269,13 +269,13 @@ export default function CollageMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs text-[var(--text-secondary)] mb-1">Background</label>
-                <input type="color" value={bgColor}
+                <input aria-label="Background" type="color" value={bgColor}
                   onChange={e => setBgColor(e.target.value)}
                   className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
               <div>
                 <label className="block text-xs text-[var(--text-secondary)] mb-1">Border Color</label>
-                <input type="color" value={borderColor}
+                <input aria-label="Border Color" type="color" value={borderColor}
                   onChange={e => setBorderColor(e.target.value)}
                   className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
@@ -298,7 +298,7 @@ export default function CollageMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs text-[var(--text-secondary)] mb-1">Format</label>
-                <select value={format}
+                <select aria-label="Format" value={format}
                   onChange={e => setFormat(e.target.value as Format)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-2 text-sm text-zinc-900 dark:text-zinc-100"
                 >

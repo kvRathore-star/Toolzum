@@ -263,45 +263,45 @@ export default function BusinessCardMaker() {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Full Name</label>
-                <input type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Full Name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Job Title</label>
-                <input type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Job Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Company Name</label>
-                <input type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Company Name" type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Phone Number</label>
-                <input type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Phone Number" type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Email Address</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Email Address" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Website URL</label>
-                <input type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input aria-label="Website URL" type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Office Address</label>
-              <input type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              <input aria-label="Office Address" type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
             </div>
 
             {/* Logo upload */}
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Custom Logo</label>
-              <input 
+              <input aria-label="Upload Custom Logo" 
                 type="file" 
                 accept="image/*" 
                 onChange={handleLogoUpload} 

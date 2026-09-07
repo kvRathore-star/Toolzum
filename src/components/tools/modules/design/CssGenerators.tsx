@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useId } from 'react';
 
 const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2";
 const labelClass = "block text-sm font-medium mb-1";
@@ -10,11 +10,12 @@ const previewClass = "w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 da
 const codeClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 font-mono text-xs h-32 overflow-auto whitespace-pre";
 
 function Slider({ label, value, onChange, min, max, step = 1 }: { label: string; value: number; onChange: (v: number) => void; min: number; max: number; step?: number }) {
+  const id = useId();
   return (
     <div className="flex items-center gap-3">
-      <label className="text-xs font-medium w-24 shrink-0">{label}</label>
-      <input type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 accent-blue-600" />
-      <input type="number" value={value} onChange={e => onChange(Number(e.target.value))} className="w-16 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs text-center" />
+      <label htmlFor={id} className="text-xs font-medium w-24 shrink-0">{label}</label>
+      <input id={id} type="range" min={min} max={max} step={step} value={value} onChange={e => onChange(Number(e.target.value))} className="flex-1 accent-blue-600" />
+      <input type="number" aria-label={`${label} value`} value={value} onChange={e => onChange(Number(e.target.value))} className="w-16 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs text-center" />
     </div>
   );
 }
@@ -71,10 +72,10 @@ function BoxShadowGeneratorInner() {
       <Slider label="Spread" value={spread} onChange={setSpread} min={-20} max={20} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
-        <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
+        <input aria-label="Opacity" type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
       </div>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={inset} onChange={e => setInset(e.target.checked)} className="accent-blue-600" /> Inset</label>
@@ -93,7 +94,7 @@ function GradientGeneratorInner() {
       <div className={previewClass} style={{ background: `linear-gradient(${direction}, ${color1}, ${color2})` }} />
       <div>
         <label className={labelClass}>Direction</label>
-        <select value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}>
+        <select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}>
           <option value="to bottom">Top to Bottom</option>
           <option value="to top">Bottom to Top</option>
           <option value="to right">Left to Right</option>
@@ -105,11 +106,11 @@ function GradientGeneratorInner() {
       <div className="flex gap-4">
         <div className="flex-1">
           <label className={labelClass}>Color 1</label>
-          <input type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
+          <input aria-label="Color 1" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
         </div>
         <div className="flex-1">
           <label className={labelClass}>Color 2</label>
-          <input type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
+          <input aria-label="Color 2" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
         </div>
       </div>
       <pre className={codeClass}>{css}</pre>
@@ -147,10 +148,10 @@ function FlexboxGeneratorInner() {
         {[1, 2, 3].map(i => <div key={i} className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">{i}</div>)}
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div><label className={labelClass}>Direction</label><select value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="row">Row</option><option value="column">Column</option><option value="row-reverse">Row Reverse</option><option value="column-reverse">Column Reverse</option></select></div>
-        <div><label className={labelClass}>Wrap</label><select value={wrap} onChange={e => setWrap(e.target.value)} className={inputClass}><option value="nowrap">No Wrap</option><option value="wrap">Wrap</option></select></div>
-        <div><label className={labelClass}>Justify</label><select value={justify} onChange={e => setJustify(e.target.value)} className={inputClass}><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option><option value="space-between">Space Between</option><option value="space-around">Space Around</option></select></div>
-        <div><label className={labelClass}>Align</label><select value={align} onChange={e => setAlign(e.target.value)} className={inputClass}><option value="stretch">Stretch</option><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option></select></div>
+        <div><label className={labelClass}>Direction</label><select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="row">Row</option><option value="column">Column</option><option value="row-reverse">Row Reverse</option><option value="column-reverse">Column Reverse</option></select></div>
+        <div><label className={labelClass}>Wrap</label><select aria-label="Wrap" value={wrap} onChange={e => setWrap(e.target.value)} className={inputClass}><option value="nowrap">No Wrap</option><option value="wrap">Wrap</option></select></div>
+        <div><label className={labelClass}>Justify</label><select aria-label="Justify" value={justify} onChange={e => setJustify(e.target.value)} className={inputClass}><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option><option value="space-between">Space Between</option><option value="space-around">Space Around</option></select></div>
+        <div><label className={labelClass}>Align</label><select aria-label="Align" value={align} onChange={e => setAlign(e.target.value)} className={inputClass}><option value="stretch">Stretch</option><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option></select></div>
       </div>
       <Slider label="Gap" value={gap} onChange={setGap} min={0} max={40} />
       <pre className={codeClass}>{css}</pre>
@@ -191,10 +192,10 @@ function TextShadowGeneratorInner() {
       <Slider label="Blur" value={blur} onChange={setBlur} min={0} max={20} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
-        <input type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
+        <input aria-label="Opacity" type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
       </div>
       <pre className={codeClass}>{css}</pre>
@@ -247,7 +248,7 @@ function AnimationGeneratorInner() {
       </div>
       <div>
         <label className={labelClass}>Animation</label>
-        <select value={animType} onChange={e => setAnimType(e.target.value)} className={inputClass}>
+        <select aria-label="Animation" value={animType} onChange={e => setAnimType(e.target.value)} className={inputClass}>
           <option value="fade-in">Fade In</option>
           <option value="slide-in">Slide In</option>
           <option value="pulse">Pulse</option>
@@ -256,10 +257,10 @@ function AnimationGeneratorInner() {
       <Slider label="Duration (s)" value={duration} onChange={setDuration} min={0.1} max={5} step={0.1} />
       <Slider label="Delay (s)" value={delay} onChange={setDelay} min={0} max={5} step={0.1} />
       <div className="grid grid-cols-2 gap-3">
-        <div><label className={labelClass}>Iterations</label><select value={iterations} onChange={e => setIterations(e.target.value)} className={inputClass}><option value="infinite">Infinite</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
-        <div><label className={labelClass}>Direction</label><select value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="normal">Normal</option><option value="reverse">Reverse</option><option value="alternate">Alternate</option></select></div>
+        <div><label className={labelClass}>Iterations</label><select aria-label="Iterations" value={iterations} onChange={e => setIterations(e.target.value)} className={inputClass}><option value="infinite">Infinite</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div><label className={labelClass}>Direction</label><select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="normal">Normal</option><option value="reverse">Reverse</option><option value="alternate">Alternate</option></select></div>
       </div>
-      <div><label className={labelClass}>Timing</label><select value={timing} onChange={e => setTiming(e.target.value)} className={inputClass}><option value="ease">Ease</option><option value="linear">Linear</option><option value="ease-in">Ease In</option><option value="ease-out">Ease Out</option><option value="ease-in-out">Ease In Out</option></select></div>
+      <div><label className={labelClass}>Timing</label><select aria-label="Timing" value={timing} onChange={e => setTiming(e.target.value)} className={inputClass}><option value="ease">Ease</option><option value="linear">Linear</option><option value="ease-in">Ease In</option><option value="ease-out">Ease Out</option><option value="ease-in-out">Ease In Out</option></select></div>
       <pre className={codeClass}>{css}</pre>
       <button onClick={() => navigator.clipboard.writeText(css)} className={btnClass}>Copy CSS</button>
     </div>
@@ -324,8 +325,8 @@ function NeumorphismGeneratorInner() {
       <Slider label="Blur" value={blur} onChange={setBlur} min={5} max={40} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <pre className={codeClass}>{css}</pre>
       <button onClick={() => navigator.clipboard.writeText(css)} className={btnClass}>Copy CSS</button>
@@ -350,12 +351,12 @@ function BorderCssGeneratorInner() {
       <Slider label="Width" value={width} onChange={setWidth} min={0} max={10} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <div>
         <label className={labelClass}>Style</label>
-        <select value={style} onChange={e => setStyle(e.target.value)} className={inputClass}>
+        <select aria-label="Style" value={style} onChange={e => setStyle(e.target.value)} className={inputClass}>
           <option value="solid">Solid</option>
           <option value="dashed">Dashed</option>
           <option value="dotted">Dotted</option>

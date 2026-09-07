@@ -207,7 +207,7 @@ export default function XlsxCsvConverter() {
           {direction === 'xlsx-to-csv' && sheetNames.length > 0 && (
             <div>
               <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Sheet</label>
-              <select
+              <select aria-label="Sheet"
                 value={sheetName}
                 onChange={(e) => { setSheetName(e.target.value); if (file) processXlsxFile(file, e.target.value, delimiter, includeHeader, range); }}
                 className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -220,7 +220,7 @@ export default function XlsxCsvConverter() {
           {direction === 'xlsx-to-csv' && (
             <div>
               <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Range</label>
-              <select
+              <select aria-label="Range"
                 value={range}
                 onChange={(e) => setRange(e.target.value)}
                 className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -235,7 +235,7 @@ export default function XlsxCsvConverter() {
 
           <div>
             <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Delimiter</label>
-            <select
+            <select aria-label="Delimiter"
               value={delimiter}
               onChange={(e) => setDelimiter(e.target.value as Delimiter)}
               className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm focus:focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -249,7 +249,7 @@ export default function XlsxCsvConverter() {
 
           {direction === 'xlsx-to-csv' && (
             <div className="flex items-center gap-2 pb-1">
-              <input
+              <input aria-label="Delimiter"
                 type="checkbox"
                 id="includeHeader"
                 checked={includeHeader}
@@ -263,7 +263,7 @@ export default function XlsxCsvConverter() {
           {direction === 'csv-to-xlsx' && (
             <div>
               <label className="block text-xs text-[var(--text-secondary)] mb-1 font-medium">Sheet Name</label>
-              <input
+              <input aria-label="Sheet Name"
                 type="text"
                 value={csvSheetName}
                 onChange={(e) => setCsvSheetName(e.target.value)}

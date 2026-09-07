@@ -196,7 +196,7 @@ export default function AadhaarValidator() {
             Enter 12-Digit Aadhaar Number
           </label>
           <div className="relative">
-            <input
+            <input aria-label="Enter 12-Digit Aadhaar Number"
               ref={inputRef}
               type="text"
               inputMode="numeric"

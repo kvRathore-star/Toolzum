@@ -36,11 +36,11 @@ export default function JSONDiffChecker() {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Left (original)</label>
-            <textarea value={left} onChange={e => setLeft(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
+            <textarea aria-label="Left (original)" value={left} onChange={e => setLeft(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Right (modified)</label>
-            <textarea value={right} onChange={e => setRight(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
+            <textarea aria-label="Right (modified)" value={right} onChange={e => setRight(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
           </div>
         </div>
         <button onClick={compare} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Compare</button>

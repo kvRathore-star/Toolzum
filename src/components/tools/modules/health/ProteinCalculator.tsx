@@ -26,9 +26,9 @@ export default function ProteinCalculator() {
   return (
     <CalculatorShell category="Health" title="Protein Calculator" accent="blue" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Weight (kg)</label><input className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Goal</label><select className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="general">General health</option><option value="muscle">Muscle gain</option><option value="weightLoss">Weight loss</option></select></div>
-        <div><label className={labelCls}>Activity</label><select className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="sedentary">Sedentary</option><option value="moderate">Moderate</option><option value="active">Very active</option></select></div>
+        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label className={labelCls}>Goal</label><select aria-label="Goal" className={inputCls} value={goal} onChange={e => setGoal(e.target.value)}><option value="general">General health</option><option value="muscle">Muscle gain</option><option value="weightLoss">Weight loss</option></select></div>
+        <div><label className={labelCls}>Activity</label><select aria-label="Activity" className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="sedentary">Sedentary</option><option value="moderate">Moderate</option><option value="active">Very active</option></select></div>
       </div>
     </CalculatorShell>
   );

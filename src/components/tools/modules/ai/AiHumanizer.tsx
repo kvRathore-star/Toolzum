@@ -324,7 +324,7 @@ export default function AiHumanizer() {
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Original Text</label>
                 <span className="text-[10px] text-[var(--text-muted)]">{input.length}/{MAX_CHARS}</span>
               </div>
-              <textarea value={input} onChange={e => setInput(e.target.value.slice(0, MAX_CHARS))}
+              <textarea aria-label="Original Text" value={input} onChange={e => setInput(e.target.value.slice(0, MAX_CHARS))}
                 placeholder="Paste AI-generated text here..."
                 className="w-full h-64 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:ring-2 focus:ring-emerald-500/30" />
             </div>

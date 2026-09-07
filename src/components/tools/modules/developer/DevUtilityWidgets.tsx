@@ -57,7 +57,7 @@ export function PortNumberLookup() {
   return (
     <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
-      <input type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
+      <input aria-label="Port Number" type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
       {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
@@ -93,7 +93,7 @@ export function UserAgentParser() {
   return (
     <CalculatorShell category="Developer" title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label>
-      <textarea value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
+      <textarea aria-label="User-Agent String" value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
 
       {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
@@ -127,7 +127,7 @@ export function QueryStringParser() {
   return (
     <CalculatorShell category="Developer" title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label>
-      <input type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
+      <input aria-label="Query String" type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
 
       {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
@@ -205,7 +205,7 @@ export function SseEventFormatter() {
       </div>
       <Section title="SSE Event Formatter">
         <div className="space-y-3">
-          <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+          <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea aria-label="SSE Event Text" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
           <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
 
           {events.length > 0 && (
@@ -309,7 +309,7 @@ export function RateLimitHeaderParser() {
       </div>
       <Section title="Rate Limit Header Parser">
         <div className="space-y-3">
-          <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+          <div><label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea aria-label="Rate Limit Headers" value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
           <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
 
           {usagePct > 0 && (
@@ -361,7 +361,7 @@ export function PricingTierBuilder() {
     <CalculatorShell category="Developer" title="Pricing Tier Builder" result={resultText} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
-        <textarea value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
+        <textarea aria-label="Tiers JSON" value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y"
           placeholder='[{"name": "Free", "price": 0, "users": 1, "features": ["Basic"]}]' />
 

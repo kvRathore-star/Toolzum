@@ -11,14 +11,15 @@ import { Section } from '../MiscToolsShared';
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
+  const id = React.useId();
   const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
+      <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
       {rows ? (
-        <textarea className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <textarea id={id} className={cls} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       ) : (
-        <input className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
+        <input id={id} className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       )}
     </div>
   );
@@ -521,7 +522,7 @@ export function TemperatureConverter() {
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">From</label>
-          <select value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+          <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>
@@ -529,7 +530,7 @@ export function TemperatureConverter() {
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">To</label>
-          <select value={to} onChange={e => setTo(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+          <select aria-label="To" value={to} onChange={e => setTo(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>

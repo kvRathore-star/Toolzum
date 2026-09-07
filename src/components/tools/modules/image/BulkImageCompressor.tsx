@@ -34,7 +34,7 @@ export default function BulkImageCompressor({ defaultConfig: extraConfig }: { de
           </div>
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
-            <select name="format" defaultValue={merged.format as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <select aria-label="Output Format" name="format" defaultValue={merged.format as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               <option value="jpeg">JPEG (smaller)</option>
               <option value="png">PNG (lossless)</option>
             </select>

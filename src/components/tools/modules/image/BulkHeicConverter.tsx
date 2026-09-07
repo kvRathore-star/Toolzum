@@ -38,7 +38,7 @@ export default function BulkHeicConverter() {
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
-            <select
+            <select aria-label="Output Format"
               name="format"
               value={format}
               onChange={(e) => setFormat(e.target.value)}

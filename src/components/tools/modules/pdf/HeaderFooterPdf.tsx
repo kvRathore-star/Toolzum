@@ -183,7 +183,7 @@ export default function HeaderFooterPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Header Text</label>
-            <input
+            <input aria-label="Header Text"
               type="text"
               placeholder="e.g. Confidential &bull; {{page}}/{{total}}"
               value={headerText}
@@ -194,7 +194,7 @@ export default function HeaderFooterPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Footer Text</label>
-            <input
+            <input aria-label="Footer Text"
               type="text"
               placeholder="e.g. Page {{page}} of {{total}} &mdash; {{date}}"
               value={footerText}
@@ -208,7 +208,7 @@ export default function HeaderFooterPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Font Size</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{fontSize}pt</span>
             </div>
-            <input
+            <input aria-label="Font Size"
               type="range"
               min="8"
               max="24"
@@ -239,7 +239,7 @@ export default function HeaderFooterPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Top Margin</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{topMargin}pt</span>
             </div>
-            <input
+            <input aria-label="Top Margin"
               type="range"
               min="10"
               max="80"
@@ -255,7 +255,7 @@ export default function HeaderFooterPdf() {
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Bottom Margin</label>
               <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{bottomMargin}pt</span>
             </div>
-            <input
+            <input aria-label="Bottom Margin"
               type="range"
               min="10"
               max="80"
@@ -268,7 +268,7 @@ export default function HeaderFooterPdf() {
 
           <div className="space-y-3">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Range (leave empty for all)</label>
-            <input
+            <input aria-label="Page Range (leave empty for all)"
               type="text"
               placeholder="e.g. 1-5, 8, 11-13"
               value={pageRange}

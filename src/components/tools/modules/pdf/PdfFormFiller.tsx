@@ -153,6 +153,7 @@ export default function PdfFormFiller() {
                   <select 
                     className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                     value={field.value}
+                    aria-label={field.name}
                     onChange={(e) => handleFieldChange(field.name, e.target.value)}
                   >
                     <option value="">Unchecked</option>
@@ -161,6 +162,7 @@ export default function PdfFormFiller() {
                 ) : (
                   <input 
                     type="text" 
+                    aria-label={field.name}
                     className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                     placeholder={`Enter ${field.name}`}
                     value={field.value}

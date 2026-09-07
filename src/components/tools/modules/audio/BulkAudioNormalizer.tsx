@@ -41,7 +41,7 @@ export default function BulkAudioNormalizer() {
       configFields={
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">Target Peak Level (dBFS)</label>
-          <input name="targetLevel" type="number" defaultValue="-3" min="-12" max="0" step="0.5" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
+          <input aria-label="Target Peak Level (dBFS)" name="targetLevel" type="number" defaultValue="-3" min="-12" max="0" step="0.5" className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]" />
           <p className="text-xs text-[var(--text-muted)] mt-1">-3 dBFS (recommended), -1 dBFS (max loudness), -6 dBFS (conservative)</p>
         </div>
       }

@@ -74,12 +74,13 @@ const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-su
 const labelClass = "block text-xs font-medium mb-1 text-[var(--text-secondary)]";
 
 function MetricInput({ label, value, onChange, prefix, step }: { label: string; value: number; onChange: (v: number) => void; prefix?: string; step?: string }) {
+  const id = React.useId();
   return (
     <div>
-      <label className={labelClass}>{label}</label>
+      <label htmlFor={id} className={labelClass}>{label}</label>
       <div className="relative">
         {prefix && <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-[var(--text-tertiary)]">{prefix}</span>}
-        <input type="number" value={value} step={step || '1'} onChange={e => onChange(Number(e.target.value))} className={`${inputClass} ${prefix ? 'pl-7' : ''}`} />
+        <input id={id} type="number" value={value} step={step || '1'} onChange={e => onChange(Number(e.target.value))} className={`${inputClass} ${prefix ? 'pl-7' : ''}`} />
       </div>
     </div>
   );
@@ -329,21 +330,21 @@ export function SaaSMetricsDashboard() {
               <div>
                 <label className={labelClass}>MRR Growth Rate</label>
                 <div className="flex items-center gap-2">
-                  <input type="range" min="-20" max="50" value={m.scenarioMrrGrowth} onChange={e => setM(p => ({ ...p, scenarioMrrGrowth: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="MRR Growth Rate" type="range" min="-20" max="50" value={m.scenarioMrrGrowth} onChange={e => setM(p => ({ ...p, scenarioMrrGrowth: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioMrrGrowth >= 0 ? '+' : ''}{m.scenarioMrrGrowth}%</span>
                 </div>
               </div>
               <div>
                 <label className={labelClass}>Churn Reduction</label>
                 <div className="flex items-center gap-2">
-                  <input type="range" min="0" max="80" value={m.scenarioChurnReduction} onChange={e => setM(p => ({ ...p, scenarioChurnReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="Churn Reduction" type="range" min="0" max="80" value={m.scenarioChurnReduction} onChange={e => setM(p => ({ ...p, scenarioChurnReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioChurnReduction}%</span>
                 </div>
               </div>
               <div>
                 <label className={labelClass}>CAC Reduction</label>
                 <div className="flex items-center gap-2">
-                  <input type="range" min="0" max="80" value={m.scenarioCacReduction} onChange={e => setM(p => ({ ...p, scenarioCacReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="CAC Reduction" type="range" min="0" max="80" value={m.scenarioCacReduction} onChange={e => setM(p => ({ ...p, scenarioCacReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioCacReduction}%</span>
                 </div>
               </div>
