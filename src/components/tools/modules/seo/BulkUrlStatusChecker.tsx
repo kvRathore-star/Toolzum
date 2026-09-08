@@ -219,7 +219,7 @@ export default function BulkUrlStatusChecker() {
       )}
 
       {results.length > 0 && !isChecking && (
-        <div className="space-y-4">
+        <div role="status" className="space-y-4">
           <div className="flex items-center justify-between gap-2">
             <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Results ({results.length})</h3>
             <div className="flex gap-2">

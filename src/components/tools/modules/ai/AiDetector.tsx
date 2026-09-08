@@ -360,7 +360,7 @@ export default function AiDetector() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Burstiness</h4>
+                      <h3 className="text-sm font-bold text-[var(--text-primary)]">Burstiness</h3>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.burstiness.score)}`}>
                         {result.breakdown.burstiness.score}%
                       </span>
@@ -375,7 +375,7 @@ export default function AiDetector() {
 
                   <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Repetition</h4>
+                      <h3 className="text-sm font-bold text-[var(--text-primary)]">Repetition</h3>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.repetition.score)}`}>
                         {result.breakdown.repetition.score}%
                       </span>
@@ -390,7 +390,7 @@ export default function AiDetector() {
 
                   <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-sm font-bold text-[var(--text-primary)]">Trigger Phrases</h4>
+                      <h3 className="text-sm font-bold text-[var(--text-primary)]">Trigger Phrases</h3>
                       <span className={`text-sm font-black ${getScoreColor(result.breakdown.triggerPhrases.score)}`}>
                         {result.breakdown.triggerPhrases.score}%
                       </span>
@@ -413,7 +413,7 @@ export default function AiDetector() {
 
                 {result.breakdown.triggerPhrases.found.length > 0 && (
                   <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
-                    <h4 className="text-sm font-bold text-[var(--text-primary)] mb-2">Highlighted AI Patterns</h4>
+                    <h3 className="text-sm font-bold text-[var(--text-primary)] mb-2">Highlighted AI Patterns</h3>
                     <div className="text-sm leading-relaxed text-[var(--text-primary)] bg-[var(--bg-overlay)] dark:bg-zinc-950 rounded-lg p-4 max-h-48 overflow-y-auto font-mono text-xs whitespace-pre-wrap">
                       {highlightAiPatterns(input, result.breakdown.triggerPhrases.found)}
                     </div>
@@ -422,7 +422,7 @@ export default function AiDetector() {
 
                 {paragraphScores.length > 1 && (
                   <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-4">
-                    <h4 className="text-sm font-bold text-[var(--text-primary)] mb-3">Per-Paragraph Analysis</h4>
+                    <h3 className="text-sm font-bold text-[var(--text-primary)] mb-3">Per-Paragraph Analysis</h3>
                     <div className="space-y-2">
                       {paragraphScores.map((p) => (
                         <div key={p.index} className="flex items-center gap-3">

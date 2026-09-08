@@ -194,7 +194,7 @@ export default function LogoMaker() {
           
           {/* Preset templates */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Quick Presets</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Quick Presets</h3>
             <div className="flex gap-2 flex-wrap">
               {PRESETS.map((preset, idx) => (
                 <button
@@ -210,7 +210,7 @@ export default function LogoMaker() {
 
           {/* Typography */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h3>
             
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Brand Name</label>
@@ -263,7 +263,7 @@ export default function LogoMaker() {
 
           {/* Sizing sliders */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Dimensions & Spacing</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Dimensions & Spacing</h3>
             
             <div className="space-y-1">
               <div className="flex justify-between text-[10px] text-[var(--text-secondary)] uppercase font-bold">
@@ -292,7 +292,7 @@ export default function LogoMaker() {
 
           {/* Colors & Canvas BG */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Palette & Canvas</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Palette & Canvas</h3>
             
             <div className="grid grid-cols-3 gap-2">
               <div className="space-y-1">

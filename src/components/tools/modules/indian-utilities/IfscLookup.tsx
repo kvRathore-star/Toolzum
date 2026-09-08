@@ -123,7 +123,7 @@ export default function IfscLookup() {
         {error && (
           <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-start gap-3 animate-in fade-in duration-300">
             <AlertCircle className="w-5 h-5 text-[var(--accent)] mt-0.5 shrink-0" />
-            <div><h4 className="font-bold text-rose-700 dark:text-rose-400">Lookup Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
+            <div><h3 className="font-bold text-rose-700 dark:text-rose-400">Lookup Error</h3><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
           </div>
         )}
 
@@ -132,7 +132,7 @@ export default function IfscLookup() {
             {data.isOfflineFallback && (
               <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-3">
                 <HelpCircle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
-                <div><h4 className="font-bold text-amber-700 dark:text-amber-400">Offline Fallback Match</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
+                <div><h3 className="font-bold text-amber-700 dark:text-amber-400">Offline Fallback Match</h3><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -190,10 +190,10 @@ export default function IfscLookup() {
         </div>
 
         <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-2">
-          <h4 className="font-bold text-xs text-[var(--text-primary)] flex items-center gap-1.5">
+          <h3 className="font-bold text-xs text-[var(--text-primary)] flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[var(--accent)]" />
             IFSC Code Structure
-          </h4>
+          </h3>
           <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
             The 11-digit IFSC code uniquely identifies bank branches in India. The first four characters represent the <strong>Bank Name</strong> (e.g. HDFC), the fifth character is always <strong>0</strong> (reserved for future use), and the last six characters represent the specific <strong>Branch Code</strong>.
           </p>

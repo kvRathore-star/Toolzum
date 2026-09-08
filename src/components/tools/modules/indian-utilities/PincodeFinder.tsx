@@ -191,7 +191,7 @@ export default function PincodeFinder() {
           {error && (
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl flex items-start gap-3">
               <AlertCircle className="w-5 h-5 mt-0.5 shrink-0 text-rose-700 dark:text-rose-400" />
-              <div><h4 className="font-bold text-rose-700 dark:text-rose-400">Search Error</h4><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
+              <div><h3 className="font-bold text-rose-700 dark:text-rose-400">Search Error</h3><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">{error}</p></div>
             </motion.div>
           )}
         </AnimatePresence>

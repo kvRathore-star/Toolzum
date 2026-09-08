@@ -183,7 +183,7 @@ export default function BulkBgChanger() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             <div className="space-y-3 lg:col-span-1">
               <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
-                <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Background Settings</h5>
+                <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Background Settings</h4>
                 
                 <div className="space-y-1">
                   <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>New BG Color</span></label>

@@ -230,7 +230,7 @@ export default function SslChecker() {
         )}
 
         {result && (
-          <div className="space-y-4">
+          <div role="status" className="space-y-4">
             <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border text-sm font-bold ${statusColor(result.status)}`}>
               {result.status === 'valid' && 'Valid'}
               {result.status === 'expiring' && `Expiring in ${result.cert.daysRemaining} days`}

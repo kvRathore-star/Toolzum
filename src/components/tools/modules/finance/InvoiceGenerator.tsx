@@ -128,9 +128,9 @@ export default function InvoiceGenerator() {
           </div>
           
           <div className="space-y-4 md:text-right">
-            <h1 className="text-4xl font-black text-indigo-100 dark:text-indigo-900/50 uppercase tracking-widest">
+            <h2 className="text-4xl font-black text-indigo-100 dark:text-indigo-900/50 uppercase tracking-widest">
               Invoice
-            </h1>
+            </h2>
             <div className="space-y-2 text-sm">
               <div className="flex md:justify-end gap-2 items-center">
                 <span className="font-semibold text-[var(--text-primary)]">Invoice #:</span>

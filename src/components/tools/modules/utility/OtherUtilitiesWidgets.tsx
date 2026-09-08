@@ -60,7 +60,7 @@ export function PhoneParser() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-[var(--text-primary)]">International Phone Parser</h1>
+        <h2 className="text-xl font-bold text-[var(--text-primary)]">International Phone Parser</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Parse and format international phone numbers.</p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -113,7 +113,7 @@ export function OTPGenerator() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-[var(--text-primary)]">OTP Code Generator</h1>
+        <h2 className="text-xl font-bold text-[var(--text-primary)]">OTP Code Generator</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Generate one-time passcodes of various types and lengths.</p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -179,7 +179,7 @@ export function SlugifyTool() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-xl font-bold text-[var(--text-primary)]">URL Slug Generator</h1>
+        <h2 className="text-xl font-bold text-[var(--text-primary)]">URL Slug Generator</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Convert text into URL-friendly slugs.</p>
       </div>
       <div className="flex flex-wrap gap-2">

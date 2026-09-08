@@ -156,7 +156,7 @@ ${linkCards}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div className="space-y-4">
             <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
-              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h5>
+              <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h4>
               <div className="flex items-center gap-3">
                 <div className="w-14 h-14 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
                   role="button" tabIndex={0} onClick={() => document.getElementById('lib-profile-pic')?.click()}
@@ -174,7 +174,7 @@ ${linkCards}
             </div>
 
             <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-2">
-              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Theme</h5>
+              <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Theme</h4>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Background</label>
@@ -196,7 +196,7 @@ ${linkCards}
             </div>
 
             <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
-              <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Link className="w-3 h-3" /> Links {links.length > 0 && <span className="font-mono text-[var(--text-secondary)]">({links.length})</span>}</h5>
+              <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Link className="w-3 h-3" /> Links {links.length > 0 && <span className="font-mono text-[var(--text-secondary)]">({links.length})</span>}</h4>
               
               <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
                 <input aria-label="Link title" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Link title"

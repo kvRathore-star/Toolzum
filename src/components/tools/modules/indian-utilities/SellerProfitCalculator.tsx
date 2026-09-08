@@ -142,7 +142,7 @@ export default function SellerProfitCalculator() {
           </div>
 
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
-            <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Fee Breakdown ({PLATFORM_DATA[input.platform].label})</h5>
+            <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Fee Breakdown ({PLATFORM_DATA[input.platform].label})</h4>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs">
               {[
                 { label: 'Commission', value: result.commissionAmt },

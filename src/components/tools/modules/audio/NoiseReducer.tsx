@@ -280,7 +280,7 @@ export default function NoiseReducer() {
             )}
 
             {outputUrl && originalUrlRef.current && (
-              <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
+              <div role="status" className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <p className="text-[10px] font-semibold text-[var(--text-muted)] flex items-center gap-1.5">

@@ -253,10 +253,10 @@ export default function UpiValidator() {
 
         {result?.valid && (
           <div className="border-t border-[var(--border-subtle)] pt-5 space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
-            <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
+            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
               <Banknote className="w-3.5 h-3.5 text-[#0d9488]" />
               Payment QR Details
-            </h4>
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-[var(--text-secondary)]">Payee Name</label>
@@ -312,10 +312,10 @@ export default function UpiValidator() {
       {history.length > 0 && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 shadow-xl space-y-3 animate-in fade-in duration-500">
           <div className="flex items-center justify-between">
-            <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
+            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1.5">
               <History className="w-3.5 h-3.5 text-[#0d9488]" />
               Recent Validations
-            </h4>
+            </h3>
             <button onClick={clearHistory} className="text-[10px] font-bold text-rose-500 hover:text-rose-700 dark:hover:text-rose-400 cursor-pointer">Clear All</button>
           </div>
           <div className="space-y-1.5">

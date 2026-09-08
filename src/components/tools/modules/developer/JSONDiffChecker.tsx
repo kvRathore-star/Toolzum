@@ -29,7 +29,7 @@ export default function JSONDiffChecker() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">JSON Diff Checker</h1>
+        <h2 className="text-3xl font-bold tracking-tight">JSON Diff Checker</h2>
         <p className="text-[var(--text-muted)] mt-2">Compare two JSON objects side-by-side with color-coded key-level differences.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">

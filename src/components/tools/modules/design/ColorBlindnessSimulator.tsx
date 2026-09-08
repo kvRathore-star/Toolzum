@@ -126,7 +126,7 @@ export default function ColorBlindnessSimulator() {
   return (
     <div className="p-6 space-y-4">
       <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-6">Color Blindness Simulator</h1>
+      <h2 className="text-2xl font-bold mb-6">Color Blindness Simulator</h2>
       <p className="text-sm mb-6 text-[var(--text-secondary)]">
         Simulate how your designs and images appear to people with protanopia, deuteranopia, tritanopia,
         and achromatopsia color vision deficiencies. Everything runs locally in your browser — nothing is uploaded.

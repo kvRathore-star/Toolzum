@@ -33,7 +33,7 @@ export function CsvAnalyzer() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold">CSV Analyzer</h1>
+        <h2 className="text-2xl font-bold">CSV Analyzer</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Analyze CSV structure — column types, counts, unique values, and empty cells.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
@@ -97,7 +97,7 @@ export function JsonPathQueryBuilder() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold">JSON Path Query Builder</h1>
+        <h2 className="text-2xl font-bold">JSON Path Query Builder</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Query JSON data using dot-notation path expressions with wildcard support.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
@@ -148,7 +148,7 @@ export function JsonTreeViewer() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold">JSON Tree Viewer</h1>
+        <h2 className="text-2xl font-bold">JSON Tree Viewer</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">

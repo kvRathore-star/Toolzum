@@ -242,7 +242,7 @@ export default function BusinessCardMaker() {
 
           {/* Presets */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Color Schemes</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Color Schemes</h3>
             <div className="flex gap-2 flex-wrap">
               {TEMPLATES.map((tpl, idx) => (
                 <button
@@ -258,7 +258,7 @@ export default function BusinessCardMaker() {
 
           {/* Details input form */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Details Fields</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Sliders className="w-3.5 h-3.5" /> Details Fields</h3>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">

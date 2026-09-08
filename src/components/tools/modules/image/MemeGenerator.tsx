@@ -166,10 +166,10 @@ export default function MemeGenerator() {
             </label>
           </div>
 
-          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
+          <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
             <Type className="w-4 h-4 text-[var(--accent)]" />
             Captions
-          </h4>
+          </h3>
 
           {/* Top text */}
           <div className="space-y-1 text-xs">
@@ -189,10 +189,10 @@ export default function MemeGenerator() {
             />
           </div>
 
-          <h4 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
+          <h3 className="font-bold text-xs text-[var(--text-secondary)] uppercase tracking-wider flex items-center gap-1 border-t border-[var(--border-subtle)] pt-4">
             <Sliders className="w-4 h-4 text-[var(--accent)]" />
             Styling Settings
-          </h4>
+          </h3>
 
           {/* Font Size */}
           <div className="space-y-2">

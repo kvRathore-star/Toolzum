@@ -292,7 +292,7 @@ export default function AudioCompressor() {
             <audio controls className="w-full" src={originalUrl.current || undefined} />
           </div>
 
-          <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
+          <div role="status" className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
             <h4 className="text-[var(--text-primary)] font-medium mb-3">Compressed</h4>
             {outputUrl ? (
               <>

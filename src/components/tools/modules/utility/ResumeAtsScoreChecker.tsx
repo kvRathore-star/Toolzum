@@ -178,7 +178,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
 
           {result ? (
             <div className="flex-1 space-y-4 overflow-y-auto max-h-[550px] pr-1">
-              <div className={`flex items-center justify-between p-4 rounded-xl border ${scoreBg(result.score)}`}>
+              <div role="status" className={`flex items-center justify-between p-4 rounded-xl border ${scoreBg(result.score)}`}>
                 <div>
                   <p className="text-xs font-semibold text-[var(--text-secondary)] uppercase">ATS Compatibility Score</p>
                   <p className="text-xs text-[var(--text-muted)] mt-0.5">{result.score >= 80 ? 'Strong candidate' : result.score >= 60 ? 'Room for improvement' : 'Needs significant work'}</p>

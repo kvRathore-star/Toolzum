@@ -294,7 +294,7 @@ export default function VideoStabilizer() {
           </div>
 
           {outputUrl && (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+            <div role="status" className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Video Stabilized!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button

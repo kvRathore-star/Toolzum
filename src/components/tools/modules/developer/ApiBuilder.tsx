@@ -232,7 +232,7 @@ export function ApiBuilder() {
             <Terminal className="w-4 h-4 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-[var(--text-primary)]">API Builder & Tester</h1>
+            <h2 className="text-lg font-bold text-[var(--text-primary)]">API Builder & Tester</h2>
             <p className="text-[10px] text-[var(--text-tertiary)]">Requests go directly from your browser — your API keys never touch a server</p>
           </div>
         </div>

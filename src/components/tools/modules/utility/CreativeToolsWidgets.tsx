@@ -432,9 +432,9 @@ export function EmojiPicker() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <h1 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
+      <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
         <SmilePlus className="w-6 h-6 text-blue-600 dark:text-blue-400" /> Emoji Picker
-      </h1>
+      </h2>
       <p className="text-sm text-[var(--text-secondary)]">
         Browse 400+ emoji organized by category. Click any emoji to copy it.
       </p>

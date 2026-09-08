@@ -222,9 +222,9 @@ export default function CgpaToPercentage() {
                 </div>
 
                 <div className="space-y-2">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1">
+                  <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1">
                     <BarChart3 className="w-3 h-3" style={{ color: '#8b5cf6' }} /> All Boards Comparison
-                  </h5>
+                  </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {allResults.map((r: any) => (
                       <div key={r.id} className={`p-2 rounded-lg border text-center transition-all ${r.id === board ? 'border-transparent' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)]'}`}

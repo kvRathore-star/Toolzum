@@ -157,7 +157,7 @@ export default function SocialMediaCalendar() {
           </button>
         ) : (
           <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
-            <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">{editingId ? 'Edit' : 'New'} Post</h5>
+            <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">{editingId ? 'Edit' : 'New'} Post</h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} aria-label="Post date"
                 className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
@@ -188,9 +188,9 @@ export default function SocialMediaCalendar() {
         <div className="flex items-center justify-between">
           <button onClick={() => { if (viewMonth === 0) { setViewMonth(11); setViewYear(v => v - 1); } else setViewMonth(m => m - 1); }}
             className="text-xs text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">&larr; Previous</button>
-          <h5 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
+          <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
             {new Date(viewYear, viewMonth).toLocaleString('default', { month: 'long', year: 'numeric' })}
-          </h5>
+          </h4>
           <button onClick={() => { if (viewMonth === 11) { setViewMonth(0); setViewYear(v => v + 1); } else setViewMonth(m => m + 1); }}
             className="text-xs text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">Next &rarr;</button>
         </div>
@@ -226,7 +226,7 @@ export default function SocialMediaCalendar() {
         </div>
 
         <div className="space-y-2">
-          <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Upcoming Posts</h5>
+          <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Upcoming Posts</h4>
           {upcoming.length === 0 ? (
             <p className="text-xs text-[var(--text-secondary)] text-center py-4">No upcoming posts. Add your first one!</p>
           ) : (

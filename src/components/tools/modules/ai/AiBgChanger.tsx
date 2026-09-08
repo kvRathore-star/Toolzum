@@ -219,7 +219,7 @@ export default function AiBgChanger() {
             <div className="space-y-3 lg:col-span-1">
               <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
                 <div className="flex items-center justify-between">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Mode</h5>
+                  <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Mode</h4>
                   <div className="flex bg-zinc-200 dark:bg-zinc-700 rounded-lg p-0.5">
                     <button onClick={() => setMode('auto')}
                       aria-pressed={mode === 'auto'}

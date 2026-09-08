@@ -152,7 +152,7 @@ export default function GstinLookup() {
               </div>
 
               {result && (
-                <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
+                <div role="status" className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="p-4 space-y-3">
                     <div className="flex items-start justify-between">
                       <div>

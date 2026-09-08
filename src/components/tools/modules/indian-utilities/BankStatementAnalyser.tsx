@@ -269,7 +269,7 @@ export default function BankStatementAnalyser() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                    <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><PieChart className="w-3 h-3" /> Spending by Category</h5>
+                    <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><PieChart className="w-3 h-3" /> Spending by Category</h4>
                     <div className="space-y-2">
                       {stats.topCategories.slice(0, 8).map(([cat, data]) => (
                         <div key={cat}>
@@ -286,7 +286,7 @@ export default function BankStatementAnalyser() {
                   </div>
 
                   <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                    <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Monthly Summary</h5>
+                    <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-3 flex items-center gap-1.5"><Calendar className="w-3 h-3" /> Monthly Summary</h4>
                     <div className="space-y-1.5 max-h-[240px] overflow-y-auto">
                       {Object.entries(stats.monthly).slice(-12).map(([month, data]) => (
                         <div key={month} className="flex items-center gap-2 text-[11px]">

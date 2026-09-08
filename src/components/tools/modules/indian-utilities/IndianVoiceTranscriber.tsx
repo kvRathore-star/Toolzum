@@ -297,9 +297,9 @@ export default function IndianVoiceTranscriber() {
               {transcript && !isTranscribing && (
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5">
+                    <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5">
                       <FileText className="w-3 h-3" style={{ color: '#0284c7' }} /> Transcript
-                    </h5>
+                    </h4>
                     <div className="flex gap-2">
                       <button onClick={handleCopy}
                         className="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors text-white" style={{ backgroundColor: copied ? '#059669' : '#0284c7' }}>

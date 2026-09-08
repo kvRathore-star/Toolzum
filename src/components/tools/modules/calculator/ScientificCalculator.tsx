@@ -201,7 +201,7 @@ export default function ScientificCalculator() {
     <div className="max-w-2xl mx-auto">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="flex items-center justify-between px-4 pt-4 pb-2">
-          <h1 className="text-lg font-bold text-[var(--text-primary)]">Scientific Calculator</h1>
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">Scientific Calculator</h2>
           <div className="flex items-center gap-2">
             <button onClick={() => setShowHistory(!showHistory)} className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${showHistory ? 'bg-indigo-500/20 text-indigo-700 dark:text-indigo-400' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               History {history.length > 0 && `(${history.length})`}
@@ -223,7 +223,7 @@ export default function ScientificCalculator() {
             <div className="flex items-center gap-2">
               {result && (
                 <>
-                  <span className="text-2xl font-bold text-[var(--text-primary)] font-mono">{result}</span>
+                  <span role="status" className="text-2xl font-bold text-[var(--text-primary)] font-mono">{result}</span>
                   <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result" aria-label="Copy result"><Copy size={16} /></button>
                 </>
               )}

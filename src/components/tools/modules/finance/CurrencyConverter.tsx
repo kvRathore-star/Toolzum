@@ -264,7 +264,7 @@ export default function CurrencyConverter() {
 
           {/* Results Box */}
           {finalResult > 0 && (
-            <div className="bg-[var(--bg-overlay)]/35 border border-[var(--border-subtle)]/50 dark:border-zinc-800/80 rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
+            <div role="status" className="bg-[var(--bg-overlay)]/35 border border-[var(--border-subtle)]/50 dark:border-zinc-800/80 rounded-2xl p-6 space-y-4 animate-in fade-in duration-300">
               <div className="space-y-1">
                 <span className="text-sm font-semibold text-[var(--text-muted)]">
                   {parseFloat(amount).toLocaleString()} {fromCurrency} =

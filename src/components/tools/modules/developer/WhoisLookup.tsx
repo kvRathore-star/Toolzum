@@ -191,7 +191,7 @@ export default function WhoisLookup() {
         )}
 
         {result && (
-          <div className="space-y-4">
+          <div role="status" className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4">
                 <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider">Domain</p>

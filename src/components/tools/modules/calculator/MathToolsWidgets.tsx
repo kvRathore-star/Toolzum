@@ -32,7 +32,7 @@ export function EtaCalculator() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold">ETA Calculator</h1>
+        <h2 className="text-2xl font-bold">ETA Calculator</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Estimate travel time from distance and speed — with optional arrival time.</p>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">

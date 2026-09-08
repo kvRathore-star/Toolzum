@@ -176,7 +176,7 @@ export default function RentalAgreementGenerator() {
 
   const Section = ({ title, icon: Icon, children }: { title: string; icon?: React.ElementType; children: React.ReactNode }) => (
     <div className="space-y-3 border border-[var(--border-subtle)]/60 rounded-xl p-4 bg-[var(--bg-overlay)]/50 dark:bg-black/20">
-      <h4 className="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">{Icon && <Icon className="w-3.5 h-3.5" />}{title}</h4>
+      <h3 className="text-xs font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">{Icon && <Icon className="w-3.5 h-3.5" />}{title}</h3>
       {children}
     </div>
   );

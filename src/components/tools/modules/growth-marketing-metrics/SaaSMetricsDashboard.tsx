@@ -165,7 +165,7 @@ export function SaaSMetricsDashboard() {
             <BarChart3 className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-[var(--text-primary)]">SaaS Metrics Dashboard</h1>
+            <h2 className="text-xl font-bold text-[var(--text-primary)]">SaaS Metrics Dashboard</h2>
             <p className="text-xs text-[var(--text-tertiary)]">All your key metrics in one place. Data stays in your browser.</p>
           </div>
         </div>

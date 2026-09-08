@@ -77,7 +77,7 @@ export default function ResumeBuilder() {
         {/* Live Preview (Right) */}
         <div className="bg-white text-black p-10 min-h-[1056px] w-full max-w-[816px] shadow-2xl mx-auto printable-area print:shadow-none print:m-0 print:p-0">
           <div className="border-b-2 border-[var(--border-subtle)] pb-6 mb-6">
-            <h1 className="text-4xl font-black text-zinc-900 mb-1">{personal.name || 'Your Name'}</h1>
+            <h2 className="text-4xl font-black text-zinc-900 mb-1">{personal.name || 'Your Name'}</h2>
             <h2 className="text-xl text-zinc-600 font-medium mb-3">{personal.title || 'Professional Title'}</h2>
             <div className="text-sm text-[var(--text-secondary)] flex gap-4">
               <span>{personal.email || 'email@example.com'}</span>

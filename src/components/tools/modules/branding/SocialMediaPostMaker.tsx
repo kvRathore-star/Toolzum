@@ -178,7 +178,7 @@ export default function SocialMediaPostMaker() {
           
           {/* Ratio choices */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Dimensions / Platform</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layout className="w-3.5 h-3.5" /> Dimensions / Platform</h3>
             <div className="grid grid-cols-2 gap-2">
               {RATIOS.map((ratio) => (
                 <button
@@ -194,7 +194,7 @@ export default function SocialMediaPostMaker() {
 
           {/* Text controls */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)] dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Text Content</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Text Content</h3>
             
             <div className="space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Overlay</label>
@@ -235,7 +235,7 @@ export default function SocialMediaPostMaker() {
 
           {/* Background colors/image */}
           <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)] dark:border-zinc-800">
-            <h4 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Backdrop Settings</h4>
+            <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Layers className="w-3.5 h-3.5" /> Backdrop Settings</h3>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">

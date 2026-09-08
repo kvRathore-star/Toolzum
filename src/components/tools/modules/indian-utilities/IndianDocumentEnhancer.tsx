@@ -265,7 +265,7 @@ export default function IndianDocumentEnhancer() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
               <div className="space-y-4 lg:col-span-1">
                 <div className="space-y-3 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" style={{ color: '#475569' }} /> Adjustments</h5>
+                  <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Sliders className="w-3 h-3" style={{ color: '#475569' }} /> Adjustments</h4>
                   
                   <div className="space-y-1">
                     <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brightness</span><span className="font-mono">{(brightness * 100).toFixed(0)}%</span></label>
@@ -300,7 +300,7 @@ export default function IndianDocumentEnhancer() {
                 </div>
 
                 <div className="space-y-2 bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)]">
-                  <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" style={{ color: '#475569' }} /> Export Preset</h5>
+                  <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" style={{ color: '#475569' }} /> Export Preset</h4>
                   <div className="grid grid-cols-2 gap-1.5">
                     {DOCUMENT_PRESETS.map(p => (
                       <button key={p.label} onClick={() => setSelectedPreset(selectedPreset?.label === p.label ? null : p)}

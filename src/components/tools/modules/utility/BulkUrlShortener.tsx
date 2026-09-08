@@ -149,7 +149,7 @@ export default function BulkUrlShortener() {
 
         {/* Results */}
         {results.length > 0 && !isProcessing && (
-          <div className="space-y-2">
+          <div role="status" className="space-y-2">
             <h3 className="text-sm font-semibold text-[var(--text-primary)]">Results</h3>
             <div className="max-h-96 overflow-y-auto space-y-1.5">
               {results.map((r, i) => (

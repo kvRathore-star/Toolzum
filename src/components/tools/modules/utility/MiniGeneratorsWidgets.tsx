@@ -779,7 +779,7 @@ export function MACVendorLookup() {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold">MAC Vendor Lookup</h1>
+        <h2 className="text-2xl font-bold">MAC Vendor Lookup</h2>
         <p className="text-sm text-[var(--text-secondary)] mt-1">Look up the vendor associated with a MAC address OUI.</p>
       </div>
 

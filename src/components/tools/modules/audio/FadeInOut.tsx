@@ -345,7 +345,7 @@ export default function FadeInOut() {
             )}
 
             {outputUrl && (
-              <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
+              <div role="status" className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2 mb-1">
                   <Volume2 className="w-4 h-4 text-emerald-500" />
                   <span className="text-xs font-semibold text-zinc-600 dark:text-[var(--text-muted)]">Preview</span>
