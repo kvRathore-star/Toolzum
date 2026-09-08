@@ -165,7 +165,7 @@ ${linkCards}
                 </div>
                 <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="hidden" />
                 <div className="flex-1 space-y-2">
-                  <input value={profileName} onChange={e => setProfileName(e.target.value)} placeholder="Your name"
+                  <input value={profileName} onChange={e => setProfileName(e.target.value)} placeholder="Your name" aria-label="Your name"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                   <input aria-label="Short bio" value={profileBio} onChange={e => setProfileBio(e.target.value)} placeholder="Short bio"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
