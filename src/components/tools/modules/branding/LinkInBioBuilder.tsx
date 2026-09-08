@@ -163,7 +163,7 @@ ${linkCards}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById('lib-profile-pic')?.click(); } }}>
                   {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-[var(--text-muted)]" style={{ paddingTop: '18px' }} />}
                 </div>
-                <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="hidden" />
+                <input id="lib-profile-pic" type="file" accept="image/*" onChange={handleProfileImage} className="sr-only" aria-label="Profile photo" />
                 <div className="flex-1 space-y-2">
                   <input value={profileName} onChange={e => setProfileName(e.target.value)} placeholder="Your name" aria-label="Your name"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
