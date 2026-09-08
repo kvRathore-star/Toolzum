@@ -240,6 +240,11 @@ export default function AiImageUpscaler() {
             {upscaledUrl ? (
               <div
                 ref={containerRef}
+                role="slider" tabIndex={0} aria-label="Original versus upscaled comparison" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(sliderPos)}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowLeft') { e.preventDefault(); setSliderPos((p) => Math.max(0, p - 5)); }
+                  else if (e.key === 'ArrowRight') { e.preventDefault(); setSliderPos((p) => Math.min(100, p + 5)); }
+                }}
                 onMouseMove={handleMouseMove}
                 onMouseDown={() => setIsResizing(true)}
                 onMouseUp={() => setIsResizing(false)}

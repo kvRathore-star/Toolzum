@@ -281,6 +281,8 @@ export default function AiDetector() {
           <div
             onDrop={handleFileDrop}
             onDragOver={handleDragOver}
+            role="group"
+            aria-label="Drop a text file here, or type in the field below"
             className="relative"
           >
             <textarea aria-label="Input Text"

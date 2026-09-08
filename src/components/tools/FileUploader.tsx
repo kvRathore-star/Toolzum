@@ -116,6 +116,8 @@ export function FileUploader({
   return (
     <div className="w-full">
       <div 
+        role="group"
+        aria-label={title}
         className={`relative group flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-3xl transition-all duration-300 ease-in-out cursor-pointer overflow-hidden
           ${isDragging 
             ? 'border-blue-500 bg-blue-50/50 dark:bg-blue-900/20 scale-[1.02] shadow-[0_0_30px_rgba(59,130,246,0.3)]' 

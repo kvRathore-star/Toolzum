@@ -105,6 +105,11 @@ export default function PdfPageManager() {
     setPages(p); setDraggedIdx(null);
   };
   const handleRemove = (i: number) => { const p = [...pages]; p.splice(i, 1); setPages(p); };
+  const movePage = (from: number, dir: -1 | 1) => {
+    const to = from + dir;
+    if (to < 0 || to >= pages.length) return;
+    setPages((prev) => { const next = [...prev]; [next[from], next[to]] = [next[to], next[from]]; return next; });
+  };
 
   // --- Extract ---
   const processExtract = async () => {
@@ -205,10 +210,15 @@ export default function PdfPageManager() {
 
             {tab === 'organize' && (
               <div className="space-y-4">
-                <p className="text-[10px] text-[var(--text-secondary)]">Drag pages to reorder. Click × to remove.</p>
-                <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-2 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
+                <p className="text-[10px] text-[var(--text-secondary)]">Drag pages to reorder, or focus a page and use ← → arrow keys. Click × to remove.</p>
+                <div role="listbox" aria-label="Pages. Press left or right arrow on a focused page to reorder it." className="flex flex-wrap gap-2 max-h-56 overflow-y-auto p-2 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                   {pages.map((pn, i) => (
                     <div key={`${pn}-${i}`} draggable onDragStart={() => handleDragStart(i)} onDragOver={e => e.preventDefault()} onDrop={() => handleDrop(i)} onDragEnd={() => setDraggedIdx(null)}
+                      role="option" tabIndex={0} aria-label={`Page ${pn + 1}. Press left or right arrow to reorder.`}
+                      onKeyDown={(e) => {
+                        if (e.key === 'ArrowLeft') { e.preventDefault(); movePage(i, -1); }
+                        else if (e.key === 'ArrowRight') { e.preventDefault(); movePage(i, 1); }
+                      }}
                       className={`flex flex-col items-center justify-center w-20 h-24 bg-white dark:bg-[var(--bg-surface)] border-2 ${draggedIdx === i ? 'border-dashed border-blue-400 opacity-50' : 'border-[var(--border-subtle)]'} rounded-lg shadow-sm cursor-move hover:border-blue-400 transition-colors group relative`}>
                       <button onClick={() => handleRemove(i)} className="absolute -top-1.5 -right-1.5 bg-rose-500 text-white rounded-full w-5 h-5 text-[8px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">×</button>
                       <FileText className="w-6 h-6 text-[var(--text-muted)] mb-1" /><span className="font-bold text-[10px]">Page {pn + 1}</span>

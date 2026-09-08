@@ -154,6 +154,8 @@ export function Header() {
           <nav className="hidden md:flex items-center gap-1">
             <div 
               ref={triggerRef}
+              role="group"
+              aria-label="Tools navigation"
               className="relative"
               onMouseEnter={() => setMegaMenuOpen(true)}
               onMouseLeave={() => setMegaMenuOpen(false)}
@@ -326,6 +328,8 @@ export function Header() {
 
               
                   <div
+                    role="group"
+                    aria-label="Share"
                     className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-3 min-w-[200px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${shareOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                     onMouseEnter={() => setShareOpen(true)}
                     onMouseLeave={() => setShareOpen(false)}
@@ -432,6 +436,8 @@ export function Header() {
 
                   
                       <div
+                        role="group"
+                        aria-label="User menu"
                         onMouseLeave={() => setUserMenuOpen(false)}
                         className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-1.5 min-w-[180px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${userMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                       >

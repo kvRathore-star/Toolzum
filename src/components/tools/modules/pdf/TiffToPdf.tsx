@@ -241,6 +241,8 @@ export default function TiffToPdf() {
         </div>
         <div
           onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+          role="group"
+          aria-label="Drop a TIFF image here, or tab to the file picker below"
           onDrop={async (e) => {
             e.preventDefault();
             const f = e.dataTransfer.files?.[0];
@@ -252,6 +254,7 @@ export default function TiffToPdf() {
           <input
             type="file"
             accept=".tiff,.tif,image/tiff"
+            aria-label="Upload TIFF"
             className="absolute inset-0 opacity-0 cursor-pointer"
             onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
           />

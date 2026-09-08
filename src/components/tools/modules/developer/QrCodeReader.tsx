@@ -205,10 +205,12 @@ export default function QrCodeReader() {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
+          role="group"
+          aria-label="Drop a QR code image here, or tab to the file picker below"
           className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${dragOver ? 'border-indigo-500 bg-indigo-500/5 scale-[1.02]' : 'border-zinc-300 dark:border-zinc-700 hover:border-indigo-400'}`}
         >
           <label className="cursor-pointer">
-            <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFileSelect} className="hidden" />
+            <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFileSelect} className="sr-only" aria-label="Upload QR Code Image" />
             <div className="text-[var(--text-muted)] text-sm">
               <p className="font-medium text-zinc-600 dark:text-zinc-300 mb-1">Upload QR Code Image</p>
               <p className="text-xs">Drag & drop or click to select (PNG, JPG, WebP)</p>

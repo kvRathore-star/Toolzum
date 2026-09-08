@@ -127,9 +127,11 @@ export default function BulkCsvExcelToJson() {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
+          role="group"
+          aria-label="Drop a spreadsheet file here, or tab to the file picker below"
           className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer"
         >
-          <input type="file" accept=".csv,.xlsx,.xls" onChange={handleFileInput} className="hidden" id="csv-upload" />
+          <input type="file" accept=".csv,.xlsx,.xls" onChange={handleFileInput} className="sr-only" id="csv-upload" />
           <label htmlFor="csv-upload" className="cursor-pointer">
             <div className="text-3xl mb-2">📄</div>
             <p className="text-sm text-[var(--text-secondary)]">Drop a CSV/Excel file here or click to browse</p>

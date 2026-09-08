@@ -214,6 +214,8 @@ export default function PdfToTiff() {
         </div>
         <div
           onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+          role="group"
+          aria-label="Drop a PDF here, or tab to the file picker below"
           onDrop={async (e) => {
             e.preventDefault();
             const f = e.dataTransfer.files?.[0];
@@ -225,6 +227,7 @@ export default function PdfToTiff() {
           <input
             type="file"
             accept="application/pdf"
+            aria-label="Upload PDF"
             className="absolute inset-0 opacity-0 cursor-pointer"
             onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
           />

@@ -136,7 +136,7 @@ export function CalculatorShell({
   const hasResult = result || error || customResult;
 
   return (
-    <div ref={shellRef} onKeyDown={handleKeyDown}>
+    <div ref={shellRef} onKeyDown={handleKeyDown} role="group" aria-label={title}>
       {/* Header with icon + title + history toggle */}
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-6">
         <div className="flex items-center gap-2">

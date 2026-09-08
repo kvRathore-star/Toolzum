@@ -168,8 +168,10 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 <ChevronDown className={`w-3 h-3 transition-transform ${openGroup === groupLabel ? 'rotate-180' : ''}`} />
               </button>
               {openGroup === groupLabel && (
-                <div
-                  className="absolute top-full left-0 mt-1 w-52 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-2 z-50"
+                    <div
+                      role="group"
+                      aria-label="Category submenu"
+                      className="absolute top-full left-0 mt-1 w-52 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-2 z-50"
                   onMouseLeave={() => setOpenGroup(null)}
                 >
                   {cats.map(cat => {
