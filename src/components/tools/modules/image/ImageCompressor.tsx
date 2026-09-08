@@ -159,7 +159,7 @@ export default function ImageCompressor() {
               <span>Image Quality</span>
               <span className="text-[var(--accent)] font-bold">{Math.round(quality * 100)}%</span>
             </div>
-            <input
+            <input aria-label="Image Quality"
               type="range"
               min="0.1"
               max="1.0"
@@ -179,7 +179,7 @@ export default function ImageCompressor() {
               <span>Resolution Scale</span>
               <span className="text-[var(--accent)] font-bold">{Math.round(scale * 100)}%</span>
             </div>
-            <input
+            <input aria-label="Resolution Scale"
               type="range"
               min="0.1"
               max="1.0"

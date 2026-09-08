@@ -358,7 +358,7 @@ export function PdfWorkflowBuilder() {
             <>
               <h3 className="text-lg font-semibold">Merge PDFs</h3>
               <p className="text-sm text-[var(--text-tertiary)]">Upload multiple PDFs and combine them into one file.</p>
-              <input ref={mergeRef} type="file" accept=".pdf" multiple onChange={handleMergeUpload} className="hidden" />
+              <input aria-label="Upload multiple PDFs and combine them into one file." ref={mergeRef} type="file" accept=".pdf" multiple onChange={handleMergeUpload} className="hidden" />
               {dropZone('Click to select PDF files', () => mergeRef.current?.click())}
               {mergeFiles.length > 0 && (
                 <div className="space-y-1.5">
@@ -383,13 +383,13 @@ export function PdfWorkflowBuilder() {
             <>
               <h3 className="text-lg font-semibold">Split PDF</h3>
               <p className="text-sm text-[var(--text-tertiary)]">Extract specific pages or ranges into a new PDF.</p>
-              <input ref={splitRef} type="file" accept=".pdf" onChange={handleSplitUpload} className="hidden" />
+              <input aria-label="Extract specific pages or ranges into a new PDF." ref={splitRef} type="file" accept=".pdf" onChange={handleSplitUpload} className="hidden" />
               {!splitFile ? dropZone('Click to select a PDF', () => splitRef.current?.click()) : fileBar(splitFile.name, () => { setSplitFile(null); setSplitRanges(''); })}
               {splitFile && (
                 <>
                   <div>
                     <label className="block text-xs font-medium mb-1 text-[var(--text-tertiary)]">Page ranges (e.g. 1-3, 5, 7-9)</label>
-                    <input className={inputCls} value={splitRanges} onChange={e => setSplitRanges(e.target.value)} placeholder="1-3, 5, 7-9" />
+                    <input aria-label="Page ranges (e.g. 1-3, 5, 7-9)" className={inputCls} value={splitRanges} onChange={e => setSplitRanges(e.target.value)} placeholder="1-3, 5, 7-9" />
                   </div>
                   <button onClick={handleSplit} disabled={loading} className={btnCls}>{loading ? 'Extracting...' : 'Extract Pages'}</button>
                 </>
@@ -401,7 +401,7 @@ export function PdfWorkflowBuilder() {
             <>
               <h3 className="text-lg font-semibold">Fill PDF Form</h3>
               <p className="text-sm text-[var(--text-tertiary)]">Upload a PDF form, fill the fields, and download a flattened copy.</p>
-              <input ref={fillRef} type="file" accept=".pdf" onChange={handleFillUpload} className="hidden" />
+              <input aria-label="Upload a PDF form, fill the fields, and download a flattened copy." ref={fillRef} type="file" accept=".pdf" onChange={handleFillUpload} className="hidden" />
               {!fillFile ? dropZone('Click to select a PDF form', () => fillRef.current?.click()) : fileBar(fillFileName, () => { setFillFile(null); setFillFileName(''); setFormFields([]); })}
               {formFields.length > 0 && (
                 <div className="space-y-2">
@@ -426,7 +426,7 @@ export function PdfWorkflowBuilder() {
               <div className="flex gap-2">
                 {(['rotate', 'extract', 'delete'] as const).map(m => tabBtn(m, pageMode, setPageMode, m === 'rotate' ? <><RotateCw size={13} className="inline mr-1" />Rotate</> : m === 'extract' ? 'Extract' : 'Delete'))}
               </div>
-              <input ref={pagesRef} type="file" accept=".pdf" onChange={handlePagesUpload} className="hidden" />
+              <input aria-label="Rotate" ref={pagesRef} type="file" accept=".pdf" onChange={handlePagesUpload} className="hidden" />
               {!pagesFile ? dropZone('Click to select a PDF', () => pagesRef.current?.click()) : fileBar(pagesFileName, () => { setPagesFile(null); setPagesFileName(''); setPageCount(0); setSelectedPages([]); })}
               {pageCount > 0 && (
                 <>
@@ -458,7 +458,7 @@ export function PdfWorkflowBuilder() {
             <>
               <h3 className="text-lg font-semibold">Optimize PDF</h3>
               <p className="text-sm text-[var(--text-tertiary)]">Reduce file size by stripping unused data and re-saving efficiently.</p>
-              <input ref={optimizeRef} type="file" accept=".pdf" onChange={handleOptimize} className="hidden" />
+              <input aria-label="Reduce file size by stripping unused data and re-saving efficiently." ref={optimizeRef} type="file" accept=".pdf" onChange={handleOptimize} className="hidden" />
               {dropZone('Click to select a PDF to optimize', () => optimizeRef.current?.click())}
               {optimizeResult && <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg text-sm text-blue-700 dark:text-blue-400">{optimizeResult}</div>}
             </>
@@ -468,7 +468,7 @@ export function PdfWorkflowBuilder() {
             <>
               <h3 className="text-lg font-semibold">Edit Metadata</h3>
               <p className="text-sm text-[var(--text-tertiary)]">View and edit PDF document properties like title, author, and subject.</p>
-              <input ref={metaRef} type="file" accept=".pdf" onChange={handleMetaUpload} className="hidden" />
+              <input aria-label="View and edit PDF document properties like title, author, and subject." ref={metaRef} type="file" accept=".pdf" onChange={handleMetaUpload} className="hidden" />
               {!metaFile ? dropZone('Click to select a PDF', () => metaRef.current?.click()) : fileBar(metaFileName, () => { setMetaFile(null); setMetaFileName(''); })}
               {metaFile && (
                 <div className="space-y-3">

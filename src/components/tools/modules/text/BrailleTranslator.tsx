@@ -60,7 +60,7 @@ export default function BrailleTranslator() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
           <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">English Plaintext</span>
-          <textarea
+          <textarea aria-label="English Plaintext"
             value={text}
             onChange={e => setText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && translateToBraille()}
             placeholder="Type standard text here..."
@@ -78,7 +78,7 @@ export default function BrailleTranslator() {
 
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
           <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Braille Characters Output</span>
-          <textarea
+          <textarea aria-label="Braille Characters Output"
             value={braille}
             onChange={e => setBraille(e.target.value)}
             placeholder="Braille cells output (e.g. ⠓⠑⠇⠇⠕)..."

@@ -26,13 +26,13 @@ export default function ResumeBuilder() {
         <div className="space-y-6 no-print">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4">Personal Info</h3>
-            <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Full Name" onChange={(e) => setPersonal({...personal, name: e.target.value})} />
-            <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Professional Title" onChange={(e) => setPersonal({...personal, title: e.target.value})} />
+            <input aria-label="Full Name" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Full Name" onChange={(e) => setPersonal({...personal, name: e.target.value})} />
+            <input aria-label="Professional Title" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Professional Title" onChange={(e) => setPersonal({...personal, title: e.target.value})} />
             <div className="grid grid-cols-2 gap-4">
-              <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Email" onChange={(e) => setPersonal({...personal, email: e.target.value})} />
-              <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Phone" onChange={(e) => setPersonal({...personal, phone: e.target.value})} />
+              <input aria-label="Email" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Email" onChange={(e) => setPersonal({...personal, email: e.target.value})} />
+              <input aria-label="Phone" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Phone" onChange={(e) => setPersonal({...personal, phone: e.target.value})} />
             </div>
-            <textarea className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-24" placeholder="Professional Summary" onChange={(e) => setPersonal({...personal, summary: e.target.value})} />
+            <textarea aria-label="Professional Summary" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-24" placeholder="Professional Summary" onChange={(e) => setPersonal({...personal, summary: e.target.value})} />
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
@@ -42,12 +42,12 @@ export default function ResumeBuilder() {
             </div>
             {experience.map((exp, i) => (
               <div key={i} className="space-y-2 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
-                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Role" onChange={(e) => { const newExp = [...experience]; newExp[i].role = e.target.value; setExperience(newExp); }} />
+                <input aria-label="Role" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Role" onChange={(e) => { const newExp = [...experience]; newExp[i].role = e.target.value; setExperience(newExp); }} />
                 <div className="grid grid-cols-2 gap-4">
-                  <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Company" onChange={(e) => { const newExp = [...experience]; newExp[i].company = e.target.value; setExperience(newExp); }} />
+                  <input aria-label="Company" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Company" onChange={(e) => { const newExp = [...experience]; newExp[i].company = e.target.value; setExperience(newExp); }} />
                   <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Duration (e.g. 2020-2023)" onChange={(e) => { const newExp = [...experience]; newExp[i].duration = e.target.value; setExperience(newExp); }} />
                 </div>
-                <textarea className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-20" placeholder="Description of duties" onChange={(e) => { const newExp = [...experience]; newExp[i].description = e.target.value; setExperience(newExp); }} />
+                <textarea aria-label="Description of duties" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-20" placeholder="Description of duties" onChange={(e) => { const newExp = [...experience]; newExp[i].description = e.target.value; setExperience(newExp); }} />
               </div>
             ))}
           </div>
@@ -59,9 +59,9 @@ export default function ResumeBuilder() {
             </div>
             {education.map((edu, i) => (
               <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
-                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Institution" onChange={(e) => { const newEdu = [...education]; newEdu[i].institution = e.target.value; setEducation(newEdu); }} />
-                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Degree" onChange={(e) => { const newEdu = [...education]; newEdu[i].degree = e.target.value; setEducation(newEdu); }} />
-                <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Year" onChange={(e) => { const newEdu = [...education]; newEdu[i].year = e.target.value; setEducation(newEdu); }} />
+                <input aria-label="Institution" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Institution" onChange={(e) => { const newEdu = [...education]; newEdu[i].institution = e.target.value; setEducation(newEdu); }} />
+                <input aria-label="Degree" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Degree" onChange={(e) => { const newEdu = [...education]; newEdu[i].degree = e.target.value; setEducation(newEdu); }} />
+                <input aria-label="Year" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] md:col-span-1" placeholder="Year" onChange={(e) => { const newEdu = [...education]; newEdu[i].year = e.target.value; setEducation(newEdu); }} />
               </div>
             ))}
           </div>

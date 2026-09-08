@@ -263,7 +263,7 @@ export default function WebInspector() {
 
       {tab === 'mime' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-          <input value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+          <input aria-label="No matching status codes." value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
               <thead><tr className="text-[var(--text-muted)] font-bold uppercase text-[10px] border-b border-[var(--border-subtle)]"><th className="text-left py-2 px-2">Extension</th><th className="text-left py-2 px-2">MIME Type</th><th className="text-left py-2 px-2">Category</th></tr></thead>
@@ -285,14 +285,14 @@ export default function WebInspector() {
       {tab === 'basic-auth' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <input value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+            <input aria-label="No matching MIME types." value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
             <input value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
           {basicUser && basicPass && (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
               <div className="relative">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Authorization Header</label>
-                <input type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <input aria-label="Authorization Header" type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
               </div>
               <InfoRow label="Raw Base64" val={basicResult} />

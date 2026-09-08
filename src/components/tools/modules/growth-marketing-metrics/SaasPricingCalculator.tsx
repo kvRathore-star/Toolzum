@@ -100,7 +100,7 @@ export default function SaasPricingCalculator() {
                 <span>Avg. Revenue Per User (ARPU)</span>
                 <span className="text-[var(--text-primary)]">${arpu}/mo</span>
               </div>
-              <input 
+              <input aria-label="Avg. Revenue Per User (ARPU)" 
                 type="range" min="5" max="500" step="5" value={arpu} 
                 onChange={e => setArpu(parseInt(e.target.value))} 
                 className="w-full accent-indigo-600"
@@ -113,7 +113,7 @@ export default function SaasPricingCalculator() {
                 <span>Customer Acquisition Cost (CAC)</span>
                 <span className="text-[var(--text-primary)]">${cac}</span>
               </div>
-              <input 
+              <input aria-label="Customer Acquisition Cost (CAC)" 
                 type="range" min="10" max="2000" step="10" value={cac} 
                 onChange={e => setCac(parseInt(e.target.value))} 
                 className="w-full accent-indigo-600"
@@ -126,7 +126,7 @@ export default function SaasPricingCalculator() {
                 <span>Monthly Churn Rate (%)</span>
                 <span className="text-[var(--text-primary)]">{churn}%</span>
               </div>
-              <input 
+              <input aria-label="Monthly Churn Rate (%)" 
                 type="range" min="0.5" max="25" step="0.5" value={churn} 
                 onChange={e => setChurn(parseFloat(e.target.value))} 
                 className="w-full accent-indigo-600"
@@ -139,7 +139,7 @@ export default function SaasPricingCalculator() {
                 <span>Monthly Operating Expense</span>
                 <span className="text-[var(--text-primary)]">${opex.toLocaleString()}/mo</span>
               </div>
-              <input 
+              <input aria-label="Monthly Operating Expense" 
                 type="range" min="1000" max="100000" step="1000" value={opex} 
                 onChange={e => setOpex(parseInt(e.target.value))} 
                 className="w-full accent-indigo-600"
@@ -152,7 +152,7 @@ export default function SaasPricingCalculator() {
                 <span>COGS (Hosting/Support/API %)</span>
                 <span className="text-[var(--text-primary)]">{cogsPercent}%</span>
               </div>
-              <input 
+              <input aria-label="COGS (Hosting/Support/API %)" 
                 type="range" min="5" max="60" step="5" value={cogsPercent} 
                 onChange={e => setCogsPercent(parseInt(e.target.value))} 
                 className="w-full accent-indigo-600"
@@ -165,7 +165,7 @@ export default function SaasPricingCalculator() {
                 <span>Starting Customers</span>
                 <span className="text-[var(--text-primary)]">{startingCustomers}</span>
               </div>
-              <input 
+              <input aria-label="Starting Customers" 
                 type="range" min="0" max="1000" step="10" value={startingCustomers} 
                 onChange={e => setStartingCustomers(parseInt(e.target.value))} 
                 className="w-full accent-indigo-600"

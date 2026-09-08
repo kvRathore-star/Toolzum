@@ -154,7 +154,7 @@ export default function LiveTranscription() {
         <div className="text-blue-700 dark:text-blue-400 text-sm">
           <strong>100% Client-Side Voice AI:</strong> Audio is processed locally by your browser's speech engine. No audio files are uploaded to our servers.
         </div>
-        <select 
+        <select aria-label="Audio is processed locally by your browser's speech engine. No audio files are u" 
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
           className="bg-white dark:bg-black border border-blue-500/30 text-blue-300 text-sm rounded-lg px-3 py-1.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

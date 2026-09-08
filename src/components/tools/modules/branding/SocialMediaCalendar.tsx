@@ -172,7 +172,7 @@ export default function SocialMediaCalendar() {
                 <option value="published">Published</option>
               </select>
             </div>
-            <textarea value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} rows={3} placeholder="Post content..."
+            <textarea aria-label="Published" value={form.content} onChange={e => setForm(f => ({ ...f, content: e.target.value }))} rows={3} placeholder="Post content..."
               className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none" />
             <div className="flex gap-2">
               <button onClick={editingId ? updatePost : addPost}

@@ -50,7 +50,7 @@ export default function DiffChecker() {
           {/* Original panel */}
           <div className="space-y-2">
             <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider block">Original Text</span>
-            <textarea
+            <textarea aria-label="Original Text"
               value={original}
               onChange={(e) => {
                 setOriginal(e.target.value);
@@ -65,7 +65,7 @@ export default function DiffChecker() {
           {/* Modified panel */}
           <div className="space-y-2">
             <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider block">Modified Text</span>
-            <textarea
+            <textarea aria-label="Modified Text"
               value={modified}
               onChange={(e) => {
                 setModified(e.target.value);

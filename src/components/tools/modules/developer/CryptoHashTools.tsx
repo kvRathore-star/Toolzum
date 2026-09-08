@@ -153,7 +153,7 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
           {mode === 'encrypt' && (
             <div>
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Output Format</label>
-              <select value={outputFormat} onChange={e => setOutputFormat(e.target.value as any)}
+              <select aria-label="Output Format" value={outputFormat} onChange={e => setOutputFormat(e.target.value as any)}
                 className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
                 <option value="Base64">Base64</option>
                 <option value="Hex">Hexadecimal</option>

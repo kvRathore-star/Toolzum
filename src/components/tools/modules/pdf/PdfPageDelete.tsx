@@ -151,7 +151,7 @@ export default function PdfPageDelete() {
           </h4>
           
           <div className="space-y-3">
-            <input
+            <input aria-label="Remove"
               type="text"
               placeholder="e.g. 1, 3, 5-10"
               value={rangeInput}

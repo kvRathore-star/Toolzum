@@ -95,7 +95,7 @@ function GroupLinkTab() {
       <div className="space-y-2">
         <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Group Invite Code / ID</label>
         <div className="flex gap-2">
-          <input value={groupId} onChange={e => setGroupId(e.target.value)} placeholder="e.g. IvR5dLkQzP9..."
+          <input aria-label="Group Invite Code / ID" value={groupId} onChange={e => setGroupId(e.target.value)} placeholder="e.g. IvR5dLkQzP9..."
             className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         </div>
       </div>
@@ -141,7 +141,7 @@ function FormatTextTab() {
   return (
     <div className="space-y-4">
       <p className="text-xs text-[var(--text-secondary)]">Format your text for WhatsApp. Type below and copy the formatted version.</p>
-      <textarea value={input} onChange={e => setInput(e.target.value)} rows={3}
+      <textarea aria-label="Format your text for WhatsApp. Type below and copy the formatted version." value={input} onChange={e => setInput(e.target.value)} rows={3}
         placeholder="Type or paste your text here..."
         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none" />
       {formats.length > 0 && (
@@ -254,7 +254,7 @@ function BulkLinkTab() {
         <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
         <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Upload CSV file'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">CSV format: phone,message (one per line)</p>
-        <input ref={fileInputRef} type="file" accept=".csv" onChange={handleFile} className="hidden" />
+        <input aria-label="CSV format: phone,message (one per line)" ref={fileInputRef} type="file" accept=".csv" onChange={handleFile} className="hidden" />
       </div>
 
       {csvData.length > 0 && (
@@ -388,7 +388,7 @@ function QrTab() {
           </div>
           <div className="space-y-1">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Logo (optional)</label>
-            <input type="file" accept="image/*" onChange={e => {
+            <input aria-label="Logo (optional)" type="file" accept="image/*" onChange={e => {
               const file = e.target.files?.[0];
               if (file) {
                 if (logoImage) URL.revokeObjectURL(logoImage);
@@ -472,7 +472,7 @@ function QuickRepliesTab() {
       <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
         <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Plus className="w-3 h-3" /> New Quick Reply</h5>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-          <input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Template title (e.g. Order Confirmation)"
+          <input aria-label="New Quick Reply" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Template title (e.g. Order Confirmation)"
             className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)"
             className="md:col-span-1 bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
@@ -653,7 +653,7 @@ function ChatAnalyzerTab() {
         <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
         <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Tap to upload _chat.txt'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">WhatsApp → More → Export Chat → Without Media</p>
-        <input ref={fileInputRef} type="file" accept=".txt" onChange={handleFile} className="hidden" />
+        <input aria-label="WhatsApp → More → Export Chat → Without Media" ref={fileInputRef} type="file" accept=".txt" onChange={handleFile} className="hidden" />
       </div>
 
       {stats && (

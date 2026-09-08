@@ -261,7 +261,7 @@ export default function CollageMaker() {
 
             <div>
               <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Spacing</span><span>{spacing}px</span></label>
-              <input type="range" min={0} max={20} value={spacing}
+              <input aria-label="Spacing" type="range" min={0} max={20} value={spacing}
                 onChange={e => setSpacing(Number(e.target.value))}
                 className="w-full accent-blue-500" />
             </div>
@@ -283,14 +283,14 @@ export default function CollageMaker() {
 
             <div>
               <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Border Width</span><span>{borderWidth}px</span></label>
-              <input type="range" min={0} max={10} value={borderWidth}
+              <input aria-label="Border Width" type="range" min={0} max={10} value={borderWidth}
                 onChange={e => setBorderWidth(Number(e.target.value))}
                 className="w-full accent-blue-500" />
             </div>
 
             <div>
               <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Corner Radius</span><span>{radius}px</span></label>
-              <input type="range" min={0} max={50} value={radius}
+              <input aria-label="Corner Radius" type="range" min={0} max={50} value={radius}
                 onChange={e => setRadius(Number(e.target.value))}
                 className="w-full accent-blue-500" />
             </div>
@@ -310,7 +310,7 @@ export default function CollageMaker() {
               {(format === 'image/jpeg' || format === 'image/webp') && (
                 <div>
                   <label className="flex justify-between text-xs text-[var(--text-secondary)] mb-1"><span>Quality</span><span>{Math.round(quality * 100)}%</span></label>
-                  <input type="range" min={0.1} max={1} step={0.01} value={quality}
+                  <input aria-label="Quality" type="range" min={0.1} max={1} step={0.01} value={quality}
                     onChange={e => setQuality(Number(e.target.value))}
                     className="w-full accent-blue-500" />
                 </div>

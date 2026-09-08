@@ -150,7 +150,7 @@ export default function BulkUrlStatusChecker() {
             <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
             <p className="text-sm text-[var(--text-primary)] font-medium">Drop a .txt or .csv file here, or click to browse</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">One URL per line — up to 5,000 URLs</p>
-            <input ref={fileRef} type="file" accept=".txt,.csv,text/plain,text/csv" className="hidden" onChange={e => {
+            <input aria-label="One URL per line — up to 5,000 URLs" ref={fileRef} type="file" accept=".txt,.csv,text/plain,text/csv" className="hidden" onChange={e => {
               const f = e.target.files?.[0];
               if (f) handleFile(f);
               e.target.value = '';

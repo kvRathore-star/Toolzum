@@ -279,7 +279,7 @@ export default function PronunciationTool() {
         <form onSubmit={handleSubmit}>
           <div className="flex gap-3">
             <div className="flex-1 relative">
-              <input
+              <input aria-label="Free Text"
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}

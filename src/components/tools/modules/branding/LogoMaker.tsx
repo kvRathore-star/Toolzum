@@ -249,7 +249,7 @@ export default function LogoMaker() {
 
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Layout Style</label>
-                <select
+                <select aria-label="Layout Style"
                   value={layout}
                   onChange={(e) => setLayout(e.target.value as any)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
@@ -270,7 +270,7 @@ export default function LogoMaker() {
                 <span>Icon Size</span>
                 <span>{iconSize}px</span>
               </div>
-              <input type="range" min="30" max="120" value={iconSize} onChange={e => setIconSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
+              <input aria-label="Icon Size" type="range" min="30" max="120" value={iconSize} onChange={e => setIconSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
             </div>
 
             <div className="space-y-1">
@@ -278,7 +278,7 @@ export default function LogoMaker() {
                 <span>Text Size</span>
                 <span>{textSize}px</span>
               </div>
-              <input type="range" min="18" max="64" value={textSize} onChange={e => setTextSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
+              <input aria-label="Text Size" type="range" min="18" max="64" value={textSize} onChange={e => setTextSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
             </div>
 
             <div className="space-y-1">
@@ -286,7 +286,7 @@ export default function LogoMaker() {
                 <span>Tagline Size</span>
                 <span>{taglineSize}px</span>
               </div>
-              <input type="range" min="8" max="24" value={taglineSize} onChange={e => setTaglineSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
+              <input aria-label="Tagline Size" type="range" min="8" max="24" value={taglineSize} onChange={e => setTaglineSize(parseInt(e.target.value))} className="w-full accent-indigo-650" />
             </div>
           </div>
 

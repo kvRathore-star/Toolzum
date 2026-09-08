@@ -104,7 +104,7 @@ export default function ImageColorizer() {
                     <span>Hue Tone</span>
                     <span>{hue}°</span>
                   </div>
-                  <input type="range" min="0" max="360" value={hue} onChange={e => setHue(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Hue Tone" type="range" min="0" max="360" value={hue} onChange={e => setHue(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
 
                 <div>
@@ -112,7 +112,7 @@ export default function ImageColorizer() {
                     <span>Color Saturation</span>
                     <span>{saturation}%</span>
                   </div>
-                  <input type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Color Saturation" type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
               </div>
 

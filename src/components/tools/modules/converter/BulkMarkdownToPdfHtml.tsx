@@ -106,7 +106,7 @@ export default function BulkMarkdownToPdfHtml() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="space-y-1">
             <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Markdown</h4>
-            <textarea value={markdown} onChange={(e) => setMarkdown(e.target.value)} className="w-full h-[400px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)] transition-colors" placeholder="Write or paste Markdown..." />
+            <textarea aria-label="Markdown" value={markdown} onChange={(e) => setMarkdown(e.target.value)} className="w-full h-[400px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)] transition-colors" placeholder="Write or paste Markdown..." />
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between">

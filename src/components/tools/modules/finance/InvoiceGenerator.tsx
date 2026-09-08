@@ -134,7 +134,7 @@ export default function InvoiceGenerator() {
             <div className="space-y-2 text-sm">
               <div className="flex md:justify-end gap-2 items-center">
                 <span className="font-semibold text-[var(--text-primary)]">Invoice #:</span>
-                <input
+                <input aria-label="Invoice #:"
                   type="text"
                   value={invoiceNum}
                   onChange={(e) => setInvoiceNum(e.target.value)}
@@ -143,7 +143,7 @@ export default function InvoiceGenerator() {
               </div>
               <div className="flex md:justify-end gap-2 items-center">
                 <span className="font-semibold text-[var(--text-primary)]">Date:</span>
-                <input
+                <input aria-label="Date:"
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
@@ -152,7 +152,7 @@ export default function InvoiceGenerator() {
               </div>
               <div className="flex md:justify-end gap-2 items-center">
                 <span className="font-semibold text-[var(--text-primary)]">Due Date:</span>
-                <input
+                <input aria-label="Due Date:"
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
@@ -167,7 +167,7 @@ export default function InvoiceGenerator() {
         <div className="mb-12">
           <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-3">Bill To</h3>
           <div className="space-y-2 max-w-sm">
-            <input
+            <input aria-label="Bill To"
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
@@ -257,7 +257,7 @@ export default function InvoiceGenerator() {
         <div className="flex flex-col-reverse md:flex-row justify-between gap-8">
           <div className="flex-1">
             <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2">Notes</h3>
-            <textarea
+            <textarea aria-label="Notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
@@ -275,7 +275,7 @@ export default function InvoiceGenerator() {
               <span className="text-[var(--text-secondary)] flex items-center gap-1">
                 Tax 
                 <span className="print-hide text-xs bg-[var(--bg-surface)] px-1 rounded flex items-center">
-                  <input
+                  <input aria-label="Tax"
                     type="number"
                     value={taxRate}
                     onChange={(e) => setTaxRate(parseFloat(e.target.value) || 0)}

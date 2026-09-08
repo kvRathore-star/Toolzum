@@ -200,7 +200,7 @@ export default function BulkImageWatermark() {
           <Upload className="w-8 h-8 text-[var(--text-muted)] mb-2" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Upload images</p>
           <p className="text-xs text-[var(--text-muted)]">PNG, JPG, WebP</p>
-          <input ref={fileRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
+          <input aria-label="PNG, JPG, WebP" ref={fileRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         {/* Watermark type toggle */}
@@ -214,7 +214,7 @@ export default function BulkImageWatermark() {
         </div>
 
         {watermarkType === 'text' ? (
-          <input
+          <input aria-label="Logo"
             value={watermarkText}
             onChange={e => setWatermarkText(e.target.value)}
             placeholder="Enter watermark text..."
@@ -233,7 +233,7 @@ export default function BulkImageWatermark() {
                 <span className="text-sm text-[var(--text-muted)]">Upload logo (PNG/SVG)</span>
               </>
             )}
-            <input ref={logoRef} type="file" accept="image/png,image/svg+xml" onChange={handleLogoUpload} className="hidden" />
+            <input aria-label="Upload logo (PNG/SVG)" ref={logoRef} type="file" accept="image/png,image/svg+xml" onChange={handleLogoUpload} className="hidden" />
           </div>
         )}
 

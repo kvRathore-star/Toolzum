@@ -212,7 +212,7 @@ export default function AiBgChanger() {
             <Image className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
             <p className="text-base font-semibold text-[var(--text-secondary)]">Upload an image</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">AI-powered background removal + replacement</p>
-            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
+            <input aria-label="AI-powered background removal + replacement" ref={fileInputRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -238,7 +238,7 @@ export default function AiBgChanger() {
                   <>
                     <div className="space-y-1">
                       <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Detection Sensitivity</span><span className="font-mono">{tolerance}%</span></label>
-                      <input type="range" min="1" max="50" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
+                      <input aria-label="Detection Sensitivity" type="range" min="1" max="50" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={removeBackgroundAuto} disabled={isProcessing}
@@ -251,7 +251,7 @@ export default function AiBgChanger() {
                     <p className="text-[9px] text-[var(--text-secondary)]">Paint over the foreground (subject) to keep it. Everything else will be removed.</p>
                     <div className="space-y-1">
                       <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Brush Size</span><span className="font-mono">{brushSize}px</span></label>
-                      <input type="range" min="5" max="80" value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}
+                      <input aria-label="Brush Size" type="range" min="5" max="80" value={brushSize} onChange={e => setBrushSize(Number(e.target.value))}
                         className="w-full accent-emerald-500" />
                     </div>
                     <button onClick={applyManualMask} disabled={isProcessing}

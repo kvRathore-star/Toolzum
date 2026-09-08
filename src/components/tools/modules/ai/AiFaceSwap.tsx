@@ -191,7 +191,7 @@ export default function AiFaceSwap() {
                   <span className="flex items-center gap-1"><Move className="w-3.5 h-3.5" /> Position X</span>
                   <span>{posX}px</span>
                 </div>
-                <input type="range" min="-300" max="300" value={posX} onChange={e => setPosX(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                <input aria-label="Position X" type="range" min="-300" max="300" value={posX} onChange={e => setPosX(parseInt(e.target.value))} className="w-full accent-indigo-500" />
               </div>
 
               <div className="space-y-1">
@@ -199,7 +199,7 @@ export default function AiFaceSwap() {
                   <span className="flex items-center gap-1"><Move className="w-3.5 h-3.5" /> Position Y</span>
                   <span>{posY}px</span>
                 </div>
-                <input type="range" min="-300" max="300" value={posY} onChange={e => setPosY(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                <input aria-label="Position Y" type="range" min="-300" max="300" value={posY} onChange={e => setPosY(parseInt(e.target.value))} className="w-full accent-indigo-500" />
               </div>
 
               <div className="space-y-1">
@@ -207,7 +207,7 @@ export default function AiFaceSwap() {
                   <span className="flex items-center gap-1"><Scale className="w-3.5 h-3.5" /> Scale Size</span>
                   <span>{scale.toFixed(2)}x</span>
                 </div>
-                <input type="range" min="0.2" max="3.0" step="0.05" value={scale} onChange={e => setScale(parseFloat(e.target.value))} className="w-full accent-indigo-500" />
+                <input aria-label="Scale Size" type="range" min="0.2" max="3.0" step="0.05" value={scale} onChange={e => setScale(parseFloat(e.target.value))} className="w-full accent-indigo-500" />
               </div>
 
               <div className="space-y-1">
@@ -215,17 +215,17 @@ export default function AiFaceSwap() {
                   <span className="flex items-center gap-1"><RotateCw className="w-3.5 h-3.5" /> Rotation</span>
                   <span>{rotation}°</span>
                 </div>
-                <input type="range" min="-180" max="180" value={rotation} onChange={e => setRotation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                <input aria-label="Rotation" type="range" min="-180" max="180" value={rotation} onChange={e => setRotation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Feather Edge</span>
-                  <input type="range" min="0" max="50" value={feather} onChange={e => setFeather(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Feather Edge" type="range" min="0" max="50" value={feather} onChange={e => setFeather(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Face Blend</span>
-                  <input type="range" min="10" max="100" value={opacity} onChange={e => setOpacity(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Face Blend" type="range" min="10" max="100" value={opacity} onChange={e => setOpacity(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
               </div>
             </div>

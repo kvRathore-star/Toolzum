@@ -67,7 +67,7 @@ export function ColorPaletteGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Palette Generator</h2>
-        <input type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+        <input aria-label="Color Palette Generator" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Palette</button>
         {palette.length > 0 && (
           <div className="flex gap-1">
@@ -98,7 +98,7 @@ export function ColorShadesTints() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Shades &amp; Tints</h2>
-        <input type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+        <input aria-label="Color Shades &amp; Tints" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Shades</button>
         {shades.length > 0 && (
           <div className="flex gap-1 flex-wrap">
@@ -133,7 +133,7 @@ export function ContrastRatioChecker() {
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Background</label>
-            <input type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+            <input aria-label="Background" type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
           </div>
         </div>
         <div className="p-3 rounded-lg text-center text-sm font-bold" style={{ color: fg, backgroundColor: bg }}>Sample Text Aa</div>
@@ -239,7 +239,7 @@ export function MarkdownTableGenerator() {
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Rows</label>
-            <input type="number" value={rows} onChange={e => setRows(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={20}
+            <input aria-label="Rows" type="number" value={rows} onChange={e => setRows(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={20}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
@@ -262,7 +262,7 @@ export function NginxConfigGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Nginx Config Generator</h2>
-        <textarea rows={4} value={options} onChange={e => setOptions(e.target.value)} placeholder="One directive per line"
+        <textarea aria-label="Nginx Config Generator" rows={4} value={options} onChange={e => setOptions(e.target.value)} placeholder="One directive per line"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
@@ -319,7 +319,7 @@ export function IpAllowlistGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Allowlist Generator</h2>
         <p className="text-xs text-[var(--text-secondary)]">Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Cloudflare WAF from CIDR ranges.</p>
-        <textarea rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"
+        <textarea aria-label="Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Clo" rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-1 flex-wrap">
           {formats.map(f => (

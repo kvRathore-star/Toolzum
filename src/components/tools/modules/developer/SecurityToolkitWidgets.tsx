@@ -325,7 +325,7 @@ export function OAuthStateValidator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">State parameter</label>
-          <input type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
+          <input aria-label="State parameter" type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>
@@ -363,7 +363,7 @@ export function Pbkdf2HashGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PBKDF2 Hash Generator</h2>
-        <textarea rows={3} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="PBKDF2 Hash Generator" rows={3} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Hash</button>
         {output && (
@@ -419,7 +419,7 @@ export function CookieParser() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Cookie Parser &amp; Analyzer</h2>
-        <textarea rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Set-Cookie header value..."
+        <textarea aria-label="Cookie Parser &amp; Analyzer" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Set-Cookie header value..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={() => { setMode('parse'); parse(); }}

@@ -142,7 +142,7 @@ export default function GstinLookup() {
             <>
               <p className="text-xs text-[var(--text-secondary)]">Enter a 15-character GSTIN to verify business details. Free: 5 lookups/day. <strong>{5 - dailyUsed} remaining today.</strong></p>
               <div className="flex gap-2">
-                <input value={gstin} onChange={e => setGstin(e.target.value.toUpperCase())} placeholder="27AABCU1234D1Z5"
+                <input aria-label="Enter a 15-character GSTIN to verify business details. Free: 5 lookups/day." value={gstin} onChange={e => setGstin(e.target.value.toUpperCase())} placeholder="27AABCU1234D1Z5"
                   maxLength={15}
                   className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                 <button onClick={handleLookup} disabled={loading || !gstin || isFreeLimitReached}
@@ -189,7 +189,7 @@ export default function GstinLookup() {
                 <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
                 <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{bulkData.length > 0 ? `${bulkData.length} GSTINs loaded` : 'Upload CSV/TXT file'}</p>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">One GSTIN per line</p>
-                <input id="bulk-gstin-file" type="file" accept=".csv,.txt" onChange={handleBulkFile} className="hidden" />
+                <input aria-label="One GSTIN per line" id="bulk-gstin-file" type="file" accept=".csv,.txt" onChange={handleBulkFile} className="hidden" />
               </div>
               {bulkData.length > 0 && (
                 <div className="space-y-3">

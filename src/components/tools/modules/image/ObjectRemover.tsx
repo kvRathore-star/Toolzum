@@ -270,7 +270,7 @@ export default function ObjectRemover() {
               <span>Brush Size</span>
               <span className="text-[var(--accent)] font-bold">{brushSize} px</span>
             </div>
-            <input
+            <input aria-label="Brush Size"
               type="range"
               min="5"
               max="100"

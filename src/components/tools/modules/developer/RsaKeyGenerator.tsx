@@ -54,7 +54,7 @@ export default function RsaKeyGenerator() {
         <h3 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase">{title}</h3>
         {pem && <button onClick={() => copy(pem, title)} className="text-[10px] text-[var(--accent)] hover:underline flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>}
       </div>
-      <textarea value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
+      <textarea aria-label="Copy" value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
       {pem && (
         <div className="text-[10px] text-[var(--text-muted)]">
           {pem.split('\n').filter(l => !l.startsWith('---')).join('').length} characters

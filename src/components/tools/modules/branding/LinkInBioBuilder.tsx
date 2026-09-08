@@ -190,7 +190,7 @@ ${linkCards}
                 </div>
                 <div className="space-y-1">
                   <label className="text-[9px] text-[var(--text-secondary)]">Accent</label>
-                  <input type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <input aria-label="Accent" type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
               </div>
             </div>

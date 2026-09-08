@@ -126,7 +126,7 @@ export function ScssToCssConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SCSS to CSS Converter</h2>
         <PresetBar presets={presets} />
-        <textarea rows={8} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="SCSS to CSS Converter" rows={8} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {errors.length > 0 && (
@@ -260,7 +260,7 @@ export function StylusToCssConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Stylus to CSS Converter</h2>
         <PresetBar presets={presets} />
-        <textarea rows={8} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Stylus to CSS Converter" rows={8} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {output && (
@@ -405,7 +405,7 @@ export function ProtobufDecoder() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Protobuf Decoder</h2>
         <p className="text-xs text-[var(--text-secondary)]">Decode protobuf wire format hex to readable field structure. Supports varints, strings, nested messages, and fixed-width types.</p>
         <PresetBar presets={presets} />
-        <textarea rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
+        <textarea aria-label="Decode protobuf wire format hex to readable field structure. Supports varints, s" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
         {output && (
@@ -455,7 +455,7 @@ export function TailwindToCssConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Tailwind to CSS Converter</h2>
-        <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Space-separated Tailwind classes"
+        <textarea aria-label="Tailwind to CSS Converter" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Space-separated Tailwind classes"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <p className="text-xs text-[var(--text-secondary)]">Supports 40+ common Tailwind classes.</p>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
@@ -496,7 +496,7 @@ export function ProtoSchemaConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Proto Schema to TS + JSON</h2>
-        <textarea rows={7} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Proto Schema to TS + JSON" rows={7} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate TS + JSON</button>
         {output && (
@@ -534,7 +534,7 @@ export function TsconfigAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">tsconfig Analyzer</h2>
-        <textarea rows={5} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="tsconfig Analyzer" rows={5} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
@@ -565,7 +565,7 @@ export function TypeScriptFormatter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">TypeScript Formatter</h2>
-        <textarea rows={5} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="TypeScript Formatter" rows={5} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={format} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Format</button>
         {output && (

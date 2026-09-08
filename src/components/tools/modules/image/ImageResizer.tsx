@@ -71,7 +71,7 @@ export default function ImageResizer() {
          <h2 className="text-2xl font-bold">Image Resizer</h2>
          
          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
-           <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+           <input aria-label="Image Resizer" type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
            {image ? <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg" /> : <div className="text-[var(--text-secondary)]">Click or Drag Image Here</div>}
          </div>
 

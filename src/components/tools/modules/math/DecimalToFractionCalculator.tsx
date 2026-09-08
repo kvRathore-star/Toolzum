@@ -41,7 +41,7 @@ export default function DecimalToFractionCalculator() {
 
           <div className="bg-[var(--bg-surface)] rounded-xl p-3">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Precision</div>
-            <input type="range" min={10} max={100000000} step={10} value={precision} onChange={e => setPrecision(Number(e.target.value))}
+            <input aria-label="Precision" type="range" min={10} max={100000000} step={10} value={precision} onChange={e => setPrecision(Number(e.target.value))}
               className="w-full accent-amber-500 mb-2" />
             <div className="text-xs text-[var(--text-muted)]">Precision: ${precision.toLocaleString()}</div>
           </div>

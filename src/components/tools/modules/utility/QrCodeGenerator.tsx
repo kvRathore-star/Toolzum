@@ -235,46 +235,46 @@ export default function QrCodeGenerator() {
           {qrType === 'text' && (
             <div className="space-y-1 text-xs">
               <span className="font-bold text-[var(--text-secondary)] uppercase block">Plain Text</span>
-              <textarea value={textContent} onChange={e => setTextContent(e.target.value)} className={`${inpCls} h-24 resize-none`} />
+              <textarea aria-label="Plain Text" value={textContent} onChange={e => setTextContent(e.target.value)} className={`${inpCls} h-24 resize-none`} />
             </div>
           )}
 
           {qrType === 'email' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Email Address</span><input type="email" value={emailAddr} onChange={e => setEmailAddr(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Subject</span><input type="text" value={emailSubj} onChange={e => setEmailSubj(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Body</span><textarea value={emailBody} onChange={e => setEmailBody(e.target.value)} className={`${inpCls} h-20 resize-none`} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Email Address</span><input aria-label="Email Address" type="email" value={emailAddr} onChange={e => setEmailAddr(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Subject</span><input aria-label="Subject" type="text" value={emailSubj} onChange={e => setEmailSubj(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Body</span><textarea aria-label="Body" value={emailBody} onChange={e => setEmailBody(e.target.value)} className={`${inpCls} h-20 resize-none`} /></div>
             </div>
           )}
 
           {qrType === 'phone' && (
             <div className="space-y-1 text-xs">
               <span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number (with country code)</span>
-              <input type="tel" value={phoneNum} onChange={e => setPhoneNum(e.target.value)} placeholder="+14155552671" className={inpCls} />
+              <input aria-label="Phone Number (with country code)" type="tel" value={phoneNum} onChange={e => setPhoneNum(e.target.value)} placeholder="+14155552671" className={inpCls} />
             </div>
           )}
 
           {qrType === 'sms' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number</span><input type="tel" value={smsNum} onChange={e => setSmsNum(e.target.value)} placeholder="+14155552671" className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Message</span><textarea value={smsBody} onChange={e => setSmsBody(e.target.value)} className={`${inpCls} h-20 resize-none`} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number</span><input aria-label="Phone Number" type="tel" value={smsNum} onChange={e => setSmsNum(e.target.value)} placeholder="+14155552671" className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Message</span><textarea aria-label="Message" value={smsBody} onChange={e => setSmsBody(e.target.value)} className={`${inpCls} h-20 resize-none`} /></div>
             </div>
           )}
 
           {qrType === 'whatsapp' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number (without +)</span><input type="tel" value={waNum} onChange={e => setWaNum(e.target.value)} placeholder="14155552671" className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Pre-filled Message</span><textarea value={waText} onChange={e => setWaText(e.target.value)} className={`${inpCls} h-20 resize-none`} placeholder="Hi! I'd like to chat..." /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone Number (without +)</span><input aria-label="Phone Number (without +)" type="tel" value={waNum} onChange={e => setWaNum(e.target.value)} placeholder="14155552671" className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Pre-filled Message</span><textarea aria-label="Pre-filled Message" value={waText} onChange={e => setWaText(e.target.value)} className={`${inpCls} h-20 resize-none`} placeholder="Hi! I'd like to chat..." /></div>
             </div>
           )}
 
           {qrType === 'wifi' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">SSID (Network Name)</span><input type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Password</span><input type="password" value={wifiPass} onChange={e => setWifiPass(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">SSID (Network Name)</span><input aria-label="SSID (Network Name)" type="text" value={wifiSsid} onChange={e => setWifiSsid(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Password</span><input aria-label="Password" type="password" value={wifiPass} onChange={e => setWifiPass(e.target.value)} className={inpCls} /></div>
               <div className="space-y-1">
                 <span className="font-bold text-[var(--text-secondary)] uppercase block">Security</span>
-                <select value={wifiSec} onChange={e => setWifiSec(e.target.value)} className={inpCls}>
+                <select aria-label="Security" value={wifiSec} onChange={e => setWifiSec(e.target.value)} className={inpCls}>
                   <option value="WPA">WPA / WPA2</option>
                   <option value="WEP">WEP</option>
                   <option value="nopass">Open (No Password)</option>
@@ -285,33 +285,33 @@ export default function QrCodeGenerator() {
 
           {qrType === 'contact' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Full Name</span><input type="text" value={contactName} onChange={e => setContactName(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone</span><input type="text" value={contactPhone} onChange={e => setContactPhone(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Email</span><input type="email" value={contactEmail} onChange={e => setContactEmail(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Organization</span><input type="text" value={contactOrg} onChange={e => setContactOrg(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Website</span><input type="url" value={contactUrl} onChange={e => setContactUrl(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Full Name</span><input aria-label="Full Name" type="text" value={contactName} onChange={e => setContactName(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Phone</span><input aria-label="Phone" type="text" value={contactPhone} onChange={e => setContactPhone(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Email</span><input aria-label="Email" type="email" value={contactEmail} onChange={e => setContactEmail(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Organization</span><input aria-label="Organization" type="text" value={contactOrg} onChange={e => setContactOrg(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Website</span><input aria-label="Website" type="url" value={contactUrl} onChange={e => setContactUrl(e.target.value)} className={inpCls} /></div>
             </div>
           )}
 
           {qrType === 'event' && (
             <div className="space-y-3 text-xs">
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Event Title</span><input type="text" value={eventTitle} onChange={e => setEventTitle(e.target.value)} className={inpCls} /></div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Location</span><input type="text" value={eventLoc} onChange={e => setEventLoc(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Event Title</span><input aria-label="Event Title" type="text" value={eventTitle} onChange={e => setEventTitle(e.target.value)} className={inpCls} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Location</span><input aria-label="Location" type="text" value={eventLoc} onChange={e => setEventLoc(e.target.value)} className={inpCls} /></div>
               <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Start (YYYYMMDDTHHMMSS)</span><input type="text" value={eventStart} onChange={e => setEventStart(e.target.value)} className={inpCls} /></div>
-                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">End</span><input type="text" value={eventEnd} onChange={e => setEventEnd(e.target.value)} className={inpCls} /></div>
+                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Start (YYYYMMDDTHHMMSS)</span><input aria-label="Start (YYYYMMDDTHHMMSS)" type="text" value={eventStart} onChange={e => setEventStart(e.target.value)} className={inpCls} /></div>
+                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">End</span><input aria-label="End" type="text" value={eventEnd} onChange={e => setEventEnd(e.target.value)} className={inpCls} /></div>
               </div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Description</span><textarea value={eventDesc} onChange={e => setEventDesc(e.target.value)} className={`${inpCls} h-16 resize-none`} /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Description</span><textarea aria-label="Description" value={eventDesc} onChange={e => setEventDesc(e.target.value)} className={`${inpCls} h-16 resize-none`} /></div>
             </div>
           )}
 
           {qrType === 'location' && (
             <div className="space-y-3 text-xs">
               <div className="grid grid-cols-2 gap-2">
-                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Latitude</span><input type="text" value={geoLat} onChange={e => setGeoLat(e.target.value)} className={inpCls} /></div>
-                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Longitude</span><input type="text" value={geoLon} onChange={e => setGeoLon(e.target.value)} className={inpCls} /></div>
+                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Latitude</span><input aria-label="Latitude" type="text" value={geoLat} onChange={e => setGeoLat(e.target.value)} className={inpCls} /></div>
+                <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Longitude</span><input aria-label="Longitude" type="text" value={geoLon} onChange={e => setGeoLon(e.target.value)} className={inpCls} /></div>
               </div>
-              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Label</span><input type="text" value={geoLabel} onChange={e => setGeoLabel(e.target.value)} className={inpCls} placeholder="San Francisco" /></div>
+              <div className="space-y-1"><span className="font-bold text-[var(--text-secondary)] uppercase block">Label</span><input aria-label="Label" type="text" value={geoLabel} onChange={e => setGeoLabel(e.target.value)} className={inpCls} placeholder="San Francisco" /></div>
             </div>
           )}
 

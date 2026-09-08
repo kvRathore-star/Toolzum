@@ -95,7 +95,7 @@ export default function PodcastTranscription() {
               </button>
             )}
           </div>
-          <textarea
+          <textarea aria-label="Download .TXT"
             className="flex-1 w-full bg-white dark:bg-black border border-emerald-500/30 rounded-lg px-4 py-3 text-[var(--text-primary)] font-serif leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none min-h-[300px]"
             readOnly
             value={output}

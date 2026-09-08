@@ -176,7 +176,7 @@ export default function BulkBgChanger() {
           <ImagePlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
           <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Upload product photos</p>
           <p className="text-[10px] text-[var(--text-secondary)] mt-1">Select a color to remove, replace with your brand background</p>
-          <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
+          <input aria-label="Select a color to remove, replace with your brand background" ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         {images.length > 0 && (
@@ -193,7 +193,7 @@ export default function BulkBgChanger() {
 
                 <div className="space-y-1">
                   <label className="text-[10px] text-[var(--text-secondary)] flex justify-between"><span>Color Tolerance</span><span className="font-mono">{tolerance}%</span></label>
-                  <input type="range" min="1" max="100" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
+                  <input aria-label="Color Tolerance" type="range" min="1" max="100" value={tolerance} onChange={e => setTolerance(Number(e.target.value))}
                     className="w-full accent-emerald-500" />
                 </div>
 

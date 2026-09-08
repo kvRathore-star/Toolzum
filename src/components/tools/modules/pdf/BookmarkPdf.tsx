@@ -223,7 +223,7 @@ export default function BookmarkPdf() {
           {showBulk ? (
             <div className="space-y-3">
               <p className="text-xs text-[var(--text-secondary)]">Tab-indented list: title (tab) page number</p>
-              <textarea
+              <textarea aria-label="Tab-indented list: title (tab) page number"
                 value={bulkInput}
                 onChange={e => setBulkInput(e.target.value)}
                 className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-sm text-zinc-900 dark:text-zinc-100 resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -239,7 +239,7 @@ export default function BookmarkPdf() {
           ) : (
             <div className="space-y-3">
               <div className="flex gap-2">
-                <input
+                <input aria-label="Import Bookmarks"
                   type="text"
                   value={title}
                   onChange={e => setTitle(e.target.value)}

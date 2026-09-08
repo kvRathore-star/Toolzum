@@ -678,7 +678,7 @@ export default function AiThumbnailMaker() {
 
             {bgType === 'solid' && (
               <div className="flex items-center gap-3">
-                <input 
+                <input aria-label="Image" 
                   type="color" 
                   value={solidColor}
                   onChange={e => setSolidColor(e.target.value)}
@@ -754,7 +754,7 @@ export default function AiThumbnailMaker() {
                         <span>Brightness</span>
                         <span>{brightness}%</span>
                       </div>
-                      <input 
+                      <input aria-label="Brightness" 
                         type="range" min="30" max="200" value={brightness}
                         onChange={e => setBrightness(parseInt(e.target.value))}
                         className="w-full accent-indigo-600"
@@ -766,7 +766,7 @@ export default function AiThumbnailMaker() {
                         <span>Contrast</span>
                         <span>{contrast}%</span>
                       </div>
-                      <input 
+                      <input aria-label="Contrast" 
                         type="range" min="30" max="200" value={contrast}
                         onChange={e => setContrast(parseInt(e.target.value))}
                         className="w-full accent-indigo-600"
@@ -778,7 +778,7 @@ export default function AiThumbnailMaker() {
                         <span>Blur</span>
                         <span>{blur}px</span>
                       </div>
-                      <input 
+                      <input aria-label="Blur" 
                         type="range" min="0" max="20" value={blur}
                         onChange={e => setBlur(parseInt(e.target.value))}
                         className="w-full accent-indigo-600"
@@ -974,7 +974,7 @@ export default function AiThumbnailMaker() {
                       </div>
                       <div>
                         <label className="text-[9px] text-[var(--text-muted)]">Shadow Color</label>
-                        <input 
+                        <input aria-label="Shadow Color" 
                           type="color" 
                           value={activeText.shadowColor.startsWith('rgba') ? '#000000' : activeText.shadowColor}
                           onChange={e => handleTextPropertyChange('shadowColor', e.target.value)}
@@ -995,7 +995,7 @@ export default function AiThumbnailMaker() {
                       <span>Sticker Width</span>
                       <span>{activeImage.w}px</span>
                     </div>
-                    <input 
+                    <input aria-label="Sticker Width" 
                       type="range" min="50" max="600" value={activeImage.w}
                       onChange={e => {
                         const newW = parseInt(e.target.value);
@@ -1017,7 +1017,7 @@ export default function AiThumbnailMaker() {
                       <span>Rotation</span>
                       <span>{activeImage.rotation}°</span>
                     </div>
-                    <input 
+                    <input aria-label="Rotation" 
                       type="range" min="-180" max="180" value={activeImage.rotation}
                       onChange={e => handleImagePropertyChange('rotation', parseInt(e.target.value))}
                       className="w-full accent-indigo-600"

@@ -100,7 +100,7 @@ export default function BrowserExtension() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
+            <input aria-label="Enter your email"
               type="email"
               placeholder="Enter your email"
               value={email}

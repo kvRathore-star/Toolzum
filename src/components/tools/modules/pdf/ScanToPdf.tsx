@@ -153,7 +153,7 @@ export default function ScanToPdf() {
             Clear All
           </button>
         </div>
-        <input
+        <input aria-label="Clear All"
           ref={inputRef}
           type="file"
           accept="image/*"

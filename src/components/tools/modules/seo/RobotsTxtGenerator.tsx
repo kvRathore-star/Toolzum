@@ -56,7 +56,7 @@ export default function RobotsTxtGenerator() {
           
           <div className="space-y-2">
             <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Sitemap URL</label>
-            <input 
+            <input aria-label="Sitemap URL" 
               type="text" 
               value={sitemap} 
               onChange={e => setSitemap(e.target.value)} 
@@ -67,7 +67,7 @@ export default function RobotsTxtGenerator() {
           <div className="border-t border-[var(--border-subtle)] pt-3 space-y-3">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Block Paths (Disallow)</span>
             <div className="flex gap-2">
-              <input 
+              <input aria-label="Block Paths (Disallow)" 
                 type="text" 
                 value={newDisallow} 
                 onChange={e => setNewDisallow(e.target.value)}

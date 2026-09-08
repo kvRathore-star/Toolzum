@@ -116,7 +116,7 @@ export default function BulkVideoCompressor() {
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Upload videos (MP4, MOV, AVI, WebM, MKV)</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Processed with H.264 + AAC at selected CRF</p>
-          <input ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
+          <input aria-label="Processed with H.264 + AAC at selected CRF" ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         <div className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">

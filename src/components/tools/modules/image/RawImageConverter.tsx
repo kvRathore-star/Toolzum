@@ -184,7 +184,7 @@ export default function RawImageConverter() {
               <h4 className="text-[var(--text-primary)] font-medium text-sm">Files</h4>
               <button onClick={() => fileInputRef.current?.click()} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-medium">+ Add More</button>
             </div>
-            <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
+            <input aria-label="Files" ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
             <div className="space-y-1 max-h-72 overflow-y-auto">
               {files.map((f, i) => (
                 <div key={i} role="button" tabIndex={0} onClick={() => { setSelectedIndex(i); setOutputUrl(null); }}

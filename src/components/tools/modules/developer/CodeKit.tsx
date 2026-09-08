@@ -91,7 +91,7 @@ export function CodeObfuscator() {
         <option value="medium">Medium (Hex + Base64)</option>
         <option value="heavy">Heavy (Multi-var + Dead Code)</option>
       </select>
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste code to obfuscate..."
+      <textarea aria-label="Heavy (Multi-var + Dead Code)" value={input} onChange={e => setInput(e.target.value)} placeholder="Paste code to obfuscate..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={obfuscate} label="Obfuscate" />
       {output && (

@@ -18,7 +18,7 @@ export default function PercentageCalculator() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
            <h2 className="text-xl font-bold text-[var(--text-primary)]">What is X% of Y?</h2>
            <div className="flex items-center space-x-4">
-              <input 
+              <input aria-label="What is X% of Y?" 
                 type="number" value={val1} onChange={e => setVal1(e.target.value)}
                 placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
@@ -43,12 +43,12 @@ export default function PercentageCalculator() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
            <h2 className="text-xl font-bold text-[var(--text-primary)]">X is what % of Y?</h2>
            <div className="flex items-center space-x-4">
-              <input 
+              <input aria-label="X is what % of Y?" 
                 type="number" value={val3} onChange={e => setVal3(e.target.value)}
                 placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <span className="font-bold text-[var(--text-secondary)]">is what % of</span>
-              <input 
+              <input aria-label="is what % of" 
                 type="number" value={val4} onChange={e => setVal4(e.target.value)}
                 placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-emerald-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />

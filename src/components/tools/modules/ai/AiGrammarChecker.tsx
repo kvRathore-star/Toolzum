@@ -239,7 +239,7 @@ export default function AiGrammarChecker() {
             <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Text</span>
             <span className={`text-[10px] font-mono ${input.length > 4800 ? 'text-red-500' : 'text-[var(--text-muted)]'}`}>{input.length} / 5,000</span>
           </div>
-          <textarea
+          <textarea aria-label="Your Text"
             value={input}
             onChange={(e) => {
               if (e.target.value.length <= 5000) setInput(e.target.value);

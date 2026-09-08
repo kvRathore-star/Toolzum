@@ -391,7 +391,7 @@ export default function GeminiWatermarkRemover() {
         {outputFormat !== 'png' && (
           <div className="flex items-center gap-2">
             <label className="text-xs text-[var(--text-secondary)]">Quality: {quality}%</label>
-            <input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-24 h-1 accent-[var(--accent-ink)]" />
+            <input aria-label="WebP" type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-24 h-1 accent-[var(--accent-ink)]" />
           </div>
         )}
         {processTime !== null && (
@@ -414,7 +414,7 @@ export default function GeminiWatermarkRemover() {
               <Upload className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
               <p className="text-[var(--text-primary)] font-medium">{isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}</p>
               <p className="text-sm text-[var(--text-secondary)] mt-1">or click to browse</p>
-              <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
+              <input aria-label="or click to browse" ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
             </div>
           ) : (
             <div className="space-y-4">
@@ -563,7 +563,7 @@ export default function GeminiWatermarkRemover() {
                     <span className="text-xs text-[var(--text-muted)]">or download individually ↓</span>
                   </>
                 )}
-                <input ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
+                <input aria-label="or download individually ↓" ref={bulkFileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleBulkFiles} />
               </div>
               <BatchProgressPanel
                 files={batch.files} progress={batch.progress} isProcessing={batch.isProcessing}

@@ -246,7 +246,7 @@ export default function IndianVoiceTranscriber() {
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
               <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)</p>
-              <input ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
+              <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
             </div>
 
             <AnimatePresence>

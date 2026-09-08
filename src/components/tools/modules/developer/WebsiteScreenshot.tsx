@@ -336,7 +336,7 @@ export default function WebsiteScreenshot() {
 
             <div className="flex items-center gap-2 text-sm text-[var(--text-primary)]">
               <span>Delay:</span>
-              <input
+              <input aria-label="Delay:"
                 type="range"
                 min={0}
                 max={10}

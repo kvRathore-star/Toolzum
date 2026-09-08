@@ -189,7 +189,7 @@ export default function TranslatePdf() {
               <Languages className="w-4 h-4 text-[var(--accent)]" />
               Translation
             </h4>
-            <textarea
+            <textarea aria-label="Translation"
               readOnly
               value={translatedText}
               placeholder="Translated text will appear here..."

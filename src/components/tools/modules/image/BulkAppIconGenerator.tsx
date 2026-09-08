@@ -128,7 +128,7 @@ export default function BulkAppIconGenerator() {
         </div>
 
         {source === 'svg' ? (
-          <textarea
+          <textarea aria-label="Upload Image"
             value={svgText}
             onChange={(e) => setSvgText(e.target.value)}
             placeholder={`<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -157,7 +157,7 @@ export default function BulkAppIconGenerator() {
                 <p className="text-xs text-[var(--text-muted)] mt-1">Your source icon should be square</p>
               </>
             )}
-            <input ref={fileInputRef} type="file" accept="image/png,image/svg+xml,image/jpeg" onChange={handleImageUpload} className="hidden" />
+            <input aria-label="Your source icon should be square" ref={fileInputRef} type="file" accept="image/png,image/svg+xml,image/jpeg" onChange={handleImageUpload} className="hidden" />
           </div>
         )}
 

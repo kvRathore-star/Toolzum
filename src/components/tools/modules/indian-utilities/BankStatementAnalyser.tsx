@@ -220,11 +220,11 @@ export default function BankStatementAnalyser() {
               <Upload className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
               <p className="text-base font-semibold text-[var(--text-secondary)]">Upload bank statement</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">CSV, TXT — paste raw text below</p>
-              <input id="bs-statement-file" type="file" accept=".csv,.txt" onChange={handleFile} className="hidden" />
+              <input aria-label="CSV, TXT — paste raw text below" id="bs-statement-file" type="file" accept=".csv,.txt" onChange={handleFile} className="hidden" />
             </div>
             <div className="mt-4 space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Or paste statement text</label>
-              <textarea value={rawText} onChange={e => {
+              <textarea aria-label="Or paste statement text" value={rawText} onChange={e => {
                 setRawText(e.target.value);
                 if (e.target.value.length > 50) {
                   const result = parseStatement(e.target.value);
@@ -315,7 +315,7 @@ export default function BankStatementAnalyser() {
                 <option value="">All categories</option>
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
-              <input type="text" value={dateFilter} onChange={e => setDateFilter(e.target.value)} placeholder="Filter date..."
+              <input aria-label="All categories" type="text" value={dateFilter} onChange={e => setDateFilter(e.target.value)} placeholder="Filter date..."
                 className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               <button onClick={handleExport}
                 className="px-3 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">

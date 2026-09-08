@@ -77,7 +77,7 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
           </div>
           <div>
             <span className="text-[10px] text-[var(--text-muted)] block mb-1">Curve</span>
-            <select value={curve} onChange={e => onCurve(e.target.value as FadeCurve)}
+            <select aria-label="Curve" value={curve} onChange={e => onCurve(e.target.value as FadeCurve)}
               className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {CURVES.map(c => <option key={c.v} value={c.v}>{c.l}</option>)}
             </select>

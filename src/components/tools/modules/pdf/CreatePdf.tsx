@@ -288,7 +288,7 @@ export default function CreatePdf() {
                 <input type="file" accept=".json" onChange={handleJsonFileSelect} className="hidden" />
               </label>
             </div>
-            <textarea value={text} onChange={(e) => setText(e.target.value)}
+            <textarea aria-label="Upload JSON File" value={text} onChange={(e) => setText(e.target.value)}
               placeholder='{"name": "John", "age": 30}'
               className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
             />

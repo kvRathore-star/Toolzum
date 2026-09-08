@@ -114,11 +114,11 @@ export default function BulkVideoSizeReducer() {
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Upload videos</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Each video will be compressed to fit your target size</p>
-          <input ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
+          <input aria-label="Each video will be compressed to fit your target size" ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
         </div>
         <div className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
           <div className="flex items-center gap-2 mb-3"><Settings2 className="w-4 h-4 text-[var(--text-muted)]" /><span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Target Size</span></div>
-          <select value={targetSize} onChange={e => setTargetSize(e.target.value)} className="w-full p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+          <select aria-label="Target Size" value={targetSize} onChange={e => setTargetSize(e.target.value)} className="w-full p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
             <option value="10">~10 MB per video (email)</option>
             <option value="25">~25 MB per video (social media)</option>
             <option value="50">~50 MB per video (web, default)</option>

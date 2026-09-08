@@ -329,7 +329,7 @@ export default function OdtRtfConverter() {
 
           <div>
             <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Font Size: <span className="font-bold text-[var(--text-primary)]">{fontSize}pt</span></label>
-            <input type="range" min={8} max={16} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-blue-600" />
+            <input aria-label="Font Size:" type="range" min={8} max={16} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-blue-600" />
             <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>8pt</span><span>16pt</span></div>
           </div>
 

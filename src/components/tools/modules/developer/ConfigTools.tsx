@@ -252,7 +252,7 @@ export function HttpHeadersGenerator() {
         <div className="space-y-2 mb-3">
           {headers.map((h, i) => (
             <div key={i} className="flex gap-2 items-center">
-              <input value={h.name} onChange={e => updateHeader(i, 'name', e.target.value)} placeholder="Header name"
+              <input aria-label="Security Headers" value={h.name} onChange={e => updateHeader(i, 'name', e.target.value)} placeholder="Header name"
                 className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
               <input value={h.value} onChange={e => updateHeader(i, 'value', e.target.value)} placeholder="Value"
                 className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />

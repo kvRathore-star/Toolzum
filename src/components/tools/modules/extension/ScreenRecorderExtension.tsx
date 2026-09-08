@@ -106,7 +106,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
           
           <div className="space-y-2">
             <label className="text-xs text-[var(--text-muted)] font-bold">Extension Name</label>
-            <input 
+            <input aria-label="Extension Name" 
               type="text" 
               value={extName} 
               onChange={e => setExtName(e.target.value)}
@@ -133,7 +133,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
               </button>
             </div>
 
-            <textarea
+            <textarea aria-label="popup.js"
               value={activeTab === 'manifest' ? manifest : activeTab === 'popupHtml' ? popupHtml : popupJs}
               readOnly
               className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"

@@ -54,7 +54,7 @@ export default function HtmlToImage() {
            {/* Editor */}
            <div className="space-y-4">
              <h3 className="font-semibold">HTML Source Code</h3>
-             <textarea 
+             <textarea aria-label="HTML Source Code" 
                value={htmlContent}
                onChange={(e) => setHtmlContent(e.target.value)}
                className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"

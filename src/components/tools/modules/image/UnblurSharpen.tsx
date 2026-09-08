@@ -350,7 +350,7 @@ export default function UnblurSharpen() {
               <span>Intensity</span>
               <span className="text-blue-700 dark:text-blue-400 font-bold">{intensity}</span>
             </div>
-            <input
+            <input aria-label="Intensity"
               type="range" min="1" max="10" value={intensity}
               onChange={e => setIntensity(Number(e.target.value))}
               className="w-full accent-blue-500"
@@ -363,7 +363,7 @@ export default function UnblurSharpen() {
                 <span>Angle</span>
                 <span className="text-blue-700 dark:text-blue-400 font-bold">{angle}°</span>
               </div>
-              <input
+              <input aria-label="Angle"
                 type="range" min="0" max="360" value={angle}
                 onChange={e => setAngle(Number(e.target.value))}
                 className="w-full accent-blue-500"

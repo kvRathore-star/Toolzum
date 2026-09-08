@@ -64,7 +64,7 @@ export default function IpAddressLookup() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">IP Address query</span>
-            <input 
+            <input aria-label="IP Address query" 
               type="text" 
               value={ipAddress}
               onChange={e => setIpAddress(e.target.value)}

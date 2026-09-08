@@ -171,7 +171,7 @@ export default function GifCompressor() {
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                 Colors: {colors}
               </label>
-              <input
+              <input aria-label="Compression Settings"
                 type="range"
                 min="2"
                 max="256"

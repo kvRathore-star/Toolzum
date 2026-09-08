@@ -203,7 +203,7 @@ export default function PdfPageManager() {
             {tab === 'crop' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Remove white margins from all pages.</p>
-                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Crop Margin (points): {margin}pt</label><input type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
+                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Crop Margin (points): {margin}pt</label><input aria-label="Remove white margins from all pages." type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
                 <button onClick={processCrop} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Crop & Download'}</button>
               </div>
             )}
@@ -233,7 +233,7 @@ export default function PdfPageManager() {
             {tab === 'extract' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Specify pages to extract (e.g. 1, 3, 5-10).</p>
-                <input type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
+                <input aria-label="Specify pages to extract (e.g. 1, 3, 5-10)." type="text" placeholder="1, 2-5, 8" value={pageRange} onChange={e => setPageRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
                 <button onClick={processExtract} disabled={isProcessing || !pageRange.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Extract & Download'}</button>
               </div>
             )}

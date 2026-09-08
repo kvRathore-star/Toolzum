@@ -75,7 +75,7 @@ export default function SecureNoteSharer() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Create Secure Note</h3>
           
-          <textarea
+          <textarea aria-label="Create Secure Note"
             value={note}
             onChange={e => setNote(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && createSecureNote()}
             placeholder="Type your sensitive message here..."
@@ -84,7 +84,7 @@ export default function SecureNoteSharer() {
 
           <div className="space-y-1">
             <label className="text-xs text-[var(--text-muted)] font-bold">Custom Password (Optional)</label>
-            <input 
+            <input aria-label="Custom Password (Optional)" 
               type="text" 
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -101,7 +101,7 @@ export default function SecureNoteSharer() {
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)] animate-in">
               <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Shareable link</span>
               <div className="flex gap-2">
-                <input readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <input aria-label="Shareable link" readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-[var(--accent-ink)] px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy"><Copy className="w-4 h-4" /></button>
               </div>
             </div>
@@ -116,7 +116,7 @@ export default function SecureNoteSharer() {
                 <span className="text-xs text-[var(--accent)] font-bold uppercase block flex items-center gap-1"><Trash2 className="w-4 h-4" /> Decrypted Note (Self-Destructed)</span>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">This note has been deleted from history. Copy it now if you need to retain the contents.</p>
               </div>
-              <textarea
+              <textarea aria-label="This note has been deleted from history. Copy it now if you need to retain the c"
                 value={decryptedNote}
                 readOnly
                 className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none mt-2"

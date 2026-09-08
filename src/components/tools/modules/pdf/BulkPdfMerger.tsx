@@ -80,7 +80,7 @@ export default function BulkPdfMerger() {
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Drop PDF files here</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Files will be merged in the order shown</p>
-          <input ref={fileRef} type="file" accept=".pdf" multiple onChange={handleFiles} className="hidden" />
+          <input aria-label="Files will be merged in the order shown" ref={fileRef} type="file" accept=".pdf" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         <button

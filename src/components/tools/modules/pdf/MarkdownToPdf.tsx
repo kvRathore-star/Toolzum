@@ -421,7 +421,7 @@ export default function MarkdownToPdf() {
               <h3 className="text-sm font-semibold text-[var(--text-primary)]">Markdown Editor</h3>
               <span className="text-xs text-[var(--text-muted)]">{markdown.length} chars</span>
             </div>
-            <textarea
+            <textarea aria-label="Markdown Editor"
               value={markdown}
               onChange={(e) => { setMarkdown(e.target.value); setPdfUrl(null); }}
               placeholder="# Enter your markdown here..."

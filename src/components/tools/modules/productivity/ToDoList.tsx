@@ -89,7 +89,7 @@ export default function ToDoList() {
       <div className="space-y-4">
         {/* Input Bar */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <input 
+          <input aria-label="Clear Completed" 
             type="text"
             value={input}
             onChange={e => setInput(e.target.value)}

@@ -132,14 +132,14 @@ export default function BulkVideoSubtitleBurner() {
             <p className="text-sm font-medium text-[var(--text-primary)]">Videos</p>
             <p className="text-xs text-[var(--text-muted)] text-center">MP4, MOV, AVI, WebM</p>
             <p className="text-xs text-[var(--accent)] mt-1">{batch.files.length} selected</p>
-            <input ref={videoRef} type="file" accept="video/*" multiple onChange={handleVideos} className="hidden" />
+            <input aria-label="MP4, MOV, AVI, WebM" ref={videoRef} type="file" accept="video/*" multiple onChange={handleVideos} className="hidden" />
           </div>
           <div role="button" tabIndex={0} onClick={() => srtRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); srtRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
             <Subtitles className="w-8 h-8 text-[var(--text-muted)] mb-2" />
             <p className="text-sm font-medium text-[var(--text-primary)]">Subtitle file (.srt)</p>
             <p className="text-xs text-[var(--text-muted)] text-center">Single SRT applied to all videos</p>
             {subtitle && <p className="text-xs text-[var(--accent)] mt-1">{subtitle.name}</p>}
-            <input ref={srtRef} type="file" accept=".srt,.ass,.ssa,.vtt" onChange={handleSubtitle} className="hidden" />
+            <input aria-label="Single SRT applied to all videos" ref={srtRef} type="file" accept=".srt,.ass,.ssa,.vtt" onChange={handleSubtitle} className="hidden" />
           </div>
         </div>
 

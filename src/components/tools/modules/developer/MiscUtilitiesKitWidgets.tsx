@@ -36,10 +36,10 @@ export function CidrCalculator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CIDR Calculator</h2>
-        <input type="text" value={cidr} onChange={e => setCidr(e.target.value)} placeholder="192.168.1.0/24"
+        <input aria-label="CIDR Calculator" type="text" value={cidr} onChange={e => setCidr(e.target.value)} placeholder="192.168.1.0/24"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <textarea readOnly rows={7} value={result} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
+        {result && <textarea aria-label="Calculate" readOnly rows={7} value={result} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
       </div>
     </div>
   );
@@ -86,10 +86,10 @@ export function AwsIamPolicyAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">AWS IAM Policy Analyzer</h2>
-        <textarea rows={6} value={policy} onChange={e => setPolicy(e.target.value)}
+        <textarea aria-label="AWS IAM Policy Analyzer" rows={6} value={policy} onChange={e => setPolicy(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {analysis && <textarea readOnly rows={10} value={analysis} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
+        {analysis && <textarea aria-label="Analyze" readOnly rows={10} value={analysis} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
       </div>
     </div>
   );

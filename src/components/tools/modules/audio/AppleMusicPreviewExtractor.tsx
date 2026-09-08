@@ -47,7 +47,7 @@ export default function AppleMusicPreviewExtractor() {
         <div className="md:col-span-7 space-y-4">
           <div className="space-y-2">
             <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Apple Music Link</span>
-            <input 
+            <input aria-label="Apple Music Link" 
               type="text" 
               value={url}
               onChange={e => setUrl(e.target.value)}

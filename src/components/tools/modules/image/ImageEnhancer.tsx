@@ -184,7 +184,7 @@ export default function ImageEnhancer() {
               <span>Brightness</span>
               <span className="text-[var(--accent)] font-bold">{filters.brightness}%</span>
             </div>
-            <input
+            <input aria-label="Brightness"
               type="range" min="0" max="200" value={filters.brightness}
               onChange={(e) => handleSliderChange('brightness', Number(e.target.value))}
               className="w-full accent-indigo-500"
@@ -197,7 +197,7 @@ export default function ImageEnhancer() {
               <span>Contrast</span>
               <span className="text-[var(--accent)] font-bold">{filters.contrast}%</span>
             </div>
-            <input
+            <input aria-label="Contrast"
               type="range" min="0" max="200" value={filters.contrast}
               onChange={(e) => handleSliderChange('contrast', Number(e.target.value))}
               className="w-full accent-indigo-500"
@@ -210,7 +210,7 @@ export default function ImageEnhancer() {
               <span>Saturation</span>
               <span className="text-[var(--accent)] font-bold">{filters.saturation}%</span>
             </div>
-            <input
+            <input aria-label="Saturation"
               type="range" min="0" max="200" value={filters.saturation}
               onChange={(e) => handleSliderChange('saturation', Number(e.target.value))}
               className="w-full accent-indigo-500"
@@ -223,7 +223,7 @@ export default function ImageEnhancer() {
               <span>Soft Blur</span>
               <span className="text-[var(--accent)] font-bold">{filters.blur} px</span>
             </div>
-            <input
+            <input aria-label="Soft Blur"
               type="range" min="0" max="10" value={filters.blur}
               onChange={(e) => handleSliderChange('blur', Number(e.target.value))}
               className="w-full accent-indigo-500"
@@ -236,7 +236,7 @@ export default function ImageEnhancer() {
               <span>Sepia (Warmth)</span>
               <span className="text-[var(--accent)] font-bold">{filters.sepia}%</span>
             </div>
-            <input
+            <input aria-label="Sepia (Warmth)"
               type="range" min="0" max="100" value={filters.sepia}
               onChange={(e) => handleSliderChange('sepia', Number(e.target.value))}
               className="w-full accent-indigo-500"
@@ -249,7 +249,7 @@ export default function ImageEnhancer() {
               <span>Grayscale</span>
               <span className="text-[var(--accent)] font-bold">{filters.grayscale}%</span>
             </div>
-            <input
+            <input aria-label="Grayscale"
               type="range" min="0" max="100" value={filters.grayscale}
               onChange={(e) => handleSliderChange('grayscale', Number(e.target.value))}
               className="w-full accent-indigo-500"

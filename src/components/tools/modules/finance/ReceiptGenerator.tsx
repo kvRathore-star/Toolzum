@@ -157,7 +157,7 @@ export default function ReceiptGenerator() {
             </div>
             <div className="space-y-1">
               <label className="text-[10px] text-[var(--text-muted)] font-bold">Payment Method</label>
-              <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <select aria-label="Payment Method" value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="Credit Card">Credit Card</option>
                 <option value="PayPal">PayPal</option>
                 <option value="Bank Transfer">Bank Transfer</option>
@@ -168,7 +168,7 @@ export default function ReceiptGenerator() {
 
           <div className="border-t border-[var(--border-subtle)] pt-3 space-y-3">
             <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Add Line Item</span>
-            <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="Consultation Fees" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <input aria-label="Add Line Item" type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="Consultation Fees" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label className="text-[9px] text-[var(--text-secondary)]">Qty</label>

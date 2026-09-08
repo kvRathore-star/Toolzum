@@ -176,7 +176,7 @@ export default function VideoSpeedChanger() {
               <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                 Speed: <span className="font-bold text-[var(--text-primary)]">{speed}x</span>
               </label>
-              <input
+              <input aria-label="Speed:"
                 type="range"
                 min="0.1"
                 max="10"

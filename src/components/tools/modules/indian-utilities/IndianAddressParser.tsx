@@ -259,7 +259,7 @@ export default function IndianAddressParser() {
               <MapPin className="w-4 h-4" style={{ color: ACCENT }} />
               Enter Indian Address
             </label>
-            <textarea
+            <textarea aria-label="Enter Indian Address"
               value={input}
               onChange={e => { setInput(e.target.value); setParsed(null); }}
               placeholder={`Sample Indian address:

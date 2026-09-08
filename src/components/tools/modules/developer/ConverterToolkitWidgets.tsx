@@ -58,7 +58,7 @@ export function Base32Encoder() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base32 Encode / Decode</h2>
-        <textarea rows={3} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Base32 Encode / Decode" rows={3} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={encode} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Encode</button>
@@ -109,7 +109,7 @@ export function Base64ToJsonDecoder() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base64 to JSON Decoder</h2>
-        <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste base64 string..."
+        <textarea aria-label="Base64 to JSON Decoder" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste base64 string..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode to JSON</button>
         {output && (
@@ -160,7 +160,7 @@ export function HexTextConverter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Hex &lt;-&gt; Text Converter</h2>
-        <textarea rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Hex string or text..."
+        <textarea aria-label="Hex &lt;-&gt; Text Converter" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Hex string or text..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={hexToText} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Hex to Text</button>
@@ -210,7 +210,7 @@ export function SvgToBase64Converter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG to Base64 Converter</h2>
-        <textarea rows={4} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
+        <textarea aria-label="SVG to Base64 Converter" rows={4} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Data URI</button>
         {output && (
@@ -260,7 +260,7 @@ export function CharacterEncodingConverter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Character Encoding Converter</h2>
-        <textarea rows={2} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Character Encoding Converter" rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze Characters</button>
         {output && (
@@ -311,7 +311,7 @@ export function UnicodeConverter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Unicode Converter</h2>
-        <textarea rows={2} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Unicode Converter" rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert Unicode</button>
         {output && (
@@ -449,7 +449,7 @@ export function PxRemConverter() {
           </div>
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Base (px)</label>
-            <input type="text" value={base} onChange={e => setBase(e.target.value)}
+            <input aria-label="Base (px)" type="text" value={base} onChange={e => setBase(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
@@ -506,7 +506,7 @@ export function SvgOptimizer() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG Optimizer</h2>
-        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
+        <textarea aria-label="SVG Optimizer" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={optimize} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Optimize SVG</button>
         {output && (

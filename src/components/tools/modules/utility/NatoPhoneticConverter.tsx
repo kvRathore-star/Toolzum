@@ -76,7 +76,7 @@ export default function NatoPhoneticConverter() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <textarea
+        <textarea aria-label="Swap"
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder={mode === 'to' ? 'Type text here...' : 'Paste NATO words here...'}

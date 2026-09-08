@@ -74,7 +74,7 @@ export default function UrlShortener() {
               Paste your long URL here
             </label>
             <div className="flex flex-col sm:flex-row gap-3">
-              <input
+              <input aria-label="Paste your long URL here"
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
