@@ -295,7 +295,7 @@ export function IdealWeightCalc() {
       downloadFilename="ideal-weight.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Height" type="number" value={height} onChange={setHeight} /></div>
+        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)} aria-label="Gender"><option value="male">Male</option><option value="female">Female</option></select><Input label="Height" type="number" value={height} onChange={setHeight} /></div>
       </div>
     </CalculatorShell>
   );
@@ -442,7 +442,7 @@ export function BloodAlcoholCalculator() {
       downloadFilename="bac.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} placeholder="Weight (kg)" /></div>
+        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)} aria-label="Gender"><option value="male">Male</option><option value="female">Female</option></select><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} placeholder="Weight (kg)" /></div>
         <div className="flex gap-2"><Input label="Drinks" type="number" value={drinks} onChange={setDrinks} placeholder="Drinks" /><Input label="Hours" type="number" value={hours} onChange={setHours} placeholder="Hours" /></div>
       </div>
     </CalculatorShell>
