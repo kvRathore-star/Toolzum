@@ -54,3 +54,21 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  e2e:
+    # Browser E2E runs here (ubuntu), not locally: Playwright browsers
+    # do not install on macOS 12. Runs against the static production
+    # build served locally, so specs exercise real build output.
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npx serve out -l 3000 &
+      - run: PLAYWRIGHT_BASE_URL=http://localhost:3000 npm run test:e2e
