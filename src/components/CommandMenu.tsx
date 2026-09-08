@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Command } from "cmdk";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -19,8 +19,32 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { favorites } = useFavorites();
+  const [query, setQuery] = useState("");
+
+  const HISTORY_KEY = "toolzum_search_history";
+  const [history, setHistory] = useState<string[]>(() => {
+    try {
+      const raw = localStorage.getItem(HISTORY_KEY);
+      const parsed: unknown = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed.filter((s): s is string => typeof s === "string").slice(0, 5) : [];
+    } catch {
+      return [];
+    }
+  });
 
   const runCommand = (command: () => void) => {
+    const q = query.trim();
+    if (q) {
+      setHistory((prev) => {
+        const next = [q, ...prev.filter((s) => s !== q)].slice(0, 5);
+        try {
+          localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
+        } catch {
+          /* private mode — history just won't persist */
+        }
+        return next;
+      });
+    }
     onClose();
     command();
   };
@@ -57,6 +81,8 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
               <Search className="w-5 h-5 text-[var(--text-muted)] mr-3 shrink-0" />
               <Command.Input
                 autoFocus
+                value={query}
+                onValueChange={setQuery}
                 placeholder="Search tools, categories, or actions..."
                 className="w-full py-5 text-[var(--text-primary)] placeholder-[var(--text-muted)] bg-transparent border-none outline-none focus:ring-0 text-[18px]"
               />
@@ -66,6 +92,22 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
               <Command.Empty className="py-12 text-center text-sm text-[var(--text-muted)]">
                 No matching tools or settings found.
               </Command.Empty>
+
+              {!query && history.length > 0 && (
+                <Command.Group heading="Recent Searches" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
+                  {history.map((h) => (
+                    <Command.Item
+                      key={h}
+                      value={`recent-${h}`}
+                      onSelect={() => setQuery(h)}
+                      className="flex items-center h-[48px] px-3 rounded-[var(--radius-md)] text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer data-[selected=true]:bg-[var(--bg-surface)] data-[selected=true]:text-[var(--text-primary)] transition-colors"
+                    >
+                      <Search className="w-4 h-4 text-[var(--text-muted)] mr-3" />
+                      <span className="font-medium flex-1 text-left">{h}</span>
+                    </Command.Item>
+                  ))}
+                </Command.Group>
+              )}
 
               {favorites.size > 0 && (
                 <Command.Group heading="Your Favorites" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
