@@ -58,6 +58,15 @@ export function createAuth(env: AuthEnv) {
     })(),
     baseURL: env.BETTER_AUTH_URL || "https://toolzum.com",
     basePath: "/api/auth",
+    // Session lifetimes made explicit (values equal better-auth v1
+    // defaults — verified in create-context.mjs — so this changes no
+    // behavior, it just stops the lifetimes being implicit tribal
+    // knowledge). B3.5: revisit durations as a product decision, not code.
+    session: {
+      expiresIn: 60 * 60 * 24 * 7, // 7 days: absolute session lifetime
+      updateAge: 60 * 60 * 24, // 1 day: rolling refresh window
+      freshAge: 60 * 60 * 24, // 1 day: sensitive-action freshness
+    },
     database: drizzleAdapter(
       drizzle(env.DB, { schema }),
       {
