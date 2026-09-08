@@ -189,7 +189,7 @@ export default function GstinLookup() {
                 <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
                 <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{bulkData.length > 0 ? `${bulkData.length} GSTINs loaded` : 'Upload CSV/TXT file'}</p>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">One GSTIN per line</p>
-                <input aria-label="One GSTIN per line" id="bulk-gstin-file" type="file" accept=".csv,.txt" onChange={handleBulkFile} className="hidden" />
+                <input aria-label="One GSTIN per line" id="bulk-gstin-file" type="file" accept=".csv,.txt" onChange={handleBulkFile} className="sr-only" />
               </div>
               {bulkData.length > 0 && (
                 <div className="space-y-3">

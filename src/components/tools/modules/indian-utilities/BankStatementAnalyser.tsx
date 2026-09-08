@@ -220,7 +220,7 @@ export default function BankStatementAnalyser() {
               <Upload className="w-12 h-12 mx-auto mb-3 text-[var(--text-muted)]" />
               <p className="text-base font-semibold text-[var(--text-secondary)]">Upload bank statement</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">CSV, TXT — paste raw text below</p>
-              <input aria-label="CSV, TXT — paste raw text below" id="bs-statement-file" type="file" accept=".csv,.txt" onChange={handleFile} className="hidden" />
+              <input aria-label="CSV, TXT — paste raw text below" id="bs-statement-file" type="file" accept=".csv,.txt" onChange={handleFile} className="sr-only" />
             </div>
             <div className="mt-4 space-y-1">
               <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Or paste statement text</label>
