@@ -74,8 +74,8 @@ describe('DownloadLimitModal', () => {
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
-    const backdrop = document.querySelector('.fixed.inset-0');
-    fireEvent.click(backdrop!);
+    const backdrop = screen.getByRole('button', { name: 'Close dialog' });
+    fireEvent.click(backdrop);
     
     expect(screen.queryByText('Daily download limit reached')).toBeNull();
   });
