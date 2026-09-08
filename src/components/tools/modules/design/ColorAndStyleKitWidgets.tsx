@@ -166,12 +166,12 @@ export function MediaQueryGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Media Query Generator</h2>
         <div className="grid grid-cols-2 gap-3">
-          <select value={type} onChange={e => setType(e.target.value)}
+          <select aria-label="Media feature" value={type} onChange={e => setType(e.target.value)}
             className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
             <option value="min-width">Min Width</option>
             <option value="max-width">Max Width</option>
           </select>
-          <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="Width"
+          <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="Width" aria-label={type === 'max-width' ? 'Max Width' : 'Min Width'}
             className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <input type="text" value={device} onChange={e => setDevice(e.target.value)} placeholder="Device type (e.g. print, speech)"
@@ -198,7 +198,7 @@ export function ConventionalCommitGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Conventional Commit Generator</h2>
-        <select value={type} onChange={e => setType(e.target.value)}
+        <select aria-label="Commit type" value={type} onChange={e => setType(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
           {['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'chore', 'ci', 'build'].map(t => <option key={t} value={t}>{t}</option>)}
         </select>

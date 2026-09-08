@@ -319,8 +319,8 @@ export function ApiBuilder() {
               {params.map(p => (
                 <div key={p.id} className="flex gap-1.5 items-center">
                   <input type="checkbox" checked={p.enabled} onChange={() => toggleParam(p.id)} className="accent-indigo-500" />
-                  <input type="text" placeholder="Key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <input type="text" placeholder="Value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Key" aria-label="Parameter key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Value" aria-label="Parameter value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
                   <button onClick={() => removeParam(p.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove parameter"><Trash2 size={13} /></button>
                 </div>
               ))}
@@ -337,8 +337,8 @@ export function ApiBuilder() {
               {headers.map(h => (
                 <div key={h.id} className="flex gap-1.5 items-center">
                   <input type="checkbox" checked={h.enabled} onChange={() => toggleHeader(h.id)} className="accent-indigo-500" />
-                  <input type="text" placeholder="Header" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <input type="text" placeholder="Value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Header" aria-label="Header name" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Value" aria-label="Header value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
                   <button onClick={() => removeHeader(h.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove header"><Trash2 size={13} /></button>
                 </div>
               ))}
@@ -358,17 +358,17 @@ export function ApiBuilder() {
                 <option value="text">Text</option>
               </select>
               {bodyType !== 'none' && (
-                <textarea value={body} onChange={e => setBody(e.target.value)} rows={6} placeholder={bodyType === 'json' ? '{\n  "key": "value"\n}' : 'Enter request body...'} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] resize-y" />
+                <textarea aria-label="Request body" value={body} onChange={e => setBody(e.target.value)} rows={6} placeholder={bodyType === 'json' ? '{\n  "key": "value"\n}' : 'Enter request body...'} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] resize-y" />
               )}
             </div>
           </details>
 
           {/* Save & Snippet bar */}
           <div className="flex items-center gap-2">
-            <input type="text" value={savedName} onChange={e => setSavedName(e.target.value)} placeholder="Request name..." className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] max-w-xs" />
+            <input type="text" value={savedName} onChange={e => setSavedName(e.target.value)} placeholder="Request name..." aria-label="Request name" className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] max-w-xs" />
             <button onClick={saveToCollection} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Book size={13} /> Save</button>
             <div className="flex-1" />
-            <select value={snippetLang} onChange={e => setSnippetLang(e.target.value as 'curl' | 'fetch' | 'axios')} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]">
+            <select aria-label="Snippet language" value={snippetLang} onChange={e => setSnippetLang(e.target.value as 'curl' | 'fetch' | 'axios')} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]">
               <option value="curl">cURL</option>
               <option value="fetch">Fetch</option>
               <option value="axios">Axios</option>

@@ -46,7 +46,7 @@ export default function Md5HashGenerator() {
         <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
           <div className="space-y-3">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase block">Input Text Data</span>
-            <textarea
+            <textarea aria-label="Input Text Data"
               value={input}
               onChange={e => setInput(e.target.value)}
               placeholder="Enter text to hash here..."
@@ -69,7 +69,7 @@ export default function Md5HashGenerator() {
                 <span>MD5 (128-bit)</span>
                 {md5Hash && <button onClick={() => handleCopy(md5Hash, 'MD5')} className="text-[var(--accent)] hover:underline">Copy</button>}
               </div>
-              <input type="text" readOnly value={md5Hash} placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <input type="text" readOnly value={md5Hash} aria-label="MD5 digest" placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
 
             {/* SHA-1 */}
@@ -78,7 +78,7 @@ export default function Md5HashGenerator() {
                 <span>SHA-1 (160-bit)</span>
                 {sha1Hash && <button onClick={() => handleCopy(sha1Hash, 'SHA-1')} className="text-[var(--accent)] hover:underline">Copy</button>}
               </div>
-              <input type="text" readOnly value={sha1Hash} placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <input type="text" readOnly value={sha1Hash} aria-label="SHA-1 digest" placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
 
             {/* SHA-256 */}
@@ -87,7 +87,7 @@ export default function Md5HashGenerator() {
                 <span>SHA-256 (256-bit)</span>
                 {sha256Hash && <button onClick={() => handleCopy(sha256Hash, 'SHA-256')} className="text-[var(--accent)] hover:underline">Copy</button>}
               </div>
-              <input type="text" readOnly value={sha256Hash} placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <input type="text" readOnly value={sha256Hash} aria-label="SHA-256 digest" placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
 
             {/* SHA-512 */}
@@ -96,7 +96,7 @@ export default function Md5HashGenerator() {
                 <span>SHA-512 (512-bit)</span>
                 {sha512Hash && <button onClick={() => handleCopy(sha512Hash, 'SHA-512')} className="text-[var(--accent)] hover:underline">Copy</button>}
               </div>
-              <textarea readOnly rows={2} value={sha512Hash} placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
+              <textarea readOnly rows={2} value={sha512Hash} aria-label="SHA-512 digest" placeholder="Compute hashes to view digest..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-zinc-900 dark:text-emerald-400 font-mono text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
             </div>
           </div>
         </div>

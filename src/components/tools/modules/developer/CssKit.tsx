@@ -101,15 +101,15 @@ export function GlassmorphismGenerator() {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Blur</span>
-            <input type="range" min={0} max={40} value={blur} onChange={e => setBlur(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={0} max={40} value={blur} aria-label="Glassmorphism blur" onChange={e => setBlur(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-6">{blur}px</span>
           </div>
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Opacity</span>
-            <input type="range" min={0} max={100} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={0} max={100} value={opacity} aria-label="Glassmorphism opacity" onChange={e => setOpacity(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-6">{opacity}%</span>
           </div>
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Radius</span>
-            <input type="range" min={0} max={40} value={borderRadius} onChange={e => setBorderRadius(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={0} max={40} value={borderRadius} aria-label="Glassmorphism radius" onChange={e => setBorderRadius(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-6">{borderRadius}px</span>
           </div>
         </div>
@@ -195,15 +195,15 @@ export function NeumorphismGenerator() {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-2">
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Intensity</span>
-            <input type="range" min={1} max={20} value={intensity} onChange={e => setIntensity(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={1} max={20} value={intensity} aria-label="Neumorphism intensity" onChange={e => setIntensity(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-5">{intensity}</span>
           </div>
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Distance</span>
-            <input type="range" min={0} max={30} value={distance} onChange={e => setDistance(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={0} max={30} value={distance} aria-label="Neumorphism distance" onChange={e => setDistance(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-5">{distance}px</span>
           </div>
           <div className="flex gap-1 items-center"><span className="text-[10px] text-[var(--text-secondary)]">Blur</span>
-            <input type="range" min={1} max={60} value={blur} onChange={e => setBlur(Number(e.target.value))} className="flex-1" />
+            <input type="range" min={1} max={60} value={blur} aria-label="Neumorphism blur" onChange={e => setBlur(Number(e.target.value))} className="flex-1" />
             <span className="text-[10px] text-[var(--text-muted)] w-5">{blur}px</span>
           </div>
         </div>
@@ -336,7 +336,7 @@ export function CssToScss() {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">CSS Input</span>
-          <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS..."
+          <textarea aria-label="CSS input" value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS..."
             className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
         </div>
         <div className="space-y-1">
@@ -439,7 +439,7 @@ export function LessToCss() {
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
           <span className="text-[10px] text-[var(--text-secondary)] font-semibold">LESS Input</span>
-          <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="@var: value;"
+          <textarea aria-label="LESS input" value={input} onChange={e => setInput(e.target.value)} placeholder="@var: value;"
             className="w-full h-40 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
         </div>
         <div className="space-y-1">
@@ -504,7 +504,7 @@ export function CssSpecificityCalculator() {
       <PresetBar presets={presetList} />
 
       <div className="space-y-2">
-        <input type="text" value={sel} onChange={e => setSel(e.target.value)} placeholder="Enter CSS selector..."
+        <input type="text" value={sel} onChange={e => setSel(e.target.value)} placeholder="Enter CSS selector..." aria-label="CSS selector"
           className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
 
         {/* Specificity bar */}
@@ -523,7 +523,7 @@ export function CssSpecificityCalculator() {
 
       {compareMode && (
         <div className="space-y-2">
-          <input type="text" value={sel2} onChange={e => setSel2(e.target.value)} placeholder="Second selector..."
+          <input type="text" value={sel2} onChange={e => setSel2(e.target.value)} placeholder="Second selector..." aria-label="Second selector"
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           {spec2 && (
             <div className="w-full bg-[var(--bg-overlay)] rounded-lg h-4 overflow-hidden">
@@ -619,7 +619,7 @@ export function CssValidator() {
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
       <PresetBar presets={presetList} />
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS to validate..."
+      <textarea aria-label="CSS to validate" value={input} onChange={e => setInput(e.target.value)} placeholder="Paste CSS to validate..."
         className="w-full h-32 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={validate} label="Validate CSS" />
 
