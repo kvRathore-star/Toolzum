@@ -20,12 +20,12 @@ export default function TextCleaner() {
   return (
     <CalculatorShell category="SEO" title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to clean..."
+      <textarea aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to clean..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50 resize-y" />
 
       {result && (
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
-          <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
+          <textarea aria-label="Result" readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 resize-none" />
           <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors self-start"><Copy size={14} /></button>
         </div>
       )}

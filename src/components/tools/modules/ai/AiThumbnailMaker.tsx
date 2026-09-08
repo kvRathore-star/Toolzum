@@ -709,6 +709,7 @@ export default function AiThumbnailMaker() {
                       <input 
                         type="color" 
                         value={gradColorEnd}
+                        aria-label="End Color"
                         onChange={e => setGradColorEnd(e.target.value)}
                         className="w-8 h-8 rounded border-0 cursor-pointer"
                       />
@@ -723,6 +724,7 @@ export default function AiThumbnailMaker() {
                   </div>
                   <input 
                     type="range" min="0" max="360" value={gradAngle}
+                    aria-label="Gradient angle"
                     onChange={e => setGradAngle(parseInt(e.target.value))}
                     className="w-full accent-indigo-600 mt-1"
                   />

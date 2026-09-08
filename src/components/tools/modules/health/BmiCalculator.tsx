@@ -112,11 +112,11 @@ export default function BmiCalculator() {
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height</label>
                 <div className="flex gap-2">
                   <div className="flex-1">
-                    <input type="number" value={heightFt} onChange={e => onHeightImperialChange(Math.max(0, parseInt(e.target.value) || 0), heightIn)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="ft" />
+                    <input type="number" value={heightFt} aria-label="Height (feet)" onChange={e => onHeightImperialChange(Math.max(0, parseInt(e.target.value) || 0), heightIn)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="ft" />
                     <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">ft</div>
                   </div>
                   <div className="flex-1">
-                    <input type="number" value={heightIn} onChange={e => onHeightImperialChange(heightFt, Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="in" />
+                    <input type="number" value={heightIn} aria-label="Height (inches)" onChange={e => onHeightImperialChange(heightFt, Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="in" />
                     <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">in</div>
                   </div>
                 </div>
