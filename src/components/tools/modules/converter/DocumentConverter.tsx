@@ -171,7 +171,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
+          role="button" tabIndex={0} aria-label="Upload documents" onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}
           className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-8 cursor-pointer transition-all ${
             isDragOver
@@ -202,7 +202,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
         {files.length > 0 && (
           <div className="flex flex-wrap gap-2 items-center">
-            <select aria-label="Remove" value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
+            <select aria-label="Source format" value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
               {FORMATS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
             <button onClick={swapFormats} className="px-3 py-2 rounded-xl bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:border-blue-400" title="Swap formats">⇄</button>

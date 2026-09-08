@@ -352,7 +352,7 @@ const copyOutput = useCallback(() => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <select aria-label="Target:"
+          <select aria-label="Source format"
             value={srcFormat}
             onChange={(e) => { setSrcFormat(e.target.value as FormatKey); setOutput(''); }}
             className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"

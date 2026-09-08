@@ -80,7 +80,7 @@ export default function RotateImage() {
          <p className="text-[var(--text-secondary)]">Rotate to any angle, flip horizontally or vertically. All processing in your browser.</p>
          
           <div 
-            role="button" tabIndex={0}
+            role="button" tabIndex={0} aria-label="Upload image"
             className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
             onClick={() => !image && fileInputRef.current?.click()}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!image) fileInputRef.current?.click(); } }}

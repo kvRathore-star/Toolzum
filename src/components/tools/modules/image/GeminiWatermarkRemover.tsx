@@ -405,8 +405,7 @@ export default function GeminiWatermarkRemover() {
         <div className="space-y-4">
           {!singleImage ? (
             <div onDragOver={e => { e.preventDefault(); setIsDragging(true); }} onDragLeave={() => setIsDragging(false)} onDrop={handleDrop}
-              role="button"
-              tabIndex={0}
+              role="button" tabIndex={0} aria-label="Upload Gemini image"
               onClick={() => fileRef.current?.click()}
               onKeyDown={(e) => buttonKeyDown(e, () => fileRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileRef.current?.click())}
@@ -414,7 +413,7 @@ export default function GeminiWatermarkRemover() {
               <Upload className="w-12 h-12 mx-auto mb-4 text-[var(--accent)]" />
               <p className="text-[var(--text-primary)] font-medium">{isDragging ? 'Drop image here' : 'Drag & drop a Gemini image'}</p>
               <p className="text-sm text-[var(--text-secondary)] mt-1">or click to browse</p>
-              <input aria-label="or click to browse" ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
+              <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleSingleUpload} />
             </div>
           ) : (
             <div className="space-y-4">

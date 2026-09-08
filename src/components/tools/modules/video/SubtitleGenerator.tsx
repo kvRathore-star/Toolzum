@@ -146,11 +146,11 @@ export default function SubtitleGenerator() {
               {entries.length === 0 && (
                 <p className="text-xs text-[var(--text-muted)] text-center py-8">Play the video and click "Add at..." to start creating subtitles</p>
               )}
-              {entries.map((entry) => (
+              {entries.map((entry, idx) => (
                 <div key={entry.id} className={`bg-[var(--bg-overlay)] border rounded-xl p-3 space-y-2 ${editingId === entry.id ? 'border-emerald-400 ring-2 ring-emerald-500/20' : 'border-[var(--border-subtle)]'}`}>
                   <div className="flex items-center justify-between">
                     <div className="flex gap-2 text-[10px] font-mono text-[var(--text-secondary)]">
-                      <input type="text" value={formatTime(entry.start)} onChange={e => {
+                      <input type="text" value={formatTime(entry.start)} aria-label={`Subtitle ${idx + 1} start time`} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
                         if (parts.length === 4) {
                           const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
@@ -158,7 +158,7 @@ export default function SubtitleGenerator() {
                         }
                       }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
                       <span>→</span>
-                      <input type="text" value={formatTime(entry.end)} onChange={e => {
+                      <input type="text" value={formatTime(entry.end)} aria-label={`Subtitle ${idx + 1} end time`} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
                         if (parts.length === 4) {
                           const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;

@@ -335,8 +335,7 @@ export default function FontConverter() {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
-          role="button"
-          tabIndex={0}
+          role="button" tabIndex={0} aria-label="Upload font file"
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}

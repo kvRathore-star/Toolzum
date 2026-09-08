@@ -197,7 +197,7 @@ export default function InvoiceGenerator() {
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/50">
-              {items.map((item) => (
+              {items.map((item, idx) => (
                 <tr key={item.id} className="group">
                   <td className="py-3 px-2">
                     <input aria-label="Item description"
@@ -212,7 +212,7 @@ export default function InvoiceGenerator() {
                     <input
                       type="number"
                       min="1"
-                      value={item.quantity}
+                      value={item.quantity} aria-label={`Item ${idx + 1} quantity`}
                       onChange={(e) => handleItemChange(item.id, 'quantity', parseFloat(e.target.value) || 0)}
                       className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
                     />
@@ -222,7 +222,7 @@ export default function InvoiceGenerator() {
                       type="number"
                       min="0"
                       step="0.01"
-                      value={item.rate}
+                      value={item.rate} aria-label={`Item ${idx + 1} rate`}
                       onChange={(e) => handleItemChange(item.id, 'rate', parseFloat(e.target.value) || 0)}
                       className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
                     />

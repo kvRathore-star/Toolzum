@@ -95,7 +95,7 @@ export default function BlurFace() {
          <p className="text-[var(--text-secondary)]">Automatically detect and blur faces in photos using completely private, on-device AI.</p>
          
          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
-           <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+           <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" aria-label="Upload image" />
            {image ? (
               <NextImage unoptimized={true} loading="lazy" src={image} alt="Preview" width={800} height={600} className="max-h-64 mx-auto rounded-lg shadow-sm" />
            ) : (

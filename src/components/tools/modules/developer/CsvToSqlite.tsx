@@ -256,8 +256,7 @@ export default function CsvToSqlite() {
             <div
               onDrop={handleDrop}
               onDragOver={e => e.preventDefault()}
-              role="button"
-              tabIndex={0}
+              role="button" tabIndex={0} aria-label="Upload spreadsheet file"
               onClick={() => fileInputRef.current?.click()}
               onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
@@ -266,7 +265,7 @@ export default function CsvToSqlite() {
               <Upload className="w-8 h-8 mx-auto text-[var(--text-muted)] mb-2" />
               <p className="text-xs text-[var(--text-secondary)] font-medium">Drop CSV/TSV/SQLite file here</p>
               <p className="text-[10px] text-zinc-600 mt-1">or click to browse</p>
-              <input aria-label="or click to browse" ref={fileInputRef} type="file" accept=".csv,.tsv,.sqlite,.db,.sql" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
+              <input ref={fileInputRef} type="file" accept=".csv,.tsv,.sqlite,.db,.sql" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
             </div>
           )}
 

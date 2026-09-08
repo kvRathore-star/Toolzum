@@ -126,7 +126,7 @@ export default function BatchImageEditor() {
 
          {files.length === 0 ? (
            <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
-             <input type="file" multiple accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+             <input type="file" multiple accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" aria-label="Select images" />
              <div className="text-[var(--text-secondary)] flex flex-col items-center">
                 <Upload className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" />
                 Select Multiple Images

@@ -236,8 +236,7 @@ export default function IndianVoiceTranscriber() {
               style={{ borderColor: audioFile ? '#0284c7' : undefined }}
               onMouseEnter={e => { if (!audioFile) e.currentTarget.style.borderColor = '#0284c780'; }}
               onMouseLeave={e => { if (!audioFile) e.currentTarget.style.borderColor = 'var(--border-subtle)'; }}
-              role="button"
-              tabIndex={0}
+              role="button" tabIndex={0} aria-label="Upload voice note or audio file"
               onClick={() => fileInputRef.current?.click()}
               onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}>

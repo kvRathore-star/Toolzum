@@ -223,8 +223,7 @@ export default function IndianDocumentEnhancer() {
               style={{ borderColor: '#47556940' }}
               onMouseEnter={e => e.currentTarget.style.borderColor = '#475569'}
               onMouseLeave={e => e.currentTarget.style.borderColor = '#47556940'}
-              role="button"
-              tabIndex={0}
+              role="button" tabIndex={0} aria-label="Upload a document photo"
               onClick={() => fileInputRef.current?.click()}
               onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}>
