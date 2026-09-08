@@ -70,6 +70,7 @@ export default function DomainAvailabilityChecker() {
       <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <input
+            aria-label="Domain"
             type="text"
             value={domain}
             onChange={(e) => setDomain(e.target.value)}
