@@ -175,7 +175,7 @@ export function CodeToCurlParser() {
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch, axios, or XMLHttpRequest code..."
+      <textarea aria-label="Paste fetch, axios, or XMLHttpRequest code..." value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch, axios, or XMLHttpRequest code..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={parse} label="Parse to Curl" />
       {output && (
@@ -259,7 +259,7 @@ export function JsSyntaxChecker() {
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
-      <textarea value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
+      <textarea aria-label="JavaScript code..." value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={check} label="Check Syntax" />
       {result && (
@@ -386,7 +386,7 @@ export function PugToHtml() {
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello&#10;  p World"
+      <textarea aria-label="div.container&#10; h1 Hello&#10; p World" value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello&#10;  p World"
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <div className="flex gap-2">
         <CalcBtn onClick={convert} label="Convert" />

@@ -40,9 +40,9 @@ export function CalorieTracker() {
           ))}
         </div>
         <div className="flex gap-2 mb-3">
-          <input type="text" value={food} onChange={e => setFood(e.target.value)} placeholder="Food name"
+          <input aria-label="Food name" type="text" value={food} onChange={e => setFood(e.target.value)} placeholder="Food name"
             className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
-          <input type="number" value={calories || ''} onChange={e => setCalories(Number(e.target.value))} placeholder="Cal"
+          <input aria-label="Cal" type="number" value={calories || ''} onChange={e => setCalories(Number(e.target.value))} placeholder="Cal"
             className="w-24 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           <button onClick={addFood} className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-all">+ Add</button>
         </div>

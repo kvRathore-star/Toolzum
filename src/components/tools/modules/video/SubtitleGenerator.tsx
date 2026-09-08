@@ -168,7 +168,7 @@ export default function SubtitleGenerator() {
                     </div>
                     <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
-                  <textarea
+                  <textarea aria-label="Subtitle text..."
                     ref={editingId === entry.id ? textInputRef : undefined}
                     value={entry.text}
                     onChange={e => updateEntry(entry.id, 'text', e.target.value)}

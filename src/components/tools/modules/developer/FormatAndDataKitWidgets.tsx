@@ -304,7 +304,7 @@ export function CodeToCurlConverter() {
             </button>
           ))}
         </div>
-        <textarea rows={5} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch/axios code"
+        <textarea aria-label="Paste fetch/axios code" rows={5} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch/axios code"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to cURL</button>
         {output && (
@@ -394,7 +394,7 @@ export function CurlToCodeConverter() {
             <button key={lang} onClick={() => setTargetLang(lang as any)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
           ))}
         </div>
-        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
+        <textarea aria-label="Paste cURL command" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-96 overflow-auto">{output}</pre>}

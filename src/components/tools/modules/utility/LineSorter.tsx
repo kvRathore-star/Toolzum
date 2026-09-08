@@ -49,7 +49,7 @@ export default function LineSorter() {
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Paste lines of text, one per line..." className="w-full h-[300px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
+        <textarea aria-label="Paste lines of text, one per line..." value={input} onChange={e => setInput(e.target.value)} placeholder="Paste lines of text, one per line..." className="w-full h-[300px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
           <textarea value={output} readOnly placeholder="Result..." className="w-full h-[300px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
           {output && (

@@ -304,7 +304,7 @@ export default function AiChatPdf() {
             </div>
           )}
           <div className="relative flex items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-inner focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all">
-            <textarea
+            <textarea aria-label="Ask a question about your document..."
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               onKeyDown={(e) => {

@@ -49,7 +49,7 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md mx-auto">
-          <Input 
+          <Input aria-label="Enter your email to get early access" 
             type="email" 
             placeholder="Enter your email to get early access"
             value={email}

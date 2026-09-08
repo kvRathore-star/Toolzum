@@ -307,7 +307,7 @@ export default function BankStatementAnalyser() {
             <div className="flex flex-wrap items-center gap-2">
               <div className="relative flex-1 min-w-[200px]">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--text-muted)]" />
-                <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search description..."
+                <input aria-label="Search description..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search description..."
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}

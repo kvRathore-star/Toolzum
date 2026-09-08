@@ -219,7 +219,7 @@ export default function WheelOfNames() {
                 Entries ({nameList.length})
               </h3>
             </div>
-            <textarea
+            <textarea aria-label="Enter names here...\\nOne name per line"
               value={names}
               onChange={(e) => setNames(e.target.value)}
               placeholder="Enter names here...\\nOne name per line"

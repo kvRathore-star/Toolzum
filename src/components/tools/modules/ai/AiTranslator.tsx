@@ -107,7 +107,7 @@ ${inputText}`;
         {/* Text Areas */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="relative">
-            <textarea
+            <textarea aria-label="Enter text to translate..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Enter text to translate..."

@@ -167,7 +167,7 @@ ${linkCards}
                 <div className="flex-1 space-y-2">
                   <input value={profileName} onChange={e => setProfileName(e.target.value)} placeholder="Your name"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
-                  <input value={profileBio} onChange={e => setProfileBio(e.target.value)} placeholder="Short bio"
+                  <input aria-label="Short bio" value={profileBio} onChange={e => setProfileBio(e.target.value)} placeholder="Short bio"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                 </div>
               </div>
@@ -199,7 +199,7 @@ ${linkCards}
               <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Link className="w-3 h-3" /> Links {links.length > 0 && <span className="font-mono text-[var(--text-secondary)]">({links.length})</span>}</h5>
               
               <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                <input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Link title"
+                <input aria-label="Link title" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Link title"
                   className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                 <input value={newUrl} onChange={e => setNewUrl(e.target.value)} placeholder="https://..."
                   className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />

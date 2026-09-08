@@ -202,9 +202,9 @@ export function ConventionalCommitGenerator() {
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
           {['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test', 'chore', 'ci', 'build'].map(t => <option key={t} value={t}>{t}</option>)}
         </select>
-        <input type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="Scope (optional)"
+        <input aria-label="Scope (optional)" type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="Scope (optional)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-        <input type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description"
+        <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && (

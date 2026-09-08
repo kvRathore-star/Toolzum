@@ -57,7 +57,7 @@ export default function StringInspector() {
         ))}
       </div>
 
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="Type or paste any string to inspect..." className="w-full h-[200px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
+      <textarea aria-label="Type or paste any string to inspect..." value={input} onChange={e => setInput(e.target.value)} placeholder="Type or paste any string to inspect..." className="w-full h-[200px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
       <div className="flex gap-2 mb-2">
         <button onClick={copyStats} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
           <Copy className="w-3.5 h-3.5" /> Copy Stats

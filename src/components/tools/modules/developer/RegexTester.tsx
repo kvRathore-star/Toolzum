@@ -133,7 +133,7 @@ export default function RegexTester() {
                     className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl pl-8 pr-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
                   <span className="absolute right-4 text-[var(--text-muted)] text-lg">/</span>
                 </div>
-                <input type="text" value={flags} onChange={e => setFlags(e.target.value)} placeholder="gmi"
+                <input aria-label="gmi" type="text" value={flags} onChange={e => setFlags(e.target.value)} placeholder="gmi"
                   className="w-24 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
               </div>
               {error && <p className="text-sm text-red-500 flex items-center gap-2"><Info className="w-4 h-4" />{error}</p>}

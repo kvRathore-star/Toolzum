@@ -33,7 +33,7 @@ export default function JwtDebugger() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <textarea value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors break-all" />
+      <textarea aria-label="Paste JWT token (header.payload.signature)..." value={input} onChange={e => { setInput(e.target.value); decode(e.target.value); }} placeholder="Paste JWT token (header.payload.signature)..." className="w-full h-[100px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors break-all" />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {header && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

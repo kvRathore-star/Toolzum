@@ -49,7 +49,7 @@ export default function InvisibleTextGenerator() {
           </div>
 
           <div className="flex gap-2 items-center">
-            <input
+            <input aria-label="Custom count"
               type="number"
               min={1}
               max={10000}

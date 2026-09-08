@@ -221,7 +221,7 @@ export default function DockerRunToCompose() {
           </button>
         ))}
       </div>
-      <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="docker run -d --name myapp -p 8080:80 nginx"
+      <textarea aria-label="docker run -d --name myapp -p 8080:80 nginx" value={input} onChange={e => setInput(e.target.value)} placeholder="docker run -d --name myapp -p 8080:80 nginx"
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono h-[100px]" />
       <button onClick={convert} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Convert to Compose</button>
       {warnings.length > 0 && (

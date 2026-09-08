@@ -112,14 +112,14 @@ export default function InvoiceGenerator() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between gap-8 mb-12">
           <div className="space-y-4 flex-1">
-            <input
+            <input aria-label="Your Company Name"
               type="text"
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
               className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full transition-colors"
               placeholder="Your Company Name"
             />
-            <textarea
+            <textarea aria-label="Your Address & Contact Info"
               value={senderDetails}
               onChange={(e) => setSenderDetails(e.target.value)}
               className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none transition-colors"
@@ -174,7 +174,7 @@ export default function InvoiceGenerator() {
               className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full"
               placeholder="Client Name"
             />
-            <textarea
+            <textarea aria-label="Client Address & Info"
               value={clientDetails}
               onChange={(e) => setClientDetails(e.target.value)}
               className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
@@ -200,7 +200,7 @@ export default function InvoiceGenerator() {
               {items.map((item) => (
                 <tr key={item.id} className="group">
                   <td className="py-3 px-2">
-                    <input
+                    <input aria-label="Item description"
                       type="text"
                       value={item.description}
                       onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
