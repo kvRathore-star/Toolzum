@@ -1,3 +1,4 @@
+/** Dumps the DynamicModuleWrapper slug registry baseline for diffing route changes between builds. */
 const fs = require('fs');
 
 const WRAPPER = fs.readFileSync('src/components/tools/modules/DynamicModuleWrapper.tsx', 'utf8');

@@ -1,3 +1,4 @@
+// HISTORICAL one-off: slug-coverage audit against the old registry layout. Superseded by quality-audit.
 const fs = require('fs');
 const path = require('path');
 

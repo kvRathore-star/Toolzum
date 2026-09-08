@@ -1,3 +1,4 @@
+/** Rebuilds registry chunk files from tool metadata. Run after adding/removing tools, before building. */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

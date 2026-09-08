@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/** Converts public/og PNGs to WebP via sharp (quality 80). One-off migration; re-run safe (skips existing). */
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve, join, relative } from 'path';

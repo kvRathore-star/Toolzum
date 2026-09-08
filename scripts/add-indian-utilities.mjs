@@ -1,3 +1,4 @@
+// HISTORICAL one-off: appended indian-utilities entries to the old registry. Do not re-run (paths stale).
 import fs from 'fs';
 import path from 'path';
 

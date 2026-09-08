@@ -1,3 +1,4 @@
+/** Diagnostic pass over the registry: missing modules, bad slugs, miscategorized tools. Read-only; exits nonzero on errors. NOTE: references legacy paths, may need updating. */
 import { toolsRegistry } from '../src/registry/tools';
 
 async function verifyRegistry() {

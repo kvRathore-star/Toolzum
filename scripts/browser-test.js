@@ -1,3 +1,4 @@
+/** Puppeteer smoke test: loads the homepage headless and pipes console logs. Not wired into CI. */
 const puppeteer = require('puppeteer');
 
 (async () => {

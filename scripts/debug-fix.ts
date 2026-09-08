@@ -1,3 +1,4 @@
+// HISTORICAL one-off: flagged descriptions identical to normalized SEO text. Debugging aid, not a gate.
 import { readFileSync } from 'fs';
 import { toolsRegistry } from '../src/registry/tools';
 import { getShortDescription } from '../src/lib/generateToolDescription';

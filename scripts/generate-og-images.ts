@@ -1,3 +1,4 @@
+/** Generates per-tool OG images into public/og (npm run gen:og). Skips up-to-date files by content hash. */
 import { createRequire } from "module";
 import { createHash } from "crypto";
 import {

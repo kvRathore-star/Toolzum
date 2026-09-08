@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# HISTORICAL one-off: import-path rewrite for the module move. See module docstring.
 """Rewrite all import paths referencing the old flat modules/ layout.
 Uses the same mapping JSON as the move script — single source of truth.
 Fails loudly on any file it can't read/write.

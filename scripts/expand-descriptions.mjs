@@ -1,3 +1,4 @@
+// HISTORICAL one-off: description expansion against the old registry. Paths stale.
 import fs from "fs";
 
 const filePath = "src/registry/tools.ts";

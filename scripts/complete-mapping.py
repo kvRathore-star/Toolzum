@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# HISTORICAL one-off: added manual buckets for unmapped files during the module move. Inputs in /tmp, long gone.
 """Complete the mapping by adding manual buckets for the 85 unmapped files."""
 import json
 

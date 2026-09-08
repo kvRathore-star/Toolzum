@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// HISTORICAL one-off: registry repair script. Do not re-run.
 import fs from 'fs';
 
 const path = 'src/registry/tools.ts';

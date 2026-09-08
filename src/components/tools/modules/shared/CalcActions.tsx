@@ -11,6 +11,7 @@ interface CalcActionsProps {
   accent?: string;
 }
 
+/** Result action bar: copy button, CSV download, collapsible 20-entry history (debounced 500ms). Use when a tool needs result actions without the full CalculatorShell. */
 export function CalcActions({
   result,
   downloadData,

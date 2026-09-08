@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// HISTORICAL one-off: applied descriptions-map.json to the old registry. Paths stale.
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';

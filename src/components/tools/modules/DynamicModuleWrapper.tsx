@@ -1367,6 +1367,14 @@ const ComingSoonTool = dynamic(() => import('@/components/tools/modules/utility/
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 
+/**
+ * Lazy tool loader + crash boundary. Looks `slug` up in MODULE_REGISTRY
+ * (the ONLY sanctioned importer of tool modules — see no-restricted-imports
+ * in eslint.config.mjs), renders the dynamic import with a skeleton
+ * fallback (15s timeout → refresh prompt), and wraps everything in an
+ * ErrorBoundary so one broken tool can't take down the page.
+ * Register new tools in MODULE_REGISTRY; never import a module directly.
+ */
 export function DynamicModuleWrapper({ slug, category }: { slug: string, category: string }) {
   const DynamicModule = MODULE_REGISTRY[slug];
 

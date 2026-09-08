@@ -1,3 +1,4 @@
+// HISTORICAL one-off: located placeholder entries in the old registry.
 const fs = require('fs');
 const path = require('path');
 

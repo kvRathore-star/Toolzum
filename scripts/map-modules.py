@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# HISTORICAL one-off: old-path to new-path mapping for the module move. See module docstring.
 """Build old-path -> new-path mapping for the 400 module files.
 Pulls slug->category from tools chunks and slug->filename from DynamicModuleWrapper.
 Outputs a machine-readable JSON mapping for use by the move script.

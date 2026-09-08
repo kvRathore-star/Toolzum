@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// HISTORICAL one-off: description fixes against the old registry. Paths stale.
 const fs = require("fs");
 const path = require("path");
 

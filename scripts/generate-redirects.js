@@ -1,3 +1,4 @@
+/** Generates public/_redirects (301s for renamed tools) below a GENERATED marker; preserves hand-written rules above it (npm run gen:redirects). */
 const fs = require('fs');
 const path = require('path');
 

@@ -1,3 +1,4 @@
+/** Submits sitemap URLs to the IndexNow API (Bing/Yandex) after deploy. Requires no secrets (key is public by design). */
 const INDEXNOW_KEY = '71a78a2efbe244249625d4740fd91311';
 const SITEMAP_URL = 'https://toolzum.com/sitemap.xml';
 const INDEXNOW_API = 'https://api.indexnow.org/indexnow';

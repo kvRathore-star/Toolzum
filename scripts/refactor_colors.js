@@ -1,3 +1,4 @@
+// HISTORICAL one-off: codemod replacing hardcoded colors with CSS vars across tool modules.
 const fs = require('fs');
 const path = require('path');
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// HISTORICAL one-off: backfilled missing bulk-tool SEO entries. Do not re-run.
 const fs = require("fs");
 const path = require("path");
 const ROOT = path.resolve(__dirname, "..");

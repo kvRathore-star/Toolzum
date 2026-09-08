@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+/** Canonical per-category visuals (icon, colors). Single source of truth —
+ * megamenu icons and category pages must match these, not redefine their own. */
 export interface CategoryTheme {
   icon: LucideIcon;
   iconColor: string;
@@ -216,6 +218,7 @@ export function getGroupedCategories(categories: string[]): Record<string, strin
   return groups;
 }
 
+/** Fallback when a category has no entry in CATEGORY_THEMES. */
 export function getCategoryTheme(category: string): CategoryTheme {
   return CATEGORY_THEMES[category] ?? DEFAULT_THEME;
 }

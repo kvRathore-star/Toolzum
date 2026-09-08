@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// HISTORICAL one-off: appended missing tool entries to the old registry. Do not re-run (paths stale).
 import fs from 'fs';
 
 const registryPath = 'src/registry/tools.ts';

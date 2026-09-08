@@ -1,3 +1,4 @@
+// HISTORICAL one-off: split the monolithic registry into chunks. Do not re-run.
 const fs = require('fs');
 const path = require('path');
 
