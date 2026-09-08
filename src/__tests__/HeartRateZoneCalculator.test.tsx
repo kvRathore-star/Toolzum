@@ -13,9 +13,12 @@ describe('HeartRateZoneCalculator', () => {
     expect(screen.getByDisplayValue('65')).toBeDefined();
   });
 
-  it('shows max HR with defaults (auto mode)', () => {
+  it('shows max HR and zones with defaults (auto mode)', () => {
     render(<HeartRateZoneCalculator />);
+    // Note: zone names render split across elements, so assert on text
+    // content rather than a single-element text query.
     expect(screen.getByText(/Max HR:/)).toBeDefined();
+    expect(document.body.textContent).toContain('Zone 1');
   });
 
   it('updates when age changes', () => {
