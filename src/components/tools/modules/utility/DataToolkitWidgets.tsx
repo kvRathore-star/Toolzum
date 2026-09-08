@@ -1372,7 +1372,7 @@ export function CsvJsonRowGenerator() {
       </div>
       <div className="flex items-center gap-3 mb-3">
         <span className="text-sm text-[var(--text-secondary)]">Rows: {count}</span>
-        <input type="range" min={1} max={50} value={count} onChange={e => setCount(Number(e.target.value))} className="flex-1 h-2 accent-blue-500" />
+        <input type="range" min={1} max={50} value={count} onChange={e => setCount(Number(e.target.value))} aria-label="Rows" className="flex-1 h-2 accent-blue-500" />
       </div>
       <button onClick={handle} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Generate</button>
       {out && (

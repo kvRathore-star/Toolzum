@@ -159,13 +159,13 @@ export default function SocialMediaCalendar() {
           <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
             <h5 className="text-[10px] font-bold text-[var(--text-muted)] uppercase">{editingId ? 'Edit' : 'New'} Post</h5>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))}
+              <input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} aria-label="Post date"
                 className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
-              <select value={form.platform} onChange={e => setForm(f => ({ ...f, platform: e.target.value as Platform }))}
+              <select value={form.platform} onChange={e => setForm(f => ({ ...f, platform: e.target.value as Platform }))} aria-label="Platform"
                 className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
                 {Object.keys(PLATFORM_ICONS).map(p => <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
               </select>
-              <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value as Post['status'] }))}
+              <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value as Post['status'] }))} aria-label="Status"
                 className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
                 <option value="draft">Draft</option>
                 <option value="scheduled">Scheduled</option>

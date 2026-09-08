@@ -326,12 +326,12 @@ export default function WaveformGenerator() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Width: {width}px</label>
-                <input type="range" min={800} max={4000} step={50} value={width} onChange={e => setWidth(Number(e.target.value))}
+                <input type="range" min={800} max={4000} step={50} value={width} aria-label="Width" onChange={e => setWidth(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
               <div>
                 <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Height: {height}px</label>
-                <input type="range" min={100} max={800} step={10} value={height} onChange={e => setHeight(Number(e.target.value))}
+                <input type="range" min={100} max={800} step={10} value={height} aria-label="Height" onChange={e => setHeight(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
             </div>

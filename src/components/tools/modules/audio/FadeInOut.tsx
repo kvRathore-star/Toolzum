@@ -70,7 +70,7 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
                 {percent ? 'Switch to sec' : 'Switch to %'}
               </button>
             </div>
-            <input type="range" min={0.5} max={max} step={0.5} value={duration}
+            <input type="range" min={0.5} max={max} step={0.5} value={duration} aria-label="Duration"
               onChange={e => onDuration(parseFloat(e.target.value))}
               className={`w-full ${accent}`} />
             <div className="text-center text-[10px] text-[var(--text-secondary)] font-mono">{duration.toFixed(1)}{label}</div>

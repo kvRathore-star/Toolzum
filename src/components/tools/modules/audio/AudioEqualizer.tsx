@@ -384,7 +384,7 @@ export default function AudioEqualizer() {
             {BANDS.map((freq, i) => (
               <div key={freq} className="flex flex-col items-center gap-1 flex-1">
                 <span className="text-[9px] font-semibold text-[var(--text-muted)]">{BAND_LABELS[i]}</span>
-                <input
+                <input aria-label={BAND_LABELS[i]}
                   type="range"
                   min="-12"
                   max="12"

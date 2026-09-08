@@ -264,6 +264,7 @@ export default function AudioMerger() {
               </button>
               <input
                 ref={addMoreRef}
+                aria-label="Add more audio files"
                 type="file"
                 multiple
                 accept=".mp3,.wav,.m4a,.flac,.ogg"

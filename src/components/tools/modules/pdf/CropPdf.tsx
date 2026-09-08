@@ -152,7 +152,7 @@ export default function CropPdf() {
               {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
                 <div key={side}>
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1 capitalize">{side} (pts)</label>
-                  <input
+                  <input aria-label={`${side} (pts)`}
                     type="number"
                     min={0}
                     max={2000}

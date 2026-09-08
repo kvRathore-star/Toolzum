@@ -384,7 +384,7 @@ export function MarkdownToSlackConverter() {
             </button>
           ))}
         </div>
-        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
+        <textarea aria-label="Markdown text" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Slack</button>
         {output && (

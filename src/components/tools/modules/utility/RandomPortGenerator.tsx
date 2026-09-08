@@ -32,7 +32,7 @@ export default function RandomPortGenerator() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-4 flex-wrap">
         <label className="text-sm text-[var(--text-secondary)]">Count: {portCount}</label>
-        <input type="range" min={1} max={20} value={portCount} onChange={e => setPortCount(parseInt(e.target.value))} className="w-32" />
+        <input type="range" min={1} max={20} value={portCount} onChange={e => setPortCount(parseInt(e.target.value))} aria-label="Port count" className="w-32" />
         <button onClick={generate} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer">Generate</button>
       </div>
       <div className="space-y-2">

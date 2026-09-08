@@ -23,7 +23,7 @@ export default function PercentageCalculator() {
                 placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <span className="font-bold text-[var(--text-secondary)]">% of</span>
-              <input 
+              <input aria-label="Y" 
                 type="number" value={val2} onChange={e => setVal2(e.target.value)}
                 placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />

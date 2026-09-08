@@ -192,7 +192,7 @@ export default function WhiteoutPdf() {
               {(['x', 'y', 'w', 'h'] as const).map((key) => (
                 <div key={key}>
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">{key === 'w' ? 'Width' : key === 'h' ? 'Height' : key.toUpperCase()} (pts)</label>
-                  <input
+                  <input aria-label={`${key === 'w' ? 'Width' : key === 'h' ? 'Height' : key.toUpperCase()} (pts)`}
                     type="number"
                     min={0}
                     max={5000}

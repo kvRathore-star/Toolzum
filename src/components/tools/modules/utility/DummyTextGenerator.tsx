@@ -34,12 +34,12 @@ export default function DummyTextGenerator() {
       <div className="space-y-4">
         <div className="space-y-1">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Character Length ({length})</label>
-          <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full accent-sky-500" />
-          <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+          <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} aria-label="Character Length" className="w-full accent-sky-500" />
+          <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} aria-label="Character Length" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
         {result ? (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-            <textarea readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+            <textarea readOnly value={result} rows={6} aria-label="Result" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
             <div className="flex items-center justify-between mt-2">
               <span className="text-xs text-[var(--text-muted)]">{result.length} chars</span>
               <div className="flex gap-1">

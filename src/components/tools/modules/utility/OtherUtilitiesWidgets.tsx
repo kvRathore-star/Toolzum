@@ -74,7 +74,7 @@ export function PhoneParser() {
           </button>
         ))}
       </div>
-      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+      <input value={phoneInput} onChange={e => { setPhoneInput(e.target.value); setPhoneResult(detectCountry(e.target.value)); }} aria-label="Phone number" placeholder="Enter phone number (e.g. +14155552671 or +919876543210)..." className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
       {phoneResult && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.country}</span></div>
@@ -145,7 +145,7 @@ export function OTPGenerator() {
           </div>
           <div>
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Count: {otpCount}</label>
-            <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} className="w-24" />
+            <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} aria-label="OTP count" className="w-24" />
           </div>
         </div>
         <div className="flex gap-3 items-center">

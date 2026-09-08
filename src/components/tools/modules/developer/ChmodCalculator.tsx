@@ -60,7 +60,7 @@ export default function ChmodCalculator() {
           <button key={p} onClick={() => handleInput(p)} className="text-xs bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[var(--text-secondary)] px-3 py-1.5 rounded-lg hover:bg-[var(--bg-overlay)] hover:text-[var(--text-primary)] transition-colors font-mono cursor-pointer">{p}</button>
         ))}
       </div>
-      <input value={input} onChange={e => handleInput(e.target.value)} placeholder="e.g. 755 or u=rwx,g=rx,o=rx" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+      <input value={input} onChange={e => handleInput(e.target.value)} placeholder="e.g. 755 or u=rwx,g=rx,o=rx" aria-label="File permissions" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
       {/^[0-7]{3}$/.test(numeric) && (
         <div className="space-y-4">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">

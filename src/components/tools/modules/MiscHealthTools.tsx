@@ -37,7 +37,7 @@ export function BodyMassIndexCalculator() {
       downloadFilename="bmi.json"
     >
       <div className="space-y-4">
-        <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
+        <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)} aria-label="Unit">
           <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
         </select>
         <div className="flex gap-2">
@@ -123,7 +123,7 @@ export function CalorieIntakeCalculator() {
       <div className="space-y-4">
         <div className="flex gap-2">
           <select className={selClass} value={gender} onChange={e => setGender(e.target.value)} aria-label="Gender"><option value="male">Male</option><option value="female">Female</option></select>
-          <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)}>
+          <select className={selClass} value={activity} onChange={e => setActivity(e.target.value)} aria-label="Activity level">
             <option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option>
             <option value="1.725">Active</option><option value="1.9">Very Active</option>
           </select>

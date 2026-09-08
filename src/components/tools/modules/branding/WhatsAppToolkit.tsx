@@ -474,7 +474,7 @@ function QuickRepliesTab() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           <input aria-label="New Quick Reply" value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Template title (e.g. Order Confirmation)"
             className="bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
-          <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)"
+          <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)" aria-label="Message content"
             className="md:col-span-1 bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           <button onClick={addTemplate}
             className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
@@ -494,9 +494,9 @@ function QuickRepliesTab() {
             <div key={t.id} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3">
               {editingId === t.id ? (
                 <div className="space-y-2">
-                  <input defaultValue={t.title} id={`edit-title-${t.id}`}
+                  <input defaultValue={t.title} id={`edit-title-${t.id}`} aria-label="Edit title"
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
-                  <textarea defaultValue={t.content} id={`edit-content-${t.id}`} rows={2}
+                  <textarea defaultValue={t.content} id={`edit-content-${t.id}`} aria-label="Edit message" rows={2}
                     className="w-full bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none" />
                   <div className="flex gap-2">
                     <button onClick={() => {

@@ -343,7 +343,7 @@ export default function VoiceRecorder() {
             <audio ref={audioRef} controls className="w-full" src={audioUrl || undefined} />
             <div className="flex items-center justify-between p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               {isRenaming ? (
-                <input ref={inputRef} defaultValue={recordingName}
+                <input ref={inputRef} defaultValue={recordingName} aria-label="Recording name"
                   onKeyDown={e => { if (e.key === 'Enter') confirmRename(); if (e.key === 'Escape') setIsRenaming(false); }}
                   onBlur={confirmRename}
                   className="flex-1 bg-[var(--bg-elevated)] border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-fuchsia-500" />

@@ -296,11 +296,11 @@ export function ApiBuilder() {
         <div className="flex-1 space-y-3">
           {/* URL Bar */}
           <div className="flex gap-2">
-            <select value={method} onChange={e => setMethod(e.target.value as HttpMethod)} className={`px-3 py-2 rounded-lg text-xs font-bold font-mono border border-[var(--border-subtle)] bg-[var(--bg-surface)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 ${(methodColors[method] || '').split(' ').map(c => c).join(' ')}`}>
+            <select aria-label="HTTP method" value={method} onChange={e => setMethod(e.target.value as HttpMethod)} className={`px-3 py-2 rounded-lg text-xs font-bold font-mono border border-[var(--border-subtle)] bg-[var(--bg-surface)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 ${(methodColors[method] || '').split(' ').map(c => c).join(' ')}`}>
               {METHODS.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
             <div className="flex-1 relative">
-              <input ref={urlRef} type="text" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://api.example.com/endpoint" className={`${inputClass} pr-20`} onKeyDown={e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendRequest(); }} />
+              <input ref={urlRef} type="text" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://api.example.com/endpoint" aria-label="Request URL" className={`${inputClass} pr-20`} onKeyDown={e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendRequest(); }} />
               <div className="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
                 <button onClick={() => copyToClipboard(url)} className="p-1 rounded hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy URL" aria-label="Copy URL"><Copy size={14} /></button>
               </div>
@@ -352,7 +352,7 @@ export function ApiBuilder() {
               <Code size={13} /> Body {bodyType !== 'none' && <span className="text-[10px] text-indigo-700 dark:text-indigo-400">{bodyType.toUpperCase()}</span>}
             </summary>
             <div className="px-4 pb-3 space-y-2">
-              <select value={bodyType} onChange={e => setBodyType(e.target.value as BodyType)} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)]">
+              <select aria-label="Body type" value={bodyType} onChange={e => setBodyType(e.target.value as BodyType)} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)]">
                 <option value="none">None</option>
                 <option value="json">JSON</option>
                 <option value="text">Text</option>

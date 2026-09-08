@@ -159,7 +159,7 @@ export default function MorseCodeTranslator() {
           <label className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
             {mode === 'encode' ? 'Text Input' : 'Morse Code Input'}
           </label>
-          <textarea
+          <textarea aria-label={mode === 'encode' ? 'Text Input' : 'Morse Code Input'}
             value={input}
             onChange={(e) => handleInputChange(e.target.value)}
             placeholder={mode === 'encode' ? 'Type your text here...' : 'Enter Morse code (use space between letters, / between words)...'}
@@ -171,7 +171,7 @@ export default function MorseCodeTranslator() {
           <label className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">
             {mode === 'encode' ? 'Morse Code Output' : 'Text Output'}
           </label>
-          <textarea
+          <textarea aria-label={mode === 'encode' ? 'Morse Code Output' : 'Text Output'}
             value={output}
             readOnly
             placeholder="Translation will appear here..."

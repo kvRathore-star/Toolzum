@@ -86,7 +86,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
         <div className="space-y-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between">
           <div className="space-y-2">
             <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Original {cfg.label}</span>
-            <textarea value={input} onChange={e => setInput(e.target.value)} placeholder={cfg.placeholder}
+            <textarea value={input} onChange={e => setInput(e.target.value)} aria-label={`Original ${cfg.label}`} placeholder={cfg.placeholder}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none" />
           </div>
           <button onClick={minify} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
@@ -105,7 +105,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
                 </div>
               )}
             </div>
-            <textarea value={output} readOnly placeholder={`Minified ${cfg.label} code will appear here...`}
+            <textarea value={output} readOnly aria-label="Result" placeholder={`Minified ${cfg.label} code will appear here...`}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none" />
           </div>
           {stats && (

@@ -331,7 +331,7 @@ function createFormatter(lang: string) {
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source {lang}</label>
-            <textarea value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
+            <textarea aria-label={`Source ${lang}`} value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
           </div>
           {validationError && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400">{validationError}</div>

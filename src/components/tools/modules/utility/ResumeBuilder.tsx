@@ -45,7 +45,7 @@ export default function ResumeBuilder() {
                 <input aria-label="Role" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Role" onChange={(e) => { const newExp = [...experience]; newExp[i].role = e.target.value; setExperience(newExp); }} />
                 <div className="grid grid-cols-2 gap-4">
                   <input aria-label="Company" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Company" onChange={(e) => { const newExp = [...experience]; newExp[i].company = e.target.value; setExperience(newExp); }} />
-                  <input className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Duration (e.g. 2020-2023)" onChange={(e) => { const newExp = [...experience]; newExp[i].duration = e.target.value; setExperience(newExp); }} />
+                  <input aria-label="Duration" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)]" placeholder="Duration (e.g. 2020-2023)" onChange={(e) => { const newExp = [...experience]; newExp[i].duration = e.target.value; setExperience(newExp); }} />
                 </div>
                 <textarea aria-label="Description of duties" className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] h-20" placeholder="Description of duties" onChange={(e) => { const newExp = [...experience]; newExp[i].description = e.target.value; setExperience(newExp); }} />
               </div>

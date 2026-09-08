@@ -44,7 +44,7 @@ export default function AvatarGenerator() {
         </div>
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Size: {size}px</label>
-        <input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
+        <input type="range" min={40} max={200} value={size} onChange={e => setSize(Number(e.target.value))} aria-label="Size" className="w-full accent-[var(--accent)]" />
 
         <div className="flex gap-2">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>

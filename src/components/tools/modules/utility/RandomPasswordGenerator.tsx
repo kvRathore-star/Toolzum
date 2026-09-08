@@ -44,7 +44,7 @@ export default function RandomPasswordGenerator() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-4">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length ({length})</label>
-            <input type="range" min={4} max={128} value={length} onChange={e => setLength(Number(e.target.value))}
+            <input type="range" min={4} max={128} value={length} onChange={e => setLength(Number(e.target.value))} aria-label="Length"
               className="w-full accent-[var(--accent)]" />
             <div className="text-xs text-[var(--text-muted)] text-right">{length} characters</div>
 

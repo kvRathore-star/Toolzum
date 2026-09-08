@@ -256,7 +256,7 @@ export default function BookmarkPdf() {
                   title="Page number"
                 />
               </div>
-              <select
+              <select aria-label="Parent bookmark"
                 value={parentId || ''}
                 onChange={e => setParentId(e.target.value || null)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

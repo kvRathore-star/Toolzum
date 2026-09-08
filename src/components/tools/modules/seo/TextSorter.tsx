@@ -24,7 +24,7 @@ export default function TextSorter() {
     <CalculatorShell category="SEO" title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
-        <textarea value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
+        <textarea aria-label="Lines" value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
         <div className="flex flex-wrap gap-2">
@@ -40,7 +40,7 @@ export default function TextSorter() {
 
         {sorted && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
-            <textarea readOnly value={sorted} rows={8}
+            <textarea readOnly value={sorted} rows={8} aria-label="Result"
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
             <div className="flex items-center justify-between mt-2">
               <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>

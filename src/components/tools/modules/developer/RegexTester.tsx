@@ -128,7 +128,7 @@ export default function RegexTester() {
               <div className="flex gap-2">
                 <div className="flex-1 relative flex items-center">
                   <span className="absolute left-4 text-[var(--text-muted)] text-lg">/</span>
-                  <input type="text" value={pattern} onChange={e => setPattern(e.target.value)}
+                  <input type="text" value={pattern} onChange={e => setPattern(e.target.value)} aria-label="Regular expression"
                     placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
                     className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl pl-8 pr-4 py-3 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono" />
                   <span className="absolute right-4 text-[var(--text-muted)] text-lg">/</span>

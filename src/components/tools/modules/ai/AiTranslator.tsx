@@ -75,7 +75,7 @@ ${inputText}`;
         {/* Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm">
            <div className="flex-1 w-full relative">
-             <select 
+             <select aria-label="Source language" 
                value={sourceLang}
                onChange={(e) => setSourceLang(e.target.value)}
                className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
@@ -94,7 +94,7 @@ ${inputText}`;
             </button>
 
            <div className="flex-1 w-full relative">
-             <select 
+             <select aria-label="Target language" 
                value={targetLang}
                onChange={(e) => setTargetLang(e.target.value)}
                className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
@@ -119,7 +119,7 @@ ${inputText}`;
           </div>
           
           <div className="relative">
-            <textarea
+            <textarea aria-label="Result"
               value={outputText}
               readOnly
               placeholder="Translation will appear here..."

@@ -641,7 +641,7 @@ export function ULIDGenerator() {
       <div className="space-y-4">
         <div className="space-y-3">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count: {count}</label>
-          <input type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))}
+          <input type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))} aria-label="Count"
             className="w-full accent-emerald-500" />
         </div>
 

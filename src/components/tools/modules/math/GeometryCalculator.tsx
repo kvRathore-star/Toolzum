@@ -36,7 +36,7 @@ export default function GeometryCalculator() {
   const downloadData = `${csvHeaders}\n${csvValues}`;
   return (
     <Section title="Geometry Calculator">
-      <select className={selClass} value={shape} onChange={e => setShape(e.target.value)}>
+      <select className={selClass} value={shape} onChange={e => setShape(e.target.value)} aria-label="Shape">
         <option value="circle">Circle</option><option value="square">Square</option><option value="triangle">Triangle</option>
         <option value="rectangle">Rectangle</option><option value="sphere">Sphere</option><option value="cylinder">Cylinder</option>
         <option value="cone">Cone</option><option value="cube">Cube</option>

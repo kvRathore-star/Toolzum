@@ -228,7 +228,7 @@ export default function GlitchText() {
                 type="range"
                 min="1"
                 max="10"
-                value={intensity}
+                value={intensity} aria-label="Intensity"
                 onChange={e => setIntensity(Number(e.target.value))}
                 className="w-full accent-[var(--accent)]"
               />

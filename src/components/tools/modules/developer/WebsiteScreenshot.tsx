@@ -224,7 +224,7 @@ export default function WebsiteScreenshot() {
 
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
           <div className="flex items-center gap-3">
-            <input
+            <input aria-label="Website URL"
               type="url"
               value={url}
               onChange={e => setUrl(e.target.value)}
@@ -275,7 +275,7 @@ export default function WebsiteScreenshot() {
                   type="range"
                   min={10}
                   max={100}
-                  value={Math.round(quality * 100)}
+                  value={Math.round(quality * 100)} aria-label="Quality"
                   onChange={e => setQuality(parseInt(e.target.value) / 100)}
                   className="w-full accent-blue-600"
                 />

@@ -140,7 +140,7 @@ export default function UuidGenerator() {
               type="range"
               min={1}
               max={100}
-              value={quantity}
+              value={quantity} aria-label="Quantity"
               onChange={e => setQuantityAndRegenerate(Number(e.target.value))}
               className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3"
             />

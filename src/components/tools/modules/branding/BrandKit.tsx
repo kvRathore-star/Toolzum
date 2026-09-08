@@ -116,14 +116,14 @@ export default function BrandKit() {
              <div className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col justify-center items-center bg-[var(--bg-overlay)]/20">
                <div className="flex gap-2 w-full mb-3">
                  <input 
-                   type="color" 
+                   type="color" aria-label="New color" 
                    value={newColorHex} 
                    onChange={e => setNewColorHex(e.target.value)} 
                    className="h-10 w-12 rounded cursor-pointer border-0 p-0 shrink-0"
                  />
                  <input 
                    type="text" 
-                   placeholder="Name (e.g. Primary)"
+                   placeholder="Name (e.g. Primary)" aria-label="Color name"
                    value={newColorName} 
                    onChange={e => setNewColorName(e.target.value)} 
                    className="w-full text-sm p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -166,7 +166,7 @@ export default function BrandKit() {
            <div className="flex gap-3 max-w-sm">
              <input 
                type="text" 
-               placeholder="Google Font Name (e.g. Roboto)"
+               placeholder="Google Font Name (e.g. Roboto)" aria-label="Google font name"
                value={newFont} 
                onChange={e => setNewFont(e.target.value)} 
                className="flex-1 p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

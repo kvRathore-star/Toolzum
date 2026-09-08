@@ -470,7 +470,7 @@ export default function PronunciationTool() {
             </label>
             <input
               type="range"
-              min="0.3"
+              min="0.3" aria-label="Speed"
               max="2.0"
               step="0.1"
               value={rate}

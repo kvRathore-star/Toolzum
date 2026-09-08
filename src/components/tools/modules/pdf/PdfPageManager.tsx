@@ -181,7 +181,7 @@ export default function PdfPageManager() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
           <div className="bg-blue-500/10 border-b border-blue-500/20 p-3 px-5 text-blue-700 dark:text-blue-400 text-xs"><strong>All-in-One PDF Page Tool:</strong> Crop, organize, extract, rotate, and delete pages.</div>
           <div className="p-5 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl m-5 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center relative">
-            <input type="file" accept="application/pdf" onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" />
+            <input type="file" accept="application/pdf" onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" aria-label="Upload PDF" />
             <FileText className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
             <p className="text-xs text-[var(--text-secondary)]">Click or drag PDF here</p>
           </div>
@@ -253,7 +253,7 @@ export default function PdfPageManager() {
             {tab === 'delete' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Enter page numbers to delete (e.g. 1, 3, 5-10). Max: {totalPages}.</p>
-                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} onChange={e => setDeleteRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500" />
+                <input type="text" placeholder="1, 3, 5-10" value={deleteRange} aria-label="Page numbers to delete" onChange={e => setDeleteRange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500" />
                 <button onClick={processDelete} disabled={isProcessing || !deleteRange.trim()} className="w-full bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Delete Pages & Download'}</button>
               </div>
             )}

@@ -173,7 +173,7 @@ export default function TranslatePdf() {
               Extracted Text
               {isProcessing && <RefreshCw className="w-4 h-4 animate-spin text-[var(--accent)] ml-auto" />}
             </h4>
-            <textarea
+            <textarea aria-label="Extracted text"
               readOnly
               value={extractedText}
               placeholder="Text extracted from PDF will appear here..."

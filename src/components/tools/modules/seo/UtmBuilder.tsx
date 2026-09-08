@@ -58,7 +58,7 @@ export default function UtmBuilder() {
                 {p.label}
                 {!p.required && <span className="text-xs text-[var(--text-muted)]">(optional)</span>}
               </label>
-              <input type="text" value={p.value} onChange={e => {
+              <input type="text" value={p.value} aria-label={p.label} onChange={e => {
                 if (p.key === 'utm_source') setSource(e.target.value);
                 else if (p.key === 'utm_medium') setMedium(e.target.value);
                 else if (p.key === 'utm_campaign') setCampaign(e.target.value);

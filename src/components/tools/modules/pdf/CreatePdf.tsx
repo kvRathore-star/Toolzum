@@ -274,7 +274,7 @@ export default function CreatePdf() {
               </label>
               {csvFile && <span className="text-sm text-[var(--text-secondary)]">{csvFile.name}</span>}
             </div>
-            <textarea value={csvRaw} onChange={(e) => setCsvRaw(e.target.value)}
+            <textarea value={csvRaw} onChange={(e) => setCsvRaw(e.target.value)} aria-label="CSV data"
               placeholder="name,email,role&#10;John,john@example.com,Admin&#10;Jane,jane@example.com,Editor"
               className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
             />
@@ -294,7 +294,7 @@ export default function CreatePdf() {
             />
           </div>
         ) : (
-          <textarea value={text} onChange={(e) => setText(e.target.value)}
+          <textarea value={text} onChange={(e) => setText(e.target.value)} aria-label={`Content (${mode})`}
             placeholder={mode === 'text' ? 'Enter your text here...' : '<root><item>XML content</item></root>'}
             className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y"
           />

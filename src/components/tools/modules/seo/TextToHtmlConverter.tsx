@@ -49,7 +49,7 @@ export function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'h
     <CalculatorShell title={isTextToHtml ? 'Text to HTML Converter' : 'HTML to Text Converter'} category="SEO" result={resultText} onCalculate={convert} presets={presets} accent="amber" downloadData={result} downloadFilename={isTextToHtml ? 'output.html' : 'output.txt'}>
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{isTextToHtml ? 'Plain Text' : 'HTML'}</label>
-        <textarea value={input} onChange={e => setInput(e.target.value)} rows={8} placeholder={isTextToHtml ? 'Enter plain text...' : 'Enter HTML...'}
+        <textarea value={input} onChange={e => setInput(e.target.value)} rows={8} aria-label={isTextToHtml ? 'Plain Text' : 'HTML'} placeholder={isTextToHtml ? 'Enter plain text...' : 'Enter HTML...'}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
 
         <div className="flex flex-wrap gap-2">
@@ -76,7 +76,7 @@ export function TextHtmlTool({ defaultMode }: { defaultMode: 'text-to-html' | 'h
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(result) }} />
               </div>
             ) : (
-              <textarea readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+              <textarea readOnly value={result} rows={8} aria-label="Result" className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
             )}
             <div className="flex items-center gap-3 mt-2">
               <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy result"><Copy size={14} /></button>

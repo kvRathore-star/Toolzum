@@ -122,7 +122,7 @@ export default function PasswordGenerator() {
       {/* Password display */}
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 shadow-[var(--shadow-card)] space-y-4">
         <div className="relative">
-          <input
+          <input aria-label="Generated password"
             type="text"
             readOnly
             value={password}

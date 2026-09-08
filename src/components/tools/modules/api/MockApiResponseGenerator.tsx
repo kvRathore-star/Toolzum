@@ -70,7 +70,7 @@ export default function MockApiResponseGenerator() {
         </div>
         <div>
           <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>
-          <input type="range" min={1} max={50} value={count} onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
+          <input type="range" min={1} max={50} value={count} aria-label="Array Length" onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
         <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {output && (
