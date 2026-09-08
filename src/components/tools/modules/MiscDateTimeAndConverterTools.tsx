@@ -36,7 +36,7 @@ export function DateDifferenceCalculator() {
       downloadFilename="date-diff.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><Input label="Value" type="date" value={d1} onChange={setD1} /><Input label="Value" type="date" value={d2} onChange={setD2} /></div>
+        <div className="flex gap-2"><Input label="Start date" type="date" value={d1} onChange={setD1} /><Input label="End date" type="date" value={d2} onChange={setD2} /></div>
       </div>
     </CalculatorShell>
   );
@@ -68,7 +68,7 @@ export function DateAdditionCalculator() {
       downloadFilename="date-add.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><Input label="Value" type="date" value={start} onChange={setStart} /><Input label="Value" type="number" value={days} onChange={setDays} /></div>
+        <div className="flex gap-2"><Input label="Start date" type="date" value={start} onChange={setStart} /><Input label="Days to add or subtract" type="number" value={days} onChange={setDays} /></div>
       </div>
     </CalculatorShell>
   );
@@ -102,7 +102,7 @@ export function WeekNumberCalculator() {
       downloadFilename="week-number.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="date" value={date} onChange={setDate} />
+        <Input label="Date" type="date" value={date} onChange={setDate} />
       </div>
     </CalculatorShell>
   );
@@ -142,7 +142,7 @@ export function TimeSinceCalculator() {
       downloadFilename="time-since.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="date" value={date} onChange={setDate} />
+        <Input label="Date" type="date" value={date} onChange={setDate} />
       </div>
     </CalculatorShell>
   );
@@ -182,8 +182,8 @@ export function TimeZoneConverter() {
       downloadFilename="timezone.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><Input label="Value" type="time" value={time} onChange={setTime} /><Input label="Value" value={fromTz} onChange={setFromTz} /></div>
-        <div className="flex gap-2"><Input label="Value" value={toTz} onChange={setToTz} /></div>
+        <div className="flex gap-2"><Input label="Time" type="time" value={time} onChange={setTime} /><Input label="From time zone" value={fromTz} onChange={setFromTz} /></div>
+        <div className="flex gap-2"><Input label="To time zone" value={toTz} onChange={setToTz} /></div>
       </div>
     </CalculatorShell>
   );
@@ -218,7 +218,7 @@ export function DaylightSavingTimeChecker() {
       downloadFilename="dst.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={year} onChange={setYear} />
+        <Input label="Year" type="number" value={year} onChange={setYear} />
       </div>
     </CalculatorShell>
   );
@@ -254,7 +254,7 @@ export function WorkHoursCalculator() {
       downloadFilename="work-hours.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><Input label="Value" type="time" value={start} onChange={setStart} /><Input label="Value" type="time" value={end} onChange={setEnd} /><Input label="Value" type="number" value={breakMin} onChange={setBreakMin} /></div>
+        <div className="flex gap-2"><Input label="Shift start" type="time" value={start} onChange={setStart} /><Input label="Shift end" type="time" value={end} onChange={setEnd} /><Input label="Break (minutes)" type="number" value={breakMin} onChange={setBreakMin} /></div>
       </div>
     </CalculatorShell>
   );
@@ -288,9 +288,9 @@ export function HoursMinutesCalculator() {
     >
       <div className="space-y-4">
         <div className="flex gap-2">
-          <Input label="Value" type="number" value={h1} onChange={setH1} /><Input label="Value" type="number" value={m1} onChange={setM1} />
+          <Input label="Time 1 – hours" type="number" value={h1} onChange={setH1} /><Input label="Time 1 – minutes" type="number" value={m1} onChange={setM1} />
           <span className="self-center text-muted">+</span>
-          <Input label="Value" type="number" value={h2} onChange={setH2} /><Input label="Value" type="number" value={m2} onChange={setM2} />
+          <Input label="Time 2 – hours" type="number" value={h2} onChange={setH2} /><Input label="Time 2 – minutes" type="number" value={m2} onChange={setM2} />
         </div>
       </div>
     </CalculatorShell>
@@ -322,7 +322,7 @@ export function SpeedConverter() {
       downloadFilename="speed.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={kmh} onChange={setKmh} />
+        <Input label="Speed" type="number" value={kmh} onChange={setKmh} />
       </div>
     </CalculatorShell>
   );
@@ -353,7 +353,7 @@ export function LengthConverter() {
       downloadFilename="length.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={meters} onChange={setMeters} />
+        <Input label="Length" type="number" value={meters} onChange={setMeters} />
       </div>
     </CalculatorShell>
   );
@@ -384,7 +384,7 @@ export function WeightConverter() {
       downloadFilename="weight.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={kg} onChange={setKg} />
+        <Input label="Weight" type="number" value={kg} onChange={setKg} />
       </div>
     </CalculatorShell>
   );
@@ -415,7 +415,7 @@ export function VolumeConverter() {
       downloadFilename="volume.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={liters} onChange={setLiters} />
+        <Input label="Volume" type="number" value={liters} onChange={setLiters} />
       </div>
     </CalculatorShell>
   );
@@ -446,7 +446,7 @@ export function AreaConverter() {
       downloadFilename="area.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={sqm} onChange={setSqm} />
+        <Input label="Area" type="number" value={sqm} onChange={setSqm} />
       </div>
     </CalculatorShell>
   );
@@ -479,7 +479,7 @@ export function DataSizeConverter() {
       downloadFilename="datasize.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={bytes} onChange={setBytes} />
+        <Input label="Data size" type="number" value={bytes} onChange={setBytes} />
       </div>
     </CalculatorShell>
   );

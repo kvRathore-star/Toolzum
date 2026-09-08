@@ -18,7 +18,7 @@ export default function SignificantFiguresCalculator() {
   const downloadData = `Value,Significant Figures\n${input},${sigFigs}`;
   return (
     <Section title="Significant Figures">
-      <Input label="Value" value={input} onChange={setInput} />
+      <Input label="Number" value={input} onChange={setInput} />
       <div className="text-lg font-bold">{sigFigs} significant figures</div>
       <CalcActions result={resultText} downloadData={downloadData} downloadFilename="significant_figures.csv" />
     </Section>

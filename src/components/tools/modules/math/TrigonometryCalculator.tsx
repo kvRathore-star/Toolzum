@@ -21,7 +21,7 @@ export default function TrigonometryCalculator() {
   return (
     <Section title="Trigonometry Calculator">
       <div className="flex gap-2 items-center">
-        <Input label="Value" type="number" value={angle} onChange={setAngle} />
+        <Input label={unit === 'deg' ? 'Angle (degrees)' : 'Angle (radians)'} type="number" value={angle} onChange={setAngle} />
         <select className={selClass} value={unit} onChange={e => setUnit(e.target.value)}>
           <option value="deg">Degrees</option><option value="rad">Radians</option>
         </select>

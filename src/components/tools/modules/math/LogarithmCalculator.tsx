@@ -16,8 +16,8 @@ export default function LogarithmCalculator() {
     <Section title="Logarithm Calculator">
       <div className="flex gap-2 items-center">
         <span className="text-sm">log</span>
-        <Input label="Value" type="number" value={base} onChange={setBase} />
-        <Input label="Value" type="number" value={num} onChange={setNum} />
+        <Input label="Base" type="number" value={base} onChange={setBase} />
+        <Input label="Number" type="number" value={num} onChange={setNum} />
       </div>
       <div className="text-lg font-bold">log_{b}({n}) = {isFinite(log) ? log.toFixed(6) : 'Invalid'}</div>
       <div className="text-xs text-[var(--text-secondary)]">Natural log: {Math.log(n).toFixed(6)}</div>

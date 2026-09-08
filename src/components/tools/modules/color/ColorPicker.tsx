@@ -27,7 +27,7 @@ export default function ColorPicker() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Picker</h2>
           <div className="flex gap-4 items-center">
             <input type="color" value={color} onChange={e => setColor(e.target.value)} className="w-16 h-16 rounded-lg cursor-pointer" />
-            <Input label="Value" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
+            <Input label="Hex color" value={color} onChange={v => setColor(v.startsWith("#") ? v : "#" + v)} />
           </div>
           <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
           <div className="flex gap-2 flex-wrap">

@@ -176,7 +176,7 @@ export function NumberGuessingGame() {
       <h2 className="text-lg font-bold text-[var(--text-primary)]">Number Guessing Game</h2>
       <p className="text-sm text-[var(--text-secondary)]">Guess a number between 1 and 100</p>
       <div className="flex gap-2">
-        <Input label="Value" type="number" min={1} max={100} value={guess} onChange={setGuess} />
+        <Input label="Your guess" type="number" min={1} max={100} value={guess} onChange={setGuess} />
         <button className={btnClass(clr)} onClick={check} disabled={won}>Guess</button>
       </div>
       {won && <div className="text-green-600 font-bold text-lg">You won in {hints.length} guesses!</div>}

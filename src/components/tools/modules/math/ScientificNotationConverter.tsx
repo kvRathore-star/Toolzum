@@ -19,7 +19,7 @@ export default function ScientificNotationConverter() {
   const downloadData = `Number,Scientific Notation\n${input},"${scientific}"`;
   return (
     <Section title="Scientific Notation Converter">
-      <Input label="Value" type="number" value={input} onChange={setInput} />
+      <Input label="Number" type="number" value={input} onChange={setInput} />
       <div className="text-sm">{scientific}</div>
       <CalcActions result={resultText} downloadData={downloadData} downloadFilename="scientific_notation.csv" />
     </Section>

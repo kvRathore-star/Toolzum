@@ -518,7 +518,7 @@ export function TemperatureConverter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Temperature Converter</h2>
-      <Input label="Value" value={value} onChange={setValue} placeholder="e.g. 100" type="number" />
+      <Input label="Temperature" value={value} onChange={setValue} placeholder="e.g. 100" type="number" />
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">From</label>

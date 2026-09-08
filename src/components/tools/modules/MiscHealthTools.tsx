@@ -41,8 +41,8 @@ export function BodyMassIndexCalculator() {
           <option value="metric">Metric (cm/kg)</option><option value="imperial">Imperial (in/lb)</option>
         </select>
         <div className="flex gap-2">
-          <Input label="Value" type="number" value={height} onChange={setHeight} placeholder={unit === 'metric' ? 'cm' : 'in'} />
-          <Input label="Value" type="number" value={weight} onChange={setWeight} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
+          <Input label={unit === 'metric' ? 'Height (cm)' : 'Height (in)'} type="number" value={height} onChange={setHeight} placeholder={unit === 'metric' ? 'cm' : 'in'} />
+          <Input label={unit === 'metric' ? 'Weight (kg)' : 'Weight (lb)'} type="number" value={weight} onChange={setWeight} placeholder={unit === 'metric' ? 'kg' : 'lb'} />
         </div>
       </div>
     </CalculatorShell>
@@ -159,7 +159,7 @@ export function MacroSplitCalculator() {
       downloadFilename="macros.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={calories} onChange={setCalories} />
+        <Input label="Daily calories" type="number" value={calories} onChange={setCalories} />
       </div>
     </CalculatorShell>
   );
@@ -227,7 +227,7 @@ export function SleepRequirementCalculator() {
       downloadFilename="sleep.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={age} onChange={setAge} />
+        <Input label="Age" type="number" value={age} onChange={setAge} />
       </div>
     </CalculatorShell>
   );
@@ -259,7 +259,7 @@ export function HeartRateCalculator() {
       downloadFilename="heart-rate.json"
     >
       <div className="space-y-4">
-        <Input label="Value" type="number" value={age} onChange={setAge} />
+        <Input label="Age" type="number" value={age} onChange={setAge} />
         <p className="text-xs text-[var(--text-secondary)]">Uses %-of-max HR method. For Karvonen method, see <Link href="/health/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator</Link>.</p>
       </div>
     </CalculatorShell>
@@ -295,7 +295,7 @@ export function IdealWeightCalc() {
       downloadFilename="ideal-weight.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Value" type="number" value={height} onChange={setHeight} /></div>
+        <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Height" type="number" value={height} onChange={setHeight} /></div>
       </div>
     </CalculatorShell>
   );
@@ -443,7 +443,7 @@ export function BloodAlcoholCalculator() {
     >
       <div className="space-y-4">
         <div className="flex gap-2"><select className={selClass} value={gender} onChange={e => setGender(e.target.value)}><option value="male">Male</option><option value="female">Female</option></select><Input label="Weight (kg)" type="number" value={weight} onChange={setWeight} placeholder="Weight (kg)" /></div>
-        <div className="flex gap-2"><Input label="Drinks" type="number" value={drinks} onChange={setDrinks} placeholder="Drinks" /><Input label="Value" type="number" value={hours} onChange={setHours} placeholder="Hours" /></div>
+        <div className="flex gap-2"><Input label="Drinks" type="number" value={drinks} onChange={setDrinks} placeholder="Drinks" /><Input label="Hours" type="number" value={hours} onChange={setHours} placeholder="Hours" /></div>
       </div>
     </CalculatorShell>
   );
