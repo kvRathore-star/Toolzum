@@ -26,6 +26,7 @@ export function Header() {
   const [shareCopied, setShareCopied] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const lastSearchTriggerRef = useRef<HTMLElement | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const { history } = useToolHistory();
@@ -57,6 +58,22 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Restore focus to whatever opened the palette when it closes
+  // (search pill, megamenu shortcut, or wherever focus was on Cmd+K).
+  // Without this, focus drops to <body> and keyboard users land at
+  // the top of the page after Escape.
+  useEffect(() => {
+    if (cmdOpen) {
+      lastSearchTriggerRef.current =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+    } else {
+      lastSearchTriggerRef.current?.focus?.();
+      lastSearchTriggerRef.current = null;
+    }
+  }, [cmdOpen]);
 
   // Open CommandMenu (loads cmdk + registry on demand) from any trigger:
   // ⌘K, the search pill, and the megamenu/mobile "Search tools..." shortcuts.
