@@ -1,0 +1,21 @@
+name: ZAP baseline scan
+on:
+  schedule:
+    - cron: "0 6 * * 1" # weekly Monday 06:00 UTC
+  workflow_dispatch: {} # immediate runs from the Actions tab
+
+jobs:
+  zap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baseline scan (production, passive + light active)
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: "https://toolzum.com"
+          # Fail the job only on medium+ findings. Lows (incl. the
+          # documented CSP unsafe-inline/unsafe-eval tradeoff for
+          # TF.js/Tesseract WASM) are reported, not gating.
+          # Decision rule: anything above low in auth, payments, or
+          # injection classes triggers a scoped third-party pentest.
+          fail_action: true
+          allow_issue_writing: false

@@ -2,13 +2,19 @@
 # unsafe-eval is required: TF.js (BlurFace) and Tesseract.js (PdfOcr,
 # BulkImageToTextOcr, BulkInvoiceReceiptParser) use eval/new Function()
 # internally. Removing it silently breaks those tools. audited 2026-08-31.
+# NOTE (2026-09): nonce-based CSP is structurally impossible here — static
+# export has no per-request server. Policy stays static; cdnjs is
+# deliberately absent from script-src (FFmpeg core loads via fetch+blob,
+# which needs only connect-src/worker-src — verified in useFFmpeg.ts).
+# img-src includes ui-avatars.com (LinkInBioBuilder default avatars).
+# If video tools ever fail WASM load in console, check worker-src for data:.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; media-src 'self' blob:; font-src 'self' data:; frame-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ui-avatars.com; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; media-src 'self' blob:; font-src 'self' data:; frame-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Font files - long cache
 *.woff2
