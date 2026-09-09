@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { marked } from 'marked';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import type { PDFFont, PDFPage } from 'pdf-lib';
 import type { Token, TokensList } from 'marked';
 import DOMPurify from 'dompurify';
 
@@ -30,7 +31,7 @@ interface InlineRun {
 }
 
 interface RenderCtx {
-  page: any;
+  page: PDFPage;
   y: number;
   pageNum: number;
 }
@@ -58,8 +59,8 @@ function extractInlineRuns(tokens: Token[]): InlineRun[] {
         runs.push({ text: '\n', bold: false, mono: false });
         break;
       default:
-        if ('text' in t && typeof (t as any).text === 'string')
-          runs.push({ text: (t as any).text, bold: false, mono: false });
+        if ('text' in t && typeof (t as { text?: unknown }).text === 'string')
+          runs.push({ text: (t as { text: string }).text, bold: false, mono: false });
     }
   }
   return runs;
@@ -68,14 +69,14 @@ function extractInlineRuns(tokens: Token[]): InlineRun[] {
 function drawRuns(
   runs: InlineRun[],
   ctx: RenderCtx,
-  doc: any,
+  doc: PDFDocument,
   x: number,
   maxW: number,
   size: number,
   lh: number,
-  font: any,
-  boldFont: any,
-  monoFont: any,
+  font: PDFFont,
+  boldFont: PDFFont,
+  monoFont: PDFFont,
   pageW: number,
   pageH: number,
   margin: number,
@@ -136,7 +137,7 @@ function drawRuns(
   flush();
 }
 
-function pageBreak(ctx: RenderCtx, doc: any, pageW: number, pageH: number, margin: number) {
+function pageBreak(ctx: RenderCtx, doc: PDFDocument, pageW: number, pageH: number, margin: number) {
   ctx.page = doc.addPage([pageW, pageH]);
   ctx.y = pageH - margin;
   ctx.pageNum++;
@@ -529,7 +530,7 @@ export default function MarkdownToPdf() {
             <h4 className="text-[var(--text-primary)] font-medium text-sm border-b border-[var(--border-subtle)] pb-2 mb-3">Import .md</h4>
             <FileUploader
               accept=".md,.markdown,text/markdown"
-              onFileSelect={handleFileSelect as any}
+              onFileSelect={handleFileSelect}
               title="Upload Markdown File"
               subtitle="Drag & drop .md file here"
             />

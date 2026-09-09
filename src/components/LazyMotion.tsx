@@ -1,26 +1,25 @@
 "use client";
 
 import React, { type ComponentProps, useEffect, useState } from "react";
+import type { AnimatePresence as AnimatePresenceComponent, MotionProps } from "framer-motion";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AnyModule = Record<string, any>;
+type MotionModule = typeof import("framer-motion");
 
-let motionPromise: Promise<AnyModule> | null = null;
-async function getMotion(): Promise<AnyModule> {
+let motionPromise: Promise<MotionModule> | null = null;
+async function getMotion(): Promise<MotionModule> {
   if (!motionPromise) motionPromise = import("framer-motion");
   return motionPromise;
 }
 
-function LazyAnimatePresence({ children, ...props }: ComponentProps<any>) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [Mod, setMod] = useState<AnyModule | null>(null);
+function LazyAnimatePresence({ children, ...props }: ComponentProps<typeof AnimatePresenceComponent>) {
+  const [Mod, setMod] = useState<MotionModule | null>(null);
   useEffect(() => { getMotion().then(setMod); }, []);
   if (!Mod) return <>{children}</>;
   return <Mod.AnimatePresence {...props}>{children}</Mod.AnimatePresence>;
 }
 
-function LazyMotionDiv({ children, ...props }: ComponentProps<"div"> & { initial?: any; animate?: any; exit?: any; transition?: any; onMouseEnter?: any; onMouseLeave?: any; onFocus?: any; onBlur?: any; ref?: any }) {
-  const [MotionDiv, setMotionDiv] = useState<any>(null);
+function LazyMotionDiv({ children, ...props }: ComponentProps<"div"> & MotionProps) {
+  const [MotionDiv, setMotionDiv] = useState<MotionModule["motion"]["div"] | null>(null);
   useEffect(() => { getMotion().then(m => setMotionDiv(() => m.motion.div)); }, []);
   if (!MotionDiv) return <div {...props}>{children}</div>;
   return <MotionDiv {...props}>{children}</MotionDiv>;
