@@ -30,8 +30,10 @@ function formatCSV(headers: string[], rows: string[][]): string {
   return [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
 }
 
-function parseJSON(s: string) {
-  try { return JSON.parse(s); } catch { toast.error('Invalid JSON'); return null; }
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
+function parseJSON(s: string): JsonValue | null {
+  try { return JSON.parse(s) as JsonValue; } catch { toast.error('Invalid JSON'); return null; }
 }
 
 const firstNames = ['John', 'Jane', 'Bob', 'Alice', 'Eve', 'Charlie', 'Diana', 'Frank', 'Grace', 'Henry'];
@@ -859,8 +861,8 @@ export function JsonFlattener() {
     if (t !== undefined) setInput(txt);
     const obj = parseJSON(txt);
     if (!obj) return;
-    const flat: Record<string, any> = {};
-    const go = (o: any, prefix: string) => {
+    const flat: Record<string, JsonValue> = {};
+    const go = (o: JsonValue, prefix: string) => {
       if (typeof o !== 'object' || o === null) { flat[prefix] = o; return; }
       if (Array.isArray(o)) o.forEach((v, i) => go(v, `${prefix}[${i}]`));
       else Object.entries(o).forEach(([k, v]) => go(v, prefix ? `${prefix}.${k}` : k));
@@ -960,12 +962,14 @@ export function MergePatchGenerator() {
     const objA = parseJSON(o);
     const objB = parseJSON(m);
     if (!objA || !objB) return;
-    const patch: Record<string, any> = {};
+    const patch: Record<string, JsonValue> = {};
+    const recA = objA as Record<string, JsonValue>;
+    const recB = objB as Record<string, JsonValue>;
     const allKeys = new Set([...Object.keys(objA), ...Object.keys(objB)]);
     allKeys.forEach(k => {
-      if (!(k in objA)) patch[k] = objB[k];
-      else if (!(k in objB)) patch[k] = null;
-      else if (JSON.stringify(objA[k]) !== JSON.stringify(objB[k])) patch[k] = objB[k];
+      if (!(k in recA)) patch[k] = recB[k];
+      else if (!(k in recB)) patch[k] = null;
+      else if (JSON.stringify(recA[k]) !== JSON.stringify(recB[k])) patch[k] = recB[k];
     });
     setOut(JSON.stringify(patch, null, 2));
   };
@@ -1010,11 +1014,11 @@ export function JsonSchemaGenerator() {
     if (t !== undefined) setInput(txt);
     const obj = parseJSON(txt);
     if (!obj) return;
-    const infer = (o: any): any => {
+    const infer = (o: JsonValue): unknown => {
       if (o === null) return { type: 'null' };
       if (Array.isArray(o)) return { type: 'array', items: o.length ? infer(o[0]) : {} };
       if (typeof o === 'object') {
-        const props: Record<string, any> = {};
+        const props: Record<string, unknown> = {};
         Object.entries(o).forEach(([k, v]) => { props[k] = infer(v); });
         return { type: 'object', properties: props, required: Object.keys(o) };
       }
@@ -1023,7 +1027,7 @@ export function JsonSchemaGenerator() {
       if (typeof o === 'boolean') return { type: 'boolean' };
       return {};
     };
-    setOut(JSON.stringify({ $schema: 'http://json-schema.org/draft-07/schema#', ...infer(obj) }, null, 2));
+    setOut(JSON.stringify({ $schema: 'http://json-schema.org/draft-07/schema#', ...(infer(obj) as Record<string, unknown>) }, null, 2));
   };
   return (
     <>
@@ -1065,13 +1069,13 @@ export function JsonSizeAnalyzer() {
     const obj = parseJSON(txt);
     if (!obj) return;
     const str = JSON.stringify(obj);
-    const countKeys = (o: any): number => {
+    const countKeys = (o: JsonValue): number => {
       if (typeof o !== 'object' || o === null) return 0;
-      return Object.keys(o).length + Object.values(o).reduce((s: number, v: any) => s + countKeys(v), 0);
+      return Object.keys(o).length + Object.values(o as Record<string, JsonValue>).reduce((s: number, v: JsonValue) => s + countKeys(v), 0);
     };
-    const maxDepth = (o: any): number => {
+    const maxDepth = (o: JsonValue): number => {
       if (typeof o !== 'object' || o === null) return 0;
-      return 1 + Math.max(0, ...Object.values(o).map(maxDepth));
+      return 1 + Math.max(0, ...Object.values(o as Record<string, JsonValue>).map(maxDepth));
     };
     setMetrics({
       size: (str.length / 1024).toFixed(2),
@@ -1126,7 +1130,7 @@ export function JsonToZod() {
     if (t !== undefined) setInput(txt);
     const obj = parseJSON(txt);
     if (!obj) return;
-    const toZod = (o: any): string => {
+    const toZod = (o: JsonValue): string => {
       if (o === null) return 'z.null()';
       if (Array.isArray(o)) return `z.array(${o.length ? toZod(o[0]) : 'z.any()'})`;
       if (typeof o === 'object') {
@@ -1265,7 +1269,7 @@ export function NdjsonToJson() {
     const txt = t !== undefined ? t : input;
     if (t !== undefined) setInput(txt);
     const lines = txt.split('\n').filter(l => l.trim());
-    const objs: any[] = [];
+    const objs: JsonValue[] = [];
     for (const l of lines) { try { objs.push(JSON.parse(l)); } catch { /* skip */ } }
     setObjCount(objs.length);
     setOut(JSON.stringify(objs, null, 2));
