@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
+import type { ParseResult } from 'papaparse';
 import { getErrorMessage } from '@/utils/error';
 import { CalculatorShell } from '../shared/CalculatorShell';
 
@@ -107,8 +108,8 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
       if (srcFormat === 'XML' && !input.trim().startsWith('<')) throw new Error('XML must start with <');
       setValidationError('');
       return true;
-    } catch (e: any) {
-      setValidationError(e.message || `Invalid ${srcFormat} input`);
+    } catch (e: unknown) {
+      setValidationError(getErrorMessage(e, `Invalid ${srcFormat} input`));
       return false;
     }
   }, [input, srcFormat]);
@@ -128,7 +129,7 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
         const { default: Papa } = await import('papaparse');
         Papa.parse(input, {
           header: true, skipEmptyLines: true,
-          complete: (r: any) => { result = JSON.stringify(r.data, null, 2); },
+          complete: (r: ParseResult<Record<string, unknown>>) => { result = JSON.stringify(r.data, null, 2); },
           error: () => { throw new Error('Failed to parse CSV'); }
         });
       } else if (srcFormat === 'JSON' && dstFormat === 'XML') {
@@ -142,8 +143,8 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
       } else if (srcFormat === 'CSV' && dstFormat === 'XML') {
         const { default: Papa } = await import('papaparse');
         const { Builder } = await import('xml2js');
-        const parsed = await new Promise<any>((resolve, reject) => {
-          Papa.parse(input, { header: true, skipEmptyLines: true, complete: (r: any) => resolve(r.data), error: reject });
+        const parsed = await new Promise<Record<string, unknown>[]>((resolve, reject) => {
+          Papa.parse(input, { header: true, skipEmptyLines: true, complete: (r: ParseResult<Record<string, unknown>>) => resolve(r.data), error: reject });
         });
         const builder = new Builder();
         result = builder.buildObject({ root: { item: parsed } });
@@ -151,11 +152,11 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
         const { parseStringPromise } = await import('xml2js');
         const { default: Papa } = await import('papaparse');
         const parsed = await parseStringPromise(input, { explicitArray: false, mergeAttrs: true });
-        const findArray = (obj: any): any[] | null => {
+        const findArray = (obj: unknown): Record<string, unknown>[] | null => {
           if (Array.isArray(obj)) return obj;
           if (typeof obj === 'object' && obj !== null) {
-            for (const key in obj) {
-              const val = obj[key];
+            for (const key in (obj as Record<string, unknown>)) {
+              const val = (obj as Record<string, unknown>)[key];
               if (Array.isArray(val)) return val;
               if (typeof val === 'object') { const n = findArray(val); if (n) return n; }
             }
@@ -187,8 +188,8 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
       } else if (srcFormat === 'CSV' && dstFormat === 'YAML') {
         const { default: Papa } = await import('papaparse');
         const YAML = await import('yaml');
-        const parsed: any[] = await new Promise((resolve, reject) => {
-          Papa.parse(input, { header: true, skipEmptyLines: true, complete: (r: any) => resolve(r.data), error: reject });
+        const parsed: Record<string, unknown>[] = await new Promise((resolve, reject) => {
+          Papa.parse(input, { header: true, skipEmptyLines: true, complete: (r: ParseResult<Record<string, unknown>>) => resolve(r.data), error: reject });
         });
         result = YAML.stringify(parsed);
       } else if (srcFormat === 'XML' && dstFormat === 'YAML') {
@@ -210,14 +211,14 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
         const { default: Papa } = await import('papaparse');
         Papa.parse(input, {
           header: true, skipEmptyLines: true, delimiter: '\t',
-          complete: (r: any) => { result = JSON.stringify(r.data, null, 2); },
+          complete: (r: ParseResult<Record<string, unknown>>) => { result = JSON.stringify(r.data, null, 2); },
           error: () => { throw new Error('Failed to parse TSV'); }
         });
       } else if (srcFormat === 'TSV' && dstFormat === 'XML') {
         const { default: Papa } = await import('papaparse');
         const { Builder } = await import('xml2js');
-        const parsed = await new Promise<any>((resolve, reject) => {
-          Papa.parse(input, { header: true, skipEmptyLines: true, delimiter: '\t', complete: (r: any) => resolve(r.data), error: reject });
+        const parsed = await new Promise<Record<string, unknown>[]>((resolve, reject) => {
+          Papa.parse(input, { header: true, skipEmptyLines: true, delimiter: '\t', complete: (r: ParseResult<Record<string, unknown>>) => resolve(r.data), error: reject });
         });
         const builder = new Builder();
         result = builder.buildObject({ root: { item: parsed } });
@@ -225,11 +226,11 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
         const { parseStringPromise } = await import('xml2js');
         const { default: Papa } = await import('papaparse');
         const parsed = await parseStringPromise(input, { explicitArray: false, mergeAttrs: true });
-        const findArray = (obj: any): any[] | null => {
+        const findArray = (obj: unknown): Record<string, unknown>[] | null => {
           if (Array.isArray(obj)) return obj;
           if (typeof obj === 'object' && obj !== null) {
-            for (const key in obj) {
-              const val = obj[key];
+            for (const key in (obj as Record<string, unknown>)) {
+              const val = (obj as Record<string, unknown>)[key];
               if (Array.isArray(val)) return val;
               if (typeof val === 'object') { const n = findArray(val); if (n) return n; }
             }
@@ -241,8 +242,8 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
       } else if (srcFormat === 'TSV' && dstFormat === 'YAML') {
         const { default: Papa } = await import('papaparse');
         const YAML = await import('yaml');
-        const parsed: any[] = await new Promise((resolve, reject) => {
-          Papa.parse(input, { header: true, skipEmptyLines: true, delimiter: '\t', complete: (r: any) => resolve(r.data), error: reject });
+        const parsed: Record<string, unknown>[] = await new Promise((resolve, reject) => {
+          Papa.parse(input, { header: true, skipEmptyLines: true, delimiter: '\t', complete: (r: ParseResult<Record<string, unknown>>) => resolve(r.data), error: reject });
         });
         result = YAML.stringify(parsed);
       } else if (srcFormat === 'YAML' && dstFormat === 'TSV') {
@@ -256,7 +257,7 @@ export function DataConverter({ defaultFrom, defaultTo, presetOverrides, downloa
         const YAML = await import('yaml');
         const { default: Papa } = await import('papaparse');
         const { parseStringPromise, Builder } = await import('xml2js');
-        let parsed: any;
+        let parsed: unknown;
         switch (srcFormat) {
           case 'JSON': parsed = JSON.parse(input); break;
           case 'CSV': parsed = Papa.parse(input, { header: true, skipEmptyLines: true }).data; break;
