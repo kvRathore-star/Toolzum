@@ -3,14 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
-import { PDFDocument, StandardFonts, degrees } from 'pdf-lib';
+import { PDFDocument, StandardFonts, degrees, type PDFPage, type PDFFont } from 'pdf-lib';
 import { EmptyState } from '@/components/EmptyState';
 
 interface PdfActionBaseProps {
   title: string;
   description: string;
   renderOptions: (state: Record<string, unknown>, setState: (s: Record<string, unknown>) => void) => React.ReactNode;
-  processAction: (pdfDoc: any, font: any, boldFont: any, pages: any[], state: Record<string, unknown>) => Promise<void>;
+  processAction: (pdfDoc: PDFDocument, font: PDFFont, boldFont: PDFFont, pages: PDFPage[], state: Record<string, unknown>) => Promise<void>;
 }
 
 export function PdfActionBase({ title, description, renderOptions, processAction }: PdfActionBaseProps) {
@@ -48,7 +48,7 @@ export function PdfActionBase({ title, description, renderOptions, processAction
       const pages = pdfDoc.getPages();
       await processAction(pdfDoc, font, boldFont, pages, state);
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       toast.success(`${title} applied successfully!`);

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from 'react';
-import Cropper from 'react-cropper';
+import Cropper, { type ReactCropperElement } from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
 import { FileUploader } from '../../FileUploader';
 import { Crop, RotateCw, RefreshCcw, Download, FlipHorizontal, FlipVertical, Trash2 } from 'lucide-react';
@@ -13,7 +13,7 @@ export default function CropImage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [aspectRatio, setAspectRatio] = useState<number | undefined>(undefined);
-  const cropperRef = useRef<HTMLImageElement>(null);
+  const cropperRef = useRef<ReactCropperElement>(null);
 
   const handleFileSelect = (file: File, url: string) => {
     setImageFile(file);
@@ -21,7 +21,7 @@ export default function CropImage() {
   };
 
   const handleCrop = () => {
-    const cropper = (cropperRef.current as any)?.cropper;
+    const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
 
     const croppedCanvas = cropper.getCroppedCanvas();
@@ -39,12 +39,12 @@ export default function CropImage() {
   };
 
   const handleRotate = (deg: number) => {
-    const cropper = (cropperRef.current as any)?.cropper;
+    const cropper = cropperRef.current?.cropper;
     if (cropper) cropper.rotate(deg);
   };
 
   const handleFlip = (direction: 'h' | 'v') => {
-    const cropper = (cropperRef.current as any)?.cropper;
+    const cropper = cropperRef.current?.cropper;
     if (!cropper) return;
     const data = cropper.getData();
     if (direction === 'h') {
@@ -56,12 +56,12 @@ export default function CropImage() {
 
   const changeAspectRatio = (ratio: number | undefined) => {
     setAspectRatio(ratio);
-    const cropper = (cropperRef.current as any)?.cropper;
+    const cropper = cropperRef.current?.cropper;
     if (cropper) cropper.setAspectRatio(ratio === undefined ? NaN : ratio);
   };
 
   const handleReset = () => {
-    const cropper = (cropperRef.current as any)?.cropper;
+    const cropper = cropperRef.current?.cropper;
     if (cropper) cropper.reset();
   };
 

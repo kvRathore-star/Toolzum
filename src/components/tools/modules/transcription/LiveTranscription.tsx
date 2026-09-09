@@ -4,14 +4,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
-
-// Define Web Speech API types
-declare global {
-  interface Window {
-    SpeechRecognition: any;
-    webkitSpeechRecognition: any;
-  }
-}
+import type {
+  SpeechRecognitionInstance,
+  SpeechRecognitionResultEvent,
+  SpeechRecognitionErrorEvent,
+} from "@/lib/speechRecognition";
+import { getSpeechRecognitionCtor } from "@/lib/speechRecognition";
 
 export default function LiveTranscription() {
   const [isRecording, setIsRecording] = useState(false);
@@ -20,13 +18,13 @@ export default function LiveTranscription() {
   const [isSupported, setIsSupported] = useState(true);
   const [language, setLanguage] = useState('en-US');
   
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check support
     if (typeof window !== 'undefined') {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition = getSpeechRecognitionCtor();
       if (!SpeechRecognition) {
         // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detect SpeechRecognition support once on mount
         setIsSupported(false);
@@ -35,7 +33,7 @@ export default function LiveTranscription() {
         recognitionRef.current.continuous = true;
         recognitionRef.current.interimResults = true;
         
-        recognitionRef.current.onresult = (event: any) => {
+        recognitionRef.current.onresult = (event: SpeechRecognitionResultEvent) => {
           let currentInterim = '';
           let currentFinal = '';
 
@@ -53,7 +51,7 @@ export default function LiveTranscription() {
           setInterimTranscript(currentInterim);
         };
 
-        recognitionRef.current.onerror = (event: any) => {
+        recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
           console.error("Speech recognition error", event.error);
           if (event.error === 'not-allowed') {
             toast.error("Microphone access denied.");
@@ -65,7 +63,7 @@ export default function LiveTranscription() {
           // Auto-restart if we are supposed to be recording (handles native timeouts)
           if (isRecording) {
             try {
-              recognitionRef.current.start();
+              recognitionRef.current?.start();
             } catch (e) {
               // might already be started
             }
@@ -76,7 +74,7 @@ export default function LiveTranscription() {
     
     return () => {
       if (recognitionRef.current) {
-        recognitionRef.current.stop();
+        recognitionRef.current?.stop();
       }
     };
   }, [isRecording]);
@@ -101,12 +99,12 @@ export default function LiveTranscription() {
     }
 
     if (isRecording) {
-      recognitionRef.current.stop();
+      recognitionRef.current?.stop();
       setIsRecording(false);
       setInterimTranscript('');
     } else {
       try {
-        recognitionRef.current.start();
+        recognitionRef.current?.start();
         setIsRecording(true);
       } catch (e) {
         toast.error("Failed to start recording.");

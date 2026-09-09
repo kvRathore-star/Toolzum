@@ -4,6 +4,12 @@ import { FileUploader } from '../../FileUploader';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { Play, Pause, Plus, Trash2, Download, Mic, FileText } from 'lucide-react';
+import type {
+  SpeechRecognitionInstance,
+  SpeechRecognitionResultEvent,
+  SpeechRecognitionErrorEvent,
+} from '@/lib/speechRecognition';
+import { getSpeechRecognitionCtor } from '@/lib/speechRecognition';
 
 interface SubtitleEntry {
   id: number;
@@ -236,11 +242,11 @@ export default function SubtitleGenerator() {
 function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset: number) => void }) {
   const [isListening, setIsListening] = useState(false);
   const [interimText, setInterimText] = useState('');
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
   const startTimeRef = useRef(0);
 
   const startListening = () => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognition = getSpeechRecognitionCtor();
     if (!SpeechRecognition) {
       toast.error('Speech recognition not available in this browser. Try Chrome or Edge.');
       return;
@@ -251,7 +257,7 @@ function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset
     recognition.interimResults = true;
     recognition.lang = 'en-US';
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionResultEvent) => {
       let finalText = '';
       let interim = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
@@ -269,7 +275,7 @@ function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset
       }
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('Speech error:', event.error);
       if (event.error === 'no-speech') return;
       setIsListening(false);
