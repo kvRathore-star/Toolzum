@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { OnboardingTour } from "@/components/OnboardingTour";
 
 const HIDDEN_CHROME_PATHS = ["/admin"];
 
@@ -20,6 +21,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <ServiceWorkerRegister />
+      <OnboardingTour />
       <Header />
       {children}
       <Footer />
