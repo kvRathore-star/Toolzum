@@ -299,7 +299,7 @@ export function ZipFileExtractor() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">ZIP File Extractor</h2>
         <p className="text-xs text-[var(--text-secondary)]">Select a ZIP file to view its contents.</p>
-        <input aria-label="From" type="file" accept=".zip" onChange={extract} className="w-full text-xs" />
+        <input aria-label="ZIP file" type="file" accept=".zip" onChange={extract} className="w-full text-xs" />
         {contents && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{contents}</pre>}
       </div>
     </div>

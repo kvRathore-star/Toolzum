@@ -273,7 +273,7 @@ export function LargeTextViewer() {
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Large Text File Viewer</h5>
-      <input aria-label="From" type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
+      <input aria-label="Text file to view" type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
         className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
       <p className="text-sm text-[var(--text-muted)]">Size: {(fileSize / 1024).toFixed(1)} KB</p>
       <div className="flex gap-3">

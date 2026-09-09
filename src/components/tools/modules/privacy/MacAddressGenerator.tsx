@@ -82,7 +82,7 @@ export default function MacAddressGenerator() {
           </div>
 
           <div className="flex items-center gap-1.5 pt-2">
-            <input aria-label="OUI Prefix (e.g. 00:50:56 for VMware)" type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
+            <input aria-label="Uppercase Hex Letters" type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
             <label className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
           </div>
 

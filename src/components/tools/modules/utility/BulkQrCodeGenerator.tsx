@@ -134,7 +134,7 @@ export default function BulkQrCodeGenerator() {
         ) : (
           <div className="space-y-4">
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
-              <input aria-label="Text or URL" type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
+              <input aria-label="Upload CSV file" type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
               <FileSpreadsheet className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
               <p className="text-sm font-medium text-[var(--text-secondary)]">Upload CSV (columns: <strong>value</strong>, optional <strong>label</strong>)</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">Pro: up to {PRO_MAX} QR codes per batch</p>

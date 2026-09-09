@@ -278,7 +278,7 @@ export default function ImageToIco() {
                 className="w-full h-10 rounded-lg border border-[var(--border-subtle)] cursor-pointer"
               />
               <div className="flex items-center gap-2 mt-2">
-                <input aria-label="Background Color"
+                <input aria-label="Transparent background"
                   type="checkbox"
                   id="transparentBg"
                   checked={bgColor === '#ffffff00'}

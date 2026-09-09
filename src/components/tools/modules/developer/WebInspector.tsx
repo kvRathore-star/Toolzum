@@ -323,7 +323,7 @@ export default function WebInspector() {
 
       {tab === 'keycode' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-          <input aria-label="Generated Meta Tags" placeholder="Press any key here..." onKeyDown={e => {
+                <input aria-label="Press any key" placeholder="Press any key here..." onKeyDown={e => {
             setKeyInfo({
               'key': e.key,
               'code': e.code,
