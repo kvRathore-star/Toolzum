@@ -17,7 +17,7 @@ export default function NicknameGenerator() {
   const [patternIdx, setPatternIdx] = useState(0);
   const [count, setCount] = useState(10);
   const [results, setResults] = useState<string[]>([]);
-  const generate = () => { const n: string[] = []; for (let i = 0; i < count; i++) n.push(NICKNAME_PATTERNS[patternIdx].get()); setResults(n); };
+  const generate = () => { const n: string[] = []; for (let i = 0; i < count; i++) n.push(NICKNAME_PATTERNS[patternIdx]!.get()); setResults(n); };
 
   const presets = [
     { label: 'Gamer', apply: () => { setPatternIdx(0); setCount(10); generate(); } },
@@ -27,7 +27,7 @@ export default function NicknameGenerator() {
     { label: 'Professional', apply: () => { setPatternIdx(4); setCount(10); generate(); } },
   ];
 
-  const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx].name + ')' : 'Select pattern and generate';
+  const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx]!.name + ')' : 'Select pattern and generate';
 
   return (
     <CalculatorShell category="Utility" title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">

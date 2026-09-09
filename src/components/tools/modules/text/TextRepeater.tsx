@@ -19,7 +19,7 @@ const SEPARATORS = [
 export default function TextRepeater() {
   const [text, setText] = useState('');
   const [count, setCount] = useState(5);
-  const [separator, setSeparator] = useState(SEPARATORS[1].value);
+  const [separator, setSeparator] = useState(SEPARATORS[1]!.value);
   const [addNumbering, setAddNumbering] = useState(false);
 
   const output = useMemo(() => {
@@ -52,7 +52,7 @@ export default function TextRepeater() {
   const handleClear = () => {
     setText('');
     setCount(5);
-    setSeparator(SEPARATORS[1].value);
+    setSeparator(SEPARATORS[1]!.value);
     setAddNumbering(false);
   };
 

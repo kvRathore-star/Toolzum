@@ -125,11 +125,11 @@ function autoMapColumns(headers: string[]): Record<string, string> {
     'note': 'Note', 'notes': 'Note', 'description': 'Note',
   };
   for (let i = 0; i < headers.length; i++) {
-    const h = lowerHeaders[i];
+    const h = lowerHeaders[i]!;
     if (headerMap[h]) {
-      map[headers[i]] = headerMap[h];
+      map[headers[i]!] = headerMap[h];
     } else {
-      map[headers[i]] = headers[i];
+      map[headers[i]!] = headers[i]!;
     }
   }
   return map;
@@ -191,7 +191,7 @@ export default function VcfCsvConverter() {
           toast.error('CSV must have a header row and at least one data row');
           return;
         }
-        const headers = rows[0];
+        const headers = rows[0]!;
         setCsvHeaders(headers);
         const mapping = autoMapColumns(headers);
         setColumnMapping(mapping);
@@ -224,8 +224,8 @@ export default function VcfCsvConverter() {
     setError(null);
     try {
       if (direction === 'vcf-to-csv') {
-        const displayFields = selectedFields.map(k => VCF_FIELDS.find(f => f.key === k)!.label.split(' (')[0]);
-        const rows = [displayFields, ...contacts.map(c => displayFields.map(f => c[selectedFields[displayFields.indexOf(f)]] || ''))];
+        const displayFields = selectedFields.map(k => VCF_FIELDS.find(f => f.key === k)!.label.split(' (')[0]!);
+        const rows = [displayFields, ...contacts.map(c => displayFields.map(f => c[selectedFields[displayFields.indexOf(f)]!] || ''))];
         const csv = generateCsv(rows, csvDelimiter);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         if (outputUrl) URL.revokeObjectURL(outputUrl);
@@ -276,7 +276,7 @@ export default function VcfCsvConverter() {
   }
 
   const displayHeaders = direction === 'vcf-to-csv'
-    ? selectedFields.map(k => VCF_FIELDS.find(f => f.key === k)!.label.split(' (')[0])
+    ? selectedFields.map(k => VCF_FIELDS.find(f => f.key === k)!.label.split(' (')[0]!)
     : Object.values(columnMapping).length > 0 ? Object.values(columnMapping) : csvHeaders;
 
   return (

@@ -21,12 +21,12 @@ export default function RandomDecisionMaker() {
     setChoice('');
     let i = 0;
     const interval = setInterval(() => {
-      setChoice(items[i % items.length]);
+      setChoice(items[i % items.length]!);
       i++;
       if (i > items.length * 5) {
         clearInterval(interval);
         setSpinning(false);
-        const final = items[Math.floor(Math.random() * items.length)];
+        const final = items[Math.floor(Math.random() * items.length)]!;
         setChoice(final);
         const label = question.trim() ? 'Q: ' + question + ' → ' + final : final;
         setHistory(prev => [label, ...prev].slice(0, 10));

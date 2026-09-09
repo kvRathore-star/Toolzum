@@ -83,7 +83,7 @@ export default function ComplaintLetterGenerator() {
   const [copied, setCopied] = useState(false);
   const [expandedStatute, setExpandedStatute] = useState(false);
 
-  const ct = COMPLAINT_TYPES.find(t => t.id === form.type) || COMPLAINT_TYPES[0];
+  const ct = COMPLAINT_TYPES.find(t => t.id === form.type) || COMPLAINT_TYPES[0]!;
 
   const update = (key: keyof FormData, val: string) => setForm(prev => ({ ...prev, [key]: val }));
 

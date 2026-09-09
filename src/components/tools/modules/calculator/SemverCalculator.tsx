@@ -16,12 +16,12 @@ export default function SemverCalculator() {
     diff = 'Invalid semver format. Use major.minor.patch';
   } else {
     const semverCompare = (x: number[], y: number[]): number => {
-      for (let i = 0; i < 3; i++) { if (x[i] !== y[i]) return x[i] > y[i] ? 1 : -1; }
+      for (let i = 0; i < 3; i++) { if (x[i] !== y[i]) return x[i]! > y[i]! ? 1 : -1; }
       return 0;
     };
     const cmp = semverCompare(a, b);
     diff = cmp === 0 ? 'Equal' : cmp > 0 ? `${v1} > ${v2}` : `${v1} < ${v2}`;
-    bumps = `${v1} -> major: ${a[0] + 1}.0.0\n${v1} -> minor: ${a[0]}.${a[1] + 1}.0\n${v1} -> patch: ${a[0]}.${a[1]}.${a[2] + 1}`;
+    bumps = `${v1} -> major: ${a[0]! + 1}.0.0\n${v1} -> minor: ${a[0]}.${a[1]! + 1}.0\n${v1} -> patch: ${a[0]}.${a[1]}.${a[2]! + 1}`;
   }
   const result = diff ? `Comparison: ${diff}\n${bumps}` : '';
   const customResult = (

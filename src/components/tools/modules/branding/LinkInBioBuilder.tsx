@@ -59,7 +59,7 @@ export default function LinkInBioBuilder() {
     if (direction === 'down' && idx === links.length - 1) return;
     const newLinks = [...links];
     const swap = direction === 'up' ? idx - 1 : idx + 1;
-    [newLinks[idx], newLinks[swap]] = [newLinks[swap], newLinks[idx]];
+    [newLinks[idx]!, newLinks[swap]!] = [newLinks[swap]!, newLinks[idx]!];
     setLinks(newLinks);
   };
 

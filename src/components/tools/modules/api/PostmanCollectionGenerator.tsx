@@ -15,7 +15,7 @@ export default function PostmanCollectionGenerator() {
       const [method, path, ...descParts] = l.split(' ');
       return {
         name: descParts.join(' ') || path,
-        request: { method, header: [], url: { raw: `https://api.example.com${path}`, protocol: 'https', host: ['api', 'example', 'com'], path: path.split('/').filter(Boolean) } },
+        request: { method, header: [], url: { raw: `https://api.example.com${path}`, protocol: 'https', host: ['api', 'example', 'com'], path: path!.split('/').filter(Boolean) } },
       };
     });
     const collection = {

@@ -72,10 +72,10 @@ export default function PngToSvg() {
           for (let y = 0; y < canvas.height; y++) {
             for (let x = 0; x < canvas.width; x++) {
               const idx = (y * canvas.width + x) * 4;
-              const r = data[idx];
-              const g = data[idx + 1];
-              const b = data[idx + 2];
-              const a = data[idx + 3];
+              const r = data[idx] ?? 0;
+              const g = data[idx + 1] ?? 0;
+              const b = data[idx + 2] ?? 0;
+              const a = data[idx + 3] ?? 0;
               const brightness = (r + g + b) / 3;
 
               // Threshold trace black paths

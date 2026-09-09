@@ -35,7 +35,7 @@ export default function BulkBgChanger() {
       processedUrl: null,
     }));
     setImages(prev => [...prev, ...newImages]);
-    if (!selectedImageId && newImages.length > 0) setSelectedImageId(newImages[0].id);
+    if (!selectedImageId && newImages.length > 0) setSelectedImageId(newImages[0]!.id);
     toast.success(`Added ${files.length} image(s)`);
   };
 
@@ -43,7 +43,7 @@ export default function BulkBgChanger() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     const pixel = ctx.getImageData(x, y, 1, 1).data;
-    const hex = '#' + [pixel[0], pixel[1], pixel[2]].map(v => v.toString(16).padStart(2, '0')).join('');
+    const hex = '#' + [pixel[0] ?? 0, pixel[1] ?? 0, pixel[2] ?? 0].map(v => v.toString(16).padStart(2, '0')).join('');
     setSampleColor(hex);
     toast.success(`Sampled color: ${hex}`);
   };
@@ -74,9 +74,9 @@ export default function BulkBgChanger() {
           const sb = parseInt(sampleColor.slice(5, 7), 16);
 
           for (let i = 0; i < data.length; i += 4) {
-            const dr = Math.abs(data[i] - sr);
-            const dg = Math.abs(data[i + 1] - sg);
-            const db = Math.abs(data[i + 2] - sb);
+            const dr = Math.abs((data[i] ?? 0) - sr);
+            const dg = Math.abs((data[i + 1] ?? 0) - sg);
+            const db = Math.abs((data[i + 2] ?? 0) - sb);
             const dist = Math.sqrt(dr * dr + dg * dg + db * db);
             const threshold = tolerance * 2.55;
 
@@ -89,16 +89,16 @@ export default function BulkBgChanger() {
                 const br = parseInt(bgColor.slice(1, 3), 16);
                 const bg = parseInt(bgColor.slice(3, 5), 16);
                 const bb = parseInt(bgColor.slice(5, 7), 16);
-                data[i] = data[i] * blend + br * (1 - blend);
-                data[i + 1] = data[i + 1] * blend + bg * (1 - blend);
-                data[i + 2] = data[i + 2] * blend + bb * (1 - blend);
+                data[i] = (data[i] ?? 0) * blend + br * (1 - blend);
+                data[i + 1] = (data[i + 1] ?? 0) * blend + bg * (1 - blend);
+                data[i + 2] = (data[i + 2] ?? 0) * blend + bb * (1 - blend);
               }
             }
           }
         } else {
           // Auto-detect: remove white or near-white backgrounds
           for (let i = 0; i < data.length; i += 4) {
-            const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            const avg = ((data[i] ?? 0) + (data[i + 1] ?? 0) + (data[i + 2] ?? 0)) / 3;
             const threshold = 255 - tolerance * 1.5;
             if (avg > threshold) {
               if (useTransparent) {

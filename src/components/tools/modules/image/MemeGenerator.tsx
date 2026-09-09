@@ -18,7 +18,7 @@ const POPULAR_TEMPLATES: MemeTemplate[] = [
 ];
 
 export default function MemeGenerator() {
-  const [templateUrl, setTemplateUrl] = useState<string>(POPULAR_TEMPLATES[0].url);
+  const [templateUrl, setTemplateUrl] = useState<string>(POPULAR_TEMPLATES[0]!.url);
   const [customImage, setCustomImage] = useState<string | null>(null);
   const [topText, setTopText] = useState('WRITE CODES');
   const [bottomText, setBottomText] = useState('NO BUGS ALLOWED');
@@ -115,7 +115,7 @@ export default function MemeGenerator() {
 
   const reset = () => {
     setCustomImage(null);
-    setTemplateUrl(POPULAR_TEMPLATES[0].url);
+    setTemplateUrl(POPULAR_TEMPLATES[0]!.url);
     setTopText('WRITE CODES');
     setBottomText('NO BUGS ALLOWED');
     setFontSize(36);

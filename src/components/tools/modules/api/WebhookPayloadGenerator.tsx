@@ -22,7 +22,7 @@ export default function WebhookPayloadGenerator() {
     const payload: Record<string, any> = {};
     for (const line of fields.split('\n').filter(Boolean)) {
       const [key, type] = line.split(':').map(s => s.trim());
-      payload[key] = generate(type);
+      payload[key!] = generate(type!);
     }
     const webhook = { id: Math.random().toString(36).substring(2, 10), event, created: new Date().toISOString(), data: payload };
     setResult(JSON.stringify(webhook, null, 2));

@@ -213,7 +213,7 @@ export function HttpHeadersGenerator() {
   const removeHeader = (idx: number) => setHeaders(headers.filter((_, i) => i !== idx));
   const updateHeader = (idx: number, field: 'name' | 'value', val: string) => {
     const next = [...headers];
-    next[idx] = { ...next[idx], [field]: val };
+    next[idx]! = { ...next[idx]!, [field]: val };
     setHeaders(next);
   };
 
@@ -426,7 +426,7 @@ export function EslintConfigGenerator() {
   const current = CATEGORIES[category];
 
   const generate = () => {
-    setOutput(JSON.stringify(current.config, null, 2));
+    setOutput(JSON.stringify(current!.config, null, 2));
   };
 
   const copyOutput = () => {
@@ -455,9 +455,9 @@ export function EslintConfigGenerator() {
             className={'px-4 py-2 text-sm font-semibold rounded-xl transition-all ' + (category === key ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]')}>{cat.label}</button>
         ))}
       </div>
-      <Section title={'ESLint Config — ' + current.label}>
+      <Section title={'ESLint Config — ' + current!.label}>
         <div className="space-y-2 mb-4">
-          {current.rules.map((r) => (
+          {current!.rules.map((r) => (
             <div key={r.name} className="flex items-start gap-3 text-sm py-2 px-3 rounded-lg bg-[var(--bg-surface)]">
               <span className={'text-xs font-bold px-2 py-0.5 rounded ' + (r.severity === 'error' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : r.severity === 'warn' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' : 'bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300')}>{r.severity}</span>
               <div>
@@ -505,7 +505,7 @@ export function HttpRetryPolicyBuilder() {
   };
 
   const build = () => {
-    const base = POLICIES[policy].defaults;
+    const base = POLICIES[policy]!.defaults;
     const retries = parseInt(maxRetries) || 3;
     const delay = parseInt(baseDelay) || 1000;
     const merged: Record<string, unknown> = { ...base, maxRetries: retries };

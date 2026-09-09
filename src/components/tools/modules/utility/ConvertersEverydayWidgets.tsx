@@ -45,7 +45,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       const batchResults = values.map(v => {
         const num = parseFloat(v.trim());
         if (isNaN(num)) return { label: v.trim(), value: 'Invalid' };
-        const base = units[fromUnit].toBase(num);
+        const base = units[fromUnit]!.toBase(num);
         return {
           label: v.trim(),
           value: units.map((u, i) => `${u.label}: ${i === fromUnit ? v.trim() : u.fromBase(base).toFixed(4)}`).join(' | ')
@@ -56,14 +56,14 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
     }
     const num = parseFloat(val);
     if (isNaN(num)) { toast.error('Enter a valid number'); return; }
-    const base = units[fromUnit].toBase(num);
+    const base = units[fromUnit]!.toBase(num);
     const newResults = units.map((u, i) => ({
       label: u.label,
       value: i === fromUnit ? val : u.fromBase(base).toFixed(4),
     }));
     setResults(newResults);
     const time = new Date().toLocaleTimeString();
-    setHistory(prev => [{ value: val, from: units[fromUnit].label, result: newResults.map(r => `${r.label}: ${r.value}`).join(', '), time }, ...prev].slice(0, 20));
+    setHistory(prev => [{ value: val, from: units[fromUnit]!.label, result: newResults.map(r => `${r.label}: ${r.value}`).join(', '), time }, ...prev].slice(0, 20));
   }, [val, fromUnit, units, batchMode, batchValues]);
 
   const swapUnits = useCallback(() => {

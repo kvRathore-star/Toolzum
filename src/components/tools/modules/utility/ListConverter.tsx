@@ -23,7 +23,7 @@ function detectDelimiter(input: string): Delimiter {
     counts[d] = (input.match(new RegExp(char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
   }
   const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-  if (sorted.length > 0 && sorted[0][1] > 0) return sorted[0][0] as Delimiter;
+  if (sorted.length > 0 && sorted[0]![1] > 0) return sorted[0]![0] as Delimiter;
   // Check for newlines
   if (input.includes('\n')) return 'newline';
   return 'comma';

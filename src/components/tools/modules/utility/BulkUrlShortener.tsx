@@ -50,7 +50,7 @@ export default function BulkUrlShortener() {
     const out: ShortenResult[] = [];
     for (let i = 0; i < urls.length; i++) {
       if (abortRef.current) break;
-      const r = await shortenUrl(urls[i]);
+      const r = await shortenUrl(urls[i]!);
       out.push(r);
       setResults([...out]);
       setProgress({ done: i + 1, total: urls.length });

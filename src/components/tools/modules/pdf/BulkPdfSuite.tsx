@@ -288,7 +288,7 @@ function parseRangeToIndices(input: string, max: number): number[] {
   const indices: number[] = [];
   for (const r of ranges) {
     if (r.includes('-')) {
-      const [a, b] = r.split('-').map(Number);
+      const [a = 0, b = 0] = r.split('-').map(Number);
       const start = Math.max(1, Math.min(a, b));
       const end = Math.min(max, Math.max(a, b));
       for (let i = start; i <= end; i++) indices.push(i - 1);

@@ -24,7 +24,7 @@ const RATIOS: AspectRatio[] = [
 export default function SocialMediaPostMaker() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const [selectedRatio, setSelectedRatio] = useState<AspectRatio>(RATIOS[0]);
+  const [selectedRatio, setSelectedRatio] = useState<AspectRatio>(RATIOS[0]!);
   const [text, setText] = useState('Build Something Beautiful');
   const [fontFamily, setFontFamily] = useState('sans-serif');
   const [fontSize, setFontSize] = useState(48);

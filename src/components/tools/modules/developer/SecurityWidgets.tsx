@@ -193,10 +193,10 @@ export function DnsRecordValidator() {
       if (parts.length < 2) { results.push(`Line ${i + 1}: Too few parts`); return; }
       const type = parts[parts.length - 2]?.toUpperCase();
       const val = parts[parts.length - 1];
-      if (!validTypes.includes(type)) { results.push(`Line ${i + 1}: Unknown type "${type}"`); }
-      if (type === 'A' && !/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(val)) results.push(`Line ${i + 1}: Invalid A record IP`);
-      if (type === 'AAAA' && !/^[0-9a-f:]+$/i.test(val)) results.push(`Line ${i + 1}: Invalid AAAA record`);
-      if (type === 'MX' && !val.includes('.')) results.push(`Line ${i + 1}: Invalid MX record`);
+      if (!validTypes.includes(type ?? "")) { results.push(`Line ${i + 1}: Unknown type "${type}"`); }
+      if (type === 'A' && !/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(val ?? "")) results.push(`Line ${i + 1}: Invalid A record IP`);
+      if (type === 'AAAA' && !/^[0-9a-f:]+$/i.test(val ?? "")) results.push(`Line ${i + 1}: Invalid AAAA record`);
+      if (type === 'MX' && !(val ?? "").includes('.')) results.push(`Line ${i + 1}: Invalid MX record`);
       results.push(`Line ${i + 1}: ${type} ${val} \u2713`);
     });
     setOutput(results.join('\n'));

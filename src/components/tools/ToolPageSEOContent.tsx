@@ -58,7 +58,7 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
 
   const toMatch = n.match(/(.+?)\s+to\s+/i);
   if (toMatch && hasFileInput) {
-    const raw = toMatch[1].trim();
+    const raw = toMatch[1]!.trim();
     const inputType = raw.replace(/^(bulk|add)\s+/i, '').trim();
     if (!ACTION_VERBS.test(raw) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
       return { pattern: 'upload-convert-download', inputType };
@@ -66,7 +66,7 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   }
   if (s.includes('-to-') && hasFileInput) {
     const raw = s.split('-to-')[0];
-    const inputType = raw.replace(/^(bulk|add)/, '').trim();
+    const inputType = raw!.replace(/^(bulk|add)/, '').trim();
     if (inputType && !ACTION_VERBS.test(inputType) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
       return { pattern: 'upload-convert-download', inputType };
     }
@@ -380,7 +380,7 @@ const seoInstructionTypeTemplates: Record<string, { title: string; desc: string 
 function parseFormatPair(slug: string): { from: string; to: string } | null {
   const match = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
   if (!match) return null;
-  const [, from, to] = match;
+  const [, from = "", to = ""] = match;
   if (FORMAT_INFO[from] && FORMAT_INFO[to]) return { from, to };
   return null;
 }
@@ -693,9 +693,9 @@ export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOConte
 
   const pair = parseFormatPair(tool.slug);
   const formatSteps = pair ? [
-    { title: `1. Upload Your ${FORMAT_INFO[pair.from].name} File`, desc: `Select a ${FORMAT_INFO[pair.from].name} file from your device. ${FORMAT_INFO[pair.from].fullName} files use ${FORMAT_INFO[pair.from].quality} encoding. Drag and drop or browse to upload.` },
-    { title: `2. Convert to ${FORMAT_INFO[pair.to].name}`, desc: `The tool converts your ${FORMAT_INFO[pair.from].name} file to ${FORMAT_INFO[pair.to].name} format. ${FORMAT_INFO[pair.to].fullName} uses ${FORMAT_INFO[pair.to].quality} encoding — ${FORMAT_INFO[pair.to].bestFor}.` },
-    { title: "3. Download the Result", desc: `Your converted ${FORMAT_INFO[pair.to].name} file is ready instantly. Download it to your device. Everything runs locally — nothing is uploaded to any server.` },
+    { title: `1. Upload Your ${FORMAT_INFO[pair.from]!.name} File`, desc: `Select a ${FORMAT_INFO[pair.from]!.name} file from your device. ${FORMAT_INFO[pair.from]!.fullName} files use ${FORMAT_INFO[pair.from]!.quality} encoding. Drag and drop or browse to upload.` },
+    { title: `2. Convert to ${FORMAT_INFO[pair.to]!.name}`, desc: `The tool converts your ${FORMAT_INFO[pair.from]!.name} file to ${FORMAT_INFO[pair.to]!.name} format. ${FORMAT_INFO[pair.to]!.fullName} uses ${FORMAT_INFO[pair.to]!.quality} encoding — ${FORMAT_INFO[pair.to]!.bestFor}.` },
+    { title: "3. Download the Result", desc: `Your converted ${FORMAT_INFO[pair.to]!.name} file is ready instantly. Download it to your device. Everything runs locally — nothing is uploaded to any server.` },
   ] : null;
 
   const toolType = deriveToolType(tool.slug, tool.name, tool.description, tool.category);
@@ -714,8 +714,8 @@ export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOConte
   const categoryFaqFn = categoryFaqTemplates[categoryKey];
   const baseFaqs = tool.faqs || (categoryFaqFn ? (typeof categoryFaqFn === 'function' ? (categoryFaqFn as (t: ToolMetadata) => { question: string; answer: string }[])(tool) : categoryFaqFn) : defaultFaqs);
   const formatFaq = pair ? {
-    question: `Why convert ${FORMAT_INFO[pair.from].name} to ${FORMAT_INFO[pair.to].name}?`,
-    answer: `${FORMAT_INFO[pair.from].name} (${FORMAT_INFO[pair.from].fullName}) uses ${FORMAT_INFO[pair.from].quality} encoding and is best for ${FORMAT_INFO[pair.from].bestFor}. ${FORMAT_INFO[pair.to].name} (${FORMAT_INFO[pair.to].fullName}) uses ${FORMAT_INFO[pair.to].quality} encoding and excels at ${FORMAT_INFO[pair.to].bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`
+    question: `Why convert ${FORMAT_INFO[pair.from]!.name} to ${FORMAT_INFO[pair.to]!.name}?`,
+    answer: `${FORMAT_INFO[pair.from]!.name} (${FORMAT_INFO[pair.from]!.fullName}) uses ${FORMAT_INFO[pair.from]!.quality} encoding and is best for ${FORMAT_INFO[pair.from]!.bestFor}. ${FORMAT_INFO[pair.to]!.name} (${FORMAT_INFO[pair.to]!.fullName}) uses ${FORMAT_INFO[pair.to]!.quality} encoding and excels at ${FORMAT_INFO[pair.to]!.bestFor}. Converting between them lets you take advantage of each format's strengths — for example, using a compressed format for sharing and a lossless format for editing. All conversion happens locally in your browser with no file size limits.`
   } : null;
 
   const requiresInternet = requiresCloudApi(tool.dependencies);

@@ -37,7 +37,7 @@ function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: n
 
 function luminance(r: number, g: number, b: number): number {
   const [R, G, B] = [r / 255, g / 255, b / 255].map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
-  return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+  return 0.2126 * R! + 0.7152 * G! + 0.0722 * B!;
 }
 
 function contrastRatio(c1: string, c2: string): number {

@@ -34,7 +34,7 @@ export default function AlgebraCalculator() {
     };
     const parseFactor = (): number => {
       if (tokens[pos] === '(') { pos++; const val = parseExpression(); pos++; return val; }
-      return parseFloat(tokens[pos++]);
+      return parseFloat(tokens[pos++] ?? "");
     };
     pos = 0;
     return parseExpression();

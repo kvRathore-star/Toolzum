@@ -34,7 +34,7 @@ export default function BulkAvifOptimizer() {
 
   const applyPreset = (idx: number) => {
     setPreset(idx);
-    const p = PRESETS[idx];
+    const p = PRESETS[idx]!;
     setCustomQuality(p.quality);
     if (p.maxWidth > 0) setMaxWidth(p.maxWidth);
   };
@@ -103,7 +103,7 @@ export default function BulkAvifOptimizer() {
     const blobs = doneBlobsRef.current;
     if (blobs.length === 0) return;
     if (blobs.length === 1) {
-      downloadOrShare(URL.createObjectURL(blobs[0]), 'optimized.avif');
+      downloadOrShare(URL.createObjectURL(blobs[0]!), 'optimized.avif');
       return;
     }
     const zip = new JSZip();

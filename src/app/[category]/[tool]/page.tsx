@@ -90,7 +90,7 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
       let redirectUrl = `/${parentTool.category.toLowerCase()}/${parentTool.slug}/`;
       if (seoPage.slug.includes('-to-')) {
         const parts = seoPage.slug.split('-to-');
-        const from = parts[0].replace('bulk-', '');
+        const from = parts[0]!.replace('bulk-', '');
         const to = parts[1];
         redirectUrl += `?from=${from}&to=${to}`;
       } else {

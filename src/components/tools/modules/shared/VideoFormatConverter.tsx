@@ -134,7 +134,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
   const { ffmpeg, isLoaded, isLoading, progress, loadError, loadFFmpeg } = useFFmpeg();
   const description = DESCRIPTIONS[slug];
 
-  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0]!, [slug]);
 
   const [inputKey, setInputKey] = useState<string>(initialPair.input);
   const [outputKey, setOutputKey] = useState<string>(initialPair.output);
@@ -143,8 +143,8 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
   const [outputSize, setOutputSize] = useState<number | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const inputFmt = FORMATS[inputKey];
-  const outputFmt = FORMATS[outputKey];
+  const inputFmt = FORMATS[inputKey]!;
+  const outputFmt = FORMATS[outputKey]!;
 
   useEffect(() => {
     loadFFmpeg();
@@ -265,7 +265,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
         >
           {FORMAT_KEYS.map(k => (
-            <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
+            <option key={k} value={k}>{FORMATS[k]!.name} ({FORMATS[k]!.ext})</option>
           ))}
         </select>
 
@@ -286,7 +286,7 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
         >
           {FORMAT_KEYS.map(k => (
-            <option key={k} value={k}>{FORMATS[k].name} ({FORMATS[k].ext})</option>
+            <option key={k} value={k}>{FORMATS[k]!.name} ({FORMATS[k]!.ext})</option>
           ))}
         </select>
       </div>

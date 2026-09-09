@@ -35,7 +35,7 @@ function verhoeffCheck(num: string): boolean {
   let c = 0;
   const digits = num.split('').reverse().map(Number);
   for (let i = 0; i < digits.length; i++) {
-    c = d[c][p[i % 8][digits[i]]];
+    c = d[c]![p[i % 8]![digits[i]!]!]!;
   }
   return c === 0;
 }
@@ -130,23 +130,23 @@ export default function AadhaarValidator() {
     ];
 
     await new Promise(r => setTimeout(r, 300));
-    const firstDigit = parseInt(digits[0]);
+    const firstDigit = parseInt(digits[0] ?? "");
     const formatPass = /^\d{12}$/.test(digits) && firstDigit >= 2;
-    newSteps[0].status = formatPass ? 'pass' : 'fail';
-    newSteps[0].detail = formatPass ? '12 digits, valid start' : firstDigit < 2 ? 'First digit cannot be 0 or 1' : 'Must be exactly 12 digits';
+    newSteps[0]!.status = formatPass ? 'pass' : 'fail';
+    newSteps[0]!.detail = formatPass ? '12 digits, valid start' : firstDigit < 2 ? 'First digit cannot be 0 or 1' : 'Must be exactly 12 digits';
     setSteps([...newSteps]);
 
     await new Promise(r => setTimeout(r, 500));
     const checksumPass = verhoeffCheck(digits);
-    newSteps[1].status = checksumPass ? 'pass' : 'fail';
-    newSteps[1].detail = checksumPass ? 'Verhoeff checksum valid' : 'Verhoeff checksum failed';
+    newSteps[1]!.status = checksumPass ? 'pass' : 'fail';
+    newSteps[1]!.detail = checksumPass ? 'Verhoeff checksum valid' : 'Verhoeff checksum failed';
     setSteps([...newSteps]);
 
     await new Promise(r => setTimeout(r, 400));
     const susp = isSuspicious(digits);
     setSuspicious(susp);
-    newSteps[2].status = susp.suspicious ? 'fail' : 'pass';
-    newSteps[2].detail = susp.suspicious ? `Suspicious: ${susp.reason}` : 'No suspicious patterns';
+    newSteps[2]!.status = susp.suspicious ? 'fail' : 'pass';
+    newSteps[2]!.detail = susp.suspicious ? `Suspicious: ${susp.reason}` : 'No suspicious patterns';
     setSteps([...newSteps]);
 
     setIsValid(formatPass && checksumPass && !susp.suspicious);
@@ -379,14 +379,14 @@ export default function AadhaarValidator() {
                 <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] text-center">
                   <FileDigit className="w-3.5 h-3.5 mx-auto mb-1 text-zinc-400" />
                   <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Checksum</div>
-                  <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[1].status === 'pass' ? '#22c55e' : '#ef4444' }}>
-                    {steps[1].status === 'pass' ? 'Verified' : 'Failed'}
+                  <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[1]!.status === 'pass' ? '#22c55e' : '#ef4444' }}>
+                    {steps[1]!.status === 'pass' ? 'Verified' : 'Failed'}
                   </div>
                 </div>
                 <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] text-center">
                   <Hash className="w-3.5 h-3.5 mx-auto mb-1 text-zinc-400" />
                   <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Pattern</div>
-                  <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[2].status === 'pass' ? '#22c55e' : '#ef4444' }}>
+                  <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[2]!.status === 'pass' ? '#22c55e' : '#ef4444' }}>
                     {suspicious.suspicious ? `${suspicious.reason}` : 'Clean'}
                   </div>
                 </div>

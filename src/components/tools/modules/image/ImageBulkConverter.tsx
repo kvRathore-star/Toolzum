@@ -49,7 +49,7 @@ export default function ImageBulkConverter() {
       const ext = extensionMap[targetFormat];
 
       for (let i = 0; i < files.length; i++) {
-        const fileObj = files[i].file;
+        const fileObj = files[i]!.file;
         
         // Setup compression/conversion options
         const options = {

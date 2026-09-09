@@ -53,8 +53,8 @@ export default function PdfSplitter() {
       
       if (part.includes('-')) {
         const [startStr, endStr] = part.split('-');
-        const start = parseInt(startStr);
-        const end = parseInt(endStr);
+        const start = parseInt(startStr ?? "");
+        const end = parseInt(endStr ?? "");
         
         if (!isNaN(start) && !isNaN(end) && start <= end) {
           for (let i = start; i <= end; i++) {

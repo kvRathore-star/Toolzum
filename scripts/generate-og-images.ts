@@ -327,7 +327,7 @@ async function runPool<T>(
   const tasks = Array.from({ length: Math.min(concurrency, items.length) }, async () => {
     while (next < items.length) {
       const i = next++;
-      await worker(items[i], i);
+      await worker(items[i]!, i);
     }
   });
   await Promise.all(tasks);

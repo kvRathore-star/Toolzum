@@ -123,7 +123,7 @@ export default function NoiseReducer() {
       const data = await ffmpeg.readFile(outputName);
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
-      setOutputUrl(URL.createObjectURL(createDownloadBlob(data, MIME_TYPES[outputFormat])));
+      setOutputUrl(URL.createObjectURL(createDownloadBlob(data, MIME_TYPES[outputFormat]!)));
 
       await ffmpeg.deleteFile(inputName);
       await ffmpeg.deleteFile(outputName);

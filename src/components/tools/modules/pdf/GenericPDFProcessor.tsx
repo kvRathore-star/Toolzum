@@ -59,7 +59,7 @@ export default function GenericPDFProcessor() {
         setStatusText(`Rotating ${pages.length} pages...`);
         for (let i = 0; i < pages.length; i++) {
           const currentAngle = pdfDoc.getPage(i).getRotation().angle;
-          pages[i].setRotation(degrees((currentAngle + rotation) % 360));
+          pages[i]!.setRotation(degrees((currentAngle + rotation) % 360));
           setProgress(Math.round(((i + 1) / pages.length) * 80));
         }
         setProgress(85);

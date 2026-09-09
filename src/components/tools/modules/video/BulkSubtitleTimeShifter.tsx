@@ -32,7 +32,7 @@ export default function BulkSubtitleTimeShifter() {
   const shiftTime = (timestamp: string, msOffset: number): string => {
     const match = timestamp.match(/(\d{2}):(\d{2}):(\d{2})[,.](\d{3})/);
     if (!match) return timestamp;
-    const [, h, m, s, ms] = match.map(Number);
+    const [, h = 0, m = 0, s = 0, ms = 0] = match.map(Number);
     let totalMs = h * 3600000 + m * 60000 + s * 1000 + ms + msOffset;
     if (totalMs < 0) totalMs = 0;
     const nh = Math.floor(totalMs / 3600000);

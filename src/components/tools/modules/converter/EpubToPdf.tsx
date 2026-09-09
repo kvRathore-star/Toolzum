@@ -113,9 +113,9 @@ async function parseEpub(zip: JSZip): Promise<ParsedEpub> {
   const opfPathMatch = containerXml.match(/full-path="([^"]+)"/);
   if (!opfPathMatch) throw new Error('Invalid EPUB: cannot find OPF path');
   const opfPath = opfPathMatch[1];
-  const opfDir = opfPath.split('/').slice(0, -1).join('/') + '/';
+  const opfDir = opfPath!.split('/').slice(0, -1).join('/') + '/';
 
-  const opfContent = await zip.file(opfPath)?.async('string');
+  const opfContent = await zip.file(opfPath!)?.async('string');
   if (!opfContent) throw new Error('Invalid EPUB: cannot read OPF file');
 
   const titleMatch = opfContent.match(/<dc:title[^>]*>([^<]+)<\/dc:title>/);
@@ -125,9 +125,9 @@ async function parseEpub(zip: JSZip): Promise<ParsedEpub> {
   const manifestRegex = /<item\s+([^>]+)\/>/g;
   let m;
   while ((m = manifestRegex.exec(opfContent)) !== null) {
-    const id = m[1].match(/id="([^"]+)"/)?.[1];
-    const href = m[1].match(/href="([^"]+)"/)?.[1];
-    const mediaType = m[1].match(/media-type="([^"]+)"/)?.[1];
+    const id = m[1]!.match(/id="([^"]+)"/)?.[1];
+    const href = m[1]!.match(/href="([^"]+)"/)?.[1];
+    const mediaType = m[1]!.match(/media-type="([^"]+)"/)?.[1];
     if (id && href && mediaType) {
       manifest[id] = { id, href, mediaType };
     }
@@ -136,8 +136,8 @@ async function parseEpub(zip: JSZip): Promise<ParsedEpub> {
   const spine: SpineItem[] = [];
   const spineRegex = /<itemref\s+([^>]+)\/?>/g;
   while ((m = spineRegex.exec(opfContent)) !== null) {
-    const idref = m[1].match(/idref="([^"]+)"/)?.[1];
-    const linear = m[1].match(/linear="([^"]+)"/)?.[1] || 'yes';
+    const idref = m[1]!.match(/idref="([^"]+)"/)?.[1];
+    const linear = m[1]!.match(/linear="([^"]+)"/)?.[1] || 'yes';
     if (idref) {
       spine.push({ idref, linear });
     }
@@ -145,7 +145,7 @@ async function parseEpub(zip: JSZip): Promise<ParsedEpub> {
 
   let coverId: string | null = null;
   const coverMeta = opfContent.match(/<meta\s+[^>]*name="cover"[^>]*content="([^"]+)"/);
-  if (coverMeta) coverId = coverMeta[1];
+  if (coverMeta) coverId = coverMeta[1]!;
   if (!coverId) {
     for (const [id, item] of Object.entries(manifest)) {
       if (id.toLowerCase().includes('cover') || item.href.toLowerCase().includes('cover')) {
@@ -345,7 +345,7 @@ export default function EpubToPdf() {
 
       for (let ci = 0; ci < parsedData.chapters.length; ci++) {
         const ch = parsedData.chapters[ci];
-        const lines = wrapText(ch.content, maxCharsPerLine);
+        const lines = wrapText(ch!.content, maxCharsPerLine);
 
         const heading = lines.find(l => l.trim()) || '';
         if (heading) {

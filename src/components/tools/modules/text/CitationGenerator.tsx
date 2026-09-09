@@ -34,7 +34,7 @@ const INITIAL_FORM: CitationForm = {
   publisher: '',
   year: new Date().getFullYear().toString(),
   url: '',
-  accessed: new Date().toISOString().split('T')[0],
+  accessed: new Date().toISOString().split('T')[0] ?? "",
   volume: '',
   issue: '',
   pages: '',
@@ -42,7 +42,7 @@ const INITIAL_FORM: CitationForm = {
   city: '',
   edition: '',
   translator: '',
-  accessedDate: new Date().toISOString().split('T')[0],
+  accessedDate: new Date().toISOString().split('T')[0] ?? "",
 };
 
 function generateCitation(form: CitationForm, format: CitationFormat): string {

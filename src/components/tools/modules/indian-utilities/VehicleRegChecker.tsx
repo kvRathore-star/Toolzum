@@ -280,7 +280,7 @@ function parsePlate(raw: string) {
     };
   }
 
-  const [, state, rtoStr, series, serial] = match;
+  const [, state = "", rtoStr = "", series = "", serial = ""] = match;
   const rtoNum = parseInt(rtoStr, 10);
 
   if (isBH) {
@@ -296,7 +296,7 @@ function parsePlate(raw: string) {
     };
   }
 
-  const stateName = STATE_MAP[stateCode];
+  const stateName = STATE_MAP[stateCode]!;
   const range = RTO_RANGES[stateCode];
   if (range && (rtoNum < range.min || rtoNum > range.max)) {
     return {

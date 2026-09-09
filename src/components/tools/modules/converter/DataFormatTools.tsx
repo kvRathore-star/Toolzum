@@ -128,16 +128,16 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
       const trimmed = line.trim();
       if (trimmed.includes('→')) {
         const [key, ...valParts] = trimmed.split('→');
-        const k = key.trim();
+        const k = key!.trim();
         const v = valParts.join('→').trim();
-        while (stack.length > 1 && stack[stack.length - 1].indent >= indent) stack.pop();
+        while (stack.length > 1 && stack[stack.length - 1]!.indent >= indent) stack.pop();
         if (v === '') {
           const newObj: Record<string, unknown> = {};
-          (stack[stack.length - 1].obj)[k] = newObj;
+          (stack[stack.length - 1]!.obj)[k] = newObj;
           stack.push({ indent, obj: newObj });
         } else {
           const num = Number(v);
-          (stack[stack.length - 1].obj)[k] = isNaN(num) ? v : num;
+          (stack[stack.length - 1]!.obj)[k] = isNaN(num) ? v : num;
         }
       }
     }
@@ -210,7 +210,7 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
             </button>
           ))}
         </div>
-        <Input label={labels[mode]} value={input} onChange={setInput} rows={6} placeholder={placeholders[mode]} />
+        <Input label={labels[mode]!} value={input} onChange={setInput} rows={6} placeholder={placeholders[mode]} />
         <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         <Output value={output} label={outputLabels[mode]} />
         <p className="text-xs text-[var(--text-secondary)] mt-2">Toon is a YAML-like human-readable format using → arrows instead of colons. Supports nested objects and converts both ways.</p>
@@ -228,7 +228,7 @@ export function CsvDataCleaner() {
     if (!input.trim()) return;
     const lines = input.split('\n').filter(l => l.trim());
     if (lines.length < 2) { setOutput('Need at least a header and one data row'); return; }
-    const header = lines[0].split(',').map(h => h.trim().toLowerCase());
+    const header = lines[0]!.split(',').map(h => h.trim().toLowerCase());
     const cleaned = [header];
     for (const row of lines.slice(1)) {
       const cells = row.split(',');
@@ -236,9 +236,9 @@ export function CsvDataCleaner() {
       const processed = cells.map((c, i) => {
         let val = c.trim();
         if (colAware && i < header.length) {
-          if (/email/i.test(header[i])) val = val.toLowerCase();
-          else if (/phone|mobile|tel|fax/i.test(header[i])) val = val.replace(/\D/g, '');
-          else if (/note|comment|desc/i.test(header[i])) val = val.toLowerCase();
+          if (/email/i.test(header[i]!)) val = val.toLowerCase();
+          else if (/phone|mobile|tel|fax/i.test(header[i]!)) val = val.replace(/\D/g, '');
+          else if (/note|comment|desc/i.test(header[i]!)) val = val.toLowerCase();
         }
         return val.includes(',') ? `"${val}"` : val;
       });
@@ -287,7 +287,7 @@ export function CsvStatistics() {
     if (!input.trim()) return;
     const lines = input.split('\n').filter(l => l.trim());
     if (lines.length < 2) { setOutput('Need at least a header and one data row'); return; }
-    const header = lines[0].split(',').map(h => h.trim());
+    const header = lines[0]!.split(',').map(h => h.trim());
     const data = lines.slice(1).map(r => r.split(',').map(c => c.trim()));
     const rows = data.length;
     const results: string[] = [`Rows: ${rows}`, `Columns: ${header.length}`, ''];
@@ -351,7 +351,7 @@ export function CsvHtmlTableConverter() {
     if (mode === 'csv-to-html') {
       const lines = input.split('\n').filter(l => l.trim());
       if (lines.length < 1) return;
-      const header = lines[0].split(',').map(h => h.trim());
+      const header = lines[0]!.split(',').map(h => h.trim());
       const rows = lines.slice(1).map(r => r.split(',').map(c => c.trim()));
       let html = '<table>\n  <thead>\n    <tr>';
       header.forEach(h => { html += `\n      <th>${h.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</th>`; });
@@ -373,7 +373,7 @@ export function CsvHtmlTableConverter() {
       const tables = doc.querySelectorAll('table');
       if (tables.length === 0) { setOutput('No table found in HTML'); setPreview(''); return; }
       const table = tables[0];
-      const rows = table.querySelectorAll('tr');
+      const rows = table!.querySelectorAll('tr');
       const result: string[] = [];
       rows.forEach(tr => {
         const cells = tr.querySelectorAll('th, td');

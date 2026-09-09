@@ -11,8 +11,8 @@ export default function BulkImageResizer() {
       accept="image/*"
       processFile={async (file, config) => {
         const cfg = config as Record<string, string>;
-        const width = parseInt(cfg.width) || 800;
-        const height = parseInt(cfg.height) || 800;
+        const width = parseInt(cfg.width ?? "") || 800;
+        const height = parseInt(cfg.height ?? "") || 800;
         const fit = cfg.fit || 'contain';
         const img = await createImageBitmap(file);
         const canvas = document.createElement('canvas');

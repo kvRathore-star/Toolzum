@@ -106,19 +106,19 @@ export default function PronunciationTool() {
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.lang = voiceLang || ACCENTS[accentIndex].lang;
+    utterance.lang = voiceLang || ACCENTS[accentIndex]!.lang;
     utterance.rate = rate;
 
     const voices = window.speechSynthesis.getVoices();
     const matchingVoices = voices.filter(v =>
-      v.lang.startsWith(utterance.lang.split('-')[0]) &&
+      v.lang.startsWith(utterance.lang.split('-')[0] ?? "") &&
       v.name.toLowerCase().includes(voiceGender)
     );
     if (matchingVoices.length > 0) {
-      utterance.voice = matchingVoices[0];
+      utterance.voice = matchingVoices[0]!;
     } else {
-      const langVoices = voices.filter(v => v.lang.startsWith(utterance.lang.split('-')[0]));
-      if (langVoices.length > 0) utterance.voice = langVoices[0];
+      const langVoices = voices.filter(v => v.lang.startsWith(utterance.lang.split('-')[0] ?? ""));
+      if (langVoices.length > 0) utterance.voice = langVoices[0]!;
     }
 
     utterance.onstart = () => setIsSpeaking(true);
@@ -148,7 +148,7 @@ export default function PronunciationTool() {
         return;
       }
       const data: DictionaryEntry[] = await res.json();
-      setDictionaryData(data[0]);
+      setDictionaryData(data[0] ?? null);
       addToHistory(word.trim());
       speakText(word.trim());
     } catch {
@@ -344,7 +344,7 @@ export default function PronunciationTool() {
                       {dictionaryData.phonetic}
                     </span>
                   )}
-                  <span className="text-xs text-[var(--text-muted)]">{ACCENTS[accentIndex].flag} {ACCENTS[accentIndex].label}</span>
+                  <span className="text-xs text-[var(--text-muted)]">{ACCENTS[accentIndex]!.flag} {ACCENTS[accentIndex]!.label}</span>
                 </div>
               </div>
               <div className="text-right">

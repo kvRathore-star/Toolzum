@@ -195,8 +195,8 @@ function mapSlugs(filePaths: string[]): string[] {
         if (slugMatch) {
           const slug = slugMatch[1];
           // Skip trivial downloads (calculators, text generators, dev tools)
-          if (!TRIVIAL_DOWNLOADS.has(slug)) {
-            slugs.add(slug);
+          if (!TRIVIAL_DOWNLOADS.has(slug!)) {
+            slugs.add(slug!);
           }
         }
       }

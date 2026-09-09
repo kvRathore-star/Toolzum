@@ -77,7 +77,7 @@ export function CalculatorShell({
   const [showHistory, setShowHistory] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const shellRef = useRef<HTMLDivElement>(null);
-  const a = accentMap[accent] || accentMap.indigo;
+  const a = accentMap[accent] || accentMap.indigo!;
   const resolvedIcon = icon ?? (category ? React.createElement(getCategoryTheme(category).icon, { size: 20 }) : null);
 
   const prevResultRef = useRef(result);

@@ -48,7 +48,7 @@ export default function ExtractPagesFromPdf() {
     for (const part of parts) {
       if (!part) continue;
       if (part.includes('-')) {
-        const [startStr, endStr] = part.split('-');
+        const [startStr = "", endStr = ""] = part.split('-');
         const start = parseInt(startStr);
         const end = parseInt(endStr);
         if (!isNaN(start) && !isNaN(end) && start <= end) {

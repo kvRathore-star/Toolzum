@@ -4,7 +4,7 @@ import { requiresCloudApi, classifyDependencies, LOCAL_TRUST_CLAIM, CLOUD_TRUST_
 function parseFormatPair(slug: string): { from: string; to: string } | null {
   const match = slug.match(/^([a-z0-9]+)-to-([a-z0-9]+)$/);
   if (!match) return null;
-  const [, from, to] = match;
+  const [, from = "", to = ""] = match;
   if (FORMAT_INFO[from] && FORMAT_INFO[to]) return { from, to };
   return null;
 }
@@ -159,8 +159,8 @@ function isFormatterTool(name: string, slug: string, description: string): boole
 }
 
 function generateConverterDescription(tool: ToolMetadata, pair: { from: string; to: string }): DescriptionVariants {
-  const fromInfo = FORMAT_INFO[pair.from];
-  const toInfo = FORMAT_INFO[pair.to];
+  const fromInfo = FORMAT_INFO[pair.from]!;
+  const toInfo = FORMAT_INFO[pair.to]!;
 
   return {
     short: `Converts ${fromInfo.name} files to ${toInfo.name} format — ${fromInfo.bestFor.split(' — ')[0]} to ${toInfo.bestFor.split(' — ')[0]}. All conversion happens locally in your browser with no file size limits.`,
@@ -412,7 +412,7 @@ function generateGenericDescription(tool: ToolMetadata): DescriptionVariants {
       'extension': ['generates', 'browser extension source code for your needs'],
     };
     if (catLower in catTargets) {
-      [action, target] = catTargets[catLower];
+      [action, target] = catTargets[catLower]!;
     } else {
       action = 'processes';
       target = 'your data';
@@ -435,7 +435,7 @@ export function generateToolDescription(tool: ToolMetadata): DescriptionVariants
 
   if (isFormatterTool(tool.name, tool.slug, tool.description)) {
     const formatterType = identifyFormatterType(tool.name, tool.slug, tool.description);
-    const generator = formatterVariants[formatterType] || formatterVariants['default'];
+    const generator = formatterVariants[formatterType] || formatterVariants['default']!;
     return generator(tool.name, tool.dependencies);
   }
 

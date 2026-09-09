@@ -170,8 +170,8 @@ export default function CollageMaker() {
       }
 
       for (let i = 0; i < Math.min(cells.length, n); i++) {
-        const c = cells[i];
-        const img = await loadImage(images[i].dataUrl);
+        const c = cells[i]!;
+        const img = await loadImage(images[i]!.dataUrl);
         drawCell(ctx, img, c.x, c.y, c.w, c.h);
       }
 

@@ -62,8 +62,8 @@ export function OnboardingTour() {
   useEffect(() => {
     if (step === null) return;
     const place = () => {
-      const anchor = STEPS[step].anchor
-        ? document.querySelector(STEPS[step].anchor as string)
+      const anchor = STEPS[step]!.anchor
+        ? document.querySelector(STEPS[step]!.anchor as string)
         : null;
       if (!anchor) {
         setPos(null);
@@ -98,8 +98,8 @@ export function OnboardingTour() {
       className="fixed z-[9998] w-[320px] rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--bg-elevated)] p-4 shadow-xl"
       style={pos ? { top: pos.top, left: pos.left } : { bottom: 24, left: "50%", transform: "translateX(-50%)" }}
     >
-      <p className="text-sm font-bold text-[var(--text-primary)]">{current.title}</p>
-      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">{current.body}</p>
+      <p className="text-sm font-bold text-[var(--text-primary)]">{current!.title}</p>
+      <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">{current!.body}</p>
       <div className="mt-3 flex items-center justify-between">
         <button
           onClick={() => dismiss(false)}

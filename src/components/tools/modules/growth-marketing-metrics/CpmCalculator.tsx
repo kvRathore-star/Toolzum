@@ -32,8 +32,8 @@ export default function CpmCalculator() {
   if (prevPlatform !== platform) {
     setPrevPlatform(platform);
     if (platform !== 'custom') {
-      setEstCpm(platformPresets[platform].cpm);
-      setEstRpm(platformPresets[platform].rpm);
+      setEstCpm(platformPresets[platform]!.cpm);
+      setEstRpm(platformPresets[platform]!.rpm);
     }
   }
 
@@ -86,7 +86,7 @@ export default function CpmCalculator() {
               <option value="linkedin">LinkedIn</option>
             </select>
             {platform !== 'custom' && (
-              <p className="text-[11px] text-[var(--text-muted)] mt-1">{platformPresets[platform].note}</p>
+              <p className="text-[11px] text-[var(--text-muted)] mt-1">{platformPresets[platform]!.note}</p>
             )}
           </div>
 

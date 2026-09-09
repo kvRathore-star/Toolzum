@@ -15,7 +15,7 @@ export default function RestEndpointDocumenter() {
       const [method, ...rest] = l.split(' ');
       const restStr = rest.join(' ');
       const [path, ...descParts] = restStr.split('-');
-      return `| ${method.trim()} | \`${path.trim()}\` | ${descParts.join('-').trim()} |`;
+      return `| ${method!.trim()} | \`${path!.trim()}\` | ${descParts.join('-').trim()} |`;
     }).join('\n');
     const output = `## REST API Endpoints\n\n| Method | Path | Description |\n|--------|------|-------------|\n${table}\n\n### Sample Request Body\n\`\`\`json\n{\n  "name": "string",\n  "email": "string"\n}\n\`\`\`\n\n### Sample Response\n\`\`\`json\n{\n  "id": 1,\n  "name": "string",\n  "email": "string",\n  "createdAt": "2026-01-01T00:00:00Z"\n}\n\`\`\``;
     setResult(output);

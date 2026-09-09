@@ -149,7 +149,7 @@ export default function NupPdf() {
           const pageIdx = startIdx + pos;
           if (pageIdx >= orderedPages.length) break;
 
-          const realPageNum = orderedPages[pageIdx];
+          const realPageNum = orderedPages[pageIdx]!;
           if (realPageNum > totalSrcPages) continue;
 
           const pageCanvas = await renderPageToCanvas(pdfjsPdf, realPageNum, cellW, cellH);

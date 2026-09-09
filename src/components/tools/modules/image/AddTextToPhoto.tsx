@@ -47,7 +47,7 @@ export default function SocialMediaImageCreator() {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      const p = PRESETS[preset];
+      const p = PRESETS[preset]!;
       const cw = p.label === 'Custom' ? parseInt(customW) || image.width : p.w;
       const ch = p.label === 'Custom' ? parseInt(customH) || image.height : p.h;
 
@@ -91,7 +91,7 @@ export default function SocialMediaImageCreator() {
       try {
         const a = document.createElement('a');
         a.href = canvasRef.current.toDataURL('image/png');
-        a.download = `social-${PRESETS[preset].label.toLowerCase().replace(/\s+/g, '-')}.png`;
+        a.download = `social-${PRESETS[preset]!.label.toLowerCase().replace(/\s+/g, '-')}.png`;
         a.click();
         trackUsage(usage + 1);
         if (usage + 1 >= DAILY_LIMIT) {
@@ -147,7 +147,7 @@ export default function SocialMediaImageCreator() {
                    </button>
                  ))}
                </div>
-               {PRESETS[preset].label === 'Custom' && (
+                {PRESETS[preset]!.label === 'Custom' && (
                  <div className="grid grid-cols-2 gap-2">
                    <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input aria-label="Width" type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" /></div>
                    <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input aria-label="Height" type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-elevated)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" /></div>

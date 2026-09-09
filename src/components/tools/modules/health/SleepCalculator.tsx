@@ -8,7 +8,7 @@ export default function SleepCalculator() {
 
   let result = '';
   if (wakeTime) {
-    const [h, m] = wakeTime.split(':').map(Number);
+    const [h = 0, m = 0] = wakeTime.split(':').map(Number);
     const wakeMin = h * 60 + m;
     const cycles = [5, 4.5, 4, 3.5, 3, 2.5, 2].map(c => {
       const sleepMin = c * 90;

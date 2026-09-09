@@ -97,7 +97,7 @@ const CTA: Record<string, string[]> = {
   pinterest: ['Save this pin for later','Share on your board','Like if you love this','Comment your favorite','Follow for more ideas','Pin this to your collection'],
 };
 
-function pick<T>(a: T[]): T { return a[Math.floor(Math.random() * a.length)]; }
+function pick<T>(a: T[]): T { return a[Math.floor(Math.random() * a.length)]!; }
 function pickN<T>(a: T[], n: number): T[] { return [...a].sort(() => Math.random() - 0.5).slice(0, Math.min(n, a.length)); }
 
 function cats(topic: string): string[] {
@@ -143,7 +143,7 @@ function build(topic: string, platform: string, mood: string, tone: string, h: b
     if (platform === 'twitter') { if (tags.length <= 280 - cap.length - 2) cap = `${cap}\n${tags}`; }
     else cap = `${cap}\n\n${tags}`;
   }
-  if (cta) cap = `${cap}\n\n${(pick(CTA[platform] || CTA.instagram)).replace(/\{topic\}/g, topic)}`;
+  if (cta) cap = `${cap}\n\n${(pick(CTA[platform]! || CTA.instagram)).replace(/\{topic\}/g, topic)}`;
   return cap;
 }
 

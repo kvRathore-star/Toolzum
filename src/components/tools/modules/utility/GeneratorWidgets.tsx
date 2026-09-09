@@ -230,8 +230,8 @@ export function RandomSentenceGenerator() {
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
       const wc = randInt(Math.max(3, wordsPerSentence - 2), wordsPerSentence + 2);
-      const words = Array.from({ length: wc }, () => WORDS[randInt(0, WORDS.length - 1)]);
-      return words[0].charAt(0).toUpperCase() + words.slice(1).join(' ') + '.';
+      const words = Array.from({ length: wc }, () => WORDS[randInt(0, WORDS.length - 1)]!);
+      return words[0]!.charAt(0).toUpperCase() + words.slice(1).join(' ') + '.';
     });
     setOut(lines.join('\n'));
     toast.success('Sentences generated');
@@ -267,7 +267,7 @@ export function RandomWordGenerator() {
 
   const gen = () => {
     setOut(Array.from({ length: count }, () => {
-      const w = WORDS[randInt(0, WORDS.length - 1)];
+      const w = WORDS[randInt(0, WORDS.length - 1)]!;
       return capitalize ? w.charAt(0).toUpperCase() + w.slice(1) : w;
     }).join('\n'));
     toast.success('Words generated');
@@ -349,7 +349,7 @@ export function LicenseKeyGenerator() {
   const gen = () => {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const lines = Array.from({ length: count }, () =>
-      format.replace(/X/g, () => charset[randInt(0, charset.length - 1)])
+      format.replace(/X/g, () => charset[randInt(0, charset.length - 1)]!)
     );
     setOut(lines.join('\n'));
     toast.success('License keys generated');
@@ -438,7 +438,7 @@ export function LogoPlaceholderGenerator() {
 
   const gen = () => {
     const lines = Array.from({ length: count }, () => {
-      const brand = C_PRODUCTS[randInt(0, C_PRODUCTS.length - 1)];
+      const brand = C_PRODUCTS[randInt(0, C_PRODUCTS.length - 1)]!;
       const initials = brand.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase();
       const sz = randInt(80, 200);
       const bg = C_BG[randInt(0, C_BG.length - 1)];

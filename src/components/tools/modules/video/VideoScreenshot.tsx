@@ -33,8 +33,8 @@ export default function VideoScreenshot() {
 
   const parseTimeToSeconds = (t: string): number => {
     const parts = t.split(':').map(Number);
-    if (parts.length === 2) return parts[0] * 60 + parts[1];
-    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0]! * 60 + parts[1]!;
+    if (parts.length === 3) return parts[0]! * 3600 + parts[1]! * 60 + parts[2]!;
     return 0;
   };
 
@@ -128,14 +128,14 @@ export default function VideoScreenshot() {
   const downloadAll = async () => {
     if (screenshots.length === 0) return;
     if (screenshots.length === 1) {
-      downloadOrShare(screenshots[0].blobUrl, `screenshot.${getExt()}`);
+      downloadOrShare(screenshots[0]!.blobUrl, `screenshot.${getExt()}`);
       return;
     }
     try {
       const zip = new JSZip();
       const ext = getExt();
       for (let i = 0; i < screenshots.length; i++) {
-        const res = await fetch(screenshots[i].blobUrl);
+        const res = await fetch(screenshots[i]!.blobUrl);
         const blob = await res.blob();
         zip.file(`screenshot_${String(i + 1).padStart(3, '0')}.${ext}`, blob);
       }

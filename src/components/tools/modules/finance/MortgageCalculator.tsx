@@ -40,7 +40,7 @@ export default function MortgageCalculator() {
     { label: '15yr Fixed 5.5%', apply: () => { setLoan('300000'); setRate('5.5'); setYears('15'); } },
     { label: 'Jumbo 30yr', apply: () => { setLoan('750000'); setRate('6.75'); setYears('30'); } },
   ];
-  const downloadData = result ? `Metric,Value\nMonthly Payment,$${result.split('\n')[0].split(': $')[1]}\nTotal Payment,$${result.split('\n')[1].split(': $')[1]}\nTotal Interest,$${result.split('\n')[2].split(': $')[1]}` : undefined;
+  const downloadData = result ? `Metric,Value\nMonthly Payment,$${result.split('\n')[0]!.split(': $')[1]}\nTotal Payment,$${result.split('\n')[1]!.split(': $')[1]}\nTotal Interest,$${result.split('\n')[2]!.split(': $')[1]}` : undefined;
   return (
     <CalculatorShell category="Finance" title="Mortgage Calculator" result={result} auto presets={presets} downloadData={downloadData} downloadFilename="mortgage.csv" accent="indigo" customResult={
       amort.length > 0 ? (

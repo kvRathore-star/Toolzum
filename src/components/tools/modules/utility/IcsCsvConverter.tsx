@@ -38,12 +38,12 @@ function parseIcs(text: string): IcsEvent[] {
     } else if (current) {
       const colonIdx = trimmed.indexOf(':');
       if (colonIdx > 0) {
-        const key = trimmed.slice(0, colonIdx).split(';')[0].toLowerCase();
+        const key = trimmed.slice(0, colonIdx).split(';')[0]!.toLowerCase();
         const val = trimmed.slice(colonIdx + 1);
         if (key === 'dtstart' || key === 'dtend') {
           const dt = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/.exec(val);
           if (dt) {
-            current[key] = new Date(Date.UTC(+dt[1], +dt[2] - 1, +dt[3], +dt[4], +dt[5], +dt[6]));
+            current[key] = new Date(Date.UTC(+dt[1]!, +dt[2]! - 1, +dt[3]!, +dt[4]!, +dt[5]!, +dt[6]!));
           } else {
             current[key] = val;
           }
@@ -213,8 +213,8 @@ function autoMapColumns(headers: string[]): Record<string, string> {
     'status': 'Status', 'state': 'Status',
   };
   for (let i = 0; i < headers.length; i++) {
-    const h = lowerHeaders[i];
-    map[headers[i]] = headerMap[h] || headers[i];
+    const h = lowerHeaders[i]!;
+    map[headers[i]!] = headerMap[h] || headers[i]!;
   }
   return map;
 }
@@ -277,7 +277,7 @@ export default function IcsCsvConverter() {
           toast.error('CSV must have a header row and at least one data row');
           return;
         }
-        const headers = rows[0];
+        const headers = rows[0]!;
         setCsvHeaders(headers);
         const mapping = autoMapColumns(headers);
         setColumnMapping(mapping);
@@ -311,7 +311,7 @@ export default function IcsCsvConverter() {
     try {
       if (direction === 'ics-to-csv') {
         const displayFields = selectedFields.map(k => ICS_FIELDS.find(f => f.key === k)!.label);
-        const rows = [displayFields, ...events.map(ev => displayFields.map(f => ev[selectedFields[displayFields.indexOf(f)]] || ''))];
+        const rows = [displayFields, ...events.map(ev => displayFields.map(f => ev[selectedFields[displayFields.indexOf(f)]!] || ''))];
         const csv = generateCsv(rows);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         if (outputUrl) URL.revokeObjectURL(outputUrl);

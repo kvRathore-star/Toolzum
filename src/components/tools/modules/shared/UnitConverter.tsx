@@ -67,8 +67,8 @@ function ConverterMeta({ family }: { family: FamilyConfig }) {
 
 function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: string }) {
   const [value, setValue] = useState('100');
-  const [from, setFrom] = useState(family.units[0].key);
-  const [to, setTo] = useState(family.units[1]?.key ?? family.units[0].key);
+  const [from, setFrom] = useState(family.units[0]!.key);
+  const [to, setTo] = useState(family.units[1]?.key ?? family.units[0]!.key);
   const [output, setOutput] = useState('');
 
   const convert = () => {
@@ -78,7 +78,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
     if (family.customConvert) {
       result = family.customConvert(v, from, to);
     } else if (family.multipliers) {
-      result = (v / family.multipliers[from]) * family.multipliers[to];
+      result = (v / family.multipliers[from]!) * family.multipliers[to]!;
     } else return;
     const fromLabel = family.units.find(u => u.key === from)?.label ?? from;
     const toLabel = family.units.find(u => u.key === to)?.label ?? to;
@@ -140,7 +140,7 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
   const results = family.units.map(u => {
     let converted: number;
     if (family.multipliers) {
-      const base = v / family.multipliers[u.key];
+      const base = v / family.multipliers[u.key]!;
       converted = base;
     } else converted = 0;
     return { label: u.label, value: converted };

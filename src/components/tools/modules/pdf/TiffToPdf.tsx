@@ -32,7 +32,7 @@ function parsePageRange(range: string, totalPages: number): number[] {
   for (const part of parts) {
     const trimmed = part.trim();
     if (trimmed.includes('-')) {
-      const [s, e] = trimmed.split('-').map(n => parseInt(n.trim(), 10));
+      const [s = NaN, e = NaN] = trimmed.split('-').map(n => parseInt(n.trim(), 10));
       if (!isNaN(s) && !isNaN(e)) {
         for (let p = Math.max(1, s); p <= Math.min(e, totalPages); p++) pages.add(p);
       }
@@ -156,7 +156,7 @@ export default function TiffToPdf() {
       const pdfDoc = await PDFDocument.create();
 
       for (let idx = 0; idx < pages.length; idx++) {
-        const pageIdx = pages[idx] - 1;
+        const pageIdx = pages[idx]! - 1;
         setProgress(Math.round(((idx) / pages.length) * 100));
 
         const ifd = ifds[pageIdx];

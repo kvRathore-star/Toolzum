@@ -10,9 +10,9 @@ export function CidrCalculator() {
   const calc = () => {
     const parts = cidr.split('/');
     if (parts.length !== 2) { toast.error('Invalid CIDR format (e.g. 192.168.1.0/24)'); return; }
-    const prefix = parseInt(parts[1]);
+    const prefix = parseInt(parts[1] ?? "");
     if (isNaN(prefix) || prefix < 0 || prefix > 32) { toast.error('Prefix must be 0-32'); return; }
-    const octets = parts[0].split('.').map(Number);
+    const octets = parts[0]!.split('.').map(Number);
     if (octets.length !== 4 || octets.some(o => isNaN(o) || o < 0 || o > 255)) { toast.error('Invalid IP address'); return; }
     const ipInt = octets.reduce((acc, o) => (acc << 8) + o, 0) >>> 0;
     const mask = ~(2 ** (32 - prefix) - 1) >>> 0;

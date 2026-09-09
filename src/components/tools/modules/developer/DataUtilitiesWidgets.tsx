@@ -10,7 +10,7 @@ export function CsvAnalyzer() {
     if (!csv.trim()) { toast.error('Paste CSV data first'); return; }
     const lines = csv.trim().split('\n');
     if (lines.length < 2) { toast.error('CSV must have a header and at least one row'); return; }
-    const headers = lines[0].split(',').map(h => h.trim());
+    const headers = lines[0]!.split(',').map(h => h.trim());
     const rows = lines.slice(1).map(r => r.split(',').map(c => c.trim()));
     const result: Record<string, any> = {};
 

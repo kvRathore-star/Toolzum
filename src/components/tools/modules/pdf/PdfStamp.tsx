@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { degrees } from 'pdf-lib';
+import { degrees, rgb } from 'pdf-lib';
 import { PdfActionBase } from './PdfActionBase';
 
 export default function PdfStamp() {
@@ -29,7 +29,7 @@ export default function PdfStamp() {
             y: height / 2 - size / 2,
             size,
             font: boldFont,
-            color: { r: 0.8, g: 0.2, b: 0.2 },
+            color: rgb(0.8, 0.2, 0.2),
             opacity: 0.3,
             rotate: degrees(-45),
           });

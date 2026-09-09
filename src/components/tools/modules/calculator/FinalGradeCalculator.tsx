@@ -14,7 +14,7 @@ export default function FinalGradeCalculator() {
   const w = weights.split(',').map(Number);
   let total = 0;
   let weightSum = 0;
-  for (let i = 0; i < g.length; i++) { total += g[i] * w[i] / 100; weightSum += w[i]; }
+  for (let i = 0; i < g.length; i++) { total += g[i]! * w[i]! / 100; weightSum += w[i]!; }
   const hasInput = grades !== '' && weights !== '' && weightSum > 0;
   const final = hasInput ? total / (weightSum / 100) : 0;
   const customResult = (

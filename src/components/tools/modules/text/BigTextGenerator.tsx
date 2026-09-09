@@ -53,7 +53,7 @@ const STYLES = [
       const chars = t.toUpperCase().split('');
       const lines = ['', '', '', '', '', '', ''];
       for (const c of chars) {
-        const block = ASCII_ALPHABET[c] || ASCII_ALPHABET[' '];
+        const block = ASCII_ALPHABET[c] || ASCII_ALPHABET[' ']!;
         for (let i = 0; i < 7; i++) {
           lines[i] += block[i] + ' ';
         }
@@ -81,9 +81,9 @@ const STYLES = [
 
 export default function BigTextGenerator() {
   const [text, setText] = useState('');
-  const [activeStyle, setActiveStyle] = useState(STYLES[0].id);
+  const [activeStyle, setActiveStyle] = useState(STYLES[0]!.id);
 
-  const activeStyleObj = STYLES.find(s => s.id === activeStyle) || STYLES[0];
+  const activeStyleObj = STYLES.find(s => s.id === activeStyle) || STYLES[0]!;
 
   const output = useMemo(() => {
     if (!text) return '';

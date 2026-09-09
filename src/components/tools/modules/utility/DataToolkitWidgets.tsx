@@ -22,7 +22,7 @@ function Input({ label, value, onChange, placeholder, type = "text", rows }: {
 function parseCSV(text: string): { headers: string[]; rows: string[][] } {
   const lines = text.trim().split('\n').filter(l => l.trim());
   if (lines.length < 1) return { headers: [], rows: [] };
-  const headers = lines[0].split(',').map(h => h.trim());
+  const headers = lines[0]!.split(',').map(h => h.trim());
   const rows = lines.slice(1).map(l => l.split(',').map(c => c.trim()));
   return { headers, rows };
 }
@@ -103,7 +103,7 @@ export function ColumnRenamer() {
     const p = parseCSV(inp);
     if (!p.headers.length) { toast.error('Enter valid CSV'); return; }
     const mappings = mapping.split(',').map(m => m.split(':').map(s => s.trim()));
-    const nh = p.headers.map(h => { const m = mappings.find(([k]) => k === h); return m ? m[1] : h; });
+    const nh = p.headers.map(h => { const m = mappings.find(([k]) => k === h); return m ? m[1] ?? h : h; });
     setOut(formatCSV(nh, p.rows));
   };
   return (
@@ -155,8 +155,8 @@ export function DataTypeConverter() {
       const n = [...r];
       if (type === 'number') n[ci] = String(Number(n[ci]));
       else if (type === 'string') n[ci] = String(n[ci]);
-      else if (type === 'int') n[ci] = String(parseInt(n[ci], 10) || 0);
-      else if (type === 'float') n[ci] = String(parseFloat(n[ci]) || 0);
+      else if (type === 'int') n[ci] = String(parseInt(n[ci] ?? "", 10) || 0);
+      else if (type === 'float') n[ci] = String(parseFloat(n[ci] ?? "") || 0);
       return n;
     });
     setOut(formatCSV(p.headers, nr));
@@ -636,8 +636,8 @@ export function Transpose() {
     const all = [p.headers, ...p.rows];
     const maxLen = Math.max(...all.map(r => r.length));
     const filled = all.map(r => [...r, ...Array(maxLen - r.length).fill('')]);
-    const transposed = filled[0].map((_, ci) => filled.map(r => r[ci]));
-    const nh = transposed[0];
+    const transposed = filled[0]!.map((_, ci) => filled.map(r => r[ci]!));
+    const nh = transposed[0]!;
     const nr = transposed.slice(1);
     setOut(formatCSV(nh, nr));
   };
@@ -967,9 +967,9 @@ export function MergePatchGenerator() {
     const recB = objB as Record<string, JsonValue>;
     const allKeys = new Set([...Object.keys(objA), ...Object.keys(objB)]);
     allKeys.forEach(k => {
-      if (!(k in recA)) patch[k] = recB[k];
+      if (!(k in recA)) patch[k] = recB[k]!;
       else if (!(k in recB)) patch[k] = null;
-      else if (JSON.stringify(recA[k]) !== JSON.stringify(recB[k])) patch[k] = recB[k];
+      else if (JSON.stringify(recA[k]) !== JSON.stringify(recB[k])) patch[k] = recB[k]!;
     });
     setOut(JSON.stringify(patch, null, 2));
   };
@@ -1016,7 +1016,7 @@ export function JsonSchemaGenerator() {
     if (!obj) return;
     const infer = (o: JsonValue): unknown => {
       if (o === null) return { type: 'null' };
-      if (Array.isArray(o)) return { type: 'array', items: o.length ? infer(o[0]) : {} };
+      if (Array.isArray(o)) return { type: 'array', items: o.length ? infer(o[0]!) : {} };
       if (typeof o === 'object') {
         const props: Record<string, unknown> = {};
         Object.entries(o).forEach(([k, v]) => { props[k] = infer(v); });
@@ -1132,7 +1132,7 @@ export function JsonToZod() {
     if (!obj) return;
     const toZod = (o: JsonValue): string => {
       if (o === null) return 'z.null()';
-      if (Array.isArray(o)) return `z.array(${o.length ? toZod(o[0]) : 'z.any()'})`;
+      if (Array.isArray(o)) return `z.array(${o.length ? toZod(o[0]!) : 'z.any()'})`;
       if (typeof o === 'object') {
         const props = Object.entries(o).map(([k, v]) => `  ${k}: ${toZod(v)},`).join('\n');
         return `z.object({\n${props}\n})`;
@@ -1358,7 +1358,7 @@ export function CsvJsonRowGenerator() {
           id: crypto.randomUUID().slice(0, 8),
           name: `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}`,
           age: Math.floor(Math.random() * 50 + 20),
-          email: `${firstNames[Math.floor(Math.random() * firstNames.length)].toLowerCase()}@${domains[Math.floor(Math.random() * domains.length)]}`,
+          email: `${firstNames[Math.floor(Math.random() * firstNames.length)]!.toLowerCase()}@${domains[Math.floor(Math.random() * domains.length)]}`,
           active: Math.random() > 0.3,
         }));
       }

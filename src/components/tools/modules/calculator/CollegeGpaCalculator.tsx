@@ -15,7 +15,7 @@ export default function CollegeGpaCalculator() {
   const g = semGrades.split(',').map(g => g.trim().toUpperCase());
   const c = semCredits.split(',').map(Number);
   let tp = 0, tc = 0;
-  for (let i = 0; i < g.length; i++) { tp += (gradePointsMap[g[i]] || 0) * c[i]; tc += c[i]; }
+  for (let i = 0; i < g.length; i++) { tp += (gradePointsMap[g[i]!] || 0) * c[i]!; tc += c[i]!; }
   const semGpa = tc > 0 ? tp / tc : 0;
   const pg = parseFloat(prevGpa) || 0;
   const pc = parseFloat(prevCredits) || 0;

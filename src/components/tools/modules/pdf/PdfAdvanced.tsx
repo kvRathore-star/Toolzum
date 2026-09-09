@@ -93,7 +93,7 @@ export default function PdfAdvanced() {
           resultDoc.addPage(mainPage);
           const [overlayPg] = await resultDoc.copyPages(overlay, [Math.min(i, overlayPages.length - 1)]);
           const targetPage = resultDoc.getPage(resultDoc.getPageCount() - 1);
-          const embedded = await resultDoc.embedPage(overlayPg);
+          const embedded = await resultDoc.embedPage(overlayPg!);
           targetPage.drawPage(embedded);
         }
       } else if (action === 'alternate-merge') {
@@ -115,13 +115,13 @@ export default function PdfAdvanced() {
       } else if (action === 'combine') {
         resultDoc = await PDFDocument.create();
         const srcPages = mainDoc.getPages();
-        const { width, height } = srcPages[0]?.getSize() || [595.28, 841.89];
+        const { width, height } = srcPages[0]?.getSize() || [595.28, 841.89] as unknown as { width: number; height: number };
         const newPage = resultDoc.addPage([width * Math.min(pagesPerSheet, srcPages.length), height * Math.ceil(srcPages.length / pagesPerSheet)]);
         for (let i = 0; i < srcPages.length; i++) {
           const [cp] = await resultDoc.copyPages(mainDoc, [i]);
           const col = i % pagesPerSheet;
           const row = Math.floor(i / pagesPerSheet);
-          const embedded = await resultDoc.embedPage(cp);
+          const embedded = await resultDoc.embedPage(cp!);
           newPage.drawPage(embedded, {
             x: col * width,
             y: newPage.getSize().height - (row + 1) * height,
@@ -140,8 +140,8 @@ export default function PdfAdvanced() {
           const sheetPage = resultDoc.addPage([pageWidth * 2, pageHeight]);
           const indices = [s * 2, n - 1 - s * 2, s * 2 + 1, n - 1 - s * 2 - 1].filter(i => i >= 0 && i < n);
           for (let ci = 0; ci < indices.length; ci++) {
-            const [cp] = await resultDoc.copyPages(mainDoc, [indices[ci]]);
-            const embedded = await resultDoc.embedPage(cp);
+            const [cp] = await resultDoc.copyPages(mainDoc, [indices[ci]!]);
+            const embedded = await resultDoc.embedPage(cp!);
             sheetPage.drawPage(embedded, {
               x: ci % 2 === 0 ? 0 : pageWidth,
               y: 0,
@@ -166,9 +166,9 @@ export default function PdfAdvanced() {
           await page.render({ canvasContext: ctx, viewport }).promise;
           const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           for (let j = 0; j < imageData.data.length; j += 4) {
-            imageData.data[j] = 255 - imageData.data[j];
-            imageData.data[j + 1] = 255 - imageData.data[j + 1];
-            imageData.data[j + 2] = 255 - imageData.data[j + 2];
+            imageData.data[j] = 255 - (imageData.data[j] ?? 0);
+            imageData.data[j + 1] = 255 - (imageData.data[j + 1] ?? 0);
+            imageData.data[j + 2] = 255 - (imageData.data[j + 2] ?? 0);
           }
           ctx.putImageData(imageData, 0, 0);
           const pngBlob = await new Promise<Blob>(resolve => canvas.toBlob(b => resolve(b!), 'image/png'));

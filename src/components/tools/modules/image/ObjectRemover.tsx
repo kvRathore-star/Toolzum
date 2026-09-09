@@ -162,7 +162,7 @@ export default function ObjectRemover() {
             const idx = (y * width + x) * 4;
             
             // Mask is white on mask canvas
-            const isMasked = mData[idx] > 100;
+            const isMasked = (mData[idx] ?? 0) > 100;
             if (isMasked) {
               // Sample neighboring pixels
               const neighbors = [
@@ -174,10 +174,10 @@ export default function ObjectRemover() {
 
               let rSum = 0, gSum = 0, bSum = 0, count = 0;
               for (const nIdx of neighbors) {
-                if (mData[nIdx] < 100) { // Not masked neighbor
-                  rSum += data[nIdx];
-                  gSum += data[nIdx + 1];
-                  bSum += data[nIdx + 2];
+                if ((mData[nIdx] ?? 0) < 100) { // Not masked neighbor
+                  rSum += data[nIdx] ?? 0;
+                  gSum += data[nIdx + 1] ?? 0;
+                  bSum += data[nIdx + 2] ?? 0;
                   count++;
                 }
               }

@@ -48,7 +48,7 @@ export default function ReelShortsMaker() {
       const outputName = 'cropped.mp4';
       await ffmpeg.writeFile(inputName, await fetchFile(file));
 
-      const r = RATIOS[ratioIdx];
+      const r = RATIOS[ratioIdx]!;
       const cw = Math.floor((r.label === 'Custom' ? Number(customW) : r.w) / 2) * 2;
       const ch = Math.floor((r.label === 'Custom' ? Number(customH) : r.h) / 2) * 2;
       const ox = Number(xOffset) || 0;
@@ -126,7 +126,7 @@ export default function ReelShortsMaker() {
               </div>
             </div>
 
-            {RATIOS[ratioIdx].label === 'Custom' && (
+            {RATIOS[ratioIdx]!.label === 'Custom' && (
               <div className="grid grid-cols-2 gap-3">
                 <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Width</label><input aria-label="Width" type="number" value={customW} onChange={e => setCustomW(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>
                 <div><label className="text-[10px] font-semibold text-[var(--text-muted)]">Height</label><input aria-label="Height" type="number" value={customH} onChange={e => setCustomH(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 mt-1" /></div>

@@ -40,7 +40,7 @@ function LanguageSelector() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-xs cursor-pointer"
       >
-        <Globe className="w-3.5 h-3.5" /> {lang.code.toUpperCase()}
+        <Globe className="w-3.5 h-3.5" /> {lang!.code.toUpperCase()}
       </button>
       {open && (
         <div className="absolute bottom-full right-0 mb-2 w-48 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-2xl py-2 max-h-64 overflow-y-auto z-[100]">

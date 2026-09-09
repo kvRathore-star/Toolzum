@@ -39,7 +39,7 @@ export default function BulkAudioConverter({ defaultConfig: extraConfig }: { def
           let offset = 44;
           for (let i = 0; i < length; i++) {
             for (let ch = 0; ch < numChannels; ch++) {
-              const sample = Math.max(-1, Math.min(1, audioBuf.getChannelData(ch)[i]));
+              const sample = Math.max(-1, Math.min(1, audioBuf.getChannelData(ch)[i]!));
               view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
               offset += 2;
             }

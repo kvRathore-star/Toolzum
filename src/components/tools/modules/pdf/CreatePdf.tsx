@@ -129,7 +129,7 @@ export default function CreatePdf() {
       if (mode === 'csv' && csvRaw.trim()) {
         const rows = parseCSV(csvRaw);
         if (rows.length === 0) { toast.error('No CSV data found.'); return; }
-        const headers = rows[0];
+        const headers = rows[0]!;
         const colWidth = Math.min(120, (maxWidth - 10) / headers.length);
         const cellPad = 4;
         const rowHeight = 20;
@@ -158,7 +158,7 @@ export default function CreatePdf() {
           }
           for (let ci = 0; ci < headers.length; ci++) {
             const cellX = margin + ci * colWidth;
-            const cellVal = rows[ri][ci] || '';
+            const cellVal = rows[ri]![ci] || '';
             drawTableCell(cellVal, cellX, y, ri === 0);
             page.drawRectangle({
               x: cellX, y: y - 2, width: colWidth, height: rowHeight,

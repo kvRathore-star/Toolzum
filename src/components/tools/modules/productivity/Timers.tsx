@@ -485,8 +485,8 @@ export function TimeDurationCalculator() {
   const [result, setResult] = useState('');
 
   const calc = () => {
-    const [sh, sm] = startTime.split(':').map(Number);
-    const [eh, em] = endTime.split(':').map(Number);
+    const [sh = 0, sm = 0] = startTime.split(':').map(Number);
+    const [eh = 0, em = 0] = endTime.split(':').map(Number);
     const start = sh * 3600 + sm * 60;
     let end = eh * 3600 + em * 60;
     if (end < start) end += 86400;
@@ -519,7 +519,7 @@ export function TimeAdditionCalculator() {
   const [result, setResult] = useState('');
 
   const calc = () => {
-    const [sh, sm] = startTime.split(':').map(Number);
+    const [sh = 0, sm = 0] = startTime.split(':').map(Number);
     const total = sh * 60 + sm + parseInt(addH) * 60 + parseInt(addM);
     const d = Math.floor(total / 1440);
     const m = total % 1440;

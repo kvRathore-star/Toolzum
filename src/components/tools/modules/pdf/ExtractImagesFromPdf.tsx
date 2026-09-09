@@ -61,7 +61,7 @@ export default function ExtractImagesFromPdf() {
 
         // Retrieve and process each image
         for (let j = 0; j < imgKeys.length; j++) {
-          const key = imgKeys[j];
+          const key = imgKeys[j]!;
           try {
             // Get image from page objects (this might be synchronous or asynchronous depending on pdfjs version)
             const imgObj = await new Promise<any>((resolve, reject) => {
@@ -98,7 +98,7 @@ export default function ExtractImagesFromPdf() {
 
               ctx.putImageData(imgData, 0, 0);
               const dataUrl = canvas.toDataURL('image/png');
-              const base64Data = dataUrl.split(',')[1];
+              const base64Data = dataUrl.split(',')[1] ?? "";
               
               extractedCount++;
               zip.file(`extracted_img_${extractedCount}.png`, base64Data, { base64: true });

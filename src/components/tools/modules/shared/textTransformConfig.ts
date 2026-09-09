@@ -88,8 +88,8 @@ const CASE_CONVERTER = (i: string) => {
   return [
     `UPPER:      ${i.toUpperCase()}`,
     `lower:      ${i.toLowerCase()}`,
-    `Title:      ${w.map(x => x[0].toUpperCase() + x.slice(1).toLowerCase()).join(' ')}`,
-    `camelCase:  ${w.map((x, j) => j === 0 ? x.toLowerCase() : x[0].toUpperCase() + x.slice(1).toLowerCase()).join('')}`,
+    `Title:      ${w.map(x => x[0]!.toUpperCase() + x.slice(1).toLowerCase()).join(' ')}`,
+    `camelCase:  ${w.map((x, j) => j === 0 ? x.toLowerCase() : x[0]!.toUpperCase() + x.slice(1).toLowerCase()).join('')}`,
     `snake_case: ${w.map(x => x.toLowerCase()).join('_')}`,
     `kebab-case: ${w.map(x => x.toLowerCase()).join('-')}`,
     `UPPER_SNAKE:${w.map(x => x.toUpperCase()).join('_')}`,
@@ -101,7 +101,7 @@ const YAML_TO_JSON = (i: string) => {
     const o: Record<string, string> = {};
     i.split('\n').filter(l => l.trim() && !l.trim().startsWith('#')).forEach(l => {
       const m = l.match(/^(\w+):\s*(.*)/);
-      if (m) o[m[1]] = m[2].replace(/^['"]|['"]$/g, '');
+      if (m) o[m[1]!] = m[2]!.replace(/^['"]|['"]$/g, '');
     });
     return JSON.stringify(o, null, 2);
   } catch { return 'Invalid YAML'; }
@@ -126,9 +126,9 @@ const INI_TO_JSON = (i: string) => {
     const o: Record<string, any> = {}; let s = '';
     i.split('\n').forEach(l => {
       const sec = l.match(/^\[(\w+)\]/);
-      if (sec) { s = sec[1]; o[s] = {}; return; }
+      if (sec) { s = sec[1]!; o[s] = {}; return; }
       const m = l.match(/^(\w+)\s*=\s*(.*)/);
-      if (m) { if (s) o[s][m[1]] = m[2]; else o[m[1]] = m[2]; }
+      if (m) { if (s) o[s][m[1]!] = m[2]; else o[m[1]!] = m[2]; }
     });
     return JSON.stringify(o, null, 2);
   } catch { return 'Invalid INI'; }
@@ -139,14 +139,14 @@ const TOML_TO_JSON = (i: string) => {
     const o: Record<string, any> = {}; let s = '';
     i.split('\n').forEach(l => {
       const sec = l.match(/^\[(\w+)\]/);
-      if (sec) { s = sec[1]; o[s] = {}; return; }
+      if (sec) { s = sec[1]!; o[s] = {}; return; }
       const m = l.match(/^(\w+)\s*=\s*(.*)/);
       if (m) {
-        let v: any = m[2].replace(/^['"]|['"]$/g, '');
+        let v: any = m[2]!.replace(/^['"]|['"]$/g, '');
         if (!isNaN(Number(v))) v = Number(v);
         else if (v === 'true') v = true;
         else if (v === 'false') v = false;
-        if (s) o[s][m[1]] = v; else o[m[1]] = v;
+        if (s) o[s][m[1]!] = v; else o[m[1]!] = v;
       }
     });
     return JSON.stringify(o, null, 2);

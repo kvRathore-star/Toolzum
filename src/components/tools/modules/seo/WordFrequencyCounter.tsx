@@ -16,7 +16,7 @@ export default function WordFrequencyCounter() {
     setFrequencies(sorted);
   };
 
-  const maxCount = frequencies.length > 0 ? frequencies[0].count : 1;
+  const maxCount = frequencies.length > 0 ? frequencies[0]!.count : 1;
   const totalWords = frequencies.reduce((sum, f) => sum + f.count, 0);
 
   const presets = [

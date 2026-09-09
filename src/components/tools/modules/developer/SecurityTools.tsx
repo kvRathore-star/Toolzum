@@ -271,7 +271,7 @@ export function BruteForceTimeEstimator() {
       { label: 'centuries', v: 3153600000 },
       { label: 'millennia', v: 31536000000 },
     ];
-    let found = units[0];
+    let found = units[0]!;
     for (const u of units) { if (secs / u.v >= 1) found = u; }
     const val = (secs / found.v).toLocaleString(undefined, { maximumFractionDigits: 2 });
     setEst(`${val} ${found.label}`);
@@ -327,7 +327,7 @@ export function BruteForceTimeEstimator() {
                 <div><span className="text-zinc-500">Total Combinations</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Math.pow(10, Math.log10(Math.pow(10, Math.log10(seconds) || 0)))?.toLocaleString?.() || '∞'}</p></div>
                 <div><span className="text-zinc-500">Attack Rate</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Number(rate).toLocaleString()}/s</p></div>
                 <div><span className="text-zinc-500">Seconds</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{seconds.toLocaleString()}</p></div>
-                <div><span className="text-zinc-500">Severity</span><p className={`font-bold ${severityColors[severity].replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
+                <div><span className="text-zinc-500">Severity</span><p className={`font-bold ${severityColors[severity]!.replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
               </div>
             </div>
 
@@ -392,7 +392,7 @@ export function HashGenerator() {
         const buf = await crypto.subtle.digest(algo.id, data);
         r[algo.id] = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
       }
-      r['MD5'] = r['SHA-1']; // placeholder, not real MD5
+      r['MD5'] = r['SHA-1']!; // placeholder, not real MD5
       setResults(r);
     };
     run();
@@ -437,7 +437,7 @@ export function HashGenerator() {
                     {a.deprecated && <span className="px-1.5 py-0.5 text-[10px] bg-rose-500/10 text-rose-600 dark:text-rose-400 rounded">Deprecated</span>}
                     <span className="text-[var(--text-muted)] text-xs">({a.length} chars)</span>
                   </span>
-                  <button onClick={() => copy(a.id, results[a.id])} className="px-2 py-0.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded transition-colors">
+                  <button onClick={() => copy(a.id, results[a.id]!)} className="px-2 py-0.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded transition-colors">
                     {copiedId === a.id ? 'Copied!' : 'Copy'}
                   </button>
                 </div>
@@ -823,8 +823,8 @@ export function JwtInspector() {
     try {
       const parts = tk.split('.');
       if (parts.length !== 3) { setHeader(null); setPayload(null); setIssues(['Invalid JWT format — expected 3 parts']); setIsValid(false); return; }
-      const h = JSON.parse(atob(parts[0].replace(/-/g, '+').replace(/_/g, '/')));
-      const p = JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));
+      const h = JSON.parse(atob(parts[0]!.replace(/-/g, '+').replace(/_/g, '/')));
+      const p = JSON.parse(atob(parts[1]!.replace(/-/g, '+').replace(/_/g, '/')));
       setHeader(h);
       setPayload(p);
       const now = Math.floor(Date.now() / 1000);
@@ -952,11 +952,11 @@ export function SubnetCalculator() {
   const calc = (cidrInput?: string) => {
     const inp = cidrInput !== undefined ? cidrInput : input;
     if (cidrInput !== undefined) setInput(inp);
-    const [ipStr, cidrStr] = inp.split('/');
+    const [ipStr = "", cidrStr] = inp.split('/');
     const cidr = parseInt(cidrStr || '24');
     const octets = ipStr.split('.').map(Number);
     if (octets.length !== 4 || octets.some(o => isNaN(o) || o < 0 || o > 255)) return;
-    const ip = ((octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]) >>> 0;
+    const ip = ((octets[0]! << 24) | (octets[1]! << 16) | (octets[2]! << 8) | octets[3]!) >>> 0;
     const mask = ~(2 ** (32 - cidr) - 1) >>> 0;
     const network = ip & mask;
     const broadcast = network | (~mask >>> 0);
@@ -1014,11 +1014,11 @@ export function SubnetVisualizer() {
   const visualize = (cidrInput?: string) => {
     const inp = cidrInput !== undefined ? cidrInput : input;
     if (cidrInput !== undefined) setInput(inp);
-    const [ipStr, cidrStr] = inp.split('/');
+    const [ipStr = "", cidrStr] = inp.split('/');
     const cidr = parseInt(cidrStr || '24');
     const octets = ipStr.split('.').map(Number);
     if (octets.length !== 4 || octets.some(o => isNaN(o))) return;
-    const ip = ((octets[0] << 24) | (octets[1] << 16) | (octets[2] << 8) | octets[3]) >>> 0;
+    const ip = ((octets[0]! << 24) | (octets[1]! << 16) | (octets[2]! << 8) | octets[3]!) >>> 0;
     const mask = ~(2 ** (32 - cidr) - 1) >>> 0;
     const toBin = (n: number) => n.toString(2).padStart(32, '0').replace(/(.{8})/g, '$1.').slice(0, -1);
     setViz({ ip: toBin(ip), mask: toBin(mask), network: `${'1'.repeat(cidr)}${'0'.repeat(32 - cidr)}`.replace(/(.{8})/g, '$1.').slice(0, -1), cidr });
@@ -1123,7 +1123,7 @@ Expected preflight response for methods: ${m}
 
 Browser will send OPTIONS request with:
   Origin: ${origin}
-  Access-Control-Request-Method: ${m.split(',')[0].trim()}
+  Access-Control-Request-Method: ${m.split(',')[0]!.trim()}
 
 Server should respond with:
   Access-Control-Allow-Origin: ${origin} or *
@@ -1345,7 +1345,7 @@ export function YamlValidator() {
     const iss: string[] = [];
     let prevIndent = 0;
     for (let i = 0; i < lines.length; i++) {
-      const l = lines[i];
+      const l = lines[i]!;
       if (l.trim().startsWith('#')) continue;
       if (l.trim() === '') continue;
       const indent = l.search(/\S/);
@@ -1365,9 +1365,9 @@ export function YamlValidator() {
         const trimmed = line.trim();
         if (!trimmed || trimmed.startsWith('#')) continue;
         const indent = line.search(/\S/);
-        const [key, ...valueParts] = trimmed.split(':');
+        const [key = "", ...valueParts] = trimmed.split(':');
         const value = valueParts.join(':').trim();
-        while (indentStack.length > 0 && indentStack[indentStack.length - 1] >= indent) indentStack.pop();
+        while (indentStack.length > 0 && indentStack[indentStack.length - 1]! >= indent) indentStack.pop();
         indentStack.push(indent);
         let current: Record<string, unknown> = obj;
         for (const p of indentStack.slice(1, -1)) { /* path tracking */ }
@@ -1853,7 +1853,7 @@ export function CspValidator() {
     const unknown: string[] = [];
     const warnings: string[] = [];
     for (const d of directives) {
-      const name = d.split(/\s+/)[0];
+      const name = d.split(/\s+/)[0] ?? "";
       if (!validDirs.includes(name)) unknown.push(name);
       else valid.push(d);
     }
@@ -1994,7 +1994,7 @@ Cache-Control: no-store, no-cache, must-revalidate
 Pragma: no-cache
 X-XSS-Protection: 0`,
     };
-    setHeaders(recommendations[c] || recommendations.website);
+    setHeaders(recommendations[c] || recommendations.website!);
   };
   const [copied, setCopied] = useState(false);
   const copy = () => { if (headers) { navigator.clipboard.writeText(headers).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
@@ -2135,8 +2135,8 @@ export function EmailValidator() {
     if (!addr.includes('@')) issues.push('Missing @ symbol');
     else {
       const parts = addr.split('@');
-      local = parts[0];
-      domain = parts[1];
+      local = parts[0] ?? "";
+      domain = parts[1] ?? "";
       if (!domain.includes('.')) issues.push('Domain missing TLD');
       if (local.length > 64) issues.push('Local part too long (max 64 chars)');
       if (domain.length > 255) issues.push('Domain too long (max 255 chars)');

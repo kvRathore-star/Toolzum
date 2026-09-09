@@ -85,13 +85,13 @@ export function AsciiTableGenerator() {
   const gen = () => {
     const rows = data.trim().split('\n').map(r => r.split(',').map(c => c.trim()));
     if (rows.length < 2) return;
-    const colWidths = rows[0].map((_, ci) => Math.max(...rows.map(r => (r[ci] || '').length)));
+    const colWidths = rows[0]!.map((_, ci) => Math.max(...rows.map(r => (r[ci] || '').length)));
     const sep = (c: string) => '+' + colWidths.map(w => c.repeat(w + 2)).join('+') + '+';
     let out = sep('-') + '\n';
-    out += '| ' + rows[0].map((h, i) => h.padEnd(colWidths[i])).join(' | ') + ' |\n';
+    out += '| ' + rows[0]!.map((h, i) => h.padEnd(colWidths[i]!)).join(' | ') + ' |\n';
     out += sep('=') + '\n';
     for (let i = 1; i < rows.length; i++) {
-      out += '| ' + rows[i].map((c, j) => (c || '').padEnd(colWidths[j])).join(' | ') + ' |\n';
+      out += '| ' + rows[i]!.map((c, j) => (c || '').padEnd(colWidths[j]!)).join(' | ') + ' |\n';
       out += sep('-') + '\n';
     }
     setTable(out);

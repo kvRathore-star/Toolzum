@@ -63,7 +63,7 @@ export const MODES: Record<string, ColorMode> = {
       }
       const m = t.match(/(\d+)/g);
       if (m && m.length >= 3) {
-        const [r, g, b] = m.map(Number);
+        const [r = 0, g = 0, b = 0] = m.map(Number);
         if (r > 255 || g > 255 || b > 255) return 'Invalid RGB values (0-255)';
         const hsl = rgbToHsl(r, g, b);
         return `HEX: ${rgbToHex(r, g, b)}\nRGB: ${r}, ${g}, ${b}\nHSL: ${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;

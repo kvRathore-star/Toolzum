@@ -190,8 +190,8 @@ export function DataAnonymizer() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.pii)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
-        <button onClick={() => setInput(PRESETS.financial)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
+        <button onClick={() => setInput(PRESETS.pii!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
+        <button onClick={() => setInput(PRESETS.financial!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Data Anonymizer</h2>
@@ -272,7 +272,7 @@ export function CodeToCurlConverter() {
     let body = '';
 
     const urlMatch = input.match(/['"](https?:\/\/[^'"]+)['"]/);
-    if (urlMatch) url = urlMatch[1];
+    if (urlMatch) url = urlMatch[1] ?? "";
     if (/method:\s*['"](POST|PUT|DELETE|PATCH)['"]/i.test(input)) method = input.match(/method:\s*['"]([^'"]+)['"]/i)?.[1] || 'GET';
     else if (/fetch\(['"]/.test(input) && /body/.test(input)) method = 'POST';
 
@@ -282,7 +282,7 @@ export function CodeToCurlConverter() {
     const headerRegex = /['"]([^'"]+)['"]\s*:\s*['"]([^'"]+)['"]/g;
     let m;
     while ((m = headerRegex.exec(input)) !== null) {
-      if (!m[1].toLowerCase().includes('method') && !m[1].toLowerCase().includes('body')) {
+      if (!m[1]!.toLowerCase().includes('method') && !m[1]!.toLowerCase().includes('body')) {
         headers.push("-H '" + m[1] + ': ' + m[2] + "'");
       }
     }
@@ -341,23 +341,23 @@ export function CurlToCodeConverter() {
       let body = '';
 
       const urlMatch = curl.match(/-X\s+(\w+)/);
-      if (urlMatch) method = urlMatch[1];
+      if (urlMatch) method = urlMatch[1] ?? method;
       else if (curl.includes('-d') || curl.includes('--data')) method = 'POST';
 
       const urlMatch2 = curl.match(/['"](https?:\/\/[^'"]+)['"]/);
-      if (urlMatch2) url = urlMatch2[1];
+      if (urlMatch2) url = urlMatch2[1] ?? url;
 
       const headerRegex = /-H\s+['"]([^:]+):\s*([^'"]+)['"]/g;
       let m;
       while ((m = headerRegex.exec(curl)) !== null) {
-        headers[m[1]] = m[2];
+        headers[m[1]!] = m[2] ?? "";
       }
 
       const dataMatch = curl.match(/-d\s+['"]([^'"]*)['"]/);
-      if (dataMatch) body = dataMatch[1];
+      if (dataMatch) body = dataMatch[1] ?? body;
       else {
         const dataMatch2 = curl.match(/--data\s+['"]([^'"]*)['"]/);
-        if (dataMatch2) body = dataMatch2[1];
+        if (dataMatch2) body = dataMatch2[1] ?? body;
       }
 
       let result = '';
@@ -534,8 +534,8 @@ export function HarAnalyzer() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.small)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
-        <button onClick={() => setInput(PRESETS.cookies)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
+        <button onClick={() => setInput(PRESETS.small!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
+        <button onClick={() => setInput(PRESETS.cookies!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HAR File Analyzer</h2>
@@ -592,22 +592,22 @@ export function LogAnalyzer() {
     lines.forEach(function(line) {
       const levelMatch = line.match(/\b(ERROR|INFO|WARN|DEBUG|FATAL|TRACE|error|notice|warn|crit)\b/i);
       if (levelMatch) {
-        const lvl = levelMatch[1].toUpperCase();
+        const lvl = levelMatch[1]!.toUpperCase();
         levels[lvl] = (levels[lvl] || 0) + 1;
         if (lvl === 'ERROR' || lvl === 'FATAL' || lvl === 'CRIT') errorCount++;
       }
 
       const statusMatch = line.match(/\s(\d{3})\s/);
       if (statusMatch) {
-        const s = statusMatch[1];
-        statusDist[s] = (statusDist[s] || 0) + 1;
+        const s = statusMatch[1] ?? "";
+        statusDist[s] = (statusDist[s] ?? 0) + 1;
       }
 
       const ipMatch = line.match(/\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b/);
-      if (ipMatch) ips[ipMatch[1]] = (ips[ipMatch[1]] || 0) + 1;
+      if (ipMatch) ips[ipMatch[1]!] = (ips[ipMatch[1]!] ?? 0) + 1;
 
       const urlMatch = line.match(/"([A-Z]+) ([^ "]+)/);
-      if (urlMatch && urlMatch[2] !== '-') urls.push(urlMatch[2]);
+      if (urlMatch && urlMatch[2] !== '-') urls.push(urlMatch[2] ?? "");
     });
 
     const errorRate = lines.length > 0 ? ((errorCount / lines.length) * 100).toFixed(1) : '0';
@@ -666,8 +666,8 @@ export function LogAnalyzer() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.apache)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
-        <button onClick={() => setInput(PRESETS.nginx)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
+        <button onClick={() => setInput(PRESETS.apache!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
+        <button onClick={() => setInput(PRESETS.nginx!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Log File Analyzer</h2>

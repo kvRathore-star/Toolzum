@@ -40,7 +40,7 @@ export default function BodySurfaceAreaCalculator() {
             { text: 'text-violet-700 dark:text-violet-400' },
             { text: 'text-amber-700 dark:text-amber-400' },
           ];
-          const s = styles[i] || styles[0];
+          const s = styles[i] || styles[0]!;
           return (
             <div key={i} className="flex items-center justify-between">
               <span className="text-sm font-bold text-[var(--text-primary)]">{r.formula}</span>

@@ -24,7 +24,7 @@ export function HtmlLinter() {
     const tagRegex = /<\/?(\w+)[^>]*>/g;
     let match;
     while ((match = tagRegex.exec(htmlInput)) !== null) {
-      const tag = match[1].toLowerCase();
+      const tag = match[1]!.toLowerCase();
       if (['br', 'hr', 'img', 'input', 'meta', 'link', '!DOCTYPE'].includes(tag)) continue;
       if (match[0].startsWith('</')) {
         if (tagStack.length && tagStack[tagStack.length - 1] === tag) tagStack.pop();

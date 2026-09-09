@@ -164,7 +164,7 @@ export default function BulkImageWatermark() {
   const downloadAll = async () => {
     const zip = new JSZip();
     doneBlobs.forEach((blob, i) => {
-      zip.file(batch.files[i].file.name.replace(/\.[^.]+$/, '') + '-watermarked.png', blob);
+      zip.file(batch.files[i]!.file.name.replace(/\.[^.]+$/, '') + '-watermarked.png', blob);
     });
     const content = await zip.generateAsync({ type: 'blob' });
     const url = URL.createObjectURL(content);
@@ -181,7 +181,7 @@ export default function BulkImageWatermark() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = batch.files[i].file.name.replace(/\.[^.]+$/, '') + '-watermarked.png';
+      a.download = batch.files[i]!.file.name.replace(/\.[^.]+$/, '') + '-watermarked.png';
       a.click();
       URL.revokeObjectURL(url);
     });

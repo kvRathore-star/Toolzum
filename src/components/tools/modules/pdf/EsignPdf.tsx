@@ -92,8 +92,8 @@ export default function EsignPdf() {
     const rect = canvas.getBoundingClientRect();
     let clientX, clientY;
     if ('touches' in e) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
+      clientX = e.touches[0]!.clientX;
+      clientY = e.touches[0]!.clientY;
     } else {
       clientX = (e as React.MouseEvent).clientX;
       clientY = (e as React.MouseEvent).clientY;
@@ -114,8 +114,8 @@ export default function EsignPdf() {
     const rect = canvas.getBoundingClientRect();
     let clientX, clientY;
     if ('touches' in e) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
+      clientX = e.touches[0]!.clientX;
+      clientY = e.touches[0]!.clientY;
     } else {
       clientX = (e as React.MouseEvent).clientX;
       clientY = (e as React.MouseEvent).clientY;
@@ -176,7 +176,7 @@ export default function EsignPdf() {
       
       // Get the page where we want to place it (for now, place at bottom right of current page)
       const pages = pdfDoc.getPages();
-      const pageToSign = pages[currentPage - 1]; // 0-indexed
+      const pageToSign = pages[currentPage - 1]!; // 0-indexed
       
       const sigDims = sigImage.scale(0.5); // scale down
       

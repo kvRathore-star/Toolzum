@@ -48,7 +48,7 @@ export function PdfActionBase({ title, description, renderOptions, processAction
       const pages = pdfDoc.getPages();
       await processAction(pdfDoc, font, boldFont, pages, state);
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       toast.success(`${title} applied successfully!`);

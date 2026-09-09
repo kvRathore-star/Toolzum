@@ -35,7 +35,7 @@ const ACCEPT_STRING = 'audio/mpeg,audio/wav,audio/mp4,audio/flac,audio/ogg,.mp3,
 
 export default function AudioEqualizer() {
   const [file, setFile] = useState<File | null>(null);
-  const [bands, setBands] = useState<number[]>([...PRESETS.Flat]);
+  const [bands, setBands] = useState<number[]>([...PRESETS.Flat!]);
   const [preset, setPreset] = useState('Flat');
   const [outputFormat, setOutputFormat] = useState<typeof OUTPUT_FORMATS[number]>('mp3');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -139,21 +139,21 @@ export default function AudioEqualizer() {
     }
 
     for (let i = 0; i < BANDS.length; i++) {
-      const gain = bands[i];
+      const gain = bands[i]!;
       if (gain === 0) continue;
-      const f0 = BANDS[i];
+      const f0 = BANDS[i]!;
       const curve: { x: number; y: number }[] = [];
       for (let j = 0; j < steps; j++) {
-        const g = getGainAtFreq(freqs[j], f0, gain);
-        combined[j] += g;
-        curve.push({ x: freqToX(freqs[j]), y: gainToY(g) });
+        const g = getGainAtFreq(freqs[j]!, f0, gain);
+        combined[j]! += g;
+        curve.push({ x: freqToX(freqs[j]!), y: gainToY(g) });
       }
       ctx.strokeStyle = 'rgba(168,85,247,0.12)';
       ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(curve[0].x, Math.max(pad.top, Math.min(pad.top + plotH, curve[0].y)));
+      ctx.moveTo(curve[0]!.x, Math.max(pad.top, Math.min(pad.top + plotH, curve[0]!.y)));
       for (let j = 1; j < steps; j++) {
-        ctx.lineTo(curve[j].x, Math.max(pad.top, Math.min(pad.top + plotH, curve[j].y)));
+        ctx.lineTo(curve[j]!.x, Math.max(pad.top, Math.min(pad.top + plotH, curve[j]!.y)));
       }
       ctx.stroke();
     }
@@ -163,7 +163,7 @@ export default function AudioEqualizer() {
       for (let j = 0; j < steps; j++) {
         const f = minFreq * Math.exp((Math.log(maxFreq / minFreq) * j) / (steps - 1));
         const x = freqToX(f);
-        const y = gainToY(Math.max(-12, Math.min(12, combined[j])));
+        const y = gainToY(Math.max(-12, Math.min(12, combined[j]!)));
         finalCurve.push({ x, y });
       }
     } else {
@@ -176,18 +176,18 @@ export default function AudioEqualizer() {
     }
 
     ctx.beginPath();
-    ctx.moveTo(finalCurve[0].x, finalCurve[0].y);
+    ctx.moveTo(finalCurve[0]!.x, finalCurve[0]!.y);
     for (let j = 1; j < steps; j++) {
-      ctx.lineTo(finalCurve[j].x, Math.max(pad.top, Math.min(pad.top + plotH, finalCurve[j].y)));
+      ctx.lineTo(finalCurve[j]!.x, Math.max(pad.top, Math.min(pad.top + plotH, finalCurve[j]!.y)));
     }
     ctx.strokeStyle = '#a855f7';
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(finalCurve[0].x, finalCurve[0].y);
+    ctx.moveTo(finalCurve[0]!.x, finalCurve[0]!.y);
     for (let j = 1; j < steps; j++) {
-      ctx.lineTo(finalCurve[j].x, Math.max(pad.top, Math.min(pad.top + plotH, finalCurve[j].y)));
+      ctx.lineTo(finalCurve[j]!.x, Math.max(pad.top, Math.min(pad.top + plotH, finalCurve[j]!.y)));
     }
     ctx.strokeStyle = 'rgba(168,85,247,0.08)';
     ctx.lineWidth = 6;
@@ -203,7 +203,7 @@ export default function AudioEqualizer() {
     const url = URL.createObjectURL(f);
     setPreviewUrl(url);
     setOutputUrl(null);
-    setBands([...PRESETS.Flat]);
+    setBands([...PRESETS.Flat!]);
     setPreset('Flat');
     loadFFmpeg();
   };
@@ -213,7 +213,7 @@ export default function AudioEqualizer() {
     setFile(null);
     setPreviewUrl(null);
     setOutputUrl(null);
-    setBands([...PRESETS.Flat]);
+    setBands([...PRESETS.Flat!]);
     setPreset('Flat');
   };
 
@@ -228,7 +228,7 @@ export default function AudioEqualizer() {
     const next = [...bands];
     next[index] = value;
     setBands(next);
-    const match = PRESET_NAMES.find(n => PRESETS[n].every((v, i) => v === next[i]));
+    const match = PRESET_NAMES.find(n => PRESETS[n]!.every((v, i) => v === next[i]));
     setPreset(match ?? '');
   };
 
@@ -396,8 +396,8 @@ export default function AudioEqualizer() {
                   style={{ writingMode: 'vertical-lr', direction: 'ltr' }}
                 />
                 <span className={`text-[10px] font-mono font-semibold
-                  ${bands[i] > 0 ? 'text-emerald-500' : bands[i] < 0 ? 'text-red-700 dark:text-red-400' : 'text-[var(--text-muted)]'}`}>
-                  {bands[i] > 0 ? '+' : ''}{bands[i]}
+                  ${bands[i]! > 0 ? 'text-emerald-500' : bands[i]! < 0 ? 'text-red-700 dark:text-red-400' : 'text-[var(--text-muted)]'}`}>
+                  {bands[i]! > 0 ? '+' : ''}{bands[i]}
                 </span>
               </div>
             ))}

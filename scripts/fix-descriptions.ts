@@ -47,48 +47,48 @@ for (const file of allFiles) {
   const fileChanges: { lineIdx: number; newLine: string }[] = [];
 
   for (let i = 0; i < lines.length; i++) {
-    const slugMatch = lines[i].match(/(?:^\s*|\b)slug:\s*(['"])([^'"]+)\1/);
+    const slugMatch = lines[i]!.match(/(?:^\s*|\b)slug:\s*(['"])([^'"]+)\1/);
     if (!slugMatch) continue;
     const slug = slugMatch[2];
-    if (!slugMap.has(slug)) continue;
+    if (!slugMap.has(slug!)) continue;
 
     // Found a flagged tool — find the description line (search forward & backward, or same line)
     let descIdx = -1;
     let oldLine: string;
 
     // First check if description: is on the same line as slug (single-line entries)
-    if (lines[i].includes('description:')) {
+    if (lines[i]!.includes('description:')) {
       descIdx = i;
-      oldLine = lines[i];
+      oldLine = lines[i]!;
     } else {
       // Scope search within the current entry: find entry-opening `{` before slug
       let entryStart = i;
       for (let k = i - 1; k >= Math.max(0, i - 20); k--) {
-        if (/^\s*\{/.test(lines[k])) { entryStart = k; break; }
+        if (/^\s*\{/.test(lines[k]!)) { entryStart = k; break; }
       }
       // Find entry-closing `}` after slug (may be own line or trailing on last property)
       let entryEnd = i;
       for (let k = i + 1; k < Math.min(lines.length, i + 20); k++) {
-        if (/^\s*\}[\s,]*$/.test(lines[k]) || /\},?\s*$/.test(lines[k])) { entryEnd = k; break; }
+        if (/^\s*\}[\s,]*$/.test(lines[k]!) || /\},?\s*$/.test(lines[k]!)) { entryEnd = k; break; }
       }
       // Search backward from slug within entry first (description before slug)
       for (let j = i - 1; j >= entryStart; j--) {
-        if (lines[j].trim().startsWith('description:')) { descIdx = j; break; }
+        if (lines[j]!.trim().startsWith('description:')) { descIdx = j; break; }
       }
       // If not found, search forward from slug within entry
       if (descIdx === -1) {
         for (let j = i + 1; j <= entryEnd; j++) {
-          if (lines[j].trim().startsWith('description:')) { descIdx = j; break; }
+          if (lines[j]!.trim().startsWith('description:')) { descIdx = j; break; }
         }
       }
       if (descIdx === -1) {
         failures.push(`${slug}: description line not found near line ${i + 1}`);
         continue;
       }
-      oldLine = lines[descIdx];
+      oldLine = lines[descIdx]!;
     }
 
-    const newDesc = slugMap.get(slug)!;
+    const newDesc = slugMap.get(slug!)!;
 
     // Handle single-line case (description on same line as slug)
     if (descIdx === i) {
@@ -98,7 +98,7 @@ for (const file of allFiles) {
         const quote = inlineMatch[2];
         let useQuote = quote;
         let escaped = newDesc;
-        if (escaped.includes(useQuote)) {
+        if (escaped.includes(useQuote!)) {
           useQuote = useQuote === "'" ? '"' : "'";
         }
         escaped = escaped.replace(new RegExp(useQuote === "'" ? /'/g : /"/g), '\\' + useQuote);
@@ -127,19 +127,19 @@ for (const file of allFiles) {
     const rest = quoteMatch[3];
 
     // Find where the value ends: look for `',` or `",` or just `'` or `"` at end
-    let closeQuoteIdx = rest.lastIndexOf(oldQuote === "'" ? "'," : '",');
-    if (closeQuoteIdx === -1) closeQuoteIdx = rest.lastIndexOf(oldQuote);
+    let closeQuoteIdx = rest!.lastIndexOf(oldQuote === "'" ? "'," : '",');
+    if (closeQuoteIdx === -1) closeQuoteIdx = rest!.lastIndexOf(oldQuote!);
     if (closeQuoteIdx === -1) {
-      failures.push(`${slug}: cannot find closing quote in "${rest.slice(0, 60)}"`);
+      failures.push(`${slug}: cannot find closing quote in "${rest!.slice(0, 60)}"`);
       continue;
     }
     // Get trailing comma if present
-    const trailing = rest.slice(closeQuoteIdx + 1) || ',';
+    const trailing = rest!.slice(closeQuoteIdx + 1) || ',';
 
     // If newDesc contains the same quote char, use the opposite one
     let useQuote = oldQuote;
     let escaped = newDesc;
-    if (escaped.includes(useQuote)) {
+    if (escaped.includes(useQuote!)) {
       useQuote = useQuote === "'" ? '"' : "'";
     }
     escaped = escaped.replace(new RegExp(useQuote === "'" ? /'/g : /"/g), '\\' + useQuote);

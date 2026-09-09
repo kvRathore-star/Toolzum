@@ -69,22 +69,22 @@ export default function AiBgChanger() {
           // Only sample edges (first/last 5% of width/height)
           if (x < canvas.width * 0.05 || x > canvas.width * 0.95 || y < canvas.height * 0.05 || y > canvas.height * 0.95) {
             const i = (y * canvas.width + x) * 4;
-            edgeSamples.push([data[i], data[i + 1], data[i + 2]]);
+            edgeSamples.push([data[i]!, data[i + 1]!, data[i + 2]!]);
           }
         }
       }
 
       // Compute average background color
-      const avgR = edgeSamples.reduce((s, p) => s + p[0], 0) / edgeSamples.length;
-      const avgG = edgeSamples.reduce((s, p) => s + p[1], 0) / edgeSamples.length;
-      const avgB = edgeSamples.reduce((s, p) => s + p[2], 0) / edgeSamples.length;
+      const avgR = edgeSamples.reduce((s, p) => s + p[0]!, 0) / edgeSamples.length;
+      const avgG = edgeSamples.reduce((s, p) => s + p[1]!, 0) / edgeSamples.length;
+      const avgB = edgeSamples.reduce((s, p) => s + p[2]!, 0) / edgeSamples.length;
 
       const threshold = tolerance * 3;
 
       for (let i = 0; i < data.length; i += 4) {
-        const dr = data[i] - avgR;
-        const dg = data[i + 1] - avgG;
-        const db = data[i + 2] - avgB;
+        const dr = data[i]! - avgR;
+        const dg = data[i + 1]! - avgG;
+        const db = data[i + 2]! - avgB;
         const dist = Math.sqrt(dr * dr + dg * dg + db * db);
 
         if (dist < threshold) {
@@ -96,9 +96,9 @@ export default function AiBgChanger() {
             const bg = parseInt(bgColor.slice(3, 5), 16);
             const bb = parseInt(bgColor.slice(5, 7), 16);
             const blend = dist / threshold;
-            data[i] = data[i] * blend + br * (1 - blend);
-            data[i + 1] = data[i + 1] * blend + bg * (1 - blend);
-            data[i + 2] = data[i + 2] * blend + bb * (1 - blend);
+            data[i] = data[i]! * blend + br * (1 - blend);
+            data[i + 1] = data[i + 1]! * blend + bg * (1 - blend);
+            data[i + 2] = data[i + 2]! * blend + bb * (1 - blend);
           }
         }
       }
@@ -165,7 +165,7 @@ export default function AiBgChanger() {
 
       for (let i = 0; i < data.length; i += 4) {
         const oi = (i / 4) * 4;
-        if (oData[oi + 3] > 0) {
+        if (oData[oi + 3]! > 0) {
           // This pixel was painted (marked as foreground)
           continue; // keep it
         } else {

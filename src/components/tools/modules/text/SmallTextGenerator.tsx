@@ -42,9 +42,9 @@ const MODES = [
 
 export default function SmallTextGenerator() {
   const [text, setText] = useState('');
-  const [activeMode, setActiveMode] = useState(MODES[0].id);
+  const [activeMode, setActiveMode] = useState(MODES[0]!.id);
 
-  const activeModeObj = MODES.find(m => m.id === activeMode) || MODES[0];
+  const activeModeObj = MODES.find(m => m.id === activeMode) || MODES[0]!;
 
   const output = useMemo(() => {
     if (!text) return '';

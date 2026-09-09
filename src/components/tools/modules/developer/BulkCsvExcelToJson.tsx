@@ -40,7 +40,7 @@ export default function BulkCsvExcelToJson() {
         const text = await file.text();
         const lines = text.split('\n').filter(l => l.trim());
         if (lines.length < 2) throw new Error('CSV must have header + data rows');
-        const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+        const headers = lines[0]!.split(',').map(h => h.trim().replace(/^"|"$/g, ''));
         records = lines.slice(1).map(line => {
           const vals = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
           const record: Record<string, unknown> = {};
@@ -53,7 +53,7 @@ export default function BulkCsvExcelToJson() {
         const wb = read(data, { type: 'array' });
         wb.SheetNames.forEach(name => {
           const sheet = wb.Sheets[name];
-          const json = utils.sheet_to_json(sheet);
+          const json = utils.sheet_to_json(sheet!);
           (json as Record<string, unknown>[]).forEach(r => records.push(r));
         });
       }
@@ -153,7 +153,7 @@ export default function BulkCsvExcelToJson() {
               <table className="w-full text-xs">
                 <thead>
                   <tr className="bg-[var(--bg-surface)]">
-                    {Object.keys(preview[0]).map((key) => (
+                    {Object.keys(preview[0]!).map((key) => (
                       <th key={key} className="px-3 py-2 text-left font-medium text-[var(--text-secondary)] border-b border-[var(--border-subtle)]">{key}</th>
                     ))}
                   </tr>

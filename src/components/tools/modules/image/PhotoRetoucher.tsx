@@ -127,9 +127,9 @@ export default function PhotoRetoucher() {
             for (let ky = -1; ky <= 1; ky++) {
               for (let kx = -1; kx <= 1; kx++) {
                 const nIdx = ((cy + ky) * width + (cx + kx)) * 4;
-                rSum += temp[nIdx];
-                gSum += temp[nIdx + 1];
-                bSum += temp[nIdx + 2];
+                rSum += temp[nIdx] ?? 0;
+                gSum += temp[nIdx + 1] ?? 0;
+                bSum += temp[nIdx + 2] ?? 0;
                 count++;
               }
             }
@@ -149,9 +149,9 @@ export default function PhotoRetoucher() {
           const dx = (startX + cx) - x;
           const dy = (startY + cy) - y;
           if (dx * dx + dy * dy <= radius * radius) {
-            const r = data[idx];
-            const g = data[idx + 1];
-            const b = data[idx + 2];
+            const r = data[idx] ?? 0;
+            const g = data[idx + 1] ?? 0;
+            const b = data[idx + 2] ?? 0;
 
             // Threshold: R is dominant over G and B
             if (r > 120 && r > g * 1.5 && r > b * 1.5) {

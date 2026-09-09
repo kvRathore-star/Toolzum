@@ -85,7 +85,7 @@ export function DockerfileLinter() {
     lines.forEach((l, i) => {
       const t = l.trim();
       if (!t || t.startsWith('#')) return;
-      const instr = t.split(/\s+/)[0].toUpperCase();
+      const instr = t.split(/\s+/)[0]!.toUpperCase();
       if (!validInstructions.includes(instr)) issues.push('Line ' + (i + 1) + ': Unknown instruction "' + instr + '"');
     });
     if (!lines.some(l => l.trim().toUpperCase().startsWith('FROM'))) issues.push('Missing FROM instruction');
@@ -129,7 +129,7 @@ export function HtaccessValidator() {
       const t = l.trim();
       if (!t || t.startsWith('#')) return;
       const dir = t.split(/\s+/)[0];
-      if (!validDirs.includes(dir) && !dir.startsWith('<') && !dir.startsWith('</')) issues.push('Line ' + (i + 1) + ': Unknown directive "' + dir + '"');
+      if (!validDirs.includes(dir!) && !dir!.startsWith('<') && !dir!.startsWith('</')) issues.push('Line ' + (i + 1) + ': Unknown directive "' + dir + '"');
     });
     setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : 'Valid .htaccess (' + lines.length + ' lines)');
@@ -321,9 +321,9 @@ export function GeoJsonValidator() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.validPoint)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Point</button>
-        <button onClick={() => setInput(PRESETS.validPolygon)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Polygon</button>
-        <button onClick={() => setInput(PRESETS.invalidCoords)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid Coordinates</button>
+        <button onClick={() => setInput(PRESETS.validPoint!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Point</button>
+        <button onClick={() => setInput(PRESETS.validPolygon!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Polygon</button>
+        <button onClick={() => setInput(PRESETS.invalidCoords!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid Coordinates</button>
       </div>
       <Section title="GeoJSON Validator">
         <div className="space-y-3">
@@ -488,11 +488,11 @@ export function CronExpressionValidator() {
     const desc: string[] = [];
     parts.slice(0, 5).forEach((p, i) => {
       const r = ranges[i];
-      if (p === '*') { desc.push(r.name + ': every'); return; }
-      if (p.startsWith('*/')) { const n = parseInt(p.slice(2)); if (isNaN(n) || n < 1) issues.push(r.name + ': invalid step "' + p + '"'); else desc.push(r.name + ': every ' + n + ' ' + r.name + 's'); return; }
-      if (p.includes(',')) { const vals = p.split(',').map(v => parseInt(v)); if (vals.some(v => isNaN(v) || v < r.min || v > r.max)) issues.push(r.name + ': value(s) out of range ' + r.min + '-' + r.max); else desc.push(r.name + ': at ' + p); return; }
-      if (p.includes('-')) { const [a, b] = p.split('-').map(v => parseInt(v)); if (isNaN(a) || isNaN(b) || a < r.min || b > r.max) issues.push(r.name + ': range out of bounds'); else desc.push(r.name + ': ' + a + '-' + b); return; }
-      const n = parseInt(p); if (isNaN(n) || n < r.min || n > r.max) issues.push(r.name + ': "' + p + '" not in range ' + r.min + '-' + r.max); else desc.push(r.name + ': at ' + n);
+      if (p === '*') { desc.push(r!.name + ': every'); return; }
+      if (p.startsWith('*/')) { const n = parseInt(p.slice(2)); if (isNaN(n) || n < 1) issues.push(r!.name + ': invalid step "' + p + '"'); else desc.push(r!.name + ': every ' + n + ' ' + r!.name + 's'); return; }
+      if (p.includes(',')) { const vals = p.split(',').map(v => parseInt(v)); if (vals.some(v => isNaN(v) || v < r!.min || v > r!.max)) issues.push(r!.name + ': value(s) out of range ' + r!.min + '-' + r!.max); else desc.push(r!.name + ': at ' + p); return; }
+      if (p.includes('-')) { const [a, b] = p.split('-').map(v => parseInt(v)); if (isNaN(a!) || isNaN(b!) || a! < r!.min || b! > r!.max) issues.push(r!.name + ': range out of bounds'); else desc.push(r!.name + ': ' + a + '-' + b); return; }
+      const n = parseInt(p); if (isNaN(n) || n < r!.min || n > r!.max) issues.push(r!.name + ': "' + p + '" not in range ' + r!.min + '-' + r!.max); else desc.push(r!.name + ': at ' + n);
     });
     setIsValid(issues.length === 0);
     setOutput(issues.length ? issues.join('\n') : 'Valid cron: ' + parts.slice(0, 5).join(' ') + '\n' + desc.join('\n') + (parts[5] ? '\n(Cmd: ' + parts.slice(5).join(' ') + ')' : ''));

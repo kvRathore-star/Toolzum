@@ -185,7 +185,7 @@ function getCurrentToolContext(): { toolSlug: string | null; category: string | 
   const parts = window.location.pathname.split("/").filter(Boolean);
   // URL pattern: /{category}/{tool-slug}/ — if this doesn't match, analytics rows will have null toolSlug/category
   if (parts.length >= 2) {
-    return { category: parts[0], toolSlug: parts[1] };
+    return { category: parts[0] ?? null, toolSlug: parts[1] ?? null };
   }
   console.warn('[download-analytics] URL does not match /{category}/{tool-slug}/ pattern:', window.location.pathname);
   return { toolSlug: null, category: null };

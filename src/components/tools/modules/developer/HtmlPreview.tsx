@@ -18,7 +18,7 @@ const viewports = [
 export default function HtmlPreview() {
   const [html, setHtml] = useState('<h1>Hello, World!</h1>\n<p>Start typing HTML above to see a live preview below.</p>');
   const [autoRefresh, setAutoRefresh] = useState(true);
-  const [viewport, setViewport] = useState(viewports[0]);
+  const [viewport, setViewport] = useState(viewports[0]!);
   const [previewHtml, setPreviewHtml] = useState(html);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 

@@ -200,8 +200,8 @@ export function SseEventFormatter() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.standard)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Standard SSE</button>
-        <button onClick={() => setInput(PRESETS.multiline)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Multi-line data</button>
+        <button onClick={() => setInput(PRESETS.standard!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Standard SSE</button>
+        <button onClick={() => setInput(PRESETS.multiline!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Multi-line data</button>
       </div>
       <Section title="SSE Event Formatter">
         <div className="space-y-3">
@@ -247,10 +247,10 @@ export function RateLimitHeaderParser() {
       const [k, ...v] = line.split(': ');
       if (k) parsed[k.trim()] = v.join(': ').trim();
     });
-    const limit = parseInt(parsed['X-RateLimit-Limit']) || 0;
-    const remaining = parseInt(parsed['X-RateLimit-Remaining']) || 0;
-    const reset = parseInt(parsed['X-RateLimit-Reset']) || 0;
-    const retryAfter = parseInt(parsed['Retry-After']) || 0;
+    const limit = parseInt(parsed['X-RateLimit-Limit'] ?? "") || 0;
+    const remaining = parseInt(parsed['X-RateLimit-Remaining'] ?? "") || 0;
+    const reset = parseInt(parsed['X-RateLimit-Reset'] ?? "") || 0;
+    const retryAfter = parseInt(parsed['Retry-After'] ?? "") || 0;
     const used = limit - remaining;
     const pct = limit > 0 ? (used / limit * 100) : 0;
     setUsagePct(pct);
@@ -304,8 +304,8 @@ export function RateLimitHeaderParser() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => { setHeaders(PRESETS.github); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">GitHub API</button>
-        <button onClick={() => { setHeaders(PRESETS.twitter); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Twitter API</button>
+        <button onClick={() => { setHeaders(PRESETS.github!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">GitHub API</button>
+        <button onClick={() => { setHeaders(PRESETS.twitter!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Twitter API</button>
       </div>
       <Section title="Rate Limit Header Parser">
         <div className="space-y-3">

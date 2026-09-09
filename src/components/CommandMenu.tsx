@@ -59,7 +59,7 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
       if (!groups[tool.category]) {
         groups[tool.category] = [];
       }
-      groups[tool.category].push(tool);
+      groups[tool.category]!.push(tool);
     });
     return groups;
   }, []);

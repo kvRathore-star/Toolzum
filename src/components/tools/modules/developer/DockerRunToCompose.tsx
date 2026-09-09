@@ -14,14 +14,14 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
   let i = 0;
 
   while (i < parts.length) {
-    const p = parts[i];
+    const p = parts[i]!;
     if (p === 'docker' || p === 'run') { i++; continue; }
     if (p === '-d' || p === '--detach') { i++; continue; }
     if (p === '-it' || p === '-i' || p === '-t') { i++; continue; }
     if (p === '--rm') { i++; continue; }
 
     if ((p === '--name' || p === '--service-name') && i + 1 < parts.length) {
-      serviceName = parts[i + 1];
+      serviceName = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -29,7 +29,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Image
     if (!p.startsWith('-') && !services[serviceName]?.image) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].image = p;
+      services[serviceName]!.image = p;
       i++;
       continue;
     }
@@ -37,8 +37,8 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Ports
     if ((p === '-p' || p === '--publish') && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      if (!services[serviceName].ports) services[serviceName].ports = [];
-      (services[serviceName].ports as string[]).push(parts[i + 1]);
+      if (!services[serviceName]!.ports) services[serviceName]!.ports = [];
+      (services[serviceName]!.ports as string[]).push(parts[i + 1]!);
       i += 2;
       continue;
     }
@@ -46,13 +46,13 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Volumes
     if ((p === '-v' || p === '--volume') && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      if (!services[serviceName].volumes) services[serviceName].volumes = [];
-      const vol = parts[i + 1];
-      (services[serviceName].volumes as string[]).push(vol);
+      if (!services[serviceName]!.volumes) services[serviceName]!.volumes = [];
+      const vol = parts[i + 1]!;
+      (services[serviceName]!.volumes as string[]).push(vol);
       // Track named volumes
       const volParts = vol.split(':');
-      if (volParts.length >= 2 && !volParts[0].startsWith('/') && !volParts[0].startsWith('.')) {
-        volumes[volParts[0]] = {};
+      if (volParts.length >= 2 && !volParts[0]!.startsWith('/') && !volParts[0]!.startsWith('.')) {
+        volumes[volParts[0]!] = {};
       }
       i += 2;
       continue;
@@ -61,10 +61,10 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Environment variables
     if ((p === '-e' || p === '--env') && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      if (!services[serviceName].environment) services[serviceName].environment = {};
-      const envParts = parts[i + 1].split('=');
+      if (!services[serviceName]!.environment) services[serviceName]!.environment = {};
+      const envParts = parts[i + 1]!.split('=');
       if (envParts.length >= 2) {
-        (services[serviceName].environment as Record<string, string>)[envParts[0]] = envParts.slice(1).join('=');
+        (services[serviceName]!.environment as Record<string, string>)[envParts[0]!] = envParts.slice(1).join('=');
       } else {
         warnings.push(`Env var "${parts[i + 1]}" has no value`);
       }
@@ -75,7 +75,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Env file
     if ((p === '--env-file') && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].env_file = parts[i + 1];
+      services[serviceName]!.env_file = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -83,7 +83,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Restart
     if (p === '--restart' && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].restart = parts[i + 1];
+      services[serviceName]!.restart = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -91,9 +91,9 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Network
     if (p === '--network' && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      if (!services[serviceName].networks) services[serviceName].networks = [];
-      (services[serviceName].networks as string[]).push(parts[i + 1]);
-      networks[parts[i + 1]] = {};
+      if (!services[serviceName]!.networks) services[serviceName]!.networks = [];
+      (services[serviceName]!.networks as string[]).push(parts[i + 1]!);
+      networks[parts[i + 1]!] = {};
       i += 2;
       continue;
     }
@@ -101,7 +101,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Container name
     if (p === '--hostname' && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].hostname = parts[i + 1];
+      services[serviceName]!.hostname = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -109,7 +109,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // Working dir
     if ((p === '-w' || p === '--workdir') && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].working_dir = parts[i + 1];
+      services[serviceName]!.working_dir = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -117,7 +117,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     // User
     if (p === '--user' && i + 1 < parts.length) {
       if (!services[serviceName]) services[serviceName] = {};
-      services[serviceName].user = parts[i + 1];
+      services[serviceName]!.user = parts[i + 1]!;
       i += 2;
       continue;
     }
@@ -126,7 +126,7 @@ function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
     if (p === '--') {
       if (!services[serviceName]) services[serviceName] = {};
       const cmdParts = parts.slice(i + 1);
-      if (cmdParts.length > 0) services[serviceName].command = cmdParts.join(' ');
+      if (cmdParts.length > 0) services[serviceName]!.command = cmdParts.join(' ');
       break;
     }
 

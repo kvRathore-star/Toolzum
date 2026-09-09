@@ -93,7 +93,7 @@ export default function VoiceRecorder() {
       const barWidth = (canvas.width / bufferLength) * 2.5;
       let x = 0;
       for (let i = 0; i < bufferLength; i++) {
-        const barHeight = (dataArray[i] / 255) * canvas.height;
+        const barHeight = (dataArray[i]! / 255) * canvas.height;
         const grad = ctx.createLinearGradient(0, canvas.height, 0, 0);
         grad.addColorStop(0, '#a855f7');
         grad.addColorStop(1, '#ec4899');
@@ -216,7 +216,7 @@ export default function VoiceRecorder() {
     let offset = 44;
     for (let i = 0; i < audioBuffer.length; i++) {
       for (let ch = 0; ch < numChannels; ch++) {
-        const s = Math.max(-1, Math.min(1, channels[ch][i]));
+        const s = Math.max(-1, Math.min(1, channels[ch]![i]!));
         view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
         offset += 2;
       }

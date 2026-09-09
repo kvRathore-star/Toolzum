@@ -159,8 +159,8 @@ export function TimeZoneConverter() {
   const fromOffset = -new Date(local.toLocaleString('en-US', { timeZone: fromTz })).getTimezoneOffset();
   const toOffset = -new Date(local.toLocaleString('en-US', { timeZone: toTz })).getTimezoneOffset();
   const diffMin = toOffset - fromOffset;
-  const resultH = (h + Math.floor(diffMin / 60) + 24) % 24;
-  const resultM = (m + diffMin % 60 + 60) % 60;
+  const resultH = (h! + Math.floor(diffMin / 60) + 24) % 24;
+  const resultM = (m! + diffMin % 60 + 60) % 60;
 
   const presets = [
     { label: 'UTC → NYC', apply: () => { setFromTz('UTC'); setToTz('America/New_York'); } },
@@ -231,7 +231,7 @@ export function WorkHoursCalculator() {
   const [breakMin, setBreakMin] = useState('30');
   const [sH, sM] = start.split(':').map(Number);
   const [eH, eM] = end.split(':').map(Number);
-  const total = (eH * 60 + eM) - (sH * 60 + sM) - Number(breakMin);
+  const total = (eH! * 60 + eM!) - (sH! * 60 + sM!) - Number(breakMin);
   const hrs = Math.floor(total / 60), mins = total % 60;
 
   const presets = [

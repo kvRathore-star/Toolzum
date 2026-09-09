@@ -25,7 +25,7 @@ export default function ScanToPdf() {
   const handleFiles = (files: FileList) => {
     const valid: ImageItem[] = [];
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+      const file = files[i]!;
       if (!file.type.startsWith('image/')) {
         toast.error(`${file.name} is not a valid image.`);
         continue;
@@ -59,7 +59,7 @@ export default function ScanToPdf() {
     if (newIndex < 0 || newIndex >= images.length) return;
     setImages(prev => {
       const arr = [...prev];
-      [arr[index], arr[newIndex]] = [arr[newIndex], arr[index]];
+      [arr[index], arr[newIndex]] = [arr[newIndex]!, arr[index]!];
       return arr;
     });
     setOutputUrl(null);

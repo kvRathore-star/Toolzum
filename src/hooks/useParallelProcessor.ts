@@ -44,7 +44,7 @@ export function useParallelProcessor() {
       for (let i = 0; i < files.length; i++) {
         if (signal.aborted) break;
         try {
-          results[i] = await processFn(files[i], i, signal);
+          results[i] = await processFn(files[i]!, i, signal);
         } catch (e) {
           results[i] = undefined;
         }
@@ -59,10 +59,10 @@ export function useParallelProcessor() {
       for (const chunk of chunks) {
         if (signal.aborted) break;
         const chunkResults = await Promise.allSettled(
-          chunk.map(i => processFn(files[i], i, signal))
+          chunk.map(i => processFn(files[i]!, i, signal))
         );
         chunkResults.forEach((r, j) => {
-          const idx = chunk[j];
+          const idx = chunk[j]!;
           results[idx] = r.status === 'fulfilled' ? r.value : undefined;
           done++;
         });

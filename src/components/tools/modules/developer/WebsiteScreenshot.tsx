@@ -106,9 +106,9 @@ export default function WebsiteScreenshot() {
     for (let i = 0; i < w * h; i++) {
       const si = i * 4;
       const di = i * 3;
-      pixels[di] = d[si];
-      pixels[di + 1] = d[si + 1];
-      pixels[di + 2] = d[si + 2];
+      pixels[di] = d[si] ?? 0;
+      pixels[di + 1] = d[si + 1] ?? 0;
+      pixels[di + 2] = d[si + 2] ?? 0;
     }
 
     return new Blob([buf], { type: 'image/tiff' });

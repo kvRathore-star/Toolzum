@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { rgb } from 'pdf-lib';
 import { PdfActionBase } from './PdfActionBase';
 
 export default function PdfBatesNumbering() {
@@ -42,7 +43,7 @@ export default function PdfBatesNumbering() {
         const startNum = (state?.startNum as number) || 1;
         const position = (state?.position as string) || 'bottom-right';
         for (let i = 0; i < pages.length; i++) {
-          const page = pages[i];
+          const page = pages[i]!;
           const { width, height } = page.getSize();
           const text = `${prefix}${String(startNum + i).padStart(4, '0')}`;
           const size = 10;
@@ -53,7 +54,7 @@ export default function PdfBatesNumbering() {
           if (position.includes('center')) x = (width - tw) / 2;
           if (position.includes('left')) x = margin;
           if (position.includes('top')) y = height - margin - size;
-          page.drawText(text, { x, y, size, font: boldFont, color: { r: 0.2, g: 0.2, b: 0.2 } });
+          page.drawText(text, { x, y, size, font: boldFont, color: rgb(0.2, 0.2, 0.2) });
         }
       }}
     />

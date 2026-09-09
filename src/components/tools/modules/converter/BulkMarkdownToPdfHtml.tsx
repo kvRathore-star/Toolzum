@@ -28,7 +28,7 @@ export default function BulkMarkdownToPdfHtml() {
     try {
       const { marked } = await import('marked');
       const html = await marked.parse(markdown);
-      const selectedTheme = themes.find(t => t.value === theme)?.css || themes[0].css;
+      const selectedTheme = themes.find(t => t.value === theme)?.css || themes[0]!.css;
       const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${fileName}</title><style>${selectedTheme}</style></head><body>${html}</body></html>`;
       setResultHtml(fullHtml);
       setShowPreview(true);

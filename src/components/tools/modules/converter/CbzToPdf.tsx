@@ -66,8 +66,8 @@ function parsePageRange(range: string, maxPage: number): number[] {
     const trimmed = part.trim();
     if (trimmed.includes('-')) {
       const [startStr, endStr] = trimmed.split('-').map(s => s.trim());
-      const start = parseInt(startStr, 10);
-      const end = parseInt(endStr, 10);
+      const start = parseInt(startStr!, 10);
+      const end = parseInt(endStr!, 10);
       if (!isNaN(start) && !isNaN(end)) {
         for (let i = Math.max(1, start); i <= Math.min(end, maxPage); i++) {
           pages.add(i - 1);
@@ -147,7 +147,7 @@ export default function CbzToPdf() {
         entry.blob = await zipEntry.async('blob');
       }
 
-      const firstBlob = entries[0].blob;
+      const firstBlob = entries[0]!.blob;
       const firstUrl = URL.createObjectURL(firstBlob);
       setPreview(firstUrl);
 
@@ -195,7 +195,7 @@ export default function CbzToPdf() {
 
       for (let idx = 0; idx < pagesToConvert.length; idx++) {
         const pageIdx = pagesToConvert[idx];
-        const entry = imageFiles[pageIdx];
+        const entry = imageFiles[pageIdx!]!;
         const imageBytes = await renderImageToPngBytes(entry.blob);
 
         let pageWidth: number, pageHeight: number;
@@ -241,7 +241,7 @@ export default function CbzToPdf() {
 
         if (pageLayout === 'double' && idx % 2 === 0 && idx < pagesToConvert.length - 1) {
           const nextIdx = pagesToConvert[idx + 1];
-          const nextEntry = imageFiles[nextIdx];
+          const nextEntry = imageFiles[nextIdx!]!;
           const nextBytes = await renderImageToPngBytes(nextEntry.blob);
           const nextPng = await pdfDoc.embedPng(nextBytes);
           const halfWidth = pageWidth / 2;

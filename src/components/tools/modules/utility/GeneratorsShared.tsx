@@ -11,8 +11,8 @@ import { labelClass } from '../MiscToolsShared';
 export { React, useState, useRef, useEffect, Copy, Download, History, RotateCcw, RefreshCw, Shuffle, User, CreditCard, Key, Hash, Braces, Sigma, Ticket, ImageIcon, BarChart3, Users, Palette, DollarSign, TrendingUp, Eye, List, toast, clipboardWrite, QRCodeLib, downloadOrShare, CalculatorShell, labelClass };
 
 export function randInt(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-export function randItem<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }
-export function shuffleArray<T>(arr: T[]): T[] { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+export function randItem<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]!; }
+export function shuffleArray<T>(arr: T[]): T[] { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j]!, a[i]!]; } return a; }
 
 export function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (

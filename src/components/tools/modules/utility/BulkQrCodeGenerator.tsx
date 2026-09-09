@@ -30,13 +30,13 @@ export default function BulkQrCodeGenerator() {
       const text = ev.target?.result as string;
       const lines = text.split('\n').filter(l => l.trim());
       if (lines.length < 2) { toast.error('CSV must have a header row + at least 1 data row'); return; }
-      const header = lines[0].split(',').map(h => h.trim().toLowerCase());
+      const header = lines[0]!.split(',').map(h => h.trim().toLowerCase());
       const valueIdx = header.findIndex(h => h === 'value' || h === 'url' || h === 'link' || h === 'data');
       const labelIdx = header.findIndex(h => h === 'label' || h === 'name' || h === 'title');
       if (valueIdx === -1) { toast.error('CSV must have a "value" or "url" column'); return; }
       const data = lines.slice(1).map(line => {
         const cols = line.split(',').map(c => c.trim());
-        return { label: labelIdx >= 0 ? cols[labelIdx] || `QR ${cols[valueIdx].substring(0, 20)}` : `QR ${cols[valueIdx].substring(0, 20)}`, value: cols[valueIdx] };
+        return { label: labelIdx >= 0 ? cols[labelIdx] || `QR ${cols[valueIdx]!.substring(0, 20)}` : `QR ${cols[valueIdx]!.substring(0, 20)}`, value: cols[valueIdx]! };
       });
       if (data.length > PRO_MAX && usage >= DAILY_LIMIT) { toast.error(`Free tier limited to ${DAILY_LIMIT} QR. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
       setCsvData(data);

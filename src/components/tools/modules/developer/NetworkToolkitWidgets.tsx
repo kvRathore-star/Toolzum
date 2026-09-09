@@ -48,7 +48,7 @@ export function IpAddressConverter() {
     const parts = ip.split('.').map(Number);
     if (parts.length !== 4 || parts.some(isNaN)) { setIsPrivate(null); return; }
     if (parts[0] === 10) { setIsPrivate(true); return; }
-    if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) { setIsPrivate(true); return; }
+    if (parts[0] === 172 && parts[1]! >= 16 && parts[1]! <= 31) { setIsPrivate(true); return; }
     if (parts[0] === 192 && parts[1] === 168) { setIsPrivate(true); return; }
     if (parts[0] === 127) { setIsPrivate(true); return; }
     if (parts[0] === 0) { setIsPrivate(true); return; }
@@ -66,8 +66,8 @@ export function IpAddressConverter() {
     const hex = num.toString(16).toUpperCase().padStart(8, '0');
 
     let classLabel = 'A';
-    if (parts[0] >= 192) classLabel = 'C';
-    else if (parts[0] >= 128) classLabel = 'B';
+    if (parts[0]! >= 192) classLabel = 'C';
+    else if (parts[0]! >= 128) classLabel = 'B';
 
     const report = 'IPv4 Address Analysis\n' +
       '=====================\n\n' +
@@ -214,14 +214,14 @@ export function Ipv6UlaGenerator() {
     const parts: string[] = [];
     for (let i = 0; i < 8; i++) {
       if (i === 0) parts.push('fd');
-      parts.push(bytes[i].toString(16).padStart(2, '0'));
+      parts.push(bytes[i]!.toString(16).padStart(2, '0'));
     }
     const full = parts.join('');
     const addr = full.replace(/(.{4})/g, '$1:').slice(0, -1);
     const shortened = addr.replace(/(:0)+:/, '::');
-    const subnet = 'fd' + bytes[0].toString(16).padStart(2, '0') + ':' +
-                   bytes[1].toString(16).padStart(2, '0') + ':' +
-                   bytes[2].toString(16).padStart(2, '0') + '::/48';
+    const subnet = 'fd' + bytes[0]!.toString(16).padStart(2, '0') + ':' +
+                   bytes[1]!.toString(16).padStart(2, '0') + ':' +
+                   bytes[2]!.toString(16).padStart(2, '0') + '::/48';
     setUla({ full: addr, shortened, subnet });
   }, []);
 

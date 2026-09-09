@@ -103,7 +103,7 @@ export function PdfWorkflowBuilder() {
     if (!files?.length) return;
     const entries: MergeFile[] = [];
     for (let i = 0; i < files.length; i++) {
-      entries.push({ name: files[i].name, buffer: await readFile(files[i]), id: uid() });
+      entries.push({ name: files[i]!.name, buffer: await readFile(files[i]!), id: uid() });
     }
     setMergeFiles(p => [...p, ...entries]);
     e.target.value = '';
@@ -118,7 +118,7 @@ export function PdfWorkflowBuilder() {
       const a = [...prev];
       const t = index + dir;
       if (t < 0 || t >= a.length) return a;
-      [a[index], a[t]] = [a[t], a[index]];
+      [a[index], a[t]] = [a[t]!, a[index]!];
       return a;
     });
   }, []);

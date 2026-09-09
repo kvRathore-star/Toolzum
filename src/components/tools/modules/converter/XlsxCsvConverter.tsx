@@ -52,21 +52,21 @@ export default function XlsxCsvConverter() {
       const names = wb.SheetNames;
       setSheetNames(names);
       const targetSheet = sheet || names[0];
-      setSheetName(targetSheet);
-      const ws = wb.Sheets[targetSheet];
+      setSheetName(targetSheet!);
+      const ws = wb.Sheets[targetSheet!];
       if (!ws) throw new Error(`Sheet "${targetSheet}" not found`);
 
       const ref = ws['!ref'];
       if (!ref) throw new Error('Empty sheet');
-      const [, endStr] = ref.split(':');
+      const [, endStr = ""] = ref.split(':');
       const endCol = endStr.replace(/[0-9]/g, '');
       const endRow = parseInt(endStr.replace(/[A-Z]/g, ''), 10);
 
       let rowsToProcess = endRow;
       if (rng !== 'all') {
         const [start, end] = rng.split('-').map(Number);
-        if (isNaN(start) || isNaN(end)) throw new Error('Invalid range. Use format: 1-100');
-        rowsToProcess = Math.min(end, endRow) - start + 1;
+        if (isNaN(start!) || isNaN(end!)) throw new Error('Invalid range. Use format: 1-100');
+        rowsToProcess = Math.min(end!, endRow) - start! + 1;
       }
 
       const csv = XLSX.utils.sheet_to_csv(ws, { FS: delim, blankrows: false });
@@ -169,7 +169,7 @@ export default function XlsxCsvConverter() {
     downloadOrShare(outputUrl, `converted.${ext}`);
   }, [outputUrl, direction]);
 
-  const previewColumns = previewData.length > 0 ? Object.keys(previewData[0]) : [];
+  const previewColumns = previewData.length > 0 ? Object.keys(previewData[0]!) : [];
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">

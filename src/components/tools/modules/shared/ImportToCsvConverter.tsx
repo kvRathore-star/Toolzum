@@ -65,7 +65,7 @@ export const MODES: Record<string, ConvertMode> = {
         block.split('\n').forEach(line => {
           const [k, ...v] = line.split(':');
           if (k && v.length) {
-            const key = k.split(';')[0].trim();
+            const key = k.split(';')[0]!.trim();
             row[key] = v.join(':').trim();
             headers.add(key);
           }

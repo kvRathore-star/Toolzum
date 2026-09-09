@@ -24,7 +24,7 @@ const CATEGORY_ORDER = [
 const grouped: Record<string, { slug: string; name: string; category: string }[]> = {};
 for (const tool of clientToolsRegistry) {
   if (!grouped[tool.category]) grouped[tool.category] = [];
-  grouped[tool.category].push({ slug: tool.slug, name: tool.name, category: tool.category });
+  grouped[tool.category]!.push({ slug: tool.slug, name: tool.name, category: tool.category });
 }
 
 const sortedCategories = CATEGORY_ORDER.filter((c) => grouped[c]?.length);
@@ -86,10 +86,10 @@ export default function SitemapPage() {
               <h2 className="text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
                 {category}
-                <span className="text-xs font-mono text-[var(--text-muted)]">({grouped[category].length})</span>
+                <span className="text-xs font-mono text-[var(--text-muted)]">({grouped[category]!.length})</span>
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {grouped[category]
+                {grouped[category]!
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map((tool) => (
                     <Link

@@ -48,7 +48,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
     const fileArray = Array.from(newFiles);
     setFiles(prev => [...prev, ...fileArray]);
     if (fileArray.length > 0 && !defaultFrom) {
-      setSrcFormat(detectFormat(fileArray[0].name) as typeof FORMATS[number]);
+      setSrcFormat(detectFormat(fileArray[0]!.name) as typeof FORMATS[number]);
     }
     setConvertedFiles([]);
   }, [defaultFrom]);
@@ -137,7 +137,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
   };
 
   const info = FORMAT_INFO[srcFormat];
-  const outFilename = downloadFilename || (convertedFiles.length > 0 ? convertedFiles[0].name : `converted.${dstFormat.toLowerCase()}`);
+  const outFilename = downloadFilename || (convertedFiles.length > 0 ? convertedFiles[0]!.name : `converted.${dstFormat.toLowerCase()}`);
 
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
@@ -146,17 +146,17 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3">
             <div className="text-xs font-semibold text-[var(--text-primary)] mb-1">{srcFormat} Info</div>
             <div className="text-[10px] text-[var(--text-muted)] space-y-0.5">
-              <div>Max size: <span className="font-medium text-[var(--text-secondary)]">{info.maxSize}</span></div>
-              <div>{info.features.join(' · ')}</div>
-              <div className="italic">{info.notes}</div>
+              <div>Max size: <span className="font-medium text-[var(--text-secondary)]">{info!.maxSize}</span></div>
+              <div>{info!.features.join(' · ')}</div>
+              <div className="italic">{info!.notes}</div>
             </div>
           </div>
           <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3">
             <div className="text-xs font-semibold text-[var(--text-primary)] mb-1">{dstFormat} Info</div>
             <div className="text-[10px] text-[var(--text-muted)] space-y-0.5">
-              <div>Max size: <span className="font-medium text-[var(--text-secondary)]">{FORMAT_INFO[dstFormat].maxSize}</span></div>
-              <div>{FORMAT_INFO[dstFormat].features.join(' · ')}</div>
-              <div className="italic">{FORMAT_INFO[dstFormat].notes}</div>
+              <div>Max size: <span className="font-medium text-[var(--text-secondary)]">{FORMAT_INFO[dstFormat]!.maxSize}</span></div>
+              <div>{FORMAT_INFO[dstFormat]!.features.join(' · ')}</div>
+              <div className="italic">{FORMAT_INFO[dstFormat]!.notes}</div>
             </div>
           </div>
         </div>

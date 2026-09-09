@@ -108,9 +108,9 @@ export default function IndianDocumentEnhancer() {
       const shadowThreshold = shadowRemoval ? 40 : 0;
 
       for (let i = 0; i < data.length; i += 4) {
-        let r = data[i];
-        let g = data[i + 1];
-        let b = data[i + 2];
+        let r = data[i] ?? 0;
+        let g = data[i + 1] ?? 0;
+        let b = data[i + 2] ?? 0;
 
         if (brightnessFactor !== 0) {
           r += brightnessFactor * 255;

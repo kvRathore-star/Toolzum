@@ -20,7 +20,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
   const [input, setInput] = useState('name,price,stock\nWidget,29.99,100\nGadget,49.99,50\nDoohickey,19.99,200');
   const [output, setOutput] = useState('');
 
-  const mode = MODES[activeSlug];
+  const mode = MODES[activeSlug]!;
 
   const handleConvert = useCallback(() => {
     try {

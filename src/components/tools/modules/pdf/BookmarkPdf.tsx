@@ -92,8 +92,8 @@ export default function BookmarkPdf() {
       const titleParts = isNaN(pageNum) ? parts : parts.slice(0, -1);
       const bmTitle = titleParts.join(' ').trim();
       if (!bmTitle || isNaN(pageNum) || pageNum < 1) continue;
-      while (stack.length && stack[stack.length - 1].depth >= depth) stack.pop();
-      const parent = stack.length ? stack[stack.length - 1].id : null;
+      while (stack.length && stack[stack.length - 1]!.depth >= depth) stack.pop();
+      const parent = stack.length ? stack[stack.length - 1]!.id : null;
       const id = genId();
       newBookmarks.push({ id, title: bmTitle, page: pageNum, parentId: parent });
       stack.push({ id, depth });

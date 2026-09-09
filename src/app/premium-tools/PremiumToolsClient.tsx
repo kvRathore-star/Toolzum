@@ -25,7 +25,7 @@ function groupProTools(tools: ToolMetadata[]): Record<string, ToolMetadata[]> {
   const groups: Record<string, ToolMetadata[]> = {};
   for (const tool of tools) {
     if (!groups[tool.category]) groups[tool.category] = [];
-    groups[tool.category].push(tool);
+    groups[tool.category]!.push(tool);
   }
   return groups;
 }
@@ -154,7 +154,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
                     <div className="flex items-center gap-2">
                       <h3 className="text-lg font-semibold text-[var(--text-primary)]">{category}</h3>
                       <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-                        {tools.length} Pro
+                        {tools!.length} Pro
                       </span>
                     </div>
                     {summary && <p className="text-sm text-[var(--text-secondary)] mt-0.5">{summary.desc}</p>}
@@ -164,7 +164,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
 
                 {!isCollapsed && (
                   <div className="px-5 pb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                    {tools.map(tool => {
+                    {tools!.map(tool => {
                       const toolTheme = getCategoryTheme(tool.category);
                       const ToolIcon = toolTheme.icon;
                       return (

@@ -12,7 +12,7 @@ export default function BulkHeicToJpg() {
       processFile={async (file) => {
         const { default: heic2any } = await import('heic2any');
         const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
-        const resultBlob = Array.isArray(blob) ? blob[0] : blob;
+        const resultBlob = Array.isArray(blob) ? blob[0]! : blob;
         return { name: file.name.replace(/\.(heic|heif)$/i, '.jpg'), blob: resultBlob };
       }}
     />

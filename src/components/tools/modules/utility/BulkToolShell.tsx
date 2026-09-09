@@ -107,7 +107,7 @@ export function BulkToolShell({
   const removeFile = useCallback((idx: number) => {
     setFiles(prev => prev.filter((_, i) => i !== idx));
     setPreviews(prev => {
-      URL.revokeObjectURL(prev[idx]);
+      URL.revokeObjectURL(prev[idx]!);
       return prev.filter((_, i) => i !== idx);
     });
     setProcessedBlobs([]);

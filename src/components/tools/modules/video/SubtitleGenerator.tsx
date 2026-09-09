@@ -159,7 +159,7 @@ export default function SubtitleGenerator() {
                       <input type="text" value={formatTime(entry.start)} aria-label={`Subtitle ${idx + 1} start time`} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
                         if (parts.length === 4) {
-                          const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
+                          const secs = parseInt(parts[0]!) * 3600 + parseInt(parts[1]!) * 60 + parseInt(parts[2]!) + parseInt(parts[3]!) / 1000;
                           updateEntry(entry.id, 'start', secs);
                         }
                       }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
@@ -167,7 +167,7 @@ export default function SubtitleGenerator() {
                       <input type="text" value={formatTime(entry.end)} aria-label={`Subtitle ${idx + 1} end time`} onChange={e => {
                         const parts = e.target.value.split(/[:,]/);
                         if (parts.length === 4) {
-                          const secs = parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]) + parseInt(parts[3]) / 1000;
+                          const secs = parseInt(parts[0]!) * 3600 + parseInt(parts[1]!) * 60 + parseInt(parts[2]!) + parseInt(parts[3]!) / 1000;
                           updateEntry(entry.id, 'end', secs);
                         }
                       }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
@@ -261,10 +261,10 @@ function TimedTextInput({ onAddEntry }: { onAddEntry: (text: string, startOffset
       let finalText = '';
       let interim = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) {
-          finalText += event.results[i][0].transcript + ' ';
+        if (event.results[i]!.isFinal) {
+          finalText += event.results[i]![0]!.transcript + ' ';
         } else {
-          interim += event.results[i][0].transcript;
+          interim += event.results[i]![0]!.transcript;
         }
       }
       setInterimText(interim);

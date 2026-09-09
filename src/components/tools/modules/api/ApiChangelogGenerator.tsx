@@ -16,7 +16,7 @@ export default function ApiChangelogGenerator() {
     const categorized: Record<string, string[]> = { Added: [], Changed: [], Deprecated: [], Removed: [], Fixed: [], Security: [] };
     for (const line of lines) {
       const [cat] = line.split(':');
-      const clean = cat.trim();
+      const clean = cat!.trim();
       if (categorized[clean]) categorized[clean].push(line.trim());
     }
     let output = `## Changelog\n\n### ${newVersion} (${new Date().toISOString().split('T')[0]})\n`;

@@ -39,17 +39,17 @@ function applyConvolution(
         for (let kx = 0; kx < kernelSize; kx++) {
           const idx = ((y + ky - half) * width + (x + kx - half)) * 4;
           const kidx = ky * kernelSize + kx;
-          const wt = kernel[kidx];
-          r += data[idx] * wt;
-          g += data[idx + 1] * wt;
-          b += data[idx + 2] * wt;
+          const wt = kernel[kidx] ?? 0;
+          r += (data[idx] ?? 0) * wt;
+          g += (data[idx + 1] ?? 0) * wt;
+          b += (data[idx + 2] ?? 0) * wt;
         }
       }
       const oidx = (y * width + x) * 4;
       output[oidx] = Math.max(0, Math.min(255, r));
       output[oidx + 1] = Math.max(0, Math.min(255, g));
       output[oidx + 2] = Math.max(0, Math.min(255, b));
-      output[oidx + 3] = data[oidx + 3];
+      output[oidx + 3] = data[oidx + 3] ?? 0;
     }
   }
   return new ImageData(output, width, height);
@@ -85,7 +85,7 @@ function buildBlurKernel(size: number): number[] {
   const kernel: number[] = [];
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
-      kernel.push(k1d[i] * k1d[j]);
+      kernel.push((k1d[i] ?? 0) * (k1d[j] ?? 0));
     }
   }
   return kernel;

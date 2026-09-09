@@ -31,7 +31,7 @@ export default function TextSorter() {
           {[
             ['A→Z', 'az'], ['Z→A', 'za'], ['By Length', 'length'], ['Randomize', 'random'], ['Deduplicate', 'unique']
           ].map(([label, id]) => (
-            <button key={id} onClick={() => sort(id)}
+            <button key={id} onClick={() => sort(id!)}
               className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {label}
             </button>

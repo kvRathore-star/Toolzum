@@ -38,7 +38,7 @@ function numberToWords(num: number): string {
   if (num === 0) return "Zero";
   const a = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
   const b = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-  function g(n: number): string { if (n < 20) return a[n]; const d = n % 10; return b[Math.floor(n / 10)] + (d ? " " + a[d] : ""); }
+  function g(n: number): string { if (n < 20) return a[n]!; const d = n % 10; return b[Math.floor(n / 10)]! + (d ? " " + a[d]! : ""); }
   function c(n: number): string {
     if (n === 0) return "";
     let s = "";

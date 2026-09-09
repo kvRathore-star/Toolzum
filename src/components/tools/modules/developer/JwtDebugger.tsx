@@ -16,8 +16,8 @@ export default function JwtDebugger() {
     const parts = token.trim().split('.');
     if (parts.length !== 3) { setError('Invalid JWT — expected 3 parts (header.payload.signature)'); setHeader(''); setPayload(''); return; }
     try {
-      const h = JSON.parse(atob(parts[0]));
-      const p = JSON.parse(atob(parts[1]));
+      const h = JSON.parse(atob(parts[0] ?? ""));
+      const p = JSON.parse(atob(parts[1] ?? ""));
       setHeader(JSON.stringify(h, null, 2));
       setPayload(JSON.stringify(p, null, 2));
     } catch { setError('Invalid Base64 encoding in JWT parts'); setHeader(''); setPayload(''); }

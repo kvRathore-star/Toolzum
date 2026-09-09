@@ -359,7 +359,7 @@ function makeAsciiArt(text: string, style: string): string {
     };
     const lines = ['', '', '', '', ''];
     for (const ch of chars) {
-      const glyph = FONT[ch] || FONT[' '];
+      const glyph = FONT[ch] || FONT[' ']!;
       for (let r = 0; r < 5; r++) lines[r] += glyph[r] + ' ';
     }
     return lines.join('\n');
@@ -387,7 +387,7 @@ function makeAsciiArt(text: string, style: string): string {
     };
     const lines = ['', '', ''];
     for (const ch of chars) {
-      const glyph = DIGITS[ch] || DIGITS[' '];
+      const glyph = DIGITS[ch] || DIGITS[' ']!;
       for (let r = 0; r < 3; r++) lines[r] += glyph[r] + ' ';
     }
     return lines.join('\n');
@@ -411,7 +411,7 @@ export function EmojiPicker() {
     const groups: Record<string, typeof EMOJIS> = {};
     for (const e of filtered) {
       if (!groups[e.c]) groups[e.c] = [];
-      groups[e.c].push(e);
+      groups[e.c]!.push(e);
     }
     return groups;
   }, [filtered]);
@@ -622,12 +622,12 @@ const FONT_PATTERNS: Record<string, Record<string, string[]>> = {
 };
 
 function renderAsciiFont(text: string, font: string): string {
-  const pattern = FONT_PATTERNS[font] || FONT_PATTERNS['standard'];
+  const pattern = FONT_PATTERNS[font] || FONT_PATTERNS['standard']!;
   const upper = text.toUpperCase();
   const lines: string[] = ['', '', '', '', ''];
   
   for (const char of upper) {
-    const glyph = pattern[char] || pattern[' '];
+    const glyph = pattern[char] || pattern[' ']!;
     for (let i = 0; i < 5; i++) {
       lines[i] += glyph[i] + ' ';
     }

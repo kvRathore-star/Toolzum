@@ -86,15 +86,15 @@ export function useUndoHistory<T>(initialState: T, maxEntries = 50) {
     locking.current = true;
     const newIdx = index - 1;
     setIndex(newIdx);
-    setFuture(prev => [past[index], ...prev]);
+    setFuture(prev => [past[index]!, ...prev]);
     setTimeout(() => { locking.current = false; }, 0);
-    return past[newIdx].state;
+    return past[newIdx]!.state;
   }, [index, past]);
 
   const redo = useCallback((): T | null => {
     if (future.length === 0) return null;
     locking.current = true;
-    const entry = future[0];
+    const entry = future[0]!;
     setFuture(prev => prev.slice(1));
     setIndex(prev => prev + 1);
     setPast(prev => [...prev, entry]);

@@ -162,19 +162,19 @@ async function buildWoff(sfntBuffer: ArrayBuffer, flavor: number): Promise<Array
 
   for (let i = 0; i < numTables; i++) {
     const t = tables[i];
-    const tagNum = (t.tag.charCodeAt(0) << 24) | (t.tag.charCodeAt(1) << 16) |
-                   (t.tag.charCodeAt(2) << 8) | t.tag.charCodeAt(3);
+    const tagNum = (t!.tag.charCodeAt(0) << 24) | (t!.tag.charCodeAt(1) << 16) |
+                   (t!.tag.charCodeAt(2) << 8) | t!.tag.charCodeAt(3);
     wU32(tagNum);
-    wU32(entries[i].offset);
-    wU32(compressed[i].compLen);
-    wU32(compressed[i].origLen);
-    wU32(compressed[i].checksum);
+    wU32(entries[i]!.offset);
+    wU32(compressed[i]!.compLen);
+    wU32(compressed[i]!.origLen);
+    wU32(compressed[i]!.checksum);
   }
 
   const fullArray = new Uint8Array(woffBuf);
   for (let i = 0; i < numTables; i++) {
-    const src = new Uint8Array(compressed[i].data);
-    fullArray.set(src, entries[i].offset);
+    const src = new Uint8Array(compressed[i]!.data);
+    fullArray.set(src, entries[i]!.offset);
   }
 
   return woffBuf;

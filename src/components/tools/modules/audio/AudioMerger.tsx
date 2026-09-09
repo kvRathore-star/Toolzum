@@ -107,7 +107,7 @@ export default function AudioMerger() {
     setFiles((prev) => prev.filter((_, i) => i !== fileIdx));
     setOrder((prev) => {
       const remaining = prev.filter((_, i) => i !== displayIdx);
-      return remaining.map((i) => (i > fileIdx ? i - 1 : i));
+      return remaining.map((i) => (i > fileIdx! ? i - 1 : i));
     });
     setOutputUrl(null);
   };
@@ -116,7 +116,7 @@ export default function AudioMerger() {
     if (displayIdx === 0) return;
     setOrder((prev) => {
       const next = [...prev];
-      [next[displayIdx - 1], next[displayIdx]] = [next[displayIdx], next[displayIdx - 1]];
+      [next[displayIdx - 1]!, next[displayIdx]!] = [next[displayIdx]!, next[displayIdx - 1]!];
       return next;
     });
     setOutputUrl(null);
@@ -126,7 +126,7 @@ export default function AudioMerger() {
     if (displayIdx >= order.length - 1) return;
     setOrder((prev) => {
       const next = [...prev];
-      [next[displayIdx], next[displayIdx + 1]] = [next[displayIdx + 1], next[displayIdx]];
+      [next[displayIdx]!, next[displayIdx + 1]!] = [next[displayIdx + 1]!, next[displayIdx]!];
       return next;
     });
     setOutputUrl(null);
@@ -155,7 +155,7 @@ export default function AudioMerger() {
       const inputFiles: { name: string; ext: string }[] = [];
 
       for (let i = 0; i < order.length; i++) {
-        const file = files[order[i]];
+        const file = files[order[i]!]!;
         const ext = file.name.split('.').pop() || 'mp3';
         const vfsName = `input${i}.${ext}`;
         await ff.writeFile(vfsName, await fetchFile(file));
@@ -284,9 +284,9 @@ export default function AudioMerger() {
                 >
                   <span className="text-[10px] text-[var(--text-muted)] w-5 text-right font-mono">{displayIdx + 1}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
+                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">{file!.name}</p>
                     <p className="text-[10px] text-[var(--text-muted)]">
-                      {(file.size / 1024 / 1024).toFixed(1)} MB
+                      {(file!.size / 1024 / 1024).toFixed(1)} MB
                       {durations[fileIdx] ? ` · ${formatTime(durations[fileIdx])}` : ''}
                     </p>
                   </div>

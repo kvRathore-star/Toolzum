@@ -38,10 +38,10 @@ export default function LiveTranscription() {
           let currentFinal = '';
 
           for (let i = event.resultIndex; i < event.results.length; ++i) {
-            if (event.results[i].isFinal) {
-              currentFinal += event.results[i][0].transcript + ' ';
+            if (event.results[i]!.isFinal) {
+              currentFinal += event.results[i]![0]!.transcript + ' ';
             } else {
-              currentInterim += event.results[i][0].transcript;
+              currentInterim += event.results[i]![0]!.transcript;
             }
           }
           

@@ -18,7 +18,7 @@ export function EtaCalculator() {
     let out = `${hh}h ${mm}m`;
     if (start) {
       const [sh, sm] = start.split(':').map(Number);
-      const startMin = sh * 60 + sm;
+      const startMin = sh! * 60 + sm!;
       const totalMin = startMin + hh * 60 + mm;
       const ah = Math.floor(totalMin / 60) % 24;
       const am = totalMin % 60;

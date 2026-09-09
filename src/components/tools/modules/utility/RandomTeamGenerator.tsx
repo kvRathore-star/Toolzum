@@ -5,7 +5,7 @@ import { Input, shuffleArray } from './GeneratorsShared';
 
 export default function RandomTeamGenerator() {
   const [input, setInput] = useState('Alice\nBob\nCharlie\nDiana\nEve\nFrank'); const [numTeams, setNumTeams] = useState(2); const [teams, setTeams] = useState<string[][]>([]);
-  const generate = () => { const names = input.split('\n').map(s => s.trim()).filter(Boolean); const shuffled = shuffleArray(names); const t: string[][] = Array.from({ length: numTeams }, () => []); shuffled.forEach((name, i) => t[i % numTeams].push(name)); setTeams(t); };
+  const generate = () => { const names = input.split('\n').map(s => s.trim()).filter(Boolean); const shuffled = shuffleArray(names); const t: string[][] = Array.from({ length: numTeams }, () => []); shuffled.forEach((name, i) => t[i % numTeams]!.push(name)); setTeams(t); };
   const teamColors = ['text-emerald-500', 'text-violet-500', 'text-amber-500', 'text-blue-700 dark:text-blue-400', 'text-pink-500', 'text-cyan-500'];
 
   const presets = [

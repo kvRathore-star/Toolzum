@@ -88,7 +88,7 @@ async function fetchWithCache(url: string, type: 'text/javascript' | 'applicatio
     const buf = await resp.arrayBuffer();
     const bytes = new Uint8Array(buf);
     let binary = '';
-    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]!);
     const b64 = btoa(binary);
     await setCached(cacheKey, b64);
     return b64;
@@ -207,7 +207,7 @@ export function useFFmpeg() {
 
     try {
       for (let i = 0; i < CDN_FALLBACKS.length; i++) {
-        const loaded = await attemptLoad(CDN_FALLBACKS[i]);
+        const loaded = await attemptLoad(CDN_FALLBACKS[i]!);
         if (loaded) {
           setIsLoaded(true);
           hasLoadedOnce = true;

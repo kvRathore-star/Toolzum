@@ -12,7 +12,7 @@ const PRO_SLUG_SET = new Set(proSlugs);
 function isCurrentToolPro(): boolean {
   if (typeof window === "undefined") return false;
   const parts = window.location.pathname.split("/").filter(Boolean);
-  return parts.length >= 2 ? PRO_SLUG_SET.has(parts[1]) : false;
+  return parts.length >= 2 ? PRO_SLUG_SET.has(parts[1]!) : false;
 }
 
 type PlanLimitReason = "file_size" | "batch_size" | "pro_tool_anon";

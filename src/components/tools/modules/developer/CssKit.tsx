@@ -286,13 +286,13 @@ export function CssToScss() {
       const grouped: Record<string, string[]> = {};
       rules.forEach(rule => {
         const parts = rule.selector.split(/\s+/);
-        const parent = parts[0];
+        const parent = parts[0] ?? "";
         const child = parts.slice(1).join(' ');
         if (!grouped[parent]) grouped[parent] = [];
         if (child) {
-          grouped[parent].push(`  & ${child} {\n${rule.body.map(b => `    ${b}`).join('\n')}\n  }`);
+          grouped[parent]!.push(`  & ${child} {\n${rule.body.map(b => `    ${b}`).join('\n')}\n  }`);
         } else {
-          grouped[parent].push(...rule.body.map(b => `  ${b}`));
+          grouped[parent]!.push(...rule.body.map(b => `  ${b}`));
         }
       });
 
@@ -574,7 +574,7 @@ export function CssValidator() {
       const prop = trimmed.match(/^([\w-]+)\s*:/);
       if (prop) {
         const known = ['color', 'background', 'margin', 'padding', 'border', 'display', 'position', 'width', 'height', 'font-size', 'font-weight', 'text-align', 'line-height', 'border-radius', 'box-shadow', 'opacity', 'transform', 'transition', 'animation', 'flex', 'grid', 'overflow', 'z-index', 'cursor', 'float', 'clear', 'top', 'left', 'right', 'bottom', 'max-width', 'min-width', 'max-height', 'min-height', 'gap', 'justify-content', 'align-items', 'flex-direction', 'flex-wrap', 'order', 'flex-grow', 'flex-shrink', 'flex-basis', 'align-self', 'justify-self', 'place-self', 'grid-template-columns', 'grid-template-rows', 'grid-column', 'grid-row', 'grid-area', 'grid-gap', 'grid-auto-flow', 'grid-auto-columns', 'grid-auto-rows', 'column-gap', 'row-gap', 'justify-items', 'justify-content', 'align-content', 'place-content', 'place-items', 'place-content', 'inset', 'object-fit', 'object-position', 'aspect-ratio', 'contain', 'resize', 'user-select', 'pointer-events', 'visibility', 'clip-path', 'mask', 'filter', 'backdrop-filter', 'mix-blend-mode', 'isolation', 'perspective', 'transform-origin', 'transform-style', 'backface-visibility', 'will-change', 'container-type', 'container-name', 'container'];
-        if (!known.includes(prop[1]) && !prop[1].startsWith('--')) {
+        if (!known.includes(prop[1]!) && !prop[1]!.startsWith('--')) {
           found.push({ line: i + 1, severity: 'warning', message: `Possible unknown property: "${prop[1]}"`, suggestion: 'Check spelling or add vendor prefix' });
         }
       }

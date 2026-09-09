@@ -23,7 +23,7 @@ const FONTS_LIST: FontOption[] = [
 
 export default function FontGenerator() {
   const [text, setText] = useState('Google Fonts Preview');
-  const [selectedFont, setSelectedFont] = useState<FontOption>(FONTS_LIST[0]);
+  const [selectedFont, setSelectedFont] = useState<FontOption>(FONTS_LIST[0]!);
   const [copied, setCopied] = useState(false);
 
   const handleCopyCSS = () => {

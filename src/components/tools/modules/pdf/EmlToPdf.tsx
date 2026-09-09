@@ -18,11 +18,11 @@ function parseEml(text: string): { headers: Record<string, string>; body: string
   const headers: Record<string, string> = {};
   let i = 0;
   for (; i < lines.length; i++) {
-    if (lines[i].trim() === '') break;
-    const colonIdx = lines[i].indexOf(':');
+    if (lines[i]!.trim() === '') break;
+    const colonIdx = lines[i]!.indexOf(':');
     if (colonIdx > 0) {
-      const key = lines[i].substring(0, colonIdx).trim();
-      const val = lines[i].substring(colonIdx + 1).trim();
+      const key = lines[i]!.substring(0, colonIdx).trim();
+      const val = lines[i]!.substring(colonIdx + 1).trim();
       headers[key.toLowerCase()] = val;
     }
   }
@@ -184,7 +184,7 @@ export default function EmlToPdf() {
 
       const boundaryMatch = ct.match(/boundary="?([^"\s;]+)"?/);
       if (boundaryMatch) {
-        bodyText = extractPlainTextFromMultipart(bodyText, boundaryMatch[1]);
+        bodyText = extractPlainTextFromMultipart(bodyText, boundaryMatch[1] ?? "");
       } else if (ct.includes('text/html')) {
         bodyText = stripHtml(bodyText);
       }

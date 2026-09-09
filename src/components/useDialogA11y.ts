@@ -53,8 +53,8 @@ export function useDialogA11y<T extends HTMLElement>(
         e.preventDefault();
         return;
       }
-      const first = items[0];
-      const last = items[items.length - 1];
+      const first = items[0]!;
+      const last = items[items.length - 1]!;
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();

@@ -18,14 +18,14 @@ interface GifInfo {
 
 function parseGifInfo(buffer: ArrayBuffer): GifInfo {
   const view = new Uint8Array(buffer);
-  const width = view[6] | (view[7] << 8);
-  const height = view[8] | (view[9] << 8);
+  const width = (view[6] ?? 0) | ((view[7] ?? 0) << 8);
+  const height = (view[8] ?? 0) | ((view[9] ?? 0) << 8);
   let frameCount = 0;
   let durationMs = 0;
   for (let i = 0; i < view.length - 8; i++) {
     if (view[i] === 0x21 && view[i + 1] === 0xF9 && view[i + 2] === 0x04) {
       frameCount++;
-      const delayCs = view[i + 4] | (view[i + 5] << 8);
+      const delayCs = (view[i + 4] ?? 0) | ((view[i + 5] ?? 0) << 8);
       durationMs += delayCs * 10;
     }
   }

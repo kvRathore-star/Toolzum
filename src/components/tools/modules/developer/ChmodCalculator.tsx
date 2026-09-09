@@ -8,7 +8,7 @@ function toNumericPerm(s: string): string {
   let num = 0;
   const categories = ['u', 'g', 'o'];
   for (let ci = 0; ci < 3; ci++) {
-    const part = parts.find(p => p.startsWith(categories[ci])) || '';
+    const part = parts.find(p => p.startsWith(categories[ci]!)) || '';
     const perm = part.split('=')[1] || '';
     let val = 0;
     if (perm.includes('r')) val += 4;
@@ -29,7 +29,7 @@ function toSymbolicPerm(n: string): string {
     if (v & 1) s += 'x'; else s += '-';
     return s;
   };
-  return `u=${perm(nums[0])},g=${perm(nums[1])},o=${perm(nums[2])}`;
+  return `u=${perm(nums[0]!)},g=${perm(nums[1]!)},o=${perm(nums[2]!)}`;
 }
 
 export default function ChmodCalculator() {
@@ -66,9 +66,9 @@ export default function ChmodCalculator() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <div className="grid grid-cols-3 gap-4">
               {[
-                { label: 'Owner', val: parseInt(numeric[0]) },
-                { label: 'Group', val: parseInt(numeric[1]) },
-                { label: 'Others', val: parseInt(numeric[2]) },
+                { label: 'Owner', val: parseInt(numeric[0]!) },
+                { label: 'Group', val: parseInt(numeric[1]!) },
+                { label: 'Others', val: parseInt(numeric[2]!) },
               ].map(({ label, val }) => (
                 <div key={label} className="text-center">
                   <div className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-1">{label}</div>

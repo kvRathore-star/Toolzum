@@ -20,7 +20,7 @@ export default function BulkAudioNormalizer() {
         for (let ch = 0; ch < numChannels; ch++) {
           const data = audioBuf.getChannelData(ch);
           for (let i = 0; i < length; i++) {
-            const abs = Math.abs(data[i]);
+            const abs = Math.abs(data[i]!);
             if (abs > maxSample) maxSample = abs;
           }
         }
@@ -67,7 +67,7 @@ async function audioBufferToWav(audioBuf: AudioBuffer): Promise<Blob> {
   let offset = 44;
   for (let i = 0; i < length; i++) {
     for (let ch = 0; ch < numChannels; ch++) {
-      const sample = Math.max(-1, Math.min(1, audioBuf.getChannelData(ch)[i]));
+      const sample = Math.max(-1, Math.min(1, audioBuf.getChannelData(ch)[i]!));
       view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
       offset += 2;
     }

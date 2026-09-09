@@ -96,7 +96,7 @@ export default function ChartMaker() {
   const parsedData = data.map((r, i) => ({
     label: r.label || `Item ${i + 1}`,
     value: parseFloat(r.value) || 0,
-    color: PALETTES[paletteIndex].colors[i % PALETTES[paletteIndex].colors.length],
+    color: PALETTES[paletteIndex]!.colors[i % PALETTES[paletteIndex]!.colors.length] ?? "",
   }));
 
   const renderChart = () => {
@@ -263,16 +263,16 @@ export default function ChartMaker() {
 
       const area = chartType === 'area';
       ctx.beginPath();
-      if (area) ctx.moveTo(points[0].x, pad.top + chartH);
-      ctx.moveTo(points[0].x, points[0].y);
+      if (area) ctx.moveTo(points[0]!.x, pad.top + chartH);
+      ctx.moveTo(points[0]!.x, points[0]!.y);
       points.forEach((p, i) => {
         if (i === 0) return;
-        const prev = points[i - 1];
+        const prev = points[i - 1]!;
         const cpx = (prev.x + p.x) / 2;
         ctx.bezierCurveTo(cpx, prev.y, cpx, p.y, p.x, p.y);
       });
       if (area) {
-        ctx.lineTo(points[points.length - 1].x, pad.top + chartH);
+        ctx.lineTo(points[points.length - 1]!.x, pad.top + chartH);
         ctx.closePath();
         const gradient = ctx.createLinearGradient(0, pad.top, 0, pad.top + chartH);
         gradient.addColorStop(0, hexToRgba(items[0]?.color || '#36A2EB', 0.3));
@@ -544,7 +544,7 @@ export default function ChartMaker() {
                 <button key={p.name} onClick={() => setPaletteIndex(i)} className={`h-8 rounded-lg border-2 transition-all ${paletteIndex === i ? 'border-blue-500 shadow-md scale-105' : 'border-[var(--border-subtle)]'}`} title={p.name} style={{ background: `linear-gradient(90deg, ${p.colors.slice(0, 5).join(', ')})` }} />
               ))}
             </div>
-            <p className="text-xs text-[var(--text-secondary)] mt-1">{PALETTES[paletteIndex].name}</p>
+            <p className="text-xs text-[var(--text-secondary)] mt-1">{PALETTES[paletteIndex]!.name}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">

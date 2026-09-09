@@ -171,7 +171,7 @@ export function DayOfWeekCalculator() {
   const presets = [
     { label: 'Christmas', apply: () => { setDate('2026-12-25'); } },
     { label: 'New Year', apply: () => { setDate('2027-01-01'); } },
-    { label: 'Today', apply: () => { setDate(new Date().toISOString().split('T')[0]); } },
+    { label: 'Today', apply: () => { setDate(new Date().toISOString().split('T')[0]!); } },
   ];
   const d = new Date(date);
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -181,7 +181,7 @@ export function DayOfWeekCalculator() {
     <CalculatorShell category="Calculator" title="Day of Week Calculator" result={result} onCalculate={calc} presets={presets} accent="orange" customResult={
       result ? (
         <div className="text-center">
-          <div className={`text-3xl font-bold ${colors[dayName] || 'text-indigo-700 dark:text-indigo-400'}`}>{dayName}</div>
+          <div className={`text-3xl font-bold ${colors[dayName!] || 'text-indigo-700 dark:text-indigo-400'}`}>{dayName}</div>
         </div>
       ) : null
     }>

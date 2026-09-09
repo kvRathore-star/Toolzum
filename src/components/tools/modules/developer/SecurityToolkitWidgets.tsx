@@ -156,7 +156,7 @@ export function OAuthScopeBuilder() {
   };
 
   const [activeProvider, setActiveProvider] = useState('Google');
-  const scopes = SCOPE_DB[activeProvider];
+  const scopes = SCOPE_DB[activeProvider] ?? [];
 
   const toggleScope = (label: string) => {
     setSelectedScopes(prev => ({ ...prev, [label]: !prev[label] }));
@@ -318,8 +318,8 @@ export function OAuthStateValidator() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setState(PRESETS.valid)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
-        <button onClick={() => setState(PRESETS.invalid)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
+        <button onClick={() => setState(PRESETS.valid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
+        <button onClick={() => setState(PRESETS.invalid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>

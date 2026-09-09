@@ -43,7 +43,7 @@ export default function BatchImageEditor() {
       if (!ctx) return;
 
       for (let i = 0; i < toProcess; i++) {
-        const file = files[i];
+        const file = files[i]!;
         const img = await new Promise<HTMLImageElement>((resolve, reject) => {
           const image = new Image();
           image.onload = () => resolve(image);

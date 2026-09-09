@@ -14,8 +14,8 @@ function parsePageRange(input: string, max: number): number[] {
     if (!trimmed) continue;
     if (trimmed.includes('-')) {
       const [startStr, endStr] = trimmed.split('-');
-      const start = parseInt(startStr, 10);
-      const end = parseInt(endStr, 10);
+      const start = parseInt(startStr ?? "", 10);
+      const end = parseInt(endStr ?? "", 10);
       if (!isNaN(start) && !isNaN(end)) {
         const from = Math.max(1, Math.min(start, end));
         const to = Math.min(max, Math.max(start, end));

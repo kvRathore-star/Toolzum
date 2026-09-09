@@ -56,10 +56,10 @@ export default function ImageToIco() {
       let o = 40 + (height - 1 - y) * paddedRowSize;
       for (let x = 0; x < width; x++) {
         const i = rowStart + x * 4;
-        view.setUint8(o++, data[i + 2]);
-        view.setUint8(o++, data[i + 1]);
-        view.setUint8(o++, data[i]);
-        view.setUint8(o++, data[i + 3]);
+        view.setUint8(o++, data[i + 2] ?? 0);
+        view.setUint8(o++, data[i + 1] ?? 0);
+        view.setUint8(o++, data[i] ?? 0);
+        view.setUint8(o++, data[i + 3] ?? 0);
       }
     }
 
@@ -67,7 +67,7 @@ export default function ImageToIco() {
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const i = (y * width + x) * 4;
-        if (data[i + 3] < 128) {
+        if ((data[i + 3] ?? 0) < 128) {
           const byteIdx = andOffset + y * andRowSize + Math.floor(x / 8);
           const bitIdx = 7 - (x % 8);
           view.setUint8(byteIdx, view.getUint8(byteIdx) | (1 << bitIdx));
@@ -144,7 +144,7 @@ export default function ImageToIco() {
 
       let imgDataOffset = 6 + sizesToGenerate.length * 16;
       for (let i = 0; i < sizesToGenerate.length; i++) {
-        const size = sizesToGenerate[i];
+        const size = sizesToGenerate[i]!;
         const w = size >= 256 ? 0 : size;
         const h = size >= 256 ? 0 : size;
         icoView.setUint8(offset++, w);
@@ -153,9 +153,9 @@ export default function ImageToIco() {
         icoView.setUint8(offset++, 0);
         icoView.setUint16(offset, 1, true); offset += 2;
         icoView.setUint16(offset, 32, true); offset += 2;
-        icoView.setUint32(offset, iconDir[i].byteLength, true); offset += 4;
+        icoView.setUint32(offset, iconDir[i]!.byteLength, true); offset += 4;
         icoView.setUint32(offset, imgDataOffset, true); offset += 4;
-        imgDataOffset += iconDir[i].byteLength;
+        imgDataOffset += iconDir[i]!.byteLength;
       }
 
       for (const bmp of iconDir) {

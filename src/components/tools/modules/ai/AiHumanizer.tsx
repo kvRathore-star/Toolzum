@@ -154,7 +154,7 @@ function readableLabel(score: number): string {
 }
 
 function pick<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)];
+  return arr[Math.floor(Math.random() * arr.length)]!;
 }
 
 function applyRules(text: string, rules: [RegExp, string][], intensity: number): string {
@@ -174,7 +174,7 @@ function addTransitions(text: string, tone: Tone, intensity: number): string {
   const sents = text.match(/[^.!?]+[.!?]*/g) || [text];
   let r = sents[0] || '';
   for (let i = 1; i < sents.length; i++) {
-    const s = sents[i].trim();
+    const s = sents[i]!.trim();
     if (s && Math.random() < intensity * 0.4) {
       const word = pick(TRANSITIONS[tone]);
       r += ' ' + word + ', ' + s.charAt(0).toLowerCase() + s.slice(1);

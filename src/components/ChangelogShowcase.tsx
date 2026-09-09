@@ -129,7 +129,7 @@ function ToolExpansionDemo() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
+      ([entry]) => { if (entry!.isIntersecting) setIsVisible(true); },
       { threshold: 0.5 }
     );
     if (ref.current) observer.observe(ref.current);

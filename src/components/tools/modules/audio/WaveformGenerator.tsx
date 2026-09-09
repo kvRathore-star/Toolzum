@@ -24,12 +24,12 @@ function downsample(data: Float32Array, target: number): Float32Array {
     const start = Math.floor(i * block);
     const end = Math.floor((i + 1) * block);
     let sum = 0;
-    for (let j = start; j < end; j++) sum += Math.abs(data[j]);
+    for (let j = start; j < end; j++) sum += Math.abs(data[j]!);
     result[i] = (end - start) > 0 ? sum / (end - start) : 0;
   }
   let max = 0;
-  for (let i = 0; i < target; i++) if (result[i] > max) max = result[i];
-  if (max > 0) for (let i = 0; i < target; i++) result[i] /= max;
+  for (let i = 0; i < target; i++) if (result[i]! > max) max = result[i]!;
+  if (max > 0) for (let i = 0; i < target; i++) result[i]! /= max;
   return result;
 }
 
@@ -86,7 +86,7 @@ function renderWaveform(
     const aw = bw - gap;
     const rr = Math.min(borderRadius, aw / 2);
     for (let i = 0; i < count; i++) {
-      const v = Math.abs(smp[Math.floor((i / count) * n)]);
+      const v = Math.abs(smp[Math.floor((i / count) * n)]!);
       const bh = Math.max(1, v * h);
       ctx.fillStyle = getFill(i, count);
       if (mirror) {
@@ -103,11 +103,11 @@ function renderWaveform(
       const v = smp[i];
       if (mirror) {
         const x = (i / (n - 1)) * w;
-        const y = h / 2 - v * (h / 2);
+        const y = h / 2 - v! * (h / 2);
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       } else {
         const x = (i / (n - 1)) * w;
-        const y = h / 2 + v * (h / 2);
+        const y = h / 2 + v! * (h / 2);
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
     }
@@ -118,7 +118,7 @@ function renderWaveform(
       ctx.beginPath();
       for (let i = 0; i < n; i++) {
         const x = (i / (n - 1)) * w;
-        const y = h / 2 + Math.abs(smp[i]) * (h / 2);
+        const y = h / 2 + Math.abs(smp[i]!) * (h / 2);
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.globalAlpha = 0.3;
@@ -131,7 +131,7 @@ function renderWaveform(
     ctx.moveTo(0, baseY);
     for (let i = 0; i < n; i++) {
       const x = (i / (n - 1)) * w;
-      const v = Math.abs(smp[i]);
+      const v = Math.abs(smp[i]!);
       ctx.lineTo(x, mirror ? baseY - v * (h / 2) : baseY - v * h);
     }
     ctx.lineTo(w, baseY);
@@ -143,7 +143,7 @@ function renderWaveform(
       ctx.moveTo(0, h / 2);
       for (let i = 0; i < n; i++) {
         const x = (i / (n - 1)) * w;
-        ctx.lineTo(x, h / 2 + Math.abs(smp[i]) * (h / 2));
+        ctx.lineTo(x, h / 2 + Math.abs(smp[i]!) * (h / 2));
       }
       ctx.lineTo(w, h / 2);
       ctx.closePath();
@@ -161,7 +161,7 @@ function renderWaveform(
     ctx.save();
     ctx.translate(cx, cy);
     for (let i = 0; i < count; i++) {
-      const v = Math.abs(smp[Math.floor((i / count) * n)]);
+      const v = Math.abs(smp[Math.floor((i / count) * n)]!);
       const r1 = minR;
       const r2 = minR + v * (maxR - minR);
       const angle = (i / count) * Math.PI * 2 - Math.PI / 2;

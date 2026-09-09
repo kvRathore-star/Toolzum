@@ -56,7 +56,7 @@ export default function PdfPageManager() {
     const set = new Set<number>();
     for (const part of input.split(',').map(p => p.trim())) {
       if (part.includes('-')) {
-        const [s, e] = part.split('-').map(Number);
+        const [s = NaN, e = NaN] = part.split('-').map(Number);
         if (!isNaN(s) && !isNaN(e) && s <= e) for (let i = s; i <= e; i++) { if (i >= 1 && i <= max) set.add(i - 1); }
       } else {
         const n = parseInt(part);
@@ -101,14 +101,14 @@ export default function PdfPageManager() {
   const handleDragStart = (i: number) => { setDraggedIdx(i); };
   const handleDrop = (ti: number) => {
     if (draggedIdx === null || draggedIdx === ti) return;
-    const p = [...pages]; const [m] = p.splice(draggedIdx, 1); p.splice(ti, 0, m);
+    const p = [...pages]; const [m] = p.splice(draggedIdx, 1); p.splice(ti, 0, m!);
     setPages(p); setDraggedIdx(null);
   };
   const handleRemove = (i: number) => { const p = [...pages]; p.splice(i, 1); setPages(p); };
   const movePage = (from: number, dir: -1 | 1) => {
     const to = from + dir;
     if (to < 0 || to >= pages.length) return;
-    setPages((prev) => { const next = [...prev]; [next[from], next[to]] = [next[to], next[from]]; return next; });
+    setPages((prev) => { const next = [...prev]; [next[from], next[to]] = [next[to]!, next[from]!]; return next; });
   };
 
   // --- Extract ---

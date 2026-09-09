@@ -101,10 +101,10 @@ export default function AiImageUpscaler() {
 
               if (weight > 0) {
                 const srcIdx = (sy * srcW + sx) * 4;
-                r += srcData[srcIdx] * weight;
-                g += srcData[srcIdx + 1] * weight;
-                b += srcData[srcIdx + 2] * weight;
-                a += srcData[srcIdx + 3] * weight;
+                r += srcData[srcIdx]! * weight;
+                g += srcData[srcIdx + 1]! * weight;
+                b += srcData[srcIdx + 2]! * weight;
+                a += srcData[srcIdx + 3]! * weight;
                 totalWeight += weight;
               }
             }

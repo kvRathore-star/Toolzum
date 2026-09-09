@@ -28,7 +28,7 @@ export default function BulkHeicConverter() {
           toType: target.mime,
           quality: quality / 100,
         });
-        const resultBlob = Array.isArray(blob) ? blob[0] : blob;
+        const resultBlob = Array.isArray(blob) ? blob[0]! : blob;
         return {
           name: file.name.replace(/\.(heic|heif)$/i, target.ext),
           blob: resultBlob,

@@ -50,11 +50,11 @@ const MARGINS: Record<MarginVal, number> = {
 };
 
 function readU16(data: Uint8Array, off: number): number {
-  return (data[off] << 8) | data[off + 1];
+  return (data[off]! << 8) | data[off + 1]!;
 }
 
 function readU32(data: Uint8Array, off: number): number {
-  return ((data[off] * 256 + data[off + 1]) * 256 + data[off + 2]) * 256 + data[off + 3];
+  return ((data[off]! * 256 + data[off + 1]!) * 256 + data[off + 2]!) * 256 + data[off + 3]!;
 }
 
 function readStr(data: Uint8Array, off: number, len: number, encoding: string): string {
@@ -75,44 +75,44 @@ function decompressPalmDoc(compressed: Uint8Array): Uint8Array {
     const c = compressed[ip++];
     if (c === 0x00) {
       out.push(0x00);
-    } else if (c <= 0x08) {
+    } else if (c! <= 0x08) {
       const length = c;
       let offset: number;
       if (c === 0x01 || c === 0x08) {
         if (ip + 1 >= compressed.length) break;
-        offset = (compressed[ip] << 8) | compressed[ip + 1];
+        offset = (compressed[ip]! << 8) | compressed[ip + 1]!;
         ip += 2;
       } else {
-        offset = compressed[ip++];
+        offset = compressed[ip++]!;
       }
       if (offset === 0) offset = 1;
-      for (let i = 0; i < length; i++) {
+      for (let i = 0; i < length!; i++) {
         const src = out.length - offset;
-        out.push(src >= 0 ? out[src] : 0x20);
+        out.push(src >= 0 ? out[src]! : 0x20);
       }
-    } else if (c < 0x80) {
-      const length = c - 8;
+    } else if (c! < 0x80) {
+      const length = c! - 8;
       for (let i = 0; i < length; i++) {
         if (ip >= compressed.length) break;
-        out.push(compressed[ip++]);
+        out.push(compressed[ip++]!);
       }
-    } else if (c < 0xC0) {
+    } else if (c! < 0xC0) {
       if (ip >= compressed.length) break;
-      const length = ((c & 0x3F) << 8) | compressed[ip++];
+      const length = ((c! & 0x3F) << 8) | compressed[ip++]!;
       for (let i = 0; i < length; i++) {
         if (ip >= compressed.length) break;
-        out.push(compressed[ip++]);
+        out.push(compressed[ip++]!);
       }
     } else {
       if (ip >= compressed.length) break;
-      const length = ((c & 0x3F) << 8) | compressed[ip++];
+      const length = ((c! & 0x3F) << 8) | compressed[ip++]!;
       if (ip + 1 >= compressed.length) break;
-      let offset = (compressed[ip] << 8) | compressed[ip + 1];
+      let offset = (compressed[ip]! << 8) | compressed[ip + 1]!;
       ip += 2;
       if (offset === 0) offset = 1;
       for (let i = 0; i < length; i++) {
         const src = out.length - offset;
-        out.push(src >= 0 ? out[src] : 0x20);
+        out.push(src >= 0 ? out[src]! : 0x20);
       }
     }
   }
@@ -199,7 +199,7 @@ function compressPalmDocSimple(input: Uint8Array): Uint8Array {
           const take = Math.min(chunk.length, 0x3FFF);
           out.push(0x80 | (take >> 8));
           out.push(take & 0xFF);
-          for (let k = 0; k < take; k++) out.push(chunk[k]);
+          for (let k = 0; k < take; k++) out.push(chunk[k]!);
           rp += take;
         }
       }
@@ -215,26 +215,26 @@ function parseMobi(data: Uint8Array): { metadata: MobiMetadata; text: string } {
     recOffsets.push(readU32(data, 0x4E + i * 8));
   }
   const r0 = recOffsets[0];
-  const magic = String.fromCharCode(data[r0], data[r0 + 1], data[r0 + 2], data[r0 + 3]);
+  const magic = String.fromCharCode(data[r0!]!, data[r0! + 1]!, data[r0! + 2]!, data[r0! + 3]!);
   if (magic !== 'MOBI') throw new Error('Not a valid MOBI file');
 
-  const mobiHeaderLen = readU32(data, r0 + 0x04);
-  const encoding = readU32(data, r0 + 0x0C);
-  const firstNonBook = readU32(data, r0 + 0x50);
-  const titleOff = readU32(data, r0 + 0x54);
-  const titleLen = readU32(data, r0 + 0x5C);
+  const mobiHeaderLen = readU32(data, r0! + 0x04);
+  const encoding = readU32(data, r0! + 0x0C);
+  const firstNonBook = readU32(data, r0! + 0x50);
+  const titleOff = readU32(data, r0! + 0x54);
+  const titleLen = readU32(data, r0! + 0x5C);
   const encStr = encoding === 65001 ? 'utf-8' : 'windows-1252';
 
   let title = 'Unknown';
-  if (titleLen > 0 && r0 + titleOff + titleLen <= data.length) {
-    title = readStr(data, r0 + titleOff, titleLen, encStr);
+  if (titleLen > 0 && r0! + titleOff + titleLen <= data.length) {
+    title = readStr(data, r0! + titleOff, titleLen, encStr);
   }
 
   let author = '';
-  const exthStart = r0 + mobiHeaderLen;
+  const exthStart = r0! + mobiHeaderLen;
   let exthLen = 0;
   if (exthStart + 4 <= data.length) {
-    const exMagic = String.fromCharCode(data[exthStart], data[exthStart + 1], data[exthStart + 2], data[exthStart + 3]);
+    const exMagic = String.fromCharCode(data[exthStart]!, data[exthStart + 1]!, data[exthStart + 2]!, data[exthStart + 3]!);
     if (exMagic === 'EXTH') {
       exthLen = readU32(data, exthStart + 0x04);
       const exthCount = readU32(data, exthStart + 0x08);
@@ -522,7 +522,7 @@ ${htmlContent}
         writeU32(mobiHeader, 0x54, titlePadOff);
         writeU32(mobiHeader, 0x5C, titleEncoded.length);
         for (let i = 0; i < titleEncoded.length && titlePadOff + i < mobiHeaderLen; i++) {
-          mobiHeader[titlePadOff + i] = titleEncoded[i];
+          mobiHeader[titlePadOff + i]! = titleEncoded[i]!;
         }
         const palmdocHeader = new Uint8Array(16);
         writeU16(palmdocHeader, 0, 2);
@@ -532,10 +532,10 @@ ${htmlContent}
         writeU16(palmdocHeader, 10, maxRecSize);
         writeU32(palmdocHeader, 12, 0);
 
-        const record0Data = new Uint8Array(mobiHeaderLen + palmdocHeader.length + (records.length > 0 ? records[0].length : 0));
+        const record0Data = new Uint8Array(mobiHeaderLen + palmdocHeader.length + (records.length > 0 ? records[0]!.length : 0));
         record0Data.set(mobiHeader, 0);
         record0Data.set(palmdocHeader, mobiHeaderLen);
-        if (records.length > 0) record0Data.set(records[0], mobiHeaderLen + 16);
+        if (records.length > 0) record0Data.set(records[0]!, mobiHeaderLen + 16);
 
         const totalRecords = 1 + Math.max(0, records.length - 1);
         const pdbHeaderLen = 78;
@@ -544,14 +544,14 @@ ${htmlContent}
 
         const dataBlobs: Uint8Array[] = [record0Data];
         for (let ri = 1; ri < records.length; ri++) {
-          dataBlobs.push(records[ri]);
+          dataBlobs.push(records[ri]!);
         }
 
         let runningDataOffset = dataStart;
         const recOffsets: number[] = [];
         for (let ri = 0; ri < totalRecords; ri++) {
           recOffsets.push(runningDataOffset);
-          runningDataOffset += dataBlobs[ri].length;
+          runningDataOffset += dataBlobs[ri]!.length;
         }
 
         const totalLen = runningDataOffset;
@@ -565,11 +565,11 @@ ${htmlContent}
 
         for (let ri = 0; ri < totalRecords; ri++) {
           const off = pdbHeaderLen + ri * 8;
-          writeU32(result, off, recOffsets[ri]);
+          writeU32(result, off, recOffsets[ri]!);
         }
 
         for (let ri = 0; ri < totalRecords; ri++) {
-          result.set(dataBlobs[ri], recOffsets[ri]);
+          result.set(dataBlobs[ri]!, recOffsets[ri]!);
         }
 
         const blob = new Blob([result], { type: 'application/x-mobipocket-ebook' });

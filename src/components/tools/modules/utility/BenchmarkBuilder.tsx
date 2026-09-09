@@ -50,9 +50,9 @@ function runBench(type: BenchType, duration: number): number {
 
 function getRanking(score: number): { label: string; pct: number; color: string } {
   for (let i = THRESHOLDS.length - 1; i >= 0; i--) {
-    if (score >= THRESHOLDS[i].min) return THRESHOLDS[i];
+    if (score >= THRESHOLDS[i]!.min) return THRESHOLDS[i]!;
   }
-  return THRESHOLDS[0];
+  return THRESHOLDS[0]!;
 }
 
 export default function BenchmarkBuilder() {

@@ -14,11 +14,11 @@ export default function CronParser() {
 
     const labels = ['Minute', 'Hour', 'Day of Month', 'Month', 'Day of Week'];
     const descriptions = parts.map((p, i) => {
-      if (p === '*') return { label: labels[i], value: `Every ${labels[i].toLowerCase()}` };
-      if (p.startsWith('*/')) return { label: labels[i], value: `Every ${p.slice(2)} ${labels[i].toLowerCase()}(s)` };
-      if (p.includes(',')) return { label: labels[i], value: `At ${p}` };
-      if (p.includes('-')) return { label: labels[i], value: `Every minute between ${p}` };
-      return { label: labels[i], value: `At ${p}` };
+      if (p === '*') return { label: labels[i] ?? "", value: `Every ${labels[i]!.toLowerCase()}` };
+      if (p.startsWith('*/')) return { label: labels[i] ?? "", value: `Every ${p.slice(2)} ${labels[i]!.toLowerCase()}(s)` };
+      if (p.includes(',')) return { label: labels[i] ?? "", value: `At ${p}` };
+      if (p.includes('-')) return { label: labels[i] ?? "", value: `Every minute between ${p}` };
+      return { label: labels[i] ?? "", value: `At ${p}` };
     });
 
     const h = parts[1], m = parts[0], w = parts[4];
@@ -67,7 +67,7 @@ export default function CronParser() {
             ['0 0 1 * *', 'First day of month'],
             ['*/30 9-17 * * *', 'Every 30 min, 9-5'],
           ].map(([expr, desc]) => (
-            <button key={expr} onClick={() => { setExpression(expr); parse(expr); }} className="flex items-center gap-2 text-xs text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
+            <button key={expr} onClick={() => { setExpression(expr!); parse(expr!); }} className="flex items-center gap-2 text-xs text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
               <code className="font-mono text-blue-600 dark:text-blue-400 shrink-0">{expr}</code>
               <span className="text-[var(--text-secondary)] truncate">{desc}</span>
             </button>

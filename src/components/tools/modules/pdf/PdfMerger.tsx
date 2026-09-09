@@ -28,8 +28,8 @@ export default function PdfMerger() {
   const moveUp = (index: number) => {
     if (index === 0) return;
     const newFiles = [...files];
-    const temp = newFiles[index - 1];
-    newFiles[index - 1] = newFiles[index];
+    const temp = newFiles[index - 1]!;
+    newFiles[index - 1]! = newFiles[index]!;
     newFiles[index] = temp;
     setFiles(newFiles);
     setOutputUrl(null);
@@ -38,8 +38,8 @@ export default function PdfMerger() {
   const moveDown = (index: number) => {
     if (index === files.length - 1) return;
     const newFiles = [...files];
-    const temp = newFiles[index + 1];
-    newFiles[index + 1] = newFiles[index];
+    const temp = newFiles[index + 1]!;
+    newFiles[index + 1]! = newFiles[index]!;
     newFiles[index] = temp;
     setFiles(newFiles);
     setOutputUrl(null);

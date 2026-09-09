@@ -81,7 +81,7 @@ export default function AddImageToPdf() {
     try {
       const pdfDoc = await PDFDocument.load(fileBuffer);
       const imageBytes = await imageFile.arrayBuffer();
-      const pages = addToAllPages ? pdfDoc.getPages() : [pdfDoc.getPages()[pageNum - 1]];
+      const pages = addToAllPages ? pdfDoc.getPages() : [pdfDoc.getPages()[pageNum - 1]!];
 
       let embeddedImage: any;
       if (imageType === 'png') {

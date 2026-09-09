@@ -30,9 +30,9 @@ function applyMatrix(imgData: ImageData, m: [number, number, number, number, num
   const data = imgData.data;
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i], g = data[i + 1], b = data[i + 2];
-    data[i] = m[0] * r + m[1] * g + m[2] * b;
-    data[i + 1] = m[3] * r + m[4] * g + m[5] * b;
-    data[i + 2] = m[6] * r + m[7] * g + m[8] * b;
+    data[i] = m[0] * r! + m[1] * g! + m[2] * b!;
+    data[i + 1] = m[3] * r! + m[4] * g! + m[5] * b!;
+    data[i + 2] = m[6] * r! + m[7] * g! + m[8] * b!;
   }
   return imgData;
 }
@@ -50,7 +50,7 @@ function drawSample(canvas: HTMLCanvasElement) {
 
   const palette = ['#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe', '#008080', '#800000'];
   for (let i = 0; i < palette.length; i++) {
-    ctx.fillStyle = palette[i];
+    ctx.fillStyle = palette[i]!;
     ctx.beginPath();
     ctx.arc(30 + i * ((w - 60) / (palette.length - 1)), 70, 16, 0, Math.PI * 2);
     ctx.fill();

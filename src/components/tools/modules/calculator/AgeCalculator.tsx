@@ -9,7 +9,7 @@ export default function AgeCalculator() {
   const calculate = () => {
     if (!dob) return;
     const d1 = new Date(dob);
-    const d2 = new Date(targetDate);
+    const d2 = new Date(targetDate!);
     
     let years = d2.getFullYear() - d1.getFullYear();
     let months = d2.getMonth() - d1.getMonth();

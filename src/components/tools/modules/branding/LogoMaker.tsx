@@ -27,10 +27,10 @@ export default function LogoMaker() {
   const [text, setText] = useState('My Brand');
   const [tagline, setTagline] = useState('INNOVATION FIRST');
   
-  const [selectedIcon, setSelectedIcon] = useState(PRESETS[0].icon);
-  const [color1, setColor1] = useState(PRESETS[0].color1);
-  const [color2, setColor2] = useState(PRESETS[0].color2);
-  const [fontFamily, setFontFamily] = useState(PRESETS[0].font);
+  const [selectedIcon, setSelectedIcon] = useState(PRESETS[0]!.icon);
+  const [color1, setColor1] = useState(PRESETS[0]!.color1);
+  const [color2, setColor2] = useState(PRESETS[0]!.color2);
+  const [fontFamily, setFontFamily] = useState(PRESETS[0]!.font);
   
   const [iconSize, setIconSize] = useState(60);
   const [textSize, setTextSize] = useState(36);

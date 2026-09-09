@@ -148,7 +148,7 @@ export default function BulkImageUpscaler() {
     const blobs = doneBlobsRef.current;
     if (blobs.length === 0) return;
     if (blobs.length === 1) {
-      downloadOrShare(URL.createObjectURL(blobs[0]), 'upscaled.png');
+      downloadOrShare(URL.createObjectURL(blobs[0]!), 'upscaled.png');
       return;
     }
     const zip = new JSZip();

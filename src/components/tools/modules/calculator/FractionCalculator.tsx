@@ -11,8 +11,8 @@ export default function FractionCalculator() {
     { label: '1/2 + 1/3', apply: () => { setFrac1('1/2'); setFrac2('1/3'); setOp('+'); } },
     { label: '3/4 * 2/5', apply: () => { setFrac1('3/4'); setFrac2('2/5'); setOp('*'); } },
   ];
-  const [n1, d1] = frac1.split('/').map(Number);
-  const [n2, d2] = frac2.split('/').map(Number);
+  const [n1 = 0, d1 = 0] = frac1.split('/').map(Number);
+  const [n2 = 0, d2 = 0] = frac2.split('/').map(Number);
   const hasInput = !isNaN(n1) && !isNaN(d1) && d1 !== 0 && !isNaN(n2) && !isNaN(d2) && d2 !== 0 && !(op === '/' && n2 === 0);
   let rn = 0, rd = 1;
   if (hasInput) {

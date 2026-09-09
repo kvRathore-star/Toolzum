@@ -399,7 +399,7 @@ export default function CssGeneratorHub({ defaultMode }: { defaultMode?: Mode })
       {/* Category pills */}
       <div className="flex flex-wrap gap-1.5 mb-3">
         {CATEGORIES.map(cat => (
-          <button key={cat.key} onClick={() => { setCategory(cat.key); if (!cat.modes.includes(mode)) setMode(cat.modes[0]); }}
+          <button key={cat.key} onClick={() => { setCategory(cat.key); if (!cat.modes.includes(mode)) setMode(cat.modes[0]!); }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               category === cat.key
                 ? 'bg-blue-600 text-white shadow-sm'

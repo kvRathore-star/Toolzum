@@ -23,7 +23,7 @@ async function parseOdt(file: File): Promise<string> {
   const re = /<text:p[^>]*>([\s\S]*?)<\/text:p>/g;
   let m: RegExpExecArray | null;
   while ((m = re.exec(xml)) !== null) {
-    const text = m[1]
+    const text = m[1]!
       .replace(/<\/?[^>]+>/g, '')
       .replace(/&(amp|lt|gt|quot|#39|#x201[89]|#x201[CD]|#x201[34]|#xa0);/g, (e) => {
         const map: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", '#x2019': "'", '#x2018': "'", '#x201C': '"', '#x201D': '"', '#x2013': '–', '#x2014': '—', '#xa0': ' ' };
@@ -71,8 +71,8 @@ function parseRtfFormatted(text: string): TextRun[][] {
       flush();
       i++;
       let cmd = '';
-      while (i < text.length && /[a-z]/i.test(text[i])) { cmd += text[i]; i++; }
-      while (i < text.length && /[-0-9]/.test(text[i])) i++;
+      while (i < text.length && /[a-z]/i.test(text[i]!)) { cmd += text[i]!; i++; }
+      while (i < text.length && /[-0-9]/.test(text[i]!)) i++;
       if (i < text.length && text[i] === ' ') i++;
 
       if (cmd === 'par' || cmd === 'line') newParagraph();
@@ -204,7 +204,7 @@ async function renderPdf(options: RenderOptions): Promise<Uint8Array> {
     const pg = pages[i];
     const text = `${i + 1} / ${pages.length}`;
     const w = font.widthOfTextAtSize(text, 8);
-    pg.drawText(text, { x: (width - w) / 2, y: margin / 2, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
+    pg!.drawText(text, { x: (width - w) / 2, y: margin / 2, size: 8, font, color: rgb(0.5, 0.5, 0.5) });
   }
 
   return pdfDoc.save();
@@ -259,7 +259,7 @@ export default function OdtRtfConverter() {
         paragraphs = extractedText.split('\n\n').filter(Boolean).map(p => [{ text: p.trim(), bold: false, italic: false }]);
       }
       if (paragraphs.length === 0) { toast.error('No content to convert.'); return; }
-      const [pw, ph] = PAGE_SIZES[pageSize] || PAGE_SIZES.A4;
+      const [pw, ph] = PAGE_SIZES[pageSize] || PAGE_SIZES.A4!;
       const pdfBytes = await renderPdf({ width: pw, height: ph, margin: margins, fontSize, title, paragraphs });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);

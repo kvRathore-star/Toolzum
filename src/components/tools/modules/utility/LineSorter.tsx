@@ -17,7 +17,7 @@ export default function LineSorter() {
       case 'sort-asc': lines = lines.sort((a, b) => a.localeCompare(b)); break;
       case 'sort-desc': lines = lines.sort((a, b) => b.localeCompare(a)); break;
       case 'reverse': lines = lines.reverse(); break;
-      case 'shuffle': for (let i = lines.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [lines[i], lines[j]] = [lines[j], lines[i]]; } break;
+      case 'shuffle': for (let i = lines.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [lines[i], lines[j]] = [lines[j]!, lines[i]!]; } break;
       case 'dedupe': lines = [...new Set(lines)]; break;
     }
     setOutput(lines.join('\n'));

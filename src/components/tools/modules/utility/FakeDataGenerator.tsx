@@ -11,7 +11,7 @@ export default function FakeDataGenerator() {
   const [count, setCount] = useState(5); const [fields, setFields] = useState<Field[]>(['name', 'email', 'phone', 'address']); const [data, setData] = useState<Record<string, string>[]>([]);
   const toggleField = (f: Field) => setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
   const generate = () => { const entries: Record<string, string>[] = []; for (let i = 0; i < count; i++) { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); const entry: Record<string, string> = {}; if (fields.includes('name')) entry.Name = fn + ' ' + ln; if (fields.includes('email')) entry.Email = fn.toLowerCase() + '.' + ln.toLowerCase() + randInt(1, 99) + '@' + randItem(DOMAINS); if (fields.includes('phone')) entry.Phone = '+91 ' + randInt(70000, 99999) + ' ' + randInt(10000, 99999); if (fields.includes('address')) entry.Address = randInt(1, 999) + ' ' + randItem(STREETS) + ', ' + randItem(CITIES) + ' - ' + randInt(100001, 999999); entries.push(entry); } setData(entries); };
-  const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]); return [headers.join(','), ...data.map(r => headers.map(h => '"' + (r[h] || '').replace(/"/g, '""') + '"').join(','))].join('\n'); };
+  const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]!); return [headers.join(','), ...data.map(r => headers.map(h => '"' + (r[h] || '').replace(/"/g, '""') + '"').join(','))].join('\n'); };
 
   const presets = [
     { label: '5 Records (All Fields)', apply: () => { setCount(5); setFields(['name', 'email', 'phone', 'address']); generate(); } },

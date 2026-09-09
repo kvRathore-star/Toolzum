@@ -8,7 +8,7 @@ function periodKey(period: UsagePeriod): string {
   const now = new Date();
   return period === "month"
     ? `${now.getFullYear()}-${now.getMonth()}`
-    : now.toISOString().split("T")[0];
+    : now.toISOString().split("T")[0] ?? "";
 }
 
 export function useUsageCounter(storageKey: string, period: UsagePeriod = "day") {

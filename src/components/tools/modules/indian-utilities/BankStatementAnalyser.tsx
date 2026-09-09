@@ -54,9 +54,9 @@ function parseStatement(text: string): { transactions: Transaction[]; error?: st
     for (const pattern of patterns) {
       const m = line.match(pattern);
       if (m) {
-        const date = m[1];
-        const desc = m[2].trim();
-        const amtStr = m[3].replace(/,/g, '');
+        const date = m[1] ?? "";
+        const desc = (m[2] ?? "").trim();
+        const amtStr = (m[3] ?? "").replace(/,/g, '');
         const typeFlag = m[4]?.toLowerCase() || '';
         const balStr = m[5]?.replace(/,/g, '') || '';
         const amount = parseFloat(amtStr);
@@ -95,7 +95,7 @@ function parseStatement(text: string): { transactions: Transaction[]; error?: st
         const amount = parseFloat(amtMatch[0].replace(/,/g, ''));
         if (!isNaN(amount) && amount > 0) {
           transactions.push({
-            date: dateMatch[1],
+            date: dateMatch[1] ?? "",
             description: line.slice(dateMatch[0].length).trim().slice(0, 60),
             amount,
             type: 'debit',
@@ -168,8 +168,8 @@ export default function BankStatementAnalyser() {
     for (const t of transactions) {
       if (t.type === 'debit') {
         if (!categorySummary[t.category]) categorySummary[t.category] = { count: 0, total: 0 };
-        categorySummary[t.category].count++;
-        categorySummary[t.category].total += t.amount;
+        categorySummary[t.category]!.count++;
+        categorySummary[t.category]!.total += t.amount;
       }
     }
     const topCategories = Object.entries(categorySummary).sort((a, b) => b[1].total - a[1].total);

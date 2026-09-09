@@ -18,7 +18,7 @@ function generateULID(): { ulid: string; timestamp: number } {
     t = Math.floor(t / 32);
   }
   for (let i = 0; i < 16; i++) {
-    str += CROCKFORD[rand[i] & 0x1f];
+    str += CROCKFORD[rand[i]! & 0x1f]!;
   }
   return { ulid: str, timestamp: time };
 }
@@ -27,7 +27,7 @@ function decodeULIDTimestamp(ulid: string): number | null {
   if (ulid.length < 10) return null;
   let ts = 0;
   for (let i = 0; i < 10; i++) {
-    const idx = CROCKFORD.indexOf(ulid[i].toUpperCase());
+    const idx = CROCKFORD.indexOf(ulid[i]!.toUpperCase());
     if (idx === -1) return null;
     ts = ts * 32 + idx;
   }
@@ -37,7 +37,7 @@ function decodeULIDTimestamp(ulid: string): number | null {
 function toNumeronym(word: string): string {
   const w = word.trim();
   if (w.length <= 2) return w;
-  return w[0] + (w.length - 2) + w[w.length - 1];
+  return w[0]! + (w.length - 2) + w[w.length - 1];
 }
 
 function toAcronym(text: string): string {

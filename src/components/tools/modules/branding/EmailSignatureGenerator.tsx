@@ -22,7 +22,7 @@ const TEMPLATES: SignatureTemplate[] = [
 ];
 
 export default function EmailSignatureGenerator() {
-  const [selectedTemplate, setSelectedTemplate] = useState<SignatureTemplate>(TEMPLATES[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState<SignatureTemplate>(TEMPLATES[0]!);
 
   // Details
   const [name, setName] = useState('Sarah Jenkins');

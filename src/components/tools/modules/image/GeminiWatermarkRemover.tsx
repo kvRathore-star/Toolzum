@@ -34,7 +34,7 @@ function calculateAlphaMap(imageData: ImageData): Float32Array {
   const alphaMap = new Float32Array(width * height);
   for (let i = 0; i < alphaMap.length; i++) {
     const idx = i * 4;
-    alphaMap[i] = Math.max(data[idx], data[idx + 1], data[idx + 2]) / 255.0;
+    alphaMap[i] = Math.max(data[idx] ?? 0, data[idx + 1] ?? 0, data[idx + 2] ?? 0) / 255.0;
   }
   return alphaMap;
 }
@@ -67,13 +67,13 @@ function removeWatermarkFromImageData(
     for (let col = 0; col < width; col++) {
       const imgIdx = ((y + row) * imageData.width + (x + col)) * 4;
       const alphaIdx = row * width + col;
-      const rawAlpha = alphaMap[alphaIdx];
+      const rawAlpha = alphaMap[alphaIdx] ?? 0;
       const signalAlpha = Math.max(0, Math.abs(rawAlpha) - ALPHA_NOISE_FLOOR);
       if (signalAlpha < ALPHA_THRESHOLD) continue;
       const alpha = Math.min(Math.abs(rawAlpha), MAX_ALPHA);
       const oneMinusAlpha = 1.0 - alpha;
       for (let c = 0; c < 3; c++) {
-        const watermarked = data[imgIdx + c];
+        const watermarked = data[imgIdx + c] ?? 0;
         const original = (watermarked - alpha * LOGO_VALUE) / oneMinusAlpha;
         data[imgIdx + c] = Math.max(0, Math.min(255, Math.round(original)));
       }
@@ -177,7 +177,7 @@ function SliderCompare({ before, after }: { before: string; after: string }) {
         else if (e.key === 'ArrowRight') { e.preventDefault(); setPos((p) => Math.min(100, p + 5)); }
       }}
       onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
-      onTouchMove={(e) => updatePos(e.touches[0].clientX)}>
+      onTouchMove={(e) => updatePos(e.touches[0]!.clientX)}>
       <img src={after} alt="After" className="absolute inset-0 w-full h-full object-contain" />
       <div className="absolute inset-0 overflow-hidden" style={{ width: pos + '%' }}>
         <img src={before} alt="Before" className="absolute inset-0 h-full object-contain" style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100%' }} />
@@ -273,7 +273,7 @@ export default function GeminiWatermarkRemover() {
 
   const handleFiles = useCallback((files: File[]) => {
     if (files.length === 0) return;
-    const file = files[0];
+    const file = files[0]!;
     const url = URL.createObjectURL(file);
     blobUrlsRef.current.push(url);
     setSingleImage({ file, url });
@@ -340,7 +340,7 @@ export default function GeminiWatermarkRemover() {
   const downloadAll = useCallback(async () => {
     const blobs = doneBlobsRef.current;
     if (blobs.length === 0) return;
-    if (blobs.length === 1) { downloadOrShare(URL.createObjectURL(blobs[0]), 'clean.png'); return; }
+    if (blobs.length === 1) { downloadOrShare(URL.createObjectURL(blobs[0]!), 'clean.png'); return; }
     const zip = new JSZip();
     const ext = outputFormat === 'jpeg' ? '.jpg' : outputFormat === 'webp' ? '.webp' : '.png';
     batch.files.forEach((bf) => {

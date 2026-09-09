@@ -70,7 +70,7 @@ export default function WheelOfNames() {
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, radius, angle, angle + arc);
       ctx.lineTo(0, 0);
-      ctx.fillStyle = colors[i % colors.length];
+      ctx.fillStyle = colors[i % colors.length]!;
       ctx.fill();
       ctx.stroke();
       
@@ -84,7 +84,7 @@ export default function WheelOfNames() {
       ctx.textBaseline = 'middle';
       
       // Truncate long names
-      let text = nameList[i];
+      let text: string = nameList[i]!;
       if (text.length > 12) text = text.substring(0, 10) + '...';
       
       ctx.fillText(text, 0, 0);
@@ -152,7 +152,7 @@ export default function WheelOfNames() {
         // Easier: The distance to 0 angle going backwards.
         const winningIndex = Math.floor(((Math.PI * 2 - normalizedRotation) % (Math.PI * 2)) / arc);
         
-        setWinner(nameList[winningIndex]);
+        setWinner(nameList[winningIndex]!);
       }
     };
     

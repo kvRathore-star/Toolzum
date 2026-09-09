@@ -69,7 +69,7 @@ export function ScssToCssConverter() {
       // Collect variables
       const varMatch = trimmed.match(/^\$(\w[\w-]*):\s*(.+);$/);
       if (varMatch) {
-        variables[varMatch[1]] = varMatch[2].trim();
+        variables[varMatch[1]!] = varMatch[2]!.trim();
         return;
       }
 
@@ -117,7 +117,7 @@ export function ScssToCssConverter() {
     if (!css.trim()) errs.push('No CSS output generated');
     setErrors(errs);
     setOutput(css.trim());
-    if (errs.length) toast.error(errs[0]);
+    if (errs.length) toast.error(errs[0]!);
     else toast.success('Converted to CSS');
   };
 
@@ -171,7 +171,7 @@ export function StylusToCssConverter() {
       // Variable definition
       const varMatch = content.match(/^(\$[\w-]+)\s*=\s*(.+)/);
       if (varMatch) {
-        variables[varMatch[1]] = varMatch[2].trim();
+        variables[varMatch[1]!] = varMatch[2]!.trim();
         return;
       }
 
@@ -179,7 +179,7 @@ export function StylusToCssConverter() {
       const mixinMatch = content.match(/^([\w-]+)\s*\(([^)]*)\)\s*$/);
       if (mixinMatch) {
         inMixin = true;
-        mixinNames.push(mixinMatch[1]);
+        mixinNames.push(mixinMatch[1] ?? "");
         return;
       }
 
@@ -202,12 +202,12 @@ export function StylusToCssConverter() {
 
       // Mixin include
       const includeMatch = content.match(/^([\w-]+)\(([^)]*)\)\s*$/);
-      if (includeMatch && mixinNames.includes(includeMatch[1])) {
-        const args = includeMatch[2].split(',').map(a => a.trim());
+      if (includeMatch && mixinNames.includes(includeMatch[1] ?? "")) {
+        const args = (includeMatch[2] ?? "").split(',').map(a => a.trim());
         mixinBody.forEach(mb => {
           let line = mb;
           args.forEach((a, i) => { line = line.replace(new RegExp(`\\$${i + 1}`, 'g'), a); });
-          const prop = line.split(/\s+/)[0];
+          const prop = line.split(/\s+/)[0] ?? "";
           const val = line.split(/\s+/).slice(1).join(' ');
           // Resolve variables
           let resolvedVal = val;
@@ -279,7 +279,7 @@ function readVarint(bytes: Uint8Array, offset: number): { value: number; newOffs
   let shift = 0;
   let pos = offset;
   while (pos < bytes.length) {
-    const b = bytes[pos];
+    const b = bytes[pos]!;
     result |= (b & 0x7f) << shift;
     pos++;
     if ((b & 0x80) === 0) return { value: result, newOffset: pos };
@@ -386,7 +386,7 @@ export function ProtobufDecoder() {
       const hexDump = Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(' ');
       const typeSummary = result.fields.map(f => {
         const typeMatch = f.match(/\((\S+)\)/);
-        return typeMatch ? typeMatch[1] : 'unknown';
+        return typeMatch ? typeMatch[1] ?? 'unknown' : 'unknown';
       });
       const typeCounts = typeSummary.reduce((acc: Record<string, number>, t) => { acc[t] = (acc[t] || 0) + 1; return acc; }, {});
 
@@ -482,7 +482,7 @@ export function ProtoSchemaConverter() {
     const fieldRe = /(\w+)\s+(\w+)\s*=\s*(\d+)/g;
     let m;
     while ((m = fieldRe.exec(input)) !== null) {
-      fields.push({ type: m[1], name: m[2], id: m[3] });
+      fields.push({ type: m[1] ?? "", name: m[2] ?? "", id: m[3] ?? "" });
     }
     const ts = `interface ${name} {\n${fields.map(f => `  ${f.name}: ${f.type === 'string' ? 'string' : f.type.startsWith('int') || f.type === 'float' || f.type === 'double' ? 'number' : f.type};`).join('\n')}\n}`;
     const json = JSON.stringify(fields.reduce((acc: Record<string, any>, f) => {

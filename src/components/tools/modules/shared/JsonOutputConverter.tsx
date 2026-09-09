@@ -32,7 +32,7 @@ export const MODES: Record<string, ModeDef> = {
         if (typeof v === 'string') return k.match(/email|mail/i) ? 'z.string().email()' : k.match(/url|href|link/i) ? 'z.string().url()' : 'z.string()';
         if (typeof v === 'number') return Number.isInteger(v) ? 'z.number().int()' : 'z.number()';
         if (typeof v === 'boolean') return 'z.boolean()';
-        if (Array.isArray(v)) return v.length ? `z.array(${infer(v[0], k)})` : 'z.array(z.any())';
+        if (Array.isArray(v)) return v.length ? `z.array(${infer(v[0]!, k)})` : 'z.array(z.any())';
         if (typeof v === 'object') return `z.object({\n${Object.entries(v).map(([kk, vv]) => `  "${kk}": ${infer(vv, kk)}`).join(',\n')}\n})`;
         return 'z.any()';
       };
@@ -76,7 +76,7 @@ export const MODES: Record<string, ModeDef> = {
         if (typeof v === 'string') return { type: 'string' };
         if (typeof v === 'number') return { type: 'number' };
         if (typeof v === 'boolean') return { type: 'boolean' };
-        if (Array.isArray(v)) return { type: 'array', items: v.length ? infer(v[0]) : {} };
+        if (Array.isArray(v)) return { type: 'array', items: v.length ? infer(v[0]!) : {} };
         if (typeof v === 'object') return { type: 'object', properties: Object.fromEntries(Object.entries(v).map(([k, vv]) => [k, infer(vv)])), required: Object.keys(v) };
         return {};
       };
@@ -89,7 +89,7 @@ export const MODES: Record<string, ModeDef> = {
     outputLabel: "Analysis",
     transform: (d, raw) => {
       const depth = (o: JsonValue): number => o && typeof o === 'object' ? 1 + Math.max(...Object.values(o as Record<string, JsonValue>).map(v => depth(v)), 0) : 0;
-      const countKeys = (o: JsonValue): number => { if (!o || typeof o !== 'object') return 0; const r = o as Record<string, JsonValue>; return Object.keys(r).reduce((s, k) => s + countKeys(r[k]), 0) + Object.keys(r).length; };
+      const countKeys = (o: JsonValue): number => { if (!o || typeof o !== 'object') return 0; const r = o as Record<string, JsonValue>; return Object.keys(r).reduce((s, k) => s + countKeys(r[k]!), 0) + Object.keys(r).length; };
       return [
         `Characters:  ${raw.length}`,
         `Bytes:       ${new Blob([raw]).size}`,

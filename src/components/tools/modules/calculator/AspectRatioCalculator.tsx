@@ -16,7 +16,7 @@ export default function AspectRatioCalculator() {
   const hasInput = width !== '' && height !== '' && !isNaN(w) && !isNaN(h) && w > 0 && h > 0;
   const g = hasInput ? gcd(w, h) : 1;
   const commonRatios = ['16:9', '4:3', '21:9', '3:2', '1:1', '5:4'];
-  const match = commonRatios.find(r => { const [rw, rh] = r.split(':').map(Number); return w / h === rw / rh; });
+  const match = commonRatios.find(r => { const [rw, rh] = r.split(':').map(Number); return w / h === rw! / rh!; });
   const customResult = (
     !hasInput ? (
       <div className="text-sm text-[var(--text-muted)]">Enter dimensions</div>

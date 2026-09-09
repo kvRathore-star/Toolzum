@@ -95,7 +95,7 @@ export default function PhpTools() {
     function parseNumber(): number {
       const start = pos;
       if (s[pos] === '-') pos++;
-      while (pos < s.length && ((s[pos] >= '0' && s[pos] <= '9') || s[pos] === '.')) pos++;
+      while (pos < s.length && ((s[pos]! >= '0' && s[pos]! <= '9') || s[pos] === '.')) pos++;
       return parseFloat(s.slice(start, pos));
     }
     function parseValue(): unknown {

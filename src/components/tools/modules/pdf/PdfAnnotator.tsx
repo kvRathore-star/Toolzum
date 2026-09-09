@@ -78,7 +78,7 @@ export default function PdfAnnotator() {
       const doc = await PDFDocument.load(pdfBytes);
       const pages = doc.getPages();
       for (const ann of annotations) {
-        const page = pages[currentPage - 1];
+        const page = pages[currentPage - 1]!;
         const { r, g, b } = hexToRgb(ann.color);
         const color = rgb(r, g, b);
         switch (ann.type) {

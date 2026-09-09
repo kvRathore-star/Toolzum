@@ -168,7 +168,7 @@ export default function SellerProfitCalculator() {
           {comparison && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 animate-in fade-in slide-in-from-top-2 duration-200">
               {comparison.map((c, i) => {
-                const p = (['amazon', 'flipkart', 'meesho'] as Platform[]).filter(p => p !== input.platform)[i];
+                const p = (['amazon', 'flipkart', 'meesho'] as Platform[]).filter(p => p !== input.platform)[i]!;
                 return (
                   <div key={p} className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)]">
                     <div className="flex items-center justify-between mb-1">

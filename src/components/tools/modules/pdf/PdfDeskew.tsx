@@ -14,30 +14,30 @@ function computeSkew(canvas: HTMLCanvasElement): number {
   const { data, width, height } = ctx.getImageData(0, 0, canvas.width, canvas.height);
   const gray = new Float32Array(width * height);
   for (let i = 0; i < width * height; i++) {
-    gray[i] = 0.299 * data[i * 4] + 0.587 * data[i * 4 + 1] + 0.114 * data[i * 4 + 2];
+    gray[i]! = 0.299 * data[i * 4]! + 0.587 * data[i * 4 + 1]! + 0.114 * data[i * 4 + 2]!;
   }
   const hist = new Float32Array(180);
   for (let y = 1; y < height - 1; y++) {
     for (let x = 1; x < width - 1; x++) {
       const idx = y * width + x;
-      const gx = -gray[idx - width - 1] + gray[idx - width + 1]
-                - 2 * gray[idx - 1] + 2 * gray[idx + 1]
-                - gray[idx + width - 1] + gray[idx + width + 1];
-      const gy = -gray[idx - width - 1] - 2 * gray[idx - width] - gray[idx - width + 1]
-                + gray[idx + width - 1] + 2 * gray[idx + width] + gray[idx + width + 1];
+      const gx = -gray[idx - width - 1]! + gray[idx - width + 1]!
+                - 2 * gray[idx - 1]! + 2 * gray[idx + 1]!
+                - gray[idx + width - 1]! + gray[idx + width + 1]!;
+      const gy = -gray[idx - width - 1]! - 2 * gray[idx - width]! - gray[idx - width + 1]!
+                + gray[idx + width - 1]! + 2 * gray[idx + width]! + gray[idx + width + 1]!;
       const mag = Math.sqrt(gx * gx + gy * gy);
       if (mag < 40) continue;
       const angle = ((Math.atan2(gy, gx) * 180 / Math.PI) % 180 + 180) % 180;
-      hist[Math.floor(angle)] += mag;
+      hist[Math.floor(angle)]! += mag;
     }
   }
   let peakNear0 = 0, valNear0 = 0, peakNear90 = 0, valNear90 = 0;
   for (let i = 0; i < 180; i++) {
     if (i < 40 || i > 140) {
-      if (hist[i] > valNear0) { valNear0 = hist[i]; peakNear0 = i; }
+      if (hist[i]! > valNear0) { valNear0 = hist[i]!; peakNear0 = i; }
     }
     if (i > 50 && i < 130) {
-      if (hist[i] > valNear90) { valNear90 = hist[i]; peakNear90 = i; }
+      if (hist[i]! > valNear90) { valNear90 = hist[i]!; peakNear90 = i; }
     }
   }
   if (valNear90 > valNear0) {

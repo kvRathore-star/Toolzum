@@ -27,7 +27,7 @@ export const parseCsv = (text: string): { headers: string[]; rows: string[][] } 
     parts.push(cur.trim());
     return parts;
   };
-  const headers = parseLine(lines[0]);
+  const headers = parseLine(lines[0]!);
   const rows = lines.slice(1).map(parseLine);
   return { headers, rows };
 };
@@ -115,7 +115,7 @@ export const MODES: Record<string, CsvMode> = {
         if (uniq.size === 1 && vals.length > 1) issues.push(`"${h}": All values identical (no variation)`);
       });
       const dups = rows.map((r, i) => [i, r.join(',')] as const).filter(([i, s], _, arr) => arr.filter(([j, t]) => t === s).length > 1);
-      if (dups.length) issues.push(`Found ${dups.length} duplicate rows (${new Set(dups.map(([i]) => rows[i].join(','))).size} unique duplicates)`);
+      if (dups.length) issues.push(`Found ${dups.length} duplicate rows (${new Set(dups.map(([i]) => rows[i]!.join(','))).size} unique duplicates)`);
       return issues.length ? issues.join('\n') : 'No issues found.';
     },
   },

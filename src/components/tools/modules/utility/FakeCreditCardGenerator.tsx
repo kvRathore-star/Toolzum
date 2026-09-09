@@ -8,7 +8,7 @@ import { Input, randInt, randItem } from './GeneratorsShared';
 const CARD_TYPES = [
   { name: 'Visa', prefix: '4', len: 16 }, { name: 'Mastercard', prefix: '5', len: 16 }, { name: 'Amex', prefix: '34', len: 15 }, { name: 'Discover', prefix: '6011', len: 16 }, { name: 'RuPay', prefix: '60', len: 16 },
 ];
-function luhnCheck(num: string): boolean { let sum = 0; let alt = false; for (let i = num.length - 1; i >= 0; i--) { let d = parseInt(num[i]); if (alt) { d *= 2; if (d > 9) d -= 9; } sum += d; alt = !alt; } return sum % 10 === 0; }
+function luhnCheck(num: string): boolean { let sum = 0; let alt = false; for (let i = num.length - 1; i >= 0; i--) { let d = parseInt(num[i] ?? ""); if (alt) { d *= 2; if (d > 9) d -= 9; } sum += d; alt = !alt; } return sum % 10 === 0; }
 function genCardNum(prefix: string, len: number): string { let num = prefix; for (let i = num.length; i < len - 1; i++) num += randInt(0, 9); for (let c = 0; c <= 9; c++) { if (luhnCheck(num + c)) return num + c; } return num + '0'; }
 export default function FakeCreditCardGenerator() {
   const [count, setCount] = useState(3); const [cards, setCards] = useState<{ type: string; number: string; expiry: string; cvv: string }[]>([]);

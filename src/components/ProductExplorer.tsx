@@ -80,8 +80,8 @@ const CATEGORIES = [
 ];
 
 export function ProductExplorer() {
-  const [activeTab, setActiveTab] = useState(CATEGORIES[0].id);
-  const activeCategory = CATEGORIES.find(c => c.id === activeTab) || CATEGORIES[0];
+  const [activeTab, setActiveTab] = useState(CATEGORIES[0]!.id);
+  const activeCategory = CATEGORIES.find(c => c.id === activeTab) || CATEGORIES[0]!;
 
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-12 relative overflow-hidden">

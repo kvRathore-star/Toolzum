@@ -27,7 +27,7 @@ function parsePageRange(range: string, totalPages: number): number[] {
   for (const part of parts) {
     const trimmed = part.trim();
     if (trimmed.includes('-')) {
-      const [s, e] = trimmed.split('-').map(n => parseInt(n.trim(), 10));
+      const [s = NaN, e = NaN] = trimmed.split('-').map(n => parseInt(n.trim(), 10));
       if (!isNaN(s) && !isNaN(e)) {
         for (let p = Math.max(1, s); p <= Math.min(e, totalPages); p++) pages.add(p);
       }
@@ -48,8 +48,8 @@ function formatFileSize(bytes: number): string {
 function toGrayscale(data: Uint8ClampedArray): Uint8ClampedArray {
   const out = new Uint8ClampedArray(data.length);
   for (let i = 0; i < data.length; i += 4) {
-    const gray = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
-    out[i] = gray; out[i + 1] = gray; out[i + 2] = gray; out[i + 3] = data[i + 3];
+    const gray = Math.round(0.299 * data[i]! + 0.587 * data[i + 1]! + 0.114 * data[i + 2]!);
+    out[i]! = gray; out[i + 1]! = gray; out[i + 2]! = gray; out[i + 3]! = data[i + 3]!;
   }
   return out;
 }
@@ -57,9 +57,9 @@ function toGrayscale(data: Uint8ClampedArray): Uint8ClampedArray {
 function toBlackWhite(data: Uint8ClampedArray, threshold = 128): Uint8ClampedArray {
   const out = new Uint8ClampedArray(data.length);
   for (let i = 0; i < data.length; i += 4) {
-    const gray = Math.round(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+    const gray = Math.round(0.299 * data[i]! + 0.587 * data[i + 1]! + 0.114 * data[i + 2]!);
     const val = gray > threshold ? 255 : 0;
-    out[i] = val; out[i + 1] = val; out[i + 2] = val; out[i + 3] = 255;
+    out[i]! = val; out[i + 1]! = val; out[i + 2]! = val; out[i + 3]! = 255;
   }
   return out;
 }
@@ -135,7 +135,7 @@ export default function PdfToTiff() {
       const encodings: Uint8Array[] = [];
 
       for (let idx = 0; idx < pages.length; idx++) {
-        const pageNum = pages[idx];
+        const pageNum = pages[idx]!;
         setProgress(Math.round(((idx) / pages.length) * 100));
 
         const page = await pdf.getPage(pageNum);

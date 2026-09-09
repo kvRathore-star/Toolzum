@@ -538,8 +538,8 @@ export function SpeedConverter() {
   const convert = () => {
     const v = parseFloat(value);
     if (isNaN(v)) return;
-    const base = v / RATES[from];
-    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
+    const base = v / RATES[from]!;
+    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]!).toFixed(4)} ${LABELS[to]}`);
   };
 
   const presets = [
@@ -609,8 +609,8 @@ export function PowerConverter() {
   const convert = () => {
     const v = parseFloat(value);
     if (isNaN(v)) return;
-    const base = v / RATES[from];
-    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
+    const base = v / RATES[from]!;
+    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]!).toFixed(4)} ${LABELS[to]}`);
   };
 
   const presets = [
@@ -680,8 +680,8 @@ export function PressureConverter() {
   const convert = () => {
     const v = parseFloat(value);
     if (isNaN(v)) return;
-    const base = v / RATES[from];
-    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]).toFixed(4)} ${LABELS[to]}`);
+    const base = v / RATES[from]!;
+    setOutput(`${v} ${LABELS[from]} = ${(base * RATES[to]!).toFixed(4)} ${LABELS[to]}`);
   };
 
   const presets = [

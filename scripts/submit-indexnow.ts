@@ -10,7 +10,7 @@ async function fetchSitemapUrls(): Promise<string[]> {
   const regex = /<loc>(.*?)<\/loc>/g;
   let match;
   while ((match = regex.exec(xml)) !== null) {
-    urls.push(match[1]);
+    urls.push(match[1]!);
   }
   return urls;
 }

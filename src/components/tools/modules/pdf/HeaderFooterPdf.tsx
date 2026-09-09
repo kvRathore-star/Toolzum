@@ -54,7 +54,7 @@ export default function HeaderFooterPdf() {
     for (const part of parts) {
       const trimmed = part.trim();
       if (trimmed.includes('-')) {
-        const [start, end] = trimmed.split('-').map(s => parseInt(s.trim()));
+        const [start = 0, end = 0] = trimmed.split('-').map(s => parseInt(s.trim()));
         if (isNaN(start) || isNaN(end)) return null;
         for (let i = start; i <= end; i++) pages.push(i);
       } else {
@@ -83,7 +83,7 @@ export default function HeaderFooterPdf() {
       const now = new Date().toLocaleDateString();
 
       for (const pageNum of targetPages) {
-        const page = pages[pageNum - 1];
+        const page = pages[pageNum - 1]!;
         const { width, height } = page.getSize();
 
         const resolveText = (text: string) =>

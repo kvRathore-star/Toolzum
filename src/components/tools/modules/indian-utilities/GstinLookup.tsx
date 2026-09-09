@@ -32,9 +32,9 @@ function mockLookup(gstin: string) {
     registrationDate: `20${Math.floor(Math.random() * 4) + 20}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`,
     lastUpdatedDate: `20${Math.floor(Math.random() * 2) + 24}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`,
     status: 'Active',
-    taxpayerType: ['Regular', 'Composition', 'Unregistered'][Math.floor(Math.random() * 2)],
-    filingStatus: ['Filing Regularly', 'Filing Quarterly', 'Pending'][Math.floor(Math.random() * 2)],
-    constitution: ['Private Limited', 'Public Limited', 'Partnership', 'Proprietorship', 'LLP'][Math.floor(Math.random() * 5)],
+    taxpayerType: ['Regular', 'Composition', 'Unregistered'][Math.floor(Math.random() * 2)]!,
+    filingStatus: ['Filing Regularly', 'Filing Quarterly', 'Pending'][Math.floor(Math.random() * 2)]!,
+    constitution: ['Private Limited', 'Public Limited', 'Partnership', 'Proprietorship', 'LLP'][Math.floor(Math.random() * 5)]!,
   };
 }
 

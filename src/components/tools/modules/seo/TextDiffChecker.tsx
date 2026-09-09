@@ -13,10 +13,10 @@ export default function TextDiffChecker() {
     const maxLen = Math.max(lines1.length, lines2.length);
     const lines: { text: string; type: 'same' | 'added' | 'removed' }[] = [];
     for (let i = 0; i < maxLen; i++) {
-      if (i >= lines1.length) lines.push({ text: lines2[i], type: 'added' });
-      else if (i >= lines2.length) lines.push({ text: lines1[i], type: 'removed' });
-      else if (lines1[i] === lines2[i]) lines.push({ text: lines1[i], type: 'same' });
-      else { lines.push({ text: lines1[i], type: 'removed' }); lines.push({ text: lines2[i], type: 'added' }); }
+      if (i >= lines1.length) lines.push({ text: lines2[i]!, type: 'added' });
+      else if (i >= lines2.length) lines.push({ text: lines1[i]!, type: 'removed' });
+      else if (lines1[i] === lines2[i]) lines.push({ text: lines1[i]!, type: 'same' });
+      else { lines.push({ text: lines1[i]!, type: 'removed' }); lines.push({ text: lines2[i]!, type: 'added' }); }
     }
     setDiff({ lines });
   };

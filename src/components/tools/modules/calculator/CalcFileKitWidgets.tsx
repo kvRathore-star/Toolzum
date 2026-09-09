@@ -198,8 +198,8 @@ export function ScreenSizeConverter() {
   const calc = () => {
     const d = parseFloat(diag);
     const [wR, hR] = ratio.split(':').map(Number);
-    const h = d / Math.sqrt(1 + (wR / hR) ** 2);
-    const w = h * (wR / hR);
+    const h = d / Math.sqrt(1 + (wR! / hR!) ** 2);
+    const w = h * (wR! / hR!);
     const area = w * h;
     setResult(`${diag}" ${ratio}\nWidth: ${w.toFixed(1)}"\nHeight: ${h.toFixed(1)}"\nArea: ${area.toFixed(1)} sq in`);
   };
@@ -237,14 +237,14 @@ export function ShoeSizeConverter() {
   const shoeSizes: Record<string, Record<string, string>> = {
     'US': { '5': 'UK 4.5', '6': 'UK 5.5', '7': 'UK 6.5', '8': 'UK 7.5', '9': 'UK 8.5', '10': 'UK 9.5', '11': 'UK 10.5', '12': 'UK 11.5' },
   };
-  shoeSizes['UK'] = Object.fromEntries(Object.entries(shoeSizes['US']).map(([k, v]) => {
+  shoeSizes['UK'] = Object.fromEntries(Object.entries(shoeSizes['US']!).map(([k, v]) => {
     const match = v.match(/[\d.]+/);
     return [match ? match[0] : k, `US ${k}`];
   }));
 
   const convert = () => {
     const sizes = shoeSizes[from] || shoeSizes['US'];
-    const converted = sizes[size] || 'Unknown';
+    const converted = sizes![size] || 'Unknown';
     setResult(`${from} ${size} = ${converted} (approx)`);
   };
 
@@ -289,7 +289,7 @@ export function ZipFileExtractor() {
         if (err) { setContents('Error unzipping file.'); return; }
         Object.assign(files, unzipped);
         const names = Object.keys(files);
-        setContents(`ZIP contains ${names.length} file(s):\n${names.map(n => `  - ${n} (${files[n].length} bytes)`).join('\n')}`);
+        setContents(`ZIP contains ${names.length} file(s):\n${names.map(n => `  - ${n} (${files[n]!.length} bytes)`).join('\n')}`);
       });
     } catch { setContents('Failed to extract ZIP file.'); }
   };

@@ -17,9 +17,9 @@ export default function SwaggerOpenapiGenerator() {
     const paths: Record<string, any> = {};
     for (const line of lines) {
       const [method, path, ...descParts] = line.split(' ');
-      const m = method.toLowerCase();
-      paths[path] = paths[path] || {};
-      paths[path][m] = { summary: descParts.join(' '), responses: { '200': { description: 'OK', content: { 'application/json': { schema: { type: 'object' } } } } } };
+      const m = method!.toLowerCase();
+      paths[path!] = paths[path!] || {};
+      paths[path!][m] = { summary: descParts.join(' '), responses: { '200': { description: 'OK', content: { 'application/json': { schema: { type: 'object' } } } } } };
     }
     const spec = { openapi: '3.0.0', info: { title, version, description: desc }, paths };
     setResult(JSON.stringify(spec, null, 2));

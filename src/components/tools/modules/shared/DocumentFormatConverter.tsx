@@ -97,8 +97,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
     return p ? p.slug : 'pdf-to-word';
   }, [slug]);
 
-  const [inputKey, setInputKey] = useState<string>(initialSlug.split('-to-')[0]);
-  const [outputKey, setOutputKey] = useState<string>(initialSlug.split('-to-')[1]);
+  const [inputKey, setInputKey] = useState<string>(initialSlug.split('-to-')[0] ?? "");
+  const [outputKey, setOutputKey] = useState<string>(initialSlug.split('-to-')[1] ?? "");
   const [file, setFile] = useState<File | null>(null);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -106,7 +106,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
   const [statusText, setStatusText] = useState('');
 
   const resolvedSlug = useMemo(() => resolveSlug(inputKey, outputKey), [inputKey, outputKey]);
-  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === resolvedSlug) || FORMAT_PAIRS[0], [resolvedSlug]);
+  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === resolvedSlug) || FORMAT_PAIRS[0]!, [resolvedSlug]);
 
   const handleFormatChange = (role: "input" | "output", value: string) => {
     if (role === "input") setInputKey(value);
@@ -164,9 +164,9 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const paragraphs = xmlDoc.getElementsByTagName('w:p');
           const extracted: string[] = [];
           for (let i = 0; i < paragraphs.length; i++) {
-            const textRuns = paragraphs[i].getElementsByTagName('w:t');
+            const textRuns = paragraphs[i]!.getElementsByTagName('w:t');
             let text = '';
-            for (let j = 0; j < textRuns.length; j++) text += textRuns[j].textContent || '';
+            for (let j = 0; j < textRuns.length; j++) text += textRuns[j]!.textContent || '';
             extracted.push(text.trim());
           }
           setProgress(75);
@@ -211,7 +211,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const sortedY = Object.keys(linesMap).map(Number).sort((a, b) => b - a);
             let pageText = '';
             sortedY.forEach(y => {
-              const lineStr = linesMap[y].join(' ').trim();
+              const lineStr = linesMap[y]!.join(' ').trim();
               if (lineStr) pageText += `<p style="margin:0 0 10px 0;font-family:Calibri,Arial,sans-serif;font-size:11pt;">${lineStr}</p>\n`;
             });
             if (i < totalPages) htmlContent += `<div class="page">${pageText}</div>\n<br clear="all" style="page-break-before:always" />\n`;
@@ -227,8 +227,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const XLSX = await import('xlsx');
           const { jsPDF } = await import('jspdf');
           const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
+          const sheetName = workbook.SheetNames[0] ?? "";
+          const worksheet = workbook.Sheets[sheetName]!;
           const rawRows: unknown[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as unknown[][];
           if (rawRows.length === 0) throw new Error('No data found.');
           setProgress(80);
@@ -280,7 +280,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             });
             const sortedY = Object.keys(rowsMap).map(Number).sort((a, b) => b - a);
             sortedY.forEach(y => {
-              const items = rowsMap[y].sort((a, b) => a.x - b.x);
+              const items = rowsMap[y]!.sort((a, b) => a.x - b.x);
               const rowCells: string[] = [];
               let currentCell = '';
               let lastX = -999;
@@ -324,12 +324,12 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const slidesText: string[][] = [];
           for (let i = 0; i < slideFiles.length; i++) {
             setStatusText(`Extracting slide ${i + 1} of ${slideFiles.length}...`);
-            const xmlText = await slideFiles[i].file.async('text');
+            const xmlText = await slideFiles[i]!.file.async('text');
             const xmlDoc = new DOMParser().parseFromString(xmlText, 'text/xml');
             const textElements = xmlDoc.getElementsByTagName('a:t');
             const slideTexts: string[] = [];
             for (let j = 0; j < textElements.length; j++) {
-              const t = textElements[j].textContent;
+              const t = textElements[j]!.textContent;
               if (t && t.trim()) slideTexts.push(t.trim());
             }
             slidesText.push(slideTexts);
@@ -437,7 +437,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             canvas.height = viewport.height;
             canvas.width = viewport.width;
             await page.render({ canvasContext: context, viewport }).promise;
-            const base64Data = canvas.toDataURL('image/jpeg', 0.9).split(',')[1];
+            const base64Data = canvas.toDataURL('image/jpeg', 0.9).split(',')[1] ?? "";
             zip.file(`page_${i}.jpg`, base64Data, { base64: true });
             setProgress(Math.round((i / totalPages) * 100));
           }
@@ -502,7 +502,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const sortedY = Object.keys(linesMap).map(Number).sort((a, b) => b - a);
             bodyContent += `<section class="page" id="page-${i}">\n<h2 class="page-number">Page ${i}</h2>\n`;
             sortedY.forEach(y => {
-              const lineStr = linesMap[y].join(' ').trim();
+              const lineStr = linesMap[y]!.join(' ').trim();
               if (lineStr) {
                 const e = lineStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
                 bodyContent += `  <p>${e}</p>\n`;
@@ -535,8 +535,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const manifestItems = opfDoc.getElementsByTagName('item');
           const manifestMap: Record<string, string> = {};
           for (let i = 0; i < manifestItems.length; i++) {
-            const id = manifestItems[i].getAttribute('id');
-            const href = manifestItems[i].getAttribute('href');
+            const id = manifestItems[i]!.getAttribute('id');
+            const href = manifestItems[i]!.getAttribute('href');
             if (id && href) {
               const opfDir = opfPath.substring(0, opfPath.lastIndexOf('/') + 1);
               manifestMap[id] = opfDir + href;
@@ -545,14 +545,14 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const spineItems = opfDoc.getElementsByTagName('itemref');
           const spinePaths: string[] = [];
           for (let i = 0; i < spineItems.length; i++) {
-            const idref = spineItems[i].getAttribute('idref');
+            const idref = spineItems[i]!.getAttribute('idref');
             if (idref && manifestMap[idref]) spinePaths.push(manifestMap[idref]);
           }
           if (spinePaths.length === 0) throw new Error('No readable chapters found.');
           const extractedText: string[] = [];
           for (let i = 0; i < spinePaths.length; i++) {
             setStatusText(`Extracting chapter ${i + 1} of ${spinePaths.length}...`);
-            const chapterFile = zip.file(spinePaths[i]);
+            const chapterFile = zip.file(spinePaths[i]!);
             if (!chapterFile) continue;
             const htmlText = await chapterFile.async('text');
             const chapterDoc = parser.parseFromString(htmlText, 'text/html');
@@ -605,7 +605,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const sortedY = Object.keys(linesMap).map(Number).sort((a, b) => b - a);
             let paragraphsHtml = '';
             sortedY.forEach(y => {
-              const lineStr = linesMap[y].join(' ').trim();
+              const lineStr = linesMap[y]!.join(' ').trim();
               if (lineStr) {
                 const e = lineStr.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
                 paragraphsHtml += `<p>${e}</p>\n`;
@@ -633,7 +633,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const heic2any = (await import('heic2any')).default;
           const { PDFDocument } = await import('pdf-lib');
           const blobResult = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
-          const finalBlob = Array.isArray(blobResult) ? blobResult[0] : blobResult;
+          const finalBlob = Array.isArray(blobResult) ? blobResult[0]! : blobResult;
           const jpgBuffer = await finalBlob.arrayBuffer();
           const pdfDoc = await PDFDocument.create();
           const image = await pdfDoc.embedJpg(jpgBuffer);
@@ -672,7 +672,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {FORMAT_KEYS.map(k => (
-          <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
+          <option key={k} value={k}>{FORMATS[k]!.label} ({FORMATS[k]!.ext})</option>
         ))}
       </select>
 
@@ -692,7 +692,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {(VALID_OUTPUTS[inputKey] || []).map(k => (
-          <option key={k} value={k}>{FORMATS[k].label} ({FORMATS[k].ext})</option>
+          <option key={k} value={k}>{FORMATS[k]!.label} ({FORMATS[k]!.ext})</option>
         ))}
       </select>
     </div>

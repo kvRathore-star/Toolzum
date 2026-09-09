@@ -104,7 +104,7 @@ export default function CsvToSqlite() {
       }
 
       const delimiter = file.name.endsWith('.tsv') ? '\t' : ',';
-      const headers = lines[0].split(delimiter).map(h => h.trim().replace(/^["']|["']$/g, ''));
+      const headers = lines[0]!.split(delimiter).map(h => h.trim().replace(/^["']|["']$/g, ''));
       const safeHeaders = headers.map(h => h.replace(/[^a-zA-Z0-9_]/g, '_').replace(/^(\d)/, '_$1') || 'col');
 
       const database = new SQL.Database();
@@ -114,7 +114,7 @@ export default function CsvToSqlite() {
       const insertStmt = database.prepare(`INSERT INTO data (${safeHeaders.map(h => `"${h}"`).join(', ')}) VALUES (${safeHeaders.map(() => '?').join(', ')})`);
 
       for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(delimiter).map(v => v.trim().replace(/^["']|["']$/g, ''));
+        const values = lines[i]!.split(delimiter).map(v => v.trim().replace(/^["']|["']$/g, ''));
         if (values.length > 0) {
           try {
             insertStmt.run(values);
@@ -156,8 +156,8 @@ export default function CsvToSqlite() {
       setQueryTime(elapsed);
 
       if (stmt.length > 0) {
-        setResults({ columns: stmt[0].columns, rows: stmt[0].values.map((r) => r.map((v) => v === null ? 'NULL' : String(v))) });
-        toast.success(`Query returned ${stmt[0].values.length} rows in ${elapsed.toFixed(1)}ms`);
+        setResults({ columns: stmt[0]!.columns, rows: stmt[0]!.values.map((r) => r.map((v) => v === null ? 'NULL' : String(v))) });
+        toast.success(`Query returned ${stmt[0]!.values.length} rows in ${elapsed.toFixed(1)}ms`);
       } else {
         const modified = targetDb.getRowsModified();
         setResults({ columns: ['Result'], rows: [[modified > 0 ? `${modified} row(s) affected.` : 'Query executed successfully (no results).']] });
@@ -360,7 +360,7 @@ export default function CsvToSqlite() {
 
             {results && !error && (
               results.columns[0] === 'Result' ? (
-                <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-xs text-[var(--text-muted)] font-mono">{results.rows[0][0]}</div>
+                <div className="bg-[var(--bg-overlay)] rounded-xl p-4 text-xs text-[var(--text-muted)] font-mono">{results.rows[0]![0]}</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs font-mono">

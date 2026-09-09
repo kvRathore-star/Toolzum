@@ -13,7 +13,7 @@ export default function GpaCalculator() {
   const g = grades.split(',').map(g => g.trim().toUpperCase());
   const c = credits.split(',').map(Number);
   let tp = 0, tc = 0;
-  for (let i = 0; i < g.length; i++) { tp += (gradePointsMap[g[i]] || 0) * c[i]; tc += c[i]; }
+  for (let i = 0; i < g.length; i++) { tp += (gradePointsMap[g[i]!] || 0) * c[i]!; tc += c[i]!; }
   const hasInput = grades !== '' && credits !== '' && tc > 0;
   const gpa = hasInput ? tp / tc : 0;
   const customResult = (

@@ -18,7 +18,7 @@ export default function IndianAgeCalculator() {
   const [day, setDay] = useState('1');
   const [month, setMonth] = useState('1');
   const [year, setYear] = useState('2000');
-  const [targetDate, setTargetDate] = useState(new Date().toISOString().split('T')[0]);
+  const [targetDate, setTargetDate] = useState(new Date().toISOString().split('T')[0] ?? "");
 
   const [result, setResult] = useState<any>(null);
 
@@ -88,7 +88,7 @@ export default function IndianAgeCalculator() {
     setDay('1');
     setMonth('1');
     setYear('2000');
-    setTargetDate(new Date().toISOString().split('T')[0]);
+    setTargetDate(new Date().toISOString().split('T')[0] ?? "");
     setResult(null);
   };
 

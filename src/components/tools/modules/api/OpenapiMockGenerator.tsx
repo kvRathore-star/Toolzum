@@ -10,7 +10,7 @@ export default function OpenapiMockGenerator() {
     const mock: Record<string, any> = {};
     let currentPath = '';
     for (const line of lines) {
-      if (line.startsWith('/')) { currentPath = line.split(':')[0]; mock[currentPath] = {}; }
+      if (line.startsWith('/')) { currentPath = line.split(':')[0]!; mock[currentPath] = {}; }
       if (line.includes('type: integer')) mock[currentPath] = { data: [{ id: 1, name: 'John' }], total: 1 };
       if (line.includes('type: string')) mock[currentPath] = { data: [{ id: 1, name: 'John' }], total: 1 };
     }

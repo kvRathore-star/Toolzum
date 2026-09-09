@@ -30,13 +30,13 @@ export default function GifToWebpWebm() {
       try {
         const buffer = await file.arrayBuffer();
         const bytes = new Uint8Array(buffer);
-        const width = bytes[6] | (bytes[7] << 8);
-        const height = bytes[8] | (bytes[9] << 8);
+        const width = bytes[6]! | (bytes[7]! << 8);
+        const height = bytes[8]! | (bytes[9]! << 8);
         let frames = 0;
         let i = 13;
         const packed = bytes[10];
-        if (packed & 0x80) {
-          i += 3 * (1 << ((packed & 0x07) + 1));
+        if (packed! & 0x80) {
+          i += 3 * (1 << ((packed! & 0x07) + 1));
         }
         while (i < bytes.length) {
           if (bytes[i] === 0x2C) {
@@ -44,19 +44,19 @@ export default function GifToWebpWebm() {
             i += 9;
             const lctPacked = bytes[i];
             i++;
-            if (lctPacked & 0x80) {
-              i += 3 * (1 << ((lctPacked & 0x07) + 1));
+            if (lctPacked! & 0x80) {
+              i += 3 * (1 << ((lctPacked! & 0x07) + 1));
             }
             i++;
             while (i < bytes.length && bytes[i] !== 0x00) {
-              i += 1 + bytes[i];
+              i += 1 + bytes[i]!;
             }
             i++;
           } else if (bytes[i] === 0x21) {
             i++;
             i++;
             while (i < bytes.length && bytes[i] !== 0x00) {
-              i += 1 + bytes[i];
+              i += 1 + bytes[i]!;
             }
             i++;
           } else if (bytes[i] === 0x3B) {

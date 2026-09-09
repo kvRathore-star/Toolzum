@@ -123,15 +123,15 @@ export function GraphqlSchemaToJsonSchema() {
       const [, name, fields] = t.match(/(\w+)\s*\{([^}]+)\}/) || [];
       if (!name) continue;
       const props: Record<string, any> = {};
-      const fieldList = fields.split(/\s+/).filter(Boolean);
+      const fieldList = fields!.split(/\s+/).filter(Boolean);
       for (let i = 0; i < fieldList.length; i += 2) {
         if (!fieldList[i + 1]) continue;
         const fName = fieldList[i];
-        const fType = fieldList[i + 1].replace('!', '').replace('[', '').replace(']', '');
-        const required = fieldList[i + 1].includes('!');
+        const fType = fieldList[i + 1]!.replace('!', '').replace('[', '').replace(']', '');
+        const required = fieldList[i + 1]!.includes('!');
         const mapping: Record<string, string> = { ID: 'string', String: 'string', Int: 'integer', Float: 'number', Boolean: 'boolean' };
-        props[fName] = { type: mapping[fType] || 'string' };
-        if (required) props[fName].description = 'required';
+        props[fName!] = { type: mapping[fType] || 'string' };
+        if (required) props[fName!].description = 'required';
       }
       jsonSchema.properties[name.toLowerCase()] = { type: 'object', properties: props };
     }

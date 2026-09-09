@@ -98,7 +98,7 @@ function findDistrict(text: string): string | null {
   ];
   for (const p of distPatterns) {
     const m = text.match(p);
-    if (m) return m[1].trim().replace(/^[,\s]+|[,\s]+$/g, '');
+    if (m) return m[1]!.trim().replace(/^[,\s]+|[,\s]+$/g, '');
   }
   return null;
 }
@@ -108,7 +108,7 @@ function parseAddress(text: string): ParsedAddress | null {
   if (!trimmed) return null;
 
   const pinMatch = trimmed.match(/\b(\d{6})\b/);
-  const pincode = pinMatch ? pinMatch[1] : '';
+  const pincode = pinMatch ? pinMatch[1] ?? '' : '';
 
   const region = findRegion(trimmed);
   const state = region || '';
@@ -146,10 +146,10 @@ function parseAddress(text: string): ParsedAddress | null {
   let line1 = '';
 
   if (lines.length > 0) {
-    city = lines[lines.length - 1];
+    city = lines[lines.length - 1]!;
   }
   if (lines.length > 1) {
-    line2 = lines[lines.length - 2];
+    line2 = lines[lines.length - 2]!;
   }
   if (lines.length > 2) {
     line1 = lines.slice(0, -2).join(', ');
@@ -200,7 +200,7 @@ export default function IndianAddressParser() {
     const pin = parsed.pincode;
     if (!/^\d{6}$/.test(pin)) return false;
     if (!parsed.state) return true;
-    const firstDigit = pin[0];
+    const firstDigit = pin[0] ?? "";
     const region = INDIAN_REGIONS.find(r => r.name === parsed.state);
     if (!region) return null;
     return region.pin.includes(firstDigit);

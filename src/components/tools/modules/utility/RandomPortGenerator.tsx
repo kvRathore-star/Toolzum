@@ -38,7 +38,7 @@ export default function RandomPortGenerator() {
       <div className="space-y-2">
         {[0, 1, 2].map(i => {
           const label = ['Well-Known (0-1023)', 'Registered (1024-49151)', 'Dynamic (49152-65535)'][i];
-          const range = [{min:0,max:1023},{min:1024,max:49151},{min:49152,max:65535}][i];
+          const range = [{min:0,max:1023},{min:1024,max:49151},{min:49152,max:65535}][i]!;
           const checked = portRanges.some(r => r.min === range.min);
           return (
             <label key={i} className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">

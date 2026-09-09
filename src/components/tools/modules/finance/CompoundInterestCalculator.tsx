@@ -20,7 +20,7 @@ export default function CompoundInterestCalculator() {
       return { year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 };
     }) : [];
     const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%` : '';
-    const maxVal = yearData.length > 0 ? yearData[yearData.length - 1].value : 1;
+    const maxVal = yearData.length > 0 ? yearData[yearData.length - 1]!.value : 1;
     return { A, yearData, result, maxVal };
   }, [principal, rate, n, t]);
   const presets = [

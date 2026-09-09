@@ -135,7 +135,7 @@ export default function ScreenRecorder() {
         stopAllTracks();
       };
 
-      displayStream.getVideoTracks()[0].onended = () => {
+      displayStream.getVideoTracks()[0]!.onended = () => {
         if (recorder.state === 'recording' || recorder.state === 'paused') {
           recorder.stop();
         }

@@ -74,7 +74,7 @@ export default function GrayscalePdf() {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData.data;
         for (let j = 0; j < data.length; j += 4) {
-          const gray = 0.299 * data[j] + 0.587 * data[j + 1] + 0.114 * data[j + 2];
+          const gray = 0.299 * (data[j] ?? 0) + 0.587 * (data[j + 1] ?? 0) + 0.114 * (data[j + 2] ?? 0);
           data[j] = gray;
           data[j + 1] = gray;
           data[j + 2] = gray;
@@ -93,7 +93,7 @@ export default function GrayscalePdf() {
         }
 
         const pages = newPdf.getPages();
-        const currentPage = pages[pages.length - 1];
+        const currentPage = pages[pages.length - 1]!;
         const img = await newPdf.embedPng(imgData);
         const { width, height } = img.scale(1);
         currentPage.drawImage(img, {

@@ -40,7 +40,7 @@ const TRANSITIONS = [
   'With this in mind,', 'Looking ahead,', 'At its core,',
 ];
 
-function pick<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]; }
+function pick<T>(arr: T[]): T { return arr[Math.floor(Math.random() * arr.length)]!; }
 function pickN<T>(arr: T[], n: number): T[] {
   const shuffled = [...arr].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, Math.min(n, arr.length));
@@ -236,7 +236,12 @@ const TAKEAWAY_TEMPLATES: Record<Tone, string[]> = {
   ],
 };
 
-const AUDIENCE_CONTEXT: Record<Audience, Record<string, string>> = {
+interface AudienceCtx {
+  trend: string; implication: string; benefit: string; explanation: string;
+  finding: string; action_step: string; positive_outcome: string; key_benefit: string;
+  summary_point: string; definition: string; importance: string; analogy: string;
+}
+const AUDIENCE_CONTEXT: Record<Audience, AudienceCtx> = {
   General: {
     trend: 'digital transformation',
     implication: 'staying informed and adapting to change',
@@ -317,8 +322,8 @@ function fillFAQ(template: { q: string; a: string }, vars: Record<string, string
 }
 
 function generateOutline(topic: string, tone: Tone, audience: Audience, sections: SectionId[]): OutlineItem[] {
-  const ctx = AUDIENCE_CONTEXT[audience];
-  const words = TOPIC_KEYWORDS.default;
+  const ctx = AUDIENCE_CONTEXT[audience]!;
+  const words = TOPIC_KEYWORDS.default!;
   const vars: Record<string, string> = {
     topic, audience,
     trend: ctx.trend,

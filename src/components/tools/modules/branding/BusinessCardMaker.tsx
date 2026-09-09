@@ -25,7 +25,7 @@ export default function BusinessCardMaker() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const [activeSide, setActiveSide] = useState<'front' | 'back'>('front');
-  const [selectedTemplate, setSelectedTemplate] = useState<CardTemplate>(TEMPLATES[0]);
+  const [selectedTemplate, setSelectedTemplate] = useState<CardTemplate>(TEMPLATES[0]!);
   
   // Fields
   const [name, setName] = useState('John Doe');

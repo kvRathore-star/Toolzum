@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { rgb } from 'pdf-lib';
 import { PdfActionBase } from './PdfActionBase';
 
 export default function PdfTimestamp() {
@@ -24,7 +25,7 @@ export default function PdfTimestamp() {
             y: 15,
             size,
             font,
-            color: { r: 0.5, g: 0.5, b: 0.5 },
+            color: rgb(0.5, 0.5, 0.5),
           });
         }
       }}

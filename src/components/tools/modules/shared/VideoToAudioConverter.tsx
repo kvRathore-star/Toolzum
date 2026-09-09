@@ -46,7 +46,7 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
   const description = DESCRIPTIONS[slug];
 
-  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+  const pair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0]!, [slug]);
 
   const [file, setFile] = useState<File | null>(null);
   const [quality, setQuality] = useState(2);

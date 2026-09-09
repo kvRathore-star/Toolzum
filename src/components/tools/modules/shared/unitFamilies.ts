@@ -259,8 +259,8 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
     ],
     customConvert: (v, from, to) => {
       const toML: Record<string, number> = { tsp: 4.92892, tbsp: 14.7868, cup: 236.588, floz: 29.5735, ml: 1, l: 1000 };
-      const ml = v * toML[from];
-      return ml / toML[to];
+      const ml = v * toML[from]!;
+      return ml / toML[to]!;
     },
   },
   "fuel-consumption-converter": {
@@ -295,7 +295,7 @@ export const UNIT_FAMILIES: Record<string, FamilyConfig> = {
         a0: 1, a1: 0.5, a2: 0.25, a3: 0.125, a4: 0.0625, a5: 0.03125, a6: 0.015625,
         b4: 0.088388, b5: 0.044194,
       };
-      return (v / area[from]) * area[to];
+      return (v / area[from]!) * area[to]!;
     },
   },
   "clothing-size-converter": {

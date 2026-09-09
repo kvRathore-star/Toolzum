@@ -61,7 +61,7 @@ export default function CropPdf() {
       const pdfDoc = await PDFDocument.load(fileBytes);
       const pages = pdfDoc.getPages();
 
-      const pagesToCrop = selectedPage === 0 ? pages : [pages[selectedPage - 1]];
+      const pagesToCrop = selectedPage === 0 ? pages : [pages[selectedPage - 1]!];
 
       for (const page of pagesToCrop) {
         const { width, height } = page.getSize();

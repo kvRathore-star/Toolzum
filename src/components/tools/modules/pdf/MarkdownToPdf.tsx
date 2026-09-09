@@ -168,8 +168,8 @@ async function generatePdf(
   const tokens = marked.lexer(markdown);
 
   let startIndex = 0;
-  if (titlePage && tokens.length > 0 && tokens[0].type === 'heading' && tokens[0].depth === 1) {
-    const titleRuns = extractInlineRuns(tokens[0].tokens!);
+  if (titlePage && tokens.length > 0 && tokens[0]!.type === 'heading' && tokens[0]!.depth === 1) {
+    const titleRuns = extractInlineRuns(tokens[0]!.tokens!);
     const titleText = titleRuns.map(r => r.text).join('');
     const titleSize = 28;
     const tw = boldFont.widthOfTextAtSize(titleText, titleSize);
@@ -206,6 +206,7 @@ async function generatePdf(
 
   for (let i = startIndex; i < tokens.length; i++) {
     const token = tokens[i];
+    if (!token) continue;
 
     switch (token.type) {
       case 'heading': {
@@ -361,8 +362,8 @@ export default function MarkdownToPdf() {
     }
     setIsProcessing(true);
     try {
-      const [pw, ph] = PAGE_SIZES[pageSize];
-      const marginPt = MARGINS[margin];
+      const [pw, ph] = PAGE_SIZES[pageSize]!;
+      const marginPt = MARGINS[margin]!;
       const bytes = await generatePdf(markdown, pw, ph, marginPt, fontSize, includeTitlePage);
       const blob = new Blob([new Uint8Array(bytes)], { type: 'application/pdf' });
       if (pdfUrl) URL.revokeObjectURL(pdfUrl);

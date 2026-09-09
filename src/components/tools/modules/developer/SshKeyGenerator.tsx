@@ -75,7 +75,7 @@ function pointMul(s: bigint, p: { x: bigint; y: bigint }) {
 function encodePoint(p: { x: bigint; y: bigint }): Uint8Array {
   const yBytes = leBuf(p.y, 32);
   const xParity = Number(p.x & BigInt(1));
-  yBytes[31] |= (xParity << 7);
+  yBytes[31] = (yBytes[31] ?? 0) | (xParity << 7);
   return yBytes;
 }
 
@@ -91,15 +91,15 @@ function leBuf(n: bigint, len: number): Uint8Array {
 
 function bufToBigInt(buf: Uint8Array): bigint {
   let v = BigInt(0);
-  for (let i = buf.length - 1; i >= 0; i--) v = (v << BigInt(8)) | BigInt(buf[i]);
+  for (let i = buf.length - 1; i >= 0; i--) v = (v << BigInt(8)) | BigInt(buf[i] ?? 0);
   return v;
 }
 
 function clampScalar(hash: ArrayBuffer): bigint {
   const bytes = new Uint8Array(hash.slice(0, 32));
-  bytes[0] &= 0xf8;
-  bytes[31] &= 0x7f;
-  bytes[31] |= 0x40;
+  bytes[0] = bytes[0]! & 0xf8;
+  bytes[31] = bytes[31]! & 0x7f;
+  bytes[31] = bytes[31]! | 0x40;
   return bufToBigInt(bytes);
 }
 
@@ -141,7 +141,7 @@ function concat(...arrays: Uint8Array[]): Uint8Array {
 
 function arrToStr(a: Uint8Array): string {
   let s = '';
-  for (let i = 0; i < a.length; i++) s += String.fromCharCode(a[i]);
+  for (let i = 0; i < a.length; i++) s += String.fromCharCode(a[i] ?? 0);
   return s;
 }
 

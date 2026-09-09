@@ -120,38 +120,38 @@ export function CodeToCurlParser() {
     // fetch() pattern
     const fetchMatch = input.match(/fetch\s*\(\s*["'`](.*?)["'`]/s);
     if (fetchMatch) {
-      url = fetchMatch[1];
+      url = fetchMatch[1]!;
       const methodMatch = input.match(/method\s*:\s*["'`](\w+)["'`]/);
-      if (methodMatch) method = methodMatch[1];
+      if (methodMatch) method = methodMatch[1]!;
       const headerMatches = [...input.matchAll(/["'`](.*?)["'`]\s*:\s*["'`](.*?)["'`]/g)];
-      headers = headerMatches.filter(m => m[1].toLowerCase().includes('content') || m[1].toLowerCase().includes('auth') || m[1].toLowerCase().includes('accept')).map(m => `-H '${m[1]}: ${m[2]}'`);
+      headers = headerMatches.filter(m => m[1]!.toLowerCase().includes('content') || m[1]!.toLowerCase().includes('auth') || m[1]!.toLowerCase().includes('accept')).map(m => `-H '${m[1]}: ${m[2]}'`);
       const bodyMatch = input.match(/body\s*:\s*JSON\.stringify\((.*?)\)/s);
-      if (bodyMatch) body = bodyMatch[1];
+      if (bodyMatch) body = bodyMatch[1]!;
     }
 
     // axios pattern
     const axiosMatch = input.match(/axios\s*\.\s*(get|post|put|patch|delete)\s*\(\s*["'`](.*?)["'`]/s);
     if (axiosMatch) {
-      method = axiosMatch[1].toUpperCase();
-      url = axiosMatch[2];
+      method = axiosMatch[1]!.toUpperCase();
+      url = axiosMatch[2]!;
       const axiosHeaders = input.match(/headers\s*:\s*\{([^}]+)\}/s);
       if (axiosHeaders) {
-        const hm = [...axiosHeaders[1].matchAll(/["'`](.*?)["'`]\s*:\s*["'`](.*?)["'`]/g)];
+        const hm = [...axiosHeaders[1]!.matchAll(/["'`](.*?)["'`]\s*:\s*["'`](.*?)["'`]/g)];
         headers = hm.map(m => `-H '${m[1]}: ${m[2]}'`);
       }
       const axiosBody = input.match(/axios\s*\.\s*\w+\s*\([^)]*,\s*(\{[^}]+\})/s);
-      if (axiosBody) body = axiosBody[1];
+      if (axiosBody) body = axiosBody[1]!;
     }
 
     // XMLHttpRequest pattern
     const xhrMatch = input.match(/\.open\s*\(\s*["'`](\w+)["'`]\s*,\s*["'`](.*?)["'`]/s);
     if (xhrMatch) {
-      method = xhrMatch[1];
-      url = xhrMatch[2];
+      method = xhrMatch[1]!;
+      url = xhrMatch[2]!;
       const xhrHeaders = [...input.matchAll(/setRequestHeader\s*\(\s*["'`](.*?)["'`]\s*,\s*["'`](.*?)["'`]/g)];
       headers = xhrHeaders.map(m => `-H '${m[1]}: ${m[2]}'`);
       const xhrBody = input.match(/\.send\s*\((.*?)\)/s);
-      if (xhrBody && xhrBody[1].trim() !== '') body = xhrBody[1];
+      if (xhrBody && xhrBody[1]!.trim() !== '') body = xhrBody[1]!;
     }
 
     // Fallback: raw curl
@@ -159,7 +159,7 @@ export function CodeToCurlParser() {
       const curlUrl = input.match(/https?:\/\/[^\s"']+/);
       if (curlUrl) url = curlUrl[0];
       const curlMethod = input.match(/-X\s+(\w+)/);
-      if (curlMethod) method = curlMethod[1];
+      if (curlMethod) method = curlMethod[1]!;
     }
 
     if (!url) { toast.error('Could not detect URL'); return; }
@@ -303,11 +303,11 @@ export function PugToHtml() {
       const indent = line.search(/\S/);
       const content = line.trim();
 
-      while (indentStack.length > 0 && indentStack[indentStack.length - 1] >= indent) {
+      while (indentStack.length > 0 && indentStack[indentStack.length - 1]! >= indent) {
         if (out.length > 0) {
           const lastLine = out[out.length - 1];
-          const tagMatch = lastLine.match(/^<(\w+)/);
-          if (tagMatch && !['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagMatch[1])) {
+          const tagMatch = lastLine!.match(/^<(\w+)/);
+          if (tagMatch && !['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagMatch[1]!)) {
             out[out.length - 1] = lastLine + `</${tagMatch[1]}>`;
           }
         }
@@ -322,20 +322,20 @@ export function PugToHtml() {
       let selfClosing = false;
 
       const tagMatch = content.match(/^(\w[\w-]*)/);
-      if (tagMatch) tag = tagMatch[1];
+      if (tagMatch) tag = tagMatch[1]!;
 
       const idMatch = content.match(/#([\w-]+)/);
-      if (idMatch) id = idMatch[1];
+      if (idMatch) id = idMatch[1]!;
 
       const classMatches = [...content.matchAll(/\.([\w-]+)/g)];
-      classes = classMatches.map(m => m[1]);
+      classes = classMatches.map(m => m[1]!);
 
       const parenMatch = content.match(/\(([^)]+)\)/);
       if (parenMatch) {
         const attrStr = parenMatch[1];
-        const attrPairs = [...attrStr.matchAll(/(\w[\w-]*)=["']([^"']*?)["']/g)];
+        const attrPairs = [...attrStr!.matchAll(/(\w[\w-]*)=["']([^"']*?)["']/g)];
         attrs = attrPairs.map(m => ` ${m[1]}="${m[2]}"`).join('');
-        const attrBool = attrStr.match(/(\w[\w-]*)(?:,\s*|$)/g);
+        const attrBool = attrStr!.match(/(\w[\w-]*)(?:,\s*|$)/g);
         if (attrBool) {
           attrBool.forEach(a => {
             const name = a.replace(/[, ]/g, '').trim();
@@ -370,8 +370,8 @@ export function PugToHtml() {
     while (indentStack.length > 0) {
       if (out.length > 0) {
         const lastLine = out[out.length - 1];
-        const tagMatch = lastLine.match(/^<(\w+)/);
-        if (tagMatch && !['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagMatch[1])) {
+        const tagMatch = lastLine!.match(/^<(\w+)/);
+        if (tagMatch && !['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagMatch[1]!)) {
           out[out.length - 1] = lastLine + `</${tagMatch[1]}>`;
         }
       }

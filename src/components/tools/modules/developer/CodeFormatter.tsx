@@ -188,7 +188,7 @@ export default function CodeFormatter() {
     <Section title="Code Formatter">
       <div className="flex flex-wrap gap-2 mb-4">
         {CODE_FORMATTER_PRESETS.map((p) => (
-          <button key={p.label} onClick={() => { setLang(p.lang); setCode(p.code); setOutput(formatCode(p.code, p.lang, { indent, sortKeys, minify })); toast.success(`Loaded ${p.label}`); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={() => { setLang(p.lang); setCode(p.code!); setOutput(formatCode(p.code!, p.lang, { indent, sortKeys, minify })); toast.success(`Loaded ${p.label}`); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}

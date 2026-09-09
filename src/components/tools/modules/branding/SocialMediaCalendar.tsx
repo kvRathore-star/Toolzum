@@ -92,7 +92,7 @@ export default function SocialMediaCalendar() {
   };
 
   const duplicatePost = (post: Post) => {
-    const newPost: Post = { ...post, id: Date.now().toString(), date: new Date().toISOString().split('T')[0], status: 'draft' };
+    const newPost: Post = { ...post, id: Date.now().toString(), date: new Date().toISOString().split('T')[0]!, status: 'draft' };
     save([...posts, newPost]);
     toast.success('Duplicated!');
   };
@@ -151,7 +151,7 @@ export default function SocialMediaCalendar() {
         </div>
 
         {!showForm ? (
-          <button onClick={() => { setEditingId(null); setForm({ date: new Date().toISOString().split('T')[0], platform: 'instagram', content: '', status: 'draft' }); setShowForm(true); }}
+          <button onClick={() => { setEditingId(null); setForm({ date: new Date().toISOString().split('T')[0]!, platform: 'instagram', content: '', status: 'draft' }); setShowForm(true); }}
             className="w-full py-3 border-2 border-dashed border-[var(--border-subtle)] rounded-xl text-xs text-[var(--text-secondary)] hover:border-emerald-500/50 hover:text-emerald-500 transition-colors flex items-center justify-center gap-1.5">
             <Plus className="w-4 h-4" /> New Post
           </button>

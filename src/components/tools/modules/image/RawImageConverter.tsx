@@ -19,7 +19,7 @@ export default function RawImageConverter() {
   const [previews, setPreviews] = useState<string[]>([]);
   const [supported, setSupported] = useState<boolean[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [format, setFormat] = useState<(typeof FORMATS)[number]>(FORMATS[0]);
+  const [format, setFormat] = useState<(typeof FORMATS)[number]>(FORMATS[0]!);
   const [quality, setQuality] = useState(0.92);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
@@ -76,14 +76,14 @@ export default function RawImageConverter() {
     });
 
   const convertFile = async (idx: number): Promise<string> => {
-    const img = await loadImage(previews[idx]);
+    const img = await loadImage(previews[idx]!);
     const canvas = document.createElement('canvas');
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     canvas.getContext('2d')!.drawImage(img, 0, 0);
     const blob = await canvasToBlob(canvas, format.value, quality);
     const url = URL.createObjectURL(blob);
-    const baseName = files[idx].name.replace(/\.[^.]+$/, '');
+    const baseName = files[idx]!.name.replace(/\.[^.]+$/, '');
     const name = `${baseName}.${format.ext}`;
     return url;
   };
@@ -98,7 +98,7 @@ export default function RawImageConverter() {
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       const url = await convertFile(selectedIndex);
       setOutputUrl(url);
-      const baseName = files[selectedIndex].name.replace(/\.[^.]+$/, '');
+      const baseName = files[selectedIndex]!.name.replace(/\.[^.]+$/, '');
       setOutputName(`${baseName}.${format.ext}`);
       toast.success(`Converted to ${format.label}!`);
     } catch (e) {
@@ -117,7 +117,7 @@ export default function RawImageConverter() {
     try {
       for (const idx of indices) {
         const url = await convertFile(idx);
-        const baseName = files[idx].name.replace(/\.[^.]+$/, '');
+    const baseName = files[idx]!.name.replace(/\.[^.]+$/, '');
         downloadOrShare(url, `${baseName}.${format.ext}`);
         URL.revokeObjectURL(url);
         count++;
@@ -156,7 +156,7 @@ export default function RawImageConverter() {
     );
   }
 
-  const currentFile = files[selectedIndex];
+  const currentFile = files[selectedIndex]!;
   const isSupported = supported[selectedIndex];
   const showQuality = format.value !== 'image/png';
   const convertableCount = supported.filter(Boolean).length;

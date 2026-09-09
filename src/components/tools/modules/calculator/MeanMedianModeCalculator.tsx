@@ -13,7 +13,7 @@ export default function MeanMedianModeCalculator() {
   const nums = numbers.split(',').map(Number).filter(n => !isNaN(n)).sort((a, b) => a - b);
   const hasInput = nums.length > 0;
   const mean = hasInput ? nums.reduce((s, v) => s + v, 0) / nums.length : 0;
-  const median = hasInput ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1] + nums[nums.length / 2]) / 2)) : 0;
+  const median = hasInput ? (nums.length % 2 ? nums[Math.floor(nums.length / 2)] : ((nums[nums.length / 2 - 1]! + nums[nums.length / 2]!) / 2)) : 0;
   const mode = hasInput ? (() => { const freq: Record<number, number> = {}; nums.forEach(n => { freq[n] = (freq[n] || 0) + 1; }); const maxFreq = Math.max(...Object.values(freq)); return maxFreq > 1 ? Object.keys(freq).filter(k => freq[Number(k)] === maxFreq).join(', ') : 'No mode'; })() : '';
   const result = hasInput ? `Mean: ${mean.toFixed(2)} | Median: ${median}${mode !== 'No mode' ? ` | Mode: ${mode}` : ''}` : '';
   const resultStats = hasInput ? [

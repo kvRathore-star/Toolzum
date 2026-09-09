@@ -12,7 +12,7 @@ export default function ApiDocumentationGenerator() {
     const paramLines = params.split('\n').filter(Boolean);
     const table = paramLines.map(p => {
       const parts = p.split('-');
-      const field = parts[0].trim();
+      const field = parts[0]!.trim();
       const desc2 = parts.slice(1).join('-').trim();
       return `| ${field} | ${desc2} |`;
     }).join('\n');

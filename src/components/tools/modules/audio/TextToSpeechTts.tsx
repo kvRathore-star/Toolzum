@@ -22,7 +22,7 @@ export default function TextToSpeechTts() {
         if (availableVoices.length > 0 && !selectedVoiceURI) {
           // Find a good default voice (like a natural english one)
           const defaultVoice = availableVoices.find(v => v.lang === 'en-US' && v.name.includes('Google')) || availableVoices[0];
-          setSelectedVoiceURI(defaultVoice.voiceURI);
+          setSelectedVoiceURI(defaultVoice!.voiceURI);
         }
       };
 

@@ -57,22 +57,22 @@ function findErrors(text: string): GrammarError[] {
   const patterns: { regex: RegExp; extract: (_m: RegExpExecArray) => { start: number; end: number; msg: string; sug: string }; type: 'Grammar' | 'Punctuation' | 'Style' }[] = [
     {
       regex: /\b(your)\s+(going|doing|making|taking|coming|leaving|being|having|using|trying|running|walking|talking|eating|playing|working|studying|sleeping|saying|telling|asking|giving|getting|buying|bringing|meeting|starting|stopping|reading|writing)\b/gi,
-      extract: (m) => ({ start: m.index, end: m.index + m[1].length, msg: "Use 'you're' (you are) instead of 'your' (possessive)", sug: "you're" }),
+      extract: (m) => ({ start: m.index, end: m.index + m[1]!.length, msg: "Use 'you're' (you are) instead of 'your' (possessive)", sug: "you're" }),
       type: 'Grammar',
     },
     {
       regex: /\b(its)\s+(is|was|has|been|being|a|an|the|going|making|doing|getting|taking|coming|having|saying|telling|asking|giving|running|working|playing)\b/gi,
-      extract: (m) => ({ start: m.index, end: m.index + m[1].length, msg: "Use 'it's' (it is) instead of 'its' (possessive)", sug: "it's" }),
+      extract: (m) => ({ start: m.index, end: m.index + m[1]!.length, msg: "Use 'it's' (it is) instead of 'its' (possessive)", sug: "it's" }),
       type: 'Grammar',
     },
     {
       regex: /\b(their)\s+(is|was|are|were|has|have|been|being)\b/gi,
-      extract: (m) => ({ start: m.index, end: m.index + m[1].length, msg: "Use 'there' (existential) instead of 'their' (possessive)", sug: 'there' }),
+      extract: (m) => ({ start: m.index, end: m.index + m[1]!.length, msg: "Use 'there' (existential) instead of 'their' (possessive)", sug: 'there' }),
       type: 'Grammar',
     },
     {
       regex: /\b(there)\s+(book|books|car|cars|house|houses|home|homes|dog|dogs|cat|cats|idea|ideas|work|works|life|lives|family|families|child|children|friend|friends|money|name|names|company|companies|world|people|team|teams|office|offices|website|websites|project|projects)\b/gi,
-      extract: (m) => ({ start: m.index, end: m.index + m[1].length, msg: "Use 'their' (possessive) instead of 'there' (location)", sug: 'their' }),
+      extract: (m) => ({ start: m.index, end: m.index + m[1]!.length, msg: "Use 'their' (possessive) instead of 'there' (location)", sug: 'their' }),
       type: 'Grammar',
     },
     {
@@ -82,7 +82,7 @@ function findErrors(text: string): GrammarError[] {
     },
     {
       regex: /\.\s+([a-z])/g,
-      extract: (m) => ({ start: m.index + m[0].length - 1, end: m.index + m[0].length, msg: 'Capitalize after a period', sug: m[1].toUpperCase() }),
+      extract: (m) => ({ start: m.index + m[0].length - 1, end: m.index + m[0].length, msg: 'Capitalize after a period', sug: m[1]!.toUpperCase() }),
       type: 'Punctuation',
     },
     {
@@ -186,7 +186,7 @@ export default function AiGrammarChecker() {
   const correctedText = applyFixes(input, errors);
   const categories = ['Spelling', 'Grammar', 'Punctuation', 'Style'] as const;
   const counts: Record<string, number> = { Spelling: 0, Grammar: 0, Punctuation: 0, Style: 0 };
-  for (const e of errors) counts[e.type]++;
+  for (const e of errors) counts[e.type]!++;
 
   function renderHighlighted(text: string, errs: GrammarError[]) {
     if (!errs.length) return <span className="whitespace-pre-wrap">{text}</span>;
@@ -283,7 +283,7 @@ export default function AiGrammarChecker() {
                 <div className="flex flex-wrap items-center gap-3">
                   <span className="text-sm font-bold text-[var(--text-primary)]">{errors.length} error{errors.length > 1 ? 's' : ''} found</span>
                   <div className="flex flex-wrap gap-2">
-                    {categories.map((cat) => counts[cat] > 0 && (
+                    {categories.map((cat) => counts[cat]! > 0 && (
                       <span key={cat} className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${CAT_COLORS[cat]}`}>{cat}: {counts[cat]}</span>
                     ))}
                   </div>

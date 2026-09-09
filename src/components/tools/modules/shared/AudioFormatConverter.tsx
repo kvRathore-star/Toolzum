@@ -194,7 +194,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
   const { ffmpeg, isLoaded, isLoading, progress, loadFFmpeg } = useFFmpeg();
   const description = DESCRIPTIONS[slug];
 
-  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0], [slug]);
+  const initialPair = useMemo(() => FORMAT_PAIRS.find(p => p.slug === slug) || FORMAT_PAIRS[0]!, [slug]);
 
   const [inputKey, setInputKey] = useState<string>(initialPair.input);
   const [outputKey, setOutputKey] = useState<string>(initialPair.output);
@@ -202,8 +202,8 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const inputFmt = FORMATS[inputKey];
-  const outputFmt = FORMATS[outputKey];
+  const inputFmt = FORMATS[inputKey]!;
+  const outputFmt = FORMATS[outputKey]!;
 
   useEffect(() => {
     return () => { if (outputUrl) URL.revokeObjectURL(outputUrl); };
@@ -267,7 +267,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
       <div className="flex items-center justify-center gap-3 flex-wrap">
         <select value={inputKey} onChange={(e) => handleFormatChange("input", e.target.value)}
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
-          {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k].label} (.{FORMATS[k].ext})</option>)}
+          {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>
 
         <button onClick={swapFormats}
@@ -280,7 +280,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
 
         <select value={outputKey} onChange={(e) => handleFormatChange("output", e.target.value)}
           className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
-          {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k].label} (.{FORMATS[k].ext})</option>)}
+          {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>
       </div>
 

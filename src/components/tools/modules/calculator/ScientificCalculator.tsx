@@ -87,7 +87,7 @@ function evalScientific(input: string, degMode = true): number {
       }
     }
     let numStr = '';
-    while (pos < s.length && (/[0-9.]/).test(s[pos])) { numStr += s[pos++]; }
+    while (pos < s.length && (/[0-9.]/).test(s[pos]!)) { numStr += s[pos++]!; }
     if (numStr === '') throw new Error('Unexpected character');
     let val = parseFloat(numStr);
     if (pos < s.length && s[pos] === '!') { pos++; val = factorial(val); }

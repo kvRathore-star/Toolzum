@@ -71,7 +71,7 @@ function validateEmail(email: string): { valid: boolean; reason: string } {
 
 function isDisposable(email: string): boolean {
   const domain = email.split('@')[1]?.toLowerCase();
-  return DISPOSABLE_DOMAINS.includes(domain);
+  return DISPOSABLE_DOMAINS.includes(domain ?? "");
 }
 
 export default function EmailNormalizer() {
@@ -140,9 +140,9 @@ export default function EmailNormalizer() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.gmail)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Gmail with dots</button>
-        <button onClick={() => setInput(PRESETS.yahoo)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Yahoo</button>
-        <button onClick={() => setInput(PRESETS.corporate)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Corporate</button>
+        <button onClick={() => setInput(PRESETS.gmail!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Gmail with dots</button>
+        <button onClick={() => setInput(PRESETS.yahoo!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Yahoo</button>
+        <button onClick={() => setInput(PRESETS.corporate!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Corporate</button>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">

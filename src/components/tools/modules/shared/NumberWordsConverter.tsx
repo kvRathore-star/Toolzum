@@ -23,7 +23,7 @@ const fromRoman = (s: string): number => {
   const vals: Record<string, number> = { M: 1000, D: 500, C: 100, L: 50, X: 10, V: 5, I: 1 };
   let t = 0; const i = s.toUpperCase();
   for (let c = 0; c < i.length; c++) {
-    const cur = vals[i[c]] || 0, next = vals[i[c + 1]] || 0;
+    const cur = vals[i[c]!] || 0, next = vals[i[c + 1]!] || 0;
     t += cur < next ? -cur : cur;
   }
   return t;
@@ -43,8 +43,8 @@ const toWords = (n: number): string => {
     if (h) parts.push(ONES[h] + ' Hundred');
     const r = x % 100;
     if (r === 0) return parts.join(' ');
-    if (r < 10) parts.push(ONES[r]);
-    else if (r < 20) parts.push(TEENS[r - 10]);
+    if (r < 10) parts.push(ONES[r]!);
+    else if (r < 20) parts.push(TEENS[r - 10]!);
     else {
       const t = Math.floor(r / 10), o = r % 10;
       parts.push(TENS[t] + (o ? ' ' + ONES[o] : ''));

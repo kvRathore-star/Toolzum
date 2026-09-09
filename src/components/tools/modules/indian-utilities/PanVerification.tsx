@@ -74,11 +74,11 @@ export default function PanVerification() {
       return;
     }
 
-    const statusLetter = cleanPan[3];
+    const statusLetter = cleanPan[3] ?? "";
     const statusText = STATUS_MAP[statusLetter] || 'Unknown status character';
-    const surnameChar = cleanPan[4];
+    const surnameChar = cleanPan[4] ?? "";
     const serialText = cleanPan.substring(5, 9);
-    const checkChar = cleanPan[9];
+    const checkChar = cleanPan[9] ?? "";
 
     setValidationResult({
       isValid: true,

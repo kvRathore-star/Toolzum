@@ -197,7 +197,7 @@ function BulkLinkTab() {
       const lines = text.split('\n').filter(l => l.trim());
       const data: { phone: string; message: string }[] = [];
       for (let i = 0; i < lines.length; i++) {
-        const parts = lines[i].split(',').map(s => s.trim().replace(/^"|"$/g, ''));
+        const parts = lines[i]!.split(',').map(s => s.trim().replace(/^"|"$/g, ''));
         if (parts[0]) {
           const phone = parts[0].replace(/[\s\+\-\(\)]/g, '').replace(/^0+/, '');
           if (phone) data.push({ phone, message: parts[1] || '' });
@@ -223,7 +223,7 @@ function BulkLinkTab() {
   };
 
   const handleCopy = (index: number) => {
-    clipboardWrite(generateLink(csvData[index]));
+    clipboardWrite(generateLink(csvData[index]!));
     setCopiedIndex(index);
     setTimeout(() => setCopiedIndex(null), 2000);
   };
@@ -590,12 +590,12 @@ function ChatAnalyzerTab() {
       const match = line.match(dateRegex);
       if (match) {
         const [, datePart, hourStr] = match;
-        const sender = match[4].trim();
-        const msg = match[5].trim();
+        const sender = match[4]!.trim();
+        const msg = match[5]!.trim();
 
         senderCount[sender] = (senderCount[sender] || 0) + 1;
-        dayCount[datePart] = (dayCount[datePart] || 0) + 1;
-        const hour = parseInt(hourStr);
+        dayCount[datePart!] = (dayCount[datePart!] || 0) + 1;
+        const hour = parseInt(hourStr!);
         hourCount[hour] = (hourCount[hour] || 0) + 1;
 
         if (/<(Media omitted|image omitted|video omitted|document omitted|audio omitted)>/i.test(msg)) media++;
