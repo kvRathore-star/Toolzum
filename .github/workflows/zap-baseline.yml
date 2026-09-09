@@ -12,6 +12,7 @@ jobs:
         uses: zaproxy/action-baseline@v0.14.0
         with:
           target: "https://toolzum.com"
+          rules_file_name: ".zap-baseline-rules.tsv"
           # Fail the job only on medium+ findings. Lows (incl. the
           # documented CSP unsafe-inline/unsafe-eval tradeoff for
           # TF.js/Tesseract WASM) are reported, not gating.

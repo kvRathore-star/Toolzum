@@ -10,9 +10,12 @@ export async function onRequest(context: { request: Request; next: () => Promise
   if (country && typeof country === 'string' && country.length === 2) {
     const existing = response.headers.get('Set-Cookie') || '';
     if (!existing.includes(`user-country=${country}`)) {
+      // NOTE: HttpOnly is intentionally absent — src/lib/geo.ts reads this
+      // client-side. It holds a non-sensitive 2-letter country code only.
+      // Secure is safe: edge-only cookie, never set on http://localhost.
       response.headers.append(
         'Set-Cookie',
-        `user-country=${country}; Path=/; Max-Age=86400; SameSite=Lax`
+        `user-country=${country}; Path=/; Max-Age=86400; SameSite=Lax; Secure`
       );
     }
   }

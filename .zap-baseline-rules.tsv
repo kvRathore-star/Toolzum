@@ -1,0 +1,10 @@
+# ZAP baseline allowlist — accepted risks, reviewed 2026-09.
+# Format: <rule-id>\t<IGNORE|WARN|FAIL>\t<url-regex>\t<comment>
+# Anything not listed here fails the job (fail_action: true).
+#
+# 10010 Cookie No HttpOnly Flag: the only app-set cookie is user-country
+# (2-letter geo code, functions/_middleware.ts), which src/lib/geo.ts
+# reads client-side by design — HttpOnly would break geo detection.
+# better-auth session cookies are HttpOnly already. Revisit only if a
+# session-bearing cookie ever appears in this finding.
+10010	IGNORE	.*	Accepted: user-country must stay JS-readable; no session cookies affected.
