@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import * as UTIF from 'utif';
 import { PDFDocument, PageSizes } from 'pdf-lib';
 import { Upload, Download, RefreshCw, FileImage, Settings, Eye, Info } from 'lucide-react';
+import { EmptyState } from '@/components/EmptyState';
 
 type PageSizeOption = 'auto' | 'a4' | 'letter' | 'legal';
 type OrientationOption = 'auto' | 'portrait' | 'landscape';
@@ -377,13 +378,20 @@ export default function TiffToPdf() {
           )}
         </button>
 
-        {outputUrl && (
+        {outputUrl ? (
           <button
             onClick={handleDownload}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-semibold rounded-xl transition-all"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all"
           >
             <Download className="w-5 h-5" /> Download PDF
           </button>
+        ) : (
+          <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+            <EmptyState
+              title="Converted PDF will appear here"
+              message="Upload a TIFF image above."
+            />
+          </div>
         )}
       </div>
     </div>
