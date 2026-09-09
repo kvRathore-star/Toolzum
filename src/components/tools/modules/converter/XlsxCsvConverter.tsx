@@ -250,7 +250,7 @@ export default function XlsxCsvConverter() {
 
           {direction === 'xlsx-to-csv' && (
             <div className="flex items-center gap-2 pb-1">
-              <input aria-label="Delimiter"
+              <input aria-label="Include header row"
                 type="checkbox"
                 id="includeHeader"
                 checked={includeHeader}
