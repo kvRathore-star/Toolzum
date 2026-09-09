@@ -5,12 +5,14 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
 
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 type ModeDef = {
   slug: string;
   name: string;
   description: string;
   outputLabel: string;
-  transform: (data: any, input: string) => string;
+  transform: (data: JsonValue, input: string) => string;
 };
 
 export const MODES: Record<string, ModeDef> = {
@@ -25,7 +27,7 @@ export const MODES: Record<string, ModeDef> = {
     description: "Generate Zod validation schemas from JSON",
     outputLabel: "Zod Schema",
     transform: (d) => {
-      const infer = (v: any, k: string): string => {
+      const infer = (v: JsonValue, k: string): string => {
         if (v === null) return 'z.nullable(z.any())';
         if (typeof v === 'string') return k.match(/email|mail/i) ? 'z.string().email()' : k.match(/url|href|link/i) ? 'z.string().url()' : 'z.string()';
         if (typeof v === 'number') return Number.isInteger(v) ? 'z.number().int()' : 'z.number()';
@@ -34,22 +36,22 @@ export const MODES: Record<string, ModeDef> = {
         if (typeof v === 'object') return `z.object({\n${Object.entries(v).map(([kk, vv]) => `  "${kk}": ${infer(vv, kk)}`).join(',\n')}\n})`;
         return 'z.any()';
       };
-      return `import { z } from 'zod';\n\nexport const schema = z.object({\n${Object.entries(d).map(([k, v]) => `  "${k}": ${infer(v, k)}`).join(',\n')}\n});\n`;
+      return `import { z } from 'zod';\n\nexport const schema = z.object({\n${Object.entries(d as Record<string, JsonValue>).map(([k, v]) => `  "${k}": ${infer(v, k)}`).join(',\n')}\n});\n`;
     },
   },
   "json-to-url-params": {
     slug: "json-to-url-params", name: "JSON → URL Params",
     description: "Convert JSON object to URL query string",
     outputLabel: "Query String",
-    transform: (d) => '?' + new URLSearchParams(Object.fromEntries(Object.entries(d).map(([k, v]) => [k, String(v)]))).toString(),
+    transform: (d) => '?' + new URLSearchParams(Object.fromEntries(Object.entries(d as Record<string, JsonValue>).map(([k, v]) => [k, String(v)]))).toString(),
   },
   "json-flattener": {
     slug: "json-flattener", name: "JSON Flattener",
     description: "Flatten nested JSON to dot-notation key-value pairs",
     outputLabel: "Flattened",
     transform: (d) => {
-      const flatten = (obj: any, prefix = ''): Record<string, string> =>
-        Object.entries(obj).reduce((acc, [k, v]) => {
+      const flatten = (obj: JsonValue, prefix = ''): Record<string, string> =>
+        Object.entries(obj as Record<string, JsonValue>).reduce((acc, [k, v]) => {
           const key = prefix ? `${prefix}.${k}` : k;
           if (v && typeof v === 'object' && !Array.isArray(v)) Object.assign(acc, flatten(v, key));
           else acc[key] = String(v);
@@ -62,14 +64,14 @@ export const MODES: Record<string, ModeDef> = {
     slug: "json-ld-generator", name: "JSON-LD Generator",
     description: "Wrap JSON in schema.org JSON-LD structure",
     outputLabel: "JSON-LD",
-    transform: (d) => JSON.stringify({ "@context": "https://schema.org", "@type": "Thing", ...d }, null, 2),
+    transform: (d) => JSON.stringify({ "@context": "https://schema.org", "@type": "Thing", ...(d as Record<string, JsonValue>) }, null, 2),
   },
   "json-schema-generator": {
     slug: "json-schema-generator", name: "JSON Schema Generator",
     description: "Infer JSON Schema draft-07 from sample JSON",
     outputLabel: "JSON Schema",
     transform: (d) => {
-      const infer = (v: any): any => {
+      const infer = (v: JsonValue): unknown => {
         if (v === null) return { type: 'null' };
         if (typeof v === 'string') return { type: 'string' };
         if (typeof v === 'number') return { type: 'number' };
@@ -78,7 +80,7 @@ export const MODES: Record<string, ModeDef> = {
         if (typeof v === 'object') return { type: 'object', properties: Object.fromEntries(Object.entries(v).map(([k, vv]) => [k, infer(vv)])), required: Object.keys(v) };
         return {};
       };
-      return JSON.stringify({ $schema: "http://json-schema.org/draft-07/schema#", ...infer(d) }, null, 2);
+      return JSON.stringify({ $schema: "http://json-schema.org/draft-07/schema#", ...(infer(d) as Record<string, unknown>) }, null, 2);
     },
   },
   "json-size-analyzer": {
@@ -86,12 +88,12 @@ export const MODES: Record<string, ModeDef> = {
     description: "Analyze JSON payload size, keys, and nesting depth",
     outputLabel: "Analysis",
     transform: (d, raw) => {
-      const depth = (o: any): number => o && typeof o === 'object' ? 1 + Math.max(...Object.values(o).map(v => depth(v)), 0) : 0;
-      const countKeys = (o: any): number => o && typeof o === 'object' ? Object.keys(o).reduce((s, k) => s + countKeys(o[k]), 0) + Object.keys(o).length : 0;
+      const depth = (o: JsonValue): number => o && typeof o === 'object' ? 1 + Math.max(...Object.values(o as Record<string, JsonValue>).map(v => depth(v)), 0) : 0;
+      const countKeys = (o: JsonValue): number => { if (!o || typeof o !== 'object') return 0; const r = o as Record<string, JsonValue>; return Object.keys(r).reduce((s, k) => s + countKeys(r[k]), 0) + Object.keys(r).length; };
       return [
         `Characters:  ${raw.length}`,
         `Bytes:       ${new Blob([raw]).size}`,
-        `Top-level keys: ${Object.keys(d).length}`,
+        `Top-level keys: ${Object.keys(d as Record<string, JsonValue>).length}`,
         `Total keys:  ${countKeys(d)}`,
         `Nesting depth: ${depth(d)}`,
         `Type:        ${Array.isArray(d) ? 'Array' : 'Object'}`,

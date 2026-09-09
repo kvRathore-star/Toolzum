@@ -5,10 +5,28 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 
-function parseIcs(text: string): any[] {
-  const events: any[] = [];
+interface IcsAttendee {
+  params?: { CN?: string };
+  val?: string;
+}
+
+interface IcsEvent {
+  type?: string;
+  summary?: string;
+  dtstart?: Date | string;
+  dtend?: Date | string;
+  location?: string;
+  description?: string;
+  organizer?: string;
+  attendees?: string | (string | IcsAttendee)[];
+  status?: string;
+  [key: string]: string | Date | (string | IcsAttendee)[] | undefined;
+}
+
+function parseIcs(text: string): IcsEvent[] {
+  const events: IcsEvent[] = [];
   const lines = text.split(/\r?\n/);
-  let current: Record<string, any> | null = null;
+  let current: IcsEvent | null = null;
   for (const line of lines) {
     const trimmed = line.trim();
     if (trimmed === 'BEGIN:VEVENT') {
@@ -164,7 +182,7 @@ function generateIcs(events: Record<string, string>[], dateFormat: DateFormat): 
   return lines.join('\r\n');
 }
 
-function flattenIcsEvent(event: any, selectedFields: string[], dateFmt: DateFormat): Record<string, string> {
+function flattenIcsEvent(event: IcsEvent, selectedFields: string[], dateFmt: DateFormat): Record<string, string> {
   const record: Record<string, string> = {};
   if (selectedFields.includes('summary')) record.summary = event.summary || '';
   if (selectedFields.includes('dtstart')) record.dtstart = formatDate(event.dtstart, dateFmt);
@@ -174,7 +192,7 @@ function flattenIcsEvent(event: any, selectedFields: string[], dateFmt: DateForm
   if (selectedFields.includes('organizer')) record.organizer = event.organizer || '';
   if (selectedFields.includes('attendees')) {
     record.attendees = Array.isArray(event.attendees)
-      ? event.attendees.map((a: any) => typeof a === 'string' ? a : a.params?.CN || a.val || '').join('; ')
+      ? event.attendees.map((a) => typeof a === 'string' ? a : a.params?.CN || a.val || '').join('; ')
       : '';
   }
   if (selectedFields.includes('status')) record.status = event.status || '';
@@ -239,16 +257,16 @@ export default function IcsCsvConverter() {
 
       if (direction === 'ics-to-csv') {
         const data = parseIcs(text);
-        const parsedEvents = data.filter((e: any) => e.type === 'VEVENT');
+        const parsedEvents = data.filter((e) => e.type === 'VEVENT');
         if (parsedEvents.length === 0) {
           toast.error('No events found in the ICS file');
           return;
         }
-        const flat = parsedEvents.map((e: any) => flattenIcsEvent(e, selectedFields, dateFormat));
+        const flat = parsedEvents.map((e) => flattenIcsEvent(e, selectedFields, dateFormat));
         setEvents(flat);
         setPreview(flat.slice(0, 10));
         setFile(selectedFile);
-        const dates = parsedEvents.map((e: any) => e.dtstart).filter(Boolean);
+        const dates = parsedEvents.map((e) => e.dtstart).filter((d): d is Date | string => Boolean(d));
         const dateRange = dates.length > 0
           ? `${new Date(Math.min(...dates.map((d: Date | string) => new Date(d).getTime()))).toLocaleDateString()} - ${new Date(Math.max(...dates.map((d: Date | string) => new Date(d).getTime()))).toLocaleDateString()}`
           : 'N/A';
