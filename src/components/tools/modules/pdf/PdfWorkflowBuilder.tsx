@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useCallback, useRef } from 'react';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, PDFTextField, PDFCheckBox, PDFDropdown, PDFOptionList, PDFRadioGroup } from 'pdf-lib';
 import {
   FileText, Shuffle, Scissors,
   PenSquare, Info, Trash2,
@@ -193,11 +193,10 @@ export function PdfWorkflowBuilder() {
       const fields = doc.getForm().getFields();
       for (let i = 0; i < fields.length; i++) {
         const f = fields[i]; const v = formFields[i]?.value || '';
-        const cn = f.constructor.name;
-        if (cn === 'PDFTextField') (f as any).setText(v);
-        else if (cn === 'PDFCheckBox') v.toLowerCase() === 'yes' || v === 'true' || v === '1' ? (f as any).check() : (f as any).uncheck();
-        else if (cn === 'PDFDropdown' || cn === 'PDFOptionList') { if (v) (f as any).select(v); }
-        else if (cn === 'PDFRadioGroup') { if (v) (f as any).select(v); }
+        if (f instanceof PDFTextField) f.setText(v);
+        else if (f instanceof PDFCheckBox) v.toLowerCase() === 'yes' || v === 'true' || v === '1' ? f.check() : f.uncheck();
+        else if (f instanceof PDFDropdown || f instanceof PDFOptionList) { if (v) f.select(v); }
+        else if (f instanceof PDFRadioGroup) { if (v) f.select(v); }
       }
       doc.getForm().flatten();
       download(await doc.save(), `filled_${fillFileName}`);
@@ -330,7 +329,7 @@ export function PdfWorkflowBuilder() {
     );
   }
 
-  function tabBtn(mode: string, current: string, setter: (v: any) => void, children: React.ReactNode) {
+  function tabBtn<T extends string>(mode: T, current: string, setter: (v: T) => void, children: React.ReactNode) {
     return (
       <button onClick={() => setter(mode)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${mode === current ? 'bg-blue-600 text-white' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
         {children}

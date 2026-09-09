@@ -23,7 +23,7 @@ export function IniToJsonConverter() {
         const eqIdx = trimmed.indexOf('=');
         if (eqIdx > 0) {
           const key = trimmed.slice(0, eqIdx).trim();
-          let value: any = trimmed.slice(eqIdx + 1).trim();
+          let value: string | boolean | number = trimmed.slice(eqIdx + 1).trim();
           if (value === 'true') value = true;
           else if (value === 'false') value = false;
           else if (!isNaN(Number(value))) value = Number(value);
@@ -390,8 +390,8 @@ export function CurlToCodeConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">cURL to Code Converter</h2>
         <div className="flex flex-wrap gap-2">
-          {['fetch', 'axios', 'xhr', 'python', 'node'].map(lang => (
-            <button key={lang} onClick={() => setTargetLang(lang as any)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
+          {(['fetch', 'axios', 'xhr', 'python', 'node'] as const).map(lang => (
+            <button key={lang} onClick={() => setTargetLang(lang)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
           ))}
         </div>
         <textarea aria-label="Paste cURL command" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
@@ -451,17 +451,22 @@ export function HarAnalyzer() {
   const analyze = () => {
     try {
       const har = JSON.parse(input);
-      const entries = har?.log?.entries || [];
+      interface HarEntry {
+        request?: { url?: string };
+        response?: { status?: number; content?: { size?: number } };
+        timings?: { wait?: number; receive?: number };
+      }
+      const entries: HarEntry[] = har?.log?.entries || [];
       if (entries.length === 0) { setOutput('No entries found.'); return; }
 
-      const totalSize = entries.reduce((s: number, e: any) => s + (e.response?.content?.size || 0), 0);
-      const totalTime = entries.reduce((s: number, e: any) => s + (e.timings?.wait || 0) + (e.timings?.receive || 0), 0);
+      const totalSize = entries.reduce((s: number, e: HarEntry) => s + (e.response?.content?.size || 0), 0);
+      const totalTime = entries.reduce((s: number, e: HarEntry) => s + (e.timings?.wait || 0) + (e.timings?.receive || 0), 0);
 
       const domains: Record<string, number> = {};
       const statuses: Record<number, number> = {};
       const lines: string[] = [];
 
-      entries.forEach((e: any, i: number) => {
+      entries.forEach((e: HarEntry, i: number) => {
         try {
           const u = new URL(e.request?.url || '');
           domains[u.hostname] = (domains[u.hostname] || 0) + 1;
@@ -493,7 +498,7 @@ export function HarAnalyzer() {
       });
 
       let wf = 'Waterfall (text):\n';
-      entries.forEach((e: any, i: number) => {
+      entries.forEach((e: HarEntry, i: number) => {
         const wait = e.timings?.wait || 0;
         const recv = e.timings?.receive || 0;
         const total = wait + recv;

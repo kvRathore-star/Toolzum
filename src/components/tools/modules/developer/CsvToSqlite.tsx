@@ -46,16 +46,16 @@ export default function CsvToSqlite() {
 
   const refreshSchema = useCallback((database: SqlDb) => {
     const tbls: string[] = [];
-      database.exec("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").forEach((stmt: any) => {
-        stmt.values.forEach((row: any[]) => tbls.push(row[0] as string));
+      database.exec("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").forEach((stmt) => {
+        stmt.values.forEach((row) => tbls.push(String(row[0] ?? '')));
       });
     setTables(tbls);
 
     const schemaInfo: { table: string; columns: { name: string; type: string }[] }[] = [];
     tbls.forEach(t => {
       const cols: { name: string; type: string }[] = [];
-      database.exec(`PRAGMA table_info("${t}")`).forEach((stmt: any) => {
-        stmt.values.forEach((row: any[]) => {
+      database.exec(`PRAGMA table_info("${t}")`).forEach((stmt) => {
+        stmt.values.forEach((row) => {
           cols.push({ name: row[1] as string, type: row[2] as string });
         });
       });
@@ -156,7 +156,7 @@ export default function CsvToSqlite() {
       setQueryTime(elapsed);
 
       if (stmt.length > 0) {
-        setResults({ columns: stmt[0].columns, rows: stmt[0].values.map((r: any[]) => r.map((v: any) => v === null ? 'NULL' : String(v))) });
+        setResults({ columns: stmt[0].columns, rows: stmt[0].values.map((r) => r.map((v) => v === null ? 'NULL' : String(v))) });
         toast.success(`Query returned ${stmt[0].values.length} rows in ${elapsed.toFixed(1)}ms`);
       } else {
         const modified = targetDb.getRowsModified();
