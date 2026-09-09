@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import type { JsonValue } from '@/lib/json';
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
@@ -30,7 +31,6 @@ function formatCSV(headers: string[], rows: string[][]): string {
   return [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
 }
 
-type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 function parseJSON(s: string): JsonValue | null {
   try { return JSON.parse(s) as JsonValue; } catch { toast.error('Invalid JSON'); return null; }

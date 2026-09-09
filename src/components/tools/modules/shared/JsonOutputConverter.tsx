@@ -4,8 +4,8 @@ import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
+import type { JsonValue } from '@/lib/json';
 
-type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 type ModeDef = {
   slug: string;
