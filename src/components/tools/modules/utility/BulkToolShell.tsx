@@ -243,6 +243,7 @@ export function BulkToolShell({
         <div
           role="button"
           tabIndex={0}
+          aria-label="Drop files here or click to upload"
           onClick={() => fileRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click(); } }}
           className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] relative"
@@ -257,7 +258,7 @@ export function BulkToolShell({
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
             Zero-trust: Processing happens in your browser memory. No data leaves your device. Safe for corporate and financial files.
           </p>
-          <input aria-label="Zero-trust: Processing happens in your browser memory. No data leaves your devic" ref={fileRef} type="file" accept={accept} multiple onChange={handleFiles} className="hidden" />
+          <input ref={fileRef} type="file" accept={accept} multiple onChange={handleFiles} className="hidden" />
         </div>
 
         {/* File list */}
