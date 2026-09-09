@@ -83,6 +83,7 @@ export class ErrorBoundary extends Component<Props, State> {
           retryPending={this.state.retryPending}
           onRefresh={() => window.location.reload()}
           copyText={`Error: ${this.state.error?.message}\n\nStack: ${this.state.errorInfo}`}
+          debugText={`${this.state.error?.name}: ${this.state.error?.message}\n\n${this.state.errorInfo}`}
         />
       );
     }

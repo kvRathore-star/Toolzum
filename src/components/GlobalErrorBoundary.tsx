@@ -17,6 +17,7 @@ function FallbackComponent({ error, resetErrorBoundary }: FallbackProps) {
       onRetry={resetErrorBoundary}
       retryLabel="Reset Tool & Try Again"
       copyText={`[${errorName}] ${friendly.message}`}
+      debugText={error instanceof Error ? `${error.name}: ${error.message}\n\n${error.stack || ""}` : String(error)}
       hint="Try refreshing the page or clearing your browser cache. If the issue persists, contact support."
     />
   );

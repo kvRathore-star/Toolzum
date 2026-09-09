@@ -21,6 +21,7 @@ export default function Error({
           detail={error.digest ? `digest: ${error.digest}` : undefined}
           onRetry={reset}
           retryLabel="Try again"
+          debugText={`${error.name}: ${error.message}\n\n${error.stack || ""}`}
         />
       </div>
     </div>

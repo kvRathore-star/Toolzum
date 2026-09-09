@@ -18,6 +18,12 @@ interface ErrorMessageProps {
   copyText?: string;
   /** Extra hint line under the actions (e.g. cache/support pointers). */
   hint?: string;
+  /**
+   * Raw technical details (message + stack). Rendered only outside
+   * production, inside a collapsed <details> — useful when reproducing,
+   * never shown to end users.
+   */
+  debugText?: string;
 }
 
 /**
@@ -36,6 +42,7 @@ export function ErrorMessage({
   onRefresh,
   copyText,
   hint,
+  debugText,
 }: ErrorMessageProps) {
   const [copied, setCopied] = useState(false);
 
@@ -96,6 +103,16 @@ export function ErrorMessage({
         )}
       </div>
       {hint && <p className="text-[10px] text-zinc-500 mt-6 max-w-md">{hint}</p>}
+      {debugText && process.env.NODE_ENV !== "production" && (
+        <details className="mt-4 max-w-md text-left">
+          <summary className="cursor-pointer text-[11px] text-[var(--text-muted)] hover:text-[var(--text-secondary)]">
+            Technical details (dev only)
+          </summary>
+          <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-lg bg-[var(--bg-overlay)] p-3 text-[10px] font-mono text-[var(--text-secondary)]">
+            {debugText}
+          </pre>
+        </details>
+      )}
     </div>
   );
 }
