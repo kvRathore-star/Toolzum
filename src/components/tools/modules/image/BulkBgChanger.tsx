@@ -170,13 +170,13 @@ export default function BulkBgChanger() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
-        <div role="button" tabIndex={0} className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
+        <div role="button" tabIndex={0} aria-label="Upload product photos" className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-6 text-center hover:border-emerald-500/50 transition-colors cursor-pointer bg-[var(--bg-overlay)]/50 dark:bg-black/20"
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
           <ImagePlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
           <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Upload product photos</p>
           <p className="text-[10px] text-[var(--text-secondary)] mt-1">Select a color to remove, replace with your brand background</p>
-          <input aria-label="Select a color to remove, replace with your brand background" ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
+          <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
 
         {images.length > 0 && (

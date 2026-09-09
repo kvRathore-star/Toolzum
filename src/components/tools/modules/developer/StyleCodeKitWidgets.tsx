@@ -405,7 +405,7 @@ export function ProtobufDecoder() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Protobuf Decoder</h2>
         <p className="text-xs text-[var(--text-secondary)]">Decode protobuf wire format hex to readable field structure. Supports varints, strings, nested messages, and fixed-width types.</p>
         <PresetBar presets={presets} />
-        <textarea aria-label="Decode protobuf wire format hex to readable field structure. Supports varints, s" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
+        <textarea aria-label="Protobuf hex input" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
         {output && (

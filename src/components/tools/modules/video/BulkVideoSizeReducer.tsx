@@ -110,11 +110,11 @@ export default function BulkVideoSizeReducer() {
         <strong>Target-size encoding:</strong> FFmpeg adjusts bitrate to hit your desired file size per video.
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
-        <div role="button" tabIndex={0} onClick={() => fileRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click(); } }} className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
+        <div role="button" tabIndex={0} aria-label="Upload videos" onClick={() => fileRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click(); } }} className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)]">
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Upload videos</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Each video will be compressed to fit your target size</p>
-          <input aria-label="Each video will be compressed to fit your target size" ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
+          <input ref={fileRef} type="file" accept="video/*" multiple onChange={handleFiles} className="hidden" />
         </div>
         <div className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
           <div className="flex items-center gap-2 mb-3"><Settings2 className="w-4 h-4 text-[var(--text-muted)]" /><span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Target Size</span></div>

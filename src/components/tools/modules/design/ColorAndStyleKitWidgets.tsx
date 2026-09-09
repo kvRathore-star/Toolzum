@@ -319,7 +319,7 @@ export function IpAllowlistGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Allowlist Generator</h2>
         <p className="text-xs text-[var(--text-secondary)]">Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Cloudflare WAF from CIDR ranges.</p>
-        <textarea aria-label="Generate firewall rules for Nginx, Apache, iptables, AWS Security Groups, or Clo" rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"
+                  <textarea aria-label="CIDR ranges" rows={4} value={list} onChange={e => setList(e.target.value)} placeholder="One CIDR per line (e.g. 192.168.1.0/24)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-1 flex-wrap">
           {formats.map(f => (

@@ -116,7 +116,7 @@ export default function SecureNoteSharer() {
                 <span className="text-xs text-[var(--accent)] font-bold uppercase block flex items-center gap-1"><Trash2 className="w-4 h-4" /> Decrypted Note (Self-Destructed)</span>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-1">This note has been deleted from history. Copy it now if you need to retain the contents.</p>
               </div>
-              <textarea aria-label="This note has been deleted from history. Copy it now if you need to retain the c"
+              <textarea aria-label="Decrypted note"
                 value={decryptedNote}
                 readOnly
                 className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none mt-2"
