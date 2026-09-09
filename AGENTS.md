@@ -43,3 +43,13 @@ Otherwise, just push — Cloudflare Pages handles the rest.
 - **Guard pattern:** Computation must be inside `if (hasInput) { ... }`, NOT just the display. Inline division in template literals executes even in untaken ternary branches.
 - **CSS vars:** Use `var(--accent)`, `var(--bg-surface)`, `var(--text-primary)` etc. — not hardcoded Tailwind colors
 - **Category icons:** Defined in `src/lib/categoryTheme.ts` (canonical). Megamenu icons in `src/registry/megamenu-icons.ts` must match.
+
+### Verification Discipline (earned the hard way, Sep 2026 a11y session)
+
+- **Batch scripts that touch JSX must use a brace-aware tag scanner** (`[^>]*` truncates attributes at the `>` inside `=>`, hiding everything after `onChange`). One shared scanner, never rewritten per script.
+- **Verify with file-attributed output.** Grep/head pipelines that drop filenames invite confident wrong conclusions (happened twice: a truncated `stat` tail, an unattributed lint hit). Always keep the filename attached to every finding.
+- **Batch writes are two-phase: validate all, then write.** A mid-batch assert abort must never leave half a batch applied. Scripts must also be idempotent-safe (skip already-applied).
+- **Anchor checks must assert absence, not just presence.** Matching the old string is not enough — the target must also lack the thing being added (caught duplicate-label injections).
+- **Name controls from bound/visible identity, never positional proximity.** Sibling-text mirroring, placeholder copying, and shared names across different state are all mislabel vectors. When in doubt, leave unlabeled for human review rather than shipping a plausible-but-wrong name.
+- **Edits are additions-only.** Never retype surrounding expressions (caused a `parseInt`→`Number` behavior change and dropped template braces). Insert at a known offset; verify handler sets identical before/after (`removed == added`).
+- **Insert, don't reconstruct.** Prefer `aria-label` insertion right after the tag name over rebuilding attribute strings.
