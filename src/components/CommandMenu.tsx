@@ -22,7 +22,9 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
   const [query, setQuery] = useState("");
 
   const HISTORY_KEY = "toolzum_search_history";
-  const [history, setHistory] = useState<string[]>(() => {
+  // Category filter: narrows tool groups only — favorites, recents and
+  // actions always stay visible. Null = unfiltered (today's behavior).
+  const [catFilter, setCatFilter] = useState<string | null>(null);  const [history, setHistory] = useState<string[]>(() => {
     try {
       const raw = localStorage.getItem(HISTORY_KEY);
       const parsed: unknown = raw ? JSON.parse(raw) : [];
@@ -45,6 +47,7 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
         return next;
       });
     }
+    setCatFilter(null);
     onClose();
     command();
   };
@@ -92,6 +95,26 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
               <Command.Empty className="py-12 text-center text-sm text-[var(--text-muted)]">
                 No matching tools or settings found.
               </Command.Empty>
+
+              <div className="flex gap-1.5 overflow-x-auto px-2 py-2" role="group" aria-label="Filter by category">
+                <button
+                  onClick={() => setCatFilter(null)}
+                  aria-pressed={catFilter === null}
+                  className={`shrink-0 px-3 py-1 text-xs font-semibold rounded-full border transition-colors ${catFilter === null ? "bg-[var(--accent-ink)] text-white border-transparent" : "text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-[var(--text-primary)]"}`}
+                >
+                  All
+                </button>
+                {Object.keys(categories).map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setCatFilter(catFilter === c ? null : c)}
+                    aria-pressed={catFilter === c}
+                    className={`shrink-0 px-3 py-1 text-xs font-semibold rounded-full border transition-colors ${catFilter === c ? "bg-[var(--accent-ink)] text-white border-transparent" : "text-[var(--text-secondary)] border-[var(--border-subtle)] hover:text-[var(--text-primary)]"}`}
+                  >
+                    {c === "indian-utilities" ? "India Utilities" : c}
+                  </button>
+                ))}
+              </div>
 
               {!query && history.length > 0 && (
                 <Command.Group heading="Recent Searches" className="px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]">
@@ -155,7 +178,9 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
                 </Command.Item>
               </Command.Group>
 
-              {Object.entries(categories).map(([category, items]) => (
+              {Object.entries(categories)
+                .filter(([category]) => !catFilter || category === catFilter)
+                .map(([category, items]) => (
                 <Command.Group
                   key={category}
                   heading={category === "indian-utilities" ? "India Utilities" : category}
