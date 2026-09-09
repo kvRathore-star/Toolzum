@@ -298,12 +298,19 @@ export default function GifResizer() {
             </div>
           )}
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img
                 src={outputUrl}
                 alt="Resized GIF"
                 className="max-h-[240px] object-contain rounded-lg"
+              />
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Resized preview will appear here"
+                message="Upload a GIF above to resize."
               />
             </div>
           )}

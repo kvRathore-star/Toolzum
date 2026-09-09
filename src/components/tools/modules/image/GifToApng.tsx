@@ -225,7 +225,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
               {toApng && (
@@ -239,6 +239,13 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
               )}
               <button onClick={() => downloadOrShare(outputUrl, `${file!.name.split('.')[0]}.${toApng ? 'png' : 'gif'}`)}
                 className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg">Download {toApng ? 'APNG' : 'GIF'}</button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Converted file will appear here"
+                message="Upload a GIF above to convert."
+              />
             </div>
           )}
         </div>
