@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
+import type { JSZipObject } from 'jszip';
 import { toast } from 'react-hot-toast';
 import { getErrorMessage } from '@/utils/error';
 import { createDownloadBlob } from '@/utils/blob';
@@ -201,7 +202,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const page = await pdf.getPage(i);
             const textContent = await page.getTextContent();
             const linesMap: Record<number, string[]> = {};
-            textContent.items.forEach((item: any) => {
+            textContent.items.forEach((item) => {
+            if (!('transform' in item) || !('str' in item)) return;
               const y = Math.round(item.transform[5]);
               if (!linesMap[y]) linesMap[y] = [];
               linesMap[y].push(item.str);
@@ -227,7 +229,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const workbook = XLSX.read(arrayBuffer, { type: 'array' });
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
-          const rawRows: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+          const rawRows: unknown[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as unknown[][];
           if (rawRows.length === 0) throw new Error('No data found.');
           setProgress(80);
           setStatusText('Building PDF grid...');
@@ -246,7 +248,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           rawRows.forEach(row => {
             if (y + rowHeight > pageHeight - margin) { doc.addPage(); y = margin; }
             let x = margin;
-            row.slice(0, 8).forEach((cell: any) => {
+            row.slice(0, 8).forEach((cell: unknown) => {
               doc.rect(x, y, colWidth, rowHeight);
               doc.text(String(cell ?? '').substring(0, 22), x + 2, y + 5.5);
               x += colWidth;
@@ -263,13 +265,14 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const XLSX = await import('xlsx');
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
-          const allRows: any[][] = [];
+          const allRows: unknown[][] = [];
           for (let i = 1; i <= totalPages; i++) {
             setStatusText(`Analyzing page ${i} of ${totalPages}...`);
             const page = await pdf.getPage(i);
             const textContent = await page.getTextContent();
             const rowsMap: Record<number, { x: number; str: string; width: number }[]> = {};
-            textContent.items.forEach((item: any) => {
+            textContent.items.forEach((item) => {
+            if (!('transform' in item) || !('str' in item)) return;
               const y = Math.round(item.transform[5]);
               const x = Math.round(item.transform[4]);
               if (!rowsMap[y]) rowsMap[y] = [];
@@ -307,7 +310,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
           const JSZip = (await import('jszip')).default;
           const { jsPDF } = await import('jspdf');
           const zip = await JSZip.loadAsync(arrayBuffer);
-          const slideFiles: { name: string; file: any }[] = [];
+          const slideFiles: { name: string; file: JSZipObject }[] = [];
           zip.forEach((relativePath, fileObj) => {
             if (relativePath.startsWith('ppt/slides/slide') && relativePath.endsWith('.xml')) {
               slideFiles.push({ name: relativePath, file: fileObj });
@@ -490,7 +493,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const page = await pdf.getPage(i);
             const textContent = await page.getTextContent();
             const linesMap: Record<number, string[]> = {};
-            textContent.items.forEach((item: any) => {
+            textContent.items.forEach((item) => {
+            if (!('transform' in item) || !('str' in item)) return;
               const y = Math.round(item.transform[5]);
               if (!linesMap[y]) linesMap[y] = [];
               linesMap[y].push(item.str);
@@ -592,7 +596,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
             const page = await pdf.getPage(i);
             const textContent = await page.getTextContent();
             const linesMap: Record<number, string[]> = {};
-            textContent.items.forEach((item: any) => {
+            textContent.items.forEach((item) => {
+            if (!('transform' in item) || !('str' in item)) return;
               const y = Math.round(item.transform[5]);
               if (!linesMap[y]) linesMap[y] = [];
               linesMap[y].push(item.str);
