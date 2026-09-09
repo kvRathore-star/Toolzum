@@ -7,6 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 export default function GifCompressor() {
   const [file, setFile] = useState<File | null>(null);
@@ -251,7 +252,7 @@ export default function GifCompressor() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Compressed!</h4>
               <img src={outputUrl} alt="Compressed GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
@@ -268,6 +269,13 @@ export default function GifCompressor() {
               >
                 Download Compressed GIF
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Compressed GIF will appear here"
+                message="Upload a GIF above to compress."
+              />
             </div>
           )}
         </div>

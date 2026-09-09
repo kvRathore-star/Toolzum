@@ -7,6 +7,7 @@ import { Crop, Upload, Download, Loader2, Smartphone, Square, Monitor, Crown } f
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { EmptyState } from '@/components/EmptyState';
 
 const RATIOS = [
   { label: '9:16 Reel/Shorts', w: 1080, h: 1920, icon: Smartphone },
@@ -150,10 +151,17 @@ export default function ReelShortsMaker() {
                 <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
               </div>
             )}
-            {outputUrl && (
+            {outputUrl ? (
               <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <video controls className="w-full rounded-xl" src={outputUrl}></video>
                 <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}_cropped.mp4`} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all"><Download className="w-4 h-4" /> Download Cropped Video</a>
+              </div>
+            ) : (
+              <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+                <EmptyState
+                  title="Cropped video will appear here"
+                  message="Upload a video above to crop."
+                />
               </div>
             )}
           </div>

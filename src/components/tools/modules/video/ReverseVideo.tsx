@@ -7,6 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { EmptyState } from '@/components/EmptyState';
 
 export default function ReverseVideo() {
   const [file, setFile] = useState<File | null>(null);
@@ -178,7 +179,7 @@ export default function ReverseVideo() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Reversed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
@@ -189,6 +190,13 @@ export default function ReverseVideo() {
               >
                 Download Reversed Video
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Reversed video will appear here"
+                message="Upload a video above to reverse."
+              />
             </div>
           )}
         </div>

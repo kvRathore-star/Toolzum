@@ -8,6 +8,7 @@ import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
 import { Film, Image } from 'lucide-react';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { EmptyState } from '@/components/EmptyState';
 
 type InputMode = 'video' | 'image';
 
@@ -159,7 +160,7 @@ export default function VideoToGif() {
         </div>
       )}
 
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-4">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3"><h4 className="text-xs font-bold text-emerald-500">GIF Ready</h4>{outputSize && <span className="text-[10px] bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}</div>
           <div className="bg-zinc-100 dark:bg-black rounded-xl overflow-hidden p-4 flex items-center justify-center" style={{backgroundImage: 'linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee)', backgroundSize: '20px 20px', backgroundPosition: '0 0,10px 10px'}}>
@@ -172,6 +173,13 @@ export default function VideoToGif() {
           <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> No watermark, HD resolution (1080p+), batch convert multiple videos, custom loop count, add text overlays to GIFs.</p>
           </div>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Converted GIF will appear here"
+            message="Upload a video above to convert."
+          />
         </div>
       )}
     </div>

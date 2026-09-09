@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { EmptyState } from '@/components/EmptyState';
 
 const FORMATS = [
   { label: 'JPEG', value: 'image/jpeg', ext: 'jpg' },
@@ -263,7 +264,7 @@ export default function RawImageConverter() {
             <p className="mt-3 text-xs text-[var(--text-secondary)] truncate">{currentFile.name} &mdash; {(currentFile.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                 <h4 className="font-bold text-emerald-500">Complete</h4>
@@ -279,6 +280,13 @@ export default function RawImageConverter() {
                 </svg>
                 Download {outputName}
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Converted image will appear here"
+                message="Upload a RAW file above."
+              />
             </div>
           )}
         </div>

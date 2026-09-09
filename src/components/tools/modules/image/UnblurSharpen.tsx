@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { EmptyState } from '@/components/EmptyState';
 
 type Mode = 'sharpen' | 'blur' | 'motion-blur';
 type Format = 'image/jpeg' | 'image/png' | 'image/webp';
@@ -452,7 +453,7 @@ export default function UnblurSharpen() {
             </label>
 
             <div className="flex gap-2">
-              {outputUrl && (
+              {outputUrl ? (
                 <button
                   onClick={() => {
                     const ext = extensionMap[format];
@@ -463,6 +464,13 @@ export default function UnblurSharpen() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download
                 </button>
+              ) : (
+                <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+                  <EmptyState
+                    title="Processed image will appear here"
+                    message="Upload an image above to enhance."
+                  />
+                </div>
               )}
             </div>
           </div>

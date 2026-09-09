@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { fetchFile } from '@ffmpeg/util';
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 type Mode = 'mute' | 'replace' | 'volume';
 
@@ -273,7 +274,7 @@ export default function MuteVideo() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-2">Processing Complete!</h4>
               <p className="text-sm text-emerald-600 dark:text-emerald-300 mb-4">
@@ -288,6 +289,13 @@ export default function MuteVideo() {
               >
                 Download Video
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Muted video will appear here"
+                message="Upload a video above to mute."
+              />
             </div>
           )}
         </div>

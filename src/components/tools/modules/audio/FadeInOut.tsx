@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { fetchFile } from '@ffmpeg/util';
 import { Music, Loader2, Download, Volume2, Play, Square, Trash2 } from 'lucide-react';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 type FadeCurve = 'linear' | 'logarithmic' | 'exponential' | 's-curve';
 type OutputFormat = 'mp3' | 'wav' | 'm4a' | 'flac' | 'ogg';
@@ -344,7 +345,7 @@ export default function FadeInOut() {
               </button>
             )}
 
-            {outputUrl && (
+            {outputUrl ? (
               <div role="status" className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2 mb-1">
                   <Volume2 className="w-4 h-4 text-emerald-500" />
@@ -362,6 +363,13 @@ export default function FadeInOut() {
                   className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                   <Download className="w-4 h-4" /> Download {FORMAT_LABELS[outputFmt]}
                 </button>
+              </div>
+            ) : (
+              <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+                <EmptyState
+                  title="Processed audio will appear here"
+                  message="Upload audio above to edit."
+                />
               </div>
             )}
           </div>

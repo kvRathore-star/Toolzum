@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { fetchFile } from '@ffmpeg/util';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 const BANDS = [31, 62, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 const BAND_LABELS = ['31Hz', '62Hz', '125Hz', '250Hz', '500Hz', '1kHz', '2kHz', '4kHz', '8kHz', '16kHz'];
@@ -442,7 +443,7 @@ export default function AudioEqualizer() {
                 <audio controls className="w-full h-9" src={previewUrl}></audio>
               </div>
             )}
-            {outputUrl && (
+            {outputUrl ? (
               <div role="status">
                 <div className="text-[10px] font-semibold text-emerald-500 mb-1.5 flex items-center gap-1.5">
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -451,6 +452,13 @@ export default function AudioEqualizer() {
                   Equalized ({outputFormat.toUpperCase()})
                 </div>
                 <audio controls className="w-full h-9" src={outputUrl}></audio>
+              </div>
+            ) : (
+              <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+                <EmptyState
+                  title="Equalized audio will appear here"
+                  message="Upload audio above to equalize."
+                />
               </div>
             )}
             {outputUrl && (

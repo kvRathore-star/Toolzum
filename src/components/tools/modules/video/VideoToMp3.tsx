@@ -9,6 +9,7 @@ import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
 import { useSession } from '@/lib/auth-client';
 import { smartMax } from '@/utils/fileSizeLimits';
+import { EmptyState } from '@/components/EmptyState';
 
 const DAILY_LIMIT = 3;
 
@@ -154,7 +155,7 @@ export default function VideoToMp3() {
                </div>
              )}
 
-             {outputUrl && (
+             {outputUrl ? (
                <div className="space-y-4 pt-4 border-t border-[var(--border-subtle)]">
                  <audio controls className="w-full" src={outputUrl}></audio>
                  <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}.mp3`}
@@ -162,6 +163,13 @@ export default function VideoToMp3() {
                    <Download className="w-5 h-5" />
                    Download MP3
                  </a>
+               </div>
+             ) : (
+               <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+                 <EmptyState
+                   title="Converted audio will appear here"
+                   message="Upload a video above to extract audio."
+                 />
                </div>
              )}
            </div>

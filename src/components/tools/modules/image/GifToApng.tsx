@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import NextImage from "next/image";
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 type Mode = 'gif-to-apng' | 'apng-to-gif';
 
@@ -255,9 +256,16 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             </div>
           )}
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="bg-white dark:bg-black border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex items-center justify-center min-h-[240px]">
               <img src={outputUrl} alt="Converted" className="max-h-[240px] object-contain rounded-lg" />
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Converted preview will appear here"
+                message="Upload a GIF above to convert."
+              />
             </div>
           )}
 

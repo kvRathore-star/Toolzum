@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import Image from "next/image";
 import { createDownloadBlob } from '@/utils/blob';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { EmptyState } from '@/components/EmptyState';
 
 export default function GifToMp4() {
   const [file, setFile] = useState<File | null>(null);
@@ -108,7 +109,7 @@ export default function GifToMp4() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">MP4 Ready!</h4>
               <video src={outputUrl} controls autoPlay loop className="w-full max-h-[200px] rounded-lg mb-6" />
@@ -118,6 +119,13 @@ export default function GifToMp4() {
               >
                 Download MP4
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Converted MP4 will appear here"
+                message="Upload a GIF above to convert."
+              />
             </div>
           )}
         </div>
