@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import NextImage from "next/image";
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { isLowEndDevice } from '@/lib/device';
 
 export default function BlurFace() {
   const [image, setImage] = useState<string | null>(null);
@@ -14,6 +15,9 @@ export default function BlurFace() {
   const ensureModel = async () => {
     if (modelRef.current) return modelRef.current;
     setIsLoadingModel(true);
+    if (isLowEndDevice()) {
+      toast.loading("Large AI download on a constrained device — this may take a while…", { id: 'blur-model-slow' });
+    }
     toast.loading("Loading AI face detection model...", { id: 'blur-model' });
     try {
       const [{ load: loadBlazeface }] = await Promise.all([
@@ -22,9 +26,11 @@ export default function BlurFace() {
       ]);
       const m = await loadBlazeface();
       modelRef.current = m;
+      toast.dismiss('blur-model-slow');
       toast.success("Face detection model ready", { id: 'blur-model' });
       return m;
     } catch (err) {
+      toast.dismiss('blur-model-slow');
       toast.error("Failed to load face detection model", { id: 'blur-model' });
       console.error("Failed to load blazeface", err);
       return null;

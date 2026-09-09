@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { isLowEndDevice } from '@/lib/device';
 
 type FFmpegInstance = InstanceType<typeof import('@ffmpeg/ffmpeg').FFmpeg>;
 
@@ -235,5 +236,8 @@ export function useFFmpeg() {
     logs,
     isFirstLoad,
     loadFFmpeg,
+    // Lets tool UIs warn before the ~30MB first download on constrained
+    // devices. Never gates loading — see isLowEndDevice docs.
+    isLowEndDevice: isLowEndDevice(),
   };
 }
