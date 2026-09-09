@@ -6,6 +6,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import JSZip from 'jszip';
+import { EmptyState } from '@/components/EmptyState';
 
 let pdfjsLib: any = null;
 
@@ -320,7 +321,7 @@ export default function PdfAdvanced() {
         </button>
       </div>
 
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Complete</h4>
@@ -329,6 +330,13 @@ export default function PdfAdvanced() {
             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             Download {action === 'zip' ? 'ZIP' : 'PDF'}
           </button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Result will appear here"
+            message="Run the action above."
+          />
         </div>
       )}
     </div>

@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { EmptyState } from '@/components/EmptyState';
 
 function hexToRgb(hex: string): [number, number, number] {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -84,11 +85,18 @@ export function PdfBackgroundColor() {
         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Processing...' : 'Apply Background Color'}
       </button>
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `bg_${file.name}`)}
             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Colored PDF will appear here"
+            message="Pick a background color above to begin."
+          />
         </div>
       )}
     </div>
@@ -199,11 +207,18 @@ export function PdfAddBlankPage() {
         className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Processing...' : 'Add Blank Pages'}
       </button>
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `blank_${file.name}`)}
             className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Updated PDF will appear here"
+            message="Add blank pages above to begin."
+          />
         </div>
       )}
     </div>

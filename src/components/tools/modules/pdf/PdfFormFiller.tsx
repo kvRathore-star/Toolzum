@@ -6,6 +6,7 @@ import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
+import { EmptyState } from '@/components/EmptyState';
 
 interface FormFieldData {
   name: string;
@@ -185,7 +186,7 @@ export default function PdfFormFiller() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center">
               <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">PDF Generated Successfully!</h4>
               <button 
@@ -194,6 +195,13 @@ export default function PdfFormFiller() {
               >
                 Download PDF
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Filled PDF will appear here"
+                message="Fill the form above to generate."
+              />
             </div>
           )}
         </div>

@@ -7,6 +7,7 @@ import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { createDownloadBlob } from '@/utils/blob';
+import { EmptyState } from '@/components/EmptyState';
 
 // Configure pdfjs worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
@@ -295,7 +296,7 @@ export default function EsignPdf() {
             </button>
           </div>
 
-          {outputUrl && (
+          {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4">
               <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">Document Signed!</h4>
               <button 
@@ -304,6 +305,13 @@ export default function EsignPdf() {
               >
                 Download Signed PDF
               </button>
+            </div>
+          ) : (
+            <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+              <EmptyState
+                title="Signed PDF will appear here"
+                message="Upload, sign, then download above."
+              />
             </div>
           )}
         </div>

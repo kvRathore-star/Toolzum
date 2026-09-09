@@ -6,6 +6,7 @@ import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { createDownloadBlob } from '@/utils/blob';
+import { EmptyState } from '@/components/EmptyState';
 
 export default function PdfOptimizer() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -102,7 +103,7 @@ export default function PdfOptimizer() {
         </button>
       </div>
 
-      {outputUrl && outputSize && (
+      {outputUrl && outputSize ? (
         <div aria-live="polite" className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 animate-in slide-in-from-bottom-4">
           <div className="w-full">
             <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-2">Optimization Complete!</h4>
@@ -124,6 +125,13 @@ export default function PdfOptimizer() {
           >
             Download PDF
           </button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Optimized PDF will appear here"
+            message="Upload a file above, then click Optimize PDF."
+          />
         </div>
       )}
     </div>

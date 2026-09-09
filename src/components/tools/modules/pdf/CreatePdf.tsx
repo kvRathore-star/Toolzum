@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { EmptyState } from '@/components/EmptyState';
 
 type InputMode = 'text' | 'csv' | 'json' | 'xml';
 
@@ -306,7 +307,7 @@ export default function CreatePdf() {
         {isProcessing ? 'Creating PDF...' : 'Create PDF'}
       </button>
 
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">PDF Ready</h4>
@@ -316,6 +317,13 @@ export default function CreatePdf() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download PDF
           </button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Your PDF will appear here"
+            message="Fill in the fields above and click Generate."
+          />
         </div>
       )}
     </div>

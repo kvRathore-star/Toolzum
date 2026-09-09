@@ -7,6 +7,7 @@ import { PDFDocument } from 'pdf-lib';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { createDownloadBlob } from '@/utils/blob';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { EmptyState } from '@/components/EmptyState';
 
 export default function PdfMerger() {
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -120,7 +121,7 @@ export default function PdfMerger() {
         </div>
       )}
 
-      {outputUrl && (
+      {outputUrl ? (
         <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 animate-in slide-in-from-bottom-4">
           <div>
             <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400">Merge Complete!</h4>
@@ -134,6 +135,13 @@ export default function PdfMerger() {
           >
             Download PDF
           </button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Merged PDF will appear here"
+            message="Add two or more files above, then click Merge PDFs."
+          />
         </div>
       )}
     </div>

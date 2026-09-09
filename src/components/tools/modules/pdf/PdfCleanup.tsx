@@ -7,6 +7,7 @@ import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
+import { EmptyState } from '@/components/EmptyState';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -193,7 +194,7 @@ export default function PdfCleanup() {
         </button>
       </div>
 
-      {outputUrl && (
+      {outputUrl ? (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4 animate-in zoom-in-95 duration-300">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
             <h4 className="font-bold text-emerald-500">Cleanup Complete</h4>
@@ -203,6 +204,13 @@ export default function PdfCleanup() {
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Download Cleaned PDF
           </button>
+        </div>
+      ) : (
+        <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+          <EmptyState
+            title="Cleaned PDF will appear here"
+            message="Upload a PDF above to clean."
+          />
         </div>
       )}
     </div>

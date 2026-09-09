@@ -7,6 +7,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import * as UTIF from 'utif';
 import JSZip from 'jszip';
 import { Upload, Download, RefreshCw, FileText, Image, Settings, Eye, Info } from 'lucide-react';
+import { EmptyState } from '@/components/EmptyState';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -361,13 +362,20 @@ export default function PdfToTiff() {
           )}
         </button>
 
-        {outputUrl && (
+        {outputUrl ? (
           <button
             onClick={handleDownload}
             className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all"
           >
             <Download className="w-5 h-5" /> Download {mode === 'multi' ? 'TIFF' : 'ZIP'}
           </button>
+        ) : (
+          <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+            <EmptyState
+              title="Converted files will appear here"
+              message="Upload a PDF above to convert."
+            />
+          </div>
         )}
       </div>
     </div>

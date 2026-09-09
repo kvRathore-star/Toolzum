@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
+import { EmptyState } from '@/components/EmptyState';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 import { Upload, Download, RefreshCw, FileText, Image, Settings, Eye, Info } from 'lucide-react';
@@ -314,11 +315,18 @@ export default function PdfToPng() {
           className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all">
           {isProcessing ? <><RefreshCw className="w-5 h-5 animate-spin" /> Converting...</> : <><Settings className="w-5 h-5" /> Convert to {format.toUpperCase()}</>}
         </button>
-        {outputUrl && (
+        {outputUrl ? (
           <button onClick={handleDownload}
             className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all">
             <Download className="w-5 h-5" /> Download ZIP
           </button>
+        ) : (
+          <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
+            <EmptyState
+              title="Converted images will appear here"
+              message="Upload a PDF above to convert its pages."
+            />
+          </div>
         )}
       </div>
     </div>
