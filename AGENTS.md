@@ -6,11 +6,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Project Overview
 
-**Toolzum.com** — privacy-first PWA with **1,149 routed tool pages** (1,067 in category listings + 82 SEO landing pages) across 21 categories. All processing is client-side (nothing uploaded). Built with Next.js 16, React 19, Capacitor (Android), Cloudflare Pages + D1.
+**Toolzum.com** — privacy-first PWA with **1,148 routed tool pages** (1,066 in category listings + 82 SEO landing pages) across 21 categories. All processing is client-side (nothing uploaded). Built with Next.js 16, React 19, Capacitor (Android), Cloudflare Pages + D1.
 
 ### Key Architecture
 
-- **Tool registry:** `src/registry/tools-client-index.ts` (1,149 tools), `src/lib/categoryTheme.ts` (icon/color per category)
+- **Tool registry:** `src/registry/tools-client-index.ts` (1,148 tools), `src/lib/categoryTheme.ts` (icon/color per category)
 - **Shared shell:** `src/components/tools/modules/shared/CalculatorShell.tsx` — wraps ~90+ calculators with consistent header, result panel, copy/download/history
 - **Dynamic loading:** `src/components/tools/modules/DynamicModuleWrapper.tsx` — lazy-loads tool modules by slug
 - **Route pattern:** `src/app/[category]/[tool]/page.tsx` — tools live at `/{category}/{tool-slug}/`

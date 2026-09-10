@@ -363,7 +363,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "video-to-text-transcription",
     "category": "Transcription",
     "description": "Clean up and restructure raw video transcription logs into readable scripts, articles, or outlines using AI. Paste a messy transcript dump and pick a target format.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "48",
@@ -403,7 +403,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "text-to-speech-tts",
     "category": "Audio",
     "description": "Generate natural-sounding speech from text with AI voices in Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download as MP3 or WAV.",
-    "isPro": true
+    "isPro": false
   },
   {
     "id": "53",
@@ -475,7 +475,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "audio-to-text-transcription",
     "category": "Transcription",
     "description": "Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "66",
@@ -683,7 +683,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "speech-to-text",
     "category": "Audio",
     "description": "Transcribe audio to text in multiple languages — supports MP3, WAV, M4A, and FLAC with AI-powered speech recognition.",
-    "isPro": true
+    "isPro": false
   },
   {
     "id": "106",
@@ -1683,7 +1683,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "resume-ats-score-checker",
     "category": "AI",
     "description": "Analyzes uploaded resumes against a job description using AI to calculate an ATS compatibility score and provide actionable suggestions. No signup or account required.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "261",
@@ -1771,7 +1771,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "pdf-ai-summariser",
     "category": "AI",
     "description": "Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "278",
@@ -2027,7 +2027,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "complaint-letter-generator",
     "category": "indian-utilities",
     "description": "Generates legally correct formal complaint letters citing Indian consumer law — Consumer Protection Act 2019, RERA, TRAI, or RBI regulations. AI-powered with your API key.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "auto-10030",
@@ -2035,7 +2035,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "brand-color-palette-generator",
     "category": "Branding",
     "description": "Describe your brand and get a complete 6-color palette with usage suggestions for designers. Uses AI to generate harmonious color schemes.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "auto-10031",
@@ -3750,14 +3750,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "514",
-    "name": "Crypto & Hash Toolkit",
-    "slug": "crypto-kit",
-    "category": "Developer",
-    "description": "Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.",
-    "isPro": false
-  },
-  {
     "id": "515",
     "name": "TOML Converter",
     "slug": "toml-converter",
@@ -4259,7 +4251,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "gemini-watermark-remover",
     "category": "Image",
     "description": "Remove the visible sparkle watermark from Gemini AI-generated images using reverse alpha blending. Supports single image and batch processing with ZIP download. 100% client-side — nothing is uploaded.",
-    "isPro": true
+    "isPro": false
   },
   {
     "id": "502",

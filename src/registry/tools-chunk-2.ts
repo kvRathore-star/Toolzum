@@ -1294,17 +1294,6 @@ export const entries_chunk_2: ToolMetadata[] = [
     ],
   },
   {
-
-    id: "514",
-    name: "Crypto & Hash Toolkit",
-    slug: "crypto-kit",
-    category: "Developer",
-    description: 'Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. All client-side, no server uploads.',
-    seoDescription: 'Free online Crypto & Hash Toolkit — Compute SHA-1, SHA-224, SHA-256, SHA-384, SHA-512, SHA-3, and RIPEMD-160 hashes, generate HMACs, and encrypt/decrypt text with AES. ',
-    dependencies: "None",
-    showInCategory: false,
-},
-  {
     id: "515",
     name: "TOML Converter",
     slug: "toml-converter",

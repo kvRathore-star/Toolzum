@@ -453,7 +453,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'html-preview': dynamic(() => import('@/components/tools/modules/developer/HtmlPreview'), { ssr: false, loading: () => <DynamicImportFallback slug="html-preview" /> }),
   'cron-parser': dynamic(() => import('@/components/tools/modules/developer/CronParser'), { ssr: false, loading: () => <DynamicImportFallback slug="cron-parser" /> }),
   'aes-encrypt': dynamic(() => import('@/components/tools/modules/developer/CryptoHashTools').then(m => ({ default: m.AesEncrypt })), { ssr: false, loading: () => <DynamicImportFallback slug="aes-encrypt" /> }),
-  'crypto-kit': dynamic(() => import('@/components/tools/modules/developer/CryptoKit'), { ssr: false, loading: () => <DynamicImportFallback slug="crypto-kit" /> }),
   'ip-address-converter': dynamic(() => import('@/components/tools/modules/developer/NetworkToolkitWidgets').then(m => ({ default: m.IpAddressConverter })), { ssr: false, loading: () => <DynamicImportFallback slug="ip-address-converter" /> }),
   'ip-range-expander': dynamic(() => import('@/components/tools/modules/developer/NetworkToolkitWidgets').then(m => ({ default: m.IpRangeExpander })), { ssr: false, loading: () => <DynamicImportFallback slug="ip-range-expander" /> }),
   'ipv6-ula-generator': dynamic(() => import('@/components/tools/modules/developer/NetworkToolkitWidgets').then(m => ({ default: m.Ipv6UlaGenerator })), { ssr: false, loading: () => <DynamicImportFallback slug="ipv6-ula-generator" /> }),

@@ -55,7 +55,7 @@ function collect(outDir: string): BundleStats {
   for (const f of files) {
     const chunks = chunksOf(f);
     perPage.push({ route: f.slice(outDir.length), chunks });
-    shared = shared === null ? chunks : new Set([...shared].filter((c) => chunks.has(c)));
+    shared = shared === null ? chunks : new Set([...shared].filter((c: string) => chunks.has(c)));
   }
   const sharedList = [...shared!].sort();
   if (sharedList.length === 0) throw new Error('empty shared-chunk intersection — check CHUNK_RE');
