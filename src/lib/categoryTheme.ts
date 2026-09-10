@@ -161,6 +161,10 @@ const CATEGORY_THEMES: Record<string, CategoryTheme> = {
   },
 };
 
+/** Canonical category display names — use to validate stored categories
+ * (dashboard activity links) instead of a hardcoded list that rots. */
+export const CATEGORY_NAMES: readonly string[] = Object.keys(CATEGORY_THEMES);
+
 const DEFAULT_THEME: CategoryTheme = {
   icon: ArrowRightLeft,
   iconColor: "text-[var(--text-muted)]",

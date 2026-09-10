@@ -1,11 +1,11 @@
 import { createAuth } from "../../../src/lib/auth";
 import type { D1Database } from "@cloudflare/workers-types";
 
-const VALID_CATEGORIES = [
-  "Image", "PDF", "Video", "Audio", "Developer", "Text", "AI",
-  "Calculator", "Financial", "Color", "Unit", "Web", "Security",
-  "Network", "Data", "File", "Social", "Privacy", "Design",
-];
+// NOTE: never an allowlist here. A hardcoded category list rotted silently
+// (renames like Financial->Finance) and NULLed 11 of 21 categories,
+// breaking dashboard links. Taxonomy lives in the registry — accept any
+// sane client-supplied value; unknown ones degrade gracefully at render.
+const MAX_CATEGORY_LENGTH = 40;
 
 const MAX_SLUG_LENGTH = 80;
 const MAX_NAME_LENGTH = 120;
@@ -49,8 +49,8 @@ export async function onRequestPost(context: { request: Request; env: Record<str
 
     const toolSlug = String(body.toolSlug).trim().slice(0, MAX_SLUG_LENGTH);
     const toolName = String(body.toolName).trim().slice(0, MAX_NAME_LENGTH);
-    const category = body.category && VALID_CATEGORIES.includes(body.category)
-      ? body.category
+    const category = body.category && typeof body.category === 'string' && body.category.trim().length > 0 && body.category.trim().length <= MAX_CATEGORY_LENGTH
+      ? body.category.trim()
       : null;
 
     if (!toolSlug || !toolName) {
