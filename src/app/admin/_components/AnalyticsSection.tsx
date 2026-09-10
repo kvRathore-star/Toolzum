@@ -104,6 +104,7 @@ export function AnalyticsSection() {
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- initial data load on mount (fetch-then-set, not derived state)
   useEffect(() => { load(); }, [load]);
 
   if (loading) {

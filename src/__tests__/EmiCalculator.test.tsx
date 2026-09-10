@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import EmiCalculator from '@/components/tools/modules/finance/EmiCalculator';
 
@@ -16,23 +16,20 @@ describe('EmiCalculator', () => {
 
   it('calculates EMI correctly', () => {
     render(<EmiCalculator />);
-    fireEvent.click(screen.getByText('Calculate EMI'));
     expect(screen.getByText('Monthly EMI')).toBeDefined();
-    expect(screen.getByText(/Total Interest/)).toBeDefined();
-    expect(screen.getByText(/Total Payment/)).toBeDefined();
+    expect(screen.getByText('Total Interest')).toBeDefined();
+    expect(screen.getByText('Total Payment')).toBeDefined();
   });
 
   it('shows EMI value for default inputs', () => {
     render(<EmiCalculator />);
-    fireEvent.click(screen.getByText('Calculate EMI'));
     const emiText = screen.getAllByText(/\$\d+\.\d{2}/);
     expect(emiText.length).toBeGreaterThan(0);
   });
 
   it('has aria-live on results', () => {
     render(<EmiCalculator />);
-    fireEvent.click(screen.getByText('Calculate EMI'));
-    const resultGrid = screen.getByText('Monthly EMI').closest('.grid');
-    expect(resultGrid).toBeDefined();
+    const live = screen.getByText('Monthly EMI').closest('[aria-live="polite"]');
+    expect(live).not.toBeNull();
   });
 });

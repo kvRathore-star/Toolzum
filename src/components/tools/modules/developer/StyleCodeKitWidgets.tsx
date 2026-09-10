@@ -224,7 +224,7 @@ export function StylusToCssConverter() {
       // Selector
       const indentLevel = line.search(/\S/);
       if (content.endsWith('{')) {
-        let selector = content.replace(/\s*{\s*$/, '').trim();
+        const selector = content.replace(/\s*{\s*$/, '').trim();
         if (selector.startsWith('.')) {
           result += `${'  '.repeat(indent)}${selector} {\n`;
           indent++;

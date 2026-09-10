@@ -23,9 +23,9 @@ describe('CpmCalculator', () => {
 
   it('shows CPM/RPM/Estimate tabs', () => {
     render(<CpmCalculator />);
-    expect(screen.getByText('CPM')).toBeInTheDocument();
-    expect(screen.getByText('RPM')).toBeInTheDocument();
-    expect(screen.getByText('Estimate')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'CPM' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'RPM' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Estimate' })).toBeInTheDocument();
   });
 
   it('shows platform selector', () => {
@@ -45,7 +45,7 @@ describe('CpmCalculator', () => {
 
   it('switches to RPM mode', () => {
     render(<CpmCalculator />);
-    fireEvent.click(screen.getByText('RPM'));
+    fireEvent.click(screen.getByRole('button', { name: 'RPM' }));
     expect(screen.getByText('RPM Calculator')).toBeInTheDocument();
   });
 
@@ -58,6 +58,6 @@ describe('CpmCalculator', () => {
   it('shows YouTube platform preset', () => {
     render(<CpmCalculator />);
     fireEvent.change(screen.getByDisplayValue('Custom (manual entry)'), { target: { value: 'youtube' } });
-    expect(screen.getByText(/YouTube/)).toBeInTheDocument();
+    expect(screen.getByText(/CPM varies by niche/)).toBeInTheDocument();
   });
 });

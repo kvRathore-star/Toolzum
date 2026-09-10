@@ -35,8 +35,17 @@ describe('crypto-js dependency', () => {
 
   it('fails decryption with wrong password', () => {
     const encrypted = CryptoJS.AES.encrypt('Secret', 'correct').toString();
-    const decrypted = CryptoJS.AES.decrypt(encrypted, 'wrong').toString(CryptoJS.enc.Utf8);
-    expect(decrypted).not.toBe('Secret');
+    // Wrong-password garbage is random bytes per encrypt (fresh salt), so
+    // Utf8 decoding either throws or yields non-'Secret' text — both are
+    // correct failure outcomes. Asserting only .not.toBe flaked ~1/8 runs.
+    let decrypted: string | null = null;
+    let threw = false;
+    try {
+      decrypted = CryptoJS.AES.decrypt(encrypted, 'wrong').toString(CryptoJS.enc.Utf8);
+    } catch {
+      threw = true;
+    }
+    expect(threw || decrypted !== 'Secret').toBe(true);
   });
 
   it('handles empty string', () => {

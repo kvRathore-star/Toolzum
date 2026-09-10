@@ -9,7 +9,7 @@
  * Run: npx tsx scripts/generate-download-slugs.ts
  * Wired into: npm run build (via gen:download-slugs)
  */
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
 const ROOT = join(import.meta.dirname, '..');
@@ -151,18 +151,15 @@ const TRIVIAL_DOWNLOADS = new Set([
 
 function findDownloadFiles(): string[] {
   // Use a simple recursive glob since we can't assume ripgrep is available
-  const { readdirSync, readFileSync: read } = require('fs');
-  const { join: j } = require('path');
-
   function walk(dir: string): string[] {
     const entries = readdirSync(dir, { withFileTypes: true });
     const files: string[] = [];
     for (const entry of entries) {
-      const full = j(dir, entry.name);
+      const full = join(dir, entry.name);
       if (entry.isDirectory()) {
         files.push(...walk(full));
       } else if (/\.(tsx?|mts?)$/.test(entry.name)) {
-        const content = read(full, 'utf8');
+        const content = readFileSync(full, 'utf8');
         if (content.includes('downloadOrShare') || content.includes('BulkToolShell') || content.includes('JSZip') || content.includes('URL.createObjectURL')) {
           files.push(full);
         }

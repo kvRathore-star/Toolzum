@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { withErrorHandling } from '@/lib/withErrorHandling';
+import { toast } from 'react-hot-toast';
 
 vi.mock('react-hot-toast', () => ({
   toast: { error: vi.fn() },
@@ -23,7 +24,6 @@ describe('withErrorHandling', () => {
   });
 
   it('shows toast on error', async () => {
-    const toast = require('react-hot-toast').toast;
     await withErrorHandling(async () => {
       throw new Error('Test error');
     }, { toast: 'Something went wrong' });

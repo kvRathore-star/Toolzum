@@ -33,7 +33,7 @@ describe('ProfitMarginCalculator', () => {
 
   it('displays gross profit margin', () => {
     render(<ProfitMarginCalculator />);
-    expect(screen.getByText('Gross Profit Margin')).toBeInTheDocument();
+    expect(screen.getByText('Gross Profit')).toBeInTheDocument();
   });
 
   it('has preset buttons', () => {
@@ -50,11 +50,11 @@ describe('ProfitMarginCalculator', () => {
 
   it('shows copy margin button', () => {
     render(<ProfitMarginCalculator />);
-    expect(screen.getByLabelText('Copy margin')).toBeDefined();
+    expect(screen.getByLabelText('Copy result')).toBeDefined();
   });
 
   it('shows download CSV button', () => {
     render(<ProfitMarginCalculator />);
-    expect(screen.getByLabelText('Download CSV')).toBeDefined();
+    expect(screen.getByLabelText('Download result')).toBeDefined();
   });
 });

@@ -29,7 +29,7 @@ describe('SalaryCalculator', () => {
 
   it('displays annual breakdown', () => {
     render(<SalaryCalculator />);
-    expect(screen.getByText('Annual Breakdown')).toBeInTheDocument();
+    expect(screen.getByText('Annual Take-Home')).toBeInTheDocument();
   });
 
   it('has preset buttons', () => {
@@ -45,11 +45,11 @@ describe('SalaryCalculator', () => {
 
   it('shows copy button after calculation', () => {
     render(<SalaryCalculator />);
-    expect(screen.getByText('Copy')).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Copy result' })).toBeDefined();
   });
 
   it('shows download button after calculation', () => {
     render(<SalaryCalculator />);
-    expect(screen.getByText('Download')).toBeDefined();
+    expect(screen.getByRole('button', { name: 'Download result' })).toBeDefined();
   });
 });

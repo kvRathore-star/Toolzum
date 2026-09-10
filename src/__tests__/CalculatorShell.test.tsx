@@ -53,22 +53,22 @@ describe('CalculatorShell', () => {
   });
 
   it('shows result with aria-live', () => {
-    renderShell({ result: '42' });
-    const status = screen.getByRole('status');
-    expect(status).toHaveAttribute('aria-live', 'polite');
-    expect(status).toHaveTextContent('42');
+    const { container } = renderShell({ result: '42' });
+    const live = container.querySelector('[aria-live="polite"]');
+    expect(live).not.toBeNull();
+    expect(live).toHaveTextContent('42');
   });
 
   it('shows error styling', () => {
-    renderShell({ error: 'Invalid input' });
-    const status = screen.getByRole('status');
-    expect(status).toHaveTextContent('Invalid input');
-    expect(status.className).toContain('bg-red-500/10');
+    const { container } = renderShell({ error: 'Invalid input' });
+    const live = container.querySelector('[aria-live="polite"]');
+    expect(live).toHaveTextContent('Invalid input');
+    expect(live!.className).toContain('bg-red-500/10');
   });
 
   it('copy button has aria-label when result is set', () => {
     renderShell({ result: '42' });
-    expect(screen.getByRole('button', { name: /copy result to clipboard/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Copy result' })).toBeInTheDocument();
   });
 
   it('history toggle toggles aria-expanded', () => {
@@ -89,7 +89,7 @@ describe('CalculatorShell', () => {
 
   it('download button appears with aria-label when downloadData is set', () => {
     renderShell({ result: '42', downloadData: 'col1,col2\n1,2' });
-    expect(screen.getByRole('button', { name: /download csv/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Download result' })).toBeInTheDocument();
   });
 
   it('accent blue applies gradient classes', () => {

@@ -23,12 +23,12 @@ describe('SipCalculator', () => {
 
   it('displays investment summary', () => {
     render(<SipCalculator />);
-    expect(screen.getByText('Investment Summary')).toBeInTheDocument();
+    expect(screen.getByText('Total Invested')).toBeInTheDocument();
   });
 
-  it('displays year-by-year breakdown', () => {
+  it('displays expected future value result', () => {
     render(<SipCalculator />);
-    expect(screen.getByText('Year-by-Year Breakdown')).toBeInTheDocument();
+    expect(screen.getByText('Expected Future Value')).toBeInTheDocument();
   });
 
   it('has preset buttons', () => {
@@ -53,16 +53,16 @@ describe('SipCalculator', () => {
 
   it('shows copy FV button', () => {
     render(<SipCalculator />);
-    expect(screen.getByLabelText('Copy FV')).toBeDefined();
+    expect(screen.getByLabelText('Copy result')).toBeDefined();
   });
 
   it('shows download CSV button', () => {
     render(<SipCalculator />);
-    expect(screen.getByLabelText('Download CSV')).toBeDefined();
+    expect(screen.getByLabelText('Download result')).toBeDefined();
   });
 
-  it('shows save to history button', () => {
+  it('shows calculation history toggle', () => {
     render(<SipCalculator />);
-    expect(screen.getByLabelText('Save to history')).toBeDefined();
+    expect(screen.getByRole('button', { name: /show calculation history/i })).toBeDefined();
   });
 });

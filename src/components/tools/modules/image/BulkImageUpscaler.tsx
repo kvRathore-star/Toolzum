@@ -63,7 +63,7 @@ export default function BulkImageUpscaler() {
       let currentCanvas = document.createElement('canvas');
       currentCanvas.width = img.width;
       currentCanvas.height = img.height;
-      let ctx = currentCanvas.getContext('2d')!;
+      const ctx = currentCanvas.getContext('2d')!;
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = algorithm === 'lanczos' ? 'high' : algorithm === 'bicubic' ? 'medium' : 'low';
       ctx.drawImage(img, 0, 0);

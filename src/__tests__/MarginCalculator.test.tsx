@@ -44,12 +44,12 @@ describe('MarginCalculator', () => {
 
   it('shows copy price button', () => {
     render(<MarginCalculator />);
-    expect(screen.getByLabelText('Copy price')).toBeDefined();
+    expect(screen.getByLabelText('Copy result')).toBeDefined();
   });
 
   it('shows download CSV button', () => {
     render(<MarginCalculator />);
-    expect(screen.getByLabelText('Download CSV')).toBeDefined();
+    expect(screen.getByLabelText('Download result')).toBeDefined();
   });
 
   it('has number inputs', () => {

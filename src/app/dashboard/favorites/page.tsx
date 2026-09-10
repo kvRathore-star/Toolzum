@@ -46,6 +46,7 @@ export default function FavoritesPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- favorites load on sign-in (fetch-then-set, not derived state)
     if (session) loadFavorites();
   }, [session, loadFavorites]);
 

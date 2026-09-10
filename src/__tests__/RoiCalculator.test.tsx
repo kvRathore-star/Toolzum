@@ -50,11 +50,11 @@ describe('RoiCalculator', () => {
 
   it('shows copy ROI button', () => {
     render(<RoiCalculator />);
-    expect(screen.getByLabelText('Copy ROI')).toBeDefined();
+    expect(screen.getByLabelText('Copy result')).toBeDefined();
   });
 
   it('shows download CSV button', () => {
     render(<RoiCalculator />);
-    expect(screen.getByLabelText('Download CSV')).toBeDefined();
+    expect(screen.getByLabelText('Download result')).toBeDefined();
   });
 });

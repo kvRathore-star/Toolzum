@@ -13,7 +13,7 @@ const DISPOSABLE_DOMAINS = [
 function normalizeEmail(email: string): { normalized: string; changes: string[] } {
   const original = email.trim();
   const changes: string[] = [];
-  let result = original.toLowerCase();
+  const result = original.toLowerCase();
 
   if (result !== original.toLowerCase()) {
     changes.push('Lowercased');

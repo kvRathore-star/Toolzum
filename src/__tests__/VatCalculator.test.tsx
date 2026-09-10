@@ -38,12 +38,12 @@ describe('VatCalculator', () => {
 
   it('shows copy gross button', () => {
     render(<VatCalculator />);
-    expect(screen.getByLabelText('Copy gross')).toBeDefined();
+    expect(screen.getByLabelText('Copy result')).toBeDefined();
   });
 
   it('shows download CSV button', () => {
     render(<VatCalculator />);
-    expect(screen.getByLabelText('Download CSV')).toBeDefined();
+    expect(screen.getByLabelText('Download result')).toBeDefined();
   });
 
   it('has number inputs', () => {

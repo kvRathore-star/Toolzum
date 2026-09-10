@@ -26,6 +26,7 @@ export function useEscapeToClose(onClose: () => void) {
 }
 
 export function useHotkey(key: string, handler: () => void, deps: unknown[] = []) {
+  // eslint-disable-next-line react-hooks/use-memo -- deps is caller-controlled by API design (pass-through memo inputs)
   const callback = useCallback(() => handler(), deps);
 
   useEffect(() => {

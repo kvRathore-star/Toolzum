@@ -12,6 +12,7 @@ export function useFavorites() {
   useEffect(() => {
     if (isPending) return;
     if (!isSignedIn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- favorites reset on sign-out (state sync with auth, not derived render state)
       setFavorites(new Set());
       setIsLoading(false);
       return;

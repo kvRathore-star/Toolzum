@@ -121,6 +121,7 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- activity load on sign-in (fetch-then-set, not derived state)
     if (session) fetchActivity();
   }, [session, fetchActivity]);
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/lib/auth-client";
 import { BarChart3, Shield } from "lucide-react";
@@ -10,15 +10,13 @@ import { AnalyticsSection } from "../_components/AnalyticsSection";
 export default function AdminAnalyticsPage() {
   const router = useRouter();
   const { data: session, isPending } = useSession();
-  const [loading, setLoading] = useState(true);
+  // Derived during render: true until a session exists, never true again
+  // (logout is handled by the redirect effect + `if (!session) return null`).
+  const loading = !session;
 
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
   }, [session, isPending, router]);
-
-  useEffect(() => {
-    if (session) setLoading(false);
-  }, [session]);
 
   if (isPending || loading) {
     return (
