@@ -55,6 +55,49 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Collect bundle stats
+        run: npx tsx scripts/bundle-budget.ts --collect
+
+      - name: Check bundle budget
+        # C3.2/C3.3: shared-JS budget gate (default 500 KB gzip, override via
+        # BUDGET_SHARED_KB env). Posts a summary table and fails the build job
+        # on breach — blocks PRs and skips e2e until fixed.
+        run: npx tsx scripts/bundle-budget.ts --check
+
+  preview:
+    # C3.1 branch-aware PR previews via Cloudflare Pages direct upload.
+    # Requires repo secrets CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
+    # (Cloudflare dashboard → My Profile → API Tokens). Skips cleanly without
+    # them. Alternative with no secrets: Pages dashboard → toolzum project →
+    # Settings → Builds & deployments → enable "Preview deployments for pull
+    # requests" (native integration). Use ONE path, not both.
+    if: github.event_name == 'pull_request'
+    needs: [quality, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy PR preview
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=toolzum --branch=${{ github.head_ref }}
+
+      - name: Preview skipped (no secrets)
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' }}
+        run: echo "No CLOUDFLARE_API_TOKEN secret — preview deploy skipped. Add the secrets or enable native PR previews in the Pages dashboard."
+
+      - name: Preview URL
+        run: echo "Preview should be live at https://${{ github.head_ref }}.toolzum.pages.dev (Pages sanitizes branch characters)"
+
   e2e:
     # Browser E2E runs here (ubuntu), not locally: Playwright browsers
     # do not install on macOS 12. Runs against the static production

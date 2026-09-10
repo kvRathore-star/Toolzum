@@ -4,6 +4,7 @@ node_modules/
 out/
 coverage/
 lcov.info
+bundle-stats.json
 
 scripts/deep-audit.js
 scripts/full-audit.js
