@@ -141,7 +141,7 @@ export function CalculatorShell({
       <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-6">
         <div className="flex items-center gap-2">
           {resolvedIcon && <span className={a.icon}>{resolvedIcon}</span>}
-          <h3 className="text-lg font-bold text-[var(--text-primary)]">{title}</h3>
+          <h2 className="text-lg font-bold text-[var(--text-primary)]">{title}</h2>
         </div>
         <button
           onClick={() => setShowHistory(!showHistory)}

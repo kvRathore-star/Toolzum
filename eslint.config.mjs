@@ -18,9 +18,11 @@ const eslintConfig = defineConfig([
       // jsx-a11y interaction rules are errors: the 2026-09 a11y pass fixed
       // every onClick-without-keyboard site repo-wide (labels, focus traps,
       // dropzones, canvas, table rows, admin overlays). New violations block CI.
-      // Anchor rules stay warn-only (not yet audited).
-      "jsx-a11y/anchor-has-content": "warn",
-      "jsx-a11y/anchor-is-valid": "warn",
+      // Anchor rules audited 2026-09-10: zero violations repo-wide, now errors.
+      // Label rule stays warn-only: 1,148 sites across 385 files need
+      // bound-identity naming review first (batch-flipping would break CI).
+      "jsx-a11y/anchor-has-content": "error",
+      "jsx-a11y/anchor-is-valid": "error",
       "jsx-a11y/click-events-have-key-events": "error",
       "jsx-a11y/no-static-element-interactions": "error",
       "react/no-unescaped-entities": "warn",
