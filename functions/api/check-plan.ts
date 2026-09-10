@@ -1,7 +1,13 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
+import { createAuth } from "../../src/lib/auth";
 
 interface Env {
   DB: D1Database;
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string;
+  BETTER_AUTH_SECRET?: string;
+  BETTER_AUTH_URL?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 export const PLAN_LIMITS: Record<string, { maxFileSizeMB: number; maxBatchSize: number; threads: number }> = {
@@ -18,17 +24,25 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const rl = await checkRateLimit(DB, "check-plan", ip, 30);
     if (rl.limited) return rl.response;
 
-    const cookies = context.request.headers.get('cookie') || '';
-    const tokenMatch = cookies.match(/(?:authjs\.session-token|__Secure-better-auth\.session_token|better-auth\.session_token|auth_session)=([^;]+)/);
-    const token = tokenMatch?.[1];
+    // Identify user via better-auth. The session cookie is HMAC-signed, so
+    // manual token lookup never matches — every signed-in user fell through
+    // to 'signedin' limits (pro users got 150MB/10-file caps instead of
+    // 2GB/500). Resolved through the SDK like favorites/downloads.
+    const auth = createAuth({
+      DB,
+      GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
+      GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
+      BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
+      BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
+      TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY as string,
+    });
+    const session = await auth.api.getSession({ headers: context.request.headers });
 
-    const key = token ? 'signedin' : 'free';
-    let plan: string = key;
-
-    if (token) {
-      const user = await DB.prepare(
-        "SELECT u.plan FROM session s JOIN user u ON u.id = s.userId WHERE s.token = ? AND s.expiresAt > unixepoch()"
-      ).bind(token).first<{ plan: string }>();
+    let plan: string = 'free';
+    if (session?.user?.id) {
+      const user = await DB.prepare("SELECT plan FROM user WHERE id = ?")
+        .bind(session.user.id)
+        .first<{ plan: string }>();
       plan = user?.plan || 'signedin';
     }
 
