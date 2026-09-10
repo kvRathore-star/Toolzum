@@ -33,11 +33,11 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     // never matches — resolve through the SDK like the favorites endpoints.
     const auth = createAuth({
       DB,
-      GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
-      GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
-      BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
-      BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
-      TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY as string,
+      GOOGLE_CLIENT_ID: context.env.GOOGLE_CLIENT_ID as string,
+      GOOGLE_CLIENT_SECRET: context.env.GOOGLE_CLIENT_SECRET as string,
+      BETTER_AUTH_SECRET: context.env.BETTER_AUTH_SECRET as string,
+      BETTER_AUTH_URL: context.env.BETTER_AUTH_URL as string,
+      TURNSTILE_SECRET_KEY: context.env.TURNSTILE_SECRET_KEY as string,
     });
     const session = await auth.api.getSession({ headers: request.headers });
     let plan: string | null = null;
