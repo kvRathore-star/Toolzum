@@ -809,7 +809,7 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   // ============ Validators & Converters ============
   "diff-checker": ["json-diff-checker", "api-diff-checker"],
   "regex-tester": ["bulk-regex-extractor-replacer", "secret-scanner"],
-  "syntax-validator": ["validator-kit", "html-linter"],
+  "syntax-validator": ["html-linter"],
   "yaml-validator": ["yaml-formatter", "yaml-reindenter"],
   "git-commit-linter": ["conventional-commit-generator", "gitignore-generator"],
   "gitignore-generator": ["git-commit-linter", "dockerfile-linter"],
@@ -847,7 +847,6 @@ export const TOOL_RELATIONSHIPS: Record<string, string[]> = {
   "merge-patch-generator": ["json-diff-checker", "json-formatter"],
   "css-specificity-calculator": ["css-formatter", "css-validator"],
   "css-validator": ["css-specificity-calculator", "css-formatter"],
-  "validator-kit": ["syntax-validator", "email-format-validator"],
   "csv-data-cleaner": ["csv-analyzer", "email-normalizer"],
   "json-formatter-tool": ["json-formatter", "json-schema-generator"],
   "url-parser": ["query-string-parser", "url-encoder-decoder"],

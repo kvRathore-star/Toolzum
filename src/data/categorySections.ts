@@ -140,7 +140,6 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "jsonl-formatter", "json-to-url-params",
         "json-schema-generator", "merge-patch-generator",
         "css-specificity-calculator", "css-validator",
-        "validator-kit",
         "json-formatter-tool",
         "url-parser", "protobuf-decoder", "query-string-parser",
         "email-normalizer", "json-ld-generator", "json-size-analyzer",

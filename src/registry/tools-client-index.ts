@@ -8366,14 +8366,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "1086",
-    "name": "Validator Kit",
-    "slug": "validator-kit",
-    "category": "Developer",
-    "description": "Validate email addresses, URLs, phone numbers, credit cards, IP addresses, JSON, and more. Batch validation supported.",
-    "isPro": false
-  },
-  {
     "id": "1087",
     "name": "JSON to YAML Converter",
     "slug": "json-to-yaml-converter",

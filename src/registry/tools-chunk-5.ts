@@ -2070,16 +2070,6 @@ export const entries_chunk_5: ToolMetadata[] = [
 
   },
   {
-
-    id: "1086",
-    name: "Validator Kit",
-    slug: "validator-kit",
-    category: "Developer",
-    description: 'Validate email addresses, URLs, phone numbers, credit cards, IP addresses, JSON, and more. Batch validation supported.',
-    seoDescription: 'Free online Validator Kit — Validate email, URL, phone, credit card, IP, JSON, and more. Batch validation with detailed error messages.',
-    dependencies: "None",
-},
-  {
     id: "1087",
     name: "JSON to YAML Converter",
     slug: "json-to-yaml-converter",
