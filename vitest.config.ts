@@ -11,8 +11,18 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text-summary', 'lcov'],
-      // Reporting only for now — no thresholds until the baseline is
-      // measured and the suite is green under coverage.
+      // Baseline measured 2026-09-10 (full suite green under coverage:
+      // 195 files / 1134 tests passed): statements 45.10% (52124/115565),
+      // branches 50.27% (3498/6958), functions 16.44% (1374/8355),
+      // lines 45.10% (52124/115565).
+      // Thresholds are ratcheted just below baseline (floor - 1 per metric);
+      // raise them as coverage improves, never above a measured value.
+      thresholds: {
+        statements: 44,
+        branches: 49,
+        functions: 15,
+        lines: 44,
+      },
       exclude: [
         'src/__tests__/**',
         '**/*.test.{ts,tsx}',

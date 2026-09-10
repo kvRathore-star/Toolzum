@@ -51,12 +51,14 @@ describe('parseUrlList', () => {
     expect(urls).toEqual(['https://a.com/', 'https://b.com/']);
   });
 
+  // Large input (~5k URLs) exceeds the default 5s timeout under v8 coverage
+  // overhead; the parse itself is synchronous and deterministic.
   it('respects MAX_URLS_PER_CHECK limit', () => {
     const urls = Array.from({ length: MAX_URLS_PER_CHECK + 100 }, (_, i) => `https://example${i}.com`);
     const text = urls.join('\n');
     const result = parseUrlList(text);
     expect(result.length).toBeLessThanOrEqual(MAX_URLS_PER_CHECK);
-  });
+  }, 30000);
 
   it('handles BOM at start of line', () => {
     const text = '\uFEFFhttps://example.com';
