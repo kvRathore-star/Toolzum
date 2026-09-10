@@ -57,7 +57,7 @@ export default function PricingPage() {
               <tbody className="divide-y divide-[var(--border-subtle)]">
                 {[
                   ['Max file size', '10-30MB / 20-150MB', '2GB'],
-                  ['Server downloads (daily)', '3 / 10 per day', 'Unlimited'],
+                  ['Server downloads (daily)', '3 / 5 per day', 'Unlimited'],
                   ['Batch processing', '1 / 10 files', '500 files'],
                   ['Processing speed', 'Standard (1 thread)', 'Parallel (6 threads)'],
                   ['ZIP batch download', '—', '✓'],
