@@ -55,4 +55,10 @@ const withBA = withBundleAnalyzer({
 
 export default withBA(nextConfig);
 
+// B1.6 note: @ducanh2912/next-pwa was evaluated and REJECTED — it injects
+// a webpack config, which hard-errors under this repo's Turbopack-default
+// Next 16 build ("This build is using Turbopack, with a webpack config").
+// Fresh-SW generation instead lives in scripts/gen-sw.js (workbox-build,
+// post-build step): same Workbox engine and route set, no webpack involved.
+
 // initOpenNextCloudflareForDev() skipped — macOS 12 doesn't support workerd runtime
