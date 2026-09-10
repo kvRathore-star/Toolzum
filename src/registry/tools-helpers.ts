@@ -23,8 +23,8 @@ export function getToolCounts() {
     t.showInCategory === false && !proSlugs.includes(t.slug)
   ).length;
 
-  const proTools = implementedTools.filter(t => 
-    proSlugs.includes(t.slug)
+  const proTools = implementedTools.filter(t =>
+    proSlugs.includes(t.slug) && t.showInCategory !== false
   ).length;
 
   const seoVariants = SEO_PERMUTATIONS.length;
