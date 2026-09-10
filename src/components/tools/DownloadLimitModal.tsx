@@ -6,6 +6,7 @@ import { Crown, Lock, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDialogA11y } from "@/components/useDialogA11y";
 import { proSlugs } from "@/registry/tools-constants";
+import { getSignedInStatus } from "@/utils/freeUsageGuard";
 
 const PRO_SLUG_SET = new Set(proSlugs);
 
@@ -25,6 +26,7 @@ interface PlanLimitDetail {
 
 type BlockEvent =
   | { type: "quota"; detail?: undefined }
+  | { type: "unavailable"; detail?: undefined }
   | { type: "plan"; detail: PlanLimitDetail };
 
 const reasonCopy: Record<PlanLimitReason, { title: string; body: string }> = {
@@ -50,6 +52,7 @@ export function DownloadLimitModal() {
 
   useEffect(() => {
     const onQuota = () => setEvent({ type: "quota" });
+    const onUnavailable = () => setEvent({ type: "unavailable" });
     const onPlan = (e: Event) => {
       const custom = e as CustomEvent<PlanLimitDetail>;
       const detail = custom.detail;
@@ -58,9 +61,11 @@ export function DownloadLimitModal() {
     };
 
     window.addEventListener("toolzum:download-blocked", onQuota);
+    window.addEventListener("toolzum:download-unavailable", onUnavailable);
     window.addEventListener("toolzum:plan-limit", onPlan);
     return () => {
       window.removeEventListener("toolzum:download-blocked", onQuota);
+      window.removeEventListener("toolzum:download-unavailable", onUnavailable);
       window.removeEventListener("toolzum:plan-limit", onPlan);
     };
   }, []);
@@ -68,8 +73,16 @@ export function DownloadLimitModal() {
   if (!event) return null;
 
   const isQuota = event.type === "quota";
+  const isUnavailable = event.type === "unavailable";
   const isProTool = isCurrentToolPro();
-  const copy = isQuota
+  // Signed-in users never need a "sign in" CTA — show upgrade path only.
+  const signedIn = getSignedInStatus();
+  const copy = isUnavailable
+    ? {
+        title: "Downloads temporarily unavailable",
+        body: "We couldn't reach the download service. Check your connection and try again — none of your quota was used.",
+      }
+    : isQuota
     ? isProTool
       ? {
           title: "Pro tool daily limit reached",
@@ -112,20 +125,24 @@ export function DownloadLimitModal() {
         <p className="text-sm text-[var(--text-secondary)] mb-5">{copy.body}</p>
 
         <div className="space-y-2.5">
-          <Link
-            href="/pricing"
-            className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
-          >
-            <Crown className="w-4 h-4" /> Upgrade to Pro — Unlimited
-          </Link>
-          <Button
-            variant="secondary"
-            size="md"
-            className="w-full text-sm"
-            asChild
-          >
-            <Link href="/sign-in">Sign in free for more</Link>
-          </Button>
+          {!isUnavailable && (
+            <Link
+              href="/pricing"
+              className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
+            >
+              <Crown className="w-4 h-4" /> Upgrade to Pro — Unlimited
+            </Link>
+          )}
+          {!signedIn && !isUnavailable && (
+            <Button
+              variant="secondary"
+              size="md"
+              className="w-full text-sm"
+              asChild
+            >
+              <Link href="/sign-in">Sign in free for more</Link>
+            </Button>
+          )}
           <button
             onClick={close}
             className="w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors"

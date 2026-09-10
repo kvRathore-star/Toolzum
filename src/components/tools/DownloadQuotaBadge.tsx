@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Download } from "lucide-react";
-import { getFingerprint } from "@/utils/freeUsageGuard";
+import { getFingerprint, getSignedInStatus } from "@/utils/freeUsageGuard";
 import { proSlugs } from "@/registry/tools-constants";
 
 const PRO_SLUG_SET = new Set(proSlugs);
@@ -61,10 +61,13 @@ export function DownloadQuotaBadge() {
 
   const isZero = remaining === 0;
 
+  // Anonymous users get limit 0 on Pro tools — that's "sign in", not "used up".
   const label = isProTool
-    ? isZero
-      ? "Pro downloads used up today"
-      : `${remaining} Pro ${remaining === 1 ? "download" : "downloads"} left — Upgrade for unlimited`
+    ? isZero && !getSignedInStatus()
+      ? "Sign in to use Pro tools"
+      : isZero
+        ? "Pro downloads used up today"
+        : `${remaining} Pro ${remaining === 1 ? "download" : "downloads"} left — Upgrade for unlimited`
     : isZero
       ? "Free downloads used up today"
       : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`;

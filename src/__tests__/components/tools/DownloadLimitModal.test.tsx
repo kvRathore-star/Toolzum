@@ -95,7 +95,7 @@ describe('DownloadLimitModal', () => {
     
     fireEvent(window, new CustomEvent('toolzum:download-blocked'));
     
-    const signInLink = screen.getByText('Sign in free for 3 more');
+    const signInLink = screen.getByText('Sign in free for more');
     expect(signInLink).toBeDefined();
   });
 

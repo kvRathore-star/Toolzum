@@ -60,7 +60,7 @@ function writeCount(key: string, value: number) {
   }
 }
 
-function getSignedInStatus(): boolean {
+export function getSignedInStatus(): boolean {
   if (typeof window === "undefined") return false;
   try {
     const cookies = document.cookie.split("; ");
@@ -233,6 +233,7 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
   const plan = await callPlanCheck();
   if (!plan) {
     console.warn("[toolzum] Plan server unreachable — blocking download to stay safe");
+    try { window.dispatchEvent(new CustomEvent("toolzum:download-unavailable")); } catch {}
     return false;
   }
   if (options?.fileSizeMB && options.fileSizeMB > plan.maxFileSizeMB) {
@@ -244,9 +245,17 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
     return false;
   }
 
-  // 1. Server-side quota check (defensive: block if server unreachable)
+  // 1. Server-side quota check. null = unreachable (not quota) — honest copy.
   const server = await callServerCheck(isProTool);
-  if (!server || !server.allowed) {
+  if (!server) {
+    try {
+      window.dispatchEvent(new CustomEvent("toolzum:download-unavailable"));
+    } catch (e) {
+      console.error("[toolzum]", e);
+    }
+    return false;
+  }
+  if (!server.allowed) {
     try {
       window.dispatchEvent(new CustomEvent("toolzum:download-blocked"));
     } catch (e) {
@@ -255,10 +264,12 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
     return false;
   }
 
-  // 2. Record on server (blocking — must succeed to authorise)
+  // 2. Record on server (blocking — must succeed to authorise).
+  // A failed record is a service problem, not quota exhaustion.
   const serverRecorded = await callServerRecord(isProTool);
   if (!serverRecorded) {
     console.warn("[toolzum] Server-side download record failed — rejecting to stay safe");
+    try { window.dispatchEvent(new CustomEvent("toolzum:download-unavailable")); } catch {}
     return false;
   }
 

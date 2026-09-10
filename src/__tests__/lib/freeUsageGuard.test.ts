@@ -47,25 +47,25 @@ describe('freeUsageGuard', () => {
   });
 
   describe('getRemainingDownloads', () => {
-    it('returns 10 for new user (3 anon + 7 signed-in)', () => {
+    it('returns 5 for new user (3 anon + 2 signed-in)', () => {
       const remaining = getRemainingDownloads();
-      expect(remaining).toBe(10);
+      expect(remaining).toBe(5);
     });
 
     it('returns less after incrementing', () => {
       incrementDownloadCount();
       const remaining = getRemainingDownloads();
-      expect(remaining).toBe(9);
+      expect(remaining).toBe(4);
     });
 
-    it('returns 0 after exhausting anon free uses', () => {
+    it('returns 2 after exhausting anon free uses', () => {
       // Use all 3 anon free downloads
       for (let i = 0; i < 3; i++) {
         incrementDownloadCount();
       }
       const remaining = getRemainingDownloads();
-      // Remaining should be 7 (signed-in portion) since we only used anon portion
-      expect(remaining).toBe(7);
+      // Remaining should be 2 (signed-in portion) since we only used anon portion
+      expect(remaining).toBe(2);
     });
 
     it('does not go below 0', () => {
