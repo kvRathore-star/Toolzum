@@ -1,3 +1,11 @@
+/**
+ * Codemod adding light/dark Tailwind pairs for hardcoded dark backgrounds,
+ * borders, and zinc text across tool modules, page.tsx, and ToolLayout.tsx.
+ *
+ * Run: node scripts/refactor_colors.js (historical one-off, rewrites files).
+ * Reads/writes: src/components/tools/modules/*.tsx, src/app/page.tsx,
+ *   src/components/tools/ToolLayout.tsx.
+ */
 // HISTORICAL one-off: codemod replacing hardcoded colors with CSS vars across tool modules.
 const fs = require('fs');
 const path = require('path');

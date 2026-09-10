@@ -1,3 +1,10 @@
+/**
+ * Read-only audit comparing registry slugs against DynamicModuleWrapper
+ * lazy-load keys; prints counts plus slugs missing on either side.
+ *
+ * Run: node scripts/audit_registry.js.
+ * Reads: src/registry/tools.ts, src/components/tools/modules/DynamicModuleWrapper.tsx.
+ */
 // HISTORICAL one-off: slug-coverage audit against the old registry layout. Superseded by quality-audit.
 const fs = require('fs');
 const path = require('path');

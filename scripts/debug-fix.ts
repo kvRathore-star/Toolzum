@@ -1,3 +1,11 @@
+/**
+ * Debug helper listing tools whose description equals the normalized
+ * seoDescription, with candidate replacements from getShortDescription.
+ *
+ * Run: npx tsx scripts/debug-fix.ts (read-only, prints to stdout).
+ * Reads: src/registry/tools, src/lib/generateToolDescription,
+ *   src/registry/tools-index.ts, src/registry/tools-constants.ts.
+ */
 // HISTORICAL one-off: flagged descriptions identical to normalized SEO text. Debugging aid, not a gate.
 import { readFileSync } from 'fs';
 import { toolsRegistry } from '../src/registry/tools';

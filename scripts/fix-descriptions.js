@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Rewrites X-to-Y converter descriptions plus a small specials-by-slug map
+ * in the registry; leaves other descriptions untouched.
+ *
+ * Run: node scripts/fix-descriptions.js (historical one-off, paths stale).
+ * Reads/writes: src/registry/tools.ts.
+ */
 // HISTORICAL one-off: description fixes against the old registry. Paths stale.
 const fs = require("fs");
 const path = require("path");

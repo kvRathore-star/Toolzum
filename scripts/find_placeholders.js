@@ -1,3 +1,11 @@
+/**
+ * Finds placeholder tools: parses the registry, then checks each slug's module
+ * file for ComingSoonTool/placeholder markers; prints a per-category summary.
+ *
+ * Run: node scripts/find_placeholders.js (historical paths, read-only).
+ * Reads: /Users/kvsingh/99-ai-tools/src/registry/tools.ts and
+ *   /Users/kvsingh/99-ai-tools/src/components/tools/modules (*.tsx).
+ */
 // HISTORICAL one-off: located placeholder entries in the old registry.
 const fs = require('fs');
 const path = require('path');

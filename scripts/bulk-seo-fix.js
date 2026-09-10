@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Backfills instructions/faqs SEO blocks for bulk-tool entries in the registry
+ * (fully implements image-bulk-converter; other slugs reuse a small map).
+ *
+ * Run: node scripts/bulk-seo-fix.js (historical one-off, do not re-run).
+ * Reads/writes: src/registry/tools.ts.
+ */
 // HISTORICAL one-off: backfilled missing bulk-tool SEO entries. Do not re-run.
 const fs = require("fs");
 const path = require("path");

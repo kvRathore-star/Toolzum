@@ -1,3 +1,10 @@
+/**
+ * Rewrites every registry description using category-specific template
+ * builders, picking a variant by hash(name + slug).
+ *
+ * Run: node scripts/expand-descriptions.mjs (historical one-off, paths stale).
+ * Reads/writes: src/registry/tools.ts.
+ */
 // HISTORICAL one-off: description expansion against the old registry. Paths stale.
 import fs from "fs";
 

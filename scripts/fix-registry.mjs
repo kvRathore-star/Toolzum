@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Adds the youtube-thumbnail-downloader entry, removes 13 orphaned entries
+ * and their proSlugs, then prints registry vs DynamicModuleWrapper counts.
+ *
+ * Run: node scripts/fix-registry.mjs (historical one-off, do not re-run).
+ * Reads/writes: src/registry/tools.ts; reads DynamicModuleWrapper.tsx.
+ */
 // HISTORICAL one-off: registry repair script. Do not re-run.
 import fs from 'fs';
 

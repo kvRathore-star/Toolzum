@@ -1,3 +1,10 @@
+/**
+ * Splits monolithic src/registry/tools.ts into types, chunk, constants,
+ * helpers, and index files, then rewrites tools.ts as a re-export barrel.
+ *
+ * Run: node scripts/split-registry.js (historical one-off, do not re-run).
+ * Reads: src/registry/tools.ts; writes tools-{types,chunk-*,constants,helpers,index}.ts.
+ */
 // HISTORICAL one-off: split the monolithic registry into chunks. Do not re-run.
 const fs = require('fs');
 const path = require('path');

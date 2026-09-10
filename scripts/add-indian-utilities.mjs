@@ -1,3 +1,10 @@
+/**
+ * Appends four indian-utilities entries (ids 201-204) plus a
+ * getToolByCategoryAndSlug helper to the tool registry.
+ *
+ * Run: node scripts/add-indian-utilities.mjs (historical one-off, do not re-run).
+ * Reads/writes: /Users/kvsingh/99-ai-tools/src/registry/tools.ts (hardcoded absolute path).
+ */
 // HISTORICAL one-off: appended indian-utilities entries to the old registry. Do not re-run (paths stale).
 import fs from 'fs';
 import path from 'path';

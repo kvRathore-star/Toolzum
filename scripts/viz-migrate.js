@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Migrates legacy Tailwind color classes to design-system CSS vars in the
+ * files matched by the required CLI glob argument.
+ *
+ * Run: node scripts/viz-migrate.js "<glob-pattern>" (e.g. tool module paths).
+ * Reads/writes: every non-node_modules file matched by the given glob.
+ */
 // Mechanical CSS-var migration for tool module files.
 // Maps legacy Tailwind color patterns to design-system CSS custom properties.
 // Run: node scripts/viz-migrate.js [file-or-glob]

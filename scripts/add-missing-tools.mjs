@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Appends 32 missing tool entries (ids 245-276) to rawToolsRegistry and
+ * adds their slugs to the proSlugs list.
+ *
+ * Run: node scripts/add-missing-tools.mjs (historical one-off, do not re-run).
+ * Reads/writes: src/registry/tools.ts.
+ */
 // HISTORICAL one-off: appended missing tool entries to the old registry. Do not re-run (paths stale).
 import fs from 'fs';
 

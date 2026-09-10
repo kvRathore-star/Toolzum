@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+/**
+ * Applies per-slug descriptions from scripts/descriptions-map.json to tool
+ * entries in the registry file (optional argv[2] path override).
+ *
+ * Run: node scripts/update-descriptions.mjs [registry-path].
+ * Reads: scripts/descriptions-map.json + target registry; writes target registry.
+ */
 // HISTORICAL one-off: applied descriptions-map.json to the old registry. Paths stale.
 import fs from 'fs';
 import path from 'path';
