@@ -41,6 +41,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   if ("error" in auth) return auth.error;
 
   const now = Math.floor(Date.now() / 1000);
+  const oneDayAgo = now - 86400;
   const sevenDaysAgo = now - 7 * 86400;
   const thirtyDaysAgo = now - 30 * 86400;
 
@@ -80,6 +81,15 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
 
   const activeSubscribers = (proUsers.count || 0) + (signedinUsers.count || 0);
 
+  // Pro-block canary: pro users must NEVER hit a download block (their limit
+  // is Infinity). Any count here means quota/session logic regressed — the
+  // exact failure mode fixed in ca25d878/1ddfa90d. download_event only logs
+  // record-path blocks with a toolSlug; check-path denials aren't logged.
+  const [proBlocks24h, proBlocks7d] = await Promise.all([
+    safeCount(DB, "SELECT COUNT(*) as count FROM download_event WHERE userType = ? AND outcome LIKE 'blocked%' AND createdAt > ?", "pro", oneDayAgo),
+    safeCount(DB, "SELECT COUNT(*) as count FROM download_event WHERE userType = ? AND outcome LIKE 'blocked%' AND createdAt > ?", "pro", sevenDaysAgo),
+  ]);
+
   recordRateLimit(DB, "admin-stats", ip, "/api/admin/stats");
 
   return json({
@@ -96,11 +106,14 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     revenueLast30Days: revenueLast30Days.total,
     paidCountLast30Days: paidCountLast30Days.count,
     activeSubscribers,
-    _degraded: recentActivity.failed || totalRevenue.failed || mrrFailed,
+    proBlocks24h: proBlocks24h.count,
+    proBlocks7d: proBlocks7d.count,
+    _degraded: recentActivity.failed || totalRevenue.failed || mrrFailed || proBlocks24h.failed || proBlocks7d.failed,
     _failedQueries: [
       recentActivity.failed && "analytics_event",
       totalRevenue.failed && "payment",
       mrrFailed && "payment_mrr",
+      (proBlocks24h.failed || proBlocks7d.failed) && "download_event",
     ].filter(Boolean),
   });
 }

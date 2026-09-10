@@ -67,8 +67,29 @@ function MilestoneBar({ label, current, target, color }: { label: string; curren
 }
 
 export function StatsSection({ stats }: { stats: AdminStats }) {
+  const breach24h = (stats.proBlocks24h ?? 0) > 0;
+  const breach7d = !breach24h && (stats.proBlocks7d ?? 0) > 0;
   return (
     <div className="space-y-6">
+      <div
+        role="status"
+        className={`flex items-center gap-3 px-4 py-3 rounded-xl border text-sm ${
+          breach24h
+            ? "bg-red-500/10 border-red-500/40 text-red-600 dark:text-red-400"
+            : breach7d
+              ? "bg-amber-500/10 border-amber-500/40 text-amber-600 dark:text-amber-400"
+              : "bg-emerald-500/5 border-emerald-500/20 text-[var(--text-muted)]"
+        }`}
+      >
+        <Shield className={`w-4 h-4 flex-shrink-0 ${breach24h || breach7d ? "" : "text-emerald-400"}`} />
+        {breach24h ? (
+          <span><strong>{stats.proBlocks24h} pro download block{stats.proBlocks24h === 1 ? "" : "s"} in 24h</strong> — quota/session logic regressed. Check downloads endpoints.</span>
+        ) : breach7d ? (
+          <span><strong>{stats.proBlocks7d} pro download block{stats.proBlocks7d === 1 ? "" : "s"} in 7d</strong> — none in the last 24h. Worth a look.</span>
+        ) : (
+          <span>Pro downloads healthy — 0 blocked pro downloads in 7 days.</span>
+        )}
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard label="Total Users" value={stats.totalUsers} icon={Users} color="bg-blue-500" badge="ALL" badgeColor="bg-blue-500/10 text-blue-400" delay={0} />
         <StatCard label="Active Subs" value={stats.activeSubscribers} icon={Zap} color="bg-emerald-500" badge="PRO+SIGNEDIN" badgeColor="bg-emerald-500/10 text-emerald-400" delay={50} />

@@ -12,6 +12,8 @@ export interface AdminStats {
   revenueLast30Days: number;
   paidCountLast30Days: number;
   activeSubscribers: number;
+  proBlocks24h: number;
+  proBlocks7d: number;
 }
 
 export interface User {
