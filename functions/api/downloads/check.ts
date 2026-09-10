@@ -1,7 +1,13 @@
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import { createAuth } from "../../../src/lib/auth";
 
 interface Env {
   DB: D1Database;
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string;
+  BETTER_AUTH_SECRET?: string;
+  BETTER_AUTH_URL?: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 function getUserLimit(plan: string | null, isProTool: boolean): number {
@@ -22,18 +28,26 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const url = new URL(request.url);
     const isProTool = url.searchParams.get('isPro') === '1';
 
-    // Identify user from session
-    const cookies = request.headers.get('cookie') || '';
-    const tokenMatch = cookies.match(/(?:authjs\.session-token|better-auth\.session_token|auth_session)=([^;]+)/);
-    const token = tokenMatch?.[1];
+    // Identify user via better-auth. The session cookie is HMAC-signed
+    // (token.signature), so manual token lookup against the session table
+    // never matches — resolve through the SDK like the favorites endpoints.
+    const auth = createAuth({
+      DB,
+      GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
+      GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
+      BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
+      BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
+      TURNSTILE_SECRET_KEY: env.TURNSTILE_SECRET_KEY as string,
+    });
+    const session = await auth.api.getSession({ headers: request.headers });
     let plan: string | null = null;
     let userId: string | null = null;
-    if (token) {
-      const user = await DB.prepare(
-        "SELECT u.plan, s.userId FROM session s JOIN user u ON u.id = s.userId WHERE s.token = ? AND s.expiresAt > unixepoch()"
-      ).bind(token).first<{ plan: string; userId: string }>();
-      plan = user?.plan || null;
-      userId = user?.userId || null;
+    if (session?.user?.id) {
+      userId = session.user.id;
+      const row = await DB.prepare("SELECT plan FROM user WHERE id = ?")
+        .bind(userId)
+        .first<{ plan: string }>();
+      plan = row?.plan || 'free';
     }
 
     const limit = getUserLimit(plan, isProTool);
