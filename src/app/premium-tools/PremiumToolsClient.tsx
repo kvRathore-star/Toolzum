@@ -14,7 +14,7 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 
 const BENEFITS = [
   { icon: Upload, title: 'Batch up to 500 files', desc: 'Process hundreds of files at once — images, PDFs, audio, and video.' },
-  { icon: Zap, title: 'No file size limits', desc: 'Upload files up to 500MB. No more worrying about arbitrary caps.' },
+  { icon: Zap, title: 'No file size limits', desc: 'Upload files up to 2GB. No more worrying about arbitrary caps.' },
   { icon: Layers, title: 'Parallel processing', desc: '6-thread parallel processing for faster conversions and compressions.' },
   { icon: Star, title: 'AI-powered tools', desc: 'Full access to AI tools — document chat, image generation, and more.' },
   { icon: ShieldCheck, title: 'Privacy first', desc: 'All processing stays in your browser. Zero uploads, zero logs, zero tracking.' },
@@ -111,7 +111,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
             { value: proCount, label: 'Pro Tools', sub: 'Across 9+ categories' },
             { value: toolCount, label: 'Total Tools', sub: 'Privacy-first, client-side' },
             { value: '500', label: 'Batch Files', sub: 'Per operation' },
-            { value: '500MB', label: 'Max File Size', sub: 'Per upload' },
+            { value: '2GB', label: 'Max File Size', sub: 'Per upload' },
           ].map((stat, i) => (
             <div key={i} className="text-center p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)]">
               <div className="font-mono text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-1">{stat.value}</div>
