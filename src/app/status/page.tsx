@@ -1,14 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { 
-  Activity, 
-  CheckCircle, 
-  RefreshCw, 
-  Server, 
-  ShieldCheck, 
-  Cpu, 
-  Network 
+import {
+  Activity,
+  CheckCircle,
+  RefreshCw,
+  Server,
+  ShieldCheck,
+  Cpu,
+  Network,
+  KeyRound
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -38,7 +39,7 @@ const MONTH_NAMES = [
 ];
 
 /** Rolling 4-month window ending at the current month — advances automatically each month. */
-function getIncidentMonths(): { label: string; text: string }[] {
+export function getIncidentMonths(): { label: string; text: string }[] {
   const now = new Date();
   const out: { label: string; text: string }[] = [];
   for (let back = 0; back < 4; back++) {
@@ -91,6 +92,25 @@ const PROBES: Record<string, () => Promise<number>> = {
   cdn: () => probeUrl("/", { method: "HEAD" }),
   // Functions + session-resolution stack (read-only, rate-limit safe).
   auth: () => probeUrl("/api/check-plan"),
+  // Google OAuth initiation (POST sign-in/social, expect a Google redirect
+  // target — no credentials exchanged, no session created). Catches the
+  // class of breakage where the button flow dies before reaching Google
+  // (e.g. method or secret misconfiguration). Regression probe for Sep 2026.
+  "google-login": async () => {
+    const t0 = performance.now();
+    const res = await fetch("/api/auth/sign-in/social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ provider: "google", callbackURL: "/dashboard" }),
+      cache: "no-store",
+    });
+    const data = (await res.json().catch(() => null)) as { url?: string } | null;
+    const target = res.headers.get("location") || data?.url || "";
+    if (!res.ok || !target.includes("accounts.google.com")) {
+      throw new Error("Google initiation failed");
+    }
+    return performance.now() - t0;
+  },
   // This device's JS engine.
   sandbox: async () => probeLocal(),
   // Functions + D1 read path (check records nothing).
@@ -100,6 +120,7 @@ const PROBES: Record<string, () => Promise<number>> = {
 const BASE_SYSTEMS = [
   { id: "cdn", name: "Global Edge CDN", icon: Network },
   { id: "auth", name: "Auth & Gateway", icon: ShieldCheck },
+  { id: "google-login", name: "Google Sign-In", icon: KeyRound },
   { id: "sandbox", name: "Local WASM Sandbox Core", icon: Cpu },
   { id: "cloud-relay", name: "Heavy Cloud Relay API", icon: Server },
 ];
