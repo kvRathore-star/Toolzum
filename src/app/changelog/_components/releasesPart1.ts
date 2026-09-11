@@ -5,6 +5,23 @@ export const RELEASES_PART_1: Release[] = [
   // SEPTEMBER 2026
   // ══════════════════════════════════════════════
   {
+    version: "v2.4.0",
+    date: "September 11, 2026",
+    title: "Accessibility Pass, Live Credits & Adaptive WASM",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Every form field announces its name to screen readers. Credit balances go live instead of day-old snapshots. Low-end devices skip the heavy video engine. Quota copy finally tells the truth about who you are.",
+    updates: [
+      { type: "feature", text: "Form labels bound for screen readers across 800+ inputs — fields announce their names instead of silence." },
+      { type: "feature", text: "Skip link jumps past navigation on every page; dialogs trap focus, close on Escape, and return focus on dismiss." },
+      { type: "feature", text: "Live credit balances — dashboard and account read true remaining credits from the server ('X remaining of 300/mo')." },
+      { type: "fix", text: "Download badge reads server plan state — Pro users never see quota copy; anonymous users on Pro tools get 'Sign in' instead of 'used up'." },
+      { type: "performance", text: "Low-end devices skip the multi-threaded video core and get heads-up toasts before large AI and OCR downloads." },
+      { type: "fix", text: "Contract suites added for credits and downloads endpoints — 1,141 tests green across 196 files." },
+      { type: "fix", text: "Beyond-plan catches from the same pass: palette Space hijack fixed with focus-return on close; dropzones, indexed rows, and selects named; hidden file inputs keyboard-focusable; 294 controls labeled from nearby text; hover/drag-only containers keyboard-accessible." },
+    ]
+  },
+  {
     version: "v2.3.0",
     date: "September 03, 2026",
     title: "Admin Command Center & Platform Hardening",
@@ -16,7 +33,7 @@ export const RELEASES_PART_1: Release[] = [
       { type: "feature", text: "Admin user detail slide-out: edit credits, change plans, ban/unban, GDPR delete, payment history, active sessions, and role change audit trail — all in one panel." },
       { type: "feature", text: "Platform-wide payments dashboard — browse, search, and filter all transactions by name, email, order ID, or payment status." },
       { type: "feature", text: "Error telemetry — client-side error capture with admin dashboard view, grouped by tool, source, and message." },
-      { type: "security", text: "Admin panel restricted by IP — only trusted networks can access admin routes via ADMIN_IPS environment variable." },
+      { type: "security", text: "Admin panel restricted to allowlisted admin emails — unauthorized accounts cannot reach admin APIs." },
       { type: "security", text: "Admin role changes require typing the user's exact email to confirm — eliminates accidental privilege changes." },
       { type: "security", text: "Session management: view active sessions per user (device, IP, expiry) and force-logout lost or stolen devices." },
       { type: "feature", text: "30+ new tools: bulk image upscaling, HEIC/AVIF conversion, AI watermark removal (single + batch), bulk PDF operations, and text utilities." },
@@ -129,8 +146,7 @@ export const RELEASES_PART_1: Release[] = [
       { type: "fix", text: "23 duplicate tool entries removed. 6 broken tool links fixed. Category filtering corrected across all pages." },
       { type: "feature", text: "Content integrity test suite runs before every commit — catches broken tools, duplicate entries, and missing modules automatically." },
       { type: "fix", text: "509 tools with duplicate descriptions deduplicated — each tool now has a unique, accurate description." },
-      { type: "feature", text: "Test suite now catches duplicate entries and broken links before they reach production." },
-    ]
+    ],
   },
   {
     version: "v1.10.0",
@@ -142,15 +158,12 @@ export const RELEASES_PART_1: Release[] = [
     updates: [
       { type: "security", text: "Content-Security-Policy headers added — prevents unauthorized script execution on all pages." },
       { type: "security", text: "X-Frame-Options and X-Content-Type-Options headers added — prevents clickjacking and MIME-type attacks." },
-      { type: "feature", text: "Automated sitemap generation with 876+ URLs, plus AI crawler rules for discoverability." },
+      { type: "feature", text: "Automated sitemap generation with 876+ URLs for discoverability." },
       { type: "feature", text: "Sitemap submitted to Google Search Console — accelerates indexing of all tool pages." },
       { type: "performance", text: "Batch processing hardened: a single corrupted or broken file is auto-skipped instead of crashing the entire batch." },
       { type: "fix", text: "Broken internal links across 15 category pages corrected." },
-    ]
+    ],
   },
-  // ══════════════════════════════════════════════
-  // MAY 2026
-  // ══════════════════════════════════════════════
   {
     version: "v1.9.0",
     date: "June 08, 2026",

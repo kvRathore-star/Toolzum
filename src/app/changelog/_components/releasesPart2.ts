@@ -1,6 +1,9 @@
 import type { Release } from "./releaseTypes";
 
 export const RELEASES_PART_2: Release[] = [
+  // ══════════════════════════════════════════════
+  // MAY 2026
+  // ══════════════════════════════════════════════
   {
     version: "v1.8.0",
     date: "May 26, 2026",
@@ -173,9 +176,7 @@ export const RELEASES_PART_2: Release[] = [
     description: "A full PDF office suite launches — Word-to-PDF, PDF-to-Word, PDF-to-JPG, and page editing. All client-side. Toolzum goes from 'file converter' to 'productivity suite' overnight.",
     updates: [
       { type: "feature", text: "PDF office suite: Word-to-PDF, PDF-to-Word, PDF-to-JPG, and PDF page editing — fully client-side." },
-      { type: "feature", text: "Catalog crossed 230 tools across 21 categories." },
       { type: "feature", text: "PDF page editing supports drag-and-drop page reordering and rotation." },
-      { type: "fix", text: "Currency converter exchange rates now fetched from backend with caching — live data instead of stale fallbacks." },
       { type: "fix", text: "PDF.js memory leak fixed — prolonged use no longer degrades browser performance." },
     ]
   },
@@ -194,7 +195,6 @@ export const RELEASES_PART_2: Release[] = [
       { type: "feature", text: "Offline caching enabled across all page routes — tools and pages load instantly even without WiFi." },
       { type: "feature", text: "Developer tools now support syntax highlighting for 10+ languages — Python, JavaScript, TypeScript, Go, Rust, and more." },
       { type: "fix", text: "XML sitemap generator blob URL race condition fixed — downloads no longer fail on slow devices." },
-      { type: "performance", text: "Tool card rendering optimized — category listing pages load noticeably faster." },
       { type: "fix", text: "Broken internal links across category pages corrected." },
     ]
   },
