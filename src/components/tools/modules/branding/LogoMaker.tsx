@@ -251,7 +251,7 @@ export default function LogoMaker() {
                 <label htmlFor="lbl-logomaker-layout-style" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Layout Style</label>
                 <select id="lbl-logomaker-layout-style" aria-label="Layout Style"
                   value={layout}
-                  onChange={(e) => setLayout(e.target.value as any)}
+                  onChange={(e) => setLayout(e.target.value as 'vertical' | 'horizontal')}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
                 >
                   <option value="vertical">Stacked (Vertical)</option>

@@ -56,7 +56,7 @@ export default function VideoCompressor() {
           'output.mp4'
         ]);
         const data = await ffmpeg.readFile('output.mp4');
-        const blob = new Blob([data as any], { type: 'video/mp4' });
+        const blob = new Blob([data as BlobPart], { type: 'video/mp4' });
         if (outputUrl) URL.revokeObjectURL(outputUrl);
         setOutputUrl(URL.createObjectURL(blob));
         setOutputSize(blob.size);

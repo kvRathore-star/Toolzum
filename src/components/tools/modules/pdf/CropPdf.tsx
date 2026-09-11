@@ -85,7 +85,7 @@ export default function CropPdf() {
       }
 
       const pdfBytes = await pdfDoc.save();
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
       toast.success("PDF cropped successfully!");

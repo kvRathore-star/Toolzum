@@ -126,7 +126,7 @@ export default function ReverseVideo() {
                 {(['video', 'audio', 'both'] as const).map((m) => (
                   <button
                     key={m}
-                    onClick={() => setMode(m as any)}
+                    onClick={() => setMode(m)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       mode === m
                         ? 'bg-blue-600 text-white shadow'

@@ -38,7 +38,7 @@ export default function GradientGenerator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Gradient Generator</h2>
           <div className="flex gap-2 flex-wrap items-center">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
-            <select aria-label="Type" value={type} onChange={e => { setType(e.target.value as any); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
+            <select aria-label="Type" value={type} onChange={e => { setType(e.target.value as 'linear' | 'radial' | 'conic'); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
               className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
               <option value="linear">Linear</option>
               <option value="radial">Radial</option>

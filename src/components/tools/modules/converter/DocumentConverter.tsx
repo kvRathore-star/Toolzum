@@ -163,7 +163,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
         <div className="flex flex-wrap gap-2 mb-4">
           {popularPairs.map((p, i) => (
-            <button key={i} onClick={() => { setSrcFormat(p.from as any); setDstFormat(p.to as any); }} className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">{p.label}</button>
+            <button key={i} onClick={() => { setSrcFormat(p.from); setDstFormat(p.to); }} className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">{p.label}</button>
           ))}
         </div>
 

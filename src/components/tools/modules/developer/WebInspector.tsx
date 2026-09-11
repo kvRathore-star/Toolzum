@@ -153,7 +153,7 @@ export default function WebInspector() {
       'Screen Size': `${s.width} × ${s.height}`,
       'Color Depth': `${s.colorDepth}-bit`,
       'Viewport': `${window.innerWidth} × ${window.innerHeight}`,
-      'Device Memory': (n as any).deviceMemory ? `${(n as any).deviceMemory} GB` : 'N/A',
+      'Device Memory': (n as Navigator & { deviceMemory?: number }).deviceMemory ? `${(n as Navigator & { deviceMemory?: number }).deviceMemory} GB` : 'N/A',
       'CPU Cores': String(n.hardwareConcurrency || 'N/A'),
       'Online': String(n.onLine),
       'Do Not Track': n.doNotTrack || 'N/A',

@@ -486,7 +486,7 @@ return (
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2 mb-3">
           {[{ v: 'validate', l: 'Validate' }, { v: 'to-json', l: 'To JSON' }, { v: 'minify', l: 'Minify' }].map(({ v, l }) => (
-            <button key={v} onClick={() => setMode(v as any)}
+            <button key={v} onClick={() => setMode(v as 'validate' | 'to-json' | 'minify')}
               className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{l}</button>
           ))}
         </div>

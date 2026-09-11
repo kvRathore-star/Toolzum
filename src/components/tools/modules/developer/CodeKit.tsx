@@ -85,7 +85,7 @@ export function CodeObfuscator() {
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
       <PresetBar presets={presets} />
-      <select aria-label="Obfuscation level" value={level} onChange={e => setLevel(e.target.value as any)}
+      <select aria-label="Obfuscation level" value={level} onChange={e => setLevel(e.target.value as 'light' | 'medium' | 'heavy')}
         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
         <option value="light">Light (Base64)</option>
         <option value="medium">Medium (Hex + Base64)</option>
@@ -203,7 +203,7 @@ export function JsSyntaxChecker() {
   const check = () => {
     const found: typeof issues = [];
     try {
-      const ast = acorn.parse(code, { ecmaVersion: 'latest', sourceType: 'module', locations: true }) as any;
+      const ast = acorn.parse(code, { ecmaVersion: 'latest', sourceType: 'module', locations: true });
       const declaredVars = new Set<string>();
       const usedVars = new Set<string>();
 
