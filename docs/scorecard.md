@@ -228,3 +228,17 @@ keep/301 calls rested on structure, not clicks:
 GSC export: `docs/toolzum.com-Performance-on-Search-2026-08-19/` (untracked,
 reference only). Only the video pair was a real duplicate; the other two "duplicates"
 from the original audit were pattern-matched names, not shared code.
+
+## Update (2026-09-11)
+
+| Dimension | Aug 8 | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Testing | 80 (30 files / 123 tests) | **~90** | 196 files / 1,141 tests: coverage thresholds ratcheted, 32 API contract tests, 103 guarded-calc behavior tests, Playwright E2E (critical-path, auth-flow, responsive). Unparks the "no E2E" item. Residual: og-images 5s timeout flakes under parallel load (passes solo). |
+| Accessibility | unmeasured | **~82** | 817 inputs bound via htmlFor/id (brace-aware batch, insertions-only); skip link live; dialog focus traps via shared hook; interaction rules at error. Residual: 327-site human-naming queue (bound-identity judgment, no safe automation). |
+| Quota/credits honesty | — | fixed | Live `/api/account/credits` + hook (session snapshots went stale daily); plan-aware badge (Pro never sees quota copy); transcription cost enforced at 10 (was accidentally 1 since Aug 28). |
+| Performance/build | 70 | **~72** | Adaptive WASM (ST-only cores + heads-ups on low-end); OG/redirect/site-data generators all green; `out/` 482MB and climbing (diet pass still open). |
+| Code quality | 80 | **~82** | `: any` 75→67 across 3 tsc-gated batches (9 mid-batch reverts caught by the gate); 3 dead deps + 184 transitive packages pruned; 2 dead scripts removed. |
+| Premium/prod | — | fixed | `pdf-workflow-builder` re-gated (test-ungating from Jul 22 never restored; 65→66); `temporary-email-generator` stub retired (was hijacking privacy-cleaner). |
+| Perf target (Aug 18) | open | **resolved** | HomeClient imports only the light client index; ToolLayout imports no registry. |
+
+Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-producing.
