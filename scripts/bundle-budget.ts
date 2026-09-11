@@ -12,19 +12,39 @@
  * page — the static-export equivalent of Next's "First Load JS shared by
  * all". Budget default 500 KB gzip (override: BUDGET_SHARED_KB env).
  *
+ * File-count gate: Cloudflare Pages allows ~20,000 files per deployment and
+ * each tool page emits ~7 files (HTML + RSC/txt companions + OG dir), so the
+ * catalog cannot grow unboundedly. collect records total file count;
+ * check fails above FILE_BUDGET_MAX (default 20000) and warns above
+ * FILE_BUDGET_WARN (default 18000). Current: ~16,930 files.
+ *
  * Usage:
  *   npx tsx scripts/bundle-budget.ts --collect [--out=out --stats=bundle-stats.json]
  *   npx tsx scripts/bundle-budget.ts --check [--stats=bundle-stats.json]
  */
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
+import { fileURLToPath } from 'node:url';
 
 interface BundleStats {
   pageCount: number;
   shared: string[];
   sizes: Record<string, number>;
   heaviest: { route: string; kb: number }[];
+  fileCount: number;
+}
+
+export function countAll(dir: string): number {
+  let n = 0;
+  for (const e of readdirSync(dir)) {
+    const p = join(dir, e);
+    try {
+      if (statSync(p).isDirectory()) n += countAll(p);
+      else n += 1;
+    } catch { /* ignore races with concurrent writes */ }
+  }
+  return n;
 }
 
 const CHUNK_RE = /src="\/_next\/static\/chunks\/([^"]+\.js)"/g;
@@ -71,18 +91,28 @@ function collect(outDir: string): BundleStats {
     .sort((a, b) => b.kb - a.kb)
     .slice(0, 15)
     .map(({ route, kb }) => ({ route, kb: Math.round(kb * 10) / 10 }));
-  return { pageCount: files.length, shared: sharedList, sizes, heaviest };
+  return { pageCount: files.length, shared: sharedList, sizes, heaviest, fileCount: countAll(outDir) };
 }
 
 function check(statsPath: string, budgetKb: number): void {
   const stats = JSON.parse(readFileSync(statsPath, 'utf8')) as BundleStats;
   const sharedKb = stats.shared.reduce((s, c) => s + (stats.sizes[c] ?? 0), 0) / 1024;
   const pass = sharedKb <= budgetKb;
+  const fileMax = Number(process.env.FILE_BUDGET_MAX ?? 20000);
+  const fileWarn = Number(process.env.FILE_BUDGET_WARN ?? 18000);
+  const fileCount = stats.fileCount ?? -1;
+  const filePass = fileCount < 0 || fileCount <= fileMax;
   const rows = [
-    `# Bundle budget ${pass ? '✅ PASS' : '❌ FAIL'}`,
+    `# Bundle budget ${pass && filePass ? '✅ PASS' : '❌ FAIL'}`,
     '',
     `Shared JS (loaded by all ${stats.pageCount} pages): **${sharedKb.toFixed(1)} KB** gzip — budget **${budgetKb} KB**.`,
     '',
+    ...(fileCount < 0
+      ? ['File count not collected (old stats file) — file gate skipped.', '']
+      : [
+          `Deployed files: **${fileCount.toLocaleString()}** — warn at ${fileWarn.toLocaleString()}, max ${fileMax.toLocaleString()} (Pages ceiling).`,
+          '',
+        ]),
     '| Shared chunk | gzip KB |',
     '| --- | --- |',
     ...stats.shared.map((c) => `| \`${c}\` | ${((stats.sizes[c] ?? 0) / 1024).toFixed(1)} |`),
@@ -98,6 +128,13 @@ function check(statsPath: string, budgetKb: number): void {
     console.error(`BUDGET EXCEEDED: shared ${sharedKb.toFixed(1)} KB > ${budgetKb} KB`);
     process.exit(1);
   }
+  if (fileCount >= 0 && fileCount > fileWarn) {
+    console.warn(`FILE BUDGET: ${fileCount.toLocaleString()} deployed files (warn ${fileWarn.toLocaleString()}, max ${fileMax.toLocaleString()})`);
+  }
+  if (!filePass) {
+    console.error(`FILE BUDGET EXCEEDED: ${fileCount.toLocaleString()} files > ${fileMax.toLocaleString()} max`);
+    process.exit(1);
+  }
 }
 
 const args = process.argv.slice(2);
@@ -105,11 +142,17 @@ const opt = (name: string, def: string): string => {
   const hit = args.find((a) => a.startsWith(`--${name}=`));
   return hit ? hit.split('=').slice(1).join('=') : def;
 };
-if (args.includes('--collect')) {
+// Import-safe: unit tests import countAll without triggering the CLI
+// (same isDirectRun pattern as scripts/generate-og-images.ts).
+const isDirectRun =
+  !!process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+if (!isDirectRun) {
+  // imported — export only
+} else if (args.includes('--collect')) {
   const stats = collect(opt('out', 'out'));
   writeFileSync(opt('stats', 'bundle-stats.json'), JSON.stringify(stats));
   const kb = stats.shared.reduce((s, c) => s + stats.sizes[c]!, 0) / 1024;
-  console.log(`collected ${stats.pageCount} pages, shared=${kb.toFixed(1)} KB gzip`);
+  console.log(`collected ${stats.pageCount} pages, shared=${kb.toFixed(1)} KB gzip, files=${stats.fileCount}`);
 } else if (args.includes('--check')) {
   check(opt('stats', 'bundle-stats.json'), Number(process.env.BUDGET_SHARED_KB ?? 500));
 } else {

@@ -1,62 +1,19 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Globe, Moon, Sun, Check, User, LayoutDashboard, Star } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSession } from "@/lib/auth-client";
 
-const LANGUAGES = [
-  { code: "en", label: "English", native: "English" },
-  { code: "hi", label: "Hindi", native: "हिन्दी" },
-  { code: "es", label: "Spanish", native: "Español" },
-  { code: "fr", label: "French", native: "Français" },
-  { code: "de", label: "German", native: "Deutsch" },
-  { code: "zh", label: "Chinese", native: "中文" },
-  { code: "ja", label: "Japanese", native: "日本語" },
-  { code: "ar", label: "Arabic", native: "العربية" },
-  { code: "pt", label: "Portuguese", native: "Português" },
-  { code: "ru", label: "Russian", native: "Русский" },
-];
+// English-only today: the UI ships in one language, so the footer shows a
+// static indicator instead of a fake language choice.
 
 function LanguageSelector() {
-  const [open, setOpen] = useState(false);
-  const [current, setCurrent] = useState("en");
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  const lang = LANGUAGES.find((l) => l.code === current) || LANGUAGES[0];
-
   return (
-    <div className="relative" ref={ref}>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors text-xs cursor-pointer"
-      >
-        <Globe className="w-3.5 h-3.5" /> {lang!.code.toUpperCase()}
-      </button>
-      {open && (
-        <div className="absolute bottom-full right-0 mb-2 w-48 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-2xl py-2 max-h-64 overflow-y-auto z-[100]">
-          {LANGUAGES.map((l) => (
-            <button
-              key={l.code}
-              onClick={() => { setCurrent(l.code); setOpen(false); }}
-              className={`w-full flex items-center justify-between px-4 py-2 text-xs text-left hover:bg-[var(--bg-overlay)] transition-colors cursor-pointer ${current === l.code ? "text-[var(--accent)] font-semibold" : "text-[var(--text-secondary)]"}`}
-            >
-              <span>{l.native}</span>
-              {current === l.code && <Check className="w-3 h-3" />}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <span className="flex items-center gap-2 text-[var(--text-muted)] text-xs" title="English only for now">
+      <Globe className="w-3.5 h-3.5" /> EN
+    </span>
   );
 }
 
