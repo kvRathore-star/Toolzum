@@ -38,7 +38,7 @@ Last verified: 2026-09-11
 | Signed-in (free) | 2/day | Daily (midnight UTC) | Server-side (separate `pro:` fingerprint prefix) |
 | Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
 
-**Code:** `functions/api/downloads/check.ts:7-10`, `functions/api/downloads/record.ts:7-10`
+**Code:** `functions/api/downloads/check.ts:13-17`, `functions/api/downloads/record.ts` (same `getUserLimit` shape)
 
 ```
 getUserLimit(plan, isProTool):
@@ -130,7 +130,7 @@ Rate limited at 10 req/min per IP. Daily quota enforced separately.
 
 ## 5. File Size Limits
 
-**Code:** `functions/api/check-plan.ts:7-11`
+**Code:** `functions/api/check-plan.ts:13-17` (`PLAN_LIMITS`)
 
 | Tier | Max file size | Max batch size | Threads |
 |------|--------------|----------------|---------|
