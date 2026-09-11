@@ -16,6 +16,9 @@ const RATE_LIMITS: Record<string, number> = {
 const CREDIT_RESET_DAYS = 30;
 const FREE_CREDITS = 30;
 const PRO_CREDITS = 300;
+// Per-task cost (decided Sep 11): transcription runs a full audio model
+// pass (~$0.19/25min), so it costs 10× a text generation.
+export const TRANSCRIPTION_CREDITS = 10;
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';
@@ -82,8 +85,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const maxCredits = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt);
 
-    if (user.credits <= 0) {
-      return new Response(JSON.stringify({ error: 'No credits remaining' }), {
+    if (user.credits < TRANSCRIPTION_CREDITS) {
+      return new Response(JSON.stringify({ error: 'Not enough credits — transcription requires 10' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
       });
@@ -163,7 +166,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare("UPDATE user SET credits = credits - 1 WHERE id = ? AND credits > 0").bind(userId).run();
+    await DB.prepare(`UPDATE user SET credits = credits - ${TRANSCRIPTION_CREDITS} WHERE id = ? AND credits >= ${TRANSCRIPTION_CREDITS}`).bind(userId).run();
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
 

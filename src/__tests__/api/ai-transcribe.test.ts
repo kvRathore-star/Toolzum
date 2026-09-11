@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { onRequestPost } from '../../../functions/api/ai/transcribe';
+import { onRequestPost, TRANSCRIPTION_CREDITS } from '../../../functions/api/ai/transcribe';
 
 // NOTE: transcribe.ts resolves the session from the session cookie via a
 // manual D1 lookup (no createAuth mock here — mirrors ai-generate.test.ts).
@@ -121,4 +121,32 @@ describe('POST /api/ai/transcribe contract', () => {
   // in this jsdom environment (parse throws -> 500), so the branch is not
   // reachable here. The 50MB cap itself is a one-line constant
   // (MAX_UPLOAD_BYTES) with no logic to pin down.
+});
+
+describe('POST /api/ai/transcribe credit cost (10 per transcription)', () => {
+  it('pins the per-task cost at 10 (matches docs + pricing)', () => {
+    // Happy-path deduction SQL is unreachable in jsdom (undici multipart
+    // parser rejects jsdom FormData — see note above), so the cost is
+    // pinned at the exported constant instead of the UPDATE string.
+    expect(TRANSCRIPTION_CREDITS).toBe(10);
+  });
+
+  it('403s with 5 credits (below the 10 cost) before touching the provider', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = {
+      DB: mockDb({ credits: 5 }),
+      GEMINI_API_KEY: 'k',
+    } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({
+        cookie: COOKIE,
+        body: fileBody('clip.mp3', 'audio/mpeg', 'fake-audio-bytes'),
+        contentType: MULTIPART,
+      }),
+      env,
+    });
+    expect(res.status).toBe(403);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
 });

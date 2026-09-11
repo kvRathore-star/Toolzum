@@ -75,33 +75,32 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 1 (code deducts 1 — doc previously said 10, wrong) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Transcription (Speech-to-Text) | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
 | AI Image Generation | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
-- ~30 transcription sessions (25 min each), OR
+- ~3 transcription sessions (25 min each), OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
 **Cost at 300 Pro credits/month:**
 - ~300 text gen calls, OR
-- ~300 transcription sessions, OR
+- ~30 transcription sessions, OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$5.70/month (30 transcriptions × $0.19).
-**Worst-case cost per Pro user:** ~$57/month (300 × $0.19) vs $14.99 revenue.
+**Worst-case cost per free user:** ~$0.57/month (3 transcriptions × $0.19).
+**Worst-case cost per Pro user:** ~$5.70/month (30 × $0.19) vs $14.99 revenue.
 
-> ⚠️ **OPEN DECISION (carried from tracker):** per-task credit costs are currently
-> flat (everything = 1 credit). At 1/transcription, a heavy free user costs up
-> to $5.70/mo and a heavy Pro user up to $57/mo against $14.99 revenue. Raising
-> transcription to 5–10 credits (or capping transcription minutes) closes this.
-> Decide before scaling AI traffic.
+> Decided 2026-09-11: per-task costs are text = 1, transcription = 10
+> (`TRANSCRIPTION_CREDITS` in `transcribe.ts`, pinned by contract test).
+> The code previously deducted 1 for everything since gating launched
+> (Aug 28) — the doc's 10 was the intent that never shipped until now.
 
 ---
 
