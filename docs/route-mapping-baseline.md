@@ -11,14 +11,14 @@
 
 | Mechanism | Slugs |
 |---|---|
-| MODULE_REGISTRY (direct dynamic import) | 1047 |
-| Redirect-only sources (not in MODULE_REGISTRY) | 82 (22 ComingSoon registry tools + 0 registry tools redirecting to a hub + 60 legacy URLs) |
-| Category-move redirects (same slug, old->new category) | 63 (63 MODULE_REGISTRY) |
+| MODULE_REGISTRY (direct dynamic import) | 1044 |
+| Redirect-only sources (not in MODULE_REGISTRY) | 86 (21 ComingSoon registry tools + 0 registry tools redirecting to a hub + 65 legacy URLs) |
+| Category-move redirects (same slug, old->new category) | 144 (144 MODULE_REGISTRY) |
 | SEO permutation landing slugs (redirected in page.tsx) | 82 |
 
 - All routing now flows through MODULE_REGISTRY; CONVERTER_CONFIG / ConverterRouter were retired in Phase 4.
 - Redirect-only slugs never reach `ComingSoonTool` because `[category]/[tool]/page.tsx` redirects them first.
-- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1047) through the real resolution path with no throw. Two real bugs were found and fixed:
+- **Render baseline:** `registry-render-smoke.test.ts` renders every MODULE_REGISTRY slug (1044) through the real resolution path with no throw. Two real bugs were found and fixed:
   - `json-tree-viewer` (DataUtilitiesWidgets.tsx) called `setError` during render -> infinite re-render loop.
   - `ssh-key-generator` (SshKeyGenerator.tsx) computed `x ** (p-2)` with a ~2^255 BigInt exponent at module load -> import crash. Fixed `modinv` to use modular exponentiation.
 
@@ -69,7 +69,7 @@
 | aadhaar-card-masker | AadhaarMasker |
 | aadhaar-number-validator | AadhaarValidator |
 | aadhaar-wallet-cropper | AadhaarWalletCropper |
-| ab-test-calculator | Calculators -> AbTestCalculator |
+| ab-test-calculator | AbTestCalculator |
 | acv-calculator | ExtraTools -> AnnualContractValueCalculator |
 | add-image-to-pdf | AddImageToPdf |
 | add-page-numbers-to-pdf | AddPageNumbersToPdf |
@@ -97,44 +97,44 @@
 | aiff-to-opus | AudioFormatConverter [slug=aiff-to-opus] |
 | aiff-to-wav | AudioFormatConverter [slug=aiff-to-wav] |
 | aiff-to-wma | AudioFormatConverter [slug=aiff-to-wma] |
-| algebra-calculator | MiscellaneousTools1 -> AlgebraCalculator |
+| algebra-calculator | AlgebraCalculator |
 | api-builder | ApiBuilder -> ApiBuilder |
-| api-changelog-generator | ApiTools -> ApiChangelogGenerator |
+| api-changelog-generator | ApiChangelogGenerator |
 | api-cost-estimator | ApiTools -> ApiCostEstimator |
-| api-diff-checker | ApiTools -> ApiDiffChecker |
-| api-docs-generator | ApiTools -> ApiDocsGenerator |
-| api-documentation-generator | ApiTools -> ApiDocumentationGenerator |
-| api-error-decoder | ApiTools -> ApiErrorDecoder |
+| api-diff-checker | ApiDiffChecker |
+| api-docs-generator | ApiDocsGenerator |
+| api-documentation-generator | ApiDocumentationGenerator |
+| api-error-decoder | ApiErrorDecoder |
 | api-gateway-rate-calculator | ApiTools -> ApiGatewayRateCalculator |
 | api-key-generator | ApiTools -> ApiKeyGenerator |
 | api-key-hasher | ApiTools -> ApiKeyHasher |
 | api-key-validator | ApiTools -> ApiKeyValidator |
-| api-latency-budget | ApiTools -> ApiLatencyBudget |
-| api-mock-data-generator | ApiTools -> ApiMockDataGenerator |
-| api-mock-server-config | ApiTools -> ApiMockServerConfig |
-| api-pagination-calculator | ApiTools -> ApiPaginationCalculator |
-| api-payload-analyzer | ApiTools -> ApiPayloadAnalyzer |
+| api-latency-budget | ApiLatencyBudget |
+| api-mock-data-generator | ApiMockDataGenerator |
+| api-mock-server-config | ApiMockServerConfig |
+| api-pagination-calculator | ApiPaginationCalculator |
+| api-payload-analyzer | ApiPayloadAnalyzer |
 | api-rate-limiter-calculator | ApiTools -> ApiRateLimiterCalculator |
-| api-request-builder | ApiTools -> ApiRequestBuilder |
-| api-response-formatter | ApiTools -> ApiResponseFormatter |
-| api-tester | ApiTools -> ApiTester |
+| api-request-builder | ApiRequestBuilder |
+| api-response-formatter | ApiResponseFormatter |
+| api-tester | ApiTester |
 | apng-to-gif | GifToApng -> AnimationConverter [apng-to-gif] |
 | apple-music-preview-extractor | AppleMusicPreviewExtractor |
 | archive-converter | ArchiveConverter |
 | area-converter | UnitConverter [slug=area-converter] |
-| arr-calculator | Calculators -> ArrCalculator |
+| arr-calculator | ArrCalculator |
 | article-writer | AiArticleWriter |
 | ascii-art-generator | CreativeToolsWidgets -> ASCIIArtGenerator |
 | ascii-font-generator | CreativeToolsWidgets -> ASCIIFontGenerator |
 | ascii-table-generator | ExtraTools -> AsciiTableGenerator |
-| aspect-ratio-calculator | Calculators -> AspectRatioCalculator |
+| aspect-ratio-calculator | AspectRatioCalculator |
 | audio-compressor | AudioCompressor |
 | audio-converter | AudioFormatConverter [slug=audio-converter] |
 | audio-cutter | AudioCutter |
 | audio-equalizer | AudioEqualizer |
 | audio-merger | AudioMerger |
 | audio-to-text-transcription | AudioToTextTranscription |
-| avatar-generator | Generators -> AvatarGenerator |
+| avatar-generator | AvatarGenerator |
 | avi-to-mkv | VideoFormatConverter [slug=avi-to-mkv] |
 | avi-to-mov | VideoFormatConverter [slug=avi-to-mov] |
 | avi-to-mp4 | VideoFormatConverter [slug=avi-to-mp4] |
@@ -152,12 +152,12 @@
 | avro-schema-generator | ConvertersEverydayWidgets -> AvroSchemaGenerator |
 | avro-to-json-sample | ConvertersEverydayWidgets -> AvroToJsonSample |
 | aws-iam-policy-analyzer | MiscUtilitiesKitWidgets -> AwsIamPolicyAnalyzer |
-| baby-formula-calculator | Calculators -> BabyFormulaCalculator |
-| baby-growth-percentile-calculator | Calculators -> BabyGrowthPercentileCalculator |
-| baby-sleep-schedule-calculator | Calculators -> BabySleepScheduleCalculator |
+| baby-formula-calculator | BabyFormulaCalculator |
+| baby-growth-percentile-calculator | BabyGrowthPercentileCalculator |
+| baby-sleep-schedule-calculator | BabySleepScheduleCalculator |
 | backslash-escape | EncoderDecoder -> EncoderDecoder |
 | bank-statement-analyser | BankStatementAnalyser |
-| barcode-generator | Generators -> BarcodeGenerator |
+| barcode-generator | BarcodeGenerator |
 | base32-encoder | ConverterToolkitWidgets -> Base32Encoder |
 | base64-encode-decode | EncoderDecoder -> EncoderDecoder |
 | base64-json-decoder | ConverterToolkitWidgets -> Base64ToJsonDecoder |
@@ -169,7 +169,7 @@
 | blood-alcohol-calculator | MiscellaneousTools1 -> BloodAlcoholCalculator |
 | blur-face | BlurFace |
 | bmi-calculator | BmiCalculator |
-| bmi-calculator-for-kids | Calculators -> BmiCalculatorForKids |
+| bmi-calculator-for-kids | BmiCalculator |
 | bmp-to-avif | ImageCatchAllConverter [slug=bmp-to-avif] |
 | bmp-to-gif | ImageCatchAllConverter [slug=bmp-to-gif] |
 | bmp-to-heic | ImageCatchAllConverter [slug=bmp-to-heic] |
@@ -182,8 +182,8 @@
 | bmp-to-webp | ImageCatchAllConverter [slug=bmp-to-webp] |
 | bmr-calculator | BmrCalculator |
 | body-fat-calculator | MiscellaneousTools1 -> BodyFatCalculator |
-| body-fat-percentage-calculator | Calculators -> BodyFatPercentageCalculator |
-| body-surface-area-calculator | Calculators -> BodySurfaceAreaCalculator |
+| body-fat-percentage-calculator | BodyFatPercentageCalculator |
+| body-surface-area-calculator | BodySurfaceAreaCalculator |
 | bookmark-pdf | BookmarkPdf |
 | border-css-generator | CssGenerators [border-css] |
 | border-radius-generator | CssGenerators [border-radius] |
@@ -191,26 +191,29 @@
 | braille-translator | BrailleTranslator |
 | brand-color-palette-generator | BrandColorPaletteGenerator |
 | brand-kit | BrandKit |
-| breadcrumb-schema-generator | TextSeoTools -> BreadcrumbSchemaGenerator |
+| breadcrumb-schema-generator | BreadcrumbSchemaGenerator |
 | break-even-calculator | BreakEvenCalculator |
-| breastfeeding-calorie-calculator | Calculators -> BreastfeedingCalorieCalculator |
+| breastfeeding-calorie-calculator | BreastfeedingCalorieCalculator |
 | browser-extension | BrowserExtension |
-| brute-force-time-estimator | SecurityTools -> BruteForceTimeEstimator |
+| brute-force-time-estimator | PasswordTools -> BruteForceTimeEstimator |
 | bulk-app-icon-generator | BulkAppIconGenerator |
 | bulk-audio-converter | BulkAudioConverter |
 | bulk-audio-normalizer | BulkAudioNormalizer |
+| bulk-avif-optimizer | BulkAvifOptimizer |
 | bulk-bg-changer | BulkBgChanger |
 | bulk-csv-excel-to-json | BulkCsvExcelToJson |
 | bulk-ebook-converter | BulkEbookConverter |
 | bulk-exif-stripper-injector | BulkExifStripperInjector |
 | bulk-face-anonymizer | BulkFaceAnonymizer |
 | bulk-font-subsetter | BulkFontSubsetter |
+| bulk-heic-converter | BulkHeicConverter |
 | bulk-heic-to-jpg | BulkHeicToJpg |
 | bulk-image-compressor | BulkImageCompressor |
 | bulk-image-converter | BulkImageConverter |
 | bulk-image-resizer | BulkImageResizer |
 | bulk-image-to-pdf | BulkImageToPdf |
 | bulk-image-to-text-ocr | BulkImageToTextOcr |
+| bulk-image-upscaler | BulkImageUpscaler |
 | bulk-image-watermark | BulkImageWatermark |
 | bulk-invoice-receipt-parser | BulkInvoiceReceiptParser |
 | bulk-markdown-to-pdf-html | BulkMarkdownToPdfHtml |
@@ -230,28 +233,28 @@
 | bulk-video-subtitle-burner | BulkVideoSubtitleBurner |
 | burn-rate-calculator | BurnRateCalculator |
 | business-card-maker | BusinessCardMaker |
-| business-days-calculator | Calculators -> BusinessDaysCalculator |
+| business-days-calculator | DateTimeCalculators -> BusinessDaysCalculator |
 | cac-calculator | CacCalculator |
-| cagr-calculator | MiscellaneousTools1 -> CAGRCalculator |
-| calorie-calculator | Calculators -> CalorieCalculator |
+| cagr-calculator | CAGRCalculator |
+| calorie-calculator | CalorieCalculator |
 | calorie-intake-calculator | MiscellaneousTools1 -> CalorieIntakeCalculator |
 | calorie-tracker | HealthTools -> CalorieTracker |
 | calories-burned-calculator | MiscellaneousTools1 -> CaloriesBurnedCalculator |
-| canonical-url-checker | TextSeoTools -> CanonicalUrlChecker |
-| car-lease-calculator | Calculators -> CarLeaseCalculator |
-| car-loan-calculator | Calculators -> CarLoanCalculator |
+| canonical-url-checker | CanonicalUrlChecker |
+| car-lease-calculator | CarLeaseCalculator |
+| car-loan-calculator | CarLoanCalculator |
 | case-converter | TextTransformConverter [slug=case-converter] |
 | cbor-inspector | FormatAndDataKitWidgets -> CborInspector |
 | cbz-to-pdf | CbzToPdf |
 | cgpa-to-percentage-converter | CgpaToPercentage |
-| character-counter | TextSeoTools -> CharacterCounter |
+| character-counter | CharacterCounter |
 | character-encoding-converter | ConverterToolkitWidgets -> CharacterEncodingConverter |
 | chart-maker | ChartMaker |
-| child-height-predictor | Calculators -> ChildHeightPredictor |
+| child-height-predictor | ChildHeightPredictor |
 | chmod-calculator | ChmodCalculator |
-| churn-rate-calculator | Calculators -> ChurnRateCalculator |
+| churn-rate-calculator | ChurnRateCalculator |
 | cidr-calculator | MiscUtilitiesKitWidgets -> CidrCalculator |
-| circle-calculator | Calculators -> CircleCalculator |
+| circle-calculator | CircleCalculator |
 | citation-generator | CitationGenerator |
 | clothing-size-converter | UnitConverter [slug=clothing-size-converter] |
 | code-beautifier | CodeFormatter |
@@ -261,32 +264,32 @@
 | code-to-curl-parser | CodeKit -> CodeToCurlParser |
 | coin-flipper | CoinFlipper |
 | collage-maker | CollageMaker |
-| college-gpa-calculator | Calculators -> CollegeGpaCalculator |
+| college-gpa-calculator | CollegeGpaCalculator |
 | color-blindness-simulator | ColorBlindnessSimulator |
 | color-converter | ColorConverter [slug=color-converter] |
 | color-palette-generator | ColorAndStyleKitWidgets -> ColorPaletteGenerator |
-| color-picker | MiscellaneousTools1 -> ColorPicker |
+| color-picker | ColorPicker |
 | color-shades-tints | ColorAndStyleKitWidgets -> ColorShadesTints |
-| column-extractor | DataToolkitWidgets -> ColumnExtractor |
-| column-renamer | DataToolkitWidgets -> ColumnRenamer |
-| combination-calculator | MiscellaneousTools1 -> CombinationCalculator |
+| column-extractor | ColumnExtractor |
+| column-renamer | ColumnRenamer |
+| combination-calculator | CombinationCalculator |
 | compare-pdf-files | ComparePdfFiles |
 | complaint-letter-generator | ComplaintLetterGenerator |
-| compound-interest-calculator | Calculators -> CompoundInterestCalculator |
+| compound-interest-calculator | CompoundInterestCalculator |
 | compress-image-to-50kb | CompressImageTo50kb |
-| content-security-policy-generator | SecurityTools -> ContentSecurityPolicyGenerator |
+| content-security-policy-generator | WebSecurityTools -> ContentSecurityPolicyGenerator |
 | contrast-ratio-checker | ColorAndStyleKitWidgets -> ContrastRatioChecker |
 | conventional-commit-generator | ColorAndStyleKitWidgets -> ConventionalCommitGenerator |
 | conversion-rate-calculator | ConversionRateCalculator |
 | convert-to-jpg | ConvertToJpg |
 | cookie-parser | SecurityToolkitWidgets -> CookieParser |
 | cooking-measurement-converter | UnitConverter [slug=cooking-measurement-converter] |
-| coordinate-calculator | MiscellaneousTools1 -> CoordinateCalculator |
-| cors-header-generator | SecurityTools -> CorsHeaderGenerator |
-| cors-inspector | SecurityTools -> CorsInspector |
+| coordinate-calculator | CoordinateCalculator |
+| cors-header-generator | WebSecurityTools -> CorsHeaderGenerator |
+| cors-inspector | WebSecurityTools -> CorsInspector |
 | countdown-tool | Timers -> CountdownTimer |
 | counter-tool | MiscellaneousTools1 -> CounterTool |
-| coupon-code-generator | Generators -> CouponCodeGenerator |
+| coupon-code-generator | CouponCodeGenerator |
 | cpm-calculator | CpmCalculator |
 | create-pdf | CreatePdf |
 | cron-expression-validator | ConfigValidatorWidgets -> CronExpressionValidator |
@@ -294,9 +297,8 @@
 | crop-image | CropImage |
 | crop-pdf | CropPdf |
 | crop-video | CropVideo |
-| crypto-kit | CryptoKit |
-| csp-policy-validator | SecurityTools -> CspValidator |
-| csrf-token-generator | SecurityTools -> CsrfTokenGenerator |
+| csp-policy-validator | WebSecurityTools -> CspValidator |
+| csrf-token-generator | AuthTools -> CsrfTokenGenerator |
 | css-animation-generator | CssGenerators [animation] |
 | css-filter-generator | CssGenerators [filter] |
 | css-formatter | CodeFormatter -> CssFormatter |
@@ -312,10 +314,10 @@
 | csv-data-cleaner | CsvHubConverter [slug=csv-data-cleaner] |
 | csv-formatter | CsvHubConverter [slug=csv-formatter] |
 | csv-html-table-converter | CsvHubConverter [slug=csv-html-table-converter] |
-| csv-json-row-generator | DataToolkitWidgets -> CsvJsonRowGenerator |
-| csv-merger | DataToolkitWidgets -> CsvMerger |
-| csv-row-sorter | DataToolkitWidgets -> Sorter |
-| csv-splitter | DataToolkitWidgets -> Splitter |
+| csv-json-row-generator | CsvJsonRowGenerator |
+| csv-merger | CsvMerger |
+| csv-row-sorter | Sorter |
+| csv-splitter | Splitter |
 | csv-statistics | CsvHubConverter [slug=csv-statistics] |
 | csv-to-json | DataConverter -> DataConverterFromSlug [slug=csv-to-json] |
 | csv-to-markdown | CsvHubConverter [slug=csv-to-markdown] |
@@ -323,41 +325,41 @@
 | csv-to-sql | CsvHubConverter [slug=csv-to-sql] |
 | csv-to-sqlite | CsvToSqlite |
 | csv-to-xml | DataConverter -> DataConverterFromSlug [slug=csv-to-xml] |
-| csv-transpose | DataToolkitWidgets -> Transpose |
+| csv-transpose | Transpose |
 | curl-to-code-converter | FormatAndDataKitWidgets -> CurlToCodeConverter |
 | currency-converter | CurrencyConverter |
 | cursive-text-generator | TextStylingConverter [slug=cursive-text-generator] |
-| customer-ltv-calculator | Calculators -> LtvCalculator |
-| cve-lookup | SecurityTools -> CveLookup |
-| cycling-calorie-calculator | Calculators -> CyclingCalorieCalculator |
+| customer-ltv-calculator | LtvCalculator |
+| cve-lookup | WebSecurityTools -> CveLookup |
+| cycling-calorie-calculator | CyclingCalorieCalculator |
 | data-anonymizer | FormatAndDataKitWidgets -> DataAnonymizer |
 | data-format-converter | DataConverter -> DataConverter |
 | data-size-converter | UnitConverter [slug=data-size-converter] |
-| data-type-converter | DataToolkitWidgets -> DataTypeConverter |
+| data-type-converter | DataTypeConverter |
 | date-addition-calculator | MiscellaneousTools1 -> DateAdditionCalculator |
 | date-difference-calculator | MiscellaneousTools1 -> DateDifferenceCalculator |
-| day-of-week-calculator | Calculators -> DayOfWeekCalculator |
-| day-of-year-calculator | Calculators -> DayOfYearCalculator |
+| day-of-week-calculator | DateTimeCalculators -> DayOfWeekCalculator |
+| day-of-year-calculator | DateTimeCalculators -> DayOfYearCalculator |
 | daylight-saving-time-checker | MiscellaneousTools1 -> DaylightSavingTimeChecker |
-| debt-payoff-calculator | Calculators -> DebtPayoffCalculator |
-| decimal-to-fraction-calculator | MiscellaneousTools1 -> DecimalToFractionCalculator |
-| deduplicator | DataToolkitWidgets -> Deduplicator |
+| debt-payoff-calculator | DebtPayoffCalculator |
+| decimal-to-fraction-calculator | DecimalToFractionCalculator |
+| deduplicator | Deduplicator |
 | degree-radian-converter | UnitConverter [slug=degree-radian-converter] |
 | deskew-pdf | PdfDeskew |
 | dice-roller | DiceRoller |
 | diff-checker | DiffChecker |
-| discount-calculator | Calculators -> DiscountCalculator |
-| dns-lookup-generator | SecurityTools -> DnsLookupGenerator |
+| discount-calculator | DiscountCalculator |
+| dns-lookup-generator | NetworkTools -> DnsLookupGenerator |
 | dns-record-validator | SecurityWidgets -> DnsRecordValidator |
 | docker-compose-validator | ConfigValidatorWidgets -> DockerComposeValidator |
 | docker-run-to-compose | DockerRunToCompose |
 | dockerfile-linter | ConfigValidatorWidgets -> DockerfileLinter |
 | document-converter | DocumentConverter -> DocumentConverter |
 | domain-availability-checker | DomainAvailabilityChecker |
-| dpi-calculator | Calculators -> DpiCalculator |
-| dummy-text-generator | Generators -> DummyTextGenerator |
-| duplicate-word-remover | TextSeoTools -> DuplicateWordRemover |
-| email-format-validator | SecurityTools -> EmailValidator |
+| dpi-calculator | DpiCalculator |
+| dummy-text-generator | DummyTextGenerator |
+| duplicate-word-remover | DuplicateWordRemover |
+| email-format-validator | ValidatorTools -> EmailValidator |
 | email-normalizer | EmailNormalizer |
 | email-signature-generator | EmailSignatureGenerator |
 | emi-calculator | EmiCalculator |
@@ -365,25 +367,25 @@
 | emoji-picker | CreativeToolsWidgets -> EmojiPicker |
 | employee-turnover-calculator | EmployeeTurnoverCalculator |
 | encoder-decoder | EncoderDecoder -> EncoderDecoder |
-| env-file-generator | SecurityTools -> EnvFileGenerator |
-| env-file-parser | SecurityTools -> EnvFileParser |
+| env-file-generator | ValidatorTools -> EnvFileGenerator |
+| env-file-parser | ValidatorTools -> EnvFileParser |
 | epub-to-pdf | EpubToPdf |
 | esign-pdf | EsignPdf |
 | eslint-config-generator | ConfigTools -> EslintConfigGenerator |
 | eta-calculator | MathToolsWidgets -> EtaCalculator |
 | excel-to-pdf | DocumentFormatConverter [slug=excel-to-pdf] |
 | exif-data-remover | ExifDataRemover |
-| exponent-calculator | Calculators -> ExponentCalculator |
+| exponent-calculator | ExponentCalculator |
 | extract-images-from-pdf | ExtractImagesFromPdf |
 | extract-pages-from-pdf | ExtractPagesFromPdf |
-| factorial-calculator | MiscellaneousTools1 -> FactorialCalculator |
+| factorial-calculator | FactorialCalculator |
 | fade-in-out | FadeInOut |
-| fake-credit-card-generator | Generators -> FakeCreditCardGenerator |
-| fake-data-generator | Generators -> FakeDataGenerator |
-| fake-identity-generator | Generators -> FakeIdentityGenerator |
+| fake-credit-card-generator | FakeCreditCardGenerator |
+| fake-data-generator | FakeDataGenerator |
+| fake-identity-generator | FakeIdentityGenerator |
 | fancy-text-generator | TextStylingConverter [slug=fancy-text-generator] |
 | favicon-generator | FaviconGenerator |
-| final-grade-calculator | Calculators -> FinalGradeCalculator |
+| final-grade-calculator | FinalGradeCalculator |
 | flac-to-aac | AudioFormatConverter [slug=flac-to-aac] |
 | flac-to-aiff | AudioFormatConverter [slug=flac-to-aiff] |
 | flac-to-m4a | AudioFormatConverter [slug=flac-to-m4a] |
@@ -394,18 +396,19 @@
 | flac-to-wma | AudioFormatConverter [slug=flac-to-wma] |
 | flatten-pdf | FlattenPdf |
 | flexbox-css-generator | CssGenerators [flexbox] |
-| fluid-typography-calculator | Calculators -> FluidTypographyCalculator |
+| fluid-typography-calculator | FluidTypographyCalculator |
 | font-converter | FontConverter |
 | font-generator | FontGenerator |
 | font-subsetter | FontSubsetter |
-| format-validator | DataToolkitWidgets -> FormatValidator |
-| fraction-calculator | Calculators -> FractionCalculator |
-| fraction-to-decimal-calculator | MiscellaneousTools1 -> FractionToDecimalCalculator |
+| format-validator | FormatValidator |
+| fraction-calculator | FractionCalculator |
+| fraction-to-decimal-calculator | FractionToDecimalCalculator |
 | fuel-consumption-converter | UnitConverter [slug=fuel-consumption-converter] |
-| gas-mileage-calculator | Calculators -> GasMileageCalculator |
+| gas-mileage-calculator | GasMileageCalculator |
+| gemini-watermark-remover | GeminiWatermarkRemover |
 | generic-pdf-processor | GenericPDFProcessor |
 | geojson-validator | ConfigValidatorWidgets -> GeoJsonValidator |
-| geometry-calculator | MiscellaneousTools1 -> GeometryCalculator |
+| geometry-calculator | GeometryCalculator |
 | gif-compressor | GifCompressor |
 | gif-editor | GifEditor |
 | gif-resizer | GifResizer |
@@ -427,9 +430,9 @@
 | gitignore-generator | ExtraTools -> GitignoreGenerator |
 | glassmorphism-generator | CssGenerators [glassmorphism] |
 | glitch-text | GlitchText |
-| gpa-calculator | Calculators -> GpaCalculator |
-| grade-calculator | Calculators -> GradeCalculator |
-| gradient-generator | MiscellaneousTools1 -> GradientGenerator |
+| gpa-calculator | GpaCalculator |
+| grade-calculator | GradeCalculator |
+| gradient-generator | GradientGenerator |
 | grammar-checker | AiGrammarChecker |
 | graphql-cost-estimator | ApiTools -> GraphqlCostEstimator |
 | graphql-query-formatter | ApiTools -> GraphqlQueryFormatter |
@@ -439,18 +442,18 @@
 | graphql-tester | ApiTools -> GraphqlTester |
 | graphql-variables-formatter | ApiTools -> GraphqlVariablesFormatter |
 | grayscale-pdf | GrayscalePdf |
-| greatest-common-factor-calculator | MiscellaneousTools1 -> GreatestCommonFactorCalculator |
-| grpc-status-code-lookup | ApiTools -> GrpcStatusCodeLookup |
+| greatest-common-factor-calculator | GreatestCommonFactorCalculator |
+| grpc-status-code-lookup | GrpcStatusCodeLookup |
 | gst-calculator | GstCalculator |
 | gst-invoice-generator | GstInvoiceGenerator |
 | gstin-lookup | GstinLookup |
 | hangman-game | MiscellaneousTools1 -> HangmanGame |
 | har-analyzer | FormatAndDataKitWidgets -> HarAnalyzer |
-| hash-file-generator | SecurityTools -> HashFileGenerator |
-| hash-password-generator | SecurityTools -> HashPasswordGenerator |
-| hash-verifier | SecurityTools -> HashVerifier |
+| hash-file-generator | HashTools -> HashFileGenerator |
+| hash-password-generator | PasswordTools -> HashPasswordGenerator |
+| hash-verifier | HashTools -> HashVerifier |
 | header-footer-pdf | HeaderFooterPdf |
-| heart-rate-zone-calculator | Calculators -> HeartRateZoneCalculator |
+| heart-rate-zone-calculator | HeartRateZoneCalculator |
 | heic-to-avif | ImageCatchAllConverter [slug=heic-to-avif] |
 | heic-to-bmp | ImageCatchAllConverter [slug=heic-to-bmp] |
 | heic-to-gif | ImageCatchAllConverter [slug=heic-to-gif] |
@@ -466,10 +469,9 @@
 | hex-text-converter | TextTransformConverter [slug=hex-text-converter] |
 | hex-to-rgb-converter | ColorConverter [slug=hex-to-rgb-converter] |
 | hindi-regional-font-generator | RegionalFontGenerator |
-| hmac-generator | SecurityTools -> HmacGenerator |
-| hourly-to-salary-calculator | Calculators -> HourlyToSalaryCalculator |
+| hmac-generator | HashTools -> HmacGenerator |
+| hourly-to-salary-calculator | HourlyToSalaryCalculator |
 | hours-minutes-calculator | MiscellaneousTools1 -> HoursMinutesCalculator |
-| hours-to-minutes-converter | ExtraTools -> HoursToMinutesConverter |
 | htaccess-validator | ConfigValidatorWidgets -> HtaccessValidator |
 | html-entity-encoder | EncoderDecoder -> EncoderDecoder |
 | html-formatter | CodeFormatter -> HtmlFormatter |
@@ -484,7 +486,7 @@
 | http-header-analyzer | ConfigTools -> HttpHeaderAnalyzer |
 | http-headers-generator | ConfigTools -> HttpHeadersGenerator |
 | http-retry-policy-builder | ConfigTools -> HttpRetryPolicyBuilder |
-| http-security-checker | SecurityTools -> HttpSecurityChecker |
+| http-security-checker | WebSecurityTools -> HttpSecurityChecker |
 | http-status-code-checker | ConfigTools -> HttpStatusCodeChecker |
 | iban-validator | IbanValidator |
 | ical-event-generator | ConvertersEverydayWidgets -> IcalEventGenerator |
@@ -517,7 +519,7 @@
 | indian-document-enhancer | IndianDocumentEnhancer |
 | indian-investment-calculator | IndianInvestmentCalculator |
 | indian-voice-transcriber | IndianVoiceTranscriber |
-| inflation-calculator | Calculators -> InflationCalculator |
+| inflation-calculator | InflationCalculator |
 | ini-json-converter | FormatSerializerHub [slug=ini-json-converter] |
 | interval-timer | Timers -> IntervalTimer |
 | invisible-character | InvisibleCharacter |
@@ -528,7 +530,7 @@
 | ip-allowlist-generator | ColorAndStyleKitWidgets -> IpAllowlistGenerator |
 | ip-anonymizer | IpAnonymizer |
 | ip-range-expander | NetworkToolkitWidgets -> IpRangeExpander |
-| ip-reputation-checker | SecurityTools -> IpReputationChecker |
+| ip-reputation-checker | NetworkTools -> IpReputationChecker |
 | ipv6-ula-generator | NetworkToolkitWidgets -> Ipv6UlaGenerator |
 | itr-filing-helper | ItrFilingHelper |
 | javascript-formatter | CodeFormatter -> JavascriptFormatter |
@@ -547,7 +549,7 @@
 | js-minifier | JsMinifier |
 | js-syntax-checker | CodeKit -> JsSyntaxChecker |
 | json-diff-checker | JSONDiffChecker |
-| json-escape-unescape | DataToolkitWidgets -> JsonEscapeUnescape |
+| json-escape-unescape | JsonEscapeUnescape |
 | json-flattener | JsonOutputConverter [slug=json-flattener] |
 | json-formatter | JsonFormatter |
 | json-formatter-tool | JsonOutputConverter [slug=json-formatter-tool] |
@@ -565,12 +567,12 @@
 | json-to-zod | JsonOutputConverter [slug=json-to-zod] |
 | json-toon-converter | DataFormatTools [slug=json-toon-converter] |
 | json-tree-viewer | DataUtilitiesWidgets -> JsonTreeViewer |
-| jsonl-formatter | DataToolkitWidgets -> JsonlFormatter |
+| jsonl-formatter | JsonlFormatter |
 | jsonrpc-builder | FormatAndDataKitWidgets -> JsonRpcBuilder |
 | jsx-formatter | CodeFormatter -> JsxFormatter |
-| jwk-generator | DataToolkitWidgets -> JwkGenerator |
+| jwk-generator | JwkGenerator |
 | jwt-debugger | JwtDebugger |
-| jwt-inspector | SecurityTools -> JwtInspector |
+| jwt-inspector | AuthTools -> JwtInspector |
 | jxl-to-avif | ImageCatchAllConverter [slug=jxl-to-avif] |
 | jxl-to-bmp | ImageCatchAllConverter [slug=jxl-to-bmp] |
 | jxl-to-gif | ImageCatchAllConverter [slug=jxl-to-gif] |
@@ -581,14 +583,14 @@
 | jxl-to-svg | ImageCatchAllConverter [slug=jxl-to-svg] |
 | jxl-to-tiff | ImageCatchAllConverter [slug=jxl-to-tiff] |
 | jxl-to-webp | ImageCatchAllConverter [slug=jxl-to-webp] |
-| keto-calculator | Calculators -> KetoCalculator |
-| keyword-density-checker | TextSeoTools -> KeywordDensityChecker |
-| keyword-planner-tool | TextSeoTools -> KeywordPlannerTool |
+| keto-calculator | KetoCalculator |
+| keyword-density-checker | KeywordDensityChecker |
+| keyword-planner-tool | KeywordPlannerTool |
 | kubernetes-yaml-validator | ConfigValidatorWidgets -> KubernetesYamlValidator |
 | large-text-viewer | ConvertersEverydayWidgets -> LargeTextViewer |
-| lean-body-mass-calculator | Calculators -> LeanBodyMassCalculator |
-| leap-year-calculator | Calculators -> LeapYearCalculator |
-| least-common-multiple-calculator | MiscellaneousTools1 -> LeastCommonMultipleCalculator |
+| lean-body-mass-calculator | LeanBodyMassCalculator |
+| leap-year-calculator | LeapYearCalculator |
+| least-common-multiple-calculator | LeastCommonMultipleCalculator |
 | length-converter | UnitConverter [slug=length-converter] |
 | less-to-css-converter | CssPreprocessorHub [slug=less-to-css-converter] |
 | license-key-generator | GeneratorWidgets -> LicenseKeyGenerator |
@@ -599,10 +601,10 @@
 | list-sorter | MiscellaneousTools1 -> ListSorter |
 | live-transcription | LiveTranscription |
 | log-analyzer | FormatAndDataKitWidgets -> LogAnalyzer |
-| logarithm-calculator | MiscellaneousTools1 -> LogarithmCalculator |
+| logarithm-calculator | LogarithmCalculator |
 | logo-maker | LogoMaker |
 | logo-placeholder-generator | GeneratorWidgets -> LogoPlaceholderGenerator |
-| lorem-ipsum-generator | Generators -> LoremIpsumGenerator |
+| lorem-ipsum-generator | LoremIpsumGenerator |
 | ltv-calculator | LtvCalculator |
 | m4a-to-aac | AudioFormatConverter [slug=m4a-to-aac] |
 | m4a-to-aiff | AudioFormatConverter [slug=m4a-to-aiff] |
@@ -614,38 +616,37 @@
 | m4a-to-wma | AudioFormatConverter [slug=m4a-to-wma] |
 | mac-address-generator | MacAddressGenerator |
 | mac-vendor-lookup | MiniGeneratorsWidgets -> MACVendorLookup |
-| macro-calculator | Calculators -> MacroCalculator |
+| macro-calculator | MacroCalculator |
 | macro-split-calculator | MiscellaneousTools1 -> MacroSplitCalculator |
 | margin-calculator | MarginCalculator |
 | markdown-formatter | CodeFormatter -> MarkdownFormatter |
-| markdown-previewer | TextSeoTools -> MarkdownPreviewer |
+| markdown-previewer | MarkdownPreviewer |
 | markdown-slack-converter | ConverterToolkitWidgets -> MarkdownToSlackConverter |
 | markdown-table-generator | ColorAndStyleKitWidgets -> MarkdownTableGenerator |
 | markdown-to-html | MarkdownTools |
 | markdown-to-pdf | MarkdownToPdf |
 | markdown-to-text | MarkdownTools |
 | markdown-tools | MarkdownTools |
-| markup-calculator | MiscellaneousTools1 -> MarkupCalculator |
+| markup-calculator | MarkupCalculator |
 | marriage-biodata-maker | MarriageBiodataMaker |
-| math-equation-solver | MiscellaneousTools1 -> MathEquationSolver |
+| math-equation-solver | MathEquationSolver |
 | md5-hash-generator | Md5HashGenerator |
-| mean-median-mode-calculator | Calculators -> MeanMedianModeCalculator |
+| mean-median-mode-calculator | MeanMedianModeCalculator |
 | media-query-generator | ColorAndStyleKitWidgets -> MediaQueryGenerator |
 | meeting-minutes-generator | MeetingMinutesGenerator |
 | meeting-time-planner | Timers -> MeetingTimePlanner |
 | meme-generator | MemeGenerator |
-| merge-patch-generator | DataToolkitWidgets -> MergePatchGenerator |
+| merge-patch-generator | MergePatchGenerator |
 | mime-finder | FormatAndDataKitWidgets -> MimeFinder |
-| minutes-to-hours-converter | MiscellaneousTools1 -> MinutesToHoursConverter |
 | mkv-to-avi | VideoFormatConverter [slug=mkv-to-avi] |
 | mkv-to-mov | VideoFormatConverter [slug=mkv-to-mov] |
 | mkv-to-mp4 | VideoFormatConverter [slug=mkv-to-mp4] |
 | mkv-to-webm | VideoFormatConverter [slug=mkv-to-webm] |
 | mobi-converter | MobiConverter |
-| mock-api-response-generator | ApiTools -> MockApiResponseGenerator |
-| modulo-calculator | MiscellaneousTools1 -> ModuloCalculator |
+| mock-api-response-generator | MockApiResponseGenerator |
+| modulo-calculator | ModuloCalculator |
 | morse-code-translator | MorseCodeTranslator |
-| mortgage-calculator | Calculators -> MortgageCalculator |
+| mortgage-calculator | MortgageCalculator |
 | mov-to-avi | VideoFormatConverter [slug=mov-to-avi] |
 | mov-to-mkv | VideoFormatConverter [slug=mov-to-mkv] |
 | mov-to-mp3 | VideoToAudioConverter [slug=mov-to-mp3] |
@@ -665,18 +666,18 @@
 | mp4-to-mov | VideoFormatConverter [slug=mp4-to-mov] |
 | mp4-to-mp3 | VideoToAudioConverter [slug=mp4-to-mp3] |
 | mp4-to-webm | VideoFormatConverter [slug=mp4-to-webm] |
-| mrr-calculator | Calculators -> MrrCalculator |
+| mrr-calculator | MrrCalculator |
 | msgpack-inspector | FormatAndDataKitWidgets -> MessagePackInspector |
 | mute-video | MuteVideo |
 | nato-phonetic-converter | NatoPhoneticConverter |
 | ndjson-to-json | JsonOutputConverter [slug=ndjson-to-json] |
 | net-promoter-score-calculator | NetPromoterScoreCalculator |
-| net-worth-calculator | Calculators -> NetWorthCalculator |
+| net-worth-calculator | NetWorthCalculator |
 | neumorphism-generator | CssGenerators [neumorphism] |
 | nginx-config-generator | ColorAndStyleKitWidgets -> NginxConfigGenerator |
-| nickname-generator | Generators -> NicknameGenerator |
+| nickname-generator | NicknameGenerator |
 | noise-reducer | NoiseReducer |
-| null-value-handler | DataToolkitWidgets -> NullValueHandler |
+| null-value-handler | NullValueHandler |
 | number-base-converter | TextTransformConverter [slug=number-base-converter] |
 | number-guessing-game | MiscellaneousTools1 -> NumberGuessingGame |
 | number-to-words-converter | NumberWordsConverter [slug=number-to-words-converter] |
@@ -686,7 +687,7 @@
 | oauth-pkce-generator | GeneratorWidgets -> OauthPkceGenerator |
 | oauth-scope-builder | SecurityToolkitWidgets -> OAuthScopeBuilder |
 | oauth-state-validator | SecurityToolkitWidgets -> OAuthStateValidator |
-| oauth2-debugger | SecurityTools -> Oauth2Debugger |
+| oauth2-debugger | AuthTools -> Oauth2Debugger |
 | object-remover | ObjectRemover |
 | odt-rtf-to-pdf | OdtRtfConverter |
 | ogg-to-aac | AudioFormatConverter [slug=ogg-to-aac] |
@@ -698,9 +699,9 @@
 | ogg-to-wav | AudioFormatConverter [slug=ogg-to-wav] |
 | ogg-to-wma | AudioFormatConverter [slug=ogg-to-wma] |
 | open-graph-generator | GeneratorWidgets -> OpenGraphGenerator |
-| openapi-mock-generator | ApiTools -> OpenapiMockGenerator |
-| openapi-to-postman | ApiTools -> OpenapiToPostman |
-| openapi-validator | ApiTools -> OpenapiValidator |
+| openapi-mock-generator | OpenapiMockGenerator |
+| openapi-to-postman | OpenapiToPostman |
+| openapi-validator | OpenapiValidator |
 | opus-to-aac | AudioFormatConverter [slug=opus-to-aac] |
 | opus-to-aiff | AudioFormatConverter [slug=opus-to-aiff] |
 | opus-to-flac | AudioFormatConverter [slug=opus-to-flac] |
@@ -716,7 +717,7 @@
 | pan-verification | PanVerification |
 | paper-size-converter | UnitConverter [slug=paper-size-converter] |
 | passport-photo-india | PassportPhotoIndia |
-| password-entropy-calculator | SecurityTools -> PasswordEntropyCalculator |
+| password-entropy-calculator | PasswordTools -> PasswordEntropyCalculator |
 | password-generator | PasswordGenerator |
 | password-strength-checker | PasswordStrengthChecker |
 | pbkdf2-hash-generator | SecurityToolkitWidgets -> Pbkdf2HashGenerator |
@@ -753,14 +754,14 @@
 | pdf-to-word | DocumentFormatConverter [slug=pdf-to-word] |
 | pdf-workflow-builder | PdfWorkflowBuilder -> PdfWorkflowBuilder |
 | percentage-calculator | PercentageCalculator |
-| percentage-difference-calculator | MiscellaneousTools1 -> PercentageDifferenceCalculator |
-| permutation-calculator | MiscellaneousTools1 -> PermutationCalculator |
+| percentage-difference-calculator | PercentageDifferenceCalculator |
+| permutation-calculator | PermutationCalculator |
 | pgp-key-generator | PgpKeyGenerator |
 | phone-parser | OtherUtilitiesWidgets -> PhoneParser |
 | photo-retoucher | PhotoRetoucher |
 | php-tools | PhpTools |
 | pin-generator | GeneratorWidgets -> PinGenerator |
-| pivot-generator | DataToolkitWidgets -> PivotGenerator |
+| pivot-generator | PivotGenerator |
 | pkce-verifier | SecurityToolkitWidgets -> PkceVerifier |
 | png-to-avif | ImageCatchAllConverter [slug=png-to-avif] |
 | png-to-bmp | ImageCatchAllConverter [slug=png-to-bmp] |
@@ -775,66 +776,66 @@
 | podcast-transcription | PodcastTranscription |
 | pomodoro-timer | Timers -> PomodoroTimer |
 | port-number-lookup | DevUtilityWidgets -> PortNumberLookup |
-| postman-collection-generator | ApiTools -> PostmanCollectionGenerator |
-| postman-to-openapi-converter | ApiTools -> PostmanToOpenapiConverter |
+| postman-collection-generator | PostmanCollectionGenerator |
+| postman-to-openapi-converter | PostmanToOpenapiConverter |
 | power-converter | UnitConverter [slug=power-converter] |
-| ppi-calculator | Calculators -> PpiCalculator |
+| ppi-calculator | PpiCalculator |
 | ppt-to-pdf | DocumentFormatConverter [slug=ppt-to-pdf] |
-| pregnancy-due-date-calculator | Calculators -> PregnancyDueDateCalculator |
+| pregnancy-due-date-calculator | PregnancyDueDateCalculator |
 | pressure-converter | UnitConverter [slug=pressure-converter] |
 | pricing-tier-builder | DevUtilityWidgets -> PricingTierBuilder |
-| prime-factorization-calculator | MiscellaneousTools1 -> PrimeFactorizationCalculator |
-| prime-number-checker | MiscellaneousTools1 -> PrimeNumberChecker |
+| prime-factorization-calculator | PrimeFactorizationCalculator |
+| prime-number-checker | PrimeNumberChecker |
 | privacy-cleaner | PrivacyCleaner |
-| probability-calculator | Calculators -> ProbabilityCalculator |
+| probability-calculator | ProbabilityCalculator |
 | profit-loss-calculator | CalcFileKitWidgets -> ProfitLossCalculator |
 | profit-margin-calculator | ProfitMarginCalculator |
 | pronunciation-tool | PronunciationTool |
-| proportion-calculator | Calculators -> ProportionCalculator |
+| proportion-calculator | ProportionCalculator |
 | protect-pdf | ProtectPdf |
-| protein-calculator | Calculators -> ProteinCalculator |
+| protein-calculator | ProteinCalculator |
 | proto-schema-converter | StyleCodeKitWidgets -> ProtoSchemaConverter |
 | protobuf-decoder | StyleCodeKitWidgets -> ProtobufDecoder |
 | psd-to-jpg-png | PsdToJpgPng |
 | pug-to-html-converter | CodeKit -> PugToHtml |
 | px-rem-converter | ConverterToolkitWidgets -> PxRemConverter |
-| pythagorean-theorem-calculator | Calculators -> PythagoreanTheoremCalculator |
+| pythagorean-theorem-calculator | PythagoreanTheoremCalculator |
 | python-formatter | CodeFormatter -> PythonFormatter |
 | qr-code-generator | QrCodeGenerator |
 | qr-code-reader | QrCodeReader |
-| quadratic-equation-solver | Calculators -> QuadraticEquationSolver |
+| quadratic-equation-solver | QuadraticEquationSolver |
 | query-string-parser | DevUtilityWidgets -> QueryStringParser |
-| random-color-generator | Generators -> RandomColorGenerator |
+| random-color-generator | RandomColorGenerator |
 | random-date-generator | GeneratorWidgets -> RandomDateGenerator |
-| random-decision-maker | Generators -> RandomDecisionMaker |
+| random-decision-maker | RandomDecisionMaker |
 | random-ip-generator | GeneratorWidgets -> RandomIpGenerator |
-| random-number-generator | Generators -> RandomNumberGenerator |
-| random-picker-generator | Generators -> RandomPickerGenerator |
+| random-number-generator | RandomNumberGenerator |
+| random-picker-generator | RandomPickerGenerator |
 | random-port-generator | RandomPortGenerator |
 | random-sentence-generator | GeneratorWidgets -> RandomSentenceGenerator |
-| random-string-generator | Generators -> RandomStringGenerator |
-| random-team-generator | Generators -> RandomTeamGenerator |
+| random-string-generator | RandomStringGenerator |
+| random-team-generator | RandomTeamGenerator |
 | random-time-generator | GeneratorWidgets -> RandomTimeGenerator |
-| random-token-generator | Generators -> RandomTokenGenerator |
+| random-token-generator | RandomTokenGenerator |
 | random-user-agent-generator | GeneratorWidgets -> RandomUserAgentGenerator |
-| random-username-generator | Generators -> RandomUsernameGenerator |
+| random-username-generator | RandomUsernameGenerator |
 | random-word-generator | GeneratorWidgets -> RandomWordGenerator |
 | rate-limit-header-parser | DevUtilityWidgets -> RateLimitHeaderParser |
-| ratio-calculator | Calculators -> RatioCalculator |
+| ratio-calculator | RatioCalculator |
 | raw-image-converter | RawImageConverter |
 | receipt-generator | ReceiptGenerator |
-| rectangle-area-calculator | Calculators -> RectangleAreaCalculator |
+| rectangle-area-calculator | RectangleAreaCalculator |
 | redact-pdf | RedactPdf |
 | regex-tester | RegexTester |
-| rent-vs-buy-calculator | Calculators -> RentVsBuyCalculator |
+| rent-vs-buy-calculator | RentVsBuyCalculator |
 | rental-agreement-generator | RentalAgreementGenerator |
 | repair-pdf | RepairPdf |
 | resize-pdf-pages | ResizePdfPages |
-| rest-endpoint-documenter | ApiTools -> RestEndpointDocumenter |
+| rest-endpoint-documenter | RestEndpointDocumenter |
 | resume-ats-score-checker | ResumeAtsScoreChecker |
 | resume-builder | ResumeBuilder |
-| retirement-calculator | Calculators -> RetirementCalculator |
-| revenue-growth-calculator | Calculators -> RevenueGrowthCalculator |
+| retirement-calculator | RetirementCalculator |
+| revenue-growth-calculator | RevenueGrowthCalculator |
 | reverse-video | ReverseVideo |
 | ring-size-converter | CalcFileKitWidgets -> RingSizeConverter |
 | roas-calculator | RoasCalculator |
@@ -845,54 +846,53 @@
 | roman-numeral-converter | RomanNumeralConverter |
 | rotate-image | RotateImage |
 | rotate-pdf | RotatePdf |
-| rounding-calculator | MiscellaneousTools1 -> RoundingCalculator |
-| row-filter | DataToolkitWidgets -> RowFilter |
+| rounding-calculator | RoundingCalculator |
+| row-filter | RowFilter |
 | rsa-key-generator | RsaKeyGenerator |
 | rss-feed-validator | ConfigValidatorWidgets -> RssFeedValidator |
-| running-pace-calculator | Calculators -> RunningPaceCalculator |
-| runway-calculator | Calculators -> RunwayCalculator |
+| running-pace-calculator | RunningPaceCalculator |
+| runway-calculator | RunwayCalculator |
 | saas-metrics-dashboard | SaaSMetricsDashboard -> SaaSMetricsDashboard |
 | saas-payback-period | ExtraTools -> SaasPaybackPeriod |
 | saas-pricing-calculator | SaasPricingCalculator |
 | saas-quick-ratio | ExtraTools -> SaasQuickRatio |
 | saas-rule-of-40 | ExtraTools -> SaasRuleOf40 |
 | salary-calculator | SalaryCalculator |
-| sales-tax-calculator | MiscellaneousTools1 -> SalesTaxCalculator |
-| saml-decoder | SecurityTools -> SamlDecoder |
-| savings-calculator | Calculators -> SavingsCalculator |
+| sales-tax-calculator | SalesTaxCalculator |
+| saml-decoder | AuthTools -> SamlDecoder |
+| savings-calculator | SavingsCalculator |
 | scan-to-pdf | ScanToPdf |
-| scientific-calculator | Calculators -> ScientificCalculator |
-| scientific-notation-converter | MiscellaneousTools1 -> ScientificNotationConverter |
+| scientific-calculator | ScientificCalculator |
+| scientific-notation-converter | ScientificNotationConverter |
 | screen-recorder | ScreenRecorder |
 | screen-recorder-extension | ScreenRecorderExtension |
 | screen-size-converter | CalcFileKitWidgets -> ScreenSizeConverter |
 | scss-formatter | CodeFormatter -> ScssFormatter |
 | scss-to-css-converter | CssPreprocessorHub [slug=scss-to-css-converter] |
-| seat-license-calculator | Calculators -> SeatLicenseCalculator |
-| seconds-to-minutes-converter | MiscellaneousTools1 -> SecondsToMinutesConverter |
+| seat-license-calculator | SeatLicenseCalculator |
 | secret-scanner | SecurityWidgets -> SecretScanner |
 | secure-note-sharer | SecureNoteSharer |
 | security-txt-generator | SecurityWidgets -> SecurityTxtGenerator |
 | seller-profit-calculator | SellerProfitCalculator |
-| semver-calculator | Calculators -> SemverCalculator |
-| seo-headline-analyzer | TextSeoTools -> SeoHeadlineAnalyzer |
-| seo-meta-tag-generator | TextSeoTools -> SeoMetaTagGenerator |
-| seo-preview-generator | TextSeoTools -> SeoPreviewGenerator |
-| seo-schema-generator | TextSeoTools -> SeoSchemaGenerator |
-| seo-slug-generator | TextSeoTools -> SeoSlugGenerator |
-| sequence-generator | Generators -> SequenceGenerator |
-| serial-number-generator | Generators -> SerialNumberGenerator |
+| semver-calculator | SemverCalculator |
+| seo-headline-analyzer | SeoHeadlineAnalyzer |
+| seo-meta-tag-generator | SeoMetaTagGenerator |
+| seo-preview-generator | SeoPreviewGenerator |
+| seo-schema-generator | SeoSchemaGenerator |
+| seo-slug-generator | SeoSlugGenerator |
+| sequence-generator | SequenceGenerator |
+| serial-number-generator | SerialNumberGenerator |
 | shoe-size-converter | UnitConverter [slug=shoe-size-converter] |
-| significant-figures-calculator | MiscellaneousTools1 -> SignificantFiguresCalculator |
-| simple-interest-calculator | Calculators -> SimpleInterestCalculator |
+| significant-figures-calculator | SignificantFiguresCalculator |
+| simple-interest-calculator | SimpleInterestCalculator |
 | sip-calculator | SipCalculator |
 | sitemap-validator | ConfigValidatorWidgets -> SitemapValidator |
-| sleep-calculator | Calculators -> SleepCalculator |
+| sleep-calculator | SleepCalculator |
 | sleep-requirement-calculator | MiscellaneousTools1 -> SleepRequirementCalculator |
-| slope-calculator | MiscellaneousTools1 -> SlopeCalculator |
+| slope-calculator | SlopeCalculator |
 | slugify-tool | OtherUtilitiesWidgets -> SlugifyTool |
 | small-text-generator | SmallTextGenerator |
-| soap-api-tester | ApiTools -> SoapApiTester |
+| soap-api-tester | SoapApiTester |
 | social-caption-generator | AiSocialCaption |
 | social-media-calendar | SocialMediaCalendar |
 | social-media-post-maker | SocialMediaPostMaker |
@@ -900,24 +900,24 @@
 | speed-converter | UnitConverter [slug=speed-converter] |
 | speed-test | SpeedTest |
 | sql-formatter | CodeFormatter -> SqlFormatter |
-| sql-injection-detector | SecurityTools -> SqlInjectionDetector |
-| square-root-calculator | Calculators -> SquareRootCalculator |
+| sql-injection-detector | WebSecurityTools -> SqlInjectionDetector |
+| square-root-calculator | SquareRootCalculator |
 | sse-event-formatter | DevUtilityWidgets -> SseEventFormatter |
 | ssh-key-generator | SshKeyGenerator |
-| ssl-certificate-decoder | SecurityTools -> SslCertificateDecoder |
+| ssl-certificate-decoder | TlsTools -> SslCertificateDecoder |
 | ssl-checker | SslChecker |
-| ssl-tls-checker | SecurityTools -> SslTlsChecker |
-| standard-deviation-calculator | Calculators -> StandardDeviationCalculator |
+| ssl-tls-checker | TlsTools -> SslTlsChecker |
+| standard-deviation-calculator | StandardDeviationCalculator |
 | steps-calculator | MiscellaneousTools1 -> StepsCalculator |
-| steps-to-calories-calculator | Calculators -> StepsToCaloriesCalculator |
+| steps-to-calories-calculator | StepsToCaloriesCalculator |
 | stopwatch | Timers -> Stopwatch |
 | string-inspector | StringInspector |
 | string-template-tester | StyleCodeKitWidgets -> StringTemplateTester |
 | study-time-calculator | CalcFileKitWidgets -> StudyTimeCalculator |
 | stylus-to-css-converter | CssPreprocessorHub [slug=stylus-to-css-converter] |
-| subdomain-finder | SecurityTools -> SubdomainFinder |
-| subnet-calculator | SecurityTools -> SubnetCalculator |
-| subnet-visualizer | SecurityTools -> SubnetVisualizer |
+| subdomain-finder | NetworkTools -> SubdomainFinder |
+| subnet-calculator | NetworkTools -> SubnetCalculator |
+| subnet-visualizer | NetworkTools -> SubnetVisualizer |
 | subtitle-generator | SubtitleGenerator |
 | subtitle-translator | SubtitleTranslator |
 | svg-base64-converter | ConverterToolkitWidgets -> SvgToBase64Converter |
@@ -934,26 +934,26 @@
 | svg-to-png | ImageCatchAllConverter [slug=svg-to-png] |
 | svg-to-tiff | ImageCatchAllConverter [slug=svg-to-tiff] |
 | svg-to-webp | ImageCatchAllConverter [slug=svg-to-webp] |
-| swagger-openapi-generator | ApiTools -> SwaggerOpenapiGenerator |
+| swagger-openapi-generator | SwaggerOpenapiGenerator |
 | swift-formatter | ExtraTools -> SwiftFormatter |
-| syntax-validator | SecurityTools -> Validator |
+| syntax-validator | ValidatorTools -> Validator |
 | tabata-timer | Timers -> TabataTimer |
 | tailwind-to-css-converter | TextTransformConverter [slug=tailwind-to-css-converter] |
-| tax-calculator | Calculators -> TaxCalculator |
+| tax-calculator | TaxCalculator |
 | tax-saving-calculator | TaxSavingCalculator |
-| tds-calculator-india | Calculators -> TdsCalculatorIndia |
+| tds-calculator-india | TdsCalculatorIndia |
 | temperature-converter | UnitConverter [slug=temperature-converter] |
 | test-data-generator | StyleCodeKitWidgets -> TestDataGenerator |
 | test-score-calculator | CalcFileKitWidgets -> TestScoreCalculator |
 | text-binary-converter | TextBinaryHub [slug=text-binary-converter] |
-| text-cleaner | TextSeoTools -> TextCleaner |
-| text-deduplicator | TextSeoTools -> TextDeduplicator |
+| text-cleaner | TextCleaner |
+| text-deduplicator | TextDeduplicator |
 | text-repeater | TextRepeater |
-| text-replacer | TextSeoTools -> TextReplacer |
+| text-replacer | TextReplacer |
 | text-reverser | TextReverser |
 | text-shadow-generator | CssGenerators [text-shadow] |
-| text-sorter | TextSeoTools -> TextSorter |
-| text-splitter | TextSeoTools -> TextSplitter |
+| text-sorter | TextSorter |
+| text-splitter | TextSplitter |
 | text-to-binary | TextBinaryHub [slug=text-to-binary] |
 | text-to-handwriting | TextToHandwriting |
 | text-to-html-converter | HtmlTextHub [slug=text-to-html-converter] |
@@ -978,21 +978,21 @@
 | time-until-calculator | Timers -> TimeUntilCalculator |
 | time-zone-converter | TextTransformConverter [slug=time-zone-converter] |
 | timer | Timers -> Timer |
-| tip-calculator | MiscellaneousTools1 -> TipCalculator |
-| tls-cipher-checker | SecurityTools -> TlsCipherChecker |
+| tip-calculator | TipCalculator |
+| tls-cipher-checker | TlsTools -> TlsCipherChecker |
 | to-do-list | ToDoList |
 | toml-converter | FormatSerializerHub [slug=toml-converter] |
 | toon-to-json | DataFormatTools [slug=toon-to-json] |
 | toon-to-yaml | DataFormatTools [slug=toon-to-yaml] |
-| trailing-space-remover | TextSeoTools -> TrailingSpaceRemover |
+| trailing-space-remover | TrailingSpaceRemover |
 | translate-pdf | TranslatePdf |
-| trial-conversion-calculator | Calculators -> TrialConversionCalculator |
-| triangle-area-calculator | Calculators -> TriangleAreaCalculator |
-| trigonometry-calculator | MiscellaneousTools1 -> TrigonometryCalculator |
+| trial-conversion-calculator | TrialConversionCalculator |
+| triangle-area-calculator | TriangleAreaCalculator |
+| trigonometry-calculator | TrigonometryCalculator |
 | tsconfig-analyzer | StyleCodeKitWidgets -> TsconfigAnalyzer |
 | tsv-csv-converter | ImportToCsvConverter [slug=tsv-csv-converter] |
 | tsx-formatter | CodeFormatter -> TsxFormatter |
-| two-factor-auth-generator | SecurityTools -> TwoFactorAuthGenerator |
+| two-factor-auth-generator | PasswordTools -> TwoFactorAuthGenerator |
 | typescript-formatter | StyleCodeKitWidgets -> TypeScriptFormatter |
 | typography-preview | TypographyPreview |
 | ulid-generator | MiniGeneratorsWidgets -> ULIDGenerator |
@@ -1006,20 +1006,18 @@
 | upside-down-text | UpsideDownText |
 | url-encoder-decoder | EncoderDecoder -> EncoderDecoder |
 | url-parser | UrlParser |
-| url-sanitizer | SecurityTools -> UrlSanitizer |
+| url-sanitizer | NetworkTools -> UrlSanitizer |
 | url-shortener | UrlShortener |
 | url-to-pdf | UrlToPdf |
 | user-agent-parser | DevUtilityWidgets -> UserAgentParser |
-| utm-builder | TextSeoTools -> UtmBuilder |
+| utm-builder | UtmBuilder |
 | uuid-generator | UuidGenerator |
-| validator-kit | ValidatorKit |
 | vat-calculator | VatCalculator |
 | vcf-csv-converter | VcfCsvConverter |
 | vector-pen-canvas | VectorPenCanvas |
 | vehicle-registration-checker | VehicleRegChecker |
 | video-compressor | VideoCompressor |
 | video-converter | VideoFormatConverter [slug=video-converter] |
-| video-converter-tool | VideoFormatConverter [slug=video-converter-tool] |
 | video-filters | VideoFilters |
 | video-screenshot | VideoScreenshot |
 | video-speed-changer | VideoSpeedChanger |
@@ -1034,7 +1032,7 @@
 | volume-converter | UnitConverter [slug=volume-converter] |
 | voter-id-form-helper | VoterIdHelper |
 | waist-to-hip-ratio-calculator | HealthTools -> WaistToHipRatioCalculator |
-| water-intake-calculator | Calculators -> WaterIntakeCalculator |
+| water-intake-calculator | WaterIntakeCalculator |
 | watermark-pdf | WatermarkPdf |
 | wav-to-aac | AudioFormatConverter [slug=wav-to-aac] |
 | wav-to-aiff | AudioFormatConverter [slug=wav-to-aiff] |
@@ -1046,11 +1044,11 @@
 | wav-to-wma | AudioFormatConverter [slug=wav-to-wma] |
 | waveform-generator | WaveformGenerator |
 | web-inspector | WebInspector |
-| webhook-payload-generator | ApiTools -> WebhookPayloadGenerator |
-| webhook-retry-config | ApiTools -> WebhookRetryConfig |
-| webhook-signature-verifier | ApiTools -> WebhookSignatureVerifier |
-| webhook-tester | ApiTools -> WebhookTester |
-| webhook-validator | ApiTools -> WebhookValidator |
+| webhook-payload-generator | WebhookPayloadGenerator |
+| webhook-retry-config | WebhookRetryConfig |
+| webhook-signature-verifier | WebhookSignatureVerifier |
+| webhook-tester | WebhookTester |
+| webhook-validator | WebhookValidator |
 | webm-to-avi | VideoFormatConverter [slug=webm-to-avi] |
 | webm-to-mkv | VideoFormatConverter [slug=webm-to-mkv] |
 | webm-to-mov | VideoFormatConverter [slug=webm-to-mov] |
@@ -1081,8 +1079,8 @@
 | wma-to-ogg | AudioFormatConverter [slug=wma-to-ogg] |
 | wma-to-opus | AudioFormatConverter [slug=wma-to-opus] |
 | wma-to-wav | AudioFormatConverter [slug=wma-to-wav] |
-| word-counter | TextSeoTools -> WordCounter |
-| word-frequency-counter | TextSeoTools -> WordFrequencyCounter |
+| word-counter | WordCounter |
+| word-frequency-counter | WordFrequencyCounter |
 | word-to-pdf | DocumentFormatConverter [slug=word-to-pdf] |
 | words-per-page-calculator | CalcFileKitWidgets -> WordsPerPageCalculator |
 | work-hours-calculator | MiscellaneousTools1 -> WorkHoursCalculator |
@@ -1095,11 +1093,10 @@
 | xml-to-csv | DataConverter -> DataConverterFromSlug [slug=xml-to-csv] |
 | xml-to-json | DataConverter -> DataConverterFromSlug [slug=xml-to-json] |
 | xpath-validator | ConfigValidatorWidgets -> XpathValidator |
-| xss-protection-checker | SecurityTools -> XssProtectionChecker |
+| xss-protection-checker | WebSecurityTools -> XssProtectionChecker |
 | yaml-formatter | CodeFormatter -> YamlFormatter |
 | yaml-json-converter | FormatSerializerHub [slug=yaml-json-converter] |
 | yaml-reindenter | CodeFormatter -> YamlFormatter |
-| yaml-syntax-validator | SecurityTools -> YamlValidator |
 | yaml-to-toon | DataFormatTools [slug=yaml-to-toon] |
 | yaml-validator | DataFormatTools -> YamlValidator |
 | youtube-transcript-generator | YoutubeTranscriptGenerator |
@@ -1108,7 +1105,7 @@
 
 ## Redirect-only slugs (never reach ComingSoonTool)
 
-These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx` redirects them before the wrapper renders.
+These 86 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx` redirects them before the wrapper renders.
 
 ### Registry tools (22) — the wrapper's only "ComingSoon" fallthrough candidates
 
@@ -1132,7 +1129,6 @@ These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | php-beautifier | code-beautifier |
 | ruby-formatter | code-beautifier |
 | rust-formatter | code-beautifier |
-| temporary-email-generator | privacy-cleaner |
 | text-converter | text-to-binary |
 | wifi-qr-generator | qr-code-generator |
 | yes-no-picker | random-decision-maker |
@@ -1166,6 +1162,7 @@ These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | guid-generator | uuid-generator |
 | hash-generator | md5-hash-generator |
 | heart-rate-calculator | heart-rate-zone-calculator |
+| hours-to-minutes-converter | time-converter |
 | ideal-weight-calculator | ideal-weight-calc |
 | json-minifier | json-formatter |
 | jwt-decoder | jwt-debugger |
@@ -1173,6 +1170,7 @@ These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | macronutrient-calculator | macro-split-calculator |
 | meta-tag-generator | seo-meta-tag-generator |
 | midpoint-calculator | coordinate-calculator |
+| minutes-to-hours-converter | time-converter |
 | mla-citation-generator | citation-generator |
 | morse-code-converter | morse-code-translator |
 | mp4-to-gif | video-to-gif |
@@ -1189,6 +1187,7 @@ These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | reverse-text-generator | text-reverser |
 | rpm-calculator | cpm-calculator |
 | rule-of-three-calculator | proportion-calculator |
+| seconds-to-minutes-converter | time-converter |
 | subscript-generator | small-text-generator |
 | superscript-generator | small-text-generator |
 | svg-to-png-converter | svg-to-png |
@@ -1197,30 +1196,42 @@ These 82 slugs are in `TOOL_REDIRECTS` and not in MODULE_REGISTRY, so `page.tsx`
 | text-style-generator | fancy-text-generator |
 | text-styling | fancy-text-generator |
 | unicode-text-styler | fancy-text-generator |
+| video-converter-tool | video-converter |
 | water-requirement-calculator | water-intake-calculator |
 | webm-to-gif | video-to-gif |
 | word-count-tool | writing-tools |
 | working-capital-calculator | profit-loss-calculator |
+| yaml-syntax-validator | yaml-validator |
 
 ## Category-move redirects (same slug, old category -> new category)
 
-These 63 slugs render normally at their new category; the redirect only fires from the legacy category URL.
+These 144 slugs render normally at their new category; the redirect only fires from the legacy category URL.
 
 | Slug | Redirect target |
 |---|---|
 | ab-test-calculator | ab-test-calculator |
 | acv-calculator | acv-calculator |
+| age-calculator | age-calculator |
 | arr-calculator | arr-calculator |
+| ascii-art-generator | ascii-art-generator |
 | avatar-generator | avatar-generator |
 | binary-to-text | binary-to-text |
+| bmr-calculator | bmr-calculator |
 | braille-translator | braille-translator |
+| break-even-calculator | break-even-calculator |
 | bulk-csv-excel-to-json | bulk-csv-excel-to-json |
 | burn-rate-calculator | burn-rate-calculator |
 | cac-calculator | cac-calculator |
+| car-lease-calculator | car-lease-calculator |
+| car-loan-calculator | car-loan-calculator |
+| child-height-predictor | child-height-predictor |
 | churn-rate-calculator | churn-rate-calculator |
+| cidr-calculator | cidr-calculator |
+| color-converter | color-converter |
 | color-palette-generator | color-palette-generator |
 | color-picker | color-picker |
 | conversion-rate-calculator | conversion-rate-calculator |
+| countdown-tool | countdown-tool |
 | cpm-calculator | cpm-calculator |
 | csv-analyzer | csv-analyzer |
 | csv-data-cleaner | csv-data-cleaner |
@@ -1228,49 +1239,120 @@ These 63 slugs render normally at their new category; the redirect only fires fr
 | csv-merger | csv-merger |
 | csv-splitter | csv-splitter |
 | csv-statistics | csv-statistics |
+| csv-to-markdown | csv-to-markdown |
 | csv-to-sql | csv-to-sql |
 | csv-to-sqlite | csv-to-sqlite |
 | csv-transpose | csv-transpose |
 | customer-ltv-calculator | customer-ltv-calculator |
 | data-type-converter | data-type-converter |
+| date-addition-calculator | date-addition-calculator |
+| date-difference-calculator | date-difference-calculator |
+| daylight-saving-time-checker | daylight-saving-time-checker |
+| document-converter | document-converter |
+| emi-calculator | emi-calculator |
 | employee-turnover-calculator | employee-turnover-calculator |
+| epub-to-pdf | epub-to-pdf |
+| eta-calculator | eta-calculator |
 | fluid-typography-calculator | fluid-typography-calculator |
 | gradient-generator | gradient-generator |
+| greatest-common-factor-calculator | greatest-common-factor-calculator |
+| hourly-to-salary-calculator | hourly-to-salary-calculator |
+| hours-minutes-calculator | hours-minutes-calculator |
 | ics-csv-converter | ics-csv-converter |
 | image-placeholder-generator | image-placeholder-generator |
 | image-to-base64 | image-to-base64 |
 | ip-address-lookup | ip-address-lookup |
+| json-path-query-builder | json-path-query-builder |
+| json-to-code | json-to-code |
+| json-to-xml | json-to-xml |
 | large-text-viewer | large-text-viewer |
+| line-sorter | line-sorter |
+| list-converter | list-converter |
 | logo-placeholder-generator | logo-placeholder-generator |
 | ltv-calculator | ltv-calculator |
 | mac-vendor-lookup | mac-vendor-lookup |
+| macro-calculator | macro-calculator |
+| margin-calculator | margin-calculator |
 | markdown-slack-converter | markdown-slack-converter |
+| media-query-generator | media-query-generator |
+| meeting-time-planner | meeting-time-planner |
 | morse-code-translator | morse-code-translator |
 | mov-to-mp3 | mov-to-mp3 |
 | mp4-to-mp3 | mp4-to-mp3 |
 | mrr-calculator | mrr-calculator |
 | nato-phonetic-converter | nato-phonetic-converter |
 | net-promoter-score-calculator | net-promoter-score-calculator |
+| nickname-generator | nickname-generator |
 | number-base-converter | number-base-converter |
+| pdf-workflow-builder | pdf-workflow-builder |
+| percentage-calculator | percentage-calculator |
+| percentage-difference-calculator | percentage-difference-calculator |
+| permutation-calculator | permutation-calculator |
 | phone-parser | phone-parser |
+| prime-number-checker | prime-number-checker |
+| profit-margin-calculator | profit-margin-calculator |
+| random-decision-maker | random-decision-maker |
+| random-picker-generator | random-picker-generator |
 | random-port-generator | random-port-generator |
+| random-sentence-generator | random-sentence-generator |
+| random-string-generator | random-string-generator |
+| random-team-generator | random-team-generator |
+| random-time-generator | random-time-generator |
+| random-word-generator | random-word-generator |
+| rent-vs-buy-calculator | rent-vs-buy-calculator |
 | revenue-growth-calculator | revenue-growth-calculator |
 | roas-calculator | roas-calculator |
+| roman-numeral-converter | roman-numeral-converter |
 | runway-calculator | runway-calculator |
 | saas-metrics-dashboard | saas-metrics-dashboard |
 | saas-payback-period | saas-payback-period |
 | saas-pricing-calculator | saas-pricing-calculator |
 | saas-quick-ratio | saas-quick-ratio |
 | saas-rule-of-40 | saas-rule-of-40 |
+| salary-calculator | salary-calculator |
+| sales-tax-calculator | sales-tax-calculator |
+| savings-calculator | savings-calculator |
+| screen-size-converter | screen-size-converter |
 | seat-license-calculator | seat-license-calculator |
 | semver-calculator | semver-calculator |
+| sequence-generator | sequence-generator |
+| simple-interest-calculator | simple-interest-calculator |
+| sip-calculator | sip-calculator |
+| steps-to-calories-calculator | steps-to-calories-calculator |
+| stopwatch | stopwatch |
+| stylus-to-css-converter | stylus-to-css-converter |
 | svg-base64-converter | svg-base64-converter |
+| tabata-timer | tabata-timer |
+| tailwind-to-css-converter | tailwind-to-css-converter |
+| tds-calculator-india | tds-calculator-india |
+| temperature-converter | temperature-converter |
+| text-deduplicator | text-deduplicator |
+| text-replacer | text-replacer |
+| text-sorter | text-sorter |
 | text-to-binary | text-to-binary |
+| text-to-html-converter | text-to-html-converter |
+| time-converter | time-converter |
+| time-duration-calculator | time-duration-calculator |
+| time-until-calculator | time-until-calculator |
+| time-zone-converter | time-zone-converter |
+| tip-calculator | tip-calculator |
+| toml-converter | toml-converter |
+| trailing-space-remover | trailing-space-remover |
 | trial-conversion-calculator | trial-conversion-calculator |
 | tsv-csv-converter | tsv-csv-converter |
+| unix-time-converter | unix-time-converter |
+| url-shortener | url-shortener |
+| vat-calculator | vat-calculator |
 | vcf-csv-converter | vcf-csv-converter |
 | video-converter | video-converter |
+| water-intake-calculator | water-intake-calculator |
 | webm-to-mp3 | webm-to-mp3 |
+| week-number-calculator | week-number-calculator |
+| words-per-page-calculator | words-per-page-calculator |
+| work-hours-calculator | work-hours-calculator |
+| xlsx-csv-converter | xlsx-csv-converter |
+| xml-to-json | xml-to-json |
+| yaml-json-converter | yaml-json-converter |
 
 ## Special cases
 
@@ -1318,29 +1400,3 @@ category routing matches hub tabs exactly (except documented fallbacks above):
   and browser-only libs (`@ffmpeg/ffmpeg`, `@ffmpeg/util`, `heic2any`, `openpgp`) stubbed for the harness.
 - renderToString exercises the render phase only (no effects). Effect-phase crashes are not caught by the smoke test.
 - Hub contract suites run in the node environment and do not render; they validate the slug->mode mapping.
-
-## Phase 5 — retroactive type-safety scan (any-casts in the routing layer)
-
-Scanned (2026-08-06) whether any `no-explicit-any` demotions from the lint-restoration work
-(`f2b3830`) were routing-layer casualties that the single MODULE_REGISTRY path resolves. Result:
-**no routing-layer type-safety casualties exist.**
-
-- The old 3-way path was already type-clean: `converterConfig.ts`, `ConverterRouter.tsx`,
-  `ConverterCategory.ts` carried **zero** type-level `any` (one comment mention only), and the
-  pre-retirement wrapper had the same single registry `any` the post-retirement one does.
-- The routing layer today (`[category]/[tool]/page.tsx`, `DynamicModuleWrapper.tsx`, the
-  `tools-chunk-*.ts` registry, `ToolPageSEOContent`, all pair-closure hubs) contains exactly
-  **one** `any`: `MODULE_REGISTRY: Record<string, React.ComponentType<any>>` — the honest common
-  type for a heterogeneous `dynamic()` registry rendered with no props, marked with an
-  eslint-disable and an explanatory comment (wrapper line ~58-61).
-- All hub prop boundaries are fully typed: closures pass `{ slug: string }`,
-  `{ defaultFrom?, defaultTo? }`, `AudioFormatConverterProps`, etc. No `as any`, `as unknown as`,
-  `@ts-ignore`, or `@ts-expect-error` anywhere in the routing layer.
-- The ~200 remaining `any`-casts live inside tool *components* and are all **parser outputs**
-  (`JSON.parse`, `Papa.parse`, `XLSX.sheet_to_json`, `heic2any`, pdf/ffmpeg stream objects) —
-  inherent to consuming untyped external data, not a symptom of routing ambiguity. The only
-  non-module `any`s are third-party untyped-lib declarations (`types/modules.d.ts`: utif, ical,
-  vcard-parser), Cloudflare `context.request.cf` typing gaps in `functions/`, and a fetch body in
-  `src/utils/cobaltApi.ts` — all unrelated to routing.
-- **Verdict:** the single registration path (Phase 4, guarded by commit `b04f253`) did not leave
-  or conceal any routing-layer type-safety holes. No further routing work needed for Tier 1.1.
