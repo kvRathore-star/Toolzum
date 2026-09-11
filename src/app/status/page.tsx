@@ -25,6 +25,31 @@ interface SystemStatus {
 const HISTORY_KEY = "toolzum:status-history";
 const HISTORY_LEN = 30;
 
+/**
+ * Manual incident entries (newest last is fine — matched by "Month YYYY" label).
+ * Months without an entry render "No incidents reported this month."
+ * Example: { month: "September 2026", text: "API latency spike 14:00–14:40 IST, resolved." }
+ */
+const MANUAL_INCIDENTS: { month: string; text: string }[] = [];
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+/** Rolling 4-month window ending at the current month — advances automatically each month. */
+function getIncidentMonths(): { label: string; text: string }[] {
+  const now = new Date();
+  const out: { label: string; text: string }[] = [];
+  for (let back = 0; back < 4; back++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - back, 1);
+    const label = `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;
+    const manual = MANUAL_INCIDENTS.find((m) => m.month === label);
+    out.push({ label, text: manual?.text ?? "No incidents reported this month." });
+  }
+  return out;
+}
+
 function loadHistory(): Record<string, boolean[]> {
   try {
     const raw = localStorage.getItem(HISTORY_KEY);
@@ -305,31 +330,18 @@ export default function StatusPage() {
         {/* Incident History List */}
         <div className="max-w-4xl mx-auto">
           <h3 className="text-base font-semibold border-b border-[var(--border-subtle)] pb-4 mb-6">Incident History</h3>
-          
+
           <div className="space-y-6">
-            <div className="relative pl-6 before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4">
-              <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
-              <h4 className="text-sm font-semibold text-[var(--text-secondary)]">June 2026</h4>
-              <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
-            </div>
-
-            <div className="relative pl-6 before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4">
-              <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
-              <h4 className="text-sm font-semibold text-[var(--text-secondary)]">May 2026</h4>
-              <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
-            </div>
-
-            <div className="relative pl-6 before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4">
-              <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
-              <h4 className="text-sm font-semibold text-[var(--text-secondary)]">April 2026</h4>
-              <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
-            </div>
-
-            <div className="relative pl-6">
-              <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
-              <h4 className="text-sm font-semibold text-[var(--text-secondary)]">March 2026</h4>
-              <p className="text-xs text-[var(--text-muted)] mt-1.5">No incidents reported this month.</p>
-            </div>
+            {getIncidentMonths().map((m, i, arr) => (
+              <div
+                key={m.label}
+                className={`relative pl-6 ${i < arr.length - 1 ? "before:absolute before:top-1.5 before:bottom-0 before:left-[3px] before:w-[1px] before:bg-[var(--border-subtle)] pb-4" : ""}`}
+              >
+                <div className="absolute left-0 top-1.5 w-2 h-2 rounded-full bg-[var(--text-muted)]" />
+                <h4 className="text-sm font-semibold text-[var(--text-secondary)]">{m.label}</h4>
+                <p className="text-xs text-[var(--text-muted)] mt-1.5">{m.text}</p>
+              </div>
+            ))}
           </div>
         </div>
 

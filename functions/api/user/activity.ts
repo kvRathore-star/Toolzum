@@ -1,6 +1,16 @@
 import { createAuth } from "../../../src/lib/auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import { clientToolsRegistry } from "../../../src/registry/tools-client-index";
 import type { D1Database } from "@cloudflare/workers-types";
+
+// Legacy usage rows stored NULL category (old clients / allowlist era).
+// Resolve them from the registry so Recent Activity links to the tool page.
+const slugToCategory = new Map(clientToolsRegistry.map((t) => [t.slug, t.category]));
+
+function resolveCategory(category: string | null, toolSlug: string): string | null {
+  if (category) return category;
+  return slugToCategory.get(toolSlug) ?? null;
+}
 
 export async function onRequestGet(context: { request: Request; env: Record<string, unknown> }) {
   const { env } = context;
@@ -88,8 +98,14 @@ export async function onRequestGet(context: { request: Request; env: Record<stri
       JSON.stringify({
         monthlyToolsUsed: monthlyUsage?.count ?? 0,
         totalToolsUsed: totalUsage?.count ?? 0,
-        recentActivity: recentActivity?.results ?? [],
-        topTools: topTools?.results ?? [],
+        recentActivity: (recentActivity?.results ?? []).map((r) => ({
+          ...r,
+          category: resolveCategory(r.category, r.toolSlug),
+        })),
+        topTools: (topTools?.results ?? []).map((t) => ({
+          ...t,
+          category: resolveCategory(t.category, t.toolSlug),
+        })),
         dailyUsage: dailyUsage?.results ?? [],
         categoryBreakdown: categoryBreakdown?.results ?? [],
       }),
