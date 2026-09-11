@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { useFFmpeg, selectFfmpegFallbacks } from '@/hooks/useFFmpeg';
 
 vi.mock('@ffmpeg/ffmpeg', () => ({
   FFmpeg: vi.fn().mockImplementation(() => ({
@@ -32,5 +32,21 @@ describe('useFFmpeg', () => {
   it('returns loadFFmpeg function', () => {
     const { result } = renderHook(() => useFFmpeg());
     expect(typeof result.current.loadFFmpeg).toBe('function');
+  });
+});
+
+describe('selectFfmpegFallbacks (B1.4 adaptive)', () => {
+  it('keeps the full list (incl. MT cores) on capable devices', () => {
+    const list = selectFfmpegFallbacks(false);
+    expect(list.length).toBeGreaterThan(0);
+    expect(list.every((e) => typeof e.baseURL === 'string')).toBe(true);
+  });
+
+  it('drops multi-threaded cores on low-end devices but never empties', () => {
+    const full = selectFfmpegFallbacks(false);
+    const lowEnd = selectFfmpegFallbacks(true);
+    expect(lowEnd.every((e) => !e.mt)).toBe(true);
+    expect(lowEnd.length).toBeGreaterThan(0);
+    expect(lowEnd.length).toBeLessThanOrEqual(full.length);
   });
 });

@@ -9,6 +9,7 @@ export default function BulkImageToTextOcr() {
       title="Bulk Image to Text (OCR)"
       description="Extract text from images and scanned documents using browser-based OCR."
       accept="image/*"
+      heavyEngineNotice="OCR engine is large — first run on a constrained device may take a while…"
       processFile={async (file, config) => {
         const lang = (config as Record<string, string>).lang || 'eng';
         const Tesseract = await import('tesseract.js');

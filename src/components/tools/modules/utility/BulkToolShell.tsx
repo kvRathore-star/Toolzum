@@ -9,6 +9,7 @@ import { useParallelProcessor } from '@/hooks/useParallelProcessor';
 import { useWorkflowPresets } from '@/hooks/useWorkflowPresets';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import { isLowEndDevice } from '@/lib/device';
 
 export interface ProcessedFile {
   name: string;
@@ -24,6 +25,9 @@ interface BulkToolShellProps {
   processFile: (file: File, config: Record<string, unknown>, signal: AbortSignal) => Promise<ProcessedFile | null>;
   configFields?: React.ReactNode;
   defaultConfig?: Record<string, unknown>;
+  /** Shown once as a heads-up on low-end devices when processing starts
+   *  (heavy WASM/AI engines). Never blocks — a slow tool beats no tool. */
+  heavyEngineNotice?: string;
 }
 
 export function BulkToolShell({
@@ -35,6 +39,7 @@ export function BulkToolShell({
   processFile,
   configFields,
   defaultConfig = {},
+  heavyEngineNotice,
 }: BulkToolShellProps) {
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -115,6 +120,9 @@ export function BulkToolShell({
 
   const handleProcess = useCallback(async () => {
     if (files.length === 0) { toast.error('Upload files first'); return; }
+    if (heavyEngineNotice && isLowEndDevice()) {
+      toast.loading(heavyEngineNotice, { id: 'bulk-heavy-engine' });
+    }
     setIsProcessing(true);
     setProgress({ done: 0, total: files.length });
     try {
@@ -143,9 +151,10 @@ export function BulkToolShell({
         : 'Browser memory limit reached. Try smaller batches or close other tabs.';
       toast.error(message);
     } finally {
+      toast.dismiss('bulk-heavy-engine');
       setIsProcessing(false);
     }
-  }, [files, config, process, processFile]);
+  }, [files, config, process, processFile, heavyEngineNotice]);
 
   const downloadAll = useCallback(async () => {
     const zip = new JSZip();

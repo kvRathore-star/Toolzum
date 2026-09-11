@@ -9,6 +9,7 @@ export default function BulkInvoiceReceiptParser() {
       title="Bulk Invoice & Receipt Parser"
       description="Extract invoice numbers, dates, totals, and vendor names from receipt images using OCR."
       accept="image/*,.pdf"
+      heavyEngineNotice="OCR engine is large — first run on a constrained device may take a while…"
       processFile={async (file, config) => {
         const lang = (config as Record<string, string>).lang || 'eng';
         const imageFile = file;

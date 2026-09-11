@@ -36,6 +36,16 @@ const CDN_FALLBACKS: { baseURL: string; mt?: boolean }[] = [
   { baseURL: 'https://cdnjs.cloudflare.com/ajax/libs/ffmpeg-core@0.12.9/dist/umd', mt: false },
 ];
 
+/**
+ * Adaptive strategy (B1.4): on low-end devices skip the multi-threaded core
+ * entries — the extra ~30MB download plus thread overhead thrashes
+ * ≤4-core/low-RAM devices. Single-threaded WASM still runs, just slower.
+ * Never blocks: ST entries always remain.
+ */
+export function selectFfmpegFallbacks(lowEnd: boolean): { baseURL: string; mt?: boolean }[] {
+  return lowEnd ? CDN_FALLBACKS.filter((e) => !e.mt) : CDN_FALLBACKS;
+}
+
 // --- IndexedDB helpers for caching wasm binaries ---
 function openCacheDB(): Promise<IDBDatabase | null> {
   return new Promise((resolve) => {
@@ -206,8 +216,10 @@ export function useFFmpeg() {
     setProgress(0);
 
     try {
-      for (let i = 0; i < CDN_FALLBACKS.length; i++) {
-        const loaded = await attemptLoad(CDN_FALLBACKS[i]!);
+      // Adaptive: low-end devices try single-threaded cores only.
+      const fallbacks = selectFfmpegFallbacks(isLowEndDevice());
+      for (let i = 0; i < fallbacks.length; i++) {
+        const loaded = await attemptLoad(fallbacks[i]!);
         if (loaded) {
           setIsLoaded(true);
           hasLoadedOnce = true;

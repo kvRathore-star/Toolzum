@@ -7,6 +7,7 @@ import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { isLowEndDevice } from '@/lib/device';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -35,6 +36,9 @@ export default function PdfOcr() {
     
     try {
       setStatusText('Initializing OCR Engine...');
+      if (isLowEndDevice()) {
+        toast.loading('OCR engine is large — this may take a while on your device…', { id: 'ocr-engine-slow' });
+      }
       worker = await (createWorker as any)({
         logger: (m: any) => {
           if (m.status === 'recognizing text') {
@@ -91,6 +95,7 @@ export default function PdfOcr() {
       if (worker) {
         await worker.terminate();
       }
+      toast.dismiss('ocr-engine-slow');
       setIsProcessing(false);
     }
   };
