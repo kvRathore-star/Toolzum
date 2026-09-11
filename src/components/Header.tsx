@@ -324,7 +324,7 @@ export function Header() {
             <Link href="/extension" aria-current={pathname === "/extension" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Extension
             </Link>
-            <Link href="/premium-tools" aria-current={pathname === "/premium-tools" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-amber-700 dark:text-amber-700 dark:text-amber-400 hover:text-amber-500 transition-colors">
+            <Link href="/premium-tools" aria-current={pathname === "/premium-tools" ? "page" : undefined} className="px-3 py-2 text-[14px] font-semibold text-amber-500 dark:text-amber-400 hover:text-amber-600 dark:hover:text-amber-300 transition-colors">
               Pro
             </Link>
             <Link href="/pricing" aria-current={pathname === "/pricing" ? "page" : undefined} className="px-3 py-2 text-[14px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
