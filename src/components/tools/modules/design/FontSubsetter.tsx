@@ -170,7 +170,7 @@ async function buildWoff(sfntBuffer: ArrayBuffer, flavor: number): Promise<Array
 export default function FontSubsetter() {
   const [file, setFile] = useState<File | null>(null);
   const [fontMeta, setFontMeta] = useState<FontMeta | null>(null);
-  const [parsedFont, setParsedFont] = useState<any>(null);
+  const [parsedFont, setParsedFont] = useState<OpentypeFont | null>(null);
   const [characters, setCharacters] = useState('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
   const [outputFormat, setOutputFormat] = useState<FontFormat>('ttf');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -301,8 +301,8 @@ export default function FontSubsetter() {
       if (notdef) glyphs.unshift(notdef);
 
       const subsetFont = new opentypeModule.Font({
-        familyName: parsedFont.names.fontFamily?.en || 'Subset',
-        styleName: parsedFont.names.fontSubfamily?.en || 'Regular',
+        familyName: parsedFont.names?.fontFamily?.en || 'Subset',
+        styleName: parsedFont.names?.fontSubfamily?.en || 'Regular',
         unitsPerEm: parsedFont.unitsPerEm,
         ascender: parsedFont.ascender,
         descender: parsedFont.descender,

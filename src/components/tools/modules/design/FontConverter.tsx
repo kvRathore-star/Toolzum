@@ -172,7 +172,7 @@ export default function FontConverter() {
   const [outputFormat, setOutputFormat] = useState<FontFormat>('ttf');
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [previewText, setPreviewText] = useState('The quick brown fox jumps over the lazy dog 1234567890');
-  const [parsedFont, setParsedFont] = useState<any>(null);
+  const [parsedFont, setParsedFont] = useState<OpentypeFont | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isConverting, setIsConverting] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);

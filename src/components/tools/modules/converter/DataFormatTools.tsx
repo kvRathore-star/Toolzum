@@ -150,14 +150,14 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
         const obj = JSON.parse(input);
         setOutput(toonify(Array.isArray(obj) ? { items: obj } : obj));
       } else if (mode === 'yaml-to-toon') {
-        let yaml: any;
+        let yaml: unknown;
         try {
           yaml = YAML.load(input);
         } catch {
           yaml = JSON.parse(input);
         }
         if (typeof yaml !== 'object' || yaml === null) throw new Error('Input must be an object');
-        setOutput(toonify(Array.isArray(yaml) ? { items: yaml } : yaml));
+        setOutput(toonify(Array.isArray(yaml) ? { items: yaml } : yaml as Record<string, unknown>));
       } else if (mode === 'toon-to-json') {
         const obj = detoonify(input);
         setOutput(JSON.stringify(obj, null, 2));

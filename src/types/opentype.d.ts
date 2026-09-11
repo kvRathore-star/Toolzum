@@ -11,16 +11,23 @@ declare module "opentype.js" {
   };
   export type OpentypeGlyphSet = {
     length: number;
-    get(index: number): unknown;
+    get(index: number): OpentypeGlyph;
+  };
+  export type OpentypeGlyph = {
+    index?: number;
+  };
+  export type OpentypePath = {
+    fill: string;
+    draw(ctx: CanvasRenderingContext2D): void;
   };
   export type OpentypeFont = {
     names?: OpentypeFontNames;
-    glyphs?: OpentypeGlyphSet;
+    glyphs: OpentypeGlyphSet;
     unitsPerEm?: number;
     ascender?: number;
     descender?: number;
-    getPath?: (text: string, x: number, y: number, size: number) => unknown;
-    charToGlyph?: (char: string) => unknown;
+    getPath: (text: string, x: number, y: number, size: number) => OpentypePath;
+    charToGlyph: (char: string) => OpentypeGlyph;
     toArrayBuffer: () => ArrayBuffer;
   };
   export function parse(buffer: ArrayBuffer): OpentypeFont;
