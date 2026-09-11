@@ -184,8 +184,10 @@ clusters, confirming most tool pages render the same ~4.7s shell cost.
   generated this run and now show as modified/untracked).
 - `docs/depth-audit-followups.md` **#4b**: `gen:og` rewrites all `public/og/**` PNGs every build
   (~1,150 modified files in `git status` after each build). Observed live again this run.
-- `docs/codebase-audit.md` P1 (`<img>` everywhere — no next/image), P9 (2417-line `tools.ts`
-  loaded via layout import) remain open from the audit.
+- (Retired 2026-09: the former codebase audit was removed as superseded. Its two
+  cited items have moved on: `<img>`→`next/image` migration is partial — 4 files
+  converted, the rest pending; the 2417-line registry was long since split into
+  chunk files with single-source routing enforced by lint.)
 
 ## Optimization candidates (Phase 2 — NOT started, per plan)
 
