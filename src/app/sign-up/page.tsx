@@ -24,6 +24,10 @@ export default function SignUpPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  // Guard against double-clicks: each click issues a fresh OAuth state and
+  // overwrites the previous state cookie, so a second click guarantees the
+  // first flow fails with state_mismatch.
+  const [socialLoading, setSocialLoading] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -224,7 +228,12 @@ export default function SignUpPage() {
             <button
               type="button"
               aria-label="Sign up with Google"
-              onClick={() => signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+              onClick={() => {
+                if (socialLoading) return;
+                setSocialLoading(true);
+                signIn.social({ provider: "google", callbackURL: "/dashboard" });
+              }}
+              disabled={socialLoading}
               className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
               style={{ borderRadius: "var(--radius-md)" }}
             >

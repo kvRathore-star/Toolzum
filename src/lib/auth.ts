@@ -103,7 +103,18 @@ export function createAuth(env: AuthEnv) {
       accountLinking: {
         enabled: true,
         trustedProviders: ["google"],
+        // No email-verification flow exists (no SMTP configured), so a local
+        // credential row can never become emailVerified. Google as a trusted
+        // provider already proves email ownership — requiring local
+        // verification would permanently block Google login for every
+        // email-signup user with account_not_linked. Verified 1.7.2 source:
+        // requireLocalEmailVerified defaults true and rejects the link.
+        requireLocalEmailVerified: false,
       },
+    },
+    onAPIError: {
+      // Friendly branded error page instead of better-auth's default.
+      errorURL: `${env.BETTER_AUTH_URL || "https://toolzum.com"}/auth-error`,
     },
     user: {
       additionalFields: {
