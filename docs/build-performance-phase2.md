@@ -364,3 +364,7 @@ checking stays ON** (no `ignoreBuildErrors`).
   carry-over). Fixing them is its own tier, not a rider here. Until they're fixed, CI's Lint
   step will fail and no CI check is meaningful as a merge gate.
 
+> Update 2026-09-11: CI lint is green again (re-greened Sep 10), so the TypeCheck step gates
+> in practice — but without branch protection it still cannot be *required*. Rule stands:
+> never set `ignoreBuildErrors` on this plan.
+
