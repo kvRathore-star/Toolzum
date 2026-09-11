@@ -164,7 +164,10 @@ export default function UrlToPdf() {
             ref={iframeRef}
             src={outputUrl!}
             className="w-full h-full border-0"
-            sandbox="allow-scripts allow-same-origin allow-forms"
+            // allow-scripts for page fidelity, but NEVER allow-same-origin:
+            // proxy mode renders third-party HTML in a blob: URL (our origin),
+            // and scripts + same-origin together would defeat the sandbox.
+            sandbox="allow-scripts allow-forms"
             title="URL Preview"
           />
         </div>

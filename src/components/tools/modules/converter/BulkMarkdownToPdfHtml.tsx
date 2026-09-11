@@ -120,7 +120,8 @@ export default function BulkMarkdownToPdfHtml() {
             </div>
             {showPreview && resultHtml ? (
               <div className="w-full h-[400px] bg-white border border-[var(--border-subtle)] rounded-xl overflow-hidden">
-                <iframe srcDoc={resultHtml} title="Preview" className="w-full h-full border-0" />
+                {/* Fully sandboxed: static converted markdown needs no scripts, forms, or origin access. */}
+                <iframe srcDoc={resultHtml} title="Preview" className="w-full h-full border-0" sandbox="" />
               </div>
             ) : (
               <pre role="status" className="w-full h-[400px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] overflow-auto whitespace-pre-wrap">
