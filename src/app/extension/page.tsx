@@ -13,7 +13,6 @@ import {
   Check, 
   QrCode, 
   Info,
-  ExternalLink
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -67,11 +66,9 @@ export default function ChromeExtensionPage() {
             <Button size="lg" className="gap-2 opacity-60 cursor-not-allowed" disabled>
               <Download className="w-4.5 h-4.5" /> Download Extension ZIP
             </Button>
-            <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="secondary" className="gap-2">
-                Chrome Web Store <ExternalLink className="w-4 h-4" />
-              </Button>
-            </a>
+            <Button size="lg" variant="secondary" className="gap-2 opacity-60 cursor-not-allowed" disabled>
+              Chrome Web Store — Soon
+            </Button>
           </div>
         </div>
 
