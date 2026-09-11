@@ -489,15 +489,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     showInCategory: false,
   },
   {
-    id: "39",
-    name: "Temporary Email Generator",
-    slug: "temporary-email-generator",
-    category: "Privacy",
-    description: 'Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Uses cloud-based processing.',
-    seoDescription: 'Free online Temporary Email Generator — Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). ',
-    dependencies: "Mailinator API / Custom Backend",
-  },
-  {
     id: "40",
     name: "Screen Recorder Extension",
     slug: "screen-recorder-extension",

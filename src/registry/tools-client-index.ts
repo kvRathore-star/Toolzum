@@ -302,14 +302,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "39",
-    "name": "Temporary Email Generator",
-    "slug": "temporary-email-generator",
-    "category": "Privacy",
-    "description": "Creates disposable email inboxes that self-destruct after a user-configurable time limit (5 minutes to 48 hours). Uses cloud-based processing.",
-    "isPro": false
-  },
-  {
     "id": "40",
     "name": "Screen Recorder Extension",
     "slug": "screen-recorder-extension",
@@ -1299,7 +1291,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "pdf-workflow-builder",
     "category": "PDF",
     "description": "Full-featured PDF editor that runs entirely in your browser — merge, split, fill forms, rotate pages, add/remove passwords, and edit metadata. Your files never leave your device — 100% private.",
-    "isPro": false
+    "isPro": true
   },
   {
     "id": "221",

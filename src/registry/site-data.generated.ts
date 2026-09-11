@@ -17,13 +17,13 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1147;
+export const TOOL_COUNT = 1146;
 
 export const SITE_STATS = {
-  totalImplemented: 1063,
-  freeTierTotal: 998,
+  totalImplemented: 1062,
+  freeTierTotal: 996,
   localTools: 1024,
-  cloudTools: 32,
+  cloudTools: 31,
   hybridTools: 4,
 } as const;
 
@@ -403,10 +403,6 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
     "icon": "privacy",
     "tools": [
       {
-        "name": "Temporary Email Generator",
-        "href": "/privacy/temporary-email-generator"
-      },
-      {
         "name": "Password Strength Checker",
         "href": "/privacy/password-strength-checker"
       },
@@ -429,9 +425,13 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
       {
         "name": "Privacy Cleaner",
         "href": "/privacy/privacy-cleaner"
+      },
+      {
+        "name": "MAC Address Generator",
+        "href": "/privacy/mac-address-generator"
       }
     ],
-    "allCount": 8,
+    "allCount": 7,
     "allHref": "/tools",
     "isIndia": false
   },

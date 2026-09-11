@@ -640,8 +640,6 @@
 /pdf/document-converter    /converter/document-converter/   301
 /pdf/epub-to-pdf/   /converter/epub-to-pdf/   301
 /pdf/epub-to-pdf    /converter/epub-to-pdf/   301
-/privacy/temporary-email-generator/   /privacy/privacy-cleaner/   301
-/privacy/temporary-email-generator    /privacy/privacy-cleaner/   301
 /seo/meta-tag-generator/   /seo/seo-meta-tag-generator/   301
 /seo/meta-tag-generator    /seo/seo-meta-tag-generator/   301
 /seo/text-deduplicator/   /text/text-deduplicator/   301

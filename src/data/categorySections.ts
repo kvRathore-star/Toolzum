@@ -1082,11 +1082,10 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
     {
       id: "password",
       heading: "Password & Secure Sharing",
-      description: "Check password strength, generate temporary emails, and share notes securely.",
+      description: "Check password strength and share notes securely.",
       slugs: [
         "password-strength-checker",
         "secure-note-sharer",
-        "temporary-email-generator",
       ],
     },
   ],
