@@ -32,6 +32,8 @@ export const proSlugs = [
   // Premium SaaS / batch
   "saas-metrics-dashboard",
   "bank-statement-analyser", "api-builder",
+  // Restored: ungated for testing in 0217c642 (Jul 22), never re-gated.
+  "pdf-workflow-builder",
 ];
 
 
