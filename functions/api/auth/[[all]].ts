@@ -7,6 +7,16 @@ export const onRequest: PagesFunction = async (context) => {
 
   try {
     const auth = createAuth(context.env);
+    // TEMP-DIAG (remove after OAuth debug): log callback/error shapes only — never values.
+    if (pathname.includes("/callback/") || pathname.includes("/error")) {
+      const s = new URL(context.request.url).searchParams;
+      const cookie = context.request.headers.get("cookie") || "";
+      console.log(
+        `[AUTH DIAG] ${method} ${pathname} hasStateParam=${s.has("state")} hasCode=${s.has("code")} ` +
+          `paramError=${s.get("error") || "none"} hasStateCookie=${/(^|;\s*)(__Secure-)?better-auth\.state=/.test(cookie)} ` +
+          `cookieNames=${cookie.split(";").map((c) => c.split("=")[0]?.trim()).join(",") || "none"}`
+      );
+    }
     const response = await auth.handler(context.request);
 
     if (response.status >= 400) {
