@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { toolsRegistry } from '@/registry/tools';
+import { toolsRegistry, TOOL_REDIRECTS, SEO_PERMUTATIONS } from '@/registry/tools';
 
 export const dynamic = 'force-static';
 
@@ -46,11 +46,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const toolPages = toolsRegistry.map(tool => ({
-    url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}`,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
+  // Sitemaps must list only canonical 200-pages. Two registry populations
+  // 301 by design and must be excluded, or Google burns crawl budget on
+  // redirects (GSC showed 450 redirect + dozens of 404 exclusions from this):
+  // - stub slugs redirected to a DIFFERENT tool (bg-changer -> ai-bg-changer).
+  //   Same-slug canonical-category redirects are kept (their canonical URL 200s).
+  // - SEO_PERMUTATIONS landing slugs (page.tsx 301s each to its parent hub).
+  const seoSlugs = new Set(SEO_PERMUTATIONS.map((p) => p.slug));
+  const toolPages = toolsRegistry
+    .filter((tool) => {
+      const redirect = TOOL_REDIRECTS[tool.slug];
+      if (redirect && redirect.slug !== tool.slug) return false;
+      if (seoSlugs.has(tool.slug)) return false;
+      return true;
+    })
+    .map((tool) => ({
+      url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }));
 
   return [...staticPages, ...categoryPages, ...toolPages];
 }
