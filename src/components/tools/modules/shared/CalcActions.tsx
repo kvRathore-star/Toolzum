@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Copy, Download, Clock, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { clipboardWrite } from "@/lib/clipboard";
 
 interface CalcActionsProps {
   result: string;
@@ -36,10 +37,12 @@ export function CalcActions({
     return () => { if (historyTimerRef.current) clearTimeout(historyTimerRef.current); };
   }, [result]);
 
-  const copyResult = useCallback(() => {
-    if (result) {
-      navigator.clipboard.writeText(result);
+  const copyResult = useCallback(async () => {
+    if (!result) return;
+    if (await clipboardWrite(result)) {
       toast.success("Result copied");
+    } else {
+      toast.error("Copy failed — select the result text manually");
     }
   }, [result]);
 

@@ -2,6 +2,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { Copy, Clock, ChevronDown, ChevronUp, Download, RotateCcw } from 'lucide-react';
 import { getCategoryTheme } from '@/lib/categoryTheme';
+import { clipboardWrite } from '@/lib/clipboard';
 import { toast } from 'react-hot-toast';
 
 interface Preset {
@@ -101,10 +102,12 @@ export function CalculatorShell({
     }
   }, [showHistory]);
 
-  const copyResult = useCallback(() => {
-    if (result) {
-      navigator.clipboard.writeText(result);
+  const copyResult = useCallback(async () => {
+    if (!result) return;
+    if (await clipboardWrite(result)) {
       toast.success('Result copied');
+    } else {
+      toast.error('Copy failed — select the result text manually');
     }
   }, [result]);
 
