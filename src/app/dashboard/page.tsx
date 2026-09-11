@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { getCategoryTheme, CATEGORY_NAMES } from "@/lib/categoryTheme";
+import { useLiveCredits } from "@/hooks/useLiveCredits";
 
 interface ActivityItem {
   toolSlug: string;
@@ -130,6 +131,9 @@ export default function DashboardPage() {
     router.push("/");
   };
 
+  // Hook before early returns (rules-of-hooks); inactive until session loads.
+  const live = useLiveCredits(!!session);
+
   if (isPending) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-[var(--bg-base)]">
@@ -143,6 +147,10 @@ export default function DashboardPage() {
   const user = session.user;
   const credits = (user as { credits?: number }).credits ?? 0;
   const plan = (user as { plan?: string }).plan || "free";
+  // Session snapshot goes stale after AI use (refreshes daily at most) —
+  // overlay the live D1 balance, falling back to the session value.
+  const shownCredits = live?.credits ?? credits;
+  const allowance = live?.allowance ?? (plan === "pro" ? 300 : 30);
   const firstName = user.name?.split(" ")[0] || "there";
 
   return (
@@ -197,14 +205,14 @@ export default function DashboardPage() {
             </div>
             <div className="flex items-baseline gap-1.5">
               <span className="text-3xl font-semibold font-mono tracking-tight">
-                {credits}
+                {shownCredits}
               </span>
-              <span className="text-xs text-[var(--text-muted)]">remaining</span>
+              <span className="text-xs text-[var(--text-muted)]">remaining of {allowance}/mo</span>
             </div>
             <div className="mt-3 w-full bg-[var(--bg-overlay)] rounded-full h-1">
               <div
                 className="bg-[var(--accent)] h-full rounded-full transition-all duration-500"
-                style={{ width: `${Math.min((credits / (plan === "pro" ? 300 : 30)) * 100, 100)}%` }}
+                style={{ width: `${Math.min((shownCredits / allowance) * 100, 100)}%` }}
               />
             </div>
           </div>

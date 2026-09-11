@@ -52,13 +52,13 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
     const limit = getUserLimit(plan, isProTool);
     if (limit === Infinity) {
-      return new Response(JSON.stringify({ allowed: true, remaining: 999 }), {
+      return new Response(JSON.stringify({ allowed: true, remaining: 999, plan }), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
     if (limit === 0) {
-      return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
+      return new Response(JSON.stringify({ allowed: false, remaining: 0, plan }), {
         headers: { 'Content-Type': 'application/json' },
       });
     }
@@ -75,11 +75,13 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const remaining = Math.max(0, limit - count);
     recordRateLimit(DB, "dl-check", ip, "/downloads/check");
 
-    return new Response(JSON.stringify({ allowed: remaining > 0, remaining }), {
+    return new Response(JSON.stringify({ allowed: remaining > 0, remaining, plan }), {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch {
-    return new Response(JSON.stringify({ allowed: false, remaining: 0 }), {
+    // Unknown state (not exhaustion): plan null tells the badge/modal to
+    // render "unavailable", never "used up".
+    return new Response(JSON.stringify({ allowed: false, remaining: 0, plan: null }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' },
     });

@@ -23,6 +23,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import { AccountSessions, type Session } from "./_components/AccountSessions";
 import { AccountDangerZone } from "./_components/AccountDangerZone";
+import { useLiveCredits } from "@/hooks/useLiveCredits";
 
 export default function AccountPage() {
   const router = useRouter();
@@ -168,6 +169,9 @@ export default function AccountPage() {
     router.push("/");
   };
 
+  // Hook before early returns (rules-of-hooks); inactive until session loads.
+  const live = useLiveCredits(!!session);
+
   if (isPending) {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-[var(--bg-base)]">
@@ -181,6 +185,10 @@ export default function AccountPage() {
   const user = session.user;
   const credits = (user as { credits?: number }).credits ?? 0;
   const plan = (user as { plan?: string }).plan || "free";
+  // Session snapshot goes stale after AI use (refreshes daily at most) —
+  // overlay the live D1 balance, falling back to the session value.
+  const shownCredits = live?.credits ?? credits;
+  const allowance = live?.allowance ?? (plan === "pro" ? 300 : 30);
 
   return (
     <div className="min-h-[90vh] bg-[var(--bg-base)] text-[var(--text-primary)]">
@@ -309,14 +317,14 @@ export default function AccountPage() {
               <div className="mt-6">
                 <div className="flex items-center justify-between text-sm mb-2">
                   <span className="text-[var(--text-secondary)]">
-                    <Zap className="w-3.5 h-3.5 inline mr-1" /> Credits
+                    <Zap className="w-3.5 h-3.5 inline mr-1" /> Credits remaining
                   </span>
-                  <span className="font-mono font-semibold text-[var(--text-primary)]">{credits}</span>
+                  <span className="font-mono font-semibold text-[var(--text-primary)]">{shownCredits} <span className="text-xs font-normal text-[var(--text-muted)]">of {allowance}/mo</span></span>
                 </div>
                 <div className="w-full bg-[var(--bg-overlay)] rounded-full h-2 overflow-hidden">
                   <div
                     className="bg-[var(--accent-ink)] h-full transition-all duration-500"
-                    style={{ width: `${Math.min((credits / (plan === "pro" ? 300 : 30)) * 100, 100)}%` }}
+                    style={{ width: `${Math.min((shownCredits / allowance) * 100, 100)}%` }}
                   />
                 </div>
               </div>
@@ -405,10 +413,10 @@ export default function AccountPage() {
               </div>
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase">
+              <label htmlFor="lbl-page-confirm-new-password" className="text-xs font-medium text-[var(--text-secondary)] tracking-wide uppercase">
                 Confirm New Password
               </label>
-              <input
+              <input id="lbl-page-confirm-new-password"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

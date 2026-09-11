@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Download } from "lucide-react";
-import { getFingerprint, getSignedInStatus } from "@/utils/freeUsageGuard";
+import { getFingerprint } from "@/utils/freeUsageGuard";
 import { proSlugs } from "@/registry/tools-constants";
 
 const PRO_SLUG_SET = new Set(proSlugs);
@@ -11,6 +11,9 @@ const PRO_REMAINING = 999;
 interface CheckResponse {
   allowed: boolean;
   remaining: number;
+  /** Server-resolved plan ('pro' | 'free' | null for anon). Pro users always
+   *  resolve to plan 'pro' with remaining 999, so the badge hides for them. */
+  plan: string | null;
 }
 
 function isCurrentToolPro(): boolean {
@@ -19,7 +22,7 @@ function isCurrentToolPro(): boolean {
   return parts.length >= 2 ? PRO_SLUG_SET.has(parts[1]!) : false;
 }
 
-async function fetchRemaining(): Promise<number | null> {
+async function fetchQuota(): Promise<CheckResponse | null> {
   try {
     const isPro = isCurrentToolPro();
     const url = isPro ? "/api/downloads/check?isPro=1" : "/api/downloads/check";
@@ -27,22 +30,27 @@ async function fetchRemaining(): Promise<number | null> {
       headers: { "x-download-fingerprint": getFingerprint() },
     });
     if (!res.ok) return null;
-    const data = (await res.json()) as CheckResponse;
-    return data.remaining;
+    const data = (await res.json()) as Partial<CheckResponse>;
+    if (typeof data.remaining !== "number") return null;
+    return {
+      allowed: data.allowed !== false,
+      remaining: data.remaining,
+      plan: typeof data.plan === "string" ? data.plan : null,
+    };
   } catch {
     return null;
   }
 }
 
 export function DownloadQuotaBadge() {
-  const [remaining, setRemaining] = useState<number | null>(null);
+  const [quota, setQuota] = useState<CheckResponse | null>(null);
   const [isProTool, setIsProTool] = useState(false);
 
   const refresh = useCallback(async () => {
     const proTool = isCurrentToolPro();
     setIsProTool(proTool);
-    const value = await fetchRemaining();
-    if (value !== null) setRemaining(value);
+    const value = await fetchQuota();
+    if (value !== null) setQuota(value);
   }, []);
 
   useEffect(() => {
@@ -57,13 +65,14 @@ export function DownloadQuotaBadge() {
     };
   }, [refresh]);
 
-  if (remaining === null || remaining >= PRO_REMAINING) return null;
+  if (quota === null || quota.plan === "pro" || quota.remaining >= PRO_REMAINING) return null;
 
+  const { remaining, plan } = quota;
   const isZero = remaining === 0;
 
   // Anonymous users get limit 0 on Pro tools — that's "sign in", not "used up".
   const label = isProTool
-    ? isZero && !getSignedInStatus()
+    ? isZero && plan === null
       ? "Sign in to use Pro tools"
       : isZero
         ? "Pro downloads used up today"
