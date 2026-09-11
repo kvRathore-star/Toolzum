@@ -6,6 +6,7 @@ import { Upload, Download, Type, Loader2, FileText, WholeWord } from 'lucide-rea
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
 import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
+import type { OpentypeFont, OpentypeNameRecord } from 'opentype.js';
 
 type FontFormat = 'ttf' | 'woff';
 
@@ -31,8 +32,8 @@ function formatFileSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
-function parseFontMeta(font: any, fileSize: number): FontMeta {
-  const names = font.names || {};
+function parseFontMeta(font: OpentypeFont, fileSize: number): FontMeta {
+  const names: Record<string, OpentypeNameRecord | undefined> = font.names || {};
   return {
     familyName: names.fontFamily?.en || names.fontFamily?.enUS || 'Unknown',
     style: names.fontSubfamily?.en || names.fontSubfamily?.enUS || 'Regular',
@@ -40,20 +41,6 @@ function parseFontMeta(font: any, fileSize: number): FontMeta {
     glyphCount: font.glyphs?.length || 0,
     fileSize: formatFileSize(fileSize),
   };
-}
-
-function sfntChecksum(data: ArrayBuffer, offset: number, length: number): number {
-  const view = new DataView(data, offset, length);
-  let sum = 0;
-  const nLongs = Math.ceil(length / 4);
-  for (let i = 0; i < nLongs; i++) {
-    const b = view.getUint8(i * 4);
-    const b1 = view.getUint8(i * 4 + 1);
-    const b2 = view.getUint8(i * 4 + 2);
-    const b3 = view.getUint8(i * 4 + 3);
-    sum += ((b << 24) | (b1 << 16) | (b2 << 8) | b3) >>> 0;
-  }
-  return sum >>> 0;
 }
 
 function adjustCheckSumAdjustment(data: ArrayBuffer): ArrayBuffer {
@@ -237,7 +224,7 @@ export default function FontSubsetter() {
     setIsProcessing(true);
     try {
       const arrayBuffer = await f.arrayBuffer();
-      const opentypeModule: any = await import('opentype.js');
+      const opentypeModule = await import('opentype.js');
       const font = opentypeModule.parse(arrayBuffer);
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
@@ -263,7 +250,7 @@ export default function FontSubsetter() {
     setIsProcessing(true);
     try {
       const arrayBuffer = await f.arrayBuffer();
-      const opentypeModule: any = await import('opentype.js');
+      const opentypeModule = await import('opentype.js');
       const font = opentypeModule.parse(arrayBuffer);
       setParsedFont(font);
       setFontMeta(parseFontMeta(font, f.size));
@@ -292,7 +279,7 @@ export default function FontSubsetter() {
     }
     setIsProcessing(true);
     try {
-      const opentypeModule: any = await import('opentype.js');
+      const opentypeModule = await import('opentype.js');
       const glyphs: unknown[] = [];
       const seen = new Set<number>();
 

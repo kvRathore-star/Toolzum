@@ -437,7 +437,7 @@ export function YamlValidator() {
       }
     } else if (mode === 'to-json') {
       try {
-        const jsYaml = (window as any).jsyaml;
+        const jsYaml = (window as unknown as { jsyaml?: { load: (src: string) => unknown } }).jsyaml;
         if (jsYaml) {
           const obj = jsYaml.load(input);
           setOutput(JSON.stringify(obj, null, 2));
