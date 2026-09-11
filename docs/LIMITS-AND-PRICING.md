@@ -3,7 +3,7 @@
 > Single source of truth for all user-facing limits, credit costs, and rate limits.
 > **If this file and the code disagree, the code wins — but update this file immediately.**
 
-Last verified: 2026-09-04
+Last verified: 2026-09-11
 
 ---
 
@@ -11,16 +11,16 @@ Last verified: 2026-09-04
 
 | Metric | Count |
 |--------|-------|
-| Total tools | 1,046 |
-| Pro tools | 62 (gated by `proSlugs` in `tools-constants.ts`) |
-| Download-producing tools | 408 (auto-generated in `downloadProducingSlugs.ts`) |
+| Total tools | 1,146 |
+| Pro tools | 66 (gated by `proSlugs` in `tools-constants.ts`) |
+| Download-producing tools | 425 (auto-generated in `downloadProducingSlugs.ts`) |
 | Categories | 21 |
 
 ---
 
 ## 2. Download Quota
 
-**Applies to:** 408 tools that call `downloadOrShare()` — image compressors, PDF tools, video converters, audio tools, etc.
+**Applies to:** 425 tools that call `downloadOrShare()` — image compressors, PDF tools, video converters, audio tools, etc.
 
 ### Free tools (non-Pro)
 
@@ -53,7 +53,7 @@ getUserLimit(plan, isProTool):
 
 **Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
 
-**Badge:** Shows on tool page for all 408 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies:
+**Badge:** Shows on tool page for all 425 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies:
 - Pro tool: "2 Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
 - Free tool: "3/5 free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
@@ -75,26 +75,33 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Transcription (Speech-to-Text) | 1 (code deducts 1 — doc previously said 10, wrong) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
 | AI Image Generation | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
-- ~3 transcription sessions (25 min each), OR
+- ~30 transcription sessions (25 min each), OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
 **Cost at 300 Pro credits/month:**
 - ~300 text gen calls, OR
-- ~30 transcription sessions, OR
+- ~300 transcription sessions, OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$0.57/month (3 transcription sessions × $0.19)
+**Worst-case cost per free user:** ~$5.70/month (30 transcriptions × $0.19).
+**Worst-case cost per Pro user:** ~$57/month (300 × $0.19) vs $14.99 revenue.
+
+> ⚠️ **OPEN DECISION (carried from tracker):** per-task credit costs are currently
+> flat (everything = 1 credit). At 1/transcription, a heavy free user costs up
+> to $5.70/mo and a heavy Pro user up to $57/mo against $14.99 revenue. Raising
+> transcription to 5–10 credits (or capping transcription minutes) closes this.
+> Decide before scaling AI traffic.
 
 ---
 
@@ -177,7 +184,7 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 ## 7. Pro Tools
 
-**List:** `src/registry/tools-constants.ts` → `proSlugs` array (62 slugs)
+**List:** `src/registry/tools-constants.ts` → `proSlugs` array (66 slugs: 55 produce file downloads, 11 are text-only/dashboards)
 
 **Categories covered:** AI, Image (bulk), PDF (bulk), Audio (bulk), Video (bulk), Transcription, Developer, E-commerce, Privacy, Indian Utilities
 
