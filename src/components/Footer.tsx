@@ -77,18 +77,18 @@ export function Footer() {
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12 lg:gap-12 mb-16">
           
           {/* Column 1: Brand */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start lg:pr-6">
             <Link href="/" className="flex items-center gap-2 mb-6">
               <span className="font-bold text-2xl tracking-tight text-[var(--text-primary)]">Tool<span className="text-[var(--accent)]">zum</span></span>
             </Link>
             <p className="text-base leading-relaxed mb-6 text-[var(--text-secondary)] max-w-[240px]">
               Privacy-first tools — PDF, images, video, converters, AI & more. All in one place.
             </p>
-            <div className="flex flex-col gap-3">
-              <p className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</p>
+            <div className="flex flex-col gap-4">
+              <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Share Toolzum</p>
               <div className="flex items-center gap-1.5 flex-wrap">
                 <a href="https://twitter.com/intent/tweet?text=Check+out+Toolzum+—+privacy-first+browser+tools,+all+free.&url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[11px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-white/30 hover:bg-zinc-800 transition-all" title="Share on X/Twitter">𝕏</a>
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://toolzum.com" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] hover:text-white hover:border-blue-500/30 hover:bg-blue-600 transition-all" title="Share on LinkedIn">in</a>
