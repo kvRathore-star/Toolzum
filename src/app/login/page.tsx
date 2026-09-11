@@ -79,6 +79,29 @@ export default function LoginPage() {
             </p>
           </div>
 
+          {/* Social buttons */}
+          <div className="flex flex-col gap-3 mb-6">
+            <button
+              type="button"
+              aria-label="Sign in with Google"
+              onClick={() => signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+              className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
+              style={{ borderRadius: "var(--radius-md)" }}
+            >
+              <Globe className="w-4 h-4" />
+              Sign in with Google
+            </button>
+          </div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex-1 h-px bg-[var(--border-subtle)]" />
+            <span className="text-xs text-[var(--text-muted)] font-medium uppercase tracking-wide">
+              or continue with email
+            </span>
+            <div className="flex-1 h-px bg-[var(--border-subtle)]" />
+          </div>
+
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
@@ -155,29 +178,6 @@ export default function LoginPage() {
               {!loading && <ArrowRight className="w-4 h-4" />}
             </Button>
           </form>
-
-          {/* Divider */}
-          <div className="flex items-center gap-3 my-6">
-            <div className="flex-1 h-px bg-[var(--border-subtle)]" />
-            <span className="text-xs text-[var(--text-muted)] font-medium uppercase tracking-wide">
-              or continue with
-            </span>
-            <div className="flex-1 h-px bg-[var(--border-subtle)]" />
-          </div>
-
-          {/* Social buttons */}
-          <div className="flex flex-col gap-3">
-            <button
-              type="button"
-              aria-label="Sign in with Google"
-              onClick={() => signIn.social({ provider: "google", callbackURL: "/dashboard" })}
-              className="w-full flex items-center justify-center gap-2.5 h-11 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all duration-150"
-              style={{ borderRadius: "var(--radius-md)" }}
-            >
-              <Globe className="w-4 h-4" />
-              Sign in with Google
-            </button>
-          </div>
 
           {/* Footer */}
           <p className="text-center text-xs text-[var(--text-muted)] mt-6">
