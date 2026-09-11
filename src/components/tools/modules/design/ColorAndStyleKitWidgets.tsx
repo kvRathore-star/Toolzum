@@ -128,12 +128,12 @@ export function ContrastRatioChecker() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Contrast Ratio Checker</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Foreground</label>
-            <input aria-label="Foreground" type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+            <label htmlFor="lbl-colorandstylekitwidgets-foreground" className="text-xs text-[var(--text-secondary)] mb-1 block">Foreground</label>
+            <input id="lbl-colorandstylekitwidgets-foreground" aria-label="Foreground" type="color" value={fg} onChange={e => setFg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Background</label>
-            <input aria-label="Background" type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
+            <label htmlFor="lbl-colorandstylekitwidgets-background" className="text-xs text-[var(--text-secondary)] mb-1 block">Background</label>
+            <input id="lbl-colorandstylekitwidgets-background" aria-label="Background" type="color" value={bg} onChange={e => setBg(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
           </div>
         </div>
         <div className="p-3 rounded-lg text-center text-sm font-bold" style={{ color: fg, backgroundColor: bg }}>Sample Text Aa</div>
@@ -233,13 +233,13 @@ export function MarkdownTableGenerator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markdown Table Generator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Columns</label>
-            <input aria-label="Columns" type="number" value={cols} onChange={e => setCols(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={10}
+            <label htmlFor="lbl-colorandstylekitwidgets-columns" className="text-xs text-[var(--text-secondary)] mb-1 block">Columns</label>
+            <input id="lbl-colorandstylekitwidgets-columns" aria-label="Columns" type="number" value={cols} onChange={e => setCols(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={10}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Rows</label>
-            <input aria-label="Rows" type="number" value={rows} onChange={e => setRows(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={20}
+            <label htmlFor="lbl-colorandstylekitwidgets-rows" className="text-xs text-[var(--text-secondary)] mb-1 block">Rows</label>
+            <input id="lbl-colorandstylekitwidgets-rows" aria-label="Rows" type="number" value={rows} onChange={e => setRows(Math.max(1, parseInt(e.target.value) || 1))} min={1} max={20}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>

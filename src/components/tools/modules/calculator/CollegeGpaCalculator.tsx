@@ -38,10 +38,10 @@ export default function CollegeGpaCalculator() {
   return (
     <CalculatorShell category="Calculator" title="College GPA Calculator" result="" auto presets={presets} accent="purple" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input aria-label="Semester Grades (e.g., A,B+,A-)" type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input aria-label="Semester Credits" type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous GPA</label><input aria-label="Previous GPA" type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Credits</label><input aria-label="Previous Credits" type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-collegegpacalculator-semester-grades-e-g-a-b-a" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Grades (e.g., A,B+,A-)</label><input id="lbl-collegegpacalculator-semester-grades-e-g-a-b-a" aria-label="Semester Grades (e.g., A,B+,A-)" type="text" value={semGrades} onChange={e => setSemGrades(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-collegegpacalculator-semester-credits" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Semester Credits</label><input id="lbl-collegegpacalculator-semester-credits" aria-label="Semester Credits" type="text" value={semCredits} onChange={e => setSemCredits(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-collegegpacalculator-previous-gpa" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous GPA</label><input id="lbl-collegegpacalculator-previous-gpa" aria-label="Previous GPA" type="number" value={prevGpa} onChange={e => setPrevGpa(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label htmlFor="lbl-collegegpacalculator-previous-credits" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Credits</label><input id="lbl-collegegpacalculator-previous-credits" aria-label="Previous Credits" type="number" value={prevCredits} onChange={e => setPrevCredits(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

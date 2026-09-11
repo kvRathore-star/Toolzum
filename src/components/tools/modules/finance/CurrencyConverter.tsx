@@ -171,8 +171,8 @@ export default function CurrencyConverter() {
             
             {/* Amount */}
             <div className="md:col-span-3 space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Amount</label>
-              <input aria-label="Amount" 
+              <label htmlFor="lbl-currencyconverter-amount" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Amount</label>
+              <input id="lbl-currencyconverter-amount" aria-label="Amount" 
                 type="number" 
                 value={amount} 
                 onChange={e => setAmount(e.target.value)} 

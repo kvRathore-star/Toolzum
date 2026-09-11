@@ -83,8 +83,8 @@ export default function Mp3Compressor() {
           <h4 className="text-[var(--text-primary)] font-medium">Compression Settings</h4>
           
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Target Bitrate</label>
-            <select aria-label="Target Bitrate" 
+            <label htmlFor="lbl-mp3compressor-target-bitrate" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Target Bitrate</label>
+            <select id="lbl-mp3compressor-target-bitrate" aria-label="Target Bitrate" 
               value={bitrate}
               onChange={(e) => setBitrate(e.target.value)}
               className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-bold"

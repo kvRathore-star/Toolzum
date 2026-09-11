@@ -41,12 +41,12 @@ export default function ProfitMarginCalculator() {
     >
       <div className="space-y-4">
         <div>
-          <label className={labelCls}>Cost of Goods Sold ($)</label>
-          <input aria-label="Cost of Goods Sold ($)" className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-profitmargincalculator-cost-of-goods-sold" className={labelCls}>Cost of Goods Sold ($)</label>
+          <input id="lbl-profitmargincalculator-cost-of-goods-sold" aria-label="Cost of Goods Sold ($)" className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
-          <label className={labelCls}>Sale Revenue ($)</label>
-          <input aria-label="Sale Revenue ($)" className={inputCls} type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-profitmargincalculator-sale-revenue" className={labelCls}>Sale Revenue ($)</label>
+          <input id="lbl-profitmargincalculator-sale-revenue" aria-label="Sale Revenue ($)" className={inputCls} type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
       </div>
     </CalculatorShell>

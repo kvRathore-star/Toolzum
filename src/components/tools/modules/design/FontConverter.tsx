@@ -388,8 +388,8 @@ export default function FontConverter() {
               </div>
               <ArrowRight className="w-5 h-5 text-[var(--text-muted)] mt-6" />
               <div className="flex-1">
-                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Output Format</label>
-                <select aria-label="Output Format"
+                <label htmlFor="lbl-fontconverter-output-format" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Output Format</label>
+                <select id="lbl-fontconverter-output-format" aria-label="Output Format"
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as FontFormat)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-pointer"

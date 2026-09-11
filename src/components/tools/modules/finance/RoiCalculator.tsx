@@ -39,12 +39,12 @@ export default function RoiCalculator() {
     >
       <div className="space-y-4">
         <div>
-          <label className={labelCls}>Initial Investment ($)</label>
-          <input aria-label="Initial Investment ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-roicalculator-initial-investment" className={labelCls}>Initial Investment ($)</label>
+          <input id="lbl-roicalculator-initial-investment" aria-label="Initial Investment ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
-          <label className={labelCls}>Final Value ($)</label>
-          <input aria-label="Final Value ($)" className={inputCls} type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-roicalculator-final-value" className={labelCls}>Final Value ($)</label>
+          <input id="lbl-roicalculator-final-value" aria-label="Final Value ($)" className={inputCls} type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
       </div>
     </CalculatorShell>

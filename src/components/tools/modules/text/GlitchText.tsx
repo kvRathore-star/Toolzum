@@ -155,8 +155,8 @@ export default function GlitchText() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
-          <textarea aria-label="Your Text"
+          <label htmlFor="lbl-glitchtext-your-text" className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
+          <textarea id="lbl-glitchtext-your-text" aria-label="Your Text"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type or paste text to glitch..."
@@ -221,10 +221,10 @@ export default function GlitchText() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs text-[var(--text-muted)] font-bold uppercase">
+              <label htmlFor="lbl-glitchtext-intensity-intensity-10" className="text-xs text-[var(--text-muted)] font-bold uppercase">
                 Intensity: {intensity}/10
               </label>
-              <input
+              <input id="lbl-glitchtext-intensity-intensity-10"
                 type="range"
                 min="1"
                 max="10"

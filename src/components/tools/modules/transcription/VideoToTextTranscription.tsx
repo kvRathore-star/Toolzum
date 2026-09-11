@@ -62,8 +62,8 @@ ${videoText}`;
             <p className="text-xs text-[var(--text-muted)] mb-4">Structure and edit video audio logs into high-quality scripts or articles.</p>
             
 <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Video Audio Logs / Transcript</label>
-              <textarea aria-label="Video Audio Logs / Transcript"
+              <label htmlFor="lbl-videototexttranscription-video-audio-logs-transcript" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Video Audio Logs / Transcript</label>
+              <textarea id="lbl-videototexttranscription-video-audio-logs-transcript" aria-label="Video Audio Logs / Transcript"
                 value={videoText}
                 onChange={e => setVideoText(e.target.value)}
                 placeholder="Paste video transcription logs..."
@@ -72,8 +72,8 @@ ${videoText}`;
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Format</label>
-              <select aria-label="Target Format"
+              <label htmlFor="lbl-videototexttranscription-target-format" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Format</label>
+              <select id="lbl-videototexttranscription-target-format" aria-label="Target Format"
                 value={format}
                 onChange={e => setFormat(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

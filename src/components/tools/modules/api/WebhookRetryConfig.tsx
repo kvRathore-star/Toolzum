@@ -27,12 +27,12 @@ export default function WebhookRetryConfig() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Webhook Retry Config</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Max Retries</label>
-            <input aria-label="Max Retries" type="number" value={maxRetries} onChange={e => setMaxRetries(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <label htmlFor="lbl-webhookretryconfig-max-retries" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Max Retries</label>
+            <input id="lbl-webhookretryconfig-max-retries" aria-label="Max Retries" type="number" value={maxRetries} onChange={e => setMaxRetries(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Base Delay (ms)</label>
-            <input aria-label="Base Delay (ms)" type="number" value={baseDelay} onChange={e => setBaseDelay(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <label htmlFor="lbl-webhookretryconfig-base-delay-ms" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Base Delay (ms)</label>
+            <input id="lbl-webhookretryconfig-base-delay-ms" aria-label="Base Delay (ms)" type="number" value={baseDelay} onChange={e => setBaseDelay(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Calculate</button>

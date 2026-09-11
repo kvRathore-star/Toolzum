@@ -39,13 +39,13 @@ export default function GreatestCommonFactorCalculator() {
       <div className="space-y-4">
         <div className="flex gap-2">
           <div className="flex-1">
-            <label className={labelClass}>First number</label>
-            <input aria-label="First number" type="number" min={0} value={a} onChange={e => setA(e.target.value)}
+            <label htmlFor="lbl-greatestcommonfactorcalculator-first-number" className={labelClass}>First number</label>
+            <input id="lbl-greatestcommonfactorcalculator-first-number" aria-label="First number" type="number" min={0} value={a} onChange={e => setA(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
           <div className="flex-1">
-            <label className={labelClass}>Second number</label>
-            <input aria-label="Second number" type="number" min={0} value={b} onChange={e => setB(e.target.value)}
+            <label htmlFor="lbl-greatestcommonfactorcalculator-second-number" className={labelClass}>Second number</label>
+            <input id="lbl-greatestcommonfactorcalculator-second-number" aria-label="Second number" type="number" min={0} value={b} onChange={e => setB(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
         </div>

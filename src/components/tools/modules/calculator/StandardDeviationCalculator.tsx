@@ -36,7 +36,7 @@ export default function StandardDeviationCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Standard Deviation Calculator" accent="blue" result="" auto customResult={customResult} presets={presets}>
       <div className="max-w-xl">
-        <div><label className={labelCls}>Numbers (comma separated)</label><textarea aria-label="Numbers (comma separated)" className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
+        <div><label htmlFor="lbl-standarddeviationcalculator-numbers-comma-separated" className={labelCls}>Numbers (comma separated)</label><textarea id="lbl-standarddeviationcalculator-numbers-comma-separated" aria-label="Numbers (comma separated)" className={`${inputCls} min-h-[80px] resize-none`} value={numbers} onChange={e => setNumbers(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

@@ -44,12 +44,12 @@ export default function ApiMockDataGenerator() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Schema (JSON)</label>
-          <textarea aria-label="Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apimockdatagenerator-schema-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Schema (JSON)</label>
+          <textarea id="lbl-apimockdatagenerator-schema-json" aria-label="Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
-          <input type="range" min={1} max={20} value={count} aria-label="Count" onChange={e => { setCount(Number(e.target.value)); setResult(''); }} className="w-full mt-1 accent-emerald-500" />
+          <label htmlFor="lbl-apimockdatagenerator-count-count" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
+          <input id="lbl-apimockdatagenerator-count-count" type="range" min={1} max={20} value={count} aria-label="Count" onChange={e => { setCount(Number(e.target.value)); setResult(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
         <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {result && (

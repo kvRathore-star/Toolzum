@@ -72,12 +72,12 @@ export default function BurnRateCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Starting Cash Balance ($)</label>
-            <input aria-label="Starting Cash Balance ($)" type="number" value={starting} onChange={e => setStarting(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <label htmlFor="lbl-burnratecalculator-starting-cash-balance" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Starting Cash Balance ($)</label>
+            <input id="lbl-burnratecalculator-starting-cash-balance" aria-label="Starting Cash Balance ($)" type="number" value={starting} onChange={e => setStarting(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Ending Cash Balance ($)</label>
-            <input aria-label="Ending Cash Balance ($)" type="number" value={ending} onChange={e => setEnding(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <label htmlFor="lbl-burnratecalculator-ending-cash-balance" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Ending Cash Balance ($)</label>
+            <input id="lbl-burnratecalculator-ending-cash-balance" aria-label="Ending Cash Balance ($)" type="number" value={ending} onChange={e => setEnding(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
             <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Time Period (Months)</label>

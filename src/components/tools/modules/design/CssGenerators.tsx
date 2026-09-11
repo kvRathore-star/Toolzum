@@ -93,8 +93,8 @@ function GradientGeneratorInner() {
     <div className="space-y-4">
       <div className={previewClass} style={{ background: `linear-gradient(${direction}, ${color1}, ${color2})` }} />
       <div>
-        <label className={labelClass}>Direction</label>
-        <select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}>
+        <label htmlFor="lbl-cssgenerators-direction" className={labelClass}>Direction</label>
+        <select id="lbl-cssgenerators-direction" aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}>
           <option value="to bottom">Top to Bottom</option>
           <option value="to top">Bottom to Top</option>
           <option value="to right">Left to Right</option>
@@ -105,12 +105,12 @@ function GradientGeneratorInner() {
       </div>
       <div className="flex gap-4">
         <div className="flex-1">
-          <label className={labelClass}>Color 1</label>
-          <input aria-label="Color 1" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
+          <label htmlFor="lbl-cssgenerators-color-1" className={labelClass}>Color 1</label>
+          <input id="lbl-cssgenerators-color-1" aria-label="Color 1" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
         </div>
         <div className="flex-1">
-          <label className={labelClass}>Color 2</label>
-          <input aria-label="Color 2" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
+          <label htmlFor="lbl-cssgenerators-color-2" className={labelClass}>Color 2</label>
+          <input id="lbl-cssgenerators-color-2" aria-label="Color 2" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded cursor-pointer" />
         </div>
       </div>
       <pre className={codeClass}>{css}</pre>
@@ -148,10 +148,10 @@ function FlexboxGeneratorInner() {
         {[1, 2, 3].map(i => <div key={i} className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">{i}</div>)}
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div><label className={labelClass}>Direction</label><select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="row">Row</option><option value="column">Column</option><option value="row-reverse">Row Reverse</option><option value="column-reverse">Column Reverse</option></select></div>
-        <div><label className={labelClass}>Wrap</label><select aria-label="Wrap" value={wrap} onChange={e => setWrap(e.target.value)} className={inputClass}><option value="nowrap">No Wrap</option><option value="wrap">Wrap</option></select></div>
-        <div><label className={labelClass}>Justify</label><select aria-label="Justify" value={justify} onChange={e => setJustify(e.target.value)} className={inputClass}><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option><option value="space-between">Space Between</option><option value="space-around">Space Around</option></select></div>
-        <div><label className={labelClass}>Align</label><select aria-label="Align" value={align} onChange={e => setAlign(e.target.value)} className={inputClass}><option value="stretch">Stretch</option><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-direction-4" className={labelClass}>Direction</label><select id="lbl-cssgenerators-direction-4" aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="row">Row</option><option value="column">Column</option><option value="row-reverse">Row Reverse</option><option value="column-reverse">Column Reverse</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-wrap" className={labelClass}>Wrap</label><select id="lbl-cssgenerators-wrap" aria-label="Wrap" value={wrap} onChange={e => setWrap(e.target.value)} className={inputClass}><option value="nowrap">No Wrap</option><option value="wrap">Wrap</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-justify" className={labelClass}>Justify</label><select id="lbl-cssgenerators-justify" aria-label="Justify" value={justify} onChange={e => setJustify(e.target.value)} className={inputClass}><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option><option value="space-between">Space Between</option><option value="space-around">Space Around</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-align" className={labelClass}>Align</label><select id="lbl-cssgenerators-align" aria-label="Align" value={align} onChange={e => setAlign(e.target.value)} className={inputClass}><option value="stretch">Stretch</option><option value="flex-start">Start</option><option value="center">Center</option><option value="flex-end">End</option></select></div>
       </div>
       <Slider label="Gap" value={gap} onChange={setGap} min={0} max={40} />
       <pre className={codeClass}>{css}</pre>
@@ -247,8 +247,8 @@ function AnimationGeneratorInner() {
         <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={animStyle}>Anim</div>
       </div>
       <div>
-        <label className={labelClass}>Animation</label>
-        <select aria-label="Animation" value={animType} onChange={e => setAnimType(e.target.value)} className={inputClass}>
+        <label htmlFor="lbl-cssgenerators-animation" className={labelClass}>Animation</label>
+        <select id="lbl-cssgenerators-animation" aria-label="Animation" value={animType} onChange={e => setAnimType(e.target.value)} className={inputClass}>
           <option value="fade-in">Fade In</option>
           <option value="slide-in">Slide In</option>
           <option value="pulse">Pulse</option>
@@ -257,10 +257,10 @@ function AnimationGeneratorInner() {
       <Slider label="Duration (s)" value={duration} onChange={setDuration} min={0.1} max={5} step={0.1} />
       <Slider label="Delay (s)" value={delay} onChange={setDelay} min={0} max={5} step={0.1} />
       <div className="grid grid-cols-2 gap-3">
-        <div><label className={labelClass}>Iterations</label><select aria-label="Iterations" value={iterations} onChange={e => setIterations(e.target.value)} className={inputClass}><option value="infinite">Infinite</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
-        <div><label className={labelClass}>Direction</label><select aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="normal">Normal</option><option value="reverse">Reverse</option><option value="alternate">Alternate</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-iterations" className={labelClass}>Iterations</label><select id="lbl-cssgenerators-iterations" aria-label="Iterations" value={iterations} onChange={e => setIterations(e.target.value)} className={inputClass}><option value="infinite">Infinite</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></div>
+        <div><label htmlFor="lbl-cssgenerators-direction-10" className={labelClass}>Direction</label><select id="lbl-cssgenerators-direction-10" aria-label="Direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="normal">Normal</option><option value="reverse">Reverse</option><option value="alternate">Alternate</option></select></div>
       </div>
-      <div><label className={labelClass}>Timing</label><select aria-label="Timing" value={timing} onChange={e => setTiming(e.target.value)} className={inputClass}><option value="ease">Ease</option><option value="linear">Linear</option><option value="ease-in">Ease In</option><option value="ease-out">Ease Out</option><option value="ease-in-out">Ease In Out</option></select></div>
+      <div><label htmlFor="lbl-cssgenerators-timing" className={labelClass}>Timing</label><select id="lbl-cssgenerators-timing" aria-label="Timing" value={timing} onChange={e => setTiming(e.target.value)} className={inputClass}><option value="ease">Ease</option><option value="linear">Linear</option><option value="ease-in">Ease In</option><option value="ease-out">Ease Out</option><option value="ease-in-out">Ease In Out</option></select></div>
       <pre className={codeClass}>{css}</pre>
       <button onClick={() => navigator.clipboard.writeText(css)} className={btnClass}>Copy CSS</button>
     </div>
@@ -355,8 +355,8 @@ function BorderCssGeneratorInner() {
         <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <div>
-        <label className={labelClass}>Style</label>
-        <select aria-label="Style" value={style} onChange={e => setStyle(e.target.value)} className={inputClass}>
+        <label htmlFor="lbl-cssgenerators-style" className={labelClass}>Style</label>
+        <select id="lbl-cssgenerators-style" aria-label="Style" value={style} onChange={e => setStyle(e.target.value)} className={inputClass}>
           <option value="solid">Solid</option>
           <option value="dashed">Dashed</option>
           <option value="dotted">Dotted</option>

@@ -55,8 +55,8 @@ export default function RobotsTxtGenerator() {
           <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Directives</h3>
           
           <div className="space-y-2">
-            <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Sitemap URL</label>
-            <input aria-label="Sitemap URL" 
+            <label htmlFor="lbl-robotstxtgenerator-sitemap-url" className="text-xs text-[var(--text-muted)] font-bold uppercase">Sitemap URL</label>
+            <input id="lbl-robotstxtgenerator-sitemap-url" aria-label="Sitemap URL" 
               type="text" 
               value={sitemap} 
               onChange={e => setSitemap(e.target.value)} 

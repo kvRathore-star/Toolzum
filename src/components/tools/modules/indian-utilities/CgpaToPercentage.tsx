@@ -157,8 +157,8 @@ export default function CgpaToPercentage() {
 
           {board === 'custom' && (
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-2">
-              <label className="block text-sm font-bold text-[var(--text-primary)]">Multiplication Factor</label>
-              <input aria-label="Multiplication Factor" type="number" step="0.1" value={customFactor} onChange={e => setCustomFactor(e.target.value)}
+              <label htmlFor="lbl-cgpatopercentage-multiplication-factor" className="block text-sm font-bold text-[var(--text-primary)]">Multiplication Factor</label>
+              <input id="lbl-cgpatopercentage-multiplication-factor" aria-label="Multiplication Factor" type="number" step="0.1" value={customFactor} onChange={e => setCustomFactor(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-violet-500 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </motion.div>
           )}

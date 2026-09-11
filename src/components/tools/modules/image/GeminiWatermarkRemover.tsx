@@ -380,8 +380,8 @@ export default function GeminiWatermarkRemover() {
       {/* Settings Bar */}
       <div className="flex flex-wrap items-center gap-4 text-sm">
         <div className="flex items-center gap-2">
-          <label className="text-xs text-[var(--text-secondary)]">Output:</label>
-          <select aria-label="Output:" value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
+          <label htmlFor="lbl-geminiwatermarkremover-output" className="text-xs text-[var(--text-secondary)]">Output:</label>
+          <select id="lbl-geminiwatermarkremover-output" aria-label="Output:" value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof outputFormat)}
             className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
             <option value="png">PNG</option>
             <option value="jpeg">JPG</option>
@@ -390,8 +390,8 @@ export default function GeminiWatermarkRemover() {
         </div>
         {outputFormat !== 'png' && (
           <div className="flex items-center gap-2">
-            <label className="text-xs text-[var(--text-secondary)]">Quality: {quality}%</label>
-            <input aria-label="WebP" type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-24 h-1 accent-[var(--accent-ink)]" />
+            <label htmlFor="lbl-geminiwatermarkremover-quality-quality" className="text-xs text-[var(--text-secondary)]">Quality: {quality}%</label>
+            <input id="lbl-geminiwatermarkremover-quality-quality" aria-label="WebP" type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-24 h-1 accent-[var(--accent-ink)]" />
           </div>
         )}
         {processTime !== null && (

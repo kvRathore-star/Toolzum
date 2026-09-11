@@ -177,20 +177,20 @@ ${linkCards}
               <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><Palette className="w-3 h-3" /> Theme</h4>
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[var(--text-secondary)]">Background</label>
-                  <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <label htmlFor="lbl-linkinbiobuilder-background" className="text-[9px] text-[var(--text-secondary)]">Background</label>
+                  <input id="lbl-linkinbiobuilder-background" aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[var(--text-secondary)]">Card</label>
-                  <input aria-label="Card" type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <label htmlFor="lbl-linkinbiobuilder-card" className="text-[9px] text-[var(--text-secondary)]">Card</label>
+                  <input id="lbl-linkinbiobuilder-card" aria-label="Card" type="color" value={cardColor} onChange={e => setCardColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[var(--text-secondary)]">Text</label>
-                  <input aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <label htmlFor="lbl-linkinbiobuilder-text" className="text-[9px] text-[var(--text-secondary)]">Text</label>
+                  <input id="lbl-linkinbiobuilder-text" aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[9px] text-[var(--text-secondary)]">Accent</label>
-                  <input aria-label="Accent" type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
+                  <label htmlFor="lbl-linkinbiobuilder-accent" className="text-[9px] text-[var(--text-secondary)]">Accent</label>
+                  <input id="lbl-linkinbiobuilder-accent" aria-label="Accent" type="color" value={accentColor} onChange={e => setAccentColor(e.target.value)} className="w-full h-8 rounded-lg border border-[var(--border-subtle)] cursor-pointer" />
                 </div>
               </div>
             </div>

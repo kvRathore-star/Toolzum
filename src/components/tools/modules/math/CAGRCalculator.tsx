@@ -27,18 +27,18 @@ export default function CAGRCalculator() {
       <div className="space-y-4">
         <div className="grid grid-cols-3 gap-2">
           <div>
-            <label className={labelClass}>Start Value</label>
-            <input aria-label="Start Value" type="number" min={0} step="0.01" value={start} onChange={e => setStart(e.target.value)}
+            <label htmlFor="lbl-cagrcalculator-start-value" className={labelClass}>Start Value</label>
+            <input id="lbl-cagrcalculator-start-value" aria-label="Start Value" type="number" min={0} step="0.01" value={start} onChange={e => setStart(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
           <div>
-            <label className={labelClass}>End Value</label>
-            <input aria-label="End Value" type="number" min={0} step="0.01" value={end} onChange={e => setEnd(e.target.value)}
+            <label htmlFor="lbl-cagrcalculator-end-value" className={labelClass}>End Value</label>
+            <input id="lbl-cagrcalculator-end-value" aria-label="End Value" type="number" min={0} step="0.01" value={end} onChange={e => setEnd(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
           <div>
-            <label className={labelClass}>Years</label>
-            <input aria-label="Years" type="number" min={0} step="0.1" value={years} onChange={e => setYears(e.target.value)}
+            <label htmlFor="lbl-cagrcalculator-years" className={labelClass}>Years</label>
+            <input id="lbl-cagrcalculator-years" aria-label="Years" type="number" min={0} step="0.1" value={years} onChange={e => setYears(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>

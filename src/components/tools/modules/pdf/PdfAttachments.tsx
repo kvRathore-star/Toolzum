@@ -115,8 +115,8 @@ export default function PdfAttachments() {
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Description (optional)</label>
-            <input aria-label="Description (optional)" type="text" value={attachDescription} onChange={(e) => setAttachDescription(e.target.value)}
+            <label htmlFor="lbl-pdfattachments-description-optional" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Description (optional)</label>
+            <input id="lbl-pdfattachments-description-optional" aria-label="Description (optional)" type="text" value={attachDescription} onChange={(e) => setAttachDescription(e.target.value)}
               placeholder="Attached file description"
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>

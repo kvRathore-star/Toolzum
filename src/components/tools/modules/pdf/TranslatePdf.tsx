@@ -221,11 +221,11 @@ export default function TranslatePdf() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
+            <label htmlFor="lbl-translatepdf-source-language" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
               <Globe className="w-3 h-3" />
               Source Language
             </label>
-            <select aria-label="Source Language"
+            <select id="lbl-translatepdf-source-language" aria-label="Source Language"
               value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
@@ -242,11 +242,11 @@ export default function TranslatePdf() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
+            <label htmlFor="lbl-translatepdf-target-language" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1">
               <Languages className="w-3 h-3" />
               Target Language
             </label>
-            <select aria-label="Target Language"
+            <select id="lbl-translatepdf-target-language" aria-label="Target Language"
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"

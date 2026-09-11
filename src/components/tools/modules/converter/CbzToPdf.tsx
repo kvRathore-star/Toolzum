@@ -333,8 +333,8 @@ export default function CbzToPdf() {
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Conversion Settings</h4>
 
           <div>
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Range</label>
-            <input aria-label="Page Range"
+            <label htmlFor="lbl-cbztopdf-page-range" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Page Range</label>
+            <input id="lbl-cbztopdf-page-range" aria-label="Page Range"
               type="text"
               value={pageRange}
               onChange={e => setPageRange(e.target.value)}

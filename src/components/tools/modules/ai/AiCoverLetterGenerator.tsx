@@ -65,8 +65,8 @@ export default function AiCoverLetterGenerator() {
             <p className="text-xs text-[var(--text-muted)] mb-4">Create professional, customized cover letters tailored for jobs.</p>
             
 <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Job Title</label>
-              <input aria-label="Target Job Title"
+              <label htmlFor="lbl-aicoverlettergenerator-target-job-title" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Job Title</label>
+              <input id="lbl-aicoverlettergenerator-target-job-title" aria-label="Target Job Title"
                 type="text"
                 value={jobTitle}
                 onChange={e => setJobTitle(e.target.value)}
@@ -76,8 +76,8 @@ export default function AiCoverLetterGenerator() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Company Name</label>
-              <input aria-label="Company Name"
+              <label htmlFor="lbl-aicoverlettergenerator-company-name" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Company Name</label>
+              <input id="lbl-aicoverlettergenerator-company-name" aria-label="Company Name"
                 type="text"
                 value={company}
                 onChange={e => setCompany(e.target.value)}
@@ -87,8 +87,8 @@ export default function AiCoverLetterGenerator() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Job Description / Requirements (Optional)</label>
-              <textarea aria-label="Job Description / Requirements (Optional)"
+              <label htmlFor="lbl-aicoverlettergenerator-job-description-requirements-optional" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Job Description / Requirements (Optional)</label>
+              <textarea id="lbl-aicoverlettergenerator-job-description-requirements-optional" aria-label="Job Description / Requirements (Optional)"
                 value={jobDesc}
                 onChange={e => setJobDesc(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="Paste key job responsibilities or requirements..."
@@ -97,8 +97,8 @@ export default function AiCoverLetterGenerator() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Skills / Experience</label>
-              <textarea aria-label="Your Skills / Experience"
+              <label htmlFor="lbl-aicoverlettergenerator-your-skills-experience" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Your Skills / Experience</label>
+              <textarea id="lbl-aicoverlettergenerator-your-skills-experience" aria-label="Your Skills / Experience"
                 value={resumeSummary}
                 onChange={e => setResumeSummary(e.target.value)}
                 placeholder="Paste your resume summary, key achievements, or skills..."

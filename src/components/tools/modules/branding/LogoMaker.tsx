@@ -213,8 +213,8 @@ export default function LogoMaker() {
             <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Typography</h3>
             
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Brand Name</label>
-              <input aria-label="Brand Name"
+              <label htmlFor="lbl-logomaker-brand-name" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Brand Name</label>
+              <input id="lbl-logomaker-brand-name" aria-label="Brand Name"
                 type="text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
@@ -223,8 +223,8 @@ export default function LogoMaker() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tagline</label>
-              <input aria-label="Tagline"
+              <label htmlFor="lbl-logomaker-tagline" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tagline</label>
+              <input id="lbl-logomaker-tagline" aria-label="Tagline"
                 type="text"
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
@@ -234,8 +234,8 @@ export default function LogoMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Font Family</label>
-                <select aria-label="Font Family"
+                <label htmlFor="lbl-logomaker-font-family" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Font Family</label>
+                <select id="lbl-logomaker-font-family" aria-label="Font Family"
                   value={fontFamily}
                   onChange={(e) => setFontFamily(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
@@ -248,8 +248,8 @@ export default function LogoMaker() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Layout Style</label>
-                <select aria-label="Layout Style"
+                <label htmlFor="lbl-logomaker-layout-style" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Layout Style</label>
+                <select id="lbl-logomaker-layout-style" aria-label="Layout Style"
                   value={layout}
                   onChange={(e) => setLayout(e.target.value as any)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs"
@@ -296,16 +296,16 @@ export default function LogoMaker() {
             
             <div className="grid grid-cols-3 gap-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient Start</label>
-                <input aria-label="Gradient Start" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <label htmlFor="lbl-logomaker-gradient-start" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient Start</label>
+                <input id="lbl-logomaker-gradient-start" aria-label="Gradient Start" type="color" value={color1} onChange={e => setColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient End</label>
-                <input aria-label="Gradient End" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <label htmlFor="lbl-logomaker-gradient-end" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Gradient End</label>
+                <input id="lbl-logomaker-gradient-end" aria-label="Gradient End" type="color" value={color2} onChange={e => setColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Canvas BG</label>
-                <select aria-label="Canvas BG"
+                <label htmlFor="lbl-logomaker-canvas-bg" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Canvas BG</label>
+                <select id="lbl-logomaker-canvas-bg" aria-label="Canvas BG"
                   value={bgColor}
                   onChange={(e) => setBgColor(e.target.value)}
                   className="w-full h-10 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 text-[10px] font-bold focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

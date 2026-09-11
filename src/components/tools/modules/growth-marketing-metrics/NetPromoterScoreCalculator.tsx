@@ -55,16 +55,16 @@ export default function NetPromoterScoreCalculator() {
         <div className="space-y-4">
           <div className="grid grid-cols-3 gap-2">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Promoters (9-10)</label>
-              <input aria-label="Promoters (9-10)" type="number" value={promoters} onChange={e => setPromoters(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+              <label htmlFor="lbl-netpromoterscorecalculator-promoters-9-10" className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">Promoters (9-10)</label>
+              <input id="lbl-netpromoterscorecalculator-promoters-9-10" aria-label="Promoters (9-10)" type="number" value={promoters} onChange={e => setPromoters(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Passives (7-8)</label>
-              <input aria-label="Passives (7-8)" type="number" value={passives} onChange={e => setPassives(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors" />
+              <label htmlFor="lbl-netpromoterscorecalculator-passives-7-8" className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Passives (7-8)</label>
+              <input id="lbl-netpromoterscorecalculator-passives-7-8" aria-label="Passives (7-8)" type="number" value={passives} onChange={e => setPassives(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Detractors (0-6)</label>
-              <input aria-label="Detractors (0-6)" type="number" value={detractors} onChange={e => setDetractors(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500 transition-colors" />
+              <label htmlFor="lbl-netpromoterscorecalculator-detractors-0-6" className="text-[10px] font-bold text-red-500 uppercase tracking-wider">Detractors (0-6)</label>
+              <input id="lbl-netpromoterscorecalculator-detractors-0-6" aria-label="Detractors (0-6)" type="number" value={detractors} onChange={e => setDetractors(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-red-500 transition-colors" />
             </div>
           </div>
 

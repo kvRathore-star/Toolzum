@@ -88,8 +88,8 @@ export default function BulkSubtitleTimeShifter() {
             </div>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Time Offset (ms)</label>
-            <input aria-label="Time Offset (ms)" type="number" value={offset} onChange={(e) => setOffset(Number(e.target.value))} step={100} className="w-full mt-1 p-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)]" />
+            <label htmlFor="lbl-bulksubtitletimeshifter-time-offset-ms" className="text-xs font-medium text-[var(--text-secondary)]">Time Offset (ms)</label>
+            <input id="lbl-bulksubtitletimeshifter-time-offset-ms" aria-label="Time Offset (ms)" type="number" value={offset} onChange={(e) => setOffset(Number(e.target.value))} step={100} className="w-full mt-1 p-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)]" />
             <p className="text-[10px] text-[var(--text-muted)] mt-1">Negative = earlier, Positive = later</p>
           </div>
           <div className="flex items-end">

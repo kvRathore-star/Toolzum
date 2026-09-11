@@ -168,10 +168,10 @@ export default function BulkAvifOptimizer() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">
+            <label htmlFor="lbl-bulkavifoptimizer-quality-customquality" className="text-xs font-medium text-[var(--text-secondary)]">
               Quality: {customQuality}%
             </label>
-            <input
+            <input id="lbl-bulkavifoptimizer-quality-customquality"
               type="range"
               min="10"
               max="100"
@@ -184,10 +184,10 @@ export default function BulkAvifOptimizer() {
             />
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">
+            <label htmlFor="lbl-bulkavifoptimizer-max-width-maxwidth-0-original-maxwidth-p" className="text-xs font-medium text-[var(--text-secondary)]">
               Max Width: {maxWidth === 0 ? 'Original' : `${maxWidth}px`}
             </label>
-            <input
+            <input id="lbl-bulkavifoptimizer-max-width-maxwidth-0-original-maxwidth-p"
               type="range"
               min="0"
               max="4000"

@@ -147,8 +147,8 @@ export default function BulkVideoSubtitleBurner() {
           <div className="flex items-center gap-2 mb-3"><Settings2 className="w-4 h-4 text-[var(--text-muted)]" /><span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Subtitle Style</span></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="text-xs font-medium text-[var(--text-secondary)]">Font size</label>
-              <select aria-label="Font size" value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
+              <label htmlFor="lbl-bulkvideosubtitleburner-font-size" className="text-xs font-medium text-[var(--text-secondary)]">Font size</label>
+              <select id="lbl-bulkvideosubtitleburner-font-size" aria-label="Font size" value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
                 <option value="12">12 — Small</option>
                 <option value="18">18 — Normal</option>
                 <option value="24">24 — Large</option>
@@ -156,8 +156,8 @@ export default function BulkVideoSubtitleBurner() {
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-[var(--text-secondary)]">Position</label>
-              <select aria-label="Position" value={position} onChange={e => setPosition(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
+              <label htmlFor="lbl-bulkvideosubtitleburner-position" className="text-xs font-medium text-[var(--text-secondary)]">Position</label>
+              <select id="lbl-bulkvideosubtitleburner-position" aria-label="Position" value={position} onChange={e => setPosition(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm">
                 <option value="bottom">Bottom (default)</option>
                 <option value="top">Top</option>
                 <option value="middle">Middle</option>

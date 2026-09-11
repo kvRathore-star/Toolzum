@@ -18,8 +18,8 @@ export default function BreastfeedingCalorieCalculator() {
   return (
     <CalculatorShell category="Health" title="Breastfeeding Calories" accent="fuchsia" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Baby age (months)</label><input aria-label="Baby age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Feedings / day</label><input aria-label="Feedings / day" className={inputCls} type="number" value={feedings} onChange={e => setFeedings(e.target.value)} /></div>
+        <div><label htmlFor="lbl-breastfeedingcaloriecalculator-baby-age-months" className={labelCls}>Baby age (months)</label><input id="lbl-breastfeedingcaloriecalculator-baby-age-months" aria-label="Baby age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-breastfeedingcaloriecalculator-feedings-day" className={labelCls}>Feedings / day</label><input id="lbl-breastfeedingcaloriecalculator-feedings-day" aria-label="Feedings / day" className={inputCls} type="number" value={feedings} onChange={e => setFeedings(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

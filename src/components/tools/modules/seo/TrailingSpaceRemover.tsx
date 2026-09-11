@@ -20,8 +20,8 @@ export default function TrailingSpaceRemover() {
 
   return (
     <CalculatorShell category="SEO" title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-      <textarea aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text with trailing spaces..."
+      <label htmlFor="lbl-trailingspaceremover-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+      <textarea id="lbl-trailingspaceremover-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text with trailing spaces..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
 
       {result && (

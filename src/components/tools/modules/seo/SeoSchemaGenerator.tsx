@@ -22,8 +22,8 @@ export default function SeoSchemaGenerator() {
     <CalculatorShell category="SEO" title="SEO Schema Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="schema.json">
       <div className="space-y-4">
         <div className="mb-3">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
-          <select aria-label="Schema Type" value={type} onChange={e => setType(e.target.value)}
+          <label htmlFor="lbl-seoschemagenerator-schema-type" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema Type</label>
+          <select id="lbl-seoschemagenerator-schema-type" aria-label="Schema Type" value={type} onChange={e => setType(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
             <option value="Article">Article</option>
             <option value="Product">Product</option>
@@ -34,8 +34,8 @@ export default function SeoSchemaGenerator() {
           </select>
         </div>
 
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Properties (JSON)</label>
-        <textarea aria-label="Properties (JSON)" value={data} onChange={e => setData(e.target.value)} rows={6} placeholder='{"headline": "Sample Article", "description": "Article description"}'
+        <label htmlFor="lbl-seoschemagenerator-properties-json" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Properties (JSON)</label>
+        <textarea id="lbl-seoschemagenerator-properties-json" aria-label="Properties (JSON)" value={data} onChange={e => setData(e.target.value)} rows={6} placeholder='{"headline": "Sample Article", "description": "Article description"}'
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
 
         {result && (

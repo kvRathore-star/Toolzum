@@ -127,8 +127,8 @@ export default function SpeechToText() {
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
         <div className="flex items-center gap-4 w-full sm:w-auto">
-          <label className="text-sm font-bold text-[var(--text-secondary)]">Language:</label>
-          <select aria-label="Language:"
+          <label htmlFor="lbl-speechtotext-language" className="text-sm font-bold text-[var(--text-secondary)]">Language:</label>
+          <select id="lbl-speechtotext-language" aria-label="Language:"
             value={language}
             onChange={(e) => {
               setLanguage(e.target.value);

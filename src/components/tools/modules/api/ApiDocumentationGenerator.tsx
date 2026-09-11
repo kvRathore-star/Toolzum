@@ -25,23 +25,23 @@ export default function ApiDocumentationGenerator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Documentation Generator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2">
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoint</label>
-            <input aria-label="Endpoint" type="text" value={endpoint} onChange={e => setEndpoint(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apidocumentationgenerator-endpoint" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoint</label>
+            <input id="lbl-apidocumentationgenerator-endpoint" aria-label="Endpoint" type="text" value={endpoint} onChange={e => setEndpoint(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Method</label>
-            <select aria-label="Method" value={method} onChange={e => setMethod(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono">
+            <label htmlFor="lbl-apidocumentationgenerator-method" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Method</label>
+            <select id="lbl-apidocumentationgenerator-method" aria-label="Method" value={method} onChange={e => setMethod(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono">
               <option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option>
             </select>
           </div>
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Description</label>
-          <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+          <label htmlFor="lbl-apidocumentationgenerator-description" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Description</label>
+          <input id="lbl-apidocumentationgenerator-description" aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Parameters (one per line: name (type, required) - description)</label>
-          <textarea aria-label="Parameters (one per line: name (type, required) - description)" value={params} onChange={e => setParams(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apidocumentationgenerator-parameters-one-per-line-name-type-requir" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Parameters (one per line: name (type, required) - description)</label>
+          <textarea id="lbl-apidocumentationgenerator-parameters-one-per-line-name-type-requir" aria-label="Parameters (one per line: name (type, required) - description)" value={params} onChange={e => setParams(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Docs</button>
         {result && (

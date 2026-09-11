@@ -487,18 +487,18 @@ export default function ChartMaker() {
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Data Entry</h4>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Title</label>
-            <input aria-label="Chart Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
+            <label htmlFor="lbl-chartmaker-chart-title" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Chart Title</label>
+            <input id="lbl-chartmaker-chart-title" aria-label="Chart Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="My Chart" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">X-Axis Label</label>
-              <input aria-label="X-Axis Label" type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Category" />
+              <label htmlFor="lbl-chartmaker-x-axis-label" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">X-Axis Label</label>
+              <input id="lbl-chartmaker-x-axis-label" aria-label="X-Axis Label" type="text" value={xLabel} onChange={e => setXLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Category" />
             </div>
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Y-Axis Label</label>
-              <input aria-label="Y-Axis Label" type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Value" />
+              <label htmlFor="lbl-chartmaker-y-axis-label" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Y-Axis Label</label>
+              <input id="lbl-chartmaker-y-axis-label" aria-label="Y-Axis Label" type="text" value={yLabel} onChange={e => setYLabel(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500" placeholder="Value" />
             </div>
           </div>
 
@@ -549,12 +549,12 @@ export default function ChartMaker() {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Width: {width}px</label>
-              <input type="range" min={400} max={2000} step={50} value={width} onChange={e => setWidth(Number(e.target.value))} className="w-full accent-blue-600" />
+              <label htmlFor="lbl-chartmaker-width-width-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Width: {width}px</label>
+              <input id="lbl-chartmaker-width-width-px" type="range" min={400} max={2000} step={50} value={width} onChange={e => setWidth(Number(e.target.value))} className="w-full accent-blue-600" />
             </div>
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Height: {height}px</label>
-              <input type="range" min={300} max={1200} step={50} value={height} onChange={e => setHeight(Number(e.target.value))} className="w-full accent-blue-600" />
+              <label htmlFor="lbl-chartmaker-height-height-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Height: {height}px</label>
+              <input id="lbl-chartmaker-height-height-px" type="range" min={300} max={1200} step={50} value={height} onChange={e => setHeight(Number(e.target.value))} className="w-full accent-blue-600" />
             </div>
           </div>
 

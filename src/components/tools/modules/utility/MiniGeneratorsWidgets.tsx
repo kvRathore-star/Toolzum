@@ -640,8 +640,8 @@ export function ULIDGenerator() {
       </div>
       <div className="space-y-4">
         <div className="space-y-3">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count: {count}</label>
-          <input type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))} aria-label="Count"
+          <label htmlFor="lbl-minigeneratorswidgets-count-count" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count: {count}</label>
+          <input id="lbl-minigeneratorswidgets-count-count" type="range" min={1} max={20} value={count} onChange={e => setCount(parseInt(e.target.value))} aria-label="Count"
             className="w-full accent-emerald-500" />
         </div>
 
@@ -709,8 +709,8 @@ export function NumeronymGenerator() {
         ))}
       </div>
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
-        <input aria-label="Input Text" type="text" value={input} onChange={e => setInput(e.target.value)}
+        <label htmlFor="lbl-minigeneratorswidgets-input-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input id="lbl-minigeneratorswidgets-input-text" aria-label="Input Text" type="text" value={input} onChange={e => setInput(e.target.value)}
           placeholder="e.g., internationalization"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
 
@@ -790,8 +790,8 @@ export function MACVendorLookup() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">MAC Address</label>
-          <input aria-label="MAC Address" type="text" value={macInput} onChange={e => setMacInput(e.target.value)}
+          <label htmlFor="lbl-minigeneratorswidgets-mac-address" className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">MAC Address</label>
+          <input id="lbl-minigeneratorswidgets-mac-address" aria-label="MAC Address" type="text" value={macInput} onChange={e => setMacInput(e.target.value)}
             placeholder="00:1A:11:22:33:44 or 001A11223344"
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-400 transition-colors" />
         </div>

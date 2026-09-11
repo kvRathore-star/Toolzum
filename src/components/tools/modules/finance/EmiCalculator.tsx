@@ -50,16 +50,16 @@ export default function EmiCalculator() {
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label className={labelCls}>Loan Amount ($)</label>
-          <input aria-label="Loan Amount ($)" type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} />
+          <label htmlFor="lbl-emicalculator-loan-amount" className={labelCls}>Loan Amount ($)</label>
+          <input id="lbl-emicalculator-loan-amount" aria-label="Loan Amount ($)" type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} />
         </div>
         <div>
-          <label className={labelCls}>Interest Rate (% p.a)</label>
-          <input aria-label="Interest Rate (% p.a)" type="number" value={rate} onChange={e => setRate(e.target.value)} className={inputCls} />
+          <label htmlFor="lbl-emicalculator-interest-rate-p-a" className={labelCls}>Interest Rate (% p.a)</label>
+          <input id="lbl-emicalculator-interest-rate-p-a" aria-label="Interest Rate (% p.a)" type="number" value={rate} onChange={e => setRate(e.target.value)} className={inputCls} />
         </div>
         <div>
-          <label className={labelCls}>Loan Tenure (Months)</label>
-          <input aria-label="Loan Tenure (Months)" type="number" value={tenure} onChange={e => setTenure(e.target.value)} className={inputCls} />
+          <label htmlFor="lbl-emicalculator-loan-tenure-months" className={labelCls}>Loan Tenure (Months)</label>
+          <input id="lbl-emicalculator-loan-tenure-months" aria-label="Loan Tenure (Months)" type="number" value={tenure} onChange={e => setTenure(e.target.value)} className={inputCls} />
         </div>
       </div>
     </CalculatorShell>

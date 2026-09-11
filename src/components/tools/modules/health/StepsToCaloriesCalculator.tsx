@@ -28,9 +28,9 @@ export default function StepsToCaloriesCalculator() {
   return (
     <CalculatorShell category="Health" title="Steps to Calories" accent="green" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Steps</label><input aria-label="Steps" className={inputCls} type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div>
-        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Height (cm)</label><input aria-label="Height (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-stepstocaloriescalculator-steps" className={labelCls}>Steps</label><input id="lbl-stepstocaloriescalculator-steps" aria-label="Steps" className={inputCls} type="number" value={steps} onChange={e => setSteps(e.target.value)} /></div>
+        <div><label htmlFor="lbl-stepstocaloriescalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-stepstocaloriescalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-stepstocaloriescalculator-height-cm" className={labelCls}>Height (cm)</label><input id="lbl-stepstocaloriescalculator-height-cm" aria-label="Height (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

@@ -74,8 +74,8 @@ export default function CpmCalculator() {
         <div className="space-y-5">
           {/* Platform Preset */}
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Platform Preset</label>
-            <select aria-label="Platform Preset" value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none cursor-pointer">
+            <label htmlFor="lbl-cpmcalculator-platform-preset" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Platform Preset</label>
+            <select id="lbl-cpmcalculator-platform-preset" aria-label="Platform Preset" value={platform} onChange={e => setPlatform(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 appearance-none cursor-pointer">
               <option value="custom">Custom (manual entry)</option>
               <option value="youtube">YouTube</option>
               <option value="twitch">Twitch</option>
@@ -93,41 +93,41 @@ export default function CpmCalculator() {
           {mode === 'cpm' ? (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Campaign Cost ($)</label>
-                <input aria-label="Total Ad Campaign Cost ($)" type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-total-ad-campaign-cost" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Campaign Cost ($)</label>
+                <input id="lbl-cpmcalculator-total-ad-campaign-cost" aria-label="Total Ad Campaign Cost ($)" type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 {presetCpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Impressions Delivered</label>
-                <input aria-label="Total Ad Impressions Delivered" type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-total-ad-impressions-delivered" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Ad Impressions Delivered</label>
+                <input id="lbl-cpmcalculator-total-ad-impressions-delivered" aria-label="Total Ad Impressions Delivered" type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
             </>
           ) : mode === 'rpm' ? (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Creator Revenue ($)</label>
-                <input aria-label="Total Creator Revenue ($)" type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-total-creator-revenue" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Creator Revenue ($)</label>
+                <input id="lbl-cpmcalculator-total-creator-revenue" aria-label="Total Creator Revenue ($)" type="number" value={revenue} onChange={e => setRevenue(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 {presetRpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
-                <input aria-label="Total Views / Impressions" type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-total-views-impressions" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
+                <input id="lbl-cpmcalculator-total-views-impressions" aria-label="Total Views / Impressions" type="number" value={impressions} onChange={e => setImpressions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
             </>
           ) : (
             <>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
-                <input aria-label="Total Views / Impressions" type="number" value={estViews} onChange={e => setEstViews(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-total-views-impressions-6" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Views / Impressions</label>
+                <input id="lbl-cpmcalculator-total-views-impressions-6" aria-label="Total Views / Impressions" type="number" value={estViews} onChange={e => setEstViews(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average CPM ($) <span className="font-normal text-[var(--text-muted)]">(cost per 1K)</span></label>
-                <input aria-label="Average CPM ($) (cost per 1K)" type="number" value={estCpm} onChange={e => setEstCpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-average-cpm" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average CPM ($) <span className="font-normal text-[var(--text-muted)]">(cost per 1K)</span></label>
+                <input id="lbl-cpmcalculator-average-cpm" aria-label="Average CPM ($) (cost per 1K)" type="number" value={estCpm} onChange={e => setEstCpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 {presetCpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} CPM: ${presetCpm.toFixed(2)}</p>}
               </div>
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average RPM ($) <span className="font-normal text-[var(--text-muted)]">(earnings per 1K)</span></label>
-                <input aria-label="Average RPM ($) (earnings per 1K)" type="number" value={estRpm} onChange={e => setEstRpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-cpmcalculator-average-rpm" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Average RPM ($) <span className="font-normal text-[var(--text-muted)]">(earnings per 1K)</span></label>
+                <input id="lbl-cpmcalculator-average-rpm" aria-label="Average RPM ($) (earnings per 1K)" type="number" value={estRpm} onChange={e => setEstRpm(Math.max(0, parseFloat(e.target.value) || 0))} step="0.1" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                 {presetRpm && <p className="text-[11px] text-[var(--text-muted)]">Avg. {platformLabel} RPM: ${presetRpm.toFixed(2)}</p>}
               </div>
             </>

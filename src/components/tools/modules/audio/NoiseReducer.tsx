@@ -213,8 +213,8 @@ export default function NoiseReducer() {
             {useNoiseProfile && (
               <div className="grid grid-cols-2 gap-3 pl-7">
                 <div>
-                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise Start (sec)</label>
-                  <input aria-label="Noise Start (sec)"
+                  <label htmlFor="lbl-noisereducer-noise-start-sec" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise Start (sec)</label>
+                  <input id="lbl-noisereducer-noise-start-sec" aria-label="Noise Start (sec)"
                     type="number"
                     min={0}
                     step={0.1}
@@ -226,8 +226,8 @@ export default function NoiseReducer() {
                   <span className="text-[10px] text-[var(--text-muted)] mt-1 block">{Math.floor(noiseStart / 60)}:{(noiseStart % 60).toFixed(1).padStart(4, '0')}</span>
                 </div>
                 <div>
-                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise End (sec)</label>
-                  <input aria-label="Noise End (sec)"
+                  <label htmlFor="lbl-noisereducer-noise-end-sec" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Noise End (sec)</label>
+                  <input id="lbl-noisereducer-noise-end-sec" aria-label="Noise End (sec)"
                     type="number"
                     min={0}
                     step={0.1}
@@ -242,8 +242,8 @@ export default function NoiseReducer() {
             )}
 
             <div>
-              <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
-              <select aria-label="Output Format"
+              <label htmlFor="lbl-noisereducer-output-format" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
+              <select id="lbl-noisereducer-output-format" aria-label="Output Format"
                 value={outputFormat}
                 onChange={e => setOutputFormat(e.target.value as OutputFormat)}
                 disabled={isProcessing}

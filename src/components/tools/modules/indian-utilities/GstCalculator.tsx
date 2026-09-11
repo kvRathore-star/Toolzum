@@ -30,14 +30,14 @@ export default function GstCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Base Amount (₹)</label>
-            <input aria-label="Base Amount (₹)" type="number" value={amount} onChange={e => setAmount(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <label htmlFor="lbl-gstcalculator-base-amount" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Base Amount (₹)</label>
+            <input id="lbl-gstcalculator-base-amount" aria-label="Base Amount (₹)" type="number" value={amount} onChange={e => setAmount(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">GST Rate (%)</label>
-              <select aria-label="GST Rate (%)" value={rate} onChange={e => setRate(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <label htmlFor="lbl-gstcalculator-gst-rate" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">GST Rate (%)</label>
+              <select id="lbl-gstcalculator-gst-rate" aria-label="GST Rate (%)" value={rate} onChange={e => setRate(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="5">5%</option>
                 <option value="12">12%</option>
                 <option value="18">18%</option>
@@ -46,8 +46,8 @@ export default function GstCalculator() {
             </div>
             
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Calculation Action</label>
-              <select aria-label="Calculation Action" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <label htmlFor="lbl-gstcalculator-calculation-action" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Calculation Action</label>
+              <select id="lbl-gstcalculator-calculation-action" aria-label="Calculation Action" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="add">Add GST (+)</option>
                 <option value="remove">Remove GST (-)</option>
               </select>

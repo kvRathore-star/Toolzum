@@ -49,11 +49,11 @@ export default function SavingsCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Initial deposit ($)</label><input aria-label="Initial deposit ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(e.target.value)} /></div>
-        <div><label className={labelCls}>Monthly contribution ($)</label><input aria-label="Monthly contribution ($)" className={inputCls} type="number" value={monthly} onChange={e => setMonthly(e.target.value)} /></div>
-        <div><label className={labelCls}>Annual rate (%)</label><input aria-label="Annual rate (%)" className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
-        <div><label className={labelCls}>Time (years)</label><input aria-label="Time (years)" className={inputCls} type="number" value={years} onChange={e => setYears(e.target.value)} /></div>
-        <div><label className={labelCls}>Compounds / year</label><select aria-label="Compounds / year" className={inputCls} value={compoundsPerYear} onChange={e => setCompoundsPerYear(e.target.value)}><option value="1">Annual</option><option value="2">Semi-annual</option><option value="4">Quarterly</option><option value="12">Monthly</option><option value="365">Daily</option></select></div>
+        <div><label htmlFor="lbl-savingscalculator-initial-deposit" className={labelCls}>Initial deposit ($)</label><input id="lbl-savingscalculator-initial-deposit" aria-label="Initial deposit ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(e.target.value)} /></div>
+        <div><label htmlFor="lbl-savingscalculator-monthly-contribution" className={labelCls}>Monthly contribution ($)</label><input id="lbl-savingscalculator-monthly-contribution" aria-label="Monthly contribution ($)" className={inputCls} type="number" value={monthly} onChange={e => setMonthly(e.target.value)} /></div>
+        <div><label htmlFor="lbl-savingscalculator-annual-rate" className={labelCls}>Annual rate (%)</label><input id="lbl-savingscalculator-annual-rate" aria-label="Annual rate (%)" className={inputCls} type="number" value={rate} onChange={e => setRate(e.target.value)} /></div>
+        <div><label htmlFor="lbl-savingscalculator-time-years" className={labelCls}>Time (years)</label><input id="lbl-savingscalculator-time-years" aria-label="Time (years)" className={inputCls} type="number" value={years} onChange={e => setYears(e.target.value)} /></div>
+        <div><label htmlFor="lbl-savingscalculator-compounds-year" className={labelCls}>Compounds / year</label><select id="lbl-savingscalculator-compounds-year" aria-label="Compounds / year" className={inputCls} value={compoundsPerYear} onChange={e => setCompoundsPerYear(e.target.value)}><option value="1">Annual</option><option value="2">Semi-annual</option><option value="4">Quarterly</option><option value="12">Monthly</option><option value="365">Daily</option></select></div>
       </div>
     </CalculatorShell>
   );

@@ -260,13 +260,13 @@ export default function RentalAgreementGenerator() {
       <Section title="Financial Terms" icon={IndianRupee}>
         <div className="grid grid-cols-2 gap-3">
           <div className="p-3 bg-amber-50/50 dark:bg-amber-900/10 rounded-xl border border-amber-200/50 dark:border-amber-800/30">
-            <label className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block mb-1">Monthly Rent (₹)</label>
-            <input aria-label="Monthly Rent (₹)" value={form.monthlyRent} onChange={e => update('monthlyRent', e.target.value)} placeholder="e.g. 25000"
+            <label htmlFor="lbl-rentalagreementgenerator-monthly-rent" className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block mb-1">Monthly Rent (₹)</label>
+            <input id="lbl-rentalagreementgenerator-monthly-rent" aria-label="Monthly Rent (₹)" value={form.monthlyRent} onChange={e => update('monthlyRent', e.target.value)} placeholder="e.g. 25000"
               className="w-full bg-transparent border-0 p-0 text-sm font-bold text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
           <div className="p-3 bg-amber-50/50 dark:bg-amber-900/10 rounded-xl border border-amber-200/50 dark:border-amber-800/30">
-            <label className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block mb-1">Security Deposit (₹)</label>
-            <input aria-label="Security Deposit (₹)" value={form.securityDeposit} onChange={e => update('securityDeposit', e.target.value)} placeholder="e.g. 50000"
+            <label htmlFor="lbl-rentalagreementgenerator-security-deposit" className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block mb-1">Security Deposit (₹)</label>
+            <input id="lbl-rentalagreementgenerator-security-deposit" aria-label="Security Deposit (₹)" value={form.securityDeposit} onChange={e => update('securityDeposit', e.target.value)} placeholder="e.g. 50000"
               className="w-full bg-transparent border-0 p-0 text-sm font-bold text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
           <Field label="Rent Due Day" value={form.rentDueDay} onChange={v => update('rentDueDay', v)} placeholder="e.g. 5" />

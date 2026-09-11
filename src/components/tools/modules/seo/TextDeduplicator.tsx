@@ -20,8 +20,8 @@ export default function TextDeduplicator() {
 
   return (
     <CalculatorShell category="SEO" title="Text Deduplicator" result={resultText} onCalculate={deduplicate} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
-      <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Lines</label>
-      <textarea aria-label="Text Lines" value={text} onChange={e => setText(e.target.value)} rows={8}
+      <label htmlFor="lbl-textdeduplicator-text-lines" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Lines</label>
+      <textarea id="lbl-textdeduplicator-text-lines" aria-label="Text Lines" value={text} onChange={e => setText(e.target.value)} rows={8}
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50 resize-y" />
 
       {result && (

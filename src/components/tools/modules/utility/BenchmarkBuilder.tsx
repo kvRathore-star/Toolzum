@@ -88,8 +88,8 @@ export default function BenchmarkBuilder() {
 
         <div className="flex items-center gap-4">
           <div className="flex-1">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Duration: {duration}s</label>
-            <input type="range" min={1} max={5} step={0.5} value={duration} onChange={e => setDuration(parseFloat(e.target.value))} aria-label="Duration" disabled={running} className="w-full" />
+            <label htmlFor="lbl-benchmarkbuilder-duration-duration-s" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Duration: {duration}s</label>
+            <input id="lbl-benchmarkbuilder-duration-duration-s" type="range" min={1} max={5} step={0.5} value={duration} onChange={e => setDuration(parseFloat(e.target.value))} aria-label="Duration" disabled={running} className="w-full" />
           </div>
           <button onClick={run} disabled={running} className={`bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-2 ${running ? 'opacity-70 cursor-not-allowed' : ''}`}>
             {running ? <><Loader2 className="w-4 h-4 animate-spin" /> Running...</> : <><Zap className="w-4 h-4" /> Run Benchmark</>}

@@ -66,12 +66,12 @@ export default function ConversionRateCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Conversions Count</label>
-            <input aria-label="Conversions Count" type="number" value={conversions} onChange={e => setConversions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-violet-500 transition-colors" />
+            <label htmlFor="lbl-conversionratecalculator-conversions-count" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Conversions Count</label>
+            <input id="lbl-conversionratecalculator-conversions-count" aria-label="Conversions Count" type="number" value={conversions} onChange={e => setConversions(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-violet-500 transition-colors" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Visitors / Traffic</label>
-            <input aria-label="Total Visitors / Traffic" type="number" value={visitors} onChange={e => setVisitors(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-violet-500 transition-colors" />
+            <label htmlFor="lbl-conversionratecalculator-total-visitors-traffic" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Total Visitors / Traffic</label>
+            <input id="lbl-conversionratecalculator-total-visitors-traffic" aria-label="Total Visitors / Traffic" type="number" value={visitors} onChange={e => setVisitors(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-violet-500 transition-colors" />
           </div>
           {visitors > 0 && (
             <div className="mt-2 space-y-1">

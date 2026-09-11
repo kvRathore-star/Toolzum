@@ -58,8 +58,8 @@ export default function MacAddressGenerator() {
           
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-[10px] text-[var(--text-muted)] font-bold">Quantity</label>
-              <select aria-label="Quantity" value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <label htmlFor="lbl-macaddressgenerator-quantity" className="text-[10px] text-[var(--text-muted)] font-bold">Quantity</label>
+              <select id="lbl-macaddressgenerator-quantity" aria-label="Quantity" value={qty} onChange={e => setQty(parseInt(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="5">5 Addresses</option>
                 <option value="10">10 Addresses</option>
                 <option value="20">20 Addresses</option>
@@ -67,8 +67,8 @@ export default function MacAddressGenerator() {
             </div>
             
             <div className="space-y-1">
-              <label className="text-[10px] text-[var(--text-muted)] font-bold">Delimiter</label>
-              <select aria-label="Delimiter" value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <label htmlFor="lbl-macaddressgenerator-delimiter" className="text-[10px] text-[var(--text-muted)] font-bold">Delimiter</label>
+              <select id="lbl-macaddressgenerator-delimiter" aria-label="Delimiter" value={delimiter} onChange={e => setDelimiter(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2.5 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value=":">Colon (:)</option>
                 <option value="-">Hyphen (-)</option>
                 <option value="">None</option>
@@ -77,13 +77,13 @@ export default function MacAddressGenerator() {
           </div>
 
           <div className="space-y-1">
-            <label className="text-[10px] text-[var(--text-muted)] font-bold">OUI Prefix (e.g. 00:50:56 for VMware)</label>
-            <input aria-label="OUI Prefix (e.g. 00:50:56 for VMware)" type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            <label htmlFor="lbl-macaddressgenerator-oui-prefix-e-g-00-50-56-for-vmware" className="text-[10px] text-[var(--text-muted)] font-bold">OUI Prefix (e.g. 00:50:56 for VMware)</label>
+            <input id="lbl-macaddressgenerator-oui-prefix-e-g-00-50-56-for-vmware" aria-label="OUI Prefix (e.g. 00:50:56 for VMware)" type="text" value={prefix} onChange={e => setPrefix(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
 
           <div className="flex items-center gap-1.5 pt-2">
-            <input aria-label="Uppercase Hex Letters" type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
-            <label className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
+            <input id="lbl-macaddressgenerator-uppercase-hex-letters" aria-label="Uppercase Hex Letters" type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)} className="rounded" />
+            <label htmlFor="lbl-macaddressgenerator-uppercase-hex-letters" className="text-[var(--text-muted)] cursor-pointer">Uppercase Hex Letters</label>
           </div>
 
           <button onClick={generateMacs} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">

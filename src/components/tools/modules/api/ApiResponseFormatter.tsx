@@ -19,8 +19,8 @@ export default function ApiResponseFormatter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Response Formatter</h2>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">JSON Input</label>
-          <textarea aria-label="JSON Input" value={input} onChange={e => { setInput(e.target.value); setResult(''); }} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apiresponseformatter-json-input" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">JSON Input</label>
+          <textarea id="lbl-apiresponseformatter-json-input" aria-label="JSON Input" value={input} onChange={e => { setInput(e.target.value); setResult(''); }} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div className="flex items-center gap-3">
           <label className="text-xs text-[var(--text-secondary)]">Indent:</label>

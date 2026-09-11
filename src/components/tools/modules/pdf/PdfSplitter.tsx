@@ -145,8 +145,8 @@ export default function PdfSplitter() {
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Split Settings</h4>
           
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Pages to Extract</label>
-            <input aria-label="Pages to Extract"
+            <label htmlFor="lbl-pdfsplitter-pages-to-extract" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Pages to Extract</label>
+            <input id="lbl-pdfsplitter-pages-to-extract" aria-label="Pages to Extract"
               type="text"
               placeholder="e.g. 1, 3, 5-10"
               value={rangeInput}

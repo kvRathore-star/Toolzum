@@ -78,8 +78,8 @@ export function PasswordEntropyCalculator() {
       }
     >
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
-        <input aria-label="Password" type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
+        <label htmlFor="lbl-passwordtools-password" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
+        <input id="lbl-passwordtools-password" aria-label="Password" type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/50" />
       </div>
     </CalculatorShell>
@@ -163,19 +163,19 @@ export function TwoFactorAuthGenerator() {
           ))}
         </div>
 
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Secret Key (Base32)</label>
-        <input aria-label="Secret Key (Base32)" type="text" value={secret} onChange={e => setSecret(e.target.value)} placeholder="Leave blank to generate"
+        <label htmlFor="lbl-passwordtools-secret-key-base32" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Secret Key (Base32)</label>
+        <input id="lbl-passwordtools-secret-key-base32" aria-label="Secret Key (Base32)" type="text" value={secret} onChange={e => setSecret(e.target.value)} placeholder="Leave blank to generate"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Issuer</label>
-            <input aria-label="Issuer" type="text" value={issuer} onChange={e => setIssuer(e.target.value)} placeholder="e.g. Toolzum"
+            <label htmlFor="lbl-passwordtools-issuer" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Issuer</label>
+            <input id="lbl-passwordtools-issuer" aria-label="Issuer" type="text" value={issuer} onChange={e => setIssuer(e.target.value)} placeholder="e.g. Toolzum"
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Account</label>
-            <input aria-label="Account" type="text" value={account} onChange={e => setAccount(e.target.value)} placeholder="e.g. user@example.com"
+            <label htmlFor="lbl-passwordtools-account" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Account</label>
+            <input id="lbl-passwordtools-account" aria-label="Account" type="text" value={account} onChange={e => setAccount(e.target.value)} placeholder="e.g. user@example.com"
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
         </div>
@@ -293,14 +293,14 @@ export function BruteForceTimeEstimator() {
       }
     >
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
-        <input aria-label="Password" type="text" value={pwd} onChange={e => { setPwd(e.target.value); setEst(''); setSeverity(''); }} placeholder="Enter password..."
+        <label htmlFor="lbl-passwordtools-password-5" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
+        <input id="lbl-passwordtools-password-5" aria-label="Password" type="text" value={pwd} onChange={e => { setPwd(e.target.value); setEst(''); setSeverity(''); }} placeholder="Enter password..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Attack Rate</label>
-            <select aria-label="Attack Rate" value={rate} onChange={e => { setRate(e.target.value); calc(); }}
+            <label htmlFor="lbl-passwordtools-attack-rate" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Attack Rate</label>
+            <select id="lbl-passwordtools-attack-rate" aria-label="Attack Rate" value={rate} onChange={e => { setRate(e.target.value); calc(); }}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50">
               <option value="1000000">1M/s (CPU)</option>
               <option value="1000000000">1B/s (GPU)</option>

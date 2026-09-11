@@ -62,8 +62,8 @@ ${audioText}`;
             <p className="text-xs text-[var(--text-muted)] mb-4">Clean up and format raw audio transcriptions into structured documents.</p>
             
 <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Raw Transcript Text</label>
-              <textarea aria-label="Raw Transcript Text"
+              <label htmlFor="lbl-audiototexttranscription-raw-transcript-text" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Raw Transcript Text</label>
+              <textarea id="lbl-audiototexttranscription-raw-transcript-text" aria-label="Raw Transcript Text"
                 value={audioText}
                 onChange={e => setAudioText(e.target.value)}
                 placeholder="Paste your audio transcript text here..."
@@ -72,8 +72,8 @@ ${audioText}`;
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Clean Up Style</label>
-              <select aria-label="Clean Up Style"
+              <label htmlFor="lbl-audiototexttranscription-clean-up-style" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Clean Up Style</label>
+              <select id="lbl-audiototexttranscription-clean-up-style" aria-label="Clean Up Style"
                 value={format}
                 onChange={e => setFormat(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

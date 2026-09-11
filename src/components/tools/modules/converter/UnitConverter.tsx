@@ -96,17 +96,17 @@ export function UnitConverter() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
-            <select aria-label="From" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <label htmlFor="lbl-unitconverter-from" className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select id="lbl-unitconverter-from" aria-label="From" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">To</label>
-            <select aria-label="To" value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <label htmlFor="lbl-unitconverter-to" className="text-xs font-medium text-[var(--text-secondary)]">To</label>
+            <select id="lbl-unitconverter-to" aria-label="To" value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
         </div>
         <div>
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
-          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
+          <label htmlFor="lbl-unitconverter-value" className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
+          <input id="lbl-unitconverter-value" aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
         </div>
         <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
           <p className="text-xs text-[var(--text-secondary)]">Result</p>

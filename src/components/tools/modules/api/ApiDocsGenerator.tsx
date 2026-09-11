@@ -45,8 +45,8 @@ export default function ApiDocsGenerator() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">OpenAPI Spec (JSON)</label>
-          <textarea aria-label="OpenAPI Spec (JSON)" value={spec} onChange={e => { setSpec(e.target.value); setResult(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apidocsgenerator-openapi-spec-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">OpenAPI Spec (JSON)</label>
+          <textarea id="lbl-apidocsgenerator-openapi-spec-json" aria-label="OpenAPI Spec (JSON)" value={spec} onChange={e => { setSpec(e.target.value); setResult(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Docs</button>
         {result && (

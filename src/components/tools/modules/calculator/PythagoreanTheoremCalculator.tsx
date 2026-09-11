@@ -28,8 +28,8 @@ export default function PythagoreanTheoremCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Pythagorean Theorem" result="" auto presets={presets} accent="teal" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side a</label><input aria-label="Side a" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side b</label><input aria-label="Side b" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-pythagoreantheoremcalculator-side-a" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side a</label><input id="lbl-pythagoreantheoremcalculator-side-a" aria-label="Side a" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-pythagoreantheoremcalculator-side-b" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Side b</label><input id="lbl-pythagoreantheoremcalculator-side-b" aria-label="Side b" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

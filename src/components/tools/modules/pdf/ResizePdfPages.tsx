@@ -188,8 +188,8 @@ export default function ResizePdfPages() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Width ({unit})</label>
-                  <input
+                  <label htmlFor="lbl-resizepdfpages-width-unit" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Width ({unit})</label>
+                  <input id="lbl-resizepdfpages-width-unit"
                     type="number"
                     aria-label={`Width (${unit})`}
                     min={1}
@@ -200,8 +200,8 @@ export default function ResizePdfPages() {
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Height ({unit})</label>
-                  <input
+                  <label htmlFor="lbl-resizepdfpages-height-unit" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Height ({unit})</label>
+                  <input id="lbl-resizepdfpages-height-unit"
                     type="number"
                     aria-label={`Height (${unit})`}
                     min={1}

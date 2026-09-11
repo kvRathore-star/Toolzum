@@ -62,10 +62,10 @@ export default function CompoundInterestCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div><label className={labelCls}>Principal ($)</label><input aria-label="Principal ($)" type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
-        <div><label className={labelCls}>Annual Rate (%)</label><input aria-label="Annual Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className={labelCls}>Compounds/Yr</label><input aria-label="Compounds/Yr" type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
-        <div><label className={labelCls}>Years</label><input aria-label="Years" type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-compoundinterestcalculator-principal" className={labelCls}>Principal ($)</label><input id="lbl-compoundinterestcalculator-principal" aria-label="Principal ($)" type="number" value={principal} onChange={e => setPrincipal(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-compoundinterestcalculator-annual-rate" className={labelCls}>Annual Rate (%)</label><input id="lbl-compoundinterestcalculator-annual-rate" aria-label="Annual Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label htmlFor="lbl-compoundinterestcalculator-compounds-yr" className={labelCls}>Compounds/Yr</label><input id="lbl-compoundinterestcalculator-compounds-yr" aria-label="Compounds/Yr" type="number" value={n} onChange={e => setN(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-compoundinterestcalculator-years" className={labelCls}>Years</label><input id="lbl-compoundinterestcalculator-years" aria-label="Years" type="number" value={t} onChange={e => setT(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

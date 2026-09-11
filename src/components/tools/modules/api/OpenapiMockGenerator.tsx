@@ -21,8 +21,8 @@ export default function OpenapiMockGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OpenAPI Mock Generator</h2>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">OpenAPI Spec (YAML fragment)</label>
-          <textarea aria-label="OpenAPI Spec (YAML fragment)" value={spec} onChange={e => setSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-openapimockgenerator-openapi-spec-yaml-fragment" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">OpenAPI Spec (YAML fragment)</label>
+          <textarea id="lbl-openapimockgenerator-openapi-spec-yaml-fragment" aria-label="OpenAPI Spec (YAML fragment)" value={spec} onChange={e => setSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Mock</button>
         {result && (

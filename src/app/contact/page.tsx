@@ -144,8 +144,8 @@ export default function ContactPage() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Full Name *</label>
-                    <input 
+                    <label htmlFor="lbl-page-full-name" className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Full Name *</label>
+                    <input id="lbl-page-full-name" 
                       type="text" 
                       required
                       value={formData.name}
@@ -155,8 +155,8 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Email Address *</label>
-                    <input 
+                    <label htmlFor="lbl-page-email-address" className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Email Address *</label>
+                    <input id="lbl-page-email-address" 
                       type="email" 
                       required
                       value={formData.email}
@@ -168,8 +168,8 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Inquiry Category</label>
-                  <select
+                  <label htmlFor="lbl-page-inquiry-category" className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Inquiry Category</label>
+                  <select id="lbl-page-inquiry-category"
                     aria-label="Inquiry category"
                     value={formData.subject}
                     onChange={(e) => setFormData({...formData, subject: e.target.value})}
@@ -184,8 +184,8 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Message *</label>
-                  <textarea 
+                  <label htmlFor="lbl-page-message" className="block text-xs font-mono uppercase text-[var(--text-muted)] tracking-wider mb-2">Message *</label>
+                  <textarea id="lbl-page-message" 
                     required
                     rows={5}
                     value={formData.message}

@@ -28,8 +28,8 @@ export default function ExponentCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Exponent Calculator" result="" auto presets={presets} accent="pink" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Base</label><input aria-label="Base" type="number" value={base} onChange={e => setBase(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Exponent</label><input aria-label="Exponent" type="number" value={exp} onChange={e => setExp(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-exponentcalculator-base" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Base</label><input id="lbl-exponentcalculator-base" aria-label="Base" type="number" value={base} onChange={e => setBase(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-exponentcalculator-exponent" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Exponent</label><input id="lbl-exponentcalculator-exponent" aria-label="Exponent" type="number" value={exp} onChange={e => setExp(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

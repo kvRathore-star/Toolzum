@@ -146,8 +146,8 @@ export default function PdfMetadataEditor() {
           
           <div className="grid grid-cols-1 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Title</label>
-              <input aria-label="Title"
+              <label htmlFor="lbl-pdfmetadataeditor-title" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Title</label>
+              <input id="lbl-pdfmetadataeditor-title" aria-label="Title"
                 type="text"
                 value={metadata.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
@@ -156,8 +156,8 @@ export default function PdfMetadataEditor() {
             </div>
             
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Author</label>
-              <input aria-label="Author"
+              <label htmlFor="lbl-pdfmetadataeditor-author" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Author</label>
+              <input id="lbl-pdfmetadataeditor-author" aria-label="Author"
                 type="text"
                 value={metadata.author}
                 onChange={(e) => handleInputChange('author', e.target.value)}
@@ -166,8 +166,8 @@ export default function PdfMetadataEditor() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Subject</label>
-              <input aria-label="Subject"
+              <label htmlFor="lbl-pdfmetadataeditor-subject" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Subject</label>
+              <input id="lbl-pdfmetadataeditor-subject" aria-label="Subject"
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => handleInputChange('subject', e.target.value)}
@@ -176,8 +176,8 @@ export default function PdfMetadataEditor() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Keywords</label>
-              <input aria-label="Keywords"
+              <label htmlFor="lbl-pdfmetadataeditor-keywords" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Keywords</label>
+              <input id="lbl-pdfmetadataeditor-keywords" aria-label="Keywords"
                 type="text"
                 value={metadata.keywords}
                 onChange={(e) => handleInputChange('keywords', e.target.value)}
@@ -188,8 +188,8 @@ export default function PdfMetadataEditor() {
 
             <div className="grid grid-cols-2 gap-4">
                <div className="space-y-1">
-                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Creator</label>
-                 <input aria-label="Creator"
+                 <label htmlFor="lbl-pdfmetadataeditor-creator" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Creator</label>
+                 <input id="lbl-pdfmetadataeditor-creator" aria-label="Creator"
                    type="text"
                    value={metadata.creator}
                    onChange={(e) => handleInputChange('creator', e.target.value)}
@@ -197,8 +197,8 @@ export default function PdfMetadataEditor() {
                  />
                </div>
                <div className="space-y-1">
-                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Producer</label>
-                 <input aria-label="Producer"
+                 <label htmlFor="lbl-pdfmetadataeditor-producer" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Producer</label>
+                 <input id="lbl-pdfmetadataeditor-producer" aria-label="Producer"
                    type="text"
                    value={metadata.producer}
                    onChange={(e) => handleInputChange('producer', e.target.value)}

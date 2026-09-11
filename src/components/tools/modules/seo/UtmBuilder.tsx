@@ -47,8 +47,8 @@ export default function UtmBuilder() {
   return (
     <CalculatorShell category="SEO" title="UTM Builder" result={resultText} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
-        <input aria-label="Base URL" type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
+        <label htmlFor="lbl-utmbuilder-base-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
+        <input id="lbl-utmbuilder-base-url" aria-label="Base URL" type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

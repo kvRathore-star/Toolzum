@@ -113,14 +113,14 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       {batchMode ? (
         <div className="space-y-3">
           <div className="space-y-1">
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Values (one per line)</label>
-            <textarea aria-label="Values (one per line)" value={batchValues} onChange={e => setBatchValues(e.target.value)} rows={4}
+            <label htmlFor="lbl-converterseverydaywidgets-values-one-per-line" className="text-xs font-medium text-[var(--text-secondary)]">Values (one per line)</label>
+            <textarea id="lbl-converterseverydaywidgets-values-one-per-line" aria-label="Values (one per line)" value={batchValues} onChange={e => setBatchValues(e.target.value)} rows={4}
               placeholder="100&#10;250&#10;500"
               className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
-            <select aria-label="From" value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
+            <label htmlFor="lbl-converterseverydaywidgets-from" className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select id="lbl-converterseverydaywidgets-from" aria-label="From" value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
               className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
             </select>
@@ -129,13 +129,13 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       ) : (
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
-            <input aria-label="Value" type="number" value={val} onChange={e => setVal(e.target.value)}
+            <label htmlFor="lbl-converterseverydaywidgets-value" className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
+            <input id="lbl-converterseverydaywidgets-value" aria-label="Value" type="number" value={val} onChange={e => setVal(e.target.value)}
               className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-medium text-[var(--text-secondary)]">From</label>
-            <select aria-label="From" value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
+            <label htmlFor="lbl-converterseverydaywidgets-from-4" className="text-xs font-medium text-[var(--text-secondary)]">From</label>
+            <select id="lbl-converterseverydaywidgets-from-4" aria-label="From" value={fromUnit} onChange={e => setFromUnit(parseInt(e.target.value))}
               className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]">
               {units.map((u, i) => <option key={i} value={i}>{u.label}</option>)}
             </select>
@@ -278,8 +278,8 @@ export function LargeTextViewer() {
       <p className="text-sm text-[var(--text-muted)]">Size: {(fileSize / 1024).toFixed(1)} KB</p>
       <div className="flex gap-3">
         <div className="flex-1 space-y-1">
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Search</label>
-          <input aria-label="Search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
+          <label htmlFor="lbl-converterseverydaywidgets-search" className="text-xs font-medium text-[var(--text-secondary)]">Search</label>
+          <input id="lbl-converterseverydaywidgets-search" aria-label="Search" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search..."
             className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <button onClick={doSearch} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-5 py-2.5 rounded-xl self-end">Find</button>
@@ -309,19 +309,19 @@ export function AvroSchemaGenerator() {
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro Schema Generator</h5>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Namespace</label>
-          <input aria-label="Namespace" type="text" value={namespace} onChange={e => setNamespace(e.target.value)} placeholder="Namespace"
+          <label htmlFor="lbl-converterseverydaywidgets-namespace" className="text-xs font-medium text-[var(--text-secondary)]">Namespace</label>
+          <input id="lbl-converterseverydaywidgets-namespace" aria-label="Namespace" type="text" value={namespace} onChange={e => setNamespace(e.target.value)} placeholder="Namespace"
             className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
         <div className="space-y-1">
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Name</label>
-          <input aria-label="Name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"
+          <label htmlFor="lbl-converterseverydaywidgets-name" className="text-xs font-medium text-[var(--text-secondary)]">Name</label>
+          <input id="lbl-converterseverydaywidgets-name" aria-label="Name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Name"
             className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         </div>
       </div>
       <div className="space-y-1">
-        <label className="text-xs font-medium text-[var(--text-secondary)]">Fields JSON</label>
-        <textarea aria-label="Fields JSON" rows={4} value={fields} onChange={e => setFields(e.target.value)}
+        <label htmlFor="lbl-converterseverydaywidgets-fields-json" className="text-xs font-medium text-[var(--text-secondary)]">Fields JSON</label>
+        <textarea id="lbl-converterseverydaywidgets-fields-json" aria-label="Fields JSON" rows={4} value={fields} onChange={e => setFields(e.target.value)}
           className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
       </div>
       <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
@@ -355,8 +355,8 @@ export function AvroToJsonSample() {
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Avro to JSON Sample</h5>
       <div className="space-y-1">
-        <label className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
-        <textarea aria-label="Avro schema" rows={4} value={schema} onChange={e => setSchema(e.target.value)}
+        <label htmlFor="lbl-converterseverydaywidgets-avro-schema" className="text-xs font-medium text-[var(--text-secondary)]">Avro schema</label>
+        <textarea id="lbl-converterseverydaywidgets-avro-schema" aria-label="Avro schema" rows={4} value={schema} onChange={e => setSchema(e.target.value)}
           className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
       </div>
       <button onClick={generateSample} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
@@ -399,16 +399,16 @@ export function IcalEventGenerator() {
     <div className="md:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">iCal Event Generator</h5>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input aria-label="Summary" type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start</label><input aria-label="Start" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Start time</label><input aria-label="Start time" type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Location</label><input aria-label="Location" type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-summary" className="text-xs font-medium text-[var(--text-secondary)]">Summary</label><input id="lbl-converterseverydaywidgets-summary" aria-label="Summary" type="text" value={summary} onChange={e => setSummary(e.target.value)} placeholder="Summary" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-start" className="text-xs font-medium text-[var(--text-secondary)]">Start</label><input id="lbl-converterseverydaywidgets-start" aria-label="Start" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-start-time" className="text-xs font-medium text-[var(--text-secondary)]">Start time</label><input id="lbl-converterseverydaywidgets-start-time" aria-label="Start time" type="time" value={startTime} onChange={e => setStartTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-location" className="text-xs font-medium text-[var(--text-secondary)]">Location</label><input id="lbl-converterseverydaywidgets-location" aria-label="Location" type="text" value={location} onChange={e => setLocation(e.target.value)} placeholder="Location" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End date</label><input aria-label="End date" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
-        <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">End time</label><input aria-label="End time" type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-end-date" className="text-xs font-medium text-[var(--text-secondary)]">End date</label><input id="lbl-converterseverydaywidgets-end-date" aria-label="End date" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
+        <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-end-time" className="text-xs font-medium text-[var(--text-secondary)]">End time</label><input id="lbl-converterseverydaywidgets-end-time" aria-label="End time" type="time" value={endTime} onChange={e => setEndTime(e.target.value)} className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" /></div>
       </div>
-      <div className="space-y-1"><label className="text-xs font-medium text-[var(--text-secondary)]">Description</label><textarea aria-label="Description" rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" /></div>
+      <div className="space-y-1"><label htmlFor="lbl-converterseverydaywidgets-description" className="text-xs font-medium text-[var(--text-secondary)]">Description</label><textarea id="lbl-converterseverydaywidgets-description" aria-label="Description" rows={2} value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description" className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" /></div>
       <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate .ics</button>
       {ical && <div className="relative"><pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{ical}</pre><div className="mt-1"><CopyBtn text={ical} label=".ics" /></div></div>}
     </div>

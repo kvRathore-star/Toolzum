@@ -97,10 +97,10 @@ export default function BulkUrlShortener() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
         {/* Input */}
         <div className="space-y-3">
-          <label className="text-sm font-medium text-[var(--text-primary)]">
+          <label htmlFor="lbl-bulkurlshortener-paste-urls-to-shorten" className="text-sm font-medium text-[var(--text-primary)]">
             Paste URLs to shorten <span className="text-[var(--text-muted)]">(one per line)</span>
           </label>
-          <textarea aria-label="Paste URLs to shorten (one per line)"
+          <textarea id="lbl-bulkurlshortener-paste-urls-to-shorten" aria-label="Paste URLs to shorten (one per line)"
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="https://example.com/very/long/url/1&#10;https://example.com/very/long/url/2&#10;https://example.com/very/long/url/3"

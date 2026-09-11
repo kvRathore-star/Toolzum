@@ -197,8 +197,8 @@ export default function SocialMediaPostMaker() {
             <h3 className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5"><Type className="w-3.5 h-3.5" /> Text Content</h3>
             
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Overlay</label>
-              <textarea aria-label="Text Overlay"
+              <label htmlFor="lbl-socialmediapostmaker-text-overlay" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Overlay</label>
+              <textarea id="lbl-socialmediapostmaker-text-overlay" aria-label="Text Overlay"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs h-20 resize-none"
@@ -207,12 +207,12 @@ export default function SocialMediaPostMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
-                <input aria-label="Font Size" type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-socialmediapostmaker-font-size" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
+                <input id="lbl-socialmediapostmaker-font-size" aria-label="Font Size" type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
-                <select aria-label="Font Family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
+                <label htmlFor="lbl-socialmediapostmaker-font-family" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
+                <select id="lbl-socialmediapostmaker-font-family" aria-label="Font Family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
                   <option value="sans-serif">Sans-Serif</option>
                   <option value="serif">Serif</option>
                   <option value="Impact">Impact (Meme Style)</option>
@@ -223,12 +223,12 @@ export default function SocialMediaPostMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Color</label>
-                <input aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <label htmlFor="lbl-socialmediapostmaker-text-color" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Text Color</label>
+                <input id="lbl-socialmediapostmaker-text-color" aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Position Y (%)</label>
-                <input aria-label="Position Y (%)" type="range" min="10" max="90" value={textY} onChange={e => setTextY(parseInt(e.target.value))} className="w-full accent-indigo-650 mt-2" />
+                <label htmlFor="lbl-socialmediapostmaker-position-y" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Position Y (%)</label>
+                <input id="lbl-socialmediapostmaker-position-y" aria-label="Position Y (%)" type="range" min="10" max="90" value={textY} onChange={e => setTextY(parseInt(e.target.value))} className="w-full accent-indigo-650 mt-2" />
               </div>
             </div>
           </div>
@@ -239,18 +239,18 @@ export default function SocialMediaPostMaker() {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad Start</label>
-                <input aria-label="Grad Start" type="color" value={bgColor1} onChange={e => setBgColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <label htmlFor="lbl-socialmediapostmaker-grad-start" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad Start</label>
+                <input id="lbl-socialmediapostmaker-grad-start" aria-label="Grad Start" type="color" value={bgColor1} onChange={e => setBgColor1(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad End</label>
-                <input aria-label="Grad End" type="color" value={bgColor2} onChange={e => setBgColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
+                <label htmlFor="lbl-socialmediapostmaker-grad-end" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Grad End</label>
+                <input id="lbl-socialmediapostmaker-grad-end" aria-label="Grad End" type="color" value={bgColor2} onChange={e => setBgColor2(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer" />
               </div>
             </div>
 
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Background Image</label>
-              <input aria-label="Upload Background Image" 
+              <label htmlFor="lbl-socialmediapostmaker-upload-background-image" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Background Image</label>
+              <input id="lbl-socialmediapostmaker-upload-background-image" aria-label="Upload Background Image" 
                 type="file" 
                 accept="image/*" 
                 onChange={handleImageUpload} 

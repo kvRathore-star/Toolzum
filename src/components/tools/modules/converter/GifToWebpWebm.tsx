@@ -206,10 +206,10 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                <label htmlFor="lbl-giftowebpwebm-webp-quality-quality" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   WebP Quality: {quality}
                 </label>
-                <input
+                <input id="lbl-giftowebpwebm-webp-quality-quality"
                   type="range"
                   min="0"
                   max="100"
@@ -247,10 +247,10 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                <label htmlFor="lbl-giftowebpwebm-loop-count" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   Loop Count <span className="text-[var(--text-muted)]">(0 = infinite)</span>
                 </label>
-                <input aria-label="Loop Count (0 = infinite)"
+                <input id="lbl-giftowebpwebm-loop-count" aria-label="Loop Count (0 = infinite)"
                   type="number"
                   min="0"
                   max="1000"

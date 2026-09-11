@@ -52,9 +52,9 @@ export default function DebtPayoffCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Balance ($)</label><input aria-label="Current Balance ($)" type="number" value={balance} onChange={e => setBalance(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Interest Rate (%)</label><input aria-label="Annual Interest Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Payment ($)</label><input aria-label="Monthly Payment ($)" type="number" value={payment} onChange={e => setPayment(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-debtpayoffcalculator-current-balance" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Balance ($)</label><input id="lbl-debtpayoffcalculator-current-balance" aria-label="Current Balance ($)" type="number" value={balance} onChange={e => setBalance(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-debtpayoffcalculator-annual-interest-rate" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Annual Interest Rate (%)</label><input id="lbl-debtpayoffcalculator-annual-interest-rate" aria-label="Annual Interest Rate (%)" type="number" value={rate} onChange={e => setRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label htmlFor="lbl-debtpayoffcalculator-monthly-payment" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Payment ($)</label><input id="lbl-debtpayoffcalculator-monthly-payment" aria-label="Monthly Payment ($)" type="number" value={payment} onChange={e => setPayment(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

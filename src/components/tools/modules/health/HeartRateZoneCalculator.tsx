@@ -42,8 +42,8 @@ export default function HeartRateZoneCalculator() {
       downloadFilename="heart-rate-zones.csv"
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Age</label><input aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Resting HR (bpm)</label><input aria-label="Resting HR (bpm)" className={inputCls} type="number" value={restHr} onChange={e => setRestHr(e.target.value)} /></div>
+        <div><label htmlFor="lbl-heartratezonecalculator-age" className={labelCls}>Age</label><input id="lbl-heartratezonecalculator-age" aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-heartratezonecalculator-resting-hr-bpm" className={labelCls}>Resting HR (bpm)</label><input id="lbl-heartratezonecalculator-resting-hr-bpm" aria-label="Resting HR (bpm)" className={inputCls} type="number" value={restHr} onChange={e => setRestHr(e.target.value)} /></div>
       </div>
       <div className="flex gap-3 mt-3">
         <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setAge('25'); setRestHr('60'); }}>Athlete 25</button>

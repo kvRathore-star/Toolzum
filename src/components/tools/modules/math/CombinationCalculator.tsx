@@ -101,14 +101,14 @@ export default function CombinationCalculator() {
       <div className="space-y-4">
         <div className="flex gap-2 items-end">
           <div className="flex-1">
-            <label className={labelClass}>n (total items)</label>
-            <input aria-label="n (total items)" type="number" min="0" value={n} onChange={e => setN(e.target.value)}
+            <label htmlFor="lbl-combinationcalculator-n-total-items" className={labelClass}>n (total items)</label>
+            <input id="lbl-combinationcalculator-n-total-items" aria-label="n (total items)" type="number" min="0" value={n} onChange={e => setN(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <button onClick={swap} className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors text-sm" title="Swap n and r">⇄</button>
           <div className="flex-1">
-            <label className={labelClass}>r (choose)</label>
-            <input aria-label="r (choose)" type="number" min="0" value={r} onChange={e => setR(e.target.value)}
+            <label htmlFor="lbl-combinationcalculator-r-choose" className={labelClass}>r (choose)</label>
+            <input id="lbl-combinationcalculator-r-choose" aria-label="r (choose)" type="number" min="0" value={r} onChange={e => setR(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
         </div>

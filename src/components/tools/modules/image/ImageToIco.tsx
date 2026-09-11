@@ -270,8 +270,8 @@ export default function ImageToIco() {
 
           {!squareCrop && (
             <div>
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Background Color</label>
-              <input aria-label="Background Color"
+              <label htmlFor="lbl-imagetoico-background-color" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider mb-2 block">Background Color</label>
+              <input id="lbl-imagetoico-background-color" aria-label="Background Color"
                 type="color"
                 value={bgColor === '#ffffff00' ? '#ffffff' : bgColor}
                 onChange={(e) => setBgColor(e.target.value)}

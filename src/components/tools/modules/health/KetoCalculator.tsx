@@ -33,11 +33,11 @@ export default function KetoCalculator() {
   return (
     <CalculatorShell category="Health" title="Keto Calculator" accent="amber" result={result} auto presets={presets}>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Height (cm)</label><input aria-label="Height (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Age</label><input aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Gender</label><select aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label className={labelCls}>Activity</label><select aria-label="Activity" className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Very active</option></select></div>
+        <div><label htmlFor="lbl-ketocalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-ketocalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-ketocalculator-height-cm" className={labelCls}>Height (cm)</label><input id="lbl-ketocalculator-height-cm" aria-label="Height (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-ketocalculator-age" className={labelCls}>Age</label><input id="lbl-ketocalculator-age" aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-ketocalculator-gender" className={labelCls}>Gender</label><select id="lbl-ketocalculator-gender" aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label htmlFor="lbl-ketocalculator-activity" className={labelCls}>Activity</label><select id="lbl-ketocalculator-activity" aria-label="Activity" className={inputCls} value={activity} onChange={e => setActivity(e.target.value)}><option value="1.2">Sedentary</option><option value="1.375">Light</option><option value="1.55">Moderate</option><option value="1.725">Very active</option></select></div>
       </div>
     </CalculatorShell>
   );

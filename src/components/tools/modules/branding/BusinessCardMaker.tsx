@@ -262,46 +262,46 @@ export default function BusinessCardMaker() {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Full Name</label>
-                <input aria-label="Full Name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-businesscardmaker-full-name" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Full Name</label>
+                <input id="lbl-businesscardmaker-full-name" aria-label="Full Name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Job Title</label>
-                <input aria-label="Job Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Company Name</label>
-                <input aria-label="Company Name" type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
-              </div>
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Phone Number</label>
-                <input aria-label="Phone Number" type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-businesscardmaker-job-title" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Job Title</label>
+                <input id="lbl-businesscardmaker-job-title" aria-label="Job Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Email Address</label>
-                <input aria-label="Email Address" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-businesscardmaker-company-name" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Company Name</label>
+                <input id="lbl-businesscardmaker-company-name" aria-label="Company Name" type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Website URL</label>
-                <input aria-label="Website URL" type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-businesscardmaker-phone-number" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Phone Number</label>
+                <input id="lbl-businesscardmaker-phone-number" aria-label="Phone Number" type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label htmlFor="lbl-businesscardmaker-email-address" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Email Address</label>
+                <input id="lbl-businesscardmaker-email-address" aria-label="Email Address" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              </div>
+              <div className="space-y-1">
+                <label htmlFor="lbl-businesscardmaker-website-url" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Website URL</label>
+                <input id="lbl-businesscardmaker-website-url" aria-label="Website URL" type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Office Address</label>
-              <input aria-label="Office Address" type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              <label htmlFor="lbl-businesscardmaker-office-address" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Office Address</label>
+              <input id="lbl-businesscardmaker-office-address" aria-label="Office Address" type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
             </div>
 
             {/* Logo upload */}
             <div className="space-y-2 pt-2 border-t border-[var(--border-subtle)]">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Custom Logo</label>
-              <input aria-label="Upload Custom Logo" 
+              <label htmlFor="lbl-businesscardmaker-upload-custom-logo" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase flex items-center gap-1"><ImageIcon className="w-3.5 h-3.5" /> Upload Custom Logo</label>
+              <input id="lbl-businesscardmaker-upload-custom-logo" aria-label="Upload Custom Logo" 
                 type="file" 
                 accept="image/*" 
                 onChange={handleLogoUpload} 

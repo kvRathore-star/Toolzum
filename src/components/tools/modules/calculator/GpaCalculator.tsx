@@ -29,8 +29,8 @@ export default function GpaCalculator() {
   return (
     <CalculatorShell category="Calculator" title="GPA Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (e.g., A,B+,A-)</label><input aria-label="Grades (e.g., A,B+,A-)" type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Credits (comma-separated)</label><input aria-label="Credits (comma-separated)" type="text" value={credits} onChange={e => setCredits(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-gpacalculator-grades-e-g-a-b-a" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (e.g., A,B+,A-)</label><input id="lbl-gpacalculator-grades-e-g-a-b-a" aria-label="Grades (e.g., A,B+,A-)" type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-gpacalculator-credits-comma-separated" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Credits (comma-separated)</label><input id="lbl-gpacalculator-credits-comma-separated" aria-label="Credits (comma-separated)" type="text" value={credits} onChange={e => setCredits(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

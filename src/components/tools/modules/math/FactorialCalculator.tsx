@@ -64,8 +64,8 @@ export default function FactorialCalculator() {
       ) : null
     }>
       <div className="space-y-4">
-        <label className={labelClass}>Non-negative integer (0-170)</label>
-        <input aria-label="Non-negative integer (0-170)" type="number" min={0} max={170} value={n} onChange={e => setN(e.target.value)}
+        <label htmlFor="lbl-factorialcalculator-non-negative-integer-0-170" className={labelClass}>Non-negative integer (0-170)</label>
+        <input id="lbl-factorialcalculator-non-negative-integer-0-170" aria-label="Non-negative integer (0-170)" type="number" min={0} max={170} value={n} onChange={e => setN(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
       </div>
     </CalculatorShell>

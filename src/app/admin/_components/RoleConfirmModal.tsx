@@ -38,10 +38,10 @@ export function RoleConfirmModal({ target, confirmEmail, onConfirmEmailChange, o
         </p>
         {isAdminChange && (
           <div>
-            <label className="block text-sm text-[var(--text-secondary)] mb-1">
+            <label htmlFor="lbl-roleconfirmmodal-type-to-confirm" className="block text-sm text-[var(--text-secondary)] mb-1">
               Type <strong className="text-[var(--text-primary)]">{target.email}</strong> to confirm:
             </label>
-            <input
+            <input id="lbl-roleconfirmmodal-type-to-confirm"
               type="text"
               value={confirmEmail}
               onChange={(e) => onConfirmEmailChange(e.target.value)}

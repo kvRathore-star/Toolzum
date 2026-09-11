@@ -65,9 +65,9 @@ export default function TdsCalculatorIndia() {
       ) : null}
     >
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Annual income (₹)</label><input aria-label="Annual income (₹)" className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
-        <div><label className={labelCls}>Age</label><input aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Regime</label><select aria-label="Regime" className={inputCls} value={regime} onChange={e => setRegime(e.target.value as 'old'|'new')}><option value="new">New (default)</option><option value="old">Old</option></select></div>
+        <div><label htmlFor="lbl-tdscalculatorindia-annual-income" className={labelCls}>Annual income (₹)</label><input id="lbl-tdscalculatorindia-annual-income" aria-label="Annual income (₹)" className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
+        <div><label htmlFor="lbl-tdscalculatorindia-age" className={labelCls}>Age</label><input id="lbl-tdscalculatorindia-age" aria-label="Age" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-tdscalculatorindia-regime" className={labelCls}>Regime</label><select id="lbl-tdscalculatorindia-regime" aria-label="Regime" className={inputCls} value={regime} onChange={e => setRegime(e.target.value as 'old'|'new')}><option value="new">New (default)</option><option value="old">Old</option></select></div>
       </div>
     </CalculatorShell>
   );

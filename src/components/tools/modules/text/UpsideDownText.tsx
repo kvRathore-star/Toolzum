@@ -49,8 +49,8 @@ export default function UpsideDownText() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
-          <textarea aria-label="Your Text"
+          <label htmlFor="lbl-upsidedowntext-your-text" className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
+          <textarea id="lbl-upsidedowntext-your-text" aria-label="Your Text"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type or paste text to flip upside down..."

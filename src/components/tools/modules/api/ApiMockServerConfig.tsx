@@ -37,8 +37,8 @@ export default function ApiMockServerConfig() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoints (key: JSON array, one per line)</label>
-          <textarea aria-label="Endpoints (key: JSON array, one per line)" value={endpoints} onChange={e => { setEndpoints(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apimockserverconfig-endpoints-key-json-array-one-per-line" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoints (key: JSON array, one per line)</label>
+          <textarea id="lbl-apimockserverconfig-endpoints-key-json-array-one-per-line" aria-label="Endpoints (key: JSON array, one per line)" value={endpoints} onChange={e => { setEndpoints(e.target.value); setResult(''); }} rows={4} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Config</button>
         {result && (

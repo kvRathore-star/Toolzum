@@ -433,11 +433,11 @@ export default function PronunciationTool() {
         {/* Controls */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div>
-            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
+            <label htmlFor="lbl-pronunciationtool-accent" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5" />
               Accent
             </label>
-            <select aria-label="Accent"
+            <select id="lbl-pronunciationtool-accent" aria-label="Accent"
               value={accentIndex}
               onChange={(e) => setAccentIndex(Number(e.target.value))}
               className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
@@ -449,11 +449,11 @@ export default function PronunciationTool() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
+            <label htmlFor="lbl-pronunciationtool-voice" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5 flex items-center gap-1.5">
               <Mic className="w-3.5 h-3.5" />
               Voice
             </label>
-            <select aria-label="Voice"
+            <select id="lbl-pronunciationtool-voice" aria-label="Voice"
               value={voiceGender}
               onChange={(e) => setVoiceGender(e.target.value as 'male' | 'female')}
               className="w-full px-3 py-2 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/40"
@@ -464,11 +464,11 @@ export default function PronunciationTool() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
+            <label htmlFor="lbl-pronunciationtool-speed-rate-tofixed-1-x" className="block text-xs font-medium text-[var(--text-secondary)] mb-1.5">
               <Volume className="w-3.5 h-3.5 inline mr-1" />
               Speed: {rate.toFixed(1)}x
             </label>
-            <input
+            <input id="lbl-pronunciationtool-speed-rate-tofixed-1-x"
               type="range"
               min="0.3" aria-label="Speed"
               max="2.0"

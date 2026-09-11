@@ -140,45 +140,45 @@ export default function EmailSignatureGenerator() {
             
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Full Name</label>
-                <input aria-label="Full Name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-full-name" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Full Name</label>
+                <input id="lbl-emailsignaturegenerator-full-name" aria-label="Full Name" type="text" value={name} onChange={e => setName(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Job Title</label>
-                <input aria-label="Job Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-job-title" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Job Title</label>
+                <input id="lbl-emailsignaturegenerator-job-title" aria-label="Job Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Company Name</label>
-                <input aria-label="Company Name" type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-company-name" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Company Name</label>
+                <input id="lbl-emailsignaturegenerator-company-name" aria-label="Company Name" type="text" value={company} onChange={e => setCompany(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Phone Number</label>
-                <input aria-label="Phone Number" type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-phone-number" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Phone Number</label>
+                <input id="lbl-emailsignaturegenerator-phone-number" aria-label="Phone Number" type="text" value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Email Address</label>
-                <input aria-label="Email Address" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-email-address" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Email Address</label>
+                <input id="lbl-emailsignaturegenerator-email-address" aria-label="Email Address" type="email" value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Website URL</label>
-                <input aria-label="Website URL" type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <label htmlFor="lbl-emailsignaturegenerator-website-url" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Website URL</label>
+                <input id="lbl-emailsignaturegenerator-website-url" aria-label="Website URL" type="text" value={website} onChange={e => setWebsite(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Office Location</label>
-              <input aria-label="Office Location" type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              <label htmlFor="lbl-emailsignaturegenerator-office-location" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Office Location</label>
+              <input id="lbl-emailsignaturegenerator-office-location" aria-label="Office Location" type="text" value={address} onChange={e => setAddress(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Avatar/Logo Image URL</label>
-              <input aria-label="Avatar/Logo Image URL" type="text" value={logoUrl} onChange={e => setLogoUrl(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+              <label htmlFor="lbl-emailsignaturegenerator-avatar-logo-image-url" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Avatar/Logo Image URL</label>
+              <input id="lbl-emailsignaturegenerator-avatar-logo-image-url" aria-label="Avatar/Logo Image URL" type="text" value={logoUrl} onChange={e => setLogoUrl(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
             </div>
           </div>
 

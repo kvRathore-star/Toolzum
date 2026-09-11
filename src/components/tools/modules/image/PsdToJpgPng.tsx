@@ -209,10 +209,10 @@ export default function PsdToJpgPng() {
 
           {format === 'image/jpeg' || format === 'image/webp' ? (
             <div>
-              <label className="text-xs text-[var(--text-secondary)] font-medium mb-2 block">
+              <label htmlFor="lbl-psdtojpgpng-quality-quality" className="text-xs text-[var(--text-secondary)] font-medium mb-2 block">
                 Quality: {quality}%
               </label>
-              <input
+              <input id="lbl-psdtojpgpng-quality-quality"
                 type="range"
                 min={10}
                 max={100}

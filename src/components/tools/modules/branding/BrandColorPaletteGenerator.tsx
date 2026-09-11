@@ -94,8 +94,8 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
             <p className="text-xs text-[var(--text-muted)] mb-4">AI-powered color palettes that match your brand identity.</p>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Describe Your Brand</label>
-              <textarea aria-label="Describe Your Brand"
+              <label htmlFor="lbl-brandcolorpalettegenerator-describe-your-brand" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Describe Your Brand</label>
+              <textarea id="lbl-brandcolorpalettegenerator-describe-your-brand" aria-label="Describe Your Brand"
                 value={brandDesc}
                 onChange={e => setBrandDesc(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
@@ -105,8 +105,8 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Palette Style</label>
-              <select aria-label="Palette Style"
+              <label htmlFor="lbl-brandcolorpalettegenerator-palette-style" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Palette Style</label>
+              <select id="lbl-brandcolorpalettegenerator-palette-style" aria-label="Palette Style"
                 value={style}
                 onChange={e => setStyle(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"

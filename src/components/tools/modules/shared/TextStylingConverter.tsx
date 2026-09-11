@@ -137,8 +137,8 @@ function FancyView() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
         <div className="space-y-2">
-          <label className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
-          <input aria-label="Input Text" type="text" value={inputText} onChange={e => setInputText(e.target.value)}
+          <label htmlFor="lbl-textstylingconverter-input-text" className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
+          <input id="lbl-textstylingconverter-input-text" aria-label="Input Text" type="text" value={inputText} onChange={e => setInputText(e.target.value)}
             className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
         </div>
         {inputText && (

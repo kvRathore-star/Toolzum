@@ -28,32 +28,32 @@ export default function BmrCalculator() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Gender</label>
-              <select aria-label="Gender" value={gender} onChange={e => setGender(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <label htmlFor="lbl-bmrcalculator-gender" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Gender</label>
+              <select id="lbl-bmrcalculator-gender" aria-label="Gender" value={gender} onChange={e => setGender(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Age (Years)</label>
-              <input aria-label="Age (Years)" type="number" value={age} onChange={e => setAge(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <label htmlFor="lbl-bmrcalculator-age-years" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Age (Years)</label>
+              <input id="lbl-bmrcalculator-age-years" aria-label="Age (Years)" type="number" value={age} onChange={e => setAge(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
-              <input aria-label="Weight (kg)" type="number" value={weight} onChange={e => setWeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <label htmlFor="lbl-bmrcalculator-weight-kg" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
+              <input id="lbl-bmrcalculator-weight-kg" aria-label="Weight (kg)" type="number" value={weight} onChange={e => setWeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
-              <input aria-label="Height (cm)" type="number" value={height} onChange={e => setHeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              <label htmlFor="lbl-bmrcalculator-height-cm" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
+              <input id="lbl-bmrcalculator-height-cm" aria-label="Height (cm)" type="number" value={height} onChange={e => setHeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Activity Level</label>
-            <select aria-label="Activity Level" value={activity} onChange={e => setActivity(parseFloat(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+            <label htmlFor="lbl-bmrcalculator-activity-level" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Activity Level</label>
+            <select id="lbl-bmrcalculator-activity-level" aria-label="Activity Level" value={activity} onChange={e => setActivity(parseFloat(e.target.value))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               <option value="1.2">Sedentary (Little or no exercise)</option>
               <option value="1.375">Lightly Active (Exercise 1-3 days/week)</option>
               <option value="1.55">Moderately Active (Exercise 3-5 days/week)</option>

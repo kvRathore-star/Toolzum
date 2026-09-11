@@ -240,14 +240,14 @@ export default function BulkImageWatermark() {
         {/* Position & Opacity */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Position</label>
-            <select aria-label="Position" value={position} onChange={e => setPosition(e.target.value as typeof position)} className="w-full p-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-primary)]">
+            <label htmlFor="lbl-bulkimagewatermark-position" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Position</label>
+            <select id="lbl-bulkimagewatermark-position" aria-label="Position" value={position} onChange={e => setPosition(e.target.value as typeof position)} className="w-full p-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-primary)]">
               {POSITIONS.map(p => <option key={p} value={p}>{p.replace('-', ' ')}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Opacity: {opacity}%</label>
-            <input type="range" min={10} max={100} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="w-full" />
+            <label htmlFor="lbl-bulkimagewatermark-opacity-opacity" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Opacity: {opacity}%</label>
+            <input id="lbl-bulkimagewatermark-opacity-opacity" type="range" min={10} max={100} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="w-full" />
           </div>
         </div>
 

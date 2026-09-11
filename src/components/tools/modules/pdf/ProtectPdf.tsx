@@ -196,8 +196,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
               {isProtect ? 'Set Encryption Password' : 'Enter PDF Password'}
             </h4>
             <div className="space-y-1">
-              <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Password</label>
-              <input aria-label="Password" type="password" value={password} onChange={e => setPassword(e.target.value)}
+              <label htmlFor="lbl-protectpdf-password" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Password</label>
+              <input id="lbl-protectpdf-password" aria-label="Password" type="password" value={password} onChange={e => setPassword(e.target.value)}
                 placeholder={isProtect ? 'Enter password (minimum 4 characters)...' : 'Enter password (leave empty if none)...'}
                 minLength={isProtect ? 4 : undefined}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]"
@@ -205,8 +205,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
             </div>
             {isProtect && (
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Confirm Password</label>
-                <input aria-label="Confirm Password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
+                <label htmlFor="lbl-protectpdf-confirm-password" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Confirm Password</label>
+                <input id="lbl-protectpdf-confirm-password" aria-label="Confirm Password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                   placeholder="Confirm password..." minLength={4} required
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]" />
               </div>

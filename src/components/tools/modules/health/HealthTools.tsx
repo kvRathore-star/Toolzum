@@ -83,13 +83,13 @@ export function WaistToHipRatioCalculator() {
       <Section title="Waist-to-Hip Ratio Calculator">
         <div className="grid grid-cols-2 gap-4 mb-3">
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Waist (cm)</label>
-            <input aria-label="Waist (cm)" type="number" value={waist} onChange={e => setWaist(Number(e.target.value))}
+            <label htmlFor="lbl-healthtools-waist-cm" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Waist (cm)</label>
+            <input id="lbl-healthtools-waist-cm" aria-label="Waist (cm)" type="number" value={waist} onChange={e => setWaist(Number(e.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hip (cm)</label>
-            <input aria-label="Hip (cm)" type="number" value={hip} onChange={e => setHip(Number(e.target.value))}
+            <label htmlFor="lbl-healthtools-hip-cm" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hip (cm)</label>
+            <input id="lbl-healthtools-hip-cm" aria-label="Hip (cm)" type="number" value={hip} onChange={e => setHip(Number(e.target.value))}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
         </div>

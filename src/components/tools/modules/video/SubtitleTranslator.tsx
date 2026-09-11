@@ -64,8 +64,8 @@ ${subtitleText}`;
             <p className="text-xs text-[var(--text-muted)] mb-4">Translate SRT or VTT subtitle files while preserving timestamp formats.</p>
             
 <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Subtitles (SRT or VTT)</label>
-              <textarea aria-label="Subtitles (SRT or VTT)"
+              <label htmlFor="lbl-subtitletranslator-subtitles-srt-or-vtt" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Subtitles (SRT or VTT)</label>
+              <textarea id="lbl-subtitletranslator-subtitles-srt-or-vtt" aria-label="Subtitles (SRT or VTT)"
                 value={subtitleText}
                 onChange={e => setSubtitleText(e.target.value)}
                 placeholder="Paste SRT or VTT content here..."
@@ -74,8 +74,8 @@ ${subtitleText}`;
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Language</label>
-              <select aria-label="Target Language"
+              <label htmlFor="lbl-subtitletranslator-target-language" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Target Language</label>
+              <select id="lbl-subtitletranslator-target-language" aria-label="Target Language"
                 value={targetLanguage}
                 onChange={e => setTargetLanguage(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

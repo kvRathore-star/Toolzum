@@ -268,10 +268,10 @@ export default function WebsiteScreenshot() {
 
             {format === 'jpg' && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[var(--text-primary)]">
+                <label htmlFor="lbl-websitescreenshot-quality-math-round-quality-100" className="text-sm font-medium text-[var(--text-primary)]">
                   Quality: {Math.round(quality * 100)}%
                 </label>
-                <input
+                <input id="lbl-websitescreenshot-quality-math-round-quality-100"
                   type="range"
                   min={10}
                   max={100}
@@ -284,7 +284,7 @@ export default function WebsiteScreenshot() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium text-[var(--text-primary)]">Viewport Width</label>
+            <label htmlFor="lbl-websitescreenshot-viewport-width" className="text-sm font-medium text-[var(--text-primary)]">Viewport Width</label>
             <div className="flex flex-wrap gap-2">
               {viewportPresets.map(p => (
                 <button
@@ -311,7 +311,7 @@ export default function WebsiteScreenshot() {
               </button>
             </div>
             {viewportWidth === -1 && (
-              <input aria-label="Viewport Width"
+              <input id="lbl-websitescreenshot-viewport-width" aria-label="Viewport Width"
                 type="number"
                 value={customWidth}
                 onChange={e => setCustomWidth(e.target.value)}

@@ -861,8 +861,8 @@ export default function AiThumbnailMaker() {
                 <div className="space-y-4">
                   {/* Text Edit Box */}
                   <div className="space-y-1">
-                    <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Value</label>
-                    <textarea aria-label="Text Value" 
+                    <label htmlFor="lbl-aithumbnailmaker-text-value" className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Text Value</label>
+                    <textarea id="lbl-aithumbnailmaker-text-value" aria-label="Text Value" 
                       value={activeText.text}
                       onChange={e => handleTextPropertyChange('text', e.target.value)}
                       className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-400"
@@ -910,8 +910,8 @@ export default function AiThumbnailMaker() {
                   {/* Font Size & Family */}
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Size</label>
-                      <input aria-label="Font Size" 
+                      <label htmlFor="lbl-aithumbnailmaker-font-size" className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Size</label>
+                      <input id="lbl-aithumbnailmaker-font-size" aria-label="Font Size" 
                         type="number" min="10" max="200"
                         value={activeText.fontSize}
                         onChange={e => handleTextPropertyChange('fontSize', parseInt(e.target.value) || 20)}
@@ -919,8 +919,8 @@ export default function AiThumbnailMaker() {
                       />
                     </div>
                     <div>
-                      <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Family</label>
-                      <select aria-label="Font Family" 
+                      <label htmlFor="lbl-aithumbnailmaker-font-family" className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Font Family</label>
+                      <select id="lbl-aithumbnailmaker-font-family" aria-label="Font Family" 
                         value={activeText.fontFamily}
                         onChange={e => handleTextPropertyChange('fontFamily', e.target.value)}
                         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1 text-xs mt-1"
@@ -939,8 +939,8 @@ export default function AiThumbnailMaker() {
                     <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Stroke Outline</span>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[9px] text-[var(--text-muted)]">Outline Width</label>
-                        <input aria-label="Outline Width" 
+                        <label htmlFor="lbl-aithumbnailmaker-outline-width" className="text-[9px] text-[var(--text-muted)]">Outline Width</label>
+                        <input id="lbl-aithumbnailmaker-outline-width" aria-label="Outline Width" 
                           type="number" min="0" max="15"
                           value={activeText.strokeWidth}
                           onChange={e => handleTextPropertyChange('strokeWidth', parseInt(e.target.value) || 0)}
@@ -948,8 +948,8 @@ export default function AiThumbnailMaker() {
                         />
                       </div>
                       <div>
-                        <label className="text-[9px] text-[var(--text-muted)]">Outline Color</label>
-                        <input aria-label="Outline Color" 
+                        <label htmlFor="lbl-aithumbnailmaker-outline-color" className="text-[9px] text-[var(--text-muted)]">Outline Color</label>
+                        <input id="lbl-aithumbnailmaker-outline-color" aria-label="Outline Color" 
                           type="color" 
                           value={activeText.strokeColor}
                           onChange={e => handleTextPropertyChange('strokeColor', e.target.value)}
@@ -964,8 +964,8 @@ export default function AiThumbnailMaker() {
                     <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block">Text Drop Shadow</span>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[9px] text-[var(--text-muted)]">Shadow Blur</label>
-                        <input aria-label="Shadow Blur" 
+                        <label htmlFor="lbl-aithumbnailmaker-shadow-blur" className="text-[9px] text-[var(--text-muted)]">Shadow Blur</label>
+                        <input id="lbl-aithumbnailmaker-shadow-blur" aria-label="Shadow Blur" 
                           type="number" min="0" max="30"
                           value={activeText.shadowBlur}
                           onChange={e => handleTextPropertyChange('shadowBlur', parseInt(e.target.value) || 0)}
@@ -973,8 +973,8 @@ export default function AiThumbnailMaker() {
                         />
                       </div>
                       <div>
-                        <label className="text-[9px] text-[var(--text-muted)]">Shadow Color</label>
-                        <input aria-label="Shadow Color" 
+                        <label htmlFor="lbl-aithumbnailmaker-shadow-color" className="text-[9px] text-[var(--text-muted)]">Shadow Color</label>
+                        <input id="lbl-aithumbnailmaker-shadow-color" aria-label="Shadow Color" 
                           type="color" 
                           value={activeText.shadowColor.startsWith('rgba') ? '#000000' : activeText.shadowColor}
                           onChange={e => handleTextPropertyChange('shadowColor', e.target.value)}

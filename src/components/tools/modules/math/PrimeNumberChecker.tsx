@@ -37,8 +37,8 @@ export default function PrimeNumberChecker() {
     <CalculatorShell category="Math" title="Prime Number Checker" result={resultText} auto presets={presets} accent="emerald" downloadData={`Number,IsPrime,Factors,NearestPrimeBelow,NearestPrimeAbove\n${n},${prime ? 'Yes' : 'No'},${factorList.join('*')},${nearestPrimes.below || ''},${nearestPrimes.above || ''}`} downloadFilename="prime-check.csv">
       <div className="space-y-4">
         <div>
-          <label className={labelClass}>Number</label>
-          <input aria-label="Number" type="number" min={0} value={n} onChange={e => setN(e.target.value)}
+          <label htmlFor="lbl-primenumberchecker-number" className={labelClass}>Number</label>
+          <input id="lbl-primenumberchecker-number" aria-label="Number" type="number" min={0} value={n} onChange={e => setN(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
         </div>
 

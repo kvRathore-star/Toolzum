@@ -306,19 +306,19 @@ export default function WaveformGenerator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>
-                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Waveform Color</label>
-                <input aria-label="Waveform Color" type="color" value={waveformColor} onChange={e => setWaveformColor(e.target.value)}
+                <label htmlFor="lbl-waveformgenerator-waveform-color" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Waveform Color</label>
+                <input id="lbl-waveformgenerator-waveform-color" aria-label="Waveform Color" type="color" value={waveformColor} onChange={e => setWaveformColor(e.target.value)}
                   className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               <div>
-                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Background Color</label>
-                <input aria-label="Background Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+                <label htmlFor="lbl-waveformgenerator-background-color" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Background Color</label>
+                <input id="lbl-waveformgenerator-background-color" aria-label="Background Color" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                   className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
               </div>
               {useGradient && (
                 <div>
-                  <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Gradient Color</label>
-                  <input aria-label="Gradient Color" type="color" value={gradientColor} onChange={e => setGradientColor(e.target.value)}
+                  <label htmlFor="lbl-waveformgenerator-gradient-color" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Gradient Color</label>
+                  <input id="lbl-waveformgenerator-gradient-color" aria-label="Gradient Color" type="color" value={gradientColor} onChange={e => setGradientColor(e.target.value)}
                     className="w-full h-9 rounded-xl cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
                 </div>
               )}
@@ -326,13 +326,13 @@ export default function WaveformGenerator() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Width: {width}px</label>
-                <input type="range" min={800} max={4000} step={50} value={width} aria-label="Width" onChange={e => setWidth(Number(e.target.value))}
+                <label htmlFor="lbl-waveformgenerator-width-width-px" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Width: {width}px</label>
+                <input id="lbl-waveformgenerator-width-width-px" type="range" min={800} max={4000} step={50} value={width} aria-label="Width" onChange={e => setWidth(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
               <div>
-                <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Height: {height}px</label>
-                <input type="range" min={100} max={800} step={10} value={height} aria-label="Height" onChange={e => setHeight(Number(e.target.value))}
+                <label htmlFor="lbl-waveformgenerator-height-height-px" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Height: {height}px</label>
+                <input id="lbl-waveformgenerator-height-height-px" type="range" min={100} max={800} step={10} value={height} aria-label="Height" onChange={e => setHeight(Number(e.target.value))}
                   className="w-full accent-indigo-500" />
               </div>
             </div>

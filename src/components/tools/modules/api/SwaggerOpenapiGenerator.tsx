@@ -36,21 +36,21 @@ export default function SwaggerOpenapiGenerator() {
         </div>
         <div className="grid grid-cols-3 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Title</label>
-            <input aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <label htmlFor="lbl-swaggeropenapigenerator-title" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Title</label>
+            <input id="lbl-swaggeropenapigenerator-title" aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Version</label>
-            <input aria-label="Version" type="text" value={version} onChange={e => setVersion(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-swaggeropenapigenerator-version" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Version</label>
+            <input id="lbl-swaggeropenapigenerator-version" aria-label="Version" type="text" value={version} onChange={e => setVersion(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Description</label>
-            <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
+            <label htmlFor="lbl-swaggeropenapigenerator-description" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Description</label>
+            <input id="lbl-swaggeropenapigenerator-description" aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs" />
           </div>
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoints (METHOD /path description, one per line)</label>
-          <textarea aria-label="Endpoints (METHOD /path description, one per line)" value={endpoints} onChange={e => setEndpoints(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-swaggeropenapigenerator-endpoints-method-path-description-one-pe" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoints (METHOD /path description, one per line)</label>
+          <textarea id="lbl-swaggeropenapigenerator-endpoints-method-path-description-one-pe" aria-label="Endpoints (METHOD /path description, one per line)" value={endpoints} onChange={e => setEndpoints(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate Spec</button>
         {result && (

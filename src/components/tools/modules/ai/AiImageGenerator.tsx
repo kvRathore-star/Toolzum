@@ -97,8 +97,8 @@ export default function AiImageGenerator() {
             </div>
             
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Image Prompt</label>
-              <textarea aria-label="Image Prompt"
+              <label htmlFor="lbl-aiimagegenerator-image-prompt" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Image Prompt</label>
+              <textarea id="lbl-aiimagegenerator-image-prompt" aria-label="Image Prompt"
                 value={prompt}
                 onChange={e => setPrompt(e.target.value)}
                 placeholder="e.g. A futuristic city with flying cars at sunset, watercolor style..."
@@ -108,8 +108,8 @@ export default function AiImageGenerator() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Art Style</label>
-                <select aria-label="Art Style"
+                <label htmlFor="lbl-aiimagegenerator-art-style" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Art Style</label>
+                <select id="lbl-aiimagegenerator-art-style" aria-label="Art Style"
                   value={style}
                   onChange={e => setStyle(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
@@ -121,8 +121,8 @@ export default function AiImageGenerator() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Aspect Ratio</label>
-                <select aria-label="Aspect Ratio"
+                <label htmlFor="lbl-aiimagegenerator-aspect-ratio" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Aspect Ratio</label>
+                <select id="lbl-aiimagegenerator-aspect-ratio" aria-label="Aspect Ratio"
                   value={aspectRatio}
                   onChange={e => setAspectRatio(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

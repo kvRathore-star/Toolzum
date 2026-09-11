@@ -182,8 +182,8 @@ export default function HeaderFooterPdf() {
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Header Text</label>
-            <input aria-label="Header Text"
+            <label htmlFor="lbl-headerfooterpdf-header-text" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Header Text</label>
+            <input id="lbl-headerfooterpdf-header-text" aria-label="Header Text"
               type="text"
               placeholder="e.g. Confidential &bull; {{page}}/{{total}}"
               value={headerText}
@@ -193,8 +193,8 @@ export default function HeaderFooterPdf() {
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Footer Text</label>
-            <input aria-label="Footer Text"
+            <label htmlFor="lbl-headerfooterpdf-footer-text" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Footer Text</label>
+            <input id="lbl-headerfooterpdf-footer-text" aria-label="Footer Text"
               type="text"
               placeholder="e.g. Page {{page}} of {{total}} &mdash; {{date}}"
               value={footerText}
@@ -267,8 +267,8 @@ export default function HeaderFooterPdf() {
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Range (leave empty for all)</label>
-            <input aria-label="Page Range (leave empty for all)"
+            <label htmlFor="lbl-headerfooterpdf-page-range-leave-empty-for-all" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Page Range (leave empty for all)</label>
+            <input id="lbl-headerfooterpdf-page-range-leave-empty-for-all" aria-label="Page Range (leave empty for all)"
               type="text"
               placeholder="e.g. 1-5, 8, 11-13"
               value={pageRange}

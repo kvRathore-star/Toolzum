@@ -27,9 +27,9 @@ export default function CyclingCalorieCalculator() {
   return (
     <CalculatorShell category="Health" title="Cycling Calorie Calculator" accent="orange" result={result} auto presets={presets}>
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Distance (km)</label><input aria-label="Distance (km)" className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
-        <div><label className={labelCls}>Speed (km/h)</label><input aria-label="Speed (km/h)" className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
+        <div><label htmlFor="lbl-cyclingcaloriecalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-cyclingcaloriecalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-cyclingcaloriecalculator-distance-km" className={labelCls}>Distance (km)</label><input id="lbl-cyclingcaloriecalculator-distance-km" aria-label="Distance (km)" className={inputCls} type="number" value={distance} onChange={e => setDistance(e.target.value)} /></div>
+        <div><label htmlFor="lbl-cyclingcaloriecalculator-speed-km-h" className={labelCls}>Speed (km/h)</label><input id="lbl-cyclingcaloriecalculator-speed-km-h" aria-label="Speed (km/h)" className={inputCls} type="number" value={speed} onChange={e => setSpeed(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

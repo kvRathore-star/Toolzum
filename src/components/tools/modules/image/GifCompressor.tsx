@@ -169,10 +169,10 @@ export default function GifCompressor() {
             <h4 className="text-[var(--text-primary)] font-medium">Compression Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-gifcompressor-colors-colors" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                 Colors: {colors}
               </label>
-              <input aria-label="Compression Settings"
+              <input id="lbl-gifcompressor-colors-colors" aria-label="Compression Settings"
                 type="range"
                 min="2"
                 max="256"
@@ -206,10 +206,10 @@ export default function GifCompressor() {
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-gifcompressor-loss-tolerance-losstolerance" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                 Loss Tolerance: {lossTolerance}
               </label>
-              <input
+              <input id="lbl-gifcompressor-loss-tolerance-losstolerance"
                 type="range"
                 min="0"
                 max="100"

@@ -508,8 +508,8 @@ export function ASCIIArtGenerator() {
       downloadFilename="ascii-art.txt"
     >
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
-        <input aria-label="Input Text" value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+        <label htmlFor="lbl-creativetoolswidgets-input-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input id="lbl-creativetoolswidgets-input-text" aria-label="Input Text" value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
           {['simple', 'block', 'bubble', 'fancy', 'digital'].map(s => (
             <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
@@ -665,8 +665,8 @@ export function ASCIIFontGenerator() {
       downloadFilename="ascii-font.txt"
     >
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
-        <input aria-label="Input Text" value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+        <label htmlFor="lbl-creativetoolswidgets-input-text-2" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
+        <input id="lbl-creativetoolswidgets-input-text-2" aria-label="Input Text" value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
           {['standard'].map(s => (
             <button key={s} onClick={() => setFontStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${fontStyle === s ? 'bg-[var(--bg-elevated)] text-purple-600 dark:text-purple-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>

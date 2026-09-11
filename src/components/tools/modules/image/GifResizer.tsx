@@ -181,8 +181,8 @@ export default function GifResizer() {
             <h4 className="text-[var(--text-primary)] font-medium">Resize Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (px)</label>
-              <input aria-label="Width (px)"
+              <label htmlFor="lbl-gifresizer-width-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (px)</label>
+              <input id="lbl-gifresizer-width-px" aria-label="Width (px)"
                 type="number"
                 min="1"
                 value={width}
@@ -207,8 +207,8 @@ export default function GifResizer() {
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (px)</label>
-              <input aria-label="Height (px)"
+              <label htmlFor="lbl-gifresizer-height-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (px)</label>
+              <input id="lbl-gifresizer-height-px" aria-label="Height (px)"
                 type="number"
                 min="1"
                 value={height}

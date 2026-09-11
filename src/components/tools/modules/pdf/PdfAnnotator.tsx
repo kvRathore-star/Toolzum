@@ -178,8 +178,8 @@ export default function PdfAnnotator() {
             </div>
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Opacity: {selectedOpacity.toFixed(1)}</label>
-            <input type="range" min="0.1" max="1" step="0.1" value={selectedOpacity} aria-label={`Opacity: ${selectedOpacity.toFixed(1)}`}
+            <label htmlFor="lbl-pdfannotator-opacity-selectedopacity-tofixed-1" className="text-xs text-[var(--text-secondary)] font-medium mb-1.5 block">Opacity: {selectedOpacity.toFixed(1)}</label>
+            <input id="lbl-pdfannotator-opacity-selectedopacity-tofixed-1" type="range" min="0.1" max="1" step="0.1" value={selectedOpacity} aria-label={`Opacity: ${selectedOpacity.toFixed(1)}`}
               onChange={(e) => setSelectedOpacity(parseFloat(e.target.value))} className="w-full accent-blue-600" />
           </div>
           <div className="grid grid-cols-2 gap-3">

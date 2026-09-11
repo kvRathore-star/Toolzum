@@ -42,10 +42,10 @@ export default function TaxCalculator() {
       downloadFilename="tax-calculation.csv"
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Annual income ($)</label><input aria-label="Annual income ($)" className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
-        <div><label className={labelCls}>Filing status</label><select aria-label="Filing status" className={inputCls} value={filingStatus} onChange={e => setFilingStatus(e.target.value as 'single'|'married'|'head')}><option value="single">Single</option><option value="married">Married filing jointly</option><option value="head">Head of household</option></select></div>
-        <div><label className={labelCls}>State tax rate (%)</label><input aria-label="State tax rate (%)" className={inputCls} type="number" value={stateTax} onChange={e => setStateTax(e.target.value)} /></div>
-        <div><label className={labelCls}>Standard deduction ($)</label><input aria-label="Standard deduction ($)" className={inputCls} type="number" value={deductions} onChange={e => setDeductions(e.target.value)} /></div>
+        <div><label htmlFor="lbl-taxcalculator-annual-income" className={labelCls}>Annual income ($)</label><input id="lbl-taxcalculator-annual-income" aria-label="Annual income ($)" className={inputCls} type="number" value={income} onChange={e => setIncome(e.target.value)} /></div>
+        <div><label htmlFor="lbl-taxcalculator-filing-status" className={labelCls}>Filing status</label><select id="lbl-taxcalculator-filing-status" aria-label="Filing status" className={inputCls} value={filingStatus} onChange={e => setFilingStatus(e.target.value as 'single'|'married'|'head')}><option value="single">Single</option><option value="married">Married filing jointly</option><option value="head">Head of household</option></select></div>
+        <div><label htmlFor="lbl-taxcalculator-state-tax-rate" className={labelCls}>State tax rate (%)</label><input id="lbl-taxcalculator-state-tax-rate" aria-label="State tax rate (%)" className={inputCls} type="number" value={stateTax} onChange={e => setStateTax(e.target.value)} /></div>
+        <div><label htmlFor="lbl-taxcalculator-standard-deduction" className={labelCls}>Standard deduction ($)</label><input id="lbl-taxcalculator-standard-deduction" aria-label="Standard deduction ($)" className={inputCls} type="number" value={deductions} onChange={e => setDeductions(e.target.value)} /></div>
       </div>
       <div className="flex gap-3 mt-3">
         <button className="px-4 py-2 rounded-xl text-sm bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)]" onClick={() => { setIncome('60000'); setFilingStatus('single'); }}>60k Single</button>

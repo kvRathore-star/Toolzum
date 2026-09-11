@@ -26,14 +26,14 @@ export default function FractionToDecimalCalculator() {
       <div className="space-y-4">
         <div className="flex gap-2 items-center">
           <div className="flex-1">
-            <label className={labelClass}>Numerator</label>
-            <input aria-label="Numerator" type="number" value={num} onChange={e => setNum(e.target.value)}
+            <label htmlFor="lbl-fractiontodecimalcalculator-numerator" className={labelClass}>Numerator</label>
+            <input id="lbl-fractiontodecimalcalculator-numerator" aria-label="Numerator" type="number" value={num} onChange={e => setNum(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
           <span className="text-xl font-bold">/</span>
           <div className="flex-1">
-            <label className={labelClass}>Denominator</label>
-            <input aria-label="Denominator" type="number" value={den} onChange={e => setDen(e.target.value)}
+            <label htmlFor="lbl-fractiontodecimalcalculator-denominator" className={labelClass}>Denominator</label>
+            <input id="lbl-fractiontodecimalcalculator-denominator" aria-label="Denominator" type="number" value={den} onChange={e => setDen(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
           </div>
         </div>

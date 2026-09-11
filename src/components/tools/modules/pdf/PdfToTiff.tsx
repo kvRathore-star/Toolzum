@@ -274,8 +274,8 @@ export default function PdfToTiff() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
-          <input aria-label="Page Range"
+          <label htmlFor="lbl-pdftotiff-page-range" className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
+          <input id="lbl-pdftotiff-page-range" aria-label="Page Range"
             type="text"
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
@@ -285,8 +285,8 @@ export default function PdfToTiff() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Output Mode</label>
-          <select aria-label="Output Mode"
+          <label htmlFor="lbl-pdftotiff-output-mode" className="text-sm font-medium text-[var(--text-primary)]">Output Mode</label>
+          <select id="lbl-pdftotiff-output-mode" aria-label="Output Mode"
             value={mode}
             onChange={(e) => setMode(e.target.value as OutputMode)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -297,8 +297,8 @@ export default function PdfToTiff() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">DPI</label>
-          <select aria-label="DPI"
+          <label htmlFor="lbl-pdftotiff-dpi" className="text-sm font-medium text-[var(--text-primary)]">DPI</label>
+          <select id="lbl-pdftotiff-dpi" aria-label="DPI"
             value={dpi}
             onChange={(e) => setDpi(Number(e.target.value))}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -310,8 +310,8 @@ export default function PdfToTiff() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Color Mode</label>
-          <select aria-label="Color Mode"
+          <label htmlFor="lbl-pdftotiff-color-mode" className="text-sm font-medium text-[var(--text-primary)]">Color Mode</label>
+          <select id="lbl-pdftotiff-color-mode" aria-label="Color Mode"
             value={colorMode}
             onChange={(e) => setColorMode(e.target.value as ColorMode)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -323,8 +323,8 @@ export default function PdfToTiff() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Compression</label>
-          <select aria-label="Compression"
+          <label htmlFor="lbl-pdftotiff-compression" className="text-sm font-medium text-[var(--text-primary)]">Compression</label>
+          <select id="lbl-pdftotiff-compression" aria-label="Compression"
             value={compression}
             onChange={(e) => setCompression(e.target.value as Compression)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

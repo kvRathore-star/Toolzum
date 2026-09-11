@@ -29,9 +29,9 @@ export default function ProportionCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Proportion Calculator" result="" auto presets={presets} accent="indigo" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input aria-label="A" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input aria-label="B (first ratio)" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input aria-label="C (solve D)" type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-proportioncalculator-a" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">A</label><input id="lbl-proportioncalculator-a" aria-label="A" type="number" value={a} onChange={e => setA(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-proportioncalculator-b-first-ratio" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">B (first ratio)</label><input id="lbl-proportioncalculator-b-first-ratio" aria-label="B (first ratio)" type="number" value={b} onChange={e => setB(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-proportioncalculator-c-solve-d" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">C (solve D)</label><input id="lbl-proportioncalculator-c-solve-d" aria-label="C (solve D)" type="number" value={c} onChange={e => setC(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

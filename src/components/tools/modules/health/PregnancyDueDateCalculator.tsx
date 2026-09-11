@@ -29,8 +29,8 @@ export default function PregnancyDueDateCalculator() {
   return (
     <CalculatorShell category="Health" title="Pregnancy Due Date" accent="fuchsia" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>First day of LMP</label><input aria-label="First day of LMP" className={inputCls} type="date" value={lmp} onChange={e => setLmp(e.target.value)} /></div>
-        <div><label className={labelCls}>Cycle length (optional)</label><input aria-label="Cycle length (optional)" className={inputCls} type="number" value={cycleLen} onChange={e => setCycleLen(e.target.value)} /></div>
+        <div><label htmlFor="lbl-pregnancyduedatecalculator-first-day-of-lmp" className={labelCls}>First day of LMP</label><input id="lbl-pregnancyduedatecalculator-first-day-of-lmp" aria-label="First day of LMP" className={inputCls} type="date" value={lmp} onChange={e => setLmp(e.target.value)} /></div>
+        <div><label htmlFor="lbl-pregnancyduedatecalculator-cycle-length-optional" className={labelCls}>Cycle length (optional)</label><input id="lbl-pregnancyduedatecalculator-cycle-length-optional" aria-label="Cycle length (optional)" className={inputCls} type="number" value={cycleLen} onChange={e => setCycleLen(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

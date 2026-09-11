@@ -130,8 +130,8 @@ export function OTPGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-4 flex-wrap">
           <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Length</label>
-            <select aria-label="Length" value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+            <label htmlFor="lbl-otherutilitieswidgets-length" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Length</label>
+            <select id="lbl-otherutilitieswidgets-length" aria-label="Length" value={otpLen} onChange={e => setOtpLen(parseInt(e.target.value))} className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {[4,5,6,7,8].map(n => <option key={n} value={n}>{n} digits</option>)}
             </select>
           </div>
@@ -144,8 +144,8 @@ export function OTPGenerator() {
             </div>
           </div>
           <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Count: {otpCount}</label>
-            <input type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} aria-label="OTP count" className="w-24" />
+            <label htmlFor="lbl-otherutilitieswidgets-count-otpcount" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Count: {otpCount}</label>
+            <input id="lbl-otherutilitieswidgets-count-otpcount" type="range" min={1} max={20} value={otpCount} onChange={e => setOtpCount(parseInt(e.target.value))} aria-label="OTP count" className="w-24" />
           </div>
         </div>
         <div className="flex gap-3 items-center">
@@ -204,8 +204,8 @@ export function SlugifyTool() {
       </div>
       {slugInput && (
         <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
-          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
-          <input aria-label="Slug" type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+          <label htmlFor="lbl-otherutilitieswidgets-slug" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
+          <input id="lbl-otherutilitieswidgets-slug" aria-label="Slug" type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <div className="absolute top-6 right-3 flex gap-2">
             <button onClick={() => copy(slugOutput, 'Slug')} className="text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
             <button onClick={() => { const blob = new Blob([slugOutput], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='slug.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Download</button>

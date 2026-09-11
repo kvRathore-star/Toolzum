@@ -92,14 +92,14 @@ export default function BulkImageConverter({ defaultConfig: extraConfig }: { def
           )}
           <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
-            <select aria-label="Output Format" name="format" defaultValue={(merged.format) as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+            <label htmlFor="lbl-bulkimageconverter-output-format" className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
+            <select id="lbl-bulkimageconverter-output-format" aria-label="Output Format" name="format" defaultValue={(merged.format) as string} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
               {OUTPUT_FORMATS.map(f => <option key={f.value} value={f.value}>{f.label}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality</label>
-            <input aria-label="Quality" name="quality" type="range" min="10" max="100" defaultValue={merged.quality as string} className="w-full mt-1" />
+            <label htmlFor="lbl-bulkimageconverter-quality" className="text-xs font-medium text-[var(--text-secondary)]">Quality</label>
+            <input id="lbl-bulkimageconverter-quality" aria-label="Quality" name="quality" type="range" min="10" max="100" defaultValue={merged.quality as string} className="w-full mt-1" />
           </div>
         </div>
         </div>

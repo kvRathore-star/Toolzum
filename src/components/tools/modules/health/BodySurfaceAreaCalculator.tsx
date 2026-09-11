@@ -58,7 +58,7 @@ export default function BodySurfaceAreaCalculator() {
     }>
       <div className="max-w-xl">
         <div className="grid grid-cols-2 gap-4">
-          <div><label className={labelCls}>Unit</label><select aria-label="Unit" className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'metric'|'imperial')}><option value="metric">Metric (kg/cm)</option><option value="imperial">Imperial (lb/in)</option></select></div>
+          <div><label htmlFor="lbl-bodysurfaceareacalculator-unit" className={labelCls}>Unit</label><select id="lbl-bodysurfaceareacalculator-unit" aria-label="Unit" className={inputCls} value={unit} onChange={e => setUnit(e.target.value as 'metric'|'imperial')}><option value="metric">Metric (kg/cm)</option><option value="imperial">Imperial (lb/in)</option></select></div>
           <div><label className={labelCls}>{unit === 'metric' ? 'Weight (kg)' : 'Weight (lb)'}</label><input aria-label={unit === 'metric' ? 'Weight (kg)' : 'Weight (lb)'} className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
           <div><label className={labelCls}>{unit === 'metric' ? 'Height (cm)' : 'Height (in)'}</label><input aria-label={unit === 'metric' ? 'Height (cm)' : 'Height (in)'} className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
         </div>

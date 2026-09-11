@@ -114,8 +114,8 @@ export default function IndianAgeCalculator() {
             <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-wider">Date of Birth</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Day</label>
-                <select aria-label="Day"
+                <label htmlFor="lbl-indianagecalculator-day" className="text-[10px] text-[var(--text-secondary)] block mb-1">Day</label>
+                <select id="lbl-indianagecalculator-day" aria-label="Day"
                   value={day}
                   onChange={e => setDay(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -127,8 +127,8 @@ export default function IndianAgeCalculator() {
               </div>
 
               <div>
-                <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Month</label>
-                <select aria-label="Month"
+                <label htmlFor="lbl-indianagecalculator-month" className="text-[10px] text-[var(--text-secondary)] block mb-1">Month</label>
+                <select id="lbl-indianagecalculator-month" aria-label="Month"
                   value={month}
                   onChange={e => setMonth(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -140,8 +140,8 @@ export default function IndianAgeCalculator() {
               </div>
 
               <div>
-                <label className="text-[10px] text-[var(--text-secondary)] block mb-1">Year</label>
-                <select aria-label="Year"
+                <label htmlFor="lbl-indianagecalculator-year" className="text-[10px] text-[var(--text-secondary)] block mb-1">Year</label>
+                <select id="lbl-indianagecalculator-year" aria-label="Year"
                   value={year}
                   onChange={e => setYear(e.target.value)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
@@ -155,8 +155,8 @@ export default function IndianAgeCalculator() {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-[var(--text-primary)]">Target Date (Defaults to Today)</label>
-            <input aria-label="Target Date (Defaults to Today)"
+            <label htmlFor="lbl-indianagecalculator-target-date-defaults-to-today" className="block text-sm font-bold text-[var(--text-primary)]">Target Date (Defaults to Today)</label>
+            <input id="lbl-indianagecalculator-target-date-defaults-to-today" aria-label="Target Date (Defaults to Today)"
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}

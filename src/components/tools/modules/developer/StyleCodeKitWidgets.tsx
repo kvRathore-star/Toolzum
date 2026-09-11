@@ -598,13 +598,13 @@ export function StringTemplateTester() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">String Template Tester</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Template</label>
-          <input aria-label="Template" type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
+          <label htmlFor="lbl-stylecodekitwidgets-template" className="text-xs text-[var(--text-secondary)] mb-1 block">Template</label>
+          <input id="lbl-stylecodekitwidgets-template" aria-label="Template" type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Variables (JSON)</label>
-          <textarea aria-label="Variables (JSON)" rows={3} value={vars} onChange={e => setVars(e.target.value)}
+          <label htmlFor="lbl-stylecodekitwidgets-variables-json" className="text-xs text-[var(--text-secondary)] mb-1 block">Variables (JSON)</label>
+          <textarea id="lbl-stylecodekitwidgets-variables-json" aria-label="Variables (JSON)" rows={3} value={vars} onChange={e => setVars(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={test} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Test</button>
@@ -650,8 +650,8 @@ export function TestDataGenerator() {
         ))}
       </div>
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {"{name, type}"})</label>
-        <textarea value={schema} onChange={e => setSchema(e.target.value)} rows={6} aria-label="Schema (JSON array)" placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
+        <label htmlFor="lbl-stylecodekitwidgets-schema-json-array-of-name-type" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {"{name, type}"})</label>
+        <textarea id="lbl-stylecodekitwidgets-schema-json-array-of-name-type" value={schema} onChange={e => setSchema(e.target.value)} rows={6} aria-label="Schema (JSON array)" placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-green-500/50 resize-y" />
 
         <button onClick={generate} className="px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate</button>

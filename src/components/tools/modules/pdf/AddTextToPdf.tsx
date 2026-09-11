@@ -173,8 +173,8 @@ export default function AddTextToPdf() {
           </div>
 
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Text Content</label>
-            <input aria-label="Text Content"
+            <label htmlFor="lbl-addtexttopdf-text-content" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Text Content</label>
+            <input id="lbl-addtexttopdf-text-content" aria-label="Text Content"
               type="text"
               placeholder="Enter text to add..."
               value={text}
@@ -230,8 +230,8 @@ export default function AddTextToPdf() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
-              <input aria-label="X Position"
+              <label htmlFor="lbl-addtexttopdf-x-position" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
+              <input id="lbl-addtexttopdf-x-position" aria-label="X Position"
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
@@ -239,8 +239,8 @@ export default function AddTextToPdf() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
-              <input aria-label="Y Position"
+              <label htmlFor="lbl-addtexttopdf-y-position" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
+              <input id="lbl-addtexttopdf-y-position" aria-label="Y Position"
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}

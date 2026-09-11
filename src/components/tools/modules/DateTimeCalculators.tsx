@@ -63,8 +63,8 @@ export function BusinessDaysCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Start Date</label><input aria-label="Start Date" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">End Date</label><input aria-label="End Date" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-datetimecalculators-start-date" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Start Date</label><input id="lbl-datetimecalculators-start-date" aria-label="Start Date" type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-datetimecalculators-end-date" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">End Date</label><input id="lbl-datetimecalculators-end-date" aria-label="End Date" type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );
@@ -117,8 +117,8 @@ export function DaysBetweenDates() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 1</label><input aria-label="Date 1" type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 2</label><input aria-label="Date 2" type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-datetimecalculators-date-1" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 1</label><input id="lbl-datetimecalculators-date-1" aria-label="Date 1" type="date" value={date1} onChange={e => setDate1(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-datetimecalculators-date-2" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date 2</label><input id="lbl-datetimecalculators-date-2" aria-label="Date 2" type="date" value={date2} onChange={e => setDate2(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );
@@ -154,7 +154,7 @@ export function DaysUntilCalculator() {
         </div>
       ) : null
     }>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Target Date</label><input aria-label="Target Date" type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputCls} /></div>
+      <div><label htmlFor="lbl-datetimecalculators-target-date" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Target Date</label><input id="lbl-datetimecalculators-target-date" aria-label="Target Date" type="date" value={targetDate} onChange={e => setTargetDate(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }
@@ -185,7 +185,7 @@ export function DayOfWeekCalculator() {
         </div>
       ) : null
     }>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
+      <div><label htmlFor="lbl-datetimecalculators-date" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input id="lbl-datetimecalculators-date" aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }
@@ -218,7 +218,7 @@ export function DayOfYearCalculator() {
   const pct = (day / totalDays) * 100;
   return (
     <CalculatorShell category="Calculator" title="Day of Year Calculator" result={result} onCalculate={calc} presets={presets} accent="teal">
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
+      <div><label htmlFor="lbl-datetimecalculators-date-7" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Date</label><input id="lbl-datetimecalculators-date-7" aria-label="Date" type="date" value={date} onChange={e => setDate(e.target.value)} className={inputCls} /></div>
       {result && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">

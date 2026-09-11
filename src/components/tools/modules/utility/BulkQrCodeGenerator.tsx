@@ -112,8 +112,8 @@ export default function BulkQrCodeGenerator() {
         {mode === 'single' ? (
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-bold text-[var(--text-primary)]">Text or URL</label>
-              <input aria-label="Text or URL" type="text" value={text} onChange={e => setText(e.target.value)}
+              <label htmlFor="lbl-bulkqrcodegenerator-text-or-url" className="text-sm font-bold text-[var(--text-primary)]">Text or URL</label>
+              <input id="lbl-bulkqrcodegenerator-text-or-url" aria-label="Text or URL" type="text" value={text} onChange={e => setText(e.target.value)}
                 placeholder="https://example.com"
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500" />
             </div>

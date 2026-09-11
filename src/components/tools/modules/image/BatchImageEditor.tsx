@@ -144,14 +144,14 @@ export default function BatchImageEditor() {
              <div className="space-y-6 bg-[var(--bg-overlay)]/50 p-6 rounded-xl border border-[var(--border-subtle)]">
                <div className="flex items-center gap-2 font-semibold border-b border-[var(--border-subtle)] pb-3"><Settings2 className="w-5 h-5" />Batch Settings</div>
                <div className="space-y-3">
-                 <label className="block text-sm font-semibold">Max Width (px)</label>
+                 <label htmlFor="lbl-batchimageeditor-max-width-px" className="block text-sm font-semibold">Max Width (px)</label>
                  <p className="text-xs text-[var(--text-secondary)] mb-2">Images wider than this will be scaled down.</p>
-                 <input aria-label="Max Width (px)" type="number" value={maxWidth} onChange={e => setMaxWidth(Number(e.target.value))} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                 <input id="lbl-batchimageeditor-max-width-px" aria-label="Max Width (px)" type="number" value={maxWidth} onChange={e => setMaxWidth(Number(e.target.value))} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <div className="space-y-3">
-                 <label className="block text-sm font-semibold">Watermark Text (Optional)</label>
+                 <label htmlFor="lbl-batchimageeditor-watermark-text-optional" className="block text-sm font-semibold">Watermark Text (Optional)</label>
                  <p className="text-xs text-[var(--text-secondary)] mb-2">Added to bottom right corner.</p>
-                 <input aria-label="Watermark Text (Optional)" type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                 <input id="lbl-batchimageeditor-watermark-text-optional" aria-label="Watermark Text (Optional)" type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <button onClick={processBatch} disabled={isProcessing || remaining === 0}
                  className="w-full mt-4 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">

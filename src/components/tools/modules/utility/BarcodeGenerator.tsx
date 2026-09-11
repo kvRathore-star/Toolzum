@@ -33,8 +33,8 @@ export default function BarcodeGenerator() {
     >
       <div className="space-y-4">
         <div className="mb-3">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-          <select aria-label="Type" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
+          <label htmlFor="lbl-barcodegenerator-type" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
+          <select id="lbl-barcodegenerator-type" aria-label="Type" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
         </div>
         <Input label="Data" value={input} onChange={v => setInput(v)} />
         <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col items-center justify-center min-h-[160px]">

@@ -61,8 +61,8 @@ export default function MeetingMinutesGenerator() {
             <p className="text-xs text-[var(--text-muted)] mb-4">Generate professional meeting minutes, notes, and action items from transcripts.</p>
             
 <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Transcript or Raw Notes</label>
-              <textarea aria-label="Meeting Transcript or Raw Notes"
+              <label htmlFor="lbl-meetingminutesgenerator-meeting-transcript-or-raw-notes" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Transcript or Raw Notes</label>
+              <textarea id="lbl-meetingminutesgenerator-meeting-transcript-or-raw-notes" aria-label="Meeting Transcript or Raw Notes"
                 value={transcript}
                 onChange={e => setTranscript(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="Paste transcription text here..."
@@ -71,8 +71,8 @@ export default function MeetingMinutesGenerator() {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Focus</label>
-              <select aria-label="Meeting Focus"
+              <label htmlFor="lbl-meetingminutesgenerator-meeting-focus" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Meeting Focus</label>
+              <select id="lbl-meetingminutesgenerator-meeting-focus" aria-label="Meeting Focus"
                 value={focus}
                 onChange={e => setFocus(e.target.value)}
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"

@@ -93,14 +93,14 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
-        <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-        <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
+        <label htmlFor="lbl-unitconverter-value" className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
+        <input id="lbl-unitconverter-value" aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-          <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
+          <label htmlFor="lbl-unitconverter-from" className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
+          <select id="lbl-unitconverter-from" aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
@@ -109,8 +109,8 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
           &#8644;
         </button>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
-          <select aria-label="To" value={to} onChange={e => setTo(e.target.value)}
+          <label htmlFor="lbl-unitconverter-to" className="text-xs text-[var(--text-secondary)] mb-1 block">To</label>
+          <select id="lbl-unitconverter-to" aria-label="To" value={to} onChange={e => setTo(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]">
             {family.units.map(u => <option key={u.key} value={u.key}>{u.label}</option>)}
           </select>
@@ -152,8 +152,8 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
-        <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value (in {family.baseUnit})</label>
-        <input type="number" value={value} onChange={e => setValue(e.target.value)}
+        <label htmlFor="lbl-unitconverter-value-in-family-baseunit" className="text-xs text-[var(--text-secondary)] mb-1 block">Value (in {family.baseUnit})</label>
+        <input id="lbl-unitconverter-value-in-family-baseunit" type="number" value={value} onChange={e => setValue(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="text-xs space-y-1.5">

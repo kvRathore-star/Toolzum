@@ -46,8 +46,8 @@ export default function SemverCalculator() {
       customResult={customResult}
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Version 1</label><input aria-label="Version 1" className={inputCls} value={v1} onChange={e => setV1(e.target.value)} placeholder="1.0.0" /></div>
-        <div><label className={labelCls}>Version 2</label><input aria-label="Version 2" className={inputCls} value={v2} onChange={e => setV2(e.target.value)} placeholder="2.0.0" /></div>
+        <div><label htmlFor="lbl-semvercalculator-version-1" className={labelCls}>Version 1</label><input id="lbl-semvercalculator-version-1" aria-label="Version 1" className={inputCls} value={v1} onChange={e => setV1(e.target.value)} placeholder="1.0.0" /></div>
+        <div><label htmlFor="lbl-semvercalculator-version-2" className={labelCls}>Version 2</label><input id="lbl-semvercalculator-version-2" aria-label="Version 2" className={inputCls} value={v2} onChange={e => setV2(e.target.value)} placeholder="2.0.0" /></div>
       </div>
     </CalculatorShell>
   );

@@ -45,13 +45,13 @@ function MessageLinkTab() {
       <p className="text-xs text-[var(--text-secondary)]">Generate a clickable <code className="text-emerald-500">wa.me</code> link with optional pre-filled message.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="space-y-2">
-          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
-          <input aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
+          <label htmlFor="lbl-whatsapptoolkit-phone-number" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
+          <input id="lbl-whatsapptoolkit-phone-number" aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 98765 43210"
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         </div>
         <div className="space-y-2">
-          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
-          <input aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I saw your listing..."
+          <label htmlFor="lbl-whatsapptoolkit-pre-filled-message" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
+          <input id="lbl-whatsapptoolkit-pre-filled-message" aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I saw your listing..."
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         </div>
       </div>
@@ -365,30 +365,30 @@ function QrTab() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
-            <input aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="919876543210"
+            <label htmlFor="lbl-whatsapptoolkit-phone-number-3" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Phone Number *</label>
+            <input id="lbl-whatsapptoolkit-phone-number-3" aria-label="Phone Number *" value={phone} onChange={e => setPhone(e.target.value)} placeholder="919876543210"
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
-            <input aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I need your services..."
+            <label htmlFor="lbl-whatsapptoolkit-pre-filled-message-4" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Pre-filled Message</label>
+            <input id="lbl-whatsapptoolkit-pre-filled-message-4" aria-label="Pre-filled Message" value={message} onChange={e => setMessage(e.target.value)} placeholder="Hi, I need your services..."
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           </div>
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">QR Color</label>
-              <input aria-label="QR Color" type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
+              <label htmlFor="lbl-whatsapptoolkit-qr-color" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">QR Color</label>
+              <input id="lbl-whatsapptoolkit-qr-color" aria-label="QR Color" type="color" value={fgColor} onChange={e => setFgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
-              <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+              <label htmlFor="lbl-whatsapptoolkit-background" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
+              <input id="lbl-whatsapptoolkit-background" aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>
           <div className="space-y-1">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Logo (optional)</label>
-            <input aria-label="Logo (optional)" type="file" accept="image/*" onChange={e => {
+            <label htmlFor="lbl-whatsapptoolkit-logo-optional" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Logo (optional)</label>
+            <input id="lbl-whatsapptoolkit-logo-optional" aria-label="Logo (optional)" type="file" accept="image/*" onChange={e => {
               const file = e.target.files?.[0];
               if (file) {
                 if (logoImage) URL.revokeObjectURL(logoImage);
@@ -805,21 +805,21 @@ function StatusDesignerTab() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Status Text</label>
-            <textarea aria-label="Status Text" value={text} onChange={e => setText(e.target.value)} rows={3}
+            <label htmlFor="lbl-whatsapptoolkit-status-text" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Status Text</label>
+            <textarea id="lbl-whatsapptoolkit-status-text" aria-label="Status Text" value={text} onChange={e => setText(e.target.value)} rows={3}
               placeholder="Type your status message..."
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30 resize-none" />
           </div>
 
           <div className="grid grid-cols-2 gap-2">
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
-              <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
+              <label htmlFor="lbl-whatsapptoolkit-background-9" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Background</label>
+              <input id="lbl-whatsapptoolkit-background-9" aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Text Color</label>
-              <input aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
+              <label htmlFor="lbl-whatsapptoolkit-text-color" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Text Color</label>
+              <input id="lbl-whatsapptoolkit-text-color" aria-label="Text Color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)}
                 className="w-full h-10 rounded-xl border border-[var(--border-subtle)] cursor-pointer" />
             </div>
           </div>

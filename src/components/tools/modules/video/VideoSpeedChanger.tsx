@@ -174,10 +174,10 @@ export default function VideoSpeedChanger() {
             <h4 className="text-[var(--text-primary)] font-medium">Speed Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-videospeedchanger-speed" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                 Speed: <span className="font-bold text-[var(--text-primary)]">{speed}x</span>
               </label>
-              <input aria-label="Speed:"
+              <input id="lbl-videospeedchanger-speed" aria-label="Speed:"
                 type="range"
                 min="0.1"
                 max="10"

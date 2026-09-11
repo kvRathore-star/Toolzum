@@ -24,7 +24,7 @@ export default function BabySleepScheduleCalculator() {
   return (
     <CalculatorShell category="Health" title="Baby Sleep Schedule" accent="purple" result={result} auto presets={presets}>
       <div className="max-w-sm">
-        <div><label className={labelCls}>Age (weeks)</label><input aria-label="Age (weeks)" className={inputCls} type="number" value={ageWeeks} onChange={e => setAgeWeeks(e.target.value)} /></div>
+        <div><label htmlFor="lbl-babysleepschedulecalculator-age-weeks" className={labelCls}>Age (weeks)</label><input id="lbl-babysleepschedulecalculator-age-weeks" aria-label="Age (weeks)" className={inputCls} type="number" value={ageWeeks} onChange={e => setAgeWeeks(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

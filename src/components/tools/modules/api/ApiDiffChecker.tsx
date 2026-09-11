@@ -24,12 +24,12 @@ export default function ApiDiffChecker() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Diff Checker</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Old Spec</label>
-            <textarea aria-label="Old Spec" value={oldSpec} onChange={e => setOldSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder='{"paths":{"/users":{"get":{}}}}' />
+            <label htmlFor="lbl-apidiffchecker-old-spec" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Old Spec</label>
+            <textarea id="lbl-apidiffchecker-old-spec" aria-label="Old Spec" value={oldSpec} onChange={e => setOldSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder='{"paths":{"/users":{"get":{}}}}' />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">New Spec</label>
-            <textarea aria-label="New Spec" value={newSpec} onChange={e => setNewSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder='{"paths":{"/users":{"get":{}},"/posts":{"get":{}}}}' />
+            <label htmlFor="lbl-apidiffchecker-new-spec" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">New Spec</label>
+            <textarea id="lbl-apidiffchecker-new-spec" aria-label="New Spec" value={newSpec} onChange={e => setNewSpec(e.target.value)} rows={5} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder='{"paths":{"/users":{"get":{}},"/posts":{"get":{}}}}' />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Compare Specs</button>

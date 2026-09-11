@@ -65,12 +65,12 @@ export default function MockApiResponseGenerator() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Response Schema (JSON)</label>
-          <textarea aria-label="Response Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setOutput(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-mockapiresponsegenerator-response-schema-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Response Schema (JSON)</label>
+          <textarea id="lbl-mockapiresponsegenerator-response-schema-json" aria-label="Response Schema (JSON)" value={schema} onChange={e => { setSchema(e.target.value); setOutput(''); }} rows={6} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>
-          <input type="range" min={1} max={50} value={count} aria-label="Array Length" onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
+          <label htmlFor="lbl-mockapiresponsegenerator-array-length-count" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>
+          <input id="lbl-mockapiresponsegenerator-array-length-count" type="range" min={1} max={50} value={count} aria-label="Array Length" onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
         <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {output && (

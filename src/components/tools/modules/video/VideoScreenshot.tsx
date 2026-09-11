@@ -197,8 +197,8 @@ export default function VideoScreenshot() {
 
             {mode === 'single' ? (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
-                <input aria-label="Timestamp (MM:SS or HH:MM:SS)" type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
+                <label htmlFor="lbl-videoscreenshot-timestamp-mm-ss-or-hh-mm-ss" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
+                <input id="lbl-videoscreenshot-timestamp-mm-ss-or-hh-mm-ss" aria-label="Timestamp (MM:SS or HH:MM:SS)" type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
@@ -209,8 +209,8 @@ export default function VideoScreenshot() {
               </div>
             ) : (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
-                <input aria-label="Interval (seconds between frames)" type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
+                <label htmlFor="lbl-videoscreenshot-interval-seconds-between-frames" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
+                <input id="lbl-videoscreenshot-interval-seconds-between-frames" aria-label="Interval (seconds between frames)" type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
@@ -247,14 +247,14 @@ export default function VideoScreenshot() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
-                <input aria-label="Width (0 = original)" type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
+                <label htmlFor="lbl-videoscreenshot-width-0-original" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
+                <input id="lbl-videoscreenshot-width-0-original" aria-label="Width (0 = original)" type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
-                <input aria-label="Height (0 = original)" type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
+                <label htmlFor="lbl-videoscreenshot-height-0-original" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
+                <input id="lbl-videoscreenshot-height-0-original" aria-label="Height (0 = original)" type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>

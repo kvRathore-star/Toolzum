@@ -301,8 +301,8 @@ export default function TiffToPdf() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
-          <input aria-label="Page Range"
+          <label htmlFor="lbl-tifftopdf-page-range" className="text-sm font-medium text-[var(--text-primary)]">Page Range</label>
+          <input id="lbl-tifftopdf-page-range" aria-label="Page Range"
             type="text"
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
@@ -312,8 +312,8 @@ export default function TiffToPdf() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Page Size</label>
-          <select aria-label="Page Size"
+          <label htmlFor="lbl-tifftopdf-page-size" className="text-sm font-medium text-[var(--text-primary)]">Page Size</label>
+          <select id="lbl-tifftopdf-page-size" aria-label="Page Size"
             value={pageSize}
             onChange={(e) => setPageSize(e.target.value as PageSizeOption)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -326,8 +326,8 @@ export default function TiffToPdf() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Orientation</label>
-          <select aria-label="Orientation"
+          <label htmlFor="lbl-tifftopdf-orientation" className="text-sm font-medium text-[var(--text-primary)]">Orientation</label>
+          <select id="lbl-tifftopdf-orientation" aria-label="Orientation"
             value={orientation}
             onChange={(e) => setOrientation(e.target.value as OrientationOption)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
@@ -339,8 +339,8 @@ export default function TiffToPdf() {
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-sm font-medium text-[var(--text-primary)]">Margin</label>
-          <select aria-label="Margin"
+          <label htmlFor="lbl-tifftopdf-margin" className="text-sm font-medium text-[var(--text-primary)]">Margin</label>
+          <select id="lbl-tifftopdf-margin" aria-label="Margin"
             value={margin}
             onChange={(e) => setMargin(e.target.value as MarginOption)}
             className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

@@ -40,8 +40,8 @@ export default function RevenueGrowthCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Period ($)</label><input aria-label="Current Period ($)" type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Period ($)</label><input aria-label="Previous Period ($)" type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-revenuegrowthcalculator-current-period" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Current Period ($)</label><input id="lbl-revenuegrowthcalculator-current-period" aria-label="Current Period ($)" type="number" value={current} onChange={e => setCurrent(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-revenuegrowthcalculator-previous-period" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Previous Period ($)</label><input id="lbl-revenuegrowthcalculator-previous-period" aria-label="Previous Period ($)" type="number" value={previous} onChange={e => setPrevious(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

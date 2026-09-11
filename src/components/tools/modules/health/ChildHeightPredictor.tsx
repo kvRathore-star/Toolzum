@@ -30,11 +30,11 @@ export default function ChildHeightPredictor() {
   return (
     <CalculatorShell category="Health" title="Child Height Predictor" accent="cyan" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Father height (cm)</label><input aria-label="Father height (cm)" className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Mother height (cm)</label><input aria-label="Mother height (cm)" className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Child gender</label><select aria-label="Child gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label className={labelCls}>Child age (optional)</label><input aria-label="Child age (optional)" className={inputCls} type="number" value={childAge} onChange={e => setChildAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Child height (optional)</label><input aria-label="Child height (optional)" className={inputCls} type="number" value={childHeight} onChange={e => setChildHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-childheightpredictor-father-height-cm" className={labelCls}>Father height (cm)</label><input id="lbl-childheightpredictor-father-height-cm" aria-label="Father height (cm)" className={inputCls} type="number" value={parentHeight} onChange={e => setParentHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-childheightpredictor-mother-height-cm" className={labelCls}>Mother height (cm)</label><input id="lbl-childheightpredictor-mother-height-cm" aria-label="Mother height (cm)" className={inputCls} type="number" value={motherHeight} onChange={e => setMotherHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-childheightpredictor-child-gender" className={labelCls}>Child gender</label><select id="lbl-childheightpredictor-child-gender" aria-label="Child gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label htmlFor="lbl-childheightpredictor-child-age-optional" className={labelCls}>Child age (optional)</label><input id="lbl-childheightpredictor-child-age-optional" aria-label="Child age (optional)" className={inputCls} type="number" value={childAge} onChange={e => setChildAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-childheightpredictor-child-height-optional" className={labelCls}>Child height (optional)</label><input id="lbl-childheightpredictor-child-height-optional" aria-label="Child height (optional)" className={inputCls} type="number" value={childHeight} onChange={e => setChildHeight(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

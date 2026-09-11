@@ -31,8 +31,8 @@ export default function SeoHeadlineAnalyzer() {
   return (
     <CalculatorShell category="SEO" title="SEO Headline Analyzer" result={resultText} onCalculate={analyze} calculateLabel="Analyze" presets={presets} accent="rose" downloadData={analysis ? JSON.stringify({ headline, ...analysis }, null, 2) : ''} downloadFilename="headline-analysis.json">
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
-        <input aria-label="Headline" type="text" value={headline} onChange={e => setHeadline(e.target.value)}
+        <label htmlFor="lbl-seoheadlineanalyzer-headline" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
+        <input id="lbl-seoheadlineanalyzer-headline" aria-label="Headline" type="text" value={headline} onChange={e => setHeadline(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50" />
 
         {analysis && (

@@ -34,12 +34,12 @@ export default function AvatarGenerator() {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
-            <input aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
+            <label htmlFor="lbl-avatargenerator-background" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Background</label>
+            <input id="lbl-avatargenerator-background" aria-label="Background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-            <input aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
+            <label htmlFor="lbl-avatargenerator-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+            <input id="lbl-avatargenerator-text" aria-label="Text" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-10 rounded-xl cursor-pointer border border-[var(--border-subtle)]" />
           </div>
         </div>
 

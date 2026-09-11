@@ -178,22 +178,22 @@ export default function AadhaarWalletCropper() {
 
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div className="space-y-1">
-                  <label className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
+                  <label htmlFor="lbl-aadhaarwalletcropper-horizontal-position-cropbox-x-px" className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
                     <Ruler className="w-3 h-3 text-[#0d9488]" />
                     Horizontal Position ({cropBox.x}px)
                   </label>
-                  <input
+                  <input id="lbl-aadhaarwalletcropper-horizontal-position-cropbox-x-px"
                     type="range" min="0" max="300" value={cropBox.x}
                     onChange={e => setCropBox(prev => ({ ...prev, x: parseInt(e.target.value) }))}
                     className="w-full accent-[#0d9488]"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
+                  <label htmlFor="lbl-aadhaarwalletcropper-vertical-position-cropbox-y-px" className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1">
                     <Ruler className="w-3 h-3 text-[#0d9488]" />
                     Vertical Position ({cropBox.y}px)
                   </label>
-                  <input
+                  <input id="lbl-aadhaarwalletcropper-vertical-position-cropbox-y-px"
                     type="range" min="0" max="200" value={cropBox.y}
                     onChange={e => setCropBox(prev => ({ ...prev, y: parseInt(e.target.value) }))}
                     className="w-full accent-[#0d9488]"

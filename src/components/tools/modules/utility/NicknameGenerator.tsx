@@ -33,15 +33,15 @@ export default function NicknameGenerator() {
     <CalculatorShell category="Utility" title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">
       <div className="space-y-4">
         <div>
-          <label className={labelClass}>Pattern</label>
-          <select aria-label="Pattern" value={patternIdx} onChange={e => setPatternIdx(Number(e.target.value))}
+          <label htmlFor="lbl-nicknamegenerator-pattern" className={labelClass}>Pattern</label>
+          <select id="lbl-nicknamegenerator-pattern" aria-label="Pattern" value={patternIdx} onChange={e => setPatternIdx(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
             {NICKNAME_PATTERNS.map((p, i) => (<option key={i} value={i}>{p.name}</option>))}
           </select>
         </div>
         <div>
-          <label className={labelClass}>Count</label>
-          <input aria-label="Count" type="number" min={1} max={100} value={String(count)} onChange={e => setCount(Number(e.target.value))}
+          <label htmlFor="lbl-nicknamegenerator-count" className={labelClass}>Count</label>
+          <input id="lbl-nicknamegenerator-count" aria-label="Count" type="number" min={1} max={100} value={String(count)} onChange={e => setCount(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50" />
         </div>
 

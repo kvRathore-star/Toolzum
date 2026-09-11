@@ -196,8 +196,8 @@ export default function VocalRemover() {
         </div>
 
         <div>
-          <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
-          <select aria-label="Output Format"
+          <label htmlFor="lbl-vocalremover-output-format" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Output Format</label>
+          <select id="lbl-vocalremover-output-format" aria-label="Output Format"
             value={outputFormat}
             onChange={e => setOutputFormat(e.target.value as OutFormat)}
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

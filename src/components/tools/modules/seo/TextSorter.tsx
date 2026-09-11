@@ -23,8 +23,8 @@ export default function TextSorter() {
   return (
     <CalculatorShell category="SEO" title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
       <div className="space-y-4">
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
-        <textarea aria-label="Lines" value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
+        <label htmlFor="lbl-textsorter-lines-inlines" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
+        <textarea id="lbl-textsorter-lines-inlines" aria-label="Lines" value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
         <div className="flex flex-wrap gap-2">

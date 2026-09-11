@@ -25,7 +25,7 @@ export default function SquareRootCalculator() {
   );
   return (
     <CalculatorShell category="Calculator" title="Square Root Calculator" result="" auto presets={presets} accent="sky" customResult={customResult}>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number</label><input aria-label="Number" type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputCls} /></div>
+      <div><label htmlFor="lbl-squarerootcalculator-number" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number</label><input id="lbl-squarerootcalculator-number" aria-label="Number" type="number" value={number} onChange={e => setNumber(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }

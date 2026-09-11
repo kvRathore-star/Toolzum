@@ -53,8 +53,8 @@ export default function FontGenerator() {
         {/* Left Side settings */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div className="space-y-2">
-            <label className="block text-sm font-bold text-[var(--text-primary)]">Preview Text</label>
-            <input aria-label="Preview Text"
+            <label htmlFor="lbl-fontgenerator-preview-text" className="block text-sm font-bold text-[var(--text-primary)]">Preview Text</label>
+            <input id="lbl-fontgenerator-preview-text" aria-label="Preview Text"
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}

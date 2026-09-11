@@ -19,13 +19,13 @@ export function StudyTimeCalculator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Study Time Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Hours per day</label>
-            <input aria-label="Hours per day" type="number" value={hrs} onChange={e => setHrs(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-hours-per-day" className="text-xs text-[var(--text-secondary)] mb-1 block">Hours per day</label>
+            <input id="lbl-calcfilekitwidgets-hours-per-day" aria-label="Hours per day" type="number" value={hrs} onChange={e => setHrs(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total days</label>
-            <input aria-label="Total days" type="number" value={days} onChange={e => setDays(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-total-days" className="text-xs text-[var(--text-secondary)] mb-1 block">Total days</label>
+            <input id="lbl-calcfilekitwidgets-total-days" aria-label="Total days" type="number" value={days} onChange={e => setDays(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
@@ -53,13 +53,13 @@ export function TestScoreCalculator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Test Score Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Correct answers</label>
-            <input aria-label="Correct answers" type="number" value={correct} onChange={e => setCorrect(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-correct-answers" className="text-xs text-[var(--text-secondary)] mb-1 block">Correct answers</label>
+            <input id="lbl-calcfilekitwidgets-correct-answers" aria-label="Correct answers" type="number" value={correct} onChange={e => setCorrect(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Total questions</label>
-            <input aria-label="Total questions" type="number" value={total} onChange={e => setTotal(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-total-questions" className="text-xs text-[var(--text-secondary)] mb-1 block">Total questions</label>
+            <input id="lbl-calcfilekitwidgets-total-questions" aria-label="Total questions" type="number" value={total} onChange={e => setTotal(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
@@ -89,13 +89,13 @@ export function WordsPerPageCalculator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Words Per Page Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Word count</label>
-            <input aria-label="Word count" type="number" value={words} onChange={e => setWords(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-word-count" className="text-xs text-[var(--text-secondary)] mb-1 block">Word count</label>
+            <input id="lbl-calcfilekitwidgets-word-count" aria-label="Word count" type="number" value={words} onChange={e => setWords(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Font size</label>
-            <select aria-label="Font size" value={fontSize} onChange={e => setFontSize(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-font-size" className="text-xs text-[var(--text-secondary)] mb-1 block">Font size</label>
+            <select id="lbl-calcfilekitwidgets-font-size" aria-label="Font size" value={fontSize} onChange={e => setFontSize(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {[8, 9, 10, 11, 12, 14, 16, 18].map(s => <option key={s} value={s}>{s}pt</option>)}
             </select>
@@ -130,18 +130,18 @@ export function ProfitLossCalculator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Working Capital Calculator</h2>
         <div className="grid grid-cols-3 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Revenue ($)</label>
-            <input aria-label="Revenue ($)" type="number" value={revenue} onChange={e => setRevenue(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-revenue" className="text-xs text-[var(--text-secondary)] mb-1 block">Revenue ($)</label>
+            <input id="lbl-calcfilekitwidgets-revenue" aria-label="Revenue ($)" type="number" value={revenue} onChange={e => setRevenue(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">COGS ($)</label>
-            <input aria-label="COGS ($)" type="number" value={cogs} onChange={e => setCogs(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-cogs" className="text-xs text-[var(--text-secondary)] mb-1 block">COGS ($)</label>
+            <input id="lbl-calcfilekitwidgets-cogs" aria-label="COGS ($)" type="number" value={cogs} onChange={e => setCogs(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Operating Exp ($)</label>
-            <input aria-label="Operating Exp ($)" type="number" value={opExp} onChange={e => setOpExp(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-operating-exp" className="text-xs text-[var(--text-secondary)] mb-1 block">Operating Exp ($)</label>
+            <input id="lbl-calcfilekitwidgets-operating-exp" aria-label="Operating Exp ($)" type="number" value={opExp} onChange={e => setOpExp(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
@@ -179,8 +179,8 @@ export function RingSizeConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Ring Size Converter</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Inner diameter (mm)</label>
-          <input aria-label="Inner diameter (mm)" type="number" value={mm} onChange={e => setMm(e.target.value)} step={0.1}
+          <label htmlFor="lbl-calcfilekitwidgets-inner-diameter-mm" className="text-xs text-[var(--text-secondary)] mb-1 block">Inner diameter (mm)</label>
+          <input id="lbl-calcfilekitwidgets-inner-diameter-mm" aria-label="Inner diameter (mm)" type="number" value={mm} onChange={e => setMm(e.target.value)} step={0.1}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
@@ -210,13 +210,13 @@ export function ScreenSizeConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Screen Size Calculator</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Diagonal (inches)</label>
-            <input aria-label="Diagonal (inches)" type="number" value={diag} onChange={e => setDiag(e.target.value)} step={0.1}
+            <label htmlFor="lbl-calcfilekitwidgets-diagonal-inches" className="text-xs text-[var(--text-secondary)] mb-1 block">Diagonal (inches)</label>
+            <input id="lbl-calcfilekitwidgets-diagonal-inches" aria-label="Diagonal (inches)" type="number" value={diag} onChange={e => setDiag(e.target.value)} step={0.1}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Aspect ratio</label>
-            <select aria-label="Aspect ratio" value={ratio} onChange={e => setRatio(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-aspect-ratio" className="text-xs text-[var(--text-secondary)] mb-1 block">Aspect ratio</label>
+            <select id="lbl-calcfilekitwidgets-aspect-ratio" aria-label="Aspect ratio" value={ratio} onChange={e => setRatio(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               {['16:9', '16:10', '4:3', '3:2', '21:9'].map(r => <option key={r} value={r}>{r}</option>)}
             </select>
@@ -254,13 +254,13 @@ export function ShoeSizeConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Shoe Size Converter</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Size</label>
-            <input aria-label="Size" type="number" value={size} onChange={e => setSize(e.target.value)} min={1} max={20}
+            <label htmlFor="lbl-calcfilekitwidgets-size" className="text-xs text-[var(--text-secondary)] mb-1 block">Size</label>
+            <input id="lbl-calcfilekitwidgets-size" aria-label="Size" type="number" value={size} onChange={e => setSize(e.target.value)} min={1} max={20}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-            <select aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-from" className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
+            <select id="lbl-calcfilekitwidgets-from" aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               <option value="US">US to UK</option>
               <option value="UK">UK to US</option>

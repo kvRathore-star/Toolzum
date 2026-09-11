@@ -203,7 +203,7 @@ export default function PdfPageManager() {
             {tab === 'crop' && (
               <div className="space-y-4">
                 <p className="text-[10px] text-[var(--text-secondary)]">Remove white margins from all pages.</p>
-                <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Crop Margin (points): {margin}pt</label><input aria-label="Remove white margins from all pages." type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
+                <div><label htmlFor="lbl-pdfpagemanager-crop-margin-points-margin-pt" className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Crop Margin (points): {margin}pt</label><input id="lbl-pdfpagemanager-crop-margin-points-margin-pt" aria-label="Remove white margins from all pages." type="range" min="0" max="200" value={margin} onChange={e => setMargin(Number(e.target.value))} className="w-full mt-2 accent-blue-600" /></div>
                 <button onClick={processCrop} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs transition-all active:scale-[0.98] disabled:opacity-50">{isProcessing ? 'Processing...' : 'Crop & Download'}</button>
               </div>
             )}

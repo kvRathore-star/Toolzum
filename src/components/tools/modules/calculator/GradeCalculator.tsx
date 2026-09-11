@@ -31,7 +31,7 @@ export default function GradeCalculator() {
   );
   return (
     <CalculatorShell category="Calculator" title="Grade Calculator" result="" auto presets={presets} accent="fuchsia" customResult={customResult}>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Percentage (%)</label><input aria-label="Percentage (%)" type="number" value={percentage} onChange={e => setPercentage(e.target.value)} className={inputCls} /></div>
+      <div><label htmlFor="lbl-gradecalculator-percentage" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Percentage (%)</label><input id="lbl-gradecalculator-percentage" aria-label="Percentage (%)" type="number" value={percentage} onChange={e => setPercentage(e.target.value)} className={inputCls} /></div>
     </CalculatorShell>
   );
 }

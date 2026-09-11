@@ -49,10 +49,10 @@ export default function SeatLicenseCalculator() {
       ) : null}
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Number of users</label><input aria-label="Number of users" className={inputCls} type="number" value={users} onChange={e => setUsers(e.target.value)} /></div>
-        <div><label className={labelCls}>Price / user / month ($)</label><input aria-label="Price / user / month ($)" className={inputCls} type="number" value={pricePerUser} onChange={e => setPricePerUser(e.target.value)} /></div>
-        <div><label className={labelCls}>Billing cycle</label><select aria-label="Billing cycle" className={inputCls} value={billingCycle} onChange={e => setBillingCycle(e.target.value as 'monthly'|'annual')}><option value="monthly">Monthly</option><option value="annual">Annual</option></select></div>
-        <div><label className={labelCls}>Annual discount (%)</label><input aria-label="Annual discount (%)" className={inputCls} type="number" value={annualDiscount} onChange={e => setAnnualDiscount(e.target.value)} /></div>
+        <div><label htmlFor="lbl-seatlicensecalculator-number-of-users" className={labelCls}>Number of users</label><input id="lbl-seatlicensecalculator-number-of-users" aria-label="Number of users" className={inputCls} type="number" value={users} onChange={e => setUsers(e.target.value)} /></div>
+        <div><label htmlFor="lbl-seatlicensecalculator-price-user-month" className={labelCls}>Price / user / month ($)</label><input id="lbl-seatlicensecalculator-price-user-month" aria-label="Price / user / month ($)" className={inputCls} type="number" value={pricePerUser} onChange={e => setPricePerUser(e.target.value)} /></div>
+        <div><label htmlFor="lbl-seatlicensecalculator-billing-cycle" className={labelCls}>Billing cycle</label><select id="lbl-seatlicensecalculator-billing-cycle" aria-label="Billing cycle" className={inputCls} value={billingCycle} onChange={e => setBillingCycle(e.target.value as 'monthly'|'annual')}><option value="monthly">Monthly</option><option value="annual">Annual</option></select></div>
+        <div><label htmlFor="lbl-seatlicensecalculator-annual-discount" className={labelCls}>Annual discount (%)</label><input id="lbl-seatlicensecalculator-annual-discount" aria-label="Annual discount (%)" className={inputCls} type="number" value={annualDiscount} onChange={e => setAnnualDiscount(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

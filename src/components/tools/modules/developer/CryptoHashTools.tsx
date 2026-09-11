@@ -143,8 +143,8 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
 
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div>
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
-            <select aria-label="Algorithm" value={algorithm} onChange={e => setAlgorithm(e.target.value as any)}
+            <label htmlFor="lbl-cryptohashtools-algorithm" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Algorithm</label>
+            <select id="lbl-cryptohashtools-algorithm" aria-label="Algorithm" value={algorithm} onChange={e => setAlgorithm(e.target.value as any)}
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
               <option value="AES-128">AES-128 (128-bit)</option>
               <option value="AES-256">AES-256 (256-bit)</option>
@@ -152,8 +152,8 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
           </div>
           {mode === 'encrypt' && (
             <div>
-              <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Output Format</label>
-              <select aria-label="Output Format" value={outputFormat} onChange={e => setOutputFormat(e.target.value as any)}
+              <label htmlFor="lbl-cryptohashtools-output-format" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Output Format</label>
+              <select id="lbl-cryptohashtools-output-format" aria-label="Output Format" value={outputFormat} onChange={e => setOutputFormat(e.target.value as any)}
                 className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
                 <option value="Base64">Base64</option>
                 <option value="Hex">Hexadecimal</option>

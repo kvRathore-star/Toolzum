@@ -33,8 +33,8 @@ export default function ProbabilityCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Probability Calculator" result="" auto presets={presets} accent="green" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Favorable Outcomes</label><input aria-label="Favorable Outcomes" type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Possible Outcomes</label><input aria-label="Total Possible Outcomes" type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-probabilitycalculator-favorable-outcomes" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Favorable Outcomes</label><input id="lbl-probabilitycalculator-favorable-outcomes" aria-label="Favorable Outcomes" type="number" value={favorable} onChange={e => setFavorable(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-probabilitycalculator-total-possible-outcomes" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Possible Outcomes</label><input id="lbl-probabilitycalculator-total-possible-outcomes" aria-label="Total Possible Outcomes" type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

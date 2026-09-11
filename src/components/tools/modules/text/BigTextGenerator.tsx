@@ -105,8 +105,8 @@ export default function BigTextGenerator() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
-          <textarea aria-label="Your Text"
+          <label htmlFor="lbl-bigtextgenerator-your-text" className="text-xs text-[var(--text-muted)] font-bold uppercase">Your Text</label>
+          <textarea id="lbl-bigtextgenerator-your-text" aria-label="Your Text"
             value={text}
             onChange={e => setText(e.target.value)}
             placeholder="Type something to make it BIG..."

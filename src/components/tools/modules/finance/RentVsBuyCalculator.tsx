@@ -54,11 +54,11 @@ export default function RentVsBuyCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Home Price ($)</label><input aria-label="Home Price ($)" type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Down Payment ($)</label><input aria-label="Down Payment ($)" type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Mortgage Rate (%)</label><input aria-label="Mortgage Rate (%)" type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Rent ($)</label><input aria-label="Monthly Rent ($)" type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Timeframe (years)</label><input aria-label="Timeframe (years)" type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-rentvsbuycalculator-home-price" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Home Price ($)</label><input id="lbl-rentvsbuycalculator-home-price" aria-label="Home Price ($)" type="number" value={homePrice} onChange={e => setHomePrice(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-rentvsbuycalculator-down-payment" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Down Payment ($)</label><input id="lbl-rentvsbuycalculator-down-payment" aria-label="Down Payment ($)" type="number" value={downPayment} onChange={e => setDownPayment(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-rentvsbuycalculator-mortgage-rate" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Mortgage Rate (%)</label><input id="lbl-rentvsbuycalculator-mortgage-rate" aria-label="Mortgage Rate (%)" type="number" value={mortgageRate} onChange={e => setMortgageRate(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label htmlFor="lbl-rentvsbuycalculator-monthly-rent" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Monthly Rent ($)</label><input id="lbl-rentvsbuycalculator-monthly-rent" aria-label="Monthly Rent ($)" type="number" value={rent} onChange={e => setRent(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-rentvsbuycalculator-timeframe-years" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Timeframe (years)</label><input id="lbl-rentvsbuycalculator-timeframe-years" aria-label="Timeframe (years)" type="number" value={years} onChange={e => setYears(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

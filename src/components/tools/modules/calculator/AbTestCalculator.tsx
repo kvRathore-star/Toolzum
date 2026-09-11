@@ -47,10 +47,10 @@ export default function AbTestCalculator() {
   return (
     <CalculatorShell category="Calculator" title="A/B Test Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input aria-label="Control Visitors" type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input aria-label="Control Conversions" type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Visitors</label><input aria-label="Variant Visitors" type="number" value={variantVisitors} onChange={e => setVariantVisitors(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Conversions</label><input aria-label="Variant Conversions" type="number" value={variantConversions} onChange={e => setVariantConversions(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-abtestcalculator-control-visitors" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Visitors</label><input id="lbl-abtestcalculator-control-visitors" aria-label="Control Visitors" type="number" value={controlVisitors} onChange={e => setControlVisitors(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-abtestcalculator-control-conversions" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Control Conversions</label><input id="lbl-abtestcalculator-control-conversions" aria-label="Control Conversions" type="number" value={controlConversions} onChange={e => setControlConversions(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-abtestcalculator-variant-visitors" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Visitors</label><input id="lbl-abtestcalculator-variant-visitors" aria-label="Variant Visitors" type="number" value={variantVisitors} onChange={e => setVariantVisitors(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-abtestcalculator-variant-conversions" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Variant Conversions</label><input id="lbl-abtestcalculator-variant-conversions" aria-label="Variant Conversions" type="number" value={variantConversions} onChange={e => setVariantConversions(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

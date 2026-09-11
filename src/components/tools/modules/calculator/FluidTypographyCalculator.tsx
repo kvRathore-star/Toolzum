@@ -46,12 +46,12 @@ export default function FluidTypographyCalculator() {
       <div className="max-w-xl">
         <button onClick={calc} className="mb-4 px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-sm font-medium transition-colors">Generate Type Scale</button>
         <div className="grid grid-cols-2 gap-4">
-          <div><label className={labelCls}>Base Font Size (px)</label><input aria-label="Base Font Size (px)" className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
-          <div><label className={labelCls}>Scale Ratio</label><input aria-label="Scale Ratio" className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
-          <div><label className={labelCls}>Min Viewport (px)</label><input aria-label="Min Viewport (px)" className={inputCls} value={minVw} onChange={e => setMinVw(e.target.value)} /></div>
-          <div><label className={labelCls}>Max Viewport (px)</label><input aria-label="Max Viewport (px)" className={inputCls} value={maxVw} onChange={e => setMaxVw(e.target.value)} /></div>
-          <div><label className={labelCls}>Min Clamp (px, optional)</label><input aria-label="Min Clamp (px, optional)" className={inputCls} value={minSize} onChange={e => setMinSize(e.target.value)} placeholder="Auto" /></div>
-          <div><label className={labelCls}>Max Clamp (px, optional)</label><input aria-label="Max Clamp (px, optional)" className={inputCls} value={maxSize} onChange={e => setMaxSize(e.target.value)} placeholder="Auto" /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-base-font-size-px" className={labelCls}>Base Font Size (px)</label><input id="lbl-fluidtypographycalculator-base-font-size-px" aria-label="Base Font Size (px)" className={inputCls} value={base} onChange={e => setBase(e.target.value)} /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-scale-ratio" className={labelCls}>Scale Ratio</label><input id="lbl-fluidtypographycalculator-scale-ratio" aria-label="Scale Ratio" className={inputCls} value={scale} onChange={e => setScale(e.target.value)} /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-min-viewport-px" className={labelCls}>Min Viewport (px)</label><input id="lbl-fluidtypographycalculator-min-viewport-px" aria-label="Min Viewport (px)" className={inputCls} value={minVw} onChange={e => setMinVw(e.target.value)} /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-max-viewport-px" className={labelCls}>Max Viewport (px)</label><input id="lbl-fluidtypographycalculator-max-viewport-px" aria-label="Max Viewport (px)" className={inputCls} value={maxVw} onChange={e => setMaxVw(e.target.value)} /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-min-clamp-px-optional" className={labelCls}>Min Clamp (px, optional)</label><input id="lbl-fluidtypographycalculator-min-clamp-px-optional" aria-label="Min Clamp (px, optional)" className={inputCls} value={minSize} onChange={e => setMinSize(e.target.value)} placeholder="Auto" /></div>
+          <div><label htmlFor="lbl-fluidtypographycalculator-max-clamp-px-optional" className={labelCls}>Max Clamp (px, optional)</label><input id="lbl-fluidtypographycalculator-max-clamp-px-optional" aria-label="Max Clamp (px, optional)" className={inputCls} value={maxSize} onChange={e => setMaxSize(e.target.value)} placeholder="Auto" /></div>
         </div>
         {result.length > 0 && (
           <div className="mt-6">

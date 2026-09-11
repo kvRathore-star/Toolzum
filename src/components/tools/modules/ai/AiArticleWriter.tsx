@@ -596,8 +596,8 @@ export default function AiArticleWriter() {
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5">
         <div className="space-y-2">
-          <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Topic</label>
-          <input aria-label="Topic"
+          <label htmlFor="lbl-aiarticlewriter-topic" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Topic</label>
+          <input id="lbl-aiarticlewriter-topic" aria-label="Topic"
             type="text"
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
@@ -609,8 +609,8 @@ export default function AiArticleWriter() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tone</label>
-            <select aria-label="Tone"
+            <label htmlFor="lbl-aiarticlewriter-tone" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Tone</label>
+            <select id="lbl-aiarticlewriter-tone" aria-label="Tone"
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
@@ -619,8 +619,8 @@ export default function AiArticleWriter() {
             </select>
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
-            <select aria-label="Length"
+            <label htmlFor="lbl-aiarticlewriter-length" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Length</label>
+            <select id="lbl-aiarticlewriter-length" aria-label="Length"
               value={length}
               onChange={(e) => setLength(e.target.value as LengthKey)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
@@ -629,8 +629,8 @@ export default function AiArticleWriter() {
             </select>
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Audience</label>
-            <select aria-label="Audience"
+            <label htmlFor="lbl-aiarticlewriter-audience" className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Audience</label>
+            <select id="lbl-aiarticlewriter-audience" aria-label="Audience"
               value={audience}
               onChange={(e) => setAudience(e.target.value as Audience)}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"

@@ -31,7 +31,7 @@ export default function CircleCalculator() {
   );
   return (
     <CalculatorShell category="Calculator" title="Circle Calculator" result="" auto presets={presets} accent="violet" customResult={customResult}>
-      <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Radius</label><input aria-label="Radius" type="number" value={radius} onChange={e => setRadius(e.target.value)} step="0.1" className={inputCls} /></div>
+      <div><label htmlFor="lbl-circlecalculator-radius" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Radius</label><input id="lbl-circlecalculator-radius" aria-label="Radius" type="number" value={radius} onChange={e => setRadius(e.target.value)} step="0.1" className={inputCls} /></div>
     </CalculatorShell>
   );
 }

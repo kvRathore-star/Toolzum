@@ -38,14 +38,14 @@ export default function KeywordDensityChecker() {
     <CalculatorShell category="SEO" title="Keyword Density Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="amber" downloadData={density ? JSON.stringify({ keyword, text, ...density }, null, 2) : ''} downloadFilename="keyword-density.json">
       <div className="space-y-4">
         <div className="space-y-3">
-          <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
-          <textarea aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
+          <label htmlFor="lbl-keyworddensitychecker-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
+          <textarea id="lbl-keyworddensitychecker-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
         </div>
         <div className="flex gap-2">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Keyword</label>
-            <input aria-label="Keyword" type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Enter keyword to check..."
+            <label htmlFor="lbl-keyworddensitychecker-keyword" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Keyword</label>
+            <input id="lbl-keyworddensitychecker-keyword" aria-label="Keyword" type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Enter keyword to check..."
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
           </div>
         </div>

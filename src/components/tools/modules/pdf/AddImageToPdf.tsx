@@ -175,8 +175,8 @@ export default function AddImageToPdf() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
-              <input aria-label="X Position"
+              <label htmlFor="lbl-addimagetopdf-x-position" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">X Position</label>
+              <input id="lbl-addimagetopdf-x-position" aria-label="X Position"
                 type="number"
                 value={x}
                 onChange={(e) => setX(parseInt(e.target.value) || 0)}
@@ -184,8 +184,8 @@ export default function AddImageToPdf() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
-              <input aria-label="Y Position"
+              <label htmlFor="lbl-addimagetopdf-y-position" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Y Position</label>
+              <input id="lbl-addimagetopdf-y-position" aria-label="Y Position"
                 type="number"
                 value={y}
                 onChange={(e) => setY(parseInt(e.target.value) || 0)}
@@ -196,8 +196,8 @@ export default function AddImageToPdf() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Width (px)</label>
-              <input aria-label="Width (px)"
+              <label htmlFor="lbl-addimagetopdf-width-px" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Width (px)</label>
+              <input id="lbl-addimagetopdf-width-px" aria-label="Width (px)"
                 type="number"
                 min={1}
                 value={width}
@@ -206,8 +206,8 @@ export default function AddImageToPdf() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Height (px)</label>
-              <input aria-label="Height (px)"
+              <label htmlFor="lbl-addimagetopdf-height-px" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Height (px)</label>
+              <input id="lbl-addimagetopdf-height-px" aria-label="Height (px)"
                 type="number"
                 min={1}
                 value={height}

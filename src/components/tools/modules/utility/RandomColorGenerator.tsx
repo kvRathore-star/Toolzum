@@ -55,8 +55,8 @@ export default function RandomColorGenerator() {
         <div className="grid grid-cols-2 gap-3">
           <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
           <div className="mb-3">
-            <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
-            <select aria-label="Format" value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+            <label htmlFor="lbl-randomcolorgenerator-format" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
+            <select id="lbl-randomcolorgenerator-format" aria-label="Format" value={format} onChange={e => setFormat(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value="hex">Hex</option>
               <option value="rgb">RGB</option>
               <option value="hsl">HSL</option>

@@ -268,14 +268,14 @@ export default function CollageMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-[var(--text-secondary)] mb-1">Background</label>
-                <input aria-label="Background" type="color" value={bgColor}
+                <label htmlFor="lbl-collagemaker-background" className="block text-xs text-[var(--text-secondary)] mb-1">Background</label>
+                <input id="lbl-collagemaker-background" aria-label="Background" type="color" value={bgColor}
                   onChange={e => setBgColor(e.target.value)}
                   className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
               <div>
-                <label className="block text-xs text-[var(--text-secondary)] mb-1">Border Color</label>
-                <input aria-label="Border Color" type="color" value={borderColor}
+                <label htmlFor="lbl-collagemaker-border-color" className="block text-xs text-[var(--text-secondary)] mb-1">Border Color</label>
+                <input id="lbl-collagemaker-border-color" aria-label="Border Color" type="color" value={borderColor}
                   onChange={e => setBorderColor(e.target.value)}
                   className="w-full h-9 rounded-lg cursor-pointer border border-[var(--border-subtle)]" />
               </div>
@@ -297,8 +297,8 @@ export default function CollageMaker() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs text-[var(--text-secondary)] mb-1">Format</label>
-                <select aria-label="Format" value={format}
+                <label htmlFor="lbl-collagemaker-format" className="block text-xs text-[var(--text-secondary)] mb-1">Format</label>
+                <select id="lbl-collagemaker-format" aria-label="Format" value={format}
                   onChange={e => setFormat(e.target.value as Format)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-2 text-sm text-zinc-900 dark:text-zinc-100"
                 >

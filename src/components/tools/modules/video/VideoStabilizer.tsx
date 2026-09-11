@@ -203,10 +203,10 @@ export default function VideoStabilizer() {
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                <label htmlFor="lbl-videostabilizer-smoothing-window-smoothing-frames" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
                   Smoothing Window: {smoothing} frames
                 </label>
-                <input
+                <input id="lbl-videostabilizer-smoothing-window-smoothing-frames"
                   type="range"
                   min={5}
                   max={30}

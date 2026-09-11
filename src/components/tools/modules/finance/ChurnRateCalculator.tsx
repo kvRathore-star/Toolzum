@@ -37,8 +37,8 @@ export default function ChurnRateCalculator() {
   return (
     <CalculatorShell category="Finance" title="Churn Rate Calculator" result={result} auto presets={presets} accent="rose" downloadData={csvData} downloadFilename="churn-rate.csv">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input aria-label="Customers Lost" type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input aria-label="Total Customers" type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-churnratecalculator-customers-lost" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Customers Lost</label><input id="lbl-churnratecalculator-customers-lost" aria-label="Customers Lost" type="number" value={lost} onChange={e => setLost(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-churnratecalculator-total-customers" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Total Customers</label><input id="lbl-churnratecalculator-total-customers" aria-label="Total Customers" type="number" value={total} onChange={e => setTotal(e.target.value)} className={inputCls} /></div>
       </div>
       {hasInput && (
       <div className="space-y-3">

@@ -260,12 +260,12 @@ export default function GstInvoiceGenerator() {
         <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-2xl shadow-xl space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Number</label>
-              <input aria-label="Invoice Number" type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+              <label htmlFor="lbl-gstinvoicegenerator-invoice-number" className="text-sm font-semibold text-[var(--text-primary)]">Invoice Number</label>
+              <input id="lbl-gstinvoicegenerator-invoice-number" aria-label="Invoice Number" type="text" value={invoiceNo} onChange={e => setInvoiceNo(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-[var(--text-primary)]">Invoice Date</label>
-              <input aria-label="Invoice Date" type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+              <label htmlFor="lbl-gstinvoicegenerator-invoice-date" className="text-sm font-semibold text-[var(--text-primary)]">Invoice Date</label>
+              <input id="lbl-gstinvoicegenerator-invoice-date" aria-label="Invoice Date" type="date" value={invoiceDate} onChange={e => setInvoiceDate(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
             </div>
           </div>
 

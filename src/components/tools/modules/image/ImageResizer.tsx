@@ -78,12 +78,12 @@ export default function ImageResizer() {
          {image && (
            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                 <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Width (px)</label>
-                 <input aria-label="Width (px)" type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                 <label htmlFor="lbl-imageresizer-width-px" className="block text-sm font-bold text-left mb-2 text-zinc-600">Width (px)</label>
+                 <input id="lbl-imageresizer-width-px" aria-label="Width (px)" type="number" value={width} onChange={e => setWidth(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
               <div>
-                 <label className="block text-sm font-bold text-left mb-2 text-zinc-600">Height (px)</label>
-                 <input aria-label="Height (px)" type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                 <label htmlFor="lbl-imageresizer-height-px" className="block text-sm font-bold text-left mb-2 text-zinc-600">Height (px)</label>
+                 <input id="lbl-imageresizer-height-px" aria-label="Height (px)" type="number" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
               </div>
            </div>
          )}

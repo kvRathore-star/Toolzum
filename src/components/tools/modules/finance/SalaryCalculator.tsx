@@ -58,12 +58,12 @@ export default function SalaryCalculator() {
     >
       <div className="space-y-4">
         <div>
-          <label className={labelCls}>Annual CTC / Salary</label>
-          <input aria-label="Annual CTC / Salary" type="number" value={ctc} onChange={e => setCtc(e.target.value)} className={inputCls} />
+          <label htmlFor="lbl-salarycalculator-annual-ctc-salary" className={labelCls}>Annual CTC / Salary</label>
+          <input id="lbl-salarycalculator-annual-ctc-salary" aria-label="Annual CTC / Salary" type="number" value={ctc} onChange={e => setCtc(e.target.value)} className={inputCls} />
         </div>
         <div>
-          <label className={labelCls}>Annual Deductions / 80C</label>
-          <input aria-label="Annual Deductions / 80C" type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputCls} />
+          <label htmlFor="lbl-salarycalculator-annual-deductions-80c" className={labelCls}>Annual Deductions / 80C</label>
+          <input id="lbl-salarycalculator-annual-deductions-80c" aria-label="Annual Deductions / 80C" type="number" value={deductions} onChange={e => setDeductions(e.target.value)} className={inputCls} />
         </div>
       </div>
     </CalculatorShell>

@@ -38,12 +38,12 @@ export function EtaCalculator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Distance ({unit === 'km' ? 'km' : 'mi'})</label>
-            <input value={dist} aria-label={`Distance (${unit === 'km' ? 'km' : 'mi'})`} onChange={e => setDist(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+            <label htmlFor="lbl-mathtoolswidgets-distance-unit-km-km-mi" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Distance ({unit === 'km' ? 'km' : 'mi'})</label>
+            <input id="lbl-mathtoolswidgets-distance-unit-km-km-mi" value={dist} aria-label={`Distance (${unit === 'km' ? 'km' : 'mi'})`} onChange={e => setDist(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
           <div>
-            <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Speed ({unit === 'km' ? 'km/h' : 'mph'})</label>
-            <input value={speed} aria-label={`Speed (${unit === 'km' ? 'km/h' : 'mph'})`} onChange={e => setSpeed(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+            <label htmlFor="lbl-mathtoolswidgets-speed-unit-km-km-h-mph" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Speed ({unit === 'km' ? 'km/h' : 'mph'})</label>
+            <input id="lbl-mathtoolswidgets-speed-unit-km-km-h-mph" value={speed} aria-label={`Speed (${unit === 'km' ? 'km/h' : 'mph'})`} onChange={e => setSpeed(e.target.value)} type="number" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -54,8 +54,8 @@ export function EtaCalculator() {
           <div className="flex-1" />
         </div>
         <div>
-          <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Start Time (optional, HH:MM)</label>
-            <input aria-label="Start Time (optional, HH:MM)" value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+          <label htmlFor="lbl-mathtoolswidgets-start-time-optional-hh-mm" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Start Time (optional, HH:MM)</label>
+            <input id="lbl-mathtoolswidgets-start-time-optional-hh-mm" aria-label="Start Time (optional, HH:MM)" value={start} onChange={e => setStart(e.target.value)} placeholder="e.g. 14:30" className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         </div>
         {result && (
           <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl p-5 text-center">

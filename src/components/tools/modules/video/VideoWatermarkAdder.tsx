@@ -110,8 +110,8 @@ export default function VideoWatermarkAdder() {
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Watermark Text</label>
-                <input aria-label="Watermark Text" 
+                <label htmlFor="lbl-videowatermarkadder-watermark-text" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Watermark Text</label>
+                <input id="lbl-videowatermarkadder-watermark-text" aria-label="Watermark Text" 
                   type="text" 
                   value={watermarkText}
                   onChange={(e) => setWatermarkText(e.target.value)}
@@ -121,8 +121,8 @@ export default function VideoWatermarkAdder() {
               </div>
 
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Position</label>
-                <select aria-label="Position" 
+                <label htmlFor="lbl-videowatermarkadder-position" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Position</label>
+                <select id="lbl-videowatermarkadder-position" aria-label="Position" 
                   value={position}
                   onChange={(e) => setPosition(e.target.value)}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"

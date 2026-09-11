@@ -39,18 +39,18 @@ export function OauthClientSetup() {
         </div>
         <div className="space-y-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Client ID</label>
-            <input aria-label="Client ID" type="text" value={clientId} onChange={e => setClientId(e.target.value)} placeholder="your-client-id"
+            <label htmlFor="lbl-securitytoolkitwidgets-client-id" className="text-xs text-[var(--text-secondary)] mb-1 block">Client ID</label>
+            <input id="lbl-securitytoolkitwidgets-client-id" aria-label="Client ID" type="text" value={clientId} onChange={e => setClientId(e.target.value)} placeholder="your-client-id"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Redirect URI</label>
-            <input aria-label="Redirect URI" type="text" value={redirectUri} onChange={e => setRedirectUri(e.target.value)} placeholder="https://yourapp.com/callback"
+            <label htmlFor="lbl-securitytoolkitwidgets-redirect-uri" className="text-xs text-[var(--text-secondary)] mb-1 block">Redirect URI</label>
+            <input id="lbl-securitytoolkitwidgets-redirect-uri" aria-label="Redirect URI" type="text" value={redirectUri} onChange={e => setRedirectUri(e.target.value)} placeholder="https://yourapp.com/callback"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Scope</label>
-            <input aria-label="Scope" type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="openid profile email"
+            <label htmlFor="lbl-securitytoolkitwidgets-scope" className="text-xs text-[var(--text-secondary)] mb-1 block">Scope</label>
+            <input id="lbl-securitytoolkitwidgets-scope" aria-label="Scope" type="text" value={scope} onChange={e => setScope(e.target.value)} placeholder="openid profile email"
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
@@ -99,13 +99,13 @@ export function PkceVerifier() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PKCE Verifier</h2>
         <div className="space-y-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_verifier</label>
-            <textarea aria-label="code_verifier" rows={2} value={verifier} onChange={e => setVerifier(e.target.value)} placeholder="Paste or generate..."
+            <label htmlFor="lbl-securitytoolkitwidgets-code-verifier" className="text-xs text-[var(--text-secondary)] mb-1 block">code_verifier</label>
+            <textarea id="lbl-securitytoolkitwidgets-code-verifier" aria-label="code_verifier" rows={2} value={verifier} onChange={e => setVerifier(e.target.value)} placeholder="Paste or generate..."
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">code_challenge (S256)</label>
-            <input aria-label="code_challenge (S256)" type="text" value={challenge} onChange={e => setChallenge(e.target.value)}
+            <label htmlFor="lbl-securitytoolkitwidgets-code-challenge-s256" className="text-xs text-[var(--text-secondary)] mb-1 block">code_challenge (S256)</label>
+            <input id="lbl-securitytoolkitwidgets-code-challenge-s256" aria-label="code_challenge (S256)" type="text" value={challenge} onChange={e => setChallenge(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
@@ -324,8 +324,8 @@ export function OAuthStateValidator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">State parameter</label>
-          <input aria-label="State parameter" type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
+          <label htmlFor="lbl-securitytoolkitwidgets-state-parameter" className="text-xs text-[var(--text-secondary)] mb-1 block">State parameter</label>
+          <input id="lbl-securitytoolkitwidgets-state-parameter" aria-label="State parameter" type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
         <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>

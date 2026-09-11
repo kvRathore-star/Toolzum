@@ -30,8 +30,8 @@ export default function FinalGradeCalculator() {
   return (
     <CalculatorShell category="Calculator" title="Final Grade Calculator" result="" auto presets={presets} accent="lime" customResult={customResult}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (comma-separated)</label><input aria-label="Grades (comma-separated)" type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Weights (comma-separated, %)</label><input aria-label="Weights (comma-separated, %)" type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-finalgradecalculator-grades-comma-separated" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Grades (comma-separated)</label><input id="lbl-finalgradecalculator-grades-comma-separated" aria-label="Grades (comma-separated)" type="text" value={grades} onChange={e => setGrades(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-finalgradecalculator-weights-comma-separated" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Weights (comma-separated, %)</label><input id="lbl-finalgradecalculator-weights-comma-separated" aria-label="Weights (comma-separated, %)" type="text" value={weights} onChange={e => setWeights(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

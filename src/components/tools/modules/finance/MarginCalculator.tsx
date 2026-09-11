@@ -41,8 +41,8 @@ export default function MarginCalculator() {
     >
       <div className="space-y-4">
         <div>
-          <label className={labelCls}>Item Cost ($)</label>
-          <input aria-label="Item Cost ($)" className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-margincalculator-item-cost" className={labelCls}>Item Cost ($)</label>
+          <input id="lbl-margincalculator-item-cost" aria-label="Item Cost ($)" className={inputCls} type="number" value={cost} onChange={e => setCost(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
           <label className={labelCls}>Target Margin (%)</label>

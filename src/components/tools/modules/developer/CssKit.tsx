@@ -115,8 +115,8 @@ export function GlassmorphismGenerator() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <label className="text-[10px] text-[var(--text-secondary)]">Tint</label>
-            <input aria-label="Tint" type="color" value={`#${bgColor.split(',').map(c => Number(c).toString(16).padStart(2, '0')).join('')}`}
+            <label htmlFor="lbl-csskit-tint" className="text-[10px] text-[var(--text-secondary)]">Tint</label>
+            <input id="lbl-csskit-tint" aria-label="Tint" type="color" value={`#${bgColor.split(',').map(c => Number(c).toString(16).padStart(2, '0')).join('')}`}
               onChange={e => { const h = e.target.value.slice(1); setBgColor(`${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)}`); }}
               className="w-8 h-6 rounded cursor-pointer border-0" />
           </div>
@@ -209,8 +209,8 @@ export function NeumorphismGenerator() {
         </div>
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <label className="text-[10px] text-[var(--text-secondary)]">Base</label>
-            <input aria-label="Base" type="color" value={color} onChange={e => setColor(e.target.value)} className="w-8 h-6 rounded cursor-pointer border-0" />
+            <label htmlFor="lbl-csskit-base" className="text-[10px] text-[var(--text-secondary)]">Base</label>
+            <input id="lbl-csskit-base" aria-label="Base" type="color" value={color} onChange={e => setColor(e.target.value)} className="w-8 h-6 rounded cursor-pointer border-0" />
           </div>
           <label className="flex items-center gap-1.5 cursor-pointer">
             <input type="checkbox" checked={inset} onChange={e => setInset(e.target.checked)} className="w-3 h-3 rounded" />

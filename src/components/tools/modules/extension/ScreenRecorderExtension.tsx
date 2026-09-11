@@ -105,8 +105,8 @@ document.getElementById('stopBtn').addEventListener('click', () => {
           <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block border-b border-zinc-800 pb-2">Settings</span>
           
           <div className="space-y-2">
-            <label className="text-xs text-[var(--text-muted)] font-bold">Extension Name</label>
-            <input aria-label="Extension Name" 
+            <label htmlFor="lbl-screenrecorderextension-extension-name" className="text-xs text-[var(--text-muted)] font-bold">Extension Name</label>
+            <input id="lbl-screenrecorderextension-extension-name" aria-label="Extension Name" 
               type="text" 
               value={extName} 
               onChange={e => setExtName(e.target.value)}

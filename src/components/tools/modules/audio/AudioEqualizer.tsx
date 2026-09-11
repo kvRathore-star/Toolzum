@@ -406,8 +406,8 @@ export default function AudioEqualizer() {
 
         <div className="flex items-center justify-between gap-4 pt-2">
           <div className="flex items-center gap-2">
-            <label className="text-[10px] font-semibold text-[var(--text-muted)]">Output:</label>
-            <select aria-label="Output:" value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof OUTPUT_FORMATS[number])}
+            <label htmlFor="lbl-audioequalizer-output" className="text-[10px] font-semibold text-[var(--text-muted)]">Output:</label>
+            <select id="lbl-audioequalizer-output" aria-label="Output:" value={outputFormat} onChange={e => setOutputFormat(e.target.value as typeof OUTPUT_FORMATS[number])}
               className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-xs text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {OUTPUT_FORMATS.map(f => <option key={f} value={f}>{f.toUpperCase()}</option>)}
             </select>

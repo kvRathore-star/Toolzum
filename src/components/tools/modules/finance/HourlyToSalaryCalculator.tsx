@@ -35,8 +35,8 @@ export default function HourlyToSalaryCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hourly Rate ($)</label><input aria-label="Hourly Rate ($)" type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hours per Week</label><input aria-label="Hours per Week" type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-hourlytosalarycalculator-hourly-rate" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hourly Rate ($)</label><input id="lbl-hourlytosalarycalculator-hourly-rate" aria-label="Hourly Rate ($)" type="number" value={hourly} onChange={e => setHourly(e.target.value)} step="0.01" className={inputCls} /></div>
+        <div><label htmlFor="lbl-hourlytosalarycalculator-hours-per-week" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Hours per Week</label><input id="lbl-hourlytosalarycalculator-hours-per-week" aria-label="Hours per Week" type="number" value={hoursPerWeek} onChange={e => setHoursPerWeek(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

@@ -32,8 +32,8 @@ export function GraphqlCostEstimator() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
-          <textarea aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(null); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-query" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
+          <textarea id="lbl-apigraphqltools-query" aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(null); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-pink-600 hover:bg-pink-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Estimate Cost</button>
         {result && (
@@ -92,8 +92,8 @@ export function GraphqlQueryFormatter() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
-          <textarea aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-query-2" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
+          <textarea id="lbl-apigraphqltools-query-2" aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-fuchsia-600 hover:bg-fuchsia-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Format</button>
         {result && (
@@ -148,8 +148,8 @@ export function GraphqlSchemaToJsonSchema() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">GraphQL Schema</label>
-          <textarea aria-label="GraphQL Schema" value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-graphql-schema" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">GraphQL Schema</label>
+          <textarea id="lbl-apigraphqltools-graphql-schema" aria-label="GraphQL Schema" value={schema} onChange={e => { setSchema(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Convert</button>
         {result && (
@@ -194,8 +194,8 @@ export function GraphqlSchemaValidator() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Schema</label>
-          <textarea aria-label="Schema" value={schema} onChange={e => { setSchema(e.target.value); setResult(null); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-schema" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Schema</label>
+          <textarea id="lbl-apigraphqltools-schema" aria-label="Schema" value={schema} onChange={e => { setSchema(e.target.value); setResult(null); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Validate</button>
         {result && (
@@ -242,12 +242,12 @@ export function GraphqlSubscriptionBuilder() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Name</label>
-            <input aria-label="Name" type="text" value={name} onChange={e => { setName(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apigraphqltools-name" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Name</label>
+            <input id="lbl-apigraphqltools-name" aria-label="Name" type="text" value={name} onChange={e => { setName(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Payload Fields</label>
-            <textarea aria-label="Payload Fields" value={payload} onChange={e => { setPayload(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apigraphqltools-payload-fields" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Payload Fields</label>
+            <textarea id="lbl-apigraphqltools-payload-fields" aria-label="Payload Fields" value={payload} onChange={e => { setPayload(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <button onClick={calc} className="w-full bg-lime-600 hover:bg-lime-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Build Subscription</button>
@@ -287,12 +287,12 @@ export function GraphqlTester() {
           ))}
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
-          <textarea aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-query-7" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query</label>
+          <textarea id="lbl-apigraphqltools-query-7" aria-label="Query" value={query} onChange={e => { setQuery(e.target.value); setResult(''); }} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables (JSON)</label>
-          <textarea aria-label="Variables (JSON)" value={variables} onChange={e => { setVariables(e.target.value); setResult(''); }} rows={2} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-variables-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables (JSON)</label>
+          <textarea id="lbl-apigraphqltools-variables-json" aria-label="Variables (JSON)" value={variables} onChange={e => { setVariables(e.target.value); setResult(''); }} rows={2} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Format</button>
         {result && (
@@ -324,8 +324,8 @@ export function GraphqlVariablesFormatter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Variables Formatter</h2>
         <div>
-          <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables JSON</label>
-          <textarea aria-label="Variables JSON" value={input} onChange={e => setInput(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+          <label htmlFor="lbl-apigraphqltools-variables-json-9" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables JSON</label>
+          <textarea id="lbl-apigraphqltools-variables-json-9" aria-label="Variables JSON" value={input} onChange={e => setInput(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
         <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Format</button>
         {result && (

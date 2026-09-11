@@ -26,8 +26,8 @@ export default function PrimeFactorizationCalculator() {
   return (
     <CalculatorShell category="Math" title="Prime Factorization" result={resultText} auto presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
       <div className="space-y-4">
-        <label className={labelClass}>Number (≥ 2)</label>
-        <input aria-label="Number (≥ 2)" type="number" min={2} value={n} onChange={e => setN(e.target.value)}
+        <label htmlFor="lbl-primefactorizationcalculator-number-2" className={labelClass}>Number (≥ 2)</label>
+        <input id="lbl-primefactorizationcalculator-number-2" aria-label="Number (≥ 2)" type="number" min={2} value={n} onChange={e => setN(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
 
         {nn >= 2 && (

@@ -123,8 +123,8 @@ export default function BulkVideoCompressor() {
           <div className="flex items-center gap-2 mb-3"><Settings2 className="w-4 h-4 text-[var(--text-muted)]" /><span className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Compression Settings</span></div>
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="text-xs font-medium text-[var(--text-secondary)]">CRF (Constant Rate Factor)</label>
-              <select aria-label="CRF (Constant Rate Factor)" value={crf} onChange={e => setCrf(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
+              <label htmlFor="lbl-bulkvideocompressor-crf-constant-rate-factor" className="text-xs font-medium text-[var(--text-secondary)]">CRF (Constant Rate Factor)</label>
+              <select id="lbl-bulkvideocompressor-crf-constant-rate-factor" aria-label="CRF (Constant Rate Factor)" value={crf} onChange={e => setCrf(e.target.value)} className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]">
                 {CRF_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
               <p className="text-xs text-[var(--text-muted)] mt-1">Lower CRF = higher quality, larger file. 23 is a good balance.</p>

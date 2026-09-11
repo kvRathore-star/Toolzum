@@ -412,13 +412,13 @@ export function ImagePlaceholderGenerator() {
     <CalculatorShell category="Utility" title="Image Placeholder Generator" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="cyan" downloadData={out} downloadFilename="placeholders.txt">
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
-          <label className={labelClass}>Width</label>
-          <input aria-label="Width" type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
+          <label htmlFor="lbl-generatorwidgets-width" className={labelClass}>Width</label>
+          <input id="lbl-generatorwidgets-width" aria-label="Width" type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
         <div>
-          <label className={labelClass}>Height</label>
-          <input aria-label="Height" type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
+          <label htmlFor="lbl-generatorwidgets-height" className={labelClass}>Height</label>
+          <input id="lbl-generatorwidgets-height" aria-label="Height" type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
       </div>

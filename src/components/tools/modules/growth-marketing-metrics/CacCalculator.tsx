@@ -72,16 +72,16 @@ export default function CacCalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Marketing Expenses ($)</label>
-            <input aria-label="Marketing Expenses ($)" type="number" value={marketing} onChange={e => setMarketing(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <label htmlFor="lbl-caccalculator-marketing-expenses" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Marketing Expenses ($)</label>
+            <input id="lbl-caccalculator-marketing-expenses" aria-label="Marketing Expenses ($)" type="number" value={marketing} onChange={e => setMarketing(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Sales Expenses / Salaried Overhead ($)</label>
-            <input aria-label="Sales Expenses / Salaried Overhead ($)" type="number" value={sales} onChange={e => setSales(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <label htmlFor="lbl-caccalculator-sales-expenses-salaried-overhead" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Sales Expenses / Salaried Overhead ($)</label>
+            <input id="lbl-caccalculator-sales-expenses-salaried-overhead" aria-label="Sales Expenses / Salaried Overhead ($)" type="number" value={sales} onChange={e => setSales(Math.max(0, parseFloat(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
           <div className="space-y-1">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">New Customers Acquired</label>
-            <input aria-label="New Customers Acquired" type="number" value={acquired} onChange={e => setAcquired(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
+            <label htmlFor="lbl-caccalculator-new-customers-acquired" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">New Customers Acquired</label>
+            <input id="lbl-caccalculator-new-customers-acquired" aria-label="New Customers Acquired" type="number" value={acquired} onChange={e => setAcquired(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" />
           </div>
         </div>
 

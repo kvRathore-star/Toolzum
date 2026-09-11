@@ -111,8 +111,8 @@ export default function PdfToPdfa() {
 
           <div className="space-y-4">
             <div>
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Title</label>
-              <input aria-label="Title"
+              <label htmlFor="lbl-pdftopdfa-title" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Title</label>
+              <input id="lbl-pdftopdfa-title" aria-label="Title"
                 type="text"
                 value={metadata.title}
                 onChange={(e) => setMetadata({ ...metadata, title: e.target.value })}
@@ -121,8 +121,8 @@ export default function PdfToPdfa() {
               />
             </div>
             <div>
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Author</label>
-              <input aria-label="Author"
+              <label htmlFor="lbl-pdftopdfa-author" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Author</label>
+              <input id="lbl-pdftopdfa-author" aria-label="Author"
                 type="text"
                 value={metadata.author}
                 onChange={(e) => setMetadata({ ...metadata, author: e.target.value })}
@@ -131,8 +131,8 @@ export default function PdfToPdfa() {
               />
             </div>
             <div>
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Subject</label>
-              <input aria-label="Subject"
+              <label htmlFor="lbl-pdftopdfa-subject" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Subject</label>
+              <input id="lbl-pdftopdfa-subject" aria-label="Subject"
                 type="text"
                 value={metadata.subject}
                 onChange={(e) => setMetadata({ ...metadata, subject: e.target.value })}
@@ -141,8 +141,8 @@ export default function PdfToPdfa() {
               />
             </div>
             <div>
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Keywords</label>
-              <input aria-label="Keywords"
+              <label htmlFor="lbl-pdftopdfa-keywords" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Keywords</label>
+              <input id="lbl-pdftopdfa-keywords" aria-label="Keywords"
                 type="text"
                 value={metadata.keywords}
                 onChange={(e) => setMetadata({ ...metadata, keywords: e.target.value })}

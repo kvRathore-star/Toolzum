@@ -43,10 +43,10 @@ export default function CarLeaseCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-2 gap-4">
-        <div className="md:col-span-2"><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Capitalized Cost ($)</label><input aria-label="Capitalized Cost ($)" type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Residual Value ($)</label><input aria-label="Residual Value ($)" type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Lease Term (months)</label><input aria-label="Lease Term (months)" type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Money Factor</label><input aria-label="Money Factor" type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputCls} /></div>
+        <div className="md:col-span-2"><label htmlFor="lbl-carleasecalculator-capitalized-cost" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Capitalized Cost ($)</label><input id="lbl-carleasecalculator-capitalized-cost" aria-label="Capitalized Cost ($)" type="number" value={capCost} onChange={e => setCapCost(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-carleasecalculator-residual-value" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Residual Value ($)</label><input id="lbl-carleasecalculator-residual-value" aria-label="Residual Value ($)" type="number" value={residual} onChange={e => setResidual(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-carleasecalculator-lease-term-months" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Lease Term (months)</label><input id="lbl-carleasecalculator-lease-term-months" aria-label="Lease Term (months)" type="number" value={term} onChange={e => setTerm(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-carleasecalculator-money-factor" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Money Factor</label><input id="lbl-carleasecalculator-money-factor" aria-label="Money Factor" type="number" value={mf} onChange={e => setMf(e.target.value)} step="0.00001" className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

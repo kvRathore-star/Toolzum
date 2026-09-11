@@ -34,9 +34,9 @@ export default function WaterIntakeCalculator() {
       downloadFilename="water-intake.csv"
     >
       <div className="grid grid-cols-3 gap-4">
-        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Exercise (min/day)</label><input aria-label="Exercise (min/day)" className={inputCls} type="number" value={activity} onChange={e => setActivity(e.target.value)} /></div>
-        <div><label className={labelCls}>Climate</label><select aria-label="Climate" className={inputCls} value={climate} onChange={e => setClimate(e.target.value)}><option value="moderate">Moderate</option><option value="hot">Hot / humid</option><option value="cold">Cold</option></select></div>
+        <div><label htmlFor="lbl-waterintakecalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-waterintakecalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-waterintakecalculator-exercise-min-day" className={labelCls}>Exercise (min/day)</label><input id="lbl-waterintakecalculator-exercise-min-day" aria-label="Exercise (min/day)" className={inputCls} type="number" value={activity} onChange={e => setActivity(e.target.value)} /></div>
+        <div><label htmlFor="lbl-waterintakecalculator-climate" className={labelCls}>Climate</label><select id="lbl-waterintakecalculator-climate" aria-label="Climate" className={inputCls} value={climate} onChange={e => setClimate(e.target.value)}><option value="moderate">Moderate</option><option value="hot">Hot / humid</option><option value="cold">Cold</option></select></div>
       </div>
     </CalculatorShell>
   );

@@ -387,8 +387,8 @@ export function PdfWorkflowBuilder() {
               {splitFile && (
                 <>
                   <div>
-                    <label className="block text-xs font-medium mb-1 text-[var(--text-tertiary)]">Page ranges (e.g. 1-3, 5, 7-9)</label>
-                    <input aria-label="Page ranges (e.g. 1-3, 5, 7-9)" className={inputCls} value={splitRanges} onChange={e => setSplitRanges(e.target.value)} placeholder="1-3, 5, 7-9" />
+                    <label htmlFor="lbl-pdfworkflowbuilder-page-ranges-e-g-1-3-5-7-9" className="block text-xs font-medium mb-1 text-[var(--text-tertiary)]">Page ranges (e.g. 1-3, 5, 7-9)</label>
+                    <input id="lbl-pdfworkflowbuilder-page-ranges-e-g-1-3-5-7-9" aria-label="Page ranges (e.g. 1-3, 5, 7-9)" className={inputCls} value={splitRanges} onChange={e => setSplitRanges(e.target.value)} placeholder="1-3, 5, 7-9" />
                   </div>
                   <button onClick={handleSplit} disabled={loading} className={btnCls}>{loading ? 'Extracting...' : 'Extract Pages'}</button>
                 </>

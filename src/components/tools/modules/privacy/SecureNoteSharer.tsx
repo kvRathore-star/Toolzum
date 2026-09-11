@@ -83,8 +83,8 @@ export default function SecureNoteSharer() {
           />
 
           <div className="space-y-1">
-            <label className="text-xs text-[var(--text-muted)] font-bold">Custom Password (Optional)</label>
-            <input aria-label="Custom Password (Optional)" 
+            <label htmlFor="lbl-securenotesharer-custom-password-optional" className="text-xs text-[var(--text-muted)] font-bold">Custom Password (Optional)</label>
+            <input id="lbl-securenotesharer-custom-password-optional" aria-label="Custom Password (Optional)" 
               type="text" 
               value={password}
               onChange={e => setPassword(e.target.value)}

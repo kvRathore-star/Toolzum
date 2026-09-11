@@ -35,8 +35,8 @@ export default function MrrCalculator() {
       ) : null
     }>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number of Customers</label><input aria-label="Number of Customers" type="number" value={customers} onChange={e => setCustomers(e.target.value)} className={inputCls} /></div>
-        <div><label className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Avg Revenue/Customer ($)</label><input aria-label="Avg Revenue/Customer ($)" type="number" value={avgRevenue} onChange={e => setAvgRevenue(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-mrrcalculator-number-of-customers" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Number of Customers</label><input id="lbl-mrrcalculator-number-of-customers" aria-label="Number of Customers" type="number" value={customers} onChange={e => setCustomers(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-mrrcalculator-avg-revenue-customer" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Avg Revenue/Customer ($)</label><input id="lbl-mrrcalculator-avg-revenue-customer" aria-label="Avg Revenue/Customer ($)" type="number" value={avgRevenue} onChange={e => setAvgRevenue(e.target.value)} className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

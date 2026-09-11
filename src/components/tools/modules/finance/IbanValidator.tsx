@@ -25,8 +25,8 @@ export default function IbanValidator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-4 flex flex-col justify-between">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">International Bank Account Number (IBAN)</label>
-            <input aria-label="International Bank Account Number (IBAN)" 
+            <label htmlFor="lbl-ibanvalidator-international-bank-account-number-iban" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">International Bank Account Number (IBAN)</label>
+            <input id="lbl-ibanvalidator-international-bank-account-number-iban" aria-label="International Bank Account Number (IBAN)" 
               type="text" 
               value={iban} 
               onChange={e => {

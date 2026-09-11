@@ -56,11 +56,11 @@ export default function TrialConversionCalculator() {
       ) : null}
     >
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Visitors / mo</label><input aria-label="Visitors / mo" className={inputCls} type="number" value={visitors} onChange={e => setVisitors(e.target.value)} /></div>
-        <div><label className={labelCls}>Trial signups</label><input aria-label="Trial signups" className={inputCls} type="number" value={signups} onChange={e => setSignups(e.target.value)} /></div>
-        <div><label className={labelCls}>Paid conversions</label><input aria-label="Paid conversions" className={inputCls} type="number" value={paid} onChange={e => setPaid(e.target.value)} /></div>
-        <div><label className={labelCls}>Trial length (days)</label><input aria-label="Trial length (days)" className={inputCls} type="number" value={trialLength} onChange={e => setTrialLength(e.target.value)} /></div>
-        <div><label className={labelCls}>Price ($/mo)</label><input aria-label="Price ($/mo)" className={inputCls} type="number" value={price} onChange={e => setPrice(e.target.value)} /></div>
+        <div><label htmlFor="lbl-trialconversioncalculator-visitors-mo" className={labelCls}>Visitors / mo</label><input id="lbl-trialconversioncalculator-visitors-mo" aria-label="Visitors / mo" className={inputCls} type="number" value={visitors} onChange={e => setVisitors(e.target.value)} /></div>
+        <div><label htmlFor="lbl-trialconversioncalculator-trial-signups" className={labelCls}>Trial signups</label><input id="lbl-trialconversioncalculator-trial-signups" aria-label="Trial signups" className={inputCls} type="number" value={signups} onChange={e => setSignups(e.target.value)} /></div>
+        <div><label htmlFor="lbl-trialconversioncalculator-paid-conversions" className={labelCls}>Paid conversions</label><input id="lbl-trialconversioncalculator-paid-conversions" aria-label="Paid conversions" className={inputCls} type="number" value={paid} onChange={e => setPaid(e.target.value)} /></div>
+        <div><label htmlFor="lbl-trialconversioncalculator-trial-length-days" className={labelCls}>Trial length (days)</label><input id="lbl-trialconversioncalculator-trial-length-days" aria-label="Trial length (days)" className={inputCls} type="number" value={trialLength} onChange={e => setTrialLength(e.target.value)} /></div>
+        <div><label htmlFor="lbl-trialconversioncalculator-price-mo" className={labelCls}>Price ($/mo)</label><input id="lbl-trialconversioncalculator-price-mo" aria-label="Price ($/mo)" className={inputCls} type="number" value={price} onChange={e => setPrice(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

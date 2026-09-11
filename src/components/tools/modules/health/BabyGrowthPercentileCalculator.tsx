@@ -28,10 +28,10 @@ export default function BabyGrowthPercentileCalculator() {
   return (
     <CalculatorShell category="Health" title="Baby Growth Percentile" accent="rose" result={result} auto>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className={labelCls}>Age (months)</label><input aria-label="Age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
-        <div><label className={labelCls}>Gender</label><select aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-        <div><label className={labelCls}>Height / Length (cm)</label><input aria-label="Height / Length (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
-        <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-babygrowthpercentilecalculator-age-months" className={labelCls}>Age (months)</label><input id="lbl-babygrowthpercentilecalculator-age-months" aria-label="Age (months)" className={inputCls} type="number" value={age} onChange={e => setAge(e.target.value)} /></div>
+        <div><label htmlFor="lbl-babygrowthpercentilecalculator-gender" className={labelCls}>Gender</label><select id="lbl-babygrowthpercentilecalculator-gender" aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+        <div><label htmlFor="lbl-babygrowthpercentilecalculator-height-length-cm" className={labelCls}>Height / Length (cm)</label><input id="lbl-babygrowthpercentilecalculator-height-length-cm" aria-label="Height / Length (cm)" className={inputCls} type="number" value={height} onChange={e => setHeight(e.target.value)} /></div>
+        <div><label htmlFor="lbl-babygrowthpercentilecalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-babygrowthpercentilecalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
       </div>
     </CalculatorShell>
   );

@@ -427,8 +427,8 @@ export default function FontSubsetter() {
         {parsedFont && (
           <>
             <div className="space-y-3">
-              <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Characters to Keep</label>
-              <textarea aria-label="Characters to Keep"
+              <label htmlFor="lbl-fontsubsetter-characters-to-keep" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Characters to Keep</label>
+              <textarea id="lbl-fontsubsetter-characters-to-keep" aria-label="Characters to Keep"
                 value={characters}
                 onChange={(e) => { setCharacters(e.target.value); setOutputUrl(null); cleanup(); setSubsetInfo(null); }}
                 rows={3}
@@ -453,8 +453,8 @@ export default function FontSubsetter() {
 
             <div className="flex items-center gap-3">
               <div className="flex-1">
-                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Output Format</label>
-                <select aria-label="Output Format"
+                <label htmlFor="lbl-fontsubsetter-output-format" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1.5">Output Format</label>
+                <select id="lbl-fontsubsetter-output-format" aria-label="Output Format"
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value as FontFormat)}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 cursor-pointer"

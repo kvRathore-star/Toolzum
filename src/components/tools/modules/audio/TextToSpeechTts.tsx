@@ -114,8 +114,8 @@ export default function TextToSpeechTts() {
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
         <div className="flex items-center gap-4 w-full sm:w-auto">
-          <label className="text-sm font-bold text-[var(--text-secondary)] whitespace-nowrap">Voice:</label>
-          <select aria-label="Voice:"
+          <label htmlFor="lbl-texttospeechtts-voice" className="text-sm font-bold text-[var(--text-secondary)] whitespace-nowrap">Voice:</label>
+          <select id="lbl-texttospeechtts-voice" aria-label="Voice:"
             value={selectedVoiceURI}
             onChange={(e) => setSelectedVoiceURI(e.target.value)}
             className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 truncate"

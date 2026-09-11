@@ -126,8 +126,8 @@ export default function WatermarkPdf() {
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">Watermark Settings</h4>
           
           <div className="space-y-3">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Watermark Text</label>
-            <input aria-label="Watermark Text"
+            <label htmlFor="lbl-watermarkpdf-watermark-text" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Watermark Text</label>
+            <input id="lbl-watermarkpdf-watermark-text" aria-label="Watermark Text"
               type="text"
               placeholder="e.g. CONFIDENTIAL"
               value={watermarkText}

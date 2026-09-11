@@ -44,8 +44,8 @@ export default function ApiErrorDecoder() {
         </div>
         <div className="grid grid-cols-3 gap-3">
           <div className="col-span-2">
-            <label className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Status Code</label>
-            <input aria-label="Status Code" type="number" value={code} onChange={e => setCode(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apierrordecoder-status-code" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Status Code</label>
+            <input id="lbl-apierrordecoder-status-code" aria-label="Status Code" type="number" value={code} onChange={e => setCode(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div className="flex items-end">
             <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-xs transition-all">Lookup</button>

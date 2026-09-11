@@ -133,10 +133,10 @@ export default function UuidGenerator() {
 
           {/* Quantity Selector */}
           <div className="space-y-2">
-            <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">
+            <label htmlFor="lbl-uuidgenerator-quantity-quantity" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">
               Quantity ({quantity})
             </label>
-            <input
+            <input id="lbl-uuidgenerator-quantity-quantity"
               type="range"
               min={1}
               max={100}

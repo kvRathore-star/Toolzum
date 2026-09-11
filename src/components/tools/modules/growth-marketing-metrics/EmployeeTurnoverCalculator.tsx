@@ -74,8 +74,8 @@ export default function EmployeeTurnoverCalculator() {
             <div className="grid grid-cols-2 gap-4">
               {/* Starting Headcount */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Starting Employees</label>
-                <input aria-label="Starting Employees" 
+                <label htmlFor="lbl-employeeturnovercalculator-starting-employees" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Starting Employees</label>
+                <input id="lbl-employeeturnovercalculator-starting-employees" aria-label="Starting Employees" 
                   type="number" value={startingEmployees} 
                   onChange={e => setStartingEmployees(Math.max(1, parseInt(e.target.value) || 0))}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
@@ -84,8 +84,8 @@ export default function EmployeeTurnoverCalculator() {
 
               {/* Ending Headcount */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Ending Employees</label>
-                <input aria-label="Ending Employees" 
+                <label htmlFor="lbl-employeeturnovercalculator-ending-employees" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Ending Employees</label>
+                <input id="lbl-employeeturnovercalculator-ending-employees" aria-label="Ending Employees" 
                   type="number" value={endingEmployees} 
                   onChange={e => setEndingEmployees(Math.max(1, parseInt(e.target.value) || 0))}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
@@ -96,8 +96,8 @@ export default function EmployeeTurnoverCalculator() {
             <div className="grid grid-cols-2 gap-4">
               {/* Voluntary */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Voluntary Quits</label>
-                <input aria-label="Voluntary Quits" 
+                <label htmlFor="lbl-employeeturnovercalculator-voluntary-quits" className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Voluntary Quits</label>
+                <input id="lbl-employeeturnovercalculator-voluntary-quits" aria-label="Voluntary Quits" 
                   type="number" value={voluntaryDepartures} 
                   onChange={e => setVoluntaryDepartures(Math.max(0, parseInt(e.target.value) || 0))}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"
@@ -106,8 +106,8 @@ export default function EmployeeTurnoverCalculator() {
 
               {/* Involuntary */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Involuntary Layoffs</label>
-                <input aria-label="Involuntary Layoffs" 
+                <label htmlFor="lbl-employeeturnovercalculator-involuntary-layoffs" className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Involuntary Layoffs</label>
+                <input id="lbl-employeeturnovercalculator-involuntary-layoffs" aria-label="Involuntary Layoffs" 
                   type="number" value={involuntaryDepartures} 
                   onChange={e => setInvoluntaryDepartures(Math.max(0, parseInt(e.target.value) || 0))}
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm"

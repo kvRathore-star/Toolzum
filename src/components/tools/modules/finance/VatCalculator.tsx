@@ -45,8 +45,8 @@ export default function VatCalculator() {
     >
       <div className="space-y-4">
         <div>
-          <label className={labelCls}>Net Price / Pre-tax ($)</label>
-          <input aria-label="Net Price / Pre-tax ($)" className={inputCls} type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <label htmlFor="lbl-vatcalculator-net-price-pre-tax" className={labelCls}>Net Price / Pre-tax ($)</label>
+          <input id="lbl-vatcalculator-net-price-pre-tax" aria-label="Net Price / Pre-tax ($)" className={inputCls} type="number" value={netPrice} onChange={e => setNetPrice(Math.max(0, parseFloat(e.target.value) || 0))} />
         </div>
         <div>
           <label className={labelCls}>VAT / GST Rate (%)</label>

@@ -67,11 +67,11 @@ export default function BodyFatPercentageCalculator() {
     }>
       <div className="max-w-xl">
         <div className="grid grid-cols-2 gap-4">
-          <div><label className={labelCls}>Gender</label><select aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
-          <div><label className={labelCls}>Weight (kg)</label><input aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
-          <div><label className={labelCls}>Waist (cm)</label><input aria-label="Waist (cm)" className={inputCls} type="number" value={waist} onChange={e => setWaist(e.target.value)} /></div>
-          <div><label className={labelCls}>Neck (cm)</label><input aria-label="Neck (cm)" className={inputCls} type="number" value={neck} onChange={e => setNeck(e.target.value)} /></div>
-          <div className={gender === 'female' ? '' : 'opacity-50'}><label className={labelCls}>Hip (cm, female)</label><input aria-label="Hip (cm, female)" className={inputCls} type="number" value={hip} onChange={e => setHip(e.target.value)} disabled={gender === 'male'} /></div>
+          <div><label htmlFor="lbl-bodyfatpercentagecalculator-gender" className={labelCls}>Gender</label><select id="lbl-bodyfatpercentagecalculator-gender" aria-label="Gender" className={inputCls} value={gender} onChange={e => setGender(e.target.value as 'male'|'female')}><option value="male">Male</option><option value="female">Female</option></select></div>
+          <div><label htmlFor="lbl-bodyfatpercentagecalculator-weight-kg" className={labelCls}>Weight (kg)</label><input id="lbl-bodyfatpercentagecalculator-weight-kg" aria-label="Weight (kg)" className={inputCls} type="number" value={weight} onChange={e => setWeight(e.target.value)} /></div>
+          <div><label htmlFor="lbl-bodyfatpercentagecalculator-waist-cm" className={labelCls}>Waist (cm)</label><input id="lbl-bodyfatpercentagecalculator-waist-cm" aria-label="Waist (cm)" className={inputCls} type="number" value={waist} onChange={e => setWaist(e.target.value)} /></div>
+          <div><label htmlFor="lbl-bodyfatpercentagecalculator-neck-cm" className={labelCls}>Neck (cm)</label><input id="lbl-bodyfatpercentagecalculator-neck-cm" aria-label="Neck (cm)" className={inputCls} type="number" value={neck} onChange={e => setNeck(e.target.value)} /></div>
+          <div className={gender === 'female' ? '' : 'opacity-50'}><label htmlFor="lbl-bodyfatpercentagecalculator-hip-cm-female" className={labelCls}>Hip (cm, female)</label><input id="lbl-bodyfatpercentagecalculator-hip-cm-female" aria-label="Hip (cm, female)" className={inputCls} type="number" value={hip} onChange={e => setHip(e.target.value)} disabled={gender === 'male'} /></div>
         </div>
       </div>
     </CalculatorShell>
