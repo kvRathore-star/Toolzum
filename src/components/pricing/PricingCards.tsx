@@ -90,6 +90,14 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                <span>3 downloads/day (5/day + 30 AI credits/month after signing in free)</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
+                <span>Pro tools: blocked as guest, 2 downloads/day after signing in free</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
                 <span>Sequential execution + manual individual downloads</span>
               </li>
               <li className="flex items-center gap-3">
@@ -172,6 +180,10 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
                 <span>1-Click "Download All as ZIP Archive" + save workflow presets</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
+                <span>300 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 10/use)</span></span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />

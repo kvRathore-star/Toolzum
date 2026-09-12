@@ -3,24 +3,30 @@
 > Single source of truth for all user-facing limits, credit costs, and rate limits.
 > **If this file and the code disagree, the code wins — but update this file immediately.**
 
-Last verified: 2026-09-11
+Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free server caps + badge copy + paywall 2GB)
 
 ---
 
 ## 1. Tool Overview
 
-| Metric | Count |
-|--------|-------|
-| Total tools | 1,146 |
-| Pro tools | 66 (gated by `proSlugs` in `tools-constants.ts`) |
-| Download-producing tools | 425 (auto-generated in `downloadProducingSlugs.ts`) |
-| Categories | 21 |
+| Metric | Count | Canonical source |
+|--------|-------|------------------|
+| Total tools | 1,146 (1,064 registry + 82 SEO landing pages) | `src/registry/tools-client-index.ts` + `SEO_PERMUTATIONS` |
+| Pro tools | 66 (gated by `proSlugs`) | `src/registry/tools-constants.ts` → `proSlugs` |
+| Download-producing tools | 426 (auto-generated) | `src/lib/downloadProducingSlugs.ts` (regen: `npx tsx scripts/generate-download-slugs.ts`) |
+| BulkToolShell wrappers | 20 tools | wrappers import from `src/components/tools/modules/utility/BulkToolShell.tsx` |
+| Categories | 21 | `src/lib/categoryTheme.ts` |
+
+> Counts verified Sep 12 2026 (`AGENTS.md` corrected same day — both agree:
+> 1,064 registry + 82 SEO = 1,146). Slugs are NOT pasted here by design — the
+> registry is the single source of truth; verify with:
+> `node -e "const fs=require('fs');const s=fs.readFileSync('src/registry/tools-constants.ts','utf8');console.log(s.match(/export const proSlugs = \[(.*?)\];/s)[1].match(/\"[^\"]+\"/g).length)"`
 
 ---
 
 ## 2. Download Quota
 
-**Applies to:** 425 tools that call `downloadOrShare()` — image compressors, PDF tools, video converters, audio tools, etc.
+**Applies to:** 426 tools that save files through the quota gate — `downloadOrShare()` per-save, or one `gateBatchDownload()` call per batch (ZIP/batch downloaders). Single-save tools and batch tools alike; AI-credit tools are separate (§3).
 
 ### Free tools (non-Pro)
 
@@ -38,7 +44,7 @@ Last verified: 2026-09-11
 | Signed-in (free) | 2/day | Daily (midnight UTC) | Server-side (separate `pro:` fingerprint prefix) |
 | Pro | Unlimited | N/A | `getUserLimit()` returns `Infinity` |
 
-**Code:** `functions/api/downloads/check.ts:13-17`, `functions/api/downloads/record.ts` (same `getUserLimit` shape)
+**Code:** `functions/api/downloads/check.ts:7-10`, `functions/api/downloads/record.ts:7-10`
 
 ```
 getUserLimit(plan, isProTool):
@@ -53,10 +59,36 @@ getUserLimit(plan, isProTool):
 
 **Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
 
-**Badge:** Shows on tool page for all 425 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies:
-- Pro tool: "2 Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
-- Free tool: "3/5 free downloads left today" / "Free downloads used up today"
+**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies (anon copy names denominators so the 3→5 math is self-evident):
+- Pro tool + anon: "Sign in to use Pro tools" (pill links to `/sign-in`)
+- Pro tool + signed: "N Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
+- Free tool + anon: "N of 3 free left — sign in for 5/day + 30 AI credits" (pill links to `/sign-in`) / "3/3 free used — sign in for 5/day + 30 AI credits"
+- Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
+
+**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 30 credits/mo, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 30 credits".
+
+> ✅ **Per-batch accounting (Option C, Sep 12 2026):** one batch download =
+> one quota unit, gated by a single `checkAndRecordDownload({ batchSize,
+> fileSizeMB })` call (`gateBatchDownload()` in `freeUsageGuard.ts`) BEFORE
+> any file saves. So signed free gets 5 batches/day on free tools (~50 files)
+> and 2 batches/day on Pro tools (~20 files) — the `pro:` bucket is unchanged.
+> Applies to `BulkToolShell` (covers 20 wrapper tools), `DocumentConverter`,
+> `BatchImageEditor`, `BulkImageWatermark`, the three FFmpeg bulk video tools,
+> `BulkPdfMerger`, and `ArchiveConverter`. Single-save tools were already gated
+> via `downloadOrShare()`. User-facing copy keeps saying "downloads/day" (a batch
+> save reads as one download action; the badge decrements per batch, so it's
+> self-consistent) — "batch" lives in code comments and this doc only.
+>
+> **Gate coverage by surface (verified Sep 12 2026):**
+>
+> | Surface | Tools | Gate |
+> |---------|-------|------|
+> | `BulkToolShell` wrappers | 20 tools (bulk converters, compressors, mergers, extractors…) | Intake caps (1/10/500) + `gateBatchDownload` on Download All/Each |
+> | `useBatchProgress` standalone | `BulkImageWatermark`, `BulkVideoSizeReducer`, `BulkVideoCompressor`, `BulkVideoSubtitleBurner`, `BulkPdfMerger` | `gateBatchDownload` (merger: on merged artifact) |
+> | Single-shot batch tools | `BatchImageEditor` (gated pre-process), `DocumentConverter`, `ArchiveConverter` | `gateBatchDownload` before save |
+> | All other saving tools | anything saving via `downloadOrShare()` | Per-save gate in `nativeShare.ts` |
+> | AI-credit tools (no file output) | `CREDIT_COST_SLUGS` in `ToolLayout.tsx` (11 slugs) | Credit deduction, not download quota |
 
 ---
 
@@ -70,37 +102,42 @@ getUserLimit(plan, isProTool):
 | Pro | 300/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
 | Anonymous | N/A (sign-in required) | — | 401 on AI routes |
 
+> ✅ **FIXED Sep 12 2026 — reset race:** `generate.ts`/`transcribe.ts` read the
+> balance before the monthly reset, then enforced on the stale row — users
+> whose window renewed mid-request got a wrongful 403. Reset now returns the
+> fresh balance.
+
 ### Per-Task Credit Costs
 
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 10 | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Transcription (Speech-to-Text) | 10 (`TRANSCRIPTION_CREDITS` in `transcribe.ts`) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
 | AI Image Generation | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
-- ~3 transcription sessions (25 min each), OR
+- ~3 transcription sessions (10 credits each, 25 min each), OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
-- Mix of all
+- Mix of all (e.g. 20 text + 1 transcription = 30)
 
 **Cost at 300 Pro credits/month:**
 - ~300 text gen calls, OR
-- ~30 transcription sessions, OR
+- ~30 transcription sessions (10 credits each), OR
 - Unlimited AI image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
 **Worst-case cost per free user:** ~$0.57/month (3 transcriptions × $0.19).
-**Worst-case cost per Pro user:** ~$5.70/month (30 × $0.19) vs $14.99 revenue.
+**Worst-case cost per Pro user:** ~$5.70/month (30 × $0.19) vs $14.99 revenue — sustainable.
 
-> Decided 2026-09-11: per-task costs are text = 1, transcription = 10
-> (`TRANSCRIPTION_CREDITS` in `transcribe.ts`, pinned by contract test).
-> The code previously deducted 1 for everything since gating launched
-> (Aug 28) — the doc's 10 was the intent that never shipped until now.
+> ✅ **RESOLVED Sep 12 2026:** transcription costs 10× text generation
+> (`TRANSCRIPTION_CREDITS = 10` in `functions/api/ai/transcribe.ts`,
+> `TEXT_GENERATION_CREDITS = 1` in `generate.ts`, badge in `ToolLayout.tsx`).
+> Code + tests agree; this doc was stale (said 1) and is now fixed.
 
 ---
 
@@ -126,11 +163,16 @@ getUserLimit(plan, isProTool):
 
 Rate limited at 10 req/min per IP. Daily quota enforced separately.
 
+**Notes:**
+- Transcription uploads are capped at 50MB by the endpoint itself (`MAX_UPLOAD_BYTES` in `transcribe.ts`) regardless of plan — a signed-in user's 150MB file allowance does not apply to `/api/ai/transcribe`.
+- Daily download buckets use `YYYY-M-D` server dates (workerd runs UTC → effectively midnight-UTC reset). The legacy client mirror (`freeUsageGuard`) resets on browser-local midnight — server is authoritative on conflict.
+- Plan labels differ slightly per endpoint (`check-plan` returns `signedin` for authenticated free users; download/credit endpoints use `free`) but resolve to identical free-tier outcomes everywhere.
+
 ---
 
 ## 5. File Size Limits
 
-**Code:** `functions/api/check-plan.ts:13-17` (`PLAN_LIMITS`)
+**Code:** `functions/api/check-plan.ts:7-11`
 
 | Tier | Max file size | Max batch size | Threads |
 |------|--------------|----------------|---------|
@@ -148,6 +190,15 @@ Rate limited at 10 req/min per IP. Daily quota enforced separately.
 | Default (image, etc.) | 10 MB | 20 MB |
 
 **Note:** Pro always uses `check-plan.ts` limits (2 GB), not `smartMax()`.
+
+> ✅ **FIXED Sep 12 2026 — signed-free server caps:** the DB default is
+> `plan='free'` for every new account, so `check-plan.ts` returned the
+> 30MB/1-file anon caps to all real signed-in users — who were then blocked
+> at download after the uploader (`smartMax`) allowed up to 150MB. Now an
+> authenticated user with stored plan `free` (or missing row) resolves to the
+> `signedin` caps (150MB/10 files). Only stored `pro` → pro caps; unknown
+> stored values fall back to free caps. Contract locked in
+> `src/__tests__/api/check-plan.test.ts`.
 
 ---
 
@@ -187,7 +238,9 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 **Categories covered:** AI, Image (bulk), PDF (bulk), Audio (bulk), Video (bulk), Transcription, Developer, E-commerce, Privacy, Indian Utilities
 
-**Enforcement:** `isPro` flag checked at tool page render; anonymous users see full lock screen. Signed-in free users get full access with download limits (2/day for Pro tools).
+**Enforcement:** `isPro` flag checked at tool page render. Anonymous users are NOT hard-locked — they see the tool UI but downloads are blocked (limit 0) with badge + modal pushing free sign-in. Signed-in free users get full access with download limits (2/day for Pro tools). The full lock screen (`ToolPaywall`) only renders while the plan is still resolving or for unknown plans. Its feature card advertises "Up to 2GB" (fixed Sep 12 — previously said 500MB).
+
+**Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 1, signed-in 10, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `checkAndRecordDownload()` accepts a `batchSize` option but no caller currently sends it, so the server does not independently enforce batch size — batch is capped at intake, quota at download.
 
 **Get Pro button:** Hidden for Pro users in header (desktop + mobile drawer).
 
@@ -207,6 +260,7 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 | Transcription rate limit | Blocked | 2 req/min | 5 req/min |
 | Max file size | 30 MB | 150 MB | 2 GB |
 | Max batch size | 1 file | 10 files | 500 files |
+| Batch ZIP download | Single-file only | Single-file only (individual downloads) | ✓ Batch ZIP |
 | Pro tools access | Blocked | Full access (with limits) | Full access (unlimited) |
 | Gemini watermark single | 3/day | 5/day | Unlimited |
 | Gemini watermark batch | Blocked | Blocked | Unlimited |
@@ -229,3 +283,15 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 ## 10. Known Gaps / TODO
 
 - [ ] Log AI-credit exhaustion events to analytics (same pattern as download-event)
+- [ ] Consider normalizing plan labels across endpoints (`signedin` vs `free` for authenticated free users — outcomes identical today, labels differ)
+
+**Tuning triggers (revisit with real data, not gut calls):**
+- Single-file saves and batch saves share ONE daily counter per user (`download_usage`
+  by fingerprint+date — no separate bulk bucket). The steepest step in the tier
+  ladder is anon→signed on free tools (3 files → 5 batches ≈ 50 files, ~17x).
+  That's the conscious signup incentive; if data shows signed-free users routinely
+  exhausting 5 batches/day without converting, revisit the 50-file ceiling (batch
+  cap or batch quota) — not the Pro side.
+- `download_event` already logs `toolSlug + userType + outcome`: watch
+  `blocked_quota` rate by slug to see whether single-file casual users or batch
+  power users hit the wall first before touching any numbers.

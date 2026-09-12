@@ -17,10 +17,11 @@ const WRAPPER_PATH = join(ROOT, 'src/components/tools/modules/DynamicModuleWrapp
 const MODULES_DIR = join(ROOT, 'src/components/tools/modules');
 const OUTPUT_PATH = join(ROOT, 'src/lib/downloadProducingSlugs.ts');
 
-// Files that import downloadOrShare but never call it (verified by audit 2026-09-04)
+// Files that import downloadOrShare but never call it (verified by audit 2026-09-04;
+// re-verified 2026-09-12 — converter/DocumentConverter removed: now gated via
+// gateBatchDownload, so its slug must be badged)
 const DEAD_IMPORTS = new Set([
   'pdf/UrlToPdf',
-  'converter/DocumentConverter',
   'privacy/PrivacyCleaner',
   'ai/AiHumanizer',
 ]);

@@ -22,7 +22,7 @@ describe('clipboardWrite', () => {
 
   it('handles clipboard errors silently', async () => {
     mockWriteText.mockRejectedValue(new Error('Clipboard denied'));
-    await expect(clipboardWrite('test')).resolves.toBeUndefined();
+    await expect(clipboardWrite('test')).resolves.toBe(false);
   });
 
   it('handles empty string', async () => {

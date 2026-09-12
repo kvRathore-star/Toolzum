@@ -2,6 +2,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { Section } from '../MiscToolsShared';
 
 const FORMATS = ['PDF', 'DOCX', 'TXT', 'HTML', 'Markdown', 'RTF', 'ODT', 'EPUB'];
@@ -105,8 +106,11 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
     toast.success(`Converted ${results.length} file${results.length > 1 ? 's' : ''}`);
   };
 
-  const handleDownload = (item?: { blob: Blob; name: string }) => {
+  const handleDownload = async (item?: { blob: Blob; name: string }) => {
     const toDownload = item ? [item] : convertedFiles;
+    // Per-batch quota: one gate call for the whole batch (1 unit), checked
+    // before any file saves. Abort silently on block — modal explains.
+    if (!(await gateBatchDownload(toDownload.length, maxBlobMB(toDownload.map((f) => f.blob))))) return;
     toDownload.forEach(f => {
       const url = URL.createObjectURL(f.blob);
       const a = document.createElement('a');
@@ -120,9 +124,10 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
   const handleDownloadZip = async () => {
     if (convertedFiles.length <= 1) {
-      handleDownload();
+      await handleDownload();
       return;
     }
+    if (!(await gateBatchDownload(convertedFiles.length, maxBlobMB(convertedFiles.map((f) => f.blob))))) return;
     const JSZip = (await import('jszip')).default;
     const zip = new JSZip();
     convertedFiles.forEach(f => zip.file(f.name, f.blob));

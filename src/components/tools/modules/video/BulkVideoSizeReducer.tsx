@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
@@ -82,8 +83,12 @@ export default function BulkVideoSizeReducer() {
   };
 
   const downloadAll = async () => {
+    const done = batch.files.filter(f => f.status === 'done' && f.result);
+    if (done.length === 0) return;
+    // Per-batch quota: one gate call (1 unit) before anything saves.
+    if (!(await gateBatchDownload(batch.files.length, maxBlobMB(done.map(d => d.result!))))) return;
     const zip = new JSZip();
-    batch.files.filter(f => f.status === 'done' && f.result).forEach(bf => {
+    done.forEach(bf => {
       zip.file(bf.file.name.replace(/\.[^.]+$/, '-reduced.mp4'), bf.result!);
     });
     const content = await zip.generateAsync({ type: 'blob' });
@@ -92,8 +97,11 @@ export default function BulkVideoSizeReducer() {
     URL.revokeObjectURL(url);
   };
 
-  const downloadEach = () => {
-    batch.files.filter(f => f.status === 'done' && f.result).forEach(bf => {
+  const downloadEach = async () => {
+    const done = batch.files.filter(f => f.status === 'done' && f.result);
+    if (done.length === 0) return;
+    if (!(await gateBatchDownload(batch.files.length, maxBlobMB(done.map(d => d.result!))))) return;
+    done.forEach(bf => {
       const url = URL.createObjectURL(bf.result!);
       const a = document.createElement('a'); a.href = url;
       a.download = bf.file.name.replace(/\.[^.]+$/, '-reduced.mp4'); a.click();

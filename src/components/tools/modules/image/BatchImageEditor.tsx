@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { Layers, Upload, Download, Settings2, Loader2, Crown } from 'lucide-react';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
 
 const FREE_LIMIT = 3;
@@ -34,6 +35,10 @@ export default function BatchImageEditor() {
       toast.error(`You've used all ${FREE_LIMIT} free images today. Upgrade to Pro for unlimited processing.`);
       return;
     }
+    // Per-batch quota first (1 unit for the batch) — before any processing,
+    // so over-quota users are stopped here, not after waiting. The limit
+    // modal explains on block.
+    if (!(await gateBatchDownload(toProcess, maxBlobMB(files.slice(0, toProcess))))) return;
 
     setIsProcessing(true);
     try {

@@ -4,6 +4,7 @@ import { Upload, Loader2, Download, FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 
@@ -59,8 +60,11 @@ export default function BulkPdfMerger() {
     });
   };
 
-  const downloadMerged = () => {
+  const downloadMerged = async () => {
     if (!mergedBlob) return;
+    // Per-batch quota: one gate call (1 unit) for the merged artifact.
+    // Abort silently on block — the limit modal explains.
+    if (!(await gateBatchDownload(batch.files.length, maxBlobMB([mergedBlob])))) return;
     const url = URL.createObjectURL(mergedBlob);
     const a = document.createElement('a');
     a.href = url;

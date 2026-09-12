@@ -20,6 +20,7 @@ vi.mock('lucide-react', () => {
     ShieldCheck: stub,
     Cpu: stub,
     Network: stub,
+    KeyRound: stub,
   };
 });
 
@@ -41,7 +42,19 @@ describe('StatusPage live probes', () => {
   it('starts unchecked (no fabricated green) and measures on demand', async () => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => ({ ok: true, arrayBuffer: async () => new ArrayBuffer(8) })),
+      vi.fn(async (input: unknown) => {
+        // The google-login probe needs a Google redirect target (headers or
+        // JSON body); every other probe only needs ok + arrayBuffer.
+        if (String(input).includes('/api/auth/sign-in/social')) {
+          return {
+            ok: true,
+            headers: { get: () => null },
+            json: async () => ({ url: 'https://accounts.google.com/o/oauth2/auth?client_id=test' }),
+            arrayBuffer: async () => new ArrayBuffer(8),
+          };
+        }
+        return { ok: true, arrayBuffer: async () => new ArrayBuffer(8) };
+      }),
     );
     render(<StatusPage />);
 

@@ -55,66 +55,14 @@ Last updated: 2026-08-23
 SEO: Add unique meta descriptions to top 50 most-visited tools
 SEO: Add internal linking between related tools (reduces thin content signals)
 
+Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–3 weeks after that, we compare exclusion buckets + indexed count. I'll pull on your word anytime — just say "gsc check".
+
  Wire up email service (Resend)
  Wire Resend email service for forgot-password/reset-password
 
  Newsletter has no backend — clicking subscribe does nothing (would need a Cloudflare Worker or email service)
 
- gsc connect with agent ide
-  
-  PDF Workflow Builder, Bulk PDF Suite- ui ihatepdf.cv/
-
-  changelog update
-
-  Quick wins:
-- Check analytics_event / download_event tables have data flowing in D1
-- Any remaining tool fixes from your list?
-- Pricing page or Pro features to refine?
-- Analytics dashboard for yourself (admin)? 
-
-- Exact Limits
-User type	Daily limit
-Anonymous (not signed in)	3
-Signed-in free user	5
-Pro user	Unlimited
-That's a business decision, but here's the data:
-- The real Pro upsell is batch processing (500 files), file size (2GB vs 30MB), and parallel threads (6 vs 1) — not the download count
-- The download quota is more of an anti-abuse mechanism than a conversion lever
-
-Pro downloads used up today- shows in pro acc?
-3 free downloads left today- says in pro acc
-they should be user state aware acc to User type	Daily limit
-Anonymous (not signed in)	3
-Signed-in free user	5
-Pro user	Unlimited
-
-pro acc shows- pro 300 AI credits/month on acc pge
-while on dashboard says- 100 remaning
-
-recent activiy tool says not all but few like emi calculator- 404 Page not found
-This page doesn't exist or may have been moved. Try searching the tools directory.
-
-
-
-
- use CalculatorShell with: which 
-1. Truly bare/minimal tools — tools with just a plain form and no styling
-2. Calculator-style tools — inputs → calculate/auto → result
-Two-column layout (inputs left, result panel right) 
-Preset chips for quick values, 
-Result panel with stats, copy/download/history
-reusable CalcActions component (copy + download + history)
-3. Tools with inconsistent UI — where you want uniform look
-Icon + title with border-bottom
-Added icon prop to CalculatorShell 
-Finance tools: DollarSign icon
-Calculator tools: Calculator/GraduationCap/Monitor icons
-Health tools: Heart icon
-Math tools: Calculator icon
-Developer tools: Code icon etc.
-
-
-
+ 
 ## Completed
 - [x] A/E/X/H QA sweep — 4 commits (cookie/FAQ, a11y, error-handling, mobile)
 - [x] Gemini Watermark Remover — commit b185098
@@ -126,149 +74,14 @@ Developer tools: Code icon etc.
 - [x] Protobuf Decoder — rewrote with real wire format parsing (commit b06b887)
 - [x] User Favorites — D1 table, API endpoints, star buttons, homepage section, ⌘K group (commit 5ee786c)
 
-
-
 -----------------
 
-
-97+ Scorecard Plan — Verified & Detailed
-Current: 87/100 → Target: 97+
-Tool count: 1,149 tools (1,067 client + 82 SEO) across 21 categories
-Tier A — High-impact, contained work (get to ~92)
-A1. Accessibility (74 → 82, +8 points)
-Verified gaps:
-- ~907 of 912 inputs lack htmlFor/aria-label/aria-labelledby
-- Hundreds of onClick handlers without paired keyboard handlers
-- Skip link CSS exists but is NOT wired up in any component
-- No focus trap library (only Radix Dialog has built-in)
-- 21 aria-live regions exist (good foundation)
-Tasks:
-- A1.1 Run eslint --rule '{"jsx-a11y/click-events-have-key-events": "error"}' to get exact count of onClick violations
-- A1.2 Wire up skip link: add <a class="skip-link" href="#main">Skip to content</a> in src/app/layout.tsx
-- A1.3 Add htmlFor/id pairs to all 912 inputs (batch across 1,067 tools — can use codemod)
-- A1.4 Install focus-trap package, apply to GDPR banner, ShareTool, FavoritesSignInModal, DownloadLimitModal
-- A1.5 Add heading hierarchy lint rule or test (enforce h1 → h2 → h3 order)
-- A1.6 Flip jsx-a11y rules from "warn" to "error" in eslint.config.mjs:18-23 after fixes
-- A1.7 Manual screen-reader test with VoiceOver on top 20 tools
-A2. Testing (82 → 86, +4 points)
-Verified gaps:
-- 155 test files exist, but NO vitest coverage config
-- 18 API endpoints have ZERO contract tests
-- Only 11 guarded calculators (not 20+)
-- No Playwright/Cypress
-Tasks:
-- A2.1 Add @vitest/coverage-v8 to devDependencies, configure coverage in vitest.config.ts
-- A2.2 Write contract tests for top 5 API endpoints: ai/generate, analytics, favorites, payments, auth
-- A2.3 Add unit tests for remaining 5 untested guarded calculators (11 total, check which lack tests)
-- A2.4 Install Playwright, create playwright.config.ts, write E2E test for critical path: home → category → tool → execute → download
-- A2.5 Add E2E test for auth flow: signup → login → session → logout
-A3. Documentation (71 → 76, +5 points)
-Verified gaps:
-- README.md exists but is OUTDATED (says "260+ tools")
-- Zero README files in src/components/tools/modules/shared/
-- Only 8 of 37 scripts have JSDoc (22%)
-- No CONTRIBUTING.md
-Tasks:
-- A3.1 Update README.md with current stats (1,149 tools, 21 categories, correct architecture references)
-- A3.2 Create CONTRIBUTING.md with setup, conventions, PR guidelines
-- A3.3 Add JSDoc to 25 undocumented scripts in scripts/
-- A3.4 Create src/components/tools/modules/shared/README.md documenting CalculatorShell props, auto-calculate rule, guard pattern
-- A3.5 Add JSDoc to CalcActions.tsx, categoryTheme.ts, DynamicModuleWrapper.tsx exports
-Tier B — Structural improvements (get to ~95)
-B1. Mobile/PWA (72 → 80, +8 points)
-Verified gaps:
-- @capacitor/ios in package.json but NO ios/ directory
-- Service worker exists and is robust (Workbox, 15+ cache routes)
-- No responsive design tests
-- No device-specific WASM optimization
-Tasks:
-- B1.1 Run npx cap add ios to initialize iOS platform
-- B1.2 Configure iOS-specific settings in capacitor.config.ts (splash screen, status bar, etc.)
-- B1.3 Test build: npx cap sync ios && npx cap open ios
-- B1.4 Add WASM adaptive loading: detect device RAM/CPU, skip heavy WASM on low-end (check navigator.deviceMemory)
-- B1.5 Add Playwright responsive tests for 3 breakpoints: 375px (mobile), 768px (tablet), 1280px (desktop)
-- B1.6 Audit service worker: verify @ducanh2912/next-pwa is properly integrated in next.config.ts (currently not called)
-B2. UX (82 → 90, +5 points) (Note: your plan says 85→90, but original scorecard was 82)
-Verified gaps:
-- CommandMenu exists but has no filters, no fuzzy config, no search history
-- Tool loading states are GOOD (skeleton + timeout)
-- Empty-state UX is MINIMAL (only search has it)
-- No onboarding flow
-Tasks:
-- B2.1 Add category filter to CommandMenu (dropdown or chips above search)
-- B2.2 Add search history (localStorage, show last 5 searches)
-- B2.3 Create reusable EmptyState component with icon, message, CTA
-- B2.4 Add empty states to top 20 tools that show zero-data scenarios
-- B2.5 Create simple onboarding: first-visit tooltip tour showing Cmd+K, category nav, theme toggle
-B3. Security (86 → 90, +4 points)
-Verified gaps:
-- CSP is NOT configured at all (no headers in next.config.ts, middleware, or wrangler.toml)
-- public/_headers has CSP but only for static files on Cloudflare Pages
-- No penetration test
-- CSRF handled by better-auth (good)
-Tasks:
-- B3.1 Add CSP headers in next.config.ts or _middleware.ts with nonce-based approach
-- B3.2 Remove unsafe-inline from CSP: use nonces for inline scripts/styles
-- B3.3 Investigate TF.js/Tesseract newer versions that don't require eval (to remove unsafe-eval)
-- B3.4 Schedule third-party penetration test (or use a tool like OWASP ZAP for automated scan)
-- B3.5 Add session expiry configuration in better-auth config
-Tier C — Polish (get to 97+)
-C1. Error Handling (85 → 92, +7 points)
-Verified gaps:
-- Error boundaries ALREADY cover all 1,149 tools via DynamicModuleWrapper
-- 3 separate error UIs exist (not standardized)
-- No shared ErrorMessage component
-Tasks:
-- C1.1 Create shared ErrorMessage component with icon, title, message, retry button, copy error
-- C1.2 Refactor ErrorBoundary.tsx, GlobalErrorBoundary.tsx, app/error.tsx to use shared component
-- C1.3 Add error message standardization: map error types to user-friendly messages
-- C1.4 Add recovery UX: retry with exponential backoff, fallback UI for failed WASM loads
-C2. Code Quality (90 → 94, +4 points)
-Verified gaps:
-- 29 files exceed 500 lines (largest: 2,280 lines)
-- ~223 any usages (140 annotations + 83 casts)
-- strict: true is on but missing stricter options
-Tasks:
-- C2.1 Split SecurityTools.tsx (2,280 lines) into focused modules (password, hash, encoding, network tools)
-- C2.2 Split DataToolkitWidgets.tsx (1,392 lines) into individual tool components
-- C2.3 Run grep -r ': any' src/ --include="*.tsx" | wc -l to get exact count, fix top 50 highest-impact files
-- C2.4 Add noUncheckedIndexedAccess: true to tsconfig.json, fix resulting errors
-- C2.5 Add noFallthroughCasesInSwitch: true to tsconfig.json
-C3. CI/CD (90 → 93, +3 points)
-Verified gaps:
-- No PR preview deployments (Cloudflare Pages from main only)
-- Bundle analyzer exists but no size alerts
-- No visual regression testing
-Tasks:
-- C3.1 Configure Cloudflare Pages preview deployments for PRs (branch-aware deploy)
-- C3.2 Add bundlesize or GitHub Action for bundle size comparison on PRs
-- C3.3 Set size budget: fail PR if main bundle exceeds threshold (e.g., 500KB)
-- C3.4 Install Chromatic or Percy for visual regression testing
-- C3.5 Add visual regression test for CalculatorShell (most-used shared component)
-Execution Order
-Session 1 (Tier A): A1.1-A1.7 → A2.1-A2.5 → A3.1-A3.5 → Score: ~92
-Session 2 (Tier B): B1.1-B1.6 → B2.1-B2.5 → B3.1-B3.5 → Score: ~95
-Session 3 (Tier C): C1.1-C1.4 → C2.1-C2.5 → C3.1-C3.5 → Score: ~97
-Corrections to Your Original Plan
-Item	Your Claim	Verified Actual
-Tool count	"260+"	1,149 (1,067 client + 82 SEO)
-Guarded calculators	"20+"	11
-CSP status	Implied configured	NOT configured (only in public/_headers for static files)
-Error boundaries	"on every tool module" needed	Already cover all tools via DynamicModuleWrapper
-Service worker	Implied needs work	Already robust (Workbox, 15+ cache routes)
-README existence	Implied missing	Exists but outdated
-UX score	"85"	82 (original scorecard)
-
-
-
-
-
-
-
-
+The C2.3 remainder block, verbatim. It's today's live process note and still accurate (75 + 51, batch gate, skip-list, next-up batch). Everything around it can go.
+Pentest (item 10) is already in your human-side pending list, so it's preserved there.
 
 
 Here is your complete test list. Do it in this order — each session is independent, so you can stop after any of them.
+
 Session 1 — smoke pass (10 min, keyboard only, no mouse)
 1. Search: open toolzum.com, press Cmd+K, type font converter with the space. Then Esc. Pass = space types, results filter, Esc closes and focus returns to the search button.
 2. Dropzone: open toolzum.com/design/font-converter. Tab until the dashed box has a visible outline. Press Enter (file picker must open), cancel, Tab back, press Space (picker opens, page must NOT scroll).
@@ -280,6 +93,7 @@ Session 2 — admin check (10 min, sign in as admin first!)
 2. Keep pressing Tab — focus must stay inside the panel. Press Esc — panel closes, focus returns to the row.
 3. Change a user's Role → confirm dialog pops up → press Esc (Cancel, don't confirm) → only the dialog closes.
 4. Click Delete on a user → second dialog stacks → Esc closes only the top one (Cancel, don't confirm).
+
 Session 3 — VoiceOver pass (the big one)
 1. On Mac: turn on VoiceOver with Cmd+F5. Move with Ctrl+Option+Right arrow. Stop with Cmd+F5.
 2. Visit each page below and arrow through it. For every button, box, and field, listen: does it announce a clear name ("Loan Amount", "Upload font file") or something useless ("button", "edit text", silence)?
@@ -321,3 +135,18 @@ Needs humans (all batched, none scheduled):
 - ZAP weekly run going green on its own (allowlist is in — confirm on next Monday run or manual trigger)
 - Video WASM console check (devtools on a video tool, one red-error scan)
 Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
+
+Each was left for a specific reason — not skipped, judged:
+6. Fingerprint — fixing it would cost privacy credibility. Making anon quotas unbypassable means canvas/WebGL/font fingerprinting or IP-locking. That directly contradicts the "privacy-first, nothing uploaded" promise on the homepage. The anon quota is a speed bump by design; the real anti-abuse layer is already server-side (IP rate limiters on both endpoints). A stronger client fingerprint buys almost nothing — incognito clears it anyway — while weakening the brand claim.
+7. UTC skew — nothing user-visible to fix. The local counts are a display-only mirror; every allow/block comes from the server (UTC). The badge shows server values. Aligning the mirror to UTC would churn code + tests to change a number no user ever sees differ. Negative value.
+8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,148 pages to polish a minutes-long cosmetic mismatch that resolves itself.
+Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
+
+
+Live — carry these three out before deleting:
+
+One rescue — the "Important Notes" honesty block (~15 lines): the coverage-definition warning ("test-file coverage, not statement coverage — clarify externally"), the dependency≠tool-tests gap, and the revenue-critical-first rule. Still true, still load-bearing judgment, and it lives nowhere else.
+
+Contact form still fakes it (contact/page.tsx:49 — localStorage + simulated success, no email/API). Real fix needs a backend (Cloudflare Email Service / worker) — product decision first.
+
+Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.

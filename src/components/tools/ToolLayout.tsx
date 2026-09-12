@@ -63,8 +63,8 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'ai-document-chat': 1,
   'brand-color-palette-generator': 1,
   'complaint-letter-generator': 1,
-  'video-to-text-transcription': 1,
-  'audio-to-text-transcription': 1,
+  'video-to-text-transcription': 10,
+  'audio-to-text-transcription': 10,
   'pdf-ai-summariser': 1,
   'resume-ats-score-checker': 1,
   'indian-voice-transcriber': 10,
@@ -229,6 +229,18 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                   <Sparkles className="w-3.5 h-3.5" />
                   {CREDIT_COST_SLUGS[slug]} credit{CREDIT_COST_SLUGS[slug] > 1 ? 's' : ''} per use
                 </span>
+                {!isPending && !sessionData?.user && (
+                  <>
+                    <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+                    <Link
+                      href="/sign-in"
+                      className="flex items-center gap-1.5 text-[var(--accent)] hover:underline"
+                      aria-label="Sign in free to get 30 AI credits per month"
+                    >
+                      Sign in free — 30 credits/mo
+                    </Link>
+                  </>
+                )}
               </>
             )}
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}

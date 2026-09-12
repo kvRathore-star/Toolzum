@@ -73,16 +73,14 @@ describe('GET /api/check-plan contract', () => {
     });
   });
 
-  it('signed-in users with a free row keep the free caps', async () => {
+  it('signed-in users with a free row get the signedin caps (DB default is free for every account)', async () => {
     const res = await checkPlan({
       request: req('free-user'),
       env: { DB: mockDb({ userRow: { plan: 'free' } }) } as never,
     });
-    expect(await res.json()).toMatchObject({
-      plan: 'free',
-      maxFileSizeMB: 30,
-      maxBatchSize: 1,
-      threads: 1,
+    expect(await res.json()).toEqual({
+      plan: 'signedin',
+      ...PLAN_LIMITS.signedin,
     });
   });
 

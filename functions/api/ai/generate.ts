@@ -35,7 +35,7 @@ async function getUserContext(request: Request, DB: D1Database): Promise<{ userI
   return { userId: row.userId, plan: row.plan || 'free' };
 }
 
-async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string, creditResetAt: number | null): Promise<number> {
+async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string, creditResetAt: number | null, currentCredits: number): Promise<{ maxCredits: number; balance: number }> {
   const now = Date.now();
   const resetMs = CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000;
   const maxCredits = plan === 'pro' ? PRO_CREDITS : FREE_CREDITS;
@@ -44,10 +44,12 @@ async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string
     await DB.prepare(
       "UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?"
     ).bind(maxCredits, now, userId).run();
-    return maxCredits;
+    // Return the fresh balance — the caller-side `user` row was read before
+    // the reset, so reusing it would 403 users whose window just renewed.
+    return { maxCredits, balance: maxCredits };
   }
 
-  return maxCredits;
+  return { maxCredits, balance: currentCredits };
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
@@ -78,9 +80,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const maxCredits = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt);
+    const { balance } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
 
-    if (user.credits <= 0) {
+    if (balance <= 0) {
       return new Response(JSON.stringify({ error: 'No credits remaining' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },

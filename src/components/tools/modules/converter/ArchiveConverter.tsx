@@ -3,6 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { FileArchive, Download, Upload, Trash2, File } from 'lucide-react';
 
 interface ZipFile {
@@ -38,6 +39,9 @@ export default function ArchiveConverter() {
 
   const createZip = async () => {
     if (files.length === 0) return toast.error('Add at least one file');
+    // Per-batch quota: one gate call (1 unit) before generating anything.
+    // Abort silently on block — the limit modal explains.
+    if (!(await gateBatchDownload(files.length, maxBlobMB(files.map((f) => f.file))))) return;
     setIsProcessing(true);
     toast.loading('Creating ZIP archive...', { id: 'zip' });
 

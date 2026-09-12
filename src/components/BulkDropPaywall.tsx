@@ -4,25 +4,38 @@ import { FileText, Crown, X } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { useIsIndia } from '@/hooks/useIsIndia';
+import { useSession } from '@/lib/auth-client';
+import { getSignedInStatus } from '@/utils/freeUsageGuard';
 
 export function BulkDropPaywall() {
   const [files, setFiles] = useState<File[]>([]);
   const [showModal, setShowModal] = useState(false);
   const isIndia = useIsIndia();
+  const { data: session } = useSession();
+  const isPro = (session?.user as Record<string, unknown> | undefined)?.plan === 'pro';
 
   React.useEffect(() => {
+    if (isPro) return; // Pro handles 500-file batches — never upsell Pro users.
     const handler = (e: ClipboardEvent) => {
       const items = e.clipboardData?.files;
       if (items && items.length > 1) {
-        e.preventDefault();
         const fileList = Array.from(items);
+        // Cap-aware: guests 1, signed-in 10 (matches check-plan.ts). Pasting
+        // within the free batch is fine — don't push Pro, just confirm.
+        const cap = getSignedInStatus() ? 10 : 1;
+        if (fileList.length <= cap) {
+          e.preventDefault();
+          toast.success(`${fileList.length} files ready — drop them into the tool (up to ${cap}/batch free)`);
+          return;
+        }
+        e.preventDefault();
         setFiles(fileList);
         setShowModal(true);
       }
     };
     document.addEventListener('paste', handler);
     return () => document.removeEventListener('paste', handler);
-  }, []);
+  }, [isPro]);
 
   return (
     <>
@@ -39,7 +52,7 @@ export function BulkDropPaywall() {
             </div>
             <h3 className="text-lg font-bold text-[var(--text-primary)] mb-1">Bulk Processing Detected</h3>
             <p className="text-sm text-[var(--text-secondary)] mb-2">
-              You dropped <strong>{files.length} files</strong>. This tool processes 1 file at a time on the Free plan.
+              You dropped <strong>{files.length} files</strong>. Free batches run up to 10 files (guests: 1 file at a time) — sign in free or drop fewer files.
             </p>
             <p className="text-xs text-[var(--text-muted)] mb-5">
               Pro processes up to <strong>500 files in parallel</strong>.

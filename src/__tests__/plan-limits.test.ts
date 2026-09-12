@@ -1,7 +1,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { PLAN_LIMITS } from '../../functions/api/check-plan';
 import { smartMax } from '@/utils/fileSizeLimits';
-import { checkAndRecordDownload } from '@/utils/freeUsageGuard';
+import { checkAndRecordDownload, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 
 const CATEGORIES = ['video/*', 'application/pdf', 'audio/*', 'image/*'];
 
@@ -55,5 +55,46 @@ describe('plan limits alignment (Option A)', () => {
 
     const allowed = await checkAndRecordDownload({ fileSizeMB: 60 });
     expect(allowed).toBe(false);
+  });
+
+  it('counts one batch download as one unit (batchSize within cap passes)', async () => {
+    mockPlanFetch(PLAN_LIMITS.signedin, 'signedin');
+    document.cookie = 'authjs.session-token=dummy-session';
+
+    const allowed = await checkAndRecordDownload({ batchSize: 10, fileSizeMB: 20 });
+    expect(allowed).toBe(true);
+  });
+
+  it('blocks batches over the plan cap before touching the quota service', async () => {
+    const calls: string[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      calls.push(url);
+      if (url.endsWith('/api/check-plan')) {
+        return new Response(JSON.stringify({ plan: 'signedin', ...PLAN_LIMITS.signedin }), { status: 200 });
+      }
+      return new Response('{}', { status: 404 });
+    }));
+    let reason: string | null = null;
+    const onPlan = (e: Event) => {
+      reason = (e as CustomEvent<{ reason?: string }>).detail?.reason ?? null;
+    };
+    window.addEventListener('toolzum:plan-limit', onPlan);
+    try {
+      const allowed = await checkAndRecordDownload({ batchSize: 11, fileSizeMB: 20 });
+      expect(allowed).toBe(false);
+      expect(reason).toBe('batch_size');
+      expect(calls.some((u) => u.endsWith('/api/downloads/record'))).toBe(false);
+    } finally {
+      window.removeEventListener('toolzum:plan-limit', onPlan);
+    }
+  });
+
+  it('gateBatchDownload passes batchSize through and maxBlobMB takes the max', async () => {
+    expect(maxBlobMB([{ size: 2 * 1048576 }, { size: 1 * 1048576 }])).toBe(2);
+    expect(maxBlobMB([])).toBeUndefined();
+    mockPlanFetch(PLAN_LIMITS.signedin, 'signedin');
+    document.cookie = 'authjs.session-token=dummy-session';
+    await expect(gateBatchDownload(10, 20)).resolves.toBe(true);
   });
 });

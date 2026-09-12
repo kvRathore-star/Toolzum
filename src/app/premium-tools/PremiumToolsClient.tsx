@@ -14,7 +14,7 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 
 const BENEFITS = [
   { icon: Upload, title: 'Batch up to 500 files', desc: 'Process hundreds of files at once — images, PDFs, audio, and video.' },
-  { icon: Zap, title: 'No file size limits', desc: 'Upload files up to 2GB. No more worrying about arbitrary caps.' },
+  { icon: Zap, title: '2GB file uploads', desc: 'Upload files up to 2GB. No more worrying about arbitrary caps.' },
   { icon: Layers, title: 'Parallel processing', desc: '6-thread parallel processing for faster conversions and compressions.' },
   { icon: Star, title: 'AI-powered tools', desc: 'Full access to AI tools — document chat, image generation, and more.' },
   { icon: ShieldCheck, title: 'Privacy first', desc: 'All processing stays in your browser. Zero uploads, zero logs, zero tracking.' },
@@ -281,7 +281,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
             <div className="text-2xl font-bold text-[var(--text-primary)] mb-4">$0</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Single file processing</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-50MB)</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-30MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Batch processing</span></li>
@@ -298,8 +298,8 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
             <div className="text-xs text-[var(--text-muted)] mb-4">{proPriceSuffix}</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>No file size limits</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited monthly uses</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Files up to 2GB</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited downloads</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>All AI tools</span></li>

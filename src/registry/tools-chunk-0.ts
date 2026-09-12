@@ -1128,9 +1128,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Video Compressor",
     slug: "video-compressor",
     category: "Video",
-    description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles files up to 500MB.",
+    description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles videos up to 30MB as guest, 150MB signed in, 2GB Pro.",
     dependencies: "FFmpeg / WebCodecs API",
-    seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. Up to 500MB. ',
+    seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. 30MB guest / 150MB free sign-in / 2GB Pro. ',
     faqs: [
       { question: "What compression methods are available?", answer: "Three methods: CRF (Constant Rate Factor) for quality-based compression, resolution scaling to reduce dimensions, and bitrate control for predictable file sizes. Combine methods for maximum reduction." },
       { question: "What is CRF and how do I choose a value?", answer: "CRF (Constant Rate Factor) controls quality. Lower CRF = higher quality/larger file. Typical values: 18 (high quality), 23 (default/good balance), 28 (smaller file). 18-23 is recommended for most use cases." },
@@ -1364,8 +1364,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Video to GIF",
     slug: "video-to-gif",
     category: "Video",
-    description: "Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.",
-    seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. Max 500MB input. ',
+    description: "Convert MP4/WebM to GIF animations. Videos up to 30MB as guest, 150MB signed in, 2GB Pro. Everything runs locally in your browser — nothing is uploaded.",
+    seoDescription: 'Free online Video to GIF — Convert MP4/WebM to GIF animations. 30MB guest / 150MB free sign-in / 2GB Pro. ',
     dependencies: "FFmpeg / gif.js",
     faqs: [
       { question: "What video formats can I convert to GIF?", answer: "MP4, WebM, MOV, AVI, and MKV files are supported. The tool uses FFmpeg to extract frames and gif.js to encode the final GIF animation." },

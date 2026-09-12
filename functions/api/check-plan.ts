@@ -43,7 +43,15 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       const user = await DB.prepare("SELECT plan FROM user WHERE id = ?")
         .bind(session.user.id)
         .first<{ plan: string }>();
-      plan = user?.plan || 'signedin';
+      const stored = user?.plan;
+      // The DB default is 'free' for every new account, so a stored 'free'
+      // row (or missing row) means an authenticated free user — they get the
+      // signedin file/batch caps (150MB/10). Without this, every real
+      // signed-in user fell to the 30MB/1-file anon caps and was blocked at
+      // download after the uploader (smartMax) allowed up to 150MB.
+      if (stored === 'pro') plan = 'pro';
+      else if (!stored || stored === 'free') plan = 'signedin';
+      else plan = stored;
     }
 
     const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free;

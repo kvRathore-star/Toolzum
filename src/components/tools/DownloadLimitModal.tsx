@@ -77,6 +77,11 @@ export function DownloadLimitModal() {
   const isProTool = isCurrentToolPro();
   // Signed-in users never need a "sign in" CTA — show upgrade path only.
   const signedIn = getSignedInStatus();
+  // Anon quota hit on a free tool is the prime signup moment — name the
+  // concrete free-account upside (3→5 downloads, 30 AI credits, 10-file
+  // batch, 150MB) instead of a generic "sign in for more".
+  const isAnonQuota = isQuota && !isProTool && !signedIn;
+  const isAnonPlanLimit = !isQuota && !isUnavailable && !signedIn && (event.type === "plan" && (event.detail.reason === "file_size" || event.detail.reason === "batch_size"));
   const copy = isUnavailable
     ? {
         title: "Downloads temporarily unavailable",
@@ -88,11 +93,26 @@ export function DownloadLimitModal() {
           title: "Pro tool daily limit reached",
           body: "You've used your 2 free downloads on Pro tools today. Upgrade to Pro for unlimited downloads.",
         }
-      : {
-          title: "Daily download limit reached",
-          body: "You've used up your free downloads for today. Sign in for more, or go Pro for unlimited downloads.",
+      : !signedIn
+        ? {
+            title: "You've used your 3 free downloads",
+            body: "Sign in free to keep going today — 5 downloads/day, 30 AI credits/month, 10-file batches up to 150MB. No credit card.",
+          }
+        : {
+            title: "Daily download limit reached",
+            body: "You've used up your free downloads for today. Sign in for more, or go Pro for unlimited downloads.",
+          }
+    : !signedIn && event.type === "plan" && event.detail.reason === "file_size"
+      ? {
+          title: "File too large for guest use (30MB)",
+          body: "Sign in free for files up to 150MB, or upgrade to Pro for up to 2GB uploads.",
         }
-    : reasonCopy[event.detail.reason];
+      : !signedIn && event.type === "plan" && event.detail.reason === "batch_size"
+        ? {
+            title: "Guests are limited to 1 file at a time",
+            body: "Sign in free for batches up to 10 files, or upgrade to Pro for up to 500 files.",
+          }
+        : reasonCopy[(event as { detail: PlanLimitDetail }).detail.reason];
 
   return (
     <div
@@ -124,6 +144,15 @@ export function DownloadLimitModal() {
         <h3 id="download-limit-title" className="text-lg font-bold text-[var(--text-primary)] mb-1">{copy.title}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-5">{copy.body}</p>
 
+        {(isAnonQuota || isAnonPlanLimit) && (
+          <ul className="mb-5 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-3.5 text-[13px] text-[var(--text-secondary)] space-y-1.5" aria-label="Free account benefits">
+            <li>✓ 5 downloads/day <span className="text-[var(--text-muted)]">(vs 3 as guest)</span></li>
+            <li>✓ 30 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 10/use)</span></li>
+            <li>✓ 10-file batches up to 150MB <span className="text-[var(--text-muted)]">(vs 1 file / 30MB)</span></li>
+            <li>✓ 2 Pro-tool downloads/day</li>
+          </ul>
+        )}
+
         <div className="space-y-2.5">
           {!isUnavailable && (
             <Link
@@ -140,7 +169,7 @@ export function DownloadLimitModal() {
               className="w-full text-sm"
               asChild
             >
-              <Link href="/sign-in">Sign in free for more</Link>
+              <Link href="/sign-in">{isAnonQuota || isAnonPlanLimit ? "Sign in free — unlock 5/day + 30 credits" : "Sign in free for more"}</Link>
             </Button>
           )}
           <button

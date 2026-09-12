@@ -754,7 +754,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Compressor",
     "slug": "video-compressor",
     "category": "Video",
-    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles files up to 500MB.",
+    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles videos up to 30MB as guest, 150MB signed in, 2GB Pro.",
     "isPro": false
   },
   {
@@ -938,7 +938,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video to GIF",
     "slug": "video-to-gif",
     "category": "Video",
-    "description": "Convert MP4/WebM to GIF animations. Max 500MB input. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Convert MP4/WebM to GIF animations. Videos up to 30MB as guest, 150MB signed in, 2GB Pro. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {

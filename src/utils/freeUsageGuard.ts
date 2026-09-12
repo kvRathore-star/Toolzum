@@ -284,3 +284,21 @@ export async function checkAndRecordDownload(options?: { fileSizeMB?: number; ba
   }
   return true;
 }
+
+/** Largest blob size in MB (per-file plan semantics — pass the biggest file, not the sum). */
+export function maxBlobMB(blobs: { size: number }[]): number | undefined {
+  if (blobs.length === 0) return undefined;
+  return Math.max(...blobs.map((b) => b.size)) / (1024 * 1024);
+}
+
+/**
+ * Per-batch quota gate (Option C): one batch download = one quota unit.
+ * Call ONCE before generating any anchors/saving anything. Returns false
+ * when blocked — the limit modal is shown automatically via the
+ * `toolzum:plan-limit` / `toolzum:download-blocked` events, so callers
+ * should simply abort (no extra toast needed).
+ */
+export async function gateBatchDownload(inputCount: number, maxFileMB?: number): Promise<boolean> {
+  if (typeof window === "undefined") return true;
+  return checkAndRecordDownload({ batchSize: inputCount, fileSizeMB: maxFileMB });
+}

@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import NextImage from "next/image";
 import { useBatchProgress } from '@/hooks/useBatchProgress';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
@@ -162,6 +163,9 @@ export default function BulkImageWatermark() {
   };
 
   const downloadAll = async () => {
+    if (doneBlobs.length === 0) return;
+    // Per-batch quota: one gate call (1 unit) before anything saves.
+    if (!(await gateBatchDownload(batch.files.length, maxBlobMB(doneBlobs)))) return;
     const zip = new JSZip();
     doneBlobs.forEach((blob, i) => {
       zip.file(batch.files[i]!.file.name.replace(/\.[^.]+$/, '') + '-watermarked.png', blob);
@@ -176,7 +180,9 @@ export default function BulkImageWatermark() {
     toast.success('ZIP downloaded');
   };
 
-  const downloadEach = () => {
+  const downloadEach = async () => {
+    if (doneBlobs.length === 0) return;
+    if (!(await gateBatchDownload(batch.files.length, maxBlobMB(doneBlobs)))) return;
     doneBlobs.forEach((blob, i) => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');

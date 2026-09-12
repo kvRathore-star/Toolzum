@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { Download } from "lucide-react";
 import { getFingerprint } from "@/utils/freeUsageGuard";
 import { proSlugs } from "@/registry/tools-constants";
@@ -71,25 +72,45 @@ export function DownloadQuotaBadge() {
   const isZero = remaining === 0;
 
   // Anonymous users get limit 0 on Pro tools — that's "sign in", not "used up".
+  // Anon on free tools gets a concrete signup upside (3→5/day, 30 AI credits,
+  // 10-file batch) so the value of a free account is visible pre-paywall.
+  const isAnon = plan === null;
   const label = isProTool
-    ? isZero && plan === null
+    ? isZero && isAnon
       ? "Sign in to use Pro tools"
       : isZero
         ? "Pro downloads used up today"
         : `${remaining} Pro ${remaining === 1 ? "download" : "downloads"} left — Upgrade for unlimited`
-    : isZero
-      ? "Free downloads used up today"
-      : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`;
+    : isZero && isAnon
+      ? "3/3 free used — sign in for 5/day + 30 AI credits"
+      : isZero
+        ? "Free downloads used up today"
+        : isAnon
+          ? `${remaining} of 3 free left — sign in for 5/day + 30 AI credits`
+          : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`;
 
   return (
     <>
       <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
-      <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full">
-        <Download
-          className={`w-3.5 h-3.5 ${isZero ? "text-[var(--danger)]" : "text-[var(--accent)]"}`}
-        />
-        {label}
-      </span>
+      {isAnon && !isProTool ? (
+        <Link
+          href="/sign-in"
+          className="inline-flex items-center gap-1.5 text-[11px] font-medium tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full text-[var(--text-muted)] hover:border-[var(--accent)]/40 hover:text-[var(--text-primary)] transition-colors"
+          aria-label={`${label}. Sign in free.`}
+        >
+          <Download
+            className={`w-3.5 h-3.5 ${isZero ? "text-[var(--danger)]" : "text-[var(--accent)]"}`}
+          />
+          {label}
+        </Link>
+      ) : (
+        <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)] tracking-wide bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-3 sm:px-4 py-2 rounded-full">
+          <Download
+            className={`w-3.5 h-3.5 ${isZero ? "text-[var(--danger)]" : "text-[var(--accent)]"}`}
+          />
+          {label}
+        </span>
+      )}
     </>
   );
 }

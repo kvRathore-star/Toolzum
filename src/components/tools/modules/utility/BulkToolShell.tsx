@@ -9,6 +9,7 @@ import { useParallelProcessor } from '@/hooks/useParallelProcessor';
 import { useWorkflowPresets } from '@/hooks/useWorkflowPresets';
 import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
+import { getSignedInStatus, gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { isLowEndDevice } from '@/lib/device';
 
 export interface ProcessedFile {
@@ -91,14 +92,40 @@ export function BulkToolShell({
     }));
     const valid = validated.filter((f): f is File => f !== null);
     if (valid.length === 0) return;
-    setFiles(prev => [...prev, ...valid]);
-    valid.forEach(f => {
+    // Plan batch caps at drop time (matches check-plan.ts: anon 1, signed-in
+    // 10, pro 500) — blocking upfront beats grinding through files only to
+    // hit the ZIP/quota gate at download.
+    const batchCap = isPro ? 500 : getSignedInStatus() ? 10 : 1;
+    const room = batchCap - files.length;
+    if (room <= 0) {
+      toast.error(
+        isPro
+          ? `Pro batches up to 500 files — remove some to add more.`
+          : getSignedInStatus()
+            ? `Free plan batches up to 10 files — upgrade to Pro for 500.`
+            : `Guests process 1 file at a time — sign in free for 10-file batches.`
+      );
+      if (fileRef.current) fileRef.current.value = '';
+      return;
+    }
+    const capped = valid.slice(0, room);
+    if (capped.length < valid.length) {
+      toast.error(
+        isPro
+          ? `Pro batches up to 500 files — first ${capped.length} kept.`
+          : getSignedInStatus()
+            ? `Free plan batches up to 10 files — first ${capped.length} kept, Pro handles 500.`
+            : `Guests process 1 file at a time — first file kept, sign in free for 10-file batches.`
+      );
+    }
+    setFiles(prev => [...prev, ...capped]);
+    capped.forEach(f => {
       const url = URL.createObjectURL(f);
       blobUrlsRef.current.push(url);
       setPreviews(prev => [...prev, url]);
     });
-    toast.success(`Added ${valid.length} file(s)`);
-    if (hasLargeFiles(valid)) {
+    toast.success(`Added ${capped.length} file(s)`);
+    if (hasLargeFiles(capped)) {
       setShowLargeFileWarning(true);
       const mem = checkMemory();
       if (mem.low) {
@@ -107,7 +134,7 @@ export function BulkToolShell({
     }
     // Reset input so re-uploading same file triggers onChange
     if (fileRef.current) fileRef.current.value = '';
-  }, [maxSizeMB, accept]);
+  }, [maxSizeMB, accept, files.length, isPro]);
 
   const removeFile = useCallback((idx: number) => {
     setFiles(prev => prev.filter((_, i) => i !== idx));
@@ -157,6 +184,10 @@ export function BulkToolShell({
   }, [files, config, process, processFile, heavyEngineNotice]);
 
   const downloadAll = useCallback(async () => {
+    // Per-batch quota: one gate call for the whole batch, BEFORE generating
+    // anything. Abort silently on block — the limit modal explains.
+    if (processedBlobs.length === 0) return;
+    if (!(await gateBatchDownload(files.length, maxBlobMB(processedBlobs.map((p) => p.blob))))) return;
     const zip = new JSZip();
     processedBlobs.forEach(({ name, blob }) => zip.file(name, blob));
     const content = await zip.generateAsync({ type: 'blob' });
@@ -167,9 +198,11 @@ export function BulkToolShell({
     a.click();
     URL.revokeObjectURL(url);
     toast.success('ZIP downloaded');
-  }, [processedBlobs, toolSlug]);
+  }, [processedBlobs, toolSlug, files.length]);
 
-  const downloadEach = useCallback(() => {
+  const downloadEach = useCallback(async () => {
+    if (processedBlobs.length === 0) return;
+    if (!(await gateBatchDownload(files.length, maxBlobMB(processedBlobs.map((p) => p.blob))))) return;
     processedBlobs.forEach(({ name, blob }) => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -178,7 +211,7 @@ export function BulkToolShell({
       a.click();
       URL.revokeObjectURL(url);
     });
-  }, [processedBlobs]);
+  }, [processedBlobs, files.length]);
 
   const handleSavePreset = useCallback(() => {
     if (!presetName.trim()) { toast.error('Enter a preset name'); return; }
@@ -263,6 +296,9 @@ export function BulkToolShell({
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Drop files here or click to upload</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Max {maxSizeMB}MB per file • {accept === '*/*' ? 'All formats' : accept}</p>
+          {!isPro && (
+            <p className="text-[10px] text-[var(--text-muted)] mt-1">Guests: 1 file • Free sign-in: 10 files/batch, individual downloads (batch ZIP is Pro)</p>
+          )}
           <p className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-2 flex items-center gap-1">
             <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
             Zero-trust: Processing happens in your browser memory. No data leaves your device. Safe for corporate and financial files.
