@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useMemo } from 'react';
-import { Search, Info, Settings2, Sparkles, Crown } from 'lucide-react';
+import { Search, Info, Settings2, Sparkles } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useAiProvider } from '@/hooks/useAiProvider';
+import { useSession } from '@/lib/auth-client';
 import AiSettings from '../../AiSettings';
 import Link from 'next/link';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
@@ -17,6 +18,8 @@ export default function RegexTester() {
   const [description, setDescription] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const { generateCompletion } = useAiProvider();
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
 
   const { matches, error } = useMemo(() => {
     if (aiTab !== 'manual' || !pattern) return { matches: [] as { match: string; index: number }[], error: null as string | null };
@@ -52,7 +55,14 @@ export default function RegexTester() {
       setAiTab('manual');
       toast.success('Regex generated! Test it below.');
     } catch (e: unknown) {
-      toast.error(getErrorMessage(e, 'Failed to generate regex'));
+      const msg = getErrorMessage(e, 'Failed to generate regex');
+      // Anonymous users have no credit balance (401) — turn the dead-end
+      // error into the signup funnel instead of a shrug.
+      if (!isSignedIn && /sign in/i.test(msg)) {
+        toast.error('Sign in free to use AI generation — 30 credits/month, no card.');
+      } else {
+        toast.error(msg);
+      }
     } finally { setIsGenerating(false); }
   };
 
@@ -85,7 +95,7 @@ export default function RegexTester() {
                 <p className="text-sm text-[var(--text-secondary)]">AI-powered generation and real-time testing</p>
               </div>
             </div>
-            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Sparkles className="w-3.5 h-3.5" /> AI · 1 credit/use</span>
           </div>
         </div>
 
@@ -104,6 +114,11 @@ export default function RegexTester() {
           {aiTab === 'ai' && (
             <div className="space-y-4 bg-amber-50/50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-xl p-5 animate-in fade-in duration-300">
               <AiSettings />
+              {!isSignedIn && (
+                <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
+                  AI generation needs a free account — <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">sign in</Link> for 30 credits/month. Manual testing below stays free forever.
+                </p>
+              )}
               <div className="space-y-2">
                 <label className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-amber-500" />Describe what you want to match
@@ -116,7 +131,7 @@ export default function RegexTester() {
                 className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
                 {isGenerating ? <><div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Generating...</> : <><Sparkles className="w-4 h-4" /> Generate Regex Pattern</>}
               </button>
-              <p className="text-[10px] text-[var(--text-muted)]">The generated regex will be inserted below for testing. Requires an AI provider API key.</p>
+              <p className="text-[10px] text-[var(--text-muted)]">The generated regex will be inserted below for testing. Costs 1 AI credit per use — no API key needed.</p>
             </div>
           )}
 
