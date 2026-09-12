@@ -5,7 +5,8 @@ import Link from 'next/link';
 import {
   Crown, Sparkles, Zap, ShieldCheck, Upload, Check, ArrowRight,
   ChevronRight, FileText, Image, Code2, Briefcase, Wrench,
-  Mic, Video, Cpu, Users, Star, Layers, ChevronDown
+  Mic, Video, Cpu, Users, Star, Layers, ChevronDown,
+  Download, Save, Bot
 } from 'lucide-react';
 import { getCategoryTheme } from '@/lib/categoryTheme';
 import type { ToolMetadata } from '@/registry/tools';
@@ -17,6 +18,9 @@ const BENEFITS = [
   { icon: Zap, title: '2GB file uploads', desc: 'Upload files up to 2GB. No more worrying about arbitrary caps.' },
   { icon: Layers, title: 'Parallel processing', desc: '6-thread parallel processing for faster conversions and compressions.' },
   { icon: Star, title: 'AI-powered tools', desc: 'Full access to AI tools — document chat, image generation, and more.' },
+  { icon: Bot, title: '300 AI credits/month', desc: 'Text generation at 1 credit per use, transcription at 10 — 10x the free allowance.' },
+  { icon: Download, title: '1-click batch ZIP', desc: 'Download entire processed batches as a single ZIP archive.' },
+  { icon: Save, title: 'Workflow presets', desc: 'Save tool configurations and reload them in one click.' },
   { icon: ShieldCheck, title: 'Privacy first', desc: 'All processing stays in your browser. Zero uploads, zero logs, zero tracking.' },
   { icon: Crown, title: 'White-label export', desc: 'Export watermarked results without branding included.' },
 ];

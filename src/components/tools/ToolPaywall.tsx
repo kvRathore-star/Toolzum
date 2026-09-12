@@ -31,14 +31,14 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
       {isLocked && (
         <div className="absolute inset-0 z-50 flex items-start sm:items-center justify-center p-6 overflow-y-auto">
           <div className="absolute inset-0 bg-black/40" />
-          <div className="relative w-full max-w-md my-auto max-h-full overflow-y-auto overflow-x-hidden bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 text-center shadow-2xl">
+          <div className={`relative w-full max-w-md my-auto max-h-full overflow-y-auto overflow-x-hidden bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] text-center shadow-2xl ${signInFirst ? "p-6" : "p-8"}`}>
             <div className="absolute -top-10 -left-10 w-32 h-32 bg-[var(--accent-ink)]/10 blur-2xl rounded-full pointer-events-none" />
 
-            <div className="w-14 h-14 bg-[var(--accent-ink)]/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--accent)]/30">
-              <Lock className="w-6 h-6 text-[var(--accent)]" />
+            <div className={`bg-[var(--accent-ink)]/15 rounded-full flex items-center justify-center mx-auto border border-[var(--accent)]/30 ${signInFirst ? "w-11 h-11 mb-4" : "w-14 h-14 mb-6"}`}>
+              <Lock className={`text-[var(--accent)] ${signInFirst ? "w-5 h-5" : "w-6 h-6"}`} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">{signInFirst ? "Sign in to use this Pro tool" : "Pro Feature"}</h3>
-            <p className="text-sm text-[var(--text-secondary)] mb-6">
+            <h3 className={`font-bold text-white mb-2 ${signInFirst ? "text-xl" : "text-2xl"}`}>{signInFirst ? "Sign in to use this Pro tool" : "Pro Feature"}</h3>
+            <p className={`text-sm text-[var(--text-secondary)] ${signInFirst ? "mb-5" : "mb-6"}`}>
               {signInFirst ? (
                 <><strong>{title}</strong> is premium. Sign in free for 2 Pro downloads per day, or upgrade for unlimited access plus {proToolCount} other professional-grade tools.</>
               ) : (
@@ -46,6 +46,7 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
               )}
             </p>
 
+            {!signInFirst && (
             <div className="grid grid-cols-2 gap-2 mb-6 text-left">
               <div className="p-2.5 rounded-[var(--radius-md)] bg-zinc-800/50 border border-zinc-700/50">
                 <Upload className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400 mb-1" />
@@ -68,6 +69,7 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
                 <div className="text-[10px] text-zinc-400">no watermarks</div>
               </div>
             </div>
+            )}
 
             <div className="space-y-3">
               {signInFirst ? (

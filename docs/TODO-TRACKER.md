@@ -82,12 +82,9 @@ Pentest (item 10) is already in your human-side pending list, so it's preserved 
 
 Here is your complete test list. Do it in this order — each session is independent, so you can stop after any of them.
 
-Session 1 — smoke pass (10 min, keyboard only, no mouse)
-1. Search: open toolzum.com, press Cmd+K, type font converter with the space. Then Esc. Pass = space types, results filter, Esc closes and focus returns to the search button.
-2. Dropzone: open toolzum.com/design/font-converter. Tab until the dashed box has a visible outline. Press Enter (file picker must open), cancel, Tab back, press Space (picker opens, page must NOT scroll).
-3. Labeled form: open toolzum.com/finance/emi-calculator. Tab through the three fields — each must show its name correctly.
+~~Session 1 — smoke pass~~ — DONE Sep 12 2026 (all three passed; dropzone Space-scroll led to picker focus-return fix on 8 dropzones + explicit focus rings).
 
-Session 2 — admin check (10 min, sign in as admin first!)
+Session 2 — admin check (10 min, sign in as admin first!) — NEEDS RE-PASS: dialogs were rebuilt (Esc/trap/stacking + close fix) after your first pass.
 ⚠️ Live data — open things but always Cancel, never confirm.
 1. Open toolzum.com/admin/users. Tab to a table row, press Enter — detail panel must slide in.
 2. Keep pressing Tab — focus must stay inside the panel. Press Esc — panel closes, focus returns to the row.
@@ -123,17 +120,10 @@ I'll give you these in small batches of 10 with screenshots-worth of context ("t
 Report format for everything: page name + what you pressed + what happened (or what it announced). Short lines are perfect.
 
 
-2. Video WASM console check
-Open toolzum.com (live, after this deploy finishes) in Chrome desktop.
-Press Cmd+Option+J (Mac) to open DevTools console. Keep it open.
-Open any video tool (e.g. search "video compress"), upload a small video, run it.
-Watch the console for red errors mentioning any of: Content Security Policy, blocked, SharedArrayBuffer, failed to fetch, wasm.
-Report back: either "clean, video processed, no console errors" or paste the exact red error text.
+~~2. Video WASM console check~~ — DONE Sep 12 2026 (found real breaks: CSP blob:/data: for FFmpeg core, Pollinations img-src, Turnstile script — all fixed + regression tests).
 
 Needs humans (all batched, none scheduled):
 - Smoke re-pass on new UI (chips, tour, empty states), admin keyboard check, VoiceOver top-20
-- ZAP weekly run going green on its own (allowlist is in — confirm on next Monday run or manual trigger)
-- Video WASM console check (devtools on a video tool, one red-error scan)
 Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
 
 Each was left for a specific reason — not skipped, judged:

@@ -11,7 +11,7 @@ interface AnalyticsData {
   blockedDownloads: { toolSlug: string; category: string; count: number }[];
   topDownloadedTools: { toolSlug: string; category: string; count: number }[];
   errorsByDay: { date: string; count: number }[];
-  topErrors: { message: string; count: number; lastSeen: string }[];
+  topErrors: { message: string; count: number; lastSeen: string | number | null }[];
   signupsByDay: { date: string; count: number }[];
   pageViewsByDay: { date: string; count: number }[];
   totals: {
@@ -129,6 +129,12 @@ export function AnalyticsSection() {
   // page again (Sep 12 2026: one bad row killed all of /admin/analytics).
   const dayLabel = (date: string | null): string =>
     typeof date === "string" && date.length >= 5 ? date.slice(5) : "—";
+  // error_log timestamps are unix seconds (numbers), not ISO strings —
+  // .slice() on a number threw "is not a function" (Sep 12 2026).
+  const stampLabel = (v: string | number | null): string => {
+    if (typeof v === "number") return new Date(v * 1000).toLocaleDateString();
+    return typeof v === "string" && v.length >= 10 ? v.slice(0, 10) : "—";
+  };
   const topTools = range === "7d" ? data.topTools7d : data.topTools30d;
   const downloadsByDay = data.downloadsByDay;
   const signupsByDay = data.signupsByDay;
@@ -277,7 +283,7 @@ export function AnalyticsSection() {
                 <span className="text-xs text-[var(--text-secondary)] truncate max-w-[70%]">{e.message}</span>
                 <div className="flex items-center gap-3">
                   <span className="text-xs text-[var(--text-muted)] tabular-nums">{e.count}x</span>
-                  <span className="text-[10px] text-[var(--text-muted)]">{e.lastSeen?.slice(0, 10)}</span>
+                  <span className="text-[10px] text-[var(--text-muted)]">{stampLabel(e.lastSeen)}</span>
                 </div>
               </div>
             ))}
