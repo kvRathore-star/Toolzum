@@ -72,7 +72,7 @@ getUserLimit(plan, isProTool):
 **Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge copy stays short (pill links to `/sign-in`); the full pitch (5/day + 30 credits) lives in the limit modal that fires at zero:
 - Pro tool + anon: "Sign in to use Pro tools"
 - Pro tool + signed: "N Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
-- Free tool + anon: "N of 3 free left — sign in for more" / "3/3 free used — sign in for more"
+- Free tool + anon: "N remaining — sign in for more" / "0 remaining — sign in free"
 - Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
 
