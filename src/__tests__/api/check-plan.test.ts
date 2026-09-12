@@ -41,14 +41,14 @@ function req(user?: string) {
 }
 
 describe('GET /api/check-plan contract', () => {
-  it('anonymous callers get the free caps', async () => {
+  it('anonymous callers get the free caps under the canonical anon label', async () => {
     const res = await checkPlan({
       request: req(),
       env: { DB: mockDb() } as never,
     });
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(body).toEqual({ plan: 'free', ...PLAN_LIMITS.free });
+    expect(body).toEqual({ plan: 'anon', ...PLAN_LIMITS.free });
     expect(body).toMatchObject({
       maxFileSizeMB: 30,
       maxBatchSize: 1,
@@ -98,14 +98,14 @@ describe('GET /api/check-plan contract', () => {
     });
   });
 
-  it('unknown stored plans fall back to the free limits', async () => {
+  it('unknown stored plans fail closed to signedin caps (never pro)', async () => {
     const res = await checkPlan({
       request: req('weird-user'),
       env: { DB: mockDb({ userRow: { plan: 'enterprise' } }) } as never,
     });
     expect(await res.json()).toEqual({
-      plan: 'enterprise',
-      ...PLAN_LIMITS.free,
+      plan: 'signedin',
+      ...PLAN_LIMITS.signedin,
     });
   });
 });

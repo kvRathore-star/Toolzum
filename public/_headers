@@ -13,6 +13,8 @@
 # (email sign-in is dead without it — token never resolves). Pollinations
 # serves AI-generated images (img + connect) — blocked img-src broke the
 # AI Image Generator entirely (verified Sep 12 2026, live console).
+# storage.googleapis.com serves the MediaPipe segmentation model for on-device
+# AI background removal (fetched at runtime, cached by the browser).
 # img-src includes ui-avatars.com (LinkInBioBuilder default avatars).
 # If video tools ever fail WASM load in console, check worker-src for data:.
 /*
@@ -21,7 +23,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=63072000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https://unpkg.com https://cdn.jsdelivr.net https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ui-avatars.com https://image.pollinations.ai; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://challenges.cloudflare.com https://image.pollinations.ai; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; media-src 'self' blob:; font-src 'self' data:; frame-src 'self' https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' blob: https://unpkg.com https://cdn.jsdelivr.net https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ui-avatars.com https://image.pollinations.ai; connect-src 'self' blob: data: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://challenges.cloudflare.com https://image.pollinations.ai https://storage.googleapis.com; worker-src 'self' blob: https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; media-src 'self' blob:; font-src 'self' data:; frame-src 'self' https://challenges.cloudflare.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
 # Hashed build assets - long cache (filenames change every deploy)
 # NOTE: bare "*.ext" globs are NOT valid Pages syntax and match EVERYTHING,

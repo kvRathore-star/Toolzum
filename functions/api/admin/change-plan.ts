@@ -23,7 +23,11 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
   const body = (await context.request.json()) as { userId: string; plan: string };
   const { userId, plan } = body;
 
-  if (!userId || !["free", "signedin", "pro"].includes(plan)) {
+  // Stored-plan invariant (planTiers.StoredPlan): only billable tiers live in
+  // the DB. 'signedin' is an effective server tier, never stored — it resolves
+  // identically to 'free' everywhere, so accepting it would only create
+  // confusing rows.
+  if (!userId || !["free", "pro"].includes(plan)) {
     return json({ error: "invalid_params" }, 400);
   }
 

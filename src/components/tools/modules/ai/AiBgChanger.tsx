@@ -6,12 +6,18 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { useSession } from '@/lib/auth-client';
 import NextImage from "next/image";
+import {
+  getPersonSegmenter,
+  segmentPerson,
+  applyPersonMask,
+} from '@/lib/selfieSegmentation';
 
 export default function AiBgChanger() {
   const [image, setImage] = useState<string | null>(null);
   const [result, setResult] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [mode, setMode] = useState<'auto' | 'manual'>('auto');
+  const [mode, setMode] = useState<'auto' | 'manual' | 'ai'>('auto');
+  const [aiStatus, setAiStatus] = useState<'idle' | 'loading' | 'ready' | 'failed'>('idle');
   const [tolerance, setTolerance] = useState(20);
   const [bgColor, setBgColor] = useState('#10b981');
   const [useTransparent, setUseTransparent] = useState(true);
@@ -23,6 +29,51 @@ export default function AiBgChanger() {
   const imageRef = useRef<HTMLImageElement>(null);
   const { data: session } = useSession();
   const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isSignedIn = !!session?.user;
+
+  /**
+   * True on-device AI segmentation (MediaPipe, local model — no uploads, no
+   * credits). Signed-in perk: guests keep the instant chroma heuristic.
+   * Any model failure falls back to the heuristic with an honest toast —
+   * never a dead button.
+   */
+  const removeBackgroundAI = async () => {
+    if (!isSignedIn) {
+      toast('Sign in free to unlock AI segmentation — guests use Standard mode.', { icon: '🔓' });
+      return;
+    }
+    const img = imageRef.current;
+    const canvas = canvasRef.current;
+    if (!img || !canvas) return;
+    setIsProcessing(true);
+    try {
+      if (aiStatus !== 'ready') {
+        setAiStatus('loading');
+        toast.loading('Downloading on-device AI model (once)…', { id: 'ai-model' });
+        await getPersonSegmenter();
+        setAiStatus('ready');
+        toast.dismiss('ai-model');
+      }
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.drawImage(img, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const mask = await segmentPerson(img);
+      applyPersonMask(imageData, mask, { useTransparent, bgColor });
+      ctx.putImageData(imageData, 0, 0);
+      addWatermark(canvas);
+      setResult(canvas.toDataURL('image/png'));
+      toast.success('AI segmentation complete — 100% on-device!');
+    } catch {
+      setAiStatus('failed');
+      toast.dismiss('ai-model');
+      toast.error('AI model unavailable — using Standard mode instead.');
+      setMode('auto');
+      removeBackgroundAuto();
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const addWatermark = (canvas: HTMLCanvasElement) => {
     if (isPro) return;
@@ -231,6 +282,12 @@ export default function AiBgChanger() {
                       className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'manual' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                       Manual
                     </button>
+                    <button onClick={() => setMode('ai')}
+                      aria-pressed={mode === 'ai'}
+                      title={isSignedIn ? 'On-device AI person segmentation' : 'Sign in free to unlock'}
+                      className={`px-2.5 py-1 rounded-md text-[9px] font-semibold transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-1 ${mode === 'ai' ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                      AI ✨
+                    </button>
                   </div>
                 </div>
 
@@ -244,6 +301,18 @@ export default function AiBgChanger() {
                     <button onClick={removeBackgroundAuto} disabled={isProcessing}
                       className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
                       {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Scissors className="w-3.5 h-3.5" /> Remove BG {!isPro ? '(Standard)' : ''}</>}
+                    </button>
+                  </>
+                ) : mode === 'ai' ? (
+                  <>
+                    <p className="text-[9px] text-[var(--text-secondary)]">
+                      {isSignedIn
+                        ? 'Real on-device person segmentation — no uploads, no credits. Falls back to Standard if the model fails.'
+                        : 'AI segmentation is a free signed-in perk. Guests use Standard mode.'}
+                    </p>
+                    <button onClick={removeBackgroundAI} disabled={isProcessing || aiStatus === 'loading'}
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2">
+                      {isProcessing || aiStatus === 'loading' ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> {aiStatus === 'loading' ? 'Loading AI model…' : 'Processing...'}</> : <><Scissors className="w-3.5 h-3.5" /> Segment with on-device AI</>}
                     </button>
                   </>
                 ) : (

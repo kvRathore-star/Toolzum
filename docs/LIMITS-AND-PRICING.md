@@ -22,6 +22,15 @@ Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free
 > Slugs are NOT pasted here by design — the
 > registry is the single source of truth; verify with:
 > `node -e "const fs=require('fs');const s=fs.readFileSync('src/registry/tools-constants.ts','utf8');console.log(s.match(/export const proSlugs = \[(.*?)\];/s)[1].match(/\"[^\"]+\"/g).length)"`
+>
+> ### Plan labels (canonical — `src/lib/planTiers.ts`, Sep 12 2026)
+>
+> Stored (`user.plan`): only `free` \| `pro` (enforced by
+> `/api/admin/change-plan`). Effective (all limit decisions): `anon` \|
+> `signedin` \| `pro` via `resolvePlan(authenticated, stored)`. Unknown stored
+> values fail closed to `signedin` outcomes (never pro). Endpoint responses
+> carry the effective label (`/api/check-plan`, `/api/downloads/check`,
+> `/api/account/credits`); the 503 path keeps `plan: null` = unknown state.
 
 ---
 
@@ -291,8 +300,21 @@ feature card advertises "Up to 2GB".
 
 ## 10. Known Gaps / TODO
 
-- [ ] Log AI-credit exhaustion events to analytics (same pattern as download-event)
-- [ ] Consider normalizing plan labels across endpoints (`signedin` vs `free` for authenticated free users — outcomes identical today, labels differ)
+- [x] Log AI-credit exhaustion events to analytics (shipped Sep 12 2026 — see below)
+- [x] Normalize plan labels (shipped Sep 12 2026 — `src/lib/planTiers.ts`: stored `free|pro`, effective `anon|signedin|pro`)
+
+### AI-credit analytics (`ai_credit_event`, Sep 12 2026)
+
+Same pattern as `download_event`: every `/api/ai/*` call logs one row —
+`{ userId, task: generate|transcribe, outcome: allowed|blocked_exhausted,
+balance, allowance, createdAt }`. Table is lazy-created (`CREATE TABLE IF NOT
+EXISTS` in `functions/api/ai/credit-events.ts`, same as `error-log.ts`), and
+logging never fails the request. Watch query:
+
+```sql
+SELECT task, outcome, COUNT(*) FROM ai_credit_event
+WHERE createdAt > unixepoch('now', '-30 days') GROUP BY task, outcome;
+```
 
 **Tuning triggers (revisit with real data, not gut calls):**
 - Single-file saves and batch saves share ONE daily counter per user (`download_usage`

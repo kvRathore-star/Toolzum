@@ -9,16 +9,12 @@ interface Env {
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { logAiCreditEvent } from './credit-events';
+import {
+  resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
+  type EffectivePlan,
+} from '../../../src/lib/planTiers';
 
-const RATE_LIMITS: Record<string, number> = {
-  free: 2,
-  signedin: 2,
-  pro: 5,
-};
-
-const CREDIT_RESET_DAYS = 30;
-const FREE_CREDITS = 30;
-const PRO_CREDITS = 300;
 // Per-task cost: plain text generation. (Transcription costs 10× — see
 // TRANSCRIPTION_CREDITS in transcribe.ts.)
 export const TEXT_GENERATION_CREDITS = 1;
@@ -35,10 +31,10 @@ async function getUserContext(request: Request, DB: D1Database): Promise<{ userI
   return { userId: row.userId, plan: row.plan || 'free' };
 }
 
-async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string, creditResetAt: number | null, currentCredits: number): Promise<{ maxCredits: number; balance: number }> {
+async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: EffectivePlan, creditResetAt: number | null, currentCredits: number): Promise<{ maxCredits: number; balance: number }> {
   const now = Date.now();
   const resetMs = CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000;
-  const maxCredits = plan === 'pro' ? PRO_CREDITS : FREE_CREDITS;
+  const maxCredits = creditAllowance(plan);
 
   if (!creditResetAt || (now - creditResetAt) >= resetMs) {
     await DB.prepare(
@@ -64,8 +60,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { userId, plan } = userCtx;
-    const rateLimit = RATE_LIMITS[plan] || RATE_LIMITS.free;
+    const { userId, plan: storedPlan } = userCtx;
+    const plan = resolvePlan(true, storedPlan);
+    const rateLimit = aiRateLimit(plan);
 
     const rl = await checkRateLimit(DB, 'ai-gen', userId, rateLimit);
     if (rl.limited) return rl.response;
@@ -80,9 +77,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { balance } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
+    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
 
     if (balance <= 0) {
+      await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
       return new Response(JSON.stringify({ error: 'No credits remaining' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
@@ -148,6 +146,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     await DB.prepare(`UPDATE user SET credits = credits - ${TEXT_GENERATION_CREDITS} WHERE id = ? AND credits > 0`).bind(userId).run();
+    await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'allowed', balance: balance - TEXT_GENERATION_CREDITS, allowance: maxCredits });
 
     return new Response(JSON.stringify({ content: text }), {
       headers: { 'Content-Type': 'application/json' },

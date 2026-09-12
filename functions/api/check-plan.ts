@@ -1,5 +1,6 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
 import { createAuth } from "../../src/lib/auth";
+import { resolvePlan, fileCaps, type FileCaps } from "../../src/lib/planTiers";
 
 interface Env {
   DB: D1Database;
@@ -10,10 +11,13 @@ interface Env {
   TURNSTILE_SECRET_KEY?: string;
 }
 
-export const PLAN_LIMITS: Record<string, { maxFileSizeMB: number; maxBatchSize: number; threads: number }> = {
-  free:     { maxFileSizeMB: 30,   maxBatchSize: 1,   threads: 1 },
-  signedin: { maxFileSizeMB: 150,  maxBatchSize: 10,  threads: 1 },
-  pro:      { maxFileSizeMB: 2000, maxBatchSize: 500, threads: 6 },
+// Legacy alias map (kept for existing clients/tests): 'free' === anon caps.
+// Canonical caps live in planTiers.fileCaps(); this map derives from it so
+// the numbers exist exactly once.
+export const PLAN_LIMITS: Record<string, FileCaps> = {
+  free: fileCaps("anon"),
+  signedin: fileCaps("signedin"),
+  pro: fileCaps("pro"),
 };
 
 export async function onRequestGet(context: { request: Request; env: Env }) {
@@ -38,23 +42,21 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     });
     const session = await auth.api.getSession({ headers: context.request.headers });
 
-    let plan: string = 'free';
+    let plan = resolvePlan(false, null);
+    let stored: string | null = null;
     if (session?.user?.id) {
       const user = await DB.prepare("SELECT plan FROM user WHERE id = ?")
         .bind(session.user.id)
         .first<{ plan: string }>();
-      const stored = user?.plan;
-      // The DB default is 'free' for every new account, so a stored 'free'
-      // row (or missing row) means an authenticated free user — they get the
-      // signedin file/batch caps (150MB/10). Without this, every real
-      // signed-in user fell to the 30MB/1-file anon caps and was blocked at
-      // download after the uploader (smartMax) allowed up to 150MB.
-      if (stored === 'pro') plan = 'pro';
-      else if (!stored || stored === 'free') plan = 'signedin';
-      else plan = stored;
+      stored = user?.plan ?? null;
+      // Authenticated free users get the signedin file/batch caps (150MB/10).
+      // The DB default is 'free' for every new account — resolving the raw
+      // stored value directly once served 30MB/1-file anon caps to all real
+      // signed-in users (fixed Sep 12 2026, locked by check-plan.test.ts).
+      plan = resolvePlan(true, stored);
     }
 
-    const limits = PLAN_LIMITS[plan] || PLAN_LIMITS.free;
+    const limits = fileCaps(plan);
     recordRateLimit(DB, "check-plan", ip, "/check-plan");
 
     return new Response(JSON.stringify({ plan, ...limits }), {

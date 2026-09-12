@@ -47,6 +47,10 @@ describe("public/_headers CSP third-party surface (Sep 12 2026 live-console regr
     expect(csp).toMatch(/img-src[^;]*image\.pollinations\.ai/);
     expect(csp).toMatch(/connect-src[^;]*image\.pollinations\.ai/);
   });
+
+  it("allows the MediaPipe model origin (on-device AI segmentation fetches it at runtime)", () => {
+    expect(csp).toMatch(/connect-src[^;]*storage\.googleapis\.com/);
+  });
 });
 
 describe("getIncidentMonths rolling window", async () => {

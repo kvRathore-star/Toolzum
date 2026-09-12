@@ -102,7 +102,7 @@ describe('GET /api/downloads/check contract', () => {
       env: { DB: db } as never,
     });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ allowed: true, remaining: 3, plan: null });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 3, plan: 'anon' });
   });
 
   it('anon pro tool: blocked (limit 0), no usage row consulted', async () => {
@@ -111,7 +111,7 @@ describe('GET /api/downloads/check contract', () => {
       request: checkReq({ fingerprint: 'fp-1', isPro: true }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: false, remaining: 0, plan: null });
+    expect(await res.json()).toEqual({ allowed: false, remaining: 0, plan: 'anon' });
     expect(seen.some((q) => q.sql.includes('FROM download_usage'))).toBe(false);
   });
 
@@ -121,7 +121,7 @@ describe('GET /api/downloads/check contract', () => {
       request: checkReq({ user: 'free-user' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 5, plan: 'free' });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 5, plan: 'signedin' });
   });
 
   it('signed-in free user, pro tool: limit 2 bucket with pro: fingerprint prefix', async () => {
@@ -130,7 +130,7 @@ describe('GET /api/downloads/check contract', () => {
       request: checkReq({ user: 'free-user', isPro: true }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: true, remaining: 1, plan: 'free' });
+    expect(await res.json()).toEqual({ allowed: true, remaining: 1, plan: 'signedin' });
     expect(usageFingerprint(seen)).toBe('pro:free-user');
   });
 
@@ -169,7 +169,7 @@ describe('GET /api/downloads/check contract', () => {
       request: checkReq({ fingerprint: 'fp-1' }),
       env: { DB: db } as never,
     });
-    expect(await res.json()).toEqual({ allowed: false, remaining: 0, plan: null });
+    expect(await res.json()).toEqual({ allowed: false, remaining: 0, plan: 'anon' });
   });
 
   it('service failure reports plan null (unknown state, never "used up")', async () => {

@@ -74,7 +74,9 @@ export function DownloadQuotaBadge() {
   // Anonymous users get limit 0 on Pro tools — that's "sign in", not "used up".
   // Anon on free tools gets a concrete signup upside (3→5/day, 30 AI credits,
   // 10-file batch) so the value of a free account is visible pre-paywall.
-  const isAnon = plan === null;
+  // plan 'anon' is the canonical label (downloads/check); null is tolerated
+  // for older/error responses. Both mean "not signed in".
+  const isAnon = plan === null || plan === "anon";
   const label = isProTool
     ? isZero && isAnon
       ? "Sign in to use Pro tools"

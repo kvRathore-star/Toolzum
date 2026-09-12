@@ -1,5 +1,6 @@
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
 import { createAuth } from "../../../src/lib/auth";
+import { resolvePlan, downloadLimit } from "../../../src/lib/planTiers";
 
 interface Env {
   DB: D1Database;
@@ -8,12 +9,6 @@ interface Env {
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
   TURNSTILE_SECRET_KEY?: string;
-}
-
-function getUserLimit(plan: string | null, isProTool: boolean): number {
-  if (plan === 'pro') return Infinity;
-  if (isProTool) return plan ? 2 : 0;
-  return plan ? 5 : 3;
 }
 
 export async function onRequestGet(context: { request: Request; env: Env }) {
@@ -40,17 +35,17 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       TURNSTILE_SECRET_KEY: context.env.TURNSTILE_SECRET_KEY as string,
     });
     const session = await auth.api.getSession({ headers: request.headers });
-    let plan: string | null = null;
+    let plan = resolvePlan(false, null);
     let userId: string | null = null;
     if (session?.user?.id) {
       userId = session.user.id;
       const row = await DB.prepare("SELECT plan FROM user WHERE id = ?")
         .bind(userId)
         .first<{ plan: string }>();
-      plan = row?.plan || 'free';
+      plan = resolvePlan(true, row?.plan ?? null);
     }
 
-    const limit = getUserLimit(plan, isProTool);
+    const limit = downloadLimit(plan, isProTool);
     if (limit === Infinity) {
       return new Response(JSON.stringify({ allowed: true, remaining: 999, plan }), {
         headers: { 'Content-Type': 'application/json' },

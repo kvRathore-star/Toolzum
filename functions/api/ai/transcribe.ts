@@ -6,16 +6,12 @@ interface Env {
 const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { logAiCreditEvent } from './credit-events';
+import {
+  resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
+  type EffectivePlan,
+} from '../../../src/lib/planTiers';
 
-const RATE_LIMITS: Record<string, number> = {
-  free: 2,
-  signedin: 2,
-  pro: 5,
-};
-
-const CREDIT_RESET_DAYS = 30;
-const FREE_CREDITS = 30;
-const PRO_CREDITS = 300;
 // Per-task cost (decided Sep 11): transcription runs a full audio model
 // pass (~$0.19/25min), so it costs 10× a text generation.
 export const TRANSCRIPTION_CREDITS = 10;
@@ -32,10 +28,10 @@ async function getUserContext(request: Request, DB: D1Database): Promise<{ userI
   return { userId: row.userId, plan: row.plan || 'free' };
 }
 
-async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: string, creditResetAt: number | null, currentCredits: number): Promise<{ maxCredits: number; balance: number }> {
+async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: EffectivePlan, creditResetAt: number | null, currentCredits: number): Promise<{ maxCredits: number; balance: number }> {
   const now = Date.now();
   const resetMs = CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000;
-  const maxCredits = plan === 'pro' ? PRO_CREDITS : FREE_CREDITS;
+  const maxCredits = creditAllowance(plan);
 
   if (!creditResetAt || (now - creditResetAt) >= resetMs) {
     await DB.prepare(
@@ -69,8 +65,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { userId, plan } = userCtx;
-    const rateLimit = RATE_LIMITS[plan] || RATE_LIMITS.free;
+    const { userId, plan: storedPlan } = userCtx;
+    const plan = resolvePlan(true, storedPlan);
+    const rateLimit = aiRateLimit(plan);
 
     const rl = await checkRateLimit(DB, 'ai-trans', userId, rateLimit);
     if (rl.limited) return rl.response;
@@ -85,9 +82,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { balance } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
+    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
 
     if (balance < TRANSCRIPTION_CREDITS) {
+      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
       return new Response(JSON.stringify({ error: 'Not enough credits — transcription requires 10' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
@@ -169,6 +167,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     await DB.prepare(`UPDATE user SET credits = credits - ${TRANSCRIPTION_CREDITS} WHERE id = ? AND credits >= ${TRANSCRIPTION_CREDITS}`).bind(userId).run();
+    await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - TRANSCRIPTION_CREDITS, allowance: maxCredits });
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
 

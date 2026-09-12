@@ -75,7 +75,7 @@ describe('GET /api/account/credits contract', () => {
     });
     const res = await credits({ request: req('free-user'), env: { DB: db } as never });
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ credits: 17, plan: 'free', allowance: FREE_CREDITS });
+    expect(await res.json()).toEqual({ credits: 17, plan: 'signedin', allowance: FREE_CREDITS });
     expect(runs).toEqual([]);
   });
 

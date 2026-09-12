@@ -1,4 +1,11 @@
 import { createAuth } from "../../../src/lib/auth";
+import {
+  resolvePlan, creditAllowance, CREDIT_RESET_DAYS,
+  FREE_CREDITS, PRO_CREDITS,
+} from "../../../src/lib/planTiers";
+
+// Re-exported for existing importers (account-credits.test.ts).
+export { FREE_CREDITS, PRO_CREDITS };
 
 interface Env {
   DB: D1Database;
@@ -8,10 +15,6 @@ interface Env {
   BETTER_AUTH_URL?: string;
   TURNSTILE_SECRET_KEY?: string;
 }
-
-export const FREE_CREDITS = 30;
-export const PRO_CREDITS = 300;
-const CREDIT_RESET_DAYS = 30;
 
 /**
  * Live credit balance. Dashboard/account pages used to read `credits` from
@@ -52,8 +55,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       });
     }
 
-    const plan = row.plan || "free";
-    const allowance = plan === "pro" ? PRO_CREDITS : FREE_CREDITS;
+    const plan = resolvePlan(true, row.plan);
+    const allowance = creditAllowance(plan);
     let credits = row.credits ?? allowance;
 
     const now = Date.now();
