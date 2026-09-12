@@ -56,6 +56,8 @@ const SERVER_SIDE_SLUGS = new Set([
 ]);
 
 const CREDIT_COST_SLUGS: Record<string, number> = {
+  // NOTE: ai-image-generator is intentionally absent — its cost depends on
+  // the in-tool engine choice (Pollinations 0 vs Gemini 5), shown inline.
   'ai-paraphrasing-tool': 1,
   'ai-translator': 1,
   'ai-cover-letter-generator': 1,
@@ -66,12 +68,17 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'youtube-transcript-generator': 1,
   'subtitle-translator': 1,
   'meeting-minutes-generator': 1,
+  // NOTE: audio/video-to-text clean up pasted transcript dumps via TEXT
+  // generation (1 credit) — they never touch /api/ai/transcribe. Only
+  // true audio uploads (podcast, indian-voice) cost 10.
+  'video-to-text-transcription': 1,
+  'audio-to-text-transcription': 1,
   'podcast-transcription': 10,
-  'video-to-text-transcription': 10,
-  'audio-to-text-transcription': 10,
   'pdf-ai-summariser': 1,
   'resume-ats-score-checker': 1,
   'indian-voice-transcriber': 10,
+  'ai-humanizer': 1,
+  'grammar-checker': 1,
 };
 
 function getCategoryPath(category: string): string {

@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { useAiProvider } from '@/hooks/useAiProvider';
+import { useSession } from '@/lib/auth-client';
+import Link from 'next/link';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 type Tone = 'casual' | 'professional' | 'friendly' | 'natural' | 'storytelling';
 type Creativity = 'low' | 'medium' | 'high';
@@ -253,6 +257,34 @@ export default function AiHumanizer() {
 
   const handleKeyDown = useEnterToSubmit(handleHumanize);
 
+  const { generateCompletion } = useAiProvider();
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
+
+  // Server-AI rewrite (1 credit): template engine stays free and instant,
+  // this is the quality option — same dual pattern as Regex Generator.
+  const handleAiRewrite = async () => {
+    if (!input.trim()) { toast.error('Enter some text to rewrite'); return; }
+    setIsLoading(true);
+    try {
+      const result = await generateCompletion(
+        [{ role: 'user', content: `Rewrite the following text in a ${tone} tone with ${creativity} creativity. Make it sound naturally human. Return ONLY the rewritten text, no commentary:\n\n${input.slice(0, 4000)}` }],
+        0.8,
+      );
+      setOutput(result.trim());
+      toast.success('AI rewrite complete — 1 credit used.');
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : 'AI rewrite failed';
+      if (!isSignedIn && /sign in/i.test(msg)) {
+        toast.error('Sign in free for AI rewrite — 30 credits/month, no card.');
+      } else {
+        toast.error(msg);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleCopy = () => {
     if (!output) return;
     navigator.clipboard.writeText(output);
@@ -274,6 +306,7 @@ export default function AiHumanizer() {
 
   return (
     <div className="max-w-6xl mx-auto animate-in fade-in duration-500 space-y-5">
+      <AiPrivacyBanner />
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
         <div className="p-5 space-y-5">
           <div className="flex items-center gap-2">
@@ -372,11 +405,21 @@ export default function AiHumanizer() {
                   className="px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-semibold rounded-xl text-sm transition-colors">
                   Try Again
                 </button>
+                <button onClick={handleAiRewrite} disabled={isLoading || !input.trim()}
+                  title={isSignedIn ? 'Server AI rewrite, 1 credit per use' : 'Sign in free to unlock'}
+                  className="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-50 text-white font-semibold rounded-xl text-sm transition-all">
+                  ✨ AI Rewrite · 1 credit
+                </button>
                 <button onClick={handleCopy}
                   className="px-4 py-2.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-semibold rounded-xl text-sm transition-colors">
                   Copy to Clipboard
                 </button>
               </>
+            )}
+            {!isSignedIn && (
+              <p className="text-xs text-[var(--text-secondary)]">
+                <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI rewrite (30 credits/month) — template engine stays free.
+              </p>
             )}
           </div>
 

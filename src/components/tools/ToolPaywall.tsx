@@ -71,6 +71,14 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
             </div>
             )}
 
+            {signInFirst && (
+            <div className="flex items-center justify-center gap-4 mb-5 text-[10px] text-zinc-400">
+              <span className="flex items-center gap-1"><Upload className="w-3 h-3 text-emerald-500" /> 2GB files</span>
+              <span className="flex items-center gap-1"><Zap className="w-3 h-3 text-amber-500" /> 500-file batch</span>
+              <span className="flex items-center gap-1"><Crown className="w-3 h-3 text-amber-500" /> No watermarks</span>
+            </div>
+            )}
+
             <div className="space-y-3">
               {signInFirst ? (
                 <>

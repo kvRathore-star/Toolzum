@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { useEnterToSubmit } from '@/lib/keyboard';
+import { useAiProvider } from '@/hooks/useAiProvider';
+import { useSession } from '@/lib/auth-client';
+import Link from 'next/link';
+import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 interface GrammarError {
   start: number;
@@ -137,6 +141,9 @@ export default function AiGrammarChecker() {
   const [errors, setErrors] = useState<GrammarError[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasChecked, setHasChecked] = useState(false);
+  const { generateCompletion } = useAiProvider();
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
 
   useEffect(() => { return () => { setErrors([]); }; }, []);
 
@@ -156,6 +163,31 @@ export default function AiGrammarChecker() {
   };
 
   const handleKeyDown = useEnterToSubmit(handleCheck);
+
+  // Server-AI rewrite (1 credit): rule engine stays free and instant.
+  const handleAiFix = async () => {
+    if (!input.trim()) { toast.error('Enter some text to fix'); return; }
+    setIsLoading(true);
+    try {
+      const result = await generateCompletion(
+        [{ role: 'user', content: `Fix all grammar, spelling, and punctuation errors in the following text. Preserve meaning and tone. Return ONLY the corrected text, no commentary:\n\n${input.slice(0, 4000)}` }],
+        0.2,
+      );
+      setInput(result.trim());
+      setErrors([]);
+      setHasChecked(false);
+      toast.success('AI fix applied — 1 credit used.');
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : 'AI fix failed';
+      if (!isSignedIn && /sign in/i.test(msg)) {
+        toast.error('Sign in free for AI fix — 30 credits/month, no card.');
+      } else {
+        toast.error(msg);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleFixAll = () => {
     try {
@@ -216,6 +248,12 @@ export default function AiGrammarChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <AiPrivacyBanner />
+      {!isSignedIn && (
+        <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
+          <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI fix (30 credits/month) — rule-based check stays free.
+        </p>
+      )}
       <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -264,6 +302,13 @@ export default function AiGrammarChecker() {
               </svg>
             )}
             {isLoading ? 'Checking...' : 'Check Grammar'}
+          </button>
+          <button onClick={handleAiFix} disabled={isLoading || !input.trim()}
+            title={isSignedIn ? 'Server AI fix, 1 credit per use' : 'Sign in free to unlock'}
+            className="px-5 py-3 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 disabled:opacity-50 text-white font-bold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed"
+            aria-label="AI fix with server model"
+          >
+            ✨ AI Fix · 1 credit
           </button>
           <button onClick={handleClear}
             className="px-5 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-xs cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"

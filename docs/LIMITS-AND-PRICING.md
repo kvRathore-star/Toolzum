@@ -124,21 +124,28 @@ getUserLimit(plan, isProTool):
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
 | Transcription (Speech-to-Text) | 10 (`TRANSCRIPTION_CREDITS` in `transcribe.ts`) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
-| AI Image Generation | 0 | $0 | Pollinations.ai (free external API, client-side) |
+| AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
+| AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.039/image | Gemini 2.5 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
+
+> Costs follow the *endpoint called*, not the tool name: `audio/video-to-text-transcription`
+> clean up pasted dumps via `/api/ai/generate` (1 credit) — only true audio
+> uploads (`podcast`, `indian-voice`) hit `/api/ai/transcribe` (10). Enforced
+> by `credit-badge-coverage.test.ts`, which also forbids duplicate badge keys.
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
 **Cost at 30 free credits/month:**
 - ~30 text gen calls, OR
 - ~3 transcription sessions (10 credits each, 25 min each), OR
-- Unlimited AI image generation (free), OR
+- Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all (e.g. 20 text + 1 transcription = 30)
 
 **Cost at 300 Pro credits/month:**
 - ~300 text gen calls, OR
 - ~30 transcription sessions (10 credits each), OR
-- Unlimited AI image generation (free), OR
+- ~60 Gemini images (5 credits each, Pro-only engine), OR
+- Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 

@@ -3,16 +3,30 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Download, Sparkles, Image as ImageIcon, Link2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { useSession } from '@/lib/auth-client';
+import { useAiProvider } from '@/hooks/useAiProvider';
 import NextImage from "next/image";
+import Link from "next/link";
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+
+type Engine = 'free' | 'gemini';
+
+// Kill-switch: Gemini engine stays hidden until output quality + billing are
+// approved live with a real key. Flip to true to expose the toggle.
+const GEMINI_ENGINE_LIVE = false;
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('Photorealistic');
   const [aspectRatio, setAspectRatio] = useState('1:1');
+  const [engine, setEngine] = useState<Engine>('free');
   const [isGenerating, setIsGenerating] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+  const { data: session } = useSession();
+  const isSignedIn = !!session?.user;
+  const isPro = (session?.user as Record<string, unknown> | undefined)?.plan === 'pro';
+  const { generateImage } = useAiProvider();
 
   const styles = [
     { name: 'Photorealistic', suffix: 'highly detailed, photorealistic, 8k resolution, raw photo, realistic lighting' },
@@ -24,9 +38,15 @@ export default function AiImageGenerator() {
     { name: 'Cinematic', suffix: 'cinematic still, dramatic lighting, depth of field, 35mm film, masterpiece' }
   ];
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!prompt.trim()) {
       return toast.error('Please enter a description for your image!');
+    }
+
+    // Gemini engine is Pro-only (Pollinations stays free for everyone).
+    if (engine === 'gemini' && !isPro) {
+      toast.error(isSignedIn ? 'Gemini generation is a Pro feature — upgrade to unlock.' : 'Gemini generation is Pro-only — sign in, then upgrade. Pollinations stays free for guests.');
+      return;
     }
 
     setIsGenerating(true);
@@ -36,6 +56,19 @@ export default function AiImageGenerator() {
     const selectedStyleObj = styles.find(s => s.name === style);
     const suffix = selectedStyleObj ? selectedStyleObj.suffix : '';
     const fullPrompt = `${prompt}, ${suffix}`;
+
+    if (engine === 'gemini') {
+      try {
+        const { url } = await generateImage(fullPrompt, aspectRatio);
+        setImageUrl(url);
+        toast.success('Gemini image generated — 5 credits used.');
+      } catch (e: unknown) {
+        toast.error(e instanceof Error ? e.message : 'Gemini generation failed.');
+      } finally {
+        setIsGenerating(false);
+      }
+      return;
+    }
 
     // Map aspect ratio to width/height
     let w = 1024;
@@ -85,7 +118,11 @@ export default function AiImageGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
-      <AiPrivacyBanner service="image AI" serverLabel="a third-party service directly from your browser" />
+      {engine === 'gemini' ? (
+        <AiPrivacyBanner service="AI models" serverLabel="our server" />
+      ) : (
+        <AiPrivacyBanner service="image AI" serverLabel="a third-party service directly from your browser" />
+      )}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Control Panel */}
@@ -104,6 +141,40 @@ export default function AiImageGenerator() {
                 placeholder="e.g. A futuristic city with flying cars at sunset, watercolor style..."
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
               />
+            </div>
+
+            <div className="space-y-2">
+              <span className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Engine</span>
+              {GEMINI_ENGINE_LIVE ? (
+              <>
+              <div className="grid grid-cols-2 gap-2" role="group" aria-label="Image engine">
+                <button
+                  onClick={() => setEngine('free')}
+                  aria-pressed={engine === 'free'}
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${engine === 'free' ? 'bg-blue-600 text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                >
+                  Pollinations · Free
+                </button>
+                <button
+                  onClick={() => setEngine('gemini')}
+                  aria-pressed={engine === 'gemini'}
+                  title={isPro ? 'Gemini quality, 5 credits per image' : 'Pro feature — upgrade to unlock'}
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 ${engine === 'gemini' ? 'bg-blue-600 text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                >
+                  {!isPro && <span aria-hidden="true">👑</span>} Gemini · 5 credits · Pro
+                </button>
+              </div>
+              {!isPro && engine === 'gemini' && (
+                <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
+                  {isSignedIn ? (
+                    <><Link href="/pricing" className="text-[var(--accent)] hover:underline font-semibold">Upgrade to Pro</Link> for Gemini HD generation (300 credits/month). Pollinations stays free.</>
+                  ) : (
+                    <><Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in</Link>, then upgrade to Pro for Gemini HD generation. Pollinations stays free for guests.</>
+                  )}
+                </p>
+              )}
+              </>
+              ) : null}
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -148,7 +219,7 @@ export default function AiImageGenerator() {
             ) : (
               <>
                 <Sparkles className="w-5 h-5" />
-                <span>Generate Image</span>
+                <span>{engine === 'gemini' ? 'Generate with Gemini · 5 credits' : 'Generate Image · Free'}</span>
               </>
             )}
           </button>

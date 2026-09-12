@@ -8,7 +8,7 @@
  * effort insert.
  */
 
-export type AiCreditTask = "generate" | "transcribe";
+export type AiCreditTask = "generate" | "transcribe" | "image";
 export type AiCreditOutcome = "allowed" | "blocked_exhausted";
 
 const CREATE_TABLE = `
