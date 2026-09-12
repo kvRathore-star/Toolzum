@@ -1,6 +1,6 @@
 # Toolzum TODO Tracker
 
-Last updated: 2026-08-23
+Last updated: 2026-09-12
 
 ## Quick Wins (do now)
 - [x] 1. Generate OG images for 4 new tools + fix default /og-image.png 404 — Ran `npx tsx scripts/generate-og-images.ts`, fixed layout/page.tsx to use `/og/branding/index.png`
@@ -74,6 +74,16 @@ Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–
 - [x] Protobuf Decoder — rewrote with real wire format parsing (commit b06b887)
 - [x] User Favorites — D1 table, API endpoints, star buttons, homepage section, ⌘K group (commit 5ee786c)
 
+## Completed Sep 12 2026 (plan/quota/a11y hardening batch)
+- [x] Per-batch quota gate on all bulk + single save paths (BulkToolShell family, 10 badged singles, PdfWorkflowBuilder, BulkPdfMerger); downloadOrShare returns boolean
+- [x] Anon Pro hard-lock with sign-in CTA; signed-free server caps 150MB/10; credit-reset race fix
+- [x] Transcription 10-credit truth (docs/badge/tests); 5 missing credit badges added (16/16 callers)
+- [x] CSP production fixes (FFmpeg blob:+data:, Turnstile, Pollinations, beacon, MediaPipe model) + regression tests
+- [x] Admin dialogs Esc/trap/stacking + close fix; plan options free|pro; lastLoginAt writer; analytics crash + blocked-stat + date fixes
+- [x] Case-redirect 404 net (38 rules); dead ai-video-subtitler removed (redirect kept); FaceSwap copy honesty
+- [x] Canonical plan tiers (planTiers.ts); ai_credit_event analytics; MediaPipe on-device segmentation (signed perk); tour per-account + replay
+- [x] Keyboard: picker focus-return + explicit dropzone rings; manifest/AGENTS/count truth pass
+
 -----------------
 
 The C2.3 remainder block, verbatim. It's today's live process note and still accurate (75 + 51, batch gate, skip-list, next-up batch). Everything around it can go.
@@ -123,13 +133,14 @@ Report format for everything: page name + what you pressed + what happened (or w
 ~~2. Video WASM console check~~ — DONE Sep 12 2026 (found real breaks: CSP blob:/data: for FFmpeg core, Pollinations img-src, Turnstile script — all fixed + regression tests).
 
 Needs humans (all batched, none scheduled):
-- Smoke re-pass on new UI (chips, tour, empty states), admin keyboard check, VoiceOver top-20
+- Smoke re-pass on new UI: chips ✓ verified Sep 12, tour nagging ✓ fixed+verified, empty states — guide given (favorites/history/badge-zero/search-empty/admin-empty), awaiting eyes
+- Admin keyboard check — NEEDS RE-PASS (dialogs rebuilt after first pass; see Session 2)
 Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
 
 Each was left for a specific reason — not skipped, judged:
 6. Fingerprint — fixing it would cost privacy credibility. Making anon quotas unbypassable means canvas/WebGL/font fingerprinting or IP-locking. That directly contradicts the "privacy-first, nothing uploaded" promise on the homepage. The anon quota is a speed bump by design; the real anti-abuse layer is already server-side (IP rate limiters on both endpoints). A stronger client fingerprint buys almost nothing — incognito clears it anyway — while weakening the brand claim.
 7. UTC skew — nothing user-visible to fix. The local counts are a display-only mirror; every allow/block comes from the server (UTC). The badge shows server values. Aligning the mirror to UTC would churn code + tests to change a number no user ever sees differ. Negative value.
-8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,148 pages to polish a minutes-long cosmetic mismatch that resolves itself.
+8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,145 pages to polish a minutes-long cosmetic mismatch that resolves itself.
 Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
 
 
@@ -139,4 +150,4 @@ One rescue — the "Important Notes" honesty block (~15 lines): the coverage-def
 
 Contact form still fakes it (contact/page.tsx:49 — localStorage + simulated success, no email/API). Real fix needs a backend (Cloudflare Email Service / worker) — product decision first.
 
-Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.
+Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done. (Sep 12: downloadOrShare now returns boolean; 11 migrated savers + AiFaceSwap check it. Long tail of unrelated copy-buttons remains.)
