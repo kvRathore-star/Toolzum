@@ -29,9 +29,9 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
       </div>
 
       {isLocked && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center p-6">
+        <div className="absolute inset-0 z-50 flex items-start sm:items-center justify-center p-6 overflow-y-auto">
           <div className="absolute inset-0 bg-black/40" />
-          <div className="relative w-full max-w-md bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 text-center shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-md my-auto max-h-full overflow-y-auto overflow-x-hidden bg-[var(--bg-overlay)] border-2 border-[var(--accent)] rounded-[var(--radius-2xl)] p-8 text-center shadow-2xl">
             <div className="absolute -top-10 -left-10 w-32 h-32 bg-[var(--accent-ink)]/10 blur-2xl rounded-full pointer-events-none" />
 
             <div className="w-14 h-14 bg-[var(--accent-ink)]/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--accent)]/30">

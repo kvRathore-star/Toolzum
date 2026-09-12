@@ -8,6 +8,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
+import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 
@@ -15,6 +16,7 @@ export default function BulkVideoSizeReducer() {
   const [targetSize, setTargetSize] = useState('50');
   const fileRef = useRef<HTMLInputElement>(null);
   const batch = useBatchProgress();
+  const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
   const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
   const batchRef = useRef(batch);
   batchRef.current = batch;
@@ -34,6 +36,7 @@ export default function BulkVideoSizeReducer() {
     if (accepted.length === 0) return;
     batch.addFiles(accepted);
     toast.success(`Added ${accepted.length} video(s)`);
+    focusDrop();
   };
 
   const getVideoDuration = async (ff: Awaited<import('@ffmpeg/ffmpeg').FFmpeg>, input: string): Promise<number> => {
@@ -118,7 +121,7 @@ export default function BulkVideoSizeReducer() {
         <strong>Target-size encoding:</strong> FFmpeg adjusts bitrate to hit your desired file size per video.
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
-        <div role="button" tabIndex={0} aria-label="Upload videos" onClick={() => fileRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileRef.current?.click(); } }} className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
+        <div role="button" tabIndex={0} ref={dropRef} aria-label="Upload videos" onClick={() => { armReturn(); fileRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); fileRef.current?.click(); } }} className="flex flex-col items-center justify-center p-10 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
           <p className="text-sm text-[var(--text-primary)] font-medium">Upload videos</p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Each video will be compressed to fit your target size</p>

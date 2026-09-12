@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
+import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { FileArchive, Download, Upload, Trash2, File } from 'lucide-react';
 
 interface ZipFile {
@@ -15,6 +16,7 @@ export default function ArchiveConverter() {
   const [files, setFiles] = useState<ZipFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
 
   const addFiles = (newFiles: FileList | File[]) => {
     const toAdd: ZipFile[] = Array.from(newFiles).map(f => ({
@@ -22,6 +24,7 @@ export default function ArchiveConverter() {
       id: `${f.name}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
     }));
     setFiles(prev => [...prev, ...toAdd]);
+    focusDrop();
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -95,8 +98,8 @@ export default function ArchiveConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Drag & drop files or select them to create a ZIP archive. All processing is done locally in your browser.</p>
 
-        <div onDrop={handleDrop} onDragOver={handleDragOver} role="button" tabIndex={0} aria-label="Upload files to archive" onClick={() => inputRef.current?.click()}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inputRef.current?.click(); } }}
+        <div onDrop={handleDrop} onDragOver={handleDragOver} role="button" tabIndex={0} ref={dropRef} aria-label="Upload files to archive" onClick={() => { armReturn(); inputRef.current?.click(); }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); inputRef.current?.click(); } }}
           className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]"
         >
           <input ref={inputRef} type="file" multiple onChange={e => { if (e.target.files) addFiles(e.target.files); e.target.value = ''; }} className="hidden" />

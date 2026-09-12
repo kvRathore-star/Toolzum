@@ -37,6 +37,12 @@ describe("public/_headers CSP third-party surface (Sep 12 2026 live-console regr
     expect(csp).toMatch(/script-src[^;]*blob:/);
   });
 
+  it("allows data: scripts for the FFmpeg UMD core wrapper (script-src data:)", () => {
+    // The core wrapper self-injects as data:text/javascript (script-src-elem
+    // falls back to script-src). Seen as a live-console violation Sep 12 2026.
+    expect(csp).toMatch(/script-src[^;]*data:/);
+  });
+
   it("allows the Turnstile captcha script, frame, and API (email auth is dead without it)", () => {
     expect(csp).toMatch(/script-src[^;]*challenges\.cloudflare\.com/);
     expect(csp).toMatch(/frame-src[^;]*challenges\.cloudflare\.com/);
@@ -50,6 +56,18 @@ describe("public/_headers CSP third-party surface (Sep 12 2026 live-console regr
 
   it("allows the MediaPipe model origin (on-device AI segmentation fetches it at runtime)", () => {
     expect(csp).toMatch(/connect-src[^;]*storage\.googleapis\.com/);
+  });
+
+  it("allows the First-party analytics beacon (script + collect endpoint)", () => {
+    expect(csp).toMatch(/script-src[^;]*static\.cloudflareinsights\.com/);
+    expect(csp).toMatch(/connect-src[^;]*cloudflareinsights\.com/);
+  });
+});
+
+describe("public/manifest.json validity (Sep 12 2026 regression)", () => {
+  it("parses as JSON (a trailing comma broke PWA install with 'Unexpected token')", () => {
+    const raw = fs.readFileSync(path.join(process.cwd(), "public/manifest.json"), "utf8");
+    expect(() => JSON.parse(raw)).not.toThrow();
   });
 });
 

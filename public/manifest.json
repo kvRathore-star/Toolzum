@@ -53,5 +53,5 @@
       "url": "/text/word-counter",
       "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
     }
-  ],
+  ]
 }

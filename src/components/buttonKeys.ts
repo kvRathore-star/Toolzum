@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useCallback } from "react";
 
 /**
  * Shared keyboard activation for `role="button"` elements.
@@ -33,4 +33,36 @@ export function buttonKeyUp(e: React.KeyboardEvent, onActivate: () => void) {
     e.preventDefault();
     onActivate();
   }
+}
+
+/**
+ * Native file pickers return focus nowhere when cancelled (the <input> is
+ * display:none, so it can't take focus) — focus falls to <body> and the next
+ * Space press scrolls the page instead of reopening the picker. This hook
+ * pulls focus back to the dropzone after every picker interaction.
+ *
+ * Usage: spread `ref={dropRef}` on the dropzone div, call `armReturn()`
+ * right before opening the picker, and `focusDrop()` after handling files.
+ */
+export function usePickerFocusReturn<T extends HTMLElement>() {
+  const dropRef = useRef<T>(null);
+
+  const focusDrop = useCallback(() => {
+    dropRef.current?.focus();
+  }, []);
+
+  const armReturn = useCallback(() => {
+    const timer = window.setTimeout(
+      () => window.removeEventListener("focus", onFocus),
+      60_000,
+    );
+    function onFocus() {
+      window.clearTimeout(timer);
+      window.removeEventListener("focus", onFocus);
+      dropRef.current?.focus();
+    }
+    window.addEventListener("focus", onFocus);
+  }, []);
+
+  return { dropRef, armReturn, focusDrop };
 }

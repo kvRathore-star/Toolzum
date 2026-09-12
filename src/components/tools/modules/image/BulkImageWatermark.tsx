@@ -9,6 +9,7 @@ import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import NextImage from "next/image";
 import { useBatchProgress } from '@/hooks/useBatchProgress';
+import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 
 const POSITIONS = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'center'] as const;
@@ -28,6 +29,7 @@ export default function BulkImageWatermark() {
   const [doneBlobs, setDoneBlobs] = useState<Blob[]>([]);
 
   const batch = useBatchProgress();
+  const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
   const fileRef = useRef<HTMLInputElement>(null);
   const logoRef = useRef<HTMLInputElement>(null);
   const blobUrlsRef = useRef<string[]>([]);
@@ -48,6 +50,7 @@ export default function BulkImageWatermark() {
       blobUrlsRef.current.push(url);
     });
     toast.success(`Added ${accepted.length} file(s)`);
+    focusDrop();
   };
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -227,7 +230,7 @@ export default function BulkImageWatermark() {
             className="w-full p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
           />
         ) : (
-          <div role="button" tabIndex={0} onClick={() => logoRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); logoRef.current?.click(); } }} className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-lg)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
+          <div role="button" tabIndex={0} ref={dropRef} onClick={() => { armReturn(); logoRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); logoRef.current?.click(); } }} className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-lg)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
             {watermarkImage ? (
               <>
                 <NextImage src={watermarkImage} alt="Watermark logo" loading="lazy" unoptimized={true} width={40} height={40} className="w-10 h-10 object-contain rounded" />

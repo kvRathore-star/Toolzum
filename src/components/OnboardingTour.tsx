@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useSession } from "@/lib/auth-client";
 
 const STORAGE_KEY = "toolzum_onboarded";
+export const REPLAY_TOUR_EVENT = "toolzum:replay-tour";
 
 interface TourStep {
   /** CSS selector for the anchor element. Omitted → centered card. */
@@ -37,27 +39,87 @@ const STEPS: TourStep[] = [
 export function OnboardingTour() {
   const [step, setStep] = useState<number | null>(null);
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const { data: session, isPending } = useSession();
+  const isSignedIn = !!session?.user;
+
+  const persistSeen = useCallback(
+    async (seen: boolean) => {
+      try {
+        if (seen) localStorage.setItem(STORAGE_KEY, "1");
+        else localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* private mode — server flag still applies for signed users */
+      }
+      if (isSignedIn) {
+        try {
+          await fetch("/api/account/tour", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ seen }),
+          });
+        } catch {
+          /* local flag remains the fallback */
+        }
+      }
+    },
+    [isSignedIn],
+  );
 
   useEffect(() => {
-    try {
-      if (localStorage.getItem(STORAGE_KEY)) return;
-    } catch {
-      return;
-    }
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: show tour exactly once on first mount
-    setStep(0);
-  }, []);
-
-  const dismiss = useCallback((done: boolean) => {
-    if (done) {
+    if (isPending) return;
+    let cancelled = false;
+    (async () => {
       try {
-        localStorage.setItem(STORAGE_KEY, "1");
+        if (localStorage.getItem(STORAGE_KEY)) return;
       } catch {
-        /* private mode — tour simply reappears next visit */
+        /* fall through to server check for signed users */
       }
-    }
-    setStep(null);
-  }, []);
+      if (isSignedIn) {
+        try {
+          const res = await fetch("/api/account/tour");
+          if (res.ok) {
+            const data = (await res.json()) as { seen?: boolean };
+            if (data.seen) {
+              try {
+                localStorage.setItem(STORAGE_KEY, "1");
+              } catch {
+                /* ignore */
+              }
+              return;
+            }
+          }
+        } catch {
+          /* show the tour rather than failing silently */
+        }
+      }
+      if (!cancelled) {
+        // Intentional: show tour exactly once on first mount.
+        setStep(0);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isPending, isSignedIn]);
+
+  // Footer "Replay tour" entry point — resets both flags and restarts.
+  useEffect(() => {
+    const onReplay = () => {
+      void persistSeen(false).finally(() => setStep(0));
+    };
+    window.addEventListener(REPLAY_TOUR_EVENT, onReplay);
+    return () => window.removeEventListener(REPLAY_TOUR_EVENT, onReplay);
+  }, [persistSeen]);
+
+  // Skip AND Done both persist — a dismissed tour must never reappear
+  // (previously Skip forgot the flag and nagged every visit).
+  const dismiss = useCallback(
+    (_done: boolean) => {
+      void persistSeen(true);
+      setStep(null);
+    },
+    [persistSeen],
+  );
 
   useEffect(() => {
     if (step === null) return;

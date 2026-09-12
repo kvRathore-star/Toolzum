@@ -8,6 +8,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useBatchProgress } from '@/hooks/useBatchProgress';
+import { usePickerFocusReturn } from '@/components/buttonKeys';
 import { BatchProgressPanel } from '@/components/tools/BatchProgressPanel';
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 
@@ -24,6 +25,8 @@ export default function BulkVideoSubtitleBurner() {
   const videoRef = useRef<HTMLInputElement>(null);
   const srtRef = useRef<HTMLInputElement>(null);
   const batch = useBatchProgress();
+  const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
+  const srtDrop = usePickerFocusReturn<HTMLDivElement>();
   const { ffmpeg, isLoaded, loadFFmpeg } = useFFmpeg();
   const batchRef = useRef(batch);
   batchRef.current = batch;
@@ -43,6 +46,7 @@ export default function BulkVideoSubtitleBurner() {
     if (accepted.length === 0) return;
     batch.addFiles(accepted);
     toast.success(`Added ${accepted.length} video(s)`);
+    focusDrop();
   };
 
   const handleSubtitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +54,7 @@ export default function BulkVideoSubtitleBurner() {
     if (!file) return;
     setSubtitle(file);
     toast.success(`Subtitle: ${file.name}`);
+    srtDrop.focusDrop();
   };
 
   const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {
@@ -135,14 +140,14 @@ export default function BulkVideoSubtitleBurner() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-8 space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div role="button" tabIndex={0} onClick={() => videoRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); videoRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
+          <div role="button" tabIndex={0} ref={dropRef} onClick={() => { armReturn(); videoRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); videoRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
             <Film className="w-8 h-8 text-[var(--text-muted)] mb-2" />
             <p className="text-sm font-medium text-[var(--text-primary)]">Videos</p>
             <p className="text-xs text-[var(--text-muted)] text-center">MP4, MOV, AVI, WebM</p>
             <p className="text-xs text-[var(--accent)] mt-1">{batch.files.length} selected</p>
             <input aria-label="MP4, MOV, AVI, WebM" ref={videoRef} type="file" accept="video/*" multiple onChange={handleVideos} className="hidden" />
           </div>
-          <div role="button" tabIndex={0} onClick={() => srtRef.current?.click()} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); srtRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
+          <div role="button" tabIndex={0} ref={srtDrop.dropRef} onClick={() => { srtDrop.armReturn(); srtRef.current?.click(); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); srtDrop.armReturn(); srtRef.current?.click(); } }} className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] cursor-pointer hover:border-[var(--accent)]/50 transition-colors bg-[var(--bg-overlay)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]">
             <Subtitles className="w-8 h-8 text-[var(--text-muted)] mb-2" />
             <p className="text-sm font-medium text-[var(--text-primary)]">Subtitle file (.srt)</p>
             <p className="text-xs text-[var(--text-muted)] text-center">Single SRT applied to all videos</p>

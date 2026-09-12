@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Globe, Moon, Sun, Check, User, LayoutDashboard, Star } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSession } from "@/lib/auth-client";
+import { REPLAY_TOUR_EVENT } from "./OnboardingTour";
 
 // English-only today: the UI ships in one language, so the footer shows a
 // static indicator instead of a fake language choice.
@@ -101,6 +102,14 @@ export function Footer() {
           <div className="flex flex-col gap-4">
             <p className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-[0.08em]">Account</p>
             <ul className="flex flex-col gap-3">
+              <li>
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent(REPLAY_TOUR_EVENT))}
+                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors cursor-pointer"
+                >
+                  Replay tour
+                </button>
+              </li>
               {session?.user ? (
                 <>
                   <li><Link href="/dashboard" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"><LayoutDashboard className="w-3.5 h-3.5" /> Dashboard</Link></li>

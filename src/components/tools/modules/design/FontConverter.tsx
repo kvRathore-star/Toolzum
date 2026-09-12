@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { Upload, Download, Type, ArrowRight, Loader2, FileText } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
-import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
+import { buttonKeyDown, buttonKeyUp, usePickerFocusReturn } from '@/components/buttonKeys';
 import type { OpentypeFont, OpentypeNameRecord } from 'opentype.js';
 
 type FontFormat = 'ttf' | 'otf' | 'woff' | 'woff2';
@@ -177,6 +177,7 @@ export default function FontConverter() {
   const [isConverting, setIsConverting] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();
   const outputUrlRef = useRef<string | null>(null);
 
   const cleanup = useCallback(() => {
@@ -231,8 +232,9 @@ export default function FontConverter() {
       setFile(null);
     } finally {
       setIsProcessing(false);
+      focusDrop();
     }
-  }, [cleanup]);
+  }, [cleanup, focusDrop]);
 
   const handleDrop = useCallback(async (e: React.DragEvent) => {
     e.preventDefault();
@@ -322,11 +324,11 @@ export default function FontConverter() {
         <div
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
-          role="button" tabIndex={0} aria-label="Upload font file"
-          onClick={() => fileInputRef.current?.click()}
-          onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
-              onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
-          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
+          role="button" tabIndex={0} ref={dropRef} aria-label="Upload font file"
+          onClick={() => { armReturn(); fileInputRef.current?.click(); }}
+          onKeyDown={(e) => buttonKeyDown(e, () => { armReturn(); fileInputRef.current?.click(); })}
+          onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
+          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]"
         >
           <input ref={fileInputRef} type="file" accept={INPUT_ACCEPT} onChange={handleFileChange} className="hidden" />
           <Upload className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-3" />
