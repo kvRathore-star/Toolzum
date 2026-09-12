@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import AiSettings from '@/components/tools/AiSettings';
 import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getErrorMessage } from '@/utils/error';
@@ -100,17 +101,16 @@ export default function IndianVoiceTranscriber() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadTxt = () => {
+  const handleDownloadTxt = async () => {
     if (!transcript) return;
     const blob = new Blob([transcript], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `transcript_${audioFile?.name?.replace(/\.[^.]+$/, '') || 'voice'}_${Date.now()}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    toast.success('Transcript downloaded!');
+    // Quota-gated save (1 unit; transcription itself already cost 10 credits).
+    if (await downloadOrShare(url, `transcript_${audioFile?.name?.replace(/\.[^.]+$/, '') || 'voice'}_${Date.now()}.txt`)) {
+      toast.success('Transcript downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   const formatDuration = (seconds: number) => {

@@ -10,7 +10,7 @@ import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 describe('AiPrivacyBanner', () => {
   it('renders default service name', () => {
     render(<AiPrivacyBanner />);
-    expect(screen.getByText(/Google Gemini/)).toBeInTheDocument();
+    expect(screen.getByText(/AI models/)).toBeInTheDocument();
   });
 
   it('renders custom service name', () => {

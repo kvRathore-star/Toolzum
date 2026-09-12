@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { ClipboardList, Check, ChevronDown, ChevronRight, ExternalLink, Calendar, Download, FileText, AlertCircle } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 
 const ITR_FORMS = [
   { id: 'ITR-1', label: 'ITR-1 (Sahaj)', eligibility: 'Individual having income from salary, one house property, and other sources (up to ₹50 lakhs)', icon: FileText },
@@ -95,17 +96,17 @@ Note: Connect backend LLM for exact deduction processing.`);
     setChecklist(prev => prev.includes(item) ? prev.filter(i => i !== item) : [...prev, item]);
   };
 
-  const downloadChecklist = () => {
+  const downloadChecklist = async () => {
     const checked = checklist.join('\n✓ ');
     const text = `ITR Filing Document Checklist\n${'='.repeat(30)}\n\n✓ ${checked}`;
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'itr-checklist.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Checklist downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, 'itr-checklist.txt')) {
+      toast.success('Checklist downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (

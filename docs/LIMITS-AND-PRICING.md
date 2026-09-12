@@ -11,14 +11,15 @@ Last verified: 2026-09-12 (re-audited every tier against code; fixed signed-free
 
 | Metric | Count | Canonical source |
 |--------|-------|------------------|
-| Total tools | 1,146 (1,064 registry + 82 SEO landing pages) | `src/registry/tools-client-index.ts` + `SEO_PERMUTATIONS` |
-| Pro tools | 66 (gated by `proSlugs`) | `src/registry/tools-constants.ts` → `proSlugs` |
+| Total tools | 1,145 (1,063 registry + 82 SEO landing pages) | `src/registry/tools-client-index.ts` + `SEO_PERMUTATIONS` |
+| Pro tools | 65 (all gated via `proSlugs`, all browsable) | `src/registry/tools-constants.ts` → `proSlugs` |
 | Download-producing tools | 426 (auto-generated) | `src/lib/downloadProducingSlugs.ts` (regen: `npx tsx scripts/generate-download-slugs.ts`) |
 | BulkToolShell wrappers | 20 tools | wrappers import from `src/components/tools/modules/utility/BulkToolShell.tsx` |
 | Categories | 21 | `src/lib/categoryTheme.ts` |
 
 > Counts verified Sep 12 2026 (`AGENTS.md` corrected same day — both agree:
-> 1,064 registry + 82 SEO = 1,146). Slugs are NOT pasted here by design — the
+> 1,063 registry + 82 SEO = 1,145; `ai-video-subtitler` stub removed, Pro 66→65).
+> Slugs are NOT pasted here by design — the
 > registry is the single source of truth; verify with:
 > `node -e "const fs=require('fs');const s=fs.readFileSync('src/registry/tools-constants.ts','utf8');console.log(s.match(/export const proSlugs = \[(.*?)\];/s)[1].match(/\"[^\"]+\"/g).length)"`
 
@@ -59,10 +60,10 @@ getUserLimit(plan, isProTool):
 
 **Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
 
-**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge text varies (anon copy names denominators so the 3→5 math is self-evident):
-- Pro tool + anon: "Sign in to use Pro tools" (pill links to `/sign-in`)
+**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge copy stays short (pill links to `/sign-in`); the full pitch (5/day + 30 credits) lives in the limit modal that fires at zero:
+- Pro tool + anon: "Sign in to use Pro tools"
 - Pro tool + signed: "N Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
-- Free tool + anon: "N of 3 free left — sign in for 5/day + 30 AI credits" (pill links to `/sign-in`) / "3/3 free used — sign in for 5/day + 30 AI credits"
+- Free tool + anon: "N of 3 free left — sign in for more" / "3/3 free used — sign in for more"
 - Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
 
@@ -86,9 +87,10 @@ getUserLimit(plan, isProTool):
 > |---------|-------|------|
 > | `BulkToolShell` wrappers | 20 tools (bulk converters, compressors, mergers, extractors…) | Intake caps (1/10/500) + `gateBatchDownload` on Download All/Each |
 > | `useBatchProgress` standalone | `BulkImageWatermark`, `BulkVideoSizeReducer`, `BulkVideoCompressor`, `BulkVideoSubtitleBurner`, `BulkPdfMerger` | `gateBatchDownload` (merger: on merged artifact) |
-> | Single-shot batch tools | `BatchImageEditor` (gated pre-process), `DocumentConverter`, `ArchiveConverter` | `gateBatchDownload` before save |
+> | Single-shot batch tools | `BatchImageEditor` (gated pre-process), `DocumentConverter`, `ArchiveConverter`, `PdfWorkflowBuilder` | `gateBatchDownload` before save |
+> | Badged single-save tools (Sep 12) | `BarcodeGenerator`, `AddTextToPhoto`, `BulkCsvExcelToJson`, `BulkMarkdownToPdfHtml`, `BulkSubtitleTimeShifter`, `IndianVoiceTranscriber`, `ItrFilingHelper`, `PdfInfo`, `CitationGenerator`, `LinkInBioBuilder` | Migrated to `downloadOrShare()` (now returns boolean — no success toast on block) |
 > | All other saving tools | anything saving via `downloadOrShare()` | Per-save gate in `nativeShare.ts` |
-> | AI-credit tools (no file output) | `CREDIT_COST_SLUGS` in `ToolLayout.tsx` (11 slugs) | Credit deduction, not download quota |
+> | AI-credit tools (no file output) | `CREDIT_COST_SLUGS` in `ToolLayout.tsx` (16 slugs) | Credit deduction, not download quota (badge warns per-use cost) |
 
 ---
 
@@ -238,7 +240,14 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 
 **Categories covered:** AI, Image (bulk), PDF (bulk), Audio (bulk), Video (bulk), Transcription, Developer, E-commerce, Privacy, Indian Utilities
 
-**Enforcement:** `isPro` flag checked at tool page render. Anonymous users are NOT hard-locked — they see the tool UI but downloads are blocked (limit 0) with badge + modal pushing free sign-in. Signed-in free users get full access with download limits (2/day for Pro tools). The full lock screen (`ToolPaywall`) only renders while the plan is still resolving or for unknown plans. Its feature card advertises "Up to 2GB" (fixed Sep 12 — previously said 500MB).
+**Enforcement (locked Sep 2026 — anon hard-lock, signed taste):** Pro pages are
+hard-locked for anonymous visitors via `ToolPaywall` (`isLocked = isPro && anon`,
+resolved only after the session settles to avoid lock-flash for signed users).
+The lock screen leads with **Sign in** (free accounts get 2 Pro downloads/day),
+Upgrade secondary. Signed-in free users open Pro tools with download limits
+(2/day, separate `pro:` counter). The lock screen never appears for signed-in
+users; its upgrade-first variant is the fallback for unknown plans only. Its
+feature card advertises "Up to 2GB".
 
 **Batch caps** are enforced client-side at drop time in `BulkToolShell.tsx` (guests 1, signed-in 10, Pro 500 — matches `check-plan.ts`); over-cap drops are truncated with a toast naming the upgrade path. `checkAndRecordDownload()` accepts a `batchSize` option but no caller currently sends it, so the server does not independently enforce batch size — batch is capped at intake, quota at download.
 
@@ -261,7 +270,7 @@ Pure client-side alpha-blending (no API calls, zero cost). No credit charge, no 
 | Max file size | 30 MB | 150 MB | 2 GB |
 | Max batch size | 1 file | 10 files | 500 files |
 | Batch ZIP download | Single-file only | Single-file only (individual downloads) | ✓ Batch ZIP |
-| Pro tools access | Blocked | Full access (with limits) | Full access (unlimited) |
+| Pro tools access | Locked at page (sign in for 2/day) | Full access (with limits) | Full access (unlimited) |
 | Gemini watermark single | 3/day | 5/day | Unlimited |
 | Gemini watermark batch | Blocked | Blocked | Unlimited |
 

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { X, CreditCard, Activity, Clock, Monitor, ShieldOff, ShieldCheck, Trash2, Save } from "lucide-react";
 import Image from "next/image";
+import { useDialogA11y } from "@/components/useDialogA11y";
 import type { UserDetail, Payment, ToolUsage, AuditEntry, Session } from "./admin.types";
 import { inputCls, labelCls } from "./admin.utils";
 
@@ -60,6 +61,10 @@ export function UserDetailSlideOver({
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteConfirmText, setDeleteConfirmText] = useState("");
 
+  // Esc closes, Tab stays trapped, focus returns to the invoking row.
+  // Stack-aware: Esc while the delete confirm is open closes only that.
+  const dialogRef = useDialogA11y<HTMLDivElement>(!!(userDetail || loading), onClose);
+
   if (!userDetail && !loading) return null;
 
   return (
@@ -71,6 +76,7 @@ export function UserDetailSlideOver({
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in cursor-default"
       />
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby="user-detail-title"
@@ -172,8 +178,14 @@ export function UserDetailSlideOver({
                 }}
                 className="px-3 py-2 min-h-[44px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-xs text-[var(--text-primary)] cursor-pointer disabled:opacity-50 focus:ring-2 focus:ring-[var(--accent)]/50 transition-all duration-200"
               >
+                {/* Stored billing tier (free|pro). 'signedin' is a server-effective
+                    tier, never a stored plan — shown read-only if legacy data exists. */}
                 <option value="free">Free</option>
-                <option value="signedin">Signed In</option>
+                {userDetail.user.plan !== "free" && userDetail.user.plan !== "pro" && (
+                  <option value={userDetail.user.plan} disabled>
+                    {userDetail.user.plan} (legacy — switch to Free or Pro)
+                  </option>
+                )}
                 <option value="pro">Pro</option>
               </select>
 
@@ -221,14 +233,45 @@ export function UserDetailSlideOver({
       </div>
 
       {showDeleteConfirm && (
+        <DeleteConfirmDialog
+          userName={userDetail?.user.name ?? ""}
+          deleting={deletingUser}
+          confirmText={deleteConfirmText}
+          onConfirmText={setDeleteConfirmText}
+          onCancel={() => setShowDeleteConfirm(false)}
+          onConfirm={async () => {
+            if (!userDetail) return;
+            setDeletingUser(true);
+            try {
+              const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail.user.id, confirm: "DELETE" }) });
+              if (res.ok) { onDeleteUser(userDetail.user.id); onToast("User deleted"); setShowDeleteConfirm(false); }
+              else onToast("Failed to delete user", "error");
+            } catch { onToast("Failed to delete user", "error"); } finally { setDeletingUser(false); }
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+function DeleteConfirmDialog({ userName, deleting, confirmText, onConfirmText, onCancel, onConfirm }: {
+  userName: string;
+  deleting: boolean;
+  confirmText: string;
+  onConfirmText: (v: string) => void;
+  onCancel: () => void;
+  onConfirm: () => void;
+}) {
+  const ref = useDialogA11y<HTMLDivElement>(true, onCancel);
+  return (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <button
             aria-label="Cancel delete"
-            onClick={() => setShowDeleteConfirm(false)}
+            onClick={onCancel}
             tabIndex={-1}
             className="absolute inset-0 bg-black/50 backdrop-blur-sm cursor-default"
           />
-          <div role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl">
+          <div ref={ref} role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-xl">
                 <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />
@@ -236,7 +279,7 @@ export function UserDetailSlideOver({
               <h3 id="delete-confirm-title" className="text-lg font-bold text-[var(--text-primary)]">Delete User</h3>
             </div>
             <p className="text-sm text-[var(--text-secondary)]">
-              This will permanently delete <strong className="text-[var(--text-primary)]">{userDetail?.user.name}</strong> and all their data across 6 tables. This cannot be undone.
+              This will permanently delete <strong className="text-[var(--text-primary)]">{userName}</strong> and all their data across 6 tables. This cannot be undone.
             </p>
             <div>
               <label htmlFor="delete-confirm-input" className="block text-sm text-[var(--text-secondary)] mb-1">
@@ -245,34 +288,25 @@ export function UserDetailSlideOver({
               <input
                 id="delete-confirm-input"
                 type="text"
-                value={deleteConfirmText}
-                onChange={(e) => setDeleteConfirmText(e.target.value)}
+                value={confirmText}
+                onChange={(e) => onConfirmText(e.target.value)}
                 placeholder="DELETE"
                 className="w-full px-3 py-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-200"
                 autoFocus
               />
             </div>
             <div className="flex justify-end gap-2 pt-2">
-              <button onClick={() => setShowDeleteConfirm(false)} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer transition-all duration-200 active:scale-95">Cancel</button>
+              <button onClick={onCancel} className="px-4 py-2 border border-[var(--border-subtle)] rounded-xl text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer transition-all duration-200 active:scale-95">Cancel</button>
               <button
-                disabled={deleteConfirmText !== "DELETE" || deletingUser}
-                onClick={async () => {
-                  setDeletingUser(true);
-                  try {
-                    const res = await fetch("/api/admin/delete-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ userId: userDetail!.user.id, confirm: "DELETE" }) });
-                    if (res.ok) { onDeleteUser(userDetail!.user.id); onToast("User deleted"); setShowDeleteConfirm(false); }
-                    else onToast("Failed to delete user", "error");
-                  } catch { onToast("Failed to delete user", "error"); } finally { setDeletingUser(false); }
-                }}
+                disabled={confirmText !== "DELETE" || deleting}
+                onClick={onConfirm}
                 className="px-4 py-2 rounded-xl text-sm font-medium cursor-pointer transition-all duration-200 active:scale-95 disabled:bg-[var(--bg-surface)] disabled:text-[var(--text-muted)] disabled:cursor-not-allowed bg-red-600 text-white hover:bg-red-700"
               >
-                {deletingUser ? "Deleting..." : "Delete Forever"}
+                {deleting ? "Deleting..." : "Delete Forever"}
               </button>
             </div>
           </div>
         </div>
-      )}
-    </div>
   );
 }
 

@@ -26,6 +26,29 @@ describe("public/_headers cache policy (Sep 2026 regression)", () => {
   });
 });
 
+describe("public/_headers CSP third-party surface (Sep 12 2026 live-console regression)", () => {
+  const raw = fs.readFileSync(path.join(process.cwd(), "public/_headers"), "utf8");
+  const csp = raw.split("\n").find((l) => l.includes("Content-Security-Policy")) ?? "";
+
+  it("allows blob: workers to importScripts FFmpeg cores (script-src blob:)", () => {
+    // @ffmpeg/ffmpeg boots via importScripts(blob:coreURL), governed by
+    // script-src. Without blob: every video/audio tool fails with
+    // "All CDN sources failed" despite healthy CDNs.
+    expect(csp).toMatch(/script-src[^;]*blob:/);
+  });
+
+  it("allows the Turnstile captcha script, frame, and API (email auth is dead without it)", () => {
+    expect(csp).toMatch(/script-src[^;]*challenges\.cloudflare\.com/);
+    expect(csp).toMatch(/frame-src[^;]*challenges\.cloudflare\.com/);
+    expect(csp).toMatch(/connect-src[^;]*challenges\.cloudflare\.com/);
+  });
+
+  it("allows Pollinations image origins (AI Image Generator renders nothing without them)", () => {
+    expect(csp).toMatch(/img-src[^;]*image\.pollinations\.ai/);
+    expect(csp).toMatch(/connect-src[^;]*image\.pollinations\.ai/);
+  });
+});
+
 describe("getIncidentMonths rolling window", async () => {
   const { getIncidentMonths } = await import("@/app/status/page");
 

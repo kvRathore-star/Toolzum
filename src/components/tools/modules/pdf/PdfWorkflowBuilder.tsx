@@ -8,6 +8,7 @@ import {
   Zap
 } from 'lucide-react';
 import { getErrorMessage } from '@/utils/error';
+import { gateBatchDownload } from '@/utils/freeUsageGuard';
 
 type PdfTab = 'merge' | 'split' | 'fill' | 'pages' | 'optimize' | 'metadata';
 
@@ -83,8 +84,10 @@ export function PdfWorkflowBuilder() {
     });
   }, []);
 
-  const download = useCallback((data: Uint8Array | ArrayBuffer, name: string) => {
+  const download = useCallback(async (data: Uint8Array | ArrayBuffer, name: string) => {
     const raw = data instanceof ArrayBuffer ? data : new Uint8Array(data).buffer;
+    // Quota gate (Pro tool: anon blocked, signed 2/day) — checked before saving.
+    if (!(await gateBatchDownload(1, raw.byteLength / (1024 * 1024)))) return;
     const blob = new Blob([raw], { type: 'application/pdf' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

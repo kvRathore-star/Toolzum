@@ -222,7 +222,7 @@ export default function PdfAdvanced() {
     }
   };
 
-  const actionLabel = () => {
+  const actionLabel = (a: Action = action) => {
     const labels: Record<Action, string> = {
       overlay: 'Overlay PDF',
       'alternate-merge': 'Alternate Merge',
@@ -231,7 +231,7 @@ export default function PdfAdvanced() {
       invert: 'Invert Colors',
       zip: 'PDF to ZIP',
     };
-    return labels[action];
+    return labels[a];
   };
 
   const actionClass = (a: Action) =>
@@ -248,7 +248,7 @@ export default function PdfAdvanced() {
       <div className="flex flex-wrap gap-2">
         {actions.map(a => (
           <button key={a} onClick={() => setAction(a)} className={actionClass(a)}>
-            {actionLabel()}
+            {actionLabel(a)}
           </button>
         ))}
       </div>

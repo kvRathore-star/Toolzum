@@ -85,7 +85,7 @@ export default function AiImageGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
-      <AiPrivacyBanner service="Pollinations AI" serverLabel="a third-party API" />
+      <AiPrivacyBanner service="image AI" serverLabel="a third-party service directly from your browser" />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Control Panel */}

@@ -2,6 +2,8 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
+import { gateBatchDownload } from "@/utils/freeUsageGuard";
 
 const outputFormats = [
   { label: 'PDF', value: 'pdf' },
@@ -45,18 +47,20 @@ export default function BulkMarkdownToPdfHtml() {
     toast.success('HTML copied!');
   };
 
-  const downloadHtml = () => {
+  const downloadHtml = async () => {
     const blob = new Blob([resultHtml], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${fileName}.html`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, `${fileName}.html`)) {
+      toast.success('Downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   const downloadPdf = async () => {
+    // Quota gate (1 unit) before generating — jsPDF saves directly.
+    if (!(await gateBatchDownload(1))) return;
     try {
       const { jsPDF } = await import('jspdf');
       const pdf = new jsPDF();

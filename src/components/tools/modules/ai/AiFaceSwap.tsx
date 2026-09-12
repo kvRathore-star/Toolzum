@@ -114,8 +114,9 @@ export default function AiFaceSwap() {
     const canvas = canvasRef.current;
     if (!canvas || !targetImg) return;
     
-    downloadOrShare(canvas.toDataURL('image/png'), `faceswap_${Date.now()}.png`);
-    toast.success("Swapped artwork downloaded!");
+    downloadOrShare(canvas.toDataURL('image/png'), `faceswap_${Date.now()}.png`).then((saved) => {
+      if (saved) toast.success("Swapped artwork downloaded!");
+    });
   };
 
   return (

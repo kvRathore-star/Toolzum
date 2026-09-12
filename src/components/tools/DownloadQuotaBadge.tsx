@@ -82,11 +82,11 @@ export function DownloadQuotaBadge() {
         ? "Pro downloads used up today"
         : `${remaining} Pro ${remaining === 1 ? "download" : "downloads"} left — Upgrade for unlimited`
     : isZero && isAnon
-      ? "3/3 free used — sign in for 5/day + 30 AI credits"
+      ? "3/3 free used — sign in for more"
       : isZero
         ? "Free downloads used up today"
         : isAnon
-          ? `${remaining} of 3 free left — sign in for 5/day + 30 AI credits`
+          ? `${remaining} of 3 free left — sign in for more`
           : `${remaining} free ${remaining === 1 ? "download" : "downloads"} left today`;
 
   return (

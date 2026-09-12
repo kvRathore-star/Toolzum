@@ -2,6 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 
 const outputFormats = [
   { label: 'JSON', value: 'json' },
@@ -84,15 +85,15 @@ export default function BulkCsvExcelToJson() {
     toast.success('JSON copied!');
   };
 
-  const downloadJson = () => {
+  const downloadJson = async () => {
     const blob = new Blob([resultJson], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = fileName ? fileName.replace(/\.(csv|xlsx|xls)$/i, '.json') : 'output.json';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, fileName ? fileName.replace(/\.(csv|xlsx|xls)$/i, '.json') : 'output.json')) {
+      toast.success('Downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {

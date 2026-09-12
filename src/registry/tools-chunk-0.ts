@@ -1144,9 +1144,9 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Face Swap",
     slug: "ai-face-swap",
     category: "AI",
-    description: 'Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle for natural results.',
-    seoDescription: 'Free online AI Face Swap — Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle. ',
-    dependencies: "InsightFace",
+    description: 'Combine two photos with manual face compositing — position, scale, and blend a source face onto a target photo on canvas. You control alignment and size for natural results.',
+    seoDescription: 'Free online AI Face Swap — Combine two photos with manual face compositing, positioning, and blending controls. ',
+    dependencies: "Canvas API",
   },
   {
 
@@ -1995,16 +1995,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.',
     dependencies: "CF Vectorize",
     seoDescription: 'Chat with your documents using AI — upload PDFs, Word files, and ask natural-language questions. Free online RAG tool. Uses cloud-based processing.',
-  },
-  {
-    id: "217",
-    name: "AI Video Subtitler",
-    slug: "ai-video-subtitler",
-    category: "AI",
-    description: 'Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Uses cloud-based processing.',
-    seoDescription: 'Free online AI Video Subtitler — Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. ',
-    dependencies: "Whisper API",
-    showInCategory: false,
   },
   {
     id: "218",

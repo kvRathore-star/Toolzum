@@ -5,6 +5,11 @@ import { useEffect, useRef } from "react";
 const FOCUSABLE =
   'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+// Module-level stack of open dialogs (topmost last). Nested dialogs (confirm
+// over slide-over) each attach a keydown listener — without this, Esc would
+// fire every open dialog's onClose instead of just the topmost one.
+const openStack: Array<object> = [];
+
 /**
  * Dialog a11y: initial focus, focus trap (Tab wrap), Escape to close,
  * body scroll lock (optional), and focus restore on unmount.
@@ -26,6 +31,8 @@ export function useDialogA11y<T extends HTMLElement>(
 
   useEffect(() => {
     if (!active) return;
+    const token: object = {};
+    openStack.push(token);
     prevFocus.current =
       document.activeElement instanceof HTMLElement
         ? document.activeElement
@@ -40,6 +47,9 @@ export function useDialogA11y<T extends HTMLElement>(
     }, 0);
 
     const onKey = (e: KeyboardEvent) => {
+      // Only the topmost dialog handles keys — underlying dialogs stay put
+      // while a confirm is stacked above them.
+      if (openStack[openStack.length - 1] !== token) return;
       if (e.key === "Escape") {
         e.stopPropagation();
         onCloseRef.current();
@@ -71,6 +81,8 @@ export function useDialogA11y<T extends HTMLElement>(
     return () => {
       window.clearTimeout(t);
       document.removeEventListener("keydown", onKey, true);
+      const idx = openStack.indexOf(token);
+      if (idx >= 0) openStack.splice(idx, 1);
       if (lockScroll) document.body.style.overflow = prevOverflow;
       prevFocus.current?.focus?.();
     };

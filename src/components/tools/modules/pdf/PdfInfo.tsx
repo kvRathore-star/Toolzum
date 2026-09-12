@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { downloadOrShare } from '@/utils/nativeShare';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -119,24 +120,17 @@ export default function PdfInfo() {
     setPageCount(0);
   };
 
-  const downloadText = () => {
+  const downloadText = async () => {
     const blob = new Blob([extractedText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = (file?.name || 'document').replace(/\.pdf$/i, '') + '-extracted-text.txt';
-    a.click();
-    URL.revokeObjectURL(url);
+    // Quota-gated saves (1 unit each) — block shows the limit modal.
+    await downloadOrShare(url, (file?.name || 'document').replace(/\.pdf$/i, '') + '-extracted-text.txt');
   };
 
-  const downloadJson = () => {
+  const downloadJson = async () => {
     const blob = new Blob([jsonOutput], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = (file?.name || 'document').replace(/\.pdf$/i, '') + '-info.json';
-    a.click();
-    URL.revokeObjectURL(url);
+    await downloadOrShare(url, (file?.name || 'document').replace(/\.pdf$/i, '') + '-info.json');
   };
 
   if (!file) {

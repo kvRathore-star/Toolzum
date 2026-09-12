@@ -296,7 +296,7 @@ export default function AdminUsersPage() {
         sessions={userSessions}
         sessionsLoading={sessionsLoading}
         revokingSession={revokingSession}
-        onClose={() => setSelectedUserId(null)}
+        onClose={() => { setSelectedUserId(null); setUserDetail(null); }}
         onRevokeSession={revokeSession}
         onUpdateCredits={(userId, credits) => {
           setUserDetail((prev) => prev ? { ...prev, user: { ...prev.user, credits } } : prev);
@@ -312,6 +312,7 @@ export default function AdminUsersPage() {
         }}
         onDeleteUser={(userId) => {
           setSelectedUserId(null);
+          setUserDetail(null);
           setUsers((prev) => prev.filter((u) => u.id !== userId));
           setTotal((prev) => prev - 1);
         }}

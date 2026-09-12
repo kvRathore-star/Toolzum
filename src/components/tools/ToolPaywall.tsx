@@ -17,6 +17,11 @@ interface ToolPaywallProps {
 export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, children }: ToolPaywallProps) {
   if (!isLocked) return <>{children}</>;
 
+  // Anonymous visitors hit the sign-in variant: free accounts get 2 Pro
+  // downloads/day, so Sign in (not Upgrade) is the primary CTA. The
+  // upgrade-first variant below is the fallback for unknown plans.
+  const signInFirst = showSignInPrompt;
+
   return (
     <div className="relative overflow-hidden">
       <div className={isLocked ? "blur-md pointer-events-none select-none opacity-40 transition-all duration-300" : "transition-all duration-300"}>
@@ -32,9 +37,13 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
             <div className="w-14 h-14 bg-[var(--accent-ink)]/15 rounded-full flex items-center justify-center mx-auto mb-6 border border-[var(--accent)]/30">
               <Lock className="w-6 h-6 text-[var(--accent)]" />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Pro Feature</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">{signInFirst ? "Sign in to use this Pro tool" : "Pro Feature"}</h3>
             <p className="text-sm text-[var(--text-secondary)] mb-6">
-              <strong>{title}</strong> is a premium Pro tool. Upgrade to unlock it plus {proToolCount} other professional-grade tools.
+              {signInFirst ? (
+                <><strong>{title}</strong> is premium. Sign in free for 2 Pro downloads per day, or upgrade for unlimited access plus {proToolCount} other professional-grade tools.</>
+              ) : (
+                <><strong>{title}</strong> is a premium Pro tool. Upgrade to unlock it plus {proToolCount} other professional-grade tools.</>
+              )}
             </p>
 
             <div className="grid grid-cols-2 gap-2 mb-6 text-left">
@@ -61,17 +70,32 @@ export function ToolPaywall({ isLocked, showSignInPrompt, proToolCount, title, c
             </div>
 
             <div className="space-y-3">
-              <Link href="/pricing" className="block w-full">
-                <Button variant="primary" className="w-full py-5 text-base" size="lg">
-                  Upgrade to Pro <Crown className="w-4 h-4 ml-1.5" />
-                </Button>
-              </Link>
-              <div className="text-xs text-[var(--text-muted)] pt-1 text-center">
-                Already subscribed?{' '}
-                <Link href="/dashboard" className="text-[var(--accent)] hover:underline font-semibold">
-                  Log in to unlock
-                </Link>
-              </div>
+              {signInFirst ? (
+                <>
+                  <Link href="/sign-in" className="block w-full">
+                    <Button variant="primary" className="w-full py-5 text-base" size="lg">
+                      Sign in free — 2 Pro downloads/day
+                    </Button>
+                  </Link>
+                  <Link href="/pricing" className="block w-full text-center text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] underline transition-colors">
+                    Or upgrade to Pro for unlimited
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/pricing" className="block w-full">
+                    <Button variant="primary" className="w-full py-5 text-base" size="lg">
+                      Upgrade to Pro <Crown className="w-4 h-4 ml-1.5" />
+                    </Button>
+                  </Link>
+                  <div className="text-xs text-[var(--text-muted)] pt-1 text-center">
+                    Already subscribed?{' '}
+                    <Link href="/dashboard" className="text-[var(--accent)] hover:underline font-semibold">
+                      Log in to unlock
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

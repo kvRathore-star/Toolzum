@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { Copy, Check, Download, Plus, Trash2, GripVertical, Image as ImageIcon, Link, Palette, Eye, Code, Smartphone, MoveUp, MoveDown, Globe, Camera, Video, Music, ShoppingBag, MessageCircle } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 
 interface LinkItem {
   id: string;
@@ -131,16 +132,15 @@ ${linkCards}
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadHtml = () => {
+  const handleDownloadHtml = async () => {
     const blob = new Blob([generateHtml], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'index.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    toast.success('HTML downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, 'index.html')) {
+      toast.success('HTML downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (

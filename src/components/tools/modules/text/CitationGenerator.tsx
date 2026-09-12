@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BookOpen, Copy, Download } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 
 interface CitationForm {
   sourceType: 'book' | 'website' | 'journal' | 'article' | 'video';
@@ -242,16 +243,16 @@ export default function CitationGenerator() {
     toast.success('All citations copied!');
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     const content = citations.map(c => `--- ${c.format} ---\n${c.text}`).join('\n\n');
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'citations.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Citations downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, 'citations.txt')) {
+      toast.success('Citations downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (

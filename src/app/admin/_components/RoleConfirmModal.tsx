@@ -2,6 +2,7 @@
 
 import React from "react";
 import { AlertTriangle } from "lucide-react";
+import { useDialogA11y } from "@/components/useDialogA11y";
 
 interface RoleConfirmModalProps {
   target: { userId: string; name: string; email: string; oldRole: string; newRole: string } | null;
@@ -12,6 +13,8 @@ interface RoleConfirmModalProps {
 }
 
 export function RoleConfirmModal({ target, confirmEmail, onConfirmEmailChange, onConfirm, onCancel }: RoleConfirmModalProps) {
+  // Stack-aware with the slide-over beneath: Esc closes only this dialog.
+  const dialogRef = useDialogA11y<HTMLDivElement>(target !== null, onCancel);
   if (!target) return null;
   const isAdminChange = target.newRole === "admin" || target.oldRole === "admin";
   const emailMatch = confirmEmail === target.email;
@@ -24,7 +27,7 @@ export function RoleConfirmModal({ target, confirmEmail, onConfirmEmailChange, o
         tabIndex={-1}
         className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fade-in cursor-default"
       />
-      <div className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl animate-scale-in" role="dialog" aria-modal="true" aria-label="Confirm role change">
+      <div ref={dialogRef} className="relative bg-[var(--bg-base)] rounded-2xl border border-[var(--border-subtle)] max-w-md w-full mx-4 p-6 space-y-4 shadow-2xl animate-scale-in" role="dialog" aria-modal="true" aria-label="Confirm role change">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-xl">
             <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />

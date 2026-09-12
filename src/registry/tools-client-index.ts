@@ -762,7 +762,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Face Swap",
     "slug": "ai-face-swap",
     "category": "AI",
-    "description": "Seamlessly replaces one face with another in photos using AI, matching skin tone, lighting, and head angle for natural results.",
+    "description": "Combine two photos with manual face compositing — position, scale, and blend a source face onto a target photo on canvas. You control alignment and size for natural results.",
     "isPro": true
   },
   {
@@ -1403,14 +1403,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "ai-document-chat",
     "category": "AI",
     "description": "Indexes uploaded PDFs, Word files, and plain-text documents into a vector store and lets you ask natural-language questions about their contents.",
-    "isPro": true
-  },
-  {
-    "id": "217",
-    "name": "AI Video Subtitler",
-    "slug": "ai-video-subtitler",
-    "category": "AI",
-    "description": "Transcribes speech from video files and syncs the resulting subtitles to the exact timing of each utterance. Uses cloud-based processing.",
     "isPro": true
   },
   {

@@ -37,7 +37,7 @@ const faqs = [
   },
   {
     q: "Can I try Pro tools for free?",
-    a: "Yes. Guests can't download from Pro tools, but signing in free unlocks 2 Pro-tool downloads per day — enough to evaluate any premium tool. Upgrade to Pro for unlimited downloads, 500-file batches, batch ZIP, and 300 AI credits/month.",
+    a: "Yes. Guests see a sign-in screen on Pro tools, but signing in free unlocks 2 Pro-tool downloads per day — enough to evaluate any premium tool. Upgrade to Pro for unlimited downloads, 500-file batches, batch ZIP, and 300 AI credits/month.",
   },
   {
     q: "Can I download multiple files as a single ZIP?",

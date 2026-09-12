@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Type, Upload, Download, Settings2, Camera, Crown } from 'lucide-react';
 import Link from 'next/link';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { downloadOrShare } from '@/utils/nativeShare';
 
 const PRESETS = [
   { label: 'Instagram Post', w: 1080, h: 1080 },
@@ -82,20 +83,23 @@ export default function SocialMediaImageCreator() {
     }
   }, [image, text, color, fontSize, xPos, yPos, preset, customW, customH]);
 
-  const downloadImage = () => {
+  const downloadImage = async () => {
     if (usage >= DAILY_LIMIT) {
       toast.error(`You've used all ${DAILY_LIMIT} free downloads today. Upgrade to Pro for unlimited exports.`);
       return;
     }
     if (canvasRef.current) {
       try {
-        const a = document.createElement('a');
-        a.href = canvasRef.current.toDataURL('image/png');
-        a.download = `social-${PRESETS[preset]!.label.toLowerCase().replace(/\s+/g, '-')}.png`;
-        a.click();
-        trackUsage(usage + 1);
-        if (usage + 1 >= DAILY_LIMIT) {
-          toast(`Upgrade to Pro for unlimited image exports.`, { icon: '👑' });
+        // Server quota gate (1 unit) — block shows the limit modal, so only
+        // count local usage when the save actually happened.
+        if (await downloadOrShare(
+          canvasRef.current.toDataURL('image/png'),
+          `social-${PRESETS[preset]!.label.toLowerCase().replace(/\s+/g, '-')}.png`
+        )) {
+          trackUsage(usage + 1);
+          if (usage + 1 >= DAILY_LIMIT) {
+            toast(`Upgrade to Pro for unlimited image exports.`, { icon: '👑' });
+          }
         }
       } catch (e) {
         console.error('AddTextToPhoto canvas error:', e);

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
@@ -21,7 +21,6 @@ import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 import { OfflineIndicator } from '@/components/OfflineIndicator';
 import { BulkDropPaywall } from '@/components/BulkDropPaywall';
 import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
-import type { SessionUser } from '@/types/tool';
 import { getShortDescription } from '@/lib/generateToolDescription';
 
 const PostDownloadBar = dynamic(() => import('@/components/PostDownloadBar').then(m => ({ default: m.PostDownloadBar })), { ssr: false });
@@ -63,6 +62,11 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'ai-document-chat': 1,
   'brand-color-palette-generator': 1,
   'complaint-letter-generator': 1,
+  'regex-tester': 1,
+  'youtube-transcript-generator': 1,
+  'subtitle-translator': 1,
+  'meeting-minutes-generator': 1,
+  'podcast-transcription': 10,
   'video-to-text-transcription': 10,
   'audio-to-text-transcription': 10,
   'pdf-ai-summariser': 1,
@@ -79,24 +83,19 @@ function getRelativePath(category: string, slug: string): string {
 }
 
 export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp }: ToolLayoutProps) {
-  const [userPlan, setUserPlan] = useState<string | null>(null);
   const { data: sessionData, isPending } = useSession();
-
-  useEffect(() => {
-    if (!isPending && sessionData?.user) {
-      const user = sessionData.user as unknown as SessionUser;
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync plan into local state once session resolves
-      setUserPlan(user.plan || "free");
-    } else if (!isPending) {
-      setUserPlan("free");
-    }
-  }, [sessionData, isPending]);
 
   const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn } = useFreeUsage(category);
   const { recordTool } = useToolHistory();
 
   const isPro = tool?.isPro || false;
-  const isLocked = isPro && userPlan !== "pro" && userPlan !== "free";
+  // Access model (locked Sep 2026): Pro pages are HARD-LOCKED for anonymous
+  // visitors (sign in to enter) and taste-gated for signed-in free users
+  // (2 Pro downloads/day, enforced at save). Never lock while the session is
+  // still resolving — a lock flash for signed-in users is worse than a brief
+  // content flash for anon.
+  const isAnonResolved = !isPending && !sessionData?.user;
+  const isLocked = isPro && isAnonResolved;
   const displayCategory = category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
   const breadcrumbSchema = {
@@ -259,7 +258,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                 <WorkflowPresetPanel toolSlug={slug}>
                   <ToolPaywall
                     isLocked={isLocked}
-                    showSignInPrompt={showSignInPrompt}
+                    showSignInPrompt={isAnonResolved}
                     proToolCount={proToolCount}
                     toolCount={toolCount}
                     title={title}
@@ -270,7 +269,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
               ) : (
                 <ToolPaywall
                   isLocked={isLocked}
-                  showSignInPrompt={showSignInPrompt}
+                  showSignInPrompt={isAnonResolved}
                   proToolCount={proToolCount}
                   toolCount={toolCount}
                   title={title}

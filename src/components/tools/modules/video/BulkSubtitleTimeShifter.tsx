@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from "@/utils/nativeShare";
 
 const timePresets = [
   { label: 'Delay 1s', offset: 1000 },
@@ -54,15 +55,15 @@ export default function BulkSubtitleTimeShifter() {
     toast.success('Copied!');
   };
 
-  const downloadOutput = () => {
+  const downloadOutput = async () => {
     const blob = new Blob([outputText], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `shifted.${format}`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
+    // Quota-gated save (1 unit) — block shows the limit modal, so only toast on success.
+    if (await downloadOrShare(url, `shifted.${format}`)) {
+      toast.success('Downloaded!');
+    } else {
+      URL.revokeObjectURL(url);
+    }
   };
 
   return (
