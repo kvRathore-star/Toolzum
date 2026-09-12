@@ -922,7 +922,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Thumbnail Maker",
     "slug": "ai-thumbnail-maker",
     "category": "AI",
-    "description": "Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Uses cloud-based processing.",
+    "description": "Designs click-optimized YouTube thumbnails by compositing text, images, and effects on a smart canvas. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": true
   },
   {
@@ -930,7 +930,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Secure Note Sharer",
     "slug": "secure-note-sharer",
     "category": "Privacy",
-    "description": "Encrypts a text note with a passphrase and generates a one-time view link that self-destructs after the recipient reads it. Uses cloud-based processing.",
+    "description": "Encrypts a text note with a passphrase and generates a shareable link with the encrypted note in the URL fragment — the fragment is never sent to any server. Everything runs locally in your browser.",
     "isPro": false
   },
   {
