@@ -125,6 +125,10 @@ export function AnalyticsSection() {
 
   if (!data) return null;
 
+  // Day labels are server-normalized, but a null date must never crash the
+  // page again (Sep 12 2026: one bad row killed all of /admin/analytics).
+  const dayLabel = (date: string | null): string =>
+    typeof date === "string" && date.length >= 5 ? date.slice(5) : "—";
   const topTools = range === "7d" ? data.topTools7d : data.topTools30d;
   const downloadsByDay = data.downloadsByDay;
   const signupsByDay = data.signupsByDay;
@@ -175,7 +179,7 @@ export function AnalyticsSection() {
           <div className="flex-1">
             <p className="text-[10px] text-[var(--text-muted)] mb-1">Allowed</p>
             <MiniBarChart
-              data={downloadsByDay.map((d) => ({ label: d.date.slice(5), value: d.count - d.blocked }))}
+              data={downloadsByDay.map((d) => ({ label: dayLabel(d.date), value: d.count - d.blocked }))}
               maxVal={Math.max(...downloadsByDay.map((d) => d.count - d.blocked), 1)}
               color="bg-emerald-500"
             />
@@ -183,7 +187,7 @@ export function AnalyticsSection() {
           <div className="flex-1">
             <p className="text-[10px] text-[var(--text-muted)] mb-1">Blocked</p>
             <MiniBarChart
-              data={downloadsByDay.map((d) => ({ label: d.date.slice(5), value: d.blocked }))}
+              data={downloadsByDay.map((d) => ({ label: dayLabel(d.date), value: d.blocked }))}
               maxVal={Math.max(...downloadsByDay.map((d) => d.blocked), 1)}
               color="bg-amber-500"
             />
@@ -241,7 +245,7 @@ export function AnalyticsSection() {
             <h3 className="text-sm font-semibold text-[var(--text-primary)]">Signups Over Time</h3>
           </div>
           <MiniBarChart
-            data={signupsByDay.map((d) => ({ label: d.date.slice(5), value: d.count }))}
+            data={signupsByDay.map((d) => ({ label: dayLabel(d.date), value: d.count }))}
             maxVal={Math.max(...signupsByDay.map((d) => d.count), 1)}
             color="bg-blue-500"
           />
@@ -253,7 +257,7 @@ export function AnalyticsSection() {
             <h3 className="text-sm font-semibold text-[var(--text-primary)]">Page Views Over Time</h3>
           </div>
           <MiniBarChart
-            data={pageViewsByDay.map((d) => ({ label: d.date.slice(5), value: d.count }))}
+            data={pageViewsByDay.map((d) => ({ label: dayLabel(d.date), value: d.count }))}
             maxVal={Math.max(...pageViewsByDay.map((d) => d.count), 1)}
             color="bg-violet-500"
           />

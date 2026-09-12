@@ -11,6 +11,9 @@ export const users = sqliteTable("user", {
   // Custom fields for SaaS
   credits: integer("credits").default(30).notNull(),
   creditResetAt: integer("creditResetAt", { mode: "timestamp" }),
+  // Written by the session-create hook in src/lib/auth.ts (unix seconds).
+  // Column predates the schema entry (created out-of-band in D1).
+  lastLoginAt: integer("lastLoginAt"),
   plan: text("plan").default("free").notNull(),
   role: text("role").default("user").notNull(),
   status: text("status").default("active").notNull(),

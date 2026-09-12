@@ -67,6 +67,27 @@ export function createAuth(env: AuthEnv) {
       updateAge: 60 * 60 * 24, // 1 day: rolling refresh window
       freshAge: 60 * 60 * 24, // 1 day: sensitive-action freshness
     },
+    databaseHooks: {
+      session: {
+        create: {
+          // Stamp last login on every fresh session (all sign-in paths).
+          // Never throws — a failed stamp must not break login.
+          after: async (session) => {
+            try {
+              const userId = (session as { userId?: string }).userId;
+              if (!userId) return;
+              await env.DB.prepare(
+                'UPDATE "user" SET lastLoginAt = unixepoch() WHERE id = ?'
+              )
+                .bind(userId)
+                .run();
+            } catch {
+              // login proceeds; admin "Last Login" just stays stale
+            }
+          },
+        },
+      },
+    },
     database: drizzleAdapter(
       drizzle(env.DB, { schema }),
       {
@@ -80,8 +101,7 @@ export function createAuth(env: AuthEnv) {
       }
     ),
     emailAndPassword: {
-      enabled: true,
-      password: {
+      enabled: true,      password: {
         hash: hashPassword,
         verify: verifyPassword,
       },

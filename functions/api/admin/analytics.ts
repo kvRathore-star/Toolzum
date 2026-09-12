@@ -30,6 +30,17 @@ async function safeFirst<T>(DB: D1Database, query: string, ...args: unknown[]): 
   }
 }
 
+// Day bucket that tolerates every createdAt flavor in this DB: unix seconds
+// (download_event, error_log, rate-limit rows), unix millis (better-auth
+// user/session rows), and ISO/datetime text. Bare DATE(int) misreads integers
+// as Julian days (garbage labels) and DATE(bad-input) yields NULL (which
+// crashed the analytics page on .slice — Sep 12 2026).
+const DAY_BUCKET =
+  "DATE(CASE WHEN typeof(createdAt) = 'integer' AND createdAt > 100000000000 " +
+  "THEN datetime(CAST(createdAt / 1000 AS INTEGER), 'unixepoch') " +
+  "WHEN typeof(createdAt) = 'integer' THEN datetime(createdAt, 'unixepoch') " +
+  "ELSE createdAt END)";
+
 export async function onRequestGet(context: { request: Request; env: AdminEnv }) {
   const DB = context.env.DB;
   const ip = context.request.headers.get("cf-connecting-ip") || "unknown";
@@ -70,14 +81,15 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
        WHERE createdAt > ? GROUP BY toolSlug ORDER BY uses DESC LIMIT 15`,
       thirtyDaysAgo
     ),
-    // Downloads by day (30d)
+    // Downloads by day (30d). Blocked outcomes are 'blocked_quota' /
+    // 'blocked_pro_anon' (see downloads/record.ts) — LIKE, never =.
     safeQuery<{ date: string; count: number; blocked: number }>(
       DB,
-      `SELECT DATE(createdAt) as date,
+      `SELECT ${DAY_BUCKET} as date,
               COUNT(*) as count,
-              SUM(CASE WHEN outcome = 'blocked' THEN 1 ELSE 0 END) as blocked
+              SUM(CASE WHEN outcome LIKE 'blocked%' THEN 1 ELSE 0 END) as blocked
        FROM download_event WHERE createdAt > ?
-       GROUP BY DATE(createdAt) ORDER BY date`,
+       GROUP BY ${DAY_BUCKET} ORDER BY date`,
       thirtyDaysAgo
     ),
     // Downloads by user type
@@ -85,7 +97,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
       DB,
       `SELECT userType,
               COUNT(*) as count,
-              SUM(CASE WHEN outcome = 'blocked' THEN 1 ELSE 0 END) as blocked
+              SUM(CASE WHEN outcome LIKE 'blocked%' THEN 1 ELSE 0 END) as blocked
        FROM download_event WHERE createdAt > ?
        GROUP BY userType ORDER BY count DESC`,
       thirtyDaysAgo
@@ -94,7 +106,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     safeQuery<{ toolSlug: string; category: string; count: number }>(
       DB,
       `SELECT toolSlug, category, COUNT(*) as count FROM download_event
-       WHERE outcome = 'blocked' AND createdAt > ?
+       WHERE outcome LIKE 'blocked%' AND createdAt > ?
        GROUP BY toolSlug ORDER BY count DESC LIMIT 10`,
       thirtyDaysAgo
     ),
@@ -109,8 +121,8 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     // Errors by day (30d)
     safeQuery<{ date: string; count: number }>(
       DB,
-      `SELECT DATE(createdAt) as date, COUNT(*) as count FROM error_log
-       WHERE createdAt > ? GROUP BY DATE(createdAt) ORDER BY date`,
+      `SELECT ${DAY_BUCKET} as date, COUNT(*) as count FROM error_log
+       WHERE createdAt > ? GROUP BY ${DAY_BUCKET} ORDER BY date`,
       thirtyDaysAgo
     ),
     // Top errors
@@ -123,15 +135,17 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     // Signups by day (30d)
     safeQuery<{ date: string; count: number }>(
       DB,
-      `SELECT DATE(createdAt) as date, COUNT(*) as count FROM user
-       WHERE createdAt > ? GROUP BY DATE(createdAt) ORDER BY date`,
+      `SELECT ${DAY_BUCKET} as date, COUNT(*) as count FROM user
+       WHERE createdAt > ? GROUP BY ${DAY_BUCKET} ORDER BY date`,
       thirtyDaysAgo
     ),
-    // Page views by day (30d)
+    // Page views by day (30d). NOTE: the column is createdAt (mixed unix /
+    // datetime rows) — a previous revision read a nonexistent `timestamp`
+    // column, so this chart silently showed "No data" forever.
     safeQuery<{ date: string; count: number }>(
       DB,
-      `SELECT DATE(timestamp) as date, COUNT(*) as count FROM analytics_event
-       WHERE timestamp > ? GROUP BY DATE(timestamp) ORDER BY date`,
+      `SELECT ${DAY_BUCKET} as date, COUNT(*) as count FROM analytics_event
+       WHERE createdAt > ? GROUP BY ${DAY_BUCKET} ORDER BY date`,
       thirtyDaysAgo
     ),
   ]);
@@ -149,7 +163,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     ),
     safeFirst<{ count: number }>(
       DB,
-      "SELECT COUNT(*) as count FROM download_event WHERE outcome = 'blocked' AND createdAt > ?",
+      "SELECT COUNT(*) as count FROM download_event WHERE outcome LIKE 'blocked%' AND createdAt > ?",
       thirtyDaysAgo
     ),
     safeFirst<{ count: number }>(
