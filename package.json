@@ -72,6 +72,7 @@
     "fabric": "^7.4.0",
     "file-saver": "^2.0.5",
     "framer-motion": "^12.40.0",
+    "fuse.js": "7.5.0",
     "gif.js.optimized": "^1.0.1",
     "heic2any": "^0.0.4",
     "html-minifier-terser": "^7.2.0",

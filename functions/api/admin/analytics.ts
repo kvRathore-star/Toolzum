@@ -61,6 +61,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     downloadsByDay,
     downloadsByUserType,
     blockedDownloads,
+    missedSearches,
     topDownloadedTools,
     errorsByDay,
     topErrors,
@@ -108,6 +109,15 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
       `SELECT toolSlug, category, COUNT(*) as count FROM download_event
        WHERE outcome LIKE 'blocked%' AND createdAt > ?
        GROUP BY toolSlug ORDER BY count DESC LIMIT 10`,
+      thirtyDaysAgo
+    ),
+    // Top missed searches (30d) — zero-result Cmd+K queries logged as
+    // search:miss:<query>. Feeds SEARCH_ALIASES: promote repeats monthly.
+    safeQuery<{ query: string; misses: number }>(
+      DB,
+      `SELECT REPLACE(path, 'search:miss:', '') as query, COUNT(*) as misses FROM analytics_event
+       WHERE path LIKE 'search:miss:%' AND createdAt > ?
+       GROUP BY query ORDER BY misses DESC LIMIT 15`,
       thirtyDaysAgo
     ),
     // Top downloaded tools
@@ -187,6 +197,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     downloadsByUserType,
     blockedDownloads,
     topDownloadedTools,
+    missedSearches,
     errorsByDay,
     topErrors,
     signupsByDay,

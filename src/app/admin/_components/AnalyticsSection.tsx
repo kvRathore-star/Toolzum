@@ -9,6 +9,7 @@ interface AnalyticsData {
   downloadsByDay: { date: string; count: number; blocked: number }[];
   downloadsByUserType: { userType: string; count: number; blocked: number }[];
   blockedDownloads: { toolSlug: string; category: string; count: number }[];
+  missedSearches: { query: string; misses: number }[];
   topDownloadedTools: { toolSlug: string; category: string; count: number }[];
   errorsByDay: { date: string; count: number }[];
   topErrors: { message: string; count: number; lastSeen: string | number | null }[];
@@ -227,6 +228,21 @@ export function AnalyticsSection() {
           />
         </div>
       </div>
+
+      {/* Missed searches — zero-result Cmd+K queries; promote repeats to SEARCH_ALIASES */}
+      {(data.missedSearches ?? []).length > 0 && (
+        <div className="p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">
+          <div className="flex items-center gap-2 mb-4">
+            <Search className="w-5 h-5 text-violet-400" />
+            <h3 className="text-sm font-semibold text-[var(--text-primary)]">Top Missed Searches</h3>
+          </div>
+          <HorizontalBarChart
+            items={data.missedSearches.map((d) => ({ label: d.query, value: d.misses }))}
+            maxVal={data.missedSearches[0]?.misses || 0}
+            color="bg-violet-500"
+          />
+        </div>
+      )}
 
       {/* Top Downloaded Tools */}
       {data.topDownloadedTools.length > 0 && (

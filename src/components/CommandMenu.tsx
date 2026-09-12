@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { Command } from "cmdk";
+import Fuse from "fuse.js";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Search, Sparkles, Zap, Layout, Sun, Moon, Home, Star } from "lucide-react";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
 import { useFavorites } from "@/hooks/useFavorites";
+import { aliasesForSlug } from "@/lib/searchAliases";
 
 interface CommandMenuProps {
   open: boolean;
@@ -64,6 +66,98 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
     return groups;
   }, []);
 
+  // Typo-tolerant ranking (Sep 2026): fuse over name/slug/description +
+  // synonym aliases. cmdk still owns keyboard nav; we only decide visibility
+  // (filter) and relevance order (rank-sorted before render).
+  const fuseDocs = useMemo(
+    () =>
+      clientToolsRegistry.map((t) => ({
+        ...t,
+        searchText: `${t.description ?? ""} ${aliasesForSlug(t.slug).join(" ")}`,
+      })),
+    [],
+  );
+  const fuse = useMemo(
+    () =>
+      new Fuse(fuseDocs, {
+        keys: [
+          { name: "name", weight: 0.45 },
+          { name: "slug", weight: 0.25 },
+          { name: "searchText", weight: 0.2 },
+          { name: "category", weight: 0.1 },
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        includeScore: false,
+      }),
+    [fuseDocs],
+  );
+
+  // Multi-word queries behave as token-AND: every token must match
+  // (typo-tolerated), full-token hits outrank partials. Single tokens take
+  // the fast path. "merge pdf" must surface bulk-pdf-merger, not just any
+  // tool with "merge" or "pdf" in its name.
+  const ranked = React.useCallback(
+    (q: string): string[] => {
+      const tokens = q
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 6);
+      if (tokens.length <= 1) {
+        return fuse.search(q).map((r) => (r.item as { slug: string }).slug);
+      }
+      const hits = new Map<string, { count: number; rankSum: number }>();
+      tokens.forEach((t) => {
+        fuse.search(t).forEach((r, i) => {
+          const slug = (r.item as { slug: string }).slug;
+          const prev = hits.get(slug) ?? { count: 0, rankSum: 0 };
+          hits.set(slug, { count: prev.count + 1, rankSum: prev.rankSum + i });
+        });
+      });
+      return [...hits.entries()]
+        .sort((a, b) => b[1].count - a[1].count || a[1].rankSum - b[1].rankSum)
+        .map(([slug]) => slug);
+    },
+    [fuse],
+  );
+
+  const rankedSlugs = useMemo(() => {
+    const q = query.trim();
+    if (!q) return null;
+    return new Set(ranked(q).map((slug) => slug));
+  }, [fuse, query, ranked]);
+
+  const rankOf = useMemo(() => {
+    const q = query.trim();
+    if (!q) return null;
+    const order = new Map<string, number>();
+    ranked(q).forEach((slug, i) => order.set(slug, i));
+    return order;
+  }, [fuse, query, ranked]);
+
+  // Missed-query log (zero-result searches only, truncated): feeds the
+  // synonym map — top misses get promoted to SEARCH_ALIASES monthly.
+  // Never logs successful searches (privacy: typed text stays local).
+  const loggedMisses = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const q = query.trim().toLowerCase();
+    if (!q || rankedSlugs === null || rankedSlugs.size > 0) return;
+    if (loggedMisses.current.has(q)) return;
+    loggedMisses.current.add(q);
+    const t = window.setTimeout(() => {
+      fetch("/api/analytics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          path: `search:miss:${q.slice(0, 80)}`,
+          clientType: "search",
+        }),
+      }).catch(() => {});
+    }, 800);
+    return () => window.clearTimeout(t);
+  }, [query, rankedSlugs]);
+
   if (!open) return null;
 
   return (
@@ -79,7 +173,17 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
         <div 
           className="relative w-[calc(100%-2rem)] max-w-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col max-h-[60vh] mt-[10vh]"
         >
-          <Command className="flex flex-col h-full">
+          <Command
+            className="flex flex-col h-full"
+            // Fuse decides tool visibility (typo-tolerant); non-tool rows
+            // (recents, actions) keep plain substring matching on their text.
+            filter={(value, search) => {
+              const q = search.trim().toLowerCase();
+              if (!q || rankedSlugs === null) return 1;
+              if (rankedSlugs.has(value)) return 1;
+              return value.toLowerCase().includes(q) ? 1 : 0;
+            }}
+          >
             <div className="flex items-center border-b border-[var(--border-subtle)] px-4">
               <Search className="w-5 h-5 text-[var(--text-muted)] mr-3 shrink-0" />
               <Command.Input
@@ -140,6 +244,7 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
                     return (
                       <Command.Item
                         key={slug}
+                        value={slug}
                         onSelect={() => runCommand(() => router.push(`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`))}
                         className="flex items-center h-[48px] px-3 rounded-[var(--radius-md)] text-[14px] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] cursor-pointer data-[selected=true]:bg-[var(--bg-surface)] data-[selected=true]:text-[var(--text-primary)] transition-colors group"
                       >
@@ -186,9 +291,13 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
                   heading={category === "indian-utilities" ? "India Utilities" : category}
                   className="mt-2 px-2 py-2 text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-[0.06em]"
                 >
-                  {items.map((tool) => (
+                  {items
+                    .slice()
+                    .sort((a, b) => (rankOf?.get(a.slug) ?? 1e9) - (rankOf?.get(b.slug) ?? 1e9))
+                    .map((tool) => (
                     <Command.Item
                       key={tool.id}
+                      value={tool.slug}
                       onSelect={() =>
                         runCommand(() =>
                           router.push(

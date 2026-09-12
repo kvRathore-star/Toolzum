@@ -28,6 +28,7 @@ function payload(downloadsByDay: unknown[]) {
     downloadsByUserType: [],
     blockedDownloads: [],
     topDownloadedTools: [],
+    missedSearches: [{ query: 'backgroud', misses: 3 }],
     errorsByDay: [],
     topErrors: [],
     signupsByDay: [],
@@ -65,5 +66,8 @@ describe('AnalyticsSection null-date hardening (Sep 12 2026 regression)', () => 
     await waitFor(() => {
       expect(screen.getAllByText('09-12').length).toBeGreaterThan(0);
     });
+    // Missed-searches panel renders from the same payload.
+    expect(screen.getByText('Top Missed Searches')).toBeDefined();
+    expect(screen.getByText('backgroud')).toBeDefined();
   });
 });
