@@ -1,6 +1,6 @@
 # Toolzum TODO Tracker
 
-Last updated: 2026-09-12
+Last updated: 2026-08-23
 
 ## Quick Wins (do now)
 - [x] 1. Generate OG images for 4 new tools + fix default /og-image.png 404 — Ran `npx tsx scripts/generate-og-images.ts`, fixed layout/page.tsx to use `/og/branding/index.png`
@@ -74,32 +74,31 @@ Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–
 - [x] Protobuf Decoder — rewrote with real wire format parsing (commit b06b887)
 - [x] User Favorites — D1 table, API endpoints, star buttons, homepage section, ⌘K group (commit 5ee786c)
 
-## Completed Sep 12 2026 (plan/quota/a11y hardening batch)
-- [x] Per-batch quota gate on all bulk + single save paths (BulkToolShell family, 10 badged singles, PdfWorkflowBuilder, BulkPdfMerger); downloadOrShare returns boolean
-- [x] Anon Pro hard-lock with sign-in CTA; signed-free server caps 150MB/10; credit-reset race fix
-- [x] Transcription 10-credit truth (docs/badge/tests); 5 missing credit badges added (16/16 callers)
-- [x] CSP production fixes (FFmpeg blob:+data:, Turnstile, Pollinations, beacon, MediaPipe model) + regression tests
-- [x] Admin dialogs Esc/trap/stacking + close fix; plan options free|pro; lastLoginAt writer; analytics crash + blocked-stat + date fixes
-- [x] Case-redirect 404 net (38 rules); dead ai-video-subtitler removed (redirect kept); FaceSwap copy honesty
-- [x] Canonical plan tiers (planTiers.ts); ai_credit_event analytics; MediaPipe on-device segmentation (signed perk); tour per-account + replay
-- [x] Keyboard: picker focus-return + explicit dropzone rings; manifest/AGENTS/count truth pass
-
 -----------------
 
 The C2.3 remainder block, verbatim. It's today's live process note and still accurate (75 + 51, batch gate, skip-list, next-up batch). Everything around it can go.
 Pentest (item 10) is already in your human-side pending list, so it's preserved there.
 
 
-Here is your complete test list. Do it in this order — each session is independent, so you can stop after any of them.
+Session 1 — smoke pass (10 min, keyboard only, no mouse)
+1. Search: open toolzum.com, press Cmd+K, type font converter with the space. Then Esc. Pass = space types, results filter, Esc closes and focus returns to the search button.
+2. Dropzone: open toolzum.com/design/font-converter. Tab until the dashed box has a visible outline. Press Enter (file picker must open), cancel, Tab back, press Space (picker opens, page must NOT scroll).
+3. Labeled form: open toolzum.com/finance/emi-calculator. Tab through the three fields — each must show its name correctly.
 
-~~Session 1 — smoke pass~~ — DONE Sep 12 2026 (all three passed; dropzone Space-scroll led to picker focus-return fix on 8 dropzones + explicit focus rings).
+2. Video WASM console check
+Open toolzum.com (live, after this deploy finishes) in Chrome desktop.
+Press Cmd+Option+J (Mac) to open DevTools console. Keep it open.
+Open any video tool (e.g. search "video compress"), upload a small video, run it.
+Watch the console for red errors mentioning any of: Content Security Policy, blocked, SharedArrayBuffer, failed to fetch, wasm.
+Report back: either "clean, video processed, no console errors" or paste the exact red error text.
 
-Session 2 — admin check (10 min, sign in as admin first!) — NEEDS RE-PASS: dialogs were rebuilt (Esc/trap/stacking + close fix) after your first pass.
-⚠️ Live data — open things but always Cancel, never confirm.
-1. Open toolzum.com/admin/users. Tab to a table row, press Enter — detail panel must slide in.
-2. Keep pressing Tab — focus must stay inside the panel. Press Esc — panel closes, focus returns to the row.
-3. Change a user's Role → confirm dialog pops up → press Esc (Cancel, don't confirm) → only the dialog closes.
-4. Click Delete on a user → second dialog stacks → Esc closes only the top one (Cancel, don't confirm).
+Needs humans (all batched, none scheduled):
+- Smoke re-pass on new UI (chips, tour, empty states)
+
+- ZAP weekly run going green on its own (allowlist is in — confirm on next Monday run or manual trigger)
+
+Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
+
 
 Session 3 — VoiceOver pass (the big one)
 1. On Mac: turn on VoiceOver with Cmd+F5. Move with Ctrl+Option+Right arrow. Stop with Cmd+F5.
@@ -125,22 +124,17 @@ Session 3 — VoiceOver pass (the big one)
 - toolzum.com/indian-utilities/rental-agreement-generator
 - toolzum.com/utility/todo-list (if it exists — search it; skip if not)
 - toolzum.com/utility/base64 (same — search, skip if missing)
+
 Session 4 — UI-look naming (only if sessions 1–3 are done)
 I'll give you these in small batches of 10 with screenshots-worth of context ("this box, next to that text — what should it be called?"). Say the word when you get here and I'll prepare the first batch.
 Report format for everything: page name + what you pressed + what happened (or what it announced). Short lines are perfect.
 
 
-~~2. Video WASM console check~~ — DONE Sep 12 2026 (found real breaks: CSP blob:/data: for FFmpeg core, Pollinations img-src, Turnstile script — all fixed + regression tests).
-
-Needs humans (all batched, none scheduled):
-- Smoke re-pass on new UI: chips ✓ verified Sep 12, tour nagging ✓ fixed+verified, empty states — guide given (favorites/history/badge-zero/search-empty/admin-empty), awaiting eyes
-- Admin keyboard check — NEEDS RE-PASS (dialogs rebuilt after first pass; see Session 2)
-Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
 
 Each was left for a specific reason — not skipped, judged:
 6. Fingerprint — fixing it would cost privacy credibility. Making anon quotas unbypassable means canvas/WebGL/font fingerprinting or IP-locking. That directly contradicts the "privacy-first, nothing uploaded" promise on the homepage. The anon quota is a speed bump by design; the real anti-abuse layer is already server-side (IP rate limiters on both endpoints). A stronger client fingerprint buys almost nothing — incognito clears it anyway — while weakening the brand claim.
 7. UTC skew — nothing user-visible to fix. The local counts are a display-only mirror; every allow/block comes from the server (UTC). The badge shows server values. Aligning the mirror to UTC would churn code + tests to change a number no user ever sees differ. Negative value.
-8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,145 pages to polish a minutes-long cosmetic mismatch that resolves itself.
+8. Expired cookie — self-healing transient. The window is minutes between expiry and next login, and during it the server is correct (session genuinely invalid → anon limits). Any client-side fix means a session-validation roundtrip on every tool open — a performance cost on 1,148 pages to polish a minutes-long cosmetic mismatch that resolves itself.
 Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
 
 
@@ -150,4 +144,4 @@ One rescue — the "Important Notes" honesty block (~15 lines): the coverage-def
 
 Contact form still fakes it (contact/page.tsx:49 — localStorage + simulated success, no email/API). Real fix needs a backend (Cloudflare Email Service / worker) — product decision first.
 
-Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done. (Sep 12: downloadOrShare now returns boolean; 11 migrated savers + AiFaceSwap check it. Long tail of unrelated copy-buttons remains.)
+Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.

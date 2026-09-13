@@ -1128,7 +1128,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Video Compressor",
     slug: "video-compressor",
     category: "Video",
-    description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles videos up to 30MB as guest, 150MB signed in, 2GB Pro.",
+    description: "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Everything runs locally in your browser — nothing is uploaded.",
     dependencies: "FFmpeg / WebCodecs API",
     seoDescription: 'Free online Video Compressor — reduce MP4, MOV, and WebM file sizes with CRF encoding, resolution scaling, and bitrate control. 30MB guest / 150MB free sign-in / 2GB Pro. ',
     faqs: [

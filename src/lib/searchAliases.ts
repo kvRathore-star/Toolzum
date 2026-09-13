@@ -28,6 +28,8 @@ export const SEARCH_ALIASES: Record<string, string[]> = {
   // Resize
   resize: ["bulk-image-resizer", "image-resizer"],
   scale: ["bulk-image-resizer", "image-resizer"],
+  // Font
+  "font converter": ["font-converter"],
   // Text tools
   summarize: ["pdf-ai-summariser"],
   summary: ["pdf-ai-summariser", "meeting-minutes-generator"],

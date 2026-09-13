@@ -228,7 +228,7 @@ export function useFFmpeg() {
         }
       }
       const mtNote = supportsMT ? '' : ' Your browser does not support SharedArrayBuffer (required for multi-threaded mode).';
-      throw new Error(`All CDN sources failed to load.${mtNote} Try Chrome or Edge, disable browser extensions, or check your network connection.`);
+      throw new Error(`All CDN sources failed to load.${mtNote} This is usually caused by browser extensions (ad blockers, MetaMask, etc.) blocking the engine download. Try disabling extensions for this site, or open this page in an incognito/private window.`);
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Failed to load FFmpeg WASM';
       console.error("FFmpeg load failed:", e);
