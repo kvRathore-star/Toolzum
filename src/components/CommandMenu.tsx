@@ -115,17 +115,29 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
           hits.set(slug, { count: prev.count + 1, rankSum: prev.rankSum + i });
         });
       });
-      return [...hits.entries()]
-        .sort((a, b) => b[1].count - a[1].count || a[1].rankSum - b[1].rankSum)
-        .map(([slug]) => slug);
+      const ordered = [...hits.entries()].sort(
+        (a, b) => b[1].count - a[1].count || a[1].rankSum - b[1].rankSum,
+      );
+      // True AND: a tool is only a match when every token hits it. Without
+      // this the union floods All (e.g. "converter" alone matches ~500
+      // tools, burying the real hit in its category group far below). Falls
+      // back to the union only when nothing matches all tokens (heavy typos)
+      // so a search never goes empty while partials exist.
+      const full = ordered.filter(([, h]) => h.count === tokens.length);
+      return (full.length > 0 ? full : ordered).map(([slug]) => slug);
     },
     [fuse],
   );
 
+  // Palette is for jumping, not browsing: cap visible hits so a broad
+  // single token (e.g. "emi" fuzzy-matches 600+ tools at threshold 0.4)
+  // can't bury the top-ranked hit below hundreds of rows. Top rank first,
+  // so the cap never hides the best match.
+  const VISIBLE_CAP = 60;
   const rankedSlugs = useMemo(() => {
     const q = query.trim();
     if (!q) return null;
-    return new Set(ranked(q).map((slug) => slug));
+    return new Set(ranked(q).slice(0, VISIBLE_CAP).map((slug) => slug));
   }, [fuse, query, ranked]);
 
   const rankOf = useMemo(() => {
@@ -285,6 +297,17 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
 
               {Object.entries(categories)
                 .filter(([category]) => !catFilter || category === catFilter)
+                .sort(([a], [b]) => {
+                  // While searching, best-ranked group first — otherwise the
+                  // top hit sits in its category group far down the list and
+                  // All looks empty. No query: keep registry order.
+                  if (!rankOf) return 0;
+                  const best = (cat: string) =>
+                    Math.min(
+                      ...(categories[cat] ?? []).map((t) => rankOf.get(t.slug) ?? 1e9),
+                    );
+                  return best(a) - best(b);
+                })
                 .map(([category, items]) => (
                 <Command.Group
                   key={category}
