@@ -85,7 +85,7 @@ export default function NatoPhoneticConverter() {
         <div className="relative">
           <textarea
             value={output}
-            readOnly aria-label="Result"
+            readOnly aria-label="Phonetic result"
             placeholder="Result will appear here..."
             className="w-full h-[180px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono"
           />

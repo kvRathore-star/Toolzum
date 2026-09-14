@@ -119,7 +119,7 @@ export default function JsonFormatter() {
           </div>
           
           <div className="flex-1 relative">
-            <textarea aria-label="Result" 
+            <textarea aria-label="Formatted JSON" 
               value={output}
               readOnly
               placeholder="Formatted JSON will appear here..."

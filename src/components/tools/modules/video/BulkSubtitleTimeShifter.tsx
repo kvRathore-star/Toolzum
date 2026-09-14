@@ -102,8 +102,8 @@ export default function BulkSubtitleTimeShifter() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="space-y-1">
-            <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Input</h4>
-            <textarea aria-label="Input" value={inputText} onChange={(e) => setInputText(e.target.value)} className="w-full h-[300px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)] transition-colors" placeholder="Paste your subtitles here..." />
+            <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Subtitle text</h4>
+            <textarea aria-label="Subtitle text" value={inputText} onChange={(e) => setInputText(e.target.value)} className="w-full h-[300px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)] transition-colors" placeholder="Paste your subtitles here..." />
           </div>
           <div className="space-y-1">
             <div className="flex items-center justify-between">

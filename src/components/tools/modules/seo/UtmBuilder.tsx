@@ -74,7 +74,7 @@ export default function UtmBuilder() {
           <div className="space-y-2">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Result</label>
             <div className="flex gap-2">
-              <input aria-label="Result" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" />
+              <input aria-label="UTM URL" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" />
               <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors shrink-0">Copy</button>
             </div>
             <div className="text-xs text-[var(--text-muted)]">

@@ -443,8 +443,8 @@ export function PxRemConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PX &lt;-&gt; REM Converter</h2>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-            <input aria-label="Value" type="text" value={value} onChange={e => setValue(e.target.value)}
+            <label className="text-xs text-[var(--text-secondary)] mb-1 block">Pixel value</label>
+            <input aria-label="Pixel value" type="text" value={value} onChange={e => setValue(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
           <div>
@@ -559,8 +559,8 @@ export function SpeedConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Speed Converter</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Speed</label>
+          <input aria-label="Speed" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -630,8 +630,8 @@ export function PowerConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Power Converter</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Power</label>
+          <input aria-label="Power" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">
@@ -701,8 +701,8 @@ export function PressureConverter() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Pressure Converter</h2>
         <div>
-          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-          <input aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Pressure</label>
+          <input aria-label="Pressure" type="number" value={value} onChange={e => setValue(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="grid grid-cols-2 gap-3">

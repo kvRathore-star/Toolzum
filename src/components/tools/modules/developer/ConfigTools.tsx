@@ -254,7 +254,7 @@ export function HttpHeadersGenerator() {
             <div key={i} className="flex gap-2 items-center">
               <input aria-label="Security Headers" value={h.name} onChange={e => updateHeader(i, 'name', e.target.value)} placeholder="Header name"
                 className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
-              <input aria-label="Value" value={h.value} onChange={e => updateHeader(i, 'value', e.target.value)} placeholder="Value"
+              <input aria-label="Header value" value={h.value} onChange={e => updateHeader(i, 'value', e.target.value)} placeholder="Value"
                 className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
               <button onClick={() => removeHeader(i)} className="text-red-500 hover:text-red-400 text-sm px-2">✕</button>
             </div>

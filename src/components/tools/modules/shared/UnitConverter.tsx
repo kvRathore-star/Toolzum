@@ -93,8 +93,8 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
       <p className="text-xs text-[var(--text-secondary)]">{family.desc}</p>
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
-        <label htmlFor="lbl-unitconverter-value" className="text-xs text-[var(--text-secondary)] mb-1 block">Value</label>
-        <input id="lbl-unitconverter-value" aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)}
+        <label htmlFor="lbl-unitconverter-value" className="text-xs text-[var(--text-secondary)] mb-1 block">Quantity</label>
+        <input id="lbl-unitconverter-value" aria-label="Quantity" type="number" value={value} onChange={e => setValue(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="grid grid-cols-[1fr_auto_1fr] gap-2 items-end">

@@ -105,8 +105,8 @@ export function UnitConverter() {
           </div>
         </div>
         <div>
-          <label htmlFor="lbl-unitconverter-value" className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
-          <input id="lbl-unitconverter-value" aria-label="Value" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
+          <label htmlFor="lbl-unitconverter-value" className="text-xs font-medium text-[var(--text-secondary)]">Quantity</label>
+          <input id="lbl-unitconverter-value" aria-label="Quantity" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
         </div>
         <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
           <p className="text-xs text-[var(--text-secondary)]">Result</p>

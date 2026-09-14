@@ -119,7 +119,7 @@ ${inputText}`;
           </div>
           
           <div className="relative">
-            <textarea aria-label="Result"
+            <textarea aria-label="Translation"
               value={outputText}
               readOnly
               placeholder="Translation will appear here..."

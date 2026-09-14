@@ -117,7 +117,7 @@ export default function UrlShortener() {
                 <input
                   type="text"
                   readOnly
-                  aria-label="Result"
+                  aria-label="Shortened URL"
                   value={shortUrl}
                   className="flex-1 bg-transparent border-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] px-2 font-medium"
                 />

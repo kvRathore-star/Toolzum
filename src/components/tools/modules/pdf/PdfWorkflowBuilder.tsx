@@ -411,7 +411,7 @@ export function PdfWorkflowBuilder() {
                   {formFields.map((f, i) => (
                     <div key={f.name} className="flex gap-2 items-center">
                       <span className="text-xs text-[var(--text-secondary)] w-1/3 truncate font-mono" title={f.name}>{f.name}</span>
-                      <input aria-label="Value" className={`${inputCls} flex-1`} value={f.value} onChange={e => updateFormField(i, e.target.value)} placeholder="Value" />
+                      <input aria-label="Field value" className={`${inputCls} flex-1`} value={f.value} onChange={e => updateFormField(i, e.target.value)} placeholder="Value" />
                     </div>
                   ))}
                   <button onClick={handleFill} disabled={loading} className={btnCls}>{loading ? 'Filling...' : 'Fill & Download'}</button>
