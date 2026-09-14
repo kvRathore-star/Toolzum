@@ -174,7 +174,7 @@ export function MediaQueryGenerator() {
           <input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="Width" aria-label={type === 'max-width' ? 'Max Width' : 'Min Width'}
             className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
-        <input type="text" value={device} onChange={e => setDevice(e.target.value)} placeholder="Device type (e.g. print, speech)"
+        <input type="text" value={device} onChange={e => setDevice(e.target.value)} placeholder="Device type (e.g. print, speech)" aria-label="Media device type"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}

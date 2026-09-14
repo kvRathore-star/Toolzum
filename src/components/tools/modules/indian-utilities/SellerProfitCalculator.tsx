@@ -82,7 +82,7 @@ export default function SellerProfitCalculator() {
       <div className="flex items-center gap-1">
         {suffix === '₹' && <span className="text-[var(--text-muted)] text-xs font-medium">{suffix}</span>}
         <input type="number" min="0" step="1" value={(input[key] as number) || ''} onChange={e => update(key, e.target.value)}
-          placeholder={placeholder}
+          placeholder={placeholder} aria-label={label}
           className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
         {suffix && suffix !== '₹' && <span className="text-[var(--text-muted)] text-[10px] w-6">{suffix}</span>}
       </div>

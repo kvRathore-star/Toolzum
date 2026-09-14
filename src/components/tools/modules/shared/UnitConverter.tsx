@@ -153,7 +153,7 @@ function ConverterAllOutputs({ family, slug }: { family: FamilyConfig; slug: str
       <ConverterExamples examples={family.examples ?? []} onSelect={v => setValue(v)} />
       <div>
         <label htmlFor="lbl-unitconverter-value-in-family-baseunit" className="text-xs text-[var(--text-secondary)] mb-1 block">Value (in {family.baseUnit})</label>
-        <input id="lbl-unitconverter-value-in-family-baseunit" type="number" value={value} onChange={e => setValue(e.target.value)}
+        <input id="lbl-unitconverter-value-in-family-baseunit" type="number" value={value} onChange={e => setValue(e.target.value)} aria-label={`Value in ${family.baseUnit}`}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
       </div>
       <div className="text-xs space-y-1.5">
