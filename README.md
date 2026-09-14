@@ -7,7 +7,7 @@ Privacy-first toolbox with **1,147 tools** (1,065 interactive + 82 SEO landing p
 - **Auth**: Better Auth with D1 database
 - **Payments**: Razorpay + Dodo (Pro tier with credits)
 - **Mobile**: PWA manifest + Capacitor (Android built, iOS not yet initialized)
-- **Testing**: Vitest + Testing Library (155 test files); no E2E yet
+- **Testing**: Vitest + Testing Library (212 test files) + Playwright E2E (`e2e/`)
 
 ## Getting Started
 

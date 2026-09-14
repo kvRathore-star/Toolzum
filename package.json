@@ -126,6 +126,7 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@capacitor/cli": "^6.0.0",
     "@cloudflare/workers-types": "^5.20260708.1",
     "@next/bundle-analyzer": "^16.2.6",

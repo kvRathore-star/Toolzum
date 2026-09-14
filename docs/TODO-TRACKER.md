@@ -82,7 +82,7 @@ The C2.3 remainder block, verbatim. It's today's live process note and still acc
 Pentest (item 10) is already in your human-side pending list, so it's preserved there.
 
 
-Session 1 — smoke pass (10 min, keyboard only, no mouse)
+Session 1 — smoke pass (10 min, keyboard only, no mouse) — DONE 2026-09-14 (human pass: Cmd+K + space, dropzone Enter/Space, EMI labels all correct).
 1. Search: open toolzum.com, press Cmd+K, type font converter with the space. Then Esc. Pass = space types, results filter, Esc closes and focus returns to the search button.
 2. Dropzone: open toolzum.com/design/font-converter. Tab until the dashed box has a visible outline. Press Enter (file picker must open), cancel, Tab back, press Space (picker opens, page must NOT scroll).
 3. Labeled form: open toolzum.com/finance/emi-calculator. Tab through the three fields — each must show its name correctly.
