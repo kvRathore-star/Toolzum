@@ -525,16 +525,16 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
         {/* Sort */}
         <div className="flex items-center gap-3 mb-6">
           <div className="relative" ref={sortRef}>
-            <button onClick={() => setShowSortMenu(!showSortMenu)} className="flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-mono border border-[var(--border-subtle)] rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
+            <button aria-expanded={showSortMenu} aria-haspopup="menu" onClick={() => setShowSortMenu(!showSortMenu)} className="flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-mono border border-[var(--border-subtle)] rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">
               <ArrowUpDown className="w-3 h-3" />
               {sortBy === 'name-asc' ? 'A–Z' : 'Z–A'}
             </button>
             {showSortMenu && (
-              <div className="absolute left-0 top-full mt-1 w-36 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-1 z-50">
-                <button onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+              <div role="menu" aria-label="Sort tools" className="absolute left-0 top-full mt-1 w-36 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-1 z-50">
+                <button role="menuitem" onClick={() => { setSortBy('name-asc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-asc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
                   A → Z
                 </button>
-                <button onClick={() => { setSortBy('name-desc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
+                <button role="menuitem" onClick={() => { setSortBy('name-desc'); setShowSortMenu(false); }} className={`w-full text-left px-3 py-1.5 text-xs transition-colors ${sortBy === 'name-desc' ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'}`}>
                   Z → A
                 </button>
               </div>
@@ -639,6 +639,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
               return (
                 <section key={section.id} id={section.id} className="border border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-elevated)] overflow-hidden">
                   <button
+                    aria-expanded={isExpanded}
                     onClick={() => toggleSection(section.id)}
                     className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[var(--bg-overlay)] transition-colors"
                   >
@@ -693,6 +694,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             {uncategorized && uncategorized.length > 0 && (
               <section id="other-tools" className="border border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-elevated)] overflow-hidden">
                 <button
+                  aria-expanded={expandedSections.has('other-tools')}
                   onClick={() => toggleSection('other-tools')}
                   className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-[var(--bg-overlay)] transition-colors"
                 >

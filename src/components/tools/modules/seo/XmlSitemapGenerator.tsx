@@ -250,6 +250,7 @@ export default function XmlSitemapGenerator() {
             </div>
 
             <button
+              aria-expanded={showSettings}
               onClick={() => setShowSettings(!showSettings)}
               className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             >

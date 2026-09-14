@@ -146,7 +146,7 @@ Note: Connect backend LLM for exact deduction processing.`);
             <div className="space-y-1.5">
               {GUIDE_STEPS.map((step, i) => (
                 <div key={i} className="border border-[var(--border-subtle)] rounded-xl overflow-hidden transition-all">
-                  <button onClick={() => setExpandedStep(expandedStep === i ? null : i)}
+                  <button aria-expanded={expandedStep === i} onClick={() => setExpandedStep(expandedStep === i ? null : i)}
                     className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--bg-overlay)]/50 transition-colors">
                     <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
                       expandedStep === i

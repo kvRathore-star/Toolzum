@@ -246,7 +246,7 @@ export function ApiBuilder() {
         {/* Collections sidebar */}
         <div className="w-56 shrink-0">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-            <button onClick={() => setShowCollections(!showCollections)} className="flex items-center justify-between w-full px-4 py-3 text-xs font-bold text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors">
+            <button aria-expanded={showCollections} onClick={() => setShowCollections(!showCollections)} className="flex items-center justify-between w-full px-4 py-3 text-xs font-bold text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors">
               <div className="flex items-center gap-2"><Book size={14} /> Collections ({collections.length})</div>
               {showCollections ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
             </button>
@@ -255,7 +255,7 @@ export function ApiBuilder() {
                 {collections.length === 0 && <p className="text-[10px] text-[var(--text-tertiary)] px-2 py-3 text-center">No saved requests yet</p>}
                 {collections.map(col => (
                   <div key={col.id}>
-                    <button onClick={() => setActiveCollection(activeCollection === col.id ? null : col.id)} className={`flex items-center gap-1 w-full text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${activeCollection === col.id ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>
+                    <button aria-expanded={activeCollection === col.id} onClick={() => setActiveCollection(activeCollection === col.id ? null : col.id)} className={`flex items-center gap-1 w-full text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${activeCollection === col.id ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>
                       {activeCollection === col.id ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
                       <span className="font-medium">{col.name}</span>
                       <span className="text-[var(--text-muted)] ml-auto">({col.requests.length})</span>

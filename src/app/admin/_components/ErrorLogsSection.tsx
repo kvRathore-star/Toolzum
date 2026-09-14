@@ -186,6 +186,7 @@ export function ErrorLogsSection() {
           ) : messages.map((e) => (
             <div key={e.id} className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
               <button
+                aria-expanded={expandedId === e.id}
                 onClick={() => setExpandedId(expandedId === e.id ? null : e.id)}
                 className="w-full flex items-center justify-between p-4 text-left hover:bg-[var(--bg-elevated)] transition-colors duration-150 cursor-pointer"
               >

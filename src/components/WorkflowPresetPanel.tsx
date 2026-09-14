@@ -70,6 +70,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
         <div className="border-t border-[var(--border-subtle)]">
           <div className="px-5 py-3">
             <button
+              aria-expanded={isOpen}
               onClick={() => setIsOpen(!isOpen)}
               className="flex items-center gap-2 text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors uppercase tracking-wider"
             >
@@ -83,6 +84,8 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                 {presets.length > 0 && (
                   <div className="relative">
                     <button
+                      aria-expanded={showLoadDropdown}
+                      aria-haspopup="menu"
                       onClick={() => setShowLoadDropdown(!showLoadDropdown)}
                       className="flex items-center gap-2 text-xs text-[var(--text-primary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-3 py-2 hover:border-[var(--border-default)] transition-colors w-full"
                     >
@@ -92,12 +95,16 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                     </button>
 
                     {showLoadDropdown && (
-                      <div className="absolute top-full left-0 right-0 mt-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] shadow-lg z-50 overflow-hidden">
+                      <div role="menu" aria-label="Load preset" className="absolute top-full left-0 right-0 mt-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] shadow-lg z-50 overflow-hidden">
                         {presets.map(p => (
-                          <button
+                          <div
                             key={p.id}
+                            role="menuitem"
+                            tabIndex={0}
+                            aria-label={`Load preset ${p.name}`}
                             onClick={() => handleLoad(p.id)}
-                            className={`flex items-center gap-2 w-full text-xs text-left px-3 py-2.5 hover:bg-[var(--bg-overlay)] transition-colors ${
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleLoad(p.id); } }}
+                            className={`flex items-center gap-2 w-full text-xs text-left px-3 py-2.5 hover:bg-[var(--bg-overlay)] transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-inset ${
                               recentlyLoaded === p.id ? 'bg-[var(--accent-ink)]/10 text-[var(--accent)]' : ''
                             }`}
                           >
@@ -109,7 +116,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                             >
                               <Trash2 className="w-3 h-3" />
                             </button>
-                          </button>
+                          </div>
                         ))}
                       </div>
                     )}
