@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRovingTabs } from "@/components/useRovingTabs";
 
 const CATEGORIES = [
   {
@@ -81,6 +82,12 @@ const CATEGORIES = [
 
 export function ProductExplorer() {
   const [activeTab, setActiveTab] = useState(CATEGORIES[0]!.id);
+  const explorerTabs = useRovingTabs(
+    CATEGORIES.map((c) => c.id),
+    activeTab,
+    setActiveTab,
+    "data-explorer-tab",
+  );
   const activeCategory = CATEGORIES.find(c => c.id === activeTab) || CATEGORIES[0]!;
 
   return (
@@ -95,13 +102,14 @@ export function ProductExplorer() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-8 border-b border-[var(--border-subtle)] pb-4" role="tablist" aria-label="Product divisions">
+      <div className="flex flex-wrap gap-2 mb-8 border-b border-[var(--border-subtle)] pb-4" role="tablist" aria-label="Product divisions" onKeyDown={explorerTabs.onKeyDown}>
         {CATEGORIES.map(category => {
           const Icon = category.icon;
           return (
             <button
               key={category.id}
               role="tab"
+              {...explorerTabs.tabProps(category.id)}
               aria-selected={activeTab === category.id}
               onClick={() => setActiveTab(category.id)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${

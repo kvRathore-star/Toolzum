@@ -5,6 +5,7 @@ import { Search, Building2, MapPin, Calendar, Shield, FileSpreadsheet, Download,
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from "@/lib/clipboard";
+import { useRovingTabs } from "@/components/useRovingTabs";
 
 const GSTIN_REGEX = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
 const STATE_CODES: Record<string, string> = {
@@ -64,6 +65,12 @@ export default function GstinLookup() {
   const [bulkData, setBulkData] = useState<string[]>([]);
   const [bulkResults, setBulkResults] = useState<LookupResult[]>([]);
   const [activeTab, setActiveTab] = useState<'single' | 'bulk'>('single');
+  const lookupTabs = useRovingTabs(
+    ['single', 'bulk'] as const,
+    activeTab,
+    setActiveTab,
+    "data-lookup-tab",
+  );
 
   const isValid = useMemo(() => GSTIN_REGEX.test(gstin.toUpperCase()), [gstin]);
   const dailyUsed = getDailyLookups();
@@ -126,9 +133,9 @@ export default function GstinLookup() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-[var(--border-subtle)]" role="tablist" aria-label="Lookup mode">
+        <div className="flex border-b border-[var(--border-subtle)]" role="tablist" aria-label="Lookup mode" onKeyDown={lookupTabs.onKeyDown}>
           {(['single', 'bulk'] as const).map(tab => (
-            <button key={tab} role="tab" aria-selected={activeTab === tab} onClick={() => setActiveTab(tab)}
+            <button key={tab} role="tab" {...lookupTabs.tabProps(tab)} aria-selected={activeTab === tab} onClick={() => setActiveTab(tab)}
               className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
                 activeTab === tab ? 'text-emerald-500 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10' : 'text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}>

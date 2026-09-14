@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useCallback, useRef } from 'react';
+import { useRovingTabs } from "@/components/useRovingTabs";
 import { PDFDocument, PDFTextField, PDFCheckBox, PDFDropdown, PDFOptionList, PDFRadioGroup } from 'pdf-lib';
 import {
   FileText, Shuffle, Scissors,
@@ -46,6 +47,12 @@ function rangeToPageIndices(ranges: [number, number][], max: number): number[] {
 
 export function PdfWorkflowBuilder() {
   const [activeTab, setActiveTab] = useState<PdfTab>('merge');
+  const flowTabs = useRovingTabs(
+    TABS.map((t) => t.id),
+    activeTab,
+    (id) => { setActiveTab(id); setError(''); setSuccess(''); },
+    "data-flow-tab",
+  );
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -343,9 +350,9 @@ export function PdfWorkflowBuilder() {
   return (
     <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
       <div className="flex min-h-[500px]">
-        <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1" role="tablist" aria-orientation="vertical" aria-label="PDF workflow steps">
+        <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1" role="tablist" aria-orientation="vertical" aria-label="PDF workflow steps" onKeyDown={flowTabs.onKeyDown}>
           {TABS.map(t => (
-            <button key={t.id} role="tab" aria-selected={activeTab === t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
+            <button key={t.id} role="tab" {...flowTabs.tabProps(t.id)} aria-selected={activeTab === t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-blue-600/20 text-blue-700 dark:text-blue-400 border border-blue-500/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
               {t.icon}<span>{t.label}</span>
             </button>

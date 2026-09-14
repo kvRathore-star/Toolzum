@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useRovingTabs } from "@/components/useRovingTabs";
 import { toast } from 'react-hot-toast';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
@@ -15,6 +16,12 @@ export default function PdfInfo() {
   const [file, setFile] = useState<File | null>(null);
   const [arrayBuffer, setArrayBuffer] = useState<ArrayBuffer | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>('metadata');
+  const infoTabs = useRovingTabs(
+    ['metadata', 'dimensions', 'text', 'json'] as TabType[],
+    activeTab,
+    setActiveTab,
+    "data-pdfinfo-tab",
+  );
 
   const [metadata, setMetadata] = useState<Record<string, string> | null>(null);
   const [dimensions, setDimensions] = useState<{ page: number; width: number; height: number }[]>([]);
@@ -165,11 +172,11 @@ export default function PdfInfo() {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="PDF info views">
-        <button role="tab" aria-selected={activeTab === 'metadata'} onClick={() => setActiveTab('metadata')} className={tabClass('metadata')}>Metadata</button>
-        <button role="tab" aria-selected={activeTab === 'dimensions'} onClick={() => setActiveTab('dimensions')} className={tabClass('dimensions')}>Page Dimensions</button>
-        <button role="tab" aria-selected={activeTab === 'text'} onClick={() => setActiveTab('text')} className={tabClass('text')}>Extract Text</button>
-        <button role="tab" aria-selected={activeTab === 'json'} onClick={() => setActiveTab('json')} className={tabClass('json')}>Export JSON</button>
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="PDF info views" onKeyDown={infoTabs.onKeyDown}>
+        <button role="tab" {...infoTabs.tabProps('metadata')} aria-selected={activeTab === 'metadata'} onClick={() => setActiveTab('metadata')} className={tabClass('metadata')}>Metadata</button>
+        <button role="tab" {...infoTabs.tabProps('dimensions')} aria-selected={activeTab === 'dimensions'} onClick={() => setActiveTab('dimensions')} className={tabClass('dimensions')}>Page Dimensions</button>
+        <button role="tab" {...infoTabs.tabProps('text')} aria-selected={activeTab === 'text'} onClick={() => setActiveTab('text')} className={tabClass('text')}>Extract Text</button>
+        <button role="tab" {...infoTabs.tabProps('json')} aria-selected={activeTab === 'json'} onClick={() => setActiveTab('json')} className={tabClass('json')}>Export JSON</button>
       </div>
 
       {isLoading ? (

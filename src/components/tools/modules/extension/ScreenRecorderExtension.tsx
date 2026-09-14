@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRovingTabs } from "@/components/useRovingTabs";
 import { Eye, Download, Video, Sparkles } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
@@ -8,6 +9,12 @@ import { downloadOrShare } from '@/utils/nativeShare';
 
 export default function ScreenRecorderExtension() {
   const [activeTab, setActiveTab] = useState<'manifest' | 'popupHtml' | 'popupJs'>('manifest');
+  const extTabs = useRovingTabs(
+    ['manifest', 'popupHtml', 'popupJs'] as const,
+    activeTab,
+    setActiveTab,
+    "data-ext-tab",
+  );
   const [extName, setExtName] = useState('Tab Recorder Pro');
 
   const manifest = `{
@@ -121,14 +128,14 @@ document.getElementById('stopBtn').addEventListener('click', () => {
 
         <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
           <div className="space-y-3 flex-1 flex flex-col">
-            <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1" role="tablist" aria-label="Extension files">
-              <button role="tab" aria-selected={activeTab === 'manifest'} onClick={() => setActiveTab('manifest')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'manifest' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+            <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1" role="tablist" aria-label="Extension files" onKeyDown={extTabs.onKeyDown}>
+              <button role="tab" {...extTabs.tabProps('manifest')} aria-selected={activeTab === 'manifest'} onClick={() => setActiveTab('manifest')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'manifest' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 manifest.json
               </button>
-              <button role="tab" aria-selected={activeTab === 'popupHtml'} onClick={() => setActiveTab('popupHtml')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupHtml' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button role="tab" {...extTabs.tabProps('popupHtml')} aria-selected={activeTab === 'popupHtml'} onClick={() => setActiveTab('popupHtml')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupHtml' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 popup.html
               </button>
-              <button role="tab" aria-selected={activeTab === 'popupJs'} onClick={() => setActiveTab('popupJs')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupJs' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button role="tab" {...extTabs.tabProps('popupJs')} aria-selected={activeTab === 'popupJs'} onClick={() => setActiveTab('popupJs')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupJs' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 popup.js
               </button>
             </div>

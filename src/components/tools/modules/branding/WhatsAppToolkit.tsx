@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import QRCode from 'qrcode';
 import { clipboardWrite } from "@/lib/clipboard";
+import { useRovingTabs } from "@/components/useRovingTabs";
 
 type Tab = 'link' | 'group' | 'analyzer' | 'status' | 'format' | 'bulk' | 'qr' | 'replies';
 
@@ -862,6 +863,12 @@ function StatusDesignerTab() {
 
 export default function WhatsAppToolkit() {
   const [activeTab, setActiveTab] = useState<Tab>('link');
+  const waTabs = useRovingTabs(
+    TABS.map((t) => t.key),
+    activeTab,
+    setActiveTab,
+    "data-wa-tab",
+  );
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-5">
@@ -874,9 +881,9 @@ export default function WhatsAppToolkit() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-[var(--border-subtle)] overflow-x-auto" role="tablist" aria-label="WhatsApp tools">
+        <div className="flex border-b border-[var(--border-subtle)] overflow-x-auto" role="tablist" aria-label="WhatsApp tools" onKeyDown={waTabs.onKeyDown}>
           {TABS.map(tab => (
-            <button key={tab.key} role="tab" aria-selected={activeTab === tab.key} onClick={() => setActiveTab(tab.key)}
+            <button key={tab.key} role="tab" {...waTabs.tabProps(tab.key)} aria-selected={activeTab === tab.key} onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-1.5 px-4 py-3 text-xs font-semibold whitespace-nowrap transition-colors border-b-2 ${
                 activeTab === tab.key
                   ? 'text-emerald-500 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10'

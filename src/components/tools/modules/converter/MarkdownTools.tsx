@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
+import { useRovingTabs } from "@/components/useRovingTabs";
 
 type TabId = 'markdown-to-html' | 'text-to-markdown' | 'html-to-markdown' | 'markdown-to-text';
 
@@ -359,15 +360,22 @@ export default function MarkdownTools() {
   const slug = (params?.tool as string) || '';
   const defaultTab: TabId = TABS.find(t => t.id === slug)?.id || 'markdown-to-html';
   const [activeTab, setActiveTab] = React.useState<TabId>(defaultTab);
+  const mdTabs = useRovingTabs(
+    TABS.map((t) => t.id),
+    activeTab,
+    setActiveTab,
+    "data-md-tab",
+  );
   const ActiveComponent = TAB_COMPONENTS[activeTab];
 
   return (
     <div>
-      <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl p-1 mb-6 overflow-x-auto" role="tablist" aria-label="Markdown tools">
+      <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl p-1 mb-6 overflow-x-auto" role="tablist" aria-label="Markdown tools" onKeyDown={mdTabs.onKeyDown}>
         {TABS.map(tab => (
           <button
             key={tab.id}
             role="tab"
+            {...mdTabs.tabProps(tab.id)}
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={'px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ' + (activeTab === tab.id ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')}
