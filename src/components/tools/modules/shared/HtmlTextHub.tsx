@@ -72,7 +72,7 @@ export default function HtmlTextHub({ slug: defaultSlug }: { slug: string; descr
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">{config.name}</h2>
         <p className="text-xs text-[var(--text-secondary)]">{config.description}</p>
-        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
+        <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} aria-label="Input HTML"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
           className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">

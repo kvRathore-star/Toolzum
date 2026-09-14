@@ -70,7 +70,7 @@ export default function TypographyPreview() {
           ))}
         </div>
 
-        <textarea value={text} onChange={e => setText(e.target.value)}
+        <textarea value={text} onChange={e => setText(e.target.value)} aria-label="Preview text"
           className="w-full h-20 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
 
         <div className="grid grid-cols-2 gap-4">
