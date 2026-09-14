@@ -26,7 +26,7 @@ export default function TextDeduplicator() {
 
       {result && (
         <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
-          <textarea aria-label="Result" readOnly value={result} rows={8}
+          <textarea aria-label="Deduplicated text" readOnly value={result} rows={8}
             className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
           <div className="flex items-center justify-between mt-2">
             <span className="text-xs text-[var(--text-muted)]">{result.split('\n').length} unique lines ({inLines - result.split('\n').length} removed)</span>

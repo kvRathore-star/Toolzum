@@ -105,7 +105,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
                 </div>
               )}
             </div>
-            <textarea value={output} readOnly aria-label="Result" placeholder={`Minified ${cfg.label} code will appear here...`}
+            <textarea value={output} readOnly aria-label="Minified code" placeholder={`Minified ${cfg.label} code will appear here...`}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none" />
           </div>
           {stats && (

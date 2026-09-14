@@ -152,7 +152,7 @@ export function JsonTreeViewer() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
-        <textarea aria-label="Result" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
+        <textarea aria-label="JSON data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         {parsed && (
           <div>

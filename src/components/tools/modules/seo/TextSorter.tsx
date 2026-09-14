@@ -40,7 +40,7 @@ export default function TextSorter() {
 
         {sorted && (
           <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
-            <textarea readOnly value={sorted} rows={8} aria-label="Result"
+            <textarea readOnly value={sorted} rows={8} aria-label="Sorted text"
               className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
             <div className="flex items-center justify-between mt-2">
               <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>

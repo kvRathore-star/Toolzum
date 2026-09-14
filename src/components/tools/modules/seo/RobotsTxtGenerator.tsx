@@ -98,7 +98,7 @@ export default function RobotsTxtGenerator() {
             <textarea
               value={buildRobotsTxt()}
               readOnly
-              aria-label="Result"
+              aria-label="robots.txt output"
               className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"
             />
           </div>
