@@ -232,6 +232,7 @@ export default function InvoiceGenerator() {
                   </td>
                   <td className="py-3 px-2 text-right print-hide">
                     <button
+                      aria-label={item.description ? `Remove ${item.description}` : `Remove invoice item ${idx + 1}`}
                       onClick={() => handleRemoveItem(item.id)}
                       className="p-1.5 text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
                     >

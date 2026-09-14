@@ -39,7 +39,7 @@ export function Validator() {
       <div className="flex flex-wrap gap-1.5 mb-3">
         {formatPills.map(f => <button key={f} onClick={() => validate(f)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${format === f ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 border-amber-500/20'}`}>{f.toUpperCase()}</button>)}
       </div>
-      <Input label="Input" rows={6} value={input} onChange={v => { setInput(v); setResult(''); setIsValid(null); }} placeholder="Paste JSON, YAML, or XML..." />
+      <Input label="Text to validate" rows={6} value={input} onChange={v => { setInput(v); setResult(''); setIsValid(null); }} placeholder="Paste JSON, YAML, or XML..." />
       <button onClick={() => validate()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       {result && (
         <div className={`mt-4 p-4 rounded-xl text-sm font-medium border-l-4 ${isValid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>

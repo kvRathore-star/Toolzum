@@ -120,7 +120,7 @@ export default function BookmarkPdf() {
             {bm.title}
             <span className="text-[var(--text-muted)] ml-1.5 text-xs">p.{bm.page}</span>
           </span>
-          <button onClick={() => removeBookmark(bm.id)} className="opacity-0 group-hover:opacity-100 text-red-700 dark:text-red-400 hover:text-red-500 text-xs p-1">
+          <button aria-label={`Remove bookmark ${bm.title}`} onClick={() => removeBookmark(bm.id)} className="opacity-0 group-hover:opacity-100 text-red-700 dark:text-red-400 hover:text-red-500 text-xs p-1">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>

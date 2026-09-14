@@ -217,15 +217,15 @@ ${linkCards}
                 {links.map((l, i) => (
                   <div key={l.id} className="flex items-center gap-2 p-2 bg-white dark:bg-black/50 rounded-lg border border-[var(--border-subtle)]">
                     <div className="flex flex-col gap-0.5">
-                      <button onClick={() => moveLink(l.id, 'up')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
-                      <button onClick={() => moveLink(l.id, 'down')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
+                      <button aria-label={`Move ${l.title} up`} onClick={() => moveLink(l.id, 'up')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
+                      <button aria-label={`Move ${l.title} down`} onClick={() => moveLink(l.id, 'down')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
                     </div>
                     <span className="text-[var(--text-muted)]">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
                     <div className="flex-1 min-w-0">
                       <p className="text-[11px] font-medium text-[var(--text-primary)] truncate">{l.title}</p>
                       <p className="text-[9px] text-[var(--text-secondary)] truncate">{l.url}</p>
                     </div>
-                    <button onClick={() => removeLink(l.id)}
+                    <button aria-label={`Remove ${l.title}`} onClick={() => removeLink(l.id)}
                       className="p-1.5 bg-red-100 dark:bg-red-900/20 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors">
                       <Trash2 className="w-3 h-3 text-red-500" />
                     </button>

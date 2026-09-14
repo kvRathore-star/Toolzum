@@ -216,6 +216,7 @@ export default function RegionalFontGenerator() {
                     >
                       <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
+                          aria-label={isFav ? `Remove ${item.name} from favorites` : `Add ${item.name} to favorites`}
                           onClick={(e) => { e.stopPropagation(); toggleFavorite(item.id); }}
                           className={`p-1.5 rounded-lg transition-colors ${isFav ? 'text-rose-500 bg-rose-500/10' : 'text-[var(--text-muted)] hover:text-rose-700 dark:hover:text-rose-400 bg-[var(--bg-surface)]/80'}`}
                         >

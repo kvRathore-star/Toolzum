@@ -288,6 +288,7 @@ export default function PronunciationTool() {
               />
               {text && (
                 <button
+                  aria-label="Clear text"
                   type="button"
                   onClick={() => { setText(''); setDictionaryData(null); setError(''); }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] hover:text-zinc-600 cursor-pointer"

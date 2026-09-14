@@ -147,6 +147,7 @@ export default function ReverseVideo() {
                 type="button"
                 role="switch"
                 aria-checked={preservePitch}
+                aria-label="Preserve Audio Pitch"
                 onClick={() => setPreservePitch(!preservePitch)}
                 className={`relative w-11 h-6 rounded-full transition-colors ${
                   preservePitch ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'

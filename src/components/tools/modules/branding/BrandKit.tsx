@@ -98,13 +98,13 @@ export default function BrandKit() {
                    <div className="font-semibold text-sm truncate">{color.name || 'Unnamed'}</div>
                    <div className="text-xs text-[var(--text-secondary)] font-mono flex items-center justify-between">
                      {color.hex.toUpperCase()}
-                     <button onClick={() => copyToClipboard(color.hex)} className="hover:text-zinc-900 dark:hover:text-white">
+                     <button aria-label={`Copy ${color.hex}`} onClick={() => copyToClipboard(color.hex)} className="hover:text-zinc-900 dark:hover:text-white">
                        <Copy className="w-3 h-3" />
                      </button>
                    </div>
                  </div>
-                 <button 
-                   onClick={() => removeColor(idx)}
+<button aria-label={`Remove color ${color.hex}`} 
+                    onClick={() => removeColor(idx)}
                    className="absolute top-2 right-2 p-1.5 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500"
                  >
                    <Trash2 className="w-4 h-4" />
@@ -147,14 +147,14 @@ export default function BrandKit() {
              {fonts.map((font, idx) => (
                <div key={idx} className="flex items-center gap-3 px-4 py-3 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl group">
                  <div className="font-medium" style={{ fontFamily: font }}>{font}</div>
-                 <button 
-                   onClick={() => copyToClipboard(`font-family: '${font}';`)}
+<button aria-label={`Copy font ${font}`}
+                    onClick={() => copyToClipboard(`font-family: '${font}';`)}
                    className="text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white"
                  >
                    {copiedId === `font-family: '${font}';` ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                  </button>
-                 <button 
-                   onClick={() => removeFont(font)}
+<button aria-label={`Remove font ${font}`}
+                    onClick={() => removeFont(font)}
                    className="text-[var(--text-muted)] hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity ml-2"
                  >
                    <Trash2 className="w-4 h-4" />

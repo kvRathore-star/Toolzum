@@ -80,7 +80,7 @@ export const BatchProgressPanel = memo(function BatchProgressPanel({ files, prog
               )}
             </div>
             {!isProcessing && bf.status !== 'processing' && (
-              <button onClick={() => onRemove(bf.id)} className="shrink-0 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 transition-colors">
+              <button aria-label={`Remove ${bf.file.name}`} onClick={() => onRemove(bf.id)} className="shrink-0 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 transition-colors">
                 <X className="w-3.5 h-3.5" />
               </button>
             )}

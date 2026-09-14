@@ -247,6 +247,7 @@ export default function AccountPage() {
                         autoFocus
                       />
                       <button
+                        aria-label="Save name"
                         onClick={saveName}
                         disabled={savingName}
                         className="p-1.5 text-[var(--success)] hover:bg-[var(--success)]/10 rounded-md transition-colors"
@@ -254,6 +255,7 @@ export default function AccountPage() {
                         {savingName ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                       </button>
                       <button
+                        aria-label="Cancel name edit"
                         onClick={() => { setEditingName(false); setNameValue(user.name || ""); }}
                         className="p-1.5 text-[var(--text-muted)] hover:bg-[var(--bg-overlay)] rounded-md transition-colors"
                       >

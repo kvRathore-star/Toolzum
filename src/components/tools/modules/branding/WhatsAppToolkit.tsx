@@ -287,11 +287,11 @@ function BulkLinkTab() {
                   {item.message && <p className="text-[10px] text-[var(--text-secondary)] truncate">{item.message}</p>}
                 </div>
                 <div className="flex gap-1 shrink-0">
-                  <button onClick={() => window.open(generateLink(item), '_blank')}
+                  <button aria-label={`Open WhatsApp chat with ${item.phone}`} onClick={() => window.open(generateLink(item), '_blank')}
                     className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                     <MessageCircle className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
                   </button>
-                  <button onClick={() => handleCopy(i)}
+                  <button aria-label="Copy WhatsApp link" onClick={() => handleCopy(i)}
                     className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                     {copiedIndex === i ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-[var(--text-secondary)]" />}
                   </button>
@@ -516,15 +516,15 @@ function QuickRepliesTab() {
                     <p className="text-[11px] text-[var(--text-secondary)] mt-0.5 truncate">{t.content}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
-                    <button onClick={() => handleCopy(t.id, t.content)}
+                    <button aria-label={`Copy template ${t.title}`} onClick={() => handleCopy(t.id, t.content)}
                       className="p-1.5 bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 rounded-lg hover:bg-emerald-700/20 transition-colors">
                       {copiedId === t.id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
-                    <button onClick={() => setEditingId(t.id)}
+                    <button aria-label={`Edit template ${t.title}`} onClick={() => setEditingId(t.id)}
                       className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
-                    <button onClick={() => deleteTemplate(t.id)}
+                    <button aria-label={`Delete template ${t.title}`} onClick={() => deleteTemplate(t.id)}
                       className="p-1.5 bg-red-100 dark:bg-red-900/20 text-red-500 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors">
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

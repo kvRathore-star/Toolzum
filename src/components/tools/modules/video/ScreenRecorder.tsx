@@ -277,6 +277,7 @@ export default function ScreenRecorder() {
             <button
               role="switch"
               aria-checked={includeAudio}
+              aria-label="Include microphone audio"
               onClick={() => setIncludeAudio(!includeAudio)}
               className={`relative w-11 h-6 rounded-full transition-colors ${includeAudio ? 'bg-red-500' : 'bg-zinc-300 dark:bg-zinc-600'}`}
             >

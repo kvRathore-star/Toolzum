@@ -121,7 +121,7 @@ export default function ArchiveConverter() {
                     <span className="text-xs text-[var(--text-primary)] truncate">{file.name}</span>
                     <span className="text-[10px] text-[var(--text-muted)] shrink-0">({(file.size / 1024).toFixed(1)} KB)</span>
                   </div>
-                  <button onClick={() => removeFile(id)} className="text-[var(--text-muted)] hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2">
+                  <button aria-label={`Remove ${file.name}`} onClick={() => removeFile(id)} className="text-[var(--text-muted)] hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-2">
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>

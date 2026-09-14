@@ -244,6 +244,9 @@ export default function PdfDeskew() {
           <div className="flex items-center justify-between">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Auto-Detect</label>
             <button
+              role="switch"
+              aria-checked={useAutoDetect}
+              aria-label="Auto-Detect"
               onClick={() => {
                 setUseAutoDetect(!useAutoDetect);
                 if (!useAutoDetect) {
@@ -294,6 +297,9 @@ export default function PdfDeskew() {
           <div className="flex items-center justify-between">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Apply to All Pages</label>
             <button
+              role="switch"
+              aria-checked={applyToAll}
+              aria-label="Apply to All Pages"
               onClick={() => setApplyToAll(!applyToAll)}
               className={`relative w-10 h-5 rounded-full transition-colors ${applyToAll ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'}`}
             >

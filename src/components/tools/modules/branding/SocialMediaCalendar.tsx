@@ -248,19 +248,19 @@ export default function SocialMediaCalendar() {
                     <p className="text-xs text-[var(--text-primary)] mt-0.5 truncate">{p.content}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
-                    <button onClick={() => copyPost(p.content, p.id)}
+                    <button aria-label="Copy post" onClick={() => copyPost(p.content, p.id)}
                       className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       {copiedId === p.id ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3 text-[var(--text-secondary)]" />}
                     </button>
-                    <button onClick={() => duplicatePost(p)}
+                    <button aria-label="Duplicate post" onClick={() => duplicatePost(p)}
                       className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Copy className="w-3 h-3 text-[var(--text-secondary)]" />
                     </button>
-                    <button onClick={() => editPost(p)}
+                    <button aria-label="Edit post" onClick={() => editPost(p)}
                       className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Edit3 className="w-3 h-3 text-[var(--text-secondary)]" />
                     </button>
-                    <button onClick={() => deletePost(p.id)}
+                    <button aria-label="Delete post" onClick={() => deletePost(p.id)}
                       className="p-1.5 bg-red-100 dark:bg-red-900/20 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/30 transition-colors">
                       <Trash2 className="w-3 h-3 text-red-500" />
                     </button>

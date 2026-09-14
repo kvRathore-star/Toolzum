@@ -172,7 +172,7 @@ export default function SubtitleGenerator() {
                         }
                       }} className="w-[90px] bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 border-b border-dashed border-zinc-300 dark:border-zinc-700" />
                     </div>
-                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
+                    <button aria-label={entry.text ? `Remove subtitle ${entry.text}` : 'Remove subtitle entry'} onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                   <textarea aria-label="Subtitle text..."
                     ref={editingId === entry.id ? textInputRef : undefined}
@@ -223,7 +223,7 @@ export default function SubtitleGenerator() {
                   <div key={entry.id} className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] bg-[var(--bg-overlay)] rounded-lg px-3 py-1.5">
                     <span className="font-mono text-[9px] text-[var(--text-muted)] w-[150px]">{formatTime(entry.start)} → {formatTime(entry.end)}</span>
                     <span className="flex-1">{entry.text}</span>
-                    <button onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
+                    <button aria-label={entry.text ? `Remove subtitle ${entry.text}` : 'Remove subtitle entry'} onClick={() => removeEntry(entry.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400"><Trash2 className="w-3 h-3" /></button>
                   </div>
                 ))}
               </div>

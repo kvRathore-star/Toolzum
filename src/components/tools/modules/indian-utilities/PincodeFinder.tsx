@@ -173,7 +173,7 @@ export default function PincodeFinder() {
             <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1"><Clock className="w-3 h-3" style={{ color: accentColor }} /> Recent Searches</span>
-                <button onClick={() => { setSearchHistory([]); localStorage.removeItem('pincodeSearchHistory'); }} className="text-[10px] text-[var(--text-secondary)] hover:text-red-500 transition-colors"><X className="w-3 h-3" /></button>
+                <button aria-label="Clear search history" onClick={() => { setSearchHistory([]); localStorage.removeItem('pincodeSearchHistory'); }} className="text-[10px] text-[var(--text-secondary)] hover:text-red-500 transition-colors"><X className="w-3 h-3" /></button>
               </div>
               <div className="flex flex-wrap gap-1.5 mt-1">
                 {searchHistory.map((h, i) => (
@@ -238,7 +238,7 @@ export default function PincodeFinder() {
                     </div>
                     <div className="space-y-1 text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-2">
                       <span className="block">Pincode: <strong className="font-mono" style={{ color: accentColor }}>{office.Pincode}</strong>
-                        <button onClick={() => { clipboardWrite(office.Pincode); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                        <button aria-label={`Copy pincode ${office.Pincode}`} onClick={() => { clipboardWrite(office.Pincode); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </button>
                       </span>

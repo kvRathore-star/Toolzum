@@ -233,7 +233,7 @@ export default function ComparePdfFiles() {
           </h4>
 
           <div className="flex items-center justify-between">
-            <button 
+            <button aria-label="Previous page"
               disabled={currentPage === 0}
               onClick={() => setCurrentPage(p => p - 1)}
               className="p-2 bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] disabled:opacity-40 transition-colors cursor-pointer"
@@ -243,7 +243,7 @@ export default function ComparePdfFiles() {
             <span className="text-sm font-bold text-[var(--text-primary)]">
               Page {currentPage + 1} of {maxPages}
             </span>
-            <button 
+            <button aria-label="Next page"
               disabled={currentPage === maxPages - 1}
               onClick={() => setCurrentPage(p => p + 1)}
               className="p-2 bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] disabled:opacity-40 transition-colors cursor-pointer"

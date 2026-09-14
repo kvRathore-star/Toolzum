@@ -176,6 +176,7 @@ export default function ScanToPdf() {
                 <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1">{img.file.name}</span>
                 <div className="flex gap-1 shrink-0">
                   <button
+                    aria-label={`Move ${img.file.name} up`}
                     onClick={() => moveImage(idx, -1)}
                     disabled={idx === 0}
                     className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
@@ -183,6 +184,7 @@ export default function ScanToPdf() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                   </button>
                   <button
+                    aria-label={`Move ${img.file.name} down`}
                     onClick={() => moveImage(idx, 1)}
                     disabled={idx === images.length - 1}
                     className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
@@ -190,6 +192,7 @@ export default function ScanToPdf() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
                   <button
+                    aria-label={`Remove ${img.file.name}`}
                     onClick={() => removeImage(idx)}
                     className="p-1.5 rounded-lg bg-red-50 dark:bg-red-900/20 text-red-500 hover:text-red-700 dark:hover:text-red-400"
                   >

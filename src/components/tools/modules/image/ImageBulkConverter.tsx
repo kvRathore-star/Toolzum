@@ -114,7 +114,7 @@ export default function ImageBulkConverter() {
                 {files.map((f) => (
                   <li key={f.id} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] p-2 rounded-lg text-sm">
                     <span className="text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1 mr-2">{f.file.name}</span>
-                    <button onClick={() => removeFile(f.id)} className="text-red-700 dark:text-red-400 hover:text-red-300 p-1">
+                    <button aria-label={`Remove ${f.file.name}`} onClick={() => removeFile(f.id)} className="text-red-700 dark:text-red-400 hover:text-red-300 p-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                   </li>

@@ -341,6 +341,7 @@ Maharashtra 400050`}
                           <span className="text-sm font-medium text-[var(--text-primary)] break-words">{value || <span className="italic text-[var(--text-muted)]">Not found</span>}</span>
                         </div>
                         <button
+                          aria-label={`Copy ${field.label}`}
                           onClick={() => handleCopyField(value, field.label)}
                           className="opacity-0 group-hover:opacity-100 text-[var(--text-muted)] hover:text-amber-500 transition-all p-1 rounded hover:bg-amber-500/10"
                         >
@@ -372,6 +373,7 @@ Maharashtra 400050`}
                     </div>
                     {parsed.state && (
                       <button
+                        aria-label="Copy state"
                         onClick={() => handleCopyField(parsed.state, 'State')}
                         className="opacity-0 group-hover:opacity-100 text-[var(--text-muted)] hover:text-amber-500 transition-all p-1 rounded hover:bg-amber-500/10"
                       >
@@ -416,6 +418,7 @@ Maharashtra 400050`}
                     </div>
                     {parsed.pincode && (
                       <button
+                        aria-label="Copy pincode"
                         onClick={() => handleCopyField(parsed.pincode, 'Pincode')}
                         className="opacity-0 group-hover:opacity-100 text-[var(--text-muted)] hover:text-amber-500 transition-all p-1 rounded hover:bg-amber-500/10"
                       >

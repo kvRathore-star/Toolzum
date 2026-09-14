@@ -538,7 +538,7 @@ export function CssSpecificityCalculator() {
       )}
 
       <Result value={output} />
-      <CopyDownload content={output} filename="specificity.txt" label="Result" />
+      <CopyDownload content={output} filename="specificity.txt" label="Specificity result" />
     </div>
   );
 }

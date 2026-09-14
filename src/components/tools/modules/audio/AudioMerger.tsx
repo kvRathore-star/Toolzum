@@ -292,6 +292,7 @@ export default function AudioMerger() {
                   </div>
                   <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
+                      aria-label={`Move ${file!.name} up`}
                       onClick={() => moveUp(displayIdx)}
                       disabled={displayIdx === 0}
                       className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
@@ -299,6 +300,7 @@ export default function AudioMerger() {
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                     </button>
                     <button
+                      aria-label={`Move ${file!.name} down`}
                       onClick={() => moveDown(displayIdx)}
                       disabled={displayIdx === order.length - 1}
                       className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
@@ -306,6 +308,7 @@ export default function AudioMerger() {
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     <button
+                      aria-label={`Remove ${file!.name}`}
                       onClick={() => removeFile(displayIdx)}
                       className="p-1 text-red-700 dark:text-red-400 hover:text-red-600 transition-colors ml-1"
                     >

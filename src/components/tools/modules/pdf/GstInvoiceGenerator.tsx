@@ -344,7 +344,7 @@ export default function GstInvoiceGenerator() {
                       <td className="px-4 py-3 text-right">₹{item.price.toFixed(2)}</td>
                       <td className="px-4 py-3 text-center">{item.gstRate}%</td>
                       <td className="px-4 py-3 text-right text-[var(--text-primary)] font-medium">₹{(item.quantity * item.price).toFixed(2)}</td>
-                      <td className="px-4 py-3 text-center"><button onClick={() => removeLineItem(item.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold transition-colors"><Trash2 className="w-4 h-4 inline" /></button></td>
+                      <td className="px-4 py-3 text-center"><button aria-label={`Remove ${item.description}`} onClick={() => removeLineItem(item.id)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold transition-colors"><Trash2 className="w-4 h-4 inline" /></button></td>
                     </tr>
                   ))}
                 </tbody>

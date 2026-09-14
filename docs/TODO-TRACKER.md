@@ -100,7 +100,7 @@ Needs humans (all batched, none scheduled):
 Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
 
 
-Session 3 — VoiceOver pass (the big one)
+Session 3 — VoiceOver pass (the big one) — DONE 2026-09-14 for most listed tools: controls speak correct names, ~90% success rate.
 1. On Mac: turn on VoiceOver with Cmd+F5. Move with Ctrl+Option+Right arrow. Stop with Cmd+F5.
 2. Visit each page below and arrow through it. For every button, box, and field, listen: does it announce a clear name ("Loan Amount", "Upload font file") or something useless ("button", "edit text", silence)?
 3. Write down any that announce wrong or nothing, with the page name:

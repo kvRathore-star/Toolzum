@@ -296,7 +296,7 @@ export default function XmlSitemapGenerator() {
                     {exclusions.map((e, i) => (
                       <span key={i} className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--bg-surface)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">
                         {e.pattern}
-                        <button onClick={() => removeExclusion(i)} className="text-[var(--text-muted)] hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
+                        <button aria-label={`Remove exclusion ${e.pattern}`} onClick={() => removeExclusion(i)} className="text-[var(--text-muted)] hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
                       </span>
                     ))}
                   </div>
