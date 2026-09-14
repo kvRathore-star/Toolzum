@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
-import { createWorker } from 'tesseract.js';
+import { createWorker, type Worker, type LoggerMessage } from 'tesseract.js';
 import * as pdfjsLib from 'pdfjs-dist';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
@@ -32,22 +32,21 @@ export default function PdfOcr() {
     setProgress(0);
     setExtractedText('');
     
-    let worker: any = null;
+    let worker: Worker | null = null;
     
     try {
       setStatusText('Initializing OCR Engine...');
       if (isLowEndDevice()) {
         toast.loading('OCR engine is large — this may take a while on your device…', { id: 'ocr-engine-slow' });
       }
-      worker = await (createWorker as any)({
-        logger: (m: any) => {
+      worker = await createWorker(undefined, undefined, {
+        logger: (m: LoggerMessage) => {
           if (m.status === 'recognizing text') {
             setProgress(m.progress * 100);
           }
         }
       });
-      await worker.loadLanguage(language);
-      await worker.initialize(language);
+      await worker.reinitialize(language);
 
       let fullText = '';
       

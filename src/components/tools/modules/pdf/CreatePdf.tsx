@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb, type PDFFont } from 'pdf-lib';
 import { EmptyState } from '@/components/EmptyState';
 
 type InputMode = 'text' | 'csv' | 'json' | 'xml';
@@ -65,7 +65,7 @@ export default function CreatePdf() {
     reader.readAsText(f);
   };
 
-  const wrapText = (text: string, font: any, size: number, maxWidth: number): string[] => {
+  const wrapText = (text: string, font: PDFFont, size: number, maxWidth: number): string[] => {
     const lines: string[] = [];
     const words = text.split(' ');
     let line = '';

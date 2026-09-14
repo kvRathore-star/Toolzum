@@ -398,7 +398,7 @@ export default function AiThumbnailMaker() {
     isDragging.current = false;
   };
 
-  const handleTextPropertyChange = (key: keyof TextElement, value: any) => {
+  const handleTextPropertyChange = <K extends keyof TextElement>(key: K, value: TextElement[K]) => {
     setTexts(prev => prev.map(t => {
       if (t.id === selectedId) {
         return { ...t, [key]: value };
@@ -407,7 +407,7 @@ export default function AiThumbnailMaker() {
     }));
   };
 
-  const handleImagePropertyChange = (key: keyof ImageElement, value: any) => {
+  const handleImagePropertyChange = <K extends keyof ImageElement>(key: K, value: ImageElement[K]) => {
     setImages(prev => prev.map(img => {
       if (img.id === selectedId) {
         return { ...img, [key]: value };

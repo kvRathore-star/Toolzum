@@ -8,7 +8,7 @@ import { PDFDocument } from 'pdf-lib';
 import JSZip from 'jszip';
 import { EmptyState } from '@/components/EmptyState';
 
-let pdfjsLib: any = null;
+let pdfjsLib: typeof import('pdfjs-dist') | null = null;
 
 async function loadPdfjs() {
   if (!pdfjsLib) {

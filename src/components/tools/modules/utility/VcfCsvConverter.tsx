@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
+import type { VCardData } from 'vcard-parser';
 import { toast } from 'react-hot-toast';
 import * as VP from 'vcard-parser';
 
@@ -86,17 +87,17 @@ function generateVcf(contact: Record<string, string>, version: '3.0' | '4.0'): s
   return lines.join('\n');
 }
 
-function flattenVcard(vcard: any, selectedFields: string[]): Record<string, string> {
+function flattenVcard(vcard: VCardData, selectedFields: string[]): Record<string, string> {
   const record: Record<string, string> = {};
   for (const field of selectedFields) {
     const vals = vcard[field];
     if (Array.isArray(vals)) {
-      record[field] = vals.map((v: any) => {
+      record[field] = vals.map((v) => {
         if (typeof v === 'object' && v !== null) return v.value ?? '';
         return String(v);
       }).join('; ');
     } else if (vals !== undefined && vals !== null) {
-      record[field] = String(typeof vals === 'object' ? vals.value ?? vals : vals);
+      record[field] = typeof vals === 'object' ? (vals.value ?? String(vals)) : vals;
     } else {
       record[field] = '';
     }

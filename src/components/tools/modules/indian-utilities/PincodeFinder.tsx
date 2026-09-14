@@ -18,7 +18,7 @@ export default function PincodeFinder() {
   const [officeName, setOfficeName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [results, setResults] = useState<any[] | null>(null);
+  const [results, setResults] = useState<Array<Record<string, string>> | null>(null);
   const [showHistory, setShowHistory] = useState(false);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
@@ -51,7 +51,7 @@ export default function PincodeFinder() {
       try {
         const response = await fetch(`https://api.postalpincode.in/pincode/${cleanPincode}`);
         if (!response.ok) throw new Error('API server returned an error.');
-        const json = (await response.json()) as any;
+        const json = (await response.json()) as Array<{ Status?: string; Message?: string; PostOffice?: Array<Record<string, string>> }>;
         const postOffices = json[0]?.PostOffice;
         if (json[0]?.Status === 'Success' && postOffices) { setResults(postOffices); trackUsage(usage + 1); addToHistory(cleanPincode); toast.success(`Found ${postOffices.length} branches!`); }
         else setError(json[0]?.Message || 'No post offices found for this pincode.');
@@ -64,7 +64,7 @@ export default function PincodeFinder() {
       try {
         const response = await fetch(`https://api.postalpincode.in/postoffice/${encodeURIComponent(cleanName)}`);
         if (!response.ok) throw new Error('API server returned an error.');
-        const json = (await response.json()) as any;
+        const json = (await response.json()) as Array<{ Status?: string; Message?: string; PostOffice?: Array<Record<string, string>> }>;
         const postOffices = json[0]?.PostOffice;
         if (json[0]?.Status === 'Success' && postOffices) { setResults(postOffices); trackUsage(usage + 1); addToHistory(cleanName); toast.success(`Found ${postOffices.length} matching branches!`); }
         else setError(json[0]?.Message || 'No post offices found matching this name.');
@@ -225,7 +225,7 @@ export default function PincodeFinder() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
               <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Branches Found ({results.length})</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-1">
-                {results.map((office: any, idx: number) => (
+                {results.map((office, idx) => (
                   <motion.div key={idx} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.05 }}
                     className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] transition-all duration-200 flex flex-col justify-between gap-3 text-xs"
                     style={{ borderColor: idx === 0 ? accentColor + '30' : undefined }}>
@@ -237,8 +237,8 @@ export default function PincodeFinder() {
                       <span className="text-[var(--text-secondary)] block">Type: {office.BranchType}</span>
                     </div>
                     <div className="space-y-1 text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-2">
-                      <span className="block">Pincode: <strong className="font-mono" style={{ color: accentColor }}>{office.Pincode}</strong>
-                        <button aria-label={`Copy pincode ${office.Pincode}`} onClick={() => { clipboardWrite(office.Pincode); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                      <span className="block">Pincode: <strong className="font-mono" style={{ color: accentColor }}>{office.Pincode ?? '—'}</strong>
+                        <button aria-label={`Copy pincode ${office.Pincode ?? ''}`} onClick={() => { clipboardWrite(office.Pincode ?? ''); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </button>
                       </span>

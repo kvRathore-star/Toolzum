@@ -207,16 +207,23 @@ export function JsSyntaxChecker() {
       const declaredVars = new Set<string>();
       const usedVars = new Set<string>();
 
-      const walk = (node: any) => {
+      interface AstNode {
+        type?: string;
+        id?: { name?: string } | null;
+        name?: string;
+        [key: string]: unknown;
+      }
+      const walk = (node: unknown) => {
         if (!node || typeof node !== 'object') return;
-        if (node.type === 'VariableDeclarator' && node.id?.name) declaredVars.add(node.id.name);
-        if (node.type === 'FunctionDeclaration' && node.id?.name) declaredVars.add(node.id.name);
-        if (node.type === 'Identifier' && node.name && !['console', 'JSON', 'Math', 'Object', 'Array', 'String', 'Number', 'Boolean', 'Promise', 'Map', 'Set', 'Date', 'RegExp', 'Error', 'parseInt', 'parseFloat', 'undefined', 'NaN', 'Infinity', 'globalThis', 'window', 'document', 'process', 'require', 'module', 'exports'].includes(node.name)) {
-          usedVars.add(node.name);
+        const n = node as AstNode;
+        if (n.type === 'VariableDeclarator' && n.id?.name) declaredVars.add(n.id.name);
+        if (n.type === 'FunctionDeclaration' && n.id?.name) declaredVars.add(n.id.name);
+        if (n.type === 'Identifier' && n.name && !['console', 'JSON', 'Math', 'Object', 'Array', 'String', 'Number', 'Boolean', 'Promise', 'Map', 'Set', 'Date', 'RegExp', 'Error', 'parseInt', 'parseFloat', 'undefined', 'NaN', 'Infinity', 'globalThis', 'window', 'document', 'process', 'require', 'module', 'exports'].includes(n.name)) {
+          usedVars.add(n.name);
         }
-        for (const key of Object.keys(node)) {
+        for (const key of Object.keys(n)) {
           if (key === 'type' || key === 'loc') continue;
-          const val = node[key];
+          const val: unknown = n[key];
           if (Array.isArray(val)) val.forEach(walk);
           else if (val && typeof val === 'object') walk(val);
         }
@@ -244,12 +251,13 @@ export function JsSyntaxChecker() {
       }
       setIssues(found);
       toast.success(found.length === 0 ? 'No issues found' : `Found ${found.length} issue(s)`);
-    } catch (e: any) {
-      const lineMatch = e.message?.match(/line (\d+)/i) || e.message?.match(/:(\d+):/);
-      const line = lineMatch ? parseInt(lineMatch[1]) : 0;
-      const colMatch = e.message?.match(/column (\d+)/i);
-      const col = colMatch ? parseInt(colMatch[1]) : 0;
-      const msg = e.message || 'Unknown syntax error';
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : '';
+      const lineMatch = message.match(/line (\d+)/i) || message.match(/:(\d+):/);
+      const line = lineMatch ? parseInt(lineMatch[1]!) : 0;
+      const colMatch = message.match(/column (\d+)/i);
+      const col = colMatch ? parseInt(colMatch[1]!) : 0;
+      const msg = message || 'Unknown syntax error';
       found.push({ line, col, msg, severity: 'error', suggestion: 'Fix the syntax error at this position' });
       setResult(`✗ Syntax Error: ${msg}`);
       setIssues(found);

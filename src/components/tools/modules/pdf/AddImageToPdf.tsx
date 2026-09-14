@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { PDFDocument } from 'pdf-lib';
+import { PDFDocument, type PDFImage } from 'pdf-lib';
 
 export default function AddImageToPdf() {
   const [file, setFile] = useState<File | null>(null);
@@ -83,7 +83,7 @@ export default function AddImageToPdf() {
       const imageBytes = await imageFile.arrayBuffer();
       const pages = addToAllPages ? pdfDoc.getPages() : [pdfDoc.getPages()[pageNum - 1]!];
 
-      let embeddedImage: any;
+      let embeddedImage: PDFImage;
       if (imageType === 'png') {
         embeddedImage = await pdfDoc.embedPng(imageBytes);
       } else {

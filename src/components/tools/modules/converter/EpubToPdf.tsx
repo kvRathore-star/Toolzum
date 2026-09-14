@@ -5,7 +5,7 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import JSZip from 'jszip';
-import { PDFDocument, rgb } from 'pdf-lib';
+import { PDFDocument, type PDFPage, rgb } from 'pdf-lib';
 import DOMPurify from 'dompurify';
 
 const PAGE_SIZES = [
@@ -275,7 +275,7 @@ export default function EpubToPdf() {
         return p;
       };
 
-      const writeLine = (page: any, text: string, isBold = false) => {
+      const writeLine = (page: PDFPage, text: string, isBold = false) => {
         page.drawText(text, {
           x: marginPt,
           y: currentY,

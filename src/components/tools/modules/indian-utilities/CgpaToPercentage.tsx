@@ -86,7 +86,7 @@ export default function CgpaToPercentage() {
       else pct = cgpaVal * 9.0;
     }
     return { ...f, pct: Math.min(100, pct) };
-  }).filter(Boolean);
+  }).filter((r): r is NonNullable<typeof r> => r !== null);
 
   const circumference = 2 * Math.PI * 54;
   const progress = result ? (result.percentage / 100) * circumference : 0;
@@ -226,7 +226,7 @@ export default function CgpaToPercentage() {
                     <BarChart3 className="w-3 h-3" style={{ color: '#8b5cf6' }} /> All Boards Comparison
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    {allResults.map((r: any) => (
+                    {allResults.map((r) => (
                       <div key={r.id} className={`p-2 rounded-lg border text-center transition-all ${r.id === board ? 'border-transparent' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)]'}`}
                         style={r.id === board ? { borderColor: '#8b5cf6', backgroundColor: '#8b5cf610' } : {}}>
                         <span className="text-xs block mb-0.5">{r.logo}</span>

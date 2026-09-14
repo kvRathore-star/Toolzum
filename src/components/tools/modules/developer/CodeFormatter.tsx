@@ -15,10 +15,11 @@ function formatJson(code: string, indent = 2, sortKeys = false) {
   try {
     let parsed = JSON.parse(code);
     if (sortKeys && typeof parsed === 'object' && parsed !== null) {
-      const sortObj = (obj: any): any => {
+      type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
+      const sortObj = (obj: Json): Json => {
         if (Array.isArray(obj)) return obj.map(sortObj);
         if (typeof obj === 'object' && obj !== null) {
-          return Object.keys(obj).sort().reduce((acc: any, key) => { acc[key] = sortObj(obj[key]); return acc; }, {});
+          return Object.keys(obj).sort().reduce((acc: { [key: string]: Json }, key) => { acc[key] = sortObj(obj[key] as Json); return acc; }, {});
         }
         return obj;
       };
@@ -106,10 +107,11 @@ function validateCode(code: string, lang: string): string | null {
   if (!code.trim()) return null;
   if (lang === 'JSON') {
     try { JSON.parse(code); return null; }
-    catch (e: any) {
-      const match = e.message?.match(/position (\d+)/);
+    catch (e: unknown) {
+      const message = e instanceof Error ? e.message : '';
+      const match = message.match(/position (\d+)/);
       if (match) {
-        const pos = parseInt(match[1]);
+        const pos = parseInt(match[1]!);
         const upToPos = code.slice(0, pos);
         const line = upToPos.split('\n').length;
         const col = pos - upToPos.lastIndexOf('\n');

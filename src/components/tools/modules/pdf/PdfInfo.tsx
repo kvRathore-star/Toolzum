@@ -94,8 +94,7 @@ export default function PdfInfo() {
         const page = await pdfJsDoc.getPage(i);
         const content = await page.getTextContent();
         const pageText = content.items
-          .filter((item: any) => 'str' in item)
-          .map((item: any) => item.str)
+          .map((item) => ('str' in item ? item.str : ''))
           .join(' ');
         fullText += `--- Page ${i} ---\n${pageText}\n\n`;
       }

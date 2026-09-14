@@ -119,7 +119,7 @@ export default function LogoMaker() {
     }
   };
 
-  const drawIconPath = (ctx: CanvasRenderingContext2D, pathStr: string, size: number, fillStyle: any) => {
+  const drawIconPath = (ctx: CanvasRenderingContext2D, pathStr: string, size: number, fillStyle: string | CanvasGradient | CanvasPattern) => {
     ctx.scale(size / 24, size / 24); // SVG paths are standard 24x24px scale
     ctx.translate(-12, -12); // Center path translation
     

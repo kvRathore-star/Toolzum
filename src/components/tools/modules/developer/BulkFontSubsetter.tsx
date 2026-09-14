@@ -2,6 +2,17 @@
 import React from 'react';
 import { BulkToolShell } from '../utility/BulkToolShell';
 
+/** Minimal subset of opentype.js API surface (opentype.js has no TS declarations). */
+interface OpentypeFont {
+  charToGlyph(char: string): { index?: number } | null;
+  glyphs: { get(index: number): unknown };
+  names: { fontFamily?: { en?: string } };
+  unitsPerEm: number;
+  ascender: number;
+  descender: number;
+  toArrayBuffer(): ArrayBuffer;
+}
+
 export default function BulkFontSubsetter() {
   return (
     <BulkToolShell
@@ -13,7 +24,7 @@ export default function BulkFontSubsetter() {
         const chars = (config as Record<string, string>).chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,!?@#$%^&*()_+-=[]{}|;:\'"<>/`~ ';
         const arrayBuf = await file.arrayBuffer() as ArrayBuffer;
         // opentype.js has no types
-        const opentypeModule: any = await import('opentype.js');
+        const opentypeModule = await import('opentype.js') as { parse: (buf: ArrayBuffer) => OpentypeFont; Font: new (options: Record<string, unknown>) => OpentypeFont };
         const font = opentypeModule.parse(arrayBuf);
         const glyphs: unknown[] = [];
         const seen = new Set<number>();

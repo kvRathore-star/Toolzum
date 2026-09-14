@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
-const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: number | string; onChange: (v: any) => void; suffix?: string; small?: boolean }) => {
+const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: number | string; onChange: (v: number | string) => void; suffix?: string; small?: boolean }) => {
   const id = React.useId();
   return (
   <div className="flex items-center gap-1.5">

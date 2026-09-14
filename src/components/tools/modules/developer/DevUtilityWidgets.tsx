@@ -338,9 +338,9 @@ export function PricingTierBuilder() {
 
   const build = () => {
     try {
-      const parsed = JSON.parse(tiers);
+      const parsed: Array<{ name: string; price: number; users: number | typeof Infinity; features?: string[] }> = JSON.parse(tiers);
       let out = '';
-      parsed.forEach((t: any, i: number) => {
+      parsed.forEach((t, i) => {
         out += 'Tier ' + (i + 1) + ': ' + t.name + '\n  Price: ' + (t.price === 0 ? 'Free' : '$' + t.price + '/mo') + '\n  Users: ' + (t.users === Infinity ? 'Unlimited' : t.users) + '\n';
         if (t.features) out += '  Features: ' + (t.features as string[]).join(', ') + '\n';
         out += '\n';

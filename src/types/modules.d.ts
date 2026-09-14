@@ -18,7 +18,7 @@ declare module "ical" {
 }
 
 declare module "vcard-parser" {
-  interface VCardData {
+  export interface VCardData {
     fn?: string[];
     n?: string[];
     tel?: string[];
@@ -28,7 +28,7 @@ declare module "vcard-parser" {
     title?: string[];
     url?: string[];
     note?: string[];
-    [key: string]: any;
+    [key: string]: string | Array<string | { value?: string }> | { value?: string } | undefined;
   }
   export function parse(vcf: string): VCardData[];
 }

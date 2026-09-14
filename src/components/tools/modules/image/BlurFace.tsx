@@ -75,7 +75,7 @@ export default function BlurFace() {
         }
 
         ctx.filter = 'blur(15px)';
-        predictions.forEach((pred: any) => {
+        predictions.forEach((pred: { topLeft: number[]; bottomRight: number[] }) => {
           const [x, y] = pred.topLeft as [number, number];
           const [x2, y2] = pred.bottomRight as [number, number];
           const w = x2 - x;

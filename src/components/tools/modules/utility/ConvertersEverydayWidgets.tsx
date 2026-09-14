@@ -338,8 +338,8 @@ export function AvroToJsonSample() {
     try {
       const parsed = JSON.parse(schema);
       const fields = parsed.fields || [];
-      const sampleObj: Record<string, any> = { id: Date.now(), name: parsed.name || 'sample' };
-      fields.forEach((f: any) => {
+      const sampleObj: Record<string, string | number | boolean | null> = { id: Date.now(), name: parsed.name || 'sample' };
+      fields.forEach((f: { name: string; type: string }) => {
         if (f.name === 'id') sampleObj[f.name] = 1;
         else if (f.type === 'string') sampleObj[f.name] = 'example';
         else if (f.type === 'int' || f.type === 'long') sampleObj[f.name] = 42;

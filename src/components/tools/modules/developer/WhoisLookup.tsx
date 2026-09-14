@@ -7,7 +7,7 @@ import { downloadOrShare } from '@/utils/nativeShare';
 interface RDAPEntity {
   handle?: string;
   roles?: string[];
-  vcardArray?: any[];
+  vcardArray?: string[][];
   entities?: RDAPEntity[];
   events?: { eventAction: string; eventDate: string }[];
   remarks?: { title: string; description: string[] }[];
@@ -46,7 +46,7 @@ function parseRDAP(data: RDAPResponse, domain: string): WhoisResult {
     for (const e of entities) {
       if (e.roles?.includes('registrar') && e.vcardArray?.[1]) {
         for (const item of e.vcardArray[1]) {
-          if (item[0] === 'fn') { registrar = item[3]; return; }
+          if (item[0] === 'fn') { registrar = item[3] ?? ''; return; }
         }
       }
       if (e.entities) findRegistrar(e.entities);
@@ -65,19 +65,19 @@ function parseRDAP(data: RDAPResponse, domain: string): WhoisResult {
   };
 }
 
-function parseWhoisFreeAes(data: any, domain: string): WhoisResult {
-  const raw = data.raw || JSON.stringify(data, null, 2);
-  const registrar = data.registrar || data.Registrar || '';
-  const creation = data.creation_date || data.created || data['Creation Date'] || '';
-  const expiration = data.expiration_date || data.expires || data['Registry Expiry Date'] || '';
-  const nameservers = data.name_servers || data.nameservers || [];
-  const status = data.status || [];
+function parseWhoisFreeAes(data: Record<string, unknown>, domain: string): WhoisResult {
+  const raw = (data.raw as string) || JSON.stringify(data, null, 2);
+  const registrar = (data.registrar || data.Registrar || '') as string | string[];
+  const creation = (data.creation_date || data.created || data['Creation Date'] || '') as string | string[];
+  const expiration = (data.expiration_date || data.expires || data['Registry Expiry Date'] || '') as string | string[];
+  const nameservers = (data.name_servers || data.nameservers || []) as string | string[];
+  const status = (data.status || []) as string | string[];
 
   return {
     domain,
-    registrar: Array.isArray(registrar) ? registrar[0] : registrar || 'N/A',
-    creationDate: Array.isArray(creation) ? creation[0] : creation || 'N/A',
-    expirationDate: Array.isArray(expiration) ? expiration[0] : expiration || 'N/A',
+    registrar: Array.isArray(registrar) ? (registrar[0] ?? '') : registrar || 'N/A',
+    creationDate: Array.isArray(creation) ? (creation[0] ?? '') : creation || 'N/A',
+    expirationDate: Array.isArray(expiration) ? (expiration[0] ?? '') : expiration || 'N/A',
     nameServers: Array.isArray(nameservers) ? nameservers.slice(0, 10) : [],
     status: Array.isArray(status) ? status : typeof status === 'string' ? [status] : [],
     rawData: raw,
@@ -124,8 +124,8 @@ export default function WhoisLookup() {
       try {
         const fallbackRes = await fetch(`https://whois.freeaes.com/api/whois?domain=${target}`);
         if (!fallbackRes.ok) throw new Error('Fallback failed');
-        const data: any = await fallbackRes.json();
-        if (data.error || !data.raw) throw new Error(data.error || 'No data');
+        const data: Record<string, unknown> = await fallbackRes.json();
+        if (data.error || !data.raw) throw new Error((data.error as string) || 'No data');
         setResult(parseWhoisFreeAes(data, target));
         setHistory(prev => [target, ...prev.filter(h => h !== target)].slice(0, 5));
         toast.success('WHOIS data retrieved (via fallback)');

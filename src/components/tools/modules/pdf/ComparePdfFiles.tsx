@@ -45,7 +45,7 @@ export default function ComparePdfFiles() {
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
-      const textItems = textContent.items.map((item: any) => item.str);
+      const textItems = textContent.items.map((item) => 'str' in item ? item.str : '');
       // Join strings with spaces, maintaining simple line structures
       pagesText.push(textItems.join(' '));
     }

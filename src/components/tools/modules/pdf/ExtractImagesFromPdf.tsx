@@ -64,9 +64,9 @@ export default function ExtractImagesFromPdf() {
           const key = imgKeys[j]!;
           try {
             // Get image from page objects (this might be synchronous or asynchronous depending on pdfjs version)
-            const imgObj = await new Promise<any>((resolve, reject) => {
-              page.objs.get(key, (obj: any) => {
-                if (obj) resolve(obj);
+            const imgObj = await new Promise<{ width: number; height: number; data: Uint8ClampedArray }>((resolve, reject) => {
+              page.objs.get(key, (obj: unknown) => {
+                if (obj && typeof obj === 'object' && 'width' in obj && 'data' in obj) resolve(obj as { width: number; height: number; data: Uint8ClampedArray });
                 else reject(new Error("Image not found in page objects"));
               });
             });
@@ -84,13 +84,15 @@ export default function ExtractImagesFromPdf() {
                 imgData.data.set(imgObj.data);
               } else {
                 // Handle RGB to RGBA conversion
+                const src = imgObj.data;
+                const dst = imgData.data;
                 let srcIdx = 0;
                 let dstIdx = 0;
                 for (let p = 0; p < imgObj.width * imgObj.height; p++) {
-                  imgData.data[dstIdx] = imgObj.data[srcIdx];       // R
-                  imgData.data[dstIdx+1] = imgObj.data[srcIdx+1];   // G
-                  imgData.data[dstIdx+2] = imgObj.data[srcIdx+2];   // B
-                  imgData.data[dstIdx+3] = 255;                     // A
+                  dst[dstIdx] = src[srcIdx]!;       // R
+                  dst[dstIdx+1] = src[srcIdx+1]!;   // G
+                  dst[dstIdx+2] = src[srcIdx+2]!;   // B
+                  dst[dstIdx+3] = 255;               // A
                   srcIdx += 3;
                   dstIdx += 4;
                 }

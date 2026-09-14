@@ -13,8 +13,9 @@ export default function ApiPayloadAnalyzer() {
     try {
       const obj = JSON.parse(payload);
       const str = JSON.stringify(obj);
-      const depth = (o: any): number => typeof o === 'object' && o !== null ? 1 + Math.max(0, ...Object.values(o).map(v => depth(v))) : 0;
-      const countKeys = (o: any): number => typeof o === 'object' && o !== null ? Object.keys(o).length + Object.values(o).filter(v => typeof v === 'object' && v !== null).reduce((s: number, v: any) => s + countKeys(v), 0) : 0;
+      type Json = string | number | boolean | null | Json[] | { [key: string]: Json };
+      const depth = (o: Json): number => typeof o === 'object' && o !== null ? 1 + Math.max(0, ...Object.values(o).map(v => depth(v))) : 0;
+      const countKeys = (o: Json): number => typeof o === 'object' && o !== null ? Object.keys(o).length + Object.values(o).filter(v => typeof v === 'object' && v !== null).reduce((s: number, v) => s + countKeys(v), 0) : 0;
       setResult({
         size: str.length,
         keys: countKeys(obj),

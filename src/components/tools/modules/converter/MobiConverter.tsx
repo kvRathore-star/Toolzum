@@ -8,7 +8,7 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import JSZip from 'jszip';
 import { getErrorMessage } from '@/utils/error';
 
-let pdfjsLib: any = null;
+let pdfjsLib: typeof import('pdfjs-dist') | null = null;
 
 async function loadPdfjs() {
   if (!pdfjsLib) {
@@ -350,7 +350,7 @@ export default function MobiConverter() {
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
           const tc = await page.getTextContent();
-          text += tc.items.map((item: any) => item.str).join(' ') + '\n\n';
+          text += tc.items.map((item) => ('str' in item ? (item.str as string) : '')).join(' ') + '\n\n';
         }
         const title = selectedFile.name.replace(/\.pdf$/i, '');
         setMetadata({ title, author: '', size: buf.byteLength, encoding: 'utf-8', pageCount: pdf.numPages });

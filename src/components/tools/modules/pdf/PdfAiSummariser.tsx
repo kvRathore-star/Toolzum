@@ -58,7 +58,7 @@ export default function PdfAiSummariser() {
       for (let i = 1; i <= pagesToRead; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        const pageText = content.items.map((item: any) => item.str).join(' ');
+        const pageText = content.items.map((item) => 'str' in item ? item.str : '').join(' ');
         fullText += pageText + '\n';
       }
       setExtractedText(fullText);

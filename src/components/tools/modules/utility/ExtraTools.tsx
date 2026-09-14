@@ -574,7 +574,7 @@ export function PdfToTxt() {
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        fullText += content.items.map((item: any) => item.str).join(' ') + '\n\n';
+        fullText += content.items.map((item) => 'str' in item ? item.str : '').join(' ') + '\n\n';
       }
       setText(fullText.trim() || 'No text found in PDF');
     } catch (err) {

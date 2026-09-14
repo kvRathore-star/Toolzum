@@ -91,7 +91,7 @@ function AesTool({ defaultMode = 'encrypt' }: { defaultMode?: 'encrypt' | 'decry
 
     try {
       if (mode === 'encrypt') {
-        const options: any = {};
+        const options: Record<string, number> = {};
         if (algorithm === 'AES-256') {
           options.keySize = 256 / 32;
         } else {

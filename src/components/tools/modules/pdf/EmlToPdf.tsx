@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, rgb, StandardFonts, type PDFFont, type RGB } from 'pdf-lib';
 
 interface ParsedEmail {
   headers: Record<string, string>;
@@ -141,7 +141,7 @@ export default function EmlToPdf() {
       const fs = 10;
       const lh = 15;
 
-      const write = (text: string, x: number, y: number, font: any, size: number, color: any) => {
+      const write = (text: string, x: number, y: number, font: PDFFont, size: number, color: RGB) => {
         if (y < 50) {
           page = pdfDoc.addPage([pageWidth, pageHeight]);
           y = pageHeight - 50;

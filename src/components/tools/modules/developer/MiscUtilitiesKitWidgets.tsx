@@ -52,12 +52,12 @@ export function AwsIamPolicyAnalyzer() {
   const analyze = () => {
     try {
       const p = JSON.parse(policy);
-      const statements = p.Statement || [];
+      const statements: Array<{ Action: string | string[]; Resource: string | string[]; Effect?: string; Sid?: string; Condition?: unknown }> = p.Statement || [];
       const issues: string[] = [];
       let actions: string[] = [];
       let resources: string[] = [];
 
-      statements.forEach((s: any, i: number) => {
+      statements.forEach((s, i) => {
         const acts = Array.isArray(s.Action) ? s.Action : [s.Action];
         const ress = Array.isArray(s.Resource) ? s.Resource : [s.Resource];
         actions = [...actions, ...acts];

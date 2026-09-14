@@ -48,7 +48,7 @@ export default function PdfCleanup() {
     setPageCount(0);
   };
 
-  const isBlankPage = (textContent: any): boolean => {
+  const isBlankPage = (textContent: { items?: unknown[] }): boolean => {
     return !textContent.items || textContent.items.length === 0;
   };
 

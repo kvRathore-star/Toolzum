@@ -26,7 +26,7 @@ export interface CobaltOptions {
 }
 
 export async function fetchCobaltDownload(options: CobaltOptions): Promise<CobaltResponse> {
-  const fetchWithTimeout = async (url: string, body: any, timeout = 10000) => {
+  const fetchWithTimeout = async (url: string, body: unknown, timeout = 10000) => {
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(url, {

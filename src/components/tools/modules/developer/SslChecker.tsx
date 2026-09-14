@@ -30,11 +30,13 @@ interface SslResult {
   status: 'valid' | 'expiring' | 'expired';
 }
 
-function parseSSLCheckerResponse(data: any, domain: string): SslResult | null {
+function parseSSLCheckerResponse(data: Record<string, unknown>, domain: string): SslResult | null {
   if (!data || data.error) return null;
-  const info = data.certificate_info || data.cert || data;
-  const validTo = info.valid_to || info.validTill || info.validity?.to || '';
-  const validFrom = info.valid_from || info.validFrom || info.validity?.from || '';
+  const info = (data.certificate_info || data.cert || data) as Record<string, unknown>;
+  const validity = info.validity as Record<string, unknown> | undefined;
+  const extensions = info.extensions as Record<string, unknown> | undefined;
+  const validTo = (info.valid_to || info.validTill || validity?.to || '') as string;
+  const validFrom = (info.valid_from || info.validFrom || validity?.from || '') as string;
   const now = new Date();
   const end = new Date(validTo);
   const daysRemaining = Math.floor((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
@@ -42,16 +44,16 @@ function parseSSLCheckerResponse(data: any, domain: string): SslResult | null {
   if (daysRemaining < 0) status = 'expired';
   else if (daysRemaining < 30) status = 'expiring';
 
-  const sans = info.subject_alt_names || info.extensions?.subjectAltName || info.san || [];
+  const sans = (info.subject_alt_names || extensions?.subjectAltName || info.san || []) as string[] | string;
   const chain: ChainCert[] = [];
   if (data.certificate_chain || data.chain) {
-    const raw = data.certificate_chain || data.chain || [];
+    const raw = (data.certificate_chain || data.chain || []) as Record<string, unknown>[];
     for (const c of raw) {
       chain.push({
-        subject: c.subject || c.Subject || '',
-        issuer: c.issuer || c.Issuer || '',
-        validFrom: c.valid_from || c.validFrom || c.ValidFrom || '',
-        validTo: c.valid_to || c.validTo || c.ValidTo || '',
+        subject: (c.subject || c.Subject || '') as string,
+        issuer: (c.issuer || c.Issuer || '') as string,
+        validFrom: (c.valid_from || c.validFrom || c.ValidFrom || '') as string,
+        validTo: (c.valid_to || c.validTo || c.ValidTo || '') as string,
       });
     }
   }
@@ -59,26 +61,26 @@ function parseSSLCheckerResponse(data: any, domain: string): SslResult | null {
   return {
     domain,
     cert: {
-      issuer: info.issuer || info.Issuer || 'N/A',
-      subject: info.subject || info.Subject || 'N/A',
+      issuer: (info.issuer || info.Issuer || 'N/A') as string,
+      subject: (info.subject || info.Subject || 'N/A') as string,
       validFrom,
       validTo,
       daysRemaining,
       sans: Array.isArray(sans) ? sans : typeof sans === 'string' ? sans.split(/,\s*/) : [],
-      protocolVersion: info.protocol_version || info.version || 'N/A',
-      serialNumber: info.serial_number || info.serialNumber,
-      fingerprint: info.fingerprint,
+      protocolVersion: (info.protocol_version || info.version || 'N/A') as string,
+      serialNumber: (info.serial_number || info.serialNumber) as string | undefined,
+      fingerprint: info.fingerprint as string | undefined,
     },
     chain,
     status,
   };
 }
 
-function parseCrtShResponse(data: any[], domain: string): SslResult | null {
+function parseCrtShResponse(data: Record<string, unknown>[], domain: string): SslResult | null {
   if (!data || data.length === 0) return null;
-  const entry = data[0];
-  const validTo = entry.not_after || '';
-  const validFrom = entry.not_before || '';
+  const entry = data[0] as Record<string, unknown>;
+  const validTo = (entry.not_after || '') as string;
+  const validFrom = (entry.not_before || '') as string;
   const now = new Date();
   const end = new Date(validTo);
   const daysRemaining = Math.floor((end.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
@@ -89,14 +91,14 @@ function parseCrtShResponse(data: any[], domain: string): SslResult | null {
   return {
     domain,
     cert: {
-      issuer: entry.issuer_name || 'N/A',
-      subject: entry.subject_name || 'N/A',
+      issuer: (entry.issuer_name || 'N/A') as string,
+      subject: (entry.subject_name || 'N/A') as string,
       validFrom: validFrom,
       validTo: validTo,
       daysRemaining,
-      sans: entry.name_value ? entry.name_value.split(/\n+/) : [],
+      sans: entry.name_value ? (entry.name_value as string).split(/\n+/) : [],
       protocolVersion: 'N/A',
-      serialNumber: entry.serial_number,
+      serialNumber: entry.serial_number as string | undefined,
     },
     chain: [],
     status,
@@ -140,7 +142,7 @@ export default function SslChecker() {
     try {
       const res = await fetch(`https://ssl-checker.io/api/v1/check?domain=${target}`, { signal: controller.signal });
       if (!res.ok) throw new Error('SSL Checker API failed');
-      const data = await res.json();
+      const data = (await res.json()) as Record<string, unknown>;
       const parsed = parseSSLCheckerResponse(data, target);
       if (!parsed) throw new Error('Invalid response');
       setResult(parsed);
@@ -153,7 +155,7 @@ export default function SslChecker() {
       try {
         const crtRes = await fetch(`https://crt.sh/?q=${target}&output=json`, { signal: controller.signal });
         if (!crtRes.ok) throw new Error('crt.sh failed');
-        const crtData: any = await crtRes.json();
+        const crtData: Record<string, unknown>[] = await crtRes.json();
         const parsed = parseCrtShResponse(crtData, target);
         if (!parsed) throw new Error('No certificate data found');
         setResult(parsed);

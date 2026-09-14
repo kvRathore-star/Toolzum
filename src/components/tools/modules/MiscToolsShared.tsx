@@ -12,7 +12,7 @@ export function Section({ title, children }: { title: string; children: React.Re
 }
 
 export function Input({ label, value, onChange, placeholder, type = "text", rows, min, max, step }: {
-  label: string; value: string | number; onChange: (v: any) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string;
+  label: string; value: string | number; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string;
 }) {
   const id = React.useId();
   const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";

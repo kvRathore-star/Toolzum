@@ -67,24 +67,26 @@ export function JsonPathQueryBuilder() {
   const [path, setPath] = useState('$.users[*].name');
   const [result, setResult] = useState('');
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- recursive JSON traversal requires any
   const query = () => {
     try {
       const parsed = JSON.parse(json);
       const parts = path.replace(/^\$\.?/, '').split(/\.|\[/).filter(Boolean);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let current: any = parsed;
       for (const part of parts) {
         const clean = part.replace(/\]$/, '').replace(/'/g, '"');
         if (clean.includes('*')) {
           if (Array.isArray(current)) {
             const key = clean.replace('*', '');
-            current = current.map((item: any) => key ? item[key] : item).flat();
-          } else if (typeof current === 'object') {
-            current = Object.values(current);
+            current = current.map((item: any) => key && typeof item === 'object' && item !== null ? (item as Record<string, any>)[key] ?? item : item).flat();
+          } else if (typeof current === 'object' && current !== null) {
+            current = Object.values(current as Record<string, any>);
           }
         } else if (clean.match(/^\d+$/)) {
-          current = current[parseInt(clean)];
+          current = Array.isArray(current) ? current[parseInt(clean)] ?? null : null;
         } else {
-          current = current[clean];
+          current = typeof current === 'object' && current !== null ? (current as Record<string, any>)[clean] ?? null : null;
         }
       }
       setResult(JSON.stringify(current, null, 2));
@@ -124,6 +126,8 @@ export function JsonPathQueryBuilder() {
 export function JsonTreeViewer() {
   const [json, setJson] = useState('{"name":"John","age":30,"address":{"city":"NYC","zip":"10001"},"hobbies":["reading","coding"]}');
 
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- recursive JSON traversal requires any
   const renderTree = (data: any, depth = 0): string => {
     const indent = '  '.repeat(depth);
     if (data === null) return `${indent}null`;

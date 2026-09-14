@@ -9,6 +9,9 @@ export type TransformDef = {
   convert: (input: string) => string;
 };
 
+/** Recursive JSON value: replaces `any` for parsed JSON structures. */
+type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
 const CSS_TO_SCSS = (i: string) => i;
 
 const SCSS_TO_CSS = (i: string) =>
@@ -110,7 +113,7 @@ const YAML_TO_JSON = (i: string) => {
 const JSON_TO_YAML = (i: string) => {
   try {
     const o = JSON.parse(i);
-    const fmt = (obj: Record<string, any>, prefix = ''): string =>
+    const fmt = (obj: Record<string, JsonValue>, prefix = ''): string =>
       Object.entries(obj).map(([k, v]) => {
         if (typeof v === 'object' && v !== null && !Array.isArray(v))
           return `${prefix}${k}:\n${fmt(v, prefix + '  ')}`;
@@ -123,12 +126,15 @@ const JSON_TO_YAML = (i: string) => {
 
 const INI_TO_JSON = (i: string) => {
   try {
-    const o: Record<string, any> = {}; let s = '';
+    const o: Record<string, string | Record<string, string>> = {}; let s = '';
     i.split('\n').forEach(l => {
       const sec = l.match(/^\[(\w+)\]/);
       if (sec) { s = sec[1]!; o[s] = {}; return; }
       const m = l.match(/^(\w+)\s*=\s*(.*)/);
-      if (m) { if (s) o[s][m[1]!] = m[2]; else o[m[1]!] = m[2]; }
+      if (m) {
+        if (s) (o[s] as Record<string, string>)[m[1]!] = m[2]!;
+        else o[m[1]!] = m[2]!;
+      }
     });
     return JSON.stringify(o, null, 2);
   } catch { return 'Invalid INI'; }
@@ -136,17 +142,17 @@ const INI_TO_JSON = (i: string) => {
 
 const TOML_TO_JSON = (i: string) => {
   try {
-    const o: Record<string, any> = {}; let s = '';
+    const o: Record<string, string | number | boolean | Record<string, string | number | boolean>> = {}; let s = '';
     i.split('\n').forEach(l => {
       const sec = l.match(/^\[(\w+)\]/);
       if (sec) { s = sec[1]!; o[s] = {}; return; }
       const m = l.match(/^(\w+)\s*=\s*(.*)/);
       if (m) {
-        let v: any = m[2]!.replace(/^['"]|['"]$/g, '');
+        let v: string | number | boolean = m[2]!.replace(/^['"]|['"]$/g, '');
         if (!isNaN(Number(v))) v = Number(v);
         else if (v === 'true') v = true;
         else if (v === 'false') v = false;
-        if (s) o[s][m[1]!] = v; else o[m[1]!] = v;
+        if (s) (o[s] as Record<string, string | number | boolean>)[m[1]!] = v; else o[m[1]!] = v;
       }
     });
     return JSON.stringify(o, null, 2);
@@ -157,7 +163,7 @@ const JSON_TO_TOML = (i: string) => {
   try {
     const o = JSON.parse(i);
     const out: string[] = [];
-    const fmt = (v: any): string => {
+    const fmt = (v: unknown): string => {
       if (typeof v === 'string') return `"${v}"`;
       if (typeof v === 'boolean') return v ? 'true' : 'false';
       return String(v);
@@ -165,7 +171,7 @@ const JSON_TO_TOML = (i: string) => {
     for (const [k, v] of Object.entries(o)) {
       if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
         out.push(`[${k}]`);
-        for (const [sk, sv] of Object.entries(v as Record<string, any>))
+        for (const [sk, sv] of Object.entries(v as Record<string, unknown>))
           out.push(`${sk} = ${fmt(sv)}`);
       } else {
         out.push(`${k} = ${fmt(v)}`);
@@ -182,7 +188,7 @@ const JSON_TO_INI = (i: string) => {
     for (const [k, v] of Object.entries(o)) {
       if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
         out.push(`[${k}]`);
-        for (const [sk, sv] of Object.entries(v as Record<string, any>))
+        for (const [sk, sv] of Object.entries(v as Record<string, unknown>))
           out.push(`${sk}=${sv}`);
       } else {
         out.push(`${k}=${v}`);

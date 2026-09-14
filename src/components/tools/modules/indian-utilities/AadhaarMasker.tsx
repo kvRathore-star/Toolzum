@@ -6,7 +6,7 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { Eye, EyeOff, ShieldCheck, RotateCcw, Undo2, Download } from 'lucide-react';
 
-let pdfjsLib: any = null;
+let pdfjsLib: typeof import('pdfjs-dist') | null = null;
 
 async function loadPdfjs() {
   if (!pdfjsLib) {

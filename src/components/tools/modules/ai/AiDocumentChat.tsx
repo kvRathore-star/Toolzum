@@ -33,7 +33,7 @@ export default function AiDocumentChat() {
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
-        text += content.items.map((item: any) => item.str).join(' ') + '\n';
+        text += content.items.map((item) => 'str' in item ? item.str : '').join(' ') + '\n';
       }
       return text.slice(0, 15000);
     } else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {

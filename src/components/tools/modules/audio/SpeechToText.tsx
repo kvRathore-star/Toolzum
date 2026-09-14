@@ -4,6 +4,24 @@ import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
+/** Minimal Web Speech API surface used here (absent from TS lib.dom). */
+interface SpeechAlternative {
+  readonly transcript: string;
+}
+interface SpeechResult extends Array<SpeechAlternative> {
+  readonly isFinal: boolean;
+}
+interface SpeechRecognitionInstance {
+  continuous: boolean;
+  interimResults: boolean;
+  lang: string;
+  onresult: ((event: { resultIndex: number; results: ArrayLike<SpeechResult> }) => void) | null;
+  onerror: ((event: { error: string }) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+}
+
 export default function SpeechToText() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcript, setTranscript] = useState('');
@@ -11,7 +29,7 @@ export default function SpeechToText() {
   const [isSupported, setIsSupported] = useState(true);
   const [language, setLanguage] = useState('en-US');
   
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognitionInstance | null>(null);
 
   useEffect(() => {
     // Check for browser support
@@ -23,18 +41,18 @@ export default function SpeechToText() {
       return;
     }
 
-    const recognition = new SpeechRecognition();
+    const recognition: SpeechRecognitionInstance = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = language;
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event) => {
       let currentTranscript = '';
       let currentInterim = '';
 
       for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcriptSegment = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
+        const transcriptSegment = event.results[i]![0]!.transcript;
+        if (event.results[i]!.isFinal) {
           currentTranscript += transcriptSegment;
         } else {
           currentInterim += transcriptSegment;
@@ -47,7 +65,7 @@ export default function SpeechToText() {
       setInterimTranscript(currentInterim);
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event) => {
       console.error(event.error);
       if (event.error === 'not-allowed') {
         toast.error('Microphone access denied.');

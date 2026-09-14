@@ -14,7 +14,8 @@ export default function MockApiResponseGenerator() {
     { label: 'Blog Posts', schema: '{\n  "posts": [\n    { "id": "number", "title": "string", "slug": "string", "content": "string", "publishedAt": "date" }\n  ],\n  "meta": { "total": "number", "page": "number" }\n}' },
   ];
 
-  const generate = (type: string): any => {
+  type MockValue = string | number | boolean | MockValue[] | { [key: string]: MockValue };
+  const generate = (type: string): MockValue => {
     if (type === 'number') return Math.floor(Math.random() * 1000);
     if (type === 'string') return Math.random().toString(36).substring(2, 10);
     if (type === 'boolean') return Math.random() > 0.5;
@@ -26,12 +27,12 @@ export default function MockApiResponseGenerator() {
   const calc = () => {
     try {
       const template = JSON.parse(schema);
-      const generateFromTemplate = (obj: any): any => {
+      const generateFromTemplate = (obj: MockValue): MockValue => {
         if (Array.isArray(obj)) {
-          return Array.from({ length: count }, () => obj[0] ? generateFromTemplate(obj[0]) : {});
+          return Array.from({ length: count }, () => obj[0] ? generateFromTemplate(obj[0] as MockValue) : {});
         }
         if (typeof obj === 'object' && obj !== null) {
-          const result: any = {};
+          const result: { [key: string]: MockValue } = {};
           for (const [key, value] of Object.entries(obj)) {
             if (typeof value === 'string') {
               result[key] = generate(value);
