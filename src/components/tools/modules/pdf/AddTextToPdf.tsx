@@ -212,13 +212,13 @@ export default function AddTextToPdf() {
               ))}
             </div>
             <div className="flex items-center gap-3">
-              <input aria-label="Color"
+              <input aria-label="Text color"
                 type="color"
                 value={customColor}
                 onChange={(e) => { setCustomColor(e.target.value); setColor(e.target.value); }}
                 className="w-10 h-10 p-0.5 rounded-lg cursor-pointer border border-[var(--border-subtle)] bg-transparent"
               />
-              <input aria-label="Color"
+              <input aria-label="Text color hex value"
                 type="text"
                 value={customColor}
                 onChange={(e) => { setCustomColor(e.target.value); setColor(e.target.value); }}

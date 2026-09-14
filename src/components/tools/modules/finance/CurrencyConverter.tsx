@@ -189,7 +189,7 @@ export default function CurrencyConverter() {
                 type="button" 
                 onClick={handleSwap} 
                 className="p-3 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full hover:bg-zinc-200 dark:hover:bg-[var(--bg-elevated)] transition-all text-zinc-600 dark:text-zinc-300 shadow-md active:scale-95"
-                aria-label="Swap"
+                aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-5 h-5" />
               </button>
@@ -224,7 +224,7 @@ export default function CurrencyConverter() {
                 type="button" 
                 onClick={handleSwap} 
                 className="p-3 bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-surface)] transition-all text-zinc-600 dark:text-zinc-300 shadow-sm hover:shadow-md cursor-pointer active:scale-95"
-                title="Swap Currencies" aria-label="Swap"
+                title="Swap Currencies" aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-4 h-4 rotate-90" />
               </button>
