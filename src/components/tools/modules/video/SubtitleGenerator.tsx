@@ -32,6 +32,16 @@ function toSrt(entries: SubtitleEntry[]): string {
   ).join('\n');
 }
 
+function formatTimeVtt(seconds: number): string {
+  return formatTime(seconds).replace(',', '.');
+}
+
+function toVtt(entries: SubtitleEntry[]): string {
+  return 'WEBVTT\n\n' + entries.map((e) =>
+    `${formatTimeVtt(e.start)} --> ${formatTimeVtt(e.end)}\n${e.text}\n`
+  ).join('\n');
+}
+
 export default function SubtitleGenerator() {
   const [file, setFile] = useState<File | null>(null);
   const [entries, setEntries] = useState<SubtitleEntry[]>([]);
@@ -73,6 +83,10 @@ export default function SubtitleGenerator() {
     setEntries(prev => prev.map(e => e.id === id ? { ...e, [field]: value } : e));
   };
 
+  const shiftAll = (delta: number) => {
+    setEntries(prev => prev.map(e => ({ ...e, start: Math.max(0, Math.round((e.start + delta) * 100) / 100), end: Math.max(0, Math.round((e.end + delta) * 100) / 100) })));
+  };
+
   const downloadSrt = () => {
     if (entries.length === 0) return toast.error('No subtitles to export');
     const srt = toSrt(entries);
@@ -81,11 +95,19 @@ export default function SubtitleGenerator() {
     downloadOrShare(url, file ? `${file.name.split('.')[0]}.srt` : 'subtitles.srt');
   };
 
+  const downloadVtt = () => {
+    if (entries.length === 0) return toast.error('No subtitles to export');
+    const vtt = toVtt(entries);
+    const blob = new Blob([vtt], { type: 'text/vtt' });
+    const url = URL.createObjectURL(blob);
+    downloadOrShare(url, file ? `${file.name.split('.')[0]}.vtt` : 'subtitles.vtt');
+  };
+
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
-          <strong>Browser-Only:</strong> Create SRT subtitles by adding timed text entries while previewing your media. Everything runs locally.
+          <strong>Manual subtitle editor (browser-only):</strong> Create subtitles by adding timed text entries while previewing your media, or dictate them live with your microphone. There is no automatic transcription of the uploaded file&apos;s audio — everything runs locally.
         </div>
         <FileUploader
           accept="video/*,audio/*"
@@ -143,9 +165,16 @@ export default function SubtitleGenerator() {
             <div className="flex justify-between items-center mb-3">
               <h4 className="text-sm font-bold text-[var(--text-primary)]">Subtitles ({entries.length})</h4>
               {entries.length > 0 && (
-                <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
-                  <Download className="w-3 h-3" /> SRT
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <button onClick={() => shiftAll(-0.5)} title="Shift all subtitles back 0.5s" aria-label="Shift all subtitles back 0.5 seconds" className="text-xs bg-[var(--bg-surface)] px-2 py-1.5 rounded-lg transition-colors">−0.5s</button>
+                  <button onClick={() => shiftAll(0.5)} title="Shift all subtitles forward 0.5s" aria-label="Shift all subtitles forward 0.5 seconds" className="text-xs bg-[var(--bg-surface)] px-2 py-1.5 rounded-lg transition-colors">+0.5s</button>
+                  <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                    <Download className="w-3 h-3" /> SRT
+                  </button>
+                  <button onClick={downloadVtt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                    <Download className="w-3 h-3" /> VTT
+                  </button>
+                </div>
               )}
             </div>
             <div className="flex-1 space-y-2 overflow-y-auto max-h-[400px] pr-1">
@@ -214,9 +243,14 @@ export default function SubtitleGenerator() {
             <div className="pt-3 border-t border-[var(--border-subtle)]">
               <div className="flex justify-between items-center mb-2">
                 <span className="text-xs font-bold text-[var(--text-primary)]">{entries.length} entries</span>
-                <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
-                  <Download className="w-3 h-3" /> Download SRT
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <button onClick={downloadSrt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                    <Download className="w-3 h-3" /> Download SRT
+                  </button>
+                  <button onClick={downloadVtt} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors">
+                    <Download className="w-3 h-3" /> Download VTT
+                  </button>
+                </div>
               </div>
               <div className="space-y-1 max-h-[200px] overflow-y-auto">
                 {entries.map((entry) => (

@@ -9,8 +9,14 @@ export function StudyTimeCalculator() {
   const [result, setResult] = useState('');
 
   const calc = () => {
-    const total = parseFloat(hrs) * parseInt(days);
-    setResult(`Total: ${total} hours over ${days} days\nDaily: ${parseFloat(hrs).toFixed(1)}h/day\n~${Math.round(total / 30)} months at this pace`);
+    const h = parseFloat(hrs);
+    const d = parseInt(days);
+    if (!Number.isFinite(h) || !Number.isFinite(d) || h <= 0 || d <= 0) {
+      setResult('Enter positive hours and days.');
+      return;
+    }
+    const total = h * d;
+    setResult(`Total: ${total} hours over ${d} days\nDaily: ${h.toFixed(1)}h/day\n~${Math.round(total / 30)} months at this pace`);
   };
 
   return (
@@ -42,9 +48,19 @@ export function TestScoreCalculator() {
   const [result, setResult] = useState('');
 
   const calc = () => {
-    const pct = (parseInt(correct) / parseInt(total)) * 100;
+    const c = parseInt(correct);
+    const t = parseInt(total);
+    if (!Number.isFinite(c) || !Number.isFinite(t) || t <= 0 || c < 0) {
+      setResult('Enter valid numbers — total questions must be above zero.');
+      return;
+    }
+    if (c > t) {
+      setResult('Correct answers cannot exceed total questions.');
+      return;
+    }
+    const pct = (c / t) * 100;
     const grade = pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : pct >= 60 ? 'D' : 'F';
-    setResult(`Score: ${correct}/${total} = ${pct.toFixed(1)}%\nGrade: ${grade}`);
+    setResult(`Score: ${c}/${t} = ${pct.toFixed(1)}%\nGrade: ${grade}`);
   };
 
   return (

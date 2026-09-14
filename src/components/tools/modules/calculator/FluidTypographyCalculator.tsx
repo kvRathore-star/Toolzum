@@ -11,7 +11,6 @@ export default function FluidTypographyCalculator() {
   const [minSize, setMinSize] = useState('');
   const [maxSize, setMaxSize] = useState('');
   const [result, setResult] = useState<Array<{size: string; value: number}>>([]);
-  const [fontSizes, setFontSizes] = useState<Array<{level: number; cls: string}>>([]);
   const calc = useCallback(() => {
     const b = parseFloat(base) || 16;
     const mn = parseFloat(minVw) || 320;
@@ -31,16 +30,19 @@ export default function FluidTypographyCalculator() {
       return { size: l <= 0 ? `h${Math.abs(l) + 6}` : `h${6 - l}`, value: desktop, level: l };
     });
     setResult(sizes);
-    setFontSizes([]);
   }, [base, minVw, maxVw, scale, minSize, maxSize]);
-  const b2 = parseFloat(base) || 16;
-  const mn2 = parseFloat(minVw) || 320;
-  const mx2 = parseFloat(maxVw) || 1440;
-  const minSz = parseFloat(minSize) || b2 * 0.75;
-  const maxSz = parseFloat(maxSize) || b2 * 1.2;
-  const slope2 = ((maxSz - minSz) / (mx2 - mn2) * 100).toFixed(4);
-  const intercept2 = (minSz - mn2 * (maxSz - minSz) / (mx2 - mn2)).toFixed(2);
-  const cssClamp = `font-size: clamp(${minSz.toFixed(1)}px, ${slope2}vw + ${intercept2}px, ${maxSz.toFixed(1)}px);`;
+  const hasInput = result.length > 0;
+  let cssClamp = '';
+  if (hasInput) {
+    const b2 = parseFloat(base) || 16;
+    const mn2 = parseFloat(minVw) || 320;
+    const mx2 = parseFloat(maxVw) || 1440;
+    const minSz = parseFloat(minSize) || b2 * 0.75;
+    const maxSz = parseFloat(maxSize) || b2 * 1.2;
+    const slope2 = ((maxSz - minSz) / (mx2 - mn2) * 100).toFixed(4);
+    const intercept2 = (minSz - mn2 * (maxSz - minSz) / (mx2 - mn2)).toFixed(2);
+    cssClamp = `font-size: clamp(${minSz.toFixed(1)}px, ${slope2}vw + ${intercept2}px, ${maxSz.toFixed(1)}px);`;
+  }
   return (
     <Section title="Fluid Typography">
       <div className="max-w-xl">
@@ -57,7 +59,7 @@ export default function FluidTypographyCalculator() {
           <div className="mt-6">
             <div className="text-sm font-bold text-[var(--text-primary)] mb-3">Type Scale</div>
             <div className="grid gap-3">
-              {result.reverse().map((r, i) => {
+              {[...result].reverse().map((r, i) => {
                 const baseRatio = r.value / (parseFloat(base) || 16);
                 const bg = baseRatio >= 2 ? 'bg-purple-500/10 border border-purple-500/20' : baseRatio >= 1.5 ? 'bg-blue-500/10' : baseRatio <= 0.7 ? 'bg-rose-500/10' : 'bg-[var(--bg-overlay)]';
                 return (

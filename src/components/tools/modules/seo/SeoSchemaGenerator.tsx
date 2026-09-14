@@ -7,12 +7,15 @@ import { CalculatorShell } from '../shared/CalculatorShell';
 
 export default function SeoSchemaGenerator() {
   const [type, setType] = useState('Article'); const [data, setData] = useState('{"headline": "Sample Article", "description": "Article description"}'); const [result, setResult] = useState('');
-  const generate = () => { try { const parsed = JSON.parse(data); setResult(JSON.stringify({ '@context': 'https://schema.org', '@type': type, ...parsed }, null, 2)); } catch { setResult('Invalid JSON input'); } };
+  // Generate from explicit args: presets set state and generate in the same
+  // tick, so reading state here would emit the previous type/data (stale).
+  const generateWith = (t: string, d: string) => { try { const parsed = JSON.parse(d); setResult(JSON.stringify({ '@context': 'https://schema.org', '@type': t, ...parsed }, null, 2)); } catch { setResult('Invalid JSON input'); } };
+  const generate = () => generateWith(type, data);
 
   const presets = [
-    { label: 'Article', apply: () => { setType('Article'); setData('{"headline": "Sample Article", "description": "Article description"}'); generate(); } },
-    { label: 'Product', apply: () => { setType('Product'); setData('{"name": "Product Name", "description": "Product description", "price": "29.99", "currency": "USD"}'); generate(); } },
-    { label: 'FAQPage', apply: () => { setType('FAQPage'); setData('{"mainEntity": [{"@type": "Question", "name": "Question?", "acceptedAnswer": {"@type": "Answer", "text": "Answer text."}}]}'); generate(); } },
+    { label: 'Article', apply: () => { const t = 'Article'; const d = '{"headline": "Sample Article", "description": "Article description"}'; setType(t); setData(d); generateWith(t, d); } },
+    { label: 'Product', apply: () => { const t = 'Product'; const d = '{"name": "Product Name", "description": "Product description", "price": "29.99", "currency": "USD"}'; setType(t); setData(d); generateWith(t, d); } },
+    { label: 'FAQPage', apply: () => { const t = 'FAQPage'; const d = '{"mainEntity": [{"@type": "Question", "name": "Question?", "acceptedAnswer": {"@type": "Answer", "text": "Answer text."}}]}'; setType(t); setData(d); generateWith(t, d); } },
     { label: 'Clear', apply: () => { setResult(''); } },
   ];
 

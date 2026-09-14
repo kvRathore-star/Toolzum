@@ -12,11 +12,13 @@ export default function UtmBuilder() {
   const [term, setTerm] = useState('');
   const [content, setContent] = useState('');
   const [result, setResult] = useState('');
+  const [urlError, setUrlError] = useState('');
 
   const build = () => {
     try {
       new URL(baseUrl);
-    } catch { return; }
+    } catch { setUrlError('Invalid base URL — include the protocol, e.g. https://example.com/page'); toast.error('Invalid base URL'); return; }
+    setUrlError('');
     const u = new URL(baseUrl);
     u.searchParams.set('utm_source', source);
     u.searchParams.set('utm_medium', medium);
@@ -50,6 +52,9 @@ export default function UtmBuilder() {
         <label htmlFor="lbl-utmbuilder-base-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
         <input id="lbl-utmbuilder-base-url" aria-label="Base URL" type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
+        {urlError && (
+          <p role="alert" className="text-xs text-red-600 dark:text-red-400 font-medium">{urlError}</p>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {params.map(p => (

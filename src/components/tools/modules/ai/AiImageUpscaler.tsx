@@ -164,7 +164,7 @@ export default function AiImageUpscaler() {
       <div className="space-y-6">
         <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
           <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
-          <span><strong>Lanczos-3 Processing:</strong> The high-fidelity mathematical resampler scales image resolution client-side without adding pixel noise.</span>
+          <span><strong>Lanczos-3 Processing:</strong> The high-fidelity mathematical resampler scales image resolution client-side without adding pixel noise. No neural model is used — this is high-quality interpolation, not AI upscaling. Best for 2x on clean art; it cannot restore lost detail.</span>
         </div>
         <FileUploader
           accept="image/*"

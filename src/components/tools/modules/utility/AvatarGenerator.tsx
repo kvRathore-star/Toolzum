@@ -24,9 +24,10 @@ export default function AvatarGenerator() {
   ];
 
   const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
+  const avatarSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><rect width="' + size + '" height="' + size + '" rx="' + (size * shapes[shape]) + '" fill="' + bgColor + '"/><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="' + textColor + '" font-size="' + (size * 0.4) + '" font-family="sans-serif" font-weight="bold">' + initials + '</text></svg>';
 
   return (
-    <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData="avatar.svg" downloadFilename="avatar.svg">
+    <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData={avatarSvg} downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Person name</label>
         <input aria-label="Person name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."

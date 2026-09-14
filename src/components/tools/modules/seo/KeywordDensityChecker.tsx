@@ -9,8 +9,15 @@ export default function KeywordDensityChecker() {
 
   const check = () => {
     const words = text.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(Boolean);
-    const kw = keyword.toLowerCase();
-    const count = words.filter(w => w === kw).length;
+    const kwWords = keyword.toLowerCase().split(/\s+/).filter(Boolean);
+    // Sliding-window phrase match: the old single-word compare made any
+    // multi-word keyword (e.g. 'coffee maker') score 0% forever.
+    let count = 0;
+    if (kwWords.length > 0) {
+      for (let i = 0; i <= words.length - kwWords.length; i++) {
+        if (kwWords.every((w, j) => words[i + j] === w)) count++;
+      }
+    }
     const total = words.length;
     setDensity({ count, total, percentage: total > 0 ? (count / total) * 100 : 0 });
   };

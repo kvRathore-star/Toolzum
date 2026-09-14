@@ -11,14 +11,17 @@ export default function HourlyToSalaryCalculator() {
     { label: 'Mid Career', apply: () => { setHourly('35'); setHoursPerWeek('40'); } },
     { label: 'Senior/Tech', apply: () => { setHourly('75'); setHoursPerWeek('40'); } },
   ];
-  const h = parseFloat(hourly) || 0;
-  const hpw = parseFloat(hoursPerWeek) || 0;
-  const annual = h * hpw * 52;
+  const h = parseFloat(hourly);
+  const hpw = parseFloat(hoursPerWeek);
+  const hasInput = hourly.trim() !== '' && hoursPerWeek.trim() !== '' && Number.isFinite(h) && Number.isFinite(hpw) && h > 0 && hpw > 0;
+  const annual = hasInput ? h * hpw * 52 : 0;
   const monthly = annual / 12;
-  const result = `Annual: $${annual.toLocaleString()}\nMonthly: $${monthly.toLocaleString()}\nBiweekly: $${(annual / 26).toLocaleString()}\nWeekly: $${(h * hpw).toLocaleString()}\nDaily (8h): $${(h * 8).toLocaleString()}\nHourly: $${h.toFixed(2)}`;
+  const result = hasInput
+    ? `Annual: $${annual.toLocaleString()}\nMonthly: $${monthly.toLocaleString()}\nBiweekly: $${(annual / 26).toLocaleString()}\nWeekly: $${(h * hpw).toLocaleString()}\nDaily (8h): $${(h * 8).toLocaleString()}\nHourly: $${h.toFixed(2)}`
+    : 'Enter an hourly rate and hours per week';
   return (
     <CalculatorShell category="Finance" title="Hourly to Salary Calculator" result={result} auto presets={presets} accent="pink" customResult={
-      h > 0 ? (
+      hasInput ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
             { label: 'Annual', value: `$${annual.toLocaleString()}`, color: 'text-indigo-700 dark:text-indigo-400' },

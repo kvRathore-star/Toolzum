@@ -9,29 +9,40 @@ export default function BrailleTranslator() {
   const [text, setText] = useState('');
   const [braille, setBraille] = useState('');
 
+  const NUMBER_SIGN = '⠼';
+  const CAPITAL_SIGN = '⠠';
+  // Grade-1 cells for a-z (digits reuse a-j cells after a number sign —
+  // the old table mapped 0-9 directly, so ⠁ decoded to '1' not 'a').
   const brailleMap: Record<string, string> = {
     'a': '⠁', 'b': '⠃', 'c': '⠉', 'd': '⠙', 'e': '⠑', 'f': '⠋', 'g': '⠛', 'h': '⠓',
     'i': '⠊', 'j': '⠚', 'k': '⠅', 'l': '⠇', 'm': '⠍', 'n': '⠝', 'o': '⠕', 'p': '⠏',
     'q': '⠟', 'r': '⠗', 's': '⠎', 't': '⠞', 'u': '⠥', 'v': '⠧', 'w': '⠺', 'x': '⠭',
-    'y': '⠽', 'z': '⠵', ' ': ' ', '0': '⠚', '1': '⠁', '2': '⠃', '3': '⠉', '4': '⠙',
-    '5': '⠑', '6': '⠋', '7': '⠛', '8': '⠓', '9': '⠊'
+    'y': '⠽', 'z': '⠵', ' ': ' ',
   };
+  const DIGIT_CELLS = ['⠚', '⠁', '⠃', '⠉', '⠙', '⠑', '⠋', '⠛', '⠓', '⠊']; // 0-9
 
   const reverseBrailleMap = Object.entries(brailleMap).reduce((acc, [key, val]) => {
     acc[val] = key;
     return acc;
   }, {} as Record<string, string>);
+  const reverseDigitMap = Object.fromEntries(DIGIT_CELLS.map((cell, d) => [cell, String(d)]));
 
   const translateToBraille = () => {
     if (!text.trim()) {
       setBraille('');
       return;
     }
-    const result = text
-      .toLowerCase()
-      .split('')
-      .map(char => brailleMap[char] || char)
-      .join('');
+    let result = '';
+    for (const char of text) {
+      if (/[A-Z]/.test(char)) {
+        const cell = brailleMap[char.toLowerCase()];
+        result += cell ? CAPITAL_SIGN + cell : char;
+      } else if (/[0-9]/.test(char)) {
+        result += NUMBER_SIGN + DIGIT_CELLS[Number(char)]!;
+      } else {
+        result += brailleMap[char.toLowerCase()] || char;
+      }
+    }
     setBraille(result);
   };
 
@@ -40,11 +51,26 @@ export default function BrailleTranslator() {
       setText('');
       return;
     }
-    const result = braille
-      .split('')
-      .map(char => reverseBrailleMap[char] || char)
-      .join('');
-    setText(result.toUpperCase());
+    let result = '';
+    let numberMode = false;
+    let capitalizeNext = false;
+    for (const char of braille) {
+      if (char === NUMBER_SIGN) { numberMode = true; continue; }
+      if (char === CAPITAL_SIGN) { capitalizeNext = true; continue; }
+      if (numberMode && reverseDigitMap[char] !== undefined) {
+        result += reverseDigitMap[char];
+        continue;
+      }
+      numberMode = false;
+      const letter = reverseBrailleMap[char];
+      if (letter !== undefined) {
+        result += capitalizeNext ? letter.toUpperCase() : letter;
+      } else {
+        result += char;
+      }
+      capitalizeNext = false;
+    }
+    setText(result);
   };
 
   return (

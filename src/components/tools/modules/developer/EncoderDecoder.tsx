@@ -13,8 +13,11 @@ function rot13(s: string): string {
 
 function toHex(s: string): string { return Array.from(s).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join(' '); }
 function fromHex(s: string): string {
-  try { return s.replace(/\s+/g, '').match(/.{2}/g)?.map(b => String.fromCharCode(parseInt(b, 16))).join('') || ''; } catch { return ''; }
+  try { return s.replace(/\s+/g, '').match(/.{2}/g)?.map(b => String.fromCharCode(parseInt(b, 16))).join('') || ''; } catch (e) { return ''; }
 }
+
+function toUtf8Bytes(s: string): string { return Array.from(new TextEncoder().encode(s)).map((b) => b.toString(16).padStart(2, '0')).join(' '); }
+function fromUtf8Bytes(s: string): string { const clean = s.trim(); const parts = clean.includes(' ') ? clean.split(/\s+/) : (clean.match(/.{2}/g) ?? []); try { const bytes = new Uint8Array(parts.map((b) => parseInt(b, 16))); const out = new TextDecoder('utf-8', { fatal: true }).decode(bytes); return out; } catch { throw new Error('Invalid UTF-8 hex bytes — encode text with the UTF-8 scheme first'); } }
 
 function toBinary(s: string): string { return Array.from(s).map(c => c.charCodeAt(0).toString(2).padStart(8, '0')).join(' '); }
 function fromBinary(s: string): string {
@@ -24,14 +27,14 @@ function fromBinary(s: string): string {
 function process(text: string, scheme: Scheme, mode: Mode): string {
   if (mode === 'encode') {
     switch (scheme) {
-      case 'Base64': return btoa(text);
-      case 'Base64URL': return btoa(text).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+      case 'Base64': try { return btoa(text); } catch { throw new Error('Base64 supports Latin-1 text only — use the UTF-8 scheme for Unicode/emoji'); }
+      case 'Base64URL': try { return btoa(text).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); } catch { throw new Error('Base64URL supports Latin-1 text only — use the UTF-8 scheme for Unicode/emoji'); }
       case 'URL': return encodeURIComponent(text);
       case 'HTML Entity': return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
       case 'Hex': return toHex(text);
       case 'Binary': return toBinary(text);
       case 'ROT13': return rot13(text);
-      case 'UTF-8': return text;
+      case 'UTF-8': return toUtf8Bytes(text);
       case 'Unicode Escape': return Array.from(text).map(c => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`).join('');
       case 'Backslash Escape': return text.replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t').replace(/"/g, '\\"').replace(/'/g, "\\'");
     }
@@ -44,7 +47,7 @@ function process(text: string, scheme: Scheme, mode: Mode): string {
       case 'Hex': return fromHex(text);
       case 'Binary': return fromBinary(text);
       case 'ROT13': return rot13(text);
-      case 'UTF-8': return text;
+      case 'UTF-8': return fromUtf8Bytes(text);
       case 'Unicode Escape': return text.replace(/\\u[0-9a-fA-F]{4}/g, m => String.fromCharCode(parseInt(m.slice(2), 16)));
       case 'Backslash Escape': return text.replace(/\\n/g, '\n').replace(/\\r/g, '\r').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'").replace(/\\\\/g, '\\');
     }
@@ -68,7 +71,7 @@ export function EncoderDecoder() {
     try {
       setOutput(process(input, scheme, mode));
     } catch {
-      toast.error('Processing failed — check your input');
+      toast.error(e instanceof Error ? e.message : 'Processing failed — check your input');
     }
   };
 

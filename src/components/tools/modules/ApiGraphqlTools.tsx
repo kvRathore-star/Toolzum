@@ -176,10 +176,23 @@ export function GraphqlSchemaValidator() {
     const types = schema.match(/\btype\s+(\w+)/g) || [];
     if (!types.length) issues.push('No type definitions found');
     if (!schema.includes('type Query')) issues.push('Missing Query type (root type)');
-    const referenced = schema.match(/(\w+)(?:!|\))/g)?.map(m => m.replace(/[!)\]]/g, '')) || [];
+    // Only flag genuine type references: skip $variables and field/argument
+    // names (words followed by ':' or '('), which the old check misreported
+    // as "unknown types" (e.g. $id, users:, user().
     const defined = schema.match(/\btype\s+(\w+)/g)?.map(m => m.replace('type ', '')) || ['String', 'Int', 'Float', 'Boolean', 'ID'];
-    for (const ref of referenced) {
-      if (!defined.includes(ref) && ref.length > 1) issues.push(`Reference to unknown type: ${ref}`);
+    const refRe = /(\w+)(?:!|\))/g;
+    let rm: RegExpExecArray | null;
+    const seen = new Set<string>();
+    while ((rm = refRe.exec(schema)) !== null) {
+      const ref = rm[1]!.replace(/[!)\]]/g, '');
+      const before = schema[rm.index - 1] || '';
+      const after = schema[rm.index + rm[0].length] || '';
+      if (before === '$') continue; // variable usage, not a type
+      if (after === ':' || after === '(') continue; // field/argument name
+      if (!defined.includes(ref) && ref.length > 1 && !seen.has(ref)) {
+        seen.add(ref);
+        issues.push(`Reference to unknown type: ${ref}`);
+      }
     }
     setResult({ valid: issues.length === 0, issues: issues.length ? issues : ['Schema appears valid'] });
   };
@@ -264,22 +277,52 @@ export function GraphqlSubscriptionBuilder() {
 }
 
 export function GraphqlTester() {
+  const [endpoint, setEndpoint] = useState('https://countries.trevorblades.com/');
   const [query, setQuery] = useState('query { users { id name email } }');
   const [variables, setVariables] = useState('{}');
   const [result, setResult] = useState('');
   const [copied, setCopied] = useState(false);
+  const [sending, setSending] = useState(false);
   const presets = [
     { label: 'Users Query', q: 'query { users { id name email } }', v: '{}' },
     { label: 'With Variables', q: 'query ($id: ID!) { user(id: $id) { name email } }', v: '{"id": "1"}' },
   ];
-  const calc = () => {
-    const formatted = `# Query\n${query.replace(/\s+/g, ' ').trim()}\n\n# Variables\n${variables}\n\n# Response (mock)\n{\n  "data": {\n    "users": [\n      { "id": "1", "name": "John", "email": "john@example.com" }\n    ]\n  }\n}`;
-    setResult(formatted);
+  const calc = async () => {
+    // Real request: POST {query, variables} to the endpoint. The old version
+    // ignored any endpoint and printed a canned "John" response.
+    let vars: unknown = {};
+    try {
+      vars = variables.trim() ? JSON.parse(variables) : {};
+    } catch {
+      setResult('Variables are not valid JSON.');
+      return;
+    }
+    setSending(true);
+    setResult('');
+    try {
+      const res = await fetch(endpoint.trim(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query, variables: vars }),
+      });
+      const text = await res.text();
+      let pretty = text;
+      try { pretty = JSON.stringify(JSON.parse(text), null, 2); } catch { /* non-JSON body — show raw */ }
+      setResult(`# Status: ${res.status} ${res.ok ? 'OK' : 'ERROR'}\n\n${pretty}`);
+    } catch (e) {
+      setResult(`Request failed: ${e instanceof Error ? e.message : 'network error'} (the endpoint may block browser CORS — try a CORS-enabled API).`);
+    } finally {
+      setSending(false);
+    }
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">GraphQL Tester</h2>
+        <div>
+          <label htmlFor="lbl-apigraphqltools-endpoint" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Endpoint URL</label>
+          <input id="lbl-apigraphqltools-endpoint" aria-label="Endpoint URL" type="url" value={endpoint} onChange={e => { setEndpoint(e.target.value); setResult(''); }} placeholder="https://your-api.com/graphql" className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        </div>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
             <button key={p.label} onClick={() => { setQuery(p.q); setVariables(p.v); setResult(''); }}
@@ -294,7 +337,7 @@ export function GraphqlTester() {
           <label htmlFor="lbl-apigraphqltools-variables-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Variables (JSON)</label>
           <textarea id="lbl-apigraphqltools-variables-json" aria-label="Variables (JSON)" value={variables} onChange={e => { setVariables(e.target.value); setResult(''); }} rows={2} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
-        <button onClick={calc} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Format</button>
+        <button onClick={calc} disabled={sending} className="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] disabled:opacity-50">{sending ? 'Sending…' : 'Send Request'}</button>
         {result && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{result}</pre>

@@ -13,6 +13,9 @@ export default function Mp3Compressor() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [bitrate, setBitrate] = useState('64k');
+  const [sampleRate, setSampleRate] = useState('44100');
+  const [channels, setChannels] = useState(2);
+  const [duration, setDuration] = useState<number | null>(null);
   
   const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
 
@@ -32,7 +35,7 @@ export default function Mp3Compressor() {
       await ffmpeg.writeFile('input.mp3', await fetchFile(file));
       
       toast("Compressing audio...");
-      await ffmpeg.exec(['-i', 'input.mp3', '-b:a', bitrate, 'output.mp3']);
+      await ffmpeg.exec(['-i', 'input.mp3', '-b:a', bitrate, '-ar', sampleRate, '-ac', String(channels), 'output.mp3']);
       
       const data = await ffmpeg.readFile('output.mp3');
       const url = URL.createObjectURL(createDownloadBlob(data, 'audio/mpeg'));
@@ -71,7 +74,7 @@ export default function Mp3Compressor() {
           <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
-          onClick={() => { setFile(null); setOutputUrl(null); }}
+          onClick={() => { setFile(null); setOutputUrl(null); setDuration(null); }}
           className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
@@ -96,6 +99,35 @@ export default function Mp3Compressor() {
             </select>
           </div>
 
+          <div>
+            <label htmlFor="lbl-mp3compressor-sample-rate" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Sample Rate</label>
+            <select id="lbl-mp3compressor-sample-rate" aria-label="Sample Rate"
+              value={sampleRate}
+              onChange={(e) => setSampleRate(e.target.value)}
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-bold"
+            >
+              <option value="8000">8,000 Hz (Phone/Voice)</option>
+              <option value="22050">22,050 Hz (Voice/Podcasts)</option>
+              <option value="44100">44,100 Hz (CD Standard)</option>
+              <option value="48000">48,000 Hz (Video/Studio)</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="lbl-mp3compressor-channels" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Channels</label>
+            <select id="lbl-mp3compressor-channels" aria-label="Channels"
+              value={channels}
+              onChange={(e) => setChannels(Number(e.target.value))}
+              className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-bold"
+            >
+              <option value={2}>Stereo</option>
+              <option value={1}>Mono (Smaller File)</option>
+            </select>
+          </div>
+
+          {duration !== null && (
+            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Estimated output size: ≈ {((parseInt(bitrate) * 1000) / 8 * duration / 1024 / 1024).toFixed(2)} MB</p>
+          )}
           <button 
             onClick={processAudio}
             disabled={isProcessing || !isLoaded}
@@ -130,7 +162,7 @@ export default function Mp3Compressor() {
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zM21 16c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2z" /></svg>
             </div>
             <h4 className="text-[var(--text-primary)] font-bold mb-2">Original Audio</h4>
-            <audio src={URL.createObjectURL(file)} controls className="w-full opacity-80 scale-90" />
+            <audio src={URL.createObjectURL(file)} controls className="w-full opacity-80 scale-90" onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)} />
           </div>
         )}
       </div>

@@ -32,8 +32,13 @@ export default function TypographyPreview() {
   const [letterSpacing, setLetterSpacing] = useState(0);
   const [fontWeight, setFontWeight] = useState(400);
   const [textAlign, setTextAlign] = useState<'left' | 'center' | 'right' | 'justify'>('left');
+  const [fontFamily, setFontFamily] = useState('Inter, sans-serif');
+  const [textColor, setTextColor] = useState('#111827');
+  const [bgColor, setBgColor] = useState('#f9fafb');
 
-  const cssOutput = `font-size: ${fontSize}px;\nline-height: ${lineHeight};\nletter-spacing: ${letterSpacing}px;\nfont-weight: ${fontWeight};\ntext-align: ${textAlign};`;
+  const FONT_STACKS = ['Inter, sans-serif', 'Georgia, serif', 'Courier New, monospace', 'system-ui, sans-serif', 'Playfair Display, serif'];
+
+  const cssOutput = `font-family: ${fontFamily};\nfont-size: ${fontSize}px;\nline-height: ${lineHeight};\nletter-spacing: ${letterSpacing}px;\nfont-weight: ${fontWeight};\ntext-align: ${textAlign};\ncolor: ${textColor};\nbackground-color: ${bgColor};`;
 
   const copyCss = () => {
     clipboardWrite(cssOutput);
@@ -75,13 +80,13 @@ export default function TypographyPreview() {
 
         <div className="grid grid-cols-2 gap-4">
           {[
-            { l: 'Font Size', v: fontSize, s: setFontSize, min: 12, max: 72, unit: 'px' },
-            { l: 'Line Height', v: lineHeight, s: setLineHeight, min: 1.0, max: 3.0, step: 0.1 },
-            { l: 'Letter Spacing', v: letterSpacing, s: setLetterSpacing, min: -5, max: 10, unit: 'px' },
-          ].map(({ l, v, s, min, max, step, unit }) => (
+            { l: 'Font Size', v: fontSize, s: setFontSize, min: 12, max: 72, unit: 'px', id: 'lbl-typographypreview-font-size' },
+            { l: 'Line Height', v: lineHeight, s: setLineHeight, min: 1.0, max: 3.0, step: 0.1, id: 'lbl-typographypreview-line-height' },
+            { l: 'Letter Spacing', v: letterSpacing, s: setLetterSpacing, min: -5, max: 10, unit: 'px', id: 'lbl-typographypreview-letter-spacing' },
+          ].map(({ l, v, s, min, max, step, unit, id }) => (
             <div key={l}>
-              <label className="text-xs text-[var(--text-secondary)] block mb-1">{l}: {v}{unit || ''}</label>
-              <input type="range" min={min} max={max} step={step || 1} value={v} onChange={e => s(step === 0.1 ? parseFloat(e.target.value) : Number(e.target.value))} className="w-full" />
+              <label htmlFor={id} className="text-xs text-[var(--text-secondary)] block mb-1">{l}: {v}{unit || ''}</label>
+              <input id={id} type="range" min={min} max={max} step={step || 1} value={v} onChange={e => s(step === 0.1 ? parseFloat(e.target.value) : Number(e.target.value))} className="w-full" />
             </div>
           ))}
           <div>
@@ -97,8 +102,8 @@ export default function TypographyPreview() {
         </div>
 
         <div>
-          <label className="text-xs text-[var(--text-secondary)] block mb-1">Font Weight: {fontWeight}</label>
-          <div className="flex flex-wrap gap-1">
+          <label htmlFor="lbl-typographypreview-font-weight" className="text-xs text-[var(--text-secondary)] block mb-1">Font Weight: {fontWeight}</label>
+          <div id="lbl-typographypreview-font-weight" className="flex flex-wrap gap-1">
             {fontWeights.map((w) => (
               <button key={w.value} onClick={() => setFontWeight(w.value)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${fontWeight === w.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
                 {w.label}
@@ -107,7 +112,24 @@ export default function TypographyPreview() {
           </div>
         </div>
 
-        <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" style={{ fontSize: `${fontSize}px`, lineHeight, letterSpacing: `${letterSpacing}px`, fontWeight, textAlign }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label htmlFor="lbl-typographypreview-font-family" className="text-xs text-[var(--text-secondary)] block mb-1">Font Family</label>
+            <select id="lbl-typographypreview-font-family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs">
+              {FONT_STACKS.map(f => <option key={f} value={f}>{f.split(',')[0]}</option>)}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="lbl-typographypreview-text-color" className="text-xs text-[var(--text-secondary)] block mb-1">Text Color</label>
+            <input id="lbl-typographypreview-text-color" type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-full h-9 rounded-lg cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
+          </div>
+          <div>
+            <label htmlFor="lbl-typographypreview-background" className="text-xs text-[var(--text-secondary)] block mb-1">Background</label>
+            <input id="lbl-typographypreview-background" type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="w-full h-9 rounded-lg cursor-pointer bg-[var(--bg-overlay)] border border-[var(--border-subtle)]" />
+          </div>
+        </div>
+
+        <div className="p-4 rounded-xl border border-[var(--border-subtle)]" style={{ fontFamily, fontSize: `${fontSize}px`, lineHeight, letterSpacing: `${letterSpacing}px`, fontWeight, textAlign, color: textColor, backgroundColor: bgColor }}>
           {text || 'Preview text'}
         </div>
 

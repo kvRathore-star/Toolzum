@@ -280,6 +280,8 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "image-converter": { category: "image", slug: "bulk-image-compressor" },
   "video-converter": { category: "converter", slug: "video-converter", sourceCategory: "video" },
   "ai-video-subtitler": { category: "video", slug: "subtitle-generator" },
+  // Placeholder marketing page delisted Sep 2026 — route to the live Extension tool
+  "browser-extension": { category: "extension", slug: "screen-recorder-extension" },
   // Video-to-audio redirects — from /video/ to /converter/ for proper routing
   "mp4-to-mp3": { category: "converter", slug: "mp4-to-mp3", sourceCategory: "video" },
   "mov-to-mp3": { category: "converter", slug: "mov-to-mp3", sourceCategory: "video" },

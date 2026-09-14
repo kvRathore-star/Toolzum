@@ -6,8 +6,32 @@ import { CalculatorShell } from '../shared/CalculatorShell';
 export default function MarkdownPreviewer() {
   const [md, setMd] = useState('# Hello World\n\nThis is **bold** and *italic* text.\n\n- List item 1\n- List item 2\n\n```\ncode block\n```\n\n> Blockquote'); const [html, setHtml] = useState('');
 
+  const mdTables = (src: string): string => {
+    const lines = src.split('\n');
+    const out: string[] = [];
+    for (let i = 0; i < lines.length; i++) {
+      const row = lines[i]!;
+      const next = lines[i + 1] ?? '';
+      if (/^\|.+\|\s*$/.test(row) && next.includes('-') && /^\|?[\s:|-]+\|?[\s:|-]*$/.test(next)) {
+        const head = row.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+        i += 2;
+        const body: string[][] = [];
+        while (i < lines.length && /^\|.+\|\s*$/.test(lines[i]!)) {
+          body.push(lines[i]!.trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim()));
+          i++;
+        }
+        i--;
+        out.push('<table><thead><tr>' + head.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>' + body.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('') + '</tbody></table>');
+      } else {
+        out.push(row);
+      }
+    }
+    return out.join('\n');
+  };
+
   const preview = () => {
-    let h = md.replace(/^###### (.*$)/gm, '<h6>$1</h6>').replace(/^##### (.*$)/gm, '<h5>$1</h5>').replace(/^#### (.*$)/gm, '<h4>$1</h4>').replace(/^### (.*$)/gm, '<h3>$1</h3>').replace(/^## (.*$)/gm, '<h2>$1</h2>').replace(/^# (.*$)/gm, '<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1</code></pre>').replace(/`(.*?)`/g, '<code>$1</code>').replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>').replace(/^- (.*$)/gm, '<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>').replace(/\n\n/g, '</p><p>').replace(/^(?!<[hulpb])/gm, '');
+    let h = mdTables(md).replace(/^###### (.*$)/gm, '<h6>$1</h6>').replace(/^##### (.*$)/gm, '<h5>$1</h5>').replace(/^#### (.*$)/gm, '<h4>$1</h4>').replace(/^### (.*$)/gm, '<h3>$1</h3>').replace(/^## (.*$)/gm, '<h2>$1</h2>').replace(/^# (.*$)/gm, '<h1>$1</h1>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/`{3}([\s\S]*?)`{3}/g, '<pre><code>$1</code></pre>').replace(/`(.*?)`/g, '<code>$1</code>').replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>').replace(/^- (.*$)/gm, '<li>$1</li>').replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>').replace(/\n\n/g, '</p><p>').replace(/^(?!<[hulpb])/gm, '');
+    h = h.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, '<img alt="$1" src="$2" />').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
     h = `<p>${h}</p>`.replace(/<p><\/p>/g, '');
     setHtml(h);
   };

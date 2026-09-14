@@ -41,11 +41,14 @@ export default function UrlParser() {
       data['Query Parameters'] = JSON.stringify(Object.fromEntries(params));
     }
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const objectUrl = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    a.href = objectUrl;
     a.download = 'url-parsed.json';
     a.click();
-    URL.revokeObjectURL(url);
+    // Revoke the blob URL we created (the old code passed the input string,
+    // leaking every generated blob URL).
+    setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
     toast.success('JSON downloaded!');
   };
 

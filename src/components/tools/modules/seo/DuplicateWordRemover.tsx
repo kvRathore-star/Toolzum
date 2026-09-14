@@ -23,7 +23,7 @@ export default function DuplicateWordRemover() {
   return (
     <CalculatorShell category="SEO" title="Duplicate Word Remover" result={resultText} onCalculate={remove} presets={presets} accent="rose" downloadData={result} downloadFilename="deduplicated.txt">
       <p className="text-sm text-[var(--text-secondary)] mb-3">Removes duplicate words within text. For removing duplicate <em>lines</em>, use <NextLink href="/text/text-deduplicator" className="text-[var(--accent)] hover:underline">Text Deduplicator</NextLink>.</p>
-      <label htmlFor="lbl-duplicatewordremover-text-inwords-words" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text (${inWords} words)</label>
+      <label htmlFor="lbl-duplicatewordremover-text-inwords-words" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{`Text (${inWords} words)`}</label>
       <textarea id="lbl-duplicatewordremover-text-inwords-words" aria-label="Text Deduplicator" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste text..."
         className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50 resize-y" />
 

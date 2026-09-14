@@ -3,12 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Target, ListPlus, Play, Trophy } from 'lucide-react';
 
 export default function WheelOfNames() {
-  const [names, setNames] = useState<string>('Alice\\nBob\\nCharlie\\nDavid\\nEve');
+  const [names, setNames] = useState<string>('Alice\nBob\nCharlie\nDavid\nEve');
   const [winner, setWinner] = useState<string | null>(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
-  const nameList = names.split('\\n').filter(n => n.trim() !== '');
+  const nameList = names.split('\n').filter(n => n.trim() !== '');
   
   // Wheel State
   const [rotation, setRotation] = useState(0);

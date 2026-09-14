@@ -12,12 +12,22 @@ export default function JSONDiffChecker() {
       const l = JSON.parse(left);
       const r = JSON.parse(right);
       const diffLines: string[] = [];
-      const allKeys = new Set([...Object.keys(l), ...Object.keys(r)]);
-      allKeys.forEach(k => {
-        const lv = JSON.stringify(l[k]);
-        const rv = JSON.stringify(r[k]);
-        if (lv !== rv) diffLines.push(`- ${k}: ${lv}\n+ ${k}: ${rv}`);
-      });
+      const walk = (lv: unknown, rv: unknown, path: string): void => {
+        if (lv !== null && rv !== null && typeof lv === 'object' && typeof rv === 'object' && !Array.isArray(lv) && !Array.isArray(rv)) {
+          const lo = lv as Record<string, unknown>;
+          const ro = rv as Record<string, unknown>;
+          const allKeys = new Set([...Object.keys(lo), ...Object.keys(ro)]);
+          allKeys.forEach(k => walk(lo[k], ro[k], path ? `${path}.${k}` : k));
+          return;
+        }
+        if (Array.isArray(lv) && Array.isArray(rv)) {
+          const len = Math.max(lv.length, rv.length);
+          for (let i = 0; i < len; i++) walk(lv[i], rv[i], `${path}[${i}]`);
+          return;
+        }
+        if (JSON.stringify(lv) !== JSON.stringify(rv)) diffLines.push(`- ${path}: ${JSON.stringify(lv)}\n+ ${path}: ${JSON.stringify(rv)}`);
+      };
+      walk(l, r, '');
       if (diffLines.length === 0) diffLines.push('(no differences)');
       setDiff(diffLines.join('\n'));
       toast.success('Comparison complete');

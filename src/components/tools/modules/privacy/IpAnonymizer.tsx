@@ -10,16 +10,32 @@ export default function IpAnonymizer() {
   const [mask, setMask] = useState('24'); // /24 mask
   const [anonymized, setAnonymized] = useState('');
 
-  const anonymizeIp = () => {
+  const anonymizeIp = async () => {
     if (!ip.trim()) {
       toast.error('Please enter IP address');
       return;
     }
 
     try {
-      const parts = ip.trim().split('.');
+      const raw = ip.trim();
+      if (raw.includes(':')) {
+        // IPv6: mask last 80 bits (keep first 48 bits / first 3 hextets)
+        const groups = raw.split(':');
+        if (groups.length < 3) {
+          toast.error('Invalid IPv6 format');
+          return;
+        }
+        setAnonymized(`${groups.slice(0, 3).join(':')}::`);
+        toast.success('IP Anonymized!');
+        return;
+      }
+      const parts = raw.split('.');
       if (parts.length !== 4) {
         toast.error('Invalid IPv4 format');
+        return;
+      }
+      if (parts.some(p => !/^\d+$/.test(p) || Number(p) < 0 || Number(p) > 255)) {
+        toast.error('Each IPv4 octet must be 0-255');
         return;
       }
 
@@ -30,8 +46,11 @@ export default function IpAnonymizer() {
         // Zero out last two octets
         setAnonymized(`${parts[0]}.${parts[1]}.0.0`);
       } else {
-        // Full hash anonymizer (standard GDPR mask method)
-        setAnonymized(`xxx.xxx.xxx.xxx`);
+        // Full hash anonymizer: SHA-256 of the IP, first 8 hex chars mapped to 4 octets
+        const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw));
+        const hex = [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+        const octets = [0, 1, 2, 3].map(i => parseInt(hex.slice(i * 2, i * 2 + 2), 16)).join('.');
+        setAnonymized(octets);
       }
       toast.success('IP Anonymized!');
     } catch (err) {

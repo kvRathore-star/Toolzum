@@ -28,12 +28,13 @@ export default function ReelShortsMaker() {
   const [customH, setCustomH] = useState('480');
   const [xOffset, setXOffset] = useState('0');
   const [yOffset, setYOffset] = useState('0');
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const { usage, trackUsage } = useUsageCounter('reelShortsUsage');
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
-    if (f) { setFile(f); setOutputUrl(null); if (!isLoaded) await loadFFmpeg(); }
+    if (f) { setFile(f); setOutputUrl(null); setPreviewUrl(URL.createObjectURL(f)); if (!isLoaded) await loadFFmpeg(); }
   };
 
   const processVideo = async () => {
@@ -109,8 +110,23 @@ export default function ReelShortsMaker() {
           <div className="space-y-5">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div><div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</div><div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div></div>
-              <button onClick={() => { setFile(null); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Remove</button>
+              <button onClick={() => { if (previewUrl) URL.revokeObjectURL(previewUrl); setPreviewUrl(null); setFile(null); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Remove</button>
             </div>
+
+            {previewUrl && (
+              <div>
+                <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2 block">Crop preview (approximate framing)</span>
+                <div className="relative rounded-xl overflow-hidden border border-[var(--border-subtle)] bg-black">
+                  <video src={previewUrl} controls muted playsInline className="w-full max-h-64" />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-4">
+                    <div
+                      className="border-2 border-dashed border-indigo-400 bg-indigo-500/10 max-w-full"
+                      style={{ aspectRatio: RATIOS[ratioIdx]!.label === 'Custom' ? `${Number(customW) || 1} / ${Number(customH) || 1}` : `${RATIOS[ratioIdx]!.w} / ${RATIOS[ratioIdx]!.h}`, height: '85%', maxWidth: '90%' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div><label className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2 block">Aspect Ratio</label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">

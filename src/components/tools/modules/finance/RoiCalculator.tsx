@@ -12,14 +12,17 @@ const PRESETS: Preset[] = [
 ];
 
 export default function RoiCalculator() {
-  const [initial, setInitial] = useState(10000);
-  const [final, setFinal] = useState(15000);
+  const [initial, setInitial] = useState('10000');
+  const [final, setFinal] = useState('15000');
 
-  const gain = final - initial;
-  const roi = initial > 0 ? (gain / initial) * 100 : 0;
-  const result = `${roi.toFixed(2)}% ROI`;
+  const init = parseFloat(initial);
+  const fin = parseFloat(final);
+  const valid = Number.isFinite(init) && Number.isFinite(fin) && init > 0 && fin >= 0;
+  const gain = valid ? fin - init : 0;
+  const roi = valid ? (gain / init) * 100 : 0;
+  const result = valid ? `${roi.toFixed(2)}% ROI` : 'Enter investment and final value';
 
-  const csvContent = `Metric,Value\nInitial Investment,${initial}\nFinal Value,${final}\nNet Gain,${gain}\nROI,${roi.toFixed(2)}%`;
+  const csvContent = valid ? `Metric,Value\nInitial Investment,${init}\nFinal Value,${fin}\nNet Gain,${gain}\nROI,${roi.toFixed(2)}%` : '';
 
   return (
     <CalculatorShell
@@ -28,10 +31,10 @@ export default function RoiCalculator() {
       accent="emerald"
       result={result}
       auto
-      presets={PRESETS.map(p => ({ label: p.name, apply: () => { setInitial(p.initial); setFinal(p.final); } }))}
+      presets={PRESETS.map(p => ({ label: p.name, apply: () => { setInitial(String(p.initial)); setFinal(String(p.final)); } }))}
       resultStats={[
-        { label: 'Net Return Gain', value: `$${gain.toFixed(2)}`, color: gain >= 0 ? 'text-emerald-500' : 'text-red-500' },
-        { label: 'Total Return', value: `$${final.toLocaleString()} from $${initial.toLocaleString()}` },
+        { label: 'Net Return Gain', value: valid ? `$${gain.toFixed(2)}` : '—', color: gain >= 0 ? 'text-emerald-500' : 'text-red-500' },
+        { label: 'Total Return', value: valid ? `$${fin.toLocaleString()} from $${init.toLocaleString()}` : '—' },
       ]}
       resultLabel="Return on Investment (ROI)"
       downloadData={csvContent}
@@ -40,11 +43,11 @@ export default function RoiCalculator() {
       <div className="space-y-4">
         <div>
           <label htmlFor="lbl-roicalculator-initial-investment" className={labelCls}>Initial Investment ($)</label>
-          <input id="lbl-roicalculator-initial-investment" aria-label="Initial Investment ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input id="lbl-roicalculator-initial-investment" aria-label="Initial Investment ($)" className={inputCls} type="number" value={initial} onChange={e => setInitial(e.target.value)} />
         </div>
         <div>
           <label htmlFor="lbl-roicalculator-final-value" className={labelCls}>Final Value ($)</label>
-          <input id="lbl-roicalculator-final-value" aria-label="Final Value ($)" className={inputCls} type="number" value={final} onChange={e => setFinal(Math.max(0, parseFloat(e.target.value) || 0))} />
+          <input id="lbl-roicalculator-final-value" aria-label="Final Value ($)" className={inputCls} type="number" value={final} onChange={e => setFinal(e.target.value)} />
         </div>
       </div>
     </CalculatorShell>

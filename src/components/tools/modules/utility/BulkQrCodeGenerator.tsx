@@ -62,11 +62,15 @@ export default function BulkQrCodeGenerator() {
 
   const generateBulk = async () => {
     if (csvData.length === 0) { toast.error('Upload a CSV first'); return; }
-    if (csvData.length > PRO_MAX && usage >= DAILY_LIMIT) { toast.error(`Free tier limited to ${DAILY_LIMIT} QR. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
+    // Free tier is 5 QR/day on every path — the old bulk check only gated
+    // files over 100 rows, leaving bulk ≤100 effectively unlimited.
+    if (usage >= DAILY_LIMIT) { toast.error(`You've used your free QR today. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
+    const rows = csvData.slice(0, DAILY_LIMIT);
+    if (csvData.length > DAILY_LIMIT) toast.success(`Free tier: generating first ${DAILY_LIMIT} of ${csvData.length} rows — upgrade to Pro for up to ${PRO_MAX}.`);
     setIsProcessing(true);
     try {
       const zip = new JSZip();
-      for (const item of csvData) {
+      for (const item of rows) {
         const canvas = document.createElement('canvas');
         await QRCode.toCanvas(canvas, item.value, { width: 500, margin: 2, errorCorrectionLevel: 'M' });
         const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(b => resolve(b)));
@@ -74,7 +78,8 @@ export default function BulkQrCodeGenerator() {
       }
       const content = await zip.generateAsync({ type: 'blob' });
       downloadOrShare(URL.createObjectURL(content), 'bulk_qr_codes.zip');
-      toast.success(`Generated ${csvData.length} QR codes!`);
+      trackUsage(usage + 1);
+      toast.success(`Generated ${rows.length} QR codes!`);
     } catch { toast.error('Failed to generate bulk QR codes'); }
     finally { setIsProcessing(false); }
   };
@@ -161,7 +166,7 @@ export default function BulkQrCodeGenerator() {
         )}
 
         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
-          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Generate up to {PRO_MAX} QR codes per batch, custom colors per QR, logo overlay on all QRs, high-resolution output (2000×2000), CSV templates included.</p>
+          <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Generate up to {PRO_MAX} QR codes per batch, CSV templates included. Standard black-on-white PNG output.</p>
           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>
       </div>

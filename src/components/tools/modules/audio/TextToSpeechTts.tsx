@@ -96,6 +96,21 @@ export default function TextToSpeechTts() {
     setIsPaused(false);
   };
 
+  const handleDownloadText = () => {
+    if (!text.trim()) {
+      toast.error("Nothing to download — enter some text first.");
+      return;
+    }
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'speech-text.txt';
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Text downloaded as .txt");
+  };
+
   if (!isSupported) {
     return (
       <div className="max-w-3xl mx-auto mt-12 bg-red-500/10 border border-red-500/20 p-8 rounded-2xl text-center space-y-4">
@@ -110,6 +125,7 @@ export default function TextToSpeechTts() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
+      <p className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-xs">Playback uses your browser&apos;s built-in voices — audio-file (MP3/WAV) export isn&apos;t possible from browser speech synthesis. Use the button below to download your text as a .txt file; audio recording needs a server-side TTS service.</p>
       
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
@@ -154,9 +170,16 @@ export default function TextToSpeechTts() {
                  aria-label="Stop"
                >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clipRule="evenodd" /></svg>
+               </button>
+            )}
+            <button
+                onClick={handleDownloadText}
+                className="flex-1 sm:flex-none bg-zinc-600 hover:bg-zinc-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-label="Download text as .txt file"
+              >
+                Download .txt
               </button>
-           )}
-        </div>
+         </div>
       </div>
 
       {/* Main Content Split */}

@@ -45,15 +45,23 @@ export default function FlattenPdf() {
     setIsProcessing(true);
     try {
       const pdfDoc = await PDFDocument.load(fileBytes);
-      const newPdf = await PDFDocument.create();
-      const pages = await newPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-      pages.forEach((page) => newPdf.addPage(page));
-      const pdfBytes = await newPdf.save();
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+      // Real flatten: burn AcroForm field appearances into page content so
+      // fields are no longer fillable. The old code only copied pages into a
+      // new document, which changed nothing.
+      let flattened = 0;
+      try {
+        const form = pdfDoc.getForm();
+        flattened = form.getFields().length;
+        if (flattened > 0) form.flatten();
+      } catch {
+        flattened = 0; // no AcroForm present — nothing to flatten
+      }
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
 
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
-      toast.success("PDF flattened successfully!");
+      toast.success(flattened > 0 ? `Flattened ${flattened} form field${flattened > 1 ? 's' : ''}!` : 'No fillable fields found — saved a clean copy.');
     } catch (e) {
       console.error(e);
       toast.error("An error occurred while flattening PDF.");

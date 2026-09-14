@@ -14,7 +14,8 @@ export default function BmiCalculator() {
   const [heightIn, setHeightIn] = useState(9);
 
   const heightM = heightCm / 100;
-  const bmi = heightM > 0 ? weightKg / (heightM * heightM) : 0;
+  const valid = weightKg > 0 && heightCm > 0;
+  const bmi = valid && heightM > 0 ? weightKg / (heightM * heightM) : 0;
 
   let category = 'Normal';
   let color = 'text-emerald-500';
@@ -92,31 +93,31 @@ export default function BmiCalculator() {
             <>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
-                <input aria-label="Weight (kg)" type="number" value={weightKg} onChange={e => onWeightKgChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <input aria-label="Weight (kg)" type="range" min="30" max="150" value={weightKg} onChange={e => onWeightKgChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
+                <input aria-label="Weight (kg)" type="number" value={weightKg} onChange={e => onWeightKgChange(parseFloat(e.target.value) || 0)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <input aria-label="Weight (kg)" type="range" min="30" max="150" value={weightKg} onChange={e => onWeightKgChange(parseFloat(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
-                <input aria-label="Height (cm)" type="number" value={heightCm} onChange={e => onHeightCmChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <input aria-label="Height (cm)" type="range" min="100" max="220" value={heightCm} onChange={e => onHeightCmChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
+                <input aria-label="Height (cm)" type="number" value={heightCm} onChange={e => onHeightCmChange(parseFloat(e.target.value) || 0)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <input aria-label="Height (cm)" type="range" min="100" max="220" value={heightCm} onChange={e => onHeightCmChange(parseFloat(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
             </>
           ) : (
             <>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (lbs)</label>
-                <input aria-label="Weight (lbs)" type="number" value={weightLbs} onChange={e => onWeightLbsChange(Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <input aria-label="Weight (lbs)" type="range" min="70" max="330" value={weightLbs} onChange={e => onWeightLbsChange(parseInt(e.target.value))} className="w-full accent-rose-500 mt-1" />
+                <input aria-label="Weight (lbs)" type="number" value={weightLbs} onChange={e => onWeightLbsChange(parseFloat(e.target.value) || 0)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <input aria-label="Weight (lbs)" type="range" min="70" max="330" value={weightLbs} onChange={e => onWeightLbsChange(parseFloat(e.target.value))} className="w-full accent-rose-500 mt-1" />
               </div>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height</label>
                 <div className="flex gap-2">
                   <div className="flex-1">
-                    <input type="number" value={heightFt} aria-label="Height (feet)" onChange={e => onHeightImperialChange(Math.max(0, parseInt(e.target.value) || 0), heightIn)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="ft" />
+                    <input type="number" value={heightFt} aria-label="Height (feet)" onChange={e => onHeightImperialChange(parseFloat(e.target.value) || 0, heightIn)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="ft" />
                     <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">ft</div>
                   </div>
                   <div className="flex-1">
-                    <input type="number" value={heightIn} aria-label="Height (inches)" onChange={e => onHeightImperialChange(heightFt, Math.max(0, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="in" />
+                    <input type="number" value={heightIn} aria-label="Height (inches)" onChange={e => onHeightImperialChange(heightFt, parseFloat(e.target.value) || 0)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" placeholder="in" />
                     <div className="text-[10px] text-[var(--text-muted)] mt-1 text-center">in</div>
                   </div>
                 </div>
@@ -125,16 +126,16 @@ export default function BmiCalculator() {
           )}
         </div>
 
-        <div role="status" aria-label={`BMI ${bmi.toFixed(1)}, ${category}`} className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
+        <div role="status" aria-label={valid ? `BMI ${bmi.toFixed(1)}, ${category}` : 'BMI: enter weight and height'} className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div>
             <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase mb-4">Body Mass Index</h4>
-            <p className="text-5xl font-extrabold text-[var(--text-secondary)] dark:text-white">{bmi.toFixed(1)}</p>
+            <p className="text-5xl font-extrabold text-[var(--text-secondary)] dark:text-white">{valid ? bmi.toFixed(1) : '—'}</p>
           </div>
 
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-6 space-y-3">
             <div>
               <span className="text-xs text-[var(--text-muted)]">Classification</span>
-              <p className={`text-2xl font-bold ${color}`}>{category}</p>
+              <p className={`text-2xl font-bold ${color}`}>{valid ? category : 'Enter values'}</p>
             </div>
             <div className="pt-2 border-t border-[var(--border-subtle)]">
               <span className="text-xs text-[var(--text-muted)]">Healthy BMI Range (18.5–24.9)</span>

@@ -8,6 +8,7 @@ interface DomainStatus {
   domain: string;
   available: boolean;
   error?: string;
+  note?: string;
 }
 
 const COMMON_TLDS = ['.com', '.net', '.org', '.io', '.dev', '.app', '.co', '.me', '.tools', '.xyz'];
@@ -31,11 +32,21 @@ export default function DomainAvailabilityChecker() {
     for (const tld of COMMON_TLDS) {
       const fullDomain = `${name}${tld}`;
       try {
-        const res = await fetch(`https://dns.google/resolve?name=${fullDomain}&type=A`);
-        const data: { Answer?: { data: string }[] } = await res.json();
+        // Check A (web) AND MX (mail) records: a domain with mail but no
+        // website is still registered. The old check looked at A records
+        // only and reported such domains as "available".
+        const [aRes, mxRes] = await Promise.all([
+          fetch(`https://dns.google/resolve?name=${fullDomain}&type=A`),
+          fetch(`https://dns.google/resolve?name=${fullDomain}&type=MX`),
+        ]);
+        const aData: { Answer?: { data: string }[] } = await aRes.json();
+        const mxData: { Answer?: { data: string }[] } = await mxRes.json();
+        const hasA = !!aData.Answer && aData.Answer.length > 0;
+        const hasMx = !!mxData.Answer && mxData.Answer.length > 0;
         checks.push({
           domain: fullDomain,
-          available: !data.Answer || data.Answer.length === 0,
+          available: !hasA && !hasMx,
+          note: !hasA && !hasMx ? 'No DNS records — likely available, confirm at a registrar' : hasA ? 'Has a website — registered' : 'Has mail records — registered',
         });
       } catch {
         checks.push({
@@ -64,7 +75,7 @@ export default function DomainAvailabilityChecker() {
           <Globe className="w-5 h-5 text-emerald-500" />
           Domain Name Availability Checker
         </h2>
-        <p className="text-xs text-[var(--text-secondary)] mt-1">Check domain availability across 10 popular TLDs instantly. Find available domains for your next project.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">Checks live DNS (web + mail records) across 10 popular TLDs. DNS-based — a final registrar check confirms before purchase.</p>
       </div>
 
       <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-6">
@@ -99,6 +110,7 @@ export default function DomainAvailabilityChecker() {
                     <XCircle className="w-5 h-5 text-red-700 dark:text-red-400 shrink-0" />
                   )}
                   <span className="text-sm font-mono text-[var(--text-primary)]">{r.domain}</span>
+                  {r.note && <span className="text-[10px] text-[var(--text-muted)] hidden sm:inline">{r.note}</span>}
                 </div>
                 <span className={`text-xs font-medium ${r.available ? 'text-emerald-600' : 'text-[var(--text-muted)]'}`}>
                   {r.available ? 'Available' : r.error || 'Taken'}

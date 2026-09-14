@@ -396,7 +396,7 @@ export default function UnblurSharpen() {
               <span>Quality</span>
               <span className="text-[var(--accent)] font-bold">{Math.round(quality * 100)}%</span>
             </div>
-            <input aria-label="Output Format"
+            <input aria-label="Output Quality"
               type="range" min="0.1" max="1" step="0.01" value={quality}
               onChange={e => setQuality(Number(e.target.value))}
               className="w-full accent-indigo-500"

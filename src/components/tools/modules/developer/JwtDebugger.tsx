@@ -8,7 +8,16 @@ export default function JwtDebugger() {
   const [header, setHeader] = useState('');
   const [payload, setPayload] = useState('');
   const [error, setError] = useState('');
-  const [expanded, setExpanded] = useState(false);
+
+  // JWTs are base64url-encoded (- and _ instead of + and /). The old code
+  // fed parts straight to atob(), which throws on real issuer tokens.
+  const b64urlToJson = (part: string): unknown => {
+    let b64 = part.replace(/-/g, '+').replace(/_/g, '/');
+    const pad = b64.length % 4;
+    if (pad === 1) throw new Error('bad length');
+    if (pad > 0) b64 += '='.repeat(4 - pad);
+    return JSON.parse(atob(b64));
+  };
 
   const decode = (token: string) => {
     setError('');
@@ -16,19 +25,11 @@ export default function JwtDebugger() {
     const parts = token.trim().split('.');
     if (parts.length !== 3) { setError('Invalid JWT — expected 3 parts (header.payload.signature)'); setHeader(''); setPayload(''); return; }
     try {
-      const h = JSON.parse(atob(parts[0] ?? ""));
-      const p = JSON.parse(atob(parts[1] ?? ""));
+      const h = b64urlToJson(parts[0] ?? "");
+      const p = b64urlToJson(parts[1] ?? "");
       setHeader(JSON.stringify(h, null, 2));
       setPayload(JSON.stringify(p, null, 2));
-    } catch { setError('Invalid Base64 encoding in JWT parts'); setHeader(''); setPayload(''); }
-  };
-
-  const isExpired = () => {
-    try {
-      const p = JSON.parse(payload);
-      if (p.exp) return Date.now() > p.exp * 1000;
-    } catch {}
-    return null;
+    } catch { setError('Invalid Base64URL encoding in JWT parts'); setHeader(''); setPayload(''); }
   };
 
   return (

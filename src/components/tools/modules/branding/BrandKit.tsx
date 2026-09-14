@@ -1,12 +1,25 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Palette, Plus, Trash2, Copy, Check } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Palette, Plus, Trash2, Copy, Check, Download } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from '@/utils/nativeShare';
+import { toast } from 'react-hot-toast';
 
 interface BrandColor {
   hex: string;
   name: string;
 }
+
+const HEX_RE = /^#[0-9a-fA-F]{6}$/;
+
+const STARTER_COLORS: BrandColor[] = [
+  { hex: '#4F46E5', name: 'Primary' },
+  { hex: '#10B981', name: 'Secondary' },
+  { hex: '#F59E0B', name: 'Accent' },
+  { hex: '#111827', name: 'Text' },
+];
+
+const STARTER_FONTS = ['Inter', 'Roboto'];
 
 export default function BrandKit() {
   const [colors, setColors] = useState<BrandColor[]>([]);
@@ -15,25 +28,37 @@ export default function BrandKit() {
   const [newColorName, setNewColorName] = useState('Primary');
   const [newFont, setNewFont] = useState('Inter');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const hydratedRef = useRef(false);
 
-  // Load from local storage
+  // Load from local storage (seed with starter templates only when nothing stored)
   useEffect(() => {
-    const savedColors = localStorage.getItem('brandKit_colors');
-    const savedFonts = localStorage.getItem('brandKit_fonts');
-    if (savedColors) // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate colors from localStorage on mount
-      setColors(JSON.parse(savedColors));
-    if (savedFonts) setFonts(JSON.parse(savedFonts));
+    try {
+      const savedColors = localStorage.getItem('brandKit_colors');
+      const savedFonts = localStorage.getItem('brandKit_fonts');
+      if (savedColors !== null) // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate colors from localStorage on mount
+        setColors(JSON.parse(savedColors));
+      else setColors(STARTER_COLORS);
+      if (savedFonts !== null) setFonts(JSON.parse(savedFonts));
+      else setFonts(STARTER_FONTS);
+    } catch {
+      setColors(STARTER_COLORS);
+      setFonts(STARTER_FONTS);
+    } finally {
+      hydratedRef.current = true;
+    }
   }, []);
 
-  // Save to local storage when state changes
+  // Save to local storage when state changes (skip until hydrated so mount never overwrites storage with [])
   useEffect(() => {
+    if (!hydratedRef.current) return;
     localStorage.setItem('brandKit_colors', JSON.stringify(colors));
     localStorage.setItem('brandKit_fonts', JSON.stringify(fonts));
   }, [colors, fonts]);
 
   const addColor = () => {
+    if (!HEX_RE.test(newColorHex.trim())) { toast.error('Enter a valid 6-digit hex color, e.g. #4F46E5'); return; }
     if (newColorHex) {
-      setColors([...colors, { hex: newColorHex, name: newColorName }]);
+      setColors([...colors, { hex: newColorHex, name: newColorName.trim() || 'Unnamed' }]);
       setNewColorName('');
     }
   };
@@ -61,6 +86,14 @@ export default function BrandKit() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const exportKit = () => {
+    const blob = new Blob([JSON.stringify({ colors, fonts }, null, 2)], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    downloadOrShare(url, 'brand-kit.json');
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+    toast.success('Brand kit exported!');
+  };
+
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-8">
@@ -68,10 +101,13 @@ export default function BrandKit() {
            <div className="p-3 bg-rose-100 dark:bg-rose-900/30 rounded-xl">
              <Palette className="w-8 h-8 text-[var(--accent)]" />
            </div>
-           <div>
-             <h2 className="text-2xl font-bold">Your Brand Kit</h2>
-             <p className="text-[var(--text-secondary)]">Save your brand colors and fonts locally to easily copy them when needed.</p>
-           </div>
+            <div>
+              <h2 className="text-2xl font-bold">Your Brand Kit</h2>
+              <p className="text-[var(--text-secondary)]">Save your brand colors and fonts locally to easily copy them when needed.</p>
+            </div>
+            <button onClick={exportKit} className="ml-auto flex items-center gap-1.5 px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium rounded-xl transition-colors shrink-0" aria-label="Export brand kit as JSON">
+              <Download className="w-4 h-4" /> Export
+            </button>
          </div>
 
          {/* Colors Section */}

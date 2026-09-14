@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ShieldAlert, Copy, Download } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from '@/utils/nativeShare';
 
 export default function RobotsTxtGenerator() {
   const [sitemap, setSitemap] = useState('https://mysite.com/sitemap.xml');
@@ -37,6 +38,14 @@ export default function RobotsTxtGenerator() {
   const handleCopy = () => {
     clipboardWrite(buildRobotsTxt());
     toast.success('Copied robots.txt!');
+  };
+
+  const handleDownload = () => {
+    const blob = new Blob([buildRobotsTxt()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    downloadOrShare(url, 'robots.txt');
+    setTimeout(() => URL.revokeObjectURL(url), 100);
+    toast.success('Downloaded robots.txt!');
   };
 
   return (
@@ -93,7 +102,10 @@ export default function RobotsTxtGenerator() {
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Generated Robots.txt</span>
-              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy robots.txt"><Copy className="w-4 h-4" /></button>
+              <div className="flex gap-1.5">
+                <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy robots.txt"><Copy className="w-4 h-4" /></button>
+                <button onClick={handleDownload} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Download robots.txt"><Download className="w-4 h-4" /></button>
+              </div>
             </div>
             <textarea
               value={buildRobotsTxt()}

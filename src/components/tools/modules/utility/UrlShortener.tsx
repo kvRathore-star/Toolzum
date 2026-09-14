@@ -9,20 +9,19 @@ export default function UrlShortener() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<{ long: string; short: string }[]>([]);
 
   const shortenUrl = async () => {
-    if (!url) return;
-    
-    // Basic URL validation
+    const raw = url.trim();
+    if (!raw) return;
+
+    // Never mutate the user's input — derive a request URL locally instead
+    const requestUrl = raw.startsWith('http://') || raw.startsWith('https://') ? raw : 'https://' + raw;
     try {
-      new URL(url);
+      new URL(requestUrl);
     } catch {
-      if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        setUrl('https://' + url);
-      } else {
-        setError('Please enter a valid URL');
-        return;
-      }
+      setError('Please enter a valid URL');
+      return;
     }
 
     setIsLoading(true);
@@ -31,7 +30,7 @@ export default function UrlShortener() {
     setCopied(false);
 
     try {
-      const response = await fetch(`/api/url-shorten?url=${encodeURIComponent(url.startsWith('http') ? url : 'https://' + url)}`);
+      const response = await fetch(`/api/url-shorten?url=${encodeURIComponent(requestUrl)}`);
       
       if (!response.ok) {
         throw new Error('Failed to shorten URL');
@@ -39,6 +38,7 @@ export default function UrlShortener() {
       
       const data = await response.text();
       setShortUrl(data);
+      setHistory(prev => [{ long: raw, short: data }, ...prev].slice(0, 10));
     } catch (err) {
       setError('Could not shorten URL. Please try again later.');
     } finally {
@@ -64,6 +64,7 @@ export default function UrlShortener() {
             <div>
               <h2 className="text-xl font-bold text-[var(--text-primary)]">URL Shortener</h2>
               <p className="text-sm text-[var(--text-secondary)]">Create short, memorable links instantly</p>
+              <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">Server-based shortening: your URL is sent to our API to create the short link — it is not processed on-device.</p>
             </div>
           </div>
         </div>
@@ -139,6 +140,22 @@ export default function UrlShortener() {
                 >
                   <ExternalLink className="w-4 h-4" />
                 </a>
+              </div>
+            </div>
+          )}
+          {history.length > 0 && (
+            <div className="space-y-1.5">
+              <div className="flex justify-between items-center">
+                <span className="text-xs font-bold text-[var(--text-muted)] uppercase">History</span>
+                <button onClick={() => setHistory([])} className="text-xs text-[var(--text-muted)] hover:underline">Clear</button>
+              </div>
+              <div className="space-y-1 max-h-40 overflow-y-auto">
+                {history.map((h, i) => (
+                  <div key={i} className="flex justify-between items-center gap-2 text-xs px-3 py-2 bg-[var(--bg-overlay)]/50 rounded-lg">
+                    <span className="text-[var(--text-muted)] truncate flex-1">{h.long}</span>
+                    <button onClick={() => { setUrl(h.long); setShortUrl(h.short); }} className="text-blue-600 dark:text-blue-400 hover:underline shrink-0 font-mono">{h.short}</button>
+                  </div>
+                ))}
               </div>
             </div>
           )}

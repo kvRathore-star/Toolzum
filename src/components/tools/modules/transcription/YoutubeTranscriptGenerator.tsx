@@ -16,16 +16,44 @@ export default function YoutubeTranscriptGenerator() {
   
   const [videoUrl, setVideoUrl] = useState("");
   const [detailLevel, setDetailLevel] = useState("Standard Summary");
+  const [transcriptInfo, setTranscriptInfo] = useState('');
+
+  const extractVideoId = (input: string): string | null => {
+    const trimmed = input.trim();
+    const patterns = [
+      /(?:youtube\.com\/watch\?.*v=|youtu\.be\/|youtube\.com\/shorts\/|youtube\.com\/embed\/)([A-Za-z0-9_-]{11})/,
+      /^([A-Za-z0-9_-]{11})$/,
+    ];
+    for (const re of patterns) {
+      const m = trimmed.match(re);
+      if (m?.[1]) return m[1];
+    }
+    return null;
+  };
 
   const handleGenerate = async () => {
     if (!videoUrl.trim()) return toast.error('Please fill in the YouTube Video URL field');
+    const videoId = extractVideoId(videoUrl);
+    if (!videoId) return toast.error('Could not find a video ID — paste a watch, youtu.be, Shorts, or embed link');
 
     setIsProcessing(true);
+    setTranscriptInfo('');
     try {
-      const prompt = `You are an expert YouTube content analyst assistant.\n\nProcess and analyze the content of the YouTube video: ${videoUrl}. Detail level: ${detailLevel}. Create a summary, structured outline, and actionable takeaways.`;
+      // Real captions first: public tracks via our /api/youtube-captions
+      // proxy. Previously this tool sent only the URL to the LLM, which
+      // hallucinated analysis without ever reading the video.
+      const capRes = await fetch(`/api/youtube-captions?id=${videoId}`);
+      const capData = await capRes.json() as { lines?: string[]; lang?: string; error?: string };
+      if (!capRes.ok || !capData.lines?.length) {
+        throw new Error(capData.error || 'No public captions found for this video.');
+      }
+      const transcript = capData.lines.join(' ');
+      setTranscriptInfo(`${capData.lines.length} caption lines (${capData.lang || 'unknown language'}) — analysis below is grounded in this transcript.`);
+      const excerpt = transcript.length > 12000 ? `${transcript.slice(0, 12000)}…` : transcript;
+      const prompt = `You are an expert YouTube content analyst assistant.\n\nAnalyze THIS ACTUAL TRANSCRIPT (do not invent content beyond it). Detail level: ${detailLevel}. Create a summary, structured outline, and actionable takeaways.\n\nTranscript:\n${excerpt}`;
       const response = await generateCompletion([{ role: 'user', content: prompt }], 0.5);
       setOutputText(response);
-      toast.success('Successfully generated!');
+      toast.success('Transcript fetched and analyzed!');
     } catch (e: unknown) {
       toast.error(getErrorMessage(e, "Failed to generate"));
     } finally {
@@ -129,6 +157,9 @@ export default function YoutubeTranscriptGenerator() {
           </div>
 
           <div className="flex-1 flex flex-col">
+            {transcriptInfo && (
+              <p className="text-[11px] text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/30 rounded-xl px-3 py-2 mb-2">{transcriptInfo}</p>
+            )}
             {outputText ? (
               <pre className="flex-1 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
                 {outputText}

@@ -6,23 +6,25 @@ export default function WordFrequencyCounter() {
   const [text, setText] = useState('');
   const [limit, setLimit] = useState(20);
   const [frequencies, setFrequencies] = useState<{ word: string; count: number; pct: number }[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   const analyze = () => {
     const words = text.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(Boolean);
     const freq: Record<string, number> = {};
     words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
     const total = words.length;
+    setTotalCount(total);
     const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, limit).map(([word, count]) => ({ word, count, pct: (count / total) * 100 }));
     setFrequencies(sorted);
   };
 
   const maxCount = frequencies.length > 0 ? frequencies[0]!.count : 1;
-  const totalWords = frequencies.reduce((sum, f) => sum + f.count, 0);
+  const totalWords = totalCount;
 
   const presets = [
     { label: 'Lorem Ipsum', apply: () => { setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'); } },
     { label: 'Repeated Words', apply: () => { setText('the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog the quick brown fox'); } },
-    { label: 'Clear', apply: () => { setText(''); setFrequencies([]); } },
+    { label: 'Clear', apply: () => { setText(''); setFrequencies([]); setTotalCount(0); } },
   ];
 
   const resultText = frequencies.length > 0

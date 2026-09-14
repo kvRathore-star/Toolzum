@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Check, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { isValidIBAN } from 'ibantools';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
 
 export default function IbanValidator() {
   const [iban, setIban] = useState('');
@@ -55,6 +57,8 @@ export default function IbanValidator() {
                 </div>
                 <h4 className="text-lg font-bold text-emerald-500">Valid IBAN</h4>
                 <p className="text-xs text-[var(--text-muted)]">The account format and checksum calculations are correct.</p>
+                <p className="text-xs font-mono text-[var(--text-primary)] break-all">{iban.replace(/\s+/g, '').toUpperCase()}</p>
+                <button onClick={() => { clipboardWrite(iban.replace(/\s+/g, '').toUpperCase()); toast.success('IBAN copied!'); }} className="text-xs text-[var(--accent)] hover:underline">Copy IBAN</button>
               </div>
             ) : (
               <div className="text-center space-y-2 animate-in zoom-in-95">

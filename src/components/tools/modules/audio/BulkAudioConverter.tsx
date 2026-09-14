@@ -1,10 +1,18 @@
 "use client";
-import React from 'react';
+import React, { useRef } from 'react';
 import { BulkToolShell } from '../utility/BulkToolShell';
+import { useFFmpeg } from '@/hooks/useFFmpeg';
+import { fetchFile } from '@ffmpeg/util';
+import { toast } from 'react-hot-toast';
 
 export default function BulkAudioConverter({ defaultConfig: extraConfig }: { defaultConfig?: Record<string, unknown> } = {}) {
   const base = { format: 'wav', sampleRate: '44100' };
   const merged = { ...base, ...extraConfig };
+  const { loadFFmpeg } = useFFmpeg();
+  // processFile runs inside BulkToolShell's handlers (not a component), so
+  // the hook result is bridged via ref.
+  const loadRef = useRef(loadFFmpeg);
+  loadRef.current = loadFFmpeg;
   return (
     <BulkToolShell
       toolSlug="bulk-audio-converter"
@@ -47,16 +55,25 @@ export default function BulkAudioConverter({ defaultConfig: extraConfig }: { def
           audioCtx.close();
           return { name: file.name.replace(/\.[^.]+$/, '.wav'), blob: new Blob([buffer], { type: 'audio/wav' }) };
         }
-        const blob = await new Promise<Blob>(resolve => {
-          const mediaRecorder = new MediaRecorder(new MediaStream(), { mimeType: `audio/${format}` });
-          const chunks: Blob[] = [];
-          mediaRecorder.ondataavailable = e => chunks.push(e.data);
-          mediaRecorder.onstop = () => resolve(new Blob(chunks, { type: `audio/${format}` }));
-          mediaRecorder.start();
-          setTimeout(() => mediaRecorder.stop(), 100);
-        });
+        // Non-WAV formats go through the FFmpeg engine (real transcode).
+        // The old path recorded 100ms of silence via an empty MediaRecorder
+        // and mislabeled it .mp3/.ogg — removed.
+        const ffmpeg = await loadRef.current();
+        if (!ffmpeg) {
+          toast.error('Audio engine failed to load. Try WAV output, which needs no engine.');
+          throw new Error('FFmpeg engine unavailable');
+        }
+        const inputName = `input_${file.name.replace(/\s+/g, '_')}`;
+        const outputName = `output.${format}`;
+        await ffmpeg.writeFile(inputName, await fetchFile(file));
+        await ffmpeg.exec(['-i', inputName, '-ar', String(sampleRate), outputName]);
+        const data = await ffmpeg.readFile(outputName);
+        const bytes = data instanceof Uint8Array ? data : new TextEncoder().encode(String(data));
+        const outBlob = new Blob([bytes.buffer as ArrayBuffer], { type: `audio/${format}` });
+        await ffmpeg.deleteFile(inputName);
+        await ffmpeg.deleteFile(outputName);
         audioCtx.close();
-        return { name: file.name.replace(/\.[^.]+$/, `.${format}`), blob };
+        return { name: file.name.replace(/\.[^.]+$/, `.${format}`), blob: outBlob };
       }}
       configFields={
         <div className="grid grid-cols-2 gap-3">

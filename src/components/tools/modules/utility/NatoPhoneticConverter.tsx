@@ -39,7 +39,7 @@ export default function NatoPhoneticConverter() {
     toast.success('Copied to clipboard!');
   };
 
-  const toggleMode = () => setMode(m => m === 'to' ? 'from' : 'from');
+  const toggleMode = () => setMode(m => m === 'to' ? 'from' : 'to');
 
   return (
     <div className="max-w-2xl mx-auto space-y-5 animate-in fade-in duration-500">

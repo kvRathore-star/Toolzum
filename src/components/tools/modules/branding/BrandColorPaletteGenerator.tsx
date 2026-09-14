@@ -22,6 +22,10 @@ export default function BrandColorPaletteGenerator() {
 
   const [brandDesc, setBrandDesc] = useState('');
   const [style, setStyle] = useState('Minimal & Modern');
+  const [swatches, setSwatches] = useState<{ name: string; hex: string; usage: string }[]>([]);
+  const [paletteName, setPaletteName] = useState('');
+  const [designNotes, setDesignNotes] = useState('');
+  const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 
   const handleGenerate = async () => {
     if (!brandDesc.trim()) return toast.error('Please describe your brand');
@@ -55,8 +59,15 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
       try {
         const parsed = JSON.parse(cleaned);
         setOutputText(JSON.stringify(parsed, null, 2));
+        const list = Array.isArray(parsed?.colors) ? parsed.colors.filter((c: { hex?: string }) => typeof c?.hex === 'string' && HEX_RE.test(c.hex.trim())).map((c: { name?: string; hex: string; usage?: string }) => ({ name: c.name || 'Unnamed', hex: c.hex.trim(), usage: c.usage || '' })) : [];
+        setSwatches(list);
+        setPaletteName(typeof parsed?.palette_name === 'string' ? parsed.palette_name : '');
+        setDesignNotes(typeof parsed?.design_notes === 'string' ? parsed.design_notes : '');
       } catch {
         setOutputText(cleaned);
+        setSwatches([]);
+        setPaletteName('');
+        setDesignNotes('');
       }
       
       toast.success('Palette generated!');
@@ -152,10 +163,31 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
 
           <div className="flex-1 flex flex-col">
             {outputText ? (
-              <div className="flex-1 overflow-y-auto max-h-[500px]">
-                <pre className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed">
-                  {outputText}
-                </pre>
+              <div className="flex-1 overflow-y-auto max-h-[500px] space-y-4">
+                {swatches.length > 0 && (
+                  <div className="space-y-3">
+                    {paletteName && <h5 className="font-bold text-[var(--text-primary)]">{paletteName}</h5>}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                      {swatches.map((c, i) => (
+                        <button key={i} onClick={() => { clipboardWrite(c.hex); toast.success(`${c.name} ${c.hex} copied!`); }} className="rounded-xl overflow-hidden border border-[var(--border-subtle)] text-left hover:shadow-md transition-shadow" aria-label={`Copy ${c.name} ${c.hex}`}>
+                          <div className="h-16 w-full" style={{ backgroundColor: c.hex }} />
+                          <div className="p-2 bg-[var(--bg-overlay)]">
+                            <div className="text-xs font-bold text-[var(--text-primary)]">{c.name}</div>
+                            <div className="text-[11px] font-mono text-[var(--text-secondary)]">{c.hex}</div>
+                            {c.usage && <div className="text-[10px] text-[var(--text-muted)] truncate">{c.usage}</div>}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                    {designNotes && <p className="text-xs text-[var(--text-secondary)] italic">{designNotes}</p>}
+                  </div>
+                )}
+                <details className="group">
+                  <summary className="text-xs font-bold text-[var(--text-muted)] uppercase cursor-pointer hover:text-[var(--text-primary)]">Raw JSON</summary>
+                  <pre className="mt-2 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                    {outputText}
+                  </pre>
+                </details>
               </div>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center text-[var(--text-muted)]">

@@ -13,15 +13,9 @@ interface DecodedQr {
   height: number;
 }
 
-interface QrMetadata {
-  version?: number;
-  errorCorrection?: string;
-}
-
 export default function QrCodeReader() {
   const [file, setFile] = useState<File | null>(null);
   const [decodedData, setDecodedData] = useState<DecodedQr[]>([]);
-  const [metadata, setMetadata] = useState<QrMetadata | null>(null);
   const [preview, setPreview] = useState<string>('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState('');
@@ -74,7 +68,8 @@ export default function QrCodeReader() {
 
       if (code) {
         setDecodedData([{ data: code.data, x: code.location.topLeftCorner.x, y: code.location.topLeftCorner.y, width: code.location.bottomRightCorner.x - code.location.topLeftCorner.x, height: code.location.bottomRightCorner.y - code.location.topLeftCorner.y }]);
-        setMetadata({ version: 1, errorCorrection: 'M' });
+        // jsQR returns content + corner location only — it exposes no version
+        // or error-correction level, so only real decoded data is shown.
         toast.success('QR code detected!');
       } else {
         setError('No QR code found in the image');
@@ -259,11 +254,9 @@ export default function QrCodeReader() {
               <img ref={imageRef} src={preview} alt="QR code preview" className="max-h-80 rounded-xl border border-[var(--border-subtle)]" />
               <canvas ref={overlayRef} className="absolute inset-0 pointer-events-none" />
             </div>
-            {decodedData.length > 0 && metadata && (
+            {decodedData.length > 0 && (
               <div className="flex items-center gap-4 mt-3 text-xs text-[var(--text-secondary)]">
-                <span>Version: {metadata.version}</span>
-                <span>ECC: {metadata.errorCorrection}</span>
-                <span>Modules: {decodedData.length}</span>
+                <span>Content length: {decodedData[0]!.data.length} chars</span>
               </div>
             )}
           </div>
@@ -299,7 +292,7 @@ export default function QrCodeReader() {
         {!file && !isProcessing && !error && (
           <div className="text-center py-6 text-[var(--text-muted)] text-sm border-t border-[var(--border-subtle)]">
             <p>Upload an image containing a QR code to get started.</p>
-            <p className="text-xs mt-1">Supports multiple QR codes in a single image.</p>
+            <p className="text-xs mt-1">Decodes one QR code per image — the clearest, largest code.</p>
           </div>
         )}
       </div>

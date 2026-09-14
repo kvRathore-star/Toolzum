@@ -4,16 +4,23 @@ import { Activity } from 'lucide-react';
 import { CalcActions } from '../shared/CalcActions';
 
 export default function BmrCalculator() {
-  const [weight, setWeight] = useState(70);
-  const [height, setHeight] = useState(170);
-  const [age, setAge] = useState(25);
+  const [weight, setWeight] = useState('70');
+  const [height, setHeight] = useState('170');
+  const [age, setAge] = useState('25');
   const [gender, setGender] = useState('male');
   const [activity, setActivity] = useState(1.2); // Sedentary
 
+  // String states + parseFloat: the old numeric states with Math.max(1, …)
+  // clamps made fields unclearable and parseInt truncated decimals.
+  const w = parseFloat(weight);
+  const h = parseFloat(height);
+  const a = parseFloat(age);
+  const valid = Number.isFinite(w) && Number.isFinite(h) && Number.isFinite(a) && w > 0 && h > 0 && a > 0;
+
   // Mifflin-St Jeor Equation
-  const bmr = gender === 'male'
-    ? (10 * weight) + (6.25 * height) - (5 * age) + 5
-    : (10 * weight) + (6.25 * height) - (5 * age) - 161;
+  const bmr = valid ? (gender === 'male'
+    ? (10 * w) + (6.25 * h) - (5 * a) + 5
+    : (10 * w) + (6.25 * h) - (5 * a) - 161) : 0;
 
   const tdee = bmr * activity;
 
@@ -35,19 +42,19 @@ export default function BmrCalculator() {
               </select>
             </div>
             <div className="space-y-1">
-              <label htmlFor="lbl-bmrcalculator-age-years" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Age (Years)</label>
-              <input id="lbl-bmrcalculator-age-years" aria-label="Age (Years)" type="number" value={age} onChange={e => setAge(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-bmrcalculator-age-years" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Age (Years)</label>
+                <input id="lbl-bmrcalculator-age-years" aria-label="Age (Years)" type="number" min="1" value={age} onChange={e => setAge(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label htmlFor="lbl-bmrcalculator-weight-kg" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
-              <input id="lbl-bmrcalculator-weight-kg" aria-label="Weight (kg)" type="number" value={weight} onChange={e => setWeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-bmrcalculator-weight-kg" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Weight (kg)</label>
+                <input id="lbl-bmrcalculator-weight-kg" aria-label="Weight (kg)" type="number" min="1" step="0.1" value={weight} onChange={e => setWeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
             <div className="space-y-1">
-              <label htmlFor="lbl-bmrcalculator-height-cm" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
-              <input id="lbl-bmrcalculator-height-cm" aria-label="Height (cm)" type="number" value={height} onChange={e => setHeight(Math.max(1, parseInt(e.target.value) || 0))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                <label htmlFor="lbl-bmrcalculator-height-cm" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Height (cm)</label>
+                <input id="lbl-bmrcalculator-height-cm" aria-label="Height (cm)" type="number" min="1" step="0.1" value={height} onChange={e => setHeight(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
             </div>
           </div>
 
@@ -66,16 +73,16 @@ export default function BmrCalculator() {
         <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div className="space-y-4">
             <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">Basal Metabolic Rate</h4>
-            <p className="text-3xl font-extrabold text-[var(--text-secondary)] dark:text-white">{Math.round(bmr)} kcal/day</p>
+            <p className="text-3xl font-extrabold text-[var(--text-secondary)] dark:text-white">{valid ? `${Math.round(bmr)} kcal/day` : '—'}</p>
           </div>
 
           <div className="border-t border-[var(--border-subtle)] pt-4 mt-6">
             <span className="text-xs text-[var(--text-muted)]">TDEE (Daily Calories Needed)</span>
-            <p className="text-4xl font-extrabold text-[var(--accent)]">{Math.round(tdee)} kcal/day</p>
+            <p className="text-4xl font-extrabold text-[var(--accent)]">{valid ? `${Math.round(tdee)} kcal/day` : 'Enter weight, height & age'}</p>
           </div>
           <CalcActions
-            result={`BMR: ${bmr.toFixed(0)} kcal/day | TDEE: ${tdee.toFixed(0)} kcal/day`}
-            downloadData={`Metric,Value\nBMR,${bmr.toFixed(0)} kcal/day\nTDEE,${tdee.toFixed(0)} kcal/day\nActivity Level,${activity}\nWeight,${weight} kg\nHeight,${height} cm\nAge,${age}`}
+            result={valid ? `BMR: ${bmr.toFixed(0)} kcal/day | TDEE: ${tdee.toFixed(0)} kcal/day` : ''}
+            downloadData={valid ? `Metric,Value\nBMR,${bmr.toFixed(0)} kcal/day\nTDEE,${tdee.toFixed(0)} kcal/day\nActivity Level,${activity}\nWeight,${weight} kg\nHeight,${height} cm\nAge,${age}` : ''}
             downloadFilename="bmr-result.csv"
           />
         </div>

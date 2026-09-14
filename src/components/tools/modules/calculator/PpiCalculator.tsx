@@ -4,19 +4,23 @@ import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
 export default function PpiCalculator() {
-  const [diagPixels, setDiagPixels] = useState('2200');
+  const [resW, setResW] = useState('1179');
+  const [resH, setResH] = useState('2556');
   const [diagInches, setDiagInches] = useState('6.1');
   const presets = [
-    { label: 'iPhone 6.1"', apply: () => { setDiagPixels('2532'); setDiagInches('6.1'); } },
-    { label: '27" Monitor', apply: () => { setDiagPixels('3840'); setDiagInches('27'); } },
-    { label: '15" Laptop', apply: () => { setDiagPixels('1920'); setDiagInches('15.6'); } },
+    { label: 'iPhone 6.1"', apply: () => { setResW('1179'); setResH('2556'); setDiagInches('6.1'); } },
+    { label: '27" 4K Monitor', apply: () => { setResW('3840'); setResH('2160'); setDiagInches('27'); } },
+    { label: '15.6" Laptop', apply: () => { setResW('1920'); setResH('1080'); setDiagInches('15.6'); } },
   ];
-  const hasInput = diagPixels !== '' && diagInches !== '';
+  const hasInput = resW !== '' && resH !== '' && diagInches !== '';
   let ppi: number | null = null;
   if (hasInput) {
-    const p = parseFloat(diagPixels) || 0;
-    const i = parseFloat(diagInches) || 1;
-    ppi = p / i;
+    // True PPI: diagonal pixels over diagonal inches. The old version asked
+    // for a free-text "diagonal pixels" value and divided it directly.
+    const w = parseFloat(resW) || 0;
+    const h = parseFloat(resH) || 0;
+    const d = parseFloat(diagInches) || 0;
+    ppi = d > 0 && w > 0 && h > 0 ? Math.sqrt(w * w + h * h) / d : null;
   }
   const customResult = hasInput && ppi !== null ? (
     <div className="text-center">
@@ -26,9 +30,10 @@ export default function PpiCalculator() {
   ) : null;
   return (
     <CalculatorShell category="Calculator" title="PPI Calculator" result="" auto presets={presets} accent="orange" customResult={customResult}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div><label htmlFor="lbl-ppicalculator-diagonal-pixels" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Pixels</label><input id="lbl-ppicalculator-diagonal-pixels" aria-label="Diagonal Pixels" type="number" value={diagPixels} onChange={e => setDiagPixels(e.target.value)} className={inputCls} /></div>
-        <div><label htmlFor="lbl-ppicalculator-diagonal-inches" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal Inches</label><input id="lbl-ppicalculator-diagonal-inches" aria-label="Diagonal Inches" type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputCls} /></div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div><label htmlFor="lbl-ppicalculator-width-pixels" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Width (pixels)</label><input id="lbl-ppicalculator-width-pixels" aria-label="Width in pixels" type="number" value={resW} onChange={e => setResW(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-ppicalculator-height-pixels" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Height (pixels)</label><input id="lbl-ppicalculator-height-pixels" aria-label="Height in pixels" type="number" value={resH} onChange={e => setResH(e.target.value)} className={inputCls} /></div>
+        <div><label htmlFor="lbl-ppicalculator-diagonal-inches" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Diagonal (inches)</label><input id="lbl-ppicalculator-diagonal-inches" aria-label="Diagonal in inches" type="number" value={diagInches} onChange={e => setDiagInches(e.target.value)} step="0.1" className={inputCls} /></div>
       </div>
     </CalculatorShell>
   );

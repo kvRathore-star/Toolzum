@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import { toPng, toJpeg, toSvg } from 'html-to-image';
 import DOMPurify from 'dompurify';
@@ -8,20 +8,13 @@ import { downloadOrShare } from '@/utils/nativeShare';
 export default function HtmlToImage() {
   const [htmlContent, setHtmlContent] = useState('<div style="padding: 20px; background: linear-gradient(45deg, #FF6B6B, #4ECDC4); border-radius: 10px; color: white; font-family: sans-serif; text-align: center;"><h1>Hello World</h1><p>Edit this HTML to generate an image!</p></div>');
   const [format, setFormat] = useState<'png' | 'jpeg' | 'svg'>('png');
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const previewContainerRef = useRef<HTMLDivElement>(null);
+  const renderRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe || !iframe.contentDocument) return;
-    const sanitized = DOMPurify.sanitize(htmlContent);
-    iframe.contentDocument.open();
-    iframe.contentDocument.write(sanitized);
-    iframe.contentDocument.close();
-  }, [htmlContent]);
+  const sanitizedHtml = useMemo(() => DOMPurify.sanitize(htmlContent), [htmlContent]);
 
   const convert = async () => {
-    const container = previewContainerRef.current;
+    const container = renderRef.current ?? previewContainerRef.current;
     if (!container) return;
     toast.loading("Rendering Image...", { id: 'html' });
     try {
@@ -47,7 +40,7 @@ export default function HtmlToImage() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6">
          <div className="text-center">
            <h2 className="text-2xl font-bold">HTML to Image Converter</h2>
-           <p className="text-[var(--text-secondary)]">Render custom HTML/CSS directly into a downloadable image (PNG, JPG, SVG).</p>
+           <p className="text-[var(--text-secondary)]">Render custom HTML/CSS directly into a downloadable image (PNG, JPG, SVG). Paste HTML markup below — screenshots from a URL are not possible fully client-side (cross-origin pages cannot be rasterized in the browser).</p>
          </div>
          
          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -76,12 +69,11 @@ export default function HtmlToImage() {
            <div className="space-y-4">
              <h3 className="font-semibold">Live Preview</h3>
              <div ref={previewContainerRef} className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 overflow-auto bg-[var(--bg-overlay)] flex items-center justify-center min-h-[16rem]">
-               <iframe
-                 ref={iframeRef}
-                 className="w-full h-full min-h-[14rem]"
-                 sandbox="allow-same-origin"
-                 title="Preview"
-               />
+                <div
+                  ref={renderRef}
+                  className="w-full min-h-[14rem] bg-white rounded-lg overflow-hidden"
+                  dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
+                />
              </div>
            </div>
          </div>

@@ -13,6 +13,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 const COMMON_FOODS: Record<string, number> = {
   'Rice (1 cup)': 206, 'Chicken breast (100g)': 165, 'Egg (1)': 78, 'Apple': 95,
   'Banana': 105, 'Bread (1 slice)': 75, 'Milk (1 cup)': 149, 'Pasta (1 cup)': 220,
+  'Oatmeal (1 cup)': 158, 'Greek yogurt (170g)': 100, 'Almonds (28g)': 164, 'Orange': 62,
+  'Salmon (100g)': 208, 'Potato (1 medium)': 161, 'Chapati (1)': 104, 'Dal (1 cup)': 230,
 };
 
 export function CalorieTracker() {
@@ -68,14 +70,22 @@ export function CalorieTracker() {
 }
 
 export function WaistToHipRatioCalculator() {
-  const [waist, setWaist] = useState(80);
-  const [hip, setHip] = useState(95);
+  const [waist, setWaist] = useState('80');
+  const [hip, setHip] = useState('95');
   const [gender, setGender] = useState<'male' | 'female'>('male');
   const [ratio, setRatio] = useState<number | null>(null);
+  const [inputError, setInputError] = useState('');
 
   const calculate = () => {
-    if (hip <= 0) return;
-    setRatio(Math.round((waist / hip) * 100) / 100);
+    const w = parseFloat(waist);
+    const h = parseFloat(hip);
+    if (waist.trim() === '' || hip.trim() === '' || isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+      setInputError('Enter valid waist and hip measurements greater than 0.');
+      setRatio(null);
+      return;
+    }
+    setInputError('');
+    setRatio(Math.round((w / h) * 100) / 100);
   };
 
   return (
@@ -98,6 +108,9 @@ export function WaistToHipRatioCalculator() {
           <button onClick={() => setGender('female')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${gender === 'female' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>Female</button>
         </div>
         <button onClick={calculate} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 rounded-xl transition-all">Calculate WHR</button>
+        {inputError && (
+          <p role="alert" className="text-xs text-red-600 dark:text-red-400 font-medium mt-2">{inputError}</p>
+        )}
         {ratio !== null && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl text-center">
             <div className="text-3xl font-bold text-[var(--text-primary)]">{ratio}</div>

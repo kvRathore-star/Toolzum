@@ -8,7 +8,7 @@ import { Input, FIRST_NAMES, LAST_NAMES, DOMAINS, CITIES, STREETS, randInt, rand
 
 type Field = 'name' | 'email' | 'phone' | 'address';
 export default function FakeDataGenerator() {
-  const [count, setCount] = useState(5); const [fields, setFields] = useState<Field[]>(['name', 'email', 'phone', 'address']); const [data, setData] = useState<Record<string, string>[]>([]);
+  const [count, setCount] = useState(5); const [fields, setFields] = useState<Field[]>(['name', 'email', 'phone', 'address']); const [data, setData] = useState<Record<string, string>[]>([]); const [format, setFormat] = useState<'json' | 'csv'>('json');
   const toggleField = (f: Field) => setFields(prev => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
   const generate = () => { const entries: Record<string, string>[] = []; for (let i = 0; i < count; i++) { const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES); const entry: Record<string, string> = {}; if (fields.includes('name')) entry.Name = fn + ' ' + ln; if (fields.includes('email')) entry.Email = fn.toLowerCase() + '.' + ln.toLowerCase() + randInt(1, 99) + '@' + randItem(DOMAINS); if (fields.includes('phone')) entry.Phone = '+91 ' + randInt(70000, 99999) + ' ' + randInt(10000, 99999); if (fields.includes('address')) entry.Address = randInt(1, 999) + ' ' + randItem(STREETS) + ', ' + randItem(CITIES) + ' - ' + randInt(100001, 999999); entries.push(entry); } setData(entries); };
   const toCSV = () => { if (!data.length) return ''; const headers = Object.keys(data[0]!); return [headers.join(','), ...data.map(r => headers.map(h => '"' + (r[h] || '').replace(/"/g, '""') + '"').join(','))].join('\n'); };
@@ -22,6 +22,8 @@ export default function FakeDataGenerator() {
 
   const resultText = data.length > 0 ? 'Generated ' + data.length + ' records with ' + fields.length + ' fields' : 'Configure and generate';
 
+  const downloadPayload = data.length > 0 ? (format === 'json' ? JSON.stringify(data, null, 2) : toCSV()) : '';
+
   return (
     <CalculatorShell category="Utility"
       title="Fake Data Generator"
@@ -30,11 +32,21 @@ export default function FakeDataGenerator() {
       calculateLabel="Generate"
       presets={presets}
       accent="emerald"
-      downloadData={data.length > 0 ? JSON.stringify(data, null, 2) : ''}
-      downloadFilename="fake-data.json"
+      downloadData={downloadPayload}
+      downloadFilename={format === 'json' ? 'fake-data.json' : 'fake-data.csv'}
     >
       <div className="space-y-4">
-        <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+        <div className="grid grid-cols-2 gap-3">
+          <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
+          <div className="mb-3">
+            <label htmlFor="lbl-fakedatagenerator-format" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
+            <select id="lbl-fakedatagenerator-format" aria-label="Format" value={format} onChange={e => setFormat(e.target.value as 'json' | 'csv')}
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              <option value="json">JSON</option>
+              <option value="csv">CSV</option>
+            </select>
+          </div>
+        </div>
         <div className="flex flex-wrap gap-2">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider w-full">Fields</span>
           {(['name', 'email', 'phone', 'address'] as Field[]).map(f => (

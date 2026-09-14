@@ -71,22 +71,22 @@ export default function RepairPdf() {
       }
       log.push(`Verified ${recoveredCount} page(s) with valid dimensions.`);
 
-      log.push("Rebuilding document structure...");
-      log.push("Normalizing page references and cross-reference table...");
-      log.push("Re-saving PDF with repaired structure...");
-
+      // Honest repair: lenient load + clean re-serialization with flat object
+      // streams, then a verification reload. This fixes broken cross-reference
+      // tables and truncated downloads — not object-level corruption.
+      log.push("Re-serializing document with flat object streams...");
       const pdfBytes = await pdfDoc.save({ useObjectStreams: false });
 
       const repairedDoc = await PDFDocument.load(pdfBytes);
       const repairedCount = repairedDoc.getPageCount();
-      log.push(`Repaired PDF verified: ${repairedCount} page(s) intact.`);
+      log.push(`Verified reload: ${repairedCount} page(s) intact.`);
 
-      const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
+      const blob = new Blob([pdfBytes as unknown as BlobPart], { type: 'application/pdf' });
       if (outputUrl) URL.revokeObjectURL(outputUrl);
       setOutputUrl(URL.createObjectURL(blob));
-      log.push("Repair complete. PDF is ready for download.");
+      log.push("Done. If pages were missing before, this file only recovers what was still readable — severely corrupted objects cannot be rebuilt in a browser.");
       setRepairLog(log);
-      toast.success("PDF repaired successfully!");
+      toast.success("Recovery pass complete — check the log!");
     } catch (e) {
       console.error(e);
       log.push("Repair failed: " + (e instanceof Error ? e.message : "Unknown error"));
@@ -101,7 +101,7 @@ export default function RepairPdf() {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
         <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
-          <strong>PDF Repair:</strong> Rebuilds corrupted or damaged PDF files and recovers readable content. Attempts encryption bypass and structure reconstruction automatically.
+          <strong>PDF Recovery Pass:</strong> Re-serializes damaged PDFs and recovers readable pages. Fixes broken cross-reference tables and truncated downloads; cannot rebuild severely corrupted objects.
         </div>
         <FileUploader
           accept="application/pdf"

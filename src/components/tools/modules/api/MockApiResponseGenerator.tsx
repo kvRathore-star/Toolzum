@@ -57,6 +57,7 @@ export default function MockApiResponseGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Mock API Response Generator</h2>
+        <p className="text-xs text-[var(--text-secondary)]">Schema-form-driven: describe a freeform JSON shape with type keywords. For OpenAPI YAML specs, use the OpenAPI Mock Generator instead.</p>
         <div className="flex flex-wrap gap-1.5">
           {presets.map(p => (
             <button key={p.label} onClick={() => { setSchema(p.schema); setOutput(''); }}

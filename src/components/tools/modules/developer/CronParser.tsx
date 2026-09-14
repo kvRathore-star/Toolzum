@@ -7,19 +7,56 @@ export default function CronParser() {
   const [expression, setExpression] = useState('*/5 * * * *');
   const [result, setResult] = useState<{ label: string; value: string }[]>([]);
 
+  const FIELD_BOUNDS: [number, number][] = [[0, 59], [0, 23], [1, 31], [1, 12], [0, 7]];
+  const numOk = (n: number, i: number): boolean => Number.isInteger(n) && n >= FIELD_BOUNDS[i]![0] && n <= FIELD_BOUNDS[i]![1];
+  const describePart = (part: string, i: number, label: string): { value: string; error?: string } => {
+    const [lo, hi] = FIELD_BOUNDS[i]!;
+    if (part === '*') return { value: `Every ${label.toLowerCase()}` };
+    const stepM = part.match(/^\*\/(\d+)$/);
+    if (stepM) { const st = parseInt(stepM[1]!); if (!(st >= 1 && st <= hi)) return { value: part, error: `${label} step ${st} out of range (${lo}-${hi})` }; return { value: `Every ${st} ${label.toLowerCase()}(s)` }; }
+    const rangeM = part.match(/^(\d+)-(\d+)(?:\/(\d+))?$/);
+    if (rangeM) { const a = parseInt(rangeM[1]!); const b = parseInt(rangeM[2]!); const st = rangeM[3] ? parseInt(rangeM[3]!) : 1; if (!numOk(a, i) || !numOk(b, i)) return { value: part, error: `${label} range ${a}-${b} out of bounds (${lo}-${hi})` }; if (a > b) return { value: part, error: `${label} range start ${a} is after end ${b}` }; return { value: `${label} from ${a} to ${b}${rangeM[3] ? ` every ${st}` : ''}` }; }
+    if (part.includes(',')) { for (const v of part.split(',')) { const rm = v.match(/^(\d+)-(\d+)$/); if (rm) { if (!numOk(parseInt(rm[1]!), i) || !numOk(parseInt(rm[2]!), i)) return { value: part, error: `${label} list entry ${v} out of bounds (${lo}-${hi})` }; } else if (!/^\d+$/.test(v) || !numOk(parseInt(v), i)) return { value: part, error: `${label} value ${v} out of bounds (${lo}-${hi})` }; } return { value: `At ${part}` }; }
+    if (!/^\d+$/.test(part) || !numOk(parseInt(part), i)) return { value: part, error: `${label} value ${part} out of bounds (${lo}-${hi})` };
+    return { value: `At ${part}` };
+  };
+  const fieldMatches = (field: string, v: number, i: number): boolean => {
+    const lo = FIELD_BOUNDS[i]![0];
+    const norm = (n: number): number => (i === 4 && n === 7 ? 0 : n);
+    for (const alt of field.split(',')) {
+      if (alt === '*') return true;
+      const sm = alt.match(/^\*\/(\d+)$/);
+      if (sm) { const st = parseInt(sm[1]!); if (st >= 1 && (v - lo) % st === 0) return true; continue; }
+      const rm = alt.match(/^(\d+)-(\d+)(?:\/(\d+))?$/);
+      if (rm) { const a = norm(parseInt(rm[1]!)); const b = norm(parseInt(rm[2]!)); const st = rm[3] ? parseInt(rm[3]!) : 1; const vv = norm(v); if (vv >= a && vv <= b && (vv - a) % st === 0) return true; continue; }
+      if (/^\d+$/.test(alt) && norm(parseInt(alt)) === norm(v)) return true;
+    }
+    return false;
+  };
+  const nextCronRuns = (fields: string[], count = 3): string[] => {
+    const out: string[] = [];
+    const d = new Date(); d.setSeconds(0, 0); d.setMinutes(d.getMinutes() + 1);
+    const domR = fields[2] !== '*'; const dowR = fields[4] !== '*';
+    for (let t = 0; t < 525600 && out.length < count; t++) {
+      const vals = [d.getMinutes(), d.getHours(), d.getDate(), d.getMonth() + 1, d.getDay()];
+      let ok = fieldMatches(fields[0]!, vals[0]!, 0) && fieldMatches(fields[1]!, vals[1]!, 1) && fieldMatches(fields[3]!, vals[3]!, 3);
+      if (ok) { const domOk = fieldMatches(fields[2]!, vals[2]!, 2); const dowOk = fieldMatches(fields[4]!, vals[4]!, 4); ok = domR && dowR ? (domOk || dowOk) : (domOk && dowOk); }
+      if (ok) out.push(new Date(d).toLocaleString());
+      d.setMinutes(d.getMinutes() + 1);
+    }
+    return out;
+  };
   const parse = (expr: string) => {
     if (!expr.trim()) { setResult([]); return; }
     const parts = expr.trim().split(/\s+/);
     if (parts.length < 5) { setResult([{ label: 'Error', value: 'Expected at least 5 fields (minute hour day month weekday)' }]); return; }
 
     const labels = ['Minute', 'Hour', 'Day of Month', 'Month', 'Day of Week'];
-    const descriptions = parts.map((p, i) => {
-      if (p === '*') return { label: labels[i] ?? "", value: `Every ${labels[i]!.toLowerCase()}` };
-      if (p.startsWith('*/')) return { label: labels[i] ?? "", value: `Every ${p.slice(2)} ${labels[i]!.toLowerCase()}(s)` };
-      if (p.includes(',')) return { label: labels[i] ?? "", value: `At ${p}` };
-      if (p.includes('-')) return { label: labels[i] ?? "", value: `Every minute between ${p}` };
-      return { label: labels[i] ?? "", value: `At ${p}` };
-    });
+    const fields = parts.slice(0, 5);
+    const described = fields.map((p, i) => ({ label: labels[i] ?? "", ...describePart(p!, i, labels[i]!) }));
+    const descriptions = described.map((d) => ({ label: d.label, value: d.value }));
+    const errors = described.filter((d) => d.error).map((d) => ({ label: 'Error', value: `${d.label}: ${d.error}` }));
+    if (errors.length > 0) { setResult([...errors, ...descriptions]); return; }
 
     const h = parts[1], m = parts[0], w = parts[4];
     let readable = '';
@@ -30,9 +67,11 @@ export default function CronParser() {
     else if (m === '0' && h === '0' && w === '0') readable = 'Every Sunday at midnight';
     else readable = descriptions.map(d => d.value).join(', ');
 
+    const upcoming = nextCronRuns(fields as string[], 3);
     setResult([
       ...descriptions,
       { label: 'Readable', value: readable.charAt(0).toUpperCase() + readable.slice(1) },
+      ...upcoming.map((t, i) => ({ label: `Next run ${i + 1}`, value: t })),
     ]);
   };
 

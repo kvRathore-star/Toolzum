@@ -333,7 +333,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'video-watermark-adder': dynamic(() => import('@/components/tools/modules/video/VideoWatermarkAdder'), { ssr: false, loading: () => <DynamicImportFallback slug="video-watermark-adder" /> }),
   'gst-invoice-generator': dynamic(() => import('@/components/tools/modules/pdf/GstInvoiceGenerator'), { ssr: false, loading: () => <DynamicImportFallback slug="gst-invoice-generator" /> }),
   'itr-filing-helper': dynamic(() => import('@/components/tools/modules/indian-utilities/ItrFilingHelper'), { ssr: false, loading: () => <DynamicImportFallback slug="itr-filing-helper" /> }),
-  'browser-extension': dynamic(() => import('@/components/tools/modules/extension/BrowserExtension'), { ssr: false, loading: () => <DynamicImportFallback slug="browser-extension" /> }),
   'pan-verification': dynamic(() => import('@/components/tools/modules/indian-utilities/PanVerification'), { ssr: false, loading: () => <DynamicImportFallback slug="pan-verification" /> }),
   'ifsc-code-lookup': dynamic(() => import('@/components/tools/modules/indian-utilities/IfscLookup'), { ssr: false, loading: () => <DynamicImportFallback slug="ifsc-code-lookup" /> }),
   'voter-id-form-helper': dynamic(() => import('@/components/tools/modules/indian-utilities/VoterIdHelper'), { ssr: false, loading: () => <DynamicImportFallback slug="voter-id-form-helper" /> }),

@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { Gauge, Zap, Loader2 } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { downloadOrShare } from '@/utils/nativeShare';
 
 type BenchType = 'integer' | 'float' | 'array' | 'string' | 'mixed';
 
@@ -114,6 +115,10 @@ export default function BenchmarkBuilder() {
             </div>
             <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-3 overflow-hidden">
               <div className={`h-full rounded-full transition-all duration-500 ${ranking.color}`} style={{ width: `${ranking.pct}%` }} />
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => { const report = `Benchmark: ${BENCH_LABELS[benchType]}\nScore: ${currentScore.toLocaleString()} ops/s\nRanking: ${ranking.label} (faster than ~${ranking.pct}%)\nDuration: ${duration}s\nDate: ${new Date().toLocaleString()}`; clipboardWrite(report); toast.success('Report copied!'); }} className="px-3 py-1.5 text-[11px] font-bold bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy Report</button>
+              <button onClick={() => { const report = `Benchmark: ${BENCH_LABELS[benchType]}\nScore: ${currentScore.toLocaleString()} ops/s\nRanking: ${ranking.label} (faster than ~${ranking.pct}%)\nDuration: ${duration}s\nDate: ${new Date().toLocaleString()}\n\nHistory:\n${results.map(r => `- ${BENCH_LABELS[r.type]}: ${r.score.toLocaleString()} ops/s (${r.date})`).join('\n')}`; const blob = new Blob([report], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); downloadOrShare(url, 'benchmark-report.txt'); setTimeout(() => URL.revokeObjectURL(url), 100); toast.success('Report downloaded!'); }} className="px-3 py-1.5 text-[11px] font-bold bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Download Report</button>
             </div>
           </div>
         )}

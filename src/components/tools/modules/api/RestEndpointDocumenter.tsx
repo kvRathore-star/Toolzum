@@ -11,13 +11,27 @@ export default function RestEndpointDocumenter() {
   ];
   const calc = () => {
     const lines = endpoints.split('\n').filter(Boolean);
+    // Sample bodies are derived from each endpoint's own :params (the old
+    // version appended one identical canned body to every document).
     const table = lines.map(l => {
       const [method, ...rest] = l.split(' ');
       const restStr = rest.join(' ');
       const [path, ...descParts] = restStr.split('-');
-      return `| ${method!.trim()} | \`${path!.trim()}\` | ${descParts.join('-').trim()} |`;
+      return { method: (method || 'GET').trim().toUpperCase(), path: (path || '/').trim(), desc: descParts.join('-').trim() };
+    });
+    const rows = table.map(t => `| ${t.method} | \`${t.path}\` | ${t.desc} |`).join('\n');
+    const sections = table.map(t => {
+      const params = [...t.path.matchAll(/:([A-Za-z_]\w*)/g)].map(m => m[1]!);
+      const paramJson = params.map(p => `  "${p}": "${p === 'id' ? '1' : 'value'}"`).join(',\n');
+      const body = ['POST', 'PUT', 'PATCH'].includes(t.method) && params.length > 0
+        ? `\n**Request Body**\n\n\`\`\`json\n{\n${paramJson}\n}\n\`\`\`\n`
+        : '';
+      const resp = params.length > 0
+        ? `\n**Response**\n\n\`\`\`json\n{\n  "success": true,\n${paramJson}\n}\n\`\`\`\n`
+        : `\n**Response**\n\n\`\`\`json\n{\n  "success": true\n}\n\`\`\`\n`;
+      return `### ${t.method} ${t.path}\n\n${t.desc}${body}${resp}`;
     }).join('\n');
-    const output = `## REST API Endpoints\n\n| Method | Path | Description |\n|--------|------|-------------|\n${table}\n\n### Sample Request Body\n\`\`\`json\n{\n  "name": "string",\n  "email": "string"\n}\n\`\`\`\n\n### Sample Response\n\`\`\`json\n{\n  "id": 1,\n  "name": "string",\n  "email": "string",\n  "createdAt": "2026-01-01T00:00:00Z"\n}\n\`\`\``;
+    const output = `## REST API Endpoints\n\n| Method | Path | Description |\n|--------|------|-------------|\n${rows}\n\n${sections}`;
     setResult(output);
   };
   return (

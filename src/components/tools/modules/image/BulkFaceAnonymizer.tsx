@@ -2,30 +2,64 @@
 import React from 'react';
 import { BulkToolShell } from '../utility/BulkToolShell';
 
+type BlazeFaceModel = {
+  estimateFaces: (
+    _input: HTMLCanvasElement,
+    _returnTensors: boolean,
+  ) => Promise<Array<{ topLeft: number[]; bottomRight: number[]; probability?: number[] | number }>>;
+};
+
+// Module-level singleton: one model download shared across the whole batch
+// (same pattern as the single-image BlurFace tool).
+let modelPromise: Promise<BlazeFaceModel | null> | null = null;
+function ensureBlazeFace(): Promise<BlazeFaceModel | null> {
+  if (!modelPromise) {
+    modelPromise = (async () => {
+      try {
+        const [{ load: loadBlazeface }] = await Promise.all([
+          import('@tensorflow-models/blazeface'),
+          import('@tensorflow/tfjs'),
+        ]);
+        return (await loadBlazeface()) as BlazeFaceModel;
+      } catch (err) {
+        console.error('Failed to load blazeface', err);
+        return null;
+      }
+    })();
+  }
+  return modelPromise;
+}
+
 export default function BulkFaceAnonymizer() {
   return (
     <BulkToolShell
       toolSlug="bulk-face-anonymizer"
       title="Bulk Face Anonymizer"
-      description="Blur or pixelate faces across multiple images. Privacy-first batch redaction."
+      description="Detect faces with on-device AI, then blur or pixelate them across multiple images. Privacy-first batch redaction."
       accept="image/*"
       processFile={async (file, config) => {
         const method = (config as Record<string, string>).method || 'blur';
         const strength = Number((config as Record<string, string>).strength) || 20;
+        const model = await ensureBlazeFace();
+        if (!model) throw new Error('Face-detection engine failed to load');
         const img = await createImageBitmap(file);
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d')!;
         canvas.width = img.width; canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
         img.close();
-        const w = canvas.width;
-        const h = canvas.height;
-        const faceSize = Math.min(w, h) * 0.15;
-        const faces = [
-          { x: w * 0.3, y: h * 0.15, size: faceSize },
-          { x: w * 0.55, y: h * 0.12, size: faceSize * 0.9 },
-          { x: w * 0.08, y: h * 0.2, size: faceSize * 0.7 },
-        ];
+        // Real detection replaces the old hardcoded rectangles (which blurred
+        // fixed screen positions whether or not a face was there).
+        const predictions = await model.estimateFaces(canvas, false);
+        const faces = predictions
+          .map(p => {
+            const [x, y] = p.topLeft as [number, number];
+            const [x2, y2] = p.bottomRight as [number, number];
+            const prob = Array.isArray(p.probability) ? p.probability[0] ?? 1 : p.probability ?? 1;
+            return { x, y, size: Math.max(x2 - x, y2 - y), prob };
+          })
+          .filter(f => f.prob > 0.5 && f.size > 8);
+        if (faces.length === 0) throw new Error(`No faces detected in ${file.name} — skipped`);
         for (const face of faces) {
           if (method === 'pixelate') {
             const ps = Math.max(8, Math.floor(face.size / strength * 2));

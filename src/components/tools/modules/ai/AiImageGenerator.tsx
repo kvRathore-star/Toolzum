@@ -82,7 +82,10 @@ export default function AiImageGenerator() {
     }
 
     const seed = Math.floor(Math.random() * 1000000);
-    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}`;
+    // FLUX photoreal default + server-side prompt enhancement: short prompts
+    // like "an apple" under-specify, and the implicit default model renders
+    // them poorly. `enhance` expands the prompt via LLM before diffusion.
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}&model=flux&enhance=true`;
 
     // Force preloading of the image before displaying
     const img = new Image();

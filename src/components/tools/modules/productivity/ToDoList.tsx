@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { CheckSquare, Trash2, Plus, Calendar, Star } from 'lucide-react';
+import { CheckSquare, Trash2, Plus } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 
 interface ToDoItem {
@@ -89,7 +89,7 @@ export default function ToDoList() {
       <div className="space-y-4">
         {/* Input Bar */}
         <div className="flex flex-col sm:flex-row gap-3">
-          <input aria-label="Clear Completed" 
+          <input aria-label="New task input" 
             type="text"
             value={input}
             onChange={e => setInput(e.target.value)}

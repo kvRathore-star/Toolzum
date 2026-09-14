@@ -18,6 +18,9 @@ export default function VideoToMp3() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const [bitrate, setBitrate] = useState('192k');
+  const [title, setTitle] = useState('');
+  const [artist, setArtist] = useState('');
   const { data: session } = useSession();
   const isSignedIn = !!session?.user;
 
@@ -56,7 +59,11 @@ export default function VideoToMp3() {
       const outputName = 'output.mp3';
 
       await ffmpeg.writeFile(inputName, await fetchFile(file));
-      await ffmpeg.exec(['-i', inputName, '-q:a', '0', '-map', 'a', outputName]);
+      const args = ['-i', inputName, '-b:a', bitrate, '-map', 'a'];
+      if (title.trim()) args.push('-metadata', `title=${title.trim()}`);
+      if (artist.trim()) args.push('-metadata', `artist=${artist.trim()}`);
+      args.push(outputName);
+      await ffmpeg.exec(args);
 
       const data = await ffmpeg.readFile(outputName);
       const url = URL.createObjectURL(createDownloadBlob(data, 'audio/mp3'));
@@ -136,12 +143,19 @@ export default function VideoToMp3() {
                 </div>
               )}
 
-             {isLoaded && !outputUrl && !isProcessing && (
-               <button onClick={processVideo} disabled={remaining === 0}
+              {isLoaded && !outputUrl && !isProcessing && (
+                <>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="text-left"><label htmlFor="lbl-videotomp3-bitrate" className="text-xs font-semibold text-[var(--text-secondary)]">Bitrate</label><select id="lbl-videotomp3-bitrate" aria-label="Bitrate" value={bitrate} onChange={e => setBitrate(e.target.value)} className="w-full mt-1 p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs text-[var(--text-primary)]"><option value="128k">128 kbps</option><option value="192k">192 kbps</option><option value="320k">320 kbps</option></select></div>
+                  <div className="text-left"><label htmlFor="lbl-videotomp3-title" className="text-xs font-semibold text-[var(--text-secondary)]">Title tag</label><input id="lbl-videotomp3-title" aria-label="Title tag" type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Track title" className="w-full mt-1 p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs text-[var(--text-primary)]" /></div>
+                  <div className="text-left"><label htmlFor="lbl-videotomp3-artist" className="text-xs font-semibold text-[var(--text-secondary)]">Artist tag</label><input id="lbl-videotomp3-artist" aria-label="Artist tag" type="text" value={artist} onChange={e => setArtist(e.target.value)} placeholder="Artist" className="w-full mt-1 p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs text-[var(--text-primary)]" /></div>
+                </div>
+                <button onClick={processVideo} disabled={remaining === 0}
                  className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
-                 {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Extract MP3'}
-               </button>
-             )}
+                  {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Extract MP3'}
+                </button>
+                </>
+              )}
 
              {isProcessing && (
                <div className="space-y-2">

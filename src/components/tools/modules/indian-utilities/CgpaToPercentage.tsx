@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Award, Calculator, Info, RefreshCw, Crown, Copy, Check, BarChart3, Sliders } from 'lucide-react';
+import { Award, Calculator, Info, RefreshCw, Copy, Check, BarChart3, Sliders } from 'lucide-react';
 import { toast } from 'react-hot-toast';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clipboardWrite } from "@/lib/clipboard";
 
@@ -108,7 +107,6 @@ export default function CgpaToPercentage() {
             <Calculator className="w-6 h-6" style={{ color: '#8b5cf6' }} />
             CGPA to Percentage Converter
           </h2>
-          <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
         </div>
         <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Convert 10-point CGPA pointers to equivalent percentage scales officially used by Indian boards and universities — CBSE, MU, VTU, AKTU, SPPU, Anna University, JNTU, DU, and custom scales.
@@ -254,10 +252,6 @@ export default function CgpaToPercentage() {
               <ul className="space-y-1 font-mono text-[10px]">
                 <li>≥ 75%: First Class with Distinction</li><li>60% to 74.9%: First Class</li><li>50% to 59.9%: Second Class</li><li>40% to 49.9%: Pass Class</li><li>&lt; 40%: Fail</li>
               </ul>
-            </div>
-            <div className="p-3 rounded-xl" style={{ backgroundColor: '#8b5cf608', borderColor: '#8b5cf620', borderWidth: 1 }}>
-              <p className="text-[10px]" style={{ color: '#8b5cf6' }}><strong>Pro:</strong> Batch convert a semester's worth of CGPAs, export conversion history as CSV, compare across university formulas side-by-side.</p>
-              <Link href="/pricing" className="text-[10px] font-bold underline mt-1 inline-block" style={{ color: '#8b5cf6' }}>Upgrade →</Link>
             </div>
           </div>
         </div>

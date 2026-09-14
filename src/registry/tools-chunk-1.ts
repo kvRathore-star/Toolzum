@@ -46,16 +46,6 @@ export const entries_chunk_1: ToolMetadata[] = [
     showInCategory: false,
   },
   {
-    name: 'Browser Extension',
-    slug: 'browser-extension',
-    description: 'All-in-one AI sidebar assistant that helps with writing, summarization, translation, and answering questions right in your browser.',
-    seoDescription: 'Free online Browser Extension — All-in-one sidebar AI assistant. ',
-    category: 'Extension',
-    id:  "230",
-    dependencies: 'None',
-    showInCategory: false,
-  },
-  {
     name: 'MP3 Compressor',
     slug: 'mp3-compressor',
     description: 'Reduce MP3 file size by adjusting bitrate and audio quality settings. Perfect for saving storage or faster uploads.',

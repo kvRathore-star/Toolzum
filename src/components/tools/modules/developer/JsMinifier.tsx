@@ -15,12 +15,86 @@ const CONFIG: Record<Lang, { label: string; mime: string; placeholder: string; d
     placeholder: 'Paste JavaScript source here...',
     desc: 'Compress JavaScript codes by stripping comments and reducing space payload client-side.',
     minify: (code: string) => {
-      let m = code;
-      m = m.replace(/\/\/.*$/gm, '');
-      m = m.replace(/\/\*[\s\S]*?\*\//g, '');
-      m = m.replace(/\s+/g, ' ');
-      m = m.replace(/\s*([{}();,=+-\/%&|^!<>?:])\s*/g, '$1');
-      return m.trim();
+      // Single-pass stripper that respects string/template literals (with
+      // escapes) and regex literals, and collapses spacing inline so string
+      // contents are never touched. The old chain (`//.*$` first, then
+      // global whitespace collapse) mangled `https://` URLs, `//` inside
+      // strings, and spaces inside string literals.
+      const isWordChar = (c: string) => /[A-Za-z0-9_$]/.test(c);
+      const isRegexStart = (prev: string): boolean => {
+        const t = prev.trimEnd();
+        if (!t) return true;
+        const ch = t[t.length - 1]!;
+        if ('([{,:;!&|?=+-*%<>~^'.includes(ch)) return true;
+        return /(?:^|[^A-Za-z0-9_$])(?:return|typeof|instanceof|in|of|new|delete|void|throw|case|do|else)$/.test(t);
+      };
+      let out = '';
+      let pendingSpace = false;
+      let i = 0;
+      const n = code.length;
+      const emitSpaceIfNeeded = (nextIsWord: boolean) => {
+        if (!pendingSpace || out.length === 0) return;
+        const last = out[out.length - 1]!;
+        // Space survives only between two word chars (`return x`); everywhere
+        // else around punctuation it is dropped.
+        if (nextIsWord && isWordChar(last)) out += ' ';
+        pendingSpace = false;
+      };
+      while (i < n) {
+        const c = code[i]!;
+        const next = code[i + 1] ?? '';
+        if (c === '"' || c === "'" || c === '`') {
+          emitSpaceIfNeeded(true);
+          const quote = c;
+          out += c;
+          i++;
+          while (i < n) {
+            const sc = code[i]!;
+            out += sc;
+            if (sc === '\\') { if (i + 1 < n) out += code[i + 1]; i += 2; continue; }
+            if (sc === quote) { i++; break; }
+            i++;
+          }
+          continue;
+        }
+        if (c === '/' && next === '/') {
+          while (i < n && code[i] !== '\n') i++;
+          continue;
+        }
+        if (c === '/' && next === '*') {
+          i += 2;
+          while (i < n && !(code[i] === '*' && code[i + 1] === '/')) i++;
+          i += 2;
+          continue;
+        }
+        if (c === '/' && isRegexStart(out)) {
+          emitSpaceIfNeeded(false);
+          out += c;
+          i++;
+          let inClass = false;
+          while (i < n) {
+            const rc = code[i]!;
+            out += rc;
+            if (rc === '\\') { if (i + 1 < n) out += code[i + 1]; i += 2; continue; }
+            if (rc === '[') inClass = true;
+            else if (rc === ']') inClass = false;
+            else if (rc === '/' && !inClass) { i++; break; }
+            else if (rc === '\n') break;
+            i++;
+          }
+          continue;
+        }
+        if (/\s/.test(c)) {
+          pendingSpace = true;
+          i++;
+          continue;
+        }
+        emitSpaceIfNeeded(isWordChar(c));
+        out += c;
+        pendingSpace = false;
+        i++;
+      }
+      return out.trim();
     },
   },
   css: {

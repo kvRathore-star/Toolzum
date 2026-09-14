@@ -14,15 +14,29 @@ export default function BabyGrowthPercentileCalculator() {
   const w = parseFloat(weight) || 0;
   let result = '';
   if (a && h && w) {
-    const avgHeight: Record<string, Record<number, number>> = { male: { 0:50,6:68,12:76,24:87,36:96,48:103,60:110 }, female: { 0:49,6:66,12:74,24:86,36:95,48:102,60:109 } };
-    const avgWeight: Record<string, Record<number, number>> = { male: { 0:3.4,6:7.9,12:10.2,24:12.8,36:14.5,48:16.5,60:18.5 }, female: { 0:3.2,6:7.3,12:9.5,24:12.2,36:14.0,48:16.0,60:18.0 } };
-    const ages: number[] = Object.keys(avgHeight[gender]!).map(k => parseInt(k));
-    const closest = ages.reduce((x, y) => Math.abs(x - a) < Math.abs(y - a) ? x : y);
-    const medH = avgHeight[gender]![closest];
-    const medW = avgWeight[gender]![closest];
-    const hPct = medH ? Math.round((1 - Math.abs(h - medH) / (medH * 0.15)) * 100) : 50;
-    const wPct = medW ? Math.round((1 - Math.abs(w - medW) / (medW * 0.2)) * 100) : 50;
-    result = `Height: ${Math.max(1, Math.min(99, hPct))}th percentile\nWeight: ${Math.max(1, Math.min(99, wPct))}th percentile`;
+    // WHO median reference (length/weight at 0,6,12,24,36,48,60 mo).
+    // Reported as distance from the median with linear age interpolation —
+    // NOT a clinical percentile (true percentiles need the WHO LMS
+    // z-score tables). The old version printed fake "x-th percentile"
+    // numbers from a linear formula.
+    const medH: Record<string, Record<number, number>> = { male: { 0:50,6:68,12:76,24:87,36:96,48:103,60:110 }, female: { 0:49,6:66,12:74,24:86,36:95,48:102,60:109 } };
+    const medW: Record<string, Record<number, number>> = { male: { 0:3.4,6:7.9,12:10.2,24:12.8,36:14.5,48:16.5,60:18.5 }, female: { 0:3.2,6:7.3,12:9.5,24:12.2,36:14.0,48:16.0,60:18.0 } };
+    const ages: number[] = Object.keys(medH[gender]!).map(k => parseInt(k)).sort((x, y) => x - y);
+    const interp = (table: Record<number, number>): number => {
+      if (a <= ages[0]!) return table[ages[0]!]!;
+      if (a >= ages[ages.length - 1]!) return table[ages[ages.length - 1]!]!;
+      let lo = ages[0]!;
+      for (const edge of ages) { if (edge <= a) lo = edge; }
+      const hi = ages[ages.indexOf(lo)! + 1]!;
+      const t = (a - lo) / (hi - lo);
+      return table[lo]! + (table[hi]! - table[lo]!) * t;
+    };
+    const refH = interp(medH[gender]!);
+    const refW = interp(medW[gender]!);
+    const dH = ((h - refH) / refH) * 100;
+    const dW = ((w - refW) / refW) * 100;
+    const fmt = (d: number) => `${d >= 0 ? '+' : ''}${d.toFixed(1)}% vs median`;
+    result = `Height: ${fmt(dH)} (WHO median ${refH.toFixed(1)} cm)\nWeight: ${fmt(dW)} (WHO median ${refW.toFixed(1)} kg)\nThis is a reference comparison, not a clinical percentile — track growth with your pediatrician's chart.`;
   }
 
   return (

@@ -13,13 +13,16 @@ export default function ExponentCalculator() {
   ];
   const b = parseFloat(base);
   const e = parseFloat(exp);
-  const hasInput = base !== '' && exp !== '';
+  const hasInput = base.trim() !== '' && exp.trim() !== '' && Number.isFinite(b) && Number.isFinite(e);
+  // Guard the display too: hasInput on raw strings let NaN/Infinity render
+  // through toLocaleString. Non-finite results get a plain message.
   const val = hasInput ? Math.pow(b, e) : null;
+  const valText = val === null ? '' : !Number.isFinite(val) ? 'Result too large to display' : val.toLocaleString();
   const customResult = (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Result</div>
       {hasInput ? (
-        <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {val!.toLocaleString()}</div>
+        <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {valText}</div>
       ) : (
         <div className="text-xl font-bold text-[var(--text-muted)] font-mono">Enter base and exponent</div>
       )}

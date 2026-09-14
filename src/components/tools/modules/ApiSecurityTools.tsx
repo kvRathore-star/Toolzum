@@ -89,19 +89,51 @@ export function ApiKeyHasher() {
 export function ApiKeyValidator() {
   const [apiKey, setApiKey] = useState('sk_test_abc123def456ghi789');
   const [result, setResult] = useState<{ valid: boolean; checks: { label: string; pass: boolean }[] } | null>(null);
+  // Known provider prefixes — identification, not validation (no offline
+  // check can verify a key with its issuer; the old copy implied it could).
+  const PROVIDERS: { prefix: string; name: string }[] = [
+    { prefix: 'sk_live_', name: 'Stripe live secret' },
+    { prefix: 'sk_test_', name: 'Stripe test secret' },
+    { prefix: 'rk_live_', name: 'Stripe restricted' },
+    { prefix: 'ghp_', name: 'GitHub personal token' },
+    { prefix: 'gho_', name: 'GitHub OAuth token' },
+    { prefix: 'xoxb-', name: 'Slack bot token' },
+    { prefix: 'xoxp-', name: 'Slack user token' },
+    { prefix: 'AKIA', name: 'AWS access key' },
+    { prefix: 'AIza', name: 'Google API key' },
+    { prefix: 'hf_', name: 'Hugging Face token' },
+    { prefix: 'sk-ant-', name: 'Anthropic key' },
+    { prefix: 'dop_v1_', name: 'DigitalOcean token' },
+  ];
+  const shannon = (s: string): number => {
+    if (!s) return 0;
+    const freq = new Map<string, number>();
+    for (const c of s) freq.set(c, (freq.get(c) || 0) + 1);
+    let h = 0;
+    for (const n of freq.values()) {
+      const p = n / s.length;
+      h -= p * Math.log2(p);
+    }
+    return h;
+  };
   const calc = () => {
+    const key = apiKey.trim();
+    const provider = PROVIDERS.find(p => key.startsWith(p.prefix));
+    const entropy = shannon(key);
     const checks = [
-      { label: `Length (16-128): ${apiKey.length}`, pass: apiKey.length >= 16 && apiKey.length <= 128 },
-      { label: 'Has prefix separator (_)', pass: apiKey.includes('_') },
-      { label: 'Valid characters (a-zA-Z0-9_-)', pass: /^[a-zA-Z0-9_-]+$/.test(apiKey) },
-      { label: 'Character diversity', pass: (apiKey.match(/[a-z]/g)?.length || 0) + (apiKey.match(/[A-Z]/g)?.length || 0) + (apiKey.match(/[0-9]/g)?.length || 0) >= 3 },
+      { label: `Length ${key.length} (typical keys are 20+ chars)`, pass: key.length >= 20 },
+      { label: provider ? `Recognized format: ${provider.name}` : 'Unrecognized prefix — custom or malformed format', pass: !!provider },
+      { label: `Entropy ${entropy.toFixed(1)} bits/char ${entropy >= 4 ? '(looks random)' : '(low — may be a placeholder like "test123")'}`, pass: entropy >= 4 },
+      { label: 'Valid characters (a-zA-Z0-9_-.~)', pass: /^[a-zA-Z0-9_\-.~]+$/.test(key) && key.length > 0 },
+      { label: 'Not a common placeholder (test/demo/example/12345/abcdef)', pass: !/^(test|demo|example|changeme|12345|abcdef)/i.test(key) },
     ];
     setResult({ valid: checks.every(c => c.pass), checks });
   };
   return (
     <div className="max-w-2xl mx-auto space-y-4">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
-        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Validator</h2>
+        <h2 className="text-lg font-bold text-[var(--text-primary)]">API Key Hygiene Check</h2>
+        <p className="text-[11px] text-[var(--text-secondary)]">Checks format, provider prefix, and randomness offline. No offline check can confirm a key works with its issuer — only a real API call can.</p>
         <div>
           <label htmlFor="lbl-apisecuritytools-api-key-4" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API Key</label>
           <input id="lbl-apisecuritytools-api-key-4" aria-label="API Key" type="text" value={apiKey} onChange={e => setApiKey(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />

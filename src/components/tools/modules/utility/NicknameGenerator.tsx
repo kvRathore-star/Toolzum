@@ -12,22 +12,34 @@ const NICKNAME_PATTERNS = [
   { name: 'Color+Animal', get: () => randItem(['Red', 'Blue', 'Dark', 'Gold', 'Silver', 'Neon', 'Ice', 'Fire']) + randItem(['Wolf', 'Fox', 'Bear', 'Hawk', 'Lion', 'Viper', 'Puma', 'Elk']) },
   { name: 'Random Word', get: () => randItem(NICKNAME_PARTS) + randItem(ADJECTIVES) + randInt(10, 999) },
   { name: 'Gamer Tag', get: () => 'xX' + randItem(ADJECTIVES) + randItem(NOUNS) + randInt(1, 99) + 'Xx' },
+  { name: 'Professional', get: () => randItem(['Alex', 'Sam', 'Jordan', 'Taylor', 'Casey', 'Robin']) + '.' + randItem(['Smith', 'Lee', 'Patel', 'Garcia', 'Kim', 'Novak']) + randInt(1, 99) },
 ];
 export default function NicknameGenerator() {
   const [patternIdx, setPatternIdx] = useState(0);
   const [count, setCount] = useState(10);
   const [results, setResults] = useState<string[]>([]);
-  const generate = () => { const n: string[] = []; for (let i = 0; i < count; i++) n.push(NICKNAME_PATTERNS[patternIdx]!.get()); setResults(n); };
+  // Generate from explicit args: presets set state AND generate in the same
+  // tick, so reading state here would use stale values (the old code also
+  // crashed on the out-of-bounds 'Professional' index, now a real pattern).
+  const generateWith = (idx: number, cnt: number) => {
+    const pattern = NICKNAME_PATTERNS[Math.min(Math.max(idx, 0), NICKNAME_PATTERNS.length - 1)]!;
+    const safeCount = Math.min(Math.max(Math.floor(cnt) || 10, 1), 100);
+    const n: string[] = [];
+    for (let i = 0; i < safeCount; i++) n.push(pattern.get());
+    setResults(n);
+  };
+  const generate = () => generateWith(patternIdx, count);
 
   const presets = [
-    { label: 'Gamer', apply: () => { setPatternIdx(0); setCount(10); generate(); } },
-    { label: 'Fantasy', apply: () => { setPatternIdx(1); setCount(10); generate(); } },
-    { label: 'Sci-Fi', apply: () => { setPatternIdx(2); setCount(10); generate(); } },
-    { label: 'Cute', apply: () => { setPatternIdx(3); setCount(10); generate(); } },
-    { label: 'Professional', apply: () => { setPatternIdx(4); setCount(10); generate(); } },
+    { label: 'Gamer', apply: () => { setPatternIdx(0); setCount(10); generateWith(0, 10); } },
+    { label: 'Fantasy', apply: () => { setPatternIdx(1); setCount(10); generateWith(1, 10); } },
+    { label: 'Sci-Fi', apply: () => { setPatternIdx(2); setCount(10); generateWith(2, 10); } },
+    { label: 'Cute', apply: () => { setPatternIdx(3); setCount(10); generateWith(3, 10); } },
+    { label: 'Professional', apply: () => { setPatternIdx(4); setCount(10); generateWith(4, 10); } },
   ];
 
-  const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + NICKNAME_PATTERNS[patternIdx]!.name + ')' : 'Select pattern and generate';
+  const activePattern = NICKNAME_PATTERNS[Math.min(patternIdx, NICKNAME_PATTERNS.length - 1)]!;
+  const resultText = results.length > 0 ? 'Generated ' + results.length + ' nicknames (' + activePattern.name + ')' : 'Select pattern and generate';
 
   return (
     <CalculatorShell category="Utility" title="Nickname Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="pink" downloadData={results.join('\n')} downloadFilename="nicknames.txt">

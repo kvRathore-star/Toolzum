@@ -29,7 +29,7 @@ export default function BulkImageCompressor({ defaultConfig: extraConfig }: { de
       configFields={
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality: {50}%</label>
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality: {merged.quality as string}%</label>
             <input name="quality" type="range" min="10" max="100" defaultValue={merged.quality as string} className="w-full mt-1" onChange={e => { const el = e.target; const lbl = el.parentElement?.querySelector('label'); if (lbl) lbl.textContent = `Quality: ${e.target.value}%`; }} />
           </div>
           <div>

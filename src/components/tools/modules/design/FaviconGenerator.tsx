@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import NextImage from "next/image";
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -11,6 +11,8 @@ export default function FaviconGenerator() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const previewUrl = useMemo(() => (file ? URL.createObjectURL(file) : null), [file]);
+  useEffect(() => { return () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }; }, [previewUrl]);
 
   useEffect(() => {
     return () => {
@@ -65,7 +67,7 @@ export default function FaviconGenerator() {
         zip.file(item.name, blob);
       }
 
-      // Hack for favicon.ico (most modern browsers accept renamed PNGs or we just supply 32x32 as .ico)
+      // Note: favicon.ico below is PNG data with an .ico name for modern browsers only; legacy IE needs a real ICO container
       const icoBlob = await resizeImage(32);
       zip.file('favicon.ico', icoBlob);
 
@@ -137,7 +139,7 @@ export default function FaviconGenerator() {
             <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> apple-touch-icon.png (180x180)</li>
             <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-192x192.png</li>
             <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-512x512.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon.ico (fallback)</li>
+            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon.ico (PNG data, modern browsers only)</li>
             <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> site.webmanifest</li>
           </ul>
 
@@ -190,7 +192,7 @@ export default function FaviconGenerator() {
                       }
                     }
                   `}</style>
-                  <NextImage unoptimized={true} loading="lazy" src={URL.createObjectURL(file)} alt="Original" className="max-h-[250px] object-contain drop-shadow-md rounded" />
+                  <NextImage unoptimized={true} loading="lazy" src={previewUrl!} alt="Original" width={250} height={250} className="max-h-[250px] object-contain drop-shadow-md rounded" />
                 </div>
              </div>
           )}

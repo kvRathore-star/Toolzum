@@ -121,6 +121,7 @@ export default function AiFaceSwap() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
+      <p className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-xs">Manual compositing tool — not AI face-swap: there is no face detection or model here, you position/blend the overlay yourself. Best results need matching photo angles and lighting.</p>
       
       {/* Hidden helper images for canvas rendering */}
       {sourceImg && (

@@ -4,24 +4,28 @@ import React, { useState } from 'react';
 import { HelpCircle, RefreshCw } from 'lucide-react';
 
 export default function DiceRoller() {
-  const [dices, setDices] = useState<number[]>([1, 6]);
+  const [dices, setDices] = useState<number[]>([]);
+  const [sides, setSides] = useState(6);
   const [isRolling, setIsRolling] = useState(false);
+  const [hasRolled, setHasRolled] = useState(false);
 
   const rollDices = () => {
     setIsRolling(true);
     setTimeout(() => {
-      const rolled = dices.map(() => Math.floor(Math.random() * 6) + 1);
+      const count = Math.max(1, dices.length || 2);
+      const rolled = Array.from({ length: count }, () => Math.floor(Math.random() * sides) + 1);
       setDices(rolled);
+      setHasRolled(true);
       setIsRolling(false);
     }, 600); // Animation duration
   };
 
   const addDice = () => {
-    if (dices.length < 5) setDices([...dices, 1]);
+    if (dices.length < 5) setDices(prev => [...prev, 1]);
   };
 
   const removeDice = () => {
-    if (dices.length > 1) setDices(dices.slice(0, -1));
+    if (dices.length > 1) setDices(prev => prev.slice(0, -1));
   };
 
   return (
@@ -32,6 +36,11 @@ export default function DiceRoller() {
           <h3 className="text-lg font-bold text-[var(--text-primary)]">3D CSS Dice Roller</h3>
         </div>
         <div className="flex gap-2">
+          <select value={sides} onChange={e => setSides(Number(e.target.value))} aria-label="Dice sides" className="px-2.5 py-1 bg-[var(--bg-surface)] text-xs text-[var(--text-secondary)] rounded font-semibold">
+            {[4, 6, 8, 10, 12, 20].map(n => (
+              <option key={n} value={n}>d{n}</option>
+            ))}
+          </select>
           <button onClick={removeDice} className="px-2.5 py-1 bg-[var(--bg-surface)] text-xs text-[var(--text-secondary)] rounded font-semibold">- Remove</button>
           <button onClick={addDice} className="px-2.5 py-1 bg-[var(--accent-ink)] text-xs text-white rounded font-semibold">+ Add Dice</button>
         </div>
@@ -39,7 +48,10 @@ export default function DiceRoller() {
 
       <div className="flex flex-col items-center justify-center space-y-12 py-10 bg-[var(--bg-overlay)] rounded-2xl border border-[var(--border-subtle)]">
         <div className="flex flex-wrap justify-center gap-8 min-h-[120px] items-center">
-          {dices.map((val, idx) => (
+          {!hasRolled && dices.length === 0 ? (
+            <p className="text-xs text-[var(--text-muted)]">Choose your dice (d{sides}) and press Roll to start</p>
+          ) : (
+          dices.map((val, idx) => (
             <div 
               key={idx}
               className={`w-16 h-16 bg-white dark:bg-[var(--bg-surface)] border-2 border-[var(--border-subtle)] rounded-xl shadow-lg flex items-center justify-center text-3xl font-black text-[var(--accent)] transition-all duration-500 ${
@@ -48,11 +60,11 @@ export default function DiceRoller() {
             >
               {val}
             </div>
-          ))}
+          )))}
         </div>
 
         <div className="text-center">
-          <p className="text-xs text-[var(--text-muted)] font-bold mb-4">Total Sum: {dices.reduce((a, b) => a + b, 0)}</p>
+          <p className="text-xs text-[var(--text-muted)] font-bold mb-4">{hasRolled ? `Total Sum: ${dices.reduce((a, b) => a + b, 0)}` : 'No rolls yet'}</p>
           <button 
             onClick={rollDices} 
             disabled={isRolling}

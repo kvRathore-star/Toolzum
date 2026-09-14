@@ -7,10 +7,14 @@ export default function LtvCalculator() {
   const [arpu, setArpu] = useState('50');
   const [churn, setChurn] = useState('5');
 
-  const a = parseFloat(arpu) || 0;
-  const c = parseFloat(churn) || 0.01;
-  const ltv = a / (c / 100);
-  const ltvFormatted = ltv > 0 ? `$${ltv.toFixed(0)}` : '';
+  const hasInput = arpu.trim() !== '' && churn.trim() !== '';
+  const a = parseFloat(arpu);
+  const c = parseFloat(churn);
+  // Churn of 0 (or blank) means infinite lifetime, not $5000 — the old
+  // `|| 0.01` fallback silently computed on empty input. Show empty state.
+  const valid = hasInput && Number.isFinite(a) && Number.isFinite(c) && a >= 0 && c > 0;
+  const ltv = valid ? a / (c / 100) : 0;
+  const ltvFormatted = valid && ltv > 0 ? `$${ltv.toFixed(0)}` : '';
 
   const presets = [
     { label: 'SaaS', apply: () => { setArpu('50'); setChurn('5'); } },
@@ -20,7 +24,7 @@ export default function LtvCalculator() {
 
   return (
     <CalculatorShell category="Finance" title="LTV Calculator" result={ltvFormatted} auto presets={presets} accent="sky" customResult={
-      ltv > 0 ? (
+      valid && ltv > 0 ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>
           <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${ltv.toFixed(0)}</div>

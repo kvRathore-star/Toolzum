@@ -114,6 +114,14 @@ export default function ImageColorizer() {
                   </div>
                   <input aria-label="Color Saturation" type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
                 </div>
+
+                <div>
+                  <div className="flex justify-between text-[10px] text-[var(--text-secondary)]">
+                    <span>Tint Brightness</span>
+                    <span>{brightness}%</span>
+                  </div>
+                  <input aria-label="Tint Brightness" type="range" min="-40" max="40" value={brightness} onChange={e => setBrightness(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">

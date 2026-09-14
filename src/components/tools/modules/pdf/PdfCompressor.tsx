@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { toast } from "react-hot-toast";
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
@@ -90,7 +91,7 @@ export default function PdfOptimizer() {
         <h4 className="text-[var(--text-primary)] font-medium mb-4">Optimization Strategy</h4>
         <div className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-4 rounded-xl mb-6">
           <p className="text-sm text-[var(--text-secondary)]">
-            Client-side optimization removes metadata (title, author, keywords, etc.) and enables object streams to compress the internal PDF structure. This is effective for text-heavy documents but provides minimal reduction for files with large embedded images.
+            Client-side optimization removes metadata (title, author, keywords, etc.) and enables object streams to compress the internal PDF structure. This is effective for text-heavy documents but provides minimal reduction for files with large embedded images. Quality/DPI downsampling of embedded images is not possible in this client-side pass — for scan-heavy PDFs, try the <Link href="/pdf/bulk-pdf-size-reducer" className="underline font-medium">Bulk PDF Size Reducer</Link>.
           </p>
         </div>
 

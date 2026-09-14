@@ -9,6 +9,7 @@ export default function SpeedTest() {
   const [speedMbps, setSpeedMbps] = useState<number | null>(null);
   const [latencyMs, setLatencyMs] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+  const [latencyEstimated, setLatencyEstimated] = useState(false);
 
   const startTest = async () => {
     setIsRunning(true);
@@ -21,8 +22,9 @@ export default function SpeedTest() {
     try {
       await fetch('https://httpbin.org/delay/0', { mode: 'cors' });
       setLatencyMs(Date.now() - startLatency);
+      setLatencyEstimated(false);
     } catch (e) {
-      setLatencyMs(45); // Standard fallback mockup latency
+      setLatencyMs(45); setLatencyEstimated(true); // Estimated fallback when direct ping is blocked
     }
     setProgress(40);
 
@@ -49,6 +51,7 @@ export default function SpeedTest() {
       const speed = (sizeBits / durationSecs) / (1024 * 1024); // Mbps
       
       setSpeedMbps(Math.min(950, parseFloat(speed.toFixed(1))));
+      toast.success('Speed test completed!');
     } catch (err) {
       // CORS or network error: cannot measure speed from this environment
       setSpeedMbps(null);
@@ -57,7 +60,6 @@ export default function SpeedTest() {
     } finally {
       setProgress(100);
       setIsRunning(false);
-      toast.success('Speed test completed!');
     }
   };
 
@@ -93,7 +95,7 @@ export default function SpeedTest() {
               <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">
                 <span className="text-[10px] text-[var(--text-secondary)] block uppercase">Latency (Ping)</span>
                 <p className="text-lg font-mono font-bold text-[var(--text-secondary)] dark:text-[var(--text-primary)]">
-                  {latencyMs !== null ? `${latencyMs} ms` : '--'}
+                  {latencyMs !== null ? `${latencyMs} ms${latencyEstimated ? ' (est.)' : ''}` : '--'}
                 </p>
               </div>
               <div className="bg-[var(--bg-overlay)] p-3 rounded-xl border border-[var(--border-subtle)]">

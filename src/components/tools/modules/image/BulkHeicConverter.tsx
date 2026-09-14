@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React from 'react';
 import { BulkToolShell } from '../utility/BulkToolShell';
 import { toast } from 'react-hot-toast';
 
@@ -11,16 +11,16 @@ const OUTPUT_FORMATS = [
 ] as const;
 
 export default function BulkHeicConverter() {
-  const [format, setFormat] = useState('jpg');
-  const [quality, setQuality] = useState(92);
-
   return (
     <BulkToolShell
       toolSlug="bulk-heic-converter"
       title="Bulk HEIC Converter"
       description="Convert iPhone HEIC/HEIF photos to JPG, PNG, or WebP in batch. Fully client-side — your photos never leave your device."
       accept=".heic,.heif,image/heic,image/heif"
-      processFile={async (file) => {
+      processFile={async (file, config) => {
+        const cfg = config as Record<string, string>;
+        const format = cfg.format || 'jpg';
+        const quality = Number(cfg.quality) || 92;
         const { default: heic2any } = await import('heic2any');
         const target = OUTPUT_FORMATS.find((f) => f.value === format) || OUTPUT_FORMATS[0];
         const blob = await heic2any({
@@ -40,8 +40,7 @@ export default function BulkHeicConverter() {
             <label className="text-xs font-medium text-[var(--text-secondary)]">Output Format</label>
             <select aria-label="Output Format"
               name="format"
-              value={format}
-              onChange={(e) => setFormat(e.target.value)}
+              defaultValue="jpg"
               className="w-full mt-1 p-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-md)] text-sm text-[var(--text-primary)]"
             >
               {OUTPUT_FORMATS.map((f) => (
@@ -52,13 +51,13 @@ export default function BulkHeicConverter() {
             </select>
           </div>
           <div>
-            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality: {quality}%</label>
-            <input
+            <label className="text-xs font-medium text-[var(--text-secondary)]">Quality</label>
+            <input aria-label="Quality"
               type="range"
+              name="quality"
               min="10"
               max="100"
-              value={quality}
-              onChange={(e) => setQuality(Number(e.target.value))}
+              defaultValue="92"
               className="w-full mt-1"
             />
           </div>

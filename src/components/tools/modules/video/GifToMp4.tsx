@@ -15,6 +15,10 @@ export default function GifToMp4() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const { ffmpeg, isLoaded, progress, loadFFmpeg } = useFFmpeg();
+  const [fps, setFps] = useState('15');
+  const [scaleW, setScaleW] = useState('original');
+  const [crf, setCrf] = useState('23');
+  const [loop, setLoop] = useState('1');
 
   useEffect(() => {
     return () => {
@@ -33,7 +37,9 @@ export default function GifToMp4() {
       
       toast("Converting to MP4...");
       // Convert GIF to MP4. -pix_fmt yuv420p ensures compatibility with most players.
-      await ffmpeg.exec(['-i', 'input.gif', '-movflags', 'faststart', '-pix_fmt', 'yuv420p', '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', 'output.mp4']);
+      const vf = scaleW === 'original' ? `fps=${fps},scale=trunc(iw/2)*2:trunc(ih/2)*2` : `fps=${fps},scale=${scaleW}:-2`;
+      const loopArgs = loop === '1' ? [] : ['-stream_loop', String(Number(loop) - 1)];
+      await ffmpeg.exec([...loopArgs, '-i', 'input.gif', '-movflags', 'faststart', '-pix_fmt', 'yuv420p', '-vf', vf, '-crf', crf, 'output.mp4']);
       
       const data = await ffmpeg.readFile('output.mp4');
       const blob = createDownloadBlob(data, 'video/mp4');
@@ -91,6 +97,50 @@ export default function GifToMp4() {
             <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
               MP4 videos are significantly smaller than animated GIFs and load much faster on websites. This process runs locally on your device.
             </p>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="lbl-giftomp4-fps" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Frame Rate</label>
+                <select id="lbl-giftomp4-fps" aria-label="Frame Rate" value={fps} onChange={(e) => setFps(e.target.value)}
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+                  <option value="10">10 fps (Smallest)</option>
+                  <option value="15">15 fps (Balanced)</option>
+                  <option value="24">24 fps (Smooth)</option>
+                  <option value="30">30 fps (Smoothest)</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="lbl-giftomp4-scale" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Scale</label>
+                <select id="lbl-giftomp4-scale" aria-label="Scale" value={scaleW} onChange={(e) => setScaleW(e.target.value)}
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+                  <option value="original">Original Size</option>
+                  <option value="320">320px wide</option>
+                  <option value="480">480px wide</option>
+                  <option value="640">640px wide</option>
+                  <option value="854">854px wide</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="lbl-giftomp4-quality" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Quality (CRF)</label>
+                <select id="lbl-giftomp4-quality" aria-label="Quality" value={crf} onChange={(e) => setCrf(e.target.value)}
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+                  <option value="18">High (CRF 18)</option>
+                  <option value="23">Balanced (CRF 23)</option>
+                  <option value="28">Compressed (CRF 28)</option>
+                  <option value="32">Smallest (CRF 32)</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="lbl-giftomp4-loop" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Loop Output</label>
+                <select id="lbl-giftomp4-loop" aria-label="Loop Output" value={loop} onChange={(e) => setLoop(e.target.value)}
+                  className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+                  <option value="1">Play once (1x)</option>
+                  <option value="2">Repeat 2x</option>
+                  <option value="3">Repeat 3x</option>
+                  <option value="5">Repeat 5x</option>
+                </select>
+              </div>
+            </div>
 
             <button 
               onClick={processVideo}

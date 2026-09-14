@@ -84,7 +84,7 @@ export default function JsonFormatter() {
               Clear
             </button>
           </div>
-          <textarea aria-label="Clear" 
+          <textarea aria-label="JSON input" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your unformatted JSON here..."

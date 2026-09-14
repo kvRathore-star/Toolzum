@@ -5,11 +5,18 @@ export default function AgeCalculator() {
   const [dob, setDob] = useState('');
   const [targetDate, setTargetDate] = useState(new Date().toISOString().split('T')[0]);
   const [result, setResult] = useState<any>(null);
+  const [error, setError] = useState('');
 
   const calculate = () => {
     if (!dob) return;
     const d1 = new Date(dob);
     const d2 = new Date(targetDate!);
+    if (d2 < d1) {
+      setResult(null);
+      setError('Target date must be on or after the date of birth.');
+      return;
+    }
+    setError('');
     
     let years = d2.getFullYear() - d1.getFullYear();
     let months = d2.getMonth() - d1.getMonth();
@@ -62,6 +69,12 @@ export default function AgeCalculator() {
           >
             Calculate Exact Age
           </button>
+
+          {error && (
+            <div role="alert" className="p-4 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-xl text-center text-sm font-bold text-rose-700 dark:text-rose-300">
+              {error}
+            </div>
+          )}
 
           {result && (
             <div className="p-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl text-center space-y-2">

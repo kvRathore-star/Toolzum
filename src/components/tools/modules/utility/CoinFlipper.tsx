@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { HelpCircle, RefreshCw } from 'lucide-react';
 
 export default function CoinFlipper() {
-  const [result, setResult] = useState<'HEADS' | 'TAILS'>('HEADS');
+  const [result, setResult] = useState<'HEADS' | 'TAILS' | null>(null);
   const [isFlipping, setIsFlipping] = useState(false);
-  const [stats, setStats] = useState({ heads: 5, tails: 5 });
+  const [stats, setStats] = useState({ heads: 0, tails: 0 });
 
   const flipCoin = () => {
     setIsFlipping(true);
@@ -36,8 +36,11 @@ export default function CoinFlipper() {
               isFlipping ? 'scale-90 opacity-40 rotate-[360deg] animate-bounce' : ''
             }`}
           >
-            {result}
+            {result ?? '—'}
           </div>
+          {!result && !isFlipping && (
+            <p className="mt-4 text-xs text-[var(--text-muted)]">Press Flip Coin to start — no flips yet</p>
+          )}
 
           <button 
             onClick={flipCoin} 

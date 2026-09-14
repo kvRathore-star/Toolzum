@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 
 const CATEGORIES: Record<string, { units: string[]; convert: (val: number, from: string, to: string) => number }> = {
   Length: {
@@ -63,6 +65,27 @@ const CATEGORIES: Record<string, { units: string[]; convert: (val: number, from:
       return v * toB[f]! / toB[t]!;
     },
   },
+  Energy: {
+    units: ['Joule', 'Kilojoule', 'Calorie', 'Kilocalorie', 'Watt-hour', 'Kilowatt-hour', 'BTU', 'Electronvolt'],
+    convert(v, f, t) {
+      const toJ: Record<string, number> = { Joule: 1, Kilojoule: 1000, Calorie: 4.184, Kilocalorie: 4184, 'Watt-hour': 3600, 'Kilowatt-hour': 3600000, BTU: 1055.06, Electronvolt: 1.60218e-19 };
+      return v * toJ[f]! / toJ[t]!;
+    },
+  },
+  Power: {
+    units: ['Watt', 'Kilowatt', 'Megawatt', 'Horsepower', 'BTU/hour'],
+    convert(v, f, t) {
+      const toW: Record<string, number> = { Watt: 1, Kilowatt: 1000, Megawatt: 1e6, Horsepower: 745.7, 'BTU/hour': 0.293071 };
+      return v * toW[f]! / toW[t]!;
+    },
+  },
+  Pressure: {
+    units: ['Pascal', 'Kilopascal', 'Bar', 'PSI', 'Atmosphere', 'mmHg', 'Torr'],
+    convert(v, f, t) {
+      const toPa: Record<string, number> = { Pascal: 1, Kilopascal: 1000, Bar: 100000, PSI: 6894.76, Atmosphere: 101325, mmHg: 133.322, Torr: 133.322 };
+      return v * toPa[f]! / toPa[t]!;
+    },
+  },
 };
 
 export function UnitConverter() {
@@ -79,7 +102,13 @@ export function UnitConverter() {
     setToUnit(units[1]! || units[0]!);
   };
 
-  const result = value ? cat!.convert(parseFloat(value) || 0, fromUnit, toUnit) : 0;
+  const result = value.trim() !== '' && Number.isFinite(parseFloat(value)) ? cat!.convert(parseFloat(value), fromUnit, toUnit) : null;
+
+  const copyResult = () => {
+    if (result === null) return;
+    clipboardWrite(`${value} ${fromUnit} = ${result} ${toUnit}`);
+    toast.success('Result copied!');
+  };
 
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
@@ -110,7 +139,17 @@ export function UnitConverter() {
         </div>
         <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
           <p className="text-xs text-[var(--text-secondary)]">Result</p>
-          <p className="text-2xl font-bold">{value} {fromUnit} = {result.toFixed(6)} {toUnit}</p>
+          {result === null ? (
+            <p className="text-lg text-[var(--text-muted)]">Enter a quantity to convert</p>
+          ) : (
+            <div className="flex items-center justify-between gap-3">
+              <p className="text-2xl font-bold">{value} {fromUnit} = {result.toLocaleString(undefined, { maximumFractionDigits: 6 })} {toUnit}</p>
+              <button onClick={copyResult} aria-label="Copy conversion result" className="shrink-0 px-3 py-1.5 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Copy</button>
+            </div>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <button onClick={() => { setFromUnit(toUnit); setToUnit(fromUnit); }} aria-label="Swap units" className="flex-1 py-2 text-sm font-bold bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl hover:bg-[var(--bg-overlay)] transition-colors">⇅ Swap units</button>
         </div>
       </div>
     </div>

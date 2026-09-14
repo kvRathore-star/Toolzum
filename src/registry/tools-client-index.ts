@@ -1478,14 +1478,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "230",
-    "name": "Browser Extension",
-    "slug": "browser-extension",
-    "category": "Extension",
-    "description": "All-in-one AI sidebar assistant that helps with writing, summarization, translation, and answering questions right in your browser.",
-    "isPro": false
-  },
-  {
     "id": "231",
     "name": "MP3 Compressor",
     "slug": "mp3-compressor",
@@ -2130,7 +2122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to PDF/A",
     "slug": "pdf-to-pdfa",
     "category": "PDF",
-    "description": "Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Prepares PDFs for long-term archiving: normalizes metadata, strips scripts and attachments, flattens structure. Certified PDF/A conformance (embedded fonts, color profiles) needs desktop tools — this gets the file honestly ready. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2154,7 +2146,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Translate PDF",
     "slug": "translate-pdf",
     "category": "PDF",
-    "description": "Extract and translate PDF content between 50+ languages. Preserves document structure while converting text to your chosen language. Powered by browser-based and free translation APIs.",
+    "description": "Extract PDF text and translate it between 50+ languages via free API, delivered as a TXT file. For sensitive documents, review translations manually.",
     "isPro": false
   },
   {

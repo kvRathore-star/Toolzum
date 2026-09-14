@@ -36,18 +36,25 @@ export default function ChmodCalculator() {
   const [input, setInput] = useState('755');
   const [symbolic, setSymbolic] = useState('u=rwx,g=rx,o=rx');
   const [numeric, setNumeric] = useState('755');
+  const [error, setError] = useState('');
 
   const handleInput = useCallback((val: string) => {
     setInput(val);
     if (/^[0-7]{3}$/.test(val)) {
       setNumeric(val);
       setSymbolic(toSymbolicPerm(val));
+      setError('');
     } else if (val.includes('=')) {
       const n = toNumericPerm(val);
       if (n.length === 3) {
         setNumeric(n);
         setSymbolic(toSymbolicPerm(n));
+        setError('');
+      } else {
+        setError('Invalid symbolic permission. Use e.g. u=rwx,g=rx,o=rx.');
       }
+    } else {
+      setError('Invalid permission. Enter 3 octal digits (0-7) or symbolic form (e.g. u=rwx,g=rx,o=rx).');
     }
   }, []);
 
@@ -61,6 +68,7 @@ export default function ChmodCalculator() {
         ))}
       </div>
       <input value={input} onChange={e => handleInput(e.target.value)} placeholder="e.g. 755 or u=rwx,g=rx,o=rx" aria-label="File permissions" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+      {error && <div role="alert" className="text-sm font-medium text-rose-600 dark:text-rose-400">{error}</div>}
       {/^[0-7]{3}$/.test(numeric) && (
         <div className="space-y-4">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">

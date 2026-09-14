@@ -46,6 +46,7 @@ export default function VocalRemover() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
   const [outputUrl2, setOutputUrl2] = useState<string | null>(null);
+  const [isMono, setIsMono] = useState(false);
 
   const { ffmpeg, isLoaded, loadFFmpeg, progress } = useFFmpeg();
 
@@ -60,10 +61,25 @@ export default function VocalRemover() {
     loadFFmpeg();
   }, []);
 
-  const handleFileSelect = (f: File) => {
+  const handleFileSelect = async (f: File) => {
     setFile(f);
     setOutputUrl(null);
     setOutputUrl2(null);
+    setIsMono(false);
+    try {
+      const buf = await f.arrayBuffer();
+      const Ctx = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const audioBuf = await ctx.decodeAudioData(buf);
+      await ctx.close();
+      if (audioBuf.numberOfChannels < 2) {
+        setIsMono(true);
+        toast.error('Mono audio detected — vocal removal needs stereo center-panned audio and will have no effect on this file.');
+      }
+    } catch {
+      /* decode probe failed; continue without a channel warning */
+    }
   };
 
   const handleRemove = () => {
@@ -72,6 +88,7 @@ export default function VocalRemover() {
     setFile(null);
     setOutputUrl(null);
     setOutputUrl2(null);
+    setIsMono(false);
   };
 
   const ext = FORMAT_EXT[outputFormat];
@@ -175,6 +192,16 @@ export default function VocalRemover() {
           </div>
           <button onClick={handleRemove} disabled={isProcessing} className="text-[10px] text-red-500 hover:underline disabled:opacity-50">Remove</button>
         </div>
+
+        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-[11px] font-medium">
+          <strong>Simple stereo trick, not AI stem separation:</strong> this subtracts the left/right channels to cancel center-panned vocals. It only works on stereo recordings with centered vocals.
+        </div>
+
+        {isMono && (
+          <div role="alert" className="bg-red-500/10 border border-red-500/20 p-3 rounded-xl text-red-700 dark:text-red-400 text-[11px] font-medium">
+            <strong>Mono input detected:</strong> center-cancellation has no effect on mono audio — the output will sound identical to the input. Use a stereo file for vocal removal.
+          </div>
+        )}
 
         <div>
           <label className="text-[10px] font-semibold text-[var(--text-muted)] mb-1.5 block">Output Mode</label>
