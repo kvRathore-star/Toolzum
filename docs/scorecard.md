@@ -248,3 +248,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Sep 11 | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Accessibility | ~82 | **~92** (xlsx row #9: 72 → **92**) | Commits `1263920e`, `7ca5aff9`, `9e246eca`, `d7936d8b`, `ed1fbb56`, `d5c28137` (60 generic labels renamed + missing labels added), `63e4b6ef` + `fdad6bab` (28 icon buttons, dialog semantics), `e474e590` (A1: 50 more buttons, 0 unnamed repo-wide per brace-aware scan; 0 generic labels), `45148e66` (A2: 7 accordion expanded states, menu/menuitem roles, nested-button fix), `bd6ee83d` (A3: shell announcer, error alerts, BMI status, tour focus restore, inert hidden trees). VoiceOver Session 3 DONE (~90% speak-correct, TODO-TRACKER). Residual: Session 4 UI-look naming, toast-only copy feedback, palette trap, tab arrow-key nav. eslint 0 errors throughout. |
+
+## Update (2026-09-14, 97+ push)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Accessibility | 92 | **95** (xlsx row #9: 92 → **95**, composite 74.6 → **74.7**) | `a985a49c` (From/To qualified), `147b5107` (shell announcers), `6eaa1724` (palette trap), `cb0dee66` (tab arrow keys), `f3a763d1` (Session-4-in-code: 32 Copy/Download object-named, single letters expanded), `a4432f2c` (shared `useRovingTabs` + all 9 tab sets complete), `c69873a7` (tabpanels), `e99c5639` (duplicate-name spot-check). Repo-wide scans: unnamed 0, vague 0, generic 0. Toast verified non-issue (library `role=status` live region). `tsc --noEmit` clean; targeted tests 13/13. Residual to 97+: human Session-4 dense-page pass, full-suite CI on push. |
