@@ -136,7 +136,7 @@ export function DownloadLimitModal() {
           <div className="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
             <Lock className="w-6 h-6 text-amber-500" />
           </div>
-          <button onClick={close} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]" aria-label="Close">
+          <button onClick={close} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]" aria-label="Close dialog">
             <X className="w-5 h-5" />
           </button>
         </div>

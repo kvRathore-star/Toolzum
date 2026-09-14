@@ -72,8 +72,8 @@ function BoxShadowGeneratorInner() {
       <Slider label="Spread" value={spread} onChange={setSpread} min={-20} max={20} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Box shadow color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Box shadow color hex value" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
         <input aria-label="Opacity" type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
@@ -192,8 +192,8 @@ function TextShadowGeneratorInner() {
       <Slider label="Blur" value={blur} onChange={setBlur} min={0} max={20} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Text shadow color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Text shadow color hex value" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
         <label className="text-xs font-medium ml-2">Opacity</label>
         <input aria-label="Opacity" type="range" min={0} max={1} step={0.05} value={opacity} onChange={e => setOpacity(Number(e.target.value))} className="flex-1 accent-blue-600" />
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
@@ -325,8 +325,8 @@ function NeumorphismGeneratorInner() {
       <Slider label="Blur" value={blur} onChange={setBlur} min={5} max={40} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Neumorphic color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Neumorphic color hex value" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <pre className={codeClass}>{css}</pre>
       <button onClick={() => navigator.clipboard.writeText(css)} className={btnClass}>Copy CSS</button>
@@ -351,8 +351,8 @@ function BorderCssGeneratorInner() {
       <Slider label="Width" value={width} onChange={setWidth} min={0} max={10} />
       <div className="flex items-center gap-3">
         <label className="text-xs font-medium w-24 shrink-0">Color</label>
-        <input aria-label="Color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
-        <input aria-label="Color" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
+        <input aria-label="Border color" type="color" value={color} onChange={e => setColor(e.target.value)} className="h-8 w-12 rounded cursor-pointer" />
+        <input aria-label="Border color hex value" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <div>
         <label htmlFor="lbl-cssgenerators-style" className={labelClass}>Style</label>

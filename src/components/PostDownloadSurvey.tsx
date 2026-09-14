@@ -57,7 +57,7 @@ export function PostDownloadSurvey() {
         <button
           onClick={dismiss}
           className="absolute top-2 right-2 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
-          aria-label="Dismiss"
+          aria-label="Dismiss survey"
         >
           <X className="w-3.5 h-3.5" />
         </button>

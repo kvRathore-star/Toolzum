@@ -213,7 +213,7 @@ export default function AadhaarValidator() {
               <button
                 onClick={handleReset}
                 className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-                aria-label="Reset"
+                aria-label="Clear Aadhaar number"
               >
                 <RefreshCw className="w-4 h-4 text-zinc-400" />
               </button>

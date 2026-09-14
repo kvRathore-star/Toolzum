@@ -102,7 +102,7 @@ export default function ToDoList() {
               <option value="medium">Medium Priority</option>
               <option value="low">Low Priority</option>
             </select>
-            <button onClick={addItem} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold p-3 rounded-xl text-xs flex items-center justify-center cursor-pointer" aria-label="Add">
+            <button onClick={addItem} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold p-3 rounded-xl text-xs flex items-center justify-center cursor-pointer" aria-label="Add task">
               <Plus className="w-4 h-4" />
             </button>
           </div>
@@ -134,7 +134,7 @@ export default function ToDoList() {
                   </span>
                 </label>
 
-                <button onClick={() => deleteItem(item.id)} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] rounded-lg cursor-pointer" aria-label="Delete">
+                <button onClick={() => deleteItem(item.id)} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] rounded-lg cursor-pointer" aria-label={`Delete task ${item.text}`}>
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>

@@ -134,7 +134,7 @@ export default function TextRepeater() {
               <button onClick={handleDownload} disabled={!output} className="flex-1 bg-[var(--bg-overlay)] hover:bg-[var(--border-subtle)] disabled:opacity-50 text-[var(--text-primary)] font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 border border-[var(--border-subtle)] cursor-pointer">
                 <Download className="w-4 h-4" /> Download
               </button>
-              <button onClick={handleClear} aria-label="Clear" className="px-3 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-xl text-sm cursor-pointer">
+              <button onClick={handleClear} aria-label="Clear text" className="px-3 py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-xl text-sm cursor-pointer">
                 <Eraser className="w-4 h-4" />
               </button>
             </div>

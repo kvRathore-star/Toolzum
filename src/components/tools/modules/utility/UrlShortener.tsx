@@ -125,7 +125,7 @@ export default function UrlShortener() {
                 <button
                   onClick={copyToClipboard}
                   className="p-2 hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-md transition-colors flex items-center gap-2"
-                  title="Copy to clipboard" aria-label="Copy"
+                  title="Copy to clipboard" aria-label="Copy shortened URL"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                 </button>

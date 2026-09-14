@@ -93,7 +93,7 @@ export default function RobotsTxtGenerator() {
           <div className="space-y-2 flex-1 flex flex-col">
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Generated Robots.txt</span>
-              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy"><Copy className="w-4 h-4" /></button>
+              <button onClick={handleCopy} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-[var(--border-subtle)] rounded-lg" aria-label="Copy robots.txt"><Copy className="w-4 h-4" /></button>
             </div>
             <textarea
               value={buildRobotsTxt()}

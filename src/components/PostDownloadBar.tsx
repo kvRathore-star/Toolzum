@@ -52,7 +52,7 @@ export function PostDownloadBar() {
             <button
               onClick={() => setShow(false)}
               className="text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
-              aria-label="Dismiss"
+              aria-label="Dismiss sign-in prompt"
             >
               <X className="w-4 h-4" />
             </button>

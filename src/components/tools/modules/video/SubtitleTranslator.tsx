@@ -121,14 +121,14 @@ ${subtitleText}`;
                 <button 
                   onClick={handleCopy} 
                   className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
-                  title="Copy to Clipboard" aria-label="Copy"
+                  title="Copy to Clipboard" aria-label="Copy translation"
                 >
                   <Clipboard className="w-4 h-4" />
                 </button>
                 <button 
                   onClick={handleDownload} 
                   className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
-                  title="Download as File" aria-label="Download"
+                  title="Download as File" aria-label="Download translation"
                 >
                   <Download className="w-4 h-4" />
                 </button>
