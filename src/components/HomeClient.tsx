@@ -166,6 +166,8 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                     <button
                       key={tab}
                       role="tab"
+                      id={`demotab-${tab}`}
+                      aria-controls="demotab-panel"
                       data-demotab={tab}
                       tabIndex={activeTab === tab ? 0 : -1}
                       aria-selected={activeTab === tab}
@@ -179,7 +181,9 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                   ))}
                 </div>
 
+                <div role="tabpanel" id="demotab-panel" aria-labelledby={`demotab-${activeTab}`}>
                 <FileDropZone activeTab={activeTab} />
+                </div>
               </div>
             </div>
           </motion.div>

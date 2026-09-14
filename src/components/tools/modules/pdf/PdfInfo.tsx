@@ -165,11 +165,11 @@ export default function PdfInfo() {
         </button>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        <button onClick={() => setActiveTab('metadata')} className={tabClass('metadata')}>Metadata</button>
-        <button onClick={() => setActiveTab('dimensions')} className={tabClass('dimensions')}>Page Dimensions</button>
-        <button onClick={() => setActiveTab('text')} className={tabClass('text')}>Extract Text</button>
-        <button onClick={() => setActiveTab('json')} className={tabClass('json')}>Export JSON</button>
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="PDF info views">
+        <button role="tab" aria-selected={activeTab === 'metadata'} onClick={() => setActiveTab('metadata')} className={tabClass('metadata')}>Metadata</button>
+        <button role="tab" aria-selected={activeTab === 'dimensions'} onClick={() => setActiveTab('dimensions')} className={tabClass('dimensions')}>Page Dimensions</button>
+        <button role="tab" aria-selected={activeTab === 'text'} onClick={() => setActiveTab('text')} className={tabClass('text')}>Extract Text</button>
+        <button role="tab" aria-selected={activeTab === 'json'} onClick={() => setActiveTab('json')} className={tabClass('json')}>Export JSON</button>
       </div>
 
       {isLoading ? (

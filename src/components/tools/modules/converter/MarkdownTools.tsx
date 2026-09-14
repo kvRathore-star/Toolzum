@@ -363,10 +363,12 @@ export default function MarkdownTools() {
 
   return (
     <div>
-      <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl p-1 mb-6 overflow-x-auto">
+      <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl p-1 mb-6 overflow-x-auto" role="tablist" aria-label="Markdown tools">
         {TABS.map(tab => (
           <button
             key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={'px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ' + (activeTab === tab.id ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')}
           >
@@ -374,7 +376,9 @@ export default function MarkdownTools() {
           </button>
         ))}
       </div>
+      <div role="tabpanel" aria-label="Selected markdown tool">
       <ActiveComponent />
+      </div>
     </div>
   );
 }

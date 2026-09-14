@@ -166,15 +166,15 @@ export default function ChromeExtensionPage() {
                     <span className="font-semibold text-sm text-[var(--text-primary)]">Toolzum Quick</span>
                   </div>
                   <div className="flex gap-2" role="tablist" aria-label="Extension preview tabs" onKeyDown={onPreviewTabsKeyDown}>
-                    <button role="tab" data-previewtab="picker" tabIndex={activeTab === "picker" ? 0 : -1} aria-selected={activeTab === "picker"} aria-label="Show color picker" onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
-                    <button role="tab" data-previewtab="tools" tabIndex={activeTab === "tools" ? 0 : -1} aria-selected={activeTab === "tools"} aria-label="Show tools" onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
-                    <button role="tab" data-previewtab="qr" tabIndex={activeTab === "qr" ? 0 : -1} aria-selected={activeTab === "qr"} aria-label="Show QR code" onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
+                    <button role="tab" id="previewtab-picker" aria-controls="previewpanel-picker" data-previewtab="picker" tabIndex={activeTab === "picker" ? 0 : -1} aria-selected={activeTab === "picker"} aria-label="Show color picker" onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
+                    <button role="tab" id="previewtab-tools" aria-controls="previewpanel-tools" data-previewtab="tools" tabIndex={activeTab === "tools" ? 0 : -1} aria-selected={activeTab === "tools"} aria-label="Show tools" onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
+                    <button role="tab" id="previewtab-qr" aria-controls="previewpanel-qr" data-previewtab="qr" tabIndex={activeTab === "qr" ? 0 : -1} aria-selected={activeTab === "qr"} aria-label="Show QR code" onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
                   </div>
                 </div>
 
                 {/* Tab content: Color Picker */}
                 {activeTab === "picker" && (
-                  <div className="flex-1 flex flex-col justify-between">
+                  <div role="tabpanel" id="previewpanel-picker" aria-labelledby="previewtab-picker" className="flex-1 flex flex-col justify-between">
                     <div>
                       <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-3">Color Dropper</h4>
                       <div className="flex items-center gap-4 mb-4">
@@ -213,7 +213,7 @@ export default function ChromeExtensionPage() {
 
                 {/* Tab content: Quick Tools */}
                 {activeTab === "tools" && (
-                  <div className="flex-1 space-y-2">
+                  <div role="tabpanel" id="previewpanel-tools" aria-labelledby="previewtab-tools" className="flex-1 space-y-2">
                     <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">Instant Operations</h4>
                     
                     <button onClick={() => toast("Page snapshot capturing queued.", { icon: "📸" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
@@ -235,7 +235,7 @@ export default function ChromeExtensionPage() {
 
                 {/* Tab content: QR Code */}
                 {activeTab === "qr" && (
-                  <div className="flex-1 flex flex-col justify-between">
+                  <div role="tabpanel" id="previewpanel-qr" aria-labelledby="previewtab-qr" className="flex-1 flex flex-col justify-between">
                     <div>
                       <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">QR Code generator</h4>
                       <input

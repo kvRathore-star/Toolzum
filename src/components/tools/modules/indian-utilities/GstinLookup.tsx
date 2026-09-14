@@ -126,9 +126,9 @@ export default function GstinLookup() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-[var(--border-subtle)]">
+        <div className="flex border-b border-[var(--border-subtle)]" role="tablist" aria-label="Lookup mode">
           {(['single', 'bulk'] as const).map(tab => (
-            <button key={tab} onClick={() => setActiveTab(tab)}
+            <button key={tab} role="tab" aria-selected={activeTab === tab} onClick={() => setActiveTab(tab)}
               className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors ${
                 activeTab === tab ? 'text-emerald-500 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10' : 'text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}>

@@ -874,9 +874,9 @@ export default function WhatsAppToolkit() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
-        <div className="flex border-b border-[var(--border-subtle)] overflow-x-auto">
+        <div className="flex border-b border-[var(--border-subtle)] overflow-x-auto" role="tablist" aria-label="WhatsApp tools">
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+            <button key={tab.key} role="tab" aria-selected={activeTab === tab.key} onClick={() => setActiveTab(tab.key)}
               className={`flex items-center gap-1.5 px-4 py-3 text-xs font-semibold whitespace-nowrap transition-colors border-b-2 ${
                 activeTab === tab.key
                   ? 'text-emerald-500 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10'
@@ -887,7 +887,7 @@ export default function WhatsAppToolkit() {
           ))}
         </div>
 
-        <div className="p-5">
+        <div className="p-5" role="tabpanel" aria-label="Selected WhatsApp tool">
           {activeTab === 'link' && <MessageLinkTab />}
           {activeTab === 'group' && <GroupLinkTab />}
           {activeTab === 'format' && <FormatTextTab />}

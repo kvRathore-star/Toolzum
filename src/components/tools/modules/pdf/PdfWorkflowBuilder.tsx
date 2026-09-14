@@ -343,18 +343,18 @@ export function PdfWorkflowBuilder() {
   return (
     <div className="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
       <div className="flex min-h-[500px]">
-        <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1">
+        <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1" role="tablist" aria-orientation="vertical" aria-label="PDF workflow steps">
           {TABS.map(t => (
-            <button key={t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
+            <button key={t.id} role="tab" aria-selected={activeTab === t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-blue-600/20 text-blue-700 dark:text-blue-400 border border-blue-500/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
               {t.icon}<span>{t.label}</span>
             </button>
           ))}
         </div>
 
-        <div className="flex-1 p-6 overflow-y-auto space-y-4">
-          {error && <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-700 dark:text-red-400">{error}</div>}
-          {success && <div className="p-3 bg-emerald-700/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-700 dark:text-emerald-400">{success}</div>}
+        <div className="flex-1 p-6 overflow-y-auto space-y-4" role="tabpanel" aria-label="PDF workflow step">
+          {error && <div role="alert" className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-700 dark:text-red-400">{error}</div>}
+          {success && <div role="status" className="p-3 bg-emerald-700/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-700 dark:text-emerald-400">{success}</div>}
 
           {activeTab === 'merge' && (
             <>

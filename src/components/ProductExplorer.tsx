@@ -95,12 +95,14 @@ export function ProductExplorer() {
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-8 border-b border-[var(--border-subtle)] pb-4">
+      <div className="flex flex-wrap gap-2 mb-8 border-b border-[var(--border-subtle)] pb-4" role="tablist" aria-label="Product divisions">
         {CATEGORIES.map(category => {
           const Icon = category.icon;
           return (
             <button
               key={category.id}
+              role="tab"
+              aria-selected={activeTab === category.id}
               onClick={() => setActiveTab(category.id)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeTab === category.id 

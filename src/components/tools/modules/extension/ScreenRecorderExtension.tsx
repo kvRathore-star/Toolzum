@@ -121,19 +121,19 @@ document.getElementById('stopBtn').addEventListener('click', () => {
 
         <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl flex flex-col justify-between min-h-[450px]">
           <div className="space-y-3 flex-1 flex flex-col">
-            <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1">
-              <button onClick={() => setActiveTab('manifest')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'manifest' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+            <div className="flex bg-[var(--bg-overlay)]/45 p-1 rounded-xl gap-1" role="tablist" aria-label="Extension files">
+              <button role="tab" aria-selected={activeTab === 'manifest'} onClick={() => setActiveTab('manifest')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'manifest' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 manifest.json
               </button>
-              <button onClick={() => setActiveTab('popupHtml')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupHtml' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button role="tab" aria-selected={activeTab === 'popupHtml'} onClick={() => setActiveTab('popupHtml')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupHtml' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 popup.html
               </button>
-              <button onClick={() => setActiveTab('popupJs')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupJs' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button role="tab" aria-selected={activeTab === 'popupJs'} onClick={() => setActiveTab('popupJs')} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold cursor-pointer ${activeTab === 'popupJs' ? 'bg-white dark:bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 popup.js
               </button>
             </div>
 
-            <textarea aria-label="popup.js"
+            <textarea aria-label={activeTab === 'manifest' ? 'manifest.json' : activeTab === 'popupHtml' ? 'popup.html' : 'popup.js'}
               value={activeTab === 'manifest' ? manifest : activeTab === 'popupHtml' ? popupHtml : popupJs}
               readOnly
               className="w-full flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none"
