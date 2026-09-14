@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Search, Sparkles, Zap, Layout, Sun, Moon, Home, Star } from "lucide-react";
 import { clientToolsRegistry } from "@/registry/tools-client-index";
+import { useDialogA11y } from "@/components/useDialogA11y";
 import { useFavorites } from "@/hooks/useFavorites";
 import { aliasesForSlug } from "@/lib/searchAliases";
 
@@ -18,6 +19,9 @@ interface CommandMenuProps {
 // Loaded on demand via next/dynamic from Header — cmdk + the full toolsRegistry
 // stay out of the initial bundle until the user actually opens search.
 export function CommandMenu({ open, onClose }: CommandMenuProps) {
+  // Tab trap + Escape + scroll-lock. Header keeps owning return-focus
+  // (trigger element) and the global ⌘K toggle; cmdk keeps arrow-key nav.
+  const paletteRef = useDialogA11y<HTMLDivElement>(open, onClose);
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { favorites } = useFavorites();
@@ -183,6 +187,8 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
         className="absolute inset-0 cursor-default bg-transparent border-0 p-0"
       />
         <div 
+          ref={paletteRef}
+          tabIndex={-1}
           role="dialog"
           aria-modal="true"
           aria-label="Search tools"
