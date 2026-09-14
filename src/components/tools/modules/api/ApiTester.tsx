@@ -39,8 +39,8 @@ export default function ApiTester() {
         </div>
         <div className="grid grid-cols-4 gap-3">
           <div className="col-span-3">
-            <label htmlFor="lbl-apitester-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">URL</label>
-            <input id="lbl-apitester-url" aria-label="URL" type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apitester-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API endpoint URL</label>
+            <input id="lbl-apitester-url" aria-label="API endpoint URL" type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label htmlFor="lbl-apitester-method" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Method</label>

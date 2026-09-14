@@ -95,7 +95,7 @@ export default function UrlToPdf() {
             <input
               type="url"
               value={url}
-              aria-label="URL"
+              aria-label="URL to convert"
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleLoad()}
               placeholder="https://example.com"

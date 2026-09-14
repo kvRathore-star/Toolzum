@@ -51,7 +51,7 @@ export default function UrlParser() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
-      <input value={url} onChange={e => setUrl(e.target.value)} placeholder="Paste a URL (e.g. https://example.com/page?q=hello#section)" aria-label="URL" className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono focus:border-[var(--accent)] transition-colors" />
+      <input value={url} onChange={e => setUrl(e.target.value)} placeholder="Paste a URL (e.g. https://example.com/page?q=hello#section)" aria-label="URL to parse" className="w-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3.5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono focus:border-[var(--accent)] transition-colors" />
       {error && <p className="text-sm text-red-500">{error}</p>}
       {parts.length > 0 && (
         <div className="space-y-2">

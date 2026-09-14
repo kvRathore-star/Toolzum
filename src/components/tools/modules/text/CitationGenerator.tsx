@@ -344,8 +344,8 @@ export default function CitationGenerator() {
 
             {(form.sourceType === 'website' || form.sourceType === 'article' || form.sourceType === 'video') && (
               <div className="space-y-1">
-                <label htmlFor="lbl-citationgenerator-url" className="text-xs text-[var(--text-muted)] font-bold uppercase">URL</label>
-                <input id="lbl-citationgenerator-url" aria-label="URL"
+                <label htmlFor="lbl-citationgenerator-url" className="text-xs text-[var(--text-muted)] font-bold uppercase">Source URL</label>
+                <input id="lbl-citationgenerator-url" aria-label="Source URL"
                   value={form.url}
                   onChange={e => updateField('url', e.target.value)}
                   placeholder="https://"

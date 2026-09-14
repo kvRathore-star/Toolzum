@@ -242,8 +242,8 @@ export function GraphqlSubscriptionBuilder() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label htmlFor="lbl-apigraphqltools-name" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Name</label>
-            <input id="lbl-apigraphqltools-name" aria-label="Name" type="text" value={name} onChange={e => { setName(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apigraphqltools-name" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Query name</label>
+            <input id="lbl-apigraphqltools-name" aria-label="Query name" type="text" value={name} onChange={e => { setName(e.target.value); setResult(''); }} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div>
             <label htmlFor="lbl-apigraphqltools-payload-fields" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Payload Fields</label>

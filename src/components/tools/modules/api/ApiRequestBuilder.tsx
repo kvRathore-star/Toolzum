@@ -44,8 +44,8 @@ export default function ApiRequestBuilder() {
             </div>
           </div>
           <div>
-            <label htmlFor="lbl-apirequestbuilder-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">URL</label>
-            <input id="lbl-apirequestbuilder-url" aria-label="URL" type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+            <label htmlFor="lbl-apirequestbuilder-url" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">API endpoint URL</label>
+            <input id="lbl-apirequestbuilder-url" aria-label="API endpoint URL" type="text" value={url} onChange={e => setUrl(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
         <div>

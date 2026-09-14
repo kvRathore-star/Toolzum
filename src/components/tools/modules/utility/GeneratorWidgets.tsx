@@ -515,8 +515,8 @@ export function OpenGraphGenerator() {
         <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Discover the best content..."
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
-        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
-        <input aria-label="URL" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
+        <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Website URL</label>
+        <input aria-label="Website URL" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label>

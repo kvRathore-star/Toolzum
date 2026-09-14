@@ -18,8 +18,8 @@ export default function CanonicalUrlChecker() {
   return (
     <CalculatorShell category="SEO" title="Canonical URL Checker" result={resultText} onCalculate={check} calculateLabel="Check" presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
       <div className="space-y-4">
-        <label htmlFor="lbl-canonicalurlchecker-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL</label>
-        <input id="lbl-canonicalurlchecker-url" aria-label="URL" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
+        <label htmlFor="lbl-canonicalurlchecker-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL to check</label>
+        <input id="lbl-canonicalurlchecker-url" aria-label="URL to check" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
           className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
 
         {result && (
