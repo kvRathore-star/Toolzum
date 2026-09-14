@@ -98,7 +98,7 @@ export default function TextReverser() {
             {output && <span className="text-xs text-[var(--text-muted)]">{output.length} chars</span>}
           </div>
           <div className="relative">
-            <textarea aria-label="Output"
+            <textarea aria-label="Reversed text"
               value={output}
               readOnly
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-sm break-all"

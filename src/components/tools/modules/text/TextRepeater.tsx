@@ -121,7 +121,7 @@ export default function TextRepeater() {
                 <label className="text-xs text-[var(--text-muted)] font-bold uppercase">Output</label>
                 <span className="text-xs text-[var(--text-muted)]">{totalChars.toLocaleString()} chars</span>
               </div>
-              <textarea aria-label="Output"
+              <textarea aria-label="Repeated text"
                 value={output}
                 readOnly
                 className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-mono text-sm h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none"

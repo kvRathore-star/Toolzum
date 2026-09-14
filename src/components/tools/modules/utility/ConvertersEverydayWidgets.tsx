@@ -129,8 +129,8 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       ) : (
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
-            <label htmlFor="lbl-converterseverydaywidgets-value" className="text-xs font-medium text-[var(--text-secondary)]">Value</label>
-            <input id="lbl-converterseverydaywidgets-value" aria-label="Value" type="number" value={val} onChange={e => setVal(e.target.value)}
+            <label htmlFor="lbl-converterseverydaywidgets-value" className="text-xs font-medium text-[var(--text-secondary)]">Quantity</label>
+            <input id="lbl-converterseverydaywidgets-value" aria-label="Quantity" type="number" value={val} onChange={e => setVal(e.target.value)}
               className="w-full bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           </div>
           <div className="space-y-1">
