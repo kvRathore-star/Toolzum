@@ -313,7 +313,7 @@ export default function VoiceRecorder() {
                 </button>
               ) : (
                 <>
-                  <button onClick={isPaused ? resumeRecording : pauseRecording}
+                  <button aria-label={isPaused ? "Resume recording" : "Pause recording"} onClick={isPaused ? resumeRecording : pauseRecording}
                     className="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center shadow-lg transition-all active:scale-95">
                     {isPaused ? <Play className="w-7 h-7" /> : <Pause className="w-7 h-7" />}
                   </button>
@@ -350,7 +350,7 @@ export default function VoiceRecorder() {
               ) : (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[180px]">{recordingName}.{outputFormat}</span>
-                  <button onClick={startRename} className="text-[var(--text-muted)] hover:text-fuchsia-500 transition-colors shrink-0"><Edit3 className="w-4 h-4" /></button>
+                  <button aria-label="Rename recording" onClick={startRename} className="text-[var(--text-muted)] hover:text-fuchsia-500 transition-colors shrink-0"><Edit3 className="w-4 h-4" /></button>
                 </div>
               )}
               <div className="text-sm text-[var(--text-secondary)] shrink-0 ml-3">{audioBlob && `${(audioBlob.size / 1024).toFixed(1)} KB`}</div>

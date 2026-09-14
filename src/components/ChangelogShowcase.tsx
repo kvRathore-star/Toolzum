@@ -75,7 +75,7 @@ function BatchProcessingDemo() {
           <div className="w-2 h-2 rounded-full bg-[var(--accent-ink)] animate-pulse" />
           <span className="text-xs font-mono text-[var(--text-muted)]">Batch Processing Simulation</span>
         </div>
-        <button onClick={() => setIsPlaying(p => !p)} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] transition-colors">
+        <button aria-label={isPlaying ? "Pause simulation" : "Play simulation"} onClick={() => setIsPlaying(p => !p)} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)] transition-colors">
           {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
         </button>
       </div>

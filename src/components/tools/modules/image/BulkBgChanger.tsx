@@ -234,10 +234,10 @@ export default function BulkBgChanger() {
                     </div>
                     <div className="flex gap-1">
                       {item.processedUrl && (
-                        <button onClick={e => { e.stopPropagation(); downloadImage(item.processedUrl!, item.name); }}
+                        <button aria-label={`Download ${item.name}`} onClick={e => { e.stopPropagation(); downloadImage(item.processedUrl!, item.name); }}
                           className="p-1 bg-zinc-200 dark:bg-zinc-700 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600"><Download className="w-3 h-3 text-[var(--text-secondary)]" /></button>
                       )}
-                      <button onClick={e => { e.stopPropagation(); removeImage(item.id); }}
+                      <button aria-label={`Remove ${item.name}`} onClick={e => { e.stopPropagation(); removeImage(item.id); }}
                         className="p-1 bg-red-100 dark:bg-red-900/20 rounded hover:bg-red-200 dark:hover:bg-red-900/30"><Trash2 className="w-3 h-3 text-red-500" /></button>
                     </div>
                   </div>

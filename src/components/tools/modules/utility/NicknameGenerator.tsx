@@ -51,7 +51,7 @@ export default function NicknameGenerator() {
               {results.map((n, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                   <span>{n}</span>
-                  <button onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
+                  <button aria-label={`Copy nickname ${n}`} onClick={() => { clipboardWrite(n); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
             </div>

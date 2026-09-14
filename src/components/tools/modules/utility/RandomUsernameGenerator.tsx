@@ -44,7 +44,7 @@ export default function RandomUsernameGenerator() {
               {results.map((u, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
                   <span className="font-mono">{u}</span>
-                  <button onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
+                  <button aria-label={`Copy username ${u}`} onClick={() => { clipboardWrite(u); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
               <button onClick={() => { clipboardWrite(results.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>

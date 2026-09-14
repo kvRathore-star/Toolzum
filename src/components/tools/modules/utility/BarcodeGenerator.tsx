@@ -42,7 +42,7 @@ export default function BarcodeGenerator() {
           {input ? (
             <div className="overflow-auto w-full flex justify-center">
               {renderBarcode()}
-              <button onClick={async () => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); if (await downloadOrShare(url, 'barcode.svg')) toast.success('SVG downloaded!'); URL.revokeObjectURL(url); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button>
+              <button aria-label="Download barcode" onClick={async () => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); if (await downloadOrShare(url, 'barcode.svg')) toast.success('SVG downloaded!'); URL.revokeObjectURL(url); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button>
             </div>
           ) : (
             <p className="text-[var(--text-muted)] text-sm">Enter data to generate barcode</p>

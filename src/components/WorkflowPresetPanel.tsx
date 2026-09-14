@@ -103,7 +103,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                           >
                             <Check className={`w-3 h-3 ${recentlyLoaded === p.id ? 'opacity-100' : 'opacity-0'}`} />
                             <span className="flex-1 truncate">{p.name}</span>
-                            <button
+                            <button aria-label={`Delete preset ${p.name}`}
                               onClick={(e) => handleDelete(e, p.id, p.name)}
                               className="text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 transition-colors p-0.5"
                             >
@@ -142,7 +142,7 @@ export function WorkflowPresetPanel({ toolSlug, children }: { toolSlug: string; 
                         >
                           Save
                         </button>
-                        <button
+                        <button aria-label="Close save dialog"
                           onClick={() => setShowSaveDialog(false)}
                           className="text-xs text-[var(--text-muted)] p-2 hover:text-[var(--text-primary)] transition-colors"
                         >

@@ -331,7 +331,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             <div className="absolute left-0 top-0 h-full w-72 bg-[var(--bg-elevated)] border-r border-[var(--border-subtle)] p-4 overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-bold text-[var(--text-primary)]">Categories</h3>
-                <button onClick={() => setSidebarOpen(false)} className="p-1 rounded-md hover:bg-[var(--bg-overlay)]">
+                <button aria-label="Close sidebar" onClick={() => setSidebarOpen(false)} className="p-1 rounded-md hover:bg-[var(--bg-overlay)]">
                   <X className="w-4 h-4 text-[var(--text-muted)]" />
                 </button>
               </div>

@@ -88,7 +88,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       <div className="flex items-center justify-between">
         <h5 className="text-sm font-bold text-[var(--text-primary)]">{title}</h5>
         <div className="flex gap-1">
-          <button onClick={() => toggleFavorite(favKey)}
+          <button aria-label={favorites.includes(favKey) ? `Remove ${title} from favorites` : `Add ${title} to favorites`} onClick={() => toggleFavorite(favKey)}
             className={`p-1.5 rounded-lg transition-colors ${favorites.includes(favKey) ? 'text-amber-500' : 'text-[var(--text-muted)] hover:text-amber-400'}`}>
             <Star className="w-4 h-4" fill={favorites.includes(favKey) ? 'currentColor' : 'none'} />
           </button>

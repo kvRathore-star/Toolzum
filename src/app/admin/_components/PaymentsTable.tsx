@@ -142,9 +142,9 @@ export function PaymentsTable() {
         <div className="flex items-center justify-between">
           <span className="text-sm text-[var(--text-muted)] tabular-nums">Showing {(page - 1) * 20 + 1}–{Math.min(page * 20, total)} of {total}</span>
           <div className="flex gap-2">
-            <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 hover:border-[var(--accent)]/30 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><ChevronLeft className="w-4 h-4" /></button>
+            <button aria-label="Previous page" onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 hover:border-[var(--accent)]/30 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><ChevronLeft className="w-4 h-4" /></button>
             <span className="px-3 py-2 text-sm text-[var(--text-secondary)] tabular-nums">{page} / {totalPages}</span>
-            <button onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 hover:border-[var(--accent)]/30 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><ChevronRight className="w-4 h-4" /></button>
+            <button aria-label="Next page" onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="p-2 rounded-xl border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-all duration-200 hover:border-[var(--accent)]/30 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><ChevronRight className="w-4 h-4" /></button>
           </div>
         </div>
       )}

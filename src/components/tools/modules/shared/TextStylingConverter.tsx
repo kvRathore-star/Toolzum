@@ -157,7 +157,7 @@ function FancyView() {
                         <span className="text-[10px] text-[var(--text-secondary)] block">{font.name}</span>
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
-                      <button onClick={() => handleCopy(output, key)}
+                      <button aria-label={`Copy ${font.name} style`} onClick={() => handleCopy(output, key)}
                         className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
@@ -180,7 +180,7 @@ function FancyView() {
                         <span className="text-[10px] text-[var(--text-secondary)] block">{decor.name}</span>
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
-                      <button onClick={() => handleCopy(output, key)}
+                      <button aria-label={`Copy ${decor.name} style`} onClick={() => handleCopy(output, key)}
                         className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
