@@ -44,6 +44,21 @@ const itemVariants = {
 
 export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { isIndia?: boolean; popularTools: PopularTool[]; categoryCounts: CategoryCount[] }) {
   const [activeTab, setActiveTab] = useState("compress");
+  const DEMO_TABS = ["compress", "resize", "convert"];
+  // Roving-tabindex arrow-key nav (APG tabs pattern): arrows move + select.
+  const onDemoTabsKeyDown = (e: React.KeyboardEvent) => {
+    const i = DEMO_TABS.indexOf(activeTab);
+    let next: string | null = null;
+    if (e.key === "ArrowRight") next = DEMO_TABS[(i + 1) % DEMO_TABS.length]!;
+    else if (e.key === "ArrowLeft") next = DEMO_TABS[(i - 1 + DEMO_TABS.length) % DEMO_TABS.length]!;
+    else if (e.key === "Home") next = DEMO_TABS[0]!;
+    else if (e.key === "End") next = DEMO_TABS[DEMO_TABS.length - 1]!;
+    if (next) {
+      e.preventDefault();
+      setActiveTab(next);
+      document.querySelector<HTMLElement>(`[data-demotab="${next}"]`)?.focus();
+    }
+  };
   const showIndia = useIsIndia(isIndia);
   const { favorites, isLoading: favoritesLoading } = useFavorites();
 
@@ -146,11 +161,13 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               </div>
 
               <div className="flex-1 p-6 flex flex-col">
-                <div className="flex gap-4 mb-8" role="tablist" aria-label="Demo actions">
-                  {['compress', 'resize', 'convert'].map(tab => (
+                <div className="flex gap-4 mb-8" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
+                  {DEMO_TABS.map(tab => (
                     <button
                       key={tab}
                       role="tab"
+                      data-demotab={tab}
+                      tabIndex={activeTab === tab ? 0 : -1}
                       aria-selected={activeTab === tab}
                       onClick={() => setActiveTab(tab)}
                       className={`text-sm font-medium capitalize pb-2 border-b-2 transition-colors ${

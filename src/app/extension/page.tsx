@@ -27,6 +27,22 @@ export default function ChromeExtensionPage() {
 
   const colors = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#14b8a6", "#f43f5e"];
 
+  const PREVIEW_TABS = ["picker", "tools", "qr"] as const;
+  // Roving-tabindex arrow-key nav (APG tabs pattern): arrows move + select.
+  const onPreviewTabsKeyDown = (e: React.KeyboardEvent) => {
+    const i = PREVIEW_TABS.indexOf(activeTab);
+    let next: (typeof PREVIEW_TABS)[number] | null = null;
+    if (e.key === "ArrowRight") next = PREVIEW_TABS[(i + 1) % PREVIEW_TABS.length]!;
+    else if (e.key === "ArrowLeft") next = PREVIEW_TABS[(i - 1 + PREVIEW_TABS.length) % PREVIEW_TABS.length]!;
+    else if (e.key === "Home") next = PREVIEW_TABS[0]!;
+    else if (e.key === "End") next = PREVIEW_TABS[PREVIEW_TABS.length - 1]!;
+    if (next) {
+      e.preventDefault();
+      setActiveTab(next);
+      document.querySelector<HTMLElement>(`[data-previewtab="${next}"]`)?.focus();
+    }
+  };
+
   const handleCopyColor = (color: string) => {
     setSelectedColor(color);
     navigator.clipboard.writeText(color);
@@ -149,10 +165,10 @@ export default function ChromeExtensionPage() {
                     <div className="w-6 h-6 rounded bg-[var(--accent-ink)] text-white flex items-center justify-center font-bold text-xs">T</div>
                     <span className="font-semibold text-sm text-[var(--text-primary)]">Toolzum Quick</span>
                   </div>
-                  <div className="flex gap-2" role="tablist" aria-label="Extension preview tabs">
-                    <button role="tab" aria-selected={activeTab === "picker"} aria-label="Show color picker" onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
-                    <button role="tab" aria-selected={activeTab === "tools"} aria-label="Show tools" onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
-                    <button role="tab" aria-selected={activeTab === "qr"} aria-label="Show QR code" onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
+                  <div className="flex gap-2" role="tablist" aria-label="Extension preview tabs" onKeyDown={onPreviewTabsKeyDown}>
+                    <button role="tab" data-previewtab="picker" tabIndex={activeTab === "picker" ? 0 : -1} aria-selected={activeTab === "picker"} aria-label="Show color picker" onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
+                    <button role="tab" data-previewtab="tools" tabIndex={activeTab === "tools" ? 0 : -1} aria-selected={activeTab === "tools"} aria-label="Show tools" onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
+                    <button role="tab" data-previewtab="qr" tabIndex={activeTab === "qr" ? 0 : -1} aria-selected={activeTab === "qr"} aria-label="Show QR code" onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
                   </div>
                 </div>
 
