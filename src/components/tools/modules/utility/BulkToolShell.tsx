@@ -382,6 +382,11 @@ export function BulkToolShell({
               <div
                 className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }}
+                role="progressbar"
+                aria-valuenow={progress.done}
+                aria-valuemin={0}
+                aria-valuemax={Math.max(progress.total, 1)}
+                aria-label="Batch progress"
               />
             </div>
           </div>
@@ -397,7 +402,7 @@ export function BulkToolShell({
               </span>
             </div>
             <div className="mt-2 h-1.5 w-full bg-emerald-200/50 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-300" style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }} />
+              <div className="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full transition-all duration-300" style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }} role="progressbar" aria-valuenow={progress.done} aria-valuemin={0} aria-valuemax={Math.max(progress.total, 1)} aria-label="Batch progress" />
             </div>
           </div>
         )}

@@ -183,6 +183,9 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
         className="absolute inset-0 cursor-default bg-transparent border-0 p-0"
       />
         <div 
+          role="dialog"
+          aria-modal="true"
+          aria-label="Search tools"
           className="relative w-[calc(100%-2rem)] max-w-[600px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col max-h-[60vh] mt-[10vh]"
         >
           <Command

@@ -83,7 +83,7 @@ export function Timer() {
         <div className="text-center">
           <div className="text-5xl font-bold font-mono my-6">{formatTime(remaining)}</div>
           <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2 mb-4">
-            <div className="bg-blue-600 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} />
+            <div className="bg-blue-600 h-2 rounded-full transition-all" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label="Timer progress" />
           </div>
         </div>
         <div className="flex gap-3">

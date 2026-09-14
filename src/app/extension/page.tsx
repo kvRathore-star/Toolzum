@@ -149,10 +149,10 @@ export default function ChromeExtensionPage() {
                     <div className="w-6 h-6 rounded bg-[var(--accent-ink)] text-white flex items-center justify-center font-bold text-xs">T</div>
                     <span className="font-semibold text-sm text-[var(--text-primary)]">Toolzum Quick</span>
                   </div>
-                  <div className="flex gap-2">
-                    <button onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
-                    <button onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
-                    <button onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
+                  <div className="flex gap-2" role="tablist" aria-label="Extension preview tabs">
+                    <button role="tab" aria-selected={activeTab === "picker"} aria-label="Show color picker" onClick={() => setActiveTab("picker")} className={`p-1.5 rounded transition-colors ${activeTab === "picker" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Pipette className="w-4 h-4" /></button>
+                    <button role="tab" aria-selected={activeTab === "tools"} aria-label="Show tools" onClick={() => setActiveTab("tools")} className={`p-1.5 rounded transition-colors ${activeTab === "tools" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><Grid className="w-4 h-4" /></button>
+                    <button role="tab" aria-selected={activeTab === "qr"} aria-label="Show QR code" onClick={() => setActiveTab("qr")} className={`p-1.5 rounded transition-colors ${activeTab === "qr" ? "bg-[var(--accent-ink)]/15 text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-white"}`}><QrCode className="w-4 h-4" /></button>
                   </div>
                 </div>
 
@@ -167,7 +167,7 @@ export default function ChromeExtensionPage() {
                           <div className="text-xs font-mono text-[var(--text-secondary)]">HEX value</div>
                           <div className="text-sm font-semibold font-mono flex items-center gap-1.5 mt-0.5">
                             {selectedColor}
-                            <button onClick={() => handleCopyColor(selectedColor)} className="text-[var(--text-muted)] hover:text-white transition-colors">
+                            <button aria-label={`Copy color ${selectedColor}`} onClick={() => handleCopyColor(selectedColor)} className="text-[var(--text-muted)] hover:text-white transition-colors">
                               {copied ? <Check className="w-3.5 h-3.5 text-[var(--success)]" /> : <Copy className="w-3.5 h-3.5" />}
                             </button>
                           </div>

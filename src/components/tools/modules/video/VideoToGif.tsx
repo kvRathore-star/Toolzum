@@ -152,10 +152,10 @@ export default function VideoToGif() {
           </div>
           {progress === 0 ? (
             <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
-              <div className="bg-pink-500 h-full rounded-full animate-pulse" style={{ width: '100%' }}></div>
+              <div className="bg-pink-500 h-full rounded-full animate-pulse" style={{ width: '100%' }} role="progressbar" aria-label="Generating GIF"></div>
             </div>
           ) : (
-            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-pink-500 h-full transition-all duration-300" style={{ width: `${progress}%` }} role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} aria-label="GIF generation progress"></div></div>
           )}
         </div>
       )}

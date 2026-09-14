@@ -146,10 +146,12 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               </div>
 
               <div className="flex-1 p-6 flex flex-col">
-                <div className="flex gap-4 mb-8">
+                <div className="flex gap-4 mb-8" role="tablist" aria-label="Demo actions">
                   {['compress', 'resize', 'convert'].map(tab => (
                     <button
                       key={tab}
+                      role="tab"
+                      aria-selected={activeTab === tab}
                       onClick={() => setActiveTab(tab)}
                       className={`text-sm font-medium capitalize pb-2 border-b-2 transition-colors ${
                         activeTab === tab ? 'border-[var(--accent)] text-[var(--text-primary)]' : 'border-transparent text-[var(--text-muted)] hover:text-[var(--text-secondary)]'

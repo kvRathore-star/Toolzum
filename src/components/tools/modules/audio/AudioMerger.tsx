@@ -361,6 +361,9 @@ export default function AudioMerger() {
           {/* Normalize */}
           <label className="flex items-center gap-3 cursor-pointer group">
             <button
+              role="switch"
+              aria-checked={normalize}
+              aria-label="Normalize volume"
               onClick={() => setNormalize((n) => !n)}
               disabled={isProcessing}
               className={`w-10 h-6 rounded-full transition-colors relative ${
