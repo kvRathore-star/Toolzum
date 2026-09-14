@@ -209,6 +209,9 @@ export function CalculatorShell({
           )}
         </div>
 
+        {/* Always-mounted announcer: SRs miss live regions created simultaneously with content */}
+        <div role="status" className="sr-only">{typeof result === 'string' && result ? `Result: ${result}` : customResult ? 'Result updated' : ''}</div>
+
         {/* Right: Result panel */}
         {hasResult && (
           <div aria-live="polite" className={`rounded-2xl p-6 border flex flex-col justify-between ${error ? 'bg-red-500/10 border-red-500/20' : a.resultBg + ' ' + a.resultBorder}`}>
@@ -233,7 +236,7 @@ export function CalculatorShell({
                   <span className="text-xs text-[var(--text-muted)]">{resultLabel}</span>
                 )}
                 {error ? (
-                  <p className="text-sm font-mono text-red-700 dark:text-red-400 mt-1">{error}</p>
+                  <p role="alert" className="text-sm font-mono text-red-700 dark:text-red-400 mt-1">{error}</p>
                 ) : customResult ? (
                   <div className="mt-1">{customResult}</div>
                 ) : result ? (

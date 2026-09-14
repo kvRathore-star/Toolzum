@@ -125,7 +125,7 @@ export default function BmiCalculator() {
           )}
         </div>
 
-        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
+        <div role="status" aria-label={`BMI ${bmi.toFixed(1)}, ${category}`} className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between">
           <div>
             <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase mb-4">Body Mass Index</h4>
             <p className="text-5xl font-extrabold text-[var(--text-secondary)] dark:text-white">{bmi.toFixed(1)}</p>

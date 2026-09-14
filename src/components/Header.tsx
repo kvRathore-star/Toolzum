@@ -200,6 +200,7 @@ export function Header() {
               
                   <div
                     ref={menuRef}
+                    inert={!megaMenuOpen}
                     className={`fixed left-1/2 -translate-x-1/2 top-[60px] mt-2 w-screen max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-b-[var(--radius-xl)] shadow-[var(--shadow-lg)] max-h-[80vh] overflow-y-auto z-[1000] md:w-[600px] lg:w-[900px] xl:w-[1100px] transition-all duration-200 ease-[cubic-bezier(0,0,0.2,1)] ${megaMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                   >
                     {/* Inline Search — opens CommandMenu */}
@@ -347,6 +348,7 @@ export function Header() {
                   <div
                     role="group"
                     aria-label="Share"
+                    inert={!shareOpen}
                     className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-3 min-w-[200px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${shareOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                     onMouseEnter={() => setShareOpen(true)}
                     onMouseLeave={() => setShareOpen(false)}
@@ -455,6 +457,7 @@ export function Header() {
                       <div
                         role="group"
                         aria-label="User menu"
+                        inert={!userMenuOpen}
                         onMouseLeave={() => setUserMenuOpen(false)}
                         className={`absolute right-0 top-full mt-2 z-50 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-lg)] p-1.5 min-w-[180px] transition-all duration-150 ease-[cubic-bezier(0,0,0.2,1)] ${userMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'}`}
                       >
@@ -541,6 +544,7 @@ export function Header() {
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
+            inert={!mobileMenuOpen}
             className={`fixed inset-x-0 top-[60px] bottom-0 z-[999] md:hidden bg-[var(--bg-base)] border-t border-[var(--border-subtle)] overflow-y-auto transition-all duration-200 ease-[cubic-bezier(0,0,0.2,1)] ${mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'}`}
           >
             <div className="p-4 space-y-1">

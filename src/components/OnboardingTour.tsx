@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useSession } from "@/lib/auth-client";
 
 const STORAGE_KEY = "toolzum_onboarded";
@@ -39,6 +39,7 @@ const STEPS: TourStep[] = [
 export function OnboardingTour() {
   const [step, setStep] = useState<number | null>(null);
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const prevFocus = useRef<HTMLElement | null>(null);
   const { data: session, isPending } = useSession();
   const isSignedIn = !!session?.user;
 
@@ -117,9 +118,22 @@ export function OnboardingTour() {
     (_done: boolean) => {
       void persistSeen(true);
       setStep(null);
+      prevFocus.current?.focus?.();
     },
     [persistSeen],
   );
+
+  // Capture the focused element when the tour first appears (auto-show or
+  // footer replay) so dismiss can return focus to it.
+  useEffect(() => {
+    if (step === 0 && !prevFocus.current) {
+      prevFocus.current =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+    }
+    if (step === null) prevFocus.current = null;
+  }, [step]);
 
   useEffect(() => {
     if (step === null) return;

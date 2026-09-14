@@ -227,7 +227,7 @@ export default function ScientificCalculator() {
                   <button onClick={copyResult} className="p-1.5 rounded-lg hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy result" aria-label="Copy result"><Copy size={16} /></button>
                 </>
               )}
-              {error && <span className="text-sm text-red-700 dark:text-red-400 font-medium">{error}</span>}
+              {error && <span role="alert" className="text-sm text-red-700 dark:text-red-400 font-medium">{error}</span>}
             </div>
           </div>
         </div>
