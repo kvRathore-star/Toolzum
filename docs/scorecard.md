@@ -242,3 +242,9 @@ from the original audit were pattern-matched names, not shared code.
 | Perf target (Aug 18) | open | **resolved** | HomeClient imports only the light client index; ToolLayout imports no registry. |
 
 Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-producing.
+
+## Update (2026-09-14)
+
+| Dimension | Sep 11 | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Accessibility | ~82 | **~92** (xlsx row #9: 72 → **92**) | Commits `1263920e`, `7ca5aff9`, `9e246eca`, `d7936d8b`, `ed1fbb56`, `d5c28137` (60 generic labels renamed + missing labels added), `63e4b6ef` + `fdad6bab` (28 icon buttons, dialog semantics), `e474e590` (A1: 50 more buttons, 0 unnamed repo-wide per brace-aware scan; 0 generic labels), `45148e66` (A2: 7 accordion expanded states, menu/menuitem roles, nested-button fix), `bd6ee83d` (A3: shell announcer, error alerts, BMI status, tour focus restore, inert hidden trees). VoiceOver Session 3 DONE (~90% speak-correct, TODO-TRACKER). Residual: Session 4 UI-look naming, toast-only copy feedback, palette trap, tab arrow-key nav. eslint 0 errors throughout. |
