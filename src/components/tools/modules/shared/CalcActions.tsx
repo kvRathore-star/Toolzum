@@ -21,6 +21,15 @@ export function CalcActions({
 }: CalcActionsProps) {
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
+  // Inline SR announcer: toasts alone are missed when dismissed, so every
+  // copy/download confirmation is also announced here (key remounts so
+  // repeats re-announce).
+  const [announce, setAnnounce] = useState<{ id: number; text: string } | null>(null);
+  const announceId = useRef(0);
+  const say = useCallback((text: string) => {
+    announceId.current += 1;
+    setAnnounce({ id: announceId.current, text });
+  }, []);
 
   const historyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
@@ -41,10 +50,12 @@ export function CalcActions({
     if (!result) return;
     if (await clipboardWrite(result)) {
       toast.success("Result copied");
+      say("Result copied to clipboard");
     } else {
       toast.error("Copy failed — select the result text manually");
+      say("Copy failed. Select the result text manually.");
     }
-  }, [result]);
+  }, [result, say]);
 
   const handleDownload = useCallback(() => {
     if (!downloadData) return;
@@ -56,10 +67,16 @@ export function CalcActions({
     el.click();
     URL.revokeObjectURL(url);
     toast.success("File downloaded");
-  }, [downloadData, downloadFilename]);
+    say("File downloaded");
+  }, [downloadData, downloadFilename, say]);
 
   return (
     <div className="flex items-center gap-2 flex-wrap">
+      {announce && (
+        <div key={announce.id} role="status" className="sr-only">
+          {announce.text}
+        </div>
+      )}
       {/* Copy button */}
       <button
         onClick={copyResult}

@@ -77,6 +77,13 @@ export function CalculatorShell({
   const [history, setHistory] = useState<string[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [activePreset, setActivePreset] = useState<string | null>(null);
+  // Inline SR announcer (see CalcActions): toasts are missed when dismissed.
+  const [announce, setAnnounce] = useState<{ id: number; text: string } | null>(null);
+  const announceId = useRef(0);
+  const say = useCallback((text: string) => {
+    announceId.current += 1;
+    setAnnounce({ id: announceId.current, text });
+  }, []);
   const shellRef = useRef<HTMLDivElement>(null);
   const a = accentMap[accent] || accentMap.indigo!;
   const resolvedIcon = icon ?? (category ? React.createElement(getCategoryTheme(category).icon, { size: 20 }) : null);
@@ -106,10 +113,12 @@ export function CalculatorShell({
     if (!result) return;
     if (await clipboardWrite(result)) {
       toast.success('Result copied');
+      say('Result copied to clipboard');
     } else {
       toast.error('Copy failed — select the result text manually');
+      say('Copy failed. Select the result text manually.');
     }
-  }, [result]);
+  }, [result, say]);
 
   const handleDownload = useCallback(() => {
     if (!downloadData) return;
@@ -121,7 +130,8 @@ export function CalculatorShell({
     el.click();
     URL.revokeObjectURL(url);
     toast.success('File downloaded');
-  }, [downloadData, downloadFilename]);
+    say('File downloaded');
+  }, [downloadData, downloadFilename, say]);
 
   useEffect(() => {
     if (auto || !onCalculate) return;
@@ -211,6 +221,11 @@ export function CalculatorShell({
 
         {/* Always-mounted announcer: SRs miss live regions created simultaneously with content */}
         <div role="status" className="sr-only">{typeof result === 'string' && result ? `Result: ${result}` : customResult ? 'Result updated' : ''}</div>
+        {announce && (
+          <div key={announce.id} role="status" className="sr-only">
+            {announce.text}
+          </div>
+        )}
 
         {/* Right: Result panel */}
         {hasResult && (
