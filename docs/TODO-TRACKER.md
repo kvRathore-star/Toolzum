@@ -64,6 +64,7 @@ Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–
 
  
 ## Completed
+- [x] A11y 97+ push (Sep 14, DEPLOYED to production Pages build `8f7e1de8`, commit `256ce85d`): 60 generic labels renamed, 78 icon buttons named, 9 dialogs trapped+labelled, switch/tab/menu/progressbar roles, 9 tablists with arrow-key nav (shared `useRovingTabs`), accordions, live regions, inert hidden trees, tour focus restore. Scans at zero (unnamed/vague/generic); `tsc` clean; full suite 1208/1208 green. xlsx Accessibility 72 → **95** (composite 74.1 → 74.7).
 - [x] A/E/X/H QA sweep — 4 commits (cookie/FAQ, a11y, error-handling, mobile)
 - [x] Gemini Watermark Remover — commit b185098
 - [x] Bulk AVIF Optimizer — commit a9dd4cc
@@ -101,6 +102,8 @@ Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked
 
 
 Session 3 — VoiceOver pass (the big one) — DONE 2026-09-14 for most listed tools: controls speak correct names, ~90% success rate.
+
+Session 4 — UI-look naming — DONE IN CODE 2026-09-14 (no manual batches needed): worst-offender mining fixed 32 Copy/Download + vague actions + single letters + duplicates (commits `f3a763d1`, `e99c5639`). Human spot-checks on dense pages remain optional.
 1. On Mac: turn on VoiceOver with Cmd+F5. Move with Ctrl+Option+Right arrow. Stop with Cmd+F5.
 2. Visit each page below and arrow through it. For every button, box, and field, listen: does it announce a clear name ("Loan Amount", "Upload font file") or something useless ("button", "edit text", silence)?
 3. Write down any that announce wrong or nothing, with the page name:
