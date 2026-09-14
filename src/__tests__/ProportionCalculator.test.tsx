@@ -33,7 +33,7 @@ describe('ProportionCalculator', () => {
 
   it('shows the empty-state prompt and no NaN when cleared (guard pattern)', () => {
     render(<ProportionCalculator />);
-    fireEvent.change(screen.getByLabelText('A'), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText('A (first ratio)'), { target: { value: '' } });
     expect(screen.getByText('Enter values to calculate')).toBeDefined();
     expect(document.body.textContent).not.toMatch(/NaN/);
   });

@@ -26,7 +26,7 @@ describe('UrlShortener', () => {
     fireEvent.change(input, { target: { value: 'https://example.com/long-path' } });
     fireEvent.click(screen.getByText('Shorten'));
     await waitFor(() => {
-      expect(screen.getByLabelText('Copy')).toBeDefined();
+      expect(screen.getByLabelText('Copy shortened URL')).toBeDefined();
     });
   });
 

@@ -21,7 +21,7 @@ describe('ToDoList', () => {
     render(<ToDoList />);
     const input = screen.getByPlaceholderText(/What needs to be accomplished/);
     fireEvent.change(input, { target: { value: 'Buy groceries' } });
-    fireEvent.click(screen.getByLabelText('Add'));
+    fireEvent.click(screen.getByLabelText('Add task'));
     expect(screen.getByText('Buy groceries')).toBeDefined();
   });
 
@@ -29,7 +29,7 @@ describe('ToDoList', () => {
     render(<ToDoList />);
     const input = screen.getByPlaceholderText(/What needs to be accomplished/);
     fireEvent.change(input, { target: { value: 'Task 1' } });
-    fireEvent.click(screen.getByLabelText('Add'));
+    fireEvent.click(screen.getByLabelText('Add task'));
     const checkbox = screen.getByRole('checkbox');
     fireEvent.click(checkbox);
     expect(checkbox).toBeChecked();
@@ -39,14 +39,14 @@ describe('ToDoList', () => {
     render(<ToDoList />);
     const input = screen.getByPlaceholderText(/What needs to be accomplished/);
     fireEvent.change(input, { target: { value: 'Task to delete' } });
-    fireEvent.click(screen.getByLabelText('Add'));
+    fireEvent.click(screen.getByLabelText('Add task'));
     expect(screen.getByText('Task to delete')).toBeDefined();
-    fireEvent.click(screen.getByLabelText('Delete'));
+    fireEvent.click(screen.getByLabelText('Delete task Task to delete'));
     expect(screen.queryByText('Task to delete')).toBeNull();
   });
 
   it('has proper aria attributes on buttons', () => {
     render(<ToDoList />);
-    expect(screen.getByLabelText('Add')).toBeDefined();
+    expect(screen.getByLabelText('Add task')).toBeDefined();
   });
 });

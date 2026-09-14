@@ -70,7 +70,7 @@ export function UserDetailSlideOver({
   return (
     <div className="fixed inset-0 z-40 flex justify-end">
       <button
-        aria-label="Close user detail"
+        aria-label="Close dialog"
         onClick={onClose}
         tabIndex={-1}
         className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity animate-fade-in cursor-default"
@@ -84,7 +84,7 @@ export function UserDetailSlideOver({
       >
         <div className="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-[var(--border-subtle)] bg-[var(--bg-base)]/95 backdrop-blur-xl">
           <h2 id="user-detail-title" className="text-lg font-bold text-[var(--text-primary)]">User Detail</h2>
-          <button type="button" onClick={onClose} aria-label="Close user detail" className="relative z-20 p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
+          <button type="button" onClick={onClose} aria-label="Close user detail dialog" className="relative z-20 p-2 hover:bg-[var(--bg-surface)] rounded-lg cursor-pointer transition-all duration-200 active:scale-95 min-h-[44px] min-w-[44px] flex items-center justify-center"><X className="w-5 h-5 text-[var(--text-muted)]" /></button>
         </div>
         {loading ? (
           <div className="p-12 text-center" role="status" aria-live="polite">

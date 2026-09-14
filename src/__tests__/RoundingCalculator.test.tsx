@@ -28,7 +28,7 @@ describe('RoundingCalculator', () => {
 
   it('switches rounding mode (floor of 3.14159 to 2 dp -> 3.14; ceil path exists)', () => {
     render(<RoundingCalculator />);
-    fireEvent.change(screen.getByLabelText('Value'), { target: { value: '3.149' } });
+    fireEvent.change(screen.getByLabelText('Number to round'), { target: { value: '3.149' } });
     fireEvent.click(screen.getByRole('button', { name: 'Floor (↓)' }));
     expect(screen.getByText(/3\.149.*3\.14/)).toBeDefined();
     fireEvent.click(screen.getByRole('button', { name: 'Ceil (↑)' }));
@@ -37,7 +37,7 @@ describe('RoundingCalculator', () => {
 
   it('shows the empty-state prompt and no NaN when cleared (guard pattern)', () => {
     render(<RoundingCalculator />);
-    fireEvent.change(screen.getByLabelText('Value'), { target: { value: '' } });
+    fireEvent.change(screen.getByLabelText('Number to round'), { target: { value: '' } });
     expect(screen.getByText('Enter a number to round')).toBeDefined();
     expect(document.body.textContent).not.toMatch(/NaN/);
   });

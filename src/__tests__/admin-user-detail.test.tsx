@@ -58,7 +58,7 @@ function renderOpen(onClose = vi.fn()) {
 describe('UserDetailSlideOver dialog behavior', () => {
   it('closes on X click', () => {
     const { onClose } = renderOpen();
-    fireEvent.click(screen.getByLabelText('Close'));
+    fireEvent.click(screen.getByLabelText('Close user detail dialog'));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 

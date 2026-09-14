@@ -48,7 +48,7 @@ describe('CurrencyConverter', () => {
     await waitFor(() => {
       expect(mockFetch).toHaveBeenCalled();
     });
-    const swapButtons = screen.getAllByLabelText('Swap');
+    const swapButtons = screen.getAllByLabelText('Swap currencies');
     fireEvent.click(swapButtons[swapButtons.length - 1]);
     const selects = screen.getAllByRole('combobox');
     expect(selects[0]).toHaveValue('INR');

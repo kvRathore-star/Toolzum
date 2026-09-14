@@ -219,8 +219,6 @@ export function CalculatorShell({
           )}
         </div>
 
-        {/* Always-mounted announcer: SRs miss live regions created simultaneously with content */}
-        <div role="status" className="sr-only">{typeof result === 'string' && result ? `Result: ${result}` : customResult ? 'Result updated' : ''}</div>
         {announce && (
           <div key={announce.id} role="status" className="sr-only">
             {announce.text}
