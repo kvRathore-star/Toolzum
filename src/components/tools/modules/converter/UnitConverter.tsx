@@ -96,11 +96,11 @@ export function UnitConverter() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="lbl-unitconverter-from" className="text-xs font-medium text-[var(--text-secondary)]">From</label>
-            <select id="lbl-unitconverter-from" aria-label="From" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <label htmlFor="lbl-unitconverter-from" className="text-xs font-medium text-[var(--text-secondary)]">From unit</label>
+            <select id="lbl-unitconverter-from" aria-label="From unit" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
           <div>
-            <label htmlFor="lbl-unitconverter-to" className="text-xs font-medium text-[var(--text-secondary)]">To</label>
+            <label htmlFor="lbl-unitconverter-to" className="text-xs font-medium text-[var(--text-secondary)]">To unit</label>
             <select id="lbl-unitconverter-to" aria-label="To" value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
         </div>

@@ -259,8 +259,8 @@ export function ShoeSizeConverter() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
           <div>
-            <label htmlFor="lbl-calcfilekitwidgets-from" className="text-xs text-[var(--text-secondary)] mb-1 block">From</label>
-            <select id="lbl-calcfilekitwidgets-from" aria-label="From" value={from} onChange={e => setFrom(e.target.value)}
+            <label htmlFor="lbl-calcfilekitwidgets-from" className="text-xs text-[var(--text-secondary)] mb-1 block">Shoe size system</label>
+            <select id="lbl-calcfilekitwidgets-from" aria-label="Shoe size system" value={from} onChange={e => setFrom(e.target.value)}
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm">
               <option value="US">US to UK</option>
               <option value="UK">UK to US</option>
