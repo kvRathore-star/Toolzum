@@ -212,8 +212,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Extract PDF content into editable DOCX files. Preserves formatting and layout.',
     dependencies: "pdf2docx / PDF.js",
-    seoDescription: 'Convert PDF to Word online free — extract PDF content into editable DOCX files. Preserves formatting. 100% client-side, no uploads needed.',
+    seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
     showInCategory: false,
+    faqs: [
+      { question: "How accurate is the conversion?", answer: "Text-heavy PDFs convert cleanly — paragraphs, headings, lists, and tables survive. Scanned/image-only PDFs need OCR first; complex multi-column magazine layouts may reflow into single-column text." },
+      { question: "What about fonts?", answer: "Standard fonts map to Word equivalents; exotic embedded fonts fall back to the closest match. Check headings and special characters after conversion before sending." },
+      { question: "Can it convert scanned PDFs?", answer: "Not directly — a scan is a photo of text. Run it through an OCR tool first to get a searchable PDF, then convert that to DOCX." },
+      { question: "Is there a page or size limit?", answer: "Large documents (100+ pages with heavy images) convert slower and can strain mobile browsers — split into chapters under ~30 pages each for reliability." },
+      { question: "Are my documents uploaded?", answer: "No. Extraction runs entirely in your browser. Documents never leave your device." },
+    ],
   },
   {
     id: "10",
@@ -298,9 +305,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "word-to-pdf",
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
-    seoDescription: 'Free online Word to PDF — Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. ',
+    seoDescription: 'Free online Word to PDF — convert DOCX/DOC with fonts, tables, and images intact. Server-side for fidelity. ',
     dependencies: "LibreOffice API / CloudConvert API",
     showInCategory: false,
+    faqs: [
+      { question: "Will my formatting survive?", answer: "Yes — fonts, tables, images, headers, footers, and page breaks render via LibreOffice, matching desktop Word output closely. Macro/VBA code does not transfer (PDFs can't carry it)." },
+      { question: "Why is this one server-side, not in-browser?", answer: "Faithful Word rendering needs a full document engine, too heavy for browsers. Files are processed on the conversion API and deleted after — unlike the local-first tools elsewhere on this site." },
+      { question: "DOC vs DOCX — both supported?", answer: "Yes. Legacy .doc (Word 97–2003) and modern .docx both convert. Password-protected files must be unlocked first." },
+      { question: "How large a document can I convert?", answer: "Typical reports and resumes (under 50 pages) convert in seconds. Image-heavy 100+ page manuals take longer — split them if the conversion times out." },
+      { question: "Is my document kept on the server?", answer: "No. The conversion API deletes files after processing; nothing is retained or used for training. For highly sensitive documents, print-to-PDF from Word itself instead." },
+    ],
   },
   {
     id: "21",
@@ -460,9 +474,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "png-to-jpg",
     category: "Image",
     description: 'Convert PNG images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
-    seoDescription: 'Free online PNG to JPG — Convert PNG images into space-efficient JPEG files. Ideal for photographs and complex images where smaller file size outweighs loss of transparency. ',
+    seoDescription: 'Free online PNG to JPG — convert PNG to smaller JPEG. Know the transparency tradeoff first. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "When should I convert PNG to JPG?", answer: "For photographs and complex images where file size matters more than transparency — expect 60–90% smaller files. Keep PNG for logos, icons, and anything with transparency or sharp text edges." },
+      { question: "What happens to transparency?", answer: "JPG has no alpha channel: transparent pixels become a solid background (usually white). If the transparency matters, convert to WebP instead — it keeps alpha at JPG-like sizes." },
+      { question: "What quality setting should I use?", answer: "Quality 85–90 for photos you keep; 70–80 for web uploads where bandwidth matters. Below 60, banding and block artifacts become visible in skies and gradients." },
+      { question: "Is the conversion really lossless?", answer: "No — PNG→JPG is always lossy by nature (JPG discards data). The original PNG pixels are read exactly; the size saving comes from JPEG compression. Archive the PNG if you need pixel-perfect originals." },
+      { question: "Are my images uploaded?", answer: "No. Conversion runs entirely in your browser via Canvas. Images never leave your device." },
+    ],
   },
   {
 
@@ -835,7 +856,14 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Image",
     description: 'Scales images to exact pixel dimensions or percentage-based sizes with intelligent resampling algorithms that preserve sharpness.',
     dependencies: "Canvas API / Sharp",
-    seoDescription: 'Resize images online free — scale JPG, PNG, WebP to exact dimensions or percentage. Smart resampling preserves quality. ',
+    seoDescription: 'Resize images online free — exact pixels or percentage, with resampling that keeps edges sharp. ',
+    faqs: [
+      { question: "Exact pixels or percentage — which to use?", answer: "Exact pixels for platform requirements (e.g., 1920×1080 hero, 1080×1080 post); percentage for quick proportional shrinks. Percentage preserves aspect ratio automatically; exact dimensions let you lock one side." },
+      { question: "Will downscaling blur my image?", answer: "Minimal loss with proper resampling — halving a 4000px photo to 2000px stays crisp. Upscaling beyond ~2× invents pixels and softens detail; use the AI Upscaler instead for enlargements." },
+      { question: "How do I avoid stretched images?", answer: "Keep aspect-ratio lock on (default). Stretching happens only when width and height scale differently — e.g., forcing a 4:3 photo into 16:9. Crop first, then resize." },
+      { question: "What output format should I pick?", answer: "Match the source for fidelity (JPG→JPG, PNG→PNG) or switch to WebP for smallest size. Format conversion happens after resampling, so quality settings still apply." },
+      { question: "Are my images uploaded?", answer: "No. Resizing runs entirely in your browser. Images never leave your device." },
+    ],
   },
   {
 
