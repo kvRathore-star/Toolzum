@@ -1925,6 +1925,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online GIF to WebP — Convert GIF images into modern WebP format for smaller file sizes with optional animation support. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does GIF to WebP do?", answer: "Converts GIF files to WebP format \u2014 simple animations, memes, and images on platforms that support animated GIFs natively to modern websites. All conversion happens locally in your browser with no file size limits." },
+      { question: "How long does GIF-to-WebP conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting GIF lose quality?", answer: "From lossy (limited to 256 colors) to lossy or lossless: quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original GIF files?", answer: "Yes \u2014 archive GIF originals before batch-converting. Re-converting from WebP back to GIF never restores discarded data." },
+    ],
   },
   {
     id: "389",
@@ -1999,6 +2005,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online HEIC to WebP — Convert Apple HEIC/HEIF photos into modern WebP format for efficient web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does HEIC to WebP do?", answer: "Convert HEIC images to WEBP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "What HEIC files convert best?", answer: "Complete, uncorrupted HEIC files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert HEIC to WebP?", answer: "HEIC (High Efficiency Image Container) is lossy or lossless \u2014 best for Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency. WebP (Web Picture Format) is lossy or lossless \u2014 best for modern websites \u2014 Google-recommended format with superior compression for faster page loads." },
+      { question: "Where does WebP fit best?", answer: "modern websites \u2014 Google-recommended format with superior compression for faster page loads." },
+    ],
   },
   {
     id: "392",
@@ -2029,6 +2041,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online JPG to JXL — Convert JPEG photos into cutting-edge JPEG XL format with superior compression. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does JPG to JXL do?", answer: "Convert JPG images to JXL format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "Why convert JPEG to JPEG XL?", answer: "JPEG (Joint Photographic Experts Group) is lossy compressed \u2014 best for photographs, web images, and social media where smaller file size matters more than perfect quality. JPEG XL (JPEG XL) is lossy or lossless \u2014 best for next-gen image archival \u2014 better compression than JPEG with support for wide gamut and HDR." },
+      { question: "Where does JPEG XL fit best?", answer: "next-gen image archival \u2014 better compression than JPEG with support for wide gamut and HDR." },
+      { question: "What JPEG files convert best?", answer: "Complete, uncorrupted JPEG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+    ],
   },
   {
     id: "395",
@@ -2076,6 +2094,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online SVG to AVIF — Convert SVG vector graphics into AVIF format for next-gen web delivery. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does SVG to AVIF do?", answer: "Convert SVG images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "Where does AVIF fit best?", answer: "next-gen web images \u2014 royalty-free format with better compression than WebP and JPEG." },
+      { question: "What SVG files convert best?", answer: "Complete, uncorrupted SVG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert SVG to AVIF?", answer: "SVG (Scalable Vector Graphics) is vector (resolution-independent) \u2014 best for logos, icons, illustrations, and any graphic that needs to scale cleanly to any size. AVIF (AV1 Image File Format) is lossy or lossless \u2014 best for next-gen web images \u2014 royalty-free format with better compression than WebP and JPEG." },
+    ],
   },
   {
     id: "399",
@@ -2106,6 +2130,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to AVIF — Convert TIFF images into next-gen AVIF format for best-in-class compression. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does TIFF to AVIF do?", answer: "Convert TIFF images to AVIF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "How long does TIFF-to-AVIF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting TIFF lose quality?", answer: "From lossless (supports layers) to lossy or lossless: yes, some detail is discarded \u2014 keep the original TIFF archived." },
+      { question: "Should I keep the original TIFF files?", answer: "Yes \u2014 archive TIFF originals before batch-converting. Re-converting from AVIF back to TIFF never restores discarded data." },
+    ],
   },
   {
     id: "402",
