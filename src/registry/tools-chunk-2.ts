@@ -205,9 +205,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "mp3-to-ogg",
     category: "Audio",
     description: 'Convert MP3 audio files to OGG format directly in your browser. High-quality conversion with no file size limits. Private and free.',
-    seoDescription: 'Free online MP3 to OGG — Convert MP3 audio files into OGG Vorbis format. ',
+    seoDescription: 'Free online MP3 to OGG — convert MP3 audio to open OGG Vorbis in your browser. Smaller files, no uploads. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "Why convert MP3 to OGG?", answer: "OGG Vorbis is patent-free and typically 10–20% smaller than MP3 at the same perceived quality — useful for game assets, web audio, and open-source projects that avoid MP3 licensing friction." },
+      { question: "Will I lose audio quality?", answer: "Both are lossy, so transcoding loses a little. At quality setting 6 (≈192 kbps) the difference from the source MP3 is inaudible for speech and most music. Keep the original MP3 archived if quality is critical." },
+      { question: "Does OGG play everywhere?", answer: "Browsers (Chrome, Firefox, Edge) and VLC play OGG natively; Apple devices and Safari historically do not. For iPhone-bound audio, convert to AAC/MP4 instead." },
+      { question: "Why does the first conversion take a while?", answer: "The FFmpeg engine (~30MB WASM) downloads once on first use and is cached after. Subsequent conversions start instantly, even offline." },
+      { question: "Are my audio files uploaded?", answer: "No. Conversion runs entirely in your browser via FFmpeg.wasm. Files never leave your device." },
+    ],
   },
   {
     id: "422",

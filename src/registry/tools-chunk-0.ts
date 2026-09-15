@@ -718,10 +718,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "sip-calculator",
     category: "Finance",
     description: 'Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online SIP Calculator — Projects the future value of recurring mutual-fund investments using compounded monthly returns based on historical or assumed growth rates. ',
-    dependencies: "Vanilla JS"
-  ,
-},
+    seoDescription: 'Free online SIP Calculator — project mutual-fund SIP growth with monthly compounding. See future value, invested amount, and gains. ',
+    dependencies: "Vanilla JS",
+    faqs: [
+      { question: "How is SIP future value calculated?", answer: "FV = P × [((1+r)^n − 1) / r] × (1+r), with monthly rate r and n months. Example: ₹10,000/month at 12% annual (≈1%/month) for 10 years (120 months) → ≈₹23.2 lakh on ₹12 lakh invested." },
+      { question: "What return rate should I assume?", answer: "Indian equity funds averaged ~12% over long periods, but use 10–12% for planning and 8% for conservative estimates. The calculator shows invested vs gains separately so you can sanity-check the growth assumption." },
+      { question: "What is a step-up SIP?", answer: "Increasing your SIP yearly (e.g., +10% as salary grows). A ₹10,000 SIP stepped up 10% yearly for 10 years at 12% beats a flat SIP by roughly 40% — model it by raising the monthly amount manually per period." },
+      { question: "Does it account for expense ratio and tax?", answer: "No — projected returns are pre-expense and pre-tax. A 1% expense ratio drags ~1% off annual returns; equity gains above ₹1.25 lakh/year face 12.5% LTCG. Treat the output as gross, then haircut it." },
+      { question: "Is my investment data stored?", answer: "No. All projections run locally in your browser. No amounts, rates, or tenures are transmitted or stored." },
+    ],
+  },
   {
     id: "62",
     name: "BMI Calculator",
@@ -817,8 +823,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "password-generator",
     category: "Utility",
     description: 'Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Password Generator — Generates cryptographically strong random passwords with fully customizable length, character sets, and pattern rules. ',
+    seoDescription: 'Free online Password Generator — create strong random passwords with custom length and character sets, generated securely in your browser. ',
     dependencies: "Crypto API",
+    faqs: [
+      { question: "How long should my password be?", answer: "12 characters minimum for everyday accounts (≈79 bits of entropy from a 94-character set); 16+ (≈105 bits) for email, banking, and password-manager master passwords. Every extra character multiplies guessing effort ~94×." },
+      { question: "Random characters or a passphrase?", answer: "Random strings pack more entropy per character; 5-word passphrases are easier to type and remember. Use random for stored-in-manager logins, passphrases for the few you must memorize." },
+      { question: "Which character sets should I enable?", answer: "Uppercase + lowercase + digits + symbols gives the full 94-character set. Some legacy sites reject symbols — the generator lets you exclude them without weakening length, which matters more than variety." },
+      { question: "Should I reuse variations of one password?", answer: "No. One breach exposes the pattern. Generate a unique password per site and store them in a password manager — that is the threat model this tool is built for." },
+      { question: "Are generated passwords sent anywhere?", answer: "No. Generation uses the browser Web Crypto API locally. Passwords never leave your device and are never logged." },
+    ],
 },
   {
 
@@ -1253,6 +1266,13 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Calculates gross margin percentage, markup percentage, cost, and selling price from any two known variables — perfect for retail pricing, wholesale negotiations, and e-commerce product listing optimization where you need to work backwards from a target margin.',
     seoDescription: 'Free online Margin Calculator — calculate gross margin %, markup %, cost, or selling price from any two known variables. Perfect for retail pricing, wholesale, and e-commerce. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What is the difference between margin and markup?", answer: "Margin is profit as a share of selling price; markup is profit as a share of cost. Example: cost $80, price $100 → margin 20%, markup 25%. Same profit, different base — mixing them up is the most common pricing error." },
+      { question: "How do I work backwards from a target margin?", answer: "Enter your cost and target margin %; the calculator solves for price. Example: cost $80 with a 30% target margin → price = $80 / (1 − 0.30) = $114.29." },
+      { question: "Which inputs do I need?", answer: "Any two of cost, selling price, margin %, or markup %. The calculator derives the other two instantly — useful in wholesale negotiations when only one side quotes first." },
+      { question: "Does it handle taxes or discounts?", answer: "Enter tax-inclusive or post-discount figures directly. For a 10% discount off a $100 list price, run the numbers on $90 to see the true margin before quoting." },
+      { question: "Is my pricing data stored?", answer: "No. All calculations run locally in your browser. No costs, prices, or margins are transmitted or stored." },
+    ],
   },
   {
 
