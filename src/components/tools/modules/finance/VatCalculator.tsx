@@ -39,7 +39,7 @@ export default function VatCalculator() {
       accent="emerald"
       result={result}
       auto
-      presets={PRESETS.map(p => ({ label: p.name, apply: () => setVatRate(p.rate) }))}
+      presets={PRESETS.map(p => ({ label: p.name, apply: () => setVatRate(String(p.rate)) }))}
       resultStats={valid ? [
         { label: 'VAT Amount', value: `$${vatAmount.toFixed(2)}` },
         ...(rate > 0 ? [{ label: 'Reverse VAT', value: `$${exclusiveVat.toFixed(2)}` }] : []),

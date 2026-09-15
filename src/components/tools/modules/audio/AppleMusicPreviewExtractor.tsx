@@ -40,16 +40,17 @@ export default function AppleMusicPreviewExtractor() {
       setProgress(50);
       const res = await fetch(apiUrl);
       if (!res.ok) throw new Error('Apple lookup failed');
-      const data = await res.json();
-      const results: PreviewTrack[] = (data.results || [])
-        .filter((t: { previewUrl?: string; trackId?: number }) => t.previewUrl && t.trackId)
-        .map((t: { trackId: number; trackName: string; artistName: string; artworkUrl100?: string; previewUrl: string }) => ({
+      const data = await res.json() as { results?: Array<{ previewUrl?: string; trackId?: number; trackName?: string; artistName?: string; artworkUrl100?: string }> };
+      const results: PreviewTrack[] = (data.results || []).flatMap(t => {
+        if (!t.previewUrl || !t.trackId || !t.trackName || !t.artistName) return [];
+        return [{
           trackId: t.trackId,
           trackName: t.trackName,
           artistName: t.artistName,
           artworkUrl: (t.artworkUrl100 || '').replace('100x100', '300x300'),
           previewUrl: t.previewUrl,
-        }));
+        }];
+      });
       setProgress(100);
       if (results.length === 0) {
         toast.error(idMatch ? 'No track found for that link. Try a song link (with ?i=) or a song name.' : 'No matches. Try a different song or artist name.');

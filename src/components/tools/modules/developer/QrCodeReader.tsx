@@ -41,7 +41,6 @@ export default function QrCodeReader() {
     setFile(f);
     setError('');
     setDecodedData([]);
-    setMetadata(null);
     if (blobUrlRef.current) URL.revokeObjectURL(blobUrlRef.current);
     const url = URL.createObjectURL(f);
     blobUrlRef.current = url;
@@ -143,7 +142,6 @@ export default function QrCodeReader() {
   const handleReset = () => {
     setFile(null);
     setDecodedData([]);
-    setMetadata(null);
     setPreview('');
     setError('');
     setImageDimensions({ width: 0, height: 0 });

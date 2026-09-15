@@ -6,11 +6,11 @@ import { CalculatorShell } from '../shared/CalculatorShell';
 import { FIRST_NAMES, LAST_NAMES, DOMAINS, CITIES, STREETS, randInt, randItem } from './GeneratorsShared';
 
 const GENDERS = ['Any', 'Male', 'Female'] as const;
-const COUNTRIES = [
+const COUNTRIES: { id: string; label: string; dial: string; cities: string[] }[] = [
   { id: 'IN', label: 'India', dial: '+91', cities: CITIES },
   { id: 'US', label: 'United States', dial: '+1', cities: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Seattle'] },
   { id: 'UK', label: 'United Kingdom', dial: '+44', cities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Glasgow'] },
-] as const;
+];
 
 function makeIdentity(gender: string, countryId: string) {
   const fn = randItem(FIRST_NAMES); const ln = randItem(LAST_NAMES);

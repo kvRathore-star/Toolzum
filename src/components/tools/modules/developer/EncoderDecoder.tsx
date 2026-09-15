@@ -70,7 +70,7 @@ export function EncoderDecoder() {
     if (!input.trim()) { toast.error('Enter text to process'); return; }
     try {
       setOutput(process(input, scheme, mode));
-    } catch {
+    } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Processing failed — check your input');
     }
   };

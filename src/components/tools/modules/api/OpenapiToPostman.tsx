@@ -59,7 +59,7 @@ export default function OpenapiToPostman() {
     };
     for (let i = pathsStart + 1; i <= lines.length; i++) {
       const line = lines[i] ?? '';
-      const indent = line.match(/^(\s*)/)?.[1].length ?? 0;
+      const indent = (line.match(/^(\s*)/)?.[1] ?? '').length;
       const trimmed = line.trim();
       if (i === lines.length || (indent === 0 && trimmed)) break; // next top-level key
       if (!trimmed || trimmed.startsWith('#')) continue;
