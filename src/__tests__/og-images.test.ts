@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { createHash } from 'node:crypto';
 import { mkdtempSync, rmSync, readFileSync, readdirSync, statSync, writeFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -8,6 +8,10 @@ import { generateAll, type ToolInfo } from '../../scripts/generate-og-images';
 import { toolsRegistry } from '@/registry/tools';
 
 const PNG_MAGIC = '89504e470d0a1a0a';
+
+// Sharp renders ~1s/image; under full-suite load the 5s default flakes.
+// Timeout covers slowness only — every assertion still runs in full.
+vi.setConfig({ testTimeout: 60000 });
 
 function mkTool(name: string, slug: string, category: string, description: string): ToolInfo {
   return { name, slug, category, description };
