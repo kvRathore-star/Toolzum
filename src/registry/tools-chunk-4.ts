@@ -266,8 +266,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "color-picker",
     category: "Design",
     description: 'Pick colors from a visual spectrum or enter hex values. Copy to clipboard — perfect for design palettes, CSS variables, and UI mockups. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Color Picker \u2014 Pick colors from a visual spectrum or enter hex values. Copy to clipboard \u2014 perfect for design palettes, CSS variables, and UI mockups. ',
+    seoDescription: 'Free online Color Picker — grab HEX, RGB, and HSL from a spectrum or eyedropper. Copy-ready for CSS and palettes. ',
     dependencies: "None",
+    faqs: [
+      { question: "Which formats can I copy?", answer: "HEX (#3B82F6), RGB (59, 130, 246), and HSL (217°, 91%, 60%) — one click copies any of them, ready to paste into CSS variables, Tailwind config, or design tokens." },
+      { question: "How do I match a color from an image?", answer: "Upload the image and use the eyedropper to sample any pixel. The tool reports the exact HEX plus nearest named color, so brand-matching takes seconds." },
+      { question: "What is the difference between HEX, RGB, and HSL?", answer: "HEX and RGB describe the same color in different notation; HSL describes hue/saturation/lightness, which is intuitive for building shades — raise lightness for tints, lower it for shades of the same hue." },
+      { question: "How do I check contrast for accessibility?", answer: "Pick foreground and background, then compare luminance: WCAG AA needs 4.5:1 for body text, 3:1 for large text. Aim darker text on light surfaces rather than guessing." },
+      { question: "Are my images or colors uploaded?", answer: "No. Sampling and conversion run entirely in your browser. Nothing leaves your device." },
+    ],
 },
   {
 
@@ -276,8 +283,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "color-palette-generator",
     category: "Design",
     description: 'Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Color Palette Generator \u2014 Generate harmonious color palettes from a base color. Includes complementary, analogous, and triadic color schemes for designers. ',
+    seoDescription: 'Free online Color Palette Generator — complementary, analogous, and triadic schemes from any base color. Copy HEX codes instantly. ',
     dependencies: "None",
+    faqs: [
+      { question: "What scheme should I start with?", answer: "Analogous (neighbors on the wheel) for calm, cohesive UIs; complementary (opposites) for bold CTAs against quiet backgrounds; triadic for playful three-color brands. Start analogous, add one complementary accent." },
+      { question: "How many colors does a UI need?", answer: "Five roles: background, surface, primary, text, accent — plus success/warning/error states. Generate the base five here, then derive shades by shifting lightness ±10–20%." },
+      { question: "How do I avoid muddy combinations?", answer: "Keep saturation similar across palette members and vary lightness instead. Two highly saturated colors of different hues vibrate; muting one fixes it instantly." },
+      { question: "Can I export the palette?", answer: "Yes — copy all HEX codes at once, or individual values per swatch, ready for CSS variables, Tailwind theme extension, or Figma styles." },
+      { question: "Is anything uploaded?", answer: "No. Palette math runs entirely in your browser. Nothing leaves your device." },
+    ],
 },
   {
 
