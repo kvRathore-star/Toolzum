@@ -19,7 +19,11 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
-const TOOLS_PATH = path.join(ROOT, "src/registry/tools.ts");
+// NOTE: tools.ts is a 5-line barrel since the registry split — parsing it
+// yields ZERO entries and every check below runs blind. Always parse the
+// real data: tools-chunk-*.ts (+ tools-constants.ts for redirects).
+const CHUNK_GLOB_DIR = path.join(ROOT, "src/registry");
+const CONSTANTS_PATH = path.join(ROOT, "src/registry/tools-constants.ts");
 const WRAPPER_PATH = path.join(ROOT, "src/components/tools/modules/DynamicModuleWrapper.tsx");
 const CATEGORY_PAGES_PATH = path.join(ROOT, "src/app/[category]/page.tsx");
 const SITEMAP_PATH = path.join(ROOT, "public/sitemap.xml");
@@ -40,36 +44,45 @@ function slugFromName(name) {
 // ─── 1. Parse registry ──────────────────────────────────────────────────────
 
 function parseRegistry() {
-  const content = readOrNull(TOOLS_PATH);
-  if (!content) return { entries: [], error: "tools.ts not found" };
-
-  const proIdx = content.indexOf("const proSlugs");
-  const beforePro = content.slice(0, proIdx);
-
+  const fs = require("fs");
+  const files = fs.readdirSync(CHUNK_GLOB_DIR)
+    .filter(f => /^tools-chunk-\d+\.ts$/.test(f))
+    .sort()
+    .map(f => path.join(CHUNK_GLOB_DIR, f));
+  // Parse EACH file separately: splitting the concatenated blob merges the
+  // tail of one file with the head of the next, shadowing boundary entries
+  // (and the old blind shift() dropped chunk-0's first tool outright).
   const entries = [];
-  const objects = beforePro.split(/\},\s*\n\s*\{/);
-  for (const chunk of objects) {
-    if (!chunk.includes("id:") || !chunk.includes("name:")) continue;
-    const id = (chunk.match(/id: ["']([^"']+)["']/) || [])[1] || "";
-    const name = (chunk.match(/name: ["']([^"']+)["']/) || [])[1] || "";
-    const slug = (chunk.match(/slug: ["']([^"']+)["']/) || [])[1] || "";
-    const deps = (chunk.match(/dependencies: ["']([^"']*)["']/) || [])[1] || "";
-    const desc = (chunk.match(/description: '([^']*)'/) || chunk.match(/description: "([^"]*)"/) || [])[1] || "";
-    const seoDesc = (chunk.match(/seoDescription: '([^']*)'/) || chunk.match(/seoDescription: "([^"]*)"/) || [])[1] || "";
-    const hidden = chunk.includes("showInCategory: false");
-    entries.push({ id, name, slug, deps, desc, seoDesc, hidden });
+  const rawStringSlugs = [];
+  for (const file of files) {
+    const content = readOrNull(file);
+    if (!content) continue;
+    const proIdx = content.indexOf("const proSlugs");
+    const beforePro = proIdx === -1 ? content : content.slice(0, proIdx);
+    const objects = beforePro.split(/\},\s*\n\s*\{/);
+    for (const chunk of objects) {
+      if (!chunk.includes("id:") || !chunk.includes("name:")) continue;
+      const id = (chunk.match(/id: ["']([^"']+)["']/) || [])[1] || "";
+      const name = (chunk.match(/name: ["']([^"']+)["']/) || [])[1] || "";
+      const slug = (chunk.match(/slug: ["']([^"']+)["']/) || [])[1] || "";
+      const deps = (chunk.match(/dependencies: ["']([^"']*)["']/) || [])[1] || "";
+      const desc = (chunk.match(/description: '([^']*)'/) || chunk.match(/description: "([^"]*)"/) || [])[1] || "";
+      const seoDesc = (chunk.match(/seoDescription: '([^']*)'/) || chunk.match(/seoDescription: "([^"]*)"/) || [])[1] || "";
+      const hidden = chunk.includes("showInCategory: false");
+      const hasFaqs = /faqs:\s*\[/.test(chunk);
+      entries.push({ id, name, slug, deps, desc, seoDesc, hidden, hasFaqs });
+    }
+    // Also get raw string-only entries (no metadata)
+    rawStringSlugs.push(...[...beforePro.matchAll(/^ {2}"([a-z0-9-]+)",$/gm)].map(m => m[1]));
   }
-  entries.shift(); // remove the array opening
-
-  // Also get raw string-only entries (no metadata)
-  const rawStringSlugs = [...beforePro.matchAll(/^ {2}"([a-z0-9-]+)",$/gm)].map(m => m[1]);
+  if (!entries.length && !files.length) return { entries: [], error: "no chunk files found" };
 
   return { entries, rawStringSlugs };
 }
 
 function parseModules() {
   const wrapper = readOrNull(WRAPPER_PATH);
-  const tools = readOrNull(TOOLS_PATH);
+  const tools = readOrNull(CONSTANTS_PATH);
   if (!wrapper) return { moduleKeys: [], redirectSlugs: [], seoSlugs: [] };
 
   const moduleKeys = wrapper ? [...wrapper.matchAll(/'([a-z0-9-]+)': dynamic/g)].map(m => m[1]) : [];
@@ -208,6 +221,33 @@ function checkCategoryKeywords(entries) {
   return results;
 }
 
+// ─── 4b. #25: new/modified tools without FAQs (warning, never fails) ─────────
+// Only flags entries touched in the working tree vs HEAD, so the 800+
+// pre-existing FAQ-less tools don't spam every run. New debt only.
+function checkNewToolsWithoutFaqs(entries) {
+  const { execSync } = require("child_process");
+  let diff = "";
+  try {
+    diff = execSync("git diff HEAD -- src/registry/tools.ts src/registry/tools-chunk-*.ts src/registry/tools-constants.ts", { encoding: "utf-8", cwd: ROOT });
+  } catch { return { touched: [], note: "git diff unavailable (not a repo?)" }; }
+  const touchedSlugs = new Set(
+    [...diff.matchAll(/^\+.*slug:\s*["']([a-z0-9-]+)["']/gm)].map(m => m[1])
+  );
+  // Untracked new registry files count as touched wholesale.
+  try {
+    const untracked = execSync("git ls-files --others --exclude-standard -- src/registry/", { encoding: "utf-8", cwd: ROOT });
+    if (untracked.trim()) {
+      for (const e of entries) touchedSlugs.add(e.slug);
+    }
+  } catch { /* ignore */ }
+  const bySlug = new Map(entries.map(e => [e.slug, e]));
+  const flagged = [...touchedSlugs]
+    .map(s => bySlug.get(s))
+    .filter(e => e && !e.hasFaqs)
+    .map(e => ({ id: e.id, name: e.name, slug: e.slug }));
+  return { touched: flagged, note: null };
+}
+
 // ─── 4. Tool Quality Bar Score ──────────────────────────────────────────────
 
 function qualityScore(entry, { moduleKeys }) {
@@ -317,6 +357,20 @@ async function main() {
       console.log(`   ID ${c.id} | "${c.name}" → slug "${c.slug}" (expected "${c.expected}")`);
     console.log();
   }
+
+  // ── #25: new/modified tools without FAQs ──
+  const newNoFaq = checkNewToolsWithoutFaqs(entries);
+  const allNoFaq = entries.filter(e => e.slug && !e.hasFaqs).length;
+  console.log(`  Tools without custom FAQs (backlog): ${allNoFaq}`);
+  if (newNoFaq.note) {
+    console.log(`  (new-tool FAQ check skipped: ${newNoFaq.note})`);
+  } else if (newNoFaq.touched.length) {
+    console.log(`⚠  NEW/MODIFIED TOOLS WITHOUT FAQs: ${newNoFaq.touched.length}`);
+    for (const t of newNoFaq.touched) console.log(`   ID ${t.id} | ${t.name} | ${t.slug}`);
+  } else {
+    console.log(`  New/modified tools without FAQs: none — no new debt.`);
+  }
+  console.log();
 
   // ── Quality Bar — Score all tools ──
   console.log("══════════════════════════════════════════════════════════");
