@@ -32,6 +32,7 @@ async function submitBatch(urls: string[]): Promise<void> {
   if (!res.ok) {
     const text = await res.text();
     console.error(`  API error ${res.status}: ${text}`);
+    process.exitCode = 1;
   } else {
     console.log(`  Submitted ${urls.length} URLs (HTTP ${res.status})`);
   }
@@ -40,6 +41,10 @@ async function submitBatch(urls: string[]): Promise<void> {
 async function main() {
   console.log(`Fetching sitemap from ${SITEMAP_URL}...`);
   const urls = await fetchSitemapUrls();
+  if (urls.length === 0) {
+    console.error('Refusing to submit an empty URL list (sitemap fetch failed or parsed zero URLs).');
+    process.exit(1);
+  }
   console.log(`Found ${urls.length} URLs in sitemap.\n`);
 
   const BATCH_SIZE = 10000;
@@ -55,4 +60,4 @@ async function main() {
   console.log(`\nDone. ${submitted} URLs submitted to IndexNow.`);
 }
 
-main().catch(console.error);
+main().catch((e) => { console.error(e); process.exit(1); });

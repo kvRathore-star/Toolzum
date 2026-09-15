@@ -1,6 +1,10 @@
 # Toolzum TODO Tracker
 
-Last updated: 2026-08-23
+Last updated: 2026-09-15
+
+## Revealed backlog (Sep 15 — quality-audit was parsing an empty barrel, reporting zeros)
+- [ ] R1. quality-audit fix (`8bde7cf1`) revealed previously-hidden counts: **774 tools without custom FAQs, 478 missing-deps, 104 card-slug mismatches**. These were invisible, not deprioritized — triage before they become the new normal.
+- [ ] R2. Fail-closed audit follow-up: bundle-budget ✅ fail-closed; CI gates ✅; ZAP ✅ (`fail_action: true`); `submit-indexnow` + `gen-sw` hardened Sep 15 (exit non-zero on API error / empty input). Remaining: re-check any new gate added hereafter parses non-empty input — gates must error, not pass, on unparsable input (same silent-success family as `docs/redirects-dynamic-budget-postmortem.md`).
 
 ## Quick Wins (do now)
 - [x] 1. Generate OG images for 4 new tools + fix default /og-image.png 404 — Ran `npx tsx scripts/generate-og-images.ts`, fixed layout/page.tsx to use `/og/branding/index.png`

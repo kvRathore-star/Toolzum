@@ -138,6 +138,7 @@ async function main() {
     runtimeCaching,
   });
   for (const w of warnings) console.warn('[gen-sw]', w);
+  if (count === 0) throw new Error('precached 0 files — out/ build output missing or empty, refusing to write sw.js');
   console.log(`[gen-sw] precached ${count} files, out/sw.js written`);
   void size;
 }
