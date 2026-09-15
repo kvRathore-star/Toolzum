@@ -1023,7 +1023,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online MKV to WEBM — Convert MKV video files into WEBM format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
 
-    showInCategory: false
+    showInCategory: false,
+    faqs: [
+      { question: "What does MKV to WEBM do?", answer: "Convert MKV video files to WEBM format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "Where does WebM fit best?", answer: "web-optimized video \u2014 streaming, embedded players, and HTML5 video tags with fast loading." },
+      { question: "What MKV files convert best?", answer: "Complete, uncorrupted MKV files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert MKV to WebM?", answer: "MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file. WebM (WebM Video) is lossy compressed \u2014 best for web-optimized video \u2014 streaming, embedded players, and HTML5 video tags with fast loading." },
+    ],
   },
   {
     id: "1004",
@@ -1102,7 +1108,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBM to MKV — Convert WEBM video files into MKV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
 
-    showInCategory: false
+    showInCategory: false,
+    faqs: [
+      { question: "What does WEBM to MKV do?", answer: "Convert WEBM video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "Will converting WebM lose quality?", answer: "From lossy compressed to lossless container: quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original WebM files?", answer: "Yes \u2014 archive WebM originals before batch-converting. Re-converting from MKV back to WebM never restores discarded data." },
+      { question: "How long does WebM-to-MKV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+    ],
   },
   {
     id: "1010",
@@ -1124,7 +1136,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBM to AVI — Convert WEBM video files into AVI format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
 
-    showInCategory: false
+    showInCategory: false,
+    faqs: [
+      { question: "What does WEBM to AVI do?", answer: "Convert WEBM video files to AVI format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "What WebM files convert best?", answer: "Complete, uncorrupted WebM files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert WebM to AVI?", answer: "WebM (WebM Video) is lossy compressed \u2014 best for web-optimized video \u2014 streaming, embedded players, and HTML5 video tags with fast loading. AVI (Audio Video Interleave) is uncompressed or lossy \u2014 best for legacy video compatibility \u2014 older software, embedded systems, and archival playback." },
+      { question: "Where does AVI fit best?", answer: "legacy video compatibility \u2014 older software, embedded systems, and archival playback." },
+    ],
   },
   {
     id: "1012",
@@ -1152,7 +1170,13 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online AVI to MOV — Convert AVI video files into MOV format. Fast browser-based video conversion.',
     dependencies: "FFmpeg",
 
-    showInCategory: false
+    showInCategory: false,
+    faqs: [
+      { question: "What does AVI to MOV do?", answer: "Convert AVI video files to MOV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "Should I keep the original AVI files?", answer: "Yes \u2014 archive AVI originals before batch-converting. Re-converting from MOV back to AVI never restores discarded data." },
+      { question: "How long does AVI-to-MOV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting AVI lose quality?", answer: "From uncompressed or lossy to lossless or lossy: yes, some detail is discarded \u2014 keep the original AVI archived." },
+    ],
   },
   {
     id: "1014",
@@ -1218,6 +1242,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online WEBP to PNG — Convert WEBP images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does WEBP to PNG do?", answer: "Converts WebP files to PNG format \u2014 modern websites to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
+      { question: "Where does PNG fit best?", answer: "graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds." },
+      { question: "What WebP files convert best?", answer: "Complete, uncorrupted WebP files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert WebP to PNG?", answer: "WebP (Web Picture Format) is lossy or lossless \u2014 best for modern websites \u2014 Google-recommended format with superior compression for faster page loads. PNG (Portable Network Graphics) is lossless \u2014 best for graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds." },
+    ],
   },
   {
     id: "1019",
@@ -1228,6 +1258,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online HEIC to PNG — Convert HEIC images into PNG format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does HEIC to PNG do?", answer: "Converts HEIC files to PNG format \u2014 Apple device photos to graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. All conversion happens locally in your browser with no file size limits." },
+      { question: "How long does HEIC-to-PNG conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting HEIC lose quality?", answer: "From lossy or lossless to lossless: quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original HEIC files?", answer: "Yes \u2014 archive HEIC originals before batch-converting. Re-converting from PNG back to HEIC never restores discarded data." },
+    ],
   },
   {
     id: "1020",
@@ -1567,6 +1603,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online AVIF to HEIC — Convert AVIF images into HEIC format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does AVIF to HEIC do?", answer: "Convert AVIF images to HEIC format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "Where does HEIC fit best?", answer: "Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency." },
+      { question: "What AVIF files convert best?", answer: "Complete, uncorrupted AVIF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert AVIF to HEIC?", answer: "AVIF (AV1 Image File Format) is lossy or lossless \u2014 best for next-gen web images \u2014 royalty-free format with better compression than WebP and JPEG. HEIC (High Efficiency Image Container) is lossy or lossless \u2014 best for Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency." },
+    ],
   },
   {
     id: "1044",
@@ -1785,6 +1827,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online TIFF to BMP — Convert TIFF images into BMP format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does TIFF to BMP do?", answer: "Convert TIFF images to BMP format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "What TIFF files convert best?", answer: "Complete, uncorrupted TIFF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert TIFF to BMP?", answer: "TIFF (Tagged Image File Format) is lossless (supports layers) \u2014 best for professional photography, print publishing, and document scanning with high color depth. BMP (Bitmap Image File) is uncompressed \u2014 best for legacy software compatibility, raw pixel data transfers, and simple image processing tasks." },
+      { question: "Where does BMP fit best?", answer: "legacy software compatibility, raw pixel data transfers, and simple image processing tasks." },
+    ],
   },
   {
     id: "1063",
@@ -1943,6 +1991,12 @@ export const entries_chunk_5: ToolMetadata[] = [
     seoDescription: 'Free online ICO to TIFF — Convert ICO images into TIFF format. Perfect for image conversion needs.',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does ICO to TIFF do?", answer: "Convert ICO images to TIFF format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "How long does ICO-to-TIFF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting ICO lose quality?", answer: "From lossless (multiple sizes) to lossless (supports layers): quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original ICO files?", answer: "Yes \u2014 archive ICO originals before batch-converting. Re-converting from TIFF back to ICO never restores discarded data." },
+    ],
   },
   {
     id: "1076",
