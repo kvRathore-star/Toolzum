@@ -721,7 +721,11 @@ export function ToolPageSEOContent({ tool, relatedTools = [] }: ToolPageSEOConte
   const requiresInternet = requiresCloudApi(tool.dependencies);
   const generatedDesc = getShortDescription(tool);
   const inputTypeFaqs: { question: string; answer: string }[] = [];
-  if (!pair) {
+  // Tools with substantive custom FAQs stand on their own — the generated
+  // intros below would only add template bulk on top. Thin tools keep them
+  // as the safety net.
+  const hasCustomDepth = (tool.faqs?.length ?? 0) >= 4;
+  if (!pair && !hasCustomDepth) {
     inputTypeFaqs.push({
       question: `What exactly does ${tool.name} do?`,
       answer: `${tool.name} lets you ${generatedDesc.charAt(0).toLowerCase() + generatedDesc.slice(1)}. It works on any device with a modern web browser.`
