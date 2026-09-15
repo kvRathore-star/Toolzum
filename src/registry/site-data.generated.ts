@@ -17,7 +17,7 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1145;
+export const TOOL_COUNT = 1144;
 
 export const SITE_STATS = {
   totalImplemented: 1061,
