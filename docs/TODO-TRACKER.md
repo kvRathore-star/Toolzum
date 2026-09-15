@@ -60,7 +60,7 @@ Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–
  Wire up email service (Resend)
  Wire Resend email service for forgot-password/reset-password
 
- Newsletter has no backend — clicking subscribe does nothing (would need a Cloudflare Worker or email service)
+  PARKED Sep 15 2026 per owner (no newsletter planned) — dead `ChangelogNewsletter` signup removed from changelog page; component deleted. Only transactional quota/credit nudges if ever.
 
  
 ## Completed

@@ -22,7 +22,7 @@ Projected: **73.8 → 75.0** (small number, existential risk removed).
 
 | # | Item | Now → Target | Notes |
 |---|------|--------------|-------|
-| 33 | Notifications | 25 → 88 | Backend for newsletter (currently dead button) + one re-engagement loop (credit-reset nudge, quota-wall follow-up). |
+| 33 | Notifications | 25, PARKED | Owner decision Sep 15 2026: no newsletter planned — dead signup removed from changelog; only transactional quota/credit nudges if ever. |
 | 26 | Compliance | 72 → 95 | Verify consent banner behavior; audit policy accuracy vs actual data flows. |
 | 36 | Billing | 75 → 92 | Dunning/payment-failure recovery paths; verify cancel + refund flows live. |
 | 51 | Privacy review | 55 → 92 | Formalize the ad-hoc process: checklist gate before ship (data flow, third parties, retention). |
@@ -77,5 +77,6 @@ Requires literal 100s in craft areas (zero warnings, minute-long builds, proven-
 
 ## Non-goals (parked with reasons)
 
+- Newsletter (#33) — parked per owner Sep 15 2026; no backend planned, dead signup removed. Only transactional quota/credit nudges if ever.
 - A/B infra at scale, team workspaces beyond lite — revisit past 96.
 - English-only assumption lifts in Phase 3 deliberately, not before.

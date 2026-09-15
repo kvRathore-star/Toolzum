@@ -9,7 +9,6 @@ import { ChangelogTimeline } from "@/components/ChangelogTimeline";
 import type { Release } from "./_components/releaseTypes";
 import { RELEASES_PART_1 } from "./_components/releasesPart1";
 import { RELEASES_PART_2 } from "./_components/releasesPart2";
-import { ChangelogNewsletter } from "./_components/ChangelogNewsletter";
 
 const RELEASES: Release[] = [...RELEASES_PART_1, ...RELEASES_PART_2];
 
@@ -55,10 +54,6 @@ export default function ChangelogPage() {
             </button>
           </div>
         )}
-
-        {/* Bottom newsletter section */}
-        <ChangelogNewsletter />
-
       </div>
     </div>
   );

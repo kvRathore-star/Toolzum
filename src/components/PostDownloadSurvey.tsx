@@ -40,17 +40,6 @@ export function PostDownloadSurvey() {
     setVisible(false);
   };
 
-  const emailCapture = (email: string) => {
-    try {
-      const emails = JSON.parse(localStorage.getItem("th_email_captures") || "[]");
-      emails.push({ email, timestamp: Date.now() });
-      localStorage.setItem("th_email_captures", JSON.stringify(emails));
-      localStorage.setItem(SURVEY_KEY, "1");
-    } catch (e) { console.error("[toolzum]", e); }
-    toast.success("We'll keep you posted!");
-    setVisible(false);
-  };
-
   return (
     <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[90] w-[90vw] max-w-sm">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] shadow-xl p-4">
@@ -79,33 +68,6 @@ export function PostDownloadSurvey() {
             <ThumbsDown className="w-3.5 h-3.5" /> No
           </button>
         </div>
-
-        <details className="group">
-          <summary className="text-[11px] text-[var(--text-muted)] cursor-pointer hover:text-[var(--text-primary)] transition-colors [&::-webkit-details-marker]:hidden">
-            Get notified about new tools
-          </summary>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const input = (e.target as HTMLFormElement).elements.namedItem("email") as HTMLInputElement;
-              if (input.value) emailCapture(input.value);
-            }}
-            className="flex gap-2 mt-2"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              className="flex-1 px-2.5 py-1.5 text-xs rounded-lg bg-[var(--bg-base)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]"
-            />
-            <button
-              type="submit"
-              className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[var(--accent-ink)] text-white hover:brightness-110 transition-all"
-            >
-              Subscribe
-            </button>
-          </form>
-        </details>
       </div>
     </div>
   );
