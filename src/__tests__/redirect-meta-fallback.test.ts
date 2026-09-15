@@ -92,4 +92,19 @@ describe('redirect noindex fallback (#10): unlisted paths degrade gracefully, ne
     expect(dynamicBeforeStatic, `static rules appear after the first dynamic rule:\n${dynamicBeforeStatic.join('\n')}`).toEqual([]);
     expect(rules.filter(r => dynamic.test(r)).length).toBeLessThanOrEqual(100);
   });
+
+  it('merged video-converter redirects preserve format intent (?from=)', () => {
+    // 11b merge: retired /converter/<fmt>-to-mp4 URLs must land on
+    // /converter/video-converter/ with the source format preselected.
+    const file = readFileSync(join(process.cwd(), 'public/_redirects'), 'utf8');
+    const targets = new Map<string, string>();
+    for (const line of file.split('\n')) {
+      const parts = line.trim().split(/\s+/);
+      if (parts.length >= 3) targets.set(parts[0].replace(/\/$/, ''), parts[1]);
+    }
+    for (const fmt of ['avi', 'webm', 'mov']) {
+      expect(targets.get(`/converter/${fmt}-to-mp4`),
+        `${fmt}-to-mp4 must redirect with ?from=${fmt}`).toBe(`/converter/video-converter/?from=${fmt}`);
+    }
+  });
 });

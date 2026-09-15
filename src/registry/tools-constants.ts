@@ -134,7 +134,7 @@ export const SEO_PERMUTATIONS: SeoPermutation[] = [
   { slug: "bulk-pdf-flatten", name: "Bulk PDF Flatten", category: "PDF", description: "Flatten form fields and annotations in multiple PDFs at once. Convert fillable PDF forms into static documents in one batch. Everything runs locally in your browser — nothing is uploaded.", seoDescription: 'Free online Bulk PDF Flatten — Flatten form fields and annotations in multiple PDFs at once. Convert fillable PDF forms into static documents. ', parentSlug: "bulk-pdf-suite" },
 ];
 
-export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; sourceCategory?: string | string[] }> = {
+export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; sourceCategory?: string | string[]; query?: string }> = {
   "base64-encoder-decoder": { category: "developer", slug: "base64-encode-decode" },
   "yaml-syntax-validator": { category: "developer", slug: "yaml-validator" },
   "jwt-decoder": { category: "developer", slug: "jwt-debugger" },
@@ -181,9 +181,9 @@ export const TOOL_REDIRECTS: Record<string, { category: string; slug: string; so
   "distance-calculator": { category: "calculator", slug: "coordinate-calculator" },
   "midpoint-calculator": { category: "calculator", slug: "coordinate-calculator" },
   "rule-of-three-calculator": { category: "calculator", slug: "proportion-calculator" },
-  "avi-to-mp4": { category: "converter", slug: "video-converter" },
-  "webm-to-mp4": { category: "converter", slug: "video-converter" },
-  "mov-to-mp4": { category: "converter", slug: "video-converter" },
+  "avi-to-mp4": { category: "converter", slug: "video-converter", query: "from=avi" },
+  "webm-to-mp4": { category: "converter", slug: "video-converter", query: "from=webm" },
+  "mov-to-mp4": { category: "converter", slug: "video-converter", query: "from=mov" },
   "fluid-typography-calculator": { category: "developer", slug: "fluid-typography-calculator" },
   "semver-calculator": { category: "developer", slug: "semver-calculator", sourceCategory: "calculator" },
   "reverse-text-generator": { category: "text", slug: "text-reverser" },

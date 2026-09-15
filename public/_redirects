@@ -456,8 +456,8 @@
 /calculator/rule-of-three-calculator    /calculator/proportion-calculator/   301
 /calculator/semver-calculator/   /developer/semver-calculator/   301
 /calculator/semver-calculator    /developer/semver-calculator/   301
-/converter/avi-to-mp4/   /converter/video-converter/   301
-/converter/avi-to-mp4    /converter/video-converter/   301
+/converter/avi-to-mp4/   /converter/video-converter/?from=avi   301
+/converter/avi-to-mp4    /converter/video-converter/?from=avi   301
 /converter/binary-converter/   /converter/number-base-converter/   301
 /converter/binary-converter    /converter/number-base-converter/   301
 /converter/csv-preview-generator/   /converter/csv-html-table-converter/   301
@@ -466,8 +466,8 @@
 /converter/data-converter    /converter/data-format-converter/   301
 /converter/morse-code-converter/   /converter/morse-code-translator/   301
 /converter/morse-code-converter    /converter/morse-code-translator/   301
-/converter/mov-to-mp4/   /converter/video-converter/   301
-/converter/mov-to-mp4    /converter/video-converter/   301
+/converter/mov-to-mp4/   /converter/video-converter/?from=mov   301
+/converter/mov-to-mp4    /converter/video-converter/?from=mov   301
 /converter/temperature-converter/   /utility/temperature-converter/   301
 /converter/temperature-converter    /utility/temperature-converter/   301
 /converter/text-converter/   /converter/text-to-binary/   301
@@ -476,8 +476,8 @@
 /converter/time-converter    /utility/time-converter/   301
 /converter/video-converter-tool/   /converter/video-converter/   301
 /converter/video-converter-tool    /converter/video-converter/   301
-/converter/webm-to-mp4/   /converter/video-converter/   301
-/converter/webm-to-mp4    /converter/video-converter/   301
+/converter/webm-to-mp4/   /converter/video-converter/?from=webm   301
+/converter/webm-to-mp4    /converter/video-converter/?from=webm   301
 /design/contrast-checker/   /design/contrast-ratio-checker/   301
 /design/contrast-checker    /design/contrast-ratio-checker/   301
 /design/css-gradient-generator/   /design/gradient-generator/   301

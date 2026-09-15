@@ -20,6 +20,7 @@ function parseToolRedirects() {
     const [, key, body] = m;
     const category = body.match(/category:\s*"([^"]+)"/);
     const slug = body.match(/slug:\s*"([^"]+)"/);
+    const query = body.match(/query:\s*"([^"]+)"/);
     const sourceCategoryMatch = body.match(/sourceCategory:\s*("(?:[^"]+)"|\[[^\]]*\])/);
 
     let sourceCategory;
@@ -37,6 +38,7 @@ function parseToolRedirects() {
       category: category ? category[1] : null,
       targetSlug: slug ? slug[1] : null,
       sourceCategory,
+      query: query ? query[1] : null,
     });
   }
 
@@ -55,17 +57,20 @@ function deriveRules(entries) {
   for (const entry of entries) {
     const catSlug = slugifyCategory(entry.category);
     if (!catSlug || !entry.targetSlug) continue;
+    // Optional ?query= preserved through the redirect (e.g. ?from=avi so the
+    // merged tool page can preselect the visitor's original intent).
+    const suffix = entry.query ? `?${entry.query}` : "";
 
     // Same-category slug rename: /cat/old-slug → /cat/new-slug/
     if (entry.slug !== entry.targetSlug) {
-      rules.set(`/${catSlug}/${entry.slug}`, `/${catSlug}/${entry.targetSlug}/`);
+      rules.set(`/${catSlug}/${entry.slug}`, `/${catSlug}/${entry.targetSlug}/${suffix}`);
     }
 
     // Cross-category migration: /old-cat/slug → /new-cat/slug/
     for (const src of entry.sourceCategory || []) {
       const srcSlug = slugifyCategory(src);
       if (srcSlug) {
-        rules.set(`/${srcSlug}/${entry.slug}`, `/${catSlug}/${entry.targetSlug}/`);
+        rules.set(`/${srcSlug}/${entry.slug}`, `/${catSlug}/${entry.targetSlug}/${suffix}`);
       }
     }
   }

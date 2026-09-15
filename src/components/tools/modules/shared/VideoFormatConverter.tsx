@@ -150,6 +150,20 @@ export default function VideoFormatConverter({ slug }: VideoFormatConverterProps
     loadFFmpeg();
   }, []);
 
+  // Merge-redirect intent preservation: /converter/avi-to-mp4/ lands here as
+  // /converter/video-converter/?from=avi — preselect the visitor's format.
+  useEffect(() => {
+    try {
+      const from = new URLSearchParams(window.location.search).get("from");
+      if (from && FORMATS[from]) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- mount-time URL hydration for redirect intent
+        setInputKey(from);
+      }
+    } catch {
+      /* non-browser or malformed query — keep defaults */
+    }
+  }, []);
+
   const swapFormats = () => {
     setInputKey(outputKey);
     setOutputKey(inputKey);
