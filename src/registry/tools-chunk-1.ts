@@ -2132,8 +2132,15 @@ export const entries_chunk_1: ToolMetadata[] = [
     slug: "aadhaar-number-validator",
     category: "indian-utilities",
     description: 'Validates Aadhaar numbers using Verhoeff checksum verification. Checks format rules, detects fake UIDs, and explains Aadhaar number structure. Fully local validation with no data upload.',
-    seoDescription: 'Free online Aadhaar Number Validator — Validate 12-digit Aadhaar numbers with Verhoeff checksum. Check format, detect fake UIDs, and understand Aadhaar structure. 100 percent local validation, no data upload.',
+    seoDescription: 'Free online Aadhaar Number Validator — check any 12-digit Aadhaar with Verhoeff checksum. Spot fakes, learn the structure. ',
     dependencies: "None",
+    faqs: [
+      { question: "How does Aadhaar validation work?", answer: "The 12-digit number must satisfy the Verhoeff checksum (last digit validates the first 11) and format rules — first digit 2–9, no obvious patterns like 11 repeated digits. The tool checks all of these instantly." },
+      { question: "Does a valid number mean a genuine card?", answer: "No. Validation proves the number is well-formed, not that UIDAI issued it to the holder. For onboarding or KYC, always verify against UIDAI e-KYC or masked-Aadhaar XML — never trust format alone." },
+      { question: "What is masked Aadhaar?", answer: "A version showing only the last 4 digits (XXXX-XXXX-1234), downloadable from myAadhaar. Share masked copies wherever full numbers aren't legally required — it limits exposure if the copy leaks." },
+      { question: "What should I never do with Aadhaar numbers?", answer: "Never publish full numbers, email them unencrypted, or store them in spreadsheets without need. Collect only with consent and a stated purpose, per the Aadhaar Act." },
+      { question: "Is the number I check uploaded?", answer: "No. Validation runs entirely in your browser via the Verhoeff algorithm. Numbers never leave your device." },
+    ],
   },
   {
     id: "408",

@@ -459,8 +459,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "cagr-calculator",
     category: "Finance",
     description: 'Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online CAGR Calculator \u2014 Calculate the Compound Annual Growth Rate (CAGR) for investments. Shows year-by-year growth breakdown. ',
+    seoDescription: 'Free online CAGR Calculator — smooth investment growth into one yearly rate, with year-by-year breakdown and worked examples. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is CAGR calculated?", answer: "CAGR = (End Value ÷ Start Value)^(1 ÷ years) − 1. Example: ₹1,00,000 growing to ₹1,80,000 in 5 years → (1.8)^0.2 − 1 ≈ 12.5% per year." },
+      { question: "CAGR vs absolute returns — which matters?", answer: "Absolute return (80% total here) ignores time; CAGR normalizes it. 80% in 5 years (12.5% CAGR) beats 80% in 10 years (6.1% CAGR) — always compare annualized figures across different horizons." },
+      { question: "Does CAGR capture volatility?", answer: "No. A fund swinging +30%/−20% can show the same CAGR as steady 5% yearly growth. Pair CAGR with max drawdown or yearly returns before judging risk." },
+      { question: "CAGR vs XIRR vs IRR?", answer: "CAGR fits single lump-sum investments; XIRR handles irregular SIP-style cash flows with exact dates. Use this calculator for lump sums, XIRR for ongoing contributions." },
+      { question: "Is my investment data stored?", answer: "No. All calculations run locally in your browser. Nothing is transmitted or stored." },
+    ],
 
   },
   {

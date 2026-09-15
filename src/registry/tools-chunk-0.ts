@@ -308,8 +308,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "percentage-calculator",
     category: "Calculator",
     description: 'Computes percentage values, percentage increases and decreases, and what-percent-of-what relationships with precise decimal arithmetic. Essential for everyday math — tips, discounts, tax rates, grade scores, and statistical comparisons where quick percentage answers are needed.',
-    seoDescription: 'Free online Percentage Calculator — compute percentages, increases, decreases, and what-percent-of-what relationships. Perfect for tips, discounts, taxes, and everyday math. ',
+    seoDescription: 'Free online Percentage Calculator — tips, discounts, increases, and what-percent-of-what, with precise decimals. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What can it compute?", answer: "Three modes: X% of Y (20% of ₹1,500 = ₹300), percent change (₹120 → ₹150 = +25%), and what-percent-of-what (45 is 25% of 180). Covers tips, discounts, tax, and grade math." },
+      { question: "How do I reverse a discount?", answer: "A 20%-off price of ₹800 means original = 800 ÷ 0.80 = ₹1,000 — not 800 × 1.20 (₹960). Always divide by (1 − rate) to undo a percentage decrease." },
+      { question: "Why do successive percentages not add?", answer: "10% off then 10% off again is 19% total, not 20%: ₹100 → ₹90 → ₹81. Each discount applies to the reduced base — the calculator chains them correctly." },
+      { question: "How precise are the results?", answer: "Full decimal precision (e.g., 33.333…% for 1/3), rounded for display only. Useful for tax and statistical comparisons where rounding early compounds errors." },
+      { question: "Is my input stored?", answer: "No. All computation runs locally in your browser. Nothing is transmitted or stored." },
+    ],
   },
   {
     id: "22",
