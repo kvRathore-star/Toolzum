@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Toaster } from "react-hot-toast";
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GdprConsentBanner } from "@/components/GdprConsentBanner";
-import { PostHogProvider } from "@/components/PostHogProvider";
 import { ErrorLogger } from "@/components/ErrorLogger";
 import { SiteShell } from "@/components/SiteShell";
 import { TOOL_COUNT } from "@/registry/site-data.generated";
 import "./globals.css";
+
+const PostHogProvider = dynamic(() => import("@/components/PostHogProvider").then(m => m.PostHogProvider), { ssr: false });
+const Toaster = dynamic(() => import("react-hot-toast").then(m => m.Toaster), { ssr: false });
 
 const geistSans = Geist({
   subsets: ["latin"],
