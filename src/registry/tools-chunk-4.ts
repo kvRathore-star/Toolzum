@@ -1376,9 +1376,16 @@ export const entries_chunk_4: ToolMetadata[] = [
     name: ".gitignore Generator",
     slug: "gitignore-generator",
     category: "Developer",
-    description: 'Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.',
-    seoDescription: 'Free online .gitignore Generator \u2014 Generate .gitignore files by selecting languages, frameworks, and tools. ',
+    description: 'Generate .gitignore files by selecting languages, frameworks, and tools from a checklist — covers Node, Python, Java, Go, Rust, macOS, Windows, Linux, and popular IDEs. Supports negation patterns and custom rules.',
+    seoDescription: 'Free online .gitignore Generator — build .gitignore files for Node, Python, Java, Go, Rust, and 100+ stacks with negation patterns and custom rules. ',
     dependencies: "None",
+    faqs: [
+      { question: "Should I use one .gitignore per repo or a global one?", answer: "Use a repo .gitignore for everything the project generates (node_modules, build output, .env) so every contributor is covered, and a global ~/.gitignore only for personal files like .DS_Store or editor swap files." },
+      { question: "Which stacks are covered?", answer: "Node, Python, Java, Go, Rust, Ruby, PHP, .NET, plus macOS, Windows, Linux artifacts and JetBrains, VS Code, Vim, and Emacs files. Tick boxes combine into one file with section headers." },
+      { question: "How do negation patterns work?", answer: "Prefix with ! to re-include a path, e.g. *.log ignores all logs then !important.log keeps one. Negation only works if no parent directory of the path is itself ignored." },
+      { question: "Why is Git still tracking a file I ignored?", answer: ".gitignore only applies to untracked files. For already-tracked files run: git rm --cached <path>, commit, and the ignore rule takes effect from then on." },
+      { question: "Is my file list stored or transmitted?", answer: "No. Generation runs entirely in your browser. Nothing you select or type leaves your device." },
+    ],
   },
   {
     id: "939",

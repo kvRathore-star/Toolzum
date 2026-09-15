@@ -465,9 +465,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "Image Compressor",
     slug: "image-compressor",
     category: "Image",
-    description: 'Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider. Balance file size and visual quality visually — max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.',
+    description: 'Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.',
     dependencies: "HTML5 Canvas / libjpeg-turbo",
-    seoDescription: 'Free online Image Compressor — reduce JPG, PNG, and WebP file sizes with a side-by-side quality preview slider. Perfect for web optimization, email, and social media. ',
+    seoDescription: 'Free online Image Compressor — shrink JPG, PNG, and WebP photos with a live quality slider. See file size vs quality side by side, up to 20MB per image. ',
+    faqs: [
+      { question: "How much smaller will my image get?", answer: "Typical JPEG photos shrink 60–80% at quality 80 with no visible difference on screens. PNG screenshots with flat colors often shrink less — converting those to WebP usually beats PNG compression." },
+      { question: "Should I choose JPG, PNG, or WebP output?", answer: "Photos: JPG or WebP. Graphics with transparency: PNG or WebP. WebP is smallest in most cases and supported by all modern browsers — pick it unless you need maximum compatibility with old software." },
+      { question: "How does the quality slider work?", answer: "Drag the slider and the preview updates live next to the original, with the exact output file size shown. Start at 80 and lower it until you can see a difference, then step back up one notch." },
+      { question: "What is the file size limit?", answer: "20MB per image. Larger files are rejected before processing so the browser tab stays responsive. Resize dimensions first if your file exceeds the limit." },
+      { question: "Are my photos uploaded anywhere?", answer: "No. Compression runs entirely in your browser via Canvas. Your images never leave your device." },
+    ],
   },
   {
     id: "37",

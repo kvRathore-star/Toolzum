@@ -402,9 +402,16 @@ export const entries_chunk_3: ToolMetadata[] = [
     name: "MRR Calculator",
     slug: "mrr-calculator",
     category: "Growth & Marketing",
-    description: 'Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online MRR Calculator — Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. ',
+    description: 'Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Everything runs locally in your browser — nothing is uploaded.',
+    seoDescription: 'Free online MRR Calculator — compute Monthly Recurring Revenue, net new MRR, and ARR from customers and ARPA, with churn and expansion broken out. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is MRR calculated?", answer: "MRR = paying customers × average revenue per account (ARPA). Example: 120 customers at $49 ARPA gives $5,880 MRR. Enter your two numbers and the result updates instantly." },
+      { question: "What is net new MRR?", answer: "Net new MRR = new + expansion − churned − contraction MRR. Example: $800 new + $200 expansion − $300 churned − $100 contraction = $600 net new MRR for the month. Positive net new means the business is growing." },
+      { question: "How do I convert MRR to ARR?", answer: "Multiply by 12: $5,880 MRR × 12 = $70,560 ARR. This annualizes the run-rate; it assumes no churn or growth, so treat it as a snapshot, not a forecast." },
+      { question: "How are annual plans handled?", answer: "Divide the annual contract value by 12 to get normalized monthly MRR. A $1,200 annual plan contributes $100 MRR. This keeps monthly and annual customers comparable." },
+      { question: "Is my revenue data stored or transmitted?", answer: "No. All calculations run locally in your browser. No customer counts, prices, or revenue figures leave your device." },
+    ],
 
   },
   {
