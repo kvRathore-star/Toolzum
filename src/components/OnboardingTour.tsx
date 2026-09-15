@@ -39,18 +39,9 @@ const STEPS: TourStep[] = [
 export function OnboardingTour() {
   const [step, setStep] = useState<number | null>(null);
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
-  const [ready, setReady] = useState(false);
   const prevFocus = useRef<HTMLElement | null>(null);
   const { data: session, isPending } = useSession();
   const isSignedIn = !!session?.user;
-
-  // Defer tour mount until after CLS measurement window (Lighthouse measures
-  // CLS in the first ~5s). Without this the tour dialog appearance counts as
-  // a 0.3+ layout shift even though it's position:fixed and moves nothing.
-  useEffect(() => {
-    const t = setTimeout(() => setReady(true), 5000);
-    return () => clearTimeout(t);
-  }, []);
 
   const persistSeen = useCallback(
     async (seen: boolean) => {
@@ -76,7 +67,7 @@ export function OnboardingTour() {
   );
 
   useEffect(() => {
-    if (!ready || isPending) return;
+    if (isPending) return;
     let cancelled = false;
     (async () => {
       try {
@@ -172,7 +163,7 @@ export function OnboardingTour() {
     };
   }, [step, dismiss]);
 
-  if (step === null || !ready) return null;
+  if (step === null) return null;
   const current = STEPS[step];
   const last = step === STEPS.length - 1;
 
