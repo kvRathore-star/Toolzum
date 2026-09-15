@@ -1909,8 +1909,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "ltv-calculator",
     category: "Growth & Marketing",
     description: 'Projects customer lifetime value using average order value, purchase frequency, gross margin, and estimated customer lifespan in months. SaaS founders and e-commerce operators use LTV to determine acquisition budgets, segment high-value customers, and forecast recurring revenue.',
-    seoDescription: 'Free online LTV Calculator — project customer lifetime value from order value, purchase frequency, margin, and lifespan. SaaS and e-commerce essential for acquisition budgeting and revenue forecasting. ',
+    seoDescription: 'Free online LTV Calculator — customer lifetime value from ARPA, margin, and lifespan, with the 3:1 LTV:CAC rule explained. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "How is LTV calculated?", answer: "LTV = ARPA × gross margin × average lifetime in months. Example: $50 ARPA × 80% margin × 20 months = $800 LTV. E-commerce variant swaps ARPA for average order value × purchase frequency." },
+      { question: "What is a good LTV:CAC ratio?", answer: "3:1 or higher — $800 LTV supports up to ~$267 CAC. Below 3:1 you're overpaying for growth; above 5:1 you're likely under-spending and growing slower than you could." },
+      { question: "Average LTV or cohort LTV?", answer: "Average hides everything: enterprise cohorts often show 5× the LTV of self-serve. Segment by plan, channel, and signup month before setting budgets — one blended number misprices every channel." },
+      { question: "How does churn feed into LTV?", answer: "Lifetime ≈ 1 ÷ monthly churn rate: 5% monthly churn implies ~20 months average life. Cut churn from 5% to 3% and the same $50×80% base jumps from $800 to ~$1,333 LTV." },
+      { question: "Where does margin come in?", answer: "Use gross margin (revenue minus cost of delivery), not revenue. A $50 plan at 80% margin contributes $40/month, not $50 — forgetting margin overstates LTV by 25% here." },
+    ],
   },
   {
     id: "188",
@@ -1918,8 +1925,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "cac-calculator",
     category: "Growth & Marketing",
     description: 'Divides total sales-and-marketing spend by the number of new customers acquired in the same period to produce a blended acquisition cost. Startups and growth teams use CAC to evaluate marketing channel efficiency, optimize ad spend, and benchmark against LTV.',
-    seoDescription: 'Free online CAC Calculator — divide total sales and marketing spend by new customers acquired to find your customer acquisition cost. Essential for startup growth, ad spend optimization, and LTV benchmarking. ',
+    seoDescription: 'Free online CAC Calculator — fully-loaded acquisition cost per customer, payback math, and the LTV:CAC check. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "How is CAC calculated?", answer: "CAC = fully-loaded sales + marketing cost ÷ new customers in the same period. Example: $50,000 spend for 500 customers = $100 CAC. Same-period matching matters — don't divide Q1 spend by Q2 customers." },
+      { question: "What counts as fully-loaded cost?", answer: "Ad spend plus salaries, tools, agency fees, and content production. Ad-only CAC of $40 becomes $100+ fully loaded — the version investors and the LTV:CAC ratio actually use." },
+      { question: "What is the CAC payback period?", answer: "Payback = CAC ÷ monthly gross profit per customer. Example: $100 CAC ÷ ($50 × 80%) = 2.5 months. Under 12 months is healthy for SMB SaaS; enterprise tolerates 18+ on annual contracts." },
+      { question: "Blended CAC or channel CAC?", answer: "Both. Blended ($100) sets budgets; channel splits reveal waste — e.g., paid search at $60 vs events at $400. Kill or fix the $400 channel instead of averaging it away." },
+      { question: "Why did my CAC spike this month?", answer: "Usual causes: experimental spend on a new channel, sales hiring ahead of ramp (cost now, customers later), or a denominator dip from seasonality. Compare 3-month rolling CAC before reacting." },
+    ],
   },
   {
     id: "189",

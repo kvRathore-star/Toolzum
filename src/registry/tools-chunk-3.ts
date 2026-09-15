@@ -297,8 +297,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "arr-calculator",
     category: "Growth & Marketing",
     description: 'Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online ARR Calculator — Calculate Annual Recurring Revenue from subscription revenue, expansion revenue, and churn. Essential for SaaS businesses tracking growth. ',
+    seoDescription: 'Free online ARR Calculator — build the ARR bridge (new + expansion − churn) and avoid double-counting. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is ARR built?", answer: "ARR bridge: start ARR + new + expansion − churned − contraction. Example: $1.0M + $300k + $150k − $200k = $1.25M ARR. Every dollar must sit in exactly one bucket." },
+      { question: "ARR vs revenue — what's the difference?", answer: "ARR is contracted run-rate; revenue is recognized cash. A $120k annual deal signed in December adds $120k ARR immediately but ~$10k December revenue. Investors value the ARR; accountants audit the revenue." },
+      { question: "Do multi-year deals count in full?", answer: "No — only the next 12 months count toward ARR. A 3-year $360k deal contributes $120k ARR, not $360k. Counting full TCV as ARR is the classic fundraise-inflation error." },
+      { question: "New ARR vs net new ARR?", answer: "New ARR (new logos + expansion) shows sales output; net new subtracts churn for the growth truth. A team adding $300k while losing $280k grew $20k — celebrate the former, manage the latter." },
+      { question: "Is my revenue data stored?", answer: "No. All calculations run locally in your browser. No revenue figures leave your device." },
+    ],
 
   },
   {
@@ -343,8 +350,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "churn-rate-calculator",
     category: "Growth & Marketing",
     description: 'Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Churn Rate Calculator — Calculate customer churn rate by dividing customers lost by total customers. Monitor retention health for your subscription business. ',
+    seoDescription: 'Free online Churn Calculator — logo vs revenue churn, net revenue retention, and cohort math with examples. ',
     dependencies: "None",
+    faqs: [
+      { question: "Logo churn vs revenue churn?", answer: "Logo churn = customers lost ÷ starting customers (1,000 → 950 = 5%). Revenue churn weights by MRR — losing ten $10 plans hurts less than one $1,000 plan. Track both; revenue churn decides survival." },
+      { question: "What is net revenue retention?", answer: "NRR = (start MRR + expansion − churn − contraction) ÷ start MRR. Example: ($100k + $15k − $8k − $2k) ÷ $100k = 105% — growing without adding a single customer. Best-in-class SaaS runs 110–130%." },
+      { question: "What churn rate is acceptable?", answer: "SMB SaaS: 3–7% monthly logo churn is typical; enterprise: under 1–2%. Anything above 10% monthly means the bucket leaks faster than sales can fill it — fix onboarding before spending on acquisition." },
+      { question: "Why cohort instead of average?", answer: "Average churn blends January signups (settled) with March signups (still onboarding). Cohort curves show whether each signup month retains better than the last — the only view that proves product improvements work." },
+      { question: "Is my subscriber data stored?", answer: "No. All churn math runs locally in your browser. No customer counts or revenue figures leave your device." },
+    ],
 
   },
   {
