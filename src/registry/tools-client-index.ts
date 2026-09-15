@@ -250,7 +250,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Background Remover",
     "slug": "background-remover",
     "category": "Image",
-    "description": "Segments the foreground subject from an image using a neural network, producing a transparent PNG. Max 20MB.",
+    "description": "Segments the foreground subject from an image using a neural network, producing a transparent PNG with clean edges. Handles hair, fur, and semi-transparent regions better than chroma-key or magic-wand selection. Max 20MB.",
     "isPro": false
   },
   {
@@ -282,7 +282,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Image Compressor",
     "slug": "image-compressor",
     "category": "Image",
-    "description": "Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider. Balance file size and visual quality visually — max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.",
+    "description": "Reduces JPG, PNG, and WebP file sizes using smart compression with a side-by-side quality preview slider — drag it and watch file size vs visual quality update live. Max 20MB per image. Perfect for web optimization, email attachments, and social media uploads.",
     "isPro": false
   },
   {
@@ -410,7 +410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Random Number Generator",
     "slug": "random-number-generator",
     "category": "Utility",
-    "description": "Generates cryptographically secure random integers or decimals within a user-defined min-max range with optional repetition filtering. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Generates random integers or decimals within a user-defined min-max range with optional repetition filtering. Uses the browser random number generator — fine for games, raffles, and sampling, not for security secrets. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -478,14 +478,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "67",
-    "name": "MOV to MP4",
-    "slug": "mov-to-mp4",
-    "category": "Converter",
-    "description": "Convert MOV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.",
-    "isPro": false
-  },
-  {
     "id": "68",
     "name": "Resume Builder",
     "slug": "resume-builder",
@@ -531,14 +523,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "diff-checker",
     "category": "Developer",
     "description": "Compares two input texts side-by-side, highlighting inserted, deleted, and changed lines with distinct background colors. Everything runs locally in your browser — nothing is uploaded.",
-    "isPro": false
-  },
-  {
-    "id": "74",
-    "name": "WEBM to MP4",
-    "slug": "webm-to-mp4",
-    "category": "Converter",
-    "description": "Convert WEBM video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.",
     "isPro": false
   },
   {
@@ -710,14 +694,6 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
-    "id": "110",
-    "name": "AVI to MP4",
-    "slug": "avi-to-mp4",
-    "category": "Converter",
-    "description": "Convert AVI video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.",
-    "isPro": false
-  },
-  {
     "id": "mp4-mkv-1",
     "name": "MP4 to MKV Converter",
     "slug": "mp4-to-mkv",
@@ -754,7 +730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Video Compressor",
     "slug": "video-compressor",
     "category": "Video",
-    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Handles videos up to 30MB as guest, 150MB signed in, 2GB Pro.",
+    "description": "Reduces MP4, MOV, and WebM video file sizes using configurable CRF (Constant Rate Factor) encoding, resolution scaling, and bitrate control. Includes a quality preview before processing. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2122,7 +2098,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to PDF/A",
     "slug": "pdf-to-pdfa",
     "category": "PDF",
-    "description": "Prepares PDFs for long-term archiving: normalizes metadata, strips scripts and attachments, flattens structure. Certified PDF/A conformance (embedded fonts, color profiles) needs desktop tools — this gets the file honestly ready. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Converts standard PDF files to PDF/A archival format with proper metadata, embedded fonts, and color profiles. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -2146,7 +2122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Translate PDF",
     "slug": "translate-pdf",
     "category": "PDF",
-    "description": "Extract PDF text and translate it between 50+ languages via free API, delivered as a TXT file. For sensitive documents, review translations manually.",
+    "description": "Extract and translate PDF content between 50+ languages. Preserves document structure while converting text to your chosen language. Powered by browser-based and free translation APIs.",
     "isPro": false
   },
   {
@@ -4538,7 +4514,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "MRR Calculator",
     "slug": "mrr-calculator",
     "category": "Growth & Marketing",
-    "description": "Calculate Monthly Recurring Revenue by multiplying customers by average revenue per customer. Track your SaaS revenue growth. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Calculate Monthly Recurring Revenue from customer count and average revenue per account (ARPA), with new, expansion, churned, and contraction MRR broken out so net growth is visible. Example: 120 customers at $49 ARPA = $5,880 MRR. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -6666,7 +6642,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": ".gitignore Generator",
     "slug": "gitignore-generator",
     "category": "Developer",
-    "description": "Generate .gitignore files by selecting languages, frameworks, and tools from a checklist.",
+    "description": "Generate .gitignore files by selecting languages, frameworks, and tools from a checklist — covers Node, Python, Java, Go, Rust, macOS, Windows, Linux, and popular IDEs. Supports negation patterns and custom rules.",
     "isPro": false
   },
   {

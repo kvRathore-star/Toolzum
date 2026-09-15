@@ -812,17 +812,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     dependencies: "Canvas API",
   },
   {
-    id: "67",
-    name: "MOV to MP4",
-    slug: "mov-to-mp4",
-    category: "Converter",
-    description: 'Convert MOV video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
-    seoDescription: 'Free online MOV to MP4 — Transcodes QuickTime MOV files into MP4 format while optimizing for web playback and social media uploads. ',
-    dependencies: "FFmpeg",
-    showInCategory: false,
-  },
-  {
-
     id: "68",
     name: "Resume Builder",
     slug: "resume-builder",
@@ -912,19 +901,8 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Does it work offline?", answer: "Yes. After the initial page load, the comparison runs entirely in your browser using the diff-match-patch library. No data is sent to any server." },
       { question: "Can I copy the diff results?", answer: "The highlighted comparison is displayed visually. You can select and copy the text from either panel, or take a screenshot of the side-by-side view." },
     ],
-},
-  {
-    id: "74",
-    name: "WEBM to MP4",
-    slug: "webm-to-mp4",
-    category: "Converter",
-    description: 'Convert WEBM video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
-    seoDescription: 'Free online WEBM to MP4 — Converts WebM video files to MP4 format, which is critical for users whose editing software or sharing platforms reject WebM. ',
-    dependencies: "FFmpeg",
-    showInCategory: false,
   },
   {
-
     id: "76",
     name: "IP Address Lookup",
     slug: "ip-address-lookup",
@@ -1189,16 +1167,6 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Should I strip before every upload?", answer: "For public posts, yes — always. For client deliveries and archives, keep originals with metadata intact (timestamps prove provenance). Clean copies for sharing, keep masters for records." },
       { question: "Are my photos uploaded?", answer: "No. Stripping runs entirely in your browser. Photos never leave your device." },
     ],
-  },
-  {
-    id: "110",
-    name: "AVI to MP4",
-    slug: "avi-to-mp4",
-    category: "Converter",
-    description: 'Convert AVI video files to MP4 format directly in your browser. 100% free, private — your files never leave your device.',
-    seoDescription: 'Free online AVI to MP4 — Converts legacy AVI video containers into modern MP4 files with H.264 encoding for drastically smaller file sizes. ',
-    dependencies: "FFmpeg",
-    showInCategory: false,
   },
   {
     id: "mp4-mkv-1",

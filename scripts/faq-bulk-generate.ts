@@ -62,7 +62,7 @@ function stripPrivacyBoiler(desc: string): string {
     .trim();
 }
 
-const T: Record<string, (t: Tool) => Faq[]> = {
+const T: Record<string, (t: Tool, forcedOffset?: number) => Faq[]> = {
   converter: (t, forcedOffset?: number) => {
     const pair = pairOf(t)!;
     const [from, to] = pair;

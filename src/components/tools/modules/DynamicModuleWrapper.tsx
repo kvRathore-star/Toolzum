@@ -1034,9 +1034,6 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   // VideoFormatConverter resolves each slug's description from its own DESCRIPTIONS map.
   'video-converter': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="video-converter" /> }))),
   'mkv-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-mp4" /> }))),
-  'mov-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mov-to-mp4" /> }))),
-  'webm-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="webm-to-mp4" /> }))),
-  'avi-to-mp4': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="avi-to-mp4" /> }))),
   'mp4-to-mkv': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-mkv" /> }))),
   'mp4-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mp4-to-mov" /> }))),
   'mkv-to-mov': dynamic(() => import('@/components/tools/modules/shared/VideoFormatConverter').then(m => ({ default: () => <m.default slug="mkv-to-mov" /> }))),

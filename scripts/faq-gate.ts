@@ -64,7 +64,7 @@ function touchedSlugs(): Set<string> | null {
     console.error('FATAL: git diff failed — refusing to pass blind.');
     process.exit(2);
   }
-  return new Set([...diff.matchAll(/^\+.*slug:\s*["']([a-z0-9-]+)["']/gm)].map((m) => m[1]));
+  return new Set([...diff.matchAll(/^\+.*slug:\s*["']([a-z0-9-]+)["']/gm)].map((m) => m[1]!));
 }
 
 function wrapperMap(): Map<string, string> {

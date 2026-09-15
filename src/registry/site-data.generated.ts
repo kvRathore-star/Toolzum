@@ -17,12 +17,12 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1144;
+export const TOOL_COUNT = 1141;
 
 export const SITE_STATS = {
-  totalImplemented: 1061,
-  freeTierTotal: 996,
-  localTools: 1027,
+  totalImplemented: 1058,
+  freeTierTotal: 993,
+  localTools: 1024,
   cloudTools: 29,
   hybridTools: 2,
 } as const;
