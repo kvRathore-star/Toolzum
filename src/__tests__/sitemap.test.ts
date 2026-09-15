@@ -24,6 +24,14 @@ describe('sitemap', () => {
     expect(bad).toEqual([]);
   });
 
+  it('lists canonical trailing-slash URLs (server 308s non-slashed variants)', () => {
+    // Scoped to tool + category URLs: static pages carry their own mixed
+    // canonicals (see per-route layouts) and are a separate cleanup.
+    const urls = sitemap().map((e) => e.url);
+    const deep = urls.filter((u) => u.slice(BASE.length + 1).split('/').length > 1);
+    expect(deep.filter((u) => !u.endsWith('/'))).toEqual([]);
+  });
+
   it('lists every non-redirect registry tool exactly once', async () => {
     const { toolsRegistry } = await import('@/registry/tools');
     const urls = new Set(sitemap().map((e) => e.url));
@@ -34,7 +42,7 @@ describe('sitemap', () => {
         return (!r || r.slug === t.slug) && !seoSlugs.has(t.slug);
       })
       .map((t) => t.slug)
-      .filter((slug) => ![...urls].some((full) => full.endsWith('/' + slug)));
+      .filter((slug) => ![...urls].some((full) => full.endsWith('/' + slug + '/')));
     expect(missing).toEqual([]);
   });
 });

@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const categories = [...new Set(toolsRegistry.map(t => t.category ? catSlug(t.category) : undefined).filter(Boolean))];
 
   const categoryPages = categories.map(cat => ({
-    url: `${baseUrl}/${cat}`,
+    url: `${baseUrl}/${cat}/`,
     lastModified: LAUNCH_DATE,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
@@ -61,7 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       return true;
     })
     .map((tool) => ({
-      url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}`,
+      url: `${baseUrl}/${tool.category ? catSlug(tool.category) : 'tools'}/${tool.slug}/`,
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     }));
