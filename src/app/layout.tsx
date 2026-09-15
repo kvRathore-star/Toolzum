@@ -1,15 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GdprConsentBanner } from "@/components/GdprConsentBanner";
 import { ErrorLogger } from "@/components/ErrorLogger";
 import { SiteShell } from "@/components/SiteShell";
 import { TOOL_COUNT } from "@/registry/site-data.generated";
+import { ClientProviders } from "@/components/ClientProviders";
 import "./globals.css";
-
-const PostHogProvider = dynamic(() => import("@/components/PostHogProvider").then(m => m.PostHogProvider), { ssr: false });
-const Toaster = dynamic(() => import("react-hot-toast").then(m => m.Toaster), { ssr: false });
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -122,38 +119,14 @@ export default function RootLayout({
         </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <SiteShell>
-            <PostHogProvider>
+            <ClientProviders>
               <ErrorLogger>
                 <main id="main-content" className="flex-1">
                   {children}
                 </main>
               </ErrorLogger>
-            </PostHogProvider>
+            </ClientProviders>
           </SiteShell>
-
-          <Toaster 
-            position="bottom-center"
-            toastOptions={{
-              style: {
-                background: '#18181b', // zinc-900
-                color: '#fff',
-                border: '1px solid #27272a',
-                borderRadius: '12px',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#10b981',
-                  secondary: '#fff',
-                },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#ef4444',
-                  secondary: '#fff',
-                },
-              },
-            }}
-          />
 
           <GdprConsentBanner />
         </ThemeProvider>
