@@ -65,12 +65,13 @@ function parseRegistry() {
       const id = (chunk.match(/id: ["']([^"']+)["']/) || [])[1] || "";
       const name = (chunk.match(/name: ["']([^"']+)["']/) || [])[1] || "";
       const slug = (chunk.match(/slug: ["']([^"']+)["']/) || [])[1] || "";
+      const category = (chunk.match(/category: ["']([^"']+)["']/) || [])[1] || "";
       const deps = (chunk.match(/dependencies: ["']([^"']*)["']/) || [])[1] || "";
       const desc = (chunk.match(/description: '([^']*)'/) || chunk.match(/description: "([^"]*)"/) || [])[1] || "";
       const seoDesc = (chunk.match(/seoDescription: '([^']*)'/) || chunk.match(/seoDescription: "([^"]*)"/) || [])[1] || "";
       const hidden = chunk.includes("showInCategory: false");
       const hasFaqs = /faqs:\s*\[/.test(chunk);
-      entries.push({ id, name, slug, deps, desc, seoDesc, hidden, hasFaqs });
+      entries.push({ id, name, slug, category, deps, desc, seoDesc, hidden, hasFaqs });
     }
     // Also get raw string-only entries (no metadata)
     rawStringSlugs.push(...[...beforePro.matchAll(/^ {2}"([a-z0-9-]+)",$/gm)].map(m => m[1]));
@@ -248,6 +249,28 @@ function checkNewToolsWithoutFaqs(entries) {
   return { touched: flagged, note: null };
 }
 
+// ─── 4c. #27: sitemap-vs-registry category consistency ─────────────────────
+// Skips with a note when no built sitemap exists (pre-build runs) — an
+// explicit skip, not a silent pass.
+function checkSitemapCategories(entries) {
+  const fs = require("fs");
+  const smPath = path.join(ROOT, "out/sitemap.xml");
+  const xml = readOrNull(smPath);
+  if (!xml) return { skipped: true, mismatches: [] };
+  const catSlug = (c) => c === "Growth & Marketing" ? "growth-metrics" : c.toLowerCase().replace(/\s+/g, '-');
+  const bySlug = new Map(entries.map(e => [e.slug, e]));
+  const mismatches = [];
+  for (const m of xml.matchAll(/<loc>([^<]+)/g)) {
+    const u = m[1].match(/^https:\/\/toolzum\.com\/([a-z0-9-]+)\/([a-z0-9-]+)\/$/);
+    if (!u) continue;
+    const tool = bySlug.get(u[2]);
+    if (tool && tool.category && catSlug(tool.category) !== u[1]) {
+      mismatches.push({ url: m[1], slug: u[2], expected: catSlug(tool.category) });
+    }
+  }
+  return { skipped: false, mismatches };
+}
+
 // ─── 4. Tool Quality Bar Score ──────────────────────────────────────────────
 
 function qualityScore(entry, { moduleKeys }) {
@@ -369,6 +392,18 @@ async function main() {
     for (const t of newNoFaq.touched) console.log(`   ID ${t.id} | ${t.name} | ${t.slug}`);
   } else {
     console.log(`  New/modified tools without FAQs: none — no new debt.`);
+  }
+  console.log();
+
+  // ── #27: sitemap-vs-registry category consistency ──
+  const smCheck = checkSitemapCategories(entries);
+  if (smCheck.skipped) {
+    console.log(`  Sitemap-vs-registry: skipped (no out/sitemap.xml — pre-build run).`);
+  } else if (smCheck.mismatches.length) {
+    console.log(`⚠  SITEMAP-REGISTRY CATEGORY MISMATCH: ${smCheck.mismatches.length}`);
+    for (const m of smCheck.mismatches.slice(0, 10)) console.log(`   ${m.url} (registry: ${m.expected})`);
+  } else {
+    console.log(`  Sitemap-vs-registry: consistent.`);
   }
   console.log();
 
