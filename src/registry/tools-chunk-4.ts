@@ -55,8 +55,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "stopwatch",
     category: "Utility",
     description: 'Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Stopwatch — Precision stopwatch with start, stop, lap recording, and reset functionality. Lap times are displayed in a table for easy comparison. ',
+    seoDescription: 'Free online Stopwatch — start, stop, laps in a table. Millisecond precision for sports and labs. ',
     dependencies: "None",
+    faqs: [
+      { question: "How precise is it?", answer: "Millisecond display driven by high-resolution browser timers — plenty for sports splits, lab timings, and speedcubing. Not certified for official race timing." },
+      { question: "How do laps work?", answer: "Hit Lap anytime: the lap time and running total both record into the table. Export or copy the table for training logs and analysis." },
+      { question: "Does it run in the background?", answer: "Yes — elapsed time derives from the wall clock, so switching tabs doesn't lose time. Display updates may pause in background tabs; the final reading stays correct." },
+      { question: "Stopwatch vs timer — which do I need?", answer: "Stopwatch counts up from zero (measuring how long something took); timer counts down to zero (alerting when time is up). This page is the former." },
+      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+    ],
 },
   {
 
@@ -65,8 +72,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "countdown-tool",
     category: "Utility",
     description: 'Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Countdown Timer — Countdown to a specific date and time with live days, hours, minutes, and seconds display. Perfect for event countdowns and deadlines. ',
+    seoDescription: 'Free online Countdown Timer — live days, hours, minutes, seconds to any date. Shareable event links. ',
     dependencies: "None",
+    faqs: [
+      { question: "How do I count down to an event?", answer: "Pick the date and time (with timezone) — the display ticks live in days, hours, minutes, and seconds. Weddings, launches, exams, and deadlines all work the same way." },
+      { question: "Does it handle timezones?", answer: "Yes — set the event's timezone explicitly so a New York launch shows the right remaining time in Mumbai. Without this, countdowns drift by the UTC offset." },
+      { question: "Will it keep running if I close the tab?", answer: "The target timestamp persists; reopening resumes the correct remaining time. It is a clock reading, not an accumulated timer, so nothing is lost." },
+      { question: "Can I share the countdown?", answer: "Yes — the event is encoded in the shareable link, so recipients see the same countdown live on their own devices." },
+      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+    ],
 },
   {
 
@@ -75,8 +89,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "interval-timer",
     category: "Utility",
     description: 'Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Interval Timer — Repeating interval timer for workouts and training. Configure sets, work period, and rest period with automatic cycling. ',
+    seoDescription: 'Free online Interval Timer — custom work/rest rounds with auto-cycling for HIIT, Tabata, and circuits. ',
     dependencies: "None",
+    faqs: [
+      { question: "How do I set up a workout?", answer: "Set work seconds, rest seconds, and rounds — e.g., 40s work / 20s rest × 8 rounds for HIIT. Audio cues mark each transition so you never watch the screen." },
+      { question: "Tabata vs custom intervals?", answer: "Tabata is fixed 20s/10s × 8 (use the dedicated Tabata timer). Custom intervals suit circuits, EMOM, and pyramid sets where work/rest ratios differ per round." },
+      { question: "Will I hear round changes with the screen locked?", answer: "On desktop yes; mobile browsers may silence background audio — keep the tab foreground during workouts or use the device clock app as backup." },
+      { question: "Can I save workout presets?", answer: "Yes — named presets (e.g., 'Morning HIIT 20min') persist locally, so one tap starts repeat sessions without re-entering rounds." },
+      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+    ],
 },
   {
 
@@ -85,8 +106,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "tabata-timer",
     category: "Utility",
     description: 'Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Tabata Timer — Tabata interval timer with 20 seconds work and 10 seconds rest per round. Features a 3-second preparation countdown and configurable rounds. ',
+    seoDescription: 'Free online Tabata Timer — strict 20s work / 10s rest × 8 rounds with prep countdown. True HIIT timing. ',
     dependencies: "None",
+    faqs: [
+      { question: "What is the exact Tabata protocol?", answer: "20 seconds all-out work, 10 seconds rest, 8 rounds = 4 minutes, plus the 3-second prep countdown. Deviating (longer rests, fewer rounds) makes it interval training, not Tabata." },
+      { question: "How hard should 'all-out' be?", answer: "≈170% VO2max — unsustainable-beyond-20-seconds effort. If you can chat in round 6, go harder; if form collapses before round 5, scale to 15s work intervals first." },
+      { question: "How often per week?", answer: "2–3 true Tabata sessions weekly with rest days between; daily Tabata overtrains most people within 3 weeks. Fill other days with Zone 2 cardio and strength." },
+      { question: "Why does the prep countdown matter?", answer: "3 seconds to set position prevents false starts and pulled muscles — most Tabata injuries come from launching cold into round 1." },
+      { question: "Is anything uploaded?", answer: "No. Everything runs locally in your browser. Nothing leaves your device." },
+    ],
 },
   {
 

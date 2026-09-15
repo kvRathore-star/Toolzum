@@ -1015,8 +1015,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "pomodoro-timer",
     category: "Productivity",
     description: 'Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Pomodoro Timer — Pomodoro Timer manages work and break intervals with fully customizable session lengths and auto-start options. ',
+    seoDescription: 'Free online Pomodoro Timer — 25/5 focus cycles with custom lengths and auto-start. Beat procrastination. ',
     dependencies: "Web Audio API / Vanilla JS",
+    faqs: [
+      { question: "How does Pomodoro work?", answer: "25 minutes focused work, 5 minutes break, repeat; after 4 cycles take a 15–30 minute break. One task per pomodoro, phone away — the timer enforces the rhythm." },
+      { question: "What if 25 minutes doesn't fit my work?", answer: "Adjust freely: 50/10 suits deep coding and writing; 15/5 suits admin and email. The protocol matters (single-tasking + breaks), not the exact numbers." },
+      { question: "What do I do when interrupted mid-pomodoro?", answer: "Note it and continue ('inform, negotiate, call back' rule). If you switch tasks, void the pomodoro and restart — protecting the 25 minutes is the skill being trained." },
+      { question: "Does it track completed sessions?", answer: "Yes — daily pomodoro counts persist locally, so you can see output trends (e.g., 6 focused sessions ≈ a strong deep-work day) without any account." },
+      { question: "Is anything uploaded?", answer: "No. Timing and counts stay in your browser via local storage. Nothing leaves your device." },
+    ],
   },
   {
     id: "90",
