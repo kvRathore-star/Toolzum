@@ -1,16 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const PostHogProvider = dynamic(
-  () => import("@/components/PostHogProvider").then((m) => m.PostHogProvider),
-  { ssr: false }
-);
-
-const Toaster = dynamic(
-  () => import("react-hot-toast").then((m) => m.Toaster),
-  { ssr: false }
-);
+import { PostHogProvider } from "@/components/PostHogProvider";
+import { Toaster } from "react-hot-toast";
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (

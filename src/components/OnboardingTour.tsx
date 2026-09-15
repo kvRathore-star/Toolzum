@@ -48,8 +48,8 @@ export function OnboardingTour() {
   // CLS in the first ~5s). Without this the tour dialog appearance counts as
   // a 0.3+ layout shift even though it's position:fixed and moves nothing.
   useEffect(() => {
-    const t = requestIdleCallback(() => setReady(true), { timeout: 2000 });
-    return () => cancelIdleCallback(t);
+    const t = setTimeout(() => setReady(true), 5000);
+    return () => clearTimeout(t);
   }, []);
 
   const persistSeen = useCallback(
