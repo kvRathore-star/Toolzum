@@ -40,11 +40,13 @@ Last updated: 2026-09-15
   - Decision needed before bulk rollout treats these clusters as separate tools.
 
 ## Save for Focus Time
-- [ ] 11. FAQ rollout (~1,060 tools) — multi-day
+- [ ] 11. FAQ rollout — bulk path per archetype (converter proven Sep 15: skeleton-check ≤0.30; sibling clusters merged via 11b). Remaining archetypes need per-archetype dry-run validation before scaling. Hand batches continue ONLY demand-driven (see policy below), never blind.
 - [x] 12. Registry-import perf rewrite — eliminated 736KB full registry from client bundles; Homepage -567KB (30%), Tool page -734KB (35%) (commit 52dccf2)
 
 ## Mechanical (proven playbook, no decision needed)
-- [ ] 13. FAQ rollout — Tier 1 done (category templates personalized, commit 296e435). Still pending: custom FAQs for GSC "crawled, not indexed" flagged tools, then general volume rollout. Weekend task.
+- [ ] 13. FAQ rollout — Tier 1 done (category templates personalized, commit 296e435). Custom FAQs: 49 hand-deepened Sep 15 (batches 1–12) + hub intros + FAQ-trim (deep pages show customs only). Still pending: custom FAQs for GSC "crawled, not indexed" flagged tools (demand-driven picks — see policy below), then bulk volume per #11.
+- [x] Depth batch policy (Sep 15): hand batches are DEMAND-DRIVEN ONLY — next picks come from the GSC bucket pull (impressions/ranked pages first), never blind supply batching. Rationale: 800 remaining tools ÷ 5/batch is not a viable strategy; returns concentrate in ranked/money pages.
+- [x] Structural SEO freeze (Sep 15 – Oct 15): no URL, sitemap, redirect, or merge changes. Content depth on existing URLs + Request Indexing only. Rationale: every structural change restarts Google's evaluation clock.
 - [x] 14. ~~Developer dedup~~ — api-response-formatter → json-formatter, api-error-decoder → http-status-code-checker (commit 0b3b4c0)
 - [x] 15. ~~Calculator consolidation~~ — 6 tools redirected to geometry/scientific/date calculators (commit 0b3b4c0)
 - [x] 16. ~~Transcription reclassification~~ — Renamed to "Audio Transcript Formatter" / "Video Transcript Formatter", fixed descriptions (commit 0b3b4c0)
