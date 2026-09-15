@@ -450,9 +450,16 @@ export const entries_chunk_2: ToolMetadata[] = [
     slug: "lorem-ipsum-generator",
     category: "Text",
     description: 'Generate placeholder text in multiple styles — Standard Lorem Ipsum, Cicero (original Latin), Legal, Startup, Coffee, and Pirate themes. Customizable paragraph and word counts for design mockups.',
-    seoDescription: 'Free online Lorem Ipsum Generator — Generate placeholder text in Standard, Cicero, Legal, Startup, Coffee, and Pirate themes. Customizable paragraphs and word count for design mockups and layouts.',
+    seoDescription: 'Free online Lorem Ipsum Generator — classic, Cicero, legal, startup, coffee, pirate themes. Paragraphs and word counts. ',
     dependencies: "none",
     showInCategory: true,
+    faqs: [
+      { question: "Why use placeholder text at all?", answer: "Real-looking text reveals layout problems (overflows, orphans, contrast) that gray boxes hide. Clients also review design instead of proofreading when content isn't final." },
+      { question: "What are the themed variants for?", answer: "Legal, startup, coffee, and pirate themes match mockup context so demos feel intentional — a coffee-shop site mock reads better with coffee-themed filler than Cicero Latin." },
+      { question: "How much filler do I need?", answer: "Match the real content's volume: 3 paragraphs where 3 will live. One paragraph under-tests the layout; ten pages of lorem nobody reads wastes review attention." },
+      { question: "Never ship lorem to production — right?", answer: "Right. Search engines index it, screen readers read it aloud, and clients screenshot it. Grep your build for 'lorem' before every launch." },
+      { question: "Is anything uploaded?", answer: "No. Generation runs entirely in your browser. Nothing leaves your device." },
+    ],
   },
   {
 
