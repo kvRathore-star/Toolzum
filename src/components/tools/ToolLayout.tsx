@@ -8,20 +8,20 @@ import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-rea
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
 import { PerToolBadge } from '@/components/privacy-claims';
 import { useSession } from '@/lib/auth-client';
-import { ToolPaywall } from './ToolPaywall';
 import { useFreeUsage } from '@/hooks/useFreeUsage';
-import { PostDownloadSurvey } from '@/components/PostDownloadSurvey';
-import { DownloadQuotaBadge } from '@/components/tools/DownloadQuotaBadge';
-import { DownloadLimitModal } from '@/components/tools/DownloadLimitModal';
 import { useToolHistory } from '@/hooks/useToolHistory';
 import { getCategoryTheme } from '@/lib/categoryTheme';
-import { ShareTool } from '@/components/ShareTool';
-import { FavoriteStarButton } from '@/components/FavoriteStarButton';
-
-import { OfflineIndicator } from '@/components/OfflineIndicator';
-import { BulkDropPaywall } from '@/components/BulkDropPaywall';
-import { WorkflowPresetPanel } from '@/components/WorkflowPresetPanel';
 import { getShortDescription } from '@/lib/generateToolDescription';
+
+const ToolPaywall = dynamic(() => import('./ToolPaywall').then(m => ({ default: m.ToolPaywall })), { ssr: false });
+const PostDownloadSurvey = dynamic(() => import('@/components/PostDownloadSurvey').then(m => ({ default: m.PostDownloadSurvey })), { ssr: false });
+const DownloadQuotaBadge = dynamic(() => import('@/components/tools/DownloadQuotaBadge').then(m => ({ default: m.DownloadQuotaBadge })), { ssr: false });
+const DownloadLimitModal = dynamic(() => import('@/components/tools/DownloadLimitModal').then(m => ({ default: m.DownloadLimitModal })), { ssr: false });
+const ShareTool = dynamic(() => import('@/components/ShareTool').then(m => ({ default: m.ShareTool })), { ssr: false });
+const FavoriteStarButton = dynamic(() => import('@/components/FavoriteStarButton').then(m => ({ default: m.FavoriteStarButton })), { ssr: false });
+const OfflineIndicator = dynamic(() => import('@/components/OfflineIndicator').then(m => ({ default: m.OfflineIndicator })), { ssr: false });
+const BulkDropPaywall = dynamic(() => import('@/components/BulkDropPaywall').then(m => ({ default: m.BulkDropPaywall })), { ssr: false });
+const WorkflowPresetPanel = dynamic(() => import('@/components/WorkflowPresetPanel').then(m => ({ default: m.WorkflowPresetPanel })), { ssr: false });
 
 const PostDownloadBar = dynamic(() => import('@/components/PostDownloadBar').then(m => ({ default: m.PostDownloadBar })), { ssr: false });
 
