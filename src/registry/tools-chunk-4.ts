@@ -914,8 +914,15 @@ export const entries_chunk_4: ToolMetadata[] = [
     slug: "ovulation-tracker",
     category: "Health",
     description: 'Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Ovulation Tracker \u2014 Track your fertile window and estimated ovulation date based on your last menstrual period. Helps with family planning. ',
+    seoDescription: 'Free online Ovulation Tracker — fertile window and ovulation date from last period. Cycle-aware family planning. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is the fertile window calculated?", answer: "Ovulation ≈ 14 days before the next period; the fertile window is the 5 days before plus ovulation day (sperm survive up to 5 days, the egg ~24h). Example: 28-day cycle starting May 1 → ovulation ≈ May 15, fertile May 10–15." },
+      { question: "What if my cycle is irregular?", answer: "Calendar estimates weaken with irregularity — a 21–35 day range shifts ovulation by ±7 days. Track 3+ cycles to find your average, and confirm with basal-body-temperature or LH strips for conception timing." },
+      { question: "Can this prevent pregnancy?", answer: "No — calendar method alone fails ~24% yearly with typical use. Ovulation shifts with stress and illness. Use barrier or hormonal contraception if avoiding pregnancy." },
+      { question: "Does it predict the next period?", answer: "Yes, by adding your average cycle length to the last period start. Log actual starts to keep predictions calibrated — the tracker improves as history grows." },
+      { question: "Is my cycle data stored?", answer: "No. All tracking runs locally in your browser. No health data is transmitted or stored." },
+    ],
   },
   {
     id: "887",

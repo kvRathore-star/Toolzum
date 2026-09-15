@@ -803,8 +803,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "calorie-calculator",
     category: "Health",
     description: 'Calculate your Total Daily Energy Expenditure (TDEE) from BMR and activity level. Find how many calories you burn per day.',
-    seoDescription: 'Free online TDEE Calculator \u2014 Calculate your Total Daily Energy Expenditure from BMR and activity level. Find how many calories you burn per day. ',
+    seoDescription: 'Free online TDEE Calculator — daily calorie burn from BMR × activity level, with deficit/surplus targets. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is TDEE calculated?", answer: "TDEE = BMR × activity multiplier: 1.2 sedentary, 1.375 light, 1.55 moderate, 1.725 heavy, 1.9 athlete. Example: BMR 1,730 × 1.55 (moderate) ≈ 2,680 kcal/day maintenance." },
+      { question: "How big a deficit for fat loss?", answer: "300–500 kcal/day → ~0.3–0.5kg/week. A 500 kcal deficit on 2,680 TDEE means eating ≈2,180 kcal. Larger deficits cost muscle and stall faster — slow beats heroic." },
+      { question: "Why am I not losing at my target?", answer: "Usual suspects: untracked oils/snacks (~200–400 kcal/day), overestimated activity, water retention masking 2–3 weeks of fat loss. Track everything for 2 weeks before adjusting." },
+      { question: "Does exercise or diet matter more?", answer: "Diet dominates — you can't outrun intake (an hour of running ≈ 600 kcal ≈ one burger). Use exercise for health and muscle retention, the calorie target for the scale." },
+      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+    ],
   },
   {
     id: "658",
@@ -812,8 +819,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "heart-rate-zone-calculator",
     category: "Health",
     description: 'Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Heart Rate Zone Calculator — Calculate heart rate training zones by age. Find your target heart rate ranges for different exercise intensity levels. ',
+    seoDescription: 'Free online Heart Rate Zone Calculator — 5 training zones by age, with max-HR math explained. ',
     dependencies: "None",
+    faqs: [
+      { question: "How are the zones calculated?", answer: "Max HR ≈ 220 − age (rough) or 207 − 0.7 × age (better fit over 40). Zones: 50–60% recovery, 60–70% fat-burn, 70–80% aerobic, 80–90% threshold, 90–100% max. Example: age 30 → max ≈186, Zone 2 ≈112–130 bpm." },
+      { question: "Which zone burns the most fat?", answer: "Zone 2 (60–70%) burns the highest fat fraction — but higher zones burn more total calories per minute. For fat loss, total weekly volume in Zones 2–3 beats short Zone 5 bursts." },
+      { question: "How accurate is 220-minus-age?", answer: "±10–12 bpm for most people; medications (beta blockers), fitness, and genetics shift it. For precise training, do a field test or lab VO2max — formulas are starting points." },
+      { question: "What zone for a beginner runner?", answer: "80% of runs in Zone 2 (conversational pace), 20% harder. Beginners going too hard is the top cause of burnout and injury — slow builds the aerobic base." },
+      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+    ],
   },
   {
     id: "660",

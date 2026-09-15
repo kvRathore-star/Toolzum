@@ -1616,8 +1616,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "bmr-calculator",
     category: "Health",
     description: 'Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online BMR Calculator — Calculates Basal Metabolic Rate using the Mifflin-St Jeor equation with age, sex, height, and weight. Nutritionists use it for diet planning. ',
+    seoDescription: 'Free online BMR Calculator — Mifflin-St Jeor basal metabolic rate by age, sex, height, weight. Diet-planning baseline. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "What is BMR?", answer: "Basal Metabolic Rate — calories your body burns at complete rest in 24h. Example: a 30-year-old man, 178cm, 75kg → ≈1,730 kcal/day. Everything above that (movement, digestion, exercise) adds on top." },
+      { question: "Mifflin-St Jeor vs Harris-Benedict?", answer: "Mifflin-St Jeor (men: 10w + 6.25h − 5a + 5; women: −161 instead of +5) validates better against modern calorimetry, underestimating less for overweight users. This tool uses Mifflin-St Jeor." },
+      { question: "BMR vs TDEE — which do I diet on?", answer: "Never eat at BMR long-term — that is starvation level. Multiply BMR by activity (sedentary 1.2 … very active 1.9) to get TDEE, then subtract 300–500 kcal for fat loss. Use the calorie calculator for the full chain." },
+      { question: "Does muscle raise BMR?", answer: "Yes, ~6 kcal/lb/day vs ~2 for fat — but the effect is modest: 5kg of extra muscle adds roughly 60–70 kcal/day. Strength training matters more for the calories it burns directly." },
+      { question: "Is my health data stored?", answer: "No. All calculations run locally in your browser. No health data is transmitted or stored." },
+    ],
   },
   // REMOVED: meta-tag-generator — merged into seo-meta-tag-generator (id:799)
   {
