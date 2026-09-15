@@ -163,6 +163,13 @@
   "lint-staged": {
     "src/registry/tools.ts": [
       "node scripts/quality-audit.js"
+    ],
+    "src/registry/tools-chunk-*.ts": [
+      "node scripts/quality-audit.js",
+      "npx tsx scripts/faq-gate.ts"
+    ],
+    "src/components/tools/ToolPageSEOContent.tsx": [
+      "npx tsx scripts/faq-gate.ts --full"
     ]
   }
 }
