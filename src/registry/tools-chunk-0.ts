@@ -186,6 +186,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
     showInCategory: false,
+    faqs: [
+      { question: "What does HEIC to PDF do?", answer: "Converts HEIC files to PDF format \u2014 Apple device photos to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
+      { question: "Where does PDF fit best?", answer: "document sharing, printing, and archival with consistent formatting." },
+      { question: "What HEIC files convert best?", answer: "Complete, uncorrupted HEIC files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert HEIC to PDF?", answer: "HEIC (High Efficiency Image Container) is lossy or lossless \u2014 best for Apple device photos \u2014 iPhone and Mac default format with excellent compression efficiency. PDF (Portable Document Format) is fixed-layout document \u2014 best for document sharing, printing, and archival with consistent formatting." },
+    ],
   },
   {
     id: "2",
@@ -421,6 +427,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does PDF to JPG do?", answer: "Convert PDF images to JPG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "Where does JPEG fit best?", answer: "photographs, web images, and social media where smaller file size matters more than perfect quality." },
+      { question: "What PDF files convert best?", answer: "Complete, uncorrupted PDF files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert PDF to JPEG?", answer: "PDF (Portable Document Format) is fixed-layout document \u2014 best for document sharing, printing, and archival with consistent formatting. JPEG (Joint Photographic Experts Group) is lossy compressed \u2014 best for photographs, web images, and social media where smaller file size matters more than perfect quality." },
+    ],
   },
   {
     id: "29",
@@ -474,6 +486,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online WebP to JPG — Converts WebP images into standard JPG format, making them usable in applications and websites that do not support Google\'s modern format. ',
     dependencies: "Canvas API",
     showInCategory: false,
+    faqs: [
+      { question: "What does WebP to JPG do?", answer: "Convert WEBP images to JPG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "Will converting WebP lose quality?", answer: "From lossy or lossless to lossy compressed: yes, some detail is discarded \u2014 keep the original WebP archived." },
+      { question: "Should I keep the original WebP files?", answer: "Yes \u2014 archive WebP originals before batch-converting. Re-converting from JPEG back to WebP never restores discarded data." },
+      { question: "How long does WebP-to-JPEG conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+    ],
   },
   {
     id: "34b",
@@ -986,6 +1004,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online MP3 to WAV — Convert compressed MP3 audio files into uncompressed WAV format for professional audio editing. ',
     dependencies: "FFmpeg.wasm",
     showInCategory: false,
+    faqs: [
+      { question: "What does MP3 to WAV do?", answer: "Converts MP3 files to WAV format \u2014 universal music playback and sharing across all devices and platforms to professional audio editing, mastering, and archival in DAWs and production software. All conversion happens locally in your browser with no file size limits." },
+      { question: "How long does MP3-to-WAV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting MP3 lose quality?", answer: "From lossy compressed to uncompressed lossless: quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original MP3 files?", answer: "Yes \u2014 archive MP3 originals before batch-converting. Re-converting from WAV back to MP3 never restores discarded data." },
+    ],
   },
   {
     id: "87",
@@ -1021,6 +1045,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online EPUB to PDF — Convert e-books to PDF format. Preserves structure, images, and formatting. ',
     dependencies: "jszip, pdf-lib",
     showInCategory: true,
+    faqs: [
+      { question: "What does EPUB to PDF do?", answer: "Converts EPUB files to PDF format \u2014 e-readers, mobile devices, and accessible digital books to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
+      { question: "Should I keep the original EPUB files?", answer: "Yes \u2014 archive EPUB originals before batch-converting. Re-converting from PDF back to EPUB never restores discarded data." },
+      { question: "How long does EPUB-to-PDF conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+      { question: "Will converting EPUB lose quality?", answer: "From reflowable ebook to fixed-layout document: quality is preserved as far as the formats allow." },
+    ],
   },
   {
     id: "96",
@@ -1177,6 +1207,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mp4-to-mkv",
     dependencies: "ffmpeg",
     showInCategory: false,
+    faqs: [
+      { question: "What does MP4 to MKV Converter do?", answer: "Converts MP4 files to MKV format \u2014 universal video playback on any device to advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file. All conversion happens locally in your browser with no file size limits." },
+      { question: "Where does MKV fit best?", answer: "advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
+      { question: "What MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert MP4 to MKV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
+    ],
   },
   {
     id: "mp4-mov-1",
@@ -1187,6 +1223,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mp4-to-mov",
     dependencies: "ffmpeg",
     showInCategory: false,
+    faqs: [
+      { question: "What does MP4 to MOV Converter do?", answer: "Convert MP4 video files to MKV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "Why convert MP4 to MOV?", answer: "MP4 (MPEG-4 Part 14) is lossy compressed \u2014 best for universal video playback on any device \u2014 phones, smart TVs, web browsers, and social media. MOV (QuickTime Movie) is lossless or lossy \u2014 best for Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
+      { question: "Where does MOV fit best?", answer: "Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows." },
+      { question: "What MP4 files convert best?", answer: "Complete, uncorrupted MP4 files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+    ],
   },
   {
     id: "mkv-mov-1",
@@ -1197,6 +1239,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mkv-to-mov",
     dependencies: "ffmpeg",
     showInCategory: false,
+    faqs: [
+      { question: "What does MKV to MOV Converter do?", answer: "Converts MKV files to MOV format \u2014 advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file to Apple ecosystem. All conversion happens locally in your browser with no file size limits." },
+      { question: "Will converting MKV lose quality?", answer: "From lossless container to lossless or lossy: yes, some detail is discarded \u2014 keep the original MKV archived." },
+      { question: "Should I keep the original MKV files?", answer: "Yes \u2014 archive MKV originals before batch-converting. Re-converting from MOV back to MKV never restores discarded data." },
+      { question: "How long does MKV-to-MOV conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+    ],
   },
   {
     id: "mov-mkv-1",
@@ -1207,6 +1255,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "mov-to-mkv",
     dependencies: "ffmpeg",
     showInCategory: false,
+    faqs: [
+      { question: "What does MOV to MKV Converter do?", answer: "Convert MKV video files to MOV format directly in your browser. 100% free, private \u2014 your files never leave your device." },
+      { question: "What MOV files convert best?", answer: "Complete, uncorrupted MOV files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert MOV to MKV?", answer: "MOV (QuickTime Movie) is lossless or lossy \u2014 best for Apple ecosystem \u2014 Final Cut Pro, iMovie, and macOS video editing workflows. MKV (Matroska Video) is lossless container \u2014 best for advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
+      { question: "Where does MKV fit best?", answer: "advanced video archiving with multiple subtitle tracks, chapters, and audio streams in one file." },
+    ],
   },
   {
     id: "111",
@@ -1286,6 +1340,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online JSON to CSV — Parses structured JSON data—including nested objects and arrays—and flattens it into a clean CSV spreadsheet with proper column headers. ',
     dependencies: "PapaParse",
     showInCategory: false,
+    faqs: [
+      { question: "What does JSON to CSV do?", answer: "Converts JSON files to CSV format \u2014 APIs, configuration files, and data exchange between web services to spreadsheets, database exports, and data imports. All conversion happens locally in your browser with no file size limits." },
+      { question: "Why convert JSON to CSV?", answer: "JSON (JavaScript Object Notation) is human-readable structured data \u2014 best for APIs, configuration files, and data exchange between web services. CSV (Comma-Separated Values) is tabular plain text \u2014 best for spreadsheets, database exports, and data imports." },
+      { question: "Where does CSV fit best?", answer: "spreadsheets, database exports, and data imports." },
+      { question: "What JSON files convert best?", answer: "Complete, uncorrupted JSON files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+    ],
   },
   {
     id: "122",
@@ -1313,6 +1373,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PNG images to SVG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PNG to SVG — Traces bitmap PNG shapes into clean SVG paths using Potrace in WebAssembly, with controls for curve tolerance, corner threshold. ',
     dependencies: "Potrace",
+    faqs: [
+      { question: "What does PNG to SVG do?", answer: "Convert PNG images to SVG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
+      { question: "What PNG files convert best?", answer: "Complete, uncorrupted PNG files convert cleanly. Partial downloads and truncated files fail or produce broken output \u2014 verify the source opens correctly first." },
+      { question: "Why convert PNG to SVG?", answer: "PNG (Portable Network Graphics) is lossless \u2014 best for graphics with sharp edges, text overlays, screenshots, and images requiring transparent backgrounds. SVG (Scalable Vector Graphics) is vector (resolution-independent) \u2014 best for logos, icons, illustrations, and any graphic that needs to scale cleanly to any size." },
+      { question: "Where does SVG fit best?", answer: "logos, icons, illustrations, and any graphic that needs to scale cleanly to any size." },
+    ],
   },
   {
     id: "125",
@@ -1525,6 +1591,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online CSV to JSON — Reads CSV files and converts each row into a structured JSON object, correctly inferring data types and handling quoted fields. ',
     dependencies: "PapaParse",
     showInCategory: false,
+    faqs: [
+      { question: "What does CSV to JSON do?", answer: "Converts CSV files to JSON format \u2014 spreadsheets, database exports, and data imports to APIs, configuration files, and data exchange between web services. All conversion happens locally in your browser with no file size limits." },
+      { question: "Will converting CSV lose quality?", answer: "From tabular plain text to human-readable structured data: quality is preserved as far as the formats allow." },
+      { question: "Should I keep the original CSV files?", answer: "Yes \u2014 archive CSV originals before batch-converting. Re-converting from JSON back to CSV never restores discarded data." },
+      { question: "How long does CSV-to-JSON conversion take?", answer: "Seconds for typical files on a modern device; large files scale with size and CPU. Conversion speed depends on the machine, not the formats \u2014 close heavy tabs for big batches." },
+    ],
   },
   {
     id: "151b",

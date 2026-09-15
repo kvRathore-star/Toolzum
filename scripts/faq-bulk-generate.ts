@@ -15,6 +15,7 @@
  *   npx tsx scripts/faq-bulk-generate.ts --archetype converter --limit 4
  *   npx tsx scripts/faq-bulk-generate.ts --archetype all --limit 4
  */
+import fs from 'node:fs';
 import { toolsRegistry } from '../src/registry/tools';
 import { FORMAT_INFO, requiresCloudApi } from '../src/lib/cloudPatterns';
 
@@ -212,6 +213,11 @@ function main() {
   }
   console.log(JSON.stringify(out, null, 1).slice(0, 6000));
   console.log(`\n(dry-run: ${sample.length} shown of ${pool.length} in scope '${archArg}'; nothing written)`);
+  const outPath = process.argv.find((a) => a.startsWith('--out='))?.split('=')[1];
+  if (outPath) {
+    fs.writeFileSync(outPath, JSON.stringify(out, null, 1));
+    console.log(`full JSON written to ${outPath}`);
+  }
 
   // MECHANICAL SKELETON CHECK: no generated block may be >50% shared
   // skeleton with another (pairwise Jaccard < 0.30, the faq-gate bar).
