@@ -34,6 +34,10 @@ Last updated: 2026-09-15
 ## Business decisions (separate thread)
 - [ ] 9. Email capture — where do signups go?
 - [ ] 10. Annual plan / credit pack — what price/credit size?
+- [ ] 11b. Merge near-duplicate sibling tools? (from bulk-generator dry-runs Sep 15: mov/avi/webm-to-mp4, pdf/webp-to-jpg score 0.32–0.41 inter-similarity — one tool wearing several URLs, no FAQ design fixes structural sameness)
+  - Benefit: fewer, genuinely distinct pages (precedent: time-converter merge, a796dcc).
+  - Cost: redirecting previously-indexed URLs → ranking dip during transition, possible loss of exact-query long-tail ("avi to mp4").
+  - Decision needed before bulk rollout treats these clusters as separate tools.
 
 ## Save for Focus Time
 - [ ] 11. FAQ rollout (~1,060 tools) — multi-day
