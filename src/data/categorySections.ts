@@ -1193,46 +1193,46 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
 
 export const CATEGORY_INTROS: Record<string, string> = {
   Developer:
-    "Developer tools for formatting, debugging, encoding, API testing, and security analysis — all in your browser. No server uploads, no accounts needed. Whether you're formatting JSON before a code review, testing a REST endpoint, generating a hash, or decoding a JWT token, every tool runs locally on your device.",
+    "Developer tools for formatting JSON, testing regex, debugging JWTs, parsing cron, encoding Base64, and 240+ more — every tool runs locally in your browser with zero uploads. Paste unformatted code, validate an API response, or generate a UUID without opening a terminal or trusting a random pastebin.",
   Calculator:
-    "Online calculators for math, date/time, and academic calculations — percentages, fractions, quadratic equations, date differences, grade averages, and more. Every calculation runs in your browser with nothing sent to a server. No sign-up, no data collection, just fast, accurate results.",
+    "Online calculators for percentages, fractions, dates, grades, and everyday math — EMI-style precision without the signup. Every calculation runs in your browser; results appear as you type, and nothing you enter is ever sent to a server.",
   Utility:
-    "Everyday utility tools — random generators, unit converters, CSV tools, timers, and fun games. All processing happens locally in your browser. Generate a strong password, convert kilograms to pounds, pick a random team, or analyze a CSV file without uploading anything.",
+    "83 everyday utility tools — password and random generators, unit converters, CSV cleaners, timers, resume builder, QR codes, and more. Generate a strong password, convert kilograms to pounds, or analyze a CSV: all processing happens locally in your browser with nothing uploaded.",
   Audio:
-    "Browser-based audio tools — convert between MP3, WAV, FLAC, OGG, AAC, and more, trim audio clips, reduce noise, merge tracks, and apply effects. Powered by FFmpeg WASM running entirely on your device. No files are ever uploaded to any server.",
+    "16 browser-based audio tools — convert MP3, WAV, FLAC, OGG, and AAC, transcribe speech to text, trim clips, and synthesize speech in Indian languages. Powered by FFmpeg WASM and Whisper running on your device; files are never uploaded.",
   Image:
-    "Image tools for compressing, resizing, converting, and editing photos — all in your browser. Crop a profile picture, convert PNG to JPG, remove a background, or compress images for web use. Zero uploads, complete privacy.",
+    "42 image tools — compress JPGs 60–80% without visible loss, remove backgrounds with AI, resize to exact pixels, convert PNG to JPG, and crop passport photos. Everything renders in your browser; your photos never leave your device.",
   PDF:
-    "PDF tools to compress, merge, split, convert, and edit PDFs locally. No file size limits, no uploads. Combine multiple PDFs, extract pages, add watermarks, fill forms, OCR scanned documents, and convert between PDF and HTML, Markdown, or images.",
+    "62 PDF tools — merge 20+ files with drag-and-drop, compress for email, convert JPG to PDF and PDF to Word, split chapters, and fill forms. All processing is local via pdf-lib; documents are never uploaded.",
   Video:
-    "Browser-based video tools — compress, convert, trim, and edit videos using FFmpeg WASM running on your device. Cut a clip, convert MP4 to GIF, add subtitles, or reduce file size. Nothing is uploaded to any server.",
+    "19 browser-based video tools — compress MP4s, convert to GIF, trim clips, extract MP3 audio, and add subtitles using FFmpeg WASM on your device. Nothing is uploaded to any server.",
   Converter:
-    "File conversion tools for documents, images, audio, video, and data — EPUB to PDF, Markdown to HTML, JSON to CSV, and more. Every conversion happens locally in your browser for complete privacy.",
+    "38 file converters — Markdown to HTML, JSON to CSV, EPUB to PDF, images to PDF, and dozens more. Every conversion happens locally in your browser; documents and data are never uploaded.",
   SEO:
-    "SEO analysis and optimization tools — check keyword density, preview search snippets, generate XML sitemaps, and audit meta tags. All processing is done locally in your browser with no data sent to any server.",
+    "14 SEO tools — check keyword density, preview Google snippets, generate XML sitemaps, validate robots.txt, and audit canonical tags. All analysis runs locally in your browser with no data sent anywhere.",
   Health:
-    "Health and wellness calculators — BMI, BMR, calorie intake, body fat, heart rate zones, pregnancy due date, and more. All calculations run locally in your browser. Track your fitness journey without uploading personal data.",
+    "Health calculators — BMI, BMR via Mifflin-St Jeor, TDEE with activity multipliers, body fat, heart-rate zones, ovulation windows, and calorie needs. All math runs locally; no health data ever leaves your browser.",
   AI:
-    "AI-powered tools for generating images, summarizing documents, checking grammar, detecting AI-written content, and enhancing photos. Browser-based AI keeps your data private — nothing is uploaded to any server.",
+    "16 AI tools — generate images, transcribe audio, summarize documents, check grammar, and upscale photos. Cloud AI features are clearly marked; everything else runs on-device with nothing uploaded.",
   Text:
-    "Text tools for counting words, converting case, generating fancy fonts, analyzing content, and more. All processing happens locally in your browser. No sign-up, no limits, no uploads.",
+    "27 text tools — live word counts with Flesch-Kincaid readability, case conversion, fancy Unicode fonts, handwriting rendering, diff checking, and lorem ipsum. All processing happens locally with no sign-up and no limits.",
   Branding:
-    "Branding and design tools — create logos, design business cards, generate email signatures, build brand kits, and schedule social media content. Every tool runs locally in your browser.",
+    "8 branding tools — logo maker, business cards, email signatures, link-in-bio pages, and social calendars. Every tool runs locally in your browser; your brand assets stay yours.",
   Design:
-    "Design tools for color conversion, typography preview, SVG editing, font subsetting, and CSS code generation. All processing happens locally — no uploads, no accounts, no data collection.",
+    "Design utilities — pick colors with eyedropper precision, generate harmonious palettes, preview typography, edit SVG, and subset fonts. All processing happens locally — no uploads, no accounts.",
   Finance:
-    "Financial calculators and tools — currency conversion, invoice generation, IBAN validation, loan calculators, savings tools, tax calculators, and more. Every calculation runs in your browser.",
+    "33 financial tools — EMI with reducing-balance math, SIP projections with worked examples, margin vs markup solver, GST invoices, salary take-home, and CAGR. Every calculation runs in your browser; no financial data is transmitted.",
   Privacy:
-    "Privacy tools for encrypting data, generating PGP keys, removing EXIF metadata from photos, checking password strength, and sharing notes securely. All processing happens locally with nothing uploaded.",
+    "7 privacy tools — strip GPS EXIF before posting, validate Aadhaar format offline, check password strength, generate PGP keys, and share self-destructing notes. All processing happens locally with nothing uploaded.",
   "indian-utilities":
-    "India-specific utility tools — Aadhaar photo cropping and masking, PAN card verification, GST invoice generation, IFSC code lookup, UPI ID validation, vehicle registration check, and more. Every tool runs entirely in your browser with no server uploads.",
+    "26 India-specific tools — passport photos (3.5×4.5 cm), PAN resizing, Aadhaar masking and validation, GST calculators and invoices, IFSC lookup, and UPI validation. Built for NSDL, UIDAI, and GST-portal realities; everything runs in your browser.",
   Transcription:
-    "Browser-based transcription tools — convert speech to text from audio and video files, generate YouTube transcripts, and create meeting minutes. All processing happens locally on your device.",
+    "Transcription tools — speech-to-text from MP3/WAV/M4A/FLAC, YouTube transcripts from URLs, and meeting-minutes generation. Whisper-grade accuracy with on-device options; recordings stay yours.",
   Extension:
-    "Browser extension generator tools — create screen recorder extensions and other browser-level utilities. All processing happens locally in your browser with no server uploads.",
+    "Browser extension generator — scaffold screen-recorder extensions and other browser-level utilities from templates. All processing happens locally in your browser.",
   "Growth & Marketing":
-    "Growth and marketing metrics tools — ARR, MRR, LTV, CAC, churn, runway, CPM, ROAS, NPS, A/B testing, and SaaS analytics dashboards. All calculations run in your browser with nothing uploaded.",
+    "SaaS metrics calculators — MRR with net-new breakout, ARR, LTV, CAC, churn, runway, CPM, ROAS, and NPS. Worked examples included (e.g., 120 customers × $49 = $5,880 MRR). All math runs in your browser.",
   Productivity:
-    "Productivity tools — pomodoro timers, to-do lists, and focus management utilities to help you get things done. All processing happens locally in your browser.",
+    "Productivity tools — Pomodoro with void-on-interrupt discipline, to-do lists, countdowns, and world clock. Session counts persist locally; no account, no uploads.",
 };
 
