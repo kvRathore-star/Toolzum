@@ -24,9 +24,10 @@ describe('RandomPortGenerator', () => {
 
   it('renders range checkboxes', () => {
     render(<RandomPortGenerator />);
-    expect(screen.getByText(/Well-Known/)).toBeInTheDocument();
-    expect(screen.getByText(/Registered/)).toBeInTheDocument();
-    expect(screen.getByText(/Dynamic/)).toBeInTheDocument();
+    expect(screen.getAllByRole('checkbox')).toHaveLength(3);
+    expect(screen.getByText('Well-Known (0-1023)')).toBeInTheDocument();
+    expect(screen.getByText('Registered (1024-49151)')).toBeInTheDocument();
+    expect(screen.getByText('Dynamic (49152-65535)')).toBeInTheDocument();
   });
 
   it('generates ports on click', () => {

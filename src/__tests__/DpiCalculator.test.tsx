@@ -9,7 +9,7 @@ vi.mock('react-hot-toast', () => ({
 describe('DpiCalculator', () => {
   it('renders with default values', () => {
     render(<DpiCalculator />);
-    expect(screen.getByDisplayValue('1920')).toBeDefined();
+    expect(screen.getByDisplayValue('2560')).toBeDefined();
     expect(screen.getByDisplayValue('13.3')).toBeDefined();
   });
 
@@ -21,13 +21,13 @@ describe('DpiCalculator', () => {
   it('updates the result when inputs change', () => {
     render(<DpiCalculator />);
     const before = document.body.textContent;
-    fireEvent.change(screen.getByDisplayValue('1920'), { target: { value: '3840' } });
+    fireEvent.change(screen.getByDisplayValue('2560'), { target: { value: '3840' } });
     expect(document.body.textContent).not.toBe(before);
   });
 
   it('never renders NaN with empty inputs (guard pattern)', () => {
     render(<DpiCalculator />);
-    fireEvent.change(screen.getByDisplayValue('1920'), { target: { value: '' } });
+    fireEvent.change(screen.getByDisplayValue('2560'), { target: { value: '' } });
     expect(document.body.textContent).not.toMatch(/NaN/);
   });
 });

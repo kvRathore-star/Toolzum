@@ -64,7 +64,7 @@ export default function RandomPortGenerator() {
                 if (checked) setPortRanges(prev => prev.filter(r => r.min !== range.min));
                 else setPortRanges(prev => [...prev, range]);
               }} />
-              {label} ({range.min}-{range.max})
+              {label}
             </label>
           );
         })}

@@ -9,7 +9,7 @@ vi.mock('react-hot-toast', () => ({
 describe('PpiCalculator', () => {
   it('renders with default values', () => {
     render(<PpiCalculator />);
-    expect(screen.getByDisplayValue('2200')).toBeDefined();
+    expect(screen.getByDisplayValue('1179')).toBeDefined();
     expect(screen.getByDisplayValue('6.1')).toBeDefined();
   });
 
@@ -21,7 +21,7 @@ describe('PpiCalculator', () => {
   it('updates the result when inputs change', () => {
     render(<PpiCalculator />);
     const before = document.body.textContent;
-    fireEvent.change(screen.getByDisplayValue('2200'), { target: { value: '3840' } });
+    fireEvent.change(screen.getByDisplayValue('1179'), { target: { value: '3840' } });
     expect(document.body.textContent).not.toBe(before);
   });
 
