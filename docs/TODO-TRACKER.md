@@ -60,7 +60,12 @@ Last updated: 2026-09-15
 
 ## Prevention (ongoing)
 - [ ] 25. Add lint check: new tools without `faqs` field in registry trigger a warning. Prevents future818-tool backlog. Bake into the tool-addition checklist.
-- [ ] 26. Add quality gate script: detect generic FAQ text, duplicate FAQ hashes, thin components (<40 lines), one-way converters missing bidirectional UI, identical description/seoDescription. Run as part of content integrity test suite before every commit.
+- [x] 26. Quality gate remainder — BUILT Sep 15 (`scripts/faq-gate.ts`, wired into lint-staged for chunks + templates):
+  - Hash-dupe = 5-gram Jaccard ≥ 0.30 (measured: customs 0.00–0.02, fallback pairs 0.45–0.57; word-count alone can't separate — fallback blocks run 132–145 words vs customs 150–176, so thin ≡ template-similar).
+  - Thin metric folded into the same check (no separate word-count gate — data showed it would pass boilerplate).
+  - One-way = X-to-Y with both sides in FORMAT_INFO, no reverse slug, no swap UI (bulk + actions excluded; mp4/mov/webm-to-mp3 extraction accepted). 6 genuine gaps remain (gif-to-mp4, eml-to-pdf, html-to-jsx, svg-to-css, pdf-to-png, csv-to-sql) → product backlog, not blockers.
+  - Fail-closed throughout: empty parse/templates exit 2; touched-scope exit 1 on fail, `--full` validates bulk output.
+  - Remainder: thin-COMPONENT check (<40 lines of code — distinct from thin-FAQ, folded above) still open; identical desc/seoDesc already covered by content-integrity test.
 - [ ] 27. Add category-slug validation: maintain a known-good slug→category mapping, flag mismatches at build time. Catches miscategorized tools before they ship.
 - [ ] 28. **FAQ depth audit for Formula-type CalculatorShell tools** — ~120 tools use CalculatorShell with Formula classification. The FAQ rollout (item 11/13/23) only solves thin-content if FAQs are genuinely deep (worked examples, derivation steps, edge cases), not generic templates. Before FAQ rollout: audit all Formula tools' registry `faqs` for: step-by-step derivation, worked numeric example, common mistake warnings, formula variant explanations. Flag tools with <4 FAQs or missing worked examples for manual deepening.
 
