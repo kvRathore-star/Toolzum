@@ -28,8 +28,10 @@ describe("PWA offline + install contract (#10)", () => {
 
   it("service worker serves the fallback for navigations (never for APIs)", () => {
     const sw = fs.readFileSync(path.join(ROOT, "scripts/gen-sw.js"), "utf8");
-    expect(sw.includes("navigateFallback")).toBe(true);
-    expect(sw.includes("offline.html")).toBe(true);
+    // Canonical /offline: /offline.html 308-redirects on Pages pretty URLs
+    // and a redirected precache-put throws — the fallback must be the 200 URL.
+    expect(sw.includes("navigateFallback: '/offline'")).toBe(true);
+    expect(sw.includes("additionalManifestEntries")).toBe(true);
     expect(sw.includes("navigateFallbackDenylist")).toBe(true);
     expect(sw.includes("/api/")).toBe(true);
   });

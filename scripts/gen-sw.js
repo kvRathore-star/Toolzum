@@ -11,6 +11,8 @@
  * Registration: src/components/ServiceWorkerRegister.tsx (prod only).
  */
 const { generateSW } = require('workbox-build');
+const { readFileSync, existsSync } = require('node:fs');
+const { createHash } = require('node:crypto');
 
 const DAY = 86400;
 
@@ -117,6 +119,13 @@ const runtimeCaching = [
 ];
 
 async function main() {
+  // #10 recheck: the canonical URL is /offline (/offline.html 308s to it
+  // on Pages pretty URLs, and a redirected precache-put throws). Hash the
+  // file so the fallback entry invalidates on change.
+  const offlineHtml = 'public/offline.html';
+  const offlineRevision = existsSync(offlineHtml)
+    ? createHash('sha256').update(readFileSync(offlineHtml)).digest('hex').slice(0, 16)
+    : null;
   const { count, size, warnings } = await generateSW({
     globDirectory: 'out/',
     globPatterns: [
@@ -135,8 +144,11 @@ async function main() {
     // #10: uncached navigations fall back to the offline page instead of
     // the browser error screen. API calls are excluded (JSON must 404/503
     // honestly, never serve HTML to a fetch()).
-    navigateFallback: '/offline.html',
+    navigateFallback: '/offline',
     navigateFallbackDenylist: [/^\/api\//],
+    ...(offlineRevision
+      ? { additionalManifestEntries: [{ url: '/offline', revision: offlineRevision }] }
+      : {}),
     swDest: 'out/sw.js',
     skipWaiting: true,
     clientsClaim: true,
