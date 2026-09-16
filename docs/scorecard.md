@@ -278,3 +278,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Analytics | 72 | **88** (xlsx row #34: 72 → **88**) | `4e5aaf2a` — all three Phase 1 funnels live in `/admin` analytics: signup→first-tool (activation, 7d activation, median time-to-first), quota-wall→Pro (signed conversion + honest anon-wall unlinkability note), credit-wall→Pro. Fixed dead Top-tools charts en route (queried nonexistent `user_tool_usage.createdAt`; column is `usedAt` — "No data" forever). Empty-table defaults (lazy `ai_credit_event`); endpoint tests 3/3; eslint 0 errors; full `tsc` clean. Held below 90 for: real-traffic validation of rates, 7d range toggle for funnels (30d fixed). |
+
+## Update (2026-09-16, data #27: 68 → 88, composite 76.3 → 76.8)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Data mgmt | 68 | **88** (xlsx row #27: 68 → **88**) | `2c84e9c4` — lazy-CREATE gap closed: 0015/0016 version `ai_credit_event` + `user_flags` (were runtime-only); `data-migrations.test.ts` 3/3 in CI (migration coverage, runtime-vs-migration column parity, purge-target coverage — caught 0012's missing IF NOT EXISTS on first run); CI `migrate` job applies D1 migrations on main push (Pages never did; secret-gated, idempotent); `docs/DATA-MIGRATIONS.md` (source-of-truth rule, apply procedure, locked timestamp ledger, FK-fiction note, backup export + drill table). Held below 90 for: first restore drill (the #38 exit criterion), runtime-fallback removal after the apply pipeline proves itself in prod. |
