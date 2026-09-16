@@ -316,6 +316,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Onboarding | 70 | **86** (xlsx row #32: 70 → **86**) | `a52a0963` — audit first: 57 dropzone hits sampled as false positives (labeled zones with format hints), dashboards/favorites/directory already have icon+CTA empties. Real gaps fixed: tour pinned top-left on mobile (hidden `header nav` query-matches with zero rect → zero-rect guard centers it); search empty echoes query + Browse-all escape; dashboard empties gain Browse CTAs. Anchor-rot gate + tour tests 7/7. #46 parked (no store apps). Held below 92 for: human-eyes pass (device-lab block) + richer tour. |
 
+## Update (2026-09-16, mobile/PWA #10: 78 → 86, composite 78.8 → 79.0)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Mobile/PWA | 78 | **86** (xlsx row #10: 78 → **86**) | `739a3879` — offline hardening beyond shell caching: standalone `/offline.html` (zero Next.js dependency, safe-area aware) + SW `navigateFallback` with API denylist (generated `sw.js` verified: fallback + precache + denylist); manifest `id`; PWA gate 3/3 (fallback contract, SW wiring, shortcuts resolve to real tools). `docs/DEVICE-AUDIT.md`: owner-run matrix covering #10/#45/#47 (+#31 devices). Held below 92 for: the device audit itself (real hardware required). |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
