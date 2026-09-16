@@ -43,9 +43,8 @@ export function logAbuse(
 /**
  * AI bot rule: N calls from one IP in the last hour across ANY accounts
  * (per-account credits + per-user rate limits already bound individuals;
- * this catches multi-account farms draining provider budget).
- * Callers must record the tick via recordAiIpHit() on the allow path...
- * Simpler: this helper both checks AND records (one row per AI call).
+ * this catches multi-account farms draining provider budget). Checks and
+ * records the tick in one call (one row per AI call).
  */
 export async function checkAiIpVelocity(
   DB: D1Database,
