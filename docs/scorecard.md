@@ -328,6 +328,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Offline/degraded | 65 | **84** (xlsx row #45: 65 → **84**) | `4eb7729e` — offline banner promoted to single global instance (was tool-pages-only, doubling where both mounted); `toUserError()` maps offline network failures to explicit copy while server errors pass verbatim; wired into all AI spend paths with manual-retry-only rule (auto-retry would burn credits). Tests caught 2 helper bugs pre-commit (`JSON.stringify(undefined)` → undefined, `"null"` user-facing). Held below 88 for: throttled-network live verification (device-lab rig), quota-wall-before-JS chunks. |
 
+## Update (2026-09-16, energy #47: 65 → 82, composite 79.2 → 79.4)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Energy | 65 | **82** (xlsx row #47: 65 → **82**) | `02f7c7a5` — audit found the last two unwarned heavy engines (MediaPipe BG changer, batch BlazeFace — worst case) while FFmpeg/OCR/BlurFace were covered: matching heads-ups, no new patterns. Energy gate pins all six + the never-block detector rule. `docs/ENERGY.md`: engine-cost ledger, efficient-defaults inventory, lab protocol + log. Deliberately no device telemetry (would violate the fingerprinting stance). Held below 85 for: lab battery measurements. |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
