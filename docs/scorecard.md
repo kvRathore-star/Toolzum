@@ -375,3 +375,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Build/perf | 72 | **78** (xlsx row #15: 72 → **78**) | Measured, not assumed: gen steps ~7s parallel, OG incremental ~11s, compile 5.5min + static-gen 11min both already at hardware parallelism (workers scale with CPUs; oversubscription can't help CPU-bound rendering). `docs/BUILD.md`: phase ledger, cache inventory, hygiene rule (gen scripts must not dirty the tree — caught og/slugs churn live). Held below 86 for: faster runners / fewer pages — both hardware-or-scope, neither free. |
+
+## Update (2026-09-16, load #42: 40 → 65, composite 81.0 → 81.3)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Load testing | 40 | **65** (xlsx row #42: 40 → **65**) | `e30e6f8c` — rig armed, deliberately unfired: artillery warmup/spike/hold over static pages + write-free edge probe (no D1 writes, no authed AI); production apex refused without explicit confirm; report checker with budgets wired into `npm run test:load`; manual-dispatch CI with preview default + artifact; guard tests 5/5; fire trigger is 10× baseline week (`docs/LOAD.md`). Local proof impossible here (no serve sockets, no browsers); CI ubuntu is the venue. Held for: first fired run with numbers. |
