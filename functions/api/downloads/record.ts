@@ -1,4 +1,5 @@
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import { maybePurgeOldRows } from "../_retention";
 import { createAuth } from "../../../src/lib/auth";
 import { resolvePlan, downloadLimit } from "../../../src/lib/planTiers";
 
@@ -23,6 +24,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const rl = await checkRateLimit(DB, "dl-record", ip, 10);
     if (rl.limited) return rl.response;
+
+    // #26: sampled 90-day retention enforcement (no cron on Pages).
+    await maybePurgeOldRows(DB);
 
     // Parse optional body fields (toolSlug, category, isPro) sent by the client
     let toolSlug: string | null = null;

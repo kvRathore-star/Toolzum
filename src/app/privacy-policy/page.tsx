@@ -196,7 +196,7 @@ export default function PrivacyPolicyPage() {
                   <li><strong>Grievance Officer:</strong> Reachable at support@toolzum.com</li>
                   <li><strong>Data we collect:</strong> Usage analytics (anonymised), account email (if logged in).</li>
                   <li><strong>Your rights:</strong> Right to access, correct, and erase your personal data.</li>
-                  <li><strong>Retention:</strong> Analytics data retained for 90 days. Account data retained until deletion.</li>
+                  <li><strong>Retention:</strong> Analytics data retained for 90 days, then automatically purged. Account data retained until deletion.</li>
                   <li><strong>Contact:</strong> For data requests, email support@toolzum.com within 72 hours response SLA.</li>
                 </ul>
               </div>

@@ -8,6 +8,8 @@
  * effort insert.
  */
 
+import { maybePurgeOldRows } from "../_retention";
+
 export type AiCreditTask = "generate" | "transcribe" | "image";
 export type AiCreditOutcome = "allowed" | "blocked_exhausted";
 
@@ -50,6 +52,8 @@ export async function logAiCreditEvent(
     )
       .bind(event.userId, event.task, event.outcome, event.balance, event.allowance)
       .run();
+    // #26: sampled 90-day retention enforcement (no cron on Pages).
+    await maybePurgeOldRows(DB);
   } catch {
     // Analytics must never break the request path.
   }

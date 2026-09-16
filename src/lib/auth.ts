@@ -4,6 +4,7 @@ import { captcha } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/d1";
 import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
+import { deleteUserAppData } from "@/lib/userErasure";
 
 interface AuthEnv {
   DB: D1Database;
@@ -68,6 +69,19 @@ export function createAuth(env: AuthEnv) {
       freshAge: 60 * 60 * 24, // 1 day: sensitive-action freshness
     },
     databaseHooks: {
+      user: {
+        delete: {
+          // #26 erasure cascade: D1 ignores FK cascades and better-auth
+          // only removes rows it owns — without this, favorites, usage
+          // history, payments, and AI-credit events orphan on self-delete.
+          // Never throws; a failed cleanup must not break deletion.
+          after: async (user) => {
+            const userId = (user as { id?: string } | null)?.id;
+            if (!userId) return;
+            await deleteUserAppData(env.DB, userId);
+          },
+        },
+      },
       session: {
         create: {
           // Stamp last login on every fresh session (all sign-in paths).

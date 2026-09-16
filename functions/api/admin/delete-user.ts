@@ -42,6 +42,10 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
   await DB.prepare("DELETE FROM payment WHERE userId = ?").bind(userId).run();
   await DB.prepare("DELETE FROM user_favorite WHERE userId = ?").bind(userId).run();
   await DB.prepare("DELETE FROM user_tool_usage WHERE userId = ?").bind(userId).run();
+  // #26 erasure completeness: AI-credit events are userId-keyed app data;
+  // verification rows are keyed by email (password-reset tokens).
+  await DB.prepare("DELETE FROM ai_credit_event WHERE userId = ?").bind(userId).run().catch(() => {});
+  await DB.prepare("DELETE FROM verification WHERE identifier = ?").bind(target.email).run().catch(() => {});
   await DB.prepare('DELETE FROM "user" WHERE id = ?').bind(userId).run();
 
   await DB.prepare(

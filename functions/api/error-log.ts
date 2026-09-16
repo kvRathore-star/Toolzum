@@ -1,5 +1,6 @@
 import { json } from "../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
+import { maybePurgeOldRows } from "./_retention";
 import type { D1Database } from "@cloudflare/workers-types";
 
 interface Env {
@@ -63,6 +64,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       ).bind(id, err.message.slice(0, 2000), (err.stack || "").slice(0, 3000), err.source, err.toolSlug || null, null, userAgent, err.path || null, now, now, now).run();
     }
   }
+
+  // #26: sampled 90-day retention enforcement (no cron on Pages).
+  await maybePurgeOldRows(DB);
 
   return json({ ok: true });
 }

@@ -3,6 +3,7 @@ interface Env {
 }
 
 import { checkRateLimit, recordRateLimit } from './rate-limit';
+import { maybePurgeOldRows } from './_retention';
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
@@ -23,6 +24,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     await DB.prepare(
       "INSERT INTO analytics_event (path, fingerprint, clientType, viewport, createdAt) VALUES (?, ?, ?, ?, datetime('now'))"
     ).bind(path.slice(0, 500), fingerprint || 'web', clientType || 'Web Browser', viewport || '').run();
+
+    // #26: sampled 90-day retention enforcement (no cron on Pages).
+    await maybePurgeOldRows(DB);
 
     return new Response(JSON.stringify({ ok: true }), {
       headers: { 'Content-Type': 'application/json' },
