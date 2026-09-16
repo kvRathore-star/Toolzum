@@ -79,5 +79,6 @@ Requires literal 100s in craft areas (zero warnings, minute-long builds, proven-
 
 - Newsletter (#33) — parked per owner Sep 15 2026; no backend planned, dead signup removed. Only transactional quota/credit nudges if ever.
 - Native store apps (#46) — parked per owner Sep 16 2026; no Play Store / iOS app planned (PWA + Capacitor shell only). Platform row stays 55.
+- Full i18n/l10n (#30/#48) — parked per owner Sep 16 2026. Rationale: the Indian audience operates in English for productivity domains (GST/UPI/banking/API terminology is English-official); Hindi chrome would double content costs without unlocking a blocked audience. Hindi *content* (transcription output, voice) already exists where it matters. English-only is deliberate. Revisit only on geo/behavior evidence of a bouncing Hindi-preferring segment. Rows stay 35/30.
 - A/B infra at scale, team workspaces beyond lite — revisit past 96.
 - English-only assumption lifts in Phase 3 deliberately, not before.
