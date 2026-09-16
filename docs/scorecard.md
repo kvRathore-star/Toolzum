@@ -284,3 +284,10 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Data mgmt | 68 | **88** (xlsx row #27: 68 → **88**) | `2c84e9c4` — lazy-CREATE gap closed: 0015/0016 version `ai_credit_event` + `user_flags` (were runtime-only); `data-migrations.test.ts` 3/3 in CI (migration coverage, runtime-vs-migration column parity, purge-target coverage — caught 0012's missing IF NOT EXISTS on first run); CI `migrate` job applies D1 migrations on main push (Pages never did; secret-gated, idempotent); `docs/DATA-MIGRATIONS.md` (source-of-truth rule, apply procedure, locked timestamp ledger, FK-fiction note, backup export + drill table). Held below 90 for: first restore drill (the #38 exit criterion), runtime-fallback removal after the apply pipeline proves itself in prod. |
+
+## Update (2026-09-16, flags #41/49: 45/50 → 88, composite 76.8 → 77.8)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Feature flagging | 45 | **88** (xlsx row #41) | `7141989a` — D1-backed service, no vendor: 0017 + `_flags` helper (fail-open reads, seeded defaults), public `GET /api/flags`, admin GET+POST with audit rows, `useFlag` hook, `/admin/flags` UI, data-migrations gate covers 0017. |
+| Kill-switch | 50 | **88** (xlsx row #49) | Same commit — all 3 AI endpoints 503 pre-spend when `ai_generation` flips (kill confirm in UI, maintenance banner client-side); `GEMINI_ENGINE_LIVE` const migrated to flippable `ai_image_gemini` (default off, unchanged behavior). 32/32 AI+flags tests green; eslint 0 errors; full `tsc` clean. Held below 92 for: full rollback pipeline (deferred per plan — flags first), at-scale propagation proof, load-tested flag reads. |
