@@ -322,6 +322,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Mobile/PWA | 78 | **86** (xlsx row #10: 78 → **86**) | `739a3879` — offline hardening beyond shell caching: standalone `/offline.html` (zero Next.js dependency, safe-area aware) + SW `navigateFallback` with API denylist (generated `sw.js` verified: fallback + precache + denylist); manifest `id`; PWA gate 3/3 (fallback contract, SW wiring, shortcuts resolve to real tools). `docs/DEVICE-AUDIT.md`: owner-run matrix covering #10/#45/#47 (+#31 devices). Held below 92 for: the device audit itself (real hardware required). |
 
+## Update (2026-09-16, degraded #45: 65 → 84, composite 79.0 → 79.2)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Offline/degraded | 65 | **84** (xlsx row #45: 65 → **84**) | `4eb7729e` — offline banner promoted to single global instance (was tool-pages-only, doubling where both mounted); `toUserError()` maps offline network failures to explicit copy while server errors pass verbatim; wired into all AI spend paths with manual-retry-only rule (auto-retry would burn credits). Tests caught 2 helper bugs pre-commit (`JSON.stringify(undefined)` → undefined, `"null"` user-facing). Held below 88 for: throttled-network live verification (device-lab rig), quota-wall-before-JS chunks. |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
