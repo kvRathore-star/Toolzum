@@ -15,6 +15,8 @@
  *   await recordRateLimit(DB, 'analytics', ip);   // fire-and-forget
  */
 
+import { maybePurgeOldRows } from "./_retention";
+
 interface RateLimitResult {
   limited: boolean;
   response?: Response;
@@ -77,4 +79,7 @@ export function recordRateLimit(
     .bind(path, fingerprint)
     .run()
     .catch(() => {});
+  // #26: retention rides along (sampled low — this runs per request).
+  // Never rejects; Workers may cut it off, which is fine (best effort).
+  void maybePurgeOldRows(DB, 0.005);
 }

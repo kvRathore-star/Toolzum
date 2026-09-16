@@ -19,6 +19,9 @@ export async function deleteUserAppData(
       DB.prepare("DELETE FROM user_favorite WHERE userId = ?").bind(userId),
       DB.prepare("DELETE FROM user_tool_usage WHERE userId = ?").bind(userId),
       DB.prepare("DELETE FROM payment WHERE userId = ?").bind(userId),
+      // Signed-in download history (fingerprint-keyed analytics stay —
+      // they can't identify anyone once the userId link is gone).
+      DB.prepare("DELETE FROM download_event WHERE userId = ?").bind(userId),
       // Lazily created (see functions/api/ai/credit-events.ts) — ensure
       // first so one missing table can't abort the whole batch.
       DB.prepare(

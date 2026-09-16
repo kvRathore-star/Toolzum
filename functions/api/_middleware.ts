@@ -1,3 +1,5 @@
+import { maybePurgeOldRows } from "./_retention";
+
 const ALLOWED = ['toolzum.com'];
 
 function isAllowed(header: string | null): boolean {
@@ -64,6 +66,8 @@ export async function onRequest(context: { request: Request; next: () => Promise
   }
 
   if (context.env.DB) {
+    // #26: abuse rows land in analytics_event — purge rides along (sampled).
+    await maybePurgeOldRows(context.env.DB, 0.005).catch(() => {});
     const banned = await isBanned(request, context.env.DB);
     if (banned) {
       logAbuse(context.env.DB, request.url, 'banned-user', ip);
