@@ -1,4 +1,5 @@
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import { checkAnonDlVelocity } from "../_abuse";
 import { maybePurgeOldRows } from "../_retention";
 import { createAuth } from "../../../src/lib/auth";
 import { resolvePlan, downloadLimit } from "../../../src/lib/planTiers";
@@ -60,6 +61,14 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         .bind(userId)
         .first<{ plan: string }>();
       plan = resolvePlan(true, row?.plan ?? null);
+    }
+
+    // #37 rotation backstop: the anon fingerprint quota is self-reported
+    // and rotatable — cap total attempts per IP per day (signed-in users
+    // are identity-bound already, so they skip this).
+    if (!userId) {
+      const vel = await checkAnonDlVelocity(DB, ip, "/downloads/record");
+      if (vel) return vel;
     }
 
     const limit = getUserLimit(plan, isProTool);

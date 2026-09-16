@@ -6,6 +6,7 @@ interface Env {
 const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { checkAiIpVelocity } from '../_abuse';
 import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
@@ -57,6 +58,11 @@ function toBase64(bytes: Uint8Array): string {
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
+
+    // #37 bot rule first (cheapest: no session lookup for farms).
+    const ip = context.request.headers.get('cf-connecting-ip') || 'unknown';
+    const vel = await checkAiIpVelocity(DB, ip, '/ai/transcribe');
+    if (vel) return vel;
 
     const userCtx = await getUserContext(context.request, DB);
     if (!userCtx) {

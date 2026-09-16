@@ -280,4 +280,37 @@ describe('POST /api/downloads/record contract', () => {
     });
     expect(await res.json()).toEqual({ allowed: true, remaining: 2 });
   });
+
+  it('rotation farm: anon 429s at the daily IP attempt budget', async () => {
+    const { db } = mockDb();
+    const farmDb = (() => {
+      const base = db as unknown as {
+        prepare: (sql: string) => {
+          bind: (...args: unknown[]) => {
+            first: () => Promise<{ c: number } | null>;
+            run: () => Promise<unknown>;
+            all: () => Promise<{ results: unknown[] }>;
+          };
+        };
+      };
+      const prepare = vi.fn((sql: string) => {
+        if (sql.includes('-1 day')) {
+          return {
+            bind: (..._args: unknown[]) => ({
+              first: async () => ({ c: 500 }),
+              run: async () => ({}),
+              all: async () => ({ results: [] }),
+            }),
+          };
+        }
+        return base.prepare(sql);
+      });
+      return { prepare } as unknown as D1Database;
+    })();
+    const res = await dlRecord({
+      request: recordReq({ toolSlug: 'pdf-compressor', category: 'PDF' }, { fingerprint: 'fp-fresh-every-time' }),
+      env: { DB: farmDb } as never,
+    });
+    expect(res.status).toBe(429);
+  });
 });

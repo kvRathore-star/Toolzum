@@ -4,6 +4,7 @@ interface Env {
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { checkAiIpVelocity } from '../_abuse';
 import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
@@ -48,6 +49,11 @@ async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: Effect
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
     const { DB } = context.env;
+
+    // #37 bot rule first (cheapest: no session lookup for farms).
+    const ip = context.request.headers.get('cf-connecting-ip') || 'unknown';
+    const vel = await checkAiIpVelocity(DB, ip, '/ai/generate-image');
+    if (vel) return vel;
 
     const userCtx = await getUserContext(context.request, DB);
     if (!userCtx) {

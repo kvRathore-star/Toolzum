@@ -94,6 +94,32 @@ describe('POST /api/ai/generate contract', () => {
     expect(res.status).toBe(429);
   });
 
+  it('429s farm-scale IP velocity without touching Gemini', async () => {
+    const farmDb = (() => {
+      const base = mockDb();
+      const prepare = vi.fn((sql: string) => {
+        if (sql.includes('-1 hour')) {
+          return {
+            bind: vi.fn(() => ({
+              first: vi.fn(async () => ({ c: 301 })),
+            })),
+          };
+        }
+        return (base as unknown as { prepare: typeof prepare }).prepare(sql);
+      });
+      return { prepare } as unknown as D1Database;
+    })();
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: farmDb, GEMINI_API_KEY: 'k' } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ messages: [{ role: 'user', content: 'hi' }] }),
+      env,
+    });
+    expect(res.status).toBe(429);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
   it('503s without spending credits when the ai_generation kill-switch is off', async () => {
     const killedDb = (() => {
       const base = mockDb();

@@ -1,5 +1,7 @@
 import { maybePurgeOldRows } from "./_retention";
 
+import { logAbuse } from "./_abuse";
+
 const ALLOWED = ['toolzum.com'];
 
 function isAllowed(header: string | null): boolean {
@@ -21,15 +23,6 @@ async function isBanned(request: Request, DB: D1Database): Promise<boolean> {
     "SELECT u.status FROM session s JOIN \"user\" u ON s.userId = u.id WHERE s.token = ? AND s.expiresAt > unixepoch()"
   ).bind(token).first<{ status: string }>();
   return row?.status === 'banned';
-}
-
-function logAbuse(DB: D1Database, path: string, reason: string, ip: string): void {
-  const fingerprint = `abuse:${reason}:${ip}`;
-  DB.prepare(
-    "INSERT INTO analytics_event (id, path, fingerprint, clientType, createdAt) VALUES (?, ?, 'abuse', unixepoch())"
-  ).bind(crypto.randomUUID(), `${path} [${reason}]`)
-    .run()
-    .catch(() => {});
 }
 
 export async function onRequest(context: { request: Request; next: () => Promise<Response>; env: { DB?: D1Database } }) {
