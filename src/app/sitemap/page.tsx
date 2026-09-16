@@ -17,8 +17,9 @@ export const metadata: Metadata = {
 
 const CATEGORY_ORDER = [
   "Image", "PDF", "Video", "Audio", "Developer", "Text", "AI",
-  "Calculator", "Financial", "Color", "Unit", "Web", "Security",
-  "Network", "Data", "File", "Social", "Privacy", "Design",
+  "Calculator", "Finance", "Converter", "Design", "Branding",
+  "Extension", "Growth & Marketing", "Health", "Privacy",
+  "Productivity", "SEO", "Transcription", "Utility", "indian-utilities",
 ];
 
 const grouped: Record<string, { slug: string; name: string; category: string }[]> = {};

@@ -79,7 +79,7 @@ export function Footer() {
             <ul className="flex flex-col gap-3">
               <li><Link href="/about" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">About</Link></li>
               <li><Link href="/blog" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Blog</Link></li>
-              <li><Link href="/careers" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors flex items-center gap-2">Careers <span className="text-[10px] font-semibold bg-[var(--accent-ink)]/10 text-[var(--accent)] px-1.5 py-0.5 rounded">Hiring</span></Link></li>
+              <li><Link href="/careers" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Careers</Link></li>
               <li><Link href="/roadmap" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Roadmap</Link></li>
               <li><Link href="/contact" className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">Contact</Link></li>
             </ul>
