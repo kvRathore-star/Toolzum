@@ -114,6 +114,32 @@ describe('GET /api/admin/analytics funnels (#34)', () => {
       creditWallToPro: { walledUsers: 0, convertedPro: 0 },
     });
   });
+
+  it('coerces NULL sums to 0 (SQLite SUM over zero rows)', async () => {
+    const prepare = vi.fn(() => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(async () => [
+          { signups: 0, activated: null, activated7d: null, avgSecsToFirst: null },
+        ]),
+        first: vi.fn(async () => ({ count: 0 })),
+        run: vi.fn(async () => ({})),
+      })),
+    }));
+    const db = { prepare } as unknown as D1Database;
+    const res = await analytics({
+      request: new Request('https://toolzum.com/api/admin/analytics'),
+      env: ENV(db),
+    });
+    const body = (await res.json()) as {
+      funnels: { signupToFirstTool: Record<string, unknown> };
+    };
+    expect(body.funnels.signupToFirstTool).toEqual({
+      signups: 0,
+      activated: 0,
+      activated7d: 0,
+      avgSecsToFirst: null,
+    });
+  });
 });
 
 describe('GET /api/admin/analytics contract', () => {

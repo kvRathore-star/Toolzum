@@ -174,8 +174,8 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     }>(
       DB,
       `SELECT COUNT(*) as signups,
-              SUM(CASE WHEN f.firstUse IS NOT NULL THEN 1 ELSE 0 END) as activated,
-              SUM(CASE WHEN f.firstUse IS NOT NULL AND f.firstUse <= s.signupSec + 604800 THEN 1 ELSE 0 END) as activated7d,
+              COALESCE(SUM(CASE WHEN f.firstUse IS NOT NULL THEN 1 ELSE 0 END), 0) as activated,
+              COALESCE(SUM(CASE WHEN f.firstUse IS NOT NULL AND f.firstUse <= s.signupSec + 604800 THEN 1 ELSE 0 END), 0) as activated7d,
               AVG(CASE WHEN f.firstUse IS NOT NULL AND f.firstUse >= s.signupSec THEN f.firstUse - s.signupSec END) as avgSecsToFirst
        FROM (SELECT id,
                     CAST(CASE WHEN createdAt > 100000000000 THEN createdAt / 1000 ELSE createdAt END AS INTEGER) as signupSec
@@ -192,7 +192,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     safeQuery<{ blockedUsers: number; convertedPro: number }>(
       DB,
       `SELECT COUNT(*) as blockedUsers,
-              SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END) as convertedPro
+              COALESCE(SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END), 0) as convertedPro
        FROM (SELECT DISTINCT userId FROM download_event
              WHERE userId IS NOT NULL AND outcome LIKE 'blocked%' AND createdAt > ?) d
        LEFT JOIN "user" u ON u.id = d.userId`,
@@ -213,7 +213,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     safeQuery<{ walledUsers: number; convertedPro: number }>(
       DB,
       `SELECT COUNT(*) as walledUsers,
-              SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END) as convertedPro
+              COALESCE(SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END), 0) as convertedPro
        FROM (SELECT DISTINCT userId FROM ai_credit_event
              WHERE outcome = 'blocked_exhausted' AND createdAt > ?) w
        LEFT JOIN "user" u ON u.id = w.userId`,
@@ -250,7 +250,10 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   ]);
 
   // Single-row funnel aggregates: default on empty (notably the lazy
-  // ai_credit_event table, missing before first AI use).
+  // ai_credit_event table, missing before first AI use) and on NULL sums
+  // (SQLite SUM over zero rows is NULL, not 0 — that null.toLocaleString
+  // would crash the admin page).
+  const n = (v: unknown) => (typeof v === "number" ? v : 0);
   const f1 = funnelSignup[0] ?? { signups: 0, activated: 0, activated7d: 0, avgSecsToFirst: null };
   const f2 = funnelQuota[0] ?? { blockedUsers: 0, convertedPro: 0 };
   const f2b = funnelQuotaAnon[0] ?? { anonBlocks: 0, anonDevices: 0 };
@@ -272,20 +275,20 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     pageViewsByDay,
     funnels: {
       signupToFirstTool: {
-        signups: f1.signups,
-        activated: f1.activated,
-        activated7d: f1.activated7d,
-        avgSecsToFirst: f1.avgSecsToFirst,
+        signups: n(f1.signups),
+        activated: n(f1.activated),
+        activated7d: n(f1.activated7d),
+        avgSecsToFirst: typeof f1.avgSecsToFirst === "number" ? f1.avgSecsToFirst : null,
       },
       quotaWallToPro: {
-        blockedUsers: f2.blockedUsers,
-        convertedPro: f2.convertedPro,
-        anonBlocks: f2b.anonBlocks,
-        anonDevices: f2b.anonDevices,
+        blockedUsers: n(f2.blockedUsers),
+        convertedPro: n(f2.convertedPro),
+        anonBlocks: n(f2b.anonBlocks),
+        anonDevices: n(f2b.anonDevices),
       },
       creditWallToPro: {
-        walledUsers: f3.walledUsers,
-        convertedPro: f3.convertedPro,
+        walledUsers: n(f3.walledUsers),
+        convertedPro: n(f3.convertedPro),
       },
     },
     totals: {
