@@ -351,3 +351,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Observability | 80 | **90** (xlsx row #21: 80 → **90**) | `4d2497c9` — data finally has alarms: threshold endpoint (token-authed, 503-loud unconfigured) fires error-burst ≥50/15min and quota-wall ≥40%-share/≥20/hr, 1h per-key cooldown (`alert_log`, 0019); 15-min scheduler workflow relays via **Cloudflare Email Service** (no SMTP procurement, no new vendor — email-vs-Discord decision Sep 16); `docs/ALERTS.md` (5-min owner setup, per-rule runbook, tuning log). Endpoint tests 7/7. Held below 93 for: owner setup completion (domain onboarding, token, recipient) + threshold tuning on prod noise. | |
+
+## Update (2026-09-16, depth #2: 76 → 80, composite 80.6 → 80.7)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Depth | 76 | **80** (xlsx row #2: 76 → **80**) | Recounted from source: **345/1,144 with 4+ FAQs** (prior note said 288 — stale), ~800 remaining via fallback. Spot-checked bulk 5 (mortgage/car-loan/discount): worked examples with real numbers, pairwise-distinct, privacy FAQ each — genuine depth, not filler. Five gated batches with similarity verification. Held below target for: the remaining ~800 (same gated path, ~60 batches at current pace). |
