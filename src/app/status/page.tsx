@@ -12,6 +12,9 @@ import {
   KeyRound
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import pkg from "../../../package.json";
+
+const APP_VERSION = pkg.version;
 
 interface SystemStatus {
   id: string;
@@ -241,6 +244,7 @@ export default function StatusPage() {
             <div>
               <h1 className="text-xl sm:text-2xl font-semibold text-white">{overallTitle}</h1>
               <p className="text-sm text-[var(--text-secondary)] mt-1">{overallSub}</p>
+              <p className="text-xs font-mono text-[var(--text-muted)] mt-1">v{APP_VERSION}</p>
             </div>
           </div>
 
