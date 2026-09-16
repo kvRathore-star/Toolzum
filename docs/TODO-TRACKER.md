@@ -82,8 +82,10 @@ SEO: Add internal linking between related tools (reduces thin content signals)
 
 Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–3 weeks after that, we compare exclusion buckets + indexed count. I'll pull on your word anytime — just say "gsc check".
 
- Wire up email service (Resend)
- Wire Resend email service for forgot-password/reset-password
+  Wire up email service (Resend)
+  Wire Resend email service for forgot-password/reset-password
+
+  PARKED Sep 16 2026 per owner (Cloudflare setup items 1–5 deferred: Email Sending onboarding, ALERT_TOKEN/ALERT_TO secrets, ALERT_TOKEN Pages env, post-deploy banner + flags verification). Item 6 (D1 restore drill per docs/DATA-MIGRATIONS.md) stays open as the #38 exit criterion.
 
   PARKED Sep 15 2026 per owner (no newsletter planned) — dead `ChangelogNewsletter` signup removed from changelog page; component deleted. Only transactional quota/credit nudges if ever.
 
