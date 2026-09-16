@@ -287,8 +287,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "mortgage-calculator",
     category: "Finance",
     description: 'Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Mortgage Calculator — Calculate monthly mortgage payments with amortization schedule. Enter loan amount, interest rate, and term to see total interest paid. ',
+    seoDescription: 'Free mortgage calculator — monthly payment, total interest, and amortization. Test rates and terms. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is the monthly payment calculated?", answer: "Standard amortization: M = P·r(1+r)^n/((1+r)^n−1). Example: $300,000 at 7% for 30 years (360 months, r=0.00583) → ≈$1,996/month, ≈$418,000 total interest — more interest than principal." },
+      { question: "15-year vs 30-year — what's the real difference?", answer: "On $300k at 7%: 30-year pays ≈$1,996/mo and $418k interest; 15-year pays ≈$2,697/mo but only ≈$185k interest. The 15-year costs $700/mo more and saves $233k — if cash flow allows." },
+      { question: "How much house can I afford?", answer: "The 28/36 rule: housing under 28% of gross monthly income, all debts under 36%. $8,000/mo income → ≈$2,240 housing budget → roughly a $335k loan at 7%/30yr before tax and insurance." },
+      { question: "Does extra principal really help?", answer: "Yes disproportionately early: one extra $2,000 payment in year 1 of the example loan saves ≈$7,000 interest and cuts ~4 months. Late-loan extra payments save far less." },
+      { question: "Is my loan data stored?", answer: "No. All calculations run locally in your browser. No amounts or rates leave your device." },
+    ],
 
   },
   {
@@ -330,8 +337,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "car-loan-calculator",
     category: "Finance",
     description: 'Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Car Loan Calculator — Calculate monthly car loan payments, total interest, and total cost. Enter loan amount, rate, and term for a complete auto financing picture. ',
+    seoDescription: 'Free car loan calculator — payment, total interest, and true cost with depreciation reality-check. ',
     dependencies: "None",
+    faqs: [
+      { question: "How much car can I afford?", answer: "The 20/4/10 rule: 20% down, max 4-year term, total car costs under 10% of gross income. $6,000/mo income → ≈$600/mo all-in (payment + insurance + fuel). A $30,000 car at 8%/48mo ≈ $732/mo payment alone — over budget before insurance." },
+      { question: "What loan term should I pick?", answer: "48 months max for new cars, 36 for used. 72–84 month terms lower the payment but keep you underwater (owing more than resale) for years — a $30k car at 8%/84mo costs ≈$9,200 in interest vs ≈$5,100 at 48mo." },
+      { question: "New vs used financing?", answer: "Used wins on depreciation (new cars lose ~20% in year one), but used rates run 1–3 points higher. Compare total cost, not payment: a $20k used car at 9%/48mo (≈$24k total) vs $30k new at 7%/60mo (≈$36k total)." },
+      { question: "Should I put more down?", answer: "Yes if it avoids being underwater: put ≥20% down or cover the first-year depreciation gap. Gap insurance ($300–600) covers the remainder if you must finance with little down." },
+      { question: "Is my loan data stored?", answer: "No. All calculations run locally in your browser. No amounts or rates leave your device." },
+    ],
 
   },
   {
@@ -377,8 +391,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "discount-calculator",
     category: "Finance",
     description: 'Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Discount Calculator — Calculate savings and final price after a percentage discount. Perfect for shopping, sales, and budget planning. ',
+    seoDescription: 'Free discount calculator — final price, savings, and stacked-discount math for smart shopping. ',
     dependencies: "None",
+    faqs: [
+      { question: "How do stacked discounts work?", answer: "Multiply, don't add: 30% then 20% off $100 → $100 × 0.70 × 0.80 = $56 (44% total, not 50%). Retailers stack precisely because most shoppers add." },
+      { question: "Is 50% off plus an extra 20% off really 60%?", answer: "Yes in this case: $100 × 0.50 × 0.80 = $40 paid, i.e., 60% off. Stacking multiplies remainders: (1−0.5)(1−0.2) = 0.40. The calculator chains any discount sequence correctly — never just add the percentages." },
+      { question: "How do I spot a fake sale?", answer: "Divide sale price by (1 − claimed discount) to recover the alleged original — then check price history. A $70 '50% off' implies $140 original; if it never sold above $90, the discount is theater." },
+      { question: "Sales tax: before or after discount?", answer: "After, in most jurisdictions — tax applies to the discounted price. $100 item at 30% off with 8% tax: $70 × 1.08 = $75.60, not $78." },
+      { question: "Is anything stored?", answer: "No. All calculations run locally in your browser. Nothing leaves your device." },
+    ],
 
   },
   {
@@ -387,8 +408,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "hourly-to-salary-calculator",
     category: "Finance",
     description: 'Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Hourly to Salary Calculator — Convert hourly wage to annual salary. Enter hourly rate and hours per week to see your projected yearly income. ',
+    seoDescription: 'Free hourly-to-salary converter — annualize wages (2080-hr rule), compare offers, price freelance rates. ',
     dependencies: "None",
+    faqs: [
+      { question: "How do I annualize an hourly wage?", answer: "Multiply by 2,080 (40 hrs × 52 weeks): $35/hr → $72,800/year. For 37.5-hr weeks use 1,950 ($68,250). These assume zero unpaid time off — subtract 2–3 weeks for reality." },
+      { question: "Hourly offer vs salary offer — how to compare?", answer: "Annualize the hourly, then add benefits gap: salaried roles typically add 20–30% in health insurance, PTO, retirement match. $35/hr contracting ($72.8k, no benefits) ≈ $55–58k salaried equivalent." },
+      { question: "What should I charge freelance?", answer: "Take target salary ÷ 1,000 (not 2,080): $100k target → $100/hr. The 2× covers non-billable hours, self-employment tax (~15.3% in the US), insurance, and dry spells." },
+      { question: "Does overtime change the math?", answer: "Yes — hourly workers earning 1.5× past 40 hrs can out-earn salaried peers. 5 OT hrs/week at $35 base adds ≈$13,650/yr. Enter effective weekly hours, not contracted ones." },
+      { question: "Is my pay data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
+    ],
 
   },
   {
@@ -444,8 +472,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "rent-vs-buy-calculator",
     category: "Finance",
     description: 'Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Rent vs Buy Calculator — Compare the total cost of renting versus buying a home over time. Factor in mortgage payments, rent, and equity growth. ',
+    seoDescription: 'Free rent-vs-buy calculator — break-even horizon with equity, appreciation, and opportunity cost. ',
     dependencies: "None",
+    faqs: [
+      { question: "How is the break-even horizon computed?", answer: "Year-by-year net worth: buying builds equity minus interest, tax, insurance, maintenance (~1%/yr) and selling costs (~8%); renting invests the down payment difference at market returns. Example: $400k home, 10% down, 7% rate vs $2,200 rent growing 3%/yr → buying pulls ahead around year 7–9." },
+      { question: "What is the 5% rule?", answer: "Unrecoverable buying costs run ≈5% of home value yearly (interest + tax + maintenance, excluding principal). If annual rent is well below 5% of the price, renting wins financially. $400k × 5% = $20k/yr vs $26,400 rent → close call, decided by appreciation." },
+      { question: "Does appreciation change the answer?", answer: "Dramatically: 3% yearly appreciation on $400k adds $12k/yr to the buy side. In flat markets renting usually wins under 7 years; in hot markets buying wins sooner. Run both assumptions." },
+      { question: "What about the down payment's opportunity cost?", answer: "Counted: a $40k down payment invested at 7% becomes ~$79k in 10 years. Buying must beat renting by more than that foregone growth — the calculator includes it automatically." },
+      { question: "Is my financial data stored?", answer: "No. All calculations run locally in your browser. No amounts leave your device." },
+    ],
 
   },
   {
@@ -542,8 +577,15 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "final-grade-calculator",
     category: "Calculator",
     description: 'Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Final Grade Calculator — Calculate your final grade using weighted assignment scores. Enter grades and their weights to compute your overall percentage. ',
+    seoDescription: 'Free final grade calculator — what you need on the final, with weights that actually count. ',
     dependencies: "None",
+    faqs: [
+      { question: "What do I need on the final to get an A?", answer: "Needed = (target − current×(1−w)) ÷ w, where w is the final's weight. Example: 82% average, 30% final, targeting 90% → (90 − 57.4) ÷ 0.30 = 108.7% — impossible; targeting 87% needs 98.7%. The calculator solves your exact numbers." },
+      { question: "How do dropped lowest scores work?", answer: "If 1 of 10 quizzes drops, your quiz average uses the best 9 — enter only counted scores, or average all 10 and note the tool assumes equal weights within the category unless specified." },
+      { question: "Weighted vs points-based grading?", answer: "Weighted: categories have % weights (exams 40%, homework 30%...). Points-based: total points earned ÷ total possible. This tool uses weights — for points systems, convert: each assignment's weight = its points ÷ course total." },
+      { question: "Can extra credit save me?", answer: "Math, not hope: +3% extra credit on a 10%-weighted category adds 0.3% overall. Enter it as a bonus category with its weight to see the true (usually small) effect." },
+      { question: "Is my grade data stored?", answer: "No. All calculations run locally in your browser. No grades leave your device." },
+    ],
   },
   {
     id: "629",

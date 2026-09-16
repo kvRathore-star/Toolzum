@@ -276,10 +276,16 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "currency-converter",
     category: "Finance",
     description: 'Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. Uses cloud-based processing.',
-    seoDescription: 'Free online Currency Converter — Converts between 160+ world currencies using real-time exchange rates sourced from central banks and financial data providers. ',
-    dependencies: "ExchangeRate-API"
-  ,
-},
+    seoDescription: 'Free currency converter — 160+ currencies at live bank rates. Travel, shopping, and forex math. ',
+    dependencies: "ExchangeRate-API",
+    faqs: [
+      { question: "How fresh are the rates?", answer: "Rates refresh from central-bank and provider feeds throughout the trading day. For travel cash and small purchases any intraday rate is fine; for large transfers, compare against your bank's sell rate, which adds 1–3% margin." },
+      { question: "Why does my bank show a different rate?", answer: "Banks add a spread plus flat fees on top of the mid-market rate shown here. A $1,000 transfer at 1% spread costs $10 more than mid-market — always compare the all-in received amount, not the headline rate." },
+      { question: "How do I estimate a trip budget?", answer: "Convert daily costs (hotel, food, transport) at the current rate, then add a 5–10% buffer for rate drift and card foreign-transaction fees (typically 2–3% unless your card waives them)." },
+      { question: "Does it handle crypto or street rates?", answer: "Fiat currencies only, at official market rates. Street rates in restricted economies differ substantially — this tool won't reflect those." },
+      { question: "Is my conversion history stored?", answer: "Amounts stay in your browser session. Rate lookups hit the provider API; amounts are not logged with queries." },
+    ],
+  },
   {
     id: "16",
     name: "Logo Maker",
@@ -1430,8 +1436,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "roi-calculator",
     category: "Finance",
     description: 'Measures return on investment by comparing net gain or loss against the original cost, expressed as both a percentage and a dollar amount. Essential for marketing campaign evaluation, equipment purchase decisions, real estate investment analysis, and comparing investment opportunities.',
-    seoDescription: 'Free online ROI Calculator — measure return on investment as percentage and dollar amount. Perfect for marketing campaigns, equipment purchases, real estate, and investment analysis. ',
+    seoDescription: 'Free ROI calculator — percentage and dollar returns, annualized, with the metric traps flagged. ',
     dependencies: "Vanilla JS",
+    faqs: [
+      { question: "How is ROI calculated?", answer: "ROI = (gain − cost) ÷ cost. Example: $12,000 revenue on $10,000 ad spend → ($12,000−$10,000)÷$10,000 = 20%. Simple, but time-blind — see annualization below." },
+      { question: "Why annualize ROI?", answer: "20% in 3 months (≈107% annualized) beats 20% in 2 years (≈9.5% annualized). Annualized ROI = (1+ROI)^(1/years) − 1. Always attach a horizon or comparisons lie." },
+      { question: "ROI vs ROAS vs profit?", answer: "ROAS = revenue ÷ spend ($12k÷$10k = 1.2×) ignores costs beyond ads; ROI subtracts full cost; profit is the dollars. A 300% ROAS campaign can still lose money after product and overhead costs." },
+      { question: "What does ROI miss?", answer: "Risk, timing, and intangibles: a 50% ROI bet that can go to zero differs from a 15% certain return. ROI also ignores brand, learning, and customer-lifetime effects — pair it with payback period." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
+    ],
   },
   {
     id: "132",
@@ -1439,9 +1452,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "vat-calculator",
     category: "Finance",
     description: 'Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online VAT Calculator — Computes VAT-inclusive and VAT-exclusive amounts for EU member-state rates (standard and reduced) with country-specific rules for digital services. ',
-    dependencies: "Vanilla JS"
-  ,
+    seoDescription: 'Free EU VAT calculator — add/strip VAT by country, standard and reduced rates, digital-goods rules. ',
+    dependencies: "Vanilla JS",
+    faqs: [
+      { question: "How do I add or remove VAT?", answer: "Add: net × (1 + rate). Strip: gross ÷ (1 + rate). Example at 20%: €100 net → €120 gross; €120 gross → €100 net. Never subtract 20% from gross (€96 — wrong)." },
+      { question: "Which rate applies?", answer: "Standard rates run 17–27% by member state (Germany 19%, France 20%, Hungary 27%); reduced rates cover food, books, and hospitality. Digital services use the CUSTOMER's country rate under EU VAT MOSS rules." },
+      { question: "What is reverse charge?", answer: "B2B cross-border sales within the EU shift VAT accounting to the buyer (0% charged, buyer self-assesses). Requires both parties' valid VAT numbers — validate them before invoicing." },
+      { question: "How do I verify a VAT number?", answer: "Use the EU VIES database for real-time validation. Invalid numbers mean you must charge your local rate — the calculator can't verify, only compute." },
+      { question: "Is my data stored?", answer: "No. All calculations run locally in your browser. No figures leave your device." },
+    ],
 },
   {
     id: "134",
@@ -1449,8 +1468,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "password-strength-checker",
     category: "Privacy",
     description: 'Evaluates password strength using zxcvbn entropy analysis: score, crack time estimate, length, character diversity, dictionary words, and pattern repetition.',
-    seoDescription: 'Free online Password Strength Checker — Evaluates password strength using zxcvbn entropy analysis with score, crack time estimate, and improvement suggestions. ',
+    seoDescription: 'Free password strength checker — zxcvbn entropy score, crack-time estimate, and fixes. ',
     dependencies: "zxcvbn",
+    faqs: [
+      { question: "What does the score mean?", answer: "zxcvbn scores 0–4 from real-world cracking models (not just length): 0–1 fall in seconds (dictionary words, patterns), 2 takes hours, 3 takes years, 4 takes centuries. Aim for 3+ on important accounts, 4 on email and banking." },
+      { question: "Why is 'Tr0ub4dor&3' weak but 'correct horse battery staple' strong?", answer: "Leetspeak substitutions are in every cracking dictionary — that 11-character example falls in ~3 days. Four random common words (≈44 bits) take centuries despite looking simple. Length beats complexity theater." },
+      { question: "How do I fix a weak score?", answer: "Add length first (each character multiplies guessing work), then uniqueness (never reuse), then unpredictability (avoid names, dates, keyboard walks like 'qwerty123'). Regenerate with the Password Generator if editing feels hopeless." },
+      { question: "Does it check breach databases?", answer: "No — zxcvbn estimates guessability from patterns, it doesn't know if your exact password leaked. Check Have I Been Pwned separately; if breached, change it everywhere it was reused, immediately." },
+      { question: "Is my password uploaded?", answer: "No. Analysis runs entirely in your browser via zxcvbn. Passwords never leave your device — which is the only safe way to check them." },
+    ],
   },
   {
 
@@ -1900,8 +1926,15 @@ export const entries_chunk_0: ToolMetadata[] = [
     slug: "barcode-generator",
     category: "Utility",
     description: 'Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. Everything runs locally in your browser — nothing is uploaded.',
-    seoDescription: 'Free online Barcode Generator — Generates scannable barcodes in major symbologies including EAN-13, Code 128, QR Code, and UPC-A from typed input or pasted data. ',
+    seoDescription: 'Free barcode generator — EAN-13, UPC-A, Code 128, and QR. Retail-ready, scannable output. ',
     dependencies: "JsBarcode",
+    faqs: [
+      { question: "Which symbology should I use?", answer: "Retail products: EAN-13 (international) or UPC-A (North America) — these need GS1-registered numbers to scan at checkout. Internal tracking: Code 128 (dense, alphanumeric). Customer phones: QR Code." },
+      { question: "Do I need to buy barcode numbers?", answer: "For retail checkout, yes — EAN/UPC numbers come from GS1 (never reuse another company's prefix). For warehouse, tickets, and internal labels, Code 128 with your own numbering is free and sufficient." },
+      { question: "Why won't my barcode scan?", answer: "Usual causes: printed too small (EAN needs ≥80% magnification ≈ 30mm wide), low contrast (no red-on-white — scanners see red as white), or glossy lamination reflecting the laser. Test with a phone scanner before mass printing." },
+      { question: "What size should I print?", answer: "EAN-13 at 100% is 37.3×25.9mm including quiet zones (mandatory blank margins). Keep quiet zones clear — text or borders inside them break scanning." },
+      { question: "Is my data uploaded?", answer: "No. Generation runs entirely in your browser via JsBarcode. Data never leaves your device." },
+    ],
 },
   {
     id: "181",
