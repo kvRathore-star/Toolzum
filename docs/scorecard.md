@@ -363,3 +363,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Compliance & legal | 90 | **93** (xlsx row #26: 90 → **93**) | Senior-counsel issue-spotting pass (10 findings, owner-factored: India law, unincorporated, no-refunds). Fixed: false "Inc." designation everywhere incl. footer; new billing/subscription terms mirroring live behavior (no auto-renew, email cancel/1hr, no refunds); 12-month liability cap; copyright notice agent (IT Act); children clause; India governing law + 30-day good-faith window; material-change notice via changelog; self-imposed SLAs softened to aims (statutory GDPR/CCPA timelines kept); billing "one click" corrected to email. Held below 95 for: licensed-attorney countersign + live banner check. NOT legal advice. |
+
+## Update (2026-09-16, release #20: 85 → 90, composite 80.7 → 80.8)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Release/versioning | 85 | **90** (xlsx row #20: 85 → **90**) | First tagged cycle complete: v2.5.0 changelog entry, version bump, tag pushed alongside main. `/status` version check rides the deploy. Item closed. |
