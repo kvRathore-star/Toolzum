@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
-import { Download, BarChart3, AlertTriangle, TrendingUp, Users, Search, Filter, ArrowUpDown } from "lucide-react";
+import { Download, BarChart3, AlertTriangle, TrendingUp, Users, Search, Filter, ArrowUpDown, Zap } from "lucide-react";
 
 interface AnalyticsData {
   topTools7d: { toolSlug: string; toolName: string; category: string; uses: number }[];
@@ -20,6 +20,15 @@ interface AnalyticsData {
     blocked30d: number;
     toolUsages30d: number;
     errors30d: number;
+  };
+  funnels?: {
+    signupToFirstTool: {
+      signups: number; activated: number; activated7d: number; avgSecsToFirst: number | null;
+    };
+    quotaWallToPro: {
+      blockedUsers: number; convertedPro: number; anonBlocks: number; anonDevices: number;
+    };
+    creditWallToPro: { walledUsers: number; convertedPro: number };
   };
 }
 
@@ -82,6 +91,51 @@ function StatBox({ label, value, sub, icon: Icon, color }: {
       </div>
       <p className="text-lg font-bold text-[var(--text-primary)] tabular-nums">{typeof value === "number" ? value.toLocaleString() : value}</p>
       {sub && <p className="text-xs text-[var(--text-muted)] mt-0.5">{sub}</p>}
+    </div>
+  );
+}
+
+function funnelPct(part: number, whole: number): string {
+  if (!whole || whole <= 0) return "—";
+  return `${Math.round((part / whole) * 100)}%`;
+}
+
+function formatDuration(secs: number | null): string {
+  if (secs == null || secs < 0) return "—";
+  if (secs < 3600) return `${Math.max(1, Math.round(secs / 60))}m`;
+  if (secs < 86400) return `${Math.round(secs / 3600)}h`;
+  return `${Math.round(secs / 86400)}d`;
+}
+
+function FunnelCard({ title, icon: Icon, color, steps, note }: {
+  title: string; icon: React.ElementType; color: string;
+  steps: { label: string; value: number; base: number }[]; note?: string;
+}) {
+  return (
+    <div className="p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">
+      <div className="flex items-center gap-2 mb-4">
+        <Icon className={`w-5 h-5 ${color}`} />
+        <h3 className="text-sm font-semibold text-[var(--text-primary)]">{title}</h3>
+      </div>
+      <div className="space-y-3">
+        {steps.map((s) => (
+          <div key={s.label}>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs text-[var(--text-secondary)]">{s.label}</span>
+              <span className="text-xs text-[var(--text-muted)] tabular-nums">
+                {s.value.toLocaleString()} · {funnelPct(s.value, s.base)}
+              </span>
+            </div>
+            <div className="h-1.5 bg-[var(--bg-base)] rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-500 ${color.replace("text-", "bg-")}`}
+                style={{ width: `${s.base > 0 ? Math.max(2, (s.value / s.base) * 100) : 2}%` }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      {note && <p className="text-[11px] text-[var(--text-muted)] mt-3">{note}</p>}
     </div>
   );
 }
@@ -150,6 +204,43 @@ export function AnalyticsSection() {
         <StatBox label="Tool Uses (30d)" value={data.totals.toolUsages30d} icon={BarChart3} color="text-blue-400" />
         <StatBox label="Errors (30d)" value={data.totals.errors30d} icon={AlertTriangle} color="text-red-400" />
       </div>
+
+      {/* Conversion Funnels (#34) — 30d windows; missing keys default (older API shape) */}
+      {data.funnels && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <FunnelCard
+            title="Signup → First Tool"
+            icon={Users}
+            color="text-blue-400"
+            steps={[
+              { label: "Signups", value: data.funnels.signupToFirstTool.signups, base: data.funnels.signupToFirstTool.signups },
+              { label: "Used a tool", value: data.funnels.signupToFirstTool.activated, base: data.funnels.signupToFirstTool.signups },
+              { label: "Within 7 days", value: data.funnels.signupToFirstTool.activated7d, base: data.funnels.signupToFirstTool.signups },
+            ]}
+            note={`Median time to first use: ${formatDuration(data.funnels.signupToFirstTool.avgSecsToFirst)}`}
+          />
+          <FunnelCard
+            title="Quota Wall → Pro"
+            icon={AlertTriangle}
+            color="text-amber-400"
+            steps={[
+              { label: "Signed-in users blocked", value: data.funnels.quotaWallToPro.blockedUsers, base: data.funnels.quotaWallToPro.blockedUsers },
+              { label: "Pro now", value: data.funnels.quotaWallToPro.convertedPro, base: data.funnels.quotaWallToPro.blockedUsers },
+            ]}
+            note={`${data.funnels.quotaWallToPro.anonBlocks.toLocaleString()} anon blocks across ${data.funnels.quotaWallToPro.anonDevices.toLocaleString()} devices — unlinkable to signup by design`}
+          />
+          <FunnelCard
+            title="Credit Wall → Pro"
+            icon={Zap}
+            color="text-violet-400"
+            steps={[
+              { label: "Users hitting empty", value: data.funnels.creditWallToPro.walledUsers, base: data.funnels.creditWallToPro.walledUsers },
+              { label: "Pro now", value: data.funnels.creditWallToPro.convertedPro, base: data.funnels.creditWallToPro.walledUsers },
+            ]}
+            note="Empty-credit events with no AI table yet show zeros, not errors"
+          />
+        </div>
+      )}
 
       {/* Tool Usage */}
       <div className="p-5 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)]">

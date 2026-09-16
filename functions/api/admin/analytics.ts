@@ -54,6 +54,8 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
   const day = 86400;
   const sevenDaysAgo = now - 7 * day;
   const thirtyDaysAgo = now - 30 * day;
+  // better-auth user rows are millis; everything event-like is seconds.
+  const thirtyDaysAgoMs = thirtyDaysAgo * 1000;
 
   const [
     topTools7d,
@@ -67,19 +69,25 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     topErrors,
     signupsByDay,
     pageViewsByDay,
+    funnelSignup,
+    funnelQuota,
+    funnelQuotaAnon,
+    funnelCredit,
   ] = await Promise.all([
-    // Top tools used (7d)
+    // Top tools used (7d). NOTE: the column is usedAt (unix seconds) —
+    // a previous revision read a nonexistent createdAt, so these charts
+    // silently showed "No data" forever. Same fix as the timestamp note.
     safeQuery<{ toolSlug: string; toolName: string; category: string; uses: number }>(
       DB,
       `SELECT toolSlug, toolName, category, COUNT(*) as uses FROM user_tool_usage
-       WHERE createdAt > ? GROUP BY toolSlug ORDER BY uses DESC LIMIT 10`,
+       WHERE usedAt > ? GROUP BY toolSlug ORDER BY uses DESC LIMIT 10`,
       sevenDaysAgo
     ),
     // Top tools used (30d)
     safeQuery<{ toolSlug: string; toolName: string; category: string; uses: number }>(
       DB,
       `SELECT toolSlug, toolName, category, COUNT(*) as uses FROM user_tool_usage
-       WHERE createdAt > ? GROUP BY toolSlug ORDER BY uses DESC LIMIT 15`,
+       WHERE usedAt > ? GROUP BY toolSlug ORDER BY uses DESC LIMIT 15`,
       thirtyDaysAgo
     ),
     // Downloads by day (30d). Blocked outcomes are 'blocked_quota' /
@@ -158,6 +166,59 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
        WHERE createdAt > ? GROUP BY ${DAY_BUCKET} ORDER BY date`,
       thirtyDaysAgo
     ),
+    // FUNNEL 1 — signup → first tool (30d signups). First use = earliest
+    // signed-in usage row or allowed download (both unix seconds); signup
+    // is better-auth millis, normalized per row.
+    safeQuery<{
+      signups: number; activated: number; activated7d: number; avgSecsToFirst: number | null;
+    }>(
+      DB,
+      `SELECT COUNT(*) as signups,
+              SUM(CASE WHEN f.firstUse IS NOT NULL THEN 1 ELSE 0 END) as activated,
+              SUM(CASE WHEN f.firstUse IS NOT NULL AND f.firstUse <= s.signupSec + 604800 THEN 1 ELSE 0 END) as activated7d,
+              AVG(CASE WHEN f.firstUse IS NOT NULL AND f.firstUse >= s.signupSec THEN f.firstUse - s.signupSec END) as avgSecsToFirst
+       FROM (SELECT id,
+                    CAST(CASE WHEN createdAt > 100000000000 THEN createdAt / 1000 ELSE createdAt END AS INTEGER) as signupSec
+             FROM "user" WHERE createdAt > ?) s
+       LEFT JOIN (SELECT userId, MIN(ts) as firstUse FROM (
+                    SELECT userId, usedAt as ts FROM user_tool_usage WHERE userId IS NOT NULL
+                    UNION ALL
+                    SELECT userId, createdAt as ts FROM download_event WHERE userId IS NOT NULL AND outcome = 'allowed'
+                  ) GROUP BY userId) f ON f.userId = s.id`,
+      thirtyDaysAgoMs
+    ),
+    // FUNNEL 2 — quota wall → Pro (30d). Signed-in users blocked who are
+    // pro now. plan='pro' covers paid conversion (set on payment).
+    safeQuery<{ blockedUsers: number; convertedPro: number }>(
+      DB,
+      `SELECT COUNT(*) as blockedUsers,
+              SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END) as convertedPro
+       FROM (SELECT DISTINCT userId FROM download_event
+             WHERE userId IS NOT NULL AND outcome LIKE 'blocked%' AND createdAt > ?) d
+       LEFT JOIN "user" u ON u.id = d.userId`,
+      thirtyDaysAgo
+    ),
+    // FUNNEL 2b — anonymous wall volume (unlinkable: anon rows carry the
+    // browser hash, signed-in rows carry userId — no join key by design).
+    safeQuery<{ anonBlocks: number; anonDevices: number }>(
+      DB,
+      `SELECT COUNT(*) as anonBlocks, COUNT(DISTINCT fingerprint) as anonDevices
+       FROM download_event
+       WHERE userId IS NULL AND outcome LIKE 'blocked%' AND createdAt > ?`,
+      thirtyDaysAgo
+    ),
+    // FUNNEL 3 — AI credit wall → Pro (30d). ai_credit_event is lazy
+    // (missing before first AI use) — safeQuery yields [] so the UI
+    // must default, never assume a row.
+    safeQuery<{ walledUsers: number; convertedPro: number }>(
+      DB,
+      `SELECT COUNT(*) as walledUsers,
+              SUM(CASE WHEN u.plan = 'pro' THEN 1 ELSE 0 END) as convertedPro
+       FROM (SELECT DISTINCT userId FROM ai_credit_event
+             WHERE outcome = 'blocked_exhausted' AND createdAt > ?) w
+       LEFT JOIN "user" u ON u.id = w.userId`,
+      thirtyDaysAgo
+    ),
   ]);
 
   const [
@@ -178,7 +239,7 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     ),
     safeFirst<{ count: number }>(
       DB,
-      "SELECT COUNT(*) as count FROM user_tool_usage WHERE createdAt > ?",
+      "SELECT COUNT(*) as count FROM user_tool_usage WHERE usedAt > ?",
       thirtyDaysAgo
     ),
     safeFirst<{ count: number }>(
@@ -187,6 +248,13 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
       thirtyDaysAgo
     ),
   ]);
+
+  // Single-row funnel aggregates: default on empty (notably the lazy
+  // ai_credit_event table, missing before first AI use).
+  const f1 = funnelSignup[0] ?? { signups: 0, activated: 0, activated7d: 0, avgSecsToFirst: null };
+  const f2 = funnelQuota[0] ?? { blockedUsers: 0, convertedPro: 0 };
+  const f2b = funnelQuotaAnon[0] ?? { anonBlocks: 0, anonDevices: 0 };
+  const f3 = funnelCredit[0] ?? { walledUsers: 0, convertedPro: 0 };
 
   recordRateLimit(DB, "admin-analytics", ip, "/api/admin/analytics");
 
@@ -202,6 +270,24 @@ export async function onRequestGet(context: { request: Request; env: AdminEnv })
     topErrors,
     signupsByDay,
     pageViewsByDay,
+    funnels: {
+      signupToFirstTool: {
+        signups: f1.signups,
+        activated: f1.activated,
+        activated7d: f1.activated7d,
+        avgSecsToFirst: f1.avgSecsToFirst,
+      },
+      quotaWallToPro: {
+        blockedUsers: f2.blockedUsers,
+        convertedPro: f2.convertedPro,
+        anonBlocks: f2b.anonBlocks,
+        anonDevices: f2b.anonDevices,
+      },
+      creditWallToPro: {
+        walledUsers: f3.walledUsers,
+        convertedPro: f3.convertedPro,
+      },
+    },
     totals: {
       downloads30d: totalDownloads?.count || 0,
       blocked30d: totalBlocked?.count || 0,

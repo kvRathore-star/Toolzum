@@ -56,6 +56,66 @@ const ENV = (db: D1Database) =>
     ADMIN_EMAILS: 'a@x.com',
   }) as never;
 
+describe('GET /api/admin/analytics funnels (#34)', () => {
+  function funnelDb() {
+    const prepare = vi.fn((sql: string) => ({
+      bind: vi.fn(() => ({
+        all: vi.fn(async () => {
+          if (sql.includes('as signups')) {
+            return { results: [{ signups: 100, activated: 60, activated7d: 45, avgSecsToFirst: 7200 }] };
+          }
+          if (sql.includes('as blockedUsers')) {
+            return { results: [{ blockedUsers: 20, convertedPro: 5 }] };
+          }
+          if (sql.includes('anonBlocks')) {
+            return { results: [{ anonBlocks: 300, anonDevices: 150 }] };
+          }
+          if (sql.includes('as walledUsers')) {
+            return { results: [{ walledUsers: 10, convertedPro: 4 }] };
+          }
+          return { results: [] };
+        }),
+        first: vi.fn(async () => {
+          if (sql.includes('COUNT(*)')) return { count: 0 };
+          return null;
+        }),
+        run: vi.fn(async () => ({})),
+      })),
+    }));
+    return { db: { prepare } as unknown as D1Database };
+  }
+
+  it('returns all three conversion funnels with wall→pro attribution', async () => {
+    const { db } = funnelDb();
+    const res = await analytics({
+      request: new Request('https://toolzum.com/api/admin/analytics'),
+      env: ENV(db),
+    });
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as Record<string, unknown>;
+    expect(body.funnels).toEqual({
+      signupToFirstTool: { signups: 100, activated: 60, activated7d: 45, avgSecsToFirst: 7200 },
+      quotaWallToPro: { blockedUsers: 20, convertedPro: 5, anonBlocks: 300, anonDevices: 150 },
+      creditWallToPro: { walledUsers: 10, convertedPro: 4 },
+    });
+  });
+
+  it('defaults funnels on empty tables (lazy ai_credit_event)', async () => {
+    const { db } = mockDb();
+    const res = await analytics({
+      request: new Request('https://toolzum.com/api/admin/analytics'),
+      env: ENV(db),
+    });
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as Record<string, unknown>;
+    expect(body.funnels).toEqual({
+      signupToFirstTool: { signups: 0, activated: 0, activated7d: 0, avgSecsToFirst: null },
+      quotaWallToPro: { blockedUsers: 0, convertedPro: 0, anonBlocks: 0, anonDevices: 0 },
+      creditWallToPro: { walledUsers: 0, convertedPro: 0 },
+    });
+  });
+});
+
 describe('GET /api/admin/analytics contract', () => {
   it('returns missedSearches aligned with the blocked/top queries (no slot shift)', async () => {
     const { db } = mockDb();
