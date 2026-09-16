@@ -19,7 +19,6 @@ const DownloadQuotaBadge = dynamic(() => import('@/components/tools/DownloadQuot
 const DownloadLimitModal = dynamic(() => import('@/components/tools/DownloadLimitModal').then(m => ({ default: m.DownloadLimitModal })), { ssr: false });
 const ShareTool = dynamic(() => import('@/components/ShareTool').then(m => ({ default: m.ShareTool })), { ssr: false });
 const FavoriteStarButton = dynamic(() => import('@/components/FavoriteStarButton').then(m => ({ default: m.FavoriteStarButton })), { ssr: false });
-const OfflineIndicator = dynamic(() => import('@/components/OfflineIndicator').then(m => ({ default: m.OfflineIndicator })), { ssr: false });
 const BulkDropPaywall = dynamic(() => import('@/components/BulkDropPaywall').then(m => ({ default: m.BulkDropPaywall })), { ssr: false });
 const WorkflowPresetPanel = dynamic(() => import('@/components/WorkflowPresetPanel').then(m => ({ default: m.WorkflowPresetPanel })), { ssr: false });
 
@@ -187,7 +186,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
 
       <div className="min-h-screen bg-[var(--bg-base)]">
 
-          <OfflineIndicator />
+          {/* #45: OfflineIndicator now lives once in SiteShell (was doubled here) */}
           <BulkDropPaywall />
         
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[var(--accent-ink)]/5 blur-[120px] rounded-full pointer-events-none hidden sm:block" />

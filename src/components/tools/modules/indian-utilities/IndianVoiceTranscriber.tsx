@@ -9,7 +9,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { downloadOrShare } from "@/utils/nativeShare";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getErrorMessage } from '@/utils/error';
+import { toUserError } from '@/utils/network';
 
 const INDIAN_LANGUAGES = [
   { code: 'hi', label: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
@@ -87,7 +87,8 @@ export default function IndianVoiceTranscriber() {
       setTranscript(text);
       toast.success('Transcription complete!');
     } catch (err: unknown) {
-      toast.error(getErrorMessage(err, 'Transcription failed'));
+      // #45: offline-aware error copy (never auto-retries: 10 credits/try).
+      toast.error(toUserError(err, 'Transcription failed'));
     } finally {
       setIsTranscribing(false);
     }

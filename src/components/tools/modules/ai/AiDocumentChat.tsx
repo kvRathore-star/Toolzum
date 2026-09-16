@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { toast } from 'react-hot-toast';
+import { toUserError } from '@/utils/network';
 
 export default function AiDocumentChat() {
   const [file, setFile] = useState<File | null>(null);
@@ -95,8 +96,10 @@ export default function AiDocumentChat() {
       const data: { content?: string } = await res.json();
       setMessages(prev => [...prev, { role: 'ai', content: data.content || 'No response' }]);
     } catch (err) {
-      toast.error('Failed to get AI response');
-      setMessages(prev => [...prev, { role: 'ai', content: `Error: ${err instanceof Error ? err.message : 'Unknown error'}` }]);
+      // #45: offline-aware (manual retry only — each attempt spends credits).
+      const msg = toUserError(err, 'Failed to get AI response');
+      toast.error(msg);
+      setMessages(prev => [...prev, { role: 'ai', content: `Error: ${msg}` }]);
     } finally {
       setIsTyping(false);
     }
