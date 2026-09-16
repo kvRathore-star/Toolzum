@@ -81,6 +81,7 @@ SEO: Add unique meta descriptions to top 50 most-visited tools
 SEO: Add internal linking between related tools (reduces thin content signals)
 
 Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–3 weeks after that, we compare exclusion buckets + indexed count. I'll pull on your word anytime — just say "gsc check".
+Depth bulk batches PAUSED Sep 16 per owner — resume ordered by GSC impressions (deepen surfaced pages first, not bulk order). 345/1144 done, ~800 via fallback.
 
   Wire up email service (Resend)
   Wire Resend email service for forgot-password/reset-password
