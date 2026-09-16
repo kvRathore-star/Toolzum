@@ -357,3 +357,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Depth | 76 | **80** (xlsx row #2: 76 → **80**) | Recounted from source: **345/1,144 with 4+ FAQs** (prior note said 288 — stale), ~800 remaining via fallback. Spot-checked bulk 5 (mortgage/car-loan/discount): worked examples with real numbers, pairwise-distinct, privacy FAQ each — genuine depth, not filler. Five gated batches with similarity verification. Held below target for: the remaining ~800 (same gated path, ~60 batches at current pace). |
+
+## Update (2026-09-16, counsel pass #26: 90 → 93, composite 80.7 → 80.8)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Compliance & legal | 90 | **93** (xlsx row #26: 90 → **93**) | Senior-counsel issue-spotting pass (10 findings, owner-factored: India law, unincorporated, no-refunds). Fixed: false "Inc." designation everywhere incl. footer; new billing/subscription terms mirroring live behavior (no auto-renew, email cancel/1hr, no refunds); 12-month liability cap; copyright notice agent (IT Act); children clause; India governing law + 30-day good-faith window; material-change notice via changelog; self-imposed SLAs softened to aims (statutory GDPR/CCPA timelines kept); billing "one click" corrected to email. Held below 95 for: licensed-attorney countersign + live banner check. NOT legal advice. |

@@ -38,9 +38,9 @@ export default function BillingPage() {
           {/* Cancel / Pause */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6">
             <h2 className="text-lg font-bold mb-4">Cancel or Pause Subscription</h2>
-            <p className="text-sm text-[var(--text-secondary)] mb-4">
-              You can cancel anytime with one click. Subscriptions auto-cancel after the paid period — no questions asked.
-            </p>
+              <p className="text-sm text-[var(--text-secondary)] mb-4">
+                You can cancel anytime by email below. Subscriptions auto-cancel after the paid period — no questions asked.
+              </p>
             <div className="space-y-3">
               <a
                 href="mailto:support@toolzum.com?subject=Cancel%20Subscription"

@@ -130,7 +130,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--border-subtle)] flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-[var(--text-muted)] text-center md:text-left">
-            <span>&copy; {currentYear} Toolzum Inc.</span>
+            <span>&copy; {currentYear} Toolzum.</span>
             <span className="hidden md:block w-1 h-1 rounded-full bg-[var(--border-subtle)]" />
             <span>The browser supercomputer. Free, private, yours.</span>
           </div>

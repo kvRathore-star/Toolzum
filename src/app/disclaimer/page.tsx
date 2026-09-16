@@ -44,7 +44,7 @@ const SECTIONS = [
     title: "3. No Liability for Third-Party Content",
     content: (
       <p>
-        Toolzum Inc. is not responsible for the content, accuracy, legality, or availability of any third-party websites, services, or resources linked to or accessed through our tools. You acknowledge that we have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites or services.
+        Toolzum is not responsible for the content, accuracy, legality, or availability of any third-party websites, services, or resources linked to or accessed through our tools. You acknowledge that we have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites or services.
       </p>
     ),
   },
@@ -67,7 +67,7 @@ const SECTIONS = [
     title: "5. No Warranty of Accuracy",
     content: (
       <p>
-        The tools and services provided on this site are offered "as is" and "as available" without any representation or warranty, express or implied. Toolzum Inc. does not warrant that the tools will be error-free, uninterrupted, or that the results obtained from using the tools will be accurate or reliable.
+        The tools and services provided on this site are offered "as is" and "as available" without any representation or warranty, express or implied. Toolzum does not warrant that the tools will be error-free, uninterrupted, or that the results obtained from using the tools will be accurate or reliable.
       </p>
     ),
   },

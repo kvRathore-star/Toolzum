@@ -20,48 +20,48 @@ Projected: **73.8 → 75.0** (small number, existential risk removed).
 
 ## Phase 1 — Revenue & trust (weeks 1–3)
 
-| # | Item | Now → Target | Notes |
-|---|------|--------------|-------|
-| 33 | Notifications | 25, PARKED | Owner decision Sep 15 2026: no newsletter planned — dead signup removed from changelog; only transactional quota/credit nudges if ever. |
-| 26 | Compliance | 72 → 95 | Verify consent banner behavior; audit policy accuracy vs actual data flows. |
-| 36 | Billing | 75 → 92 | Dunning/payment-failure recovery paths; verify cancel + refund flows live. |
-| 51 | Privacy review | 55 → 92 | Formalize the ad-hoc process: checklist gate before ship (data flow, third parties, retention). |
-| 34 | Analytics | 72 → 90 | Funnels: signup→first-tool, quota-wall→convert, credit-wall→upgrade. |
-| 44 | Legal pages | 82 → 96 | Accuracy pass against #26 findings. |
+| # | Item | Was → Now (target) | Status Sep 16 |
+|---|------|-------------------|---------------|
+| 33 | Notifications | 25, PARKED | Parked (owner Sep 15, no newsletter). |
+| 26 | Compliance | 72 → 93 (95) | Done + counsel pass; held for licensed countersign + live banner check. |
+| 36 | Billing | 75 (→ 92) | **OPEN — blocked: SMTP provider + gateway test access.** |
+| 51 | Privacy review | 55 → 88 (92) | Done; held for first real sign-off. |
+| 34 | Analytics | 72 → 88 (90) | Done; held for traffic validation + 7d toggle. |
+| 44 | Legal pages | 82 → 96 | Done ✓ (incl. counsel pass). |
 
-Projected: **→ 77.6**.
+Projected: **→ 77.6**. Actual: **→ ~79.3** on completed items (billing excluded).
 
 ## Phase 2 — Resilience (weeks 3–5)
 
-| # | Item | Now → Target | Notes |
-|---|------|--------------|-------|
-| 41/49 | Flags + kill-switch | 45/50 → 92 | Lightweight flag service first (80% of instant-disable); full rollback pipeline only if flags prove insufficient. |
-| 20 | Release/versioning | 65 → 90 | Semver + changelog discipline + rollback runbook faster than a 15-min rebuild. |
-| 38 | (cont.) | — | Restore drill counts here. |
-| 27 | Data mgmt | 68 → 90 | Migration story to replace lazy CREATEs; backup verification. |
-| 15 | Build/perf | 72 → 86 | Attack the 15-min build (TS 5.5min first); bundle budgets in CI. |
-| 42 | Load testing | 40 → 88 | First-ever spike test before traffic justifies it. |
-| 37 | Abuse | 85 → 96 | Review fingerprint-vs-IP layers; bot rules for AI endpoints. |
-| 22 | Dependencies | 75 → 88 | Lockfile audit cadence + update policy. |
-| 21 | Observability | 80 → 93 | Alerting on error-rate + quota-block spikes (data exists, alarms don't). |
+| # | Item | Was → Now (target) | Status Sep 16 |
+|---|------|-------------------|---------------|
+| 41/49 | Flags + kill-switch | 45/50 → 88 (92) | Done; rollback pipeline deferred per plan. |
+| 20 | Release/versioning | 65 → 85 (90) | Done; held for first tagged release. |
+| 38 | (cont.) | 50 → 90 | **Done ✓ (drill PASS Sep 16).** |
+| 27 | Data mgmt | 68 → 88 (90) | Done; fallback removal awaits migrate-job confirmation. |
+| 15 | Build/perf | 72 (→ 86) | **OPEN.** |
+| 42 | Load testing | 40 (→ 88) | **OPEN — trigger: 10× baseline traffic for a week.** |
+| 37 | Abuse | 85 → 93 (96) | Done; held for Turnstile-on-AI + CGNAT tuning + dashboard. |
+| 22 | Dependencies | 75 → 88 | Done ✓ (target met). |
+| 21 | Observability | 80 → 90 (93) | Done; held for owner email setup + noise tuning. |
 
 Projected: **→ 81.2**.
 
 ## Phase 3 — Reach & quality (weeks 5–9)
 
-| # | Item | Now → Target | Notes |
-|---|------|--------------|-------|
-| 30/48 | i18n + scale | 35/30 → 90/88 | Hindi-first pilot (Indian utilities already exist); cultural/legal nuance after. |
-| 9 | Accessibility | 72 → 95 | Session 3 VoiceOver pass → fix → re-pass. Non-negotiable for 95. |
-| 10 | Mobile/PWA | 78 → 92 | Device audit + offline hardening beyond shell caching. |
-| 31 | Browser compat | 75 → 90 | Safari/Firefox matrix for WASM + SAB paths. |
-| 45 | Offline/degraded | 65 → 88 | Degraded-network UX, not just offline shell. |
-| 46 | Platform | 55 → 88 | Play Store submission state resolved. |
-| 32 | Onboarding | 70 → 92 | Empty-state audit with eyes (spots already listed in tracker). |
-| 47 | Energy | 65 → 85 | Measure-first; low-end path already exists. |
-| 43 | Brand | 80 → 93 | Touchpoint sweep (emails exist only after Phase 1). |
+| # | Item | Was → Now (target) | Status Sep 16 |
+|---|------|-------------------|---------------|
+| 30/48 | i18n + scale | 35/30, PARKED | Parked (owner: English-only deliberate). |
+| 9 | Accessibility | 72 → 95 | Done ✓ (Sep 14 sessions). |
+| 10 | Mobile/PWA | 78 → 86 (92) | Done; held for device audit. |
+| 31 | Browser compat | 75 → 85 (90) | Done; held for device rows. |
+| 45 | Offline/degraded | 65 → 84 (88) | Done; held for throttled live verification. |
+| 46 | Platform | 55, PARKED | Parked (owner: no store apps). |
+| 32 | Onboarding | 70 → 86 (92) | Done; held for eyes pass + richer tour. |
+| 47 | Energy | 65 → 82 (85) | Done; held for lab battery measurements. |
+| 43 | Brand | 80 (→ 93) | **OPEN — blocked on email existing.** |
 
-Projected: **→ 85.1**.
+Projected: **→ 85.1**. Actual: parked i18n reprices the honest ceiling to ~83–84.
 
 ## Phase 4 — Craft (weeks 9–14) → 93.9
 
@@ -81,4 +81,4 @@ Requires literal 100s in craft areas (zero warnings, minute-long builds, proven-
 - Native store apps (#46) — parked per owner Sep 16 2026; no Play Store / iOS app planned (PWA + Capacitor shell only). Platform row stays 55.
 - Full i18n/l10n (#30/#48) — parked per owner Sep 16 2026. Rationale: the Indian audience operates in English for productivity domains (GST/UPI/banking/API terminology is English-official); Hindi chrome would double content costs without unlocking a blocked audience. Hindi *content* (transcription output, voice) already exists where it matters. English-only is deliberate. Revisit only on geo/behavior evidence of a bouncing Hindi-preferring segment. Rows stay 35/30.
 - A/B infra at scale, team workspaces beyond lite — revisit past 96.
-- English-only assumption lifts in Phase 3 deliberately, not before.
+- ~~English-only assumption lifts in Phase 3 deliberately, not before.~~ Superseded: English-only is permanent policy per the #30/#48 park above.
