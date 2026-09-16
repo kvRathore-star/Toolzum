@@ -334,6 +334,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Energy | 65 | **82** (xlsx row #47: 65 → **82**) | `02f7c7a5` — audit found the last two unwarned heavy engines (MediaPipe BG changer, batch BlazeFace — worst case) while FFmpeg/OCR/BlurFace were covered: matching heads-ups, no new patterns. Energy gate pins all six + the never-block detector rule. `docs/ENERGY.md`: engine-cost ledger, efficient-defaults inventory, lab protocol + log. Deliberately no device telemetry (would violate the fingerprinting stance). Held below 85 for: lab battery measurements. |
 
+## Update (2026-09-16, compat #31: 75 → 85, composite 79.4 → 79.6)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Browser compat | 75 | **85** (xlsx row #31: 75 → **85**) | `9395bdf7` — Playwright runs firefox + webkit in CI (chromium-only locally, browsers don't install on macOS 12); `compat-wasm.spec.ts` pins the no-COI baseline (SAB undefined on every engine → ST paths), a local-tool execution with verified selectors, and offline-fallback reachability. `docs/BROWSER-MATRIX.md`: automated vs manual rows + known quirks (Safari private IDB, Firefox ETP, Turnstile flake policy). Full `tsc` clean (spec typechecked). Held below 90 for: manual device rows, heavy-engine CI (deliberately excluded as flaky). |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
