@@ -291,3 +291,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Feature flagging | 45 | **88** (xlsx row #41) | `7141989a` — D1-backed service, no vendor: 0017 + `_flags` helper (fail-open reads, seeded defaults), public `GET /api/flags`, admin GET+POST with audit rows, `useFlag` hook, `/admin/flags` UI, data-migrations gate covers 0017. |
 | Kill-switch | 50 | **88** (xlsx row #49) | Same commit — all 3 AI endpoints 503 pre-spend when `ai_generation` flips (kill confirm in UI, maintenance banner client-side); `GEMINI_ENGINE_LIVE` const migrated to flippable `ai_image_gemini` (default off, unchanged behavior). 32/32 AI+flags tests green; eslint 0 errors; full `tsc` clean. Held below 92 for: full rollback pipeline (deferred per plan — flags first), at-scale propagation proof, load-tested flag reads. |
+
+## Update (2026-09-16, abuse #37: 85 → 93, composite 77.8 → 77.9)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Abuse | 85 | **93** (xlsx row #37: 85 → **93**) | `08348464` — layer review in `docs/ABUSE.md` (fingerprint vs IP vs account vs Turnstile, spoofability table, CGNAT tradeoffs, SQLite NULL-PK quirks). Fixed dead abuse logging (4-into-5-column INSERT failed silently — rows never written). AI IP-velocity guard (300/hr across accounts, pre-auth, 429 + abuse row) on all 3 AI endpoints; anon rotation backstop (500 attempts/IP/day); 0018 composite fingerprint index (rate-limit lookups were full scans). 45/45 tests green; gates 14/14; full `tsc` clean. Held below 96 for: Turnstile-on-AI (covered by credits + velocity), CGNAT threshold tuning on prod data, abuse dashboard UI. |
