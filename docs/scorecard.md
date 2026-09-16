@@ -369,3 +369,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Release/versioning | 85 | **90** (xlsx row #20: 85 → **90**) | First tagged cycle complete: v2.5.0 changelog entry, version bump, tag pushed alongside main. `/status` version check rides the deploy. Item closed. |
+
+## Update (2026-09-16, build #15: 72 → 78, composite 80.8 → 81.0)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Build/perf | 72 | **78** (xlsx row #15: 72 → **78**) | Measured, not assumed: gen steps ~7s parallel, OG incremental ~11s, compile 5.5min + static-gen 11min both already at hardware parallelism (workers scale with CPUs; oversubscription can't help CPU-bound rendering). `docs/BUILD.md`: phase ledger, cache inventory, hygiene rule (gen scripts must not dirty the tree — caught og/slugs churn live). Held below 86 for: faster runners / fewer pages — both hardware-or-scope, neither free. |
