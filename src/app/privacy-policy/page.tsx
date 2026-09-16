@@ -131,7 +131,7 @@ export default function PrivacyPolicyPage() {
                 <strong>What our servers do receive and store:</strong>
               </p>
               <ul className="list-disc pl-6 space-y-2 mb-4">
-                <li><strong>Page-view telemetry</strong> — visited path, viewport size, and client type, sent to our first-party <span className="font-mono text-xs">/api/analytics</span> endpoint and stored in our database (no cookies, no IP logging; disabled when you choose Decline in the consent banner).</li>
+                <li><strong>Page-view telemetry</strong> — visited path, viewport size, and client type, sent to our first-party <span className="font-mono text-xs">/api/analytics</span> endpoint and stored in our database (no cookies; IP addresses are used only for rate-limiting and never stored alongside page views; disabled when you choose Decline in the consent banner).</li>
                 <li><strong>Error reports</strong> — error message, stack trace, tool name, page path, and user-agent string, stored to diagnose crashes. Error text can occasionally contain fragments of what the page was doing — never file contents.</li>
                 <li><strong>Zero-result search terms</strong> — only searches that match no tool, truncated, used to improve search synonyms.</li>
                 <li><strong>Quota identifiers</strong> — a salted hash of basic browser attributes (user-agent, screen size, language, timezone) used solely to enforce anonymous download/usage limits. It cannot identify you and is never joined to account data.</li>
@@ -149,7 +149,7 @@ export default function PrivacyPolicyPage() {
                 Toolzum utilizes browser storage mechanisms (LocalStorage, SessionStorage, and IndexedDB) to save settings, UI preferences, and user states (such as checklist items, upvotes, and custom styling themes).
               </p>
               <p className="mb-4">
-                A small number of functional cookies and storage keys keep the site working: your consent choice (<span className="font-mono text-xs">th_gdpr_consent</span>), sign-in session tokens (signed-in users only), an edge-set 2-letter country code used for regional formatting (<span className="font-mono text-xs">user-country</span>, 24h), and anonymous quota counters. PostHog analytics storage is only set when you Accept analytics.
+                A small number of functional cookies and storage keys keep the site working: your consent choice (stored locally on your device), sign-in session tokens (signed-in users only), an edge-set 2-letter country code used for regional formatting (<span className="font-mono text-xs">user-country</span>, 24h), and anonymous quota counters. PostHog analytics storage is only set when you Accept analytics.
               </p>
               <p>
                 These states remain persistently cached on your browser and can be completely purged at any time by clearing your browser cache. Full details in our <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link>.
@@ -216,7 +216,7 @@ export default function PrivacyPolicyPage() {
                   <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, withdraw it at any time.</li>
                 </ul>
                 <p className="text-sm"><strong>Legal Basis:</strong> We process data based on (a) consent (analytics, account creation), (b) contractual necessity (providing the service), and (c) legitimate interests (security, fraud prevention).</p>
-                <p className="text-sm"><strong>Data Transfers:</strong> Toolzum uses Cloudflare (global CDN) and may process data outside the EEA. We rely on Standard Contractual Clauses (SCCs) where required.</p>
+                <p className="text-sm"><strong>Data Transfers:</strong> Toolzum uses Cloudflare (global CDN) and PostHog (product analytics) and may process data outside the EEA. We rely on Standard Contractual Clauses (SCCs) where required.</p>
                 <p className="text-sm"><strong>Contact:</strong> For GDPR requests, email support@toolzum.com. We respond within 30 days. You also have the right to lodge a complaint with your local supervisory authority.</p>
               </div>
             </section>

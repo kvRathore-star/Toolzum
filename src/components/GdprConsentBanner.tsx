@@ -3,21 +3,20 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Cookie } from 'lucide-react';
-import { CONSENT_KEY, type ConsentChoice } from '@/lib/consent';
+import { getConsent, setConsent, type ConsentChoice } from '@/lib/consent';
 
 export function GdprConsentBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(CONSENT_KEY);
       // eslint-disable-next-line react-hooks/set-state-in-effect -- show banner only after reading consent from localStorage
-      if (!stored) setVisible(true);
+      if (!getConsent()) setVisible(true);
     } catch { /* noop */ }
   }, []);
 
   const choose = (choice: ConsentChoice) => {
-    try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* noop */ }
+    setConsent(choice);
     setVisible(false);
   };
 
@@ -42,7 +41,7 @@ export function GdprConsentBanner() {
         <div className="flex items-start gap-3 flex-1">
           <Cookie className="w-5 h-5 text-[var(--text-muted)] shrink-0 mt-0.5" />
           <div id="gdpr-title" className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
-            We use only essential cookies and privacy-preserving analytics (no personal data collected).
+            We use only essential cookies and privacy-preserving analytics. Declining turns analytics off.
             By using Toolzum, you agree to our{' '}
             <Link href="/privacy-policy" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Privacy Policy</Link>,{' '}
             <Link href="/cookies" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Cookie Policy</Link>, and{' '}

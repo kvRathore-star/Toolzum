@@ -21,7 +21,7 @@ const BENEFITS = [
   { icon: Bot, title: '300 AI credits/month', desc: 'Text generation at 1 credit per use, transcription at 10 — 10x the free allowance.' },
   { icon: Download, title: '1-click batch ZIP', desc: 'Download entire processed batches as a single ZIP archive.' },
   { icon: Save, title: 'Workflow presets', desc: 'Save tool configurations and reload them in one click.' },
-  { icon: ShieldCheck, title: 'Privacy first', desc: 'All processing stays in your browser. Zero uploads, zero logs, zero tracking.' },
+  { icon: ShieldCheck, title: 'Privacy first', desc: 'Local tools process entirely in your browser — zero uploads. Cloud AI features are clearly marked; see our Privacy Policy.' },
   { icon: Crown, title: 'White-label export', desc: 'Export watermarked results without branding included.' },
 ];
 

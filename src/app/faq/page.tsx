@@ -53,7 +53,7 @@ const faqs = [
   },
   {
     q: "Is my data tracked or sold?",
-    a: "Never. We use privacy-preserving analytics (PostHog) with strictly-necessary cookies for session persistence. No tracking pixels, no fingerprinting, no IP logging, and no third-party ad networks. We have no incentive or mechanism to sell user data.",
+    a: "Never. We use privacy-preserving analytics (PostHog page views you can Decline, plus cookieless aggregate metrics) with strictly-necessary storage for sessions and free-tier quota. No advertising trackers, no cross-site profiling, no data sale — IP addresses are used only for rate-limiting, never stored with analytics. Full details in our Privacy Policy.",
   },
   {
     q: "What happens if I close the browser during processing?",

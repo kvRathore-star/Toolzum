@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Toolzum",
   },
   description:
-    `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
+    `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Most run fully in your browser with nothing uploaded; cloud AI tools are clearly marked.`,
   robots: "index, follow",
   manifest: "/manifest.json",
   icons: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     siteName: "Toolzum",
     title: "Toolzum – Privacy-First Web Tools",
     description:
-      `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Zero servers. Zero uploads. Zero storage. Instant utility.`,
+      `${toolCount}+ privacy-first tools — PDF, images, video, AI, and more — all in one place. Most run fully in your browser with nothing uploaded; cloud AI tools are clearly marked.`,
     images: [{ url: "/og/branding/index.webp", width: 1200, height: 630 }],
   },
   twitter: {

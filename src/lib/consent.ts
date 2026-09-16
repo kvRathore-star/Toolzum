@@ -38,3 +38,27 @@ export function resetConsent(): void {
     /* noop */
   }
 }
+
+const CHANGE_EVENT = "toolzum:consent";
+
+/**
+ * Stores a choice and notifies live telemetry senders in the same tab
+ * (same-tab setItem fires no storage event, and providers mount before
+ * the visitor chooses — without this, Decline would only take effect
+ * after a reload or navigation).
+ */
+export function setConsent(choice: ConsentChoice): void {
+  try {
+    window.localStorage.setItem(CONSENT_KEY, choice);
+  } catch {
+    /* noop */
+  }
+  window.dispatchEvent(new CustomEvent<ConsentChoice>(CHANGE_EVENT, { detail: choice }));
+}
+
+/** Subscribe to choice changes; returns an unsubscribe function. */
+export function onConsentChange(fn: (choice: ConsentChoice | null) => void): () => void {
+  const handler = () => fn(getConsent());
+  window.addEventListener(CHANGE_EVENT, handler);
+  return () => window.removeEventListener(CHANGE_EVENT, handler);
+}

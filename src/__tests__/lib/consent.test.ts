@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { CONSENT_KEY, getConsent, mayCollectTelemetry, resetConsent } from '@/lib/consent';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { CONSENT_KEY, getConsent, mayCollectTelemetry, resetConsent, setConsent, onConsentChange } from '@/lib/consent';
 
 describe('consent helper (#26: Decline must disable telemetry)', () => {
   beforeEach(() => {
@@ -32,5 +32,28 @@ describe('consent helper (#26: Decline must disable telemetry)', () => {
     resetConsent();
     expect(getConsent()).toBeNull();
     expect(mayCollectTelemetry()).toBe(true);
+  });
+
+  it('setConsent stores the choice and notifies live subscribers', () => {
+    const seen: (string | null)[] = [];
+    const unsub = onConsentChange((c) => {
+      seen.push(c);
+    });
+    setConsent('declined');
+    expect(getConsent()).toBe('declined');
+    expect(mayCollectTelemetry()).toBe(false);
+    setConsent('accepted');
+    expect(mayCollectTelemetry()).toBe(true);
+    unsub();
+    setConsent('declined');
+    expect(seen).toEqual(['declined', 'accepted']);
+  });
+
+  it('unsubscribed listeners hear nothing', () => {
+    const fn = vi.fn();
+    const unsub = onConsentChange(fn);
+    unsub();
+    setConsent('accepted');
+    expect(fn).not.toHaveBeenCalled();
   });
 });
