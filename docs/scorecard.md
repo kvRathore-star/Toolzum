@@ -302,4 +302,10 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
-| Release/versioning | 65 | **85** (xlsx row #20: 65 → **85**) | `741dc4e3` — version truth restored (`0.1.0` → `2.4.0`, displayed on `/status`); `docs/RELEASE.md` (semver policy, per-PR changelog discipline with Unreleased block, release flow, rollback runbook: flags-first order, dashboard rollback, D1-forward-only warning, additive-migration rule, per-release checklist). Held below 90 for: first tagged release cycle (no tags exist yet — back-tagging 5 days of work as v2.4.0 would mislabel history). |
+| Release/versioning | 65 | **85** (xlsx row #20: 65 → **85**) | `741dc4e3` — version truth restored (`0.1.0` → `2.4.0`, displayed on `/status`); `docs/RELEASE.md` (semver policy, per-PR changelog discipline with Unreleased block, release flow, rollback runbook: flags-first order, dashboard rollback, D1-forward-only warning, additive-migration rule, per-release checklist). Held below 90 for: first tagged release cycle (no tags exist yet — back-tagging 5 days of work as v2.4.0 would mislabel history).
+
+## Update (2026-09-16, deps #22: 75 → 88, composite 78.2 → 78.3)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Dependencies | 75 | **88** (xlsx row #22: 75 → **88**) | `6c5ffd41` — audit found 2 live criticals (CI's blanket gate was red-or-meaningless): `next` upgraded 16.2.6 → 16.3.5 with a **full green build (2563/2563 pages)** as proof (also clears transitive postcss/sharp/xmldom highs). CI gate switched to `audit-ci` (prod-only, GHSA-allowlist) — passes with exactly 2 documented exceptions. Dependabot weekly cadence; `docs/DEPENDENCIES.md` (severity SLAs + triage ledger: jspdf/xlsx accepted-risk with client-side-only rationale, pptxgenjs major queued). Build-dirtied files restored, tree holds intended changes only. Held below target for: jspdf 4.x + pptxgenjs 2.x majors (need dedicated regression passes). | |
