@@ -1,0 +1,44 @@
+name: Alert Relay (#21)
+
+on:
+  schedule:
+    # Every 15 minutes — evaluates error bursts + quota-wall spikes.
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check-and-relay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate alert thresholds
+        id: check
+        if: ${{ secrets.ALERT_TOKEN != '' }}
+        run: |
+          RESP=$(curl -sS -m 30 -H "Authorization: Bearer ${{ secrets.ALERT_TOKEN }}" \
+            https://toolzum.com/api/admin/alerts-check)
+          echo "response=$RESP"
+          echo "triggered=$(echo "$RESP" | jq -r .triggered)"
+          echo "alerts<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$RESP" | jq -r '.alerts[]? | "- \(.key): \(.detail)"' >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "triggered=$(echo "$RESP" | jq -r .triggered)" >> "$GITHUB_OUTPUT"
+
+      - name: Relay to email (Cloudflare Email Service)
+        # REST API: POST /accounts/{id}/email/sending/send. Requires
+        # toolzum.com onboarded to Email Sending + a token with email
+        # permissions (see docs/ALERTS.md setup). Transactional only.
+        if: ${{ steps.check.outputs.triggered == 'true' && secrets.CLOUDFLARE_API_TOKEN != '' && secrets.ALERT_TO != '' }}
+        run: |
+          BODY=$(jq -n \
+            --arg to "${{ secrets.ALERT_TO }}" \
+            --arg text "$(printf 'Toolzum alerts (evaluated %s):\n\n%s' "$(date -u +%FT%TZ)" "${{ steps.check.outputs.alerts }}")" \
+            '{to: [{address: $to}], from: {address: "alerts@toolzum.com", name: "Toolzum Alerts"}, subject: "[Toolzum] Alert: error burst / quota-wall spike", text: $text}')
+          curl -sS -m 30 -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/email/sending/send" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY"
+
+      - name: Alerting skipped (no secrets)
+        if: ${{ secrets.ALERT_TOKEN == '' }}
+        run: echo "No ALERT_TOKEN secret — see docs/ALERTS.md setup (token + Email Sending onboarding + ALERT_TO)."
