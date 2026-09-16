@@ -36,6 +36,14 @@ describe("PWA offline + install contract (#10)", () => {
     expect(sw.includes("/api/")).toBe(true);
   });
 
+  it("versioned CDN engines get a long-lived cache (offline tools)", () => {
+    const sw = fs.readFileSync(path.join(ROOT, "scripts/gen-sw.js"), "utf8");
+    expect(sw.includes("immutable-cdn")).toBe(true);
+    for (const origin of ["cdn\\.jsdelivr\\.net", "unpkg\\.com", "storage\\.googleapis\\.com"]) {
+      expect(sw.includes(origin)).toBe(true);
+    }
+  });
+
   it("manifest is installable with working shortcuts", () => {
     const manifest = JSON.parse(
       fs.readFileSync(path.join(ROOT, "public/manifest.json"), "utf8"),

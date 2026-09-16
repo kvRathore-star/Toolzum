@@ -19,6 +19,15 @@ const DAY = 86400;
 const runtimeCaching = [
   { urlPattern: '/', handler: 'NetworkFirst', options: { cacheName: 'start-url' } },
   {
+    // #10 pre-emptive: versioned library/model CDNs are immutable
+    // (pinned versions in URLs) — cache them for months, not the 1h
+    // cross-origin default. This is what keeps FFmpeg/MediaPipe/TF.js
+    // tools working offline instead of evicting mid-week.
+    urlPattern: /^https:\/\/(cdn\.jsdelivr\.net|unpkg\.com|cdnjs\.cloudflare\.com|storage\.googleapis\.com)\/.*/i,
+    handler: 'CacheFirst',
+    options: { cacheName: 'immutable-cdn', expiration: { maxEntries: 48, maxAgeSeconds: 90 * DAY } },
+  },
+  {
     urlPattern: /^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,
     handler: 'CacheFirst',
     options: { cacheName: 'google-fonts-webfonts', expiration: { maxEntries: 4, maxAgeSeconds: 365 * DAY } },
@@ -147,7 +156,14 @@ async function main() {
     navigateFallback: '/offline',
     navigateFallbackDenylist: [/^\/api\//],
     ...(offlineRevision
-      ? { additionalManifestEntries: [{ url: '/offline', revision: offlineRevision }] }
+      ? { additionalManifestEntries: [
+          { url: '/offline', revision: offlineRevision },
+          // Shell routes: always revalidate on SW install (revision null),
+          // so first offline launch after install has the boot set even if
+          // the user never revisits. Three small pages, not 2,563.
+          { url: '/', revision: null },
+          { url: '/tools/', revision: null },
+        ] }
       : {}),
     swDest: 'out/sw.js',
     skipWaiting: true,
