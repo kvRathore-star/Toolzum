@@ -1,0 +1,46 @@
+name: Uptime Monitor (#21)
+
+on:
+  schedule:
+    # Every 5 minutes — independent outside observer (Actions infra,
+    # not our own edge). No new vendor: reuses the #21 email relay.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe home + tool page
+        id: probe
+        run: |
+          fail=""
+          for URL in "https://toolzum.com/" "https://toolzum.com/text/word-counter/"; do
+            OUT=$(curl -sS -m 20 -o /dev/null -w "%{http_code} %{time_total}" "$URL") || OUT="000 20.0"
+            CODE=$(echo "$OUT" | cut -d' ' -f1)
+            TIME=$(echo "$OUT" | cut -d' ' -f2)
+            echo "$URL -> $CODE in ${TIME}s"
+            SLOW=$(awk -v t="$TIME" 'BEGIN{print (t > 15)}')
+            if [ "$CODE" != "200" ] || [ "$SLOW" = "1" ]; then
+              fail="${fail}${URL} -> ${CODE} in ${TIME}s; "
+            fi
+          done
+          echo "fail=${fail}" >> "$GITHUB_OUTPUT"
+          echo "failed=$([ -n "$fail" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
+      - name: Relay outage via email (Cloudflare Email Service)
+        if: ${{ steps.probe.outputs.failed == 'true' && secrets.CLOUDFLARE_API_TOKEN != '' && secrets.ALERT_TO != '' }}
+        run: |
+          BODY=$(jq -n \
+            --arg to "${{ secrets.ALERT_TO }}" \
+            --arg text "$(printf 'Toolzum uptime probe FAILED at %s:\n\n%s\n\nCheck Cloudflare Pages status and recent deploys.' "$(date -u +%FT%TZ)" "${{ steps.probe.outputs.fail }}")" \
+            '{to: [{address: $to}], from: {address: "alerts@toolzum.com", name: "Toolzum Alerts"}, subject: "[Toolzum] DOWN: uptime probe failed", text: $text}')
+          curl -sS -m 30 -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/email/sending/send" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY"
+
+      - name: Uptime relay skipped (no secrets)
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN == '' || secrets.ALERT_TO == '' }}
+        run: echo "No email secrets — probes still run in Actions logs; add secrets for email relay (docs/ALERTS.md)."

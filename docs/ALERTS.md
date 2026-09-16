@@ -33,7 +33,6 @@ threshold endpoint, scheduler, Cloudflare Email Service.
    Without secrets every step skips loudly (nothing fails silently).
 
 ## On alert (runbook)
-
 - **error-burst:** open `/admin/errors` (group by message), check the
   latest deploy + `/admin/analytics` error chart. If a release caused
   it: flip flags first (`/admin/flags`), then roll back per
@@ -50,3 +49,12 @@ Thresholds live at the top of `functions/api/admin/alerts-check.ts`
 (`ERROR_BURST_LIMIT`, `BLOCKED_SHARE_*`). Raise them on noisy weeks,
 lower them before launches. Change the cooldown (`COOLDOWN_SEC`) only
 with a reason recorded here: ___________________________.
+
+## Outside observer: uptime workflow
+
+`.github/workflows/uptime.yml` (5-min cron + manual dispatch) curls `/`
+and one tool page, asserts HTTP 200 within 15s, and emails on failure
+via the same Cloudflare relay. No new vendor: Actions infra is outside
+our edge, which is the structural requirement (self-monitoring can't
+report its own death). Probe logic verified live Sep 16 2026
+(200s, ~2s). Same secrets as above; skips loudly without them.
