@@ -68,4 +68,4 @@ Record each drill (date, exporter, result) here:
 
 | Date | By | Result |
 |---|---|---|
-| — | — | _No drill recorded yet — first drill is the #38 exit criterion._ |
+| 2026-09-16 | agent-run (owner credentials) | **PASS** — export 148KB; scratch import 2,283 rows / 13 tables; all core tables queryable with live counts (8 users, 303 usages); scratch deleted. Notes: `ai_credit_event`, `feature_flag`, `alert_log`, `user_flags` absent in prod (paths never wrote — consistent with low traffic, not corruption); latest activity Sep 11–12. |

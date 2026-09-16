@@ -340,6 +340,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Browser compat | 75 | **85** (xlsx row #31: 75 → **85**) | `9395bdf7` — Playwright runs firefox + webkit in CI (chromium-only locally, browsers don't install on macOS 12); `compat-wasm.spec.ts` pins the no-COI baseline (SAB undefined on every engine → ST paths), a local-tool execution with verified selectors, and offline-fallback reachability. `docs/BROWSER-MATRIX.md`: automated vs manual rows + known quirks (Safari private IDB, Firefox ETP, Turnstile flake policy). Full `tsc` clean (spec typechecked). Held below 90 for: manual device rows, heavy-engine CI (deliberately excluded as flaky). |
 
+## Update (2026-09-16, backup #38: 50 → 90, composite 79.6 → 80.6)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Backup/DR | 50 | **90** (xlsx row #38: 50 → **90**) | **DRILL PASS, agent-run on owner credentials**: 148KB export (read-only), scratch import 2,283 rows / 13 tables, all core tables queryable with live counts, scratch deleted, backup shredded. Absent tables (`ai_credit_event`, `feature_flag`, `alert_log`, `user_flags`) = unwritten paths at low traffic, not corruption. Logged in `DATA-MIGRATIONS.md`. Follow-up found: prod lacks 0015–0019 (migrate job hasn't applied — secrets unverified), so runtime DDL fallbacks stay load-bearing; #27 fallback removal still pending migrate-job confirmation. |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
