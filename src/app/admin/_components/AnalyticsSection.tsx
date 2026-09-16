@@ -107,8 +107,8 @@ function formatDuration(secs: number | null): string {
   return `${Math.round(secs / 86400)}d`;
 }
 
-function FunnelCard({ title, icon: Icon, color, steps, note }: {
-  title: string; icon: React.ElementType; color: string;
+function FunnelCard({ title, icon: Icon, color, bar, steps, note }: {
+  title: string; icon: React.ElementType; color: string; bar: string;
   steps: { label: string; value: number; base: number }[]; note?: string;
 }) {
   return (
@@ -127,8 +127,10 @@ function FunnelCard({ title, icon: Icon, color, steps, note }: {
               </span>
             </div>
             <div className="h-1.5 bg-[var(--bg-base)] rounded-full overflow-hidden">
+              {/* NOTE: bar must be a literal class (Tailwind scans source —
+                  a runtime "text-"→"bg-" replace generates no CSS). */}
               <div
-                className={`h-full rounded-full transition-all duration-500 ${color.replace("text-", "bg-")}`}
+                className={`h-full rounded-full transition-all duration-500 ${bar}`}
                 style={{ width: `${s.base > 0 ? Math.max(2, (s.value / s.base) * 100) : 2}%` }}
               />
             </div>
@@ -212,6 +214,7 @@ export function AnalyticsSection() {
             title="Signup → First Tool"
             icon={Users}
             color="text-blue-400"
+            bar="bg-blue-500"
             steps={[
               { label: "Signups", value: data.funnels.signupToFirstTool.signups, base: data.funnels.signupToFirstTool.signups },
               { label: "Used a tool", value: data.funnels.signupToFirstTool.activated, base: data.funnels.signupToFirstTool.signups },
@@ -223,6 +226,7 @@ export function AnalyticsSection() {
             title="Quota Wall → Pro"
             icon={AlertTriangle}
             color="text-amber-400"
+            bar="bg-amber-500"
             steps={[
               { label: "Signed-in users blocked", value: data.funnels.quotaWallToPro.blockedUsers, base: data.funnels.quotaWallToPro.blockedUsers },
               { label: "Pro now", value: data.funnels.quotaWallToPro.convertedPro, base: data.funnels.quotaWallToPro.blockedUsers },
@@ -233,6 +237,7 @@ export function AnalyticsSection() {
             title="Credit Wall → Pro"
             icon={Zap}
             color="text-violet-400"
+            bar="bg-violet-500"
             steps={[
               { label: "Users hitting empty", value: data.funnels.creditWallToPro.walledUsers, base: data.funnels.creditWallToPro.walledUsers },
               { label: "Pro now", value: data.funnels.creditWallToPro.convertedPro, base: data.funnels.creditWallToPro.walledUsers },

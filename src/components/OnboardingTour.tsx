@@ -150,8 +150,10 @@ export function OnboardingTour() {
         return;
       }
       setPos({
-        top: Math.min(r.bottom + 12 + window.scrollY, window.innerHeight - 180),
-        left: Math.max(16, Math.min(r.left + window.scrollX, window.innerWidth - 336)),
+        // Fixed positioning = viewport coords: NO scroll offsets here
+        // (adding scrollY/scrollX pushed the card off-screen on scrolled pages).
+        top: Math.min(r.bottom + 12, window.innerHeight - 180),
+        left: Math.max(16, Math.min(r.left, window.innerWidth - 336)),
       });
     };
     place();

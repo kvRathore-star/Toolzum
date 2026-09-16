@@ -42,7 +42,9 @@ for T in '"user"' 'download_event' 'analytics_event' 'error_log' 'feature_flag' 
   COUNT=$(npx wrangler d1 execute "$SCRATCH" --remote --json --command "SELECT COUNT(*) as c FROM $T;" 2>/dev/null \
     | grep -o '"c": [0-9]*' | head -1 | grep -o '[0-9]*' || echo "MISSING")
   echo "  $T: ${COUNT:-MISSING}"
-  [[ "$COUNT" == "MISSING" ]] && PASS=false
+  if [[ "$COUNT" == "MISSING" ]]; then
+    PASS=false
+  fi
 done
 
 echo "→ drill import verified. Cleanup when done:"
