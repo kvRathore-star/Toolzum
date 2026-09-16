@@ -1,0 +1,26 @@
+config:
+  # Target comes from LOAD_TARGET env (set by npm run test:load after the
+  # guard). Never hardcode production here — see scripts/check-load-target.js.
+  target: "{{ $processEnvironment.LOAD_TARGET }}"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+      name: "warmup"
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 50
+      name: "spike"
+    - duration: 60
+      arrivalRate: 50
+      name: "hold"
+scenarios:
+  - name: "Browse static pages + edge function"
+    flow:
+      - get:
+          url: "/"
+      - get:
+          url: "/text/word-counter/"
+      - get:
+          url: "/finance/emi-calculator/"
+      - get:
+          url: "/api/geo-country"

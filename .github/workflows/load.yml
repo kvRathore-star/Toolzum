@@ -1,0 +1,47 @@
+name: Load Test (#42, manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Target base URL (preview deployment — never the apex)"
+        required: true
+        default: "https://main.toolzum.pages.dev"
+      p95_ms:
+        description: "p95 budget in ms"
+        required: false
+        default: "2000"
+      max_error_pct:
+        description: "Error budget in percent"
+        required: false
+        default: "1"
+
+jobs:
+  spike:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+      - name: Guard target (refuses production apex)
+        run: node scripts/check-load-target.js
+        env:
+          LOAD_TARGET: ${{ inputs.target }}
+      - name: Run spike (warmup 1rps, spike to 50, hold)
+        run: npx artillery run --output load-report.json load/artillery.yml
+        env:
+          LOAD_TARGET: ${{ inputs.target }}
+      - name: Check thresholds
+        run: node scripts/check-load-report.js load-report.json
+        env:
+          LOAD_P95_MS: ${{ inputs.p95_ms }}
+          LOAD_MAX_ERROR_PCT: ${{ inputs.max_error_pct }}
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: load-report
+          path: load-report.json
