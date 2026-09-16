@@ -23,11 +23,11 @@ test('no cross-origin isolation: single-threaded WASM baseline everywhere', asyn
 
 test('local tool executes end-to-end (word counter)', async ({ page }) => {
   await page.goto('/text/word-counter');
-  const input = page.getByLabel(/text|input/i).first();
+  const input = page.getByLabel('Text', { exact: true });
   await expect(input).toBeVisible({ timeout: 15000 });
   await input.fill('hello brave new world');
   // Result reflects the input without any server round-trip.
-  await expect(page.getByText(/5\s*(words|word)/i).first()).toBeVisible({
+  await expect(page.getByText(/5 words,/i).first()).toBeVisible({
     timeout: 15000,
   });
 });
