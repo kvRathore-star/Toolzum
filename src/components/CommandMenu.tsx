@@ -220,8 +220,19 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
             </div>
 
             <Command.List className="overflow-y-auto p-2 flex-1 scrollbar-thin scrollbar-thumb-[var(--border-subtle)]">
-              <Command.Empty className="py-12 text-center text-sm text-[var(--text-muted)]">
-                No matching tools or settings found.
+              <Command.Empty className="py-12 px-6 text-center">
+                <p className="text-sm text-[var(--text-muted)]">
+                  No matching tools or settings{query.trim() ? <> for “{query.trim().slice(0, 60)}”</> : ""}.
+                </p>
+                <button
+                  onClick={() => {
+                    onClose();
+                    router.push("/tools/");
+                  }}
+                  className="mt-3 text-xs font-medium text-[var(--accent)] underline underline-offset-2 hover:no-underline cursor-pointer"
+                >
+                  Browse all tools
+                </button>
               </Command.Empty>
 
               <div className="flex gap-1.5 overflow-x-auto px-2 py-2" role="group" aria-label="Filter by category">

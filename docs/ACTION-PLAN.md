@@ -78,5 +78,6 @@ Requires literal 100s in craft areas (zero warnings, minute-long builds, proven-
 ## Non-goals (parked with reasons)
 
 - Newsletter (#33) — parked per owner Sep 15 2026; no backend planned, dead signup removed. Only transactional quota/credit nudges if ever.
+- Native store apps (#46) — parked per owner Sep 16 2026; no Play Store / iOS app planned (PWA + Capacitor shell only). Platform row stays 55.
 - A/B infra at scale, team workspaces beyond lite — revisit past 96.
 - English-only assumption lifts in Phase 3 deliberately, not before.

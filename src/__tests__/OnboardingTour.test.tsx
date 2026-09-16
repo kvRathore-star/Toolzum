@@ -44,4 +44,46 @@ describe('OnboardingTour persistence', () => {
     });
     expect(localStorage.getItem('toolzum_onboarded')).toBeNull();
   });
+
+  it('centers the card when the anchor exists but is hidden (mobile nav)', async () => {
+    // display:none elements still query-match with a zero rect (jsdom
+    // returns zeros for all rects) — the card must center, not pin
+    // to the top-left corner.
+    const anchor = document.createElement('button');
+    anchor.setAttribute('aria-label', 'Open search');
+    anchor.style.display = 'none';
+    document.body.appendChild(anchor);
+    const fetchSpy = vi.fn(async () => new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchSpy);
+    const { container } = render(<OnboardingTour />);
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    });
+    const dialog = container.querySelector('[role="dialog"]') as HTMLElement;
+    expect(dialog.style.bottom).toBe('24px');
+    expect(dialog.style.left).toBe('50%');
+    anchor.remove();
+    vi.unstubAllGlobals();
+  });
+
+  it('positions the card by a visible anchor', async () => {
+    const anchor = document.createElement('button');
+    anchor.setAttribute('aria-label', 'Open search');
+    document.body.appendChild(anchor);
+    vi.spyOn(anchor, 'getBoundingClientRect').mockReturnValue({
+      top: 10, bottom: 40, left: 100, right: 200, width: 100, height: 30,
+      x: 100, y: 10, toJSON: () => ({}),
+    });
+    const fetchSpy = vi.fn(async () => new Response('{}', { status: 200 }));
+    vi.stubGlobal('fetch', fetchSpy);
+    const { container } = render(<OnboardingTour />);
+    await waitFor(() => {
+      expect(screen.getByText('Skip tour')).toBeDefined();
+    });
+    const dialog = container.querySelector('[role="dialog"]') as HTMLElement;
+    expect(dialog.style.top).toBe('52px');
+    expect(dialog.style.left).toBe('100px');
+    anchor.remove();
+    vi.unstubAllGlobals();
+  });
 });

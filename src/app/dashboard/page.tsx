@@ -318,6 +318,12 @@ export default function DashboardPage() {
                   <p className="text-xs text-[var(--text-muted)]/60 mt-1">
                     Start using tools to see your history here
                   </p>
+                  <Link
+                    href="/tools/"
+                    className="inline-block mt-3 text-xs font-medium text-[var(--accent)] underline underline-offset-2 hover:no-underline"
+                  >
+                    Browse tools
+                  </Link>
                 </div>
               ) : (
                 activity?.recentActivity?.map((item, i) => {
@@ -369,6 +375,12 @@ export default function DashboardPage() {
                   <p className="text-sm text-[var(--text-muted)]">
                     No tools used yet
                   </p>
+                  <Link
+                    href="/tools/"
+                    className="inline-block mt-3 text-xs font-medium text-[var(--accent)] underline underline-offset-2 hover:no-underline"
+                  >
+                    Browse tools
+                  </Link>
                 </div>
               ) : (
                 activity?.topTools?.map((tool, i) => {

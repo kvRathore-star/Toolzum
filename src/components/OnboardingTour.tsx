@@ -141,11 +141,14 @@ export function OnboardingTour() {
       const anchor = STEPS[step]!.anchor
         ? document.querySelector(STEPS[step]!.anchor as string)
         : null;
-      if (!anchor) {
+      // Hidden anchors (e.g. `header nav` is display:none on mobile) still
+      // query-match but report a zero rect — treat them as missing so the
+      // card centers instead of pinning to the top-left corner.
+      const r = anchor instanceof HTMLElement ? anchor.getBoundingClientRect() : null;
+      if (!anchor || !r || (r.width === 0 && r.height === 0)) {
         setPos(null);
         return;
       }
-      const r = anchor.getBoundingClientRect();
       setPos({
         top: Math.min(r.bottom + 12 + window.scrollY, window.innerHeight - 180),
         left: Math.max(16, Math.min(r.left + window.scrollX, window.innerWidth - 336)),
