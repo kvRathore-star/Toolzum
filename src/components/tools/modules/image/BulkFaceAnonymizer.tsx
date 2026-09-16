@@ -37,6 +37,7 @@ export default function BulkFaceAnonymizer() {
       title="Bulk Face Anonymizer"
       description="Detect faces with on-device AI, then blur or pixelate them across multiple images. Privacy-first batch redaction."
       accept="image/*"
+      heavyEngineNotice="Face-detection AI loads once, then runs per image — expect slower batches on constrained devices."
       processFile={async (file, config) => {
         const method = (config as Record<string, string>).method || 'blur';
         const strength = Number((config as Record<string, string>).strength) || 20;

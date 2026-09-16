@@ -12,6 +12,7 @@ import {
   applyPersonMask,
 } from '@/lib/selfieSegmentation';
 import { usePickerFocusReturn } from '@/components/buttonKeys';
+import { isLowEndDevice } from '@/lib/device';
 
 export default function AiBgChanger() {
   const [image, setImage] = useState<string | null>(null);
@@ -52,9 +53,14 @@ export default function AiBgChanger() {
     try {
       if (aiStatus !== 'ready') {
         setAiStatus('loading');
+        // #47: same low-end heads-up as BlurFace — multi-MB model download.
+        if (isLowEndDevice()) {
+          toast.loading('AI model is large — this may take a while on your device…', { id: 'ai-model-slow' });
+        }
         toast.loading('Downloading on-device AI model (once)…', { id: 'ai-model' });
         await getPersonSegmenter();
         setAiStatus('ready');
+        toast.dismiss('ai-model-slow');
         toast.dismiss('ai-model');
       }
       const ctx = canvas.getContext('2d');
@@ -69,6 +75,7 @@ export default function AiBgChanger() {
       toast.success('AI segmentation complete — 100% on-device!');
     } catch {
       setAiStatus('failed');
+      toast.dismiss('ai-model-slow');
       toast.dismiss('ai-model');
       toast.error('AI model unavailable — using Standard mode instead.');
       setMode('auto');
