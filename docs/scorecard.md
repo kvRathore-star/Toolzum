@@ -310,6 +310,12 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 |---|---|---|---|
 | Dependencies | 75 | **88** (xlsx row #22: 75 → **88**) | `6c5ffd41` — audit found 2 live criticals (CI's blanket gate was red-or-meaningless): `next` upgraded 16.2.6 → 16.3.5 with a **full green build (2563/2563 pages)** as proof (also clears transitive postcss/sharp/xmldom highs). CI gate switched to `audit-ci` (prod-only, GHSA-allowlist) — passes with exactly 2 documented exceptions. Dependabot weekly cadence; `docs/DEPENDENCIES.md` (severity SLAs + triage ledger: jspdf/xlsx accepted-risk with client-side-only rationale, pptxgenjs major queued). Build-dirtied files restored, tree holds intended changes only. Held below target for: jspdf 4.x + pptxgenjs 2.x majors (need dedicated regression passes). |
 
+## Update (2026-09-16, onboarding #32: 70 → 86, composite 78.6 → 78.8)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Onboarding | 70 | **86** (xlsx row #32: 70 → **86**) | `a52a0963` — audit first: 57 dropzone hits sampled as false positives (labeled zones with format hints), dashboards/favorites/directory already have icon+CTA empties. Real gaps fixed: tour pinned top-left on mobile (hidden `header nav` query-matches with zero rect → zero-rect guard centers it); search empty echoes query + Browse-all escape; dashboard empties gain Browse CTAs. Anchor-rot gate + tour tests 7/7. #46 parked (no store apps). Held below 92 for: human-eyes pass (device-lab block) + richer tour. |
+
 ## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
 
 | Dimension | Before | Now | Evidence / scope boundary |
