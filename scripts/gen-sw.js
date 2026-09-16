@@ -123,6 +123,7 @@ async function main() {
       '_next/static/**/*.{js,css}',
       '_next/static/media/*',
       'manifest.json',
+      'offline.html',
       'robots.txt',
       'sitemap.xml',
       '_redirects',
@@ -131,6 +132,11 @@ async function main() {
       '*.ico',
       'favicon*',
     ],
+    // #10: uncached navigations fall back to the offline page instead of
+    // the browser error screen. API calls are excluded (JSON must 404/503
+    // honestly, never serve HTML to a fetch()).
+    navigateFallback: '/offline.html',
+    navigateFallbackDenylist: [/^\/api\//],
     swDest: 'out/sw.js',
     skipWaiting: true,
     clientsClaim: true,

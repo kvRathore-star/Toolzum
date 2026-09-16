@@ -4,6 +4,7 @@
   "lang": "en",
   "description": "Free, privacy-first web tools. PDF, image, video, audio, AI — all in your browser.",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
   "background_color": "#020617",

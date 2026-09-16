@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#020617">
+<title>Offline — Toolzum</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+    background: #f4f4f5; color: #18181b;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #020617; color: #e4e4e7; }
+    .card { background: #0f172a !important; border-color: #1e293b !important; }
+    a.btn { background: #6366f1 !important; }
+    a.ghost { border-color: #334155 !important; color: #e4e4e7 !important; }
+    .hint { color: #94a3b8 !important; }
+  }
+  .card {
+    max-width: 420px; width: 100%; text-align: center;
+    background: #ffffff; border: 1px solid #e4e4e7; border-radius: 20px;
+    padding: 40px 28px;
+  }
+  .dot {
+    width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 16px;
+    background: #6366f1; color: #fff; font-size: 24px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  h1 { font-size: 22px; margin-bottom: 8px; }
+  p { font-size: 14px; line-height: 1.6; opacity: 0.75; margin-bottom: 8px; }
+  .row { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+  a.btn {
+    display: inline-block; padding: 10px 20px; border-radius: 10px;
+    background: #4f46e5; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+  }
+  a.ghost {
+    display: inline-block; padding: 10px 20px; border-radius: 10px;
+    border: 1px solid #d4d4d8; color: inherit; text-decoration: none; font-size: 14px;
+  }
+  .hint { font-size: 12px; margin-top: 20px; opacity: 0.6; }
+  ul { list-style: none; margin-top: 16px; font-size: 14px; }
+  ul a { color: #6366f1; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="dot">T</div>
+    <h1>You&rsquo;re offline</h1>
+    <p>This page isn&rsquo;t cached yet. Pages you&rsquo;ve already visited keep working offline — everything still processes in your browser.</p>
+    <div class="row">
+      <a class="btn" href="/">Back to Toolzum</a>
+      <a class="ghost" href="/tools/">Browse tools</a>
+    </div>
+    <ul>
+      <li><a href="/pdf/pdf-compressor/">PDF Compressor</a></li>
+      <li><a href="/image/image-compressor/">Image Compressor</a></li>
+      <li><a href="/text/word-counter/">Word Counter</a></li>
+    </ul>
+    <p class="hint">Tip: open the tools you need while online and they&rsquo;ll be here when you&rsquo;re not.</p>
+  </div>
+</body>
+</html>
