@@ -37,6 +37,7 @@ Writers must use the documented format; readers must tolerate history.
 | `analytics_event` | `createdAt` | `datetime('now')` **text** (rate-limit comparisons depend on it — do not "fix" to integer without updating `rate-limit.ts`) |
 | `download_usage` | `createdAt`/`updatedAt` | `datetime('now')` **text** |
 | `download_usage` | `date` | `YYYY-M-D` text (non-padded — string comparison unreliable, use `updatedAt`) |
+| `feature_flag` | `updatedAt` | unix **seconds** |
 
 Mixed legacy rows exist (`analytics_event`, `download_usage`). SQLite
 sorts INTEGER before TEXT, so `<` purge cutoffs sweep both formats —

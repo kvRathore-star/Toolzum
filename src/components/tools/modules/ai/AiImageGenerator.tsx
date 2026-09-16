@@ -9,12 +9,13 @@ import NextImage from "next/image";
 import Link from "next/link";
 import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { useFlag } from '@/hooks/useFlag';
 
 type Engine = 'free' | 'gemini';
 
-// Kill-switch: Gemini engine stays hidden until output quality + billing are
-// approved live with a real key. Flip to true to expose the toggle.
-const GEMINI_ENGINE_LIVE = false;
+// Kill-switch via the flag service (#41/49): Gemini engine stays hidden
+// until output quality + billing are approved. Flip `ai_image_gemini`
+// in /admin/flags — no rebuild.
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -27,6 +28,7 @@ export default function AiImageGenerator() {
   const isSignedIn = !!session?.user;
   const isPro = (session?.user as Record<string, unknown> | undefined)?.plan === 'pro';
   const { generateImage } = useAiProvider();
+  const geminiEngineLive = useFlag("ai_image_gemini");
 
   const styles = [
     { name: 'Photorealistic', suffix: 'highly detailed, photorealistic, 8k resolution, raw photo, realistic lighting' },
@@ -148,7 +150,7 @@ export default function AiImageGenerator() {
 
             <div className="space-y-2">
               <span className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Engine</span>
-              {GEMINI_ENGINE_LIVE ? (
+              {geminiEngineLive ? (
               <>
               <div className="grid grid-cols-2 gap-2" role="group" aria-label="Image engine">
                 <button

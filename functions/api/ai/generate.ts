@@ -9,6 +9,7 @@ interface Env {
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
+import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
   resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
@@ -61,6 +62,14 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     const { userId, plan: storedPlan } = userCtx;
+    // #49 kill-switch: instant-disable without a rebuild. Checked before
+    // rate-limit/credit spend so a killed feature costs nobody anything.
+    if (!(await isFlagEnabled(DB, 'ai_generation'))) {
+      return new Response(JSON.stringify({ error: 'AI features are temporarily disabled' }), {
+        status: 503,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
     const plan = resolvePlan(true, storedPlan);
     const rateLimit = aiRateLimit(plan);
 

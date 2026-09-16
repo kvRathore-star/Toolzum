@@ -93,4 +93,32 @@ describe('POST /api/ai/generate contract', () => {
     });
     expect(res.status).toBe(429);
   });
+
+  it('503s without spending credits when the ai_generation kill-switch is off', async () => {
+    const killedDb = (() => {
+      const base = mockDb();
+      const prepare = vi.fn((sql: string) => {
+        if (sql.includes('feature_flag')) {
+          return {
+            bind: vi.fn(() => ({
+              first: vi.fn(async () => ({ enabled: 0 })),
+            })),
+            first: vi.fn(async () => ({ enabled: 0 })),
+          };
+        }
+        return (base as unknown as { prepare: typeof prepare }).prepare(sql);
+      });
+      return { prepare } as unknown as D1Database;
+    })();
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: killedDb, GEMINI_API_KEY: 'k' } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ messages: [{ role: 'user', content: 'hi' }] }),
+      env,
+    });
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: 'AI features are temporarily disabled' });
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
 });

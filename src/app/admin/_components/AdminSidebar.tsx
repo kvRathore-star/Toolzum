@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug, CreditCard, BarChart3 } from "lucide-react";
+import { Shield, Users, TrendingUp, Clock, ArrowLeft, Bug, CreditCard, BarChart3, Flag } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Overview", icon: TrendingUp },
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
   { href: "/admin/errors", label: "Errors", icon: Bug },
   { href: "/admin/audit", label: "Audit Log", icon: Clock },
+  { href: "/admin/flags", label: "Feature Flags", icon: Flag },
 ];
 
 export function AdminSidebar() {
