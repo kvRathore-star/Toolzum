@@ -1,6 +1,24 @@
 import type { Release } from "./releaseTypes";
 
 export const RELEASES_PART_1: Release[] = [
+  {
+    version: "v2.5.0",
+    date: "September 16, 2026",
+    title: "Trust & Resilience Program",
+    tag: "minor",
+    tagColor: "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+    description: "Privacy policies rewritten to match reality, a consent banner that actually disables analytics, admin conversion funnels, instant kill-switches, and an offline page that works when pages don't load.",
+    updates: [
+      { type: "feature", text: "Consent banner Decline now truly disables analytics — plus a reset button to revisit your choice anytime." },
+      { type: "feature", text: "Admin conversion funnels: signup-to-first-tool, quota-wall-to-Pro, and credit-wall-to-Pro." },
+      { type: "feature", text: "Instant kill-switches for AI features with an admin control page — no rebuild to pause." },
+      { type: "feature", text: "Offline fallback page: uncached visits show a helpful page instead of a browser error." },
+      { type: "feature", text: "Onboarding tour fixed on mobile; search and dashboard empty states guide you onward." },
+      { type: "fix", text: "Legal pages audited line-by-line against the live product; subscription, copyright, and children's terms added." },
+      { type: "fix", text: "AI errors now say you're offline when you are — and never auto-retry paid requests." },
+      { type: "security", text: "Bot-rate guards on AI endpoints, repaired abuse logging, Next.js security upgrade." },
+    ]
+  },
   // ══════════════════════════════════════════════
   // SEPTEMBER 2026
   // ══════════════════════════════════════════════
