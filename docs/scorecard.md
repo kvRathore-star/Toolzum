@@ -297,3 +297,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Abuse | 85 | **93** (xlsx row #37: 85 → **93**) | `08348464` — layer review in `docs/ABUSE.md` (fingerprint vs IP vs account vs Turnstile, spoofability table, CGNAT tradeoffs, SQLite NULL-PK quirks). Fixed dead abuse logging (4-into-5-column INSERT failed silently — rows never written). AI IP-velocity guard (300/hr across accounts, pre-auth, 429 + abuse row) on all 3 AI endpoints; anon rotation backstop (500 attempts/IP/day); 0018 composite fingerprint index (rate-limit lookups were full scans). 45/45 tests green; gates 14/14; full `tsc` clean. Held below 96 for: Turnstile-on-AI (covered by credits + velocity), CGNAT threshold tuning on prod data, abuse dashboard UI. |
+
+## Update (2026-09-16, release #20: 65 → 85, composite 77.9 → 78.2)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Release/versioning | 65 | **85** (xlsx row #20: 65 → **85**) | `741dc4e3` — version truth restored (`0.1.0` → `2.4.0`, displayed on `/status`); `docs/RELEASE.md` (semver policy, per-PR changelog discipline with Unreleased block, release flow, rollback runbook: flags-first order, dashboard rollback, D1-forward-only warning, additive-migration rule, per-release checklist). Held below 90 for: first tagged release cycle (no tags exist yet — back-tagging 5 days of work as v2.4.0 would mislabel history). |
