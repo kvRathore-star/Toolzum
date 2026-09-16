@@ -15,9 +15,14 @@ const SECTIONS = [
     id: "general",
     title: "1. General Disclaimer",
     content: (
-      <p>
-        All site names, logos, and trademarks are the property of their respective owners and are used on this site solely for identification purposes. This website does NOT host, store, or distribute any copyrighted or pirated content. All content processed through our tools is retrieved directly from the user's own device or from official, public servers of the respective platforms, and only publicly available content can be accessed. All company logos and trademarks displayed on this site remain the property of their respective owners. Our tools are provided as utilities to access publicly available content only, and this website takes no responsibility for content hosted elsewhere.
-      </p>
+      <>
+        <p className="mb-3">
+          Toolzum is a browser-based utility catalog. Most tools process your files locally on your own device — we never host, store, or distribute files you process with local tools. A small number of clearly-marked AI and cloud tools send your input to our server for processing (for example, AI features powered by our AI provider, or tools that query public third-party data such as captions, exchange rates, or postal records).
+        </p>
+        <p>
+          All company, site, and product names, logos, and trademarks referenced on this site remain the property of their respective owners and are used solely for identification. This website does not host, store, or distribute any copyrighted or pirated content, and our tools are provided as utilities for lawful content you have the right to access.
+        </p>
+      </>
     ),
   },
   {

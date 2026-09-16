@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import posthog from 'posthog-js';
+import { mayCollectTelemetry } from '@/lib/consent';
 
 const POSTHOG_KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 
@@ -14,6 +15,8 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!POSTHOG_KEY || initialized) return;
+    // #26: an explicit Decline in the consent banner disables PostHog.
+    if (!mayCollectTelemetry()) return;
     initialized = true;
 
     posthog.init(POSTHOG_KEY, {

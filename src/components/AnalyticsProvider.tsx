@@ -2,12 +2,15 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { mayCollectTelemetry } from '@/lib/consent';
 
 export function AnalyticsProvider() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    // #26: an explicit Decline in the consent banner disables first-party telemetry.
+    if (!mayCollectTelemetry()) return;
     // Zero-Knowledge Cookieless Telemetry Dispatcher
     const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
     

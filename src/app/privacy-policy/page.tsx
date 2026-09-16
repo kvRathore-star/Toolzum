@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { 
   ShieldAlert, 
   EyeOff, 
@@ -49,14 +50,14 @@ export default function PrivacyPolicyPage() {
             <ShieldAlert className="w-3 h-3" /> Privacy by Architecture, Not Policy
           </div>
           <h3 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] mb-2">
-            We Cannot See Your Files. Period.
+            Your files never leave your device.
           </h3>
           <p className="text-sm text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlike traditional services that upload your documents to cloud servers and promise to delete them later, 
-            Toolzum <strong>never sends your files to our servers</strong>. Most tools load, process, and output data 
-            entirely within your browser's memory via WebAssembly. A small number of AI-powered tools send data directly 
-            from your browser to a third-party AI API — these are clearly marked on every tool page. 
-            Either way, your file <strong>never reaches our infrastructure</strong>.
+            Unlike traditional services that upload your documents to cloud servers and promise to delete them later,
+            Toolzum <strong>never sends your files to our servers for local tools</strong>. Most tools load, process, and output data
+            entirely within your browser's memory via WebAssembly. A small number of AI-powered and cloud tools do send your input
+            to our server, which forwards it to our AI provider (Google Gemini) — these tools are clearly marked on every tool page,
+            and your file is never stored by us.
           </p>
         </div>
 
@@ -112,22 +113,33 @@ export default function PrivacyPolicyPage() {
                 Traditional utility sites transmit user documents to backend queues to run formatting scripts. Toolzum compiles C++ libraries and JavaScript tools into WebAssembly binaries that execute locally inside a sandboxed client thread.
               </p>
               <p>
-                For the majority of tools, your files (such as confidential business PDFs, identification files, or private photo pixels) never exit your device to traverse the internet. A small number of AI tools send data directly from your browser to third-party AI APIs — these are clearly marked so you always know what happens with your data.
+                For the majority of tools, your files (such as confidential business PDFs, identification files, or private photo pixels) never exit your device to traverse the internet. A small number of AI and cloud tools are the exception: your input is sent to our server, which forwards it to our AI provider (Google Gemini) for processing and returns the result. These tools are clearly marked so you always know what happens with your data, and we do not store your file content — only anonymous credit/quota accounting.
               </p>
             </section>
 
             <section id="data-collection" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">3. Information We Collect</h3>
               <p className="mb-4">
-                Because all processing operations occur locally, our API servers do not collect:
+                Because local-tool processing operations occur in your browser, our servers never receive:
               </p>
               <ul className="list-disc pl-6 space-y-2 mb-4">
-                <li>Files uploaded to converters, PDF compressors, or image editors.</li>
-                <li>Content, text strings, or inputs entered into developer calculators or humanizers.</li>
+                <li>Files uploaded to converters, PDF compressors, or image editors (local tools).</li>
+                <li>Content, text strings, or inputs entered into developer calculators or humanizers (local tools).</li>
                 <li>Cryptographic hashes, passwords, or secure notes generated locally.</li>
               </ul>
+              <p className="mb-4">
+                <strong>What our servers do receive and store:</strong>
+              </p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>Page-view telemetry</strong> — visited path, viewport size, and client type, sent to our first-party <span className="font-mono text-xs">/api/analytics</span> endpoint and stored in our database (no cookies, no IP logging; disabled when you choose Decline in the consent banner).</li>
+                <li><strong>Error reports</strong> — error message, stack trace, tool name, page path, and user-agent string, stored to diagnose crashes. Error text can occasionally contain fragments of what the page was doing — never file contents.</li>
+                <li><strong>Zero-result search terms</strong> — only searches that match no tool, truncated, used to improve search synonyms.</li>
+                <li><strong>Quota identifiers</strong> — a salted hash of basic browser attributes (user-agent, screen size, language, timezone) used solely to enforce anonymous download/usage limits. It cannot identify you and is never joined to account data.</li>
+                <li><strong>AI/cloud tool inputs</strong> — prompts, text, or audio you submit to a marked AI or cloud tool transit our server to our AI provider (Google Gemini). We log only anonymous credit/quota accounting, not your content.</li>
+                <li><strong>Account data (signed-in users only)</strong> — email, plan, AI credit balance, favorites, and session tokens.</li>
+              </ul>
               <p>
-                We only collect basic, anonymized static telemetry (such as page route views and errors) via localized tracking pixels to analyze platform optimization and check overall compilation crashes.
+                We also run <strong>Cloudflare Web Analytics</strong> (cookieless, aggregate page metrics) and, unless you Decline, <strong>PostHog</strong> page-view analytics. See our <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link> for details and controls.
               </p>
             </section>
 
@@ -136,8 +148,11 @@ export default function PrivacyPolicyPage() {
               <p className="mb-4">
                 Toolzum utilizes browser storage mechanisms (LocalStorage, SessionStorage, and IndexedDB) to save settings, UI preferences, and user states (such as checklist items, upvotes, and custom styling themes).
               </p>
+              <p className="mb-4">
+                A small number of functional cookies and storage keys keep the site working: your consent choice (<span className="font-mono text-xs">th_gdpr_consent</span>), sign-in session tokens (signed-in users only), an edge-set 2-letter country code used for regional formatting (<span className="font-mono text-xs">user-country</span>, 24h), and anonymous quota counters. PostHog analytics storage is only set when you Accept analytics.
+              </p>
               <p>
-                These states remain persistently cached on your browser and can be completely purged at any time by clearing your browser cache.
+                These states remain persistently cached on your browser and can be completely purged at any time by clearing your browser cache. Full details in our <Link href="/cookies" className="text-[var(--accent)] hover:underline">Cookie Policy</Link>.
               </p>
             </section>
 
@@ -146,8 +161,19 @@ export default function PrivacyPolicyPage() {
               <p className="mb-4">
                 We do not sell, rent, or lease any analytical details or user data. We host the Toolzum compiler framework on global CDN edge nodes (Cloudflare/Pages) to deliver files to your browser efficiently.
               </p>
+              <p className="mb-4">
+                Subprocessors and integrations that may receive limited data:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>Google Gemini</strong> — our AI provider. Inputs you submit to marked AI/cloud tools transit our server to Gemini for processing, under Google's API data terms. We store none of your content.</li>
+                <li><strong>PostHog</strong> — page-view analytics, active only until you choose Decline in the consent banner.</li>
+                <li><strong>Cloudflare Web Analytics</strong> — cookieless aggregate metrics; no personal data.</li>
+                <li><strong>Pollinations</strong> — the free AI image engine loads generated images directly from their servers in your browser.</li>
+                <li><strong>Library & model CDNs</strong> (jsDelivr, unpkg, cdnjs, Google storage) — deliver open-source processing libraries and on-device AI models to your browser. They see standard download requests (IP, user-agent) like any CDN fetch.</li>
+                <li><strong>Cloudflare Turnstile</strong> — bot-protection challenge on email sign-in.</li>
+              </ul>
               <p>
-                When you initiate payment requests (such as upgraded cloud quotas), your transactions are handled directly through authorized secure portal gateways (e.g. Razorpay or Dodo) under their respective privacy parameters.
+                When you initiate payment requests (such as upgraded cloud quotas), your transactions are handled directly through authorized secure portal gateways (e.g. Razorpay or Dodo) under their respective privacy parameters. We never see or store card details.
               </p>
             </section>
 

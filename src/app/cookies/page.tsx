@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { DocumentSidebar } from "@/components/DocumentSidebar";
+import { CookieResetButton } from "@/components/CookieResetButton";
 
 const SECTIONS = [
   { id: "intro", title: "1. Introduction" },
@@ -46,15 +47,15 @@ export default function CookiePolicyPage() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
             <ShieldCheck className="w-8 h-8 text-[var(--accent)] shrink-0" />
             <div>
-              <h2 className="font-semibold text-sm">Essential Only</h2>
-              <p className="text-xs text-[var(--text-secondary)] mt-1">We only use strictly necessary cookies for basic functionality. No tracking cookies, no fingerprinting.</p>
+              <h2 className="font-semibold text-sm">Essential Only (by default)</h2>
+              <p className="text-xs text-[var(--text-secondary)] mt-1">Strictly necessary cookies and local storage for basic functionality. Analytics only runs if you Accept — Decline turns it off.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
             <EyeOff className="w-8 h-8 text-emerald-700 dark:text-emerald-400 shrink-0" />
             <div>
               <h2 className="font-semibold text-sm">No Personal Data</h2>
-              <p className="text-xs text-[var(--text-secondary)] mt-1">Our privacy-first analytics collect zero personal information. No cookies are used for analytics.</p>
+              <p className="text-xs text-[var(--text-secondary)] mt-1">Our analytics collect zero personal information — page paths and viewport sizes only, never file contents. Quota enforcement uses an anonymous browser-attribute hash, never joined to your identity.</p>
             </div>
           </div>
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] p-6 flex items-start gap-4">
@@ -103,9 +104,12 @@ export default function CookiePolicyPage() {
                 Essential cookies are necessary for the website to function properly. They enable core features like:
               </p>
               <ul className="list-disc pl-6 space-y-2 mb-4">
-                <li>Remembering your cookie consent preference (so we don't ask every visit)</li>
+                <li>Remembering your cookie consent preference (stored locally on your device, so we don't ask every visit)</li>
                 <li>Maintaining your theme selection (dark/light mode)</li>
                 <li>Storing session preferences during your visit</li>
+                <li>Sign-in session tokens (only when you create an account and log in)</li>
+                <li>A 2-letter country code set by our edge network for regional formatting (expires after 24 hours)</li>
+                <li>Anonymous quota counters and a browser-attribute hash used solely to enforce free-usage limits</li>
               </ul>
               <p>
                 These cookies do not collect any personally identifiable information and cannot be disabled through our consent banner, as they are required for the site to operate.
@@ -123,15 +127,28 @@ export default function CookiePolicyPage() {
                 <li>Does <strong>not</strong> track individual users across sessions</li>
                 <li>Provides only anonymized, aggregate metrics</li>
               </ul>
-              <p>
+              <p className="mb-4">
                 Because Cloudflare Web Analytics operates without cookies, it requires no consent banner opt-in under GDPR/ePrivacy regulations.
+              </p>
+              <p className="mb-4">
+                We also run two consent-gated analytics channels that are <strong>disabled when you choose Decline</strong> in our banner:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 mb-4">
+                <li><strong>PostHog page views</strong> — product analytics that stores a session identifier in your browser. Only initialized after you Accept (or before you choose); never initialized after Decline.</li>
+                <li><strong>First-party telemetry</strong> — visited path, viewport size, and client type sent to our own <span className="font-mono text-xs">/api/analytics</span> endpoint and stored in our database. Skipped entirely after Decline.</li>
+              </ul>
+              <p>
+                Crash reports (error message, tool name, page path) are always collected under our legitimate interest in keeping the site working — they contain no file contents and no personal data.
               </p>
             </section>
 
             <section id="third-party" className="scroll-mt-28 border-t border-[var(--border-subtle)] pt-8">
               <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-3">5. Third-Party Cookies</h3>
               <p className="mb-4">
-                Toolzum does <strong>not</strong> set any third-party cookies. We do not integrate advertising networks, social media pixels, or external tracking scripts that would place cookies from other domains.
+                Toolzum sets <strong>no advertising or cross-site tracking cookies</strong>. We do not integrate advertising networks, social media pixels, or external trackers that build behavioral profiles.
+              </p>
+              <p className="mb-4">
+                Two integrations may store their own strictly-necessary data: <strong>PostHog</strong> (session identifier, only when analytics are accepted) and <strong>Cloudflare Turnstile</strong> (bot-protection challenge state during email sign-in).
               </p>
               <p className="mb-4">
                 If you choose to make a payment through our billing portal, your transaction is handled by an authorized payment gateway (Razorpay or Dodo Payments) under their own privacy and cookie policies. Those services may set their own cookies during the checkout process.
@@ -146,11 +163,13 @@ export default function CookiePolicyPage() {
               <div className="bg-[var(--bg-surface)] p-6 rounded-xl border border-[var(--border-subtle)] space-y-4">
                 <p>You have full control over cookies and storage:</p>
                 <ul className="list-disc list-inside space-y-2 text-sm">
-                  <li><strong>Consent Banner:</strong> When you first visit, our banner lets you Accept or Decline non-essential storage.</li>
+                  <li><strong>Consent Banner:</strong> When you first visit, our banner lets you Accept or Decline non-essential analytics. Declining disables PostHog and our first-party telemetry — only essential storage and cookieless aggregate metrics remain.</li>
+                  <li><strong>Change your mind:</strong> Use the button below to clear your stored choice and show the banner again.</li>
                   <li><strong>Browser Settings:</strong> Most browsers allow you to view, block, or delete cookies in their settings.</li>
                   <li><strong>Clear Data:</strong> You can clear LocalStorage, IndexedDB, and cookies at any time through your browser's developer tools or privacy settings.</li>
                   <li><strong>No Impact:</strong> Declining cookies will not break the core functionality of our tools — all processing still works locally.</li>
                 </ul>
+                <CookieResetButton />
               </div>
             </section>
 

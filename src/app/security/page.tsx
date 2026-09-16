@@ -21,7 +21,7 @@ const trustMetrics = [
   { value: `${pct}%`, label: "Client-Side", sub: `${localTools} tools — no server needed` },
   { value: "0s", label: "Data Retention", sub: "Processed then garbage collected" },
   { value: totalCloud.toString(), label: "Cloud Processing", sub: `${hybridTools > 0 ? `${hybridTools} hybrid, ` : ''}clearly marked` },
-  { value: `${totalImplemented}`, label: "Total Tools", sub: "all free, no signup" },
+  { value: `${totalImplemented}`, label: "Total Tools", sub: "free to start · sign-in optional" },
 ];
 
 const comparisonPoints = [
@@ -38,7 +38,7 @@ const comparisonPoints = [
   {
     icon: EyeOff,
     title: "No Telemetry on Your Content",
-    desc: "We run zero analytics on file contents, filenames, or processing outcomes. No tracking pixels, no session replays, no metadata collection on what you process."
+    desc: "We run zero analytics on file contents or filenames — no session replays, no content inspection. We do record anonymous page views, crash reports, and per-tool quota accounting (never file contents) to keep the site working; see our Privacy Policy for the full list."
   },
   {
     icon: Wifi,
@@ -53,9 +53,9 @@ const securitySections = [
     title: "Architecture",
     items: [
       "All processing via WebAssembly (WASM) — compiled C++, Rust, and Python libraries execute in your browser's sandboxed worker thread",
-      "Zero data transmitted to external servers during file operations",
-      "Static edge delivery via global CDN — no application servers, no file storage buckets",
-      "Session management and payments are the only server-side operations, and they never touch your files"
+      "Zero file bytes transmitted to external servers during local-tool operations",
+      "Static edge delivery via global CDN — no file storage buckets, no file servers",
+      "Server-side APIs handle sessions, AI proxying for marked cloud tools, quota/analytics accounting, and payments — and they never touch your file bytes"
     ],
   },
   {
@@ -82,10 +82,9 @@ const securitySections = [
     icon: FileCheck,
     title: "Enterprise Security Controls",
     items: [
-      "Content Security Policy (CSP) headers — restricts all outbound connections by policy",
-      "Subresource Integrity (SRI) — all open source libraries loaded with cryptographic integrity hashes",
-      "X-Content-Type-Options: nosniff, X-Frame-Options: DENY, strict Referrer-Policy",
-      "No third-party cookies, no advertising scripts, no external tracking on tool pages"
+      "Content Security Policy (CSP) headers — restricts script, connection, and frame sources by allowlist",
+      "X-Content-Type-Options: nosniff, X-Frame-Options: DENY, HSTS, strict Referrer-Policy",
+      "No advertising scripts and no cross-site trackers; privacy-preserving analytics only (see Cookie Policy)"
     ],
   },
 ];
@@ -101,12 +100,13 @@ export default function SecurityPage() {
             <Shield className="w-3.5 h-3.5" /> Security & Data Protection
           </span>
           <h1 className="font-[family-name:var(--font-serif)] text-5xl mb-4 leading-tight">
-            There is No Server.
+            There Is No File Server.
           </h1>
           <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
             Traditional web tools upload your documents to a server, process them, and promise to delete them later. 
-            Toolzum skips the server entirely — your files load into browser memory, process locally via WebAssembly, 
-            and are downloaded directly. There is nothing to intercept, no server to breach, no file to delete.
+            Toolzum skips the file server entirely for local tools — your files load into browser memory, process locally via WebAssembly, 
+            and are downloaded directly. There is nothing to intercept, no file server to breach, no file to delete.
+            (Account, AI, quota, and payment APIs do exist — they handle sessions and marked cloud features, never your file bytes.)
           </p>
         </div>
 

@@ -10,6 +10,7 @@ import { clientToolsRegistry } from "@/registry/tools-client-index";
 import { useDialogA11y } from "@/components/useDialogA11y";
 import { useFavorites } from "@/hooks/useFavorites";
 import { aliasesForSlug } from "@/lib/searchAliases";
+import { mayCollectTelemetry } from "@/lib/consent";
 
 interface CommandMenuProps {
   open: boolean;
@@ -161,6 +162,8 @@ export function CommandMenu({ open, onClose }: CommandMenuProps) {
     if (!q || rankedSlugs === null || rankedSlugs.size > 0) return;
     if (loggedMisses.current.has(q)) return;
     loggedMisses.current.add(q);
+    // #26: an explicit Decline in the consent banner disables miss logging.
+    if (!mayCollectTelemetry()) return;
     const t = window.setTimeout(() => {
       fetch("/api/analytics", {
         method: "POST",

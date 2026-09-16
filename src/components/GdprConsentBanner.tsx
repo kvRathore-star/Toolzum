@@ -3,8 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Cookie } from 'lucide-react';
-
-const CONSENT_KEY = 'th_gdpr_consent';
+import { CONSENT_KEY, type ConsentChoice } from '@/lib/consent';
 
 export function GdprConsentBanner() {
   const [visible, setVisible] = useState(false);
@@ -17,15 +16,14 @@ export function GdprConsentBanner() {
     } catch { /* noop */ }
   }, []);
 
-  const accept = () => {
-    try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch { /* noop */ }
+  const choose = (choice: ConsentChoice) => {
+    try { localStorage.setItem(CONSENT_KEY, choice); } catch { /* noop */ }
     setVisible(false);
   };
 
-  const decline = () => {
-    try { localStorage.setItem(CONSENT_KEY, 'declined'); } catch { /* noop */ }
-    setVisible(false);
-  };
+  const accept = () => choose('accepted');
+
+  const decline = () => choose('declined');
 
   useEffect(() => {
     if (!visible) return;

@@ -79,7 +79,7 @@ const SECTIONS = [
           </div>
         </div>
         <p className="mb-3">
-          Because all file-handling operations run locally inside your browser, Toolzum Inc. has no control over, and assumes no responsibility for, the outcomes of your processed files, calculations, or data.
+          Because local-tool file handling runs entirely inside your browser, Toolzum Inc. has no control over, and assumes no responsibility for, the outcomes of your locally processed files, calculations, or data. Inputs you submit to clearly-marked AI or cloud tools transit our server to our AI provider as described in our Privacy Policy.
         </p>
         <p>
           In no event shall Toolzum Inc. or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the Service.
@@ -144,6 +144,9 @@ export default function TermsOfServicePage() {
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
             Please read these guidelines carefully before using the Toolzum client compilers.
+          </p>
+          <p className="text-sm font-mono text-[var(--text-muted)] mt-4">
+            Last Updated: September 16, 2026
           </p>
         </div>
 

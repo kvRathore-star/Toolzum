@@ -36,7 +36,7 @@ export default function PricingPage() {
             One Plan. Total Freedom.
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
-            Unlock the power of all {totalImplemented} tools with zero limits. {localTools} run locally on your device. No maintenance, no server logs.
+            Unlock the power of all {totalImplemented} tools with zero limits. {localTools} run locally on your device — your files are never uploaded, never stored.
           </p>
         </div>
 
