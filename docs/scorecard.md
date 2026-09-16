@@ -308,4 +308,10 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
-| Dependencies | 75 | **88** (xlsx row #22: 75 → **88**) | `6c5ffd41` — audit found 2 live criticals (CI's blanket gate was red-or-meaningless): `next` upgraded 16.2.6 → 16.3.5 with a **full green build (2563/2563 pages)** as proof (also clears transitive postcss/sharp/xmldom highs). CI gate switched to `audit-ci` (prod-only, GHSA-allowlist) — passes with exactly 2 documented exceptions. Dependabot weekly cadence; `docs/DEPENDENCIES.md` (severity SLAs + triage ledger: jspdf/xlsx accepted-risk with client-side-only rationale, pptxgenjs major queued). Build-dirtied files restored, tree holds intended changes only. Held below target for: jspdf 4.x + pptxgenjs 2.x majors (need dedicated regression passes). | |
+| Dependencies | 75 | **88** (xlsx row #22: 75 → **88**) | `6c5ffd41` — audit found 2 live criticals (CI's blanket gate was red-or-meaningless): `next` upgraded 16.2.6 → 16.3.5 with a **full green build (2563/2563 pages)** as proof (also clears transitive postcss/sharp/xmldom highs). CI gate switched to `audit-ci` (prod-only, GHSA-allowlist) — passes with exactly 2 documented exceptions. Dependabot weekly cadence; `docs/DEPENDENCIES.md` (severity SLAs + triage ledger: jspdf/xlsx accepted-risk with client-side-only rationale, pptxgenjs major queued). Build-dirtied files restored, tree holds intended changes only. Held below target for: jspdf 4.x + pptxgenjs 2.x majors (need dedicated regression passes). |
+
+## Update (2026-09-16, observability #21: 80 → 90, composite 78.3 → 78.6)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Observability | 80 | **90** (xlsx row #21: 80 → **90**) | `4d2497c9` — data finally has alarms: threshold endpoint (token-authed, 503-loud unconfigured) fires error-burst ≥50/15min and quota-wall ≥40%-share/≥20/hr, 1h per-key cooldown (`alert_log`, 0019); 15-min scheduler workflow relays via **Cloudflare Email Service** (no SMTP procurement, no new vendor — email-vs-Discord decision Sep 16); `docs/ALERTS.md` (5-min owner setup, per-rule runbook, tuning log). Endpoint tests 7/7. Held below 93 for: owner setup completion (domain onboarding, token, recipient) + threshold tuning on prod noise. | |
