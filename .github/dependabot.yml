@@ -1,0 +1,25 @@
+version: 2
+updates:
+  # #22: weekly npm cadence. Minor/patch grouped into one PR; majors
+  # arrive separately for deliberate triage (see docs/DEPENDENCIES.md).
+  # jspdf is intentionally NOT ignored — its 4.x major needs visibility,
+  # but must not auto-merge (breaking PDF-tool changes).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Kolkata"
+    groups:
+      minor-patch:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "next"
+          - "jspdf"
+          - "pptxgenjs"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+    target-branch: "main"

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+  "skip-dev": true,
+  "allowlist": [
+    "GHSA-wfv2-pwc8-crg5",
+    "GHSA-f8cm-6447-x5h2"
+  ]
+}
