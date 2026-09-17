@@ -422,18 +422,18 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                   <Link
                     key={tool.id}
                     href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
-                    className="group flex items-center gap-4 p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5"
+                    className="group flex items-center gap-4 p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 overflow-hidden"
                   >
                     <div className={`w-10 h-10 rounded-xl ${theme.bgTint} flex items-center justify-center shrink-0 ring-1 ring-[var(--border-subtle)]`}>
                       <Icon className={`w-5 h-5 ${theme.iconColor}`} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
-                        <span className="text-[9px] font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-1.5 py-0.5 rounded">{tool.category}</span>
-                          {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Crown className="w-2.5 h-2.5" />Pro</span>}
+                      <div className="flex items-center gap-2 mb-0.5 min-w-0">
+                        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}</h3>
+                        <span className="text-[9px] font-mono text-[var(--text-muted)] bg-[var(--bg-overlay)] px-1.5 py-0.5 rounded shrink-0">{tool.category}</span>
+                          {tool.isPro && <span className="text-[9px] font-mono text-amber-700 dark:text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded flex items-center gap-0.5 shrink-0"><Crown className="w-2.5 h-2.5" />Pro</span>}
                       </div>
-                      <p className="text-xs text-[var(--text-secondary)] truncate">{tool.description}</p>
+                      <p className="text-xs text-[var(--text-secondary)] truncate break-words">{tool.description}</p>
                     </div>
                     <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
                   </Link>

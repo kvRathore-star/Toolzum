@@ -38,7 +38,7 @@ describe('CategoryPageClient filter dead-ends (#issue)', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Pro' }));
     expect(screen.getByText(/No Pro tools in/)).toBeDefined();
 
-    fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
     expect(screen.getByText('Percentage Calculator')).toBeDefined();
     expect(screen.getByText('Age Calculator')).toBeDefined();
   });

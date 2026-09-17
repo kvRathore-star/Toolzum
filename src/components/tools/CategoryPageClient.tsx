@@ -227,6 +227,26 @@ const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
   },
 };
 
+function SectionToolRow({ tool }: { tool: { id: string; slug: string; name: string; description: string; category: string } }) {
+  const { icon: Icon, color, bg } = getIconBg(tool);
+  return (
+    <Link
+      key={tool.id}
+      href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
+      className="group flex items-center gap-4 p-4 bg-[var(--bg-base)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 overflow-hidden"
+    >
+      <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shrink-0 ring-1 ring-[var(--border-subtle)]`}>
+        <Icon className={`w-5 h-5 ${color}`} />
+      </div>
+      <div className="flex-1 min-w-0">
+        <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}</h3>
+        <p className="text-xs text-[var(--text-secondary)] truncate break-words">{tool.description}</p>
+      </div>
+      <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
+    </Link>
+  );
+}
+
 export function CategoryPageClient({ category, tools, sections = [], uncategorized = [], intro = '' }: CategoryPageClientProps) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [activeSubcategory, setActiveSubcategory] = React.useState<string | null>(null);
@@ -579,23 +599,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
 
         {/* Tool Grid/List */}
         {searchQuery || activeSubcategory || letterFilter || proFilter !== 'all' || !sections?.length ? (
-          filtered.length === 0 ? (
-            <div className="py-20 text-center border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-overlay)]">
-              <p className="text-[var(--text-muted)] mb-2">
-                {proFilter === 'pro'
-                  ? `No Pro tools in ${displayName} yet — everything here is free.`
-                  : proFilter === 'free'
-                    ? `No free tools match here.`
-                    : 'No tools match your filters.'}
-              </p>
-              <button
-                onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); setProFilter('all'); }}
-                className="mt-2 px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
-              >
-                Reset filters
-              </button>
-            </div>
-          ) : viewMode === 'grid' ? (
+          viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((tool) => {
                 const { icon: Icon, color, bg, gradient } = getIconBg(tool);
@@ -674,7 +678,8 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                   </button>
                   <div className={`transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                     <div className="px-6 pb-6 pt-2 border-t border-[var(--border-subtle)]">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {viewMode === 'grid' ? (
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {section.tools.map((tool) => {
                           const { icon: Icon, color, bg, gradient } = getIconBg(tool);
                           return (
@@ -702,6 +707,11 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                           );
                         })}
                       </div>
+) : (
+<div className="space-y-2">
+{section.tools.map((tool) => <SectionToolRow key={tool.id} tool={tool} />)}
+</div>
+)}
                     </div>
                   </div>
                 </section>
@@ -729,7 +739,8 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                 </button>
                 <div className={`transition-all duration-300 ease-in-out ${expandedSections.has('other-tools') ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}>
                   <div className="px-6 pb-6 pt-2 border-t border-[var(--border-subtle)]">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {viewMode === 'grid' ? (
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                       {uncategorized.map((tool) => {
                         const { icon: Icon, color, bg, gradient } = getIconBg(tool);
                         return (
@@ -757,6 +768,11 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                         );
                       })}
                     </div>
+) : (
+<div className="space-y-2">
+{uncategorized.map((tool) => <SectionToolRow key={tool.id} tool={tool} />)}
+</div>
+)}
                   </div>
                 </div>
               </section>
@@ -770,9 +786,13 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--bg-surface)] flex items-center justify-center">
               <Search className="w-6 h-6 text-[var(--text-muted)]" />
             </div>
-            <p className="text-[var(--text-muted)] mb-2">No tools found{searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : letterFilter ? ` starting with "${letterFilter}"` : ''}.</p>
+            <p className="text-[var(--text-muted)] mb-2">
+              {proFilter === 'pro'
+                ? `No Pro tools in ${displayName} yet — everything here is free.`
+                : `No tools found${searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : letterFilter ? ` starting with "${letterFilter}"` : ''}.`}
+            </p>
             <p className="text-xs text-[var(--text-muted)] mb-4">Try a different search term or browse other categories.</p>
-            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
+            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); setProFilter('all'); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
               Clear filters
             </button>
           </div>
