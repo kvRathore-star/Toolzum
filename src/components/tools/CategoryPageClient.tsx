@@ -574,8 +574,8 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
         </div>
 
         {/* Search + view toggle */}
-        <div className="flex items-center gap-4 mb-10">
-          <div className="relative flex-1 max-w-md">
+        <div className="flex flex-wrap items-center gap-4 mb-10">
+          <div className="relative flex-1 min-w-0 max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
             <input
               type="text"
@@ -636,14 +636,14 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
                   <Link
                     key={tool.id}
                     href={`/${tool.category.toLowerCase().replace(/\s+/g, '-')}/${tool.slug}`}
-                    className="group flex items-center gap-4 p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5"
+                    className="group flex items-center gap-4 p-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 overflow-hidden"
                   >
                     <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shrink-0 ring-1 ring-[var(--border-subtle)]`}>
                       <Icon className={`w-5 h-5 ${color}`} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
-                      <p className="text-xs text-[var(--text-secondary)] truncate">{tool.description}</p>
+                      <h3 className="text-sm font-medium text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors truncate">{tool.name}</h3>
+                      <p className="text-xs text-[var(--text-secondary)] truncate break-words">{tool.description}</p>
                     </div>
                     <ChevronRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-0.5 transition-all shrink-0" />
                   </Link>
