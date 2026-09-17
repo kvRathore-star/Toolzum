@@ -70,7 +70,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] overflow-hidden">
 
       {/* ===== 1. HERO ===== */}
-      <section ref={heroRef} className="relative pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+      <section ref={heroRef} className="relative pt-16 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent-ink)]/8 blur-[140px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
@@ -152,7 +152,9 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
             transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
             className="relative lg:h-[600px] w-full flex items-center justify-center"
           >
-            <div className="w-full max-w-[500px] aspect-[4/5] bg-[var(--bg-elevated)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col relative">
+            {/* No aspect ratio: the box sizes to content on mobile (no dead
+                stretch, no overflow) and holds 600px presence on desktop. */}
+            <div className="w-full max-w-[500px] min-h-[480px] lg:min-h-0 lg:h-[600px] bg-[var(--bg-elevated)] rounded-[var(--radius-2xl)] border border-[var(--border-subtle)] shadow-[var(--shadow-lg)] overflow-hidden flex flex-col relative">
               <div className="h-12 border-b border-[var(--border-subtle)] flex items-center px-4 gap-2 bg-[var(--bg-overlay)]">
                 <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
                 <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
@@ -191,7 +193,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       </section>
 
       {/* ===== 2. HOW IT WORKS ===== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
