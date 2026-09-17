@@ -19,6 +19,7 @@ import {
   getWhyChoose, getStatsBar
 } from '@/data/homepage';
 import { useIsIndia } from '@/hooks/useIsIndia';
+import { getSignedInStatus, getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 import { getClientToolBySlug } from '@/registry/tools-client-index';
@@ -760,6 +761,15 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 function FileDropZone({ activeTab }: { activeTab: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  // User state (quota-aware box): cookie + local counters only — no request.
+  // Server remains the source of truth at save time; this is a heads-up.
+  const [quota, setQuota] = useState<{ signedIn: boolean; remaining: number } | null>(null);
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate quota hint from local counters on mount
+      setQuota({ signedIn: getSignedInStatus(), remaining: getRemainingDownloads() });
+    } catch { /* stays neutral */ }
+  }, []);
   // Drag-enter/leave counter: crossing child elements fires leave events
   // without the pointer actually exiting (classic highlight flicker).
   const dragDepth = useRef(0);
@@ -944,6 +954,19 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
           )}
         </div>
       </div>
+
+      {/* Quota-aware status line (local counters; server enforces at save). */}
+      {quota && (
+        <p className="mt-2 text-center text-[10px] text-[var(--text-muted)]" role="status">
+          {!quota.signedIn ? (
+            <>3 free downloads/day · <Link href="/sign-in" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">Sign in for 5/day + AI credits</Link></>
+          ) : quota.remaining > 0 ? (
+            <>{quota.remaining} free {quota.remaining === 1 ? "download" : "downloads"} left today</>
+          ) : (
+            <>Daily limit reached — resets tomorrow · <Link href="/pricing" className="text-[var(--accent)] underline underline-offset-2 hover:no-underline">View Pro</Link></>
+          )}
+        </p>
+      )}
     </div>
   );
 }
