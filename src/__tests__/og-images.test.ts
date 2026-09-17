@@ -177,3 +177,27 @@ describe('OG image generation: per-tool images are decoupled from the global too
     }
   });
 });
+
+describe('OG template helpers (word-boundary truncation + category accents)', () => {
+  it('never cuts a word in half', async () => {
+    const { truncateWords } = await import('../../scripts/generate-og-images');
+    expect(truncateWords('short', 80)).toBe('short');
+    expect(truncateWords('Reduces PDF file size by compressing embedded images, removing redundant metadata, and more', 80)).toBe(
+      'Reduces PDF file size by compressing embedded images, removing redundant...',
+    );
+    expect(truncateWords('a'.repeat(100), 80)).toBe(`${'a'.repeat(80)}...`);
+  });
+
+  it('resolves every registry category to a hex accent', async () => {
+    const { accentFor, CATEGORY_ACCENT } = await import('../../scripts/generate-og-images');
+    const { toolsRegistry } = await import('@/registry/tools');
+    const cats = [...new Set(toolsRegistry.map((t) => t.category))];
+    expect(cats.length).toBeGreaterThan(15);
+    const unmapped = cats.filter((c) => !(c in CATEGORY_ACCENT));
+    expect(unmapped, 'categories falling back to default accent').toEqual([]);
+    for (const c of cats) {
+      expect(accentFor(c)).toMatch(/^#[0-9a-fA-F]{6}$/);
+    }
+    expect(accentFor('No Such Category')).toBe('#6366f1');
+  });
+});

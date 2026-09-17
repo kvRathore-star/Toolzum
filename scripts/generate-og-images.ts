@@ -29,7 +29,7 @@ const geistFont = readFileSync(geistPath);
 const OUT = resolve("public/og");
 
 // Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
-const TEMPLATE_VERSION = "og-template-v1";
+const TEMPLATE_VERSION = "og-template-v3";
 
 const CACHE_FILE = "og-cache.json";
 
@@ -71,11 +71,45 @@ function h(type: string, props: Record<string, any> | null, ...children: any[]) 
   return React.createElement(type, props, ...children);
 }
 
+export function truncateWords(s: string, max: number): string {
+  if (s.length <= max) return s;
+  const cut = s.lastIndexOf(" ", max);
+  return (cut > 0 ? s.slice(0, cut) : s.slice(0, max)) + "...";
+}
+
+// Canonical category accents (mirrors src/lib/categoryTheme.ts iconColor).
+// Bump template hash below when touching any template.
+export const CATEGORY_ACCENT: Record<string, string> = {
+  Image: "#a855f7",
+  PDF: "#f59e0b",
+  Text: "#14b8a6",
+  Audio: "#ec4899",
+  Video: "#3b82f6",
+  AI: "#6366f1",
+  "indian-utilities": "#FF6B35",
+  Developer: "#06b6d4",
+  Privacy: "#8b5cf6",
+  Extension: "#d946ef",
+  SEO: "#f43f5e",
+  Finance: "#22c55e",
+  Utility: "#71717a",
+  Productivity: "#14b8a6",
+  Health: "#ef4444",
+  Converter: "#10b981",
+  Transcription: "#0ea5e9",
+  Design: "#f43f5e",
+  "Growth & Marketing": "#10b981",
+  Calculator: "#f97316",
+  Branding: "#d946ef",
+};
+
+export function accentFor(category: string): string {
+  return CATEGORY_ACCENT[category] ?? "#6366f1";
+}
+
 export function toolOG(tool: ToolInfo) {
-  const descTrunc =
-    tool.description.length > 80
-      ? tool.description.slice(0, 77) + "..."
-      : tool.description;
+  const descTrunc = truncateWords(tool.description, 80);
+  const accent = accentFor(tool.category);
 
   return h(
     "div",
@@ -91,8 +125,19 @@ export function toolOG(tool: ToolInfo) {
         color: "#fff",
         fontFamily: "Geist",
         padding: "60px 80px",
+        position: "relative",
       },
     },
+    h("div", {
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: 1200,
+        height: 8,
+        background: `linear-gradient(90deg, ${accent}, ${accent}00)`,
+      },
+    }),
     h(
       "div",
       {
@@ -144,7 +189,8 @@ export function toolOG(tool: ToolInfo) {
             fontWeight: 500,
             padding: "6px 20px",
             borderRadius: 100,
-            color: "#a1a1aa",
+            color: accent,
+            border: `1px solid ${accent}55`,
           },
         },
         `${tool.category} \u2022 Free Online Tool`
@@ -188,6 +234,7 @@ export function toolOG(tool: ToolInfo) {
 }
 
 export function categoryOG(category: string, count: number) {
+  const accent = accentFor(category);
   return h(
     "div",
     {
@@ -202,8 +249,19 @@ export function categoryOG(category: string, count: number) {
         color: "#fff",
         fontFamily: "Geist",
         padding: "60px 80px",
+        position: "relative",
       },
     },
+    h("div", {
+      style: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: 1200,
+        height: 8,
+        background: `linear-gradient(90deg, ${accent}, ${accent}00)`,
+      },
+    }),
     h(
       "div",
       {
