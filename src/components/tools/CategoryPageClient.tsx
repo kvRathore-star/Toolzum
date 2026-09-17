@@ -260,7 +260,6 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
   const [showSortMenu, setShowSortMenu] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const [proFilter, setProFilter] = React.useState<'all' | 'free' | 'pro'>('all');
-  const [letterFilter, setLetterFilter] = React.useState("");
   const [expandedSections, setExpandedSections] = React.useState<Set<string>>(new Set());
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -598,7 +597,7 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
         </div>
 
         {/* Tool Grid/List */}
-        {searchQuery || activeSubcategory || letterFilter || proFilter !== 'all' || !sections?.length ? (
+        {searchQuery || activeSubcategory || proFilter !== 'all' || !sections?.length ? (
           viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((tool) => {
@@ -789,10 +788,10 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
             <p className="text-[var(--text-muted)] mb-2">
               {proFilter === 'pro'
                 ? `No Pro tools in ${displayName} yet — everything here is free.`
-                : `No tools found${searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : letterFilter ? ` starting with "${letterFilter}"` : ''}.`}
+                : `No tools found${searchQuery ? ` matching "${searchQuery}"` : activeSubcategory ? ` in ${activeSubcategory}` : ''}.`}
             </p>
             <p className="text-xs text-[var(--text-muted)] mb-4">Try a different search term or browse other categories.</p>
-            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); setProFilter('all'); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
+            <button onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setProFilter('all'); }} className="px-4 py-2 text-xs font-medium text-white bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-lg)] transition-colors">
               Clear filters
             </button>
           </div>
