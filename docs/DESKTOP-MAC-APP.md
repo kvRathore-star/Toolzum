@@ -116,7 +116,7 @@ web-frontend (reuse Next static export, frozen per release)
 - $39 = first 100 coupon codes (`TZM-EARLY-001..100`, single-use, expiring). Counter on site is manual but must be true — update `sold/100` on each sale.
 - Then $69 (cap ~500), then $99 permanent v1 price. Math: 100×$39=$3,900 net ~$3,700 direct; covers dev account + notarization time before volume.
 - v1 lifetime = all v1.x. v2 = paid upgrade ($29 early / $49 regular), never free. State this on checkout or chargeback risk rises.
-- Keep web Pro $14.99/mo untouched. Desktop checkout copy: `One-time. Your API costs. Your machine.`
+- Keep web Pro $9.99/mo untouched. Desktop checkout copy: `One-time. Your API costs. Your machine.`
 
 ### 1.7 Clipboard (web vs desktop split)
 

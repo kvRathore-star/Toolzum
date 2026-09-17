@@ -281,20 +281,20 @@ feature card advertises "Up to 2GB".
 
 ## 8. User Tiers Summary
 
-| Feature | Anonymous | Signed-in (free) | Pro ($14.99/mo) |
-|---------|-----------|------------------|-----------------|
-| Client-side tools | Unlimited | Unlimited | Unlimited |
-| Download quota (free tools) | 3/day | 5/day | Unlimited |
-| Download quota (Pro tools) | Blocked | 2/day | Unlimited |
-| AI credits | N/A | 30/month | 300/month |
-| AI rate limit | Blocked | 2 req/min | 5 req/min |
-| Transcription rate limit | Blocked | 2 req/min | 5 req/min |
-| Max file size | 30 MB | 150 MB | 2 GB |
-| Max batch size | 1 file | 10 files | 500 files |
-| Batch ZIP download | Single-file only | Single-file only (individual downloads) | ✓ Batch ZIP |
-| Pro tools access | Locked at page (sign in for 2/day) | Full access (with limits) | Full access (unlimited) |
-| Gemini watermark single | 3/day | 5/day | Unlimited |
-| Gemini watermark batch | Blocked | Blocked | Unlimited |
+| Feature | Anonymous | Signed-in (free) | Pro ($9.99/mo, ₹299/mo) | Project Pass (7d) |
+|---------|-----------|------------------|-----------------|-------------------|
+| Client-side tools | Unlimited | Unlimited | Unlimited | Unlimited |
+| Download quota (free tools) | 3/day | 5/day | Unlimited | Unlimited |
+| Download quota (Pro tools) | Blocked | 2/day | Unlimited | Unlimited |
+| AI credits | N/A | 10/month | 200/month | 70 one-time |
+| AI rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
+| Transcription rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
+| Max file size | 30 MB | 150 MB | 2 GB | 2 GB |
+| Max batch size | 1 file | 10 files | 500 files | 500 files |
+| Batch ZIP download | Single-file only | Single-file only (individual downloads) | ✓ Batch ZIP | ✓ Batch ZIP |
+| Pro tools access | Locked at page (sign in for 2/day) | Full access (with limits) | Full access (unlimited) | Full access (7 days) |
+| Gemini watermark single | 3/day | 5/day | Unlimited | Unlimited |
+| Gemini watermark batch | Blocked | Blocked | Unlimited | Unlimited |
 
 ---
 

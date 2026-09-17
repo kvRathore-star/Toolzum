@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { FREE_CREDITS, PRO_CREDITS } from "@/lib/planTiers";
 
 export interface LiveCredits {
   credits: number;
@@ -31,7 +32,7 @@ export function useLiveCredits(active: boolean): LiveCredits | null {
           plan: typeof data.plan === "string" ? data.plan : "free",
           allowance: typeof data.allowance === "number"
             ? data.allowance
-            : data.plan === "pro" ? 300 : 30,
+            : data.plan === "pro" ? PRO_CREDITS : FREE_CREDITS,
         });
       } catch {
         // Session value remains the fallback — never blank the UI.

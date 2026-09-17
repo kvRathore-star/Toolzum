@@ -32,7 +32,7 @@ export const RELEASES_PART_1: Release[] = [
     updates: [
       { type: "feature", text: "Form labels bound for screen readers across 800+ inputs — fields announce their names instead of silence." },
       { type: "feature", text: "Skip link jumps past navigation on every page; dialogs trap focus, close on Escape, and return focus on dismiss." },
-      { type: "feature", text: "Live credit balances — dashboard and account read true remaining credits from the server ('X remaining of 300/mo')." },
+      { type: "feature", text: "Live credit balances — dashboard and account read true remaining credits from the server ('X remaining of 200/mo')." },
       { type: "fix", text: "Download badge reads server plan state — Pro users never see quota copy; anonymous users on Pro tools get 'Sign in' instead of 'used up'." },
       { type: "performance", text: "Low-end devices skip the multi-threaded video core and get heads-up toasts before large AI and OCR downloads." },
       { type: "fix", text: "Contract suites added for credits and downloads endpoints — 1,141 tests green across 196 files." },
