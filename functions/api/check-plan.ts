@@ -1,6 +1,6 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
 import { createAuth } from "../../src/lib/auth";
-import { resolvePlan, fileCaps, type FileCaps } from "../../src/lib/planTiers";
+import { resolvePlan, fileCaps, effectivePlanForUser, type FileCaps } from "../../src/lib/planTiers";
 
 interface Env {
   DB: D1Database;
@@ -53,7 +53,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       // The DB default is 'free' for every new account — resolving the raw
       // stored value directly once served 30MB/1-file anon caps to all real
       // signed-in users (fixed Sep 12 2026, locked by check-plan.test.ts).
-      plan = resolvePlan(true, stored);
+      // Live Pass counts as Pro (time-based, no writes needed).
+      plan = await effectivePlanForUser(DB, session.user.id, stored);
     }
 
     const limits = fileCaps(plan);

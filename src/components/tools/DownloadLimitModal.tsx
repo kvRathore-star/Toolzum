@@ -78,7 +78,7 @@ export function DownloadLimitModal() {
   // Signed-in users never need a "sign in" CTA — show upgrade path only.
   const signedIn = getSignedInStatus();
   // Anon quota hit on a free tool is the prime signup moment — name the
-  // concrete free-account upside (3→5 downloads, 30 AI credits, 10-file
+  // concrete free-account upside (3→5 downloads, 10 AI credits, 10-file
   // batch, 150MB) instead of a generic "sign in for more".
   const isAnonQuota = isQuota && !isProTool && !signedIn;
   const isAnonPlanLimit = !isQuota && !isUnavailable && !signedIn && (event.type === "plan" && (event.detail.reason === "file_size" || event.detail.reason === "batch_size"));
@@ -96,7 +96,7 @@ export function DownloadLimitModal() {
       : !signedIn
         ? {
             title: "You've used your 3 free downloads",
-            body: "Sign in free to keep going today — 5 downloads/day, 30 AI credits/month, 10-file batches up to 150MB. No credit card.",
+            body: "Sign in free to keep going today — 5 downloads/day, 10 AI credits/month, 10-file batches up to 150MB. No credit card.",
           }
         : {
             title: "Daily download limit reached",
@@ -147,7 +147,7 @@ export function DownloadLimitModal() {
         {(isAnonQuota || isAnonPlanLimit) && (
           <ul className="mb-5 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-3.5 text-[13px] text-[var(--text-secondary)] space-y-1.5" aria-label="Free account benefits">
             <li>✓ 5 downloads/day <span className="text-[var(--text-muted)]">(vs 3 as guest)</span></li>
-            <li>✓ 30 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 10/use)</span></li>
+            <li>✓ 10 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 20/use)</span></li>
             <li>✓ 10-file batches up to 150MB <span className="text-[var(--text-muted)]">(vs 1 file / 30MB)</span></li>
             <li>✓ 2 Pro-tool downloads/day</li>
           </ul>
@@ -169,7 +169,7 @@ export function DownloadLimitModal() {
               className="w-full text-sm"
               asChild
             >
-              <Link href="/sign-in">{isAnonQuota || isAnonPlanLimit ? "Sign in free — unlock 5/day + 30 credits" : "Sign in free for more"}</Link>
+              <Link href="/sign-in">{isAnonQuota || isAnonPlanLimit ? "Sign in free — unlock 5/day + 10 credits" : "Sign in free for more"}</Link>
             </Button>
           )}
           <button

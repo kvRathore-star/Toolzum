@@ -15,8 +15,8 @@
 export type StoredPlan = "free" | "pro";
 export type EffectivePlan = "anon" | "signedin" | "pro";
 
-export const FREE_CREDITS = 30;
-export const PRO_CREDITS = 300;
+export const FREE_CREDITS = 10;
+export const PRO_CREDITS = 200;
 export const CREDIT_RESET_DAYS = 30;
 
 export interface FileCaps {
@@ -67,4 +67,70 @@ export function fileCaps(plan: EffectivePlan): FileCaps {
 /** Narrow an arbitrary stored value to the DB invariant (free|pro). */
 export function normalizeStoredPlan(plan: string | null): StoredPlan {
   return plan === "pro" ? "pro" : "free";
+}
+
+/** Project Pass terms (pricing spec Sep 2026). */
+export const PASS_DAYS = 7;
+export const PASS_CREDITS = 70;
+
+/**
+ * Effective plan with a live Project Pass: a valid passExpiresAt grants
+ * Pro treatment without touching the stored plan, so expiry needs no
+ * writes, no cron, no cleanup — time does it. Stale timestamps are inert.
+ */
+export function resolvePlanWithPass(
+  authenticated: boolean,
+  storedPlan: string | null,
+  passExpiresAt: number | null,
+  nowMs: number = Date.now(),
+): EffectivePlan {
+  if (
+    authenticated &&
+    typeof passExpiresAt === "number" &&
+    passExpiresAt > nowMs
+  ) {
+    return "pro";
+  }
+  return resolvePlan(authenticated, storedPlan);
+}
+
+/**
+ * Read-path helper: resolves the effective plan for a user row,
+ * tolerating databases predating the passExpiresAt column (0020).
+ */
+export async function effectivePlanForUser(
+  DB: D1Database,
+  userId: string,
+  storedPlan: string | null,
+  nowMs: number = Date.now(),
+): Promise<EffectivePlan> {
+  let passExpiresAt: number | null = null;
+  try {
+    const row = await DB.prepare('SELECT passExpiresAt FROM "user" WHERE id = ?')
+      .bind(userId)
+      .first<{ passExpiresAt: number | null }>();
+    passExpiresAt = row?.passExpiresAt ?? null;
+  } catch {
+    /* pre-0020 database — stored plan decides */
+  }
+  return resolvePlanWithPass(true, storedPlan, passExpiresAt, nowMs);
+}
+
+/**
+ * Grants a Project Pass: tops up credits once (monthly reset normalizes
+ * any remainder) and stamps expiry. Called by the payment webhook
+ * (pending gateway keys) or admin tooling — never by clients.
+ */
+export async function grantPass(
+  DB: D1Database,
+  userId: string,
+  days: number = PASS_DAYS,
+  bonusCredits: number = PASS_CREDITS,
+  nowMs: number = Date.now(),
+): Promise<void> {
+  await DB.prepare(
+    'UPDATE "user" SET passExpiresAt = ?, credits = credits + ?, creditResetAt = COALESCE(creditResetAt, ?) WHERE id = ?',
+  )
+    .bind(nowMs + days * 86400 * 1000, bonusCredits, nowMs, userId)
+    .run();
 }

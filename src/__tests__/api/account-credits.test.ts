@@ -59,7 +59,7 @@ describe('GET /api/account/credits contract', () => {
     expect(res.status).toBe(401);
   });
 
-  it('pro user past the reset window gets refilled to 300', async () => {
+    it('pro user past the reset window gets refilled to PRO_CREDITS', async () => {
     const { db, runs } = mockDb({
       userRow: { plan: 'pro', credits: 12, creditResetAt: null },
     });

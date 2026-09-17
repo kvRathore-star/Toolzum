@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Are my files uploaded to any server?",
-    a: "For the majority of tools: no — all processing happens entirely in your browser using WebAssembly and JavaScript. Your files never reach our servers. A small number of AI-powered tools send data directly from your browser to a third-party AI API; these are clearly marked on every tool page. Either way, your files never touch Toolzum's infrastructure.",
+    a: "For the majority of tools: no — all processing happens entirely in your browser using WebAssembly and JavaScript. A small number of clearly-marked AI and cloud tools send your input to our server, which forwards it to our AI provider (Google Gemini) — we store none of your content. See our Privacy Policy for the full data-flow list.",
   },
   {
     q: "Do I need to create an account?",
-    a: "No account is needed for any tool. All free tools work immediately. Signing in free raises limits to 5 downloads/day, 30 AI credits/month, and batches up to 10 files (150MB each). A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 300 AI credits/month.",
+    a: "No account is needed for any tool. All free tools work immediately. Signing in free raises limits to 5 downloads/day, 10 AI credits/month, and batches up to 10 files (150MB each). A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 200 AI credits/month.",
   },
   {
     q: "What file formats are supported?",
@@ -33,11 +33,11 @@ const faqs = [
   },
   {
     q: "How do AI credits work?",
-    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 10 credits per use. Signing in free gives 30 credits/month; Pro gives 300/month, resetting monthly. AI image generation and all local tools are free and use no credits. Anonymous users need to sign in to use AI tools.",
+    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 20 credits per use; Gemini HD image generation costs 5 per use (the standard Pollinations engine stays free). Signing in free gives 10 credits/month; Pro gives 200/month, resetting monthly. All local tools use no credits. Anonymous users need to sign in to use AI tools.",
   },
   {
     q: "Can I try Pro tools for free?",
-    a: "Yes. Guests see a sign-in screen on Pro tools, but signing in free unlocks 2 Pro-tool downloads per day — enough to evaluate any premium tool. Upgrade to Pro for unlimited downloads, 500-file batches, batch ZIP, and 300 AI credits/month.",
+    a: "Yes. Guests see a sign-in screen on Pro tools, but signing in free unlocks 2 Pro-tool downloads per day — enough to evaluate any premium tool. Upgrade to Pro for unlimited downloads, 500-file batches, batch ZIP, and 200 AI credits/month.",
   },
   {
     q: "Can I download multiple files as a single ZIP?",

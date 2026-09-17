@@ -9,6 +9,7 @@ import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
   resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
+  effectivePlanForUser,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
@@ -72,7 +73,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    const plan = resolvePlan(true, storedPlan);
+    // Gates effective (live Pass counts); refill strictly stored (see generate.ts).
+    const plan = await effectivePlanForUser(DB, userId, storedPlan);
+    const resetPlan = resolvePlan(true, storedPlan);
 
     // Gemini image generation is a Pro-only lever (Pollinations stays free
     // for everyone). Signed-in free users get a 402-style upsell, not a silent 401.
@@ -98,7 +101,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
+    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
     if (balance < IMAGE_GENERATION_CREDITS) {
       await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'blocked_exhausted', balance, allowance: maxCredits });

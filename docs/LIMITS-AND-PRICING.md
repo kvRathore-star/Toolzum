@@ -69,14 +69,14 @@ getUserLimit(plan, isProTool):
 
 **Analytics:** Every attempt logged to `download_event` table with `userType`, `toolSlug`, `outcome` (allowed/blocked_quota/blocked_pro_anon).
 
-**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge copy stays short (pill links to `/sign-in`); the full pitch (5/day + 30 credits) lives in the limit modal that fires at zero:
+**Badge:** Shows on tool page for all 426 slugs via `DOWNLOAD_PRODUCING_SLUGS.has(slug)` in `ToolLayout.tsx`. Badge copy stays short (pill links to `/sign-in`); the full pitch (5/day + 10 credits) lives in the limit modal that fires at zero:
 - Pro tool + anon: "Sign in to use Pro tools"
 - Pro tool + signed: "N Pro downloads left — Upgrade for unlimited" / "Pro downloads used up today"
 - Free tool + anon: "N remaining — sign in for more" / "0 remaining — sign in free"
 - Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
 
-**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 30 credits/mo, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 30 credits".
+**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 10 credits/mo, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 10 credits".
 
 > ✅ **Per-batch accounting (Option C, Sep 12 2026):** one batch download =
 > one quota unit, gated by a single `checkAndRecordDownload({ batchSize,
@@ -109,8 +109,9 @@ getUserLimit(plan, isProTool):
 
 | Tier | Credits | Reset | Enforcement |
 |------|---------|-------|-------------|
-| Free (signed-in) | 30/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
-| Pro | 300/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
+| Free (signed-in) | 10/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
+| Pro | 200/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
+| Project Pass (7-day) | 70 one-time + Pro treatment 7d | `passExpiresAt` (time-based, no cron) | `grantPass` + `effectivePlanForUser` |
 | Anonymous | N/A (sign-in required) | — | 401 on AI routes |
 
 > ✅ **FIXED Sep 12 2026 — reset race:** `generate.ts`/`transcribe.ts` read the
@@ -123,39 +124,44 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 10 (`TRANSCRIPTION_CREDITS` in `transcribe.ts`) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Transcription (Speech-to-Text) | 20 (`TRANSCRIPTION_CREDITS` in `transcribe.ts`) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
 | AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.039/image | Gemini 2.5 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
 
 > Costs follow the *endpoint called*, not the tool name: `audio/video-to-text-transcription`
 > clean up pasted dumps via `/api/ai/generate` (1 credit) — only true audio
-> uploads (`podcast`, `indian-voice`) hit `/api/ai/transcribe` (10). Enforced
+> uploads (`podcast`, `indian-voice`) hit `/api/ai/transcribe` (20). Enforced
 > by `credit-badge-coverage.test.ts`, which also forbids duplicate badge keys.
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
-**Cost at 30 free credits/month:**
-- ~30 text gen calls, OR
-- ~3 transcription sessions (10 credits each, 25 min each), OR
+**Cost at 10 free credits/month:**
+- ~10 text gen calls, OR
+- ~2 Gemini images (5 credits each), OR
+- 0 transcriptions (20 > 10 — by design, transcription is Pro/Pass territory), OR
 - Unlimited Pollinations image generation (free), OR
-- Unlimited watermark removal (free), OR
-- Mix of all (e.g. 20 text + 1 transcription = 30)
+- Unlimited watermark removal (free)
 
-**Cost at 300 Pro credits/month:**
-- ~300 text gen calls, OR
-- ~30 transcription sessions (10 credits each), OR
-- ~60 Gemini images (5 credits each, Pro-only engine), OR
+**Cost at 200 Pro credits/month:**
+- ~200 text gen calls, OR
+- ~10 transcription sessions (20 credits each), OR
+- ~40 Gemini images (5 credits each, Pro-only engine), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$0.57/month (3 transcriptions × $0.19).
-**Worst-case cost per Pro user:** ~$5.70/month (30 × $0.19) vs $14.99 revenue — sustainable.
+**Worst-case cost per free user:** ~$0.078/month (2 images × $0.039).
+**Worst-case cost per Pro user:** ~$1.90/month (10 × $0.19) vs $9.99 / ₹299 revenue — sustainable.
+**Worst-case cost per Pass user:** ~$0.57 (3 × $0.19) vs $3.99 / ₹99 — one-shot, repurchase to farm.
 
-> ✅ **RESOLVED Sep 12 2026:** transcription costs 10× text generation
-> (`TRANSCRIPTION_CREDITS = 10` in `functions/api/ai/transcribe.ts`,
+> ✅ **REPRICED Sep 17 2026:** transcription costs 20× text generation
+> (`TRANSCRIPTION_CREDITS = 20`); Free 30→10, Pro 300→200, Pass 70/7d
+> (`grantPass`, `resolvePlanWithPass` — resets always use the stored
+> plan so Pass top-ups never renew to Pro allowances).
+
+> ✅ **RESOLVED Sep 12 2026, repriced Sep 17 2026:** transcription costs 20× text generation
+> (`TRANSCRIPTION_CREDITS = 20` in `functions/api/ai/transcribe.ts`,
 > `TEXT_GENERATION_CREDITS = 1` in `generate.ts`, badge in `ToolLayout.tsx`).
-> Code + tests agree; this doc was stale (said 1) and is now fixed.
 
 ---
 

@@ -313,7 +313,7 @@ export default function AccountPage() {
               <div>
                 <span className="text-3xl font-bold capitalize text-[var(--text-primary)]">{plan}</span>
                 <p className="text-sm text-[var(--text-muted)] mt-1">
-                  {plan === "free" ? "30 AI credits/month" : "300 AI credits/month"}
+                  {plan === "free" ? "10 AI credits/month" : "200 AI credits/month"}
                 </p>
               </div>
               <div className="mt-6">

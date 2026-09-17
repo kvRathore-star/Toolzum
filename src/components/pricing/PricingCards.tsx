@@ -18,13 +18,13 @@ interface PricingPlan {
 const pricingData: Record<"USD" | "INR", Record<BillingInterval, PricingPlan>> = {
   USD: {
     pass: { price: "3.99", unit: "7 days", label: "7-Day Project Pass" },
-    monthly: { price: "14.99", unit: "month", label: "Monthly" },
-    yearly: { price: "99", unit: "year", label: "Yearly", discount: "Save 45%" },
+    monthly: { price: "9.99", unit: "month", label: "Monthly" },
+    yearly: { price: "99", unit: "year", label: "Yearly", discount: "Save 17%" },
   },
   INR: {
     pass: { price: "99", unit: "7 days", label: "7-Day Project Pass" },
-    monthly: { price: "249", unit: "month", label: "Monthly" },
-    yearly: { price: "1999", unit: "year", label: "Yearly", discount: "Save 33%" },
+    monthly: { price: "299", unit: "month", label: "Monthly" },
+    yearly: { price: "2990", unit: "year", label: "Yearly", discount: "Save 17%" },
   },
 };
 
@@ -90,7 +90,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>3 downloads/day (5/day + 30 AI credits/month after signing in free)</span>
+                <span>3 downloads/day (5/day + 10 AI credits/month after signing in free)</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
@@ -149,7 +149,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               {billingInterval === "pass"
                 ? (isIndia ? 'Instant bulk processing for a single project. Pay securely with UPI.' : 'Perfect for a one-off heavy workload. One-time payment, expires automatically.')
                 : billingInterval === "yearly"
-                ? (isIndia ? 'Ultimate long-term utility. Breaks down to just ₹166/month.' : 'Best for teams and power users. Save 45% off monthly.')
+                ? (isIndia ? 'Ultimate long-term utility. Breaks down to just ₹249/month.' : 'Best for teams and power users. Save 17% off monthly.')
                 : (isIndia ? `Less than ₹9/day. Unlimited access for growing businesses. Recommended for Indian freelancers.` : `The standard for active freelancers and developers. Cancel anytime in 1-click.`)}
             </p>
             <div className="flex items-baseline gap-1 mb-6">
@@ -183,7 +183,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                <span>300 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 10/use)</span></span>
+                <span>200 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 20/use)</span></span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />

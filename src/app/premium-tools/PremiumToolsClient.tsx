@@ -18,7 +18,7 @@ const BENEFITS = [
   { icon: Zap, title: '2GB file uploads', desc: 'Upload files up to 2GB. No more worrying about arbitrary caps.' },
   { icon: Layers, title: 'Parallel processing', desc: '6-thread parallel processing for faster conversions and compressions.' },
   { icon: Star, title: 'AI-powered tools', desc: 'Full access to AI tools — document chat, image generation, and more.' },
-  { icon: Bot, title: '300 AI credits/month', desc: 'Text generation at 1 credit per use, transcription at 10 — 10x the free allowance.' },
+  { icon: Bot, title: '200 AI credits/month', desc: 'Text generation at 1 credit per use, transcription at 20 — 20x the free allowance.' },
   { icon: Download, title: '1-click batch ZIP', desc: 'Download entire processed batches as a single ZIP archive.' },
   { icon: Save, title: 'Workflow presets', desc: 'Save tool configurations and reload them in one click.' },
   { icon: ShieldCheck, title: 'Privacy first', desc: 'Local tools process entirely in your browser — zero uploads. Cloud AI features are clearly marked; see our Privacy Policy.' },
@@ -57,7 +57,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
   const isIndia = useIsIndia();
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set());
 
-  const proPrice = isIndia ? "₹249" : "$14.99";
+  const proPrice = isIndia ? "₹299" : "$9.99";
   const proPriceSuffix = isIndia ? "/month" : "/month, cancel anytime";
 
   const grouped = groupProTools(proTools);
@@ -289,7 +289,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Basic file size limits (10-30MB)</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited client-side tools</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>30 AI credits/month after free sign-in</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>10 AI credits/month after free sign-in</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>2 Pro-tool downloads/day after sign-in</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Batch processing</span></li>
               <li className="flex items-start gap-2 text-[var(--text-muted)]"><span className="w-4 mt-0.5 shrink-0 text-center">—</span><span>Batch ZIP downloads</span></li>
@@ -308,7 +308,7 @@ export function PremiumToolsClient({ proTools, proCount, toolCount }: { proTools
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Files up to 2GB</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Unlimited downloads</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>1-click batch ZIP downloads</span></li>
-              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>300 AI credits/month</span></li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>200 AI credits/month</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Watermark-free export + workflow presets</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Local processing</span></li>
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch processing</span></li>

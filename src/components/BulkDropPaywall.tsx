@@ -65,7 +65,7 @@ export function BulkDropPaywall() {
                 href="/pricing"
                 className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold rounded-[var(--radius-lg)] transition-all text-sm"
               >
-                <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? (isIndia ? '₹249/mo' : '$14.99/mo') : 'Batch 500 files'}
+                <Crown className="w-4 h-4" /> Upgrade to Pro — {files.length <= 1 ? (isIndia ? '₹299/mo' : '$9.99/mo') : 'Batch 500 files'}
               </Link>
               <button
                 onClick={() => {

@@ -14,10 +14,11 @@ import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
   resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
+  effectivePlanForUser,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
-// Per-task cost: plain text generation. (Transcription costs 10× — see
+// Per-task cost: plain text generation. (Transcription costs 20× — see
 // TRANSCRIPTION_CREDITS in transcribe.ts.)
 export const TEXT_GENERATION_CREDITS = 1;
 
@@ -76,7 +77,11 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    const plan = resolvePlan(true, storedPlan);
+    // Gates use the effective plan (live Pass counts as Pro); the monthly
+    // refill below MUST use the stored plan, or Pass top-ups would renew
+    // to Pro allowances every cycle.
+    const plan = await effectivePlanForUser(DB, userId, storedPlan);
+    const resetPlan = resolvePlan(true, storedPlan);
     const rateLimit = aiRateLimit(plan);
 
     const rl = await checkRateLimit(DB, 'ai-gen', userId, rateLimit);
@@ -92,7 +97,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
+    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
     if (balance <= 0) {
       await logAiCreditEvent(DB, { userId, task: 'generate', outcome: 'blocked_exhausted', balance, allowance: maxCredits });

@@ -69,13 +69,13 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'meeting-minutes-generator': 1,
   // NOTE: audio/video-to-text clean up pasted transcript dumps via TEXT
   // generation (1 credit) — they never touch /api/ai/transcribe. Only
-  // true audio uploads (podcast, indian-voice) cost 10.
+  // true audio uploads (podcast, indian-voice) cost 20.
   'video-to-text-transcription': 1,
   'audio-to-text-transcription': 1,
-  'podcast-transcription': 10,
+  'podcast-transcription': 20,
   'pdf-ai-summariser': 1,
   'resume-ats-score-checker': 1,
-  'indian-voice-transcriber': 10,
+  'indian-voice-transcriber': 20,
   'ai-humanizer': 1,
   'grammar-checker': 1,
 };
@@ -123,7 +123,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
     "operatingSystem": "Web Browser",
     "offers": {
       "@type": "Offer",
-      "price": tool.isPro ? "14.99" : "0.00",
+      "price": tool.isPro ? "9.99" : "0.00",
       "priceCurrency": "USD",
     },
   } : null;
@@ -240,9 +240,9 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                     <Link
                       href="/sign-in"
                       className="flex items-center gap-1.5 text-[var(--accent)] hover:underline"
-                      aria-label="Sign in free to get 30 AI credits per month"
+                      aria-label="Sign in free to get 10 AI credits per month"
                     >
-                      Sign in free — 30 credits/mo
+                      Sign in free — 10 credits/mo
                     </Link>
                   </>
                 )}

@@ -1,6 +1,7 @@
 import { createAuth } from "../../../src/lib/auth";
 import {
   resolvePlan, creditAllowance, CREDIT_RESET_DAYS,
+  effectivePlanForUser,
   FREE_CREDITS, PRO_CREDITS,
 } from "../../../src/lib/planTiers";
 
@@ -55,8 +56,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       });
     }
 
-    const plan = resolvePlan(true, row.plan);
-    const allowance = creditAllowance(plan);
+    // Display plan is effective (live Pass reads as Pro); the refill
+    // allowance below stays stored-plan so Pass top-ups never renew.
+    const plan = await effectivePlanForUser(DB, session.user.id, row.plan);
+    const allowance = creditAllowance(resolvePlan(true, row.plan));
     let credits = row.credits ?? allowance;
 
     const now = Date.now();

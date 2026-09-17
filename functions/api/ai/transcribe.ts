@@ -11,12 +11,13 @@ import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
   resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
+  effectivePlanForUser,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
-// Per-task cost (decided Sep 11): transcription runs a full audio model
-// pass (~$0.19/25min), so it costs 10× a text generation.
-export const TRANSCRIPTION_CREDITS = 10;
+// Per-task cost (decided Sep 11, repriced Sep 17): transcription runs a full audio model
+// pass (~$0.19/25min), so it costs 20× a text generation.
+export const TRANSCRIPTION_CREDITS = 20;
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';
@@ -80,7 +81,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    const plan = resolvePlan(true, storedPlan);
+    // Gates effective (live Pass counts); refill strictly stored (see generate.ts).
+    const plan = await effectivePlanForUser(DB, userId, storedPlan);
+    const resetPlan = resolvePlan(true, storedPlan);
     const rateLimit = aiRateLimit(plan);
 
     const rl = await checkRateLimit(DB, 'ai-trans', userId, rateLimit);
@@ -96,11 +99,11 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, plan, user.creditResetAt, user.credits);
+    const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
     if (balance < TRANSCRIPTION_CREDITS) {
       await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
-      return new Response(JSON.stringify({ error: 'Not enough credits — transcription requires 10' }), {
+      return new Response(JSON.stringify({ error: 'Not enough credits — transcription requires 20' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
       });

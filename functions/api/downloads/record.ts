@@ -2,7 +2,7 @@ import { checkRateLimit, recordRateLimit } from "../rate-limit";
 import { checkAnonDlVelocity } from "../_abuse";
 import { maybePurgeOldRows } from "../_retention";
 import { createAuth } from "../../../src/lib/auth";
-import { resolvePlan, downloadLimit } from "../../../src/lib/planTiers";
+import { resolvePlan, downloadLimit, effectivePlanForUser } from "../../../src/lib/planTiers";
 
 interface Env {
   DB: D1Database;
@@ -60,7 +60,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       const row = await DB.prepare("SELECT plan FROM user WHERE id = ?")
         .bind(userId)
         .first<{ plan: string }>();
-      plan = resolvePlan(true, row?.plan ?? null);
+      // Live Pass counts as Pro (time-based, no writes needed).
+      plan = await effectivePlanForUser(DB, userId, row?.plan ?? null);
     }
 
     // #37 rotation backstop: the anon fingerprint quota is self-reported

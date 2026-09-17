@@ -596,7 +596,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               <Crown className="w-4 h-4 text-amber-700 dark:text-amber-400" />
               <span className="text-xs font-mono text-amber-700 dark:text-amber-400 uppercase tracking-wider">Pro</span>
             </div>
-            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">{showIndia ? '₹249' : '$14.99'}</div>
+            <div className="text-2xl font-bold text-[var(--text-primary)] mb-1">{showIndia ? '₹299' : '$9.99'}</div>
             <div className="text-xs text-[var(--text-muted)] mb-4">/{showIndia ? 'mo' : 'month'}, cancel anytime</div>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-start gap-2"><Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" /><span>Batch up to 500 files at once</span></li>

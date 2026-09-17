@@ -59,7 +59,7 @@ export default function RegexTester() {
       // Anonymous users have no credit balance (401) — turn the dead-end
       // error into the signup funnel instead of a shrug.
       if (!isSignedIn && /sign in/i.test(msg)) {
-        toast.error('Sign in free to use AI generation — 30 credits/month, no card.');
+        toast.error('Sign in free to use AI generation — 10 credits/month, no card.');
       } else {
         toast.error(msg);
       }
@@ -116,7 +116,7 @@ export default function RegexTester() {
               <AiSettings />
               {!isSignedIn && (
                 <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
-                  AI generation needs a free account — <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">sign in</Link> for 30 credits/month. Manual testing below stays free forever.
+                  AI generation needs a free account — <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">sign in</Link> for 10 credits/month. Manual testing below stays free forever.
                 </p>
               )}
               <div className="space-y-2">

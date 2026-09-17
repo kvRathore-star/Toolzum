@@ -58,7 +58,7 @@ describe('ai_credit_event analytics', () => {
     expect(seen.some((q) => q.sql.includes('CREATE TABLE IF NOT EXISTS "ai_credit_event"'))).toBe(true);
     const evt = seen.find((q) => q.sql.includes('INSERT INTO ai_credit_event'));
     expect(evt).toBeDefined();
-    expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'generate', 'blocked_exhausted', 0, 30]);
+    expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'generate', 'blocked_exhausted', 0, 10]);
   });
 
   it('generate: allowed logged on success without failing the request', async () => {
@@ -74,7 +74,7 @@ describe('ai_credit_event analytics', () => {
       });
       expect(res.status).toBe(200);
       const evt = seen.find((q) => q.sql.includes('INSERT INTO ai_credit_event'));
-      expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'generate', 'allowed', 9, 30]);
+      expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'generate', 'allowed', 9, 10]);
     } finally {
       vi.unstubAllGlobals();
     }
@@ -94,6 +94,6 @@ describe('ai_credit_event analytics', () => {
     });
     expect(res.status).toBe(403);
     const evt = seen.find((q) => q.sql.includes('INSERT INTO ai_credit_event'));
-    expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'transcribe', 'blocked_exhausted', 5, 30]);
+    expect(evt?.args.slice(0, 5)).toEqual(['user-1', 'transcribe', 'blocked_exhausted', 5, 10]);
   });
 });

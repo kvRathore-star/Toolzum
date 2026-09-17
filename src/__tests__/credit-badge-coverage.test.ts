@@ -9,7 +9,7 @@ import path from "node:path";
  * cost, or the deduction happens without user-visible warning.
  *
  * Rules:
- * - files calling submitTranscription or /api/ai/transcribe → cost 10
+ * - files calling submitTranscription or /api/ai/transcribe → cost 20
  * - files calling useAiProvider or /api/ai/generate → cost 1
  * - files calling ONLY /api/ai/generate-image (engine-dependent cost,
  *   shown inline per engine) → must NOT be in the map
@@ -80,7 +80,7 @@ describe("credit badge completeness (no silent deductions)", () => {
     }
     spenders.push({
       slug,
-      expected: usesTranscribe ? 10 : 1,
+      expected: usesTranscribe ? 20 : 1,
       file: rel,
     });
   }

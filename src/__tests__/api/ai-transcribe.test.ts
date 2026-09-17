@@ -91,20 +91,25 @@ describe('POST /api/ai/transcribe contract', () => {
   });
 
   it('400s when no audio file is attached (before touching the model)', async () => {
+    // Balance above the 20-credit cost so the test reaches file validation.
+    const env = {
+      DB: mockDb({ credits: 30 }),
+      GEMINI_API_KEY: 'test-key',
+    } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
         cookie: COOKIE,
         body: textFieldBody('language', 'en'),
         contentType: MULTIPART,
       }),
-      env: ENV,
+      env,
     });
     expect(res.status).toBe(400);
     expect(await res.json()).toEqual({ error: 'Missing audio file' });
   });
 
   it('500s without a configured provider key', async () => {
-    const env = { DB: mockDb() } as unknown as typeof ENV;
+    const env = { DB: mockDb({ credits: 30 }) } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
         cookie: COOKIE,
@@ -123,15 +128,15 @@ describe('POST /api/ai/transcribe contract', () => {
   // (MAX_UPLOAD_BYTES) with no logic to pin down.
 });
 
-describe('POST /api/ai/transcribe credit cost (10 per transcription)', () => {
-  it('pins the per-task cost at 10 (matches docs + pricing)', () => {
+describe('POST /api/ai/transcribe credit cost (20 per transcription)', () => {
+  it('pins the per-task cost at 20 (matches docs + pricing)', () => {
     // Happy-path deduction SQL is unreachable in jsdom (undici multipart
     // parser rejects jsdom FormData — see note above), so the cost is
     // pinned at the exported constant instead of the UPDATE string.
-    expect(TRANSCRIPTION_CREDITS).toBe(10);
+    expect(TRANSCRIPTION_CREDITS).toBe(20);
   });
 
-  it('403s with 5 credits (below the 10 cost) before touching the provider', async () => {
+  it('403s with 5 credits (below the 20 cost) before touching the provider', async () => {
     const fetchSpy = vi.fn();
     vi.stubGlobal('fetch', fetchSpy);
     const env = {
@@ -148,5 +153,26 @@ describe('POST /api/ai/transcribe credit cost (10 per transcription)', () => {
     });
     expect(res.status).toBe(403);
     expect(fetchSpy).not.toHaveBeenCalled();
+    vi.unstubAllGlobals();
+  });
+
+  it('403s with 19 credits: floor logic, no rounding into a 20-cost action (TC-5)', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = {
+      DB: mockDb({ credits: 19 }),
+      GEMINI_API_KEY: 'k',
+    } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({
+        cookie: COOKIE,
+        body: fileBody('clip.mp3', 'audio/mpeg', 'fake-audio-bytes'),
+        contentType: MULTIPART,
+      }),
+      env,
+    });
+    expect(res.status).toBe(403);
+    expect(fetchSpy).not.toHaveBeenCalled();
+    vi.unstubAllGlobals();
   });
 });

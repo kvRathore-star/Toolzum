@@ -172,7 +172,7 @@ export default function AiImageGenerator() {
               {!isPro && engine === 'gemini' && (
                 <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
                   {isSignedIn ? (
-                    <><Link href="/pricing" className="text-[var(--accent)] hover:underline font-semibold">Upgrade to Pro</Link> for Gemini HD generation (300 credits/month). Pollinations stays free.</>
+                    <><Link href="/pricing" className="text-[var(--accent)] hover:underline font-semibold">Upgrade to Pro</Link> for Gemini HD generation (200 credits/month). Pollinations stays free.</>
                   ) : (
                     <><Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in</Link>, then upgrade to Pro for Gemini HD generation. Pollinations stays free for guests.</>
                   )}

@@ -2,10 +2,14 @@ interface Env {
   DB: D1Database;
 }
 
-const PRICES: Record<string, { amount: number; currency: string }> = {
-  pass: { amount: 1999, currency: 'INR' },
-  monthly: { amount: 499, currency: 'INR' },
-  yearly: { amount: 3999, currency: 'INR' },
+const PRICES: Record<string, { INR: number; USD: number }> = {
+  // Advertised prices, single-sourced with PricingCards + pricing/layout.
+  // A previous revision charged ₹1999 for the ₹99 pass — amounts below
+  // MUST match the UI or checkout lies. Razorpay takes paise, Dodo takes
+  // major units: convert at the gateway call (VERIFY with test keys, #36).
+  pass: { INR: 99, USD: 3.99 },
+  monthly: { INR: 299, USD: 9.99 },
+  yearly: { INR: 2990, USD: 99 },
 };
 
 const VALID_GATEWAYS = ['razorpay', 'dodo'];
@@ -28,7 +32,18 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const plan = (formData.get('plan') as string) || 'pass';
     let gateway = (formData.get('gateway') as string) || 'razorpay';
     if (!VALID_GATEWAYS.includes(gateway)) gateway = 'razorpay';
-    const price = PRICES[plan] || PRICES.pass;
+    // Unknown plans previously fell through to the pass price — a pricing
+    // lie by typo. Reject instead. Currency follows the gateway until the
+    // full verify-then-upgrade flow lands with test keys (#36).
+    const tier = PRICES[plan];
+    if (!tier) {
+      return new Response(JSON.stringify({ error: 'invalid_plan' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+    const currency = gateway === 'dodo' ? 'USD' : 'INR';
+    const price = { amount: tier[currency], currency };
 
     const orderId = `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
@@ -82,6 +97,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       headers: { 'Content-Type': 'text/html; charset=utf-8' },
     });
   } catch {
-    return new Response(JSON.stringify({ error: 'Internal server error' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500, headers: { "Content-Type": "application/json" } });
   }
 }
