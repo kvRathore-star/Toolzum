@@ -150,7 +150,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
                 ? (isIndia ? 'Instant bulk processing for a single project. Pay securely with UPI.' : 'Perfect for a one-off heavy workload. One-time payment, expires automatically.')
                 : billingInterval === "yearly"
                 ? (isIndia ? 'Ultimate long-term utility. Breaks down to just ₹249/month.' : 'Best for teams and power users. Save 17% off monthly.')
-                : (isIndia ? `Less than ₹9/day. Unlimited access for growing businesses. Recommended for Indian freelancers.` : `The standard for active freelancers and developers. Cancel anytime in 1-click.`)}
+                : (isIndia ? `Less than ₹9/day. Unlimited access for growing businesses. Recommended for Indian freelancers.` : `The standard for active freelancers and developers. Cancel anytime by email.`)}
             </p>
             <div className="flex items-baseline gap-1 mb-6">
               <span className="text-5xl font-mono font-bold text-[var(--text-primary)]">

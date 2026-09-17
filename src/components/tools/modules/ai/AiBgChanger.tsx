@@ -430,7 +430,7 @@ export default function AiBgChanger() {
           <p className="text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1.5">
             <Crown className="w-3 h-3" />
             {!isPro ? 'Free output includes a subtle "Processed with Toolzum" watermark. ' : ''}
-            <strong>Pro:</strong> No watermark • 4K export • AI-powered subject isolation • Batch processing • Shadows & reflections • API access.
+            <strong>Pro:</strong> No watermark • 4K export • AI-powered subject isolation • Batch processing • Shadows & reflections.
           </p>
         </div>
       </div>

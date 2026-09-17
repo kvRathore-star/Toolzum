@@ -65,7 +65,7 @@ const faqs = [
   },
   {
     q: "How do I cancel my Pro subscription?",
-    a: "You can cancel anytime from the Billing page or by emailing support@toolzum.com. Your Pro access continues until the end of the billing period.",
+    a: "You can cancel anytime by emailing support@toolzum.com. Your Pro access continues until the end of the billing period.",
   },
   {
     q: "Who built Toolzum?",
