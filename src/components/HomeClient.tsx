@@ -19,7 +19,9 @@ import {
   getWhyChoose, getStatsBar
 } from '@/data/homepage';
 import { useIsIndia } from '@/hooks/useIsIndia';
+import { useSession } from '@/lib/auth-client';
 import { getSignedInStatus, getRemainingDownloads } from '@/utils/freeUsageGuard';
+import { resolvePlan, fileCaps } from '@/lib/planTiers';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 import { getClientToolBySlug } from '@/registry/tools-client-index';
@@ -761,6 +763,8 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 function FileDropZone({ activeTab }: { activeTab: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  const { data: session } = useSession();
+  const planCapMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
   // User state (quota-aware box): cookie + local counters only — no request.
   // Server remains the source of truth at save time; this is a heads-up.
   const [quota, setQuota] = useState<{ signedIn: boolean; remaining: number } | null>(null);
@@ -782,11 +786,14 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     }
     const f = list[0]!;
     setFile(f);
-    // Heads-up, not a block: the destination tool enforces its own caps.
-    if (f.size > 500 * 1024 * 1024) {
+    // Size heads-up against the viewer's plan cap (destination tool enforces).
+    const capMB = fileCaps(resolvePlan(!!session?.user, (session?.user as { plan?: string } | undefined)?.plan ?? null)).maxFileSizeMB;
+    if (f.size > capMB * 1024 * 1024) {
+      toast(`Exceeds your ${capMB}MB limit — the tool will enforce it.`, { icon: '⚠️' });
+    } else if (f.size > 500 * 1024 * 1024) {
       toast('Large file — Pro tools handle up to 2GB.', { icon: '⚠️' });
     }
-  }, []);
+  }, [session]);
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -905,7 +912,9 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
               {fileTypeIcon(fileType)}
             </div>
             <p className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[200px]">{file.name}</p>
-            <p className="text-xs text-[var(--text-muted)]">{formatSize(file.size)} &middot; {fileType.toUpperCase()}</p>
+            <p className={`text-xs mt-0.5 ${file.size > planCapMB * 1024 * 1024 ? "text-amber-600 dark:text-amber-400 font-medium" : "text-[var(--text-muted)]"}`}>
+              {formatSize(file.size)} &middot; {fileType.toUpperCase()} &middot; limit {planCapMB}MB
+            </p>
             <button
               onClick={(e) => { e.stopPropagation(); setFile(null); fileInputRef.current && (fileInputRef.current.value = ''); }}
               className="mt-1 px-3 py-1.5 text-xs font-medium text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg hover:border-[var(--accent)]/30 transition-all duration-200 min-h-[32px]"
