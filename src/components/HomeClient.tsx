@@ -22,6 +22,7 @@ import { useIsIndia } from '@/hooks/useIsIndia';
 import { useSession } from '@/lib/auth-client';
 import { getSignedInStatus, getRemainingDownloads } from '@/utils/freeUsageGuard';
 import { resolvePlan, fileCaps } from '@/lib/planTiers';
+import { detectFileType, heroRouteFor, heroToolName, type HeroFileType } from '@/lib/fileRoute';
 import { useFavorites } from '@/hooks/useFavorites';
 import { FavoriteStarButton } from '@/components/FavoriteStarButton';
 import { getClientToolBySlug } from '@/registry/tools-client-index';
@@ -801,40 +802,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   };
 
-  const detectFileType = (f: File): 'image' | 'video' | 'audio' | 'pdf' | 'document' | 'other' => {
-    const type = f.type;
-    const ext = f.name.split('.').pop()?.toLowerCase() || '';
-    if (type.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg', 'tiff', 'tif', 'ico', 'avif'].includes(ext)) return 'image';
-    if (type.startsWith('video/') || ['mp4', 'webm', 'mkv', 'mov', 'avi', 'wmv', 'flv'].includes(ext)) return 'video';
-    if (type.startsWith('audio/') || ['mp3', 'wav', 'flac', 'ogg', 'm4a', 'aac', 'wma', 'opus', 'aiff'].includes(ext)) return 'audio';
-    if (type === 'application/pdf' || ext === 'pdf') return 'pdf';
-    if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'epub'].includes(ext)) return 'document';
-    return 'other';
-  };
-
-  const getRoute = (fileType: ReturnType<typeof detectFileType>): string => {
-    switch (fileType) {
-      case 'image': return '/image/image-compressor';
-      case 'video': return '/video/video-compressor';
-      case 'audio': return '/audio/audio-compressor';
-      case 'pdf': return '/pdf/pdf-compressor';
-      case 'document': return '/document/document-converter';
-      default: return '/tools';
-    }
-  };
-
-  const getToolName = (fileType: ReturnType<typeof detectFileType>): string => {
-    switch (fileType) {
-      case 'image': return 'Image Compressor';
-      case 'video': return 'Video Compressor';
-      case 'audio': return 'Audio Converter';
-      case 'pdf': return 'PDF Compressor';
-      case 'document': return 'Document Converter';
-      default: return 'All Tools';
-    }
-  };
-
-  const fileTypeIcon = (fileType: ReturnType<typeof detectFileType>) => {
+  const fileTypeIcon = (fileType: HeroFileType) => {
     switch (fileType) {
       case 'image': return <FileImage className="w-5 h-5 text-[var(--accent)]" />;
       case 'video': return <Video className="w-5 h-5 text-[var(--accent)]" />;
@@ -951,7 +919,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         <div className="flex items-center gap-3">
           {file && fileType ? (
             <Button size="sm" asChild>
-              <Link href={getRoute(fileType)}>Open {getToolName(fileType)} <MoveRight className="w-3 h-3 ml-1" /></Link>
+              <Link href={heroRouteFor(fileType)}>Open {heroToolName(fileType)} <MoveRight className="w-3 h-3 ml-1" /></Link>
             </Button>
           ) : (
             <Link
