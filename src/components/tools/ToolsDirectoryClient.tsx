@@ -385,11 +385,11 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                     className="group block h-full"
                   >
                     <div className={`h-full p-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-xl)] transition-all duration-300 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--border-default)] hover:-translate-y-0.5 ${theme.gradientHover}`}>
-                      <div className="flex items-start justify-between mb-4">
-                        <div className={`w-9 h-9 rounded-xl ${theme.bgTint} flex items-center justify-center ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
+                      <div className="flex items-start justify-between gap-2 mb-4">
+                        <div className={`w-9 h-9 rounded-xl ${theme.bgTint} flex items-center justify-center shrink-0 ring-1 ring-[var(--border-subtle)] group-hover:ring-[var(--accent)]/30 transition-all`}>
                           <Icon className={`w-4 h-4 ${theme.iconColor}`} />
                         </div>
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center justify-end gap-1.5 flex-wrap min-w-0">
                           <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider bg-[var(--bg-overlay)] border border-[var(--border-subtle)] px-2 py-0.5 rounded">
                             {tool.category}
                           </span>
