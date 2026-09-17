@@ -292,7 +292,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
         {/* Navigation: Sidebar or Menubar */}
         {navMode === 'sidebar' ? <Sidebar /> : null}
 
-        <main className="flex-1">
+        <main className="flex-1 min-w-0">
           {/* Top controls row */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div className="flex items-center gap-3">
