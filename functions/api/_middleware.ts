@@ -1,4 +1,5 @@
 import { maybePurgeOldRows } from "./_retention";
+import { recordRateLimit } from "./rate-limit";
 
 import { logAbuse } from "./_abuse";
 
@@ -27,6 +28,37 @@ async function isBanned(request: Request, DB: D1Database): Promise<boolean> {
 
 export async function onRequest(context: { request: Request; next: () => Promise<Response>; env: { DB?: D1Database } }) {
   const { request } = context;
+
+  // #25 brute-force throttle for auth mutations. better-auth's built-in
+  // limiter is per-isolate memory — ineffective at the edge where each
+  // request may land on a fresh isolate. This D1-backed count is
+  // read-only w.r.t. auth mechanics (no cookie/body/CSRF contact):
+  // 30 mutations per IP per 10 minutes is generous to humans retrying
+  // passwords and binding on credential-stuffing scale.
+  if (
+    request.url.includes('/api/auth/') &&
+    ['POST', 'PUT', 'DELETE', 'PATCH'].includes(request.method) &&
+    context.env.DB
+  ) {
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+    try {
+      const row = await context.env.DB.prepare(
+        "SELECT COUNT(*) as c FROM analytics_event WHERE fingerprint = ? AND createdAt > datetime('now', '-10 minutes')",
+      )
+        .bind(`auth:${ip}`)
+        .first<{ c: number }>();
+      if (row && row.c >= 30) {
+        logAbuse(context.env.DB, request.url, 'auth-velocity', ip);
+        return new Response(JSON.stringify({ error: 'Too many attempts. Try again later.' }), {
+          status: 429,
+          headers: { 'Content-Type': 'application/json', 'Retry-After': '600' },
+        });
+      }
+      recordRateLimit(context.env.DB, 'auth', ip, request.url);
+    } catch {
+      /* fail open — never lock legitimate users out on DB trouble */
+    }
+  }
 
   // Skip middleware entirely for auth routes — better-auth handles its own CSRF, sessions, and state
   if (request.url.includes('/api/auth/')) {
