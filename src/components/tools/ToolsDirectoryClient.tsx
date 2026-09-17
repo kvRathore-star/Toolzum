@@ -148,9 +148,12 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
         >
           All
         </button>
-        {GROUP_ORDER.map(groupLabel => {
+        {GROUP_ORDER.map((groupLabel, gi) => {
           const cats = groupedCategories[groupLabel];
           if (!cats || cats.length === 0) return null;
+          // Last groups open leftward: a left-anchored w-52 menu would
+          // otherwise run off the viewport with no way to reach it.
+          const alignRight = gi >= GROUP_ORDER.length - 2;
           return (
             <div key={groupLabel} className="relative shrink-0">
               <button
@@ -171,7 +174,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                     <div
                       role="group"
                       aria-label="Category submenu"
-                      className="absolute top-full left-0 mt-1 w-52 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-2 z-50"
+                      className={`absolute top-full mt-1 w-52 max-w-[calc(100vw-2rem)] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] py-2 z-50 ${alignRight ? 'right-0' : 'left-0'}`}
                   onMouseLeave={() => setOpenGroup(null)}
                 >
                   {cats.map(cat => {

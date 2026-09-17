@@ -579,7 +579,23 @@ export function CategoryPageClient({ category, tools, sections = [], uncategoriz
 
         {/* Tool Grid/List */}
         {searchQuery || activeSubcategory || letterFilter || proFilter !== 'all' || !sections?.length ? (
-          viewMode === 'grid' ? (
+          filtered.length === 0 ? (
+            <div className="py-20 text-center border border-dashed border-[var(--border-subtle)] rounded-[var(--radius-xl)] bg-[var(--bg-overlay)]">
+              <p className="text-[var(--text-muted)] mb-2">
+                {proFilter === 'pro'
+                  ? `No Pro tools in ${displayName} yet — everything here is free.`
+                  : proFilter === 'free'
+                    ? `No free tools match here.`
+                    : 'No tools match your filters.'}
+              </p>
+              <button
+                onClick={() => { setSearchQuery(''); setActiveSubcategory(null); setLetterFilter(''); setProFilter('all'); }}
+                className="mt-2 px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
+              >
+                Reset filters
+              </button>
+            </div>
+          ) : viewMode === 'grid' ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {filtered.map((tool) => {
                 const { icon: Icon, color, bg, gradient } = getIconBg(tool);
