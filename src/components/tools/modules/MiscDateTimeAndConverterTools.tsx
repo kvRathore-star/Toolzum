@@ -148,19 +148,87 @@ export function TimeSinceCalculator() {
   );
 }
 // --- TimeZoneConverter ---
+const COMMON_TIMEZONES = [
+  'UTC', 'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles',
+  'America/Toronto', 'America/Sao_Paulo', 'Europe/London', 'Europe/Paris', 'Europe/Berlin',
+  'Africa/Cairo', 'Asia/Dubai', 'Asia/Kolkata', 'Asia/Singapore', 'Asia/Tokyo',
+  'Asia/Shanghai', 'Australia/Sydney', 'Pacific/Auckland',
+];
+
+function supportedTimeZones(): string[] {
+  try {
+    const all = (Intl as unknown as { supportedValuesOf?: (k: string) => string[] }).supportedValuesOf?.('timeZone');
+    if (Array.isArray(all) && all.length > 0) return all;
+  } catch { /* fall through to common list */ }
+  return COMMON_TIMEZONES;
+}
+
+function zoneOffsetMinutes(tz: string, instant: Date): number | null {
+  // True zone offset via formatToParts round-trip. (The old code parsed a
+  // wall-clock string and read the SYSTEM offset — it returned the input
+  // time unchanged for every pair of zones.)
+  try {
+    const dtf = new Intl.DateTimeFormat("en-US", {
+      timeZone: tz,
+      hour12: false,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    const parts: Record<string, string> = {};
+    for (const p of dtf.formatToParts(instant)) parts[p.type] = p.value;
+    const asUTC = Date.UTC(
+      Number(parts.year),
+      Number(parts.month) - 1,
+      Number(parts.day),
+      Number(parts.hour) % 24,
+      Number(parts.minute),
+      Number(parts.second),
+    );
+    return Math.round((asUTC - instant.getTime()) / 60000);
+  } catch {
+    return null; // invalid IANA name — never crash render on a typo
+  }
+}
 export function TimeZoneConverter() {
   const clr = ac('TimeZoneConverter');
   const [time, setTime] = useState('12:00');
   const [fromTz, setFromTz] = useState('UTC');
   const [toTz, setToTz] = useState('America/New_York');
+  const zones = supportedTimeZones();
   const now = new Date();
   const [h, m] = time.split(':').map(Number);
-  const local = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
-  const fromOffset = -new Date(local.toLocaleString('en-US', { timeZone: fromTz })).getTimezoneOffset();
-  const toOffset = -new Date(local.toLocaleString('en-US', { timeZone: toTz })).getTimezoneOffset();
-  const diffMin = toOffset - fromOffset;
-  const resultH = (h! + Math.floor(diffMin / 60) + 24) % 24;
-  const resultM = (m! + diffMin % 60 + 60) % 60;
+  // Interpret the entered wall time on today's date IN the source zone,
+  // then project into the target zone. All DST handling falls out of the
+  // offsets — no hardcoded rules.
+  const fromOffset = Number.isFinite(h) && Number.isFinite(m)
+    ? zoneOffsetMinutes(fromTz, new Date(now.getFullYear(), now.getMonth(), now.getDate(), h ?? 0, m ?? 0))
+    : null;
+  const valid =
+    fromOffset !== null &&
+    h !== undefined && m !== undefined && !isNaN(h) && !isNaN(m);
+  let resultText = 'Enter a time and valid time zones';
+  let downloadText = '';
+  if (valid) {
+    const baseUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), h as number, m as number) - (fromOffset as number) * 60000;
+    const toOffset = zoneOffsetMinutes(toTz, new Date(baseUTC));
+    if (toOffset === null) {
+      resultText = 'Enter a time and valid time zones';
+    } else {
+      const out = new Date(baseUTC + toOffset * 60000);
+      const hh = String(out.getUTCHours()).padStart(2, '0');
+      const mm = String(out.getUTCMinutes()).padStart(2, '0');
+      const inDay = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())).getTime();
+      const outDay = new Date(Date.UTC(out.getUTCFullYear(), out.getUTCMonth(), out.getUTCDate())).getTime();
+      const dayShift = Math.round((outDay - inDay) / 86400000);
+      const suffix = dayShift === 0 ? '' : dayShift > 0 ? ` (+${dayShift}d)` : ` (${dayShift}d)`;
+      resultText = `${hh}:${mm}${suffix} (${fromTz} → ${toTz})`;
+      downloadText = resultText;
+    }
+  }
 
   const presets = [
     { label: 'UTC → NYC', apply: () => { setFromTz('UTC'); setToTz('America/New_York'); } },
@@ -169,7 +237,10 @@ export function TimeZoneConverter() {
     { label: 'Clear', apply: () => { setTime('12:00'); setFromTz('UTC'); setToTz('America/New_York'); } },
   ];
 
-  const resultText = `${String(resultH).padStart(2, '0')}:${String(resultM).padStart(2, '0')} (${fromTz} → ${toTz})`;
+  const setNow = () => {
+    const n = new Date();
+    setTime(`${String(n.getHours()).padStart(2, '0')}:${String(n.getMinutes()).padStart(2, '0')}`);
+  };
 
   return (
     <CalculatorShell category="Converter"
@@ -178,12 +249,19 @@ export function TimeZoneConverter() {
       auto={true}
       presets={presets}
       accent="violet"
-      downloadData={JSON.stringify({ time, fromTz, toTz, result: `${String(resultH).padStart(2, '0')}:${String(resultM).padStart(2, '0')}` }, null, 2)}
+      downloadData={valid && downloadText ? JSON.stringify({ time, fromTz, toTz, result: downloadText }, null, 2) : ''}
       downloadFilename="timezone.json"
     >
       <div className="space-y-4">
-        <div className="flex gap-2"><Input label="Time" type="time" value={time} onChange={setTime} /><Input label="From time zone" value={fromTz} onChange={setFromTz} /></div>
-        <div className="flex gap-2"><Input label="To time zone" value={toTz} onChange={setToTz} /></div>
+        <div className="flex gap-2">
+          <Input label="Time" type="time" value={time} onChange={setTime} />
+          <button onClick={setNow} className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-xl self-end" aria-label="Use current time">Now</button>
+          <button onClick={() => { setFromTz(toTz); setToTz(fromTz); }} className="px-3 py-2 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-xl self-end" aria-label="Swap time zones">⇄ Swap</button>
+        </div>
+        <div className="flex gap-2"><Input label="From time zone" value={fromTz} onChange={setFromTz} list="tz-list" /><Input label="To time zone" value={toTz} onChange={setToTz} list="tz-list" /></div>
+        <datalist id="tz-list">
+          {zones.map((z) => <option key={z} value={z} />)}
+        </datalist>
       </div>
     </CalculatorShell>
   );

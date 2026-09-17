@@ -11,8 +11,8 @@ export function Section({ title, children }: { title: string; children: React.Re
   );
 }
 
-export function Input({ label, value, onChange, placeholder, type = "text", rows, min, max, step }: {
-  label: string; value: string | number; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string;
+export function Input({ label, value, onChange, placeholder, type = "text", rows, min, max, step, list }: {
+  label: string; value: string | number; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number; min?: number; max?: number; step?: string; list?: string;
 }) {
   const id = React.useId();
   const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
@@ -22,7 +22,7 @@ export function Input({ label, value, onChange, placeholder, type = "text", rows
       {rows ? (
         <textarea id={id} className={cls + " resize-y"} rows={rows} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />
       ) : (
-        <input id={id} className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} min={min} max={max} step={step} />
+        <input id={id} className={cls} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} min={min} max={max} step={step} list={list} />
       )}
     </div>
   );
