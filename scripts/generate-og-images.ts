@@ -25,11 +25,15 @@ const geistPath = resolve(
   "node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf"
 );
 const geistFont = readFileSync(geistPath);
+// Vendored statics (scripts/assets): real 600/700 faces so semibold titles
+// and the 800 wordmark stop rendering as faux-bold Regular.
+const geistSemiBold = readFileSync(resolve(process.cwd(), "scripts/assets/Geist-SemiBold.ttf"));
+const geistBold = readFileSync(resolve(process.cwd(), "scripts/assets/Geist-Bold.ttf"));
 
 const OUT = resolve("public/og");
 
 // Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
-const TEMPLATE_VERSION = "og-template-v7";
+const TEMPLATE_VERSION = "og-template-v8";
 
 const CACHE_FILE = "og-cache.json";
 
@@ -417,7 +421,11 @@ async function renderImage(element: any): Promise<Buffer> {
   const img = new ImageResponse(element, {
     width: 1200,
     height: 630,
-    fonts: [{ name: "Geist", data: geistFont, weight: 400, style: "normal" }],
+    fonts: [
+      { name: "Geist", data: geistFont, weight: 400, style: "normal" },
+      { name: "Geist", data: geistSemiBold, weight: 600, style: "normal" },
+      { name: "Geist", data: geistBold, weight: 700, style: "normal" },
+    ],
   });
   const resp = await img;
   return Buffer.from(await resp.arrayBuffer());
