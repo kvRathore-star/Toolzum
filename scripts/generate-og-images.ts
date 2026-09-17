@@ -29,7 +29,7 @@ const geistFont = readFileSync(geistPath);
 const OUT = resolve("public/og");
 
 // Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
-const TEMPLATE_VERSION = "og-template-v4";
+const TEMPLATE_VERSION = "og-template-v6";
 
 const CACHE_FILE = "og-cache.json";
 
@@ -152,28 +152,33 @@ export function toolOG(tool: ToolInfo) {
       h(
         "div",
         { style: { display: "flex", alignItems: "center", gap: 14 } },
+        // Primary mark, v2.1 guidelines: tapered-Z gesture, never a "Z" glyph.
         h(
-          "div",
-          {
-            style: {
-              width: 44,
-              height: 44,
-              borderRadius: 12,
-              background: "#6366F1",
-              color: "#fff",
-              fontSize: 28,
-              fontWeight: 700,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          },
-          "Z"
+          "svg",
+          { width: 44, height: 44, viewBox: "0 0 100 100" },
+          h("rect", { x: 0, y: 0, width: 100, height: 100, rx: 24, fill: "#6366F1" }),
+          h("path", {
+            d: "M28 34 H72 L30 66 H72",
+            fill: "none",
+            stroke: "white",
+            strokeWidth: 11,
+            strokeLinecap: "round",
+            strokeLinejoin: "round",
+          })
         ),
         h(
           "div",
-          { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
-          "toolzum"
+          { style: { display: "flex", flexDirection: "row" } },
+          h(
+            "div",
+            { style: { fontSize: 28, fontWeight: 800, color: "#e6edf3" } },
+            "Tool"
+          ),
+          h(
+            "div",
+            { style: { fontSize: 28, fontWeight: 800, color: "#6366F1" } },
+            "zum"
+          )
         )
       )
     ),
@@ -298,28 +303,33 @@ export function categoryOG(category: string, count: number) {
       h(
         "div",
         { style: { display: "flex", alignItems: "center", gap: 14 } },
+        // Primary mark, v2.1 guidelines: tapered-Z gesture, never a "Z" glyph.
         h(
-          "div",
-          {
-            style: {
-              width: 44,
-              height: 44,
-              borderRadius: 12,
-              background: "#6366F1",
-              color: "#fff",
-              fontSize: 28,
-              fontWeight: 700,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          },
-          "Z"
+          "svg",
+          { width: 44, height: 44, viewBox: "0 0 100 100" },
+          h("rect", { x: 0, y: 0, width: 100, height: 100, rx: 24, fill: "#6366F1" }),
+          h("path", {
+            d: "M28 34 H72 L30 66 H72",
+            fill: "none",
+            stroke: "white",
+            strokeWidth: 11,
+            strokeLinecap: "round",
+            strokeLinejoin: "round",
+          })
         ),
         h(
           "div",
-          { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
-          "toolzum"
+          { style: { display: "flex", flexDirection: "row" } },
+          h(
+            "div",
+            { style: { fontSize: 28, fontWeight: 800, color: "#e6edf3" } },
+            "Tool"
+          ),
+          h(
+            "div",
+            { style: { fontSize: 28, fontWeight: 800, color: "#6366F1" } },
+            "zum"
+          )
         )
       )
     ),
@@ -346,7 +356,9 @@ export function categoryOG(category: string, count: number) {
             lineHeight: 1.1,
           },
         },
-        category === "indian-utilities" ? "India \ud83c\uddee\ud83c\uddf3 Tools" : category === "E-commerce" ? "E-Commerce" : category
+        // No flag emoji: satori fetches emoji glyphs from a CDN at render
+        // time, and one failed fetch used to abort the whole batch.
+        category === "indian-utilities" ? "India Tools" : category === "E-commerce" ? "E-Commerce" : category
       ),
       h(
         "div",
@@ -476,9 +488,16 @@ export async function generateAll(
   const start = Date.now();
   let done = 0;
 
+  const failures: string[] = [];
   await runPool(jobs, concurrency, async (job) => {
-    const buf = await renderImage(job.element);
-    await writeImage(job.outPath, buf);
+    try {
+      const buf = await renderImage(job.element);
+      await writeImage(job.outPath, buf);
+    } catch (err) {
+      // One bad asset (e.g. emoji CDN fetch) must not nuke the batch.
+      failures.push(`${rel(job.outPath)}: ${(err as Error).message}`);
+      return;
+    }
     done++;
     if (done % 25 === 0) {
       console.log(`  [${done}/${jobs.length}] rendered...`);
@@ -486,6 +505,11 @@ export async function generateAll(
   });
 
   for (const job of jobs) cache.set(rel(job.outPath), job.hash);
+  if (failures.length > 0) {
+    console.error(`[gen-og] ${failures.length} failed (cached hashes kept for retry):`);
+    for (const f of failures) console.error(`  FAILED: ${f}`);
+    throw new Error(`${failures.length} images failed to render`);
+  }
   for (const cachedPath of cache.keys()) {
     if (!livePaths.has(cachedPath)) cache.delete(cachedPath);
   }
