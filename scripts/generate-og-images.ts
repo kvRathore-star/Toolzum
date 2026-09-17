@@ -29,7 +29,7 @@ const geistFont = readFileSync(geistPath);
 const OUT = resolve("public/og");
 
 // Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
-const TEMPLATE_VERSION = "og-template-v6";
+const TEMPLATE_VERSION = "og-template-v7";
 
 const CACHE_FILE = "og-cache.json";
 
@@ -176,7 +176,10 @@ export function toolOG(tool: ToolInfo) {
           ),
           h(
             "div",
-            { style: { fontSize: 28, fontWeight: 800, color: "#6366F1" } },
+            // App-parity indigo (#818CF8 = --accent): matches the live
+            // header/footer wordmark. Guideline #6366F1 kept for the
+            // badge fill. See brand guidelines §08 exception.
+            { style: { fontSize: 28, fontWeight: 800, color: "#818CF8" } },
             "zum"
           )
         )
@@ -327,7 +330,10 @@ export function categoryOG(category: string, count: number) {
           ),
           h(
             "div",
-            { style: { fontSize: 28, fontWeight: 800, color: "#6366F1" } },
+            // App-parity indigo (#818CF8 = --accent): matches the live
+            // header/footer wordmark. Guideline #6366F1 kept for the
+            // badge fill. See brand guidelines §08 exception.
+            { style: { fontSize: 28, fontWeight: 800, color: "#818CF8" } },
             "zum"
           )
         )
