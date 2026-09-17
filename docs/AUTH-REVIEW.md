@@ -49,3 +49,8 @@ sessions/revoke, password reset, user delete, flag set) write
   throttle + creation CAPTCHA cover the realistic paths.
 - Banned-user login block — rejected: would couple ban state into
   auth internals for no gain (nothing server-side is reachable anyway).
+- ~~Breach-corpus check~~ DONE Sep 17: `haveIBeenPwned()` wired
+  (k-anonymity, no key, no password material leaves). Accepted coupling:
+  HIBP range-API outage fails signups loudly (retryable) instead of
+  silently accepting breached passwords. Verify live on preview with
+  `password123`.

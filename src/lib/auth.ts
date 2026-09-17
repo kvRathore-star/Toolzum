@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { captcha } from "better-auth/plugins";
+import { captcha, haveIBeenPwned } from "better-auth/plugins";
 import { drizzle } from "drizzle-orm/d1";
 import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
@@ -159,6 +159,9 @@ export function createAuth(env: AuthEnv) {
       },
     },
     plugins: [
+      // Breached-password rejection (k-anonymity: only a 5-char hash
+      // prefix leaves the server — no password material, ever).
+      haveIBeenPwned(),
       ...(env.TURNSTILE_SECRET_KEY
         ? [
             captcha({
