@@ -227,7 +227,7 @@ const SUBCATEGORY_KEYWORDS: Record<string, Record<string, string[]>> = {
   },
 };
 
-function SectionToolRow({ tool }: { tool: { id: string; slug: string; name: string; description: string; category: string } }) {
+function SectionToolRow({ tool }: { tool: ToolMetadata }) {
   const { icon: Icon, color, bg } = getIconBg(tool);
   return (
     <Link
