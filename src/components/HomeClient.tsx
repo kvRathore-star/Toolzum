@@ -78,12 +78,12 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       <section ref={heroRef} className="relative overflow-x-clip pt-16 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent-ink)]/8 blur-[140px] pointer-events-none" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
           <div className="flex flex-col items-start text-left">
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] mb-8"
+              className="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] mb-8 max-w-full"
             >
               <Sparkles className="w-3.5 h-3.5 text-[var(--accent)]" />
               <span>{totalImplemented.toLocaleString()} free tools · {localPct}% local · no signup</span>
@@ -93,7 +93,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl lg:text-[84px] leading-[0.95] tracking-tight mb-6 sm:mb-8"
+              className="font-[family-name:var(--font-serif)] text-5xl sm:text-7xl md:text-6xl lg:text-[84px] leading-[0.95] tracking-tight mb-6 sm:mb-8"
             >
               The browser<br />
               <span className="text-[var(--accent)]">supercomputer.</span>
@@ -112,7 +112,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+              className="flex flex-col sm:flex-row flex-wrap items-center gap-4 w-full sm:w-auto"
             >
               <Button size="lg" className="w-full sm:w-auto whitespace-nowrap shadow-[var(--shadow-glow-accent)]" asChild>
                 <Link href="/tools">
@@ -130,7 +130,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="flex flex-wrap gap-6 sm:gap-10 mt-16 pt-8 border-t border-[var(--border-subtle)] w-full"
+              className="flex flex-wrap gap-6 sm:gap-10 mt-10 lg:mt-16 pt-8 border-t border-[var(--border-subtle)] w-full"
             >
               <div className="flex flex-col">
                 <span className="font-mono text-2xl text-[var(--text-primary)] font-semibold">{totalImplemented.toLocaleString()}+</span>
