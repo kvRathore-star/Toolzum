@@ -37,10 +37,13 @@ for (let i = 0; i <= 5; i++) {
     if (!block.includes('id:') || !block.includes('slug:')) continue;
 
     const get = (field) => {
-      // Match: field: "value" or field: 'value'
-      const re = new RegExp(field + ':\\s*[\'"`]([^\'"`]*)[\'"`]');
+      // Match: field: "value" or field: 'value'. The value may contain the
+      // OTHER quote type (e.g. "Can't decide?") — capture until the SAME
+      // quote that opened it, honoring backslash escapes. The old
+      // [^'"`]* class truncated at the first inner apostrophe.
+      const re = new RegExp(field + ':\\s*([\'"`])((?:\\\\.|(?!\\1).)*?)\\1', 's');
       const m = block.match(re);
-      return m ? m[1] : '';
+      return m ? m[2].replace(/\\\\(.)/g, '$1') : '';
     };
 
     const id = get('id');

@@ -770,7 +770,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Cover Letter Generator",
     "slug": "ai-cover-letter-generator",
     "category": "AI",
-    "description": "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer",
+    "description": "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. Uses cloud-based processing.",
     "isPro": true
   },
   {
@@ -3986,7 +3986,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Shoe Size Converter",
     "slug": "shoe-size-converter",
     "category": "Utility",
-    "description": "Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\\",
+    "description": "Convert between US, UK, European, and Asian shoe size systems instantly. Includes men\\'s, women\\'s, and children\\'s size charts.",
     "isPro": false
   },
   {
@@ -5274,7 +5274,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Webhook Signature Verifier",
     "slug": "webhook-signature-verifier",
     "category": "Developer",
-    "description": "Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\\",
+    "description": "Verify webhook HMAC-SHA256 signatures. Validate that incoming webhooks are genuinely from your provider and haven\\'t been tampered with.",
     "isPro": false
   },
   {
@@ -5890,7 +5890,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Decision Maker",
     "slug": "decision-maker",
     "category": "Utility",
-    "description": "Can",
+    "description": "Can't decide? Enter your options and let the tool randomly pick one for you. Perfect for everyday choices. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -6106,7 +6106,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Rounding Calculator",
     "slug": "rounding-calculator",
     "category": "Calculator",
-    "description": "Round numbers using 5 modes: round half up, banker\\",
+    "description": "Round numbers using 5 modes: round half up, banker\\'s rounding, floor, ceil, and truncate. Shows step-by-step explanation with the digit being rounded. Everything runs locally in your browser — nothing is uploaded.",
     "isPro": false
   },
   {
@@ -7202,7 +7202,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Clothing Size Converter",
     "slug": "clothing-size-converter",
     "category": "Utility",
-    "description": "Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\\",
+    "description": "Convert clothing sizes between US/Canada, UK, EU, Japan, and France sizing systems. Supports women\\'s apparel size conversions with international standards.",
     "isPro": false
   },
   {
