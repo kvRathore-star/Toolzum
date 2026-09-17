@@ -338,19 +338,19 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
               </div>
               {/* Nav mode toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
-                <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Sidebar navigation">
+                <button onClick={() => setNavMode('sidebar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'sidebar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Sidebar navigation" aria-label="Sidebar navigation">
                   <PanelLeft className="w-4 h-4" />
                 </button>
-                <button onClick={() => setNavMode('menubar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'menubar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Horizontal menu navigation">
+                <button onClick={() => setNavMode('menubar')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${navMode === 'menubar' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Menubar navigation" aria-label="Horizontal menu navigation">
                   <AlignJustify className="w-4 h-4" />
                 </button>
               </div>
               {/* View mode toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
-                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="Grid view">
+                <button onClick={() => setViewMode('grid')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'grid' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="Grid view" aria-label="Grid view">
                   <Grid3X3 className="w-4 h-4" />
                 </button>
-                <button onClick={() => setViewMode('list')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'list' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} aria-label="List view">
+                <button onClick={() => setViewMode('list')} className={`p-2 rounded-[var(--radius-md)] transition-colors ${viewMode === 'list' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`} title="List view" aria-label="List view">
                   <List className="w-4 h-4" />
                 </button>
               </div>
