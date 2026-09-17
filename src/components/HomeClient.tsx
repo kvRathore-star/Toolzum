@@ -75,7 +75,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
     <div className="min-h-screen bg-[var(--bg-base)] text-[var(--text-primary)] overflow-hidden">
 
       {/* ===== 1. HERO ===== */}
-      <section ref={heroRef} className="relative pt-16 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+      <section ref={heroRef} className="relative overflow-x-clip pt-16 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div style={{ y: heroY }} className="absolute top-[-20%] left-[10%] w-[80%] h-[60%] rounded-full bg-[var(--accent-ink)]/8 blur-[140px] pointer-events-none" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
@@ -268,7 +268,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       </section>
 
       {/* ===== 4. CATEGORY SHOWCASE ===== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -334,7 +334,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       </section>
 
       {/* ===== 5. USE CASES ===== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -383,7 +383,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       </section>
 
       {/* ===== 6. WHY TOOLZUM ===== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -423,7 +423,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 
       {/* ===== 6.5. YOUR FAVORITES ===== */}
       {!favoritesLoading && favorites.size > 0 && (
-        <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+        <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -479,7 +479,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       )}
 
       {/* ===== 7. POPULAR TOOLS ===== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -651,7 +651,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 
       {/* ===== 9. INDIA SECTION ===== */}
       {showIndia && (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
+        <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto">
           <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF6B35]/50 to-transparent" />
           <div className="absolute top-0 inset-x-0 h-[100px] bg-gradient-to-b from-[#FF6B35]/[0.03] to-transparent pointer-events-none" />
 
@@ -719,7 +719,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
       </section>
 
       {/* ===== 11. FINAL CTA ===== */}
-      <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
+      <section className="relative overflow-x-clip py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-[1280px] mx-auto border-t border-[var(--border-subtle)]">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[60%] h-[80%] rounded-full bg-[var(--accent-ink)]/5 blur-[100px]" />
         </div>
