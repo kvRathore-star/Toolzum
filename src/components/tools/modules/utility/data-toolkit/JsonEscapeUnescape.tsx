@@ -23,7 +23,7 @@ export default function JsonEscapeUnescape() {
   return (
     <>
       <div className="flex flex-wrap gap-2 mb-4">
-        {jsonPresets.map(p => <button key={p.label} onClick={() => { setInput(p.v); setOut(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
+        {jsonPresets.map(p => <button key={p.label} onClick={() => { setInput(p.v); setOut(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">JSON Escape / Unescape</h2>

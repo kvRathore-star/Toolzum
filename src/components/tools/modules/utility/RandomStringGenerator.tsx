@@ -41,12 +41,12 @@ export default function RandomStringGenerator() {
           <div>
             <label htmlFor="lbl-randomstringgenerator-length" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length</label>
             <input id="lbl-randomstringgenerator-length" aria-label="Length" type="number" min={1} max={1000} value={String(length)} onChange={e => setLength(Number(e.target.value))}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
           </div>
           <div>
             <label htmlFor="lbl-randomstringgenerator-charset" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Charset</label>
             <select id="lbl-randomstringgenerator-charset" aria-label="Charset" value={charset} onChange={e => setCharset(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
               <option value="alphanumeric">Alphanumeric</option>
               <option value="alpha">Alphabetic</option>
               <option value="numeric">Numeric</option>

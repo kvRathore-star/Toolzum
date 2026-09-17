@@ -25,23 +25,23 @@ export default function TextSorter() {
       <div className="space-y-4">
         <label htmlFor="lbl-textsorter-lines-inlines" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
         <textarea id="lbl-textsorter-lines-inlines" aria-label="Lines" value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
         <div className="flex flex-wrap gap-2">
           {[
             ['A→Z', 'az'], ['Z→A', 'za'], ['By Length', 'length'], ['Randomize', 'random'], ['Deduplicate', 'unique']
           ].map(([label, id]) => (
             <button key={id} onClick={() => sort(id!)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+              className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${sortMethod === id ? 'bg-violet-500/10 border-violet-400 text-violet-500' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {label}
             </button>
           ))}
         </div>
 
         {sorted && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[250px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[250px]">
             <textarea readOnly value={sorted} rows={8} aria-label="Sorted text"
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
             <div className="flex items-center justify-between mt-2">
               <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>
               <button onClick={() => { clipboardWrite(sorted); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy sorted lines"><Copy size={14} /></button>

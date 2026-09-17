@@ -44,10 +44,10 @@ export default function CanonicalUrlChecker() {
       <div className="space-y-4">
         <label htmlFor="lbl-canonicalurlchecker-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL to check</label>
         <input id="lbl-canonicalurlchecker-url" aria-label="URL to check" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
 
         {result && (
-          <pre className="p-4 bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 font-mono text-sm whitespace-pre-wrap">{result}</pre>
+          <pre className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] font-mono text-sm whitespace-pre-wrap">{result}</pre>
         )}
       </div>
     </CalculatorShell>

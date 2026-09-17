@@ -49,10 +49,10 @@ export default function MarkdownPreviewer() {
     <CalculatorShell category="SEO" title="Markdown Previewer" result={resultText} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Markdown</label>
       <textarea aria-label="Markdown" value={md} onChange={e => setMd(e.target.value)} rows={10} placeholder="Enter Markdown..."
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
 
       {html && (
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">
           <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
         </div>
       )}

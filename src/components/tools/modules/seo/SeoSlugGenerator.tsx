@@ -23,10 +23,10 @@ export default function SeoSlugGenerator() {
       <div className="space-y-4">
         <label htmlFor="lbl-seosluggenerator-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <input id="lbl-seosluggenerator-text" aria-label="Text" type="text" value={text} onChange={e => setText(e.target.value)} placeholder="Enter text to convert to slug"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
 
         {slug && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center items-center min-h-[100px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[100px]">
             <div className="text-center">
               <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{slug}</p>
               <button aria-label="Copy slug" onClick={() => { clipboardWrite(slug); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>

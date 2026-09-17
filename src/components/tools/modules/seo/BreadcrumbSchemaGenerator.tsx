@@ -23,12 +23,12 @@ export default function BreadcrumbSchemaGenerator() {
       <div className="space-y-4">
         <label htmlFor="lbl-breadcrumbschemagenerator-pages-name-url-per-line" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Pages (Name,URL per line)</label>
         <textarea id="lbl-breadcrumbschemagenerator-pages-name-url-per-line" aria-label="Pages (Name,URL per line)" value={pages} onChange={e => setPages(e.target.value)} rows={5} placeholder="Home,https://example.com\nProducts,https://example.com/products"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
 
         {result && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <textarea aria-label="Breadcrumb schema" readOnly value={result} rows={10}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs resize-none" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
             <button aria-label="Copy breadcrumb schema" onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Copy size={14} /></button>
           </div>
         )}

@@ -25,20 +25,20 @@ export default function SeoPreviewGenerator() {
         <div>
           <label htmlFor="lbl-seopreviewgenerator-title" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
           <input id="lbl-seopreviewgenerator-title" aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
         </div>
         <div>
           <label htmlFor="lbl-seopreviewgenerator-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Page URL</label>
           <input id="lbl-seopreviewgenerator-url" aria-label="Page URL" type="url" value={url} onChange={e => setUrl(e.target.value)}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
         </div>
         <div>
           <label htmlFor="lbl-seopreviewgenerator-description" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
           <textarea id="lbl-seopreviewgenerator-description" aria-label="Description" value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Meta description..."
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
         </div>
 
-        <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col justify-center min-h-[200px]">
+        <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center min-h-[200px]">
           <p className="text-xs font-bold text-[var(--text-muted)] uppercase mb-3">Google SERP Preview</p>
           <div className="p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)]">
             <div className="text-xs text-green-700 dark:text-green-400 mb-1">{url}</div>

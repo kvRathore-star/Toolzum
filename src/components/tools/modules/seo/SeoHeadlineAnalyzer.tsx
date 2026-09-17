@@ -33,7 +33,7 @@ export default function SeoHeadlineAnalyzer() {
       <div className="space-y-4">
         <label htmlFor="lbl-seoheadlineanalyzer-headline" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Headline</label>
         <input id="lbl-seoheadlineanalyzer-headline" aria-label="Headline" type="text" value={headline} onChange={e => setHeadline(e.target.value)}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-rose-500/50" />
 
         {analysis && (
           <div aria-live="polite" className="space-y-3">

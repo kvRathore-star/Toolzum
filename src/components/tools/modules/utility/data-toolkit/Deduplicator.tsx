@@ -26,7 +26,7 @@ export default function Deduplicator() {
   return (
     <>
       <div className="flex flex-wrap gap-2 mb-4">
-        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
+        {csvPresets.map(p => <button key={p.label} onClick={() => handle(p.v)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>)}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Deduplicator</h2>
@@ -38,7 +38,7 @@ export default function Deduplicator() {
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-orange-400">
               <span className="text-xs text-zinc-500">Before</span>
-              <p className="text-lg font-bold text-zinc-900 dark:text-zinc-100">{stats.before}</p>
+              <p className="text-lg font-bold text-[var(--text-primary)]">{stats.before}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-green-400">
               <span className="text-xs text-zinc-500">After</span>

@@ -72,7 +72,7 @@ export default function DecimalToFractionCalculator() {
       <div className="space-y-4">
         <label htmlFor="lbl-decimaltofractioncalculator-decimal-value" className={labelClass}>Decimal Value</label>
         <input id="lbl-decimaltofractioncalculator-decimal-value" aria-label="Decimal Value" type="text" value={dec} onChange={e => setDec(e.target.value)} placeholder="0.75"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
       </div>
     </CalculatorShell>
   );

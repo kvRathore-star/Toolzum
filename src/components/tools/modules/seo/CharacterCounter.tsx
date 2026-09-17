@@ -38,7 +38,7 @@ export default function CharacterCounter() {
       <div className="space-y-4">
         <label htmlFor="lbl-charactercounter-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea id="lbl-charactercounter-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={10} placeholder="Type or paste text..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/50 resize-y" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-sky-500/50 resize-y" />
 
         {text && (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
