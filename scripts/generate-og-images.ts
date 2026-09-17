@@ -29,7 +29,7 @@ const geistFont = readFileSync(geistPath);
 const OUT = resolve("public/og");
 
 // Bump whenever toolOG/categoryOG template changes so cached hashes invalidate.
-const TEMPLATE_VERSION = "og-template-v3";
+const TEMPLATE_VERSION = "og-template-v4";
 
 const CACHE_FILE = "og-cache.json";
 
@@ -151,8 +151,30 @@ export function toolOG(tool: ToolInfo) {
       },
       h(
         "div",
-        { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
-        "toolzum"
+        { style: { display: "flex", alignItems: "center", gap: 14 } },
+        h(
+          "div",
+          {
+            style: {
+              width: 44,
+              height: 44,
+              borderRadius: 12,
+              background: "#6366F1",
+              color: "#fff",
+              fontSize: 28,
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          },
+          "Z"
+        ),
+        h(
+          "div",
+          { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
+          "toolzum"
+        )
       )
     ),
     h(
@@ -275,8 +297,30 @@ export function categoryOG(category: string, count: number) {
       },
       h(
         "div",
-        { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
-        "toolzum"
+        { style: { display: "flex", alignItems: "center", gap: 14 } },
+        h(
+          "div",
+          {
+            style: {
+              width: 44,
+              height: 44,
+              borderRadius: 12,
+              background: "#6366F1",
+              color: "#fff",
+              fontSize: 28,
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          },
+          "Z"
+        ),
+        h(
+          "div",
+          { style: { fontSize: 28, fontWeight: 600, letterSpacing: "-0.5px", color: "#a1a1aa" } },
+          "toolzum"
+        )
       )
     ),
     h(
