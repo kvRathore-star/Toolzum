@@ -306,7 +306,7 @@ export function ToolsDirectoryClient({ initialTools, toolCount }: { initialTools
                 {filteredTools.length} tools shown · {(toolCount ?? (initialTools ?? toolsRegistry).length).toLocaleString()}+ total
               </span>
             </div>
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="sticky top-[60px] z-30 bg-[var(--bg-base)]/95 backdrop-blur-sm py-2 -my-2 flex items-center gap-2 flex-wrap">
               {/* Pro/Free toggle */}
               <div className="flex bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-[var(--radius-lg)] p-0.5">
                 <button onClick={() => { setProFilter('all'); setCurrentPage(1); }} className={`px-2.5 py-1.5 text-[11px] font-mono rounded-[var(--radius-md)] transition-colors ${proFilter === 'all' ? 'bg-[var(--bg-elevated)] shadow-sm text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'}`}>
