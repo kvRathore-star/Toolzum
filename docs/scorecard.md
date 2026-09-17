@@ -381,3 +381,9 @@ Counts as of this entry: 1,146 tools, 21 categories, 66 pro, 425 download-produc
 | Dimension | Before | Now | Evidence / scope boundary |
 |---|---|---|---|
 | Load testing | 40 | **65** (xlsx row #42: 40 → **65**) | `e30e6f8c` — rig armed, deliberately unfired: artillery warmup/spike/hold over static pages + write-free edge probe (no D1 writes, no authed AI); production apex refused without explicit confirm; report checker with budgets wired into `npm run test:load`; manual-dispatch CI with preview default + artifact; guard tests 5/5; fire trigger is 10× baseline week (`docs/LOAD.md`). Local proof impossible here (no serve sockets, no browsers); CI ubuntu is the venue. Held for: first fired run with numbers. |
+
+## Update (2026-09-17, auth #25: 82 → 90, composite 81.3 → 81.5)
+
+| Dimension | Before | Now | Evidence / scope boundary |
+|---|---|---|---|
+| Auth hardening | 82 | **90** (xlsx row #25: 82 → **90**) | `ae258587` — real gap closed: better-auth's limiter is per-isolate memory (near-useless at edge) and middleware skipped auth routes entirely. D1 throttle now caps auth mutations at 30/IP/10min, read-only to auth mechanics, fail-open, OAuth GETs exempt. `docs/AUTH-REVIEW.md` (passwords, sessions, ban semantics, Turnstile, complete admin-audit inventory). Middleware tests 4/4. Target met. |
