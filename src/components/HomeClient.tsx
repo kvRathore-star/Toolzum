@@ -10,6 +10,7 @@ import {
   Music, Video, File as FileIcon, FileImage
 } from 'lucide-react';
 import type { PopularTool, CategoryCount } from '@/registry/tools';
+import { toast } from 'react-hot-toast';
 import { SITE_STATS } from '@/registry/site-data.generated';
 import { Button } from '@/components/ui/button';
 import { getCategoryTheme } from '@/lib/categoryTheme';
@@ -759,7 +760,23 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
 function FileDropZone({ activeTab }: { activeTab: string }) {
   const [file, setFile] = useState<File | null>(null);
   const [dragOver, setDragOver] = useState(false);
+  // Drag-enter/leave counter: crossing child elements fires leave events
+  // without the pointer actually exiting (classic highlight flicker).
+  const dragDepth = useRef(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const takeFiles = useCallback((list: FileList | null) => {
+    if (!list || list.length === 0) return;
+    if (list.length > 1) {
+      toast('One file here — bulk tools inside handle whole folders.', { icon: '📁' });
+    }
+    const f = list[0]!;
+    setFile(f);
+    // Heads-up, not a block: the destination tool enforces its own caps.
+    if (f.size > 500 * 1024 * 1024) {
+      toast('Large file — Pro tools handle up to 2GB.', { icon: '⚠️' });
+    }
+  }, []);
 
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return `${bytes} B`;
@@ -812,15 +829,21 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
+    dragDepth.current = 0;
     setDragOver(false);
-    const f = e.dataTransfer.files[0];
-    if (f) setFile(f);
-  }, []);
+    takeFiles(e.dataTransfer.files);
+  }, [takeFiles]);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (f) setFile(f);
-  }, []);
+    takeFiles(e.target.files);
+    // Reset so the same file can be picked twice in a row.
+    e.target.value = '';
+  }, [takeFiles]);
+
+  const handlePaste = useCallback((e: React.ClipboardEvent) => {
+    // Screenshots and copied files land straight in the box.
+    if (e.clipboardData.files.length > 0) takeFiles(e.clipboardData.files);
+  }, [takeFiles]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -847,14 +870,16 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       </div>
 
       <div
-        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-        onDragLeave={() => setDragOver(false)}
+        onDragOver={(e) => { e.preventDefault(); }}
+        onDragEnter={(e) => { e.preventDefault(); dragDepth.current += 1; setDragOver(true); }}
+        onDragLeave={() => { dragDepth.current = Math.max(0, dragDepth.current - 1); if (dragDepth.current === 0) setDragOver(false); }}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
         onKeyDown={handleKeyDown}
+        onPaste={handlePaste}
         tabIndex={0}
         role="button"
-        aria-label="Drop a file here or click to browse"
+        aria-label="Drop a file here, paste from clipboard, or click to browse"
         className={`flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
           dragOver
             ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
@@ -865,7 +890,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
       >
         <input ref={fileInputRef} id="hero-file-input" type="file" className="hidden" onChange={handleInputChange} aria-hidden="true" tabIndex={-1} />
         {file && fileType ? (
-          <div className="flex flex-col items-center gap-2 p-4 animate-fade-in">
+          <div role="status" className="flex flex-col items-center gap-2 p-4 animate-fade-in">
             <div className="w-12 h-12 rounded-full bg-[var(--bg-elevated)] border border-[var(--border-subtle)] flex items-center justify-center animate-scale-in">
               {fileTypeIcon(fileType)}
             </div>
