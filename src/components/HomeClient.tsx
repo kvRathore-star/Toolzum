@@ -167,7 +167,7 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
                 <span className="ml-4 text-[11px] text-[var(--text-muted)] font-mono">toolzum — browser-supercomputer</span>
               </div>
 
-              <div className="flex-1 p-6 flex flex-col">
+              <div className="flex-1 p-6 flex flex-col justify-between gap-3">
                 <div className="flex gap-4 mb-8" role="tablist" aria-label="Demo actions" onKeyDown={onDemoTabsKeyDown}>
                   {DEMO_TABS.map(tab => (
                     <button
@@ -865,7 +865,7 @@ function FileDropZone({ activeTab }: { activeTab: string }) {
         tabIndex={0}
         role="button"
         aria-label="Drop a file here, paste from clipboard, or click to browse"
-        className={`flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
+        className={`max-h-[320px] flex-1 min-h-[180px] border-2 border-dashed rounded-[var(--radius-xl)] flex flex-col items-center justify-center gap-3 transition-all cursor-pointer group outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 ${
           dragOver
             ? 'border-[var(--accent)] bg-[var(--accent-ink)]/5 scale-[1.01]'
             : file
