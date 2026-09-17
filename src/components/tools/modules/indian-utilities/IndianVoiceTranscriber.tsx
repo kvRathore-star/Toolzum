@@ -106,7 +106,7 @@ export default function IndianVoiceTranscriber() {
     if (!transcript) return;
     const blob = new Blob([transcript], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    // Quota-gated save (1 unit; transcription itself already cost 10 credits).
+    // Quota-gated save (1 unit; transcription itself already cost 20 credits).
     if (await downloadOrShare(url, `transcript_${audioFile?.name?.replace(/\.[^.]+$/, '') || 'voice'}_${Date.now()}.txt`)) {
       toast.success('Transcript downloaded!');
     } else {
