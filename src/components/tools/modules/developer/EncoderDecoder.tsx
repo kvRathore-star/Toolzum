@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 
 type Mode = 'encode' | 'decode';
@@ -77,26 +78,11 @@ export function EncoderDecoder() {
     }
   };
 
-  const handleCopy = () => {
-    clipboardWrite(output).then(ok => ok && toast.success('Copied!'));
-  };
-
-  const handleDownload = () => {
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `encoded-${scheme.toLowerCase().replace(/\s+/g, '-')}.txt`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-3xl mx-auto space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -105,30 +91,30 @@ export function EncoderDecoder() {
         <h2 className="text-2xl font-bold">Encoder / Decoder</h2>
         <p className="text-sm text-[var(--text-secondary)]">Encode or decode text using various schemes</p>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Encode</button>
-          <button onClick={() => setMode('decode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Decode</button>
+          <button onClick={() => setMode('encode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>Encode</button>
+          <button onClick={() => setMode('decode')} className={`px-4 py-2 text-sm rounded-lg transition ${mode === 'decode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>Decode</button>
         </div>
-        <div>
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Scheme</label>
-          <select aria-label="Scheme" value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
-        </div>
-        <div>
-          <label className="text-xs font-medium text-[var(--text-secondary)]">Text</label>
-          <textarea aria-label="Text" value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
-        </div>
-        <button onClick={handleProcess} className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition active:scale-[0.98]">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-xs font-medium text-[var(--text-secondary)]">Output</label>
-              <div className="flex gap-2">
-                <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+        <DualPanel
+          input={
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs font-medium text-[var(--text-secondary)]">Scheme</label>
+                <select aria-label="Scheme" value={scheme} onChange={e => setScheme(e.target.value as Scheme)} className="w-full mt-1 p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm">{SCHEMES.map(s => <option key={s} value={s}>{s}</option>)}</select>
               </div>
+              <div>
+                <label className="text-xs font-medium text-[var(--text-secondary)]">Text</label>
+                <textarea aria-label="Text" value={input} onChange={e => setInput(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder={mode === 'encode' ? 'Enter text to encode...' : 'Enter text to decode...'} />
+              </div>
+              <button onClick={handleProcess} className="w-full py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl font-bold text-sm transition active:scale-[0.98]">{mode === 'encode' ? 'Encode' : 'Decode'}</button>
             </div>
-            <pre className="p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap break-all">{output}</pre>
-          </div>
-        )}
+          }
+          output={
+            <pre className="p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap break-all min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          }
+          actions={
+            <CalcActions result={output} downloadData={output} downloadFilename={`encoded-${scheme.toLowerCase().replace(/\s+/g, '-')}.txt`} />
+          }
+        />
       </div>
     </div>
   );

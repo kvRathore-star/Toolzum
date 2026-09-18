@@ -40,6 +40,10 @@ Inline division inside template literals executes in untaken ternary branches an
 
 `{ result, downloadData?, downloadFilename?, accent? }` — copy button, CSV download, collapsible 20-entry history (debounced 500ms). Use it when a tool needs result actions without the full shell.
 
+## `DualPanel` — side-by-side input/output layout
+
+`{ input, output, inputLabel?, outputLabel?, actions? }` — stacks on mobile, `md:grid-cols-2` on desktop, theme vars only. Dumb layout: the tool owns controls and logic; pass `<CalcActions/>` as `actions`. Use for converter-style tools (encode/decode, format, convert). Do NOT use for canvas/interactive tools or single-flow generators.
+
 ## `Calculators.shared` (`../Calculators.shared.ts`)
 
 `inputCls` / `labelCls` — the canonical input + label styling. Use them instead of hand-rolled classes so all tools look and focus identically.
