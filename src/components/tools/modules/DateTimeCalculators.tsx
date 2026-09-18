@@ -44,7 +44,7 @@ export function BusinessDaysCalculator() {
       result ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           <div className="text-center p-3">
-            <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{bdCount}</div>
+            <div className="text-xl font-bold text-[var(--accent)]">{bdCount}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Business Days</div>
           </div>
           <div className="text-center p-3">
@@ -98,7 +98,7 @@ export function DaysBetweenDates() {
       result && days > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           <div className="text-center p-3">
-            <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{days}</div>
+            <div className="text-xl font-bold text-[var(--accent)]">{days}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Days</div>
           </div>
           <div className="text-center p-3">
@@ -150,7 +150,7 @@ export function DaysUntilCalculator() {
       result && days > 0 ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Countdown</div>
-          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-400">{days} <span className="text-lg">days</span></div>
+          <div className="text-3xl font-bold text-[var(--accent)]">{days} <span className="text-lg">days</span></div>
         </div>
       ) : null
     }>
@@ -226,7 +226,7 @@ export function DayOfYearCalculator() {
             <span className="text-sm font-bold text-[var(--text-primary)]">{pct.toFixed(1)}%</span>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-indigo-500 via-[var(--accent-ink)] to-emerald-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+            <div className="h-full bg-gradient-to-r from-[var(--accent-ink)] via-[var(--accent-ink)] to-emerald-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
           </div>
         </div>
       )}

@@ -55,7 +55,7 @@ export default function ArrCalculator() {
         <div className="pt-2 border-t border-[var(--border-subtle)]">
           <div className="flex justify-between text-sm font-bold">
             <span className="text-[var(--text-primary)]">ARR</span>
-            <span className="text-indigo-700 dark:text-indigo-400">${arr.toLocaleString()}</span>
+            <span className="text-[var(--accent)]">${arr.toLocaleString()}</span>
           </div>
         </div>
       </div>

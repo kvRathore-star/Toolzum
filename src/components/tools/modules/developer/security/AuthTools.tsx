@@ -88,10 +88,10 @@ export function JwtInspector() {
             )}
 
             {payload && (
-              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
+              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Payload</span>
-                  <button onClick={copyP} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
+                  <button onClick={copyP} className="px-2 py-0.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
                 </div>
                 <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
               </div>
@@ -260,11 +260,11 @@ export function SamlDecoder() {
               <span className="text-xs text-[var(--text-muted)]">SAML Namespace</span>
               <p className={`font-mono text-sm ${fields.hasSaml ? 'text-green-600' : 'text-red-600'}`}>{fields.hasSaml ? '✓ Detected' : '✗ Not found'}</p>
             </div>
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
               <span className="text-xs text-[var(--text-muted)]">Issuer</span>
               <p className="font-mono text-sm text-[var(--text-primary)] truncate">{fields.issuer}</p>
             </div>
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
               <span className="text-xs text-[var(--text-muted)]">Destination</span>
               <p className="font-mono text-sm text-[var(--text-primary)] truncate">{fields.destination}</p>
             </div>

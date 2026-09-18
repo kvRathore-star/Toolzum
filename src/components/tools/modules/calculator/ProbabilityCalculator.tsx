@@ -22,10 +22,10 @@ export default function ProbabilityCalculator() {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <span className="text-sm text-[var(--text-secondary)]">Probability</span>
-        <span className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{pct.toFixed(1)}%</span>
+        <span className="text-xl font-bold text-[var(--accent)]">{pct.toFixed(1)}%</span>
       </div>
       <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-500" style={{ width: `${Math.min(pct, 100)}%` }} />
+        <div className="h-full bg-gradient-to-r from-[var(--accent-ink)] to-purple-500 rounded-full transition-all duration-500" style={{ width: `${Math.min(pct, 100)}%` }} />
       </div>
     </div>
     )

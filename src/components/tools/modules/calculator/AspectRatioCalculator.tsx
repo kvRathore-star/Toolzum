@@ -23,7 +23,7 @@ export default function AspectRatioCalculator() {
     ) : (
     <div>
       <div className="text-center">
-        <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{w / g}:{h / g}</div>
+        <div className="text-2xl font-bold text-[var(--accent)]">{w / g}:{h / g}</div>
         {match && <div className="text-xs text-emerald-700 dark:text-emerald-400 mt-1">Common: {match}</div>}
       </div>
       <div className="mt-3 bg-[var(--bg-elevated)] rounded-lg h-24 flex items-center justify-center" style={{ aspectRatio: `${w / g}/${h / g}` }}>

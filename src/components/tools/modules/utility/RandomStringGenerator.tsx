@@ -41,12 +41,12 @@ export default function RandomStringGenerator() {
           <div>
             <label htmlFor="lbl-randomstringgenerator-length" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Length</label>
             <input id="lbl-randomstringgenerator-length" aria-label="Length" type="number" min={1} max={1000} value={String(length)} onChange={e => setLength(Number(e.target.value))}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
           <div>
             <label htmlFor="lbl-randomstringgenerator-charset" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Charset</label>
             <select id="lbl-randomstringgenerator-charset" aria-label="Charset" value={charset} onChange={e => setCharset(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value="alphanumeric">Alphanumeric</option>
               <option value="alpha">Alphabetic</option>
               <option value="numeric">Numeric</option>
@@ -65,7 +65,7 @@ export default function RandomStringGenerator() {
         </div>
 
         {result && (
-          <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-500/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
+          <div className="bg-[var(--accent)]/10/30 border border-[var(--accent)]/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
             <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
             <p className="text-xs text-[var(--text-muted)] mt-1">{result.length} chars ({charset})</p>
           </div>

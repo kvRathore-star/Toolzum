@@ -19,7 +19,7 @@ export default function SquareRootCalculator() {
     ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">√{n}</div>
-      <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{sqrt.toFixed(4)}</div>
+      <div className="text-lg font-bold text-[var(--accent)]">{sqrt.toFixed(4)}</div>
     </div>
     )
   );

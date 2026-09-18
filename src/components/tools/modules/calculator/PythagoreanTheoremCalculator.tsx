@@ -21,7 +21,7 @@ export default function PythagoreanTheoremCalculator() {
     ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">c = √(a² + b²)</div>
-      <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{c.toFixed(2)}</div>
+      <div className="text-lg font-bold text-[var(--accent)]">{c.toFixed(2)}</div>
     </div>
     )
   );

@@ -73,7 +73,7 @@ export default function FakeIdentityGenerator() {
           <div key={idx} className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-3">
               <div className="flex justify-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
               </div>
               <div className="p-4 bg-[var(--bg-surface)] rounded-xl text-sm space-y-1.5">
                 {[['Name', identity.name], ['Email', identity.email], ['Phone', identity.phone], ['Address', identity.address], ['DOB', identity.dob], ['Occupation', identity.occupation]].map(([k, v]) => (

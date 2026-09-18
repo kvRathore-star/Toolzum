@@ -58,7 +58,7 @@ export function PortNumberLookup() {
     <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
       <label htmlFor="lbl-devutilitywidgets-port-number" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
       <input id="lbl-devutilitywidgets-port-number" aria-label="Port Number" type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
-        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
 
       {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
@@ -206,14 +206,14 @@ export function SseEventFormatter() {
       <Section title="SSE Event Formatter">
         <div className="space-y-3">
           <div><label htmlFor="lbl-devutilitywidgets-sse-event-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea id="lbl-devutilitywidgets-sse-event-text" aria-label="SSE Event Text" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
-          <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-[var(--accent-ink)] hover:from-indigo-500 hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
+          <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
 
           {events.length > 0 && (
             <div className="space-y-2">
               {events.map(function(ev, i) {
                 return (
                   <div key={i} className="flex items-center gap-2 text-sm">
-                    <span className="px-2 py-0.5 text-xs font-bold rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">{ev.type}</span>
+                    <span className="px-2 py-0.5 text-xs font-bold rounded bg-indigo-100 text-indigo-700 dark:bg-[var(--accent)]/10 dark:text-indigo-300">{ev.type}</span>
                     <span className="text-[var(--text-muted)] text-xs">id: {ev.id || 'N/A'}</span>
                   </div>
                 );
@@ -310,7 +310,7 @@ export function RateLimitHeaderParser() {
       <Section title="Rate Limit Header Parser">
         <div className="space-y-3">
           <div><label htmlFor="lbl-devutilitywidgets-rate-limit-headers" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea id="lbl-devutilitywidgets-rate-limit-headers" aria-label="Rate Limit Headers" value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
-          <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-[var(--accent-ink)] hover:from-indigo-500 hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
+          <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
 
           {usagePct > 0 && (
             <div className="mt-3">
@@ -362,7 +362,7 @@ export function PricingTierBuilder() {
       <div className="space-y-4">
         <label htmlFor="lbl-devutilitywidgets-tiers-json" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
         <textarea id="lbl-devutilitywidgets-tiers-json" aria-label="Tiers JSON" value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y"
           placeholder='[{"name": "Free", "price": 0, "users": 1, "features": ["Basic"]}]' />
 
         {result && (

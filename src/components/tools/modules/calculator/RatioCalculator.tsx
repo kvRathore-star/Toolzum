@@ -20,7 +20,7 @@ export default function RatioCalculator() {
       <div className="text-sm text-[var(--text-muted)]">Enter numbers</div>
     ) : (
     <div className="text-center">
-      <div className="text-2xl font-bold text-indigo-700 dark:text-indigo-400">{n1 / g} : {n2 / g}</div>
+      <div className="text-2xl font-bold text-[var(--accent)]">{n1 / g} : {n2 / g}</div>
     </div>
     )
   );

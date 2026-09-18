@@ -31,7 +31,7 @@ export default function AvatarGenerator() {
       <div className="space-y-4">
         <label className={labelClass}>Person name</label>
         <input aria-label="Person name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
@@ -51,7 +51,7 @@ export default function AvatarGenerator() {
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider self-center mr-2">Shape:</span>
           {Object.entries(shapes).map(([k, v]) => (
             <button key={k} onClick={() => setShape(k as 'rounded' | 'circle' | 'square')}
-              className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (shape === k ? 'bg-[var(--accent)]/10 border-indigo-400 text-[var(--accent)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)]')}>
+              className={'px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ' + (shape === k ? 'bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]' : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)]')}>
               {k.charAt(0).toUpperCase() + k.slice(1)}
             </button>
           ))}

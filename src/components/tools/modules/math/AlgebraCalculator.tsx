@@ -59,8 +59,8 @@ export default function AlgebraCalculator() {
     <CalculatorShell category="Math" title="Algebraic Expression Evaluator" result={resultText} auto presets={presets} accent="indigo" downloadData={result ? `Expression: ${expr}\nResult: ${result}` : ''} downloadFilename="algebra.txt" customResult={
       result ? (
         <div className="text-center">
-          <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium mb-1">Result</div>
-          <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 font-mono">${result}</div>
+          <div className="text-xs text-[var(--accent)] font-medium mb-1">Result</div>
+          <div className="text-3xl font-bold text-[var(--accent)] font-mono">${result}</div>
         </div>
       ) : error ? (
         <div className="text-center">
@@ -72,7 +72,7 @@ export default function AlgebraCalculator() {
       <div className="space-y-4">
         <label htmlFor="lbl-algebracalculator-expression" className={labelClass}>Expression</label>
         <input id="lbl-algebracalculator-expression" aria-label="Expression" type="text" value={expr} onChange={e => { setExpr(e.target.value); evaluate(); }}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"
           placeholder="e.g., 2*(3+4) or 10+20*3" />
 
         <div className="bg-[var(--bg-surface)] rounded-xl p-3">

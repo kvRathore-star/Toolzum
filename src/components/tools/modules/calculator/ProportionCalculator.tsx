@@ -22,7 +22,7 @@ export default function ProportionCalculator() {
       <div className="text-sm text-[var(--text-muted)]">Enter values to calculate</div>
     ) : (
     <div className="text-center font-mono text-lg">
-      <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-indigo-700 dark:text-indigo-400 font-bold">{d.toFixed(2)}</span></span>
+      <span className="text-[var(--text-primary)]">{na} : {nb} = {nc} : <span className="text-[var(--accent)] font-bold">{d.toFixed(2)}</span></span>
     </div>
     )
   );

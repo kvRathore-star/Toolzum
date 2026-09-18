@@ -20,7 +20,7 @@ export default function MrrCalculator() {
       c > 0 && r > 0 ? (
         <div className="grid grid-cols-3 gap-3">
           <div className="text-center p-3">
-            <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${mrr.toLocaleString()}</div>
+            <div className="text-lg font-bold text-[var(--accent)]">${mrr.toLocaleString()}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Monthly</div>
           </div>
           <div className="text-center p-3">

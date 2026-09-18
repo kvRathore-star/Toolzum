@@ -27,7 +27,7 @@ export default function CollegeGpaCalculator() {
     <div className="grid grid-cols-2 gap-3">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Semester GPA</div>
-        <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{semGpa.toFixed(2)}</div>
+        <div className="text-xl font-bold text-[var(--accent)]">{semGpa.toFixed(2)}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Cumulative GPA</div>

@@ -20,7 +20,7 @@ export default function CircleCalculator() {
     <div className="grid grid-cols-2 gap-2">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{area.toFixed(1)}</div>
+        <div className="text-lg font-bold text-[var(--accent)]">{area.toFixed(1)}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Circumference</div>

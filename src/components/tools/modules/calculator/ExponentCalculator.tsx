@@ -22,7 +22,7 @@ export default function ExponentCalculator() {
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Result</div>
       {hasInput ? (
-        <div className="text-xl font-bold text-indigo-700 dark:text-indigo-400 font-mono break-all">{b}^{e} = {valText}</div>
+        <div className="text-xl font-bold text-[var(--accent)] font-mono break-all">{b}^{e} = {valText}</div>
       ) : (
         <div className="text-xl font-bold text-[var(--text-muted)] font-mono">Enter base and exponent</div>
       )}

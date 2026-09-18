@@ -27,7 +27,7 @@ export default function LtvCalculator() {
       valid && ltv > 0 ? (
         <div className="text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Customer Lifetime Value</div>
-          <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">${ltv.toFixed(0)}</div>
+          <div className="text-lg font-bold text-[var(--accent)]">${ltv.toFixed(0)}</div>
         </div>
       ) : null
     }>

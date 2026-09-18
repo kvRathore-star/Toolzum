@@ -21,7 +21,7 @@ export default function RectangleAreaCalculator() {
     <div className="grid grid-cols-3 gap-2">
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Area</div>
-        <div className="text-lg font-bold text-indigo-700 dark:text-indigo-400">{hasInput ? l * w : 0}</div>
+        <div className="text-lg font-bold text-[var(--accent)]">{hasInput ? l * w : 0}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>

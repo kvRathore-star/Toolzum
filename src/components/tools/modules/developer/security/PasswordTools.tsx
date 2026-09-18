@@ -372,12 +372,12 @@ export function HashPasswordGenerator() {
   return (
     <CalculatorShell category="Developer" title="Hash Password Generator (PBKDF2-SHA256)" result={resultText} onCalculate={gen} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="password-hash.txt" customResult={
       params ? (
-        <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-4 text-center">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">PBKDF2-SHA256 Hash</span>
-            <button onClick={copy} className="px-2 py-1 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <span className="text-xs font-semibold text-[var(--accent)]">PBKDF2-SHA256 Hash</span>
+            <button onClick={copy} className="px-2 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <p className="font-mono text-xs text-indigo-700 dark:text-indigo-300 break-all">{result}</p>
+          <p className="font-mono text-xs text-[var(--accent)] break-all">{result}</p>
           <div className="text-xs text-[var(--text-secondary)] mt-1">Iterations: {params.iter.toLocaleString()} | Salt: {params.salt}</div>
         </div>
       ) : null
@@ -385,15 +385,15 @@ export function HashPasswordGenerator() {
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input aria-label="Password" type="password" value={pwd} onChange={e => { setPwd(e.target.value); setResult(''); }} placeholder="Enter password..."
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Salt (optional)</label>
         <input aria-label="Salt (optional)" type="text" value={salt} onChange={e => { setSalt(e.target.value); setResult(''); }} placeholder="Leave blank to auto-generate"
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Iterations</label>
         <select aria-label="Iterations" value={iterations} onChange={e => { setIterations(e.target.value); gen(); }}
-          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
           <option value="100000">100K (Legacy)</option>
           <option value="600000">600K (OWASP recommended)</option>
           <option value="1000000">1M (High security)</option>
