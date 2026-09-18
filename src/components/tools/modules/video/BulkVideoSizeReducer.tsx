@@ -40,8 +40,18 @@ export default function BulkVideoSizeReducer() {
   };
 
   const getVideoDuration = async (ff: Awaited<import('@ffmpeg/ffmpeg').FFmpeg>, input: string): Promise<number> => {
-    try { await ff.exec(['-i', input, '-f', 'null', '-']); return 30; }
-    catch { return 30; }
+    try {
+      const logs: string[] = [];
+      const onLog = ({ message }: { message: string }) => logs.push(message);
+      ff.on('log', onLog);
+      await ff.exec(['-i', input, '-f', 'null', '-']);
+      ff.off('log', onLog);
+      for (const line of logs) {
+        const m = line.match(/Duration:\s*(\d{2}):(\d{2}):(\d{2})\.(\d{2})/);
+        if (m?.[1] && m?.[2] && m?.[3] && m?.[4]) return parseInt(m[1]) * 3600 + parseInt(m[2]) * 60 + parseInt(m[3]) + parseInt(m[4]) / 100;
+      }
+      return 30;
+    } catch { return 30; }
   };
 
   const processor = async (file: File, onProgress: (pct: number) => void): Promise<Blob | null> => {

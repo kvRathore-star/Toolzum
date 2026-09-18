@@ -94,6 +94,7 @@ export function WordsPerPageCalculator() {
   const calc = () => {
     const w = parseInt(words);
     const fs = parseFloat(fontSize);
+    if (!Number.isFinite(w) || w <= 0) { setResult('Enter a positive word count.'); return; }
     const wpp = fs <= 10 ? 600 : fs <= 12 ? 500 : fs <= 14 ? 400 : 300;
     const pages = Math.ceil(w / wpp);
     setResult(`~${wpp} words/page at ${fontSize}pt\n${w} words = ${pages} page${pages > 1 ? 's' : ''}`);
@@ -134,6 +135,7 @@ export function ProfitLossCalculator() {
     const rev = parseFloat(revenue);
     const c = parseFloat(cogs);
     const op = parseFloat(opExp);
+    if (!Number.isFinite(rev) || rev === 0) { setResult('Revenue must be a non-zero number.'); return; }
     const grossProfit = rev - c;
     const netIncome = grossProfit - op;
     const margin = (netIncome / rev) * 100;
