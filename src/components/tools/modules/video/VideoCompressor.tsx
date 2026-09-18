@@ -174,7 +174,7 @@ export default function VideoCompressor() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Compression Level</label>
-                  <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crf === 23 ? 'High Quality' : crf >= 32 ? 'Low Quality' : 'Balanced'} (CRF {crf})</span>
+                  <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crf <= 22 ? 'High Quality' : crf >= 32 ? 'Low Quality' : 'Balanced'} (CRF {crf})</span>
                 </div>
                 <input aria-label="Compression Level"
                   type="range" min="20" max="40" step="1" value={crf}
