@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Input, parseCSV, formatCSV } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function DataTypeConverter() {
   const [input, setInput] = useState('name,age,salary\nJohn,35,75000\nJane,28,62000');
@@ -48,7 +50,7 @@ export default function DataTypeConverter() {
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Result — {col} as {type}</span>
             <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
           </div>

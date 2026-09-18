@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Input, parseCSV } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function PivotGenerator() {
   const [input, setInput] = useState('name,role,salary\nJohn,Admin,75000\nJane,Editor,62000\nBob,Admin,82000');
@@ -45,7 +47,7 @@ export default function PivotGenerator() {
           <div className="flex justify-between items-center mb-2">
             <span className="text-xs font-semibold text-zinc-500">Pivot Table (group, count, sum, avg)</span>
             <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(out); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
           </div>

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { Send, Plus, Trash2, Copy, ChevronDown, ChevronRight, Clock, Book, Code, Globe, Shield, Terminal, Download } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS';
 type BodyType = 'none' | 'json' | 'text' | 'form';
@@ -213,7 +215,7 @@ export function ApiBuilder() {
   }, [method, url, headers, body, bodyType, snippetLang, buildUrl]);
 
   const copyToClipboard = useCallback((text: string) => {
-    navigator.clipboard.writeText(text);
+  void clipboardWrite(text);
   }, []);
 
   const statusColor = (s: number) => {

@@ -333,7 +333,7 @@ export function IpAllowlistGenerator() {
         {output && (
           <div className="relative">
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
-            <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }}
+            <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
               className="absolute top-2 right-2 text-xs bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded px-2 py-1 hover:bg-[var(--bg-overlay)]">
               Copy
             </button>

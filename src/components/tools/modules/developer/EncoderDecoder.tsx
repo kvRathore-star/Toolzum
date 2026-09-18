@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 type Mode = 'encode' | 'decode';
 type Scheme = 'Base64' | 'Base64URL' | 'URL' | 'HTML Entity' | 'Hex' | 'Binary' | 'ROT13' | 'UTF-8' | 'Unicode Escape' | 'Backslash Escape';
@@ -76,8 +78,7 @@ export function EncoderDecoder() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => ok && toast.success('Copied!'));
   };
 
   const handleDownload = () => {
