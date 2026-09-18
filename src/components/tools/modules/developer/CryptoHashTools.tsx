@@ -65,7 +65,7 @@ function StrengthMeter({ password }: { password: string }) {
     <div className="mt-2">
       <div className="flex gap-1 mb-1">
         {[0, 1, 2, 3, 4].map(i => (
-          <div key={i} className={`h-1.5 flex-1 rounded-full ${i < strength ? colors[strength] : 'bg-zinc-200 dark:bg-zinc-700'} transition-colors`} />
+          <div key={i} className={`h-1.5 flex-1 rounded-full ${i < strength ? colors[strength] : 'bg-[var(--bg-overlay)]'} transition-colors`} />
         ))}
       </div>
       <div className="flex justify-between text-[10px] text-[var(--text-muted)]">

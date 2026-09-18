@@ -58,7 +58,7 @@ export default function DiffChecker() {
               }}
               onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleDiffCheck()}
               placeholder="Paste the source version of your text..."
-              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-indigo-500"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)]"
             />
           </div>
 
@@ -72,7 +72,7 @@ export default function DiffChecker() {
                 setDiffs(null);
               }}
               placeholder="Paste the updated/modified version..."
-              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-indigo-500"
+              className="w-full h-48 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)]"
             />
           </div>
         </div>

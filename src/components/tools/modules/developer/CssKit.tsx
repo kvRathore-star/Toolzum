@@ -171,7 +171,7 @@ export function NeumorphismGenerator() {
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
       <div className="flex items-center justify-between">
         <PresetBar presets={presetList} />
-        <button onClick={toggleDark} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ml-2">
+        <button onClick={toggleDark} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors ml-2">
           {dark ? '☀️ Light' : '🌙 Dark'}
         </button>
       </div>
