@@ -141,7 +141,7 @@ export default function LiveTranscription() {
     return (
       <div className="bg-red-500/10 border border-red-500/20 p-8 rounded-2xl text-center">
         <h3 className="text-xl font-bold text-red-700 dark:text-red-400 mb-2">Browser Not Supported</h3>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Live Transcription requires the Web Speech API, which is not supported in your current browser. Please try using Google Chrome, Microsoft Edge, or Safari.</p>
+        <p className="text-[var(--text-secondary)]">Live Transcription requires the Web Speech API, which is not supported in your current browser. Please try using Google Chrome, Microsoft Edge, or Safari.</p>
       </div>
     );
   }
@@ -166,7 +166,7 @@ export default function LiveTranscription() {
       </div>
 
       <div className="flex flex-col h-[500px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl overflow-hidden shadow-2xl relative">
-        <div className="bg-black/40 px-6 py-4 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex flex-wrap gap-4 items-center justify-between">
+        <div className="bg-black/40 px-6 py-4 border-b border-[var(--border-subtle)] flex flex-wrap gap-4 items-center justify-between">
           <button 
             onClick={toggleRecording}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold transition-all shadow-lg ${
@@ -189,7 +189,7 @@ export default function LiveTranscription() {
           </button>
           
           <div className="flex gap-2">
-            <button onClick={clearAll} disabled={!transcript && !interimTranscript} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-30">
+            <button onClick={clearAll} disabled={!transcript && !interimTranscript} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-30">
               Clear
             </button>
             <button onClick={copyToClipboard} disabled={!transcript} className="p-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] rounded-lg disabled:opacity-50 transition-colors" title="Copy" aria-label="Copy transcript">
@@ -206,7 +206,7 @@ export default function LiveTranscription() {
           className="flex-1 p-6 overflow-y-auto scroll-smooth font-sans text-lg leading-relaxed text-[var(--text-primary)]"
         >
           {transcript === '' && interimTranscript === '' && !isRecording && (
-            <div className="h-full flex flex-col items-center justify-center text-zinc-600">
+            <div className="h-full flex flex-col items-center justify-center text-[var(--text-secondary)]">
               <svg className="w-16 h-16 mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
               <p>Click "Start Recording" to begin speaking.</p>
               <p className="text-sm mt-2">Make sure to allow microphone permissions.</p>

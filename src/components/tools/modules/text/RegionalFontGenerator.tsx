@@ -132,7 +132,7 @@ export default function RegionalFontGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Type className="w-6 h-6" style={{ color: '#9333ea' }} />
           Hindi & Regional Font Stylizer
@@ -185,7 +185,7 @@ export default function RegionalFontGenerator() {
               </div>
               <button onClick={() => setShowOnlyFavorites(!showOnlyFavorites)}
                 className={`text-[10px] font-semibold px-3 py-1.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
-                  showOnlyFavorites ? 'bg-rose-500/10 border-rose-500/30 text-rose-500' : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400'
+                  showOnlyFavorites ? 'bg-rose-500/10 border-rose-500/30 text-rose-500' : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-subtle)]'
                 }`}>
                 <Heart className="w-3 h-3" fill={showOnlyFavorites ? 'currentColor' : 'none'} />
                 Favorites {favorites.length > 0 && `(${favorites.length})`}
@@ -224,7 +224,7 @@ export default function RegionalFontGenerator() {
                         </button>
                       </div>
                       <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">{item.name}</span>
-                      <span className="text-base font-medium text-zinc-900 dark:text-zinc-100 block break-all">{item.output}</span>
+                      <span className="text-base font-medium text-[var(--text-primary)] block break-all">{item.output}</span>
                       <div className="mt-2 flex items-center gap-1.5">
                         {isCopied ? (
                           <span className="text-[10px] flex items-center gap-1" style={{ color: '#9333ea' }}>

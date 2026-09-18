@@ -88,7 +88,7 @@ export default function TextToHandwriting() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <FileText className="w-5 h-5 text-[var(--accent)]" />
           Text to Handwriting Canvas Sheet Generator
@@ -99,7 +99,7 @@ export default function TextToHandwriting() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
         {/* Input Controls */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Configuration</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Configuration</h3>
           
           <textarea aria-label="Handwriting text input"
             value={text}
@@ -110,13 +110,13 @@ export default function TextToHandwriting() {
           <div className="space-y-1">
             <label className="text-[10px] text-[var(--text-muted)] font-bold uppercase">Ink Color</label>
             <div className="flex bg-[var(--bg-overlay)] p-1 rounded-xl gap-1 max-w-xs">
-              <button onClick={() => setInkColor('#0018a8')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#0018a8' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Blue</button>
-              <button onClick={() => setInkColor('#09090b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#09090b' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Black</button>
-              <button onClick={() => setInkColor('#991b1b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#991b1b' ? 'bg-indigo-600 text-white shadow' : 'text-[var(--text-secondary)]'}`}>Red</button>
+              <button onClick={() => setInkColor('#0018a8')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#0018a8' ? 'bg-[var(--accent-ink)] text-white shadow' : 'text-[var(--text-secondary)]'}`}>Blue</button>
+              <button onClick={() => setInkColor('#09090b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#09090b' ? 'bg-[var(--accent-ink)] text-white shadow' : 'text-[var(--text-secondary)]'}`}>Black</button>
+              <button onClick={() => setInkColor('#991b1b')} className={`flex-1 py-1 rounded text-[10px] font-bold cursor-pointer ${inkColor === '#991b1b' ? 'bg-[var(--accent-ink)] text-white shadow' : 'text-[var(--text-secondary)]'}`}>Red</button>
             </div>
           </div>
 
-          <button onClick={downloadSheet} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={downloadSheet} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
             <Download className="w-4 h-4" /> Download Sheet (PNG)
           </button>
         </div>
@@ -127,7 +127,7 @@ export default function TextToHandwriting() {
             ref={canvasRef} 
             width={500} 
             height={600} 
-            className="border border-zinc-300 dark:border-zinc-800 shadow-xl max-w-full rounded bg-[#fdfbf7]"
+            className="border border-[var(--border-subtle)] shadow-xl max-w-full rounded bg-[#fdfbf7]"
           />
         </div>
       </div>

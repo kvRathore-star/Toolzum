@@ -43,9 +43,9 @@ export default function InvisibleTextGenerator() {
           <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block border-b border-[var(--border-subtle)] pb-2">Generate Payload</span>
 
           <div className="grid grid-cols-3 gap-2">
-            <button onClick={() => generateInvisible(5)} className="py-2.5 bg-zinc-800 text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">5 Bytes</button>
-            <button onClick={() => generateInvisible(20)} className="py-2.5 bg-zinc-800 text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">20 Bytes</button>
-            <button onClick={() => generateInvisible(100)} className="py-2.5 bg-zinc-800 text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">100 Bytes</button>
+            <button onClick={() => generateInvisible(5)} className="py-2.5 bg-[var(--bg-elevated)] text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">5 Bytes</button>
+            <button onClick={() => generateInvisible(20)} className="py-2.5 bg-[var(--bg-elevated)] text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">20 Bytes</button>
+            <button onClick={() => generateInvisible(100)} className="py-2.5 bg-[var(--bg-elevated)] text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-elevated)] font-bold cursor-pointer">100 Bytes</button>
           </div>
 
           <div className="flex gap-2 items-center">
@@ -71,12 +71,12 @@ export default function InvisibleTextGenerator() {
           </p>
         </div>
 
-        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-zinc-800 flex flex-col justify-between min-h-[200px] space-y-4">
+        <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-[var(--border-subtle)] flex flex-col justify-between min-h-[200px] space-y-4">
           <div className="space-y-1">
             <span className="text-[10px] text-[var(--text-secondary)] uppercase block">Preview (Blank Space)</span>
-            <div className="border border-zinc-800 p-4 rounded-xl font-mono text-center text-[var(--text-muted)] select-all min-h-[50px] bg-black/40">
+            <div className="border border-[var(--border-subtle)] p-4 rounded-xl font-mono text-center text-[var(--text-muted)] select-all min-h-[50px] bg-black/40">
               {output}
-              <span className="text-[9px] text-zinc-600 block mt-1">({output.length} chars — select text above to verify)</span>
+              <span className="text-[9px] text-[var(--text-secondary)] block mt-1">({output.length} chars — select text above to verify)</span>
             </div>
           </div>
           <div className="flex gap-2">

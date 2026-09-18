@@ -67,7 +67,7 @@ ${videoText}`;
                 value={videoText}
                 onChange={e => setVideoText(e.target.value)}
                 placeholder="Paste video transcription logs..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm resize-none"
               />
             </div>
 
@@ -76,7 +76,7 @@ ${videoText}`;
               <select id="lbl-videototexttranscription-target-format" aria-label="Target Format"
                 value={format}
                 onChange={e => setFormat(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm"
               >
                 <option value="Clean Article / Blog Post">Clean Article / Blog Post</option>
                 <option value="Script with Speaker Names">Script with Speaker Names</option>
@@ -112,14 +112,14 @@ ${videoText}`;
               <div className="flex gap-2">
                 <button 
                   onClick={handleCopy} 
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors"
                   title="Copy to Clipboard" aria-label="Copy transcript"
                 >
                   <Clipboard className="w-4 h-4" />
                 </button>
                 <button 
                   onClick={handleDownload} 
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors"
                   title="Download as File" aria-label="Download transcript"
                 >
                   <Download className="w-4 h-4" />
@@ -130,12 +130,12 @@ ${videoText}`;
 
           <div className="flex-1 flex flex-col">
             {outputText ? (
-              <pre className="flex-1 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
+              <pre className="flex-1 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-[var(--text-primary)] whitespace-pre-wrap font-mono text-sm leading-relaxed overflow-y-auto max-h-[500px]">
                 {outputText}
               </pre>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center text-[var(--text-muted)]">
-                <Sparkles className="w-8 h-8 mb-3 text-zinc-300 dark:text-zinc-700 animate-pulse" />
+                <Sparkles className="w-8 h-8 mb-3 text-[var(--text-muted)] animate-pulse" />
                 <p className="text-sm font-medium">Your generated content will appear here.</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Configure your API key and click generate to begin.</p>
               </div>

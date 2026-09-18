@@ -39,7 +39,7 @@ export default function FontGenerator() {
       {/* Google fonts style sheets loaded dynamically */}
       <style>{FONTS_LIST.map(f => f.importUrl).join('\n')}</style>
 
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Code className="w-6 h-6 text-[var(--accent)]" />
           Google Font Previewer & Code Generator
@@ -58,7 +58,7 @@ export default function FontGenerator() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
             />
           </div>
 
@@ -71,7 +71,7 @@ export default function FontGenerator() {
                   onClick={() => setSelectedFont(font)}
                   className={`w-full text-left p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                     selectedFont.name === font.name
-                      ? 'bg-indigo-500/10 border-indigo-500/30 text-[var(--accent)]'
+                      ? 'bg-[var(--accent)]/10 border-[var(--accent)]/30 text-[var(--accent)]'
                       : 'bg-[var(--bg-overlay)]/35 border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)]'
                   }`}
                 >
@@ -85,7 +85,7 @@ export default function FontGenerator() {
         {/* Right Side previews & code */}
         <div className="lg:col-span-2 space-y-6">
           {/* Preview Panel */}
-          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-8 rounded-2xl flex items-center justify-center min-h-[180px] overflow-hidden text-center relative">
+          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-8 rounded-2xl flex items-center justify-center min-h-[180px] overflow-hidden text-center relative">
             <span className="absolute top-3 left-3 text-[10px] text-[var(--text-secondary)] font-mono">Visual Preview ({selectedFont.family})</span>
             <div 
               style={{ fontFamily: selectedFont.family }} 
@@ -101,14 +101,14 @@ export default function FontGenerator() {
               <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">CSS Integration Code</span>
               <button
                 onClick={handleCopyCSS}
-                className="text-xs font-bold text-[var(--accent)] hover:text-indigo-300 flex items-center gap-1 cursor-pointer"
+                className="text-xs font-bold text-[var(--accent)] hover:opacity-80 flex items-center gap-1 cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 Copy snippets
               </button>
             </div>
 
-            <pre className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl text-xs font-mono text-zinc-800 dark:text-[var(--text-muted)] overflow-x-auto">
+            <pre className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono text-[var(--text-primary)] dark:text-[var(--text-muted)] overflow-x-auto">
               {`/* 1. Add this import to your CSS file */\n${selectedFont.importUrl}\n\n/* 2. Apply to your elements */\n.custom-text {\n  ${selectedFont.css}\n}`}
             </pre>
 
@@ -117,7 +117,7 @@ export default function FontGenerator() {
                 href={`https://fonts.google.com/specimen/${selectedFont.family.replace(/\s+/g, '+')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 flex items-center gap-1 cursor-pointer"
+                className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-1 cursor-pointer"
               >
                 Open Google Fonts Specimen
                 <ExternalLink className="w-3.5 h-3.5" />
