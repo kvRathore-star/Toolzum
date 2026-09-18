@@ -856,7 +856,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     name: "AI Image Upscaler",
     slug: "ai-image-upscaler",
     category: "AI",
-    description: 'Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.',
+    description: 'Increase image resolution by up to 4x using Lanczos-3 interpolation (not AI reconstruction — best for logos, icons, and simple graphics).',
     dependencies: "Real-ESRGAN",
     seoDescription: 'Upscale images online free with AI — increase resolution by 4x while reconstructing fine details. ',
   },

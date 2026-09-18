@@ -2111,7 +2111,7 @@ export const entries_chunk_5: ToolMetadata[] = [
     name: "Subtitle Generator",
     slug: "subtitle-generator",
     category: "Video",
-    description: 'Generate SRT/VTT subtitles for videos from transcript text. Auto-sync timestamps with configurable duration and gap.',
+    description: 'Create SRT/VTT subtitles manually by typing or dictating text with live timestamp capture. No automatic transcription — you provide the text.',
     seoDescription: 'Free online Subtitle Generator — Generate SRT and VTT subtitle files from transcript text. Auto-sync with configurable timestamps.',
     dependencies: "None",
     faqs: [

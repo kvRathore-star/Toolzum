@@ -84,7 +84,7 @@ export default function ReelShortsMaker() {
           <Smartphone className="w-5 h-5 text-[var(--accent)]" />
           <h2 className="text-lg font-bold text-[var(--text-primary)]">Reel & Shorts Maker</h2>
         </div>
-        <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
+        <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Crop any video to the perfect aspect ratio for Instagram Reels, YouTube Shorts, or TikTok.</p>

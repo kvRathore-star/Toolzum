@@ -490,7 +490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "AI Image Upscaler",
     "slug": "ai-image-upscaler",
     "category": "AI",
-    "description": "Increases image resolution by up to 4x while reconstructing fine details that standard interpolation loses.",
+    "description": "Increase image resolution by up to 4x using Lanczos-3 interpolation (not AI reconstruction — best for logos, icons, and simple graphics).",
     "isPro": true
   },
   {
@@ -2122,7 +2122,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Translate PDF",
     "slug": "translate-pdf",
     "category": "PDF",
-    "description": "Extract and translate PDF content between 50+ languages. Preserves document structure while converting text to your chosen language. Powered by browser-based and free translation APIs.",
+    "description": "Extract text from a PDF and translate it between 20 languages. Output is plain text (PDF formatting is not preserved). Text limited to 5,000 characters.",
     "isPro": false
   },
   {
@@ -2322,7 +2322,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Vocal Remover",
     "slug": "vocal-remover",
     "category": "Audio",
-    "description": "Remove vocals from any song to create karaoke instrumentals. Extract acapella tracks or get both. Perfect for DJs, content creators, and karaoke enthusiasts.",
+    "description": "Reduce vocals from stereo tracks using center-channel cancellation (works best on studio mixes; not AI stem separation).",
     "isPro": false
   },
   {
@@ -8314,7 +8314,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subtitle Generator",
     "slug": "subtitle-generator",
     "category": "Video",
-    "description": "Generate SRT/VTT subtitles for videos from transcript text. Auto-sync timestamps with configurable duration and gap.",
+    "description": "Create SRT/VTT subtitles manually by typing or dictating text with live timestamp capture. No automatic transcription — you provide the text.",
     "isPro": false
   },
   {

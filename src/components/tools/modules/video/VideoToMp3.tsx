@@ -94,7 +94,7 @@ export default function VideoToMp3() {
          </div>
          <div className="flex items-center justify-center gap-2">
            <span className="text-[var(--text-secondary)] text-xs">Extract high-quality audio from video files</span>
-           <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
          </div>
 
          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)] max-w-md mx-auto">
