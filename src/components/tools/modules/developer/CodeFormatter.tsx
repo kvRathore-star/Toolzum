@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { CalcActions } from '../shared/CalcActions';
 
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -192,7 +192,7 @@ export default function CodeFormatter() {
     <Section title="Code Formatter">
       <div className="flex flex-wrap gap-2 mb-4">
         {CODE_FORMATTER_PRESETS.map((p) => (
-          <button key={p.label} onClick={() => { setLang(p.lang); setCode(p.code!); setOutput(formatCode(p.code!, p.lang, { indent, sortKeys, minify })); toast.success(`Loaded ${p.label}`); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={() => { setLang(p.lang); setCode(p.code!); setOutput(formatCode(p.code!, p.lang, { indent, sortKeys, minify })); toast.success(`Loaded ${p.label}`); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -202,14 +202,14 @@ export default function CodeFormatter() {
           <div className="flex-1 min-w-[160px]">
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Language</label>
             <select aria-label="Language" value={lang} onChange={e => { setLang(e.target.value); setCode(LANG_SAMPLES[e.target.value] || ''); setOutput(''); setValidationError(''); }}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               {LANGUAGES.map(l => <option key={l} value={l}>{l}</option>)}
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Indent</label>
             <select aria-label="Indent" value={indent} onChange={e => setIndent(Number(e.target.value))}
-              className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+              className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               <option value={2}>2 spaces</option>
               <option value={4}>4 spaces</option>
               <option value={8}>8 spaces</option>
@@ -218,28 +218,28 @@ export default function CodeFormatter() {
           {lang === 'JSON' && (
             <>
               <button onClick={() => setSortKeys(!sortKeys)}
-                className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${sortKeys ? 'bg-purple-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${sortKeys ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                 Sort Keys
               </button>
               <button onClick={() => setMinify(!minify)}
-                className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${minify ? 'bg-orange-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${minify ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                 Minify
               </button>
             </>
           )}
           <button onClick={() => setShowPreview(!showPreview)}
-            className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${showPreview ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+            className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${showPreview ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
             {showPreview ? 'Side by Side' : 'Preview'}
           </button>
         </div>
         <div>
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source Code</label>
-          <textarea aria-label="Source Code" value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder="Paste your code here..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
+          <textarea aria-label="Source Code" value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder="Paste your code here..." className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
         </div>
         {validationError && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400">{validationError}</div>
         )}
-        <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format Code</button>
+        <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format Code</button>
         {output && (
           showPreview ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -247,29 +247,23 @@ export default function CodeFormatter() {
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-sm font-medium text-[var(--text-secondary)]">Input</label>
                 </div>
-                <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{code}</pre>
+                <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{code}</pre>
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-sm font-medium text-[var(--text-secondary)]">Output</label>
-                  <div className="flex gap-2">
-                    <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                    <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-                  </div>
+                                      <CalcActions result={output} downloadData={output} downloadFilename={`${lang.toLowerCase()}-formatted.txt`} />
                 </div>
-                <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+                <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
               </div>
             </div>
           ) : (
             <div>
               <div className="flex items-center justify-between mb-1.5">
                 <label className="block text-sm font-medium text-[var(--text-secondary)]">Formatted Output</label>
-                <div className="flex gap-2">
-                  <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                  <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-                </div>
+                                  <CalcActions result={output} downloadData={output} downloadFilename={`${lang.toLowerCase()}-formatted.txt`} />
               </div>
-              <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+              <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
             </div>
           )
         )}
@@ -301,7 +295,7 @@ function createFormatter(lang: string) {
       <Section title={`${lang} Formatter`}>
         <div className="flex flex-wrap gap-2 mb-4">
           <button onClick={() => { setCode(sampleCode); setOutput(formatCode(sampleCode, lang, { indent, sortKeys, minify })); }}
-            className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             Sample {lang}
           </button>
         </div>
@@ -310,7 +304,7 @@ function createFormatter(lang: string) {
             <div>
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Indent</label>
               <select aria-label="Indent" value={indent} onChange={e => setIndent(Number(e.target.value))}
-                className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+                className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
                 <option value={2}>2 spaces</option>
                 <option value={4}>4 spaces</option>
                 <option value={8}>8 spaces</option>
@@ -319,56 +313,50 @@ function createFormatter(lang: string) {
             {lang === 'JSON' && (
               <>
                 <button onClick={() => setSortKeys(!sortKeys)}
-                  className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${sortKeys ? 'bg-purple-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                  className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${sortKeys ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                   Sort Keys
                 </button>
                 <button onClick={() => setMinify(!minify)}
-                  className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${minify ? 'bg-orange-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                  className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${minify ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                   Minify
                 </button>
               </>
             )}
             <button onClick={() => setShowPreview(!showPreview)}
-              className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${showPreview ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+              className={`px-3 py-2 rounded-xl text-xs font-medium transition-colors ${showPreview ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {showPreview ? 'Side by Side' : 'Preview'}
             </button>
           </div>
           <div>
             <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Source {lang}</label>
-            <textarea aria-label={`Source ${lang}`} value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
+            <textarea aria-label={`Source ${lang}`} value={code} onChange={e => { setCode(e.target.value); setOutput(''); setValidationError(''); }} placeholder={`Paste ${lang} code here...`} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono h-64 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-sm resize-y" />
           </div>
           {validationError && (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl px-4 py-2 text-xs text-red-600 dark:text-red-400">{validationError}</div>
           )}
-          <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format {lang}</button>
+          <button onClick={handleFormat} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format {lang}</button>
           {output && (
             showPreview ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input</label>
-                  <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{code}</pre>
+                  <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{code}</pre>
                 </div>
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <label className="block text-sm font-medium text-[var(--text-secondary)]">Output</label>
-                    <div className="flex gap-2">
-                      <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                      <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-                    </div>
+                                          <CalcActions result={output} downloadData={output} downloadFilename={`${lang.toLowerCase()}-formatted.txt`} />
                   </div>
-                  <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+                  <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
                 </div>
               </div>
             ) : (
               <div>
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-sm font-medium text-[var(--text-secondary)]">Formatted Output</label>
-                  <div className="flex gap-2">
-                    <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                    <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-                  </div>
+                                      <CalcActions result={output} downloadData={output} downloadFilename={`${lang.toLowerCase()}-formatted.txt`} />
                 </div>
-                <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
+                <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 font-mono text-sm h-64 overflow-auto whitespace-pre">{output}</pre>
               </div>
             )
           )}

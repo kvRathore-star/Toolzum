@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
-import { Copy, Download } from 'lucide-react';
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 import * as msgpack from '@msgpack/msgpack';
 import * as cbor from 'cbor-x';
 
@@ -41,8 +41,18 @@ export function IniToJsonConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">INI to JSON Converter</h2>
         <textarea aria-label="INI to JSON Converter" rows={5} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to JSON</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert to JSON</button>
+        <DualPanel
+          input={<>
+        <textarea aria-label="INI to JSON Converter" rows={5} value={input} onChange={e => setInput(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert to JSON</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='ini-to-json.txt' />}
+        />
       </div>
     </div>
   );
@@ -77,13 +87,27 @@ export function MessagePackInspector() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MessagePack Inspector</h2>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → MsgPack</button>
-          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 MsgPack → JSON</button>
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → MsgPack</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 MsgPack → JSON</button>
         </div>
         <textarea aria-label="Decode Base64 MsgPack → JSON" rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 MessagePack to decode'} />
-        <button onClick={inspect} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        <button onClick={inspect} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
+        <DualPanel
+          input={<>
+        <div className="flex gap-2">
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → MsgPack</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 MsgPack → JSON</button>
+        </div>
+        <textarea aria-label="Decode Base64 MsgPack → JSON" rows={4} value={input} onChange={e => setInput(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 MessagePack to decode'} />
+        <button onClick={inspect} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='messagepack.txt' />}
+        />
       </div>
     </div>
   );
@@ -118,13 +142,27 @@ export function CborInspector() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CBOR Inspector</h2>
         <div className="flex gap-2">
-          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → CBOR</button>
-          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 CBOR → JSON</button>
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → CBOR</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 CBOR → JSON</button>
         </div>
         <textarea aria-label="Decode Base64 CBOR → JSON" rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 CBOR to decode'} />
-        <button onClick={inspect} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        <button onClick={inspect} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
+        <DualPanel
+          input={<>
+        <div className="flex gap-2">
+          <button onClick={() => setMode('encode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'encode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Encode JSON → CBOR</button>
+          <button onClick={() => setMode('decode')} className={'px-3 py-1.5 text-sm rounded-lg ' + (mode === 'decode' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>Decode Base64 CBOR → JSON</button>
+        </div>
+        <textarea aria-label="Decode Base64 CBOR → JSON" rows={4} value={input} onChange={e => setInput(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" placeholder={mode === 'encode' ? 'Enter JSON to encode' : 'Enter Base64 CBOR to decode'} />
+        <button onClick={inspect} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Inspect</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='cbor-inspect.txt' />}
+        />
       </div>
     </div>
   );
@@ -169,36 +207,21 @@ export function DataAnonymizer() {
     setOutput(result);
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Anonymized text copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'anonymized.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.pii!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
-        <button onClick={() => setInput(PRESETS.financial!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
+        <button onClick={() => setInput(PRESETS.pii!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">PII Data</button>
+        <button onClick={() => setInput(PRESETS.financial!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Financial Data</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Data Anonymizer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Data Anonymizer" rows={4} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={anonymize} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Anonymize</button>
-
+        <button onClick={anonymize} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Anonymize</button>
+          </>}
+          output={<>
         {Object.keys(detectedTypes).length > 0 && (
           <div className="flex flex-wrap gap-2">
             {Object.entries(detectedTypes).map(function(entry) {
@@ -210,9 +233,6 @@ export function DataAnonymizer() {
             })}
           </div>
         )}
-
-        {output && (
-          <div>
             <div className="grid grid-cols-2 gap-4 text-xs">
               <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
                 <span className="font-bold text-[var(--text-muted)]">Before</span>
@@ -220,19 +240,12 @@ export function DataAnonymizer() {
               </div>
               <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
                 <span className="font-bold text-emerald-600">After</span>
-                <pre className="mt-1 whitespace-pre-wrap font-mono text-emerald-700 dark:text-emerald-300">{output}</pre>
+                <pre className="mt-1 whitespace-pre-wrap font-mono text-emerald-700 dark:text-emerald-300">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
               </div>
             </div>
-            <div className="flex gap-2 mt-3">
-              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy
-              </button>
-              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                <Download className="w-3.5 h-3.5" /> Download
-              </button>
-            </div>
-          </div>
-        )}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='anonymized.txt' />}
+        />
       </div>
     </div>
   );
@@ -247,24 +260,8 @@ export function CodeToCurlConverter() {
     { label: 'Sample Axios', apply: () => setInput("axios({\n  method: 'GET',\n  url: 'https://api.example.com/users',\n  headers: {\n    'Authorization': 'Bearer abc123'\n  }\n})") },
   ];
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied to clipboard!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'curl-command.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
+  
+  
   const convert = () => {
     let method = 'GET';
     let url = '';
@@ -297,29 +294,24 @@ export function CodeToCurlConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Code to cURL Converter</h2>
+        <DualPanel
+          input={<>
         <div className="flex flex-wrap gap-2 mb-4">
           {presets.map((p) => (
-            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           ))}
         </div>
         <textarea aria-label="Paste fetch/axios code" rows={5} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch/axios code"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to cURL</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy
-              </button>
-              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                <Download className="w-3.5 h-3.5" /> Download
-              </button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert to cURL</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='curl-command.txt' />}
+        />
       </div>
     </div>
   );
@@ -391,13 +383,28 @@ export function CurlToCodeConverter() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">cURL to Code Converter</h2>
         <div className="flex flex-wrap gap-2">
           {(['fetch', 'axios', 'xhr', 'python', 'node'] as const).map(lang => (
-            <button key={lang} onClick={() => setTargetLang(lang)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
+            <button key={lang} onClick={() => setTargetLang(lang)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
           ))}
         </div>
         <textarea aria-label="Paste cURL command" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-96 overflow-auto">{output}</pre>}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+        <DualPanel
+          input={<>
+        <div className="flex flex-wrap gap-2">
+          {(['fetch', 'axios', 'xhr', 'python', 'node'] as const).map(lang => (
+            <button key={lang} onClick={() => setTargetLang(lang)} className={'px-3 py-1.5 text-sm rounded-lg ' + (targetLang === lang ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)]')}>{lang}</button>
+          ))}
+        </div>
+        <textarea aria-label="Paste cURL command" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste cURL command"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-96 overflow-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='curl-code.txt' />}
+        />
       </div>
     </div>
   );
@@ -429,8 +436,26 @@ export function JsonRpcBuilder() {
           <textarea aria-label="Params (JSON)" rows={3} value={params} onChange={e => setParams(e.target.value)} placeholder='{"param": "value"}'
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
-        <button onClick={build} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Build</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        <button onClick={build} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Build</button>
+        <DualPanel
+          input={<>
+        <div>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Method</label>
+          <input aria-label="Method" type="text" value={method} onChange={e => setMethod(e.target.value)} placeholder="method.name"
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label className="text-xs text-[var(--text-secondary)] mb-1 block">Params (JSON)</label>
+          <textarea aria-label="Params (JSON)" rows={3} value={params} onChange={e => setParams(e.target.value)} placeholder='{"param": "value"}'
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        </div>
+        <button onClick={build} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Build</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='json-rpc.txt' />}
+        />
       </div>
     </div>
   );
@@ -511,38 +536,21 @@ export function HarAnalyzer() {
     } catch { toast.error('Invalid HAR JSON'); }
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    const full = output + '\n\n' + waterfall;
-    clipboardWrite(full);
-    toast.success('Report copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const full = output + '\n\n' + waterfall;
-    const blob = new Blob([full], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'har-report.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.small!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
-        <button onClick={() => setInput(PRESETS.cookies!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
+        <button onClick={() => setInput(PRESETS.small!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Small HAR</button>
+        <button onClick={() => setInput(PRESETS.cookies!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">With cookies</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HAR File Analyzer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="HAR File Analyzer" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-
+        <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
+          </>}
+          output={<>
         {Object.keys(statusDist).length > 0 && (
           <div className="flex flex-wrap gap-2">
             {Object.entries(statusDist).map(function(entry) {
@@ -551,21 +559,11 @@ export function HarAnalyzer() {
             })}
           </div>
         )}
-
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy Report
-              </button>
-              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                <Download className="w-3.5 h-3.5" /> Download
-              </button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            {waterfall && <pre className="text-xs font-mono bg-zinc-900 text-green-400 rounded-lg p-3 whitespace-pre-wrap max-h-48 overflow-y-auto">{waterfall}</pre>}
-          </div>
-        )}
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+            {waterfall ? <pre className="text-xs font-mono bg-zinc-900 text-green-400 rounded-lg p-3 whitespace-pre-wrap max-h-48 overflow-y-auto">{waterfall}</pre> : null}
+          </>}
+          actions={<CalcActions result={output + (waterfall ? '\n\n' + waterfall : '')} downloadData={output + (waterfall ? '\n\n' + waterfall : '')} downloadFilename='har-report.txt' />}
+        />
       </div>
     </div>
   );
@@ -645,56 +643,31 @@ export function LogAnalyzer() {
     setOutput(report);
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Report copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'log-analysis.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.apache!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
-        <button onClick={() => setInput(PRESETS.nginx!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
+        <button onClick={() => setInput(PRESETS.apache!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Apache access</button>
+        <button onClick={() => setInput(PRESETS.nginx!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Nginx error</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Log File Analyzer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Log File Analyzer" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-
+        <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
+          </>}
+          output={<>
         {stats.total > 0 && (
           <div className="flex gap-4 text-xs">
             <span className="px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Lines: {stats.total}</span>
             <span className="px-2 py-1 rounded bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">Errors: {stats.errorRate}</span>
           </div>
         )}
-
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy Report
-              </button>
-              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                <Download className="w-3.5 h-3.5" /> Download
-              </button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-          </div>
-        )}
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='log-analysis.txt' />}
+        />
       </div>
     </div>
   );
@@ -727,8 +700,18 @@ export function PackageJsonValidator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">package.json Validator</h2>
         <textarea aria-label="package.json Validator" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        <button onClick={validate} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Validate</button>
+        <DualPanel
+          input={<>
+        <textarea aria-label="package.json Validator" rows={6} value={input} onChange={e => setInput(e.target.value)}
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
+        <button onClick={validate} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Validate</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='package-json.txt' />}
+        />
       </div>
     </div>
   );
@@ -760,8 +743,18 @@ export function MimeFinder() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">MIME Type Finder</h2>
         <input aria-label="MIME Type Finder" type="text" value={ext} onChange={e => setExt(e.target.value.startsWith('.') ? e.target.value : '.' + e.target.value)} placeholder=".ext"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
-        <button onClick={find} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Find MIME Type</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        <button onClick={find} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Find MIME Type</button>
+        <DualPanel
+          input={<>
+        <input aria-label="MIME Type Finder" type="text" value={ext} onChange={e => setExt(e.target.value.startsWith('.') ? e.target.value : '.' + e.target.value)} placeholder=".ext"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
+        <button onClick={find} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Find MIME Type</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='mime-type.txt' />}
+        />
       </div>
     </div>
   );
