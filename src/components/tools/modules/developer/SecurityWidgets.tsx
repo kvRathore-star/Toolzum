@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
-import { Copy, Download } from 'lucide-react';
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -30,12 +30,6 @@ const SECRET_PATTERNS: [RegExp, string][] = [
   [/secret['":\s=]+[^'"\s,]{6,}/gi, 'Potential secret in config'],
 ];
 
-function CopyBtn({ text, label }: { text: string; label?: string }) {
-  return (
-    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
-      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1 mt-2">Copy</button>
-  );
-}
 
 export function SecretScanner() {
   const [input, setInput] = useState('');
@@ -45,24 +39,8 @@ export function SecretScanner() {
     { label: 'Sample with Secrets', apply: () => setInput("const config = {\n  apiKey: 'sk-abc123def456ghi789jkl012mno345pqr',\n  password: 'supersecret123',\n  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U',\n  github: 'ghp_abcdefghijklmnopqrstuvwxyz123456'\n};") },
   ];
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied to clipboard!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'scan-results.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-  const scan = () => {
+  
+    const scan = () => {
     if (!input.trim()) { toast.error('Paste text to scan'); return; }
     const findings: string[] = [];
     SECRET_PATTERNS.forEach(([re, label]) => {
@@ -81,30 +59,23 @@ export function SecretScanner() {
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
       <Section title="Secret Scanner">
-        <div className="space-y-3">
+        <DualPanel
+          input={<>
           <div className="flex flex-wrap gap-2 mb-4">
             {presets.map((p) => (
-              <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+              <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
                 {p.label}
               </button>
             ))}
           </div>
-          <textarea aria-label="Paste text or code to scan for API keys, tokens, and secrets..." value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="Paste text or code to scan for API keys, tokens, and secrets..." />
-          <button onClick={scan} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Scan for Secrets</button>
-          {output && (
-            <div className="space-y-2">
-              <div className="flex gap-2">
-                <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                  <Copy className="w-3.5 h-3.5" /> Copy
-                </button>
-                <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                  <Download className="w-3.5 h-3.5" /> Download
-                </button>
-              </div>
-              <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            </div>
-          )}
-        </div>
+          <textarea aria-label="Paste text or code to scan for API keys, tokens, and secrets..." value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="Paste text or code to scan for API keys, tokens, and secrets..." />
+          <button onClick={scan} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Scan for Secrets</button>
+                    </>}
+          output={<>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='scan-results.txt' />}
+        />
       </Section>
     </div>
   );
@@ -131,16 +102,21 @@ export function SecurityTxtGenerator() {
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
       <Section title="security.txt Generator">
-        <div className="space-y-3">
+        <DualPanel
+          input={<>
           <div className="space-y-2">
-            <div><label className="block text-sm font-medium mb-1">Contact</label><input aria-label="Contact" type="text" value={contact} onChange={e => setContact(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-            <div><label className="block text-sm font-medium mb-1">Policy URL</label><input aria-label="Policy URL" type="text" value={policy} onChange={e => setPolicy(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-            <div><label className="block text-sm font-medium mb-1">Encryption Key URL</label><input aria-label="Encryption Key URL" type="text" value={encryption} onChange={e => setEncryption(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
-            <div><label className="block text-sm font-medium mb-1">Expires</label><input aria-label="Expires" type="text" value={expires} onChange={e => setExpires(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+            <div><label className="block text-sm font-medium mb-1">Contact</label><input aria-label="Contact" type="text" value={contact} onChange={e => setContact(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+            <div><label className="block text-sm font-medium mb-1">Policy URL</label><input aria-label="Policy URL" type="text" value={policy} onChange={e => setPolicy(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+            <div><label className="block text-sm font-medium mb-1">Encryption Key URL</label><input aria-label="Encryption Key URL" type="text" value={encryption} onChange={e => setEncryption(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
+            <div><label className="block text-sm font-medium mb-1">Expires</label><input aria-label="Expires" type="text" value={expires} onChange={e => setExpires(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" /></div>
           </div>
-          <button onClick={generate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate security.txt</button>
-          {output && <div><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><CopyBtn text={output} label="security.txt" /></div>}
-        </div>
+          <button onClick={generate} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Generate security.txt</button>
+                    </>}
+          output={<>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='security-txt.txt' />}
+        />
       </Section>
     </div>
   );
@@ -170,11 +146,16 @@ export function RobotsTxtValidator() {
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
       <Section title="robots.txt Validator">
-        <div className="space-y-3">
-          <textarea aria-label="robots.txt content" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="User-agent: *\nAllow: /" />
-          <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate</button>
-          {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre>}
-        </div>
+        <DualPanel
+          input={<>
+          <textarea aria-label="robots.txt content" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="User-agent: *\nAllow: /" />
+          <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate</button>
+                    </>}
+          output={<>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='robots.txt' />}
+        />
       </Section>
     </div>
   );
@@ -204,11 +185,16 @@ export function DnsRecordValidator() {
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
       <Section title="DNS Record Validator">
-        <div className="space-y-3">
-          <textarea aria-label="DNS records" value={input} onChange={e => setInput(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="example.com. 3600 A 192.168.1.1" />
-          <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate Records</button>
-          {output && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
-        </div>
+        <DualPanel
+          input={<>
+          <textarea aria-label="DNS records" value={input} onChange={e => setInput(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" placeholder="example.com. 3600 A 192.168.1.1" />
+          <button onClick={validate} className="w-full px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Validate Records</button>
+                    </>}
+          output={<>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='dns-records.txt' />}
+        />
       </Section>
     </div>
   );

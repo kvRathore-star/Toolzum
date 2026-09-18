@@ -19,7 +19,7 @@ const methodColors: Record<HttpMethod, string> = {
   OPTIONS: 'text-zinc-400 bg-zinc-500/10',
 };
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)] font-mono";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)] text-[var(--text-primary)] font-mono";
 const labelClass = "block text-[10px] uppercase tracking-wider font-medium mb-1 text-[var(--text-tertiary)]";
 
 interface KeyValue { key: string; value: string; enabled: boolean; id: string; }
@@ -257,7 +257,7 @@ export function ApiBuilder() {
                 {collections.length === 0 && <p className="text-[10px] text-[var(--text-tertiary)] px-2 py-3 text-center">No saved requests yet</p>}
                 {collections.map(col => (
                   <div key={col.id}>
-                    <button aria-expanded={activeCollection === col.id} onClick={() => setActiveCollection(activeCollection === col.id ? null : col.id)} className={`flex items-center gap-1 w-full text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${activeCollection === col.id ? 'bg-indigo-500/10 text-indigo-700 dark:text-indigo-400' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>
+                    <button aria-expanded={activeCollection === col.id} onClick={() => setActiveCollection(activeCollection === col.id ? null : col.id)} className={`flex items-center gap-1 w-full text-left px-2 py-1.5 rounded-lg text-[11px] transition-colors ${activeCollection === col.id ? 'bg-[var(--accent)]/10 text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>
                       {activeCollection === col.id ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
                       <span className="font-medium">{col.name}</span>
                       <span className="text-[var(--text-muted)] ml-auto">({col.requests.length})</span>
@@ -298,7 +298,7 @@ export function ApiBuilder() {
         <div className="flex-1 space-y-3">
           {/* URL Bar */}
           <div className="flex gap-2">
-            <select aria-label="HTTP method" value={method} onChange={e => setMethod(e.target.value as HttpMethod)} className={`px-3 py-2 rounded-lg text-xs font-bold font-mono border border-[var(--border-subtle)] bg-[var(--bg-surface)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 ${(methodColors[method] || '').split(' ').map(c => c).join(' ')}`}>
+            <select aria-label="HTTP method" value={method} onChange={e => setMethod(e.target.value as HttpMethod)} className={`px-3 py-2 rounded-lg text-xs font-bold font-mono border border-[var(--border-subtle)] bg-[var(--bg-surface)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)] ${(methodColors[method] || '').split(' ').map(c => c).join(' ')}`}>
               {METHODS.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
             <div className="flex-1 relative">
@@ -307,7 +307,7 @@ export function ApiBuilder() {
                 <button onClick={() => copyToClipboard(url)} className="p-1 rounded hover:bg-[var(--bg-elevated)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Copy URL" aria-label="Copy URL"><Copy size={14} /></button>
               </div>
             </div>
-            <button onClick={sendRequest} disabled={loading} className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">
+            <button onClick={sendRequest} disabled={loading} className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">
               <Send size={15} /> {loading ? 'Sending...' : 'Send'}
             </button>
           </div>
@@ -315,59 +315,59 @@ export function ApiBuilder() {
           {/* Query Params */}
           <details className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl">
             <summary className="px-4 py-2.5 text-xs font-medium text-[var(--text-secondary)] cursor-pointer hover:text-[var(--text-primary)] transition-colors flex items-center gap-2">
-              <Globe size={13} /> Query Params {params.filter(p => p.enabled && p.key).length > 0 && <span className="text-[10px] text-indigo-700 dark:text-indigo-400">({params.filter(p => p.enabled && p.key).length})</span>}
+              <Globe size={13} /> Query Params {params.filter(p => p.enabled && p.key).length > 0 && <span className="text-[10px] text-[var(--accent)]">({params.filter(p => p.enabled && p.key).length})</span>}
             </summary>
             <div className="px-4 pb-3 space-y-1.5">
               {params.map(p => (
                 <div key={p.id} className="flex gap-1.5 items-center">
                   <input type="checkbox" checked={p.enabled} onChange={() => toggleParam(p.id)} className="accent-indigo-500" />
-                  <input type="text" placeholder="Key" aria-label="Parameter key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <input type="text" placeholder="Value" aria-label="Parameter value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Key" aria-label="Parameter key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
+                  <input type="text" placeholder="Value" aria-label="Parameter value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <button onClick={() => removeParam(p.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove parameter"><Trash2 size={13} /></button>
                 </div>
               ))}
-              <button onClick={addParam} className="flex items-center gap-1 text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-300 transition-colors"><Plus size={12} /> Add param</button>
+              <button onClick={addParam} className="flex items-center gap-1 text-[10px] text-[var(--accent)] hover:opacity-80 transition-colors"><Plus size={12} /> Add param</button>
             </div>
           </details>
 
           {/* Headers */}
           <details className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl">
             <summary className="px-4 py-2.5 text-xs font-medium text-[var(--text-secondary)] cursor-pointer hover:text-[var(--text-primary)] transition-colors flex items-center gap-2">
-              <Shield size={13} /> Headers {headers.filter(h => h.enabled && h.key).length > 0 && <span className="text-[10px] text-indigo-700 dark:text-indigo-400">({headers.filter(h => h.enabled && h.key).length})</span>}
+              <Shield size={13} /> Headers {headers.filter(h => h.enabled && h.key).length > 0 && <span className="text-[10px] text-[var(--accent)]">({headers.filter(h => h.enabled && h.key).length})</span>}
             </summary>
             <div className="px-4 pb-3 space-y-1.5">
               {headers.map(h => (
                 <div key={h.id} className="flex gap-1.5 items-center">
                   <input type="checkbox" checked={h.enabled} onChange={() => toggleHeader(h.id)} className="accent-indigo-500" />
-                  <input type="text" placeholder="Header" aria-label="Header name" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
-                  <input type="text" placeholder="Value" aria-label="Header value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500" />
+                  <input type="text" placeholder="Header" aria-label="Header name" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
+                  <input type="text" placeholder="Value" aria-label="Header value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <button onClick={() => removeHeader(h.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove header"><Trash2 size={13} /></button>
                 </div>
               ))}
-              <button onClick={addHeader} className="flex items-center gap-1 text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-300 transition-colors"><Plus size={12} /> Add header</button>
+              <button onClick={addHeader} className="flex items-center gap-1 text-[10px] text-[var(--accent)] hover:opacity-80 transition-colors"><Plus size={12} /> Add header</button>
             </div>
           </details>
 
           {/* Body */}
           <details className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl">
             <summary className="px-4 py-2.5 text-xs font-medium text-[var(--text-secondary)] cursor-pointer hover:text-[var(--text-primary)] transition-colors flex items-center gap-2">
-              <Code size={13} /> Body {bodyType !== 'none' && <span className="text-[10px] text-indigo-700 dark:text-indigo-400">{bodyType.toUpperCase()}</span>}
+              <Code size={13} /> Body {bodyType !== 'none' && <span className="text-[10px] text-[var(--accent)]">{bodyType.toUpperCase()}</span>}
             </summary>
             <div className="px-4 pb-3 space-y-2">
-              <select aria-label="Body type" value={bodyType} onChange={e => setBodyType(e.target.value as BodyType)} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)]">
+              <select aria-label="Body type" value={bodyType} onChange={e => setBodyType(e.target.value as BodyType)} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)] text-[var(--text-primary)]">
                 <option value="none">None</option>
                 <option value="json">JSON</option>
                 <option value="text">Text</option>
               </select>
               {bodyType !== 'none' && (
-                <textarea aria-label="Request body" value={body} onChange={e => setBody(e.target.value)} rows={6} placeholder={bodyType === 'json' ? '{\n  "key": "value"\n}' : 'Enter request body...'} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] resize-y" />
+                <textarea aria-label="Request body" value={body} onChange={e => setBody(e.target.value)} rows={6} placeholder={bodyType === 'json' ? '{\n  "key": "value"\n}' : 'Enter request body...'} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)] text-[var(--text-primary)] resize-y" />
               )}
             </div>
           </details>
 
           {/* Save & Snippet bar */}
           <div className="flex items-center gap-2">
-            <input type="text" value={savedName} onChange={e => setSavedName(e.target.value)} placeholder="Request name..." aria-label="Request name" className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-blue-500 text-[var(--text-primary)] max-w-xs" />
+            <input type="text" value={savedName} onChange={e => setSavedName(e.target.value)} placeholder="Request name..." aria-label="Request name" className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)] text-[var(--text-primary)] max-w-xs" />
             <button onClick={saveToCollection} className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Book size={13} /> Save</button>
             <div className="flex-1" />
             <select aria-label="Snippet language" value={snippetLang} onChange={e => setSnippetLang(e.target.value as 'curl' | 'fetch' | 'axios')} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)]">
@@ -405,7 +405,7 @@ export function ApiBuilder() {
               {/* Response tabs */}
               <div className="px-5">
                 <div className="flex gap-4 border-b border-[var(--border-subtle)]">
-                  <span className="text-xs font-medium text-indigo-700 dark:text-indigo-400 border-b-2 border-indigo-400 pb-2 -mb-[1px]">Body</span>
+                  <span className="text-xs font-medium text-[var(--accent)] border-b-2 border-[var(--accent)] pb-2 -mb-[1px]">Body</span>
                   <span className="text-xs text-[var(--text-tertiary)] pb-2">Headers ({Object.keys(response.headers).length})</span>
                 </div>
                 <pre className="text-xs font-mono text-[var(--text-primary)] py-4 overflow-x-auto max-h-96 overflow-y-auto whitespace-pre-wrap">{response.body}</pre>
@@ -416,7 +416,7 @@ export function ApiBuilder() {
                 <div className="border-t border-[var(--border-subtle)] px-5 py-3">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[10px] font-medium text-[var(--text-tertiary)] uppercase tracking-wider">Code Snippet ({snippetLang})</span>
-                    <button onClick={() => copyToClipboard(snippet)} className="flex items-center gap-1 text-[10px] text-indigo-700 dark:text-indigo-400 hover:text-indigo-300 transition-colors"><Copy size={11} /> Copy</button>
+                    <button onClick={() => copyToClipboard(snippet)} className="flex items-center gap-1 text-[10px] text-[var(--accent)] hover:opacity-80 transition-colors"><Copy size={11} /> Copy</button>
                   </div>
                   <pre className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-surface)] rounded-lg p-3 overflow-x-auto whitespace-pre-wrap max-h-32 overflow-y-auto">{snippet}</pre>
                 </div>

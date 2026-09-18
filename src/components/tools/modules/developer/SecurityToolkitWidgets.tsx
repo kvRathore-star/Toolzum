@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 export function OauthClientSetup() {
   const [provider, setProvider] = useState('Google');
@@ -31,10 +32,12 @@ export function OauthClientSetup() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Client Setup</h2>
+        <DualPanel
+          input={<>
         <div className="flex flex-wrap gap-2">
           {Object.keys(PROVIDERS).map(p => (
             <button key={p} onClick={() => setProvider(p)}
-              className={'px-3 py-1 text-xs font-bold rounded-lg transition-all ' + (provider === p ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]')}>{p}</button>
+              className={'px-3 py-1 text-xs font-bold rounded-lg transition-all ' + (provider === p ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{p}</button>
           ))}
         </div>
         <div className="space-y-3">
@@ -54,10 +57,13 @@ export function OauthClientSetup() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
           </div>
         </div>
-        <button onClick={generateUrl} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Auth URL</button>
-        {authUrl && (
-          <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{authUrl}</pre>
-        )}
+        <button onClick={generateUrl} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Generate Auth URL</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{authUrl || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={authUrl} downloadData={authUrl} downloadFilename='oauth-url.txt' />}
+        />
       </div>
     </div>
   );
@@ -97,6 +103,8 @@ export function PkceVerifier() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PKCE Verifier</h2>
+        <DualPanel
+          input={<>
         <div className="space-y-3">
           <div>
             <label htmlFor="lbl-securitytoolkitwidgets-code-verifier" className="text-xs text-[var(--text-secondary)] mb-1 block">code_verifier</label>
@@ -110,10 +118,15 @@ export function PkceVerifier() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button onClick={generate} className="flex-1 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-[var(--text-primary)] font-bold py-2 rounded-lg text-sm">Generate</button>
-          <button onClick={verify} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Verify Pair</button>
+          <button onClick={generate} className="flex-1 bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] font-bold py-2 rounded-lg text-sm">Generate</button>
+          <button onClick={verify} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Verify Pair</button>
         </div>
-        {result && <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">{result}</p>}
+          </>}
+          output={<>
+            <p className="text-sm text-[var(--text-secondary)] min-h-24">{result || <span className="text-[var(--text-muted)]">Result appears here</span>}</p>
+          </>}
+          actions={<CalcActions result={result} downloadData={result} downloadFilename='pkce-result.txt' />}
+        />
       </div>
     </div>
   );
@@ -174,45 +187,29 @@ export function OAuthScopeBuilder() {
     setOutput(result);
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Scopes copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'oauth-scopes.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
         {Object.keys(SCOPE_DB).map(function(p) {
           return (
             <button key={p} onClick={() => { setActiveProvider(p); setSelectedScopes({}); setOutput(''); }}
-              className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (activeProvider === p ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>{p}</button>
+              className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (activeProvider === p ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]')}>{p}</button>
           );
         })}
-        <button onClick={() => { const defaults: Record<string, boolean> = {}; (SCOPE_DB[activeProvider] || []).forEach(function(s) { defaults[s.label] = true; }); setSelectedScopes(defaults); }} className="px-3 py-1.5 text-xs font-medium bg-emerald-600 text-white rounded-lg">Select All</button>
+        <button onClick={() => { const defaults: Record<string, boolean> = {}; (SCOPE_DB[activeProvider] || []).forEach(function(s) { defaults[s.label] = true; }); setSelectedScopes(defaults); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] text-white rounded-lg">Select All</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth Scope Builder — {activeProvider}</h2>
 
+        <DualPanel
+          input={<>
         <div className="space-y-1">
           {scopes.map(function(s) {
             return (
               <label key={s.label} className="flex items-start gap-3 text-sm py-2 px-3 rounded-lg hover:bg-[var(--bg-surface)] cursor-pointer">
                 <input type="checkbox" checked={!!selectedScopes[s.label]} onChange={() => toggleScope(s.label)} className="mt-1 rounded" />
                 <div>
-                  <span className="font-mono text-xs text-blue-600 dark:text-blue-400">{s.label}</span>
+                  <span className="font-mono text-xs text-[var(--accent)]">{s.label}</span>
                   <p className="text-xs text-[var(--text-muted)]">{s.desc}</p>
                 </div>
               </label>
@@ -221,21 +218,17 @@ export function OAuthScopeBuilder() {
         </div>
 
         <div className="flex gap-2">
-          <button onClick={() => setFormat('space')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'space' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Space-separated</button>
-          <button onClick={() => setFormat('json')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'json' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>JSON array</button>
+          <button onClick={() => setFormat('space')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'space' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)]')}>Space-separated</button>
+          <button onClick={() => setFormat('json')} className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (format === 'json' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)]')}>JSON array</button>
         </div>
 
-        <button onClick={build} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Build Scope String</button>
-
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={build} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Build Scope String</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='oauth-scopes.txt' />}
+        />
       </div>
     </div>
   );
@@ -297,48 +290,28 @@ export function OAuthStateValidator() {
     setOutput(results.join('\n'));
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Report copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'oauth-state-validation.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setState(PRESETS.valid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
-        <button onClick={() => setState(PRESETS.invalid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
+        <button onClick={() => setState(PRESETS.valid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid state</button>
+        <button onClick={() => setState(PRESETS.invalid!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid base64</button>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">OAuth State Validator</h2>
+        <DualPanel
+          input={<>
         <div>
           <label htmlFor="lbl-securitytoolkitwidgets-state-parameter" className="text-xs text-[var(--text-secondary)] mb-1 block">State parameter</label>
           <input id="lbl-securitytoolkitwidgets-state-parameter" aria-label="State parameter" type="text" value={state} onChange={e => setState(e.target.value)} placeholder="Paste state parameter"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
         </div>
-        <button onClick={validate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>
-
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={validate} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Validate State</button>
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='oauth-state-validation.txt' />}
+        />
       </div>
     </div>
   );
@@ -363,18 +336,20 @@ export function Pbkdf2HashGenerator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PBKDF2 Hash Generator</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="PBKDF2 Hash Generator" rows={3} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Hash</button>
-        {output && (
-          <div className="bg-[var(--bg-surface)] rounded-lg p-3">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-zinc-600 dark:text-[var(--text-muted)]">Hash Output</span>
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-blue-700 dark:text-blue-400 hover:underline">Copy</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Generate Hash</button>
+          </>}
+          output={<>
+            <div className="bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3">
+              <span className="text-xs font-bold text-[var(--text-secondary)]">Hash Output</span>
+              <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 break-all mt-1">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
             </div>
-            <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 break-all">{output}</pre>
-          </div>
-        )}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='pbkdf2-hash.txt' />}
+        />
       </div>
     </div>
   );
@@ -419,15 +394,22 @@ export function CookieParser() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Cookie Parser &amp; Analyzer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Cookie Parser &amp; Analyzer" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Set-Cookie header value..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
           <button onClick={() => { setMode('parse'); parse(); }}
-            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'parse' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Parse Cookie</button>
+            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'parse' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)]')}>Parse Cookie</button>
           <button onClick={() => { setMode('analyze'); analyze(); }}
-            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'analyze' ? 'bg-blue-600 text-white' : 'bg-zinc-200 dark:bg-zinc-700 text-[var(--text-primary)]')}>Analyze Security</button>
+            className={'flex-1 py-2 rounded-lg text-sm font-bold transition-all ' + (mode === 'analyze' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)]')}>Analyze Security</button>
         </div>
-        {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
+          </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap min-h-24">{result || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={result} downloadData={result} downloadFilename='cookie-result.txt' />}
+        />
       </div>
     </div>
   );

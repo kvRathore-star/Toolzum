@@ -2,6 +2,8 @@
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 const HTTP_STATUSES: { code: number; label: string; desc: string }[] = [
   { code: 200, label: 'OK', desc: 'Standard success response' },
@@ -36,7 +38,7 @@ function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
   const id = React.useId();
-  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -59,7 +61,7 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
         <div className="absolute top-2 right-2 flex gap-1">
           <button onClick={copy} className="px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           <button onClick={() => {
@@ -71,7 +73,7 @@ function Output({ value, label }: { value: string; label?: string }) {
             a.click();
             URL.revokeObjectURL(url);
             toast.success('Downloaded!');
-          }} className="px-3 py-1 text-xs bg-zinc-600 hover:bg-zinc-500 text-white rounded-lg transition-colors">Download</button>
+          }} className="px-3 py-1 text-xs bg-[var(--bg-elevated)] hover:bg-[var(--bg-overlay)] text-white rounded-lg transition-colors">Download</button>
         </div>
       </div>
     </div>
@@ -86,7 +88,7 @@ function Select({ label, value, onChange, options }: {
     <div className="mb-3">
       <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
       <select id={id} value={value} onChange={e => onChange(e.target.value)}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </div>
@@ -100,7 +102,7 @@ function ToggleGroup({ value, onChange, options }: {
     <div className="flex flex-wrap gap-2 mb-3">
       {options.map(o => (
         <button key={o.value} onClick={() => onChange(o.value)}
-          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${value === o.value ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{o.label}</button>
+          className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${value === o.value ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>{o.label}</button>
       ))}
     </div>
   );
@@ -152,15 +154,21 @@ export function HttpHeaderAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={() => { setInput(p.apply.toString().match(/'([^']+)'/)?.[1] || ''); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={() => { setInput(p.apply.toString().match(/'([^']+)'/)?.[1] || ''); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <Section title="HTTP Header Analyzer">
+        <DualPanel
+          input={<>
         <Input label="Headers (one per line)" value={input} onChange={setInput} rows={6} placeholder="header: value" />
         <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Analyze Headers</button>
-        <Output value={output} label="Analysis" />
+                  </>}
+          output={<>
+            <Output value={output} label="Analysis" />
+          </>}
+        />
       </Section>
     </div>
   );
@@ -222,55 +230,36 @@ export function HttpHeadersGenerator() {
     setOutput(formatted);
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Headers copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'http-headers.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => applyPreset('rest')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'rest' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>REST API</button>
-        <button onClick={() => applyPreset('graphql')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'graphql' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>GraphQL</button>
-        <button onClick={() => applyPreset('cors')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'cors' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>CORS</button>
-        <button onClick={() => applyPreset('security')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'security' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]')}>Security Headers</button>
+        <button onClick={() => applyPreset('rest')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'rest' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]')}>REST API</button>
+        <button onClick={() => applyPreset('graphql')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'graphql' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]')}>GraphQL</button>
+        <button onClick={() => applyPreset('cors')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'cors' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]')}>CORS</button>
+        <button onClick={() => applyPreset('security')} className={'px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ' + (preset === 'security' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]')}>Security Headers</button>
       </div>
       <Section title="HTTP Headers Generator">
+        <DualPanel
+          input={<>
         <div className="space-y-2 mb-3">
           {headers.map((h, i) => (
             <div key={i} className="flex gap-2 items-center">
               <input aria-label="Security Headers" value={h.name} onChange={e => updateHeader(i, 'name', e.target.value)} placeholder="Header name"
-                className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+                className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
               <input aria-label="Header value" value={h.value} onChange={e => updateHeader(i, 'value', e.target.value)} placeholder="Value"
-                className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono" />
+                className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
               <button onClick={() => removeHeader(i)} className="text-red-500 hover:text-red-400 text-sm px-2">✕</button>
             </div>
           ))}
         </div>
-        <button onClick={addHeader} className="text-sm text-blue-500 hover:text-blue-400 mb-3">+ Add Header</button>
+        <button onClick={addHeader} className="text-sm text-[var(--accent)] hover:opacity-80 mb-3">+ Add Header</button>
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate Headers</button>
-        {output && (
-          <div className="mt-4">
-            <div className="flex gap-2 mb-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
-            </div>
+          </>}
+          output={<>
             <Output value={output} label="Generated Headers" />
-          </div>
-        )}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='http-headers.txt' />}
+        />
       </Section>
     </div>
   );
@@ -293,6 +282,8 @@ export function HttpCacheHeaderGenerator() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <Section title="HTTP Cache Header Generator">
+        <DualPanel
+          input={<>
         <div className="grid grid-cols-2 gap-3">
           <Input label="Max-Age (seconds)" value={maxAge} onChange={setMaxAge} placeholder="3600" />
           <Select label="Scope" value={scope} onChange={setScope} options={[
@@ -300,15 +291,19 @@ export function HttpCacheHeaderGenerator() {
           ]} />
         </div>
         <div className="flex gap-4 mb-3">
-          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">
             <input type="checkbox" checked={mustReval} onChange={e => setMustReval(e.target.checked)} className="rounded" /> must-revalidate
           </label>
-          <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
+          <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">
             <input type="checkbox" checked={noTrans} onChange={e => setNoTrans(e.target.checked)} className="rounded" /> no-transform
           </label>
         </div>
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate</button>
-        <Output value={output} label="Cache-Control Header" />
+                  </>}
+          output={<>
+            <Output value={output} label="Cache-Control Header" />
+          </>}
+        />
       </Section>
     </div>
   );
@@ -331,20 +326,26 @@ export function HttpStatusCodeChecker() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <Section title="HTTP Status Code Checker">
+        <DualPanel
+          input={<>
         <div className="flex gap-3 items-end">
           <div className="flex-1">
             <Input label="Status Code" value={code} onChange={setCode} placeholder="404" />
           </div>
           <button onClick={lookup} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all h-[42px]">Look Up</button>
         </div>
-        <Output value={output} label="Status Information" />
+                  </>}
+          output={<>
+            <Output value={output} label="Status Information" />
+          </>}
+        />
       </Section>
       <Section title="Reference Table">
         <div className="max-h-72 overflow-y-auto space-y-1">
           {HTTP_STATUSES.map(s => (
             <div key={s.code} className="flex gap-3 text-sm py-1.5 px-2 rounded-lg hover:bg-[var(--bg-surface)]">
-              <span className="font-mono font-bold text-blue-600 dark:text-blue-400 w-12 shrink-0">{s.code}</span>
-              <span className="font-semibold text-zinc-800 dark:text-zinc-200 w-36 shrink-0">{s.label}</span>
+              <span className="font-mono font-bold text-[var(--accent)] w-12 shrink-0">{s.code}</span>
+              <span className="font-semibold text-[var(--text-primary)] w-36 shrink-0">{s.label}</span>
               <span className="text-[var(--text-secondary)]">{s.desc}</span>
             </div>
           ))}
@@ -429,54 +430,35 @@ export function EslintConfigGenerator() {
     setOutput(JSON.stringify(current!.config, null, 2));
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Config copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = '.eslintrc.json';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded .eslintrc.json!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
         {Object.entries(CATEGORIES).map(([key, cat]) => (
           <button key={key} onClick={() => { setCategory(key); setOutput(''); }}
-            className={'px-4 py-2 text-sm font-semibold rounded-xl transition-all ' + (category === key ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]')}>{cat.label}</button>
+            className={'px-4 py-2 text-sm font-semibold rounded-xl transition-all ' + (category === key ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{cat.label}</button>
         ))}
       </div>
       <Section title={'ESLint Config — ' + current!.label}>
+        <DualPanel
+          input={<>
         <div className="space-y-2 mb-4">
           {current!.rules.map((r) => (
             <div key={r.name} className="flex items-start gap-3 text-sm py-2 px-3 rounded-lg bg-[var(--bg-surface)]">
               <span className={'text-xs font-bold px-2 py-0.5 rounded ' + (r.severity === 'error' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : r.severity === 'warn' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400' : 'bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300')}>{r.severity}</span>
               <div>
-                <span className="font-mono text-xs text-blue-600 dark:text-blue-400">{r.name}</span>
+                <span className="font-mono text-xs text-[var(--accent)]">{r.name}</span>
                 <p className="text-xs text-[var(--text-muted)] mt-0.5">{r.desc}</p>
               </div>
             </div>
           ))}
         </div>
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Generate ESLint Config</button>
-        {output && (
-          <div className="mt-4">
-            <div className="flex gap-2 mb-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download .eslintrc.json</button>
-            </div>
+          </>}
+          output={<>
             <Output value={output} label="ESLint Configuration" />
-          </div>
-        )}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='.eslintrc.json' />}
+        />
       </Section>
     </div>
   );
@@ -565,50 +547,31 @@ export function HttpRetryPolicyBuilder() {
     setOutput(configStr + '\n\n' + diagram);
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Policy copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'retry-policy.json';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
         {Object.entries(POLICIES).map(([key, p]) => (
           <button key={key} onClick={() => { setPolicy(key); setOutput(''); }}
-            className={'px-4 py-2 text-sm font-semibold rounded-xl transition-all ' + (policy === key ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]')}>{p.label}</button>
+            className={'px-4 py-2 text-sm font-semibold rounded-xl transition-all ' + (policy === key ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{p.label}</button>
         ))}
       </div>
       <Section title="HTTP Retry Policy Builder">
+        <DualPanel
+          input={<>
         <div className="grid grid-cols-2 gap-3">
           <Input label="Max Retries" value={maxRetries} onChange={setMaxRetries} placeholder="3" />
           <Input label="Base Delay (ms)" value={baseDelay} onChange={setBaseDelay} placeholder="1000" />
         </div>
-        <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer mb-3">
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer mb-3">
           <input type="checkbox" checked={jitter} onChange={e => setJitter(e.target.checked)} className="rounded" /> Add random jitter to delays
         </label>
         <button onClick={build} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Build Retry Policy</button>
-        {output && (
-          <div className="mt-4">
-            <div className="flex gap-2 mb-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
-            </div>
+          </>}
+          output={<>
             <Output value={output} label="Retry Policy" />
-          </div>
-        )}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='retry-policy.json' />}
+        />
       </Section>
     </div>
   );
