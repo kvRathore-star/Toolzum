@@ -96,26 +96,26 @@ export default function UuidGenerator() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       {/* Banner */}
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-blue-700 dark:text-blue-400 text-sm space-y-1">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-2xl text-[var(--accent)] text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           🆔 Bulk UUID Generator
         </h4>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+        <p className="text-[var(--text-secondary)]">
           Generate RFC4122 compliant Universally Unique Identifiers (UUIDs) v4 (cryptographically random) or v1 (timestamp-based) entirely client-side.
         </p>
       </div>
 
       {/* Control Panel */}
-      <div className="bg-[var(--bg-overlay)] p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] shadow-sm space-y-6">
+      <div className="bg-[var(--bg-overlay)] p-6 rounded-2xl border border-[var(--border-subtle)] shadow-sm space-y-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* UUID Type Selector */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">UUID Version</label>
-            <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)]">
+            <div className="flex bg-[var(--bg-surface)] p-1 rounded-xl border border-[var(--border-subtle)]">
               <button
                 onClick={() => setVersionAndRegenerate('v4')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
-                  version === 'v4' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
+                  version === 'v4' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 v4 (Random)
@@ -123,7 +123,7 @@ export default function UuidGenerator() {
               <button
                 onClick={() => setVersionAndRegenerate('v1')}
                 className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
-                  version === 'v1' ? 'bg-blue-600 text-white' : 'text-[var(--text-secondary)]'
+                  version === 'v1' ? 'bg-[var(--accent-ink)] text-white' : 'text-[var(--text-secondary)]'
                 }`}
               >
                 v1 (Time)
@@ -142,7 +142,7 @@ export default function UuidGenerator() {
               max={100}
               value={quantity} aria-label="Quantity"
               onChange={e => setQuantityAndRegenerate(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-blue-600 mt-3"
+              className="w-full h-2 bg-[var(--bg-overlay)] rounded-lg appearance-none cursor-pointer accent-[var(--accent)] mt-3"
             />
           </div>
 
@@ -153,7 +153,7 @@ export default function UuidGenerator() {
                 type="checkbox"
                 checked={uppercase}
                 onChange={e => setUppercaseAndRegenerate(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-800 text-blue-600 focus:ring-blue-500 h-4 w-4"
+                className="rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)] h-4 w-4"
               />
               Capitalize (UPPER)
             </label>
@@ -162,7 +162,7 @@ export default function UuidGenerator() {
                 type="checkbox"
                 checked={hyphens}
                 onChange={e => setHyphensAndRegenerate(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-800 text-blue-600 focus:ring-blue-500 h-4 w-4"
+                className="rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)] h-4 w-4"
               />
               Include Hyphens
             </label>
@@ -172,7 +172,7 @@ export default function UuidGenerator() {
           <div className="flex items-end">
             <button
               onClick={regenerate}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 text-sm"
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 text-sm"
             >
               🔄 Regenerate List
             </button>
@@ -184,14 +184,14 @@ export default function UuidGenerator() {
       {uuids.length > 0 && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col overflow-hidden">
           {/* Output Header */}
-          <div className="px-6 py-4 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+          <div className="px-6 py-4 bg-black/20 border-b border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">
               Generated Identifiers
             </span>
             <div className="flex gap-2">
               <button
                 onClick={copyAll}
-                className="text-xs bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 rounded-lg font-semibold transition-colors"
+                className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg font-semibold transition-colors"
               >
                 📋 Copy All
               </button>
@@ -205,13 +205,13 @@ export default function UuidGenerator() {
           </div>
 
           {/* UUID scrollable list */}
-          <div className="p-6 max-h-[450px] overflow-y-auto divide-y divide-zinc-100 dark:divide-zinc-850 font-mono text-sm">
+          <div className="p-6 max-h-[450px] overflow-y-auto divide-y divide-[var(--border-subtle)] font-mono text-sm">
             {uuids.map((id, index) => (
               <div key={index} className="flex justify-between items-center py-2.5 group">
-                <span className="text-zinc-950 dark:text-zinc-200">{id}</span>
+                <span className="text-[var(--text-primary)]">{id}</span>
                 <button
                   onClick={() => copySingle(id)}
-                  className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-semibold px-2 py-1 rounded bg-blue-500/10 transition-opacity"
+                  className="opacity-0 group-hover:opacity-100 focus:opacity-100 text-xs text-[var(--accent)] hover:opacity-80 font-semibold px-2 py-1 rounded bg-[var(--accent)]/10 transition-opacity"
                 >
                   Copy
                 </button>

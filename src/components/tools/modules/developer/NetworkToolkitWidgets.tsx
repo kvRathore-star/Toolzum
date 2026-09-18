@@ -4,6 +4,8 @@ import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { Clipboard } from 'lucide-react';
 import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 function ipToNum(ip: string): number {
   const parts = ip.split('.');
@@ -18,7 +20,7 @@ function numToIp(num: number): string {
 function CopyBtn({ text, label }: { text: string; label?: string }) {
   return (
     <button onClick={() => { clipboardWrite(text); toast.success(label ? label + ' copied!' : 'Copied!'); }}
-      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+      className="text-xs text-[var(--accent)] hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
   );
 }
 
@@ -85,24 +87,6 @@ export function IpAddressConverter() {
     toast.success('IP analyzed');
   };
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Analysis copied!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'ip-analysis.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
   const num = ipToNum(input);
   const decOut = isNaN(num) ? '' : String(num);
   const binOut = isNaN(num) ? '' : num.toString(2).padStart(32, '0').replace(/(.{8})/g, '$1.').slice(0, -1);
@@ -113,7 +97,7 @@ export function IpAddressConverter() {
       <div className="flex flex-wrap gap-2 mb-4">
         {PRESETS.map(function(p) {
           return (
-            <button key={p.label} onClick={() => { setInput(p.ip); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button key={p.label} onClick={() => { setInput(p.ip); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           );
@@ -121,6 +105,8 @@ export function IpAddressConverter() {
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IPv4 Address Converter</h2>
+        <DualPanel
+          input={<>
         <div className="space-y-1">
           <label htmlFor="lbl-networktoolkitwidgets-ipv4-address" className="text-xs font-medium text-[var(--text-secondary)]">IPv4 Address</label>
           <input id="lbl-networktoolkitwidgets-ipv4-address" aria-label="IPv4 Address" value={input} onChange={e => setInput(e.target.value)} placeholder="Enter IPv4..."
@@ -136,16 +122,12 @@ export function IpAddressConverter() {
         </div>
 
         <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Full Analysis</button>
-
-        {output && (
-          <div className="mt-4">
-            <div className="flex gap-2 mb-2">
-              <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy</button>
-              <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
-            </div>
-            <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+          </>}
+          output={<>
+            <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='ip-analysis.txt' />}
+        />
       </div>
     </div>
   );
@@ -175,6 +157,8 @@ export function IpRangeExpander() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-5">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">IP Range Expander</h2>
+        <DualPanel
+          input={<>
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-1">
             <label htmlFor="lbl-networktoolkitwidgets-start-ip" className="text-xs font-medium text-[var(--text-secondary)]">Start IP</label>
@@ -188,18 +172,24 @@ export function IpRangeExpander() {
           </div>
         </div>
         <button onClick={expand} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold px-6 py-2.5 rounded-xl transition-all">Expand Range</button>
-        {rangeCount > 0 && (
+          </>}
+          output={<>
+        {rangeCount > 0 ? (
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-3">
             <div className="flex justify-between items-center">
-              <span className="text-sm font-bold text-zinc-600 dark:text-[var(--text-muted)]">Addresses ({rangeCount} total{rangeList.length < rangeCount ? ', showing first ' + rangeList.length : ''})</span>
-              <CopyBtn text={rangeList.join('\n')} label="Range" />
+              <span className="text-sm font-bold text-[var(--text-secondary)]">Addresses ({rangeCount} total{rangeList.length < rangeCount ? ', showing first ' + rangeList.length : ''})</span>
             </div>
             <div className="max-h-[250px] overflow-y-auto font-mono text-sm text-[var(--text-primary)] space-y-1">
               {rangeList.map(ip => <div key={ip}>{ip}</div>)}
               {rangeCount > rangeList.length && <div className="text-[var(--text-muted)] italic text-sm">... {rangeCount - rangeList.length} more</div>}
             </div>
           </div>
+        ) : (
+          <p className="text-sm text-[var(--text-muted)]">Expanded addresses appear here</p>
         )}
+          </>}
+          actions={<CalcActions result={rangeList.join('\n')} downloadData={rangeList.join('\n')} downloadFilename='ip-range.txt' />}
+        />
       </div>
     </div>
   );

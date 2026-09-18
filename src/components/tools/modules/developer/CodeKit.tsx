@@ -1,43 +1,26 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 import * as acorn from 'acorn';
 import DOMPurify from 'dompurify';
 
 const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
-  <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
+  <button onClick={onClick} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
 );
 
 const Result = ({ value }: { value: string }) => (
   <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 bg-[var(--bg-overlay)] rounded-lg px-2 py-1 break-all whitespace-pre-wrap">{value}</p>
 );
 
-function CopyDownload({ output, filename = 'output.txt' }: { output: string; filename?: string }) {
-  return (
-    <div className="flex gap-3">
-      <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
-        className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-      <button onClick={() => {
-        const blob = new Blob([output], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
-        toast.success('Downloaded!');
-      }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-    </div>
-  );
-}
 
 function PresetBar({ presets }: { presets: { label: string; apply: () => void }[] }) {
   return (
     <div className="flex flex-wrap gap-2">
       {presets.map((p, i) => (
         <button key={i} onClick={p.apply}
-          className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-[10px] font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+          className="px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-lg text-[10px] font-medium hover:bg-[var(--accent)]/20 transition-colors">
           {p.label}
         </button>
       ))}
@@ -84,6 +67,8 @@ export function CodeObfuscator() {
 
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+        <DualPanel
+          input={<>
       <PresetBar presets={presets} />
       <select aria-label="Obfuscation level" value={level} onChange={e => setLevel(e.target.value as 'light' | 'medium' | 'heavy')}
         className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[10px] text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
@@ -94,12 +79,13 @@ export function CodeObfuscator() {
       <textarea aria-label="Heavy (Multi-var + Dead Code)" value={input} onChange={e => setInput(e.target.value)} placeholder="Paste code to obfuscate..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={obfuscate} label="Obfuscate" />
-      {output && (
-        <div className="space-y-2">
-          <Result value={output} />
-          <CopyDownload output={output} filename="obfuscated.js" />
-        </div>
-      )}
+                </>}
+          output={<>
+            <Result value={output} />
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='obfuscated.js' />}
+        />
+
     </div>
   );
 }
@@ -174,16 +160,19 @@ export function CodeToCurlParser() {
 
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+        <DualPanel
+          input={<>
       <PresetBar presets={presets} />
       <textarea aria-label="Paste fetch, axios, or XMLHttpRequest code..." value={input} onChange={e => setInput(e.target.value)} placeholder="Paste fetch, axios, or XMLHttpRequest code..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={parse} label="Parse to Curl" />
-      {output && (
-        <div className="space-y-2">
-          <Result value={output} />
-          <CopyDownload output={output} filename="curl-command.sh" />
-        </div>
-      )}
+                </>}
+          output={<>
+            <Result value={output} />
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='curl-command.sh' />}
+        />
+
     </div>
   );
 }
@@ -266,26 +255,29 @@ export function JsSyntaxChecker() {
 
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+        <DualPanel
+          input={<>
       <PresetBar presets={presets} />
       <textarea aria-label="JavaScript code..." value={code} onChange={e => setCode(e.target.value)} placeholder="JavaScript code..."
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
       <CalcBtn onClick={check} label="Check Syntax" />
-      {result && (
-        <div className="space-y-2">
-          <Result value={result} />
-          {issues.length > 0 && (
-            <div className="bg-[var(--bg-overlay)] rounded-lg p-2 space-y-1 max-h-32 overflow-y-auto">
-              {issues.map((iss, i) => (
-                <div key={i} className="flex items-start gap-2 text-[9px] font-mono">
-                  <span className={`inline-block w-1.5 h-1.5 rounded-full mt-1 flex-shrink-0 ${iss.severity === 'error' ? 'bg-red-500' : iss.severity === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'}`} />
-                  <span className="text-[var(--text-secondary)]">{iss.line > 0 ? `L${iss.line}: ` : ''}{iss.msg} — <span className="text-emerald-600 dark:text-emerald-400">{iss.suggestion}</span></span>
-                </div>
-              ))}
-            </div>
-          )}
-          <CopyDownload output={result + '\n\n' + issues.map(i => `[${i.severity.toUpperCase()}] L${i.line}: ${i.msg} → ${i.suggestion}`).join('\n')} filename="syntax-report.txt" />
-        </div>
-      )}
+                </>}
+          output={<>
+            <Result value={result} />
+            {issues.length > 0 && (
+              <div className="bg-[var(--bg-overlay)] rounded-lg p-2 space-y-1 max-h-32 overflow-y-auto">
+                {issues.map((iss, i) => (
+                  <div key={i} className="flex items-start gap-2 text-[9px] font-mono">
+                    <span className={`inline-block w-1.5 h-1.5 rounded-full mt-1 flex-shrink-0 ${iss.severity === 'error' ? 'bg-red-500' : iss.severity === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'}`} />
+                    <span className="text-[var(--text-secondary)]">{iss.line > 0 ? `L${iss.line}: ` : ''}{iss.msg} — <span className="text-emerald-600 dark:text-emerald-400">{iss.suggestion}</span></span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>}
+          actions={<CalcActions result={result + '\n\n' + issues.map(i => `[${i.severity.toUpperCase()}] L${i.line}: ${i.msg} → ${i.suggestion}`).join('\n')} downloadData={result + '\n\n' + issues.map(i => `[${i.severity.toUpperCase()}] L${i.line}: ${i.msg} → ${i.suggestion}`).join('\n')} downloadFilename='syntax-report.txt' />}
+        />
+
     </div>
   );
 }
@@ -393,6 +385,8 @@ export function PugToHtml() {
 
   return (
     <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-3">
+        <DualPanel
+          input={<>
       <PresetBar presets={presets} />
       <textarea aria-label="div.container&#10; h1 Hello&#10; p World" value={input} onChange={e => setInput(e.target.value)} placeholder="div.container&#10;  h1 Hello&#10;  p World"
         className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded px-2 py-1 text-[9px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
@@ -400,22 +394,23 @@ export function PugToHtml() {
         <CalcBtn onClick={convert} label="Convert" />
         {output && (
           <button onClick={() => setPreview(!preview)}
-            className="w-full bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">
             {preview ? 'Hide Preview' : 'Live Preview'}
           </button>
         )}
       </div>
-      {output && (
-        <div className="space-y-2">
-          {preview && (
-            <div className="bg-white rounded-lg border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
-              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(output) }} className="text-[11px] text-gray-800" />
-            </div>
-          )}
-          <Result value={output} />
-          <CopyDownload output={output} filename="output.html" />
-        </div>
-      )}
+                </>}
+          output={<>
+            {preview && (
+              <div className="bg-white rounded-lg border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
+                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(output) }} className="text-[11px] text-gray-800" />
+              </div>
+            )}
+            <Result value={output} />
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.html' />}
+        />
+
     </div>
   );
 }

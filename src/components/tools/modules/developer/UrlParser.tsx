@@ -61,16 +61,16 @@ export default function UrlParser() {
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">URL Components</h4>
             <div className="flex gap-1">
-              <button onClick={copyAll} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> All</button>
-              <button onClick={downloadJson} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1" aria-label="Download URL components"><Download className="w-3 h-3" /></button>
+              <button onClick={copyAll} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> All</button>
+              <button onClick={downloadJson} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1" aria-label="Download URL components"><Download className="w-3 h-3" /></button>
             </div>
           </div>
           <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
             {parts.map((p, i) => (
-              <div key={i} className={`flex items-center gap-4 px-5 py-2.5 ${i % 2 === 0 ? 'bg-white dark:bg-black/20' : ''}`}>
+              <div key={i} className={`flex items-center gap-4 px-5 py-2.5 ${i % 2 === 0 ? 'bg-[var(--bg-surface)]/50' : ''}`}>
                 <span className="w-[140px] shrink-0 text-xs font-medium text-[var(--text-secondary)]">{p.label}</span>
-                <code className="text-xs font-mono text-zinc-800 dark:text-zinc-200 break-all">{p.value}</code>
-                <button onClick={() => { clipboardWrite(p.value); toast.success('Copied!'); }} className="ml-auto text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 shrink-0">Copy</button>
+                <code className="text-xs font-mono text-[var(--text-primary)] break-all">{p.value}</code>
+                <button onClick={() => { clipboardWrite(p.value); toast.success('Copied!'); }} className="ml-auto text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] shrink-0">Copy</button>
               </div>
             ))}
           </div>
@@ -81,9 +81,9 @@ export default function UrlParser() {
           <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Query Parameters ({params.length})</h4>
           <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
             {params.map(([key, val], i) => (
-              <div key={i} className={`flex items-center gap-4 px-5 py-2.5 ${i % 2 === 0 ? 'bg-white dark:bg-black/20' : ''}`}>
-                <code className="text-xs font-mono text-blue-600 dark:text-blue-400 w-[140px] shrink-0">{key}</code>
-                <code className="text-xs font-mono text-zinc-800 dark:text-zinc-200 break-all">{val}</code>
+              <div key={i} className={`flex items-center gap-4 px-5 py-2.5 ${i % 2 === 0 ? 'bg-[var(--bg-surface)]/50' : ''}`}>
+                <code className="text-xs font-mono text-[var(--accent)] w-[140px] shrink-0">{key}</code>
+                <code className="text-xs font-mono text-[var(--text-primary)] break-all">{val}</code>
               </div>
             ))}
           </div>

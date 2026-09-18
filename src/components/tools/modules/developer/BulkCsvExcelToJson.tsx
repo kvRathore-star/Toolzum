@@ -112,7 +112,7 @@ export default function BulkCsvExcelToJson() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <div className="flex flex-wrap gap-2">
           {outputFormats.map((f) => (
-            <button key={f.value} onClick={() => setOutputFormat(f.value)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${outputFormat === f.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+            <button key={f.value} onClick={() => setOutputFormat(f.value)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${outputFormat === f.value ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {f.label}
             </button>
           ))}
@@ -120,7 +120,7 @@ export default function BulkCsvExcelToJson() {
 
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)] cursor-pointer select-none">
-            <input type="checkbox" checked={flattenNested} onChange={(e) => setFlattenNested(e.target.checked)} className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-700" />
+            <input type="checkbox" checked={flattenNested} onChange={(e) => setFlattenNested(e.target.checked)} className="w-3.5 h-3.5 rounded border-[var(--border-subtle)]" />
             Flatten nested objects
           </label>
         </div>
@@ -130,7 +130,7 @@ export default function BulkCsvExcelToJson() {
           onDragOver={(e) => e.preventDefault()}
           role="group"
           aria-label="Drop a spreadsheet file here, or tab to the file picker below"
-          className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer"
+          className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center hover:border-[var(--accent)] transition-colors cursor-pointer"
         >
           <input type="file" accept=".csv,.xlsx,.xls" onChange={handleFileInput} className="sr-only" id="csv-upload" />
           <label htmlFor="csv-upload" className="cursor-pointer">
@@ -142,7 +142,7 @@ export default function BulkCsvExcelToJson() {
 
         {isProcessing && (
           <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
-            <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
             Processing...
           </div>
         )}
@@ -178,8 +178,8 @@ export default function BulkCsvExcelToJson() {
             <div className="flex items-center justify-between">
               <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Output</h4>
               <div className="flex gap-3">
-                <button onClick={copyJson} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy JSON</button>
-                <button onClick={downloadJson} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download .json</button>
+                <button onClick={copyJson} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy JSON</button>
+                <button onClick={downloadJson} className="text-xs text-[var(--accent)] hover:underline font-medium">Download .json</button>
               </div>
             </div>
             <pre className="w-full h-[300px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs font-mono text-[var(--text-primary)] overflow-auto whitespace-pre-wrap">

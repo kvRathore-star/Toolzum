@@ -216,7 +216,7 @@ export default function WebsiteScreenshot() {
   if (!screenshotUrl) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Website Screenshot:</strong> Capture screenshots of websites in your browser.
           The page HTML is fetched via a proxy and rendered locally. External CSS and images
           may not load — results work best on simple or text-based pages.
@@ -230,12 +230,12 @@ export default function WebsiteScreenshot() {
               onChange={e => setUrl(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && !isProcessing && handleCapture()}
               placeholder="https://example.com"
-              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]"
             />
             <button
               onClick={handleCapture}
               disabled={isProcessing || !url.trim()}
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50 shadow-lg flex items-center gap-2"
+              className="px-6 py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl transition-all active:scale-95 disabled:opacity-50 shadow-lg flex items-center gap-2"
             >
               {isProcessing ? (
                 <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
@@ -256,8 +256,8 @@ export default function WebsiteScreenshot() {
                     onClick={() => setFormat(f)}
                     className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                       format === f
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
+                        ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]'
+                        : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                     }`}
                   >
                     {f.toUpperCase()}
@@ -292,8 +292,8 @@ export default function WebsiteScreenshot() {
                   onClick={() => handleViewportPreset(p.value)}
                   className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                     viewportWidth === p.value
-                      ? 'bg-blue-600 text-white border-blue-600'
-                      : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
+                      ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]'
+                      : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                   }`}
                 >
                   {p.label}
@@ -303,8 +303,8 @@ export default function WebsiteScreenshot() {
                 onClick={() => { setViewportWidth(-1); setCustomWidth(''); }}
                 className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-all ${
                   viewportWidth === -1
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-400'
+                    ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]'
+                    : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                 }`}
               >
                 Custom
@@ -318,7 +318,7 @@ export default function WebsiteScreenshot() {
                 placeholder="Enter width (320-3840)"
                 min={320}
                 max={3840}
-                className="mt-2 w-full px-3 py-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
+                className="mt-2 w-full px-3 py-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]"
               />
             )}
           </div>
@@ -329,7 +329,7 @@ export default function WebsiteScreenshot() {
                 type="checkbox"
                 checked={fullPage}
                 onChange={e => setFullPage(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500"
+                className="rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)]"
               />
               Full page
             </label>
@@ -356,7 +356,7 @@ export default function WebsiteScreenshot() {
           )}
         </div>
 
-        <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
           <p>⚠️ <strong>Limitations:</strong> Due to browser security, pages are fetched via a CORS proxy. External CSS, images, and JavaScript may not load, resulting in a plain-HTML rendering of the page. For full-featured screenshots, consider using a browser extension or a server-side tool like Puppeteer.</p>
           <p className="pt-1">💡 <strong>Tip:</strong> Increase the delay for JavaScript-heavy sites to allow more content to render before capture.</p>
         </div>
@@ -368,22 +368,22 @@ export default function WebsiteScreenshot() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
-          <svg className="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 0a9 9 0 019 9"/></svg>
-          <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm truncate">{url}</span>
+          <svg className="w-5 h-5 text-[var(--accent)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 0a9 9 0 019 9"/></svg>
+          <span className="font-bold text-[var(--text-primary)] text-sm truncate">{url}</span>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleDownload}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all active:scale-95 shadow-lg"
+            className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white text-sm font-bold rounded-xl transition-all active:scale-95 shadow-lg"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Download {format.toUpperCase()}
           </button>
           <button
             onClick={reset}
-            className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-2 bg-[var(--bg-surface)] rounded-xl"
+            className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-2 bg-[var(--bg-surface)] rounded-xl"
           >
             Capture Another
           </button>

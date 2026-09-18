@@ -102,11 +102,11 @@ export default function RegexTester() {
         <div className="p-6 space-y-6">
           <div className="flex gap-2 p-1 bg-[var(--bg-surface)] rounded-xl max-w-xs">
             <button onClick={() => setAiTab('manual')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'manual' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}>
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'manual' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               <Search className="w-3.5 h-3.5 inline mr-1" />Manual
             </button>
             <button onClick={() => setAiTab('ai')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'ai' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}>
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${aiTab === 'ai' ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               <Sparkles className="w-3.5 h-3.5 inline mr-1" />AI Generate
             </button>
           </div>
@@ -159,7 +159,7 @@ export default function RegexTester() {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-[var(--text-primary)]">Test String</label>
-                <button onClick={() => setTestString('')} className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white transition-colors">Clear</button>
+                <button onClick={() => setTestString('')} className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Clear</button>
               </div>
               <textarea aria-label="Test String" value={testString} onChange={e => setTestString(e.target.value)}
                 className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 transition-all font-mono resize-none"
@@ -168,9 +168,9 @@ export default function RegexTester() {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-[var(--text-primary)]">Match Results</label>
-                <span className="text-xs px-2 py-1 bg-[var(--bg-surface)] rounded-md text-zinc-600 dark:text-[var(--text-muted)] font-mono">{matches.length} match{matches.length !== 1 && 'es'}</span>
+                <span className="text-xs px-2 py-1 bg-[var(--bg-surface)] rounded-md text-[var(--text-secondary)] font-mono">{matches.length} match{matches.length !== 1 && 'es'}</span>
               </div>
-              <div className="w-full h-64 bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl p-4 text-sm font-mono overflow-auto whitespace-pre-wrap break-words">
+              <div className="w-full h-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm font-mono overflow-auto whitespace-pre-wrap break-words">
                 {renderHighlightedText()}
               </div>
             </div>

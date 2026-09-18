@@ -54,7 +54,7 @@ export default function HtmlPreview() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <div className="flex flex-wrap gap-2">
           {presets.map((p) => (
-            <button key={p.label} onClick={() => setHtml(p.value)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button key={p.label} onClick={() => setHtml(p.value)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           ))}
@@ -64,24 +64,24 @@ export default function HtmlPreview() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5">
               {viewports.map((v) => (
-                <button key={v.label} onClick={() => setViewport(v)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${viewport.label === v.label ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                <button key={v.label} onClick={() => setViewport(v)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${viewport.label === v.label ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                   {v.label}
                 </button>
               ))}
             </div>
             <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)] cursor-pointer select-none">
-              <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-700" />
+              <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} className="w-3.5 h-3.5 rounded border-[var(--border-subtle)]" />
               Auto-refresh
             </label>
             {!autoRefresh && (
-              <button onClick={refresh} className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-colors">
+              <button onClick={refresh} className="px-3 py-1 text-xs font-medium bg-[var(--accent-ink)] text-white rounded-lg hover:opacity-90 transition-colors">
                 Refresh
               </button>
             )}
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={copyHtml} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-            <button onClick={downloadHtml} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download .html</button>
+            <button onClick={copyHtml} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+            <button onClick={downloadHtml} className="text-xs text-[var(--accent)] hover:underline font-medium">Download .html</button>
           </div>
         </div>
 

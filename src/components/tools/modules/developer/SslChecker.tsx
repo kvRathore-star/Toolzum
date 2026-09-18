@@ -210,15 +210,15 @@ export default function SslChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-sky-500/10 border border-sky-500/20 p-4 rounded-2xl text-sky-700 dark:text-sky-400 text-sm space-y-1">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-2xl text-[var(--text-secondary)] text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)]">SSL Certificate Checker</h4>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Check SSL certificate details for any domain. Uses public certificate transparency APIs.</p>
+        <p className="text-[var(--text-secondary)]">Check SSL certificate details for any domain. Uses public certificate transparency APIs.</p>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
         <div className="flex flex-col sm:flex-row gap-3">
                       <input type="text" value={domain} aria-label="Domain" onChange={e => setDomain(e.target.value)} onKeyDown={e => e.key === 'Enter' && check()} placeholder="example.com" className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
-          <button onClick={() => check()} disabled={isProcessing} className="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 disabled:bg-sky-600/50 text-white text-sm font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer justify-center">
+          <button onClick={() => check()} disabled={isProcessing} className="px-6 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 disabled:bg-[var(--accent-ink)]/50 text-white text-sm font-bold rounded-xl transition-colors flex items-center gap-2 cursor-pointer justify-center">
             {isProcessing && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
             {isProcessing ? 'Checking...' : 'Check SSL'}
           </button>
@@ -271,7 +271,7 @@ export default function SslChecker() {
                 <p className="text-[10px] text-[var(--text-secondary)] uppercase tracking-wider mb-2">Subject Alternative Names (SANs)</p>
                 <div className="flex flex-wrap gap-2 max-h-24 overflow-y-auto">
                   {result.cert.sans.map((san, i) => (
-                    <span key={i} className="px-2.5 py-1 bg-[var(--bg-surface)] rounded-lg text-xs font-mono text-zinc-600 dark:text-[var(--text-muted)]">{san}</span>
+                    <span key={i} className="px-2.5 py-1 bg-[var(--bg-surface)] rounded-lg text-xs font-mono text-[var(--text-secondary)]">{san}</span>
                   ))}
                 </div>
               </div>
@@ -293,18 +293,18 @@ export default function SslChecker() {
             )}
 
             <div className="flex gap-3">
-              <button onClick={handleDownload} className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold rounded-xl transition-colors">Download</button>
+              <button onClick={handleDownload} className="px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white text-xs font-bold rounded-xl transition-colors">Download</button>
               <button onClick={() => check(result.domain)} className="px-4 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] text-xs font-bold rounded-xl transition-colors">Refresh</button>
             </div>
           </div>
         )}
 
         {history.length > 0 && (
-          <div className="pt-3 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="pt-3 border-t border-[var(--border-subtle)]">
             <p className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider mb-2">Recent Checks</p>
             <div className="flex flex-wrap gap-2">
               {history.map(h => (
-                <button key={h} onClick={() => { setDomain(h); check(h); }} className="px-3 py-1 text-xs font-mono bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-zinc-600 dark:text-[var(--text-muted)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] transition-colors">{h}</button>
+                <button key={h} onClick={() => { setDomain(h); check(h); }} className="px-3 py-1 text-xs font-mono bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] transition-colors">{h}</button>
               ))}
             </div>
           </div>

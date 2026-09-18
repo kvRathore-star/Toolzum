@@ -70,15 +70,15 @@ export default function DomainAvailabilityChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Globe className="w-5 h-5 text-emerald-500" />
           Domain Name Availability Checker
         </h2>
         <p className="text-xs text-[var(--text-secondary)] mt-1">Checks live DNS (web + mail records) across 10 popular TLDs. DNS-based — a final registrar check confirms before purchase.</p>
       </div>
 
-      <div className="bg-[var(--bg-elevated)]/30 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl p-6">
+      <div className="bg-[var(--bg-elevated)]/30 border border-[var(--border-subtle)] rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <input
             aria-label="Domain"
@@ -87,12 +87,12 @@ export default function DomainAvailabilityChecker() {
             onChange={(e) => setDomain(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && checkDomain()}
             placeholder="Enter a name (e.g. myproject)"
-            className="flex-1 px-4 py-2.5 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/40"
+            className="flex-1 px-4 py-2.5 text-sm bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/40"
           />
           <button
             onClick={checkDomain}
             disabled={isLoading}
-            className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-emerald-700/50 text-white text-sm font-medium rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
+            className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent-ink)]/50 text-white text-sm font-medium rounded-xl transition-colors flex items-center gap-2 cursor-pointer"
           >
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
             {isLoading ? 'Checking...' : 'Check Availability'}

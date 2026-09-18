@@ -187,9 +187,9 @@ export default function QrCodeReader() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-2xl text-[var(--accent)] text-sm space-y-1">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-2xl text-[var(--accent)] text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)]">QR Code Reader</h4>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">Scan QR codes from images. 100% browser-based.</p>
+        <p className="text-[var(--text-secondary)]">Scan QR codes from images. 100% browser-based.</p>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-5">
@@ -200,19 +200,19 @@ export default function QrCodeReader() {
           onDragLeave={handleDragLeave}
           role="group"
           aria-label="Drop a QR code image here, or tab to the file picker below"
-          className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${dragOver ? 'border-indigo-500 bg-indigo-500/5 scale-[1.02]' : 'border-zinc-300 dark:border-zinc-700 hover:border-indigo-400'}`}
+          className={`border-2 border-dashed rounded-xl p-8 text-center transition-all cursor-pointer ${dragOver ? 'border-[var(--accent)] bg-[var(--accent)]/5 scale-[1.02]' : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'}`}
         >
           <label className="cursor-pointer">
             <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handleFileSelect} className="sr-only" aria-label="Upload QR Code Image" />
             <div className="text-[var(--text-muted)] text-sm">
-              <p className="font-medium text-zinc-600 dark:text-zinc-300 mb-1">Upload QR Code Image</p>
+              <p className="font-medium text-[var(--text-secondary)] mb-1">Upload QR Code Image</p>
               <p className="text-xs">Drag & drop or click to select (PNG, JPG, WebP)</p>
             </div>
           </label>
         </div>
 
         <div className="flex items-center justify-center">
-          <button onClick={handlePaste} className="text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-4 py-2 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Paste from Clipboard</button>
+          <button onClick={handlePaste} className="text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-4 py-2 border border-[var(--accent)]/30 rounded-lg hover:bg-[var(--accent)]/10 transition-colors">Paste from Clipboard</button>
         </div>
 
         {file && (
@@ -228,7 +228,7 @@ export default function QrCodeReader() {
 
         {isProcessing && (
           <div className="flex items-center justify-center py-8">
-            <div className="w-7 h-7 border-[3px] border-indigo-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-7 h-7 border-[3px] border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
             <div className="ml-4">
               <p className="text-sm font-medium text-[var(--text-primary)]">Scanning for QR codes...</p>
               <p className="text-xs text-[var(--text-muted)] mt-0.5">Analyzing image data with jsQR engine</p>
@@ -276,7 +276,7 @@ export default function QrCodeReader() {
                     </div>
                     <pre className="text-xs font-mono text-[var(--text-primary)] whitespace-pre-wrap break-all max-h-32 overflow-y-auto">{qr.data}</pre>
                   </div>
-                  <button onClick={() => handleCopyData(qr.data)} className="shrink-0 text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-2 py-1 border border-indigo-200 dark:border-indigo-800 rounded-lg hover:bg-indigo-500/5 transition-colors">Copy</button>
+                  <button onClick={() => handleCopyData(qr.data)} className="shrink-0 text-xs text-[var(--accent)] hover:text-[var(--accent)] font-bold px-2 py-1 border border-[var(--accent)]/30 rounded-lg hover:bg-[var(--accent)]/10 transition-colors">Copy</button>
                 </div>
               </div>
             ))}
