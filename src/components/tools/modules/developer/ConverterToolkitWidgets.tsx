@@ -69,7 +69,7 @@ export function Base32Encoder() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function Base64ToJsonDecoder() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -171,7 +171,7 @@ export function HexTextConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -218,7 +218,7 @@ export function SvgToBase64Converter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -268,7 +268,7 @@ export function CharacterEncodingConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -319,7 +319,7 @@ export function UnicodeConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -462,7 +462,7 @@ export function PxRemConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -514,7 +514,7 @@ export function SvgOptimizer() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -585,7 +585,7 @@ export function SpeedConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -656,7 +656,7 @@ export function PowerConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>
@@ -727,7 +727,7 @@ export function PressureConverter() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
               <div className="flex gap-2">
-                <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                 <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
               </div>
             </div>

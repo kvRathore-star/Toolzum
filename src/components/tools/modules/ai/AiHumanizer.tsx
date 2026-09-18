@@ -8,6 +8,8 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import { useSession } from '@/lib/auth-client';
 import Link from 'next/link';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 type Tone = 'casual' | 'professional' | 'friendly' | 'natural' | 'storytelling';
 type Creativity = 'low' | 'medium' | 'high';
@@ -287,8 +289,7 @@ export default function AiHumanizer() {
 
   const handleCopy = () => {
     if (!output) return;
-    navigator.clipboard.writeText(output);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(output).then(ok => ok && toast.success('Copied to clipboard!'));
   };
 
   const handleTryAgain = () => {

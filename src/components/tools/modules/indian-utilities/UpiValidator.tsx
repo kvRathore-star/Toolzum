@@ -5,6 +5,8 @@ import QRCode from 'qrcode';
 import { Check, Copy, Download, History, User, Banknote, IndianRupee, CreditCard, XCircle, CheckCircle, Clock, ArrowRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 const KNOWN_HANDLES: Record<string, string> = {
   '@paytm': 'Paytm',
@@ -133,7 +135,7 @@ export default function UpiValidator() {
 
   const copyToClipboard = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(text);
+      await clipboardWrite(text);
       toast.success('UPI ID copied to clipboard');
     } catch {
       toast.error('Failed to copy');

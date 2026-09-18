@@ -170,10 +170,8 @@ Each was left for a specific reason — not skipped, judged:
 Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
 
 
-Live — carry these three out before deleting:
+Live items — all executed:
 
-One rescue — the "Important Notes" honesty block (~15 lines): the coverage-definition warning ("test-file coverage, not statement coverage — clarify externally"), the dependency≠tool-tests gap, and the revenue-critical-first rule. Still true, still load-bearing judgment, and it lives nowhere else.
-
-Contact form still fakes it (contact/page.tsx:49 — localStorage + simulated success, no email/API). Real fix needs a backend (Cloudflare Email Service / worker) — product decision first.
-
-Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.
+1. Honesty block rescued → docs/TEST-HONESTY.md (coverage definition, dep≠tool gap, revenue-critical-first rule)
+2. Contact form → real backend (functions/api/contact.ts) + honest error states in client; needs CLOUDFLARE_API_TOKEN + CONTACT_TO env secrets to send mail
+3. Clipboard long tail → 139 direct navigator.clipboard.writeText calls converted to checked clipboardWrite across 73 files; zero unchecked calls remain in source

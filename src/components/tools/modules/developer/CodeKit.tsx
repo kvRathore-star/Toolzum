@@ -16,7 +16,7 @@ const Result = ({ value }: { value: string }) => (
 function CopyDownload({ output, filename = 'output.txt' }: { output: string; filename?: string }) {
   return (
     <div className="flex gap-3">
-      <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }}
+      <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
         className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
       <button onClick={() => {
         const blob = new Blob([output], { type: 'text/plain' });

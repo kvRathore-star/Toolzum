@@ -1,6 +1,8 @@
 "use client";
 import { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export function EtaCalculator() {
   const [dist, setDist] = useState('100');
@@ -27,7 +29,7 @@ export function EtaCalculator() {
     return out;
   }, [dist, speed, start]);
 
-  const copy = (txt: string) => { navigator.clipboard.writeText(txt); toast.success('Copied!'); };
+  const copy = (txt: string) => { clipboardWrite(txt).then(ok => ok && toast.success('Copied!')); };
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">

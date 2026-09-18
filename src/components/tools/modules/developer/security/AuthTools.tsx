@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { CalculatorShell } from '../../shared/CalculatorShell';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function JwtInspector() {
   const [token, setToken] = useState('');
@@ -49,8 +52,8 @@ export function JwtInspector() {
 
   const [copiedH, setCopiedH] = useState(false);
   const [copiedP, setCopiedP] = useState(false);
-  const copyH = () => { if (header) { navigator.clipboard.writeText(JSON.stringify(header, null, 2)).then(() => { setCopiedH(true); setTimeout(() => setCopiedH(false), 1500); }); } };
-  const copyP = () => { if (payload) { navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => { setCopiedP(true); setTimeout(() => setCopiedP(false), 1500); }); } };
+  const copyH = () => { if (header) { clipboardWrite(JSON.stringify(header, null, 2)).then(ok => { if (ok) { setCopiedH(true); setTimeout(() => setCopiedH(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
+  const copyP = () => { if (payload) { clipboardWrite(JSON.stringify(payload, null, 2)).then(ok => { if (ok) { setCopiedP(true); setTimeout(() => setCopiedP(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   const resultText = isValid ? `✓ Valid JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'})` : (issues[0] || 'Enter JWT to inspect');
 
@@ -120,7 +123,7 @@ export function CsrfTokenGenerator() {
     setToken(Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join(''));
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (token) { navigator.clipboard.writeText(token).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (token) { clipboardWrite(token).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="CSRF Token Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -198,7 +201,7 @@ export function Oauth2Debugger() {
     }
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (result) { navigator.clipboard.writeText(result).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (result) { clipboardWrite(result).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="OAuth2 Debugger">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -241,7 +244,7 @@ export function SamlDecoder() {
     } catch { setDecoded(''); setFields(null); }
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (decoded) { navigator.clipboard.writeText(decoded).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (decoded) { clipboardWrite(decoded).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="SAML Decoder">
       <Input label="Base64 SAML Request/Response" rows={4} value={input} onChange={v => { setInput(v); setDecoded(''); setFields(null); }} placeholder="Paste base64 SAML data..." />

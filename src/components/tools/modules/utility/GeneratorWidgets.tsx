@@ -19,7 +19,7 @@ function randInt(min: number, max: number): number { return Math.floor(Math.rand
 function useCopy() {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(async (text: string) => {
-    await navigator.clipboard.writeText(text);
+    await clipboardWrite(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   }, []);

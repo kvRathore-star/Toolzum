@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 const presets = [
   { label: 'Simple HTML page', value: '<!DOCTYPE html>\n<html>\n<head><title>My Page</title>\n<style>body{font-family:sans-serif;margin:2em}h1{color:#2563eb}</style>\n</head>\n<body>\n<h1>Hello, World!</h1>\n<p>This is a simple HTML page.</p>\n</body>\n</html>' },
@@ -33,8 +35,7 @@ export default function HtmlPreview() {
   const refresh = () => setPreviewHtml(html);
 
   const copyHtml = () => {
-    navigator.clipboard.writeText(html);
-    toast.success('HTML copied!');
+    clipboardWrite(html).then(ok => ok && toast.success('HTML copied!'));
   };
 
   const downloadHtml = () => {

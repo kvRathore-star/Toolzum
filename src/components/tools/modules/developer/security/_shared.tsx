@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState, useCallback } from 'react';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -31,7 +34,7 @@ export function Input({ label, value, onChange, placeholder, type = "text", rows
 export function Output({ value, label }: { value: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   const copy = useCallback(() => {
-    navigator.clipboard.writeText(value).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {});
+    clipboardWrite(value).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
   }, [value]);
   if (!value) return null;
   return (

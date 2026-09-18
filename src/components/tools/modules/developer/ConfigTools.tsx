@@ -53,7 +53,7 @@ function Output({ value, label }: { value: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   if (!value) return null;
   const copy = () => {
-    navigator.clipboard.writeText(value).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {});
+    clipboardWrite(value).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
   };
   return (
     <div className="mt-4">

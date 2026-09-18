@@ -234,7 +234,7 @@ export default function DockerRunToCompose() {
         <div className="relative">
           <textarea aria-label="Warnings:" value={output} readOnly className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
           <div className="absolute top-3 right-3 flex gap-2">
-            <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }}
+            <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
               className="text-[11px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>
             <button onClick={() => {
               const blob = new Blob([output], { type: 'text/plain' });

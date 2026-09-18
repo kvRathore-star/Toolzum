@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { ac } from '../miscToolColors';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function GradientGenerator() {
   const clr = ac('GradientGenerator');
@@ -69,7 +71,7 @@ export default function GradientGenerator() {
 
           <div className="flex gap-2 flex-wrap">
             <code className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs break-all">{gradient}</code>
-            <button onClick={() => { navigator.clipboard.writeText(gradient); toast.success('CSS copied!'); }} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Copy CSS</button>
+            <button onClick={() => { clipboardWrite(gradient).then(ok => ok && toast.success('CSS copied!')); }} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Copy CSS</button>
           </div>
 
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">

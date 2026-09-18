@@ -7,6 +7,8 @@ import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
 import { FileText, Languages, Download, Copy, Check, ArrowRight, Globe, RefreshCw } from 'lucide-react';
 import { getErrorMessage } from '@/utils/error';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -110,7 +112,7 @@ export default function TranslatePdf() {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(translatedText);
+      await clipboardWrite(translatedText);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {

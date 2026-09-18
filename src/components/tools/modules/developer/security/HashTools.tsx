@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { CalculatorShell } from '../../shared/CalculatorShell';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function HashVerifier() {
   const [text, setText] = useState('');
@@ -29,7 +32,7 @@ export function HashVerifier() {
   };
 
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (computed) { navigator.clipboard.writeText(computed).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (computed) { clipboardWrite(computed).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   const presets = [
     { label: 'Hello World (SHA-256)', apply: () => { setText('Hello World'); setAlgo('SHA-256'); verify(); } },
@@ -101,7 +104,7 @@ export function HashFileGenerator() {
     run();
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (hash) { navigator.clipboard.writeText(hash).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (hash) { clipboardWrite(hash).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="Content Hash Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -147,7 +150,7 @@ export function HmacGenerator() {
     run();
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (hmac) { navigator.clipboard.writeText(hmac).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (hmac) { clipboardWrite(hmac).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="HMAC Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">

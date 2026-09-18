@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { CalculatorShell } from '../../shared/CalculatorShell';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function PasswordEntropyCalculator() {
   const [password, setPassword] = useState('');
@@ -24,7 +27,7 @@ export function PasswordEntropyCalculator() {
     setResult({ bits: Math.round(bits * 100) / 100, strength, score: Math.min(100, Math.round(bits / 1.28)) });
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (result) { navigator.clipboard.writeText(`Entropy: ${result.bits} bits\nStrength: ${result.strength}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (result) { clipboardWrite(`Entropy: ${result.bits} bits\nStrength: ${result.strength}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   const presets = [
     { label: 'Common Weak', apply: () => calc('Password123!') },
@@ -103,7 +106,7 @@ export function TwoFactorAuthGenerator() {
     setUri(`otpauth://totp/${encodeURIComponent(iss)}:${encodeURIComponent(acct)}?secret=${s}&issuer=${encodeURIComponent(iss)}&algorithm=SHA1&digits=6&period=30`);
   };
 
-  const copy = () => { if (uri) { navigator.clipboard.writeText(uri).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (uri) { clipboardWrite(uri).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   const presets = [
     { label: 'GitHub', apply: () => gen('GitHub') },
@@ -117,7 +120,7 @@ export function TwoFactorAuthGenerator() {
 
   const resultText = uri ? `TOTP URI generated for ${issuer || 'Service'}` : 'Enter details to generate TOTP URI';
 
-  const copyUri = () => { if (uri) { navigator.clipboard.writeText(uri).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copyUri = () => { if (uri) { clipboardWrite(uri).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   return (
     <CalculatorShell category="Developer"
@@ -242,7 +245,7 @@ export function BruteForceTimeEstimator() {
   const severityColors: Record<string, string> = { critical: 'bg-red-500', high: 'bg-orange-500', medium: 'bg-yellow-500', low: 'bg-blue-500', safe: 'bg-green-500' };
   const severityLabels: Record<string, string> = { critical: 'Instant', high: 'Very Fast', medium: 'Moderate', low: 'Slow', safe: 'Infeasible' };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (est) { navigator.clipboard.writeText(`Estimated time: ${est}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (est) { clipboardWrite(`Estimated time: ${est}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
 
   const presets = [
     { label: 'Password123! @ 1B/s', apply: () => calc('Password123!', '1000000000') },
@@ -343,7 +346,7 @@ export function HashPasswordGenerator() {
 
   const copy = async () => {
     if (result) {
-      await navigator.clipboard.writeText(result);
+      await clipboardWrite(result);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     }

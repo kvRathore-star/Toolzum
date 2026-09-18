@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { getErrorMessage } from '@/utils/error';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function Validator() {
   const [input, setInput] = useState('');
@@ -69,7 +72,7 @@ export function EnvFileGenerator() {
     setOutput(result);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title=".env File Template Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -117,7 +120,7 @@ export function EnvFileParser() {
     setVars(parsed);
   };
   const [copied, setCopied] = useState<string | null>(null);
-  const copy = (k: string, v: string) => { navigator.clipboard.writeText(v).then(() => { setCopied(k); setTimeout(() => setCopied(null), 1500); }); };
+  const copy = (k: string, v: string) => { clipboardWrite(v).then(ok => { if (ok) { setCopied(k); setTimeout(() => setCopied(null), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); };
   return (
     <Section title=".env File Parser">
       <div className="flex flex-wrap gap-1.5 mb-3">

@@ -6,6 +6,9 @@ import Link from 'next/link';
 import DOMPurify from 'dompurify';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { Section } from '../MiscToolsShared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
@@ -28,7 +31,7 @@ function Output({ value, label }: { value: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   if (!value) return null;
   const copy = () => {
-    navigator.clipboard.writeText(value).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }).catch(() => {});
+    clipboardWrite(value).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } });
   };
   return (
     <div className="mt-4">

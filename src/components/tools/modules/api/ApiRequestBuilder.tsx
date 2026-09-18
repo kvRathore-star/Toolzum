@@ -1,5 +1,7 @@
 "use client";
 import { useState } from 'react';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function ApiRequestBuilder() {
   const [method, setMethod] = useState('GET');
@@ -62,7 +64,7 @@ export default function ApiRequestBuilder() {
         {result && (
           <div className="relative">
             <pre className="bg-gray-900 text-green-700 dark:text-green-400 rounded-xl p-4 text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all max-h-48">{result}</pre>
-            <button onClick={() => { navigator.clipboard.writeText(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+            <button onClick={() => { void clipboardWrite(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
               className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
         )}

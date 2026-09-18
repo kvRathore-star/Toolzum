@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -251,7 +253,7 @@ export default function CodeFormatter() {
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-sm font-medium text-[var(--text-secondary)]">Output</label>
                   <div className="flex gap-2">
-                    <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                    <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                     <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
                   </div>
                 </div>
@@ -263,7 +265,7 @@ export default function CodeFormatter() {
               <div className="flex items-center justify-between mb-1.5">
                 <label className="block text-sm font-medium text-[var(--text-secondary)]">Formatted Output</label>
                 <div className="flex gap-2">
-                  <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                  <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                   <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
                 </div>
               </div>
@@ -350,7 +352,7 @@ function createFormatter(lang: string) {
                   <div className="flex items-center justify-between mb-1.5">
                     <label className="block text-sm font-medium text-[var(--text-secondary)]">Output</label>
                     <div className="flex gap-2">
-                      <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                      <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                       <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
                     </div>
                   </div>
@@ -362,7 +364,7 @@ function createFormatter(lang: string) {
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="block text-sm font-medium text-[var(--text-secondary)]">Formatted Output</label>
                   <div className="flex gap-2">
-                    <button onClick={() => { navigator.clipboard.writeText(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+                    <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
                     <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download=`${lang.toLowerCase()}-formatted.txt`; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
                   </div>
                 </div>

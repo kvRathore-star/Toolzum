@@ -3,6 +3,8 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Copy, Delete } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { factorial } from '../Calculators.shared';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 function evalScientific(input: string, degMode = true): number {
   let pos = 0;
@@ -164,7 +166,7 @@ export default function ScientificCalculator() {
   }, []);
 
   const copyResult = useCallback(() => {
-    if (result) { navigator.clipboard.writeText(result); toast.success('Result copied'); }
+    if (result) { clipboardWrite(result).then(ok => ok && toast.success('Result copied')); }
   }, [result]);
 
   useEffect(() => {

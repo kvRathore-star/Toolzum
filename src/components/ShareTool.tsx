@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { Share2, Link as LinkIcon, Check, Code } from 'lucide-react';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 const SITE_URL = 'https://toolzum.com';
 
@@ -38,7 +40,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(url);
+      await clipboardWrite(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch { /* fallback */ }
@@ -46,7 +48,7 @@ export function ShareTool({ title, slug, category }: ShareToolProps) {
 
   const copyMarkdown = async () => {
     try {
-      await navigator.clipboard.writeText(markdown);
+      await clipboardWrite(markdown);
       setMdCopied(true);
       setTimeout(() => setMdCopied(false), 2000);
     } catch { /* fallback */ }

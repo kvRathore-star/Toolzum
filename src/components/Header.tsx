@@ -12,6 +12,8 @@ import { useToolHistory } from '@/hooks/useToolHistory';
 import { useSession, signOut } from "@/lib/auth-client";
 import { Button } from "./ui/button";
 import { MEGAMENU_COLUMNS, SITE_STATS } from "@/registry/site-data.generated";
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 // Lazy chunk: cmdK search + full registry pulled out of the root-layout bundle.
 // Rendered only when the user opens search — cmdk + toolsRegistry stay off the
@@ -378,7 +380,7 @@ export function Header() {
                       <button
                         onClick={async () => {
                           try {
-                            await navigator.clipboard.writeText('https://toolzum.com');
+                            await clipboardWrite('https://toolzum.com');
                             setShareCopied(true);
                             setTimeout(() => setShareCopied(false), 2000);
                           } catch {}
@@ -624,7 +626,7 @@ export function Header() {
                   ].map(p => (
                     <a key={p.emoji} href={p.href} target="_blank" rel="noopener noreferrer" className={`w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] transition-all ${p.hover}`} title={p.title} onClick={() => setMobileMenuOpen(false)}>{p.emoji}</a>
                   ))}
-                  <button onClick={async () => { try { await navigator.clipboard.writeText('https://toolzum.com'); toast.success('Link copied!'); } catch {} setMobileMenuOpen(false); }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[12px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
+                  <button onClick={async () => { try { await clipboardWrite('https://toolzum.com'); toast.success('Link copied!'); } catch {} setMobileMenuOpen(false); }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[12px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
                 </div>
               </div>
 

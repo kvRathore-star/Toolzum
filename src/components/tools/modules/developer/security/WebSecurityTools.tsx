@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function HttpSecurityChecker() {
   const [input, setInput] = useState('');
@@ -28,7 +31,7 @@ To check manually, run:
   curl -sI ${input} | grep -i content-security`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="HTTP Security Headers Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -61,7 +64,7 @@ export function ContentSecurityPolicyGenerator() {
     setCsp(lines.join('; '));
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (csp) { navigator.clipboard.writeText(csp).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (csp) { clipboardWrite(csp).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="Content Security Policy Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -112,7 +115,7 @@ To test manually:
   curl -X OPTIONS -H "Origin: ${origin}" -H "Access-Control-Request-Method: GET" ${origin}`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="CORS Inspector">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -157,7 +160,7 @@ Access-Control-Allow-Credentials: ${outOrigin === '*' ? 'false' : 'true'}
 ${outOrigin !== '*' ? '' : '# Warning: Wildcard origin with credentials=false'}`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (headers) { navigator.clipboard.writeText(headers).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (headers) { clipboardWrite(headers).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="CORS Header Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -205,7 +208,7 @@ To check from CLI:
   curl -s "https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${id}" | jq .`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="CVE Lookup">
       <div className="flex flex-wrap gap-1.5 mb-3">

@@ -6,6 +6,8 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../../AiSettings';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { getErrorMessage } from '@/utils/error';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function AiParaphrasingTool() {
   const { generateCompletion } = useAiProvider();
@@ -34,8 +36,7 @@ export default function AiParaphrasingTool() {
 
   const handleCopy = () => {
     if (!outputText) return;
-    navigator.clipboard.writeText(outputText);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(outputText).then(ok => ok && toast.success('Copied to clipboard!'));
   };
 
   const handleDownload = () => {

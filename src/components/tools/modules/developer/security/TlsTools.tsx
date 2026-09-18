@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function SslTlsChecker() {
   const [hostname, setHostname] = useState('');
@@ -27,7 +30,7 @@ Common checks performed by server-side tools:
 Port ${port} is the default HTTPS port. Common alternatives: 8443, 9443.`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="SSL/TLS Certificate Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -72,7 +75,7 @@ export function TlsCipherChecker() {
     else setResult({ strength: 'Unknown', desc: 'Not in reference database. Check IANA TLS registry.' });
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (result) { navigator.clipboard.writeText(`Cipher: ${cipher}\nStrength: ${result.strength}\nDescription: ${result.desc}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (result) { clipboardWrite(`Cipher: ${cipher}\nStrength: ${result.strength}\nDescription: ${result.desc}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="TLS Cipher Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -130,7 +133,7 @@ The PEM format contains:
 Certificate is ${pem.includes('BEGIN CERTIFICATE') ? 'properly formatted' : 'malformed'}`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="SSL Certificate Decoder">
       <div className="flex flex-wrap gap-1.5 mb-3">

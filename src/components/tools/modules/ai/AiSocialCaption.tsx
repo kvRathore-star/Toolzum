@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 const PLATFORMS = [
   { id: 'instagram', label: 'Instagram', icon: '📸', limit: 2200 },
@@ -188,7 +190,7 @@ export default function AiSocialCaption() {
   };
 
   const handleCopy = async (text: string) => {
-    try { await navigator.clipboard.writeText(text); toast.success('Caption copied to clipboard'); }
+    try { await clipboardWrite(text); toast.success('Caption copied to clipboard'); }
     catch { toast.error('Failed to copy'); }
   };
 

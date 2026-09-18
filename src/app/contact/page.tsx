@@ -27,6 +27,7 @@ export default function ContactPage() {
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,26 +37,45 @@ export default function ContactPage() {
 
   const sanitize = (s: string) => s.replace(/<[^>]*>/g, "").slice(0, 1000);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill out all required fields.");
       return;
     }
-    
+
     setLoading(true);
+    setSendError(null);
     try {
-      const clean = { name: sanitize(formData.name), email: sanitize(formData.email), subject: formData.subject, message: sanitize(formData.message) };
-      const submissions = JSON.parse(localStorage.getItem("th_contact_submissions") || "[]");
-      submissions.push({ ...clean, timestamp: Date.now() });
-      localStorage.setItem("th_contact_submissions", JSON.stringify(submissions.slice(-10)));
-    } catch (e) {
-      console.error("[toolzum] Failed to store contact submission", e);
-    }
-    setTimeout(() => {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: sanitize(formData.name),
+          email: sanitize(formData.email),
+          subject: formData.subject,
+          message: sanitize(formData.message),
+          // Honeypot (bots fill it; the input is hidden from humans).
+          website: (document.getElementById("lbl-page-website") as HTMLInputElement | null)?.value || "",
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; to?: string };
+      if (res.ok && data.ok) {
+        setSubmitted(true);
+      } else if (data.error === "email_unconfigured" || data.error === "email_failed") {
+        setSendError(
+          `Our mail relay is unavailable right now — please write to us directly at ${data.to || "support@toolzum.com"} and we'll reply there.`,
+        );
+      } else if (res.status === 429) {
+        setSendError("Too many messages sent recently — please try again in a few minutes.");
+      } else {
+        setSendError("Couldn't send that — please check the fields and try again.");
+      }
+    } catch {
+      setSendError("Network error — check your connection and try again.");
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+    }
   };
 
   return (
@@ -140,7 +160,19 @@ export default function ContactPage() {
 
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                
+                {/* Honeypot: hidden from humans, bots fill it → silent reject */}
+                <div className="absolute opacity-0 pointer-events-none h-0 overflow-hidden" aria-hidden="true">
+                  <label htmlFor="lbl-page-website">Website</label>
+                  <input id="lbl-page-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
+
+                {sendError && (
+                  <div role="alert" className="rounded-[var(--radius-md)] bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300 text-xs px-4 py-3">
+                    {sendError}
+                  </div>
+                )}
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>

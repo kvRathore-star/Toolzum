@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from "react-hot-toast";
 
 interface ErrorMessageProps {
   title: string;
@@ -46,15 +48,15 @@ export function ErrorMessage({
 }: ErrorMessageProps) {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (!copyText) return;
-    navigator.clipboard
-      .writeText(copyText)
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      })
-      .catch(() => {});
+    const ok = await clipboardWrite(copyText);
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } else {
+      toast.error('Copy failed — check browser permissions');
+    }
   };
 
   return (

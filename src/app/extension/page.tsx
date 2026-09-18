@@ -17,6 +17,8 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 export default function ChromeExtensionPage() {
   const [activeTab, setActiveTab] = useState<"picker" | "tools" | "qr">("picker");
@@ -45,7 +47,7 @@ export default function ChromeExtensionPage() {
 
   const handleCopyColor = (color: string) => {
     setSelectedColor(color);
-    navigator.clipboard.writeText(color);
+  void clipboardWrite(color);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

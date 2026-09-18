@@ -1,15 +1,17 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { toast } from 'react-hot-toast';
+import { clipboardWrite } from "@/lib/clipboard";
 import { ac, btnClass } from './miscToolColors';
 
 import { Section, Input, labelClass, selClass } from './MiscToolsShared';
+
 
 export function CounterTool() {
   const clr = ac('CounterTool');
   const [count, setCount] = useState(0);
   const [history, setHistory] = useState<number[]>([]);
-  const handleCopy = () => { navigator.clipboard.writeText(`Count: ${count}\nHistory: ${history.join(', ')}`); toast.success('Copied!'); };
+  const handleCopy = () => { clipboardWrite(`Count: ${count}\nHistory: ${history.join(', ')}`).then(ok => ok && toast.success('Copied!')); };
   const handleDownload = () => { const blob = new Blob([`Count: ${count}\nHistory: ${history.join(', ')}`], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='counter-log.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
@@ -47,7 +49,7 @@ export function ListRandomizer() {
     setResult(shuffled);
   };
   const resultText = result.map((item, i) => `${i + 1}. ${item}`).join('\n');
-  const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
+  const handleCopy = () => { clipboardWrite(resultText).then(ok => ok && toast.success('Copied!')); };
   const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='randomized-list.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
     <div className="space-y-4">
@@ -90,7 +92,7 @@ export function ListSorter() {
     setResult(items);
   };
   const resultText = result.map((item, i) => `${i + 1}. ${item}`).join('\n');
-  const handleCopy = () => { navigator.clipboard.writeText(resultText); toast.success('Copied!'); };
+  const handleCopy = () => { clipboardWrite(resultText).then(ok => ok && toast.success('Copied!')); };
   const handleDownload = () => { const blob = new Blob([resultText], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='sorted-list.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); };
   return (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">

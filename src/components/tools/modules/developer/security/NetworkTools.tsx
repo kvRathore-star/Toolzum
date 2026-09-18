@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 import { Section, Input } from './_shared';
+import { clipboardWrite } from "@/lib/clipboard";
+import { toast } from 'react-hot-toast';
+
 
 export function SubnetCalculator() {
   const [input, setInput] = useState('');
@@ -31,7 +34,7 @@ export function SubnetCalculator() {
     });
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (result) { navigator.clipboard.writeText(`Address: ${result.address}/${result.cidr}\nNetwork: ${result.network}\nBroadcast: ${result.broadcast}\nMask: ${result.mask}\nHosts: ${result.hosts}\nRange: ${result.range}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (result) { clipboardWrite(`Address: ${result.address}/${result.cidr}\nNetwork: ${result.network}\nBroadcast: ${result.broadcast}\nMask: ${result.mask}\nHosts: ${result.hosts}\nRange: ${result.range}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="Subnet Calculator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -83,7 +86,7 @@ export function SubnetVisualizer() {
     setViz({ ip: toBin(ip), mask: toBin(mask), network: `${'1'.repeat(cidr)}${'0'.repeat(32 - cidr)}`.replace(/(.{8})/g, '$1.').slice(0, -1), cidr });
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (viz) { navigator.clipboard.writeText(`IP: ${viz.ip}\nMask: ${viz.mask}\nNetwork Bits: ${viz.cidr}\nHost Bits: ${32 - viz.cidr}`).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (viz) { clipboardWrite(`IP: ${viz.ip}\nMask: ${viz.mask}\nNetwork Bits: ${viz.cidr}\nHost Bits: ${32 - viz.cidr}`).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="Subnet Visualizer">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -148,7 +151,7 @@ Expected record types for a typical domain:
 • CNAME — Aliases (if any)`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="DNS Lookup Record Generator">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -194,7 +197,7 @@ Common checks:
 • Proxy/VPN detection`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="IP Reputation Checker">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -237,7 +240,7 @@ export function UrlSanitizer() {
     } catch { setSanitized('Error: Invalid URL'); setRemoved([]); }
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (sanitized) { navigator.clipboard.writeText(sanitized).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (sanitized) { clipboardWrite(sanitized).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="URL Sanitizer">
       <div className="flex flex-wrap gap-1.5 mb-3">
@@ -304,7 +307,7 @@ Common subdomains to check:
 • git, jenkins, monitor, status`);
   };
   const [copied, setCopied] = useState(false);
-  const copy = () => { if (output) { navigator.clipboard.writeText(output).then(() => { setCopied(true); setTimeout(() => setCopied(false), 1500); }); } };
+  const copy = () => { if (output) { clipboardWrite(output).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else { toast.error('Copy failed — check browser permissions'); } }); } };
   return (
     <Section title="Subdomain Finder">
       <div className="flex flex-wrap gap-1.5 mb-3">

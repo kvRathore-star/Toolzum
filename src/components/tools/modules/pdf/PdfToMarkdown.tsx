@@ -5,6 +5,8 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
+import { clipboardWrite } from "@/lib/clipboard";
+
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
@@ -92,7 +94,7 @@ export default function PdfToMarkdown() {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(markdown);
+      await clipboardWrite(markdown);
       toast.success("Copied to clipboard!");
     } catch {
       toast.error("Failed to copy.");
