@@ -159,16 +159,16 @@ export default function PhpTools() {
             { id: 'serialize', label: 'Serialize' },
             { id: 'unserialize', label: 'Unserialize' },
           ].map(b => (
-            <button key={b.id} onClick={() => { setMode(b.id as Mode); process(input, b.id as Mode); }} className={`px-2.5 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === b.id ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{b.label}</button>
+            <button key={b.id} onClick={() => { setMode(b.id as Mode); process(input, b.id as Mode); }} className={`px-2.5 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === b.id ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>{b.label}</button>
           ))}
         </div>
-        <button onClick={swap} className="text-xs text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">⇄ Swap</button>
+        <button onClick={swap} className="text-xs text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors">⇄ Swap</button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <textarea value={input} onChange={e => handleInput(e.target.value)} aria-label={mode === 'json-to-php' ? 'Paste JSON...' : mode === 'php-to-json' ? 'Paste PHP array...' : mode === 'serialize' ? 'Paste JSON to serialize...' : 'Paste serialized PHP string...'} placeholder={mode === 'json-to-php' ? 'Paste JSON...' : mode === 'php-to-json' ? 'Paste PHP array...' : mode === 'serialize' ? 'Paste JSON to serialize...' : 'Paste serialized PHP string...'} className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
           <textarea value={output} readOnly placeholder="Result..." aria-label="PHP output" className="w-full h-[350px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
+          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
         </div>
       </div>
     </div>

@@ -67,17 +67,17 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-xl font-bold text-[var(--text-primary)]">
           Image ↔ Base64 Converter
         </h2>
-        <div className="flex bg-white dark:bg-black p-1 rounded-xl border border-[var(--border-subtle)] mt-3 w-fit">
+        <div className="flex bg-[var(--bg-surface)] p-1 rounded-xl border border-[var(--border-subtle)] mt-3 w-fit">
           <button
             onClick={() => { setMode('image-to-base64'); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               mode === 'image-to-base64'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
             Image to Base64
@@ -86,8 +86,8 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
             onClick={() => { setMode('base64-to-image'); setFile(null); setDataUrl(''); setBase64Input(''); setImageUrl(null); setError(null); }}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               mode === 'base64-to-image'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
             Base64 to Image
@@ -95,7 +95,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
         </div>
       </div>
 
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--text-secondary)] text-sm">
         {isEncode
           ? <><strong>Lightning Fast & Private:</strong> Convert any image into a Base64 string instantly in your browser. Files never touch a server.</>
           : <><strong>Client-Side Only:</strong> Paste a Base64 encoded string to decode it into an image. The decoding process happens locally in your browser.</>}
@@ -114,7 +114,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
                   <h3 className="text-[var(--text-primary)] font-medium">{file.name}</h3>
                   <p className="text-xs text-[var(--text-secondary)]">{(file.size / 1024).toFixed(2)} KB</p>
                 </div>
-                <button onClick={() => { setFile(null); setDataUrl(''); }} className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change</button>
+                <button onClick={() => { setFile(null); setDataUrl(''); }} className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change</button>
               </div>
               <div className="flex-1 bg-[var(--bg-overlay)] rounded-xl overflow-hidden border border-[var(--border-subtle)] flex items-center justify-center p-4 min-h-[300px] chess-bg">
                 <style>{`.chess-bg{background-image:linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%,#eee);background-size:20px 20px;background-position:0 0,10px 10px}@media(prefers-color-scheme:dark){.chess-bg{background-image:linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111),linear-gradient(45deg,#111 25%,transparent 25%,transparent 75%,#111 75%,#111)}}`}</style>
@@ -127,13 +127,13 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
                 <h3 className="text-[var(--text-primary)] font-medium">Base64 Output</h3>
                 <span className="text-xs text-[var(--text-secondary)] font-mono bg-[var(--bg-surface)] px-2 py-1 rounded">~{((getOutputString().length * 3 / 4) / 1024).toFixed(2)} KB decoded</span>
               </div>
-              <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300 font-medium cursor-pointer">
-                <input type="checkbox" checked={includePrefix} onChange={e => setIncludePrefix(e.target.checked)} className="rounded border-zinc-300 text-blue-600 focus:ring-blue-500" />
+              <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] font-medium cursor-pointer">
+                <input type="checkbox" checked={includePrefix} onChange={e => setIncludePrefix(e.target.checked)} className="rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)]" />
                 Include URI Prefix <span className="text-xs text-[var(--text-muted)] font-normal">(data:image/jpeg;base64,...)</span>
               </label>
-              <textarea aria-label="Include URI Prefix" readOnly value={getOutputString()} className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-xs break-all" />
+              <textarea aria-label="Base64 output" readOnly value={getOutputString()} className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-xs break-all" />
               <div className="flex gap-4 pt-2">
-                <button onClick={copyBase64} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95">Copy to Clipboard</button>
+                <button onClick={copyBase64} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95">Copy to Clipboard</button>
                 <button onClick={downloadTextFile} className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3 rounded-xl shadow transition-all active:scale-95">Download .txt</button>
               </div>
             </div>
@@ -145,13 +145,13 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
             <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
               <h3 className="text-[var(--text-primary)] font-medium">Base64 String</h3>
               <div className="flex gap-2">
-                <button onClick={async () => { try { setBase64Input(await navigator.clipboard.readText()); } catch { toast.error('Failed to read clipboard'); } }} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold">Paste</button>
+                <button onClick={async () => { try { setBase64Input(await navigator.clipboard.readText()); } catch { toast.error('Failed to read clipboard'); } }} className="text-xs text-[var(--accent)] hover:opacity-80 font-bold">Paste</button>
                 <button onClick={() => { setBase64Input(''); setImageUrl(null); setError(null); }} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-bold">Clear</button>
               </div>
             </div>
-            <textarea aria-label="Clear" value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-none font-mono text-sm" />
+            <textarea aria-label="Base64 input" value={base64Input} onChange={e => setBase64Input(e.target.value)} placeholder="Paste your Base64 string here... (e.g. iVBORw0KGgo...)" className="flex-1 w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-none font-mono text-sm" />
             {error && <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm font-medium rounded-xl">{error}</div>}
-            <button onClick={processBase64} disabled={!base64Input.trim()} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">Decode to Image</button>
+            <button onClick={processBase64} disabled={!base64Input.trim()} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50">Decode to Image</button>
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl flex flex-col space-y-6 min-h-[400px]">
@@ -170,7 +170,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
               )}
             </div>
             <button onClick={() => imageUrl && downloadOrShare(imageUrl, `decoded_image_${Date.now()}.png`)} disabled={!imageUrl}
-              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 disabled:opacity-50">
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 disabled:opacity-50">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download Image
             </button>

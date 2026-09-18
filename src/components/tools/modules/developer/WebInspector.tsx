@@ -183,7 +183,7 @@ export default function WebInspector() {
   const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
 
   const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
-    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+    <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
       <Icon className="w-3.5 h-3.5" /> {label}
     </button>
   );
@@ -248,7 +248,7 @@ export default function WebInspector() {
           <input aria-label="Search by code or name..." value={httpSearch} onChange={e => setHttpSearch(e.target.value)} placeholder="Search by code or name..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           <div className="max-h-[400px] overflow-y-auto space-y-0.5">
             {filteredHttp.map(s => (
-              <div key={s.code} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/50">
+              <div key={s.code} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-[var(--bg-overlay)]">
                 <span className={`text-xs font-bold w-12 px-1.5 py-0.5 rounded ${s.code < 200 ? 'bg-gray-100 dark:bg-gray-800 text-gray-500' : s.code < 300 ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' : s.code < 400 ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : s.code < 500 ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-500' : 'bg-red-100 dark:bg-red-900/30 text-red-500'}`}>
                   {s.code}
                 </span>
@@ -263,15 +263,15 @@ export default function WebInspector() {
 
       {tab === 'mime' && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-          <input aria-label="No matching status codes." value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+                      <input aria-label="Search MIME types" value={mimeSearch} onChange={e => setMimeSearch(e.target.value)} placeholder="Search by extension, MIME type, or category..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           <div className="overflow-x-auto">
             <table className="w-full text-[11px]">
               <thead><tr className="text-[var(--text-muted)] font-bold uppercase text-[10px] border-b border-[var(--border-subtle)]"><th className="text-left py-2 px-2">Extension</th><th className="text-left py-2 px-2">MIME Type</th><th className="text-left py-2 px-2">Category</th></tr></thead>
               <tbody>
                 {filteredMime.map(m => (
-                  <tr key={m.ext} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/30">
+                  <tr key={m.ext} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)]">
                     <td className="py-1.5 px-2 font-mono text-[var(--text-primary)]">{m.ext}</td>
-                    <td className="py-1.5 px-2 font-mono text-zinc-600 dark:text-[var(--text-muted)]">{m.mime}</td>
+                    <td className="py-1.5 px-2 font-mono text-[var(--text-secondary)]">{m.mime}</td>
                     <td className="py-1.5 px-2 text-[var(--text-secondary)]">{m.cat}</td>
                   </tr>
                 ))}
@@ -285,7 +285,7 @@ export default function WebInspector() {
       {tab === 'basic-auth' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
-            <input aria-label="No matching MIME types." value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+            <input aria-label="Username" value={basicUser} onChange={e => { setBasicUser(e.target.value); setBasicResult(btoa(e.target.value + ':' + basicPass)); }} placeholder="Username..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
             <input aria-label="Password..." value={basicPass} onChange={e => { setBasicPass(e.target.value); setBasicResult(btoa(basicUser + ':' + e.target.value)); }} type="password" placeholder="Password..." className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-5 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           </div>
           {basicUser && basicPass && (
@@ -293,7 +293,7 @@ export default function WebInspector() {
               <div className="relative">
                 <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Authorization Header</label>
                 <input aria-label="Authorization Header" type="text" readOnly value={`Basic ${basicResult}`} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-emerald-600 dark:text-emerald-400 font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
+                <button onClick={() => copy(`Basic ${basicResult}`, 'Header')} className="absolute top-7 right-2 text-[10px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
               </div>
               <InfoRow label="Raw Base64" val={basicResult} />
             </div>
@@ -315,8 +315,8 @@ export default function WebInspector() {
           </div>
           <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-2">Generated Meta Tags</label>
-            <textarea aria-label="Generated Meta Tags" value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-            {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
+            <textarea aria-label="Generated Meta Tags" value={ogOutput} readOnly placeholder="Fill in fields to generate..." className="w-full h-[280px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-xs text-[var(--text-primary)] dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
+            {ogOutput && <button onClick={() => copy(ogOutput, 'Meta tags')} className="absolute top-7 right-3 text-[10px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>}
           </div>
         </div>
       )}

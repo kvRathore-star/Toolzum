@@ -146,9 +146,9 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] flex items-center gap-2">
             <Zap className="w-5 h-5 text-[var(--accent)]" />
             {cfg.label} Minifier
           </h2>
@@ -163,7 +163,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
             <textarea value={input} onChange={e => setInput(e.target.value)} aria-label={`Original ${cfg.label}`} placeholder={cfg.placeholder}
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] font-mono h-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none" />
           </div>
-          <button onClick={minify} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={minify} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
             <Sparkles className="w-4 h-4" /> Minify {cfg.label}
           </button>
         </div>
@@ -174,8 +174,8 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Minified {cfg.label}</span>
               {output && (
                 <div className="flex gap-2">
-                  <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Copy minified code"><Copy className="w-4 h-4" /></button>
-                  <button onClick={() => { const blob = new Blob([output], { type: cfg.mime }); downloadOrShare(URL.createObjectURL(blob), `minified.${lang === 'javascript' ? 'js' : lang}`); }} className="p-1.5 text-[var(--text-secondary)] hover:text-white border border-zinc-800 rounded-lg" aria-label="Download minified code"><Download className="w-4 h-4" /></button>
+                  <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] border border-[var(--border-subtle)] rounded-lg" aria-label="Copy minified code"><Copy className="w-4 h-4" /></button>
+                  <button onClick={() => { const blob = new Blob([output], { type: cfg.mime }); downloadOrShare(URL.createObjectURL(blob), `minified.${lang === 'javascript' ? 'js' : lang}`); }} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] border border-[var(--border-subtle)] rounded-lg" aria-label="Download minified code"><Download className="w-4 h-4" /></button>
                 </div>
               )}
             </div>

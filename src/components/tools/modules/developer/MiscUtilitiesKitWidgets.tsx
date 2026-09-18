@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 export function CidrCalculator() {
   const [cidr, setCidr] = useState('192.168.1.0/24');
@@ -36,10 +38,17 @@ export function CidrCalculator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CIDR Calculator</h2>
-        <input aria-label="CIDR Calculator" type="text" value={cidr} onChange={e => setCidr(e.target.value)} placeholder="192.168.1.0/24"
+        <DualPanel
+          input={<>
+        <input aria-label="CIDR notation, e.g. 192.168.1.0/24" type="text" value={cidr} onChange={e => setCidr(e.target.value)} placeholder="192.168.1.0/24"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono" />
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
-        {result && <textarea aria-label="Calculate" readOnly rows={7} value={result} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+          </>}
+          output={<>
+            <textarea aria-label="CIDR calculation result" readOnly rows={7} value={result} placeholder="Result appears here" className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2 placeholder:text-[var(--text-muted)]" />
+          </>}
+          actions={<CalcActions result={result} downloadData={result} downloadFilename='cidr-calc.txt' />}
+        />
       </div>
     </div>
   );
@@ -86,10 +95,17 @@ export function AwsIamPolicyAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">AWS IAM Policy Analyzer</h2>
-        <textarea aria-label="AWS IAM Policy Analyzer" rows={6} value={policy} onChange={e => setPolicy(e.target.value)}
+        <DualPanel
+          input={<>
+        <textarea aria-label="IAM policy JSON" rows={6} value={policy} onChange={e => setPolicy(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {analysis && <textarea aria-label="Analyze" readOnly rows={10} value={analysis} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />}
+        <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
+          </>}
+          output={<>
+            <textarea aria-label="IAM analysis result" readOnly rows={10} value={analysis || 'Result appears here'} className="w-full bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-xs font-mono mt-2" />
+          </>}
+          actions={<CalcActions result={analysis} downloadData={analysis} downloadFilename='iam-analysis.txt' />}
+        />
       </div>
     </div>
   );

@@ -2,16 +2,9 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { Clipboard } from 'lucide-react';
-import { clipboardWrite } from "@/lib/clipboard";
 import { getErrorMessage } from '@/utils/error';
-
-function CopyBtn({ text, label }: { text: string; label?: string }) {
-  return (
-    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
-      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
-  );
-}
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 export function HtmlLinter() {
   const [htmlInput, setHtmlInput] = useState('<!DOCTYPE html><html><head><title>Test</title></head><body><p>Hello</p></body></html>');
@@ -43,13 +36,20 @@ export function HtmlLinter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">HTML Linter</h2>
+        <DualPanel
+          input={<>
         <div className="space-y-1">
           <label className="text-xs font-medium text-[var(--text-secondary)]">HTML</label>
           <textarea aria-label="HTML" value={htmlInput} onChange={e => setHtmlInput(e.target.value)} placeholder="Paste HTML..."
             className="w-full h-32 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
         </div>
         <button onClick={lintHtml} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Lint HTML</button>
-        {htmlOutput && <pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-[var(--text-primary)]">{htmlOutput}</pre>}
+          </>}
+          output={<>
+            <pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-[var(--text-primary)] min-h-24">{htmlOutput || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={htmlOutput} downloadData={htmlOutput} downloadFilename='html-lint.txt' />}
+        />
       </div>
     </div>
   );
@@ -80,10 +80,12 @@ export function XmlMinifierValidator() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">XML Minifier / Validator</h2>
+        <DualPanel
+          input={<>
         <div className="flex gap-2">
           {[{ v: 'minify', l: 'Minify' }, { v: 'validate', l: 'Validate' }].map(({ v, l }) => (
             <button key={v} onClick={() => setMode(v as typeof mode)}
-              className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{l}</button>
+              className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>{l}</button>
           ))}
         </div>
         <div className="space-y-1">
@@ -92,12 +94,12 @@ export function XmlMinifierValidator() {
             className="w-full h-32 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y" />
         </div>
         <button onClick={process} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Process</button>
-        {xmlOutput && (
-          <div className="relative">
-            <pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400">{xmlOutput}</pre>
-            <div className="mt-1"><CopyBtn text={xmlOutput} label="XML result" /></div>
-          </div>
-        )}
+          </>}
+          output={<>
+            <pre className="text-sm font-mono bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 max-h-48 overflow-y-auto text-emerald-600 dark:text-emerald-400 min-h-24">{xmlOutput || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={xmlOutput} downloadData={xmlOutput} downloadFilename='xml-result.txt' />}
+        />
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 export function CsvAnalyzer() {
   const [csv, setCsv] = useState('');
@@ -37,14 +39,14 @@ export function CsvAnalyzer() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Analyze CSV structure — column types, counts, unique values, and empty cells.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
-        <textarea aria-label="Analyze CSV structure — column types, counts, unique values, and empty cells." value={csv} onChange={e => setCsv(e.target.value)} rows={6} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste CSV data (first row = headers)..." />
+        <textarea aria-label="Analyze CSV structure — column types, counts, unique values, and empty cells." value={csv} onChange={e => setCsv(e.target.value)} rows={6} className="w-full p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste CSV data (first row = headers)..." />
         <button onClick={analyze} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Analyze</button>
         {analysis && (
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
-              <thead><tr className="bg-[var(--bg-surface)]">{['Column', 'Type', 'Count', 'Unique', 'Empty', 'Min', 'Max'].map(h => <th key={h} className="p-2 border dark:border-zinc-700 text-left">{h}</th>)}</tr></thead>
+              <thead><tr className="bg-[var(--bg-surface)]">{['Column', 'Type', 'Count', 'Unique', 'Empty', 'Min', 'Max'].map(h => <th key={h} className="p-2 border dark:border-[var(--border-subtle)] text-left">{h}</th>)}</tr></thead>
               <tbody>{Object.entries(analysis).map(([col, data]) => (
-                <tr key={col} className="border-b dark:border-zinc-800">
+                <tr key={col} className="border-b dark:border-[var(--border-subtle)]">
                   <td className="p-2 font-medium">{col}</td>
                   <td className="p-2">{data.type}</td>
                   <td className="p-2">{data.count}</td>
@@ -103,21 +105,30 @@ export function JsonPathQueryBuilder() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Query JSON data using dot-notation path expressions with wildcard support.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
+        <DualPanel
+          input={<>
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">JSON Data</label>
-          <textarea aria-label="JSON Data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" />
+          <textarea aria-label="JSON Data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full mt-1 p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" />
         </div>
         <div>
           <label className="text-xs font-medium text-[var(--text-secondary)]">JSON Path</label>
-          <input aria-label="JSON Path" value={path} onChange={e => setPath(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="$.users[*].name" />
+          <input aria-label="JSON Path" value={path} onChange={e => setPath(e.target.value)} className="w-full mt-1 p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder="$.users[*].name" />
         </div>
         <button onClick={query} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg text-sm transition">Execute</button>
-        {result && (
+          </>}
+          output={<>
+        {result ? (
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Result</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{result}</pre>
+            <pre className="mt-1 p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{result}</pre>
           </div>
+        ) : (
+          <p className="text-sm text-[var(--text-muted)]">Result appears here</p>
         )}
+          </>}
+          actions={<CalcActions result={result} downloadData={result} downloadFilename='json-path-result.txt' />}
+        />
       </div>
     </div>
   );
@@ -156,12 +167,12 @@ export function JsonTreeViewer() {
         <p className="text-sm text-[var(--text-secondary)] mt-1">Visualize JSON structure as an indented tree — see nested objects and arrays at a glance.</p>
       </div>
       <div className="w-full bg-[var(--bg-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-xl space-y-4">
-        <textarea aria-label="JSON data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
+        <textarea aria-label="JSON data" value={json} onChange={e => setJson(e.target.value)} rows={4} className="w-full p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm font-mono" placeholder="Paste JSON..." />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         {parsed && (
           <div>
             <label className="text-xs font-medium text-[var(--text-secondary)]">Tree</label>
-            <pre className="mt-1 p-3 rounded-lg border dark:border-zinc-700 bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{renderTree(parsed)}</pre>
+            <pre className="mt-1 p-3 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-sm font-mono whitespace-pre-wrap">{renderTree(parsed)}</pre>
           </div>
         )}
       </div>

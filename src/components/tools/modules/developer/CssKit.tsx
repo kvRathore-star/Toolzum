@@ -16,7 +16,7 @@ const Inp = ({ label, value, onChange, suffix, small }: { label: string; value: 
 };
 
 const CalcBtn = ({ onClick, label }: { onClick: () => void; label: string }) => (
-  <button onClick={onClick} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
+  <button onClick={onClick} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white text-[11px] font-bold py-1.5 rounded-lg transition-all active:scale-[0.98]">{label}</button>
 );
 
 const Result = ({ value }: { value: string }) => (
@@ -26,7 +26,7 @@ const Result = ({ value }: { value: string }) => (
 const PresetBar = ({ presets }: { presets: { label: string; apply: () => void }[] }) => (
   <div className="flex flex-wrap gap-2 mb-4">
     {presets.map((p) => (
-      <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+      <button key={p.label} onClick={p.apply}           className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
         {p.label}
       </button>
     ))}
@@ -35,8 +35,8 @@ const PresetBar = ({ presets }: { presets: { label: string; apply: () => void }[
 
 const CopyDownload = ({ content, filename, label }: { content: string; filename: string; label?: string }) => (
   <div className="flex items-center gap-3">
-    <button onClick={() => { clipboardWrite(content); toast.success(`${label || 'CSS'} copied!`); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy {label || 'CSS'}</button>
-    <button onClick={() => { const blob = new Blob([content], { type: 'text/css' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+    <button onClick={() => { clipboardWrite(content); toast.success(`${label || 'CSS'} copied!`); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy {label || 'CSS'}</button>
+    <button onClick={() => { const blob = new Blob([content], { type: 'text/css' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
   </div>
 );
 

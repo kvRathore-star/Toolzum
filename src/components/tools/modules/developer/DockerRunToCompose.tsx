@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 function parseDockerRun(cmd: string): { yaml: string; warnings: string[] } {
   const parts = cmd.trim().split(/\s+/);
@@ -216,39 +217,28 @@ export default function DockerRunToCompose() {
       <div className="flex flex-wrap gap-2 mb-2">
         {presets.map((p, i) => (
           <button key={i} onClick={p.apply}
-            className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-[10px] font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+            className="px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-lg text-[10px] font-medium hover:bg-[var(--accent)]/20 transition-colors">
             {p.label}
           </button>
         ))}
       </div>
+      <DualPanel
+        input={<>
       <textarea aria-label="docker run -d --name myapp -p 8080:80 nginx" value={input} onChange={e => setInput(e.target.value)} placeholder="docker run -d --name myapp -p 8080:80 nginx"
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono h-[100px]" />
       <button onClick={convert} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Convert to Compose</button>
+        </>}
+        output={<>
       {warnings.length > 0 && (
         <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-3 text-xs text-yellow-700 dark:text-yellow-300">
           <div className="font-bold mb-1">Warnings:</div>
           {warnings.map((w, i) => <div key={i}>⚠ {w}</div>)}
         </div>
       )}
-      {output && (
-        <div className="relative">
           <textarea aria-label="Warnings:" value={output} readOnly className="w-full h-[350px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-emerald-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-          <div className="absolute top-3 right-3 flex gap-2">
-            <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
-              className="text-[11px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Copy</button>
-            <button onClick={() => {
-              const blob = new Blob([output], { type: 'text/plain' });
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              a.href = url;
-              a.download = 'docker-compose.yml';
-              a.click();
-              URL.revokeObjectURL(url);
-              toast.success('Downloaded!');
-            }} className="text-[11px] text-[var(--accent)] hover:underline bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)]">Download</button>
-          </div>
-        </div>
-      )}
+        </>}
+        actions={<CalcActions result={output} downloadData={output} downloadFilename='docker-compose.yml' />}
+      />
     </div>
   );
 }

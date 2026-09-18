@@ -54,7 +54,7 @@ export default function RsaKeyGenerator() {
         <h3 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase">{title}</h3>
         {pem && <button onClick={() => copy(pem, title)} className="text-[10px] text-[var(--accent)] hover:underline flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>}
       </div>
-      <textarea aria-label={title + " output"} value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-zinc-900 dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
+      <textarea aria-label={title + " output"} value={pem} readOnly placeholder={`Click "Generate" to create a ${title.toLowerCase()}...`} rows={8} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-[11px] text-[var(--text-primary)] dark:text-emerald-400 placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
       {pem && (
         <div className="text-[10px] text-[var(--text-muted)]">
           {pem.split('\n').filter(l => !l.startsWith('---')).join('').length} characters
@@ -69,7 +69,7 @@ export default function RsaKeyGenerator() {
         <div className="flex items-center gap-4 flex-wrap">
           <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
             {[2048, 4096].map(n => (
-              <button key={n} onClick={() => setKeySize(n)} disabled={loading} className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${keySize === n ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button key={n} onClick={() => setKeySize(n)} disabled={loading} className={`px-4 py-2 text-xs font-bold rounded-lg transition-all ${keySize === n ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 {n}-bit
               </button>
             ))}

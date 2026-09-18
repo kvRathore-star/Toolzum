@@ -140,16 +140,16 @@ export default function EmailNormalizer() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.gmail!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Gmail with dots</button>
-        <button onClick={() => setInput(PRESETS.yahoo!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Yahoo</button>
-        <button onClick={() => setInput(PRESETS.corporate!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Corporate</button>
+        <button onClick={() => setInput(PRESETS.gmail!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Gmail with dots</button>
+        <button onClick={() => setInput(PRESETS.yahoo!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Yahoo</button>
+        <button onClick={() => setInput(PRESETS.corporate!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Corporate</button>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
         <label htmlFor="lbl-emailnormalizer-email-input-one-per-line" className="text-[11px] font-bold text-[var(--text-muted)] uppercase mb-2 block">Email Input (one per line)</label>
         <textarea id="lbl-emailnormalizer-email-input-one-per-line" aria-label="Email Input (one per line)" value={input} onChange={e => setInput(e.target.value)} placeholder="Enter emails, one per line..."
           className="w-full h-[200px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-        <button onClick={normalizeAll} className="w-full mt-3 px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">
+        <button onClick={normalizeAll} className="w-full mt-3 px-5 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">
           Normalize & Validate
         </button>
       </div>
@@ -159,9 +159,9 @@ export default function EmailNormalizer() {
           <div className="flex justify-between items-center mb-3">
             <span className="text-[11px] font-bold text-[var(--text-muted)] uppercase">Results ({results.length} processed)</span>
             <div className="flex gap-2">
-              <button onClick={copyAllNormalized} className="text-[10px] text-blue-600 hover:underline font-medium">Copy All Normalized</button>
-              <button onClick={copyOutput} className="text-[10px] text-blue-600 hover:underline font-medium">Copy Report</button>
-              <button onClick={downloadOutput} className="text-[10px] text-emerald-600 hover:underline font-medium">Download</button>
+              <button onClick={copyAllNormalized} className="text-[10px] text-[var(--accent)] hover:underline font-medium">Copy All Normalized</button>
+              <button onClick={copyOutput} className="text-[10px] text-[var(--accent)] hover:underline font-medium">Copy Report</button>
+              <button onClick={downloadOutput} className="text-[10px] text-[var(--accent)] hover:underline font-medium">Download</button>
             </div>
           </div>
           <div className="space-y-1">

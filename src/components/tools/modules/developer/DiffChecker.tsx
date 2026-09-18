@@ -35,7 +35,7 @@ export default function DiffChecker() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Split className="w-6 h-6 text-[var(--accent)]" />
           Text Diff Checker
@@ -105,10 +105,10 @@ export default function DiffChecker() {
               Comparison Output
             </h3>
 
-            <div className="p-5 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl text-xs font-mono leading-relaxed whitespace-pre-wrap max-h-[400px] overflow-y-auto">
+            <div className="p-5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono leading-relaxed whitespace-pre-wrap max-h-[400px] overflow-y-auto">
               {diffs.map(([op, textVal], idx) => {
                 if (op === 0) {
-                  return <span key={idx} className="text-zinc-800 dark:text-zinc-300">{textVal}</span>;
+                  return <span key={idx} className="text-[var(--text-secondary)]">{textVal}</span>;
                 }
                 if (op === 1) {
                   return (
