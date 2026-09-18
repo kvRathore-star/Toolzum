@@ -2,41 +2,18 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 import { Section } from '../MiscToolsShared';
 
-function CopyBtn({ text }: { text: string }) {
-  return (
-    <button onClick={() => { clipboardWrite(text); toast.success('Copied!'); }}
-      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-  );
-}
 
-function CopyDownload({ output, filename = 'output.txt' }: { output: string; filename?: string }) {
-  return (
-    <div className="flex gap-3">
-      <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }}
-        className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-      <button onClick={() => {
-        const blob = new Blob([output], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
-        toast.success('Downloaded!');
-      }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-    </div>
-  );
-}
 
 function PresetBar({ presets }: { presets: { label: string; apply: () => void }[] }) {
   return (
     <div className="flex flex-wrap gap-2 mb-2">
       {presets.map((p, i) => (
         <button key={i} onClick={p.apply}
-          className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-[10px] font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
+          className="px-3 py-1 bg-[var(--accent)]/10 text-[var(--accent)] rounded-lg text-[10px] font-medium hover:bg-[var(--accent)]/20 transition-colors">
           {p.label}
         </button>
       ))}
@@ -125,21 +102,23 @@ export function ScssToCssConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SCSS to CSS Converter</h2>
+        <DualPanel
+          input={<>
         <PresetBar presets={presets} />
         <textarea aria-label="SCSS to CSS Converter" rows={8} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {errors.length > 0 && (
           <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-2 text-[10px] text-red-600 dark:text-red-400">
             {errors.map((e, i) => <div key={i}>⚠ {e}</div>)}
           </div>
         )}
-        {output && (
-          <div className="space-y-2">
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            <CopyDownload output={output} filename="output.css" />
-          </div>
-        )}
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='scss-to-css.txt' />}
+        />
       </div>
     </div>
   );
@@ -259,16 +238,18 @@ export function StylusToCssConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Stylus to CSS Converter</h2>
+        <DualPanel
+          input={<>
         <PresetBar presets={presets} />
         <textarea aria-label="Stylus to CSS Converter" rows={8} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && (
-          <div className="space-y-2">
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            <CopyDownload output={output} filename="output.css" />
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='stylus-to-css.txt' />}
+        />
       </div>
     </div>
   );
@@ -403,22 +384,19 @@ export function ProtobufDecoder() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Protobuf Decoder</h2>
+        <DualPanel
+          input={<>
         <p className="text-xs text-[var(--text-secondary)]">Decode protobuf wire format hex to readable field structure. Supports varints, strings, nested messages, and fixed-width types.</p>
         <PresetBar presets={presets} />
         <textarea aria-label="Protobuf hex input" rows={3} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste hex bytes (e.g. 0a03626f621205776f726c64)"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
-        {output && (
-          <div className="space-y-2">
-            {fieldCount > 0 && (
-              <div className="flex gap-4 text-[10px] text-[var(--text-secondary)]">
-                <span>{fieldCount} field(s) decoded</span>
-              </div>
-            )}
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
-            <CopyDownload output={output} filename="protobuf-decode.txt" />
-          </div>
-        )}
+        <button onClick={decode} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='protobuf-decode.txt' />}
+        />
       </div>
     </div>
   );
@@ -455,16 +433,18 @@ export function TailwindToCssConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Tailwind to CSS Converter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Tailwind to CSS Converter" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Space-separated Tailwind classes"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <p className="text-xs text-[var(--text-secondary)]">Supports 40+ common Tailwind classes.</p>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && (
-          <div className="space-y-1">
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            <CopyBtn text={output} />
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='tailwind-to-css.txt' />}
+        />
       </div>
     </div>
   );
@@ -496,15 +476,17 @@ export function ProtoSchemaConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Proto Schema to TS + JSON</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Proto Schema to TS + JSON" rows={7} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate TS + JSON</button>
-        {output && (
-          <div className="space-y-1">
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
-            <CopyBtn text={output} />
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Generate TS + JSON</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='proto-schema.txt' />}
+        />
       </div>
     </div>
   );
@@ -534,10 +516,17 @@ export function TsconfigAnalyzer() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">tsconfig Analyzer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="tsconfig Analyzer" rows={5} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
+        <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Analyze</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='tsconfig-analyzer.txt' />}
+        />
       </div>
     </div>
   );
@@ -565,15 +554,17 @@ export function TypeScriptFormatter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">TypeScript Formatter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="TypeScript Formatter" rows={5} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={format} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Format</button>
-        {output && (
-          <div className="space-y-1">
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>
-            <CopyBtn text={output} />
-          </div>
-        )}
+        <button onClick={format} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Format</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='typescript-formatter.txt' />}
+        />
       </div>
     </div>
   );
@@ -597,6 +588,8 @@ export function StringTemplateTester() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">String Template Tester</h2>
+        <DualPanel
+          input={<>
         <div>
           <label htmlFor="lbl-stylecodekitwidgets-template" className="text-xs text-[var(--text-secondary)] mb-1 block">Template</label>
           <input id="lbl-stylecodekitwidgets-template" aria-label="Template" type="text" value={template} onChange={e => setTemplate(e.target.value)} placeholder="Template with {{var}} placeholders"
@@ -607,8 +600,13 @@ export function StringTemplateTester() {
           <textarea id="lbl-stylecodekitwidgets-variables-json" aria-label="Variables (JSON)" rows={3} value={vars} onChange={e => setVars(e.target.value)}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
-        <button onClick={test} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Test</button>
-        {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
+        <button onClick={test} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Test</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap border border-[var(--border-subtle)] min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='string-template-tester.txt' />}
+        />
       </div>
     </div>
   );
@@ -644,24 +642,27 @@ export function TestDataGenerator() {
 
   return (
     <Section title="Test Data Generator">
+        <DualPanel
+          input={<>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
-          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg text-xs font-medium hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors">{p.label}</button>
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 bg-[var(--accent)]/10 text-[var(--accent)] rounded-lg text-xs font-medium hover:bg-[var(--accent)]/20 transition-colors">{p.label}</button>
         ))}
       </div>
-      <div className="space-y-4">
         <label htmlFor="lbl-stylecodekitwidgets-schema-json-array-of-name-type" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Schema (JSON array of {"{name, type}"})</label>
         <textarea id="lbl-stylecodekitwidgets-schema-json-array-of-name-type" value={schema} onChange={e => setSchema(e.target.value)} rows={6} aria-label="Schema (JSON array)" placeholder='[{"name":"id","type":"number"},{"name":"email","type":"email"}]'
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-green-500/50 resize-y" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" />
 
-        <button onClick={generate} className="px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate</button>
+        <button onClick={generate} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl text-sm transition-colors w-full sm:w-auto">Generate</button>
 
-        {output && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 max-h-[300px] overflow-auto">
-            <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
+                  </>}
+          output={<>
+            <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 max-h-[300px] overflow-auto">
+            <pre className="text-xs font-mono text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
           </div>
-        )}
-      </div>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='test-data-generator.txt' />}
+        />
     </Section>
   );
 }
