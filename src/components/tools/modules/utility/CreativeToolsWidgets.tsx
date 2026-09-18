@@ -433,7 +433,7 @@ export function EmojiPicker() {
   return (
     <div className="max-w-3xl mx-auto space-y-4 animate-in fade-in duration-500">
       <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
-        <SmilePlus className="w-6 h-6 text-blue-600 dark:text-blue-400" /> Emoji Picker
+        <SmilePlus className="w-6 h-6 text-[var(--accent)]" /> Emoji Picker
       </h2>
       <p className="text-sm text-[var(--text-secondary)]">
         Browse 400+ emoji organized by category. Click any emoji to copy it.
@@ -442,9 +442,9 @@ export function EmojiPicker() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
           <input aria-label="Search emoji" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search emoji..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           {lastCopied && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl px-4 py-3 flex items-center gap-3">
+            <div className="bg-[var(--accent)]/10/20 rounded-xl px-4 py-3 flex items-center gap-3">
               <span className="text-2xl">{lastCopied}</span>
-              <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Copied! Click another to replace.</span>
+              <span className="text-xs text-[var(--accent)] font-medium">Copied! Click another to replace.</span>
             </div>
           )}
           <div className="text-[11px] text-[var(--text-muted)]">{filtered.length} emoji found</div>
@@ -509,17 +509,17 @@ export function ASCIIArtGenerator() {
     >
       <div className="space-y-4">
         <label htmlFor="lbl-creativetoolswidgets-input-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
-        <input id="lbl-creativetoolswidgets-input-text" aria-label="Input Text" value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+        <input id="lbl-creativetoolswidgets-input-text" aria-label="Input Text" value={asciiInput} onChange={e => setAsciiInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
           {['simple', 'block', 'bubble', 'fancy', 'digital'].map(s => (
-            <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+            <button key={s} onClick={() => setAsciiStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${asciiStyle === s ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
               {s.charAt(0).toUpperCase() + s.slice(1)}
             </button>
           ))}
         </div>
 
         {asciiResult && (
-          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
+          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-5">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
               <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
@@ -532,7 +532,7 @@ export function ASCIIArtGenerator() {
         {!asciiResult && (
           <p className="text-[var(--text-muted)] text-sm text-center">Enter text and select style to generate ASCII art</p>
         )}
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
+        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-5">
           <h3 className="text-[10px] font-bold text-[var(--text-muted)] uppercase mb-2">Character Map Reference</h3>
           <div className="text-xs font-mono text-[var(--text-secondary)] leading-loose">
             <span className="text-[var(--text-primary)]">@</span> 80-100%{' '}
@@ -666,7 +666,7 @@ export function ASCIIFontGenerator() {
     >
       <div className="space-y-4">
         <label htmlFor="lbl-creativetoolswidgets-input-text-2" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
-        <input id="lbl-creativetoolswidgets-input-text-2" aria-label="Input Text" value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+        <input id="lbl-creativetoolswidgets-input-text-2" aria-label="Input Text" value={fontInput} onChange={e => setFontInput(e.target.value)} placeholder="Enter text..." className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
           {['standard'].map(s => (
             <button key={s} onClick={() => setFontStyle(s)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${fontStyle === s ? 'bg-[var(--bg-elevated)] text-purple-600 dark:text-purple-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
@@ -676,7 +676,7 @@ export function ASCIIFontGenerator() {
         </div>
 
         {fontResult && (
-          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-5">
+          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-5">
             <div className="flex justify-between items-center mb-2">
               <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
               <button onClick={() => copy(fontResult, 'ASCII font')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>

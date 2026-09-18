@@ -64,7 +64,7 @@ export function HashVerifier() {
               <div className="flex items-center gap-2 text-lg mb-2">{match ? '✓' : '✗'} <span>{match ? 'Hash matches!' : 'Hash does not match'}</span></div>
               <p className="text-xs font-mono break-all opacity-80">Computed: {computed}</p>
             </div>
-            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy Computed Hash'}</button>
           </div>
         ) : null
       }
@@ -76,11 +76,11 @@ export function HashVerifier() {
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Original Text</label>
         <input aria-label="Original Text" type="text" value={text} onChange={e => { setText(e.target.value); setMatch(null); }} placeholder="Enter text..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hash to Verify Against</label>
         <input aria-label="Hash to Verify Against" type="text" value={hash} onChange={e => { setHash(e.target.value); setMatch(null); }} placeholder="Enter hash..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
       </div>
     </CalculatorShell>
   );
@@ -117,10 +117,10 @@ export function HashFileGenerator() {
       {hash && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400">
           <div className="flex justify-between items-center mb-1">
-            <span className="text-xs font-semibold text-zinc-500">{algo} Hash</span>
+            <span className="text-xs font-semibold text-[var(--text-muted)]">{algo} Hash</span>
             <button onClick={copy} className="px-2.5 py-1 text-xs bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 break-all">{hash}</p>
+          <p className="font-mono text-sm text-[var(--text-primary)] break-all">{hash}</p>
         </div>
       )}
     </Section>
@@ -168,13 +168,13 @@ export function HmacGenerator() {
       {hmac && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-pink-400">
           <div className="flex justify-between items-center mb-1">
-            <span className="text-xs font-semibold text-zinc-500">HMAC-{algo} (hex)</span>
+            <span className="text-xs font-semibold text-[var(--text-muted)]">HMAC-{algo} (hex)</span>
             <button onClick={copy} className="px-2.5 py-1 text-xs bg-pink-500 hover:bg-pink-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 break-all">{hmac}</p>
-          <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-zinc-200 dark:border-zinc-700 text-xs text-zinc-500">
-            <div>Algorithm: <span className="font-mono text-zinc-700 dark:text-zinc-300">{algo}</span></div>
-            <div>Length: <span className="font-mono text-zinc-700 dark:text-zinc-300">{hmac.length / 2} bytes</span></div>
+          <p className="font-mono text-sm text-[var(--text-primary)] break-all">{hmac}</p>
+          <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-[var(--border-subtle)] text-xs text-[var(--text-muted)]">
+            <div>Algorithm: <span className="font-mono text-[var(--text-primary)]">{algo}</span></div>
+            <div>Length: <span className="font-mono text-[var(--text-primary)]">{hmac.length / 2} bytes</span></div>
           </div>
         </div>
       )}

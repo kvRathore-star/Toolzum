@@ -41,8 +41,8 @@ export default function TextReplacer() {
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">Copy</button>
-                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'replaced.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">Download</button>
+                <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Copy</button>
+                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'replaced.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Download</button>
               </div>
             </div>
             <textarea aria-label="Replacement result" readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />

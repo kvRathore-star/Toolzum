@@ -41,8 +41,8 @@ function OutputBlock({ value }: { value: string }) {
   if (!value) return null;
   return (
     <div className="mt-3">
-      <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{value}</pre>
-      <button onClick={() => copy(value)} className="mt-1 px-4 py-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+      <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">{value}</pre>
+      <button onClick={() => copy(value)} className="mt-1 px-4 py-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-medium transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
     </div>
   );
 }
@@ -329,7 +329,7 @@ export function PinGenerator() {
         <div className="flex gap-1 flex-wrap">
           {[4, 5, 6, 8, 10].map(n => (
             <button key={n} onClick={() => { setDigits(n); gen(); }}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${digits === n ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}>
               {n}
             </button>
           ))}
@@ -371,7 +371,7 @@ export function LicenseKeyGenerator() {
 
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format (X = any char, - = separator)</label>
       <input aria-label="Format (X = any char, - = separator)" type="text" value={format} onChange={e => setFormat(e.target.value)} placeholder="XXXXX-XXXXX-XXXXX"
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
 
       {out && <OutputBlock value={out} />}
     </CalculatorShell>
@@ -414,12 +414,12 @@ export function ImagePlaceholderGenerator() {
         <div>
           <label htmlFor="lbl-generatorwidgets-width" className={labelClass}>Width</label>
           <input id="lbl-generatorwidgets-width" aria-label="Width" type="number" min={50} max={2000} value={width} onChange={e => setWidth(Number(e.target.value))}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
         <div>
           <label htmlFor="lbl-generatorwidgets-height" className={labelClass}>Height</label>
           <input id="lbl-generatorwidgets-height" aria-label="Height" type="number" min={50} max={2000} value={height} onChange={e => setHeight(Number(e.target.value))}
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         </div>
       </div>
 
@@ -509,19 +509,19 @@ export function OpenGraphGenerator() {
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title</label>
         <input aria-label="Title" type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="My Amazing Website"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description</label>
         <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Discover the best content..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Website URL</label>
         <input aria-label="Website URL" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Image URL</label>
         <input aria-label="Image URL" type="url" value={img} onChange={e => setImg(e.target.value)} placeholder="https://example.com/image.jpg"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         {out && <OutputBlock value={out} />}
       </div>
@@ -583,7 +583,7 @@ export function OauthPkceGenerator() {
         <button onClick={generate} disabled={loading} className={`w-full px-5 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}>
           {loading ? 'Generating...' : 'Generate PKCE Pair'}
         </button>
-        {out && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-64 overflow-y-auto">{out}</pre>}
+        {out && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap max-h-64 overflow-y-auto">{out}</pre>}
       </div>
     </CalculatorShell>
   );

@@ -45,17 +45,17 @@ export default function RandomNumberGenerator() {
           <div>
             <label htmlFor="lbl-randomnumbergenerator-min" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Min</label>
             <input id="lbl-randomnumbergenerator-min" aria-label="Min" type="number" value={min} onChange={e => setMin(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label htmlFor="lbl-randomnumbergenerator-max" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Max</label>
             <input id="lbl-randomnumbergenerator-max" aria-label="Max" type="number" value={max} onChange={e => setMax(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
           <div>
             <label htmlFor="lbl-randomnumbergenerator-count" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
             <input id="lbl-randomnumbergenerator-count" aria-label="Count" type="number" min="1" max="10000" value={count} onChange={e => setCount(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
         </div>
 

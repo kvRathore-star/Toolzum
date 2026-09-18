@@ -14,7 +14,7 @@ function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
   const id = React.useId();
-  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -37,7 +37,7 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
         <button onClick={copy} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
@@ -84,8 +84,8 @@ export function TsvCsvConverter() {
     >
       <div className="space-y-4">
         <div className="flex gap-2 mb-3">
-          <button onClick={() => setMode('tsv-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'tsv-to-csv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>TSV → CSV</button>
-          <button onClick={() => setMode('csv-to-tsv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-tsv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → TSV</button>
+          <button onClick={() => setMode('tsv-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'tsv-to-csv' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>TSV → CSV</button>
+          <button onClick={() => setMode('csv-to-tsv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-tsv' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → TSV</button>
         </div>
         <Input label={mode === 'tsv-to-csv' ? 'TSV Input' : 'CSV Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'tsv-to-csv' ? 'col1\tcol2\tcol3\nval1\tval2\tval3' : 'col1,col2,col3\nval1,val2,val3'} />
         <Output value={output} label={mode === 'tsv-to-csv' ? 'CSV Output' : 'TSV Output'} />
@@ -208,7 +208,7 @@ export function JsonToonConverter({ initialMode }: { initialMode?: 'json-to-toon
         <div className="flex flex-wrap gap-1.5 mb-4">
           {MODES.map(m => (
             <button key={m.id} onClick={() => { setMode(m.id); setInput(''); setOutput(''); }}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${mode === m.id ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'}`}>
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${mode === m.id ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'}`}>
               {m.label}
             </button>
           ))}
@@ -272,7 +272,7 @@ export function CsvDataCleaner() {
     >
       <div className="space-y-4">
         <Input label="CSV Input" value={input} onChange={setInput} rows={6} placeholder="name,email,phone\nJohn,john@Example.COM,123-456-7890" />
-        <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-3 cursor-pointer">
+        <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-3 cursor-pointer">
           <input type="checkbox" checked={colAware} onChange={e => setColAware(e.target.checked)} className="rounded" />
           Column-aware cleaning (lowercases emails, strips phone non-digits, lowercases notes)
         </label>
@@ -406,8 +406,8 @@ export function CsvHtmlTableConverter() {
     >
       <div className="space-y-4">
         <div className="flex gap-2 mb-3">
-          <button onClick={() => setMode('csv-to-html')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-html' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → HTML</button>
-          <button onClick={() => setMode('html-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'html-to-csv' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>HTML → CSV</button>
+          <button onClick={() => setMode('csv-to-html')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-html' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → HTML</button>
+          <button onClick={() => setMode('html-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'html-to-csv' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>HTML → CSV</button>
         </div>
         <Input label={mode === 'csv-to-html' ? 'CSV Input' : 'HTML Table Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'csv-to-html' ? 'name,age\nAlice,30' : '<table><tr><th>Name</th></tr><tr><td>Alice</td></tr></table>'} />
         {mode === 'csv-to-html' && preview && (
@@ -490,13 +490,13 @@ return (
         <div className="flex flex-wrap gap-2 mb-3">
           {[{ v: 'validate', l: 'Validate' }, { v: 'to-json', l: 'To JSON' }, { v: 'minify', l: 'Minify' }].map(({ v, l }) => (
             <button key={v} onClick={() => setMode(v as 'validate' | 'to-json' | 'minify')}
-              className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{l}</button>
+              className={`px-4 py-2 text-sm font-semibold rounded-xl transition-all ${mode === v ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{l}</button>
           ))}
         </div>
         <Input label="YAML Input" value={input} onChange={setInput} rows={6} placeholder="name: Alice
 age: 30" />
         <Output value={output} label={mode === 'validate' ? 'Validation Results' : mode === 'to-json' ? 'JSON Output' : 'Minified YAML'} />
-        <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <Link href="/converter/yaml-json-converter" className="text-blue-600 dark:text-blue-400 hover:underline">YAML↔JSON Converter</Link>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <Link href="/converter/yaml-json-converter" className="text-[var(--accent)] hover:underline">YAML↔JSON Converter</Link>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
       </div>
     </CalculatorShell>
   );

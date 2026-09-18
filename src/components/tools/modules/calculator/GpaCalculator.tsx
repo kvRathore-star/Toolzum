@@ -22,7 +22,7 @@ export default function GpaCalculator() {
     ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">GPA</div>
-      <div className={`text-lg font-bold ${gpa >= 3.5 ? 'text-emerald-700 dark:text-emerald-400' : gpa >= 3.0 ? 'text-blue-700 dark:text-blue-400' : gpa >= 2.0 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{gpa.toFixed(2)}</div>
+      <div className={`text-lg font-bold ${gpa >= 3.5 ? 'text-emerald-700 dark:text-emerald-400' : gpa >= 3.0 ? 'text-[var(--accent)]' : gpa >= 2.0 ? 'text-amber-700 dark:text-amber-400' : 'text-red-700 dark:text-red-400'}`}>{gpa.toFixed(2)}</div>
     </div>
     )
   );

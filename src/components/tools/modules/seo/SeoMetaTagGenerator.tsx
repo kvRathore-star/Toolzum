@@ -30,17 +30,17 @@ export default function SeoMetaTagGenerator() {
         <div>
           <label htmlFor="lbl-seometataggenerator-title-60" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title (<span id="title-len">{title.length}</span>/60)</label>
           <input id="lbl-seometataggenerator-title-60" aria-label="Title (max 60 characters)" type="text" value={title} onChange={e => setTitle(e.target.value)}
-            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
         <div>
           <label htmlFor="lbl-seometataggenerator-description-160" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Description (<span id="desc-len">{description.length}</span>/160)</label>
           <textarea id="lbl-seometataggenerator-description-160" aria-label="Description (max 160 characters)" value={description} onChange={e => setDescription(e.target.value)} rows={3} placeholder="Compelling description for search engines and social media..."
-            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" />
         </div>
         <div>
           <label htmlFor="lbl-seometataggenerator-keywords" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Keywords</label>
           <input id="lbl-seometataggenerator-keywords" aria-label="Keywords" type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="toolzum, online tools, free tools"
-            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
 
         {result && (

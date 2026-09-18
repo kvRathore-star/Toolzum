@@ -53,8 +53,8 @@ export default function CombinationCalculator() {
                 <div className="text-xs text-[var(--text-secondary)] mt-1">Order doesn&apos;t matter</div>
               </div>
               <div className="text-center">
-                <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">P(n, r) — Permutations</div>
-                <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+                <div className="text-xs text-[var(--accent)] dark:text-blue-400 font-medium mb-1">P(n, r) — Permutations</div>
+                <div className="text-2xl font-bold text-[var(--accent)]">
                   {isFinite(p) ? p.toLocaleString() : '∞'}
                 </div>
                 <div className="text-xs text-[var(--text-secondary)] mt-1">Order matters</div>
@@ -103,13 +103,13 @@ export default function CombinationCalculator() {
           <div className="flex-1">
             <label htmlFor="lbl-combinationcalculator-n-total-items" className={labelClass}>n (total items)</label>
             <input id="lbl-combinationcalculator-n-total-items" aria-label="n (total items)" type="number" min="0" value={n} onChange={e => setN(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
-          <button onClick={swap} className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors text-sm" title="Swap n and r">⇄</button>
+          <button onClick={swap} className="px-3 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-zinc-300 transition-colors text-sm" title="Swap n and r">⇄</button>
           <div className="flex-1">
             <label htmlFor="lbl-combinationcalculator-r-choose" className={labelClass}>r (choose)</label>
             <input id="lbl-combinationcalculator-r-choose" aria-label="r (choose)" type="number" min="0" value={r} onChange={e => setR(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
         </div>
       </div>

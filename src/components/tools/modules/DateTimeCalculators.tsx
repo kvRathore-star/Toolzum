@@ -226,7 +226,7 @@ export function DayOfYearCalculator() {
             <span className="text-sm font-bold text-[var(--text-primary)]">{pct.toFixed(1)}%</span>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-indigo-500 via-blue-500 to-emerald-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+            <div className="h-full bg-gradient-to-r from-indigo-500 via-[var(--accent-ink)] to-emerald-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
           </div>
         </div>
       )}

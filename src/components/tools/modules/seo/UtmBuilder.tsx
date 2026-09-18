@@ -51,7 +51,7 @@ export default function UtmBuilder() {
       <div className="space-y-4">
         <label htmlFor="lbl-utmbuilder-base-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
         <input id="lbl-utmbuilder-base-url" aria-label="Base URL" type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
         {urlError && (
           <p role="alert" className="text-xs text-red-600 dark:text-red-400 font-medium">{urlError}</p>
         )}
@@ -70,7 +70,7 @@ export default function UtmBuilder() {
                 else if (p.key === 'utm_term') setTerm(e.target.value);
                 else if (p.key === 'utm_content') setContent(e.target.value);
               }} placeholder={p.desc}
-                className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
+                className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50" />
             </div>
           ))}
         </div>
@@ -79,7 +79,7 @@ export default function UtmBuilder() {
           <div className="space-y-2">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Result</label>
             <div className="flex gap-2">
-              <input aria-label="UTM URL" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100" />
+              <input aria-label="UTM URL" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)]" />
               <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors shrink-0">Copy</button>
             </div>
             <div className="text-xs text-[var(--text-muted)]">
@@ -88,7 +88,7 @@ export default function UtmBuilder() {
           </div>
         )}
 
-        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-secondary)] mb-2">UTM Parameter Guide</div>
           <div className="grid grid-cols-2 gap-1 text-xs text-[var(--text-muted)]">
             <div><span className="font-mono text-cyan-600 dark:text-cyan-400">utm_source</span> — Traffic source (google, newsletter, facebook)</div>

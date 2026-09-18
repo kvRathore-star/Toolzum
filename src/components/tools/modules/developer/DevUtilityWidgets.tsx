@@ -58,9 +58,9 @@ export function PortNumberLookup() {
     <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
       <label htmlFor="lbl-devutilitywidgets-port-number" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
       <input id="lbl-devutilitywidgets-port-number" aria-label="Port Number" type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -94,9 +94,9 @@ export function UserAgentParser() {
     <CalculatorShell category="Developer" title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
       <label htmlFor="lbl-devutilitywidgets-user-agent-string" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label>
       <textarea id="lbl-devutilitywidgets-user-agent-string" aria-label="User-Agent String" value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
 
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -128,9 +128,9 @@ export function QueryStringParser() {
     <CalculatorShell category="Developer" title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
       <label htmlFor="lbl-devutilitywidgets-query-string" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label>
       <input id="lbl-devutilitywidgets-query-string" aria-label="Query String" type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
 
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
+      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -200,13 +200,13 @@ export function SseEventFormatter() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.standard!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Standard SSE</button>
-        <button onClick={() => setInput(PRESETS.multiline!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Multi-line data</button>
+        <button onClick={() => setInput(PRESETS.standard!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Standard SSE</button>
+        <button onClick={() => setInput(PRESETS.multiline!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Multi-line data</button>
       </div>
       <Section title="SSE Event Formatter">
         <div className="space-y-3">
-          <div><label htmlFor="lbl-devutilitywidgets-sse-event-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea id="lbl-devutilitywidgets-sse-event-text" aria-label="SSE Event Text" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
-          <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
+          <div><label htmlFor="lbl-devutilitywidgets-sse-event-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">SSE Event Text</label><textarea id="lbl-devutilitywidgets-sse-event-text" aria-label="SSE Event Text" value={input} onChange={e => setInput(e.target.value)} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+          <button onClick={format} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-[var(--accent-ink)] hover:from-indigo-500 hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Format</button>
 
           {events.length > 0 && (
             <div className="space-y-2">
@@ -221,7 +221,7 @@ export function SseEventFormatter() {
             </div>
           )}
 
-          {output && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><div className="flex gap-2 mt-2"><button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">{copied ? 'Copied!' : 'Copy'}</button><button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button></div></div>}
+          {output && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><div className="flex gap-2 mt-2"><button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg hover:text-[var(--text-primary)] transition-colors">{copied ? 'Copied!' : 'Copy'}</button><button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">Download</button></div></div>}
         </div>
       </Section>
     </div>
@@ -304,13 +304,13 @@ export function RateLimitHeaderParser() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => { setHeaders(PRESETS.github!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">GitHub API</button>
-        <button onClick={() => { setHeaders(PRESETS.twitter!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Twitter API</button>
+        <button onClick={() => { setHeaders(PRESETS.github!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">GitHub API</button>
+        <button onClick={() => { setHeaders(PRESETS.twitter!); setOutput(''); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Twitter API</button>
       </div>
       <Section title="Rate Limit Header Parser">
         <div className="space-y-3">
-          <div><label htmlFor="lbl-devutilitywidgets-rate-limit-headers" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea id="lbl-devutilitywidgets-rate-limit-headers" aria-label="Rate Limit Headers" value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
-          <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
+          <div><label htmlFor="lbl-devutilitywidgets-rate-limit-headers" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Rate Limit Headers</label><textarea id="lbl-devutilitywidgets-rate-limit-headers" aria-label="Rate Limit Headers" value={headers} onChange={e => setHeaders(e.target.value)} rows={5} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" /></div>
+          <button onClick={parse} className="w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-[var(--accent-ink)] hover:from-indigo-500 hover:to-[var(--accent-ink)] text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg">Parse</button>
 
           {usagePct > 0 && (
             <div className="mt-3">
@@ -318,14 +318,14 @@ export function RateLimitHeaderParser() {
                 <span>Usage</span>
                 <span>{usagePct.toFixed(1)}%</span>
               </div>
-              <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+              <div className="w-full h-3 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                 <div className={'h-full rounded-full transition-all ' + (usagePct > 80 ? 'bg-red-500' : usagePct > 50 ? 'bg-yellow-500' : 'bg-green-500')} style={{ width: Math.min(usagePct, 100) + '%' }} />
               </div>
               {timeUntilReset && <p className="text-xs text-[var(--text-muted)] mt-1">Reset in: {timeUntilReset}</p>}
             </div>
           )}
 
-          {output && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><div className="flex gap-2 mt-2"><button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">{copied ? 'Copied!' : 'Copy'}</button><button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button></div></div>}
+          {output && <div className="mt-4"><pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{output}</pre><div className="flex gap-2 mt-2"><button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg hover:text-[var(--text-primary)] transition-colors">{copied ? 'Copied!' : 'Copy'}</button><button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">Download</button></div></div>}
         </div>
       </Section>
     </div>
@@ -362,11 +362,11 @@ export function PricingTierBuilder() {
       <div className="space-y-4">
         <label htmlFor="lbl-devutilitywidgets-tiers-json" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
         <textarea id="lbl-devutilitywidgets-tiers-json" aria-label="Tiers JSON" value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y"
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y"
           placeholder='[{"name": "Free", "price": 0, "users": 1, "features": ["Basic"]}]' />
 
         {result && (
-          <pre className="p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>
+          <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>
         )}
       </div>
     </CalculatorShell>

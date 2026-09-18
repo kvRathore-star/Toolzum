@@ -47,25 +47,25 @@ export default function KeywordDensityChecker() {
         <div className="space-y-3">
           <label htmlFor="lbl-keyworddensitychecker-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
           <textarea id="lbl-keyworddensitychecker-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Paste your content here..."
-            className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
+            className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
         </div>
         <div className="flex gap-2">
           <div className="flex-1">
             <label htmlFor="lbl-keyworddensitychecker-keyword" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Keyword</label>
             <input id="lbl-keyworddensitychecker-keyword" aria-label="Keyword" type="text" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Enter keyword to check..."
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
           </div>
         </div>
 
         {density && (
           <div aria-live="polite" className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-[var(--border-subtle)]">
                 <p className="text-3xl font-extrabold text-amber-500">{density.count}</p>
                 <p className="text-xs text-[var(--text-muted)]">Occurrences</p>
               </div>
-              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
-                <p className="text-3xl font-extrabold text-blue-700 dark:text-blue-400">{density.total}</p>
+              <div className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-[var(--border-subtle)]">
+                <p className="text-3xl font-extrabold text-[var(--accent)]">{density.total}</p>
                 <p className="text-xs text-[var(--text-muted)]">Total Words</p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function KeywordDensityChecker() {
                 <span className="text-sm font-bold text-[var(--text-secondary)]">Density</span>
                 <span className="text-3xl font-extrabold text-amber-500">{density.percentage.toFixed(2)}%</span>
               </div>
-              <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                 <div style={{ width: `${Math.min(density.percentage * 20, 100)}%` }} className="bg-amber-500 h-full rounded-full" />
               </div>
               <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">

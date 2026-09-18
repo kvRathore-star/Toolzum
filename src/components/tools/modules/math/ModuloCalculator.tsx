@@ -81,13 +81,13 @@ export default function ModuloCalculator() {
           <div className="flex-1">
             <label htmlFor="lbl-modulocalculator-dividend-a" className={labelClass}>Dividend (a)</label>
             <input id="lbl-modulocalculator-dividend-a" aria-label="Dividend (a)" type="number" value={a} onChange={e => setA(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
           <span className="text-sm font-bold self-center">mod</span>
           <div className="flex-1">
             <label htmlFor="lbl-modulocalculator-divisor-b" className={labelClass}>Divisor (b)</label>
             <input id="lbl-modulocalculator-divisor-b" aria-label="Divisor (b)" type="number" min={1} value={b} onChange={e => setB(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>
       </div>

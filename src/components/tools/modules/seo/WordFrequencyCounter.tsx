@@ -48,13 +48,13 @@ export default function WordFrequencyCounter() {
         </div>
 
         {frequencies.length > 0 && (
-          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
             <div className="max-h-[400px] overflow-y-auto space-y-1.5">
               {frequencies.map((f, i) => (
                 <div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
                   <span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span>
                   <span className="flex-1 font-medium">{f.word}</span>
-                  <div className="flex-1 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                  <div className="flex-1 h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                     <div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" />
                   </div>
                   <span className="w-20 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span>

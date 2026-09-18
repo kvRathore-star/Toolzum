@@ -41,19 +41,19 @@ export default function GreatestCommonFactorCalculator() {
           <div className="flex-1">
             <label htmlFor="lbl-greatestcommonfactorcalculator-first-number" className={labelClass}>First number</label>
             <input id="lbl-greatestcommonfactorcalculator-first-number" aria-label="First number" type="number" min={0} value={a} onChange={e => setA(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
           <div className="flex-1">
             <label htmlFor="lbl-greatestcommonfactorcalculator-second-number" className={labelClass}>Second number</label>
             <input id="lbl-greatestcommonfactorcalculator-second-number" aria-label="Second number" type="number" min={0} value={b} onChange={e => setB(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
         </div>
 
         {na > 0 && nb > 0 && (
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-blue-600 dark:text-blue-400 font-medium mb-1">Greatest Common Factor</div>
-            <div className="text-4xl font-bold text-blue-700 dark:text-blue-300">{result}</div>
+          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
+            <div className="text-xs text-[var(--accent)] font-medium mb-1">Greatest Common Factor</div>
+            <div className="text-4xl font-bold text-[var(--accent)]">{result}</div>
             <div className="text-xs text-[var(--text-secondary)] mt-1">Largest integer dividing both numbers</div>
           </div>
         )}

@@ -43,7 +43,7 @@ export default function CharacterCounter() {
         {text && (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {stats.map((s, i) => (
-              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
+              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-[var(--border-subtle)]">
                 <p className={`text-2xl font-extrabold ${s.color}`}>{s.value}</p>
                 <p className="text-xs text-[var(--text-muted)]">{s.label}</p>
                 {s.sub && <p className="text-[10px] text-[var(--text-muted)]">{s.sub}</p>}
@@ -53,10 +53,10 @@ export default function CharacterCounter() {
         )}
 
         {total > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Composition</div>
-            <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex">
-              {letters > 0 && <div style={{ width: `${(letters / total) * 100}%` }} className="bg-blue-500 h-full" title="Letters" />}
+            <div className="w-full h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden flex">
+              {letters > 0 && <div style={{ width: `${(letters / total) * 100}%` }} className="bg-[var(--accent-ink)] h-full" title="Letters" />}
               {digits > 0 && <div style={{ width: `${(digits / total) * 100}%` }} className="bg-amber-500 h-full" title="Digits" />}
               {spaces > 0 && <div style={{ width: `${(spaces / total) * 100}%` }} className="bg-cyan-500 h-full" title="Spaces" />}
               {punctuation > 0 && <div style={{ width: `${(punctuation / total) * 100}%` }} className="bg-rose-500 h-full" title="Punctuation" />}

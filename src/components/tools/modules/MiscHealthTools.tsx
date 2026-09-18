@@ -260,7 +260,7 @@ export function HeartRateCalculator() {
     >
       <div className="space-y-4">
         <Input label="Age" type="number" value={age} onChange={setAge} />
-        <p className="text-xs text-[var(--text-secondary)]">Uses %-of-max HR method. For Karvonen method, see <Link href="/health/heart-rate-zone-calculator" className="text-blue-600 hover:underline">Heart Rate Zone Calculator</Link>.</p>
+        <p className="text-xs text-[var(--text-secondary)]">Uses %-of-max HR method. For Karvonen method, see <Link href="/health/heart-rate-zone-calculator" className="text-[var(--accent)] hover:underline">Heart Rate Zone Calculator</Link>.</p>
       </div>
     </CalculatorShell>
   );
@@ -368,7 +368,7 @@ export function StepsCalculator() {
     >
       <div className="space-y-4">
         <div className="flex gap-2"><div><label className={labelClass}>Steps</label><Input label="Steps" type="number" value={steps} onChange={setSteps} /></div><div><label className={labelClass}>Height (cm)</label><Input label="Height (cm)" type="number" value={height} onChange={setHeight} /></div></div>
-        <p className="text-xs text-[var(--text-secondary)]">Uses height-based stride estimate (stride = height × 0.415). For weight-based calories, see <Link href="/health/steps-to-calories-calculator" className="text-blue-600 hover:underline">Steps to Calories Calculator</Link>.</p>
+        <p className="text-xs text-[var(--text-secondary)]">Uses height-based stride estimate (stride = height × 0.415). For weight-based calories, see <Link href="/health/steps-to-calories-calculator" className="text-[var(--accent)] hover:underline">Steps to Calories Calculator</Link>.</p>
       </div>
     </CalculatorShell>
   );

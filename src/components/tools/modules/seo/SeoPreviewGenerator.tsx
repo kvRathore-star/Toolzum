@@ -42,8 +42,8 @@ export default function SeoPreviewGenerator() {
           <p className="text-xs font-bold text-[var(--text-muted)] uppercase mb-3">Google SERP Preview</p>
           <div className="p-4 border border-[var(--border-subtle)] rounded-xl bg-white dark:bg-[var(--bg-surface)]">
             <div className="text-xs text-green-700 dark:text-green-400 mb-1">{url}</div>
-            <div className="text-xl text-blue-600 dark:text-blue-400 font-medium leading-tight mb-1 hover:underline cursor-pointer">{title}</div>
-            <div className="text-sm text-zinc-600 dark:text-[var(--text-muted)] leading-snug">{description}</div>
+            <div className="text-xl text-[var(--accent)] font-medium leading-tight mb-1 hover:underline cursor-pointer">{title}</div>
+            <div className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] leading-snug">{description}</div>
           </div>
         </div>
 

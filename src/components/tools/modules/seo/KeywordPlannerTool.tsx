@@ -46,7 +46,7 @@ export default function KeywordPlannerTool() {
         </div>
 
         {keywords.length > 0 && (
-          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 p-4">
+          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
             <div className="max-h-[400px] overflow-y-auto space-y-1">
               {keywords.map((k, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">

@@ -32,7 +32,7 @@ export default function BabySleepScheduleCalculator() {
       <div className="max-w-sm space-y-3">
         <div className="flex gap-2">
           {(['weeks', 'months'] as const).map(u => (
-            <button key={u} onClick={() => setUnit(u)} aria-pressed={unit === u} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${unit === u ? 'bg-purple-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{u === 'weeks' ? 'Weeks' : 'Months'}</button>
+            <button key={u} onClick={() => setUnit(u)} aria-pressed={unit === u} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${unit === u ? 'bg-purple-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}>{u === 'weeks' ? 'Weeks' : 'Months'}</button>
           ))}
         </div>
         <div><label htmlFor="lbl-babysleepschedulecalculator-age" className={labelCls}>Age ({unit})</label><input id="lbl-babysleepschedulecalculator-age" aria-label={`Age (${unit})`} className={inputCls} type="number" min="0" value={ageValue} onChange={e => setAgeValue(e.target.value)} /></div>

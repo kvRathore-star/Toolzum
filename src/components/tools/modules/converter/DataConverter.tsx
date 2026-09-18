@@ -356,17 +356,17 @@ const copyOutput = useCallback(() => {
           <select aria-label="Source format"
             value={srcFormat}
             onChange={(e) => { setSrcFormat(e.target.value as FormatKey); setOutput(''); }}
-            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
           >
             {formatOptions}
           </select>
 
           <button
             onClick={swapFormats}
-            className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-elevated)] hover:border-blue-400 transition-all active:scale-95 group"
+            className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-elevated)] hover:border-[var(--accent)] transition-all active:scale-95 group"
             aria-label="Swap formats"
           >
-            <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)] group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[var(--text-secondary)] dark:text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
             </svg>
           </button>
@@ -374,7 +374,7 @@ const copyOutput = useCallback(() => {
           <select
             value={dstFormat}
             onChange={(e) => { setDstFormat(e.target.value as FormatKey); setOutput(''); }}
-            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 appearance-none cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
           >
             {formatOptions}
           </select>
@@ -388,7 +388,7 @@ const copyOutput = useCallback(() => {
         )}
 
         <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
-          <label className="cursor-pointer bg-zinc-100 hover:bg-zinc-200 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-zinc-800 dark:text-zinc-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+          <label className="cursor-pointer bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
             Upload {srcFormat} File
             <input type="file" accept={`.${FORMAT_EXT[srcFormat].toLowerCase()}`} onChange={(e) => {
@@ -406,7 +406,7 @@ const copyOutput = useCallback(() => {
           <button
             onClick={handleConvert}
             disabled={isProcessing}
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2 justify-center"
+            className="w-full sm:w-auto bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2 justify-center"
           >
             {isProcessing ? (
               <>
@@ -434,7 +434,7 @@ const copyOutput = useCallback(() => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={`Paste ${srcFormat} here...`}
-              className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
+              className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] dark:placeholder:text-[var(--text-secondary)]"
               spellCheck="false"
             />
           </div>
@@ -485,7 +485,7 @@ const copyOutput = useCallback(() => {
                 <Link
                   key={p.slug}
                   href={`/converter/${p.slug}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
                 >
                   {p.input} → {p.output}
                 </Link>

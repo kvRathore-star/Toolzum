@@ -62,7 +62,7 @@ export function JwtInspector() {
       <div className="space-y-4">
         <label htmlFor="lbl-authtools-jwt-token" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JWT Token</label>
         <textarea id="lbl-authtools-jwt-token" aria-label="JWT Token" value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
 
         {isValid !== null && (
           <div className="space-y-3">
@@ -80,27 +80,27 @@ export function JwtInspector() {
             {header && (
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Header</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Header</span>
                   <button onClick={copyH} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copiedH ? 'Copied!' : 'Copy'}</button>
                 </div>
-                <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
+                <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
               </div>
             )}
 
             {payload && (
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Payload</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Payload</span>
                   <button onClick={copyP} className="px-2 py-0.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
                 </div>
-                <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
+                <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
               </div>
             )}
 
             {(header || payload) && (
               <div className="flex gap-2">
-                <button onClick={copyH} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copiedH ? 'Copied!' : 'Copy Header'}</button>
-                <button onClick={copyP} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copiedP ? 'Copied!' : 'Copy Payload'}</button>
+                <button onClick={copyH} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedH ? 'Copied!' : 'Copy Header'}</button>
+                <button onClick={copyP} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedP ? 'Copied!' : 'Copy Payload'}</button>
               </div>
             )}
           </div>
@@ -133,10 +133,10 @@ export function CsrfTokenGenerator() {
       {token && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">CSRF Token (hex) — {token.length / 2} bytes</span>
+            <span className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">CSRF Token (hex) — {token.length / 2} bytes</span>
             <button onClick={copy} className="px-2.5 py-1 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 font-mono text-sm break-all text-zinc-800 dark:text-zinc-200">{token}</div>
+          <div className="bg-[var(--bg-overlay)] rounded-lg p-3 font-mono text-sm break-all text-[var(--text-primary)]">{token}</div>
         </div>
       )}
     </Section>
@@ -205,18 +205,18 @@ export function Oauth2Debugger() {
   return (
     <Section title="OAuth2 Debugger">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {flowPresets.map(p => <button key={p.label} onClick={() => setFlow(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${flow === p.v ? 'bg-blue-500 text-white border-blue-500' : 'bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border-blue-500/20'}`}>{p.label}</button>)}
+        {flowPresets.map(p => <button key={p.label} onClick={() => setFlow(p.v)} className={`px-2.5 py-1 text-xs rounded-lg border transition-colors ${flow === p.v ? 'bg-[var(--accent-ink)] text-white border-[var(--accent)]' : 'bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border-[var(--accent)]/20'}`}>{p.label}</button>)}
       </div>
       <Input label="Client ID" value={clientId} onChange={setClientId} placeholder="your-client-id" />
       <Input label="Redirect URI" value={redirectUri} onChange={setRedirectUri} placeholder="https://example.com/callback" />
-      <button onClick={debug} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Debug Flow</button>
+      <button onClick={debug} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors">Debug Flow</button>
       {result && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Flow Debug Output</span>
-            <button onClick={copy} className="px-2.5 py-1 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <span className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Flow Debug Output</span>
+            <button onClick={copy} className="px-2.5 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg">{result}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-3 rounded-lg">{result}</pre>
         </div>
       )}
     </Section>
@@ -253,34 +253,34 @@ export function SamlDecoder() {
         <div className="mt-4 space-y-3">
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
-              <span className="text-xs text-zinc-500">Type</span>
-              <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100">{fields.type}</p>
+              <span className="text-xs text-[var(--text-muted)]">Type</span>
+              <p className="font-mono text-sm text-[var(--text-primary)]">{fields.type}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
-              <span className="text-xs text-zinc-500">SAML Namespace</span>
+              <span className="text-xs text-[var(--text-muted)]">SAML Namespace</span>
               <p className={`font-mono text-sm ${fields.hasSaml ? 'text-green-600' : 'text-red-600'}`}>{fields.hasSaml ? '✓ Detected' : '✗ Not found'}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
-              <span className="text-xs text-zinc-500">Issuer</span>
-              <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{fields.issuer}</p>
+              <span className="text-xs text-[var(--text-muted)]">Issuer</span>
+              <p className="font-mono text-sm text-[var(--text-primary)] truncate">{fields.issuer}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-indigo-400">
-              <span className="text-xs text-zinc-500">Destination</span>
-              <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{fields.destination}</p>
+              <span className="text-xs text-[var(--text-muted)]">Destination</span>
+              <p className="font-mono text-sm text-[var(--text-primary)] truncate">{fields.destination}</p>
             </div>
           </div>
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-amber-400">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-zinc-500">Status</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)]">Status</span>
             </div>
             <span className={`px-2 py-0.5 rounded text-xs font-bold ${fields.status === 'urn:oasis:names:tc:SAML:2.0:status:Success' ? 'bg-green-100 dark:bg-green-900/30 text-green-700' : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700'}`}>{fields.status}</span>
           </div>
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-zinc-500">Decoded XML</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)]">Decoded XML</span>
               <button onClick={copy} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
             </div>
-            <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-48">{decoded.substring(0, 3000)}</pre>
+            <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto max-h-48">{decoded.substring(0, 3000)}</pre>
           </div>
         </div>
       )}

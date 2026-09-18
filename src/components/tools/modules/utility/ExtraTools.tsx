@@ -13,7 +13,7 @@ function Input({ label, value, onChange, placeholder, type = "text", rows }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; rows?: number;
 }) {
   const id = React.useId();
-  const cls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
+  const cls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50";
   return (
     <div className="mb-3">
       <label htmlFor={id} className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>
@@ -33,7 +33,7 @@ function Output({ value, label }: { value: string; label?: string }) {
     <div className="mt-4">
       {label && <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">{label}</label>}
       <div className="relative">
-        <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
+        <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap break-all max-h-60">{value}</pre>
         <button onClick={() => { clipboardWrite(value).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } }); }} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
       </div>
     </div>
@@ -54,7 +54,7 @@ export function AnnualContractValueCalculator() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -67,10 +67,10 @@ export function AnnualContractValueCalculator() {
         {result !== null && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">ACV: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">${result.toFixed(2)}</span></p>
+              <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">ACV: <span className="font-mono font-bold text-[var(--text-primary)]">${result.toFixed(2)}</span></p>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(String(result)).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([String(result)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(String(result)).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(result)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
             </div>
           </div>
@@ -105,7 +105,7 @@ export function AsciiTableGenerator() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -118,8 +118,8 @@ export function AsciiTableGenerator() {
         {table && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="flex items-center justify-end gap-2 mb-2">
-              <button onClick={() => { clipboardWrite(table).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-              <button onClick={() => { const blob = new Blob([table], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='table.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              <button onClick={() => { clipboardWrite(table).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([table], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='table.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
             </div>
           </div>
         )}
@@ -212,7 +212,7 @@ export function GitignoreGenerator() {
         <div className="flex items-center gap-3">
           <button onClick={generate} className="px-5 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-sm font-medium transition-colors">Generate .gitignore</button>
           {output && (
-            <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='.gitignore'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+            <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='.gitignore'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">
               Download
             </button>
           )}
@@ -237,7 +237,7 @@ export function HoursToMinutesConverter() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -250,10 +250,10 @@ export function HoursToMinutesConverter() {
         {total !== null && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Total Minutes: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{total}</span></p>
+              <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Total Minutes: <span className="font-mono font-bold text-[var(--text-primary)]">{total}</span></p>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(String(total)).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([String(total)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(String(total)).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(total)], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
             </div>
           </div>
@@ -307,7 +307,7 @@ export function ParquetToCsvConverter() {
         <div className="mt-4">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">CSV Output</label>
           <div className="relative">
-            <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap max-h-60">{csv}</pre>
+            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap max-h-60">{csv}</pre>
             <button onClick={() => downloadOrShare(csv, 'converted.csv')} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">Download</button>
           </div>
         </div>
@@ -329,7 +329,7 @@ export function SaasPaybackPeriod() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -342,10 +342,10 @@ export function SaasPaybackPeriod() {
         {result !== null && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Payback Period: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)} months</span></p>
+              <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Payback Period: <span className="font-mono font-bold text-[var(--text-primary)]">{result.toFixed(1)} months</span></p>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(String(result.toFixed(1))).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([String(result.toFixed(1))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(String(result.toFixed(1))).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(result.toFixed(1))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
             </div>
             <p className="text-xs text-[var(--text-secondary)] mt-1">{result < 12 ? 'Healthy payback period.' : 'Long payback — consider reducing CAC or increasing MRR.'}</p>
@@ -371,7 +371,7 @@ export function SaasQuickRatio() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -387,10 +387,10 @@ export function SaasQuickRatio() {
         {ratio !== null && (
           <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Quick Ratio: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
+              <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Quick Ratio: <span className="font-mono font-bold text-[var(--text-primary)]">{ratio === Infinity ? '∞' : ratio.toFixed(2)}</span></p>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(String(ratio === Infinity ? '∞' : ratio.toFixed(2))).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([String(ratio === Infinity ? '∞' : ratio.toFixed(2))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(String(ratio === Infinity ? '∞' : ratio.toFixed(2))).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([String(ratio === Infinity ? '∞' : ratio.toFixed(2))], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
             </div>
             <p className="text-xs text-[var(--text-secondary)] mt-1">{ratio >= 4 ? 'Excellent!' : ratio >= 2 ? 'Good' : ratio >= 1 ? 'Needs improvement' : 'At risk'}</p>
@@ -414,7 +414,7 @@ export function SaasRuleOf40() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -427,10 +427,10 @@ export function SaasRuleOf40() {
       {result !== null && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Rule of 40 Score: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(1)}%</span></p>
+            <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Rule of 40 Score: <span className="font-mono font-bold text-[var(--text-primary)]">{result.toFixed(1)}%</span></p>
             <div className="flex gap-2">
-              <button onClick={() => { clipboardWrite(String(result.toFixed(1)) + '%').then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-              <button onClick={() => { const blob = new Blob([String(result.toFixed(1)) + '%'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              <button onClick={() => { clipboardWrite(String(result.toFixed(1)) + '%').then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([String(result.toFixed(1)) + '%'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
             </div>
           </div>
           <p className="text-xs text-[var(--text-secondary)] mt-1">{result >= 40 ? 'Passes the Rule of 40 ✓' : 'Below 40% threshold — focus on growth or profitability.'}</p>
@@ -464,7 +464,7 @@ export function SwiftFormatter() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -477,8 +477,8 @@ export function SwiftFormatter() {
       {formatted && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
           <div className="flex items-center justify-end gap-2 mb-2">
-            <button onClick={() => { clipboardWrite(formatted).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-            <button onClick={() => { const blob = new Blob([formatted], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='formatted.swift'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+            <button onClick={() => { clipboardWrite(formatted).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+            <button onClick={() => { const blob = new Blob([formatted], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='formatted.swift'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
           </div>
         </div>
       )}
@@ -512,7 +512,7 @@ export function TemperatureConverter() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -523,7 +523,7 @@ export function TemperatureConverter() {
       <div className="grid grid-cols-2 gap-3 mb-3">
         <div>
           <label htmlFor="lbl-extratools-from" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">From</label>
-          <select id="lbl-extratools-from" aria-label="From" value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+          <select id="lbl-extratools-from" aria-label="From" value={from} onChange={e => setFrom(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>
@@ -531,7 +531,7 @@ export function TemperatureConverter() {
         </div>
         <div>
           <label htmlFor="lbl-extratools-to" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">To</label>
-          <select id="lbl-extratools-to" aria-label="To" value={to} onChange={e => setTo(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
+          <select id="lbl-extratools-to" aria-label="To" value={to} onChange={e => setTo(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
             <option value="celsius">Celsius</option>
             <option value="fahrenheit">Fahrenheit</option>
             <option value="kelvin">Kelvin</option>
@@ -542,10 +542,10 @@ export function TemperatureConverter() {
       {result !== null && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.toFixed(2)}°</span></p>
+            <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Result: <span className="font-mono font-bold text-[var(--text-primary)]">{result.toFixed(2)}°</span></p>
             <div className="flex gap-2">
-              <button onClick={() => { clipboardWrite(String(result.toFixed(2)) + '°').then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-              <button onClick={() => { const blob = new Blob([String(result.toFixed(2)) + '°'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+              <button onClick={() => { clipboardWrite(String(result.toFixed(2)) + '°').then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+              <button onClick={() => { const blob = new Blob([String(result.toFixed(2)) + '°'], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='result.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
             </div>
           </div>
         </div>
@@ -607,7 +607,7 @@ export function PdfToTxt() {
         <div className="mt-4">
           <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Extracted Text</label>
           <div className="relative">
-            <pre className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 overflow-x-auto whitespace-pre-wrap max-h-96">{text}</pre>
+            <pre className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] overflow-x-auto whitespace-pre-wrap max-h-96">{text}</pre>
             <button onClick={() => downloadOrShare(text, file?.name.replace('.pdf', '.txt') || 'extracted.txt')} className="absolute top-2 right-2 px-3 py-1 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white rounded-lg transition-colors">Download</button>
           </div>
         </div>

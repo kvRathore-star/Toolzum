@@ -29,9 +29,9 @@ function validateYaml(text: string): string[] {
   return issues;
 }
 
-const taCls = "w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y";
+const taCls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y";
 const btnCls = "w-full px-5 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg";
-const preCls = "p-4 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto";
+const preCls = "p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap max-h-48 overflow-y-auto";
 
 export function DockerComposeValidator() {
   const [input, setInput] = useState('version: "3.8"\nservices:\n  web:\n    image: nginx:latest\n    ports:\n      - "80:80"');
@@ -64,7 +64,7 @@ export function DockerComposeValidator() {
     <CalculatorShell category="Developer" title="Docker Compose Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="docker-compose-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Docker Compose YAML</label>
       <textarea aria-label="Docker Compose YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -107,7 +107,7 @@ export function DockerfileLinter() {
     <CalculatorShell category="Developer" title="Dockerfile Linter" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="dockerfile-lint.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Dockerfile</label>
       <textarea aria-label="Dockerfile" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -149,7 +149,7 @@ export function HtaccessValidator() {
     <CalculatorShell category="Developer" title="htaccess Validator" result={resultText} onCalculate={validate} presets={presets} accent="emerald" downloadData={output} downloadFilename="htaccess-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">htaccess Content</label>
       <textarea aria-label="htaccess Content" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -189,7 +189,7 @@ export function KubernetesYamlValidator() {
     <CalculatorShell category="Developer" title="Kubernetes YAML Validator" result={resultText} onCalculate={validate} presets={presets} accent="blue" downloadData={output} downloadFilename="k8s-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Kubernetes YAML</label>
       <textarea aria-label="Kubernetes YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -228,7 +228,7 @@ export function GithubActionsValidator() {
     <CalculatorShell category="Developer" title="GitHub Actions Validator" result={resultText} onCalculate={validate} presets={presets} accent="purple" downloadData={output} downloadFilename="github-actions-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">GitHub Actions Workflow YAML</label>
       <textarea aria-label="GitHub Actions Workflow YAML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={10}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -321,9 +321,9 @@ export function GeoJsonValidator() {
   return (
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2 mb-4">
-        <button onClick={() => setInput(PRESETS.validPoint!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Point</button>
-        <button onClick={() => setInput(PRESETS.validPolygon!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Polygon</button>
-        <button onClick={() => setInput(PRESETS.invalidCoords!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid Coordinates</button>
+        <button onClick={() => setInput(PRESETS.validPoint!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Point</button>
+        <button onClick={() => setInput(PRESETS.validPolygon!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Valid Polygon</button>
+        <button onClick={() => setInput(PRESETS.invalidCoords!)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Invalid Coordinates</button>
       </div>
       <Section title="GeoJSON Validator">
         <div className="space-y-3">
@@ -333,8 +333,8 @@ export function GeoJsonValidator() {
           {output && (
             <div className="mt-4">
               <div className="flex gap-2 mb-2">
-                <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy Report</button>
-                <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Download</button>
+                <button onClick={copyOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg hover:text-[var(--text-primary)] transition-colors">Copy Report</button>
+                <button onClick={downloadOutput} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">Download</button>
               </div>
               <pre className={preCls}>{output}</pre>
             </div>
@@ -377,7 +377,7 @@ export function RssFeedValidator() {
     <CalculatorShell category="Developer" title="RSS Feed Validator" result={resultText} onCalculate={validate} presets={presets} accent="orange" downloadData={output} downloadFilename="rss-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">RSS/Atom XML</label>
       <textarea aria-label="RSS/Atom XML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
       <button onClick={validate} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors w-full sm:w-auto">Validate</button>
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border border-orange-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
@@ -417,7 +417,7 @@ export function SitemapValidator() {
     <CalculatorShell category="Developer" title="Sitemap Validator" result={resultText} onCalculate={validate} presets={presets} accent="indigo" downloadData={output} downloadFilename="sitemap-validation.txt">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Sitemap XML</label>
       <textarea aria-label="Sitemap XML" value={input} onChange={e => { setInput(e.target.value); setOutput(''); setIsValid(null); }} rows={8}
-        className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50 resize-y" />
       {output && (
         <pre className={'p-4 rounded-xl ' + (isValid ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>{output}</pre>
       )}
@@ -461,10 +461,10 @@ export function XpathValidator() {
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XPath Expression</label>
         <input aria-label="XPath Expression" type="text" value={expr} onChange={e => setExpr(e.target.value)} placeholder="//div/p"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">XML/HTML</label>
         <textarea aria-label="XML/HTML" value={xml} onChange={e => setXml(e.target.value)} rows={4}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" placeholder="<root><div><p>text</p></div></root>" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" placeholder="<root><div><p>text</p></div></root>" />
         {output && (
           <pre className={'p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ' + (matchCount > 0 ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>
             {output}
@@ -514,7 +514,7 @@ export function CronExpressionValidator() {
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Cron Expression</label>
         <input aria-label="Cron Expression" type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="*/5 * * * *"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
         <p className="text-xs text-[var(--text-muted)]">5 fields: minute hour day month weekday (optional 6th: command)</p>
         {output && (
           <pre className={'p-4 rounded-xl font-mono text-sm whitespace-pre-wrap ' + (isValid ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border border-red-500/20')}>

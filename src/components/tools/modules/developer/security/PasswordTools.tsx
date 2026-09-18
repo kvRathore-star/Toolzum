@@ -53,19 +53,19 @@ export function PasswordEntropyCalculator() {
           <div className="space-y-3">
             <div className="p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400">
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Strength</span>
+                <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Strength</span>
                 <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${strengthColors[result.strength]}`}>{result.strength}</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2.5 mb-2">
+              <div className="w-full bg-[var(--bg-overlay)] rounded-full h-2.5 mb-2">
                 <div className={`h-2.5 rounded-full transition-all duration-500 ${strengthColors[result.strength]}`} style={{ width: `${result.score}%` }} />
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm">
-                <div><span className="text-zinc-500">Entropy</span><p className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.bits} bits</p></div>
-                <div><span className="text-zinc-500">Score</span><p className="font-mono font-bold text-zinc-900 dark:text-zinc-100">{result.score}/100</p></div>
+                <div><span className="text-[var(--text-muted)]">Entropy</span><p className="font-mono font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{result.bits} bits</p></div>
+                <div><span className="text-[var(--text-muted)]">Score</span><p className="font-mono font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{result.score}/100</p></div>
               </div>
             </div>
 
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
               <p className="text-xs text-[var(--text-secondary)] mb-2">Character Pool Analysis</p>
               <div className="grid grid-cols-2 gap-2 text-xs">
                 <span className="flex items-center gap-1">✓ Lowercase: <span className="font-mono">26</span></span>
@@ -75,7 +75,7 @@ export function PasswordEntropyCalculator() {
               </div>
             </div>
 
-            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Result'}</button>
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Result'}</button>
           </div>
         ) : null
       }
@@ -83,7 +83,7 @@ export function PasswordEntropyCalculator() {
       <div className="space-y-4">
         <label htmlFor="lbl-passwordtools-password" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input id="lbl-passwordtools-password" aria-label="Password" type="password" value={password} onChange={e => { setPassword(e.target.value); setResult(null); }} placeholder="Enter password..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-red-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
       </div>
     </CalculatorShell>
   );
@@ -137,21 +137,21 @@ export function TwoFactorAuthGenerator() {
           <div className="space-y-3">
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">TOTP URI</label>
-              <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 mb-3 font-mono text-xs break-all text-zinc-800 dark:text-zinc-200">{uri}</div>
+              <div className="bg-[var(--bg-overlay)] rounded-lg p-3 mb-3 font-mono text-xs break-all text-[var(--text-primary)]">{uri}</div>
               <div className="grid grid-cols-3 gap-2 text-xs">
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Secret</span><p className="font-mono text-zinc-800 dark:text-zinc-200 truncate">{secret || '—'}</p></div>
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Issuer</span><p className="text-zinc-800 dark:text-zinc-200">{issuer || 'Service'}</p></div>
-                <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Type</span><p className="text-zinc-800 dark:text-zinc-200">TOTP (SHA-1, 6 digits, 30s)</p></div>
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Secret</span><p className="font-mono text-[var(--text-primary)] truncate">{secret || '—'}</p></div>
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Issuer</span><p className="text-[var(--text-primary)]">{issuer || 'Service'}</p></div>
+                <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Type</span><p className="text-[var(--text-primary)]">TOTP (SHA-1, 6 digits, 30s)</p></div>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Algorithm</span><p className="text-zinc-800 dark:text-zinc-200">SHA-1</p></div>
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Digits</span><p className="text-zinc-800 dark:text-zinc-200">6</p></div>
-              <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"><span className="text-zinc-500">Period</span><p className="text-zinc-800 dark:text-zinc-200">30s</p></div>
+              <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Algorithm</span><p className="text-[var(--text-primary)]">SHA-1</p></div>
+              <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Digits</span><p className="text-[var(--text-primary)]">6</p></div>
+              <div className="p-2 bg-[var(--bg-overlay)] rounded-lg"><span className="text-[var(--text-muted)]">Period</span><p className="text-[var(--text-primary)]">30s</p></div>
             </div>
 
-            <button onClick={copyUri} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors self-start">{copied ? 'Copied!' : 'Copy URI'}</button>
+            <button onClick={copyUri} className="px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors self-start">{copied ? 'Copied!' : 'Copy URI'}</button>
           </div>
         ) : null
       }
@@ -160,7 +160,7 @@ export function TwoFactorAuthGenerator() {
         <div className="flex flex-wrap gap-2 mb-3">
           {servicePresets.map(s => (
             <button key={s} onClick={() => gen(s)}
-              className="px-3 py-1.5 text-xs rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 transition-colors">
+              className="px-3 py-1.5 text-xs rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border border-[var(--accent)]/20 transition-colors">
               {s}
             </button>
           ))}
@@ -168,18 +168,18 @@ export function TwoFactorAuthGenerator() {
 
         <label htmlFor="lbl-passwordtools-secret-key-base32" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Secret Key (Base32)</label>
         <input id="lbl-passwordtools-secret-key-base32" aria-label="Secret Key (Base32)" type="text" value={secret} onChange={e => setSecret(e.target.value)} placeholder="Leave blank to generate"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label htmlFor="lbl-passwordtools-issuer" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Issuer</label>
             <input id="lbl-passwordtools-issuer" aria-label="Issuer" type="text" value={issuer} onChange={e => setIssuer(e.target.value)} placeholder="e.g. Toolzum"
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
           <div>
             <label htmlFor="lbl-passwordtools-account" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Account</label>
             <input id="lbl-passwordtools-account" aria-label="Account" type="text" value={account} onChange={e => setAccount(e.target.value)} placeholder="e.g. user@example.com"
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
         </div>
       </div>
@@ -270,27 +270,27 @@ export function BruteForceTimeEstimator() {
           <div className="space-y-3">
             <div className={`p-4 rounded-xl border-l-4 ${severity === 'critical' ? 'bg-red-50 dark:bg-red-900/30 border-red-500' : severity === 'high' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-500' : severity === 'medium' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-500' : severity === 'low' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500' : 'bg-green-50 dark:bg-green-900/30 border-green-500'}`}>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Time to Crack</span>
+                <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Time to Crack</span>
                 <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${severityColors[severity]}`}>{severityLabels[severity]}</span>
               </div>
-              <p className="text-2xl font-mono font-bold text-zinc-900 dark:text-zinc-100">{est}</p>
-              <div className="mt-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2.5">
+              <p className="text-2xl font-mono font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{est}</p>
+              <div className="mt-2 w-full bg-[var(--bg-overlay)] rounded-full h-2.5">
                 <div className={`h-2.5 rounded-full transition-all duration-500 ${severityColors[severity]}`}
                   style={{ width: severity === 'critical' ? '95%' : severity === 'high' ? '70%' : severity === 'medium' ? '50%' : severity === 'low' ? '25%' : '5%' }} />
               </div>
             </div>
 
-            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+            <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
               <p className="text-xs text-[var(--text-secondary)] mb-2">Details</p>
               <div className="grid grid-cols-2 gap-2 text-sm">
-                <div><span className="text-zinc-500">Total Combinations</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Math.pow(10, Math.log10(Math.pow(10, Math.log10(seconds) || 0)))?.toLocaleString?.() || '∞'}</p></div>
-                <div><span className="text-zinc-500">Attack Rate</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{Number(rate).toLocaleString()}/s</p></div>
-                <div><span className="text-zinc-500">Seconds</span><p className="font-mono text-zinc-900 dark:text-zinc-100">{seconds.toLocaleString()}</p></div>
-                <div><span className="text-zinc-500">Severity</span><p className={`font-bold ${severityColors[severity]!.replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
+                <div><span className="text-[var(--text-muted)]">Total Combinations</span><p className="font-mono text-[var(--text-primary)] dark:text-[var(--text-primary)]">{Math.pow(10, Math.log10(Math.pow(10, Math.log10(seconds) || 0)))?.toLocaleString?.() || '∞'}</p></div>
+                <div><span className="text-[var(--text-muted)]">Attack Rate</span><p className="font-mono text-[var(--text-primary)] dark:text-[var(--text-primary)]">{Number(rate).toLocaleString()}/s</p></div>
+                <div><span className="text-[var(--text-muted)]">Seconds</span><p className="font-mono text-[var(--text-primary)] dark:text-[var(--text-primary)]">{seconds.toLocaleString()}</p></div>
+                <div><span className="text-[var(--text-muted)]">Severity</span><p className={`font-bold ${severityColors[severity]!.replace('bg-', 'text-')}`}>{severityLabels[severity]}</p></div>
               </div>
             </div>
 
-            <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Estimate'}</button>
+            <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors self-start">{copied ? 'Copied!' : 'Copy Estimate'}</button>
           </div>
         ) : null
       }
@@ -298,13 +298,13 @@ export function BruteForceTimeEstimator() {
       <div className="space-y-4">
         <label htmlFor="lbl-passwordtools-password-5" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input id="lbl-passwordtools-password-5" aria-label="Password" type="text" value={pwd} onChange={e => { setPwd(e.target.value); setEst(''); setSeverity(''); }} placeholder="Enter password..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
 
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label htmlFor="lbl-passwordtools-attack-rate" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Attack Rate</label>
             <select id="lbl-passwordtools-attack-rate" aria-label="Attack Rate" value={rate} onChange={e => { setRate(e.target.value); calc(); }}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50">
               <option value="1000000">1M/s (CPU)</option>
               <option value="1000000000">1B/s (GPU)</option>
               <option value="100000000000">100B/s (Cluster)</option>
@@ -385,15 +385,15 @@ export function HashPasswordGenerator() {
       <div className="space-y-4">
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Password</label>
         <input aria-label="Password" type="password" value={pwd} onChange={e => { setPwd(e.target.value); setResult(''); }} placeholder="Enter password..."
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Salt (optional)</label>
         <input aria-label="Salt (optional)" type="text" value={salt} onChange={e => { setSalt(e.target.value); setResult(''); }} placeholder="Leave blank to auto-generate"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50" />
 
         <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Iterations</label>
         <select aria-label="Iterations" value={iterations} onChange={e => { setIterations(e.target.value); gen(); }}
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-indigo-500/50">
           <option value="100000">100K (Legacy)</option>
           <option value="600000">600K (OWASP recommended)</option>
           <option value="1000000">1M (High security)</option>

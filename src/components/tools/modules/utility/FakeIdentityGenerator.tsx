@@ -50,21 +50,21 @@ export default function FakeIdentityGenerator() {
           <div>
             <label htmlFor="lbl-fakeidentitygenerator-gender" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Gender</label>
             <select id="lbl-fakeidentitygenerator-gender" aria-label="Gender" value={gender} onChange={e => setGender(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {GENDERS.map(g => <option key={g} value={g}>{g}</option>)}
             </select>
           </div>
           <div>
             <label htmlFor="lbl-fakeidentitygenerator-country" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Country</label>
             <select id="lbl-fakeidentitygenerator-country" aria-label="Country" value={country} onChange={e => setCountry(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               {COUNTRIES.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
             </select>
           </div>
           <div>
             <label htmlFor="lbl-fakeidentitygenerator-count" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Count</label>
             <input id="lbl-fakeidentitygenerator-count" aria-label="Count" type="number" min="1" max="5" value={count} onChange={e => setCount(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
         </div>
         {identities.length > 0 ? (

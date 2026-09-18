@@ -25,7 +25,7 @@ export default function BreastfeedingCalorieCalculator() {
       <div className="space-y-3">
       <div className="flex gap-2">
         {(['metric', 'imperial'] as const).map(u => (
-          <button key={u} onClick={() => setUnit(u)} aria-pressed={unit === u} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${unit === u ? 'bg-fuchsia-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>{u === 'metric' ? 'Metric (mL)' : 'Imperial (fl oz)'}</button>
+          <button key={u} onClick={() => setUnit(u)} aria-pressed={unit === u} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${unit === u ? 'bg-fuchsia-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}>{u === 'metric' ? 'Metric (mL)' : 'Imperial (fl oz)'}</button>
         ))}
       </div>
       <div className="grid grid-cols-2 gap-4">

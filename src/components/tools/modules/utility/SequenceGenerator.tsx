@@ -34,7 +34,7 @@ export default function SequenceGenerator() {
       <div className="space-y-4">
         <div className="mb-3">
           <label htmlFor="lbl-sequencegenerator-type" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Type</label>
-          <select id="lbl-sequencegenerator-type" aria-label="Type" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
+          <select id="lbl-sequencegenerator-type" aria-label="Type" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="arithmetic">Arithmetic</option><option value="geometric">Geometric</option><option value="custom">Custom (n + n*r)</option></select>
         </div>
         <div className="grid grid-cols-3 gap-3"><Input label="Start" type="number" value={start} onChange={v => setStart(v)} /><Input label="Diff/Ratio" type="number" value={diff} onChange={v => setDiff(v)} /><Input label="Count" type="number" value={count} onChange={v => setCount(v)} /></div>
         {result.length > 0 && (

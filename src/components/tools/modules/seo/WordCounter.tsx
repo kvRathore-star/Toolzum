@@ -44,7 +44,7 @@ export default function WordCounter() {
         {text && (
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {stats.map((s, i) => (
-              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-zinc-200 dark:border-zinc-700">
+              <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl text-center border border-[var(--border-subtle)]">
                 <p className={`text-2xl font-extrabold ${s.color}`}>{s.value}{s.suffix || ''}</p>
                 <p className="text-xs text-[var(--text-muted)]">{s.label}</p>
               </div>
@@ -53,12 +53,12 @@ export default function WordCounter() {
         )}
 
         {text && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Character Composition</div>
-            <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex">
+            <div className="w-full h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden flex">
               {chars > 0 && <>
                 <div style={{ width: `${(charsNoSpace / chars) * 100}%` }} className="bg-emerald-500 h-full" title="Non-space" />
-                <div style={{ width: `${((chars - charsNoSpace) / chars) * 100}%` }} className="bg-zinc-400 h-full" title="Spaces" />
+                <div style={{ width: `${((chars - charsNoSpace) / chars) * 100}%` }} className="bg-[var(--bg-elevated)] h-full" title="Spaces" />
               </>}
             </div>
             <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">

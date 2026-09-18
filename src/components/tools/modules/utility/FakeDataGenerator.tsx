@@ -41,7 +41,7 @@ export default function FakeDataGenerator() {
           <div className="mb-3">
             <label htmlFor="lbl-fakedatagenerator-format" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Format</label>
             <select id="lbl-fakedatagenerator-format" aria-label="Format" value={format} onChange={e => setFormat(e.target.value as 'json' | 'csv')}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
               <option value="json">JSON</option>
               <option value="csv">CSV</option>
             </select>
