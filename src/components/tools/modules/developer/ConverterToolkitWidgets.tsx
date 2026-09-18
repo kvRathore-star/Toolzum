@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { clipboardWrite } from "@/lib/clipboard";
-import { Copy, Download } from 'lucide-react';
+import { DualPanel } from '../shared/DualPanel';
+import { CalcActions } from '../shared/CalcActions';
 
 function OutputBox({ output }: { output: string }) {
   if (!output) return null;
@@ -51,31 +51,28 @@ export function Base32Encoder() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base32 Encode / Decode</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Base32 Encode / Decode" rows={3} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
-          <button onClick={encode} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Encode</button>
-          <button onClick={decode} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
+          <button onClick={encode} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Encode</button>
+          <button onClick={decode} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Decode</button>
         </div>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -102,28 +99,25 @@ export function Base64ToJsonDecoder() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Base64 to JSON Decoder</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Base64 to JSON Decoder" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste base64 string..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={decode} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Decode to JSON</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={decode} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Decode to JSON</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -153,31 +147,28 @@ export function HexTextConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Hex &lt;-&gt; Text Converter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Hex &lt;-&gt; Text Converter" rows={2} value={input} onChange={e => setInput(e.target.value)} placeholder="Hex string or text..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         <div className="flex gap-2">
-          <button onClick={hexToText} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Hex to Text</button>
-          <button onClick={textToHex} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Text to Hex</button>
+          <button onClick={hexToText} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Hex to Text</button>
+          <button onClick={textToHex} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Text to Hex</button>
         </div>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -203,29 +194,26 @@ export function SvgToBase64Converter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG to Base64 Converter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="SVG to Base64 Converter" rows={4} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Data URI</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-            <img src={output} alt="Preview" className="max-h-16 mx-auto" />
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert to Data URI</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+            {output ? (<img src={output} alt="Preview" className="max-h-16 mx-auto" />) : null}
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -253,28 +241,25 @@ export function CharacterEncodingConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Character Encoding Converter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Character Encoding Converter" rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={analyze} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Analyze Characters</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={analyze} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Analyze Characters</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -304,28 +289,25 @@ export function UnicodeConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Unicode Converter</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="Unicode Converter" rows={2} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert Unicode</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert Unicode</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -340,24 +322,8 @@ export function MarkdownToSlackConverter() {
     { label: 'Lists & Headers', apply: () => setInput('# Title\n## Subtitle\n### Sub-subtitle\n\n1. First item\n2. Second item\n3. Third item\n\n- Bullet one\n- Bullet two\n- Bullet three') },
   ];
 
-  const copyOutput = () => {
-    if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied to clipboard!');
-  };
-
-  const downloadOutput = () => {
-    if (!output) return;
-    const blob = new Blob([output], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'slack-text.txt';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('Downloaded!');
-  };
-
+  
+  
   const convert = () => {
     let out = input;
     out = out.replace(/#{1,6}\s+(.*)/g, '*$1*');
@@ -377,29 +343,25 @@ export function MarkdownToSlackConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Markdown to Slack Converter</h2>
+        <DualPanel
+          input={<>
         <div className="flex flex-wrap gap-2 mb-4">
           {presets.map((p) => (
-            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           ))}
         </div>
         <textarea aria-label="Markdown text" rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert to Slack</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <button onClick={copyOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg hover:text-[var(--text-primary)] transition-colors">
-                <Copy className="w-3.5 h-3.5" /> Copy
-              </button>
-              <button onClick={downloadOutput} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
-                <Download className="w-3.5 h-3.5" /> Download
-              </button>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert to Slack</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='slack-text.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -434,13 +396,15 @@ export function PxRemConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">PX &lt;-&gt; REM Converter</h2>
+        <DualPanel
+          input={<>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="text-xs text-[var(--text-secondary)] mb-1 block">Pixel value</label>
@@ -454,21 +418,16 @@ export function PxRemConverter() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button onClick={pxToRem} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">PX to REM</button>
-          <button onClick={remToPx} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">REM to PX</button>
+          <button onClick={pxToRem} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">PX to REM</button>
+          <button onClick={remToPx} className="flex-1 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">REM to PX</button>
         </div>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -499,28 +458,25 @@ export function SvgOptimizer() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">SVG Optimizer</h2>
+        <DualPanel
+          input={<>
         <textarea aria-label="SVG Optimizer" rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder="Paste SVG markup..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={optimize} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Optimize SVG</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={optimize} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Optimize SVG</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -551,13 +507,15 @@ export function SpeedConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Speed Converter</h2>
+        <DualPanel
+          input={<>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Speed</label>
           <input aria-label="Speed" type="number" value={value} onChange={e => setValue(e.target.value)}
@@ -579,19 +537,14 @@ export function SpeedConverter() {
             </select>
           </div>
         </div>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -622,13 +575,15 @@ export function PowerConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Power Converter</h2>
+        <DualPanel
+          input={<>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Power</label>
           <input aria-label="Power" type="number" value={value} onChange={e => setValue(e.target.value)}
@@ -650,19 +605,14 @@ export function PowerConverter() {
             </select>
           </div>
         </div>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
@@ -693,13 +643,15 @@ export function PressureConverter() {
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Pressure Converter</h2>
+        <DualPanel
+          input={<>
         <div>
           <label className="text-xs text-[var(--text-secondary)] mb-1 block">Pressure</label>
           <input aria-label="Pressure" type="number" value={value} onChange={e => setValue(e.target.value)}
@@ -721,19 +673,14 @@ export function PressureConverter() {
             </select>
           </div>
         </div>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
-        {output && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(output).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
-              </div>
-            </div>
-            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap">{output}</pre>
-          </div>
-        )}
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+                  </>}
+          output={<>
+            <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg border border-[var(--border-subtle)] p-3 max-h-32 overflow-y-auto text-emerald-600 dark:text-emerald-400 break-all whitespace-pre-wrap min-h-24">{output || <span className="text-[var(--text-muted)]">Result appears here</span>}</pre>
+          </>}
+          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.txt' />}
+        />
+
       </div>
     </div>
   );
