@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
 import { useFFmpeg } from '@/hooks/useFFmpeg';
 import { fetchFile } from '@ffmpeg/util';
-import { Music, Upload, Download, Loader2, Crown } from 'lucide-react';
+import { Music, Upload, Download, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
