@@ -75,7 +75,7 @@ function MarkdownToHtmlTab() {
       <div className="flex flex-wrap gap-2">
         {PRESETS['markdown-to-html'].map(function(p) {
           return (
-            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
           );
         })}
       </div>
@@ -85,10 +85,10 @@ function MarkdownToHtmlTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Input</span>
             <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea aria-label="Markdown input (Preview)" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea aria-label="Markdown input (Preview)" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]" spellCheck="false" />
         </div>
         <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+          <div className="bg-[var(--bg-overlay)] border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
             <span className="font-bold text-[var(--text-primary)] text-sm">HTML Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
@@ -104,7 +104,7 @@ function MarkdownToHtmlTab() {
           </div>
         </div>
       </div>
-      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
+      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Converting...' : 'Convert Markdown to HTML'}
       </button>
     </div>
@@ -149,7 +149,7 @@ function TextToMarkdownTab() {
       <div className="flex flex-wrap gap-2">
         {PRESETS['text-to-markdown'].map(function(p) {
           return (
-            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
           );
         })}
       </div>
@@ -159,10 +159,10 @@ function TextToMarkdownTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Text Input</span>
             <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea aria-label="Plain text input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste plain text here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea aria-label="Plain text input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste plain text here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]" spellCheck="false" />
         </div>
         <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+          <div className="bg-[var(--bg-overlay)] border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
@@ -178,7 +178,7 @@ function TextToMarkdownTab() {
           </div>
         </div>
       </div>
-      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
+      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Converting...' : 'Convert Text to Markdown'}
       </button>
     </div>
@@ -226,7 +226,7 @@ function HtmlToMarkdownTab() {
       <div className="flex flex-wrap gap-2">
         {PRESETS['html-to-markdown'].map(function(p) {
           return (
-            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
           );
         })}
       </div>
@@ -236,10 +236,10 @@ function HtmlToMarkdownTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">HTML Input</span>
             <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea aria-label="HTML input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste HTML here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea aria-label="HTML input" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste HTML here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]" spellCheck="false" />
         </div>
         <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+          <div className="bg-[var(--bg-overlay)] border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
@@ -255,7 +255,7 @@ function HtmlToMarkdownTab() {
           </div>
         </div>
       </div>
-      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
+      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Converting...' : 'Convert HTML to Markdown'}
       </button>
     </div>
@@ -312,7 +312,7 @@ function MarkdownToTextTab() {
       <div className="flex flex-wrap gap-2">
         {PRESETS['markdown-to-text'].map(function(p) {
           return (
-            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
+            <button key={p.label} onClick={() => setInput(p.input)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">{p.label}</button>
           );
         })}
       </div>
@@ -322,10 +322,10 @@ function MarkdownToTextTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Input</span>
             <button onClick={() => { setInput(''); setOutput(''); }} className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors">Clear</button>
           </div>
-          <textarea aria-label="Markdown input (MD to Text)" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600" spellCheck="false" />
+          <textarea aria-label="Markdown input (MD to Text)" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste Markdown here..." className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)]" spellCheck="false" />
         </div>
         <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
-          <div className="bg-zinc-100 dark:bg-zinc-900 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+          <div className="bg-[var(--bg-overlay)] border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
             <span className="font-bold text-[var(--text-primary)] text-sm">Text Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
@@ -341,7 +341,7 @@ function MarkdownToTextTab() {
           </div>
         </div>
       </div>
-      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
+      <button onClick={handleConvert} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50">
         {isProcessing ? 'Converting...' : 'Convert Markdown to Text'}
       </button>
     </div>
@@ -370,7 +370,7 @@ export default function MarkdownTools() {
 
   return (
     <div>
-      <div className="flex gap-1 bg-zinc-100 dark:bg-zinc-900 rounded-xl p-1 mb-6 overflow-x-auto" role="tablist" aria-label="Markdown tools" onKeyDown={mdTabs.onKeyDown}>
+      <div className="flex gap-1 bg-[var(--bg-overlay)] rounded-xl p-1 mb-6 overflow-x-auto" role="tablist" aria-label="Markdown tools" onKeyDown={mdTabs.onKeyDown}>
         {TABS.map(tab => (
           <button
             key={tab.id}
@@ -378,7 +378,7 @@ export default function MarkdownTools() {
             {...mdTabs.tabProps(tab.id)}
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={'px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ' + (activeTab === tab.id ? 'bg-white dark:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-100 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')}
+            className={'px-4 py-2 text-sm font-medium rounded-lg whitespace-nowrap transition-all ' + (activeTab === tab.id ? 'bg-[var(--bg-surface)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')}
           >
             {tab.label}
           </button>

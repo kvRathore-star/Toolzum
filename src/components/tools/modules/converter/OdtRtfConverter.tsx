@@ -276,7 +276,7 @@ export default function OdtRtfConverter() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>No server uploads — </strong>Your ODT and RTF documents are parsed locally and never leave your device.
         </div>
         <FileUploader accept=".odt,.rtf,application/vnd.oasis.opendocument.text,application/rtf,text/rtf" onFileSelect={handleFileSelect} title="Upload ODT or RTF Document" subtitle="Drag & drop your file here" />
@@ -287,24 +287,24 @@ export default function OdtRtfConverter() {
   const previewText = showAllPreview ? extractedText : extractedText.slice(0, 500);
   const marginPresets = [{ label: 'Narrow', value: 36 }, { label: 'Normal', value: 72 }, { label: 'Wide', value: 108 }];
   const btnBase = 'py-2 px-3 rounded-xl text-xs font-bold transition-all border';
-  const btnActive = 'bg-blue-600 border-blue-500 text-white shadow-md';
-  const btnInactive = 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300';
+  const btnActive = 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md';
+  const btnInactive = 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]';
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{title}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{fileType?.toUpperCase()} • {(file.size / 1024).toFixed(0)} KB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{title}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{fileType?.toUpperCase()} • {(file.size / 1024).toFixed(0)} KB</p>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
+        <button onClick={clearAll} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-3">
         <div className="flex justify-between items-center">
           <h4 className="text-[var(--text-primary)] font-medium">Extracted Text Preview</h4>
           {extractedText.length > 500 && (
-            <button onClick={() => setShowAllPreview(p => !p)} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-medium">
+            <button onClick={() => setShowAllPreview(p => !p)} className="text-xs text-[var(--accent)] hover:opacity-80 font-medium">
               {showAllPreview ? 'Show Less' : `Show All (${extractedText.length} chars)`}
             </button>
           )}
@@ -319,7 +319,7 @@ export default function OdtRtfConverter() {
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">PDF Settings</h4>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Page Size</label>
+            <label className="block text-sm text-[var(--text-secondary)] mb-2">Page Size</label>
             <div className="grid grid-cols-3 gap-2">
               {['A4', 'Letter', 'Legal'].map(s => (
                 <button key={s} onClick={() => setPageSize(s)} className={`${btnBase} ${pageSize === s ? btnActive : btnInactive}`}>{s}</button>
@@ -328,13 +328,13 @@ export default function OdtRtfConverter() {
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Font Size: <span className="font-bold text-[var(--text-primary)]">{fontSize}pt</span></label>
+            <label className="block text-sm text-[var(--text-secondary)] mb-2">Font Size: <span className="font-bold text-[var(--text-primary)]">{fontSize}pt</span></label>
             <input aria-label="Font Size:" type="range" min={8} max={16} step={1} value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-blue-600" />
             <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1"><span>8pt</span><span>16pt</span></div>
           </div>
 
           <div>
-            <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Margins</label>
+            <label className="block text-sm text-[var(--text-secondary)] mb-2">Margins</label>
             <div className="grid grid-cols-3 gap-2">
               {marginPresets.map(m => (
                 <button key={m.value} onClick={() => setMargins(m.value)} className={`${btnBase} ${margins === m.value ? btnActive : btnInactive}`}>{m.label}</button>
@@ -342,7 +342,7 @@ export default function OdtRtfConverter() {
             </div>
           </div>
 
-          <button onClick={convertToPdf} disabled={isProcessing} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-4">
+          <button onClick={convertToPdf} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-4">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
             {isProcessing ? 'Generating PDF...' : 'Convert to PDF'}
           </button>

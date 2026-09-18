@@ -173,7 +173,7 @@ export default function XlsxCsvConverter() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-6xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>100% Client-Side Processing:</strong> Convert between Excel spreadsheets and CSV files. Perfect for data migration and analysis.
       </div>
 
@@ -181,13 +181,13 @@ export default function XlsxCsvConverter() {
         <div className="flex items-center gap-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-1">
           <button
             onClick={() => switchDirection('xlsx-to-csv')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'xlsx-to-csv' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'xlsx-to-csv' ? 'bg-[var(--accent-ink)] text-white shadow' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-[var(--text-primary)]'}`}
           >
             XLSX → CSV
           </button>
           <button
             onClick={() => switchDirection('csv-to-xlsx')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'csv-to-xlsx' ? 'bg-blue-600 text-white shadow' : 'text-zinc-600 dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${direction === 'csv-to-xlsx' ? 'bg-[var(--accent-ink)] text-white shadow' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-[var(--text-primary)]'}`}
           >
             CSV → XLSX
           </button>
@@ -255,9 +255,9 @@ export default function XlsxCsvConverter() {
                 id="includeHeader"
                 checked={includeHeader}
                 onChange={(e) => setIncludeHeader(e.target.checked)}
-                className="rounded border-zinc-600"
+                className="rounded border-[var(--border-subtle)]"
               />
-              <label htmlFor="includeHeader" className="text-sm text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">Include Header</label>
+              <label htmlFor="includeHeader" className="text-sm text-[var(--text-secondary)] cursor-pointer">Include Header</label>
             </div>
           )}
 
@@ -286,7 +286,7 @@ export default function XlsxCsvConverter() {
 
       {isProcessing && (
         <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
           <span className="ml-3 text-[var(--text-secondary)] text-sm">Processing...</span>
         </div>
       )}
@@ -302,7 +302,7 @@ export default function XlsxCsvConverter() {
 
       {previewData.length > 0 && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl">
-          <div className="bg-black/40 px-4 py-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center">
+          <div className="bg-black/40 px-4 py-3 border-b border-[var(--border-subtle)] flex justify-between items-center">
             <span className="text-[var(--text-primary)] font-medium text-sm">Preview (first {Math.min(previewData.length, 20)} rows)</span>
             {outputUrl ? (
               <button
@@ -326,13 +326,13 @@ export default function XlsxCsvConverter() {
               <thead>
                 <tr className="bg-[var(--bg-overlay)]/50">
                   {previewColumns.map((col, i) => (
-                    <th key={i} className="px-4 py-2 text-left text-zinc-600 dark:text-[var(--text-muted)] font-medium text-xs border-b border-[var(--border-subtle)] whitespace-nowrap">{col}</th>
+                    <th key={i} className="px-4 py-2 text-left text-[var(--text-secondary)] font-medium text-xs border-b border-[var(--border-subtle)] whitespace-nowrap">{col}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {previewData.map((row, ri) => (
-                  <tr key={ri} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800/30">
+                  <tr key={ri} className="border-b border-[var(--border-subtle)]/50 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-overlay)]/30">
                     {previewColumns.map((col, ci) => (
                       <td key={ci} className="px-4 py-2 text-[var(--text-primary)] text-xs whitespace-nowrap max-w-[200px] truncate">{row[col]}</td>
                     ))}

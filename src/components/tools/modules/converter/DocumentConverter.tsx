@@ -168,7 +168,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
         <div className="flex flex-wrap gap-2 mb-4">
           {popularPairs.map((p, i) => (
-            <button key={i} onClick={() => { setSrcFormat(p.from); setDstFormat(p.to); }} className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-medium hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">{p.label}</button>
+            <button key={i} onClick={() => { setSrcFormat(p.from); setDstFormat(p.to); }} className="px-3 py-1.5 bg-[var(--accent)]/10 text-[var(--accent)] rounded-lg text-xs font-medium hover:bg-[var(--accent)]/20 transition-colors">{p.label}</button>
           ))}
         </div>
 
@@ -180,12 +180,12 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}
           className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-8 cursor-pointer transition-all ${
             isDragOver
-              ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20 scale-[1.02]'
-              : 'border-zinc-300 dark:border-zinc-600 hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/10'
+              ? 'border-[var(--accent)] bg-[var(--accent)]/10 scale-[1.02]'
+              : 'border-[var(--border-subtle)] hover:border-[var(--accent)] hover:bg-[var(--accent)]/5'
           }`}
         >
           <input ref={fileInputRef} type="file" accept={`.pdf,.docx,.txt,.html,.htm,.md,.rtf,.odt,.epub`} multiple onChange={handleFileInput} className="hidden" />
-          <svg className={`w-10 h-10 mb-2 transition-colors ${isDragOver ? 'text-blue-500' : 'text-[var(--text-muted)]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+          <svg className={`w-10 h-10 mb-2 transition-colors ${isDragOver ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
           <span className="text-sm text-[var(--text-muted)]">{isDragOver ? 'Drop files here' : files.length > 0 ? `${files.length} file(s) selected` : 'Click or drag files to upload'}</span>
           <span className="text-[10px] text-[var(--text-muted)] mt-1">Supports: PDF, DOCX, TXT, HTML, MD, RTF, ODT, EPUB</span>
         </div>
@@ -195,7 +195,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
             {files.map((f, i) => (
               <div key={i} className="flex items-center justify-between bg-[var(--bg-surface)] rounded-xl px-4 py-2 border border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2 min-w-0">
-                  <svg className="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  <svg className="w-4 h-4 text-[var(--accent)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                   <span className="text-sm text-[var(--text-primary)] truncate">{f.name}</span>
                   <span className="text-[10px] text-[var(--text-muted)]">({(f.size / 1024).toFixed(1)} KB)</span>
                 </div>
@@ -207,11 +207,11 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
 
         {files.length > 0 && (
           <div className="flex flex-wrap gap-2 items-center">
-            <select aria-label="Source format" value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
+            <select aria-label="Source format" value={srcFormat} onChange={e => setSrcFormat(e.target.value)} className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               {FORMATS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
-            <button onClick={swapFormats} className="px-3 py-2 rounded-xl bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:border-blue-400" title="Swap formats">⇄</button>
-            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} aria-label="Output format" className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/50">
+            <button onClick={swapFormats} className="px-3 py-2 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors hover:border-[var(--accent)]" title="Swap formats">⇄</button>
+            <select value={dstFormat} onChange={e => setDstFormat(e.target.value)} aria-label="Output format" className="flex-1 min-w-[140px] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50">
               {FORMATS.map(f => <option key={f} value={f}>{f}</option>)}
             </select>
           </div>
@@ -222,7 +222,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
             <label className="text-xs font-medium text-[var(--text-secondary)]">Quality:</label>
             {(['low', 'medium', 'high'] as const).map(q => (
               <button key={q} onClick={() => setQuality(q)}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${quality === q ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${quality === q ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
                 {q.charAt(0).toUpperCase() + q.slice(1)}
               </button>
             ))}
@@ -230,7 +230,7 @@ export function DocumentConverter({ defaultFrom, defaultTo, downloadFilename }: 
         )}
 
         <button onClick={handleConvert} disabled={files.length === 0 || isProcessing}
-          className="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+          className="w-full py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl font-medium transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
           {isProcessing ? (
             <>
               <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>

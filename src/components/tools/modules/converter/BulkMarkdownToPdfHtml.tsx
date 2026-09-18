@@ -86,7 +86,7 @@ export default function BulkMarkdownToPdfHtml() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <div className="flex flex-wrap gap-2">
           {outputFormats.map((f) => (
-            <button key={f.value} onClick={() => setOutputFormat(f.value)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${outputFormat === f.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+            <button key={f.value} onClick={() => setOutputFormat(f.value)} className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${outputFormat === f.value ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {f.label}
             </button>
           ))}
@@ -96,13 +96,13 @@ export default function BulkMarkdownToPdfHtml() {
           <div className="flex items-center gap-2">
             <span className="text-xs text-[var(--text-secondary)]">Theme:</span>
             {themes.map((t) => (
-              <button key={t.value} onClick={() => setTheme(t.value)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${theme === t.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
+              <button key={t.value} onClick={() => setTheme(t.value)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${theme === t.value ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                 {t.label}
               </button>
             ))}
           </div>
           <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)] cursor-pointer select-none">
-            <input type="checkbox" checked={showPreview} onChange={(e) => setShowPreview(e.target.checked)} className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-700" />
+            <input type="checkbox" checked={showPreview} onChange={(e) => setShowPreview(e.target.checked)} className="w-3.5 h-3.5 rounded border-[var(--border-subtle)]" />
             Show preview
           </label>
         </div>
@@ -117,8 +117,8 @@ export default function BulkMarkdownToPdfHtml() {
               <h4 className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">{showPreview ? 'Preview' : 'Output'}</h4>
               {resultHtml && (
                 <div className="flex gap-3">
-                  <button onClick={copyHtml} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy HTML</button>
-                  <button onClick={outputFormat === 'pdf' ? downloadPdf : downloadHtml} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download .{outputFormat}</button>
+                  <button onClick={copyHtml} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy HTML</button>
+                  <button onClick={outputFormat === 'pdf' ? downloadPdf : downloadHtml} className="text-xs text-[var(--accent)] hover:underline font-medium">Download .{outputFormat}</button>
                 </div>
               )}
             </div>
@@ -135,7 +135,7 @@ export default function BulkMarkdownToPdfHtml() {
           </div>
         </div>
 
-        <button onClick={processMarkdown} disabled={isProcessing} className="w-full px-4 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+        <button onClick={processMarkdown} disabled={isProcessing} className="w-full px-4 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50 text-white text-sm font-bold rounded-xl transition-all flex items-center justify-center gap-2">
           {isProcessing && <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />}
           Convert Markdown to {outputFormat.toUpperCase()}
         </button>

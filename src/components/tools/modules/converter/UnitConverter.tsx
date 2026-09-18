@@ -119,32 +119,32 @@ export function UnitConverter() {
           <label className="text-xs font-medium text-[var(--text-secondary)]">Category</label>
           <div className="flex flex-wrap gap-2 mt-1">
             {Object.keys(CATEGORIES).map(c => (
-              <button key={c} onClick={() => handleCategory(c)} className={`px-3 py-1.5 text-sm rounded-lg transition ${category === c ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>{c}</button>
+              <button key={c} onClick={() => handleCategory(c)} className={`px-3 py-1.5 text-sm rounded-lg transition ${category === c ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>{c}</button>
             ))}
           </div>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="lbl-unitconverter-from" className="text-xs font-medium text-[var(--text-secondary)]">From unit</label>
-            <select id="lbl-unitconverter-from" aria-label="From unit" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <select id="lbl-unitconverter-from" aria-label="From unit" value={fromUnit} onChange={e => setFromUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
           <div>
             <label htmlFor="lbl-unitconverter-to" className="text-xs font-medium text-[var(--text-secondary)]">To unit</label>
-            <select id="lbl-unitconverter-to" aria-label="To" value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+            <select id="lbl-unitconverter-to" aria-label="To unit" value={toUnit} onChange={e => setToUnit(e.target.value)} className="w-full mt-1 p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm">{cat!.units.map(u => <option key={u} value={u}>{u}</option>)}</select>
           </div>
         </div>
         <div>
           <label htmlFor="lbl-unitconverter-value" className="text-xs font-medium text-[var(--text-secondary)]">Quantity</label>
-          <input id="lbl-unitconverter-value" aria-label="Quantity" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border dark:border-zinc-700 bg-white dark:bg-[var(--bg-surface)] text-sm" />
+            <input id="lbl-unitconverter-value" aria-label="Quantity" type="number" value={value} onChange={e => setValue(e.target.value)} className="w-full mt-1 p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-sm" />
         </div>
-        <div className="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/30">
+        <div className="p-4 rounded-xl bg-[var(--accent)]/10 border border-[var(--accent)]/20">
           <p className="text-xs text-[var(--text-secondary)]">Result</p>
           {result === null ? (
             <p className="text-lg text-[var(--text-muted)]">Enter a quantity to convert</p>
           ) : (
             <div className="flex items-center justify-between gap-3">
               <p className="text-2xl font-bold">{value} {fromUnit} = {result.toLocaleString(undefined, { maximumFractionDigits: 6 })} {toUnit}</p>
-              <button onClick={copyResult} aria-label="Copy conversion result" className="shrink-0 px-3 py-1.5 text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">Copy</button>
+              <button onClick={copyResult} aria-label="Copy conversion result" className="shrink-0 px-3 py-1.5 text-xs font-bold bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">Copy</button>
             </div>
           )}
         </div>

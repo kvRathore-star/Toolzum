@@ -430,7 +430,7 @@ const copyOutput = useCallback(() => {
                 Clear
               </button>
             </div>
-            <textarea aria-label="Clear"
+            <textarea aria-label={`${srcFormat} input`}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={`Paste ${srcFormat} here...`}
@@ -448,14 +448,14 @@ const copyOutput = useCallback(() => {
                 <button
                   onClick={copyOutput}
                   disabled={!output}
-                  className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                  className="text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
                 >
                   Copy
                 </button>
                 <button
                   onClick={downloadOutput}
                   disabled={!output}
-                  className="text-xs bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
+                  className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   .{FORMAT_EXT[dstFormat]}
@@ -485,7 +485,7 @@ const copyOutput = useCallback(() => {
                 <Link
                   key={p.slug}
                   href={`/converter/${p.slug}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] transition-all"
                 >
                   {p.input} → {p.output}
                 </Link>

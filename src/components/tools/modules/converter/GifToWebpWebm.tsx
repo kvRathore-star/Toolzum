@@ -148,7 +148,7 @@ export default function GifToWebpWebm() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Modern GIF replacement:</strong> Convert animated GIFs to WebP (animated image, ~10x smaller) or WebM (video, even better compression) — entirely in your browser.
         </div>
         <FileUploader
@@ -162,10 +162,10 @@ export default function GifToWebpWebm() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && (
             <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)] text-xs mt-1">
               {gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}
@@ -174,7 +174,7 @@ export default function GifToWebpWebm() {
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setOutputUrl2(null); setGifInfo(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -186,7 +186,7 @@ export default function GifToWebpWebm() {
             <h4 className="text-[var(--text-primary)] font-medium">Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Output Format</label>
+              <label className="block text-sm text-[var(--text-secondary)] mb-2">Output Format</label>
               <div className="flex gap-2">
                 {(['webp', 'webm', 'both'] as OutputFormat[]).map((fmt) => (
                   <button
@@ -195,7 +195,7 @@ export default function GifToWebpWebm() {
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       outputFormat === fmt
                         ? 'bg-emerald-700 text-white shadow-lg'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {fmt === 'webp' ? 'WebP' : fmt === 'webm' ? 'WebM' : 'Both'}
@@ -206,7 +206,7 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label htmlFor="lbl-giftowebpwebm-webp-quality-quality" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                <label htmlFor="lbl-giftowebpwebm-webp-quality-quality" className="block text-sm text-[var(--text-secondary)] mb-2">
                   WebP Quality: {quality}
                 </label>
                 <input id="lbl-giftowebpwebm-webp-quality-quality"
@@ -226,7 +226,7 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webm' || outputFormat === 'both') && (
               <div>
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Frame Rate</label>
+                <label className="block text-sm text-[var(--text-secondary)] mb-2">Frame Rate</label>
                 <div className="flex gap-2 flex-wrap">
                   {(['auto', 10, 15, 24, 30] as FpsOption[]).map((f) => (
                     <button
@@ -234,8 +234,8 @@ export default function GifToWebpWebm() {
                       onClick={() => setFps(f)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                         fps === f
-                          ? 'bg-blue-500 text-white shadow-lg'
-                          : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                          ? 'bg-[var(--accent-ink)] text-white shadow-lg'
+                          : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                       }`}
                     >
                       {f === 'auto' ? 'Auto' : `${f} fps`}
@@ -247,7 +247,7 @@ export default function GifToWebpWebm() {
 
             {(outputFormat === 'webp' || outputFormat === 'both') && (
               <div>
-                <label htmlFor="lbl-giftowebpwebm-loop-count" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+                <label htmlFor="lbl-giftowebpwebm-loop-count" className="block text-sm text-[var(--text-secondary)] mb-2">
                   Loop Count <span className="text-[var(--text-muted)]">(0 = infinite)</span>
                 </label>
                 <input id="lbl-giftowebpwebm-loop-count" aria-label="Loop Count (0 = infinite)"
@@ -267,9 +267,9 @@ export default function GifToWebpWebm() {
                   type="checkbox"
                   checked={preserveAlpha}
                   onChange={(e) => setPreserveAlpha(e.target.checked)}
-                  className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500"
+                  className="w-5 h-5 rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500"
                 />
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+                <span className="text-sm text-[var(--text-secondary)]">
                   Preserve transparency <span className="text-[var(--text-muted)]">(WebP only — WebM ignores this)</span>
                 </span>
               </label>
@@ -278,7 +278,7 @@ export default function GifToWebpWebm() {
             <button
               onClick={processConversion}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
                 <div
@@ -307,7 +307,7 @@ export default function GifToWebpWebm() {
                   {outputFormat !== 'webm' && (
                     <button
                       onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}.webp`)}
-                      className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                      className="w-full bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
                     >
                       Download WebP
                     </button>
@@ -320,7 +320,7 @@ export default function GifToWebpWebm() {
                   <video src={outputUrl2} controls autoPlay loop className="w-full max-h-[200px] rounded-lg mb-6" />
                   <button
                     onClick={() => downloadOrShare(outputUrl2, `${file.name.split('.')[0]}.webm`)}
-                    className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                    className="w-full bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
                   >
                     Download WebM
                   </button>
@@ -339,9 +339,9 @@ export default function GifToWebpWebm() {
             />
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
-            <p className="font-medium text-blue-300">Why convert?</p>
-            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
+          <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/20 p-4 rounded-xl space-y-2 text-sm text-[var(--accent)]">
+            <p className="font-medium text-[var(--accent)]">Why convert?</p>
+            <ul className="space-y-1 text-[var(--accent)]/80">
               <li>• WebP animated images are typically <strong>~10× smaller</strong> than GIF</li>
               <li>• WebM video offers even better compression with alpha support</li>
               <li>• Modern browsers support WebP and WebM natively</li>
@@ -349,12 +349,12 @@ export default function GifToWebpWebm() {
             </ul>
           </div>
 
-          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
-            <p className="font-medium text-zinc-800 dark:text-zinc-200">File Comparison</p>
+          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-[var(--text-secondary)]">
+            <p className="font-medium text-[var(--text-primary)] dark:text-[var(--text-primary)]">File Comparison</p>
             <div className="space-y-1">
-              <p>Original GIF: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{(file.size / 1024).toFixed(1)} KB</span></p>
+              <p>Original GIF: <span className="text-[var(--text-primary)] font-medium">{(file.size / 1024).toFixed(1)} KB</span></p>
               {gifInfo && (
-                <p>Dimensions: <span className="text-zinc-900 dark:text-zinc-100">{gifInfo.width}×{gifInfo.height}</span></p>
+                <p>Dimensions: <span className="text-[var(--text-primary)]">{gifInfo.width}×{gifInfo.height}</span></p>
               )}
             </div>
           </div>

@@ -100,10 +100,10 @@ export default function ArchiveConverter() {
 
         <div onDrop={handleDrop} onDragOver={handleDragOver} role="button" tabIndex={0} ref={dropRef} aria-label="Upload files to archive" onClick={() => { armReturn(); inputRef.current?.click(); }}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); armReturn(); inputRef.current?.click(); } }}
-          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]"
+          className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-overlay)] transition-colors cursor-pointer text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)] focus-visible:border-[var(--accent)]"
         >
           <input ref={inputRef} type="file" multiple onChange={e => { if (e.target.files) addFiles(e.target.files); e.target.value = ''; }} className="hidden" />
-          <Upload className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
+          <Upload className="w-10 h-10 text-[var(--text-secondary)] mx-auto mb-2" />
           <p className="text-xs text-[var(--text-secondary)]">Drop files here or click to browse</p>
         </div>
 
@@ -129,14 +129,14 @@ export default function ArchiveConverter() {
             </div>
 
             <button onClick={createZip} disabled={isProcessing}
-              className="w-full bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50 dark:disabled:bg-[var(--bg-elevated)] disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
               <Download className="w-4 h-4" />
               {isProcessing ? 'Creating ZIP...' : `Create & Download ZIP (${files.length} files)`}
             </button>
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-3">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Password-protected ZIPs, split large archives into multi-volume ZIPs, cloud storage integration (Google Drive / Dropbox), batch folder creation.</p>
         </div>
       </div>

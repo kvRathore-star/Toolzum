@@ -79,7 +79,7 @@ export default function JsonToCode() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
           {(['typescript', 'typescript-interface', 'java', 'csharp', 'python', 'go', 'rust', 'kotlin'] as Lang[]).map(l => (
-            <button key={l} onClick={() => { setLang(l); if (input) convert(input, l, rootName); }} className={`px-2 py-1.5 text-[10px] font-bold rounded-lg transition-all ${lang === l ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{l === 'typescript-interface' ? 'TS (interface)' : l.charAt(0).toUpperCase() + l.slice(1)}</button>
+            <button key={l} onClick={() => { setLang(l); if (input) convert(input, l, rootName); }} className={`px-2 py-1.5 text-[10px] font-bold rounded-lg transition-all ${lang === l ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>{l === 'typescript-interface' ? 'TS (interface)' : l.charAt(0).toUpperCase() + l.slice(1)}</button>
           ))}
         </div>
         <input aria-label="Root type name" value={rootName} onChange={e => { setRootName(e.target.value); if (input) convert(input, lang, e.target.value); }} placeholder="Root type name" className="w-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
@@ -88,7 +88,7 @@ export default function JsonToCode() {
         <textarea aria-label="Paste JSON..." value={input} onChange={e => { setInput(e.target.value); convert(e.target.value, lang, rootName); }} placeholder="Paste JSON..." className="w-full h-[400px] bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono focus:border-[var(--accent)] transition-colors" />
         <div className="relative">
           <textarea value={output} readOnly placeholder="Generated types..." aria-label="Generated code" className="w-full h-[400px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
+          {output && <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="absolute top-3 right-3 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>}
         </div>
       </div>
     </div>

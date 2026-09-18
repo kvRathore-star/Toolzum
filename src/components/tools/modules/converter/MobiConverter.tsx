@@ -604,11 +604,11 @@ ${htmlContent}
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap justify-between items-center gap-3 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-wrap justify-between items-center gap-3 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div className="min-w-0">
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate">{file.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)] truncate">{file.name}</h3>
           {metadata && (
-            <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm truncate">
+            <p className="text-[var(--text-secondary)] text-sm truncate">
               {metadata.title}{metadata.author ? ` • ${metadata.author}` : ''} • {(file.size / 1024 / 1024).toFixed(2)} MB • ~{metadata.pageCount} pages
             </p>
           )}
@@ -617,7 +617,7 @@ ${htmlContent}
           {mode !== 'mobi-to-pdf' && <button onClick={() => changeMode('mobi-to-pdf')} className="text-xs px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">PDF</button>}
           {mode !== 'mobi-to-epub' && <button onClick={() => changeMode('mobi-to-epub')} className="text-xs px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">EPUB</button>}
           {mode !== 'pdf-to-mobi' && <button onClick={() => changeMode('pdf-to-mobi')} className="text-xs px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">MOBI</button>}
-          <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
+          <button onClick={clearAll} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
         </div>
       </div>
 
@@ -632,7 +632,7 @@ ${htmlContent}
             <div className="grid grid-cols-3 gap-2 mt-1">
               {(['mobi-to-pdf', 'mobi-to-epub', 'pdf-to-mobi'] as Mode[]).map(m => (
                 <button key={m} onClick={() => changeMode(m)}
-                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all border ${mode === m ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+                  className={`py-2 px-2 rounded-xl text-xs font-bold transition-all border ${mode === m ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
                   {m === 'mobi-to-pdf' ? 'MOBI→PDF' : m === 'mobi-to-epub' ? 'MOBI→EPUB' : 'PDF→MOBI'}
                 </button>
               ))}
@@ -646,7 +646,7 @@ ${htmlContent}
                 <div className="grid grid-cols-3 gap-2 mt-1">
                   {(['a4', 'letter', 'kindle'] as PageSize[]).map(s => (
                     <button key={s} onClick={() => setPageSize(s)}
-                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${pageSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${pageSize === s ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                       {s === 'a4' ? 'A4' : s === 'letter' ? 'Letter' : 'Kindle'}
                     </button>
                   ))}
@@ -657,7 +657,7 @@ ${htmlContent}
                 <div className="grid grid-cols-3 gap-2 mt-1">
                   {(['small', 'medium', 'large'] as FontSizeVal[]).map(s => (
                     <button key={s} onClick={() => setFontSize(s)}
-                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${fontSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${fontSize === s ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                       {s.charAt(0).toUpperCase() + s.slice(1)}
                     </button>
                   ))}
@@ -668,7 +668,7 @@ ${htmlContent}
                 <div className="grid grid-cols-3 gap-2 mt-1">
                   {(['narrow', 'normal', 'wide'] as MarginVal[]).map(s => (
                     <button key={s} onClick={() => setMargin(s)}
-                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${margin === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+                      className={`py-2 px-2 rounded-xl text-xs font-bold border ${margin === s ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                       {s.charAt(0).toUpperCase() + s.slice(1)}
                     </button>
                   ))}
@@ -690,7 +690,7 @@ ${htmlContent}
           )}
 
           <button onClick={handleConvert} disabled={isProcessing || !extractedText}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-2">
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2 mt-2">
             {isProcessing && <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>}
             {!isProcessing && <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>}
             {isProcessing ? 'Processing...' : mode === 'mobi-to-pdf' ? 'Convert to PDF' : mode === 'mobi-to-epub' ? 'Convert to EPUB' : 'Convert to MOBI'}
@@ -721,8 +721,8 @@ ${htmlContent}
           )}
 
           {extractedText && (
-            <details className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
-              <summary className="px-4 py-3 text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer hover:text-zinc-900 dark:hover:text-white">
+            <details className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
+              <summary className="px-4 py-3 text-sm font-medium text-[var(--text-secondary)] cursor-pointer hover:text-[var(--text-primary)] dark:hover:text-white">
                 Preview extracted text ({extractedText.length.toLocaleString()} chars)
               </summary>
               <div className="px-4 pb-4 max-h-64 overflow-y-auto">
