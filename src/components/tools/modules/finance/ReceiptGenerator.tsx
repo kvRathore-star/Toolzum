@@ -124,7 +124,7 @@ export default function ReceiptGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
             <FileText className="w-5 h-5 text-[var(--accent)]" />
@@ -209,7 +209,7 @@ export default function ReceiptGenerator() {
                   <span className="col-span-6 truncate font-medium">{item.name}</span>
                   <span className="col-span-2 text-center">{item.qty}</span>
                   <span className="col-span-2 text-right">${item.rate.toFixed(2)}</span>
-                  <span className="col-span-2 text-right font-bold text-zinc-100">${(item.qty * item.rate).toFixed(2)}</span>
+                  <span className="col-span-2 text-right font-bold text-[var(--text-primary)]">${(item.qty * item.rate).toFixed(2)}</span>
                 </div>
               ))}
             </div>
@@ -223,14 +223,14 @@ export default function ReceiptGenerator() {
                 <span>Tax ({taxPercent}%):</span>
                 <span>${getTax().toFixed(2)}</span>
               </div>
-              <div className="flex justify-between w-48 text-zinc-100 font-bold border-t border-zinc-800 pt-2 text-sm">
+              <div className="flex justify-between w-48 text-[var(--text-primary)] font-bold border-t border-zinc-800 pt-2 text-sm">
                 <span>Total:</span>
                 <span className="text-emerald-500">${getTotal().toFixed(2)}</span>
               </div>
             </div>
           </div>
 
-          <button onClick={exportPdf} className="w-full mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+          <button onClick={exportPdf} className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
             <Download className="w-4 h-4" /> Export Receipt (PDF)
           </button>
         </div>

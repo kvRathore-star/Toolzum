@@ -39,7 +39,7 @@ export default function RentVsBuyCalculator() {
             </div>
             <div className="flex-1 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Rent Total</div>
-              <div className="text-xl font-bold text-amber-700 dark:text-amber-400">${rentTotal.toFixed(0)}</div>
+              <div className="text-xl font-bold text-[var(--accent)]">${rentTotal.toFixed(0)}</div>
             </div>
           </div>
           <div className="h-3 bg-[var(--bg-elevated)] rounded-full overflow-hidden flex">

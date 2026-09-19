@@ -211,9 +211,9 @@ export default function BulkUrlStatusChecker() {
         <div className="flex flex-wrap gap-2 text-xs">
           <span className="px-3 py-1.5 rounded-lg bg-emerald-700/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold">{summary.ok} OK</span>
           <span className="px-3 py-1.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-600 dark:text-sky-400 font-semibold">{summary.redirects} redirects</span>
-          <span className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 font-semibold">{summary.clientErrors} client errors</span>
+          <span className="px-3 py-1.5 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-amber-600 dark:text-amber-400 font-semibold">{summary.clientErrors} client errors</span>
           <span className="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 font-semibold">{summary.serverErrors} server errors</span>
-          <span className="px-3 py-1.5 rounded-lg bg-zinc-500/10 border border-zinc-500/20 text-zinc-600 dark:text-zinc-400 font-semibold">{summary.unreachable} unreachable</span>
+          <span className="px-3 py-1.5 rounded-lg bg-zinc-500/10 border border-zinc-500/20 text-[var(--text-secondary)] dark:text-[var(--text-muted)] font-semibold">{summary.unreachable} unreachable</span>
           <span className="px-3 py-1.5 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 font-semibold">{summary.slow} slow (&gt;1.5s)</span>
         </div>
       )}

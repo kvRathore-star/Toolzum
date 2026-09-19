@@ -20,12 +20,12 @@ export default function PercentageCalculator() {
            <div className="flex items-center space-x-4">
               <input aria-label="What is X% of Y?" 
                 type="number" value={val1} onChange={e => { setVal1(e.target.value); if (!e.target.value || !val2) setResult1(null); }}
-                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+                placeholder="X" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
               <span className="font-bold text-[var(--text-secondary)]">% of</span>
               <input aria-label="Y, the base value" 
                 type="number" value={val2} onChange={e => { setVal2(e.target.value); if (!e.target.value || !val1) setResult1(null); }}
-                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+                placeholder="Y" className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               />
            </div>
             <button

@@ -89,7 +89,7 @@ export default function AbTestCalculator() {
           <div className="text-sm font-bold text-[var(--text-primary)]">{(stats.ciLo * 100).toFixed(1)}…{(stats.ciHi * 100).toFixed(1)}pp</div>
         </div>
       </div>
-      <div role="status" className={`text-center text-sm font-bold rounded-xl px-3 py-2 ${stats.significant ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' : 'bg-amber-500/10 text-amber-700 dark:text-amber-400'}`}>
+      <div role="status" className={`text-center text-sm font-bold rounded-xl px-3 py-2 ${stats.significant ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' : 'bg-amber-500/10 text-[var(--accent)]'}`}>
         {stats.verdict}
       </div>
     </div>

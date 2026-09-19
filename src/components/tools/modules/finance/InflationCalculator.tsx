@@ -29,7 +29,7 @@ export default function InflationCalculator() {
             <div className="text-2xl text-red-700 dark:text-red-400">&#8594;</div>
             <div className="text-center">
               <div className="text-xs text-[var(--text-tertiary)]">In {y} years</div>
-              <div className="text-2xl font-bold text-amber-700 dark:text-amber-400">${fv.toFixed(0)}</div>
+              <div className="text-2xl font-bold text-[var(--accent)]">${fv.toFixed(0)}</div>
             </div>
           </div>
           <div className="mt-3 h-2 bg-[var(--bg-elevated)] rounded-full overflow-hidden">

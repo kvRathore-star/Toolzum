@@ -58,7 +58,7 @@ export default function InvoiceGenerator() {
       <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
         <div className="flex justify-between items-center print:hidden">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
               <FileText className="w-5 h-5 text-[var(--accent)] dark:text-[var(--accent)]" />
             </div>
             <div>
@@ -116,13 +116,13 @@ export default function InvoiceGenerator() {
               type="text"
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
-              className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full transition-colors"
+              className="text-3xl font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full transition-colors"
               placeholder="Your Company Name"
             />
             <textarea aria-label="Your Address & Contact Info"
               value={senderDetails}
               onChange={(e) => setSenderDetails(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none transition-colors"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none transition-colors"
               placeholder="Your Address & Contact Info"
             />
           </div>
@@ -138,7 +138,7 @@ export default function InvoiceGenerator() {
                   type="text"
                   value={invoiceNum}
                   onChange={(e) => setInvoiceNum(e.target.value)}
-                  className="w-32 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right font-mono"
+                  className="w-32 bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right font-mono"
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
@@ -147,7 +147,7 @@ export default function InvoiceGenerator() {
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right"
+                  className="w-36 bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right"
                 />
               </div>
               <div className="flex md:justify-end gap-2 items-center">
@@ -156,7 +156,7 @@ export default function InvoiceGenerator() {
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-36 bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right text-[var(--text-secondary)]"
+                  className="w-36 bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 md:text-right text-[var(--text-secondary)]"
                 />
               </div>
             </div>
@@ -171,13 +171,13 @@ export default function InvoiceGenerator() {
               type="text"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
-              className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full"
+              className="text-lg font-bold text-[var(--text-primary)] bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full"
               placeholder="Client Name"
             />
             <textarea aria-label="Client Address & Info"
               value={clientDetails}
               onChange={(e) => setClientDetails(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
               placeholder="Client Address & Info"
             />
           </div>
@@ -204,7 +204,7 @@ export default function InvoiceGenerator() {
                       type="text"
                       value={item.description}
                       onChange={(e) => handleItemChange(item.id, 'description', e.target.value)}
-                      className="w-full bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
+                      className="w-full bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
                       placeholder="Item description"
                     />
                   </td>
@@ -214,7 +214,7 @@ export default function InvoiceGenerator() {
                       min="1"
                       value={item.quantity} aria-label={`Item ${idx + 1} quantity`}
                       onChange={(e) => handleItemChange(item.id, 'quantity', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
                     />
                   </td>
                   <td className="py-3 px-2 text-right">
@@ -224,7 +224,7 @@ export default function InvoiceGenerator() {
                       step="0.01"
                       value={item.rate} aria-label={`Item ${idx + 1} rate`}
                       onChange={(e) => handleItemChange(item.id, 'rate', parseFloat(e.target.value) || 0)}
-                      className="w-full text-right bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-zinc-900 dark:text-zinc-300"
+                      className="w-full text-right bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-[var(--text-primary)] dark:text-zinc-300"
                     />
                   </td>
                   <td className="py-3 px-2 text-right font-medium text-[var(--text-primary)]">
@@ -261,7 +261,7 @@ export default function InvoiceGenerator() {
             <textarea aria-label="Notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-zinc-300 dark:hover:border-zinc-700 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
+              className="text-[var(--text-secondary)] bg-transparent border-b border-transparent hover:border-[var(--border-subtle)] dark:hover:border-[var(--border-subtle)] focus:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full h-24 resize-none"
               placeholder="Terms, payment instructions, etc."
             />
           </div>

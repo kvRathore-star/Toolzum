@@ -35,7 +35,7 @@ export function StudyTimeCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -79,7 +79,7 @@ export function TestScoreCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -118,7 +118,7 @@ export function WordsPerPageCalculator() {
             </select>
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -163,7 +163,7 @@ export function ProfitLossCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -201,7 +201,7 @@ export function RingSizeConverter() {
           <input id="lbl-calcfilekitwidgets-inner-diameter-mm" aria-label="Inner diameter (mm)" type="number" value={mm} onChange={e => setMm(e.target.value)} step={0.1}
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         </div>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -240,7 +240,7 @@ export function ScreenSizeConverter() {
             </select>
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Calculate</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>
@@ -285,7 +285,7 @@ export function ShoeSizeConverter() {
             </select>
           </div>
         </div>
-        <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Convert</button>
+        <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Convert</button>
         {result && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{result}</pre>}
       </div>
     </div>

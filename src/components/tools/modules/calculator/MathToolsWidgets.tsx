@@ -50,8 +50,8 @@ export function EtaCalculator() {
         </div>
         <div className="flex items-center gap-3">
           <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
-            <button onClick={() => setUnit('km')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${unit === 'km' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>km/h</button>
-            <button onClick={() => setUnit('mi')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${unit === 'mi' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>mph</button>
+            <button onClick={() => setUnit('km')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${unit === 'km' ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>km/h</button>
+            <button onClick={() => setUnit('mi')} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${unit === 'mi' ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>mph</button>
           </div>
           <div className="flex-1" />
         </div>
@@ -61,7 +61,7 @@ export function EtaCalculator() {
         </div>
         {result && (
           <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl p-5 text-center">
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 font-mono">{result}</p>
+            <p className="text-2xl font-bold text-[var(--accent)] font-mono">{result}</p>
             <button onClick={() => copy(result)} className="mt-2 text-[10px] text-[var(--accent)] hover:underline">Copy</button>
           </div>
         )}

@@ -45,7 +45,7 @@ export default function RetirementCalculator() {
             </div>
             <div className="rounded-lg p-2 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Growth %</div>
-              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{growthPct.toFixed(0)}%</div>
+              <div className="text-sm font-bold text-[var(--accent)]">{growthPct.toFixed(0)}%</div>
             </div>
           </div>
         </div>

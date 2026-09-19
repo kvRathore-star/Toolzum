@@ -22,7 +22,7 @@ export default function CarLeaseCalculator() {
       monthly > 0 ? (
         <div>
           <div className="text-center mb-3">
-            <div className="text-lg font-bold text-amber-700 dark:text-amber-400">${monthly.toFixed(0)}</div>
+            <div className="text-lg font-bold text-[var(--accent)]">${monthly.toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">monthly lease payment</div>
           </div>
           <div className="flex gap-3">
@@ -32,7 +32,7 @@ export default function CarLeaseCalculator() {
             </div>
             <div className="flex-1 bg-[var(--bg-elevated)] rounded-lg p-3 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">APR</div>
-              <div className="text-sm font-bold text-amber-700 dark:text-amber-400">{((parseFloat(mf) || 0) * 2400).toFixed(2)}%</div>
+              <div className="text-sm font-bold text-[var(--accent)]">{((parseFloat(mf) || 0) * 2400).toFixed(2)}%</div>
             </div>
             <div className="flex-1 bg-[var(--bg-elevated)] rounded-lg p-3 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Total</div>

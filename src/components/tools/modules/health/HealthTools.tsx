@@ -38,21 +38,21 @@ export function CalorieTracker() {
         <div className="flex flex-wrap gap-1 mb-3">
           {Object.entries(COMMON_FOODS).map(([name, cal]) => (
             <button key={name} onClick={() => { setFood(name); setCalories(cal); }}
-              className="px-2 py-1 text-[10px] bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-surface)]">{name} ({cal})</button>
+              className="px-2 py-1 text-[10px] bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg hover:bg-[var(--bg-surface)]">{name} ({cal})</button>
           ))}
         </div>
         <div className="flex gap-2 mb-3">
           <input aria-label="Food name" type="text" value={food} onChange={e => setFood(e.target.value)} placeholder="Food name"
-            className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+            className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           <input aria-label="Cal" type="number" value={calories || ''} onChange={e => setCalories(Number(e.target.value))} placeholder="Cal"
-            className="w-24 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
-          <button onClick={addFood} className="bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-all">+ Add</button>
+            className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+          <button onClick={addFood} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-all">+ Add</button>
         </div>
         {entries.length > 0 && (
           <div>
             <div className="space-y-1 max-h-48 overflow-y-auto mb-2">
               {entries.map((e, i) => (
-                <div key={i} className="flex justify-between text-xs text-zinc-600 dark:text-[var(--text-muted)] px-3 py-2 bg-[var(--bg-surface)] rounded-lg">
+                <div key={i} className="flex justify-between text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] px-3 py-2 bg-[var(--bg-surface)] rounded-lg">
                   <span>{e.food}</span>
                   <span className="font-mono">{e.cal} kcal</span>
                 </div>
@@ -95,19 +95,19 @@ export function WaistToHipRatioCalculator() {
           <div>
             <label htmlFor="lbl-healthtools-waist-cm" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Waist (cm)</label>
                 <input id="lbl-healthtools-waist-cm" aria-label="Waist (cm)" type="number" value={waist} onChange={e => setWaist(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
           <div>
             <label htmlFor="lbl-healthtools-hip-cm" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Hip (cm)</label>
                 <input id="lbl-healthtools-hip-cm" aria-label="Hip (cm)" type="number" value={hip} onChange={e => setHip(e.target.value)}
-              className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
+              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
         </div>
         <div className="flex gap-2 mb-3">
-          <button onClick={() => setGender('male')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${gender === 'male' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>Male</button>
-          <button onClick={() => setGender('female')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${gender === 'female' ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>Female</button>
+          <button onClick={() => setGender('male')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${gender === 'male' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>Male</button>
+          <button onClick={() => setGender('female')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${gender === 'female' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>Female</button>
         </div>
-        <button onClick={calculate} className="w-full bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold py-2.5 rounded-xl transition-all">Calculate WHR</button>
+        <button onClick={calculate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white text-sm font-bold py-2.5 rounded-xl transition-all">Calculate WHR</button>
         {inputError && (
           <p role="alert" className="text-xs text-red-600 dark:text-red-400 font-medium mt-2">{inputError}</p>
         )}

@@ -252,7 +252,7 @@ export default function XmlSitemapGenerator() {
             <button
               aria-expanded={showSettings}
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 transition-colors"
             >
               <Settings2 className="w-3.5 h-3.5" />
               Advanced settings
@@ -291,11 +291,11 @@ export default function XmlSitemapGenerator() {
                       className="flex-1 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                       disabled={isCrawling}
                     />
-                    <button onClick={addExclusion} className="px-3 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg text-xs transition-colors" disabled={isCrawling}>Add</button>
+                    <button onClick={addExclusion} className="px-3 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg text-xs transition-colors" disabled={isCrawling}>Add</button>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {exclusions.map((e, i) => (
-                      <span key={i} className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--bg-surface)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">
+                      <span key={i} className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--bg-surface)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                         {e.pattern}
                         <button aria-label={`Remove exclusion ${e.pattern}`} onClick={() => removeExclusion(i)} className="text-[var(--text-muted)] hover:text-red-500"><Trash2 className="w-3 h-3" /></button>
                       </span>
@@ -353,7 +353,7 @@ export default function XmlSitemapGenerator() {
             </div>
 
             {state.jsRendering && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-amber-700 dark:text-amber-400">
+              <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-[var(--accent)]">
                 <Zap className="w-3.5 h-3.5" />
                 JavaScript site detected — using browser rendering mode
               </div>
@@ -387,7 +387,7 @@ export default function XmlSitemapGenerator() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-4 text-sm">
                 <span className="text-[var(--text-primary)]"><strong className="text-lg">{state.pages.length}</strong> URLs</span>
-                <span className="w-px h-6 bg-zinc-200 dark:bg-zinc-700" />
+                <span className="w-px h-6 bg-[var(--bg-overlay)]" />
                 <span className="text-[var(--text-secondary)]">Generated in <strong>{(state.durationMs / 1000).toFixed(1)}s</strong></span>
               </div>
               <div className="flex gap-2">
@@ -438,7 +438,7 @@ export default function XmlSitemapGenerator() {
               </div>
             </div>
             {state.insights.missingMeta > 0 && (
-              <div className="flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-amber-700 dark:text-amber-400">
+              <div className="flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-[var(--accent)]">
                 <AlertTriangle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                 <span>{state.insights.missingMeta} page{state.insights.missingMeta > 1 ? 's are' : ' is'} missing meta descriptions.</span>
               </div>
@@ -450,7 +450,7 @@ export default function XmlSitemapGenerator() {
               </div>
             )}
             {state.insights.duplicateTitles > 0 && (
-              <div className="flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-amber-700 dark:text-amber-400">
+              <div className="flex items-start gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-[var(--accent)]">
                 <AlertTriangle className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                 <span>{state.insights.duplicateTitles} page{state.insights.duplicateTitles > 1 ? 's have' : ' has'} duplicate title tags.</span>
               </div>
@@ -489,7 +489,7 @@ export default function XmlSitemapGenerator() {
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Upload to your server root</p>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5">Upload sitemap.xml to the root of your website so search engines can find it.</p>
-                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">Upload sitemap.xml → /public_html/sitemap.xml</pre>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Upload sitemap.xml → /public_html/sitemap.xml</pre>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -497,7 +497,7 @@ export default function XmlSitemapGenerator() {
                 <div className="flex-1">
                   <p className="text-sm font-medium text-[var(--text-primary)]">Add to robots.txt</p>
                   <p className="text-xs text-[var(--text-secondary)] mt-0.5">Tell all search engine bots where your sitemap is.</p>
-                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-zinc-600 dark:text-[var(--text-muted)]">Sitemap: {state.url}sitemap.xml</pre>
+                  <pre className="mt-2 px-3 py-2 bg-[var(--bg-overlay)] rounded-lg text-[11px] font-mono text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Sitemap: {state.url}sitemap.xml</pre>
                 </div>
               </div>
               <div className="flex gap-4">
@@ -508,7 +508,7 @@ export default function XmlSitemapGenerator() {
                     href="https://search.google.com/search-console/sitemaps"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-xl transition-colors"
+                    className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white text-xs font-bold rounded-xl transition-colors"
                   >
                     Open Google Search Console <ExternalLink className="w-3 h-3" />
                   </a>
@@ -522,7 +522,7 @@ export default function XmlSitemapGenerator() {
                     href="https://www.bing.com/webmasters/sitemaps"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-xs font-medium rounded-xl transition-colors"
+                    className="inline-flex items-center gap-1.5 mt-2 px-4 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] text-xs font-medium rounded-xl transition-colors"
                   >
                     Open Bing Webmaster Tools <ExternalLink className="w-3 h-3" />
                   </a>

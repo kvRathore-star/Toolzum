@@ -36,7 +36,7 @@ export default function IbanValidator() {
                 setChecked(false);
               }} 
               placeholder="e.g. GB29 NWBK 6016 1331 9268 19" 
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700" 
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)]" 
             />
           </div>
 
@@ -71,7 +71,7 @@ export default function IbanValidator() {
             )
           ) : (
             <div className="text-center text-[var(--text-muted)]">
-              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700 animate-pulse" />
+              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-[var(--text-primary)] animate-pulse" />
               <p className="text-sm">Status display is idle.</p>
               <p className="text-xs text-[var(--text-secondary)]">Enter bank account details and validate.</p>
             </div>

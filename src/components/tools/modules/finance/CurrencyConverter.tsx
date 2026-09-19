@@ -143,21 +143,21 @@ export default function CurrencyConverter() {
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       {/* Header Info */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[var(--bg-overlay)] p-4 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[var(--bg-overlay)] p-4 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl gap-4">
         <div>
-          <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-500" />
             Live Currency Converter
           </h2>
           <p className="text-xs text-[var(--text-secondary)] mt-1">Convert between 160+ currencies with real-time accuracy</p>
         </div>
         <div className="flex items-center gap-3 text-xs text-[var(--text-muted)] self-end sm:self-auto">
-          <span>Rates updated: <strong className="text-zinc-600 dark:text-zinc-300">{lastUpdated || 'Loading...'}</strong></span>
+          <span>Rates updated: <strong className="text-[var(--text-secondary)] dark:text-zinc-300">{lastUpdated || 'Loading...'}</strong></span>
           <button
             onClick={fetchRates}
             disabled={loading}
             aria-label="Refresh rates"
-            className="p-2 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-zinc-700 dark:text-[var(--text-secondary)] transition-colors disabled:opacity-50 flex items-center gap-1 cursor-pointer"
+            className="p-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] rounded-lg text-[var(--text-primary)] dark:text-[var(--text-secondary)] transition-colors disabled:opacity-50 flex items-center gap-1 cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           </button>
@@ -178,7 +178,7 @@ export default function CurrencyConverter() {
                 onChange={e => setAmount(e.target.value)} 
                 min="0.01" 
                 step="any"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-[var(--border-subtle)] dark:focus:border-zinc-700 rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-colors"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)] rounded-xl px-4 py-3.5 text-[var(--text-primary)] text-lg font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 transition-colors"
                 required
               />
             </div>
@@ -188,7 +188,7 @@ export default function CurrencyConverter() {
               <button 
                 type="button" 
                 onClick={handleSwap} 
-                className="p-3 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full hover:bg-zinc-200 dark:hover:bg-[var(--bg-elevated)] transition-all text-zinc-600 dark:text-zinc-300 shadow-md active:scale-95"
+                className="p-3 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-all text-[var(--text-secondary)] dark:text-zinc-300 shadow-md active:scale-95"
                 aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-5 h-5" />
@@ -223,7 +223,7 @@ export default function CurrencyConverter() {
               <button 
                 type="button" 
                 onClick={handleSwap} 
-                className="p-3 bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-surface)] transition-all text-zinc-600 dark:text-zinc-300 shadow-sm hover:shadow-md cursor-pointer active:scale-95"
+                className="p-3 bg-[var(--bg-surface)] rounded-full hover:bg-[var(--bg-surface)] transition-all text-[var(--text-secondary)] dark:text-zinc-300 shadow-sm hover:shadow-md cursor-pointer active:scale-95"
                 title="Swap Currencies" aria-label="Swap currencies"
               >
                 <ArrowUpDown className="w-4 h-4 rotate-90" />
@@ -257,7 +257,7 @@ export default function CurrencyConverter() {
 
           <button 
             type="submit" 
-            className="w-full bg-zinc-950 dark:bg-white text-white dark:text-black font-bold py-4 rounded-xl shadow-lg transition-all hover:bg-zinc-800 dark:hover:bg-zinc-100 cursor-pointer active:scale-[0.99] text-base"
+            className="w-full bg-zinc-950 dark:bg-white text-white dark:text-black font-bold py-4 rounded-xl shadow-lg transition-all hover:opacity-90 cursor-pointer active:scale-[0.99] text-base"
           >
             Convert Currency
           </button>
@@ -295,7 +295,7 @@ export default function CurrencyConverter() {
               {multipliers.map(mult => (
                 <div key={mult} className="flex justify-between py-2 text-xs">
                   <span className="text-[var(--text-secondary)] font-medium">{mult.toLocaleString()} {fromCurrency}</span>
-                  <span className="text-zinc-900 dark:text-zinc-200 font-bold">
+                  <span className="text-[var(--text-primary)] dark:text-zinc-200 font-bold">
                     {(mult * conversionRate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {toCurrency}
                   </span>
                 </div>
@@ -308,7 +308,7 @@ export default function CurrencyConverter() {
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-3">
               <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-2">
                 <h3 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-1.5">
-                  <History className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+                  <History className="w-4 h-4 text-[var(--accent)]" />
                   Recent History
                 </h3>
                 <button 
@@ -323,7 +323,7 @@ export default function CurrencyConverter() {
                 {history.map((entry, idx) => (
                   <div key={idx} className="flex items-center justify-between text-xs p-2.5 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/30">
                     <div className="space-y-0.5">
-                      <div className="font-bold text-zinc-800 dark:text-[var(--text-secondary)]">
+                      <div className="font-bold text-[var(--text-primary)] dark:text-[var(--text-secondary)]">
                         {entry.amount.toLocaleString()} {entry.from} ➔ {entry.result.toLocaleString(undefined, { maximumFractionDigits: 2 })} {entry.to}
                       </div>
                       <div className="text-[10px] text-[var(--text-muted)]">Rate: { (entry.result / entry.amount).toFixed(4) }</div>
