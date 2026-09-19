@@ -162,7 +162,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
 
             <form action="/api/payments/create-order" method="POST" className="mb-8">
               <input type="hidden" name="plan" value={billingInterval} />
-              <input type="hidden" name="gateway" value={isIndia ? "razorpay" : "dodo"} />
+              <input type="hidden" name="gateway" value="dodo" />
               <Button variant="primary" className="w-full whitespace-nowrap" size="lg" type="submit">
                 {billingInterval === 'pass' ? `Get Project Pass — ${currencySymbol}${currentPlan.price}` : `Upgrade to Pro Now`}
               </Button>
