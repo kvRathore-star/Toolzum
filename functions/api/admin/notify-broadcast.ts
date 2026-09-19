@@ -1,9 +1,12 @@
 import { sendEmail } from "../../../src/lib/email";
+import { requireAdmin } from "../../../src/lib/admin-auth";
 
 /**
  * Launch-broadcast sender for the notify-me waitlist (#notify-me).
  *
- * Admin-only: Bearer ALERT_TOKEN (same secret as alerts-check).
+ * Auth: EITHER an admin session (browser UI) OR Bearer ALERT_TOKEN
+ * (curl / automation). Session path uses requireAdmin; token path
+ * matches alerts-check.
  * GET /api/admin/notify-broadcast?tool=<slug>&limit=<n>
  *
  * Sends a launch email to every address waiting on `tool` whose
@@ -17,6 +20,12 @@ interface Env {
   ALERT_TOKEN?: string;
   CLOUDFLARE_API_TOKEN?: string;
   CLOUDFLARE_ACCOUNT_ID?: string;
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
+  BETTER_AUTH_SECRET: string;
+  BETTER_AUTH_URL: string;
+  TURNSTILE_SECRET_KEY: string;
+  ADMIN_EMAILS: string;
 }
 
 const DEFAULT_LIMIT = 25;
@@ -33,11 +42,13 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   const { request, env } = context;
   const { DB, ALERT_TOKEN } = env;
 
-  if (!ALERT_TOKEN) {
-    return json({ error: "broadcast_not_configured" }, 503);
-  }
-  const auth = request.headers.get("authorization") || "";
-  if (auth !== `Bearer ${ALERT_TOKEN}`) {
+  // Session admin (browser UI) OR bearer token (curl/automation).
+  const session = await requireAdmin(request, env).catch(() => null);
+  const authedBySession = !!session && !("error" in session);
+  const authHeader = request.headers.get("authorization") || "";
+  const authedByToken = !!ALERT_TOKEN && authHeader === `Bearer ${ALERT_TOKEN}`;
+  if (!authedBySession && !authedByToken) {
+    if (!ALERT_TOKEN) return json({ error: "broadcast_not_configured" }, 503);
     return json({ error: "unauthorized" }, 401);
   }
 
