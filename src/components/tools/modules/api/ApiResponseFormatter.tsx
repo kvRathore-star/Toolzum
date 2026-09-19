@@ -43,20 +43,20 @@ export default function ApiResponseFormatter() {
           <label className="text-xs text-[var(--text-secondary)]">Indent:</label>
           <div className="flex gap-1">
             {([0, 2, 4, 'tab'] as const).map(v => (
-              <button key={String(v)} onClick={() => setIndent(v)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${indent === v ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{v === 0 ? 'Minify' : v === 'tab' ? 'Tab' : v}</button>
+              <button key={String(v)} onClick={() => setIndent(v)} className={`px-3 py-1 text-xs font-bold rounded-lg transition-all ${indent === v ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{v === 0 ? 'Minify' : v === 'tab' ? 'Tab' : v}</button>
             ))}
           </div>
           <label className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] cursor-pointer">
             <input type="checkbox" checked={sortKeys} onChange={e => setSortKeys(e.target.checked)} className="rounded" aria-label="Sort keys alphabetically" />
             Sort keys
           </label>
-          <button onClick={calc} className="ml-auto bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-1.5 rounded-lg text-xs transition-all">Format</button>
+          <button onClick={calc} className="ml-auto bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-1.5 rounded-lg text-xs transition-all">Format</button>
         </div>
         {result && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{result}</pre>
             <button onClick={() => { void clipboardWrite(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-              className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+              className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
         )}
       </div>

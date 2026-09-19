@@ -30,7 +30,7 @@ export default function WebhookTester() {
           <label htmlFor="lbl-webhooktester-payload-json" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Payload (JSON)</label>
           <textarea id="lbl-webhooktester-payload-json" aria-label="Payload (JSON)" value={payload} onChange={e => setPayload(e.target.value)} rows={3} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
         </div>
-        <button onClick={calc} disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">
+        <button onClick={calc} disabled={loading} className="w-full bg-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">
           {loading ? 'Sending...' : 'Send Test'}
         </button>
         {result && (

@@ -67,7 +67,7 @@ export default function ApiLatencyBudget() {
                     <span className="font-medium">{item.label}</span>
                     <span className="font-bold">{item.value.toFixed(0)}ms ({item.pct}%)</span>
                   </div>
-                  <div className="h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                  <div className="h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                     <div className={`h-full ${item.color} rounded-full transition-all`} style={{ width: `${item.pct}%` }} />
                   </div>
                 </div>

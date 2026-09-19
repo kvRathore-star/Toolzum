@@ -37,7 +37,7 @@ export default function ApiErrorDecoder() {
         <div className="flex flex-wrap gap-1.5">
           {presets.map(c => (
             <button key={c} onClick={() => { setCode(c); setResult(''); }}
-              className={`px-2.5 py-1 text-[11px] font-bold rounded-lg transition-all ${code === c ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-zinc-900'}`}>
+              className={`px-2.5 py-1 text-[11px] font-bold rounded-lg transition-all ${code === c ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
               {c}
             </button>
           ))}
@@ -48,16 +48,16 @@ export default function ApiErrorDecoder() {
             <input id="lbl-apierrordecoder-status-code" aria-label="Status Code" type="number" value={code} onChange={e => setCode(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
           <div className="flex items-end">
-            <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-xs transition-all">Lookup</button>
+            <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2 rounded-lg text-xs transition-all">Lookup</button>
           </div>
         </div>
         {info && (
           <div className="bg-[var(--bg-surface)] rounded-xl p-4 space-y-3 border border-[var(--border-subtle)]">
             <div className="flex items-center gap-3">
-              <span className={`text-3xl font-black ${info.color === 'green' ? 'text-green-500' : info.color === 'yellow' ? 'text-yellow-500' : info.color === 'blue' ? 'text-blue-700 dark:text-blue-400' : 'text-red-500'}`}>{result}</span>
+              <span className={`text-3xl font-black ${info.color === 'green' ? 'text-green-500' : info.color === 'yellow' ? 'text-yellow-500' : info.color === 'blue' ? 'text-[var(--accent)]' : 'text-red-500'}`}>{result}</span>
               <div>
                 <p className="text-lg font-bold text-[var(--text-primary)]">{info.name}</p>
-                <span className={`inline-block px-2 py-0.5 text-[10px] font-bold rounded-full ${info.color === 'green' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : info.color === 'yellow' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' : info.color === 'blue' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>{info.category}</span>
+                <span className={`inline-block px-2 py-0.5 text-[10px] font-bold rounded-full ${info.color === 'green' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : info.color === 'yellow' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' : info.color === 'blue' ? 'bg-[var(--accent)]/10 text-[var(--accent)] dark:bg-[var(--accent)]/10 dark:text-[var(--accent)]' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>{info.category}</span>
               </div>
             </div>
             <p className="text-sm text-[var(--text-secondary)]">{info.desc}</p>

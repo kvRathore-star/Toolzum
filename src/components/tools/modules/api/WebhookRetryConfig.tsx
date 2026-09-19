@@ -45,7 +45,7 @@ export default function WebhookRetryConfig() {
                   <p className="text-xs font-bold text-amber-500">{(r.total / 1000).toFixed(1)}s</p>
                 </div>
                 <p className="text-[10px] font-mono text-[var(--text-muted)] mb-1.5">{r.delays}</p>
-                <div className="h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                <div className="h-1.5 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                   <div className="h-full bg-amber-500 rounded-full transition-all" style={{ width: `${(r.total / maxTotal) * 100}%` }} />
                 </div>
               </div>

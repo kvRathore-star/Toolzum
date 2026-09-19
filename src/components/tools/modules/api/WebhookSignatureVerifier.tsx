@@ -34,7 +34,7 @@ export default function WebhookSignatureVerifier() {
             <input id="lbl-webhooksignatureverifier-signature" aria-label="Signature" type="text" value={signature} onChange={e => setSignature(e.target.value)} className="w-full mt-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
           </div>
         </div>
-        <button onClick={calc} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Verify</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Verify</button>
         {result.expected && (
           <div className="space-y-2">
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">

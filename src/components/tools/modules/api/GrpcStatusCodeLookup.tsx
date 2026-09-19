@@ -32,7 +32,7 @@ export default function GrpcStatusCodeLookup() {
         <div className="flex flex-wrap gap-1">
           {presets.map(c => (
             <button key={c} onClick={() => setCode(c)}
-              className={`px-2 py-1 text-[10px] font-bold rounded-lg transition-all ${code === c ? 'bg-stone-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-zinc-900'}`}>{c}</button>
+              className={`px-2 py-1 text-[10px] font-bold rounded-lg transition-all ${code === c ? 'bg-stone-600 text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>{c}</button>
           ))}
         </div>
         <div className="grid grid-cols-3 gap-3">
