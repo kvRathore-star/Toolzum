@@ -119,6 +119,10 @@ export function createAuth(env: AuthEnv) {
     ),
     emailAndPassword: {
       enabled: true,
+      emailVerification: {
+        enabled: true,
+        autoSignInAfterVerification: true,
+      },
       password: {
         hash: hashPassword,
         verify: verifyPassword,
