@@ -71,6 +71,90 @@ function basicIndent(code: string, indent = 2) {
   }).join('\n');
 }
 
+// Net brace-depth delta of one line, ignoring braces inside strings,
+// line comments, and block comments. Single quotes only count as string
+// delimiters when closed on the same line (Rust lifetimes like &'a str
+// and C++ digit separators like 1'000 must not swallow the line).
+function braceDelta(line: string): number {
+  let depth = 0;
+  let i = 0;
+  let str: string | null = null;
+  let blockDepth = 0;
+  while (i < line.length) {
+    const c = line[i]!;
+    const two = line.slice(i, i + 2);
+    if (str) {
+      if (c === '\\') { i += 2; continue; }
+      if (c === str) str = null;
+      i++;
+      continue;
+    }
+    if (blockDepth > 0) {
+      if (two === '*/') { blockDepth--; i += 2; }
+      else i++;
+      continue;
+    }
+    if (two === '//') break;
+    if (two === '/*') { blockDepth++; i += 2; continue; }
+    if (c === '"' || c === '`') { str = c; i++; continue; }
+    if (c === "'") {
+      // Char literal ('x', '\n', 'ab') only when the closing quote is
+      // adjacent (≤4 chars ahead). Otherwise it's a Rust lifetime (&'a),
+      // a C++ digit separator (1'000), or similar — ignore it.
+      const rest = line.slice(i, i + 5);
+      const m = rest.match(/^'(\\.|[^'\\]){1,2}'/);
+      if (m) { i += m[0].length; continue; }
+      i++;
+      continue;
+    }
+    if (c === '{' || c === '(' || c === '[') depth++;
+    else if (c === '}' || c === ')' || c === ']') depth--;
+    i++;
+  }
+  return depth;
+}
+
+// Brace-language formatter (C++, Go, Kotlin, PHP, Rust): string-aware
+// indent that keeps preprocessor directives at column 0. Honest scope:
+// structural re-indentation, not a full parser (multi-line strings and
+// macros spanning lines are left as-is).
+function formatBraces(code: string, indent = 2, preprocessorCol0 = false) {
+  const sp = ' '.repeat(indent);
+  let depth = 0;
+  return code.split('\n').map(raw => {
+    const line = raw.trim();
+    if (!line) return '';
+    if (preprocessorCol0 && line.startsWith('#')) return line;
+    const leadClose = line.match(/^[}\]\)]+/);
+    const d = Math.max(0, depth - (leadClose ? leadClose[0].length : 0));
+    const out = sp.repeat(d) + line;
+    // Next depth from the FULL line delta (leading closers included —
+    // do not subtract them twice).
+    depth = Math.max(0, depth + braceDelta(line));
+    return out;
+  }).join('\n');
+}
+
+// Ruby formatter: keyword-based (def/class/module/if/do/end) rather than
+// brace-based. Same honest scope as formatBraces.
+function formatRuby(code: string, indent = 2) {
+  const sp = ' '.repeat(indent);
+  let depth = 0;
+  const OPENS = /^(def|class|module|if|unless|case|while|until|for|begin|else|elsif|when|rescue|ensure)\b|\bdo(\s*\||\s*$)/;
+  return code.split('\n').map(raw => {
+    const line = raw.trim();
+    if (!line) return '';
+    if (line.startsWith('#')) return sp.repeat(depth) + line;
+    let d = depth;
+    let opens = OPENS.test(line) ? 1 : 0;
+    if (/^end\b/.test(line)) { d = Math.max(0, d - 1); opens = 0; }
+    else if (/^(else|elsif|when|rescue|ensure)\b/.test(line)) { d = Math.max(0, d - 1); opens = 1; }
+    const out = sp.repeat(d) + line;
+    depth = Math.max(0, d + opens);
+    return out;
+  }).join('\n');
+}
+
 function formatSql(code: string) {
   const keywords = ['SELECT', 'FROM', 'WHERE', 'AND', 'OR', 'INNER', 'LEFT', 'RIGHT', 'JOIN', 'ON', 'GROUP BY', 'ORDER BY', 'LIMIT', 'OFFSET', 'HAVING', 'INSERT INTO', 'VALUES', 'UPDATE', 'SET', 'DELETE FROM', 'CREATE TABLE', 'ALTER TABLE', 'DROP TABLE', 'INDEX', 'UNIQUE', 'PRIMARY KEY', 'FOREIGN KEY', 'NOT', 'NULL', 'DEFAULT', 'CASCADE', 'AS', 'DISTINCT', 'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'BETWEEN', 'LIKE', 'IN', 'IS', 'EXISTS', 'CASE', 'WHEN', 'THEN', 'ELSE', 'END', 'UNION', 'ALL', 'ASC', 'DESC'];
   let upper = code.replace(/\b[a-z]+\b/g, w => keywords.includes(w.toUpperCase()) ? w.toUpperCase() : w);
@@ -126,7 +210,8 @@ function validateCode(code: string, lang: string): string | null {
 }
 
 const LANGUAGES = [
-  'JavaScript', 'TypeScript', 'JSX', 'TSX', 'JSON', 'HTML', 'CSS', 'SCSS', 'Python', 'SQL', 'YAML', 'XML', 'Markdown'
+  'JavaScript', 'TypeScript', 'JSX', 'TSX', 'JSON', 'HTML', 'CSS', 'SCSS', 'Python', 'SQL', 'YAML', 'XML', 'Markdown',
+  'C++', 'Go', 'Kotlin', 'PHP', 'Ruby', 'Rust'
 ];
 
 const LANG_SAMPLES: Record<string, string> = {
@@ -143,6 +228,12 @@ const LANG_SAMPLES: Record<string, string> = {
   'JSX': 'function App() {\n  return (\n    <div className="app">\n      <h1>Hello World</h1>\n      <p>Welcome to React</p>\n    </div>\n  );\n}',
   'TSX': 'interface Props {\n  title: string;\n  count?: number;\n}\nfunction Counter({ title, count = 0 }: Props) {\n  return <div>{title}: {count}</div>;\n}',
   'Markdown': '# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n\n> Blockquote\n\n```js\nconsole.log("code");\n```',
+  'C++': '#include <iostream>\n#include <vector>\ntemplate <typename T>\nclass Stack {\nprivate:\nstd::vector<T> items;\npublic:\nvoid push(const T& v) {\nitems.push_back(v);\n}\n};\nint main() {\nStack<int> s;\ns.push(42);\nstd::cout << "done" << std::endl;\nreturn 0;\n}',
+  'Go': 'package main\nimport "fmt"\ntype User struct {\nName string\nAge int\n}\nfunc greet(u User) string {\nif u.Age >= 18 {\nreturn fmt.Sprintf("Hello, %s!", u.Name)\n}\nreturn "Hi kid"\n}\nfunc main() {\nfmt.Println(greet(User{Name: "Asha", Age: 21}))\n}',
+  'Kotlin': 'data class User(val name: String, val age: Int)\nfun greet(u: User): String {\nreturn if (u.age >= 18) {\n"Hello, ${u.name}!"\n} else {\n"Hi kid"\n}\n}\nfun main() {\nval users = listOf(User("Asha", 21))\nusers.forEach { println(greet(it)) }\n}',
+  'PHP': '<?php\nclass Greeter {\nprivate string $prefix;\npublic function __construct(string $prefix) {\n$this->prefix = $prefix;\n}\npublic function greet(string $name): string {\nif (empty($name)) {\nreturn $this->prefix . " stranger";\n}\nreturn $this->prefix . " " . $name;\n}\n}\n$g = new Greeter("Hello");\necho $g->greet("Asha");\n?>',
+  'Ruby': 'class Greeter\ndef initialize(prefix)\n@prefix = prefix\nend\ndef greet(name)\nif name.nil? || name.empty?\n"#{@prefix} stranger"\nelse\n"#{@prefix} #{name}"\nend\nend\nend\ng = Greeter.new("Hello")\nputs g.greet("Asha")',
+  'Rust': 'struct User {\nname: String,\nage: u32,\n}\nfn greet(u: &User) -> String {\nif u.age >= 18 {\nformat!("Hello, {}!", u.name)\n} else {\nString::from("Hi kid")\n}\n}\nfn main() {\nlet u = User { name: "Asha".into(), age: 21 };\nprintln!("{}", greet(&u));\n}',
 };
 
 function formatCode(code: string, lang: string, options: { indent?: number; sortKeys?: boolean; minify?: boolean } = {}) {
@@ -161,6 +252,12 @@ function formatCode(code: string, lang: string, options: { indent?: number; sort
     case 'YAML': return formatYaml(code);
     case 'XML': return formatXml(code);
     case 'Markdown': return formatMarkdown(code);
+    case 'C++': return formatBraces(code, options.indent || 2, true);
+    case 'Go':
+    case 'Kotlin':
+    case 'PHP':
+    case 'Rust': return formatBraces(code, options.indent || 2);
+    case 'Ruby': return formatRuby(code, options.indent || 2);
     default: return basicIndent(code, options.indent || 2);
   }
 }

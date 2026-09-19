@@ -26,6 +26,9 @@ export default function ChromeExtensionPage() {
   const [copied, setCopied] = useState(false);
   const [qrText, setQrText] = useState("https://toolzum.com");
   const [copiedZip, setCopiedZip] = useState(false);
+  const [waitlistEmail, setWaitlistEmail] = useState("");
+  const [waitlistDone, setWaitlistDone] = useState(false);
+  const [waitlistSending, setWaitlistSending] = useState(false);
 
   const colors = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#14b8a6", "#f43f5e"];
 
@@ -53,10 +56,34 @@ export default function ChromeExtensionPage() {
   };
 
   const handleDownloadZip = () => {
-    toast.success("Coming soon — join the waitlist for early access.");
-    
+    toast("Extension ZIP isn't published yet — join the waitlist below and we'll email you on launch.", { icon: "📦" });
+
     setCopiedZip(true);
     setTimeout(() => setCopiedZip(false), 3000);
+  };
+
+  const joinWaitlist = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!waitlistEmail.trim() || waitlistSending) return;
+    setWaitlistSending(true);
+    try {
+      const res = await fetch("/api/notify-me", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: waitlistEmail.trim(), tool: "browser-extension" }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      if (res.ok && data.ok) {
+        setWaitlistDone(true);
+        setWaitlistEmail("");
+      } else {
+        toast.error("Couldn't save that — please try again.");
+      }
+    } catch {
+      toast.error("Network error — check your connection and try again.");
+    } finally {
+      setWaitlistSending(false);
+    }
   };
 
   return (
@@ -87,6 +114,28 @@ export default function ChromeExtensionPage() {
             <Button size="lg" variant="secondary" className="gap-2 opacity-60 cursor-not-allowed" disabled>
               Chrome Web Store — Soon
             </Button>
+          </div>
+          <div className="mt-6 max-w-md mx-auto">
+            {waitlistDone ? (
+              <p className="text-sm text-emerald-700 dark:text-emerald-400 font-medium">
+                ✓ You're on the list — we'll email you when the extension launches.
+              </p>
+            ) : (
+              <form onSubmit={joinWaitlist} className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="email"
+                  required
+                  aria-label="Email for extension launch waitlist"
+                  value={waitlistEmail}
+                  onChange={(e) => setWaitlistEmail(e.target.value)}
+                  placeholder="you@example.com — get notified on launch"
+                  className="flex-1 bg-[var(--bg-elevated)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]"
+                />
+                <Button type="submit" disabled={waitlistSending} className="shrink-0">
+                  {waitlistSending ? "Joining…" : "Join Waitlist"}
+                </Button>
+              </form>
+            )}
           </div>
         </div>
 

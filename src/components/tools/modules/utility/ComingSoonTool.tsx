@@ -7,13 +7,37 @@ import { Input } from "@/components/ui/input";
 export default function ComingSoonTool({ toolName }: { toolName: string }) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const slug = toolName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    
-    setSubmitted(true);
-    setEmail('');
+    if (!email || sending) return;
+
+    setSending(true);
+    setSendError(null);
+    try {
+      const res = await fetch("/api/notify-me", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim(), tool: slug || 'unknown-tool' }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      if (res.ok && data.ok) {
+        setSubmitted(true);
+        setEmail('');
+      } else if (res.status === 429) {
+        setSendError("Too many requests — please try again in a minute.");
+      } else {
+        setSendError("Couldn't save that — please try again.");
+      }
+    } catch {
+      setSendError("Network error — check your connection and try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -57,10 +81,13 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
             required
             className="bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] flex-1 h-12 rounded-xl focus-visible:ring-[var(--accent)]"
           />
-          <Button type="submit" className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
-            Notify Me
+          <Button type="submit" disabled={sending} className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+            {sending ? 'Joining…' : 'Notify Me'}
           </Button>
         </form>
+      )}
+      {sendError && (
+        <p role="alert" className="text-xs text-red-600 dark:text-red-400 mt-3">{sendError}</p>
       )}
 
       <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-3xl mx-auto w-full border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)] pt-12">
