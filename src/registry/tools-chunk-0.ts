@@ -70,7 +70,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     id: "json-xml-1",
     name: "JSON to XML",
     description: 'Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formatting, and legacy integration pipelines.',
-    seoDescription: 'Free online JSON to XML — Converts JSON files to XML format — APIs, configuration files, and data exchange between web services to enterprise systems, SOAP APIs, document formatting, and legacy integration pipelines. ',
+    seoDescription: 'Free online JSON to XML — nested objects to nested elements, arrays as repeated elements, indentation control, attribute encoding options. Runs locally.',
     category: "Converter",
     slug: "json-to-xml",
     dependencies: "fast-xml-parser",

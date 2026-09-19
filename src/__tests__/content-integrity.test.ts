@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
+import fs from 'node:fs';
+import path from 'node:path';
 import { toolsRegistry, SEO_PERMUTATIONS } from '@/registry/tools';
+import { clientToolsRegistry } from '@/registry/tools-client-index';
 import { deriveSeoInstructionType, categoryFaqTemplates, deriveInputAnswer } from '@/components/tools/ToolPageSEOContent';
 import { UNIT_FAMILIES } from '@/components/tools/modules/shared/unitFamilies';
 
@@ -280,5 +283,71 @@ describe('tool description content integrity', () => {
       }
     }
     expect(failures, failures.join('\n')).toHaveLength(0);
+  });
+});
+
+const BASELINE_PATH = path.join(__dirname, 'content-integrity-baseline.json');
+
+function stripSeoPrefix(seo: string, name: string): string {
+  const esc = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return seo.replace(new RegExp(`^Free online ${esc} — `, 'i'), '').trim();
+}
+
+describe('content integrity gate: registry copy + FAQ ratchet (item 26)', () => {
+  it('no shipped coming-soon promises', () => {
+    const hits = toolsRegistry
+      .filter((t) => /coming soon/i.test(`${t.description} ${t.seoDescription || ''}`))
+      .map((t) => t.slug);
+    expect(hits, 'slugs promising coming-soon features').toEqual([]);
+  });
+
+  it('no thin-suspicious modules', () => {
+    const root = path.join(process.cwd(), 'src/components/tools/modules');
+    const walk = (d: string): string[] =>
+      fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => {
+        const p = path.join(d, e.name);
+        return e.isDirectory() ? walk(p) : p.endsWith('.tsx') ? [p] : [];
+      });
+    const suspects = walk(root).filter((f) => {
+      const src = fs.readFileSync(f, 'utf8');
+      if (src.split('\n').length >= 40) return false;
+      if (src.includes('export *')) return false; // barrel
+      // healthy thin wrappers reuse shared engines/shells/hubs/configs
+      return !/shared\/|Shell|Hub|config|preset|BulkToolShell/i.test(src);
+    }).map((f) => path.relative(root, f));
+    expect(suspects, 'thin modules with no shared reuse').toEqual([]);
+  });
+
+  it('FAQ metrics do not regress vs baseline', () => {
+    const qCount = new Map<string, number>();
+    let missing = 0;
+    for (const t of toolsRegistry) {
+      const faqs = (t as { faqs?: { question: string; answer: string }[] }).faqs || [];
+      if (faqs.length === 0) missing++;
+      for (const f of faqs) qCount.set(f.question, (qCount.get(f.question) || 0) + 1);
+    }
+    const dupGroups = [...qCount.values()].filter((n) => n > 1).length;
+    const dupInstances = [...qCount.values()].filter((n) => n > 1).reduce((a, n) => a + n, 0);
+    const current = { dupGroups, dupInstances, missingFaqs: missing, toolCount: toolsRegistry.length };
+    if (process.env.UPDATE_BASELINE) {
+      fs.writeFileSync(BASELINE_PATH, JSON.stringify(current, null, 2) + '\n');
+      console.info('baseline written:', current);
+      return;
+    }
+    const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8'));
+    expect(current.dupGroups, 'duplicate FAQ groups').toBeLessThanOrEqual(baseline.dupGroups);
+    expect(current.dupInstances, 'duplicate FAQ instances').toBeLessThanOrEqual(baseline.dupInstances);
+    expect(current.missingFaqs, 'tools missing FAQs').toBeLessThanOrEqual(baseline.missingFaqs);
+  });
+
+  it('reports one-way converters (non-failing)', () => {
+    const slugs = new Set(clientToolsRegistry.filter((t) => t.category === 'Converter').map((t) => t.slug));
+    const pairs: [string, string][] = [
+      ['json-to-csv', 'csv-to-json'], ['json-to-xml', 'xml-to-json'], ['yaml-to-json', 'json-to-yaml'],
+      ['csv-to-tsv', 'tsv-to-csv'], ['json-to-yaml', 'yaml-to-json'], ['csv-to-html', 'html-to-csv'],
+    ];
+    const missing = pairs.filter(([a, b]) => (slugs.has(a) && !slugs.has(b)) || (slugs.has(b) && !slugs.has(a))).flat();
+    console.info(`one-way converter check: ${missing.length ? 'missing reverse: ' + missing.join(', ') : 'all checked pairs bidirectional'}`);
+    expect(true).toBe(true);
   });
 });

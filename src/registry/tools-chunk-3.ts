@@ -1759,7 +1759,7 @@ export const entries_chunk_3: ToolMetadata[] = [
     slug: "image-converter",
     category: "Image",
     description: 'Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF formats with format auto-detection.',
-    seoDescription: 'Free online Image Converter — Convert images between PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, and TIFF. Coming soon.',
+    seoDescription: 'Free online Image Converter — PNG, JPG, WebP, GIF, BMP, SVG, ICO, AVIF, TIFF with format auto-detection. Redirects to the live bulk converter.',
     dependencies: "None",
     showInCategory: false,
   },
