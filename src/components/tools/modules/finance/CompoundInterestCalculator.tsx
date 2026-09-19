@@ -3,23 +3,34 @@ import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls, labelCls } from '../Calculators.shared';
 
+/** Pure compound-interest math (exported for formula-oracle tests). */
+export function compoundStats(principal: string, ratePct: string, nStr: string, tStr: string) {
+  const P = parseFloat(principal);
+  const r = parseFloat(ratePct) / 100;
+  const nPerYear = parseFloat(nStr);
+  const years = parseFloat(tStr);
+  const A = P && r && nPerYear && years ? P * Math.pow(1 + r / nPerYear, nPerYear * years) : 0;
+  return {
+    P, r, nPerYear, years, A,
+    interest: A - P,
+    effRate: A > 0 ? ((A / P) ** (1 / years) - 1) * 100 : 0,
+  };
+}
+
 export default function CompoundInterestCalculator() {
   const [principal, setPrincipal] = useState('10000');
   const [rate, setRate] = useState('5');
   const [n, setN] = useState('12');
   const [t, setT] = useState('10');
   const { A, yearData, result, maxVal } = useMemo(() => {
-    const P = parseFloat(principal);
-    const r = parseFloat(rate) / 100;
-    const nPerYear = parseFloat(n);
-    const years = parseFloat(t);
-    const A = P && r && nPerYear && years ? P * Math.pow(1 + r / nPerYear, nPerYear * years) : 0;
+    const { P, r, nPerYear, years, A: amount, interest, effRate } = compoundStats(principal, rate, n, t);
+    const A = amount;
     const yearData = P && r && nPerYear && years ? Array.from({ length: years }, (_, i) => {
       const y = i + 1;
       const val = P * Math.pow(1 + r / nPerYear, nPerYear * y);
       return { year: y, value: Math.round(val * 100) / 100, deposited: P, interest: Math.round((val - P) * 100) / 100 };
     }) : [];
-    const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${(A - P).toFixed(2)}\nEffective Rate: ${((A / P) ** (1 / years) - 1).toFixed(2)}%` : '';
+    const result = A > 0 ? `Final Amount: $${A.toFixed(2)}\nTotal Interest: $${interest.toFixed(2)}\nEffective Rate: ${effRate.toFixed(2)}%` : '';
     const maxVal = yearData.length > 0 ? yearData[yearData.length - 1]!.value : 1;
     return { A, yearData, result, maxVal };
   }, [principal, rate, n, t]);

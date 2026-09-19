@@ -3,17 +3,22 @@ import { useState, useMemo } from 'react';
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { inputCls } from '../Calculators.shared';
 
+/** Pure mortgage math (exported for formula-oracle tests). */
+export function mortgageStats(loan: string, ratePct: string, yearsStr: string) {
+  const p = parseFloat(loan);
+  const r = parseFloat(ratePct) / 100 / 12;
+  const n = parseFloat(yearsStr) * 12;
+  const pmt = p && r && n ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
+  const total = pmt * n;
+  return { p, r, n, pmt, total, interest: total - p };
+}
+
 export default function MortgageCalculator() {
   const [loan, setLoan] = useState('300000');
   const [rate, setRate] = useState('6.5');
   const [years, setYears] = useState('30');
   const { pmt, total, amort, result } = useMemo(() => {
-    const p = parseFloat(loan);
-    const annualRate = parseFloat(rate) / 100;
-    const r = annualRate / 12;
-    const n = parseFloat(years) * 12;
-    const pmt = p && r && n ? p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : 0;
-    const total = pmt * n;
+    const { p, r, n, pmt, total, interest } = mortgageStats(loan, rate, years);
     const amort = p && r && n ? (() => {
       const table: Array<{year: number; principal: number; interest: number; balance: number}> = [];
       let bal = p;
@@ -32,7 +37,7 @@ export default function MortgageCalculator() {
       }
       return table;
     })() : [];
-    const result = p && r && n ? `Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${total.toFixed(2)}\nTotal Interest: $${(total - p).toFixed(2)}` : '';
+    const result = p && r && n ? `Monthly Payment: $${pmt.toFixed(2)}\nTotal Payment: $${total.toFixed(2)}\nTotal Interest: $${interest.toFixed(2)}` : '';
     return { pmt, total, amort, result };
   }, [loan, rate, years]);
   const presets = [
