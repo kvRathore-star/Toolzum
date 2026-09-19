@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { diff_match_patch } from 'diff-match-patch';
 import { Columns, Split, ArrowLeftRight, Trash2, RefreshCw } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function DiffChecker() {
   const [original, setOriginal] = useState('Type or paste original text here.\nThis line changes.\nGoodbye!');
@@ -32,6 +33,23 @@ export default function DiffChecker() {
     setModified('');
     setDiffs(null);
   };
+
+  // Unified-diff text export of the computed diffs ([-1 del, 0 same, 1 add]).
+  const diffText = useMemo(() => {
+    if (!diffs) return '';
+    return diffs
+      .flatMap(([op, textVal]: [number, string]) =>
+        String(textVal)
+          .split('\n')
+          .map((line, i, arr) =>
+            i === arr.length - 1 && line === ''
+              ? null
+              : `${op === 1 ? '+' : op === -1 ? '-' : ' '}${line}`,
+          ),
+      )
+      .filter((l): l is string => l !== null)
+      .join('\n');
+  }, [diffs]);
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -101,9 +119,12 @@ export default function DiffChecker() {
         {/* Diff result rendering */}
         {diffs && (
           <div className="border-t border-[var(--border-subtle)] pt-6 space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
-            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">
-              Comparison Output
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">
+                Comparison Output
+              </h3>
+              <CalcActions result={diffText} downloadData={diffText} downloadFilename="diff.txt" />
+            </div>
 
             <div className="p-5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-xs font-mono leading-relaxed whitespace-pre-wrap max-h-[400px] overflow-y-auto">
               {diffs.map(([op, textVal], idx) => {

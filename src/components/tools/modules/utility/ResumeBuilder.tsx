@@ -1,13 +1,33 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function ResumeBuilder() {
   const [personal, setPersonal] = useState({ name: '', title: '', email: '', phone: '', summary: '' });
   const [experience, setExperience] = useState([{ company: '', role: '', duration: '', description: '' }]);
   const [education, setEducation] = useState([{ institution: '', degree: '', year: '' }]);
   const [formError, setFormError] = useState('');
+
+  // Plain-text export for copy (print/PDF stays the visual path).
+  const resumeText = useMemo(() => [
+    personal.name,
+    personal.title,
+    [personal.email, personal.phone].filter(Boolean).join(' | '),
+    '',
+    'SUMMARY',
+    personal.summary,
+    '',
+    'EXPERIENCE',
+    ...experience.flatMap((exp) => [
+      `${exp.role} — ${exp.company} (${exp.duration})`,
+      exp.description,
+      '',
+    ]),
+    'EDUCATION',
+    ...education.map((edu) => `${edu.degree} — ${edu.institution} (${edu.year})`),
+  ].filter((l, i, arr) => l !== '' || arr[i - 1] !== '').join('\n'), [personal, experience, education]);
 
   const addExperience = () => setExperience([...experience, { company: '', role: '', duration: '', description: '' }]);
   const addEducation = () => setEducation([...education, { institution: '', degree: '', year: '' }]);
@@ -81,6 +101,9 @@ export default function ResumeBuilder() {
           >
             Print / Save as PDF (via print dialog)
           </button>
+          <div className="flex justify-center">
+            <CalcActions result={resumeText} downloadData={resumeText} downloadFilename="resume.txt" />
+          </div>
         </div>
 
         {/* Live Preview (Right) */}

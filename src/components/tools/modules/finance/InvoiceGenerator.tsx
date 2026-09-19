@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { FileText, Printer, Plus, Trash2, Calculator } from 'lucide-react';
+import { CalcActions } from '../shared/CalcActions';
 
 interface InvoiceItem {
   id: string;
@@ -53,6 +54,26 @@ export default function InvoiceGenerator() {
     window.print();
   };
 
+  // Plain-text export for copy/download (print/PDF stays the visual path).
+  const invoiceText = [
+    `INVOICE ${invoiceNum}`,
+    `Date: ${date}${dueDate ? `  Due: ${dueDate}` : ''}`,
+    ``,
+    `From: ${senderName}`,
+    ...senderDetails.split('\n'),
+    ``,
+    `Bill to: ${clientName}`,
+    ...clientDetails.split('\n'),
+    ``,
+    ...items.map((item) => `${item.description || '(no description)'} — ${item.quantity} x ${item.rate} = ${item.quantity * item.rate}`),
+    ``,
+    `Subtotal: ${subtotal}`,
+    `Tax (${taxRate}%): ${tax}`,
+    `Total: ${total}`,
+    ``,
+    notes,
+  ].join('\n');
+
   return (
     <div className="p-6 space-y-4">
       <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
@@ -74,6 +95,7 @@ export default function InvoiceGenerator() {
             <Printer className="w-4 h-4" />
             Print / PDF
           </button>
+          <CalcActions result={invoiceText} downloadData={invoiceText} downloadFilename={`${invoiceNum || 'invoice'}.txt`} />
         </div>
 
         <style>{`

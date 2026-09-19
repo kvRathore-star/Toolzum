@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FileText, Plus, Trash2, Download, Printer } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import jsPDF from 'jspdf';
+import { CalcActions } from '../shared/CalcActions';
 
 interface ReceiptItem {
   id: string;
@@ -56,6 +57,19 @@ export default function ReceiptGenerator() {
   const getSubtotal = () => items.reduce((acc, item) => acc + (item.qty * item.rate), 0);
   const getTax = () => getSubtotal() * (taxPercent / 100);
   const getTotal = () => getSubtotal() + getTax() - discountAmount;
+
+  // Plain-text export for copy (PDF export stays the visual path).
+  const receiptText = [
+    `RECEIPT ${receiptNumber}`,
+    `${businessName} — ${date} — ${paymentMethod}`,
+    ``,
+    ...items.map((item) => `${item.name} — ${item.qty} x ${item.rate} = ${item.qty * item.rate}`),
+    ``,
+    `Subtotal: ${getSubtotal().toFixed(2)}`,
+    `Tax (${taxPercent}%): ${getTax().toFixed(2)}`,
+    `Discount: ${discountAmount}`,
+    `Total: ${getTotal().toFixed(2)}`,
+  ].join('\n');
 
   const exportPdf = () => {
     try {
@@ -233,6 +247,9 @@ export default function ReceiptGenerator() {
           <button onClick={exportPdf} className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
             <Download className="w-4 h-4" /> Export Receipt (PDF)
           </button>
+          <div className="mt-3 flex justify-center">
+            <CalcActions result={receiptText} downloadData={receiptText} downloadFilename={`${receiptNumber || 'receipt'}.txt`} />
+          </div>
         </div>
       </div>
     </div>

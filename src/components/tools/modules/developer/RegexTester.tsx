@@ -8,6 +8,7 @@ import AiSettings from '../../AiSettings';
 import Link from 'next/link';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { getErrorMessage } from '@/utils/error';
+import { CalcActions } from '../shared/CalcActions';
 
 export default function RegexTester() {
   const [pattern, setPattern] = useState('');
@@ -168,7 +169,16 @@ export default function RegexTester() {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <label className="text-sm font-medium text-[var(--text-primary)]">Match Results</label>
-                <span className="text-xs px-2 py-1 bg-[var(--bg-surface)] rounded-md text-[var(--text-secondary)] font-mono">{matches.length} match{matches.length !== 1 && 'es'}</span>
+                <span className="flex items-center gap-2">
+                  <span className="text-xs px-2 py-1 bg-[var(--bg-surface)] rounded-md text-[var(--text-secondary)] font-mono">{matches.length} match{matches.length !== 1 && 'es'}</span>
+                  {matches.length > 0 && (
+                    <CalcActions
+                      result={matches.map((m) => `${m.match} (index ${m.index})`).join('\n')}
+                      downloadData={matches.map((m) => `${m.match} (index ${m.index})`).join('\n')}
+                      downloadFilename="regex-matches.txt"
+                    />
+                  )}
+                </span>
               </div>
               <div className="w-full h-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm font-mono overflow-auto whitespace-pre-wrap break-words">
                 {renderHighlightedText()}
