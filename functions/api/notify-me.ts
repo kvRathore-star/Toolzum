@@ -1,4 +1,5 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
+import { verifyTurnstile } from "./turnstile";
 
 /**
  * Notify-me waitlist backend (ComingSoon tool pages + extension page).
@@ -9,6 +10,7 @@ import { checkRateLimit, recordRateLimit } from "./rate-limit";
 
 interface Env {
   DB: D1Database;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 function clean(s: unknown, max: number): string {
@@ -42,6 +44,17 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   const tool = clean(body.tool, 80);
   if (!isEmail(email) || !isSlug(tool)) {
     return json({ error: "invalid_params — send { email, tool }" }, 400);
+  }
+
+  // Bot gate: required whenever the secret is configured (prod). The
+  // widget token arrives as `captcha` in the body.
+  const captcha = await verifyTurnstile(
+    context.env.TURNSTILE_SECRET_KEY,
+    body.captcha,
+    ip,
+  );
+  if (!captcha.ok) {
+    return json({ error: "captcha_failed" }, 403);
   }
 
   try {

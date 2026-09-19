@@ -18,6 +18,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
 import { clipboardWrite } from "@/lib/clipboard";
+import { Turnstile } from "@marsidev/react-turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
 
 export default function ChromeExtensionPage() {
@@ -28,6 +31,7 @@ export default function ChromeExtensionPage() {
   const [waitlistEmail, setWaitlistEmail] = useState("");
   const [waitlistDone, setWaitlistDone] = useState(false);
   const [waitlistSending, setWaitlistSending] = useState(false);
+  const [waitlistToken, setWaitlistToken] = useState<string | null>(null);
 
   const colors = ["#ef4444", "#3b82f6", "#10b981", "#f59e0b", "#a855f7", "#ec4899", "#14b8a6", "#f43f5e"];
 
@@ -64,17 +68,24 @@ export default function ChromeExtensionPage() {
   const joinWaitlist = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!waitlistEmail.trim() || waitlistSending) return;
+    if (TURNSTILE_SITE_KEY && !waitlistToken) {
+      toast.error("Please complete the verification first.");
+      return;
+    }
     setWaitlistSending(true);
     try {
       const res = await fetch("/api/notify-me", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: waitlistEmail.trim(), tool: "browser-extension" }),
+        body: JSON.stringify({ email: waitlistEmail.trim(), tool: "browser-extension", captcha: waitlistToken }),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setWaitlistDone(true);
         setWaitlistEmail("");
+      } else if (data.error === "captcha_failed") {
+        toast.error("Verification failed — please try again.");
+        setWaitlistToken(null);
       } else {
         toast.error("Couldn't save that — please try again.");
       }
@@ -120,7 +131,8 @@ export default function ChromeExtensionPage() {
                 ✓ You're on the list — we'll email you when the extension launches.
               </p>
             ) : (
-              <form onSubmit={joinWaitlist} className="flex flex-col sm:flex-row gap-2">
+              <form onSubmit={joinWaitlist} className="flex flex-col gap-2">
+                <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="email"
                   required
@@ -133,6 +145,16 @@ export default function ChromeExtensionPage() {
                 <Button type="submit" disabled={waitlistSending} className="shrink-0">
                   {waitlistSending ? "Joining…" : "Join Waitlist"}
                 </Button>
+                </div>
+                {TURNSTILE_SITE_KEY && (
+                  <div className="flex justify-center">
+                    <Turnstile
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={(token) => setWaitlistToken(token)}
+                      onExpire={() => setWaitlistToken(null)}
+                    />
+                  </div>
+                )}
               </form>
             )}
           </div>

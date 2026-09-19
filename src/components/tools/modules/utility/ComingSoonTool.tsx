@@ -3,18 +3,26 @@
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Turnstile } from "@marsidev/react-turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
 export default function ComingSoonTool({ toolName }: { toolName: string }) {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const slug = toolName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || sending) return;
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setSendError("Please complete the verification first.");
+      return;
+    }
 
     setSending(true);
     setSendError(null);
@@ -22,14 +30,17 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
       const res = await fetch("/api/notify-me", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), tool: slug || 'unknown-tool' }),
+        body: JSON.stringify({ email: email.trim(), tool: slug || 'unknown-tool', captcha: turnstileToken }),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean };
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setSubmitted(true);
         setEmail('');
       } else if (res.status === 429) {
         setSendError("Too many requests — please try again in a minute.");
+      } else if (data.error === "captcha_failed") {
+        setSendError("Verification failed — please try again.");
+        setTurnstileToken(null);
       } else {
         setSendError("Couldn't save that — please try again.");
       }
@@ -72,7 +83,8 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
           <p className="text-emerald-500/80 text-sm">We'll notify you the moment this tool goes live.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3">
           <Input aria-label="Enter your email to get early access" 
             type="email" 
             placeholder="Enter your email to get early access"
@@ -84,6 +96,16 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
           <Button type="submit" disabled={sending} className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
             {sending ? 'Joining…' : 'Notify Me'}
           </Button>
+          </div>
+          {TURNSTILE_SITE_KEY && (
+            <div className="flex justify-center">
+              <Turnstile
+                siteKey={TURNSTILE_SITE_KEY}
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken(null)}
+              />
+            </div>
+          )}
         </form>
       )}
       {sendError && (
