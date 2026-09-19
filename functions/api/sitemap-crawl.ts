@@ -1,5 +1,9 @@
 interface Env {
   DB?: D1Database;
+  GOOGLE_CLIENT_ID?: string;
+  GOOGLE_CLIENT_SECRET?: string;
+  BETTER_AUTH_SECRET?: string;
+  BETTER_AUTH_URL?: string;
 }
 
 interface CrawledPage {
@@ -21,6 +25,8 @@ interface SEOInsights {
 }
 
 import { checkRateLimit, recordRateLimit } from './rate-limit';
+import { createAuth } from '../../src/lib/auth';
+import { effectivePlanForUser } from '../../src/lib/planTiers';
 
 function escapeXml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -175,6 +181,31 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   try { new URL(inputUrl); } catch { return new Response('Invalid URL', { status: 400 }); }
 
   const maxPages = Math.min(Math.max(parseInt(maxParam || '50', 10) || 50, 5), 500);
+
+  // Tier enforcement (matches UI labels): anon 100, signed-in 200, pro 500.
+  // Best-effort: any failure resolves to anon caps, never blocks the crawl.
+  let tierCap = 100;
+  try {
+    if (env.DB && env.BETTER_AUTH_SECRET) {
+      const auth = createAuth({
+        DB: env.DB,
+        GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
+        GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
+        BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
+        BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
+      });
+      const session = await auth.api.getSession({ headers: request.headers });
+      if (session?.user?.id) {
+        const row = await env.DB.prepare('SELECT plan FROM "user" WHERE id = ?')
+          .bind(session.user.id)
+          .first<{ plan: string | null }>()
+          .catch(() => null);
+        const plan = await effectivePlanForUser(env.DB, session.user.id, row?.plan ?? null);
+        tierCap = plan === 'pro' ? 500 : 200;
+      }
+    }
+  } catch { /* anon caps */ }
+  const maxAllowed = Math.min(maxPages, tierCap);
   const exclusions = excludeParam ? excludeParam.split(',').map(s => s.trim()).filter(Boolean) : [];
   const baseUrl = inputUrl.replace(/\/$/, '') + '/';
   const startTime = Date.now();
@@ -231,17 +262,17 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           for (const s of sitemaps) pushSitemap(s);
           let depth = 0;
           let seeded = 0;
-          while (sitemapQueue.length > 0 && depth < 2 && seeded < maxPages * 2) {
+          while (sitemapQueue.length > 0 && depth < 2 && seeded < maxAllowed * 2) {
             const levelSize = sitemapQueue.length;
             let addedThisLevel = 0;
-            for (let i = 0; i < levelSize && seeded < maxPages * 2; i++) {
+            for (let i = 0; i < levelSize && seeded < maxAllowed * 2; i++) {
               const loc = sitemapQueue.shift()!;
               try {
                 const r = await fetchWithTimeout(loc, 8000);
                 if (!r.ok) continue;
                 const { urls, indexLocs } = extractSitemapLocs(await r.text(), baseUrl);
                 for (const u of urls) {
-                  if (seeded >= maxPages * 2) break;
+                  if (seeded >= maxAllowed * 2) break;
                   if (!queued.has(u) && !matchesExclusion(u, exclusions)) {
                     queued.add(u);
                     discovered++;
@@ -259,19 +290,19 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             depth++;
           }
           if (seeded > 0) {
-            sendEvent({ type: 'progress', discovered, crawled: 0, max: maxPages, currentUrl: baseUrl, log: `✓ Seeded ${seeded} URLs from sitemap.xml / robots.txt` });
+            sendEvent({ type: 'progress', discovered, crawled: 0, max: maxAllowed, currentUrl: baseUrl, log: `✓ Seeded ${seeded} URLs from sitemap.xml / robots.txt` });
           }
         }
       } catch { /* robots/sitemap seeding is best-effort; BFS proceeds regardless */ }
 
-      while (queue.length > 0 && pages.length < maxPages) {
+      while (queue.length > 0 && pages.length < maxAllowed) {
         const currentUrl = queue.shift()!;
         if (visited.has(currentUrl)) continue;
         visited.add(currentUrl);
 
         if (matchesExclusion(currentUrl, exclusions)) continue;
 
-        sendEvent({ type: 'progress', discovered, crawled: pages.length, max: maxPages, currentUrl, log: `→ ${currentUrl}` });
+        sendEvent({ type: 'progress', discovered, crawled: pages.length, max: maxAllowed, currentUrl, log: `→ ${currentUrl}` });
 
         try {
           const res = await fetchWithTimeout(currentUrl);
@@ -292,7 +323,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             isBroken: res.status >= 400,
           });
 
-          if (pages.length >= maxPages) break;
+          if (pages.length >= maxAllowed) break;
 
           const linkRegex = /<a[^>]+href=["']([^"']+)["'][^>]*>/gi;
           let match;
