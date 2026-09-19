@@ -7,6 +7,8 @@ interface Env {
 // may be sold — unknown plans must 400, never substitute (pricing-lie guard).
 const DODO_PRODUCTS: Record<string, string> = {
   monthly: "pdt_0Nnxjj5tGkZs2aaArMZAg",
+  yearly: "pdt_0NnxnhVX9UpNpAWGnPKis",
+  pass: "pdt_0NnxoUmsSDo8QS9UhLJ0J",
 };
 
 const PRICES: Record<string, { INR: number; USD: number }> = {
@@ -125,7 +127,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
           body: JSON.stringify({
             product_cart: [{ product_id: productId, quantity: 1 }],
             customer: { email: buyer.email, name: buyer.name || undefined },
-            metadata: { plan: "pro", orderId },
+            metadata: { plan: plan === "pass" ? "pass" : "pro", orderId },
             return_url: `https://toolzum.com/api/payments/return?order=${orderId}`,
           }),
         });

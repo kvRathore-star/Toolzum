@@ -1,4 +1,5 @@
 import { sendEmail } from "../../../src/lib/email";
+import { grantPass } from "../../../src/lib/planTiers";
 
 /**
  * Dodo Payments webhook (#36 verify-then-upgrade).
@@ -23,9 +24,15 @@ interface Env {
   CLOUDFLARE_ACCOUNT_ID?: string;
 }
 
-// Live Monthly Pro product. Metadata plan=pro also accepted (set on the
-// Dodo product) so future products map without code changes.
-const PRO_PRODUCT_IDS = new Set(["pdt_0Nnxjj5tGkZs2aaArMZAg"]);
+// Live product catalog. Metadata plan=pro/pass (set on each Dodo product)
+// is authoritative; product IDs are the fallback for payloads without it.
+const PRO_PRODUCT_IDS = new Set([
+  "pdt_0Nnxjj5tGkZs2aaArMZAg", // monthly
+  "pdt_0NnxnhVX9UpNpAWGnPKis", // yearly
+]);
+const PASS_PRODUCT_IDS = new Set([
+  "pdt_0NnxoUmsSDo8QS9UhLJ0J", // 7-day pass
+]);
 
 const REPLAY_TOLERANCE_S = 300;
 
@@ -159,12 +166,17 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     type === "subscription.renewed" ||
     type === "subscription.active"
   ) {
-    // Money moved (or mandate live): deliver Pro. subscription.active
+    // Money moved (or mandate live): deliver. subscription.active
     // alone (no charge yet) only ensures the account row exists.
     const { email, name } = extractCustomer(data);
     const prod = extractProduct(data);
-    const isPro = prod.plan === "pro" || PRO_PRODUCT_IDS.has(prod.productId);
-    if (!email || !isPro) {
+    const plan =
+      prod.plan === "pass" || PASS_PRODUCT_IDS.has(prod.productId)
+        ? "pass"
+        : prod.plan === "pro" || PRO_PRODUCT_IDS.has(prod.productId)
+          ? "pro"
+          : null;
+    if (!email || !plan) {
       console.error(`[DODO] unrecognized grant shape type=${type}`, raw.slice(0, 1000));
       return json({ ok: true, ignored: "unrecognized product" });
     }
@@ -176,10 +188,46 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       return json({ ok: true, ignored: "unknown user" });
     }
     const charged = type !== "subscription.active";
+    if (plan === "pass") {
+      if (charged) {
+        await grantPass(DB, user.id);
+        try {
+          await DB.prepare(
+            "INSERT INTO payment (id, userId, gateway, orderId, amount, currency, status, createdAt) VALUES (?, ?, 'dodo', ?, ?, ?, 'paid', datetime('now'))"
+          )
+            .bind(
+              `dodo_${prod.paymentId || id}`,
+              user.id,
+              prod.paymentId || id,
+              prod.amount ?? 3.99,
+              prod.currency || "USD",
+            )
+            .run();
+        } catch {
+          /* duplicate payment row — grant already applied */
+        }
+        await sendEmail(context.env, {
+          to: user.email,
+          subject: "Receipt for your Toolzum 7-Day Pass",
+          text: [
+            `Hi${name ? ` ${name}` : ""},`,
+            ``,
+            `Your Toolzum 7-Day Pass is active.`,
+            prod.amount !== null ? `Charged: ${prod.amount} ${prod.currency || "USD"}` : `Plan: Toolzum 7-Day Pass ($3.99 one-time)`,
+            `Payment: ${prod.paymentId || id}`,
+            ``,
+            `You get 7 days of Pro-level limits plus 70 bonus AI credits.`,
+          ].join("\n"),
+        });
+      }
+      return json({ ok: true, granted: charged ? "pass" : false });
+    }
     if (charged && user.plan !== "pro") {
       await setPlan(DB, user.id, "pro", "dodo-webhook", type);
     }
     if (charged) {
+      const planLabel =
+        prod.productId === "pdt_0NnxnhVX9UpNpAWGnPKis" ? "Toolzum Pro Yearly" : "Toolzum Pro Monthly";
       try {
         await DB.prepare(
           "INSERT INTO payment (id, userId, gateway, orderId, amount, currency, status, createdAt) VALUES (?, ?, 'dodo', ?, ?, ?, 'paid', datetime('now'))"
@@ -197,12 +245,12 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       }
       await sendEmail(context.env, {
         to: user.email,
-        subject: "You're Pro — receipt for Toolzum Pro Monthly",
+        subject: `You're Pro — receipt for ${planLabel}`,
         text: [
           `Hi${name ? ` ${name}` : ""},`,
           ``,
-          `Your Toolzum Pro Monthly subscription is active.`,
-          prod.amount !== null ? `Charged: ${prod.amount} ${prod.currency || "USD"}` : `Plan: Toolzum Pro Monthly ($9.99/month)`,
+          `Your ${planLabel} subscription is active.`,
+          prod.amount !== null ? `Charged: ${prod.amount} ${prod.currency || "USD"}` : `Plan: ${planLabel}`,
           `Payment: ${prod.paymentId || id}`,
           ``,
           `Pro includes 500-page sitemap crawls, unlimited downloads, and 200 AI credits/month.`,
