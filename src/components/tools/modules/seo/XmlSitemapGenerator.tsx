@@ -48,12 +48,12 @@ const DEFAULT_EXCLUSIONS: ExclusionRule[] = [
 
 const FAQS = [
   {
-    q: 'Can it generate sitemaps for React or Next.js websites?',
-    a: 'Yes. Toolzum detects JavaScript-rendered sites automatically and uses browser rendering mode to crawl them correctly.',
+    q: 'Does it work with React, Next.js or Vue sites?',
+    a: 'It seeds from your sitemap.xml and crawls static links, which covers most content sites fully. Heavily JavaScript-rendered single-page apps may yield fewer pages, since links rendered only in the browser can’t be seen by the crawler.',
   },
   {
-    q: 'What is the maximum number of URLs in the free plan?',
-    a: 'Free users can crawl up to 100 URLs per sitemap. Pro users can crawl up to 50,000 URLs.',
+    q: 'What is the maximum number of URLs?',
+    a: 'Free crawls go up to 100 URLs per sitemap. The crawl starts from your existing sitemap.xml and robots.txt when available, then follows same-origin links.',
   },
   {
     q: 'How do I submit my sitemap to Google?',
@@ -65,7 +65,7 @@ const FAQS = [
   },
   {
     q: 'How often should I regenerate my sitemap?',
-    a: 'Whenever you add, remove, or significantly update pages. Pro users get automatic weekly regeneration.',
+    a: 'Whenever you add, remove, or significantly update pages — just re-run the crawl.',
   },
 ];
 
@@ -219,7 +219,7 @@ export default function XmlSitemapGenerator() {
         </div>
         <p className="text-sm text-[var(--text-secondary)]">
           Enter a website URL to crawl and generate a search-engine ready XML sitemap.
-          {state.status !== 'complete' && <span className="text-emerald-500 font-medium"> The only free sitemap generator that works with React, Next.js &amp; Vue.</span>}
+          {state.status !== 'complete' && <span className="text-emerald-500 font-medium"> Starts from your sitemap.xml when available — free, no signup.</span>}
         </p>
 
         {state.status !== 'complete' && (
@@ -232,7 +232,7 @@ export default function XmlSitemapGenerator() {
                   value={url}
                   onChange={e => setUrl(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && startCrawl()}
-                  placeholder="https://yourwebsite.com — works with React, Next.js & Vue too"
+                  placeholder="https://yourwebsite.com — seeds from your sitemap.xml automatically"
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-10 pr-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]/50 transition-colors placeholder:text-[var(--text-muted)]"
                   disabled={isCrawling}
                 />
@@ -270,10 +270,10 @@ export default function XmlSitemapGenerator() {
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
-                    <option value={50}>50 pages (free)</option>
-                    <option value={100}>100 pages (free)</option>
-                    <option value={200}>200 pages (signed in)</option>
-                    <option value={500}>500 pages (Pro)</option>
+                    <option value={50}>50 pages</option>
+                    <option value={100}>100 pages</option>
+                    <option value={200}>200 pages</option>
+                    <option value={500}>500 pages (large sites)</option>
                   </select>
                 </div>
 
@@ -355,7 +355,7 @@ export default function XmlSitemapGenerator() {
             {state.jsRendering && (
               <div className="flex items-center gap-2 px-3 py-2 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-[var(--accent)]">
                 <Zap className="w-3.5 h-3.5" />
-                JavaScript site detected — using browser rendering mode
+                JavaScript site detected — static crawl may find fewer pages; links from your sitemap.xml are still included
               </div>
             )}
 

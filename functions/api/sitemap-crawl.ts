@@ -106,6 +106,43 @@ function matchesExclusion(url: string, rules: string[]): boolean {
   });
 }
 
+/** Extract <loc> URLs from a sitemap (urlset) or sitemap index. Same-origin only. */
+function extractSitemapLocs(xml: string, baseUrl: string): { urls: string[]; indexLocs: string[] } {
+  const urls: string[] = [];
+  const indexLocs: string[] = [];
+  const locRe = /<\s*loc\s*>\s*([^<]+?)\s*<\s*\/\s*loc\s*>/gi;
+  let m;
+  while ((m = locRe.exec(xml)) !== null) {
+    const raw = (m[1] || '').trim();
+    if (!raw) continue;
+    try {
+      const abs = new URL(raw, baseUrl).href;
+      if (!isSameOrigin(abs, baseUrl)) continue;
+      // .xml locs are (sub-)sitemaps; everything else is a page URL.
+      if (/\.xml(\?|$)/i.test(abs)) {
+        if (!indexLocs.includes(abs)) indexLocs.push(abs);
+      } else if (!urls.includes(abs)) {
+        urls.push(abs);
+      }
+    } catch { /* skip malformed */ }
+  }
+  return { urls, indexLocs };
+}
+
+/** Parse robots.txt: returns { sitemaps, disallows } (path-prefix rules only). */
+function parseRobots(txt: string): { sitemaps: string[]; disallows: string[] } {
+  const sitemaps: string[] = [];
+  const disallows: string[] = [];
+  for (const line of txt.split('\n')) {
+    const clean = line.split('#')[0]!.trim();
+    const sm = clean.match(/^sitemap\s*:\s*(\S+)/i);
+    if (sm && sm[1] && !sitemaps.includes(sm[1])) { sitemaps.push(sm[1]!); continue; }
+    const dm = clean.match(/^disallow\s*:\s*(\S*)/i);
+    if (dm && dm[1] && !disallows.includes(dm[1])) disallows.push(dm[1]!);
+  }
+  return { sitemaps, disallows };
+}
+
 async function detectSPA(html: string): Promise<boolean> {
   return /<div id="root">\s*<\/div>|<div id="__next">|<div id="app">\s*<\/div>|window\.__NUXT__|<app-root>|<div id="__nuxt">/.test(html);
 }
@@ -164,10 +201,68 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
       if (jsRendering) sendEvent({ type: 'js_detected' });
 
       const visited = new Set<string>();
+      const queued = new Set<string>([baseUrl]);
       const queue: string[] = [baseUrl];
       const pages: CrawledPage[] = [];
       let discovered = 1;
       let consecutiveErrors = 0;
+
+      // Tier 0 (free): seed from robots.txt + sitemap.xml before BFS link crawl.
+      // This covers content sites fully with ~2 extra fetches and makes the
+      // robots.txt FAQ claim true (Disallow rules become exclusions).
+      try {
+        const robotsRes = await fetchWithTimeout(new URL('/robots.txt', baseUrl).href, 8000);
+        if (robotsRes.ok) {
+          const { sitemaps, disallows } = parseRobots(await robotsRes.text());
+          for (const d of disallows) {
+            const rule = d.endsWith('/*') ? d : d + '*';
+            if (!exclusions.includes(rule)) exclusions.push(rule);
+          }
+          const origin = new URL(baseUrl).origin;
+          const sitemapQueue: string[] = [];
+          const seenSitemaps = new Set<string>();
+          const pushSitemap = (loc: string) => {
+            try {
+              const abs = new URL(loc, baseUrl).href;
+              if (abs.startsWith(origin) && !seenSitemaps.has(abs)) { seenSitemaps.add(abs); sitemapQueue.push(abs); }
+            } catch { /* skip malformed */ }
+          };
+          pushSitemap(new URL('/sitemap.xml', baseUrl).href);
+          for (const s of sitemaps) pushSitemap(s);
+          let depth = 0;
+          let seeded = 0;
+          while (sitemapQueue.length > 0 && depth < 2 && seeded < maxPages * 2) {
+            const levelSize = sitemapQueue.length;
+            let addedThisLevel = 0;
+            for (let i = 0; i < levelSize && seeded < maxPages * 2; i++) {
+              const loc = sitemapQueue.shift()!;
+              try {
+                const r = await fetchWithTimeout(loc, 8000);
+                if (!r.ok) continue;
+                const { urls, indexLocs } = extractSitemapLocs(await r.text(), baseUrl);
+                for (const u of urls) {
+                  if (seeded >= maxPages * 2) break;
+                  if (!queued.has(u) && !matchesExclusion(u, exclusions)) {
+                    queued.add(u);
+                    discovered++;
+                    queue.push(u);
+                    seeded++;
+                    addedThisLevel++;
+                  }
+                }
+                for (const x of indexLocs) {
+                  if (!seenSitemaps.has(x) && x.startsWith(origin)) { seenSitemaps.add(x); sitemapQueue.push(x); }
+                }
+              } catch { /* skip unreachable sitemaps */ }
+            }
+            if (addedThisLevel === 0 && sitemapQueue.length === levelSize) break;
+            depth++;
+          }
+          if (seeded > 0) {
+            sendEvent({ type: 'progress', discovered, crawled: 0, max: maxPages, currentUrl: baseUrl, log: `✓ Seeded ${seeded} URLs from sitemap.xml / robots.txt` });
+          }
+        }
+      } catch { /* robots/sitemap seeding is best-effort; BFS proceeds regardless */ }
 
       while (queue.length > 0 && pages.length < maxPages) {
         const currentUrl = queue.shift()!;
@@ -176,7 +271,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
 
         if (matchesExclusion(currentUrl, exclusions)) continue;
 
-        sendEvent({ type: 'progress', discovered: visited.size, crawled: pages.length, max: maxPages, currentUrl, log: `→ ${currentUrl}` });
+        sendEvent({ type: 'progress', discovered, crawled: pages.length, max: maxPages, currentUrl, log: `→ ${currentUrl}` });
 
         try {
           const res = await fetchWithTimeout(currentUrl);
@@ -203,8 +298,8 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           let match;
           while ((match = linkRegex.exec(html)) !== null) {
             const normalized = normalizeUrl(match[1], currentUrl);
-            if (normalized && isSameOrigin(normalized, inputUrl) && !visited.has(normalized)) {
-              visited.add(normalized);
+            if (normalized && isSameOrigin(normalized, inputUrl) && !queued.has(normalized)) {
+              queued.add(normalized);
               discovered++;
               queue.push(normalized);
             }
