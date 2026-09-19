@@ -99,7 +99,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Video className="w-5 h-5 text-[var(--accent)]" />
           Tab Screen Recorder Extension Builder
@@ -109,7 +109,7 @@ document.getElementById('stopBtn').addEventListener('click', () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <div className="lg:col-span-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl space-y-4">
-          <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block border-b border-zinc-800 pb-2">Settings</span>
+          <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block border-b border-[var(--border-subtle)] pb-2">Settings</span>
           
           <div className="space-y-2">
             <label htmlFor="lbl-screenrecorderextension-extension-name" className="text-xs text-[var(--text-muted)] font-bold">Extension Name</label>

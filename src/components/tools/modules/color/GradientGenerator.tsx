@@ -33,7 +33,7 @@ export default function GradientGenerator() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
-          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
@@ -41,14 +41,14 @@ export default function GradientGenerator() {
           <div className="flex gap-2 flex-wrap items-center">
             <label className="block text-sm font-medium text-[var(--text-secondary)]">Type</label>
             <select aria-label="Type" value={type} onChange={e => { setType(e.target.value as 'linear' | 'radial' | 'conic'); setPositions(colors.map((_, i) => Math.round(i * 100 / (colors.length - 1)))); }}
-              className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
+              className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
               <option value="linear">Linear</option>
               <option value="radial">Radial</option>
               <option value="conic">Conic</option>
             </select>
             {type === 'linear' && (
               <select aria-label="Conic" value={direction} onChange={e => setDirection(e.target.value)}
-                className="bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
+                className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-pink-500/50">
                 {directions.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
             )}
@@ -57,24 +57,24 @@ export default function GradientGenerator() {
           <div className="flex flex-wrap gap-2 items-center">
             {colors.map((c, i) => (
               <div key={i} className="flex items-center gap-1">
-                <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-zinc-300 dark:border-zinc-700" />
+                <input type="color" value={c} onChange={e => updateColor(i, e.target.value)} className="w-8 h-8 rounded cursor-pointer border border-[var(--border-subtle)]" />
                 <input type="range" min={0} max={100} value={positions[i]} onChange={e => updatePosition(i, Number(e.target.value))}
                   className="w-24 accent-pink-500" />
                 <span className="text-xs text-[var(--text-muted)] w-10 text-right">{positions[i]}%</span>
                 {colors.length > 2 && <button className="text-xs text-red-500 hover:text-red-600" onClick={() => removeColor(i)}>×</button>}
               </div>
             ))}
-            <button onClick={addColor} className="px-3 py-1.5 text-sm font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">+ Add</button>
+            <button onClick={addColor} className="px-3 py-1.5 text-sm font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">+ Add</button>
           </div>
 
-          <div className="w-full h-48 rounded-xl border border-zinc-300 dark:border-zinc-700" style={{ background: gradient }} />
+          <div className="w-full h-48 rounded-xl border border-[var(--border-subtle)]" style={{ background: gradient }} />
 
           <div className="flex gap-2 flex-wrap">
-            <code className="flex-1 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-zinc-900 dark:text-zinc-100 font-mono text-xs break-all">{gradient}</code>
+            <code className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs break-all">{gradient}</code>
             <button onClick={() => { clipboardWrite(gradient).then(ok => ok && toast.success('CSS copied!')); }} className="px-4 py-2.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-xl text-sm transition-colors">Copy CSS</button>
           </div>
 
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-zinc-200 dark:border-zinc-700">
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
             <div className="text-xs text-[var(--text-secondary)] mb-2">Color Stops</div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
               {colors.map((c, i) => (

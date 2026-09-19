@@ -56,7 +56,7 @@ export default function ColorPicker() {
     <>
       <div className="flex flex-wrap gap-2 mb-4">
         {presets.map((p, i) => (
-          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
+          <button key={i} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-pink-400 transition-colors">{p.label}</button>
         ))}
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
@@ -67,11 +67,11 @@ export default function ColorPicker() {
           </div>
           <div className="w-full h-24 rounded-lg border" style={{ backgroundColor: color }} />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-            <div className="flex items-center justify-between gap-2 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2">
+            <div className="flex items-center justify-between gap-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2">
               <span className="font-mono text-[var(--text-primary)] truncate">{rgbStr}</span>
               <button onClick={() => { clipboardWrite(rgbStr).then(ok => ok && toast.success('RGB copied!')); }} className="px-2 py-1 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors shrink-0">Copy</button>
             </div>
-            <div className="flex items-center justify-between gap-2 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg px-3 py-2">
+            <div className="flex items-center justify-between gap-2 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2">
               <span className="font-mono text-[var(--text-primary)] truncate">{hslStr}</span>
               <button onClick={() => { clipboardWrite(hslStr).then(ok => ok && toast.success('HSL copied!')); }} className="px-2 py-1 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors shrink-0">Copy</button>
             </div>
@@ -83,7 +83,7 @@ export default function ColorPicker() {
                 Download
               </a>
             )}
-            <button onClick={() => { clipboardWrite(color).then(ok => ok && toast.success('Hex copied!')); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button onClick={() => { clipboardWrite(color).then(ok => ok && toast.success('Hex copied!')); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               Copy
             </button>
           </div>

@@ -94,7 +94,7 @@ export default function ToDoList() {
             value={input}
             onChange={e => setInput(e.target.value)}
             placeholder="What needs to be accomplished today?"
-            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300"
+            className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
           />
           <div className="flex gap-2">
             <select value={priority} onChange={e => setPriority(e.target.value as any)} aria-label="Priority" className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 text-[var(--text-primary)] text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
@@ -102,7 +102,7 @@ export default function ToDoList() {
               <option value="medium">Medium Priority</option>
               <option value="low">Low Priority</option>
             </select>
-            <button onClick={addItem} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold p-3 rounded-xl text-xs flex items-center justify-center cursor-pointer" aria-label="Add task">
+            <button onClick={addItem} className="bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold p-3 rounded-xl text-xs flex items-center justify-center cursor-pointer" aria-label="Add task">
               <Plus className="w-4 h-4" />
             </button>
           </div>
@@ -112,7 +112,7 @@ export default function ToDoList() {
         <div className="space-y-2 pt-2">
           {items.length > 0 ? (
             items.map(item => (
-              <div key={item.id} className="flex justify-between items-center bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] hover:border-zinc-700 transition-all">
+              <div key={item.id} className="flex justify-between items-center bg-[var(--bg-overlay)] p-3.5 rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent)] transition-all">
                 <label className="flex items-center gap-3 cursor-pointer text-xs flex-1 select-none">
                   <input 
                     type="checkbox" 
@@ -120,7 +120,7 @@ export default function ToDoList() {
                     onChange={() => toggleItem(item.id)}
                     className="rounded text-[var(--accent)]" 
                   />
-                  <span className={`text-zinc-900 dark:text-zinc-200 ${item.completed ? 'line-through text-[var(--text-secondary)]' : ''}`}>
+                  <span className={`text-[var(--text-primary)] ${item.completed ? 'line-through text-[var(--text-secondary)]' : ''}`}>
                     {item.text}
                   </span>
                   
