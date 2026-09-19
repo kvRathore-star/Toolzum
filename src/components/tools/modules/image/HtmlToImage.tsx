@@ -50,7 +50,7 @@ export default function HtmlToImage() {
              <textarea aria-label="HTML Source Code" 
                value={htmlContent}
                onChange={(e) => setHtmlContent(e.target.value)}
-               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500"
+               className="w-full h-64 p-4 font-mono text-sm bg-zinc-900 text-green-700 dark:text-green-400 rounded-xl border border-zinc-800 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]"
                placeholder="Enter HTML here..."
              />
              <div className="flex gap-4">
@@ -68,7 +68,7 @@ export default function HtmlToImage() {
            {/* Preview */}
            <div className="space-y-4">
              <h3 className="font-semibold">Live Preview</h3>
-             <div ref={previewContainerRef} className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 overflow-auto bg-[var(--bg-overlay)] flex items-center justify-center min-h-[16rem]">
+             <div ref={previewContainerRef} className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-4 overflow-auto bg-[var(--bg-overlay)] flex items-center justify-center min-h-[16rem]">
                 <div
                   ref={renderRef}
                   className="w-full min-h-[14rem] bg-white rounded-lg overflow-hidden"

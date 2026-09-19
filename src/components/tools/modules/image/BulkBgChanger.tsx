@@ -174,7 +174,7 @@ export default function BulkBgChanger() {
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
           <ImagePlus className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
-          <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">Upload product photos</p>
+          <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Upload product photos</p>
           <p className="text-[10px] text-[var(--text-secondary)] mt-1">Select a color to remove, replace with your brand background</p>
           <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFiles} className="hidden" />
         </div>
@@ -200,12 +200,12 @@ export default function BulkBgChanger() {
                 <label className="flex items-center justify-between cursor-pointer">
                   <span className="text-[10px] text-[var(--text-secondary)]">Transparent BG (PNG)</span>
                   <input type="checkbox" checked={useTransparent} onChange={e => setUseTransparent(e.target.checked)}
-                    className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
+                    className="rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500" />
                 </label>
 
                 {sampleColor && (
                   <div className="flex items-center gap-2 p-2 bg-[var(--bg-surface)] rounded-lg">
-                    <span className="w-5 h-5 rounded border border-zinc-300" style={{ backgroundColor: sampleColor }} />
+                    <span className="w-5 h-5 rounded border border-[var(--border-subtle)]" style={{ backgroundColor: sampleColor }} />
                     <span className="text-[10px] text-[var(--text-secondary)] font-mono">{sampleColor}</span>
                     <button onClick={() => setSampleColor(null)}
                       className="ml-auto text-[9px] text-[var(--text-secondary)] hover:text-red-500">Reset</button>
@@ -213,7 +213,7 @@ export default function BulkBgChanger() {
                 )}
 
                 <button onClick={processAll} disabled={isProcessing}
-                  className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+                  className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
                   {isProcessing ? <><RefreshCw className="w-3.5 h-3.5 animate-spin" /> Processing...</> : <><Layers className="w-3.5 h-3.5" /> Process All ({images.length})</>}
                 </button>
               </div>
@@ -223,7 +223,7 @@ export default function BulkBgChanger() {
                   <div key={item.id} role="button" tabIndex={0} onClick={() => setSelectedImageId(item.id)}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedImageId(item.id); } }}
                     className={`flex items-center gap-2 p-2 rounded-lg border cursor-pointer transition-colors ${
-                      selectedImageId === item.id ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20' : 'border-[var(--border-subtle)] hover:border-zinc-400 dark:hover:border-zinc-500'
+                      selectedImageId === item.id ? 'border-[var(--accent)] bg-[var(--accent)]/10' : 'border-[var(--border-subtle)] hover:border-[var(--accent)]'
                     }`}>
                     <div className="w-10 h-10 rounded-lg overflow-hidden bg-[var(--bg-surface)] shrink-0">
                       <img  loading="lazy" src={item.processedUrl || item.originalUrl} alt="Image preview" className="w-full h-full object-cover" />
@@ -235,7 +235,7 @@ export default function BulkBgChanger() {
                     <div className="flex gap-1">
                       {item.processedUrl && (
                         <button aria-label={`Download ${item.name}`} onClick={e => { e.stopPropagation(); downloadImage(item.processedUrl!, item.name); }}
-                          className="p-1 bg-zinc-200 dark:bg-zinc-700 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600"><Download className="w-3 h-3 text-[var(--text-secondary)]" /></button>
+                          className="p-1 bg-[var(--bg-overlay)] rounded hover:bg-[var(--bg-elevated)]"><Download className="w-3 h-3 text-[var(--text-secondary)]" /></button>
                       )}
                       <button aria-label={`Remove ${item.name}`} onClick={e => { e.stopPropagation(); removeImage(item.id); }}
                         className="p-1 bg-red-100 dark:bg-red-900/20 rounded hover:bg-red-200 dark:hover:bg-red-900/30"><Trash2 className="w-3 h-3 text-red-500" /></button>
@@ -246,7 +246,7 @@ export default function BulkBgChanger() {
 
               {images.some(i => i.processedUrl) && (
                 <button onClick={downloadAll}
-                  className="w-full py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+                  className="w-full py-2.5 bg-[var(--accent-ink)] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:opacity-90 transition-colors">
                   <Download className="w-3.5 h-3.5" /> Download All
                 </button>
               )}

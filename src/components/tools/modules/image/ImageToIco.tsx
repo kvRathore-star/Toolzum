@@ -196,7 +196,7 @@ export default function ImageToIco() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Image to ICO:</strong> Convert images to Windows ICO format for favicons and app icons.
         </div>
         <FileUploader
@@ -211,14 +211,14 @@ export default function ImageToIco() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setPreview(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Image
         </button>
@@ -236,10 +236,10 @@ export default function ImageToIco() {
                   disabled={multiSize}
                   className={`py-2 text-[10px] font-bold border rounded-lg transition-all ${
                     iconSize === s && !multiSize
-                      ? 'bg-blue-600 text-white border-blue-600 shadow-md'
+                      ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)] shadow-md'
                       : multiSize
                         ? 'bg-[var(--bg-surface)] text-[var(--text-muted)] border-[var(--border-subtle)] cursor-not-allowed'
-                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-blue-300'
+                        : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                   }`}
                 >
                   {s}
@@ -253,9 +253,9 @@ export default function ImageToIco() {
               type="checkbox"
               checked={multiSize}
               onChange={() => setMultiSize(!multiSize)}
-              className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-blue-600"
+              className="w-4 h-4 rounded border-[var(--border-subtle)] text-[var(--accent)]"
             />
-            <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Generate multiple sizes (16x16 – 256x256)</span>
+            <span className="text-sm font-bold text-[var(--text-primary)]">Generate multiple sizes (16x16 – 256x256)</span>
           </label>
 
           <label className="flex items-center gap-3 cursor-pointer">
@@ -263,9 +263,9 @@ export default function ImageToIco() {
               type="checkbox"
               checked={squareCrop}
               onChange={() => setSquareCrop(!squareCrop)}
-              className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-blue-600"
+              className="w-4 h-4 rounded border-[var(--border-subtle)] text-[var(--accent)]"
             />
-            <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Square crop (center)</span>
+            <span className="text-sm font-bold text-[var(--text-primary)]">Square crop (center)</span>
           </label>
 
           {!squareCrop && (
@@ -283,7 +283,7 @@ export default function ImageToIco() {
                   id="transparentBg"
                   checked={bgColor === '#ffffff00'}
                   onChange={(e) => setBgColor(e.target.checked ? '#ffffff00' : '#ffffff')}
-                  className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-700 text-blue-600"
+                  className="w-3.5 h-3.5 rounded border-[var(--border-subtle)] text-[var(--accent)]"
                 />
                 <label htmlFor="transparentBg" className="text-xs text-[var(--text-secondary)]">Transparent background</label>
               </div>
@@ -293,7 +293,7 @@ export default function ImageToIco() {
           <button
             onClick={createIco}
             disabled={isProcessing}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
             {isProcessing ? "Generating ICO..." : "Generate ICO"}
           </button>
@@ -303,7 +303,7 @@ export default function ImageToIco() {
           {outputUrl ? (
             <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">ICO Ready!</h4>
-              <div className="bg-zinc-100 dark:bg-black rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px] chess-bg">
+              <div className="bg-[var(--bg-overlay)] dark:bg-black rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px] chess-bg">
                 <style>{`
                   .chess-bg {
                     background-image: linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee),
@@ -327,7 +327,7 @@ export default function ImageToIco() {
               </div>
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}.ico`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download ICO
               </button>

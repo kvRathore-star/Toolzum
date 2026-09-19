@@ -143,7 +143,7 @@ export default function RawImageConverter() {
   if (files.length === 0) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>RAW Converter:</strong> Convert RAW camera images ({EXTENSIONS.join(', ')}) to JPG, PNG, or WebP. All processing is done locally — nothing is uploaded.
         </div>
         <FileUploader
@@ -163,19 +163,19 @@ export default function RawImageConverter() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-4">
-          <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
+          <div className="p-2 bg-[var(--accent)]/10 dark:bg-[var(--accent)]/10 rounded-lg text-[var(--accent)]">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{files.length} file{files.length > 1 ? 's' : ''}</h3>
-            <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{convertableCount} supported</p>
+            <h3 className="font-bold text-[var(--text-primary)]">{files.length} file{files.length > 1 ? 's' : ''}</h3>
+            <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{convertableCount} supported</p>
           </div>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Clear All</button>
+        <button onClick={clearAll} className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Clear All</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -183,14 +183,14 @@ export default function RawImageConverter() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-2xl shadow-xl space-y-2">
             <div className="flex justify-between items-center">
               <h4 className="text-[var(--text-primary)] font-medium text-sm">Files</h4>
-              <button onClick={() => fileInputRef.current?.click()} className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-medium">+ Add More</button>
+              <button onClick={() => fileInputRef.current?.click()} className="text-xs text-[var(--accent)] hover:text-[var(--accent)] dark:hover:text-[var(--accent)] font-medium">+ Add More</button>
             </div>
             <input aria-label="Files" ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={addMoreFiles} />
             <div className="space-y-1 max-h-72 overflow-y-auto">
               {files.map((f, i) => (
                 <div key={i} role="button" tabIndex={0} onClick={() => { setSelectedIndex(i); setOutputUrl(null); }}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedIndex(i); setOutputUrl(null); } }}
-                  className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-all ${i === selectedIndex ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 ring-1 ring-blue-500/30' : 'hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 text-[var(--text-primary)]'}`}
+                  className={`flex items-center justify-between p-2.5 rounded-lg cursor-pointer text-sm transition-all ${i === selectedIndex ? 'bg-[var(--accent)]/10/20 text-[var(--accent)] ring-1 ring-[var(--accent)]/30' : 'hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)]'}`}
                 >
                   <span className="truncate flex-1 mr-2">{f.name}</span>
                   <span className={`flex-shrink-0 w-2 h-2 rounded-full ${supported[i] ? 'bg-green-500' : 'bg-red-400'}`} />
@@ -207,7 +207,7 @@ export default function RawImageConverter() {
               <div className="grid grid-cols-3 gap-2">
                 {FORMATS.map(f => (
                   <button key={f.value} onClick={() => setFormat(f)}
-                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border ${format.value === f.value ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                    className={`py-2.5 px-3 rounded-xl text-xs font-bold transition-all border ${format.value === f.value ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]/30'}`}
                   >
                     {f.label}
                   </button>
@@ -224,7 +224,7 @@ export default function RawImageConverter() {
 
             <div className="space-y-2">
               <button onClick={convertSelected} disabled={isProcessing || !isSupported}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
               >
                 {isProcessing ? (
                   <>
@@ -255,7 +255,7 @@ export default function RawImageConverter() {
                 <img src={previews[selectedIndex]} alt={currentFile.name} className="max-w-full max-h-[400px] object-contain" />
               </div>
             ) : (
-              <div className="bg-amber-500/10 border border-amber-500/20 p-5 rounded-xl text-amber-600 dark:text-amber-400 text-sm space-y-2">
+              <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-5 rounded-xl text-amber-600 dark:text-amber-400 text-sm space-y-2">
                 <p className="font-semibold">Browser cannot decode this RAW format.</p>
                 <p>Your browser does not support decoding <strong>{currentFile.name}</strong>. This can happen with less common RAW formats or older browsers.</p>
                 <p>Try opening the file in an external editor (e.g., Adobe Lightroom, RawTherapee, or your camera&apos;s software) and saving as TIFF or JPEG, then upload that file.</p>

@@ -143,7 +143,7 @@ export default function GifResizer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
           <strong>Resize animated GIFs</strong> while preserving animation and quality.
         </div>
         <FileUploader
@@ -157,10 +157,10 @@ export default function GifResizer() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && (
             <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)] text-xs mt-1">
               {gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}
@@ -169,7 +169,7 @@ export default function GifResizer() {
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); setWidth(0); setHeight(0); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -181,7 +181,7 @@ export default function GifResizer() {
             <h4 className="text-[var(--text-primary)] font-medium">Resize Settings</h4>
 
             <div>
-              <label htmlFor="lbl-gifresizer-width-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (px)</label>
+              <label htmlFor="lbl-gifresizer-width-px" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Width (px)</label>
               <input id="lbl-gifresizer-width-px" aria-label="Width (px)"
                 type="number"
                 min="1"
@@ -197,7 +197,7 @@ export default function GifResizer() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       width === p
                         ? 'bg-emerald-700 text-white'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'
                     }`}
                   >
                     {p}px
@@ -207,7 +207,7 @@ export default function GifResizer() {
             </div>
 
             <div>
-              <label htmlFor="lbl-gifresizer-height-px" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (px)</label>
+              <label htmlFor="lbl-gifresizer-height-px" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Height (px)</label>
               <input id="lbl-gifresizer-height-px" aria-label="Height (px)"
                 type="number"
                 min="1"
@@ -223,15 +223,15 @@ export default function GifResizer() {
                 type="checkbox"
                 checked={maintainAspect}
                 onChange={(e) => setMaintainAspect(e.target.checked)}
-                className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500"
+                className="w-5 h-5 rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500"
               />
-              <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+              <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                 Maintain aspect ratio
               </span>
             </label>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interpolation</label>
+              <label className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Interpolation</label>
               <div className="flex gap-2">
                 {(['lanczos', 'bilinear', 'neighbor'] as Interpolation[]).map((m) => (
                   <button
@@ -240,7 +240,7 @@ export default function GifResizer() {
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       interpolation === m
                         ? 'bg-emerald-700 text-white shadow-lg'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'
                     }`}
                   >
                     {INTERPOLATION_LABELS[m]}
@@ -252,7 +252,7 @@ export default function GifResizer() {
             <button
               onClick={processResize}
               disabled={isProcessing || !width || !height || !isLoaded}
-              className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-emerald-600 to-[var(--accent-ink)] hover:from-emerald-500 hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
                 <div
@@ -272,7 +272,7 @@ export default function GifResizer() {
               <img src={outputUrl} alt="Resized GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}-resized.gif`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download Resized GIF
               </button>
@@ -315,17 +315,17 @@ export default function GifResizer() {
             </div>
           )}
 
-          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
-            <p className="font-medium text-zinc-800 dark:text-zinc-200">Dimensions</p>
+          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
+            <p className="font-medium text-[var(--text-primary)]">Dimensions</p>
             <div className="space-y-1">
-              <p>Original: <span className="text-zinc-900 dark:text-zinc-100">{gifInfo?.width}×{gifInfo?.height}</span></p>
-              <p>New: <span className="text-zinc-900 dark:text-zinc-100">{width}×{height}</span></p>
+              <p>Original: <span className="text-[var(--text-primary)]">{gifInfo?.width}×{gifInfo?.height}</span></p>
+              <p>New: <span className="text-[var(--text-primary)]">{width}×{height}</span></p>
             </div>
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
-            <p className="font-medium text-blue-300">About Resizing</p>
-            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
+          <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 p-4 rounded-xl space-y-2 text-sm text-[var(--accent)]">
+            <p className="font-medium text-[var(--accent)]">About Resizing</p>
+            <ul className="space-y-1 text-[var(--accent)]/80">
               <li>• Lanczos offers the best quality for most GIFs</li>
               <li>• Bilinear is faster but softer</li>
               <li>• Nearest neighbor preserves pixel art sharpness</li>

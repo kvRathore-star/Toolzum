@@ -81,7 +81,7 @@ export default function RotateImage() {
          
           <div 
             role="button" tabIndex={0} aria-label="Upload image"
-            className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative"
+            className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative"
             onClick={() => !image && fileInputRef.current?.click()}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!image) fileInputRef.current?.click(); } }}
           >
@@ -101,21 +101,21 @@ export default function RotateImage() {
              <div className="flex flex-wrap gap-2 items-center justify-center">
                 <button 
                   onClick={() => handleRotate(-90)} 
-                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="flex items-center gap-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Rotate left 90 degrees"
                 >
                   <RotateCcw className="w-4 h-4" /> 90° Left
                 </button>
                 <button 
                   onClick={() => handleRotate(90)} 
-                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="flex items-center gap-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Rotate right 90 degrees"
                 >
                   <RotateCw className="w-4 h-4" /> 90° Right
                 </button>
                 <button 
                   onClick={() => handleRotate(180)} 
-                  className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="flex items-center gap-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label="Rotate 180 degrees"
                 >
                   180°
@@ -123,7 +123,7 @@ export default function RotateImage() {
                <div className="w-px h-6 bg-[var(--border-subtle)]" />
                 <button 
                   onClick={() => setFlipH(!flipH)} 
-                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${flipH ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}
+                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${flipH ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)]'}`}
                   aria-label="Flip image horizontally"
                   aria-pressed={flipH}
                 >
@@ -131,7 +131,7 @@ export default function RotateImage() {
                 </button>
                 <button 
                   onClick={() => setFlipV(!flipV)} 
-                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${flipV ? 'bg-[var(--accent)] text-white' : 'bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100'}`}
+                  className={`flex items-center gap-1.5 font-medium py-2 px-4 rounded-lg transition-all text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${flipV ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)]'}`}
                   aria-label="Flip image vertically"
                   aria-pressed={flipV}
                 >

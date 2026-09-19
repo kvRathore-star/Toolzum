@@ -196,9 +196,9 @@ export default function PhotoRetoucher() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-muted)]">Paint directly on the image to apply retouch treatments</p>
         </div>
         <button
@@ -229,7 +229,7 @@ export default function PhotoRetoucher() {
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'smooth'
                     ? 'bg-[var(--accent-ink)] text-white shadow-lg'
-                    : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
+                    : 'bg-[var(--bg-overlay)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
                 Skin Smoothing
@@ -239,7 +239,7 @@ export default function PhotoRetoucher() {
                 className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                   retouchMode === 'redeye'
                     ? 'bg-[var(--accent-ink)] text-white shadow-lg'
-                    : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
+                    : 'bg-[var(--bg-overlay)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] border border-[var(--border-subtle)]'
                 }`}
               >
                 Red-Eye Remover
@@ -256,7 +256,7 @@ export default function PhotoRetoucher() {
             <input aria-label="Brush Size"
               type="range" min="5" max="100" value={brushSize}
               onChange={(e) => setBrushSize(Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 

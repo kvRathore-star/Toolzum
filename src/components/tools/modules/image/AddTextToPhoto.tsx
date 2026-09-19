@@ -118,7 +118,7 @@ export default function SocialMediaImageCreator() {
              <Camera className="w-8 h-8 text-violet-500" />
              <h2 className="text-2xl font-bold">Social Media Image Creator</h2>
            </div>
-           <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
+           <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
          </div>
          <p className="text-[var(--text-secondary)]">Design images for Instagram, YouTube, Twitter with preset sizes and custom text overlays.</p>
 
@@ -127,7 +127,7 @@ export default function SocialMediaImageCreator() {
            <div className="flex items-center gap-2">
              <div className="flex gap-1">
                {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-violet-500'}`} />
+                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-violet-500'}`} />
                ))}
              </div>
              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
@@ -135,9 +135,9 @@ export default function SocialMediaImageCreator() {
          </div>
 
          {!image ? (
-           <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+           <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
              <input type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" aria-label="Select image" />
-             <div className="text-[var(--text-secondary)] flex flex-col items-center"><Upload className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" />Select Image</div>
+             <div className="text-[var(--text-secondary)] flex flex-col items-center"><Upload className="w-12 h-12 text-[var(--text-muted)] dark:text-[var(--text-secondary)] mb-2" />Select Image</div>
            </div>
          ) : (
            <div className="grid md:grid-cols-[300px_1fr] gap-8">
@@ -146,7 +146,7 @@ export default function SocialMediaImageCreator() {
                <div className="grid grid-cols-2 gap-1.5">
                  {PRESETS.map((p, i) => (
                    <button key={i} onClick={() => setPreset(i)}
-                     className={`py-2 px-2 rounded-lg text-[10px] font-bold border transition-all ${preset === i ? 'bg-violet-600 text-white border-violet-500' : 'bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
+                     className={`py-2 px-2 rounded-lg text-[10px] font-bold border transition-all ${preset === i ? 'bg-violet-600 text-white border-violet-500' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
                      {p.label}{p.w ? `\n${p.w}×${p.h}` : ''}
                    </button>
                  ))}
@@ -175,14 +175,14 @@ export default function SocialMediaImageCreator() {
                  <button onClick={() => setImage(null)} className="w-full text-[var(--text-secondary)] hover:text-red-500 text-xs font-medium py-2 transition-colors">Start Over</button>
                </div>
              </div>
-             <div ref={containerRef} className="bg-zinc-100 dark:bg-black rounded-xl border border-[var(--border-subtle)] overflow-hidden flex items-center justify-center p-4 min-h-[400px]">
+             <div ref={containerRef} className="bg-[var(--bg-overlay)] dark:bg-black rounded-xl border border-[var(--border-subtle)] overflow-hidden flex items-center justify-center p-4 min-h-[400px]">
                <canvas ref={canvasRef} className="max-w-full max-h-[600px] object-contain shadow-2xl"
                  style={{ backgroundImage: 'conic-gradient(#ccc 25%, white 25%, white 50%, #ccc 50%, #ccc 75%, white 75%, white)', backgroundSize: '20px 20px' }} />
              </div>
            </div>
          )}
 
-         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+         <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> No download limits, custom fonts, save brand presets, batch create multiple sizes at once, transparent background export.</p>
            <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
          </div>

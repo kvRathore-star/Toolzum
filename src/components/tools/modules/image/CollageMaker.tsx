@@ -196,7 +196,7 @@ export default function CollageMaker() {
   if (images.length < 2) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Collage Maker:</strong> Combine 2–9 images into beautiful grid or strip layouts.
         </div>
         <FileUploader
@@ -224,13 +224,13 @@ export default function CollageMaker() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{images.length} image{images.length > 1 ? 's' : ''}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Collage Maker</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{images.length} image{images.length > 1 ? 's' : ''}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">Collage Maker</p>
         </div>
         <button onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >Change Images</button>
       </div>
 
@@ -245,10 +245,10 @@ export default function CollageMaker() {
                   onClick={() => setLayout(l.id)}
                   className={`py-3 px-2 rounded-xl text-xs font-bold transition-all border ${
                     layout === l.id
-                      ? 'bg-blue-600 border-blue-500 text-white shadow-md'
+                      ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md'
                       : disabled
-                      ? 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-muted)] dark:text-zinc-600 cursor-not-allowed opacity-50'
-                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'
+                      ? 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-muted)] dark:text-[var(--text-muted)] cursor-not-allowed opacity-50'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                   }`}
                   dangerouslySetInnerHTML={{ __html: `${LAYOUT_ICONS[l.id]}<span>${l.label}</span>` }}
                 />
@@ -300,7 +300,7 @@ export default function CollageMaker() {
                 <label htmlFor="lbl-collagemaker-format" className="block text-xs text-[var(--text-secondary)] mb-1">Format</label>
                 <select id="lbl-collagemaker-format" aria-label="Format" value={format}
                   onChange={e => setFormat(e.target.value as Format)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-2 text-sm text-zinc-900 dark:text-zinc-100"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-2 text-sm text-[var(--text-primary)]"
                 >
                   <option value="image/png">PNG</option>
                   <option value="image/jpeg">JPG</option>
@@ -319,7 +319,7 @@ export default function CollageMaker() {
           </div>
 
           <button onClick={generate} disabled={isProcessing}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
           >
             {isProcessing ? (
               <><svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>Generating...</>

@@ -129,11 +129,11 @@ export default function ImageCompressor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)]">{imageFile.name}</h3>
             <p className="text-xs text-[var(--text-secondary)]">Original size: {(imageFile.size / 1024).toFixed(1)} KB</p>
           </div>
         </div>
@@ -169,7 +169,7 @@ export default function ImageCompressor() {
                 setQuality(Number(e.target.value));
                 setCompressedUrl(null);
               }}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -189,7 +189,7 @@ export default function ImageCompressor() {
                 setScale(Number(e.target.value));
                 setCompressedUrl(null);
               }}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -197,7 +197,7 @@ export default function ImageCompressor() {
             onClick={handleCompress}
             onKeyDown={handleKeyDown}
             disabled={isProcessing}
-            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Compressing image...' : 'Apply compression settings'}
           >
             {isProcessing ? (
@@ -209,7 +209,7 @@ export default function ImageCompressor() {
         </div>
 
         {/* View panel */}
-        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between min-h-[350px]">
+        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between min-h-[350px]">
           <div aria-live="polite" className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center flex-1">
             <div className="space-y-2 text-center">
               <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block">Before</span>

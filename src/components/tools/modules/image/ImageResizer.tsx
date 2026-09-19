@@ -82,7 +82,7 @@ export default function ImageResizer() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-8 rounded-2xl shadow-xl space-y-6 text-center">
          <h2 className="text-2xl font-bold">Image Resizer</h2>
          
-         <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+         <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
            <input aria-label="Image Resizer" type="file" accept="image/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
             {image ? <img src={image} alt="Preview" className="max-h-64 mx-auto rounded-lg" /> : <div className="text-[var(--text-secondary)]">Click or Drag Image Here</div>}
          </div>
@@ -90,11 +90,11 @@ export default function ImageResizer() {
           {image && (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                  <label htmlFor="lbl-imageresizer-width-px" className="block text-sm font-bold text-left mb-2 text-zinc-600">Width (px)</label>
+                  <label htmlFor="lbl-imageresizer-width-px" className="block text-sm font-bold text-left mb-2 text-[var(--text-secondary)]">Width (px)</label>
                   <input id="lbl-imageresizer-width-px" aria-label="Width (px)" type="number" value={width} onChange={e => { setWidth(e.target.value); if (lockAspect && origAspect) { const w = parseInt(e.target.value); if (!isNaN(w) && w > 0) setHeight(String(Math.round(w / origAspect))); } }} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <div>
-                  <label htmlFor="lbl-imageresizer-height-px" className="block text-sm font-bold text-left mb-2 text-zinc-600">Height (px)</label>
+                  <label htmlFor="lbl-imageresizer-height-px" className="block text-sm font-bold text-left mb-2 text-[var(--text-secondary)]">Height (px)</label>
                   <input id="lbl-imageresizer-height-px" aria-label="Height (px)" type="number" value={height} onChange={e => { setHeight(e.target.value); if (lockAspect && origAspect) { const h = parseInt(e.target.value); if (!isNaN(h) && h > 0) setWidth(String(Math.round(h * origAspect))); } }} className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] rounded-xl px-4 py-3 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
             </div>

@@ -138,9 +138,9 @@ export default function ImageEnhancer() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-muted)]">Fine tune color, light, and styling parameters</p>
         </div>
         <button
@@ -165,7 +165,7 @@ export default function ImageEnhancer() {
                 <button
                   key={p.name}
                   onClick={() => setFilters(p.filters)}
-                  className="py-2.5 px-3 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] font-bold border border-[var(--border-subtle)] dark:border-zinc-700 rounded-lg text-center cursor-pointer"
+                  className="py-2.5 px-3 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] font-bold border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-lg text-center cursor-pointer"
                 >
                   {p.name}
                 </button>
@@ -187,7 +187,7 @@ export default function ImageEnhancer() {
             <input aria-label="Brightness"
               type="range" min="0" max="200" value={filters.brightness}
               onChange={(e) => handleSliderChange('brightness', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -200,7 +200,7 @@ export default function ImageEnhancer() {
             <input aria-label="Contrast"
               type="range" min="0" max="200" value={filters.contrast}
               onChange={(e) => handleSliderChange('contrast', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -213,7 +213,7 @@ export default function ImageEnhancer() {
             <input aria-label="Saturation"
               type="range" min="0" max="200" value={filters.saturation}
               onChange={(e) => handleSliderChange('saturation', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -226,7 +226,7 @@ export default function ImageEnhancer() {
             <input aria-label="Soft Blur"
               type="range" min="0" max="10" value={filters.blur}
               onChange={(e) => handleSliderChange('blur', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -239,7 +239,7 @@ export default function ImageEnhancer() {
             <input aria-label="Sepia (Warmth)"
               type="range" min="0" max="100" value={filters.sepia}
               onChange={(e) => handleSliderChange('sepia', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -252,7 +252,7 @@ export default function ImageEnhancer() {
             <input aria-label="Grayscale"
               type="range" min="0" max="100" value={filters.grayscale}
               onChange={(e) => handleSliderChange('grayscale', Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
         </div>

@@ -291,7 +291,7 @@ export default function UnblurSharpen() {
   if (!sourceImage) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Unblur & Sharpen:</strong> Fix blurry photos or add artistic blur effects using on-device canvas convolution. No uploads needed.
         </div>
         <FileUploader
@@ -306,9 +306,9 @@ export default function UnblurSharpen() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{sourceFile?.name || 'Image'}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{sourceFile?.name || 'Image'}</h3>
           <p className="text-[var(--text-secondary)] text-sm">Canvas-based convolution processing — all in-browser</p>
         </div>
         <button
@@ -336,8 +336,8 @@ export default function UnblurSharpen() {
                   onClick={() => { setMode(opt.key); setOutputUrl(null); }}
                   className={`py-2 px-2 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
                     mode === opt.key
-                      ? 'bg-blue-600 border-blue-500 text-white shadow-md'
-                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'
+                      ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                   }`}
                 >
                   {opt.label}
@@ -349,7 +349,7 @@ export default function UnblurSharpen() {
           <div className="space-y-2">
             <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>Intensity</span>
-              <span className="text-blue-700 dark:text-blue-400 font-bold">{intensity}</span>
+              <span className="text-[var(--accent)] font-bold">{intensity}</span>
             </div>
             <input aria-label="Intensity"
               type="range" min="1" max="10" value={intensity}
@@ -362,7 +362,7 @@ export default function UnblurSharpen() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-[var(--text-secondary)]">
                 <span>Angle</span>
-                <span className="text-blue-700 dark:text-blue-400 font-bold">{angle}°</span>
+                <span className="text-[var(--accent)] font-bold">{angle}°</span>
               </div>
               <input aria-label="Angle"
                 type="range" min="0" max="360" value={angle}
@@ -381,8 +381,8 @@ export default function UnblurSharpen() {
                   onClick={() => setFormat(f)}
                   className={`py-2 px-2 rounded-lg text-xs font-bold transition-all border cursor-pointer ${
                     format === f
-                      ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
-                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-indigo-300'
+                      ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                   }`}
                 >
                   {formatLabel[f]}
@@ -399,14 +399,14 @@ export default function UnblurSharpen() {
             <input aria-label="Output Quality"
               type="range" min="0.1" max="1" step="0.01" value={quality}
               onChange={e => setQuality(Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
           <button
             onClick={processFull}
             disabled={isProcessing}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-4"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2 mt-4"
           >
             {isProcessing ? (
               <>
@@ -437,7 +437,7 @@ export default function UnblurSharpen() {
               )
             )}
             {!previewUrl && !showOriginal && (
-              <p className="text-zinc-600 text-sm">Adjust settings to generate preview</p>
+              <p className="text-[var(--text-secondary)] text-sm">Adjust settings to generate preview</p>
             )}
           </div>
 

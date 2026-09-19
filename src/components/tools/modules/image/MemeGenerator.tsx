@@ -124,7 +124,7 @@ export default function MemeGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <ImageIcon className="w-6 h-6 text-[var(--accent)]" />
           Classic Meme Generator
@@ -148,9 +148,9 @@ export default function MemeGenerator() {
                     setTemplateUrl(t.url);
                     setCustomImage(null);
                   }}
-                  className={`p-2 bg-[var(--bg-overlay)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] text-zinc-700 dark:text-[var(--text-muted)] border rounded-lg text-center truncate cursor-pointer ${
+                  className={`p-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] dark:text-[var(--text-muted)] border rounded-lg text-center truncate cursor-pointer ${
                     templateUrl === t.url && !customImage
-                      ? 'border-indigo-500 bg-indigo-500/5 text-[var(--accent)] font-bold'
+                      ? 'border-[var(--accent)] bg-[var(--accent)]/5 text-[var(--accent)] font-bold'
                       : 'border-[var(--border-subtle)]'
                   }`}
                 >
@@ -159,7 +159,7 @@ export default function MemeGenerator() {
               ))}
             </div>
 
-            <label className="w-full py-2.5 bg-zinc-100 dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-700 dark:text-[var(--text-muted)] font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer border border-zinc-200 dark:border-[var(--border-subtle)]">
+            <label className="w-full py-2.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] dark:text-[var(--text-muted)] font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
               <Upload className="w-4 h-4" />
               Upload Custom Template
               <input type="file" accept="image/*" className="hidden" onChange={handleCustomUpload} />
@@ -176,7 +176,7 @@ export default function MemeGenerator() {
             <span className="font-bold text-[var(--text-secondary)] uppercase block">Top Caption</span>
             <input aria-label="Top Caption"
               type="text" value={topText} onChange={e => setTopText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-[var(--text-primary)]"
             />
           </div>
 
@@ -185,7 +185,7 @@ export default function MemeGenerator() {
             <span className="font-bold text-[var(--text-secondary)] uppercase block">Bottom Caption</span>
             <input aria-label="Bottom Caption"
               type="text" value={bottomText} onChange={e => setBottomText(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-[var(--text-primary)]"
             />
           </div>
 
@@ -203,7 +203,7 @@ export default function MemeGenerator() {
             <input aria-label="Text Size"
               type="range" min="20" max="70" value={fontSize}
               onChange={(e) => setFontSize(Number(e.target.value))}
-              className="w-full accent-indigo-500"
+              className="w-full accent-[var(--accent)]"
             />
           </div>
 
@@ -212,7 +212,7 @@ export default function MemeGenerator() {
             <span>Force Uppercase Text</span>
             <input aria-label="Force Uppercase Text"
               type="checkbox" checked={uppercase} onChange={e => setUppercase(e.target.checked)}
-              className="w-4 h-4 rounded border-zinc-300 text-[var(--accent)] focus:ring-indigo-500 accent-indigo-500"
+              className="w-4 h-4 rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)] accent-[var(--accent)]"
             />
           </div>
 

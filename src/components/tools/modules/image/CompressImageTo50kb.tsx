@@ -99,8 +99,8 @@ export default function CompressImageTo50kb() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm flex items-start gap-2.5">
-          <AlertTriangle className="w-5 h-5 text-amber-700 dark:text-amber-400 shrink-0 mt-0.5" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-start gap-2.5">
+          <AlertTriangle className="w-5 h-5 text-[var(--accent)] shrink-0 mt-0.5" />
           <div>
             <strong>Strict 50KB Portal Limit:</strong> This utility is pre-configured to automatically adjust file weights to fit exactly under the 50KB restriction required by NSDL, UIDAI, UPSC, and banking portals.
           </div>
@@ -116,9 +116,9 @@ export default function CompressImageTo50kb() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Original Photo</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">Original Photo</h3>
           <p className="text-xs text-[var(--text-secondary)]">File Weight: {(imageFile.size / 1024).toFixed(1)} KB</p>
         </div>
         <button
@@ -148,7 +148,7 @@ export default function CompressImageTo50kb() {
             onClick={handleCompress}
             onKeyDown={handleKeyDown}
             disabled={isProcessing}
-            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full mt-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Compressing image...' : 'Auto-compress image to under 50KB'}
           >
             {isProcessing ? (
@@ -160,7 +160,7 @@ export default function CompressImageTo50kb() {
         </div>
 
         {/* compressed preview */}
-        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center text-center">
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center text-center">
           <span className="text-xs font-bold text-[var(--text-secondary)] uppercase block mb-3">Compressed Output</span>
           <div className="relative border border-[var(--border-subtle)] rounded-xl overflow-hidden bg-black flex justify-center items-center h-[250px] w-full">
             {compressedUrl ? (
@@ -193,7 +193,7 @@ export default function CompressImageTo50kb() {
         </div>
       </div>
 
-      <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-2 text-xs text-[var(--text-secondary)] leading-relaxed">
+      <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-2 text-xs text-[var(--text-secondary)] leading-relaxed">
         <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-1.5">
           <ShieldCheck className="w-4 h-4 text-[var(--accent)]" />
           Government Compliance Guarantee

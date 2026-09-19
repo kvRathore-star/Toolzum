@@ -225,7 +225,7 @@ export default function GifEditor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Edit GIFs in Browser:</strong> Resize, speed up/slow down, reverse, optimize colors, or extract frames from animated GIFs. All processing runs locally via WebAssembly.
         </div>
         <FileUploader
@@ -240,7 +240,7 @@ export default function GifEditor() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-[var(--bg-surface)] rounded-lg overflow-hidden flex-shrink-0">
             {originalUrl && (
@@ -248,13 +248,13 @@ export default function GifEditor() {
             )}
           </div>
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">{file.name}</h3>
-            <p className="text-zinc-600 dark:text-[var(--text-muted)] text-[11px]">
+            <h3 className="font-bold text-[var(--text-primary)] text-sm">{file.name}</h3>
+            <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-[11px]">
               {gifInfo && `${gifInfo.width}x${gifInfo.height} • ${gifInfo.frameCount} frame${gifInfo.frameCount !== 1 ? 's' : ''} • ${(gifInfo.fileSize / 1024).toFixed(1)} KB • ${(gifInfo.durationMs / 1000).toFixed(2)}s`}
             </p>
           </div>
         </div>
-        <button onClick={clearAll} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
+        <button onClick={clearAll} className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -268,7 +268,7 @@ export default function GifEditor() {
                 <label htmlFor="lbl-gifeditor-width" className="text-[9px] text-[var(--text-secondary)]">Width</label>
                 <input id="lbl-gifeditor-width" aria-label="Width" type="number" min={1} value={resizeWidth} onChange={e => handleWidthChange(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm text-[var(--text-primary)]" />
               </div>
-              <button onClick={toggleKeepAspect} className={`mt-5 p-2 rounded-lg border transition-colors ${keepAspect ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-muted)]'}`} title="Keep aspect ratio">
+              <button onClick={toggleKeepAspect} className={`mt-5 p-2 rounded-lg border transition-colors ${keepAspect ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-muted)]'}`} title="Keep aspect ratio">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={keepAspect ? "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" : "M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"} /></svg>
               </button>
               <div className="flex-1">
@@ -282,7 +282,7 @@ export default function GifEditor() {
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Speed</label>
             <div className="grid grid-cols-5 gap-1.5">
               {[0.25, 0.5, 1, 2, 4].map(v => (
-                <button key={v} onClick={() => setSpeedMultiplier(v)} className={`py-2 text-[10px] font-bold border rounded-lg transition-colors ${speedMultiplier === v ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+                <button key={v} onClick={() => setSpeedMultiplier(v)} className={`py-2 text-[10px] font-bold border rounded-lg transition-colors ${speedMultiplier === v ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}>
                   {v === 1 ? '1x' : `${v}x`}
                 </button>
               ))}
@@ -291,7 +291,7 @@ export default function GifEditor() {
 
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Reverse</span>
-            <button role="switch" aria-checked={isReversed} aria-label="Reverse" onClick={() => setIsReversed(!isReversed)} className={`relative w-11 h-6 rounded-full transition-colors ${isReversed ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'}`}>
+            <button role="switch" aria-checked={isReversed} aria-label="Reverse" onClick={() => setIsReversed(!isReversed)} className={`relative w-11 h-6 rounded-full transition-colors ${isReversed ? 'bg-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]'}`}>
               <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${isReversed ? 'translate-x-5' : ''}`} />
             </button>
           </div>
@@ -300,7 +300,7 @@ export default function GifEditor() {
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Optimize Palette</label>
             <div className="grid grid-cols-4 gap-1.5">
               {[0, 32, 64, 128, 256].filter(v => v !== 0 || paletteColors === 0).map(v => (
-                <button key={v} onClick={() => setPaletteColors(v)} className={`py-2 text-[10px] font-bold border rounded-lg transition-colors ${paletteColors === v ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+                <button key={v} onClick={() => setPaletteColors(v)} className={`py-2 text-[10px] font-bold border rounded-lg transition-colors ${paletteColors === v ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}>
                   {v === 0 ? 'Off' : `${v}`}
                 </button>
               ))}
@@ -308,7 +308,7 @@ export default function GifEditor() {
           </div>
 
           <div className="flex gap-2 pt-2">
-            <button onClick={processGif} disabled={isProcessing || !isLoaded} className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-95 disabled:opacity-50">
+            <button onClick={processGif} disabled={isProcessing || !isLoaded} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-95 disabled:opacity-50">
               {isProcessing ? `Processing ${progress}%` : 'Apply Changes'}
             </button>
             <button onClick={extractFrames} disabled={isExtracting || isProcessing || !isLoaded} className="bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3.5 px-4 rounded-xl text-xs transition-all active:scale-95 disabled:opacity-50 flex items-center gap-1.5">
@@ -318,8 +318,8 @@ export default function GifEditor() {
           </div>
 
           {isProcessing && (
-            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
-              <div className="bg-blue-500 h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }} />
+            <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+              <div className="bg-[var(--accent-ink)] h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }} />
             </div>
           )}
         </div>
@@ -339,16 +339,16 @@ export default function GifEditor() {
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden">
               <div className="p-3 border-b border-[var(--border-subtle)] flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-blue-500" />
+                  <span className="w-2 h-2 rounded-full bg-[var(--accent-ink)]" />
                   <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Processed</span>
                 </div>
-                {outputSize && <span className="text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}
+                {outputSize && <span className="text-[10px] bg-[var(--accent)]/10 dark:bg-[var(--accent)]/10 text-[var(--accent)] px-2 py-0.5 rounded font-bold">{(outputSize / 1024).toFixed(1)} KB</span>}
               </div>
               <div className="bg-[radial-gradient(#ccc_1px,transparent_1px)] dark:bg-[radial-gradient(#333_1px,transparent_1px)] bg-[length:20px_20px] p-4 flex items-center justify-center min-h-[200px]">
                 <img src={outputUrl} alt="Processed GIF" className="max-w-full max-h-[250px] object-contain rounded-lg" />
               </div>
               <div className="p-4 border-t border-[var(--border-subtle)]">
-                <button onClick={() => downloadOrShare(outputUrl, `edited_${file.name}`)} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                <button onClick={() => downloadOrShare(outputUrl, `edited_${file.name}`)} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download Edited GIF
                 </button>
@@ -366,7 +366,7 @@ export default function GifEditor() {
       {extractedFrameUrls.length > 0 && (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">{extractedFrameUrls.length} Frames Extracted</h4>
+            <h4 className="text-sm font-bold text-[var(--text-primary)]">{extractedFrameUrls.length} Frames Extracted</h4>
             <button onClick={() => { extractedFrameUrls.forEach(u => URL.revokeObjectURL(u)); setExtractedFrameUrls([]); }} className="text-[10px] text-red-500 hover:underline">Clear</button>
           </div>
           <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 max-h-[400px] overflow-y-auto">

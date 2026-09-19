@@ -107,7 +107,7 @@ export default function PngToSvg() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           PNG to SVG Vector Converter
@@ -123,7 +123,7 @@ export default function PngToSvg() {
             <Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />
             {imageFile ? (
               <div>
-                <p className="text-xs text-zinc-800 dark:text-white font-bold">{imageFile.name}</p>
+                <p className="text-xs text-[var(--text-primary)] dark:text-white font-bold">{imageFile.name}</p>
                 <p className="text-[10px] text-[var(--text-secondary)] mt-0.5">{(imageFile.size / 1024).toFixed(1)} KB</p>
               </div>
             ) : (
@@ -156,7 +156,7 @@ export default function PngToSvg() {
             </div>
           </div>
 
-          <button onClick={convertToSvg} disabled={isProcessing || !imageFile} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
+          <button onClick={convertToSvg} disabled={isProcessing || !imageFile} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50">
             {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
             Trace SVG Vector
           </button>
@@ -169,7 +169,7 @@ export default function PngToSvg() {
               <div className="flex-1 flex items-center justify-center w-full p-4 bg-[var(--bg-overlay)] dark:bg-zinc-950 border border-[var(--border-subtle)] rounded-xl min-h-[220px]">
                 <div className="max-w-full max-h-full object-contain" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(svgContent, { USE_PROFILES: { svg: true, svgFilters: true } }) }} />
               </div>
-              <button onClick={downloadSvg} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+              <button onClick={downloadSvg} className="w-full mt-4 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
                 <Download className="w-4 h-4" /> Download SVG File
               </button>
             </div>

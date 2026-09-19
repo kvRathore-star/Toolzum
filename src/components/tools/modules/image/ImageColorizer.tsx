@@ -63,7 +63,7 @@ export default function ImageColorizer() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
           Colorize & Tint Image Filter
@@ -74,7 +74,7 @@ export default function ImageColorizer() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs">
         {/* Workspace */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
-          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-zinc-800 pb-2">Filter Parameters</h3>
+          <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase border-b border-[var(--border-subtle)] pb-2">Filter Parameters</h3>
           
           {!imageSrc ? (
             <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-12 flex flex-col items-center justify-center bg-[var(--bg-overlay)] text-center">
@@ -104,7 +104,7 @@ export default function ImageColorizer() {
                     <span>Hue Tone</span>
                     <span>{hue}°</span>
                   </div>
-                  <input aria-label="Hue Tone" type="range" min="0" max="360" value={hue} onChange={e => setHue(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Hue Tone" type="range" min="0" max="360" value={hue} onChange={e => setHue(parseInt(e.target.value))} className="w-full accent-[var(--accent)]" />
                 </div>
 
                 <div>
@@ -112,7 +112,7 @@ export default function ImageColorizer() {
                     <span>Color Saturation</span>
                     <span>{saturation}%</span>
                   </div>
-                  <input aria-label="Color Saturation" type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Color Saturation" type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(parseInt(e.target.value))} className="w-full accent-[var(--accent)]" />
                 </div>
 
                 <div>
@@ -120,17 +120,17 @@ export default function ImageColorizer() {
                     <span>Tint Brightness</span>
                     <span>{brightness}%</span>
                   </div>
-                  <input aria-label="Tint Brightness" type="range" min="-40" max="40" value={brightness} onChange={e => setBrightness(parseInt(e.target.value))} className="w-full accent-indigo-500" />
+                  <input aria-label="Tint Brightness" type="range" min="-40" max="40" value={brightness} onChange={e => setBrightness(parseInt(e.target.value))} className="w-full accent-[var(--accent)]" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
-                <button onClick={() => setImageSrc(null)} className="border border-zinc-800 text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs cursor-pointer">Clear File</button>
-                <button onClick={applyColorizer} disabled={isProcessing} className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-xl text-xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Apply Tint</button>
+                <button onClick={() => setImageSrc(null)} className="border border-[var(--border-subtle)] text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs cursor-pointer">Clear File</button>
+                <button onClick={applyColorizer} disabled={isProcessing} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3 rounded-xl text-xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">Apply Tint</button>
               </div>
               {isProcessing && (
                 <div className="flex items-center justify-center gap-2 text-xs text-[var(--text-secondary)] py-2">
-                  <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
                   Processing...
                 </div>
               )}

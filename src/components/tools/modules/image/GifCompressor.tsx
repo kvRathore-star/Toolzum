@@ -131,7 +131,7 @@ export default function GifCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
           <strong>Reduce GIF size by up to 80%</strong> by optimizing colors and removing duplicate frames.
         </div>
         <FileUploader
@@ -145,10 +145,10 @@ export default function GifCompressor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           {gifInfo && (
             <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)] text-xs mt-1">
               {gifInfo.width}×{gifInfo.height} · {gifInfo.frameCount} frame{gifInfo.frameCount !== 1 ? 's' : ''}
@@ -157,7 +157,7 @@ export default function GifCompressor() {
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setGifInfo(null); setUploadedUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -169,7 +169,7 @@ export default function GifCompressor() {
             <h4 className="text-[var(--text-primary)] font-medium">Compression Settings</h4>
 
             <div>
-              <label htmlFor="lbl-gifcompressor-colors-colors" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-gifcompressor-colors-colors" className="block text-sm text-[var(--text-secondary)] mb-2">
                 Colors: {colors}
               </label>
               <input id="lbl-gifcompressor-colors-colors" aria-label="Compression Settings"
@@ -187,7 +187,7 @@ export default function GifCompressor() {
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Dithering</label>
+              <label className="block text-sm text-[var(--text-secondary)] mb-2">Dithering</label>
               <div className="flex gap-2">
                 {(['floyd', 'none'] as const).map((d) => (
                   <button
@@ -196,7 +196,7 @@ export default function GifCompressor() {
                     className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       dithering === d
                         ? 'bg-emerald-700 text-white shadow-lg'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                     }`}
                   >
                     {d === 'floyd' ? 'Floyd-Steinberg' : 'None'}
@@ -206,7 +206,7 @@ export default function GifCompressor() {
             </div>
 
             <div>
-              <label htmlFor="lbl-gifcompressor-loss-tolerance-losstolerance" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-gifcompressor-loss-tolerance-losstolerance" className="block text-sm text-[var(--text-secondary)] mb-2">
                 Loss Tolerance: {lossTolerance}
               </label>
               <input id="lbl-gifcompressor-loss-tolerance-losstolerance"
@@ -228,9 +228,9 @@ export default function GifCompressor() {
                 type="checkbox"
                 checked={removeDuplicates}
                 onChange={(e) => setRemoveDuplicates(e.target.checked)}
-                className="w-5 h-5 rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500"
+                className="w-5 h-5 rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500"
               />
-              <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+              <span className="text-sm text-[var(--text-secondary)]">
                 Remove duplicate frames
               </span>
             </label>
@@ -238,7 +238,7 @@ export default function GifCompressor() {
             <button
               onClick={processCompression}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-500 hover:to-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-emerald-600 to-[var(--accent-ink)] hover:from-emerald-500 hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
                 <div
@@ -257,15 +257,15 @@ export default function GifCompressor() {
               <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Compressed!</h4>
               <img src={outputUrl} alt="Compressed GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <div className="text-sm text-[var(--text-muted)] mb-4">
-                <p>Original: <span className="text-zinc-200">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</span></p>
-                <p>Compressed: <span className="text-zinc-200">{(outputSize / 1024).toFixed(1)} KB</span></p>
+                <p>Original: <span className="text-[var(--text-primary)]">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</span></p>
+                <p>Compressed: <span className="text-[var(--text-primary)]">{(outputSize / 1024).toFixed(1)} KB</span></p>
                 <p className="text-emerald-700 dark:text-emerald-400 font-medium">
                   {gifInfo!.fileSize > 0 ? `-${Math.round((1 - outputSize / gifInfo!.fileSize) * 100)}%` : ''}
                 </p>
               </div>
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}-compressed.gif`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download Compressed GIF
               </button>
@@ -308,11 +308,11 @@ export default function GifCompressor() {
             </div>
           )}
 
-          <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-zinc-600 dark:text-[var(--text-muted)]">
-            <p className="font-medium text-zinc-800 dark:text-zinc-200">Size Estimate</p>
+          <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-4 rounded-xl space-y-2 text-sm text-[var(--text-secondary)]">
+            <p className="font-medium text-[var(--text-primary)]">Size Estimate</p>
             <div className="space-y-1">
-              <p>Original: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{gifInfo ? (gifInfo.fileSize / 1024).toFixed(1) : 0} KB</span></p>
-              <p>Estimated: <span className="text-zinc-900 dark:text-zinc-100 font-medium">{(estimatedSize / 1024).toFixed(1)} KB</span></p>
+              <p>Original: <span className="text-[var(--text-primary)] font-medium">{gifInfo ? (gifInfo.fileSize / 1024).toFixed(1) : 0} KB</span></p>
+              <p>Estimated: <span className="text-[var(--text-primary)] font-medium">{(estimatedSize / 1024).toFixed(1)} KB</span></p>
               {gifInfo && gifInfo.fileSize > 0 && (
                 <p className="text-emerald-700 dark:text-emerald-400">
                   ~{Math.round((1 - estimatedSize / gifInfo.fileSize) * 100)}% smaller
@@ -321,9 +321,9 @@ export default function GifCompressor() {
             </div>
           </div>
 
-          <div className="bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl space-y-2 text-sm text-blue-700 dark:text-blue-400">
-            <p className="font-medium text-blue-300">Optimization Tips</p>
-            <ul className="space-y-1 text-blue-700 dark:text-blue-400/80">
+          <div className="bg-[var(--accent)]/5 border border-[var(--accent)]/10 p-4 rounded-xl space-y-2 text-sm text-[var(--accent)]">
+            <p className="font-medium text-[var(--accent)]">Optimization Tips</p>
+            <ul className="space-y-1 text-[var(--accent)]/80">
               <li>• Lower colors = smaller file, but may reduce quality</li>
               <li>• Dithering helps smooth color transitions</li>
               <li>• Removing duplicate frames reduces animation size</li>

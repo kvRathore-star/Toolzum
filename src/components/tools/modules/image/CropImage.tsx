@@ -75,7 +75,7 @@ export default function CropImage() {
   if (!imageSrc) {
     return (
       <div className="space-y-6">
-        <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           <Crop className="w-5 h-5 text-[var(--accent)] shrink-0" />
           <span><strong>Client-Side Crop:</strong> Modify and crop your images locally. We do not store or send files to a server.</span>
         </div>
@@ -90,9 +90,9 @@ export default function CropImage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile?.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{imageFile?.name}</h3>
           <p className="text-xs text-[var(--text-secondary)]">Upload scan or custom photo to crop</p>
         </div>
         <div className="flex gap-2">
@@ -141,8 +141,8 @@ export default function CropImage() {
                   onClick={() => changeAspectRatio(ratio.value)}
                   className={`py-2 px-3 rounded-lg font-bold border transition-all cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${
                     aspectRatio === ratio.value
-                      ? 'bg-[var(--accent-ink)] border-indigo-600 text-white'
-                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)]'
+                      ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                   }`}
                 >
                   {ratio.label}
@@ -156,7 +156,7 @@ export default function CropImage() {
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleRotate(-90)}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Rotate left 90 degrees"
               >
                 <RefreshCcw className="w-3.5 h-3.5" />
@@ -164,7 +164,7 @@ export default function CropImage() {
               </button>
               <button
                 onClick={() => handleRotate(90)}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Rotate right 90 degrees"
               >
                 <RotateCw className="w-3.5 h-3.5" />
@@ -172,7 +172,7 @@ export default function CropImage() {
               </button>
               <button
                 onClick={() => handleFlip('h')}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Flip image horizontally"
               >
                 <FlipHorizontal className="w-3.5 h-3.5" />
@@ -180,7 +180,7 @@ export default function CropImage() {
               </button>
               <button
                 onClick={() => handleFlip('v')}
-                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-[var(--border-subtle)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="py-2.5 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)] font-bold rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Flip image vertically"
               >
                 <FlipVertical className="w-3.5 h-3.5" />

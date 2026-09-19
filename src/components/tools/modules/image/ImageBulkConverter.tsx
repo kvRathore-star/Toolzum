@@ -91,7 +91,7 @@ export default function ImageBulkConverter() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>Client-Side Bulk Processing:</strong> Convert and compress hundreds of images at once directly in your browser. No files are uploaded to any server.
       </div>
 
@@ -106,14 +106,14 @@ export default function ImageBulkConverter() {
           />
 
           {files.length > 0 && (
-            <div className="bg-[var(--bg-elevated)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-2xl max-h-[300px] overflow-y-auto">
+            <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-4 rounded-2xl max-h-[300px] overflow-y-auto">
               <h4 className="text-[var(--text-primary)] font-medium mb-3 text-sm sticky top-0 bg-[var(--bg-elevated)] pb-2">
                 {files.length} images queued
               </h4>
               <ul className="space-y-2">
                 {files.map((f) => (
-                  <li key={f.id} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 dark:bg-black/50 border border-zinc-200 dark:border-[var(--border-subtle)] p-2 rounded-lg text-sm">
-                    <span className="text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1 mr-2">{f.file.name}</span>
+                  <li key={f.id} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 dark:bg-black/50 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-2 rounded-lg text-sm">
+                    <span className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate flex-1 mr-2">{f.file.name}</span>
                     <button aria-label={`Remove ${f.file.name}`} onClick={() => removeFile(f.id)} className="text-red-700 dark:text-red-400 hover:text-red-300 p-1">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -133,19 +133,19 @@ export default function ImageBulkConverter() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   onClick={() => setTargetFormat('image/jpeg')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/jpeg' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/jpeg' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   JPG
                 </button>
                 <button
                   onClick={() => setTargetFormat('image/png')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/png' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/png' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   PNG
                 </button>
                 <button
                   onClick={() => setTargetFormat('image/webp')}
-                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/webp' ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
+                  className={`py-2 rounded-lg font-bold text-sm transition-colors ${targetFormat === 'image/webp' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-elevated)]'}`}
                 >
                   WEBP
                 </button>
@@ -155,7 +155,7 @@ export default function ImageBulkConverter() {
             <div>
               <div className="flex justify-between mb-2">
                 <label className="text-sm font-medium text-[var(--text-primary)]">Quality</label>
-                <span className="text-blue-700 dark:text-blue-400 font-bold text-sm">{Math.round(quality * 100)}%</span>
+                <span className="text-[var(--accent)] font-bold text-sm">{Math.round(quality * 100)}%</span>
               </div>
               <input aria-label="Quality" 
                 type="range" 
@@ -171,7 +171,7 @@ export default function ImageBulkConverter() {
             <button 
               onClick={processBatch}
               disabled={isProcessing || files.length === 0}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
                 <div 
@@ -195,7 +195,7 @@ export default function ImageBulkConverter() {
               
               <button 
                 onClick={() => downloadOrShare(outputUrl, `toolzum_batch_${Date.now()}.zip`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-4 rounded-xl transition-colors shadow-xl flex items-center justify-center gap-2"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-8 py-4 rounded-xl transition-colors shadow-xl flex items-center justify-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download ZIP File
