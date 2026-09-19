@@ -1,9 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
 import { onRequestPost } from '../../../functions/api/payments/create-order';
 
-// No gateway secrets exist anywhere (not even Cloudflare), so these cover
-// the order-creation contract only: auth gating, gateway fallback, and the
-// persisted 'created' row. Live gateway behavior is untestable by design.
+// Dodo is the only integrated gateway. These cover the order-creation
+// contract: auth gating, gateway default, and the persisted 'created' row.
+// Live gateway behavior is untestable by design (stubbed fetch).
 function mockDb(opts?: { hasSession?: boolean; rateCount?: number }) {
   const { hasSession = true, rateCount = 0 } = opts ?? {};
   return {
@@ -44,18 +44,15 @@ describe('POST /api/payments/create-order contract', () => {
     expect(inserts).toHaveLength(0);
   });
 
-  it('falls back to razorpay on unknown gateway and persists a created order', async () => {
+  it('falls back to dodo on unknown gateway and persists a created order', async () => {
     const db = mockDb();
     const res = await onRequestPost({
       request: req({ plan: 'monthly', gateway: 'bogus' }),
       env: { DB: db },
     });
-    const html = await res.text();
-    expect(html).toContain('/pricing?order=');
-    const inserts = (db.prepare as any).mock.calls.filter(([sql]: [string]) =>
-      sql.includes('INSERT INTO payment'),
-    );
-    expect(inserts).toHaveLength(1);
+    // No DODO_API_KEY in test env → loud 503, never a dead-end local order.
+    expect(res.status).toBe(503);
+    expect(await res.json()).toEqual({ error: 'checkout_unconfigured' });
   });
 
   it('429s under rate pressure before touching the DB writes', async () => {

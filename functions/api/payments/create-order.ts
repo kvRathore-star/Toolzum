@@ -39,11 +39,15 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const formData = await context.request.formData();
     const plan = (formData.get('plan') as string) || 'pass';
-    let gateway = (formData.get('gateway') as string) || 'razorpay';
-    if (!VALID_GATEWAYS.includes(gateway)) gateway = 'razorpay';
+    // Dodo is the only integrated gateway (UPI + INR + global). Razorpay
+    // remains accepted for backward-compat rows but is never the default —
+    // defaulting to it created 'created' orders that could never complete.
+    let gateway = (formData.get('gateway') as string) || 'dodo';
+    if (!VALID_GATEWAYS.includes(gateway)) gateway = 'dodo';
     // Unknown plans previously fell through to the pass price — a pricing
-    // lie by typo. Reject instead. Currency follows the gateway until the
-    // full verify-then-upgrade flow lands with test keys (#36).
+    // lie by typo. Reject instead. Currency follows buyer country on the
+    // Dodo path (cf-ipcountry → INR localized price or USD); the Dodo
+    // webhook is the source of truth for upgrades (#36, built).
     const tier = PRICES[plan];
     if (!tier) {
       return new Response(JSON.stringify({ error: 'invalid_plan' }), {
