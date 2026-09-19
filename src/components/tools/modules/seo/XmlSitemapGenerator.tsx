@@ -53,7 +53,7 @@ const FAQS = [
   },
   {
     q: 'What is the maximum number of URLs?',
-    a: 'Free crawls go up to 100 URLs per sitemap. The crawl starts from your existing sitemap.xml and robots.txt when available, then follows same-origin links.',
+    a: 'Free crawls go up to 100 URLs per sitemap; signed-in users up to 200 and Pro up to 500. The crawl starts from your existing sitemap.xml and robots.txt when available, then follows same-origin links.',
   },
   {
     q: 'How do I submit my sitemap to Google?',
@@ -270,10 +270,10 @@ export default function XmlSitemapGenerator() {
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
-                    <option value={50}>50 pages</option>
-                    <option value={100}>100 pages</option>
-                    <option value={200}>200 pages</option>
-                    <option value={500}>500 pages (large sites)</option>
+                    <option value={50}>50 pages (free)</option>
+                    <option value={100}>100 pages (free)</option>
+                    <option value={200}>200 pages (signed in)</option>
+                    <option value={500}>500 pages (Pro)</option>
                   </select>
                 </div>
 

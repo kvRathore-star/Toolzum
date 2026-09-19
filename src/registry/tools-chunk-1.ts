@@ -561,7 +561,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { title: "3. Merge and Download", desc: "Click merge to combine all files into a single PDF, then download the result." },
     ],
     faqs: [
-      { question: "Is there a file count limit?", answer: "Free users can merge up to 5 files. Pro users can merge up to 500 files in a single operation." },
+      { question: "Is there a file count limit?", answer: "No enforced limit — merge as many PDFs as your browser memory comfortably handles. Very large batches (hundreds of files) may slow down low-end devices." },
       { question: "Does merging reduce quality?", answer: "No. The merger preserves the original quality, formatting, and embedded fonts of each source PDF." },
     ],
   },
