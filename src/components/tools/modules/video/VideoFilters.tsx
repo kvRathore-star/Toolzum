@@ -283,7 +283,7 @@ export default function VideoFilters() {
       className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
         isEnabled(k)
           ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-          : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
+          : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
       }`}
     >
       {label}
@@ -299,7 +299,7 @@ export default function VideoFilters() {
           className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
             on
               ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-              : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
+              : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
           }`}
         >
           {cfg.label}
@@ -335,14 +335,14 @@ export default function VideoFilters() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); setThumbnailUrl(null); setFilters({ ...D, pixelate: { ...D.pixelate }, oilPaint: { ...D.oilPaint }, gaussianBlur: { ...D.gaussianBlur }, vignette: { ...D.vignette }, brightness: { ...D.brightness }, contrast: { ...D.contrast }, saturation: { ...D.saturation } }); loadCalled.current = false; }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -388,7 +388,7 @@ export default function VideoFilters() {
                   className={`px-4 py-2 rounded-lg text-xs font-bold border transition-all uppercase ${
                     outputFormat === fmt
                       ? 'bg-violet-600 text-white border-violet-500 shadow-md'
-                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
+                      : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {fmt}
@@ -412,8 +412,8 @@ export default function VideoFilters() {
       </div>
 
       {outputUrl ? (
-        <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 shadow-xl max-w-2xl mx-auto">
-          <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4 text-center">Filtered Video Ready!</h4>
+        <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 shadow-xl max-w-2xl mx-auto">
+          <h4 className="text-xl font-bold text-[var(--accent)] mb-4 text-center">Filtered Video Ready!</h4>
           {outputFormat === 'gif' ? (
             <img src={outputUrl} alt="Filtered GIF" className="w-full max-h-[300px] rounded-lg mb-6 object-contain" />
           ) : (
@@ -421,7 +421,7 @@ export default function VideoFilters() {
           )}
           <button
             onClick={() => downloadOrShare(outputUrl, `filtered_${file.name.replace(/\.[^/.]+$/, '')}.${outputFormat}`)}
-            className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+            className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
           >
             Download
           </button>

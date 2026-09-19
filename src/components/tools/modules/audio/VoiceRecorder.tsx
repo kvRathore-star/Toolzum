@@ -271,7 +271,7 @@ export default function VoiceRecorder() {
           <h2 className="text-2xl font-bold">Voice Recorder</h2>
         </div>
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-start gap-2">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-start gap-2">
           <AlertCircle className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
           <p className="text-xs text-[var(--accent)] dark:text-[var(--accent)]">
             Your recording stays in your browser — nothing is uploaded. Supports WebM (native) or WAV (converted browser-side).
@@ -301,7 +301,7 @@ export default function VoiceRecorder() {
         {!audioUrl ? (
           <div className="space-y-6">
             <div className="text-center">
-              <div className="text-6xl font-mono font-bold tracking-wider tabular-nums text-zinc-800 dark:text-zinc-100">{fmt(duration)}</div>
+              <div className="text-6xl font-mono font-bold tracking-wider tabular-nums text-[var(--text-primary)] dark:text-[var(--text-primary)]">{fmt(duration)}</div>
             </div>
             <canvas ref={canvasRef} className="w-full rounded-xl bg-[var(--bg-surface)]" style={{ height: '120px' }} />
             <div className="flex items-center justify-center gap-6">
@@ -314,7 +314,7 @@ export default function VoiceRecorder() {
               ) : (
                 <>
                   <button aria-label={isPaused ? "Resume recording" : "Pause recording"} onClick={isPaused ? resumeRecording : pauseRecording}
-                    className="w-16 h-16 rounded-full bg-amber-500 hover:bg-amber-600 text-white flex items-center justify-center shadow-lg transition-all active:scale-95">
+                    className="w-16 h-16 rounded-full bg-[var(--accent-ink)] hover:opacity-90 text-white flex items-center justify-center shadow-lg transition-all active:scale-95">
                     {isPaused ? <Play className="w-7 h-7" /> : <Pause className="w-7 h-7" />}
                   </button>
                   <button onClick={stopRecording}
@@ -346,7 +346,7 @@ export default function VoiceRecorder() {
                 <input ref={inputRef} defaultValue={recordingName} aria-label="Recording name"
                   onKeyDown={e => { if (e.key === 'Enter') confirmRename(); if (e.key === 'Escape') setIsRenaming(false); }}
                   onBlur={confirmRename}
-                  className="flex-1 bg-[var(--bg-elevated)] border border-zinc-300 dark:border-zinc-600 rounded-lg px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-fuchsia-500" />
+                  className="flex-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-fuchsia-500" />
               ) : (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="text-sm font-medium text-[var(--text-primary)] truncate max-w-[180px]">{recordingName}.{outputFormat}</span>
@@ -359,7 +359,7 @@ export default function VoiceRecorder() {
               <span className="text-sm text-[var(--text-secondary)] font-medium">Format:</span>
               {(['webm', 'wav'] as const).map(f => (
                 <button key={f} onClick={() => setOutputFormat(f)}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${outputFormat === f ? 'bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-300 dark:border-fuchsia-700' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'}`}>
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${outputFormat === f ? 'bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-300 border border-fuchsia-300 dark:border-fuchsia-700' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'}`}>
                   .{f.toUpperCase()}
                 </button>
               ))}

@@ -97,7 +97,7 @@ export default function VideoTrimmer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Lossless Trimming:</strong> Cut video clips natively in your browser using WASM. No video data is uploaded.
         </div>
         <FileUploader 
@@ -111,14 +111,14 @@ export default function VideoTrimmer() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -134,15 +134,15 @@ export default function VideoTrimmer() {
             <h4 className="text-[var(--text-primary)] font-medium">Trim Settings</h4>
 
             <div className="flex justify-between text-sm">
-              <span className="text-zinc-500 dark:text-[var(--text-muted)]">Video duration: <span className="font-mono text-[var(--text-primary)]">{fmtTime(videoDuration)}</span></span>
+              <span className="text-[var(--text-muted)] dark:text-[var(--text-muted)]">Video duration: <span className="font-mono text-[var(--text-primary)]">{fmtTime(videoDuration)}</span></span>
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Clip length: <span className="font-mono">{fmtTime(endTime - startTime)}</span></span>
             </div>
 
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between mb-2">
-                  <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Start Time</label>
-                  <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(startTime)}</span>
+                  <label className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Start Time</label>
+                  <span className="font-mono text-sm text-[var(--accent)]">{fmtTime(startTime)}</span>
                 </div>
                 <input aria-label="Start Time" 
                   type="range" 
@@ -161,8 +161,8 @@ export default function VideoTrimmer() {
 
               <div>
                 <div className="flex justify-between mb-2">
-                  <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">End Time</label>
-                  <span className="font-mono text-sm text-blue-700 dark:text-blue-400">{fmtTime(endTime)}</span>
+                  <label className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">End Time</label>
+                  <span className="font-mono text-sm text-[var(--accent)]">{fmtTime(endTime)}</span>
                 </div>
                 <input aria-label="End Time" 
                   type="range" 
@@ -180,7 +180,7 @@ export default function VideoTrimmer() {
               </div>
 
               {progress === 0 && isProcessing && (
-                <p className="text-xs text-zinc-500 dark:text-[var(--text-muted)]">
+                <p className="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted)]">
                   Seeking to keyframe... this can take a moment on large files.
                 </p>
               )}
@@ -190,7 +190,7 @@ export default function VideoTrimmer() {
               onClick={processVideo}
               onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? `Trimming video ${Math.round(progress)}%` : 'Trim video'}
             >
               {isProcessing && (
@@ -206,12 +206,12 @@ export default function VideoTrimmer() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Video Trimmed!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Video Trimmed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button 
                 onClick={() => downloadOrShare(outputUrl, `trimmed_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download trimmed video"
               >
                 Download Video

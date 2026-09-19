@@ -116,7 +116,7 @@ export default function TextToSpeechTts() {
       <div className="max-w-3xl mx-auto mt-12 bg-red-500/10 border border-red-500/20 p-8 rounded-2xl text-center space-y-4">
         <svg className="w-16 h-16 text-red-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
         <h3 className="text-xl font-bold text-red-600 dark:text-red-400">Browser Not Supported</h3>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+        <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
           Your browser does not support the Web Speech API. Please try using Google Chrome, Microsoft Edge, or Safari.
         </p>
       </div>
@@ -125,7 +125,7 @@ export default function TextToSpeechTts() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <p className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-xs">Playback uses your browser&apos;s built-in voices — audio-file (MP3/WAV) export isn&apos;t possible from browser speech synthesis. Use the button below to download your text as a .txt file; audio recording needs a server-side TTS service.</p>
+      <p className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-3 rounded-xl text-[var(--accent)] text-xs">Playback uses your browser&apos;s built-in voices — audio-file (MP3/WAV) export isn&apos;t possible from browser speech synthesis. Use the button below to download your text as a .txt file; audio recording needs a server-side TTS service.</p>
       
       {/* Top Toolbar */}
       <div className="flex flex-col sm:flex-row justify-between items-center bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-4 rounded-xl shadow-sm gap-4">
@@ -134,7 +134,7 @@ export default function TextToSpeechTts() {
           <select id="lbl-texttospeechtts-voice" aria-label="Voice:"
             value={selectedVoiceURI}
             onChange={(e) => setSelectedVoiceURI(e.target.value)}
-            className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-800 dark:text-zinc-200 px-3 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 truncate"
+            className="w-full sm:w-64 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] px-3 py-2 rounded-lg text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 truncate"
           >
             {voices.map((v, i) => (
               <option key={`${v.voiceURI}-${i}`} value={v.voiceURI}>
@@ -148,7 +148,7 @@ export default function TextToSpeechTts() {
            {isPlaying ? (
              <button 
                onClick={handlePause}
-               className="flex-1 sm:flex-none bg-amber-500 hover:bg-amber-600 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+               className="flex-1 sm:flex-none bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
                Pause
@@ -156,7 +156,7 @@ export default function TextToSpeechTts() {
            ) : (
              <button 
                onClick={handlePlay}
-               className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+               className="flex-1 sm:flex-none bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
              >
                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
                {isPaused ? 'Resume' : 'Play'}
@@ -174,7 +174,7 @@ export default function TextToSpeechTts() {
             )}
             <button
                 onClick={handleDownloadText}
-                className="flex-1 sm:flex-none bg-zinc-600 hover:bg-zinc-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="flex-1 sm:flex-none bg-[var(--bg-elevated)] hover:bg-zinc-500 text-white font-bold px-6 py-2 rounded-lg shadow transition-all active:scale-95 flex items-center justify-center gap-2 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download text as .txt file"
               >
                 Download .txt
@@ -202,19 +202,19 @@ export default function TextToSpeechTts() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter the text you want to convert to speech..."
-            className="flex-1 w-full p-6 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-lg leading-relaxed text-zinc-800 dark:text-zinc-200 placeholder:text-[var(--text-muted)] dark:placeholder:text-zinc-600"
+            className="flex-1 w-full p-6 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none text-lg leading-relaxed text-[var(--text-primary)] placeholder:text-[var(--text-muted)] dark:placeholder:text-[var(--text-secondary)]"
             spellCheck="false"
           />
         </div>
 
         {/* Right: Settings Sidebar */}
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl p-6 space-y-8">
-           <h3 className="font-bold text-zinc-900 dark:text-zinc-100 border-b border-[var(--border-subtle)] pb-2">Audio Settings</h3>
+           <h3 className="font-bold text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-2">Audio Settings</h3>
            
            <div className="space-y-4">
              <div className="flex justify-between items-center">
                <label className="text-sm font-bold text-[var(--text-secondary)]">Speech Rate</label>
-               <span className="text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded">{rate.toFixed(1)}x</span>
+               <span className="text-xs font-bold bg-blue-100 dark:bg-[var(--accent)]/10 text-[var(--accent)] px-2 py-1 rounded">{rate.toFixed(1)}x</span>
              </div>
              <input aria-label="Speech Rate"
                type="range"
@@ -252,8 +252,8 @@ export default function TextToSpeechTts() {
            </div>
            
            <div className="pt-6 border-t border-[var(--border-subtle)] flex items-center justify-center">
-             <div aria-live="polite" role="status" className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-blue-500 animate-pulse bg-blue-500/10 scale-110' : 'border-[var(--border-subtle)]'}`}>
-                 <svg className={`w-10 h-10 ${isPlaying ? 'text-blue-700 dark:text-blue-400 animate-bounce' : 'text-zinc-300 dark:text-zinc-700'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
+             <div aria-live="polite" role="status" className={`w-24 h-24 rounded-full border-4 flex items-center justify-center transition-all duration-300 ${isPlaying ? 'border-[var(--accent)] animate-pulse bg-[var(--accent)]/10 scale-110' : 'border-[var(--border-subtle)]'}`}>
+                 <svg className={`w-10 h-10 ${isPlaying ? 'text-[var(--accent)] animate-bounce' : 'text-[var(--text-muted)]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
               </div>
            </div>
         </div>

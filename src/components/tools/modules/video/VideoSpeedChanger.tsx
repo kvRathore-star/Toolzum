@@ -131,7 +131,7 @@ export default function VideoSpeedChanger() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Speed Changer:</strong> Speed up or slow down video playback using FFmpeg in your browser. All processing happens locally via WebAssembly — nothing is uploaded.
         </div>
         <FileUploader
@@ -145,14 +145,14 @@ export default function VideoSpeedChanger() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={handleReset}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -174,7 +174,7 @@ export default function VideoSpeedChanger() {
             <h4 className="text-[var(--text-primary)] font-medium">Speed Settings</h4>
 
             <div>
-              <label htmlFor="lbl-videospeedchanger-speed" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">
+              <label htmlFor="lbl-videospeedchanger-speed" className="block text-sm text-[var(--text-secondary)] mb-2">
                 Speed: <span className="font-bold text-[var(--text-primary)]">{speed}x</span>
               </label>
               <input id="lbl-videospeedchanger-speed" aria-label="Speed:"
@@ -193,7 +193,7 @@ export default function VideoSpeedChanger() {
             </div>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Presets</label>
+              <label className="block text-sm text-[var(--text-secondary)] mb-2">Presets</label>
               <div className="flex flex-wrap gap-2">
                 {presets.map((p) => (
                   <button
@@ -201,7 +201,7 @@ export default function VideoSpeedChanger() {
                     onClick={() => setSpeed(p)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       speed === p
-                        ? 'bg-blue-600 text-white shadow-lg'
+                        ? 'bg-[var(--accent-ink)] text-white shadow-lg'
                         : 'bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)]'
                     }`}
                     aria-label={`Set speed to ${p}x`}
@@ -214,14 +214,14 @@ export default function VideoSpeedChanger() {
             </div>
 
             {originalDuration > 0 && (
-              <div className="bg-[var(--bg-overlay)]/50 p-3 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+              <div className="bg-[var(--bg-overlay)]/50 p-3 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-[var(--text-muted)]">Original Duration</span>
-                  <span className="text-zinc-900 dark:text-zinc-100 font-mono">{formatDuration(originalDuration)}</span>
+                  <span className="text-[var(--text-secondary)]">Original Duration</span>
+                  <span className="text-[var(--text-primary)] font-mono">{formatDuration(originalDuration)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-[var(--text-muted)]">Estimated Output</span>
-                  <span className="text-blue-700 dark:text-blue-400 font-mono">{formatDuration(outputDuration)}</span>
+                  <span className="text-[var(--text-secondary)]">Estimated Output</span>
+                  <span className="text-[var(--accent)] font-mono">{formatDuration(outputDuration)}</span>
                 </div>
               </div>
             )}
@@ -230,7 +230,7 @@ export default function VideoSpeedChanger() {
               onClick={processVideo}
               onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? `Processing video ${progress}%` : `Change speed to ${speed}x`}
             >
               {isProcessing && (
@@ -246,12 +246,12 @@ export default function VideoSpeedChanger() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Speed Changed!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Speed Changed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `speed_${speed}x_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download speed-changed video"
               >
                 Download Video

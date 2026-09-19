@@ -169,7 +169,7 @@ export default function NoiseReducer() {
           <div className="space-y-5">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div className="min-w-0 flex-1 mr-3">
-                <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)] truncate">{file.name}</div>
                 <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
               </div>
               <button onClick={removeFile} disabled={isProcessing} className="text-[10px] text-red-500 hover:underline disabled:opacity-50 shrink-0">Remove</button>
@@ -186,7 +186,7 @@ export default function NoiseReducer() {
                     className={`py-2.5 px-2 rounded-xl text-xs font-semibold transition-all ${
                       level === l
                         ? 'bg-violet-500 text-white shadow-md shadow-violet-500/20'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                     } disabled:opacity-50`}
                   >
                     {LEVEL_LABELS[l]}
@@ -202,7 +202,7 @@ export default function NoiseReducer() {
                 checked={useNoiseProfile}
                 onChange={e => setUseNoiseProfile(e.target.checked)}
                 disabled={isProcessing}
-                className="rounded border-zinc-300 dark:border-zinc-700 text-violet-500 focus:ring-violet-500 disabled:opacity-50"
+                className="rounded border-[var(--border-subtle)] text-violet-500 focus:ring-violet-500 disabled:opacity-50"
               />
               <div>
                 <span className="text-xs font-semibold text-[var(--text-primary)]">Sample noise profile</span>
@@ -273,7 +273,7 @@ export default function NoiseReducer() {
                   <span>{useNoiseProfile ? 'Analyzing noise profile & processing...' : 'Reducing noise...'}</span>
                   <span>{progress}%</span>
                 </div>
-                <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+                <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
                   <div className="bg-violet-500 h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }}></div>
                 </div>
               </div>
@@ -284,7 +284,7 @@ export default function NoiseReducer() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <p className="text-[10px] font-semibold text-[var(--text-muted)] flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-zinc-400 inline-block" />
+                      <span className="w-2 h-2 rounded-full bg-[var(--bg-elevated)] inline-block" />
                       Original
                     </p>
                     <audio controls className="w-full" src={originalUrlRef.current} />
@@ -314,7 +314,7 @@ export default function NoiseReducer() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
             <strong>How it works:</strong> Simple mode uses FFmpeg's <code className="text-[9px] px-1 py-0.5 bg-indigo-100 dark:bg-indigo-800/40 rounded">afftdn</code> adaptive frequency-domain noise reduction, automatically estimating stationary noise and suppressing it. Noise profile mode extracts the selected segment for analysis and applies <code className="text-[9px] px-1 py-0.5 bg-indigo-100 dark:bg-indigo-800/40 rounded">anlmdn</code> non-local means denoising for more aggressive reduction. Results vary by recording quality and noise characteristics.
           </p>

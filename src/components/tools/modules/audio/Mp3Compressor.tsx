@@ -53,7 +53,7 @@ export default function Mp3Compressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>100% Client-Side Processing:</strong> Compress audio files securely in your browser using WebAssembly.
         </div>
         <FileUploader 
@@ -68,14 +68,14 @@ export default function Mp3Compressor() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); setDuration(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -86,7 +86,7 @@ export default function Mp3Compressor() {
           <h4 className="text-[var(--text-primary)] font-medium">Compression Settings</h4>
           
           <div>
-            <label htmlFor="lbl-mp3compressor-target-bitrate" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Target Bitrate</label>
+            <label htmlFor="lbl-mp3compressor-target-bitrate" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Target Bitrate</label>
             <select id="lbl-mp3compressor-target-bitrate" aria-label="Target Bitrate" 
               value={bitrate}
               onChange={(e) => setBitrate(e.target.value)}
@@ -100,7 +100,7 @@ export default function Mp3Compressor() {
           </div>
 
           <div>
-            <label htmlFor="lbl-mp3compressor-sample-rate" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Sample Rate</label>
+            <label htmlFor="lbl-mp3compressor-sample-rate" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Sample Rate</label>
             <select id="lbl-mp3compressor-sample-rate" aria-label="Sample Rate"
               value={sampleRate}
               onChange={(e) => setSampleRate(e.target.value)}
@@ -114,7 +114,7 @@ export default function Mp3Compressor() {
           </div>
 
           <div>
-            <label htmlFor="lbl-mp3compressor-channels" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Channels</label>
+            <label htmlFor="lbl-mp3compressor-channels" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Channels</label>
             <select id="lbl-mp3compressor-channels" aria-label="Channels"
               value={channels}
               onChange={(e) => setChannels(Number(e.target.value))}
@@ -126,12 +126,12 @@ export default function Mp3Compressor() {
           </div>
 
           {duration !== null && (
-            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Estimated output size: ≈ {((parseInt(bitrate) * 1000) / 8 * duration / 1024 / 1024).toFixed(2)} MB</p>
+            <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Estimated output size: ≈ {((parseInt(bitrate) * 1000) / 8 * duration / 1024 / 1024).toFixed(2)} MB</p>
           )}
           <button 
             onClick={processAudio}
             disabled={isProcessing || !isLoaded}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+            className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
           >
             {isProcessing && (
               <div 
@@ -146,19 +146,19 @@ export default function Mp3Compressor() {
         </div>
 
         {outputUrl ? (
-          <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl flex flex-col justify-center">
-            <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Compression Complete!</h4>
+          <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl flex flex-col justify-center">
+            <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Compression Complete!</h4>
             <audio src={outputUrl} controls className="w-full mb-6" />
             <button 
               onClick={() => downloadOrShare(outputUrl, `compressed_${file.name}`)}
-              className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+              className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
             >
               Download MP3
             </button>
           </div>
         ) : (
           <div className="bg-white dark:bg-black border border-[var(--border-subtle)] rounded-2xl p-6 flex flex-col items-center justify-center text-center">
-             <div className="w-16 h-16 bg-blue-500/20 text-blue-700 dark:text-blue-400 rounded-full flex items-center justify-center mb-4">
+             <div className="w-16 h-16 bg-[var(--accent)]/20 text-[var(--accent)] rounded-full flex items-center justify-center mb-4">
               <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2zM21 16c-1.105 0-2 .895-2 2s.895 2 2 2 2-.895 2-2-.895-2-2-2z" /></svg>
             </div>
             <h4 className="text-[var(--text-primary)] font-bold mb-2">Original Audio</h4>

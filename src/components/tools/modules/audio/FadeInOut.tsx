@@ -54,7 +54,7 @@ function FadePanel({ side, enabled, onToggle, duration, onDuration, percent, onP
       <div className="flex items-center justify-between">
         <label className="flex items-center gap-2 text-xs font-semibold text-[var(--text-primary)]">
           <input type="checkbox" checked={enabled} onChange={e => onToggle(e.target.checked)}
-            className={`rounded border-zinc-400 dark:border-zinc-600 text-${color}-500 focus:ring-${color}-500`} />
+            className={`rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-${color}-500 focus:ring-${color}-500`} />
           {side === 'in' ? 'Fade In' : 'Fade Out'}
         </label>
         <span className={`text-[10px] font-mono ${labelColor}`}>
@@ -274,7 +274,7 @@ export default function FadeInOut() {
               <div className="flex items-center gap-3 min-w-0">
                 <Music className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
                 <div className="min-w-0">
-                  <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
+                  <div className="text-sm font-semibold text-[var(--text-primary)] truncate">{file.name}</div>
                   <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB{duration > 0 && <span> &middot; {fmt(duration)}</span>}</div>
                 </div>
               </div>
@@ -312,7 +312,7 @@ export default function FadeInOut() {
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                       outputFmt === f
                         ? 'bg-emerald-700 text-white border-emerald-500'
-                        : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-emerald-300 dark:hover:border-emerald-700'
+                        : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-emerald-300 dark:hover:border-emerald-700'
                     }`}>
                     {FORMAT_LABELS[f]}
                   </button>
@@ -340,7 +340,7 @@ export default function FadeInOut() {
 
             {!isLoaded && !processing && (
               <button onClick={loadFFmpeg}
-                className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs transition-all">
+                className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] font-bold py-3 rounded-xl text-xs transition-all">
                 Load FFmpeg Engine
               </button>
             )}
@@ -349,7 +349,7 @@ export default function FadeInOut() {
               <div role="status" className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2 mb-1">
                   <Volume2 className="w-4 h-4 text-emerald-500" />
-                  <span className="text-xs font-semibold text-zinc-600 dark:text-[var(--text-muted)]">Preview</span>
+                  <span className="text-xs font-semibold text-[var(--text-secondary)]">Preview</span>
                   <div className="flex gap-2 ml-auto">
                     <audio ref={audioRef} src={outputUrl} onPlay={() => setPlaying(true)} onEnded={() => setPlaying(false)} onPause={() => setPlaying(false)} className="hidden" />
                     <button onClick={() => audioRef.current?.paused ? audioRef.current.play() : audioRef.current?.pause()}
@@ -375,7 +375,7 @@ export default function FadeInOut() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
             <strong>Pro:</strong> Curve types — Linear (constant rate), Logarithmic (gradual start), Exponential (rapid start), S-curve (smooth midpoint). Use percentage mode for duration-independent fades.
           </p>

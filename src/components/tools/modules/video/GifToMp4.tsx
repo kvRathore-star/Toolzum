@@ -58,7 +58,7 @@ export default function GifToMp4() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>WebAssembly Processing:</strong> Convert animated GIFs to lightweight MP4 videos natively in your browser.
         </div>
         <FileUploader 
@@ -72,14 +72,14 @@ export default function GifToMp4() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change GIF
         </button>
@@ -94,13 +94,13 @@ export default function GifToMp4() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
             <h4 className="text-[var(--text-primary)] font-medium">Ready to convert</h4>
             
-            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+            <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               MP4 videos are significantly smaller than animated GIFs and load much faster on websites. This process runs locally on your device.
             </p>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label htmlFor="lbl-giftomp4-fps" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Frame Rate</label>
+                <label htmlFor="lbl-giftomp4-fps" className="block text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-1.5">Frame Rate</label>
                 <select id="lbl-giftomp4-fps" aria-label="Frame Rate" value={fps} onChange={(e) => setFps(e.target.value)}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                   <option value="10">10 fps (Smallest)</option>
@@ -110,7 +110,7 @@ export default function GifToMp4() {
                 </select>
               </div>
               <div>
-                <label htmlFor="lbl-giftomp4-scale" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Scale</label>
+                <label htmlFor="lbl-giftomp4-scale" className="block text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-1.5">Scale</label>
                 <select id="lbl-giftomp4-scale" aria-label="Scale" value={scaleW} onChange={(e) => setScaleW(e.target.value)}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                   <option value="original">Original Size</option>
@@ -121,7 +121,7 @@ export default function GifToMp4() {
                 </select>
               </div>
               <div>
-                <label htmlFor="lbl-giftomp4-quality" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Quality (CRF)</label>
+                <label htmlFor="lbl-giftomp4-quality" className="block text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-1.5">Quality (CRF)</label>
                 <select id="lbl-giftomp4-quality" aria-label="Quality" value={crf} onChange={(e) => setCrf(e.target.value)}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                   <option value="18">High (CRF 18)</option>
@@ -131,7 +131,7 @@ export default function GifToMp4() {
                 </select>
               </div>
               <div>
-                <label htmlFor="lbl-giftomp4-loop" className="block text-xs text-zinc-600 dark:text-[var(--text-muted)] mb-1.5">Loop Output</label>
+                <label htmlFor="lbl-giftomp4-loop" className="block text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-1.5">Loop Output</label>
                 <select id="lbl-giftomp4-loop" aria-label="Loop Output" value={loop} onChange={(e) => setLoop(e.target.value)}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2">
                   <option value="1">Play once (1x)</option>
@@ -145,7 +145,7 @@ export default function GifToMp4() {
             <button 
               onClick={processVideo}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden"
             >
               {isProcessing && (
                 <div 
@@ -160,12 +160,12 @@ export default function GifToMp4() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">MP4 Ready!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">MP4 Ready!</h4>
               <video src={outputUrl} controls autoPlay loop className="w-full max-h-[200px] rounded-lg mb-6" />
               <button 
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}.mp4`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download MP4
               </button>

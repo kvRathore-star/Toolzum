@@ -84,7 +84,7 @@ export default function ReelShortsMaker() {
           <Smartphone className="w-5 h-5 text-[var(--accent)]" />
           <h2 className="text-lg font-bold text-[var(--text-primary)]">Reel & Shorts Maker</h2>
         </div>
-        <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
+        <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Crop any video to the perfect aspect ratio for Instagram Reels, YouTube Shorts, or TikTok.</p>
@@ -94,7 +94,7 @@ export default function ReelShortsMaker() {
           <div className="flex items-center gap-2">
             <div className="flex gap-1">
               {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-indigo-500'}`} />
+                <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-[var(--accent-ink)]'}`} />
               ))}
             </div>
             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
@@ -102,14 +102,14 @@ export default function ReelShortsMaker() {
         </div>
 
         {!file ? (
-          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
             <input type="file" accept="video/mp4,video/webm" onChange={handleUpload} aria-label="Select video file" className="absolute inset-0 opacity-0 cursor-pointer" />
-            <div className="text-[var(--text-secondary)] flex flex-col items-center"><Upload className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mb-2" />Select Video</div>
+            <div className="text-[var(--text-secondary)] flex flex-col items-center"><Upload className="w-10 h-10 text-[var(--text-muted)] mb-2" />Select Video</div>
           </div>
         ) : (
           <div className="space-y-5">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
-              <div><div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</div><div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div></div>
+              <div><div className="text-sm font-semibold text-[var(--text-primary)]">{file.name}</div><div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div></div>
               <button onClick={() => { if (previewUrl) URL.revokeObjectURL(previewUrl); setPreviewUrl(null); setFile(null); setOutputUrl(null); }} className="text-[10px] text-red-500 hover:underline">Remove</button>
             </div>
 
@@ -120,7 +120,7 @@ export default function ReelShortsMaker() {
                   <video src={previewUrl} controls muted playsInline className="w-full max-h-64" />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none p-4">
                     <div
-                      className="border-2 border-dashed border-indigo-400 bg-indigo-500/10 max-w-full"
+                      className="border-2 border-dashed border-[var(--accent)]/20 bg-[var(--accent)]/10 max-w-full"
                       style={{ aspectRatio: RATIOS[ratioIdx]!.label === 'Custom' ? `${Number(customW) || 1} / ${Number(customH) || 1}` : `${RATIOS[ratioIdx]!.w} / ${RATIOS[ratioIdx]!.h}`, height: '85%', maxWidth: '90%' }}
                     />
                   </div>
@@ -134,7 +134,7 @@ export default function ReelShortsMaker() {
                   const Icon = r.icon;
                   return (
                     <button key={i} onClick={() => setRatioIdx(i)}
-                      className={`flex flex-col items-center gap-1 py-3 px-2 rounded-xl text-[10px] font-bold border transition-all ${ratioIdx === i ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
+                      className={`flex flex-col items-center gap-1 py-3 px-2 rounded-xl text-[10px] font-bold border transition-all ${ratioIdx === i ? 'bg-[var(--accent-ink)] text-white border-[var(--accent)]' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
                       <Icon className="w-4 h-4" />{r.label}
                     </button>
                   );
@@ -157,20 +157,20 @@ export default function ReelShortsMaker() {
             {(!isLoaded || isLoading) && <div className="text-center text-[var(--text-secondary)] py-3 flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin text-[var(--accent)]" /><span className="text-[10px]">Loading FFmpeg...</span></div>}
             {isLoaded && !outputUrl && !isProcessing && (
               <button onClick={processVideo} disabled={remaining === 0}
-                className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">
                 {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Crop for Reels/Shorts'}
               </button>
             )}
             {isProcessing && (
               <div className="space-y-2">
                 <div className="flex justify-between text-[10px] font-semibold text-[var(--accent)] dark:text-[var(--accent)]"><span>Processing...</span><span>{progress}%</span></div>
-                <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-indigo-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
+                <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden"><div className="bg-[var(--accent-ink)] h-full transition-all duration-300" style={{ width: `${progress}%` }}></div></div>
               </div>
             )}
             {outputUrl ? (
               <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <video controls className="w-full rounded-xl" src={outputUrl}></video>
-                <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}_cropped.mp4`} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all"><Download className="w-4 h-4" /> Download Cropped Video</a>
+                <a href={outputUrl} download={`${file.name.replace(/\.[^/.]+$/, "")}_cropped.mp4`} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all"><Download className="w-4 h-4" /> Download Cropped Video</a>
               </div>
             ) : (
               <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
@@ -183,7 +183,7 @@ export default function ReelShortsMaker() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Batch crop multiple videos, export to multiple ratios simultaneously, AI auto-center, background blur for portrait videos.</p>
           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>

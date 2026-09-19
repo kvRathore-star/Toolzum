@@ -173,8 +173,8 @@ export default function VocalRemover() {
           title="Upload Your Audio File"
           subtitle="MP3, WAV, M4A, FLAC, OGG — all processed locally"
         />
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
-          <p className="text-xs text-indigo-700 dark:text-indigo-300">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-4">
+          <p className="text-xs text-[var(--accent)]">
             <strong>How it works:</strong> This tool uses center channel removal — it subtracts the left and right channels to remove audio panned to the center (typically vocals). Works best on stereo recordings where vocals are mixed in the center. Mono recordings or songs with heavily panned vocals may produce artifacts.
           </p>
         </div>
@@ -187,13 +187,13 @@ export default function VocalRemover() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-5 space-y-5">
         <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
           <div>
-            <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</div>
+            <div className="text-sm font-semibold text-[var(--text-primary)]">{file.name}</div>
             <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
           </div>
           <button onClick={handleRemove} disabled={isProcessing} className="text-[10px] text-red-500 hover:underline disabled:opacity-50">Remove</button>
         </div>
 
-        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-[11px] font-medium">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-3 rounded-xl text-[var(--accent)] text-[11px] font-medium">
           <strong>Simple stereo trick, not AI stem separation:</strong> this subtracts the left/right channels to cancel center-panned vocals. It only works on stereo recordings with centered vocals.
         </div>
 
@@ -213,7 +213,7 @@ export default function VocalRemover() {
                 className={`py-2.5 px-2 rounded-xl text-[10px] font-bold transition-all ${
                   mode === key
                     ? 'bg-violet-500 text-white shadow-lg'
-                    : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
+                    : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)]'
                 }`}
               >
                 {label}
@@ -248,7 +248,7 @@ export default function VocalRemover() {
               <span>Processing...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+            <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
               <div className="bg-violet-500 h-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           </div>
@@ -299,7 +299,7 @@ export default function VocalRemover() {
         )}
       </div>
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+      <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
         <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>How it works:</strong> This tool uses center channel removal — it subtracts the left and right channels to remove audio panned to the center (typically vocals). Works best on stereo recordings where vocals are mixed in the center. Mono recordings or songs with heavily panned vocals may produce artifacts. For best results, use studio recordings with clean vocal centering.
         </p>

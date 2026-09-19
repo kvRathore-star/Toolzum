@@ -94,7 +94,7 @@ export default function VideoToMp3() {
          </div>
          <div className="flex items-center justify-center gap-2">
            <span className="text-[var(--text-secondary)] text-xs">Extract high-quality audio from video files</span>
-            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
          </div>
 
          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)] max-w-md mx-auto">
@@ -102,7 +102,7 @@ export default function VideoToMp3() {
            <div className="flex items-center gap-2">
              <div className="flex gap-1">
                {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-fuchsia-500'}`} />
+                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-fuchsia-500'}`} />
                ))}
              </div>
              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
@@ -110,10 +110,10 @@ export default function VideoToMp3() {
          </div>
 
          {!file ? (
-           <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative mt-8">
+           <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative mt-8">
              <input type="file" accept="video/*" onChange={handleUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
              <div className="text-[var(--text-secondary)] flex flex-col items-center">
-                <Upload className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" />
+                <Upload className="w-12 h-12 text-[var(--text-muted)] mb-2" />
                 Select Video File (MP4, WEBM, MOV)
              </div>
            </div>
@@ -163,7 +163,7 @@ export default function VideoToMp3() {
                    <span>Processing...</span>
                    <span>{progress}%</span>
                  </div>
-                 <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
+                 <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                    <div className="bg-fuchsia-500 h-full transition-all duration-300 ease-out" style={{ width: `${progress}%` }}></div>
                  </div>
                </div>
@@ -189,7 +189,7 @@ export default function VideoToMp3() {
            </div>
          )}
 
-         <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+         <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
            <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Unlimited extractions, batch process multiple files, select specific audio track, export as MP3/FLAC/WAV/AAC.</p>
            <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
          </div>
@@ -205,7 +205,7 @@ export default function VideoToMp3() {
                <Link
                  key={p.slug}
                  href={`/video/${p.slug}`}
-                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-all"
+                 className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-all"
                >
                  {p.label}
                </Link>

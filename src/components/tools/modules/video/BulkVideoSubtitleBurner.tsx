@@ -180,7 +180,7 @@ export default function BulkVideoSubtitleBurner() {
         </div>
 
         {!isLoaded && batch.files.length > 0 && subtitle && (
-          <button onClick={loadFFmpeg} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-zinc-700 text-white font-medium rounded-[var(--radius-lg)] hover:bg-zinc-600 transition-all">
+          <button onClick={loadFFmpeg} className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-[var(--bg-elevated)] text-white font-medium rounded-[var(--radius-lg)] hover:bg-[var(--bg-elevated)] transition-all">
             <Loader2 className="w-4 h-4" /> Load FFmpeg Engine (~30MB)
           </button>
         )}

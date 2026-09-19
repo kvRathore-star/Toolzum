@@ -84,7 +84,7 @@ export default function ReverseVideo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Reverse Video:</strong> Play video, audio, or both in reverse. All processing happens locally in your browser — nothing is uploaded.
         </div>
         <FileUploader
@@ -98,14 +98,14 @@ export default function ReverseVideo() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -121,7 +121,7 @@ export default function ReverseVideo() {
             <h4 className="text-[var(--text-primary)] font-medium">Reverse Settings</h4>
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-3">Reverse</label>
+              <label className="block text-sm text-[var(--text-secondary)] mb-3">Reverse</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['video', 'audio', 'both'] as const).map((m) => (
                   <button
@@ -129,8 +129,8 @@ export default function ReverseVideo() {
                     onClick={() => setMode(m)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       mode === m
-                        ? 'bg-blue-600 text-white shadow'
-                        : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                        ? 'bg-[var(--accent-ink)] text-white shadow'
+                        : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                     }`}
                     aria-label={`Reverse ${m === 'both' ? 'video and audio' : m}`}
                     aria-pressed={mode === m}
@@ -142,7 +142,7 @@ export default function ReverseVideo() {
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Preserve Audio Pitch</span>
+              <span className="text-sm text-[var(--text-secondary)]">Preserve Audio Pitch</span>
               <button
                 type="button"
                 role="switch"
@@ -150,7 +150,7 @@ export default function ReverseVideo() {
                 aria-label="Preserve Audio Pitch"
                 onClick={() => setPreservePitch(!preservePitch)}
                 className={`relative w-11 h-6 rounded-full transition-colors ${
-                  preservePitch ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'
+                  preservePitch ? 'bg-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)]'
                 }`}
               >
                 <span
@@ -165,7 +165,7 @@ export default function ReverseVideo() {
               onClick={processVideo}
               onKeyDown={handleKeyDown}
               disabled={isProcessing || !isLoaded}
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 relative overflow-hidden focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? `Reversing video: ${loadingMessage || 'Processing...'}` : 'Reverse video'}
             >
               {isProcessing && (
@@ -181,12 +181,12 @@ export default function ReverseVideo() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Reversed!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Reversed!</h4>
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `reversed_${file.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Download reversed video"
               >
                 Download Reversed Video

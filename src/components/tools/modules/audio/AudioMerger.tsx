@@ -214,7 +214,7 @@ export default function AudioMerger() {
   if (!isLoaded) {
     return (
       <div className="flex flex-col items-center justify-center p-16 space-y-4">
-        <svg className="w-10 h-10 text-blue-700 dark:text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
+        <svg className="w-10 h-10 text-[var(--accent)] animate-spin" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
@@ -228,7 +228,7 @@ export default function AudioMerger() {
   if (files.length === 0) {
     return (
       <div className="max-w-3xl mx-auto animate-in fade-in duration-500 space-y-5">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-600 dark:text-blue-400 text-xs">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-xs">
           <strong>Merge Audio Tracks — 100% Offline:</strong> Combine MP3, WAV, M4A, FLAC, and OGG files into one seamless track. Add crossfade transitions and optional loudness normalization.
         </div>
         <FileUploader
@@ -243,7 +243,7 @@ export default function AudioMerger() {
 
   return (
     <div className="max-w-4xl mx-auto animate-in fade-in duration-500 space-y-6">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-600 dark:text-blue-400 text-xs">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-xs">
         <strong>Audio Merger:</strong> Drag to reorder or use the arrows. All processing is done locally — nothing is uploaded.
       </div>
 
@@ -258,7 +258,7 @@ export default function AudioMerger() {
               <span className="text-[10px] text-[var(--text-muted)]">{formatTime(totalDuration)}</span>
               <button
                 onClick={() => addMoreRef.current?.click()}
-                className="text-[10px] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg text-zinc-600 dark:text-zinc-300 transition-colors"
+                className="text-[10px] bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg text-[var(--text-secondary)] dark:text-[var(--text-muted)] transition-colors"
               >
                 + Add More
               </button>
@@ -284,7 +284,7 @@ export default function AudioMerger() {
                 >
                   <span className="text-[10px] text-[var(--text-muted)] w-5 text-right font-mono">{displayIdx + 1}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 truncate">{file!.name}</p>
+                    <p className="text-xs font-medium text-[var(--text-primary)] truncate">{file!.name}</p>
                     <p className="text-[10px] text-[var(--text-muted)]">
                       {(file!.size / 1024 / 1024).toFixed(1)} MB
                       {durations[fileIdx] ? ` · ${formatTime(durations[fileIdx])}` : ''}
@@ -295,7 +295,7 @@ export default function AudioMerger() {
                       aria-label={`Move ${file!.name} up`}
                       onClick={() => moveUp(displayIdx)}
                       disabled={displayIdx === 0}
-                      className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
+                      className="p-1 text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-white disabled:opacity-20 transition-colors"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                     </button>
@@ -303,7 +303,7 @@ export default function AudioMerger() {
                       aria-label={`Move ${file!.name} down`}
                       onClick={() => moveDown(displayIdx)}
                       disabled={displayIdx === order.length - 1}
-                      className="p-1 text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-20 transition-colors"
+                      className="p-1 text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-white disabled:opacity-20 transition-colors"
                     >
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                     </button>
@@ -332,8 +332,8 @@ export default function AudioMerger() {
                   onClick={() => setOutputFormat(f)}
                   className={`px-3 py-2 rounded-xl text-xs font-medium transition-all ${
                     outputFormat === f
-                      ? 'bg-blue-500 text-white shadow-md'
-                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                      ? 'bg-[var(--accent-ink)] text-white shadow-md'
+                      : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {FORMAT_LABELS[f]}
@@ -346,7 +346,7 @@ export default function AudioMerger() {
           <div>
             <div className="flex justify-between items-center mb-1.5">
               <label className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">Crossfade</label>
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{crossfade}s</span>
+              <span className="text-xs font-bold text-[var(--accent)]">{crossfade}s</span>
             </div>
             <input aria-label="Crossfade"
               type="range"
@@ -370,7 +370,7 @@ export default function AudioMerger() {
               onClick={() => setNormalize((n) => !n)}
               disabled={isProcessing}
               className={`w-10 h-6 rounded-full transition-colors relative ${
-                normalize ? 'bg-blue-500' : 'bg-zinc-300 dark:bg-zinc-700'
+                normalize ? 'bg-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)]'
               } ${isProcessing ? 'opacity-50' : ''}`}
             >
               <span
@@ -380,7 +380,7 @@ export default function AudioMerger() {
               />
             </button>
             <div>
-              <span className="text-xs font-medium text-zinc-800 dark:text-zinc-200">Normalize Volume</span>
+              <span className="text-xs font-medium text-[var(--text-primary)]">Normalize Volume</span>
               <p className="text-[10px] text-[var(--text-muted)]">Equalize loudness across all tracks (-16 LUFS)</p>
             </div>
           </label>
@@ -391,7 +391,7 @@ export default function AudioMerger() {
           <button
             onClick={mergeAudio}
             disabled={order.length < 2}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-40"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-40"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
             Merge {order.length} Tracks → {outputFormat.toUpperCase()}
@@ -400,12 +400,12 @@ export default function AudioMerger() {
 
         {isProcessing && (
           <div className="space-y-2">
-            <div className="flex justify-between text-[10px] font-semibold text-blue-600 dark:text-blue-400">
+            <div className="flex justify-between text-[10px] font-semibold text-[var(--accent)]">
               <span>Merging audio files...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
-              <div className="bg-blue-500 h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }} />
+            <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+              <div className="bg-[var(--accent-ink)] h-full transition-all duration-300 rounded-full" style={{ width: `${progress}%` }} />
             </div>
           </div>
         )}
@@ -415,7 +415,7 @@ export default function AudioMerger() {
             <audio controls className="w-full" src={outputUrl} />
             <button
               onClick={() => downloadOrShare(outputUrl, `merged_audio.${EXTENSIONS[outputFormat]}`)}
-              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download {outputFormat.toUpperCase()} ({formatTime(totalDuration)})
@@ -424,7 +424,7 @@ export default function AudioMerger() {
         )}
       </div>
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+      <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
         <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>Pro:</strong> Combine podcasts, merge audio chapters, create seamless DJ mixes — all in your browser. Crossfade durations up to 10s, loudness normalization, and batch mode available for power users.
         </p>

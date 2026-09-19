@@ -158,7 +158,7 @@ export default function VideoScreenshot() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Video Screenshot Extractor:</strong> Capture still frames from videos at precise timestamps. All processing happens in your browser and no data is uploaded.
         </div>
         <FileUploader accept="video/*" onFileSelect={(f) => setFile(f)} title="Upload Video" />
@@ -168,12 +168,12 @@ export default function VideoScreenshot() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
-        <button onClick={reset} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change Video</button>
+        <button onClick={reset} className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change Video</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -197,24 +197,24 @@ export default function VideoScreenshot() {
 
             {mode === 'single' ? (
               <div>
-                <label htmlFor="lbl-videoscreenshot-timestamp-mm-ss-or-hh-mm-ss" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
+                <label htmlFor="lbl-videoscreenshot-timestamp-mm-ss-or-hh-mm-ss" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Timestamp (MM:SS or HH:MM:SS)</label>
                 <input id="lbl-videoscreenshot-timestamp-mm-ss-or-hh-mm-ss" aria-label="Timestamp (MM:SS or HH:MM:SS)" type="text" value={timestamp} onChange={(e) => setTimestamp(e.target.value)} placeholder="00:00"
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
-                  className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
+                  className="w-full mt-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
                 >
                   {isProcessing ? 'Capturing...' : 'Capture at Current Time'}
                 </button>
               </div>
             ) : (
               <div>
-                <label htmlFor="lbl-videoscreenshot-interval-seconds-between-frames" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
+                <label htmlFor="lbl-videoscreenshot-interval-seconds-between-frames" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Interval (seconds between frames)</label>
                 <input id="lbl-videoscreenshot-interval-seconds-between-frames" aria-label="Interval (seconds between frames)" type="number" value={interval} onChange={(e) => setInterval(Number(e.target.value))} min={0.5} step={0.5}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
                 <button onClick={captureFrame} disabled={isProcessing}
-                  className="w-full mt-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
+                  className="w-full mt-3 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-3 rounded-xl transition-all active:scale-95 disabled:opacity-50"
                 >
                   {isProcessing ? 'Extracting...' : 'Extract Frames'}
                 </button>
@@ -222,11 +222,11 @@ export default function VideoScreenshot() {
             )}
 
             <div>
-              <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Output Format</label>
+              <label className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Output Format</label>
               <div className="flex gap-2">
                 {(['jpg', 'png', 'webp'] as const).map(f => (
                   <button key={f} onClick={() => setFormat(f)}
-                    className={`flex-1 py-2 rounded-lg text-sm font-medium uppercase transition-all ${format === f ? 'bg-blue-600 text-white shadow-sm' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
+                    className={`flex-1 py-2 rounded-lg text-sm font-medium uppercase transition-all ${format === f ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
                   >
                     {f}
                   </button>
@@ -236,8 +236,8 @@ export default function VideoScreenshot() {
 
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <label className="text-zinc-600 dark:text-[var(--text-muted)]">Quality</label>
-                <span className="text-zinc-900 dark:text-zinc-100 font-mono text-xs bg-[var(--bg-surface)] px-2 py-0.5 rounded">{quality}%</span>
+                <label className="text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Quality</label>
+                <span className="text-[var(--text-primary)] font-mono text-xs bg-[var(--bg-surface)] px-2 py-0.5 rounded">{quality}%</span>
               </div>
               <input aria-label="Quality" type="range" min={1} max={100} value={quality} onChange={(e) => setQuality(Number(e.target.value))}
                 className="w-full accent-blue-600"
@@ -247,13 +247,13 @@ export default function VideoScreenshot() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="lbl-videoscreenshot-width-0-original" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
+                <label htmlFor="lbl-videoscreenshot-width-0-original" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Width (0 = original)</label>
                 <input id="lbl-videoscreenshot-width-0-original" aria-label="Width (0 = original)" type="number" value={width} onChange={(e) => setWidth(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
               </div>
               <div>
-                <label htmlFor="lbl-videoscreenshot-height-0-original" className="block text-sm text-zinc-600 dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
+                <label htmlFor="lbl-videoscreenshot-height-0-original" className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mb-2">Height (0 = original)</label>
                 <input id="lbl-videoscreenshot-height-0-original" aria-label="Height (0 = original)" type="number" value={height} onChange={(e) => setHeight(Number(e.target.value))} min={0}
                   className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono"
                 />
@@ -270,7 +270,7 @@ export default function VideoScreenshot() {
               {screenshots.length} Screenshot{screenshots.length !== 1 ? 's' : ''}
             </h4>
             <button onClick={downloadAll}
-              className="text-sm bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium px-4 py-2 rounded-lg transition-all active:scale-95"
+              className="text-sm bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-medium px-4 py-2 rounded-lg transition-all active:scale-95"
             >
               {screenshots.length === 1 ? 'Download' : 'Download All (ZIP)'}
             </button>

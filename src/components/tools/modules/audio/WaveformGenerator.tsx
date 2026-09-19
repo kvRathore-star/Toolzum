@@ -287,7 +287,7 @@ export default function WaveformGenerator() {
         ) : (
           <div className="space-y-5">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
-              <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate max-w-[70%]">{file.name}</div>
+              <div className="text-sm font-semibold text-[var(--text-primary)] truncate max-w-[70%]">{file.name}</div>
               <button onClick={() => { setFile(null); cachedRef.current = null; setHasSamples(false); updateOutput(null); }} className="text-[10px] text-red-500 hover:underline shrink-0">Remove</button>
             </div>
 
@@ -296,8 +296,8 @@ export default function WaveformGenerator() {
                 <button key={opt.value} onClick={() => setStyle(opt.value)}
                   className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all border ${
                     style === opt.value
-                      ? 'bg-indigo-500 text-white border-indigo-500'
-                      : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)] hover:border-zinc-300'
+                      ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]'
+                      : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                   }`}>
                   {opt.label}
                 </button>
@@ -328,44 +328,44 @@ export default function WaveformGenerator() {
               <div>
                 <label htmlFor="lbl-waveformgenerator-width-width-px" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Width: {width}px</label>
                 <input id="lbl-waveformgenerator-width-width-px" type="range" min={800} max={4000} step={50} value={width} aria-label="Width" onChange={e => setWidth(Number(e.target.value))}
-                  className="w-full accent-indigo-500" />
+                  className="w-full accent-[var(--accent)]" />
               </div>
               <div>
                 <label htmlFor="lbl-waveformgenerator-height-height-px" className="text-[10px] font-semibold text-[var(--text-muted)] mb-1 block">Height: {height}px</label>
                 <input id="lbl-waveformgenerator-height-height-px" type="range" min={100} max={800} step={10} value={height} aria-label="Height" onChange={e => setHeight(Number(e.target.value))}
-                  className="w-full accent-indigo-500" />
+                  className="w-full accent-[var(--accent)]" />
               </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={useGradient} onChange={e => setUseGradient(e.target.checked)}
-                  className="rounded accent-indigo-500" />
+                  className="rounded accent-[var(--accent)]" />
                 <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Gradient</span>
               </label>
               {(style === 'bars' || style === 'circular') && (
                 <label className="flex items-center gap-2 cursor-pointer">
                   <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Radius: {borderRadius}px</span>
                   <input type="range" min={0} max={30} value={borderRadius} onChange={e => setBorderRadius(Number(e.target.value))}
-                    className="w-20 accent-indigo-500" />
+                    className="w-20 accent-[var(--accent)]" />
                 </label>
               )}
               {(style === 'line' || style === 'filled') && (
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={mirror} onChange={e => setMirror(e.target.checked)}
-                    className="rounded accent-indigo-500" />
+                    className="rounded accent-[var(--accent)]" />
                   <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Mirror</span>
                 </label>
               )}
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={transparentBg} onChange={e => setTransparentBg(e.target.checked)}
-                  className="rounded accent-indigo-500" />
+                  className="rounded accent-[var(--accent)]" />
                 <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Transparent BG</span>
               </label>
             </div>
 
             <button onClick={generate} disabled={isProcessing}
-              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
               {isProcessing ? (
                 <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" /><path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" className="opacity-75" /></svg> Processing...</>
               ) : needsFfmpeg ? (
@@ -383,7 +383,7 @@ export default function WaveformGenerator() {
 
             {outputUrl ? (
               <button onClick={() => downloadOrShare(outputUrl, `waveform_${file.name.replace(/\.[^/.]+$/, '')}.png`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 Download PNG
               </button>
@@ -398,7 +398,7 @@ export default function WaveformGenerator() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Tip:</strong> Adjust style, colors, and dimensions to match your brand. Bars work great for music visualizers, Line for podcasts, and Circular for social media covers.</p>
         </div>
       </div>

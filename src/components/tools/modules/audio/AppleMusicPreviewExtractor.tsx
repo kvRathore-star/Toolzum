@@ -143,7 +143,7 @@ export default function AppleMusicPreviewExtractor() {
         </div>
 
         <div className="md:col-span-5 bg-[var(--bg-overlay)] rounded-2xl p-5 border border-[var(--border-subtle)] flex flex-col justify-center">
-          <h4 className="font-bold text-zinc-300 uppercase">Legal & Safe</h4>
+          <h4 className="font-bold text-[var(--text-muted)] uppercase">Legal & Safe</h4>
           <p className="mt-2 text-[10px] leading-relaxed text-[var(--text-secondary)]">
             Extracts publicly available 30-90 second preview clips via Apple Music's public API. 
             Does not bypass DRM or download full tracks. Complies with Apple's preview licensing.

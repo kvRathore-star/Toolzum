@@ -105,7 +105,7 @@ export default function MuteVideo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Mute / Replace Audio:</strong> Strip, replace, or adjust the volume of your video&apos;s audio track. Everything runs in your browser — no uploads.
         </div>
         <FileUploader
@@ -145,14 +145,14 @@ export default function MuteVideo() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={reset}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Video
         </button>
@@ -170,19 +170,19 @@ export default function MuteVideo() {
             <div className="grid grid-cols-3 gap-2">
               <button
                 onClick={() => setMode('mute')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'mute' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'mute' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Mute
               </button>
               <button
                 onClick={() => setMode('replace')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'replace' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'replace' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Replace
               </button>
               <button
                 onClick={() => setMode('volume')}
-                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'volume' ? 'bg-amber-500 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
+                className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${mode === 'volume' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}
               >
                 Volume
               </button>
@@ -193,13 +193,13 @@ export default function MuteVideo() {
             {!isLoaded && (
               <div className="flex items-center gap-3 p-3 bg-[var(--bg-overlay)] rounded-xl">
                 <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Loading FFmpeg engine...</span>
+                <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Loading FFmpeg engine...</span>
               </div>
             )}
 
             {mode === 'replace' && (
               <div className="space-y-3">
-                <label className="block text-sm text-zinc-600 dark:text-[var(--text-muted)]">Replacement Audio</label>
+                <label className="block text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Replacement Audio</label>
                 {!audioFile ? (
                   <FileUploader
                     accept="audio/mp3,audio/wav,audio/m4a,audio/aac,.mp3,.wav,.m4a,.aac"
@@ -210,7 +210,7 @@ export default function MuteVideo() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">{audioFile.name}</p>
+                        <p className="text-sm font-medium text-[var(--text-primary)] truncate">{audioFile.name}</p>
                         <p className="text-xs text-[var(--text-secondary)]">{(audioFile.size / 1024 / 1024).toFixed(2)} MB</p>
                       </div>
                       <button
@@ -222,7 +222,7 @@ export default function MuteVideo() {
                     </div>
                     <audio ref={audioRef} src={URL.createObjectURL(audioFile)} controls className="w-full h-10" />
                     <div className="flex items-center justify-between p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800/30">
-                      <span className="text-xs text-amber-700 dark:text-amber-400">Sync Mode</span>
+                      <span className="text-xs text-[var(--accent)]">Sync Mode</span>
                       <select aria-label="Replacement Audio"
                         value={syncMode}
                         onChange={(e) => setSyncMode(e.target.value as 'shortest' | 'first')}
@@ -240,7 +240,7 @@ export default function MuteVideo() {
             {mode === 'volume' && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Volume Level</label>
+                  <label className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Volume Level</label>
                   <span className="text-lg font-bold text-amber-500">{volume}%</span>
                 </div>
                 <input aria-label="Volume Level"
@@ -249,7 +249,7 @@ export default function MuteVideo() {
                   max="200"
                   value={volume}
                   onChange={(e) => setVolume(Number(e.target.value))}
-                  className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  className="w-full h-2 bg-[var(--bg-overlay)] rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
                 <div className="flex justify-between text-xs text-[var(--text-muted)]">
                   <span>0% (Silent)</span>
@@ -275,8 +275,8 @@ export default function MuteVideo() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-2">Processing Complete!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-2">Processing Complete!</h4>
               <p className="text-sm text-emerald-600 dark:text-emerald-300 mb-4">
                 {mode === 'mute' && 'Audio track has been removed.'}
                 {mode === 'replace' && 'Audio track has been replaced.'}
@@ -285,7 +285,7 @@ export default function MuteVideo() {
               <video src={outputUrl} controls autoPlay className="w-full max-h-[200px] rounded-lg mb-6" />
               <button
                 onClick={() => downloadOrShare(outputUrl, getOutputFileName())}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download Video
               </button>

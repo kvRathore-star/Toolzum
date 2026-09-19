@@ -131,7 +131,7 @@ export default function AudioCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-4xl mx-auto">
-        <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Dynamic Range Compression:</strong> Reduce the volume gap between quiet and loud parts of your audio. All processing happens locally in your browser.
         </div>
         <FileUploader
@@ -149,18 +149,18 @@ export default function AudioCompressor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>Dynamic Range Compression:</strong> Reduce the volume gap between quiet and loud parts of your audio. All processing happens locally in your browser.
       </div>
 
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="min-w-0 flex-1">
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)] truncate">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg shrink-0 ml-4"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg shrink-0 ml-4"
         >
           Change File
         </button>
@@ -178,7 +178,7 @@ export default function AudioCompressor() {
                   className={`text-[10px] px-2.5 py-1 rounded-lg font-medium transition-all ${
                     preset === p.name
                       ? 'bg-amber-500 text-white'
-                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                      : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {p.name}
@@ -206,7 +206,7 @@ export default function AudioCompressor() {
                   className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-all ${
                     outputFormat === fmt.value
                       ? 'bg-amber-500 text-white'
-                      : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                      : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
                   }`}
                 >
                   {fmt.label}
@@ -218,7 +218,7 @@ export default function AudioCompressor() {
           {!isLoaded && !isLoading && !isProcessing && (
             <button
               onClick={processAudio}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]"
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]"
             >
               Load Engine & Compress
             </button>
@@ -235,7 +235,7 @@ export default function AudioCompressor() {
             <button
               onClick={processAudio}
               onKeyDown={handleKeyDown}
-              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isProcessing ? 'Compressing audio...' : 'Compress audio'}
             >
               Compress Audio
@@ -247,7 +247,7 @@ export default function AudioCompressor() {
               <div className="flex justify-between text-[10px] font-semibold text-amber-600 dark:text-amber-400">
                 <span>Processing...</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-4 overflow-hidden relative">
+              <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-4 overflow-hidden relative">
                 <div
                   className="bg-gradient-to-r from-amber-400 to-amber-600 h-full transition-all duration-500 rounded-full"
                   style={{ width: `${Math.min(gainReduction + 20, 100)}%` }}
@@ -266,7 +266,7 @@ export default function AudioCompressor() {
                 <span className="text-[10px] font-semibold text-[var(--text-secondary)]">Gain Reduction</span>
                 <span className="text-[10px] font-mono text-amber-500 font-bold">{gainReduction}%</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-6 overflow-hidden">
+              <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-6 overflow-hidden">
                 <div
                   className="h-full transition-all duration-300 rounded-full"
                   style={{
@@ -302,7 +302,7 @@ export default function AudioCompressor() {
                     const fmt = OUTPUT_FORMATS.find(f => f.value === outputFormat)!;
                     downloadOrShare(outputUrl, `compressed_${file.name.replace(/\.[^.]+$/, '')}.${fmt.ext}`);
                   }}
-                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] font-bold px-4 py-3 rounded-xl text-xs transition-all focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   aria-label={`Download compressed audio as ${OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}`}
                 >
                   Download {OUTPUT_FORMATS.find(f => f.value === outputFormat)!.label}
@@ -318,7 +318,7 @@ export default function AudioCompressor() {
         </div>
       </div>
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
+      <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-4">
         <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>What is compression?</strong> Audio compression reduces dynamic range — it makes quiet sounds louder and loud sounds quieter. <strong>Threshold</strong> sets when compression starts. <strong>Ratio</strong> controls how much compression is applied. <strong>Attack/Release</strong> determine how fast compression responds. <strong>Makeup Gain</strong> boosts the overall level after compression. <strong>Knee</strong> smooths the transition into compression.
         </p>
@@ -353,7 +353,7 @@ function SliderControl({ label, value, min, max, step, unit, onChange }: {
           step={step}
           value={value}
           onChange={e => onChange(parseFloat(e.target.value))}
-          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-zinc-200 dark:bg-[var(--bg-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2
+          className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2
             [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-amber-500 [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white
             [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:active:scale-110"

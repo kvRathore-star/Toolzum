@@ -336,7 +336,7 @@ export default function AudioEqualizer() {
               </svg>
             </div>
             <div className="min-w-0">
-              <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</div>
+              <div className="text-sm font-semibold text-[var(--text-primary)] truncate">{file.name}</div>
               <div className="text-[10px] text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
             </div>
           </div>
@@ -369,7 +369,7 @@ export default function AudioEqualizer() {
               className={`text-[10px] font-semibold px-3 py-1.5 rounded-lg border transition-all
                 ${preset === name
                   ? 'bg-violet-500 text-white border-violet-500'
-                  : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-zinc-300 border-[var(--border-subtle)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
+                  : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)]'
                 }`}>
               {name}
             </button>
@@ -422,7 +422,7 @@ export default function AudioEqualizer() {
 
           {isProcessing && (
             <div className="flex items-center gap-3 flex-1">
-              <div className="flex-1 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+              <div className="flex-1 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
                 <div id="eq-progress" className="bg-violet-500 h-full transition-all duration-300" style={{ width: '0%' }}></div>
               </div>
               <span id="eq-progress-text" className="text-[10px] font-semibold text-violet-500 w-8 text-right">0%</span>
