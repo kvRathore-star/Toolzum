@@ -6,6 +6,7 @@ import { ErrorLogger } from "@/components/ErrorLogger";
 import { SiteShell } from "@/components/SiteShell";
 import { TOOL_COUNT } from "@/registry/site-data.generated";
 import { ClientProviders } from "@/components/ClientProviders";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -130,6 +131,7 @@ export default function RootLayout({
           </SiteShell>
 
           <GdprConsentBanner />
+          <ServiceWorkerRegister />
         </ThemeProvider>
       </body>
     </html>
