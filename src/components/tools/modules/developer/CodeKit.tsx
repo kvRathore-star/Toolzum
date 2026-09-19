@@ -81,9 +81,9 @@ export function CodeObfuscator() {
       <CalcBtn onClick={obfuscate} label="Obfuscate" />
                 </>}
           output={<>
-            <Result value={output} />
+            {output ? <Result value={output} /> : <span className="text-[var(--text-muted)]">Result appears here</span>}
           </>}
-          actions={<CalcActions result={output} downloadData={output} downloadFilename='obfuscated.js' />}
+          actions={<CalcActions result={output || ''} downloadData={output || ''} downloadFilename='obfuscated.js' />}
         />
 
     </div>
@@ -168,9 +168,9 @@ export function CodeToCurlParser() {
       <CalcBtn onClick={parse} label="Parse to Curl" />
                 </>}
           output={<>
-            <Result value={output} />
+            {output ? <Result value={output} /> : <span className="text-[var(--text-muted)]">Result appears here</span>}
           </>}
-          actions={<CalcActions result={output} downloadData={output} downloadFilename='curl-command.sh' />}
+          actions={<CalcActions result={output || ''} downloadData={output || ''} downloadFilename='curl-command.sh' />}
         />
 
     </div>
@@ -263,7 +263,7 @@ export function JsSyntaxChecker() {
       <CalcBtn onClick={check} label="Check Syntax" />
                 </>}
           output={<>
-            <Result value={result} />
+            {result ? <Result value={result} /> : <span className="text-[var(--text-muted)]">Result appears here</span>}
             {issues.length > 0 && (
               <div className="bg-[var(--bg-overlay)] rounded-lg p-2 space-y-1 max-h-32 overflow-y-auto">
                 {issues.map((iss, i) => (
@@ -406,9 +406,9 @@ export function PugToHtml() {
                 <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(output) }} className="text-[11px] text-gray-800" />
               </div>
             )}
-            <Result value={output} />
+            {output ? <Result value={output} /> : <span className="text-[var(--text-muted)]">Result appears here</span>}
           </>}
-          actions={<CalcActions result={output} downloadData={output} downloadFilename='output.html' />}
+          actions={<CalcActions result={output || ''} downloadData={output || ''} downloadFilename='output.html' />}
         />
 
     </div>
