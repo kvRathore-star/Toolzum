@@ -479,6 +479,12 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             JSON.stringify([...visited]), JSON.stringify(pages),
             discovered, jsRendering ? 1 : 0, now, now,
           ).run();
+          // Retire the previous cursor (continuations only) so each crawl
+          // leaves at most one live session row; the final chunk deletes
+          // its cursor on completion, and the sweep below covers aborts.
+          if (cursorParam) {
+            await env.DB.prepare('DELETE FROM crawl_session WHERE id = ?').bind(cursorParam).run().catch(() => {});
+          }
           // Best-effort expiry sweep for abandoned sessions.
           await env.DB.prepare('DELETE FROM crawl_session WHERE updatedAt < ?')
             .bind(now - SESSION_TTL_S).run().catch(() => {});
