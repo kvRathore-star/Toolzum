@@ -34,8 +34,46 @@ export default function ContactPage() {
     subject: "general",
     message: ""
   });
+  const [suggestText, setSuggestText] = useState("");
+
+  // Deep-link prefill: /contact?subject=suggestion&message=... (from
+  // homepage "Suggest a tool"). Read once on mount via location.search
+  // (avoids the useSearchParams Suspense requirement).
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const subject = params.get("subject");
+      const message = params.get("message");
+      const validSubjects = ["general", "api", "licensing", "bug", "suggestion"];
+      setFormData((prev) => ({
+        ...prev,
+        ...(subject && validSubjects.includes(subject) ? { subject } : {}),
+        ...(message ? { message: message.replace(/<[^>]*>/g, "").slice(0, 1000) } : {}),
+      }));
+    } catch { /* malformed URL — leave defaults */ }
+    // Mount-once deep-link prefill; intentionally not reactive.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+  }, []);
 
   const sanitize = (s: string) => s.replace(/<[^>]*>/g, "").slice(0, 1000);
+
+  // Suggest-a-tool box: prefill the main form (subject=suggestion) and
+  // scroll to it so the user only adds name/email before dispatching.
+  const applySuggestion = () => {
+    const text = suggestText.trim();
+    if (!text) {
+      toast.error("Describe the tool you'd like first.");
+      return;
+    }
+    setFormData((prev) => ({
+      ...prev,
+      subject: "suggestion",
+      message: prev.message ? prev.message : `Tool suggestion: ${sanitize(text)}`,
+    }));
+    setSubmitted(false);
+    toast.success("Prefilled below — add your name and email, then send.");
+    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -134,7 +172,7 @@ export default function ContactPage() {
           </div>
 
           {/* Form column */}
-          <div className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-10 shadow-sm relative">
+          <div id="contact-form" className="lg:col-span-7 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6 sm:p-10 shadow-sm relative">
             
             {submitted ? (
               <div className="py-12 text-center flex flex-col items-center justify-center">
@@ -260,12 +298,21 @@ export default function ContactPage() {
             If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input 
-              type="text" 
-              placeholder="e.g. SVG pattern generator..." 
-              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
+            <input
+              type="text"
+              aria-label="Suggest a tool"
+              placeholder="e.g. SVG pattern generator..."
+              value={suggestText}
+              onChange={(e) => setSuggestText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  applySuggestion();
+                }
+              }}
+              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]"
             />
-            <Button disabled className="shrink-0 opacity-60 cursor-not-allowed">Submit Request</Button>
+            <Button onClick={applySuggestion} className="shrink-0">Submit Request</Button>
           </div>
         </div>
 

@@ -49,6 +49,7 @@ const itemVariants = {
 
 export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { isIndia?: boolean; popularTools: PopularTool[]; categoryCounts: CategoryCount[] }) {
   const [activeTab, setActiveTab] = useState("compress");
+  const [suggestText, setSuggestText] = useState("");
   const DEMO_TABS = ["compress", "resize", "convert"];
   // Roving-tabindex arrow-key nav (APG tabs pattern): arrows move + select.
   const onDemoTabsKeyDown = (e: React.KeyboardEvent) => {
@@ -706,12 +707,21 @@ export function HomeClient({ isIndia = false, popularTools, categoryCounts }: { 
             If you need a tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input 
-              type="text" 
-              placeholder="e.g. SVG pattern generator..." 
-              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
+            <input
+              type="text"
+              aria-label="Suggest a tool"
+              placeholder="e.g. SVG pattern generator..."
+              value={suggestText}
+              onChange={(e) => setSuggestText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  window.location.href = `/contact?subject=suggestion&message=${encodeURIComponent(suggestText.trim() ? `Tool suggestion: ${suggestText.trim()}` : '')}`;
+                }
+              }}
+              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]"
             />
-            <Link href="/contact">
+            <Link href={`/contact?subject=suggestion&message=${encodeURIComponent(suggestText.trim() ? `Tool suggestion: ${suggestText.trim()}` : '')}`}>
               <Button className="shrink-0 w-full sm:w-auto">Submit Request</Button>
             </Link>
           </div>
