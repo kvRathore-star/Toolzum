@@ -17,11 +17,11 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1141;
+export const TOOL_COUNT = 1142;
 
 export const SITE_STATS = {
-  totalImplemented: 1058,
-  freeTierTotal: 993,
+  totalImplemented: 1059,
+  freeTierTotal: 994,
   localTools: 1024,
   cloudTools: 29,
   hybridTools: 2,
@@ -431,7 +431,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/privacy/mac-address-generator"
       }
     ],
-    "allCount": 7,
+    "allCount": 8,
     "allHref": "/tools",
     "isIndia": false
   },

@@ -1422,6 +1422,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "isPro": false
   },
   {
+    "id": "1103",
+    "name": "Temporary Email Generator",
+    "slug": "temp-email-generator",
+    "category": "Privacy",
+    "description": "Generate a disposable email address that receives mail for 60 minutes. Inbound only — you cannot send or reply. Perfect for signups you don\\u2019t trust.",
+    "isPro": false
+  },
+  {
     "id": "224",
     "name": "Unit Converter",
     "slug": "unit-converter",

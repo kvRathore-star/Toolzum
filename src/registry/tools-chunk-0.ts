@@ -2337,4 +2337,20 @@ export const entries_chunk_0: ToolMetadata[] = [
       { question: "Where does MP3 fit best?", answer: "universal music playback and sharing across all devices and platforms." },
     ],
   },
+  {
+    id: "1103",
+    name: "Temporary Email Generator",
+    slug: "temp-email-generator",
+    category: "Privacy",
+    description: 'Generate a disposable email address that receives mail for 60 minutes. Inbound only — you cannot send or reply. Perfect for signups you don\u2019t trust.',
+    seoDescription: 'Free Temporary Email Generator \u2014 disposable inbox live for 60 minutes. Inbound only, auto-refreshing, destroyed on expiry. ',
+    dependencies: "Cloudflare Email Routing",
+    faqs: [
+      { question: "How long does a temp address live?", answer: "60 minutes from creation. The countdown is shown live; you can destroy the address early at any time. Expired addresses and their messages are deleted automatically." },
+      { question: "Can I send or reply from a temp address?", answer: "No — inbound only. You can still complete signup flows that email you a clickable link (you click it in your browser); you just can't answer an email from the temp address." },
+      { question: "Is my temp inbox private?", answer: "Treat it as semi-public: anyone who guesses the random address can read it. Never use it for banking, passwords, or anything sensitive — it exists for throwaway signups." },
+      { question: "What happens to messages after expiry?", answer: "They are deleted with the address. Messages are capped at 50 per address and bodies truncated past 10KB to keep the service fast for everyone." },
+      { question: "Why didn't my email arrive?", answer: "Some sites block disposable domains outright. Otherwise allow a minute for delivery, hit Refresh, and check the sender didn't typo the address — addresses expire exactly 60 minutes after creation." },
+    ],
+  },
 ];

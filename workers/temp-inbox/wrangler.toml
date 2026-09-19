@@ -1,0 +1,11 @@
+# toolzum-temp-inbox — standalone Worker (Pages Functions cannot receive
+# email; Email Routing delivers to Workers only). Deploy with:
+#   npx wrangler deploy -c workers/temp-inbox/wrangler.toml
+name = "toolzum-temp-inbox"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "toolhub-db"
+database_id = "be7bd039-a6e8-45fd-a6fd-df56e6a20469"

@@ -87,6 +87,10 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
     ssr: false,
     loading: () => <DynamicImportFallback slug="password-generator" />
   }),
+  'temp-email-generator': dynamic(() => import('@/components/tools/modules/privacy/TempEmailInbox'), { 
+    ssr: false,
+    loading: () => <DynamicImportFallback slug="temp-email-generator" />
+  }),
   'live-transcription': dynamic(() => import('@/components/tools/modules/transcription/LiveTranscription'), { 
     ssr: false,
     loading: () => <DynamicImportFallback slug="live-transcription" />
