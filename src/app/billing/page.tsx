@@ -57,7 +57,7 @@ export default function BillingPage() {
           {/* Invoices */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-6">
             <h2 className="text-lg font-bold mb-4">Invoices</h2>
-            <p className="text-sm text-[var(--text-secondary)]">No invoices yet. Payment history and email receipts will appear here once paid plans launch.</p>
+            <p className="text-sm text-[var(--text-secondary)]">No invoices yet. Receipts are emailed after each charge — your plan status lives on your <Link href="/dashboard/account" className="text-[var(--accent)] hover:underline">account page</Link>.</p>
           </div>
 
           {/* Trust */}

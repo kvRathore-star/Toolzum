@@ -337,8 +337,8 @@ export default function IndianDocumentEnhancer() {
 
                 <div className="p-3 rounded-xl" style={{ backgroundColor: '#47556908', borderColor: '#47556920', borderWidth: 1 }}>
                   <p className="text-[10px]" style={{ color: '#475569' }}>
-                    <strong>Pro:</strong> AI auto-straighten (one tap), batch enhance 20 docs at once, auto-detect document type, OCR text extraction, export ZIP. 
-                    <span className="block mt-1">₹199/mo — every CA firm, HR department, and admission office needs this.</span>
+                    <strong>Pro:</strong> AI auto-straighten (one tap), batch enhance 20 docs at once, auto-detect document type, OCR text extraction, export ZIP.
+                    <span className="block mt-1">Pro plans from ₹99 — see pricing for current plans.</span>
                   </p>
                 </div>
               </div>

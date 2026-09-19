@@ -403,22 +403,9 @@ export default function ChromeExtensionPage() {
           </div>
         </div>
 
-        {/* Available Extension Tools */}
-        <div className="max-w-3xl mx-auto mt-12 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] p-8 sm:p-12">
-          <h2 className="font-[family-name:var(--font-serif)] text-2xl sm:text-3xl font-semibold mb-6">
-            Available Extension Tools
-          </h2>
-          <div className="space-y-4">
-            <Link href="/extension/browser-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
-              <h4 className="font-semibold group-hover:text-[var(--accent)] transition-colors">Browser Extension</h4>
-              <p className="text-sm text-[var(--text-secondary)] mt-1">Access Toolzum tools directly from your browser toolbar — color picker, QR generator, and more.</p>
-            </Link>
-            <Link href="/extension/screen-recorder-extension" className="block p-4 rounded-[var(--radius-lg)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)]/30 transition-colors group">
-              <h4 className="font-semibold group-hover:text-[var(--accent)] transition-colors">Screen Recorder Extension</h4>
-              <p className="text-sm text-[var(--text-secondary)] mt-1">Record your screen, tab, or window directly from the extension popup — no separate app needed.</p>
-            </Link>
-          </div>
-        </div>
+        {/* Available Extension Tools — removed: both entries were delisted
+            placeholders (see 904e10c2). The links 404'd. Re-add only with
+            real shipped listings. */}
 
       </div>
     </div>
