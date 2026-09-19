@@ -1,6 +1,13 @@
 interface Env {
   DB: D1Database;
+  DODO_API_KEY?: string;
 }
+
+// Dodo product catalog (live). Only products created in the Dodo dashboard
+// may be sold — unknown plans must 400, never substitute (pricing-lie guard).
+const DODO_PRODUCTS: Record<string, string> = {
+  monthly: "pdt_0Nnxjj5tGkZs2aaArMZAg",
+};
 
 const PRICES: Record<string, { INR: number; USD: number }> = {
   // Advertised prices, single-sourced with PricingCards + pricing/layout.
@@ -20,7 +27,7 @@ import { checkRateLimit, recordRateLimit } from '../rate-limit';
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
-    const { DB } = context.env;
+    const { DB, DODO_API_KEY } = context.env;
     const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
 
     const rl = await checkRateLimit(DB, 'payment_rate', ip, RATE_LIMIT);
@@ -80,6 +87,75 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     await DB.prepare(
       "INSERT INTO payment (id, userId, gateway, orderId, amount, currency, status, createdAt) VALUES (?, ?, ?, ?, ?, ?, 'created', datetime('now'))"
     ).bind(orderId, userId, gateway, orderId, price.amount, price.currency).run();
+
+    // Dodo path: create a hosted checkout session and send the buyer there.
+    // The local payment row stays 'created' until payment.succeeded upgrades
+    // it to 'paid' via the webhook (source of truth — never the redirect).
+    if (gateway === "dodo") {
+      const productId = DODO_PRODUCTS[plan];
+      if (!productId) {
+        return new Response(JSON.stringify({ error: "plan_unavailable_on_gateway" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      if (!DODO_API_KEY) {
+        return new Response(JSON.stringify({ error: "checkout_unconfigured" }), {
+          status: 503,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      const buyer = await DB.prepare('SELECT email, name FROM "user" WHERE id = ?')
+        .bind(userId)
+        .first<{ email: string; name: string | null }>();
+      if (!buyer) {
+        return new Response(JSON.stringify({ error: "user_not_found" }), {
+          status: 404,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      let checkout: { session_id?: string; checkout_url?: string };
+      try {
+        const res = await fetch("https://live.dodopayments.com/checkouts", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${DODO_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_cart: [{ product_id: productId, quantity: 1 }],
+            customer: { email: buyer.email, name: buyer.name || undefined },
+            metadata: { plan: "pro", orderId },
+            return_url: `https://toolzum.com/api/payments/return?order=${orderId}`,
+          }),
+        });
+        if (!res.ok) {
+          return new Response(JSON.stringify({ error: "checkout_failed" }), {
+            status: 502,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+        checkout = (await res.json()) as { session_id?: string; checkout_url?: string };
+      } catch {
+        return new Response(JSON.stringify({ error: "checkout_failed" }), {
+          status: 502,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      if (!checkout.checkout_url) {
+        return new Response(JSON.stringify({ error: "checkout_failed" }), {
+          status: 502,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      if (checkout.session_id) {
+        await DB.prepare("UPDATE payment SET orderId = ? WHERE id = ?")
+          .bind(checkout.session_id, orderId)
+          .run()
+          .catch(() => {});
+      }
+      return Response.redirect(checkout.checkout_url, 303);
+    }
 
     const html = `<!DOCTYPE html>
 <html lang="en">
