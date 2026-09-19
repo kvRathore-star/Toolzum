@@ -96,6 +96,7 @@ export default function XmlSitemapGenerator() {
   };
 
   const eventSourceRef = useRef<EventSource | null>(null);
+  const chainingRef = useRef(false);
 
   const startCrawl = useCallback(async () => {
     let inputUrl = url.trim();
@@ -106,13 +107,19 @@ export default function XmlSitemapGenerator() {
     try { new URL(inputUrl); } catch (e) { console.error(e); toast.error('Invalid URL'); return; }
 
     abortRef.current = false;
+    chainingRef.current = true;
     setState({ status: 'detecting', url: inputUrl });
 
     const excludeParam = exclusions.map(e => e.pattern).filter(Boolean).join(',');
     const params = new URLSearchParams({ url: inputUrl, max: String(maxPages) });
     if (excludeParam) params.set('exclude', excludeParam);
 
-    const es = new EventSource(`/api/sitemap-crawl?${params}`);
+    openStream(params.toString(), inputUrl);
+  }, [url, exclusions, maxPages]);
+
+  const openStream = (query: string, inputUrl: string) => {
+    eventSourceRef.current?.close();
+    const es = new EventSource(`/api/sitemap-crawl?${query}`);
     eventSourceRef.current = es;
 
     es.onmessage = (e) => {
@@ -133,15 +140,33 @@ export default function XmlSitemapGenerator() {
             discovered: data.discovered,
             crawled: data.crawled,
             max: data.max,
-            currentPage: data.currentUrl,
+            currentUrl: data.currentUrl,
             log: [...(prev.status === 'crawling' ? prev.log.slice(-49) : []), data.log],
             jsRendering: prev.status === 'crawling' ? prev.jsRendering : false,
           }));
           return;
         }
+        if (data.type === 'partial') {
+          // Chunk done, more queued server-side: chain the next chunk automatically.
+          es.close();
+          if (abortRef.current || !chainingRef.current) return;
+          setState(prev => ({
+            status: 'crawling',
+            url: inputUrl,
+            discovered: data.discovered,
+            crawled: data.crawled,
+            max: data.max,
+            currentUrl: '',
+            log: [...(prev.status === 'crawling' ? prev.log.slice(-49) : []), `✓ Chunk complete (${data.crawled}/${data.max} pages) — continuing…`],
+            jsRendering: prev.status === 'crawling' ? prev.jsRendering : false,
+          }));
+          openStream(`cursor=${encodeURIComponent(data.cursor)}`, inputUrl);
+          return;
+        }
         if (data.type === 'complete') {
           es.close();
           eventSourceRef.current = null;
+          chainingRef.current = false;
           setState({
             status: 'complete',
             url: data.url,
@@ -166,15 +191,17 @@ export default function XmlSitemapGenerator() {
     es.onerror = () => {
       es.close();
       eventSourceRef.current = null;
+      chainingRef.current = false;
       setState(prev => {
         if (prev.status === 'complete') return prev;
         return { status: 'error', message: 'Connection lost. The crawl may have timed out.' };
       });
     };
-  }, [url, exclusions, maxPages]);
+  };
 
   const cancelCrawl = () => {
     abortRef.current = true;
+    chainingRef.current = false;
     eventSourceRef.current?.close();
     eventSourceRef.current = null;
     setState({ status: 'idle' });

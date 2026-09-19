@@ -154,6 +154,33 @@ function parseRobots(txt: string): { sitemaps: string[]; disallows: string[]; cr
 
 const POLITENESS_MS = 150;
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+/** Pages crawled per invocation — keeps free-plan subrequests (~pages + a few
+ *  sitemap docs) safely under the 50/invocation ceiling. */
+const CHUNK_PAGES = 20;
+const SESSION_TTL_S = 3600;
+const MAX_SITEMAP_FETCHES = 10;
+
+interface CrawlSession {
+  baseUrl: string;
+  inputUrl: string;
+  jsRendering: boolean;
+  maxAllowed: number;
+  exclusions: string[];
+  queue: string[];
+  visited: string[];
+  pages: CrawledPage[];
+  discovered: number;
+  consecutiveErrors: number;
+  delayMs: number;
+  jsRendering: boolean;
+  createdAt: number;
+}
+
+function newSessionId(): string {
+  const b = new Uint8Array(16);
+  crypto.getRandomValues(b);
+  return [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
+}
 
 async function detectSPA(html: string): Promise<boolean> {
   return /<div id="root">\s*<\/div>|<div id="__next">|<div id="app">\s*<\/div>|window\.__NUXT__|<app-root>|<div id="__nuxt">/.test(html);
@@ -170,18 +197,43 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   const urlParam = url.searchParams.get('url');
   const excludeParam = url.searchParams.get('exclude');
   const maxParam = url.searchParams.get('max');
+  const cursorParam = url.searchParams.get('cursor');
 
-  if (!urlParam) return new Response('Missing url parameter', { status: 400 });
+  // Continuation of an existing chunked crawl: session carries all state,
+  // so no rate limit and no re-validation (the originating request paid those).
+  let resumed: CrawlSession | null = null;
+  if (cursorParam) {
+    if (!env.DB) return new Response('Crawl sessions unavailable', { status: 503 });
+    const row = await env.DB.prepare('SELECT * FROM crawl_session WHERE id = ?')
+      .bind(cursorParam)
+      .first<CrawlSession & { updatedAt: number }>()
+      .catch(() => null);
+    if (!row) return new Response('Crawl session expired or unknown — please restart.', { status: 404 });
+    if (Date.now() / 1000 - (row.updatedAt || 0) > SESSION_TTL_S) {
+      await env.DB.prepare('DELETE FROM crawl_session WHERE id = ?').bind(cursorParam).run().catch(() => {});
+      return new Response('Crawl session expired — please restart.', { status: 404 });
+    }
+    resumed = {
+      baseUrl: row.baseUrl, inputUrl: row.inputUrl, maxAllowed: row.maxAllowed,
+      exclusions: JSON.parse(row.exclusions || '[]'),
+      queue: JSON.parse(row.queue || '[]'), visited: JSON.parse(row.visited || '[]'),
+      pages: JSON.parse(row.pages || '[]'), discovered: row.discovered || 0,
+      consecutiveErrors: 0, delayMs: POLITENESS_MS, jsRendering: !!(row as { jsRendering?: number }).jsRendering,
+      createdAt: row.createdAt || Date.now() / 1000,
+    };
+  }
 
-  // Rate limit: 3 crawls/min per IP
-  if (env.DB) {
+  if (!resumed && !urlParam) return new Response('Missing url parameter', { status: 400 });
+
+  // Rate limit: 3 new crawls/min per IP (continuations are exempt).
+  if (!resumed && env.DB) {
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
     const rl = await checkRateLimit(env.DB, 'crawl', ip, 3);
     if (rl.limited) return rl.response;
     recordRateLimit(env.DB, 'crawl', ip, '/api/sitemap-crawl');
   }
 
-  let inputUrl = urlParam.trim();
+  let inputUrl = (resumed ? resumed.inputUrl : urlParam!.trim());
   if (!inputUrl.startsWith('http://') && !inputUrl.startsWith('https://')) inputUrl = 'https://' + inputUrl;
 
   try { new URL(inputUrl); } catch { return new Response('Invalid URL', { status: 400 }); }
@@ -190,30 +242,37 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
 
   // Tier enforcement (matches UI labels): anon 100, signed-in 200, pro 500.
   // Best-effort: any failure resolves to anon caps, never blocks the crawl.
+  // Resumed crawls keep the cap stored at creation (no re-resolution mid-crawl).
   let tierCap = 100;
-  try {
-    if (env.DB && env.BETTER_AUTH_SECRET) {
-      const auth = createAuth({
-        DB: env.DB,
-        GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
-        GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
-        BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
-        BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
-      });
-      const session = await auth.api.getSession({ headers: request.headers });
-      if (session?.user?.id) {
-        const row = await env.DB.prepare('SELECT plan FROM "user" WHERE id = ?')
-          .bind(session.user.id)
-          .first<{ plan: string | null }>()
-          .catch(() => null);
-        const plan = await effectivePlanForUser(env.DB, session.user.id, row?.plan ?? null);
-        tierCap = plan === 'pro' ? 500 : 200;
+  if (!resumed) {
+    try {
+      if (env.DB && env.BETTER_AUTH_SECRET) {
+        const auth = createAuth({
+          DB: env.DB,
+          GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID as string,
+          GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET as string,
+          BETTER_AUTH_SECRET: env.BETTER_AUTH_SECRET as string,
+          BETTER_AUTH_URL: env.BETTER_AUTH_URL as string,
+        });
+        const session = await auth.api.getSession({ headers: request.headers });
+        if (session?.user?.id) {
+          const row = await env.DB.prepare('SELECT plan FROM "user" WHERE id = ?')
+            .bind(session.user.id)
+            .first<{ plan: string | null }>()
+            .catch(() => null);
+          const plan = await effectivePlanForUser(env.DB, session.user.id, row?.plan ?? null);
+          tierCap = plan === 'pro' ? 500 : 200;
+        }
       }
-    }
-  } catch { /* anon caps */ }
-  const maxAllowed = Math.min(maxPages, tierCap);
-  const exclusions = excludeParam ? excludeParam.split(',').map(s => s.trim()).filter(Boolean) : [];
-  const baseUrl = inputUrl.replace(/\/$/, '') + '/';
+    } catch { /* anon caps */ }
+  } else {
+    tierCap = 500; // cap already pinned in session; Math.min below is a no-op guard
+  }
+  const maxAllowed = resumed ? resumed.maxAllowed : Math.min(maxPages, tierCap);
+  const exclusions = resumed
+    ? resumed.exclusions
+    : (excludeParam ? excludeParam.split(',').map(s => s.trim()).filter(Boolean) : []);
+  const baseUrl = (resumed ? resumed.baseUrl : inputUrl.replace(/\/$/, '') + '/');
   const startTime = Date.now();
 
   const stream = new ReadableStream({
@@ -224,30 +283,35 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
       };
 
       let rootHtml: string;
-      let jsRendering = false;
-      try {
-        const rootRes = await fetchWithTimeout(baseUrl);
-        rootHtml = await rootRes.text();
-        jsRendering = await detectSPA(rootHtml);
-      } catch {
-        sendEvent({ type: 'error', message: `Could not reach ${baseUrl}. The site may be down or blocking automated requests.` });
-        controller.close();
-        return;
-      }
-
-      if (jsRendering) sendEvent({ type: 'js_detected' });
-
-      const visited = new Set<string>();
-      const queued = new Set<string>([baseUrl]);
-      const queue: string[] = [baseUrl];
-      const pages: CrawledPage[] = [];
-      let discovered = 1;
+      let jsRendering = resumed ? resumed.jsRendering : false;
+      let visited = new Set<string>(resumed ? resumed.visited : []);
+      let queued = new Set<string>(resumed ? resumed.queue.concat(resumed.visited) : [baseUrl]);
+      let queue: string[] = resumed ? [...resumed.queue] : [baseUrl];
+      let pages: CrawledPage[] = resumed ? [...resumed.pages] : [];
+      let discovered = resumed ? resumed.discovered : 1;
       let consecutiveErrors = 0;
+      let delayMs = POLITENESS_MS;
+      // Without D1 there are no sessions: single invocation crawls everything.
+      const chunkBudget = env.DB ? CHUNK_PAGES : Number.MAX_SAFE_INTEGER;
+      let chunkCrawled = 0;
+
+      if (!resumed) {
+        try {
+          const rootRes = await fetchWithTimeout(baseUrl);
+          rootHtml = await rootRes.text();
+          jsRendering = await detectSPA(rootHtml);
+        } catch {
+          sendEvent({ type: 'error', message: `Could not reach ${baseUrl}. The site may be down or blocking automated requests.` });
+          controller.close();
+          return;
+        }
+
+        if (jsRendering) sendEvent({ type: 'js_detected' });
 
       // Tier 0 (free): seed from robots.txt + sitemap.xml before BFS link crawl.
       // This covers content sites fully with ~2 extra fetches and makes the
       // robots.txt FAQ claim true (Disallow rules become exclusions).
-      let delayMs = POLITENESS_MS;
+      // First-chunk only: continuations resume from the saved session.
       try {
         const robotsRes = await fetchWithTimeout(new URL('/robots.txt', baseUrl).href, 8000);
         if (robotsRes.ok) {
@@ -271,12 +335,14 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           for (const s of sitemaps) pushSitemap(s);
           let depth = 0;
           let seeded = 0;
-          while (sitemapQueue.length > 0 && depth < 2 && seeded < maxAllowed * 2) {
+          let sitemapFetches = 0;
+          while (sitemapQueue.length > 0 && depth < 2 && seeded < maxAllowed * 2 && sitemapFetches < MAX_SITEMAP_FETCHES) {
             const levelSize = sitemapQueue.length;
             let addedThisLevel = 0;
-            for (let i = 0; i < levelSize && seeded < maxAllowed * 2; i++) {
+            for (let i = 0; i < levelSize && seeded < maxAllowed * 2 && sitemapFetches < MAX_SITEMAP_FETCHES; i++) {
               const loc = sitemapQueue.shift()!;
               await sleep(delayMs);
+              sitemapFetches++;
               try {
                 const r = await fetchWithTimeout(loc, 8000);
                 if (!r.ok) continue;
@@ -305,8 +371,11 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           }
         }
       } catch { /* robots/sitemap seeding is best-effort; BFS proceeds regardless */ }
+      } // end if (!resumed): continuations skip root fetch + seeding
 
-      while (queue.length > 0 && pages.length < maxAllowed) {
+      // Chunked BFS: at most CHUNK_PAGES page fetches per invocation so free-plan
+      // subrequest ceilings are never hit; the client chains continuations.
+      while (queue.length > 0 && pages.length < maxAllowed && chunkCrawled < chunkBudget) {
         const currentUrl = queue.shift()!;
         if (visited.has(currentUrl)) continue;
         visited.add(currentUrl);
@@ -334,6 +403,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             depth: currentUrl === baseUrl ? 0 : currentUrl.split('/').filter(Boolean).length - 1,
             isBroken: res.status >= 400,
           });
+          chunkCrawled++;
 
           if (pages.length >= maxAllowed) break;
 
@@ -357,10 +427,50 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             depth: currentUrl === baseUrl ? 0 : currentUrl.split('/').filter(Boolean).length - 1,
             isBroken: true,
           });
+          chunkCrawled++;
           if (consecutiveErrors > 5) break;
         }
       }
 
+      const finished = queue.length === 0 || pages.length >= maxAllowed;
+      if (!finished && env.DB) {
+        // Save session and hand the client a cursor for the next chunk.
+        const cursor = newSessionId();
+        const now = Math.floor(Date.now() / 1000);
+        try {
+          await env.DB.prepare(
+            'INSERT OR REPLACE INTO crawl_session (id, baseUrl, inputUrl, maxAllowed, exclusions, queue, visited, pages, discovered, jsRendering, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+          ).bind(
+            cursor, baseUrl, inputUrl, maxAllowed,
+            JSON.stringify(exclusions), JSON.stringify(queue),
+            JSON.stringify([...visited]), JSON.stringify(pages),
+            discovered, jsRendering ? 1 : 0, now, now,
+          ).run();
+          // Best-effort expiry sweep for abandoned sessions.
+          await env.DB.prepare('DELETE FROM crawl_session WHERE updatedAt < ?')
+            .bind(now - SESSION_TTL_S).run().catch(() => {});
+          sendEvent({ type: 'partial', cursor, pages, discovered, crawled: pages.length, max: maxAllowed });
+        } catch {
+          // Session store failed: fall through and complete with what we have.
+          sendEvent({
+            type: 'complete',
+            pages,
+            xml: generateXML(pages, baseUrl),
+            html: generateHTMLSitemap(pages, baseUrl),
+            txt: pages.filter(p => !p.isBroken).map(p => p.url).join('\n'),
+            insights: generateInsights(pages),
+            durationMs: Date.now() - startTime,
+            jsRendering,
+            url: inputUrl,
+          });
+        }
+        controller.close();
+        return;
+      }
+
+      if (cursorParam && env.DB) {
+        await env.DB.prepare('DELETE FROM crawl_session WHERE id = ?').bind(cursorParam).run().catch(() => {});
+      }
       sendEvent({
         type: 'complete',
         pages,
