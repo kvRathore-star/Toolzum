@@ -101,7 +101,7 @@ export default function FaviconGenerator() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Complete Package:</strong> Upload a square image (PNG/JPG) to instantly generate all modern favicon formats (16x16, 32x32, Apple Touch, Android Chrome) and a `site.webmanifest` zipped up.
         </div>
         <FileUploader 
@@ -116,14 +116,14 @@ export default function FaviconGenerator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button 
           onClick={() => { setFile(null); setOutputUrl(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change Image
         </button>
@@ -133,20 +133,20 @@ export default function FaviconGenerator() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <h4 className="text-[var(--text-primary)] font-medium">Included Assets</h4>
           
-          <ul className="space-y-3 text-sm text-zinc-600 dark:text-zinc-300">
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon-16x16.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon-32x32.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> apple-touch-icon.png (180x180)</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-192x192.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> android-chrome-512x512.png</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> favicon.ico (PNG data, modern browsers only)</li>
-            <li className="flex items-center gap-2"><span className="text-blue-700 dark:text-blue-400">✓</span> site.webmanifest</li>
+          <ul className="space-y-3 text-sm text-[var(--text-secondary)] dark:text-zinc-300">
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> favicon-16x16.png</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> favicon-32x32.png</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> apple-touch-icon.png (180x180)</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> android-chrome-192x192.png</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> android-chrome-512x512.png</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> favicon.ico (PNG data, modern browsers only)</li>
+            <li className="flex items-center gap-2"><span className="text-[var(--accent)]">✓</span> site.webmanifest</li>
           </ul>
 
           <button 
             onClick={generateFavicons}
             disabled={isProcessing}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
           >
             {isProcessing ? "Packaging ZIP..." : "Generate ZIP Package"}
           </button>

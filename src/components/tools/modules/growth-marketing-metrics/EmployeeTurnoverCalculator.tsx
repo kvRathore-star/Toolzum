@@ -54,7 +54,7 @@ export default function EmployeeTurnoverCalculator() {
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Users className="w-5 h-5 text-[var(--accent)]" />
           Employee Turnover & Retention Calculator
@@ -202,10 +202,10 @@ export default function EmployeeTurnoverCalculator() {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-[var(--text-secondary)]">Recruiting & Agencies (40%)</span>
-                    <span className="text-zinc-900 dark:text-[var(--text-secondary)]">${Math.round(directRecruitmentCost).toLocaleString()}</span>
+                    <span className="text-[var(--text-primary)] dark:text-[var(--text-secondary)]">${Math.round(directRecruitmentCost).toLocaleString()}</span>
                   </div>
                   <div className="w-full bg-[var(--bg-surface)] h-2 rounded-full overflow-hidden">
-                    <div className="bg-indigo-500 h-full rounded-full" style={{ width: '40%' }} />
+                    <div className="bg-[var(--accent-ink)] h-full rounded-full" style={{ width: '40%' }} />
                   </div>
                 </div>
 
@@ -213,7 +213,7 @@ export default function EmployeeTurnoverCalculator() {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-[var(--text-secondary)]">Onboarding & Ramp-up Training (25%)</span>
-                    <span className="text-zinc-900 dark:text-[var(--text-secondary)]">${Math.round(trainingOnboardingCost).toLocaleString()}</span>
+                    <span className="text-[var(--text-primary)] dark:text-[var(--text-secondary)]">${Math.round(trainingOnboardingCost).toLocaleString()}</span>
                   </div>
                   <div className="w-full bg-[var(--bg-surface)] h-2 rounded-full overflow-hidden">
                     <div className="bg-amber-400 h-full rounded-full" style={{ width: '25%' }} />
@@ -224,7 +224,7 @@ export default function EmployeeTurnoverCalculator() {
                 <div className="space-y-1">
                   <div className="flex justify-between text-xs font-semibold">
                     <span className="text-[var(--text-secondary)]">Lost Productivity & Vacancy Costs (35%)</span>
-                    <span className="text-zinc-900 dark:text-[var(--text-secondary)]">${Math.round(lostProductivityCost).toLocaleString()}</span>
+                    <span className="text-[var(--text-primary)] dark:text-[var(--text-secondary)]">${Math.round(lostProductivityCost).toLocaleString()}</span>
                   </div>
                   <div className="w-full bg-[var(--bg-surface)] h-2 rounded-full overflow-hidden">
                     <div className="bg-rose-500 h-full rounded-full" style={{ width: '35%' }} />
@@ -246,7 +246,7 @@ export default function EmployeeTurnoverCalculator() {
               <Sparkles className="w-4 h-4 text-amber-500 animate-pulse" />
               Culture & Retention Advisory
             </h3>
-            <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-medium">
+            <p className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 leading-relaxed font-medium">
               {recommendation}
             </p>
           </div>

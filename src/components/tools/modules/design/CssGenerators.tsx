@@ -5,7 +5,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 
 const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2";
 const labelClass = "block text-sm font-medium mb-1";
-const btnClass = "w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg";
+const btnClass = "w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-lg";
 const cardClass = "max-w-4xl mx-auto p-6";
 const headingClass = "text-2xl font-bold mb-6";
 const previewClass = "w-full h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-xl flex items-center justify-center mb-4";
@@ -127,7 +127,7 @@ function BorderRadiusGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass}>
-        <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600" style={{ borderRadius: `${tl}px ${tr}px ${br}px ${bl}px` }} />
+        <div className="w-32 h-32 bg-gradient-to-br from-[var(--accent-ink)] to-purple-600" style={{ borderRadius: `${tl}px ${tr}px ${br}px ${bl}px` }} />
       </div>
       <Slider label="Top-Left" value={tl} onChange={setTl} min={0} max={60} />
       <Slider label="Top-Right" value={tr} onChange={setTr} min={0} max={60} />
@@ -147,7 +147,7 @@ function FlexboxGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass} style={{ display: 'flex', flexDirection: direction as any, flexWrap: wrap as any, justifyContent: justify as any, alignItems: align as any, gap, padding: 8 }}>
-        {[1, 2, 3].map(i => <div key={i} className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">{i}</div>)}
+        {[1, 2, 3].map(i => <div key={i} className="w-12 h-12 bg-[var(--accent-ink)] rounded-lg flex items-center justify-center text-white font-bold text-sm">{i}</div>)}
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div><label htmlFor="lbl-cssgenerators-direction-4" className={labelClass}>Flex direction</label><select id="lbl-cssgenerators-direction-4" aria-label="Flex direction" value={direction} onChange={e => setDirection(e.target.value)} className={inputClass}><option value="row">Row</option><option value="column">Column</option><option value="row-reverse">Row Reverse</option><option value="column-reverse">Column Reverse</option></select></div>
@@ -169,7 +169,7 @@ function GridGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass} style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)`, gap, padding: 8 }}>
-        {items.map((_, i) => <div key={i} className="bg-blue-500 rounded flex items-center justify-center text-white font-bold text-sm min-h-[40px]">{i + 1}</div>)}
+        {items.map((_, i) => <div key={i} className="bg-[var(--accent-ink)] rounded flex items-center justify-center text-white font-bold text-sm min-h-[40px]">{i + 1}</div>)}
       </div>
       <Slider label="Columns" value={columns} onChange={setColumns} min={1} max={6} />
       <Slider label="Rows" value={rows} onChange={setRows} min={1} max={4} />
@@ -213,7 +213,7 @@ function TransformGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass}>
-        <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold" style={{ transform: `translate(${tx}px, ${ty}px) rotate(${rotate}deg) scale(${scaleX}, ${scaleY}) skew(${skewX}deg, ${skewY}deg)` }}>
+        <div className="w-24 h-24 bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 rounded-lg flex items-center justify-center text-white font-bold" style={{ transform: `translate(${tx}px, ${ty}px) rotate(${rotate}deg) scale(${scaleX}, ${scaleY}) skew(${skewX}deg, ${skewY}deg)` }}>
           Box
         </div>
       </div>
@@ -246,7 +246,7 @@ function AnimationGeneratorInner() {
   return (
     <div className="space-y-4">
       <div className={previewClass}>
-        <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={animStyle}>Anim</div>
+        <div className="w-24 h-24 bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={animStyle}>Anim</div>
       </div>
       <div>
         <label htmlFor="lbl-cssgenerators-animation" className={labelClass}>Animation</label>
@@ -404,8 +404,8 @@ export default function CssGeneratorHub({ defaultMode }: { defaultMode?: Mode })
           <button key={cat.key} onClick={() => { setCategory(cat.key); if (!cat.modes.includes(mode)) setMode(cat.modes[0]!); }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               category === cat.key
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white border border-[var(--border-subtle)]'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'
             }`}>
             {cat.label}
           </button>
@@ -417,8 +417,8 @@ export default function CssGeneratorHub({ defaultMode }: { defaultMode?: Mode })
           <button key={m} onClick={() => setMode(m)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               mode === m
-                ? 'bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-600/30'
-                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white border border-transparent'
+                ? 'bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-transparent'
             }`}>
             {MODE_LABELS[m]}
           </button>

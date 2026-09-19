@@ -75,7 +75,7 @@ export default function ConversionRateCalculator() {
           </div>
           {visitors > 0 && (
             <div className="mt-2 space-y-1">
-              <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                 <div style={{ width: `${Math.min(rate, 100)}%` }} className="bg-violet-500 h-full rounded-full transition-all duration-300" />
               </div>
               <div className="flex justify-between text-[10px] text-[var(--text-muted)]">

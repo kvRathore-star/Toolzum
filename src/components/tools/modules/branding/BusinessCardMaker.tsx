@@ -211,8 +211,8 @@ export default function BusinessCardMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Header */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <CreditCard className="w-5 h-5 text-[var(--accent)]" />
           Business Card Maker
         </h2>
@@ -228,13 +228,13 @@ export default function BusinessCardMaker() {
           <div className="flex gap-4">
             <button 
               onClick={() => setActiveSide('front')} 
-              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'front' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
+              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'front' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'}`}
             >
               Front Side
             </button>
             <button 
               onClick={() => setActiveSide('back')} 
-              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'back' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-zinc-100'}`}
+              className={`flex-1 py-3 rounded-xl font-bold text-sm cursor-pointer ${activeSide === 'back' ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'}`}
             >
               Back Side (Details)
             </button>
@@ -248,7 +248,7 @@ export default function BusinessCardMaker() {
                 <button
                   key={idx}
                   onClick={() => setSelectedTemplate(tpl)}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-xl border cursor-pointer hover:bg-[var(--bg-overlay)] transition-all ${selectedTemplate.name === tpl.name ? 'border-indigo-500 bg-indigo-500/10 text-[var(--accent)] font-bold' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)]'}`}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-xl border cursor-pointer hover:bg-[var(--bg-overlay)] transition-all ${selectedTemplate.name === tpl.name ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)] font-bold' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-[var(--text-secondary)]'}`}
                 >
                   {tpl.name}
                 </button>
@@ -313,10 +313,10 @@ export default function BusinessCardMaker() {
         </div>
 
         {/* Preview Panel */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
+        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-4">
              <span className="text-xs font-bold text-[var(--text-muted)]">BUSINESS CARD CANVAS (3.5&quot; x 2.0&quot; aspect ratio)</span>
-             <span className="text-xs font-bold text-[var(--accent)] bg-indigo-500/10 px-2 py-0.5 rounded uppercase">{activeSide} view</span>
+             <span className="text-xs font-bold text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-0.5 rounded uppercase">{activeSide} view</span>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
@@ -335,7 +335,7 @@ export default function BusinessCardMaker() {
           <div className="grid grid-cols-2 gap-4 mt-6">
             <button 
               onClick={downloadPNG}
-              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
+              className="bg-zinc-900 hover:bg-[var(--bg-elevated)] dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
             >
               <Download className="w-4 h-4" />
               Download Side PNG

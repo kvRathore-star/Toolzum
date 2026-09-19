@@ -105,7 +105,7 @@ export default function EmailSignatureGenerator() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Layers className="w-5 h-5 text-[var(--accent)]" />
           Email Signature Generator
@@ -126,7 +126,7 @@ export default function EmailSignatureGenerator() {
                 <button
                   key={tpl.id}
                   onClick={() => setSelectedTemplate(tpl)}
-                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedTemplate.id === tpl.id ? 'border-indigo-500 bg-indigo-500/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
+                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedTemplate.id === tpl.id ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
                 >
                   {tpl.name}
                 </button>
@@ -185,13 +185,13 @@ export default function EmailSignatureGenerator() {
         </div>
 
         {/* Live Visual Preview Panel */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
+        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-6">
              <span className="text-xs font-bold text-[var(--text-muted)] font-mono">LIVE PREVIEW</span>
           </div>
 
           {/* Visual Container */}
-          <div className="flex-1 flex items-center justify-center p-6 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-2xl shadow-xl min-h-[220px]">
+          <div className="flex-1 flex items-center justify-center p-6 bg-white dark:bg-zinc-950 border border-[var(--border-subtle)] dark:border-zinc-900 rounded-2xl shadow-xl min-h-[220px]">
             <div 
               id="signature-preview"
               className="p-4"
@@ -203,7 +203,7 @@ export default function EmailSignatureGenerator() {
           <div className="grid grid-cols-2 gap-4 mt-6">
             <button 
               onClick={copyRichText}
-              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
+              className="bg-zinc-900 hover:bg-[var(--bg-elevated)] dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-xs"
             >
               <Copy className="w-4 h-4" />
               Copy for Gmail/Outlook

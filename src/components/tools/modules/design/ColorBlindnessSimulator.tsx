@@ -148,7 +148,7 @@ export default function ColorBlindnessSimulator() {
         {imageSrc && (
           <button
             onClick={() => { setImageSrc(null); setImageEl(null); }}
-            className="text-sm text-blue-600 hover:underline"
+            className="text-sm text-[var(--accent)] hover:underline"
           >
             Reset to sample
           </button>
@@ -162,8 +162,8 @@ export default function ColorBlindnessSimulator() {
             onClick={() => setActive(k)}
             className={`px-3 py-1.5 rounded-lg text-sm font-medium border ${
               active === k
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-blue-500'
+                ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]'
+                : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
             }`}
           >
             {CVD_MATRICES[k].label}
@@ -189,7 +189,7 @@ export default function ColorBlindnessSimulator() {
 
       <button
         onClick={onDownload}
-        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg"
+        className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2.5 rounded-lg"
       >
         Download simulated image
       </button>

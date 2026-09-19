@@ -177,9 +177,9 @@ export default function LogoMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl gap-4">
         <div>
-          <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-500 animate-pulse" />
             Vector Logo Maker
           </h2>
@@ -200,7 +200,7 @@ export default function LogoMaker() {
                 <button
                   key={idx}
                   onClick={() => loadPreset(preset)}
-                  className="px-3 py-1.5 text-xs font-bold bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/60 rounded-xl hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-xs font-bold bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/60 rounded-xl hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
                 >
                   {preset.name}
                 </button>
@@ -322,7 +322,7 @@ export default function LogoMaker() {
         </div>
 
         {/* Live Canvas Preview Panel */}
-        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
+        <div className="lg:col-span-7 flex flex-col justify-between bg-[var(--bg-overlay)]/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl min-h-[450px]">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-4">
              <span className="text-xs font-bold text-[var(--text-muted)]">CANVAS PREVIEW (500 x 500)</span>
           </div>
@@ -353,7 +353,7 @@ export default function LogoMaker() {
           <div className="grid grid-cols-2 gap-4 mt-6">
             <button 
               onClick={downloadPNG}
-              className="bg-zinc-900 hover:bg-zinc-800 dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
+              className="bg-zinc-900 hover:bg-[var(--bg-elevated)] dark:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold py-3.5 rounded-xl shadow-md transition-colors flex justify-center items-center gap-2 cursor-pointer text-sm"
             >
               <Download className="w-4 h-4" />
               Download PNG

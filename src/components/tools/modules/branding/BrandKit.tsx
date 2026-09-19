@@ -134,7 +134,7 @@ export default function BrandKit() {
                    <div className="font-semibold text-sm truncate">{color.name || 'Unnamed'}</div>
                    <div className="text-xs text-[var(--text-secondary)] font-mono flex items-center justify-between">
                      {color.hex.toUpperCase()}
-                     <button aria-label={`Copy ${color.hex}`} onClick={() => copyToClipboard(color.hex)} className="hover:text-zinc-900 dark:hover:text-white">
+                     <button aria-label={`Copy ${color.hex}`} onClick={() => copyToClipboard(color.hex)} className="hover:text-[var(--text-primary)] dark:hover:text-white">
                        <Copy className="w-3 h-3" />
                      </button>
                    </div>
@@ -149,7 +149,7 @@ export default function BrandKit() {
              ))}
 
              {/* Add Color Button */}
-             <div className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-4 flex flex-col justify-center items-center bg-[var(--bg-overlay)]/20">
+             <div className="border border-dashed border-[var(--border-subtle)] rounded-xl p-4 flex flex-col justify-center items-center bg-[var(--bg-overlay)]/20">
                <div className="flex gap-2 w-full mb-3">
                  <input 
                    type="color" aria-label="New color" 
@@ -185,7 +185,7 @@ export default function BrandKit() {
                  <div className="font-medium" style={{ fontFamily: font }}>{font}</div>
 <button aria-label={`Copy font ${font}`}
                     onClick={() => copyToClipboard(`font-family: '${font}';`)}
-                   className="text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-white"
+                   className="text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-white"
                  >
                    {copiedId === `font-family: '${font}';` ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                  </button>

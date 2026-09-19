@@ -63,9 +63,9 @@ export default function CpmCalculator() {
           </h3>
         </div>
         <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
-          <button onClick={() => setMode('cpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'cpm' ? 'bg-[var(--bg-elevated)] text-violet-600 dark:text-violet-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>CPM</button>
-          <button onClick={() => setMode('rpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'rpm' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>RPM</button>
-          <button onClick={() => setMode('estimate')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'estimate' ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-700'}`}>Estimate</button>
+          <button onClick={() => setMode('cpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'cpm' ? 'bg-[var(--bg-elevated)] text-violet-600 dark:text-violet-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>CPM</button>
+          <button onClick={() => setMode('rpm')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'rpm' ? 'bg-[var(--bg-elevated)] text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>RPM</button>
+          <button onClick={() => setMode('estimate')} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${mode === 'estimate' ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>Estimate</button>
         </div>
       </div>
 
@@ -170,14 +170,14 @@ export default function CpmCalculator() {
             </>
           ) : (
             <>
-              <div className="rounded-2xl p-6 border bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900/30 flex flex-col justify-center items-center min-h-[160px]">
+              <div className="rounded-2xl p-6 border bg-blue-50 dark:bg-blue-950/20 border-[var(--accent)]/20 dark:border-blue-900/30 flex flex-col justify-center items-center min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2">
-                  <DollarSign className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+                  <DollarSign className="w-4 h-4 text-[var(--accent)]" />
                   <span className="text-xs font-bold text-[var(--text-secondary)] uppercase">
                     Estimated Advertiser Cost
                   </span>
                 </div>
-                <p className="text-5xl font-extrabold text-blue-700 dark:text-blue-400">
+                <p className="text-5xl font-extrabold text-[var(--accent)]">
                   ${estimatedAdCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </p>
                 <p className="text-[11px] text-[var(--text-muted)] mt-2">

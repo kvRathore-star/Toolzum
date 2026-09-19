@@ -81,7 +81,7 @@ export default function SvgEditor() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <FileCode className="w-5 h-5 text-[var(--accent)]" />
           Offline SVG Editor
@@ -102,17 +102,17 @@ export default function SvgEditor() {
                
                {/* Quick add items */}
                <div className="flex gap-1">
-                 <button onClick={() => insertShape('rect')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Rectangle">Rect</button>
-                 <button onClick={() => insertShape('circle')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Circle">Circle</button>
-                 <button onClick={() => insertShape('text')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Text">Text</button>
-                 <button onClick={() => insertShape('star')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-zinc-700" title="Add Star">Star</button>
+                 <button onClick={() => insertShape('rect')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-[var(--border-subtle)]" title="Add Rectangle">Rect</button>
+                 <button onClick={() => insertShape('circle')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-[var(--border-subtle)]" title="Add Circle">Circle</button>
+                 <button onClick={() => insertShape('text')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-[var(--border-subtle)]" title="Add Text">Text</button>
+                 <button onClick={() => insertShape('star')} className="p-1.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)]/80 dark:hover:bg-[var(--bg-elevated)] rounded-lg text-xs font-semibold cursor-pointer border border-zinc-100 dark:border-[var(--border-subtle)]" title="Add Star">Star</button>
                </div>
             </div>
 
             <textarea aria-label="SVG markup editor"
               value={svgCode}
               onChange={e => setSvgCode(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-zinc-900 dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 resize-none flex-1 overflow-y-auto"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] dark:text-[var(--text-secondary)] font-mono text-xs leading-relaxed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-none flex-1 overflow-y-auto"
               placeholder="Write SVG code here..."
             />
           </div>
@@ -127,7 +127,7 @@ export default function SvgEditor() {
             </button>
             <button 
               onClick={handleRun}
-              className="py-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-700 dark:hover:bg-[var(--bg-elevated)] text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
+              className="py-3 bg-zinc-900 hover:bg-[var(--bg-elevated)] dark:bg-[var(--bg-elevated)] dark:hover:bg-[var(--bg-elevated)] text-white font-bold rounded-xl text-xs transition-all active:scale-[0.98] cursor-pointer flex justify-center items-center gap-1"
             >
               <Play className="w-3.5 h-3.5" />
               Render Live
@@ -143,7 +143,7 @@ export default function SvgEditor() {
         </div>
 
         {/* Live Vector View Panel */}
-        <div className="lg:col-span-6 flex flex-col bg-[var(--bg-overlay)]/45 border border-zinc-200 dark:border-[var(--border-subtle)] p-5 rounded-2xl h-[600px]">
+        <div className="lg:col-span-6 flex flex-col bg-[var(--bg-overlay)]/45 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-5 rounded-2xl h-[600px]">
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-3 mb-4">
              <span className="text-xs font-bold text-[var(--text-muted)]">VECTOR RENDER CANVAS (AUTO ASPECT)</span>
           </div>

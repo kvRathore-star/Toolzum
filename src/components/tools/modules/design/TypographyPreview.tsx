@@ -69,7 +69,7 @@ export default function TypographyPreview() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <div className="flex flex-wrap gap-2">
           {presets.map((p) => (
-            <button key={p.label} onClick={() => applyPreset(p)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+            <button key={p.label} onClick={() => applyPreset(p)} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
               {p.label}
             </button>
           ))}
@@ -93,7 +93,7 @@ export default function TypographyPreview() {
             <label className="text-xs text-[var(--text-secondary)] block mb-1">Text Align</label>
             <div className="flex gap-1">
               {alignments.map((a) => (
-                <button key={a.value} onClick={() => setTextAlign(a.value)} title={a.title} className={`flex-1 px-2 py-1.5 text-xs font-medium rounded-lg transition-colors ${textAlign === a.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
+                <button key={a.value} onClick={() => setTextAlign(a.value)} title={a.title} className={`flex-1 px-2 py-1.5 text-xs font-medium rounded-lg transition-colors ${textAlign === a.value ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                   {a.label}
                 </button>
               ))}
@@ -105,7 +105,7 @@ export default function TypographyPreview() {
           <label htmlFor="lbl-typographypreview-font-weight" className="text-xs text-[var(--text-secondary)] block mb-1">Font Weight: {fontWeight}</label>
           <div id="lbl-typographypreview-font-weight" className="flex flex-wrap gap-1">
             {fontWeights.map((w) => (
-              <button key={w.value} onClick={() => setFontWeight(w.value)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${fontWeight === w.value ? 'bg-blue-600 text-white' : 'bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-secondary)]'}`}>
+              <button key={w.value} onClick={() => setFontWeight(w.value)} className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${fontWeight === w.value ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>
                 {w.label}
               </button>
             ))}
@@ -136,8 +136,8 @@ export default function TypographyPreview() {
         <pre className="p-3 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-mono text-[var(--text-secondary)] whitespace-pre-wrap">{cssOutput}</pre>
 
         <div className="flex gap-3">
-          <button onClick={copyCss} className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl transition-all">Copy CSS</button>
-          <button onClick={downloadCss} className="flex-1 px-4 py-2.5 bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 text-[var(--text-primary)] text-sm font-bold rounded-xl transition-all hover:text-[var(--accent)]">Download CSS</button>
+          <button onClick={copyCss} className="flex-1 px-4 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white text-sm font-bold rounded-xl transition-all">Copy CSS</button>
+          <button onClick={downloadCss} className="flex-1 px-4 py-2.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] text-sm font-bold rounded-xl transition-all hover:text-[var(--accent)]">Download CSS</button>
         </div>
       </div>
     </div>

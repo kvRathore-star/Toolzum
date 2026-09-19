@@ -75,9 +75,9 @@ export default function NetPromoterScoreCalculator() {
                 <span className="w-4 h-2.5 rounded bg-emerald-700" />
                 <span>Promoters {promoterPct.toFixed(0)}%</span>
               </div>
-              <div className="w-full h-3 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden flex">
+              <div className="w-full h-3 bg-[var(--bg-overlay)] rounded-full overflow-hidden flex">
                 <div style={{ width: `${promoterPct}%` }} className="bg-emerald-700 h-full transition-all duration-300" />
-                <div style={{ width: `${passivePct}%` }} className="bg-zinc-400 h-full transition-all duration-300" />
+                <div style={{ width: `${passivePct}%` }} className="bg-[var(--bg-elevated)] h-full transition-all duration-300" />
                 <div style={{ width: `${detractorPct}%` }} className="bg-red-500 h-full transition-all duration-300" />
               </div>
               <div className="flex justify-between text-[10px] text-[var(--text-muted)]">
@@ -93,14 +93,14 @@ export default function NetPromoterScoreCalculator() {
           <div className="flex items-start justify-between">
             <div className="space-y-2">
               <h4 className="text-sm font-bold text-[var(--text-secondary)] uppercase">Total Respondents</h4>
-              <p className="text-2xl font-bold text-zinc-800 dark:text-white">{total.toLocaleString()} ratings</p>
+              <p className="text-2xl font-bold text-[var(--text-primary)] dark:text-white">{total.toLocaleString()} ratings</p>
               <div className="grid grid-cols-3 gap-2 text-xs mt-3">
                 <div className="text-center">
                   <p className="font-bold text-emerald-500">{promoters}</p>
                   <p className="text-[var(--text-muted)]">Promoters</p>
                 </div>
                 <div className="text-center">
-                  <p className="font-bold text-zinc-500">{passives}</p>
+                  <p className="font-bold text-[var(--text-muted)]">{passives}</p>
                   <p className="text-[var(--text-muted)]">Passives</p>
                 </div>
                 <div className="text-center">

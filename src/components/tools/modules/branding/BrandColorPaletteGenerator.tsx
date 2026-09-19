@@ -111,7 +111,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
                 onChange={e => setBrandDesc(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()}
                 placeholder="e.g., A premium organic skincare brand targeting eco-conscious millennials..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)] transition-colors text-sm resize-none"
               />
             </div>
 
@@ -151,10 +151,10 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
             <h4 className="font-semibold text-[var(--text-primary)]">Generated Palette</h4>
             {outputText && (
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Copy to Clipboard">
+                <button onClick={handleCopy} className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors" aria-label="Copy to Clipboard">
                   <Clipboard className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Download as JSON">
+                <button onClick={handleDownload} className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors" aria-label="Download as JSON">
                   <Download className="w-4 h-4" />
                 </button>
               </div>
@@ -184,14 +184,14 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
                 )}
                 <details className="group">
                   <summary className="text-xs font-bold text-[var(--text-muted)] uppercase cursor-pointer hover:text-[var(--text-primary)]">Raw JSON</summary>
-                  <pre className="mt-2 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                  <pre className="mt-2 p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)]/50 text-[var(--text-primary)] whitespace-pre-wrap font-mono text-sm leading-relaxed">
                     {outputText}
                   </pre>
                 </details>
               </div>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 text-center text-[var(--text-muted)]">
-                <Palette className="w-8 h-8 mb-3 text-zinc-300 dark:text-zinc-700 animate-pulse" />
+                <Palette className="w-8 h-8 mb-3 text-zinc-300 dark:text-[var(--text-primary)] animate-pulse" />
                 <p className="text-sm font-medium">Your color palette will appear here.</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Describe your brand and generate a professional color palette.</p>
               </div>

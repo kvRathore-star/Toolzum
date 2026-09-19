@@ -230,7 +230,7 @@ export default function VectorPenCanvas() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center">
         <div>
           <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
             <Pencil className="w-5 h-5 text-[var(--accent)]" />
@@ -244,15 +244,15 @@ export default function VectorPenCanvas() {
         {/* Toolbar */}
         <div className="flex flex-wrap items-center gap-1.5 p-3 border-b border-[var(--border-subtle)] bg-[var(--bg-overlay)]">
           {/* Drawing modes */}
-          <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-black/30 rounded-xl">
-            <button onClick={() => setMode('select')} className={`p-2 rounded-lg transition-all ${mode === 'select' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Select" aria-label="Select tool"><MousePointer2 className="w-4 h-4" /></button>
-            <button onClick={() => setMode('pen')} className={`p-2 rounded-lg transition-all ${mode === 'pen' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Freehand Pen" aria-label="Freehand pen tool"><Pencil className="w-4 h-4" /></button>
-            <button onClick={() => setMode('rect')} className={`p-2 rounded-lg transition-all ${mode === 'rect' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Rectangle" aria-label="Rectangle tool"><Square className="w-4 h-4" /></button>
-            <button onClick={() => setMode('circle')} className={`p-2 rounded-lg transition-all ${mode === 'circle' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Ellipse" aria-label="Ellipse tool"><Circle className="w-4 h-4" /></button>
-            <button onClick={() => setMode('line')} className={`p-2 rounded-lg transition-all ${mode === 'line' ? 'bg-indigo-600 text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-zinc-800'}`} title="Line" aria-label="Line tool"><Minus className="w-4 h-4" /></button>
+          <div className="flex items-center gap-1 p-1 bg-[var(--bg-overlay)] dark:bg-black/30 rounded-xl">
+            <button onClick={() => setMode('select')} className={`p-2 rounded-lg transition-all ${mode === 'select' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)]'}`} title="Select" aria-label="Select tool"><MousePointer2 className="w-4 h-4" /></button>
+            <button onClick={() => setMode('pen')} className={`p-2 rounded-lg transition-all ${mode === 'pen' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)]'}`} title="Freehand Pen" aria-label="Freehand pen tool"><Pencil className="w-4 h-4" /></button>
+            <button onClick={() => setMode('rect')} className={`p-2 rounded-lg transition-all ${mode === 'rect' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)]'}`} title="Rectangle" aria-label="Rectangle tool"><Square className="w-4 h-4" /></button>
+            <button onClick={() => setMode('circle')} className={`p-2 rounded-lg transition-all ${mode === 'circle' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)]'}`} title="Ellipse" aria-label="Ellipse tool"><Circle className="w-4 h-4" /></button>
+            <button onClick={() => setMode('line')} className={`p-2 rounded-lg transition-all ${mode === 'line' ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)]'}`} title="Line" aria-label="Line tool"><Minus className="w-4 h-4" /></button>
           </div>
 
-          <div className="w-px h-6 bg-zinc-200 dark:bg-[var(--bg-surface)] mx-1" />
+          <div className="w-px h-6 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] mx-1" />
 
           {/* Color */}
           <div className="flex items-center gap-1">
@@ -272,7 +272,7 @@ export default function VectorPenCanvas() {
             </label>
           </div>
 
-          <div className="w-px h-6 bg-zinc-200 dark:border-zinc-800 mx-1" />
+          <div className="w-px h-6 bg-[var(--bg-overlay)] dark:border-zinc-800 mx-1" />
 
           {/* Stroke width */}
           <div className="flex items-center gap-2">
@@ -280,20 +280,20 @@ export default function VectorPenCanvas() {
             <input
               type="range" min="1" max="20" value={strokeWidth}
               onChange={e => setStrokeWidth(parseInt(e.target.value))}
-              className="w-20 h-1 accent-indigo-500"
+              className="w-20 h-1 accent-[var(--accent)]"
             />
           </div>
 
-          <div className="w-px h-6 bg-zinc-200 dark:border-zinc-800 mx-1" />
+          <div className="w-px h-6 bg-[var(--bg-overlay)] dark:border-zinc-800 mx-1" />
 
           {/* Actions */}
-          <button onClick={handleUndo} className="p-2 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Undo" aria-label="Undo"><Undo2 className="w-4 h-4" /></button>
-          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 hover:bg-zinc-800 rounded-lg" title="Clear canvas" aria-label="Clear canvas"><Trash2 className="w-4 h-4" /></button>
+          <button onClick={handleUndo} className="p-2 text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)] rounded-lg" title="Undo" aria-label="Undo"><Undo2 className="w-4 h-4" /></button>
+          <button onClick={handleClear} className="p-2 text-[var(--text-muted)] hover:text-red-700 dark:hover:text-red-400 hover:bg-[var(--bg-elevated)] rounded-lg" title="Clear canvas" aria-label="Clear canvas"><Trash2 className="w-4 h-4" /></button>
 
           <div className="flex-1" />
 
           {/* Export */}
-          <button onClick={() => handleExport('svg')} className="text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <button onClick={() => handleExport('svg')} className="text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
             <Download className="w-3.5 h-3.5" /> SVG
           </button>
           <button onClick={() => handleExport('png')} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
@@ -311,7 +311,7 @@ export default function VectorPenCanvas() {
           )}
           {!fabric && !loadError && (
             <div className="flex items-center justify-center h-[500px] text-xs text-[var(--text-secondary)] gap-2">
-              <div className="w-4 h-4 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+              <div className="w-4 h-4 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
               Loading canvas engine...
             </div>
           )}
@@ -325,12 +325,12 @@ export default function VectorPenCanvas() {
             <button
               key={idx}
               onClick={() => switchPage(idx)}
-              className={`text-[10px] font-mono px-3 py-1.5 rounded-lg border transition-all ${currentPage === idx ? 'bg-indigo-600 text-white border-indigo-500' : 'text-[var(--text-muted)] border-zinc-800 hover:text-white hover:bg-zinc-800'}`}
+              className={`text-[10px] font-mono px-3 py-1.5 rounded-lg border transition-all ${currentPage === idx ? 'bg-[var(--accent-ink)] text-white border-[var(--accent)]' : 'text-[var(--text-muted)] border-zinc-800 hover:text-white hover:bg-[var(--bg-elevated)]'}`}
             >
               Page {idx + 1}
             </button>
           ))}
-          <button onClick={addPage} className="p-1.5 text-[var(--text-muted)] hover:text-white hover:bg-zinc-800 rounded-lg" title="Add Page" aria-label="Add new page">
+          <button onClick={addPage} className="p-1.5 text-[var(--text-muted)] hover:text-white hover:bg-[var(--bg-elevated)] rounded-lg" title="Add Page" aria-label="Add new page">
             <Plus className="w-3.5 h-3.5" />
           </button>
         </div>

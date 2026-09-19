@@ -70,7 +70,7 @@ function MiniBar({ values, color, height = 40 }: { values: number[]; color: stri
   );
 }
 
-const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
+const inputClass = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)] text-[var(--text-primary)]";
 const labelClass = "block text-xs font-medium mb-1 text-[var(--text-secondary)]";
 
 function MetricInput({ label, value, onChange, prefix, step }: { label: string; value: number; onChange: (v: number) => void; prefix?: string; step?: string }) {
@@ -161,7 +161,7 @@ export function SaaSMetricsDashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-ink)] to-[var(--accent-ink)] flex items-center justify-center">
             <BarChart3 className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -173,7 +173,7 @@ export function SaaSMetricsDashboard() {
           <button onClick={reset} className="p-2 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors" title="Reset to defaults" aria-label="Reset to defaults">
             <RefreshCw size={16} />
           </button>
-          <button onClick={exportPdf} disabled={exporting} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">
+          <button onClick={exportPdf} disabled={exporting} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white text-sm font-medium transition-all active:scale-95 shadow-lg disabled:opacity-50">
             <Download size={16} />
             {exporting ? 'Exporting...' : 'Export PDF'}
           </button>
@@ -183,7 +183,7 @@ export function SaaSMetricsDashboard() {
       {/* KPI Row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <KpiCard label="Monthly Recurring Revenue" value={formatCurrency(m.mrr)} icon={<TrendingUp size={16} />} color={kpiColor(revenueGrowth, [10, 30])} subtitle={`${revenueGrowth >= 0 ? '+' : ''}${revenueGrowth.toFixed(1)}% vs last period`} />
-        <KpiCard label="Annual Recurring Revenue" value={formatCurrency(m.arr)} icon={<DollarSign size={16} />} color="text-blue-700 dark:text-blue-400" subtitle={`${(m.arr / m.mrr / 12 * 100).toFixed(0)}% of target`} />
+        <KpiCard label="Annual Recurring Revenue" value={formatCurrency(m.arr)} icon={<DollarSign size={16} />} color="text-[var(--accent)]" subtitle={`${(m.arr / m.mrr / 12 * 100).toFixed(0)}% of target`} />
         <KpiCard label="Net Promoter Score" value={npsScore > 0 ? `+${npsScore.toFixed(0)}` : npsScore.toFixed(0)} icon={<Activity size={16} />} color={kpiColor(npsScore, [0, 50])} subtitle={`${m.promoters} promoters · ${m.detractors} detractors`} />
         <KpiCard label="Runway" value={runwayMonths < 12 ? `${runwayMonths.toFixed(1)}` : `${(runwayMonths / 12).toFixed(1)}yr`} suffix={runwayMonths < 12 ? "months" : undefined} icon={<Target size={16} />} color={kpiColor(runwayMonths, [6, 18])} subtitle={`$${(m.cashBalance / 1_000_000).toFixed(1)}M · $${(m.monthlyBurn / 1_000).toFixed(0)}K/mo`} />
       </div>
@@ -203,7 +203,7 @@ export function SaaSMetricsDashboard() {
 
           {/* Customers */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><Users size={14} className="text-blue-700 dark:text-blue-400" /> Customers</h2>
+            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><Users size={14} className="text-[var(--accent)]" /> Customers</h2>
             <MetricInput label="Total Customers" value={m.totalCustomers} onChange={update('totalCustomers')} />
             <MetricInput label="New Customers (this period)" value={m.newCustomers} onChange={update('newCustomers')} />
             <MetricInput label="Customers Lost (churned)" value={m.customersLost} onChange={update('customersLost')} />
@@ -281,14 +281,14 @@ export function SaaSMetricsDashboard() {
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-[var(--text-tertiary)] w-20">ARR Growth</span>
                   <div className="flex-1 h-2 bg-[var(--bg-surface)] rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full transition-all" style={{ width: `${Math.min(100, Math.max(0, revenueGrowth * 3))}%` }} />
+                    <div className="h-full bg-gradient-to-r from-emerald-500 to-[var(--accent-ink)] rounded-full transition-all" style={{ width: `${Math.min(100, Math.max(0, revenueGrowth * 3))}%` }} />
                   </div>
                   <span className="text-xs font-mono text-[var(--text-secondary)]">${(m.arr - m.mrr * 12 || 0) > 0 ? '+' : ''}{((m.arr - m.mrr * 12) / 1000).toFixed(0)}K</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-[var(--text-tertiary)] w-20">MRR Growth</span>
                   <div className="flex-1 h-2 bg-[var(--bg-surface)] rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full transition-all" style={{ width: `${Math.min(100, Math.max(0, (m.mrr - 10000) / 900 * 100))}%` }} />
+                    <div className="h-full bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] rounded-full transition-all" style={{ width: `${Math.min(100, Math.max(0, (m.mrr - 10000) / 900 * 100))}%` }} />
                   </div>
                   <span className="text-xs font-mono text-[var(--text-secondary)]">${(m.mrr / 1000).toFixed(1)}K</span>
                 </div>
@@ -307,7 +307,7 @@ export function SaaSMetricsDashboard() {
               </div>
               <div className="mt-3 flex items-center gap-2">
                 <div className="flex-1 h-3 bg-[var(--bg-surface)] rounded-full overflow-hidden flex">
-                  <div className="h-full bg-blue-500" style={{ width: `${Math.min(100, abControlRate * 100)}%` }} />
+                  <div className="h-full bg-[var(--accent-ink)]" style={{ width: `${Math.min(100, abControlRate * 100)}%` }} />
                 </div>
                 <div className="flex-1 h-3 bg-[var(--bg-surface)] rounded-full overflow-hidden flex">
                   <div className="h-full bg-emerald-700" style={{ width: `${Math.min(100, abVariantRate * 100)}%` }} />
@@ -324,27 +324,27 @@ export function SaaSMetricsDashboard() {
 
           {/* Scenario Modeling */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
-            <h2 className="text-sm font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2"><RefreshCw size={14} className="text-indigo-700 dark:text-indigo-400" /> Scenario Modeling</h2>
+            <h2 className="text-sm font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2"><RefreshCw size={14} className="text-[var(--accent)]" /> Scenario Modeling</h2>
             <p className="text-xs text-[var(--text-tertiary)] mb-4">Adjust assumptions below to see how changes impact your metrics.</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
                 <label className={labelClass}>MRR Growth Rate</label>
                 <div className="flex items-center gap-2">
-                  <input aria-label="MRR Growth Rate" type="range" min="-20" max="50" value={m.scenarioMrrGrowth} onChange={e => setM(p => ({ ...p, scenarioMrrGrowth: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="MRR Growth Rate" type="range" min="-20" max="50" value={m.scenarioMrrGrowth} onChange={e => setM(p => ({ ...p, scenarioMrrGrowth: Number(e.target.value) }))} className="flex-1 accent-[var(--accent)]" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioMrrGrowth >= 0 ? '+' : ''}{m.scenarioMrrGrowth}%</span>
                 </div>
               </div>
               <div>
                 <label className={labelClass}>Churn Reduction</label>
                 <div className="flex items-center gap-2">
-                  <input aria-label="Churn Reduction" type="range" min="0" max="80" value={m.scenarioChurnReduction} onChange={e => setM(p => ({ ...p, scenarioChurnReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="Churn Reduction" type="range" min="0" max="80" value={m.scenarioChurnReduction} onChange={e => setM(p => ({ ...p, scenarioChurnReduction: Number(e.target.value) }))} className="flex-1 accent-[var(--accent)]" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioChurnReduction}%</span>
                 </div>
               </div>
               <div>
                 <label className={labelClass}>CAC Reduction</label>
                 <div className="flex items-center gap-2">
-                  <input aria-label="CAC Reduction" type="range" min="0" max="80" value={m.scenarioCacReduction} onChange={e => setM(p => ({ ...p, scenarioCacReduction: Number(e.target.value) }))} className="flex-1 accent-indigo-500" />
+                  <input aria-label="CAC Reduction" type="range" min="0" max="80" value={m.scenarioCacReduction} onChange={e => setM(p => ({ ...p, scenarioCacReduction: Number(e.target.value) }))} className="flex-1 accent-[var(--accent)]" />
                   <span className="text-sm font-mono w-12 text-right text-[var(--text-primary)]">{m.scenarioCacReduction}%</span>
                 </div>
               </div>
@@ -360,7 +360,7 @@ export function SaaSMetricsDashboard() {
               </div>
               <div className="bg-[var(--bg-surface)] rounded-lg p-2.5 text-center">
                 <div className="text-[9px] text-[var(--text-tertiary)] uppercase">Projected LTV</div>
-                <div className="text-xs font-bold text-blue-700 dark:text-blue-400">{formatCurrency(scenarioData.projectedLtv)}</div>
+                <div className="text-xs font-bold text-[var(--accent)]">{formatCurrency(scenarioData.projectedLtv)}</div>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-lg p-2.5 text-center">
                 <div className="text-[9px] text-[var(--text-tertiary)] uppercase">Projected CAC</div>

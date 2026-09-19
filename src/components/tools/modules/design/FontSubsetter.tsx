@@ -355,12 +355,12 @@ export default function FontSubsetter() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl text-sm space-y-1">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-2xl text-sm space-y-1">
         <h4 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
-          <FileText className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+          <FileText className="w-4 h-4 text-[var(--accent)]" />
           Font Subsetter
         </h4>
-        <p className="text-zinc-600 dark:text-[var(--text-muted)]">
+        <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
           Reduce font file size by removing unused glyphs. Perfect for web fonts, where you only need specific characters.
         </p>
       </div>
@@ -373,11 +373,11 @@ export default function FontSubsetter() {
           onClick={() => fileInputRef.current?.click()}
           onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}
-          className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
+          className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 text-center cursor-pointer hover:border-[var(--accent)] dark:hover:border-[var(--accent)] transition-colors"
         >
           <input ref={fileInputRef} type="file" accept=".ttf,.otf" onChange={handleFileChange} className="hidden" />
           <Upload className="w-8 h-8 text-[var(--text-muted)] mx-auto mb-3" />
-          <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">
+          <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-zinc-300">
             {file ? file.name : 'Click or drag a font file here'}
           </p>
           <p className="text-xs text-[var(--text-muted)] mt-1">Supports TTF, OTF</p>
@@ -391,7 +391,7 @@ export default function FontSubsetter() {
         )}
 
         {fontMeta && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
             <div>
               <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">Family</span>
               <span className="text-sm font-medium text-[var(--text-primary)] truncate block">{fontMeta.familyName}</span>
@@ -455,7 +455,7 @@ export default function FontSubsetter() {
             <button
               onClick={handleSubset}
               disabled={isProcessing}
-              className="w-full px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-600/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-[var(--accent-ink)]/50 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
             >
               {isProcessing ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Creating Subset...</>

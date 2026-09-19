@@ -158,7 +158,7 @@ ${linkCards}
             <div className="bg-[var(--bg-overlay)] rounded-xl p-4 border border-[var(--border-subtle)] space-y-3">
               <h4 className="text-[10px] font-bold text-[var(--text-muted)] uppercase flex items-center gap-1.5"><ImageIcon className="w-3 h-3" /> Profile</h4>
               <div className="flex items-center gap-3">
-                <div className="w-14 h-14 rounded-full overflow-hidden bg-zinc-200 dark:bg-zinc-700 shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+                <div className="w-14 h-14 rounded-full overflow-hidden bg-[var(--bg-overlay)] shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
                   role="button" tabIndex={0} onClick={() => document.getElementById('lib-profile-pic')?.click()}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); document.getElementById('lib-profile-pic')?.click(); } }}>
                   {profileImage ? <img loading="lazy" src={profileImage} alt="Profile photo"  className="w-full h-full object-cover" /> : <ImageIcon className="w-5 h-5 m-auto text-[var(--text-muted)]" style={{ paddingTop: '18px' }} />}
@@ -217,8 +217,8 @@ ${linkCards}
                 {links.map((l, i) => (
                   <div key={l.id} className="flex items-center gap-2 p-2 bg-white dark:bg-black/50 rounded-lg border border-[var(--border-subtle)]">
                     <div className="flex flex-col gap-0.5">
-                      <button aria-label={`Move ${l.title} up`} onClick={() => moveLink(l.id, 'up')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
-                      <button aria-label={`Move ${l.title} down`} onClick={() => moveLink(l.id, 'down')} className="text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
+                      <button aria-label={`Move ${l.title} up`} onClick={() => moveLink(l.id, 'up')} className="text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300"><MoveUp className="w-3 h-3" /></button>
+                      <button aria-label={`Move ${l.title} down`} onClick={() => moveLink(l.id, 'down')} className="text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300"><MoveDown className="w-3 h-3" /></button>
                     </div>
                     <span className="text-[var(--text-muted)]">{ICON_OPTIONS.find(o => o.value === l.icon)?.icon}</span>
                     <div className="flex-1 min-w-0">
@@ -237,13 +237,13 @@ ${linkCards}
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <div className="flex bg-zinc-200 dark:bg-zinc-700 rounded-lg p-0.5">
+              <div className="flex bg-[var(--bg-overlay)] rounded-lg p-0.5">
                 <button onClick={() => setShowPreview(true)}
-                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${showPreview ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${showPreview ? 'bg-white dark:bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                   <Smartphone className="w-3 h-3" /> Preview
                 </button>
                 <button onClick={() => setShowPreview(false)}
-                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${!showPreview ? 'bg-white dark:bg-zinc-600 text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+                  className={`px-3 py-1.5 rounded-md text-[10px] font-semibold transition-colors flex items-center gap-1 ${!showPreview ? 'bg-white dark:bg-[var(--bg-elevated)] text-[var(--text-primary)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                   <Code className="w-3 h-3" /> HTML
                 </button>
               </div>
@@ -254,7 +254,7 @@ ${linkCards}
                   {copied ? 'Copied' : 'Copy HTML'}
                 </button>
                 <button onClick={handleDownloadHtml}
-                  className="px-3 py-1.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg text-[10px] font-semibold flex items-center gap-1 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+                  className="px-3 py-1.5 bg-[var(--accent-ink)] text-white rounded-lg text-[10px] font-semibold flex items-center gap-1 hover:opacity-90 transition-colors">
                   <Download className="w-3 h-3" /> .html
                 </button>
               </div>
@@ -281,7 +281,7 @@ ${linkCards}
                       </a>
                     ))}
                   </div>
-                  <p className="text-center text-zinc-600 text-xs mt-6">Made with Toolzum</p>
+                  <p className="text-center text-[var(--text-secondary)] text-xs mt-6">Made with Toolzum</p>
                 </div>
               </div>
             ) : (

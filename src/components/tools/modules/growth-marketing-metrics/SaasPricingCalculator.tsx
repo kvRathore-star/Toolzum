@@ -77,8 +77,8 @@ export default function SaasPricingCalculator() {
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
-        <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
+        <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-[var(--accent)]" />
           SaaS Pricing & Economics Calculator
         </h2>
@@ -290,7 +290,7 @@ export default function SaasPricingCalculator() {
                       <td className="py-2.5 font-semibold text-[var(--text-primary)]">Month {proj.month}</td>
                       <td className="py-2.5 font-bold text-[var(--text-primary)]">{proj.endCust.toLocaleString()}</td>
                       <td className="py-2.5 text-rose-700 dark:text-rose-400">-{proj.churned}</td>
-                      <td className="py-2.5 font-semibold text-zinc-900 dark:text-zinc-200">${Math.round(proj.mrr).toLocaleString()}</td>
+                      <td className="py-2.5 font-semibold text-[var(--text-primary)] dark:text-zinc-200">${Math.round(proj.mrr).toLocaleString()}</td>
                       <td className="py-2.5 text-[var(--text-muted)]">${Math.round(proj.arr).toLocaleString()}</td>
                       <td className="py-2.5 font-bold text-emerald-500 text-right">${Math.round(proj.grossProfit).toLocaleString()}</td>
                     </tr>

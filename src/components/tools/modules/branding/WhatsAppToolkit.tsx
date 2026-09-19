@@ -58,13 +58,13 @@ function MessageLinkTab() {
       </div>
       {whatsappUrl && (
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
-          <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
+          <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
           <button onClick={handleCopy}
             className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
-            className="p-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+            className="p-2 bg-[var(--accent-ink)] text-white rounded-lg hover:opacity-90 transition-colors">
             <MessageCircle className="w-4 h-4" />
           </a>
         </div>
@@ -102,7 +102,7 @@ function GroupLinkTab() {
       </div>
       {groupUrl && (
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
-          <code className="flex-1 text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
+          <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
           <button onClick={handleCopy}
             className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -159,7 +159,7 @@ function FormatTextTab() {
                 </span>
                 <span className="text-[9px] text-[var(--text-secondary)]">{f.desc}</span>
               </div>
-              <code className="block text-xs text-[var(--text-primary)] bg-zinc-100 dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
+              <code className="block text-xs text-[var(--text-primary)] bg-[var(--bg-overlay)] dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
               <button onClick={() => handleCopy(f.syntax, f.label)}
                 className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-colors">
                 {copied === f.label ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -253,7 +253,7 @@ function BulkLinkTab() {
         role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
         <FileSpreadsheet className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
-        <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Upload CSV file'}</p>
+        <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{fileName || 'Upload CSV file'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">CSV format: phone,message (one per line)</p>
         <input aria-label="CSV format: phone,message (one per line)" ref={fileInputRef} type="file" accept=".csv" onChange={handleFile} className="hidden" />
       </div>
@@ -273,7 +273,7 @@ function BulkLinkTab() {
                 Copy All ({filteredData.length})
               </button>
               <button onClick={downloadCsv}
-                className="flex-1 sm:flex-none px-4 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
+                className="flex-1 sm:flex-none px-4 py-2.5 bg-[var(--accent-ink)] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
                 <Download className="w-3.5 h-3.5" /> CSV
               </button>
             </div>
@@ -289,11 +289,11 @@ function BulkLinkTab() {
                 </div>
                 <div className="flex gap-1 shrink-0">
                   <button aria-label={`Open WhatsApp chat with ${item.phone}`} onClick={() => window.open(generateLink(item), '_blank')}
-                    className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                    className="p-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                     <MessageCircle className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
                   </button>
                   <button aria-label="Copy WhatsApp link" onClick={() => handleCopy(i)}
-                    className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                    className="p-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                     {copiedIndex === i ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-[var(--text-secondary)]" />}
                   </button>
                 </div>
@@ -301,7 +301,7 @@ function BulkLinkTab() {
             ))}
           </div>
 
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+          <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Bulk generate 1000+ links, custom short links with tracking, scheduled sending via API, team workspace.
             </p>
@@ -402,7 +402,7 @@ function QrTab() {
             className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download QR Code
           </button>
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+          <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Custom branding in QR center, dynamic QR (change link without reprinting), scan analytics, batch QR generation.
             </p>
@@ -507,13 +507,13 @@ function QuickRepliesTab() {
                     }}
                       className="px-3 py-1.5 bg-emerald-700 text-white rounded-lg text-xs font-semibold">Save</button>
                     <button onClick={() => setEditingId(null)}
-                      className="px-3 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs">Cancel</button>
+                      className="px-3 py-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-xs">Cancel</button>
                   </div>
                 </div>
               ) : (
                 <div className="flex items-start gap-3">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{t.title}</p>
+                    <p className="text-xs font-semibold text-[var(--text-primary)]">{t.title}</p>
                     <p className="text-[11px] text-[var(--text-secondary)] mt-0.5 truncate">{t.content}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
@@ -522,7 +522,7 @@ function QuickRepliesTab() {
                       {copiedId === t.id ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                     </button>
                     <button aria-label={`Edit template ${t.title}`} onClick={() => setEditingId(t.id)}
-                      className="p-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-lg hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                      className="p-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
                     <button aria-label={`Delete template ${t.title}`} onClick={() => deleteTemplate(t.id)}
@@ -537,7 +537,7 @@ function QuickRepliesTab() {
         </div>
       )}
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+      <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
         <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
           <strong>Pro:</strong> Unlimited templates, categories, template variables ({'{{name}}'}, {'{{order_id}}'}), team-shared templates, analytics on most-used replies.
         </p>
@@ -652,7 +652,7 @@ function ChatAnalyzerTab() {
         role="button" tabIndex={0} onClick={() => fileInputRef.current?.click()}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInputRef.current?.click(); } }}>
         <Upload className="w-8 h-8 mx-auto mb-2 text-[var(--text-muted)]" />
-        <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">{fileName || 'Tap to upload _chat.txt'}</p>
+        <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{fileName || 'Tap to upload _chat.txt'}</p>
         <p className="text-[10px] text-[var(--text-secondary)] mt-1">WhatsApp → More → Export Chat → Without Media</p>
         <input aria-label="WhatsApp → More → Export Chat → Without Media" ref={fileInputRef} type="file" accept=".txt" onChange={handleFile} className="hidden" />
       </div>
@@ -661,7 +661,7 @@ function ChatAnalyzerTab() {
         <div className="space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-              <p className="text-2xl font-black text-zinc-800 dark:text-white">{stats.totalMessages.toLocaleString()}</p>
+              <p className="text-2xl font-black text-[var(--text-primary)] dark:text-white">{stats.totalMessages.toLocaleString()}</p>
               <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Total Messages</p>
             </div>
             <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
@@ -669,7 +669,7 @@ function ChatAnalyzerTab() {
               <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Media Shared</p>
             </div>
             <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-              <p className="text-2xl font-black text-blue-700 dark:text-blue-400">{stats.linkCount}</p>
+              <p className="text-2xl font-black text-[var(--accent)]">{stats.linkCount}</p>
               <p className="text-[10px] text-[var(--text-secondary)] uppercase mt-0.5">Links Shared</p>
             </div>
           </div>
@@ -681,7 +681,7 @@ function ChatAnalyzerTab() {
                 <div key={i} className="flex items-center gap-2">
                   <span className="text-[11px] text-[var(--text-secondary)] w-4">{i + 1}.</span>
                   <span className="text-xs text-[var(--text-primary)] flex-1 truncate">{name}</span>
-                  <div className="flex-1 max-w-[120px] h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                  <div className="flex-1 max-w-[120px] h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-700 rounded-full" style={{ width: `${(count / maxVal) * 100}%` }} />
                   </div>
                   <span className="text-[10px] text-[var(--text-secondary)] font-mono w-16 text-right">{count}</span>
@@ -691,11 +691,11 @@ function ChatAnalyzerTab() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
-            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Peak day: <strong>{stats.mostActiveDay}</strong></span>
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> Peak hour: <strong>{stats.mostActiveHour}</strong></span>
             </div>
-            <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg text-xs font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+            <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-[var(--accent-ink)] text-white rounded-lg text-xs font-semibold hover:opacity-90 transition-colors">
               <Download className="w-3 h-3" /> Export
             </button>
           </div>
@@ -828,7 +828,7 @@ function StatusDesignerTab() {
           <div className="flex items-center gap-2">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={gradient} onChange={e => setGradient(e.target.checked)}
-                className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
+                className="rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500" />
               <span className="text-[11px] text-[var(--text-secondary)]">Gradient background</span>
             </label>
             <div className="flex-1" />
@@ -840,8 +840,8 @@ function StatusDesignerTab() {
           <div className="flex flex-wrap gap-1.5">
             {statusPresets.map(p => (
               <button key={p.label} onClick={() => applyPreset(p)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[10px] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors">
-                <span className="w-3 h-3 rounded-full border border-zinc-300" style={{ backgroundColor: p.bg }} />
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)] text-[10px] text-[var(--text-secondary)] hover:border-[var(--accent)] transition-colors">
+                <span className="w-3 h-3 rounded-full border border-[var(--border-subtle)]" style={{ backgroundColor: p.bg }} />
                 {p.label}
               </button>
             ))}
@@ -887,7 +887,7 @@ export default function WhatsAppToolkit() {
               className={`flex items-center gap-1.5 px-4 py-3 text-xs font-semibold whitespace-nowrap transition-colors border-b-2 ${
                 activeTab === tab.key
                   ? 'text-emerald-500 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/10'
-                  : 'text-[var(--text-muted)] border-transparent hover:text-zinc-600 dark:hover:text-zinc-300'
+                  : 'text-[var(--text-muted)] border-transparent hover:text-[var(--text-primary)]'
               }`}>
               {tab.icon} {tab.label}
             </button>

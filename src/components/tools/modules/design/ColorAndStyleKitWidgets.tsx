@@ -68,7 +68,7 @@ export function ColorPaletteGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Palette Generator</h2>
         <input aria-label="Color Palette Generator" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Palette</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate Palette</button>
         {palette.length > 0 && (
           <div className="flex gap-1">
             {palette.map((c, i) => (
@@ -99,7 +99,7 @@ export function ColorShadesTints() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Color Shades &amp; Tints</h2>
         <input aria-label="Color Shades &amp; Tints" type="color" value={base} onChange={e => setBase(e.target.value)} className="w-full h-10 rounded-lg cursor-pointer" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate Shades</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate Shades</button>
         {shades.length > 0 && (
           <div className="flex gap-1 flex-wrap">
             {shades.map((c, i) => (
@@ -176,7 +176,7 @@ export function MediaQueryGenerator() {
         </div>
         <input type="text" value={device} onChange={e => setDevice(e.target.value)} placeholder="Device type (e.g. print, speech)" aria-label="Media device type"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>}
       </div>
     </div>
@@ -206,7 +206,7 @@ export function ConventionalCommitGenerator() {
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         <input aria-label="Description" type="text" value={desc} onChange={e => setDesc(e.target.value)} placeholder="Description"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && (
           <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-xs font-mono cursor-pointer" role="button" tabIndex={0} onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output); toast.success('Copied!'); } }}>{output}</div>
         )}
@@ -243,7 +243,7 @@ export function MarkdownTableGenerator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
           </div>
         </div>
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
       </div>
     </div>
@@ -264,7 +264,7 @@ export function NginxConfigGenerator() {
         <h2 className="text-lg font-bold text-[var(--text-primary)]">Nginx Config Generator</h2>
         <textarea aria-label="Nginx Config Generator" rows={4} value={options} onChange={e => setOptions(e.target.value)} placeholder="One directive per line"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono" />
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-48 overflow-y-auto">{output}</pre>}
       </div>
     </div>
@@ -329,7 +329,7 @@ export function IpAllowlistGenerator() {
             </button>
           ))}
         </div>
-        <button onClick={generate} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">Generate</button>
+        <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && (
           <div className="relative">
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>

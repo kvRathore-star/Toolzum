@@ -163,7 +163,7 @@ export default function SocialMediaPostMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Header */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Layout className="w-5 h-5 text-[var(--accent)]" />
           Social Media Graphic Designer
@@ -184,7 +184,7 @@ export default function SocialMediaPostMaker() {
                 <button
                   key={ratio.id}
                   onClick={() => setSelectedRatio(ratio)}
-                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedRatio.id === ratio.id ? 'border-indigo-500 bg-indigo-500/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
+                  className={`px-3 py-2 text-xs font-bold rounded-xl border text-center transition-colors cursor-pointer ${selectedRatio.id === ratio.id ? 'border-[var(--accent)] bg-[var(--accent)]/10 text-[var(--accent)]' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)]'}`}
                 >
                   {ratio.name}
                 </button>
@@ -201,18 +201,18 @@ export default function SocialMediaPostMaker() {
               <textarea id="lbl-socialmediapostmaker-text-overlay" aria-label="Text Overlay"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs h-20 resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs h-20 resize-none"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1">
                 <label htmlFor="lbl-socialmediapostmaker-font-size" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Size</label>
-                <input id="lbl-socialmediapostmaker-font-size" aria-label="Font Size" type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
+                <input id="lbl-socialmediapostmaker-font-size" aria-label="Font Size" type="number" value={fontSize} onChange={e => setFontSize(Math.max(12, parseInt(e.target.value) || 24))} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs" />
               </div>
               <div className="space-y-1">
                 <label htmlFor="lbl-socialmediapostmaker-font-family" className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Font Family</label>
-                <select id="lbl-socialmediapostmaker-font-family" aria-label="Font Family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
+                <select id="lbl-socialmediapostmaker-font-family" aria-label="Font Family" value={fontFamily} onChange={e => setFontFamily(e.target.value)} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-2 py-2 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs">
                   <option value="sans-serif">Sans-Serif</option>
                   <option value="serif">Serif</option>
                   <option value="Impact">Impact (Meme Style)</option>
@@ -254,7 +254,7 @@ export default function SocialMediaPostMaker() {
                 type="file" 
                 accept="image/*" 
                 onChange={handleImageUpload} 
-                className="w-full text-xs text-[var(--text-muted)] bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl px-4 py-2 cursor-pointer focus:border-[var(--border-subtle)]" 
+                className="w-full text-xs text-[var(--text-muted)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-4 py-2 cursor-pointer focus:border-[var(--border-subtle)]" 
               />
               {bgImage && (
                 <button onClick={clearImage} className="text-[10px] font-bold text-[var(--accent)] hover:underline">Clear Image Backdrop</button>
