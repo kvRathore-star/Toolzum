@@ -210,7 +210,7 @@ export default function RentalAgreementGenerator() {
             className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
               agreementType === 'leave-license'
                 ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-400 dark:border-amber-600 text-amber-700 dark:text-amber-300 shadow-sm'
-                : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-500 hover:border-amber-300'
+                : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
             }`}>
             <Building className="w-4 h-4 mx-auto mb-1" />
             Leave & License
@@ -220,7 +220,7 @@ export default function RentalAgreementGenerator() {
             className={`px-4 py-3 rounded-xl text-xs font-bold transition-all border ${
               agreementType === 'tenancy'
                 ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-400 dark:border-amber-600 text-amber-700 dark:text-amber-300 shadow-sm'
-                : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-500 hover:border-amber-300'
+                : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
             }`}>
             <User className="w-4 h-4 mx-auto mb-1" />
             Tenancy
@@ -303,7 +303,7 @@ export default function RentalAgreementGenerator() {
           {TERMS_CHECKLIST.map(term => (
             <label key={term} className="flex items-start gap-2 cursor-pointer group">
               <input type="checkbox" checked={checkedTerms.includes(term)} onChange={() => toggleTerm(term)}
-                className="mt-0.5 accent-amber-500 w-3.5 h-3.5 rounded border-zinc-300 dark:border-zinc-600" />
+                className="mt-0.5 accent-amber-500 w-3.5 h-3.5 rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)]" />
               <span className="text-[11px] text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">{term}</span>
             </label>
           ))}
@@ -336,7 +336,7 @@ export default function RentalAgreementGenerator() {
                 </div>
                 <div className="flex gap-1.5">
                   <button onClick={handleCopyText}
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold transition-all active:scale-95">
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold transition-all active:scale-95">
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />} {copied ? 'Copied' : 'Copy'}
                   </button>
                   <button onClick={handlePrint}
@@ -346,8 +346,8 @@ export default function RentalAgreementGenerator() {
                 </div>
               </div>
             </div>
-            <div className="p-4 bg-zinc-50 dark:bg-zinc-900/30 max-h-[75vh] overflow-y-auto">
-              <div className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
+            <div className="p-4 bg-[var(--bg-overlay)] max-h-[75vh] overflow-y-auto">
+              <div className="bg-white rounded-xl border border-[var(--border-subtle)] shadow-sm overflow-hidden">
                 <div ref={previewRef} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(generateAgreementHtml(form, checkedTerms, agreementType)) }} />
               </div>
             </div>

@@ -260,14 +260,14 @@ export default function VcfCsvConverter() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>No server uploads — </strong>Convert contacts between vCard (VCF) and CSV formats. Import/export address books between any platform.
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setDirection('vcf-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'vcf-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('vcf-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'vcf-to-csv' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
             VCF → CSV
           </button>
-          <button onClick={() => setDirection('csv-to-vcf')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-vcf' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('csv-to-vcf')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-vcf' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
             CSV → VCF
           </button>
         </div>
@@ -282,12 +282,12 @@ export default function VcfCsvConverter() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{contacts.length} contact(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'vcf-to-csv' ? 'VCF → CSV' : 'CSV → VCF'}</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{contacts.length} contact(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'vcf-to-csv' ? 'VCF → CSV' : 'CSV → VCF'}</p>
         </div>
-        <button onClick={() => { setFile(null); setOutputUrl(null); setContacts([]); setPreview([]); setError(null); }} className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
+        <button onClick={() => { setFile(null); setOutputUrl(null); setContacts([]); setPreview([]); setError(null); }} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
       </div>
 
       {direction === 'vcf-to-csv' && (
@@ -295,15 +295,15 @@ export default function VcfCsvConverter() {
           <h4 className="text-[var(--text-primary)] font-medium">Fields to Export</h4>
           <div className="flex flex-wrap gap-2">
             {VCF_FIELDS.map(f => (
-              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}>
+              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
                 {f.label}
               </button>
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Delimiter:</label>
-            <button onClick={() => setCsvDelimiter(',')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${csvDelimiter === ',' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Comma (,)</button>
-            <button onClick={() => setCsvDelimiter(';')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${csvDelimiter === ';' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>Semicolon (;)</button>
+            <label className="text-sm text-[var(--text-secondary)]">Delimiter:</label>
+            <button onClick={() => setCsvDelimiter(',')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${csvDelimiter === ',' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>Comma (,)</button>
+            <button onClick={() => setCsvDelimiter(';')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${csvDelimiter === ';' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>Semicolon (;)</button>
           </div>
         </div>
       )}
@@ -314,8 +314,8 @@ export default function VcfCsvConverter() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {csvHeaders.map(h => (
               <div key={h} className="flex items-center gap-2">
-                <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)] min-w-[100px]">{h}:</span>
-                <select aria-label="Delimiter:" value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
+                <span className="text-sm text-[var(--text-secondary)] min-w-[100px]">{h}:</span>
+                <select aria-label="Delimiter:" value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)]">
                   <option value="">— Skip —</option>
                   {CSV_HEADERS.map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -325,9 +325,9 @@ export default function VcfCsvConverter() {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <label className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">VCF Version:</label>
-            <button onClick={() => setOutputFormat('3.0')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${outputFormat === '3.0' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>3.0</button>
-            <button onClick={() => setOutputFormat('4.0')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${outputFormat === '4.0' ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}>4.0</button>
+            <label className="text-sm text-[var(--text-secondary)]">VCF Version:</label>
+            <button onClick={() => setOutputFormat('3.0')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${outputFormat === '3.0' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>3.0</button>
+            <button onClick={() => setOutputFormat('4.0')} className={`py-1 px-3 rounded-lg text-xs font-bold border ${outputFormat === '4.0' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>4.0</button>
           </div>
         </div>
       )}
@@ -339,7 +339,7 @@ export default function VcfCsvConverter() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--border-subtle)]">
-                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-zinc-600 dark:text-[var(--text-muted)] font-medium whitespace-nowrap">{h}</th>)}
+                  {displayHeaders.map(h => <th key={h} className="text-left py-2 px-3 text-[var(--text-secondary)] font-medium whitespace-nowrap">{h}</th>)}
                 </tr>
               </thead>
               <tbody>
@@ -378,7 +378,7 @@ export default function VcfCsvConverter() {
           </button>
         </div>
       ) : (
-        <button onClick={convert} disabled={isProcessing || contacts.length === 0} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
+        <button onClick={convert} disabled={isProcessing || contacts.length === 0} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
           {isProcessing ? 'Converting...' : `Convert to ${direction === 'vcf-to-csv' ? 'CSV' : 'VCF'}`}
         </button>

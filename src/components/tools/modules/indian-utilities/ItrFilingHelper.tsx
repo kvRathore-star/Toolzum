@@ -112,7 +112,7 @@ Note: Connect backend LLM for exact deduction processing.`);
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
       <div className="flex items-center gap-3 mb-2">
-        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+        <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 flex items-center justify-center text-white shadow-lg shadow-[var(--accent)]/20">
           <FileText className="w-4 h-4" />
         </div>
         <h3 className="text-lg font-bold text-[var(--text-primary)]">ITR Filing Helper</h3>
@@ -122,16 +122,16 @@ Note: Connect backend LLM for exact deduction processing.`);
         <div className={`flex items-center justify-between px-5 py-3.5 rounded-2xl border shadow-sm ${
           isUrgent
             ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800/30 text-red-700 dark:text-red-300'
-            : 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-200 dark:border-indigo-800/30 text-indigo-700 dark:text-indigo-300'
+            : 'bg-[var(--accent)]/10 border-[var(--accent)]/20 text-[var(--accent)]'
         }`}>
           <div className="flex items-center gap-3">
-            <Calendar className={`w-5 h-5 ${isUrgent ? 'text-red-500 animate-pulse' : 'text-indigo-500'}`} />
+            <Calendar className={`w-5 h-5 ${isUrgent ? 'text-red-500 animate-pulse' : 'text-[var(--accent)]'}`} />
             <div>
               <p className="text-xs font-bold">{daysLeft} days left until ITR due date (July 31, 2026)</p>
               <p className="text-[10px] opacity-75">Avoid last-minute rush — file your return early</p>
             </div>
           </div>
-          <span className={`text-xs font-bold px-3 py-1 rounded-full ${isUrgent ? 'bg-red-200 dark:bg-red-800/40 text-red-800 dark:text-red-200' : 'bg-indigo-200 dark:bg-indigo-800/40 text-indigo-800 dark:text-indigo-200'}`}>
+          <span className={`text-xs font-bold px-3 py-1 rounded-full ${isUrgent ? 'bg-red-200 dark:bg-red-800/40 text-red-800 dark:text-red-200' : 'bg-[var(--accent)]/20 text-[var(--accent)]'}`}>
             {isUrgent ? 'URGENT' : 'ON TRACK'}
           </span>
         </div>
@@ -140,7 +140,7 @@ Note: Connect backend LLM for exact deduction processing.`);
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3 space-y-6">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
-            <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider flex items-center gap-1.5 mb-4">
+            <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <FileText className="w-3.5 h-3.5" /> Step-by-Step Guide
             </h4>
             <div className="space-y-1.5">
@@ -150,11 +150,11 @@ Note: Connect backend LLM for exact deduction processing.`);
                     className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--bg-overlay)]/50 transition-colors">
                     <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
                       expandedStep === i
-                        ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-md shadow-indigo-500/20'
-                        : 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400'
+                        ? 'bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 text-white shadow-md shadow-[var(--accent)]/20'
+                        : 'bg-[var(--accent)]/10 text-[var(--accent)]'
                     }`}>{i + 1}</div>
                     <span className="text-sm font-semibold text-[var(--text-primary)] flex-1">{step.title}</span>
-                    {expandedStep === i ? <ChevronDown className="w-4 h-4 text-indigo-500" /> : <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />}
+                    {expandedStep === i ? <ChevronDown className="w-4 h-4 text-[var(--accent)]" /> : <ChevronRight className="w-4 h-4 text-[var(--text-muted)]" />}
                   </button>
                   {expandedStep === i && (
                     <div className="px-4 pb-3 pt-0 text-xs text-[var(--text-secondary)] leading-relaxed animate-in fade-in slide-in-from-top-1 duration-200">
@@ -167,7 +167,7 @@ Note: Connect backend LLM for exact deduction processing.`);
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
-            <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider flex items-center gap-1.5 mb-4">
+            <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <FileText className="w-3.5 h-3.5" /> Select Your ITR Form
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -175,12 +175,12 @@ Note: Connect backend LLM for exact deduction processing.`);
                 <button key={f.id} onClick={() => setSelectedForm(f.id === selectedForm ? null : f.id)}
                   className={`relative text-left px-4 py-3 rounded-xl text-xs border transition-all ${
                     selectedForm === f.id
-                      ? 'bg-indigo-50 dark:bg-indigo-900/20 border-indigo-400 dark:border-indigo-600 shadow-sm shadow-indigo-500/10'
-                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] hover:border-indigo-300'
+                      ? 'bg-[var(--accent)]/10 border-[var(--accent)] shadow-sm shadow-[var(--accent)]/10'
+                      : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
                   }`}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className={`font-bold text-sm ${selectedForm === f.id ? 'text-indigo-600 dark:text-indigo-400' : 'text-[var(--text-primary)]'}`}>{f.id}</span>
-                    {selectedForm === f.id && <Check className="w-3.5 h-3.5 text-indigo-500" />}
+                    <span className={`font-bold text-sm ${selectedForm === f.id ? 'text-[var(--accent)]' : 'text-[var(--text-primary)]'}`}>{f.id}</span>
+                    {selectedForm === f.id && <Check className="w-3.5 h-3.5 text-[var(--accent)]" />}
                   </div>
                   <span className="text-[10px] text-[var(--text-secondary)]">{f.eligibility}</span>
                 </button>
@@ -196,12 +196,12 @@ Note: Connect backend LLM for exact deduction processing.`);
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider flex items-center gap-1.5">
+              <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5">
                 <ClipboardList className="w-3.5 h-3.5" /> Document Checklist
               </h4>
               {checklist.length > 0 && (
                 <button onClick={downloadChecklist}
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg text-[10px] font-bold shadow-lg shadow-indigo-500/20 transition-all active:scale-95">
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-gradient-to-r from-[var(--accent-ink)] to-purple-600 text-white rounded-lg text-[10px] font-bold shadow-lg shadow-[var(--accent)]/20 transition-all active:scale-95">
                   <Download className="w-3 h-3" /> Download
                 </button>
               )}
@@ -210,8 +210,8 @@ Note: Connect backend LLM for exact deduction processing.`);
               {DOCUMENT_CHECKLIST.map(item => (
                 <label key={item} className="flex items-start gap-2 cursor-pointer group">
                   <input type="checkbox" checked={checklist.includes(item)} onChange={() => toggleChecklistItem(item)}
-                    className="mt-0.5 accent-indigo-500 w-3.5 h-3.5 rounded" />
-                  <span className={`text-[11px] transition-colors ${checklist.includes(item) ? 'text-indigo-600 dark:text-indigo-400 line-through opacity-60' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
+                    className="mt-0.5 accent-[var(--accent)] w-3.5 h-3.5 rounded" />
+                  <span className={`text-[11px] transition-colors ${checklist.includes(item) ? 'text-[var(--accent)] line-through opacity-60' : 'text-[var(--text-secondary)] group-hover:text-[var(--text-primary)]'}`}>
                     {item}
                   </span>
                 </label>
@@ -223,9 +223,9 @@ Note: Connect backend LLM for exact deduction processing.`);
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider">Tax Calculator</h4>
+              <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider">Tax Calculator</h4>
               <button onClick={() => setShowCalc(!showCalc)}
-                className="text-[10px] text-indigo-500 font-semibold hover:text-indigo-700 dark:hover:text-indigo-400 transition-colors">
+                className="text-[10px] text-[var(--accent)] font-semibold hover:text-indigo-700 dark:hover:text-indigo-400 transition-colors">
                 {showCalc ? 'Hide' : 'Show'}
               </button>
             </div>
@@ -234,24 +234,24 @@ Note: Connect backend LLM for exact deduction processing.`);
                 <div>
                   <label htmlFor="lbl-itrfilinghelper-total-annual-income" className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Total Annual Income (₹)</label>
                   <input id="lbl-itrfilinghelper-total-annual-income" aria-label="Total Annual Income (₹)" type="number" value={income} onChange={e => setIncome(e.target.value)}
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm"
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-all text-sm"
                     placeholder="e.g. 1500000" />
                 </div>
                 <div>
                   <label htmlFor="lbl-itrfilinghelper-tax-regime" className="block text-[11px] font-semibold text-[var(--text-secondary)] mb-1">Tax Regime</label>
                   <select id="lbl-itrfilinghelper-tax-regime" aria-label="Tax Regime" value={regime} onChange={e => setRegime(e.target.value)}
-                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-all text-sm">
+                    className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-all text-sm">
                     <option value="new">New Tax Regime (Default)</option>
                     <option value="old">Old Tax Regime (With 80C Deductions)</option>
                   </select>
                 </div>
                 <button onClick={calculateTax}
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-indigo-500/20 transition-all active:scale-[0.98] text-sm">
+                  className="w-full bg-gradient-to-r from-[var(--accent-ink)] to-purple-600 hover:from-[var(--accent-ink)] hover:to-purple-500 text-white font-bold py-3 rounded-xl shadow-lg shadow-[var(--accent)]/20 transition-all active:scale-[0.98] text-sm">
                   Calculate Tax
                 </button>
                 {output && (
-                  <div className="bg-indigo-50 dark:bg-indigo-900/10 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-4">
-                    <pre className="text-[11px] text-indigo-700 dark:text-indigo-300 font-mono whitespace-pre-wrap leading-relaxed">{output}</pre>
+                  <div className="bg-[var(--accent)]/10/10 border border-[var(--accent)]/20 rounded-xl p-4">
+                    <pre className="text-[11px] text-[var(--accent)] font-mono whitespace-pre-wrap leading-relaxed">{output}</pre>
                   </div>
                 )}
               </div>
@@ -259,24 +259,24 @@ Note: Connect backend LLM for exact deduction processing.`);
           </div>
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-5 rounded-2xl shadow-xl">
-            <h4 className="text-xs font-bold text-indigo-500 uppercase tracking-wider flex items-center gap-1.5 mb-4">
+            <h4 className="text-xs font-bold text-[var(--accent)] uppercase tracking-wider flex items-center gap-1.5 mb-4">
               <ExternalLink className="w-3.5 h-3.5" /> Official Resources
             </h4>
             <div className="space-y-2">
               <a href={TAX_PORTAL_URL} target="_blank" rel="noopener noreferrer"
-                className="w-full flex items-center justify-between px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl text-xs shadow-lg shadow-indigo-500/20 transition-all active:scale-[0.98]">
+                className="w-full flex items-center justify-between px-4 py-3 bg-gradient-to-r from-[var(--accent-ink)] to-purple-600 hover:from-[var(--accent-ink)] hover:to-purple-500 text-white font-semibold rounded-xl text-xs shadow-lg shadow-[var(--accent)]/20 transition-all active:scale-[0.98]">
                 <span>Income Tax Portal (e-Filing)</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
               <a href="https://www.tdscpc.gov.in" target="_blank" rel="noopener noreferrer"
-                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-indigo-300 text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all">
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)] text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all">
                 <span>TDS CPC (Form 26AS)</span>
-                <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
+                <ExternalLink className="w-3.5 h-3.5 text-[var(--accent)]" />
               </a>
               <a href="https://www.nsdl.co.in" target="_blank" rel="noopener noreferrer"
-                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-indigo-300 text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all">
+                className="w-full flex items-center justify-between px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] hover:border-[var(--accent)] text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all">
                 <span>NSDL (PAN Services)</span>
-                <ExternalLink className="w-3.5 h-3.5 text-indigo-500" />
+                <ExternalLink className="w-3.5 h-3.5 text-[var(--accent)]" />
               </a>
             </div>
           </div>

@@ -69,7 +69,7 @@ export function PhoneParser() {
           { label: '+919876543210 (India)', apply: () => { setPhoneInput('+919876543210'); setPhoneResult(detectCountry('+919876543210')); } },
           { label: '+447911123456 (UK)', apply: () => { setPhoneInput('+447911123456'); setPhoneResult(detectCountry('+447911123456')); } },
         ].map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -80,10 +80,10 @@ export function PhoneParser() {
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.country}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">Country Code</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.code}</span></div>
           <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">National Number</span><span className="font-bold text-[var(--text-primary)]">{phoneResult.national}</span></div>
-          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">E.164 Format</span><span className="font-bold text-blue-600 dark:text-blue-400">{phoneResult.e164}</span></div>
+          <div className="text-xs flex justify-between"><span className="text-[var(--text-muted)]">E.164 Format</span><span className="font-bold text-[var(--accent)]">{phoneResult.e164}</span></div>
           <div className="flex gap-3 items-center">
             <button onClick={() => copy(phoneResult.e164, 'E.164')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
-            <button onClick={() => { const output = `Country: ${phoneResult.country}\nCountry Code: ${phoneResult.code}\nNational Number: ${phoneResult.national}\nE.164 Format: ${phoneResult.e164}`; const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='phone-parsed.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+            <button onClick={() => { const output = `Country: ${phoneResult.country}\nCountry Code: ${phoneResult.code}\nNational Number: ${phoneResult.national}\nE.164 Format: ${phoneResult.e164}`; const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='phone-parsed.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-[var(--accent)] hover:underline font-medium">Download</button>
           </div>
         </div>
       )}
@@ -122,7 +122,7 @@ export function OTPGenerator() {
           { label: '8-digit Hex', apply: () => { setOtpLen(8); setOtpType('hex'); setOtpCount(5); } },
           { label: '4-digit Numeric', apply: () => { setOtpLen(4); setOtpType('numeric'); setOtpCount(5); } },
         ].map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -139,7 +139,7 @@ export function OTPGenerator() {
             <label className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Type</label>
             <div className="flex bg-[var(--bg-surface)] rounded-xl p-1">
               {(['numeric','alpha','hex'] as const).map(t => (
-                <button key={t} onClick={() => setOtpType(t)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${otpType === t ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>{t}</button>
+                <button key={t} onClick={() => setOtpType(t)} className={`px-3 py-1.5 text-xs font-bold rounded-lg ${otpType === t ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>{t}</button>
               ))}
             </div>
           </div>
@@ -151,14 +151,14 @@ export function OTPGenerator() {
         <div className="flex gap-3 items-center">
           <button onClick={generateOTP} className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors cursor-pointer">Generate OTP Codes</button>
           {otpCodes.length > 0 && (
-            <button onClick={() => { const output = otpCodes.join('\n'); const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='otp-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download All</button>
+            <button onClick={() => { const output = otpCodes.join('\n'); const blob = new Blob([output], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='otp-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download All</button>
           )}
         </div>
         {otpCodes.length > 0 && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {otpCodes.map((code, i) => (
               <div key={i} className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-3 py-3 text-center">
-                <div className="text-sm font-mono font-bold text-blue-600 dark:text-blue-400 tracking-wider">{code.replace(/(.{3})/g, '$1 ').trim()}</div>
+                <div className="text-sm font-mono font-bold text-[var(--accent)] tracking-wider">{code.replace(/(.{3})/g, '$1 ').trim()}</div>
                 <button onClick={() => copy(code, 'OTP')} className="text-[9px] text-[var(--accent)] hover:underline mt-1 block">Copy</button>
               </div>
             ))}
@@ -188,7 +188,7 @@ export function SlugifyTool() {
           { label: 'My Blog Post Title', apply: () => setSlugInput('My Blog Post Title') },
           { label: 'Special Ch@rs! Here', apply: () => setSlugInput('Special Ch@rs! Here') },
         ].map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -205,10 +205,10 @@ export function SlugifyTool() {
       {slugInput && (
         <div className="relative bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5">
           <label htmlFor="lbl-otherutilitieswidgets-slug" className="text-[10px] font-bold text-[var(--text-muted)] uppercase block mb-1">Slug</label>
-          <input id="lbl-otherutilitieswidgets-slug" aria-label="Slug" type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-blue-600 dark:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
+          <input id="lbl-otherutilitieswidgets-slug" aria-label="Slug" type="text" readOnly value={slugOutput} className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 font-mono" />
           <div className="absolute top-6 right-3 flex gap-2">
             <button onClick={() => copy(slugOutput, 'Slug')} className="text-[10px] text-[var(--accent)] hover:underline bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Copy</button>
-            <button onClick={() => { const blob = new Blob([slugOutput], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='slug.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-blue-600 dark:text-blue-400 hover:underline font-medium bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Download</button>
+            <button onClick={() => { const blob = new Blob([slugOutput], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='slug.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-[10px] text-[var(--accent)] hover:underline font-medium bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded">Download</button>
           </div>
         </div>
       )}

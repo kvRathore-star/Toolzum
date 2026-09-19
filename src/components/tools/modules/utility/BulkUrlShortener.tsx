@@ -141,7 +141,7 @@ export default function BulkUrlShortener() {
         {isProcessing && (
           <div className="space-y-2">
             <div className="h-2 w-full bg-[var(--bg-overlay)] rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-300" style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }} />
+              <div className="h-full bg-gradient-to-r from-[var(--accent-ink)] to-emerald-500 rounded-full transition-all duration-300" style={{ width: `${progress.total > 0 ? (progress.done / progress.total) * 100 : 0}%` }} />
             </div>
             <p className="text-xs text-[var(--text-muted)] text-right">{progress.done}/{progress.total}</p>
           </div>

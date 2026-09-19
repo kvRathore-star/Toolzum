@@ -98,7 +98,7 @@ export default function IndianAgeCalculator() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Calendar className="w-6 h-6 text-[var(--accent)]" />
           Indian Age Calculator (DD/MM/YYYY)
@@ -111,14 +111,14 @@ export default function IndianAgeCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200 uppercase tracking-wider">Date of Birth</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider">Date of Birth</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label htmlFor="lbl-indianagecalculator-day" className="text-[10px] text-[var(--text-secondary)] block mb-1">Day</label>
                 <select id="lbl-indianagecalculator-day" aria-label="Day"
                   value={day}
                   onChange={e => setDay(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 >
                   {Array.from({ length: 31 }, (_, i) => String(i + 1)).map(d => (
                     <option key={d} value={d}>{d.padStart(2, '0')}</option>
@@ -131,7 +131,7 @@ export default function IndianAgeCalculator() {
                 <select id="lbl-indianagecalculator-month" aria-label="Month"
                   value={month}
                   onChange={e => setMonth(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 >
                   {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map((m, i) => (
                     <option key={i + 1} value={String(i + 1)}>{m}</option>
@@ -144,7 +144,7 @@ export default function IndianAgeCalculator() {
                 <select id="lbl-indianagecalculator-year" aria-label="Year"
                   value={year}
                   onChange={e => setYear(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
                 >
                   {yearOptions.map(y => (
                     <option key={y} value={String(y)}>{y}</option>
@@ -160,7 +160,7 @@ export default function IndianAgeCalculator() {
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]"
             />
           </div>
 
@@ -183,7 +183,7 @@ export default function IndianAgeCalculator() {
           {result && (
             <>
               <div className="space-y-6 border-t border-[var(--border-subtle)] pt-6 animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="p-6 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center space-y-2">
+                <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl text-center space-y-2">
                   <span className="text-xs text-[var(--accent)] font-bold uppercase tracking-wider block">Your exact age is</span>
                   <span className="text-3xl font-black text-[var(--accent)] block">
                     {result.years} <span className="text-base font-normal">Years</span>, {result.months} <span className="text-base font-normal">Months</span>, {result.days} <span className="text-base font-normal">Days</span>
@@ -191,17 +191,17 @@ export default function IndianAgeCalculator() {
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 text-center">
-                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl">
                     <span className="text-[10px] text-[var(--text-secondary)] block">Total Days</span>
-                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalDays}</span>
+                    <span className="text-sm font-bold text-[var(--text-primary)] block mt-0.5">{result.totalDays}</span>
                   </div>
-                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl">
                     <span className="text-[10px] text-[var(--text-secondary)] block">Total Weeks</span>
-                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.totalWeeks}</span>
+                    <span className="text-sm font-bold text-[var(--text-primary)] block mt-0.5">{result.totalWeeks}</span>
                   </div>
-                  <div className="p-3 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl">
+                  <div className="p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl">
                     <span className="text-[10px] text-[var(--text-secondary)] block">Next Birthday</span>
-                    <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block mt-0.5">{result.nextBdayDays} Days</span>
+                    <span className="text-sm font-bold text-[var(--text-primary)] block mt-0.5">{result.nextBdayDays} Days</span>
                   </div>
                 </div>
               </div>
@@ -216,7 +216,7 @@ export default function IndianAgeCalculator() {
         </div>
 
         {/* Right Side: Eligibility Check */}
-        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl space-y-6">
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl space-y-6">
           <h4 className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2">
             <Milestone className="w-4 h-4 text-[var(--accent)]" />
             Milestones & Eligibility

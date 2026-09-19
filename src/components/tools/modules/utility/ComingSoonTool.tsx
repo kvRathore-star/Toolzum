@@ -19,9 +19,9 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
       <div className="mb-6 relative">
-        <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full" />
+        <div className="absolute inset-0 bg-[var(--accent)]/20 blur-3xl rounded-full" />
         <div className="relative w-24 h-24 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-3xl flex items-center justify-center shadow-2xl">
-          <svg className="w-10 h-10 text-blue-700 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-10 h-10 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
@@ -55,18 +55,18 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-zinc-600 flex-1 h-12 rounded-xl focus-visible:ring-blue-500"
+            className="bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] flex-1 h-12 rounded-xl focus-visible:ring-[var(--accent)]"
           />
-          <Button type="submit" className="h-12 px-6 bg-blue-600 hover:bg-blue-500 text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
+          <Button type="submit" className="h-12 px-6 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl shadow-lg shadow-blue-500/20 transition-all">
             Notify Me
           </Button>
         </form>
       )}
 
-      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-3xl mx-auto w-full border-t border-zinc-200 dark:border-[var(--border-subtle)] pt-12">
+      <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left max-w-3xl mx-auto w-full border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)] pt-12">
         <div>
           <h4 className="text-[var(--text-primary)] font-medium mb-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-blue-500"></span> 100% Client-Side
+            <span className="w-2 h-2 rounded-full bg-[var(--accent-ink)]"></span> 100% Client-Side
           </h4>
           <p className="text-sm text-[var(--text-secondary)]">Your files will never leave your device. All processing happens in your browser.</p>
         </div>

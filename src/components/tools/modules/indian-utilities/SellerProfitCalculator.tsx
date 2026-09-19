@@ -153,7 +153,7 @@ export default function SellerProfitCalculator() {
               ].map(f => (
                 <div key={f.label} className="bg-white dark:bg-black/40 rounded-lg p-2">
                   <p className="text-[10px] text-[var(--text-secondary)]">{f.label}</p>
-                  <p className="font-semibold text-zinc-800 dark:text-zinc-200">{formatINR(f.value)}</p>
+                  <p className="font-semibold text-[var(--text-primary)]">{formatINR(f.value)}</p>
                 </div>
               ))}
             </div>
@@ -161,8 +161,8 @@ export default function SellerProfitCalculator() {
 
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={comparePlatform} onChange={e => setComparePlatform(e.target.checked)}
-              className="rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
-            <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)]">Compare across all platforms</span>
+              className="rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500" />
+            <span className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Compare across all platforms</span>
           </label>
 
           {comparison && (
@@ -191,7 +191,7 @@ export default function SellerProfitCalculator() {
             </button>
           </div>
 
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+          <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Bulk product import via CSV, profit trend tracking over time, auto-updated commission rates, export P&L report, compare same product across all 3 platforms simultaneously, team plan for agencies.
             </p>

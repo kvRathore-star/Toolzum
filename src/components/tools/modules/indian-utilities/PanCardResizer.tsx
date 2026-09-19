@@ -161,7 +161,7 @@ export default function PanCardResizer() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[var(--bg-overlay)] p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-[var(--bg-overlay)] p-6 rounded-2xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] shadow-sm">
         <div className="space-y-3">
           <label className="text-sm font-semibold text-[var(--text-primary)]">Document Type</label>
           <div className="flex gap-2">
@@ -170,7 +170,7 @@ export default function PanCardResizer() {
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all flex items-center justify-center gap-2 ${
                 docType === 'photo'
                   ? 'bg-[#7c3aed] border-[#7c3aed] text-white shadow-md shadow-[#7c3aed]/30'
-                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
+                  : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'
               }`}
             >
               <ImageIcon className="w-4 h-4" />
@@ -181,7 +181,7 @@ export default function PanCardResizer() {
               className={`flex-1 py-3 px-4 rounded-xl font-medium border text-sm transition-all flex items-center justify-center gap-2 ${
                 docType === 'signature'
                   ? 'bg-[#7c3aed] border-[#7c3aed] text-white shadow-md shadow-[#7c3aed]/30'
-                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-zinc-100 dark:hover:bg-[var(--bg-elevated)]'
+                  : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--bg-overlay)]'
               }`}
             >
               <Signature className="w-4 h-4" />
@@ -198,22 +198,22 @@ export default function PanCardResizer() {
               className={`p-3 rounded-xl border text-left transition-all ${
                 portal === 'nsdl'
                   ? 'bg-[#7c3aed]/10 border-[#7c3aed] shadow-md shadow-[#7c3aed]/20'
-                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-zinc-300 dark:hover:border-zinc-600'
+                  : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
               }`}
             >
               <span className="block text-xs font-bold text-[var(--text-primary)]">Protean (NSDL)</span>
-              <span className="block text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5">Govt. empanelled</span>
+              <span className="block text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-0.5">Govt. empanelled</span>
             </button>
             <button
               onClick={() => { setPortal('utiitsl'); setOutputUrl(null); }}
               className={`p-3 rounded-xl border text-left transition-all ${
                 portal === 'utiitsl'
                   ? 'bg-[#7c3aed]/10 border-[#7c3aed] shadow-md shadow-[#7c3aed]/20'
-                  : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-zinc-300 dark:hover:border-zinc-600'
+                  : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] hover:border-[var(--accent)]'
               }`}
             >
               <span className="block text-xs font-bold text-[var(--text-primary)]">UTIITSL</span>
-              <span className="block text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5">Public sector</span>
+              <span className="block text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-0.5">Public sector</span>
             </button>
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function PanCardResizer() {
       ) : (
         <div className="space-y-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            <h3 className="text-lg font-bold text-[var(--text-primary)]">
               Crop & Align {docType === 'photo' ? 'Photo' : 'Signature'}
             </h3>
             <button
@@ -256,7 +256,7 @@ export default function PanCardResizer() {
             </button>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-zinc-100 dark:bg-black p-4">
+          <div className="rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-black p-4">
             <Cropper
               src={image}
               style={{ height: 400, width: "100%" }}
@@ -301,7 +301,7 @@ export default function PanCardResizer() {
           <div className="flex-1 text-center md:text-left space-y-4 w-full">
             <div>
               <h4 className="text-lg font-bold text-[#7c3aed]">Document Ready!</h4>
-              <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">
+              <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">
                 Scaled to exactly {currentSpec.width} x {currentSpec.height} px ({currentSpec.dpi} DPI equivalent).
               </p>
             </div>
@@ -319,11 +319,11 @@ export default function PanCardResizer() {
 
             {sizePercent > 0 && (
               <div className="w-full max-w-xs mx-auto md:mx-0">
-                <div className="flex justify-between text-[10px] text-zinc-500 mb-1">
+                <div className="flex justify-between text-[10px] text-[var(--text-muted)] mb-1">
                   <span>Compression</span>
                   <span>{sizePercent}% of limit</span>
                 </div>
-                <div className="h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                <div className="h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{ width: `${sizePercent}%`, background: `linear-gradient(90deg, ${ACCENT}, #a855f7)` }}

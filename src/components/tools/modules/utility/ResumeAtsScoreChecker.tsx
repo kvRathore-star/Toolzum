@@ -166,10 +166,10 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
             <h4 className="font-semibold text-[var(--text-primary)]">ATS Analysis Report</h4>
             {(result || rawOutput) && (
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Copy ATS report">
+                <button onClick={handleCopy} className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors" aria-label="Copy ATS report">
                   <Clipboard className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors" aria-label="Download ATS report">
+                <button onClick={handleDownload} className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors" aria-label="Download ATS report">
                   <Download className="w-4 h-4" />
                 </button>
               </div>

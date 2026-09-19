@@ -100,7 +100,7 @@ export default function PassportPhotoIndia() {
   return (
     <div className="space-y-8 animate-in fade-in zoom-in duration-500">
       <div className="flex justify-between items-center">
-        <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Crop Your Photo</h3>
+        <h3 className="text-xl font-bold text-[var(--text-primary)]">Crop Your Photo</h3>
         <button
           onClick={() => setImage(null)}
           className="text-sm text-[#2563eb] hover:text-[#1d4ed8] font-medium flex items-center gap-1"
@@ -189,14 +189,14 @@ export default function PassportPhotoIndia() {
             </div>
           </div>
 
-          <div className="p-6 bg-[var(--bg-overlay)] rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="p-6 bg-[var(--bg-overlay)] rounded-2xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
             <h4 className="text-sm font-bold text-[var(--text-primary)] mb-4 flex items-center gap-2">
               <Grid className="w-4 h-4 text-[#2563eb]" />
               Print Layout Preview (4x6 sheet)
             </h4>
             <div className="grid grid-cols-4 gap-2 max-w-[280px] mx-auto">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-[3.5/4.5] bg-white rounded border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-sm">
+                <div key={i} className="aspect-[3.5/4.5] bg-white rounded border border-[var(--border-subtle)] overflow-hidden shadow-sm">
                   <Image
                     loading="lazy"
                     src={outputUrl}
@@ -209,7 +209,7 @@ export default function PassportPhotoIndia() {
                 </div>
               ))}
             </div>
-            <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mt-3 text-center">6 photos per 4x6 inch print sheet</p>
+            <p className="text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-3 text-center">6 photos per 4x6 inch print sheet</p>
           </div>
         </div>
         )}

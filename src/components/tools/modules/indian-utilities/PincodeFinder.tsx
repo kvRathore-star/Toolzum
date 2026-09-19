@@ -86,7 +86,7 @@ export default function PincodeFinder() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
             <MapPin className="w-6 h-6" style={{ color: accentColor }} />
@@ -104,7 +104,7 @@ export default function PincodeFinder() {
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-              <div key={i} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : ''}`} style={{ backgroundColor: i < usage ? undefined : accentColor }} />
+              <div key={i} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : ''}`} style={{ backgroundColor: i < usage ? undefined : accentColor }} />
             ))}
           </div>
           <motion.span key={remaining} initial={{ scale: 1.3 }} animate={{ scale: 1 }} className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</motion.span>
@@ -113,10 +113,10 @@ export default function PincodeFinder() {
 
       <div className="flex gap-2 p-1 bg-[var(--bg-surface)] rounded-xl max-w-sm">
         <button onClick={() => { setSearchMode('pincode'); setError(null); setResults(null); }}
-          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 cursor-pointer ${searchMode === 'pincode' ? 'text-white shadow-sm' : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 cursor-pointer ${searchMode === 'pincode' ? 'text-white shadow-sm' : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-zinc-200'}`}
           style={{ backgroundColor: searchMode === 'pincode' ? accentColor : 'transparent' }}>Search by Pincode</button>
         <button onClick={() => { setSearchMode('postoffice'); setError(null); setResults(null); }}
-          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 cursor-pointer ${searchMode === 'postoffice' ? 'text-white shadow-sm' : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-zinc-900 dark:hover:text-zinc-200'}`}
+          className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 cursor-pointer ${searchMode === 'postoffice' ? 'text-white shadow-sm' : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] dark:hover:text-zinc-200'}`}
           style={{ backgroundColor: searchMode === 'postoffice' ? accentColor : 'transparent' }}>Search by Branch Name</button>
       </div>
 
@@ -134,7 +134,7 @@ export default function PincodeFinder() {
                     onKeyDown={e => e.key === 'Enter' && handleSearch()} />
                 </div>
                 <button onClick={handleSearch} disabled={loading || remaining === 0}
-                  className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 disabled:from-blue-400 disabled:to-blue-400 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-blue-500/25">
+                  className="bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] disabled:from-[var(--accent-ink)] disabled:to-[var(--accent-ink)] text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-[var(--accent)]/25">
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
                   {remaining === 0 ? 'Limit reached' : 'Search'}
                 </button>
@@ -142,7 +142,7 @@ export default function PincodeFinder() {
               <div className="flex flex-wrap gap-2 mt-2">
                 {QUICK_PRESETS.map(p => (
                   <button key={p} onClick={() => setPincode(p)}
-                    className="px-3 py-1 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-400 hover:text-blue-700 dark:hover:text-blue-400 transition-all cursor-pointer bg-[var(--bg-overlay)]/50">
+                    className="px-3 py-1 text-[10px] font-semibold rounded-full border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)] hover:text-blue-700 dark:hover:text-blue-400 transition-all cursor-pointer bg-[var(--bg-overlay)]/50">
                     {p}
                   </button>
                 ))}
@@ -159,7 +159,7 @@ export default function PincodeFinder() {
                     onKeyDown={e => e.key === 'Enter' && handleSearch()} />
                 </div>
                 <button onClick={handleSearch} disabled={loading || remaining === 0}
-                  className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 disabled:from-blue-400 disabled:to-blue-400 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-blue-500/25">
+                  className="bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] disabled:from-[var(--accent-ink)] disabled:to-[var(--accent-ink)] text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-[var(--accent)]/25">
                   {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
                   {remaining === 0 ? 'Limit reached' : 'Search'}
                 </button>
@@ -178,7 +178,7 @@ export default function PincodeFinder() {
               <div className="flex flex-wrap gap-1.5 mt-1">
                 {searchHistory.map((h, i) => (
                   <button key={i} onClick={() => { if (/^\d{6}$/.test(h)) { setSearchMode('pincode'); setPincode(h); } else { setSearchMode('postoffice'); setOfficeName(h); } }}
-                    className="px-2.5 py-1 text-[10px] rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-400 transition-all cursor-pointer">
+                    className="px-2.5 py-1 text-[10px] rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)] transition-all cursor-pointer">
                     {h}
                   </button>
                 ))}
@@ -197,9 +197,9 @@ export default function PincodeFinder() {
         </AnimatePresence>
 
         {breakdown && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl space-y-4">
-            <div className="flex items-center gap-1 text-xs font-bold text-zinc-800 dark:text-zinc-200"><Info className="w-4 h-4" style={{ color: accentColor }} />Pincode Structure Analysis ({currentPincode})</div>
-            <div className="flex justify-center text-center gap-1 font-mono text-xl font-bold p-3 bg-white dark:bg-black/50 rounded-lg border border-zinc-200 dark:border-[var(--border-subtle)]">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl space-y-4">
+            <div className="flex items-center gap-1 text-xs font-bold text-[var(--text-primary)]"><Info className="w-4 h-4" style={{ color: accentColor }} />Pincode Structure Analysis ({currentPincode})</div>
+            <div className="flex justify-center text-center gap-1 font-mono text-xl font-bold p-3 bg-white dark:bg-black/50 rounded-lg border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
               <div className="px-2 py-1 rounded" style={{ backgroundColor: '#2563eb10', borderColor: '#2563eb20', borderWidth: 1 }}><span style={{ color: accentColor }} className="block">{breakdown.region}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Region</span></div>
               <div className="px-2 py-1 bg-rose-500/10 border border-rose-500/20 rounded"><span className="text-rose-700 dark:text-rose-400 block">{breakdown.subRegion}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sub-Reg</span></div>
               <div className="px-2 py-1 bg-amber-500/10 border border-amber-500/20 rounded"><span className="text-amber-700 dark:text-amber-400 block">{breakdown.sortingDistrict}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sorting</span></div>
@@ -227,18 +227,18 @@ export default function PincodeFinder() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[400px] overflow-y-auto pr-1">
                 {results.map((office, idx) => (
                   <motion.div key={idx} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.05 }}
-                    className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] transition-all duration-200 flex flex-col justify-between gap-3 text-xs"
+                    className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] transition-all duration-200 flex flex-col justify-between gap-3 text-xs"
                     style={{ borderColor: idx === 0 ? accentColor + '30' : undefined }}>
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="font-bold text-zinc-900 dark:text-[var(--text-primary)] text-sm block">{office.Name}</span>
+                        <span className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)] text-sm block">{office.Name}</span>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${office.DeliveryStatus === 'Delivery' ? 'bg-emerald-700/10 text-emerald-700 dark:text-emerald-400' : 'bg-rose-500/10 text-rose-700 dark:text-rose-400'}`}>{office.DeliveryStatus}</span>
                       </div>
                       <span className="text-[var(--text-secondary)] block">Type: {office.BranchType}</span>
                     </div>
                     <div className="space-y-1 text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-2">
                       <span className="block">Pincode: <strong className="font-mono" style={{ color: accentColor }}>{office.Pincode ?? '—'}</strong>
-                        <button aria-label={`Copy pincode ${office.Pincode ?? ''}`} onClick={() => { clipboardWrite(office.Pincode ?? ''); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                        <button aria-label={`Copy pincode ${office.Pincode ?? ''}`} onClick={() => { clipboardWrite(office.Pincode ?? ''); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </button>
                       </span>

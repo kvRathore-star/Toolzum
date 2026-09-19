@@ -170,7 +170,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
                     className={`relative flex items-center gap-1.5 px-3 py-2.5 rounded-xl text-[11px] font-semibold transition-all border ${
                       form.type === t.id 
                         ? 'bg-red-50 dark:bg-red-900/20 border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 shadow-sm shadow-red-500/10'
-                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-red-300'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-red-300'
                     }`}>
                     <t.icon className="w-3.5 h-3.5 shrink-0" />
                     <span className="truncate">{t.label}</span>
@@ -268,7 +268,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
                 <h4 className="text-xs font-bold text-[var(--text-primary)]">Generated Letter</h4>
                 <div className="flex gap-1.5">
                   <button onClick={handleCopy}
-                    className="flex items-center gap-1 px-2.5 py-1.5 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold transition-all active:scale-95">
+                    className="flex items-center gap-1 px-2.5 py-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] rounded-lg text-[10px] font-semibold transition-all active:scale-95">
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />} {copied ? 'Copied' : 'Copy'}
                   </button>
                   <button onClick={handleDownload}
@@ -281,7 +281,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
             </div>
           )}
 
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+          <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
               <strong>Pro:</strong> Unlimited letters, 50+ legal templates (NCDRC, banking ombudsman, SEBI, IRDA, RERA), download as PDF with professional letterhead, email directly to regulatory body.
             </p>

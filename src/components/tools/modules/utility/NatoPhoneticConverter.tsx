@@ -68,7 +68,7 @@ export default function NatoPhoneticConverter() {
         </div>
         <button
           onClick={toggleMode}
-          className="flex items-center gap-1.5 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline"
+          className="flex items-center gap-1.5 text-xs font-bold text-[var(--accent)] hover:underline"
         >
           <ArrowLeftRight className="w-3.5 h-3.5" />
           Swap
@@ -92,7 +92,7 @@ export default function NatoPhoneticConverter() {
           {output && (
             <button
               onClick={() => copy(output)}
-              className="absolute top-3 right-3 flex items-center gap-1 text-[10px] font-bold text-blue-600 dark:text-blue-400 bg-white dark:bg-[var(--bg-surface)] px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)] hover:shadow-sm transition-all"
+              className="absolute top-3 right-3 flex items-center gap-1 text-[10px] font-bold text-[var(--accent)] bg-white dark:bg-[var(--bg-surface)] px-2.5 py-1.5 rounded-lg border border-[var(--border-subtle)] hover:shadow-sm transition-all"
             >
               <Copy className="w-3 h-3" />
               Copy
@@ -109,7 +109,7 @@ export default function NatoPhoneticConverter() {
               key={letter}
               className="flex items-center gap-2 p-1.5 rounded-lg bg-[var(--bg-overlay)]/50"
             >
-              <span className="font-bold text-blue-600 dark:text-blue-400 w-4 text-center">{letter}</span>
+              <span className="font-bold text-[var(--accent)] w-4 text-center">{letter}</span>
               <span className="text-[var(--text-secondary)] truncate">{word}</span>
             </div>
           ))}

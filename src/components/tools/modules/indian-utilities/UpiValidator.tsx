@@ -158,7 +158,7 @@ export default function UpiValidator() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <CreditCard className="w-6 h-6 text-[#0d9488]" />
           UPI Validator & QR Generator
@@ -190,10 +190,10 @@ export default function UpiValidator() {
           <div className="flex flex-wrap gap-1.5 text-[10px] text-[var(--text-muted)]">
             <span className="font-medium text-[#0d9488]">Format:</span>
             <span>username@handle</span>
-            <span className="text-zinc-300 dark:text-zinc-700">|</span>
+            <span className="text-zinc-300 dark:text-[var(--text-primary)]">|</span>
             <span>e.g.</span>
             <button type="button" onClick={() => handleInputChange('john.doe@okhdfcbank')} className="text-[#0d9488] hover:underline cursor-pointer font-medium">john.doe@okhdfcbank</button>
-            <span className="text-zinc-300 dark:text-zinc-700">|</span>
+            <span className="text-zinc-300 dark:text-[var(--text-primary)]">|</span>
             <button type="button" onClick={() => handleInputChange('user@paytm')} className="text-[#0d9488] hover:underline cursor-pointer font-medium">user@paytm</button>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default function UpiValidator() {
 
         {qrDataUrl && (
           <div className="border-t border-[var(--border-subtle)] pt-5 space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
-            <div className="bg-white border border-zinc-200 dark:border-zinc-700 rounded-2xl p-6 flex justify-center items-center shadow-inner">
+            <div className="bg-white border border-[var(--border-subtle)] rounded-2xl p-6 flex justify-center items-center shadow-inner">
               <img src={qrDataUrl} alt="UPI QR Code" className="max-w-full h-auto max-h-72 object-contain" />
             </div>
             <div className="flex gap-3">

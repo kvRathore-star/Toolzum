@@ -41,17 +41,17 @@ export default function PivotGenerator() {
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
       <Input label="Group column" value={groupCol} onChange={v => { setGroupCol(v); setOut(''); }} placeholder="Group column" />
       <Input label="Value column" value={valCol} onChange={v => { setValCol(v); setOut(''); }} placeholder="Value column (numeric)" />
-      <button onClick={() => handle()} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Pivot</button>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-sm font-medium transition-colors">Pivot</button>
       {out && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]/20">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-zinc-500">Pivot Table (group, count, sum, avg)</span>
+            <span className="text-xs font-semibold text-[var(--text-muted)]">Pivot Table (group, count, sum, avg)</span>
             <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
           </div>
-          <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+          <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
         </div>
       )}
     

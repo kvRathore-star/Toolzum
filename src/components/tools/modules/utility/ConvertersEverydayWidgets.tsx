@@ -9,15 +9,15 @@ import { clipboardWrite } from "@/lib/clipboard";
 export function CopyBtn({ text, label }: { text: string; label?: string }) {
   return (
     <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
-      className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
+      className="text-xs text-[var(--accent)] hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
   );
 }
 
 export const LinkCard = ({ title, slug, desc }: { title: string; slug: string; desc: string }) => (
   <Link href={`/tools/${slug}`} className="block bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-3 rounded-xl space-y-2 hover:border-[var(--accent)] transition-all group">
     <div className="flex items-center gap-1">
-      <h5 className="text-[11px] font-bold text-blue-600 dark:text-blue-400 group-hover:underline">{title}</h5>
-      <ExternalLink className="w-3 h-3 text-blue-700 dark:text-blue-400 shrink-0" />
+      <h5 className="text-[11px] font-bold text-[var(--accent)] group-hover:underline">{title}</h5>
+      <ExternalLink className="w-3 h-3 text-[var(--accent)] shrink-0" />
     </div>
     <p className="text-[10px] text-[var(--text-secondary)] leading-relaxed">{desc}</p>
   </Link>
@@ -93,7 +93,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
             <Star className="w-4 h-4" fill={favorites.includes(favKey) ? 'currentColor' : 'none'} />
           </button>
           <button onClick={() => setBatchMode(!batchMode)}
-            className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-colors ${batchMode ? 'text-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'text-[var(--text-muted)] hover:text-blue-400'}`}>
+            className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-colors ${batchMode ? 'text-[var(--accent)] bg-[var(--accent)]/10/20' : 'text-[var(--text-muted)] hover:text-blue-400'}`}>
             Batch
           </button>
         </div>
@@ -146,7 +146,7 @@ export function UnitConv({ title, units, defaultValue = '1', presets = [] }: { t
       <div className="flex gap-2">
         <button onClick={convert} className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white text-sm font-semibold py-2.5 rounded-xl transition-all">Convert</button>
         {!batchMode && results.length > 0 && (
-          <button onClick={swapUnits} className="px-3 py-2.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-secondary)] hover:text-blue-500 hover:border-blue-400 transition-colors" title="Swap units">
+          <button onClick={swapUnits} className="px-3 py-2.5 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-secondary)] hover:text-[var(--accent)] hover:border-[var(--accent)] transition-colors" title="Swap units">
             <ArrowLeftRight className="w-4 h-4" />
           </button>
         )}
@@ -274,7 +274,7 @@ export function LargeTextViewer() {
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 space-y-4 shadow-xl">
       <h5 className="text-sm font-bold text-[var(--text-primary)]">Large Text File Viewer</h5>
       <input aria-label="Text file to view" type="file" accept=".txt,.csv,.json,.log,.md,.html,.xml" onChange={handleFile}
-        className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900/30 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-900/50 cursor-pointer" />
+        className="w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[var(--accent)]/10 file:text-[var(--accent)] hover:file:bg-[var(--accent)]/20 cursor-pointer" />
       <p className="text-sm text-[var(--text-muted)]">Size: {(fileSize / 1024).toFixed(1)} KB</p>
       <div className="flex gap-3">
         <div className="flex-1 space-y-1">

@@ -252,7 +252,7 @@ export function RandomSentenceGenerator() {
       <CountSlider value={count} onChange={setCount} max={50} />
 
       <label className={labelClass}>Words per sentence (avg)</label>
-      <input aria-label="Words per sentence (avg)" type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-indigo-500" />
+      <input aria-label="Words per sentence (avg)" type="range" min={3} max={20} value={wordsPerSentence} onChange={e => setWordsPerSentence(Number(e.target.value))} className="w-full accent-[var(--accent)]" />
       <div className="text-xs text-[var(--text-muted)] text-right">{wordsPerSentence} words</div>
 
       {out && <OutputBlock value={out} />}

@@ -648,22 +648,22 @@ export function ULIDGenerator() {
         <div className="flex items-center gap-3">
           <button onClick={generate} className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto">Generate New</button>
           {ulids.length > 0 && (
-            <button onClick={() => { const text = ulids.map(u => u.ulid).join('\n'); const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='ulids.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+            <button onClick={() => { const text = ulids.map(u => u.ulid).join('\n'); const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='ulids.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">
               Download All
             </button>
           )}
         </div>
 
         {ulids.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 flex flex-col min-h-[200px]">
+          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
             <div className="space-y-2 max-h-[400px] overflow-y-auto">
               {ulids.map((item, i) => (
                 <div key={i} className="flex items-center gap-2 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl px-4 py-3">
                   <div className="flex-1 min-w-0">
-                    <code className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{item.ulid}</code>
+                    <code className="text-sm font-mono text-[var(--text-primary)] break-all">{item.ulid}</code>
                     <div className="text-[10px] text-[var(--text-muted)] mt-0.5">{new Date(item.timestamp).toISOString()}</div>
                   </div>
-                  <button onClick={() => { clipboardWrite(item.ulid); toast.success('ULID copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
+                  <button onClick={() => { clipboardWrite(item.ulid); toast.success('ULID copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors shrink-0">Copy</button>
                 </div>
               ))}
             </div>
@@ -712,12 +712,12 @@ export function NumeronymGenerator() {
         <label htmlFor="lbl-minigeneratorswidgets-input-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Input Text</label>
         <input id="lbl-minigeneratorswidgets-input-text" aria-label="Input Text" type="text" value={input} onChange={e => setInput(e.target.value)}
           placeholder="e.g., internationalization"
-          className="w-full bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
+          className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50 transition-colors" />
 
         <div className="flex items-center gap-2">
-          <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] cursor-pointer">
+          <label className="flex items-center gap-2 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] cursor-pointer">
             <input type="checkbox" checked={preserveCase} onChange={e => setPreserveCase(e.target.checked)}
-              className="rounded border-zinc-300 dark:border-zinc-600 text-emerald-500 focus:ring-emerald-500" />
+              className="rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500" />
             Preserve case per word
           </label>
           <span className="text-[10px] text-[var(--text-muted)] ml-auto">Words: {wordCount}</span>
@@ -729,8 +729,8 @@ export function NumeronymGenerator() {
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Numeronym</span>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
-                  <button onClick={() => { const text = `Numeronym: ${numeronym}\nAcronym: ${acronym}\nInput: ${input}`; const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='numeronym.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors">
+                  <button onClick={() => { clipboardWrite(numeronym); toast.success('Numeronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                  <button onClick={() => { const text = `Numeronym: ${numeronym}\nAcronym: ${acronym}\nInput: ${input}`; const blob = new Blob([text], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='numeronym.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">
                     Download
                   </button>
                 </div>
@@ -741,9 +741,9 @@ export function NumeronymGenerator() {
             <div className="bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-[var(--text-secondary)] uppercase tracking-wider">Acronym</span>
-                <button onClick={() => { clipboardWrite(acronym); toast.success('Acronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                <button onClick={() => { clipboardWrite(acronym); toast.success('Acronym copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
               </div>
-              <code className="text-lg font-mono font-bold text-blue-600 dark:text-blue-400 break-all">{acronym}</code>
+              <code className="text-lg font-mono font-bold text-[var(--accent)] break-all">{acronym}</code>
             </div>
           </div>
         )}
@@ -811,14 +811,14 @@ export function MACVendorLookup() {
               <div className="bg-[var(--bg-overlay)]/30 rounded-xl p-3">
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">OUI</span>
                 <div className="flex items-center gap-2">
-                  <code className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{oui}</code>
+                  <code className="text-sm font-mono font-bold text-[var(--text-primary)]">{oui}</code>
                   <button onClick={() => { clipboardWrite(oui); toast.success('OUI copied!'); }}
-                    className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+                    className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
                 </div>
               </div>
               <div className="bg-[var(--bg-overlay)]/30 rounded-xl p-3">
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">Formatted MAC</span>
-                <code className="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-200">{formattedMAC || '—'}</code>
+                <code className="text-sm font-mono font-bold text-[var(--text-primary)]">{formattedMAC || '—'}</code>
               </div>
             </div>
           </div>

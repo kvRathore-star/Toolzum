@@ -80,7 +80,7 @@ export default function IfscLookup() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
             <Building className="w-6 h-6 text-[var(--accent)]" />
@@ -99,7 +99,7 @@ export default function IfscLookup() {
           <div className="flex items-center gap-2">
             <div className="flex gap-1">
               {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                <div key={i} className={`w-2.5 h-2.5 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-indigo-500'}`} />
+                <div key={i} className={`w-2.5 h-2.5 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-[var(--accent-ink)]'}`} />
               ))}
             </div>
             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
@@ -110,10 +110,10 @@ export default function IfscLookup() {
           <label className="block text-sm font-bold text-[var(--text-primary)]">Enter 11-Digit IFSC Code</label>
           <div className="flex gap-2">
             <input aria-label="Enter 11-Digit IFSC Code" type="text" maxLength={11} placeholder="e.g. HDFC0000123" value={ifsc} onChange={(e) => setIfsc(e.target.value.toUpperCase())}
-              className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+              className="flex-1 bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3 text-lg font-mono tracking-wider text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               onKeyDown={e => e.key === 'Enter' && handleLookup()} />
             <button onClick={handleLookup} disabled={loading || remaining === 0}
-              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:bg-indigo-800/50 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer">
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Search className="w-5 h-5" />}
               {remaining === 0 ? 'Limit reached' : 'Lookup'}
             </button>
@@ -136,28 +136,28 @@ export default function IfscLookup() {
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                 <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Bank Name</span>
-                <span className="text-lg font-bold text-zinc-900 dark:text-[var(--text-primary)] block">{data.BANK}</span>
+                <span className="text-lg font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)] block">{data.BANK}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                 <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Branch Name</span>
-                <span className="text-lg font-bold text-zinc-900 dark:text-[var(--text-primary)] block">{data.BRANCH}</span>
+                <span className="text-lg font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)] block">{data.BRANCH}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                 <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">IFSC Code</span>
                 <span className="text-lg font-mono font-bold text-[var(--accent)] block">{data.IFSC}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                 <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">MICR Code</span>
-                <span className="text-lg font-mono font-bold text-zinc-800 dark:text-zinc-200 block">{data.MICR || 'N/A'}</span>
+                <span className="text-lg font-mono font-bold text-[var(--text-primary)] block">{data.MICR || 'N/A'}</span>
               </div>
             </div>
             {data.ADDRESS && (
-              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
+              <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-4">
                 <div className="space-y-1">
                   <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Branch Address</span>
-                  <div className="flex items-start gap-2 text-zinc-800 dark:text-zinc-200 text-sm">
+                  <div className="flex items-start gap-2 text-[var(--text-primary)] text-sm">
                     <MapPin className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                     <span>{data.ADDRESS}, {data.CITY}, {data.DISTRICT}, {data.STATE}</span>
                   </div>
@@ -169,10 +169,10 @@ export default function IfscLookup() {
             )}
             {!data.isOfflineFallback && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
-                <div className={`p-3 rounded-lg border ${data.UPI !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>UPI Supported</div>
-                <div className={`p-3 rounded-lg border ${data.NEFT !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>NEFT Supported</div>
-                <div className={`p-3 rounded-lg border ${data.IMPS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>IMPS Supported</div>
-                <div className={`p-3 rounded-lg border ${data.RTGS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-zinc-800 border-zinc-700 text-[var(--text-secondary)]'}`}>RTGS Supported</div>
+                <div className={`p-3 rounded-lg border ${data.UPI !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>UPI Supported</div>
+                <div className={`p-3 rounded-lg border ${data.NEFT !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>NEFT Supported</div>
+                <div className={`p-3 rounded-lg border ${data.IMPS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>IMPS Supported</div>
+                <div className={`p-3 rounded-lg border ${data.RTGS !== false ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-[var(--bg-elevated)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>RTGS Supported</div>
               </div>
             )}
             {data.CONTACT && data.CONTACT !== 'N/A' && (
@@ -184,12 +184,12 @@ export default function IfscLookup() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Bulk IFSC validation — upload a CSV of 100+ IFSC codes and get branch details in one click. Used by accountants and CAs daily.</p>
           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>
 
-        <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-2">
+        <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-2">
           <h3 className="font-bold text-xs text-[var(--text-primary)] flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-[var(--accent)]" />
             IFSC Code Structure

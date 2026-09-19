@@ -39,23 +39,23 @@ export default function Deduplicator() {
         <div className="mt-4 space-y-2">
           <div className="grid grid-cols-2 gap-2">
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-orange-400">
-              <span className="text-xs text-zinc-500">Before</span>
+              <span className="text-xs text-[var(--text-muted)]">Before</span>
               <p className="text-lg font-bold text-[var(--text-primary)]">{stats.before}</p>
             </div>
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-green-400">
-              <span className="text-xs text-zinc-500">After</span>
+              <span className="text-xs text-[var(--text-muted)]">After</span>
               <p className="text-lg font-bold text-green-600">{stats.after}</p>
             </div>
           </div>
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-blue-400">
+          <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-xs font-semibold text-zinc-500">Deduplicated Data</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)]">Deduplicated Data</span>
               <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
-                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Download</button>
+                <button onClick={() => { clipboardWrite(out).then(ok => ok && toast.success('Copied!')); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+                <button onClick={() => { const blob = new Blob([out], {type:'text/plain'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='output.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
               </div>
             </div>
-            <pre className="text-xs font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
+            <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto max-h-40">{out}</pre>
           </div>
         </div>
       )}

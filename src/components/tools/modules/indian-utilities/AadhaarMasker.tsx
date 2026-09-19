@@ -145,7 +145,7 @@ export default function AadhaarMasker() {
   };
 
   if (isProcessing) {
-    return <div className="py-20 text-center text-zinc-600 dark:text-[var(--text-muted)]">Parsing document entirely on your device...</div>;
+    return <div className="py-20 text-center text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Parsing document entirely on your device...</div>;
   }
 
   if (!image) {
@@ -173,20 +173,20 @@ export default function AadhaarMasker() {
           <ShieldCheck className="w-3.5 h-3.5" />
           Local Processing
         </span>
-        <span className="inline-flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-bold px-3 py-1.5 rounded-full">
+        <span className="inline-flex items-center gap-1.5 bg-[var(--bg-overlay)] text-[var(--text-primary)] text-xs font-bold px-3 py-1.5 rounded-full">
           Masked Areas: {rects.length}
         </span>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Draw to Mask</h3>
-          <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">Click and drag over digits to redact them.</p>
+          <h3 className="font-bold text-[var(--text-primary)]">Draw to Mask</h3>
+          <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">Click and drag over digits to redact them.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setShowMasked(!showMasked)}
-            className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors"
           >
             {showMasked ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             {showMasked ? 'Hide Masks' : 'Show Masks'}
@@ -194,17 +194,17 @@ export default function AadhaarMasker() {
           {rects.length > 0 && (
             <button
               onClick={undoLastMask}
-              className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors"
             >
               <Undo2 className="w-4 h-4" />
               Undo
             </button>
           )}
-          <button onClick={clearMasks} className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors">
+          <button onClick={clearMasks} className="inline-flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors">
             <RotateCcw className="w-4 h-4" />
             Clear
           </button>
-          <button onClick={() => setImage(null)} className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg transition-colors">
+          <button onClick={() => setImage(null)} className="inline-flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] text-sm rounded-lg transition-colors">
             Start Over
           </button>
         </div>

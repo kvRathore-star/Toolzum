@@ -58,8 +58,8 @@ export default function UrlShortener() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
         <div className="border-b border-[var(--border-subtle)] p-6">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <LinkIcon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <div className="h-10 w-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
+              <LinkIcon className="w-5 h-5 text-[var(--accent)]" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-[var(--text-primary)]">URL Shortener</h2>
@@ -86,7 +86,7 @@ export default function UrlShortener() {
               <button
                 onClick={shortenUrl}
                 disabled={!url || isLoading}
-                className="w-full sm:w-auto px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:hover:bg-blue-600 text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-6 py-3 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 disabled:hover:bg-[var(--accent-ink)] text-white rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -107,9 +107,9 @@ export default function UrlShortener() {
           </div>
 
           {shortUrl && (
-            <div className="animate-in slide-in-from-bottom-4 duration-300 p-6 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/30 rounded-xl space-y-4">
+            <div className="animate-in slide-in-from-bottom-4 duration-300 p-6 bg-blue-50 dark:bg-[var(--accent)]/10 border border-[var(--accent)]/20 dark:border-[var(--accent)]/20 rounded-xl space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-blue-900 dark:text-blue-300">
+                <span className="text-sm font-medium text-[var(--accent)]">
                   Your shortened URL is ready!
                 </span>
               </div>
@@ -125,7 +125,7 @@ export default function UrlShortener() {
                 
                 <button
                   onClick={copyToClipboard}
-                  className="p-2 hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-md transition-colors flex items-center gap-2"
+                  className="p-2 hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-md transition-colors flex items-center gap-2"
                   title="Copy to clipboard" aria-label="Copy shortened URL"
                 >
                   {copied ? <CheckCircle2 className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
@@ -135,7 +135,7 @@ export default function UrlShortener() {
                   href={shortUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-md transition-colors"
+                  className="p-2 hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-md transition-colors"
                   title="Open in new tab"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -153,7 +153,7 @@ export default function UrlShortener() {
                 {history.map((h, i) => (
                   <div key={i} className="flex justify-between items-center gap-2 text-xs px-3 py-2 bg-[var(--bg-overlay)]/50 rounded-lg">
                     <span className="text-[var(--text-muted)] truncate flex-1">{h.long}</span>
-                    <button onClick={() => { setUrl(h.long); setShortUrl(h.short); }} className="text-blue-600 dark:text-blue-400 hover:underline shrink-0 font-mono">{h.short}</button>
+                    <button onClick={() => { setUrl(h.long); setShortUrl(h.short); }} className="text-[var(--accent)] hover:underline shrink-0 font-mono">{h.short}</button>
                   </div>
                 ))}
               </div>

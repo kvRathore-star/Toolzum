@@ -108,13 +108,13 @@ export default function AadhaarWalletCropper() {
               <Crop className="w-3.5 h-3.5 text-[#0d9488]" />
               Crop Workspace
             </span>
-            <div className="flex bg-zinc-100 dark:bg-zinc-800 rounded-lg p-0.5">
+            <div className="flex bg-[var(--bg-overlay)] rounded-lg p-0.5">
               <button
                 onClick={() => setSide('front')}
                 className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                   side === 'front'
-                    ? 'bg-white dark:bg-zinc-700 text-[#0d9488] shadow-sm'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+                    ? 'bg-[var(--accent)]/10 text-[var(--accent)] shadow-sm'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 Front Side
@@ -123,8 +123,8 @@ export default function AadhaarWalletCropper() {
                 onClick={() => setSide('back')}
                 className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                   side === 'back'
-                    ? 'bg-white dark:bg-zinc-700 text-[#0d9488] shadow-sm'
-                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200'
+                    ? 'bg-[var(--accent)]/10 text-[var(--accent)] shadow-sm'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 Back Side
@@ -135,8 +135,8 @@ export default function AadhaarWalletCropper() {
           {!imageSrc ? (
             <div className="border-2 border-dashed border-[#0d9488]/30 rounded-2xl p-12 flex flex-col items-center justify-center bg-[#0d9488]/5 text-center transition-all hover:border-[#0d9488]/50">
               <Upload className="w-10 h-10 text-[#0d9488] mb-2" />
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Upload scan of your ID card</p>
-              <p className="text-[10px] text-zinc-400 dark:text-zinc-500 mb-4">JPG, PNG, WEBP supported</p>
+              <p className="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted)] mb-1">Upload scan of your ID card</p>
+              <p className="text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] mb-4">JPG, PNG, WEBP supported</p>
               <label className="cursor-pointer px-5 py-2.5 rounded-xl text-xs text-white font-bold transition-all shadow-lg inline-flex items-center gap-1.5"
                 style={{
                   background: `linear-gradient(135deg, ${ACCENT}, #0f766e)`,
@@ -204,7 +204,7 @@ export default function AadhaarWalletCropper() {
               <div className="grid grid-cols-2 gap-4">
                 <button
                   onClick={() => setImageSrc(null)}
-                  className="border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors"
                 >
                   <RefreshCw className="w-4 h-4" />
                   Clear File
@@ -234,16 +234,16 @@ export default function AadhaarWalletCropper() {
                   src={croppedUrl}
                   alt="Processed result"
                   width={800} height={600}
-                  className="border border-zinc-300 dark:border-zinc-700 shadow-lg max-w-full rounded"
+                  className="border border-[var(--border-subtle)] shadow-lg max-w-full rounded"
                 />
               </div>
               <div className="w-full space-y-3">
-                <div className="flex items-center justify-center gap-3 text-xs text-zinc-600 dark:text-zinc-400">
+                <div className="flex items-center justify-center gap-3 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                   <span className="inline-flex items-center gap-1 bg-[#0d9488]/10 text-[#0d9488] px-2.5 py-1 rounded-full font-semibold">
                     <ImageIcon className="w-3 h-3" />
                     {outputSizeDisplay} KB
                   </span>
-                  <span className="inline-flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 px-2.5 py-1 rounded-full font-semibold">
+                  <span className="inline-flex items-center gap-1 bg-[var(--bg-overlay)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] px-2.5 py-1 rounded-full font-semibold">
                     <Ruler className="w-3 h-3" />
                     86mm x 54mm
                   </span>

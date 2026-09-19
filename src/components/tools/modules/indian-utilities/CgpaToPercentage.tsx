@@ -101,7 +101,7 @@ export default function CgpaToPercentage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
             <Calculator className="w-6 h-6" style={{ color: '#8b5cf6' }} />
@@ -122,7 +122,7 @@ export default function CgpaToPercentage() {
                 <motion.button key={f.id} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                   onClick={() => { setBoard(f.id); setResult(null); }}
                   className={`p-3 rounded-xl border-2 text-center transition-all duration-200 cursor-pointer ${
-                    board === f.id ? 'border-transparent shadow-md' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-zinc-400 dark:hover:border-zinc-600'
+                    board === f.id ? 'border-transparent shadow-md' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent)]'
                   }`}
                   style={board === f.id ? { borderColor: '#8b5cf6', backgroundColor: '#8b5cf612' } : {}}>
                   <span className="text-xl block mb-0.5">{f.logo}</span>
@@ -239,16 +239,16 @@ export default function CgpaToPercentage() {
           </AnimatePresence>
         </div>
 
-        <div className="bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl space-y-6">
+        <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl space-y-6">
           <h4 className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2 border-b border-[var(--border-subtle)] pb-2"><Award className="w-4 h-4" style={{ color: '#8b5cf6' }} />Conversion Guidelines</h4>
           <div className="space-y-4">
             <div className="space-y-1 text-xs">
-              <span className="font-bold text-zinc-800 dark:text-zinc-200 block">{currentFormula?.name} Scale</span>
+              <span className="font-bold text-[var(--text-primary)] block">{currentFormula?.name} Scale</span>
               <span className="font-mono block" style={{ color: '#8b5cf6' }}>{currentFormula?.formula}</span>
               <p className="text-[var(--text-secondary)] leading-relaxed mt-1">{currentFormula?.desc}</p>
             </div>
-            <div className="p-4 bg-white dark:bg-black/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] space-y-2">
-              <span className="font-bold text-zinc-800 dark:text-zinc-200 flex items-center gap-1"><Info className="w-4 h-4" style={{ color: '#8b5cf6' }} />Division Rule (Standard)</span>
+            <div className="p-4 bg-white dark:bg-black/35 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] space-y-2">
+              <span className="font-bold text-[var(--text-primary)] flex items-center gap-1"><Info className="w-4 h-4" style={{ color: '#8b5cf6' }} />Division Rule (Standard)</span>
               <ul className="space-y-1 font-mono text-[10px]">
                 <li>≥ 75%: First Class with Distinction</li><li>60% to 74.9%: First Class</li><li>50% to 59.9%: Second Class</li><li>40% to 49.9%: Pass Class</li><li>&lt; 40%: Fail</li>
               </ul>

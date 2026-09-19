@@ -257,8 +257,8 @@ export default function BankStatementAnalyser() {
                     <p className="text-[9px] text-red-600 dark:text-red-400 uppercase font-bold">Total Debits</p>
                     <p className="text-lg font-black text-red-600 dark:text-red-400 mt-1">₹{stats.totalDebit.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                   </div>
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-3 border border-blue-200 dark:border-blue-800/30">
-                    <p className="text-[9px] text-blue-600 dark:text-blue-400 uppercase font-bold">Net Balance</p>
+                  <div className="bg-[var(--accent)]/10/20 rounded-xl p-3 border border-[var(--accent)]/20">
+                    <p className="text-[9px] text-[var(--accent)] uppercase font-bold">Net Balance</p>
                     <p className={`text-lg font-black mt-1 ${stats.netBalance >= 0 ? 'text-emerald-600' : 'text-red-600'}`}>₹{stats.netBalance.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}</p>
                   </div>
                   <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-3 border border-purple-200 dark:border-purple-800/30">
@@ -274,10 +274,10 @@ export default function BankStatementAnalyser() {
                       {stats.topCategories.slice(0, 8).map(([cat, data]) => (
                         <div key={cat}>
                           <div className="flex justify-between text-[11px] mb-0.5">
-                            <span className="text-zinc-600 dark:text-[var(--text-muted)]">{cat}</span>
-                            <span className="font-semibold text-zinc-800 dark:text-zinc-200">₹{data.total.toLocaleString('en-IN')}</span>
+                            <span className="text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{cat}</span>
+                            <span className="font-semibold text-[var(--text-primary)]">₹{data.total.toLocaleString('en-IN')}</span>
                           </div>
-                          <div className="h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+                          <div className="h-1.5 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
                             <div className="h-full bg-emerald-700 rounded-full" style={{ width: `${(data.total / maxCategoryTotal) * 100}%` }} />
                           </div>
                         </div>
@@ -311,18 +311,18 @@ export default function BankStatementAnalyser() {
                   className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl pl-9 pr-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               </div>
               <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}
-                className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-zinc-600 dark:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
+                className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30">
                 <option value="">All categories</option>
                 {categories.map(c => <option key={c} value={c}>{c}</option>)}
               </select>
               <input aria-label="All categories" type="text" value={dateFilter} onChange={e => setDateFilter(e.target.value)} placeholder="Filter date..."
                 className="w-24 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
               <button onClick={handleExport}
-                className="px-3 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+                className="px-3 py-2 bg-[var(--accent-ink)] text-white rounded-xl text-xs font-semibold flex items-center gap-1.5 hover:opacity-90 transition-colors">
                 <Download className="w-3.5 h-3.5" /> Export CSV
               </button>
               <button onClick={() => setTransactions([])}
-                className="px-3 py-2 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-xl text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors">
+                className="px-3 py-2 bg-[var(--bg-surface)] text-[var(--text-secondary)] rounded-xl text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors">
                 New
               </button>
             </div>

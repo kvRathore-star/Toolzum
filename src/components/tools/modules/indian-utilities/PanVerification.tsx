@@ -137,12 +137,12 @@ export default function PanVerification() {
             />
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
-            <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium uppercase tracking-wider">Try:</span>
+            <span className="text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] font-medium uppercase tracking-wider">Try:</span>
             {EXAMPLE_PANS.map((example) => (
               <button
                 key={example}
                 onClick={() => loadExample(example)}
-                className="text-[10px] font-mono font-bold px-2 py-1 rounded-md border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="text-[10px] font-mono font-bold px-2 py-1 rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
               >
                 {example}
               </button>
@@ -191,10 +191,10 @@ export default function PanVerification() {
                         className="p-1.5 rounded-md hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
                         title="Copy PAN"
                       >
-                        <Copy className="w-4 h-4 text-zinc-500" />
+                        <Copy className="w-4 h-4 text-[var(--text-muted)]" />
                       </button>
                     </div>
-                    <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+                    <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                       The PAN complies with Income Tax Department formatting rules.
                     </p>
                   </div>
@@ -214,12 +214,12 @@ export default function PanVerification() {
                 )}
 
                 <div className="space-y-4">
-                  <h3 className="font-bold text-zinc-900 dark:text-zinc-100 text-sm uppercase tracking-wider">
+                  <h3 className="font-bold text-[var(--text-primary)] text-sm uppercase tracking-wider">
                     PAN Structure Analysis
                   </h3>
 
-                  <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
-                    <span className="text-zinc-400" title="First 3 characters: Alphabetic Series">{pan.substring(0, 3)}</span>
+                  <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
+                    <span className="text-[var(--text-muted)]" title="First 3 characters: Alphabetic Series">{pan.substring(0, 3)}</span>
                     <span className="text-[#059669] underline decoration-[#059669] decoration-2" title={`Taxpayer Status: ${validationResult.details?.statusText}`}>{pan[3]}</span>
                     <span className="text-[#d97706]" title={`Surname starting letter: ${validationResult.details?.surnameChar}`}>{pan[4]}</span>
                     <span className="text-[#2563eb]" title="4 Digits Sequential Number">{pan.substring(5, 9)}</span>
@@ -227,39 +227,39 @@ export default function PanVerification() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                       <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Alphabetic Series (1st-3rd)</span>
-                      <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
+                      <span className="text-sm font-bold text-[var(--text-primary)] block">
                         <span className="font-mono tracking-wider">{pan.substring(0, 3)}</span>
-                        <span className="text-zinc-400 dark:text-zinc-500 font-normal ml-1">— Series prefix</span>
+                        <span className="text-[var(--text-muted)] dark:text-[var(--text-muted)] font-normal ml-1">— Series prefix</span>
                       </span>
                     </div>
-                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                       <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Entity Type (4th)</span>
-                      <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
+                      <span className="text-sm font-bold text-[var(--text-primary)] block">
                         <span className="font-mono tracking-wider">{pan[3]}</span>
-                        <span className="text-zinc-400 dark:text-zinc-500 font-normal ml-1">— {validationResult.details?.statusText}</span>
+                        <span className="text-[var(--text-muted)] dark:text-[var(--text-muted)] font-normal ml-1">— {validationResult.details?.statusText}</span>
                       </span>
                     </div>
-                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                       <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Surname Initial (5th)</span>
-                      <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
+                      <span className="text-sm font-bold text-[var(--text-primary)] block">
                         <span className="font-mono tracking-wider">{pan[4]}</span>
-                        <span className="text-zinc-400 dark:text-zinc-500 font-normal ml-1">— Name match</span>
+                        <span className="text-[var(--text-muted)] dark:text-[var(--text-muted)] font-normal ml-1">— Name match</span>
                       </span>
                     </div>
-                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1">
+                    <div className="p-4 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1">
                       <span className="text-xs text-[var(--text-secondary)] font-bold uppercase block">Sequential Number (6th-9th)</span>
-                      <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200 block">
+                      <span className="text-sm font-bold text-[var(--text-primary)] block">
                         <span className="font-mono tracking-wider">{validationResult.details?.serialText}</span>
-                        <span className="text-zinc-400 dark:text-zinc-500 font-normal ml-1">— Serial</span>
+                        <span className="text-[var(--text-muted)] dark:text-[var(--text-muted)] font-normal ml-1">— Serial</span>
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] space-y-2">
-                  <div className="flex items-center gap-1.5 font-bold text-zinc-800 dark:text-zinc-200">
+                <div className="p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] space-y-2">
+                  <div className="flex items-center gap-1.5 font-bold text-[var(--text-primary)]">
                     <Info className="w-4 h-4" style={{ color: ACCENT }} />
                     How to verify actual active status?
                   </div>

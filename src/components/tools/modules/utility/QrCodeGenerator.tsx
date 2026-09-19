@@ -184,11 +184,11 @@ export default function QrCodeGenerator() {
     setFgColor('#000000'); setBgColor('#ffffff'); setSize(300); setLogoImage(null);
   };
 
-  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 text-[var(--text-primary)]";
+  const inpCls = "w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3.5 py-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] text-[var(--text-primary)]";
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Key className="w-6 h-6 text-[var(--accent)]" />
           QR Code Generator
@@ -338,7 +338,7 @@ export default function QrCodeGenerator() {
 
           <div className="space-y-1 text-xs">
             <span className="text-[var(--text-secondary)] font-bold block">Center Logo</span>
-            <label className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-zinc-700 dark:text-[var(--text-muted)] border border-[var(--border-subtle)] font-bold rounded-xl text-center cursor-pointer block">
+            <label className="w-full py-2.5 bg-[var(--bg-overlay)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] dark:text-[var(--text-muted)] border border-[var(--border-subtle)] font-bold rounded-xl text-center cursor-pointer block">
               Choose Logo File
               <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             </label>
@@ -350,7 +350,7 @@ export default function QrCodeGenerator() {
           </button>
         </div>
 
-        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center min-h-[350px]">
+        <div className="lg:col-span-2 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col justify-between items-center min-h-[350px]">
           <div aria-live="polite" className="flex-1 flex justify-center items-center p-6 bg-white border border-[var(--border-subtle)] rounded-2xl shadow-inner w-full">
             <canvas ref={canvasRef} className="max-w-full max-h-[300px] object-contain" />
           </div>

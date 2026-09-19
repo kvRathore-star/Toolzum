@@ -70,7 +70,7 @@ export default function ListConverter() {
         {detected && (
           <div className="text-[11px] text-[var(--text-secondary)] flex items-center gap-2">
             <span>Detected delimiter:</span>
-            <span className="font-mono font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">{DELIMITER_MAP[detected].label}</span>
+            <span className="font-mono font-bold text-[var(--accent)] bg-[var(--accent)]/10/20 px-2 py-0.5 rounded">{DELIMITER_MAP[detected].label}</span>
             <span className="text-[var(--text-muted)] ml-auto">{items.length} item{items.length !== 1 ? 's' : ''}</span>
           </div>
         )}
@@ -87,7 +87,7 @@ export default function ListConverter() {
           <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Convert to:</span>
           <div className="flex bg-[var(--bg-surface)] rounded-xl p-1 flex-wrap">
             {(Object.keys(DELIMITER_MAP) as Delimiter[]).map(d => (
-              <button key={d} onClick={() => setTargetDelimiter(d)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${targetDelimiter === d ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm' : 'text-[var(--text-secondary)]'}`}>
+              <button key={d} onClick={() => setTargetDelimiter(d)} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${targetDelimiter === d ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)]'}`}>
                 {DELIMITER_MAP[d].label.replace(' (', '\n(')}
               </button>
             ))}

@@ -343,14 +343,14 @@ export default function IcsCsvConverter() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>No server uploads — </strong>Convert calendar events between iCalendar (ICS) and CSV formats. Migrate events between Google Calendar, Outlook, Apple Calendar, and any spreadsheet.
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('ics-to-csv')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'ics-to-csv' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
             ICS → CSV
           </button>
-          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
+          <button onClick={() => setDirection('csv-to-ics')} className={`flex-1 py-3 px-4 rounded-xl text-sm font-bold transition-all border ${direction === 'csv-to-ics' ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
             CSV → ICS
           </button>
         </div>
@@ -365,9 +365,9 @@ export default function IcsCsvConverter() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
           <p className="text-[var(--text-secondary)] text-sm">{events.length} event(s) • {(file.size / 1024).toFixed(0)} KB • {direction === 'ics-to-csv' ? 'ICS → CSV' : 'CSV → ICS'}</p>
         </div>
         <button onClick={() => { setFile(null); setOutputUrl(null); setEvents([]); setPreview([]); setError(null); }} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">Change File</button>
@@ -378,7 +378,7 @@ export default function IcsCsvConverter() {
           <h4 className="text-[var(--text-primary)] font-medium">Fields to Export</h4>
           <div className="flex flex-wrap gap-2">
             {ICS_FIELDS.map(f => (
-              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}>
+              <button key={f.key} onClick={() => toggleField(f.key)} className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all border ${selectedFields.includes(f.key) ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}>
                 {f.label}
               </button>
             ))}
@@ -387,7 +387,7 @@ export default function IcsCsvConverter() {
             <label className="block text-sm text-[var(--text-secondary)] mb-2">Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>
@@ -401,7 +401,7 @@ export default function IcsCsvConverter() {
             {csvHeaders.map(h => (
               <div key={h} className="flex items-center gap-2">
                 <span className="text-sm text-[var(--text-secondary)] min-w-[100px]">{h}:</span>
-                <select aria-label="Date Format" value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-zinc-900 dark:text-zinc-100">
+                <select aria-label="Date Format" value={columnMapping[h] || ''} onChange={e => setColumnMapping(prev => ({ ...prev, [h]: e.target.value }))} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-1.5 text-sm text-[var(--text-primary)]">
                   <option value="">— Skip —</option>
                   {CSV_HEADERS.map(c => (
                     <option key={c} value={c}>{c}</option>
@@ -414,7 +414,7 @@ export default function IcsCsvConverter() {
             <label className="block text-sm text-[var(--text-secondary)] mb-2">Input Date Format</label>
             <div className="flex gap-2">
               {([['iso', 'ISO 8601'], ['mm-dd-yyyy', 'MM/DD/YYYY'], ['dd-mm-yyyy', 'DD/MM/YYYY'], ['human', 'Human Readable']] as [DateFormat, string][]).map(([k, lbl]) => (
-                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-blue-600 border-blue-500 text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
+                <button key={k} onClick={() => setDateFormat(k)} className={`py-1.5 px-3 rounded-lg text-xs font-bold border ${dateFormat === k ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)]'}`}>{lbl}</button>
               ))}
             </div>
           </div>

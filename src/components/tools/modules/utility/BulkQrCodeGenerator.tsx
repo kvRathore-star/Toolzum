@@ -91,7 +91,7 @@ export default function BulkQrCodeGenerator() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-indigo-500/10 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
               <Download className="w-5 h-5 text-[var(--accent)] dark:text-[var(--accent)]" />
             </div>
             <div>
@@ -120,7 +120,7 @@ export default function BulkQrCodeGenerator() {
               <label htmlFor="lbl-bulkqrcodegenerator-text-or-url" className="text-sm font-bold text-[var(--text-primary)]">Text or URL</label>
               <input id="lbl-bulkqrcodegenerator-text-or-url" aria-label="Text or URL" type="text" value={text} onChange={e => setText(e.target.value)}
                 placeholder="https://example.com"
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500" />
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
             </div>
             <button onClick={generateSingle} disabled={isProcessing || remaining === 0}
               className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
@@ -130,7 +130,7 @@ export default function BulkQrCodeGenerator() {
               <div className="flex flex-col items-center gap-3 pt-4 border-t border-[var(--border-subtle)]">
                 <Image unoptimized={true} loading="lazy" src={singleQrUrl} alt="QR Code" className="w-48 h-48 border border-[var(--border-subtle)] rounded-xl" />
                 <button onClick={() => downloadOrShare(singleQrUrl, 'qrcode.png')}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold rounded-xl text-xs hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors">
+                  className="flex items-center gap-1.5 px-4 py-2 bg-[var(--accent-ink)] text-white font-semibold rounded-xl text-xs hover:opacity-90 transition-colors">
                   <Download className="w-3.5 h-3.5" /> Download PNG
                 </button>
               </div>
@@ -138,9 +138,9 @@ export default function BulkQrCodeGenerator() {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
+            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-8 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative text-center">
               <input aria-label="Upload CSV file" type="file" accept=".csv" onChange={handleCsvUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
-              <FileSpreadsheet className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-2" />
+              <FileSpreadsheet className="w-10 h-10 text-zinc-300 dark:text-[var(--text-secondary)] mx-auto mb-2" />
               <p className="text-sm font-medium text-[var(--text-secondary)]">Upload CSV (columns: <strong>value</strong>, optional <strong>label</strong>)</p>
               <p className="text-xs text-[var(--text-muted)] mt-1">Pro: up to {PRO_MAX} QR codes per batch</p>
             </div>
@@ -165,7 +165,7 @@ export default function BulkQrCodeGenerator() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Generate up to {PRO_MAX} QR codes per batch, CSV templates included. Standard black-on-white PNG output.</p>
           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>

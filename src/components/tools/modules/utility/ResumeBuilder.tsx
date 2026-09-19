@@ -21,7 +21,7 @@ export default function ResumeBuilder() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500 max-w-7xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm no-print">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm no-print">
         <strong>Client-Side Resume Builder:</strong> Fill out your details and print/save to PDF. No data is saved on our servers.
       </div>
 
@@ -43,7 +43,7 @@ export default function ResumeBuilder() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Experience</h3>
-              <button onClick={addExperience} className="text-sm text-blue-700 dark:text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
+              <button onClick={addExperience} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
             </div>
             {experience.map((exp, i) => (
               <div key={i} className="space-y-2 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
@@ -60,7 +60,7 @@ export default function ResumeBuilder() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-xl font-bold text-[var(--text-primary)]">Education</h3>
-              <button onClick={addEducation} className="text-sm text-blue-700 dark:text-blue-400 hover:text-blue-300 px-3 py-1 bg-blue-400/10 rounded-lg">+ Add</button>
+              <button onClick={addEducation} className="text-sm text-[var(--accent)] hover:text-blue-300 px-3 py-1 bg-[var(--accent)]/10 rounded-lg">+ Add</button>
             </div>
             {education.map((edu, i) => (
               <div key={i} className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-[var(--border-subtle)] rounded-xl bg-[var(--bg-overlay)]/50 dark:bg-black/50">
@@ -76,7 +76,7 @@ export default function ResumeBuilder() {
           )}
           <button 
             onClick={handlePrint}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95"
             aria-label="Print resume or save as PDF via the print dialog"
           >
             Print / Save as PDF (via print dialog)
@@ -86,8 +86,8 @@ export default function ResumeBuilder() {
         {/* Live Preview (Right) */}
         <div className="bg-white text-black p-10 min-h-[1056px] w-full max-w-[816px] shadow-2xl mx-auto printable-area print:shadow-none print:m-0 print:p-0">
           <div className="border-b-2 border-[var(--border-subtle)] pb-6 mb-6">
-            <h2 className="text-4xl font-black text-zinc-900 mb-1">{personal.name || 'Your Name'}</h2>
-            <h2 className="text-xl text-zinc-600 font-medium mb-3">{personal.title || 'Professional Title'}</h2>
+            <h2 className="text-4xl font-black text-[var(--text-primary)] mb-1">{personal.name || 'Your Name'}</h2>
+            <h2 className="text-xl text-[var(--text-secondary)] font-medium mb-3">{personal.title || 'Professional Title'}</h2>
             <div className="text-sm text-[var(--text-secondary)] flex gap-4">
               <span>{personal.email || 'email@example.com'}</span>
               <span>•</span>
@@ -96,34 +96,34 @@ export default function ResumeBuilder() {
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-bold text-zinc-900 uppercase tracking-wider mb-2 border-b border-zinc-300 pb-1">Summary</h3>
-            <p className="text-zinc-700 text-sm leading-relaxed">{personal.summary || 'A brief professional summary highlighting your key skills and achievements.'}</p>
+            <h3 className="text-lg font-bold text-[var(--text-primary)] uppercase tracking-wider mb-2 border-b border-[var(--border-subtle)] pb-1">Summary</h3>
+            <p className="text-[var(--text-primary)] text-sm leading-relaxed">{personal.summary || 'A brief professional summary highlighting your key skills and achievements.'}</p>
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-bold text-zinc-900 uppercase tracking-wider mb-4 border-b border-zinc-300 pb-1">Experience</h3>
+            <h3 className="text-lg font-bold text-[var(--text-primary)] uppercase tracking-wider mb-4 border-b border-[var(--border-subtle)] pb-1">Experience</h3>
             <div className="space-y-6">
               {experience.map((exp, i) => (
                 <div key={i}>
                   <div className="flex justify-between items-baseline mb-1">
-                    <h4 className="font-bold text-zinc-900">{exp.role || 'Job Title'}</h4>
+                    <h4 className="font-bold text-[var(--text-primary)]">{exp.role || 'Job Title'}</h4>
                     <span className="text-sm text-[var(--text-secondary)] font-medium">{exp.duration || '2020 - Present'}</span>
                   </div>
-                  <div className="text-sm text-blue-600 font-medium mb-2">{exp.company || 'Company Name'}</div>
-                  <p className="text-zinc-700 text-sm leading-relaxed whitespace-pre-wrap">{exp.description || '• Describe your responsibilities and achievements\n• Use bullet points for readability'}</p>
+                  <div className="text-sm text-[var(--accent)] font-medium mb-2">{exp.company || 'Company Name'}</div>
+                  <p className="text-[var(--text-primary)] text-sm leading-relaxed whitespace-pre-wrap">{exp.description || '• Describe your responsibilities and achievements\n• Use bullet points for readability'}</p>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-zinc-900 uppercase tracking-wider mb-4 border-b border-zinc-300 pb-1">Education</h3>
+            <h3 className="text-lg font-bold text-[var(--text-primary)] uppercase tracking-wider mb-4 border-b border-[var(--border-subtle)] pb-1">Education</h3>
             <div className="space-y-4">
               {education.map((edu, i) => (
                 <div key={i} className="flex justify-between items-baseline">
                   <div>
-                    <h4 className="font-bold text-zinc-900">{edu.degree || 'Degree / Certificate'}</h4>
-                    <div className="text-sm text-zinc-600">{edu.institution || 'University / Institution'}</div>
+                    <h4 className="font-bold text-[var(--text-primary)]">{edu.degree || 'Degree / Certificate'}</h4>
+                    <div className="text-sm text-[var(--text-secondary)]">{edu.institution || 'University / Institution'}</div>
                   </div>
                   <span className="text-sm text-[var(--text-secondary)]">{edu.year || '2020'}</span>
                 </div>

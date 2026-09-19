@@ -81,7 +81,7 @@ export default function BenchmarkBuilder() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <div className="flex flex-wrap gap-2">
           {(Object.keys(BENCH_LABELS) as BenchType[]).map(t => (
-            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-[var(--bg-elevated)] text-blue-600 dark:text-blue-400 shadow-sm border border-blue-200 dark:border-blue-800' : 'text-[var(--text-secondary)] border border-transparent'}`}>
+            <button key={t} onClick={() => setBenchType(t)} disabled={running} className={`px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${benchType === t ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm border border-blue-200 dark:border-blue-800' : 'text-[var(--text-secondary)] border border-transparent'}`}>
               {BENCH_LABELS[t]}
             </button>
           ))}
@@ -102,7 +102,7 @@ export default function BenchmarkBuilder() {
             <div className="flex justify-between items-center">
               <div>
                 <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase block">Score</span>
-                <span className="text-3xl font-bold font-mono text-blue-600 dark:text-blue-400">{currentScore.toLocaleString()}</span>
+                <span className="text-3xl font-bold font-mono text-[var(--accent)]">{currentScore.toLocaleString()}</span>
                 <span className="text-xs text-[var(--text-muted)] ml-1">ops/s</span>
               </div>
               <div className="text-right">
@@ -113,7 +113,7 @@ export default function BenchmarkBuilder() {
                 <span className="text-xs text-[var(--text-muted)] ml-1">(faster than ~{ranking.pct}%)</span>
               </div>
             </div>
-            <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-3 overflow-hidden">
+            <div className="w-full bg-[var(--bg-overlay)] rounded-full h-3 overflow-hidden">
               <div className={`h-full rounded-full transition-all duration-500 ${ranking.color}`} style={{ width: `${ranking.pct}%` }} />
             </div>
             <div className="flex gap-2">

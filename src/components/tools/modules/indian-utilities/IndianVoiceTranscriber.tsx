@@ -187,7 +187,7 @@ export default function IndianVoiceTranscriber() {
                     className={`px-3 py-2 rounded-lg border text-xs text-left transition-all duration-200 ${
                       selectedLanguage === l.code
                         ? 'text-sky-600 dark:text-sky-400'
-                        : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500'
+                        : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                     }`}
                     style={selectedLanguage === l.code ? { borderColor: '#0284c7', backgroundColor: '#0284c710', color: '#0284c7' } : {}}>
                     <span className="text-sm mr-1">{l.flag}</span>
@@ -203,7 +203,7 @@ export default function IndianVoiceTranscriber() {
                 className={`flex-1 py-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
                   isRecording
                     ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse shadow-lg shadow-red-500/25'
-                    : 'bg-gradient-to-r from-sky-500 to-sky-700 hover:from-sky-600 hover:to-sky-800 text-white shadow-lg shadow-sky-500/25'
+                    : 'bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] text-white shadow-lg shadow-[var(--accent)]/25'
                 }`}>
                 {isRecording ? <Square className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
                 {isRecording ? 'Stop' : 'Record'}
@@ -212,12 +212,12 @@ export default function IndianVoiceTranscriber() {
 
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={showTimestamps} onChange={e => setShowTimestamps(e.target.checked)}
-                className="rounded border-zinc-300" style={{ accentColor: '#0284c7' }} />
+                className="rounded border-[var(--border-subtle)]" style={{ accentColor: '#0284c7' }} />
               <span className="text-[11px] text-[var(--text-secondary)]">Include timestamps (SRT format)</span>
             </label>
 
             <button onClick={transcribe} disabled={isTranscribing || !audioFile}
-              className="w-full py-3.5 bg-gradient-to-r from-sky-500 to-sky-700 hover:from-sky-600 hover:to-sky-800 disabled:from-zinc-300 disabled:to-zinc-300 dark:disabled:from-zinc-700 dark:disabled:to-zinc-700 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] shadow-lg shadow-sky-500/25">
+              className="w-full py-3.5 bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:from-[var(--accent-ink)] hover:to-[var(--accent-ink)] disabled:from-zinc-300 disabled:to-zinc-300 dark:disabled:from-zinc-700 dark:disabled:to-zinc-700 disabled:cursor-not-allowed text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] shadow-lg shadow-[var(--accent)]/25">
               {isTranscribing ? (
                 <><Loader2 className="w-4 h-4 animate-spin" /> Transcribing...</>
               ) : (
@@ -242,7 +242,7 @@ export default function IndianVoiceTranscriber() {
               onKeyDown={(e) => buttonKeyDown(e, () => fileInputRef.current?.click())}
               onKeyUp={(e) => buttonKeyUp(e, () => fileInputRef.current?.click())}>
               <Upload className="w-10 h-10 mx-auto mb-2" style={{ color: audioFile ? '#0284c7' : 'var(--text-muted)' }} />
-              <p className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">
+              <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
               <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)</p>

@@ -212,26 +212,26 @@ export default function AadhaarValidator() {
             {digits.length > 0 && (
               <button
                 onClick={handleReset}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
                 aria-label="Clear Aadhaar number"
               >
-                <RefreshCw className="w-4 h-4 text-zinc-400" />
+                <RefreshCw className="w-4 h-4 text-[var(--text-muted)]" />
               </button>
             )}
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium uppercase tracking-wider">Generate:</span>
+              <span className="text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] font-medium uppercase tracking-wider">Generate:</span>
               <button
                 onClick={handleGenerate}
-                className="text-[10px] font-mono font-bold px-2.5 py-1.5 rounded-md border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer flex items-center gap-1"
+                className="text-[10px] font-mono font-bold px-2.5 py-1.5 rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer flex items-center gap-1"
               >
                 <Zap className="w-3 h-3" />
                 Random Valid
               </button>
             </div>
             {digits.length > 0 && (
-              <span className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500">
+              <span className="text-[10px] font-mono text-[var(--text-muted)] dark:text-[var(--text-muted)]">
                 {digits.length}/12
               </span>
             )}
@@ -274,7 +274,7 @@ export default function AadhaarValidator() {
                   }}
                 >
                   {step.status === 'idle' ? (
-                    <div className="w-2 h-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+                    <div className="w-2 h-2 rounded-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]" />
                   ) : step.status === 'pass' ? (
                     <CheckCircle className="w-4 h-4 text-white" />
                   ) : (
@@ -292,10 +292,10 @@ export default function AadhaarValidator() {
                       {step.label}
                     </span>
                     {step.detail && (
-                      <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono ml-2 shrink-0">{step.detail}</span>
+                      <span className="text-[10px] text-[var(--text-muted)] dark:text-[var(--text-muted)] font-mono ml-2 shrink-0">{step.detail}</span>
                     )}
                   </div>
-                  <div className="mt-1 h-1 rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
+                  <div className="mt-1 h-1 rounded-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all duration-700 ease-out"
                       style={{
@@ -355,37 +355,37 @@ export default function AadhaarValidator() {
                       SECURITY CARD
                     </div>
                   </div>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                  <p className="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-0.5">
                     {isValid ? 'Verhoeff checksum & format validated successfully' : 'Validation checks failed'}
                   </p>
                 </div>
               </div>
 
-              <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 mt-4 bg-[var(--bg-overlay)] rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] relative z-10">
-                <span className="text-zinc-400" title="First digit (cannot be 0/1)">{rawDigits[0]}</span>
-                <span className="text-zinc-400" title="Digits 2-4">{rawDigits.slice(1, 4)}</span>
-                <span className="text-zinc-400 opacity-30">|</span>
+              <div className="flex justify-center font-mono text-2xl font-black gap-1 p-4 mt-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] relative z-10">
+                <span className="text-[var(--text-muted)]" title="First digit (cannot be 0/1)">{rawDigits[0]}</span>
+                <span className="text-[var(--text-muted)]" title="Digits 2-4">{rawDigits.slice(1, 4)}</span>
+                <span className="text-[var(--text-muted)] opacity-30">|</span>
                 <span className="text-[#f97316]" title="Digits 5-8">{rawDigits.slice(4, 8)}</span>
-                <span className="text-zinc-400 opacity-30">|</span>
+                <span className="text-[var(--text-muted)] opacity-30">|</span>
                 <span className="text-[#22c55e]" title="Last 4 digits">{rawDigits.slice(8)}</span>
               </div>
 
               <div className="grid grid-cols-3 gap-2 mt-4 relative z-10">
-                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] text-center">
-                  <Fingerprint className="w-3.5 h-3.5 mx-auto mb-1 text-zinc-400" />
-                  <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Issuer</div>
-                  <div className="text-[11px] font-bold text-zinc-800 dark:text-zinc-200 mt-0.5">UIDAI</div>
+                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-center">
+                  <Fingerprint className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--text-muted)]" />
+                  <div className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Issuer</div>
+                  <div className="text-[11px] font-bold text-[var(--text-primary)] mt-0.5">UIDAI</div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] text-center">
-                  <FileDigit className="w-3.5 h-3.5 mx-auto mb-1 text-zinc-400" />
-                  <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Checksum</div>
+                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-center">
+                  <FileDigit className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--text-muted)]" />
+                  <div className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Checksum</div>
                   <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[1]!.status === 'pass' ? '#22c55e' : '#ef4444' }}>
                     {steps[1]!.status === 'pass' ? 'Verified' : 'Failed'}
                   </div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] text-center">
-                  <Hash className="w-3.5 h-3.5 mx-auto mb-1 text-zinc-400" />
-                  <div className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider">Pattern</div>
+                <div className="p-2.5 rounded-lg bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-center">
+                  <Hash className="w-3.5 h-3.5 mx-auto mb-1 text-[var(--text-muted)]" />
+                  <div className="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Pattern</div>
                   <div className="text-[11px] font-bold mt-0.5" style={{ color: steps[2]!.status === 'pass' ? '#22c55e' : '#ef4444' }}>
                     {suspicious.suspicious ? `${suspicious.reason}` : 'Clean'}
                   </div>
@@ -396,14 +396,14 @@ export default function AadhaarValidator() {
             <div className="flex gap-3">
               <button
                 onClick={handleCopyMasked}
-                className="flex-1 py-3 bg-[var(--bg-surface)] hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="flex-1 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <Copy className="w-4 h-4" />
                 Copy Masked
               </button>
               <button
                 onClick={handleGenerate}
-                className="flex-1 py-3 bg-[var(--bg-surface)] hover:bg-zinc-100 dark:hover:bg-zinc-800 text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
+                className="flex-1 py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] font-bold rounded-xl transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
               >
                 <Zap className="w-4 h-4" />
                 Generate Another
@@ -415,7 +415,7 @@ export default function AadhaarValidator() {
                 <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <div>
                   <p className="text-xs font-bold text-amber-600 dark:text-amber-400">Suspicious Pattern Detected</p>
-                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
+                  <p className="text-[11px] text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-0.5">
                     This number matches known fake patterns: {suspicious.reason}. It may be a generated or test Aadhaar.
                   </p>
                 </div>
@@ -426,9 +426,9 @@ export default function AadhaarValidator() {
 
         {!validated && !isAnimating && (
           <div className="py-8 text-center">
-            <Shield className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-zinc-700" />
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">Enter an Aadhaar number to validate</p>
-            <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
+            <Shield className="w-10 h-10 mx-auto mb-2 text-zinc-300 dark:text-[var(--text-primary)]" />
+            <p className="text-sm text-[var(--text-muted)] dark:text-[var(--text-muted)] font-medium">Enter an Aadhaar number to validate</p>
+            <p className="text-xs text-[var(--text-muted)] dark:text-[var(--text-muted)] mt-1">
               The Verhoeff checksum will be computed locally
             </p>
           </div>

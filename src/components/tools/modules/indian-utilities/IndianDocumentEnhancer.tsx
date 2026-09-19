@@ -243,7 +243,7 @@ export default function IndianDocumentEnhancer() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileImage className="w-4 h-4" style={{ color: '#475569' }} />
-                <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)]">{fileName}</span>
+                <span className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{fileName}</span>
                 {originalSize > 0 && (
                   <span className="text-[10px] text-[var(--text-muted)] bg-[var(--bg-overlay)] px-2 py-0.5 rounded-full border border-[var(--border-subtle)]">
                     {(originalSize / 1024).toFixed(0)} KB
@@ -252,11 +252,11 @@ export default function IndianDocumentEnhancer() {
               </div>
               <div className="flex gap-2">
                 <button onClick={() => { setImage(null); setFileName(''); }}
-                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
+                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
                   <Upload className="w-3 h-3" /> New
                 </button>
                 <button onClick={resetAdjustments}
-                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
+                  className="px-3 py-1.5 bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-xs font-semibold hover:bg-[var(--bg-surface)] transition-colors flex items-center gap-1">
                   <RotateCcw className="w-3 h-3" /> Reset
                 </button>
               </div>
@@ -289,12 +289,12 @@ export default function IndianDocumentEnhancer() {
                     <label className="flex items-center justify-between cursor-pointer">
                       <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sun className="w-3 h-3" /> Shadow Removal</span>
                       <input type="checkbox" checked={shadowRemoval} onChange={e => setShadowRemoval(e.target.checked)}
-                        className="rounded border-zinc-300" style={{ accentColor: '#475569' }} />
+                        className="rounded border-[var(--border-subtle)]" style={{ accentColor: '#475569' }} />
                     </label>
                     <label className="flex items-center justify-between cursor-pointer">
                       <span className="text-[10px] text-[var(--text-secondary)] flex items-center gap-1.5"><Sparkles className="w-3 h-3" /> Auto Sharpen</span>
                       <input type="checkbox" checked={autoSharpen} onChange={e => setAutoSharpen(e.target.checked)}
-                        className="rounded border-zinc-300" style={{ accentColor: '#475569' }} />
+                        className="rounded border-[var(--border-subtle)]" style={{ accentColor: '#475569' }} />
                     </label>
                   </div>
                 </div>
@@ -307,7 +307,7 @@ export default function IndianDocumentEnhancer() {
                         className={`text-left px-2.5 py-2 rounded-lg border text-[10px] transition-colors ${
                           selectedPreset?.label === p.label
                             ? 'text-slate-600 dark:text-slate-400'
-                            : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-400 dark:hover:border-zinc-500'
+                            : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                         }`}
                         style={selectedPreset?.label === p.label ? { borderColor: '#475569', backgroundColor: '#47556910', color: '#475569' } : {}}>
                         <p className="font-semibold">{p.label}</p>

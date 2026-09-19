@@ -415,12 +415,12 @@ export default function VehicleRegChecker() {
           </div>
 
           <div className="flex flex-wrap gap-1.5 pt-1">
-            <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-wider mr-0.5">Try:</span>
+            <span className="text-[10px] text-[var(--text-muted)] font-medium uppercase tracking-wider mr-0.5">Try:</span>
             {EXAMPLE_PLATES.map((ex) => (
               <button
                 key={ex}
                 onClick={() => { setInput(ex); setResult(null); }}
-                className="text-[10px] font-mono font-bold px-2 py-1 rounded-md border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="text-[10px] font-mono font-bold px-2 py-1 rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer"
               >
                 {ex.slice(0, 2)} {ex.slice(2, 4)} {ex.slice(4, 6)} {ex.slice(6)}
               </button>
@@ -488,7 +488,7 @@ export default function VehicleRegChecker() {
                       <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider flex items-center gap-1">
                         <MapPin className="w-3 h-3" /> State
                       </span>
-                      <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200 block">
+                      <span className="font-bold text-sm text-[var(--text-primary)] block">
                         {result.data.stateName}
                       </span>
                       <span
@@ -508,7 +508,7 @@ export default function VehicleRegChecker() {
                       </span>
                       {result.data.cityName ? (
                         <>
-                          <span className="font-bold text-sm text-zinc-800 dark:text-zinc-200 block">
+                          <span className="font-bold text-sm text-[var(--text-primary)] block">
                             {result.data.cityName}
                           </span>
                           <span className="text-[10px] text-[var(--text-muted)] font-mono">
@@ -528,7 +528,7 @@ export default function VehicleRegChecker() {
                     </div>
                     <div className="p-3.5 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] space-y-1">
                       <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">Series</span>
-                      <span className="font-bold text-xl font-mono tracking-wider text-zinc-800 dark:text-zinc-200 block">
+                      <span className="font-bold text-xl font-mono tracking-wider text-[var(--text-primary)] block">
                         {result.data.series}
                       </span>
                       <span className="text-[10px] text-[var(--text-muted)]">
@@ -537,7 +537,7 @@ export default function VehicleRegChecker() {
                     </div>
                     <div className="p-3.5 rounded-xl bg-[var(--bg-overlay)] border border-[var(--border-subtle)] space-y-1">
                       <span className="text-[10px] text-[var(--text-secondary)] font-bold uppercase tracking-wider">Serial Number</span>
-                      <span className="font-bold text-xl font-mono tracking-wider text-zinc-800 dark:text-zinc-200 block">
+                      <span className="font-bold text-xl font-mono tracking-wider text-[var(--text-primary)] block">
                         {result.data.serial}
                       </span>
                       <span className="text-[10px] text-[var(--text-muted)]">
@@ -590,7 +590,7 @@ export default function VehicleRegChecker() {
                   </div>
 
                   <div className="p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] text-[10px] text-[var(--text-secondary)] space-y-1.5">
-                    <div className="flex items-center gap-1 font-bold text-zinc-800 dark:text-zinc-200">
+                    <div className="flex items-center gap-1 font-bold text-[var(--text-primary)]">
                       <Info className="w-3.5 h-3.5" style={{ color: ACCENT }} />
                       About this tool
                     </div>

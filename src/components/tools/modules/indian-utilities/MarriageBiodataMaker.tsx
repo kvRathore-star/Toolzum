@@ -62,7 +62,7 @@ function BiodataPreview({ data, photoUrl }: { data: BiodataForm; photoUrl: strin
   const label = (l: string) => <span className="text-[10px] font-bold text-rose-700 dark:text-rose-400 uppercase tracking-wider block mb-0.5">{l}</span>;
 
   return (
-    <div className="bg-white text-zinc-900 rounded-2xl border-2 border-rose-200 shadow-sm overflow-hidden">
+    <div className="bg-white text-[var(--text-primary)] rounded-2xl border-2 border-rose-200 shadow-sm overflow-hidden">
       <div className="bg-gradient-to-r from-rose-600 to-pink-600 text-white text-center py-6 px-4 relative">
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='0.3' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E")`
@@ -80,8 +80,8 @@ function BiodataPreview({ data, photoUrl }: { data: BiodataForm; photoUrl: strin
               </div>
             </div>
           )}
-          <h2 className="text-xl font-bold text-zinc-800">{data.fullName || 'Your Name'}</h2>
-          <p className="text-zinc-500">{data.occupation || ''}{data.occupation && data.city ? ', ' : ''}{data.city || ''}</p>
+          <h2 className="text-xl font-bold text-[var(--text-primary)]">{data.fullName || 'Your Name'}</h2>
+          <p className="text-[var(--text-muted)]">{data.occupation || ''}{data.occupation && data.city ? ', ' : ''}{data.city || ''}</p>
         </div>
 
         <div>
@@ -128,14 +128,14 @@ function BiodataPreview({ data, photoUrl }: { data: BiodataForm; photoUrl: strin
         {hasAny(data.aboutSelf) && (
           <div>
             <h3 className="text-sm font-bold text-rose-600 mb-2">About Self</h3>
-            <p className="text-zinc-700 leading-relaxed">{data.aboutSelf}</p>
+            <p className="text-[var(--text-primary)] leading-relaxed">{data.aboutSelf}</p>
           </div>
         )}
 
         {hasAny(data.expectations) && (
           <div>
             <h3 className="text-sm font-bold text-rose-600 mb-2">Partner Expectations</h3>
-            <p className="text-zinc-700 leading-relaxed">{data.expectations}</p>
+            <p className="text-[var(--text-primary)] leading-relaxed">{data.expectations}</p>
           </div>
         )}
 
@@ -145,12 +145,12 @@ function BiodataPreview({ data, photoUrl }: { data: BiodataForm; photoUrl: strin
             <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
               {data.contactName && <div>{label('Name')}<span>{data.contactName}</span></div>}
               {data.contactRelation && <div>{label('Relation')}<span>{data.contactRelation}</span></div>}
-              {data.contactPhone && <div className="col-span-2">{label('Phone')}<span className="text-blue-600">{data.contactPhone}</span></div>}
+              {data.contactPhone && <div className="col-span-2">{label('Phone')}<span className="text-[var(--accent)]">{data.contactPhone}</span></div>}
             </div>
           </div>
         )}
 
-        <div className="text-center pt-3 border-t border-rose-100 text-[9px] text-zinc-400">
+        <div className="text-center pt-3 border-t border-rose-100 text-[9px] text-[var(--text-muted)]">
           Generated via Toolzum &bull; Not a legal document
         </div>
       </div>
@@ -384,14 +384,14 @@ export default function MarriageBiodataMaker() {
         <div className="flex items-center gap-1 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-1.5 shadow-sm">
           {STEPS.map((s, i) => (
             <React.Fragment key={s.id}>
-              {i > 0 && <div className={`w-6 h-0.5 rounded-full ${step > i ? 'bg-rose-500' : 'bg-zinc-300 dark:bg-zinc-600'}`} />}
+              {i > 0 && <div className={`w-6 h-0.5 rounded-full ${step > i ? 'bg-rose-500' : 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]'}`} />}
               <button onClick={() => { if (step > i || canProceed()) setStep(s.id); }}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all ${
                   step === s.id
                     ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/20'
                     : step > s.id
                     ? 'text-rose-600 dark:text-rose-400'
-                    : 'text-zinc-400 dark:text-zinc-500'
+                    : 'text-[var(--text-muted)]'
                 }`}>
                 {step > s.id ? <Check className="w-3 h-3" /> : <s.icon className="w-3 h-3" />}
                 <span className="hidden sm:inline">{s.label}</span>
@@ -407,7 +407,7 @@ export default function MarriageBiodataMaker() {
 
           <div className="flex justify-between mt-6 pt-4 border-t border-[var(--border-subtle)]">
             <button onClick={() => setStep(Math.max(1, step - 1))} disabled={step === 1}
-              className="flex items-center gap-1.5 px-4 py-2.5 bg-zinc-200 dark:bg-[var(--bg-surface)] hover:bg-zinc-300 dark:hover:bg-[var(--bg-elevated)] disabled:opacity-40 text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all active:scale-95">
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] disabled:opacity-40 text-[var(--text-primary)] font-semibold rounded-xl text-xs transition-all active:scale-95">
               <ChevronLeft className="w-4 h-4" /> Previous
             </button>
             {!isLastStep ? (
@@ -432,7 +432,7 @@ export default function MarriageBiodataMaker() {
                 <span className="text-xs font-bold text-[var(--text-primary)]">Live Preview</span>
               </div>
             </div>
-            <div className="p-4 bg-zinc-50 dark:bg-zinc-900/30">
+            <div className="p-4 bg-[var(--bg-overlay)]">
               <div ref={previewRef}>
                 <BiodataPreview data={form} photoUrl={photoUrl} />
               </div>

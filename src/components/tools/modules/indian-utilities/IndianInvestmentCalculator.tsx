@@ -355,8 +355,8 @@ function EpfTab() {
         <StatCard label="Total Corpus" value={<><IndianRupee className="w-3.5 h-3.5 inline -ml-0.5" /><AnimatedNumber value={totalCorpus} /></>} />
       </div>
 
-      <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800/30 rounded-xl px-4 py-3">
-        <p className="text-[10px] text-blue-600 dark:text-blue-400 font-medium">
+      <div className="bg-blue-50 dark:bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl px-4 py-3">
+        <p className="text-[10px] text-[var(--accent)] font-medium">
           <Building2 className="w-3 h-3 inline mr-1" />EPS Contribution: <strong>{formatINR(totalEps)}</strong> (employer share @ 8.33% up to ₹15,000/mo basic)
         </p>
       </div>
@@ -420,7 +420,7 @@ export default function IndianInvestmentCalculator() {
         {mode === 'epf' && <EpfTab />}
       </div>
 
-      <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+      <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
         <p className="text-[10px] text-[var(--accent)]">
           <strong>Pro:</strong> Compare all three investment options side-by-side, download detailed PDF reports, set goal-based targets with timeline tracking, auto-rebalance suggestions, tax impact analysis, and export to Excel for financial planning.
         </p>

@@ -45,7 +45,7 @@ export default function LineSorter() {
           { id: 'shuffle', label: 'Shuffle' },
           { id: 'dedupe', label: 'Remove Duplicates' },
         ].map(b => (
-          <button key={b.id} onClick={() => process(b.id as Mode)} className="px-3 py-1.5 text-xs font-semibold bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-xl transition-colors">{b.label}</button>
+          <button key={b.id} onClick={() => process(b.id as Mode)} className="px-3 py-1.5 text-xs font-semibold bg-[var(--bg-surface)] text-[var(--text-primary)] hover:bg-[var(--accent)]/10 rounded-xl transition-colors">{b.label}</button>
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -54,8 +54,8 @@ export default function LineSorter() {
           <textarea value={output} readOnly aria-label="Sorted lines" placeholder="Result..." className="w-full h-[300px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-2xl p-5 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
           {output && (
             <div className="absolute top-3 right-3 flex gap-1">
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
-              <button onClick={handleDownload} aria-label="Download sorted lines" className="text-[10px] text-[var(--text-muted)] hover:text-zinc-600 dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
+              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
+              <button onClick={handleDownload} aria-label="Download sorted lines" className="text-[10px] text-[var(--text-muted)] hover:text-[var(--text-secondary)] dark:hover:text-zinc-300 bg-white dark:bg-[var(--bg-surface)] px-2 py-1 rounded border border-[var(--border-subtle)] transition-colors flex items-center gap-1"><Download className="w-3 h-3" /></button>
             </div>
           )}
         </div>

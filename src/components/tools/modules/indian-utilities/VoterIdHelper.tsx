@@ -173,7 +173,7 @@ export default function VoterIdHelper() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 print:bg-white print:text-black">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl print:border-none print:bg-transparent">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl print:border-none print:bg-transparent">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <ClipboardList className="w-6 h-6" style={{ color: '#ff6b00' }} />
           Voter ID Registration Helper (ECI)
@@ -192,7 +192,7 @@ export default function VoterIdHelper() {
             <motion.button key={key} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               onClick={() => { setSelectedForm(key); }}
               className={`relative p-4 rounded-2xl border-2 transition-all duration-200 text-left cursor-pointer ${
-                isActive ? 'border-transparent shadow-lg' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-zinc-400 dark:hover:border-zinc-600'
+                isActive ? 'border-transparent shadow-lg' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent)]'
               }`}
               style={isActive ? { borderColor: card.color, backgroundColor: card.color + '12', boxShadow: `0 4px 20px ${card.color}25` } : {}}>
               {isSaved && <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-bold"><Check className="w-2.5 h-2.5 inline" /> Saved</span>}
@@ -212,7 +212,7 @@ export default function VoterIdHelper() {
               {currentGuide.formNumber} Overview
             </span>
             <h3 className="text-xl font-bold text-[var(--text-primary)]">{currentGuide.title}</h3>
-            <p className="text-sm text-zinc-600 dark:text-[var(--text-muted)] leading-relaxed">
+            <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] leading-relaxed">
               {currentGuide.description}
             </p>
           </div>
@@ -236,16 +236,16 @@ export default function VoterIdHelper() {
               <h4 className="font-bold text-sm text-[var(--text-primary)] uppercase tracking-wider">Step-by-Step Process</h4>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
-              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1 transition-all">
-                <span className="font-bold text-zinc-800 dark:text-zinc-200 block">1. Form Submission</span>
+              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1 transition-all">
+                <span className="font-bold text-[var(--text-primary)] block">1. Form Submission</span>
                 <span>Fill and submit the online application on voters.eci.gov.in or Voter Helpline Mobile App.</span>
               </motion.div>
-              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1 transition-all">
-                <span className="font-bold text-zinc-800 dark:text-zinc-200 block">2. Field Verification</span>
+              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1 transition-all">
+                <span className="font-bold text-[var(--text-primary)] block">2. Field Verification</span>
                 <span>A Booth Level Officer (BLO) will visit your residence to verify the submitted details and address proof.</span>
               </motion.div>
-              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-1 transition-all">
-                <span className="font-bold text-zinc-800 dark:text-zinc-200 block">3. EPIC Card Dispatch</span>
+              <motion.div whileHover={{ y: -2 }} className="p-4 bg-[var(--bg-overlay)]/35 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-1 transition-all">
+                <span className="font-bold text-[var(--text-primary)] block">3. EPIC Card Dispatch</span>
                 <span>Once approved, you will receive an SMS and your physical EPIC Voter ID card will be posted to your address.</span>
               </motion.div>
             </div>
@@ -274,7 +274,7 @@ export default function VoterIdHelper() {
           </div>
         </div>
 
-        <div className="space-y-6 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-6 rounded-2xl">
+        <div className="space-y-6 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl">
           <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-2">
             <h4 className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
               <FileText className="w-4 h-4" style={{ color: '#ff6b00' }} />
@@ -302,7 +302,7 @@ export default function VoterIdHelper() {
                         className={`w-full text-left p-3 rounded-xl border text-xs font-medium transition-all duration-200 flex items-start gap-2.5 cursor-pointer ${
                           isChecked
                             ? 'text-[var(--accent)]'
-                            : 'bg-white dark:bg-black border-[var(--border-subtle)] text-zinc-700 dark:text-[var(--text-muted)] hover:border-zinc-300 dark:hover:border-zinc-700'
+                            : 'bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-primary)] hover:border-[var(--accent)]'
                         }`}
                         style={isChecked ? { backgroundColor: '#ff6b0010', borderColor: '#ff6b0030', color: '#ff6b00' } : {}}
                       >
@@ -322,7 +322,7 @@ export default function VoterIdHelper() {
                 <span>Progress</span>
                 <span className="font-bold" style={{ color: '#ff6b00' }}>{markedDocs}/{totalDocs}</span>
               </div>
-              <div className="w-full h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
+              <div className="w-full h-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)] rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${progressPct}%` }}
