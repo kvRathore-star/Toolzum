@@ -43,8 +43,7 @@ export default function BulkMarkdownToPdfHtml() {
   }, [markdown, theme, fileName]);
 
   const copyHtml = () => {
-    clipboardWrite(resultHtml);
-    toast.success('HTML copied!');
+    clipboardWrite(resultHtml).then(ok => { if (ok) toast.success('HTML copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadHtml = async () => {

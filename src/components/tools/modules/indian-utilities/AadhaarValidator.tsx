@@ -165,8 +165,7 @@ export default function AadhaarValidator() {
 
   const handleCopyMasked = useCallback(() => {
     const masked = maskLastFour(rawDigits);
-    clipboardWrite(masked);
-    toast.success('Masked copy: ' + masked);
+    clipboardWrite(masked).then(ok => { if (ok) toast.success('Masked copy: ' + masked); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [rawDigits]);
 
   const handleReset = useCallback(() => {

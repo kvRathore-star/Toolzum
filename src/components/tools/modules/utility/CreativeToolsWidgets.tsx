@@ -482,7 +482,7 @@ export function ASCIIArtGenerator() {
   const [asciiInput, setAsciiInput] = useState('HELLO');
   const [asciiStyle, setAsciiStyle] = useState('block');
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   const asciiResult = useMemo(() => makeAsciiArt(asciiInput, asciiStyle), [asciiInput, asciiStyle]);
 
@@ -640,7 +640,7 @@ export function ASCIIFontGenerator() {
   const [fontInput, setFontInput] = useState('HELLO');
   const [fontStyle, setFontStyle] = useState('standard');
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   const fontResult = useMemo(() => renderAsciiFont(fontInput, fontStyle), [fontInput, fontStyle]);
 

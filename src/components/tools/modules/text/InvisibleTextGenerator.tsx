@@ -16,8 +16,7 @@ export default function InvisibleTextGenerator() {
   };
 
   const handleCopy = () => {
-    clipboardWrite(output);
-    toast.success('Copied invisible text payload to clipboard!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied invisible text payload to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

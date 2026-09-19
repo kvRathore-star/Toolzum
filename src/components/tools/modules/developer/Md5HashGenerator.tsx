@@ -27,8 +27,7 @@ export default function Md5HashGenerator() {
   };
 
   const handleCopy = (txt: string, label: string) => {
-    clipboardWrite(txt);
-    toast.success(`${label} copied!`);
+    clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

@@ -64,7 +64,7 @@ export default function FakeDataGenerator() {
                 </div>
               ))}
               <div className="flex gap-1 mt-2">
-                <button onClick={() => { clipboardWrite(JSON.stringify(data, null, 2)); toast.success('Copied as JSON!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy as JSON"><Copy size={14} /></button>
+                <button onClick={() => { clipboardWrite(JSON.stringify(data, null, 2)).then(ok => { if (ok) toast.success('Copied as JSON!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy as JSON"><Copy size={14} /></button>
                 <button onClick={() => { const csv = toCSV(); if (!csv) return; const blob = new Blob([csv], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'fake-data.csv'; a.click(); URL.revokeObjectURL(url); toast.success('CSV downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download as CSV"><Download size={14} /></button>
               </div>
             </div>

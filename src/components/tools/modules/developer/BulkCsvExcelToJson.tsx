@@ -81,8 +81,7 @@ export default function BulkCsvExcelToJson() {
   }, [outputFormat, flattenNested]);
 
   const copyJson = () => {
-    clipboardWrite(resultJson);
-    toast.success('JSON copied!');
+    clipboardWrite(resultJson).then(ok => { if (ok) toast.success('JSON copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadJson = async () => {

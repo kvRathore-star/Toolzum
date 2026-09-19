@@ -31,8 +31,7 @@ export default function StringInspector() {
 
   const copyStats = () => {
     const text = stats.map(s => `${s.label}: ${s.value}`).join('\n');
-    clipboardWrite(text);
-    toast.success('Stats copied!');
+    clipboardWrite(text).then(ok => { if (ok) toast.success('Stats copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadReport = () => {

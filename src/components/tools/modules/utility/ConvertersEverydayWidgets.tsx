@@ -8,7 +8,7 @@ import { clipboardWrite } from "@/lib/clipboard";
 
 export function CopyBtn({ text, label }: { text: string; label?: string }) {
   return (
-    <button onClick={() => { clipboardWrite(text); toast.success(label ? `${label} copied!` : 'Copied!'); }}
+    <button onClick={() => { clipboardWrite(text).then(ok => { if (ok) toast.success(label ? `${label} copied!` : 'Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }}
       className="text-xs text-[var(--accent)] hover:underline font-medium flex items-center gap-1"><Clipboard className="w-3 h-3" /> Copy</button>
   );
 }

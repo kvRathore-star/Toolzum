@@ -38,7 +38,7 @@ export default function RandomPickerGenerator() {
           <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[160px]">
             <div className="text-center">
               <p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p>
-              <button onClick={() => { clipboardWrite(result.join(', ')); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy picked items"><Copy size={14} /></button>
+              <button onClick={() => { clipboardWrite(result.join(', ')).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy picked items"><Copy size={14} /></button>
             </div>
           </div>
         )}

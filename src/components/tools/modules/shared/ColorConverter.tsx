@@ -108,7 +108,7 @@ export default function ColorConverter({ slug }: { slug: string }) {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
+              <button onClick={() => { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
             </div>
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
           </div>

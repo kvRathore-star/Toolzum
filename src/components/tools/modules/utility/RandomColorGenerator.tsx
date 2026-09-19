@@ -71,7 +71,7 @@ export default function RandomColorGenerator() {
                 <div key={i} className="flex flex-col items-center gap-1">
                   <div className="w-14 h-14 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] shadow-sm" style={{ backgroundColor: c }} />
                   <span className="text-[10px] font-mono text-[var(--text-muted)]">{c}</span>
-                  <button onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+                  <button onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
                 </div>
               ))}
             </div>

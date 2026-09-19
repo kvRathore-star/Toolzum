@@ -238,7 +238,7 @@ export default function PincodeFinder() {
                     </div>
                     <div className="space-y-1 text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-t border-[var(--border-subtle)] pt-2">
                       <span className="block">Pincode: <strong className="font-mono" style={{ color: accentColor }}>{office.Pincode ?? '—'}</strong>
-                        <button aria-label={`Copy pincode ${office.Pincode ?? ''}`} onClick={() => { clipboardWrite(office.Pincode ?? ''); toast.success('Pincode copied!'); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
+                        <button aria-label={`Copy pincode ${office.Pincode ?? ''}`} onClick={() => { clipboardWrite(office.Pincode ?? '').then(ok => { if (ok) toast.success('Pincode copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="ml-1.5 inline-flex p-0.5 rounded hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         </button>
                       </span>

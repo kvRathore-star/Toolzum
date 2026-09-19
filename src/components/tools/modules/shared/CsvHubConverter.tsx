@@ -32,8 +32,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
   }, [input, mode]);
 
   const handleCopy = useCallback(() => {
-    clipboardWrite(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [output]);
 
   return (

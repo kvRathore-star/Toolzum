@@ -185,7 +185,7 @@ export default function GstinLookup() {
                     <button onClick={handleExport} className="flex items-center gap-1 px-3 py-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Download className="w-3 h-3" /> Export CSV
                     </button>
-                    <button onClick={() => { clipboardWrite(JSON.stringify(result, null, 2)); toast.success('Copied!'); }}
+                    <button onClick={() => { clipboardWrite(JSON.stringify(result, null, 2)).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }}
                       className="flex items-center gap-1 px-3 py-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] rounded-lg text-[10px] font-semibold hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors">
                       <Copy className="w-3 h-3" /> Copy JSON
                     </button>

@@ -135,8 +135,7 @@ export default function UpiValidator() {
 
   const copyToClipboard = async (text: string) => {
     try {
-      await clipboardWrite(text);
-      toast.success('UPI ID copied to clipboard');
+      if (await clipboardWrite(text)) toast.success('UPI ID copied to clipboard'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error('Failed to copy');
     }

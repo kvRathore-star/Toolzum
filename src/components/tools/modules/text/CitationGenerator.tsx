@@ -233,14 +233,12 @@ export default function CitationGenerator() {
 
   const handleCopy = (text: string) => {
     if (!text) return;
-    clipboardWrite(text);
-    toast.success('Citation copied!');
+    clipboardWrite(text).then(ok => { if (ok) toast.success('Citation copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleCopyAll = () => {
     const all = citations.map(c => `${c.format}:\n${c.text}`).join('\n\n---\n\n');
-    clipboardWrite(all);
-    toast.success('All citations copied!');
+    clipboardWrite(all).then(ok => { if (ok) toast.success('All citations copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = async () => {

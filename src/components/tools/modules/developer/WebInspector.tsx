@@ -180,7 +180,7 @@ export default function WebInspector() {
     setOgOutput(tags);
   }, [ogTitle, ogDesc, ogImage, ogUrl, ogSite, ogType]);
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   const TabBtn = ({ v, label, icon: Icon }: { v: Tab; label: string; icon: React.ElementType }) => (
     <button onClick={() => setTab(v)} className={`flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-bold rounded-lg transition-all ${tab === v ? 'bg-[var(--bg-elevated)] text-[var(--accent)] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>

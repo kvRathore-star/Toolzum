@@ -41,8 +41,7 @@ export default function TypographyPreview() {
   const cssOutput = `font-family: ${fontFamily};\nfont-size: ${fontSize}px;\nline-height: ${lineHeight};\nletter-spacing: ${letterSpacing}px;\nfont-weight: ${fontWeight};\ntext-align: ${textAlign};\ncolor: ${textColor};\nbackground-color: ${bgColor};`;
 
   const copyCss = () => {
-    clipboardWrite(cssOutput);
-    toast.success('CSS copied!');
+    clipboardWrite(cssOutput).then(ok => { if (ok) toast.success('CSS copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadCss = () => {

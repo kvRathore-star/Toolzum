@@ -101,8 +101,7 @@ export default function PdfOcr() {
 
   const copyToClipboard = async () => {
     try {
-      await clipboardWrite(extractedText);
-      toast.success('Copied to clipboard!');
+      if (await clipboardWrite(extractedText)) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch (err) {
       toast.error('Failed to copy text.');
     }

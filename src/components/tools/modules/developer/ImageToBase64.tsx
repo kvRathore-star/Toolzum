@@ -33,7 +33,7 @@ export function Base64ImageTool({ defaultMode = 'image-to-base64' }: { defaultMo
   const copyBase64 = async () => {
     const text = getOutputString();
     if (!text) return;
-    try { await clipboardWrite(text); toast.success('Base64 string copied!'); } catch { toast.error('Copy failed.'); }
+    try { if (await clipboardWrite(text)) toast.success('Base64 string copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); } catch { toast.error('Copy failed.'); }
   };
 
   const downloadTextFile = () => {

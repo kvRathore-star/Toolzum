@@ -27,7 +27,7 @@ export default function RandomPortGenerator() {
     setPorts(generated);
   }, [portRanges, portCount]);
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   const presets = [
     { label: 'Single Dynamic Port', apply: () => { setPortRanges([{ min: 49152, max: 65535 }]); setPortCount(1); } },

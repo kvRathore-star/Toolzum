@@ -94,8 +94,7 @@ export default function PdfToMarkdown() {
 
   const copyToClipboard = async () => {
     try {
-      await clipboardWrite(markdown);
-      toast.success("Copied to clipboard!");
+      if (await clipboardWrite(markdown)) toast.success("Copied to clipboard!"); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error("Failed to copy.");
     }

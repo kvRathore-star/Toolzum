@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
 
 interface RoadmapItem {
   id: string;
@@ -106,6 +107,7 @@ const COMPLETED: RoadmapItem[] = [
 export default function RoadmapPage() {
   const [votes, setVotes] = useState<Record<string, number>>({});
   const [userUpvoted, setUserUpvoted] = useState<Record<string, boolean>>({});
+  const [suggestText, setSuggestText] = useState("");
 
   useEffect(() => {
     // Read upvotes from localStorage
@@ -175,6 +177,7 @@ export default function RoadmapPage() {
                 {/* Interactive Upvote Box */}
                 <button
                   onClick={() => handleUpvote(item.id, item.votes)}
+                  title={hasVoted ? "Remove your vote (this device only)" : "Vote for this (this device only)"}
                   className={`flex flex-col items-center justify-center p-2 rounded-[var(--radius-md)] border shrink-0 transition-all ${
                     hasVoted 
                     ? "bg-[var(--accent-ink)]/10 border-[var(--accent)] text-[var(--accent)]" 
@@ -228,6 +231,7 @@ export default function RoadmapPage() {
           </h1>
           <p className="text-lg sm:text-xl text-[var(--text-secondary)]">
             Explore planned expansions, vote for features you want prioritize, and trace what is actively rolling out.
+            <span className="block mt-1 text-xs text-[var(--text-muted)]">Votes are saved on this device only — they help you track what you care about.</span>
           </p>
         </div>
 
@@ -246,12 +250,23 @@ export default function RoadmapPage() {
             If you need an offline tool that isn't on the roadmap, let us know! We design open-source, client-side algorithms based on community requirements.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input 
-              type="text" 
-              placeholder="e.g. SVG pattern generator..." 
-              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]" 
+            <input
+              type="text"
+              aria-label="Suggest a feature"
+              placeholder="e.g. SVG pattern generator..."
+              value={suggestText}
+              onChange={(e) => setSuggestText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  window.location.href = `/contact?subject=suggestion&message=${encodeURIComponent(suggestText.trim() ? `Feature request: ${suggestText.trim()}` : '')}`;
+                }
+              }}
+              className="flex-1 bg-[var(--bg-base)] text-sm border border-[var(--border-subtle)] rounded-[var(--radius-md)] px-4 py-2.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]"
             />
-            <Button disabled className="shrink-0 opacity-60 cursor-not-allowed">Submit Request</Button>
+            <Link href={`/contact?subject=suggestion&message=${encodeURIComponent(suggestText.trim() ? `Feature request: ${suggestText.trim()}` : '')}`}>
+              <Button className="shrink-0">Submit Request</Button>
+            </Link>
           </div>
         </div>
 

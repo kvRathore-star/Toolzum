@@ -190,7 +190,7 @@ export default function AiSocialCaption() {
   };
 
   const handleCopy = async (text: string) => {
-    try { await clipboardWrite(text); toast.success('Caption copied to clipboard'); }
+    try { if (await clipboardWrite(text)) toast.success('Caption copied to clipboard'); else toast.error('Copy blocked by the browser — select the text manually.'); }
     catch { toast.error('Failed to copy'); }
   };
 

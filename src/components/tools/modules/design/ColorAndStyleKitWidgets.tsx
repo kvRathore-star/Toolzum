@@ -73,7 +73,7 @@ export function ColorPaletteGenerator() {
           <div className="flex gap-1">
             {palette.map((c, i) => (
               <button key={i} className="flex-1 h-10 rounded-lg text-xs font-bold text-white" style={{ backgroundColor: c }}
-                onClick={() => { clipboardWrite(c); toast.success('Copied!'); }}>{c}</button>
+                onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }}>{c}</button>
             ))}
           </div>
         )}
@@ -104,7 +104,7 @@ export function ColorShadesTints() {
           <div className="flex gap-1 flex-wrap">
             {shades.map((c, i) => (
               <button key={i} className="w-10 h-10 rounded-lg text-xs" style={{ backgroundColor: c, color: i < 5 ? '#fff' : '#000' }}
-                onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} title={c} aria-label={`Copy color ${c}`} />
+                onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} title={c} aria-label={`Copy color ${c}`} />
             ))}
           </div>
         )}
@@ -208,7 +208,7 @@ export function ConventionalCommitGenerator() {
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm" />
         <button onClick={generate} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">Generate</button>
         {output && (
-          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-xs font-mono cursor-pointer" role="button" tabIndex={0} onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output); toast.success('Copied!'); } }}>{output}</div>
+          <div className="p-3 bg-[var(--bg-surface)] rounded-lg text-xs font-mono cursor-pointer" role="button" tabIndex={0} onClick={() => { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } }}>{output}</div>
         )}
       </div>
     </div>

@@ -35,8 +35,7 @@ ${videoText}`;
   };
 
   const handleCopy = () => {
-    clipboardWrite(outputText);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(outputText).then(ok => { if (ok) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

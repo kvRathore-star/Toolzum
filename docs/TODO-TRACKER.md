@@ -1,18 +1,6 @@
 # Toolzum TODO Tracker
 
-Last updated: 2026-09-15
-
-## Revealed backlog (Sep 15 — quality-audit was parsing an empty barrel, reporting zeros)
-- [x] R1. quality-audit fix (`8bde7cf1`) revealed previously-hidden counts — TRIAGED Sep 15:
-  - 774 FAQ-less → routed to #11 bulk path (no action now).
-  - 478 missing-deps → privacy cross-check DONE: triage script mapped no-deps tools to modules, flagged 28 network-mention suspects; manual inspection cleared all (OpenAI hits are detection-pattern labels, fetch hits are user-URL checks or sample-code strings, CDN/script links are not exfiltration). Zero privacy-badge corruption found. No normalization needed.
-  - 104 card-slug mismatches → routed to #27 known-good map (overlap confirmed, not separate effort).
-- [ ] R2. Fail-closed audit follow-up: bundle-budget ✅ fail-closed; CI gates ✅; ZAP ✅ (`fail_action: true`); `submit-indexnow` + `gen-sw` hardened Sep 15 (exit non-zero on API error / empty input). Remaining: re-check any new gate added hereafter parses non-empty input — gates must error, not pass, on unparsable input (same silent-success family as `docs/redirects-dynamic-budget-postmortem.md`).
-  - Verification recipe (mandatory for every new gate — this is what caught all three):
-    1. Feed it EMPTY input → must error/exit non-zero, never "0 issues".
-    2. Inject ONE known-bad item → must name it (ID/slug/path), not just count it.
-    3. Revert → must report zero NEW issues while still showing existing backlog (never claim zero existing).
-    4. Confirm the parser reads the REAL artifact — not a barrel, proxy, or cache that can silently go stale (the exact `tools.ts` failure).
+Last updated: 2026-08-23
 
 ## Quick Wins (do now)
 - [x] 1. Generate OG images for 4 new tools + fix default /og-image.png 404 — Ran `npx tsx scripts/generate-og-images.ts`, fixed layout/page.tsx to use `/og/branding/index.png`
@@ -32,21 +20,15 @@ Last updated: 2026-09-15
 - [x] 8. Thin-tool audit — merged 3 time converter clones into bidirectional time-converter; upgraded rounding calculator (5 modes + step display); upgraded modulo calculator (JS/Python semantics + long-division); added FAQs for all 3 (commit a796dcc)
 
 ## Business decisions (separate thread)
-- [ ] 9. Email capture — where do signups go?
+- [x] 9. Email capture — where do signups go? → answered Sep 19 2026: `notify_waitlist` D1 table via POST /api/notify-me (ComingSoon pages + extension waitlist); launch broadcast via GET /api/admin/notify-broadcast
 - [ ] 10. Annual plan / credit pack — what price/credit size?
-- [ ] 11b. Merge near-duplicate sibling tools? (from bulk-generator dry-runs Sep 15: mov/avi/webm-to-mp4, pdf/webp-to-jpg score 0.32–0.41 inter-similarity — one tool wearing several URLs, no FAQ design fixes structural sameness)
-  - Benefit: fewer, genuinely distinct pages (precedent: time-converter merge, a796dcc).
-  - Cost: redirecting previously-indexed URLs → ranking dip during transition, possible loss of exact-query long-tail ("avi to mp4").
-  - Decision needed before bulk rollout treats these clusters as separate tools.
 
 ## Save for Focus Time
-- [ ] 11. FAQ rollout — bulk path per archetype (converter proven Sep 15: skeleton-check ≤0.30; sibling clusters merged via 11b). Remaining archetypes need per-archetype dry-run validation before scaling. Hand batches continue ONLY demand-driven (see policy below), never blind.
+- [ ] 11. FAQ rollout (~1,060 tools) — multi-day
 - [x] 12. Registry-import perf rewrite — eliminated 736KB full registry from client bundles; Homepage -567KB (30%), Tool page -734KB (35%) (commit 52dccf2)
 
 ## Mechanical (proven playbook, no decision needed)
-- [ ] 13. FAQ rollout — Tier 1 done (category templates personalized, commit 296e435). Custom FAQs: 49 hand-deepened Sep 15 (batches 1–12) + hub intros + FAQ-trim (deep pages show customs only). Still pending: custom FAQs for GSC "crawled, not indexed" flagged tools (demand-driven picks — see policy below), then bulk volume per #11.
-- [x] Depth batch policy (Sep 15): hand batches are DEMAND-DRIVEN ONLY — next picks come from the GSC bucket pull (impressions/ranked pages first), never blind supply batching. Rationale: 800 remaining tools ÷ 5/batch is not a viable strategy; returns concentrate in ranked/money pages.
-- [x] Structural SEO freeze (Sep 15 – Oct 15): no URL, sitemap, redirect, or merge changes. Content depth on existing URLs + Request Indexing only. Rationale: every structural change restarts Google's evaluation clock.
+- [ ] 13. FAQ rollout — Tier 1 done (category templates personalized, commit 296e435). Still pending: custom FAQs for GSC "crawled, not indexed" flagged tools, then general volume rollout. Weekend task.
 - [x] 14. ~~Developer dedup~~ — api-response-formatter → json-formatter, api-error-decoder → http-status-code-checker (commit 0b3b4c0)
 - [x] 15. ~~Calculator consolidation~~ — 6 tools redirected to geometry/scientific/date calculators (commit 0b3b4c0)
 - [x] 16. ~~Transcription reclassification~~ — Renamed to "Audio Transcript Formatter" / "Video Transcript Formatter", fixed descriptions (commit 0b3b4c0)
@@ -66,29 +48,18 @@ Last updated: 2026-09-15
 
 ## Prevention (ongoing)
 - [ ] 25. Add lint check: new tools without `faqs` field in registry trigger a warning. Prevents future818-tool backlog. Bake into the tool-addition checklist.
-- [x] 26. Quality gate remainder — BUILT Sep 15 (`scripts/faq-gate.ts`, wired into lint-staged for chunks + templates):
-  - Hash-dupe = 5-gram Jaccard ≥ 0.30 (measured: customs 0.00–0.02, fallback pairs 0.45–0.57; word-count alone can't separate — fallback blocks run 132–145 words vs customs 150–176, so thin ≡ template-similar).
-  - Thin metric folded into the same check (no separate word-count gate — data showed it would pass boilerplate).
-  - One-way = X-to-Y with both sides in FORMAT_INFO, no reverse slug, no swap UI (bulk + actions excluded; mp4/mov/webm-to-mp3 extraction accepted). 6 genuine gaps remain (gif-to-mp4, eml-to-pdf, html-to-jsx, svg-to-css, pdf-to-png, csv-to-sql) → product backlog, not blockers.
-  - Fail-closed throughout: empty parse/templates exit 2; touched-scope exit 1 on fail, `--full` validates bulk output.
-  - Remainder: thin-COMPONENT check (<40 lines of code — distinct from thin-FAQ, folded above) still open; identical desc/seoDesc already covered by content-integrity test.
-  - Note: thin-components is a CODE-quality metric (C2/monolith family), not FAQ-remediation scope — parked as separate backlog; does not block #11.
-- [x] 27. Category-slug validation — BUILT Sep 15 (quality-audit sitemap-vs-registry check; consistent on current build). Verdict: SINGLE mechanism, no duplicate map — classification derives from registry fields (category + slug verbs + FORMAT_INFO), validated cross-artifact. A checked-in copy would rot. Count-only archetype pass: 5 buckets cover 617/1144, 527 ambiguous (compress/merge/edit/remove/make verbs) → bulk generator needs ~10 verb-led archetypes, not force-fitting. 104 card-slug items dissolve here.
+- [ ] 26. Add quality gate script: detect generic FAQ text, duplicate FAQ hashes, thin components (<40 lines), one-way converters missing bidirectional UI, identical description/seoDescription. Run as part of content integrity test suite before every commit.
+- [ ] 27. Add category-slug validation: maintain a known-good slug→category mapping, flag mismatches at build time. Catches miscategorized tools before they ship.
 - [ ] 28. **FAQ depth audit for Formula-type CalculatorShell tools** — ~120 tools use CalculatorShell with Formula classification. The FAQ rollout (item 11/13/23) only solves thin-content if FAQs are genuinely deep (worked examples, derivation steps, edge cases), not generic templates. Before FAQ rollout: audit all Formula tools' registry `faqs` for: step-by-step derivation, worked numeric example, common mistake warnings, formula variant explanations. Flag tools with <4 FAQs or missing worked examples for manual deepening.
-  - Interim (Sep 15): no Formula flag exists in registry/shell/types — auditing by category proxy (Calculator/Finance/Health/Growth = 155 tools, 130 flagged; SaaS money cluster deepened first). TRIGGER to build the real flag: if the proxy misclassifies >10 tools (formula tool outside the 4 categories, or non-formula tool inside them needing different FAQ treatment), or when bulk/hand coverage reaches the formula set and per-tool routing matters — then add `formula?: true` to ToolMetadata and re-run the audit against it. Until either fires, the proxy stands and this item stays open behind #11, not ahead of it.
 
 SEO: Add unique meta descriptions to top 50 most-visited tools
 SEO: Add internal linking between related tools (reduces thin content signals)
 
 Checkpoint triggers: (a) sitemap lastDownloaded moves past Sep 11, then (b) 2–3 weeks after that, we compare exclusion buckets + indexed count. I'll pull on your word anytime — just say "gsc check".
-Depth bulk batches PAUSED Sep 16 per owner — resume ordered by GSC impressions (deepen surfaced pages first, not bulk order). 345/1144 done, ~800 via fallback.
 
-  Wire up email service (Resend)
-  Wire Resend email service for forgot-password/reset-password
+ [x] Email service — DONE Sep 19 2026 via Cloudflare Email Sending (not Resend): shared src/lib/email.ts; password reset + verification wired in src/lib/auth.ts; contact form, crawl-complete, alerts, uptime all sending
 
-  PARKED Sep 16 2026 per owner (Cloudflare setup items 1–5 deferred: Email Sending onboarding, ALERT_TOKEN/ALERT_TO secrets, ALERT_TOKEN Pages env, post-deploy banner + flags verification). Item 6 (D1 restore drill per docs/DATA-MIGRATIONS.md) stays open as the #38 exit criterion.
-
-  PARKED Sep 15 2026 per owner (no newsletter planned) — dead `ChangelogNewsletter` signup removed from changelog page; component deleted. Only transactional quota/credit nudges if ever.
+ [x] Newsletter — dead signup removed; no subscribe UI ships (parked per owner Sep 15). No backend needed.
 
  
 ## Completed
@@ -105,62 +76,19 @@ Depth bulk batches PAUSED Sep 16 per owner — resume ordered by GSC impressions
 - [x] User Favorites — D1 table, API endpoints, star buttons, homepage section, ⌘K group (commit 5ee786c)
 
 -----------------
+1. Session 1 smoke pass — 10 min, keyboard only (Cmd+K + space, dropzone Enter/Space, EMI labels), admin dashboard same.
+2. Video WASM console check — upload a small video, watch for CSP/SharedArrayBuffer/wasm red.
+3. ZAP green — confirm in Actions tab (see above).
+4. PR previews — add the two Cloudflare secrets or flip native PR previews in the Pages dashboard.
 
-The C2.3 remainder block, verbatim. It's today's live process note and still accurate (75 + 51, batch gate, skip-list, next-up batch). Everything around it can go.
-Pentest (item 10) is already in your human-side pending list, so it's preserved there.
-
-
-Session 1 — smoke pass (10 min, keyboard only, no mouse) — DONE 2026-09-14 (human pass: Cmd+K + space, dropzone Enter/Space, EMI labels all correct).
-1. Search: open toolzum.com, press Cmd+K, type font converter with the space. Then Esc. Pass = space types, results filter, Esc closes and focus returns to the search button.
-2. Dropzone: open toolzum.com/design/font-converter. Tab until the dashed box has a visible outline. Press Enter (file picker must open), cancel, Tab back, press Space (picker opens, page must NOT scroll).
-3. Labeled form: open toolzum.com/finance/emi-calculator. Tab through the three fields — each must show its name correctly.
-
-2. Video WASM console check
-Open toolzum.com (live, after this deploy finishes) in Chrome desktop.
-Press Cmd+Option+J (Mac) to open DevTools console. Keep it open.
-Open any video tool (e.g. search "video compress"), upload a small video, run it.
-Watch the console for red errors mentioning any of: Content Security Policy, blocked, SharedArrayBuffer, failed to fetch, wasm.
-Report back: either "clean, video processed, no console errors" or paste the exact red error text.
-
-Needs humans (all batched, none scheduled):
-- Smoke re-pass on new UI (chips, tour, empty states)
-
-- ZAP weekly run going green on its own (allowlist is in — confirm on next Monday run or manual trigger)
-
-Needs UI eyes (~100 labels) — the only agent-side queue left, and it's blocked on looking, not tooling.
-
-
-Session 3 — VoiceOver pass (the big one) — DONE 2026-09-14 for most listed tools: controls speak correct names, ~90% success rate.
-
-Session 4 — UI-look naming — DONE IN CODE 2026-09-14 (no manual batches needed): worst-offender mining fixed 32 Copy/Download + vague actions + single letters + duplicates (commits `f3a763d1`, `e99c5639`). Human spot-checks on dense pages remain optional.
-1. On Mac: turn on VoiceOver with Cmd+F5. Move with Ctrl+Option+Right arrow. Stop with Cmd+F5.
-2. Visit each page below and arrow through it. For every button, box, and field, listen: does it announce a clear name ("Loan Amount", "Upload font file") or something useless ("button", "edit text", silence)?
-3. Write down any that announce wrong or nothing, with the page name:
-- toolzum.com/finance/emi-calculator
-- toolzum.com/finance/sip-calculator
-- toolzum.com/finance/gst-calculator
-- toolzum.com/finance/currency-converter
-- toolzum.com/calculator/age-calculator
-- toolzum.com/health/bmi-calculator
-- toolzum.com/image/image-compressor
-- toolzum.com/pdf/pdf-merger
-- toolzum.com/utility/qr-code-generator
-- toolzum.com/utility/password-generator
-- toolzum.com/utility/unit-converter
-- toolzum.com/utility/timer
-- toolzum.com/utility/stopwatch
-- toolzum.com/text/word-counter
-- toolzum.com/developer/json-formatter
-- toolzum.com/design/font-converter
-- toolzum.com/design/color-picker
-- toolzum.com/indian-utilities/rental-agreement-generator
-- toolzum.com/utility/todo-list (if it exists — search it; skip if not)
-- toolzum.com/utility/base64 (same — search, skip if missing)
-
-Session 4 — UI-look naming (only if sessions 1–3 are done)
-I'll give you these in small batches of 10 with screenshots-worth of context ("this box, next to that text — what should it be called?"). Say the word when you get here and I'll prepare the first batch.
-Report format for everything: page name + what you pressed + what happened (or what it announced). Short lines are perfect.
-
+5. UI eyes — spot-checks on dense pages only; the systematic queue is already at committed zeros.
+5 pages — the densest interactive surfaces in the codebase (ranked by control count):
+toolzum.com/developer/unicode-converter — 70 controls (densest file in repo)
+toolzum.com/calculator/scientific-calculator — 47 controls
+toolzum.com/utility/whatsapp-toolkit — 39 controls
+toolzum.com/developer/css-generator — 39 controls
+toolzum.com/utility/qr-code-generator — 33 controls
+Same drill as Session 4: VoiceOver on (Cmd+F5), arrow through each page, write down anything that announces wrong or nothing (page + control). If these 5 are clean, the eyes queue is effectively closed — everything else is sparser than what's already verified.
 
 
 Each was left for a specific reason — not skipped, judged:
@@ -170,8 +98,38 @@ Each was left for a specific reason — not skipped, judged:
 Common thread: each "fix" costs more (privacy, churn, performance) than its nuance. That said — your call overrides my judgment on any of them. Say which and I'll implement it the same careful way as 3–5.
 
 
-Live items — all executed:
+Live — carry these three out before deleting:
 
-1. Honesty block rescued → docs/TEST-HONESTY.md (coverage definition, dep≠tool gap, revenue-critical-first rule)
-2. Contact form → real backend (functions/api/contact.ts) + honest error states in client; needs CLOUDFLARE_API_TOKEN + CONTACT_TO env secrets to send mail
-3. Clipboard long tail → 139 direct navigator.clipboard.writeText calls converted to checked clipboardWrite across 73 files; zero unchecked calls remain in source
+One rescue — the "Important Notes" honesty block (~15 lines): the coverage-definition warning ("test-file coverage, not statement coverage — clarify externally"), the dependency≠tool-tests gap, and the revenue-critical-first rule. Still true, still load-bearing judgment, and it lives nowhere else.
+
+Contact form — FIXED Sep 19 2026: functions/api/contact.ts relays via Cloudflare Email Sending; success gated on res.ok && data.ok; honest 503/502 fallbacks. Suggest-a-tool boxes (homepage, contact, roadmap) deep-link into it.
+
+Clipboard honesty long tail: 154 clipboardWrite callers + 137 direct navigator.clipboard uses still assume success. Batch-convert to checked returns with fallback toasts. Shared shells already done.
+
+
+
+
+ Todos
+[✓] Audit batch 1: calculator, finance, health, converters
+[✓] Audit batch 2: text, developer, seo, image
+[✓] Audit batch 3: pdf, video, audio, ai
+[✓] Audit batch 4: design, utility, productivity, branding
+[✓] Audit batch 5: remaining categories + compile offender list
+All 21 categories swept, ~120 offenders. Ranked by trust damage, not count:
+Integrity fires — fake output sold as real (fix or delist first):
+ 1. GstinLookup — fabricates business identity + random dates behind ₹499/mo upsell (indian-utilities/GstinLookup.tsx:22-40).
+ 2. AppleMusicPreviewExtractor — downloads Blob(['APPLE_MUSIC_PREVIEW_PAYLOAD']) after fake progress (audio/AppleMusicPreviewExtractor.tsx:30).
+ 3. BulkAudioConverter — non-WAV path returns 100ms of recorded silence labeled .mp3/.ogg (audio/BulkAudioConverter.tsx:51).
+ 4. BulkFaceAnonymizer (Pro) — "detector" blurs 3 hardcoded rectangles (image/BulkFaceAnonymizer.tsx:24-28).
+ 5. BulkExifStripperInjector (Pro) — "inject" mode runs the strip path (image/BulkExifStripperInjector.tsx:12-22).
+ 6. BulkEbookConverter (Pro) — PDF is a filename-only cover page (converter/BulkEbookConverter.tsx:19-30).
+ 7. BulkInvoiceReceiptParser (Pro) — PDF branch discarded, vendor = first OCR line (finance/BulkInvoiceReceiptParser.tsx:17-33).
+ 8. youtube-transcript-generator (Pro) — hallucinates analysis from URL string, never fetches captions (transcription/YoutubeTranscriptGenerator.tsx:25).
+ 9. audio/video-to-text-transcription (both Pro) — accept no media, just rephrase pasted text (transcription/AudioToTextTranscription.tsx:17-26).
+10. QrCodeReader — hardcoded fake version metadata, single-decode despite "multiple" claim (developer/QrCodeReader.tsx:72-77).
+11. API stubs returning canned data: GraphqlTester (John mock), openapi-to-postman (hardcoded /users), openapi-mock-generator, openapi-validator (substring checks), api-key-validator, DomainAvailabilityChecker (no DNS = "available").
+12. PDF liars: PdfToPdfa (metadata-only "conversion"), RepairPdf (theatrical logs, no repair), FlattenPdf (never calls form.flatten()), BulkPdfSizeReducer (ignores quality config), pdf-table-of-contents (canned rows), eml-to-pdf (silently aborts .msg).
+Corrupt/wrong output (real code, wrong results): BulkImageResizer contain-crop coords, JsMinifier regex mangles URLs/strings, JwtDebugger base64url fail, BrailleTranslator digit-overwrite, KeywordDensityChecker multi-word never matches, PpiCalculator wrong formula, BabyGrowthPercentile fake LMS, BulkVideoSizeReducer hardcoded 30s duration, NicknameGenerator out-of-bounds crash, WheelOfNames/NatoPhonetic/BarcodeGenerator logic bugs, guard-missing NaNs (TestScore, Ltv, Exponent, Logarithm, SigFigs, Coordinate, Dpi clamps).
+Thin-for-name + Pro-gating without pro value: ai-face-swap (manual overlay), ai-image-upscaler (Lanczos, undisclosed), vocal-remover (phase trick), translate-pdf (outputs .txt), subtitle-generator (no auto-transcribe), url-to-pdf (iframe print), video-to-mp3/crop-video/BulkQrCodeGenerator (count-gated thin wrappers), cgpa-to-percentage (crown badge but isPro:false — inverted bug).
+Quick wins (labels/gaps): ~15 mislabeled aria-labels (SvgEditor, ToDoList, MacAddressGenerator, PodcastTranscription...), DuplicateWordRemover literal ${}, hardcoded quality label, UrlShortener breaking the client-side claim, ComingSoonTool/browser-extension placeholder pages.
+Two caveats: these are agent findings with file:line evidence, not hand-verified — spot-check before fixing. And the count (~10% of catalog) is actually good news: ~90% met the bar. Suggested order: integrity fires (delist-or-fix) → wrong-output math → Pro-gate honesty → quick wins. Want me to start with the top integrity batch?

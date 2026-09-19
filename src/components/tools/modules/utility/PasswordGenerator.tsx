@@ -134,8 +134,7 @@ export default function PasswordGenerator() {
 
   const copy = async () => {
     if (!password) return;
-    await clipboardWrite(password);
-    toast.success('Password copied!');
+    if (await clipboardWrite(password)) toast.success('Password copied!'); else toast.error('Copy blocked by the browser — select the text manually.');
   };
 
   const download = () => {

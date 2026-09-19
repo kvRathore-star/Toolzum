@@ -626,7 +626,7 @@ export function Header() {
                   ].map(p => (
                     <a key={p.emoji} href={p.href} target="_blank" rel="noopener noreferrer" className={`w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[10px] font-bold font-mono text-[var(--text-muted)] transition-all ${p.hover}`} title={p.title} onClick={() => setMobileMenuOpen(false)}>{p.emoji}</a>
                   ))}
-                  <button onClick={async () => { try { await clipboardWrite('https://toolzum.com'); toast.success('Link copied!'); } catch {} setMobileMenuOpen(false); }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[12px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
+                  <button onClick={async () => { try { if (await clipboardWrite('https://toolzum.com')) toast.success('Link copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); } catch {} setMobileMenuOpen(false); }} className="w-8 h-8 rounded-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] flex items-center justify-center text-[12px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:border-[var(--accent)]/30 hover:bg-[var(--accent-ink)]/5 transition-all cursor-pointer" title="Copy link">🔗</button>
                 </div>
               </div>
 

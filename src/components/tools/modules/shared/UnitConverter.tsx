@@ -121,8 +121,8 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
       </button>
       {output && (
         <div role="button" tabIndex={0} className="mt-4 p-3 bg-[var(--bg-surface)] rounded-lg text-sm text-center font-mono text-emerald-600 dark:text-emerald-400"
-          onClick={() => { clipboardWrite(output); toast.success('Copied!'); }}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output); toast.success('Copied!'); } }}>
+          onClick={() => { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } }}>
           {output}
         </div>
       )}

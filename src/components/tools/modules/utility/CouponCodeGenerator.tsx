@@ -48,11 +48,11 @@ export default function CouponCodeGenerator() {
               {codes.map((c, i) => (
                 <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm font-mono">
                   <span className="tracking-wide">{c}</span>
-                  <button aria-label={`Copy coupon code ${c}`} onClick={() => { clipboardWrite(c); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
+                  <button aria-label={`Copy coupon code ${c}`} onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
                 </div>
               ))}
               <div className="flex gap-1 mt-2">
-                <button onClick={() => { clipboardWrite(codes.join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+                <button onClick={() => { clipboardWrite(codes.join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
                 <button aria-label="Download coupon codes" onClick={() => { const blob = new Blob([codes.join('\n')], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'coupon-codes.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors"><Download size={14} /></button>
               </div>
             </div>

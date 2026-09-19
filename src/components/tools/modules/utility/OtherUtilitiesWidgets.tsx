@@ -51,7 +51,7 @@ function detectCountry(phone: string): { country: string; code: string; national
   return null;
 }
 
-const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
 export function PhoneParser() {
   const [phoneInput, setPhoneInput] = useState('');

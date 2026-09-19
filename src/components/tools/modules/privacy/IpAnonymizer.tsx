@@ -92,7 +92,7 @@ export default function IpAnonymizer() {
           <span className="text-[10px] text-[var(--text-secondary)] uppercase block">Anonymized Output</span>
           <p className="text-3xl font-black text-[var(--accent)] font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
           {anonymized && (
-            <button onClick={() => { clipboardWrite(anonymized); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline">Copy Result</button>
+            <button onClick={() => { clipboardWrite(anonymized).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[var(--accent)] hover:underline">Copy Result</button>
           )}
         </div>
       </div>

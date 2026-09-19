@@ -36,8 +36,7 @@ export default function RobotsTxtGenerator() {
   };
 
   const handleCopy = () => {
-    clipboardWrite(buildRobotsTxt());
-    toast.success('Copied robots.txt!');
+    clipboardWrite(buildRobotsTxt()).then(ok => { if (ok) toast.success('Copied robots.txt!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

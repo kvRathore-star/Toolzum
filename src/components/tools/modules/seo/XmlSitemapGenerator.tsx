@@ -213,8 +213,7 @@ export default function XmlSitemapGenerator() {
 
   const handleCopy = () => {
     if (state.status !== 'complete') return;
-    clipboardWrite(state.xml);
-    toast.success('Copied XML Sitemap!');
+    clipboardWrite(state.xml).then(ok => { if (ok) toast.success('Copied XML Sitemap!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const makeBlobUrl = (content: string, type: string): string => {

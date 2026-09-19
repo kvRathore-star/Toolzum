@@ -117,8 +117,7 @@ export default function AiImageGenerator() {
 
   const handleCopyLink = () => {
     if (!imageUrl) return;
-    clipboardWrite(imageUrl);
-    toast.success('Link copied to clipboard!');
+    clipboardWrite(imageUrl).then(ok => { if (ok) toast.success('Link copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

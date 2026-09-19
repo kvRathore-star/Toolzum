@@ -106,8 +106,7 @@ export function UnitConverter() {
 
   const copyResult = () => {
     if (result === null) return;
-    clipboardWrite(`${value} ${fromUnit} = ${result} ${toUnit}`);
-    toast.success('Result copied!');
+    clipboardWrite(`${value} ${fromUnit} = ${result} ${toUnit}`).then(ok => { if (ok) toast.success('Result copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

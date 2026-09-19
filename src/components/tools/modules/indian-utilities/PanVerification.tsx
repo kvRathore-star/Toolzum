@@ -94,8 +94,7 @@ export default function PanVerification() {
   };
 
   const copyToClipboard = (text: string) => {
-    clipboardWrite(text);
-    toast.success('Copied to clipboard');
+    clipboardWrite(text).then(ok => { if (ok) toast.success('Copied to clipboard'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const resetForm = () => {

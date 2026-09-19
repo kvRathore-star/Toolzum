@@ -58,7 +58,7 @@ export default function IbanValidator() {
                 <h4 className="text-lg font-bold text-emerald-500">Valid IBAN</h4>
                 <p className="text-xs text-[var(--text-muted)]">The account format and checksum calculations are correct.</p>
                 <p className="text-xs font-mono text-[var(--text-primary)] break-all">{iban.replace(/\s+/g, '').toUpperCase()}</p>
-                <button onClick={() => { clipboardWrite(iban.replace(/\s+/g, '').toUpperCase()); toast.success('IBAN copied!'); }} className="text-xs text-[var(--accent)] hover:underline">Copy IBAN</button>
+                <button onClick={() => { clipboardWrite(iban.replace(/\s+/g, '').toUpperCase()).then(ok => { if (ok) toast.success('IBAN copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline">Copy IBAN</button>
               </div>
             ) : (
               <div className="text-center space-y-2 animate-in zoom-in-95">

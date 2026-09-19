@@ -69,8 +69,7 @@ export default function UuidGenerator() {
   const copyAll = async () => {
     if (uuids.length === 0) return;
     try {
-      await clipboardWrite(uuids.join('\n'));
-      toast.success("All UUIDs copied to clipboard!");
+      if (await clipboardWrite(uuids.join('\n'))) toast.success("All UUIDs copied to clipboard!"); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error("Failed to copy UUIDs.");
     }
@@ -78,8 +77,7 @@ export default function UuidGenerator() {
 
   const copySingle = async (val: string) => {
     try {
-      await clipboardWrite(val);
-      toast.success("Copied UUID!");
+      if (await clipboardWrite(val)) toast.success("Copied UUID!"); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error("Failed to copy.");
     }

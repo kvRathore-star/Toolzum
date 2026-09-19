@@ -564,8 +564,8 @@ export function OauthPkceGenerator() {
 
   const presets = [
     { label: 'Generate', apply: () => generate() },
-    { label: 'Copy Verifier', apply: () => { if (verifier) clipboardWrite(verifier); toast.success('Verifier copied'); } },
-    { label: 'Copy Challenge', apply: () => { if (challenge) clipboardWrite(challenge); toast.success('Challenge copied'); } },
+    { label: 'Copy Verifier', apply: () => { if (verifier) clipboardWrite(verifier).then(ok => { if (ok) toast.success('Verifier copied'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } },
+    { label: 'Copy Challenge', apply: () => { if (challenge) clipboardWrite(challenge).then(ok => { if (ok) toast.success('Challenge copied'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } },
     { label: 'Clear', apply: () => { setOut(''); setVerifier(''); setChallenge(''); } },
   ];
 

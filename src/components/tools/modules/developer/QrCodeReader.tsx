@@ -107,8 +107,7 @@ export default function QrCodeReader() {
 
   const handleCopyData = async (text: string) => {
     try {
-      await clipboardWrite(text);
-      toast.success('Copied to clipboard!');
+      if (await clipboardWrite(text)) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error('Failed to copy');
     }
@@ -118,8 +117,7 @@ export default function QrCodeReader() {
     if (decodedData.length === 0) return;
     try {
       const all = decodedData.map(d => d.data).join('\n---\n');
-      await clipboardWrite(all);
-      toast.success('All data copied!');
+      if (await clipboardWrite(all)) toast.success('All data copied!'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error('Failed to copy');
     }

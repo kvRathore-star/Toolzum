@@ -102,7 +102,7 @@ export default function SecureNoteSharer() {
               <span className="text-[10px] text-[var(--text-muted)] font-bold uppercase block">Shareable link</span>
               <div className="flex gap-2">
                 <input aria-label="Shareable link" readOnly type="text" value={shareLink} className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[10px] text-zinc-300 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
-                <button onClick={() => { clipboardWrite(shareLink); toast.success('Link copied!'); }} className="bg-[var(--accent-ink)] px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy share link"><Copy className="w-4 h-4" /></button>
+                <button onClick={() => { clipboardWrite(shareLink).then(ok => { if (ok) toast.success('Link copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="bg-[var(--accent-ink)] px-3 py-2 rounded-xl text-xs text-white cursor-pointer" aria-label="Copy share link"><Copy className="w-4 h-4" /></button>
               </div>
             </div>
           )}

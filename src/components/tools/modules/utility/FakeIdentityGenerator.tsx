@@ -83,7 +83,7 @@ export default function FakeIdentityGenerator() {
             </div>
           </div>
             ))}
-            <button onClick={() => { clipboardWrite(JSON.stringify(identities, null, 2)); toast.success('Copied as JSON!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
+            <button onClick={() => { clipboardWrite(JSON.stringify(identities, null, 2)).then(ok => { if (ok) toast.success('Copied as JSON!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
           </div>
         ) : (
           <p className="text-[var(--text-muted)] text-sm text-center">Generate a random identity</p>

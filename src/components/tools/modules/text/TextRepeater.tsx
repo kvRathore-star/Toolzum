@@ -33,8 +33,7 @@ export default function TextRepeater() {
 
   const handleCopy = () => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied repeated text!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied repeated text!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

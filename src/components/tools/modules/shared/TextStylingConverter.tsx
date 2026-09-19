@@ -307,7 +307,7 @@ function ZalgoView() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
           <div className="px-4 py-3 bg-black/20 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
-            <button onClick={() => { if (output) { clipboardWrite(output); toast.success('Copied!'); } }} disabled={!output}
+            <button onClick={() => { if (output) { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); } }} disabled={!output}
               className="text-xs text-[var(--accent)] hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>
           <textarea aria-label="Cursed text will creep here..." value={output} readOnly placeholder="Cursed text will creep here..."

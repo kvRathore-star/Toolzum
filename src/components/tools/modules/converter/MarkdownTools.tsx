@@ -58,8 +58,7 @@ function MarkdownToHtmlTab() {
 
   const copyOutput = useCallback(() => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [output]);
 
   const downloadOutput = useCallback(() => {
@@ -132,8 +131,7 @@ function TextToMarkdownTab() {
 
   const copyOutput = useCallback(() => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [output]);
 
   const downloadOutput = useCallback(() => {
@@ -209,8 +207,7 @@ function HtmlToMarkdownTab() {
 
   const copyOutput = useCallback(() => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [output]);
 
   const downloadOutput = useCallback(() => {
@@ -295,8 +292,7 @@ function MarkdownToTextTab() {
 
   const copyOutput = useCallback(() => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [output]);
 
   const downloadOutput = useCallback(() => {

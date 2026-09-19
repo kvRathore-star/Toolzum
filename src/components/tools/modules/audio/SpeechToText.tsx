@@ -123,8 +123,7 @@ export default function SpeechToText() {
 
   const copyToClipboard = () => {
     if (!transcript && !interimTranscript) return;
-    clipboardWrite(transcript + (interimTranscript ? ' ' + interimTranscript : ''));
-    toast.success("Text copied to clipboard!");
+    clipboardWrite(transcript + (interimTranscript ? ' ' + interimTranscript : '')).then(ok => { if (ok) toast.success("Text copied to clipboard!"); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   if (!isSupported) {

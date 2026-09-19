@@ -181,8 +181,7 @@ export function SseEventFormatter() {
 
   const copyOutput = () => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Events copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Events copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadOutput = () => {
@@ -285,8 +284,7 @@ export function RateLimitHeaderParser() {
 
   const copyOutput = () => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Report copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Report copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadOutput = () => {

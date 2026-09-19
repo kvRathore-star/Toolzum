@@ -76,8 +76,7 @@ Be honest and critical. Score should reflect real ATS compatibility. Include spe
     const text = result
       ? `ATS Score: ${result.score}/100\n\n${result.summary}\n\nStrengths:\n${result.strengths.map(s => `• ${s}`).join('\n')}\n\nImprovements Needed:\n${result.weaknesses.map(w => `• ${w}`).join('\n')}\n\nMissing Keywords:\n${result.keywordGaps.map(k => `• ${k}`).join('\n')}\n\nSuggestions:\n${result.suggestions.map(s => `• ${s}`).join('\n')}`
       : rawOutput;
-    clipboardWrite(text);
-    toast.success('Copied!');
+    clipboardWrite(text).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

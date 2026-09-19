@@ -46,7 +46,7 @@ export default function RsaKeyGenerator() {
     }
   }, [keySize]);
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   const KeySection = ({ title, pem, label }: { title: string; pem: string; label: string }) => (
     <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-2">

@@ -41,8 +41,7 @@ export default function UnicodeViewer() {
 
   const copy = async (val: string, label: string) => {
     try {
-      await clipboardWrite(val);
-      toast.success(`${label} copied!`);
+      if (await clipboardWrite(val)) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch {
       toast.error('Failed to copy');
     }

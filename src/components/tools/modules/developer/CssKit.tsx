@@ -35,7 +35,7 @@ const PresetBar = ({ presets }: { presets: { label: string; apply: () => void }[
 
 const CopyDownload = ({ content, filename, label }: { content: string; filename: string; label?: string }) => (
   <div className="flex items-center gap-3">
-    <button onClick={() => { clipboardWrite(content); toast.success(`${label || 'CSS'} copied!`); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy {label || 'CSS'}</button>
+    <button onClick={() => { clipboardWrite(content).then(ok => { if (ok) toast.success(`${label || 'CSS'} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy {label || 'CSS'}</button>
     <button onClick={() => { const blob = new Blob([content], { type: 'text/css' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Download</button>
   </div>
 );
@@ -133,7 +133,7 @@ export function GlassmorphismGenerator() {
       </div>
       <div className="flex items-center gap-3">
         <CopyDownload content={css} filename="glassmorphism.css" />
-        <button onClick={() => { clipboardWrite(tailwind); toast.success('Tailwind copied!'); }} className="text-xs text-purple-600 dark:text-purple-400 hover:underline font-medium">Copy Tailwind</button>
+        <button onClick={() => { clipboardWrite(tailwind).then(ok => { if (ok) toast.success('Tailwind copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-purple-600 dark:text-purple-400 hover:underline font-medium">Copy Tailwind</button>
       </div>
     </div>
   );

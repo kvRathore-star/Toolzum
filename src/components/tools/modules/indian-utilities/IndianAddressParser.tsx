@@ -207,15 +207,13 @@ export default function IndianAddressParser() {
   }, [parsed]);
 
   const handleCopyField = useCallback((value: string, label: string) => {
-    clipboardWrite(value);
-    toast.success(`${label} copied!`);
+    clipboardWrite(value).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, []);
 
   const handleCopyAll = useCallback(() => {
     if (!parsed) return;
     const json = JSON.stringify(parsed, null, 2);
-    clipboardWrite(json);
-    toast.success('All fields copied as JSON!');
+    clipboardWrite(json).then(ok => { if (ok) toast.success('All fields copied as JSON!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   }, [parsed]);
 
   return (

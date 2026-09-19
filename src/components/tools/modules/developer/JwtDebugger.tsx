@@ -113,14 +113,14 @@ export default function JwtDebugger() {
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Header</h4>
             <div className="relative">
               <textarea aria-label="Header" value={header} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-              <button onClick={() => { clipboardWrite(header); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+              <button onClick={() => { clipboardWrite(header).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
           <div className="space-y-1">
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Payload</h4>
             <div className="relative">
               <textarea aria-label="Payload" value={payload} readOnly className="w-full h-[200px] bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono" />
-              <button onClick={() => { clipboardWrite(payload); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+              <button onClick={() => { clipboardWrite(payload).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@ export default function JwtDebugger() {
             <h4 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Signed Token</h4>
             <div className="relative">
               <textarea aria-label="Signed token" value={encToken} readOnly className="w-full h-[100px] bg-[var(--bg-overlay)]/50 border border-emerald-500/30 rounded-xl p-3 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono break-all" />
-              <button onClick={() => { clipboardWrite(encToken); toast.success('Copied!'); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
+              <button onClick={() => { clipboardWrite(encToken).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="absolute top-2 right-2 text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] px-2 py-0.5 rounded border border-[var(--border-subtle)] transition-colors">Copy</button>
             </div>
           </div>
         )}

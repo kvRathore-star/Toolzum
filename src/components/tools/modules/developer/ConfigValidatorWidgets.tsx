@@ -302,8 +302,7 @@ export function GeoJsonValidator() {
 
   const copyOutput = () => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Report copied!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Report copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadOutput = () => {

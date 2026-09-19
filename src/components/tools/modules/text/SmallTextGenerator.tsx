@@ -53,8 +53,7 @@ export default function SmallTextGenerator() {
 
   const handleCopy = (value: string) => {
     if (!value) return;
-    clipboardWrite(value);
-    toast.success('Copied!');
+    clipboardWrite(value).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

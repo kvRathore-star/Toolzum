@@ -37,8 +37,7 @@ export default function MacAddressGenerator() {
   };
 
   const handleCopy = () => {
-    clipboardWrite(list.join('\n'));
-    toast.success('Copied all addresses!');
+    clipboardWrite(list.join('\n')).then(ok => { if (ok) toast.success('Copied all addresses!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

@@ -58,7 +58,7 @@ export default function ChmodCalculator() {
     }
   }, []);
 
-  const copy = (txt: string, label: string) => { clipboardWrite(txt); toast.success(`${label} copied!`); };
+  const copy = (txt: string, label: string) => { clipboardWrite(txt).then(ok => { if (ok) toast.success(`${label} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); };
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">

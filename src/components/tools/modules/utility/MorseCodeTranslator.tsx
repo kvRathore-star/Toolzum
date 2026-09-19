@@ -102,8 +102,7 @@ export default function MorseCodeTranslator() {
 
   const copyOutput = () => {
     if (!output) return;
-    clipboardWrite(output);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(output).then(ok => { if (ok) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

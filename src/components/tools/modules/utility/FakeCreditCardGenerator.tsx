@@ -50,7 +50,7 @@ export default function FakeCreditCardGenerator() {
                   <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
                 </div>
               ))}
-              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')); toast.success('Copied all!'); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
             </div>
           </div>
         )}

@@ -36,8 +36,16 @@ export function PostDownloadSurvey() {
       localStorage.setItem("th_survey_responses", JSON.stringify(responses));
       localStorage.setItem(SURVEY_KEY, "1");
     } catch (e) { console.error("[toolzum]", e); }
-    toast.success(helpful ? "Thanks for your feedback!" : "We'll work on improving.");
     setVisible(false);
+    if (helpful) {
+      toast.success("Glad it helped!");
+      return;
+    }
+    // "No" needs a real channel — prefill the contact form so the
+    // complaint actually reaches us instead of dying in localStorage.
+    const page = window.location.pathname || "this tool";
+    window.location.href =
+      `/contact?subject=general&message=${encodeURIComponent(`Feedback: ${page} wasn't helpful because… `)}`;
   };
 
   return (

@@ -174,7 +174,7 @@ export function MinifierTool({ lang = 'javascript' }: { lang?: Lang }) {
               <span className="text-xs text-[var(--text-muted)] font-bold uppercase">Minified {cfg.label}</span>
               {output && (
                 <div className="flex gap-2">
-                  <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] border border-[var(--border-subtle)] rounded-lg" aria-label="Copy minified code"><Copy className="w-4 h-4" /></button>
+                  <button onClick={() => { clipboardWrite(output).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] border border-[var(--border-subtle)] rounded-lg" aria-label="Copy minified code"><Copy className="w-4 h-4" /></button>
                   <button onClick={() => { const blob = new Blob([output], { type: cfg.mime }); downloadOrShare(URL.createObjectURL(blob), `minified.${lang === 'javascript' ? 'js' : lang}`); }} className="p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] border border-[var(--border-subtle)] rounded-lg" aria-label="Download minified code"><Download className="w-4 h-4" /></button>
                 </div>
               )}

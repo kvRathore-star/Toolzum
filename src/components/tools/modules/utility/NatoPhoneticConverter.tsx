@@ -35,8 +35,7 @@ export default function NatoPhoneticConverter() {
   const output = input ? (mode === 'to' ? toNato(input) : fromNato(input)) : '';
 
   const copy = (txt: string) => {
-    clipboardWrite(txt);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(txt).then(ok => { if (ok) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const toggleMode = () => setMode(m => m === 'to' ? 'from' : 'to');

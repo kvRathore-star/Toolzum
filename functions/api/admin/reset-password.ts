@@ -1,5 +1,6 @@
 import { requireAdmin, json } from "../../../src/lib/admin-auth";
 import { checkRateLimit, recordRateLimit } from "../rate-limit";
+import { sendEmail } from "../../../src/lib/email";
 
 interface AdminEnv {
   DB: D1Database;
@@ -9,6 +10,8 @@ interface AdminEnv {
   BETTER_AUTH_URL: string;
   TURNSTILE_SECRET_KEY: string;
   ADMIN_EMAILS: string;
+  CLOUDFLARE_API_TOKEN?: string;
+  CLOUDFLARE_ACCOUNT_ID?: string;
 }
 
 export async function onRequestPost(context: { request: Request; env: AdminEnv }) {
@@ -57,5 +60,13 @@ export async function onRequestPost(context: { request: Request; env: AdminEnv }
 
   recordRateLimit(DB, "admin-reset-pw", ip, "/api/admin/reset-password");
 
-  return json({ success: true, tempPassword: tempPw, email: target.email });
+  // Email the temp password to the user directly (best-effort — the
+  // admin still gets it in the response if sending is unconfigured).
+  const emailed = await sendEmail(context.env, {
+    to: target.email,
+    subject: "Your Toolzum password was reset",
+    text: `An administrator reset your Toolzum password.\n\nTemporary password: ${tempPw}\n\nSign in and change it immediately from your account page. If you didn't request this, contact us at contact@toolzum.com.`,
+  });
+
+  return json({ success: true, tempPassword: tempPw, email: target.email, emailed });
 }

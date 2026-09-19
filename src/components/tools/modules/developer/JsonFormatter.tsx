@@ -41,8 +41,7 @@ export default function JsonFormatter() {
   const copyToClipboard = async () => {
     if (!output) return;
     try {
-      await clipboardWrite(output);
-      toast.success('JSON copied to clipboard!');
+      if (await clipboardWrite(output)) toast.success('JSON copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch (err) {
       toast.error('Failed to copy text.');
     }

@@ -94,8 +94,7 @@ export default function EmailSignatureGenerator() {
 
   const copyHtmlCode = async () => {
     try {
-      await clipboardWrite(generateSignatureHtml());
-      toast.success("Raw HTML code copied to clipboard!");
+      if (await clipboardWrite(generateSignatureHtml())) toast.success("Raw HTML code copied to clipboard!"); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch (err) {
       toast.error("Failed to copy HTML code.");
     }

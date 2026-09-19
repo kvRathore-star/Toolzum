@@ -32,7 +32,7 @@ export default function DuplicateWordRemover() {
           <textarea readOnly value={result} rows={6} aria-label="Text without duplicates" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
           <div className="flex items-center justify-between mt-2">
             <span className="text-xs text-[var(--text-muted)]">{outWords} unique words ({inWords - outWords} removed)</span>
-            <button onClick={() => { clipboardWrite(result); toast.success('Copied!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy unique words"><Copy size={14} /></button>
+            <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy unique words"><Copy size={14} /></button>
           </div>
         </div>
       )}

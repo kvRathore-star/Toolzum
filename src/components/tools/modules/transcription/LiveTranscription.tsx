@@ -115,8 +115,7 @@ export default function LiveTranscription() {
   const copyToClipboard = async () => {
     if (!transcript) return;
     try {
-      await clipboardWrite(transcript);
-      toast.success('Transcript copied to clipboard!');
+      if (await clipboardWrite(transcript)) toast.success('Transcript copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.');
     } catch (err) {
       toast.error('Failed to copy text.');
     }

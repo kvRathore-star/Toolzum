@@ -29,8 +29,7 @@ export default function UrlParser() {
   const copyAll = () => {
     if (!parsed) return;
     const data = parts.map(p => `${p.label}: ${p.value}`).join('\n');
-    clipboardWrite(data);
-    toast.success('All URL components copied!');
+    clipboardWrite(data).then(ok => { if (ok) toast.success('All URL components copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadJson = () => {
@@ -70,7 +69,7 @@ export default function UrlParser() {
               <div key={i} className={`flex items-center gap-4 px-5 py-2.5 ${i % 2 === 0 ? 'bg-[var(--bg-surface)]/50' : ''}`}>
                 <span className="w-[140px] shrink-0 text-xs font-medium text-[var(--text-secondary)]">{p.label}</span>
                 <code className="text-xs font-mono text-[var(--text-primary)] break-all">{p.value}</code>
-                <button onClick={() => { clipboardWrite(p.value); toast.success('Copied!'); }} className="ml-auto text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] shrink-0">Copy</button>
+                <button onClick={() => { clipboardWrite(p.value).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="ml-auto text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] shrink-0">Copy</button>
               </div>
             ))}
           </div>

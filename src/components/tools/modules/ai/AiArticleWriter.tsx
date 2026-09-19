@@ -556,8 +556,7 @@ export default function AiArticleWriter() {
     if (outline.length === 0) return;
     try {
       const content = renderContent(outline, format);
-      clipboardWrite(content);
-      toast.success('Copied to clipboard');
+      clipboardWrite(content).then(ok => { if (ok) toast.success('Copied to clipboard'); else toast.error('Copy blocked by the browser — select the text manually.'); });
     } catch (e: unknown) {
       toast.error(e instanceof Error ? e.message : 'Failed to copy');
     }

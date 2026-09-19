@@ -96,7 +96,7 @@ export default function BrailleTranslator() {
             <button onClick={translateToBraille} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Translate to Braille →
             </button>
-            <button onClick={() => { clipboardWrite(text); toast.success('Copied text!'); }} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={() => { clipboardWrite(text).then(ok => { if (ok) toast.success('Copied text!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Copy Text
             </button>
           </div>
@@ -114,7 +114,7 @@ export default function BrailleTranslator() {
             <button onClick={translateToText} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               ← Translate to Text
             </button>
-            <button onClick={() => { clipboardWrite(braille); toast.success('Copied Braille!'); }} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
+            <button onClick={() => { clipboardWrite(braille).then(ok => { if (ok) toast.success('Copied Braille!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer">
               Copy Braille
             </button>
           </div>

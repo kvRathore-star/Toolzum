@@ -24,11 +24,16 @@ threshold endpoint, scheduler, Cloudflare Email Service.
 2. **API token:** Cloudflare dashboard → My Profile → API Tokens →
    create with Email Sending `Send` permission. Save as repo secret
    `CLOUDFLARE_API_TOKEN` (already used by preview/migrate jobs).
+   Also save repo secret `CLOUDFLARE_ACCOUNT_ID` (dashboard sidebar,
+   under API) — both workflows interpolate it and fail without it.
 3. **Alert token:** generate (`openssl rand -hex 32`) and store twice:
    - Pages env var `ALERT_TOKEN` (dashboard → toolzum → Settings →
      Environment variables → Production), AND
    - repo secret `ALERT_TOKEN` (Settings → Secrets → Actions).
 4. **Recipient:** repo secret `ALERT_TO` (the email that gets paged).
+   Note: contact-form mail uses a separate optional Pages secret
+   `CONTACT_TO` (defaults to the owner Gmail) — setting `ALERT_TO`
+   does not cover it and vice versa.
 5. **Test:** Actions → Alert Relay → Run workflow → check inbox.
    Without secrets every step skips loudly (nothing fails silently).
 

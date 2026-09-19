@@ -128,8 +128,7 @@ export default function WritingTools() {
       `Flesch-Kincaid: ${result.fleschKincaid}`,
       `Reading Ease: ${result.readingEase}`,
     ].join('\n');
-    clipboardWrite(stats);
-    toast.success('Stats copied!');
+    clipboardWrite(stats).then(ok => { if (ok) toast.success('Stats copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleClear = () => {

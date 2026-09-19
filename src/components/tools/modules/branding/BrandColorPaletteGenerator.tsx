@@ -79,8 +79,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
   };
 
   const handleCopy = () => {
-    clipboardWrite(outputText);
-    toast.success('Copied to clipboard!');
+    clipboardWrite(outputText).then(ok => { if (ok) toast.success('Copied to clipboard!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {
@@ -169,7 +168,7 @@ Use real, harmonious hex codes appropriate for the brand and style.`;
                     {paletteName && <h5 className="font-bold text-[var(--text-primary)]">{paletteName}</h5>}
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {swatches.map((c, i) => (
-                        <button key={i} onClick={() => { clipboardWrite(c.hex); toast.success(`${c.name} ${c.hex} copied!`); }} className="rounded-xl overflow-hidden border border-[var(--border-subtle)] text-left hover:shadow-md transition-shadow" aria-label={`Copy ${c.name} ${c.hex}`}>
+                        <button key={i} onClick={() => { clipboardWrite(c.hex).then(ok => { if (ok) toast.success(`${c.name} ${c.hex} copied!`); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="rounded-xl overflow-hidden border border-[var(--border-subtle)] text-left hover:shadow-md transition-shadow" aria-label={`Copy ${c.name} ${c.hex}`}>
                           <div className="h-16 w-full" style={{ backgroundColor: c.hex }} />
                           <div className="p-2 bg-[var(--bg-overlay)]">
                             <div className="text-xs font-bold text-[var(--text-primary)]">{c.name}</div>

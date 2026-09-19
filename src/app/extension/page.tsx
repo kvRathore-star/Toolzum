@@ -25,7 +25,6 @@ export default function ChromeExtensionPage() {
   const [selectedColor, setSelectedColor] = useState("#a855f7");
   const [copied, setCopied] = useState(false);
   const [qrText, setQrText] = useState("https://toolzum.com");
-  const [copiedZip, setCopiedZip] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState("");
   const [waitlistDone, setWaitlistDone] = useState(false);
   const [waitlistSending, setWaitlistSending] = useState(false);
@@ -55,11 +54,11 @@ export default function ChromeExtensionPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadZip = () => {
-    toast("Extension ZIP isn't published yet — join the waitlist below and we'll email you on launch.", { icon: "📦" });
-
-    setCopiedZip(true);
-    setTimeout(() => setCopiedZip(false), 3000);
+  const handleCopyQrText = async () => {
+    if (!qrText.trim()) { toast.error("Type some text first."); return; }
+    const ok = await clipboardWrite(qrText.trim());
+    if (ok) toast.success("Text copied — paste it into the QR generator below.");
+    else toast.error("Copy blocked by the browser — select the text manually.");
   };
 
   const joinWaitlist = async (e: React.FormEvent) => {
@@ -256,9 +255,12 @@ export default function ChromeExtensionPage() {
                       </div>
                     </div>
 
-                    <Button className="w-full text-xs py-2 h-auto" onClick={() => toast("Select a color anywhere on your screen.", { icon: "🎨" })}>
+                    <Button className="w-full text-xs py-2 h-auto" onClick={() => toast("Demo preview — the eyedropper ships inside the extension.", { icon: "🎨" })}>
                       <Pipette className="w-3.5 h-3.5 mr-2" /> Launch Pipette Eyedropper
                     </Button>
+                    <Link href="/design/color-picker/" className="w-full text-xs py-2 h-auto mt-2 inline-flex items-center justify-center gap-1.5 rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                      Try the Web Color Picker Instead <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 )}
 
@@ -267,28 +269,29 @@ export default function ChromeExtensionPage() {
                   <div role="tabpanel" id="previewpanel-tools" aria-labelledby="previewtab-tools" className="flex-1 space-y-2">
                     <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">Instant Operations</h4>
                     
-                    <button onClick={() => toast("Page snapshot capturing queued.", { icon: "📸" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <Link href="/developer/website-screenshot/" className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Camera className="w-3.5 h-3.5 text-[var(--accent)]" /> Capture Full Page</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
-                    </button>
+                    </Link>
 
-                    <button onClick={() => toast("Opening Base64 Encoder...", { icon: "🔗" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <Link href="/developer/base64-encode-decode/" className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Copy className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" /> Base64 Encoder</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
-                    </button>
+                    </Link>
 
-                    <button onClick={() => toast("Opening Password Generator...", { icon: "🔑" })} className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
+                    <Link href="/utility/password-generator/" className="w-full flex items-center justify-between p-2.5 rounded bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)]/80 border border-[var(--border-subtle)] text-xs text-left group">
                       <span className="flex items-center gap-2"><Settings className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" /> Password Generator</span>
                       <ArrowRight className="w-3 h-3 text-[var(--text-muted)] group-hover:translate-x-0.5 transition-transform" />
-                    </button>
+                    </Link>
                   </div>
                 )}
 
                 {/* Tab content: QR Code */}
                 {activeTab === "qr" && (
                   <div role="tabpanel" id="previewpanel-qr" aria-labelledby="previewtab-qr" className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">QR Code generator</h4>
+                      <div>
+                        <h4 className="text-xs font-semibold uppercase text-[var(--text-muted)] tracking-wider mb-2">QR Code generator</h4>
+                        <p className="text-[10px] text-[var(--text-muted)] mb-2">Visual mock — copy your text, then generate a real code below.</p>
                       <input
                         type="text"
                         value={qrText}
@@ -307,9 +310,12 @@ export default function ChromeExtensionPage() {
                       </div>
                     </div>
                     
-                    <Button variant="secondary" className="w-full text-xs py-2 h-auto mt-2" onClick={() => toast("Copied simulated QR code to clipboard", { icon: "✅" })}>
-                      Copy Image
+                    <Button variant="secondary" className="w-full text-xs py-2 h-auto mt-2" onClick={handleCopyQrText}>
+                      Copy Text
                     </Button>
+                    <Link href="/utility/qr-code-generator/" className="w-full text-xs py-2 h-auto mt-2 inline-flex items-center justify-center gap-1.5 rounded-md border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+                      Open Real QR Generator <ArrowRight className="w-3 h-3" />
+                    </Link>
                   </div>
                 )}
 
@@ -338,13 +344,8 @@ export default function ChromeExtensionPage() {
               <div>
                 <h4 className="font-semibold">Download and Extract ZIP</h4>
                 <p className="text-[var(--text-secondary)] mt-1">
-                  Click the "Download Extension ZIP" button at the top to download the extension bundle, then extract it to a folder on your computer.
+                  The extension ZIP isn't published yet — join the waitlist above and we'll email you the moment it's ready, with install instructions.
                 </p>
-                {copiedZip && (
-                  <div className="mt-2 text-xs text-emerald-700 dark:text-emerald-400 font-medium">
-                    ✓ Extension ZIP generated and downloaded successfully!
-                  </div>
-                )}
               </div>
             </div>
 

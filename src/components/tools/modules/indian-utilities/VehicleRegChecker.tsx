@@ -358,8 +358,7 @@ export default function VehicleRegChecker() {
 
   const copyPlate = () => {
     if (result?.formatted) {
-      clipboardWrite(result.formatted);
-      toast.success('Registration number copied');
+      clipboardWrite(result.formatted).then(ok => { if (ok) toast.success('Registration number copied'); else toast.error('Copy blocked by the browser — select the text manually.'); });
     }
   };
 

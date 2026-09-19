@@ -253,8 +253,7 @@ export default function RegionalFontGenerator() {
               <button
                 onClick={() => {
                   const allText = allStyles.map(s => `${s.name}: ${s.output}`).join('\n');
-                  clipboardWrite(allText);
-                  toast.success('All styles copied!');
+                  clipboardWrite(allText).then(ok => { if (ok) toast.success('All styles copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); });
                 }}
                 className="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white font-bold py-3 px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2 cursor-pointer shadow-lg shadow-purple-500/25"
               >
