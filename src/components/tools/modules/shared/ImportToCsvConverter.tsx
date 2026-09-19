@@ -135,7 +135,7 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
             onClick={() => switchMode(m.slug)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               m.slug === slug
-                ? 'bg-blue-600 text-white shadow-sm'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
                 : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
             }`}
           >
@@ -151,7 +151,7 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
                 key={opt.name}
                 onClick={() => { setIsReverse(opt === mode.reverse); setInput(''); setOutput(''); }}
                 className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  (opt === mode.reverse) === isReverse ? 'bg-blue-600 text-white shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+                  (opt === mode.reverse) === isReverse ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
                 {opt.name}
@@ -164,14 +164,14 @@ export default function ImportToCsvConverter({ slug }: { slug: string }) {
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} placeholder={`Paste ${active.inputLabel} here...`} aria-label={`Paste ${active.inputLabel}`}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           Convert to {active.outputLabel.split(' ')[0]}
         </button>
         {output && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">{active.outputLabel}</span>
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
             </div>
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
           </div>

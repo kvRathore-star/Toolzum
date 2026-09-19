@@ -36,15 +36,15 @@ export default function ComingSoonTool({ toolName }: { toolName: string }) {
       </p>
 
       {submitted ? (
-        <div className="bg-emerald-700/10 border border-emerald-500/20 rounded-2xl p-6 max-w-sm w-full mx-auto backdrop-blur-sm animate-in fade-in zoom-in duration-300">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl p-6 max-w-sm w-full mx-auto backdrop-blur-sm animate-in fade-in zoom-in duration-300">
           <div className="flex items-center justify-center mb-3">
-            <div className="w-10 h-10 bg-emerald-700/20 rounded-full flex items-center justify-center text-emerald-700 dark:text-emerald-400">
+            <div className="w-10 h-10 bg-emerald-700/20 rounded-full flex items-center justify-center text-[var(--accent)]">
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
           </div>
-          <h3 className="text-emerald-700 dark:text-emerald-400 font-semibold mb-1">You're on the list!</h3>
+          <h3 className="text-[var(--accent)] font-semibold mb-1">You're on the list!</h3>
           <p className="text-emerald-500/80 text-sm">We'll notify you the moment this tool goes live.</p>
         </div>
       ) : (

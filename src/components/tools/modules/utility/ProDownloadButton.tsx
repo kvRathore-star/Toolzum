@@ -57,7 +57,7 @@ export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, is
       </div>
       <Link
         href="/pricing"
-        className="block w-full text-center text-xs text-amber-700 dark:text-amber-400 hover:text-amber-300 underline transition-colors"
+        className="block w-full text-center text-xs text-[var(--accent)] hover:text-amber-300 underline transition-colors"
       >
         Upgrade to Pro for batch ZIP downloads
       </Link>

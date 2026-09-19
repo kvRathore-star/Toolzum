@@ -225,8 +225,8 @@ export default function ObjectRemover() {
   if (!imageSrc) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-[var(--accent)] shrink-0" />
           <span><strong>100% Client-Side Inpaint:</strong> Draw red highlight strokes over unwanted objects to erase them using surrounding textures.</span>
         </div>
         <FileUploader
@@ -315,7 +315,7 @@ export default function ObjectRemover() {
             {processedUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 Download Restructured Image
               </button>

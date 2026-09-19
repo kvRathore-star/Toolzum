@@ -167,7 +167,7 @@ export default function PdfTableOfContents() {
       {outputUrl && (
         <button
           onClick={() => downloadOrShare(outputUrl, `toc_${file.name}`)}
-          className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg"
+          className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg"
         >
           Download PDF with Contents
         </button>

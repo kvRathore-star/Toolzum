@@ -92,7 +92,7 @@ function MarkdownToHtmlTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">HTML Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
-              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .html</button>
+              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .html</button>
             </div>
           </div>
           <div className="flex-1 overflow-auto p-4">
@@ -166,7 +166,7 @@ function TextToMarkdownTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
-              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
+              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
             </div>
           </div>
           <div className="flex-1 overflow-auto p-4">
@@ -243,7 +243,7 @@ function HtmlToMarkdownTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Markdown Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
-              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
+              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .md</button>
             </div>
           </div>
           <div className="flex-1 overflow-auto p-4">
@@ -329,7 +329,7 @@ function MarkdownToTextTab() {
             <span className="font-bold text-[var(--text-primary)] text-sm">Text Output</span>
             <div className="flex gap-2">
               <button onClick={copyOutput} disabled={!output} className="text-xs bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Copy</button>
-              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .txt</button>
+              <button onClick={downloadOutput} disabled={!output} className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50">Save .txt</button>
             </div>
           </div>
           <div className="flex-1 overflow-auto p-4">

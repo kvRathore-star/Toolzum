@@ -143,7 +143,7 @@ export default function GifResizer() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Resize animated GIFs</strong> while preserving animation and quality.
         </div>
         <FileUploader
@@ -267,8 +267,8 @@ export default function GifResizer() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Resized!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Resized!</h4>
               <img src={outputUrl} alt="Resized GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.split('.')[0]}-resized.gif`)}

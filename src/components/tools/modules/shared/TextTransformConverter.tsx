@@ -45,7 +45,7 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
         />
         <button
           onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]"
         >
           Convert
         </button>
@@ -55,7 +55,7 @@ export default function TextTransformConverter({ slug }: { slug: string; descrip
               <span className="text-xs text-[var(--text-secondary)]">{config.outputLabel}</span>
               <button
                 onClick={handleCopy}
-                className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                className="text-xs text-[var(--accent)] hover:underline font-medium"
               >
                 {copied ? 'Copied!' : 'Copy'}
               </button>

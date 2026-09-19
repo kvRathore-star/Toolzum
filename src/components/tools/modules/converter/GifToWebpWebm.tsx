@@ -297,8 +297,8 @@ export default function GifToWebpWebm() {
           {(outputUrl || outputUrl2) && (
             <div className="space-y-4">
               {outputUrl && (
-                <div role="status" className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-                  <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">WebP Ready!</h4>
+                <div role="status" className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+                  <h4 className="text-xl font-bold text-[var(--accent)] mb-4">WebP Ready!</h4>
                   {outputFormat !== 'both' ? (
                     <img src={outputUrl} alt="Converted WebP" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
                   ) : (
@@ -315,8 +315,8 @@ export default function GifToWebpWebm() {
                 </div>
               )}
               {outputUrl2 && (
-                <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-                  <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">WebM Ready!</h4>
+                <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+                  <h4 className="text-xl font-bold text-[var(--accent)] mb-4">WebM Ready!</h4>
                   <video src={outputUrl2} controls autoPlay loop className="w-full max-h-[200px] rounded-lg mb-6" />
                   <button
                     onClick={() => downloadOrShare(outputUrl2, `${file.name.split('.')[0]}.webm`)}

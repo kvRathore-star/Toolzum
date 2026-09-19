@@ -236,12 +236,12 @@ export default function GstInvoiceGenerator() {
 
   return (
     <div className="max-w-7xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between bg-emerald-700/10 border border-emerald-500/20 p-6 rounded-2xl">
-        <div className="text-emerald-700 dark:text-emerald-400 text-sm space-y-2">
+      <div className="flex items-center justify-between bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-6 rounded-2xl">
+        <div className="text-[var(--accent)] text-sm space-y-2">
           <h4 className="font-bold text-emerald-300">Client-Side GST Invoice Builder</h4>
           <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">Create legally compliant GST Invoices matching Indian standards. CGST/SGST vs IGST rates are automatically computed based on the Biller and Client states. Fully private, generated locally.</p>
         </div>
-        <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0 ml-4"><Crown className="w-3.5 h-3.5" /> Pro</span>
+        <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0 ml-4"><Crown className="w-3.5 h-3.5" /> Pro</span>
       </div>
 
       <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">

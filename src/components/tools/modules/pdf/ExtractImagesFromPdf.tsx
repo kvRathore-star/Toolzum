@@ -221,7 +221,7 @@ export default function ExtractImagesFromPdf() {
 
                <button 
                   onClick={() => downloadOrShare(outputUrl, `extracted_images_${file.name.replace('.pdf', '')}.zip`)}
-                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                  className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
                 >
                   <Download className="w-5 h-5" />
                   Download Images ZIP

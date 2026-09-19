@@ -45,7 +45,7 @@ export default function CompoundInterestCalculator() {
                   <tr key={row.year} className="border-b border-[var(--border-subtle)] last:border-0 hover:bg-[var(--bg-elevated)]/50">
                     <td className="px-3 py-1.5 text-[var(--text-primary)] font-medium">{row.year}</td>
                     <td className="px-3 py-1.5 text-right text-[var(--accent)] font-medium">${row.value.toLocaleString()}</td>
-                    <td className="px-3 py-1.5 text-right text-emerald-700 dark:text-emerald-400">${row.interest.toLocaleString()}</td>
+                    <td className="px-3 py-1.5 text-right text-[var(--accent)]">${row.interest.toLocaleString()}</td>
                     <td className="px-3 py-1.5 text-right">
                       <div className="inline-flex items-center gap-1">
                         <div className="w-16 h-1.5 bg-[var(--bg-elevated)] rounded-full overflow-hidden">

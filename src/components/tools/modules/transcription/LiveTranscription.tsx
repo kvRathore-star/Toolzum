@@ -148,14 +148,14 @@ export default function LiveTranscription() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl flex items-center justify-between">
-        <div className="text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl flex items-center justify-between">
+        <div className="text-[var(--accent)] text-sm">
           <strong>100% Client-Side Voice AI:</strong> Audio is processed locally by your browser's speech engine. No audio files are uploaded to our servers.
         </div>
         <select aria-label="Language" 
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="bg-white dark:bg-black border border-blue-500/30 text-blue-300 text-sm rounded-lg px-3 py-1.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+          className="bg-white dark:bg-black border border-[var(--accent)]/30 text-blue-300 text-sm rounded-lg px-3 py-1.5 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
         >
           <option value="en-US">English (US)</option>
           <option value="en-IN">English (India)</option>
@@ -214,10 +214,10 @@ export default function LiveTranscription() {
           )}
           
           <span>{transcript}</span>
-          <span className="text-blue-700 dark:text-blue-400 opacity-80">{interimTranscript}</span>
+          <span className="text-[var(--accent)] opacity-80">{interimTranscript}</span>
           
           {isRecording && interimTranscript === '' && (
-            <span className="inline-block w-2 h-5 ml-1 bg-blue-500 animate-pulse align-middle" />
+            <span className="inline-block w-2 h-5 ml-1 bg-[var(--accent-ink)] animate-pulse align-middle" />
           )}
         </div>
       </div>

@@ -234,7 +234,7 @@ export function DataAnonymizer() {
           </div>
         )}
             <div className="grid grid-cols-2 gap-4 text-xs">
-              <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+              <div className="p-3 bg-zinc-50 dark:bg-[var(--bg-elevated)] rounded-lg">
                 <span className="font-bold text-[var(--text-muted)]">Before</span>
                 <pre className="mt-1 whitespace-pre-wrap font-mono">{input}</pre>
               </div>
@@ -660,7 +660,7 @@ export function LogAnalyzer() {
           output={<>
         {stats.total > 0 && (
           <div className="flex gap-4 text-xs">
-            <span className="px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">Lines: {stats.total}</span>
+            <span className="px-2 py-1 rounded bg-blue-100 text-blue-700 dark:bg-[var(--accent)]/10 dark:text-blue-300">Lines: {stats.total}</span>
             <span className="px-2 py-1 rounded bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">Errors: {stats.errorRate}</span>
           </div>
         )}

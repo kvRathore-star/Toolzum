@@ -122,9 +122,9 @@ export default function PdfMerger() {
       )}
 
       {outputUrl ? (
-        <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 animate-in slide-in-from-bottom-4">
+        <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-4 animate-in slide-in-from-bottom-4">
           <div>
-            <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400">Merge Complete!</h4>
+            <h4 className="text-lg font-bold text-[var(--accent)]">Merge Complete!</h4>
             <p className="text-emerald-500/80 text-sm">Your files have been successfully combined.</p>
           </div>
           

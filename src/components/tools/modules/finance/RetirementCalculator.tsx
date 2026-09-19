@@ -41,7 +41,7 @@ export default function RetirementCalculator() {
             </div>
             <div className="rounded-lg p-2 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Growth</div>
-              <div className="text-sm font-bold text-emerald-700 dark:text-emerald-400">${growth.toLocaleString()}</div>
+              <div className="text-sm font-bold text-[var(--accent)]">${growth.toLocaleString()}</div>
             </div>
             <div className="rounded-lg p-2 text-center">
               <div className="text-xs text-[var(--text-tertiary)]">Growth %</div>

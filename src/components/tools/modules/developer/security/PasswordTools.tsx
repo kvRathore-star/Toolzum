@@ -135,7 +135,7 @@ export function TwoFactorAuthGenerator() {
       customResult={
         uri ? (
           <div className="space-y-3">
-            <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+            <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4">
               <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">TOTP URI</label>
               <div className="bg-[var(--bg-overlay)] rounded-lg p-3 mb-3 font-mono text-xs break-all text-[var(--text-primary)]">{uri}</div>
               <div className="grid grid-cols-3 gap-2 text-xs">

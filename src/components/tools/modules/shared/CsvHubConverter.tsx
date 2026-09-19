@@ -48,7 +48,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
               onClick={() => setActiveSlug(tab.slug)}
               className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 activeSlug === tab.slug
-                  ? 'bg-blue-600 text-white shadow-sm'
+                  ? 'bg-[var(--accent-ink)] text-white shadow-sm'
                   : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)]'
               }`}
             >
@@ -64,7 +64,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
         />
         <button
           onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]"
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]"
         >
           Convert
         </button>
@@ -74,7 +74,7 @@ export default function CsvHubConverter({ slug }: { slug: string }) {
               <span className="text-xs text-[var(--text-secondary)]">{mode.outputLabel}</span>
               <button
                 onClick={handleCopy}
-                className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium"
+                className="text-xs text-[var(--accent)] hover:underline font-medium"
               >
                 Copy
               </button>

@@ -41,7 +41,7 @@ To check manually, run:
       <button onClick={check} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Analyze Headers</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -75,11 +75,11 @@ export function ContentSecurityPolicyGenerator() {
       {csp && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-teal-400">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">CSP Header Value</span>
+            <span className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">CSP Header Value</span>
             <button onClick={copy} className="px-2.5 py-1 text-xs bg-teal-500 hover:bg-teal-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <div className="bg-zinc-100 dark:bg-zinc-800 rounded-lg p-3 font-mono text-xs break-all text-zinc-800 dark:text-zinc-200">{csp}</div>
-          <p className="text-xs text-zinc-500 mt-2">Directives: {csp.split(';').length} · Length: {csp.length} chars</p>
+          <div className="bg-[var(--bg-overlay)] rounded-lg p-3 font-mono text-xs break-all text-[var(--text-primary)]">{csp}</div>
+          <p className="text-xs text-[var(--text-muted)] mt-2">Directives: {csp.split(';').length} · Length: {csp.length} chars</p>
         </div>
       )}
     </Section>
@@ -119,15 +119,15 @@ To test manually:
   return (
     <Section title="CORS Inspector">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {originPresets.map(o => <button key={o} onClick={() => { setOrigin(o); }} className="px-2.5 py-1 text-xs rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 border border-blue-500/20 transition-colors">{o}</button>)}
+        {originPresets.map(o => <button key={o} onClick={() => { setOrigin(o); }} className="px-2.5 py-1 text-xs rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border border-[var(--accent)]/20 transition-colors">{o}</button>)}
       </div>
       <Input label="Origin URL" value={origin} onChange={setOrigin} placeholder="https://example.com" />
       <Input label="Methods (comma separated)" value={methods} onChange={setMethods} placeholder="GET, POST, PUT" />
-      <button onClick={inspect} className="px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
+      <button onClick={inspect} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors">Inspect</button>
       {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-blue-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]">
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
+          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
     </Section>
@@ -172,10 +172,10 @@ ${outOrigin !== '*' ? '' : '# Warning: Wildcard origin with credentials=false'}`
       {headers && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-sky-400">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">CORS Response Headers</span>
+            <span className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">CORS Response Headers</span>
             <button onClick={copy} className="px-2.5 py-1 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg">{headers}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-3 rounded-lg">{headers}</pre>
         </div>
       )}
     </Section>
@@ -218,7 +218,7 @@ To check from CLI:
       <button onClick={lookup} className="px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium transition-colors">Lookup</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-red-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -272,7 +272,7 @@ export function SqlInjectionDetector() {
               <div className="p-3 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-xl border-l-4 border-red-400 text-sm font-medium">Found {detections.length} potential SQL injection pattern(s)</div>
               {detections.map((d, i) => (
                 <div key={i} className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-red-400 flex items-center justify-between">
-                  <span className="text-sm text-zinc-800 dark:text-zinc-200">{d.name}</span>
+                  <span className="text-sm text-[var(--text-primary)]">{d.name}</span>
                   <span className={`px-2 py-0.5 rounded-full text-xs font-bold text-white ${riskColors[d.risk] || 'bg-zinc-500'}`}>{d.risk}</span>
                 </div>
               ))}
@@ -318,13 +318,13 @@ export function XssProtectionChecker() {
           {checks.map(c => (
             <div key={c.label} className={`bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 ${c.pass ? 'border-green-400' : 'border-red-400'} flex items-center justify-between`}>
               <div>
-                <span className="text-sm text-zinc-800 dark:text-zinc-200">{c.label}</span>
-                <p className="text-xs text-zinc-500">{c.desc}</p>
+                <span className="text-sm text-[var(--text-primary)]">{c.label}</span>
+                <p className="text-xs text-[var(--text-muted)]">{c.desc}</p>
               </div>
               <span className={`text-lg ${c.pass ? 'text-green-500' : 'text-red-500'}`}>{c.pass ? '✓' : '✗'}</span>
             </div>
           ))}
-          <div className="p-3 bg-[var(--bg-surface)] rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-500">
+          <div className="p-3 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] text-xs text-[var(--text-muted)]">
             Recommendation: Use CSP with strict script-src as primary XSS defense. X-XSS-Protection is deprecated — modern browsers ignore it.
           </div>
         </div>
@@ -371,19 +371,19 @@ export function CspValidator() {
         <div className="mt-4 space-y-2">
           {report.valid.length > 0 && (
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-green-400">
-              <span className="text-xs font-semibold text-zinc-500 block mb-2">Valid Directives ({report.valid.length})</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)] block mb-2">Valid Directives ({report.valid.length})</span>
               {report.valid.map((d, i) => <div key={i} className="text-xs text-green-700 dark:text-green-300 mb-1">✓ {d}</div>)}
             </div>
           )}
           {report.unknown.length > 0 && (
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-red-400">
-              <span className="text-xs font-semibold text-zinc-500 block mb-2">Unknown Directives</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)] block mb-2">Unknown Directives</span>
               {report.unknown.map((d, i) => <div key={i} className="text-xs text-red-600 dark:text-red-400">⚠ {d}</div>)}
             </div>
           )}
           {report.warnings.length > 0 && (
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-yellow-400">
-              <span className="text-xs font-semibold text-zinc-500 block mb-2">Warnings</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)] block mb-2">Warnings</span>
               {report.warnings.map((w, i) => <div key={i} className="text-xs text-yellow-700 dark:text-yellow-300">ℹ {w}</div>)}
             </div>
           )}

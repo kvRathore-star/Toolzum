@@ -54,7 +54,7 @@ export default function ChurnRateCalculator() {
         <div>
           <div className="flex justify-between text-xs mb-1">
             <span className="text-[var(--text-secondary)]">Retention</span>
-            <span className="text-emerald-700 dark:text-emerald-400 font-medium">{retentionPct.toFixed(1)}%</span>
+            <span className="text-[var(--accent)] font-medium">{retentionPct.toFixed(1)}%</span>
           </div>
           <div className="h-3 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
             <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-full transition-all duration-500" style={{ width: `${retentionPct}%` }} />

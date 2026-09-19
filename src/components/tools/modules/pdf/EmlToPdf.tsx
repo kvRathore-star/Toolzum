@@ -248,11 +248,11 @@ export default function EmlToPdf() {
       </div>
 
       {parsedEmail?.isMsg ? (
-        <div className="bg-amber-500/10 border border-amber-500/20 p-8 rounded-2xl text-center space-y-4">
-          <svg className="w-12 h-12 mx-auto text-amber-700 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-8 rounded-2xl text-center space-y-4">
+          <svg className="w-12 h-12 mx-auto text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p className="text-amber-700 dark:text-amber-400 font-bold text-lg">MSG Format Not Supported</p>
+          <p className="text-[var(--accent)] font-bold text-lg">MSG Format Not Supported</p>
           <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] max-w-md mx-auto">
             .msg files require server-side processing and cannot be converted directly in the browser.
             Please open the file in Microsoft Outlook, export it as <strong>.eml</strong> format, and try again.
@@ -317,7 +317,7 @@ export default function EmlToPdf() {
                 <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
                   <h4 className="font-bold text-emerald-500">PDF Ready</h4>
                 </div>
-                <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-500">
+                <div className="bg-[var(--accent)]/10 rounded-xl overflow-hidden border border-[var(--accent)]/20 flex flex-col items-center justify-center p-8 text-emerald-500">
                   <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
@@ -325,7 +325,7 @@ export default function EmlToPdf() {
                 </div>
                 <button
                   onClick={() => downloadOrShare(pdfUrl, file.name.replace(/\.(eml|msg)$/i, '.pdf'))}
-                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                  className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

@@ -69,7 +69,7 @@ export default function SoapApiTester() {
         </div>
         <div className="grid grid-cols-2 gap-2">
           <button onClick={calc} className="bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate SOAP Envelope</button>
-          <button onClick={send} disabled={sending} className="bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] disabled:opacity-50">{sending ? 'Sending…' : 'Send Request'}</button>
+          <button onClick={send} disabled={sending} className="bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] disabled:opacity-50">{sending ? 'Sending…' : 'Send Request'}</button>
         </div>
         {response && (
           <div className="relative">

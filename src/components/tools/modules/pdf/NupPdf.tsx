@@ -248,7 +248,7 @@ export default function NupPdf() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 h-fit">
           <h4 className="text-[var(--text-primary)] font-medium border-b border-[var(--border-subtle)] pb-2">N-up Layout Settings</h4>
 
-          <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-xs space-y-1">
+          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-xs space-y-1">
             <p><strong>Note:</strong> N-up processing rasterizes PDF pages to images. Some text quality may be reduced. This process happens entirely in your browser.</p>
           </div>
 
@@ -320,7 +320,7 @@ export default function NupPdf() {
 
                <button
                   onClick={() => downloadOrShare(outputUrl, `${layout}_${file.name}`)}
-                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                  className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download N-up PDF

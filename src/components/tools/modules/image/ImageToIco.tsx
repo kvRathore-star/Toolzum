@@ -301,8 +301,8 @@ export default function ImageToIco() {
 
         <div className="space-y-6">
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">ICO Ready!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">ICO Ready!</h4>
               <div className="bg-[var(--bg-overlay)] dark:bg-black rounded-xl p-6 mb-6 flex items-center justify-center min-h-[120px] chess-bg">
                 <style>{`
                   .chess-bg {

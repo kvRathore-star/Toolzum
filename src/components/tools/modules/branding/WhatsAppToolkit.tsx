@@ -60,7 +60,7 @@ function MessageLinkTab() {
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{whatsappUrl}</code>
           <button onClick={handleCopy}
-            className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
+            className="p-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer"
@@ -104,7 +104,7 @@ function GroupLinkTab() {
         <div className="flex items-center gap-2 p-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl">
           <code className="flex-1 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate">{groupUrl}</code>
           <button onClick={handleCopy}
-            className="p-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">
+            className="p-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
           </button>
         </div>
@@ -161,7 +161,7 @@ function FormatTextTab() {
               </div>
               <code className="block text-xs text-[var(--text-primary)] bg-[var(--bg-overlay)] dark:bg-black/40 rounded-lg p-2 break-all">{f.syntax}</code>
               <button onClick={() => handleCopy(f.syntax, f.label)}
-                className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-colors">
+                className="w-full flex items-center justify-center gap-1 px-3 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg text-xs font-semibold transition-colors">
                 {copied === f.label ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                 {copied === f.label ? 'Copied!' : 'Copy to Clipboard'}
               </button>
@@ -268,7 +268,7 @@ function BulkLinkTab() {
             </div>
             <div className="flex gap-2">
               <button onClick={copyAll}
-                className="flex-1 sm:flex-none px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
+                className="flex-1 sm:flex-none px-4 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap">
                 {copiedAll ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 Copy All ({filteredData.length})
               </button>
@@ -396,10 +396,10 @@ function QrTab() {
                 setLogoImage(URL.createObjectURL(file));
               }
             }}
-              className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-emerald-700 dark:text-emerald-400 hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
+              className="w-full text-xs text-[var(--text-secondary)] file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 dark:file:bg-emerald-900/20 file:text-emerald-600 dark:file:text-[var(--accent)] hover:file:bg-emerald-100 dark:hover:file:bg-emerald-900/30" />
           </div>
           <button onClick={handleDownload}
-            className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full py-3.5 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download QR Code
           </button>
           <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
@@ -478,7 +478,7 @@ function QuickRepliesTab() {
           <input value={newContent} onChange={e => setNewContent(e.target.value)} placeholder="Message content (e.g. Your order #123 is confirmed!)" aria-label="Message content"
             className="md:col-span-1 bg-white dark:bg-black/50 border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
           <button onClick={addTemplate}
-            className="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
+            className="px-4 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors">
             <Plus className="w-3.5 h-3.5" /> Save Template
           </button>
         </div>
@@ -848,7 +848,7 @@ function StatusDesignerTab() {
           </div>
 
           <button onClick={handleDownload}
-            className="w-full py-3.5 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full py-3.5 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download Status Image (1080×1920)
           </button>
         </div>

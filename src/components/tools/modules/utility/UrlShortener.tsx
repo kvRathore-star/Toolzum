@@ -64,7 +64,7 @@ export default function UrlShortener() {
             <div>
               <h2 className="text-xl font-bold text-[var(--text-primary)]">URL Shortener</h2>
               <p className="text-sm text-[var(--text-secondary)]">Create short, memorable links instantly</p>
-              <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">Server-based shortening: your URL is sent to our API to create the short link — it is not processed on-device.</p>
+              <p className="text-xs text-[var(--accent)] mt-1">Server-based shortening: your URL is sent to our API to create the short link — it is not processed on-device.</p>
             </div>
           </div>
         </div>

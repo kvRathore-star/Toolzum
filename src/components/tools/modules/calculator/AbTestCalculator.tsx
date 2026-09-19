@@ -67,11 +67,11 @@ export default function AbTestCalculator() {
         </div>
         <div className="flex-1 text-center">
           <div className="text-xs text-[var(--text-tertiary)]">Variant</div>
-          <div className={`text-lg font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
+          <div className={`text-lg font-bold ${pct >= 0 ? 'text-[var(--accent)]' : 'text-red-700 dark:text-red-400'}`}>{(cr2 * 100).toFixed(1)}%</div>
         </div>
       </div>
       <div className="text-center">
-        <span className={`text-sm font-bold ${pct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
+        <span className={`text-sm font-bold ${pct >= 0 ? 'text-[var(--accent)]' : 'text-red-700 dark:text-red-400'}`}>
           {pct >= 0 ? '+' : ''}{pct.toFixed(1)}% {pct >= 0 ? 'improvement' : 'decline'}
         </span>
       </div>
@@ -89,7 +89,7 @@ export default function AbTestCalculator() {
           <div className="text-sm font-bold text-[var(--text-primary)]">{(stats.ciLo * 100).toFixed(1)}…{(stats.ciHi * 100).toFixed(1)}pp</div>
         </div>
       </div>
-      <div role="status" className={`text-center text-sm font-bold rounded-xl px-3 py-2 ${stats.significant ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' : 'bg-amber-500/10 text-[var(--accent)]'}`}>
+      <div role="status" className={`text-center text-sm font-bold rounded-xl px-3 py-2 ${stats.significant ? 'bg-emerald-500/10 text-[var(--accent)]' : 'bg-amber-500/10 text-[var(--accent)]'}`}>
         {stats.verdict}
       </div>
     </div>

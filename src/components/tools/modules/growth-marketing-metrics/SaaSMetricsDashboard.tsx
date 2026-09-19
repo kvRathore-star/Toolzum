@@ -193,7 +193,7 @@ export function SaaSMetricsDashboard() {
         <div className="lg:col-span-1 space-y-4">
           {/* Revenue */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><DollarSign size={14} className="text-emerald-700 dark:text-emerald-400" /> Revenue</h2>
+            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><DollarSign size={14} className="text-[var(--accent)]" /> Revenue</h2>
             <MetricInput label="MRR ($)" value={m.mrr} onChange={update('mrr')} prefix="$" />
             <MetricInput label="ARR ($)" value={m.arr} onChange={update('arr')} prefix="$" />
             <MetricInput label="Previous Period Revenue ($)" value={m.previousRevenue} onChange={update('previousRevenue')} prefix="$" />
@@ -223,7 +223,7 @@ export function SaaSMetricsDashboard() {
 
           {/* Experimentation */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-3">
-            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><Zap size={14} className="text-amber-700 dark:text-amber-400" /> Experimentation</h2>
+            <h2 className="text-sm font-bold text-[var(--text-primary)] flex items-center gap-2"><Zap size={14} className="text-[var(--accent)]" /> Experimentation</h2>
             <MetricInput label="A/B Control Visitors" value={m.controlVisitors} onChange={update('controlVisitors')} />
             <MetricInput label="A/B Control Conversions" value={m.controlConversions} onChange={update('controlConversions')} />
             <MetricInput label="A/B Variant Visitors" value={m.variantVisitors} onChange={update('variantVisitors')} />
@@ -268,8 +268,8 @@ export function SaaSMetricsDashboard() {
               <h2 className="text-sm font-bold text-[var(--text-primary)] mb-2">NPS Score</h2>
               <NpsGauge score={npsScore} />
               <div className="flex justify-center gap-6 mt-2 text-xs">
-                <div><span className="text-emerald-700 dark:text-emerald-400 font-bold">{(m.totalCustomers ? (m.promoters / m.totalCustomers * 100) : 0).toFixed(0)}%</span> Promoters</div>
-                <div><span className="text-amber-700 dark:text-amber-400 font-bold">{(m.totalCustomers ? (m.passives / m.totalCustomers * 100) : 0).toFixed(0)}%</span> Passives</div>
+                <div><span className="text-[var(--accent)] font-bold">{(m.totalCustomers ? (m.promoters / m.totalCustomers * 100) : 0).toFixed(0)}%</span> Promoters</div>
+                <div><span className="text-[var(--accent)] font-bold">{(m.totalCustomers ? (m.passives / m.totalCustomers * 100) : 0).toFixed(0)}%</span> Passives</div>
                 <div><span className="text-red-700 dark:text-red-400 font-bold">{(m.totalCustomers ? (m.detractors / m.totalCustomers * 100) : 0).toFixed(0)}%</span> Detractors</div>
               </div>
             </div>
@@ -303,7 +303,7 @@ export function SaaSMetricsDashboard() {
               <div className="space-y-2">
                 <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Control</span><span className="font-mono">{abControlRate.toFixed(2)}%</span></div>
                 <div className="flex justify-between text-xs"><span className="text-[var(--text-tertiary)]">Variant</span><span className="font-mono">{abVariantRate.toFixed(2)}%</span></div>
-                <div className="flex justify-between text-xs font-bold"><span>Improvement</span><span className={abImprovement >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}>{abImprovement >= 0 ? '+' : ''}{abImprovement.toFixed(2)}%</span></div>
+                <div className="flex justify-between text-xs font-bold"><span>Improvement</span><span className={abImprovement >= 0 ? 'text-[var(--accent)]' : 'text-red-700 dark:text-red-400'}>{abImprovement >= 0 ? '+' : ''}{abImprovement.toFixed(2)}%</span></div>
               </div>
               <div className="mt-3 flex items-center gap-2">
                 <div className="flex-1 h-3 bg-[var(--bg-surface)] rounded-full overflow-hidden flex">
@@ -352,7 +352,7 @@ export function SaaSMetricsDashboard() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
               <div className="bg-[var(--bg-surface)] rounded-lg p-2.5 text-center">
                 <div className="text-[9px] text-[var(--text-tertiary)] uppercase">Projected MRR</div>
-                <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400">{formatCurrency(scenarioData.projectedMrr)}</div>
+                <div className="text-xs font-bold text-[var(--accent)]">{formatCurrency(scenarioData.projectedMrr)}</div>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-lg p-2.5 text-center">
                 <div className="text-[9px] text-[var(--text-tertiary)] uppercase">Projected Churn</div>
@@ -376,7 +376,7 @@ export function SaaSMetricsDashboard() {
           {/* Privacy Banner */}
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 text-center">
             <p className="text-xs text-[var(--text-tertiary)]">
-              <span className="text-emerald-700 dark:text-emerald-400 font-bold">🔒 Privacy First</span> — All your financial data stays in your browser. Nothing is saved, uploaded, or sent to any server.
+              <span className="text-[var(--accent)] font-bold">🔒 Privacy First</span> — All your financial data stays in your browser. Nothing is saved, uploaded, or sent to any server.
             </p>
           </div>
         </div>

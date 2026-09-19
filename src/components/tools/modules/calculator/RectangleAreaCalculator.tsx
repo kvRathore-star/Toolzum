@@ -25,7 +25,7 @@ export default function RectangleAreaCalculator() {
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Perimeter</div>
-        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{hasInput ? 2 * (l + w) : 0}</div>
+        <div className="text-lg font-bold text-[var(--accent)]">{hasInput ? 2 * (l + w) : 0}</div>
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Diagonal</div>

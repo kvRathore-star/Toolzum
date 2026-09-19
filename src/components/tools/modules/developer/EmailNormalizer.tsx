@@ -179,7 +179,7 @@ export default function EmailNormalizer() {
                 <div className="col-span-3 flex gap-1 justify-end">
                   {!r.valid && <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">Invalid</span>}
                   {r.disposable && <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">Disposable</span>}
-                  {r.changes.length > 0 && <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">Changed</span>}
+                  {r.changes.length > 0 && <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-blue-100 text-[var(--accent)] dark:bg-[var(--accent)]/10 dark:text-blue-400">Changed</span>}
                 </div>
               </div>
             ))}

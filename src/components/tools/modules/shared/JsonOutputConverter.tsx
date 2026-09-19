@@ -147,14 +147,14 @@ export default function JsonOutputConverter({ slug }: { slug: string; descriptio
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)} aria-label="Input JSON"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           {slug === 'ndjson-to-json' ? 'Convert' : 'Transform'}
         </button>
         {output && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">{mode.outputLabel}</span>
-              <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={handleCopy} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
             </div>
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap max-h-64 overflow-y-auto">{output}</pre>
           </div>

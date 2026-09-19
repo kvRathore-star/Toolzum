@@ -89,7 +89,7 @@ export function PdfBackgroundColor() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `bg_${file.name}`)}
-            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
         </div>
       ) : (
         <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">
@@ -211,7 +211,7 @@ export function PdfAddBlankPage() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-4">
           <h4 className="font-bold text-emerald-500">Done</h4>
           <button onClick={() => downloadOrShare(outputUrl, `blank_${file.name}`)}
-            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg">Download PDF</button>
         </div>
       ) : (
         <div className="border border-dashed border-[var(--border-subtle)] rounded-2xl">

@@ -240,7 +240,7 @@ export default function AiDetector() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-600 dark:text-amber-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-amber-600 dark:text-amber-400 text-sm">
         <strong className="block mb-1">Limitations of Automated AI Detection</strong>
         No AI detector is 100% accurate. Results are estimates based on statistical patterns and may produce false positives or false negatives. AI-generated text can mimic human writing, and human text can appear formulaic. Use this tool as a reference, not definitive proof.
       </div>

@@ -182,7 +182,7 @@ export default function PdfOcr() {
       {extractedText && (
         <div className="space-y-4 animate-in slide-in-from-bottom-4">
           <div className="flex justify-between items-center">
-            <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400">Extracted Text</h4>
+            <h4 className="text-lg font-bold text-[var(--accent)]">Extracted Text</h4>
             <div className="flex gap-2">
               <button 
                 onClick={copyToClipboard}

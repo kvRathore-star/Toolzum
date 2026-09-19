@@ -75,21 +75,21 @@ export default function ImageFormatConverter({ config }: ImageFormatConverterPro
         <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">{config.title}</h3>
         <p className="text-sm text-[var(--text-secondary)] mb-6">{config.description}</p>
         {!file ? (
-          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
             <input type="file" accept={config.accept} onChange={handleFile} className="absolute inset-0 opacity-0 cursor-pointer" />
             <div className="text-[var(--text-secondary)] flex flex-col items-center">
-              <svg className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              <svg className="w-12 h-12 text-zinc-300 dark:text-[var(--text-secondary)] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               <span className="text-sm">{config.dropZoneText}</span>
             </div>
           </div>
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
-              <span className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</span>
+              <span className="text-sm font-semibold text-[var(--text-primary)]">{file.name}</span>
               <button onClick={() => setFile(null)} className="text-xs text-red-500 hover:underline">Remove</button>
             </div>
             <button onClick={convert} disabled={isProcessing}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl text-sm transition-all disabled:opacity-50">
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-sm transition-all disabled:opacity-50">
               {isProcessing ? 'Converting...' : config.buttonText}
             </button>
           </div>

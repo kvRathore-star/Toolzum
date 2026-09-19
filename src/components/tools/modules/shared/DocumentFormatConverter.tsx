@@ -669,7 +669,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={inputKey}
         onChange={(e) => handleFormatChange("input", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {FORMAT_KEYS.map(k => (
           <option key={k} value={k}>{FORMATS[k]!.label} ({FORMATS[k]!.ext})</option>
@@ -681,7 +681,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all active:scale-95"
         aria-label="Swap formats"
       >
-        <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
         </svg>
       </button>
@@ -689,7 +689,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
       <select
         value={outputKey}
         onChange={(e) => handleFormatChange("output", e.target.value)}
-        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
+        className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer"
       >
         {(VALID_OUTPUTS[inputKey] || []).map(k => (
           <option key={k} value={k}>{FORMATS[k]!.label} ({FORMATS[k]!.ext})</option>
@@ -702,7 +702,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
         {formatPicker}
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           <Sparkles className="w-5 h-5 flex-shrink-0" />
           <span><strong>100% Client-Side:</strong> {pair.description}</span>
         </div>
@@ -719,11 +719,11 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
       {formatPicker}
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{file.name}</h3>
             <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
@@ -776,7 +776,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
 
               <button
                 onClick={() => downloadOrShare(outputUrl, pair.outputFileName(file.name))}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download {pair.iconLabel} File
@@ -802,7 +802,7 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
                 <a
                   key={s}
                   href={`/pdf/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--accent)]/10 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
                 >
                   {p.iconLabel} {p.actionLabel}
                 </a>

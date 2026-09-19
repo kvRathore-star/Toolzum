@@ -239,7 +239,7 @@ export default function MemeGenerator() {
             {processedUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 <Download className="w-4 h-4" />
                 Download Custom Meme

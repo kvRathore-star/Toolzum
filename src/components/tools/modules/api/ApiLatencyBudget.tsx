@@ -26,7 +26,7 @@ export default function ApiLatencyBudget() {
     <div className="max-w-2xl mx-auto space-y-4">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-5 space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">API Latency Splitter</h2>
-        <div className="bg-amber-500/10 border border-amber-500/20 p-3 rounded-xl text-amber-700 dark:text-amber-400 text-xs">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-3 rounded-xl text-[var(--accent)] text-xs">
           <strong>⚠ Simplified Calculator:</strong> This tool uses a fixed 30/40/30% split (Application/Database/External APIs) for demonstration. Real latency budgets require profiling your specific architecture, considering tail latencies, retries, and queueing delays.
         </div>
         <div className="flex flex-wrap gap-1.5">

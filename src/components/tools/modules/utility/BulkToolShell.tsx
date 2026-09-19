@@ -373,7 +373,7 @@ export function BulkToolShell({
               </div>
               <Link
                 href="/pricing"
-                className="shrink-0 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold rounded-[var(--radius-lg)] transition-all hover:scale-105 shadow-sm"
+                className="shrink-0 px-3 py-1.5 bg-[var(--accent-ink)] hover:opacity-90 text-white text-xs font-bold rounded-[var(--radius-lg)] transition-all hover:scale-105 shadow-sm"
               >
                 ⚡ Upgrade to Pro for 10× faster Multi-Threaded Parallel Processing
               </Link>

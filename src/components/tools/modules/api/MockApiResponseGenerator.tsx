@@ -76,7 +76,7 @@ export default function MockApiResponseGenerator() {
           <label htmlFor="lbl-mockapiresponsegenerator-array-length-count" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Array Length: {count}</label>
           <input id="lbl-mockapiresponsegenerator-array-length-count" type="range" min={1} max={50} value={count} aria-label="Array Length" onChange={e => { setCount(Number(e.target.value)); setOutput(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
-        <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {output && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{output}</pre>

@@ -81,7 +81,7 @@ export default function TextBinaryHub({ slug: defaultSlug }: { slug: string; des
     <div className="max-w-2xl mx-auto space-y-4 animate-in fade-in duration-500">
       <div className="flex flex-wrap gap-2">
         {presets.map((p) => (
-          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
+          <button key={p.label} onClick={p.apply} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">
             {p.label}
           </button>
         ))}
@@ -90,7 +90,7 @@ export default function TextBinaryHub({ slug: defaultSlug }: { slug: string; des
         {MODES.map(s => (
           <button key={s} onClick={() => { setMode(s); setInput(''); }}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-              mode === s ? 'bg-blue-600 text-white shadow-sm' : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+              mode === s ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}>
             {MODE_CONFIG[s].name}
           </button>
@@ -109,10 +109,10 @@ export default function TextBinaryHub({ slug: defaultSlug }: { slug: string; des
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">{config.outputLabel}</span>
               <div className="flex gap-2">
-                <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                <button onClick={handleCopy} className="text-xs text-[var(--accent)] hover:underline font-medium">
                   {copied ? 'Copied!' : 'Copy'}
                 </button>
-                <button onClick={handleDownload} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                <button onClick={handleDownload} className="text-xs text-[var(--accent)] hover:underline font-medium">
                   Download
                 </button>
               </div>

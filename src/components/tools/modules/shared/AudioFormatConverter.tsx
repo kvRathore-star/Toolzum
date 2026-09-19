@@ -266,34 +266,34 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
     <div className="max-w-3xl mx-auto animate-in fade-in duration-500 space-y-5">
       <div className="flex items-center justify-center gap-3 flex-wrap">
         <select value={inputKey} onChange={(e) => handleFormatChange("input", e.target.value)}
-          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
+          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
           {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>
 
         <button onClick={swapFormats}
           className="p-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] transition-all active:scale-95"
           aria-label="Swap formats">
-          <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-[var(--text-secondary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
           </svg>
         </button>
 
         <select value={outputKey} onChange={(e) => handleFormatChange("output", e.target.value)}
-          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-zinc-900 dark:text-zinc-100 font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
+          className="px-4 py-2.5 rounded-xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-medium text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 appearance-none cursor-pointer">
           {FORMAT_KEYS.map(k => <option key={k} value={k}>{FORMATS[k]!.label} (.{FORMATS[k]!.ext})</option>)}
         </select>
       </div>
 
       {description && (
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         {!file ? (
-          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative">
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
             <input type="file" accept={inputFmt.accept} onChange={handleFileSelect} className="absolute inset-0 opacity-0 cursor-pointer" aria-label={`Upload ${inputFmt.label} Audio`} />
             <div className="text-[var(--text-secondary)] flex flex-col items-center">
-              <svg className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+              <svg className="w-12 h-12 text-zinc-300 dark:text-[var(--text-secondary)] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               <span className="text-sm">Upload {inputFmt.label} Audio</span>
             </div>
           </div>
@@ -301,7 +301,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
           <div className="space-y-5">
             <div className="flex items-center justify-between p-3 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
               <div>
-                <div className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{file.name}</div>
+                <div className="text-sm font-semibold text-[var(--text-primary)]">{file.name}</div>
                 <div className="text-xs text-[var(--text-muted)]">{(file.size / 1024 / 1024).toFixed(2)} MB</div>
               </div>
               <button onClick={() => { setFile(null); setOutputUrl(null); }} className="text-xs text-red-500 hover:underline">Remove</button>
@@ -309,7 +309,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
 
             {(!isLoaded || isLoading) && (
               <div className="text-center text-[var(--text-secondary)] py-4 flex flex-col items-center gap-2">
-                <svg className="w-5 h-5 animate-spin text-blue-700 dark:text-blue-400" fill="none" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 animate-spin text-[var(--accent)]" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                 </svg>
@@ -319,7 +319,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
 
             {isLoaded && !outputUrl && !isProcessing && (
               <button onClick={convertAudio}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50"
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-sm flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50"
                 disabled={inputKey === outputKey}>
                 {inputKey === outputKey ? 'Select different formats' : `Convert to ${outputFmt.label}`}
               </button>
@@ -327,12 +327,12 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
 
             {isProcessing && (
               <div className="space-y-2">
-                <div className="flex justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                <div className="flex justify-between text-xs font-semibold text-[var(--accent)]">
                   <span>Converting...</span>
                   <span>{progress}%</span>
                 </div>
-                <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
-                  <div className="bg-blue-500 h-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-2 overflow-hidden">
+                  <div className="bg-[var(--accent-ink)] h-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
                 </div>
               </div>
             )}
@@ -341,7 +341,7 @@ export default function AudioFormatConverter({ slug }: AudioFormatConverterProps
               <div className="space-y-3 pt-3 border-t border-[var(--border-subtle)]">
                 <audio controls className="w-full" src={outputUrl}></audio>
                 <button onClick={downloadOutput}
-                  className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-sm transition-all active:scale-[0.98]">
+                  className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-sm transition-all active:scale-[0.98]">
                   Download {outputFmt.label}
                 </button>
               </div>

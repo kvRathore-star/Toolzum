@@ -126,7 +126,7 @@ function FancyView() {
 
   return (
     <>
-      <div className="bg-[var(--bg-overlay)] p-6 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-6 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] flex items-center gap-2">
           <Type className="w-6 h-6 text-[var(--accent)]" />
           Fancy Font & Text Stylizer
@@ -139,7 +139,7 @@ function FancyView() {
         <div className="space-y-2">
           <label htmlFor="lbl-textstylingconverter-input-text" className="block text-sm font-bold text-[var(--text-primary)]">Input Text</label>
           <input id="lbl-textstylingconverter-input-text" aria-label="Input Text" type="text" value={inputText} onChange={e => setInputText(e.target.value)}
-            className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-indigo-500 rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
+            className="w-full bg-[var(--bg-overlay)] border-2 border-[var(--border-subtle)] focus:border-[var(--accent)] rounded-xl px-4 py-3.5 text-lg text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
         </div>
         {inputText && (
           <div className="space-y-8">
@@ -152,13 +152,13 @@ function FancyView() {
                   const output = applyFontStyle(inputText, font.map);
                   const key = `font-${idx}`;
                   return (
-                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
+                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
                       <div className="space-y-1">
                         <span className="text-[10px] text-[var(--text-secondary)] block">{font.name}</span>
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button aria-label={`Copy ${font.name} style`} onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-subtle)]'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -175,13 +175,13 @@ function FancyView() {
                   const output = decor.format(inputText);
                   const key = `decor-${idx}`;
                   return (
-                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
+                    <div key={key} className="p-4 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl flex items-center justify-between gap-4">
                       <div className="space-y-1">
                         <span className="text-[10px] text-[var(--text-secondary)] block">{decor.name}</span>
                         <span className="text-base font-medium text-[var(--text-primary)]">{output}</span>
                       </div>
                       <button aria-label={`Copy ${decor.name} style`} onClick={() => handleCopy(output, key)}
-                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300'}`}>
+                        className={`p-2.5 rounded-lg border transition-all cursor-pointer ${copiedKey === key ? 'bg-emerald-700/10 border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-white dark:bg-[var(--bg-surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border-subtle)]'}`}>
                         {copiedKey === key ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                       </button>
                     </div>
@@ -228,7 +228,7 @@ function CursiveView() {
               className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--accent)] font-serif text-lg h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
           </div>
           <button onClick={handleCopy}
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3.5 rounded-xl text-xs cursor-pointer">
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3.5 rounded-xl text-xs cursor-pointer">
             {copied ? 'Copied!' : 'Copy Cursive Text'}
           </button>
         </div>
@@ -267,7 +267,7 @@ function ZalgoView() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl p-6 space-y-6 h-fit">
-        <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-zinc-200 dark:border-[var(--border-subtle)] pb-2">
+        <h4 className="text-sm font-bold text-[var(--text-primary)] uppercase tracking-wider border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] pb-2">
           Zalgo Parameters
         </h4>
         <div className="space-y-2">
@@ -276,7 +276,7 @@ function ZalgoView() {
             <span className="text-sm font-extrabold text-red-500">{intensity}</span>
           </div>
           <input aria-label="Cursed Level (1-20)" type="range" min={1} max={20} value={intensity} onChange={e => setIntensity(Number(e.target.value))}
-            className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-red-600 mt-2" />
+            className="w-full h-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg appearance-none cursor-pointer accent-red-600 mt-2" />
         </div>
         <div className="space-y-3 pt-2">
           {[{ label: 'Stack Above (Upwards)', v: goUp, s: setGoUp },
@@ -285,19 +285,19 @@ function ZalgoView() {
           ].map(({ label, v, s }) => (
             <label key={label} className="flex items-center gap-2 cursor-pointer text-sm text-[var(--text-primary)] font-semibold select-none">
               <input type="checkbox" checked={v} onChange={e => s(e.target.checked)}
-                className="rounded border-zinc-300 dark:border-zinc-800 text-red-600 focus:ring-red-500 h-4 w-4" />
+                className="rounded border-[var(--border-subtle)] dark:border-zinc-800 text-red-600 focus:ring-red-500 h-4 w-4" />
               {label}
             </label>
           ))}
         </div>
         <button onClick={loadSample}
-          className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-800 dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm cursor-pointer">
+          className="w-full bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] dark:text-white font-bold py-3 rounded-xl transition-all active:scale-95 text-sm cursor-pointer">
           Load Sample Text
         </button>
       </div>
       <div className="lg:col-span-2 space-y-6 flex flex-col h-auto">
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[200px]">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+          <div className="px-4 py-3 bg-black/20 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Normal Input Text</span>
             <button onClick={() => setInput('')} className="text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 font-semibold cursor-pointer">Clear</button>
           </div>
@@ -305,10 +305,10 @@ function ZalgoView() {
             className="flex-1 p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)]" />
         </div>
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl flex flex-col h-[250px] overflow-hidden">
-          <div className="px-4 py-3 bg-black/20 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
+          <div className="px-4 py-3 bg-black/20 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex justify-between items-center shrink-0">
             <span className="text-[var(--text-primary)] text-sm font-bold uppercase tracking-wider">Cursed Zalgo Output</span>
             <button onClick={() => { if (output) { clipboardWrite(output); toast.success('Copied!'); } }} disabled={!output}
-              className="text-xs text-blue-700 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
+              className="text-xs text-[var(--accent)] hover:text-blue-700 dark:hover:text-blue-400 font-semibold disabled:opacity-50 cursor-pointer">Copy</button>
           </div>
           <textarea aria-label="Cursed text will creep here..." value={output} readOnly placeholder="Cursed text will creep here..."
             className="flex-1 p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-sans text-lg text-red-500 dark:text-red-400 overflow-y-auto" />

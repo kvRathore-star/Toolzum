@@ -159,7 +159,7 @@ export default function BatchImageEditor() {
                  <input id="lbl-batchimageeditor-watermark-text-optional" aria-label="Watermark Text (Optional)" type="text" value={watermark} placeholder="e.g. © 2026 MyBrand" onChange={e => setWatermark(e.target.value)} className="w-full p-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-elevated)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
                </div>
                <button onClick={processBatch} disabled={isProcessing || remaining === 0}
-                 className="w-full mt-4 bg-emerald-700 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
+                 className="w-full mt-4 bg-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2">
                  {isProcessing ? (<><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>) : remaining === 0 ? 'Limit reached — Upgrade to Pro' : (<><Download className="w-5 h-5" /> Process & Download ZIP</>)}
                </button>
              </div>

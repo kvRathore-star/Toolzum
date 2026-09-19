@@ -211,7 +211,7 @@ export default function GenericPDFProcessor() {
             )}
 
             {operation === 'remove-metadata' && (
-              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 text-sm text-amber-700 dark:text-amber-400">
+              <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-sm text-[var(--accent)]">
                 <p className="font-semibold mb-1">What gets removed</p>
                 <p className="text-xs">Title, Author, Subject, Keywords, Producer, and Creator fields will be cleared. Page content and structure remain unchanged.</p>
               </div>
@@ -248,7 +248,7 @@ export default function GenericPDFProcessor() {
 
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.replace('.pdf', `_${operation}`)}.pdf`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
                 Download Processed PDF

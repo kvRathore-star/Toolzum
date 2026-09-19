@@ -195,7 +195,7 @@ export default function VoterIdHelper() {
                 isActive ? 'border-transparent shadow-lg' : 'border-[var(--border-subtle)] bg-[var(--bg-overlay)] hover:border-[var(--accent)]'
               }`}
               style={isActive ? { borderColor: card.color, backgroundColor: card.color + '12', boxShadow: `0 4px 20px ${card.color}25` } : {}}>
-              {isSaved && <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-700/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-bold"><Check className="w-2.5 h-2.5 inline" /> Saved</span>}
+              {isSaved && <span className="absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-700/10 text-[var(--accent)] border border-emerald-500/20 font-bold"><Check className="w-2.5 h-2.5 inline" /> Saved</span>}
               <span className="text-2xl block mb-2">{card.icon}</span>
               <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block">{card.tag}</span>
               <span className="text-sm font-bold text-[var(--text-primary)] block mt-0.5" style={isActive ? { color: card.color } : {}}>{FORM_GUIDES[key]!.formNumber}</span>

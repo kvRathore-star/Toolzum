@@ -24,7 +24,7 @@ export default function CircleCalculator() {
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Circumference</div>
-        <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">{(2 * Math.PI * r).toFixed(1)}</div>
+        <div className="text-lg font-bold text-[var(--accent)]">{(2 * Math.PI * r).toFixed(1)}</div>
       </div>
     </div>
     )

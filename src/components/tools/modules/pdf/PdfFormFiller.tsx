@@ -187,8 +187,8 @@ export default function PdfFormFiller() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center">
-              <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">PDF Generated Successfully!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center">
+              <h4 className="text-lg font-bold text-[var(--accent)] mb-4">PDF Generated Successfully!</h4>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `filled_${pdfFile.name}`)}
                 className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"

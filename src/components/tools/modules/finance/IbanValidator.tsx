@@ -42,7 +42,7 @@ export default function IbanValidator() {
 
           <button 
             onClick={validate}
-            className="w-full py-4 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-colors"
+            className="w-full py-4 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl cursor-pointer shadow-md hover:shadow-lg transition-colors"
           >
             Validate IBAN
           </button>

@@ -116,7 +116,7 @@ function ConverterDropdown({ family, slug }: { family: FamilyConfig; slug: strin
           </select>
         </div>
       </div>
-      <button onClick={convert} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm">
+      <button onClick={convert} className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm">
         Convert
       </button>
       {output && (

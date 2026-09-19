@@ -150,7 +150,7 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
               className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 active
                   ? 'bg-teal-500 text-white shadow-md'
-                  : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'
+                  : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'
               }`}
             >
               {p.label}
@@ -163,15 +163,15 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
         <div className="bg-teal-500/10 border border-teal-500/20 p-4 rounded-xl text-teal-500 text-sm" dangerouslySetInnerHTML={{ __html: description }} />
       )}
 
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
+          className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
         >
           Change File
         </button>
@@ -250,7 +250,7 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
 
               <button
                 onClick={() => downloadOrShare(outputUrl, `audio_${file.name.replace(/\.[^/.]+$/, '')}.mp3`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Download MP3
@@ -276,7 +276,7 @@ export default function VideoToAudioConverter({ slug }: VideoToAudioConverterPro
                 <Link
                   key={s}
                   href={`/video/${s}`}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:bg-blue-50 dark:hover:bg-[var(--accent)]/10 hover:text-[var(--accent)] dark:hover:text-blue-700 dark:hover:text-blue-400 transition-all"
                 >
                   {p.label}
                 </Link>

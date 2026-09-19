@@ -178,7 +178,7 @@ export default function GrayscalePdf() {
             <p className="text-xs text-[var(--text-secondary)]">Higher DPI = better quality but larger file size.</p>
           </div>
 
-          <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl text-amber-700 dark:text-amber-400 text-xs">
+          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-xs">
             <strong>Note:</strong> Grayscale conversion rasterizes each page (text becomes image). The output may be larger than the original for text-heavy documents.
           </div>
 
@@ -202,10 +202,10 @@ export default function GrayscalePdf() {
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300">
                <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4">
-                  <h4 className="font-bold text-emerald-700 dark:text-emerald-400">Conversion Complete</h4>
+                  <h4 className="font-bold text-[var(--accent)]">Conversion Complete</h4>
                </div>
 
-               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-emerald-700 dark:text-emerald-400">
+               <div className="bg-emerald-700/10 rounded-xl overflow-hidden border border-emerald-500/20 flex flex-col items-center justify-center p-8 text-[var(--accent)]">
                   <svg className="w-16 h-16 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
                   <p className="font-bold text-center">grayscale_{file.name}</p>
                </div>

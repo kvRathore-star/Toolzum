@@ -101,14 +101,14 @@ export default function ColorConverter({ slug }: { slug: string }) {
         <input type="text" value={input} onChange={e => setInput(e.target.value)} aria-label="Color value"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
         <button onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           Convert
         </button>
         {output && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">Output</span>
-              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">Copy</button>
+              <button onClick={() => { clipboardWrite(output); toast.success('Copied!'); }} className="text-xs text-[var(--accent)] hover:underline font-medium">Copy</button>
             </div>
             <pre className="text-xs font-mono bg-[var(--bg-surface)] rounded-lg p-3 text-emerald-600 dark:text-emerald-400 whitespace-pre-wrap">{output}</pre>
           </div>

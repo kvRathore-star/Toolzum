@@ -55,7 +55,7 @@ export default function PercentageCalculator() {
            </div>
             <button
               onClick={() => { if (val3 === '' || val4 === '') { setResult2(null); return; } const y = Number(val4); setResult2(y === 0 ? null : (Number(val3) / y) * 100); }}
-              className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
+              className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3 rounded-xl transition-all active:scale-95"
             >
               Calculate
             </button>

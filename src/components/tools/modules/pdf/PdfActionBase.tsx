@@ -100,7 +100,7 @@ export function PdfActionBase({ title, description, renderOptions, processAction
             <h4 className="font-bold text-emerald-500">Done</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `toolkit_${file.name}`)}
-            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             Download PDF
           </button>
         </div>

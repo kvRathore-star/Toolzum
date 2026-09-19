@@ -140,7 +140,7 @@ export default function PdfAttachments() {
             <h4 className="font-bold text-emerald-500">Attachment Added</h4>
           </div>
           <button onClick={() => downloadOrShare(outputUrl, `attached_${file.name}`)}
-            className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+            className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
             Download PDF with Attachment
           </button>
         </div>

@@ -59,14 +59,14 @@ export default function DiscountCalculator() {
               <div className="text-lg line-through text-[var(--text-tertiary)]">${originalPrice.toFixed(2)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">Original</div>
             </div>
-            <div className="text-2xl font-bold text-emerald-700 dark:text-emerald-400 px-4">&#8594;</div>
+            <div className="text-2xl font-bold text-[var(--accent)] px-4">&#8594;</div>
             <div className="text-center flex-1">
               <div className="text-lg font-bold text-[var(--text-primary)]">${finalPrice.toFixed(2)}</div>
               <div className="text-xs text-[var(--text-tertiary)]">{mode === 'forward' ? 'Final Price' : 'Sale Price'}</div>
             </div>
           </div>
           <div className="bg-emerald-700/10 rounded-lg p-2 text-center">
-            <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">
+            <span className="text-sm font-bold text-[var(--accent)]">
               {mode === 'forward'
                 ? `You Save $${savings.toFixed(2)} (${d}% off)`
                 : `Original was $${originalPrice.toFixed(2)} (${d}% off = $${sp.toFixed(2)})`

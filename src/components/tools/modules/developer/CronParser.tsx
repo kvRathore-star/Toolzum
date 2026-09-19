@@ -85,7 +85,7 @@ export default function CronParser() {
           {result.map((r, i) => (
             <div key={i} className={`flex items-center gap-4 px-5 py-3 ${i % 2 === 0 ? 'bg-white dark:bg-black/20' : ''} ${r.label === 'Readable' ? 'bg-blue-50 dark:bg-blue-950/20' : ''}`}>
               <span className="w-[130px] shrink-0 text-xs font-medium text-[var(--text-secondary)]">{r.label}</span>
-              <span className={`text-xs font-mono break-all ${r.label === 'Readable' ? 'text-blue-700 dark:text-blue-300 font-semibold' : 'text-zinc-800 dark:text-zinc-200'}`}>{r.value}</span>
+              <span className={`text-xs font-mono break-all ${r.label === 'Readable' ? 'text-[var(--accent)] font-semibold' : 'text-[var(--text-primary)]'}`}>{r.value}</span>
               <button onClick={() => { clipboardWrite(r.value); toast.success('Copied!'); }} className="ml-auto text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] shrink-0">Copy</button>
             </div>
           ))}
@@ -107,7 +107,7 @@ export default function CronParser() {
             ['*/30 9-17 * * *', 'Every 30 min, 9-5'],
           ].map(([expr, desc]) => (
             <button key={expr} onClick={() => { setExpression(expr!); parse(expr!); }} className="flex items-center gap-2 text-xs text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 hover:border-[var(--accent)] transition-colors">
-              <code className="font-mono text-blue-600 dark:text-blue-400 shrink-0">{expr}</code>
+              <code className="font-mono text-[var(--accent)] shrink-0">{expr}</code>
               <span className="text-[var(--text-secondary)] truncate">{desc}</span>
             </button>
           ))}

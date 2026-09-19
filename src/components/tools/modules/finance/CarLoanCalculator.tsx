@@ -32,7 +32,7 @@ export default function CarLoanCalculator() {
           </div>
           <div className="h-12 w-px bg-[var(--border-subtle)]" />
           <div className="text-center">
-            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">${(pmt * n - p).toFixed(0)}</div>
+            <div className="text-lg font-bold text-[var(--accent)]">${(pmt * n - p).toFixed(0)}</div>
             <div className="text-xs text-[var(--text-tertiary)]">total interest</div>
           </div>
         </div>

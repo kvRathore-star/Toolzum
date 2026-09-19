@@ -204,7 +204,7 @@ export default function TaxSavingCalculator() {
           </div>
 
           <button onClick={handleExportPDF}
-            className="w-full py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-1.5 transition-colors">
+            className="w-full py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-1.5 transition-colors">
             <Download className="w-4 h-4" /> Download Tax Report
           </button>
 

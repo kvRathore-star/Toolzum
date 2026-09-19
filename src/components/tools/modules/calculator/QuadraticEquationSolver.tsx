@@ -60,7 +60,7 @@ export default function QuadraticEquationSolver() {
       <div className="text-lg font-bold text-[var(--text-primary)]">{rootsLine}</div>
       {stepsLine && <div className="text-xs text-[var(--text-secondary)]">{stepsLine}</div>}
       {hasAll && A !== 0 && (
-        <div className="text-xs text-[var(--text-tertiary)]">Discriminant: <span className={`font-bold ${disc >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-[var(--accent)]'}`}>{disc.toFixed(2)}</span></div>
+        <div className="text-xs text-[var(--text-tertiary)]">Discriminant: <span className={`font-bold ${disc >= 0 ? 'text-[var(--accent)]' : 'text-[var(--accent)]'}`}>{disc.toFixed(2)}</span></div>
       )}
     </div>
   );

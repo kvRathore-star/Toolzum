@@ -35,7 +35,7 @@ export default function RentVsBuyCalculator() {
           <div className="flex h-20 gap-3">
             <div className="flex-1 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Buy Net Cost</div>
-              <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">${buyNet.toFixed(0)}</div>
+              <div className="text-xl font-bold text-[var(--accent)]">${buyNet.toFixed(0)}</div>
             </div>
             <div className="flex-1 p-3 flex flex-col justify-center items-center">
               <div className="text-xs text-[var(--text-tertiary)]">Rent Total</div>

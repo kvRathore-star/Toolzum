@@ -92,7 +92,7 @@ export default function PincodeFinder() {
             <MapPin className="w-6 h-6" style={{ color: accentColor }} />
             India Pincode & Branch Finder
           </h2>
-          <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
+          <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
         </div>
         <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Search details by pincode or lookup pincodes by Post Office/Branch name across India. Free official postal API integration.
@@ -202,8 +202,8 @@ export default function PincodeFinder() {
             <div className="flex justify-center text-center gap-1 font-mono text-xl font-bold p-3 bg-white dark:bg-black/50 rounded-lg border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
               <div className="px-2 py-1 rounded" style={{ backgroundColor: '#2563eb10', borderColor: '#2563eb20', borderWidth: 1 }}><span style={{ color: accentColor }} className="block">{breakdown.region}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Region</span></div>
               <div className="px-2 py-1 bg-rose-500/10 border border-rose-500/20 rounded"><span className="text-rose-700 dark:text-rose-400 block">{breakdown.subRegion}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sub-Reg</span></div>
-              <div className="px-2 py-1 bg-amber-500/10 border border-amber-500/20 rounded"><span className="text-amber-700 dark:text-amber-400 block">{breakdown.sortingDistrict}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sorting</span></div>
-              <div className="px-3 py-1 bg-emerald-700/10 border border-emerald-500/20 rounded flex-1"><span className="text-emerald-700 dark:text-emerald-400 block tracking-widest">{breakdown.office}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Post Office Route</span></div>
+              <div className="px-2 py-1 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded"><span className="text-[var(--accent)] block">{breakdown.sortingDistrict}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Sorting</span></div>
+              <div className="px-3 py-1 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded flex-1"><span className="text-[var(--accent)] block tracking-widest">{breakdown.office}</span><span className="text-[8px] text-[var(--text-secondary)] uppercase block mt-1">Post Office Route</span></div>
             </div>
           </motion.div>
         )}
@@ -232,7 +232,7 @@ export default function PincodeFinder() {
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-2">
                         <span className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)] text-sm block">{office.Name}</span>
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${office.DeliveryStatus === 'Delivery' ? 'bg-emerald-700/10 text-emerald-700 dark:text-emerald-400' : 'bg-rose-500/10 text-rose-700 dark:text-rose-400'}`}>{office.DeliveryStatus}</span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${office.DeliveryStatus === 'Delivery' ? 'bg-emerald-700/10 text-[var(--accent)]' : 'bg-rose-500/10 text-rose-700 dark:text-rose-400'}`}>{office.DeliveryStatus}</span>
                       </div>
                       <span className="text-[var(--text-secondary)] block">Type: {office.BranchType}</span>
                     </div>

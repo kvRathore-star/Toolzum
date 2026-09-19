@@ -86,7 +86,7 @@ export default function IfscLookup() {
             <Building className="w-6 h-6 text-[var(--accent)]" />
             IFSC Bank Branch Lookup
           </h2>
-          <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
+          <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Crown className="w-3.5 h-3.5" /> Pro</span>
         </div>
         <p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-1">
           Look up Indian Financial System Code (IFSC) branch details, address, MICR, contact information, and bank features instantly.
@@ -130,9 +130,9 @@ export default function IfscLookup() {
         {data && (
           <div className="border-t border-[var(--border-subtle)] pt-6 space-y-6 animate-in fade-in slide-in-from-top-4 duration-300">
             {data.isOfflineFallback && (
-              <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex items-start gap-3">
+              <div className="p-4 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl flex items-start gap-3">
                 <HelpCircle className="w-5 h-5 text-amber-500 mt-0.5 shrink-0" />
-                <div><h3 className="font-bold text-amber-700 dark:text-amber-400">Offline Fallback Match</h3><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
+                <div><h3 className="font-bold text-[var(--accent)]">Offline Fallback Match</h3><p className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] mt-0.5">We identified this bank code locally, but detailed branch information requires an active internet connection.</p></div>
               </div>
             )}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

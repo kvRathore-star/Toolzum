@@ -41,7 +41,7 @@ Port ${port} is the default HTTPS port. Common alternatives: 8443, 9443.`);
       <button onClick={check} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Check Certificate</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -86,14 +86,14 @@ export function TlsCipherChecker() {
       {result && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-cyan-400 space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">{cipher}</span>
+            <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">{cipher}</span>
             <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold text-white ${strengthColors[result.strength] || 'bg-zinc-500'}`}>{result.strength}</span>
           </div>
-          <p className="text-sm text-zinc-800 dark:text-zinc-200">{result.desc}</p>
-          <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2">
+          <p className="text-sm text-[var(--text-primary)]">{result.desc}</p>
+          <div className="w-full bg-[var(--bg-overlay)] rounded-full h-2">
             <div className={`h-2 rounded-full ${strengthColors[result.strength] || 'bg-zinc-500'}`} style={{ width: result.strength === 'Strong' ? '95%' : result.strength === 'Good' ? '75%' : result.strength === 'Moderate' ? '50%' : result.strength === 'Weak' ? '30%' : result.strength === 'Deprecated' ? '15%' : result.strength === 'Insecure' ? '5%' : '50%' }} />
           </div>
-          <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
     </Section>
@@ -143,7 +143,7 @@ Certificate is ${pem.includes('BEGIN CERTIFICATE') ? 'properly formatted' : 'mal
       <button onClick={decode} className="px-5 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-sm font-medium transition-colors">Decode</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-rose-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-rose-500 hover:bg-rose-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}

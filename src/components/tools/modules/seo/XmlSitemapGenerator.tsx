@@ -394,7 +394,7 @@ export default function XmlSitemapGenerator() {
                 <button onClick={handleCopy} className="flex items-center gap-1.5 px-3 py-2 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] rounded-xl text-xs transition-colors">
                   <Copy className="w-3.5 h-3.5" /> Copy XML
                 </button>
-                <button onClick={handleDownloadXml} className="flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
+                <button onClick={handleDownloadXml} className="flex items-center gap-1.5 px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-xs font-bold transition-colors">
                   <Download className="w-3.5 h-3.5" /> Download XML
                 </button>
               </div>
@@ -456,7 +456,7 @@ export default function XmlSitemapGenerator() {
               </div>
             )}
             {state.insights.healthyPages === state.pages.length && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 dark:bg-emerald-700/10 border border-emerald-200 dark:border-emerald-500/20 rounded-lg text-xs text-emerald-700 dark:text-emerald-400">
+              <div className="flex items-center gap-2 px-3 py-2 bg-emerald-50 dark:bg-emerald-700/10 border border-emerald-200 dark:border-emerald-500/20 rounded-lg text-xs text-[var(--accent)]">
                 <CheckCircle className="w-3.5 h-3.5" />
                 All {state.pages.length} pages look healthy.
               </div>

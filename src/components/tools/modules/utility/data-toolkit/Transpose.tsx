@@ -33,7 +33,7 @@ export default function Transpose() {
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-6 shadow-xl space-y-4">
         <h2 className="text-lg font-bold text-[var(--text-primary)]">CSV Transpose</h2>
       <Input label="CSV Input" rows={4} value={input} onChange={v => { setInput(v); setOut(''); }} placeholder="CSV input..." />
-      <button onClick={() => handle()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors">Transpose</button>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-sm font-medium transition-colors">Transpose</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-amber-400">
           <div className="flex justify-between items-center mb-2">

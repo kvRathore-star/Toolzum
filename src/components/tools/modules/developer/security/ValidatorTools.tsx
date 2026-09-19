@@ -43,7 +43,7 @@ export function Validator() {
         {formatPills.map(f => <button key={f} onClick={() => validate(f)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${format === f ? 'bg-amber-500 text-white border-amber-500' : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 hover:bg-amber-500/20 border-amber-500/20'}`}>{f.toUpperCase()}</button>)}
       </div>
       <Input label="Text to validate" rows={6} value={input} onChange={v => { setInput(v); setResult(''); setIsValid(null); }} placeholder="Paste JSON, YAML, or XML..." />
-      <button onClick={() => validate()} className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
+      <button onClick={() => validate()} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-sm font-medium transition-colors">Validate</button>
       {result && (
         <div className={`mt-4 p-4 rounded-xl text-sm font-medium border-l-4 ${isValid ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-400' : 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
           {result}
@@ -79,15 +79,15 @@ export function EnvFileGenerator() {
         {envPresets.map(p => <button key={p.label} onClick={() => gen(p.v)} className="px-2.5 py-1 text-xs rounded-lg bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border border-emerald-500/20 transition-colors">{p.label}</button>)}
       </div>
       <Input label="VAR_NAME=Description (one per line)" rows={6} value={descriptions} onChange={v => { setDescriptions(v); setOutput(''); }} />
-      <button onClick={() => gen()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
+      <button onClick={() => gen()} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-sm font-medium transition-colors">Generate .env Template</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-zinc-600 dark:text-[var(--text-muted)]">.env Template</span>
-            <button onClick={copy} className="px-2.5 py-1 text-xs bg-emerald-700 hover:bg-emerald-700 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+            <span className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">.env Template</span>
+            <button onClick={copy} className="px-2.5 py-1 text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg">{output}</pre>
-          <p className="text-xs text-zinc-500 mt-2">{output.split('\n').filter(l => l.startsWith('#')).length} variables documented</p>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-3 rounded-lg">{output}</pre>
+          <p className="text-xs text-[var(--text-muted)] mt-2">{output.split('\n').filter(l => l.startsWith('#')).length} variables documented</p>
         </div>
       )}
     </Section>
@@ -131,14 +131,14 @@ export function EnvFileParser() {
       {vars.length > 0 && (
         <div className="mt-4 space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-xs font-semibold text-zinc-500">Parsed Variables ({vars.length})</span>
+            <span className="text-xs font-semibold text-[var(--text-muted)]">Parsed Variables ({vars.length})</span>
           </div>
           <div className="grid grid-cols-1 gap-2">
             {vars.map(v => (
               <div key={v.key} className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-teal-400 flex items-center justify-between">
                 <div className="min-w-0 flex-1">
-                  <span className="text-xs font-semibold text-zinc-500">{v.key}</span>
-                  <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{v.value || <span className="text-zinc-400 italic">empty</span>}</p>
+                  <span className="text-xs font-semibold text-[var(--text-muted)]">{v.key}</span>
+                  <p className="font-mono text-sm text-[var(--text-primary)] truncate">{v.value || <span className="text-[var(--text-muted)] italic">empty</span>}</p>
                 </div>
                 <button onClick={() => copy(v.key, v.value)} className="ml-2 px-2 py-1 text-xs bg-teal-500 hover:bg-teal-600 text-white rounded shrink-0 transition-colors">{copied === v.key ? 'Copied!' : 'Copy'}</button>
               </div>
@@ -192,12 +192,12 @@ export function EmailValidator() {
           {result.local && result.domain && (
             <div className="grid grid-cols-2 gap-2">
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-pink-400">
-                <span className="text-xs text-zinc-500">Local Part</span>
-                <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{result.local}</p>
+                <span className="text-xs text-[var(--text-muted)]">Local Part</span>
+                <p className="font-mono text-sm text-[var(--text-primary)] truncate">{result.local}</p>
               </div>
               <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-pink-400">
-                <span className="text-xs text-zinc-500">Domain</span>
-                <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100 truncate">{result.domain}</p>
+                <span className="text-xs text-[var(--text-muted)]">Domain</span>
+                <p className="font-mono text-sm text-[var(--text-primary)] truncate">{result.domain}</p>
               </div>
             </div>
           )}

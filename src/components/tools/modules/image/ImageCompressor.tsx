@@ -110,8 +110,8 @@ export default function ImageCompressor() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-[var(--accent)] shrink-0" />
           <span><strong>100% Client-Side:</strong> All compression runs locally inside your browser. Your images are never sent to a server.</span>
         </div>
         <FileUploader
@@ -241,13 +241,13 @@ alt="Uploaded image preview"
           </div>
 
           {compressedUrl && compressedSize && (
-            <div className="mt-6 p-4 bg-emerald-700/10 border border-emerald-500/20 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300">
+            <div className="mt-6 p-4 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-4 duration-300">
               <div className="space-y-0.5">
-                <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold block">Compressed Successfully</span>
+                <span className="text-xs text-[var(--accent)] font-bold block">Compressed Successfully</span>
                 <div className="text-sm text-[var(--text-primary)]">
                   New Size: <strong className="text-[var(--text-primary)]">{(compressedSize / 1024).toFixed(1)} KB</strong>
                   {compressionRatio && (
-                    <span className="text-emerald-700 dark:text-emerald-400 font-bold ml-1.5">(-{compressionRatio}%)</span>
+                    <span className="text-[var(--accent)] font-bold ml-1.5">(-{compressionRatio}%)</span>
                   )}
                 </div>
               </div>

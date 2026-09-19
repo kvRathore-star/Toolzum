@@ -31,7 +31,7 @@ export default function CollegeGpaCalculator() {
       </div>
       <div className="text-center">
         <div className="text-xs text-[var(--text-tertiary)]">Cumulative GPA</div>
-        <div className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{cumGpa.toFixed(2)}</div>
+        <div className="text-xl font-bold text-[var(--accent)]">{cumGpa.toFixed(2)}</div>
       </div>
     </div>
   );

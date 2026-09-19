@@ -123,7 +123,7 @@ export default function JsonFormatter() {
               value={output}
               readOnly
               placeholder="Formatted JSON will appear here..."
-              className="absolute inset-0 w-full h-full bg-transparent p-4 text-emerald-700 dark:text-emerald-400 font-mono text-sm resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+              className="absolute inset-0 w-full h-full bg-transparent p-4 text-[var(--accent)] font-mono text-sm resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               spellCheck={false}
             />
             

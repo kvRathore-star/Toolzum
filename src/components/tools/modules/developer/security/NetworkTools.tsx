@@ -52,16 +52,16 @@ export function SubnetCalculator() {
               { label: 'Mask', value: result.mask, color: 'border-l-violet-400' },
             ].map(item => (
               <div key={item.label} className={`bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 ${item.color}`}>
-                <span className="text-xs text-zinc-500">{item.label}</span>
-                <p className="font-mono text-sm text-zinc-900 dark:text-zinc-100">{item.value}</p>
+                <span className="text-xs text-[var(--text-muted)]">{item.label}</span>
+                <p className="font-mono text-sm text-[var(--text-primary)]">{item.value}</p>
               </div>
             ))}
           </div>
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-emerald-400 flex items-center justify-between">
-            <div><span className="text-xs text-zinc-500">Usable Hosts</span><p className="font-mono text-sm text-zinc-900 dark:text-zinc-100">{result.hosts.toLocaleString()}</p></div>
-            <div className="text-right"><span className="text-xs text-zinc-500">Range</span><p className="font-mono text-xs text-zinc-900 dark:text-zinc-100">{result.range}</p></div>
+            <div><span className="text-xs text-[var(--text-muted)]">Usable Hosts</span><p className="font-mono text-sm text-[var(--text-primary)]">{result.hosts.toLocaleString()}</p></div>
+            <div className="text-right"><span className="text-xs text-[var(--text-muted)]">Range</span><p className="font-mono text-xs text-[var(--text-primary)]">{result.range}</p></div>
           </div>
-          <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy All'}</button>
+          <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy All'}</button>
         </div>
       )}
     </Section>
@@ -98,25 +98,25 @@ export function SubnetVisualizer() {
         <div className="mt-4 space-y-3">
           <div className="bg-[var(--bg-surface)] rounded-xl p-4 border-l-4 border-cyan-400">
             <div className="space-y-2 font-mono text-xs">
-              <div><span className="text-zinc-500">IP </span><span className="text-zinc-800 dark:text-zinc-200">{viz.ip}</span></div>
-              <div><span className="text-zinc-500">Mask </span><span className="text-zinc-800 dark:text-zinc-200">{viz.mask}</span></div>
+              <div><span className="text-[var(--text-muted)]">IP </span><span className="text-[var(--text-primary)]">{viz.ip}</span></div>
+              <div><span className="text-[var(--text-muted)]">Mask </span><span className="text-[var(--text-primary)]">{viz.mask}</span></div>
               <div className="flex items-center gap-1">
-                <span className="text-zinc-500">Net </span>
+                <span className="text-[var(--text-muted)]">Net </span>
                 <span className="text-emerald-600 dark:text-emerald-400">{viz.network.substring(0, viz.cidr + Math.floor(viz.cidr / 8))}</span>
-                <span className="text-zinc-400">{viz.network.substring(viz.cidr + Math.floor(viz.cidr / 8))}</span>
+                <span className="text-[var(--text-muted)]">{viz.network.substring(viz.cidr + Math.floor(viz.cidr / 8))}</span>
               </div>
             </div>
           </div>
           <div className="bg-[var(--bg-surface)] rounded-xl p-4">
             <div className="flex items-center gap-1 text-lg tracking-wide">
-              <span className="text-emerald-500">{'█'.repeat(viz.cidr)}</span><span className="text-zinc-300 dark:text-zinc-600">{'█'.repeat(32 - viz.cidr)}</span>
+              <span className="text-emerald-500">{'█'.repeat(viz.cidr)}</span><span className="text-zinc-300 dark:text-[var(--text-secondary)]">{'█'.repeat(32 - viz.cidr)}</span>
             </div>
-            <div className="flex justify-between text-xs text-zinc-500 mt-1">
+            <div className="flex justify-between text-xs text-[var(--text-muted)] mt-1">
               <span>{viz.cidr} network bits</span>
               <span>{32 - viz.cidr} host bits</span>
             </div>
           </div>
-          <button onClick={copy} className="px-3 py-1.5 text-xs bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+          <button onClick={copy} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
     </Section>
@@ -161,7 +161,7 @@ Expected record types for a typical domain:
       <button onClick={gen} className="px-5 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-sm font-medium transition-colors">Generate Records</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-orange-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-orange-500 hover:bg-orange-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -207,7 +207,7 @@ Common checks:
       <button onClick={check} className="px-5 py-2.5 bg-slate-500 hover:bg-slate-600 text-white rounded-xl text-sm font-medium transition-colors">Check Reputation</button>
       {output && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-slate-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
           <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
@@ -251,19 +251,19 @@ export function UrlSanitizer() {
       {sanitized && (
         <div className="mt-4 space-y-3">
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-red-400">
-            <span className="text-xs font-semibold text-zinc-500 block mb-1">Original</span>
-            <p className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{original}</p>
+            <span className="text-xs font-semibold text-[var(--text-muted)] block mb-1">Original</span>
+            <p className="text-sm font-mono text-[var(--text-primary)] break-all">{original}</p>
           </div>
           <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-green-400">
             <div className="flex justify-between items-center mb-1">
-              <span className="text-xs font-semibold text-zinc-500">Sanitized</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)]">Sanitized</span>
               <button onClick={copy} className="px-2 py-0.5 text-xs bg-sky-500 hover:bg-sky-600 text-white rounded transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
             </div>
-            <p className="text-sm font-mono text-zinc-800 dark:text-zinc-200 break-all">{sanitized}</p>
+            <p className="text-sm font-mono text-[var(--text-primary)] break-all">{sanitized}</p>
           </div>
           {removed.length > 0 && (
             <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-yellow-400">
-              <span className="text-xs font-semibold text-zinc-500 block mb-1">Removed Parameters ({removed.length})</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)] block mb-1">Removed Parameters ({removed.length})</span>
               <div className="flex flex-wrap gap-1">{removed.map(r => <span key={r} className="px-2 py-0.5 text-xs bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded">{r}</span>)}</div>
             </div>
           )}
@@ -311,14 +311,14 @@ Common subdomains to check:
   return (
     <Section title="Subdomain Finder">
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {domainPresets.map(d => <button key={d} onClick={() => { setDomain(d); }} className="px-2.5 py-1 text-xs rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-500/20 border border-indigo-500/20 transition-colors">{d}</button>)}
+        {domainPresets.map(d => <button key={d} onClick={() => { setDomain(d); }} className="px-2.5 py-1 text-xs rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] hover:bg-[var(--accent)]/20 border border-[var(--accent)]/20 transition-colors">{d}</button>)}
       </div>
       <Input label="Domain" value={domain} onChange={v => { setDomain(v); setOutput(''); }} placeholder="example.com" />
-      <button onClick={find} className="px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
+      <button onClick={find} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-xl text-sm font-medium transition-colors">Find Subdomains</button>
       {output && (
-        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-indigo-400">
-          <pre className="whitespace-pre-wrap text-sm font-mono text-zinc-800 dark:text-zinc-200">{output}</pre>
-          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
+        <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-[var(--accent)]/20">
+          <pre className="whitespace-pre-wrap text-sm font-mono text-[var(--text-primary)]">{output}</pre>
+          <button onClick={copy} className="mt-3 px-3 py-1.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
         </div>
       )}
     </Section>

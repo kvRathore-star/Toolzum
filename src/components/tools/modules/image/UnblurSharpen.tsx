@@ -459,7 +459,7 @@ export default function UnblurSharpen() {
                     const ext = extensionMap[format];
                     downloadOrShare(outputUrl, `processed_${sourceFile?.name?.replace(/\.[^/.]+$/, '') || 'image'}.${ext}`);
                   }}
-                  className="bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg flex items-center gap-2 text-sm"
+                  className="bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 px-6 rounded-xl transition-all active:scale-95 cursor-pointer shadow-lg flex items-center gap-2 text-sm"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                   Download

@@ -285,11 +285,11 @@ export default function PsdToJpgPng() {
           )}
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Ready!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Ready!</h4>
               <button
                 onClick={() => downloadOrShare(outputUrl, `${file.name.replace(/\.psd$/i, '')}.${getExt()}`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-3.5 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-3.5 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

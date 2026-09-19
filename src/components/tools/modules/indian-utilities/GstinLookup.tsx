@@ -159,7 +159,7 @@ export default function GstinLookup() {
                   maxLength={15}
                   className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-sm font-mono text-[var(--text-primary)] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/30" />
                 <button onClick={handleLookup} disabled={loading || !gstin}
-                  className="px-6 py-3 bg-emerald-700 hover:bg-emerald-700 disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
+                  className="px-6 py-3 bg-[var(--accent-ink)] hover:opacity-90 disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors">
                   {loading ? 'Checking...' : <><Search className="w-4 h-4" /> Validate</>}
                 </button>
               </div>
@@ -208,7 +208,7 @@ export default function GstinLookup() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-[var(--text-secondary)]">{bulkData.length} GSTINs loaded</span>
-                    <button onClick={handleBulkLookup} className="px-4 py-2 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors">
+                    <button onClick={handleBulkLookup} className="px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-xs font-bold transition-colors">
                       Validate All
                     </button>
                   </div>

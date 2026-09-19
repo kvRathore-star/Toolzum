@@ -232,7 +232,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
                 <p className="text-xs mt-1 opacity-80">{isProtect ? 'Ready with password protection.' : 'Ready without encryption.'}</p>
               </div>
               <button onClick={() => downloadOrShare(outputUrl, `${isProtect ? 'protected' : 'unlocked'}_${file!.name}`)}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer">
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold px-4 py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2 cursor-pointer">
                 <Download className="w-5 h-5" /> Download {isProtect ? 'Protected' : 'Unlocked'} PDF
               </button>
             </div>

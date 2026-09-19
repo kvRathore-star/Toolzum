@@ -361,7 +361,7 @@ export function PdfWorkflowBuilder() {
 
         <div className="flex-1 p-6 overflow-y-auto space-y-4" role="tabpanel" aria-label="PDF workflow step">
           {error && <div role="alert" className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-700 dark:text-red-400">{error}</div>}
-          {success && <div role="status" className="p-3 bg-emerald-700/10 border border-emerald-500/20 rounded-lg text-sm text-emerald-700 dark:text-emerald-400">{success}</div>}
+          {success && <div role="status" className="p-3 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg text-sm text-[var(--accent)]">{success}</div>}
 
           {activeTab === 'merge' && (
             <>
@@ -424,7 +424,7 @@ export function PdfWorkflowBuilder() {
                   <button onClick={handleFill} disabled={loading} className={btnCls}>{loading ? 'Filling...' : 'Fill & Download'}</button>
                 </div>
               )}
-              {fillFile && formFields.length === 0 && <p className="text-sm text-amber-700 dark:text-amber-400">No interactive form fields detected in this PDF.</p>}
+              {fillFile && formFields.length === 0 && <p className="text-sm text-[var(--accent)]">No interactive form fields detected in this PDF.</p>}
             </>
           )}
 
@@ -495,7 +495,7 @@ export function PdfWorkflowBuilder() {
 
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl p-3 text-center">
             <p className="text-xs text-[var(--text-tertiary)]">
-              <span className="text-emerald-700 dark:text-emerald-400 font-bold">🔒 Privacy First</span> — All PDF processing happens in your browser. Files are never uploaded to any server.
+              <span className="text-[var(--accent)] font-bold">🔒 Privacy First</span> — All PDF processing happens in your browser. Files are never uploaded to any server.
             </p>
           </div>
         </div>

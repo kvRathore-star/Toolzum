@@ -24,7 +24,7 @@ export default function MrrCalculator() {
             <div className="text-xs text-[var(--text-tertiary)]">Monthly</div>
           </div>
           <div className="text-center p-3">
-            <div className="text-lg font-bold text-emerald-700 dark:text-emerald-400">${(mrr * 12).toLocaleString()}</div>
+            <div className="text-lg font-bold text-[var(--accent)]">${(mrr * 12).toLocaleString()}</div>
             <div className="text-xs text-[var(--text-tertiary)]">Annual</div>
           </div>
           <div className="text-center p-3">

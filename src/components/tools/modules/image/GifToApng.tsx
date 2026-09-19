@@ -130,7 +130,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
             APNG to GIF
           </button>
         </div>
-        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400' : 'bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)]'}`}>          {toApng
+        <div className={`p-4 rounded-xl text-sm ${toApng ? 'bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 text-[var(--accent)]' : 'bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-[var(--accent)]'}`}>          {toApng
             ? <><strong>APNG supports 24-bit colors and 8-bit alpha transparency</strong> — better quality than GIF.</>
             : <><strong>APNG to GIF:</strong> Convert animated PNGs to universally compatible GIF format.</>}
         </div>
@@ -226,8 +226,8 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">{toApng ? 'APNG' : 'GIF'} Ready!</h4>
               {toApng && (
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div><p className="text-xs text-[var(--text-muted)] mb-2">Original (GIF)</p><p className="text-sm text-[var(--text-primary)]">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</p></div>
@@ -235,7 +235,7 @@ export function AnimationConverter({ defaultMode = 'gif-to-apng' }: { defaultMod
                 </div>
               )}
               {toApng && outputSize > 0 && gifInfo!.fileSize > 0 && (
-                <p className="text-sm text-[var(--text-muted)] mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-emerald-700 dark:text-emerald-400' : 'text-[var(--accent)]'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
+                <p className="text-sm text-[var(--text-muted)] mb-4">Size change: <span className={outputSize < gifInfo!.fileSize ? 'text-[var(--accent)]' : 'text-[var(--accent)]'}>{outputSize < gifInfo!.fileSize ? '-' : '+'}{Math.round(Math.abs((1 - outputSize / gifInfo!.fileSize) * 100))}%</span></p>
               )}
               <button onClick={() => downloadOrShare(outputUrl, `${file!.name.split('.')[0]}.${toApng ? 'png' : 'gif'}`)}
                 className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg">Download {toApng ? 'APNG' : 'GIF'}</button>

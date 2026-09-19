@@ -405,7 +405,7 @@ export default function FontConverter() {
             {outputUrl && (
               <button
                 onClick={handleDownload}
-                className="w-full px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
               >
                 <Download className="w-4 h-4" />
                 Download {file?.name?.replace(/\.[^.]+$/, '')}.{outputFormat}

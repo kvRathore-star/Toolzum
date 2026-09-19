@@ -160,7 +160,7 @@ export default function PdfToMarkdown() {
                   </button>
                   <button
                     onClick={() => downloadOrShare(outputUrl!, `${fileName}.md`)}
-                    className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg"
+                    className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg"
                   >
                     Download .md
                   </button>

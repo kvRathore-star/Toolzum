@@ -44,7 +44,7 @@ export default function DataTypeConverter() {
       <div className="flex flex-wrap gap-1.5 mb-3">
         {typePills.map(t => <button key={t} onClick={() => setType(t)} className={`px-3 py-1 text-xs rounded-full border transition-colors ${type === t ? 'bg-emerald-700 text-white border-emerald-500' : 'bg-emerald-700/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-700/20 border-emerald-500/20'}`}>{t}</button>)}
       </div>
-      <button onClick={() => handle()} className="px-5 py-2.5 bg-emerald-700 hover:bg-emerald-700 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
+      <button onClick={() => handle()} className="px-5 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-xl text-sm font-medium transition-colors">Convert</button>
       {out && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl border-l-4 border-emerald-400">
           <div className="flex justify-between items-center mb-2">

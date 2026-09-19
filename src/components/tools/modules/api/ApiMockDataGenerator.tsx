@@ -53,7 +53,7 @@ export default function ApiMockDataGenerator() {
           <label htmlFor="lbl-apimockdatagenerator-count-count" className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-wider">Count: {count}</label>
           <input id="lbl-apimockdatagenerator-count-count" type="range" min={1} max={20} value={count} aria-label="Count" onChange={e => { setCount(Number(e.target.value)); setResult(''); }} className="w-full mt-1 accent-emerald-500" />
         </div>
-        <button onClick={calc} className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
+        <button onClick={calc} className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-2.5 rounded-xl text-sm transition-all active:scale-[0.98]">Generate</button>
         {result && (
           <div className="relative">
             <pre className="bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl p-3 text-xs font-mono overflow-x-auto max-h-64 whitespace-pre-wrap break-all">{result}</pre>

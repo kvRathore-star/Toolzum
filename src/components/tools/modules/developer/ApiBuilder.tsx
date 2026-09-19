@@ -230,7 +230,7 @@ export function ApiBuilder() {
       {/* Toolbar */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[var(--accent-ink)] to-[var(--accent-ink)] flex items-center justify-center">
             <Terminal className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -320,7 +320,7 @@ export function ApiBuilder() {
             <div className="px-4 pb-3 space-y-1.5">
               {params.map(p => (
                 <div key={p.id} className="flex gap-1.5 items-center">
-                  <input type="checkbox" checked={p.enabled} onChange={() => toggleParam(p.id)} className="accent-indigo-500" />
+                  <input type="checkbox" checked={p.enabled} onChange={() => toggleParam(p.id)} className="accent-[var(--accent)]" />
                   <input type="text" placeholder="Key" aria-label="Parameter key" value={p.key} onChange={e => updateParam(p.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <input type="text" placeholder="Value" aria-label="Parameter value" value={p.value} onChange={e => updateParam(p.id, 'value', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <button onClick={() => removeParam(p.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove parameter"><Trash2 size={13} /></button>
@@ -338,7 +338,7 @@ export function ApiBuilder() {
             <div className="px-4 pb-3 space-y-1.5">
               {headers.map(h => (
                 <div key={h.id} className="flex gap-1.5 items-center">
-                  <input type="checkbox" checked={h.enabled} onChange={() => toggleHeader(h.id)} className="accent-indigo-500" />
+                  <input type="checkbox" checked={h.enabled} onChange={() => toggleHeader(h.id)} className="accent-[var(--accent)]" />
                   <input type="text" placeholder="Header" aria-label="Header name" value={h.key} onChange={e => updateHeader(h.id, 'key', e.target.value)} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <input type="text" placeholder="Value" aria-label="Header value" value={h.value} onChange={e => updateHeader(h.id, 'value', e.target.value)} className="flex-[2] bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-1 focus:ring-[var(--accent)]" />
                   <button onClick={() => removeHeader(h.id)} className="p-1 text-[var(--text-tertiary)] hover:text-red-700 dark:hover:text-red-400 transition-colors" aria-label="Remove header"><Trash2 size={13} /></button>

@@ -60,8 +60,8 @@ export default function FormatSerializerHub({ slug: defaultSlug }: { slug: strin
           <button key={s} onClick={() => { setMode(s); setInput(TRANSFORM_CONFIG[s]?.inputPlaceholder || ''); setOutput(''); }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               mode === s
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white border border-[var(--border-subtle)]'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)]'
             }`}>
             {LABELS[s]}
           </button>
@@ -73,14 +73,14 @@ export default function FormatSerializerHub({ slug: defaultSlug }: { slug: strin
         <textarea rows={6} value={input} onChange={e => setInput(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] resize-y min-h-[80px]" />
         <button onClick={handleConvert}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2 rounded-lg text-sm transition-all active:scale-[0.98]">
           Convert
         </button>
         {output && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs text-[var(--text-secondary)]">{config.outputLabel}</span>
-              <button onClick={handleCopy} className="text-xs text-blue-600 dark:text-blue-400 hover:underline font-medium">
+              <button onClick={handleCopy} className="text-xs text-[var(--accent)] hover:underline font-medium">
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>

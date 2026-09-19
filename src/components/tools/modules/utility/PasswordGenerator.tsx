@@ -126,7 +126,7 @@ export default function PasswordGenerator() {
             type="text"
             readOnly
             value={password}
-            className="w-full bg-[var(--bg-base)] border-2 border-emerald-500/30 rounded-xl px-5 py-4 text-xl font-mono text-emerald-700 dark:text-emerald-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-center tracking-wider"
+            className="w-full bg-[var(--bg-base)] border-2 border-emerald-500/30 rounded-xl px-5 py-4 text-xl font-mono text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-center tracking-wider"
           />
         </div>
 

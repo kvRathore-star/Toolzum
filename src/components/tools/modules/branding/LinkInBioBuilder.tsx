@@ -286,7 +286,7 @@ ${linkCards}
               </div>
             ) : (
               <div className="bg-zinc-900 rounded-2xl p-4 min-h-[500px] overflow-auto border-4 border-zinc-800">
-                <pre className="text-[10px] text-emerald-700 dark:text-emerald-400 whitespace-pre-wrap font-mono leading-relaxed">{generateHtml}</pre>
+                <pre className="text-[10px] text-[var(--accent)] whitespace-pre-wrap font-mono leading-relaxed">{generateHtml}</pre>
               </div>
             )}
           </div>

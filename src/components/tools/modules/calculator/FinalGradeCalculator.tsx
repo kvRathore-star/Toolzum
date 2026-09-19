@@ -23,7 +23,7 @@ export default function FinalGradeCalculator() {
     ) : (
     <div className="text-center">
       <div className="text-xs text-[var(--text-tertiary)]">Final Grade</div>
-      <div className={`text-lg font-bold ${final >= 90 ? 'text-emerald-700 dark:text-emerald-400' : final >= 80 ? 'text-[var(--accent)]' : final >= 70 ? 'text-[var(--accent)]' : 'text-red-700 dark:text-red-400'}`}>{final.toFixed(1)}%</div>
+      <div className={`text-lg font-bold ${final >= 90 ? 'text-[var(--accent)]' : final >= 80 ? 'text-[var(--accent)]' : final >= 70 ? 'text-[var(--accent)]' : 'text-red-700 dark:text-red-400'}`}>{final.toFixed(1)}%</div>
     </div>
     )
   );

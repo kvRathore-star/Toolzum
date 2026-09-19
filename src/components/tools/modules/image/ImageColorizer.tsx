@@ -151,7 +151,7 @@ export default function ImageColorizer() {
               </div>
               <button 
                 onClick={downloadImage}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 Download Tinted Image
               </button>

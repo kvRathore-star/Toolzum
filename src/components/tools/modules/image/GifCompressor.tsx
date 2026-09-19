@@ -131,7 +131,7 @@ export default function GifCompressor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm">
+        <div className="bg-gradient-to-r from-emerald-500/10 to-[var(--accent-ink)]/10 border border-emerald-500/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Reduce GIF size by up to 80%</strong> by optimizing colors and removing duplicate frames.
         </div>
         <FileUploader
@@ -253,13 +253,13 @@ export default function GifCompressor() {
           </div>
 
           {outputUrl ? (
-            <div className="p-6 bg-emerald-700/10 border border-emerald-500/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
-              <h4 className="text-xl font-bold text-emerald-700 dark:text-emerald-400 mb-4">Compressed!</h4>
+            <div className="p-6 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-2xl animate-in slide-in-from-bottom-4 text-center shadow-xl">
+              <h4 className="text-xl font-bold text-[var(--accent)] mb-4">Compressed!</h4>
               <img src={outputUrl} alt="Compressed GIF" className="w-full max-h-[200px] object-contain rounded-lg mb-6 mx-auto" />
               <div className="text-sm text-[var(--text-muted)] mb-4">
                 <p>Original: <span className="text-[var(--text-primary)]">{(gifInfo!.fileSize / 1024).toFixed(1)} KB</span></p>
                 <p>Compressed: <span className="text-[var(--text-primary)]">{(outputSize / 1024).toFixed(1)} KB</span></p>
-                <p className="text-emerald-700 dark:text-emerald-400 font-medium">
+                <p className="text-[var(--accent)] font-medium">
                   {gifInfo!.fileSize > 0 ? `-${Math.round((1 - outputSize / gifInfo!.fileSize) * 100)}%` : ''}
                 </p>
               </div>
@@ -314,7 +314,7 @@ export default function GifCompressor() {
               <p>Original: <span className="text-[var(--text-primary)] font-medium">{gifInfo ? (gifInfo.fileSize / 1024).toFixed(1) : 0} KB</span></p>
               <p>Estimated: <span className="text-[var(--text-primary)] font-medium">{(estimatedSize / 1024).toFixed(1)} KB</span></p>
               {gifInfo && gifInfo.fileSize > 0 && (
-                <p className="text-emerald-700 dark:text-emerald-400">
+                <p className="text-[var(--accent)]">
                   ~{Math.round((1 - estimatedSize / gifInfo.fileSize) * 100)}% smaller
                 </p>
               )}

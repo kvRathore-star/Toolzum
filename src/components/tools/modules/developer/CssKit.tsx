@@ -83,7 +83,7 @@ export function GlassmorphismGenerator() {
       <PresetBar presets={presetList} />
 
       {/* Live Preview */}
-      <div className="relative w-full h-32 rounded-xl overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <div className="relative w-full h-32 rounded-xl overflow-hidden bg-gradient-to-br from-[var(--accent-ink)] via-purple-500 to-pink-500">
         <div
           className="absolute inset-4 flex items-center justify-center text-sm font-semibold text-white/80"
           style={{
@@ -527,7 +527,7 @@ export function CssSpecificityCalculator() {
             className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2 py-1.5 text-[11px] font-mono text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)]" />
           {spec2 && (
             <div className="w-full bg-[var(--bg-overlay)] rounded-lg h-4 overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-blue-400 to-blue-600 transition-all duration-300 flex items-center justify-end pr-1"
+              <div className="h-full bg-gradient-to-r from-blue-400 to-[var(--accent-ink)] transition-all duration-300 flex items-center justify-end pr-1"
                 style={{ width: `${specToBar(spec2.specificity)}%` }}>
                 <span className="text-[8px] font-bold text-white">{spec2.specificity}</span>
               </div>

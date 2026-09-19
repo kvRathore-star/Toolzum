@@ -296,7 +296,7 @@ export default function VectorPenCanvas() {
           <button onClick={() => handleExport('svg')} className="text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
             <Download className="w-3.5 h-3.5" /> SVG
           </button>
-          <button onClick={() => handleExport('png')} className="text-xs bg-emerald-700 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <button onClick={() => handleExport('png')} className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
             <Download className="w-3.5 h-3.5" /> PNG
           </button>
         </div>

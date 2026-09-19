@@ -95,7 +95,7 @@ export default function RegexTester() {
                 <p className="text-sm text-[var(--text-secondary)]">AI-powered generation and real-time testing</p>
               </div>
             </div>
-            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Sparkles className="w-3.5 h-3.5" /> AI · 1 credit/use</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0"><Sparkles className="w-3.5 h-3.5" /> AI · 1 credit/use</span>
           </div>
         </div>
 
@@ -176,7 +176,7 @@ export default function RegexTester() {
             </div>
           </div>
 
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Save regex patterns to your library, batch test against multiple strings, export test results as CSV, share regex patterns with a link.</p>
             <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
           </div>

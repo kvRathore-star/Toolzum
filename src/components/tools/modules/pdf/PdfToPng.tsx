@@ -317,7 +317,7 @@ export default function PdfToPng() {
         </button>
         {outputUrl ? (
           <button onClick={handleDownload}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-700 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all">
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-[var(--accent-ink)] hover:opacity-90 text-white font-semibold rounded-xl transition-all">
             <Download className="w-5 h-5" /> Download ZIP
           </button>
         ) : (
