@@ -102,13 +102,13 @@ export default function ScanToPdf() {
   if (images.length === 0) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Scan to PDF:</strong> Turn photos of documents into a professional PDF document. All processing happens in your browser &mdash; nothing is uploaded.
         </div>
         <div
           role="button" tabIndex={0} aria-label="Upload photos to convert" onClick={() => inputRef.current?.click()}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inputRef.current?.click(); } }}
-          className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-3xl transition-all duration-300 ease-in-out cursor-pointer border-zinc-300 dark:border-zinc-700 bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:border-zinc-400 dark:hover:border-zinc-500"
+          className="relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-3xl transition-all duration-300 ease-in-out cursor-pointer border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-overlay)] hover:border-[var(--accent)]"
         >
           <input
             ref={inputRef}
@@ -118,10 +118,10 @@ export default function ScanToPdf() {
             className="hidden"
             onChange={(e) => e.target.files && handleFiles(e.target.files)}
           />
-          <div className="p-4 rounded-full mb-4 bg-white dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] shadow-sm border border-zinc-100 dark:border-zinc-700">
+          <div className="p-4 rounded-full mb-4 bg-white dark:bg-[var(--bg-surface)] text-[var(--text-secondary)] shadow-sm border border-[var(--border-subtle)]">
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
           </div>
-          <p className="mb-2 text-lg font-semibold text-zinc-900 dark:text-zinc-100">Upload Photos to Convert</p>
+          <p className="mb-2 text-lg font-semibold text-[var(--text-primary)]">Upload Photos to Convert</p>
           <p className="text-sm text-[var(--text-secondary)]">Select multiple images to combine into a single PDF</p>
         </div>
         <div className="flex items-center justify-center gap-2 text-xs text-[var(--text-muted)] font-medium uppercase tracking-wider">
@@ -134,15 +134,15 @@ export default function ScanToPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{images.length} Image{images.length !== 1 ? 's' : ''}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Arrange images in desired order</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{images.length} Image{images.length !== 1 ? 's' : ''}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">Arrange images in desired order</p>
         </div>
         <div className="flex gap-2">
           <button
             onClick={() => inputRef.current?.click()}
-            className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+            className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
           >
             Add More
           </button>
@@ -170,16 +170,16 @@ export default function ScanToPdf() {
             {images.map((img, idx) => (
               <div key={`${img.dataUrl}-${idx}`} className="flex items-center gap-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-2">
                 <span className="text-xs font-bold text-[var(--text-muted)] w-5 text-center shrink-0">{idx + 1}</span>
-                <div className="w-12 h-12 rounded-lg overflow-hidden bg-zinc-200 dark:bg-[var(--bg-surface)] shrink-0">
+                <div className="w-12 h-12 rounded-lg overflow-hidden bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] shrink-0">
                   <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                 </div>
-                <span className="text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate flex-1">{img.file.name}</span>
+                <span className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate flex-1">{img.file.name}</span>
                 <div className="flex gap-1 shrink-0">
                   <button
                     aria-label={`Move ${img.file.name} up`}
                     onClick={() => moveImage(idx, -1)}
                     disabled={idx === 0}
-                    className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
                   </button>
@@ -187,7 +187,7 @@ export default function ScanToPdf() {
                     aria-label={`Move ${img.file.name} down`}
                     onClick={() => moveImage(idx, 1)}
                     disabled={idx === images.length - 1}
-                    className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="p-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white disabled:opacity-30 disabled:cursor-not-allowed"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                   </button>
@@ -238,7 +238,7 @@ export default function ScanToPdf() {
               <h4 className="text-[var(--text-primary)] font-medium">Preview</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {images.map((img, idx) => (
-                  <div key={`${img.dataUrl}-${idx}`} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-zinc-200 dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
+                  <div key={`${img.dataUrl}-${idx}`} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)]">
                     <img src={img.dataUrl} alt="" className="w-full h-full object-cover" />
                     <span className="absolute top-1 left-1 bg-black/60 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">{idx + 1}</span>
                   </div>

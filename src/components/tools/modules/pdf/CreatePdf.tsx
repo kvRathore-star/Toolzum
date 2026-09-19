@@ -223,11 +223,11 @@ export default function CreatePdf() {
   };
 
   const tabClass = (m: InputMode) =>
-    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${mode === m ? 'bg-blue-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
+    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${mode === m ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>Create PDF:</strong> Generate a PDF document from text, CSV tables, JSON data, or XML. Fully browser-based.
       </div>
 
@@ -262,7 +262,7 @@ export default function CreatePdf() {
 
         <label className="flex items-center gap-2 cursor-pointer">
           <input type="checkbox" checked={includeTitle} onChange={(e) => setIncludeTitle(e.target.checked)}
-            className="rounded border-zinc-300 dark:border-zinc-700 text-blue-600 focus:ring-blue-500" />
+            className="rounded border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)]" />
           <span className="text-sm text-[var(--text-primary)]">Include title on first page</span>
         </label>
 
@@ -303,7 +303,7 @@ export default function CreatePdf() {
       </div>
 
       <button onClick={createPdf} disabled={isProcessing}
-        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
+        className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
         {isProcessing ? 'Creating PDF...' : 'Create PDF'}
       </button>
 

@@ -107,7 +107,7 @@ export default function PdfFormFiller() {
   if (!pdfFile) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>100% Client-Side Filling:</strong> We extract and fill the AcroForm fields right in your browser. Highly secure for sensitive documents like Government Forms, W-9s, or NDAs.
         </div>
         <FileUploader 
@@ -123,10 +123,10 @@ export default function PdfFormFiller() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
       
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{pdfFile.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{fields.length} form fields detected</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{pdfFile.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{fields.length} form fields detected</p>
         </div>
         <button 
           onClick={() => { setPdfFile(null); setFields([]); }}
@@ -148,7 +148,7 @@ export default function PdfFormFiller() {
           ) : (
             fields.map((field) => (
               <div key={field.name} className="space-y-1">
-                <label className="text-xs text-zinc-600 dark:text-[var(--text-muted)] truncate block" title={field.name}>{field.name}</label>
+                <label className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] truncate block" title={field.name}>{field.name}</label>
                 
                 {field.type.includes('CheckBox') ? (
                   <select 
@@ -180,7 +180,7 @@ export default function PdfFormFiller() {
             <button 
               onClick={generateFilledPdf}
               disabled={isProcessing || fields.length === 0}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
             >
               {isProcessing ? "Processing..." : "Generate Filled PDF"}
             </button>
@@ -191,7 +191,7 @@ export default function PdfFormFiller() {
               <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">PDF Generated Successfully!</h4>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `filled_${pdfFile.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download PDF
               </button>

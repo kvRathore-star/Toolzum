@@ -38,7 +38,7 @@ export default function PdfTimestamp() {
               <div className="grid grid-cols-3 gap-2">
                 {(['bottom-left', 'bottom-center', 'bottom-right', 'top-left', 'top-center', 'top-right'] as const).map(p => (
                   <button key={p} onClick={() => setState({ ...state, position: p })}
-                    className={`py-2 text-xs font-bold border rounded-lg ${position === p ? 'bg-blue-600 text-white border-blue-600' : 'bg-[var(--bg-overlay)] text-zinc-600 dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
+                    className={`py-2 text-xs font-bold border rounded-lg ${position === p ? 'bg-[var(--accent-ink)] text-white border-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] border-[var(--border-subtle)]'}`}>
                     {p.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                   </button>
                 ))}

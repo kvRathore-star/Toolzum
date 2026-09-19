@@ -130,7 +130,7 @@ export default function TranslatePdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           <Globe className="w-5 h-5 flex-shrink-0" />
           <span><strong>PDF Text Translation:</strong> Extract text from any PDF and translate it into 20+ languages using MyMemory API.</span>
         </div>
@@ -146,23 +146,23 @@ export default function TranslatePdf() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{file.name}</h3>
             <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button 
           onClick={clearAll}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
+          className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-secondary)] px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
         >
           Change File
         </button>
       </div>
 
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
         <Globe className="w-5 h-5 flex-shrink-0" />
         <span>Free API translation via MyMemory — limited to 5000 characters per request. Accuracy may vary. For sensitive documents, review translations manually.</span>
       </div>

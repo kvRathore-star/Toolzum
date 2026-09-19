@@ -85,7 +85,7 @@ export default function UrlToPdf() {
   if (!isLoaded) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>URL to PDF:</strong> Enter a webpage URL to convert it to PDF.
           Some sites block embedding — enable the proxy option to bypass restrictions.
         </div>
@@ -99,7 +99,7 @@ export default function UrlToPdf() {
               onChange={(e) => setUrl(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && !isLoading && handleLoad()}
               placeholder="https://example.com"
-              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]"
+              className="flex-1 px-4 py-3 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]"
             />
             <button
               onClick={handleLoad}
@@ -120,7 +120,7 @@ export default function UrlToPdf() {
               type="checkbox"
               checked={useProxy}
               onChange={(e) => setUseProxy(e.target.checked)}
-              className="rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500"
+              className="rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)]"
             />
             Use CORS proxy (helps load restricted sites)
           </label>
@@ -133,7 +133,7 @@ export default function UrlToPdf() {
           )}
         </div>
 
-        <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
+        <div className="bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] border border-[var(--border-subtle)] p-4 rounded-xl text-xs text-[var(--text-secondary)] space-y-1">
           <p>⚠️ <strong>Limitations:</strong> Some websites block embedding via X-Frame-Options. Enable &quot;Use CORS proxy&quot; to bypass this. Sites behind login or with heavy JavaScript may not render fully.</p>
         </div>
       </div>
@@ -142,10 +142,10 @@ export default function UrlToPdf() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
           <svg className="w-5 h-5 text-[var(--accent)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 0a9 9 0 019 9"/></svg>
-          <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm truncate">{url}</span>
+          <span className="font-bold text-[var(--text-primary)] text-sm truncate">{url}</span>
         </div>
         <button
           onClick={reset}

@@ -235,13 +235,13 @@ export default function PdfAdvanced() {
   };
 
   const actionClass = (a: Action) =>
-    `px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${action === a ? 'bg-blue-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
+    `px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${action === a ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
 
   const actions: Action[] = ['overlay', 'alternate-merge', 'combine', 'booklet', 'invert', 'zip'];
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>Advanced PDF Tools:</strong> Overlay PDFs, alternate-merge, combine pages into sheets, apply booklet layout, invert colors, or extract pages as ZIP images.
       </div>
 
@@ -262,7 +262,7 @@ export default function PdfAdvanced() {
           <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-2">Main PDF</label>
           {mainFile ? (
             <div className="flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-xl">
-              <span className="text-sm text-zinc-800 dark:text-zinc-200">{mainFile.name} ({pageCount} pages)</span>
+              <span className="text-sm text-[var(--text-primary)]">{mainFile.name} ({pageCount} pages)</span>
               <button onClick={() => { setMainFile(null); setMainBuffer(null); setOutputUrl(null); }}
                 className="text-xs text-[var(--text-secondary)] hover:text-red-500">Remove</button>
             </div>
@@ -279,7 +279,7 @@ export default function PdfAdvanced() {
             </label>
             {(overlayFile || secondFile) ? (
               <div className="flex items-center justify-between bg-[var(--bg-overlay)] p-3 rounded-xl">
-                <span className="text-sm text-zinc-800 dark:text-zinc-200">{(overlayFile || secondFile)?.name}</span>
+                <span className="text-sm text-[var(--text-primary)]">{(overlayFile || secondFile)?.name}</span>
                 <button onClick={() => { setOverlayFile(null); setOverlayBuffer(null); setSecondFile(null); setSecondBuffer(null); setOutputUrl(null); }}
                   className="text-xs text-[var(--text-secondary)] hover:text-red-500">Remove</button>
               </div>
@@ -305,18 +305,18 @@ export default function PdfAdvanced() {
 
         {isProcessing && action !== 'zip' && progress > 0 && (
           <div className="space-y-2">
-            <div className="flex justify-between text-sm text-zinc-600">
+            <div className="flex justify-between text-sm text-[var(--text-secondary)]">
               <span>Processing...</span>
               <span>{progress}%</span>
             </div>
-            <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
-              <div className="h-full bg-blue-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+            <div className="w-full h-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
+              <div className="h-full bg-[var(--accent-ink)] rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           </div>
         )}
 
         <button onClick={processAction} disabled={isProcessing || !mainFile}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
+          className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2">
           {isProcessing ? 'Processing...' : `Apply ${actionLabel()}`}
         </button>
       </div>

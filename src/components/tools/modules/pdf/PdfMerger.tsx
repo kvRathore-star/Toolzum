@@ -80,7 +80,7 @@ export default function PdfMerger() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>100% Client-Side PDF Merger:</strong> Combine multiple PDFs in the exact order you want. Processing happens securely in your browser.
       </div>
 
@@ -95,8 +95,8 @@ export default function PdfMerger() {
           <h4 className="text-[var(--text-primary)] font-medium mb-4">Arrange Files</h4>
           <ul className="space-y-2 mb-6">
             {files.map((f, i) => (
-              <li key={f.id} className="flex items-center justify-between bg-[var(--bg-elevated)] border border-zinc-200 dark:border-[var(--border-subtle)] p-3 rounded-xl">
-                <span className="text-zinc-800 dark:text-zinc-200 text-sm truncate flex-1">{f.file.name}</span>
+              <li key={f.id} className="flex items-center justify-between bg-[var(--bg-elevated)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-3 rounded-xl">
+                <span className="text-[var(--text-primary)] text-sm truncate flex-1">{f.file.name}</span>
                 <div className="flex gap-2">
                   <button onClick={() => moveUp(i)} disabled={i === 0} className="p-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2 rounded" aria-label={`Move ${f.file.name} up`}>
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
@@ -113,7 +113,7 @@ export default function PdfMerger() {
             onClick={processMerge}
             onKeyDown={handleKeyDown}
             disabled={isProcessing || files.length < 2}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label={isProcessing ? 'Merging PDFs...' : 'Merge PDF files'}
           >
             {isProcessing ? "Merging PDFs..." : "Merge PDFs"}
@@ -130,7 +130,7 @@ export default function PdfMerger() {
           
           <button 
             onClick={() => downloadOrShare(outputUrl, `merged_document_${Date.now()}.pdf`)}
-            className="w-full sm:w-auto bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full sm:w-auto bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-8 py-3 rounded-xl transition-colors shadow-lg focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
             aria-label="Download merged PDF document"
           >
             Download PDF

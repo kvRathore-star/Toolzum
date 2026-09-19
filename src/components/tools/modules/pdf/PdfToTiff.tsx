@@ -209,8 +209,8 @@ export default function PdfToTiff() {
   if (!file) {
     return (
       <div className="space-y-6">
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-          <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm font-medium flex items-start gap-3">
+          <Info className="w-5 h-5 shrink-0 mt-0.5 text-[var(--accent)]" />
           <span>Convert PDF pages to high-quality TIFF images for document archiving and OCR workflows.</span>
         </div>
         <div
@@ -223,7 +223,7 @@ export default function PdfToTiff() {
             if (f && f.type === 'application/pdf') handleFileSelect(f);
             else toast.error('Please upload a PDF file.');
           }}
-          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 transition cursor-pointer"
+          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-[var(--border-subtle)] rounded-2xl bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-overlay)] transition cursor-pointer"
         >
           <input
             type="file"
@@ -233,7 +233,7 @@ export default function PdfToTiff() {
             onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
           />
           <Upload className="w-10 h-10 text-[var(--text-muted)] mb-3" />
-          <p className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">Upload PDF</p>
+          <p className="text-lg font-semibold text-[var(--text-primary)]">Upload PDF</p>
           <p className="text-sm text-[var(--text-secondary)] mt-1">Drag & drop or click to browse</p>
         </div>
       </div>
@@ -242,16 +242,16 @@ export default function PdfToTiff() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm font-medium flex items-start gap-3">
+        <Info className="w-5 h-5 shrink-0 mt-0.5 text-[var(--accent)]" />
         <span>Convert PDF pages to high-quality TIFF images for document archiving and OCR workflows.</span>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
-          <FileText className="w-8 h-8 text-blue-700 dark:text-blue-400 shrink-0" />
+          <FileText className="w-8 h-8 text-[var(--accent)] shrink-0" />
           <div className="min-w-0">
-            <p className="font-semibold text-zinc-800 dark:text-zinc-200 truncate">{file.name}</p>
+            <p className="font-semibold text-[var(--text-primary)] truncate">{file.name}</p>
             {pdfInfo && (
               <p className="text-sm text-[var(--text-secondary)]">
                 {pdfInfo.pageCount} page{pdfInfo.pageCount !== 1 ? 's' : ''} &middot; {pdfInfo.fileSize}
@@ -259,7 +259,7 @@ export default function PdfToTiff() {
             )}
           </div>
         </div>
-        <button onClick={handleReset} className="text-sm text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 transition flex items-center gap-1.5 shrink-0">
+        <button onClick={handleReset} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-[var(--text-primary)] transition flex items-center gap-1.5 shrink-0">
           <RefreshCw className="w-4 h-4" /> Change File
         </button>
       </div>
@@ -267,8 +267,8 @@ export default function PdfToTiff() {
       {previewUrl && (
         <div className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 flex items-center gap-3">
           <Eye className="w-5 h-5 text-[var(--text-muted)] shrink-0" />
-          <span className="text-sm text-zinc-600 dark:text-[var(--text-muted)]">First page preview:</span>
-          <img src={previewUrl} alt="PDF preview" className="h-20 w-auto rounded border border-zinc-300 dark:border-zinc-700" />
+          <span className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">First page preview:</span>
+          <img src={previewUrl} alt="PDF preview" className="h-20 w-auto rounded border border-[var(--border-subtle)]" />
         </div>
       )}
 
@@ -280,7 +280,7 @@ export default function PdfToTiff() {
             value={pageRange}
             onChange={(e) => setPageRange(e.target.value)}
             placeholder='all, 1-5, or 1,3,5'
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus:border-[var(--accent)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           />
         </div>
 
@@ -289,7 +289,7 @@ export default function PdfToTiff() {
           <select id="lbl-pdftotiff-output-mode" aria-label="Output Mode"
             value={mode}
             onChange={(e) => setMode(e.target.value as OutputMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="multi">Single Multi-Page TIFF</option>
             <option value="single">Separate TIFF Files (ZIP)</option>
@@ -301,7 +301,7 @@ export default function PdfToTiff() {
           <select id="lbl-pdftotiff-dpi" aria-label="DPI"
             value={dpi}
             onChange={(e) => setDpi(Number(e.target.value))}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value={150}>150 DPI</option>
             <option value={200}>200 DPI</option>
@@ -314,7 +314,7 @@ export default function PdfToTiff() {
           <select id="lbl-pdftotiff-color-mode" aria-label="Color Mode"
             value={colorMode}
             onChange={(e) => setColorMode(e.target.value as ColorMode)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="rgba">Full Color</option>
             <option value="gray">Grayscale</option>
@@ -327,7 +327,7 @@ export default function PdfToTiff() {
           <select id="lbl-pdftotiff-compression" aria-label="Compression"
             value={compression}
             onChange={(e) => setCompression(e.target.value as Compression)}
-            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+            className="w-full px-3 py-2 bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-sm text-[var(--text-primary)] focus:ring-2 focus:ring-[var(--accent)]/50 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
           >
             <option value="lzw">LZW</option>
             <option value="packbits">PackBits</option>
@@ -339,12 +339,12 @@ export default function PdfToTiff() {
 
       {isProcessing && (
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-zinc-600 dark:text-[var(--text-muted)]">
+          <div className="flex justify-between text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
             <span>Converting pages...</span>
             <span>{progress}%</span>
           </div>
-          <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
-            <div className="h-full bg-blue-500 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+          <div className="w-full h-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
+            <div className="h-full bg-[var(--accent-ink)] rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
         </div>
       )}

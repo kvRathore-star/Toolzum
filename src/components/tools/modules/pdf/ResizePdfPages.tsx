@@ -117,7 +117,7 @@ export default function ResizePdfPages() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Resize PDF Pages:</strong> Changes page dimensions to a preset or custom size. "Resize canvas" adds white margins when enlarging; content may overflow when shrinking. For proportional content scaling, use a dedicated PDF editor.
         </div>
         <FileUploader
@@ -132,14 +132,14 @@ export default function ResizePdfPages() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {pageCount} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -156,14 +156,14 @@ export default function ResizePdfPages() {
                 <button
                   key={key}
                   onClick={() => setPreset(key)}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${preset === key ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${preset === key ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                 >
                   {val.label}
                 </button>
               ))}
               <button
                 onClick={() => setPreset('custom')}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${preset === 'custom' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${preset === 'custom' ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
               >
                 Custom Size
               </button>
@@ -175,13 +175,13 @@ export default function ResizePdfPages() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setUnit('pt')}
-                  className={`py-1.5 px-4 rounded-lg text-xs font-bold transition-all border ${unit === 'pt' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                  className={`py-1.5 px-4 rounded-lg text-xs font-bold transition-all border ${unit === 'pt' ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                 >
                   Points
                 </button>
                 <button
                   onClick={() => setUnit('mm')}
-                  className={`py-1.5 px-4 rounded-lg text-xs font-bold transition-all border ${unit === 'mm' ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                  className={`py-1.5 px-4 rounded-lg text-xs font-bold transition-all border ${unit === 'mm' ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                 >
                   Millimeters
                 </button>
@@ -223,7 +223,7 @@ export default function ResizePdfPages() {
           <button
             onClick={processResize}
             disabled={isProcessing}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 flex justify-center items-center gap-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
             {isProcessing ? "Resizing..." : "Resize All Pages"}

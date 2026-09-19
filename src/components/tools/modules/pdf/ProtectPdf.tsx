@@ -114,8 +114,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
             onClick={() => { setMode('protect'); setFile(null); setFileBuffer(null); }}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               mode === 'protect'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
             Protect PDF
@@ -124,14 +124,14 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
             onClick={() => { setMode('unlock'); setFile(null); setFileBuffer(null); }}
             className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               mode === 'unlock'
-                ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+                ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
             Unlock PDF
           </button>
         </div>
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           {isProtect ? <ShieldAlert className="w-5 h-5 flex-shrink-0" /> : <Unlock className="w-5 h-5 flex-shrink-0" />}
           <span>
             {isProtect
@@ -151,16 +151,16 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{file.name}</h3>
             <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button onClick={clearAll} disabled={isProcessing}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50">
+          className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-secondary)] px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50">
           Change File
         </button>
       </div>
@@ -170,8 +170,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
           onClick={() => { setMode('protect'); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
           className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
             mode === 'protect'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+              ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
           }`}
         >
           Protect PDF
@@ -180,8 +180,8 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
           onClick={() => { setMode('unlock'); setFile(null); setFileBuffer(null); setOutputUrl(null); setPassword(''); setConfirmPassword(''); }}
           className={`px-4 py-1.5 rounded-lg text-xs font-semibold transition-all ${
             mode === 'unlock'
-              ? 'bg-blue-600 text-white shadow-sm'
-              : 'text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white'
+              ? 'bg-[var(--accent-ink)] text-white shadow-sm'
+              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
           }`}
         >
           Unlock PDF
@@ -200,7 +200,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
               <input id="lbl-protectpdf-password" aria-label="Password" type="password" value={password} onChange={e => setPassword(e.target.value)}
                 placeholder={isProtect ? 'Enter password (minimum 4 characters)...' : 'Enter password (leave empty if none)...'}
                 minLength={isProtect ? 4 : undefined}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]"
                 required={isProtect} />
             </div>
             {isProtect && (
@@ -208,7 +208,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
                 <label htmlFor="lbl-protectpdf-confirm-password" className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Confirm Password</label>
                 <input id="lbl-protectpdf-confirm-password" aria-label="Confirm Password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
                   placeholder="Confirm password..." minLength={4} required
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-zinc-800 rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]" />
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]" />
               </div>
             )}
           </div>
@@ -226,7 +226,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
         <div className="flex flex-col justify-center">
           {outputUrl ? (
             <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6 animate-in zoom-in-95 duration-300 h-full flex flex-col justify-center">
-              <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-indigo-500/10 border-indigo-500/20 text-[var(--accent)]' : 'bg-emerald-700/10 border-emerald-500/20 text-emerald-500'}`}>
+              <div className={`rounded-xl overflow-hidden border flex flex-col items-center justify-center p-8 ${isProtect ? 'bg-[var(--accent)]/10 border-[var(--accent)]/20 text-[var(--accent)]' : 'bg-emerald-700/10 border-emerald-500/20 text-emerald-500'}`}>
                 {isProtect ? <Lock className="w-16 h-16 mb-4" /> : <Unlock className="w-16 h-16 mb-4" />}
                 <p className="font-bold text-center">{isProtect ? `protected_${file!.name}` : `unlocked_${file!.name}`}</p>
                 <p className="text-xs mt-1 opacity-80">{isProtect ? 'Ready with password protection.' : 'Ready without encryption.'}</p>
@@ -237,7 +237,7 @@ export function PdfSecurityTool({ defaultMode = 'protect' }: { defaultMode?: Mod
               </button>
             </div>
           ) : (
-            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
               {isProtect ? <Lock className="w-12 h-12 mb-4 opacity-30" /> : <Unlock className="w-12 h-12 mb-4 opacity-30" />}
               <p className="text-sm font-medium">{isProtect ? 'Protected' : 'Unlocked'} PDF will appear here</p>
             </div>

@@ -122,7 +122,7 @@ export default function PdfOptimizer() {
           
           <button 
             onClick={() => downloadOrShare(outputUrl, `optimized_${pdfFile.name}`)}
-            className="w-full md:w-auto bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="w-full md:w-auto bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-8 py-3 rounded-xl transition-colors shadow-lg whitespace-nowrap focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             Download PDF
           </button>

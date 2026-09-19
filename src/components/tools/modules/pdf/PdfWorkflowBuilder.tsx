@@ -22,8 +22,8 @@ const TABS: { id: PdfTab; label: string; icon: React.ReactNode; desc: string }[]
   { id: 'metadata', label: 'Metadata', icon: <Info size={15} />, desc: 'Edit title, author, and more' },
 ];
 
-const inputCls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500 text-[var(--text-primary)]";
-const btnCls = "px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
+const inputCls = "w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-sm focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)] text-[var(--text-primary)]";
+const btnCls = "px-4 py-2 bg-[var(--accent-ink)] hover:opacity-90 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed";
 const btnSec = "px-4 py-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] rounded-lg text-sm transition-colors disabled:opacity-50";
 const fileRowCls = "flex items-center gap-2 bg-[var(--bg-surface)] rounded-lg px-3 py-2 text-sm";
 
@@ -321,7 +321,7 @@ export function PdfWorkflowBuilder() {
 
   function dropZone(label: string, onClick: () => void) {
     return (
-      <div role="button" tabIndex={0} onClick={onClick} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }} className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500/50 transition-colors">
+      <div role="button" tabIndex={0} onClick={onClick} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }} className="border-2 border-dashed border-[var(--border-subtle)] rounded-2xl p-8 text-center cursor-pointer hover:border-[var(--accent)]/50 transition-colors">
         <FileUp size={32} className="mx-auto mb-3 text-[var(--text-tertiary)]" />
         <p className="text-sm text-[var(--text-tertiary)]">{label}</p>
         <p className="text-xs text-[var(--text-tertiary)] mt-2">PDF files only</p>
@@ -332,16 +332,16 @@ export function PdfWorkflowBuilder() {
   function fileBar(name: string, onChange: () => void) {
     return (
       <div className={fileRowCls}>
-        <FileText size={15} className="text-blue-700 dark:text-blue-400 shrink-0" />
+        <FileText size={15} className="text-[var(--accent)] shrink-0" />
         <span className="flex-1 truncate">{name}</span>
-        <button onClick={onChange} className="text-xs text-blue-700 dark:text-blue-400 hover:underline shrink-0">Change</button>
+        <button onClick={onChange} className="text-xs text-[var(--accent)] hover:underline shrink-0">Change</button>
       </div>
     );
   }
 
   function tabBtn<T extends string>(mode: T, current: string, setter: (v: T) => void, children: React.ReactNode) {
     return (
-      <button onClick={() => setter(mode)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${mode === current ? 'bg-blue-600 text-white' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
+      <button onClick={() => setter(mode)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${mode === current ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}>
         {children}
       </button>
     );
@@ -353,7 +353,7 @@ export function PdfWorkflowBuilder() {
         <div className="w-48 shrink-0 border-r border-[var(--border-subtle)] p-2 space-y-1" role="tablist" aria-orientation="vertical" aria-label="PDF workflow steps" onKeyDown={flowTabs.onKeyDown}>
           {TABS.map(t => (
             <button key={t.id} role="tab" {...flowTabs.tabProps(t.id)} aria-selected={activeTab === t.id} onClick={() => { setActiveTab(t.id); setError(''); setSuccess(''); }}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-blue-600/20 text-blue-700 dark:text-blue-400 border border-blue-500/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-colors text-left ${activeTab === t.id ? 'bg-[var(--accent-ink)]/20 text-[var(--accent)] border border-[var(--accent)]/30' : 'text-[var(--text-secondary)] hover:bg-[var(--bg-surface)] hover:text-[var(--text-primary)] border border-transparent'}`}>
               {t.icon}<span>{t.label}</span>
             </button>
           ))}
@@ -373,7 +373,7 @@ export function PdfWorkflowBuilder() {
                 <div className="space-y-1.5">
                   {mergeFiles.map((f, i) => (
                     <div key={f.id} className={fileRowCls}>
-                      <FileText size={15} className="text-blue-700 dark:text-blue-400 shrink-0" />
+                      <FileText size={15} className="text-[var(--accent)] shrink-0" />
                       <span className="flex-1 truncate">{f.name}</span>
                       <button onClick={() => moveMergeFile(i, -1)} disabled={i === 0} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30" aria-label="Move file up"><ChevronUp size={15} /></button>
                       <button onClick={() => moveMergeFile(i, 1)} disabled={i === mergeFiles.length - 1} className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30" aria-label="Move file down"><ChevronDown size={15} /></button>
@@ -441,12 +441,12 @@ export function PdfWorkflowBuilder() {
                 <>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-[var(--text-tertiary)]">{pageCount} page(s) · {selectedPages.length} selected</span>
-                    <button onClick={toggleAllPages} className="text-xs text-blue-700 dark:text-blue-400 hover:underline">{selectedPages.length === pageCount ? 'Deselect all' : 'Select all'}</button>
+                    <button onClick={toggleAllPages} className="text-xs text-[var(--accent)] hover:underline">{selectedPages.length === pageCount ? 'Deselect all' : 'Select all'}</button>
                   </div>
                   <div className="grid grid-cols-10 gap-1.5">
                     {Array.from({ length: pageCount }, (_, i) => i + 1).map(n => (
                       <button key={n} onClick={() => togglePage(n)}
-                        className={`h-9 rounded-lg text-xs font-medium transition-colors ${selectedPages.includes(n) ? 'bg-blue-600 text-white' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>{n}</button>
+                        className={`h-9 rounded-lg text-xs font-medium transition-colors ${selectedPages.includes(n) ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface)]'}`}>{n}</button>
                     ))}
                   </div>
                   {pageMode === 'rotate' && (
@@ -469,7 +469,7 @@ export function PdfWorkflowBuilder() {
               <p className="text-sm text-[var(--text-tertiary)]">Reduce file size by stripping unused data and re-saving efficiently.</p>
               <input aria-label="Reduce file size by stripping unused data and re-saving efficiently." ref={optimizeRef} type="file" accept=".pdf" onChange={handleOptimize} className="hidden" />
               {dropZone('Click to select a PDF to optimize', () => optimizeRef.current?.click())}
-              {optimizeResult && <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg text-sm text-blue-700 dark:text-blue-400">{optimizeResult}</div>}
+              {optimizeResult && <div className="p-3 bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-lg text-sm text-[var(--accent)]">{optimizeResult}</div>}
             </>
           )}
 

@@ -412,7 +412,7 @@ export default function MarkdownToPdf() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
         <strong>Markdown to PDF:</strong> Write or upload markdown content and convert it into a beautifully formatted PDF document.
       </div>
 
@@ -427,7 +427,7 @@ export default function MarkdownToPdf() {
               value={markdown}
               onChange={(e) => { setMarkdown(e.target.value); setPdfUrl(null); }}
               placeholder="# Enter your markdown here..."
-              className="w-full h-[340px] p-5 bg-transparent text-zinc-800 dark:text-zinc-200 font-mono text-sm resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 leading-relaxed"
+              className="w-full h-[340px] p-5 bg-transparent text-[var(--text-primary)] font-mono text-sm resize-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 leading-relaxed"
               spellCheck={false}
             />
           </div>
@@ -460,7 +460,7 @@ export default function MarkdownToPdf() {
                   <button
                     key={s}
                     onClick={() => setPageSize(s)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${pageSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${pageSize === s ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                   >
                     {s}
                   </button>
@@ -475,7 +475,7 @@ export default function MarkdownToPdf() {
                   <button
                     key={m}
                     onClick={() => setMargin(m)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border capitalize ${margin === m ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border capitalize ${margin === m ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                   >
                     {m}
                   </button>
@@ -490,7 +490,7 @@ export default function MarkdownToPdf() {
                   <button
                     key={s}
                     onClick={() => setFontSize(s)}
-                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${fontSize === s ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                    className={`py-2 px-2 rounded-lg text-xs font-semibold transition-all border ${fontSize === s ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                   >
                     {s}
                   </button>
@@ -503,7 +503,7 @@ export default function MarkdownToPdf() {
                 type="checkbox"
                 checked={includeTitlePage}
                 onChange={(e) => setIncludeTitlePage(e.target.checked)}
-                className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-600 text-blue-600 focus:ring-blue-500"
+                className="w-4 h-4 rounded border-[var(--border-subtle)] dark:border-[var(--border-subtle)] text-[var(--accent)] focus:ring-[var(--accent)]"
               />
               <span className="text-sm text-[var(--text-primary)]">Include title page</span>
             </label>
@@ -511,7 +511,7 @@ export default function MarkdownToPdf() {
             <button
               onClick={handleConvert}
               disabled={isProcessing || !markdown.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-blue-600/50 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:bg-[var(--accent-ink)]/50 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all active:scale-95 flex justify-center items-center gap-2"
             >
               {isProcessing ? (
                 <>

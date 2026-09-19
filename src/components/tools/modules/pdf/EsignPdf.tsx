@@ -203,7 +203,7 @@ export default function EsignPdf() {
   if (!pdfFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Secure Local eSign:</strong> Sign documents directly in your browser. Your signature and document never leave your device.
         </div>
         <FileUploader 
@@ -218,14 +218,14 @@ export default function EsignPdf() {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-xs">{pdfFile.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Page {currentPage} of {numPages}</p>
+          <h3 className="font-bold text-[var(--text-primary)] truncate max-w-xs">{pdfFile.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">Page {currentPage} of {numPages}</p>
         </div>
         <button 
           onClick={() => { setPdfFile(null); setPdfDataUri(null); }}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)]"
         >
           Change PDF
         </button>
@@ -235,7 +235,7 @@ export default function EsignPdf() {
         
         {/* PDF Preview (Left Col) */}
         <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-2xl flex flex-col h-[700px]">
-          <div className="bg-[var(--bg-overlay)]/50 dark:bg-black/50 p-3 border-b border-zinc-200 dark:border-[var(--border-subtle)] flex justify-between items-center">
+          <div className="bg-[var(--bg-overlay)]/50 dark:bg-black/50 p-3 border-b border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex justify-between items-center">
             <div className="flex gap-2">
               <button 
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
@@ -252,7 +252,7 @@ export default function EsignPdf() {
                 Next
               </button>
             </div>
-            <span className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">Preview</span>
+            <span className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">Preview</span>
           </div>
           <div className="flex-1 overflow-auto p-4 flex justify-center bg-black/20">
             <canvas ref={canvasRef} className="shadow-lg border border-[var(--border-subtle)] max-w-full h-auto" />
@@ -264,10 +264,10 @@ export default function EsignPdf() {
           <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
             <h4 className="text-[var(--text-primary)] font-medium mb-4 flex justify-between items-center">
               Your Signature
-              <button onClick={clearSignature} className="text-xs text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-2 py-1 bg-[var(--bg-surface)] rounded">Clear</button>
+              <button onClick={clearSignature} className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-2 py-1 bg-[var(--bg-surface)] rounded">Clear</button>
             </h4>
             
-            <div className="bg-white rounded-xl mb-6 overflow-hidden border-2 border-dashed border-zinc-500">
+            <div className="bg-white rounded-xl mb-6 overflow-hidden border-2 border-dashed border-[var(--border-subtle)]">
               <canvas 
                 ref={sigPadRef}
                 width={300}
@@ -290,7 +290,7 @@ export default function EsignPdf() {
             <button 
               onClick={processSign}
               disabled={isProcessing || !signatureDataUrl}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
+              className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-3 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50"
             >
               {isProcessing ? "Signing..." : "Sign Document"}
             </button>
@@ -301,7 +301,7 @@ export default function EsignPdf() {
               <h4 className="text-lg font-bold text-emerald-700 dark:text-emerald-400 mb-4">Document Signed!</h4>
               <button 
                 onClick={() => downloadOrShare(outputUrl, `signed_${pdfFile.name}`)}
-                className="w-full bg-white text-zinc-900 hover:bg-zinc-200 font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
+                className="w-full bg-white text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] font-bold px-4 py-3 rounded-xl transition-colors shadow-lg"
               >
                 Download Signed PDF
               </button>

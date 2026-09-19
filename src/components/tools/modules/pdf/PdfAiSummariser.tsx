@@ -110,10 +110,10 @@ export default function PdfAiSummariser() {
         <AiSettings />
 
         {!file ? (
-          <div className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors cursor-pointer relative text-center">
+          <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative text-center">
             <input type="file" accept="application/pdf" onChange={handleFileUpload} className="absolute inset-0 opacity-0 cursor-pointer" aria-label="Select PDF File" />
             <div className="text-[var(--text-secondary)] flex flex-col items-center">
-              <Upload className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mb-2" />
+              <Upload className="w-12 h-12 text-[var(--text-secondary)] dark:text-[var(--text-secondary)] mb-2" />
               Select PDF File
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function PdfAiSummariser() {
                   </button>
                 </div>
                 <div className="bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)] p-4 max-h-40 overflow-y-auto">
-                  <pre className="text-xs text-zinc-600 dark:text-[var(--text-muted)] whitespace-pre-wrap font-sans leading-relaxed">
+                  <pre className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)] whitespace-pre-wrap font-sans leading-relaxed">
                     {showFullText ? extractedText : extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : '')}
                   </pre>
                 </div>
@@ -161,7 +161,7 @@ export default function PdfAiSummariser() {
                       <Sparkles className="w-5 h-5 text-amber-500" /> AI Summary
                     </h3>
                     <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/30 rounded-xl p-5">
-                      <pre className="text-sm text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap font-sans leading-relaxed">{summary}</pre>
+                      <pre className="text-sm text-[var(--text-primary)] whitespace-pre-wrap font-sans leading-relaxed">{summary}</pre>
                     </div>
                     <button onClick={() => { setSummary(''); setExtractedText(''); setFile(null); }}
                       className="w-full py-3 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold rounded-xl text-xs transition-colors">
@@ -174,7 +174,7 @@ export default function PdfAiSummariser() {
           </div>
         )}
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Unlimited pages per PDF, summarize multi-document comparisons, export summaries as PDF/CSV, save summary history, process scanned/image PDFs with OCR.</p>
           <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
         </div>

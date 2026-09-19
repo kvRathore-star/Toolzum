@@ -116,7 +116,7 @@ export default function BookmarkPdf() {
     return items.map(bm => (
       <React.Fragment key={bm.id}>
         <div className="flex items-center gap-2 py-1.5 group rounded-lg transition-colors" style={{ paddingLeft: 8 + depth * 20 }}>
-          <span className={`flex-1 text-sm truncate ${depth === 0 ? 'font-semibold text-zinc-900 dark:text-zinc-100' : 'text-zinc-600 dark:text-[var(--text-muted)]'}`}>
+          <span className={`flex-1 text-sm truncate ${depth === 0 ? 'font-semibold text-[var(--text-primary)]' : 'text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}>
             {bm.title}
             <span className="text-[var(--text-muted)] ml-1.5 text-xs">p.{bm.page}</span>
           </span>
@@ -180,7 +180,7 @@ export default function BookmarkPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>PDF Bookmarks:</strong> Add, edit, or remove bookmarks. A Table of Contents page will be added as the first page.
         </div>
         <FileUploader
@@ -195,14 +195,14 @@ export default function BookmarkPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -214,7 +214,7 @@ export default function BookmarkPdf() {
             <h4 className="text-[var(--text-primary)] font-medium">Bookmarks</h4>
             <button
               onClick={() => { setShowBulk(!showBulk); setBulkInput(''); }}
-              className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-xs text-[var(--accent)] hover:underline"
             >
               {showBulk ? 'Add Single' : 'Bulk Import'}
             </button>
@@ -226,12 +226,12 @@ export default function BookmarkPdf() {
               <textarea aria-label="Tab-indented list: title (tab) page number"
                 value={bulkInput}
                 onChange={e => setBulkInput(e.target.value)}
-                className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-sm text-zinc-900 dark:text-zinc-100 resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+                className="w-full h-28 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-3 text-sm text-[var(--text-primary)] resize-none focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                 placeholder="Chapter 1\t3&#10;&#9;Section 1.1\t5&#10;&#9;&#9;Subsection 1.1.1\t7&#10;Chapter 2\t10"
               />
               <button
                 onClick={parseBulkImport}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl transition-all text-sm"
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2.5 rounded-xl transition-all text-sm"
               >
                 Import Bookmarks
               </button>
@@ -244,7 +244,7 @@ export default function BookmarkPdf() {
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                   placeholder="Bookmark title"
-                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/30"
+                  className="flex-1 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/30"
                 />
                 <input
                   type="number"
@@ -252,14 +252,14 @@ export default function BookmarkPdf() {
                   max={totalPages}
                   value={page}
                   onChange={e => setPage(Math.min(totalPages, Math.max(1, parseInt(e.target.value) || 1)))}
-                  className="w-16 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 py-2 text-sm text-center text-zinc-900 dark:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-blue-500/30"
+                  className="w-16 bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-2 py-2 text-sm text-center text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/30"
                   title="Page number"
                 />
               </div>
               <select aria-label="Parent bookmark"
                 value={parentId || ''}
                 onChange={e => setParentId(e.target.value || null)}
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-zinc-900 dark:text-zinc-100 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-2 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
               >
                 <option value="">— Top Level —</option>
                 {bookmarks.map(b => (
@@ -268,7 +268,7 @@ export default function BookmarkPdf() {
               </select>
               <button
                 onClick={addBookmark}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl transition-all text-sm"
+                className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-2.5 rounded-xl transition-all text-sm"
               >
                 Add Bookmark
               </button>

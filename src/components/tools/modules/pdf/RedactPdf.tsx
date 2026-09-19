@@ -120,7 +120,7 @@ export default function RedactPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           <EyeOff className="w-5 h-5 flex-shrink-0" />
           <span><strong>Permanent Redaction:</strong> Black out sensitive content in your PDFs. All processing happens locally — nothing is uploaded.</span>
         </div>
@@ -136,17 +136,17 @@ export default function RedactPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-red-500" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{file.name}</h3>
             <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB • {totalPages} Pages</p>
           </div>
         </div>
         <button 
           onClick={clearAll}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
+          className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-secondary)] px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors"
         >
           Change File
         </button>
@@ -162,13 +162,13 @@ export default function RedactPdf() {
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => setMode('pages')}
-              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'pages' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}
+              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'pages' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}
             >
               Quick Redact
             </button>
             <button
               onClick={() => setMode('area')}
-              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'area' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)]'}`}
+              className={`py-3 px-4 rounded-xl text-xs font-bold border transition-all ${mode === 'area' ? 'bg-red-600 border-red-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)]'}`}
             >
               Custom Area
             </button>

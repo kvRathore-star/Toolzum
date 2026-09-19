@@ -119,7 +119,7 @@ export default function GenericPDFProcessor() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-indigo-500/10 border border-indigo-500/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
           <Sparkles className="w-5 h-5 flex-shrink-0" />
           <span><strong>Multi-Tool PDF Processor:</strong> Compress, rotate pages, or strip metadata — all in your browser using a single upload.</span>
         </div>
@@ -135,18 +135,18 @@ export default function GenericPDFProcessor() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div className="flex items-center gap-3">
           <FileText className="w-8 h-8 text-[var(--accent)]" />
           <div>
-            <h3 className="font-bold text-zinc-900 dark:text-[var(--text-primary)]">{file.name}</h3>
+            <h3 className="font-bold text-[var(--text-primary)] dark:text-[var(--text-primary)]">{file.name}</h3>
             <p className="text-[var(--text-secondary)] text-xs">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
           </div>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-xs text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
+          className="text-xs text-[var(--text-secondary)] dark:text-[var(--text-secondary)] px-3 py-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-lg hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
         >
           Change File
         </button>
@@ -169,8 +169,8 @@ export default function GenericPDFProcessor() {
                     onClick={() => setOperation(op)}
                     className={`py-3 px-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                       operation === op
-                        ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
-                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-indigo-300'
+                        ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                     }`}
                   >
                     <div className="flex flex-col items-center gap-1">
@@ -192,8 +192,8 @@ export default function GenericPDFProcessor() {
                       onClick={() => setRotation(angle)}
                       className={`py-3 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
                         rotation === angle
-                          ? 'bg-indigo-600 border-indigo-500 text-white shadow-md'
-                          : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-indigo-300'
+                          ? 'bg-[var(--accent-ink)] border-[var(--accent-ink)] text-white shadow-md'
+                          : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                       }`}
                     >
                       {angle}°
@@ -204,7 +204,7 @@ export default function GenericPDFProcessor() {
             )}
 
             {operation === 'compress' && (
-              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 text-sm text-blue-700 dark:text-blue-400">
+              <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-sm text-[var(--accent)]">
                 <p className="font-semibold mb-1">How compression works</p>
                 <p className="text-xs">Strips all metadata (title, author, subject, keywords) and re-encodes internal object streams. File size reduction varies depending on the original content.</p>
               </div>
@@ -255,7 +255,7 @@ export default function GenericPDFProcessor() {
               </button>
             </div>
           ) : (
-            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] dark:border-zinc-800 p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
+            <div className="bg-[var(--bg-overlay)] border border-dashed border-[var(--border-subtle)] p-6 rounded-2xl flex flex-col items-center justify-center h-full min-h-[250px] text-[var(--text-muted)] text-center">
               <FileText className="w-12 h-12 mb-4 opacity-30" />
               <p className="text-sm font-medium">Processed PDF will appear here</p>
             </div>

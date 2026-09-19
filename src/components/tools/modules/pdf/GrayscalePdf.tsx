@@ -124,7 +124,7 @@ export default function GrayscalePdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Grayscale Conversion:</strong> Convert your color PDF to grayscale for professional printing or to reduce file size. Note: this process rasterizes the PDF pages.
         </div>
         <FileUploader
@@ -139,9 +139,9 @@ export default function GrayscalePdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
           <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
         </div>
         <button
@@ -161,7 +161,7 @@ export default function GrayscalePdf() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Output DPI</label>
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{dpi} DPI</span>
+              <span className="text-xs font-bold text-[var(--accent)]">{dpi} DPI</span>
             </div>
             <div className="grid grid-cols-4 gap-2">
               {[72, 150, 200, 300].map((val) => (
@@ -169,7 +169,7 @@ export default function GrayscalePdf() {
                   key={val}
                   onClick={() => setDpi(val)}
                   disabled={isProcessing}
-                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border ${dpi === val ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-blue-300'}`}
+                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border ${dpi === val ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'}`}
                 >
                   {val}
                 </button>

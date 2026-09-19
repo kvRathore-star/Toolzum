@@ -239,7 +239,7 @@ export default function GstInvoiceGenerator() {
       <div className="flex items-center justify-between bg-emerald-700/10 border border-emerald-500/20 p-6 rounded-2xl">
         <div className="text-emerald-700 dark:text-emerald-400 text-sm space-y-2">
           <h4 className="font-bold text-emerald-300">Client-Side GST Invoice Builder</h4>
-          <p className="text-zinc-600 dark:text-zinc-300">Create legally compliant GST Invoices matching Indian standards. CGST/SGST vs IGST rates are automatically computed based on the Biller and Client states. Fully private, generated locally.</p>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-secondary)]">Create legally compliant GST Invoices matching Indian standards. CGST/SGST vs IGST rates are automatically computed based on the Biller and Client states. Fully private, generated locally.</p>
         </div>
         <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0 ml-4"><Crown className="w-3.5 h-3.5" /> Pro</span>
       </div>
@@ -249,7 +249,7 @@ export default function GstInvoiceGenerator() {
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
             {Array.from({ length: MONTHLY_LIMIT }, (_, i) => (
-              <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-zinc-300 dark:bg-zinc-600' : 'bg-emerald-700'}`} />
+              <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-emerald-700'}`} />
             ))}
           </div>
           <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {MONTHLY_LIMIT} remaining this month</span>
@@ -284,7 +284,7 @@ export default function GstInvoiceGenerator() {
             )}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
             <div className="space-y-4">
               <h3 className="text-lg font-bold text-[var(--text-primary)]">Billed By (Seller)</h3>
               <div className="space-y-3">
@@ -329,7 +329,7 @@ export default function GstInvoiceGenerator() {
             </div>
           </div>
 
-          <div className="space-y-4 pt-6 border-t border-zinc-200 dark:border-[var(--border-subtle)]">
+          <div className="space-y-4 pt-6 border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
             <h3 className="text-lg font-bold text-[var(--text-primary)]">Invoice Items</h3>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-left text-sm text-[var(--text-secondary)]">
@@ -338,7 +338,7 @@ export default function GstInvoiceGenerator() {
                 </thead>
                 <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
                   {items.map(item => (
-                    <tr key={item.id} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-zinc-900/40 transition-colors">
+                    <tr key={item.id} className="hover:bg-[var(--bg-overlay)]/50 dark:hover:bg-[var(--bg-overlay)] transition-colors">
                       <td className="px-4 py-3 font-medium text-[var(--text-primary)]">{item.description}</td>
                       <td className="px-4 py-3 text-center">{item.quantity}</td>
                       <td className="px-4 py-3 text-right">₹{item.price.toFixed(2)}</td>
@@ -350,7 +350,7 @@ export default function GstInvoiceGenerator() {
                 </tbody>
               </table>
             </div>
-            <div className="bg-[var(--bg-overlay)] dark:bg-zinc-900/30 p-5 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
+            <div className="bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] p-5 rounded-2xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-4">
               <h4 className="text-sm font-semibold text-[var(--text-primary)]">Add New Line Item</h4>
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
                 <div className="sm:col-span-5"><input aria-label="Item Description" type="text" placeholder="Item Description" value={newItemDesc} onChange={e => setNewItemDesc(e.target.value)} className="w-full bg-white dark:bg-black border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-emerald-500 transition-colors" /></div>
@@ -366,15 +366,15 @@ export default function GstInvoiceGenerator() {
             </div>
           </div>
 
-          <div className="bg-[var(--bg-overlay)]/60 p-6 rounded-2xl border border-zinc-200 dark:border-[var(--border-subtle)] space-y-4">
+          <div className="bg-[var(--bg-overlay)]/60 p-6 rounded-2xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] space-y-4">
             <h3 className="text-lg font-bold text-[var(--text-primary)]">Invoice Calculations</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm font-semibold">
               <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)]"><span className="text-[var(--text-secondary)] text-xs block">Taxable Subtotal</span><span className="text-[var(--text-primary)] text-lg font-bold">₹{totals.taxableVal.toFixed(2)}</span></div>
               <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)]"><span className="text-[var(--text-secondary)] text-xs block">Total GST Tax</span><span className="text-[var(--text-primary)] text-lg font-bold">₹{totals.totalTax.toFixed(2)}</span></div>
               <div className="p-3 bg-[var(--bg-elevated)]/50 rounded-xl border border-[var(--border-subtle)] col-span-2"><span className="text-[var(--text-secondary)] text-xs block">GST Mode</span><span className="text-emerald-500 text-lg font-bold">{billerState === clientState ? `Intra-state (CGST: ₹${totals.cgst.toFixed(2)}, SGST: ₹${totals.sgst.toFixed(2)})` : `Inter-state (IGST: ₹${totals.igst.toFixed(2)})`}</span></div>
             </div>
-            <div className="pt-4 border-t border-zinc-200 dark:border-[var(--border-subtle)] flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div className="text-center sm:text-left"><span className="text-[var(--text-secondary)] text-xs block uppercase font-bold tracking-wider">Rupees in Words</span><span className="text-zinc-800 dark:text-zinc-300 font-medium text-sm block max-w-lg mt-0.5">{numberToWords(totals.grandTotal)}</span></div>
+            <div className="pt-4 border-t border-[var(--border-subtle)] dark:border-[var(--border-subtle)] flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div className="text-center sm:text-left"><span className="text-[var(--text-secondary)] text-xs block uppercase font-bold tracking-wider">Rupees in Words</span><span className="text-[var(--text-primary)] dark:text-[var(--text-secondary)] font-medium text-sm block max-w-lg mt-0.5">{numberToWords(totals.grandTotal)}</span></div>
               <div className="text-right shrink-0"><span className="text-[var(--text-secondary)] text-xs block uppercase font-bold tracking-wider">Grand Total</span><span className="text-emerald-500 text-3xl font-extrabold block">₹{totals.grandTotal.toFixed(2)}</span></div>
             </div>
           </div>
@@ -385,7 +385,7 @@ export default function GstInvoiceGenerator() {
             {isProcessing ? 'Generating PDF...' : remaining === 0 ? 'Monthly limit reached — Upgrade to Pro' : 'Generate & Download A4 Tax Invoice (PDF)'}
           </button>
 
-          <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3 flex items-center justify-between">
+          <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">
             <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]"><strong>Pro:</strong> Unlimited monthly invoices, custom brand logo on every invoice, saved client database with GSTIN auto-fill, bulk invoice generation, export to Excel.</p>
             <Link href="/pricing" className="text-[10px] font-bold text-[var(--accent)] dark:text-[var(--accent)] underline shrink-0 ml-4">Upgrade →</Link>
           </div>
@@ -400,9 +400,9 @@ export default function GstInvoiceGenerator() {
               </div>
               <span className="text-[10px] text-[var(--text-muted)]">A4</span>
             </div>
-            <div className="p-4 bg-zinc-100 dark:bg-zinc-900/60 flex justify-center">
+            <div className="p-4 bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] flex justify-center">
               <div className="w-full max-w-[420px] bg-white rounded-lg shadow-sm" style={{ aspectRatio: '210 / 297' }}>
-                <div className="p-5 text-[10px] text-zinc-800 space-y-3 font-sans overflow-hidden" style={{ lineHeight: '1.4' }}>
+                <div className="p-5 text-[10px] text-[var(--text-primary)] space-y-3 font-sans overflow-hidden" style={{ lineHeight: '1.4' }}>
                   {logoDataUrl && (
                     <div className="flex justify-center mb-1">
                       <img src={logoDataUrl} alt="Logo" className="h-8 w-auto object-contain" />
@@ -411,29 +411,29 @@ export default function GstInvoiceGenerator() {
                   <div className="text-center">
                     <h2 className="text-sm font-bold tracking-tight">TAX INVOICE</h2>
                   </div>
-                  <div className="flex justify-between text-[9px] text-zinc-500">
+                  <div className="flex justify-between text-[9px] text-[var(--text-muted)]">
                     <span>Invoice: {invoiceNo}</span>
                     <span>Date: {invoiceDate}</span>
                   </div>
-                  <div className="border-t border-zinc-300 pt-2 grid grid-cols-2 gap-3">
+                  <div className="border-t border-[var(--border-subtle)] pt-2 grid grid-cols-2 gap-3">
                     <div>
-                      <p className="font-bold text-zinc-700 mb-0.5">Seller</p>
+                      <p className="font-bold text-[var(--text-primary)] mb-0.5">Seller</p>
                       <p className="font-semibold">{billerName || '—'}</p>
-                      <p className="text-zinc-500">{billerAddress || ''}</p>
-                      <p className="text-zinc-500">{INDIAN_STATES.find(s => s.code === billerState)?.name || billerState}</p>
-                      {billerGstin && <p className="text-zinc-600 font-mono">GSTIN: {billerGstin}</p>}
+                      <p className="text-[var(--text-muted)]">{billerAddress || ''}</p>
+                      <p className="text-[var(--text-muted)]">{INDIAN_STATES.find(s => s.code === billerState)?.name || billerState}</p>
+                      {billerGstin && <p className="text-[var(--text-secondary)] font-mono">GSTIN: {billerGstin}</p>}
                     </div>
                     <div>
-                      <p className="font-bold text-zinc-700 mb-0.5">Buyer</p>
+                      <p className="font-bold text-[var(--text-primary)] mb-0.5">Buyer</p>
                       <p className="font-semibold">{clientName || '—'}</p>
-                      <p className="text-zinc-500">{clientAddress || ''}</p>
-                      <p className="text-zinc-500">{INDIAN_STATES.find(s => s.code === clientState)?.name || clientState}</p>
-                      {clientGstin && <p className="text-zinc-600 font-mono">GSTIN: {clientGstin}</p>}
+                      <p className="text-[var(--text-muted)]">{clientAddress || ''}</p>
+                      <p className="text-[var(--text-muted)]">{INDIAN_STATES.find(s => s.code === clientState)?.name || clientState}</p>
+                      {clientGstin && <p className="text-[var(--text-secondary)] font-mono">GSTIN: {clientGstin}</p>}
                     </div>
                   </div>
                   <table className="w-full border-collapse text-[9px]">
                     <thead>
-                      <tr className="bg-zinc-100">
+                      <tr className="bg-[var(--bg-overlay)]">
                         <th className="text-left px-1 py-1 font-bold">Item</th>
                         <th className="text-center px-1 py-1 font-bold">Qty</th>
                         <th className="text-right px-1 py-1 font-bold">Price</th>
@@ -443,7 +443,7 @@ export default function GstInvoiceGenerator() {
                     </thead>
                     <tbody>
                       {items.map((item, i) => (
-                        <tr key={item.id} className="border-b border-zinc-200">
+                        <tr key={item.id} className="border-b border-[var(--border-subtle)]">
                           <td className="px-1 py-1 truncate max-w-[100px]">{item.description}</td>
                           <td className="text-center px-1 py-1">{item.quantity}</td>
                           <td className="text-right px-1 py-1">₹{item.price.toFixed(2)}</td>
@@ -453,7 +453,7 @@ export default function GstInvoiceGenerator() {
                       ))}
                     </tbody>
                   </table>
-                  <div className="border-t border-zinc-300 pt-2 space-y-0.5 text-right">
+                  <div className="border-t border-[var(--border-subtle)] pt-2 space-y-0.5 text-right">
                     <div className="flex justify-between text-[9px]"><span>Taxable Value:</span><span>₹{totals.taxableVal.toFixed(2)}</span></div>
                     {(totals.cgst > 0 || totals.sgst > 0) ? (
                       <>
@@ -464,10 +464,10 @@ export default function GstInvoiceGenerator() {
                       <div className="flex justify-between text-[9px]"><span>IGST:</span><span>₹{totals.igst.toFixed(2)}</span></div>
                     )}
                     <div className="flex justify-between text-[9px]"><span>Total Tax:</span><span>₹{totals.totalTax.toFixed(2)}</span></div>
-                    <div className="flex justify-between text-[10px] font-bold border-t border-zinc-300 pt-1 mt-1"><span>Grand Total:</span><span className="text-emerald-600">₹{totals.grandTotal.toFixed(2)}</span></div>
+                    <div className="flex justify-between text-[10px] font-bold border-t border-[var(--border-subtle)] pt-1 mt-1"><span>Grand Total:</span><span className="text-emerald-600">₹{totals.grandTotal.toFixed(2)}</span></div>
                   </div>
-                  <div className="text-[8px] text-zinc-500 pt-1 border-t border-zinc-200">
-                    <p className="font-semibold text-zinc-600">Amount in Words:</p>
+                  <div className="text-[8px] text-[var(--text-muted)] pt-1 border-t border-[var(--border-subtle)]">
+                    <p className="font-semibold text-[var(--text-secondary)]">Amount in Words:</p>
                     <p>{numberToWords(totals.grandTotal)}</p>
                   </div>
                 </div>

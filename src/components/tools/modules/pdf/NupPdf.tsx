@@ -216,7 +216,7 @@ export default function NupPdf() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>N-up PDF:</strong> Combine multiple PDF pages onto one physical page. Choose from 2-up, 4-up, 6-up, 9-up, or booklet layout.
         </div>
         <FileUploader
@@ -231,14 +231,14 @@ export default function NupPdf() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {totalPages} Pages</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {totalPages} Pages</p>
         </div>
         <button
           onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg"
         >
           Change File
         </button>
@@ -259,7 +259,7 @@ export default function NupPdf() {
                 <button
                   key={opt}
                   onClick={() => setLayout(opt)}
-                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border capitalize ${layout === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                  className={`py-2 px-1 rounded-lg text-xs font-bold transition-all border capitalize ${layout === opt ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                 >
                   {opt}
                 </button>
@@ -274,7 +274,7 @@ export default function NupPdf() {
                 <button
                   key={opt}
                   onClick={() => setOrientation(opt)}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border capitalize ${orientation === opt ? 'bg-blue-600 border-blue-500 text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-blue-300'}`}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all border capitalize ${orientation === opt ? 'bg-[var(--accent-ink)] border-[var(--accent)] text-white shadow-md' : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:border-[var(--accent)]'}`}
                 >
                   {opt}
                 </button>
@@ -286,11 +286,11 @@ export default function NupPdf() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Progress</label>
-                <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{progress}%</span>
+                <span className="text-xs font-bold text-[var(--accent)]">{progress}%</span>
               </div>
-              <div className="w-full bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
+              <div className="w-full bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full h-3 overflow-hidden">
                 <div
-                  className="bg-blue-600 h-full rounded-full transition-all duration-300 ease-out"
+                  className="bg-[var(--accent-ink)] h-full rounded-full transition-all duration-300 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -300,7 +300,7 @@ export default function NupPdf() {
           <button
             onClick={processNup}
             disabled={isProcessing}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 mt-4"
+            className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-50 mt-4"
           >
             {isProcessing ? `Processing... ${progress}%` : "Generate N-up PDF"}
           </button>

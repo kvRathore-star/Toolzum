@@ -207,7 +207,7 @@ export default function PdfDeskew() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>PDF Deskew:</strong> Straighten crooked or scanned PDF pages. Auto-detects skew angle using edge analysis, or you can fine-tune manually. Note: deskewing rasterizes pages (text becomes image), so the output will be flattened.
         </div>
         <FileUploader
@@ -222,15 +222,15 @@ export default function PdfDeskew() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {pageCount} Pages</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB &bull; {pageCount} Pages</p>
         </div>
         <button
           onClick={clearAll}
           disabled={isProcessing}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg disabled:opacity-50"
         >
           Change File
         </button>
@@ -254,7 +254,7 @@ export default function PdfDeskew() {
                   generatePreview(skewAngle);
                 }
               }}
-              className={`relative w-10 h-5 rounded-full transition-colors ${useAutoDetect ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'}`}
+              className={`relative w-10 h-5 rounded-full transition-colors ${useAutoDetect ? 'bg-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]'}`}
             >
               <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${useAutoDetect ? 'translate-x-5' : 'translate-x-0.5'}`} />
             </button>
@@ -271,7 +271,7 @@ export default function PdfDeskew() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">Manual Rotation</label>
-              <span className="text-xs font-bold text-blue-700 dark:text-blue-400">{manualAngle.toFixed(1)}&deg;</span>
+              <span className="text-xs font-bold text-[var(--accent)]">{manualAngle.toFixed(1)}&deg;</span>
             </div>
             <input aria-label="Manual Rotation"
               type="range"
@@ -285,7 +285,7 @@ export default function PdfDeskew() {
                 if (!useAutoDetect) generatePreview(val);
               }}
               onMouseUp={() => { if (useAutoDetect) setManualAngle(skewAngle); }}
-              className="w-full h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none cursor-pointer accent-blue-600"
+              className="w-full h-2 bg-[var(--bg-overlay)] rounded-lg appearance-none cursor-pointer accent-blue-600"
             />
             <div className="flex justify-between text-xs text-[var(--text-secondary)]">
               <span>-45&deg;</span>
@@ -301,7 +301,7 @@ export default function PdfDeskew() {
               aria-checked={applyToAll}
               aria-label="Apply to All Pages"
               onClick={() => setApplyToAll(!applyToAll)}
-              className={`relative w-10 h-5 rounded-full transition-colors ${applyToAll ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-700'}`}
+              className={`relative w-10 h-5 rounded-full transition-colors ${applyToAll ? 'bg-[var(--accent-ink)]' : 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]'}`}
             >
               <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${applyToAll ? 'translate-x-5' : 'translate-x-0.5'}`} />
             </button>
@@ -311,17 +311,17 @@ export default function PdfDeskew() {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage <= 1}
-              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
             >
               Prev
             </button>
-            <span className="text-xs font-medium text-zinc-600 dark:text-[var(--text-muted)]">
+            <span className="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
               Page {currentPage} of {pageCount}
             </span>
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage >= pageCount}
-              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] disabled:opacity-30 hover:bg-[var(--bg-surface)]"
             >
               Next
             </button>

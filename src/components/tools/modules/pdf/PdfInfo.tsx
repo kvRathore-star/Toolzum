@@ -142,7 +142,7 @@ export default function PdfInfo() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>PDF Info & Analysis:</strong> View document metadata, page dimensions, extract text content, and export structured data as JSON. All processing stays on your device.
         </div>
         <FileUploader
@@ -156,17 +156,17 @@ export default function PdfInfo() {
   }
 
   const tabClass = (t: TabType) =>
-    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${activeTab === t ? 'bg-blue-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
+    `px-4 py-2 text-sm font-medium rounded-lg transition-all ${activeTab === t ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
-          <p className="text-zinc-600 dark:text-[var(--text-muted)] text-sm">{fileSize} &middot; {pageCount} pages</p>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
+          <p className="text-[var(--text-secondary)] dark:text-[var(--text-muted)] text-sm">{fileSize} &middot; {pageCount} pages</p>
         </div>
         <button onClick={clearAll}
-          className="text-sm text-zinc-600 dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">
+          className="text-sm text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:text-[var(--text-primary)] px-3 py-1.5 bg-[var(--bg-surface)] rounded-lg">
           Change File
         </button>
       </div>
@@ -180,7 +180,7 @@ export default function PdfInfo() {
 
       {isLoading ? (
         <div className="flex items-center justify-center py-16">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--accent)]" />
         </div>
       ) : (
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl">
@@ -189,7 +189,7 @@ export default function PdfInfo() {
               {Object.entries(metadata).map(([key, val]) => (
                 <div key={key} className="flex py-3 border-b border-[var(--border-subtle)] last:border-0">
                   <span className="w-32 text-sm font-medium text-[var(--text-secondary)] shrink-0">{key}</span>
-                  <span className="text-sm text-zinc-900 dark:text-zinc-100 break-all">{val || '—'}</span>
+                  <span className="text-sm text-[var(--text-primary)] break-all">{val || '—'}</span>
                 </div>
               ))}
             </div>
@@ -208,9 +208,9 @@ export default function PdfInfo() {
                 <tbody>
                   {dimensions.map(d => (
                     <tr key={d.page} className="border-b border-[var(--border-subtle)]">
-                      <td className="py-2 text-zinc-900 dark:text-zinc-100">{d.page}</td>
-                      <td className="py-2 text-right text-zinc-900 dark:text-zinc-100">{d.width}</td>
-                      <td className="py-2 text-right text-zinc-900 dark:text-zinc-100">{d.height}</td>
+                      <td className="py-2 text-[var(--text-primary)]">{d.page}</td>
+                      <td className="py-2 text-right text-[var(--text-primary)]">{d.width}</td>
+                      <td className="py-2 text-right text-[var(--text-primary)]">{d.height}</td>
                       <td className="py-2 text-right text-[var(--text-secondary)]">
                         {d.width >= d.height ? 'Landscape' : 'Portrait'}
                       </td>
@@ -224,11 +224,11 @@ export default function PdfInfo() {
             <div className="space-y-4">
               <div className="flex justify-end">
                 <button onClick={downloadText}
-                  className="text-sm bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg font-medium text-zinc-600 dark:text-[var(--text-muted)]">
+                  className="text-sm bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                   Download as TXT
                 </button>
               </div>
-              <pre className="max-h-96 overflow-y-auto bg-[var(--bg-overlay)] rounded-lg p-4 text-xs font-mono text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">
+              <pre className="max-h-96 overflow-y-auto bg-[var(--bg-overlay)] rounded-lg p-4 text-xs font-mono text-[var(--text-primary)] whitespace-pre-wrap">
                 {extractedText || 'No text content found in this PDF.'}
               </pre>
             </div>
@@ -237,11 +237,11 @@ export default function PdfInfo() {
             <div className="space-y-4">
               <div className="flex justify-end">
                 <button onClick={downloadJson}
-                  className="text-sm bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg font-medium text-zinc-600 dark:text-[var(--text-muted)]">
+                  className="text-sm bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] px-3 py-1.5 rounded-lg font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                   Download as JSON
                 </button>
               </div>
-              <pre className="max-h-96 overflow-y-auto bg-[var(--bg-overlay)] rounded-lg p-4 text-xs font-mono text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap">
+              <pre className="max-h-96 overflow-y-auto bg-[var(--bg-overlay)] rounded-lg p-4 text-xs font-mono text-[var(--text-primary)] whitespace-pre-wrap">
                 {jsonOutput}
               </pre>
             </div>

@@ -236,8 +236,8 @@ export default function TiffToPdf() {
   if (!file) {
     return (
       <div className="space-y-6">
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-          <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm font-medium flex items-start gap-3">
+          <Info className="w-5 h-5 shrink-0 mt-0.5 text-[var(--accent)]" />
           <span>Convert TIFF images to universally compatible PDF documents. Perfect for scanned documents and fax archives.</span>
         </div>
         <div
@@ -250,7 +250,7 @@ export default function TiffToPdf() {
             if (f && (f.type === 'image/tiff' || f.name.match(/\.tiff?$/i))) handleFileSelect(f);
             else toast.error('Please upload a TIFF file.');
           }}
-          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-[var(--border-subtle)] rounded-2xl bg-[var(--bg-overlay)] dark:bg-zinc-900/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 transition cursor-pointer"
+          className="relative flex flex-col items-center justify-center w-full h-56 border-2 border-dashed border-[var(--border-subtle)] rounded-2xl bg-[var(--bg-overlay)] dark:bg-[var(--bg-overlay)] hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-overlay)] transition cursor-pointer"
         >
           <input
             type="file"
@@ -269,14 +269,14 @@ export default function TiffToPdf() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-xl text-blue-700 dark:text-blue-300 text-sm font-medium flex items-start gap-3">
-        <Info className="w-5 h-5 shrink-0 mt-0.5 text-blue-700 dark:text-blue-400" />
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm font-medium flex items-start gap-3">
+        <Info className="w-5 h-5 shrink-0 mt-0.5 text-[var(--accent)]" />
         <span>Convert TIFF images to universally compatible PDF documents. Perfect for scanned documents and fax archives.</span>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div className="flex items-center gap-3 min-w-0">
-          <FileImage className="w-8 h-8 text-blue-700 dark:text-blue-400 shrink-0" />
+          <FileImage className="w-8 h-8 text-[var(--accent)] shrink-0" />
           <div className="min-w-0">
             <p className="font-semibold text-[var(--text-primary)] truncate">{file.name}</p>
             {tiffInfo && (
@@ -286,7 +286,7 @@ export default function TiffToPdf() {
             )}
           </div>
         </div>
-        <button onClick={handleReset} className="text-sm text-[var(--text-secondary)] hover:text-zinc-800 dark:hover:text-zinc-200 transition flex items-center gap-1.5 shrink-0">
+        <button onClick={handleReset} className="text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-[var(--text-primary)] transition flex items-center gap-1.5 shrink-0">
           <RefreshCw className="w-4 h-4" /> Change File
         </button>
       </div>
@@ -359,7 +359,7 @@ export default function TiffToPdf() {
             <span>Converting pages...</span>
             <span>{progress}%</span>
           </div>
-          <div className="w-full h-2 bg-zinc-200 dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
+          <div className="w-full h-2 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] rounded-full overflow-hidden">
             <div className="h-full bg-[var(--accent)] rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
           </div>
         </div>
