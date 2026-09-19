@@ -119,10 +119,6 @@ export function createAuth(env: AuthEnv) {
     ),
     emailAndPassword: {
       enabled: true,
-      emailVerification: {
-        enabled: true,
-        autoSignInAfterVerification: true,
-      },
       password: {
         hash: hashPassword,
         verify: verifyPassword,
@@ -135,6 +131,8 @@ export function createAuth(env: AuthEnv) {
           html: `<p>You requested a password reset.</p><p><a href="${url}">Click here to reset your password</a></p><p>This link expires in 1 hour. If you didn't request this, ignore this email.</p>`,
         });
       },
+    },
+    emailVerification: {
       sendVerificationEmail: async ({ user, url }: { user: { email: string }; url: string }) => {
         await sendEmail(env, {
           to: user.email,
@@ -143,6 +141,7 @@ export function createAuth(env: AuthEnv) {
           html: `<p>Welcome to Toolzum!</p><p><a href="${url}">Click here to verify your email</a></p><p>This link expires in 1 hour.</p>`,
         });
       },
+      expiresIn: 3600,
     },
     socialProviders: {
       google: {
