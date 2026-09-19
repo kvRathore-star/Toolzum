@@ -75,6 +75,7 @@ export default function XmlSitemapGenerator() {
   const [exclusions, setExclusions] = useState<ExclusionRule[]>(DEFAULT_EXCLUSIONS);
   const [newExclusion, setNewExclusion] = useState('');
   const [maxPages, setMaxPages] = useState(50);
+  const [notifyEmail, setNotifyEmail] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const abortRef = useRef(false);
   const blobUrlsRef = useRef<string[]>([]);
@@ -113,9 +114,10 @@ export default function XmlSitemapGenerator() {
     const excludeParam = exclusions.map(e => e.pattern).filter(Boolean).join(',');
     const params = new URLSearchParams({ url: inputUrl, max: String(maxPages) });
     if (excludeParam) params.set('exclude', excludeParam);
+    if (notifyEmail.trim()) params.set('notify', notifyEmail.trim());
 
     openStream(params.toString(), inputUrl);
-  }, [url, exclusions, maxPages]);
+  }, [url, exclusions, maxPages, notifyEmail]);
 
   const openStream = (query: string, inputUrl: string) => {
     eventSourceRef.current?.close();
@@ -290,6 +292,18 @@ export default function XmlSitemapGenerator() {
 
             {showSettings && (
               <div className="space-y-4 p-4 bg-[var(--bg-overlay)] rounded-xl border border-[var(--border-subtle)]">
+                <div>
+                  <label htmlFor="lbl-xmlsitemapgenerator-notify-email" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Notify me when done <span className="text-[var(--text-muted)] font-normal">— optional, we'll email you the results</span></label>
+                  <input id="lbl-xmlsitemapgenerator-notify-email" aria-label="Notify me when done"
+                    type="email"
+                    value={notifyEmail}
+                    onChange={e => setNotifyEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="w-full bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
+                    disabled={isCrawling}
+                  />
+                </div>
+
                 <div>
                   <label htmlFor="lbl-xmlsitemapgenerator-max-pages-to-crawl" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Max pages to crawl</label>
                   <select id="lbl-xmlsitemapgenerator-max-pages-to-crawl" aria-label="Max pages to crawl"

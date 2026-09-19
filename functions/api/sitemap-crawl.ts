@@ -4,6 +4,8 @@ interface Env {
   GOOGLE_CLIENT_SECRET?: string;
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
+  CLOUDFLARE_API_TOKEN?: string;
+  CLOUDFLARE_ACCOUNT_ID?: string;
 }
 
 interface CrawledPage {
@@ -27,6 +29,7 @@ interface SEOInsights {
 import { checkRateLimit, recordRateLimit } from './rate-limit';
 import { createAuth } from '../../src/lib/auth';
 import { effectivePlanForUser } from '../../src/lib/planTiers';
+import { sendEmail } from '../../src/lib/email';
 
 function escapeXml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -154,6 +157,35 @@ function parseRobots(txt: string): { sitemaps: string[]; disallows: string[]; cr
 
 const POLITENESS_MS = 150;
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
+
+async function sendCrawlNotification(
+  env: Env,
+  to: string,
+  baseUrl: string,
+  pages: CrawledPage[],
+  durationMs: number,
+  insights: SEOInsights,
+) {
+  const healthy = pages.filter((p) => !p.isBroken).length;
+  const broken = pages.filter((p) => p.isBroken).length;
+  const duration = Math.round(durationMs / 1000);
+  const text = [
+    `Your sitemap crawl for ${baseUrl} is complete.`,
+    ``,
+    `Pages crawled: ${pages.length}`,
+    `Healthy: ${healthy}  |  Broken: ${broken}`,
+    `Missing meta description: ${insights.missingMeta}`,
+    `Duplicate titles: ${insights.duplicateTitles}`,
+    `Duration: ${duration}s`,
+    ``,
+    `Open the tool to view, download, or copy the XML sitemap.`,
+  ].join('\n');
+  await sendEmail(env, {
+    to,
+    subject: `Sitemap complete: ${baseUrl} (${pages.length} pages)`,
+    text,
+  });
+}
 /** Pages crawled per invocation — keeps free-plan subrequests (~pages + a few
  *  sitemap docs) safely under the 50/invocation ceiling. */
 const CHUNK_PAGES = 20;
@@ -198,6 +230,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
   const excludeParam = url.searchParams.get('exclude');
   const maxParam = url.searchParams.get('max');
   const cursorParam = url.searchParams.get('cursor');
+  const notifyEmail = url.searchParams.get('notify');
 
   // Continuation of an existing chunked crawl: session carries all state,
   // so no rate limit and no re-validation (the originating request paid those).
@@ -452,8 +485,8 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
           sendEvent({ type: 'partial', cursor, pages, discovered, crawled: pages.length, max: maxAllowed });
         } catch {
           // Session store failed: fall through and complete with what we have.
-          sendEvent({
-            type: 'complete',
+          const completeData = {
+            type: 'complete' as const,
             pages,
             xml: generateXML(pages, baseUrl),
             html: generateHTMLSitemap(pages, baseUrl),
@@ -462,7 +495,9 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             durationMs: Date.now() - startTime,
             jsRendering,
             url: inputUrl,
-          });
+          };
+          sendEvent(completeData);
+          if (notifyEmail) sendCrawlNotification(env, notifyEmail, baseUrl, pages, completeData.durationMs, completeData.insights).catch(() => {});
         }
         controller.close();
         return;
@@ -471,17 +506,20 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
       if (cursorParam && env.DB) {
         await env.DB.prepare('DELETE FROM crawl_session WHERE id = ?').bind(cursorParam).run().catch(() => {});
       }
+      const finalInsights = generateInsights(pages);
+      const finalDurationMs = Date.now() - startTime;
       sendEvent({
         type: 'complete',
         pages,
         xml: generateXML(pages, baseUrl),
         html: generateHTMLSitemap(pages, baseUrl),
         txt: pages.filter(p => !p.isBroken).map(p => p.url).join('\n'),
-        insights: generateInsights(pages),
-        durationMs: Date.now() - startTime,
+        insights: finalInsights,
+        durationMs: finalDurationMs,
         jsRendering,
         url: inputUrl,
       });
+      if (notifyEmail) sendCrawlNotification(env, notifyEmail, baseUrl, pages, finalDurationMs, finalInsights).catch(() => {});
       controller.close();
     },
   });
