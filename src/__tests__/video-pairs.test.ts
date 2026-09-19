@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { DESCRIPTIONS as VIDEO_FORMAT_DESCRIPTIONS } from '@/components/tools/modules/shared/VideoFormatConverter';
 import { DESCRIPTIONS as VIDEO_TO_AUDIO_DESCRIPTIONS } from '@/components/tools/modules/shared/VideoToAudioConverter';
+import { TOOL_REDIRECTS } from '@/registry/tools';
 
 const ALL_DESCRIPTIONS = { ...VIDEO_FORMAT_DESCRIPTIONS, ...VIDEO_TO_AUDIO_DESCRIPTIONS };
 
@@ -16,6 +17,12 @@ const VIDEO_FORMAT_SLUGS = [
 ];
 
 const VIDEO_TO_AUDIO_SLUGS = ['mp4-to-mp3', 'mov-to-mp3', 'webm-to-mp3'];
+
+// Retired by design (e55386a1 "merge 11b: retire avi/webm/mov-to-mp4 into
+// video-converter (301s, same module)"): these serve via 301 redirect to
+// the hub, not via direct closures. The redirect assertion below anchors
+// this exception — removing a redirect without adding a closure fails.
+const RETIRED_TO_HUB = new Set(['mov-to-mp4', 'webm-to-mp4', 'avi-to-mp4']);
 
 const ALL_SLUGS = [...VIDEO_FORMAT_SLUGS, ...VIDEO_TO_AUDIO_SLUGS];
 
@@ -32,7 +39,13 @@ function routedSlugs(modulePath: string): string[] {
 describe('video hub slug-closure contract', () => {
   it('routes every video-format slug via VideoFormatConverter', () => {
     const routed = routedSlugs('@/components/tools/modules/shared/VideoFormatConverter').sort();
-    expect(routed).toEqual(VIDEO_FORMAT_SLUGS.slice().sort());
+    expect(routed).toEqual(VIDEO_FORMAT_SLUGS.filter(s => !RETIRED_TO_HUB.has(s)).sort());
+  });
+
+  it('retired slugs each keep a live 301 redirect (no dead exception)', () => {
+    for (const s of RETIRED_TO_HUB) {
+      expect(TOOL_REDIRECTS[s], `retired slug ${s} lost its redirect`).toBeDefined();
+    }
   });
 
   it('routes every video-to-audio slug via VideoToAudioConverter', () => {

@@ -37,9 +37,14 @@ describe('hub-owned DESCRIPTIONS parity vs MODULE_REGISTRY closures', () => {
   });
 
   it('every DESCRIPTIONS key is a real closure slug in its hub (no orphan banner data)', () => {
+    // Retired by design (e55386a1 "merge 11b"): mov/webm/avi-to-mp4 serve
+    // via 301 to the video-converter hub; their DESCRIPTIONS entries are
+    // intentionally closure-less. Anchored by the redirect assertion in
+    // video-pairs.test.ts — do not extend this list without one.
+    const RETIRED = new Set(['mov-to-mp4', 'webm-to-mp4', 'avi-to-mp4']);
     for (const [name, modPath, map] of HUB_MODULES) {
       const routed = new Set(routedSlugs(modPath));
-      const orphans = Object.keys(map).filter(s => !routed.has(s));
+      const orphans = Object.keys(map).filter(s => !routed.has(s) && !RETIRED.has(s));
       expect(
         orphans.map(s => `${name}: DESCRIPTIONS key ${s} has no closure`),
       ).toEqual([]);
