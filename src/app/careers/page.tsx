@@ -81,7 +81,7 @@ export default function CareersPage() {
           </p>
           <p className="text-[var(--text-muted)] text-sm mt-6">
             Interested in joining us?{" "}
-            <a href="mailto:support@toolzum.com?subject=Job%20Application%20-%20Resume" className="text-[var(--accent)] hover:underline">Send us your resume</a> and we will keep you in mind.
+            <a href="mailto:contact@toolzum.com?subject=Job%20Application%20-%20Resume" className="text-[var(--accent)] hover:underline">Send us your resume</a> and we will keep you in mind.
           </p>
         </div>
 

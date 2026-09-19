@@ -193,11 +193,11 @@ export default function PrivacyPolicyPage() {
                 <p>Toolzum complies with India's Digital Personal Data Protection Act, 2023.</p>
                 <ul className="list-disc list-inside space-y-2 text-sm">
                   <li><strong>Data Fiduciary:</strong> Toolzum.</li>
-                  <li><strong>Grievance Officer:</strong> Reachable at support@toolzum.com</li>
+                  <li><strong>Grievance Officer:</strong> Reachable at contact@toolzum.com</li>
                   <li><strong>Data we collect:</strong> Usage analytics (anonymised), account email (if logged in).</li>
                   <li><strong>Your rights:</strong> Right to access, correct, and erase your personal data.</li>
                   <li><strong>Retention:</strong> Analytics data retained for 90 days, then automatically purged. Account data retained until deletion.</li>
-                  <li><strong>Contact:</strong> For data requests, email support@toolzum.com — we aim to respond within 72 hours.</li>
+                  <li><strong>Contact:</strong> For data requests, email contact@toolzum.com — we aim to respond within 72 hours.</li>
                 </ul>
               </div>
             </section>
@@ -217,7 +217,7 @@ export default function PrivacyPolicyPage() {
                 </ul>
                 <p className="text-sm"><strong>Legal Basis:</strong> We process data based on (a) consent (analytics, account creation), (b) contractual necessity (providing the service), and (c) legitimate interests (security, fraud prevention).</p>
                 <p className="text-sm"><strong>Data Transfers:</strong> Toolzum uses Cloudflare (global CDN) and PostHog (product analytics) and may process data outside the EEA. We rely on Standard Contractual Clauses (SCCs) where required.</p>
-                <p className="text-sm"><strong>Contact:</strong> For GDPR requests, email support@toolzum.com. We respond within 30 days. You also have the right to lodge a complaint with your local supervisory authority.</p>
+                <p className="text-sm"><strong>Contact:</strong> For GDPR requests, email contact@toolzum.com. We respond within 30 days. You also have the right to lodge a complaint with your local supervisory authority.</p>
               </div>
             </section>
 
@@ -235,7 +235,7 @@ export default function PrivacyPolicyPage() {
                 </ul>
                 <p className="text-sm"><strong>Categories Collected:</strong> Identifiers (email, user ID), internet activity (usage analytics), and inferences (tool usage patterns). We do not collect biometric data, geolocation, or financial information beyond payment processing.</p>
                 <p className="text-sm"><strong>Disclosure:</strong> In the preceding 12 months, we have not sold personal information of California residents.</p>
-                <p className="text-sm"><strong>Contact:</strong> For CCPA requests, email support@toolzum.com. We verify your identity before processing. We respond within 45 days.</p>
+                <p className="text-sm"><strong>Contact:</strong> For CCPA requests, email contact@toolzum.com. We verify your identity before processing. We respond within 45 days.</p>
               </div>
             </section>
 

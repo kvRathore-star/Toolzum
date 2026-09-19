@@ -7,7 +7,7 @@ import { checkRateLimit, recordRateLimit } from "./rate-limit";
  *
  * Secrets (Pages env, owner-set per docs/ALERTS.md):
  * - CLOUDFLARE_API_TOKEN (Email Sending permission)
- * - CONTACT_TO (optional, defaults to support@toolzum.com)
+ * - CONTACT_TO (optional, defaults to contact@toolzum.com)
  * Without a token: 503 + the client shows a direct-mail fallback.
  * Never a fake success.
  */
@@ -19,7 +19,6 @@ interface Env {
   CONTACT_TO?: string;
 }
 
-const SUPPORT_FALLBACK = "support@toolzum.com";
 const MAX_LEN = 2000;
 
 function clean(s: unknown, max = MAX_LEN): string {
@@ -62,10 +61,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ACCOUNT_ID) {
-    return json({ error: "email_unconfigured", to: CONTACT_TO || SUPPORT_FALLBACK }, 503);
+    return json({ error: "email_unconfigured", to: CONTACT_TO || "kirtivardhan1996@gmail.com" }, 503);
   }
 
-  const to = CONTACT_TO || SUPPORT_FALLBACK;
+  const to = CONTACT_TO || "kirtivardhan1996@gmail.com";
   try {
     const res = await fetch(
       `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,

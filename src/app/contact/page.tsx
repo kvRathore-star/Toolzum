@@ -64,7 +64,7 @@ export default function ContactPage() {
         setSubmitted(true);
       } else if (data.error === "email_unconfigured" || data.error === "email_failed") {
         setSendError(
-          `Our mail relay is unavailable right now — please write to us directly at ${data.to || "support@toolzum.com"} and we'll reply there.`,
+          `Our mail relay is unavailable right now — please write to us directly at ${data.to || "contact@toolzum.com"} and we'll reply there.`,
         );
       } else if (res.status === 429) {
         setSendError("Too many messages sent recently — please try again in a few minutes.");

@@ -83,6 +83,7 @@ export default function RootLayout({
                 "url": "https://toolzum.com",
                 "logo": "https://toolzum.com/og/branding/index.webp",
                 "description": `${toolCount}+ free, privacy-first web tools that run entirely in your browser.`,
+                "email": "contact@toolzum.com",
                 "sameAs": [],
               },
               {

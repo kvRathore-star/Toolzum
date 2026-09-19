@@ -45,7 +45,7 @@ const SECTIONS = [
           Free tier tools are free. <strong>Pro</strong> (monthly) and the <strong>7-Day Project Pass</strong> are paid plans processed by our payment gateways (Razorpay or Dodo Payments). The amount charged is the amount displayed by the gateway at checkout. AI features consume credits (deducted per use as marked on each tool); credits have no cash value, are non-transferable, and reset per plan terms.
         </p>
         <p className="mb-3">
-          Plans do <strong>not</strong> auto-renew — access simply continues until the end of the paid period (the Project Pass expires automatically after 7 days). Cancel anytime by emailing <a href="mailto:support@toolzum.com?subject=Cancel%20Subscription" className="text-[var(--accent)] underline">support@toolzum.com</a>; requests are processed within 1 business hour and access continues until the period ends.
+          Plans do <strong>not</strong> auto-renew — access simply continues until the end of the paid period (the Project Pass expires automatically after 7 days). Cancel anytime by emailing <a href="mailto:contact@toolzum.com?subject=Cancel%20Subscription" className="text-[var(--accent)] underline">contact@toolzum.com</a>; requests are processed within 1 business hour and access continues until the period ends.
         </p>
         <p>
           All sales are final: we do <strong>not</strong> offer refunds, but you will never be charged after cancellation.
@@ -119,7 +119,7 @@ const SECTIONS = [
           <li>Make a good-faith effort to avoid privacy violations, data destruction, service disruption, and destruction of other users' data.</li>
           <li>Only interact with accounts you own or have explicit permission to test — never access another user's data.</li>
           <li>Do not exploit a vulnerability beyond what is necessary to confirm its existence — stop once you have demonstrated impact.</li>
-          <li>Report the vulnerability to us promptly via <a href="mailto:security@toolzum.com" className="text-[var(--accent)] underline">security@toolzum.com</a> and allow reasonable time for remediation before public disclosure.</li>
+          <li>Report the vulnerability to us promptly via <a href="mailto:contact@toolzum.com" className="text-[var(--accent)] underline">contact@toolzum.com</a> and allow reasonable time for remediation before public disclosure.</li>
         </ul>
         <p>
           We aim to acknowledge receipt of your report within 72 hours and will work with you to understand and resolve the issue. We will not pursue legal action for testing conducted in accordance with this policy.
@@ -133,7 +133,7 @@ const SECTIONS = [
     content: (
       <>
         <p className="mb-3">
-          If you believe content accessible through the Service infringes your copyright, notify us at <a href="mailto:support@toolzum.com?subject=Copyright%20Complaint" className="text-[var(--accent)] underline">support@toolzum.com</a> with: (a) identification of the copyrighted work, (b) the URL or location of the allegedly infringing material, (c) your contact details, and (d) a good-faith statement that the use is unauthorized.
+          If you believe content accessible through the Service infringes your copyright, notify us at <a href="mailto:contact@toolzum.com?subject=Copyright%20Complaint" className="text-[var(--accent)] underline">contact@toolzum.com</a> with: (a) identification of the copyrighted work, (b) the URL or location of the allegedly infringing material, (c) your contact details, and (d) a good-faith statement that the use is unauthorized.
         </p>
         <p>
           We respond to valid notices by removing or disabling access as required under applicable law (including India's Information Technology Act). Counter-notices follow the same channel.
@@ -156,7 +156,7 @@ const SECTIONS = [
     content: (
       <>
         <p className="mb-3">
-          These Terms are governed by the laws of India. Before any formal proceedings, contact <a href="mailto:support@toolzum.com?subject=Dispute" className="text-[var(--accent)] underline">support@toolzum.com</a> so we can attempt good-faith resolution within 30 days.
+          These Terms are governed by the laws of India. Before any formal proceedings, contact <a href="mailto:contact@toolzum.com?subject=Dispute" className="text-[var(--accent)] underline">contact@toolzum.com</a> so we can attempt good-faith resolution within 30 days.
         </p>
         <p>
           Failing resolution, disputes are subject to the exclusive jurisdiction of the competent courts of India.
