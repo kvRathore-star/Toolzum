@@ -187,6 +187,24 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       console.error(`[DODO] payment for unknown user email=${email} payment=${prod.paymentId}`);
       return json({ ok: true, ignored: "unknown user" });
     }
+    // Local 'created' row (written by create-order) carries the amount and
+    // currency the buyer actually saw. Prefer the webhook payload; fall
+    // back to it so INR receipts never print USD defaults.
+    let localCurrency = "";
+    let localAmount: number | null = null;
+    try {
+      const local = await DB.prepare(
+        "SELECT amount, currency FROM payment WHERE userId = ? AND gateway = 'dodo' AND status = 'created' ORDER BY createdAt DESC LIMIT 1"
+      )
+        .bind(user.id)
+        .first<{ amount: number; currency: string }>();
+      localCurrency = local?.currency || "";
+      localAmount = typeof local?.amount === "number" ? local.amount : null;
+    } catch {
+      /* best-effort */
+    }
+    const currency = prod.currency || localCurrency;
+    const amount = prod.amount ?? localAmount;
     const charged = type !== "subscription.active";
     if (plan === "pass") {
       if (charged) {
@@ -199,8 +217,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
               `dodo_${prod.paymentId || id}`,
               user.id,
               prod.paymentId || id,
-              prod.amount ?? 3.99,
-              prod.currency || "USD",
+              amount ?? 3.99,
+              currency || "USD",
             )
             .run();
         } catch {
@@ -213,7 +231,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             `Hi${name ? ` ${name}` : ""},`,
             ``,
             `Your Toolzum 7-Day Pass is active.`,
-            prod.amount !== null ? `Charged: ${prod.amount} ${prod.currency || "USD"}` : `Plan: Toolzum 7-Day Pass ($3.99 one-time)`,
+            amount !== null
+              ? `Charged: ${amount}${currency ? ` ${currency}` : ""}`
+              : `Plan: Toolzum 7-Day Pass`,
             `Payment: ${prod.paymentId || id}`,
             ``,
             `You get 7 days of Pro-level limits plus 70 bonus AI credits.`,
@@ -236,8 +256,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             `dodo_${prod.paymentId || id}`,
             user.id,
             prod.paymentId || id,
-            prod.amount ?? 9.99,
-            prod.currency || "USD",
+            amount ?? 9.99,
+            currency || "USD",
           )
           .run();
       } catch {
@@ -250,7 +270,9 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
           `Hi${name ? ` ${name}` : ""},`,
           ``,
           `Your ${planLabel} subscription is active.`,
-          prod.amount !== null ? `Charged: ${prod.amount} ${prod.currency || "USD"}` : `Plan: ${planLabel}`,
+          amount !== null
+            ? `Charged: ${amount}${currency ? ` ${currency}` : ""}`
+            : `Plan: ${planLabel}`,
           `Payment: ${prod.paymentId || id}`,
           ``,
           `Pro includes 500-page sitemap crawls, unlimited downloads, and 200 AI credits/month.`,

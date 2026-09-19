@@ -51,7 +51,11 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         headers: { 'Content-Type': 'application/json' },
       });
     }
-    const currency = gateway === 'dodo' ? 'USD' : 'INR';
+    // Currency: Razorpay is INR-only. Dodo follows the buyer's country
+    // (cf-ipcountry): India gets the INR localized price, rest of world
+    // gets USD. Must match the per-country prices set in Dodo dashboard.
+    const buyerCountry = (context.request.headers.get("cf-ipcountry") || "US").toUpperCase();
+    const currency = gateway === "dodo" ? (buyerCountry === "IN" ? "INR" : "USD") : "INR";
     const price = { amount: tier[currency], currency };
 
     const orderId = `ord_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
@@ -128,6 +132,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
             product_cart: [{ product_id: productId, quantity: 1 }],
             customer: { email: buyer.email, name: buyer.name || undefined },
             metadata: { plan: plan === "pass" ? "pass" : "pro", orderId },
+            billing_currency: currency,
+            billing_address: { country: buyerCountry },
             return_url: `https://toolzum.com/api/payments/return?order=${orderId}`,
           }),
         });
