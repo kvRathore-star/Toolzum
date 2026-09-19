@@ -286,7 +286,8 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
                 }
               } catch { /* skip unreachable sitemaps */ }
             }
-            if (addedThisLevel === 0 && sitemapQueue.length === levelSize) break;
+            // stop only when the level produced neither pages nor new sub-sitemaps
+            if (addedThisLevel === 0 && sitemapQueue.length === 0) break;
             depth++;
           }
           if (seeded > 0) {
