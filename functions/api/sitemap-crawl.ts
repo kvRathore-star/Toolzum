@@ -135,19 +135,25 @@ function extractSitemapLocs(xml: string, baseUrl: string): { urls: string[]; ind
   return { urls, indexLocs };
 }
 
-/** Parse robots.txt: returns { sitemaps, disallows } (path-prefix rules only). */
-function parseRobots(txt: string): { sitemaps: string[]; disallows: string[] } {
+/** Parse robots.txt: returns { sitemaps, disallows, crawlDelayMs }. */
+function parseRobots(txt: string): { sitemaps: string[]; disallows: string[]; crawlDelayMs: number } {
   const sitemaps: string[] = [];
   const disallows: string[] = [];
+  let crawlDelayMs = 0;
   for (const line of txt.split('\n')) {
     const clean = line.split('#')[0]!.trim();
     const sm = clean.match(/^sitemap\s*:\s*(\S+)/i);
     if (sm && sm[1] && !sitemaps.includes(sm[1])) { sitemaps.push(sm[1]!); continue; }
     const dm = clean.match(/^disallow\s*:\s*(\S*)/i);
-    if (dm && dm[1] && !disallows.includes(dm[1])) disallows.push(dm[1]!);
+    if (dm && dm[1] && !disallows.includes(dm[1])) { disallows.push(dm[1]!); continue; }
+    const cd = clean.match(/^crawl-delay\s*:\s*(\d+)/i);
+    if (cd) crawlDelayMs = Math.min(Math.max(parseInt(cd[1]!, 10) || 0, 0), 10000);
   }
-  return { sitemaps, disallows };
+  return { sitemaps, disallows, crawlDelayMs };
 }
+
+const POLITENESS_MS = 150;
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 async function detectSPA(html: string): Promise<boolean> {
   return /<div id="root">\s*<\/div>|<div id="__next">|<div id="app">\s*<\/div>|window\.__NUXT__|<app-root>|<div id="__nuxt">/.test(html);
@@ -241,10 +247,13 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
       // Tier 0 (free): seed from robots.txt + sitemap.xml before BFS link crawl.
       // This covers content sites fully with ~2 extra fetches and makes the
       // robots.txt FAQ claim true (Disallow rules become exclusions).
+      let delayMs = POLITENESS_MS;
       try {
         const robotsRes = await fetchWithTimeout(new URL('/robots.txt', baseUrl).href, 8000);
         if (robotsRes.ok) {
-          const { sitemaps, disallows } = parseRobots(await robotsRes.text());
+          const { sitemaps, disallows, crawlDelayMs } = parseRobots(await robotsRes.text());
+          // Politeness: robots Crawl-delay wins, else a 150ms baseline between same-host fetches.
+          if (crawlDelayMs > 0) delayMs = crawlDelayMs;
           for (const d of disallows) {
             const rule = d.endsWith('/*') ? d : d + '*';
             if (!exclusions.includes(rule)) exclusions.push(rule);
@@ -267,6 +276,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
             let addedThisLevel = 0;
             for (let i = 0; i < levelSize && seeded < maxAllowed * 2; i++) {
               const loc = sitemapQueue.shift()!;
+              await sleep(delayMs);
               try {
                 const r = await fetchWithTimeout(loc, 8000);
                 if (!r.ok) continue;
@@ -306,6 +316,7 @@ export async function onRequestGet({ request, env }: { request: Request; env: En
         sendEvent({ type: 'progress', discovered, crawled: pages.length, max: maxAllowed, currentUrl, log: `→ ${currentUrl}` });
 
         try {
+          await sleep(delayMs);
           const res = await fetchWithTimeout(currentUrl);
           const html = await res.text();
           consecutiveErrors = 0;
