@@ -1,4 +1,5 @@
 import { checkRateLimit, recordRateLimit } from "./rate-limit";
+import { sendEmail } from "../../src/lib/email";
 
 /**
  * Contact form backend (#contact-honesty). The form used to write to
@@ -7,7 +8,7 @@ import { checkRateLimit, recordRateLimit } from "./rate-limit";
  *
  * Secrets (Pages env, owner-set per docs/ALERTS.md):
  * - CLOUDFLARE_API_TOKEN (Email Sending permission)
- * - CONTACT_TO (optional, defaults to contact@toolzum.com)
+ * - CONTACT_TO (optional, defaults to kirtivardhan1996@gmail.com)
  * Without a token: 503 + the client shows a direct-mail fallback.
  * Never a fake success.
  */
@@ -35,8 +36,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
   const rl = await checkRateLimit(DB, "contact", ip, 5);
   if (rl.limited) return rl.response;
-  // Count every call (not just successes) so invalid-payload spam still
-  // burns the sender's budget.
   recordRateLimit(DB, "contact", ip, "/api/contact");
 
   let body: Record<string, unknown>;
@@ -46,8 +45,6 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     return json({ error: "invalid json" }, 400);
   }
 
-  // Honeypot: bots fill it, humans never see it. Swallow silently so
-  // bots can't probe the validation rules.
   if (typeof body.website === "string" && body.website.length > 0) {
     return json({ ok: true });
   }
@@ -65,28 +62,17 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   const to = CONTACT_TO || "kirtivardhan1996@gmail.com";
-  try {
-    const res = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/email/sending/send`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${CLOUDFLARE_API_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: [{ address: to }],
-          from: { address: "contact@toolzum.com", name: "Toolzum Contact" },
-          reply_to: email,
-          subject: `[Contact:${subject}] from ${name}`,
-          text: `From: ${name} <${email}>\nSubject: ${subject}\n\n${message}`,
-        }),
-      },
-    );
-    if (!res.ok) {
-      return json({ error: "email_failed", to }, 502);
+  const sent = await sendEmail(
+    { CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID },
+    {
+      to,
+      subject: `[Contact:${subject}] from ${name}`,
+      text: `From: ${name} <${email}>\nSubject: ${subject}\n\n${message}`,
+      replyTo: email,
     }
-  } catch {
+  );
+
+  if (!sent) {
     return json({ error: "email_failed", to }, 502);
   }
 

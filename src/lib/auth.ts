@@ -5,6 +5,7 @@ import { drizzle } from "drizzle-orm/d1";
 import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
 import { deleteUserAppData } from "@/lib/userErasure";
+import { sendEmail } from "@/lib/email";
 
 interface AuthEnv {
   DB: D1Database;
@@ -13,6 +14,8 @@ interface AuthEnv {
   BETTER_AUTH_SECRET?: string;
   BETTER_AUTH_URL?: string;
   TURNSTILE_SECRET_KEY?: string;
+  CLOUDFLARE_API_TOKEN?: string;
+  CLOUDFLARE_ACCOUNT_ID?: string;
 }
 
 // Reduced params: N=4096, r=8, p=1 — still memory-hard but fits Workers CPU budget (~200-400ms)
@@ -115,12 +118,26 @@ export function createAuth(env: AuthEnv) {
       }
     ),
     emailAndPassword: {
-      enabled: true,      password: {
+      enabled: true,
+      password: {
         hash: hashPassword,
         verify: verifyPassword,
       },
-      sendResetPassword: async ({ user, url, token }: { user: { email: string }; url: string; token: string }) => {
-        console.warn(`[PASSWORD RESET] User: ${user.email}, URL: ${url}, Token: ${token}`);
+      sendResetPassword: async ({ user, url }: { user: { email: string }; url: string; token: string }) => {
+        await sendEmail(env, {
+          to: user.email,
+          subject: "Reset your Toolzum password",
+          text: `You requested a password reset. Click the link to set a new password:\n\n${url}\n\nThis link expires in 1 hour. If you didn't request this, ignore this email.`,
+          html: `<p>You requested a password reset.</p><p><a href="${url}">Click here to reset your password</a></p><p>This link expires in 1 hour. If you didn't request this, ignore this email.</p>`,
+        });
+      },
+      sendVerificationEmail: async ({ user, url }: { user: { email: string }; url: string }) => {
+        await sendEmail(env, {
+          to: user.email,
+          subject: "Verify your Toolzum account",
+          text: `Welcome to Toolzum! Verify your email address by clicking the link below:\n\n${url}\n\nThis link expires in 1 hour.`,
+          html: `<p>Welcome to Toolzum!</p><p><a href="${url}">Click here to verify your email</a></p><p>This link expires in 1 hour.</p>`,
+        });
       },
     },
     socialProviders: {

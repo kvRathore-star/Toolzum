@@ -53,7 +53,7 @@ export default function SignUpPage() {
       if (result.error) {
         toast.error(result.error.message || "Failed to create account");
       } else {
-        toast.success("Account created! Check your email to verify.");
+        toast.success("Account created! Check your email for a verification link.");
         window.location.href = "/dashboard";
       }
     } catch {
