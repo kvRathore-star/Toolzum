@@ -62,7 +62,7 @@ export default function SecureNoteSharer() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Shield className="w-5 h-5 text-[var(--accent)]" />
           AES Self-Destructing Secure Note Sharer
@@ -119,12 +119,12 @@ export default function SecureNoteSharer() {
               <textarea aria-label="Decrypted note"
                 value={decryptedNote}
                 readOnly
-                className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-emerald-700 dark:text-emerald-400 font-mono h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none mt-2"
+                className="w-full bg-[var(--bg-overlay)] border border-emerald-500/30 rounded-xl px-4 py-3 text-[var(--accent)] font-mono h-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 text-xs resize-none mt-2"
               />
             </div>
           ) : (
             <div className="text-center text-[var(--text-secondary)] m-auto space-y-2">
-              <Shield className="w-12 h-12 mx-auto mb-2 text-zinc-700" />
+              <Shield className="w-12 h-12 mx-auto mb-2 text-[var(--text-primary)]" />
               <p className="text-xs">No active secure note payload detected in page URL parameters.</p>
             </div>
           )}

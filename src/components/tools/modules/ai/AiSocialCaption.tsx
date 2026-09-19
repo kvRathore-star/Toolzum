@@ -208,7 +208,7 @@ export default function AiSocialCaption() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
@@ -226,7 +226,7 @@ export default function AiSocialCaption() {
             onChange={e => setTopic(e.target.value)}
             placeholder="Describe your post topic, product, or idea..."
             rows={3}
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-indigo-500"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:border-[var(--accent)]"
           />
         </div>
 
@@ -236,7 +236,7 @@ export default function AiSocialCaption() {
             <div className="flex flex-wrap gap-1.5">
               {PLATFORMS.map(p => (
                 <button key={p.id} onClick={() => setPlatform(p.id)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${platform === p.id ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${platform === p.id ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {p.icon} {p.label}
                 </button>
               ))}
@@ -248,7 +248,7 @@ export default function AiSocialCaption() {
             <div className="flex flex-wrap gap-1.5">
               {MOODS.map(m => (
                 <button key={m} onClick={() => setMood(m)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${mood === m ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${mood === m ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {m}
                 </button>
               ))}
@@ -260,7 +260,7 @@ export default function AiSocialCaption() {
             <div className="flex flex-wrap gap-1.5">
               {TONES.map(t => (
                 <button key={t} onClick={() => setTone(t)}
-                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${tone === t ? 'bg-indigo-600 text-white shadow-md' : 'bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
+                  className={`text-xs px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${tone === t ? 'bg-[var(--accent-ink)] text-white shadow-md' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>
                   {t}
                 </button>
               ))}
@@ -280,7 +280,7 @@ export default function AiSocialCaption() {
           </label>
           <div className="ml-auto flex gap-2">
             <button onClick={handleGenerate} disabled={isLoading || !topic.trim()}
-              className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-2.5 px-5 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
+              className="bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:bg-[var(--bg-elevated)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold py-2.5 px-5 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
               {isLoading ? (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
@@ -297,7 +297,7 @@ export default function AiSocialCaption() {
       {captions.length > 0 && (
         <div className="space-y-4 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">Generated Captions ({captions.length})</h3>
+            <h3 className="text-sm font-bold text-[var(--text-primary)]">Generated Captions ({captions.length})</h3>
             <div className="flex gap-2">
               {captions.length > 0 && (
                 <button onClick={handleExportAll}
@@ -337,9 +337,9 @@ export default function AiSocialCaption() {
                       </svg>
                     </button>
                   </div>
-                  <div className="text-sm text-zinc-800 dark:text-zinc-200 whitespace-pre-wrap leading-relaxed break-words max-h-60 overflow-y-auto">{caption}</div>
+                  <div className="text-sm text-[var(--text-primary)] whitespace-pre-wrap leading-relaxed break-words max-h-60 overflow-y-auto">{caption}</div>
                   <button onClick={() => handleCopy(caption)}
-                    className="w-full bg-indigo-100 dark:bg-indigo-900/30 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold py-2 rounded-xl transition-all text-xs cursor-pointer flex items-center justify-center gap-1.5">
+                    className="w-full bg-[var(--accent)]/10 hover:bg-[var(--accent)]/20 dark:hover:bg-indigo-900/50 text-[var(--accent)] font-bold py-2 rounded-xl transition-all text-xs cursor-pointer flex items-center justify-center gap-1.5">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                     </svg>

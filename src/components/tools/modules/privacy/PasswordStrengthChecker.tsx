@@ -60,12 +60,12 @@ export default function PasswordStrengthChecker() {
                   score === 2 ? 'text-orange-500' : 'text-[var(--accent)]'
                 }`}>{scoreLabels[score]}</span>
               </div>
-              <div className="w-full h-2.5 bg-zinc-800 rounded-full overflow-hidden flex gap-1">
+              <div className="w-full h-2.5 bg-[var(--bg-elevated)] rounded-full overflow-hidden flex gap-1">
                 {[0, 1, 2, 3].map(lvl => (
                   <div 
                     key={lvl} 
                     className={`flex-1 h-full transition-colors ${
-                      lvl <= score - 1 ? scoreColors[score] : 'bg-zinc-800'
+                      lvl <= score - 1 ? scoreColors[score] : 'bg-[var(--bg-elevated)]'
                     }`}
                   />
                 ))}
@@ -80,7 +80,7 @@ export default function PasswordStrengthChecker() {
             <div className="space-y-3 text-xs text-[var(--text-muted)] animate-in zoom-in-95">
               <h4 className="text-sm font-bold text-zinc-300 uppercase">Entropy Diagnostics</h4>
               <div className="space-y-1">
-                <p>💡 Estimated Crack Time: <span className="font-bold text-zinc-100">{evaluation.crack_times_display.offline_fast_hashing_1e10_per_second}</span></p>
+                <p>💡 Estimated Crack Time: <span className="font-bold text-[var(--text-primary)]">{evaluation.crack_times_display.offline_fast_hashing_1e10_per_second}</span></p>
                 {evaluation.feedback.warning && (
                   <p className="text-rose-700 dark:text-rose-400">⚠️ Warning: {evaluation.feedback.warning}</p>
                 )}
@@ -98,7 +98,7 @@ export default function PasswordStrengthChecker() {
             </div>
           ) : (
             <div className="text-center text-[var(--text-secondary)] m-auto">
-              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-zinc-700" />
+              <ShieldCheck className="w-10 h-10 mx-auto mb-2 text-[var(--text-primary)]" />
               <p className="text-xs">Diagnostics display is idle.</p>
               <p className="text-[10px] text-[var(--text-secondary)]">Enter a password to run the ZXCVBN strength check.</p>
             </div>

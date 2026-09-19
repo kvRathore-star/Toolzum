@@ -264,14 +264,14 @@ export default function AiDetector() {
             <div className="flex gap-2">
               <button 
                 onClick={handlePaste} 
-                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Paste text from clipboard"
               >
                 Paste
               </button>
               <button 
                 onClick={handleClear} 
-                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-zinc-300 px-3 py-1.5 rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Clear input text"
               >
                 Clear
@@ -289,7 +289,7 @@ export default function AiDetector() {
               value={input}
               onChange={(e) => { if (e.target.value.length <= 10000) setInput(e.target.value); }}
               placeholder="Paste or type text to analyze (up to 10,000 characters)..."
-              className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:ring-2 focus:ring-red-500/50 transition-all"
+              className="w-full h-64 bg-[var(--bg-overlay)]/50 border border-[var(--border-subtle)] rounded-xl p-4 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none focus:ring-2 focus:ring-[var(--accent)]/50 transition-all"
               spellCheck={false}
             />
             <div className="absolute bottom-3 right-3 text-[10px] text-[var(--text-muted)] bg-[var(--bg-surface)] px-2 py-0.5 rounded-full">
@@ -349,7 +349,7 @@ export default function AiDetector() {
             <div className="flex justify-center">
               <button
                 onClick={() => setShowDetailed(!showDetailed)}
-                className="text-xs text-[var(--text-secondary)] hover:text-zinc-900 dark:hover:text-white underline underline-offset-2 transition-colors"
+                className="text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white underline underline-offset-2 transition-colors"
               >
                 {showDetailed ? 'Hide Detailed Breakdown' : 'Show Detailed Breakdown'}
               </button>
@@ -366,7 +366,7 @@ export default function AiDetector() {
                       </span>
                     </div>
                     <p className="text-[10px] text-[var(--text-secondary)] mb-3">Measures sentence length variance. Human writing has greater variation.</p>
-                    <div className="space-y-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
+                    <div className="space-y-2 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                       <div className="flex justify-between"><span>Variance</span><span className="font-mono">{result.breakdown.burstiness.variance.toFixed(2)}</span></div>
                       <div className="flex justify-between"><span>Std Deviation</span><span className="font-mono">{result.breakdown.burstiness.stdDev.toFixed(2)}</span></div>
                       <div className="flex justify-between"><span>Avg Sentence Length</span><span className="font-mono">{result.breakdown.burstiness.avgLength.toFixed(1)} words</span></div>
@@ -381,7 +381,7 @@ export default function AiDetector() {
                       </span>
                     </div>
                     <p className="text-[10px] text-[var(--text-secondary)] mb-3">Analyzes repeated n-gram patterns. AI tends to reuse phrase structures.</p>
-                    <div className="space-y-2 text-xs text-zinc-600 dark:text-[var(--text-muted)]">
+                    <div className="space-y-2 text-xs text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                       <div className="flex justify-between"><span>Repeated N-grams</span><span className="font-mono">{result.breakdown.repetition.ngramReps}</span></div>
                       <div className="flex justify-between"><span>Total N-grams</span><span className="font-mono">{result.breakdown.repetition.totalNgrams}</span></div>
                       <div className="flex justify-between"><span>Repetition Rate</span><span className="font-mono">{result.breakdown.repetition.totalNgrams > 0 ? ((result.breakdown.repetition.ngramReps / result.breakdown.repetition.totalNgrams) * 100).toFixed(1) : '0'}%</span></div>
@@ -447,7 +447,7 @@ export default function AiDetector() {
             <div className="flex justify-center gap-3 pt-2">
               <button
                 onClick={handleShare}
-                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-600 dark:text-zinc-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
+                className="text-xs bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-zinc-300 px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5"
               >
                 <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 Export Results

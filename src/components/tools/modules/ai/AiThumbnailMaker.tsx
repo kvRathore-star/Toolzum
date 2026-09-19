@@ -572,9 +572,9 @@ export default function AiThumbnailMaker() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Title */}
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center flex-wrap gap-4">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h2 className="text-xl font-bold text-zinc-950 dark:text-white flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-[var(--accent)]" />
             AI Thumbnail & Graphic Maker
           </h2>
@@ -583,7 +583,7 @@ export default function AiThumbnailMaker() {
         <div className="flex gap-2">
           <button 
             onClick={exportThumbnail}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2.5 rounded-xl shadow-lg transition-all text-xs flex items-center gap-1.5 cursor-pointer"
+            className="bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white font-bold px-4 py-2.5 rounded-xl shadow-lg transition-all text-xs flex items-center gap-1.5 cursor-pointer"
           >
             <Download className="w-4 h-4" />
             Export Thumbnail (PNG)
@@ -605,19 +605,19 @@ export default function AiThumbnailMaker() {
             <div className="grid grid-cols-3 gap-2">
               <button 
                 onClick={() => setAspectRatio('16x9')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '16x9' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '16x9' ? 'bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 16:9 YouTube
               </button>
               <button 
                 onClick={() => setAspectRatio('1x1')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '1x1' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '1x1' ? 'bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 1:1 Instagram
               </button>
               <button 
                 onClick={() => setAspectRatio('9x16')} 
-                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '9x16' ? 'bg-indigo-500/10 border-indigo-500 text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
+                className={`py-2 text-[10px] font-bold rounded-lg border text-center transition-all cursor-pointer ${aspectRatio === '9x16' ? 'bg-[var(--accent)]/10 border-[var(--accent)] text-[var(--accent)]' : 'bg-transparent border-[var(--border-subtle)] text-[var(--text-muted)] hover:text-zinc-300'}`}
               >
                 9:16 Shorts/Reel
               </button>
@@ -736,7 +736,7 @@ export default function AiThumbnailMaker() {
               <div className="space-y-3">
                 <div className="border border-dashed border-[var(--border-subtle)] rounded-xl p-3 flex flex-col items-center justify-center bg-[var(--bg-overlay)]/50 dark:bg-black/20">
                   <ImageIcon className="w-8 h-8 text-[var(--text-muted)] mb-1" />
-                  <label className="bg-indigo-600 hover:bg-indigo-500 px-3 py-1.5 rounded-lg text-[10px] text-white font-bold cursor-pointer transition-colors shadow">
+                  <label className="bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] px-3 py-1.5 rounded-lg text-[10px] text-white font-bold cursor-pointer transition-colors shadow">
                     Choose Background
                     <input 
                       type="file" accept="image/*" className="hidden" 
@@ -802,7 +802,7 @@ export default function AiThumbnailMaker() {
                 Add Text
               </button>
               <label 
-                className="flex items-center justify-center gap-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-zinc-900 dark:text-zinc-200 font-bold py-2 rounded-xl text-xs cursor-pointer text-center"
+                className="flex items-center justify-center gap-1.5 bg-[var(--bg-overlay)] dark:bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] dark:text-zinc-200 font-bold py-2 rounded-xl text-xs cursor-pointer text-center"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Add Overlay
@@ -817,10 +817,10 @@ export default function AiThumbnailMaker() {
         </div>
 
         {/* Live Canvas Area - Middle Column */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center bg-[var(--bg-overlay)] border border-zinc-200 dark:border-[var(--border-subtle)] p-4 rounded-2xl min-h-[350px]">
+        <div className="lg:col-span-5 flex flex-col items-center justify-center bg-[var(--bg-overlay)] border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] p-4 rounded-2xl min-h-[350px]">
           <span className="text-[10px] text-[var(--text-muted)] mb-2 flex items-center gap-1"><Move className="w-3 h-3" /> Click elements to select, drag to reposition on canvas</span>
           
-          <div className="relative border border-zinc-300 dark:border-zinc-800 shadow-2xl rounded overflow-hidden max-w-full">
+          <div className="relative border border-[var(--border-subtle)] dark:border-zinc-800 shadow-2xl rounded overflow-hidden max-w-full">
             <canvas
               ref={canvasRef}
               width={width}
@@ -865,7 +865,7 @@ export default function AiThumbnailMaker() {
                     <textarea id="lbl-aithumbnailmaker-text-value" aria-label="Text Value" 
                       value={activeText.text}
                       onChange={e => handleTextPropertyChange('text', e.target.value)}
-                      className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-400"
+                      className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-2.5 py-1.5 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)]"
                       rows={2}
                     />
                   </div>

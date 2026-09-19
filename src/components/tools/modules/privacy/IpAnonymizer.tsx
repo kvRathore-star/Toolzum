@@ -90,7 +90,7 @@ export default function IpAnonymizer() {
 
         <div className="bg-[var(--bg-overlay)] rounded-2xl p-6 border border-zinc-800 flex flex-col justify-center items-center min-h-[160px] space-y-3">
           <span className="text-[10px] text-[var(--text-secondary)] uppercase block">Anonymized Output</span>
-          <p className="text-3xl font-black text-emerald-700 dark:text-emerald-400 font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
+          <p className="text-3xl font-black text-[var(--accent)] font-mono tracking-wider">{anonymized ? anonymized : '--'}</p>
           {anonymized && (
             <button onClick={() => { clipboardWrite(anonymized); toast.success('Copied!'); }} className="text-[var(--accent)] hover:underline">Copy Result</button>
           )}

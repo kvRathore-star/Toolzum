@@ -57,7 +57,7 @@ export default function PgpKeyGenerator() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <Key className="w-5 h-5 text-[var(--accent)]" />
           PGP Key Pair Generator
@@ -106,7 +106,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea aria-label="Generate keys to view public armor block..." readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
+              <textarea aria-label="Generate keys to view public armor block..." readOnly value={publicKey} placeholder="Generate keys to view public armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--accent)] font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
             </div>
 
             {/* Private Key */}
@@ -120,7 +120,7 @@ export default function PgpKeyGenerator() {
                   </div>
                 )}
               </div>
-              <textarea aria-label="Generate keys to view private armor block..." readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-emerald-700 dark:text-emerald-400 font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
+              <textarea aria-label="Generate keys to view private armor block..." readOnly value={privateKey} placeholder="Generate keys to view private armor block..." className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-[var(--accent)] font-mono text-[9px] h-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none" />
             </div>
 
           </div>

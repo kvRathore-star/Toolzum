@@ -577,7 +577,7 @@ export default function AiArticleWriter() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="bg-[var(--bg-overlay)] p-5 border border-zinc-200 dark:border-[var(--border-subtle)] rounded-2xl">
+      <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">
         <h2 className="text-xl font-bold text-[var(--text-primary)] dark:text-white flex items-center gap-2">
           <svg className="w-5 h-5 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -603,7 +603,7 @@ export default function AiArticleWriter() {
             onChange={(e) => setTopic(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
             placeholder="e.g., Artificial Intelligence in Healthcare, Remote Work Best Practices..."
-            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm"
+            className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm"
           />
         </div>
 
@@ -613,7 +613,7 @@ export default function AiArticleWriter() {
             <select id="lbl-aiarticlewriter-tone" aria-label="Tone"
               value={tone}
               onChange={(e) => setTone(e.target.value as Tone)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm appearance-none cursor-pointer"
             >
               {TONES.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
@@ -623,7 +623,7 @@ export default function AiArticleWriter() {
             <select id="lbl-aiarticlewriter-length" aria-label="Length"
               value={length}
               onChange={(e) => setLength(e.target.value as LengthKey)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm appearance-none cursor-pointer"
             >
               {LENGTHS.map((l) => <option key={l.key} value={l.key}>{l.label}</option>)}
             </select>
@@ -633,7 +633,7 @@ export default function AiArticleWriter() {
             <select id="lbl-aiarticlewriter-audience" aria-label="Audience"
               value={audience}
               onChange={(e) => setAudience(e.target.value as Audience)}
-              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 transition-colors text-sm appearance-none cursor-pointer"
+              className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] transition-colors text-sm appearance-none cursor-pointer"
             >
               {AUDIENCES.map((a) => <option key={a} value={a}>{a}</option>)}
             </select>
@@ -649,8 +649,8 @@ export default function AiArticleWriter() {
                 onClick={() => toggleSection(s.id)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
                   selectedSections.includes(s.id)
-                    ? 'bg-indigo-100 dark:bg-indigo-900/30 border-indigo-300 dark:border-indigo-700 text-indigo-700 dark:text-indigo-300'
-                    : 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-zinc-300 dark:hover:border-zinc-600'
+                    ? 'bg-[var(--accent)]/10 border-[var(--accent)]/20 text-[var(--accent)]'
+                    : 'bg-[var(--bg-overlay)]/50 border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                 }`}
               >
                 {s.label}
@@ -661,7 +661,7 @@ export default function AiArticleWriter() {
 
         <div className="flex gap-3">
           <button onClick={handleGenerate} disabled={isLoading || !topic.trim()}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:bg-zinc-400 dark:disabled:bg-zinc-700 text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
+            className="flex-1 bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:bg-[var(--bg-elevated)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold py-3 rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 text-xs cursor-pointer disabled:cursor-not-allowed">
             {isLoading ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : (
@@ -700,21 +700,21 @@ export default function AiArticleWriter() {
                 <select aria-label="Include Sections"
                   value={format}
                   onChange={(e) => setFormat(e.target.value as Format)}
-                  className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-indigo-500 appearance-none cursor-pointer"
+                  className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--accent)] appearance-none cursor-pointer"
                 >
                   <option value="md">Markdown (.md)</option>
                   <option value="txt">Plain Text (.txt)</option>
                   <option value="html">HTML</option>
                 </select>
                 <button onClick={handleCopy}
-                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-all cursor-pointer"
                   aria-label="Copy article">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                 </button>
                 <button onClick={handleExport}
-                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                  className="p-2 border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-all cursor-pointer"
                   aria-label="Download article">
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -736,7 +736,7 @@ export default function AiArticleWriter() {
                   <div className="px-4 pb-3 pt-2">
                     <div className="flex flex-wrap gap-1.5 mb-2">
                       {item.subtopics.map((st, j) => (
-                        <span key={j} className="text-[10px] bg-[var(--bg-surface)] text-zinc-600 dark:text-[var(--text-muted)] px-2 py-0.5 rounded-full">
+                        <span key={j} className="text-[10px] bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] px-2 py-0.5 rounded-full">
                           {st}
                         </span>
                       ))}

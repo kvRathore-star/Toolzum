@@ -83,14 +83,14 @@ export default function AiParaphrasingTool() {
         <textarea aria-label="Paste text to paraphrase..." value={inputText} onChange={e => setInputText(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleGenerate()} placeholder="Paste text to paraphrase..." className="w-full h-96 p-4 rounded-xl border border-[var(--border-subtle)] bg-transparent focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
         <textarea value={outputText} readOnly placeholder="Paraphrased text will appear here..." className="w-full h-96 p-4 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] dark:bg-zinc-900 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
       </div>
-      <button onClick={handleGenerate} disabled={isProcessing} className="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl">{isProcessing ? <>
+      <button onClick={handleGenerate} disabled={isProcessing} className="w-full bg-[var(--accent-ink)] text-white font-bold py-4 rounded-xl">{isProcessing ? <>
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />
                 Paraphrasing...
               </> : 'Paraphrase Text'}</button>
       {outputText && (
         <div className="flex gap-3">
           <button onClick={handleCopy} className="flex-1 bg-[var(--bg-surface)] hover:bg-[var(--bg-surface)] text-[var(--text-primary)] font-bold py-3 rounded-xl">Copy to Clipboard</button>
-          <button onClick={handleDownload} className="flex-1 bg-indigo-100 dark:bg-indigo-900/30 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold py-3 rounded-xl">Download .txt</button>
+          <button onClick={handleDownload} className="flex-1 bg-[var(--accent)]/10 hover:bg-[var(--accent)]/20 dark:hover:bg-indigo-900/50 text-[var(--accent)] font-bold py-3 rounded-xl">Download .txt</button>
         </div>
       )}
     </div>

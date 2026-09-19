@@ -162,8 +162,8 @@ export default function AiImageUpscaler() {
   if (!imageFile) {
     return (
       <div className="space-y-6">
-        <div className="bg-emerald-700/10 border border-emerald-500/20 p-4 rounded-xl text-emerald-700 dark:text-emerald-400 text-sm flex items-center gap-2">
-          <Zap className="w-5 h-5 text-emerald-700 dark:text-emerald-400 shrink-0" />
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm flex items-center gap-2">
+          <Zap className="w-5 h-5 text-[var(--accent)] shrink-0" />
           <span><strong>Lanczos-3 Processing:</strong> The high-fidelity mathematical resampler scales image resolution client-side without adding pixel noise. No neural model is used — this is high-quality interpolation, not AI upscaling. Best for 2x on clean art; it cannot restore lost detail.</span>
         </div>
         <FileUploader
@@ -177,9 +177,9 @@ export default function AiImageUpscaler() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{imageFile.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{imageFile.name}</h3>
           <p className="text-xs text-[var(--text-secondary)]">Original dimensions</p>
         </div>
         <button
@@ -211,7 +211,7 @@ export default function AiImageUpscaler() {
                   className={`py-3 rounded-xl font-bold transition-all cursor-pointer ${
                     factor === f
                       ? 'bg-[var(--accent-ink)] text-white shadow-lg'
-                      : 'bg-[var(--bg-overlay)] text-zinc-700 dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
+                      : 'bg-[var(--bg-overlay)] text-[var(--text-primary)] hover:bg-[var(--bg-surface)] dark:hover:bg-[var(--bg-elevated)] border border-[var(--border-subtle)]'
                   }`}
                 >
                   {f}x
@@ -221,7 +221,7 @@ export default function AiImageUpscaler() {
           </div>
 
           {isProcessing && progress > 0 && (
-            <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-1.5 mb-2">
+            <div className="w-full bg-[var(--bg-overlay)] rounded-full h-1.5 mb-2">
               <div className="bg-[var(--accent-ink)] h-1.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
           )}
@@ -296,7 +296,7 @@ export default function AiImageUpscaler() {
             {upscaledUrl ? (
               <button
                 onClick={handleDownload}
-                className="w-full bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                className="w-full bg-[var(--accent-ink)] hover:opacity-90 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
                 <Download className="w-4 h-4" />
                 Download Upscaled Photo

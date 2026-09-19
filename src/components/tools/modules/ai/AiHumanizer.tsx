@@ -327,7 +327,7 @@ export default function AiHumanizer() {
                     className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
                       tone === t.value
                         ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-300 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300'
-                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                     }`}>
                     {t.label}
                   </button>
@@ -342,7 +342,7 @@ export default function AiHumanizer() {
                     className={`px-3 py-1.5 rounded-lg text-[11px] font-semibold border transition-colors ${
                       creativity === c.value
                         ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-300 dark:border-amber-700 text-amber-700 dark:text-amber-300'
-                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-zinc-600 dark:text-[var(--text-muted)] hover:border-zinc-400'
+                        : 'bg-[var(--bg-overlay)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)]'
                     }`}>
                     {c.label}
                   </button>
@@ -368,7 +368,7 @@ export default function AiHumanizer() {
                 {output && (
                   <label className="flex items-center gap-1.5 cursor-pointer">
                     <input type="checkbox" checked={showChanges} onChange={e => setShowChanges(e.target.checked)}
-                      className="w-3 h-3 rounded border-zinc-300 text-emerald-500 focus:ring-emerald-500" />
+                      className="w-3 h-3 rounded border-[var(--border-subtle)] text-emerald-500 focus:ring-emerald-500" />
                     <span className="text-[10px] text-[var(--text-muted)] font-medium">Highlight changes</span>
                   </label>
                 )}
@@ -389,7 +389,7 @@ export default function AiHumanizer() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button onClick={handleHumanize} onKeyDown={handleKeyDown} disabled={isLoading || !input.trim()}
-              className="px-6 py-2.5 bg-emerald-700 hover:bg-emerald-700 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="px-6 py-2.5 bg-[var(--accent-ink)] hover:opacity-90 disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] text-white font-bold rounded-xl text-sm flex items-center gap-1.5 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
               aria-label={isLoading ? 'Humanizing text...' : 'Humanize text'}
             >
               {isLoading ? (

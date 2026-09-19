@@ -90,7 +90,7 @@ export default function ExifDataRemover() {
   if (!file) {
     return (
       <div className="space-y-6 max-w-3xl mx-auto animate-in fade-in duration-500">
-        <div className="bg-blue-500/10 border border-blue-500/20 p-4 rounded-xl text-blue-700 dark:text-blue-400 text-sm">
+        <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-[var(--accent)] text-sm">
           <strong>Privacy First:</strong> Photos contain hidden data (GPS location, Camera model, Time). This tool detects and completely removes all EXIF metadata securely on your device.
         </div>
         <FileUploader 
@@ -107,9 +107,9 @@ export default function ExifDataRemover() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-zinc-200 dark:border-[var(--border-subtle)]">
+      <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)]">
         <div>
-          <h3 className="font-bold text-zinc-900 dark:text-zinc-100">{file.name}</h3>
+          <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
           <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024).toFixed(2)} KB</p>
         </div>
         <button 
@@ -127,7 +127,7 @@ export default function ExifDataRemover() {
           <div className="flex justify-between items-center border-b border-[var(--border-subtle)] pb-4 mb-4">
             <h4 className="text-[var(--text-primary)] font-medium">Metadata Analysis</h4>
             {isAnalyzing ? (
-              <span className="text-xs text-blue-700 dark:text-blue-400 font-bold animate-pulse">Scanning...</span>
+              <span className="text-xs text-[var(--accent)] font-bold animate-pulse">Scanning...</span>
             ) : (
               <span className={`text-xs font-bold px-2 py-1 rounded ${hasExif ? 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400' : 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>
                 {hasExif ? 'Exif Data Found' : 'Clean (No Exif)'}
@@ -150,7 +150,7 @@ export default function ExifDataRemover() {
                   return (
                     <div key={key} className="flex justify-between border-b border-[var(--border-subtle)] py-1 last:border-0">
                       <span className="text-[var(--text-secondary)]">{key}</span>
-                      <span className="text-zinc-900 dark:text-zinc-300 font-medium text-right break-all ml-4">
+                      <span className="text-[var(--text-primary)] dark:text-zinc-300 font-medium text-right break-all ml-4">
                         {String(value)}
                       </span>
                     </div>

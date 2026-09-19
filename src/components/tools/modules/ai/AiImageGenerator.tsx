@@ -134,7 +134,7 @@ export default function AiImageGenerator() {
         <div className="lg:col-span-5 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-5 flex flex-col justify-between">
           <div className="space-y-4">
             <div className="flex items-center gap-2 border-b border-[var(--border-subtle)] pb-3">
-              <ImageIcon className="w-5 h-5 text-blue-700 dark:text-blue-400" />
+              <ImageIcon className="w-5 h-5 text-[var(--accent)]" />
               <h3 className="text-lg font-bold text-[var(--text-primary)]">AI Image Generator</h3>
             </div>
             
@@ -144,7 +144,7 @@ export default function AiImageGenerator() {
                 value={prompt}
                 onChange={e => setPrompt(e.target.value)}
                 placeholder="e.g. A futuristic city with flying cars at sunset, watercolor style..."
-                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm resize-none"
+                className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] h-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)] transition-colors text-sm resize-none"
               />
             </div>
 
@@ -156,7 +156,7 @@ export default function AiImageGenerator() {
                 <button
                   onClick={() => setEngine('free')}
                   aria-pressed={engine === 'free'}
-                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${engine === 'free' ? 'bg-blue-600 text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${engine === 'free' ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
                 >
                   Pollinations · Free
                 </button>
@@ -164,7 +164,7 @@ export default function AiImageGenerator() {
                   onClick={() => setEngine('gemini')}
                   aria-pressed={engine === 'gemini'}
                   title={isPro ? 'Gemini quality, 5 credits per image' : 'Pro feature — upgrade to unlock'}
-                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 ${engine === 'gemini' ? 'bg-blue-600 text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 ${engine === 'gemini' ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
                 >
                   {!isPro && <span aria-hidden="true">👑</span>} Gemini · 5 credits · Pro
                 </button>
@@ -188,7 +188,7 @@ export default function AiImageGenerator() {
                 <select id="lbl-aiimagegenerator-art-style" aria-label="Art Style"
                   value={style}
                   onChange={e => setStyle(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)] transition-colors text-sm"
                 >
                   {styles.map(s => (
                     <option key={s.name} value={s.name}>{s.name}</option>
@@ -201,7 +201,7 @@ export default function AiImageGenerator() {
                 <select id="lbl-aiimagegenerator-aspect-ratio" aria-label="Aspect Ratio"
                   value={aspectRatio}
                   onChange={e => setAspectRatio(e.target.value)}
-                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-zinc-300 dark:focus:border-zinc-700 transition-colors text-sm"
+                  className="w-full bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3 text-[var(--text-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:border-[var(--border-subtle)] dark:focus:border-[var(--border-subtle)] transition-colors text-sm"
                 >
                   <option value="1:1">1:1 (Square)</option>
                   <option value="16:9">16:9 (Landscape)</option>
@@ -214,7 +214,7 @@ export default function AiImageGenerator() {
           <button
             onClick={handleGenerate}
             disabled={isGenerating}
-            className="mt-6 w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+            className="mt-6 w-full py-4 rounded-xl font-bold text-white bg-gradient-to-r from-[var(--accent-ink)] to-[var(--accent-ink)] hover:shadow-lg hover:shadow-blue-500/20 active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             {isGenerating ? (
               <>
@@ -238,14 +238,14 @@ export default function AiImageGenerator() {
               <div className="flex gap-2">
                 <button
                   onClick={handleCopyLink}
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   title="Copy Direct Link" aria-label="Copy link"
                 >
                   <Link2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={handleDownload}
-                  className="p-2 text-[var(--text-secondary)] hover:text-zinc-950 dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-800 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                  className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white border border-[var(--border-subtle)] rounded-lg hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                   title="Download Image" aria-label="Download image"
                 >
                   <Download className="w-4 h-4" />
@@ -258,8 +258,8 @@ export default function AiImageGenerator() {
             {isGenerating ? (
               <div className="flex flex-col items-center text-center p-8">
                 <div className="relative w-16 h-16 mb-4">
-                  <div className="absolute inset-0 rounded-full border-4 border-blue-500/20 animate-pulse"></div>
-                  <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-[var(--accent)]/20 animate-pulse"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-[var(--accent)] border-t-transparent animate-spin"></div>
                 </div>
                 <p className="text-sm font-semibold text-[var(--text-primary)]">Processing latent diffusion nodes...</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">This typically takes 3 to 6 seconds.</p>
@@ -273,7 +273,7 @@ export default function AiImageGenerator() {
 />
             ) : (
               <div className="flex flex-col items-center justify-center p-8 text-center text-[var(--text-muted)]">
-                <ImageIcon className="w-10 h-10 mb-3 text-zinc-300 dark:text-zinc-700 animate-bounce" />
+                <ImageIcon className="w-10 h-10 mb-3 text-zinc-300 dark:text-[var(--text-primary)] animate-bounce" />
                 <p className="text-sm font-medium">Your generated artwork will appear here.</p>
                 <p className="text-xs text-[var(--text-muted)] mt-1">Specify your prompt and options to render the model.</p>
               </div>

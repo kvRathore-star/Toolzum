@@ -126,7 +126,7 @@ export default function PrivacyCleaner() {
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">Cookies</p>
           </div>
           <div className="bg-[var(--bg-overlay)] rounded-xl p-3 border border-[var(--border-subtle)] text-center">
-            <Database className="w-4 h-4 mx-auto text-blue-700 dark:text-blue-400 mb-1" />
+            <Database className="w-4 h-4 mx-auto text-[var(--accent)] mb-1" />
             <p className="text-lg font-black text-[var(--text-primary)]">{stats.localStorage}</p>
             <p className="text-[9px] text-[var(--text-secondary)] uppercase">localStorage</p>
           </div>
@@ -153,7 +153,7 @@ export default function PrivacyCleaner() {
             <RefreshCw className={`w-3.5 h-3.5 ${scanning ? 'animate-spin' : ''}`} /> Rescan
           </button>
           <button onClick={clearStorage} disabled={cleaning || items.length === 0}
-            className="px-4 py-2.5 bg-red-500 hover:bg-red-600 disabled:bg-zinc-300 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors">
+            className="px-4 py-2.5 bg-red-500 hover:bg-red-600 disabled:bg-[var(--bg-overlay)] dark:disabled:bg-[var(--bg-elevated)] disabled:cursor-not-allowed text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-colors">
             <Trash2 className="w-3.5 h-3.5" /> Clear All
           </button>
         </div>
@@ -188,7 +188,7 @@ export default function PrivacyCleaner() {
           )}
         </div>
 
-        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800/30 rounded-xl p-3">
+        <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3">
           <p className="text-[10px] text-[var(--accent)] dark:text-[var(--accent)]">
             <strong>Pro:</strong> Cross-site privacy scan, tracker detection, auto-clean on browser close, scheduled cleanups, privacy score report, export storage report as PDF.
           </p>

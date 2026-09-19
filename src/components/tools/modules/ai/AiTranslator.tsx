@@ -78,7 +78,7 @@ ${inputText}`;
              <select aria-label="Source language" 
                value={sourceLang}
                onChange={(e) => setSourceLang(e.target.value)}
-               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-[var(--text-primary)] font-medium appearance-none"
              >
                {languages.map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -90,14 +90,14 @@ ${inputText}`;
               className="bg-[var(--bg-surface)] p-3 rounded-full hover:bg-[var(--bg-surface)] transition-colors disabled:opacity-50"
               aria-label="Swap"
             >
-              <svg className="w-5 h-5 text-zinc-600 dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+              <svg className="w-5 h-5 text-[var(--text-secondary)] dark:text-[var(--text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
             </button>
 
            <div className="flex-1 w-full relative">
              <select aria-label="Target language" 
                value={targetLang}
                onChange={(e) => setTargetLang(e.target.value)}
-               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-zinc-900 dark:text-zinc-100 font-medium appearance-none"
+               className="w-full bg-[var(--bg-overlay)] border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 px-4 py-3 rounded-lg text-[var(--text-primary)] font-medium appearance-none"
              >
                {languages.filter(l => l !== 'Auto Detect').map(l => <option key={l} value={l}>{l}</option>)}
              </select>
@@ -128,10 +128,10 @@ ${inputText}`;
             {outputText && (
               <button 
                 onClick={copyToClipboard}
-                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-zinc-600 transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="absolute top-4 right-4 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-2 rounded-lg shadow-sm hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 aria-label="Copy translation to clipboard"
               >
-                <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                <svg className="w-5 h-5 text-[var(--text-secondary)] dark:text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
               </button>
             )}
           </div>
