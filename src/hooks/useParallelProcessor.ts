@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useSession } from '@/lib/auth-client';
 
 export interface ProcessFile<T = unknown> {
@@ -20,7 +20,23 @@ export interface ParallelProcessorOptions<T> {
 
 export function useParallelProcessor() {
   const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  // Server is the source of truth for Pro (Pass holders, admin grants, etc.
+  // don't appear in the raw session plan). Resolve via /api/check-plan and
+  // fall back to the session value until it answers. Return shape unchanged.
+  const [serverPro, setServerPro] = useState<boolean | null>(null);
+  useEffect(() => {
+    let live = true;
+    fetch('/api/check-plan')
+      .then(r => (r.ok ? r.json() : null))
+      .then((d: unknown) => {
+        if (!live || !d || typeof d !== 'object') return;
+        setServerPro((d as { plan?: string }).plan === 'pro');
+      })
+      .catch(() => {});
+    return () => { live = false; };
+  }, []);
+  const sessionPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isPro = serverPro ?? sessionPro;
   const abortRef = useRef<AbortController | null>(null);
   const processingRef = useRef(false);
 

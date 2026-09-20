@@ -51,4 +51,16 @@ describe('UrlShortener', () => {
       expect(screen.getByDisplayValue('https://short.url/abc123')).toBeDefined();
     });
   });
+
+  it('rejects non-URL response bodies (upstream error text with 200)', async () => {
+    mockFetch.mockResolvedValue({ ok: true, text: async () => 'Error: blocked URL' });
+    render(<UrlShortener />);
+    const input = screen.getByPlaceholderText(/example.com/);
+    fireEvent.change(input, { target: { value: 'https://example.com' } });
+    fireEvent.click(screen.getByText('Shorten'));
+    await waitFor(() => {
+      expect(screen.getByText('Could not shorten URL. Please try again later.')).toBeDefined();
+    });
+    expect(screen.queryByDisplayValue('Error: blocked URL')).toBeNull();
+  });
 });

@@ -67,13 +67,21 @@ export default function BulkUrlStatusChecker() {
       const batch = pending.splice(0, BATCH_SIZE);
       batchNumber++;
       let delivered = false;
-      for (let attempt = 0; attempt < 2 && !delivered; attempt++) {
+      for (let attempt = 0; attempt < 3 && !delivered && !cancelRef.current; attempt++) {
         try {
           const res = await fetch('/api/url-status-check', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ urls: batch }),
           });
+          if (res.status === 429 && attempt < 2 && !cancelRef.current) {
+            // 15 checks/min backend cap: wait out the window and retry the
+            // same batch instead of marking its URLs failed.
+            const waitSec = Math.min(Number(res.headers.get('Retry-After')) || 20, 65);
+            if (attempt === 0) toast(`Rate limited — resuming in ~${waitSec}s…`);
+            await new Promise(r => setTimeout(r, waitSec * 1000));
+            continue;
+          }
           if (!res.ok) {
             const err = (await res.json().catch(() => ({ error: 'Request failed' }))) as { error?: string };
             throw new Error(err.error || `Server error (${res.status})`);
@@ -83,7 +91,8 @@ export default function BulkUrlStatusChecker() {
           if (data.skipped && data.skipped.length > 0) pending.push(...data.skipped);
           delivered = true;
         } catch (e: unknown) {
-          if (attempt === 1) {
+          if (cancelRef.current) break;
+          if (attempt === 2) {
             failed.push(...batch.map(u => ({ url: u, status: 0, statusText: '', finalUrl: u, ms: 0, ok: false, error: 'check failed' })));
             toast.error(getErrorMessage(e, 'Batch failed'));
           }

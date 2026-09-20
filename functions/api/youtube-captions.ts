@@ -3,6 +3,8 @@
 // owner published captions (manual or auto) return text; anything else gets
 // an honest no-captions error, never hallucinated analysis.
 
+import { checkRateLimit, recordRateLimit } from './rate-limit';
+
 interface Env {
   DB?: D1Database;
 }
@@ -64,6 +66,16 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const id = (url.searchParams.get('id') || '').trim();
     if (!/^[A-Za-z0-9_-]{11}$/.test(id)) {
       return json({ error: 'Invalid YouTube video ID (expected 11 characters)' }, 400);
+    }
+
+    // Rate limit: 30 caption lookups/min per IP. Without this the endpoint
+    // is an open YouTube-scraping proxy — one abuser gets the worker egress
+    // IP throttled by Google and the tool dies for everyone.
+    if (context.env.DB) {
+      const ip = context.request.headers.get('CF-Connecting-IP') || 'unknown';
+      const rl = await checkRateLimit(context.env.DB, 'yt-captions', ip, 30);
+      if (rl.limited) return rl.response;
+      recordRateLimit(context.env.DB, 'yt-captions', ip, '/api/youtube-captions');
     }
 
     // 1. Discover available caption tracks.

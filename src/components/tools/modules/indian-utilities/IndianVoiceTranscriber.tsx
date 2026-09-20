@@ -39,13 +39,28 @@ export default function IndianVoiceTranscriber() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Upload cap mirrors the backend (/api/ai/transcribe MAX_UPLOAD_BYTES =
+  // 50MB). Resolved from /api/check-plan so Pro users actually get 50MB
+  // instead of being blocked at 25MB by a hardcoded check.
+  const [isProUpload, setIsProUpload] = useState(false);
+  React.useEffect(() => {
+    let live = true;
+    fetch('/api/check-plan')
+      .then(r => (r.ok ? r.json() : null))
+      .then((d: unknown) => {
+        if (!live || !d || typeof d !== 'object') return;
+        if ((d as { plan?: string }).plan === 'pro') setIsProUpload(true);
+      })
+      .catch(() => {});
+    return () => { live = false; };
+  }, []);
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    const maxSize = 25 * 1024 * 1024;
-    if (file.size > maxSize) return toast.error('File too large. Maximum 25MB. Pro supports up to 100MB.');
+    const maxSize = (isProUpload ? 50 : 25) * 1024 * 1024;
+    if (file.size > maxSize) return toast.error(isProUpload ? 'File too large. Maximum 50MB.' : 'File too large. Maximum 25MB. Pro supports up to 50MB.');
     
     const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/m4a', 'audio/webm', 'video/mp4', 'video/webm'];
     if (!validTypes.includes(file.type) && !file.name.match(/\.(mp3|wav|ogg|m4a|webm|mp4)$/i)) {
@@ -245,8 +260,8 @@ export default function IndianVoiceTranscriber() {
               <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
-              <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)</p>
-              <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 100MB)" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
+              <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB{isProUpload ? ' (Pro: 50MB applied)' : ' (Pro: 50MB)'}</p>
+              <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 50MB)" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
             </div>
 
             <AnimatePresence>

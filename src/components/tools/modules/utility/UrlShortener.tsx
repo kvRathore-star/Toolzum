@@ -36,7 +36,10 @@ export default function UrlShortener() {
         throw new Error('Failed to shorten URL');
       }
       
-      const data = await response.text();
+      const data = (await response.text()).trim();
+      if (!/^https?:\/\/\S+$/.test(data)) {
+        throw new Error('Failed to shorten URL');
+      }
       setShortUrl(data);
       setHistory(prev => [{ long: raw, short: data }, ...prev].slice(0, 10));
     } catch (err) {

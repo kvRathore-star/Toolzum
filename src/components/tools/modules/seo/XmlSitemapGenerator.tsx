@@ -93,12 +93,13 @@ export default function XmlSitemapGenerator() {
     let live = true;
     fetch('/api/check-plan')
       .then(r => (r.ok ? r.json() : null))
-      .then((d: { plan?: string } | null) => {
-        if (!live || !d) return;
-        const cap = d.plan === 'pro' ? 500 : d.plan === 'signedin' ? 200 : 100;
+      .then((d: unknown) => {
+        if (!live || !d || typeof d !== 'object') return;
+        const plan = (d as { plan?: string }).plan;
+        const cap = plan === 'pro' ? 500 : plan === 'signedin' ? 200 : 100;
         setPlanCap(cap);
         if (!maxTouchedRef.current) {
-          setMaxPages(d.plan === 'pro' ? 500 : d.plan === 'signedin' ? 200 : 50);
+          setMaxPages(plan === 'pro' ? 500 : plan === 'signedin' ? 200 : 50);
         }
       })
       .catch(() => {});

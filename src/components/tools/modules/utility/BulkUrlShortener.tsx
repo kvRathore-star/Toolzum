@@ -2,7 +2,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
-import { useParallelProcessor } from '@/hooks/useParallelProcessor';
 import { Link as LinkIcon, Copy, CheckCircle2, AlertCircle, Loader2, Download, X, ExternalLink } from 'lucide-react';
 
 interface ShortenResult {
@@ -19,12 +18,11 @@ export default function BulkUrlShortener() {
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
-  const { maxConcurrency, isPro } = useParallelProcessor();
   const abortRef = useRef(false);
 
   const urls = input.split('\n').map(l => l.trim()).filter(l => l.length > 0);
 
-  const shortenUrl = async (url: string): Promise<ShortenResult> => {
+  const shortenUrl = async (url: string, attempt = 0): Promise<ShortenResult> => {
     try {
       new URL(url.startsWith('http') ? url : 'https://' + url);
     } catch {
@@ -32,10 +30,20 @@ export default function BulkUrlShortener() {
     }
     try {
       const res = await fetch(`/api/url-shorten?url=${encodeURIComponent(url.startsWith('http') ? url : 'https://' + url)}`);
+      // Backend allows ~10/min: back off on 429 instead of failing the URL.
+      if (res.status === 429 && attempt < 3 && !abortRef.current) {
+        const waitSec = Math.min(Number(res.headers.get('Retry-After')) || 20, 65);
+        if (attempt === 0) toast(`Rate limited — slowing down (~${waitSec}s)…`);
+        await new Promise(r => setTimeout(r, waitSec * 1000));
+        if (abortRef.current) return { original: url, shortened: '', status: 'error', error: 'Aborted' };
+        return shortenUrl(url, attempt + 1);
+      }
       if (!res.ok) return { original: url, shortened: '', status: 'error', error: `HTTP ${res.status}` };
-      const data = await res.text();
+      const data = (await res.text()).trim();
+      if (!/^https?:\/\/\S+$/.test(data)) return { original: url, shortened: '', status: 'error', error: 'Shortening failed' };
       return { original: url, shortened: data, status: 'ok' };
     } catch {
+      if (abortRef.current) return { original: url, shortened: '', status: 'error', error: 'Aborted' };
       return { original: url, shortened: '', status: 'error', error: 'Request failed' };
     }
   };
