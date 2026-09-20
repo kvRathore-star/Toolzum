@@ -126,10 +126,7 @@ ${linkCards}
   }, [links, profileName, profileBio, profileImage, bgColor, cardColor, textColor, accentColor]);
 
   const handleCopyHtml = () => {
-    clipboardWrite(generateHtml);
-    setCopied(true);
-    toast.success('HTML copied! Deploy on GitHub Pages, Vercel, or Netlify.');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(generateHtml).then(ok => { if (ok) { setCopied(true); toast.success('HTML copied! Deploy on GitHub Pages, Vercel, or Netlify.'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownloadHtml = async () => {

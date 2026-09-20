@@ -141,10 +141,7 @@ Format as plain text with proper line breaks. Do NOT include markdown.`;
 
   const handleCopy = () => {
     if (!generatedLetter) return;
-    clipboardWrite(generatedLetter);
-    setCopied(true);
-    toast.success('Copied to clipboard!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(generatedLetter).then(ok => { if (ok) { setCopied(true); toast.success('Copied to clipboard!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

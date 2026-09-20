@@ -85,10 +85,7 @@ export default function SocialMediaCalendar() {
   };
 
   const copyPost = (content: string, id: string) => {
-    clipboardWrite(content);
-    setCopiedId(id);
-    toast.success('Copied!');
-    setTimeout(() => setCopiedId(null), 2000);
+    clipboardWrite(content).then(ok => { if (ok) { setCopiedId(id); toast.success('Copied!'); setTimeout(() => setCopiedId(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const duplicatePost = (post: Post) => {

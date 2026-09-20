@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { Send, Plus, Trash2, Copy, ChevronDown, ChevronRight, Clock, Book, Code, Globe, Shield, Terminal, Download } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
 
@@ -215,7 +216,7 @@ export function ApiBuilder() {
   }, [method, url, headers, body, bodyType, snippetLang, buildUrl]);
 
   const copyToClipboard = useCallback((text: string) => {
-  void clipboardWrite(text);
+  clipboardWrite(text).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); });
   }, []);
 
   const statusColor = (s: number) => {

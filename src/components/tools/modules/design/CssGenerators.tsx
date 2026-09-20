@@ -82,7 +82,7 @@ function BoxShadowGeneratorInner() {
       </div>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={inset} onChange={e => setInset(e.target.checked)} className="accent-blue-600" /> Inset</label>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -116,7 +116,7 @@ function GradientGeneratorInner() {
         </div>
       </div>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -134,7 +134,7 @@ function BorderRadiusGeneratorInner() {
       <Slider label="Bottom-Right" value={br} onChange={setBr} min={0} max={60} />
       <Slider label="Bottom-Left" value={bl} onChange={setBl} min={0} max={60} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -157,7 +157,7 @@ function FlexboxGeneratorInner() {
       </div>
       <Slider label="Gap" value={gap} onChange={setGap} min={0} max={40} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -175,7 +175,7 @@ function GridGeneratorInner() {
       <Slider label="Rows" value={rows} onChange={setRows} min={1} max={4} />
       <Slider label="Gap" value={gap} onChange={setGap} min={0} max={40} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -201,7 +201,7 @@ function TextShadowGeneratorInner() {
         <span className="text-xs w-8">{Math.round(opacity * 100)}%</span>
       </div>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -225,7 +225,7 @@ function TransformGeneratorInner() {
       <Slider label="Translate X" value={tx} onChange={setTx} min={-50} max={50} />
       <Slider label="Translate Y" value={ty} onChange={setTy} min={-50} max={50} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -264,7 +264,7 @@ function AnimationGeneratorInner() {
       </div>
       <div><label htmlFor="lbl-cssgenerators-timing" className={labelClass}>Timing</label><select id="lbl-cssgenerators-timing" aria-label="Timing" value={timing} onChange={e => setTiming(e.target.value)} className={inputClass}><option value="ease">Ease</option><option value="linear">Linear</option><option value="ease-in">Ease In</option><option value="ease-out">Ease Out</option><option value="ease-in-out">Ease In Out</option></select></div>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -287,7 +287,7 @@ function FilterGeneratorInner() {
       <Slider label="Sepia" value={sepia} onChange={setSepia} min={0} max={100} />
       <Slider label="Grayscale" value={grayscale} onChange={setGrayscale} min={0} max={100} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -304,7 +304,7 @@ function GlassmorphismGeneratorInner() {
       <Slider label="Blur" value={blur} onChange={setBlur} min={1} max={20} />
       <Slider label="Opacity %" value={opacity} onChange={setOpacity} min={1} max={50} />
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -331,7 +331,7 @@ function NeumorphismGeneratorInner() {
         <input aria-label="Neumorphic color hex value" type="text" value={color} onChange={e => setColor(e.target.value)} className="w-24 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded px-2 py-1 text-xs" />
       </div>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }
@@ -368,7 +368,7 @@ function BorderCssGeneratorInner() {
         </select>
       </div>
       <pre className={codeClass}>{css}</pre>
-      <button onClick={() => { void clipboardWrite(css); }} className={btnClass}>Copy CSS</button>
+      <button onClick={() => { clipboardWrite(css).then(ok => { if (!ok) toast.error('Copy blocked by the browser — select the text manually.'); }); }} className={btnClass}>Copy CSS</button>
     </div>
   );
 }

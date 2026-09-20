@@ -28,10 +28,7 @@ export default function FontGenerator() {
 
   const handleCopyCSS = () => {
     const code = `${selectedFont.importUrl}\n\n.my-text {\n  ${selectedFont.css}\n}`;
-    clipboardWrite(code);
-    setCopied(true);
-    toast.success('CSS snippets copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(code).then(ok => { if (ok) { setCopied(true); toast.success('CSS snippets copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

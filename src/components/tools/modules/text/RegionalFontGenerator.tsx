@@ -96,10 +96,7 @@ export default function RegionalFontGenerator() {
   };
 
   const handleCopy = (text: string, idxKey: string) => {
-    clipboardWrite(text);
-    setCopiedIndex(idxKey);
-    toast.success('Copied text to clipboard!');
-    setTimeout(() => setCopiedIndex(null), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedIndex(idxKey); toast.success('Copied text to clipboard!'); setTimeout(() => setCopiedIndex(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const toggleFavorite = (key: string) => {

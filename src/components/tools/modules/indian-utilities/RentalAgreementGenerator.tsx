@@ -168,10 +168,7 @@ export default function RentalAgreementGenerator() {
 
   const handleCopyText = () => {
     const text = generateAgreementHtml(form, checkedTerms, agreementType).replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
-    clipboardWrite(text);
-    setCopied(true);
-    toast.success('Agreement text copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopied(true); toast.success('Agreement text copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const Section = ({ title, icon: Icon, children }: { title: string; icon?: React.ElementType; children: React.ReactNode }) => (

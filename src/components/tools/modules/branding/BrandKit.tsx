@@ -81,9 +81,7 @@ export default function BrandKit() {
   };
 
   const copyToClipboard = (text: string) => {
-    clipboardWrite(text);
-    setCopiedId(text);
-    setTimeout(() => setCopiedId(null), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedId(text); setTimeout(() => setCopiedId(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const exportKit = () => {

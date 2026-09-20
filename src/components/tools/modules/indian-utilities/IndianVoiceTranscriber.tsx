@@ -118,10 +118,7 @@ export default function IndianVoiceTranscriber() {
 
   const handleCopy = () => {
     if (!transcript) return;
-    clipboardWrite(transcript);
-    setCopied(true);
-    toast.success('Copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(transcript).then(ok => { if (ok) { setCopied(true); toast.success('Copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownloadTxt = async () => {

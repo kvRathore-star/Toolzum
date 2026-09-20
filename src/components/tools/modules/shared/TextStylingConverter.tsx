@@ -118,10 +118,7 @@ function FancyView() {
   const applyFontStyle = (text: string, mapFn: (c: string) => string) => text.split('').map(mapFn).join('');
 
   const handleCopy = (text: string, key: string) => {
-    clipboardWrite(text);
-    setCopiedKey(key);
-    toast.success('Copied style!');
-    setTimeout(() => setCopiedKey(null), 2500);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedKey(key); toast.success('Copied style!'); setTimeout(() => setCopiedKey(null), 2500); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (
@@ -203,10 +200,7 @@ function CursiveView() {
 
   const handleCopy = () => {
     if (!cursive) return;
-    clipboardWrite(cursive);
-    setCopied(true);
-    toast.success('Copied cursive text!');
-    setTimeout(() => setCopied(false), 2500);
+    clipboardWrite(cursive).then(ok => { if (ok) { setCopied(true); toast.success('Copied cursive text!'); setTimeout(() => setCopied(false), 2500); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

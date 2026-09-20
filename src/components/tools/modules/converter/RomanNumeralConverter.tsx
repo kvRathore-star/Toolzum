@@ -117,10 +117,7 @@ export default function RomanNumeralConverter() {
 
   const handleCopy = () => {
     if (!result || result.startsWith('Invalid') || result.startsWith('Number must')) return;
-    clipboardWrite(result);
-    setCopied(true);
-    toast.success('Copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(result).then(ok => { if (ok) { setCopied(true); toast.success('Copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleSwap = () => {

@@ -35,10 +35,7 @@ function MessageLinkTab() {
 
   const handleCopy = () => {
     if (!whatsappUrl) return toast.error('Enter a phone number first');
-    clipboardWrite(whatsappUrl);
-    setCopied(true);
-    toast.success('Link copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(whatsappUrl).then(ok => { if (ok) { setCopied(true); toast.success('Link copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (
@@ -84,10 +81,7 @@ function GroupLinkTab() {
 
   const handleCopy = () => {
     if (!groupUrl) return toast.error('Enter a group ID first');
-    clipboardWrite(groupUrl);
-    setCopied(true);
-    toast.success('Group link copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(groupUrl).then(ok => { if (ok) { setCopied(true); toast.success('Group link copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (
@@ -133,10 +127,7 @@ function FormatTextTab() {
   }, [input]);
 
   const handleCopy = (text: string, label: string) => {
-    clipboardWrite(text);
-    setCopied(label);
-    toast.success(`${label} copied!`);
-    setTimeout(() => setCopied(null), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopied(label); toast.success(`${label} copied!`); setTimeout(() => setCopied(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (
@@ -217,16 +208,11 @@ function BulkLinkTab() {
 
   const copyAll = () => {
     const text = filteredData.map(d => generateLink(d)).join('\n');
-    clipboardWrite(text);
-    setCopiedAll(true);
-    toast.success(`Copied ${filteredData.length} links!`);
-    setTimeout(() => setCopiedAll(false), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedAll(true); toast.success(`Copied ${filteredData.length} links!`); setTimeout(() => setCopiedAll(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleCopy = (index: number) => {
-    clipboardWrite(generateLink(csvData[index]!));
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
+    clipboardWrite(generateLink(csvData[index]!)).then(ok => { if (ok) { setCopiedIndex(index); setTimeout(() => setCopiedIndex(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const filteredData = useMemo(() => {
@@ -460,10 +446,7 @@ function QuickRepliesTab() {
   };
 
   const handleCopy = (id: string, content: string) => {
-    clipboardWrite(content);
-    setCopiedId(id);
-    toast.success('Copied!');
-    setTimeout(() => setCopiedId(null), 2000);
+    clipboardWrite(content).then(ok => { if (ok) { setCopiedId(id); toast.success('Copied!'); setTimeout(() => setCopiedId(null), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

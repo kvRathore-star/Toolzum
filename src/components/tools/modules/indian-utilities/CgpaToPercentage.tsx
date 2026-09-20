@@ -93,10 +93,7 @@ export default function CgpaToPercentage() {
   const handleCopyResult = () => {
     if (!result) return;
     const text = `CGPA ${cgpa} → ${result.percentage.toFixed(2)}% (${result.division}) — ${result.description}`;
-    clipboardWrite(text);
-    setCopiedResult(true);
-    toast.success('Result copied!');
-    setTimeout(() => setCopiedResult(false), 2000);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedResult(true); toast.success('Result copied!'); setTimeout(() => setCopiedResult(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

@@ -35,8 +35,7 @@ export default function HtmlTextHub({ slug: defaultSlug }: { slug: string; descr
   };
 
   const handleCopy = () => {
-    clipboardWrite(output); setCopied(true); toast.success('Copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(output).then(ok => { if (ok) { setCopied(true); toast.success('Copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

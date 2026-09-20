@@ -62,8 +62,7 @@ export default function TextBinaryHub({ slug: defaultSlug }: { slug: string; des
   }, [input, config]);
 
   const handleCopy = () => {
-    clipboardWrite(output); setCopied(true); toast.success('Copied!');
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(output).then(ok => { if (ok) { setCopied(true); toast.success('Copied!'); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleDownload = () => {

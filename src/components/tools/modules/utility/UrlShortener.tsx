@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Link as LinkIcon, Copy, ExternalLink, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
 export default function UrlShortener() {
@@ -51,9 +52,7 @@ export default function UrlShortener() {
 
   const copyToClipboard = () => {
     if (!shortUrl) return;
-    clipboardWrite(shortUrl);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(shortUrl).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

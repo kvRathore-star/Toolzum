@@ -53,9 +53,7 @@ export default function ChromeExtensionPage() {
 
   const handleCopyColor = (color: string) => {
     setSelectedColor(color);
-  void clipboardWrite(color);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    clipboardWrite(color).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 2000); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const handleCopyQrText = async () => {

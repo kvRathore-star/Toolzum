@@ -425,9 +425,7 @@ export function EmojiPicker() {
   };
 
   const copyEmoji = (emoji: string, name: string) => {
-    clipboardWrite(emoji);
-    setLastCopied(emoji);
-    toast.success(`${emoji} ${name} copied!`);
+    clipboardWrite(emoji).then(ok => { if (ok) { setLastCopied(emoji); toast.success(`${emoji} ${name} copied!`); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   return (

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 
 
@@ -64,7 +65,7 @@ export default function ApiRequestBuilder() {
         {result && (
           <div className="relative">
             <pre className="bg-gray-900 text-green-700 dark:text-green-400 rounded-xl p-4 text-xs font-mono overflow-x-auto whitespace-pre-wrap break-all max-h-48">{result}</pre>
-            <button onClick={() => { void clipboardWrite(result); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
+            <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) { setCopied(true); setTimeout(() => setCopied(false), 1500); } else toast.error('Copy blocked by the browser — select the text manually.'); }); }}
               className="absolute top-2 right-2 px-2.5 py-1 text-[10px] bg-gray-700 hover:bg-gray-600 text-gray-200 rounded-lg transition-colors">{copied ? 'Copied!' : 'Copy'}</button>
           </div>
         )}

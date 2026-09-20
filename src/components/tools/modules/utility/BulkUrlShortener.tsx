@@ -71,18 +71,13 @@ export default function BulkUrlShortener() {
   const abort = useCallback(() => { abortRef.current = true; setIsProcessing(false); }, []);
 
   const copyResult = (idx: number, text: string) => {
-    clipboardWrite(text);
-    setCopiedIndex(idx);
-    setTimeout(() => setCopiedIndex(null), 1500);
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedIndex(idx); setTimeout(() => setCopiedIndex(null), 1500); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const copyAll = () => {
     const text = results.filter(r => r.shortened).map(r => r.shortened).join('\n');
     if (!text) return;
-    clipboardWrite(text);
-    setCopiedAll(true);
-    setTimeout(() => setCopiedAll(false), 2000);
-    toast.success('All shortened URLs copied');
+    clipboardWrite(text).then(ok => { if (ok) { setCopiedAll(true); setTimeout(() => setCopiedAll(false), 2000); toast.success('All shortened URLs copied'); } else toast.error('Copy blocked by the browser — select the text manually.'); });
   };
 
   const downloadCsv = () => {
