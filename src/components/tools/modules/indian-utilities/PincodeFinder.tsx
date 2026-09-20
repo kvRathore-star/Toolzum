@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { clipboardWrite } from "@/lib/clipboard";
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 
 const DAILY_LIMIT = 20;
 
@@ -23,6 +24,7 @@ export default function PincodeFinder() {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
 
   const { usage, trackUsage } = useUsageCounter('pincodeFinderUsage');
+  const isProUser = useProStatus();
 
   useEffect(() => {
     const history = localStorage.getItem('pincodeSearchHistory');
@@ -41,7 +43,7 @@ export default function PincodeFinder() {
   const handleSearch = async () => {
     setError(null);
     setResults(null);
-    if (usage >= DAILY_LIMIT) { toast.error(`You've used all ${DAILY_LIMIT} free searches today. Upgrade to Pro for unlimited lookups.`); return; }
+    if (!isProUser && usage >= DAILY_LIMIT) { toast.error(`You've used all ${DAILY_LIMIT} free searches today. Upgrade to Pro for unlimited lookups.`); return; }
 
     if (searchMode === 'pincode') {
       const cleanPincode = pincode.trim();
@@ -99,6 +101,7 @@ export default function PincodeFinder() {
         </p>
       </motion.div>
 
+      {!isProUser && (
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
         <p className="text-xs text-[var(--text-secondary)]">Daily free searches:</p>
         <div className="flex items-center gap-2">
@@ -110,6 +113,7 @@ export default function PincodeFinder() {
           <motion.span key={remaining} initial={{ scale: 1.3 }} animate={{ scale: 1 }} className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</motion.span>
         </div>
       </motion.div>
+      )}
 
       <div className="flex gap-2 p-1 bg-[var(--bg-surface)] rounded-xl max-w-sm">
         <button onClick={() => { setSearchMode('pincode'); setError(null); setResults(null); }}

@@ -526,8 +526,8 @@ export default function PronunciationTool() {
       <div className="p-4 bg-[var(--bg-overlay)]/30 rounded-xl border border-[var(--border-subtle)]/50">
         <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">
           Pronunciation uses the Free Dictionary API for word data plus your browser&apos;s Web Speech API for audio.
-          Dictionary entries include IPA transcriptions, definitions, and example sentences. Works fully offline after
-          initial page load in Chrome and Edge.
+          Dictionary entries include IPA transcriptions, definitions, and example sentences. Speech synthesis runs
+          fully offline in your browser; dictionary lookups need an internet connection.
         </p>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Search, MapPin, Phone, ShieldCheck, HelpCircle, Loader2, AlertCircle, B
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 import { getErrorMessage } from '@/utils/error';
 
 const COMMON_BANKS: Record<string, string> = {
@@ -36,6 +37,7 @@ export default function IfscLookup() {
   const [data, setData] = useState<any>(null);
 
   const { usage, trackUsage } = useUsageCounter('ifscLookupUsage');
+  const isProUser = useProStatus();
 
   const validateIFSC = (code: string) => /^[A-Z]{4}0[A-Z0-9]{6}$/i.test(code);
 
@@ -44,7 +46,7 @@ export default function IfscLookup() {
     if (!cleanIfsc) { toast.error('Please enter an IFSC code'); return; }
     if (cleanIfsc.length !== 11) { setError('IFSC code must be exactly 11 characters long.'); setData(null); return; }
     if (!validateIFSC(cleanIfsc)) { setError('Invalid IFSC format. Format should be: 4 letters, then 0, then 6 alphanumeric characters (e.g. SBIN0000001).'); setData(null); return; }
-    if (usage >= DAILY_LIMIT) { toast.error(`You've used all ${DAILY_LIMIT} free lookups today. Upgrade to Pro for unlimited searches.`); return; }
+    if (!isProUser && usage >= DAILY_LIMIT) { toast.error(`You've used all ${DAILY_LIMIT} free lookups today. Upgrade to Pro for unlimited searches.`); return; }
 
     setLoading(true);
     setError(null);
@@ -94,6 +96,7 @@ export default function IfscLookup() {
       </div>
 
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 rounded-2xl shadow-xl space-y-6">
+        {!isProUser && (
         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
           <p className="text-xs text-[var(--text-secondary)]">Daily free lookups:</p>
           <div className="flex items-center gap-2">
@@ -105,6 +108,7 @@ export default function IfscLookup() {
             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
           </div>
         </div>
+        )}
 
         <div className="space-y-2">
           <label className="block text-sm font-bold text-[var(--text-primary)]">Enter 11-Digit IFSC Code</label>

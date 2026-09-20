@@ -7,6 +7,7 @@ import { Crop, Upload, Download, Loader2, Smartphone, Square, Monitor } from 'lu
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 import { EmptyState } from '@/components/EmptyState';
 
 const RATIOS = [
@@ -31,6 +32,7 @@ export default function ReelShortsMaker() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const { usage, trackUsage } = useUsageCounter('reelShortsUsage');
+  const isProUser = useProStatus();
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -39,7 +41,7 @@ export default function ReelShortsMaker() {
 
   const processVideo = async () => {
     if (!file || !ffmpeg || !isLoaded) return;
-    if (usage >= DAILY_LIMIT) {
+    if (!isProUser && usage >= DAILY_LIMIT) {
       toast.error(`You've used all ${DAILY_LIMIT} free crops today. Upgrade to Pro for unlimited processing.`);
       return;
     }
@@ -66,7 +68,7 @@ export default function ReelShortsMaker() {
       trackUsage(usage + 1);
       await ffmpeg.deleteFile(inputName);
       await ffmpeg.deleteFile(outputName);
-      if (usage + 1 >= DAILY_LIMIT) {
+      if (!isProUser && usage + 1 >= DAILY_LIMIT) {
         toast(`Upgrade to Pro for unlimited Reel & Shorts crops.`, { icon: '👑' });
       }
     } catch (e) {
@@ -84,11 +86,12 @@ export default function ReelShortsMaker() {
           <Smartphone className="w-5 h-5 text-[var(--accent)]" />
           <h2 className="text-lg font-bold text-[var(--text-primary)]">Reel & Shorts Maker</h2>
         </div>
-        <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
+        <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">{isProUser ? 'Pro unlimited' : '3/day free'}</span>
       </div>
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">Crop any video to the perfect aspect ratio for Instagram Reels, YouTube Shorts, or TikTok.</p>
 
+        {!isProUser && (
         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
           <p className="text-xs text-[var(--text-secondary)]">Daily free limit:</p>
           <div className="flex items-center gap-2">
@@ -100,6 +103,7 @@ export default function ReelShortsMaker() {
             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
           </div>
         </div>
+        )}
 
         {!file ? (
           <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-10 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
@@ -156,9 +160,9 @@ export default function ReelShortsMaker() {
 
             {(!isLoaded || isLoading) && <div className="text-center text-[var(--text-secondary)] py-3 flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin text-[var(--accent)]" /><span className="text-[10px]">Loading FFmpeg...</span></div>}
             {isLoaded && !outputUrl && !isProcessing && (
-              <button onClick={processVideo} disabled={remaining === 0}
+              <button onClick={processVideo} disabled={!isProUser && remaining === 0}
                 className="w-full bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all active:scale-[0.98]">
-                {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Crop for Reels/Shorts'}
+                {!isProUser && remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Crop for Reels/Shorts'}
               </button>
             )}
             {isProcessing && (

@@ -7,6 +7,7 @@ import { Music, Upload, Download, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { createDownloadBlob } from '@/utils/blob';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
 import { smartMax } from '@/utils/fileSizeLimits';
 import { EmptyState } from '@/components/EmptyState';
@@ -25,6 +26,7 @@ export default function VideoToMp3() {
   const isSignedIn = !!session?.user;
 
   const { usage, trackUsage } = useUsageCounter('videoToMp3Usage');
+  const isProUser = useProStatus();
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -48,7 +50,7 @@ export default function VideoToMp3() {
 
   const processVideo = async () => {
     if (!file || !ffmpeg || !isLoaded) return;
-    if (usage >= DAILY_LIMIT) {
+    if (!isProUser && usage >= DAILY_LIMIT) {
       toast.error(`You've used all ${DAILY_LIMIT} free extracts today. Upgrade to Pro for unlimited audio extraction.`);
       return;
     }
@@ -72,7 +74,7 @@ export default function VideoToMp3() {
       await ffmpeg.deleteFile(inputName);
       await ffmpeg.deleteFile(outputName);
       trackUsage(usage + 1);
-      if (usage + 1 >= DAILY_LIMIT) {
+      if (!isProUser && usage + 1 >= DAILY_LIMIT) {
         toast(`Upgrade to Pro for unlimited audio extraction.`, { icon: '👑' });
       }
     } catch (e) {
@@ -94,20 +96,22 @@ export default function VideoToMp3() {
          </div>
          <div className="flex items-center justify-center gap-2">
            <span className="text-[var(--text-secondary)] text-xs">Extract high-quality audio from video files</span>
-            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">3/day free</span>
+            <span className="flex items-center gap-1 px-3 py-1.5 bg-emerald-100 dark:bg-emerald-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider">{isProUser ? 'Pro unlimited' : '3/day free'}</span>
          </div>
 
-         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)] max-w-md mx-auto">
-           <p className="text-xs text-[var(--text-secondary)]">Daily free extractions:</p>
-           <div className="flex items-center gap-2">
-             <div className="flex gap-1">
-               {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-fuchsia-500'}`} />
-               ))}
-             </div>
-             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
-           </div>
-         </div>
+          {!isProUser && (
+          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)] max-w-md mx-auto">
+            <p className="text-xs text-[var(--text-secondary)]">Daily free extractions:</p>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                {Array.from({ length: DAILY_LIMIT }, (_, i) => (
+                  <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-fuchsia-500'}`} />
+                ))}
+              </div>
+              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
+            </div>
+          </div>
+          )}
 
          {!file ? (
            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative mt-8">
@@ -150,9 +154,9 @@ export default function VideoToMp3() {
                   <div className="text-left"><label htmlFor="lbl-videotomp3-title" className="text-xs font-semibold text-[var(--text-secondary)]">Title tag</label><input id="lbl-videotomp3-title" aria-label="Title tag" type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Track title" className="w-full mt-1 p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs text-[var(--text-primary)]" /></div>
                   <div className="text-left"><label htmlFor="lbl-videotomp3-artist" className="text-xs font-semibold text-[var(--text-secondary)]">Artist tag</label><input id="lbl-videotomp3-artist" aria-label="Artist tag" type="text" value={artist} onChange={e => setArtist(e.target.value)} placeholder="Artist" className="w-full mt-1 p-2.5 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-overlay)] text-xs text-[var(--text-primary)]" /></div>
                 </div>
-                <button onClick={processVideo} disabled={remaining === 0}
+                <button onClick={processVideo} disabled={!isProUser && remaining === 0}
                  className="w-full bg-fuchsia-600 hover:bg-fuchsia-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl shadow-lg transition-all active:scale-95">
-                  {remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Extract MP3'}
+                  {!isProUser && remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Extract MP3'}
                 </button>
                 </>
               )}

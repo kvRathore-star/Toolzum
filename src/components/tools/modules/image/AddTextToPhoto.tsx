@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Type, Upload, Download, Settings2, Camera, Crown } from 'lucide-react';
 import Link from 'next/link';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 import { downloadOrShare } from '@/utils/nativeShare';
 
 const PRESETS = [
@@ -31,6 +32,7 @@ export default function SocialMediaImageCreator() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { usage, trackUsage } = useUsageCounter('socialImageCreatorUsage');
+  const isProUser = useProStatus();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -84,7 +86,7 @@ export default function SocialMediaImageCreator() {
   }, [image, text, color, fontSize, xPos, yPos, preset, customW, customH]);
 
   const downloadImage = async () => {
-    if (usage >= DAILY_LIMIT) {
+    if (!isProUser && usage >= DAILY_LIMIT) {
       toast.error(`You've used all ${DAILY_LIMIT} free downloads today. Upgrade to Pro for unlimited exports.`);
       return;
     }
@@ -97,7 +99,7 @@ export default function SocialMediaImageCreator() {
           `social-${PRESETS[preset]!.label.toLowerCase().replace(/\s+/g, '-')}.png`
         )) {
           trackUsage(usage + 1);
-          if (usage + 1 >= DAILY_LIMIT) {
+          if (!isProUser && usage + 1 >= DAILY_LIMIT) {
             toast(`Upgrade to Pro for unlimited image exports.`, { icon: '👑' });
           }
         }
@@ -122,17 +124,19 @@ export default function SocialMediaImageCreator() {
          </div>
          <p className="text-[var(--text-secondary)]">Design images for Instagram, YouTube, Twitter with preset sizes and custom text overlays.</p>
 
-         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
-           <p className="text-xs text-[var(--text-secondary)]">Daily free downloads:</p>
-           <div className="flex items-center gap-2">
-             <div className="flex gap-1">
-               {Array.from({ length: DAILY_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-violet-500'}`} />
-               ))}
-             </div>
-             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
-           </div>
-         </div>
+          {!isProUser && (
+          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
+            <p className="text-xs text-[var(--text-secondary)]">Daily free downloads:</p>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                {Array.from({ length: DAILY_LIMIT }, (_, i) => (
+                  <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-violet-500'}`} />
+                ))}
+              </div>
+              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {DAILY_LIMIT} remaining</span>
+            </div>
+          </div>
+          )}
 
          {!image ? (
            <div className="border-2 border-dashed border-[var(--border-subtle)] rounded-xl p-12 hover:bg-[var(--bg-overlay)] dark:hover:bg-[var(--bg-elevated)] transition-colors cursor-pointer relative">
@@ -168,9 +172,9 @@ export default function SocialMediaImageCreator() {
                  <div><label className="text-xs font-semibold flex justify-between"><span>Size</span><span className="text-[var(--text-secondary)]">{fontSize}px</span></label><input aria-label="Size" type="range" min="10" max="300" value={fontSize} onChange={e => setFontSize(Number(e.target.value))} className="w-full accent-violet-500" /></div>
                  <div><label className="text-xs font-semibold flex justify-between"><span>X Pos</span><span className="text-[var(--text-secondary)]">{Math.round(xPos)}</span></label><input aria-label="X Pos" type="range" min="0" max={image.width} value={xPos} onChange={e => setXPos(Number(e.target.value))} className="w-full accent-violet-500" /></div>
                  <div><label className="text-xs font-semibold flex justify-between"><span>Y Pos</span><span className="text-[var(--text-secondary)]">{Math.round(yPos)}</span></label><input aria-label="Y Pos" type="range" min="0" max={image.height} value={yPos} onChange={e => setYPos(Number(e.target.value))} className="w-full accent-violet-500" /></div>
-                 <button onClick={downloadImage} disabled={remaining === 0}
+                 <button onClick={downloadImage} disabled={!isProUser && remaining === 0}
                    className="w-full bg-violet-600 hover:bg-violet-700 disabled:opacity-50 text-white font-bold py-3.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5">
-                   <Download className="w-4 h-4" />{remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Download PNG'}
+                   <Download className="w-4 h-4" />{!isProUser && remaining === 0 ? 'Limit reached — Upgrade to Pro' : 'Download PNG'}
                  </button>
                  <button onClick={() => setImage(null)} className="w-full text-[var(--text-secondary)] hover:text-red-500 text-xs font-medium py-2 transition-colors">Start Over</button>
                </div>
