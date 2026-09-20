@@ -60,7 +60,7 @@ export default function Mp3Compressor() {
           accept="audio/mpeg,audio/mp3,audio/*" 
           onFileSelect={(f) => setFile(f)} 
           title="Upload Audio File"
-          subtitle="Supports MP3, WAV, AAC (20MB free, 50MB signed in)"
+          subtitle="Supports MP3, WAV, AAC (up to 100MB, processed locally)"
         />
       </div>
     );

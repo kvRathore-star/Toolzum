@@ -106,8 +106,9 @@ export default function GstinLookup() {
       const text = ev.target?.result as string;
       const lines = text.split('\n').map(l => l.trim().toUpperCase()).filter(l => l && GSTIN_REGEX.test(l));
       if (lines.length === 0) return toast.error('No valid GSTINs found in file');
-      setBulkData(lines);
-      toast.success(`Found ${lines.length} valid GSTINs`);
+      const capped = lines.slice(0, 500);
+      setBulkData(capped);
+      toast.success(`Found ${capped.length} valid GSTINs${lines.length > 500 ? ' (first 500 kept)' : ''}`);
     };
     reader.readAsText(file);
   };

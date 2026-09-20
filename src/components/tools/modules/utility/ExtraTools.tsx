@@ -593,7 +593,7 @@ export function PdfToTxt() {
         accept="application/pdf" 
         onFileSelect={handleFileSelect} 
         title="Upload PDF File"
-        subtitle="Supports PDF files (20MB free, 50MB signed in)"
+        subtitle="Supports PDF files (up to 100MB, processed locally)"
       />
       {file && (
         <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl space-y-3">

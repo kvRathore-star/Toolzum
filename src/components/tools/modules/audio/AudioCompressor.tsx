@@ -141,7 +141,7 @@ export default function AudioCompressor() {
             setOutputUrl(null);
           }}
           title="Upload Audio File"
-          subtitle="Supports MP3, WAV, M4A, FLAC, OGG (20MB free, 50MB signed in)"
+          subtitle="Supports MP3, WAV, M4A, FLAC, OGG (up to 100MB, processed locally)"
         />
       </div>
     );

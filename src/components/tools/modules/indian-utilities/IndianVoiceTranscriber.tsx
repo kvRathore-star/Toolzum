@@ -95,14 +95,21 @@ export default function IndianVoiceTranscriber() {
 
       if (!response.ok) {
         const err = await response.text();
-        throw new Error(err.includes('Invalid file format') ? 'Invalid audio format. Try converting to MP3 first.' : `API error: ${response.status}`);
+        let msg = `API error: ${response.status}`;
+        try {
+          const parsed = JSON.parse(err) as { error?: string };
+          if (parsed.error) msg = parsed.error.includes('File too large') ? 'File too large. Maximum 50MB.' : parsed.error;
+        } catch {
+          if (err.includes('Invalid file format')) msg = 'Invalid audio format. Try converting to MP3 first.';
+        }
+        throw new Error(msg);
       }
 
       const text = await response.text();
       setTranscript(text);
       toast.success('Transcription complete!');
     } catch (err: unknown) {
-      // #45: offline-aware error copy (never auto-retries: 10 credits/try).
+      // #45: offline-aware error copy (never auto-retries: 20 credits/try).
       toast.error(toUserError(err, 'Transcription failed'));
     } finally {
       setIsTranscribing(false);
