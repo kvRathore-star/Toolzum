@@ -73,6 +73,33 @@ export function createAuth(env: AuthEnv) {
     },
     databaseHooks: {
       user: {
+        create: {
+          // Welcome email on every signup path (email+password, Google).
+          // Never throws — a failed send must not break account creation.
+          // Separate from the verification email: this one carries no link.
+          after: async (user) => {
+            try {
+              const u = user as { email?: string; name?: string | null };
+              if (!u?.email) return;
+              const first = (u.name || "").split(" ")[0];
+              await sendEmail(env, {
+                to: u.email,
+                subject: "Welcome to Toolzum!",
+                text: [
+                  `Hi${first ? " " + first : ""},`,
+                  ``,
+                  `Your Toolzum account is ready.`,
+                  ``,
+                  `Free plan includes 10 AI credits/month plus 1,000+ free tools that run entirely in your browser — nothing uploaded.`,
+                  ``,
+                  `Browse tools: https://toolzum.com/tools`,
+                ].join("\n"),
+              });
+            } catch {
+              // signup proceeds; welcome mail is best-effort
+            }
+          },
+        },
         delete: {
           // #26 erasure cascade: D1 ignores FK cascades and better-auth
           // only removes rows it owns — without this, favorites, usage
