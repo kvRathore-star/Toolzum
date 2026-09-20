@@ -75,6 +75,8 @@ export default function XmlSitemapGenerator() {
   const [exclusions, setExclusions] = useState<ExclusionRule[]>(DEFAULT_EXCLUSIONS);
   const [newExclusion, setNewExclusion] = useState('');
   const [maxPages, setMaxPages] = useState(50);
+  const [planCap, setPlanCap] = useState<number | null>(null);
+  const maxTouchedRef = useRef(false);
   const [notifyEmail, setNotifyEmail] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const abortRef = useRef(false);
@@ -82,6 +84,25 @@ export default function XmlSitemapGenerator() {
 
   React.useEffect(() => {
     return () => blobUrlsRef.current.forEach(u => URL.revokeObjectURL(u));
+  }, []);
+
+  // Default "Max pages" to the visitor's plan cap (backend enforces the same
+  // tiers): Pro 500, signed-in 200, anon 50. Without this, Pro users silently
+  // crawled with max=50 while the discovered counter climbed into the 100s.
+  React.useEffect(() => {
+    let live = true;
+    fetch('/api/check-plan')
+      .then(r => (r.ok ? r.json() : null))
+      .then((d: { plan?: string } | null) => {
+        if (!live || !d) return;
+        const cap = d.plan === 'pro' ? 500 : d.plan === 'signedin' ? 200 : 100;
+        setPlanCap(cap);
+        if (!maxTouchedRef.current) {
+          setMaxPages(d.plan === 'pro' ? 500 : d.plan === 'signedin' ? 200 : 50);
+        }
+      })
+      .catch(() => {});
+    return () => { live = false; };
   }, []);
 
   const isCrawling = state.status === 'detecting' || state.status === 'crawling';
@@ -304,18 +325,18 @@ export default function XmlSitemapGenerator() {
                 </div>
 
                 <div>
-                  <label htmlFor="lbl-xmlsitemapgenerator-max-pages-to-crawl" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Max pages to crawl</label>
+                  <label htmlFor="lbl-xmlsitemapgenerator-max-pages-to-crawl" className="text-xs font-medium text-[var(--text-secondary)] mb-1.5 block">Max pages to crawl{planCap !== null && <span className="text-[var(--text-muted)] font-normal"> — your plan allows up to {planCap}</span>}</label>
                   <select id="lbl-xmlsitemapgenerator-max-pages-to-crawl" aria-label="Max pages to crawl"
                     value={maxPages}
-                    onChange={e => setMaxPages(Number(e.target.value))}
+                    onChange={e => { maxTouchedRef.current = true; setMaxPages(Number(e.target.value)); }}
                     className="bg-white dark:bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg px-3 py-2 text-xs focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2"
                     disabled={isCrawling}
                   >
                     <option value={30}>30 pages (quick test)</option>
                     <option value={50}>50 pages (free)</option>
-                    <option value={100}>100 pages (free)</option>
-                    <option value={200}>200 pages (signed in)</option>
-                    <option value={500}>500 pages (Pro)</option>
+                    <option value={100} disabled={planCap !== null && planCap < 100}>100 pages (free)</option>
+                    <option value={200} disabled={planCap !== null && planCap < 200}>200 pages (signed in)</option>
+                    <option value={500} disabled={planCap !== null && planCap < 500}>500 pages (Pro)</option>
                   </select>
                 </div>
 
