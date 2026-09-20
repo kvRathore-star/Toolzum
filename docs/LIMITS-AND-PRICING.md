@@ -124,13 +124,13 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 20 (`TRANSCRIPTION_CREDITS` in `transcribe.ts`) | ~$0.19/25min | Gemini 1.5 Flash via `/api/ai/transcribe` |
+| Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.003/min | gpt-4o-mini-transcribe via `/api/ai/transcribe`, 30-min + 25MB caps |
 | AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.039/image | Gemini 2.5 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
 
 > Costs follow the *endpoint called*, not the tool name: `audio/video-to-text-transcription`
 > clean up pasted dumps via `/api/ai/generate` (1 credit) — only true audio
-> uploads (`podcast`, `indian-voice`) hit `/api/ai/transcribe` (20). Enforced
+> uploads (`podcast`, `indian-voice`) hit `/api/ai/transcribe` (1/min). Enforced
 > by `credit-badge-coverage.test.ts`, which also forbids duplicate badge keys.
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
@@ -138,30 +138,39 @@ getUserLimit(plan, isProTool):
 **Cost at 10 free credits/month:**
 - ~10 text gen calls, OR
 - ~2 Gemini images (5 credits each), OR
-- 0 transcriptions (20 > 10 — by design, transcription is Pro/Pass territory), OR
+- ~10 transcription minutes (1/min — free plans CAN transcribe short clips), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free)
 
 **Cost at 200 Pro credits/month:**
 - ~200 text gen calls, OR
-- ~10 transcription sessions (20 credits each), OR
+- ~200 transcription minutes (~3.3 hours), OR
 - ~40 Gemini images (5 credits each, Pro-only engine), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$0.078/month (2 images × $0.039).
-**Worst-case cost per Pro user:** ~$1.90/month (10 × $0.19) vs $9.99 / ₹299 revenue — sustainable.
-**Worst-case cost per Pass user:** ~$0.57 (3 × $0.19) vs $3.99 / ₹99 — one-shot, repurchase to farm.
+**Worst-case cost per free user:** ~$0.078/month (2 images × $0.039) or ~$0.03 (10 transcription minutes).
+**Worst-case cost per Pro user:** ~$0.60/month (200 min × $0.003) vs $9.99 / ₹299 revenue — sustainable.
+**Worst-case cost per Pass user:** ~$0.21 (70 min × $0.003) vs $3.99 / ₹99 — one-shot, repurchase to farm.
 
 > ✅ **REPRICED Sep 17 2026:** transcription costs 20× text generation
 > (`TRANSCRIPTION_CREDITS = 20`); Free 30→10, Pro 300→200, Pass 70/7d
 > (`grantPass`, `resolvePlanWithPass` — resets always use the stored
 > plan so Pass top-ups never renew to Pro allowances).
+>
+> ✅ **REPRICED AGAIN Sep 20 2026 (deliberate reversal):** transcription is
+> now 1 credit/min (`CREDITS_PER_MINUTE`, shared `transcriptionPricing.ts`
+> used by backend charges, UI previews, and ToolLayout per-minute badges),
+> 30-min + 25MB caps, gpt-4o-mini-transcribe (~$0.003/min). Free plans CAN
+> transcribe short clips now (10 min/mo) — the old Pro-only lock is gone
+> on purpose: real cost is trivial and it funnels upgrades honestly.
 
-> ✅ **RESOLVED Sep 12 2026, repriced Sep 17 2026:** transcription costs 20× text generation
-> (`TRANSCRIPTION_CREDITS = 20` in `functions/api/ai/transcribe.ts`,
-> `TEXT_GENERATION_CREDITS = 1` in `generate.ts`, badge in `ToolLayout.tsx`).
+> ✅ **RESOLVED Sep 12 2026, repriced Sep 17 2026, repriced again Sep 20 2026:**
+> transcription is now 1 credit/min (`CREDITS_PER_MINUTE` in
+> `src/lib/transcriptionPricing.ts`, charged in
+> `functions/api/ai/transcribe.ts`, previewed in-tool, badged per-minute
+> in `ToolLayout.tsx`).
 
 ---
 

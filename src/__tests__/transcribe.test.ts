@@ -16,14 +16,14 @@ function mockFetchResponse(ok: boolean, status: number, body: BodyInit, headers?
 }
 
 describe('submitTranscription wiring contract', () => {
-  it('POSTs a FormData payload with file + response_format=text to the transcribe endpoint', async () => {
+  it('POSTs a FormData payload with file + durationSec + response_format=text to the transcribe endpoint', async () => {
     const fetchMock = vi.fn(async () =>
       mockFetchResponse(true, 200, 'hello transcript', { 'content-type': 'text/plain' }),
     );
     vi.stubGlobal('fetch', fetchMock);
 
     const file = mockFile();
-    const result = await submitTranscription(file);
+    const result = await submitTranscription(file, 95);
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
     const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
@@ -32,6 +32,7 @@ describe('submitTranscription wiring contract', () => {
     expect(init.body).toBeInstanceOf(FormData);
     const body = init.body as FormData;
     expect(body.get('file')).toBe(file);
+    expect(body.get('durationSec')).toBe('95');
     expect(body.get('response_format')).toBe('text');
     expect(result).toBe('hello transcript');
   });
@@ -42,14 +43,14 @@ describe('submitTranscription wiring contract', () => {
     );
     vi.stubGlobal('fetch', fetchMock);
 
-    await expect(submitTranscription(mockFile())).rejects.toThrow('Audio too large');
+    await expect(submitTranscription(mockFile(), 60)).rejects.toThrow('Audio too large');
   });
 
   it('throws a fallback message when the API error body is not JSON', async () => {
     const fetchMock = vi.fn(async () => mockFetchResponse(false, 502, 'Bad Gateway'));
     vi.stubGlobal('fetch', fetchMock);
 
-    await expect(submitTranscription(mockFile())).rejects.toThrow('Transcription failed (502)');
+    await expect(submitTranscription(mockFile(), 60)).rejects.toThrow('Transcription failed (502)');
   });
 
   it('surfaces the raw transcript on success without an Accept/content-type override', async () => {
@@ -59,7 +60,7 @@ describe('submitTranscription wiring contract', () => {
     });
     vi.stubGlobal('fetch', fetchMock);
 
-    const result = await submitTranscription(mockFile());
+    const result = await submitTranscription(mockFile(), 60);
     expect(result).toBe('line one\nline two');
   });
 });

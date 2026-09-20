@@ -1,8 +1,9 @@
 export const TRANSCRIBE_ENDPOINT = '/api/ai/transcribe';
 
-export async function submitTranscription(file: File): Promise<string> {
+export async function submitTranscription(file: File, durationSec: number): Promise<string> {
   const formData = new FormData();
   formData.append('file', file);
+  formData.append('durationSec', String(Math.max(0, Math.round(durationSec))));
   formData.append('response_format', 'text');
 
   const response = await fetch(TRANSCRIBE_ENDPOINT, {

@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { Request as UndiciRequest } from 'undici';
 import { onRequestPost as generate } from '../../../functions/api/ai/generate';
 import { onRequestPost as transcribe } from '../../../functions/api/ai/transcribe';
 
@@ -80,17 +81,30 @@ describe('ai_credit_event analytics', () => {
     }
   });
 
-  it('transcribe: blocked_exhausted logged below the 10-credit cost', async () => {
+  it('transcribe: blocked_exhausted logged below the per-minute cost', async () => {
     const { db, seen } = mockDb({ credits: 5 });
-    const form = new FormData();
-    form.append('file', new File(['audio'], 'a.mp3', { type: 'audio/mpeg' }));
+    // Same-realm multipart: jsdom FormData globals break the handler's
+    // parser (500), hiding the branch under test.
+    const BOUNDARY = '----testboundary1234';
+    const body =
+      `--${BOUNDARY}\r\n` +
+      `Content-Disposition: form-data; name="file"; filename="a.mp3"\r\n` +
+      `Content-Type: audio/mpeg\r\n\r\n` +
+      `${'x'.repeat(250000)}\r\n` +
+      `--${BOUNDARY}\r\n` +
+      `Content-Disposition: form-data; name="durationSec"\r\n\r\n` +
+      `600\r\n` +
+      `--${BOUNDARY}--\r\n`;
     const res = await transcribe({
-      request: new Request('https://toolzum.com/api/ai/transcribe', {
+      request: new UndiciRequest('https://toolzum.com/api/ai/transcribe', {
         method: 'POST',
-        headers: { cookie: 'better-auth.session_token=tok' },
-        body: form,
-      }),
-      env: { DB: db, GEMINI_API_KEY: 'k' } as never,
+        headers: {
+          cookie: 'better-auth.session_token=tok',
+          'content-type': `multipart/form-data; boundary=${BOUNDARY}`,
+        },
+        body,
+      }) as unknown as Request,
+      env: { DB: db, OPENAI_API_KEY: 'k' } as never,
     });
     expect(res.status).toBe(403);
     const evt = seen.find((q) => q.sql.includes('INSERT INTO ai_credit_event'));

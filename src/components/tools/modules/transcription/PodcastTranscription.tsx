@@ -6,6 +6,11 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { getErrorMessage } from '@/utils/error';
 import { submitTranscription } from '@/utils/transcribe';
+import {
+  TRANSCRIPTION_MAX_BYTES,
+  TRANSCRIPTION_MAX_SECONDS,
+  transcriptionCostForDuration,
+} from '@/lib/transcriptionPricing';
 import AiSettings from '../../AiSettings';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
@@ -13,15 +18,37 @@ export default function PodcastTranscription() {
   const [file, setFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [output, setOutput] = useState('');
+  const [durationSec, setDurationSec] = useState<number | null>(null);
+
+  const measureDuration = (f: File) => {
+    setDurationSec(null);
+    const url = URL.createObjectURL(f);
+    const el = new Audio(url);
+    el.onloadedmetadata = () => {
+      if (Number.isFinite(el.duration) && el.duration > 0) setDurationSec(el.duration);
+      URL.revokeObjectURL(url);
+    };
+    el.onerror = () => { setDurationSec(null); URL.revokeObjectURL(url); };
+  };
 
   const processAudio = async () => {
     if (!file) return;
+    if (file.size > TRANSCRIPTION_MAX_BYTES) {
+      toast.error('File too large. Maximum 25MB.');
+      return;
+    }
+    // Billable length: measured metadata, 128kbps size estimate as fallback.
+    const billSec = durationSec ?? file.size / 16000;
+    if (billSec > TRANSCRIPTION_MAX_SECONDS) {
+      toast.error('Audio exceeds 30-minute limit — split into parts.');
+      return;
+    }
 
     setIsProcessing(true);
     setOutput('');
 
     try {
-      const text = await submitTranscription(file);
+      const text = await submitTranscription(file, Math.round(billSec));
       setOutput(text);
       toast.success('Transcription complete!');
     } catch (err: unknown) {
@@ -37,12 +64,12 @@ export default function PodcastTranscription() {
         <AiPrivacyBanner />
         <AiSettings />
         <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 p-4 rounded-xl text-emerald-600 dark:text-emerald-400 text-sm">
-          Upload a podcast episode and get a full text transcript. Audio is sent to our server for transcription with Gemini — nothing is stored.
+          Upload a podcast episode and get a full text transcript. Audio is sent to our server for AI transcription — nothing is stored.
         </div>
         <FileUploader
           accept="audio/*,video/*"
-          maxSizeMB={50}
-          onFileSelect={(f) => setFile(f)}
+          maxSizeMB={25}
+          onFileSelect={(f) => { setFile(f); measureDuration(f); }}
           title="Upload Podcast File"
         />
       </div>
@@ -56,7 +83,7 @@ export default function PodcastTranscription() {
       <div className="flex justify-between items-center bg-[var(--bg-overlay)] p-4 rounded-xl border border-[var(--border-subtle)]">
         <div>
           <h3 className="font-bold text-[var(--text-primary)]">{file.name}</h3>
-          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+          <p className="text-[var(--text-secondary)] text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB{durationSec !== null ? ` • ${Math.floor(durationSec / 60)}:${String(Math.floor(durationSec % 60)).padStart(2, '0')} • ≈${transcriptionCostForDuration(durationSec)} credits` : ''}</p>
         </div>
         <button
           onClick={() => { setFile(null); setOutput(''); }}

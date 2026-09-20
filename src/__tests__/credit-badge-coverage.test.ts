@@ -55,9 +55,20 @@ function badgeMap(): Record<string, number> {
   return map;
 }
 
+function perMinuteSet(): Set<string> {
+  const src = fs.readFileSync(
+    path.join(ROOT, "src/components/tools/ToolLayout.tsx"),
+    "utf8",
+  );
+  const body = src.match(/PER_MINUTE_SLUGS\s*=\s*new Set\(\[([\s\S]*?)\]\)/)?.[1] ?? "";
+  return new Set([...body.matchAll(/'([\w-]+)'/g)].map((m) => m[1]!));
+}
+
 describe("credit badge completeness (no silent deductions)", () => {
   const map = badgeMap();
+  const perMinute = perMinuteSet();
   const spenders: { slug: string; expected: number; file: string }[] = [];
+  const perMinuteSpenders: { slug: string; file: string }[] = [];
   const imageOnly: string[] = [];
 
   for (const full of walk(MODULES)) {
@@ -78,9 +89,15 @@ describe("credit badge completeness (no silent deductions)", () => {
       imageOnly.push(slug);
       continue;
     }
+    // True audio uploads bill per minute (no flat number is honest) — they
+    // must carry the per-minute badge instead of a flat per-use cost.
+    if (usesTranscribe) {
+      perMinuteSpenders.push({ slug, file: rel });
+      continue;
+    }
     spenders.push({
       slug,
-      expected: usesTranscribe ? 20 : 1,
+      expected: 1,
       file: rel,
     });
   }
@@ -93,6 +110,19 @@ describe("credit badge completeness (no silent deductions)", () => {
     ).toEqual([]);
   });
 
+  it("covers every per-minute transcribe spender with the per-minute badge", () => {
+    const missing = perMinuteSpenders.filter((s) => !perMinute.has(s.slug));
+    expect(
+      missing.map((s) => `${s.slug} (${s.file})`),
+      "transcribe tools must carry the per-minute badge, never a flat cost",
+    ).toEqual([]);
+    const flatLeak = perMinuteSpenders.filter((s) => s.slug in map);
+    expect(
+      flatLeak.map((s) => s.slug),
+      "transcribe tools must not also carry a flat per-use badge",
+    ).toEqual([]);
+  });
+
   it("keeps engine-dependent tools out of the flat map (cost shown inline)", () => {
     expect(
       imageOnly.filter((slug) => slug in map),
@@ -101,8 +131,10 @@ describe("credit badge completeness (no silent deductions)", () => {
     expect(imageOnly).toContain("ai-image-generator");
   });
 
-  it("maps at least the known 18 deducting slugs", () => {
-    expect(Object.keys(map).length).toBeGreaterThanOrEqual(18);
+  it("maps at least the known deducting slugs (flat + per-minute)", () => {
+    expect(Object.keys(map).length).toBeGreaterThanOrEqual(16);
+    expect(perMinute.size).toBeGreaterThanOrEqual(2);
+    expect(Object.keys(map).length + perMinute.size).toBeGreaterThanOrEqual(18);
   });
 
   it("has no duplicate slug keys (later entries silently shadow earlier ones)", () => {

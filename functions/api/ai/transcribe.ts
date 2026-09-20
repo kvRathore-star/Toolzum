@@ -1,9 +1,7 @@
 interface Env {
   DB: D1Database;
-  GEMINI_API_KEY: string;
+  OPENAI_API_KEY: string;
 }
-
-const MAX_UPLOAD_BYTES = 50 * 1024 * 1024;
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
 import { checkAiIpVelocity } from '../_abuse';
@@ -14,10 +12,37 @@ import {
   effectivePlanForUser,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
+import {
+  TRANSCRIPTION_CREDITS_PER_MINUTE,
+  TRANSCRIPTION_MAX_SECONDS,
+  TRANSCRIPTION_MAX_BYTES,
+  transcriptionCostForDuration,
+  transcriptionMaxPlausibleSeconds,
+} from '../../../src/lib/transcriptionPricing';
 
-// Per-task cost (decided Sep 11, repriced Sep 17): transcription runs a full audio model
-// pass (~$0.19/25min), so it costs 20× a text generation.
-export const TRANSCRIPTION_CREDITS = 20;
+// Cutover note (Dec 2026 review): provider moved Gemini 1.5 Flash (base64
+// inline, flat 20 credits) → gpt-4o-mini-transcribe (multipart passthrough,
+// 1 credit/min, 30-min cap). Cutover is atomic per request — the flag gates
+// nothing here because old and new share no state; in-flight Gemini requests
+// complete on the prior deployed version (platform drains old isolates),
+// so no job can be abandoned or double-charged mid-flight.
+
+/** Cross-realm file check: `instanceof File` fails when the File comes
+ *  from another realm (workers/edge runtimes, undici vs jsdom in tests).
+ *  Structural check instead — and note the handler only ever reads `.size`
+ *  (the raw body forwards untouched), so no content methods are required. */
+interface UploadedFile {
+  size: number;
+  name?: string;
+}
+function isUploadFile(v: unknown): v is UploadedFile {
+  if (!v || typeof v !== 'object') return false;
+  const o = v as Record<string, unknown>;
+  if (typeof o.size !== 'number') return false;
+  return ['arrayBuffer', 'text', 'stream', 'slice'].some(
+    (k) => typeof o[k] === 'function',
+  );
+}
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';
@@ -46,14 +71,6 @@ async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: Effect
   }
 
   return { maxCredits, balance: currentCredits };
-}
-
-function toBase64(bytes: Uint8Array): string {
-  let binary = '';
-  for (let i = 0; i < bytes.length; i += 0x8000) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-  }
-  return btoa(binary);
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
@@ -101,80 +118,97 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
-    if (balance < TRANSCRIPTION_CREDITS) {
-      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
-      return new Response(JSON.stringify({ error: 'Not enough credits — transcription requires 20' }), {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    const geminiKey = context.env.GEMINI_API_KEY;
-    if (!geminiKey) {
-      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    const formData = await context.request.formData();
+    // Clone first: validation consumes this copy via formData() while the
+    // pristine clone streams byte-identical to OpenAI below. This also keeps
+    // realm-mixing out (no re-appending parsed File objects into new forms).
+    const forwardable = context.request.clone();
+    const forwardContentType = context.request.headers.get('content-type') || 'multipart/form-data';
+    const formData = await forwardable.formData();
     const file = formData.get('file');
     const language = formData.get('language') as string | null;
     const responseFormat = formData.get('response_format') as string | null;
+    const durationSec = parseFloat(formData.get('durationSec') as string);
 
-    if (!file || !(file instanceof File)) {
+    if (!isUploadFile(file)) {
       return new Response(JSON.stringify({ error: 'Missing audio file' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    if (file.size > MAX_UPLOAD_BYTES) {
+    if (!Number.isFinite(durationSec) || durationSec <= 0) {
+      return new Response(JSON.stringify({ error: 'durationSec is required (audio length in seconds)' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (durationSec > TRANSCRIPTION_MAX_SECONDS) {
+      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
+      return new Response(JSON.stringify({ error: 'Audio exceeds 30-minute limit — split into parts' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (file.size > TRANSCRIPTION_MAX_BYTES) {
       return new Response(
-        JSON.stringify({ error: `File too large: ${file.size} bytes (max ${MAX_UPLOAD_BYTES})` }),
+        JSON.stringify({ error: 'File too large. Maximum 25MB.' }),
         { status: 413, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
+    // Plausibility, not proof: declared minutes must fit the file at floor
+    // bitrates (plus slack). Deliberate understatement is bounded to ~$1
+    // per request at provider rates — full verification isn't worth building.
+    if (durationSec > transcriptionMaxPlausibleSeconds(file.size)) {
+      return new Response(JSON.stringify({ error: 'Duration does not match file size' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const cost = transcriptionCostForDuration(durationSec);
+    if (balance < cost) {
+      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
+      return new Response(JSON.stringify({ error: `Not enough credits — this file costs ${cost}` }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    const openaiKey = context.env.OPENAI_API_KEY;
+    if (!openaiKey) {
+      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
     recordRateLimit(DB, 'ai-trans', userId, '/ai/transcribe');
 
-    const arrayBuffer = await file.arrayBuffer();
-    const base64 = toBase64(new Uint8Array(arrayBuffer));
-    const mimeType = file.type || 'audio/mpeg';
+    const upstream = new FormData();
+    upstream.append('file', file as unknown as Blob, file.name || 'audio.mpeg');
+    upstream.append('model', 'gpt-4o-mini-transcribe');
+    if (language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language)) upstream.append('language', language);
+    upstream.append('response_format', responseFormat === 'srt' ? 'srt' : 'text');
 
-    const langInstruction = language && language !== 'en'
-      ? `Transcribe the audio into ${language}. `
-      : '';
-
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            role: 'user',
-            parts: [
-              { inlineData: { mimeType, data: base64 } },
-              { text: `${langInstruction}Transcribe the audio from this file. Return only the transcribed text, no commentary.` }
-            ]
-          }],
-          generationConfig: { temperature: 0.1 },
-        }),
-      }
-    );
+    const res = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${openaiKey}` },
+      body: upstream,
+    });
 
     if (!res.ok) {
       const errBody = await res.text();
-      console.error('Gemini transcription error:', res.status, errBody);
+      console.error('Transcription provider error:', res.status, errBody);
       return new Response(JSON.stringify({ error: 'Transcription failed' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    const data: { candidates: { content: { parts: { text: string }[] }[] }[] } = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    const text = (await res.text()).trim();
 
     if (!text) {
       return new Response(JSON.stringify({ error: 'Empty transcription' }), {
@@ -183,8 +217,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare(`UPDATE user SET credits = credits - ${TRANSCRIPTION_CREDITS} WHERE id = ? AND credits >= ${TRANSCRIPTION_CREDITS}`).bind(userId).run();
-    await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - TRANSCRIPTION_CREDITS, allowance: maxCredits });
+    await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
+    await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
 
     const contentType = responseFormat === 'srt' ? 'text/plain' : 'text/plain';
 

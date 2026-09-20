@@ -18,8 +18,8 @@ import {
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
-// Per-task cost: plain text generation. (Transcription costs 20× — see
-// TRANSCRIPTION_CREDITS in transcribe.ts.)
+// Per-task cost: plain text generation. (Transcription is metered per
+// minute — see CREDITS_PER_MINUTE in transcribe.ts / transcriptionPricing.ts.)
 export const TEXT_GENERATION_CREDITS = 1;
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {

@@ -10,6 +10,11 @@ import { downloadOrShare } from "@/utils/nativeShare";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toUserError } from '@/utils/network';
+import {
+  TRANSCRIPTION_MAX_BYTES,
+  TRANSCRIPTION_MAX_SECONDS,
+  transcriptionCostForDuration,
+} from '@/lib/transcriptionPricing';
 
 const INDIAN_LANGUAGES = [
   { code: 'hi', label: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
@@ -39,28 +44,25 @@ export default function IndianVoiceTranscriber() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  // Upload cap mirrors the backend (/api/ai/transcribe MAX_UPLOAD_BYTES =
-  // 50MB). Resolved from /api/check-plan so Pro users actually get 50MB
-  // instead of being blocked at 25MB by a hardcoded check.
-  const [isProUpload, setIsProUpload] = useState(false);
-  React.useEffect(() => {
-    let live = true;
-    fetch('/api/check-plan')
-      .then(r => (r.ok ? r.json() : null))
-      .then((d: unknown) => {
-        if (!live || !d || typeof d !== 'object') return;
-        if ((d as { plan?: string }).plan === 'pro') setIsProUpload(true);
-      })
-      .catch(() => {});
-    return () => { live = false; };
-  }, []);
+  // Real audio length, measured from file metadata (not estimated from size).
+  // Drives the cost preview, the 30-minute gate, and the durationSec the
+  // backend bills on — one measurement, three uses, no drift.
+  const [audioDurationSec, setAudioDurationSec] = useState<number | null>(null);
+  const measureDuration = (url: string) => {
+    setAudioDurationSec(null);
+    const el = new Audio(url);
+    el.onloadedmetadata = () => {
+      if (Number.isFinite(el.duration) && el.duration > 0) setAudioDurationSec(el.duration);
+    };
+    el.onerror = () => setAudioDurationSec(null);
+  };
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    const maxSize = (isProUpload ? 50 : 25) * 1024 * 1024;
-    if (file.size > maxSize) return toast.error(isProUpload ? 'File too large. Maximum 50MB.' : 'File too large. Maximum 25MB. Pro supports up to 50MB.');
+    const maxSize = TRANSCRIPTION_MAX_BYTES;
+    if (file.size > maxSize) return toast.error('File too large. Maximum 25MB.');
     
     const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/ogg', 'audio/m4a', 'audio/webm', 'video/mp4', 'video/webm'];
     if (!validTypes.includes(file.type) && !file.name.match(/\.(mp3|wav|ogg|m4a|webm|mp4)$/i)) {
@@ -71,10 +73,16 @@ export default function IndianVoiceTranscriber() {
     setTranscript(null);
     const url = URL.createObjectURL(file);
     setAudioUrl(url);
+    measureDuration(url);
   };
 
   const transcribe = async () => {
     if (!audioFile) return toast.error('Upload an audio file first');
+    // Billable length: measured metadata, falling back to a 128kbps size
+    // estimate only when metadata failed to load. Same value is previewed
+    // below and sent as durationSec, so preview and charge always agree.
+    const billSec = audioDurationSec ?? audioFile.size / 16000;
+    if (billSec > TRANSCRIPTION_MAX_SECONDS) return toast.error('Audio exceeds 30-minute limit — split into parts.');
 
     setIsTranscribing(true);
     setTranscript(null);
@@ -82,7 +90,7 @@ export default function IndianVoiceTranscriber() {
     try {
       const formData = new FormData();
       formData.append('file', audioFile);
-      formData.append('model', 'whisper-1');
+      formData.append('durationSec', String(Math.round(billSec)));
       formData.append('response_format', showTimestamps ? 'srt' : 'text');
       if (selectedLanguage !== 'en') {
         formData.append('language', selectedLanguage);
@@ -109,7 +117,7 @@ export default function IndianVoiceTranscriber() {
       setTranscript(text);
       toast.success('Transcription complete!');
     } catch (err: unknown) {
-      // #45: offline-aware error copy (never auto-retries: 20 credits/try).
+      // #45: offline-aware error copy (never auto-retries: billed per minute).
       toast.error(toUserError(err, 'Transcription failed'));
     } finally {
       setIsTranscribing(false);
@@ -125,7 +133,7 @@ export default function IndianVoiceTranscriber() {
     if (!transcript) return;
     const blob = new Blob([transcript], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    // Quota-gated save (1 unit; transcription itself already cost 20 credits).
+    // Quota-gated save (1 unit; transcription itself bills per minute).
     if (await downloadOrShare(url, `transcript_${audioFile?.name?.replace(/\.[^.]+$/, '') || 'voice'}_${Date.now()}.txt`)) {
       toast.success('Transcript downloaded!');
     } else {
@@ -140,7 +148,8 @@ export default function IndianVoiceTranscriber() {
   };
 
   const wordCount = transcript ? transcript.split(/\s+/).filter(Boolean).length : 0;
-  const duration = audioFile ? formatDuration(audioFile.size / 16000) : '0:00';
+  const duration = audioDurationSec !== null ? formatDuration(audioDurationSec) : (audioFile ? '…' : '0:00');
+  const previewCost = audioFile ? transcriptionCostForDuration(audioDurationSec ?? audioFile.size / 16000) : 0;
 
   const handleStartRecording = async () => {
     try {
@@ -157,6 +166,7 @@ export default function IndianVoiceTranscriber() {
         setTranscript(null);
         const url = URL.createObjectURL(file);
         setAudioUrl(url);
+        measureDuration(url);
         stream.getTracks().forEach(t => t.stop());
       };
 
@@ -246,7 +256,7 @@ export default function IndianVoiceTranscriber() {
 
             <div className="p-3 rounded-xl" style={{ backgroundColor: '#0284c708', borderColor: '#0284c720', borderWidth: 1 }}>
               <p className="text-[10px]" style={{ color: '#0284c7' }}>
-                <strong>Pro:</strong> 5 hours/month, speaker identification (diarization), export as Word/PDF with timestamps, batch voice note transcription, WhatsApp voice note support.
+                <strong>Pro:</strong> 200 transcription credits/month (≈3 hours of audio).
               </p>
             </div>
           </div>
@@ -264,9 +274,9 @@ export default function IndianVoiceTranscriber() {
               <p className="text-sm font-medium text-[var(--text-secondary)] dark:text-[var(--text-muted)]">
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
-              <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB{isProUpload ? ' (Pro: 50MB applied)' : ' (Pro: 50MB)'}</p>
-              <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Transcription costs 20 credits per file{isProUpload ? ' (Pro: 200/month).' : ' — free plans include 10/month, so transcription needs Pro (200/month).'}</p>
-              <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB (Pro: 50MB)" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
+              <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB, max 30 min per file</p>
+              <p className="text-[10px] text-[var(--text-muted)] mt-0.5">≈1 credit per minute of audio (free plans include 10/month, Pro 200/month)</p>
+              <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB, max 30 min" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
             </div>
 
             <AnimatePresence>
@@ -289,7 +299,7 @@ export default function IndianVoiceTranscriber() {
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium text-[var(--text-primary)] truncate">{audioFile?.name}</p>
                       <p className="text-[10px] text-[var(--text-secondary)]">
-                        {duration} • {(audioFile ? (audioFile.size / 1024 / 1024).toFixed(1) : 0)} MB
+                        {duration} • {(audioFile ? (audioFile.size / 1024 / 1024).toFixed(1) : 0)} MB • ≈{previewCost} credits
                       </p>
                     </div>
                     <button onClick={() => { setAudioFile(null); setAudioUrl(null); setTranscript(null); }}
@@ -343,9 +353,6 @@ export default function IndianVoiceTranscriber() {
                     </span>
                     <span className="flex items-center gap-1 px-2 py-1 rounded-md bg-[var(--bg-overlay)] border border-[var(--border-subtle)]">
                       <Languages className="w-3 h-3" style={{ color: '#0284c7' }} /> {selectedLang?.native}
-                    </span>
-                    <span className="flex items-center gap-1 px-2 py-1 rounded-md bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-emerald-500 font-semibold">
-                      <BarChart3 className="w-3 h-3" /> Confidence: 92%
                     </span>
                   </div>
 

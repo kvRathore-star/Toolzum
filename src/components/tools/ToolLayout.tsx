@@ -68,17 +68,18 @@ const CREDIT_COST_SLUGS: Record<string, number> = {
   'subtitle-translator': 1,
   'meeting-minutes-generator': 1,
   // NOTE: audio/video-to-text clean up pasted transcript dumps via TEXT
-  // generation (1 credit) — they never touch /api/ai/transcribe. Only
-  // true audio uploads (podcast, indian-voice) cost 20.
+  // generation (1 credit) — they never touch /api/ai/transcribe.
   'video-to-text-transcription': 1,
   'audio-to-text-transcription': 1,
-  'podcast-transcription': 20,
   'pdf-ai-summariser': 1,
   'resume-ats-score-checker': 1,
-  'indian-voice-transcriber': 20,
   'ai-humanizer': 1,
   'grammar-checker': 1,
 };
+
+// True audio uploads bill per minute (see transcriptionPricing.ts), so no
+// flat number is honest — these slugs get a "1 credit/min" badge instead.
+const PER_MINUTE_SLUGS = new Set(['podcast-transcription', 'indian-voice-transcriber']);
 
 function getCategoryPath(category: string): string {
   return category.toLowerCase().replace(/\s+/g, "-");
@@ -246,6 +247,15 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                     </Link>
                   </>
                 )}
+              </>
+            )}
+            {PER_MINUTE_SLUGS.has(slug) && (
+              <>
+                <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />
+                <span className="flex items-center gap-1.5 text-amber-500">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  1 credit/min
+                </span>
               </>
             )}
             {tool && <span className="w-[1px] h-3 bg-[var(--border-subtle)]" />}
