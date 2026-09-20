@@ -430,8 +430,8 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF AI Summariser',
     slug: 'pdf-ai-summariser',
-    description: 'Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.',
-    seoDescription: 'Free online PDF AI Summariser — OCR + native text extraction, LLM condensed summaries with key points. Scanned and digital PDFs.',
+    description: 'Uploads a PDF document, extracts its full text via native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.',
+    seoDescription: 'Free online PDF AI Summariser — native text extraction, LLM condensed summaries with key points. Digital PDFs.',
     category: 'AI',
     id:  "276",
     dependencies: 'AI API, PDF.js',

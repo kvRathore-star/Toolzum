@@ -43,7 +43,7 @@ const KNOWN_INPUT_TYPES = new Set([
 
 const ACTION_VERBS = /^(add|remove|crop|merge|split|rotate|compress|extract|insert|delete|batch|import)\s/i;
 
-function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
+export function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   const n = tool.name.toLowerCase();
   const s = tool.slug;
   const dep = (tool.dependencies || '').toLowerCase();
@@ -57,14 +57,14 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
   }
 
   const toMatch = n.match(/(.+?)\s+to\s+/i);
-  if (toMatch && hasFileInput) {
+  if (toMatch && hasFileInput && !n.includes('speech')) {
     const raw = toMatch[1]!.trim();
     const inputType = raw.replace(/^(bulk|add)\s+/i, '').trim();
     if (!ACTION_VERBS.test(raw) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
       return { pattern: 'upload-convert-download', inputType };
     }
   }
-  if (s.includes('-to-') && hasFileInput) {
+  if (s.includes('-to-') && hasFileInput && !n.includes('speech')) {
     const raw = s.split('-to-')[0];
     const inputType = raw!.replace(/^(bulk|add)/, '').trim();
     if (inputType && !ACTION_VERBS.test(inputType) && KNOWN_INPUT_TYPES.has(inputType.toLowerCase())) {
@@ -78,6 +78,11 @@ function deriveInteractionPattern(tool: ToolMetadata): InteractionPattern {
 
   if (cat === 'calculator' || cat === 'finance' || cat === 'health') {
     return { pattern: 'enter-values-result' };
+  }
+  // Format converters with file input (e.g. audio-converter) convert files,
+  // they don't take typed values — route them to the converter pattern.
+  if (n.includes('converter') && hasFileInput) {
+    return { pattern: 'upload-convert-download', inputType: cat };
   }
   if (n.includes('calculator') || n.includes('converter') && !hasFileInput) {
     return { pattern: 'enter-values-result' };

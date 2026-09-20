@@ -68,6 +68,6 @@ Hard-won knowledge from debugging production issues. Read before modifying relat
 
 **Root cause:** The converter check guards on `!hasFileInput`, which excludes all audio/video/pdf/image category tools even when they're format converters. The "X to Y" regex matches before the TTS-specific check.
 
-**Fix (not yet done):** Either (a) add `audio-converter` to a known-slugs exclusion list that skips the "X to Y" pattern, or (b) move the TTS check above the converter check, or (c) add a `!n.includes('speech')` guard to the "X to Y" regex. Low priority — these tools still work, just get generic How-to steps.
+**Fix (done Sep 20 2026):** `!n.includes('speech')` guard added to both "X to Y" branches so text-to-speech/speech-to-text fall through to the `ai-generate` branch, plus a `converter + hasFileInput → upload-convert-download` rule after the calculator early-return (audio-converter was falling to `other`). Verified by full-registry dump: exactly 3 tools changed routing (audio-converter, text-to-speech-tts, speech-to-text); value-based converters (unit, currency, yaml-json, xlsx-csv…) still `enter-values-result`. Regression test at `src/__tests__/interaction-pattern.test.ts`.
 
 **Discovered:** 2026-08-23 during classifier audit. Pre-existing, not caused by any session changes.

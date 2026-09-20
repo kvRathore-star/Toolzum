@@ -1730,7 +1730,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF AI Summariser",
     "slug": "pdf-ai-summariser",
     "category": "AI",
-    "description": "Uploads a PDF document, extracts its full text via OCR and native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.",
+    "description": "Uploads a PDF document, extracts its full text via native parsing, then sends the content to an LLM for a condensed summary highlighting key points and insights.",
     "isPro": true
   },
   {
