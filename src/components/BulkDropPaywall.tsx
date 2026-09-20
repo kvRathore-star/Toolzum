@@ -5,15 +5,14 @@ import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { useDialogA11y } from '@/components/useDialogA11y';
 import { useIsIndia } from '@/hooks/useIsIndia';
-import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 import { getSignedInStatus } from '@/utils/freeUsageGuard';
 
 export function BulkDropPaywall() {
   const [files, setFiles] = useState<File[]>([]);
   const [showModal, setShowModal] = useState(false);
   const isIndia = useIsIndia();
-  const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown> | undefined)?.plan === 'pro';
+  const isPro = useProStatus();
   const closeModal = React.useCallback(() => setShowModal(false), []);
   const dialogRef = useDialogA11y<HTMLDivElement>(showModal, closeModal);
 

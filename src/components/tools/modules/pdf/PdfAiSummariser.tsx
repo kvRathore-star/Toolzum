@@ -6,6 +6,7 @@ import { useAiProvider } from '@/hooks/useAiProvider';
 import AiSettings from '../../AiSettings';
 import Link from 'next/link';
 import { getErrorMessage } from '@/utils/error';
+import { useProStatus } from '@/hooks/useProStatus';
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 
 const FREE_PAGE_LIMIT = 3;
@@ -20,6 +21,7 @@ export default function PdfAiSummariser() {
   const { generateCompletion } = useAiProvider();
   const [usage, setUsage] = useState(0);
   const [showFullText, setShowFullText] = useState(false);
+  const isProUser = useProStatus();
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -33,7 +35,7 @@ export default function PdfAiSummariser() {
       try { const { date, count } = JSON.parse(stored); currentUsage = date === today ? count : 0; }
       catch { currentUsage = 0; }
     }
-    if (currentUsage >= FREE_PAGE_LIMIT) { toast.error(`You've used all ${FREE_PAGE_LIMIT} free summaries today. Upgrade to Pro for unlimited.`); return; }
+    if (!isProUser && currentUsage >= FREE_PAGE_LIMIT) { toast.error(`You've used all ${FREE_PAGE_LIMIT} free summaries today. Upgrade to Pro for unlimited.`); return; }
 
     setFile(f);
     setSummary('');
@@ -47,13 +49,13 @@ export default function PdfAiSummariser() {
       const totalPages = pdf.numPages;
       setPageCount(totalPages);
       
-      if (totalPages > FREE_PAGE_LIMIT && currentUsage >= FREE_PAGE_LIMIT) {
+      if (!isProUser && totalPages > FREE_PAGE_LIMIT && currentUsage >= FREE_PAGE_LIMIT) {
         toast.error(`Free tier: ${FREE_PAGE_LIMIT} pages max. This PDF has ${totalPages} pages.`);
         setIsExtracting(false);
         return;
       }
 
-      const pagesToRead = Math.min(totalPages, FREE_PAGE_LIMIT);
+      const pagesToRead = isProUser ? totalPages : Math.min(totalPages, FREE_PAGE_LIMIT);
       let fullText = '';
       for (let i = 1; i <= pagesToRead; i++) {
         const page = await pdf.getPage(i);

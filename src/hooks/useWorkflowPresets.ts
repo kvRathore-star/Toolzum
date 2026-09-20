@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
-import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 
 export interface WorkflowPreset {
   id: string;
@@ -29,8 +29,7 @@ function savePresets(presets: WorkflowPreset[]) {
 }
 
 export function useWorkflowPresets(toolSlug: string) {
-  const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isPro = useProStatus();
   const [presets, setPresets] = useState<WorkflowPreset[]>([]);
 
   useEffect(() => {

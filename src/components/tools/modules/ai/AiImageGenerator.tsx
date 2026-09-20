@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Download, Sparkles, Image as ImageIcon, Link2 } from 'lucide-react';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 import { useAiProvider } from '@/hooks/useAiProvider';
 import NextImage from "next/image";
 import Link from "next/link";
@@ -26,7 +27,7 @@ export default function AiImageGenerator() {
   const [imageUrl, setImageUrl] = useState('');
   const { data: session } = useSession();
   const isSignedIn = !!session?.user;
-  const isPro = (session?.user as Record<string, unknown> | undefined)?.plan === 'pro';
+  const isPro = useProStatus();
   const { generateImage } = useAiProvider();
   const geminiEngineLive = useFlag("ai_image_gemini");
 

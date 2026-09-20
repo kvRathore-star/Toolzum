@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { Crown, Download, Lock } from 'lucide-react';
-import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 import Link from 'next/link';
 
 interface ProDownloadButtonProps {
@@ -12,8 +12,7 @@ interface ProDownloadButtonProps {
 }
 
 export function ProDownloadButton({ fileCount, onDownloadAll, onDownloadEach, isProcessing }: ProDownloadButtonProps) {
-  const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isPro = useProStatus();
 
   if (fileCount === 0) return null;
 

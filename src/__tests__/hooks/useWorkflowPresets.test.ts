@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 
 const mockUseSession = vi.fn(() => ({
   data: { user: { plan: 'pro' } },
@@ -28,11 +28,13 @@ describe('useWorkflowPresets', () => {
     vi.clearAllMocks();
     localStorageMock.clear();
     mockUseSession.mockReturnValue({ data: { user: { plan: 'pro' } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ plan: 'pro' }) }));
     await import('@/hooks/useWorkflowPresets');
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    vi.unstubAllGlobals();
   });
 
   it('exports useWorkflowPresets function', async () => {
@@ -62,6 +64,8 @@ describe('useWorkflowPresets', () => {
     const { useWorkflowPresets } = await import('@/hooks/useWorkflowPresets');
     const { result } = renderHook(() => useWorkflowPresets('test-tool'));
 
+    await waitFor(() => expect(result.current.isPro).toBe(true));
+
     let saveResult: boolean | undefined;
     await act(async () => {
       saveResult = result.current.savePreset('My Config', { quality: 1080 });
@@ -74,6 +78,7 @@ describe('useWorkflowPresets', () => {
 
   it('savePreset returns false for non-pro users', async () => {
     mockUseSession.mockReturnValue({ data: { user: { plan: 'free' } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ plan: 'free' }) }));
     localStorageMock.getItem.mockReturnValue('[]');
 
     const { useWorkflowPresets } = await import('@/hooks/useWorkflowPresets');
@@ -137,8 +142,9 @@ describe('useWorkflowPresets', () => {
     expect(result.current.presets[0].id).toBe('2');
   });
 
-  it('isPro reflects session plan', async () => {
-    mockUseSession.mockReturnValue({ data: { user: { plan: 'pro' } } });
+  it('isPro reflects server plan even when session is stale', async () => {
+    mockUseSession.mockReturnValue({ data: { user: { plan: 'free' } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ plan: 'pro' }) }));
     localStorageMock.getItem.mockReturnValue('[]');
 
     const { useWorkflowPresets } = await import('@/hooks/useWorkflowPresets');
@@ -151,6 +157,7 @@ describe('useWorkflowPresets', () => {
 
   it('isPro is false for free plan', async () => {
     mockUseSession.mockReturnValue({ data: { user: { plan: 'free' } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({ plan: 'free' }) }));
     localStorageMock.getItem.mockReturnValue('[]');
 
     const { useWorkflowPresets } = await import('@/hooks/useWorkflowPresets');

@@ -9,7 +9,7 @@ import { withErrorHandling } from '@/lib/withErrorHandling';
 import { buttonKeyDown, buttonKeyUp } from '@/components/buttonKeys';
 import { hasLargeFiles, checkMemory } from '@/lib/fileUtils';
 import { ProDownloadButton } from '../utility/ProDownloadButton';
-import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 import JSZip from 'jszip';
 import { Upload, Download, Zap, Images, X, Loader2, Sparkles, Clock, FileImage, Crop, Move, RotateCcw, Crown, Lock } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -240,8 +240,7 @@ function CropEditor({ url, onCrop, onClear }: { url: string; onCrop: (c: CropAre
 }
 
 export default function GeminiWatermarkRemover() {
-  const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isPro = useProStatus();
   const [mode, setMode] = useState<'single' | 'bulk'>('single');
   const [singleImage, setSingleImage] = useState<{ file: File; url: string } | null>(null);
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);

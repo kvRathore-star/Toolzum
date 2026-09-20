@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { createDownloadBlob } from '@/utils/blob';
 import { Crown, Upload, Trash2, Download, Eye } from 'lucide-react';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 import Link from 'next/link';
 
 interface LineItem {
@@ -87,6 +88,7 @@ export default function GstInvoiceGenerator() {
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
 
   const { usage, trackUsage } = useUsageCounter('gstInvoiceUsage', 'month');
+  const isProUser = useProStatus();
 
   const totals = useMemo(() => {
     let taxableVal = 0, cgst = 0, sgst = 0, igst = 0;
@@ -123,7 +125,7 @@ export default function GstInvoiceGenerator() {
   };
 
   const handleGeneratePdf = async () => {
-    if (usage >= MONTHLY_LIMIT) { toast.error(`You've used all ${MONTHLY_LIMIT} free invoices this month. Upgrade to Pro for unlimited invoices.`); return; }
+    if (!isProUser && usage >= MONTHLY_LIMIT) { toast.error(`You've used all ${MONTHLY_LIMIT} free invoices this month. Upgrade to Pro for unlimited invoices.`); return; }
     if (!billerName.trim()) { toast.error("Biller Name is required."); return; }
     if (!clientName.trim()) { toast.error("Client Name is required."); return; }
     if (items.length === 0) { toast.error("Add at least one line item."); return; }
@@ -225,7 +227,7 @@ export default function GstInvoiceGenerator() {
       downloadOrShare(url, `${invoiceNo}.pdf`);
       trackUsage(usage + 1);
       toast.success("GST Invoice PDF generated!");
-      if (usage + 1 >= MONTHLY_LIMIT) toast(`Upgrade to Pro for unlimited invoices this month.`, { icon: '👑' });
+      if (!isProUser && usage + 1 >= MONTHLY_LIMIT) toast(`Upgrade to Pro for unlimited invoices this month.`, { icon: '👑' });
     } catch (e) { console.error(e); toast.error("Failed to generate PDF."); }
     finally { setIsProcessing(false); }
   };
@@ -244,6 +246,7 @@ export default function GstInvoiceGenerator() {
         <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider shrink-0 ml-4"><Crown className="w-3.5 h-3.5" /> Pro</span>
       </div>
 
+      {!isProUser && (
       <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
         <p className="text-xs text-[var(--text-secondary)]">Monthly free invoices:</p>
         <div className="flex items-center gap-2">
@@ -255,6 +258,7 @@ export default function GstInvoiceGenerator() {
           <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {MONTHLY_LIMIT} remaining this month</span>
         </div>
       </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] p-6 sm:p-8 rounded-2xl shadow-xl space-y-8">
@@ -379,10 +383,10 @@ export default function GstInvoiceGenerator() {
             </div>
           </div>
 
-          <button onClick={handleGeneratePdf} disabled={isProcessing || remaining === 0}
+          <button onClick={handleGeneratePdf} disabled={isProcessing || (!isProUser && remaining === 0)}
             className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 disabled:opacity-50 text-white font-extrabold py-4 rounded-2xl shadow-xl shadow-emerald-500/10 transition-all active:scale-[0.98] text-lg flex items-center justify-center gap-2">
             <Download className="w-5 h-5" />
-            {isProcessing ? 'Generating PDF...' : remaining === 0 ? 'Monthly limit reached — Upgrade to Pro' : 'Generate & Download A4 Tax Invoice (PDF)'}
+            {isProcessing ? 'Generating PDF...' : (!isProUser && remaining === 0) ? 'Monthly limit reached — Upgrade to Pro' : 'Generate & Download A4 Tax Invoice (PDF)'}
           </button>
 
           <div className="bg-[var(--accent)]/10/20 border border-[var(--accent)]/20 rounded-xl p-3 flex items-center justify-between">

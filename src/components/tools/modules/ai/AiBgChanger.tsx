@@ -5,6 +5,7 @@ import { Upload, Download, RotateCcw, Scissors, Image, Eraser, RefreshCw, ZoomIn
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { useSession } from '@/lib/auth-client';
+import { useProStatus } from '@/hooks/useProStatus';
 import NextImage from "next/image";
 import {
   getPersonSegmenter,
@@ -30,7 +31,7 @@ export default function AiBgChanger() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const { data: session } = useSession();
-  const isPro = (session?.user as Record<string, unknown>)?.plan === 'pro';
+  const isPro = useProStatus();
   const isSignedIn = !!session?.user;
   const [isDragging, setIsDragging] = useState(false);
   const { dropRef, armReturn, focusDrop } = usePickerFocusReturn<HTMLDivElement>();

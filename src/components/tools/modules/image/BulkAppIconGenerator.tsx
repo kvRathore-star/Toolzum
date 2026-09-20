@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import JSZip from 'jszip';
 import { Download, Upload, Crown, Loader2 } from 'lucide-react';
+import { useProStatus } from '@/hooks/useProStatus';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Link from 'next/link';
@@ -34,6 +35,7 @@ export default function BulkAppIconGenerator() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [usage, setUsage] = useState(0);
+  const isProUser = useProStatus();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +76,7 @@ export default function BulkAppIconGenerator() {
   };
 
   const handleGenerate = async () => {
-    if (usage >= FREE_LIMIT) {
+    if (!isProUser && usage >= FREE_LIMIT) {
       toast.error(`You've used your free generation. Upgrade to Pro for unlimited.`);
       return;
     }
@@ -184,7 +186,7 @@ export default function BulkAppIconGenerator() {
           {isProcessing ? 'Generating Icons...' : `Generate All ${ICON_SIZES.length} Icon Sizes (ZIP)`}
         </button>
 
-        {usage >= FREE_LIMIT && (
+        {!isProUser && usage >= FREE_LIMIT && (
           <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-[var(--radius-lg)]">
             <div className="flex items-center gap-2 mb-2">
               <Crown className="w-4 h-4 text-amber-500" />

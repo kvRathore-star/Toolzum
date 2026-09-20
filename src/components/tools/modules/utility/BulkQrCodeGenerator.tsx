@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import Link from 'next/link';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 
 const DAILY_LIMIT = 5;
 const PRO_MAX = 100;
@@ -21,6 +22,7 @@ export default function BulkQrCodeGenerator() {
   const [singleQrUrl, setSingleQrUrl] = useState<string | null>(null);
 
   const { usage, trackUsage } = useUsageCounter('bulkQrUsage');
+  const isProUser = useProStatus();
 
   const handleCsvUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -38,7 +40,7 @@ export default function BulkQrCodeGenerator() {
         const cols = line.split(',').map(c => c.trim());
         return { label: labelIdx >= 0 ? cols[labelIdx] || `QR ${cols[valueIdx]!.substring(0, 20)}` : `QR ${cols[valueIdx]!.substring(0, 20)}`, value: cols[valueIdx]! };
       });
-      if (data.length > PRO_MAX && usage >= DAILY_LIMIT) { toast.error(`Free tier limited to ${DAILY_LIMIT} QR. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
+      if (!isProUser && data.length > PRO_MAX && usage >= DAILY_LIMIT) { toast.error(`Free tier limited to ${DAILY_LIMIT} QR. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
       setCsvData(data);
       toast.success(`Loaded ${data.length} entries from CSV`);
     };
@@ -47,7 +49,7 @@ export default function BulkQrCodeGenerator() {
 
   const generateSingle = async () => {
     if (!text.trim()) { toast.error('Enter text or URL'); return; }
-    if (usage >= DAILY_LIMIT) { toast.error(`You've used your free QR today. Upgrade to Pro for unlimited.`); return; }
+    if (!isProUser && usage >= DAILY_LIMIT) { toast.error(`You've used your free QR today. Upgrade to Pro for unlimited.`); return; }
     setIsProcessing(true);
     try {
       const canvas = document.createElement('canvas');
@@ -64,9 +66,9 @@ export default function BulkQrCodeGenerator() {
     if (csvData.length === 0) { toast.error('Upload a CSV first'); return; }
     // Free tier is 5 QR/day on every path — the old bulk check only gated
     // files over 100 rows, leaving bulk ≤100 effectively unlimited.
-    if (usage >= DAILY_LIMIT) { toast.error(`You've used your free QR today. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
-    const rows = csvData.slice(0, DAILY_LIMIT);
-    if (csvData.length > DAILY_LIMIT) toast.success(`Free tier: generating first ${DAILY_LIMIT} of ${csvData.length} rows — upgrade to Pro for up to ${PRO_MAX}.`);
+    if (!isProUser && usage >= DAILY_LIMIT) { toast.error(`You've used your free QR today. Upgrade to Pro for up to ${PRO_MAX}.`); return; }
+    const rows = isProUser ? csvData.slice(0, PRO_MAX) : csvData.slice(0, DAILY_LIMIT);
+    if (!isProUser && csvData.length > DAILY_LIMIT) toast.success(`Free tier: generating first ${DAILY_LIMIT} of ${csvData.length} rows — upgrade to Pro for up to ${PRO_MAX}.`);
     setIsProcessing(true);
     try {
       const zip = new JSZip();

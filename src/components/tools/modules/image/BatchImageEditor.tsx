@@ -6,6 +6,7 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { gateBatchDownload, maxBlobMB } from '@/utils/freeUsageGuard';
 import { useUsageCounter } from '@/hooks/useUsageCounter';
+import { useProStatus } from '@/hooks/useProStatus';
 
 const FREE_LIMIT = 3;
 
@@ -18,6 +19,7 @@ export default function BatchImageEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const { usage, trackUsage } = useUsageCounter('batchEditorUsage');
+  const isProUser = useProStatus();
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fList = e.target.files;
@@ -30,7 +32,7 @@ export default function BatchImageEditor() {
     if (files.length === 0 || !canvasRef.current) return;
 
     const remaining = FREE_LIMIT - usage;
-    const toProcess = Math.min(files.length, remaining);
+    const toProcess = isProUser ? files.length : Math.min(files.length, remaining);
     if (toProcess === 0) {
       toast.error(`You've used all ${FREE_LIMIT} free images today. Upgrade to Pro for unlimited processing.`);
       return;
@@ -115,17 +117,19 @@ export default function BatchImageEditor() {
            <span className="flex items-center gap-1 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-[var(--accent)] text-[10px] font-bold rounded-full uppercase tracking-wider"><Crown className="w-3.5 h-3.5" /> Pro</span>
          </div>
 
-         <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
-           <p className="text-xs text-[var(--text-secondary)]">Daily free limit:</p>
-           <div className="flex items-center gap-2">
-             <div className="flex gap-1">
-               {Array.from({ length: FREE_LIMIT }, (_, i) => (
-                 <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-emerald-700'}`} />
-               ))}
-             </div>
-             <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {FREE_LIMIT} remaining</span>
-           </div>
-         </div>
+          {!isProUser && (
+          <div className="flex items-center justify-between bg-[var(--bg-overlay)]/50 px-4 py-2.5 rounded-xl border border-[var(--border-subtle)]">
+            <p className="text-xs text-[var(--text-secondary)]">Daily free limit:</p>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                {Array.from({ length: FREE_LIMIT }, (_, i) => (
+                  <div key={i} className={`w-3 h-3 rounded-full ${i < usage ? 'bg-[var(--bg-overlay)] dark:bg-[var(--bg-elevated)]' : 'bg-emerald-700'}`} />
+                ))}
+              </div>
+              <span className="text-[10px] font-bold text-[var(--text-secondary)]">{remaining} / {FREE_LIMIT} remaining</span>
+            </div>
+          </div>
+          )}
          
          <canvas ref={canvasRef} style={{ display: 'none' }} />
 
@@ -143,7 +147,7 @@ export default function BatchImageEditor() {
                <h3 className="font-semibold text-lg border-b border-[var(--border-subtle)] pb-2">Queue Summary</h3>
                <div className="text-3xl font-bold text-emerald-500">{files.length}</div>
                <div className="text-[var(--text-secondary)] text-sm">Images ready</div>
-               <div className="text-[10px] text-[var(--text-muted)]">Processed today: {usage} / {FREE_LIMIT}</div>
+                <div className="text-[10px] text-[var(--text-muted)]">Processed today: {usage}{isProUser ? '' : ` / ${FREE_LIMIT}`}</div>
                <button onClick={() => setFiles([])} className="text-sm text-red-500 hover:underline mt-2 block">Clear Queue</button>
              </div>
              <div className="space-y-6 bg-[var(--bg-overlay)]/50 p-6 rounded-xl border border-[var(--border-subtle)]">
