@@ -24,10 +24,29 @@ export default function FakeCreditCardGenerator() {
 
   const resultText = cards.length > 0 ? 'Generated ' + cards.length + ' test cards (Luhn valid)' : 'Configure and generate';
 
+  const customResult = cards.length > 0 ? (
+    <div className="flex flex-col min-h-[200px]">
+      <div className="space-y-3 max-h-[350px] overflow-y-auto">
+        {cards.map((c, i) => (
+          <div key={i} className={'p-4 rounded-xl bg-gradient-to-br ' + (cardColors[c.type] || 'from-zinc-600 to-zinc-800') + ' text-white shadow-md'}>
+            <div className="flex justify-between items-start">
+              <span className="text-xs font-medium opacity-80">{c.type}</span>
+              <span className="text-[10px] opacity-60">CVV: {c.cvv}</span>
+            </div>
+            <div className="text-lg font-mono tracking-wider mt-3">{c.number.replace(/(\d{4})(?=\d)/g, '$1 ')}</div>
+            <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
+          </div>
+        ))}
+        <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Fake Credit Card Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -37,26 +56,6 @@ export default function FakeCreditCardGenerator() {
     >
       <div className="space-y-4">
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
-        {cards.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-            <div className="space-y-3 max-h-[350px] overflow-y-auto">
-              {cards.map((c, i) => (
-                <div key={i} className={'p-4 rounded-xl bg-gradient-to-br ' + (cardColors[c.type] || 'from-zinc-600 to-zinc-800') + ' text-white shadow-md'}>
-                  <div className="flex justify-between items-start">
-                    <span className="text-xs font-medium opacity-80">{c.type}</span>
-                    <span className="text-[10px] opacity-60">CVV: {c.cvv}</span>
-                  </div>
-                  <div className="text-lg font-mono tracking-wider mt-3">{c.number.replace(/(\d{4})(?=\d)/g, '$1 ')}</div>
-                  <div className="flex justify-between mt-3 text-xs opacity-80"><span>Expires: {c.expiry}</span></div>
-                </div>
-              ))}
-              <button onClick={() => { clipboardWrite(cards.map(c => c.number + '|' + c.expiry + '|' + c.cvv).join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy All</button>
-            </div>
-          </div>
-        )}
-        {!cards.length && (
-          <p className="text-[var(--text-muted)] text-sm text-center">Generate test card numbers</p>
-        )}
       </div>
     </CalculatorShell>
   );

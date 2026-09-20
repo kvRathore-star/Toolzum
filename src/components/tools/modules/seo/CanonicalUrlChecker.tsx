@@ -40,15 +40,11 @@ export default function CanonicalUrlChecker() {
   const resultText = result ? `URL checked: ${url}` : 'Enter URL to check canonical structure';
 
   return (
-    <CalculatorShell category="SEO" title="Canonical URL Checker" result={resultText} onCalculate={() => { void check(); }} calculateLabel={checking ? "Checking…" : "Check"} presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
+    <CalculatorShell category="SEO" title="Canonical URL Checker" result={resultText} customResult={result ? (<pre className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] font-mono text-sm whitespace-pre-wrap">{result}</pre>) : undefined} onCalculate={() => { void check(); }} calculateLabel={checking ? "Checking…" : "Check"} presets={presets} accent="blue" downloadData={result} downloadFilename="url-check.txt">
       <div className="space-y-4">
         <label htmlFor="lbl-canonicalurlchecker-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">URL to check</label>
         <input id="lbl-canonicalurlchecker-url" aria-label="URL to check" type="url" value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com/path"
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
-
-        {result && (
-          <pre className="p-4 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] font-mono text-sm whitespace-pre-wrap">{result}</pre>
-        )}
       </div>
     </CalculatorShell>
   );

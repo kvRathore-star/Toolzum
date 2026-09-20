@@ -15,7 +15,7 @@ describe('ChurnRateCalculator', () => {
 
   it('shows 5.00% churn by default (50/1000, auto mode)', () => {
     render(<ChurnRateCalculator />);
-    expect(screen.getByText(/Churn Rate: 5\.00%/)).toBeDefined();
+    expect(screen.getByText('5.0%')).toBeDefined();
   });
 
   it('updates when inputs change', () => {

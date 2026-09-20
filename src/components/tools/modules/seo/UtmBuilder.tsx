@@ -46,8 +46,21 @@ export default function UtmBuilder() {
     { key: 'utm_content', label: 'Content', value: content, required: false, desc: 'A/B test variant' },
   ];
 
+  const customResult = result ? (
+    <div className="space-y-2">
+      <label className="block text-sm font-medium text-[var(--text-secondary)]">Result</label>
+      <div className="flex gap-2">
+        <input aria-label="UTM URL" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)]" />
+        <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors shrink-0">Copy</button>
+      </div>
+      <div className="text-xs text-[var(--text-muted)]">
+        <strong>Params:</strong> {new URL(result).searchParams.toString()}
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="UTM Builder" result={resultText} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
+    <CalculatorShell category="SEO" title="UTM Builder" result={resultText} customResult={customResult} onCalculate={build} presets={presets} accent="cyan" downloadData={result} downloadFilename="utm-url.txt">
       <div className="space-y-4">
         <label htmlFor="lbl-utmbuilder-base-url" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Base URL</label>
         <input id="lbl-utmbuilder-base-url" aria-label="Base URL" type="url" value={baseUrl} onChange={e => setBaseUrl(e.target.value)} placeholder="https://example.com/page"
@@ -74,19 +87,6 @@ export default function UtmBuilder() {
             </div>
           ))}
         </div>
-
-        {result && (
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-[var(--text-secondary)]">Result</label>
-            <div className="flex gap-2">
-              <input aria-label="UTM URL" readOnly value={result} className="flex-1 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)]" />
-              <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-4 py-2.5 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-xl text-sm transition-colors shrink-0">Copy</button>
-            </div>
-            <div className="text-xs text-[var(--text-muted)]">
-              <strong>Params:</strong> {new URL(result).searchParams.toString()}
-            </div>
-          </div>
-        )}
 
         <div className="bg-[var(--bg-surface)] rounded-xl p-3 border border-[var(--border-subtle)]">
           <div className="text-xs text-[var(--text-secondary)] mb-2">UTM Parameter Guide</div>

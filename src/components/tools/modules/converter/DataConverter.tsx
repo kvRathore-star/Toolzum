@@ -323,6 +323,34 @@ const copyOutput = useCallback(() => {
 
   const resultText = output ? `Converted ${srcFormat} → ${dstFormat} (${output.length} chars)` : 'Enter data to convert';
 
+  const customResult = output ? (
+    <div className="flex flex-col min-h-[300px]">
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
+          {dstFormat} Output
+        </h3>
+        <div className="flex gap-2">
+          <button
+            onClick={copyOutput}
+            className="text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors"
+          >
+            Copy
+          </button>
+          <button
+            onClick={downloadOutput}
+            className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
+          >
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+            .{FORMAT_EXT[dstFormat]}
+          </button>
+        </div>
+      </div>
+      <pre className="text-emerald-600 dark:text-emerald-400 m-0 font-mono text-sm whitespace-pre-wrap max-h-[440px] overflow-auto">
+        {output}
+      </pre>
+    </div>
+  ) : undefined;
+
   const formatOptions = FORMATS.map(k => <option key={k} value={k}>{k}</option>);
 
   const srcInfo = FORMAT_INFO[srcFormat];
@@ -332,6 +360,7 @@ const copyOutput = useCallback(() => {
     <CalculatorShell category="Converter"
       title="Data Format Converter"
       result={resultText}
+      customResult={customResult}
       onCalculate={handleConvert}
       presets={presets}
       accent="blue"
@@ -416,64 +445,25 @@ const copyOutput = useCallback(() => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-          <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl">
-            <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
-              <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
-                {srcFormat} Input
-              </h3>
-              <button
-                onClick={() => { setInput(''); setOutput(''); setValidationError(''); }}
-                className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors"
-              >
-                Clear
-              </button>
-            </div>
-            <textarea aria-label={`${srcFormat} input`}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={`Paste ${srcFormat} here...`}
-              className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] dark:placeholder:text-[var(--text-secondary)]"
-              spellCheck="false"
-            />
+        <div className="flex flex-col bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl h-[400px]">
+          <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
+            <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
+              {srcFormat} Input
+            </h3>
+            <button
+              onClick={() => { setInput(''); setOutput(''); setValidationError(''); }}
+              className="text-xs text-[var(--text-secondary)] hover:text-red-500 transition-colors"
+            >
+              Clear
+            </button>
           </div>
-
-          <div className="flex flex-col bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden shadow-xl">
-            <div className="bg-[var(--bg-overlay)]/80 border-b border-[var(--border-subtle)] px-4 py-3 flex justify-between items-center">
-              <h3 className="font-bold text-[var(--text-primary)] text-sm flex items-center gap-2">
-                {dstFormat} Output
-              </h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={copyOutput}
-                  disabled={!output}
-                  className="text-xs bg-[var(--bg-surface)] border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)] text-[var(--text-primary)] px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
-                >
-                  Copy
-                </button>
-                <button
-                  onClick={downloadOutput}
-                  disabled={!output}
-                  className="text-xs bg-[var(--accent-ink)] hover:opacity-90 text-white px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-1"
-                >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                  .{FORMAT_EXT[dstFormat]}
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-auto p-4">
-              {output ? (
-                <pre className="text-emerald-600 dark:text-emerald-400 m-0 font-mono text-sm whitespace-pre-wrap">
-                  {output}
-                </pre>
-              ) : (
-                <div className="h-full flex flex-col items-center justify-center text-[var(--text-muted)] space-y-2 opacity-50">
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-                  <span>{dstFormat} output will appear here</span>
-                </div>
-              )}
-            </div>
-          </div>
+          <textarea aria-label={`${srcFormat} input`}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={`Paste ${srcFormat} here...`}
+            className="flex-1 w-full p-4 bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 resize-none font-mono text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] dark:placeholder:text-[var(--text-secondary)]"
+            spellCheck="false"
+          />
         </div>
 
         {related.length > 0 && (

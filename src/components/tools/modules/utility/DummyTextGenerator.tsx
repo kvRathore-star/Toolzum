@@ -20,10 +20,24 @@ export default function DummyTextGenerator() {
 
   const resultText = result ? 'Generated ' + result.length + ' chars dummy text' : 'Configure and generate';
 
+  const customResult = result ? (
+    <div className="flex flex-col min-h-[200px]">
+      <textarea readOnly value={result} rows={6} aria-label="Generated text" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
+      <div className="flex items-center justify-between mt-2">
+        <span className="text-xs text-[var(--text-muted)]">{result.length} chars</span>
+        <div className="flex gap-1">
+          <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy dummy text"><Copy size={14} /></button>
+          <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'dummy-text.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download dummy text"><Download size={14} /></button>
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Dummy Text Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -37,20 +51,6 @@ export default function DummyTextGenerator() {
           <input type="range" min={10} max={5000} step={10} value={length} onChange={e => setLength(Number(e.target.value))} aria-label="Character Length" className="w-full accent-sky-500" />
           <input type="number" min={10} max={5000} value={length} onChange={e => setLength(Number(e.target.value))} aria-label="Character Length" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
-        {result ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-            <textarea readOnly value={result} rows={6} aria-label="Generated text" className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 font-sans text-xs leading-relaxed resize-none" />
-            <div className="flex items-center justify-between mt-2">
-              <span className="text-xs text-[var(--text-muted)]">{result.length} chars</span>
-              <div className="flex gap-1">
-                <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy dummy text"><Copy size={14} /></button>
-                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'dummy-text.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download dummy text"><Download size={14} /></button>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <p className="text-[var(--text-muted)] text-sm text-center">Generate dummy text</p>
-        )}
       </div>
     </CalculatorShell>
   );

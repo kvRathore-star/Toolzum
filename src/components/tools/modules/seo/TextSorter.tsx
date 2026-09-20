@@ -20,8 +20,19 @@ export default function TextSorter() {
 
   const resultText = sorted ? `Sorted ${outLines} lines (${sortMethod})` : 'Enter lines to sort';
 
+  const customResult = sorted ? (
+    <div className="flex flex-col min-h-[250px]">
+      <textarea readOnly value={sorted} rows={8} aria-label="Sorted text"
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
+      <div className="flex items-center justify-between mt-2">
+        <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>
+        <button onClick={() => { clipboardWrite(sorted).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy sorted lines"><Copy size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Text Sorter" result={resultText} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
+    <CalculatorShell category="SEO" title="Text Sorter" result={resultText} customResult={customResult} onCalculate={() => sort('az')} presets={presets} accent="violet" downloadData={sorted} downloadFilename="sorted.txt">
       <div className="space-y-4">
         <label htmlFor="lbl-textsorter-lines-inlines" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Lines ({inLines})</label>
         <textarea id="lbl-textsorter-lines-inlines" aria-label="Lines" value={text} onChange={e => { setText(e.target.value); setSorted(''); setSortMethod(''); }} rows={8}
@@ -37,17 +48,6 @@ export default function TextSorter() {
             </button>
           ))}
         </div>
-
-        {sorted && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[250px]">
-            <textarea readOnly value={sorted} rows={8} aria-label="Sorted text"
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
-            <div className="flex items-center justify-between mt-2">
-              <span className="text-xs text-[var(--text-muted)]">{outLines} lines (was {inLines})</span>
-              <button onClick={() => { clipboardWrite(sorted).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy sorted lines"><Copy size={14} /></button>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

@@ -29,8 +29,24 @@ export default function KeywordPlannerTool() {
 
   const totalWords = text.trim() ? text.split(/\s+/).length : 0;
 
+  const customResult = keywords.length > 0 ? (
+    <div className="flex flex-col min-h-[200px]">
+      <div className="max-h-[400px] overflow-y-auto space-y-1">
+        {keywords.map((k, i) => (
+          <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+            <span className="flex items-center gap-2">
+              <span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>
+              <span className="font-medium">{k.word}</span>
+            </span>
+            <span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(2)}%)</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Keyword Planner Tool" result={resultText} onCalculate={extract} presets={presets} accent="indigo" downloadData={keywords.length > 0 ? JSON.stringify({ totalWords, keywords }, null, 2) : ''} downloadFilename="keywords.json">
+    <CalculatorShell category="SEO" title="Keyword Planner Tool" result={resultText} customResult={customResult} onCalculate={extract} presets={presets} accent="indigo" downloadData={keywords.length > 0 ? JSON.stringify({ totalWords, keywords }, null, 2) : ''} downloadFilename="keywords.json">
       <div className="space-y-4">
         <div>
           <label htmlFor="lbl-keywordplannertool-text-content" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text Content</label>
@@ -45,21 +61,6 @@ export default function KeywordPlannerTool() {
           </div>
         </div>
 
-        {keywords.length > 0 && (
-          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
-            <div className="max-h-[400px] overflow-y-auto space-y-1">
-              {keywords.map((k, i) => (
-                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
-                  <span className="flex items-center gap-2">
-                    <span className="text-xs text-[var(--text-muted)] w-5">{i + 1}</span>
-                    <span className="font-medium">{k.word}</span>
-                  </span>
-                  <span className="font-mono text-xs text-[var(--text-muted)]">{k.count} ({k.density.toFixed(2)}%)</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

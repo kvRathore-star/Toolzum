@@ -34,10 +34,33 @@ export default function FakeIdentityGenerator() {
 
   const resultText = identities.length > 0 ? `Generated ${identities.length} identit${identities.length === 1 ? 'y' : 'ies'} (${gender}, ${COUNTRIES.find(c => c.id === country)?.label})` : 'Generate a random identity';
 
+  const customResult = identities.length > 0 ? (
+    <div className="flex flex-col min-h-[200px]">
+      <div className="space-y-3">
+        {identities.map((identity, idx) => (
+          <div key={idx} className="flex flex-col">
+            <div className="space-y-3">
+              <div className="flex justify-center">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
+              </div>
+              <div className="p-4 bg-[var(--bg-surface)] rounded-xl text-sm space-y-1.5">
+                {[['Name', identity.name], ['Email', identity.email], ['Phone', identity.phone], ['Address', identity.address], ['DOB', identity.dob], ['Occupation', identity.occupation]].map(([k, v]) => (
+                  <div key={k as string} className="flex justify-between"><span className="font-bold text-[var(--text-secondary)]">{k as string}</span><span className="text-[var(--text-primary)]">{v as string}</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+        <button onClick={() => { clipboardWrite(JSON.stringify(identities, null, 2)).then(ok => { if (ok) toast.success('Copied as JSON!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Fake Identity Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -67,27 +90,6 @@ export default function FakeIdentityGenerator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2" />
           </div>
         </div>
-        {identities.length > 0 ? (
-          <div className="space-y-3">
-            {identities.map((identity, idx) => (
-          <div key={idx} className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-            <div className="space-y-3">
-              <div className="flex justify-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[var(--accent-ink)] to-purple-600 flex items-center justify-center text-2xl font-bold text-white shadow-lg">{identity.name.split(' ').map((w: string) => w[0]).join('')}</div>
-              </div>
-              <div className="p-4 bg-[var(--bg-surface)] rounded-xl text-sm space-y-1.5">
-                {[['Name', identity.name], ['Email', identity.email], ['Phone', identity.phone], ['Address', identity.address], ['DOB', identity.dob], ['Occupation', identity.occupation]].map(([k, v]) => (
-                  <div key={k as string} className="flex justify-between"><span className="font-bold text-[var(--text-secondary)]">{k as string}</span><span className="text-[var(--text-primary)]">{v as string}</span></div>
-                ))}
-              </div>
-            </div>
-          </div>
-            ))}
-            <button onClick={() => { clipboardWrite(JSON.stringify(identities, null, 2)).then(ok => { if (ok) toast.success('Copied as JSON!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors">Copy as JSON</button>
-          </div>
-        ) : (
-          <p className="text-[var(--text-muted)] text-sm text-center">Generate a random identity</p>
-        )}
       </div>
     </CalculatorShell>
   );

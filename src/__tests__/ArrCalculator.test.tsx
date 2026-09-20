@@ -16,7 +16,7 @@ describe('ArrCalculator', () => {
 
   it('shows ARR result by default (100000 + 20000 - 5000, auto mode)', () => {
     render(<ArrCalculator />);
-    expect(screen.getByText(/\$115,000 ARR/)).toBeDefined();
+    expect(screen.getByText('$115,000')).toBeDefined();
   });
 
   it('updates when inputs change', () => {

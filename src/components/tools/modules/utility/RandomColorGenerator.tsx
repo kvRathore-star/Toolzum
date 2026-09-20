@@ -40,10 +40,25 @@ export default function RandomColorGenerator() {
 
   const resultText = colors.length > 0 ? 'Generated ' + colors.length + ' ' + format.toUpperCase() + ' colors' : 'Configure and generate';
 
+  const customResult = colors.length > 0 ? (
+    <div className="flex flex-col min-h-[120px]">
+      <div className="flex flex-wrap gap-3 justify-center">
+        {colors.map((c, i) => (
+          <div key={i} className="flex flex-col items-center gap-1">
+            <div className="w-14 h-14 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] shadow-sm" style={{ backgroundColor: c }} />
+            <span className="text-[10px] font-mono text-[var(--text-muted)]">{c}</span>
+            <button onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Color Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -63,23 +78,6 @@ export default function RandomColorGenerator() {
             </select>
           </div>
         </div>
-
-        {colors.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[120px]">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {colors.map((c, i) => (
-                <div key={i} className="flex flex-col items-center gap-1">
-                  <div className="w-14 h-14 rounded-xl border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] shadow-sm" style={{ backgroundColor: c }} />
-                  <span className="text-[10px] font-mono text-[var(--text-muted)]">{c}</span>
-                  <button onClick={() => { clipboardWrite(c).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {!colors.length && (
-          <p className="text-[var(--text-muted)] text-sm text-center">Configure options and generate colors</p>
-        )}
       </div>
     </CalculatorShell>
   );

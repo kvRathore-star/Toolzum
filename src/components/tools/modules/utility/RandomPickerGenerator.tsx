@@ -19,10 +19,18 @@ export default function RandomPickerGenerator() {
 
   const resultText = result.length > 0 ? 'Picked ' + result.length + ' of ' + input.split('\n').filter(Boolean).length + ' items (' + (allowRepeat ? 'with' : 'without') + ' repeats)' : 'Add items and pick';
 
+  const customResult = result.length > 0 ? (
+    <div className="flex flex-col justify-center items-center min-h-[160px] text-center">
+      <p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p>
+      <button onClick={() => { clipboardWrite(result.join(', ')).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy picked items"><Copy size={14} /></button>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Picker Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={pick}
       calculateLabel="Generate"
       presets={presets}
@@ -34,17 +42,6 @@ export default function RandomPickerGenerator() {
         <Input label="Items (one per line)" value={input} onChange={v => setInput(v)} rows={5} />
         <Input label="Pick Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={allowRepeat} onChange={e => setAllowRepeat(e.target.checked)} className="accent-[var(--accent)]" />Allow repeats</label>
-        {result.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[160px]">
-            <div className="text-center">
-              <p className="text-3xl font-extrabold text-violet-500">{result.join(', ')}</p>
-              <button onClick={() => { clipboardWrite(result.join(', ')).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy picked items"><Copy size={14} /></button>
-            </div>
-          </div>
-        )}
-        {!result.length && (
-          <p className="text-[var(--text-muted)] text-sm text-center">Add items and pick</p>
-        )}
       </div>
     </CalculatorShell>
   );

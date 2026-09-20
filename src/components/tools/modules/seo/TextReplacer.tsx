@@ -16,8 +16,21 @@ export default function TextReplacer() {
   ];
   const resultText = result ? `Replaced ${count} occurrence${count !== 1 ? 's' : ''}` : 'Enter text to find and replace';
 
+  const customResult = result ? (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span>
+        <div className="flex gap-2">
+          <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Copy</button>
+          <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'replaced.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Download</button>
+        </div>
+      </div>
+      <textarea aria-label="Replacement result" readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Text Replacer" result={resultText} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
+    <CalculatorShell category="SEO" title="Text Replacer" result={resultText} customResult={customResult} onCalculate={replaceAll} presets={presets} accent="amber" downloadData={result} downloadFilename="replaced.txt">
       <div className="space-y-4">
         <label htmlFor="lbl-textreplacer-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
         <textarea id="lbl-textreplacer-text" aria-label="Text" value={text} onChange={e => { setText(e.target.value); setResult(''); }} rows={6} placeholder="Enter text..."
@@ -35,19 +48,6 @@ export default function TextReplacer() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50" />
           </div>
         </div>
-
-        {result && (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs text-[var(--text-muted)]">{count} replacement{count !== 1 ? 's' : ''}</span>
-              <div className="flex gap-2">
-                <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Copy</button>
-                <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'replaced.txt'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">Download</button>
-              </div>
-            </div>
-            <textarea aria-label="Replacement result" readOnly value={result} rows={8} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

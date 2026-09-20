@@ -40,10 +40,50 @@ export default function PercentageDifferenceCalculator() {
   const barColorA = 'bg-blue-500';
   const barColorB = numB > numA ? 'bg-emerald-500' : numB < numA ? 'bg-rose-500' : 'bg-blue-500';
 
+  const customResult = avg > 0 ? (
+    <div className="space-y-3">
+      <div className="flex items-baseline gap-2">
+        <span className={`text-3xl font-bold ${diffColor}`}>{diff.toFixed(2)}%</span>
+        <span className="text-sm text-[var(--text-secondary)]">difference</span>
+      </div>
+      <div className="space-y-1.5">
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-[var(--text-secondary)] w-16 text-right">A</span>
+          <div className="flex-1 h-5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
+            <div className={`h-full ${barColorA} rounded-full transition-all duration-500`} style={{ width: `${barA}%` }} />
+          </div>
+          <span className="text-xs font-mono text-[var(--text-secondary)] w-20">{numA.toLocaleString()}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-[var(--text-secondary)] w-16 text-right">B</span>
+          <div className="flex-1 h-5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
+            <div className={`h-full ${barColorB} rounded-full transition-all duration-500`} style={{ width: `${barB}%` }} />
+          </div>
+          <span className="text-xs font-mono text-[var(--text-secondary)] w-20">{numB.toLocaleString()}</span>
+        </div>
+      </div>
+      <div className="grid grid-cols-3 gap-2 pt-1">
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Average</div>
+          <div className="text-sm font-semibold text-[var(--text-primary)]">{avg.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+        </div>
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Absolute Δ</div>
+          <div className="text-sm font-semibold text-[var(--text-primary)]">{absDiff.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
+        </div>
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Relative Δ</div>
+          <div className="text-sm font-semibold text-[var(--text-primary)]">{diff.toFixed(2)}%</div>
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Math"
       title="Percentage Difference"
       result={resultText}
+      customResult={customResult}
       auto
       presets={presets}
       accent="emerald"
@@ -64,47 +104,6 @@ export default function PercentageDifferenceCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>
-
-        {avg > 0 && (
-          <div className="space-y-3">
-            <div className="flex items-baseline gap-2">
-              <span className={`text-3xl font-bold ${diffColor}`}>{diff.toFixed(2)}%</span>
-              <span className="text-sm text-[var(--text-secondary)]">difference</span>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-[var(--text-secondary)] w-16 text-right">A</span>
-                <div className="flex-1 h-5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
-                  <div className={`h-full ${barColorA} rounded-full transition-all duration-500`} style={{ width: `${barA}%` }} />
-                </div>
-                <span className="text-xs font-mono text-[var(--text-secondary)] w-20">{numA.toLocaleString()}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-[var(--text-secondary)] w-16 text-right">B</span>
-                <div className="flex-1 h-5 bg-[var(--bg-surface)] rounded-full overflow-hidden">
-                  <div className={`h-full ${barColorB} rounded-full transition-all duration-500`} style={{ width: `${barB}%` }} />
-                </div>
-                <span className="text-xs font-mono text-[var(--text-secondary)] w-20">{numB.toLocaleString()}</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 pt-1">
-              <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-                <div className="text-xs text-[var(--text-secondary)]">Average</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)]">{avg.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
-              </div>
-              <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-                <div className="text-xs text-[var(--text-secondary)]">Absolute Δ</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)]">{absDiff.toLocaleString(undefined, { maximumFractionDigits: 2 })}</div>
-              </div>
-              <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-                <div className="text-xs text-[var(--text-secondary)]">Relative Δ</div>
-                <div className="text-sm font-semibold text-[var(--text-primary)]">{diff.toFixed(2)}%</div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

@@ -22,8 +22,33 @@ export default function CAGRCalculator() {
 
   const resultText = s > 0 && y > 0 ? `CAGR: ${cagr.toFixed(2)}% (Total: ${totalReturn.toFixed(2)}%)` : 'Enter valid values';
 
+  const customResult = s > 0 && y > 0 ? (
+    <div className="space-y-4">
+      <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
+        <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">Compound Annual Growth Rate</div>
+        <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${cagr.toFixed(2)}%</div>
+        <div className="text-xs text-[var(--text-secondary)] mt-1">Total return: ${totalReturn.toFixed(2)}%</div>
+      </div>
+      <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+        <div className="text-xs text-[var(--text-secondary)] mb-2">Year-by-Year Growth</div>
+        <div className="max-h-48 overflow-auto space-y-1">
+          {Array.from({ length: y }, (_, i) => {
+            const year = i + 1;
+            const value = s * Math.pow(e / s, year / y);
+            return (
+              <div key={year} className="flex justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+                <span>Year ${year}</span>
+                <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">${value.toFixed(2)}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Math" title="CAGR Calculator" result={resultText} auto presets={presets} accent="emerald" downloadData={`StartValue,EndValue,Years,CAGR,TotalReturn\n${s},${e},${y},${cagr.toFixed(2)},${totalReturn.toFixed(2)}`} downloadFilename="cagr-calculation.csv">
+    <CalculatorShell category="Math" title="CAGR Calculator" result={resultText} customResult={customResult} auto presets={presets} accent="emerald" downloadData={`StartValue,EndValue,Years,CAGR,TotalReturn\n${s},${e},${y},${cagr.toFixed(2)},${totalReturn.toFixed(2)}`} downloadFilename="cagr-calculation.csv">
       <div className="space-y-4">
         <div className="grid grid-cols-3 gap-2">
           <div>
@@ -42,32 +67,6 @@ export default function CAGRCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
           </div>
         </div>
-
-        {s > 0 && y > 0 && (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mb-1">Compound Annual Growth Rate</div>
-            <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">${cagr.toFixed(2)}%</div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">Total return: ${totalReturn.toFixed(2)}%</div>
-          </div>
-        )}
-
-        {s > 0 && y > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Year-by-Year Growth</div>
-            <div className="max-h-48 overflow-auto space-y-1">
-              {Array.from({ length: y }, (_, i) => {
-                const year = i + 1;
-                const value = s * Math.pow(e / s, year / y);
-                return (
-                  <div key={year} className="flex justify-between p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
-                    <span>Year ${year}</span>
-                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">${value.toFixed(2)}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
 
         <div className="bg-[var(--bg-surface)] rounded-xl p-3">
           <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>

@@ -55,12 +55,10 @@ export function PortNumberLookup() {
   const resultText = result || 'Enter port number to lookup';
 
   return (
-    <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
+    <CalculatorShell category="Developer" title="Port Number Lookup" result={resultText} customResult={result ? (<pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>) : undefined} onCalculate={lookup} presets={presets} accent="indigo" downloadData={result} downloadFilename="port-lookup.txt">
       <label htmlFor="lbl-devutilitywidgets-port-number" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Port Number</label>
       <input id="lbl-devutilitywidgets-port-number" aria-label="Port Number" type="number" value={port} onChange={e => setPort(e.target.value)} min={1} max={65535}
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
-
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -91,12 +89,10 @@ export function UserAgentParser() {
   const resultText = result || 'Enter User-Agent string to parse';
 
   return (
-    <CalculatorShell category="Developer" title="User-Agent Parser" result={resultText} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
+    <CalculatorShell category="Developer" title="User-Agent Parser" result={resultText} customResult={result ? (<pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>) : undefined} onCalculate={parse} presets={presets} accent="purple" downloadData={result} downloadFilename="ua-parse.txt">
       <label htmlFor="lbl-devutilitywidgets-user-agent-string" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">User-Agent String</label>
       <textarea id="lbl-devutilitywidgets-user-agent-string" aria-label="User-Agent String" value={ua} onChange={e => setUa(e.target.value)} rows={3} placeholder="Paste User-Agent string..."
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-purple-500/50 resize-y" />
-
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -125,12 +121,10 @@ export function QueryStringParser() {
   const resultText = result || 'Enter query string to parse';
 
   return (
-    <CalculatorShell category="Developer" title="Query String Parser" result={resultText} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
+    <CalculatorShell category="Developer" title="Query String Parser" result={resultText} customResult={result ? (<pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>) : undefined} onCalculate={parse} presets={presets} accent="emerald" downloadData={result} downloadFilename="query-params.json">
       <label htmlFor="lbl-devutilitywidgets-query-string" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Query String</label>
       <input id="lbl-devutilitywidgets-query-string" aria-label="Query String" type="text" value={qs} onChange={e => setQs(e.target.value)} placeholder="?key=value&foo=bar"
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-emerald-500/50" />
-
-      {result && <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>}
     </CalculatorShell>
   );
 }
@@ -356,16 +350,12 @@ export function PricingTierBuilder() {
   const resultText = result ? 'Pricing tiers built' : 'Enter tiers JSON to build';
 
   return (
-    <CalculatorShell category="Developer" title="Pricing Tier Builder" result={resultText} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
+    <CalculatorShell category="Developer" title="Pricing Tier Builder" result={resultText} customResult={result ? (<pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>) : undefined} onCalculate={build} presets={presets} accent="indigo" downloadData={result} downloadFilename="pricing-tiers.txt">
       <div className="space-y-4">
         <label htmlFor="lbl-devutilitywidgets-tiers-json" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Tiers JSON</label>
         <textarea id="lbl-devutilitywidgets-tiers-json" aria-label="Tiers JSON" value={tiers} onChange={e => setTiers(e.target.value)} rows={6}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50 resize-y"
           placeholder='[{"name": "Free", "price": 0, "users": 1, "features": ["Basic"]}]' />
-
-        {result && (
-          <pre className="p-4 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl text-sm font-mono whitespace-pre-wrap">{result}</pre>
-        )}
       </div>
     </CalculatorShell>
   );

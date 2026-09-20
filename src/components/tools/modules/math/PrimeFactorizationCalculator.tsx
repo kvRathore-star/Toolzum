@@ -23,50 +23,46 @@ export default function PrimeFactorizationCalculator() {
 
   const resultText = nn >= 2 ? `${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}^${fc.count}` : fc.prime).join(' × ')}` : 'Enter number ≥ 2';
 
+  const customResult = nn >= 2 ? (
+    <div className="space-y-4">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
+        <div className="text-xs text-[var(--accent)] font-medium mb-1">Factorization</div>
+        <div className="text-2xl font-bold text-[var(--accent)] font-mono break-all">
+          ${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}<sup>${fc.count}</sup>` : fc.prime).join(' × ')}
+        </div>
+      </div>
+      <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+        <div className="text-xs text-[var(--text-secondary)] mb-2">Prime Factors Detail</div>
+        <div className="space-y-1.5">
+          {factorCounts.map(fc => (
+            <div key={fc.prime} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg">
+              <span className="font-mono font-bold text-[var(--accent)]">${fc.prime}</span>
+              <span className="text-sm text-[var(--text-secondary)]">
+                ${fc.count > 1 ? `^${fc.count} (${fc.prime} × ${' × '.repeat(fc.count - 1)}${fc.prime})` : ''}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Unique Primes</div>
+          <div className="text-sm font-bold text-[var(--text-primary)]">${uniqueFactors.length}</div>
+        </div>
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Total Factors</div>
+          <div className="text-sm font-bold text-[var(--text-primary)]">${f.length}</div>
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Math" title="Prime Factorization" result={resultText} auto presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
+    <CalculatorShell category="Math" title="Prime Factorization" result={resultText} customResult={customResult} auto presets={presets} accent="blue" downloadData={nn >= 2 ? JSON.stringify({ number: nn, factors: factorCounts }, null, 2) : ''} downloadFilename="factors.json">
       <div className="space-y-4">
         <label htmlFor="lbl-primefactorizationcalculator-number-2" className={labelClass}>Number (≥ 2)</label>
         <input id="lbl-primefactorizationcalculator-number-2" aria-label="Number (≥ 2)" type="number" min={2} value={n} onChange={e => setN(e.target.value)}
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
-
-        {nn >= 2 && (
-          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-[var(--accent)] font-medium mb-1">Factorization</div>
-            <div className="text-2xl font-bold text-[var(--accent)] font-mono break-all">
-              ${nn} = ${factorCounts.map(fc => fc.count > 1 ? `${fc.prime}<sup>${fc.count}</sup>` : fc.prime).join(' × ')}
-            </div>
-          </div>
-        )}
-
-        {nn >= 2 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Prime Factors Detail</div>
-            <div className="space-y-1.5">
-              {factorCounts.map(fc => (
-                <div key={fc.prime} className="flex items-center justify-between p-2 bg-[var(--bg-overlay)] rounded-lg">
-                  <span className="font-mono font-bold text-[var(--accent)]">${fc.prime}</span>
-                  <span className="text-sm text-[var(--text-secondary)]">
-                    ${fc.count > 1 ? `^${fc.count} (${fc.prime} × ${' × '.repeat(fc.count - 1)}${fc.prime})` : ''}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {nn >= 2 && (
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">Unique Primes</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">${uniqueFactors.length}</div>
-            </div>
-            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">Total Factors</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">${f.length}</div>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

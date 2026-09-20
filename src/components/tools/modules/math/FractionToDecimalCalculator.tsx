@@ -21,8 +21,31 @@ export default function FractionToDecimalCalculator() {
 
   const resultText = d ? `${n}/${d} = ${decimal.toFixed(6)} (${percent}%)` : 'Enter denominator';
 
+  const customResult = d ? (
+    <div className="space-y-4">
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
+        <div className="text-xs text-[var(--accent)] font-medium mb-1">Decimal Value</div>
+        <div className="text-3xl font-bold text-[var(--accent)] font-mono">${decimal.toFixed(6)}</div>
+        <div className="text-xs text-[var(--text-secondary)] mt-1">${percent}%</div>
+      </div>
+      <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+        <div className="text-xs text-[var(--text-secondary)] mb-2">Equivalent Fractions</div>
+        <div className="flex flex-wrap gap-2">
+          {[
+            Math.round(n * 2) + '/' + Math.round(d * 2),
+            Math.round(n * 3) + '/' + Math.round(d * 3),
+            Math.round(n * 4) + '/' + Math.round(d * 4),
+            Math.round(n * 5) + '/' + Math.round(d * 5),
+          ].map(f => (
+            <span key={f} className="px-2 py-1 bg-[var(--bg-overlay)] rounded-lg text-sm font-mono">${f}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Math" title="Fraction to Decimal" result={resultText} auto presets={presets} accent="blue" downloadData={d ? `Fraction,Decimal,Percent\n${n}/${d},${decimal.toFixed(6)},${percent}` : ''} downloadFilename="fraction-decimal.csv">
+    <CalculatorShell category="Math" title="Fraction to Decimal" result={resultText} customResult={customResult} auto presets={presets} accent="blue" downloadData={d ? `Fraction,Decimal,Percent\n${n}/${d},${decimal.toFixed(6)},${percent}` : ''} downloadFilename="fraction-decimal.csv">
       <div className="space-y-4">
         <div className="flex gap-2 items-center">
           <div className="flex-1">
@@ -37,30 +60,6 @@ export default function FractionToDecimalCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
           </div>
         </div>
-
-        {d && (
-          <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-[var(--accent)] font-medium mb-1">Decimal Value</div>
-            <div className="text-3xl font-bold text-[var(--accent)] font-mono">${decimal.toFixed(6)}</div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">${percent}%</div>
-          </div>
-        )}
-
-        {d && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Equivalent Fractions</div>
-            <div className="flex flex-wrap gap-2">
-              {[
-                Math.round(n * 2) + '/' + Math.round(d * 2),
-                Math.round(n * 3) + '/' + Math.round(d * 3),
-                Math.round(n * 4) + '/' + Math.round(d * 4),
-                Math.round(n * 5) + '/' + Math.round(d * 5),
-              ].map(f => (
-                <span key={f} className="px-2 py-1 bg-[var(--bg-overlay)] rounded-lg text-sm font-mono">${f}</span>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

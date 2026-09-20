@@ -20,10 +20,25 @@ export default function RandomUsernameGenerator() {
 
   const resultText = results.length > 0 ? 'Generated ' + results.length + ' usernames (' + pattern + ')' : 'Configure and generate';
 
+  const customResult = results.length > 0 ? (
+    <div className="flex flex-col min-h-[160px]">
+      <div className="space-y-1 max-h-[300px] overflow-y-auto">
+        {results.map((u, i) => (
+          <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
+            <span className="font-mono">{u}</span>
+            <button aria-label={`Copy username ${u}`} onClick={() => { clipboardWrite(u).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
+          </div>
+        ))}
+        <button onClick={() => { clipboardWrite(results.join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Username Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -38,22 +53,6 @@ export default function RandomUsernameGenerator() {
         </div>
         <Input label="Count" type="number" value={String(count)} onChange={v => setCount(Number(v))} />
         <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)]"><input type="checkbox" checked={includeNum} onChange={e => setIncludeNum(e.target.checked)} className="accent-[var(--accent)]" />Append random number</label>
-        {results.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[160px]">
-            <div className="space-y-1 max-h-[300px] overflow-y-auto">
-              {results.map((u, i) => (
-                <div key={i} className="flex items-center justify-between p-2 bg-[var(--bg-surface)] rounded-lg text-sm">
-                  <span className="font-mono">{u}</span>
-                  <button aria-label={`Copy username ${u}`} onClick={() => { clipboardWrite(u).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="text-xs text-[var(--accent)] hover:underline"><Copy size={12} /></button>
-                </div>
-              ))}
-              <button onClick={() => { clipboardWrite(results.join('\n')).then(ok => { if (ok) toast.success('Copied all!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="px-3 py-1.5 text-xs font-medium bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors mt-2">Copy All</button>
-            </div>
-          </div>
-        )}
-        {!results.length && (
-          <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate usernames</p>
-        )}
       </div>
     </CalculatorShell>
   );

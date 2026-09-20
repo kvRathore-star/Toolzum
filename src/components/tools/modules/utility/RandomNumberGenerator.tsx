@@ -29,10 +29,22 @@ export default function RandomNumberGenerator() {
 
   const resultText = result.length > 0 ? 'Generated ' + result.length + ' numbers (' + (unique ? 'unique' : 'with repeats') + ')' : 'Configure range and generate';
 
+  const customResult = result.length > 0 ? (
+    <div className="flex flex-col justify-center min-h-[160px]">
+      <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
+      <p className="text-xs text-[var(--text-muted)] mt-2">{result.length} numbers · {sort ? 'sorted' : 'unsorted'} · {unique ? 'unique' : 'repeatable'}</p>
+      <div className="flex gap-1 mt-2">
+        <button onClick={() => { clipboardWrite(result.join(', ')).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy numbers"><Copy size={14} /></button>
+        <button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'random-numbers.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download as CSV"><Download size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Number Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -67,17 +79,6 @@ export default function RandomNumberGenerator() {
             <input type="checkbox" checked={sort} onChange={e => setSort(e.target.checked)} className="accent-[var(--accent)]" />Sorted
           </label>
         </div>
-
-        {result.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center min-h-[160px]">
-            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all">{result.join(', ')}</p>
-            <p className="text-xs text-[var(--text-muted)] mt-2">{result.length} numbers · {sort ? 'sorted' : 'unsorted'} · {unique ? 'unique' : 'repeatable'}</p>
-            <div className="flex gap-1 mt-2">
-              <button onClick={() => { clipboardWrite(result.join(', ')).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy numbers"><Copy size={14} /></button>
-              <button onClick={() => { const blob = new Blob([result.join('\n')], { type: 'text/csv' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'random-numbers.csv'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download as CSV"><Download size={14} /></button>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

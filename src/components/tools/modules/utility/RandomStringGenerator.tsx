@@ -25,8 +25,15 @@ export default function RandomStringGenerator() {
 
   const resultText = result ? 'Generated ' + result.length + '-char string (' + charset + ')' : 'Configure and generate';
 
+  const customResult = result ? (
+    <div className="flex flex-col items-center min-h-[120px]">
+      <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
+      <p className="text-xs text-[var(--text-muted)] mt-1">{result.length} chars ({charset})</p>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Utility" title="Random String Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
+    <CalculatorShell category="Utility" title="Random String Generator" result={resultText} customResult={customResult} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="indigo" downloadData={result} downloadFilename="random-string.txt">
       <div className="space-y-4">
         <div className="flex flex-wrap gap-2">
           {STRING_PRESETS.map(p => (
@@ -63,13 +70,6 @@ export default function RandomStringGenerator() {
               className={'px-3 py-1.5 text-xs font-bold rounded-lg transition-all ' + (length === n ? 'bg-[var(--accent-ink)] text-white' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)]')}>{n}</button>
           ))}
         </div>
-
-        {result && (
-          <div className="bg-[var(--accent)]/10/30 border border-[var(--accent)]/20 rounded-xl p-4 flex flex-col items-center min-h-[120px]">
-            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
-            <p className="text-xs text-[var(--text-muted)] mt-1">{result.length} chars ({charset})</p>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

@@ -37,10 +37,25 @@ export default function RandomPortGenerator() {
 
   const resultText = ports.length > 0 ? `Generated ${ports.length} port${ports.length === 1 ? '' : 's'}: ${ports.join(', ')}` : 'Select ranges and generate';
 
+  const customResult = ports.length > 0 ? (
+    <div className="space-y-2">
+      <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+        {ports.map((p, i) => (
+          <div key={i} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-center">
+            <span className="text-sm font-mono font-bold text-[var(--accent)]">{p}</span>
+            <button onClick={() => copy(String(p), 'Port')} className="block text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] mt-0.5 w-full text-center">Copy</button>
+          </div>
+        ))}
+      </div>
+      <button onClick={() => copy(ports.join(', '), 'Ports')} className="text-[11px] text-[var(--accent)] hover:underline">Copy All</button>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Port Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -69,21 +84,6 @@ export default function RandomPortGenerator() {
           );
         })}
       </div>
-      {ports.length > 0 ? (
-        <div className="space-y-2">
-        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-          {ports.map((p, i) => (
-            <div key={i} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-center">
-              <span className="text-sm font-mono font-bold text-[var(--accent)]">{p}</span>
-              <button onClick={() => copy(String(p), 'Port')} className="block text-[10px] text-[var(--text-muted)] hover:text-[var(--text-primary)] mt-0.5 w-full text-center">Copy</button>
-            </div>
-          ))}
-        </div>
-        <button onClick={() => copy(ports.join(', '), 'Ports')} className="text-[11px] text-[var(--accent)] hover:underline">Copy All</button>
-        </div>
-      ) : (
-        <p className="text-[var(--text-muted)] text-sm text-center">Select port ranges and press Generate — no ports yet</p>
-      )}
     </div>
     </CalculatorShell>
   );

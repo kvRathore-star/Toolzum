@@ -33,31 +33,34 @@ export default function ArrCalculator() {
     { label: 'Hypergrowth', apply: () => { setSubRev('200000'); setExpRev('80000'); setChurnRev('5000'); } },
   ];
 
+  const customResult = hasInput ? (
+    <div className="space-y-2">
+      {bars.map(bar => (
+        <div key={bar.label}>
+          <div className="flex justify-between text-xs mb-1">
+            <span className="text-[var(--text-secondary)]">{bar.label}</span>
+            <span className="text-[var(--text-primary)] font-medium">${bar.value.toLocaleString()}</span>
+          </div>
+          <div className="h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
+            <div className={`h-full rounded-full transition-all duration-500 ${bar.color}`} style={{ width: `${Math.abs(bar.value) / maxVal * 100}%` }} />
+          </div>
+        </div>
+      ))}
+      <div className="pt-2 border-t border-[var(--border-subtle)]">
+        <div className="flex justify-between text-sm font-bold">
+          <span className="text-[var(--text-primary)]">ARR</span>
+          <span className="text-[var(--accent)]">${arr.toLocaleString()}</span>
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Finance" title="ARR Calculator" result={result} auto presets={presets} accent="blue">
+    <CalculatorShell category="Finance" title="ARR Calculator" result={result} customResult={customResult} auto presets={presets} accent="blue">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div><label htmlFor="lbl-arrcalculator-subscription-revenue" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Subscription Revenue ($)</label><input id="lbl-arrcalculator-subscription-revenue" aria-label="Subscription Revenue ($)" type="number" value={subRev} onChange={e => setSubRev(e.target.value)} className={inputCls} /></div>
         <div><label htmlFor="lbl-arrcalculator-expansion-revenue" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Expansion Revenue ($)</label><input id="lbl-arrcalculator-expansion-revenue" aria-label="Expansion Revenue ($)" type="number" value={expRev} onChange={e => setExpRev(e.target.value)} className={inputCls} /></div>
         <div><label htmlFor="lbl-arrcalculator-churn-revenue" className="block text-sm font-bold text-[var(--text-primary)] mb-1.5">Churn Revenue ($)</label><input id="lbl-arrcalculator-churn-revenue" aria-label="Churn Revenue ($)" type="number" value={churnRev} onChange={e => setChurnRev(e.target.value)} className={inputCls} /></div>
-      </div>
-      <div className="space-y-2">
-        {hasInput && bars.map(bar => (
-          <div key={bar.label}>
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-[var(--text-secondary)]">{bar.label}</span>
-              <span className="text-[var(--text-primary)] font-medium">${bar.value.toLocaleString()}</span>
-            </div>
-            <div className="h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
-              <div className={`h-full rounded-full transition-all duration-500 ${bar.color}`} style={{ width: `${Math.abs(bar.value) / maxVal * 100}%` }} />
-            </div>
-          </div>
-        ))}
-        <div className="pt-2 border-t border-[var(--border-subtle)]">
-          <div className="flex justify-between text-sm font-bold">
-            <span className="text-[var(--text-primary)]">ARR</span>
-            <span className="text-[var(--accent)]">${arr.toLocaleString()}</span>
-          </div>
-        </div>
       </div>
     </CalculatorShell>
   );

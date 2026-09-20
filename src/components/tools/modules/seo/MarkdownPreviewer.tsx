@@ -45,17 +45,17 @@ export default function MarkdownPreviewer() {
 
   const resultText = html ? 'Markdown rendered to HTML' : 'Enter Markdown to preview';
 
+  const customResult = html ? (
+    <div className="min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">
+      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Markdown Previewer" result={resultText} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
+    <CalculatorShell category="SEO" title="Markdown Previewer" result={resultText} customResult={customResult} onCalculate={preview} presets={presets} accent="amber" downloadData={html} downloadFilename="preview.html">
       <label className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Markdown</label>
       <textarea aria-label="Markdown" value={md} onChange={e => setMd(e.target.value)} rows={10} placeholder="Enter Markdown..."
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm font-mono text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-amber-500/50 resize-y" />
-
-      {html && (
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 min-h-[300px] prose prose-sm dark:prose-invert max-w-none overflow-auto">
-          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(html) }} />
-        </div>
-      )}
     </CalculatorShell>
   );
 }

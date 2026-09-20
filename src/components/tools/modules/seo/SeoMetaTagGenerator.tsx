@@ -24,8 +24,20 @@ export default function SeoMetaTagGenerator() {
 
   const resultText = result ? 'Meta tags generated successfully' : 'Enter details to generate meta tags';
 
+  const customResult = result ? (
+    <div className="flex flex-col">
+      <label htmlFor="lbl-seometataggenerator-generated-meta-tags" className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Generated Meta Tags</label>
+      <textarea id="lbl-seometataggenerator-generated-meta-tags" aria-label="Generated Meta Tags" readOnly value={result} rows={10}
+        className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
+      <div className="flex items-center gap-3 mt-2">
+        <button aria-label="Copy meta tags" onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>
+        <button aria-label="Download meta tags" onClick={() => { const blob = new Blob([result], { type: 'text/html' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'meta-tags.html'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"><Download size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="SEO Meta Tag Generator" result={resultText} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
+    <CalculatorShell category="SEO" title="SEO Meta Tag Generator" result={resultText} customResult={customResult} onCalculate={generate} calculateLabel="Generate" presets={presets} accent="blue" downloadData={result} downloadFilename="meta-tags.html">
       <div className="space-y-4">
         <div>
           <label htmlFor="lbl-seometataggenerator-title-60" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Title (<span id="title-len">{title.length}</span>/60)</label>
@@ -42,18 +54,6 @@ export default function SeoMetaTagGenerator() {
           <input id="lbl-seometataggenerator-keywords" aria-label="Keywords" type="text" value={keywords} onChange={e => setKeywords(e.target.value)} placeholder="toolzum, online tools, free tools"
             className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50" />
         </div>
-
-        {result && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
-            <label htmlFor="lbl-seometataggenerator-generated-meta-tags" className="block text-sm font-medium text-[var(--text-secondary)] mb-2">Generated Meta Tags</label>
-            <textarea id="lbl-seometataggenerator-generated-meta-tags" aria-label="Generated Meta Tags" readOnly value={result} rows={10}
-              className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] font-mono text-xs resize-none" />
-            <div className="flex items-center gap-3 mt-2">
-              <button aria-label="Copy meta tags" onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"><Copy size={14} /></button>
-              <button aria-label="Download meta tags" onClick={() => { const blob = new Blob([result], { type: 'text/html' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'meta-tags.html'; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-2 focus-visible:ring-offset-2"><Download size={14} /></button>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

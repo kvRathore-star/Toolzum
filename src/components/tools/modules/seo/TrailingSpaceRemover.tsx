@@ -18,21 +18,21 @@ export default function TrailingSpaceRemover() {
 
   const resultText = result ? 'Trailing spaces removed' : 'Enter text to remove trailing spaces';
 
+  const customResult = result ? (
+    <div className="flex flex-col min-h-[200px]">
+      <textarea aria-label="Cleaned text" readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
+      <div className="flex items-center justify-between mt-2">
+        <span className="text-xs text-[var(--text-muted)]">Trailing spaces removed</span>
+        <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy cleaned text"><Copy size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Trailing Space Remover" result={resultText} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
+    <CalculatorShell category="SEO" title="Trailing Space Remover" result={resultText} customResult={customResult} onCalculate={trim} presets={presets} accent="orange" downloadData={result} downloadFilename="trimmed.txt">
       <label htmlFor="lbl-trailingspaceremover-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
       <textarea id="lbl-trailingspaceremover-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text with trailing spaces..."
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-orange-500/50 resize-y" />
-
-      {result && (
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-          <textarea aria-label="Cleaned text" readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
-          <div className="flex items-center justify-between mt-2">
-            <span className="text-xs text-[var(--text-muted)]">Trailing spaces removed</span>
-            <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy cleaned text"><Copy size={14} /></button>
-          </div>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

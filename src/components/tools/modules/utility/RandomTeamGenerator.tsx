@@ -17,10 +17,24 @@ export default function RandomTeamGenerator() {
 
   const resultText = teams.length > 0 ? 'Generated ' + teams.length + ' teams from ' + input.split('\n').filter(Boolean).length + ' names' : 'Enter names and generate teams';
 
+  const customResult = teams.length > 0 ? (
+    <div className="flex flex-col min-h-[200px]">
+      <div className="space-y-3">
+        {teams.map((team, i) => (
+          <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl">
+            <div className={'text-sm font-bold ' + teamColors[i % teamColors.length] + ' mb-1'}>Team {i + 1} · {team.length} members</div>
+            <div className="text-xs text-[var(--text-secondary)]">{team.join(', ')}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Team Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -31,21 +45,6 @@ export default function RandomTeamGenerator() {
       <div className="space-y-4">
         <Input label="Names (one per line)" value={input} onChange={v => setInput(v)} rows={6} />
         <Input label="Number of Teams" type="number" value={String(numTeams)} onChange={v => setNumTeams(Number(v))} />
-        {teams.length > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-            <div className="space-y-3">
-              {teams.map((team, i) => (
-                <div key={i} className="p-3 bg-[var(--bg-surface)] rounded-xl">
-                  <div className={'text-sm font-bold ' + teamColors[i % teamColors.length] + ' mb-1'}>Team {i + 1} · {team.length} members</div>
-                  <div className="text-xs text-[var(--text-secondary)]">{team.join(', ')}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {!teams.length && (
-          <p className="text-[var(--text-muted)] text-sm text-center">Enter names and generate teams</p>
-        )}
       </div>
     </CalculatorShell>
   );

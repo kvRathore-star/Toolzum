@@ -23,8 +23,35 @@ export default function LeastCommonMultipleCalculator() {
 
   const resultText = `LCM(${na}, ${nb}) = ${result}`;
 
+  const customResult = na > 0 && nb > 0 ? (
+    <div className="space-y-4">
+      <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
+        <div className="text-xs text-violet-600 dark:text-violet-400 font-medium mb-1">Least Common Multiple</div>
+        <div className="text-4xl font-bold text-violet-700 dark:text-violet-300">{result.toLocaleString()}</div>
+        <div className="text-xs text-[var(--text-secondary)] mt-1">Smallest positive multiple of both numbers</div>
+      </div>
+      <div className="bg-[var(--bg-surface)] rounded-xl p-3">
+        <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
+        <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
+          <div>LCM(a, b) = |a × b| / GCF(a, b)</div>
+          <div className="text-[var(--text-secondary)]">{na} × {nb} / {gcd(na, nb)} = {result}</div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">GCF</div>
+          <div className="text-sm font-bold text-[var(--text-primary)]">{gcd(na, nb)}</div>
+        </div>
+        <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
+          <div className="text-xs text-[var(--text-secondary)]">Product</div>
+          <div className="text-sm font-bold text-[var(--text-primary)]">{na * nb}</div>
+        </div>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Math" title="LCM Calculator" result={resultText} auto presets={presets} accent="violet" downloadData={`Number1,Number2,LCM,GCF,Product\n${a},${b},${result},${gcd(na, nb)},${na * nb}`} downloadFilename="lcm-calculation.csv">
+    <CalculatorShell category="Math" title="LCM Calculator" result={resultText} customResult={customResult} auto presets={presets} accent="violet" downloadData={`Number1,Number2,LCM,GCF,Product\n${a},${b},${result},${gcd(na, nb)},${na * nb}`} downloadFilename="lcm-calculation.csv">
       <div className="space-y-4">
         <div className="flex gap-2">
           <div className="flex-1">
@@ -38,37 +65,6 @@ export default function LeastCommonMultipleCalculator() {
               className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50" />
           </div>
         </div>
-
-        {na > 0 && nb > 0 && (
-          <div className="bg-violet-500/10 border border-violet-500/20 rounded-xl p-4 text-center">
-            <div className="text-xs text-violet-600 dark:text-violet-400 font-medium mb-1">Least Common Multiple</div>
-            <div className="text-4xl font-bold text-violet-700 dark:text-violet-300">{result.toLocaleString()}</div>
-            <div className="text-xs text-[var(--text-secondary)] mt-1">Smallest positive multiple of both numbers</div>
-          </div>
-        )}
-
-        {na > 0 && nb > 0 && (
-          <div className="bg-[var(--bg-surface)] rounded-xl p-3">
-            <div className="text-xs text-[var(--text-secondary)] mb-2">Formula</div>
-            <div className="font-mono text-sm text-[var(--text-primary)] space-y-1">
-              <div>LCM(a, b) = |a × b| / GCF(a, b)</div>
-              <div className="text-[var(--text-secondary)]">{na} × {nb} / {gcd(na, nb)} = {result}</div>
-            </div>
-          </div>
-        )}
-
-        {na > 0 && nb > 0 && (
-          <div className="grid grid-cols-2 gap-2">
-            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">GCF</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">{gcd(na, nb)}</div>
-            </div>
-            <div className="bg-[var(--bg-surface)] rounded-xl p-2.5 text-center">
-              <div className="text-xs text-[var(--text-secondary)]">Product</div>
-              <div className="text-sm font-bold text-[var(--text-primary)]">{na * nb}</div>
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

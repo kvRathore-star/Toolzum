@@ -75,6 +75,7 @@ export function TsvCsvConverter() {
     <CalculatorShell category="Converter"
       title="TSV ↔ CSV Converter"
       result={resultText}
+      customResult={output ? <Output value={output} label={mode === 'tsv-to-csv' ? 'CSV Output' : 'TSV Output'} /> : undefined}
       onCalculate={convert}
       calculateLabel="Convert"
       presets={presets}
@@ -88,7 +89,6 @@ export function TsvCsvConverter() {
           <button onClick={() => setMode('csv-to-tsv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'csv-to-tsv' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>CSV → TSV</button>
         </div>
         <Input label={mode === 'tsv-to-csv' ? 'TSV Input' : 'CSV Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'tsv-to-csv' ? 'col1\tcol2\tcol3\nval1\tval2\tval3' : 'col1,col2,col3\nval1,val2,val3'} />
-        <Output value={output} label={mode === 'tsv-to-csv' ? 'CSV Output' : 'TSV Output'} />
       </div>
     </CalculatorShell>
   );
@@ -263,6 +263,7 @@ export function CsvDataCleaner() {
     <CalculatorShell category="Converter"
       title="CSV Data Cleaner"
       result={resultText}
+      customResult={output ? <Output value={output} label="Cleaned CSV" /> : undefined}
       onCalculate={clean}
       calculateLabel="Clean"
       presets={presets}
@@ -276,7 +277,6 @@ export function CsvDataCleaner() {
           <input type="checkbox" checked={colAware} onChange={e => setColAware(e.target.checked)} className="rounded" />
           Column-aware cleaning (lowercases emails, strips phone non-digits, lowercases notes)
         </label>
-        <Output value={output} label="Cleaned CSV" />
       </div>
     </CalculatorShell>
   );
@@ -323,6 +323,7 @@ export function CsvStatistics() {
     <CalculatorShell category="Converter"
       title="CSV Statistics"
       result={resultText}
+      customResult={output ? <Output value={output} label="Column Statistics" /> : undefined}
       onCalculate={analyze}
       calculateLabel="Analyze"
       presets={presets}
@@ -332,7 +333,6 @@ export function CsvStatistics() {
     >
       <div className="space-y-4">
         <Input label="CSV Input" value={input} onChange={setInput} rows={6} placeholder="name,age,salary\nAlice,30,75000\nBob,25,62000" />
-        <Output value={output} label="Column Statistics" />
       </div>
     </CalculatorShell>
   );
@@ -393,10 +393,20 @@ export function CsvHtmlTableConverter() {
 
   const resultText = output ? (mode === 'csv-to-html' ? 'HTML table generated' : 'CSV extracted') : 'Convert between CSV and HTML tables';
 
+  const customResult = output ? (
+    <div className="flex flex-col">
+      {mode === 'csv-to-html' && preview && (
+        <div className="mb-3 p-4 bg-[var(--bg-surface)] rounded-xl overflow-x-auto" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(preview) }} />
+      )}
+      <Output value={output} label={mode === 'csv-to-html' ? 'HTML Output' : 'CSV Output'} />
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Converter"
       title="CSV ↔ HTML Table Converter"
       result={resultText}
+      customResult={customResult}
       onCalculate={convert}
       calculateLabel="Convert"
       presets={presets}
@@ -410,10 +420,6 @@ export function CsvHtmlTableConverter() {
           <button onClick={() => setMode('html-to-csv')} className={`flex-1 py-2 text-sm font-semibold rounded-xl transition-all ${mode === 'html-to-csv' ? 'bg-[var(--accent-ink)] text-white shadow-sm' : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] dark:text-[var(--text-muted)] hover:bg-[var(--bg-surface)]'}`}>HTML → CSV</button>
         </div>
         <Input label={mode === 'csv-to-html' ? 'CSV Input' : 'HTML Table Input'} value={input} onChange={setInput} rows={6} placeholder={mode === 'csv-to-html' ? 'name,age\nAlice,30' : '<table><tr><th>Name</th></tr><tr><td>Alice</td></tr></table>'} />
-        {mode === 'csv-to-html' && preview && (
-          <div className="mt-4 p-4 bg-[var(--bg-surface)] rounded-xl overflow-x-auto" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(preview) }} />
-        )}
-        <Output value={output} label={mode === 'csv-to-html' ? 'HTML Output' : 'CSV Output'} />
       </div>
     </CalculatorShell>
   );
@@ -479,6 +485,7 @@ return (
     <CalculatorShell category="Converter"
       title="YAML Validator"
       result={resultText}
+      customResult={output ? <Output value={output} label={mode === 'validate' ? 'Validation Results' : mode === 'to-json' ? 'JSON Output' : 'Minified YAML'} /> : undefined}
       onCalculate={process}
       calculateLabel="Check"
       presets={presets}
@@ -495,7 +502,6 @@ return (
         </div>
         <Input label="YAML Input" value={input} onChange={setInput} rows={6} placeholder="name: Alice
 age: 30" />
-        <Output value={output} label={mode === 'validate' ? 'Validation Results' : mode === 'to-json' ? 'JSON Output' : 'Minified YAML'} />
         <p className="text-xs text-[var(--text-secondary)] mt-2">For full YAML↔JSON conversion with proper parsing, see <Link href="/converter/yaml-json-converter" className="text-[var(--accent)] hover:underline">YAML↔JSON Converter</Link>. For structural formatting checks (indentation, tabs), use this YAML Validator.</p>
       </div>
     </CalculatorShell>

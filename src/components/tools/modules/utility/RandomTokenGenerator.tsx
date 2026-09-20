@@ -21,10 +21,22 @@ export default function RandomTokenGenerator() {
 
   const resultText = result ? 'Generated ' + length + '-char ' + format.toUpperCase() + ' token (' + entropy + ' bits entropy)' : 'Configure and generate';
 
+  const customResult = result ? (
+    <div className="flex flex-col justify-center items-center min-h-[120px]">
+      <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
+      <p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p>
+      <div className="flex gap-1 mt-2">
+        <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy token"><Copy size={14} /></button>
+        <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'token.' + format; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download token"><Download size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Random Token Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={generate}
       calculateLabel="Generate"
       presets={presets}
@@ -40,16 +52,7 @@ export default function RandomTokenGenerator() {
           </div>
           <Input label="Length" type="number" value={String(length)} onChange={v => setLength(Number(v))} />
         </div>
-        {result ? (
-          <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[120px]">
-            <p className="text-lg font-mono font-bold text-[var(--text-primary)] break-all text-center">{result}</p>
-            <p className="text-xs text-[var(--text-muted)] mt-2">{entropy} bits entropy</p>
-            <div className="flex gap-1 mt-2">
-              <button onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy token"><Copy size={14} /></button>
-              <button onClick={() => { const blob = new Blob([result], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'token.' + format; a.click(); URL.revokeObjectURL(url); toast.success('Downloaded!'); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Download token"><Download size={14} /></button>
-            </div>
-          </div>
-        ) : (
+        {!result && (
           <p className="text-[var(--text-muted)] text-sm text-center">Configure and generate a secure token</p>
         )}
       </div>

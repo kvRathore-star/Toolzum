@@ -24,10 +24,20 @@ export default function BarcodeGenerator() {
 
   const resultText = input ? 'Generated ' + type + ' barcode for: ' + input : 'Enter data to generate barcode';
 
+  const customResult = input ? (
+    <div className="flex flex-col items-center justify-center min-h-[160px]">
+      <div className="overflow-auto w-full flex justify-center">
+        {renderBarcode()}
+        <button aria-label="Download barcode" onClick={async () => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); if (await downloadOrShare(url, 'barcode.svg')) toast.success('SVG downloaded!'); URL.revokeObjectURL(url); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button>
+      </div>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="Barcode Generator"
       result={resultText}
+      customResult={customResult}
       onCalculate={renderBarcode}
       calculateLabel="Generate"
       presets={presets}
@@ -41,16 +51,6 @@ export default function BarcodeGenerator() {
           <select id="lbl-barcodegenerator-type" aria-label="Type" value={type} onChange={e => setType(e.target.value)} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-[var(--accent)]/50"><option value="UPC-A">UPC-A</option><option value="EAN-13">EAN-13</option><option value="Code128">Code 128</option><option value="Code39">Code 39</option></select>
         </div>
         <Input label="Data" value={input} onChange={v => setInput(v)} />
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col items-center justify-center min-h-[160px]">
-          {input ? (
-            <div className="overflow-auto w-full flex justify-center">
-              {renderBarcode()}
-              <button aria-label="Download barcode" onClick={async () => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); if (await downloadOrShare(url, 'barcode.svg')) toast.success('SVG downloaded!'); URL.revokeObjectURL(url); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-2"><Download size={14} /></button>
-            </div>
-          ) : (
-            <p className="text-[var(--text-muted)] text-sm">Enter data to generate barcode</p>
-          )}
-        </div>
       </div>
     </CalculatorShell>
   );

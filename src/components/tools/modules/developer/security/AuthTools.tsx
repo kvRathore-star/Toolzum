@@ -57,54 +57,54 @@ export function JwtInspector() {
 
   const resultText = isValid ? `✓ Valid JWT (${header?.alg || 'unknown'}, ${payload?.sub ? `sub: ${payload.sub}` : 'no subject'})` : (issues[0] || 'Enter JWT to inspect');
 
+  const customResult = isValid !== null ? (
+    <div className="space-y-3">
+      <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border-violet-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
+        <div className="flex items-center gap-2 font-semibold">{isValid ? '✓ Valid JWT' : '✗ Invalid JWT'}</div>
+        {issues.length > 0 && (
+          <div className="mt-2 space-y-1">
+            {issues.map((iss, i) => (
+              <div key={i} className={`text-xs px-2 py-1 rounded ${iss.startsWith('✓') ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300' : iss.startsWith('⚠') ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' : 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300'}`}>{iss}</div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {header && (
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Header</span>
+            <button onClick={copyH} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copiedH ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
+        </div>
+      )}
+
+      {payload && (
+        <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Payload</span>
+            <button onClick={copyP} className="px-2 py-0.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
+          </div>
+          <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
+        </div>
+      )}
+
+      {(header || payload) && (
+        <div className="flex gap-2">
+          <button onClick={copyH} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedH ? 'Copied!' : 'Copy Header'}</button>
+          <button onClick={copyP} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedP ? 'Copied!' : 'Copy Payload'}</button>
+        </div>
+      )}
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="Developer" title="JWT Inspector" result={resultText} onCalculate={inspect} presets={jwtPresets} accent="violet" downloadData={header && payload ? JSON.stringify({ header, payload }, null, 2) : ''} downloadFilename="jwt.json">
+    <CalculatorShell category="Developer" title="JWT Inspector" result={resultText} customResult={customResult} onCalculate={inspect} presets={jwtPresets} accent="violet" downloadData={header && payload ? JSON.stringify({ header, payload }, null, 2) : ''} downloadFilename="jwt.json">
       <div className="space-y-4">
         <label htmlFor="lbl-authtools-jwt-token" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">JWT Token</label>
         <textarea id="lbl-authtools-jwt-token" aria-label="JWT Token" value={token} onChange={e => { setToken(e.target.value); setHeader(null); setPayload(null); setIssues([]); setIsValid(null); }} rows={3} placeholder="eyJhbGciOiJIUzI1NiIs..."
           className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-violet-500/50 resize-y" />
-
-        {isValid !== null && (
-          <div className="space-y-3">
-            <div className={`p-4 rounded-xl border-l-4 ${isValid ? 'bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border-violet-400' : 'bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-400'}`}>
-              <div className="flex items-center gap-2 font-semibold">{isValid ? '✓ Valid JWT' : '✗ Invalid JWT'}</div>
-              {issues.length > 0 && (
-                <div className="mt-2 space-y-1">
-                  {issues.map((iss, i) => (
-                    <div key={i} className={`text-xs px-2 py-1 rounded ${iss.startsWith('✓') ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300' : iss.startsWith('⚠') ? 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300' : 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300'}`}>{iss}</div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {header && (
-              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-violet-400">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Header</span>
-                  <button onClick={copyH} className="px-2 py-0.5 text-xs bg-violet-500 hover:bg-violet-600 text-white rounded transition-colors">{copiedH ? 'Copied!' : 'Copy'}</button>
-                </div>
-                <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(header, null, 2)}</pre>
-              </div>
-            )}
-
-            {payload && (
-              <div className="bg-[var(--bg-surface)] rounded-xl p-3 border-l-4 border-[var(--accent)]">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">Payload</span>
-                  <button onClick={copyP} className="px-2 py-0.5 text-xs bg-[var(--accent-ink)] hover:bg-[var(--accent-ink)] text-white rounded transition-colors">{copiedP ? 'Copied!' : 'Copy'}</button>
-                </div>
-                <pre className="text-xs font-mono text-[var(--text-primary)] bg-[var(--bg-overlay)] p-2 rounded-lg overflow-x-auto">{JSON.stringify(payload, null, 2)}</pre>
-              </div>
-            )}
-
-            {(header || payload) && (
-              <div className="flex gap-2">
-                <button onClick={copyH} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedH ? 'Copied!' : 'Copy Header'}</button>
-                <button onClick={copyP} className="px-3 py-1.5 text-xs bg-[var(--bg-overlay)] hover:bg-[var(--bg-elevated)] rounded-lg transition-colors">{copiedP ? 'Copied!' : 'Copy Payload'}</button>
-              </div>
-            )}
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

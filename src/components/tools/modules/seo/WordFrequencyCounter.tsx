@@ -31,8 +31,28 @@ export default function WordFrequencyCounter() {
     ? `Top ${frequencies.length} words from ${totalWords} total words`
     : 'Enter text and analyze';
 
+  const customResult = frequencies.length > 0 ? (
+    <div className="flex flex-col min-h-[200px]">
+      <div className="max-h-[400px] overflow-y-auto space-y-1.5">
+        {frequencies.map((f, i) => (
+          <div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
+            <span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span>
+            <span className="flex-1 font-medium">{f.word}</span>
+            <div className="flex-1 h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
+              <div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" />
+            </div>
+            <span className="w-20 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span>
+          </div>
+        ))}
+      </div>
+      <div className="text-xs text-[var(--text-muted)] mt-2">
+        Showing {frequencies.length} of {Object.keys(frequencies.reduce((acc: Record<string, number>, f) => { acc[f.word] = f.count; return acc; }, {})).length} unique words
+      </div>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Word Frequency Counter" result={resultText} onCalculate={analyze} calculateLabel="Count" presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
+    <CalculatorShell category="SEO" title="Word Frequency Counter" result={resultText} customResult={customResult} onCalculate={analyze} calculateLabel="Count" presets={presets} accent="indigo" downloadData={frequencies.length > 0 ? JSON.stringify({ totalWords, topWords: frequencies }, null, 2) : ''} downloadFilename="word-frequency.json">
       <div className="space-y-4">
         <div>
           <label htmlFor="lbl-wordfrequencycounter-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
@@ -47,25 +67,6 @@ export default function WordFrequencyCounter() {
           </div>
         </div>
 
-        {frequencies.length > 0 && (
-          <div aria-live="polite" className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
-            <div className="max-h-[400px] overflow-y-auto space-y-1.5">
-              {frequencies.map((f, i) => (
-                <div key={i} className="flex items-center gap-3 p-2 bg-[var(--bg-overlay)] rounded-lg text-sm">
-                  <span className="w-6 text-xs text-[var(--text-muted)] font-bold">{i + 1}</span>
-                  <span className="flex-1 font-medium">{f.word}</span>
-                  <div className="flex-1 h-2 bg-[var(--bg-overlay)] rounded-full overflow-hidden">
-                    <div style={{ width: `${(f.count / maxCount) * 100}%` }} className="bg-emerald-700 h-full rounded-full" />
-                  </div>
-                  <span className="w-20 text-right font-mono text-xs text-[var(--text-muted)]">{f.count} ({f.pct.toFixed(1)}%)</span>
-                </div>
-              ))}
-            </div>
-            <div className="text-xs text-[var(--text-muted)] mt-2">
-              Showing {frequencies.length} of {Object.keys(frequencies.reduce((acc: Record<string, number>, f) => { acc[f.word] = f.count; return acc; }, {})).length} unique words
-            </div>
-          </div>
-        )}
       </div>
     </CalculatorShell>
   );

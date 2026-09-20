@@ -496,10 +496,23 @@ export function ASCIIArtGenerator() {
 
   const resultText = asciiResult ? `Generated ${asciiStyle} style ASCII art` : 'Enter text and select style';
 
+  const customResult = asciiResult ? (
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
+        <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+      </div>
+      <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
+        {asciiResult}
+      </pre>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="ASCII Art Generator"
       result={resultText}
+      customResult={customResult}
       auto={true}
       calculateLabel="Generate"
       presets={presets}
@@ -518,17 +531,6 @@ export function ASCIIArtGenerator() {
           ))}
         </div>
 
-        {asciiResult && (
-          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-5">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
-              <button onClick={() => copy(asciiResult, 'ASCII art')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
-            </div>
-            <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
-              {asciiResult}
-            </pre>
-          </div>
-        )}
         {!asciiResult && (
           <p className="text-[var(--text-muted)] text-sm text-center">Enter text and select style to generate ASCII art</p>
         )}
@@ -653,10 +655,23 @@ export function ASCIIFontGenerator() {
 
   const resultText = fontResult ? `Generated ${fontStyle} font banner` : 'Enter text to generate';
 
+  const customResult = fontResult ? (
+    <div className="flex flex-col">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
+        <button onClick={() => copy(fontResult, 'ASCII font')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
+      </div>
+      <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
+        {fontResult}
+      </pre>
+    </div>
+  ) : undefined;
+
   return (
     <CalculatorShell category="Utility"
       title="ASCII Font Generator"
       result={resultText}
+      customResult={customResult}
       auto={true}
       calculateLabel="Generate"
       presets={presets}
@@ -675,17 +690,6 @@ export function ASCIIFontGenerator() {
           ))}
         </div>
 
-        {fontResult && (
-          <div className="relative bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-5">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase">Result</span>
-              <button onClick={() => copy(fontResult, 'ASCII font')} className="text-[10px] text-[var(--accent)] hover:underline">Copy</button>
-            </div>
-            <pre className="bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl p-5 text-sm text-[var(--text-primary)] font-mono whitespace-pre overflow-x-auto leading-tight">
-              {fontResult}
-            </pre>
-          </div>
-        )}
         {!fontResult && (
           <p className="text-[var(--text-muted)] text-sm text-center">Enter text to generate ASCII font banner</p>
         )}

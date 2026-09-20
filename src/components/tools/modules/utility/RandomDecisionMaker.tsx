@@ -61,10 +61,18 @@ export default function RandomDecisionMaker() {
 
   const resultText = choice ? 'Decision: ' + choice : 'Enter options and decide';
 
+  const customResult = (
+    <div className="flex flex-col justify-center items-center min-h-[160px]">
+      <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
+      {choice && <button onClick={() => { clipboardWrite(choice).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy choice"><Copy size={14} /></button>}
+    </div>
+  );
+
   return (
     <CalculatorShell category="Utility"
       title="Random Decision Maker"
       result={resultText}
+      customResult={customResult}
       auto={true}
       presets={presets}
       accent="amber"
@@ -75,11 +83,6 @@ export default function RandomDecisionMaker() {
         <Input label="What are you deciding? (optional)" value={question} onChange={v => setQuestion(v)} placeholder="e.g. Should I go out tonight?" />
         <Input label="Options (one per line)" value={options} onChange={v => setOptions(v)} rows={5} />
         <button onClick={decide} disabled={spinning} className={'px-5 py-3 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl text-sm transition-all active:scale-[0.98] shadow-lg w-full sm:w-auto ' + (spinning ? 'opacity-60' : '')}>{spinning ? 'Spinning...' : 'Decide'}</button>
-
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col justify-center items-center min-h-[160px]">
-          <canvas ref={canvasRef} width={160} height={160} className="max-w-full" />
-          {choice && <button onClick={() => { clipboardWrite(choice).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors mt-3" aria-label="Copy choice"><Copy size={14} /></button>}
-        </div>
 
         {history.length > 0 && (
           <div className="border-t border-[var(--border-subtle)] pt-4">

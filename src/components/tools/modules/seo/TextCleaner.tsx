@@ -17,18 +17,18 @@ export default function TextCleaner() {
 
   const resultText = result ? 'Text cleaned (whitespace normalized)' : 'Enter text to clean';
 
+  const customResult = result ? (
+    <div className="flex flex-col min-h-[200px]">
+      <textarea aria-label="Cleaned text" readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
+      <button aria-label="Copy cleaned text" onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors self-start"><Copy size={14} /></button>
+    </div>
+  ) : undefined;
+
   return (
-    <CalculatorShell category="SEO" title="Text Cleaner" result={resultText} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
+    <CalculatorShell category="SEO" title="Text Cleaner" result={resultText} customResult={customResult} onCalculate={clean} presets={presets} accent="cyan" downloadData={result} downloadFilename="cleaned.txt">
       <label htmlFor="lbl-textcleaner-text" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">Text</label>
       <textarea id="lbl-textcleaner-text" aria-label="Text" value={text} onChange={e => setText(e.target.value)} rows={6} placeholder="Enter text to clean..."
         className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] placeholder-zinc-400 focus-visible:focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus:ring-2 focus:ring-cyan-500/50 resize-y" />
-
-      {result && (
-        <div className="bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4 flex flex-col min-h-[200px]">
-          <textarea aria-label="Cleaned text" readOnly value={result} rows={6} className="w-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-xl px-4 py-2.5 text-sm text-[var(--text-primary)] resize-none" />
-          <button aria-label="Copy cleaned text" onClick={() => { clipboardWrite(result).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="mt-2 p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors self-start"><Copy size={14} /></button>
-        </div>
-      )}
     </CalculatorShell>
   );
 }

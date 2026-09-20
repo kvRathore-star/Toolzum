@@ -26,8 +26,21 @@ export default function AvatarGenerator() {
   const resultText = 'Avatar: ' + initials + ' (' + size + 'px, ' + shape + ')';
   const avatarSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><rect width="' + size + '" height="' + size + '" rx="' + (size * shapes[shape]) + '" fill="' + bgColor + '"/><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" fill="' + textColor + '" font-size="' + (size * 0.4) + '" font-family="sans-serif" font-weight="bold">' + initials + '</text></svg>';
 
+  const customResult = (
+    <div className="flex flex-col items-center justify-center min-h-[200px]">
+      <svg ref={svgRef} width={size} height={size} viewBox={'0 0 ' + size + ' ' + size} xmlns="http://www.w3.org/2000/svg">
+        <rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} />
+        <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text>
+      </svg>
+      <div className="flex gap-2 mt-3">
+        <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button>
+        <button onClick={() => { clipboardWrite(initials).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy initials"><Copy size={14} /></button>
+      </div>
+    </div>
+  );
+
   return (
-    <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} auto={true} presets={presets} accent="indigo" downloadData={avatarSvg} downloadFilename="avatar.svg">
+    <CalculatorShell category="Utility" title="Avatar Generator" result={resultText} customResult={customResult} auto={true} presets={presets} accent="indigo" downloadData={avatarSvg} downloadFilename="avatar.svg">
       <div className="space-y-4">
         <label className={labelClass}>Person name</label>
         <input aria-label="Person name" type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter a name..."
@@ -55,17 +68,6 @@ export default function AvatarGenerator() {
               {k.charAt(0).toUpperCase() + k.slice(1)}
             </button>
           ))}
-        </div>
-
-        <div className="flex flex-col items-center justify-center min-h-[200px] bg-[var(--bg-surface)] rounded-xl border border-[var(--border-subtle)] p-4">
-          <svg ref={svgRef} width={size} height={size} viewBox={'0 0 ' + size + ' ' + size} xmlns="http://www.w3.org/2000/svg">
-            <rect width={size} height={size} rx={size * shapes[shape]} fill={bgColor} />
-            <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fill={textColor} fontSize={size * 0.4} fontFamily="sans-serif" fontWeight="bold">{initials}</text>
-          </svg>
-          <div className="flex gap-2 mt-3">
-            <button onClick={() => { const svg = svgRef.current; if (!svg) return; const clone = svg.cloneNode(true) as SVGSVGElement; const serializer = new XMLSerializer(); const source = serializer.serializeToString(clone); const blob = new Blob([source], { type: 'image/svg+xml' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'avatar.svg'; a.click(); URL.revokeObjectURL(url); toast.success('SVG downloaded!'); }} className="px-3 py-1.5 bg-[var(--accent-ink)] hover:bg-[var(--accent-hover)] text-white font-bold rounded-lg text-xs transition-colors">Download SVG</button>
-            <button onClick={() => { clipboardWrite(initials).then(ok => { if (ok) toast.success('Copied!'); else toast.error('Copy blocked by the browser — select the text manually.'); }); }} className="p-1.5 bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-lg transition-colors" aria-label="Copy initials"><Copy size={14} /></button>
-          </div>
         </div>
       </div>
     </CalculatorShell>
