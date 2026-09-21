@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How do AI credits work?",
-    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 1 credit per minute of audio (English via Groq, other languages via mini-transcribe); Gemini HD image generation costs 5 per use (the standard Pollinations engine stays free). Signing in free gives 10 credits/month; Pro gives 200/month, resetting monthly. All local tools use no credits. Anonymous users need to sign in to use AI tools.",
+    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 1 credit per minute of audio; Gemini HD image generation costs 5 per use (the standard Pollinations engine stays free). Signing in free gives 10 credits/month; Pro gives 200/month, resetting monthly. All local tools use no credits. Anonymous users need to sign in to use AI tools.",
   },
   {
     q: "Can I try Pro tools for free?",
