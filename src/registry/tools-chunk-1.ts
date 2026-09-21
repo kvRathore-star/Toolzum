@@ -349,7 +349,12 @@ export const entries_chunk_1: ToolMetadata[] = [
     seoDescription: 'Free online Indian Voice Transcriber — Transcribe audio to text in 12 Indian languages (Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, English) using cloud-based AI.',
     category: 'indian-utilities',
     id:  "264",
-    dependencies: 'Gemini API',
+    dependencies: 'AI speech recognition API',
+    faqs: [
+      { question: "Is my voice recording uploaded?", answer: "Yes. Your recording or file is sent to our server for AI transcription and deleted after processing — it is never stored or shared." },
+      { question: "What does voice transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include 10 credits/month, Pro 200/month." },
+      { question: "Which languages work best?", answer: "12 Indian languages plus English: Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, and English. Accuracy is highest on clear speech; heavy background noise lowers it." },
+    ],
   },
   {
     name: 'Bank Statement Analyser',

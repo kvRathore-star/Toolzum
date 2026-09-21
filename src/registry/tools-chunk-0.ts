@@ -1824,7 +1824,12 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Convert a podcast episode audio file into a full text transcript using AI speech recognition.',
     seoDescription: 'Free online Podcast Transcription — Upload a podcast episode audio file and get a full text transcript using AI speech recognition.',
-    dependencies: "Gemini API",
+    dependencies: "AI speech recognition API",
+    faqs: [
+      { question: "Is my podcast audio uploaded?", answer: "Yes. Your episode file is sent to our server for AI transcription and deleted after processing — it is never stored or shared." },
+      { question: "What does podcast transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include 10 credits/month, Pro 200/month." },
+      { question: "What formats are supported?", answer: "MP3, WAV, M4A, OGG, and video files with audio tracks. Files over 25MB or audio over 30 minutes need splitting first." },
+    ],
   },
   {
 

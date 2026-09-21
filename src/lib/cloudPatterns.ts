@@ -94,6 +94,7 @@ export const CLOUD_API_PATTERNS: readonly string[] = [
   "InsightFace",
   "Postal API",
   "Vectorize",
+  "AI speech recognition",
 ];
 
 /**

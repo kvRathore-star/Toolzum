@@ -201,7 +201,7 @@ export default function IndianVoiceTranscriber() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl shadow-xl overflow-hidden p-5 space-y-5">
         <p className="text-xs text-[var(--text-secondary)]">
           Upload a voice note, audio recording, or video to get transcript in Indian languages. 
-          Powered by server-side Gemini — your audio is sent to our server for transcription.
+          Powered by server-side AI — your audio is sent to our server for transcription.
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
