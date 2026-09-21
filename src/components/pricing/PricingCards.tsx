@@ -183,7 +183,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />
-                <span>200 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 20/use)</span></span>
+                <span>200 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 1/min)</span></span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--accent)] shrink-0" />

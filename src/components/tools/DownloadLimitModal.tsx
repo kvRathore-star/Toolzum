@@ -147,7 +147,7 @@ export function DownloadLimitModal() {
         {(isAnonQuota || isAnonPlanLimit) && (
           <ul className="mb-5 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-3.5 text-[13px] text-[var(--text-secondary)] space-y-1.5" aria-label="Free account benefits">
             <li>✓ 5 downloads/day <span className="text-[var(--text-muted)]">(vs 3 as guest)</span></li>
-            <li>✓ 10 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 20/use)</span></li>
+            <li>✓ 10 AI credits/month <span className="text-[var(--text-muted)]">(text 1/use, transcription 1/min)</span></li>
             <li>✓ 10-file batches up to 150MB <span className="text-[var(--text-muted)]">(vs 1 file / 30MB)</span></li>
             <li>✓ 2 Pro-tool downloads/day</li>
           </ul>
