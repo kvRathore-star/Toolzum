@@ -505,7 +505,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Developer",
     description: 'Look up domain registration information using public RDAP APIs. Check registrar, expiration date, name servers, and more.',
     seoDescription: 'Free online WHOIS Lookup — Check domain registration info: registrar, expiration, name servers. Uses public RDAP APIs. ',
-    dependencies: "none",
+    dependencies: "RDAP API",
     showInCategory: true,
     faqs: [
       { question: "What information does the WHOIS lookup return?", answer: "Domain registrar name, registration and expiration dates, name servers, DNSSEC status, and the RDAP registry where the domain is managed." },
@@ -522,7 +522,7 @@ export const entries_chunk_2: ToolMetadata[] = [
     category: "Developer",
     description: 'Check SSL/TLS certificate details for any domain. View issuer, validity period, days remaining, and SANs.',
     seoDescription: 'Free online SSL Checker — Check SSL certificate details for any domain. Issuer, validity, days remaining, SANs. ',
-    dependencies: "none",
+    dependencies: "crt.sh / TLS endpoints",
     showInCategory: true,
     faqs: [
       { question: "What SSL certificate details does it show?", answer: "Certificate issuer (e.g., Let's Encrypt, DigiCert), validity period (not-before and not-after dates), days remaining until expiration, serial number, and Subject Alternative Names (SANs)." },
