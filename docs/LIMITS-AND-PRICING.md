@@ -76,7 +76,7 @@ getUserLimit(plan, isProTool):
 - Free tool + signed: "N free downloads left today" / "Free downloads used up today"
 - Pro user: hidden (unlimited)
 
-**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 10 credits/mo, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 10 credits".
+**Limit modal** (`DownloadLimitModal.tsx`, fires on `toolzum:download-blocked` / `toolzum:plan-limit`): anon quota/file/batch blocks show the concrete free-account upside (5/day, 5 trial credits, 10 files/150MB, 2 Pro downloads/day) with CTA "Sign in free — unlock 5/day + 5 trial credits".
 
 > ✅ **Per-batch accounting (Option C, Sep 12 2026):** one batch download =
 > one quota unit, gated by a single `checkAndRecordDownload({ batchSize,

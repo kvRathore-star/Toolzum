@@ -103,7 +103,7 @@ export function createAuth(env: AuthEnv) {
                   ``,
                   `Your Toolzum account is ready.`,
                   ``,
-                  `Free plan includes 10 AI credits/month plus 1,000+ free tools that run entirely in your browser — nothing uploaded.`,
+                  `Free plan includes 5 trial AI credits plus 1,000+ free tools that run entirely in your browser — nothing uploaded.`,
                   ``,
                   `Browse tools: https://toolzum.com/tools`,
                 ].join("\n"),

@@ -180,7 +180,7 @@ export default function AiGrammarChecker() {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'AI fix failed';
       if (!isSignedIn && /sign in/i.test(msg)) {
-        toast.error('Sign in free for AI fix — 10 credits/month, no card.');
+        toast.error('Sign in free for AI fix — 5 trial credits, no card.');
       } else {
         toast.error(msg);
       }
@@ -251,7 +251,7 @@ export default function AiGrammarChecker() {
       <AiPrivacyBanner />
       {!isSignedIn && (
         <p className="text-xs text-[var(--text-secondary)] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-4 py-3">
-          <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI fix (10 credits/month) — rule-based check stays free.
+                <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI fix (5 trial credits) — rule-based check stays free.
         </p>
       )}
       <div className="bg-[var(--bg-overlay)] p-5 border border-[var(--border-subtle)] dark:border-[var(--border-subtle)] rounded-2xl">

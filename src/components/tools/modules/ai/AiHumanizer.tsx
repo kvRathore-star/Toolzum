@@ -278,7 +278,7 @@ export default function AiHumanizer() {
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'AI rewrite failed';
       if (!isSignedIn && /sign in/i.test(msg)) {
-        toast.error('Sign in free for AI rewrite — 10 credits/month, no card.');
+        toast.error('Sign in free for AI rewrite — 5 trial credits, no card.');
       } else {
         toast.error(msg);
       }
@@ -419,7 +419,7 @@ export default function AiHumanizer() {
             )}
             {!isSignedIn && (
               <p className="text-xs text-[var(--text-secondary)]">
-                <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI rewrite (10 credits/month) — template engine stays free.
+                <Link href="/sign-in" className="text-[var(--accent)] hover:underline font-semibold">Sign in free</Link> for AI rewrite (5 trial credits) — template engine stays free.
               </p>
             )}
           </div>
