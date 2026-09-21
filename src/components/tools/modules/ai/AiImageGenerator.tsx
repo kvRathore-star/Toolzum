@@ -88,6 +88,17 @@ export default function AiImageGenerator() {
     // FLUX photoreal default + server-side prompt enhancement: short prompts
     // like "an apple" under-specify, and the implicit default model renders
     // them poorly. `enhance` expands the prompt via LLM before diffusion.
+    // Free-engine friction: min 15s between Pollinations generations (4/min).
+    // Client-side only — stops casual scripting, not a security boundary.
+    // Server-enforced credits already gate the Gemini path.
+    const now = Date.now();
+    const lastFree = Number(sessionStorage.getItem('pollinations-last') || 0);
+    if (now - lastFree < 15000) {
+      setIsGenerating(false);
+      toast.error('Free engine is cooling down — retry in a few seconds.');
+      return;
+    }
+    sessionStorage.setItem('pollinations-last', String(now));
     const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${w}&height=${h}&nologo=true&seed=${seed}&model=flux&enhance=true`;
 
     // Force preloading of the image before displaying

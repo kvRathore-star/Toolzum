@@ -13,14 +13,15 @@ import {
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
-// Per-task cost: native image generation (~$0.039/image) sits between text
-// (1) and transcription (10). At 5 credits: ~6 images/mo free, ~60 Pro/mo.
+// Per-task cost: native image generation (~$0.045/image at 1K) sits between
+// text (1) and transcription (10). At 5 credits: ~6 images/mo free, ~60 Pro/mo.
 export const IMAGE_GENERATION_CREDITS = 5;
 
-// NOTE (Sep 12 2026): gemini-2.5-flash-image retires Oct 2 2026 per Google.
-// Successor: gemini-3.1-flash-lite-image (cheapest) or gemini-3.1-flash-image.
-// Migrate MODEL before then — same request/response shape.
-const IMAGE_MODEL = 'gemini-2.5-flash-image';
+// Migrated Sep 21 2026: gemini-2.5-flash-image shut down Oct 2 2026 per
+// Google's deprecations table. Successor is gemini-3.1-flash-image (GA since
+// May 28 2026 — NOT the -preview, which died Jun 25 2026). Same
+// generateContent shape, so this is a version bump, not a rewrite.
+export const IMAGE_MODEL = 'gemini-3.1-flash-image';
 
 async function getUserContext(request: Request, DB: D1Database): Promise<{ userId: string; plan: string } | null> {
   const cookies = request.headers.get('cookie') || '';

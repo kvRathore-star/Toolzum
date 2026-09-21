@@ -126,7 +126,7 @@ getUserLimit(plan, isProTool):
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
 | Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.003/min non-English, ~$0.0007/min English (Groq) | mini-transcribe / Groq Turbo via `/api/ai/transcribe`, 30-min + 25MB caps |
 | AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
-| AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.039/image | Gemini 2.5 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
+| AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.045/image | Gemini 3.1 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
 
 > Costs follow the *endpoint called*, not the tool name: `audio/video-to-text-transcription`
 > clean up pasted dumps via `/api/ai/generate` (1 credit) — only true audio
@@ -150,9 +150,14 @@ getUserLimit(plan, isProTool):
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$0.078/month (2 images × $0.039) or ~$0.03 (10 transcription minutes).
-**Worst-case cost per Pro user:** ~$0.60/month (200 min × $0.003) vs $9.99 / ₹299 revenue — sustainable.
-**Worst-case cost per Pass user:** ~$0.21 (70 min × $0.003) vs $3.99 / ₹99 — one-shot, repurchase to farm.
+**Worst-case cost per free user:** ~$0.09/month (2 images × $0.045) or ~$0.03 (10 transcription minutes).
+**Worst-case cost per Pro user:** ~$1.80/month (40 images × $0.045) or ~$0.60 (200 non-English min) vs $9.99 / ₹299 revenue — sustainable.
+**Worst-case cost per Pass user:** ~$0.63 (14 images × $0.045) or ~$0.21 (70 min × $0.003) vs $3.99 / ₹99 — one-shot, repurchase to farm.
+
+> $/credit ceiling note (for the next margin audit): image generation
+> currently sets it at ~$0.009/credit ($0.045 ÷ 5), above transcription
+> ($0.003) and text ($0.0002). If image costs move again, this is the row
+> that moves first.
 
 > ✅ **REPRICED Sep 17 2026:** transcription costs 20× text generation
 > (`TRANSCRIPTION_CREDITS = 20`); Free 30→10, Pro 300→200, Pass 70/7d
