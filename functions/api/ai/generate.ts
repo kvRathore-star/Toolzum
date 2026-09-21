@@ -14,7 +14,7 @@ import { isFlagEnabled } from '../_flags';
 import { logAiCreditEvent } from './credit-events';
 import {
   resolvePlan, creditAllowance, aiRateLimit, CREDIT_RESET_DAYS,
-  effectivePlanForUser,
+  effectivePlanForUser, FREE_TRIAL_CREDITS,
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
@@ -39,7 +39,18 @@ async function resetCreditsIfNeeded(DB: D1Database, userId: string, plan: Effect
   const resetMs = CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000;
   const maxCredits = creditAllowance(plan);
 
-  if (!creditResetAt || (now - creditResetAt) >= resetMs) {
+  if (!creditResetAt) {
+    // One-time free trial: granted once, stamped, never refilled for free
+    // plans. Pro refills to allowance as before.
+    const grant = plan === 'pro' ? maxCredits : FREE_TRIAL_CREDITS;
+    await DB.prepare(
+      "UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?"
+    ).bind(grant, now, userId).run();
+    return { maxCredits, balance: grant };
+  }
+  if ((now - creditResetAt) >= resetMs) {
+    // Trial spent and window lapsed: free plans do NOT refill.
+    if (plan !== 'pro') return { maxCredits, balance: currentCredits };
     await DB.prepare(
       "UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?"
     ).bind(maxCredits, now, userId).run();

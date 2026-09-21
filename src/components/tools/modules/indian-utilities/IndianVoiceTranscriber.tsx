@@ -275,7 +275,7 @@ export default function IndianVoiceTranscriber() {
                 {audioFile ? audioFile.name : 'Upload voice note or audio file'}
               </p>
               <p className="text-[10px] text-[var(--text-secondary)] mt-1">MP3, WAV, OGG, M4A, WebM — Max 25MB, max 30 min per file</p>
-              <p className="text-[10px] text-[var(--text-muted)] mt-0.5">≈1 credit per minute of audio (free plans include 10/month, Pro 200/month)</p>
+              <p className="text-[10px] text-[var(--text-muted)] mt-0.5">≈1 credit per minute of audio (free trial: 5 credits, one-time; Pro 200/month)</p>
               <input aria-label="MP3, WAV, OGG, M4A, WebM — Max 25MB, max 30 min" ref={fileInputRef} type="file" accept="audio/*,video/mp4,audio/mpeg,audio/wav,audio/ogg,audio/m4a,audio/webm" onChange={handleFile} className="hidden" />
             </div>
 

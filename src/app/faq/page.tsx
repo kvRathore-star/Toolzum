@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Do I need to create an account?",
-    a: "No account is needed for any tool. All free tools work immediately. Signing in free raises limits to 5 downloads/day, 10 AI credits/month, and batches up to 10 files (150MB each). A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 200 AI credits/month.",
+    a: "No account is needed for any tool. All free tools work immediately. Signing in free raises limits to 5 downloads/day, 5 trial AI credits (one-time, never refills), and batches up to 10 files (150MB each). A Pro account adds unlimited downloads, 500-file batches up to 2GB, batch ZIP downloads, and 200 AI credits/month.",
   },
   {
     q: "What file formats are supported?",
@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "How do AI credits work?",
-    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 1 credit per minute of audio; Gemini HD image generation costs 5 per use (the standard Pollinations engine stays free). Signing in free gives 10 credits/month; Pro gives 200/month, resetting monthly. All local tools use no credits. Anonymous users need to sign in to use AI tools.",
+    a: "AI text tools (paraphraser, translator, summariser) cost 1 credit per use; voice/video transcription costs 1 credit per minute of audio; Gemini HD image generation costs 5 per use (the standard Pollinations engine stays free). Signing in free gives 5 trial credits, one-time and never refilled; Pro gives 200/month, resetting monthly. All local tools use no credits. Anonymous users need to sign in to use AI tools.",
   },
   {
     q: "Can I try Pro tools for free?",

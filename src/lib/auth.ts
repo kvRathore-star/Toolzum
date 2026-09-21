@@ -6,6 +6,7 @@ import { scryptSync, randomBytes, timingSafeEqual } from "node:crypto";
 import * as schema from "@/db/schema";
 import { deleteUserAppData } from "@/lib/userErasure";
 import { sendEmail } from "@/lib/email";
+import { FREE_TRIAL_CREDITS } from "@/lib/planTiers";
 
 interface AuthEnv {
   DB: D1Database;
@@ -79,8 +80,20 @@ export function createAuth(env: AuthEnv) {
           // Separate from the verification email: this one carries no link.
           after: async (user) => {
             try {
-              const u = user as { email?: string; name?: string | null };
+              const u = user as { id?: string; email?: string; name?: string | null };
               if (!u?.email) return;
+              // Seed the one-time free trial balance explicitly: the schema
+              // default is higher, and the trial is granted (not refilled) on
+              // first AI use — without this, dashboards show the raw default
+              // until then. Idempotent with the trial-grant branch.
+              if (u.id) {
+                await env.DB.prepare(
+                  'UPDATE "user" SET credits = ? WHERE id = ?'
+                )
+                  .bind(FREE_TRIAL_CREDITS, u.id)
+                  .run()
+                  .catch(() => {});
+              }
               const first = (u.name || "").split(" ")[0];
               await sendEmail(env, {
                 to: u.email,

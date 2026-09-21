@@ -109,7 +109,7 @@ getUserLimit(plan, isProTool):
 
 | Tier | Credits | Reset | Enforcement |
 |------|---------|-------|-------------|
-| Free (signed-in) | 10/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
+| Free (signed-in) | 5, one-time trial (never refilled) | Granted once at first AI use or signup | `user.credits` in D1 |
 | Pro | 200/month | Monthly (auto-reset via `creditResetAt`) | `user.credits` in D1 |
 | Project Pass (7-day) | 70 one-time + Pro treatment 7d | `passExpiresAt` (time-based, no cron) | `grantPass` + `effectivePlanForUser` |
 | Anonymous | N/A (sign-in required) | — | 401 on AI routes |
@@ -135,10 +135,10 @@ getUserLimit(plan, isProTool):
 | Gemini Watermark Remover | 0 | $0 | Client-side alpha-blending (no API) |
 | Other image/video/audio tools | 0 | $0 | Client-side (Canvas/WASM/FFmpeg) |
 
-**Cost at 10 free credits/month:**
-- ~10 text gen calls, OR
-- ~2 Gemini images (5 credits each), OR
-- ~10 transcription minutes (1/min — free plans CAN transcribe short clips), OR
+**Cost at 5 free trial credits (one-time, never refilled):**
+- ~5 text gen calls, OR
+- ~1 Gemini image (5 credits), OR
+- ~5 transcription minutes (1/min), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free)
 
@@ -150,7 +150,7 @@ getUserLimit(plan, isProTool):
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** ~$0.09/month (2 images × $0.045) or ~$0.03 (10 transcription minutes).
+**Worst-case cost per free user:** one-time ~$0.045 (5-image trial burn) — then zero forever. No monthly liability.
 **Worst-case cost per Pro user:** ~$1.80/month (40 images × $0.045) or ~$0.60 (200 non-English min) vs $9.99 / ₹299 revenue — sustainable.
 **Worst-case cost per Pass user:** ~$0.63 (14 images × $0.045) or ~$0.21 (70 min × $0.003) vs $3.99 / ₹99 — one-shot, repurchase to farm.
 
@@ -302,7 +302,7 @@ feature card advertises "Up to 2GB".
 | Client-side tools | Unlimited | Unlimited | Unlimited | Unlimited |
 | Download quota (free tools) | 3/day | 5/day | Unlimited | Unlimited |
 | Download quota (Pro tools) | Blocked | 2/day | Unlimited | Unlimited |
-| AI credits | N/A | 10/month | 200/month | 70 one-time |
+| AI credits | N/A | 5 trial, one-time | 200/month | 70 one-time |
 | AI rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
 | Transcription rate limit | Blocked | 2 req/min | 5 req/min | 5 req/min |
 | Max file size | 30 MB | 150 MB | 2 GB | 2 GB |

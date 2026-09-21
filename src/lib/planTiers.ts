@@ -19,6 +19,15 @@ export const FREE_CREDITS = 10;
 export const PRO_CREDITS = 200;
 export const CREDIT_RESET_DAYS = 30;
 
+/**
+ * One-time free trial: granted once at first AI use (or signup), never
+ * refilled. Replaces the old monthly FREE_CREDITS refill — recurring free
+ * credits scaled cost with the free base forever; a capped trial bounds it
+ * while preserving a real trial. FREE_CREDITS stays as the legacy constant
+ * for display fallback only; do not refill from it.
+ */
+export const FREE_TRIAL_CREDITS = 5;
+
 export interface FileCaps {
   maxFileSizeMB: number;
   maxBatchSize: number;

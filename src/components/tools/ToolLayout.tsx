@@ -241,9 +241,9 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
                     <Link
                       href="/sign-in"
                       className="flex items-center gap-1.5 text-[var(--accent)] hover:underline"
-                      aria-label="Sign in free to get 10 AI credits per month"
+                      aria-label="Sign in free to get 5 trial AI credits"
                     >
-                      Sign in free — 10 credits/mo
+                      Sign in free — 5 trial credits
                     </Link>
                   </>
                 )}

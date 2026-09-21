@@ -79,6 +79,26 @@ describe('GET /api/account/credits contract', () => {
     expect(runs).toEqual([]);
   });
 
+  it('free user past the window does NOT refill (one-time trial spent)', async () => {
+    const { db, runs } = mockDb({
+      userRow: { plan: 'free', credits: 2, creditResetAt: FRESH - 31 * 86400000 },
+    });
+    const res = await credits({ request: req('free-user'), env: { DB: db } as never });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ credits: 2, plan: 'signedin', allowance: FREE_CREDITS });
+    expect(runs).toEqual([]);
+  });
+
+  it('free user with no reset stamp gets the one-time 5-credit trial', async () => {
+    const { db, runs } = mockDb({
+      userRow: { plan: 'free', credits: 30, creditResetAt: null },
+    });
+    const res = await credits({ request: req('free-user'), env: { DB: db } as never });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ credits: 5, plan: 'signedin', allowance: FREE_CREDITS });
+    expect(runs.some((sql) => sql.startsWith('UPDATE user SET'))).toBe(true);
+  });
+
   it('missing user row is 401, DB failure is 503', async () => {
     const missing = mockDb({ userRow: null });
     const res404 = await credits({ request: req('ghost'), env: { DB: missing.db } as never });

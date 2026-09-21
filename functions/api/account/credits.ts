@@ -1,7 +1,7 @@
 import { createAuth } from "../../../src/lib/auth";
 import {
   resolvePlan, creditAllowance, CREDIT_RESET_DAYS,
-  effectivePlanForUser,
+  effectivePlanForUser, FREE_TRIAL_CREDITS,
   FREE_CREDITS, PRO_CREDITS,
 } from "../../../src/lib/planTiers";
 
@@ -63,11 +63,21 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     let credits = row.credits ?? allowance;
 
     const now = Date.now();
-    if (!row.creditResetAt || now - row.creditResetAt >= CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000) {
+    if (!row.creditResetAt) {
+      // One-time free trial (matches ai/* reset logic): grant once, stamp.
+      const grant = plan === 'pro' ? allowance : FREE_TRIAL_CREDITS;
       await DB.prepare("UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?")
-        .bind(allowance, now, session.user.id)
+        .bind(grant, now, session.user.id)
         .run();
-      credits = allowance;
+      credits = grant;
+    } else if (now - row.creditResetAt >= CREDIT_RESET_DAYS * 24 * 60 * 60 * 1000) {
+      // Trial spent and window lapsed: free plans do NOT refill.
+      if (plan === 'pro') {
+        await DB.prepare("UPDATE user SET credits = ?, creditResetAt = ? WHERE id = ?")
+          .bind(allowance, now, session.user.id)
+          .run();
+        credits = allowance;
+      }
     }
 
     return new Response(JSON.stringify({ credits, plan, allowance }), {

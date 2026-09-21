@@ -90,7 +90,7 @@ export function PricingCards({ proCount, totalTools }: { proCount: number; total
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
-                <span>3 downloads/day (5/day + 10 AI credits/month after signing in free)</span>
+                <span>3 downloads/day (5/day + 5 trial AI credits after signing in free)</span>
               </li>
               <li className="flex items-center gap-3">
                 <Check className="w-4.5 h-4.5 text-[var(--success)] shrink-0" />
