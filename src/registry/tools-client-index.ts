@@ -298,7 +298,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PPT to PDF",
     "slug": "ppt-to-pdf",
     "category": "PDF",
-    "description": "Convert PowerPoint presentations to PDF with accurate slide rendering. Server-side conversion preserves fonts and layouts.",
+    "description": "Convert PowerPoint presentations to PDF with accurate slide rendering, right in your browser. Nothing uploaded.",
     "isPro": false
   },
   {
@@ -394,7 +394,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Text to Speech (TTS)",
     "slug": "text-to-speech-tts",
     "category": "Audio",
-    "description": "Generate natural-sounding speech from text with AI voices in Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download as MP3 or WAV.",
+    "description": "Generate natural-sounding speech from text using your browser's built-in voices, including Hindi, Tamil, Telugu, Bengali, and more Indian languages. Adjust speed, pitch, and volume — download your text as .txt.",
     "isPro": false
   },
   {
@@ -418,7 +418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "URL Shortener",
     "slug": "url-shortener",
     "category": "Utility",
-    "description": "Takes any long URL and generates a compact, shareable short link with optional custom alias support. Uses cloud-based processing.",
+    "description": "Takes any long URL and generates a compact, shareable short link. Uses cloud-based processing.",
     "isPro": false
   },
   {
@@ -658,7 +658,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Speech to Text",
     "slug": "speech-to-text",
     "category": "Audio",
-    "description": "Transcribe audio to text in multiple languages — supports MP3, WAV, M4A, and FLAC with AI-powered speech recognition.",
+    "description": "Dictate live microphone speech to text in multiple languages using on-device browser recognition.",
     "isPro": false
   },
   {
@@ -666,7 +666,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "PDF to EPUB",
     "slug": "pdf-to-epub",
     "category": "PDF",
-    "description": "Convert PDF documents to EPUB format for e-book readers. Server-side conversion preserves layout, images, and chapter structure.",
+    "description": "Convert PDF documents to EPUB format for e-book readers right in your browser. Preserves layout, images, and chapter structure — nothing uploaded.",
     "isPro": false
   },
   {
@@ -1506,7 +1506,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IFSC Code Lookup",
     "slug": "ifsc-code-lookup",
     "category": "indian-utilities",
-    "description": "Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Uses the built-in IFSC database for instant results.",
+    "description": "Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Live lookup via the Razorpay IFSC API.",
     "isPro": false
   },
   {
@@ -1602,7 +1602,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Blur Face Online",
     "slug": "blur-face",
     "category": "Image",
-    "description": "Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. No signup or account required.",
+    "description": "Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. No signup or account required.",
     "isPro": false
   },
   {

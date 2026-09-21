@@ -99,7 +99,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'IFSC Code Lookup',
     slug: 'ifsc-code-lookup',
-    description: 'Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Uses the built-in IFSC database for instant results.',
+    description: 'Looks up bank details from an 11-character IFSC code — bank name, branch, address, city, district, and contact info. Live lookup via the Razorpay IFSC API.',
     seoDescription: 'Free online IFSC Code Lookup — Find bank name, branch, address, city, district, and contact details from any 11-character IFSC code. Instant lookup with comprehensive bank database.',
     category: 'indian-utilities',
     id:  "236",
@@ -109,7 +109,7 @@ export const entries_chunk_1: ToolMetadata[] = [
       { question: "What is an IFSC code?", answer: "IFSC (Indian Financial System Code) is an 11-character alphanumeric code assigned by the RBI to identify bank branches for electronic fund transfers (NEFT, RTGS, IMPS). Format: AAAA0NNNNNN (first 4 = bank, 5th = 0, last 6 = branch)." },
       { question: "Does it cover all Indian banks?", answer: "Yes. The database includes IFSC codes for all RBI-registered banks — SBI, HDFC, ICICI, Axis, PNB, Bank of India, cooperative banks, and regional rural banks." },
       { question: "Can I use this for UPI or NEFT transfers?", answer: "The lookup verifies IFSC details before initiating transfers. Use it to confirm the correct branch code before sending money via NEFT, RTGS, or IMPS to avoid failed transactions." },
-      { question: "Is the lookup done offline?", answer: "The tool uses a local IFSC database for instant results. No bank data is transmitted during lookup." },
+      { question: "Is the lookup done offline?", answer: "No. Each lookup queries the live Razorpay IFSC API, so it needs an internet connection. Only the code you type leaves the browser, and nothing is stored." },
     ],
   },
   {
@@ -129,6 +129,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: 'indian-utilities',
     id:  "238",
     dependencies: 'Postal API',
+    faqs: [
+      { question: "Is my search sent anywhere?", answer: "Yes. Lookups query the live postal API, so the pincode or name you search is transmitted for the lookup. Nothing is stored — there is no search history beyond your own browser session." },
+      { question: "How current is the data?", answer: "Results come live from the official postal API on every search — no stale built-in database. For critical address verification, cross-check with India Post." },
+      { question: "What counts against the daily limit?", answer: "Each successful lookup counts once. Failed validations (wrong length, non-numeric input) never count." },
+    ],
   },
   {
     name: 'Hindi / Regional Font Generator',
@@ -235,11 +240,11 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'Blur Face Online',
     slug: 'blur-face',
-    description: 'Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. No signup or account required.',
-    seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using AI-powered computer vision and applies an adjustable blur effect to each detected face. ',
+    description: 'Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. No signup or account required.',
+    seoDescription: 'Free online Blur Face Online — Detects faces in uploaded images using on-device AI computer vision and applies an adjustable blur effect to each detected face. ',
     category: 'Image',
     id:  "250",
-    dependencies: 'AI API',
+    dependencies: 'TensorFlow.js (on-device)',
     faqs: [
       { question: "How does face detection work?", answer: "The tool uses an AI-powered computer vision model to detect faces in the image. It identifies face bounding boxes and applies a configurable Gaussian blur effect to each detected region." },
       { question: "Can I adjust the blur intensity?", answer: "Yes. An adjustable blur slider lets you control the intensity from subtle to completely unrecognizable. Preview the effect before downloading." },
@@ -819,6 +824,11 @@ export const entries_chunk_1: ToolMetadata[] = [
     description: 'Generates legally correct formal complaint letters citing Indian consumer law — Consumer Protection Act 2019, RERA, TRAI, or RBI regulations. AI-powered with your API key.',
     seoDescription: 'Free online Complaint Letter Generator India — Create formal complaint letters citing Consumer Protection Act 2019, RERA, TRAI, RBI. Draft legal notices for telecom, banking, real estate, and e-commerce issues.',
     dependencies: "AI API",
+    faqs: [
+      { question: "Where does my complaint text go?", answer: "Your draft is sent to the AI provider you configured for generation. Choose a provider whose privacy policy you trust, and never paste passwords, OTPs, or card numbers into the complaint details." },
+      { question: "Is the generated letter legally valid?", answer: "It follows formal Indian consumer-law structure (Consumer Protection Act 2019, RERA, TRAI, RBI), but it is a draft, not legal advice. Review the facts and have an advocate vet it before sending." },
+      { question: "Do I need an API key?", answer: "Yes. Generation uses your own configured AI provider key — the tool itself stores nothing." },
+    ],
   },
   {
     id: "auto-10030",

@@ -263,6 +263,8 @@ const LOCAL_SAFE_PATTERNS: readonly string[] = [
   "fflate",
   "Potrace",
   "qpdf",
+  // Browser ML runtimes (models may download once; user data never leaves)
+  "TensorFlow.js",
   "Web Speech API",
   "fetch API",
 ];

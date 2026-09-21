@@ -604,10 +604,10 @@ export const categoryFaqTemplates: Record<string, ((tool: ToolMetadata) => { que
     { question: `Do I need design experience?`, answer: `No. The tools are designed to be intuitive. Adjust controls and see changes in real time.` },
   ],
   "Transcription": (tool) => [
-    { question: `What does ${tool.name} do?`, answer: `${tool.description} All processing happens locally where supported.` },
+    { question: `What does ${tool.name} do?`, answer: `${tool.description} Audio and text are sent to our server for AI processing.` },
     { question: `How accurate is the transcription?`, answer: `Accuracy depends on audio quality, speaker clarity, and background noise. Clean recordings produce the best results.` },
     { question: `What audio formats are supported?`, answer: `Most tools support MP3, WAV, M4A, FLAC, and video formats like MP4 and MOV.` },
-    { question: `Is my audio data private?`, answer: `Transcription runs locally using WebAssembly where possible. Audio data stays on your device.` },
+    { question: `Is my audio data private?`, answer: `Your audio is sent to our server for AI transcription and deleted after processing — it is never stored or shared.` },
     { question: `Can I edit the transcript?`, answer: `Yes. The generated text is fully editable — correct errors, add punctuation, and format before copying.` },
   ],
   "Productivity": (tool) => [

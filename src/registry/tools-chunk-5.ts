@@ -2203,6 +2203,11 @@ export const entries_chunk_5: ToolMetadata[] = [
     description: 'Shorten hundreds of URLs in one batch. Paste a list or upload a CSV — get shortened links with copy-all and CSV export. Uses cloud-based processing.',
     seoDescription: 'Free online Bulk URL Shortener — Shorten hundreds of URLs at once. Paste a list or upload a CSV, get shortened links with copy-all and CSV export. ',
     dependencies: "Node.js / Redis",
+    faqs: [
+      { question: "Where do my URLs go?", answer: "Each URL is sent to our shortening API one by one. Destination URLs are visible to the shortening service by design — don't bulk-shorten private links with secrets or tokens." },
+      { question: "Why does a big list take a while?", answer: "The API allows about 10 per minute, so large lists process sequentially with automatic retries. Progress is shown live and you can stop anytime." },
+      { question: "What do I get at the end?", answer: "A per-URL status list with copy buttons, copy-all, and CSV export of originals, shortened links, and statuses." },
+    ],
 },
   {
     id: "1093",
