@@ -124,7 +124,7 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.003/min | gpt-4o-mini-transcribe via `/api/ai/transcribe`, 30-min + 25MB caps |
+| Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.003/min non-English, ~$0.0007/min English (Groq) | mini-transcribe / Groq Turbo via `/api/ai/transcribe`, 30-min + 25MB caps |
 | AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
 | AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.039/image | Gemini 2.5 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
 
@@ -162,9 +162,11 @@ getUserLimit(plan, isProTool):
 > ✅ **REPRICED AGAIN Sep 20 2026 (deliberate reversal):** transcription is
 > now 1 credit/min (`CREDITS_PER_MINUTE`, shared `transcriptionPricing.ts`
 > used by backend charges, UI previews, and ToolLayout per-minute badges),
-> 30-min + 25MB caps, gpt-4o-mini-transcribe (~$0.003/min). Free plans CAN
-> transcribe short clips now (10 min/mo) — the old Pro-only lock is gone
-> on purpose: real cost is trivial and it funnels upgrades honestly.
+> 30-min + 25MB caps, gpt-4o-mini-transcribe (~$0.003/min) for non-English
+> and Groq Whisper Turbo (~$0.0007/min) for English, with OpenAI fallback.
+> Free plans CAN transcribe short clips now (10 min/mo) — the old Pro-only
+> lock is gone on purpose: real cost is trivial and it funnels upgrades
+> honestly.
 
 > ✅ **RESOLVED Sep 12 2026, repriced Sep 17 2026, repriced again Sep 20 2026:**
 > transcription is now 1 credit/min (`CREDITS_PER_MINUTE` in

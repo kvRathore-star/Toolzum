@@ -1,6 +1,7 @@
 interface Env {
   DB: D1Database;
   OPENAI_API_KEY: string;
+  GROQ_API_KEY?: string;
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
@@ -18,14 +19,17 @@ import {
   TRANSCRIPTION_MAX_BYTES,
   transcriptionCostForDuration,
   transcriptionMaxPlausibleSeconds,
+  transcriptionProviderForLanguage,
+  type TranscriptionProvider,
 } from '../../../src/lib/transcriptionPricing';
 
-// Cutover note (Dec 2026 review): provider moved Gemini 1.5 Flash (base64
-// inline, flat 20 credits) → gpt-4o-mini-transcribe (multipart passthrough,
-// 1 credit/min, 30-min cap). Cutover is atomic per request — the flag gates
-// nothing here because old and new share no state; in-flight Gemini requests
-// complete on the prior deployed version (platform drains old isolates),
-// so no job can be abandoned or double-charged mid-flight.
+// Provider routing (Dec 2026 review): English → Groq Whisper Turbo
+// (~$0.0007/min), everything else → gpt-4o-mini-transcribe (~$0.003/min,
+// multilingual). Missing Groq key degrades English to OpenAI; a Groq outage
+// retries once on OpenAI (English only). Cutover is atomic per request —
+// old and new share no state; in-flight requests complete on the prior
+// deployed version (platform drains old isolates), so no job can be
+// abandoned or double-charged mid-flight.
 
 /** Cross-realm file check: `instanceof File` fails when the File comes
  *  from another realm (workers/edge runtimes, undici vs jsdom in tests).
@@ -178,6 +182,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     const openaiKey = context.env.OPENAI_API_KEY;
+    const groqKey = context.env.GROQ_API_KEY;
     if (!openaiKey) {
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
         status: 500,
@@ -187,17 +192,43 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     recordRateLimit(DB, 'ai-trans', userId, '/ai/transcribe');
 
+    // Provider routing: English → Groq Whisper Turbo (~$0.0007/min),
+    // everything else → gpt-4o-mini-transcribe (~$0.003/min, multilingual).
+    // Missing Groq key degrades English to OpenAI rather than 500ing.
+    const validLang =
+      language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language) ? language : null;
+    let provider: TranscriptionProvider = transcriptionProviderForLanguage(validLang);
+    if (provider === 'groq' && !groqKey) provider = 'openai';
+
     const upstream = new FormData();
     upstream.append('file', file as unknown as Blob, file.name || 'audio.mpeg');
-    upstream.append('model', 'gpt-4o-mini-transcribe');
-    if (language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language)) upstream.append('language', language);
+    upstream.append('model', provider === 'groq' ? 'whisper-large-v3-turbo' : 'gpt-4o-mini-transcribe');
+    if (validLang) upstream.append('language', validLang);
     upstream.append('response_format', responseFormat === 'srt' ? 'srt' : 'text');
 
-    const res = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${openaiKey}` },
-      body: upstream,
-    });
+    async function runTranscription(which: TranscriptionProvider): Promise<Response> {
+      // Model is (re)set per attempt: a Groq→OpenAI fallback must not leak
+      // the turbo model name into the OpenAI call.
+      upstream.set('model', which === 'groq' ? 'whisper-large-v3-turbo' : 'gpt-4o-mini-transcribe');
+      const target =
+        which === 'groq'
+          ? 'https://api.groq.com/openai/v1/audio/transcriptions'
+          : 'https://api.openai.com/v1/audio/transcriptions';
+      const key = which === 'groq' ? groqKey! : openaiKey;
+      return fetch(target, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${key}` },
+        body: upstream,
+      });
+    }
+
+    let res = await runTranscription(provider);
+    // English-only fallback: a Groq outage retries once on mini-transcribe
+    // (valid for English input; never used to cover other languages).
+    if (!res.ok && provider === 'groq') {
+      console.error('Groq transcription failed, retrying on OpenAI');
+      res = await runTranscription('openai');
+    }
 
     if (!res.ok) {
       const errBody = await res.text();

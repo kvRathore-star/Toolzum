@@ -91,10 +91,10 @@ export default function IndianVoiceTranscriber() {
       const formData = new FormData();
       formData.append('file', audioFile);
       formData.append('durationSec', String(Math.round(billSec)));
+      // Always explicit: backend routes English→Groq, everything else→mini.
+      // Omitting it would default English traffic to the pricier path.
+      formData.append('language', selectedLanguage);
       formData.append('response_format', showTimestamps ? 'srt' : 'text');
-      if (selectedLanguage !== 'en') {
-        formData.append('language', selectedLanguage);
-      }
 
       const response = await fetch('/api/ai/transcribe', {
         method: 'POST',

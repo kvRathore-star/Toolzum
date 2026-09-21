@@ -264,3 +264,82 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
     vi.unstubAllGlobals();
   });
 });
+
+describe('POST /api/ai/transcribe provider routing (English Groq, rest mini)', () => {
+  const F = { name: 'clip.mp3', mime: 'audio/mpeg', content: 'fake-audio-bytes' };
+  const envBoth = (credits = 30) => ({
+    DB: mockDb({ credits }),
+    OPENAI_API_KEY: 'ok',
+    GROQ_API_KEY: 'gk',
+  }) as unknown as typeof ENV;
+
+  function calledUrls(fetchSpy: ReturnType<typeof vi.fn>) {
+    return fetchSpy.mock.calls.map(c => (c as unknown[])[0] as string);
+  }
+
+  it('routes English to Groq', async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+      env: envBoth(),
+    });
+    expect(res.status).toBe(200);
+    expect(calledUrls(fetchSpy)).toEqual(['https://api.groq.com/openai/v1/audio/transcriptions']);
+    vi.unstubAllGlobals();
+  });
+
+  it('routes Hindi to OpenAI mini-transcribe', async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'hi' } }),
+      env: envBoth(),
+    });
+    expect(res.status).toBe(200);
+    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
+    vi.unstubAllGlobals();
+  });
+
+  it('routes missing language to OpenAI (safe default, never English-leaning)', async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60' } }),
+      env: envBoth(),
+    });
+    expect(res.status).toBe(200);
+    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
+    vi.unstubAllGlobals();
+  });
+
+  it('degrades English to OpenAI when GROQ_API_KEY is missing', async () => {
+    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: mockDb({ credits: 30 }), OPENAI_API_KEY: 'ok' } as unknown as typeof ENV;
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+      env,
+    });
+    expect(res.status).toBe(200);
+    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
+    vi.unstubAllGlobals();
+  });
+
+  it('retries English once on OpenAI after a Groq failure', async () => {
+    const fetchSpy = vi.fn()
+      .mockResolvedValueOnce({ ok: false, status: 500, text: () => Promise.resolve('boom') })
+      .mockResolvedValueOnce({ ok: true, text: () => Promise.resolve('hi') });
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+      env: envBoth(),
+    });
+    expect(res.status).toBe(200);
+    expect(calledUrls(fetchSpy)).toEqual([
+      'https://api.groq.com/openai/v1/audio/transcriptions',
+      'https://api.openai.com/v1/audio/transcriptions',
+    ]);
+    vi.unstubAllGlobals();
+  });
+});
