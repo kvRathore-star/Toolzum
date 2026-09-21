@@ -1068,8 +1068,13 @@ export const entries_chunk_1: ToolMetadata[] = [
     category: "PDF",
     description: 'Extract text from a PDF and translate it between 20 languages. Output is plain text (PDF formatting is not preserved). Text limited to 5,000 characters.',
     seoDescription: 'Free online Translate PDF — Extract text from a PDF and translate it between 20 languages. Output is plain text.',
-    dependencies: "pdfjs-dist",
+    dependencies: "pdfjs-dist / MyMemory API",
     showInCategory: true,
+    faqs: [
+      { question: "Is my document uploaded?", answer: "Only extracted text (up to 5,000 characters) is transmitted for translation; the PDF itself is never transmitted. Nothing is stored after the translation returns." },
+      { question: "Why is output plain text?", answer: "Only extracted text is translated, so PDF layout, fonts, and images do not carry over. For layout-preserving conversion, use a PDF converter instead." },
+      { question: "Which target languages are supported?", answer: "20 languages via the translation API. Quality is best between major languages; rare pairs may need a human pass." },
+    ],
   },
   {
     id: "319",

@@ -95,6 +95,9 @@ export const CLOUD_API_PATTERNS: readonly string[] = [
   "Postal API",
   "Vectorize",
   "AI speech recognition",
+  "MyMemory",
+  "RDAP",
+  "crt.sh",
 ];
 
 /**

@@ -22,9 +22,9 @@ export const TOOL_COUNT = 1142;
 export const SITE_STATS = {
   totalImplemented: 1059,
   freeTierTotal: 994,
-  localTools: 1029,
-  cloudTools: 25,
-  hybridTools: 1,
+  localTools: 1026,
+  cloudTools: 27,
+  hybridTools: 2,
 } as const;
 
 export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
