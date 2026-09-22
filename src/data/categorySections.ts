@@ -1239,35 +1239,35 @@ export const CATEGORY_INTROS: Record<string, string> = {
   Calculator:
     "Online calculators for percentages, fractions, dates, grades, and everyday math — EMI-style precision without the signup. Every calculation runs in your browser; results appear as you type, and nothing you enter is ever sent to a server.",
   Utility:
-    "83 everyday utility tools — password and random generators, unit converters, CSV cleaners, timers, resume builder, QR codes, and more. Generate a strong password, convert kilograms to pounds, or analyze a CSV: all processing happens locally in your browser with nothing uploaded.",
+    "{count} everyday utility tools — password and random generators, unit converters, CSV cleaners, timers, resume builder, QR codes, and more. Generate a strong password, convert kilograms to pounds, or analyze a CSV: all processing happens locally in your browser with nothing uploaded.",
   Audio:
-    "16 browser-based audio tools — convert MP3, WAV, FLAC, OGG, and AAC, transcribe speech to text, trim clips, and synthesize speech in Indian languages. Powered by FFmpeg WASM and Whisper running on your device; files are never uploaded.",
+    "{count} browser-based audio tools — convert MP3, WAV, FLAC, OGG, and AAC, trim clips, and synthesize speech in Indian languages. Speech-to-text runs on our transcription API (1 credit/min); everything else processes locally with FFmpeg WASM and files are never uploaded.",
   Image:
-    "42 image tools — compress JPGs 60–80% without visible loss, remove backgrounds with AI, resize to exact pixels, convert PNG to JPG, and crop passport photos. Everything renders in your browser; your photos never leave your device.",
+    "{count} image tools — compress JPGs 60–80% without visible loss, remove backgrounds with AI, resize to exact pixels, convert PNG to JPG, and crop passport photos. Everything renders in your browser; your photos never leave your device.",
   PDF:
-    "62 PDF tools — merge 20+ files with drag-and-drop, compress for email, convert JPG to PDF and PDF to Word, split chapters, and fill forms. All processing is local via pdf-lib; documents are never uploaded.",
+    "{count} PDF tools — edit with the full in-browser editor, merge 20+ files with drag-and-drop, compress for email, convert JPG to PDF and PDF to Word, split chapters, and fill forms. Editing and conversion run locally via pdf-lib; only the optional AI actions (summarize, translate, PII sweep) send page text to our server.",
   Video:
-    "19 browser-based video tools — compress MP4s, convert to GIF, trim clips, extract MP3 audio, and add subtitles using FFmpeg WASM on your device. Nothing is uploaded to any server.",
+    "{count} browser-based video tools — compress MP4s, convert to GIF, trim clips, extract MP3 audio, and add subtitles using FFmpeg WASM on your device. Nothing is uploaded to any server.",
   Converter:
-    "38 file converters — Markdown to HTML, JSON to CSV, EPUB to PDF, images to PDF, and dozens more. Every conversion happens locally in your browser; documents and data are never uploaded.",
+    "{count} file converters — Markdown to HTML, JSON to CSV, EPUB to PDF, images to PDF, and dozens more. Every conversion happens locally in your browser; documents and data are never uploaded.",
   SEO:
-    "14 SEO tools — check keyword density, preview Google snippets, generate XML sitemaps, validate robots.txt, and audit canonical tags. All analysis runs locally in your browser with no data sent anywhere.",
+    "{count} SEO tools — check keyword density, preview Google snippets, validate robots.txt, and audit canonical tags locally. The sitemap crawler runs on our server (it must fetch the target site); everything else analyzes in your browser.",
   Health:
     "Health calculators — BMI, BMR via Mifflin-St Jeor, TDEE with activity multipliers, body fat, heart-rate zones, ovulation windows, and calorie needs. All math runs locally; no health data ever leaves your browser.",
   AI:
-    "16 AI tools — generate images, transcribe audio, summarize documents, check grammar, and upscale photos. Cloud AI features are clearly marked; everything else runs on-device with nothing uploaded.",
+    "{count} AI tools — generate images, transcribe audio, summarize documents, check grammar, and upscale photos. Cloud AI features are clearly marked; everything else runs on-device with nothing uploaded.",
   Text:
-    "27 text tools — live word counts with Flesch-Kincaid readability, case conversion, fancy Unicode fonts, handwriting rendering, diff checking, and lorem ipsum. All processing happens locally with no sign-up and no limits.",
+    "{count} text tools — live word counts with Flesch-Kincaid readability, case conversion, fancy Unicode fonts, handwriting rendering, diff checking, and lorem ipsum. All processing happens locally with no sign-up and no limits.",
   Branding:
-    "8 branding tools — logo maker, business cards, email signatures, link-in-bio pages, and social calendars. Every tool runs locally in your browser; your brand assets stay yours.",
+    "{count} branding tools — logo maker, business cards, email signatures, link-in-bio pages, and social calendars. Every tool runs locally in your browser; your brand assets stay yours.",
   Design:
     "Design utilities — pick colors with eyedropper precision, generate harmonious palettes, preview typography, edit SVG, and subset fonts. All processing happens locally — no uploads, no accounts.",
   Finance:
-    "33 financial tools — EMI with reducing-balance math, SIP projections with worked examples, margin vs markup solver, GST invoices, salary take-home, and CAGR. Every calculation runs in your browser; no financial data is transmitted.",
+    "{count} financial tools — EMI with reducing-balance math, SIP projections with worked examples, margin vs markup solver, GST invoices, salary take-home, and CAGR. Every calculation runs in your browser; no financial data is transmitted.",
   Privacy:
-    "7 privacy tools — strip GPS EXIF before posting, validate Aadhaar format offline, check password strength, generate PGP keys, and share self-destructing notes. All processing happens locally with nothing uploaded.",
+    "{count} privacy tools — strip GPS EXIF before posting, validate Aadhaar format offline, check password strength, generate PGP keys, and share self-destructing notes. All processing happens locally with nothing uploaded.",
   "indian-utilities":
-    "26 India-specific tools — passport photos (3.5×4.5 cm), PAN resizing, Aadhaar masking and validation, GST calculators and invoices, IFSC lookup, and UPI validation. Built for NSDL, UIDAI, and GST-portal realities; everything runs in your browser.",
+    "{count} India-specific tools — passport photos (3.5×4.5 cm), PAN resizing, Aadhaar masking and validation, GST calculators and invoices, IFSC lookup, and UPI validation. Built for NSDL, UIDAI, and GST-portal realities; everything runs in your browser.",
   Transcription:
     "Transcription tools — speech-to-text from MP3/WAV/M4A/FLAC, YouTube transcripts from URLs, and meeting-minutes generation. Whisper-grade accuracy with on-device options; recordings stay yours.",
   Extension:

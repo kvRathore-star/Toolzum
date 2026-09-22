@@ -103,7 +103,13 @@ export default async function CategoryPage(props: { params: Promise<{ category: 
     ? allTools.filter(t => !sections.some(s => s.slugs.includes(t.slug)))
     : allTools;
 
-  const intro = CATEGORY_INTROS[categoryKey] || '';
+  const rawIntro = CATEGORY_INTROS[categoryKey] || '';
+  // Counts drift whenever tools ship — {count} renders the live total so
+  // intros can never go stale (the "62 PDF tools" era is over).
+  const allToolsForCount = toolsRegistry.filter(t =>
+    t.category === categoryKey && t.showInCategory !== false
+  );
+  const intro = rawIntro.replace('{count}', String(allToolsForCount.length));
 
   return (
     <CategoryPageClient

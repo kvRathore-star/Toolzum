@@ -143,8 +143,32 @@ export default function PdfEditor() {
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
-  // Focus mode: hides side panels + footer strips, canvas takes the row.
+  const rootRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
+
+  // Focus = true browser fullscreen on the editor root (Google-Docs-style):
+  // site chrome disappears, toolbar + canvas + thumbs stay. Falls back to
+  // the panels-hidden layout where the Fullscreen API is unavailable.
+  const toggleFocus = async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else if (rootRef.current?.requestFullscreen) {
+        setFocus(true);
+        await rootRef.current.requestFullscreen();
+      } else {
+        setFocus((f) => !f);
+      }
+    } catch {
+      setFocus((f) => !f);
+    }
+  };
+
+  useEffect(() => {
+    const sync = () => setFocus(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', sync);
+    return () => document.removeEventListener('fullscreenchange', sync);
+  }, []);
   const [findText, setFindText] = useState('');
   const [replaceText, setReplaceText] = useState('');
   const [replaceScope, setReplaceScope] = useState<'page' | 'all'>('page');
@@ -165,7 +189,13 @@ export default function PdfEditor() {
   const openBytes = async (bytes: Uint8Array, name: string) => {
     const toastId = toast.loading('Opening PDF…');
     try {
-      const doc = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+      // A private copy goes to pdf.js (it detaches whatever buffer it parses);
+      // the original stays intact for pdf-lib export. 45s timeout separates
+      // "worker/file too slow" from "unparseable" in the error below.
+      const doc = await Promise.race([
+        pdfjsLib.getDocument({ data: bytes.slice() }).promise,
+        new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 45000)),
+      ]);
       if (doc.numPages > MAX_PAGES) {
         toast.error(`This PDF has ${doc.numPages} pages (limit ${MAX_PAGES}) — split it first, then edit in parts.`, { id: toastId });
         try { await doc.destroy(); } catch { /* ignore */ }
@@ -179,10 +209,21 @@ export default function PdfEditor() {
       setAnnos({});
       setSelected(null);
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
-    } catch {
-      toast.error('Could not open this PDF — it may be encrypted or corrupted.', { id: toastId });
+    } catch (e) {
+      toast.error(
+        e instanceof Error && e.message === 'timeout'
+          ? 'Opening is taking too long — the file may be huge or the worker failed to load. Retry, or try a smaller file.'
+          : 'Could not open this PDF — it may be encrypted or corrupted.',
+        { id: toastId },
+      );
     }
   };
+
+  // Warm the pdf.js worker on mount: first open raced a cold 1.4MB worker
+  // load and failed intermittently ("opens after refresh" reports).
+  useEffect(() => {
+    fetch('/pdf.worker.min.mjs', { method: 'HEAD' }).catch(() => {});
+  }, []);
 
   const loadFile = async (f: File) => {
     if (f.size > MAX_FILE_BYTES) {
@@ -1133,7 +1174,7 @@ export default function PdfEditor() {
   }
 
   return (
-    <div className="space-y-4">
+    <div ref={rootRef} className="space-y-4 fullscreen:bg-[var(--bg-base)] fullscreen:p-4 fullscreen:overflow-auto fullscreen:h-screen">
       {/* Ribbon: file row + grouped action rows. Wraps always — nothing clips. */}
       <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-3 space-y-2.5">
         <div className="flex flex-wrap items-center gap-3">
@@ -1162,7 +1203,7 @@ export default function PdfEditor() {
             ))}
           </div>
           <div className="flex items-center gap-2 ml-auto">
-            <button onClick={() => setFocus((f) => !f)} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+            <button onClick={toggleFocus} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
               {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
             </button>
             <button onClick={exportPdf} disabled={exporting} aria-label="Download edited PDF" title="Download the edited PDF" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
@@ -1301,9 +1342,10 @@ export default function PdfEditor() {
         </div>
       )}
 
-      <div className={`grid grid-cols-1 gap-4 ${focus ? '' : 'lg:grid-cols-12'}`}>
-        {!focus && (
-        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-1.5">
+      {/* Focus keeps all three columns (toolbar is never hidden) and drops
+          only the footer strips; true fullscreen comes from the browser API. */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+        <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-1.5 max-h-[720px] overflow-y-auto">
           {tools.map((t) => (
             <button
               key={t.id}
@@ -1450,9 +1492,8 @@ export default function PdfEditor() {
             <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
           </div>
         </div>
-        )}
 
-        <div className={`${focus ? '' : 'lg:col-span-8'} bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto`}>
+        <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <canvas ref={canvasRef} className="rounded-lg shadow" />
             <canvas
@@ -1498,6 +1539,24 @@ export default function PdfEditor() {
         )}
       </div>
 
+      {/* Status bar (Voidmark-style): live doc stats, always visible. */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]" aria-label="Document status">
+        <span>{file?.name}</span>
+        <span>{(fileBytes ? (fileBytes.length / 1024 / 1024).toFixed(1) : '0')} MB</span>
+        <span>{pageCount} pages</span>
+        <span>{Object.values(annos).reduce((n, l) => n + l.length, 0)} annotations</span>
+        <span className="ml-auto">{Math.round(scale * 100)}%</span>
+       </div>
+
+      {/* Status bar (Voidmark-style): live doc stats, always visible. */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-4 py-2 rounded-2xl bg-[var(--bg-elevated)] border border-[var(--border-subtle)] text-[11px] font-mono text-[var(--text-muted)]" aria-label="Document status">
+        <span className="truncate max-w-[220px]">{file?.name}</span>
+        <span>{fileBytes ? (fileBytes.length / 1024 / 1024).toFixed(1) : '0'} MB</span>
+        <span>{pageCount} pages</span>
+        <span>{Object.values(annos).reduce((n, l) => n + l.length, 0)} annotations</span>
+        <span className="ml-auto">{Math.round(scale * 100)}%</span>
+      </div>
+
       {!focus && (
       <>
       <p className="text-xs text-[var(--text-muted)] text-center">
@@ -1524,10 +1583,12 @@ export default function PdfEditor() {
           ['PDF to Word', '/pdf/pdf-to-word'],
           ['Extract images', '/pdf/extract-images-from-pdf'],
           ['Page manager', '/pdf/pdf-page-manager'],
-          ['Emoji picker', '/utility/emoji-picker'],
-          ['QR codes', '/utility/qr-code-generator'],
-          ['AI translator', '/ai/ai-translator'],
-          ['AI paraphraser', '/ai/ai-paraphrasing-tool'],
+          ['OCR document', '/pdf/pdf-ocr'],
+          ['Compare PDFs', '/pdf/compare-pdf-files'],
+          ['Metadata', '/pdf/pdf-metadata-editor'],
+          ['Fill form', '/pdf/pdf-form-filler'],
+          ['E-sign', '/pdf/esign-pdf'],
+          ['AI summarize', '/pdf/pdf-ai-summariser'],
         ] as [string, string][]).map(([label, href]) => (
           <Link key={href} href={href} className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
             {label}

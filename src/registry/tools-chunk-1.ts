@@ -420,7 +420,7 @@ export const entries_chunk_1: ToolMetadata[] = [
   {
     name: 'PDF Editor',
     slug: 'pdf-editor',
-    description: 'Add text, highlights, drawings, shapes, sticky notes, images, signatures, and cover-up blocks to any PDF, with zoom, page rotate/duplicate/delete, one-click retyping, OCR for scans, and AI summarize/fix actions. Free, no signup, no watermark, runs locally in your browser.',
+    description: 'Add text, highlights, drawings, shapes, sticky notes, images, signatures, and cover-up blocks to any PDF, with zoom, page rotate/duplicate/delete, one-click retyping, OCR for scans, and AI summarize/fix actions. Free, no signup, no watermark; editing runs locally in your browser, and only the optional AI buttons send page text to our server (1 credit, labeled in-tool).',
     seoDescription: 'Free online PDF Editor \u2014 add text, highlight, draw, sign, OCR scans, and AI-summarize PDFs in your browser. No signup, no watermark, nothing uploaded. ',
     category: 'PDF',
     id: "1104",
