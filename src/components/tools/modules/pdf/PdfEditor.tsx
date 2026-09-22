@@ -482,16 +482,14 @@ export default function PdfEditor() {
 
   // In-editor AI: acts on the drag-selection when present, else the whole
   // page. 1 credit via /api/ai/generate — signed-in only, never auto-retried.
-  // Translate is the Pro-only action (visible ladder: free tools → trial AI
-  // → Pro AI); summarize/grammar stay trial-spendable for signed-in users.
+  // Gating matches the standalone tools exactly (translator/paraphraser are
+  // signed-in-spend-credits, never Pro): per-surface locks would be arbitrary.
+  // Only editor-exclusive automation (PII sweep) is Pro — nothing else to
+  // compare it against.
   const runAiAction = async (action: 'summarize' | 'grammar' | 'translate') => {
     if (!pdfDoc) return;
     if (!isSignedIn) {
       toast.error('AI actions cost 1 credit — sign in to use them.');
-      return;
-    }
-    if (action === 'translate' && !isPro) {
-      toast.error('Translate is a Pro feature — upgrade to unlock. Summarize and grammar check work on trial credits.');
       return;
     }
     setAiWorking(true);
@@ -1164,8 +1162,8 @@ export default function PdfEditor() {
           <button onClick={() => runAiAction('grammar')} disabled={aiWorking} aria-label="Fix grammar with AI, 1 credit" title={isSignedIn ? 'Fix grammar · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
             <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'}
           </button>
-          <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, Pro, 1 credit" title={isPro ? 'Translate to English · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Translate'}
+          <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, 1 credit" title={isSignedIn ? 'Translate to English · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+            <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Translate'}
           </button>
           <button onClick={findSensitive} disabled={aiWorking} aria-label="Suggest sensitive-data cover boxes with AI, Pro, 1 credit" title={isPro ? 'Find sensitive data · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
             {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'}
