@@ -30,12 +30,22 @@ export function PostDownloadSurvey() {
   };
 
   const respond = (helpful: boolean) => {
+    const vote = helpful ? 'yes' : 'no';
+    // Local first (instant, offline-safe), server second (best-effort —
+    // a failed POST must never block or error the survey UX).
     try {
       const responses = JSON.parse(localStorage.getItem("th_survey_responses") || "[]");
       responses.push({ helpful, timestamp: Date.now() });
       localStorage.setItem("th_survey_responses", JSON.stringify(responses));
       localStorage.setItem(SURVEY_KEY, "1");
     } catch (e) { console.error("[toolzum]", e); }
+    try {
+      fetch("/api/analytics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: window.location.pathname || '/', event: 'vote', vote }),
+      }).catch(() => {});
+    } catch { /* best-effort */ }
     setVisible(false);
     if (helpful) {
       toast.success("Glad it helped!");

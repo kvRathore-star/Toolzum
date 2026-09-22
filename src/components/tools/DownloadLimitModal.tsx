@@ -100,7 +100,7 @@ export function DownloadLimitModal() {
           }
         : {
             title: "Daily download limit reached",
-            body: "You've used up your free downloads for today. Sign in for more, or go Pro for unlimited downloads.",
+            body: "You've used up today's free downloads. Come back tomorrow, or go Pro for unlimited downloads.",
           }
     : !signedIn && event.type === "plan" && event.detail.reason === "file_size"
       ? {
