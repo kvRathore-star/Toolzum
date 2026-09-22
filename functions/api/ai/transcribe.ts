@@ -247,9 +247,11 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       const base64 = toBase64(rawBytes);
       const mimeType = file.type || 'audio/mpeg';
       const langInstruction =
-        validLang && validLang !== 'en' ? `Transcribe the audio into ${validLang}. ` : '';
+        validLang && validLang !== 'en' ? `Transcribe the ${validLang} audio into ${validLang}. ` : '';
+      // Purpose-built STT model (85+ langs, 1hr/request): strictly better
+      // than the generic flash model previously used here, same free tier.
       const gres = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=${geminiKey}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

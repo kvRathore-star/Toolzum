@@ -1846,8 +1846,8 @@ export const entries_chunk_0: ToolMetadata[] = [
     seoDescription: 'Free online Podcast Transcription — Upload a podcast episode audio file and get a full text transcript using AI speech recognition.',
     dependencies: "AI speech recognition API",
     faqs: [
-      { question: "Is my podcast audio uploaded?", answer: "Yes. Your episode file is sent to our server for AI transcription and deleted after processing — it is never stored or shared." },
-      { question: "What does podcast transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include 10 credits/month, Pro 200/month." },
+      { question: "Is my podcast audio uploaded?", answer: "Yes. Your episode file is sent to our server for AI transcription and deleted after processing — it is never stored or shared by us. Note: transcription runs on a third-party speech service whose free tier may retain samples for service improvement — avoid highly sensitive recordings." },
+      { question: "What does podcast transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include a one-time 5-credit trial; Pro gets 200/month." },
       { question: "What formats are supported?", answer: "MP3, WAV, M4A, OGG, and video files with audio tracks. Files over 25MB or audio over 30 minutes need splitting first." },
     ],
   },

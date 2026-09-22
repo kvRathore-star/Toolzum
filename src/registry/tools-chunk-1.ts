@@ -356,8 +356,8 @@ export const entries_chunk_1: ToolMetadata[] = [
     id:  "264",
     dependencies: 'AI speech recognition API',
     faqs: [
-      { question: "Is my voice recording uploaded?", answer: "Yes. Your recording or file is sent to our server for AI transcription and deleted after processing — it is never stored or shared." },
-      { question: "What does voice transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include 10 credits/month, Pro 200/month." },
+      { question: "Is my voice recording uploaded?", answer: "Yes. Your recording or file is sent to our server for AI transcription and deleted after processing — it is never stored or shared by us. Note: transcription runs on a third-party speech service whose free tier may retain samples for service improvement — avoid dictating secrets or passwords." },
+      { question: "What does voice transcription cost?", answer: "Transcription bills 1 credit per minute of audio (25MB, 30-minute caps). Free plans include a one-time 5-credit trial; Pro gets 200/month." },
       { question: "Which languages work best?", answer: "12 Indian languages plus English: Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia, Urdu, and English. Accuracy is highest on clear speech; heavy background noise lowers it." },
     ],
   },

@@ -169,9 +169,11 @@ getUserLimit(plan, isProTool):
 > used by backend charges, UI previews, and ToolLayout per-minute badges),
 > 30-min + 25MB caps, gpt-4o-mini-transcribe (~$0.003/min) for non-English
 > and Groq Whisper Turbo (~$0.0007/min) for English, with OpenAI fallback.
-> Free plans CAN transcribe short clips now (10 min/mo) — the old Pro-only
-> lock is gone on purpose: real cost is trivial and it funnels upgrades
-> honestly.
+> No-OpenAI-billing fallback is Gemini native audio (free tier) — same
+> metering. Free plans CAN transcribe short clips now (10 min/mo) — the
+> old Pro-only lock is gone on purpose: real cost is trivial and it
+> funnels upgrades honestly. Privacy note: free-tier speech processing
+> may be human-reviewed by the provider — tool FAQs disclose this.
 
 > ✅ **RESOLVED Sep 12 2026, repriced Sep 17 2026, repriced again Sep 20 2026:**
 > transcription is now 1 credit/min (`CREDITS_PER_MINUTE` in
