@@ -1,6 +1,9 @@
 interface Env {
   DB: D1Database;
-  GEMINI_API_KEY: string;
+  GEMINI_API_KEY?: string;
+  AI?: {
+    run(model: string, inputs: unknown): Promise<unknown>;
+  };
 }
 
 import { checkRateLimit, recordRateLimit } from '../rate-limit';
@@ -13,9 +16,17 @@ import {
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 
-// Per-task cost: native image generation (~$0.045/image at 1K) sits between
-// text (1) and transcription (10). At 5 credits: ~6 images/mo free, ~60 Pro/mo.
+// Per-task cost: HD generation (~$0.045/image) costs 5 credits — ~40/mo Pro.
+// (Old comment claimed "~6 images/mo free": stale since the one-time trial;
+// the 5-credit trial buys exactly 1 HD image, or 5 drafts.)
 export const IMAGE_GENERATION_CREDITS = 5;
+
+// Draft tier (Dec 2026): Workers AI FLUX.1-schnell at ~$0.001/image for fast
+// drafts. At 1 credit the ladder reads free → 1 → 5, and every draft that
+// substitutes a hero image saves ~$0.044. Signed-in users only (never anon);
+// the free trial's 5 credits buy 5 drafts, which is the funnel working.
+export const IMAGE_DRAFT_CREDITS = 1;
+export const IMAGE_DRAFT_MODEL = '@cf/black-forest-labs/flux-1-schnell';
 
 // Migrated Sep 21 2026: gemini-2.5-flash-image shut down Oct 2 2026 per
 // Google's deprecations table. Successor is gemini-3.1-flash-image (GA since
@@ -89,9 +100,29 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     const plan = await effectivePlanForUser(DB, userId, storedPlan);
     const resetPlan = resolvePlan(true, storedPlan);
 
-    // Gemini image generation is a Pro-only lever (Pollinations stays free
-    // for everyone). Signed-in free users get a 402-style upsell, not a silent 401.
-    if (plan !== 'pro') {
+    const { prompt, aspectRatio = '1:1', tier = 'hd' } = await context.request.json() as {
+      prompt?: string;
+      aspectRatio?: string;
+      tier?: string;
+    };
+
+    if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
+      return new Response(JSON.stringify({ error: 'Missing prompt' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Tier split: 'draft' (Workers AI, 1 credit, any signed-in user) vs 'hd'
+    // (Gemini, 5 credits, Pro-only). Unknown tier values fall back to 'hd' —
+    // never to the cheaper leg, so a malformed request can't discount itself.
+    const isDraft = tier === 'draft';
+    const cost = isDraft ? IMAGE_DRAFT_CREDITS : IMAGE_GENERATION_CREDITS;
+
+    // HD is a Pro-only lever (Pollinations stays free for everyone; drafts
+    // cost 1 credit for any signed-in user). Signed-in free users get a
+    // 402-style upsell on HD, not a silent 401.
+    if (!isDraft && plan !== 'pro') {
       return new Response(JSON.stringify({ error: 'Pro feature — upgrade for Gemini image generation' }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
@@ -115,28 +146,27 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     const { balance, maxCredits } = await resetCreditsIfNeeded(DB, userId, resetPlan, user.creditResetAt, user.credits);
 
-    if (balance < IMAGE_GENERATION_CREDITS) {
+    if (balance < cost) {
       await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'blocked_exhausted', balance, allowance: maxCredits });
-      return new Response(JSON.stringify({ error: 'Not enough credits — image generation requires 5' }), {
+      return new Response(JSON.stringify({ error: `Not enough credits — image generation requires ${cost}` }), {
         status: 403,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    const { prompt, aspectRatio = '1:1' } = await context.request.json() as {
-      prompt?: string;
-      aspectRatio?: string;
-    };
-
-    if (!prompt || typeof prompt !== 'string' || !prompt.trim()) {
-      return new Response(JSON.stringify({ error: 'Missing prompt' }), {
-        status: 400,
+    const geminiKey = context.env.GEMINI_API_KEY;
+    const aiBinding = context.env.AI;
+    // Each tier gates on its own provider: drafts need the Workers AI
+    // binding, HD needs the Gemini key. A missing provider is a 500 —
+    // and a draft NEVER falls back to Gemini (that would silently 45x
+    // the cost of the request; a failed draft is an honest 502).
+    if (isDraft && !aiBinding) {
+      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
+        status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
     }
-
-    const geminiKey = context.env.GEMINI_API_KEY;
-    if (!geminiKey) {
+    if (!isDraft && !geminiKey) {
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -144,6 +174,49 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     recordRateLimit(DB, 'ai-img', userId, '/ai/generate-image');
+
+    if (isDraft) {
+      // Draft leg: FLUX.1-schnell via Workers AI (~$0.001/image). Response
+      // shape is parsed defensively — string, { image }, or raw bytes —
+      // because binding return shapes vary by model version.
+      let w = 1024;
+      let h = 1024;
+      if (aspectRatio === '16:9') { w = 1024; h = 576; }
+      else if (aspectRatio === '9:16') { w = 576; h = 1024; }
+      let base64: string | null = null;
+      try {
+        const out = await aiBinding!.run(IMAGE_DRAFT_MODEL, {
+          prompt: prompt.trim(),
+          width: w,
+          height: h,
+        });
+        if (typeof out === 'string') {
+          base64 = out.startsWith('data:') ? out.split(',', 2)[1] || null : out;
+        } else if (out && typeof out === 'object' && typeof (out as { image?: unknown }).image === 'string') {
+          const img = (out as { image: string }).image;
+          base64 = img.startsWith('data:') ? img.split(',', 2)[1] || null : img;
+        } else if (out instanceof Uint8Array) {
+          let binary = '';
+          for (let i = 0; i < out.length; i += 0x8000) {
+            binary += String.fromCharCode(...out.subarray(i, i + 0x8000));
+          }
+          base64 = btoa(binary);
+        }
+      } catch (e) {
+        console.error('Workers AI image draft error:', e);
+      }
+      if (!base64) {
+        return new Response(JSON.stringify({ error: 'AI provider error' }), {
+          status: 502,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
+      await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
+      return new Response(JSON.stringify({ image: base64, mimeType: 'image/png' }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     const fullPrompt = aspectRatio && aspectRatio !== '1:1'
       ? `${prompt.trim()} (aspect ratio ${aspectRatio})`
@@ -180,8 +253,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    await DB.prepare(`UPDATE user SET credits = credits - ${IMAGE_GENERATION_CREDITS} WHERE id = ? AND credits >= ${IMAGE_GENERATION_CREDITS}`).bind(userId).run();
-    await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: balance - IMAGE_GENERATION_CREDITS, allowance: maxCredits });
+    await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
+    await logAiCreditEvent(DB, { userId, task: 'image', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
 
     return new Response(JSON.stringify({
       image: imagePart.inlineData.data,

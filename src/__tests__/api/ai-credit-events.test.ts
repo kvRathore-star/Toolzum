@@ -104,7 +104,7 @@ describe('ai_credit_event analytics', () => {
         },
         body,
       }) as unknown as Request,
-      env: { DB: db, OPENAI_API_KEY: 'k' } as never,
+      env: { DB: db, GEMINI_API_KEY: 'k' } as never,
     });
     expect(res.status).toBe(403);
     const evt = seen.find((q) => q.sql.includes('INSERT INTO ai_credit_event'));

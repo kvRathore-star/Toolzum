@@ -1,8 +1,10 @@
 interface Env {
   DB: D1Database;
-  OPENAI_API_KEY?: string;
   GROQ_API_KEY?: string;
   GEMINI_API_KEY?: string;
+  AI?: {
+    run(model: string, inputs: unknown): Promise<unknown>;
+  };
 }
 
 function toBase64(bytes: Uint8Array): string {
@@ -23,22 +25,19 @@ import {
   type EffectivePlan,
 } from '../../../src/lib/planTiers';
 import {
-  TRANSCRIPTION_CREDITS_PER_MINUTE,
   TRANSCRIPTION_MAX_SECONDS,
   TRANSCRIPTION_MAX_BYTES,
   transcriptionCostForDuration,
   transcriptionMaxPlausibleSeconds,
-  transcriptionProviderForLanguage,
-  type TranscriptionProvider,
+  transcriptionProviderChain,
 } from '../../../src/lib/transcriptionPricing';
 
-// Provider routing (Dec 2026 review): English → Groq Whisper Turbo
-// (~$0.0007/min), everything else → gpt-4o-mini-transcribe (~$0.003/min,
-// multilingual). Missing Groq key degrades English to OpenAI; a Groq outage
-// retries once on OpenAI (English only). Cutover is atomic per request —
-// old and new share no state; in-flight requests complete on the prior
-// deployed version (platform drains old isolates), so no job can be
-// abandoned or double-charged mid-flight.
+// Provider chain (Dec 2026 review, rebuilt): Workers AI Whisper Turbo leads
+// for all languages (~$0.0005/min, free daily neurons); Groq covers English
+// outages, Gemini native covers the rest. OpenAI path removed — nothing in
+// the chain needs billing on file. Cutover is atomic per request: providers
+// share no state, in-flight requests complete on the prior deployed version,
+// so no job is abandoned or double-charged mid-flight.
 
 /** Cross-realm file check: `instanceof File` fails when the File comes
  *  from another realm (workers/edge runtimes, undici vs jsdom in tests).
@@ -201,13 +200,19 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       });
     }
 
-    const openaiKey = context.env.OPENAI_API_KEY;
     const groqKey = context.env.GROQ_API_KEY;
     const geminiKey = context.env.GEMINI_API_KEY;
-    // No OpenAI key (no billing on file) is not fatal: Groq covers English
-    // and Gemini native audio (free tier, pre-existing key) covers the rest.
-    // Only 500 when no provider key exists at all.
-    if (!openaiKey && !groqKey && !geminiKey) {
+    const aiBinding = context.env.AI;
+    // Chain order from the shared module; availability from env. No usable
+    // provider at all is the only 500 here — everything else degrades.
+    const validLang =
+      language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language) ? language : null;
+    const chain = transcriptionProviderChain(validLang, {
+      workersAi: !!aiBinding,
+      groq: !!groqKey,
+      gemini: !!geminiKey,
+    });
+    if (chain.length === 0) {
       return new Response(JSON.stringify({ error: 'Server configuration error' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
@@ -216,128 +221,106 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
     recordRateLimit(DB, 'ai-trans', userId, '/ai/transcribe');
 
-    // Provider routing: English → Groq Whisper Turbo (~$0.0007/min),
-    // everything else → gpt-4o-mini-transcribe (~$0.003/min, multilingual).
-    // Missing keys degrade gracefully, never 500 when any path can serve:
-    // no Groq key → English falls to OpenAI; no OpenAI key → non-English
-    // falls back to Gemini native audio (free tier); Groq outage retries
-    // once on OpenAI for English input only.
-    const validLang =
-      language && /^[a-z]{2}(-[A-Z]{2})?$/.test(language) ? language : null;
-    let provider: TranscriptionProvider = transcriptionProviderForLanguage(validLang);
-    if (provider === 'groq' && !groqKey) provider = 'openai';
+    // Realm-safe byte read, shared by the Workers AI + Gemini legs (Groq
+    // reuses the untouched multipart body below): Response() consumes any
+    // Blob/File flavor where direct .arrayBuffer() may not exist.
+    let rawBytes: Uint8Array | null = null;
+    try {
+      rawBytes = new Uint8Array(await new Response(file as unknown as BodyInit).arrayBuffer());
+    } catch {
+      rawBytes = null;
+    }
 
-    // Gemini native fallback (no OpenAI billing on file): same request the
-    // pre-migration code path served. Metering is unchanged (per-minute).
-    if (provider === 'openai' && !openaiKey && geminiKey) {
-      // Realm-safe byte read: Response() consumes any Blob/File flavor
-      // (workers, undici, jsdom) where direct .arrayBuffer() may not exist.
-      let rawBytes: Uint8Array | null = null;
+    async function runWorkersAi(): Promise<string | null> {
+      if (!rawBytes || rawBytes.length === 0 || !aiBinding) return null;
       try {
-        rawBytes = new Uint8Array(await new Response(file as unknown as BodyInit).arrayBuffer());
-      } catch {
-        rawBytes = null;
+        const out = (await aiBinding.run('@cf/openai/whisper-large-v3-turbo', {
+          audio: Array.from(rawBytes),
+        })) as { text?: unknown };
+        const text = typeof out?.text === 'string' ? out.text.trim() : '';
+        return text || null;
+      } catch (e) {
+        console.error('Workers AI transcription error:', e);
+        return null;
       }
-      if (!rawBytes || rawBytes.length === 0) {
-        return new Response(JSON.stringify({ error: 'Could not read audio file' }), {
-          status: 400,
-          headers: { 'Content-Type': 'application/json' },
+    }
+
+    async function runGroqLike(): Promise<Response | null> {
+      if (!groqKey) return null;
+      const upstream = new FormData();
+      upstream.append('file', file as unknown as Blob, file.name || 'audio.mpeg');
+      upstream.append('model', 'whisper-large-v3-turbo');
+      if (validLang) upstream.append('language', validLang);
+      upstream.append('response_format', responseFormat === 'srt' ? 'srt' : 'text');
+      try {
+        return await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${groqKey}` },
+          body: upstream,
         });
+      } catch (e) {
+        console.error('Groq transcription error:', e);
+        return null;
       }
+    }
+
+    async function runGemini(): Promise<string | null> {
+      if (!geminiKey || !rawBytes || rawBytes.length === 0) return null;
       const base64 = toBase64(rawBytes);
       const mimeType = file.type || 'audio/mpeg';
       const langInstruction =
         validLang && validLang !== 'en' ? `Transcribe the ${validLang} audio into ${validLang}. ` : '';
-      // Purpose-built STT model (85+ langs, 1hr/request): strictly better
-      // than the generic flash model previously used here, same free tier.
-      const gres = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=${geminiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{
-              role: 'user',
-              parts: [
-                { inlineData: { mimeType, data: base64 } },
-                { text: `${langInstruction}Transcribe the audio from this file. Return only the transcribed text, no commentary.` },
-              ],
-            }],
-            generationConfig: { temperature: 0.1 },
-          }),
-        },
-      );
-      if (!gres.ok) {
-        const errBody = await gres.text();
-        console.error('Gemini transcription fallback error:', gres.status, errBody);
-        return new Response(JSON.stringify({ error: 'Transcription failed' }), {
-          status: 502,
-          headers: { 'Content-Type': 'application/json' },
-        });
+      try {
+        const gres = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=${geminiKey}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{
+                role: 'user',
+                parts: [
+                  { inlineData: { mimeType, data: base64 } },
+                  { text: `${langInstruction}Transcribe the audio from this file. Return only the transcribed text, no commentary.` },
+                ],
+              }],
+              generationConfig: { temperature: 0.1 },
+            }),
+          },
+        );
+        if (!gres.ok) {
+          console.error('Gemini transcription fallback error:', gres.status, await gres.text());
+          return null;
+        }
+        const gdata: { candidates?: { content?: { parts?: { text?: string }[] } }[] } = await gres.json();
+        const gtext = gdata.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        return gtext || null;
+      } catch (e) {
+        console.error('Gemini transcription error:', e);
+        return null;
       }
-      const gdata: { candidates?: { content?: { parts?: { text?: string }[] } }[] } = await gres.json();
-      const gtext = gdata.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-      if (!gtext) {
-        return new Response(JSON.stringify({ error: 'Empty transcription' }), {
-          status: 502,
-          headers: { 'Content-Type': 'application/json' },
-        });
-      }
-      await DB.prepare(`UPDATE user SET credits = credits - ${cost} WHERE id = ? AND credits >= ${cost}`).bind(userId).run();
-      await logAiCreditEvent(DB, { userId, task: 'transcribe', outcome: 'allowed', balance: balance - cost, allowance: maxCredits });
-      return new Response(gtext, { headers: { 'Content-Type': 'text/plain' } });
     }
 
-    if (provider === 'openai' && !openaiKey) {
-      return new Response(JSON.stringify({ error: 'Server configuration error' }), {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' },
-      });
+    // Walk the chain; first non-empty transcript wins. A provider that is
+    // configured but failing degrades to the next leg, never to a 500 —
+    // the 502 below only fires when every configured leg came back empty.
+    let text: string | null = null;
+    for (const step of chain) {
+      if (step === 'workers-ai') text = await runWorkersAi();
+      else if (step === 'groq') {
+        const res = await runGroqLike();
+        if (res && res.ok) {
+          const t = (await res.text()).trim();
+          text = t || null;
+        } else if (res) {
+          console.error('Groq transcription error:', res.status, await res.text());
+        }
+      } else text = await runGemini();
+      if (text) break;
     }
-
-    const upstream = new FormData();
-    upstream.append('file', file as unknown as Blob, file.name || 'audio.mpeg');
-    upstream.append('model', provider === 'groq' ? 'whisper-large-v3-turbo' : 'gpt-4o-mini-transcribe');
-    if (validLang) upstream.append('language', validLang);
-    upstream.append('response_format', responseFormat === 'srt' ? 'srt' : 'text');
-
-    async function runTranscription(which: TranscriptionProvider): Promise<Response> {
-      // Model is (re)set per attempt: a Groq→OpenAI fallback must not leak
-      // the turbo model name into the OpenAI call.
-      upstream.set('model', which === 'groq' ? 'whisper-large-v3-turbo' : 'gpt-4o-mini-transcribe');
-      const target =
-        which === 'groq'
-          ? 'https://api.groq.com/openai/v1/audio/transcriptions'
-          : 'https://api.openai.com/v1/audio/transcriptions';
-      const key = which === 'groq' ? groqKey! : openaiKey;
-      return fetch(target, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${key}` },
-        body: upstream,
-      });
-    }
-
-    let res = await runTranscription(provider);
-    // English-only fallback: a Groq outage retries once on mini-transcribe
-    // (valid for English input; never used to cover other languages).
-    if (!res.ok && provider === 'groq') {
-      console.error('Groq transcription failed, retrying on OpenAI');
-      res = await runTranscription('openai');
-    }
-
-    if (!res.ok) {
-      const errBody = await res.text();
-      console.error('Transcription provider error:', res.status, errBody);
-      return new Response(JSON.stringify({ error: 'Transcription failed' }), {
-        status: 502,
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
-
-    const text = (await res.text()).trim();
 
     if (!text) {
-      return new Response(JSON.stringify({ error: 'Empty transcription' }), {
+      return new Response(JSON.stringify({ error: 'Transcription failed' }), {
         status: 502,
         headers: { 'Content-Type': 'application/json' },
       });

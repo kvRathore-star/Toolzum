@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import { onRequestPost, IMAGE_GENERATION_CREDITS } from '../../../functions/api/ai/generate-image';
+import { onRequestPost, IMAGE_GENERATION_CREDITS, IMAGE_DRAFT_CREDITS } from '../../../functions/api/ai/generate-image';
 
 function mockDb(opts?: { credits?: number; noUser?: boolean; rateCount?: number; plan?: string }) {
   const { credits = 10, noUser = false, rateCount = 0, plan = 'pro' } = opts ?? {};
@@ -35,8 +35,12 @@ afterEach(() => {
 });
 
 describe('POST /api/ai/generate-image contract', () => {
-  it(`costs ${IMAGE_GENERATION_CREDITS} credits per image`, () => {
+  it(`costs ${IMAGE_GENERATION_CREDITS} credits per HD image`, () => {
     expect(IMAGE_GENERATION_CREDITS).toBe(5);
+  });
+
+  it(`costs ${IMAGE_DRAFT_CREDITS} credit per draft`, () => {
+    expect(IMAGE_DRAFT_CREDITS).toBe(1);
   });
 
   it('401s without a session cookie', async () => {
@@ -94,5 +98,103 @@ describe('POST /api/ai/generate-image contract', () => {
     const env = { DB: mockDb({ rateCount: 99 }), GEMINI_API_KEY: 'k' } as unknown as typeof ENV;
     const res = await onRequestPost({ request: req({ prompt: 'a cat' }), env });
     expect(res.status).toBe(429);
+  });
+});
+
+describe('POST /api/ai/generate-image draft tier (Workers AI, 1 credit)', () => {
+  const mockAi = (image: unknown) => ({
+    run: vi.fn(async () => image),
+  });
+  const envDraft = (opts?: { credits?: number; plan?: string; ai?: unknown }) => ({
+    DB: mockDb({ credits: opts?.credits ?? 10, plan: opts?.plan ?? 'pro' }),
+    GEMINI_API_KEY: 'k',
+    AI: opts?.ai === undefined ? mockAi({ image: 'ZHJhZnQ=' }) : opts.ai,
+  }) as unknown as typeof ENV;
+
+  it('serves drafts to signed-in free users (HD stays Pro-only)', async () => {
+    const res = await onRequestPost({
+      request: req({ prompt: 'a cat', tier: 'draft' }),
+      env: envDraft({ plan: 'free' }),
+    });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ image: 'ZHJhZnQ=', mimeType: 'image/png' });
+  });
+
+  it('deducts 1 credit on draft success', async () => {
+    const updates: string[] = [];
+    const db = mockDb({ credits: 10 });
+    const origPrepare = (db as unknown as { prepare: (sql: string) => unknown }).prepare;
+    (db as unknown as { prepare: (sql: string) => unknown }).prepare = ((sql: string) => {
+      if (sql.startsWith('UPDATE user SET credits')) updates.push(sql);
+      return (origPrepare as (s: string) => unknown)(sql);
+    }) as never;
+    const env = { DB: db, GEMINI_API_KEY: 'k', AI: mockAi({ image: 'ZHJhZnQ=' }) } as unknown as typeof ENV;
+    const res = await onRequestPost({ request: req({ prompt: 'a cat', tier: 'draft' }), env });
+    expect(res.status).toBe(200);
+    expect(updates.some(u => u.includes('credits - 1'))).toBe(true);
+  });
+
+  it('403s drafts below the 1-credit cost without touching the binding', async () => {
+    const ai = mockAi({ image: 'ZHJhZnQ=' });
+    const res = await onRequestPost({
+      request: req({ prompt: 'a cat', tier: 'draft' }),
+      env: envDraft({ credits: 0, ai }),
+    });
+    expect(res.status).toBe(403);
+    expect(ai.run).not.toHaveBeenCalled();
+  });
+
+  it('500s drafts when the AI binding is absent', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const env = { DB: mockDb({ credits: 10 }), GEMINI_API_KEY: 'k' } as unknown as typeof ENV;
+    const res = await onRequestPost({ request: req({ prompt: 'a cat', tier: 'draft' }), env });
+    expect(res.status).toBe(500);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('502s failed drafts WITHOUT falling back to Gemini (no silent 45x spend)', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const res = await onRequestPost({
+      request: req({ prompt: 'a cat', tier: 'draft' }),
+      env: envDraft({ ai: mockAi(null) }),
+    });
+    expect(res.status).toBe(502);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('502s when the binding throws, still without touching Gemini', async () => {
+    const fetchSpy = vi.fn();
+    vi.stubGlobal('fetch', fetchSpy);
+    const ai = { run: vi.fn(async () => { throw new Error('GPU busy'); }) };
+    const res = await onRequestPost({
+      request: req({ prompt: 'a cat', tier: 'draft' }),
+      env: envDraft({ ai }),
+    });
+    expect(res.status).toBe(502);
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('accepts raw-string binding responses', async () => {
+    const res = await onRequestPost({
+      request: req({ prompt: 'a cat', tier: 'draft' }),
+      env: envDraft({ ai: mockAi('cmF3') }),
+    });
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ image: 'cmF3', mimeType: 'image/png' });
+  });
+
+  it('unknown tier values fall back to HD (never to the cheaper leg)', async () => {
+    const ai = mockAi({ image: 'ZHJhZnQ=' });
+    const env = {
+      DB: mockDb({ credits: 10, plan: 'free' }),
+      GEMINI_API_KEY: 'k',
+      AI: ai,
+    } as unknown as typeof ENV;
+    // Free user + bogus tier → HD gate fires (403), binding untouched.
+    const res = await onRequestPost({ request: req({ prompt: 'a cat', tier: 'free-plz' }), env });
+    expect(res.status).toBe(403);
+    expect(ai.run).not.toHaveBeenCalled();
   });
 });

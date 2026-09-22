@@ -124,8 +124,9 @@ getUserLimit(plan, isProTool):
 | Task | Credits | Actual API cost | Mechanism |
 |------|---------|-----------------|-----------|
 | Text generation (AI Paraphraser, Translator, etc.) | 1 | ~$0.0002 | Gemini 1.5 Flash via `/api/ai/generate` |
-| Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.003/min non-English, ~$0.0007/min English (Groq) | mini-transcribe / Groq Turbo via `/api/ai/transcribe`, 30-min + 25MB caps |
+| Transcription (Speech-to-Text) | 1/min, ceil (`CREDITS_PER_MINUTE`, `transcriptionPricing.ts`) | ~$0.0005/min (Workers AI Whisper Turbo) | Workers AI → Groq (English) → Gemini via `/api/ai/transcribe`, 30-min + 25MB caps |
 | AI Image Generation (Pollinations engine) | 0 | $0 | Pollinations.ai (free external API, client-side) |
+| AI Image Generation (Draft engine) | 1 (`IMAGE_DRAFT_CREDITS` in `generate-image.ts`) | ~$0.001/image | Workers AI FLUX.1-schnell via `/api/ai/generate-image?tier=draft` — signed-in only (anon 401); failed drafts 502, NEVER fall back to Gemini (no silent 45x spend) |
 | AI Image Generation (Gemini engine) | 5 (`IMAGE_GENERATION_CREDITS` in `generate-image.ts`) | ~$0.045/image | Gemini 3.1 Flash Image via `/api/ai/generate-image` — **Pro-only** (anon 401, signed-free 403; Pollinations stays free for all) |
 
 > Costs follow the *endpoint called*, not the tool name: `audio/video-to-text-transcription`
@@ -137,7 +138,8 @@ getUserLimit(plan, isProTool):
 
 **Cost at 5 free trial credits (one-time, never refilled):**
 - ~5 text gen calls, OR
-- ~1 Gemini image (5 credits), OR
+- ~1 Gemini HD image (5 credits), OR
+- ~5 draft images (1 credit each), OR
 - ~5 transcription minutes (1/min), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free)
@@ -145,19 +147,51 @@ getUserLimit(plan, isProTool):
 **Cost at 200 Pro credits/month:**
 - ~200 text gen calls, OR
 - ~200 transcription minutes (~3.3 hours), OR
-- ~40 Gemini images (5 credits each, Pro-only engine), OR
+- ~200 draft images (1 credit each), OR
+- ~40 Gemini HD images (5 credits each, Pro-only engine), OR
 - Unlimited Pollinations image generation (free), OR
 - Unlimited watermark removal (free), OR
 - Mix of all
 
-**Worst-case cost per free user:** one-time ~$0.045 (5-image trial burn) — then zero forever. No monthly liability.
-**Worst-case cost per Pro user:** ~$1.80/month (40 images × $0.045) or ~$0.60 (200 non-English min) vs $9.99 / ₹299 revenue — sustainable.
-**Worst-case cost per Pass user:** ~$0.63 (14 images × $0.045) or ~$0.21 (70 min × $0.003) vs $3.99 / ₹99 — one-shot, repurchase to farm.
+**Provider cost per unit (Dec 2026, post-migration):**
+- Text (Gemini 1.5 Flash): ~$0.0002/call → $0.0002/credit
+- Transcription primary (Workers AI Whisper Turbo): ~$0.0005/min → $0.0005/credit
+- Transcription fallback (Groq, English only): ~$0.0007/min
+- Transcription fallback (Gemini native, free tier): ~$0
+- Image draft (Workers AI FLUX.1-schnell): ~$0.001/image → $0.001/credit
+- Image HD (Gemini 3.1 Flash Image): ~$0.045/image → $0.009/credit (costliest leg by 18×)
 
-> $/credit ceiling note (for the next margin audit): image generation
-> currently sets it at ~$0.009/credit ($0.045 ÷ 5), above transcription
-> ($0.003) and text ($0.0002). If image costs move again, this is the row
-> that moves first.
+**Worst-case cost per free user:** one-time ~$0.045 (trial burned on 1 HD image),
+~$0.005 (5 drafts), or ~$0.0025 (5 transcription min) — then zero forever.
+No monthly liability.
+
+**Worst-case cost per Pro user:** ~$1.80/month (40 HD images × $0.045),
+~$0.20 (200 drafts), or ~$0.10 (200 transcription min) vs $9.99 / ₹299
+revenue — sustainable in every mix.
+
+**Worst-case cost per Pass user:** ~$0.63 (14 HD images × $0.045) or ~$0.035
+(70 transcription min) vs $3.99 / ₹99 — one-shot, repurchase to farm.
+
+**Free users at scale (100k signups, everyone burns the full trial):**
+- All-transcription burn: 100k × $0.0025 = **~$250, once, lifetime**
+- All-draft burn: 100k × $0.005 = **~$500, once, lifetime**
+- All-HD burn: 100k × $0.045 = **~$4,500, once, lifetime**
+- Realistic mix (mostly text/trial abandonment): **low hundreds of dollars, once.**
+  There is no recurring free cost — the trial never refills, so this table
+  does not grow month over month. 1M signups ≈ 10× the above, still one-time.
+
+**Pro profit margin (revenue/credit vs costliest leg):**
+- Monthly USD ($9.99/200 = $0.050/credit): 82% floor (all-HD) → 99% (transcription/text)
+- Pass USD ($3.99/70 = $0.057/credit): 84% floor → 99%
+- Yearly USD ($99/2400 = $0.041/credit): 78% floor → 99%
+- Monthly INR (₹299 ≈ $3.40 → ~$0.017/credit): **47% floor (all-HD)** → 97%.
+  Thinnest corner; structurally fixed as draft substitution pulls volume off
+  the $0.045 path. Gateway fees (~2–3%) come off revenue on top of the above.
+
+> $/credit ceiling note (for the next margin audit): HD image generation
+> sets it at ~$0.009/credit ($0.045 ÷ 5), above drafts ($0.001),
+> transcription ($0.0005) and text ($0.0002). If image costs move again,
+> this is the row that moves first.
 
 > ✅ **REPRICED Sep 17 2026:** transcription costs 20× text generation
 > (`TRANSCRIPTION_CREDITS = 20`); Free 30→10, Pro 300→200, Pass 70/7d
@@ -167,10 +201,10 @@ getUserLimit(plan, isProTool):
 > ✅ **REPRICED AGAIN Sep 20 2026 (deliberate reversal):** transcription is
 > now 1 credit/min (`CREDITS_PER_MINUTE`, shared `transcriptionPricing.ts`
 > used by backend charges, UI previews, and ToolLayout per-minute badges),
-> 30-min + 25MB caps, gpt-4o-mini-transcribe (~$0.003/min) for non-English
-> and Groq Whisper Turbo (~$0.0007/min) for English, with OpenAI fallback.
-> No-OpenAI-billing fallback is Gemini native audio (free tier) — same
-> metering. Free plans CAN transcribe short clips now (10 min/mo) — the
+> 30-min + 25MB caps, Workers AI Whisper Turbo (~$0.0005/min) for all
+> languages, Groq (~$0.0007/min) as English fallback, Gemini native
+> (free tier) as final fallback. No billing on file required.
+> metering. Free plans CAN transcribe short clips now (5-min one-time trial) — the
 > old Pro-only lock is gone on purpose: real cost is trivial and it
 > funnels upgrades honestly. Privacy note: free-tier speech processing
 > may be human-reviewed by the provider — tool FAQs disclose this.

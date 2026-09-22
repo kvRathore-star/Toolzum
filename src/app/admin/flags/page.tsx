@@ -12,7 +12,7 @@ interface FlagMap {
 
 const KNOWN_FLAGS: { key: string; desc: string }[] = [
   { key: "ai_generation", desc: "Master kill-switch — all /api/ai/* endpoints 503 while off." },
-  { key: "ai_image_gemini", desc: "Gemini HD image engine toggle in the image generator." },
+  { key: "ai_image_gemini", desc: "Paid image engines (Draft + Gemini HD) in the image generator." },
 ];
 
 export default function AdminFlagsPage() {

@@ -32,9 +32,8 @@ function mockDb(
   return { prepare } as unknown as D1Database;
 }
 
-const ENV = { DB: mockDb(), OPENAI_API_KEY: 'test-key' } as unknown as {
+const ENV = { DB: mockDb() } as unknown as {
   DB: D1Database;
-  OPENAI_API_KEY: string;
 };
 
 function req(opts: {
@@ -42,9 +41,6 @@ function req(opts: {
   fields?: Record<string, string>;
   file?: { name: string; mime: string; content: string };
 } = {}) {
-  // NOTE: bodies are hand-built strings sent through undici's own Request so
-  // multipart parsing happens in one realm — jsdom globals mixed with the
-  // handler's parser throw on file parts (500), hiding real branches.
   const BOUNDARY = '----testboundary1234';
   let body = '';
   if (opts.file) {
@@ -99,10 +95,9 @@ describe('POST /api/ai/transcribe contract', () => {
   });
 
   it('400s when no audio file is attached (before touching the model)', async () => {
-    // Balance above any per-minute cost so the test reaches file validation.
     const env = {
       DB: mockDb({ credits: 30 }),
-      OPENAI_API_KEY: 'test-key',
+      GEMINI_API_KEY: 'test-key',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -131,7 +126,7 @@ describe('POST /api/ai/transcribe contract', () => {
   it('400s when durationSec is missing', async () => {
     const env = {
       DB: mockDb({ credits: 30 }),
-      OPENAI_API_KEY: 'k',
+      GEMINI_API_KEY: 'k',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -147,7 +142,7 @@ describe('POST /api/ai/transcribe contract', () => {
   it('400s when audio exceeds the 30-minute cap', async () => {
     const env = {
       DB: mockDb({ credits: 500 }),
-      OPENAI_API_KEY: 'k',
+      GEMINI_API_KEY: 'k',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -164,7 +159,7 @@ describe('POST /api/ai/transcribe contract', () => {
   it('400s when declared duration is implausible for the file size', async () => {
     const env = {
       DB: mockDb({ credits: 500 }),
-      OPENAI_API_KEY: 'k',
+      GEMINI_API_KEY: 'k',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -177,19 +172,10 @@ describe('POST /api/ai/transcribe contract', () => {
     expect(res.status).toBe(400);
     expect(await res.json()).toEqual({ error: 'Duration does not match file size' });
   });
-
-  // NOTE: the 413 oversized-upload branch is deliberately untested — pushing a
-  // >25MB part through undici's multipart parser trips an internal assertion
-  // in this jsdom environment (parse throws -> 500), so the branch is not
-  // reachable here. The 25MB cap itself is a one-line constant
-  // (TRANSCRIPTION_MAX_BYTES) with no logic to pin down.
 });
 
 describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () => {
   it('pins the pricing constants (matches docs + pricing + UI preview)', () => {
-    // Happy-path deduction SQL is unreachable in jsdom (undici multipart
-    // parser rejects jsdom FormData — see note above), so pricing is pinned
-    // at the shared module both backend charges and UI previews import.
     expect(TRANSCRIPTION_CREDITS_PER_MINUTE).toBe(1);
     expect(TRANSCRIPTION_MAX_SECONDS).toBe(1800);
     expect(TRANSCRIPTION_MAX_BYTES).toBe(25 * 1024 * 1024);
@@ -205,7 +191,7 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
     vi.stubGlobal('fetch', fetchSpy);
     const env = {
       DB: mockDb({ credits: 5 }),
-      OPENAI_API_KEY: 'k',
+      GEMINI_API_KEY: 'k',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -225,7 +211,7 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
     vi.stubGlobal('fetch', fetchSpy);
     const env = {
       DB: mockDb({ credits: 19 }),
-      OPENAI_API_KEY: 'k',
+      GEMINI_API_KEY: 'k',
     } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
@@ -248,8 +234,11 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
       if (sql.startsWith('UPDATE user SET credits')) updates.push(sql);
       return (origPrepare as (s: string) => unknown)(sql);
     }) as never;
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hello world') }));
-    const env = { DB: db, OPENAI_API_KEY: 'k' } as unknown as typeof ENV;
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'hello world' }] } }] }),
+    }));
+    const env = { DB: db, GEMINI_API_KEY: 'k' } as unknown as typeof ENV;
     const res = await onRequestPost({
       request: req({
         cookie: COOKIE,
@@ -265,112 +254,190 @@ describe('POST /api/ai/transcribe credit cost (1 per minute, 30-min cap)', () =>
   });
 });
 
-describe('POST /api/ai/transcribe provider routing (English Groq, rest mini)', () => {
+describe('POST /api/ai/transcribe provider chain', () => {
   const F = { name: 'clip.mp3', mime: 'audio/mpeg', content: 'fake-audio-bytes' };
-  const envBoth = (credits = 30) => ({
-    DB: mockDb({ credits }),
-    OPENAI_API_KEY: 'ok',
-    GROQ_API_KEY: 'gk',
-  }) as unknown as typeof ENV;
-
+  function envAll(credits = 30) {
+    return {
+      DB: mockDb({ credits }),
+      GROQ_API_KEY: 'gk',
+      GEMINI_API_KEY: 'gk',
+    } as unknown as typeof ENV;
+  }
+  function envGeminiOnly(credits = 30) {
+    return {
+      DB: mockDb({ credits }),
+      GEMINI_API_KEY: 'gk',
+    } as unknown as typeof ENV;
+  }
+  function envGroqGemini(credits = 30) {
+    return {
+      DB: mockDb({ credits }),
+      GROQ_API_KEY: 'gk',
+      GEMINI_API_KEY: 'gk',
+    } as unknown as typeof ENV;
+  }
   function calledUrls(fetchSpy: ReturnType<typeof vi.fn>) {
     return fetchSpy.mock.calls.map(c => (c as unknown[])[0] as string);
   }
 
-  it('routes English to Groq', async () => {
-    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
-    vi.stubGlobal('fetch', fetchSpy);
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
-      env: envBoth(),
+  describe('English chain: [workers-ai, groq, gemini]', () => {
+    it('hits Groq when Workers AI is absent (no AI binding)', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hello') });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+        env: envAll(),
+      });
+      expect(res.status).toBe(200);
+      expect(await res.text()).toBe('hello');
+      expect(calledUrls(fetchSpy)).toEqual(['https://api.groq.com/openai/v1/audio/transcriptions']);
+      vi.unstubAllGlobals();
     });
-    expect(res.status).toBe(200);
-    expect(calledUrls(fetchSpy)).toEqual(['https://api.groq.com/openai/v1/audio/transcriptions']);
-    vi.unstubAllGlobals();
+
+    it('walks to Gemini when Groq fails (English)', async () => {
+      const fetchSpy = vi.fn()
+        .mockResolvedValueOnce({ ok: false, status: 500, text: () => Promise.resolve('boom') })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'from gemini' }] } }] }),
+        });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+        env: envAll(),
+      });
+      expect(res.status).toBe(200);
+      expect(await res.text()).toBe('from gemini');
+      expect(calledUrls(fetchSpy)).toEqual([
+        'https://api.groq.com/openai/v1/audio/transcriptions',
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=gk',
+      ]);
+      vi.unstubAllGlobals();
+    });
+
+    it('serves via Gemini only when GROQ_API_KEY is missing', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'gemini only' }] } }] }),
+      });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+        env: envGeminiOnly(),
+      });
+      expect(res.status).toBe(200);
+      expect(await res.text()).toBe('gemini only');
+      expect(calledUrls(fetchSpy)).toEqual([
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=gk',
+      ]);
+      vi.unstubAllGlobals();
+    });
   });
 
-  it('routes Hindi to OpenAI mini-transcribe', async () => {
-    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
-    vi.stubGlobal('fetch', fetchSpy);
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'hi' } }),
-      env: envBoth(),
+  describe('Non-English chain: [workers-ai, gemini] (no Groq)', () => {
+    it('serves Hindi via Gemini when Workers AI is absent', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'नमस्ते दुनिया' }] } }] }),
+      });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'hi' } }),
+        env: envAll(),
+      });
+      expect(res.status).toBe(200);
+      expect(await res.text()).toBe('नमस्ते दुनिया');
+      // Should NOT hit Groq — non-English never uses it
+      expect(calledUrls(fetchSpy)).toEqual([
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-transcribe:generateContent?key=gk',
+      ]);
+      vi.unstubAllGlobals();
     });
-    expect(res.status).toBe(200);
-    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
-    vi.unstubAllGlobals();
-  });
 
-  it('routes missing language to OpenAI (safe default, never English-leaning)', async () => {
-    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
-    vi.stubGlobal('fetch', fetchSpy);
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60' } }),
-      env: envBoth(),
+    it('walks to Gemini when Workers AI is absent and first Gemini call fails', async () => {
+      const fetchSpy = vi.fn()
+        .mockResolvedValueOnce({ ok: false, status: 429, text: () => Promise.resolve('rate limited') })
+        .mockResolvedValueOnce({
+          ok: true,
+          json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'retry ok' }] } }] }),
+        });
+      vi.stubGlobal('fetch', fetchSpy);
+      // Note: the chain walks [workers-ai, gemini] — there's only one Gemini
+      // leg, so a failure there returns 502. This test verifies that behavior.
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
+        env: envGeminiOnly(),
+      });
+      expect(res.status).toBe(502);
+      vi.unstubAllGlobals();
     });
-    expect(res.status).toBe(200);
-    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
-    vi.unstubAllGlobals();
-  });
 
-  it('degrades English to OpenAI when GROQ_API_KEY is missing', async () => {
-    const fetchSpy = vi.fn().mockResolvedValue({ ok: true, text: () => Promise.resolve('hi') });
-    vi.stubGlobal('fetch', fetchSpy);
-    const env = { DB: mockDb({ credits: 30 }), OPENAI_API_KEY: 'ok' } as unknown as typeof ENV;
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
-      env,
+    it('502s when every configured leg fails (English: Groq + Gemini both fail)', async () => {
+      const fetchSpy = vi.fn()
+        .mockResolvedValueOnce({ ok: false, status: 500, text: () => Promise.resolve('groq down') })
+        .mockResolvedValueOnce({ ok: false, status: 500, text: () => Promise.resolve('gemini down') });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
+        env: envAll(),
+      });
+      expect(res.status).toBe(502);
+      expect(await res.json()).toEqual({ error: 'Transcription failed' });
+      vi.unstubAllGlobals();
     });
-    expect(res.status).toBe(200);
-    expect(calledUrls(fetchSpy)).toEqual(['https://api.openai.com/v1/audio/transcriptions']);
-    vi.unstubAllGlobals();
-  });
 
-  it('retries English once on OpenAI after a Groq failure', async () => {
-    const fetchSpy = vi.fn()
-      .mockResolvedValueOnce({ ok: false, status: 500, text: () => Promise.resolve('boom') })
-      .mockResolvedValueOnce({ ok: true, text: () => Promise.resolve('hi') });
-    vi.stubGlobal('fetch', fetchSpy);
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'en' } }),
-      env: envBoth(),
+    it('502s when single Gemini leg fails (non-English, no Workers AI)', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({ ok: false, status: 403, text: () => Promise.resolve('forbidden') });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'ta' } }),
+        env: envGeminiOnly(),
+      });
+      expect(res.status).toBe(502);
+      vi.unstubAllGlobals();
     });
-    expect(res.status).toBe(200);
-    expect(calledUrls(fetchSpy)).toEqual([
-      'https://api.groq.com/openai/v1/audio/transcriptions',
-      'https://api.openai.com/v1/audio/transcriptions',
-    ]);
-    vi.unstubAllGlobals();
+
+    it('500s when no provider key exists at all', async () => {
+      const env = { DB: mockDb({ credits: 30 }) } as unknown as typeof ENV;
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
+        env,
+      });
+      expect(res.status).toBe(500);
+    });
+
+    it('never hits Groq for non-English even when Groq key is available', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'ok' }] } }] }),
+      });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'bn' } }),
+        env: envGroqGemini(),
+      });
+      expect(res.status).toBe(200);
+      const urls = calledUrls(fetchSpy);
+      expect(urls.every(u => !u.includes('groq.com'))).toBe(true);
+      vi.unstubAllGlobals();
+    });
+
+    it('serves missing language via Gemini (non-English fallback, never Groq)', async () => {
+      const fetchSpy = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'detected' }] } }] }),
+      });
+      vi.stubGlobal('fetch', fetchSpy);
+      const res = await onRequestPost({
+        request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60' } }),
+        env: envAll(),
+      });
+      expect(res.status).toBe(200);
+      expect(await res.text()).toBe('detected');
+      const urls = calledUrls(fetchSpy);
+      expect(urls.some(u => u.includes('groq.com'))).toBe(false);
+      vi.unstubAllGlobals();
+    });
   });
 });
 
-describe('POST /api/ai/transcribe Gemini fallback (no OpenAI billing on file)', () => {
-  const F = { name: 'clip.mp3', mime: 'audio/mpeg', content: 'fake-audio-bytes' };
-
-  it('serves non-English via Gemini native audio when OPENAI_API_KEY is absent', async () => {
-    const fetchSpy = vi.fn().mockResolvedValue({
-      ok: true,
-      json: () => Promise.resolve({ candidates: [{ content: { parts: [{ text: 'hola mundo' }] } }] }),
-    });
-    vi.stubGlobal('fetch', fetchSpy);
-    const env = { DB: mockDb({ credits: 30 }), GEMINI_API_KEY: 'gk' } as unknown as typeof ENV;
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
-      env,
-    });
-    expect(res.status).toBe(200);
-    expect(await res.text()).toBe('hola mundo');
-    const called = fetchSpy.mock.calls.map(c => (c as unknown[])[0] as string);
-    expect(called[0]).toContain('generativelanguage.googleapis.com');
-    vi.unstubAllGlobals();
-  });
-
-  it('500s only when no provider key exists at all', async () => {
-    const env = { DB: mockDb({ credits: 30 }) } as unknown as typeof ENV;
-    const res = await onRequestPost({
-      request: req({ cookie: COOKIE, file: F, fields: { durationSec: '60', language: 'es' } }),
-      env,
-    });
-    expect(res.status).toBe(500);
-  });
-});

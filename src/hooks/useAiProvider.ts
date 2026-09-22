@@ -31,13 +31,13 @@ export function useAiProvider() {
     return data.content;
   };
 
-  const generateImage = async (prompt: string, aspectRatio = '1:1'): Promise<{ url: string; mimeType: string }> => {
+  const generateImage = async (prompt: string, aspectRatio = '1:1', tier: 'draft' | 'hd' = 'hd'): Promise<{ url: string; mimeType: string }> => {
     let res: Response;
     try {
       res = await fetch('/api/ai/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, aspectRatio }),
+        body: JSON.stringify({ prompt, aspectRatio, tier }),
       });
     } catch (e) {
       throw new Error(toUserError(e, 'Request failed'));

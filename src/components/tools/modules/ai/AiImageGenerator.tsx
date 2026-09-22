@@ -12,11 +12,11 @@ import { clipboardWrite } from "@/lib/clipboard";
 import { AiPrivacyBanner } from '@/components/AiPrivacyBanner';
 import { useFlag } from '@/hooks/useFlag';
 
-type Engine = 'free' | 'gemini';
+type Engine = 'free' | 'draft' | 'gemini';
 
-// Kill-switch via the flag service (#41/49): Gemini engine stays hidden
-// until output quality + billing are approved. Flip `ai_image_gemini`
-// in /admin/flags — no rebuild.
+// Kill-switch via the flag service (#41/49): server-billed engines (draft +
+// Gemini HD) stay hidden until output quality + billing are approved. Flip
+// `ai_image_gemini` in /admin/flags — no rebuild. Pollinations is unaffected.
 
 export default function AiImageGenerator() {
   const [prompt, setPrompt] = useState('');
@@ -46,6 +46,13 @@ export default function AiImageGenerator() {
       return toast.error('Please enter a description for your image!');
     }
 
+    // Server-billed engines gate here for honest messaging; the backend
+    // re-checks everything (never trust the client for spend).
+    if (engine === 'draft' && !isSignedIn) {
+      toast.error('Drafts cost 1 credit — sign in to use them. Pollinations stays free for guests.');
+      return;
+    }
+
     // Gemini engine is Pro-only (Pollinations stays free for everyone).
     if (engine === 'gemini' && !isPro) {
       toast.error(isSignedIn ? 'Gemini generation is a Pro feature — upgrade to unlock.' : 'Gemini generation is Pro-only — sign in, then upgrade. Pollinations stays free for guests.');
@@ -59,6 +66,19 @@ export default function AiImageGenerator() {
     const selectedStyleObj = styles.find(s => s.name === style);
     const suffix = selectedStyleObj ? selectedStyleObj.suffix : '';
     const fullPrompt = `${prompt}, ${suffix}`;
+
+    if (engine === 'draft') {
+      try {
+        const { url } = await generateImage(fullPrompt, aspectRatio, 'draft');
+        setImageUrl(url);
+        toast.success('Draft generated — 1 credit used.');
+      } catch (e: unknown) {
+        toast.error(e instanceof Error ? e.message : 'Draft generation failed.');
+      } finally {
+        setIsGenerating(false);
+      }
+      return;
+    }
 
     if (engine === 'gemini') {
       try {
@@ -134,10 +154,10 @@ export default function AiImageGenerator() {
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-500 space-y-6">
-      {engine === 'gemini' ? (
-        <AiPrivacyBanner service="AI models" serverLabel="our server" />
-      ) : (
+      {engine === 'free' ? (
         <AiPrivacyBanner service="image AI" serverLabel="a third-party service directly from your browser" />
+      ) : (
+        <AiPrivacyBanner service="AI models" serverLabel="our server" />
       )}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
@@ -163,13 +183,21 @@ export default function AiImageGenerator() {
               <span className="block text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Engine</span>
               {geminiEngineLive ? (
               <>
-              <div className="grid grid-cols-2 gap-2" role="group" aria-label="Image engine">
+              <div className="grid grid-cols-3 gap-2" role="group" aria-label="Image engine">
                 <button
                   onClick={() => setEngine('free')}
                   aria-pressed={engine === 'free'}
                   className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${engine === 'free' ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
                 >
                   Pollinations · Free
+                </button>
+                <button
+                  onClick={() => setEngine('draft')}
+                  aria-pressed={engine === 'draft'}
+                  title={isSignedIn ? 'Fast draft, 1 credit per image' : 'Sign in to use drafts (1 credit each)'}
+                  className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1 ${engine === 'draft' ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
+                >
+                  Draft · 1 credit
                 </button>
                 <button
                   onClick={() => setEngine('gemini')}
@@ -235,7 +263,7 @@ export default function AiImageGenerator() {
             ) : (
               <>
                 <Sparkles className="w-5 h-5" />
-                <span>{engine === 'gemini' ? 'Generate with Gemini · 5 credits' : 'Generate Image · Free'}</span>
+                <span>{engine === 'gemini' ? 'Generate with Gemini · 5 credits' : engine === 'draft' ? 'Generate Draft · 1 credit' : 'Generate Image · Free'}</span>
               </>
             )}
           </button>

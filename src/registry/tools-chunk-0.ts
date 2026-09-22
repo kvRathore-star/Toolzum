@@ -657,7 +657,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Clean up and restructure raw video transcription logs into readable scripts, articles, or outlines using AI. Paste a messy transcript dump and pick a target format.',
     seoDescription: 'Free online Video Transcript Formatter — restructure raw video transcription logs into clean, readable scripts, articles, or outlines with AI.',
-    dependencies: "Gemini API",
+    dependencies: "Cloud AI API",
   },
   {
     id: "48",
@@ -834,7 +834,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Clean up and format raw audio transcription text into readable articles or scripts using AI. Paste a messy transcript dump and get a polished version.',
     seoDescription: 'Free online Audio Transcript Formatter — turn messy audio transcription text into clean, readable articles or scripts with AI.',
-    dependencies: "Gemini API",
+    dependencies: "Cloud AI API",
   },
   {
     id: "66",
@@ -1341,7 +1341,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "Transcription",
     description: 'Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. Uses cloud-based processing.',
     seoDescription: 'Free online Meeting Minutes Generator — Meeting Minutes Generator structures raw notes into sections like attendees, decisions, action items, and follow-ups. ',
-    dependencies: "OpenAI API",
+    dependencies: "Cloud AI API",
   },
   {
     id: "116",
@@ -1350,7 +1350,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "AI",
     description: "Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. Uses cloud-based processing.",
     seoDescription: "Free online AI Cover Letter Generator — Analyzes a job description and your résumé to produce a tailored cover letter that highlights relevant experience and matches the employer's. ",
-    dependencies: "OpenAI API",
+    dependencies: "Cloud AI API",
   },
   {
     id: "121",
