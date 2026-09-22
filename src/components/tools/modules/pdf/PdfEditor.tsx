@@ -87,7 +87,12 @@ setupPdfWorker(pdfjsLib);
 
 const RENDER_SCALE = 1.5;
 const MAX_FILE_BYTES = 100 * 1024 * 1024;
-const MAX_PAGES = 300;
+// Page caps are device-memory honesty, not pricing: rendering + thumbs for
+// hundreds of pages will OOM mobile browsers whichever plan pays. Tiers
+// reflect likely hardware (Pro skews desktop), capped where physics bites.
+const MAX_PAGES_ANON = 150;
+const MAX_PAGES_SIGNED = 300;
+const MAX_PAGES_PRO = 500;
 const THUMB_INITIAL = 60;
 const HIGHLIGHT_COLORS = ['#ffff00', '#00ff00', '#00ccff', '#ff99cc', '#ff9900'];
 const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
@@ -133,16 +138,25 @@ export default function PdfEditor() {
   const [shapeVariant, setShapeVariant] = useState<'rect' | 'ellipse' | 'line' | 'arrow'>('rect');
   const [exporting, setExporting] = useState(false);
   const [showSignPad, setShowSignPad] = useState(false);
-  // Thumbnails: first window immediately, rest idle (a 300-page doc would
-  // jank for seconds rendering all at once). Nulls stay as placeholders so
-  // indexes always match page numbers.
+  // Thumbnails: first window immediately, then only the ±25 pages around
+  // the current one (a 300-pager never needs 300 dataURLs at once). "Show
+  // all" fills the rest idle. Nulls stay as placeholders so indexes always
+  // match page numbers.
   const [thumbUrls, setThumbUrls] = useState<(string | null)[]>([]);
+  const [thumbsAll, setThumbsAll] = useState(false);
+  const loadedRef = useRef<Set<number>>(new Set());
   const [aiWorking, setAiWorking] = useState(false);
   const isPro = useProStatus();
   const [ocrWords, setOcrWords] = useState<{ text: string; x: number; y: number; size: number; conf: number }[]>([]);
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
+  // Screen-reader page text: canvas pixels expose nothing to AT. Fed from
+  // the cached text layer; empty on scanned pages until OCR runs.
+  const [pageText, setPageText] = useState('');
+  // Draft text for the selected-text field: commits on Enter/blur, Escape
+  // reverts (live-per-keystroke re-rendered the overlay on every press).
+  const [textDraft, setTextDraft] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
 
@@ -188,6 +202,9 @@ export default function PdfEditor() {
 
   const openBytes = async (bytes: Uint8Array, name: string) => {
     const toastId = toast.loading('Opening PDF…');
+    // NOTE: isPro/isSignedIn read live here (not cached) so a mid-session
+    // upgrade applies to the next file opened, no refresh needed.
+    const pageCap = isPro ? MAX_PAGES_PRO : isSignedIn ? MAX_PAGES_SIGNED : MAX_PAGES_ANON;
     try {
       // A private copy goes to pdf.js (it detaches whatever buffer it parses);
       // the original stays intact for pdf-lib export. 45s timeout separates
@@ -196,8 +213,8 @@ export default function PdfEditor() {
         pdfjsLib.getDocument({ data: bytes.slice() }).promise,
         new Promise<never>((_, reject) => setTimeout(() => reject(new Error('timeout')), 45000)),
       ]);
-      if (doc.numPages > MAX_PAGES) {
-        toast.error(`This PDF has ${doc.numPages} pages (limit ${MAX_PAGES}) — split it first, then edit in parts.`, { id: toastId });
+      if (doc.numPages > pageCap) {
+        toast.error(`This PDF has ${doc.numPages} pages (limit ${pageCap}${isPro ? '' : ' — Pro opens up to 500'}) — split it first, then edit in parts.`, { id: toastId });
         try { await doc.destroy(); } catch { /* ignore */ }
         return;
       }
@@ -208,6 +225,9 @@ export default function PdfEditor() {
       setPage(1);
       setAnnos({});
       setSelected(null);
+      setThumbUrls([]);
+      setThumbsAll(false);
+      loadedRef.current = new Set();
       toast.success(`${doc.numPages}-page PDF loaded — everything stays in your browser.`, { id: toastId });
     } catch (e) {
       toast.error(
@@ -267,7 +287,12 @@ export default function PdfEditor() {
       const ctx = canvas.getContext('2d')!;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       await pg.render({ canvasContext: ctx, viewport }).promise;
-      if (!cancelled) drawOverlay();
+      if (!cancelled) {
+        drawOverlay();
+        ensureTextLayer(page).then((items) => {
+          if (!cancelled) setPageText(items.map((it) => it.str).join(' '));
+        }).catch(() => {});
+      }
     })();
     return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -292,23 +317,34 @@ export default function PdfEditor() {
       }
     };
     (async () => {
-      const urls: (string | null)[] = [];
-      const first = Math.min(pdfDoc.numPages, THUMB_INITIAL);
-      for (let n = 1; n <= first; n++) {
-        if (cancelled) break;
-        urls.push(await renderThumb(n));
+      const total = pdfDoc.numPages;
+      const want = new Set<number>();
+      if (thumbsAll) {
+        for (let n = 1; n <= total; n++) want.add(n);
+      } else {
+        for (let n = 1; n <= Math.min(total, THUMB_INITIAL); n++) want.add(n);
+        for (let n = Math.max(1, page - 25); n <= Math.min(total, page + 25); n++) want.add(n);
       }
-      if (!cancelled) setThumbUrls(urls);
-      for (let n = first + 1; n <= pdfDoc.numPages; n++) {
+      // Seed placeholders so indexes match pages, then fill missing idle.
+      // loadedRef mirrors what's rendered (updaters must stay pure).
+      const loaded = loadedRef.current;
+      setThumbUrls((prev) => (prev.length === total ? prev : Array.from({ length: total }, (_, i) => prev[i] ?? null)));
+      for (const n of [...want].sort((a, b) => a - b)) {
         if (cancelled) break;
+        if (loaded.has(n)) continue;
         await new Promise((r) => setTimeout(r, 0));
         const u = await renderThumb(n);
         if (cancelled) break;
-        setThumbUrls((prev) => (prev.length >= n ? prev : [...prev, u]));
+        loaded.add(n);
+        setThumbUrls((prev) => {
+          const next = [...prev];
+          next[n - 1] = u;
+          return next;
+        });
       }
     })();
     return () => { cancelled = true; };
-  }, [pdfDoc]);
+  }, [pdfDoc, page, thumbsAll]);
 
   const drawOverlay = useCallback(() => {
     const overlay = overlayRef.current;
@@ -404,6 +440,7 @@ export default function PdfEditor() {
     setPage(Math.max(1, Math.min(pageCount, n)));
     setOcrWords([]);
     setSelection([]);
+    setTextDraft(null);
   };
 
   const canvasPos = (e: React.PointerEvent) => {
@@ -888,6 +925,8 @@ export default function PdfEditor() {
       setAnnos({});
       setSelected(null);
       setThumbUrls([]);
+      setThumbsAll(false);
+      loadedRef.current = new Set();
       setOcrWords([]);
       textLayerRef.current = {};
       toast.success(op === 'rotate' ? 'Page rotated.' : op === 'duplicate' ? 'Page duplicated.' : 'Page deleted. Annotations were cleared (page order changed).');
@@ -1154,7 +1193,7 @@ export default function PdfEditor() {
             Free, no signup, no watermark. Everything runs in your browser — your file is never uploaded.
             Edits are additions on top of the original; existing text can&apos;t be retyped.
           </p>
-          <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 300 pages max" />
+          <FileUploader accept=".pdf,application/pdf" freeMaxSizeMB={30} maxSizeMB={100} onFileSelect={loadFile} title="Open a PDF to edit" subtitle="Up to 30 MB free · 100 MB signed in · 150–500 pages by plan" />
           <div className="flex items-center gap-3">
             <span className="h-px flex-1 bg-[var(--border-subtle)]" />
             <span className="text-xs text-[var(--text-muted)]">or start blank</span>
@@ -1211,7 +1250,7 @@ export default function PdfEditor() {
             </button>
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2.5 border-t border-[var(--border-subtle)]">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2.5 border-t border-[var(--border-subtle)] max-sm:flex-nowrap max-sm:overflow-x-auto">
           <div className="flex items-center gap-1.5" role="group" aria-label="AI actions">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">AI</span>
             <button onClick={() => runAiAction('summarize')} disabled={aiWorking} aria-label="Summarize this page with AI, 1 credit" title={isSignedIn ? 'Summarize page · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
@@ -1432,16 +1471,24 @@ export default function PdfEditor() {
             <div className="pt-2 border-t border-[var(--border-subtle)] space-y-2">
               <span className={labelCls}>Edit selected text</span>
               <input
-                value={selAnno.text}
-                onChange={(e) => {
-                  const v = e.target.value;
-                  setAnnos((prev) => ({
-                    ...prev,
-                    [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'text' ? { ...a, text: v } : a)),
-                  }));
+                value={textDraft ?? selAnno.text}
+                onChange={(e) => setTextDraft(e.target.value)}
+                onBlur={() => {
+                  if (textDraft !== null) {
+                    const v = textDraft;
+                    setAnnos((prev) => ({
+                      ...prev,
+                      [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'text' ? { ...a, text: v } : a)),
+                    }));
+                    setTextDraft(null);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') (e.target as HTMLInputElement).blur();
+                  if (e.key === 'Escape') setTextDraft(null);
                 }}
                 className={inputCls}
-                aria-label="Selected annotation text"
+                aria-label="Selected annotation text. Enter commits, Escape reverts."
               />
             </div>
           )}
@@ -1495,6 +1542,7 @@ export default function PdfEditor() {
 
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
+            <span className="sr-only" aria-live="polite">Page {page} of {pageCount}. Text content: {pageText || 'No readable text on this page.'}</span>
             <canvas ref={canvasRef} className="rounded-lg shadow" />
             <canvas
               ref={overlayRef}
@@ -1535,6 +1583,11 @@ export default function PdfEditor() {
               <span className="absolute bottom-1 left-1 px-1.5 py-0.5 text-[10px] font-mono rounded bg-black/50 text-white">{i + 1}</span>
             </button>
           ))}
+          {thumbUrls.length < pageCount && (
+            <button onClick={() => setThumbsAll(true)} className="w-full px-2 py-2 rounded-lg border border-[var(--border-subtle)] text-[11px] font-bold text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]">
+              Show all {pageCount} thumbnails
+            </button>
+          )}
         </div>
         )}
       </div>
