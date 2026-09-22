@@ -5,10 +5,11 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import JSZip from 'jszip';
 import { Download, FileImage, FileText, RefreshCw, Sparkles } from 'lucide-react';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 export default function ExtractImagesFromPdf() {
   const [file, setFile] = useState<File | null>(null);

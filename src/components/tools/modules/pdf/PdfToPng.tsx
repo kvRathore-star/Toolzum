@@ -6,10 +6,11 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
 import { EmptyState } from '@/components/EmptyState';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import JSZip from 'jszip';
 import { Upload, Download, RefreshCw, FileText, Image, Settings, Eye, Info } from 'lucide-react';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 type OutputFormat = 'png' | 'webp' | 'bmp';
 type OutputMode = 'multi' | 'single';

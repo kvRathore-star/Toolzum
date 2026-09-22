@@ -5,7 +5,8 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import * as pdfjsLib from 'pdfjs-dist';
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
+setupPdfWorker(pdfjsLib);
 import { CalculatorShell } from '../shared/CalculatorShell';
 import { Section } from '../MiscToolsShared';
 

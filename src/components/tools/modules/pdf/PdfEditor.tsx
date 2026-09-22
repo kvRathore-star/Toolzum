@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
@@ -82,7 +83,7 @@ function RequestFeature({ tool, prompt, placeholder }: { tool: string; prompt: s
   );
 }
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 const RENDER_SCALE = 1.5;
 const MAX_FILE_BYTES = 100 * 1024 * 1024;

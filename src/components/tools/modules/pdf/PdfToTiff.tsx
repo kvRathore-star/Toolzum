@@ -4,12 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { downloadOrShare } from '@/utils/nativeShare';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import * as UTIF from 'utif';
 import JSZip from 'jszip';
 import { Upload, Download, RefreshCw, FileText, Image, Settings, Eye, Info } from 'lucide-react';
 import { EmptyState } from '@/components/EmptyState';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 type OutputMode = 'multi' | 'single';
 type ColorMode = 'rgba' | 'gray' | 'bw';

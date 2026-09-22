@@ -42,9 +42,9 @@ export async function runSanityCheck() {
   try {
     log("[TEST 2/2] Verifying pdfjs-dist WASM worker...");
     // Just test that the library loaded successfully and the worker can theoretically be configured
-    const workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.mjs`;
-    pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-    log(`✅ pdfjs-dist passed! (Worker path configured: ${workerSrc})`);
+    const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+    setupPdfWorker(pdfjsLib);
+    log(`✅ pdfjs-dist passed! (Worker path configured: /pdf.worker.min.mjs)`);
   } catch (e: unknown) {
     err(`❌ pdfjs-dist failed: ${getErrorMessage(e)}`);
     errors++;

@@ -5,10 +5,11 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { clipboardWrite } from "@/lib/clipboard";
 
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+setupPdfWorker(pdfjsLib);
 
 export default function PdfToMarkdown() {
   const [file, setFile] = useState<File | null>(null);

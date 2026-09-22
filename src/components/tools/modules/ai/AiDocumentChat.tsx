@@ -28,7 +28,8 @@ export default function AiDocumentChat() {
     
     if (file.type === 'application/pdf') {
       const pdfjsLib = await import('pdfjs-dist');
-      pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+      const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+      setupPdfWorker(pdfjsLib);
       const pdf = await pdfjsLib.getDocument({ data: uint8Array }).promise;
       let text = '';
       for (let i = 1; i <= pdf.numPages; i++) {

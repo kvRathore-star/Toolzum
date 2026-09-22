@@ -3,12 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { diff_match_patch, DIFF_DELETE, DIFF_INSERT, DIFF_EQUAL } from 'diff-match-patch';
 import { Files, ArrowLeft, RefreshCw, FileText, CheckCircle, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { getErrorMessage } from '@/utils/error';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 export default function ComparePdfFiles() {
   const [fileA, setFileA] = useState<File | null>(null);

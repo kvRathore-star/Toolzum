@@ -193,7 +193,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-word': {
           setStatusText('Reading PDF pages...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
           let htmlContent = '';
@@ -261,7 +262,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-excel': {
           setStatusText('Parsing PDF tables...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const XLSX = await import('xlsx');
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
@@ -368,7 +370,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-ppt': {
           setStatusText('Reading PDF pages...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const pptxgen = (await import('pptxgenjs')).default;
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
@@ -422,7 +425,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-jpg': {
           setStatusText('Loading PDF...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const JSZip = (await import('jszip')).default;
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
@@ -484,7 +488,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-html': {
           setStatusText('Reading PDF pages...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;
           let bodyContent = '';
@@ -583,7 +588,8 @@ export default function DocumentFormatConverter({ slug }: DocumentFormatConverte
         case 'pdf-to-epub': {
           setStatusText('Reading PDF pages...');
           const pdfjsLib = await import('pdfjs-dist');
-          pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+          const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+          setupPdfWorker(pdfjsLib);
           const JSZip = (await import('jszip')).default;
           const pdf = await pdfjsLib.getDocument(arrayBuffer).promise;
           const totalPages = pdf.numPages;

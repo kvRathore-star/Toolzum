@@ -6,10 +6,11 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import JSZip from 'jszip';
 import { EmptyState } from '@/components/EmptyState';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 export default function PdfCleanup() {
   const [file, setFile] = useState<File | null>(null);

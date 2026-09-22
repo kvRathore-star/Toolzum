@@ -12,7 +12,8 @@ export default function BulkPdfDataExtractor() {
       processFile={async (file) => {
         const arrayBuf = await file.arrayBuffer();
         const pdfjsLib = await import('pdfjs-dist');
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const { setupPdfWorker } = await import('@/lib/pdfjsWorker');
+        setupPdfWorker(pdfjsLib);
         const doc = await pdfjsLib.getDocument({ data: arrayBuf.slice(0) }).promise;
         let text = '';
         for (let i = 1; i <= doc.numPages; i++) {

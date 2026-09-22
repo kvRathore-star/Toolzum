@@ -6,9 +6,10 @@ import { toast } from 'react-hot-toast';
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { downloadOrShare } from '@/utils/nativeShare';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 type TabType = 'metadata' | 'dimensions' | 'text' | 'json';
 

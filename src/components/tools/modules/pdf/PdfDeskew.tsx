@@ -6,8 +6,9 @@ import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+setupPdfWorker(pdfjsLib);
 
 function computeSkew(canvas: HTMLCanvasElement): number {
   const ctx = canvas.getContext('2d')!;

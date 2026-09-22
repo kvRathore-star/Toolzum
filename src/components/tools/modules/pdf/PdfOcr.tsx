@@ -4,12 +4,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FileUploader } from '../../FileUploader';
 import { createWorker, type Worker, type LoggerMessage } from 'tesseract.js';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import { clipboardWrite } from "@/lib/clipboard";
 import { isLowEndDevice } from '@/lib/device';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 export default function PdfOcr() {
   const [file, setFile] = useState<File | null>(null);

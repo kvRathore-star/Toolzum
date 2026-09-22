@@ -5,12 +5,13 @@ import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { toast } from 'react-hot-toast';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { FileText, Languages, Download, Copy, Check, ArrowRight, Globe, RefreshCw } from 'lucide-react';
 import { getErrorMessage } from '@/utils/error';
 import { clipboardWrite } from "@/lib/clipboard";
 
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+setupPdfWorker(pdfjsLib);
 
 const LANGUAGES = [
   { code: 'en', name: 'English' },

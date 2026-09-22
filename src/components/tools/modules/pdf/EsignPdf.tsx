@@ -5,12 +5,13 @@ import { toast } from "react-hot-toast";
 import { FileUploader } from '../../FileUploader';
 import { PDFDocument, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import { setupPdfWorker } from '@/lib/pdfjsWorker';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { createDownloadBlob } from '@/utils/blob';
 import { EmptyState } from '@/components/EmptyState';
 
 // Configure pdfjs worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+setupPdfWorker(pdfjsLib);
 
 export default function EsignPdf() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
