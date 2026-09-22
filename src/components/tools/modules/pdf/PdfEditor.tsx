@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { setupPdfWorker } from '@/lib/pdfjsWorker';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers, Maximize2, Minimize2 } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
 import { clipboardWrite } from '@/lib/clipboard';
@@ -143,6 +143,8 @@ export default function PdfEditor() {
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
   const [ocrLang, setOcrLang] = useState('eng');
+  // Focus mode: hides side panels + footer strips, canvas takes the row.
+  const [focus, setFocus] = useState(false);
   const [findText, setFindText] = useState('');
   const [replaceText, setReplaceText] = useState('');
   const [replaceScope, setReplaceScope] = useState<'page' | 'all'>('page');
@@ -1132,78 +1134,96 @@ export default function PdfEditor() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-3">
-        <span className="text-sm font-bold text-[var(--text-primary)] truncate max-w-[220px]" title={file?.name}>{file?.name}</span>
-        <span className="text-xs text-[var(--text-muted)]">Page {page}/{pageCount}</span>
-        <div className="flex items-center gap-1 ml-2">
-          <button onClick={() => goPage(page - 1)} disabled={page <= 1} aria-label="Previous page" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button onClick={() => goPage(page + 1)} disabled={page >= pageCount} aria-label="Next page" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-        <div className="flex items-center gap-1" role="group" aria-label="Zoom">
-          {[0.75, 1, 1.5, 2].map((z) => (
-            <button
-              key={z}
-              onClick={() => setScale(z)}
-              aria-pressed={scale === z}
-              aria-label={`Zoom ${Math.round(z * 100)} percent`}
-              className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border ${scale === z ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'}`}
-            >
-              {Math.round(z * 100)}%
+      {/* Ribbon: file row + grouped action rows. Wraps always — nothing clips. */}
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl px-4 py-3 space-y-2.5">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm font-bold text-[var(--text-primary)] truncate max-w-[220px]" title={file?.name}>{file?.name}</span>
+          <span className="text-xs text-[var(--text-muted)]">Page {page}/{pageCount}</span>
+          <div className="flex items-center gap-1 ml-2">
+            <button onClick={() => goPage(page - 1)} disabled={page <= 1} aria-label="Previous page" title="Previous page" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          ))}
-        </div>
-        <div className="flex items-center gap-1 ml-auto">
-          <button onClick={() => runAiAction('summarize')} disabled={aiWorking} aria-label="Summarize this page with AI, 1 credit" title={isSignedIn ? 'Summarize page · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Summarize'}
-          </button>
-          <button onClick={() => runAiAction('grammar')} disabled={aiWorking} aria-label="Fix grammar with AI, 1 credit" title={isSignedIn ? 'Fix grammar · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'}
-          </button>
-          <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, 1 credit" title={isSignedIn ? 'Translate to English · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Translate'}
-          </button>
-          <button onClick={findSensitive} disabled={aiWorking} aria-label="Suggest sensitive-data cover boxes with AI, Pro, 1 credit" title={isPro ? 'Find sensitive data · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'}
-          </button>
-          {selection.length > 0 && (
-            <button onClick={() => { setSelection([]); drawOverlay(); toast.success('Selection cleared — AI uses the whole page.'); }} aria-label="Clear text selection" className="px-2.5 py-2 rounded-lg border border-[var(--accent)]/40 text-xs font-bold text-[var(--accent)] hover:bg-[var(--accent)]/10">
-              {selection.length} selected ✕
+            <button onClick={() => goPage(page + 1)} disabled={page >= pageCount} aria-label="Next page" title="Next page" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <ChevronRight className="w-4 h-4" />
             </button>
-          )}
-          <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages (English)" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
-            <ScanText className="w-4 h-4" /> {ocrRunning ? `${ocrProgress}%` : 'OCR'}
-          </button>
-          <button onClick={() => restructure('rotate')} aria-label="Rotate current page" title="Rotate page 90°" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <RotateCw className="w-4 h-4" />
-          </button>
-          <button onClick={() => restructure('duplicate')} aria-label="Duplicate current page" title="Duplicate page" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <CopyPlus className="w-4 h-4" />
-          </button>
-          <button onClick={() => restructure('delete')} aria-label="Delete current page" title="Delete page" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <FileMinus2 className="w-4 h-4" />
-          </button>
-          <button onClick={undo} aria-label="Undo last annotation" title="Undo" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <Undo2 className="w-4 h-4" />
-          </button>
-          <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected (Del)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
-            <Trash2 className="w-4 h-4" />
-          </button>
-          <button onClick={copySelected} disabled={!selected} aria-label="Copy selected annotation" title="Copy (Ctrl+C)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
-            <Copy className="w-4 h-4" />
-          </button>
-          <button onClick={pasteClipboard} aria-label="Paste copied annotation" title="Paste (Ctrl+V)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <ClipboardPaste className="w-4 h-4" />
-          </button>
-          <button onClick={stampAllPages} aria-label="Stamp selected image on all pages" title="Stamp on all pages (select an image/signature first)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
-            <Layers className="w-4 h-4" />
-          </button>
-          <button onClick={exportPdf} disabled={exporting} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
-            <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download PDF'}
-          </button>
+          </div>
+          <div className="flex items-center gap-1" role="group" aria-label="Zoom">
+            {[0.75, 1, 1.5, 2].map((z) => (
+              <button
+                key={z}
+                onClick={() => setScale(z)}
+                aria-pressed={scale === z}
+                aria-label={`Zoom ${Math.round(z * 100)} percent`}
+                title={`Zoom ${Math.round(z * 100)}%`}
+                className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border ${scale === z ? 'bg-[var(--accent-ink)] text-white border-transparent' : 'border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-overlay)]'}`}
+              >
+                {Math.round(z * 100)}%
+              </button>
+            ))}
+          </div>
+          <div className="flex items-center gap-2 ml-auto">
+            <button onClick={() => setFocus((f) => !f)} aria-pressed={focus} aria-label={focus ? 'Exit focus mode' : 'Enter focus mode (editor only)'} title={focus ? 'Exit focus mode' : 'Focus mode — editor only'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">
+              {focus ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />} {focus ? 'Exit focus' : 'Focus'}
+            </button>
+            <button onClick={exportPdf} disabled={exporting} aria-label="Download edited PDF" title="Download the edited PDF" className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
+              <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download PDF'}
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2.5 border-t border-[var(--border-subtle)]">
+          <div className="flex items-center gap-1.5" role="group" aria-label="AI actions">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">AI</span>
+            <button onClick={() => runAiAction('summarize')} disabled={aiWorking} aria-label="Summarize this page with AI, 1 credit" title={isSignedIn ? 'Summarize page · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Summarize'}
+            </button>
+            <button onClick={() => runAiAction('grammar')} disabled={aiWorking} aria-label="Fix grammar with AI, 1 credit" title={isSignedIn ? 'Fix grammar · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'}
+            </button>
+            <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, 1 credit" title={isSignedIn ? 'Translate to English · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+              <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Translate'}
+            </button>
+            <button onClick={findSensitive} disabled={aiWorking} aria-label="Suggest sensitive-data cover boxes with AI, Pro, 1 credit" title={isPro ? 'Find sensitive data · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+              {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'}
+            </button>
+            {selection.length > 0 && (
+              <button onClick={() => { setSelection([]); drawOverlay(); toast.success('Selection cleared — AI uses the whole page.'); }} aria-label="Clear text selection" title="Clear selection" className="px-2.5 py-2 rounded-lg border border-[var(--accent)]/40 text-xs font-bold text-[var(--accent)] hover:bg-[var(--accent)]/10">
+                {selection.length} selected ✕
+              </button>
+            )}
+            <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+              <ScanText className="w-4 h-4" /> {ocrRunning ? `${ocrProgress}%` : 'OCR'}
+            </button>
+          </div>
+          <div className="flex items-center gap-1.5" role="group" aria-label="Page actions">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Page</span>
+            <button onClick={() => restructure('rotate')} aria-label="Rotate current page" title="Rotate page 90°" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <RotateCw className="w-4 h-4" />
+            </button>
+            <button onClick={() => restructure('duplicate')} aria-label="Duplicate current page" title="Duplicate page" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <CopyPlus className="w-4 h-4" />
+            </button>
+            <button onClick={() => restructure('delete')} aria-label="Delete current page" title="Delete page" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <FileMinus2 className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="flex items-center gap-1.5" role="group" aria-label="Edit actions">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">Edit</span>
+            <button onClick={undo} aria-label="Undo last annotation" title="Undo last annotation" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <Undo2 className="w-4 h-4" />
+            </button>
+            <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected (Del)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <Trash2 className="w-4 h-4" />
+            </button>
+            <button onClick={copySelected} disabled={!selected} aria-label="Copy selected annotation" title="Copy selected (Ctrl+C)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+              <Copy className="w-4 h-4" />
+            </button>
+            <button onClick={pasteClipboard} aria-label="Paste copied annotation" title="Paste (Ctrl+V)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <ClipboardPaste className="w-4 h-4" />
+            </button>
+            <button onClick={stampAllPages} aria-label="Stamp selected image on all pages" title="Stamp on all pages (select an image/signature first)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+              <Layers className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1281,7 +1301,8 @@ export default function PdfEditor() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <div className={`grid grid-cols-1 gap-4 ${focus ? '' : 'lg:grid-cols-12'}`}>
+        {!focus && (
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-1.5">
           {tools.map((t) => (
             <button
@@ -1289,6 +1310,7 @@ export default function PdfEditor() {
               onClick={() => { setTool(t.id); if (t.id === 'sign' && !signPadDataRef.current) setShowSignPad(true); if (t.id === 'image' && !pendingImageRef.current) imagePickRef.current?.click(); }}
               aria-pressed={tool === t.id}
               aria-label={`${t.label} tool`}
+              title={t.label}
               className={`w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-colors ${tool === t.id ? 'bg-[var(--accent-ink)] text-white shadow' : 'bg-[var(--bg-overlay)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'}`}
             >
               {t.icon} {t.label}
@@ -1428,8 +1450,9 @@ export default function PdfEditor() {
             <p className="text-[11px] text-[var(--text-muted)]">Case-insensitive match; retypeset in Helvetica at matched size.</p>
           </div>
         </div>
+        )}
 
-        <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
+        <div className={`${focus ? '' : 'lg:col-span-8'} bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto`}>
           <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <canvas ref={canvasRef} className="rounded-lg shadow" />
             <canvas
@@ -1454,6 +1477,7 @@ export default function PdfEditor() {
           </p>
         </div>
 
+        {!focus && (
         <div className="lg:col-span-2 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-3 space-y-2 max-h-[560px] overflow-y-auto">
           <p className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-wider">Pages</p>
           {thumbUrls.map((u, i) => (
@@ -1471,15 +1495,15 @@ export default function PdfEditor() {
             </button>
           ))}
         </div>
+        )}
       </div>
 
+      {!focus && (
+      <>
       <p className="text-xs text-[var(--text-muted)] text-center">
         Free · no signup · no watermark · file never leaves your browser. Cover-up hides content visually only —
         for true removal see <Link href="/pdf/unlock-pdf" className="underline">Unlock PDF</Link> workflows or redact before sharing.
       </p>
-      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 space-y-3">
-        <RequestFeature tool="pdf-whiteboard" prompt="Want real-time collaboration (shared cursors, live co-editing)? It's a server product, not a weekend build — leave your email and we'll only build it if enough users ask." placeholder="you@example.com" />
-      </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <span className="text-xs text-[var(--text-muted)]">Need more?</span>
         {([
@@ -1510,6 +1534,8 @@ export default function PdfEditor() {
           </Link>
         ))}
       </div>
+      </>
+      )}
     </div>
   );
 }
