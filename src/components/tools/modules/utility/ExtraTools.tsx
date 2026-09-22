@@ -285,7 +285,15 @@ export function ParquetToCsvConverter() {
       // BigInts stringified (CSV has no 64-bit integers).
       const { parquetReadObjects } = await import('hyparquet');
       const { default: Papa } = await import('papaparse');
-      const rows = await parquetReadObjects({ file }) as Record<string, unknown>[];
+      // hyparquet reads AsyncBuffer ({byteLength, slice()->ArrayBuffer}),
+      // not File: wrap the bytes (slice() copies to an exact-size buffer).
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const buf = {
+        byteLength: bytes.byteLength,
+        slice: (start: number, end?: number): ArrayBuffer =>
+          bytes.slice(start, end).buffer as ArrayBuffer,
+      };
+      const rows = await parquetReadObjects({ file: buf }) as Record<string, unknown>[];
       const MAX_ROWS = 50000;
       const slice = rows.slice(0, MAX_ROWS);
       setTruncated(rows.length > MAX_ROWS);

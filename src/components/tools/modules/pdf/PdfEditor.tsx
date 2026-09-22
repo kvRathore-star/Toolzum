@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
 import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
@@ -787,7 +787,7 @@ export default function PdfEditor() {
       const idx = page - 1;
       if (op === 'rotate') {
         const pg = doc.getPages()[idx]!;
-        pg.setRotation(((pg.getRotation().angle + 90) % 360) as 0 | 90 | 180 | 270);
+        pg.setRotation(degrees((pg.getRotation().angle + 90) % 360));
       } else if (op === 'duplicate') {
         const [copy] = await doc.copyPages(doc, [idx]);
         doc.insertPage(idx + 1, copy!);
@@ -1007,7 +1007,6 @@ export default function PdfEditor() {
                 lp.drawLine({ start: { x: x2, y: y2 }, end: { x: x2 - head * Math.cos(ang + 0.4), y: y2 - head * Math.sin(ang + 0.4) }, thickness: a.width, color: col });
               }
             }
-          } else if (a.kind === 'note') {
           } else if (a.kind === 'note') {
             // Wrapped lines: export must never silently drop note text.
             const words = a.text.split(/\s+/).filter(Boolean);
@@ -1424,7 +1423,7 @@ export default function PdfEditor() {
       </div>
       <div className="flex flex-wrap items-center justify-center gap-2">
         <span className="text-xs text-[var(--text-muted)]">Need more?</span>
-        {[
+        {([
           ['Merge PDFs', '/pdf/pdf-merger'],
           ['Split PDF', '/pdf/pdf-splitter'],
           ['Compress', '/pdf/pdf-compressor'],
@@ -1446,7 +1445,7 @@ export default function PdfEditor() {
           ['QR codes', '/utility/qr-code-generator'],
           ['AI translator', '/ai/ai-translator'],
           ['AI paraphraser', '/ai/ai-paraphrasing-tool'],
-        ].map(([label, href]) => (
+        ] as [string, string][]).map(([label, href]) => (
           <Link key={href} href={href} className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
             {label}
           </Link>

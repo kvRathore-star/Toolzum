@@ -17,13 +17,13 @@ export interface MegamenuColumn {
   isIndia: boolean;
 }
 
-export const TOOL_COUNT = 1142;
+export const TOOL_COUNT = 1143;
 
 export const SITE_STATS = {
-  totalImplemented: 1059,
-  freeTierTotal: 994,
-  localTools: 1026,
-  cloudTools: 27,
+  totalImplemented: 1060,
+  freeTierTotal: 995,
+  localTools: 1020,
+  cloudTools: 34,
   hybridTools: 2,
 } as const;
 
@@ -98,7 +98,7 @@ export const MEGAMENU_COLUMNS: MegamenuColumn[] = [
         "href": "/pdf/jpg-to-pdf"
       }
     ],
-    "allCount": 62,
+    "allCount": 63,
     "allHref": "/pdf",
     "isIndia": false
   },
