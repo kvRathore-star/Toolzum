@@ -8,6 +8,8 @@ import { DynamicModuleWrapper } from "@/components/tools/modules/DynamicModuleWr
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { MemoryWatchdog } from "@/hooks/useMemoryWatchdog";
 import { getMetaDescription, getShortDescription, getOgDescription } from "@/lib/generateToolDescription";
+import { CATEGORY_SECTIONS } from "@/data/categorySections";
+import type { SidebarGroup } from "@/components/tools/CategorySidebar";
 
 function catToUrlSlug(cat: string): string {
   if (cat === "Growth & Marketing") return "growth-metrics";
@@ -104,6 +106,33 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
     }
   }
 
+  // Sidebar wayfinding: same-category shelves + tools for CategorySidebar.
+  // Reuses CATEGORY_SECTIONS (the category page source of truth); leftover
+  // tools land in a "More …" bucket so nothing is ever unlisted.
+  const catTools = toolsRegistry.filter(t =>
+    t.category === toolMetadata.category && t.showInCategory !== false
+  );
+  const catSections = CATEGORY_SECTIONS[toolMetadata.category] || [];
+  const covered = new Set(catSections.flatMap(s => s.slugs));
+  const sidebarGroups: SidebarGroup[] = [
+    ...catSections
+      .map(s => ({
+        heading: s.heading,
+        tools: s.slugs
+          .map(slug => catTools.find(t => t.slug === slug))
+          .filter((t): t is (typeof catTools)[number] => !!t)
+          .map(t => ({ name: t.name, slug: t.slug, href: `/${params.category}/${t.slug}` })),
+      }))
+      .filter(g => g.tools.length > 0),
+  ];
+  const rest = catTools.filter(t => !covered.has(t.slug));
+  if (rest.length > 0) {
+    sidebarGroups.push({
+      heading: `More ${toolMetadata.category} tools`,
+      tools: rest.map(t => ({ name: t.name, slug: t.slug, href: `/${params.category}/${t.slug}` })),
+    });
+  }
+
   return (
     <>
       <ToolLayout
@@ -113,6 +142,7 @@ export default async function ToolPage(props: { params: Promise<{ category: stri
         slug={toolMetadata.slug}
         tool={toolMetadata}
         {...getToolLayoutData(params.category, toolMetadata.slug)}
+        sidebarGroups={sidebarGroups}
         seoSection={<ToolPageSEOContent tool={toolMetadata} relatedTools={findRelatedTools(toolMetadata, toolsRegistry)} />}
       >
         <MemoryWatchdog />

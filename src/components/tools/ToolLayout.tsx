@@ -4,6 +4,7 @@ import React, { useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { GlobalErrorBoundary } from '../GlobalErrorBoundary';
+import { CategorySidebar, type SidebarGroup } from './CategorySidebar';
 import { ChevronRight, Shield, Zap, Info, ArrowLeft, Sparkles } from 'lucide-react';
 import type { RelatedTool, ToolMetadata } from '@/registry/tools';
 import { PerToolBadge } from '@/components/privacy-claims';
@@ -44,6 +45,7 @@ interface ToolLayoutProps {
   proToolCount: number;
   toolCount: number;
   relatedTools: RelatedTool[];
+  sidebarGroups?: SidebarGroup[];
 }
 
 const SITE_URL = "https://toolzum.com";
@@ -89,7 +91,7 @@ function getRelativePath(category: string, slug: string): string {
   return `/${getCategoryPath(category)}/${slug}`;
 }
 
-export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp }: ToolLayoutProps) {
+export function ToolLayout({ title, description, category, slug, children, seoSection, tool, proToolCount, toolCount, relatedTools: relatedToolsProp, sidebarGroups }: ToolLayoutProps) {
   const { data: sessionData, isPending } = useSession();
 
   const { remaining, canUse, recordUse, showSignInPrompt, showProPrompt, isSignedIn } = useFreeUsage(category);
@@ -192,7 +194,7 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
         
         <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[var(--accent-ink)]/5 blur-[120px] rounded-full pointer-events-none hidden sm:block" />
 
-        <div className="max-w-[960px] mx-auto py-10 sm:py-14 lg:py-16 px-4 sm:px-8 md:px-10 relative z-10 flex flex-col items-center text-center">
+        <div className={`${sidebarGroups && sidebarGroups.length > 0 ? 'max-w-[1240px]' : 'max-w-[960px]'} mx-auto py-10 sm:py-14 lg:py-16 px-4 sm:px-8 md:px-10 relative z-10 flex flex-col items-center text-center`}>
           
           {/* Back link */}
           <div className="w-full flex justify-start mb-4">
@@ -267,6 +269,20 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             {DOWNLOAD_PRODUCING_SLUGS.has(slug) && <DownloadQuotaBadge />}
           </div>
 
+          {/* Tool + sidebar: rail on xl, drawer on mobile. Without groups
+              the layout is byte-identical to before (no sidebar rendered). */}
+          <div className="w-full xl:flex xl:items-start xl:gap-6 xl:text-left">
+            {sidebarGroups && sidebarGroups.length > 0 && (
+              <CategorySidebar
+                categoryName={displayCategory}
+                categoryHref={`/${category}`}
+                totalCount={sidebarGroups.reduce((n, g) => n + g.tools.length, 0)}
+                currentSlug={slug}
+                groups={sidebarGroups}
+              />
+            )}
+            <div className="min-w-0 flex-1">
+
           {/* Tool Container */}
           <div className="w-full text-left bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-[var(--radius-2xl)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-shadow overflow-hidden relative p-6 sm:p-8">
             <GlobalErrorBoundary>
@@ -333,6 +349,8 @@ export function ToolLayout({ title, description, category, slug, children, seoSe
             </div>
           )}
 
+            </div>
+            </div>
           </div>
 
           <PostDownloadBar />

@@ -32,7 +32,7 @@ export async function generateMetadata(props: { params: Promise<{ category: stri
   const toolCount = toolsRegistry.filter(t => t.category === categoryKey && t.showInCategory !== false).length;
   const SEO: Record<string, { title: string; description: string }> = {
     Image: { title: 'Free Image Tools – Resize, Compress & Convert', description: 'Free image tools — resize, crop, compress, convert, and edit images directly in your browser. Nothing uploaded, 100% private.' },
-    PDF: { title: 'Free PDF Tools – Compress, Merge & Convert', description: 'Free PDF tools — compress, merge, split, convert, and edit PDFs. All processing happens locally in your browser.' },
+    PDF: { title: 'Free PDF Tools – Edit, Compress, Merge & Convert', description: 'Free PDF tools — edit, compress, merge, split, convert, and sign PDFs. All processing happens locally in your browser.' },
     Video: { title: 'Free Video Tools – Compress, Convert & Edit', description: 'Free video tools — trim, compress, convert between formats, and enhance videos. Zero uploads, processed entirely in-browser.' },
     Audio: { title: 'Free Audio Tools – Convert, Cut & Enhance', description: 'Free audio tools — convert between MP3, WAV, FLAC, OGG, trim, and enhance audio files locally in your browser.' },
     AI: { title: 'Free AI Tools – Generate, Summarize & Analyze', description: 'Free AI tools — generate images, summarize text, analyze content, and more. Powered by browser-based AI for complete privacy.' },
