@@ -1012,6 +1012,27 @@ export default function PdfEditor() {
   };
 
   const signPadDataRef = useRef<string | null>(null);
+  const [typedName, setTypedName] = useState('');
+
+  // Typed signature: renders the name in a script font onto the pad, then
+  // flows through the same save path as drawn signatures.
+  const applyTypedSignature = () => {
+    const name = typedName.trim();
+    if (name.length < 2) {
+      toast.error('Type your name first (2+ characters).');
+      return;
+    }
+    const c = signPadRef.current;
+    if (!c) return;
+    const ctx = c.getContext('2d')!;
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = '#000000';
+    ctx.font = '64px "Brush Script MT", "Segoe Script", "Apple Chancery", cursive';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(name.slice(0, 40), c.width / 2, c.height / 2 + 4);
+    saveSignPad();
+  };
 
   const saveSignPad = () => {
     const c = signPadRef.current;
@@ -1340,6 +1361,19 @@ export default function PdfEditor() {
             <button onClick={saveSignPad} className="px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold">Save signature</button>
             <button onClick={() => { const c = signPadRef.current; c?.getContext('2d')?.clearRect(0, 0, c.width, c.height); }} className="px-4 py-2 rounded-xl border border-[var(--border-subtle)] text-xs">Clear</button>
             <button onClick={() => setShowSignPad(false)} className="px-4 py-2 rounded-xl border border-[var(--border-subtle)] text-xs">Close</button>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <span className="text-xs text-[var(--text-muted)]">or type it:</span>
+            <input
+              value={typedName}
+              onChange={(e) => setTypedName(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') applyTypedSignature(); }}
+              placeholder="Your name"
+              maxLength={40}
+              aria-label="Type name for signature"
+              className="flex-1 min-w-[140px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            />
+            <button onClick={applyTypedSignature} className="px-4 py-2 rounded-xl border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)]">Use typed</button>
           </div>
         </div>
       )}

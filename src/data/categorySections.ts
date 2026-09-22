@@ -559,6 +559,7 @@ export const CATEGORY_SECTIONS: Record<string, CategorySection[]> = {
         "pdf-to-pdfa",
         "url-to-pdf", "eml-to-pdf",
         "pdf-to-html",
+        "pdf-to-word", "pdf-to-jpg", "pdf-to-ppt", "pdf-to-excel",
       ],
     },
     {

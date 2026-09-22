@@ -185,7 +185,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     slug: "heic-to-pdf",
     dependencies: "pdf-lib, heic2any",
-    showInCategory: false,
     faqs: [
       { question: "What does HEIC to PDF do?", answer: "Converts HEIC files to PDF format \u2014 Apple device photos to document sharing, printing, and archival with consistent formatting. All conversion happens locally in your browser with no file size limits." },
       { question: "Where does PDF fit best?", answer: "document sharing, printing, and archival with consistent formatting." },
@@ -219,7 +218,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract PDF content into editable DOCX files. Preserves formatting and layout.',
     dependencies: "pdf2docx / PDF.js",
     seoDescription: 'Convert PDF to Word online free — editable DOCX with layout kept. Know the limits first. ',
-    showInCategory: false,
     faqs: [
       { question: "How accurate is the conversion?", answer: "Text-heavy PDFs convert cleanly — paragraphs, headings, lists, and tables survive. Scanned/image-only PDFs need OCR first; complex multi-column magazine layouts may reflow into single-column text." },
       { question: "What about fonts?", answer: "Standard fonts map to Word equivalents; exotic embedded fonts fall back to the closest match. Check headings and special characters after conversion before sending." },
@@ -323,8 +321,7 @@ export const entries_chunk_0: ToolMetadata[] = [
     category: "PDF",
     description: 'Converts .docx and .doc files to PDF while preserving fonts, tables, images, headers, and embedded formatting. Uses cloud-based processing.',
     seoDescription: 'Free online Word to PDF — convert DOCX/DOC with fonts, tables, and images intact. Server-side for fidelity. ',
-    dependencies: "LibreOffice API / CloudConvert API",
-    showInCategory: false,
+    dependencies: "None",
     faqs: [
       { question: "Will my formatting survive?", answer: "Yes — fonts, tables, images, headers, footers, and page breaks render via LibreOffice, matching desktop Word output closely. Macro/VBA code does not transfer (PDFs can't carry it)." },
       { question: "Why is this one server-side, not in-browser?", answer: "Faithful Word rendering needs a full document engine, too heavy for browsers. Files are processed on the conversion API and deleted after — unlike the local-first tools elsewhere on this site." },
@@ -357,7 +354,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert JPG images to PDF format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online JPG to PDF — merge JPG photos into one multi-page PDF in your order. Lossless, private, no uploads. ',
     dependencies: "jsPDF / Canvas API",
-    showInCategory: false,
     faqs: [
       { question: "How do I order the pages?", answer: "Upload images, then drag to arrange — page 1 is the first image. The PDF preserves your order exactly, one image per page." },
       { question: "What page size and orientation?", answer: "Each page auto-fits its image (landscape photos get landscape pages). For uniform A4 output, resize images to the same dimensions first with the Image Resizer." },
@@ -437,7 +433,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PDF images to JPG format in your browser. Lossless, private, and completely free — no uploads needed.',
     seoDescription: 'Free online PDF to JPG — Renders each PDF page as a high-quality JPG image, preserving layout, fonts, and embedded graphics exactly as they appear. ',
     dependencies: "PDF.js / Canvas API",
-    showInCategory: false,
     faqs: [
       { question: "What does PDF to JPG do?", answer: "Convert PDF images to JPG format in your browser. Lossless, private, and completely free \u2014 no uploads needed." },
       { question: "Where does JPEG fit best?", answer: "photographs, web images, and social media where smaller file size matters more than perfect quality." },
@@ -453,7 +448,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online PDF to PPT — Converts PDF content—including text, images, and vector graphics—into editable PowerPoint slides with preserved layout structure. ',
     dependencies: "pdf2json / PptxGenJS",
-    showInCategory: false,
   },
   {
     id: "30",
@@ -564,7 +558,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Convert PowerPoint presentations to PDF with accurate slide rendering, right in your browser. Nothing uploaded.',
     seoDescription: 'Free online PPT to PDF — Renders each PowerPoint slide as a page in a single PDF, maintaining embedded fonts, vector graphics, and slide transitions as static layout. ',
     dependencies: "PDF.js / pdf-lib",
-    showInCategory: false,
   },
   {
     id: "40",
@@ -623,7 +616,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Excel to PDF — Converts Excel spreadsheets into properly paginated PDF files, respecting print areas, page orientation, and cell formatting. ',
     dependencies: "SheetJS / jsPDF",
-    showInCategory: false,
   },
   {
     id: "45",
@@ -775,7 +767,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Extract tables from PDF into editable XLSX spreadsheets with accurate column alignment.',
     dependencies: "pdf2json / SheetJS",
     seoDescription: 'Convert PDF to Excel online free — extract tables from PDF into editable XLSX spreadsheets. Accurate column alignment. ',
-    showInCategory: false,
   },
   {
     id: "59",
@@ -1076,7 +1067,6 @@ export const entries_chunk_0: ToolMetadata[] = [
     description: 'Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. Everything runs locally in your browser — nothing is uploaded.',
     seoDescription: 'Free online Protect PDF — Encrypts a PDF with a user-chosen password using AES-128, restricting opening, printing, and copying as specified by the owner. ',
     dependencies: "pdf-lib",
-    showInCategory: false,
   },
   {
     id: "97",
