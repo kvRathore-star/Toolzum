@@ -4,13 +4,83 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
-import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick } from 'lucide-react';
+import { Type, Highlighter, PenLine, Image as ImageIcon, PenTool, Eraser, Undo2, Download, ChevronLeft, ChevronRight, Trash2, Square, StickyNote, RotateCw, CopyPlus, FileMinus2, Sparkles, ScanText, MousePointerClick, TextSelect, Copy, ClipboardPaste, Layers } from 'lucide-react';
 import { FileUploader } from '../../FileUploader';
 import { downloadOrShare } from '@/utils/nativeShare';
+import { clipboardWrite } from '@/lib/clipboard';
 import { inputCls, labelCls } from '../../Calculators.shared';
 import { useAiProvider } from '@/hooks/useAiProvider';
+import { useProStatus } from '@/hooks/useProStatus';
 import { useSession } from '@/lib/auth-client';
+import { Turnstile } from '@marsidev/react-turnstile';
 import Link from 'next/link';
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '';
+
+// Demand-gate: posts an email to the shared notify-me waitlist (same table
+// as ComingSoon pages). Used for OCR languages beyond the big three and for
+// real-time collaboration interest — features get built on votes, not guesses.
+function RequestFeature({ tool, prompt, placeholder }: { tool: string; prompt: string; placeholder: string }) {
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const send = async () => {
+    const addr = email.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(addr)) {
+      toast.error('Enter a valid email to get notified.');
+      return;
+    }
+    if (TURNSTILE_SITE_KEY && !token) {
+      toast.error('Complete the verification first.');
+      return;
+    }
+    setSending(true);
+    try {
+      const res = await fetch('/api/notify-me', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: addr, tool, captcha: token }),
+      });
+      const data = await res.json().catch(() => ({})) as { ok?: boolean; error?: string };
+      if (res.ok && data.ok) {
+        setDone(true);
+        setEmail('');
+      } else if (data.error === 'captcha_failed') {
+        toast.error('Verification failed — please try again.');
+        setToken(null);
+      } else {
+        toast.error("Couldn't save that — please try again.");
+      }
+    } catch {
+      toast.error('Network error — check your connection and try again.');
+    } finally {
+      setSending(false);
+    }
+  };
+  if (done) return <p className="text-xs text-green-600 dark:text-green-400 font-semibold">✓ Noted — you&apos;ll hear from us if it ships.</p>;
+  return (
+    <div className="space-y-2">
+      <p className="text-xs text-[var(--text-secondary)]">{prompt}</p>
+      <div className="flex flex-wrap gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={placeholder}
+          aria-label="Email for launch notification"
+          className="flex-1 min-w-[180px] bg-[var(--bg-overlay)] border border-[var(--border-subtle)] rounded-xl px-3 py-2 text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+        />
+        <button onClick={send} disabled={sending} className="px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold disabled:opacity-50">
+          {sending ? 'Saving…' : 'Notify me'}
+        </button>
+      </div>
+      {TURNSTILE_SITE_KEY && (
+        <Turnstile siteKey={TURNSTILE_SITE_KEY} onSuccess={setToken} onExpire={() => setToken(null)} />
+      )}
+    </div>
+  );
+}
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -19,7 +89,7 @@ const MAX_FILE_BYTES = 100 * 1024 * 1024;
 const HIGHLIGHT_COLORS = ['#ffff00', '#00ff00', '#00ccff', '#ff99cc', '#ff9900'];
 const INK_COLORS = ['#000000', '#1a56db', '#c81e1e', '#047857'];
 
-type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype';
+type Tool = 'text' | 'highlight' | 'draw' | 'whiteout' | 'image' | 'sign' | 'shape' | 'note' | 'retype' | 'select';
 
 interface TextAnno { kind: 'text'; x: number; y: number; text: string; size: number; color: string; bold: boolean }
 interface RectAnno { kind: 'highlight' | 'whiteout'; x: number; y: number; w: number; h: number; color: string }
@@ -62,9 +132,11 @@ export default function PdfEditor() {
   const [showSignPad, setShowSignPad] = useState(false);
   const [thumbUrls, setThumbUrls] = useState<string[]>([]);
   const [aiWorking, setAiWorking] = useState(false);
+  const isPro = useProStatus();
   const [ocrWords, setOcrWords] = useState<{ text: string; x: number; y: number; size: number; conf: number }[]>([]);
   const [ocrRunning, setOcrRunning] = useState(false);
   const [ocrProgress, setOcrProgress] = useState(0);
+  const [ocrLang, setOcrLang] = useState('eng');
   const ocrWorkerRef = useRef<{ recognize: (img: string) => Promise<{ data: { words?: { text: string; confidence: number; bbox: { x0: number; y0: number; x1: number; y1: number } }[] } }> } | null>(null);
   const { generateCompletion } = useAiProvider();
   const { data: session } = useSession();
@@ -240,6 +312,7 @@ export default function PdfEditor() {
   const goPage = (n: number) => {
     setPage(Math.max(1, Math.min(pageCount, n)));
     setOcrWords([]);
+    setSelection([]);
   };
 
   const canvasPos = (e: React.PointerEvent) => {
@@ -326,6 +399,12 @@ export default function PdfEditor() {
         else if (shapeVariant === 'ellipse') ctx.ellipse(x + w / 2, y + h / 2, Math.abs(w) / 2, Math.abs(h) / 2, 0, 0, Math.PI * 2);
         else { ctx.moveTo(x, y); ctx.lineTo(pos.x, pos.y); }
         ctx.stroke();
+      } else if (tool === 'select') {
+        ctx.strokeStyle = '#1a56db';
+        ctx.setLineDash([5, 4]);
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(x, y, w, h);
+        ctx.setLineDash([]);
       } else {
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, y, w, h);
@@ -340,7 +419,7 @@ export default function PdfEditor() {
     const pos = canvasPos(e);
     if (tool === 'draw' && drag.points && drag.points.length >= 4) {
       pushAnno(page, { kind: 'draw', points: drag.points, color: inkColor, width: 1.7 });
-    } else if ((tool === 'highlight' || tool === 'whiteout' || tool === 'shape')) {
+    } else if ((tool === 'highlight' || tool === 'whiteout' || tool === 'shape' || tool === 'select')) {
       const w = Math.abs(pos.x / scale - drag.x);
       const h = Math.abs(pos.y / scale - drag.y);
       if (w > 3 && h > 3) {
@@ -348,33 +427,46 @@ export default function PdfEditor() {
         const y = Math.min(drag.y, pos.y / scale);
         if (tool === 'highlight') pushAnno(page, { kind: 'highlight', x, y, w, h, color: markColor });
         else if (tool === 'whiteout') pushAnno(page, { kind: 'whiteout', x, y, w, h, color: '#ffffff' });
+        else if (tool === 'select') selectInRect(x, y, w, h);
         else pushAnno(page, { kind: 'shape', shape: shapeVariant, x, y, w, h, color: inkColor, width: 1.5 });
       } else drawOverlay();
     }
   };
 
-  // In-editor AI (Tier 1 differentiator): extract the page's text layer and
-  // run a completion, then insert the result as stacked text annotations.
-  // 1 credit via /api/ai/generate — signed-in only, never auto-retried.
-  const runAiAction = async (action: 'summarize' | 'grammar') => {
+  // In-editor AI: acts on the drag-selection when present, else the whole
+  // page. 1 credit via /api/ai/generate — signed-in only, never auto-retried.
+  // Translate is the Pro-only action (visible ladder: free tools → trial AI
+  // → Pro AI); summarize/grammar stay trial-spendable for signed-in users.
+  const runAiAction = async (action: 'summarize' | 'grammar' | 'translate') => {
     if (!pdfDoc) return;
     if (!isSignedIn) {
       toast.error('AI actions cost 1 credit — sign in to use them.');
       return;
     }
+    if (action === 'translate' && !isPro) {
+      toast.error('Translate is a Pro feature — upgrade to unlock. Summarize and grammar check work on trial credits.');
+      return;
+    }
     setAiWorking(true);
     try {
-      const pg = await pdfDoc.getPage(page);
-      const tc = await pg.getTextContent();
-      const raw = tc.items.map((it) => ('str' in it ? String(it.str) : '')).join(' ').replace(/\s+/g, ' ').trim();
+      let raw: string;
+      if (selection.length > 0) {
+        raw = selection.join(' ').replace(/\s+/g, ' ').trim().slice(0, 4000);
+      } else {
+        const pg = await pdfDoc.getPage(page);
+        const tc = await pg.getTextContent();
+        raw = tc.items.map((it) => ('str' in it ? String(it.str) : '')).join(' ').replace(/\s+/g, ' ').trim();
+      }
       if (raw.length < 20) {
-        toast.error('No readable text on this page — scanned pages need OCR first.');
+        toast.error(selection.length > 0 ? 'Selection is too short.' : 'No readable text on this page — scanned pages need OCR first.');
         return;
       }
       const clipped = raw.slice(0, 6000);
       const prompt = action === 'summarize'
-        ? `Summarize this PDF page text in 3-5 short bullet lines, plain text, no markdown:\n\n${clipped}`
-        : `Fix the grammar and spelling of this PDF page text. Return only the corrected text, no commentary:\n\n${clipped}`;
+        ? `Summarize this PDF ${selection.length > 0 ? 'selection' : 'page text'} in 3-5 short bullet lines, plain text, no markdown:\n\n${clipped}`
+        : action === 'grammar'
+          ? `Fix the grammar and spelling of this PDF text. Return only the corrected text, no commentary:\n\n${clipped}`
+          : `Translate this PDF text to English. Return only the translation, no commentary:\n\n${clipped}`;
       const out = await generateCompletion([{ role: 'user', content: prompt }], 0.3);
       // drawText doesn't wrap: split into ~75-char lines, stacked downward.
       const words = out.replace(/\s+/g, ' ').split(' ');
@@ -411,14 +503,18 @@ export default function PdfEditor() {
     setOcrWords([]);
     try {
       const { createWorker } = await import('tesseract.js');
-      if (!ocrWorkerRef.current) {
-        toast.loading('Loading OCR engine (one-time download)…', { id: 'pdfedit-ocr' });
+      // One worker per language — recreated when the language changes.
+      const workerAny = ocrWorkerRef.current as unknown as { _lang?: string } | null;
+      if (!ocrWorkerRef.current || workerAny?._lang !== ocrLang) {
+        try { await (ocrWorkerRef.current as unknown as { terminate?: () => Promise<void> } | null)?.terminate?.(); } catch { /* ignore */ }
+        toast.loading('Loading OCR engine (one-time download per language)…', { id: 'pdfedit-ocr' });
         const worker = await createWorker(undefined, undefined, {
           logger: (m: { status: string; progress: number }) => {
             if (m.status === 'recognizing text') setOcrProgress(Math.round(m.progress * 100));
           },
         });
-        await worker.reinitialize('eng');
+        await worker.reinitialize(ocrLang);
+        (worker as unknown as { _lang?: string })._lang = ocrLang;
         ocrWorkerRef.current = worker as typeof ocrWorkerRef.current;
         toast.dismiss('pdfedit-ocr');
       }
@@ -450,15 +546,61 @@ export default function PdfEditor() {
   };
 
   const insertOcrWord = (w: { text: string; x: number; y: number; size: number }) => {
+    // Arabic honesty: Helvetica (the only embedded font) has no Arabic
+    // glyphs — inserting would render blank boxes. Copy instead, stated.
+    if (ocrLang === 'ara') {
+      clipboardWrite(w.text).then((ok) => {
+        if (ok) toast.success('Copied — paste where needed (Arabic can’t render in Helvetica).');
+        else toast.error('Copy blocked by the browser — select the text manually.');
+      });
+      return;
+    }
     pushAnno(page, { kind: 'text', x: w.x, y: w.y, text: w.text, size: w.size, color: '#000000', bold: false });
   };
 
   const insertAllOcr = () => {
+    if (ocrLang === 'ara') {
+      clipboardWrite(ocrWords.map((w) => w.text).join(' ')).then((ok) => {
+        if (ok) toast.success('All words copied as text.');
+        else toast.error('Copy blocked by the browser — select the text manually.');
+      });
+      return;
+    }
     ocrWords.slice(0, 300).forEach((w) => insertOcrWord(w));
     toast.success(`${Math.min(ocrWords.length, 300)} words inserted as editable text.`);
   };
 
   const textLayerRef = useRef<Record<number, { x: number; yTop: number; w: number; size: number; bold: boolean; str: string }[]>>({});
+  const [selection, setSelection] = useState<string[]>([]);
+
+  // Cached text-layer items in PDF points (shared by retype, select, AI).
+  const ensureTextLayer = async (pg: number) => {
+    if (!pdfDoc) return [];
+    if (!textLayerRef.current[pg]) {
+      const pageObj = await pdfDoc.getPage(pg);
+      const vp1 = pageObj.getViewport({ scale: 1 });
+      const tc = await pageObj.getTextContent();
+      const meas = document.createElement('canvas').getContext('2d')!;
+      const items: { x: number; yTop: number; w: number; size: number; bold: boolean; str: string }[] = [];
+      for (const it of tc.items) {
+        if (!('str' in it) || !it.str.trim()) continue;
+        const tx = pdfjsLib.Util.transform(vp1.transform, it.transform);
+        const size = Math.max(4, Math.hypot(tx[2], tx[3]));
+        meas.font = `${size}px Helvetica, Arial, sans-serif`;
+        const w = meas.measureText(it.str).width * 1.1;
+        items.push({
+          x: tx[4],
+          yTop: vp1.height - tx[5] - size,
+          w,
+          size,
+          bold: /bold|black|heavy|demi/i.test(it.fontName || ''),
+          str: it.str,
+        });
+      }
+      textLayerRef.current[pg] = items;
+    }
+    return textLayerRef.current[pg] || [];
+  };
 
   // Click-to-retype: find the nearest text-layer item, cover it with white,
   // and drop an editable Helvetica box at the same size/position. Honest
@@ -467,30 +609,7 @@ export default function PdfEditor() {
   const retypeAt = async (x: number, y: number) => {
     if (!pdfDoc) return;
     try {
-      if (!textLayerRef.current[page]) {
-        const pg = await pdfDoc.getPage(page);
-        const vp1 = pg.getViewport({ scale: 1 });
-        const tc = await pg.getTextContent();
-        const items: { x: number; yTop: number; w: number; size: number; bold: boolean; str: string }[] = [];
-        const meas = document.createElement('canvas').getContext('2d')!;
-        for (const it of tc.items) {
-          if (!('str' in it) || !it.str.trim()) continue;
-          const tx = pdfjsLib.Util.transform(vp1.transform, it.transform);
-          const size = Math.max(4, Math.hypot(tx[2], tx[3]));
-          meas.font = `${size}px Helvetica, Arial, sans-serif`;
-          const w = meas.measureText(it.str).width * 1.1;
-          items.push({
-            x: tx[4],
-            yTop: vp1.height - tx[5] - size,
-            w,
-            size,
-            bold: /bold|black|heavy|demi/i.test(it.fontName || ''),
-            str: it.str,
-          });
-        }
-        textLayerRef.current[page] = items;
-      }
-      const items = textLayerRef.current[page] || [];
+      const items = await ensureTextLayer(page);
       let best: (typeof items)[number] | null = null;
       let bestD = 30;
       for (const it of items) {
@@ -514,6 +633,84 @@ export default function PdfEditor() {
       toast.success('Text covered — retype it in the left panel. Rendered in Helvetica at matched size.');
     } catch {
       toast.error('Could not read this page’s text layer.');
+    }
+  };
+
+  // Text selection for AI: hit-test cached text-layer items against the
+  // dragged rect. Empty selection = whole page (AI buttons state this).
+  const selectInRect = async (x: number, y: number, w: number, h: number) => {
+    try {
+      const items = await ensureTextLayer(page);
+      const hits = items.filter((it) =>
+        it.x < x + w && it.x + it.w > x && it.yTop < y + h && it.yTop + it.size > y,
+      ).map((it) => it.str);
+      setSelection(hits);
+      drawOverlay();
+      toast.success(hits.length > 0 ? `${hits.length} text runs selected — AI actions now use the selection.` : 'No text in that area — try a wider box or run OCR.');
+    } catch {
+      toast.error('Could not read this page’s text layer.');
+    }
+  };
+
+  // Pro-only PII sweep: AI lists sensitive substrings, we map them back to
+  // text-layer bboxes and cover each with a whiteout box for review. This is
+  // SUGGESTED cover-up, not redaction — same recoverability caveat, stated
+  // in the toast and FAQ. 1 credit, Pro only (the converter hook).
+  const findSensitive = async () => {
+    if (!pdfDoc) return;
+    if (!isSignedIn) {
+      toast.error('PII sweep costs 1 credit — sign in to use it.');
+      return;
+    }
+    if (!isPro) {
+      toast.error('PII sweep is a Pro feature — upgrade to unlock. Cover-up boxes stay free for manual use.');
+      return;
+    }
+    setAiWorking(true);
+    try {
+      const items = await ensureTextLayer(page);
+      const raw = items.map((it) => it.str).join(' ').replace(/\s+/g, ' ').trim().slice(0, 6000);
+      if (raw.length < 20) {
+        toast.error('No readable text on this page — scanned pages need OCR first.');
+        return;
+      }
+      const out = await generateCompletion([{
+        role: 'user',
+        content: `Find personal data in this PDF page text: email addresses, phone numbers, ID/government numbers, person names, street addresses, account numbers. Return ONLY a JSON array of the exact substrings as they appear, e.g. ["john@x.com", "+1-555-0100"]. Empty array if none:\n\n${raw}`,
+      }], 0.1);
+      let found: string[] = [];
+      try {
+        const cleaned = out.replace(/```json|```/g, '').trim();
+        const parsed: unknown = JSON.parse(cleaned.slice(cleaned.indexOf('[')));
+        if (Array.isArray(parsed)) found = parsed.filter((s): s is string => typeof s === 'string').slice(0, 60);
+      } catch {
+        found = [];
+      }
+      if (found.length === 0) {
+        toast.success('No personal data patterns found on this page.');
+        return;
+      }
+      const lowered = found.map((s) => s.toLowerCase());
+      const hits = items.filter((it) => {
+        const t = it.str.toLowerCase();
+        return lowered.some((s) => s && (s.includes(t) || t.includes(s)));
+      });
+      if (hits.length === 0) {
+        toast.success('AI flagged items, but none matched on-page text exactly — review manually.');
+        return;
+      }
+      setAnnos((prev) => ({
+        ...prev,
+        [page]: [
+          ...(prev[page] || []),
+          ...hits.map((h) => ({ kind: 'whiteout', x: h.x - 2, y: h.yTop - 2, w: h.w + 4, h: h.size + 5, color: '#ffffff' }) as Anno),
+        ],
+      }));
+      toast.success(`${hits.length} spots covered for review — 1 credit used. This hides visually; it does NOT delete text (see FAQ). Verify each box, then export.`);
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'PII sweep failed.');
+    } finally {
+      setAiWorking(false);
     }
   };
 
@@ -567,6 +764,76 @@ export default function PdfEditor() {
     setSelected(null);
   };
 
+  const clipboardRef = useRef<Anno | null>(null);
+
+  const copySelected = () => {
+    if (!selected) return;
+    const a = annos[selected.page]?.[selected.index];
+    if (!a) return;
+    clipboardRef.current = JSON.parse(JSON.stringify(a)) as Anno;
+    toast.success('Copied — paste onto any page.');
+  };
+
+  const pasteClipboard = () => {
+    const a = clipboardRef.current;
+    if (!a) {
+      toast.error('Nothing copied yet.');
+      return;
+    }
+    const shift = (n: number) => n + 10;
+    const moved = JSON.parse(JSON.stringify(a)) as Anno;
+    if (moved.kind === 'text' || moved.kind === 'note') { moved.x = shift(moved.x); moved.y = shift(moved.y); }
+    else if (moved.kind === 'draw') { moved.points = moved.points.map((p) => p + 10); }
+    else { moved.x = shift(moved.x); moved.y = shift(moved.y); }
+    pushAnno(page, moved);
+  };
+
+  // Stamp-on-all-pages: clones the selected image/signature onto every page
+  // at the same position — the classic "sign every page" flow.
+  const stampAllPages = () => {
+    if (!selected) return;
+    const a = annos[selected.page]?.[selected.index];
+    if (!a || a.kind !== 'image') {
+      toast.error('Select a signature or image stamp first.');
+      return;
+    }
+    setAnnos((prev) => {
+      const next = { ...prev };
+      for (let p = 1; p <= pageCount; p++) {
+        if (p === selected.page) continue;
+        next[p] = [...(next[p] || []), JSON.parse(JSON.stringify(a)) as Anno];
+      }
+      return next;
+    });
+    toast.success(`Stamped on all ${pageCount} pages.`);
+  };
+
+  // Keyboard: arrows nudge, Delete removes, Ctrl+C/V copies. Ignored while
+  // typing in the text/note panels.
+  const onCanvasKey = (e: React.KeyboardEvent) => {
+    const t = e.target as HTMLElement;
+    if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
+    const step = e.shiftKey ? 10 : 1;
+    if (!selected) return;
+    if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); deleteSelected(); }
+    else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') { e.preventDefault(); copySelected(); }
+    else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v') { e.preventDefault(); pasteClipboard(); }
+    else if (e.key.startsWith('Arrow')) {
+      e.preventDefault();
+      const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+      const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
+      setAnnos((prev) => ({
+        ...prev,
+        [selected.page]: (prev[selected.page] || []).map((a, i) => {
+          if (i !== selected.index) return a;
+          if (a.kind === 'draw') return { ...a, points: a.points.map((p, j) => p + (j % 2 === 0 ? dx : dy)) };
+          if (a.kind === 'text' || a.kind === 'note') return { ...a, x: a.x + dx, y: a.y + dy };
+          return { ...a, x: a.x + dx, y: a.y + dy };
+        }),
+      }));
+    }
+  };
+
   const signPadDataRef = useRef<string | null>(null);
 
   const saveSignPad = () => {
@@ -581,6 +848,24 @@ export default function PdfEditor() {
     setShowSignPad(false);
     toast.success('Signature saved — switch to the Sign tool and click to place it.');
     setTool('sign');
+  };
+
+  // Emoji stamps: Helvetica can't render color emoji, so rasterize each
+  // glyph to a PNG on an offscreen canvas and stamp it as an image —
+  // exports identically everywhere, no font dependency.
+  const EMOJI_SET = ['✅', '⭐', '❤️', '➡️', '⚠️', '✔️', '❌', '💡', '📌', '🎉', '👍', '🔥'];
+  const stampEmoji = (emoji: string) => {
+    const c = document.createElement('canvas');
+    c.width = 128;
+    c.height = 128;
+    const ctx = c.getContext('2d')!;
+    ctx.font = '100px "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(emoji, 64, 70);
+    pendingImageRef.current = c.toDataURL('image/png');
+    setTool('image');
+    toast.success('Emoji ready — click on the page to stamp it.');
   };
 
   const onPickImage = (f: File | null) => {
@@ -671,8 +956,21 @@ export default function PdfEditor() {
             }
           } else if (a.kind === 'note') {
           } else if (a.kind === 'note') {
-            lp.drawRectangle({ x: a.x, y: pageH - (a.y + 44), width: 180, height: 44, color: rgb(1, 0.95, 0.64), borderColor: rgb(0.85, 0.75, 0.2), borderWidth: 0.75 });
-            lp.drawText(a.text.slice(0, 120), { x: a.x + 5, y: pageH - (a.y + 26), size: 9, font: helv, color: rgb(0, 0, 0), maxWidth: 170, lineHeight: 11 });
+            // Wrapped lines: export must never silently drop note text.
+            const words = a.text.split(/\s+/).filter(Boolean);
+            const lines: string[] = [];
+            let cur = '';
+            for (const w of words) {
+              if ((cur + ' ' + w).trim().length > 28) { lines.push(cur.trim()); cur = w; }
+              else cur += ' ' + w;
+            }
+            if (cur.trim()) lines.push(cur.trim());
+            const shown = lines.slice(0, 8);
+            const boxH = 14 + shown.length * 11;
+            lp.drawRectangle({ x: a.x, y: pageH - (a.y + boxH), width: 190, height: boxH, color: rgb(1, 0.95, 0.64), borderColor: rgb(0.85, 0.75, 0.2), borderWidth: 0.75 });
+            shown.forEach((line, li) => {
+              lp.drawText(line, { x: a.x + 5, y: pageH - (a.y + 22 + li * 11), size: 9, font: helv, color: rgb(0, 0, 0), maxWidth: 180, lineHeight: 11 });
+            });
           } else if (a.kind === 'image') {
             const bytes = await fetch(a.dataUrl).then((r) => r.arrayBuffer());
             const img = a.dataUrl.startsWith('data:image/jpeg') || a.dataUrl.startsWith('data:image/jpg')
@@ -699,6 +997,7 @@ export default function PdfEditor() {
 
   const tools: { id: Tool; label: string; icon: React.ReactNode }[] = [
     { id: 'text', label: 'Text', icon: <Type className="w-4 h-4" /> },
+    { id: 'select', label: 'Select', icon: <TextSelect className="w-4 h-4" /> },
     { id: 'retype', label: 'Retype', icon: <MousePointerClick className="w-4 h-4" /> },
     { id: 'highlight', label: 'Highlight', icon: <Highlighter className="w-4 h-4" /> },
     { id: 'draw', label: 'Draw', icon: <PenLine className="w-4 h-4" /> },
@@ -757,6 +1056,17 @@ export default function PdfEditor() {
           <button onClick={() => runAiAction('grammar')} disabled={aiWorking} aria-label="Fix grammar with AI, 1 credit" title={isSignedIn ? 'Fix grammar · 1 credit' : 'Sign in to use AI actions'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
             <Sparkles className="w-4 h-4" /> {aiWorking ? '…' : 'Fix grammar'}
           </button>
+          <button onClick={() => runAiAction('translate')} disabled={aiWorking} aria-label="Translate to English with AI, Pro, 1 credit" title={isPro ? 'Translate to English · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+            {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Translate'}
+          </button>
+          <button onClick={findSensitive} disabled={aiWorking} aria-label="Suggest sensitive-data cover boxes with AI, Pro, 1 credit" title={isPro ? 'Find sensitive data · 1 credit' : 'Pro feature — upgrade to unlock'} className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
+            {!isPro && <span aria-hidden="true">👑</span>} {aiWorking ? '…' : 'Find sensitive'}
+          </button>
+          {selection.length > 0 && (
+            <button onClick={() => { setSelection([]); drawOverlay(); toast.success('Selection cleared — AI uses the whole page.'); }} aria-label="Clear text selection" className="px-2.5 py-2 rounded-lg border border-[var(--accent)]/40 text-xs font-bold text-[var(--accent)] hover:bg-[var(--accent)]/10">
+              {selection.length} selected ✕
+            </button>
+          )}
           <button onClick={runOcr} disabled={ocrRunning} aria-label="OCR this page" title="Recognize text on scanned pages (English)" className="inline-flex items-center gap-1 px-2.5 py-2 rounded-lg border border-[var(--border-subtle)] text-xs font-bold hover:bg-[var(--bg-overlay)] disabled:opacity-50">
             <ScanText className="w-4 h-4" /> {ocrRunning ? `${ocrProgress}%` : 'OCR'}
           </button>
@@ -772,8 +1082,17 @@ export default function PdfEditor() {
           <button onClick={undo} aria-label="Undo last annotation" title="Undo" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
             <Undo2 className="w-4 h-4" />
           </button>
-          <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+          <button onClick={deleteSelected} disabled={!selected} aria-label="Delete selected annotation" title="Delete selected (Del)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
             <Trash2 className="w-4 h-4" />
+          </button>
+          <button onClick={copySelected} disabled={!selected} aria-label="Copy selected annotation" title="Copy (Ctrl+C)" className="p-2 rounded-lg border border-[var(--border-subtle)] disabled:opacity-40 hover:bg-[var(--bg-overlay)]">
+            <Copy className="w-4 h-4" />
+          </button>
+          <button onClick={pasteClipboard} aria-label="Paste copied annotation" title="Paste (Ctrl+V)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+            <ClipboardPaste className="w-4 h-4" />
+          </button>
+          <button onClick={stampAllPages} aria-label="Stamp selected image on all pages" title="Stamp on all pages (select an image/signature first)" className="p-2 rounded-lg border border-[var(--border-subtle)] hover:bg-[var(--bg-overlay)]">
+            <Layers className="w-4 h-4" />
           </button>
           <button onClick={exportPdf} disabled={exporting} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[var(--accent-ink)] text-white text-xs font-bold hover:opacity-90 disabled:opacity-50">
             <Download className="w-4 h-4" /> {exporting ? 'Exporting…' : 'Download PDF'}
@@ -822,7 +1141,17 @@ export default function PdfEditor() {
         <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 space-y-3">
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold text-[var(--text-primary)]">Recognized words (page {page}) — click to insert as editable text</p>
-            <button onClick={insertAllOcr} className="ml-auto px-3 py-1.5 rounded-lg bg-[var(--accent-ink)] text-white text-xs font-bold">Insert all</button>
+            <select value={ocrLang} onChange={(e) => { setOcrLang(e.target.value); setOcrWords([]); }} aria-label="OCR language" className="ml-auto px-2 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs bg-[var(--bg-overlay)]">
+              <option value="eng">English</option>
+              <option value="hin">Hindi (हिन्दी)</option>
+              <option value="tam">Tamil (தமிழ்)</option>
+              <option value="deu">German (Deutsch)</option>
+              <option value="spa">Spanish (Español)</option>
+              <option value="fra">French (Français)</option>
+              <option value="pol">Polish (Polski)</option>
+              <option value="ara">Arabic (العربية) — copy only</option>
+            </select>
+            <button onClick={insertAllOcr} className="px-3 py-1.5 rounded-lg bg-[var(--accent-ink)] text-white text-xs font-bold">Insert all</button>
             <button onClick={() => setOcrWords([])} className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs">Clear</button>
           </div>
           <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
@@ -838,7 +1167,10 @@ export default function PdfEditor() {
             ))}
             {ocrWords.length > 200 && <span className="text-xs text-[var(--text-muted)] self-center">+{ocrWords.length - 200} more via Insert all</span>}
           </div>
-          <p className="text-xs text-[var(--text-muted)]">Amber words are low-confidence — verify before exporting. OCR is English-only in this version.</p>
+          <p className="text-xs text-[var(--text-muted)]">Amber words are low-confidence — verify before exporting. {ocrLang === 'ara' ? 'Arabic words copy to clipboard (Helvetica has no Arabic glyphs, so on-page insert would render blank).' : 'Click a word to insert it as editable text.'}</p>
+          <div className="pt-1 border-t border-[var(--border-subtle)]">
+            <RequestFeature tool="pdf-editor-ocr-language" prompt="Need Telugu, Bengali, or another language? Tell us where to send the launch note — top-voted languages ship first." placeholder="you@example.com" />
+          </div>
         </div>
       )}
 
@@ -856,6 +1188,17 @@ export default function PdfEditor() {
             </button>
           ))}
           <input ref={imagePickRef} type="file" accept="image/png,image/jpeg" className="hidden" aria-label="Pick stamp image" onChange={(e) => onPickImage(e.target.files?.[0] || null)} />
+          <div className="pt-1">
+            <span className={labelCls}>Emoji stamps</span>
+            <div className="grid grid-cols-6 gap-1">
+              {EMOJI_SET.map((e) => (
+                <button key={e} onClick={() => stampEmoji(e)} aria-label={`Stamp ${e}`} title="Stamp this emoji" className="text-lg leading-none p-1 rounded-lg hover:bg-[var(--bg-overlay)] transition-colors">
+                  {e}
+                </button>
+              ))}
+            </div>
+            <Link href="/utility/emoji-picker" className="text-[11px] text-[var(--accent)] hover:underline">More emoji →</Link>
+          </div>
           <div className="pt-2 space-y-2">
             {(tool === 'text') && (
               <>
@@ -937,7 +1280,7 @@ export default function PdfEditor() {
               <textarea
                 value={selAnno.text}
                 onChange={(e) => {
-                  const v = e.target.value;
+                  const v = e.target.value.slice(0, 240);
                   setAnnos((prev) => ({
                     ...prev,
                     [selected.page]: (prev[selected.page] || []).map((a, i) => (i === selected.index && a.kind === 'note' ? { ...a, text: v } : a)),
@@ -945,14 +1288,15 @@ export default function PdfEditor() {
                 }}
                 className={inputCls}
                 rows={3}
-                aria-label="Selected note text"
+                maxLength={240}
+                aria-label="Selected note text (max 240 characters)"
               />
             </div>
           )}
         </div>
 
         <div className="lg:col-span-8 bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 overflow-auto">
-          <div className="relative mx-auto w-fit">
+          <div className="relative mx-auto w-fit" tabIndex={0} role="application" onKeyDown={onCanvasKey} aria-label="PDF page canvas. Arrow keys nudge the selection, Delete removes it, Control C and V copy and paste.">
             <canvas ref={canvasRef} className="rounded-lg shadow" />
             <canvas
               ref={overlayRef}
@@ -995,6 +1339,39 @@ export default function PdfEditor() {
         Free · no signup · no watermark · file never leaves your browser. Cover-up hides content visually only —
         for true removal see <Link href="/pdf/unlock-pdf" className="underline">Unlock PDF</Link> workflows or redact before sharing.
       </p>
+      <div className="bg-[var(--bg-elevated)] border border-[var(--border-subtle)] rounded-2xl p-4 space-y-3">
+        <RequestFeature tool="pdf-whiteboard" prompt="Want real-time collaboration (shared cursors, live co-editing)? It's a server product, not a weekend build — leave your email and we'll only build it if enough users ask." placeholder="you@example.com" />
+      </div>
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <span className="text-xs text-[var(--text-muted)]">Need more?</span>
+        {[
+          ['Merge PDFs', '/pdf/pdf-merger'],
+          ['Split PDF', '/pdf/pdf-splitter'],
+          ['Compress', '/pdf/pdf-compressor'],
+          ['Watermark', '/pdf/watermark-pdf'],
+          ['Page numbers', '/pdf/add-page-numbers-to-pdf'],
+          ['Unlock', '/pdf/unlock-pdf'],
+          ['OCR document', '/pdf/pdf-ocr'],
+          ['Compare PDFs', '/pdf/compare-pdf-files'],
+          ['Metadata', '/pdf/pdf-metadata-editor'],
+          ['Fill form', '/pdf/pdf-form-filler'],
+          ['E-sign', '/pdf/esign-pdf'],
+          ['AI summarize', '/pdf/pdf-ai-summariser'],
+          ['Protect', '/pdf/protect-pdf'],
+          ['True redact', '/pdf/redact-pdf'],
+          ['PDF to Word', '/pdf/pdf-to-word'],
+          ['Extract images', '/pdf/extract-images-from-pdf'],
+          ['Page manager', '/pdf/pdf-page-manager'],
+          ['Emoji picker', '/utility/emoji-picker'],
+          ['QR codes', '/utility/qr-code-generator'],
+          ['AI translator', '/ai/ai-translator'],
+          ['AI paraphraser', '/ai/ai-paraphrasing-tool'],
+        ].map(([label, href]) => (
+          <Link key={href} href={href} className="px-3 py-1.5 rounded-lg border border-[var(--border-subtle)] text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-overlay)] transition-colors">
+            {label}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
