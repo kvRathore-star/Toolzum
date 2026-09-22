@@ -1426,7 +1426,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Temporary Email Generator",
     "slug": "temp-email-generator",
     "category": "Privacy",
-    "description": "Generate a disposable email address that receives mail for 60 minutes. Inbound only — you cannot send or reply. Perfect for signups you don\\u2019t trust.",
+    "description": "Generate a free disposable email address (temp mail / throwaway email) that receives mail for 60 minutes. Inbound only — you cannot send or reply. Perfect for signups you don\\u2019t trust, confirmation codes, and keeping your real inbox spam-free.",
     "isPro": false
   },
   {
@@ -1707,6 +1707,14 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "slug": "link-in-bio-builder",
     "category": "Branding",
     "description": "Creates customizable link-in-bio landing pages with profile photo, bio, multiple social media links, and custom icon selection. Everything runs locally in your browser — nothing is uploaded.",
+    "isPro": false
+  },
+  {
+    "id": "1104",
+    "name": "PDF Editor",
+    "slug": "pdf-editor",
+    "category": "PDF",
+    "description": "Add text, highlights, freehand drawings, image stamps, signatures, and cover-up blocks to any PDF, then export. Additive edits on top of the original — free, no signup, no watermark, runs locally in your browser.",
     "isPro": false
   },
   {
@@ -6402,7 +6410,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "SSL/TLS Checker",
     "slug": "ssl-tls-checker",
     "category": "Developer",
-    "description": "Analyze SSL/TLS certificate details including issuer, expiry, and supported protocols. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Check HTTPS reachability with browser-validated certificates, plus issuer and expiry history from public certificate records.",
     "isPro": false
   },
   {
@@ -6410,7 +6418,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "HTTP Security Checker",
     "slug": "http-security-checker",
     "category": "Developer",
-    "description": "Scan HTTP response headers for security best practices like HSTS, X-Frame-Options, and CSP.",
+    "description": "Probe a live URL for reachability, redirect chain, and visible response details, plus a reference checklist for HSTS, X-Frame-Options, and CSP to verify server-side.",
     "isPro": false
   },
   {
@@ -6474,7 +6482,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "DNS Lookup Generator",
     "slug": "dns-lookup-generator",
     "category": "Developer",
-    "description": "Perform DNS lookups for A, AAAA, CNAME, MX, TXT, and NS records. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Look up live A, AAAA, CNAME, MX, TXT, and NS records via DNS-over-HTTPS, answered in your browser.",
     "isPro": false
   },
   {
@@ -6482,7 +6490,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CORS Inspector",
     "slug": "cors-inspector",
     "category": "Developer",
-    "description": "Analyze CORS headers to identify cross-origin request configuration issues. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Run a real cross-origin preflight from your browser to test whether an endpoint allows it, with the exact server headers to confirm.",
     "isPro": false
   },
   {
@@ -6514,7 +6522,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "CVE Lookup",
     "slug": "cve-lookup",
     "category": "Developer",
-    "description": "Look up Common Vulnerabilities and Exposures (CVE) by ID or keyword search. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Look up vulnerabilities by CVE ID with severity, summary, and references from the OSV database, plus direct NVD/MITRE links.",
     "isPro": false
   },
   {
@@ -6578,7 +6586,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "IP Reputation Checker",
     "slug": "ip-reputation-checker",
     "category": "Developer",
-    "description": "Check an IP address against known threat intelligence and blacklist databases. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Look up IP geolocation, ASN, and hostname instantly, with direct links to AbuseIPDB and VirusTotal for blacklist verdicts.",
     "isPro": false
   },
   {
@@ -6602,7 +6610,7 @@ export const clientToolsRegistry: ClientToolEntry[] = [
     "name": "Subdomain Finder",
     "slug": "subdomain-finder",
     "category": "Developer",
-    "description": "Discover subdomains for a given domain using common wordlists and patterns. Everything runs locally in your browser — nothing is uploaded.",
+    "description": "Discover subdomains via public certificate records plus live DNS checks of common names. Read-only lookups run from your browser — the domain you check is visible to crt.sh and Google DNS, as with any lookup.",
     "isPro": false
   },
   {

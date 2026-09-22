@@ -418,6 +418,31 @@ export const entries_chunk_1: ToolMetadata[] = [
     dependencies: 'None'
   },
   {
+    name: 'PDF Editor',
+    slug: 'pdf-editor',
+    description: 'Add text, highlights, drawings, shapes, sticky notes, images, signatures, and cover-up blocks to any PDF, with zoom, page rotate/duplicate/delete, one-click retyping, OCR for scans, and AI summarize/fix actions. Free, no signup, no watermark, runs locally in your browser.',
+    seoDescription: 'Free online PDF Editor \u2014 add text, highlight, draw, sign, OCR scans, and AI-summarize PDFs in your browser. No signup, no watermark, nothing uploaded. ',
+    category: 'PDF',
+    id: "1104",
+    dependencies: 'pdf-lib',
+    instructions: [
+      { title: "1. Open a PDF", desc: "Drop in any PDF up to 100 MB. Encrypted files need unlocking first — the editor refuses them honestly rather than failing mid-export." },
+      { title: "2. Pick a tool and click the page", desc: "Text places editable boxes, Retype covers existing text for retyping, Highlight and Cover-up drag over areas, Draw is freehand, Shapes add rectangles/ellipses/arrows, Image stamps a PNG/JPG, Sign draws a signature to place." },
+      { title: "3. Edit and undo freely", desc: "Click a text box to retype it in the left panel. Undo removes the last annotation; the bin icon deletes the selected one. Zoom to 200% for fine work." },
+      { title: "4. OCR scans, AI summaries, download", desc: "Scanned pages: run OCR, then click recognized words to insert them as text. Signed-in users can AI-summarize or grammar-fix a page for 1 credit. Download burns everything into a clean PDF." },
+    ],
+    faqs: [
+      { question: "Can I edit existing PDF text?", answer: "With Retype: click a line and the editor covers it and drops an editable box at matched size and position — retypeset in Helvetica, not the original font. For typos, this is usually indistinguishable; for design work, it isn't." },
+      { question: "What about scanned PDFs?", answer: "Run OCR on the page (English, in-browser) and click recognized words to insert them as editable text. Low-confidence words are flagged amber — verify before exporting." },
+      { question: "What do the AI buttons cost?", answer: "Summarize and Fix grammar each cost 1 credit and need a signed-in account. They read the page's text layer — scanned pages need OCR first." },
+      { question: "Is cover-up the same as redaction?", answer: "No. Cover-up paints white pixels over an area but the underlying text stays in the file and can be recovered. Never use it for sensitive data you must truly remove." },
+      { question: "Are my files uploaded?", answer: "Almost never. Rendering, annotating, OCR, and exporting all happen in your browser. The one exception: AI actions send the page's text (never the file) to our server and cost 1 credit." },
+      { question: "Is there a file size limit?", answer: "100 MB. Larger files risk browser memory issues — split or compress first." },
+      { question: "What fonts can added text use?", answer: "Helvetica (regular and bold) in any size and color. Added text won't match the document's original fonts — that's the tradeoff of additive editing." },
+      { question: "Do annotations stay editable after export?", answer: "No — export flattens everything into the PDF permanently. Keep working by re-opening the exported file and adding more." },
+    ],
+  },
+  {
     name: 'PDF Page Manager',
     slug: 'pdf-page-manager',
     description: 'Manages PDF pages with crop, organize, extract, rotate, and delete operations in a single unified interface with visual page thumbnails. Everything runs locally in your browser — nothing is uploaded.',

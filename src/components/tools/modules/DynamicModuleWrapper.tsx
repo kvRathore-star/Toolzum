@@ -1328,6 +1328,7 @@ const MODULE_REGISTRY: Record<string, React.ComponentType<any>> = {
   'domain-availability-checker': dynamic(() => import('@/components/tools/modules/developer/DomainAvailabilityChecker'), { ssr: false, loading: () => <DynamicImportFallback slug="domain-availability-checker" /> }),
   'pdf-ai-summariser': dynamic(() => import('@/components/tools/modules/pdf/PdfAiSummariser'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-ai-summariser" /> }),
   'pdf-page-manager': dynamic(() => import('@/components/tools/modules/pdf/PdfPageManager'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-page-manager" /> }),
+  'pdf-editor': dynamic(() => import('@/components/tools/modules/pdf/PdfEditor'), { ssr: false, loading: () => <DynamicImportFallback slug="pdf-editor" /> }),
   'pronunciation-tool': dynamic(() => import('@/components/tools/modules/text/PronunciationTool'), { ssr: false, loading: () => <DynamicImportFallback slug="pronunciation-tool" /> }),
 
   // ConvertersEverydayKit — promoted widgets

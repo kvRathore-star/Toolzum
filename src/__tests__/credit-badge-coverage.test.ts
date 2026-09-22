@@ -13,7 +13,19 @@ import path from "node:path";
  * - files calling useAiProvider or /api/ai/generate → cost 1
  * - files calling ONLY /api/ai/generate-image (engine-dependent cost,
  *   shown inline per engine) → must NOT be in the map
+ * - files where AI is OPTIONAL (free-first tool, AI behind an explicit
+ *   button) → exempt from the flat map ONLY if the cost is disclosed
+ *   inline next to the action AND the slug is listed in OPTIONAL_AI_SLUGS
+ *   below. A flat page-level badge on a free tool would itself mislead
+ *   (implies every use costs); per-button disclosure is more accurate.
+ *   Both conditions are required so future tools can't slip through —
+ *   they must be deliberately listed AND verifiably labeled.
  */
+const OPTIONAL_AI_SLUGS = new Set([
+  // pdf-editor: core editing free; Summarize/Fix-grammar buttons carry
+  // "· 1 credit" labels + sign-in gate + post-use toast.
+  'pdf-editor',
+]);
 const ROOT = process.cwd();
 const MODULES = path.join(ROOT, "src/components/tools/modules");
 
@@ -93,6 +105,13 @@ describe("credit badge completeness (no silent deductions)", () => {
     // must carry the per-minute badge instead of a flat per-use cost.
     if (usesTranscribe) {
       perMinuteSpenders.push({ slug, file: rel });
+      continue;
+    }
+    // Optional-AI tools disclose per-button; the flat map would overclaim.
+    if (OPTIONAL_AI_SLUGS.has(slug)) {
+      if (!/1 credit/.test(content)) {
+        throw new Error(`${slug} (${rel}): optional-AI exemption requires an inline "1 credit" disclosure`);
+      }
       continue;
     }
     spenders.push({
